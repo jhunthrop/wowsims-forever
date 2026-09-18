@@ -23,21 +23,23 @@ func (druid *Druid) registerFaerieFireSpell() {
 		return core.FaerieFireAura(target)
 	})
 
-	if druid.InForm(Cat|Bear) && druid.Talents.FaerieFireFeral {
-		spellCode = SpellCode_DruidFaerieFireFeral
-		actionID = core.ActionID{SpellID: 17392}
-		manaCostOptions = core.ManaCostOptions{}
-		gcd = time.Second
-		ignoreHaste = true
-		formMask = Cat | Bear
-		cd = core.Cooldown{
-			Timer:    druid.NewTimer(),
-			Duration: time.Second * 6,
+	/*
+		if druid.InForm(Cat|Bear) && druid.Talents.FaerieFireFeral {
+			spellCode = SpellCode_DruidFaerieFireFeral
+			actionID = core.ActionID{SpellID: 17392}
+			manaCostOptions = core.ManaCostOptions{}
+			gcd = time.Second
+			ignoreHaste = true
+			formMask = Cat | Bear
+			cd = core.Cooldown{
+				Timer:    druid.NewTimer(),
+				Duration: time.Second * 6,
+			}
+			druid.FaerieFireAuras = druid.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
+				return core.FaerieFireFeralAura(target)
+			})
 		}
-		druid.FaerieFireAuras = druid.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-			return core.FaerieFireFeralAura(target)
-		})
-	}
+	*/
 	flags |= core.SpellFlagAPL | core.SpellFlagResetAttackSwing
 
 	druid.FaerieFire = druid.RegisterSpell(formMask, core.SpellConfig{

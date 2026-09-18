@@ -36,7 +36,10 @@ func (warrior *Warrior) makeStanceSpell(stance Stance, aura *core.Aura, stanceCD
 		BerserkerStance: SpellCode_WarriorStanceBerserker,
 	}[stance]
 	actionID := aura.ActionID
-	maxRetainedRage := 5 * float64(warrior.Talents.TacticalMastery)
+	// FOREVER: Tactical Mastery is Improved Tactical Mastery in the client's
+	// trees; retained rage is 0 until the warrior's talents are rewritten.
+	// maxRetainedRage := 5 * float64(warrior.Talents.TacticalMastery)
+	maxRetainedRage := 0.0
 	rageMetrics := warrior.NewRageMetrics(actionID)
 
 	stanceSpell := warrior.RegisterSpell(AnyStance, core.SpellConfig{

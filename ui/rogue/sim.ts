@@ -31,18 +31,22 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRogue, {
 			return {
 				updateOn: simUI.player.changeEmitter,
 				getContent: () => {
-					if (simUI.player.getTalents().maceSpecialization) {
-						if (
-							simUI.player.getGear().getEquippedItem(ItemSlot.ItemSlotMainHand)?.item.weaponType == WeaponType.WeaponTypeMace ||
-							simUI.player.getGear().getEquippedItem(ItemSlot.ItemSlotOffHand)?.item.weaponType == WeaponType.WeaponTypeMace
-						) {
-							return '';
-						} else {
-							return '"Mace Specialization" talent selected, but maces not equipped.';
-						}
-					} else {
-						return '';
-					}
+					// FOREVER: Mace Specialization is not in the client's trait trees
+					// (plan 2026-09-14-sim-engine, task 17), so nobody can select it and
+					// the warning can never fire.
+					// if (simUI.player.getTalents().maceSpecialization) {
+					// 	if (
+					// 		simUI.player.getGear().getEquippedItem(ItemSlot.ItemSlotMainHand)?.item.weaponType == WeaponType.WeaponTypeMace ||
+					// 		simUI.player.getGear().getEquippedItem(ItemSlot.ItemSlotOffHand)?.item.weaponType == WeaponType.WeaponTypeMace
+					// 	) {
+					// 		return '';
+					// 	} else {
+					// 		return '"Mace Specialization" talent selected, but maces not equipped.';
+					// 	}
+					// } else {
+					// 	return '';
+					// }
+					return '';
 				},
 			};
 		},

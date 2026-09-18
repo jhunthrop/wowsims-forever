@@ -40,17 +40,19 @@ func (warlock *Warlock) getDarkPactConfig(rank int) core.SpellConfig {
 }
 
 func (warlock *Warlock) registerDarkPactSpell() {
-	if !warlock.Talents.DarkPact {
-		return
-	}
-
-	maxRank := 3
-
-	for i := 1; i <= maxRank; i++ {
-		config := warlock.getDarkPactConfig(i)
-
-		if config.RequiredLevel <= int(warlock.Level) {
-			warlock.DarkPact = warlock.GetOrRegisterSpell(config)
+	/*
+		if !warlock.Talents.DarkPact {
+			return
 		}
-	}
+
+		maxRank := 3
+
+		for i := 1; i <= maxRank; i++ {
+			config := warlock.getDarkPactConfig(i)
+
+			if config.RequiredLevel <= int(warlock.Level) {
+				warlock.DarkPact = warlock.GetOrRegisterSpell(config)
+			}
+		}
+	*/
 }

@@ -35,7 +35,8 @@ func (warlock *Warlock) getSearingPainBaseConfig(rank int) core.SpellConfig {
 				CastTime: castTime,
 			},
 		},
-		BonusCritRating: 2.0 * float64(warlock.Talents.ImprovedSearingPain) * core.CritRatingPerCritChance,
+		// FOREVER: Improved Searing Pain is not in the client's trees.
+		// BonusCritRating: 2.0 * float64(warlock.Talents.ImprovedSearingPain) * core.CritRatingPerCritChance,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 2,

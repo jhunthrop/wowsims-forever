@@ -56,7 +56,8 @@ func (mage *Mage) getScorchConfig(rank int) core.SpellConfig {
 			},
 		},
 
-		BonusCritRating: 2 * float64(mage.Talents.Incinerate) * core.CritRatingPerCritChance,
+		// FOREVER: Incinerate is not in the client's trees.
+		// BonusCritRating: 2 * float64(mage.Talents.Incinerate) * core.CritRatingPerCritChance,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,

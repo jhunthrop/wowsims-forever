@@ -12,10 +12,14 @@ func (warrior *Warrior) RegisterShieldBlockCD() {
 	cooldownDur := time.Second * 5
 
 	warrior.ShieldBlockAura = warrior.RegisterAura(core.Aura{
-		Label:     "Shield Block",
-		ActionID:  actionID,
-		Duration:  time.Second * time.Duration(5+[]float64{0, 0.5, 1, 2}[warrior.Talents.ImprovedShieldBlock]),
-		MaxStacks: 1 + []int32{0, 1, 1, 1}[warrior.Talents.ImprovedShieldBlock],
+		Label:    "Shield Block",
+		ActionID: actionID,
+		// FOREVER: Improved Shield Block is not in the client's trees, so the
+		// aura takes its untalented duration and stack count.
+		// Duration:  time.Second * time.Duration(5+[]float64{0, 0.5, 1, 2}[warrior.Talents.ImprovedShieldBlock]),
+		// MaxStacks: 1 + []int32{0, 1, 1, 1}[warrior.Talents.ImprovedShieldBlock],
+		Duration:  time.Second * 5,
+		MaxStacks: 1,
 
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			aura.SetStacks(sim, aura.MaxStacks)

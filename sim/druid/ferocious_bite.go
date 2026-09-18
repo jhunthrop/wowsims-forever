@@ -88,7 +88,9 @@ func (druid *Druid) newFerociousBiteSpellConfig(rank FerociousBiteRankInfo) core
 			return druid.ComboPoints() > 0
 		},
 
-		DamageMultiplierAdditive: 1 + 0.03*float64(druid.Talents.FeralAggression),
+		// FOREVER: Feral Aggression is not in the client's trees.
+		// DamageMultiplierAdditive: 1 + 0.03*float64(druid.Talents.FeralAggression),
+		DamageMultiplierAdditive: 1,
 		DamageMultiplier:         1,
 		ThreatMultiplier:         1,
 		BonusCoefficient:         1,

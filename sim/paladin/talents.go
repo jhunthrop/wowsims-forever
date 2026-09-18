@@ -8,6 +8,15 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
+// FOREVER: the client's trait trees replaced vanilla's, so some of the
+// talents this file reaches for no longer exist under these names, and
+// some changed their rank count and so their proto type. Their behaviour
+// is rewritten when this spec is brought up, in rankings-population order
+// (design section 2.3). Every site is commented rather than deleted, so
+// the diff shows a reviewer exactly what the old tree did, and each is
+// left reading the value an untalented character would have read - which
+// is what a talent nobody can now take is worth.
+
 func (paladin *Paladin) ApplyTalents() {
 	paladin.AddStat(stats.Hit, float64(paladin.Talents.Precision)*core.HitRatingPerHitChance)
 	// TODO: paladin.AddStat(stats.RangedHit, float64(paladin.Talents.Precision)*core.HitRatingPerHitChance)
@@ -45,7 +54,9 @@ func (paladin *Paladin) ApplyTalents() {
 }
 
 func (paladin *Paladin) improvedSoR() float64 {
-	return []float64{1, 1.03, 1.06, 1.09, 1.12, 1.15}[paladin.Talents.ImprovedSealOfRighteousness]
+	// FOREVER: Improved Seal of Righteousness is not in the client's trees.
+	// return []float64{1, 1.03, 1.06, 1.09, 1.12, 1.15}[paladin.Talents.ImprovedSealOfRighteousness]
+	return 1
 }
 
 func (paladin *Paladin) benediction() int32 {
@@ -210,27 +221,28 @@ func (paladin *Paladin) applyVindication() {
 }
 
 func (paladin *Paladin) applyImprovedLayOnHands() {
+	/*
+	   if paladin.Talents.ImprovedLayOnHands > 0 {
 
-	if paladin.Talents.ImprovedLayOnHands > 0 {
+	   		armorMultiplier := []float64{1, 1.15, 1.3}[paladin.Talents.ImprovedLayOnHands]
+	   		auraID := []int32{0, 20233, 20236}[paladin.Talents.ImprovedLayOnHands]
 
-		armorMultiplier := []float64{1, 1.15, 1.3}[paladin.Talents.ImprovedLayOnHands]
-		auraID := []int32{0, 20233, 20236}[paladin.Talents.ImprovedLayOnHands]
-
-		paladin.RegisterAura(core.Aura{
-			Label:    "Lay on Hands",
-			ActionID: core.ActionID{SpellID: auraID},
-			Duration: time.Minute * 2,
-			OnGain: func(aura *core.Aura, sim *core.Simulation) {
-				paladin.ApplyDynamicEquipScaling(sim, stats.Armor, armorMultiplier)
-			},
-			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-				paladin.RemoveDynamicEquipScaling(sim, stats.Armor, armorMultiplier)
-			},
-			OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-				if spell.SpellCode == SpellCode_PaladinLayOnHands {
-					aura.Activate(sim)
-				}
-			},
-		})
-	}
+	   		paladin.RegisterAura(core.Aura{
+	   			Label:    "Lay on Hands",
+	   			ActionID: core.ActionID{SpellID: auraID},
+	   			Duration: time.Minute * 2,
+	   			OnGain: func(aura *core.Aura, sim *core.Simulation) {
+	   				paladin.ApplyDynamicEquipScaling(sim, stats.Armor, armorMultiplier)
+	   			},
+	   			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+	   				paladin.RemoveDynamicEquipScaling(sim, stats.Armor, armorMultiplier)
+	   			},
+	   			OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
+	   				if spell.SpellCode == SpellCode_PaladinLayOnHands {
+	   					aura.Activate(sim)
+	   				}
+	   			},
+	   		})
+	   	}
+	*/
 }

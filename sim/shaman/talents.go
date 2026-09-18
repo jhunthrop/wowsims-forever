@@ -9,6 +9,15 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
+// FOREVER: the client's trait trees replaced vanilla's, so some of the
+// talents this file reaches for no longer exist under these names, and
+// some changed their rank count and so their proto type. Their behaviour
+// is rewritten when this spec is brought up, in rankings-population order
+// (design section 2.3). Every site is commented rather than deleted, so
+// the diff shows a reviewer exactly what the old tree did, and each is
+// left reading the value an untalented character would have read - which
+// is what a talent nobody can now take is worth.
+
 func (shaman *Shaman) ApplyTalents() {
 	// Elemental Talents
 	shaman.applyConcussion()
@@ -25,7 +34,9 @@ func (shaman *Shaman) ApplyTalents() {
 		shaman.MultiplyStat(stats.Mana, 1.0+0.01*float64(shaman.Talents.AncestralKnowledge))
 	}
 
-	shaman.AddStat(stats.Block, 1*float64(shaman.Talents.ShieldSpecialization))
+	/*
+		shaman.AddStat(stats.Block, 1*float64(shaman.Talents.ShieldSpecialization))
+	*/
 
 	shaman.AddStat(stats.Crit, core.CritRatingPerCritChance*1*float64(shaman.Talents.ThunderingStrikes))
 
@@ -33,15 +44,19 @@ func (shaman *Shaman) ApplyTalents() {
 
 	shaman.ApplyEquipScaling(stats.Armor, 1+.02*float64(shaman.Talents.Toughness))
 
-	if shaman.Talents.Parry {
-		shaman.PseudoStats.CanParry = true
-	}
+	/*
+		if shaman.Talents.Parry {
+			shaman.PseudoStats.CanParry = true
+		}
+	*/
 
 	// TODO: Check whether this does what it should.
 	// From all I've seen this appears to not actually be a school modifier at all, but instead simply applies
 	// to all attacks done with a weapon. The weaponmask seems to take precedence and the school mask is actually ignored.
 	// Will also be the case for similar talents like the one for retribution.
-	shaman.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + (.02 * float64(shaman.Talents.WeaponMastery))
+	/*
+		shaman.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + (.02 * float64(shaman.Talents.WeaponMastery))
+	*/
 
 	// Restoration Talents
 	// TODO: Healing Way
@@ -59,16 +74,20 @@ func (shaman *Shaman) ApplyTalents() {
 
 	// Forever: merged from MeleeHit + SpellHit, both float64(NaturesGuidance).
 	// One effect under a unified stat gets one write.
-	shaman.AddStat(stats.Hit, float64(shaman.Talents.NaturesGuidance))
+	/*
+		shaman.AddStat(stats.Hit, float64(shaman.Talents.NaturesGuidance))
+	*/
 
-	if shaman.Talents.HealingGrace > 0 {
-		threatMultiplier := 1 - .05*float64(shaman.Talents.HealingGrace)
-		shaman.OnSpellRegistered(func(spell *core.Spell) {
-			if spell.Flags.Matches(SpellFlagShaman) && spell.ProcMask.Matches(core.ProcMaskSpellHealing) {
-				spell.ThreatMultiplier *= threatMultiplier
-			}
-		})
-	}
+	/*
+		if shaman.Talents.HealingGrace > 0 {
+			threatMultiplier := 1 - .05*float64(shaman.Talents.HealingGrace)
+			shaman.OnSpellRegistered(func(spell *core.Spell) {
+				if spell.Flags.Matches(SpellFlagShaman) && spell.ProcMask.Matches(core.ProcMaskSpellHealing) {
+					spell.ThreatMultiplier *= threatMultiplier
+				}
+			})
+		}
+	*/
 
 	if shaman.Talents.TidalMastery > 0 {
 		critBonus := float64(shaman.Talents.TidalMastery) * core.CritRatingPerCritChance
@@ -193,27 +212,31 @@ func (shaman *Shaman) applyElementalDevastation() {
 }
 
 func (shaman *Shaman) applyImprovedFireTotems() {
-	if shaman.Talents.ImprovedFireTotems == 0 {
-		return
-	}
-
-	shaman.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.SpellCode == SpellCode_ShamanFireNovaTotem {
-			for _, dot := range spell.Dots() {
-				if dot == nil {
-					continue
-				}
-
-				dot.TickLength -= time.Second * time.Duration(shaman.Talents.ImprovedFireTotems)
-			}
-		} else if spell.SpellCode == SpellCode_ShamanMagmaTotem {
-			spell.ThreatMultiplier *= 1.0 - (0.25 * float64(shaman.Talents.ImprovedFireTotems))
+	/*
+		if shaman.Talents.ImprovedFireTotems == 0 {
+			return
 		}
-	})
+
+		shaman.OnSpellRegistered(func(spell *core.Spell) {
+			if spell.SpellCode == SpellCode_ShamanFireNovaTotem {
+				for _, dot := range spell.Dots() {
+					if dot == nil {
+						continue
+					}
+
+					dot.TickLength -= time.Second * time.Duration(shaman.Talents.ImprovedFireTotems)
+				}
+			} else if spell.SpellCode == SpellCode_ShamanMagmaTotem {
+				spell.ThreatMultiplier *= 1.0 - (0.25 * float64(shaman.Talents.ImprovedFireTotems))
+			}
+		})
+	*/
 }
 
 func (shaman *Shaman) applyElementalFury() {
-	if !shaman.Talents.ElementalFury {
+	// FOREVER: Elemental Fury has ranks in the client's trees, so the field
+	// is an int32 now rather than a bool.
+	if shaman.Talents.ElementalFury == 0 {
 		return
 	}
 
@@ -225,80 +248,82 @@ func (shaman *Shaman) applyElementalFury() {
 }
 
 func (shaman *Shaman) registerElementalMasteryCD() {
-	if !shaman.Talents.ElementalMastery {
-		return
-	}
+	/*
+		if !shaman.Talents.ElementalMastery {
+			return
+		}
 
-	actionID := core.ActionID{SpellID: 16166}
+		actionID := core.ActionID{SpellID: 16166}
 
-	cdTimer := shaman.NewTimer()
-	cd := time.Minute * 3
+		cdTimer := shaman.NewTimer()
+		cd := time.Minute * 3
 
-	var affectedSpells []*core.Spell
+		var affectedSpells []*core.Spell
 
-	emAura := shaman.RegisterAura(core.Aura{
-		Label:    "Elemental Mastery",
-		ActionID: actionID,
-		Duration: core.NeverExpires,
-		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			affectedSpells = core.FilterSlice(
-				shaman.Spellbook,
-				func(spell *core.Spell) bool { return spell != nil && shaman.isShamanDamagingSpell(spell) },
-			)
-		},
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			core.Each(affectedSpells, func(spell *core.Spell) {
-				spell.BonusCritRating += core.CritRatingPerCritChance * 100
-				if spell.Cost != nil {
-					spell.Cost.Multiplier -= 100
-				}
-			})
-		},
-		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			core.Each(affectedSpells, func(spell *core.Spell) {
-				spell.BonusCritRating -= core.CritRatingPerCritChance * 100
-				if spell.Cost != nil {
-					spell.Cost.Multiplier += 100
-				}
-			})
-			shaman.ElementalMastery.CD.Use(sim)
-		},
-		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			if shaman.isShamanDamagingSpell(spell) {
-				// Elemental mastery can be batched
-				core.StartDelayedAction(sim, core.DelayedActionOptions{
-					DoAt: sim.CurrentTime + core.SpellBatchWindow,
-					OnAction: func(sim *core.Simulation) {
-						if aura.IsActive() {
-							// Remove the buff and put skill on CD
-							aura.Deactivate(sim)
-							cdTimer.Set(sim.CurrentTime + cd)
-							shaman.UpdateMajorCooldowns()
-						}
-					},
-				})
-			}
-		},
-	})
-
-	shaman.ElementalMastery = shaman.RegisterSpell(core.SpellConfig{
-		ActionID: actionID,
-		Flags:    core.SpellFlagNoOnCastComplete,
-		Cast: core.CastConfig{
-			CD: core.Cooldown{
-				Timer:    cdTimer,
-				Duration: cd,
+		emAura := shaman.RegisterAura(core.Aura{
+			Label:    "Elemental Mastery",
+			ActionID: actionID,
+			Duration: core.NeverExpires,
+			OnInit: func(aura *core.Aura, sim *core.Simulation) {
+				affectedSpells = core.FilterSlice(
+					shaman.Spellbook,
+					func(spell *core.Spell) bool { return spell != nil && shaman.isShamanDamagingSpell(spell) },
+				)
 			},
-		},
-		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-			emAura.Activate(sim)
-		},
-	})
+			OnGain: func(aura *core.Aura, sim *core.Simulation) {
+				core.Each(affectedSpells, func(spell *core.Spell) {
+					spell.BonusCritRating += core.CritRatingPerCritChance * 100
+					if spell.Cost != nil {
+						spell.Cost.Multiplier -= 100
+					}
+				})
+			},
+			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+				core.Each(affectedSpells, func(spell *core.Spell) {
+					spell.BonusCritRating -= core.CritRatingPerCritChance * 100
+					if spell.Cost != nil {
+						spell.Cost.Multiplier += 100
+					}
+				})
+				shaman.ElementalMastery.CD.Use(sim)
+			},
+			OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
+				if shaman.isShamanDamagingSpell(spell) {
+					// Elemental mastery can be batched
+					core.StartDelayedAction(sim, core.DelayedActionOptions{
+						DoAt: sim.CurrentTime + core.SpellBatchWindow,
+						OnAction: func(sim *core.Simulation) {
+							if aura.IsActive() {
+								// Remove the buff and put skill on CD
+								aura.Deactivate(sim)
+								cdTimer.Set(sim.CurrentTime + cd)
+								shaman.UpdateMajorCooldowns()
+							}
+						},
+					})
+				}
+			},
+		})
 
-	shaman.AddMajorCooldown(core.MajorCooldown{
-		Spell: shaman.ElementalMastery,
-		Type:  core.CooldownTypeDPS,
-	})
+		shaman.ElementalMastery = shaman.RegisterSpell(core.SpellConfig{
+			ActionID: actionID,
+			Flags:    core.SpellFlagNoOnCastComplete,
+			Cast: core.CastConfig{
+				CD: core.Cooldown{
+					Timer:    cdTimer,
+					Duration: cd,
+				},
+			},
+			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+				emAura.Activate(sim)
+			},
+		})
+
+		shaman.AddMajorCooldown(core.MajorCooldown{
+			Spell: shaman.ElementalMastery,
+			Type:  core.CooldownTypeDPS,
+		})
+	*/
 }
 
 func (shaman *Shaman) registerNaturesSwiftnessCD() {

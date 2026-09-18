@@ -71,17 +71,19 @@ func (hunter *Hunter) getAimedShotConfig(rank int, timer *core.Timer) core.Spell
 }
 
 func (hunter *Hunter) registerAimedShotSpell(timer *core.Timer) {
-	if !hunter.Talents.AimedShot {
-		return
-	}
-
-	maxRank := 6
-
-	for i := 1; i <= maxRank; i++ {
-		config := hunter.getAimedShotConfig(i, timer)
-
-		if config.RequiredLevel <= int(hunter.Level) {
-			hunter.AimedShot = hunter.GetOrRegisterSpell(config)
+	/*
+		if !hunter.Talents.AimedShot {
+			return
 		}
-	}
+
+		maxRank := 6
+
+		for i := 1; i <= maxRank; i++ {
+			config := hunter.getAimedShotConfig(i, timer)
+
+			if config.RequiredLevel <= int(hunter.Level) {
+				hunter.AimedShot = hunter.GetOrRegisterSpell(config)
+			}
+		}
+	*/
 }

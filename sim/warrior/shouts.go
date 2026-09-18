@@ -49,7 +49,9 @@ func (warrior *Warrior) registerBattleShout() {
 	has3pcWrath := warrior.HasSetBonus(ItemSetBattleGearOfWrath, 3)
 
 	warrior.BattleShout = warrior.newShoutSpellConfig(core.ActionID{SpellID: actionId}, rank, warrior.NewPartyAuraArray(func(unit *core.Unit) *core.Aura {
-		return core.BattleShoutAura(unit, warrior.Talents.ImprovedBattleShout, warrior.Talents.BoomingVoice, has3pcWrath)
+		// FOREVER: Improved Battle Shout is not in the client's trees.
+		// return core.BattleShoutAura(unit, warrior.Talents.ImprovedBattleShout, warrior.Talents.BoomingVoice, has3pcWrath)
+		return core.BattleShoutAura(unit, 0, warrior.Talents.BoomingVoice, has3pcWrath)
 	}))
 }
 

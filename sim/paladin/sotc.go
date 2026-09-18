@@ -31,7 +31,9 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 		{level: 52, spellID: 20308, manaCost: 160, scaleLevel: 60, ap: 306, scale: 2.4, judge: judge{spellID: 20303, bonus: 140}},
 	}
 
-	improvedSotC := []float64{1, 1.05, 1.1, 1.15}[paladin.Talents.ImprovedSealOfTheCrusader]
+	// FOREVER: Improved Seal of the Crusader is not in the client's trees.
+	// improvedSotC := []float64{1, 1.05, 1.1, 1.15}[paladin.Talents.ImprovedSealOfTheCrusader]
+	improvedSotC := 1.0
 
 	var libramAp, libramBonus float64
 	if paladin.Ranged().ID == LibramOfFervor {

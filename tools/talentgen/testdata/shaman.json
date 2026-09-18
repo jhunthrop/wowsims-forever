@@ -1,0 +1,1273 @@
+{
+  "build": "1.60.1.69893",
+  "class_id": 7,
+  "class_slug": "shaman",
+  "trees": [
+    {
+      "id": 261,
+      "name": "Elemental",
+      "position": 0,
+      "talents": [
+        {
+          "id": 104773,
+          "name": "Convection",
+          "icon": "spell_nature_wispsplode",
+          "max_rank": 5,
+          "tier": 0,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16039,
+              "description": "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 2%."
+            },
+            {
+              "spell_id": 16039,
+              "description": "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 4%."
+            },
+            {
+              "spell_id": 16039,
+              "description": "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 6%."
+            },
+            {
+              "spell_id": 16039,
+              "description": "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 8%."
+            },
+            {
+              "spell_id": 16039,
+              "description": "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 10%."
+            }
+          ],
+          "spell_id": 16039
+        },
+        {
+          "id": 104772,
+          "name": "Concussion",
+          "icon": "spell_nature_earthshock",
+          "max_rank": 5,
+          "tier": 0,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16035,
+              "description": "Increases the damage done by your Lightning Bolt, Chain Lightning, and Earth Shock spells by 1%."
+            },
+            {
+              "spell_id": 16035,
+              "description": "Increases the damage done by your Lightning Bolt, Chain Lightning, and Earth Shock spells by 2%."
+            },
+            {
+              "spell_id": 16035,
+              "description": "Increases the damage done by your Lightning Bolt, Chain Lightning, and Earth Shock spells by 3%."
+            },
+            {
+              "spell_id": 16035,
+              "description": "Increases the damage done by your Lightning Bolt, Chain Lightning, and Earth Shock spells by 4%."
+            },
+            {
+              "spell_id": 16035,
+              "description": "Increases the damage done by your Lightning Bolt, Chain Lightning, and Earth Shock spells by 5%."
+            }
+          ],
+          "spell_id": 16035
+        },
+        {
+          "id": 104771,
+          "name": "Elemental Warding",
+          "icon": "spell_nature_spiritarmor",
+          "max_rank": 3,
+          "tier": 1,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 28996,
+              "description": "Reduces damage taken from Fire, Frost, and Nature effects by 3%."
+            },
+            {
+              "spell_id": 28996,
+              "description": "Reduces damage taken from Fire, Frost, and Nature effects by 7%."
+            },
+            {
+              "spell_id": 28996,
+              "description": "Reduces damage taken from Fire, Frost, and Nature effects by 10%."
+            }
+          ],
+          "spell_id": 28996
+        },
+        {
+          "id": 104767,
+          "name": "Reverberation",
+          "icon": "spell_frost_frostward",
+          "max_rank": 5,
+          "tier": 1,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16040,
+              "description": "Reduces the cooldown of your Shock spells by ${200/-1000}.1 sec."
+            },
+            {
+              "spell_id": 16040,
+              "description": "Reduces the cooldown of your Shock spells by ${400/-1000}.1 sec."
+            },
+            {
+              "spell_id": 16040,
+              "description": "Reduces the cooldown of your Shock spells by ${600/-1000}.1 sec."
+            },
+            {
+              "spell_id": 16040,
+              "description": "Reduces the cooldown of your Shock spells by ${800/-1000}.1 sec."
+            },
+            {
+              "spell_id": 16040,
+              "description": "Reduces the cooldown of your Shock spells by ${1000/-1000}.1 sec."
+            }
+          ],
+          "spell_id": 16040
+        },
+        {
+          "id": 104770,
+          "name": "Call of Flame",
+          "icon": "spell_fire_immolation",
+          "max_rank": 3,
+          "tier": 1,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16038,
+              "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 5%."
+            },
+            {
+              "spell_id": 16038,
+              "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 10%."
+            },
+            {
+              "spell_id": 16038,
+              "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 15%."
+            }
+          ],
+          "spell_id": 16038
+        },
+        {
+          "id": 104769,
+          "name": "Elemental Devastation",
+          "icon": "spell_fire_elementaldevastation",
+          "max_rank": 3,
+          "tier": 1,
+          "column": 3,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 30160,
+              "description": "Your offensive spell critical strikes will increase your chance to get a critical strike with melee attacks by 3% for 10 sec."
+            },
+            {
+              "spell_id": 30160,
+              "description": "Your offensive spell critical strikes will increase your chance to get a critical strike with melee attacks by 6% for 10 sec."
+            },
+            {
+              "spell_id": 30160,
+              "description": "Your offensive spell critical strikes will increase your chance to get a critical strike with melee attacks by 9% for 10 sec."
+            }
+          ],
+          "spell_id": 30160
+        },
+        {
+          "id": 104768,
+          "name": "Elemental Focus",
+          "icon": "spell_shadow_manaburn",
+          "max_rank": 1,
+          "tier": 2,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16164,
+              "description": "Gives you a $h% chance to enter a Clearcasting state after casting any Fire, Frost, or Nature damage spell.  The Clearcasting state reduces the mana cost of your next damage spell by 100%."
+            }
+          ],
+          "spell_id": 16164
+        },
+        {
+          "id": 104766,
+          "name": "Elemental Fury",
+          "icon": "spell_fire_volcano",
+          "max_rank": 5,
+          "tier": 2,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16089,
+              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 20%."
+            },
+            {
+              "spell_id": 16089,
+              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 40%."
+            },
+            {
+              "spell_id": 16089,
+              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 60%."
+            },
+            {
+              "spell_id": 16089,
+              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 80%."
+            },
+            {
+              "spell_id": 16089,
+              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 100%."
+            }
+          ],
+          "spell_id": 16089
+        },
+        {
+          "id": 104764,
+          "name": "Improved Fire Nova",
+          "icon": "spell_fire_sealoffire",
+          "max_rank": 2,
+          "tier": 3,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16086,
+              "description": "Increases the damage done by your Fire Nova spell by 10% and reduces its cooldown by ${2000/-1000} sec."
+            },
+            {
+              "spell_id": 16086,
+              "description": "Increases the damage done by your Fire Nova spell by 20% and reduces its cooldown by ${4000/-1000} sec."
+            }
+          ],
+          "spell_id": 16086
+        },
+        {
+          "id": 104763,
+          "name": "Eye of the Storm",
+          "icon": "spell_nature_eyeofthestorm",
+          "max_rank": 3,
+          "tier": 3,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 29062,
+              "description": "Reduces the pushback suffered from damaging attacks while casting Lightning Bolt, Chain Lightning, and Lava Burst by 23%."
+            },
+            {
+              "spell_id": 29062,
+              "description": "Reduces the pushback suffered from damaging attacks while casting Lightning Bolt, Chain Lightning, and Lava Burst by 47%."
+            },
+            {
+              "spell_id": 29062,
+              "description": "Reduces the pushback suffered from damaging attacks while casting Lightning Bolt, Chain Lightning, and Lava Burst by 70%."
+            }
+          ],
+          "spell_id": 29062
+        },
+        {
+          "id": 104762,
+          "name": "Call of Thunder",
+          "icon": "spell_nature_callstorm",
+          "max_rank": 1,
+          "tier": 3,
+          "column": 2,
+          "prereq_talent_id": 104766,
+          "prereq_rank": 5,
+          "ranks": [
+            {
+              "spell_id": 16120,
+              "description": "Increases the critical strike chance of your Lightning Bolt and Chain Lightning spells by 3%."
+            }
+          ],
+          "spell_id": 16120
+        },
+        {
+          "id": 104761,
+          "name": "Elemental Reach",
+          "icon": "spell_nature_stormreach",
+          "max_rank": 2,
+          "tier": 4,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 28999,
+              "description": "Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 3 yards, and increases the range of your Flame Shock spell by 8 yards."
+            },
+            {
+              "spell_id": 28999,
+              "description": "Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 6 yards, and increases the range of your Flame Shock spell by 15 yards."
+            }
+          ],
+          "spell_id": 28999
+        },
+        {
+          "id": 104759,
+          "name": "Lightning Overload",
+          "icon": "spell_nature_lightningoverload",
+          "max_rank": 3,
+          "tier": 4,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 408438,
+              "description": "Gives your Lightning Bolt and Chain Lightning spells a 3% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat.\r\n"
+            },
+            {
+              "spell_id": 408438,
+              "description": "Gives your Lightning Bolt and Chain Lightning spells a 7% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat.\r\n"
+            },
+            {
+              "spell_id": 408438,
+              "description": "Gives your Lightning Bolt and Chain Lightning spells a 10% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat.\r\n"
+            }
+          ],
+          "spell_id": 408438
+        },
+        {
+          "id": 104760,
+          "name": "Earthbound",
+          "icon": "spell_nature_stranglevines",
+          "max_rank": 1,
+          "tier": 4,
+          "column": 3,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 1222988,
+              "description": "Your Earthbind Totem Immobilizes nearby targets for 5 sec when cast."
+            }
+          ],
+          "spell_id": 1222988
+        },
+        {
+          "id": 104765,
+          "name": "Elemental Alacrity",
+          "icon": "spell_lightning_lightningbolt01",
+          "max_rank": 3,
+          "tier": 5,
+          "column": 2,
+          "prereq_talent_id": 104762,
+          "prereq_rank": 1,
+          "ranks": [
+            {
+              "spell_id": 16578,
+              "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by ${170/-1000}.2 sec."
+            },
+            {
+              "spell_id": 16578,
+              "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by ${330/-1000}.2 sec."
+            },
+            {
+              "spell_id": 16578,
+              "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by ${500/-1000}.2 sec."
+            }
+          ],
+          "spell_id": 16578
+        },
+        {
+          "id": 104758,
+          "name": "Lava Burst",
+          "icon": "spell_shaman_lavaburst",
+          "max_rank": 1,
+          "tier": 6,
+          "column": 1,
+          "prereq_talent_id": 104759,
+          "prereq_rank": 3,
+          "ranks": [
+            {
+              "spell_id": 408490,
+              "description": "You hurl molten lava at the target, dealing 113 Fire damage. If your Flame Shock is on the target, Lava Burst deals 20% increased damage."
+            }
+          ],
+          "spell_id": 408490
+        }
+      ],
+      "background": "shamanelementalcombat"
+    },
+    {
+      "id": 263,
+      "name": "Enhancement",
+      "position": 1,
+      "talents": [
+        {
+          "id": 104757,
+          "name": "Earth's Grasp",
+          "icon": "spell_nature_stoneclawtotem",
+          "max_rank": 2,
+          "tier": 0,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16043,
+              "description": "Increases the health of your Stoneclaw Totem by 25% and the radius of your Earthbind Totem by 10%."
+            },
+            {
+              "spell_id": 16043,
+              "description": "Increases the health of your Stoneclaw Totem by 50% and the radius of your Earthbind Totem by 20%."
+            }
+          ],
+          "spell_id": 16043
+        },
+        {
+          "id": 104753,
+          "name": "Thundering Strikes",
+          "icon": "ability_thunderbolt",
+          "max_rank": 5,
+          "tier": 0,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16255,
+              "description": "Improves your chance to get a critical strike with all spells and attacks by 1%."
+            },
+            {
+              "spell_id": 16255,
+              "description": "Improves your chance to get a critical strike with all spells and attacks by 2%."
+            },
+            {
+              "spell_id": 16255,
+              "description": "Improves your chance to get a critical strike with all spells and attacks by 3%."
+            },
+            {
+              "spell_id": 16255,
+              "description": "Improves your chance to get a critical strike with all spells and attacks by 4%."
+            },
+            {
+              "spell_id": 16255,
+              "description": "Improves your chance to get a critical strike with all spells and attacks by 5%."
+            }
+          ],
+          "spell_id": 16255
+        },
+        {
+          "id": 104756,
+          "name": "Ancestral Knowledge",
+          "icon": "spell_shadow_grimward",
+          "max_rank": 5,
+          "tier": 0,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 17485,
+              "description": "Increases your Intellect by 2%."
+            },
+            {
+              "spell_id": 17485,
+              "description": "Increases your Intellect by 4%."
+            },
+            {
+              "spell_id": 17485,
+              "description": "Increases your Intellect by 6%."
+            },
+            {
+              "spell_id": 17485,
+              "description": "Increases your Intellect by 8%."
+            },
+            {
+              "spell_id": 17485,
+              "description": "Increases your Intellect by 10%."
+            }
+          ],
+          "spell_id": 17485
+        },
+        {
+          "id": 104754,
+          "name": "Guardian Totems",
+          "icon": "spell_nature_stoneskintotem",
+          "max_rank": 2,
+          "tier": 1,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16258,
+              "description": "Increases the amount of damage reduced by your Stoneskin Totem and Windwall Totem by 10% and reduces the cooldown of your Grounding Totem by ${1000/-1000} sec."
+            },
+            {
+              "spell_id": 16258,
+              "description": "Increases the amount of damage reduced by your Stoneskin Totem and Windwall Totem by 20% and reduces the cooldown of your Grounding Totem by ${2000/-1000} sec."
+            }
+          ],
+          "spell_id": 16258
+        },
+        {
+          "id": 104755,
+          "name": "Mental Dexterity",
+          "icon": "spell_nature_mentalquickness",
+          "max_rank": 3,
+          "tier": 1,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 415140,
+              "description": "Increases your Attack Power by an amount equal to 33% of your Intellect."
+            },
+            {
+              "spell_id": 415140,
+              "description": "Increases your Attack Power by an amount equal to 67% of your Intellect."
+            },
+            {
+              "spell_id": 415140,
+              "description": "Increases your Attack Power by an amount equal to 100% of your Intellect."
+            }
+          ],
+          "spell_id": 415140
+        },
+        {
+          "id": 104752,
+          "name": "Improved Ghost Wolf",
+          "icon": "spell_nature_spiritwolf",
+          "max_rank": 2,
+          "tier": 1,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16262,
+              "description": "Reduces the cast time of your Ghost Wolf spell by ${1000/-1000}.1 sec, and Ghost Wolf may be used indoors."
+            },
+            {
+              "spell_id": 16262,
+              "description": "Reduces the cast time of your Ghost Wolf spell by ${3000/-1000}.1 sec, and Ghost Wolf may be used indoors."
+            }
+          ],
+          "spell_id": 16262
+        },
+        {
+          "id": 104751,
+          "name": "Improved Lightning Shield",
+          "icon": "spell_nature_lightningshield",
+          "max_rank": 3,
+          "tier": 1,
+          "column": 3,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16261,
+              "description": "Increases the damage done by your Lightning Shield orbs by 5%."
+            },
+            {
+              "spell_id": 16261,
+              "description": "Increases the damage done by your Lightning Shield orbs by 10%."
+            },
+            {
+              "spell_id": 16261,
+              "description": "Increases the damage done by your Lightning Shield orbs by 15%."
+            }
+          ],
+          "spell_id": 16261
+        },
+        {
+          "id": 104750,
+          "name": "Elemental Weapons",
+          "icon": "spell_fire_flametounge",
+          "max_rank": 3,
+          "tier": 2,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16266,
+              "description": "Increases the melee attack power bonus of your Rockbiter Weapon by 7%, your Windfury Weapon effect by 13% and increases the damage caused by your Flametongue Weapon and Frostbrand Weapon by 5%."
+            },
+            {
+              "spell_id": 16266,
+              "description": "Increases the melee attack power bonus of your Rockbiter Weapon by 13%, your Windfury Weapon effect by 27% and increases the damage caused by your Flametongue Weapon and Frostbrand Weapon by 10%."
+            },
+            {
+              "spell_id": 16266,
+              "description": "Increases the melee attack power bonus of your Rockbiter Weapon by 20%, your Windfury Weapon effect by 40% and increases the damage caused by your Flametongue Weapon and Frostbrand Weapon by 15%."
+            }
+          ],
+          "spell_id": 16266
+        },
+        {
+          "id": 104749,
+          "name": "Shamanistic Focus",
+          "icon": "spell_nature_elementalabsorption",
+          "max_rank": 1,
+          "tier": 2,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 1223030,
+              "description": "Reduces the mana cost of your Shock and Lightning Shield spells by 45%."
+            }
+          ],
+          "spell_id": 1223030
+        },
+        {
+          "id": 104748,
+          "name": "Anticipation",
+          "icon": "spell_nature_mirrorimage",
+          "max_rank": 3,
+          "tier": 2,
+          "column": 3,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16254,
+              "description": "Increases your chance to dodge by an additional 2%."
+            },
+            {
+              "spell_id": 16254,
+              "description": "Increases your chance to dodge by an additional 4%."
+            },
+            {
+              "spell_id": 16254,
+              "description": "Increases your chance to dodge by an additional 6%."
+            }
+          ],
+          "spell_id": 16254
+        },
+        {
+          "id": 104746,
+          "name": "Toughness",
+          "icon": "spell_holy_devotion",
+          "max_rank": 5,
+          "tier": 3,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16252,
+              "description": "Increases your Stamina by 2%."
+            },
+            {
+              "spell_id": 16252,
+              "description": "Increases your Stamina by 4%."
+            },
+            {
+              "spell_id": 16252,
+              "description": "Increases your Stamina by 6%."
+            },
+            {
+              "spell_id": 16252,
+              "description": "Increases your Stamina by 8%."
+            },
+            {
+              "spell_id": 16252,
+              "description": "Increases your Stamina by 10%."
+            }
+          ],
+          "spell_id": 16252
+        },
+        {
+          "id": 104747,
+          "name": "Flurry",
+          "icon": "ability_ghoulfrenzy",
+          "max_rank": 5,
+          "tier": 3,
+          "column": 1,
+          "prereq_talent_id": 104755,
+          "prereq_rank": 3,
+          "ranks": [
+            {
+              "spell_id": 16256,
+              "description": "Increases your attack speed by 5% for your next $16257n swings after dealing a melee critical strike."
+            },
+            {
+              "spell_id": 16256,
+              "description": "Increases your attack speed by 10% for your next $16257n swings after dealing a melee critical strike."
+            },
+            {
+              "spell_id": 16256,
+              "description": "Increases your attack speed by 15% for your next $16257n swings after dealing a melee critical strike."
+            },
+            {
+              "spell_id": 16256,
+              "description": "Increases your attack speed by 20% for your next $16257n swings after dealing a melee critical strike."
+            },
+            {
+              "spell_id": 16256,
+              "description": "Increases your attack speed by 25% for your next $16257n swings after dealing a melee critical strike."
+            }
+          ],
+          "spell_id": 16256
+        },
+        {
+          "id": 104743,
+          "name": "Stormstrike",
+          "icon": "ability_shaman_stormstrike",
+          "max_rank": 1,
+          "tier": 3,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 17364,
+              "description": "Instantly strike for normal weapon damage and increase the damage you deal to the target with your next Lightning Bolt, Chain Lightning, or Earth Shock spell by 20% for 12 sec."
+            }
+          ],
+          "spell_id": 17364
+        },
+        {
+          "id": 104745,
+          "name": "Spirit Weapons",
+          "icon": "ability_parry",
+          "max_rank": 1,
+          "tier": 4,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16268,
+              "description": "Gives a chance to parry enemy melee attacks, reduces all threat generated by your attacks by 30% while Rockbiter Weapon is not active, and increases all threat generated by 30% while Rockbiter Weapon is active."
+            }
+          ],
+          "spell_id": 16268
+        },
+        {
+          "id": 104744,
+          "name": "Mental Quickness",
+          "icon": "spell_nature_sleep",
+          "max_rank": 2,
+          "tier": 4,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 30812,
+              "description": "Increases your spell damage and healing by up to 15% of your Intellect."
+            },
+            {
+              "spell_id": 30812,
+              "description": "Increases your spell damage and healing by up to 30% of your Intellect."
+            }
+          ],
+          "spell_id": 30812
+        },
+        {
+          "id": 104742,
+          "name": "Improved Stormstrike",
+          "icon": "spell_shaman_improvedstormstrike",
+          "max_rank": 2,
+          "tier": 4,
+          "column": 2,
+          "prereq_talent_id": 104743,
+          "prereq_rank": 1,
+          "ranks": [
+            {
+              "spell_id": 1223031,
+              "description": "When you Stormstrike, you have a 50% chance to gain 50% mana regeneration while casting spells for 15 sec, and Stormstrike's cooldown has a 50% chance to reset each time you Dodge or Parry."
+            },
+            {
+              "spell_id": 1223031,
+              "description": "When you Stormstrike, you have a 100% chance to gain 50% mana regeneration while casting spells for 15 sec, and Stormstrike's cooldown has a 100% chance to reset each time you Dodge or Parry."
+            }
+          ],
+          "spell_id": 1223031
+        },
+        {
+          "id": 104741,
+          "name": "Maelstrom Weapon",
+          "icon": "spell_shaman_maelstromweapon",
+          "max_rank": 5,
+          "tier": 5,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 408498,
+              "description": "When you deal damage with a melee attack, you have a chance to reduce the cast time and Mana cost of your next Lightning Bolt spell by 4%. Stacks up to 5 times. Lasts 30 sec."
+            },
+            {
+              "spell_id": 408498,
+              "description": "When you deal damage with a melee attack, you have a chance to reduce the cast time and Mana cost of your next Lightning Bolt spell by 8%. Stacks up to 5 times. Lasts 30 sec."
+            },
+            {
+              "spell_id": 408498,
+              "description": "When you deal damage with a melee attack, you have a chance to reduce the cast time and Mana cost of your next Lightning Bolt spell by 12%. Stacks up to 5 times. Lasts 30 sec."
+            },
+            {
+              "spell_id": 408498,
+              "description": "When you deal damage with a melee attack, you have a chance to reduce the cast time and Mana cost of your next Lightning Bolt spell by 16%. Stacks up to 5 times. Lasts 30 sec."
+            },
+            {
+              "spell_id": 408498,
+              "description": "When you deal damage with a melee attack, you have a chance to reduce the cast time and Mana cost of your next Lightning Bolt spell by 20%. Stacks up to 5 times. Lasts 30 sec."
+            }
+          ],
+          "spell_id": 408498
+        },
+        {
+          "id": 104740,
+          "name": "Rage of the Farseer",
+          "icon": "spell_nature_bloodlust",
+          "max_rank": 1,
+          "tier": 6,
+          "column": 1,
+          "prereq_talent_id": 104744,
+          "prereq_rank": 2,
+          "ranks": [
+            {
+              "spell_id": 425336,
+              "description": "Increases your melee attack speed and spell casting speed by 30% for 25 sec."
+            }
+          ],
+          "spell_id": 425336
+        }
+      ],
+      "background": "shamanenhancement"
+    },
+    {
+      "id": 262,
+      "name": "Restoration",
+      "position": 2,
+      "talents": [
+        {
+          "id": 104739,
+          "name": "Improved Healing Wave",
+          "icon": "spell_nature_magicimmunity",
+          "max_rank": 5,
+          "tier": 0,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16182,
+              "description": "Reduces the casting time of your Healing Wave spell by ${100/-1000}.1 sec."
+            },
+            {
+              "spell_id": 16182,
+              "description": "Reduces the casting time of your Healing Wave spell by ${200/-1000}.1 sec."
+            },
+            {
+              "spell_id": 16182,
+              "description": "Reduces the casting time of your Healing Wave spell by ${300/-1000}.1 sec."
+            },
+            {
+              "spell_id": 16182,
+              "description": "Reduces the casting time of your Healing Wave spell by ${400/-1000}.1 sec."
+            },
+            {
+              "spell_id": 16182,
+              "description": "Reduces the casting time of your Healing Wave spell by ${500/-1000}.1 sec."
+            }
+          ],
+          "spell_id": 16182
+        },
+        {
+          "id": 104729,
+          "name": "Totemic Focus",
+          "icon": "spell_nature_moonglow",
+          "max_rank": 5,
+          "tier": 0,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16173,
+              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 5%."
+            },
+            {
+              "spell_id": 16173,
+              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 10%."
+            },
+            {
+              "spell_id": 16173,
+              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 15%."
+            },
+            {
+              "spell_id": 16173,
+              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 20%."
+            },
+            {
+              "spell_id": 16173,
+              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 25%."
+            }
+          ],
+          "spell_id": 16173
+        },
+        {
+          "id": 104734,
+          "name": "Mindfulness",
+          "icon": "spell_nature_sleep",
+          "max_rank": 3,
+          "tier": 1,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 1223033,
+              "description": "Allows 17% of your Mana regeneration to continue while casting."
+            },
+            {
+              "spell_id": 1223033,
+              "description": "Allows 33% of your Mana regeneration to continue while casting."
+            },
+            {
+              "spell_id": 1223033,
+              "description": "Allows 50% of your Mana regeneration to continue while casting."
+            }
+          ],
+          "spell_id": 1223033
+        },
+        {
+          "id": 104736,
+          "name": "Natural Grace",
+          "icon": "spell_nature_healingtouch",
+          "max_rank": 3,
+          "tier": 1,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 29187,
+              "description": "Reduces the threat generated by your spells by 5%."
+            },
+            {
+              "spell_id": 29187,
+              "description": "Reduces the threat generated by your spells by 10%."
+            },
+            {
+              "spell_id": 29187,
+              "description": "Reduces the threat generated by your spells by 15%."
+            }
+          ],
+          "spell_id": 29187
+        },
+        {
+          "id": 104735,
+          "name": "Tidal Focus",
+          "icon": "spell_frost_manarecharge",
+          "max_rank": 5,
+          "tier": 1,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16179,
+              "description": "Reduces the Mana cost of your healing spells by 1% and improves your chance to hit by 1%."
+            },
+            {
+              "spell_id": 16179,
+              "description": "Reduces the Mana cost of your healing spells by 2% and improves your chance to hit by 2%."
+            },
+            {
+              "spell_id": 16179,
+              "description": "Reduces the Mana cost of your healing spells by 3% and improves your chance to hit by 3%."
+            },
+            {
+              "spell_id": 16179,
+              "description": "Reduces the Mana cost of your healing spells by 4% and improves your chance to hit by 4%."
+            },
+            {
+              "spell_id": 16179,
+              "description": "Reduces the Mana cost of your healing spells by 5% and improves your chance to hit by 5%."
+            }
+          ],
+          "spell_id": 16179
+        },
+        {
+          "id": 104737,
+          "name": "Improved Reincarnation",
+          "icon": "spell_nature_reincarnation",
+          "max_rank": 2,
+          "tier": 1,
+          "column": 3,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16184,
+              "description": "Reduces the cooldown of your Reincarnation spell by ${600000/-60000} min, increases your maximum health by 2%, and increases the amount of health and Mana you reincarnate with by an additional 10%."
+            },
+            {
+              "spell_id": 16184,
+              "description": "Reduces the cooldown of your Reincarnation spell by ${1200000/-60000} min, increases your maximum health by 4%, and increases the amount of health and Mana you reincarnate with by an additional 20%."
+            }
+          ],
+          "spell_id": 16184
+        },
+        {
+          "id": 104731,
+          "name": "Ancestral Healing",
+          "icon": "spell_nature_undyingstrength",
+          "max_rank": 3,
+          "tier": 2,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16176,
+              "description": "Increases your target's armor value by 8% for 15 sec after getting a critical effect from one of your healing spells."
+            },
+            {
+              "spell_id": 16176,
+              "description": "Increases your target's armor value by 17% for 15 sec after getting a critical effect from one of your healing spells."
+            },
+            {
+              "spell_id": 16176,
+              "description": "Increases your target's armor value by 25% for 15 sec after getting a critical effect from one of your healing spells."
+            }
+          ],
+          "spell_id": 16176
+        },
+        {
+          "id": 104733,
+          "name": "Healing Focus",
+          "icon": "spell_nature_healingwavelesser",
+          "max_rank": 3,
+          "tier": 2,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16181,
+              "description": "Gives you a 23% chance to avoid interruption caused by damage while casting any healing spell."
+            },
+            {
+              "spell_id": 16181,
+              "description": "Gives you a 47% chance to avoid interruption caused by damage while casting any healing spell."
+            },
+            {
+              "spell_id": 16181,
+              "description": "Gives you a 70% chance to avoid interruption caused by damage while casting any healing spell."
+            }
+          ],
+          "spell_id": 16181
+        },
+        {
+          "id": 104732,
+          "name": "Water Shield",
+          "icon": "ability_shaman_watershield",
+          "max_rank": 1,
+          "tier": 2,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 408510,
+              "description": "The caster is surrounded by $n globes of water. When a spell, melee, or ranged attack hits the caster or when one of the caster's healing spells gets a critical result, 2% of maximum mana is restored to the caster, expending one water globe. Only one globe will activate every few seconds.  Lasts 10 min.\r\n\r\nOnly one Elemental Shield can be active on the Shaman at any one time."
+            }
+          ],
+          "spell_id": 408510
+        },
+        {
+          "id": 104738,
+          "name": "Tidal Mastery",
+          "icon": "spell_nature_tranquility",
+          "max_rank": 5,
+          "tier": 3,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16194,
+              "description": "Increases the critical effect chance of your healing spells by 1%."
+            },
+            {
+              "spell_id": 16194,
+              "description": "Increases the critical effect chance of your healing spells by 2%."
+            },
+            {
+              "spell_id": 16194,
+              "description": "Increases the critical effect chance of your healing spells by 3%."
+            },
+            {
+              "spell_id": 16194,
+              "description": "Increases the critical effect chance of your healing spells by 4%."
+            },
+            {
+              "spell_id": 16194,
+              "description": "Increases the critical effect chance of your healing spells by 5%."
+            }
+          ],
+          "spell_id": 16194
+        },
+        {
+          "id": 104730,
+          "name": "Restorative Totems",
+          "icon": "spell_nature_manaregentotem",
+          "max_rank": 5,
+          "tier": 3,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16187,
+              "description": "Increases the effect of your Mana Spring Totem by 5% and increases the effect of your Healing Stream Totem by 10%."
+            },
+            {
+              "spell_id": 16187,
+              "description": "Increases the effect of your Mana Spring Totem by 10% and increases the effect of your Healing Stream Totem by 20%."
+            },
+            {
+              "spell_id": 16187,
+              "description": "Increases the effect of your Mana Spring Totem by 15% and increases the effect of your Healing Stream Totem by 30%."
+            },
+            {
+              "spell_id": 16187,
+              "description": "Increases the effect of your Mana Spring Totem by 20% and increases the effect of your Healing Stream Totem by 40%."
+            },
+            {
+              "spell_id": 16187,
+              "description": "Increases the effect of your Mana Spring Totem by 25% and increases the effect of your Healing Stream Totem by 50%."
+            }
+          ],
+          "spell_id": 16187
+        },
+        {
+          "id": 104728,
+          "name": "Mana Tide Totem",
+          "icon": "spell_frost_summonwaterelemental",
+          "max_rank": 1,
+          "tier": 3,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16190,
+              "description": "Summons a Mana Tide Totem with 5 health at the feet of the caster for ${13 sec-1} sec that restores 88 mana every 3 seconds to group members within $16191a1 yards."
+            }
+          ],
+          "spell_id": 16190
+        },
+        {
+          "id": 104727,
+          "name": "Healing Way",
+          "icon": "spell_nature_healingway",
+          "max_rank": 3,
+          "tier": 4,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 29206,
+              "description": "Increases the amount healed by your Healing Wave spell by 8%."
+            },
+            {
+              "spell_id": 29206,
+              "description": "Increases the amount healed by your Healing Wave spell by 17%."
+            },
+            {
+              "spell_id": 29206,
+              "description": "Increases the amount healed by your Healing Wave spell by 25%."
+            }
+          ],
+          "spell_id": 29206
+        },
+        {
+          "id": 104726,
+          "name": "Nature's Swiftness",
+          "icon": "spell_nature_ravenform",
+          "max_rank": 1,
+          "tier": 4,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16188,
+              "description": "When activated, your next Nature spell with a casting time less than 10 sec. becomes an instant cast spell."
+            }
+          ],
+          "spell_id": 16188
+        },
+        {
+          "id": 104725,
+          "name": "Purification",
+          "icon": "spell_frost_wizardmark",
+          "max_rank": 5,
+          "tier": 5,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16178,
+              "description": "Increases the effectiveness of your healing spells by 2%."
+            },
+            {
+              "spell_id": 16178,
+              "description": "Increases the effectiveness of your healing spells by 4%."
+            },
+            {
+              "spell_id": 16178,
+              "description": "Increases the effectiveness of your healing spells by 6%."
+            },
+            {
+              "spell_id": 16178,
+              "description": "Increases the effectiveness of your healing spells by 8%."
+            },
+            {
+              "spell_id": 16178,
+              "description": "Increases the effectiveness of your healing spells by 10%."
+            }
+          ],
+          "spell_id": 16178
+        },
+        {
+          "id": 104724,
+          "name": "Riptide",
+          "icon": "spell_nature_riptide",
+          "max_rank": 1,
+          "tier": 6,
+          "column": 1,
+          "prereq_talent_id": 104727,
+          "prereq_rank": 3,
+          "ranks": [
+            {
+              "spell_id": 408521,
+              "description": "Heals a friendly target for 480, an additional 445 over 15 sec, and increases the effectiveness of your Chain Heal casts directly on that target by 25%."
+            }
+          ],
+          "spell_id": 408521
+        }
+      ],
+      "background": "shamanrestoration"
+    }
+  ]
+}
