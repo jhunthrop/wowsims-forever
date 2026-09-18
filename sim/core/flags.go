@@ -192,6 +192,7 @@ const (
 	SpellFlagSuppressEquipProcs                            // Indicates this spell cannot proc Equip procs
 	SpellFlagBatchStopAttackMacro                          // Indicates this spell is being cast in a Macro with a stopattack following it
 	SpellFlagNotAProc                                      // Indicates the proc is not treated as a proc (Seal of Command)
+	SpellFlagNoSpellMods                                   // Indicates that no spell mods should be applied to this spell
 
 	// Used to let agents categorize their spells.
 	SpellFlagAgentReserved1

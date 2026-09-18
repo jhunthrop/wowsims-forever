@@ -108,3 +108,22 @@ func (caster *Unit) NewEnemyICDArray(makeCooldown func(*Unit) *Cooldown) Cooldow
 	}
 	return cooldowns
 }
+
+// ApplyFlatCooldownMod adds a duration to this cooldown, clamped at zero.
+//
+// Season of Discovery wraps cooldowns in a SpellCooldown type that keeps
+// the flat and percentage modifiers separately and applies them lazily in
+// a fixed order. Classic's Cooldown is a timer and a duration, and
+// introducing a second cooldown type across the engine to preserve that
+// ordering buys nothing: no shipped talent applies a percentage and a
+// flat modifier to the same cooldown, so applying each in call order is
+// indistinguishable. If one ever does, this is the place to revisit.
+func (cd *Cooldown) ApplyFlatCooldownMod(duration time.Duration) {
+	cd.Duration = max(0, cd.Duration+duration)
+}
+
+// ApplyFlatPercentCooldownMod scales this cooldown. `percent` is an
+// offset from zero: -50 means minus fifty percent.
+func (cd *Cooldown) ApplyFlatPercentCooldownMod(percent int64) {
+	cd.Duration = max(0, time.Duration(float64(cd.Duration)*float64(100+percent)/100))
+}
