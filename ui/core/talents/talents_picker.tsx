@@ -468,7 +468,9 @@ class TalentPicker<TalentsProto> extends Component {
 			}
 
 			if (this.config.prereqLocation) {
-				if (!this.tree.getTalent(this.config.prereqLocation).isFull()) return false;
+				const prereq = this.tree.getTalent(this.config.prereqLocation);
+				const needed = this.config.prereqRank ?? prereq.config.maxPoints;
+				if (prereq.getPoints() < needed) return false;
 			}
 		} else {
 			const removedPoints = oldPoints - newPoints;
@@ -574,6 +576,13 @@ export type TalentConfig<TalentsProto> = {
 
 	// Location of a prerequisite talent, if any
 	prereqLocation?: TalentLocation;
+
+	// How many points the prerequisite needs before this talent opens.
+	// The client gives a rank per prerequisite edge; today every one of
+	// them is the parent's full rank, but the number is the client's and
+	// not an assumption, so it is carried rather than inferred. Omitted
+	// means "full", which is what this picker assumed before.
+	prereqRank?: number;
 
 	// Child talents depending on this talent. This is populated automatically.
 	childLocations?: TalentLocation[];

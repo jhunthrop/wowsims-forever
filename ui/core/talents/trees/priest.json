@@ -1,7 +1,7 @@
 [
   {
     "name": "Discipline",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/201.jpg",
     "talents": [
       {
         "fieldName": "powerInLight",
@@ -79,7 +79,9 @@
         "fieldName": "soulWarding",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [402000],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 2 },
+        "prereqRank": 3
       },
       {
         "fieldName": "improvedManaBurn",
@@ -97,7 +99,9 @@
         "fieldName": "renewedHope",
         "location": { "rowIdx": 4, "colIdx": 2 },
         "spellIds": [425280, 425280, 425280, 425280, 425280],
-        "maxPoints": 5
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
+        "prereqRank": 1
       },
       {
         "fieldName": "divineAegis",
@@ -109,13 +113,15 @@
         "fieldName": "powerInfusion",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [10060],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Holy",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/202.jpg",
     "talents": [
       {
         "fieldName": "twilightFocus",
@@ -181,7 +187,9 @@
         "fieldName": "searingLight",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [14909, 14909],
-        "maxPoints": 2
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 2 },
+        "prereqRank": 5
       },
       {
         "fieldName": "bindingHeal",
@@ -217,13 +225,15 @@
         "fieldName": "prayerOfMending",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [401859],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Shadow",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/203.jpg",
     "talents": [
       {
         "fieldName": "shadowFocus",
@@ -271,7 +281,9 @@
         "fieldName": "improvedPsychicScream",
         "location": { "rowIdx": 2, "colIdx": 1 },
         "spellIds": [15392, 15392],
-        "maxPoints": 2
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 0, "colIdx": 1 },
+        "prereqRank": 5
       },
       {
         "fieldName": "mindFlay",
@@ -283,7 +295,9 @@
         "fieldName": "improvedMindFlay",
         "location": { "rowIdx": 2, "colIdx": 3 },
         "spellIds": [1225139, 1225139],
-        "maxPoints": 2
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
+        "prereqRank": 1
       },
       {
         "fieldName": "improvedFade",
@@ -331,7 +345,9 @@
         "fieldName": "shadowform",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [15473],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   }

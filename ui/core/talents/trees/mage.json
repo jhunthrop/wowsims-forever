@@ -1,7 +1,7 @@
 [
   {
     "name": "Arcane",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/81.jpg",
     "talents": [
       {
         "fieldName": "wandSpecialization",
@@ -79,7 +79,9 @@
         "fieldName": "arcaneMeditation",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [18462, 18462, 18462],
-        "maxPoints": 3
+        "maxPoints": 3,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 2 },
+        "prereqRank": 5
       },
       {
         "fieldName": "missileBarrage",
@@ -109,13 +111,15 @@
         "fieldName": "arcanePower",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [12042],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Fire",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/41.jpg",
     "talents": [
       {
         "fieldName": "wakeOfFire",
@@ -187,7 +191,9 @@
         "fieldName": "hotStreak",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [400624],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
+        "prereqRank": 1
       },
       {
         "fieldName": "masterOfElements",
@@ -217,13 +223,15 @@
         "fieldName": "combustion",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [11129],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 3
       }
     ]
   },
   {
     "name": "Frost",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/61.jpg",
     "talents": [
       {
         "fieldName": "frostWarding",
@@ -325,7 +333,9 @@
         "fieldName": "fingersOfFrost",
         "location": { "rowIdx": 4, "colIdx": 2 },
         "spellIds": [400647, 400647],
-        "maxPoints": 2
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
+        "prereqRank": 1
       },
       {
         "fieldName": "wintersChill",
@@ -337,7 +347,9 @@
         "fieldName": "iceBarrier",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [11426],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   }

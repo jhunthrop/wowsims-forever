@@ -181,3 +181,69 @@ func TestFieldNameFollowsTheExistingConvention(t *testing.T) {
 		}
 	}
 }
+
+// ByNodeID is how a planner build or a combat log - both of which speak
+// the client's node ids - is matched to a talent. An id from another
+// class's tree must not resolve.
+func TestByNodeID(t *testing.T) {
+	c := warrior(t)
+	got, ok := c.ByNodeID(105958)
+	if !ok {
+		t.Fatal("node 105958 does not resolve; it is Arms tier 0 column 0")
+	}
+	if got.Name != "Improved Heroic Strike" {
+		t.Errorf("node 105958 is %q, want %q", got.Name, "Improved Heroic Strike")
+	}
+	// Every talent of every tree resolves to itself, so no tree is
+	// skipped by the walk.
+	for _, tr := range c.Trees {
+		for _, want := range tr.Talents {
+			got, ok := c.ByNodeID(want.NodeID)
+			if !ok || got.NodeID != want.NodeID {
+				t.Errorf("%s/%s (node %d) does not resolve by its own id", tr.Name, want.Name, want.NodeID)
+			}
+		}
+	}
+	if _, ok := c.ByNodeID(1); ok {
+		t.Error("node 1 resolves, and it is in no tree")
+	}
+	if _, ok := c.ByNodeID(0); ok {
+		t.Error("node 0 resolves; 0 is the absent-prerequisite sentinel and must never match")
+	}
+}
+
+// BySpellID matches on the talent's own spell id or on any rank's, so a
+// log line naming a rank's spell finds the talent that granted it.
+func TestBySpellID(t *testing.T) {
+	c := warrior(t)
+	got, ok := c.BySpellID(12282)
+	if !ok {
+		t.Fatal("spell 12282 does not resolve; it is Improved Heroic Strike")
+	}
+	if got.Name != "Improved Heroic Strike" {
+		t.Errorf("spell 12282 is %q, want %q", got.Name, "Improved Heroic Strike")
+	}
+	// The rank branch: every rank id of every talent resolves.
+	for _, tr := range c.Trees {
+		for _, want := range tr.Talents {
+			for i, id := range want.RankSpellIDs {
+				got, ok := c.BySpellID(id)
+				if !ok {
+					t.Errorf("%s/%s rank %d spell %d does not resolve", tr.Name, want.Name, i+1, id)
+					continue
+				}
+				if got.NodeID != want.NodeID {
+					// Two talents sharing a rank spell id would be a data
+					// problem worth seeing, not a reader bug.
+					t.Errorf("%s/%s rank %d spell %d resolves to %q", tr.Name, want.Name, i+1, id, got.Name)
+				}
+			}
+		}
+	}
+	if _, ok := c.BySpellID(1); ok {
+		t.Error("spell 1 resolves, and no talent has it")
+	}
+	if _, ok := c.BySpellID(0); ok {
+		t.Error("spell 0 resolves; no talent has spell 0")
+	}
+}

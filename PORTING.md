@@ -36,7 +36,17 @@ from the Forever client's trait tables, mined by the site pipeline into
 `data/builds/<build>/talents/<class>.json`. Run `make talents`.
 
 Upstream hand-writes all three. A merge that reintroduces a hand-edited
-`<Class>Talents` message will be silently wrong: `core.FillTalentsProto`
+`<Class>Talents` message would be silently wrong: `core.FillTalentsProto`
 reads the talent string positionally against the message's field order, so
 the field order, `TalentTreeSizes` and the planner's string must agree, and
 they only do because one file produces all three.
+
+It is not silent, though. `tools/talentgen`'s
+`TestRegeneratingEveryClassIsByteIdentical` regenerates all nine classes
+from the checked-in fixtures into a temp tree and compares bytes with the
+committed files, so a hand edit or a stale `make talents` fails a test.
+The fixtures are copies of the site pipeline's output and
+`TestFixturesMatchTheSiteData` compares them against a site checkout when
+one is present, so the test needs no network to run and cannot quietly
+pin stale data. Task 1's `TestGeneratedProtosMatchSources` closes the
+remaining link, from `.proto` to the committed `.pb.go`.

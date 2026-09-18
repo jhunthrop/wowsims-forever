@@ -1,7 +1,7 @@
 [
   {
     "name": "Holy",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/382.jpg",
     "talents": [
       {
         "fieldName": "improvedHolyStrike",
@@ -73,7 +73,9 @@
         "fieldName": "illumination",
         "location": { "rowIdx": 3, "colIdx": 1 },
         "spellIds": [20210, 20210, 20210, 20210, 20210],
-        "maxPoints": 5
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 1 },
+        "prereqRank": 3
       },
       {
         "fieldName": "divineFavor",
@@ -85,7 +87,9 @@
         "fieldName": "divinePrecision",
         "location": { "rowIdx": 4, "colIdx": 0 },
         "spellIds": [1310904, 1310904, 1310904],
-        "maxPoints": 3
+        "maxPoints": 3,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       },
       {
         "fieldName": "holyShock",
@@ -109,13 +113,15 @@
         "fieldName": "lightsVigil",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [1310911],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Protection",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/383.jpg",
     "talents": [
       {
         "fieldName": "toughness",
@@ -163,7 +169,9 @@
         "fieldName": "shieldSpecialization",
         "location": { "rowIdx": 2, "colIdx": 2 },
         "spellIds": [20150, 20150, 20150],
-        "maxPoints": 3
+        "maxPoints": 3,
+        "prereqLocation": { "rowIdx": 0, "colIdx": 2 },
+        "prereqRank": 5
       },
       {
         "fieldName": "sacredDuty",
@@ -175,7 +183,9 @@
         "fieldName": "swiftJudgement",
         "location": { "rowIdx": 3, "colIdx": 0 },
         "spellIds": [1310994],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 0 },
+        "prereqRank": 1
       },
       {
         "fieldName": "oneHandedWeaponSpecialization",
@@ -211,13 +221,15 @@
         "fieldName": "holyShield",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [20925],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Retribution",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/381.jpg",
     "talents": [
       {
         "fieldName": "deflection",
@@ -301,7 +313,9 @@
         "fieldName": "vengeance",
         "location": { "rowIdx": 4, "colIdx": 1 },
         "spellIds": [20049, 20049, 20049],
-        "maxPoints": 3
+        "maxPoints": 3,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 1 },
+        "prereqRank": 3
       },
       {
         "fieldName": "repentance",

@@ -239,6 +239,19 @@ function playerClassAndMissingTalent<T extends Class>(
 ): PlayerProvider {
 	return playerClassAndTalentInternal(clazz, talentName, true, extraCondition);
 }
+// playerSpec is the spec-scoped twin of playerClass: every player of this
+// spec, with no talent to ask about. Needed since the client's trait trees
+// removed talents some of these rows were keyed on - the buff still
+// exists, only its "improved" version does not.
+function playerSpec<T extends Spec>(spec: T, extraCondition?: (player: Player<T>) => boolean): PlayerProvider {
+	return {
+		class: specToClass[spec],
+		condition: (player: Player<any>): boolean => {
+			return player.isSpec(spec) && (!extraCondition || extraCondition(player));
+		},
+	};
+}
+
 function playerSpecAndTalentInternal<T extends Spec>(
 	spec: T,
 	talentName: keyof SpecTalents<T>,
@@ -672,15 +685,11 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 						// 		player => player.getSimpleRotation().maintainDemoralizingRoar,
 						// 	),
 						// },
-						// {
-						// 	label: 'Demoralizing Roar',
-						// 	actionId: ActionId.fromSpellId(9898),
-						// 	playerData: playerSpecAndMissingTalent(
-						// 		Spec.SpecFeralTankDruid,
-						// 		'feralAggression',
-						// 		player => player.getSimpleRotation().maintainDemoralizingRoar,
-						// 	),
-						// },
+						{
+							label: 'Demoralizing Roar',
+							actionId: ActionId.fromSpellId(9898),
+							playerData: playerSpec(Spec.SpecFeralTankDruid, player => player.getSimpleRotation().maintainDemoralizingRoar),
+						},
 						// {
 						// 	label: 'Improved Curse of Weakness',
 						// 	actionId: ActionId.fromSpellId(18180),

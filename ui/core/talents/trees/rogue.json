@@ -1,7 +1,7 @@
 [
   {
     "name": "Assassination",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/182.jpg",
     "talents": [
       {
         "fieldName": "improvedGouge",
@@ -55,7 +55,9 @@
         "fieldName": "lethality",
         "location": { "rowIdx": 2, "colIdx": 2 },
         "spellIds": [14128, 14128, 14128, 14128, 14128],
-        "maxPoints": 5
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 0, "colIdx": 2 },
+        "prereqRank": 5
       },
       {
         "fieldName": "vilePoisons",
@@ -103,13 +105,15 @@
         "fieldName": "venom",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [1310703],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Combat",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/181.jpg",
     "talents": [
       {
         "fieldName": "improvedEviscerate",
@@ -157,7 +161,9 @@
         "fieldName": "riposte",
         "location": { "rowIdx": 2, "colIdx": 1 },
         "spellIds": [14251],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 1 },
+        "prereqRank": 3
       },
       {
         "fieldName": "improvedSprint",
@@ -181,7 +187,9 @@
         "fieldName": "dualWieldSpecialization",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [13715, 13715, 13715, 13715, 13715],
-        "maxPoints": 5
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 2 },
+        "prereqRank": 3
       },
       {
         "fieldName": "bladeFlurry",
@@ -199,7 +207,9 @@
         "fieldName": "weaponExpertise",
         "location": { "rowIdx": 5, "colIdx": 1 },
         "spellIds": [30919, 30919],
-        "maxPoints": 2
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       },
       {
         "fieldName": "aggression",
@@ -217,7 +227,7 @@
   },
   {
     "name": "Subtlety",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/183.jpg",
     "talents": [
       {
         "fieldName": "camouflage",
@@ -313,13 +323,17 @@
         "fieldName": "hemorrhage",
         "location": { "rowIdx": 4, "colIdx": 2 },
         "spellIds": [16511],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
+        "prereqRank": 3
       },
       {
         "fieldName": "quietus",
         "location": { "rowIdx": 5, "colIdx": 0 },
         "spellIds": [1310728, 1310728, 1310728, 1310728, 1310728],
-        "maxPoints": 5
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 0 },
+        "prereqRank": 2
       },
       {
         "fieldName": "cutthroat",
@@ -331,7 +345,9 @@
         "fieldName": "thousandCuts",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [1310721],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   }

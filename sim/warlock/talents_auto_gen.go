@@ -68,10 +68,17 @@ var TalentNodeIDs = map[string]int32{
 	"incinerate":             105874,
 }
 
-// TalentSpellIDs maps each talent's proto field name to its spell id
-// per rank, in rank order. A talent's behaviour file reads this
-// rather than typing an id, so a patch that renumbers a rank is a
-// regeneration and not a code edit.
+// TalentSpellIDs maps each talent's proto field name to the spell id
+// the client gives for each of its ranks, in rank order, so a talent's
+// behaviour file reads an id rather than typing one and a patch that
+// renumbers a rank is a regeneration.
+//
+// Read the entries before planning around them: in build 1.60.1.69893 the
+// client gives ONE spell per talent and repeats it for every rank, so
+// each slice here is currently N copies of the same id and carries no
+// rank information. The per-rank descriptions in the source do differ,
+// so the distinction exists upstream; when the data lane surfaces
+// per-rank ids this map fills in by regeneration alone.
 var TalentSpellIDs = map[string][]int32{
 	"improved_life_tap":      {18182, 18182},
 	"suppression":            {18174, 18174, 18174, 18174, 18174},

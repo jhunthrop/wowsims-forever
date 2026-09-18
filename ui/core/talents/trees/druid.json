@@ -1,7 +1,7 @@
 [
   {
     "name": "Balance",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/283.jpg",
     "talents": [
       {
         "fieldName": "improvedWrath",
@@ -49,7 +49,9 @@
         "fieldName": "naturesSplendor",
         "location": { "rowIdx": 2, "colIdx": 2 },
         "spellIds": [1223083],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 2 },
+        "prereqRank": 2
       },
       {
         "fieldName": "insectSwarm",
@@ -61,7 +63,9 @@
         "fieldName": "vengeance",
         "location": { "rowIdx": 3, "colIdx": 1 },
         "spellIds": [16909, 16909, 16909, 16909, 16909],
-        "maxPoints": 5
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 1 },
+        "prereqRank": 2
       },
       {
         "fieldName": "improvedStarfire",
@@ -103,7 +107,7 @@
   },
   {
     "name": "Feral Combat",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/281.jpg",
     "talents": [
       {
         "fieldName": "ferocity",
@@ -169,7 +173,9 @@
         "fieldName": "mangle",
         "location": { "rowIdx": 3, "colIdx": 1 },
         "spellIds": [407995],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 1 },
+        "prereqRank": 2
       },
       {
         "fieldName": "predatoryStrikes",
@@ -181,7 +187,9 @@
         "fieldName": "primalFury",
         "location": { "rowIdx": 3, "colIdx": 3 },
         "spellIds": [16958, 16958],
-        "maxPoints": 2
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 3 },
+        "prereqRank": 2
       },
       {
         "fieldName": "predatoryInstincts",
@@ -211,19 +219,23 @@
         "fieldName": "rendAndTear",
         "location": { "rowIdx": 5, "colIdx": 2 },
         "spellIds": [1223246, 1223246, 1223246, 1223246, 1223246],
-        "maxPoints": 5
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
+        "prereqRank": 3
       },
       {
         "fieldName": "berserk",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [417141],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Restoration",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/282.jpg",
     "talents": [
       {
         "fieldName": "naturesFocus",
@@ -295,7 +307,9 @@
         "fieldName": "naturesSwiftness",
         "location": { "rowIdx": 4, "colIdx": 0 },
         "spellIds": [17116],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 0 },
+        "prereqRank": 5
       },
       {
         "fieldName": "livingSpirit",
@@ -313,13 +327,17 @@
         "fieldName": "improvedRegrowth",
         "location": { "rowIdx": 5, "colIdx": 2 },
         "spellIds": [17074, 17074, 17074, 17074, 17074],
-        "maxPoints": 5
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
+        "prereqRank": 3
       },
       {
         "fieldName": "wildGrowth",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [408120],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 3
       }
     ]
   }

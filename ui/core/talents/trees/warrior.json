@@ -1,7 +1,7 @@
 [
   {
     "name": "Arms",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/161.jpg",
     "talents": [
       {
         "fieldName": "improvedHeroicStrike",
@@ -43,13 +43,17 @@
         "fieldName": "angerManagement",
         "location": { "rowIdx": 2, "colIdx": 1 },
         "spellIds": [12296],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 1 },
+        "prereqRank": 5
       },
       {
         "fieldName": "deepWounds",
         "location": { "rowIdx": 2, "colIdx": 2 },
         "spellIds": [12834, 12834, 12834],
-        "maxPoints": 3
+        "maxPoints": 3,
+        "prereqLocation": { "rowIdx": 0, "colIdx": 2 },
+        "prereqRank": 3
       },
       {
         "fieldName": "spearingStrike",
@@ -103,13 +107,15 @@
         "fieldName": "mortalStrike",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [12294],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Fury",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/164.jpg",
     "talents": [
       {
         "fieldName": "boomingVoice",
@@ -211,19 +217,23 @@
         "fieldName": "flurry",
         "location": { "rowIdx": 5, "colIdx": 2 },
         "spellIds": [12319, 12319, 12319, 12319, 12319],
-        "maxPoints": 5
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
+        "prereqRank": 5
       },
       {
         "fieldName": "bloodthirst",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [23881],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Protection",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/163.jpg",
     "talents": [
       {
         "fieldName": "shieldSpecialization",
@@ -259,13 +269,17 @@
         "fieldName": "lastStand",
         "location": { "rowIdx": 2, "colIdx": 0 },
         "spellIds": [12975],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 0 },
+        "prereqRank": 2
       },
       {
         "fieldName": "masterOfDefense",
         "location": { "rowIdx": 2, "colIdx": 1 },
         "spellIds": [1310316, 1310316],
-        "maxPoints": 2
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 0, "colIdx": 1 },
+        "prereqRank": 5
       },
       {
         "fieldName": "improvedRevenge",
@@ -331,7 +345,9 @@
         "fieldName": "shieldSlam",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [23922],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   }

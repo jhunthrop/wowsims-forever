@@ -1,7 +1,7 @@
 [
   {
     "name": "Beast Mastery",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/361.jpg",
     "talents": [
       {
         "fieldName": "deadlyAspects",
@@ -79,7 +79,9 @@
         "fieldName": "intimidation",
         "location": { "rowIdx": 4, "colIdx": 1 },
         "spellIds": [19577],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 1 },
+        "prereqRank": 1
       },
       {
         "fieldName": "bestialDiscipline",
@@ -91,19 +93,23 @@
         "fieldName": "frenzy",
         "location": { "rowIdx": 5, "colIdx": 2 },
         "spellIds": [19621, 19621, 19621, 19621, 19621],
-        "maxPoints": 5
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
+        "prereqRank": 5
       },
       {
         "fieldName": "bestialWrath",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [19574],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Marksmanship",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/363.jpg",
     "talents": [
       {
         "fieldName": "hawkEye",
@@ -169,7 +175,9 @@
         "fieldName": "mortalShots",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [19485, 19485, 19485, 19485, 19485],
-        "maxPoints": 5
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 2 },
+        "prereqRank": 5
       },
       {
         "fieldName": "improvedSerpentSting",
@@ -181,7 +189,9 @@
         "fieldName": "rapidRecuperation",
         "location": { "rowIdx": 4, "colIdx": 0 },
         "spellIds": [1223987, 1223987],
-        "maxPoints": 2
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 0 },
+        "prereqRank": 2
       },
       {
         "fieldName": "barrage",
@@ -205,13 +215,15 @@
         "fieldName": "sniperShot",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [1310687],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Survival",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/362.jpg",
     "talents": [
       {
         "fieldName": "improvedTracking",
@@ -283,7 +295,9 @@
         "fieldName": "counterattack",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [19306],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
+        "prereqRank": 1
       },
       {
         "fieldName": "resourcefulness",
@@ -319,7 +333,9 @@
         "fieldName": "laceratingStrikes",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [1310533],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 2
       }
     ]
   }

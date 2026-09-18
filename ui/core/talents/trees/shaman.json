@@ -1,7 +1,7 @@
 [
   {
     "name": "Elemental",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/261.jpg",
     "talents": [
       {
         "fieldName": "convection",
@@ -67,7 +67,9 @@
         "fieldName": "callOfThunder",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [16120],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
+        "prereqRank": 5
       },
       {
         "fieldName": "elementalReach",
@@ -91,19 +93,23 @@
         "fieldName": "elementalAlacrity",
         "location": { "rowIdx": 5, "colIdx": 2 },
         "spellIds": [16578, 16578, 16578],
-        "maxPoints": 3
+        "maxPoints": 3,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
+        "prereqRank": 1
       },
       {
         "fieldName": "lavaBurst",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [408490],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 3
       }
     ]
   },
   {
     "name": "Enhancement",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/263.jpg",
     "talents": [
       {
         "fieldName": "earthsGrasp",
@@ -175,7 +181,9 @@
         "fieldName": "flurry",
         "location": { "rowIdx": 3, "colIdx": 1 },
         "spellIds": [16256, 16256, 16256, 16256, 16256],
-        "maxPoints": 5
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 1 },
+        "prereqRank": 3
       },
       {
         "fieldName": "stormstrike",
@@ -199,7 +207,9 @@
         "fieldName": "improvedStormstrike",
         "location": { "rowIdx": 4, "colIdx": 2 },
         "spellIds": [1223031, 1223031],
-        "maxPoints": 2
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
+        "prereqRank": 1
       },
       {
         "fieldName": "maelstromWeapon",
@@ -211,13 +221,15 @@
         "fieldName": "rageOfTheFarseer",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [425336],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 2
       }
     ]
   },
   {
     "name": "Restoration",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/262.jpg",
     "talents": [
       {
         "fieldName": "improvedHealingWave",
@@ -313,7 +325,9 @@
         "fieldName": "riptide",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [408521],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 3
       }
     ]
   }

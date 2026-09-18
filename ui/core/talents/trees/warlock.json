@@ -1,7 +1,7 @@
 [
   {
     "name": "Affliction",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/302.jpg",
     "talents": [
       {
         "fieldName": "improvedLifeTap",
@@ -79,7 +79,9 @@
         "fieldName": "curseOfExhaustion",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [18223],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
+        "prereqRank": 1
       },
       {
         "fieldName": "siphonLife",
@@ -103,13 +105,15 @@
         "fieldName": "wrack",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [1316697],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Demonology",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/303.jpg",
     "talents": [
       {
         "fieldName": "improvedHealthFunnel",
@@ -187,7 +191,9 @@
         "fieldName": "felDomination",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [18708],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
+        "prereqRank": 2
       },
       {
         "fieldName": "demonicBrand",
@@ -205,7 +211,9 @@
         "fieldName": "soulLink",
         "location": { "rowIdx": 4, "colIdx": 1 },
         "spellIds": [19028],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 1 },
+        "prereqRank": 1
       },
       {
         "fieldName": "demonicKnowledge",
@@ -223,13 +231,15 @@
         "fieldName": "demonicPact",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [425464],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
   {
     "name": "Destruction",
-    "backgroundUrl": "",
+    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/301.jpg",
     "talents": [
       {
         "fieldName": "destructiveReach",
@@ -301,7 +311,9 @@
         "fieldName": "pyroclasm",
         "location": { "rowIdx": 4, "colIdx": 0 },
         "spellIds": [18073, 18073],
-        "maxPoints": 2
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 0 },
+        "prereqRank": 3
       },
       {
         "fieldName": "baneOfHavoc",
@@ -313,7 +325,9 @@
         "fieldName": "fireAndBrimstone",
         "location": { "rowIdx": 4, "colIdx": 2 },
         "spellIds": [412751, 412751, 412751],
-        "maxPoints": 3
+        "maxPoints": 3,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
+        "prereqRank": 1
       },
       {
         "fieldName": "shadowAndFlame",
@@ -325,7 +339,9 @@
         "fieldName": "incinerate",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [412758],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   }
