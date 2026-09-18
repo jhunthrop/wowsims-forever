@@ -15,6 +15,7 @@
 package spellconst
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -109,12 +110,38 @@ func (s Spell) EffectiveCooldownMS() int32 {
 	return s.CategoryCooldownMS
 }
 
-// rawClass is the JSON envelope of one generated class file.
+// rawClass is the JSON envelope of one generated class file. Spells is
+// kept as raw JSON per entry, not decoded directly into spellBody here,
+// because each entry needs two independent checks before it is trusted:
+// a required-field presence check (a struct field alone cannot tell "0"
+// from "absent") and an unknown-field rejection (via a second decode
+// with DisallowUnknownFields), both against the same bytes.
 type rawClass struct {
-	Build     string               `json:"build"`
-	ClassSlug string               `json:"class_slug"`
-	Family    int32                `json:"family"`
-	Spells    map[string]spellBody `json:"spells"`
+	Build     string                     `json:"build"`
+	ClassSlug string                     `json:"class_slug"`
+	Family    int32                      `json:"family"`
+	Spells    map[string]json.RawMessage `json:"spells"`
+}
+
+// requiredTopLevelFields, requiredSpellFields and requiredEffectFields
+// are every field the amended `simconst` contract
+// (docs/superpowers/specs/2026-09-14-simulator-interfaces.md) marks as
+// part of the shape, at each of its three levels. A field missing from
+// the JSON is a pipeline defect worth failing loudly on — the contract
+// changed shape on this package once already (an array became an
+// object) without the loader noticing, which is why this package exists
+// as a follow-up at all.
+var requiredTopLevelFields = []string{"build", "class_slug", "family", "spells"}
+
+var requiredSpellFields = []string{
+	"name", "rank", "school_mask", "cast_time_ms", "gcd_ms", "cooldown_ms",
+	"category_cooldown_ms", "duration_ms", "cost", "cost_type", "spell_level",
+	"family_mask", "effects",
+}
+
+var requiredEffectFields = []string{
+	"index", "effect", "aura", "amount", "sp_coefficient", "ap_coefficient",
+	"period_ms", "misc_value", "trigger_spell",
 }
 
 // Class is one generated per-class file, spells resolved to a slice and
@@ -130,28 +157,34 @@ type Class struct {
 	hybrid bool
 }
 
-// hybridClasses are the classes the vanilla convention halves.
+// hybridClasses are the classes the vanilla convention halves. Every
+// other class (including priest — shadow priests use the full
+// convention, not the healer half) is considered non-hybrid by the zero
+// value a missing map key already returns, so only the three true
+// entries are listed.
 var hybridClasses = map[string]bool{
 	"paladin": true,
 	"shaman":  true,
 	"druid":   true,
-	"priest":  false, // shadow priests use the full convention
-	"warrior": false,
-	"rogue":   false,
-	"hunter":  false,
-	"mage":    false,
-	"warlock": false,
 }
 
-// Load reads a generated class file and resolves every effect's
-// spell-power coefficient.
+// Load reads a generated class file, rejecting an unrecognized field or
+// a field the contract requires but the file omits, and resolves every
+// effect's spell-power coefficient.
 func Load(path string) (Class, error) {
 	b, err := os.ReadFile(path)
 	if err != nil {
 		return Class{}, fmt.Errorf("spellconst: %w", err)
 	}
+
+	if err := requireFields(b, requiredTopLevelFields); err != nil {
+		return Class{}, fmt.Errorf("spellconst: %s: %w", path, err)
+	}
+
 	var raw rawClass
-	if err := json.Unmarshal(b, &raw); err != nil {
+	dec := json.NewDecoder(bytes.NewReader(b))
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(&raw); err != nil {
 		return Class{}, fmt.Errorf("spellconst: parsing %s: %w", path, err)
 	}
 	if raw.ClassSlug == "" {
@@ -168,12 +201,50 @@ func Load(path string) (Class, error) {
 		hybrid: hybridClasses[raw.ClassSlug],
 	}
 
+	// Iterate the spell ids in a fixed, sorted order rather than the
+	// map's own (randomized per run) order. Nothing downstream currently
+	// depends on load order for correctness — the generator resolves any
+	// same-(name,rank) collision explicitly — but a loader whose output
+	// order is not reproducible is a bug waiting for the next thing that
+	// assumes it is, and there is no cost to fixing it here once.
+	ids := make([]string, 0, len(raw.Spells))
+	for key := range raw.Spells {
+		ids = append(ids, key)
+	}
+	sort.Slice(ids, func(i, j int) bool {
+		a, _ := strconv.ParseInt(ids[i], 10, 64)
+		b, _ := strconv.ParseInt(ids[j], 10, 64)
+		return a < b
+	})
+
 	c.Spells = make([]Spell, 0, len(raw.Spells))
-	for key, body := range raw.Spells {
+	for _, key := range ids {
+		spellRaw := raw.Spells[key]
 		id, err := strconv.ParseInt(key, 10, 32)
 		if err != nil {
 			return Class{}, fmt.Errorf("spellconst: %s: spell key %q is not an integer id: %w", path, key, err)
 		}
+
+		if err := requireFields(spellRaw, requiredSpellFields); err != nil {
+			return Class{}, fmt.Errorf("spellconst: %s: spell %d: %w", path, id, err)
+		}
+		effectsRaw, err := effectMessages(spellRaw)
+		if err != nil {
+			return Class{}, fmt.Errorf("spellconst: %s: spell %d: %w", path, id, err)
+		}
+		for i, er := range effectsRaw {
+			if err := requireFields(er, requiredEffectFields); err != nil {
+				return Class{}, fmt.Errorf("spellconst: %s: spell %d effect %d: %w", path, id, i, err)
+			}
+		}
+
+		var body spellBody
+		bodyDec := json.NewDecoder(bytes.NewReader(spellRaw))
+		bodyDec.DisallowUnknownFields()
+		if err := bodyDec.Decode(&body); err != nil {
+			return Class{}, fmt.Errorf("spellconst: %s: spell %d: %w", path, id, err)
+		}
+
 		s := Spell{
 			ID:                 int32(id),
 			Name:               strings.TrimSpace(body.Name),
@@ -209,6 +280,38 @@ func Load(path string) (Class, error) {
 		return c.Spells[i].Rank < c.Spells[j].Rank
 	})
 	return c, nil
+}
+
+// requireFields checks that every name in want is a key of the JSON
+// object in raw, returning an error naming the first one missing. It
+// does not care about the value, only that the key was present — a
+// legitimately zero cast time and an omitted cast_time_ms are otherwise
+// indistinguishable once decoded into a struct.
+func requireFields(raw json.RawMessage, want []string) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(raw, &fields); err != nil {
+		return fmt.Errorf("not a JSON object: %w", err)
+	}
+	for _, name := range want {
+		if _, ok := fields[name]; !ok {
+			return fmt.Errorf("missing required field %q", name)
+		}
+	}
+	return nil
+}
+
+// effectMessages splits a spell's raw JSON into its effects array's raw
+// entries, for requireFields to check each one independently. A spell
+// missing its effects key entirely already failed requireFields against
+// requiredSpellFields before this is called.
+func effectMessages(raw json.RawMessage) ([]json.RawMessage, error) {
+	var fields struct {
+		Effects []json.RawMessage `json:"effects"`
+	}
+	if err := json.Unmarshal(raw, &fields); err != nil {
+		return nil, fmt.Errorf("parsing effects: %w", err)
+	}
+	return fields.Effects, nil
 }
 
 // ByID returns one rank of one spell.

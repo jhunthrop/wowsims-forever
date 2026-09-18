@@ -95,6 +95,142 @@
       "effects": [
         {"index": 0, "effect": 6, "aura": 3, "amount": 5, "sp_coefficient": 0.0, "ap_coefficient": 0.0, "period_ms": 3000, "misc_value": 0, "trigger_spell": 0}
       ]
+    },
+    "6673": {
+      "name": "Battle Shout",
+      "rank": 1,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 180000,
+      "cost": 100,
+      "cost_type": 1,
+      "spell_level": 1,
+      "family_mask": [65536, 0, 0, 0],
+      "effects": [
+        {"index": 0, "effect": 6, "aura": 99, "amount": 9, "sp_coefficient": 0.0, "ap_coefficient": 0.0, "period_ms": 0, "misc_value": 0, "trigger_spell": 0}
+      ]
+    },
+    "5242": {
+      "name": "Battle Shout",
+      "rank": 2,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 180000,
+      "cost": 100,
+      "cost_type": 1,
+      "spell_level": 12,
+      "family_mask": [65536, 0, 0, 0],
+      "effects": [
+        {"index": 0, "effect": 6, "aura": 99, "amount": 21, "sp_coefficient": 0.0, "ap_coefficient": 0.0, "period_ms": 0, "misc_value": 0, "trigger_spell": 0}
+      ]
+    },
+    "6192": {
+      "name": "Battle Shout",
+      "rank": 3,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 180000,
+      "cost": 100,
+      "cost_type": 1,
+      "spell_level": 22,
+      "family_mask": [65536, 0, 0, 0],
+      "effects": [
+        {"index": 0, "effect": 6, "aura": 99, "amount": 33, "sp_coefficient": 0.0, "ap_coefficient": 0.0, "period_ms": 0, "misc_value": 0, "trigger_spell": 0}
+      ]
+    },
+    "11549": {
+      "name": "Battle Shout",
+      "rank": 4,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 180000,
+      "cost": 100,
+      "cost_type": 1,
+      "spell_level": 32,
+      "family_mask": [65536, 0, 0, 0],
+      "effects": [
+        {"index": 0, "effect": 6, "aura": 99, "amount": 51, "sp_coefficient": 0.0, "ap_coefficient": 0.0, "period_ms": 0, "misc_value": 0, "trigger_spell": 0}
+      ]
+    },
+    "11550": {
+      "name": "Battle Shout",
+      "rank": 5,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 180000,
+      "cost": 100,
+      "cost_type": 1,
+      "spell_level": 42,
+      "family_mask": [65536, 0, 0, 0],
+      "effects": [
+        {"index": 0, "effect": 6, "aura": 99, "amount": 78, "sp_coefficient": 0.0, "ap_coefficient": 0.0, "period_ms": 0, "misc_value": 0, "trigger_spell": 0}
+      ]
+    },
+    "11551": {
+      "name": "Battle Shout",
+      "rank": 6,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 180000,
+      "cost": 100,
+      "cost_type": 1,
+      "spell_level": 52,
+      "family_mask": [65536, 0, 0, 0],
+      "effects": [
+        {"index": 0, "effect": 6, "aura": 99, "amount": 111, "sp_coefficient": 0.0, "ap_coefficient": 0.0, "period_ms": 0, "misc_value": 0, "trigger_spell": 0}
+      ]
+    },
+    "27578": {
+      "name": "Battle Shout",
+      "rank": 6,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 120000,
+      "cost": 0,
+      "cost_type": 1,
+      "spell_level": 52,
+      "family_mask": [65536, 0, 0, 0],
+      "effects": [
+        {"index": 0, "effect": 6, "aura": 99, "amount": 185, "sp_coefficient": 0.0, "ap_coefficient": 0.0, "period_ms": 0, "misc_value": 0, "trigger_spell": 0}
+      ]
+    },
+    "25289": {
+      "name": "Battle Shout",
+      "rank": 7,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 180000,
+      "cost": 100,
+      "cost_type": 1,
+      "spell_level": 60,
+      "family_mask": [65536, 0, 0, 0],
+      "effects": [
+        {"index": 0, "effect": 6, "aura": 99, "amount": 139, "sp_coefficient": 0.0, "ap_coefficient": 0.0, "period_ms": 0, "misc_value": 0, "trigger_spell": 0}
+      ]
     }
   }
 }

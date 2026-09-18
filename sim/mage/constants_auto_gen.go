@@ -11,78 +11,88 @@
 // describe its school-damage effect (falling back to its first effect
 // when it has none); sim/core/spellconst.Load exposes every effect for
 // ability files that need a different one.
+//
+// Every array is indexed by the rank label itself (rank 0 included,
+// common for a spell with no numbered progression), not by position:
+// a gap in the client's own rank numbers is a zero-valued slot here
+// too, not a shift. Where the client lists two ids under the same
+// (name, rank) — an old id and a reissue, or a player-cast and a
+// free/NPC-cast variant — the higher spell_level wins, ties broken by
+// the higher id; the id(s) that lost are named in a comment beside the
+// rank they were dropped from.
 
 package mage
 
 // ConstantsBuild is the client build these numbers came from.
 const ConstantsBuild = "1.60.1.69893"
 
-// 1.60.0 - Item - Tier 1 - Mage 2P Bonus - Hit: 1 rank(s), from build 1.60.1.69893.
-const X1600ItemTier1Mage2PBonusHitRanks = 1
+// 1.60.0 - Item - Tier 1 - Mage 2P Bonus - Hit: ranks 0 present, from build 1.60.1.69893.
+const X1600ItemTier1Mage2PBonusHitRanks = 0
 
-var X1600ItemTier1Mage2PBonusHitSpellId = [X1600ItemTier1Mage2PBonusHitRanks + 1]int32{0, 1300947}
-var X1600ItemTier1Mage2PBonusHitLevel = [X1600ItemTier1Mage2PBonusHitRanks + 1]int{0, 1}
-var X1600ItemTier1Mage2PBonusHitCastTime = [X1600ItemTier1Mage2PBonusHitRanks + 1]int32{0, 0}
-var X1600ItemTier1Mage2PBonusHitCooldownMS = [X1600ItemTier1Mage2PBonusHitRanks + 1]int32{0, 0}
-var X1600ItemTier1Mage2PBonusHitManaCost = [X1600ItemTier1Mage2PBonusHitRanks + 1]float64{0, 0}
-var X1600ItemTier1Mage2PBonusHitSpellCoeff = [X1600ItemTier1Mage2PBonusHitRanks + 1]float64{0, 0.4286}
-var X1600ItemTier1Mage2PBonusHitBaseDamage = [X1600ItemTier1Mage2PBonusHitRanks + 1][]float64{{0, 0}, {1, 1}}
+var X1600ItemTier1Mage2PBonusHitSpellId = [X1600ItemTier1Mage2PBonusHitRanks + 1]int32{1300947}
+var X1600ItemTier1Mage2PBonusHitLevel = [X1600ItemTier1Mage2PBonusHitRanks + 1]int{1}
+var X1600ItemTier1Mage2PBonusHitCastTime = [X1600ItemTier1Mage2PBonusHitRanks + 1]int32{0}
+var X1600ItemTier1Mage2PBonusHitCooldownMS = [X1600ItemTier1Mage2PBonusHitRanks + 1]int32{0}
+var X1600ItemTier1Mage2PBonusHitManaCost = [X1600ItemTier1Mage2PBonusHitRanks + 1]float64{0}
+var X1600ItemTier1Mage2PBonusHitSpellCoeff = [X1600ItemTier1Mage2PBonusHitRanks + 1]float64{0.4286}
+var X1600ItemTier1Mage2PBonusHitBaseDamage = [X1600ItemTier1Mage2PBonusHitRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: 1.60.0 - Item - Tier 1 - Mage 2P Bonus - Hit coefficient derived from the vanilla convention (rank 0)
 
-// 1.60.0 - Item - Tier 1 - Mage 3P Bonus - Counterspell: 1 rank(s), from build 1.60.1.69893.
-const X1600ItemTier1Mage3PBonusCounterspellRanks = 1
+// 1.60.0 - Item - Tier 1 - Mage 3P Bonus - Counterspell: ranks 0 present, from build 1.60.1.69893.
+const X1600ItemTier1Mage3PBonusCounterspellRanks = 0
 
-var X1600ItemTier1Mage3PBonusCounterspellSpellId = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1]int32{0, 1301013}
-var X1600ItemTier1Mage3PBonusCounterspellLevel = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1]int{0, 1}
-var X1600ItemTier1Mage3PBonusCounterspellCastTime = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1]int32{0, 0}
-var X1600ItemTier1Mage3PBonusCounterspellCooldownMS = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1]int32{0, 0}
-var X1600ItemTier1Mage3PBonusCounterspellManaCost = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1]float64{0, 0}
-var X1600ItemTier1Mage3PBonusCounterspellSpellCoeff = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1]float64{0, 0.4286}
-var X1600ItemTier1Mage3PBonusCounterspellBaseDamage = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1][]float64{{0, 0}, {-5000, -5000}}
+var X1600ItemTier1Mage3PBonusCounterspellSpellId = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1]int32{1301013}
+var X1600ItemTier1Mage3PBonusCounterspellLevel = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1]int{1}
+var X1600ItemTier1Mage3PBonusCounterspellCastTime = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1]int32{0}
+var X1600ItemTier1Mage3PBonusCounterspellCooldownMS = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1]int32{0}
+var X1600ItemTier1Mage3PBonusCounterspellManaCost = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1]float64{0}
+var X1600ItemTier1Mage3PBonusCounterspellSpellCoeff = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1]float64{0.4286}
+var X1600ItemTier1Mage3PBonusCounterspellBaseDamage = [X1600ItemTier1Mage3PBonusCounterspellRanks + 1][]float64{{-5000, -5000}}
 
 // unconfirmed: 1.60.0 - Item - Tier 1 - Mage 3P Bonus - Counterspell coefficient derived from the vanilla convention (rank 0)
 
-// 1.60.0 - Item - Tier 1 - Mage 4P Bonus - SP vs. Elementals: 1 rank(s), from build 1.60.1.69893.
-const X1600ItemTier1Mage4PBonusSPVsElementalsRanks = 1
+// 1.60.0 - Item - Tier 1 - Mage 4P Bonus - SP vs. Elementals: ranks 0 present, from build 1.60.1.69893.
+const X1600ItemTier1Mage4PBonusSPVsElementalsRanks = 0
 
-var X1600ItemTier1Mage4PBonusSPVsElementalsSpellId = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1]int32{0, 1301079}
-var X1600ItemTier1Mage4PBonusSPVsElementalsLevel = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1]int{0, 1}
-var X1600ItemTier1Mage4PBonusSPVsElementalsCastTime = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1]int32{0, 0}
-var X1600ItemTier1Mage4PBonusSPVsElementalsCooldownMS = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1]int32{0, 0}
-var X1600ItemTier1Mage4PBonusSPVsElementalsManaCost = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1]float64{0, 0}
-var X1600ItemTier1Mage4PBonusSPVsElementalsSpellCoeff = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1]float64{0, 0.4286}
-var X1600ItemTier1Mage4PBonusSPVsElementalsBaseDamage = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1][]float64{{0, 0}, {21, 21}}
+var X1600ItemTier1Mage4PBonusSPVsElementalsSpellId = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1]int32{1301079}
+var X1600ItemTier1Mage4PBonusSPVsElementalsLevel = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1]int{1}
+var X1600ItemTier1Mage4PBonusSPVsElementalsCastTime = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1]int32{0}
+var X1600ItemTier1Mage4PBonusSPVsElementalsCooldownMS = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1]int32{0}
+var X1600ItemTier1Mage4PBonusSPVsElementalsManaCost = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1]float64{0}
+var X1600ItemTier1Mage4PBonusSPVsElementalsSpellCoeff = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1]float64{0.4286}
+var X1600ItemTier1Mage4PBonusSPVsElementalsBaseDamage = [X1600ItemTier1Mage4PBonusSPVsElementalsRanks + 1][]float64{{21, 21}}
 
 // unconfirmed: 1.60.0 - Item - Tier 1 - Mage 4P Bonus - SP vs. Elementals coefficient derived from the vanilla convention (rank 0)
 
-// 1.60.0 - Item - Tier 1 - Mage 5P Bonus - Frostfire Bolt: 1 rank(s), from build 1.60.1.69893.
-const X1600ItemTier1Mage5PBonusFrostfireBoltRanks = 1
+// 1.60.0 - Item - Tier 1 - Mage 5P Bonus - Frostfire Bolt: ranks 0 present, from build 1.60.1.69893.
+const X1600ItemTier1Mage5PBonusFrostfireBoltRanks = 0
 
-var X1600ItemTier1Mage5PBonusFrostfireBoltSpellId = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1]int32{0, 1301488}
-var X1600ItemTier1Mage5PBonusFrostfireBoltLevel = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1]int{0, 1}
-var X1600ItemTier1Mage5PBonusFrostfireBoltCastTime = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1]int32{0, 0}
-var X1600ItemTier1Mage5PBonusFrostfireBoltCooldownMS = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1]int32{0, 0}
-var X1600ItemTier1Mage5PBonusFrostfireBoltManaCost = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1]float64{0, 0}
-var X1600ItemTier1Mage5PBonusFrostfireBoltSpellCoeff = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1]float64{0, 0.4286}
-var X1600ItemTier1Mage5PBonusFrostfireBoltBaseDamage = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1][]float64{{0, 0}, {10, 10}}
+var X1600ItemTier1Mage5PBonusFrostfireBoltSpellId = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1]int32{1301488}
+var X1600ItemTier1Mage5PBonusFrostfireBoltLevel = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1]int{1}
+var X1600ItemTier1Mage5PBonusFrostfireBoltCastTime = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1]int32{0}
+var X1600ItemTier1Mage5PBonusFrostfireBoltCooldownMS = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1]int32{0}
+var X1600ItemTier1Mage5PBonusFrostfireBoltManaCost = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1]float64{0}
+var X1600ItemTier1Mage5PBonusFrostfireBoltSpellCoeff = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1]float64{0.4286}
+var X1600ItemTier1Mage5PBonusFrostfireBoltBaseDamage = [X1600ItemTier1Mage5PBonusFrostfireBoltRanks + 1][]float64{{10, 10}}
 
 // unconfirmed: 1.60.0 - Item - Tier 1 - Mage 5P Bonus - Frostfire Bolt coefficient derived from the vanilla convention (rank 0)
 
-// Advanced Warding: 3 rank(s), from build 1.60.1.69893.
-const AdvancedWardingRanks = 3
+// Advanced Warding: ranks 0 present, from build 1.60.1.69893.
+const AdvancedWardingRanks = 0
 
-var AdvancedWardingSpellId = [AdvancedWardingRanks + 1]int32{0, 428738, 412115, 401726}
-var AdvancedWardingLevel = [AdvancedWardingRanks + 1]int{0, 1, 1, 1}
-var AdvancedWardingCastTime = [AdvancedWardingRanks + 1]int32{0, 0, 0, 0}
-var AdvancedWardingCooldownMS = [AdvancedWardingRanks + 1]int32{0, 0, 0, 0}
-var AdvancedWardingManaCost = [AdvancedWardingRanks + 1]float64{0, 0, 0, 0}
-var AdvancedWardingSpellCoeff = [AdvancedWardingRanks + 1]float64{0, 0.4286, 0.4286, 0.4286}
-var AdvancedWardingBaseDamage = [AdvancedWardingRanks + 1][]float64{{0, 0}, {100, 100}, {100, 100}, {412115, 412115}}
+var AdvancedWardingSpellId = [AdvancedWardingRanks + 1]int32{428738}
+var AdvancedWardingLevel = [AdvancedWardingRanks + 1]int{1}
+var AdvancedWardingCastTime = [AdvancedWardingRanks + 1]int32{0}
+var AdvancedWardingCooldownMS = [AdvancedWardingRanks + 1]int32{0}
+var AdvancedWardingManaCost = [AdvancedWardingRanks + 1]float64{0}
+var AdvancedWardingSpellCoeff = [AdvancedWardingRanks + 1]float64{0.4286}
+var AdvancedWardingBaseDamage = [AdvancedWardingRanks + 1][]float64{{100, 100}}
 
-// unconfirmed: Advanced Warding coefficient derived from the vanilla convention (rank 0, rank 0, rank 0)
+// unconfirmed: Advanced Warding coefficient derived from the vanilla convention (rank 0)
+// Advanced Warding rank 0: kept id 428738 (spell_level 1); dropped 401726 (spell_level 1), 412115 (spell_level 1)
 
-// Amplify Magic: 4 rank(s), from build 1.60.1.69893.
+// Amplify Magic: ranks 1-4 present, from build 1.60.1.69893.
 const AmplifyMagicRanks = 4
 
 var AmplifyMagicSpellId = [AmplifyMagicRanks + 1]int32{0, 1008, 8455, 10169, 10170}
@@ -95,46 +105,49 @@ var AmplifyMagicBaseDamage = [AmplifyMagicRanks + 1][]float64{{0, 0}, {23, 23}, 
 
 // unconfirmed: Amplify Magic coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4)
 
-// Arcane Barrage: 2 rank(s), from build 1.60.1.69893.
-const ArcaneBarrageRanks = 2
+// Arcane Barrage: ranks 0 present, from build 1.60.1.69893.
+const ArcaneBarrageRanks = 0
 
-var ArcaneBarrageSpellId = [ArcaneBarrageRanks + 1]int32{0, 400610, 401719}
-var ArcaneBarrageLevel = [ArcaneBarrageRanks + 1]int{0, 1, 1}
-var ArcaneBarrageCastTime = [ArcaneBarrageRanks + 1]int32{0, 0, 0}
-var ArcaneBarrageCooldownMS = [ArcaneBarrageRanks + 1]int32{0, 3000, 0}
-var ArcaneBarrageManaCost = [ArcaneBarrageRanks + 1]float64{0, 0, 0}
-var ArcaneBarrageSpellCoeff = [ArcaneBarrageRanks + 1]float64{0, 0.429, 0.4286}
-var ArcaneBarrageBaseDamage = [ArcaneBarrageRanks + 1][]float64{{0, 0}, {398, 398}, {400610, 400610}}
+var ArcaneBarrageSpellId = [ArcaneBarrageRanks + 1]int32{401719}
+var ArcaneBarrageLevel = [ArcaneBarrageRanks + 1]int{1}
+var ArcaneBarrageCastTime = [ArcaneBarrageRanks + 1]int32{0}
+var ArcaneBarrageCooldownMS = [ArcaneBarrageRanks + 1]int32{0}
+var ArcaneBarrageManaCost = [ArcaneBarrageRanks + 1]float64{0}
+var ArcaneBarrageSpellCoeff = [ArcaneBarrageRanks + 1]float64{0.4286}
+var ArcaneBarrageBaseDamage = [ArcaneBarrageRanks + 1][]float64{{400610, 400610}}
 
 // unconfirmed: Arcane Barrage coefficient derived from the vanilla convention (rank 0)
+// Arcane Barrage rank 0: kept id 401719 (spell_level 1); dropped 400610 (spell_level 1)
 
-// Arcane Blast: 13 rank(s), from build 1.60.1.69893.
-const ArcaneBlastRanks = 13
+// Arcane Blast: ranks 0-5 present, from build 1.60.1.69893.
+const ArcaneBlastRanks = 5
 
-var ArcaneBlastSpellId = [ArcaneBlastRanks + 1]int32{0, 400586, 18091, 401729, 1300176, 400573, 16067, 1300177, 400574, 1239696, 1239697, 42896, 1239699, 1239700}
-var ArcaneBlastLevel = [ArcaneBlastRanks + 1]int{0, 1, 35, 1, 1, 1, 35, 1, 20, 30, 40, 76, 50, 60}
-var ArcaneBlastCastTime = [ArcaneBlastRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 2500, 2500, 2500, 2500, 2500, 2500}
-var ArcaneBlastCooldownMS = [ArcaneBlastRanks + 1]int32{0, 180000, 8000, 0, 180000, 180000, 8000, 180000, 0, 0, 0, 0, 0, 0}
-var ArcaneBlastManaCost = [ArcaneBlastRanks + 1]float64{0, 0, 80, 0, 0, 0, 80, 0, 0, 0, 0, 0, 0, 0}
-var ArcaneBlastSpellCoeff = [ArcaneBlastRanks + 1]float64{0, 0.5333, 0.4286, 0.4286, 0.5333, 0.5333, 0.4286, 0.5333, 0.714, 0.714, 0.714, 0.714, 0.714, 0.714}
-var ArcaneBlastBaseDamage = [ArcaneBlastRanks + 1][]float64{{0, 0}, {15, 15}, {85, 85}, {400574, 400574}, {10, 10}, {10, 10}, {120, 120}, {10, 10}, {54, 54}, {130, 130}, {169, 169}, {1131, 1131}, {274, 274}, {394, 394}}
+var ArcaneBlastSpellId = [ArcaneBlastRanks + 1]int32{18091, 400574, 1239696, 42896, 1239699, 1239700}
+var ArcaneBlastLevel = [ArcaneBlastRanks + 1]int{35, 20, 30, 76, 50, 60}
+var ArcaneBlastCastTime = [ArcaneBlastRanks + 1]int32{0, 2500, 2500, 2500, 2500, 2500}
+var ArcaneBlastCooldownMS = [ArcaneBlastRanks + 1]int32{8000, 0, 0, 0, 0, 0}
+var ArcaneBlastManaCost = [ArcaneBlastRanks + 1]float64{80, 0, 0, 0, 0, 0}
+var ArcaneBlastSpellCoeff = [ArcaneBlastRanks + 1]float64{0.4286, 0.714, 0.714, 0.714, 0.714, 0.714}
+var ArcaneBlastBaseDamage = [ArcaneBlastRanks + 1][]float64{{85, 85}, {54, 54}, {130, 130}, {1131, 1131}, {274, 274}, {394, 394}}
 
-// unconfirmed: Arcane Blast coefficient derived from the vanilla convention (rank 0, rank 0, rank 0, rank 0, rank 0, rank 0, rank 0)
+// unconfirmed: Arcane Blast coefficient derived from the vanilla convention (rank 0)
+// Arcane Blast rank 0: kept id 18091 (spell_level 35); dropped 16067 (spell_level 35), 400573 (spell_level 1), 400586 (spell_level 1), 401729 (spell_level 1), 1300176 (spell_level 1), 1300177 (spell_level 1)
+// Arcane Blast rank 3: kept id 42896 (spell_level 76); dropped 1239697 (spell_level 40)
 
-// Arcane Blast Cast Pushback Reduction: 1 rank(s), from build 1.60.1.69893.
-const ArcaneBlastCastPushbackReductionRanks = 1
+// Arcane Blast Cast Pushback Reduction: ranks 0 present, from build 1.60.1.69893.
+const ArcaneBlastCastPushbackReductionRanks = 0
 
-var ArcaneBlastCastPushbackReductionSpellId = [ArcaneBlastCastPushbackReductionRanks + 1]int32{0, 459600}
-var ArcaneBlastCastPushbackReductionLevel = [ArcaneBlastCastPushbackReductionRanks + 1]int{0, 0}
-var ArcaneBlastCastPushbackReductionCastTime = [ArcaneBlastCastPushbackReductionRanks + 1]int32{0, 0}
-var ArcaneBlastCastPushbackReductionCooldownMS = [ArcaneBlastCastPushbackReductionRanks + 1]int32{0, 0}
-var ArcaneBlastCastPushbackReductionManaCost = [ArcaneBlastCastPushbackReductionRanks + 1]float64{0, 0}
-var ArcaneBlastCastPushbackReductionSpellCoeff = [ArcaneBlastCastPushbackReductionRanks + 1]float64{0, 0.4286}
-var ArcaneBlastCastPushbackReductionBaseDamage = [ArcaneBlastCastPushbackReductionRanks + 1][]float64{{0, 0}, {50, 50}}
+var ArcaneBlastCastPushbackReductionSpellId = [ArcaneBlastCastPushbackReductionRanks + 1]int32{459600}
+var ArcaneBlastCastPushbackReductionLevel = [ArcaneBlastCastPushbackReductionRanks + 1]int{0}
+var ArcaneBlastCastPushbackReductionCastTime = [ArcaneBlastCastPushbackReductionRanks + 1]int32{0}
+var ArcaneBlastCastPushbackReductionCooldownMS = [ArcaneBlastCastPushbackReductionRanks + 1]int32{0}
+var ArcaneBlastCastPushbackReductionManaCost = [ArcaneBlastCastPushbackReductionRanks + 1]float64{0}
+var ArcaneBlastCastPushbackReductionSpellCoeff = [ArcaneBlastCastPushbackReductionRanks + 1]float64{0.4286}
+var ArcaneBlastCastPushbackReductionBaseDamage = [ArcaneBlastCastPushbackReductionRanks + 1][]float64{{50, 50}}
 
 // unconfirmed: Arcane Blast Cast Pushback Reduction coefficient derived from the vanilla convention (rank 0)
 
-// Arcane Brilliance: 1 rank(s), from build 1.60.1.69893.
+// Arcane Brilliance: ranks 1 present, from build 1.60.1.69893.
 const ArcaneBrillianceRanks = 1
 
 var ArcaneBrillianceSpellId = [ArcaneBrillianceRanks + 1]int32{0, 23028}
@@ -147,300 +160,305 @@ var ArcaneBrillianceBaseDamage = [ArcaneBrillianceRanks + 1][]float64{{0, 0}, {3
 
 // unconfirmed: Arcane Brilliance coefficient derived from the vanilla convention (rank 1)
 
-// Arcane Concentration: 1 rank(s), from build 1.60.1.69893.
-const ArcaneConcentrationRanks = 1
+// Arcane Concentration: ranks 0 present, from build 1.60.1.69893.
+const ArcaneConcentrationRanks = 0
 
-var ArcaneConcentrationSpellId = [ArcaneConcentrationRanks + 1]int32{0, 11213}
-var ArcaneConcentrationLevel = [ArcaneConcentrationRanks + 1]int{0, 1}
-var ArcaneConcentrationCastTime = [ArcaneConcentrationRanks + 1]int32{0, 0}
-var ArcaneConcentrationCooldownMS = [ArcaneConcentrationRanks + 1]int32{0, 0}
-var ArcaneConcentrationManaCost = [ArcaneConcentrationRanks + 1]float64{0, 0}
-var ArcaneConcentrationSpellCoeff = [ArcaneConcentrationRanks + 1]float64{0, 0.4286}
-var ArcaneConcentrationBaseDamage = [ArcaneConcentrationRanks + 1][]float64{{0, 0}, {100, 100}}
+var ArcaneConcentrationSpellId = [ArcaneConcentrationRanks + 1]int32{11213}
+var ArcaneConcentrationLevel = [ArcaneConcentrationRanks + 1]int{1}
+var ArcaneConcentrationCastTime = [ArcaneConcentrationRanks + 1]int32{0}
+var ArcaneConcentrationCooldownMS = [ArcaneConcentrationRanks + 1]int32{0}
+var ArcaneConcentrationManaCost = [ArcaneConcentrationRanks + 1]float64{0}
+var ArcaneConcentrationSpellCoeff = [ArcaneConcentrationRanks + 1]float64{0.4286}
+var ArcaneConcentrationBaseDamage = [ArcaneConcentrationRanks + 1][]float64{{100, 100}}
 
 // unconfirmed: Arcane Concentration coefficient derived from the vanilla convention (rank 0)
 
 // skipped: "Arcane Explosion" already has a hand-written ArcaneExplosionRanks elsewhere in this package.
 
-// Arcane Focus: 1 rank(s), from build 1.60.1.69893.
-const ArcaneFocusRanks = 1
+// Arcane Focus: ranks 0 present, from build 1.60.1.69893.
+const ArcaneFocusRanks = 0
 
-var ArcaneFocusSpellId = [ArcaneFocusRanks + 1]int32{0, 11222}
-var ArcaneFocusLevel = [ArcaneFocusRanks + 1]int{0, 1}
-var ArcaneFocusCastTime = [ArcaneFocusRanks + 1]int32{0, 0}
-var ArcaneFocusCooldownMS = [ArcaneFocusRanks + 1]int32{0, 0}
-var ArcaneFocusManaCost = [ArcaneFocusRanks + 1]float64{0, 0}
-var ArcaneFocusSpellCoeff = [ArcaneFocusRanks + 1]float64{0, 0.4286}
-var ArcaneFocusBaseDamage = [ArcaneFocusRanks + 1][]float64{{0, 0}, {2, 2}}
+var ArcaneFocusSpellId = [ArcaneFocusRanks + 1]int32{11222}
+var ArcaneFocusLevel = [ArcaneFocusRanks + 1]int{1}
+var ArcaneFocusCastTime = [ArcaneFocusRanks + 1]int32{0}
+var ArcaneFocusCooldownMS = [ArcaneFocusRanks + 1]int32{0}
+var ArcaneFocusManaCost = [ArcaneFocusRanks + 1]float64{0}
+var ArcaneFocusSpellCoeff = [ArcaneFocusRanks + 1]float64{0.4286}
+var ArcaneFocusBaseDamage = [ArcaneFocusRanks + 1][]float64{{2, 2}}
 
 // unconfirmed: Arcane Focus coefficient derived from the vanilla convention (rank 0)
 
-// Arcane Geometry: 1 rank(s), from build 1.60.1.69893.
-const ArcaneGeometryRanks = 1
+// Arcane Geometry: ranks 0 present, from build 1.60.1.69893.
+const ArcaneGeometryRanks = 0
 
-var ArcaneGeometrySpellId = [ArcaneGeometryRanks + 1]int32{0, 11247}
-var ArcaneGeometryLevel = [ArcaneGeometryRanks + 1]int{0, 1}
-var ArcaneGeometryCastTime = [ArcaneGeometryRanks + 1]int32{0, 0}
-var ArcaneGeometryCooldownMS = [ArcaneGeometryRanks + 1]int32{0, 0}
-var ArcaneGeometryManaCost = [ArcaneGeometryRanks + 1]float64{0, 0}
-var ArcaneGeometrySpellCoeff = [ArcaneGeometryRanks + 1]float64{0, 0.4286}
-var ArcaneGeometryBaseDamage = [ArcaneGeometryRanks + 1][]float64{{0, 0}, {6, 6}}
+var ArcaneGeometrySpellId = [ArcaneGeometryRanks + 1]int32{11247}
+var ArcaneGeometryLevel = [ArcaneGeometryRanks + 1]int{1}
+var ArcaneGeometryCastTime = [ArcaneGeometryRanks + 1]int32{0}
+var ArcaneGeometryCooldownMS = [ArcaneGeometryRanks + 1]int32{0}
+var ArcaneGeometryManaCost = [ArcaneGeometryRanks + 1]float64{0}
+var ArcaneGeometrySpellCoeff = [ArcaneGeometryRanks + 1]float64{0.4286}
+var ArcaneGeometryBaseDamage = [ArcaneGeometryRanks + 1][]float64{{6, 6}}
 
 // unconfirmed: Arcane Geometry coefficient derived from the vanilla convention (rank 0)
 
-// Arcane Impact: 1 rank(s), from build 1.60.1.69893.
-const ArcaneImpactRanks = 1
+// Arcane Impact: ranks 0 present, from build 1.60.1.69893.
+const ArcaneImpactRanks = 0
 
-var ArcaneImpactSpellId = [ArcaneImpactRanks + 1]int32{0, 11242}
-var ArcaneImpactLevel = [ArcaneImpactRanks + 1]int{0, 1}
-var ArcaneImpactCastTime = [ArcaneImpactRanks + 1]int32{0, 0}
-var ArcaneImpactCooldownMS = [ArcaneImpactRanks + 1]int32{0, 0}
-var ArcaneImpactManaCost = [ArcaneImpactRanks + 1]float64{0, 0}
-var ArcaneImpactSpellCoeff = [ArcaneImpactRanks + 1]float64{0, 0.4286}
-var ArcaneImpactBaseDamage = [ArcaneImpactRanks + 1][]float64{{0, 0}, {6, 6}}
+var ArcaneImpactSpellId = [ArcaneImpactRanks + 1]int32{11242}
+var ArcaneImpactLevel = [ArcaneImpactRanks + 1]int{1}
+var ArcaneImpactCastTime = [ArcaneImpactRanks + 1]int32{0}
+var ArcaneImpactCooldownMS = [ArcaneImpactRanks + 1]int32{0}
+var ArcaneImpactManaCost = [ArcaneImpactRanks + 1]float64{0}
+var ArcaneImpactSpellCoeff = [ArcaneImpactRanks + 1]float64{0.4286}
+var ArcaneImpactBaseDamage = [ArcaneImpactRanks + 1][]float64{{6, 6}}
 
 // unconfirmed: Arcane Impact coefficient derived from the vanilla convention (rank 0)
 
-// Arcane Instability: 1 rank(s), from build 1.60.1.69893.
-const ArcaneInstabilityRanks = 1
+// Arcane Instability: ranks 0 present, from build 1.60.1.69893.
+const ArcaneInstabilityRanks = 0
 
-var ArcaneInstabilitySpellId = [ArcaneInstabilityRanks + 1]int32{0, 15058}
-var ArcaneInstabilityLevel = [ArcaneInstabilityRanks + 1]int{0, 0}
-var ArcaneInstabilityCastTime = [ArcaneInstabilityRanks + 1]int32{0, 0}
-var ArcaneInstabilityCooldownMS = [ArcaneInstabilityRanks + 1]int32{0, 0}
-var ArcaneInstabilityManaCost = [ArcaneInstabilityRanks + 1]float64{0, 0}
-var ArcaneInstabilitySpellCoeff = [ArcaneInstabilityRanks + 1]float64{0, 0.4286}
-var ArcaneInstabilityBaseDamage = [ArcaneInstabilityRanks + 1][]float64{{0, 0}, {1, 1}}
+var ArcaneInstabilitySpellId = [ArcaneInstabilityRanks + 1]int32{15058}
+var ArcaneInstabilityLevel = [ArcaneInstabilityRanks + 1]int{0}
+var ArcaneInstabilityCastTime = [ArcaneInstabilityRanks + 1]int32{0}
+var ArcaneInstabilityCooldownMS = [ArcaneInstabilityRanks + 1]int32{0}
+var ArcaneInstabilityManaCost = [ArcaneInstabilityRanks + 1]float64{0}
+var ArcaneInstabilitySpellCoeff = [ArcaneInstabilityRanks + 1]float64{0.4286}
+var ArcaneInstabilityBaseDamage = [ArcaneInstabilityRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Arcane Instability coefficient derived from the vanilla convention (rank 0)
 
-// Arcane Intellect: 8 rank(s), from build 1.60.1.69893.
-const ArcaneIntellectRanks = 8
+// Arcane Intellect: ranks 0-5 present, from build 1.60.1.69893.
+const ArcaneIntellectRanks = 5
 
-var ArcaneIntellectSpellId = [ArcaneIntellectRanks + 1]int32{0, 13326, 1459, 364161, 1460, 1461, 10156, 16876, 10157}
-var ArcaneIntellectLevel = [ArcaneIntellectRanks + 1]int{0, 20, 1, 14, 14, 28, 42, 56, 56}
-var ArcaneIntellectCastTime = [ArcaneIntellectRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
-var ArcaneIntellectCooldownMS = [ArcaneIntellectRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
-var ArcaneIntellectManaCost = [ArcaneIntellectRanks + 1]float64{0, 90, 60, 185, 185, 520, 945, 0, 1510}
-var ArcaneIntellectSpellCoeff = [ArcaneIntellectRanks + 1]float64{0, 120, 240, 240, 240, 240, 240, 120, 240}
-var ArcaneIntellectBaseDamage = [ArcaneIntellectRanks + 1][]float64{{0, 0}, {10, 10}, {2, 2}, {7, 7}, {7, 7}, {15, 15}, {22, 22}, {31, 31}, {31, 31}}
+var ArcaneIntellectSpellId = [ArcaneIntellectRanks + 1]int32{13326, 1459, 364161, 1461, 10156, 16876}
+var ArcaneIntellectLevel = [ArcaneIntellectRanks + 1]int{20, 1, 14, 28, 42, 56}
+var ArcaneIntellectCastTime = [ArcaneIntellectRanks + 1]int32{0, 0, 0, 0, 0, 0}
+var ArcaneIntellectCooldownMS = [ArcaneIntellectRanks + 1]int32{0, 0, 0, 0, 0, 0}
+var ArcaneIntellectManaCost = [ArcaneIntellectRanks + 1]float64{90, 60, 185, 520, 945, 0}
+var ArcaneIntellectSpellCoeff = [ArcaneIntellectRanks + 1]float64{120, 240, 240, 240, 240, 120}
+var ArcaneIntellectBaseDamage = [ArcaneIntellectRanks + 1][]float64{{10, 10}, {2, 2}, {7, 7}, {15, 15}, {22, 22}, {31, 31}}
 
-// unconfirmed: Arcane Intellect coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 2, rank 3, rank 4, rank 5, rank 5)
+// unconfirmed: Arcane Intellect coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3, rank 4, rank 5)
+// Arcane Intellect rank 2: kept id 364161 (spell_level 14); dropped 1460 (spell_level 14)
+// Arcane Intellect rank 5: kept id 16876 (spell_level 56); dropped 10157 (spell_level 56)
 
-// Arcane Might: 1 rank(s), from build 1.60.1.69893.
-const ArcaneMightRanks = 1
+// Arcane Might: ranks 0 present, from build 1.60.1.69893.
+const ArcaneMightRanks = 0
 
-var ArcaneMightSpellId = [ArcaneMightRanks + 1]int32{0, 17150}
-var ArcaneMightLevel = [ArcaneMightRanks + 1]int{0, 52}
-var ArcaneMightCastTime = [ArcaneMightRanks + 1]int32{0, 0}
-var ArcaneMightCooldownMS = [ArcaneMightRanks + 1]int32{0, 0}
-var ArcaneMightManaCost = [ArcaneMightRanks + 1]float64{0, 90}
-var ArcaneMightSpellCoeff = [ArcaneMightRanks + 1]float64{0, 120}
-var ArcaneMightBaseDamage = [ArcaneMightRanks + 1][]float64{{0, 0}, {50, 50}}
+var ArcaneMightSpellId = [ArcaneMightRanks + 1]int32{17150}
+var ArcaneMightLevel = [ArcaneMightRanks + 1]int{52}
+var ArcaneMightCastTime = [ArcaneMightRanks + 1]int32{0}
+var ArcaneMightCooldownMS = [ArcaneMightRanks + 1]int32{0}
+var ArcaneMightManaCost = [ArcaneMightRanks + 1]float64{90}
+var ArcaneMightSpellCoeff = [ArcaneMightRanks + 1]float64{120}
+var ArcaneMightBaseDamage = [ArcaneMightRanks + 1][]float64{{50, 50}}
 
 // unconfirmed: Arcane Might coefficient derived from the vanilla convention (rank 0)
 
-// Arcane Mind: 1 rank(s), from build 1.60.1.69893.
-const ArcaneMindRanks = 1
+// Arcane Mind: ranks 0 present, from build 1.60.1.69893.
+const ArcaneMindRanks = 0
 
-var ArcaneMindSpellId = [ArcaneMindRanks + 1]int32{0, 11232}
-var ArcaneMindLevel = [ArcaneMindRanks + 1]int{0, 1}
-var ArcaneMindCastTime = [ArcaneMindRanks + 1]int32{0, 0}
-var ArcaneMindCooldownMS = [ArcaneMindRanks + 1]int32{0, 0}
-var ArcaneMindManaCost = [ArcaneMindRanks + 1]float64{0, 0}
-var ArcaneMindSpellCoeff = [ArcaneMindRanks + 1]float64{0, 0.4286}
-var ArcaneMindBaseDamage = [ArcaneMindRanks + 1][]float64{{0, 0}, {10, 10}}
+var ArcaneMindSpellId = [ArcaneMindRanks + 1]int32{11232}
+var ArcaneMindLevel = [ArcaneMindRanks + 1]int{1}
+var ArcaneMindCastTime = [ArcaneMindRanks + 1]int32{0}
+var ArcaneMindCooldownMS = [ArcaneMindRanks + 1]int32{0}
+var ArcaneMindManaCost = [ArcaneMindRanks + 1]float64{0}
+var ArcaneMindSpellCoeff = [ArcaneMindRanks + 1]float64{0.4286}
+var ArcaneMindBaseDamage = [ArcaneMindRanks + 1][]float64{{10, 10}}
 
 // unconfirmed: Arcane Mind coefficient derived from the vanilla convention (rank 0)
 
-// Arcane Missile: 2 rank(s), from build 1.60.1.69893.
-const ArcaneMissileRanks = 2
+// Arcane Missile: ranks 0-1 present, from build 1.60.1.69893.
+const ArcaneMissileRanks = 1
 
-var ArcaneMissileSpellId = [ArcaneMissileRanks + 1]int32{0, 1308937, 7268}
-var ArcaneMissileLevel = [ArcaneMissileRanks + 1]int{0, 8, 8}
-var ArcaneMissileCastTime = [ArcaneMissileRanks + 1]int32{0, 0, 0}
-var ArcaneMissileCooldownMS = [ArcaneMissileRanks + 1]int32{0, 0, 0}
-var ArcaneMissileManaCost = [ArcaneMissileRanks + 1]float64{0, 0, 0}
-var ArcaneMissileSpellCoeff = [ArcaneMissileRanks + 1]float64{0, 0.286, 0.286}
-var ArcaneMissileBaseDamage = [ArcaneMissileRanks + 1][]float64{{0, 0}, {24, 24}, {24, 24}}
+var ArcaneMissileSpellId = [ArcaneMissileRanks + 1]int32{1308937, 7268}
+var ArcaneMissileLevel = [ArcaneMissileRanks + 1]int{8, 8}
+var ArcaneMissileCastTime = [ArcaneMissileRanks + 1]int32{0, 0}
+var ArcaneMissileCooldownMS = [ArcaneMissileRanks + 1]int32{0, 0}
+var ArcaneMissileManaCost = [ArcaneMissileRanks + 1]float64{0, 0}
+var ArcaneMissileSpellCoeff = [ArcaneMissileRanks + 1]float64{0.286, 0.286}
+var ArcaneMissileBaseDamage = [ArcaneMissileRanks + 1][]float64{{24, 24}, {24, 24}}
 
 // skipped: "Arcane Missiles" already has a hand-written ArcaneMissilesRanks elsewhere in this package.
 
-// Arcane Missiles +1: 1 rank(s), from build 1.60.1.69893.
-const ArcaneMissiles1Ranks = 1
+// Arcane Missiles +1: ranks 0 present, from build 1.60.1.69893.
+const ArcaneMissiles1Ranks = 0
 
-var ArcaneMissiles1SpellId = [ArcaneMissiles1Ranks + 1]int32{0, 21228}
-var ArcaneMissiles1Level = [ArcaneMissiles1Ranks + 1]int{0, 0}
-var ArcaneMissiles1CastTime = [ArcaneMissiles1Ranks + 1]int32{0, 0}
-var ArcaneMissiles1CooldownMS = [ArcaneMissiles1Ranks + 1]int32{0, 0}
-var ArcaneMissiles1ManaCost = [ArcaneMissiles1Ranks + 1]float64{0, 0}
-var ArcaneMissiles1SpellCoeff = [ArcaneMissiles1Ranks + 1]float64{0, 1}
-var ArcaneMissiles1BaseDamage = [ArcaneMissiles1Ranks + 1][]float64{{0, 0}, {1000, 1000}}
+var ArcaneMissiles1SpellId = [ArcaneMissiles1Ranks + 1]int32{21228}
+var ArcaneMissiles1Level = [ArcaneMissiles1Ranks + 1]int{0}
+var ArcaneMissiles1CastTime = [ArcaneMissiles1Ranks + 1]int32{0}
+var ArcaneMissiles1CooldownMS = [ArcaneMissiles1Ranks + 1]int32{0}
+var ArcaneMissiles1ManaCost = [ArcaneMissiles1Ranks + 1]float64{0}
+var ArcaneMissiles1SpellCoeff = [ArcaneMissiles1Ranks + 1]float64{1}
+var ArcaneMissiles1BaseDamage = [ArcaneMissiles1Ranks + 1][]float64{{1000, 1000}}
 
-// Arcane Potency: 1 rank(s), from build 1.60.1.69893.
-const ArcanePotencyRanks = 1
+// Arcane Potency: ranks 0 present, from build 1.60.1.69893.
+const ArcanePotencyRanks = 0
 
-var ArcanePotencySpellId = [ArcanePotencyRanks + 1]int32{0, 24544}
-var ArcanePotencyLevel = [ArcanePotencyRanks + 1]int{0, 0}
-var ArcanePotencyCastTime = [ArcanePotencyRanks + 1]int32{0, 0}
-var ArcanePotencyCooldownMS = [ArcanePotencyRanks + 1]int32{0, 0}
-var ArcanePotencyManaCost = [ArcanePotencyRanks + 1]float64{0, 0}
-var ArcanePotencySpellCoeff = [ArcanePotencyRanks + 1]float64{0, 1}
-var ArcanePotencyBaseDamage = [ArcanePotencyRanks + 1][]float64{{0, 0}, {5, 5}}
+var ArcanePotencySpellId = [ArcanePotencyRanks + 1]int32{24544}
+var ArcanePotencyLevel = [ArcanePotencyRanks + 1]int{0}
+var ArcanePotencyCastTime = [ArcanePotencyRanks + 1]int32{0}
+var ArcanePotencyCooldownMS = [ArcanePotencyRanks + 1]int32{0}
+var ArcanePotencyManaCost = [ArcanePotencyRanks + 1]float64{0}
+var ArcanePotencySpellCoeff = [ArcanePotencyRanks + 1]float64{1}
+var ArcanePotencyBaseDamage = [ArcanePotencyRanks + 1][]float64{{5, 5}}
 
-// Arcane Power: 1 rank(s), from build 1.60.1.69893.
-const ArcanePowerRanks = 1
+// Arcane Power: ranks 0 present, from build 1.60.1.69893.
+const ArcanePowerRanks = 0
 
-var ArcanePowerSpellId = [ArcanePowerRanks + 1]int32{0, 12042}
-var ArcanePowerLevel = [ArcanePowerRanks + 1]int{0, 1}
-var ArcanePowerCastTime = [ArcanePowerRanks + 1]int32{0, 0}
-var ArcanePowerCooldownMS = [ArcanePowerRanks + 1]int32{0, 180000}
-var ArcanePowerManaCost = [ArcanePowerRanks + 1]float64{0, 0}
-var ArcanePowerSpellCoeff = [ArcanePowerRanks + 1]float64{0, 1}
-var ArcanePowerBaseDamage = [ArcanePowerRanks + 1][]float64{{0, 0}, {30, 30}}
+var ArcanePowerSpellId = [ArcanePowerRanks + 1]int32{12042}
+var ArcanePowerLevel = [ArcanePowerRanks + 1]int{1}
+var ArcanePowerCastTime = [ArcanePowerRanks + 1]int32{0}
+var ArcanePowerCooldownMS = [ArcanePowerRanks + 1]int32{180000}
+var ArcanePowerManaCost = [ArcanePowerRanks + 1]float64{0}
+var ArcanePowerSpellCoeff = [ArcanePowerRanks + 1]float64{1}
+var ArcanePowerBaseDamage = [ArcanePowerRanks + 1][]float64{{30, 30}}
 
 // unconfirmed: Arcane Power coefficient derived from the vanilla convention (rank 0)
 
-// Arcane Shielding: 1 rank(s), from build 1.60.1.69893.
-const ArcaneShieldingRanks = 1
+// Arcane Shielding: ranks 0 present, from build 1.60.1.69893.
+const ArcaneShieldingRanks = 0
 
-var ArcaneShieldingSpellId = [ArcaneShieldingRanks + 1]int32{0, 11252}
-var ArcaneShieldingLevel = [ArcaneShieldingRanks + 1]int{0, 1}
-var ArcaneShieldingCastTime = [ArcaneShieldingRanks + 1]int32{0, 0}
-var ArcaneShieldingCooldownMS = [ArcaneShieldingRanks + 1]int32{0, 0}
-var ArcaneShieldingManaCost = [ArcaneShieldingRanks + 1]float64{0, 0}
-var ArcaneShieldingSpellCoeff = [ArcaneShieldingRanks + 1]float64{0, 0.4286}
-var ArcaneShieldingBaseDamage = [ArcaneShieldingRanks + 1][]float64{{0, 0}, {-33, -33}}
+var ArcaneShieldingSpellId = [ArcaneShieldingRanks + 1]int32{11252}
+var ArcaneShieldingLevel = [ArcaneShieldingRanks + 1]int{1}
+var ArcaneShieldingCastTime = [ArcaneShieldingRanks + 1]int32{0}
+var ArcaneShieldingCooldownMS = [ArcaneShieldingRanks + 1]int32{0}
+var ArcaneShieldingManaCost = [ArcaneShieldingRanks + 1]float64{0}
+var ArcaneShieldingSpellCoeff = [ArcaneShieldingRanks + 1]float64{0.4286}
+var ArcaneShieldingBaseDamage = [ArcaneShieldingRanks + 1][]float64{{-33, -33}}
 
 // unconfirmed: Arcane Shielding coefficient derived from the vanilla convention (rank 0)
 
-// Arcane Subtlety: 1 rank(s), from build 1.60.1.69893.
-const ArcaneSubtletyRanks = 1
+// Arcane Subtlety: ranks 0 present, from build 1.60.1.69893.
+const ArcaneSubtletyRanks = 0
 
-var ArcaneSubtletySpellId = [ArcaneSubtletyRanks + 1]int32{0, 11210}
-var ArcaneSubtletyLevel = [ArcaneSubtletyRanks + 1]int{0, 1}
-var ArcaneSubtletyCastTime = [ArcaneSubtletyRanks + 1]int32{0, 0}
-var ArcaneSubtletyCooldownMS = [ArcaneSubtletyRanks + 1]int32{0, 0}
-var ArcaneSubtletyManaCost = [ArcaneSubtletyRanks + 1]float64{0, 0}
-var ArcaneSubtletySpellCoeff = [ArcaneSubtletyRanks + 1]float64{0, 0.4286}
-var ArcaneSubtletyBaseDamage = [ArcaneSubtletyRanks + 1][]float64{{0, 0}, {-30, -30}}
+var ArcaneSubtletySpellId = [ArcaneSubtletyRanks + 1]int32{11210}
+var ArcaneSubtletyLevel = [ArcaneSubtletyRanks + 1]int{1}
+var ArcaneSubtletyCastTime = [ArcaneSubtletyRanks + 1]int32{0}
+var ArcaneSubtletyCooldownMS = [ArcaneSubtletyRanks + 1]int32{0}
+var ArcaneSubtletyManaCost = [ArcaneSubtletyRanks + 1]float64{0}
+var ArcaneSubtletySpellCoeff = [ArcaneSubtletyRanks + 1]float64{0.4286}
+var ArcaneSubtletyBaseDamage = [ArcaneSubtletyRanks + 1][]float64{{-30, -30}}
 
 // unconfirmed: Arcane Subtlety coefficient derived from the vanilla convention (rank 0)
 
-// Arcane Surge: 2 rank(s), from build 1.60.1.69893.
-const ArcaneSurgeRanks = 2
+// Arcane Surge: ranks 0 present, from build 1.60.1.69893.
+const ArcaneSurgeRanks = 0
 
-var ArcaneSurgeSpellId = [ArcaneSurgeRanks + 1]int32{0, 425168, 425124}
-var ArcaneSurgeLevel = [ArcaneSurgeRanks + 1]int{0, 1, 1}
-var ArcaneSurgeCastTime = [ArcaneSurgeRanks + 1]int32{0, 0, 0}
-var ArcaneSurgeCooldownMS = [ArcaneSurgeRanks + 1]int32{0, 0, 120000}
-var ArcaneSurgeManaCost = [ArcaneSurgeRanks + 1]float64{0, 0, 0}
-var ArcaneSurgeSpellCoeff = [ArcaneSurgeRanks + 1]float64{0, 0.4286, 0.429}
-var ArcaneSurgeBaseDamage = [ArcaneSurgeRanks + 1][]float64{{0, 0}, {425124, 425124}, {245, 245}}
+var ArcaneSurgeSpellId = [ArcaneSurgeRanks + 1]int32{425168}
+var ArcaneSurgeLevel = [ArcaneSurgeRanks + 1]int{1}
+var ArcaneSurgeCastTime = [ArcaneSurgeRanks + 1]int32{0}
+var ArcaneSurgeCooldownMS = [ArcaneSurgeRanks + 1]int32{0}
+var ArcaneSurgeManaCost = [ArcaneSurgeRanks + 1]float64{0}
+var ArcaneSurgeSpellCoeff = [ArcaneSurgeRanks + 1]float64{0.4286}
+var ArcaneSurgeBaseDamage = [ArcaneSurgeRanks + 1][]float64{{425124, 425124}}
 
 // unconfirmed: Arcane Surge coefficient derived from the vanilla convention (rank 0)
+// Arcane Surge rank 0: kept id 425168 (spell_level 1); dropped 425124 (spell_level 1)
 
-// Arcane Tunneling: 1 rank(s), from build 1.60.1.69893.
-const ArcaneTunnelingRanks = 1
+// Arcane Tunneling: ranks 0 present, from build 1.60.1.69893.
+const ArcaneTunnelingRanks = 0
 
-var ArcaneTunnelingSpellId = [ArcaneTunnelingRanks + 1]int32{0, 1226406}
-var ArcaneTunnelingLevel = [ArcaneTunnelingRanks + 1]int{0, 0}
-var ArcaneTunnelingCastTime = [ArcaneTunnelingRanks + 1]int32{0, 0}
-var ArcaneTunnelingCooldownMS = [ArcaneTunnelingRanks + 1]int32{0, 0}
-var ArcaneTunnelingManaCost = [ArcaneTunnelingRanks + 1]float64{0, 0}
-var ArcaneTunnelingSpellCoeff = [ArcaneTunnelingRanks + 1]float64{0, 1}
-var ArcaneTunnelingBaseDamage = [ArcaneTunnelingRanks + 1][]float64{{0, 0}, {100, 100}}
+var ArcaneTunnelingSpellId = [ArcaneTunnelingRanks + 1]int32{1226406}
+var ArcaneTunnelingLevel = [ArcaneTunnelingRanks + 1]int{0}
+var ArcaneTunnelingCastTime = [ArcaneTunnelingRanks + 1]int32{0}
+var ArcaneTunnelingCooldownMS = [ArcaneTunnelingRanks + 1]int32{0}
+var ArcaneTunnelingManaCost = [ArcaneTunnelingRanks + 1]float64{0}
+var ArcaneTunnelingSpellCoeff = [ArcaneTunnelingRanks + 1]float64{1}
+var ArcaneTunnelingBaseDamage = [ArcaneTunnelingRanks + 1][]float64{{100, 100}}
 
-// Arctic Reach: 1 rank(s), from build 1.60.1.69893.
-const ArcticReachRanks = 1
+// Arctic Reach: ranks 0 present, from build 1.60.1.69893.
+const ArcticReachRanks = 0
 
-var ArcticReachSpellId = [ArcticReachRanks + 1]int32{0, 16757}
-var ArcticReachLevel = [ArcticReachRanks + 1]int{0, 0}
-var ArcticReachCastTime = [ArcticReachRanks + 1]int32{0, 0}
-var ArcticReachCooldownMS = [ArcticReachRanks + 1]int32{0, 0}
-var ArcticReachManaCost = [ArcticReachRanks + 1]float64{0, 0}
-var ArcticReachSpellCoeff = [ArcticReachRanks + 1]float64{0, 1}
-var ArcticReachBaseDamage = [ArcticReachRanks + 1][]float64{{0, 0}, {10, 10}}
+var ArcticReachSpellId = [ArcticReachRanks + 1]int32{16757}
+var ArcticReachLevel = [ArcticReachRanks + 1]int{0}
+var ArcticReachCastTime = [ArcticReachRanks + 1]int32{0}
+var ArcticReachCooldownMS = [ArcticReachRanks + 1]int32{0}
+var ArcticReachManaCost = [ArcticReachRanks + 1]float64{0}
+var ArcticReachSpellCoeff = [ArcticReachRanks + 1]float64{1}
+var ArcticReachBaseDamage = [ArcticReachRanks + 1][]float64{{10, 10}}
 
-// Aspect of the Viper: 1 rank(s), from build 1.60.1.69893.
-const AspectOfTheViperRanks = 1
+// Aspect of the Viper: ranks 0 present, from build 1.60.1.69893.
+const AspectOfTheViperRanks = 0
 
-var AspectOfTheViperSpellId = [AspectOfTheViperRanks + 1]int32{0, 415718}
-var AspectOfTheViperLevel = [AspectOfTheViperRanks + 1]int{0, 1}
-var AspectOfTheViperCastTime = [AspectOfTheViperRanks + 1]int32{0, 0}
-var AspectOfTheViperCooldownMS = [AspectOfTheViperRanks + 1]int32{0, 0}
-var AspectOfTheViperManaCost = [AspectOfTheViperRanks + 1]float64{0, 0}
-var AspectOfTheViperSpellCoeff = [AspectOfTheViperRanks + 1]float64{0, 0.4286}
-var AspectOfTheViperBaseDamage = [AspectOfTheViperRanks + 1][]float64{{0, 0}, {415423, 415423}}
+var AspectOfTheViperSpellId = [AspectOfTheViperRanks + 1]int32{415718}
+var AspectOfTheViperLevel = [AspectOfTheViperRanks + 1]int{1}
+var AspectOfTheViperCastTime = [AspectOfTheViperRanks + 1]int32{0}
+var AspectOfTheViperCooldownMS = [AspectOfTheViperRanks + 1]int32{0}
+var AspectOfTheViperManaCost = [AspectOfTheViperRanks + 1]float64{0}
+var AspectOfTheViperSpellCoeff = [AspectOfTheViperRanks + 1]float64{0.4286}
+var AspectOfTheViperBaseDamage = [AspectOfTheViperRanks + 1][]float64{{415423, 415423}}
 
 // unconfirmed: Aspect of the Viper coefficient derived from the vanilla convention (rank 0)
 
-// Atal'ai Poison: 1 rank(s), from build 1.60.1.69893.
-const AtalAiPoisonRanks = 1
+// Atal'ai Poison: ranks 0 present, from build 1.60.1.69893.
+const AtalAiPoisonRanks = 0
 
-var AtalAiPoisonSpellId = [AtalAiPoisonRanks + 1]int32{0, 18949}
-var AtalAiPoisonLevel = [AtalAiPoisonRanks + 1]int{0, 50}
-var AtalAiPoisonCastTime = [AtalAiPoisonRanks + 1]int32{0, 0}
-var AtalAiPoisonCooldownMS = [AtalAiPoisonRanks + 1]int32{0, 0}
-var AtalAiPoisonManaCost = [AtalAiPoisonRanks + 1]float64{0, 0}
-var AtalAiPoisonSpellCoeff = [AtalAiPoisonRanks + 1]float64{0, 1}
-var AtalAiPoisonBaseDamage = [AtalAiPoisonRanks + 1][]float64{{0, 0}, {40, 40}}
+var AtalAiPoisonSpellId = [AtalAiPoisonRanks + 1]int32{18949}
+var AtalAiPoisonLevel = [AtalAiPoisonRanks + 1]int{50}
+var AtalAiPoisonCastTime = [AtalAiPoisonRanks + 1]int32{0}
+var AtalAiPoisonCooldownMS = [AtalAiPoisonRanks + 1]int32{0}
+var AtalAiPoisonManaCost = [AtalAiPoisonRanks + 1]float64{0}
+var AtalAiPoisonSpellCoeff = [AtalAiPoisonRanks + 1]float64{1}
+var AtalAiPoisonBaseDamage = [AtalAiPoisonRanks + 1][]float64{{40, 40}}
 
-// Aura Mastery: 1 rank(s), from build 1.60.1.69893.
-const AuraMasteryRanks = 1
+// Aura Mastery: ranks 0 present, from build 1.60.1.69893.
+const AuraMasteryRanks = 0
 
-var AuraMasterySpellId = [AuraMasteryRanks + 1]int32{0, 415756}
-var AuraMasteryLevel = [AuraMasteryRanks + 1]int{0, 1}
-var AuraMasteryCastTime = [AuraMasteryRanks + 1]int32{0, 0}
-var AuraMasteryCooldownMS = [AuraMasteryRanks + 1]int32{0, 0}
-var AuraMasteryManaCost = [AuraMasteryRanks + 1]float64{0, 0}
-var AuraMasterySpellCoeff = [AuraMasteryRanks + 1]float64{0, 0.4286}
-var AuraMasteryBaseDamage = [AuraMasteryRanks + 1][]float64{{0, 0}, {407624, 407624}}
+var AuraMasterySpellId = [AuraMasteryRanks + 1]int32{415756}
+var AuraMasteryLevel = [AuraMasteryRanks + 1]int{1}
+var AuraMasteryCastTime = [AuraMasteryRanks + 1]int32{0}
+var AuraMasteryCooldownMS = [AuraMasteryRanks + 1]int32{0}
+var AuraMasteryManaCost = [AuraMasteryRanks + 1]float64{0}
+var AuraMasterySpellCoeff = [AuraMasteryRanks + 1]float64{0.4286}
+var AuraMasteryBaseDamage = [AuraMasteryRanks + 1][]float64{{407624, 407624}}
 
 // unconfirmed: Aura Mastery coefficient derived from the vanilla convention (rank 0)
 
-// Balefire Bolt: 2 rank(s), from build 1.60.1.69893.
-const BalefireBoltRanks = 2
+// Balefire Bolt: ranks 0 present, from build 1.60.1.69893.
+const BalefireBoltRanks = 0
 
-var BalefireBoltSpellId = [BalefireBoltRanks + 1]int32{0, 428878, 429310}
-var BalefireBoltLevel = [BalefireBoltRanks + 1]int{0, 1, 1}
-var BalefireBoltCastTime = [BalefireBoltRanks + 1]int32{0, 2500, 0}
-var BalefireBoltCooldownMS = [BalefireBoltRanks + 1]int32{0, 0, 0}
-var BalefireBoltManaCost = [BalefireBoltRanks + 1]float64{0, 0, 0}
-var BalefireBoltSpellCoeff = [BalefireBoltRanks + 1]float64{0, 0.857, 0.4286}
-var BalefireBoltBaseDamage = [BalefireBoltRanks + 1][]float64{{0, 0}, {350, 350}, {428878, 428878}}
+var BalefireBoltSpellId = [BalefireBoltRanks + 1]int32{429310}
+var BalefireBoltLevel = [BalefireBoltRanks + 1]int{1}
+var BalefireBoltCastTime = [BalefireBoltRanks + 1]int32{0}
+var BalefireBoltCooldownMS = [BalefireBoltRanks + 1]int32{0}
+var BalefireBoltManaCost = [BalefireBoltRanks + 1]float64{0}
+var BalefireBoltSpellCoeff = [BalefireBoltRanks + 1]float64{0.4286}
+var BalefireBoltBaseDamage = [BalefireBoltRanks + 1][]float64{{428878, 428878}}
 
 // unconfirmed: Balefire Bolt coefficient derived from the vanilla convention (rank 0)
+// Balefire Bolt rank 0: kept id 429310 (spell_level 1); dropped 428878 (spell_level 1)
 
-// Binding Heal: 1 rank(s), from build 1.60.1.69893.
-const BindingHealRanks = 1
+// Binding Heal: ranks 0 present, from build 1.60.1.69893.
+const BindingHealRanks = 0
 
-var BindingHealSpellId = [BindingHealRanks + 1]int32{0, 402837}
-var BindingHealLevel = [BindingHealRanks + 1]int{0, 1}
-var BindingHealCastTime = [BindingHealRanks + 1]int32{0, 0}
-var BindingHealCooldownMS = [BindingHealRanks + 1]int32{0, 0}
-var BindingHealManaCost = [BindingHealRanks + 1]float64{0, 0}
-var BindingHealSpellCoeff = [BindingHealRanks + 1]float64{0, 0.4286}
-var BindingHealBaseDamage = [BindingHealRanks + 1][]float64{{0, 0}, {401937, 401937}}
+var BindingHealSpellId = [BindingHealRanks + 1]int32{402837}
+var BindingHealLevel = [BindingHealRanks + 1]int{1}
+var BindingHealCastTime = [BindingHealRanks + 1]int32{0}
+var BindingHealCooldownMS = [BindingHealRanks + 1]int32{0}
+var BindingHealManaCost = [BindingHealRanks + 1]float64{0}
+var BindingHealSpellCoeff = [BindingHealRanks + 1]float64{0.4286}
+var BindingHealBaseDamage = [BindingHealRanks + 1][]float64{{401937, 401937}}
 
 // unconfirmed: Binding Heal coefficient derived from the vanilla convention (rank 0)
 
 // skipped: "Blast Wave" already has a hand-written BlastWaveRanks elsewhere in this package.
 
-// Blink: 10 rank(s), from build 1.60.1.69893.
-const BlinkRanks = 10
+// Blink: ranks 0 present, from build 1.60.1.69893.
+const BlinkRanks = 0
 
-var BlinkSpellId = [BlinkRanks + 1]int32{0, 14514, 21655, 1953, 29208, 29209, 29211, 28391, 1236175, 28401, 29210}
-var BlinkLevel = [BlinkRanks + 1]int{0, 20, 20, 20, 20, 20, 20, 20, 0, 20, 20}
-var BlinkCastTime = [BlinkRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-var BlinkCooldownMS = [BlinkRanks + 1]int32{0, 0, 0, 15000, 0, 0, 0, 0, 0, 0, 0}
-var BlinkManaCost = [BlinkRanks + 1]float64{0, 75, 0, 0, 0, 0, 0, 75, 75, 75, 0}
-var BlinkSpellCoeff = [BlinkRanks + 1]float64{0, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.4286, 0.0667}
-var BlinkBaseDamage = [BlinkRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
+var BlinkSpellId = [BlinkRanks + 1]int32{29211}
+var BlinkLevel = [BlinkRanks + 1]int{20}
+var BlinkCastTime = [BlinkRanks + 1]int32{0}
+var BlinkCooldownMS = [BlinkRanks + 1]int32{0}
+var BlinkManaCost = [BlinkRanks + 1]float64{0}
+var BlinkSpellCoeff = [BlinkRanks + 1]float64{0.0667}
+var BlinkBaseDamage = [BlinkRanks + 1][]float64{{0, 0}}
 
-// unconfirmed: Blink coefficient derived from the vanilla convention (rank 0, rank 0, rank 0, rank 0, rank 0, rank 0, rank 0, rank 0, rank 0, rank 0)
+// unconfirmed: Blink coefficient derived from the vanilla convention (rank 0)
+// Blink rank 0: kept id 29211 (spell_level 20); dropped 1953 (spell_level 20), 14514 (spell_level 20), 21655 (spell_level 20), 28391 (spell_level 20), 28401 (spell_level 20), 29208 (spell_level 20), 29209 (spell_level 20), 29210 (spell_level 20), 1236175 (spell_level 0)
 
-// Blink Cooldown Reduction: 1 rank(s), from build 1.60.1.69893.
+// Blink Cooldown Reduction: ranks 1 present, from build 1.60.1.69893.
 const BlinkCooldownReductionRanks = 1
 
 var BlinkCooldownReductionSpellId = [BlinkCooldownReductionRanks + 1]int32{0, 23025}
@@ -451,124 +469,125 @@ var BlinkCooldownReductionManaCost = [BlinkCooldownReductionRanks + 1]float64{0,
 var BlinkCooldownReductionSpellCoeff = [BlinkCooldownReductionRanks + 1]float64{0, 1}
 var BlinkCooldownReductionBaseDamage = [BlinkCooldownReductionRanks + 1][]float64{{0, 0}, {-1500, -1500}}
 
-// Blinked: 1 rank(s), from build 1.60.1.69893.
-const BlinkedRanks = 1
+// Blinked: ranks 0 present, from build 1.60.1.69893.
+const BlinkedRanks = 0
 
-var BlinkedSpellId = [BlinkedRanks + 1]int32{0, 428865}
-var BlinkedLevel = [BlinkedRanks + 1]int{0, 1}
-var BlinkedCastTime = [BlinkedRanks + 1]int32{0, 0}
-var BlinkedCooldownMS = [BlinkedRanks + 1]int32{0, 0}
-var BlinkedManaCost = [BlinkedRanks + 1]float64{0, 0}
-var BlinkedSpellCoeff = [BlinkedRanks + 1]float64{0, 0.6667}
-var BlinkedBaseDamage = [BlinkedRanks + 1][]float64{{0, 0}, {100, 100}}
+var BlinkedSpellId = [BlinkedRanks + 1]int32{428865}
+var BlinkedLevel = [BlinkedRanks + 1]int{1}
+var BlinkedCastTime = [BlinkedRanks + 1]int32{0}
+var BlinkedCooldownMS = [BlinkedRanks + 1]int32{0}
+var BlinkedManaCost = [BlinkedRanks + 1]float64{0}
+var BlinkedSpellCoeff = [BlinkedRanks + 1]float64{0.6667}
+var BlinkedBaseDamage = [BlinkedRanks + 1][]float64{{100, 100}}
 
 // unconfirmed: Blinked coefficient derived from the vanilla convention (rank 0)
 
 // skipped: "Blizzard" already has a hand-written BlizzardRanks elsewhere in this package.
 
-// Blood Frenzy: 1 rank(s), from build 1.60.1.69893.
-const BloodFrenzyRanks = 1
+// Blood Frenzy: ranks 0 present, from build 1.60.1.69893.
+const BloodFrenzyRanks = 0
 
-var BloodFrenzySpellId = [BloodFrenzyRanks + 1]int32{0, 403352}
-var BloodFrenzyLevel = [BloodFrenzyRanks + 1]int{0, 1}
-var BloodFrenzyCastTime = [BloodFrenzyRanks + 1]int32{0, 0}
-var BloodFrenzyCooldownMS = [BloodFrenzyRanks + 1]int32{0, 0}
-var BloodFrenzyManaCost = [BloodFrenzyRanks + 1]float64{0, 0}
-var BloodFrenzySpellCoeff = [BloodFrenzyRanks + 1]float64{0, 0.4286}
-var BloodFrenzyBaseDamage = [BloodFrenzyRanks + 1][]float64{{0, 0}, {412507, 412507}}
+var BloodFrenzySpellId = [BloodFrenzyRanks + 1]int32{403352}
+var BloodFrenzyLevel = [BloodFrenzyRanks + 1]int{1}
+var BloodFrenzyCastTime = [BloodFrenzyRanks + 1]int32{0}
+var BloodFrenzyCooldownMS = [BloodFrenzyRanks + 1]int32{0}
+var BloodFrenzyManaCost = [BloodFrenzyRanks + 1]float64{0}
+var BloodFrenzySpellCoeff = [BloodFrenzyRanks + 1]float64{0.4286}
+var BloodFrenzyBaseDamage = [BloodFrenzyRanks + 1][]float64{{412507, 412507}}
 
 // unconfirmed: Blood Frenzy coefficient derived from the vanilla convention (rank 0)
 
-// Bounty of the Harvest: 1 rank(s), from build 1.60.1.69893.
-const BountyOfTheHarvestRanks = 1
+// Bounty of the Harvest: ranks 0 present, from build 1.60.1.69893.
+const BountyOfTheHarvestRanks = 0
 
-var BountyOfTheHarvestSpellId = [BountyOfTheHarvestRanks + 1]int32{0, 24006}
-var BountyOfTheHarvestLevel = [BountyOfTheHarvestRanks + 1]int{0, 6}
-var BountyOfTheHarvestCastTime = [BountyOfTheHarvestRanks + 1]int32{0, 3000}
-var BountyOfTheHarvestCooldownMS = [BountyOfTheHarvestRanks + 1]int32{0, 0}
-var BountyOfTheHarvestManaCost = [BountyOfTheHarvestRanks + 1]float64{0, 60}
-var BountyOfTheHarvestSpellCoeff = [BountyOfTheHarvestRanks + 1]float64{0, 0.8571}
-var BountyOfTheHarvestBaseDamage = [BountyOfTheHarvestRanks + 1][]float64{{0, 0}, {4, 4}}
+var BountyOfTheHarvestSpellId = [BountyOfTheHarvestRanks + 1]int32{24006}
+var BountyOfTheHarvestLevel = [BountyOfTheHarvestRanks + 1]int{6}
+var BountyOfTheHarvestCastTime = [BountyOfTheHarvestRanks + 1]int32{3000}
+var BountyOfTheHarvestCooldownMS = [BountyOfTheHarvestRanks + 1]int32{0}
+var BountyOfTheHarvestManaCost = [BountyOfTheHarvestRanks + 1]float64{60}
+var BountyOfTheHarvestSpellCoeff = [BountyOfTheHarvestRanks + 1]float64{0.8571}
+var BountyOfTheHarvestBaseDamage = [BountyOfTheHarvestRanks + 1][]float64{{4, 4}}
 
 // unconfirmed: Bounty of the Harvest coefficient derived from the vanilla convention (rank 0)
 
-// Brain Freeze: 2 rank(s), from build 1.60.1.69893.
-const BrainFreezeRanks = 2
+// Brain Freeze: ranks 0 present, from build 1.60.1.69893.
+const BrainFreezeRanks = 0
 
-var BrainFreezeSpellId = [BrainFreezeRanks + 1]int32{0, 401725, 400731}
-var BrainFreezeLevel = [BrainFreezeRanks + 1]int{0, 1, 1}
-var BrainFreezeCastTime = [BrainFreezeRanks + 1]int32{0, 0, 0}
-var BrainFreezeCooldownMS = [BrainFreezeRanks + 1]int32{0, 0, 0}
-var BrainFreezeManaCost = [BrainFreezeRanks + 1]float64{0, 0, 0}
-var BrainFreezeSpellCoeff = [BrainFreezeRanks + 1]float64{0, 0.4286, 0.4286}
-var BrainFreezeBaseDamage = [BrainFreezeRanks + 1][]float64{{0, 0}, {400731, 400731}, {15, 15}}
+var BrainFreezeSpellId = [BrainFreezeRanks + 1]int32{401725}
+var BrainFreezeLevel = [BrainFreezeRanks + 1]int{1}
+var BrainFreezeCastTime = [BrainFreezeRanks + 1]int32{0}
+var BrainFreezeCooldownMS = [BrainFreezeRanks + 1]int32{0}
+var BrainFreezeManaCost = [BrainFreezeRanks + 1]float64{0}
+var BrainFreezeSpellCoeff = [BrainFreezeRanks + 1]float64{0.4286}
+var BrainFreezeBaseDamage = [BrainFreezeRanks + 1][]float64{{400731, 400731}}
 
-// unconfirmed: Brain Freeze coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Brain Freeze coefficient derived from the vanilla convention (rank 0)
+// Brain Freeze rank 0: kept id 401725 (spell_level 1); dropped 400731 (spell_level 1)
 
-// Burn: 1 rank(s), from build 1.60.1.69893.
-const BurnRanks = 1
+// Burn: ranks 0 present, from build 1.60.1.69893.
+const BurnRanks = 0
 
-var BurnSpellId = [BurnRanks + 1]int32{0, 415768}
-var BurnLevel = [BurnRanks + 1]int{0, 1}
-var BurnCastTime = [BurnRanks + 1]int32{0, 0}
-var BurnCooldownMS = [BurnRanks + 1]int32{0, 0}
-var BurnManaCost = [BurnRanks + 1]float64{0, 0}
-var BurnSpellCoeff = [BurnRanks + 1]float64{0, 0.4286}
-var BurnBaseDamage = [BurnRanks + 1][]float64{{0, 0}, {415231, 415231}}
+var BurnSpellId = [BurnRanks + 1]int32{415768}
+var BurnLevel = [BurnRanks + 1]int{1}
+var BurnCastTime = [BurnRanks + 1]int32{0}
+var BurnCooldownMS = [BurnRanks + 1]int32{0}
+var BurnManaCost = [BurnRanks + 1]float64{0}
+var BurnSpellCoeff = [BurnRanks + 1]float64{0.4286}
+var BurnBaseDamage = [BurnRanks + 1][]float64{{415231, 415231}}
 
 // unconfirmed: Burn coefficient derived from the vanilla convention (rank 0)
 
-// Burning Soul: 1 rank(s), from build 1.60.1.69893.
-const BurningSoulRanks = 1
+// Burning Soul: ranks 0 present, from build 1.60.1.69893.
+const BurningSoulRanks = 0
 
-var BurningSoulSpellId = [BurningSoulRanks + 1]int32{0, 11083}
-var BurningSoulLevel = [BurningSoulRanks + 1]int{0, 1}
-var BurningSoulCastTime = [BurningSoulRanks + 1]int32{0, 0}
-var BurningSoulCooldownMS = [BurningSoulRanks + 1]int32{0, 0}
-var BurningSoulManaCost = [BurningSoulRanks + 1]float64{0, 0}
-var BurningSoulSpellCoeff = [BurningSoulRanks + 1]float64{0, 0.4286}
-var BurningSoulBaseDamage = [BurningSoulRanks + 1][]float64{{0, 0}, {70, 70}}
+var BurningSoulSpellId = [BurningSoulRanks + 1]int32{11083}
+var BurningSoulLevel = [BurningSoulRanks + 1]int{1}
+var BurningSoulCastTime = [BurningSoulRanks + 1]int32{0}
+var BurningSoulCooldownMS = [BurningSoulRanks + 1]int32{0}
+var BurningSoulManaCost = [BurningSoulRanks + 1]float64{0}
+var BurningSoulSpellCoeff = [BurningSoulRanks + 1]float64{0.4286}
+var BurningSoulBaseDamage = [BurningSoulRanks + 1][]float64{{70, 70}}
 
 // unconfirmed: Burning Soul coefficient derived from the vanilla convention (rank 0)
 
-// Burnout: 1 rank(s), from build 1.60.1.69893.
-const BurnoutRanks = 1
+// Burnout: ranks 0 present, from build 1.60.1.69893.
+const BurnoutRanks = 0
 
-var BurnoutSpellId = [BurnoutRanks + 1]int32{0, 412286}
-var BurnoutLevel = [BurnoutRanks + 1]int{0, 1}
-var BurnoutCastTime = [BurnoutRanks + 1]int32{0, 0}
-var BurnoutCooldownMS = [BurnoutRanks + 1]int32{0, 0}
-var BurnoutManaCost = [BurnoutRanks + 1]float64{0, 0}
-var BurnoutSpellCoeff = [BurnoutRanks + 1]float64{0, 0.4286}
-var BurnoutBaseDamage = [BurnoutRanks + 1][]float64{{0, 0}, {15, 15}}
+var BurnoutSpellId = [BurnoutRanks + 1]int32{412286}
+var BurnoutLevel = [BurnoutRanks + 1]int{1}
+var BurnoutCastTime = [BurnoutRanks + 1]int32{0}
+var BurnoutCooldownMS = [BurnoutRanks + 1]int32{0}
+var BurnoutManaCost = [BurnoutRanks + 1]float64{0}
+var BurnoutSpellCoeff = [BurnoutRanks + 1]float64{0.4286}
+var BurnoutBaseDamage = [BurnoutRanks + 1][]float64{{15, 15}}
 
 // unconfirmed: Burnout coefficient derived from the vanilla convention (rank 0)
 
-// Catlike Reflexes: 1 rank(s), from build 1.60.1.69893.
-const CatlikeReflexesRanks = 1
+// Catlike Reflexes: ranks 0 present, from build 1.60.1.69893.
+const CatlikeReflexesRanks = 0
 
-var CatlikeReflexesSpellId = [CatlikeReflexesRanks + 1]int32{0, 415717}
-var CatlikeReflexesLevel = [CatlikeReflexesRanks + 1]int{0, 1}
-var CatlikeReflexesCastTime = [CatlikeReflexesRanks + 1]int32{0, 0}
-var CatlikeReflexesCooldownMS = [CatlikeReflexesRanks + 1]int32{0, 0}
-var CatlikeReflexesManaCost = [CatlikeReflexesRanks + 1]float64{0, 0}
-var CatlikeReflexesSpellCoeff = [CatlikeReflexesRanks + 1]float64{0, 0.4286}
-var CatlikeReflexesBaseDamage = [CatlikeReflexesRanks + 1][]float64{{0, 0}, {415428, 415428}}
+var CatlikeReflexesSpellId = [CatlikeReflexesRanks + 1]int32{415717}
+var CatlikeReflexesLevel = [CatlikeReflexesRanks + 1]int{1}
+var CatlikeReflexesCastTime = [CatlikeReflexesRanks + 1]int32{0}
+var CatlikeReflexesCooldownMS = [CatlikeReflexesRanks + 1]int32{0}
+var CatlikeReflexesManaCost = [CatlikeReflexesRanks + 1]float64{0}
+var CatlikeReflexesSpellCoeff = [CatlikeReflexesRanks + 1]float64{0.4286}
+var CatlikeReflexesBaseDamage = [CatlikeReflexesRanks + 1][]float64{{415428, 415428}}
 
 // unconfirmed: Catlike Reflexes coefficient derived from the vanilla convention (rank 0)
 
-// Chaos Fire: 1 rank(s), from build 1.60.1.69893.
-const ChaosFireRanks = 1
+// Chaos Fire: ranks 0 present, from build 1.60.1.69893.
+const ChaosFireRanks = 0
 
-var ChaosFireSpellId = [ChaosFireRanks + 1]int32{0, 24389}
-var ChaosFireLevel = [ChaosFireRanks + 1]int{0, 0}
-var ChaosFireCastTime = [ChaosFireRanks + 1]int32{0, 0}
-var ChaosFireCooldownMS = [ChaosFireRanks + 1]int32{0, 0}
-var ChaosFireManaCost = [ChaosFireRanks + 1]float64{0, 0}
-var ChaosFireSpellCoeff = [ChaosFireRanks + 1]float64{0, 1}
-var ChaosFireBaseDamage = [ChaosFireRanks + 1][]float64{{0, 0}, {0, 0}}
+var ChaosFireSpellId = [ChaosFireRanks + 1]int32{24389}
+var ChaosFireLevel = [ChaosFireRanks + 1]int{0}
+var ChaosFireCastTime = [ChaosFireRanks + 1]int32{0}
+var ChaosFireCooldownMS = [ChaosFireRanks + 1]int32{0}
+var ChaosFireManaCost = [ChaosFireRanks + 1]float64{0}
+var ChaosFireSpellCoeff = [ChaosFireRanks + 1]float64{1}
+var ChaosFireBaseDamage = [ChaosFireRanks + 1][]float64{{0, 0}}
 
-// Chill: 1 rank(s), from build 1.60.1.69893.
+// Chill: ranks 1 present, from build 1.60.1.69893.
 const ChillRanks = 1
 
 var ChillSpellId = [ChillRanks + 1]int32{0, 1308651}
@@ -579,146 +598,154 @@ var ChillManaCost = [ChillRanks + 1]float64{0, 0}
 var ChillSpellCoeff = [ChillRanks + 1]float64{0, 0.03}
 var ChillBaseDamage = [ChillRanks + 1][]float64{{0, 0}, {0, 0}}
 
-// Chill Wind: 1 rank(s), from build 1.60.1.69893.
-const ChillWindRanks = 1
+// Chill Wind: ranks 0 present, from build 1.60.1.69893.
+const ChillWindRanks = 0
 
-var ChillWindSpellId = [ChillWindRanks + 1]int32{0, 15849}
-var ChillWindLevel = [ChillWindRanks + 1]int{0, 1}
-var ChillWindCastTime = [ChillWindRanks + 1]int32{0, 0}
-var ChillWindCooldownMS = [ChillWindRanks + 1]int32{0, 0}
-var ChillWindManaCost = [ChillWindRanks + 1]float64{0, 0}
-var ChillWindSpellCoeff = [ChillWindRanks + 1]float64{0, 1}
-var ChillWindBaseDamage = [ChillWindRanks + 1][]float64{{0, 0}, {0, 0}}
+var ChillWindSpellId = [ChillWindRanks + 1]int32{15849}
+var ChillWindLevel = [ChillWindRanks + 1]int{1}
+var ChillWindCastTime = [ChillWindRanks + 1]int32{0}
+var ChillWindCooldownMS = [ChillWindRanks + 1]int32{0}
+var ChillWindManaCost = [ChillWindRanks + 1]float64{0}
+var ChillWindSpellCoeff = [ChillWindRanks + 1]float64{1}
+var ChillWindBaseDamage = [ChillWindRanks + 1][]float64{{0, 0}}
 
-// Chilled: 6 rank(s), from build 1.60.1.69893.
-const ChilledRanks = 6
+// Chilled: ranks 0-1 present, from build 1.60.1.69893.
+const ChilledRanks = 1
 
-var ChilledSpellId = [ChilledRanks + 1]int32{0, 12484, 15850, 16927, 7321, 6136, 18101}
-var ChilledLevel = [ChilledRanks + 1]int{0, 1, 1, 0, 30, 1, 1}
-var ChilledCastTime = [ChilledRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
-var ChilledCooldownMS = [ChilledRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
-var ChilledManaCost = [ChilledRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
-var ChilledSpellCoeff = [ChilledRanks + 1]float64{0, 0.1, 0.3333, 0.3333, 0.3333, 0.3333, 0.3333}
-var ChilledBaseDamage = [ChilledRanks + 1][]float64{{0, 0}, {-30, -30}, {-25, -25}, {-25, -25}, {-30, -30}, {-30, -30}, {-100, -100}}
+var ChilledSpellId = [ChilledRanks + 1]int32{15850, 7321}
+var ChilledLevel = [ChilledRanks + 1]int{1, 30}
+var ChilledCastTime = [ChilledRanks + 1]int32{0, 0}
+var ChilledCooldownMS = [ChilledRanks + 1]int32{0, 0}
+var ChilledManaCost = [ChilledRanks + 1]float64{0, 0}
+var ChilledSpellCoeff = [ChilledRanks + 1]float64{0.3333, 0.3333}
+var ChilledBaseDamage = [ChilledRanks + 1][]float64{{-25, -25}, {-30, -30}}
 
-// unconfirmed: Chilled coefficient derived from the vanilla convention (rank 0, rank 0, rank 0, rank 1, rank 1, rank 1)
+// unconfirmed: Chilled coefficient derived from the vanilla convention (rank 0, rank 1)
+// Chilled rank 0: kept id 15850 (spell_level 1); dropped 12484 (spell_level 1), 16927 (spell_level 0)
+// Chilled rank 1: kept id 7321 (spell_level 30); dropped 6136 (spell_level 1), 18101 (spell_level 1)
 
-// Chilling Touch: 3 rank(s), from build 1.60.1.69893.
-const ChillingTouchRanks = 3
+// Chilling Touch: ranks 0 present, from build 1.60.1.69893.
+const ChillingTouchRanks = 0
 
-var ChillingTouchSpellId = [ChillingTouchRanks + 1]int32{0, 12531, 12529, 18146}
-var ChillingTouchLevel = [ChillingTouchRanks + 1]int{0, 1, 10, 10}
-var ChillingTouchCastTime = [ChillingTouchRanks + 1]int32{0, 0, 0, 0}
-var ChillingTouchCooldownMS = [ChillingTouchRanks + 1]int32{0, 0, 0, 0}
-var ChillingTouchManaCost = [ChillingTouchRanks + 1]float64{0, 0, 125, 125}
-var ChillingTouchSpellCoeff = [ChillingTouchRanks + 1]float64{0, 0.5333, 0.4286, 0.4286}
-var ChillingTouchBaseDamage = [ChillingTouchRanks + 1][]float64{{0, 0}, {-43, -43}, {0, 0}, {0, 0}}
+var ChillingTouchSpellId = [ChillingTouchRanks + 1]int32{18146}
+var ChillingTouchLevel = [ChillingTouchRanks + 1]int{10}
+var ChillingTouchCastTime = [ChillingTouchRanks + 1]int32{0}
+var ChillingTouchCooldownMS = [ChillingTouchRanks + 1]int32{0}
+var ChillingTouchManaCost = [ChillingTouchRanks + 1]float64{125}
+var ChillingTouchSpellCoeff = [ChillingTouchRanks + 1]float64{0.4286}
+var ChillingTouchBaseDamage = [ChillingTouchRanks + 1][]float64{{0, 0}}
 
-// unconfirmed: Chilling Touch coefficient derived from the vanilla convention (rank 0, rank 0, rank 0)
+// unconfirmed: Chilling Touch coefficient derived from the vanilla convention (rank 0)
+// Chilling Touch rank 0: kept id 18146 (spell_level 10); dropped 12529 (spell_level 10), 12531 (spell_level 1)
 
-// Chronomantic Healing: 2 rank(s), from build 1.60.1.69893.
-const ChronomanticHealingRanks = 2
+// Chronomantic Healing: ranks 0 present, from build 1.60.1.69893.
+const ChronomanticHealingRanks = 0
 
-var ChronomanticHealingSpellId = [ChronomanticHealingRanks + 1]int32{0, 433455, 401405}
-var ChronomanticHealingLevel = [ChronomanticHealingRanks + 1]int{0, 1, 1}
-var ChronomanticHealingCastTime = [ChronomanticHealingRanks + 1]int32{0, 0, 0}
-var ChronomanticHealingCooldownMS = [ChronomanticHealingRanks + 1]int32{0, 0, 0}
-var ChronomanticHealingManaCost = [ChronomanticHealingRanks + 1]float64{0, 0, 0}
-var ChronomanticHealingSpellCoeff = [ChronomanticHealingRanks + 1]float64{0, 0.4286, 0.4286}
-var ChronomanticHealingBaseDamage = [ChronomanticHealingRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}}
+var ChronomanticHealingSpellId = [ChronomanticHealingRanks + 1]int32{433455}
+var ChronomanticHealingLevel = [ChronomanticHealingRanks + 1]int{1}
+var ChronomanticHealingCastTime = [ChronomanticHealingRanks + 1]int32{0}
+var ChronomanticHealingCooldownMS = [ChronomanticHealingRanks + 1]int32{0}
+var ChronomanticHealingManaCost = [ChronomanticHealingRanks + 1]float64{0}
+var ChronomanticHealingSpellCoeff = [ChronomanticHealingRanks + 1]float64{0.4286}
+var ChronomanticHealingBaseDamage = [ChronomanticHealingRanks + 1][]float64{{0, 0}}
 
-// unconfirmed: Chronomantic Healing coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Chronomantic Healing coefficient derived from the vanilla convention (rank 0)
+// Chronomantic Healing rank 0: kept id 433455 (spell_level 1); dropped 401405 (spell_level 1)
 
-// Chronostatic Preservation: 4 rank(s), from build 1.60.1.69893.
-const ChronostaticPreservationRanks = 4
+// Chronostatic Preservation: ranks 0 present, from build 1.60.1.69893.
+const ChronostaticPreservationRanks = 0
 
-var ChronostaticPreservationSpellId = [ChronostaticPreservationRanks + 1]int32{0, 436516, 436517, 425187, 443369}
-var ChronostaticPreservationLevel = [ChronostaticPreservationRanks + 1]int{0, 1, 1, 1, 1}
-var ChronostaticPreservationCastTime = [ChronostaticPreservationRanks + 1]int32{0, 2000, 0, 0, 0}
-var ChronostaticPreservationCooldownMS = [ChronostaticPreservationRanks + 1]int32{0, 0, 0, 0, 0}
-var ChronostaticPreservationManaCost = [ChronostaticPreservationRanks + 1]float64{0, 0, 0, 0, 0}
-var ChronostaticPreservationSpellCoeff = [ChronostaticPreservationRanks + 1]float64{0, 1.3333, 2.068, 0.4286, 1.3333}
-var ChronostaticPreservationBaseDamage = [ChronostaticPreservationRanks + 1][]float64{{0, 0}, {0, 0}, {250, 250}, {436516, 436516}, {-100, -100}}
+var ChronostaticPreservationSpellId = [ChronostaticPreservationRanks + 1]int32{443369}
+var ChronostaticPreservationLevel = [ChronostaticPreservationRanks + 1]int{1}
+var ChronostaticPreservationCastTime = [ChronostaticPreservationRanks + 1]int32{0}
+var ChronostaticPreservationCooldownMS = [ChronostaticPreservationRanks + 1]int32{0}
+var ChronostaticPreservationManaCost = [ChronostaticPreservationRanks + 1]float64{0}
+var ChronostaticPreservationSpellCoeff = [ChronostaticPreservationRanks + 1]float64{1.3333}
+var ChronostaticPreservationBaseDamage = [ChronostaticPreservationRanks + 1][]float64{{-100, -100}}
 
-// unconfirmed: Chronostatic Preservation coefficient derived from the vanilla convention (rank 0, rank 0, rank 0)
+// unconfirmed: Chronostatic Preservation coefficient derived from the vanilla convention (rank 0)
+// Chronostatic Preservation rank 0: kept id 443369 (spell_level 1); dropped 425187 (spell_level 1), 436516 (spell_level 1), 436517 (spell_level 1)
 
-// Circle of Healing: 1 rank(s), from build 1.60.1.69893.
-const CircleOfHealingRanks = 1
+// Circle of Healing: ranks 0 present, from build 1.60.1.69893.
+const CircleOfHealingRanks = 0
 
-var CircleOfHealingSpellId = [CircleOfHealingRanks + 1]int32{0, 402842}
-var CircleOfHealingLevel = [CircleOfHealingRanks + 1]int{0, 1}
-var CircleOfHealingCastTime = [CircleOfHealingRanks + 1]int32{0, 0}
-var CircleOfHealingCooldownMS = [CircleOfHealingRanks + 1]int32{0, 0}
-var CircleOfHealingManaCost = [CircleOfHealingRanks + 1]float64{0, 0}
-var CircleOfHealingSpellCoeff = [CircleOfHealingRanks + 1]float64{0, 0.4286}
-var CircleOfHealingBaseDamage = [CircleOfHealingRanks + 1][]float64{{0, 0}, {401946, 401946}}
+var CircleOfHealingSpellId = [CircleOfHealingRanks + 1]int32{402842}
+var CircleOfHealingLevel = [CircleOfHealingRanks + 1]int{1}
+var CircleOfHealingCastTime = [CircleOfHealingRanks + 1]int32{0}
+var CircleOfHealingCooldownMS = [CircleOfHealingRanks + 1]int32{0}
+var CircleOfHealingManaCost = [CircleOfHealingRanks + 1]float64{0}
+var CircleOfHealingSpellCoeff = [CircleOfHealingRanks + 1]float64{0.4286}
+var CircleOfHealingBaseDamage = [CircleOfHealingRanks + 1][]float64{{401946, 401946}}
 
 // unconfirmed: Circle of Healing coefficient derived from the vanilla convention (rank 0)
 
-// Clearcasting: 1 rank(s), from build 1.60.1.69893.
-const ClearcastingRanks = 1
+// Clearcasting: ranks 0 present, from build 1.60.1.69893.
+const ClearcastingRanks = 0
 
-var ClearcastingSpellId = [ClearcastingRanks + 1]int32{0, 12536}
-var ClearcastingLevel = [ClearcastingRanks + 1]int{0, 10}
-var ClearcastingCastTime = [ClearcastingRanks + 1]int32{0, 0}
-var ClearcastingCooldownMS = [ClearcastingRanks + 1]int32{0, 0}
-var ClearcastingManaCost = [ClearcastingRanks + 1]float64{0, 0}
-var ClearcastingSpellCoeff = [ClearcastingRanks + 1]float64{0, 1}
-var ClearcastingBaseDamage = [ClearcastingRanks + 1][]float64{{0, 0}, {-1000, -1000}}
+var ClearcastingSpellId = [ClearcastingRanks + 1]int32{12536}
+var ClearcastingLevel = [ClearcastingRanks + 1]int{10}
+var ClearcastingCastTime = [ClearcastingRanks + 1]int32{0}
+var ClearcastingCooldownMS = [ClearcastingRanks + 1]int32{0}
+var ClearcastingManaCost = [ClearcastingRanks + 1]float64{0}
+var ClearcastingSpellCoeff = [ClearcastingRanks + 1]float64{1}
+var ClearcastingBaseDamage = [ClearcastingRanks + 1][]float64{{-1000, -1000}}
 
 // unconfirmed: Clearcasting coefficient derived from the vanilla convention (rank 0)
 
-// Cold Snap: 1 rank(s), from build 1.60.1.69893.
-const ColdSnapRanks = 1
+// Cold Snap: ranks 0 present, from build 1.60.1.69893.
+const ColdSnapRanks = 0
 
-var ColdSnapSpellId = [ColdSnapRanks + 1]int32{0, 12472}
-var ColdSnapLevel = [ColdSnapRanks + 1]int{0, 1}
-var ColdSnapCastTime = [ColdSnapRanks + 1]int32{0, 0}
-var ColdSnapCooldownMS = [ColdSnapRanks + 1]int32{0, 600000}
-var ColdSnapManaCost = [ColdSnapRanks + 1]float64{0, 0}
-var ColdSnapSpellCoeff = [ColdSnapRanks + 1]float64{0, 0.4286}
-var ColdSnapBaseDamage = [ColdSnapRanks + 1][]float64{{0, 0}, {0, 0}}
+var ColdSnapSpellId = [ColdSnapRanks + 1]int32{12472}
+var ColdSnapLevel = [ColdSnapRanks + 1]int{1}
+var ColdSnapCastTime = [ColdSnapRanks + 1]int32{0}
+var ColdSnapCooldownMS = [ColdSnapRanks + 1]int32{600000}
+var ColdSnapManaCost = [ColdSnapRanks + 1]float64{0}
+var ColdSnapSpellCoeff = [ColdSnapRanks + 1]float64{0.4286}
+var ColdSnapBaseDamage = [ColdSnapRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Cold Snap coefficient derived from the vanilla convention (rank 0)
 
-// Combustion: 2 rank(s), from build 1.60.1.69893.
-const CombustionRanks = 2
+// Combustion: ranks 0 present, from build 1.60.1.69893.
+const CombustionRanks = 0
 
-var CombustionSpellId = [CombustionRanks + 1]int32{0, 11129, 28682}
-var CombustionLevel = [CombustionRanks + 1]int{0, 40, 40}
-var CombustionCastTime = [CombustionRanks + 1]int32{0, 0, 0}
-var CombustionCooldownMS = [CombustionRanks + 1]int32{0, 180000, 0}
-var CombustionManaCost = [CombustionRanks + 1]float64{0, 0, 0}
-var CombustionSpellCoeff = [CombustionRanks + 1]float64{0, 0.4286, 0.4286}
-var CombustionBaseDamage = [CombustionRanks + 1][]float64{{0, 0}, {0, 0}, {10, 10}}
+var CombustionSpellId = [CombustionRanks + 1]int32{28682}
+var CombustionLevel = [CombustionRanks + 1]int{40}
+var CombustionCastTime = [CombustionRanks + 1]int32{0}
+var CombustionCooldownMS = [CombustionRanks + 1]int32{0}
+var CombustionManaCost = [CombustionRanks + 1]float64{0}
+var CombustionSpellCoeff = [CombustionRanks + 1]float64{0.4286}
+var CombustionBaseDamage = [CombustionRanks + 1][]float64{{10, 10}}
 
-// unconfirmed: Combustion coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Combustion coefficient derived from the vanilla convention (rank 0)
+// Combustion rank 0: kept id 28682 (spell_level 40); dropped 11129 (spell_level 40)
 
-// Cone of Cold: 11 rank(s), from build 1.60.1.69893.
-const ConeOfColdRanks = 11
+// Cone of Cold: ranks 0-5 present, from build 1.60.1.69893.
+const ConeOfColdRanks = 5
 
-var ConeOfColdSpellId = [ConeOfColdRanks + 1]int32{0, 30095, 15244, 12611, 22746, 20828, 12557, 120, 8492, 10159, 10160, 10161}
-var ConeOfColdLevel = [ConeOfColdRanks + 1]int{0, 20, 20, 20, 20, 20, 20, 26, 34, 42, 50, 58}
-var ConeOfColdCastTime = [ConeOfColdRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-var ConeOfColdCooldownMS = [ConeOfColdRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 10000, 10000, 10000, 10000, 10000}
-var ConeOfColdManaCost = [ConeOfColdRanks + 1]float64{0, 120, 120, 120, 0, 120, 120, 210, 290, 380, 465, 555}
-var ConeOfColdSpellCoeff = [ConeOfColdRanks + 1]float64{0, 1, 1, 1, 1, 1, 1, 0.129, 0.129, 0.129, 0.129, 0.129}
-var ConeOfColdBaseDamage = [ConeOfColdRanks + 1][]float64{{0, 0}, {1500, 1500}, {877, 877}, {655, 655}, {877, 877}, {614, 614}, {439, 439}, {97, 97}, {144, 144}, {204, 204}, {267, 267}, {340, 340}}
+var ConeOfColdSpellId = [ConeOfColdRanks + 1]int32{30095, 120, 8492, 10159, 10160, 10161}
+var ConeOfColdLevel = [ConeOfColdRanks + 1]int{20, 26, 34, 42, 50, 58}
+var ConeOfColdCastTime = [ConeOfColdRanks + 1]int32{0, 0, 0, 0, 0, 0}
+var ConeOfColdCooldownMS = [ConeOfColdRanks + 1]int32{0, 10000, 10000, 10000, 10000, 10000}
+var ConeOfColdManaCost = [ConeOfColdRanks + 1]float64{120, 210, 290, 380, 465, 555}
+var ConeOfColdSpellCoeff = [ConeOfColdRanks + 1]float64{1, 0.129, 0.129, 0.129, 0.129, 0.129}
+var ConeOfColdBaseDamage = [ConeOfColdRanks + 1][]float64{{1500, 1500}, {97, 97}, {144, 144}, {204, 204}, {267, 267}, {340, 340}}
 
-// Conjure Comprehension Charms: 1 rank(s), from build 1.60.1.69893.
-const ConjureComprehensionCharmsRanks = 1
+// Cone of Cold rank 0: kept id 30095 (spell_level 20); dropped 12557 (spell_level 20), 12611 (spell_level 20), 15244 (spell_level 20), 20828 (spell_level 20), 22746 (spell_level 20)
 
-var ConjureComprehensionCharmsSpellId = [ConjureComprehensionCharmsRanks + 1]int32{0, 435849}
-var ConjureComprehensionCharmsLevel = [ConjureComprehensionCharmsRanks + 1]int{0, 25}
-var ConjureComprehensionCharmsCastTime = [ConjureComprehensionCharmsRanks + 1]int32{0, 6000}
-var ConjureComprehensionCharmsCooldownMS = [ConjureComprehensionCharmsRanks + 1]int32{0, 12800000}
-var ConjureComprehensionCharmsManaCost = [ConjureComprehensionCharmsRanks + 1]float64{0, 350}
-var ConjureComprehensionCharmsSpellCoeff = [ConjureComprehensionCharmsRanks + 1]float64{0, 1.7143}
-var ConjureComprehensionCharmsBaseDamage = [ConjureComprehensionCharmsRanks + 1][]float64{{0, 0}, {5, 5}}
+// Conjure Comprehension Charms: ranks 0 present, from build 1.60.1.69893.
+const ConjureComprehensionCharmsRanks = 0
+
+var ConjureComprehensionCharmsSpellId = [ConjureComprehensionCharmsRanks + 1]int32{435849}
+var ConjureComprehensionCharmsLevel = [ConjureComprehensionCharmsRanks + 1]int{25}
+var ConjureComprehensionCharmsCastTime = [ConjureComprehensionCharmsRanks + 1]int32{6000}
+var ConjureComprehensionCharmsCooldownMS = [ConjureComprehensionCharmsRanks + 1]int32{12800000}
+var ConjureComprehensionCharmsManaCost = [ConjureComprehensionCharmsRanks + 1]float64{350}
+var ConjureComprehensionCharmsSpellCoeff = [ConjureComprehensionCharmsRanks + 1]float64{1.7143}
+var ConjureComprehensionCharmsBaseDamage = [ConjureComprehensionCharmsRanks + 1][]float64{{5, 5}}
 
 // unconfirmed: Conjure Comprehension Charms coefficient derived from the vanilla convention (rank 0)
 
-// Conjure Food: 7 rank(s), from build 1.60.1.69893.
+// Conjure Food: ranks 1-7 present, from build 1.60.1.69893.
 const ConjureFoodRanks = 7
 
 var ConjureFoodSpellId = [ConjureFoodRanks + 1]int32{0, 587, 597, 990, 6129, 10144, 10145, 28612}
@@ -731,72 +758,72 @@ var ConjureFoodBaseDamage = [ConjureFoodRanks + 1][]float64{{0, 0}, {2, 2}, {2, 
 
 // unconfirmed: Conjure Food coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4, rank 5, rank 6, rank 7)
 
-// Conjure Mana Agate: 1 rank(s), from build 1.60.1.69893.
-const ConjureManaAgateRanks = 1
+// Conjure Mana Agate: ranks 0 present, from build 1.60.1.69893.
+const ConjureManaAgateRanks = 0
 
-var ConjureManaAgateSpellId = [ConjureManaAgateRanks + 1]int32{0, 759}
-var ConjureManaAgateLevel = [ConjureManaAgateRanks + 1]int{0, 28}
-var ConjureManaAgateCastTime = [ConjureManaAgateRanks + 1]int32{0, 3000}
-var ConjureManaAgateCooldownMS = [ConjureManaAgateRanks + 1]int32{0, 0}
-var ConjureManaAgateManaCost = [ConjureManaAgateRanks + 1]float64{0, 530}
-var ConjureManaAgateSpellCoeff = [ConjureManaAgateRanks + 1]float64{0, 0.8571}
-var ConjureManaAgateBaseDamage = [ConjureManaAgateRanks + 1][]float64{{0, 0}, {1, 1}}
+var ConjureManaAgateSpellId = [ConjureManaAgateRanks + 1]int32{759}
+var ConjureManaAgateLevel = [ConjureManaAgateRanks + 1]int{28}
+var ConjureManaAgateCastTime = [ConjureManaAgateRanks + 1]int32{3000}
+var ConjureManaAgateCooldownMS = [ConjureManaAgateRanks + 1]int32{0}
+var ConjureManaAgateManaCost = [ConjureManaAgateRanks + 1]float64{530}
+var ConjureManaAgateSpellCoeff = [ConjureManaAgateRanks + 1]float64{0.8571}
+var ConjureManaAgateBaseDamage = [ConjureManaAgateRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Conjure Mana Agate coefficient derived from the vanilla convention (rank 0)
 
-// Conjure Mana Citrine: 1 rank(s), from build 1.60.1.69893.
-const ConjureManaCitrineRanks = 1
+// Conjure Mana Citrine: ranks 0 present, from build 1.60.1.69893.
+const ConjureManaCitrineRanks = 0
 
-var ConjureManaCitrineSpellId = [ConjureManaCitrineRanks + 1]int32{0, 10053}
-var ConjureManaCitrineLevel = [ConjureManaCitrineRanks + 1]int{0, 48}
-var ConjureManaCitrineCastTime = [ConjureManaCitrineRanks + 1]int32{0, 3000}
-var ConjureManaCitrineCooldownMS = [ConjureManaCitrineRanks + 1]int32{0, 0}
-var ConjureManaCitrineManaCost = [ConjureManaCitrineRanks + 1]float64{0, 1130}
-var ConjureManaCitrineSpellCoeff = [ConjureManaCitrineRanks + 1]float64{0, 0.8571}
-var ConjureManaCitrineBaseDamage = [ConjureManaCitrineRanks + 1][]float64{{0, 0}, {1, 1}}
+var ConjureManaCitrineSpellId = [ConjureManaCitrineRanks + 1]int32{10053}
+var ConjureManaCitrineLevel = [ConjureManaCitrineRanks + 1]int{48}
+var ConjureManaCitrineCastTime = [ConjureManaCitrineRanks + 1]int32{3000}
+var ConjureManaCitrineCooldownMS = [ConjureManaCitrineRanks + 1]int32{0}
+var ConjureManaCitrineManaCost = [ConjureManaCitrineRanks + 1]float64{1130}
+var ConjureManaCitrineSpellCoeff = [ConjureManaCitrineRanks + 1]float64{0.8571}
+var ConjureManaCitrineBaseDamage = [ConjureManaCitrineRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Conjure Mana Citrine coefficient derived from the vanilla convention (rank 0)
 
-// Conjure Mana Jade: 1 rank(s), from build 1.60.1.69893.
-const ConjureManaJadeRanks = 1
+// Conjure Mana Jade: ranks 0 present, from build 1.60.1.69893.
+const ConjureManaJadeRanks = 0
 
-var ConjureManaJadeSpellId = [ConjureManaJadeRanks + 1]int32{0, 3552}
-var ConjureManaJadeLevel = [ConjureManaJadeRanks + 1]int{0, 38}
-var ConjureManaJadeCastTime = [ConjureManaJadeRanks + 1]int32{0, 3000}
-var ConjureManaJadeCooldownMS = [ConjureManaJadeRanks + 1]int32{0, 0}
-var ConjureManaJadeManaCost = [ConjureManaJadeRanks + 1]float64{0, 800}
-var ConjureManaJadeSpellCoeff = [ConjureManaJadeRanks + 1]float64{0, 0.8571}
-var ConjureManaJadeBaseDamage = [ConjureManaJadeRanks + 1][]float64{{0, 0}, {1, 1}}
+var ConjureManaJadeSpellId = [ConjureManaJadeRanks + 1]int32{3552}
+var ConjureManaJadeLevel = [ConjureManaJadeRanks + 1]int{38}
+var ConjureManaJadeCastTime = [ConjureManaJadeRanks + 1]int32{3000}
+var ConjureManaJadeCooldownMS = [ConjureManaJadeRanks + 1]int32{0}
+var ConjureManaJadeManaCost = [ConjureManaJadeRanks + 1]float64{800}
+var ConjureManaJadeSpellCoeff = [ConjureManaJadeRanks + 1]float64{0.8571}
+var ConjureManaJadeBaseDamage = [ConjureManaJadeRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Conjure Mana Jade coefficient derived from the vanilla convention (rank 0)
 
-// Conjure Mana Ruby: 1 rank(s), from build 1.60.1.69893.
-const ConjureManaRubyRanks = 1
+// Conjure Mana Ruby: ranks 0 present, from build 1.60.1.69893.
+const ConjureManaRubyRanks = 0
 
-var ConjureManaRubySpellId = [ConjureManaRubyRanks + 1]int32{0, 10054}
-var ConjureManaRubyLevel = [ConjureManaRubyRanks + 1]int{0, 58}
-var ConjureManaRubyCastTime = [ConjureManaRubyRanks + 1]int32{0, 3000}
-var ConjureManaRubyCooldownMS = [ConjureManaRubyRanks + 1]int32{0, 0}
-var ConjureManaRubyManaCost = [ConjureManaRubyRanks + 1]float64{0, 1470}
-var ConjureManaRubySpellCoeff = [ConjureManaRubyRanks + 1]float64{0, 0.8571}
-var ConjureManaRubyBaseDamage = [ConjureManaRubyRanks + 1][]float64{{0, 0}, {1, 1}}
+var ConjureManaRubySpellId = [ConjureManaRubyRanks + 1]int32{10054}
+var ConjureManaRubyLevel = [ConjureManaRubyRanks + 1]int{58}
+var ConjureManaRubyCastTime = [ConjureManaRubyRanks + 1]int32{3000}
+var ConjureManaRubyCooldownMS = [ConjureManaRubyRanks + 1]int32{0}
+var ConjureManaRubyManaCost = [ConjureManaRubyRanks + 1]float64{1470}
+var ConjureManaRubySpellCoeff = [ConjureManaRubyRanks + 1]float64{0.8571}
+var ConjureManaRubyBaseDamage = [ConjureManaRubyRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Conjure Mana Ruby coefficient derived from the vanilla convention (rank 0)
 
-// Conjure Ocean Water: 1 rank(s), from build 1.60.1.69893.
-const ConjureOceanWaterRanks = 1
+// Conjure Ocean Water: ranks 4 present, from build 1.60.1.69893.
+const ConjureOceanWaterRanks = 4
 
-var ConjureOceanWaterSpellId = [ConjureOceanWaterRanks + 1]int32{0, 443635}
-var ConjureOceanWaterLevel = [ConjureOceanWaterRanks + 1]int{0, 30}
-var ConjureOceanWaterCastTime = [ConjureOceanWaterRanks + 1]int32{0, 0}
-var ConjureOceanWaterCooldownMS = [ConjureOceanWaterRanks + 1]int32{0, 0}
-var ConjureOceanWaterManaCost = [ConjureOceanWaterRanks + 1]float64{0, 0}
-var ConjureOceanWaterSpellCoeff = [ConjureOceanWaterRanks + 1]float64{0, 0.4286}
-var ConjureOceanWaterBaseDamage = [ConjureOceanWaterRanks + 1][]float64{{0, 0}, {20, 20}}
+var ConjureOceanWaterSpellId = [ConjureOceanWaterRanks + 1]int32{0, 0, 0, 0, 443635}
+var ConjureOceanWaterLevel = [ConjureOceanWaterRanks + 1]int{0, 0, 0, 0, 30}
+var ConjureOceanWaterCastTime = [ConjureOceanWaterRanks + 1]int32{0, 0, 0, 0, 0}
+var ConjureOceanWaterCooldownMS = [ConjureOceanWaterRanks + 1]int32{0, 0, 0, 0, 0}
+var ConjureOceanWaterManaCost = [ConjureOceanWaterRanks + 1]float64{0, 0, 0, 0, 0}
+var ConjureOceanWaterSpellCoeff = [ConjureOceanWaterRanks + 1]float64{0, 0, 0, 0, 0.4286}
+var ConjureOceanWaterBaseDamage = [ConjureOceanWaterRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {20, 20}}
 
 // unconfirmed: Conjure Ocean Water coefficient derived from the vanilla convention (rank 4)
 
-// Conjure Water: 8 rank(s), from build 1.60.1.69893.
+// Conjure Water: ranks 1-8 present, from build 1.60.1.69893.
 const ConjureWaterRanks = 8
 
 var ConjureWaterSpellId = [ConjureWaterRanks + 1]int32{0, 5504, 5505, 5506, 6127, 10138, 10139, 10140, 468766}
@@ -809,46 +836,46 @@ var ConjureWaterBaseDamage = [ConjureWaterRanks + 1][]float64{{0, 0}, {2, 2}, {2
 
 // unconfirmed: Conjure Water coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4, rank 5, rank 6, rank 7, rank 8)
 
-// Consumed by Rage: 1 rank(s), from build 1.60.1.69893.
-const ConsumedByRageRanks = 1
+// Consumed by Rage: ranks 0 present, from build 1.60.1.69893.
+const ConsumedByRageRanks = 0
 
-var ConsumedByRageSpellId = [ConsumedByRageRanks + 1]int32{0, 425440}
-var ConsumedByRageLevel = [ConsumedByRageRanks + 1]int{0, 1}
-var ConsumedByRageCastTime = [ConsumedByRageRanks + 1]int32{0, 0}
-var ConsumedByRageCooldownMS = [ConsumedByRageRanks + 1]int32{0, 0}
-var ConsumedByRageManaCost = [ConsumedByRageRanks + 1]float64{0, 0}
-var ConsumedByRageSpellCoeff = [ConsumedByRageRanks + 1]float64{0, 0.4286}
-var ConsumedByRageBaseDamage = [ConsumedByRageRanks + 1][]float64{{0, 0}, {425418, 425418}}
+var ConsumedByRageSpellId = [ConsumedByRageRanks + 1]int32{425440}
+var ConsumedByRageLevel = [ConsumedByRageRanks + 1]int{1}
+var ConsumedByRageCastTime = [ConsumedByRageRanks + 1]int32{0}
+var ConsumedByRageCooldownMS = [ConsumedByRageRanks + 1]int32{0}
+var ConsumedByRageManaCost = [ConsumedByRageRanks + 1]float64{0}
+var ConsumedByRageSpellCoeff = [ConsumedByRageRanks + 1]float64{0.4286}
+var ConsumedByRageBaseDamage = [ConsumedByRageRanks + 1][]float64{{425418, 425418}}
 
 // unconfirmed: Consumed by Rage coefficient derived from the vanilla convention (rank 0)
 
-// Conundrum: 1 rank(s), from build 1.60.1.69893.
-const ConundrumRanks = 1
+// Conundrum: ranks 0 present, from build 1.60.1.69893.
+const ConundrumRanks = 0
 
-var ConundrumSpellId = [ConundrumRanks + 1]int32{0, 1231662}
-var ConundrumLevel = [ConundrumRanks + 1]int{0, 0}
-var ConundrumCastTime = [ConundrumRanks + 1]int32{0, 0}
-var ConundrumCooldownMS = [ConundrumRanks + 1]int32{0, 0}
-var ConundrumManaCost = [ConundrumRanks + 1]float64{0, 0}
-var ConundrumSpellCoeff = [ConundrumRanks + 1]float64{0, 0.4286}
-var ConundrumBaseDamage = [ConundrumRanks + 1][]float64{{0, 0}, {10, 10}}
+var ConundrumSpellId = [ConundrumRanks + 1]int32{1231662}
+var ConundrumLevel = [ConundrumRanks + 1]int{0}
+var ConundrumCastTime = [ConundrumRanks + 1]int32{0}
+var ConundrumCooldownMS = [ConundrumRanks + 1]int32{0}
+var ConundrumManaCost = [ConundrumRanks + 1]float64{0}
+var ConundrumSpellCoeff = [ConundrumRanks + 1]float64{0.4286}
+var ConundrumBaseDamage = [ConundrumRanks + 1][]float64{{10, 10}}
 
 // unconfirmed: Conundrum coefficient derived from the vanilla convention (rank 0)
 
-// Copy of Blink: 1 rank(s), from build 1.60.1.69893.
-const CopyOfBlinkRanks = 1
+// Copy of Blink: ranks 0 present, from build 1.60.1.69893.
+const CopyOfBlinkRanks = 0
 
-var CopyOfBlinkSpellId = [CopyOfBlinkRanks + 1]int32{0, 29207}
-var CopyOfBlinkLevel = [CopyOfBlinkRanks + 1]int{0, 20}
-var CopyOfBlinkCastTime = [CopyOfBlinkRanks + 1]int32{0, 0}
-var CopyOfBlinkCooldownMS = [CopyOfBlinkRanks + 1]int32{0, 0}
-var CopyOfBlinkManaCost = [CopyOfBlinkRanks + 1]float64{0, 0}
-var CopyOfBlinkSpellCoeff = [CopyOfBlinkRanks + 1]float64{0, 0.0667}
-var CopyOfBlinkBaseDamage = [CopyOfBlinkRanks + 1][]float64{{0, 0}, {0, 0}}
+var CopyOfBlinkSpellId = [CopyOfBlinkRanks + 1]int32{29207}
+var CopyOfBlinkLevel = [CopyOfBlinkRanks + 1]int{20}
+var CopyOfBlinkCastTime = [CopyOfBlinkRanks + 1]int32{0}
+var CopyOfBlinkCooldownMS = [CopyOfBlinkRanks + 1]int32{0}
+var CopyOfBlinkManaCost = [CopyOfBlinkRanks + 1]float64{0}
+var CopyOfBlinkSpellCoeff = [CopyOfBlinkRanks + 1]float64{0.0667}
+var CopyOfBlinkBaseDamage = [CopyOfBlinkRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Copy of Blink coefficient derived from the vanilla convention (rank 0)
 
-// Copy of Frostbolt: 1 rank(s), from build 1.60.1.69893.
+// Copy of Frostbolt: ranks 1 present, from build 1.60.1.69893.
 const CopyOfFrostboltRanks = 1
 
 var CopyOfFrostboltSpellId = [CopyOfFrostboltRanks + 1]int32{0, 29163}
@@ -859,46 +886,47 @@ var CopyOfFrostboltManaCost = [CopyOfFrostboltRanks + 1]float64{0, 25}
 var CopyOfFrostboltSpellCoeff = [CopyOfFrostboltRanks + 1]float64{0, 0.163}
 var CopyOfFrostboltBaseDamage = [CopyOfFrostboltRanks + 1][]float64{{0, 0}, {19, 19}}
 
-// Copy of Portal: Undercity: 1 rank(s), from build 1.60.1.69893.
-const CopyOfPortalUndercityRanks = 1
+// Copy of Portal: Undercity: ranks 0 present, from build 1.60.1.69893.
+const CopyOfPortalUndercityRanks = 0
 
-var CopyOfPortalUndercitySpellId = [CopyOfPortalUndercityRanks + 1]int32{0, 28146}
-var CopyOfPortalUndercityLevel = [CopyOfPortalUndercityRanks + 1]int{0, 40}
-var CopyOfPortalUndercityCastTime = [CopyOfPortalUndercityRanks + 1]int32{0, 10000}
-var CopyOfPortalUndercityCooldownMS = [CopyOfPortalUndercityRanks + 1]int32{0, 60000}
-var CopyOfPortalUndercityManaCost = [CopyOfPortalUndercityRanks + 1]float64{0, 850}
-var CopyOfPortalUndercitySpellCoeff = [CopyOfPortalUndercityRanks + 1]float64{0, 4}
-var CopyOfPortalUndercityBaseDamage = [CopyOfPortalUndercityRanks + 1][]float64{{0, 0}, {0, 0}}
+var CopyOfPortalUndercitySpellId = [CopyOfPortalUndercityRanks + 1]int32{28146}
+var CopyOfPortalUndercityLevel = [CopyOfPortalUndercityRanks + 1]int{40}
+var CopyOfPortalUndercityCastTime = [CopyOfPortalUndercityRanks + 1]int32{10000}
+var CopyOfPortalUndercityCooldownMS = [CopyOfPortalUndercityRanks + 1]int32{60000}
+var CopyOfPortalUndercityManaCost = [CopyOfPortalUndercityRanks + 1]float64{850}
+var CopyOfPortalUndercitySpellCoeff = [CopyOfPortalUndercityRanks + 1]float64{4}
+var CopyOfPortalUndercityBaseDamage = [CopyOfPortalUndercityRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Copy of Portal: Undercity coefficient derived from the vanilla convention (rank 0)
 
-// Counterspell: 7 rank(s), from build 1.60.1.69893.
-const CounterspellRanks = 7
+// Counterspell: ranks 0 present, from build 1.60.1.69893.
+const CounterspellRanks = 0
 
-var CounterspellSpellId = [CounterspellRanks + 1]int32{0, 19715, 20788, 15122, 29443, 20537, 1233255, 2139}
-var CounterspellLevel = [CounterspellRanks + 1]int{0, 24, 24, 24, 1, 24, 0, 24}
-var CounterspellCastTime = [CounterspellRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
-var CounterspellCooldownMS = [CounterspellRanks + 1]int32{0, 0, 0, 0, 0, 30000, 0, 30000}
-var CounterspellManaCost = [CounterspellRanks + 1]float64{0, 0, 0, 100, 0, 0, 100, 100}
-var CounterspellSpellCoeff = [CounterspellRanks + 1]float64{0, 0.6667, 0.0001, 1, 0.6667, 1, 0.4, 0.6667}
-var CounterspellBaseDamage = [CounterspellRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
+var CounterspellSpellId = [CounterspellRanks + 1]int32{20788}
+var CounterspellLevel = [CounterspellRanks + 1]int{24}
+var CounterspellCastTime = [CounterspellRanks + 1]int32{0}
+var CounterspellCooldownMS = [CounterspellRanks + 1]int32{0}
+var CounterspellManaCost = [CounterspellRanks + 1]float64{0}
+var CounterspellSpellCoeff = [CounterspellRanks + 1]float64{0.0001}
+var CounterspellBaseDamage = [CounterspellRanks + 1][]float64{{0, 0}}
 
-// unconfirmed: Counterspell coefficient derived from the vanilla convention (rank 0, rank 0, rank 0, rank 0, rank 0, rank 0, rank 0)
+// unconfirmed: Counterspell coefficient derived from the vanilla convention (rank 0)
+// Counterspell rank 0: kept id 20788 (spell_level 24); dropped 2139 (spell_level 24), 15122 (spell_level 24), 19715 (spell_level 24), 20537 (spell_level 24), 29443 (spell_level 1), 1233255 (spell_level 0)
 
-// Critical Mass: 1 rank(s), from build 1.60.1.69893.
-const CriticalMassRanks = 1
+// Critical Mass: ranks 0 present, from build 1.60.1.69893.
+const CriticalMassRanks = 0
 
-var CriticalMassSpellId = [CriticalMassRanks + 1]int32{0, 11115}
-var CriticalMassLevel = [CriticalMassRanks + 1]int{0, 1}
-var CriticalMassCastTime = [CriticalMassRanks + 1]int32{0, 0}
-var CriticalMassCooldownMS = [CriticalMassRanks + 1]int32{0, 0}
-var CriticalMassManaCost = [CriticalMassRanks + 1]float64{0, 0}
-var CriticalMassSpellCoeff = [CriticalMassRanks + 1]float64{0, 0.4286}
-var CriticalMassBaseDamage = [CriticalMassRanks + 1][]float64{{0, 0}, {2, 2}}
+var CriticalMassSpellId = [CriticalMassRanks + 1]int32{11115}
+var CriticalMassLevel = [CriticalMassRanks + 1]int{1}
+var CriticalMassCastTime = [CriticalMassRanks + 1]int32{0}
+var CriticalMassCooldownMS = [CriticalMassRanks + 1]int32{0}
+var CriticalMassManaCost = [CriticalMassRanks + 1]float64{0}
+var CriticalMassSpellCoeff = [CriticalMassRanks + 1]float64{0.4286}
+var CriticalMassBaseDamage = [CriticalMassRanks + 1][]float64{{2, 2}}
 
 // unconfirmed: Critical Mass coefficient derived from the vanilla convention (rank 0)
 
-// Dampen Magic: 5 rank(s), from build 1.60.1.69893.
+// Dampen Magic: ranks 1-5 present, from build 1.60.1.69893.
 const DampenMagicRanks = 5
 
 var DampenMagicSpellId = [DampenMagicRanks + 1]int32{0, 604, 8450, 8451, 10173, 10174}
@@ -911,170 +939,172 @@ var DampenMagicBaseDamage = [DampenMagicRanks + 1][]float64{{0, 0}, {-15, -15}, 
 
 // unconfirmed: Dampen Magic coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4, rank 5)
 
-// Dark Energy: 1 rank(s), from build 1.60.1.69893.
-const DarkEnergyRanks = 1
+// Dark Energy: ranks 0 present, from build 1.60.1.69893.
+const DarkEnergyRanks = 0
 
-var DarkEnergySpellId = [DarkEnergyRanks + 1]int32{0, 18948}
-var DarkEnergyLevel = [DarkEnergyRanks + 1]int{0, 50}
-var DarkEnergyCastTime = [DarkEnergyRanks + 1]int32{0, 0}
-var DarkEnergyCooldownMS = [DarkEnergyRanks + 1]int32{0, 0}
-var DarkEnergyManaCost = [DarkEnergyRanks + 1]float64{0, 0}
-var DarkEnergySpellCoeff = [DarkEnergyRanks + 1]float64{0, 1}
-var DarkEnergyBaseDamage = [DarkEnergyRanks + 1][]float64{{0, 0}, {-50, -50}}
+var DarkEnergySpellId = [DarkEnergyRanks + 1]int32{18948}
+var DarkEnergyLevel = [DarkEnergyRanks + 1]int{50}
+var DarkEnergyCastTime = [DarkEnergyRanks + 1]int32{0}
+var DarkEnergyCooldownMS = [DarkEnergyRanks + 1]int32{0}
+var DarkEnergyManaCost = [DarkEnergyRanks + 1]float64{0}
+var DarkEnergySpellCoeff = [DarkEnergyRanks + 1]float64{1}
+var DarkEnergyBaseDamage = [DarkEnergyRanks + 1][]float64{{-50, -50}}
 
-// Debug Frost Spell: 1 rank(s), from build 1.60.1.69893.
-const DebugFrostSpellRanks = 1
+// Debug Frost Spell: ranks 10 present, from build 1.60.1.69893.
+const DebugFrostSpellRanks = 10
 
-var DebugFrostSpellSpellId = [DebugFrostSpellRanks + 1]int32{0, 29607}
-var DebugFrostSpellLevel = [DebugFrostSpellRanks + 1]int{0, 60}
-var DebugFrostSpellCastTime = [DebugFrostSpellRanks + 1]int32{0, 0}
-var DebugFrostSpellCooldownMS = [DebugFrostSpellRanks + 1]int32{0, 0}
-var DebugFrostSpellManaCost = [DebugFrostSpellRanks + 1]float64{0, 0}
-var DebugFrostSpellSpellCoeff = [DebugFrostSpellRanks + 1]float64{0, 0.814}
-var DebugFrostSpellBaseDamage = [DebugFrostSpellRanks + 1][]float64{{0, 0}, {446, 446}}
+var DebugFrostSpellSpellId = [DebugFrostSpellRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29607}
+var DebugFrostSpellLevel = [DebugFrostSpellRanks + 1]int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60}
+var DebugFrostSpellCastTime = [DebugFrostSpellRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+var DebugFrostSpellCooldownMS = [DebugFrostSpellRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+var DebugFrostSpellManaCost = [DebugFrostSpellRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+var DebugFrostSpellSpellCoeff = [DebugFrostSpellRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.814}
+var DebugFrostSpellBaseDamage = [DebugFrostSpellRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {446, 446}}
 
-// Decimation: 1 rank(s), from build 1.60.1.69893.
-const DecimationRanks = 1
+// Decimation: ranks 0 present, from build 1.60.1.69893.
+const DecimationRanks = 0
 
-var DecimationSpellId = [DecimationRanks + 1]int32{0, 440923}
-var DecimationLevel = [DecimationRanks + 1]int{0, 1}
-var DecimationCastTime = [DecimationRanks + 1]int32{0, 0}
-var DecimationCooldownMS = [DecimationRanks + 1]int32{0, 0}
-var DecimationManaCost = [DecimationRanks + 1]float64{0, 0}
-var DecimationSpellCoeff = [DecimationRanks + 1]float64{0, 0.4286}
-var DecimationBaseDamage = [DecimationRanks + 1][]float64{{0, 0}, {440870, 440870}}
+var DecimationSpellId = [DecimationRanks + 1]int32{440923}
+var DecimationLevel = [DecimationRanks + 1]int{1}
+var DecimationCastTime = [DecimationRanks + 1]int32{0}
+var DecimationCooldownMS = [DecimationRanks + 1]int32{0}
+var DecimationManaCost = [DecimationRanks + 1]float64{0}
+var DecimationSpellCoeff = [DecimationRanks + 1]float64{0.4286}
+var DecimationBaseDamage = [DecimationRanks + 1][]float64{{440870, 440870}}
 
 // unconfirmed: Decimation coefficient derived from the vanilla convention (rank 0)
 
-// Decreased Frozen Orb Cooldown: 1 rank(s), from build 1.60.1.69893.
-const DecreasedFrozenOrbCooldownRanks = 1
+// Decreased Frozen Orb Cooldown: ranks 0 present, from build 1.60.1.69893.
+const DecreasedFrozenOrbCooldownRanks = 0
 
-var DecreasedFrozenOrbCooldownSpellId = [DecreasedFrozenOrbCooldownRanks + 1]int32{0, 468273}
-var DecreasedFrozenOrbCooldownLevel = [DecreasedFrozenOrbCooldownRanks + 1]int{0, 0}
-var DecreasedFrozenOrbCooldownCastTime = [DecreasedFrozenOrbCooldownRanks + 1]int32{0, 0}
-var DecreasedFrozenOrbCooldownCooldownMS = [DecreasedFrozenOrbCooldownRanks + 1]int32{0, 0}
-var DecreasedFrozenOrbCooldownManaCost = [DecreasedFrozenOrbCooldownRanks + 1]float64{0, 0}
-var DecreasedFrozenOrbCooldownSpellCoeff = [DecreasedFrozenOrbCooldownRanks + 1]float64{0, 1}
-var DecreasedFrozenOrbCooldownBaseDamage = [DecreasedFrozenOrbCooldownRanks + 1][]float64{{0, 0}, {-10000, -10000}}
+var DecreasedFrozenOrbCooldownSpellId = [DecreasedFrozenOrbCooldownRanks + 1]int32{468273}
+var DecreasedFrozenOrbCooldownLevel = [DecreasedFrozenOrbCooldownRanks + 1]int{0}
+var DecreasedFrozenOrbCooldownCastTime = [DecreasedFrozenOrbCooldownRanks + 1]int32{0}
+var DecreasedFrozenOrbCooldownCooldownMS = [DecreasedFrozenOrbCooldownRanks + 1]int32{0}
+var DecreasedFrozenOrbCooldownManaCost = [DecreasedFrozenOrbCooldownRanks + 1]float64{0}
+var DecreasedFrozenOrbCooldownSpellCoeff = [DecreasedFrozenOrbCooldownRanks + 1]float64{1}
+var DecreasedFrozenOrbCooldownBaseDamage = [DecreasedFrozenOrbCooldownRanks + 1][]float64{{-10000, -10000}}
 
-// Deep Freeze: 4 rank(s), from build 1.60.1.69893.
-const DeepFreezeRanks = 4
+// Deep Freeze: ranks 0 present, from build 1.60.1.69893.
+const DeepFreezeRanks = 0
 
-var DeepFreezeSpellId = [DeepFreezeRanks + 1]int32{0, 428739, 428920, 429303, 428917}
-var DeepFreezeLevel = [DeepFreezeRanks + 1]int{0, 60, 1, 1, 1}
-var DeepFreezeCastTime = [DeepFreezeRanks + 1]int32{0, 0, 0, 0, 0}
-var DeepFreezeCooldownMS = [DeepFreezeRanks + 1]int32{0, 30000, 0, 0, 0}
-var DeepFreezeManaCost = [DeepFreezeRanks + 1]float64{0, 0, 0, 0, 0}
-var DeepFreezeSpellCoeff = [DeepFreezeRanks + 1]float64{0, 0.3333, 0.4286, 0.4286, 2.5}
-var DeepFreezeBaseDamage = [DeepFreezeRanks + 1][]float64{{0, 0}, {100, 100}, {15, 15}, {428739, 428739}, {500, 500}}
+var DeepFreezeSpellId = [DeepFreezeRanks + 1]int32{428739}
+var DeepFreezeLevel = [DeepFreezeRanks + 1]int{60}
+var DeepFreezeCastTime = [DeepFreezeRanks + 1]int32{0}
+var DeepFreezeCooldownMS = [DeepFreezeRanks + 1]int32{30000}
+var DeepFreezeManaCost = [DeepFreezeRanks + 1]float64{0}
+var DeepFreezeSpellCoeff = [DeepFreezeRanks + 1]float64{0.3333}
+var DeepFreezeBaseDamage = [DeepFreezeRanks + 1][]float64{{100, 100}}
 
-// unconfirmed: Deep Freeze coefficient derived from the vanilla convention (rank 0, rank 0, rank 0)
+// unconfirmed: Deep Freeze coefficient derived from the vanilla convention (rank 0)
+// Deep Freeze rank 0: kept id 428739 (spell_level 60); dropped 428917 (spell_level 1), 428920 (spell_level 1), 429303 (spell_level 1)
 
-// Demonic Grace: 1 rank(s), from build 1.60.1.69893.
-const DemonicGraceRanks = 1
+// Demonic Grace: ranks 0 present, from build 1.60.1.69893.
+const DemonicGraceRanks = 0
 
-var DemonicGraceSpellId = [DemonicGraceRanks + 1]int32{0, 425474}
-var DemonicGraceLevel = [DemonicGraceRanks + 1]int{0, 1}
-var DemonicGraceCastTime = [DemonicGraceRanks + 1]int32{0, 0}
-var DemonicGraceCooldownMS = [DemonicGraceRanks + 1]int32{0, 0}
-var DemonicGraceManaCost = [DemonicGraceRanks + 1]float64{0, 0}
-var DemonicGraceSpellCoeff = [DemonicGraceRanks + 1]float64{0, 0.4286}
-var DemonicGraceBaseDamage = [DemonicGraceRanks + 1][]float64{{0, 0}, {425463, 425463}}
+var DemonicGraceSpellId = [DemonicGraceRanks + 1]int32{425474}
+var DemonicGraceLevel = [DemonicGraceRanks + 1]int{1}
+var DemonicGraceCastTime = [DemonicGraceRanks + 1]int32{0}
+var DemonicGraceCooldownMS = [DemonicGraceRanks + 1]int32{0}
+var DemonicGraceManaCost = [DemonicGraceRanks + 1]float64{0}
+var DemonicGraceSpellCoeff = [DemonicGraceRanks + 1]float64{0.4286}
+var DemonicGraceBaseDamage = [DemonicGraceRanks + 1][]float64{{425463, 425463}}
 
 // unconfirmed: Demonic Grace coefficient derived from the vanilla convention (rank 0)
 
-// Demonic Pact: 1 rank(s), from build 1.60.1.69893.
-const DemonicPactRanks = 1
+// Demonic Pact: ranks 0 present, from build 1.60.1.69893.
+const DemonicPactRanks = 0
 
-var DemonicPactSpellId = [DemonicPactRanks + 1]int32{0, 425473}
-var DemonicPactLevel = [DemonicPactRanks + 1]int{0, 1}
-var DemonicPactCastTime = [DemonicPactRanks + 1]int32{0, 0}
-var DemonicPactCooldownMS = [DemonicPactRanks + 1]int32{0, 0}
-var DemonicPactManaCost = [DemonicPactRanks + 1]float64{0, 0}
-var DemonicPactSpellCoeff = [DemonicPactRanks + 1]float64{0, 0.4286}
-var DemonicPactBaseDamage = [DemonicPactRanks + 1][]float64{{0, 0}, {425464, 425464}}
+var DemonicPactSpellId = [DemonicPactRanks + 1]int32{425473}
+var DemonicPactLevel = [DemonicPactRanks + 1]int{1}
+var DemonicPactCastTime = [DemonicPactRanks + 1]int32{0}
+var DemonicPactCooldownMS = [DemonicPactRanks + 1]int32{0}
+var DemonicPactManaCost = [DemonicPactRanks + 1]float64{0}
+var DemonicPactSpellCoeff = [DemonicPactRanks + 1]float64{0.4286}
+var DemonicPactBaseDamage = [DemonicPactRanks + 1][]float64{{425464, 425464}}
 
 // unconfirmed: Demonic Pact coefficient derived from the vanilla convention (rank 0)
 
-// Demonic Tactics: 1 rank(s), from build 1.60.1.69893.
-const DemonicTacticsRanks = 1
+// Demonic Tactics: ranks 0 present, from build 1.60.1.69893.
+const DemonicTacticsRanks = 0
 
-var DemonicTacticsSpellId = [DemonicTacticsRanks + 1]int32{0, 415605}
-var DemonicTacticsLevel = [DemonicTacticsRanks + 1]int{0, 1}
-var DemonicTacticsCastTime = [DemonicTacticsRanks + 1]int32{0, 0}
-var DemonicTacticsCooldownMS = [DemonicTacticsRanks + 1]int32{0, 0}
-var DemonicTacticsManaCost = [DemonicTacticsRanks + 1]float64{0, 0}
-var DemonicTacticsSpellCoeff = [DemonicTacticsRanks + 1]float64{0, 0.4286}
-var DemonicTacticsBaseDamage = [DemonicTacticsRanks + 1][]float64{{0, 0}, {412727, 412727}}
+var DemonicTacticsSpellId = [DemonicTacticsRanks + 1]int32{415605}
+var DemonicTacticsLevel = [DemonicTacticsRanks + 1]int{1}
+var DemonicTacticsCastTime = [DemonicTacticsRanks + 1]int32{0}
+var DemonicTacticsCooldownMS = [DemonicTacticsRanks + 1]int32{0}
+var DemonicTacticsManaCost = [DemonicTacticsRanks + 1]float64{0}
+var DemonicTacticsSpellCoeff = [DemonicTacticsRanks + 1]float64{0.4286}
+var DemonicTacticsBaseDamage = [DemonicTacticsRanks + 1][]float64{{412727, 412727}}
 
 // unconfirmed: Demonic Tactics coefficient derived from the vanilla convention (rank 0)
 
-// Devastate: 1 rank(s), from build 1.60.1.69893.
-const DevastateRanks = 1
+// Devastate: ranks 0 present, from build 1.60.1.69893.
+const DevastateRanks = 0
 
-var DevastateSpellId = [DevastateRanks + 1]int32{0, 403355}
-var DevastateLevel = [DevastateRanks + 1]int{0, 1}
-var DevastateCastTime = [DevastateRanks + 1]int32{0, 0}
-var DevastateCooldownMS = [DevastateRanks + 1]int32{0, 0}
-var DevastateManaCost = [DevastateRanks + 1]float64{0, 0}
-var DevastateSpellCoeff = [DevastateRanks + 1]float64{0, 0.4286}
-var DevastateBaseDamage = [DevastateRanks + 1][]float64{{0, 0}, {403195, 403195}}
+var DevastateSpellId = [DevastateRanks + 1]int32{403355}
+var DevastateLevel = [DevastateRanks + 1]int{1}
+var DevastateCastTime = [DevastateRanks + 1]int32{0}
+var DevastateCooldownMS = [DevastateRanks + 1]int32{0}
+var DevastateManaCost = [DevastateRanks + 1]float64{0}
+var DevastateSpellCoeff = [DevastateRanks + 1]float64{0.4286}
+var DevastateBaseDamage = [DevastateRanks + 1][]float64{{403195, 403195}}
 
 // unconfirmed: Devastate coefficient derived from the vanilla convention (rank 0)
 
-// Dispel Shadows (DNT): 1 rank(s), from build 1.60.1.69893.
-const DispelShadowsDNTRanks = 1
+// Dispel Shadows (DNT): ranks 0 present, from build 1.60.1.69893.
+const DispelShadowsDNTRanks = 0
 
-var DispelShadowsDNTSpellId = [DispelShadowsDNTRanks + 1]int32{0, 449010}
-var DispelShadowsDNTLevel = [DispelShadowsDNTRanks + 1]int{0, 1}
-var DispelShadowsDNTCastTime = [DispelShadowsDNTRanks + 1]int32{0, 0}
-var DispelShadowsDNTCooldownMS = [DispelShadowsDNTRanks + 1]int32{0, 0}
-var DispelShadowsDNTManaCost = [DispelShadowsDNTRanks + 1]float64{0, 0}
-var DispelShadowsDNTSpellCoeff = [DispelShadowsDNTRanks + 1]float64{0, 0.4286}
-var DispelShadowsDNTBaseDamage = [DispelShadowsDNTRanks + 1][]float64{{0, 0}, {1, 1}}
+var DispelShadowsDNTSpellId = [DispelShadowsDNTRanks + 1]int32{449010}
+var DispelShadowsDNTLevel = [DispelShadowsDNTRanks + 1]int{1}
+var DispelShadowsDNTCastTime = [DispelShadowsDNTRanks + 1]int32{0}
+var DispelShadowsDNTCooldownMS = [DispelShadowsDNTRanks + 1]int32{0}
+var DispelShadowsDNTManaCost = [DispelShadowsDNTRanks + 1]float64{0}
+var DispelShadowsDNTSpellCoeff = [DispelShadowsDNTRanks + 1]float64{0.4286}
+var DispelShadowsDNTBaseDamage = [DispelShadowsDNTRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Dispel Shadows (DNT) coefficient derived from the vanilla convention (rank 0)
 
-// Displacement: 2 rank(s), from build 1.60.1.69893.
-const DisplacementRanks = 2
+// Displacement: ranks 0 present, from build 1.60.1.69893.
+const DisplacementRanks = 0
 
-var DisplacementSpellId = [DisplacementRanks + 1]int32{0, 428861, 428863}
-var DisplacementLevel = [DisplacementRanks + 1]int{0, 1, 1}
-var DisplacementCastTime = [DisplacementRanks + 1]int32{0, 0, 0}
-var DisplacementCooldownMS = [DisplacementRanks + 1]int32{0, 30000, 0}
-var DisplacementManaCost = [DisplacementRanks + 1]float64{0, 0, 0}
-var DisplacementSpellCoeff = [DisplacementRanks + 1]float64{0, 0.4286, 0.4286}
-var DisplacementBaseDamage = [DisplacementRanks + 1][]float64{{0, 0}, {0, 0}, {428861, 428861}}
+var DisplacementSpellId = [DisplacementRanks + 1]int32{428863}
+var DisplacementLevel = [DisplacementRanks + 1]int{1}
+var DisplacementCastTime = [DisplacementRanks + 1]int32{0}
+var DisplacementCooldownMS = [DisplacementRanks + 1]int32{0}
+var DisplacementManaCost = [DisplacementRanks + 1]float64{0}
+var DisplacementSpellCoeff = [DisplacementRanks + 1]float64{0.4286}
+var DisplacementBaseDamage = [DisplacementRanks + 1][]float64{{428861, 428861}}
 
-// unconfirmed: Displacement coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Displacement coefficient derived from the vanilla convention (rank 0)
+// Displacement rank 0: kept id 428863 (spell_level 1); dropped 428861 (spell_level 1)
 
-// Divine Aegis: 1 rank(s), from build 1.60.1.69893.
-const DivineAegisRanks = 1
+// Divine Aegis: ranks 0 present, from build 1.60.1.69893.
+const DivineAegisRanks = 0
 
-var DivineAegisSpellId = [DivineAegisRanks + 1]int32{0, 431649}
-var DivineAegisLevel = [DivineAegisRanks + 1]int{0, 1}
-var DivineAegisCastTime = [DivineAegisRanks + 1]int32{0, 0}
-var DivineAegisCooldownMS = [DivineAegisRanks + 1]int32{0, 0}
-var DivineAegisManaCost = [DivineAegisRanks + 1]float64{0, 0}
-var DivineAegisSpellCoeff = [DivineAegisRanks + 1]float64{0, 0.4286}
-var DivineAegisBaseDamage = [DivineAegisRanks + 1][]float64{{0, 0}, {431622, 431622}}
+var DivineAegisSpellId = [DivineAegisRanks + 1]int32{431649}
+var DivineAegisLevel = [DivineAegisRanks + 1]int{1}
+var DivineAegisCastTime = [DivineAegisRanks + 1]int32{0}
+var DivineAegisCooldownMS = [DivineAegisRanks + 1]int32{0}
+var DivineAegisManaCost = [DivineAegisRanks + 1]float64{0}
+var DivineAegisSpellCoeff = [DivineAegisRanks + 1]float64{0.4286}
+var DivineAegisBaseDamage = [DivineAegisRanks + 1][]float64{{431622, 431622}}
 
 // unconfirmed: Divine Aegis coefficient derived from the vanilla convention (rank 0)
 
-// Dreamstate: 1 rank(s), from build 1.60.1.69893.
-const DreamstateRanks = 1
+// Dreamstate: ranks 0 present, from build 1.60.1.69893.
+const DreamstateRanks = 0
 
-var DreamstateSpellId = [DreamstateRanks + 1]int32{0, 409831}
-var DreamstateLevel = [DreamstateRanks + 1]int{0, 1}
-var DreamstateCastTime = [DreamstateRanks + 1]int32{0, 0}
-var DreamstateCooldownMS = [DreamstateRanks + 1]int32{0, 0}
-var DreamstateManaCost = [DreamstateRanks + 1]float64{0, 0}
-var DreamstateSpellCoeff = [DreamstateRanks + 1]float64{0, 0.4286}
-var DreamstateBaseDamage = [DreamstateRanks + 1][]float64{{0, 0}, {408258, 408258}}
+var DreamstateSpellId = [DreamstateRanks + 1]int32{409831}
+var DreamstateLevel = [DreamstateRanks + 1]int{1}
+var DreamstateCastTime = [DreamstateRanks + 1]int32{0}
+var DreamstateCooldownMS = [DreamstateRanks + 1]int32{0}
+var DreamstateManaCost = [DreamstateRanks + 1]float64{0}
+var DreamstateSpellCoeff = [DreamstateRanks + 1]float64{0.4286}
+var DreamstateBaseDamage = [DreamstateRanks + 1][]float64{{408258, 408258}}
 
 // unconfirmed: Dreamstate coefficient derived from the vanilla convention (rank 0)
 
-// Earth Volley: 1 rank(s), from build 1.60.1.69893.
+// Earth Volley: ranks 1 present, from build 1.60.1.69893.
 const EarthVolleyRanks = 1
 
 var EarthVolleySpellId = [EarthVolleyRanks + 1]int32{0, 469057}
@@ -1087,248 +1117,251 @@ var EarthVolleyBaseDamage = [EarthVolleyRanks + 1][]float64{{0, 0}, {0, 0}}
 
 // unconfirmed: Earth Volley coefficient derived from the vanilla convention (rank 1)
 
-// Earthbound: 1 rank(s), from build 1.60.1.69893.
-const EarthboundRanks = 1
+// Earthbound: ranks 0 present, from build 1.60.1.69893.
+const EarthboundRanks = 0
 
-var EarthboundSpellId = [EarthboundRanks + 1]int32{0, 1222988}
-var EarthboundLevel = [EarthboundRanks + 1]int{0, 1}
-var EarthboundCastTime = [EarthboundRanks + 1]int32{0, 0}
-var EarthboundCooldownMS = [EarthboundRanks + 1]int32{0, 0}
-var EarthboundManaCost = [EarthboundRanks + 1]float64{0, 0}
-var EarthboundSpellCoeff = [EarthboundRanks + 1]float64{0, 0.4286}
-var EarthboundBaseDamage = [EarthboundRanks + 1][]float64{{0, 0}, {100, 100}}
+var EarthboundSpellId = [EarthboundRanks + 1]int32{1222988}
+var EarthboundLevel = [EarthboundRanks + 1]int{1}
+var EarthboundCastTime = [EarthboundRanks + 1]int32{0}
+var EarthboundCooldownMS = [EarthboundRanks + 1]int32{0}
+var EarthboundManaCost = [EarthboundRanks + 1]float64{0}
+var EarthboundSpellCoeff = [EarthboundRanks + 1]float64{0.4286}
+var EarthboundBaseDamage = [EarthboundRanks + 1][]float64{{100, 100}}
 
 // unconfirmed: Earthbound coefficient derived from the vanilla convention (rank 0)
 
-// Elemental Precision: 1 rank(s), from build 1.60.1.69893.
-const ElementalPrecisionRanks = 1
+// Elemental Precision: ranks 0 present, from build 1.60.1.69893.
+const ElementalPrecisionRanks = 0
 
-var ElementalPrecisionSpellId = [ElementalPrecisionRanks + 1]int32{0, 29438}
-var ElementalPrecisionLevel = [ElementalPrecisionRanks + 1]int{0, 1}
-var ElementalPrecisionCastTime = [ElementalPrecisionRanks + 1]int32{0, 0}
-var ElementalPrecisionCooldownMS = [ElementalPrecisionRanks + 1]int32{0, 0}
-var ElementalPrecisionManaCost = [ElementalPrecisionRanks + 1]float64{0, 0}
-var ElementalPrecisionSpellCoeff = [ElementalPrecisionRanks + 1]float64{0, 0.4286}
-var ElementalPrecisionBaseDamage = [ElementalPrecisionRanks + 1][]float64{{0, 0}, {6, 6}}
+var ElementalPrecisionSpellId = [ElementalPrecisionRanks + 1]int32{29438}
+var ElementalPrecisionLevel = [ElementalPrecisionRanks + 1]int{1}
+var ElementalPrecisionCastTime = [ElementalPrecisionRanks + 1]int32{0}
+var ElementalPrecisionCooldownMS = [ElementalPrecisionRanks + 1]int32{0}
+var ElementalPrecisionManaCost = [ElementalPrecisionRanks + 1]float64{0}
+var ElementalPrecisionSpellCoeff = [ElementalPrecisionRanks + 1]float64{0.4286}
+var ElementalPrecisionBaseDamage = [ElementalPrecisionRanks + 1][]float64{{6, 6}}
 
 // unconfirmed: Elemental Precision coefficient derived from the vanilla convention (rank 0)
 
-// Elemental Vulnerability: 1 rank(s), from build 1.60.1.69893.
-const ElementalVulnerabilityRanks = 1
+// Elemental Vulnerability: ranks 0 present, from build 1.60.1.69893.
+const ElementalVulnerabilityRanks = 0
 
-var ElementalVulnerabilitySpellId = [ElementalVulnerabilityRanks + 1]int32{0, 28772}
-var ElementalVulnerabilityLevel = [ElementalVulnerabilityRanks + 1]int{0, 60}
-var ElementalVulnerabilityCastTime = [ElementalVulnerabilityRanks + 1]int32{0, 0}
-var ElementalVulnerabilityCooldownMS = [ElementalVulnerabilityRanks + 1]int32{0, 0}
-var ElementalVulnerabilityManaCost = [ElementalVulnerabilityRanks + 1]float64{0, 0}
-var ElementalVulnerabilitySpellCoeff = [ElementalVulnerabilityRanks + 1]float64{0, 2}
-var ElementalVulnerabilityBaseDamage = [ElementalVulnerabilityRanks + 1][]float64{{0, 0}, {200, 200}}
+var ElementalVulnerabilitySpellId = [ElementalVulnerabilityRanks + 1]int32{28772}
+var ElementalVulnerabilityLevel = [ElementalVulnerabilityRanks + 1]int{60}
+var ElementalVulnerabilityCastTime = [ElementalVulnerabilityRanks + 1]int32{0}
+var ElementalVulnerabilityCooldownMS = [ElementalVulnerabilityRanks + 1]int32{0}
+var ElementalVulnerabilityManaCost = [ElementalVulnerabilityRanks + 1]float64{0}
+var ElementalVulnerabilitySpellCoeff = [ElementalVulnerabilityRanks + 1]float64{2}
+var ElementalVulnerabilityBaseDamage = [ElementalVulnerabilityRanks + 1][]float64{{200, 200}}
 
 // unconfirmed: Elemental Vulnerability coefficient derived from the vanilla convention (rank 0)
 
-// Elune's Fires: 1 rank(s), from build 1.60.1.69893.
-const EluneSFiresRanks = 1
+// Elune's Fires: ranks 0 present, from build 1.60.1.69893.
+const EluneSFiresRanks = 0
 
-var EluneSFiresSpellId = [EluneSFiresRanks + 1]int32{0, 415762}
-var EluneSFiresLevel = [EluneSFiresRanks + 1]int{0, 1}
-var EluneSFiresCastTime = [EluneSFiresRanks + 1]int32{0, 0}
-var EluneSFiresCooldownMS = [EluneSFiresRanks + 1]int32{0, 0}
-var EluneSFiresManaCost = [EluneSFiresRanks + 1]float64{0, 0}
-var EluneSFiresSpellCoeff = [EluneSFiresRanks + 1]float64{0, 0.4286}
-var EluneSFiresBaseDamage = [EluneSFiresRanks + 1][]float64{{0, 0}, {414719, 414719}}
+var EluneSFiresSpellId = [EluneSFiresRanks + 1]int32{415762}
+var EluneSFiresLevel = [EluneSFiresRanks + 1]int{1}
+var EluneSFiresCastTime = [EluneSFiresRanks + 1]int32{0}
+var EluneSFiresCooldownMS = [EluneSFiresRanks + 1]int32{0}
+var EluneSFiresManaCost = [EluneSFiresRanks + 1]float64{0}
+var EluneSFiresSpellCoeff = [EluneSFiresRanks + 1]float64{0.4286}
+var EluneSFiresBaseDamage = [EluneSFiresRanks + 1][]float64{{414719, 414719}}
 
 // unconfirmed: Elune's Fires coefficient derived from the vanilla convention (rank 0)
 
-// Enigma Blizzard Bonus: 1 rank(s), from build 1.60.1.69893.
-const EnigmaBlizzardBonusRanks = 1
+// Enigma Blizzard Bonus: ranks 0 present, from build 1.60.1.69893.
+const EnigmaBlizzardBonusRanks = 0
 
-var EnigmaBlizzardBonusSpellId = [EnigmaBlizzardBonusRanks + 1]int32{0, 26127}
-var EnigmaBlizzardBonusLevel = [EnigmaBlizzardBonusRanks + 1]int{0, 0}
-var EnigmaBlizzardBonusCastTime = [EnigmaBlizzardBonusRanks + 1]int32{0, 0}
-var EnigmaBlizzardBonusCooldownMS = [EnigmaBlizzardBonusRanks + 1]int32{0, 0}
-var EnigmaBlizzardBonusManaCost = [EnigmaBlizzardBonusRanks + 1]float64{0, 0}
-var EnigmaBlizzardBonusSpellCoeff = [EnigmaBlizzardBonusRanks + 1]float64{0, 1}
-var EnigmaBlizzardBonusBaseDamage = [EnigmaBlizzardBonusRanks + 1][]float64{{0, 0}, {100, 100}}
+var EnigmaBlizzardBonusSpellId = [EnigmaBlizzardBonusRanks + 1]int32{26127}
+var EnigmaBlizzardBonusLevel = [EnigmaBlizzardBonusRanks + 1]int{0}
+var EnigmaBlizzardBonusCastTime = [EnigmaBlizzardBonusRanks + 1]int32{0}
+var EnigmaBlizzardBonusCooldownMS = [EnigmaBlizzardBonusRanks + 1]int32{0}
+var EnigmaBlizzardBonusManaCost = [EnigmaBlizzardBonusRanks + 1]float64{0}
+var EnigmaBlizzardBonusSpellCoeff = [EnigmaBlizzardBonusRanks + 1]float64{1}
+var EnigmaBlizzardBonusBaseDamage = [EnigmaBlizzardBonusRanks + 1][]float64{{100, 100}}
 
-// Enigma Resist Bonus: 1 rank(s), from build 1.60.1.69893.
-const EnigmaResistBonusRanks = 1
+// Enigma Resist Bonus: ranks 0 present, from build 1.60.1.69893.
+const EnigmaResistBonusRanks = 0
 
-var EnigmaResistBonusSpellId = [EnigmaResistBonusRanks + 1]int32{0, 26128}
-var EnigmaResistBonusLevel = [EnigmaResistBonusRanks + 1]int{0, 0}
-var EnigmaResistBonusCastTime = [EnigmaResistBonusRanks + 1]int32{0, 0}
-var EnigmaResistBonusCooldownMS = [EnigmaResistBonusRanks + 1]int32{0, 0}
-var EnigmaResistBonusManaCost = [EnigmaResistBonusRanks + 1]float64{0, 0}
-var EnigmaResistBonusSpellCoeff = [EnigmaResistBonusRanks + 1]float64{0, 0.4286}
-var EnigmaResistBonusBaseDamage = [EnigmaResistBonusRanks + 1][]float64{{0, 0}, {1, 1}}
+var EnigmaResistBonusSpellId = [EnigmaResistBonusRanks + 1]int32{26128}
+var EnigmaResistBonusLevel = [EnigmaResistBonusRanks + 1]int{0}
+var EnigmaResistBonusCastTime = [EnigmaResistBonusRanks + 1]int32{0}
+var EnigmaResistBonusCooldownMS = [EnigmaResistBonusRanks + 1]int32{0}
+var EnigmaResistBonusManaCost = [EnigmaResistBonusRanks + 1]float64{0}
+var EnigmaResistBonusSpellCoeff = [EnigmaResistBonusRanks + 1]float64{0.4286}
+var EnigmaResistBonusBaseDamage = [EnigmaResistBonusRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Enigma Resist Bonus coefficient derived from the vanilla convention (rank 0)
 
-// Enigma's Solitude: 1 rank(s), from build 1.60.1.69893.
-const EnigmaSSolitudeRanks = 1
+// Enigma's Solitude: ranks 0 present, from build 1.60.1.69893.
+const EnigmaSSolitudeRanks = 0
 
-var EnigmaSSolitudeSpellId = [EnigmaSSolitudeRanks + 1]int32{0, 26132}
-var EnigmaSSolitudeLevel = [EnigmaSSolitudeRanks + 1]int{0, 0}
-var EnigmaSSolitudeCastTime = [EnigmaSSolitudeRanks + 1]int32{0, 0}
-var EnigmaSSolitudeCooldownMS = [EnigmaSSolitudeRanks + 1]int32{0, 0}
-var EnigmaSSolitudeManaCost = [EnigmaSSolitudeRanks + 1]float64{0, 0}
-var EnigmaSSolitudeSpellCoeff = [EnigmaSSolitudeRanks + 1]float64{0, 0.5333}
-var EnigmaSSolitudeBaseDamage = [EnigmaSSolitudeRanks + 1][]float64{{0, 0}, {100, 100}}
+var EnigmaSSolitudeSpellId = [EnigmaSSolitudeRanks + 1]int32{26132}
+var EnigmaSSolitudeLevel = [EnigmaSSolitudeRanks + 1]int{0}
+var EnigmaSSolitudeCastTime = [EnigmaSSolitudeRanks + 1]int32{0}
+var EnigmaSSolitudeCooldownMS = [EnigmaSSolitudeRanks + 1]int32{0}
+var EnigmaSSolitudeManaCost = [EnigmaSSolitudeRanks + 1]float64{0}
+var EnigmaSSolitudeSpellCoeff = [EnigmaSSolitudeRanks + 1]float64{0.5333}
+var EnigmaSSolitudeBaseDamage = [EnigmaSSolitudeRanks + 1][]float64{{100, 100}}
 
 // unconfirmed: Enigma's Solitude coefficient derived from the vanilla convention (rank 0)
 
-// Enlightenment: 2 rank(s), from build 1.60.1.69893.
-const EnlightenmentRanks = 2
+// Enlightenment: ranks 0 present, from build 1.60.1.69893.
+const EnlightenmentRanks = 0
 
-var EnlightenmentSpellId = [EnlightenmentRanks + 1]int32{0, 415729, 412324}
-var EnlightenmentLevel = [EnlightenmentRanks + 1]int{0, 1, 1}
-var EnlightenmentCastTime = [EnlightenmentRanks + 1]int32{0, 0, 0}
-var EnlightenmentCooldownMS = [EnlightenmentRanks + 1]int32{0, 0, 0}
-var EnlightenmentManaCost = [EnlightenmentRanks + 1]float64{0, 0, 0}
-var EnlightenmentSpellCoeff = [EnlightenmentRanks + 1]float64{0, 0.4286, 0.4286}
-var EnlightenmentBaseDamage = [EnlightenmentRanks + 1][]float64{{0, 0}, {412324, 412324}, {10, 10}}
+var EnlightenmentSpellId = [EnlightenmentRanks + 1]int32{415729}
+var EnlightenmentLevel = [EnlightenmentRanks + 1]int{1}
+var EnlightenmentCastTime = [EnlightenmentRanks + 1]int32{0}
+var EnlightenmentCooldownMS = [EnlightenmentRanks + 1]int32{0}
+var EnlightenmentManaCost = [EnlightenmentRanks + 1]float64{0}
+var EnlightenmentSpellCoeff = [EnlightenmentRanks + 1]float64{0.4286}
+var EnlightenmentBaseDamage = [EnlightenmentRanks + 1][]float64{{412324, 412324}}
 
-// unconfirmed: Enlightenment coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Enlightenment coefficient derived from the vanilla convention (rank 0)
+// Enlightenment rank 0: kept id 415729 (spell_level 1); dropped 412324 (spell_level 1)
 
-// Eureka!: 1 rank(s), from build 1.60.1.69893.
-const EurekaRanks = 1
+// Eureka!: ranks 0 present, from build 1.60.1.69893.
+const EurekaRanks = 0
 
-var EurekaSpellId = [EurekaRanks + 1]int32{0, 1259817}
-var EurekaLevel = [EurekaRanks + 1]int{0, 1}
-var EurekaCastTime = [EurekaRanks + 1]int32{0, 0}
-var EurekaCooldownMS = [EurekaRanks + 1]int32{0, 120000}
-var EurekaManaCost = [EurekaRanks + 1]float64{0, 0}
-var EurekaSpellCoeff = [EurekaRanks + 1]float64{0, 1}
-var EurekaBaseDamage = [EurekaRanks + 1][]float64{{0, 0}, {-50, -50}}
+var EurekaSpellId = [EurekaRanks + 1]int32{1259817}
+var EurekaLevel = [EurekaRanks + 1]int{1}
+var EurekaCastTime = [EurekaRanks + 1]int32{0}
+var EurekaCooldownMS = [EurekaRanks + 1]int32{120000}
+var EurekaManaCost = [EurekaRanks + 1]float64{0}
+var EurekaSpellCoeff = [EurekaRanks + 1]float64{1}
+var EurekaBaseDamage = [EurekaRanks + 1][]float64{{-50, -50}}
 
 // unconfirmed: Eureka! coefficient derived from the vanilla convention (rank 0)
 
-// Everlasting Affliction: 1 rank(s), from build 1.60.1.69893.
-const EverlastingAfflictionRanks = 1
+// Everlasting Affliction: ranks 0 present, from build 1.60.1.69893.
+const EverlastingAfflictionRanks = 0
 
-var EverlastingAfflictionSpellId = [EverlastingAfflictionRanks + 1]int32{0, 415604}
-var EverlastingAfflictionLevel = [EverlastingAfflictionRanks + 1]int{0, 1}
-var EverlastingAfflictionCastTime = [EverlastingAfflictionRanks + 1]int32{0, 0}
-var EverlastingAfflictionCooldownMS = [EverlastingAfflictionRanks + 1]int32{0, 0}
-var EverlastingAfflictionManaCost = [EverlastingAfflictionRanks + 1]float64{0, 0}
-var EverlastingAfflictionSpellCoeff = [EverlastingAfflictionRanks + 1]float64{0, 0.4286}
-var EverlastingAfflictionBaseDamage = [EverlastingAfflictionRanks + 1][]float64{{0, 0}, {412689, 412689}}
+var EverlastingAfflictionSpellId = [EverlastingAfflictionRanks + 1]int32{415604}
+var EverlastingAfflictionLevel = [EverlastingAfflictionRanks + 1]int{1}
+var EverlastingAfflictionCastTime = [EverlastingAfflictionRanks + 1]int32{0}
+var EverlastingAfflictionCooldownMS = [EverlastingAfflictionRanks + 1]int32{0}
+var EverlastingAfflictionManaCost = [EverlastingAfflictionRanks + 1]float64{0}
+var EverlastingAfflictionSpellCoeff = [EverlastingAfflictionRanks + 1]float64{0.4286}
+var EverlastingAfflictionBaseDamage = [EverlastingAfflictionRanks + 1][]float64{{412689, 412689}}
 
 // unconfirmed: Everlasting Affliction coefficient derived from the vanilla convention (rank 0)
 
-// Evocation: 3 rank(s), from build 1.60.1.69893.
-const EvocationRanks = 3
+// Evocation: ranks 0 present, from build 1.60.1.69893.
+const EvocationRanks = 0
 
-var EvocationSpellId = [EvocationRanks + 1]int32{0, 12051, 456397, 28763}
-var EvocationLevel = [EvocationRanks + 1]int{0, 20, 1, 0}
-var EvocationCastTime = [EvocationRanks + 1]int32{0, 0, 0, 0}
-var EvocationCooldownMS = [EvocationRanks + 1]int32{0, 480000, 0, 0}
-var EvocationManaCost = [EvocationRanks + 1]float64{0, 0, 0, 0}
-var EvocationSpellCoeff = [EvocationRanks + 1]float64{0, 0.5333, 0.5333, 0.4286}
-var EvocationBaseDamage = [EvocationRanks + 1][]float64{{0, 0}, {1500, 1500}, {0, 0}, {-60000, -60000}}
+var EvocationSpellId = [EvocationRanks + 1]int32{12051}
+var EvocationLevel = [EvocationRanks + 1]int{20}
+var EvocationCastTime = [EvocationRanks + 1]int32{0}
+var EvocationCooldownMS = [EvocationRanks + 1]int32{480000}
+var EvocationManaCost = [EvocationRanks + 1]float64{0}
+var EvocationSpellCoeff = [EvocationRanks + 1]float64{0.5333}
+var EvocationBaseDamage = [EvocationRanks + 1][]float64{{1500, 1500}}
 
-// unconfirmed: Evocation coefficient derived from the vanilla convention (rank 0, rank 0, rank 0)
+// unconfirmed: Evocation coefficient derived from the vanilla convention (rank 0)
+// Evocation rank 0: kept id 12051 (spell_level 20); dropped 28763 (spell_level 0), 456397 (spell_level 1)
 
-// Evoker: 1 rank(s), from build 1.60.1.69893.
-const EvokerRanks = 1
+// Evoker: ranks 0 present, from build 1.60.1.69893.
+const EvokerRanks = 0
 
-var EvokerSpellId = [EvokerRanks + 1]int32{0, 1218701}
-var EvokerLevel = [EvokerRanks + 1]int{0, 0}
-var EvokerCastTime = [EvokerRanks + 1]int32{0, 0}
-var EvokerCooldownMS = [EvokerRanks + 1]int32{0, 0}
-var EvokerManaCost = [EvokerRanks + 1]float64{0, 0}
-var EvokerSpellCoeff = [EvokerRanks + 1]float64{0, 1}
-var EvokerBaseDamage = [EvokerRanks + 1][]float64{{0, 0}, {5, 5}}
+var EvokerSpellId = [EvokerRanks + 1]int32{1218701}
+var EvokerLevel = [EvokerRanks + 1]int{0}
+var EvokerCastTime = [EvokerRanks + 1]int32{0}
+var EvokerCooldownMS = [EvokerRanks + 1]int32{0}
+var EvokerManaCost = [EvokerRanks + 1]float64{0}
+var EvokerSpellCoeff = [EvokerRanks + 1]float64{1}
+var EvokerBaseDamage = [EvokerRanks + 1][]float64{{5, 5}}
 
-// Expanded Intellect: 1 rank(s), from build 1.60.1.69893.
-const ExpandedIntellectRanks = 1
+// Expanded Intellect: ranks 0 present, from build 1.60.1.69893.
+const ExpandedIntellectRanks = 0
 
-var ExpandedIntellectSpellId = [ExpandedIntellectRanks + 1]int32{0, 436949}
-var ExpandedIntellectLevel = [ExpandedIntellectRanks + 1]int{0, 0}
-var ExpandedIntellectCastTime = [ExpandedIntellectRanks + 1]int32{0, 0}
-var ExpandedIntellectCooldownMS = [ExpandedIntellectRanks + 1]int32{0, 0}
-var ExpandedIntellectManaCost = [ExpandedIntellectRanks + 1]float64{0, 0}
-var ExpandedIntellectSpellCoeff = [ExpandedIntellectRanks + 1]float64{0, 1}
-var ExpandedIntellectBaseDamage = [ExpandedIntellectRanks + 1][]float64{{0, 0}, {-50, -50}}
+var ExpandedIntellectSpellId = [ExpandedIntellectRanks + 1]int32{436949}
+var ExpandedIntellectLevel = [ExpandedIntellectRanks + 1]int{0}
+var ExpandedIntellectCastTime = [ExpandedIntellectRanks + 1]int32{0}
+var ExpandedIntellectCooldownMS = [ExpandedIntellectRanks + 1]int32{0}
+var ExpandedIntellectManaCost = [ExpandedIntellectRanks + 1]float64{0}
+var ExpandedIntellectSpellCoeff = [ExpandedIntellectRanks + 1]float64{1}
+var ExpandedIntellectBaseDamage = [ExpandedIntellectRanks + 1][]float64{{-50, -50}}
 
-// Eye of the Void: 1 rank(s), from build 1.60.1.69893.
-const EyeOfTheVoidRanks = 1
+// Eye of the Void: ranks 0 present, from build 1.60.1.69893.
+const EyeOfTheVoidRanks = 0
 
-var EyeOfTheVoidSpellId = [EyeOfTheVoidRanks + 1]int32{0, 402846}
-var EyeOfTheVoidLevel = [EyeOfTheVoidRanks + 1]int{0, 1}
-var EyeOfTheVoidCastTime = [EyeOfTheVoidRanks + 1]int32{0, 0}
-var EyeOfTheVoidCooldownMS = [EyeOfTheVoidRanks + 1]int32{0, 0}
-var EyeOfTheVoidManaCost = [EyeOfTheVoidRanks + 1]float64{0, 0}
-var EyeOfTheVoidSpellCoeff = [EyeOfTheVoidRanks + 1]float64{0, 0.4286}
-var EyeOfTheVoidBaseDamage = [EyeOfTheVoidRanks + 1][]float64{{0, 0}, {402789, 402789}}
+var EyeOfTheVoidSpellId = [EyeOfTheVoidRanks + 1]int32{402846}
+var EyeOfTheVoidLevel = [EyeOfTheVoidRanks + 1]int{1}
+var EyeOfTheVoidCastTime = [EyeOfTheVoidRanks + 1]int32{0}
+var EyeOfTheVoidCooldownMS = [EyeOfTheVoidRanks + 1]int32{0}
+var EyeOfTheVoidManaCost = [EyeOfTheVoidRanks + 1]float64{0}
+var EyeOfTheVoidSpellCoeff = [EyeOfTheVoidRanks + 1]float64{0.4286}
+var EyeOfTheVoidBaseDamage = [EyeOfTheVoidRanks + 1][]float64{{402789, 402789}}
 
 // unconfirmed: Eye of the Void coefficient derived from the vanilla convention (rank 0)
 
-// Felfire: 1 rank(s), from build 1.60.1.69893.
-const FelfireRanks = 1
+// Felfire: ranks 0 present, from build 1.60.1.69893.
+const FelfireRanks = 0
 
-var FelfireSpellId = [FelfireRanks + 1]int32{0, 24530}
-var FelfireLevel = [FelfireRanks + 1]int{0, 60}
-var FelfireCastTime = [FelfireRanks + 1]int32{0, 0}
-var FelfireCooldownMS = [FelfireRanks + 1]int32{0, 0}
-var FelfireManaCost = [FelfireRanks + 1]float64{0, 100}
-var FelfireSpellCoeff = [FelfireRanks + 1]float64{0, 1}
-var FelfireBaseDamage = [FelfireRanks + 1][]float64{{0, 0}, {500, 500}}
+var FelfireSpellId = [FelfireRanks + 1]int32{24530}
+var FelfireLevel = [FelfireRanks + 1]int{60}
+var FelfireCastTime = [FelfireRanks + 1]int32{0}
+var FelfireCooldownMS = [FelfireRanks + 1]int32{0}
+var FelfireManaCost = [FelfireRanks + 1]float64{100}
+var FelfireSpellCoeff = [FelfireRanks + 1]float64{1}
+var FelfireBaseDamage = [FelfireRanks + 1][]float64{{500, 500}}
 
-// Felstriker: 1 rank(s), from build 1.60.1.69893.
-const FelstrikerRanks = 1
+// Felstriker: ranks 0 present, from build 1.60.1.69893.
+const FelstrikerRanks = 0
 
-var FelstrikerSpellId = [FelstrikerRanks + 1]int32{0, 16551}
-var FelstrikerLevel = [FelstrikerRanks + 1]int{0, 60}
-var FelstrikerCastTime = [FelstrikerRanks + 1]int32{0, 0}
-var FelstrikerCooldownMS = [FelstrikerRanks + 1]int32{0, 0}
-var FelstrikerManaCost = [FelstrikerRanks + 1]float64{0, 0}
-var FelstrikerSpellCoeff = [FelstrikerRanks + 1]float64{0, 0.2}
-var FelstrikerBaseDamage = [FelstrikerRanks + 1][]float64{{0, 0}, {100, 100}}
+var FelstrikerSpellId = [FelstrikerRanks + 1]int32{16551}
+var FelstrikerLevel = [FelstrikerRanks + 1]int{60}
+var FelstrikerCastTime = [FelstrikerRanks + 1]int32{0}
+var FelstrikerCooldownMS = [FelstrikerRanks + 1]int32{0}
+var FelstrikerManaCost = [FelstrikerRanks + 1]float64{0}
+var FelstrikerSpellCoeff = [FelstrikerRanks + 1]float64{0.2}
+var FelstrikerBaseDamage = [FelstrikerRanks + 1][]float64{{100, 100}}
 
 // unconfirmed: Felstriker coefficient derived from the vanilla convention (rank 0)
 
-// Fingers of Frost: 4 rank(s), from build 1.60.1.69893.
-const FingersOfFrostRanks = 4
+// Fingers of Frost: ranks 0 present, from build 1.60.1.69893.
+const FingersOfFrostRanks = 0
 
-var FingersOfFrostSpellId = [FingersOfFrostRanks + 1]int32{0, 400670, 400669, 401741, 400647}
-var FingersOfFrostLevel = [FingersOfFrostRanks + 1]int{0, 1, 1, 1, 1}
-var FingersOfFrostCastTime = [FingersOfFrostRanks + 1]int32{0, 0, 0, 0, 0}
-var FingersOfFrostCooldownMS = [FingersOfFrostRanks + 1]int32{0, 0, 0, 0, 0}
-var FingersOfFrostManaCost = [FingersOfFrostRanks + 1]float64{0, 0, 0, 0, 0}
-var FingersOfFrostSpellCoeff = [FingersOfFrostRanks + 1]float64{0, 1, 1, 0.4286, 0.4286}
-var FingersOfFrostBaseDamage = [FingersOfFrostRanks + 1][]float64{{0, 0}, {1, 1}, {2, 2}, {400647, 400647}, {2, 2}}
+var FingersOfFrostSpellId = [FingersOfFrostRanks + 1]int32{401741}
+var FingersOfFrostLevel = [FingersOfFrostRanks + 1]int{1}
+var FingersOfFrostCastTime = [FingersOfFrostRanks + 1]int32{0}
+var FingersOfFrostCooldownMS = [FingersOfFrostRanks + 1]int32{0}
+var FingersOfFrostManaCost = [FingersOfFrostRanks + 1]float64{0}
+var FingersOfFrostSpellCoeff = [FingersOfFrostRanks + 1]float64{0.4286}
+var FingersOfFrostBaseDamage = [FingersOfFrostRanks + 1][]float64{{400647, 400647}}
 
-// unconfirmed: Fingers of Frost coefficient derived from the vanilla convention (rank 0, rank 0, rank 0, rank 0)
+// unconfirmed: Fingers of Frost coefficient derived from the vanilla convention (rank 0)
+// Fingers of Frost rank 0: kept id 401741 (spell_level 1); dropped 400647 (spell_level 1), 400669 (spell_level 1), 400670 (spell_level 1)
 
 // skipped: "Fire Blast" already has a hand-written FireBlastRanks elsewhere in this package.
 
-// Fire Damage Check: 1 rank(s), from build 1.60.1.69893.
-const FireDamageCheckRanks = 1
+// Fire Damage Check: ranks 0 present, from build 1.60.1.69893.
+const FireDamageCheckRanks = 0
 
-var FireDamageCheckSpellId = [FireDamageCheckRanks + 1]int32{0, 425225}
-var FireDamageCheckLevel = [FireDamageCheckRanks + 1]int{0, 20}
-var FireDamageCheckCastTime = [FireDamageCheckRanks + 1]int32{0, 0}
-var FireDamageCheckCooldownMS = [FireDamageCheckRanks + 1]int32{0, 5000}
-var FireDamageCheckManaCost = [FireDamageCheckRanks + 1]float64{0, 95}
-var FireDamageCheckSpellCoeff = [FireDamageCheckRanks + 1]float64{0, 0.4286}
-var FireDamageCheckBaseDamage = [FireDamageCheckRanks + 1][]float64{{0, 0}, {3, 3}}
+var FireDamageCheckSpellId = [FireDamageCheckRanks + 1]int32{425225}
+var FireDamageCheckLevel = [FireDamageCheckRanks + 1]int{20}
+var FireDamageCheckCastTime = [FireDamageCheckRanks + 1]int32{0}
+var FireDamageCheckCooldownMS = [FireDamageCheckRanks + 1]int32{5000}
+var FireDamageCheckManaCost = [FireDamageCheckRanks + 1]float64{95}
+var FireDamageCheckSpellCoeff = [FireDamageCheckRanks + 1]float64{0.4286}
+var FireDamageCheckBaseDamage = [FireDamageCheckRanks + 1][]float64{{3, 3}}
 
 // unconfirmed: Fire Damage Check coefficient derived from the vanilla convention (rank 0)
 
-// Fire Power: 1 rank(s), from build 1.60.1.69893.
-const FirePowerRanks = 1
+// Fire Power: ranks 0 present, from build 1.60.1.69893.
+const FirePowerRanks = 0
 
-var FirePowerSpellId = [FirePowerRanks + 1]int32{0, 11124}
-var FirePowerLevel = [FirePowerRanks + 1]int{0, 1}
-var FirePowerCastTime = [FirePowerRanks + 1]int32{0, 0}
-var FirePowerCooldownMS = [FirePowerRanks + 1]int32{0, 0}
-var FirePowerManaCost = [FirePowerRanks + 1]float64{0, 0}
-var FirePowerSpellCoeff = [FirePowerRanks + 1]float64{0, 0.4286}
-var FirePowerBaseDamage = [FirePowerRanks + 1][]float64{{0, 0}, {2, 2}}
+var FirePowerSpellId = [FirePowerRanks + 1]int32{11124}
+var FirePowerLevel = [FirePowerRanks + 1]int{1}
+var FirePowerCastTime = [FirePowerRanks + 1]int32{0}
+var FirePowerCooldownMS = [FirePowerRanks + 1]int32{0}
+var FirePowerManaCost = [FirePowerRanks + 1]float64{0}
+var FirePowerSpellCoeff = [FirePowerRanks + 1]float64{0.4286}
+var FirePowerBaseDamage = [FirePowerRanks + 1][]float64{{2, 2}}
 
 // unconfirmed: Fire Power coefficient derived from the vanilla convention (rank 0)
 
-// Fire Volley: 1 rank(s), from build 1.60.1.69893.
+// Fire Volley: ranks 1 present, from build 1.60.1.69893.
 const FireVolleyRanks = 1
 
 var FireVolleySpellId = [FireVolleyRanks + 1]int32{0, 469055}
@@ -1341,215 +1374,224 @@ var FireVolleyBaseDamage = [FireVolleyRanks + 1][]float64{{0, 0}, {0, 0}}
 
 // unconfirmed: Fire Volley coefficient derived from the vanilla convention (rank 1)
 
-// Fire Vulnerability: 1 rank(s), from build 1.60.1.69893.
-const FireVulnerabilityRanks = 1
+// Fire Vulnerability: ranks 0 present, from build 1.60.1.69893.
+const FireVulnerabilityRanks = 0
 
-var FireVulnerabilitySpellId = [FireVulnerabilityRanks + 1]int32{0, 22959}
-var FireVulnerabilityLevel = [FireVulnerabilityRanks + 1]int{0, 0}
-var FireVulnerabilityCastTime = [FireVulnerabilityRanks + 1]int32{0, 0}
-var FireVulnerabilityCooldownMS = [FireVulnerabilityRanks + 1]int32{0, 0}
-var FireVulnerabilityManaCost = [FireVulnerabilityRanks + 1]float64{0, 0}
-var FireVulnerabilitySpellCoeff = [FireVulnerabilityRanks + 1]float64{0, 2}
-var FireVulnerabilityBaseDamage = [FireVulnerabilityRanks + 1][]float64{{0, 0}, {3, 3}}
+var FireVulnerabilitySpellId = [FireVulnerabilityRanks + 1]int32{22959}
+var FireVulnerabilityLevel = [FireVulnerabilityRanks + 1]int{0}
+var FireVulnerabilityCastTime = [FireVulnerabilityRanks + 1]int32{0}
+var FireVulnerabilityCooldownMS = [FireVulnerabilityRanks + 1]int32{0}
+var FireVulnerabilityManaCost = [FireVulnerabilityRanks + 1]float64{0}
+var FireVulnerabilitySpellCoeff = [FireVulnerabilityRanks + 1]float64{2}
+var FireVulnerabilityBaseDamage = [FireVulnerabilityRanks + 1][]float64{{3, 3}}
 
 // unconfirmed: Fire Vulnerability coefficient derived from the vanilla convention (rank 0)
 
-// Fire Ward: 11 rank(s), from build 1.60.1.69893.
-const FireWardRanks = 11
+// Fire Ward: ranks 0-5 present, from build 1.60.1.69893.
+const FireWardRanks = 5
 
-var FireWardSpellId = [FireWardRanks + 1]int32{0, 15041, 412214, 543, 412218, 8457, 412230, 8458, 412231, 10223, 10225, 412232}
-var FireWardLevel = [FireWardRanks + 1]int{0, 20, 20, 20, 30, 30, 40, 40, 50, 50, 60, 60}
-var FireWardCastTime = [FireWardRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-var FireWardCooldownMS = [FireWardRanks + 1]int32{0, 5000, 30000, 30000, 30000, 30000, 30000, 30000, 30000, 30000, 30000, 30000}
-var FireWardManaCost = [FireWardRanks + 1]float64{0, 95, 85, 85, 135, 135, 195, 195, 255, 255, 320, 320}
-var FireWardSpellCoeff = [FireWardRanks + 1]float64{0, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
-var FireWardBaseDamage = [FireWardRanks + 1][]float64{{0, 0}, {702, 702}, {330, 330}, {162, 162}, {580, 580}, {285, 285}, {940, 940}, {463, 463}, {1350, 1350}, {668, 668}, {913, 913}, {1840, 1840}}
+var FireWardSpellId = [FireWardRanks + 1]int32{15041, 412214, 412218, 412230, 412231, 412232}
+var FireWardLevel = [FireWardRanks + 1]int{20, 20, 30, 40, 50, 60}
+var FireWardCastTime = [FireWardRanks + 1]int32{0, 0, 0, 0, 0, 0}
+var FireWardCooldownMS = [FireWardRanks + 1]int32{5000, 30000, 30000, 30000, 30000, 30000}
+var FireWardManaCost = [FireWardRanks + 1]float64{95, 85, 135, 195, 255, 320}
+var FireWardSpellCoeff = [FireWardRanks + 1]float64{4, 2, 2, 2, 2, 2}
+var FireWardBaseDamage = [FireWardRanks + 1][]float64{{702, 702}, {330, 330}, {580, 580}, {940, 940}, {1350, 1350}, {1840, 1840}}
 
-// unconfirmed: Fire Ward coefficient derived from the vanilla convention (rank 0, rank 1, rank 1, rank 2, rank 2, rank 3, rank 3, rank 4, rank 4, rank 5, rank 5)
+// unconfirmed: Fire Ward coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3, rank 4, rank 5)
+// Fire Ward rank 1: kept id 412214 (spell_level 20); dropped 543 (spell_level 20)
+// Fire Ward rank 2: kept id 412218 (spell_level 30); dropped 8457 (spell_level 30)
+// Fire Ward rank 3: kept id 412230 (spell_level 40); dropped 8458 (spell_level 40)
+// Fire Ward rank 4: kept id 412231 (spell_level 50); dropped 10223 (spell_level 50)
+// Fire Ward rank 5: kept id 412232 (spell_level 60); dropped 10225 (spell_level 60)
 
 // skipped: "Fireball" already has a hand-written FireballRanks elsewhere in this package.
 
 // skipped: "Fireball!" already has a hand-written FireballRanks elsewhere in this package.
 
-// Fireball, Improved DoT: 1 rank(s), from build 1.60.1.69893.
-const FireballImprovedDoTRanks = 1
+// Fireball, Improved DoT: ranks 0 present, from build 1.60.1.69893.
+const FireballImprovedDoTRanks = 0
 
-var FireballImprovedDoTSpellId = [FireballImprovedDoTRanks + 1]int32{0, 21230}
-var FireballImprovedDoTLevel = [FireballImprovedDoTRanks + 1]int{0, 0}
-var FireballImprovedDoTCastTime = [FireballImprovedDoTRanks + 1]int32{0, 0}
-var FireballImprovedDoTCooldownMS = [FireballImprovedDoTRanks + 1]int32{0, 0}
-var FireballImprovedDoTManaCost = [FireballImprovedDoTRanks + 1]float64{0, 0}
-var FireballImprovedDoTSpellCoeff = [FireballImprovedDoTRanks + 1]float64{0, 1}
-var FireballImprovedDoTBaseDamage = [FireballImprovedDoTRanks + 1][]float64{{0, 0}, {24, 24}}
+var FireballImprovedDoTSpellId = [FireballImprovedDoTRanks + 1]int32{21230}
+var FireballImprovedDoTLevel = [FireballImprovedDoTRanks + 1]int{0}
+var FireballImprovedDoTCastTime = [FireballImprovedDoTRanks + 1]int32{0}
+var FireballImprovedDoTCooldownMS = [FireballImprovedDoTRanks + 1]int32{0}
+var FireballImprovedDoTManaCost = [FireballImprovedDoTRanks + 1]float64{0}
+var FireballImprovedDoTSpellCoeff = [FireballImprovedDoTRanks + 1]float64{1}
+var FireballImprovedDoTBaseDamage = [FireballImprovedDoTRanks + 1][]float64{{24, 24}}
 
-// Firebolt: 4 rank(s), from build 1.60.1.69893.
-const FireboltRanks = 4
+// Firebolt: ranks 0 present, from build 1.60.1.69893.
+const FireboltRanks = 0
 
-var FireboltSpellId = [FireboltRanks + 1]int32{0, 18833, 13441, 23267, 461695}
-var FireboltLevel = [FireboltRanks + 1]int{0, 30, 30, 30, 30}
-var FireboltCastTime = [FireboltRanks + 1]int32{0, 0, 0, 0, 0}
-var FireboltCooldownMS = [FireboltRanks + 1]int32{0, 8000, 8000, 8000, 0}
-var FireboltManaCost = [FireboltRanks + 1]float64{0, 80, 80, 80, 80}
-var FireboltSpellCoeff = [FireboltRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 0.4286}
-var FireboltBaseDamage = [FireboltRanks + 1][]float64{{0, 0}, {90, 90}, {60, 60}, {48, 48}, {110, 110}}
+var FireboltSpellId = [FireboltRanks + 1]int32{461695}
+var FireboltLevel = [FireboltRanks + 1]int{30}
+var FireboltCastTime = [FireboltRanks + 1]int32{0}
+var FireboltCooldownMS = [FireboltRanks + 1]int32{0}
+var FireboltManaCost = [FireboltRanks + 1]float64{80}
+var FireboltSpellCoeff = [FireboltRanks + 1]float64{0.4286}
+var FireboltBaseDamage = [FireboltRanks + 1][]float64{{110, 110}}
 
-// unconfirmed: Firebolt coefficient derived from the vanilla convention (rank 0, rank 0, rank 0, rank 0)
+// unconfirmed: Firebolt coefficient derived from the vanilla convention (rank 0)
+// Firebolt rank 0: kept id 461695 (spell_level 30); dropped 13441 (spell_level 30), 18833 (spell_level 30), 23267 (spell_level 30)
 
-// Flagellation: 1 rank(s), from build 1.60.1.69893.
-const FlagellationRanks = 1
+// Flagellation: ranks 0 present, from build 1.60.1.69893.
+const FlagellationRanks = 0
 
-var FlagellationSpellId = [FlagellationRanks + 1]int32{0, 403344}
-var FlagellationLevel = [FlagellationRanks + 1]int{0, 1}
-var FlagellationCastTime = [FlagellationRanks + 1]int32{0, 0}
-var FlagellationCooldownMS = [FlagellationRanks + 1]int32{0, 0}
-var FlagellationManaCost = [FlagellationRanks + 1]float64{0, 0}
-var FlagellationSpellCoeff = [FlagellationRanks + 1]float64{0, 0.4286}
-var FlagellationBaseDamage = [FlagellationRanks + 1][]float64{{0, 0}, {402877, 402877}}
+var FlagellationSpellId = [FlagellationRanks + 1]int32{403344}
+var FlagellationLevel = [FlagellationRanks + 1]int{1}
+var FlagellationCastTime = [FlagellationRanks + 1]int32{0}
+var FlagellationCooldownMS = [FlagellationRanks + 1]int32{0}
+var FlagellationManaCost = [FlagellationRanks + 1]float64{0}
+var FlagellationSpellCoeff = [FlagellationRanks + 1]float64{0.4286}
+var FlagellationBaseDamage = [FlagellationRanks + 1][]float64{{402877, 402877}}
 
 // unconfirmed: Flagellation coefficient derived from the vanilla convention (rank 0)
 
-// Flame Throwing: 1 rank(s), from build 1.60.1.69893.
-const FlameThrowingRanks = 1
+// Flame Throwing: ranks 0 present, from build 1.60.1.69893.
+const FlameThrowingRanks = 0
 
-var FlameThrowingSpellId = [FlameThrowingRanks + 1]int32{0, 11100}
-var FlameThrowingLevel = [FlameThrowingRanks + 1]int{0, 1}
-var FlameThrowingCastTime = [FlameThrowingRanks + 1]int32{0, 0}
-var FlameThrowingCooldownMS = [FlameThrowingRanks + 1]int32{0, 0}
-var FlameThrowingManaCost = [FlameThrowingRanks + 1]float64{0, 0}
-var FlameThrowingSpellCoeff = [FlameThrowingRanks + 1]float64{0, 0.4286}
-var FlameThrowingBaseDamage = [FlameThrowingRanks + 1][]float64{{0, 0}, {6, 6}}
+var FlameThrowingSpellId = [FlameThrowingRanks + 1]int32{11100}
+var FlameThrowingLevel = [FlameThrowingRanks + 1]int{1}
+var FlameThrowingCastTime = [FlameThrowingRanks + 1]int32{0}
+var FlameThrowingCooldownMS = [FlameThrowingRanks + 1]int32{0}
+var FlameThrowingManaCost = [FlameThrowingRanks + 1]float64{0}
+var FlameThrowingSpellCoeff = [FlameThrowingRanks + 1]float64{0.4286}
+var FlameThrowingBaseDamage = [FlameThrowingRanks + 1][]float64{{6, 6}}
 
 // unconfirmed: Flame Throwing coefficient derived from the vanilla convention (rank 0)
 
-// Flame of Hakkar: 1 rank(s), from build 1.60.1.69893.
-const FlameOfHakkarRanks = 1
+// Flame of Hakkar: ranks 0 present, from build 1.60.1.69893.
+const FlameOfHakkarRanks = 0
 
-var FlameOfHakkarSpellId = [FlameOfHakkarRanks + 1]int32{0, 12354}
-var FlameOfHakkarLevel = [FlameOfHakkarRanks + 1]int{0, 50}
-var FlameOfHakkarCastTime = [FlameOfHakkarRanks + 1]int32{0, 0}
-var FlameOfHakkarCooldownMS = [FlameOfHakkarRanks + 1]int32{0, 0}
-var FlameOfHakkarManaCost = [FlameOfHakkarRanks + 1]float64{0, 0}
-var FlameOfHakkarSpellCoeff = [FlameOfHakkarRanks + 1]float64{0, 1}
-var FlameOfHakkarBaseDamage = [FlameOfHakkarRanks + 1][]float64{{0, 0}, {250, 250}}
+var FlameOfHakkarSpellId = [FlameOfHakkarRanks + 1]int32{12354}
+var FlameOfHakkarLevel = [FlameOfHakkarRanks + 1]int{50}
+var FlameOfHakkarCastTime = [FlameOfHakkarRanks + 1]int32{0}
+var FlameOfHakkarCooldownMS = [FlameOfHakkarRanks + 1]int32{0}
+var FlameOfHakkarManaCost = [FlameOfHakkarRanks + 1]float64{0}
+var FlameOfHakkarSpellCoeff = [FlameOfHakkarRanks + 1]float64{1}
+var FlameOfHakkarBaseDamage = [FlameOfHakkarRanks + 1][]float64{{250, 250}}
 
-// Flamebreak: 1 rank(s), from build 1.60.1.69893.
-const FlamebreakRanks = 1
+// Flamebreak: ranks 0 present, from build 1.60.1.69893.
+const FlamebreakRanks = 0
 
-var FlamebreakSpellId = [FlamebreakRanks + 1]int32{0, 16785}
-var FlamebreakLevel = [FlamebreakRanks + 1]int{0, 20}
-var FlamebreakCastTime = [FlamebreakRanks + 1]int32{0, 0}
-var FlamebreakCooldownMS = [FlamebreakRanks + 1]int32{0, 0}
-var FlamebreakManaCost = [FlamebreakRanks + 1]float64{0, 0}
-var FlamebreakSpellCoeff = [FlamebreakRanks + 1]float64{0, 0.4286}
-var FlamebreakBaseDamage = [FlamebreakRanks + 1][]float64{{0, 0}, {1462, 1462}}
+var FlamebreakSpellId = [FlamebreakRanks + 1]int32{16785}
+var FlamebreakLevel = [FlamebreakRanks + 1]int{20}
+var FlamebreakCastTime = [FlamebreakRanks + 1]int32{0}
+var FlamebreakCooldownMS = [FlamebreakRanks + 1]int32{0}
+var FlamebreakManaCost = [FlamebreakRanks + 1]float64{0}
+var FlamebreakSpellCoeff = [FlamebreakRanks + 1]float64{0.4286}
+var FlamebreakBaseDamage = [FlamebreakRanks + 1][]float64{{1462, 1462}}
 
 // unconfirmed: Flamebreak coefficient derived from the vanilla convention (rank 0)
 
-// Flameshocker's Revenge: 1 rank(s), from build 1.60.1.69893.
-const FlameshockerSRevengeRanks = 1
+// Flameshocker's Revenge: ranks 0 present, from build 1.60.1.69893.
+const FlameshockerSRevengeRanks = 0
 
-var FlameshockerSRevengeSpellId = [FlameshockerSRevengeRanks + 1]int32{0, 28323}
-var FlameshockerSRevengeLevel = [FlameshockerSRevengeRanks + 1]int{0, 62}
-var FlameshockerSRevengeCastTime = [FlameshockerSRevengeRanks + 1]int32{0, 0}
-var FlameshockerSRevengeCooldownMS = [FlameshockerSRevengeRanks + 1]int32{0, 0}
-var FlameshockerSRevengeManaCost = [FlameshockerSRevengeRanks + 1]float64{0, 0}
-var FlameshockerSRevengeSpellCoeff = [FlameshockerSRevengeRanks + 1]float64{0, 0.1333}
-var FlameshockerSRevengeBaseDamage = [FlameshockerSRevengeRanks + 1][]float64{{0, 0}, {0, 0}}
+var FlameshockerSRevengeSpellId = [FlameshockerSRevengeRanks + 1]int32{28323}
+var FlameshockerSRevengeLevel = [FlameshockerSRevengeRanks + 1]int{62}
+var FlameshockerSRevengeCastTime = [FlameshockerSRevengeRanks + 1]int32{0}
+var FlameshockerSRevengeCooldownMS = [FlameshockerSRevengeRanks + 1]int32{0}
+var FlameshockerSRevengeManaCost = [FlameshockerSRevengeRanks + 1]float64{0}
+var FlameshockerSRevengeSpellCoeff = [FlameshockerSRevengeRanks + 1]float64{0.1333}
+var FlameshockerSRevengeBaseDamage = [FlameshockerSRevengeRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Flameshocker's Revenge coefficient derived from the vanilla convention (rank 0)
 
 // skipped: "Flamestrike" already has a hand-written FlamestrikeRanks elsewhere in this package.
 
-// Forbidden Magic: 1 rank(s), from build 1.60.1.69893.
-const ForbiddenMagicRanks = 1
+// Forbidden Magic: ranks 0 present, from build 1.60.1.69893.
+const ForbiddenMagicRanks = 0
 
-var ForbiddenMagicSpellId = [ForbiddenMagicRanks + 1]int32{0, 1302360}
-var ForbiddenMagicLevel = [ForbiddenMagicRanks + 1]int{0, 50}
-var ForbiddenMagicCastTime = [ForbiddenMagicRanks + 1]int32{0, 0}
-var ForbiddenMagicCooldownMS = [ForbiddenMagicRanks + 1]int32{0, 0}
-var ForbiddenMagicManaCost = [ForbiddenMagicRanks + 1]float64{0, 0}
-var ForbiddenMagicSpellCoeff = [ForbiddenMagicRanks + 1]float64{0, 0.4286}
-var ForbiddenMagicBaseDamage = [ForbiddenMagicRanks + 1][]float64{{0, 0}, {1, 1}}
+var ForbiddenMagicSpellId = [ForbiddenMagicRanks + 1]int32{1302360}
+var ForbiddenMagicLevel = [ForbiddenMagicRanks + 1]int{50}
+var ForbiddenMagicCastTime = [ForbiddenMagicRanks + 1]int32{0}
+var ForbiddenMagicCooldownMS = [ForbiddenMagicRanks + 1]int32{0}
+var ForbiddenMagicManaCost = [ForbiddenMagicRanks + 1]float64{0}
+var ForbiddenMagicSpellCoeff = [ForbiddenMagicRanks + 1]float64{0.4286}
+var ForbiddenMagicBaseDamage = [ForbiddenMagicRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Forbidden Magic coefficient derived from the vanilla convention (rank 0)
 
-// Freezing Claw: 2 rank(s), from build 1.60.1.69893.
-const FreezingClawRanks = 2
+// Freezing Claw: ranks 0 present, from build 1.60.1.69893.
+const FreezingClawRanks = 0
 
-var FreezingClawSpellId = [FreezingClawRanks + 1]int32{0, 17011, 17010}
-var FreezingClawLevel = [FreezingClawRanks + 1]int{0, 1, 1}
-var FreezingClawCastTime = [FreezingClawRanks + 1]int32{0, 0, 0}
-var FreezingClawCooldownMS = [FreezingClawRanks + 1]int32{0, 0, 0}
-var FreezingClawManaCost = [FreezingClawRanks + 1]float64{0, 0, 0}
-var FreezingClawSpellCoeff = [FreezingClawRanks + 1]float64{0, 0.3333, 1}
-var FreezingClawBaseDamage = [FreezingClawRanks + 1][]float64{{0, 0}, {1, 1}, {0, 0}}
+var FreezingClawSpellId = [FreezingClawRanks + 1]int32{17011}
+var FreezingClawLevel = [FreezingClawRanks + 1]int{1}
+var FreezingClawCastTime = [FreezingClawRanks + 1]int32{0}
+var FreezingClawCooldownMS = [FreezingClawRanks + 1]int32{0}
+var FreezingClawManaCost = [FreezingClawRanks + 1]float64{0}
+var FreezingClawSpellCoeff = [FreezingClawRanks + 1]float64{0.3333}
+var FreezingClawBaseDamage = [FreezingClawRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Freezing Claw coefficient derived from the vanilla convention (rank 0)
+// Freezing Claw rank 0: kept id 17011 (spell_level 1); dropped 17010 (spell_level 1)
 
-// Frenzied Assault: 1 rank(s), from build 1.60.1.69893.
-const FrenziedAssaultRanks = 1
+// Frenzied Assault: ranks 0 present, from build 1.60.1.69893.
+const FrenziedAssaultRanks = 0
 
-var FrenziedAssaultSpellId = [FrenziedAssaultRanks + 1]int32{0, 425442}
-var FrenziedAssaultLevel = [FrenziedAssaultRanks + 1]int{0, 1}
-var FrenziedAssaultCastTime = [FrenziedAssaultRanks + 1]int32{0, 0}
-var FrenziedAssaultCooldownMS = [FrenziedAssaultRanks + 1]int32{0, 0}
-var FrenziedAssaultManaCost = [FrenziedAssaultRanks + 1]float64{0, 0}
-var FrenziedAssaultSpellCoeff = [FrenziedAssaultRanks + 1]float64{0, 0.4286}
-var FrenziedAssaultBaseDamage = [FrenziedAssaultRanks + 1][]float64{{0, 0}, {425412, 425412}}
+var FrenziedAssaultSpellId = [FrenziedAssaultRanks + 1]int32{425442}
+var FrenziedAssaultLevel = [FrenziedAssaultRanks + 1]int{1}
+var FrenziedAssaultCastTime = [FrenziedAssaultRanks + 1]int32{0}
+var FrenziedAssaultCooldownMS = [FrenziedAssaultRanks + 1]int32{0}
+var FrenziedAssaultManaCost = [FrenziedAssaultRanks + 1]float64{0}
+var FrenziedAssaultSpellCoeff = [FrenziedAssaultRanks + 1]float64{0.4286}
+var FrenziedAssaultBaseDamage = [FrenziedAssaultRanks + 1][]float64{{425412, 425412}}
 
 // unconfirmed: Frenzied Assault coefficient derived from the vanilla convention (rank 0)
 
-// Friendly Nukes: 1 rank(s), from build 1.60.1.69893.
-const FriendlyNukesRanks = 1
+// Friendly Nukes: ranks 0 present, from build 1.60.1.69893.
+const FriendlyNukesRanks = 0
 
-var FriendlyNukesSpellId = [FriendlyNukesRanks + 1]int32{0, 21879}
-var FriendlyNukesLevel = [FriendlyNukesRanks + 1]int{0, 0}
-var FriendlyNukesCastTime = [FriendlyNukesRanks + 1]int32{0, 0}
-var FriendlyNukesCooldownMS = [FriendlyNukesRanks + 1]int32{0, 0}
-var FriendlyNukesManaCost = [FriendlyNukesRanks + 1]float64{0, 0}
-var FriendlyNukesSpellCoeff = [FriendlyNukesRanks + 1]float64{0, 1}
-var FriendlyNukesBaseDamage = [FriendlyNukesRanks + 1][]float64{{0, 0}, {-10000, -10000}}
+var FriendlyNukesSpellId = [FriendlyNukesRanks + 1]int32{21879}
+var FriendlyNukesLevel = [FriendlyNukesRanks + 1]int{0}
+var FriendlyNukesCastTime = [FriendlyNukesRanks + 1]int32{0}
+var FriendlyNukesCooldownMS = [FriendlyNukesRanks + 1]int32{0}
+var FriendlyNukesManaCost = [FriendlyNukesRanks + 1]float64{0}
+var FriendlyNukesSpellCoeff = [FriendlyNukesRanks + 1]float64{1}
+var FriendlyNukesBaseDamage = [FriendlyNukesRanks + 1][]float64{{-10000, -10000}}
 
-// Frost Armor: 7 rank(s), from build 1.60.1.69893.
-const FrostArmorRanks = 7
+// Frost Armor: ranks 0-3 present, from build 1.60.1.69893.
+const FrostArmorRanks = 3
 
-var FrostArmorSpellId = [FrostArmorRanks + 1]int32{0, 18100, 12544, 12556, 15784, 168, 7300, 7301}
-var FrostArmorLevel = [FrostArmorRanks + 1]int{0, 1, 1, 1, 1, 1, 10, 20}
-var FrostArmorCastTime = [FrostArmorRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
-var FrostArmorCooldownMS = [FrostArmorRanks + 1]int32{0, 10000, 10000, 0, 0, 0, 0, 0}
-var FrostArmorManaCost = [FrostArmorRanks + 1]float64{0, 10, 10, 0, 10, 60, 110, 170}
-var FrostArmorSpellCoeff = [FrostArmorRanks + 1]float64{0, 120, 120, 0.4286, 4, 120, 120, 120}
-var FrostArmorBaseDamage = [FrostArmorRanks + 1][]float64{{0, 0}, {12, 12}, {12, 12}, {12, 12}, {12, 12}, {30, 30}, {110, 110}, {200, 200}}
+var FrostArmorSpellId = [FrostArmorRanks + 1]int32{18100, 168, 7300, 7301}
+var FrostArmorLevel = [FrostArmorRanks + 1]int{1, 1, 10, 20}
+var FrostArmorCastTime = [FrostArmorRanks + 1]int32{0, 0, 0, 0}
+var FrostArmorCooldownMS = [FrostArmorRanks + 1]int32{10000, 0, 0, 0}
+var FrostArmorManaCost = [FrostArmorRanks + 1]float64{10, 60, 110, 170}
+var FrostArmorSpellCoeff = [FrostArmorRanks + 1]float64{120, 120, 120, 120}
+var FrostArmorBaseDamage = [FrostArmorRanks + 1][]float64{{12, 12}, {30, 30}, {110, 110}, {200, 200}}
 
-// unconfirmed: Frost Armor coefficient derived from the vanilla convention (rank 0, rank 0, rank 0, rank 0, rank 1, rank 2, rank 3)
+// unconfirmed: Frost Armor coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3)
+// Frost Armor rank 0: kept id 18100 (spell_level 1); dropped 12544 (spell_level 1), 12556 (spell_level 1), 15784 (spell_level 1)
 
-// Frost Blast: 6 rank(s), from build 1.60.1.69893.
-const FrostBlastRanks = 6
+// Frost Blast: ranks 0 present, from build 1.60.1.69893.
+const FrostBlastRanks = 0
 
-var FrostBlastSpellId = [FrostBlastRanks + 1]int32{0, 20869, 18085, 16407, 14105, 19260, 18398}
-var FrostBlastLevel = [FrostBlastRanks + 1]int{0, 30, 30, 30, 30, 30, 30}
-var FrostBlastCastTime = [FrostBlastRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
-var FrostBlastCooldownMS = [FrostBlastRanks + 1]int32{0, 8000, 8000, 8000, 8000, 8000, 8000}
-var FrostBlastManaCost = [FrostBlastRanks + 1]float64{0, 80, 80, 80, 80, 80, 80}
-var FrostBlastSpellCoeff = [FrostBlastRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286}
-var FrostBlastBaseDamage = [FrostBlastRanks + 1][]float64{{0, 0}, {75, 75}, {65, 65}, {30, 30}, {85, 85}, {205, 205}, {45, 45}}
+var FrostBlastSpellId = [FrostBlastRanks + 1]int32{20869}
+var FrostBlastLevel = [FrostBlastRanks + 1]int{30}
+var FrostBlastCastTime = [FrostBlastRanks + 1]int32{0}
+var FrostBlastCooldownMS = [FrostBlastRanks + 1]int32{8000}
+var FrostBlastManaCost = [FrostBlastRanks + 1]float64{80}
+var FrostBlastSpellCoeff = [FrostBlastRanks + 1]float64{0.4286}
+var FrostBlastBaseDamage = [FrostBlastRanks + 1][]float64{{75, 75}}
 
-// unconfirmed: Frost Blast coefficient derived from the vanilla convention (rank 0, rank 0, rank 0, rank 0, rank 0, rank 0)
+// unconfirmed: Frost Blast coefficient derived from the vanilla convention (rank 0)
+// Frost Blast rank 0: kept id 20869 (spell_level 30); dropped 14105 (spell_level 30), 16407 (spell_level 30), 18085 (spell_level 30), 18398 (spell_level 30), 19260 (spell_level 30)
 
-// Frost Channeling: 1 rank(s), from build 1.60.1.69893.
-const FrostChannelingRanks = 1
+// Frost Channeling: ranks 0 present, from build 1.60.1.69893.
+const FrostChannelingRanks = 0
 
-var FrostChannelingSpellId = [FrostChannelingRanks + 1]int32{0, 11160}
-var FrostChannelingLevel = [FrostChannelingRanks + 1]int{0, 1}
-var FrostChannelingCastTime = [FrostChannelingRanks + 1]int32{0, 0}
-var FrostChannelingCooldownMS = [FrostChannelingRanks + 1]int32{0, 0}
-var FrostChannelingManaCost = [FrostChannelingRanks + 1]float64{0, 0}
-var FrostChannelingSpellCoeff = [FrostChannelingRanks + 1]float64{0, 0.4286}
-var FrostChannelingBaseDamage = [FrostChannelingRanks + 1][]float64{{0, 0}, {-15, -15}}
+var FrostChannelingSpellId = [FrostChannelingRanks + 1]int32{11160}
+var FrostChannelingLevel = [FrostChannelingRanks + 1]int{1}
+var FrostChannelingCastTime = [FrostChannelingRanks + 1]int32{0}
+var FrostChannelingCooldownMS = [FrostChannelingRanks + 1]int32{0}
+var FrostChannelingManaCost = [FrostChannelingRanks + 1]float64{0}
+var FrostChannelingSpellCoeff = [FrostChannelingRanks + 1]float64{0.4286}
+var FrostChannelingBaseDamage = [FrostChannelingRanks + 1][]float64{{-15, -15}}
 
 // unconfirmed: Frost Channeling coefficient derived from the vanilla convention (rank 0)
 
-// Frost Nova: 4 rank(s), from build 1.60.1.69893.
+// Frost Nova: ranks 1-4 present, from build 1.60.1.69893.
 const FrostNovaRanks = 4
 
 var FrostNovaSpellId = [FrostNovaRanks + 1]int32{0, 122, 865, 6131, 10230}
@@ -1560,18 +1602,18 @@ var FrostNovaManaCost = [FrostNovaRanks + 1]float64{0, 55, 85, 115, 145}
 var FrostNovaSpellCoeff = [FrostNovaRanks + 1]float64{0, 0.029, 0.029, 0.029, 0.029}
 var FrostNovaBaseDamage = [FrostNovaRanks + 1][]float64{{0, 0}, {20, 20}, {34, 34}, {53, 53}, {73, 73}}
 
-// Frost Potency: 1 rank(s), from build 1.60.1.69893.
-const FrostPotencyRanks = 1
+// Frost Potency: ranks 0 present, from build 1.60.1.69893.
+const FrostPotencyRanks = 0
 
-var FrostPotencySpellId = [FrostPotencyRanks + 1]int32{0, 468512}
-var FrostPotencyLevel = [FrostPotencyRanks + 1]int{0, 0}
-var FrostPotencyCastTime = [FrostPotencyRanks + 1]int32{0, 0}
-var FrostPotencyCooldownMS = [FrostPotencyRanks + 1]int32{0, 0}
-var FrostPotencyManaCost = [FrostPotencyRanks + 1]float64{0, 0}
-var FrostPotencySpellCoeff = [FrostPotencyRanks + 1]float64{0, 1}
-var FrostPotencyBaseDamage = [FrostPotencyRanks + 1][]float64{{0, 0}, {5, 5}}
+var FrostPotencySpellId = [FrostPotencyRanks + 1]int32{468512}
+var FrostPotencyLevel = [FrostPotencyRanks + 1]int{0}
+var FrostPotencyCastTime = [FrostPotencyRanks + 1]int32{0}
+var FrostPotencyCooldownMS = [FrostPotencyRanks + 1]int32{0}
+var FrostPotencyManaCost = [FrostPotencyRanks + 1]float64{0}
+var FrostPotencySpellCoeff = [FrostPotencyRanks + 1]float64{1}
+var FrostPotencyBaseDamage = [FrostPotencyRanks + 1][]float64{{5, 5}}
 
-// Frost Volley: 1 rank(s), from build 1.60.1.69893.
+// Frost Volley: ranks 1 present, from build 1.60.1.69893.
 const FrostVolleyRanks = 1
 
 var FrostVolleySpellId = [FrostVolleyRanks + 1]int32{0, 469056}
@@ -1584,461 +1626,471 @@ var FrostVolleyBaseDamage = [FrostVolleyRanks + 1][]float64{{0, 0}, {0, 0}}
 
 // unconfirmed: Frost Volley coefficient derived from the vanilla convention (rank 1)
 
-// Frost Ward: 11 rank(s), from build 1.60.1.69893.
-const FrostWardRanks = 11
+// Frost Ward: ranks 0-5 present, from build 1.60.1.69893.
+const FrostWardRanks = 5
 
-var FrostWardSpellId = [FrostWardRanks + 1]int32{0, 15044, 412202, 6143, 412205, 8461, 412207, 8462, 412209, 10177, 28609, 412210}
-var FrostWardLevel = [FrostWardRanks + 1]int{0, 20, 22, 22, 32, 32, 42, 42, 52, 52, 60, 60}
-var FrostWardCastTime = [FrostWardRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-var FrostWardCooldownMS = [FrostWardRanks + 1]int32{0, 5000, 30000, 30000, 30000, 30000, 30000, 30000, 30000, 30000, 30000, 30000}
-var FrostWardManaCost = [FrostWardRanks + 1]float64{0, 95, 85, 85, 135, 135, 195, 195, 255, 255, 320, 320}
-var FrostWardSpellCoeff = [FrostWardRanks + 1]float64{0, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
-var FrostWardBaseDamage = [FrostWardRanks + 1][]float64{{0, 0}, {702, 702}, {330, 330}, {162, 162}, {580, 580}, {284, 284}, {940, 940}, {463, 463}, {1350, 1350}, {668, 668}, {913, 913}, {1840, 1840}}
+var FrostWardSpellId = [FrostWardRanks + 1]int32{15044, 412202, 412205, 412207, 412209, 412210}
+var FrostWardLevel = [FrostWardRanks + 1]int{20, 22, 32, 42, 52, 60}
+var FrostWardCastTime = [FrostWardRanks + 1]int32{0, 0, 0, 0, 0, 0}
+var FrostWardCooldownMS = [FrostWardRanks + 1]int32{5000, 30000, 30000, 30000, 30000, 30000}
+var FrostWardManaCost = [FrostWardRanks + 1]float64{95, 85, 135, 195, 255, 320}
+var FrostWardSpellCoeff = [FrostWardRanks + 1]float64{4, 2, 2, 2, 2, 2}
+var FrostWardBaseDamage = [FrostWardRanks + 1][]float64{{702, 702}, {330, 330}, {580, 580}, {940, 940}, {1350, 1350}, {1840, 1840}}
 
-// unconfirmed: Frost Ward coefficient derived from the vanilla convention (rank 0, rank 1, rank 1, rank 2, rank 2, rank 3, rank 3, rank 4, rank 4, rank 5, rank 5)
+// unconfirmed: Frost Ward coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3, rank 4, rank 5)
+// Frost Ward rank 1: kept id 412202 (spell_level 22); dropped 6143 (spell_level 22)
+// Frost Ward rank 2: kept id 412205 (spell_level 32); dropped 8461 (spell_level 32)
+// Frost Ward rank 3: kept id 412207 (spell_level 42); dropped 8462 (spell_level 42)
+// Frost Ward rank 4: kept id 412209 (spell_level 52); dropped 10177 (spell_level 52)
+// Frost Ward rank 5: kept id 412210 (spell_level 60); dropped 28609 (spell_level 60)
 
-// Frost Warding: 1 rank(s), from build 1.60.1.69893.
-const FrostWardingRanks = 1
+// Frost Warding: ranks 0 present, from build 1.60.1.69893.
+const FrostWardingRanks = 0
 
-var FrostWardingSpellId = [FrostWardingRanks + 1]int32{0, 11189}
-var FrostWardingLevel = [FrostWardingRanks + 1]int{0, 1}
-var FrostWardingCastTime = [FrostWardingRanks + 1]int32{0, 0}
-var FrostWardingCooldownMS = [FrostWardingRanks + 1]int32{0, 0}
-var FrostWardingManaCost = [FrostWardingRanks + 1]float64{0, 0}
-var FrostWardingSpellCoeff = [FrostWardingRanks + 1]float64{0, 0.4286}
-var FrostWardingBaseDamage = [FrostWardingRanks + 1][]float64{{0, 0}, {15, 15}}
+var FrostWardingSpellId = [FrostWardingRanks + 1]int32{11189}
+var FrostWardingLevel = [FrostWardingRanks + 1]int{1}
+var FrostWardingCastTime = [FrostWardingRanks + 1]int32{0}
+var FrostWardingCooldownMS = [FrostWardingRanks + 1]int32{0}
+var FrostWardingManaCost = [FrostWardingRanks + 1]float64{0}
+var FrostWardingSpellCoeff = [FrostWardingRanks + 1]float64{0.4286}
+var FrostWardingBaseDamage = [FrostWardingRanks + 1][]float64{{15, 15}}
 
 // unconfirmed: Frost Warding coefficient derived from the vanilla convention (rank 0)
 
-// Frostbite: 1 rank(s), from build 1.60.1.69893.
-const FrostbiteRanks = 1
+// Frostbite: ranks 0 present, from build 1.60.1.69893.
+const FrostbiteRanks = 0
 
-var FrostbiteSpellId = [FrostbiteRanks + 1]int32{0, 11071}
-var FrostbiteLevel = [FrostbiteRanks + 1]int{0, 1}
-var FrostbiteCastTime = [FrostbiteRanks + 1]int32{0, 0}
-var FrostbiteCooldownMS = [FrostbiteRanks + 1]int32{0, 0}
-var FrostbiteManaCost = [FrostbiteRanks + 1]float64{0, 0}
-var FrostbiteSpellCoeff = [FrostbiteRanks + 1]float64{0, 0.4286}
-var FrostbiteBaseDamage = [FrostbiteRanks + 1][]float64{{0, 0}, {15, 15}}
+var FrostbiteSpellId = [FrostbiteRanks + 1]int32{11071}
+var FrostbiteLevel = [FrostbiteRanks + 1]int{1}
+var FrostbiteCastTime = [FrostbiteRanks + 1]int32{0}
+var FrostbiteCooldownMS = [FrostbiteRanks + 1]int32{0}
+var FrostbiteManaCost = [FrostbiteRanks + 1]float64{0}
+var FrostbiteSpellCoeff = [FrostbiteRanks + 1]float64{0.4286}
+var FrostbiteBaseDamage = [FrostbiteRanks + 1][]float64{{15, 15}}
 
 // unconfirmed: Frostbite coefficient derived from the vanilla convention (rank 0)
 
 // skipped: "Frostbolt" already has a hand-written FrostboltRanks elsewhere in this package.
 
-// Frostbolt, Improved: 1 rank(s), from build 1.60.1.69893.
-const FrostboltImprovedRanks = 1
+// Frostbolt, Improved: ranks 0 present, from build 1.60.1.69893.
+const FrostboltImprovedRanks = 0
 
-var FrostboltImprovedSpellId = [FrostboltImprovedRanks + 1]int32{0, 21229}
-var FrostboltImprovedLevel = [FrostboltImprovedRanks + 1]int{0, 0}
-var FrostboltImprovedCastTime = [FrostboltImprovedRanks + 1]int32{0, 0}
-var FrostboltImprovedCooldownMS = [FrostboltImprovedRanks + 1]int32{0, 0}
-var FrostboltImprovedManaCost = [FrostboltImprovedRanks + 1]float64{0, 0}
-var FrostboltImprovedSpellCoeff = [FrostboltImprovedRanks + 1]float64{0, 1}
-var FrostboltImprovedBaseDamage = [FrostboltImprovedRanks + 1][]float64{{0, 0}, {45, 45}}
+var FrostboltImprovedSpellId = [FrostboltImprovedRanks + 1]int32{21229}
+var FrostboltImprovedLevel = [FrostboltImprovedRanks + 1]int{0}
+var FrostboltImprovedCastTime = [FrostboltImprovedRanks + 1]int32{0}
+var FrostboltImprovedCooldownMS = [FrostboltImprovedRanks + 1]int32{0}
+var FrostboltImprovedManaCost = [FrostboltImprovedRanks + 1]float64{0}
+var FrostboltImprovedSpellCoeff = [FrostboltImprovedRanks + 1]float64{1}
+var FrostboltImprovedBaseDamage = [FrostboltImprovedRanks + 1][]float64{{45, 45}}
 
-// Frostburn: 1 rank(s), from build 1.60.1.69893.
-const FrostburnRanks = 1
+// Frostburn: ranks 0 present, from build 1.60.1.69893.
+const FrostburnRanks = 0
 
-var FrostburnSpellId = [FrostburnRanks + 1]int32{0, 1300130}
-var FrostburnLevel = [FrostburnRanks + 1]int{0, 21}
-var FrostburnCastTime = [FrostburnRanks + 1]int32{0, 0}
-var FrostburnCooldownMS = [FrostburnRanks + 1]int32{0, 0}
-var FrostburnManaCost = [FrostburnRanks + 1]float64{0, 0}
-var FrostburnSpellCoeff = [FrostburnRanks + 1]float64{0, 0.4286}
-var FrostburnBaseDamage = [FrostburnRanks + 1][]float64{{0, 0}, {98, 98}}
+var FrostburnSpellId = [FrostburnRanks + 1]int32{1300130}
+var FrostburnLevel = [FrostburnRanks + 1]int{21}
+var FrostburnCastTime = [FrostburnRanks + 1]int32{0}
+var FrostburnCooldownMS = [FrostburnRanks + 1]int32{0}
+var FrostburnManaCost = [FrostburnRanks + 1]float64{0}
+var FrostburnSpellCoeff = [FrostburnRanks + 1]float64{0.4286}
+var FrostburnBaseDamage = [FrostburnRanks + 1][]float64{{98, 98}}
 
 // unconfirmed: Frostburn coefficient derived from the vanilla convention (rank 0)
 
-// Frostfire Bolt: 4 rank(s), from build 1.60.1.69893.
-const FrostfireBoltRanks = 4
+// Frostfire Bolt: ranks 0-3 present, from build 1.60.1.69893.
+const FrostfireBoltRanks = 3
 
-var FrostfireBoltSpellId = [FrostfireBoltRanks + 1]int32{0, 401735, 401502, 1237312, 1237313}
-var FrostfireBoltLevel = [FrostfireBoltRanks + 1]int{0, 1, 40, 50, 60}
-var FrostfireBoltCastTime = [FrostfireBoltRanks + 1]int32{0, 0, 3000, 3000, 3000}
-var FrostfireBoltCooldownMS = [FrostfireBoltRanks + 1]int32{0, 0, 0, 0, 0}
-var FrostfireBoltManaCost = [FrostfireBoltRanks + 1]float64{0, 0, 205, 285, 370}
-var FrostfireBoltSpellCoeff = [FrostfireBoltRanks + 1]float64{0, 0.4286, 0.814, 0.814, 0.814}
-var FrostfireBoltBaseDamage = [FrostfireBoltRanks + 1][]float64{{0, 0}, {401502, 401502}, {100, 100}, {182, 182}, {292, 292}}
+var FrostfireBoltSpellId = [FrostfireBoltRanks + 1]int32{401735, 401502, 1237312, 1237313}
+var FrostfireBoltLevel = [FrostfireBoltRanks + 1]int{1, 40, 50, 60}
+var FrostfireBoltCastTime = [FrostfireBoltRanks + 1]int32{0, 3000, 3000, 3000}
+var FrostfireBoltCooldownMS = [FrostfireBoltRanks + 1]int32{0, 0, 0, 0}
+var FrostfireBoltManaCost = [FrostfireBoltRanks + 1]float64{0, 205, 285, 370}
+var FrostfireBoltSpellCoeff = [FrostfireBoltRanks + 1]float64{0.4286, 0.814, 0.814, 0.814}
+var FrostfireBoltBaseDamage = [FrostfireBoltRanks + 1][]float64{{401502, 401502}, {100, 100}, {182, 182}, {292, 292}}
 
 // unconfirmed: Frostfire Bolt coefficient derived from the vanilla convention (rank 0)
 
-// Frosty Zap: 1 rank(s), from build 1.60.1.69893.
-const FrostyZapRanks = 1
+// Frosty Zap: ranks 0 present, from build 1.60.1.69893.
+const FrostyZapRanks = 0
 
-var FrostyZapSpellId = [FrostyZapRanks + 1]int32{0, 24392}
-var FrostyZapLevel = [FrostyZapRanks + 1]int{0, 0}
-var FrostyZapCastTime = [FrostyZapRanks + 1]int32{0, 0}
-var FrostyZapCooldownMS = [FrostyZapRanks + 1]int32{0, 0}
-var FrostyZapManaCost = [FrostyZapRanks + 1]float64{0, 0}
-var FrostyZapSpellCoeff = [FrostyZapRanks + 1]float64{0, 1}
-var FrostyZapBaseDamage = [FrostyZapRanks + 1][]float64{{0, 0}, {6, 6}}
+var FrostyZapSpellId = [FrostyZapRanks + 1]int32{24392}
+var FrostyZapLevel = [FrostyZapRanks + 1]int{0}
+var FrostyZapCastTime = [FrostyZapRanks + 1]int32{0}
+var FrostyZapCooldownMS = [FrostyZapRanks + 1]int32{0}
+var FrostyZapManaCost = [FrostyZapRanks + 1]float64{0}
+var FrostyZapSpellCoeff = [FrostyZapRanks + 1]float64{1}
+var FrostyZapBaseDamage = [FrostyZapRanks + 1][]float64{{6, 6}}
 
-// Frozen Orb: 6 rank(s), from build 1.60.1.69893.
-const FrozenOrbRanks = 6
+// Frozen Orb: ranks 0 present, from build 1.60.1.69893.
+const FrozenOrbRanks = 0
 
-var FrozenOrbSpellId = [FrozenOrbRanks + 1]int32{0, 440804, 460651, 440859, 440802, 440813, 440809}
-var FrozenOrbLevel = [FrozenOrbRanks + 1]int{0, 1, 1, 1, 1, 1, 1}
-var FrozenOrbCastTime = [FrozenOrbRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
-var FrozenOrbCooldownMS = [FrozenOrbRanks + 1]int32{0, 0, 0, 0, 60000, 0, 0}
-var FrozenOrbManaCost = [FrozenOrbRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
-var FrozenOrbSpellCoeff = [FrozenOrbRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 1.0667, 0.4286, 0.129}
-var FrozenOrbBaseDamage = [FrozenOrbRanks + 1][]float64{{0, 0}, {100, 100}, {-30, -30}, {440802, 440802}, {1, 1}, {-90, -90}, {90, 90}}
+var FrozenOrbSpellId = [FrozenOrbRanks + 1]int32{460651}
+var FrozenOrbLevel = [FrozenOrbRanks + 1]int{1}
+var FrozenOrbCastTime = [FrozenOrbRanks + 1]int32{0}
+var FrozenOrbCooldownMS = [FrozenOrbRanks + 1]int32{0}
+var FrozenOrbManaCost = [FrozenOrbRanks + 1]float64{0}
+var FrozenOrbSpellCoeff = [FrozenOrbRanks + 1]float64{0.4286}
+var FrozenOrbBaseDamage = [FrozenOrbRanks + 1][]float64{{-30, -30}}
 
-// unconfirmed: Frozen Orb coefficient derived from the vanilla convention (rank 0, rank 0, rank 0, rank 0, rank 0)
+// unconfirmed: Frozen Orb coefficient derived from the vanilla convention (rank 0)
+// Frozen Orb rank 0: kept id 460651 (spell_level 1); dropped 440802 (spell_level 1), 440804 (spell_level 1), 440809 (spell_level 1), 440813 (spell_level 1), 440859 (spell_level 1)
 
-// Furious Thunder: 1 rank(s), from build 1.60.1.69893.
-const FuriousThunderRanks = 1
+// Furious Thunder: ranks 0 present, from build 1.60.1.69893.
+const FuriousThunderRanks = 0
 
-var FuriousThunderSpellId = [FuriousThunderRanks + 1]int32{0, 403356}
-var FuriousThunderLevel = [FuriousThunderRanks + 1]int{0, 1}
-var FuriousThunderCastTime = [FuriousThunderRanks + 1]int32{0, 0}
-var FuriousThunderCooldownMS = [FuriousThunderRanks + 1]int32{0, 0}
-var FuriousThunderManaCost = [FuriousThunderRanks + 1]float64{0, 0}
-var FuriousThunderSpellCoeff = [FuriousThunderRanks + 1]float64{0, 0.4286}
-var FuriousThunderBaseDamage = [FuriousThunderRanks + 1][]float64{{0, 0}, {403219, 403219}}
+var FuriousThunderSpellId = [FuriousThunderRanks + 1]int32{403356}
+var FuriousThunderLevel = [FuriousThunderRanks + 1]int{1}
+var FuriousThunderCastTime = [FuriousThunderRanks + 1]int32{0}
+var FuriousThunderCooldownMS = [FuriousThunderRanks + 1]int32{0}
+var FuriousThunderManaCost = [FuriousThunderRanks + 1]float64{0}
+var FuriousThunderSpellCoeff = [FuriousThunderRanks + 1]float64{0.4286}
+var FuriousThunderBaseDamage = [FuriousThunderRanks + 1][]float64{{403219, 403219}}
 
 // unconfirmed: Furious Thunder coefficient derived from the vanilla convention (rank 0)
 
-// Fury of Ragnaros: 1 rank(s), from build 1.60.1.69893.
-const FuryOfRagnarosRanks = 1
+// Fury of Ragnaros: ranks 0 present, from build 1.60.1.69893.
+const FuryOfRagnarosRanks = 0
 
-var FuryOfRagnarosSpellId = [FuryOfRagnarosRanks + 1]int32{0, 15288}
-var FuryOfRagnarosLevel = [FuryOfRagnarosRanks + 1]int{0, 52}
-var FuryOfRagnarosCastTime = [FuryOfRagnarosRanks + 1]int32{0, 0}
-var FuryOfRagnarosCooldownMS = [FuryOfRagnarosRanks + 1]int32{0, 0}
-var FuryOfRagnarosManaCost = [FuryOfRagnarosRanks + 1]float64{0, 90}
-var FuryOfRagnarosSpellCoeff = [FuryOfRagnarosRanks + 1]float64{0, 120}
-var FuryOfRagnarosBaseDamage = [FuryOfRagnarosRanks + 1][]float64{{0, 0}, {25, 25}}
+var FuryOfRagnarosSpellId = [FuryOfRagnarosRanks + 1]int32{15288}
+var FuryOfRagnarosLevel = [FuryOfRagnarosRanks + 1]int{52}
+var FuryOfRagnarosCastTime = [FuryOfRagnarosRanks + 1]int32{0}
+var FuryOfRagnarosCooldownMS = [FuryOfRagnarosRanks + 1]int32{0}
+var FuryOfRagnarosManaCost = [FuryOfRagnarosRanks + 1]float64{90}
+var FuryOfRagnarosSpellCoeff = [FuryOfRagnarosRanks + 1]float64{120}
+var FuryOfRagnarosBaseDamage = [FuryOfRagnarosRanks + 1][]float64{{25, 25}}
 
 // unconfirmed: Fury of Ragnaros coefficient derived from the vanilla convention (rank 0)
 
-// Fury of Stormrage: 1 rank(s), from build 1.60.1.69893.
-const FuryOfStormrageRanks = 1
+// Fury of Stormrage: ranks 0 present, from build 1.60.1.69893.
+const FuryOfStormrageRanks = 0
 
-var FuryOfStormrageSpellId = [FuryOfStormrageRanks + 1]int32{0, 409832}
-var FuryOfStormrageLevel = [FuryOfStormrageRanks + 1]int{0, 1}
-var FuryOfStormrageCastTime = [FuryOfStormrageRanks + 1]int32{0, 0}
-var FuryOfStormrageCooldownMS = [FuryOfStormrageRanks + 1]int32{0, 0}
-var FuryOfStormrageManaCost = [FuryOfStormrageRanks + 1]float64{0, 0}
-var FuryOfStormrageSpellCoeff = [FuryOfStormrageRanks + 1]float64{0, 0.4286}
-var FuryOfStormrageBaseDamage = [FuryOfStormrageRanks + 1][]float64{{0, 0}, {414799, 414799}}
+var FuryOfStormrageSpellId = [FuryOfStormrageRanks + 1]int32{409832}
+var FuryOfStormrageLevel = [FuryOfStormrageRanks + 1]int{1}
+var FuryOfStormrageCastTime = [FuryOfStormrageRanks + 1]int32{0}
+var FuryOfStormrageCooldownMS = [FuryOfStormrageRanks + 1]int32{0}
+var FuryOfStormrageManaCost = [FuryOfStormrageRanks + 1]float64{0}
+var FuryOfStormrageSpellCoeff = [FuryOfStormrageRanks + 1]float64{0.4286}
+var FuryOfStormrageBaseDamage = [FuryOfStormrageRanks + 1][]float64{{414799, 414799}}
 
 // unconfirmed: Fury of Stormrage coefficient derived from the vanilla convention (rank 0)
 
-// Glaciate: 2 rank(s), from build 1.60.1.69893.
-const GlaciateRanks = 2
+// Glaciate: ranks 0 present, from build 1.60.1.69893.
+const GlaciateRanks = 0
 
-var GlaciateSpellId = [GlaciateRanks + 1]int32{0, 1218345, 1218352}
-var GlaciateLevel = [GlaciateRanks + 1]int{0, 60, 1}
-var GlaciateCastTime = [GlaciateRanks + 1]int32{0, 0, 0}
-var GlaciateCooldownMS = [GlaciateRanks + 1]int32{0, 0, 0}
-var GlaciateManaCost = [GlaciateRanks + 1]float64{0, 0, 0}
-var GlaciateSpellCoeff = [GlaciateRanks + 1]float64{0, 1, 0.4286}
-var GlaciateBaseDamage = [GlaciateRanks + 1][]float64{{0, 0}, {20, 20}, {0, 0}}
+var GlaciateSpellId = [GlaciateRanks + 1]int32{1218345}
+var GlaciateLevel = [GlaciateRanks + 1]int{60}
+var GlaciateCastTime = [GlaciateRanks + 1]int32{0}
+var GlaciateCooldownMS = [GlaciateRanks + 1]int32{0}
+var GlaciateManaCost = [GlaciateRanks + 1]float64{0}
+var GlaciateSpellCoeff = [GlaciateRanks + 1]float64{1}
+var GlaciateBaseDamage = [GlaciateRanks + 1][]float64{{20, 20}}
 
-// unconfirmed: Glaciate coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Glaciate coefficient derived from the vanilla convention (rank 0)
+// Glaciate rank 0: kept id 1218345 (spell_level 60); dropped 1218352 (spell_level 1)
 
-// Gladiator Stance: 1 rank(s), from build 1.60.1.69893.
-const GladiatorStanceRanks = 1
+// Gladiator Stance: ranks 0 present, from build 1.60.1.69893.
+const GladiatorStanceRanks = 0
 
-var GladiatorStanceSpellId = [GladiatorStanceRanks + 1]int32{0, 415598}
-var GladiatorStanceLevel = [GladiatorStanceRanks + 1]int{0, 1}
-var GladiatorStanceCastTime = [GladiatorStanceRanks + 1]int32{0, 0}
-var GladiatorStanceCooldownMS = [GladiatorStanceRanks + 1]int32{0, 0}
-var GladiatorStanceManaCost = [GladiatorStanceRanks + 1]float64{0, 0}
-var GladiatorStanceSpellCoeff = [GladiatorStanceRanks + 1]float64{0, 0.4286}
-var GladiatorStanceBaseDamage = [GladiatorStanceRanks + 1][]float64{{0, 0}, {412513, 412513}}
+var GladiatorStanceSpellId = [GladiatorStanceRanks + 1]int32{415598}
+var GladiatorStanceLevel = [GladiatorStanceRanks + 1]int{1}
+var GladiatorStanceCastTime = [GladiatorStanceRanks + 1]int32{0}
+var GladiatorStanceCooldownMS = [GladiatorStanceRanks + 1]int32{0}
+var GladiatorStanceManaCost = [GladiatorStanceRanks + 1]float64{0}
+var GladiatorStanceSpellCoeff = [GladiatorStanceRanks + 1]float64{0.4286}
+var GladiatorStanceBaseDamage = [GladiatorStanceRanks + 1][]float64{{412513, 412513}}
 
 // unconfirmed: Gladiator Stance coefficient derived from the vanilla convention (rank 0)
 
-// Greater Ghost Wolf: 1 rank(s), from build 1.60.1.69893.
-const GreaterGhostWolfRanks = 1
+// Greater Ghost Wolf: ranks 0 present, from build 1.60.1.69893.
+const GreaterGhostWolfRanks = 0
 
-var GreaterGhostWolfSpellId = [GreaterGhostWolfRanks + 1]int32{0, 415813}
-var GreaterGhostWolfLevel = [GreaterGhostWolfRanks + 1]int{0, 1}
-var GreaterGhostWolfCastTime = [GreaterGhostWolfRanks + 1]int32{0, 0}
-var GreaterGhostWolfCooldownMS = [GreaterGhostWolfRanks + 1]int32{0, 0}
-var GreaterGhostWolfManaCost = [GreaterGhostWolfRanks + 1]float64{0, 0}
-var GreaterGhostWolfSpellCoeff = [GreaterGhostWolfRanks + 1]float64{0, 0.4286}
-var GreaterGhostWolfBaseDamage = [GreaterGhostWolfRanks + 1][]float64{{0, 0}, {415233, 415233}}
+var GreaterGhostWolfSpellId = [GreaterGhostWolfRanks + 1]int32{415813}
+var GreaterGhostWolfLevel = [GreaterGhostWolfRanks + 1]int{1}
+var GreaterGhostWolfCastTime = [GreaterGhostWolfRanks + 1]int32{0}
+var GreaterGhostWolfCooldownMS = [GreaterGhostWolfRanks + 1]int32{0}
+var GreaterGhostWolfManaCost = [GreaterGhostWolfRanks + 1]float64{0}
+var GreaterGhostWolfSpellCoeff = [GreaterGhostWolfRanks + 1]float64{0.4286}
+var GreaterGhostWolfBaseDamage = [GreaterGhostWolfRanks + 1][]float64{{415233, 415233}}
 
 // unconfirmed: Greater Ghost Wolf coefficient derived from the vanilla convention (rank 0)
 
-// Greater Invisibility: 2 rank(s), from build 1.60.1.69893.
-const GreaterInvisibilityRanks = 2
+// Greater Invisibility: ranks 0 present, from build 1.60.1.69893.
+const GreaterInvisibilityRanks = 0
 
-var GreaterInvisibilitySpellId = [GreaterInvisibilityRanks + 1]int32{0, 16380, 10228}
-var GreaterInvisibilityLevel = [GreaterInvisibilityRanks + 1]int{0, 1, 99}
-var GreaterInvisibilityCastTime = [GreaterInvisibilityRanks + 1]int32{0, 0, 3000}
-var GreaterInvisibilityCooldownMS = [GreaterInvisibilityRanks + 1]int32{0, 0, 0}
-var GreaterInvisibilityManaCost = [GreaterInvisibilityRanks + 1]float64{0, 0, 300}
-var GreaterInvisibilitySpellCoeff = [GreaterInvisibilityRanks + 1]float64{0, 1, 8}
-var GreaterInvisibilityBaseDamage = [GreaterInvisibilityRanks + 1][]float64{{0, 0}, {300, 300}, {300, 300}}
+var GreaterInvisibilitySpellId = [GreaterInvisibilityRanks + 1]int32{10228}
+var GreaterInvisibilityLevel = [GreaterInvisibilityRanks + 1]int{99}
+var GreaterInvisibilityCastTime = [GreaterInvisibilityRanks + 1]int32{3000}
+var GreaterInvisibilityCooldownMS = [GreaterInvisibilityRanks + 1]int32{0}
+var GreaterInvisibilityManaCost = [GreaterInvisibilityRanks + 1]float64{300}
+var GreaterInvisibilitySpellCoeff = [GreaterInvisibilityRanks + 1]float64{8}
+var GreaterInvisibilityBaseDamage = [GreaterInvisibilityRanks + 1][]float64{{300, 300}}
 
 // unconfirmed: Greater Invisibility coefficient derived from the vanilla convention (rank 0)
+// Greater Invisibility rank 0: kept id 10228 (spell_level 99); dropped 16380 (spell_level 1)
 
-// Gun Axe Shot: 1 rank(s), from build 1.60.1.69893.
-const GunAxeShotRanks = 1
+// Gun Axe Shot: ranks 0 present, from build 1.60.1.69893.
+const GunAxeShotRanks = 0
 
-var GunAxeShotSpellId = [GunAxeShotRanks + 1]int32{0, 446106}
-var GunAxeShotLevel = [GunAxeShotRanks + 1]int{0, 53}
-var GunAxeShotCastTime = [GunAxeShotRanks + 1]int32{0, 0}
-var GunAxeShotCooldownMS = [GunAxeShotRanks + 1]int32{0, 0}
-var GunAxeShotManaCost = [GunAxeShotRanks + 1]float64{0, 0}
-var GunAxeShotSpellCoeff = [GunAxeShotRanks + 1]float64{0, 0.6667}
-var GunAxeShotBaseDamage = [GunAxeShotRanks + 1][]float64{{0, 0}, {140, 140}}
+var GunAxeShotSpellId = [GunAxeShotRanks + 1]int32{446106}
+var GunAxeShotLevel = [GunAxeShotRanks + 1]int{53}
+var GunAxeShotCastTime = [GunAxeShotRanks + 1]int32{0}
+var GunAxeShotCooldownMS = [GunAxeShotRanks + 1]int32{0}
+var GunAxeShotManaCost = [GunAxeShotRanks + 1]float64{0}
+var GunAxeShotSpellCoeff = [GunAxeShotRanks + 1]float64{0.6667}
+var GunAxeShotBaseDamage = [GunAxeShotRanks + 1][]float64{{140, 140}}
 
 // unconfirmed: Gun Axe Shot coefficient derived from the vanilla convention (rank 0)
 
-// Hallow's End Fright: 2 rank(s), from build 1.60.1.69893.
-const HallowSEndFrightRanks = 2
+// Hallow's End Fright: ranks 0 present, from build 1.60.1.69893.
+const HallowSEndFrightRanks = 0
 
-var HallowSEndFrightSpellId = [HallowSEndFrightRanks + 1]int32{0, 25022, 25023}
-var HallowSEndFrightLevel = [HallowSEndFrightRanks + 1]int{0, 1, 10}
-var HallowSEndFrightCastTime = [HallowSEndFrightRanks + 1]int32{0, 0, 0}
-var HallowSEndFrightCooldownMS = [HallowSEndFrightRanks + 1]int32{0, 0, 0}
-var HallowSEndFrightManaCost = [HallowSEndFrightRanks + 1]float64{0, 0, 0}
-var HallowSEndFrightSpellCoeff = [HallowSEndFrightRanks + 1]float64{0, 0.4, 120}
-var HallowSEndFrightBaseDamage = [HallowSEndFrightRanks + 1][]float64{{0, 0}, {-25, -25}, {0, 0}}
+var HallowSEndFrightSpellId = [HallowSEndFrightRanks + 1]int32{25023}
+var HallowSEndFrightLevel = [HallowSEndFrightRanks + 1]int{10}
+var HallowSEndFrightCastTime = [HallowSEndFrightRanks + 1]int32{0}
+var HallowSEndFrightCooldownMS = [HallowSEndFrightRanks + 1]int32{0}
+var HallowSEndFrightManaCost = [HallowSEndFrightRanks + 1]float64{0}
+var HallowSEndFrightSpellCoeff = [HallowSEndFrightRanks + 1]float64{120}
+var HallowSEndFrightBaseDamage = [HallowSEndFrightRanks + 1][]float64{{0, 0}}
 
-// unconfirmed: Hallow's End Fright coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Hallow's End Fright coefficient derived from the vanilla convention (rank 0)
+// Hallow's End Fright rank 0: kept id 25023 (spell_level 10); dropped 25022 (spell_level 1)
 
-// Hand of Thaurissan: 1 rank(s), from build 1.60.1.69893.
-const HandOfThaurissanRanks = 1
+// Hand of Thaurissan: ranks 0 present, from build 1.60.1.69893.
+const HandOfThaurissanRanks = 0
 
-var HandOfThaurissanSpellId = [HandOfThaurissanRanks + 1]int32{0, 17492}
-var HandOfThaurissanLevel = [HandOfThaurissanRanks + 1]int{0, 20}
-var HandOfThaurissanCastTime = [HandOfThaurissanRanks + 1]int32{0, 0}
-var HandOfThaurissanCooldownMS = [HandOfThaurissanRanks + 1]int32{0, 0}
-var HandOfThaurissanManaCost = [HandOfThaurissanRanks + 1]float64{0, 0}
-var HandOfThaurissanSpellCoeff = [HandOfThaurissanRanks + 1]float64{0, 0.3333}
-var HandOfThaurissanBaseDamage = [HandOfThaurissanRanks + 1][]float64{{0, 0}, {1403, 1403}}
+var HandOfThaurissanSpellId = [HandOfThaurissanRanks + 1]int32{17492}
+var HandOfThaurissanLevel = [HandOfThaurissanRanks + 1]int{20}
+var HandOfThaurissanCastTime = [HandOfThaurissanRanks + 1]int32{0}
+var HandOfThaurissanCooldownMS = [HandOfThaurissanRanks + 1]int32{0}
+var HandOfThaurissanManaCost = [HandOfThaurissanRanks + 1]float64{0}
+var HandOfThaurissanSpellCoeff = [HandOfThaurissanRanks + 1]float64{0.3333}
+var HandOfThaurissanBaseDamage = [HandOfThaurissanRanks + 1][]float64{{1403, 1403}}
 
 // unconfirmed: Hand of Thaurissan coefficient derived from the vanilla convention (rank 0)
 
-// Healing Rain: 1 rank(s), from build 1.60.1.69893.
-const HealingRainRanks = 1
+// Healing Rain: ranks 0 present, from build 1.60.1.69893.
+const HealingRainRanks = 0
 
-var HealingRainSpellId = [HealingRainRanks + 1]int32{0, 415714}
-var HealingRainLevel = [HealingRainRanks + 1]int{0, 1}
-var HealingRainCastTime = [HealingRainRanks + 1]int32{0, 0}
-var HealingRainCooldownMS = [HealingRainRanks + 1]int32{0, 0}
-var HealingRainManaCost = [HealingRainRanks + 1]float64{0, 0}
-var HealingRainSpellCoeff = [HealingRainRanks + 1]float64{0, 0.4286}
-var HealingRainBaseDamage = [HealingRainRanks + 1][]float64{{0, 0}, {415236, 415236}}
+var HealingRainSpellId = [HealingRainRanks + 1]int32{415714}
+var HealingRainLevel = [HealingRainRanks + 1]int{1}
+var HealingRainCastTime = [HealingRainRanks + 1]int32{0}
+var HealingRainCooldownMS = [HealingRainRanks + 1]int32{0}
+var HealingRainManaCost = [HealingRainRanks + 1]float64{0}
+var HealingRainSpellCoeff = [HealingRainRanks + 1]float64{0.4286}
+var HealingRainBaseDamage = [HealingRainRanks + 1][]float64{{415236, 415236}}
 
 // unconfirmed: Healing Rain coefficient derived from the vanilla convention (rank 0)
 
-// Holiday - Lunar Teleport Cap: Darnassus: 1 rank(s), from build 1.60.1.69893.
-const HolidayLunarTeleportCapDarnassusRanks = 1
+// Holiday - Lunar Teleport Cap: Darnassus: ranks 0 present, from build 1.60.1.69893.
+const HolidayLunarTeleportCapDarnassusRanks = 0
 
-var HolidayLunarTeleportCapDarnassusSpellId = [HolidayLunarTeleportCapDarnassusRanks + 1]int32{0, 26409}
-var HolidayLunarTeleportCapDarnassusLevel = [HolidayLunarTeleportCapDarnassusRanks + 1]int{0, 10}
-var HolidayLunarTeleportCapDarnassusCastTime = [HolidayLunarTeleportCapDarnassusRanks + 1]int32{0, 0}
-var HolidayLunarTeleportCapDarnassusCooldownMS = [HolidayLunarTeleportCapDarnassusRanks + 1]int32{0, 0}
-var HolidayLunarTeleportCapDarnassusManaCost = [HolidayLunarTeleportCapDarnassusRanks + 1]float64{0, 0}
-var HolidayLunarTeleportCapDarnassusSpellCoeff = [HolidayLunarTeleportCapDarnassusRanks + 1]float64{0, 1}
-var HolidayLunarTeleportCapDarnassusBaseDamage = [HolidayLunarTeleportCapDarnassusRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayLunarTeleportCapDarnassusSpellId = [HolidayLunarTeleportCapDarnassusRanks + 1]int32{26409}
+var HolidayLunarTeleportCapDarnassusLevel = [HolidayLunarTeleportCapDarnassusRanks + 1]int{10}
+var HolidayLunarTeleportCapDarnassusCastTime = [HolidayLunarTeleportCapDarnassusRanks + 1]int32{0}
+var HolidayLunarTeleportCapDarnassusCooldownMS = [HolidayLunarTeleportCapDarnassusRanks + 1]int32{0}
+var HolidayLunarTeleportCapDarnassusManaCost = [HolidayLunarTeleportCapDarnassusRanks + 1]float64{0}
+var HolidayLunarTeleportCapDarnassusSpellCoeff = [HolidayLunarTeleportCapDarnassusRanks + 1]float64{1}
+var HolidayLunarTeleportCapDarnassusBaseDamage = [HolidayLunarTeleportCapDarnassusRanks + 1][]float64{{0, 0}}
 
-// Holiday - Lunar Teleport Cap: Ironforge: 1 rank(s), from build 1.60.1.69893.
-const HolidayLunarTeleportCapIronforgeRanks = 1
+// Holiday - Lunar Teleport Cap: Ironforge: ranks 0 present, from build 1.60.1.69893.
+const HolidayLunarTeleportCapIronforgeRanks = 0
 
-var HolidayLunarTeleportCapIronforgeSpellId = [HolidayLunarTeleportCapIronforgeRanks + 1]int32{0, 26408}
-var HolidayLunarTeleportCapIronforgeLevel = [HolidayLunarTeleportCapIronforgeRanks + 1]int{0, 10}
-var HolidayLunarTeleportCapIronforgeCastTime = [HolidayLunarTeleportCapIronforgeRanks + 1]int32{0, 0}
-var HolidayLunarTeleportCapIronforgeCooldownMS = [HolidayLunarTeleportCapIronforgeRanks + 1]int32{0, 0}
-var HolidayLunarTeleportCapIronforgeManaCost = [HolidayLunarTeleportCapIronforgeRanks + 1]float64{0, 0}
-var HolidayLunarTeleportCapIronforgeSpellCoeff = [HolidayLunarTeleportCapIronforgeRanks + 1]float64{0, 1}
-var HolidayLunarTeleportCapIronforgeBaseDamage = [HolidayLunarTeleportCapIronforgeRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayLunarTeleportCapIronforgeSpellId = [HolidayLunarTeleportCapIronforgeRanks + 1]int32{26408}
+var HolidayLunarTeleportCapIronforgeLevel = [HolidayLunarTeleportCapIronforgeRanks + 1]int{10}
+var HolidayLunarTeleportCapIronforgeCastTime = [HolidayLunarTeleportCapIronforgeRanks + 1]int32{0}
+var HolidayLunarTeleportCapIronforgeCooldownMS = [HolidayLunarTeleportCapIronforgeRanks + 1]int32{0}
+var HolidayLunarTeleportCapIronforgeManaCost = [HolidayLunarTeleportCapIronforgeRanks + 1]float64{0}
+var HolidayLunarTeleportCapIronforgeSpellCoeff = [HolidayLunarTeleportCapIronforgeRanks + 1]float64{1}
+var HolidayLunarTeleportCapIronforgeBaseDamage = [HolidayLunarTeleportCapIronforgeRanks + 1][]float64{{0, 0}}
 
-// Holiday - Lunar Teleport Cap: Orgrimmar: 1 rank(s), from build 1.60.1.69893.
-const HolidayLunarTeleportCapOrgrimmarRanks = 1
+// Holiday - Lunar Teleport Cap: Orgrimmar: ranks 0 present, from build 1.60.1.69893.
+const HolidayLunarTeleportCapOrgrimmarRanks = 0
 
-var HolidayLunarTeleportCapOrgrimmarSpellId = [HolidayLunarTeleportCapOrgrimmarRanks + 1]int32{0, 26414}
-var HolidayLunarTeleportCapOrgrimmarLevel = [HolidayLunarTeleportCapOrgrimmarRanks + 1]int{0, 10}
-var HolidayLunarTeleportCapOrgrimmarCastTime = [HolidayLunarTeleportCapOrgrimmarRanks + 1]int32{0, 0}
-var HolidayLunarTeleportCapOrgrimmarCooldownMS = [HolidayLunarTeleportCapOrgrimmarRanks + 1]int32{0, 0}
-var HolidayLunarTeleportCapOrgrimmarManaCost = [HolidayLunarTeleportCapOrgrimmarRanks + 1]float64{0, 0}
-var HolidayLunarTeleportCapOrgrimmarSpellCoeff = [HolidayLunarTeleportCapOrgrimmarRanks + 1]float64{0, 1}
-var HolidayLunarTeleportCapOrgrimmarBaseDamage = [HolidayLunarTeleportCapOrgrimmarRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayLunarTeleportCapOrgrimmarSpellId = [HolidayLunarTeleportCapOrgrimmarRanks + 1]int32{26414}
+var HolidayLunarTeleportCapOrgrimmarLevel = [HolidayLunarTeleportCapOrgrimmarRanks + 1]int{10}
+var HolidayLunarTeleportCapOrgrimmarCastTime = [HolidayLunarTeleportCapOrgrimmarRanks + 1]int32{0}
+var HolidayLunarTeleportCapOrgrimmarCooldownMS = [HolidayLunarTeleportCapOrgrimmarRanks + 1]int32{0}
+var HolidayLunarTeleportCapOrgrimmarManaCost = [HolidayLunarTeleportCapOrgrimmarRanks + 1]float64{0}
+var HolidayLunarTeleportCapOrgrimmarSpellCoeff = [HolidayLunarTeleportCapOrgrimmarRanks + 1]float64{1}
+var HolidayLunarTeleportCapOrgrimmarBaseDamage = [HolidayLunarTeleportCapOrgrimmarRanks + 1][]float64{{0, 0}}
 
-// Holiday - Lunar Teleport Cap: Stormwind: 1 rank(s), from build 1.60.1.69893.
-const HolidayLunarTeleportCapStormwindRanks = 1
+// Holiday - Lunar Teleport Cap: Stormwind: ranks 0 present, from build 1.60.1.69893.
+const HolidayLunarTeleportCapStormwindRanks = 0
 
-var HolidayLunarTeleportCapStormwindSpellId = [HolidayLunarTeleportCapStormwindRanks + 1]int32{0, 26406}
-var HolidayLunarTeleportCapStormwindLevel = [HolidayLunarTeleportCapStormwindRanks + 1]int{0, 10}
-var HolidayLunarTeleportCapStormwindCastTime = [HolidayLunarTeleportCapStormwindRanks + 1]int32{0, 0}
-var HolidayLunarTeleportCapStormwindCooldownMS = [HolidayLunarTeleportCapStormwindRanks + 1]int32{0, 0}
-var HolidayLunarTeleportCapStormwindManaCost = [HolidayLunarTeleportCapStormwindRanks + 1]float64{0, 0}
-var HolidayLunarTeleportCapStormwindSpellCoeff = [HolidayLunarTeleportCapStormwindRanks + 1]float64{0, 1}
-var HolidayLunarTeleportCapStormwindBaseDamage = [HolidayLunarTeleportCapStormwindRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayLunarTeleportCapStormwindSpellId = [HolidayLunarTeleportCapStormwindRanks + 1]int32{26406}
+var HolidayLunarTeleportCapStormwindLevel = [HolidayLunarTeleportCapStormwindRanks + 1]int{10}
+var HolidayLunarTeleportCapStormwindCastTime = [HolidayLunarTeleportCapStormwindRanks + 1]int32{0}
+var HolidayLunarTeleportCapStormwindCooldownMS = [HolidayLunarTeleportCapStormwindRanks + 1]int32{0}
+var HolidayLunarTeleportCapStormwindManaCost = [HolidayLunarTeleportCapStormwindRanks + 1]float64{0}
+var HolidayLunarTeleportCapStormwindSpellCoeff = [HolidayLunarTeleportCapStormwindRanks + 1]float64{1}
+var HolidayLunarTeleportCapStormwindBaseDamage = [HolidayLunarTeleportCapStormwindRanks + 1][]float64{{0, 0}}
 
-// Holiday - Lunar Teleport Cap: Thunderbluff: 1 rank(s), from build 1.60.1.69893.
-const HolidayLunarTeleportCapThunderbluffRanks = 1
+// Holiday - Lunar Teleport Cap: Thunderbluff: ranks 0 present, from build 1.60.1.69893.
+const HolidayLunarTeleportCapThunderbluffRanks = 0
 
-var HolidayLunarTeleportCapThunderbluffSpellId = [HolidayLunarTeleportCapThunderbluffRanks + 1]int32{0, 26412}
-var HolidayLunarTeleportCapThunderbluffLevel = [HolidayLunarTeleportCapThunderbluffRanks + 1]int{0, 10}
-var HolidayLunarTeleportCapThunderbluffCastTime = [HolidayLunarTeleportCapThunderbluffRanks + 1]int32{0, 0}
-var HolidayLunarTeleportCapThunderbluffCooldownMS = [HolidayLunarTeleportCapThunderbluffRanks + 1]int32{0, 0}
-var HolidayLunarTeleportCapThunderbluffManaCost = [HolidayLunarTeleportCapThunderbluffRanks + 1]float64{0, 0}
-var HolidayLunarTeleportCapThunderbluffSpellCoeff = [HolidayLunarTeleportCapThunderbluffRanks + 1]float64{0, 1}
-var HolidayLunarTeleportCapThunderbluffBaseDamage = [HolidayLunarTeleportCapThunderbluffRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayLunarTeleportCapThunderbluffSpellId = [HolidayLunarTeleportCapThunderbluffRanks + 1]int32{26412}
+var HolidayLunarTeleportCapThunderbluffLevel = [HolidayLunarTeleportCapThunderbluffRanks + 1]int{10}
+var HolidayLunarTeleportCapThunderbluffCastTime = [HolidayLunarTeleportCapThunderbluffRanks + 1]int32{0}
+var HolidayLunarTeleportCapThunderbluffCooldownMS = [HolidayLunarTeleportCapThunderbluffRanks + 1]int32{0}
+var HolidayLunarTeleportCapThunderbluffManaCost = [HolidayLunarTeleportCapThunderbluffRanks + 1]float64{0}
+var HolidayLunarTeleportCapThunderbluffSpellCoeff = [HolidayLunarTeleportCapThunderbluffRanks + 1]float64{1}
+var HolidayLunarTeleportCapThunderbluffBaseDamage = [HolidayLunarTeleportCapThunderbluffRanks + 1][]float64{{0, 0}}
 
-// Holiday - Lunar Teleport Cap: Undercity: 1 rank(s), from build 1.60.1.69893.
-const HolidayLunarTeleportCapUndercityRanks = 1
+// Holiday - Lunar Teleport Cap: Undercity: ranks 0 present, from build 1.60.1.69893.
+const HolidayLunarTeleportCapUndercityRanks = 0
 
-var HolidayLunarTeleportCapUndercitySpellId = [HolidayLunarTeleportCapUndercityRanks + 1]int32{0, 26410}
-var HolidayLunarTeleportCapUndercityLevel = [HolidayLunarTeleportCapUndercityRanks + 1]int{0, 10}
-var HolidayLunarTeleportCapUndercityCastTime = [HolidayLunarTeleportCapUndercityRanks + 1]int32{0, 0}
-var HolidayLunarTeleportCapUndercityCooldownMS = [HolidayLunarTeleportCapUndercityRanks + 1]int32{0, 0}
-var HolidayLunarTeleportCapUndercityManaCost = [HolidayLunarTeleportCapUndercityRanks + 1]float64{0, 0}
-var HolidayLunarTeleportCapUndercitySpellCoeff = [HolidayLunarTeleportCapUndercityRanks + 1]float64{0, 1}
-var HolidayLunarTeleportCapUndercityBaseDamage = [HolidayLunarTeleportCapUndercityRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayLunarTeleportCapUndercitySpellId = [HolidayLunarTeleportCapUndercityRanks + 1]int32{26410}
+var HolidayLunarTeleportCapUndercityLevel = [HolidayLunarTeleportCapUndercityRanks + 1]int{10}
+var HolidayLunarTeleportCapUndercityCastTime = [HolidayLunarTeleportCapUndercityRanks + 1]int32{0}
+var HolidayLunarTeleportCapUndercityCooldownMS = [HolidayLunarTeleportCapUndercityRanks + 1]int32{0}
+var HolidayLunarTeleportCapUndercityManaCost = [HolidayLunarTeleportCapUndercityRanks + 1]float64{0}
+var HolidayLunarTeleportCapUndercitySpellCoeff = [HolidayLunarTeleportCapUndercityRanks + 1]float64{1}
+var HolidayLunarTeleportCapUndercityBaseDamage = [HolidayLunarTeleportCapUndercityRanks + 1][]float64{{0, 0}}
 
-// Holiday - Lunar Teleport: Darnassus: 1 rank(s), from build 1.60.1.69893.
-const HolidayLunarTeleportDarnassusRanks = 1
+// Holiday - Lunar Teleport: Darnassus: ranks 0 present, from build 1.60.1.69893.
+const HolidayLunarTeleportDarnassusRanks = 0
 
-var HolidayLunarTeleportDarnassusSpellId = [HolidayLunarTeleportDarnassusRanks + 1]int32{0, 26450}
-var HolidayLunarTeleportDarnassusLevel = [HolidayLunarTeleportDarnassusRanks + 1]int{0, 10}
-var HolidayLunarTeleportDarnassusCastTime = [HolidayLunarTeleportDarnassusRanks + 1]int32{0, 0}
-var HolidayLunarTeleportDarnassusCooldownMS = [HolidayLunarTeleportDarnassusRanks + 1]int32{0, 0}
-var HolidayLunarTeleportDarnassusManaCost = [HolidayLunarTeleportDarnassusRanks + 1]float64{0, 0}
-var HolidayLunarTeleportDarnassusSpellCoeff = [HolidayLunarTeleportDarnassusRanks + 1]float64{0, 0.4286}
-var HolidayLunarTeleportDarnassusBaseDamage = [HolidayLunarTeleportDarnassusRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayLunarTeleportDarnassusSpellId = [HolidayLunarTeleportDarnassusRanks + 1]int32{26450}
+var HolidayLunarTeleportDarnassusLevel = [HolidayLunarTeleportDarnassusRanks + 1]int{10}
+var HolidayLunarTeleportDarnassusCastTime = [HolidayLunarTeleportDarnassusRanks + 1]int32{0}
+var HolidayLunarTeleportDarnassusCooldownMS = [HolidayLunarTeleportDarnassusRanks + 1]int32{0}
+var HolidayLunarTeleportDarnassusManaCost = [HolidayLunarTeleportDarnassusRanks + 1]float64{0}
+var HolidayLunarTeleportDarnassusSpellCoeff = [HolidayLunarTeleportDarnassusRanks + 1]float64{0.4286}
+var HolidayLunarTeleportDarnassusBaseDamage = [HolidayLunarTeleportDarnassusRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Holiday - Lunar Teleport: Darnassus coefficient derived from the vanilla convention (rank 0)
 
-// Holiday - Lunar Teleport: Ironforge: 1 rank(s), from build 1.60.1.69893.
-const HolidayLunarTeleportIronforgeRanks = 1
+// Holiday - Lunar Teleport: Ironforge: ranks 0 present, from build 1.60.1.69893.
+const HolidayLunarTeleportIronforgeRanks = 0
 
-var HolidayLunarTeleportIronforgeSpellId = [HolidayLunarTeleportIronforgeRanks + 1]int32{0, 26452}
-var HolidayLunarTeleportIronforgeLevel = [HolidayLunarTeleportIronforgeRanks + 1]int{0, 10}
-var HolidayLunarTeleportIronforgeCastTime = [HolidayLunarTeleportIronforgeRanks + 1]int32{0, 0}
-var HolidayLunarTeleportIronforgeCooldownMS = [HolidayLunarTeleportIronforgeRanks + 1]int32{0, 0}
-var HolidayLunarTeleportIronforgeManaCost = [HolidayLunarTeleportIronforgeRanks + 1]float64{0, 0}
-var HolidayLunarTeleportIronforgeSpellCoeff = [HolidayLunarTeleportIronforgeRanks + 1]float64{0, 0.4286}
-var HolidayLunarTeleportIronforgeBaseDamage = [HolidayLunarTeleportIronforgeRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayLunarTeleportIronforgeSpellId = [HolidayLunarTeleportIronforgeRanks + 1]int32{26452}
+var HolidayLunarTeleportIronforgeLevel = [HolidayLunarTeleportIronforgeRanks + 1]int{10}
+var HolidayLunarTeleportIronforgeCastTime = [HolidayLunarTeleportIronforgeRanks + 1]int32{0}
+var HolidayLunarTeleportIronforgeCooldownMS = [HolidayLunarTeleportIronforgeRanks + 1]int32{0}
+var HolidayLunarTeleportIronforgeManaCost = [HolidayLunarTeleportIronforgeRanks + 1]float64{0}
+var HolidayLunarTeleportIronforgeSpellCoeff = [HolidayLunarTeleportIronforgeRanks + 1]float64{0.4286}
+var HolidayLunarTeleportIronforgeBaseDamage = [HolidayLunarTeleportIronforgeRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Holiday - Lunar Teleport: Ironforge coefficient derived from the vanilla convention (rank 0)
 
-// Holiday - Lunar Teleport: Orgrimmar: 1 rank(s), from build 1.60.1.69893.
-const HolidayLunarTeleportOrgrimmarRanks = 1
+// Holiday - Lunar Teleport: Orgrimmar: ranks 0 present, from build 1.60.1.69893.
+const HolidayLunarTeleportOrgrimmarRanks = 0
 
-var HolidayLunarTeleportOrgrimmarSpellId = [HolidayLunarTeleportOrgrimmarRanks + 1]int32{0, 26453}
-var HolidayLunarTeleportOrgrimmarLevel = [HolidayLunarTeleportOrgrimmarRanks + 1]int{0, 10}
-var HolidayLunarTeleportOrgrimmarCastTime = [HolidayLunarTeleportOrgrimmarRanks + 1]int32{0, 0}
-var HolidayLunarTeleportOrgrimmarCooldownMS = [HolidayLunarTeleportOrgrimmarRanks + 1]int32{0, 0}
-var HolidayLunarTeleportOrgrimmarManaCost = [HolidayLunarTeleportOrgrimmarRanks + 1]float64{0, 0}
-var HolidayLunarTeleportOrgrimmarSpellCoeff = [HolidayLunarTeleportOrgrimmarRanks + 1]float64{0, 0.4286}
-var HolidayLunarTeleportOrgrimmarBaseDamage = [HolidayLunarTeleportOrgrimmarRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayLunarTeleportOrgrimmarSpellId = [HolidayLunarTeleportOrgrimmarRanks + 1]int32{26453}
+var HolidayLunarTeleportOrgrimmarLevel = [HolidayLunarTeleportOrgrimmarRanks + 1]int{10}
+var HolidayLunarTeleportOrgrimmarCastTime = [HolidayLunarTeleportOrgrimmarRanks + 1]int32{0}
+var HolidayLunarTeleportOrgrimmarCooldownMS = [HolidayLunarTeleportOrgrimmarRanks + 1]int32{0}
+var HolidayLunarTeleportOrgrimmarManaCost = [HolidayLunarTeleportOrgrimmarRanks + 1]float64{0}
+var HolidayLunarTeleportOrgrimmarSpellCoeff = [HolidayLunarTeleportOrgrimmarRanks + 1]float64{0.4286}
+var HolidayLunarTeleportOrgrimmarBaseDamage = [HolidayLunarTeleportOrgrimmarRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Holiday - Lunar Teleport: Orgrimmar coefficient derived from the vanilla convention (rank 0)
 
-// Holiday - Lunar Teleport: Stormwind: 1 rank(s), from build 1.60.1.69893.
-const HolidayLunarTeleportStormwindRanks = 1
+// Holiday - Lunar Teleport: Stormwind: ranks 0 present, from build 1.60.1.69893.
+const HolidayLunarTeleportStormwindRanks = 0
 
-var HolidayLunarTeleportStormwindSpellId = [HolidayLunarTeleportStormwindRanks + 1]int32{0, 26454}
-var HolidayLunarTeleportStormwindLevel = [HolidayLunarTeleportStormwindRanks + 1]int{0, 10}
-var HolidayLunarTeleportStormwindCastTime = [HolidayLunarTeleportStormwindRanks + 1]int32{0, 0}
-var HolidayLunarTeleportStormwindCooldownMS = [HolidayLunarTeleportStormwindRanks + 1]int32{0, 0}
-var HolidayLunarTeleportStormwindManaCost = [HolidayLunarTeleportStormwindRanks + 1]float64{0, 0}
-var HolidayLunarTeleportStormwindSpellCoeff = [HolidayLunarTeleportStormwindRanks + 1]float64{0, 0.4286}
-var HolidayLunarTeleportStormwindBaseDamage = [HolidayLunarTeleportStormwindRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayLunarTeleportStormwindSpellId = [HolidayLunarTeleportStormwindRanks + 1]int32{26454}
+var HolidayLunarTeleportStormwindLevel = [HolidayLunarTeleportStormwindRanks + 1]int{10}
+var HolidayLunarTeleportStormwindCastTime = [HolidayLunarTeleportStormwindRanks + 1]int32{0}
+var HolidayLunarTeleportStormwindCooldownMS = [HolidayLunarTeleportStormwindRanks + 1]int32{0}
+var HolidayLunarTeleportStormwindManaCost = [HolidayLunarTeleportStormwindRanks + 1]float64{0}
+var HolidayLunarTeleportStormwindSpellCoeff = [HolidayLunarTeleportStormwindRanks + 1]float64{0.4286}
+var HolidayLunarTeleportStormwindBaseDamage = [HolidayLunarTeleportStormwindRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Holiday - Lunar Teleport: Stormwind coefficient derived from the vanilla convention (rank 0)
 
-// Holiday - Lunar Teleport: Thunderbluff: 1 rank(s), from build 1.60.1.69893.
-const HolidayLunarTeleportThunderbluffRanks = 1
+// Holiday - Lunar Teleport: Thunderbluff: ranks 0 present, from build 1.60.1.69893.
+const HolidayLunarTeleportThunderbluffRanks = 0
 
-var HolidayLunarTeleportThunderbluffSpellId = [HolidayLunarTeleportThunderbluffRanks + 1]int32{0, 26455}
-var HolidayLunarTeleportThunderbluffLevel = [HolidayLunarTeleportThunderbluffRanks + 1]int{0, 10}
-var HolidayLunarTeleportThunderbluffCastTime = [HolidayLunarTeleportThunderbluffRanks + 1]int32{0, 0}
-var HolidayLunarTeleportThunderbluffCooldownMS = [HolidayLunarTeleportThunderbluffRanks + 1]int32{0, 0}
-var HolidayLunarTeleportThunderbluffManaCost = [HolidayLunarTeleportThunderbluffRanks + 1]float64{0, 0}
-var HolidayLunarTeleportThunderbluffSpellCoeff = [HolidayLunarTeleportThunderbluffRanks + 1]float64{0, 0.4286}
-var HolidayLunarTeleportThunderbluffBaseDamage = [HolidayLunarTeleportThunderbluffRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayLunarTeleportThunderbluffSpellId = [HolidayLunarTeleportThunderbluffRanks + 1]int32{26455}
+var HolidayLunarTeleportThunderbluffLevel = [HolidayLunarTeleportThunderbluffRanks + 1]int{10}
+var HolidayLunarTeleportThunderbluffCastTime = [HolidayLunarTeleportThunderbluffRanks + 1]int32{0}
+var HolidayLunarTeleportThunderbluffCooldownMS = [HolidayLunarTeleportThunderbluffRanks + 1]int32{0}
+var HolidayLunarTeleportThunderbluffManaCost = [HolidayLunarTeleportThunderbluffRanks + 1]float64{0}
+var HolidayLunarTeleportThunderbluffSpellCoeff = [HolidayLunarTeleportThunderbluffRanks + 1]float64{0.4286}
+var HolidayLunarTeleportThunderbluffBaseDamage = [HolidayLunarTeleportThunderbluffRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Holiday - Lunar Teleport: Thunderbluff coefficient derived from the vanilla convention (rank 0)
 
-// Holiday - Lunar Teleport: Undercity: 1 rank(s), from build 1.60.1.69893.
-const HolidayLunarTeleportUndercityRanks = 1
+// Holiday - Lunar Teleport: Undercity: ranks 0 present, from build 1.60.1.69893.
+const HolidayLunarTeleportUndercityRanks = 0
 
-var HolidayLunarTeleportUndercitySpellId = [HolidayLunarTeleportUndercityRanks + 1]int32{0, 26456}
-var HolidayLunarTeleportUndercityLevel = [HolidayLunarTeleportUndercityRanks + 1]int{0, 10}
-var HolidayLunarTeleportUndercityCastTime = [HolidayLunarTeleportUndercityRanks + 1]int32{0, 0}
-var HolidayLunarTeleportUndercityCooldownMS = [HolidayLunarTeleportUndercityRanks + 1]int32{0, 0}
-var HolidayLunarTeleportUndercityManaCost = [HolidayLunarTeleportUndercityRanks + 1]float64{0, 0}
-var HolidayLunarTeleportUndercitySpellCoeff = [HolidayLunarTeleportUndercityRanks + 1]float64{0, 0.4286}
-var HolidayLunarTeleportUndercityBaseDamage = [HolidayLunarTeleportUndercityRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayLunarTeleportUndercitySpellId = [HolidayLunarTeleportUndercityRanks + 1]int32{26456}
+var HolidayLunarTeleportUndercityLevel = [HolidayLunarTeleportUndercityRanks + 1]int{10}
+var HolidayLunarTeleportUndercityCastTime = [HolidayLunarTeleportUndercityRanks + 1]int32{0}
+var HolidayLunarTeleportUndercityCooldownMS = [HolidayLunarTeleportUndercityRanks + 1]int32{0}
+var HolidayLunarTeleportUndercityManaCost = [HolidayLunarTeleportUndercityRanks + 1]float64{0}
+var HolidayLunarTeleportUndercitySpellCoeff = [HolidayLunarTeleportUndercityRanks + 1]float64{0.4286}
+var HolidayLunarTeleportUndercityBaseDamage = [HolidayLunarTeleportUndercityRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Holiday - Lunar Teleport: Undercity coefficient derived from the vanilla convention (rank 0)
 
-// Holiday - Teleport: Moonglade: 1 rank(s), from build 1.60.1.69893.
-const HolidayTeleportMoongladeRanks = 1
+// Holiday - Teleport: Moonglade: ranks 0 present, from build 1.60.1.69893.
+const HolidayTeleportMoongladeRanks = 0
 
-var HolidayTeleportMoongladeSpellId = [HolidayTeleportMoongladeRanks + 1]int32{0, 26448}
-var HolidayTeleportMoongladeLevel = [HolidayTeleportMoongladeRanks + 1]int{0, 10}
-var HolidayTeleportMoongladeCastTime = [HolidayTeleportMoongladeRanks + 1]int32{0, 0}
-var HolidayTeleportMoongladeCooldownMS = [HolidayTeleportMoongladeRanks + 1]int32{0, 0}
-var HolidayTeleportMoongladeManaCost = [HolidayTeleportMoongladeRanks + 1]float64{0, 0}
-var HolidayTeleportMoongladeSpellCoeff = [HolidayTeleportMoongladeRanks + 1]float64{0, 0.4286}
-var HolidayTeleportMoongladeBaseDamage = [HolidayTeleportMoongladeRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayTeleportMoongladeSpellId = [HolidayTeleportMoongladeRanks + 1]int32{26448}
+var HolidayTeleportMoongladeLevel = [HolidayTeleportMoongladeRanks + 1]int{10}
+var HolidayTeleportMoongladeCastTime = [HolidayTeleportMoongladeRanks + 1]int32{0}
+var HolidayTeleportMoongladeCooldownMS = [HolidayTeleportMoongladeRanks + 1]int32{0}
+var HolidayTeleportMoongladeManaCost = [HolidayTeleportMoongladeRanks + 1]float64{0}
+var HolidayTeleportMoongladeSpellCoeff = [HolidayTeleportMoongladeRanks + 1]float64{0.4286}
+var HolidayTeleportMoongladeBaseDamage = [HolidayTeleportMoongladeRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Holiday - Teleport: Moonglade coefficient derived from the vanilla convention (rank 0)
 
-// Holiday - Teleport: Moonglade (self): 1 rank(s), from build 1.60.1.69893.
-const HolidayTeleportMoongladeSelfRanks = 1
+// Holiday - Teleport: Moonglade (self): ranks 0 present, from build 1.60.1.69893.
+const HolidayTeleportMoongladeSelfRanks = 0
 
-var HolidayTeleportMoongladeSelfSpellId = [HolidayTeleportMoongladeSelfRanks + 1]int32{0, 26451}
-var HolidayTeleportMoongladeSelfLevel = [HolidayTeleportMoongladeSelfRanks + 1]int{0, 10}
-var HolidayTeleportMoongladeSelfCastTime = [HolidayTeleportMoongladeSelfRanks + 1]int32{0, 0}
-var HolidayTeleportMoongladeSelfCooldownMS = [HolidayTeleportMoongladeSelfRanks + 1]int32{0, 0}
-var HolidayTeleportMoongladeSelfManaCost = [HolidayTeleportMoongladeSelfRanks + 1]float64{0, 0}
-var HolidayTeleportMoongladeSelfSpellCoeff = [HolidayTeleportMoongladeSelfRanks + 1]float64{0, 0.4286}
-var HolidayTeleportMoongladeSelfBaseDamage = [HolidayTeleportMoongladeSelfRanks + 1][]float64{{0, 0}, {0, 0}}
+var HolidayTeleportMoongladeSelfSpellId = [HolidayTeleportMoongladeSelfRanks + 1]int32{26451}
+var HolidayTeleportMoongladeSelfLevel = [HolidayTeleportMoongladeSelfRanks + 1]int{10}
+var HolidayTeleportMoongladeSelfCastTime = [HolidayTeleportMoongladeSelfRanks + 1]int32{0}
+var HolidayTeleportMoongladeSelfCooldownMS = [HolidayTeleportMoongladeSelfRanks + 1]int32{0}
+var HolidayTeleportMoongladeSelfManaCost = [HolidayTeleportMoongladeSelfRanks + 1]float64{0}
+var HolidayTeleportMoongladeSelfSpellCoeff = [HolidayTeleportMoongladeSelfRanks + 1]float64{0.4286}
+var HolidayTeleportMoongladeSelfBaseDamage = [HolidayTeleportMoongladeSelfRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Holiday - Teleport: Moonglade (self) coefficient derived from the vanilla convention (rank 0)
 
-// Homunculi: 1 rank(s), from build 1.60.1.69893.
-const HomunculiRanks = 1
+// Homunculi: ranks 0 present, from build 1.60.1.69893.
+const HomunculiRanks = 0
 
-var HomunculiSpellId = [HomunculiRanks + 1]int32{0, 402836}
-var HomunculiLevel = [HomunculiRanks + 1]int{0, 1}
-var HomunculiCastTime = [HomunculiRanks + 1]int32{0, 0}
-var HomunculiCooldownMS = [HomunculiRanks + 1]int32{0, 0}
-var HomunculiManaCost = [HomunculiRanks + 1]float64{0, 0}
-var HomunculiSpellCoeff = [HomunculiRanks + 1]float64{0, 0.4286}
-var HomunculiBaseDamage = [HomunculiRanks + 1][]float64{{0, 0}, {402799, 402799}}
+var HomunculiSpellId = [HomunculiRanks + 1]int32{402836}
+var HomunculiLevel = [HomunculiRanks + 1]int{1}
+var HomunculiCastTime = [HomunculiRanks + 1]int32{0}
+var HomunculiCooldownMS = [HomunculiRanks + 1]int32{0}
+var HomunculiManaCost = [HomunculiRanks + 1]float64{0}
+var HomunculiSpellCoeff = [HomunculiRanks + 1]float64{0.4286}
+var HomunculiBaseDamage = [HomunculiRanks + 1][]float64{{402799, 402799}}
 
 // unconfirmed: Homunculi coefficient derived from the vanilla convention (rank 0)
 
-// Hot Streak: 4 rank(s), from build 1.60.1.69893.
-const HotStreakRanks = 4
+// Hot Streak: ranks 0 present, from build 1.60.1.69893.
+const HotStreakRanks = 0
 
-var HotStreakSpellId = [HotStreakRanks + 1]int32{0, 48108, 401724, 400624, 400625}
-var HotStreakLevel = [HotStreakRanks + 1]int{0, 0, 1, 1, 1}
-var HotStreakCastTime = [HotStreakRanks + 1]int32{0, 0, 0, 0, 0}
-var HotStreakCooldownMS = [HotStreakRanks + 1]int32{0, 0, 0, 0, 0}
-var HotStreakManaCost = [HotStreakRanks + 1]float64{0, 0, 0, 0, 0}
-var HotStreakSpellCoeff = [HotStreakRanks + 1]float64{0, 1, 0.4286, 0.4286, 1}
-var HotStreakBaseDamage = [HotStreakRanks + 1][]float64{{0, 0}, {-100, -100}, {400624, 400624}, {100, 100}, {-25, -25}}
+var HotStreakSpellId = [HotStreakRanks + 1]int32{401724}
+var HotStreakLevel = [HotStreakRanks + 1]int{1}
+var HotStreakCastTime = [HotStreakRanks + 1]int32{0}
+var HotStreakCooldownMS = [HotStreakRanks + 1]int32{0}
+var HotStreakManaCost = [HotStreakRanks + 1]float64{0}
+var HotStreakSpellCoeff = [HotStreakRanks + 1]float64{0.4286}
+var HotStreakBaseDamage = [HotStreakRanks + 1][]float64{{400624, 400624}}
 
-// unconfirmed: Hot Streak coefficient derived from the vanilla convention (rank 0, rank 0, rank 0)
+// unconfirmed: Hot Streak coefficient derived from the vanilla convention (rank 0)
+// Hot Streak rank 0: kept id 401724 (spell_level 1); dropped 48108 (spell_level 0), 400624 (spell_level 1), 400625 (spell_level 1)
 
-// Hydra Strike: 1 rank(s), from build 1.60.1.69893.
-const HydraStrikeRanks = 1
+// Hydra Strike: ranks 0 present, from build 1.60.1.69893.
+const HydraStrikeRanks = 0
 
-var HydraStrikeSpellId = [HydraStrikeRanks + 1]int32{0, 1292739}
-var HydraStrikeLevel = [HydraStrikeRanks + 1]int{0, 0}
-var HydraStrikeCastTime = [HydraStrikeRanks + 1]int32{0, 0}
-var HydraStrikeCooldownMS = [HydraStrikeRanks + 1]int32{0, 0}
-var HydraStrikeManaCost = [HydraStrikeRanks + 1]float64{0, 0}
-var HydraStrikeSpellCoeff = [HydraStrikeRanks + 1]float64{0, 0.3333}
-var HydraStrikeBaseDamage = [HydraStrikeRanks + 1][]float64{{0, 0}, {14, 14}}
+var HydraStrikeSpellId = [HydraStrikeRanks + 1]int32{1292739}
+var HydraStrikeLevel = [HydraStrikeRanks + 1]int{0}
+var HydraStrikeCastTime = [HydraStrikeRanks + 1]int32{0}
+var HydraStrikeCooldownMS = [HydraStrikeRanks + 1]int32{0}
+var HydraStrikeManaCost = [HydraStrikeRanks + 1]float64{0}
+var HydraStrikeSpellCoeff = [HydraStrikeRanks + 1]float64{0.3333}
+var HydraStrikeBaseDamage = [HydraStrikeRanks + 1][]float64{{14, 14}}
 
 // unconfirmed: Hydra Strike coefficient derived from the vanilla convention (rank 0)
 
-// Ice Armor: 4 rank(s), from build 1.60.1.69893.
+// Ice Armor: ranks 1-4 present, from build 1.60.1.69893.
 const IceArmorRanks = 4
 
 var IceArmorSpellId = [IceArmorRanks + 1]int32{0, 7302, 7320, 10219, 10220}
@@ -2053,107 +2105,113 @@ var IceArmorBaseDamage = [IceArmorRanks + 1][]float64{{0, 0}, {290, 290}, {380, 
 
 // skipped: "Ice Barrier" already has a hand-written IceBarrierRanks elsewhere in this package.
 
-// Ice Block: 2 rank(s), from build 1.60.1.69893.
-const IceBlockRanks = 2
+// Ice Block: ranks 0 present, from build 1.60.1.69893.
+const IceBlockRanks = 0
 
-var IceBlockSpellId = [IceBlockRanks + 1]int32{0, 11958, 27619}
-var IceBlockLevel = [IceBlockRanks + 1]int{0, 4, 4}
-var IceBlockCastTime = [IceBlockRanks + 1]int32{0, 0, 0}
-var IceBlockCooldownMS = [IceBlockRanks + 1]int32{0, 300000, 300000}
-var IceBlockManaCost = [IceBlockRanks + 1]float64{0, 15, 15}
-var IceBlockSpellCoeff = [IceBlockRanks + 1]float64{0, 0.6667, 0.6667}
-var IceBlockBaseDamage = [IceBlockRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}}
+var IceBlockSpellId = [IceBlockRanks + 1]int32{27619}
+var IceBlockLevel = [IceBlockRanks + 1]int{4}
+var IceBlockCastTime = [IceBlockRanks + 1]int32{0}
+var IceBlockCooldownMS = [IceBlockRanks + 1]int32{300000}
+var IceBlockManaCost = [IceBlockRanks + 1]float64{15}
+var IceBlockSpellCoeff = [IceBlockRanks + 1]float64{0.6667}
+var IceBlockBaseDamage = [IceBlockRanks + 1][]float64{{0, 0}}
 
-// unconfirmed: Ice Block coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Ice Block coefficient derived from the vanilla convention (rank 0)
+// Ice Block rank 0: kept id 27619 (spell_level 4); dropped 11958 (spell_level 4)
 
-// Ice Lance: 7 rank(s), from build 1.60.1.69893.
-const IceLanceRanks = 7
+// Ice Lance: ranks 0-6 present, from build 1.60.1.69893.
+const IceLanceRanks = 6
 
-var IceLanceSpellId = [IceLanceRanks + 1]int32{0, 401732, 1312002, 400640, 1240044, 1240045, 1240046, 1240047}
-var IceLanceLevel = [IceLanceRanks + 1]int{0, 1, 20, 28, 34, 42, 48, 56}
-var IceLanceCastTime = [IceLanceRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
-var IceLanceCooldownMS = [IceLanceRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
-var IceLanceManaCost = [IceLanceRanks + 1]float64{0, 0, 45, 55, 70, 105, 120, 160}
-var IceLanceSpellCoeff = [IceLanceRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286}
-var IceLanceBaseDamage = [IceLanceRanks + 1][]float64{{0, 0}, {400640, 400640}, {28, 28}, {36, 36}, {45, 45}, {79, 79}, {98, 98}, {145, 145}}
+var IceLanceSpellId = [IceLanceRanks + 1]int32{401732, 1312002, 400640, 1240044, 1240045, 1240046, 1240047}
+var IceLanceLevel = [IceLanceRanks + 1]int{1, 20, 28, 34, 42, 48, 56}
+var IceLanceCastTime = [IceLanceRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
+var IceLanceCooldownMS = [IceLanceRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
+var IceLanceManaCost = [IceLanceRanks + 1]float64{0, 45, 55, 70, 105, 120, 160}
+var IceLanceSpellCoeff = [IceLanceRanks + 1]float64{0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286}
+var IceLanceBaseDamage = [IceLanceRanks + 1][]float64{{400640, 400640}, {28, 28}, {36, 36}, {45, 45}, {79, 79}, {98, 98}, {145, 145}}
 
 // unconfirmed: Ice Lance coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3, rank 4, rank 5, rank 6)
 
-// Ice Shards: 1 rank(s), from build 1.60.1.69893.
-const IceShardsRanks = 1
+// Ice Shards: ranks 0 present, from build 1.60.1.69893.
+const IceShardsRanks = 0
 
-var IceShardsSpellId = [IceShardsRanks + 1]int32{0, 11207}
-var IceShardsLevel = [IceShardsRanks + 1]int{0, 1}
-var IceShardsCastTime = [IceShardsRanks + 1]int32{0, 0}
-var IceShardsCooldownMS = [IceShardsRanks + 1]int32{0, 0}
-var IceShardsManaCost = [IceShardsRanks + 1]float64{0, 0}
-var IceShardsSpellCoeff = [IceShardsRanks + 1]float64{0, 0.4286}
-var IceShardsBaseDamage = [IceShardsRanks + 1][]float64{{0, 0}, {100, 100}}
+var IceShardsSpellId = [IceShardsRanks + 1]int32{11207}
+var IceShardsLevel = [IceShardsRanks + 1]int{1}
+var IceShardsCastTime = [IceShardsRanks + 1]int32{0}
+var IceShardsCooldownMS = [IceShardsRanks + 1]int32{0}
+var IceShardsManaCost = [IceShardsRanks + 1]float64{0}
+var IceShardsSpellCoeff = [IceShardsRanks + 1]float64{0.4286}
+var IceShardsBaseDamage = [IceShardsRanks + 1][]float64{{100, 100}}
 
 // unconfirmed: Ice Shards coefficient derived from the vanilla convention (rank 0)
 
-// Icy Energy: 1 rank(s), from build 1.60.1.69893.
-const IcyEnergyRanks = 1
+// Icy Energy: ranks 0 present, from build 1.60.1.69893.
+const IcyEnergyRanks = 0
 
-var IcyEnergySpellId = [IcyEnergyRanks + 1]int32{0, 24405}
-var IcyEnergyLevel = [IcyEnergyRanks + 1]int{0, 0}
-var IcyEnergyCastTime = [IcyEnergyRanks + 1]int32{0, 0}
-var IcyEnergyCooldownMS = [IcyEnergyRanks + 1]int32{0, 0}
-var IcyEnergyManaCost = [IcyEnergyRanks + 1]float64{0, 0}
-var IcyEnergySpellCoeff = [IcyEnergyRanks + 1]float64{0, 1}
-var IcyEnergyBaseDamage = [IcyEnergyRanks + 1][]float64{{0, 0}, {50, 50}}
+var IcyEnergySpellId = [IcyEnergyRanks + 1]int32{24405}
+var IcyEnergyLevel = [IcyEnergyRanks + 1]int{0}
+var IcyEnergyCastTime = [IcyEnergyRanks + 1]int32{0}
+var IcyEnergyCooldownMS = [IcyEnergyRanks + 1]int32{0}
+var IcyEnergyManaCost = [IcyEnergyRanks + 1]float64{0}
+var IcyEnergySpellCoeff = [IcyEnergyRanks + 1]float64{1}
+var IcyEnergyBaseDamage = [IcyEnergyRanks + 1][]float64{{50, 50}}
 
-// Icy Veins: 3 rank(s), from build 1.60.1.69893.
-const IcyVeinsRanks = 3
+// Icy Veins: ranks 0 present, from build 1.60.1.69893.
+const IcyVeinsRanks = 0
 
-var IcyVeinsSpellId = [IcyVeinsRanks + 1]int32{0, 425121, 425169, 429125}
-var IcyVeinsLevel = [IcyVeinsRanks + 1]int{0, 1, 1, 20}
-var IcyVeinsCastTime = [IcyVeinsRanks + 1]int32{0, 0, 0, 0}
-var IcyVeinsCooldownMS = [IcyVeinsRanks + 1]int32{0, 180000, 0, 180000}
-var IcyVeinsManaCost = [IcyVeinsRanks + 1]float64{0, 0, 0, 0}
-var IcyVeinsSpellCoeff = [IcyVeinsRanks + 1]float64{0, 1.3333, 0.4286, 1.3333}
-var IcyVeinsBaseDamage = [IcyVeinsRanks + 1][]float64{{0, 0}, {20, 20}, {425121, 425121}, {20, 20}}
+var IcyVeinsSpellId = [IcyVeinsRanks + 1]int32{429125}
+var IcyVeinsLevel = [IcyVeinsRanks + 1]int{20}
+var IcyVeinsCastTime = [IcyVeinsRanks + 1]int32{0}
+var IcyVeinsCooldownMS = [IcyVeinsRanks + 1]int32{180000}
+var IcyVeinsManaCost = [IcyVeinsRanks + 1]float64{0}
+var IcyVeinsSpellCoeff = [IcyVeinsRanks + 1]float64{1.3333}
+var IcyVeinsBaseDamage = [IcyVeinsRanks + 1][]float64{{20, 20}}
 
-// unconfirmed: Icy Veins coefficient derived from the vanilla convention (rank 0, rank 0, rank 0)
+// unconfirmed: Icy Veins coefficient derived from the vanilla convention (rank 0)
+// Icy Veins rank 0: kept id 429125 (spell_level 20); dropped 425121 (spell_level 1), 425169 (spell_level 1)
 
-// Ignite: 3 rank(s), from build 1.60.1.69893.
-const IgniteRanks = 3
+// Ignite: ranks 0 present, from build 1.60.1.69893.
+const IgniteRanks = 0
 
-var IgniteSpellId = [IgniteRanks + 1]int32{0, 412545, 412538, 11119}
-var IgniteLevel = [IgniteRanks + 1]int{0, 1, 1, 1}
-var IgniteCastTime = [IgniteRanks + 1]int32{0, 0, 0, 0}
-var IgniteCooldownMS = [IgniteRanks + 1]int32{0, 0, 0, 0}
-var IgniteManaCost = [IgniteRanks + 1]float64{0, 0, 0, 0}
-var IgniteSpellCoeff = [IgniteRanks + 1]float64{0, 0.4286, 0.2667, 0.4286}
-var IgniteBaseDamage = [IgniteRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {40, 40}}
+var IgniteSpellId = [IgniteRanks + 1]int32{412545}
+var IgniteLevel = [IgniteRanks + 1]int{1}
+var IgniteCastTime = [IgniteRanks + 1]int32{0}
+var IgniteCooldownMS = [IgniteRanks + 1]int32{0}
+var IgniteManaCost = [IgniteRanks + 1]float64{0}
+var IgniteSpellCoeff = [IgniteRanks + 1]float64{0.4286}
+var IgniteBaseDamage = [IgniteRanks + 1][]float64{{0, 0}}
 
-// unconfirmed: Ignite coefficient derived from the vanilla convention (rank 0, rank 0, rank 0)
+// unconfirmed: Ignite coefficient derived from the vanilla convention (rank 0)
+// Ignite rank 0: kept id 412545 (spell_level 1); dropped 11119 (spell_level 1), 412538 (spell_level 1)
 
-// Impact: 2 rank(s), from build 1.60.1.69893.
-const ImpactRanks = 2
+// Impact: ranks 0 present, from build 1.60.1.69893.
+const ImpactRanks = 0
 
-var ImpactSpellId = [ImpactRanks + 1]int32{0, 1239832, 11103}
-var ImpactLevel = [ImpactRanks + 1]int{0, 10, 1}
-var ImpactCastTime = [ImpactRanks + 1]int32{0, 0, 0}
-var ImpactCooldownMS = [ImpactRanks + 1]int32{0, 0, 0}
-var ImpactManaCost = [ImpactRanks + 1]float64{0, 0, 0}
-var ImpactSpellCoeff = [ImpactRanks + 1]float64{0, 1, 0.4286}
-var ImpactBaseDamage = [ImpactRanks + 1][]float64{{0, 0}, {100, 100}, {10, 10}}
+var ImpactSpellId = [ImpactRanks + 1]int32{1239832}
+var ImpactLevel = [ImpactRanks + 1]int{10}
+var ImpactCastTime = [ImpactRanks + 1]int32{0}
+var ImpactCooldownMS = [ImpactRanks + 1]int32{0}
+var ImpactManaCost = [ImpactRanks + 1]float64{0}
+var ImpactSpellCoeff = [ImpactRanks + 1]float64{1}
+var ImpactBaseDamage = [ImpactRanks + 1][]float64{{100, 100}}
 
-// unconfirmed: Impact coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Impact coefficient derived from the vanilla convention (rank 0)
+// Impact rank 0: kept id 1239832 (spell_level 10); dropped 11103 (spell_level 1)
 
-// Improved Arcane Intellect: 2 rank(s), from build 1.60.1.69893.
-const ImprovedArcaneIntellectRanks = 2
+// Improved Arcane Intellect: ranks 0 present, from build 1.60.1.69893.
+const ImprovedArcaneIntellectRanks = 0
 
-var ImprovedArcaneIntellectSpellId = [ImprovedArcaneIntellectRanks + 1]int32{0, 21088, 24489}
-var ImprovedArcaneIntellectLevel = [ImprovedArcaneIntellectRanks + 1]int{0, 0, 0}
-var ImprovedArcaneIntellectCastTime = [ImprovedArcaneIntellectRanks + 1]int32{0, 0, 0}
-var ImprovedArcaneIntellectCooldownMS = [ImprovedArcaneIntellectRanks + 1]int32{0, 0, 0}
-var ImprovedArcaneIntellectManaCost = [ImprovedArcaneIntellectRanks + 1]float64{0, 0, 0}
-var ImprovedArcaneIntellectSpellCoeff = [ImprovedArcaneIntellectRanks + 1]float64{0, 1, 1}
-var ImprovedArcaneIntellectBaseDamage = [ImprovedArcaneIntellectRanks + 1][]float64{{0, 0}, {7, 7}, {-5, -5}}
+var ImprovedArcaneIntellectSpellId = [ImprovedArcaneIntellectRanks + 1]int32{24489}
+var ImprovedArcaneIntellectLevel = [ImprovedArcaneIntellectRanks + 1]int{0}
+var ImprovedArcaneIntellectCastTime = [ImprovedArcaneIntellectRanks + 1]int32{0}
+var ImprovedArcaneIntellectCooldownMS = [ImprovedArcaneIntellectRanks + 1]int32{0}
+var ImprovedArcaneIntellectManaCost = [ImprovedArcaneIntellectRanks + 1]float64{0}
+var ImprovedArcaneIntellectSpellCoeff = [ImprovedArcaneIntellectRanks + 1]float64{1}
+var ImprovedArcaneIntellectBaseDamage = [ImprovedArcaneIntellectRanks + 1][]float64{{-5, -5}}
 
-// Improved Blink: 2 rank(s), from build 1.60.1.69893.
+// Improved Arcane Intellect rank 0: kept id 24489 (spell_level 0); dropped 21088 (spell_level 0)
+
+// Improved Blink: ranks 1-2 present, from build 1.60.1.69893.
 const ImprovedBlinkRanks = 2
 
 var ImprovedBlinkSpellId = [ImprovedBlinkRanks + 1]int32{0, 11262, 12604}
@@ -2166,224 +2224,226 @@ var ImprovedBlinkBaseDamage = [ImprovedBlinkRanks + 1][]float64{{0, 0}, {-15000,
 
 // unconfirmed: Improved Blink coefficient derived from the vanilla convention (rank 1, rank 2)
 
-// Improved Blizzard: 1 rank(s), from build 1.60.1.69893.
-const ImprovedBlizzardRanks = 1
+// Improved Blizzard: ranks 0 present, from build 1.60.1.69893.
+const ImprovedBlizzardRanks = 0
 
-var ImprovedBlizzardSpellId = [ImprovedBlizzardRanks + 1]int32{0, 11185}
-var ImprovedBlizzardLevel = [ImprovedBlizzardRanks + 1]int{0, 1}
-var ImprovedBlizzardCastTime = [ImprovedBlizzardRanks + 1]int32{0, 0}
-var ImprovedBlizzardCooldownMS = [ImprovedBlizzardRanks + 1]int32{0, 0}
-var ImprovedBlizzardManaCost = [ImprovedBlizzardRanks + 1]float64{0, 0}
-var ImprovedBlizzardSpellCoeff = [ImprovedBlizzardRanks + 1]float64{0, 0.4286}
-var ImprovedBlizzardBaseDamage = [ImprovedBlizzardRanks + 1][]float64{{0, 0}, {-40, -40}}
+var ImprovedBlizzardSpellId = [ImprovedBlizzardRanks + 1]int32{11185}
+var ImprovedBlizzardLevel = [ImprovedBlizzardRanks + 1]int{1}
+var ImprovedBlizzardCastTime = [ImprovedBlizzardRanks + 1]int32{0}
+var ImprovedBlizzardCooldownMS = [ImprovedBlizzardRanks + 1]int32{0}
+var ImprovedBlizzardManaCost = [ImprovedBlizzardRanks + 1]float64{0}
+var ImprovedBlizzardSpellCoeff = [ImprovedBlizzardRanks + 1]float64{0.4286}
+var ImprovedBlizzardBaseDamage = [ImprovedBlizzardRanks + 1][]float64{{-40, -40}}
 
 // unconfirmed: Improved Blizzard coefficient derived from the vanilla convention (rank 0)
 
-// Improved Channeling: 1 rank(s), from build 1.60.1.69893.
-const ImprovedChannelingRanks = 1
+// Improved Channeling: ranks 0 present, from build 1.60.1.69893.
+const ImprovedChannelingRanks = 0
 
-var ImprovedChannelingSpellId = [ImprovedChannelingRanks + 1]int32{0, 11237}
-var ImprovedChannelingLevel = [ImprovedChannelingRanks + 1]int{0, 1}
-var ImprovedChannelingCastTime = [ImprovedChannelingRanks + 1]int32{0, 0}
-var ImprovedChannelingCooldownMS = [ImprovedChannelingRanks + 1]int32{0, 0}
-var ImprovedChannelingManaCost = [ImprovedChannelingRanks + 1]float64{0, 0}
-var ImprovedChannelingSpellCoeff = [ImprovedChannelingRanks + 1]float64{0, 0.4286}
-var ImprovedChannelingBaseDamage = [ImprovedChannelingRanks + 1][]float64{{0, 0}, {20, 20}}
+var ImprovedChannelingSpellId = [ImprovedChannelingRanks + 1]int32{11237}
+var ImprovedChannelingLevel = [ImprovedChannelingRanks + 1]int{1}
+var ImprovedChannelingCastTime = [ImprovedChannelingRanks + 1]int32{0}
+var ImprovedChannelingCooldownMS = [ImprovedChannelingRanks + 1]int32{0}
+var ImprovedChannelingManaCost = [ImprovedChannelingRanks + 1]float64{0}
+var ImprovedChannelingSpellCoeff = [ImprovedChannelingRanks + 1]float64{0.4286}
+var ImprovedChannelingBaseDamage = [ImprovedChannelingRanks + 1][]float64{{20, 20}}
 
 // unconfirmed: Improved Channeling coefficient derived from the vanilla convention (rank 0)
 
-// Improved Cone of Cold: 1 rank(s), from build 1.60.1.69893.
-const ImprovedConeOfColdRanks = 1
+// Improved Cone of Cold: ranks 0 present, from build 1.60.1.69893.
+const ImprovedConeOfColdRanks = 0
 
-var ImprovedConeOfColdSpellId = [ImprovedConeOfColdRanks + 1]int32{0, 11190}
-var ImprovedConeOfColdLevel = [ImprovedConeOfColdRanks + 1]int{0, 1}
-var ImprovedConeOfColdCastTime = [ImprovedConeOfColdRanks + 1]int32{0, 0}
-var ImprovedConeOfColdCooldownMS = [ImprovedConeOfColdRanks + 1]int32{0, 0}
-var ImprovedConeOfColdManaCost = [ImprovedConeOfColdRanks + 1]float64{0, 0}
-var ImprovedConeOfColdSpellCoeff = [ImprovedConeOfColdRanks + 1]float64{0, 0.4286}
-var ImprovedConeOfColdBaseDamage = [ImprovedConeOfColdRanks + 1][]float64{{0, 0}, {15, 15}}
+var ImprovedConeOfColdSpellId = [ImprovedConeOfColdRanks + 1]int32{11190}
+var ImprovedConeOfColdLevel = [ImprovedConeOfColdRanks + 1]int{1}
+var ImprovedConeOfColdCastTime = [ImprovedConeOfColdRanks + 1]int32{0}
+var ImprovedConeOfColdCooldownMS = [ImprovedConeOfColdRanks + 1]int32{0}
+var ImprovedConeOfColdManaCost = [ImprovedConeOfColdRanks + 1]float64{0}
+var ImprovedConeOfColdSpellCoeff = [ImprovedConeOfColdRanks + 1]float64{0.4286}
+var ImprovedConeOfColdBaseDamage = [ImprovedConeOfColdRanks + 1][]float64{{15, 15}}
 
 // unconfirmed: Improved Cone of Cold coefficient derived from the vanilla convention (rank 0)
 
-// Improved Counterspell: 2 rank(s), from build 1.60.1.69893.
-const ImprovedCounterspellRanks = 2
+// Improved Counterspell: ranks 0 present, from build 1.60.1.69893.
+const ImprovedCounterspellRanks = 0
 
-var ImprovedCounterspellSpellId = [ImprovedCounterspellRanks + 1]int32{0, 24429, 11255}
-var ImprovedCounterspellLevel = [ImprovedCounterspellRanks + 1]int{0, 0, 1}
-var ImprovedCounterspellCastTime = [ImprovedCounterspellRanks + 1]int32{0, 0, 0}
-var ImprovedCounterspellCooldownMS = [ImprovedCounterspellRanks + 1]int32{0, 0, 0}
-var ImprovedCounterspellManaCost = [ImprovedCounterspellRanks + 1]float64{0, 0, 0}
-var ImprovedCounterspellSpellCoeff = [ImprovedCounterspellRanks + 1]float64{0, 1, 0.4286}
-var ImprovedCounterspellBaseDamage = [ImprovedCounterspellRanks + 1][]float64{{0, 0}, {-2000, -2000}, {4000, 4000}}
+var ImprovedCounterspellSpellId = [ImprovedCounterspellRanks + 1]int32{11255}
+var ImprovedCounterspellLevel = [ImprovedCounterspellRanks + 1]int{1}
+var ImprovedCounterspellCastTime = [ImprovedCounterspellRanks + 1]int32{0}
+var ImprovedCounterspellCooldownMS = [ImprovedCounterspellRanks + 1]int32{0}
+var ImprovedCounterspellManaCost = [ImprovedCounterspellRanks + 1]float64{0}
+var ImprovedCounterspellSpellCoeff = [ImprovedCounterspellRanks + 1]float64{0.4286}
+var ImprovedCounterspellBaseDamage = [ImprovedCounterspellRanks + 1][]float64{{4000, 4000}}
 
 // unconfirmed: Improved Counterspell coefficient derived from the vanilla convention (rank 0)
+// Improved Counterspell rank 0: kept id 11255 (spell_level 1); dropped 24429 (spell_level 0)
 
-// Improved Fire Ward: 1 rank(s), from build 1.60.1.69893.
-const ImprovedFireWardRanks = 1
+// Improved Fire Ward: ranks 0 present, from build 1.60.1.69893.
+const ImprovedFireWardRanks = 0
 
-var ImprovedFireWardSpellId = [ImprovedFireWardRanks + 1]int32{0, 11094}
-var ImprovedFireWardLevel = [ImprovedFireWardRanks + 1]int{0, 1}
-var ImprovedFireWardCastTime = [ImprovedFireWardRanks + 1]int32{0, 0}
-var ImprovedFireWardCooldownMS = [ImprovedFireWardRanks + 1]int32{0, 0}
-var ImprovedFireWardManaCost = [ImprovedFireWardRanks + 1]float64{0, 0}
-var ImprovedFireWardSpellCoeff = [ImprovedFireWardRanks + 1]float64{0, 0.4286}
-var ImprovedFireWardBaseDamage = [ImprovedFireWardRanks + 1][]float64{{0, 0}, {20, 20}}
+var ImprovedFireWardSpellId = [ImprovedFireWardRanks + 1]int32{11094}
+var ImprovedFireWardLevel = [ImprovedFireWardRanks + 1]int{1}
+var ImprovedFireWardCastTime = [ImprovedFireWardRanks + 1]int32{0}
+var ImprovedFireWardCooldownMS = [ImprovedFireWardRanks + 1]int32{0}
+var ImprovedFireWardManaCost = [ImprovedFireWardRanks + 1]float64{0}
+var ImprovedFireWardSpellCoeff = [ImprovedFireWardRanks + 1]float64{0.4286}
+var ImprovedFireWardBaseDamage = [ImprovedFireWardRanks + 1][]float64{{20, 20}}
 
 // unconfirmed: Improved Fire Ward coefficient derived from the vanilla convention (rank 0)
 
-// Improved Fireball: 1 rank(s), from build 1.60.1.69893.
-const ImprovedFireballRanks = 1
+// Improved Fireball: ranks 0 present, from build 1.60.1.69893.
+const ImprovedFireballRanks = 0
 
-var ImprovedFireballSpellId = [ImprovedFireballRanks + 1]int32{0, 11069}
-var ImprovedFireballLevel = [ImprovedFireballRanks + 1]int{0, 1}
-var ImprovedFireballCastTime = [ImprovedFireballRanks + 1]int32{0, 0}
-var ImprovedFireballCooldownMS = [ImprovedFireballRanks + 1]int32{0, 0}
-var ImprovedFireballManaCost = [ImprovedFireballRanks + 1]float64{0, 0}
-var ImprovedFireballSpellCoeff = [ImprovedFireballRanks + 1]float64{0, 0.4286}
-var ImprovedFireballBaseDamage = [ImprovedFireballRanks + 1][]float64{{0, 0}, {-500, -500}}
+var ImprovedFireballSpellId = [ImprovedFireballRanks + 1]int32{11069}
+var ImprovedFireballLevel = [ImprovedFireballRanks + 1]int{1}
+var ImprovedFireballCastTime = [ImprovedFireballRanks + 1]int32{0}
+var ImprovedFireballCooldownMS = [ImprovedFireballRanks + 1]int32{0}
+var ImprovedFireballManaCost = [ImprovedFireballRanks + 1]float64{0}
+var ImprovedFireballSpellCoeff = [ImprovedFireballRanks + 1]float64{0.4286}
+var ImprovedFireballBaseDamage = [ImprovedFireballRanks + 1][]float64{{-500, -500}}
 
 // unconfirmed: Improved Fireball coefficient derived from the vanilla convention (rank 0)
 
-// Improved Flamestrike: 2 rank(s), from build 1.60.1.69893.
-const ImprovedFlamestrikeRanks = 2
+// Improved Flamestrike: ranks 0 present, from build 1.60.1.69893.
+const ImprovedFlamestrikeRanks = 0
 
-var ImprovedFlamestrikeSpellId = [ImprovedFlamestrikeRanks + 1]int32{0, 24491, 11108}
-var ImprovedFlamestrikeLevel = [ImprovedFlamestrikeRanks + 1]int{0, 0, 1}
-var ImprovedFlamestrikeCastTime = [ImprovedFlamestrikeRanks + 1]int32{0, 0, 0}
-var ImprovedFlamestrikeCooldownMS = [ImprovedFlamestrikeRanks + 1]int32{0, 0, 0}
-var ImprovedFlamestrikeManaCost = [ImprovedFlamestrikeRanks + 1]float64{0, 0, 0}
-var ImprovedFlamestrikeSpellCoeff = [ImprovedFlamestrikeRanks + 1]float64{0, 1, 0.4286}
-var ImprovedFlamestrikeBaseDamage = [ImprovedFlamestrikeRanks + 1][]float64{{0, 0}, {-500, -500}, {15, 15}}
+var ImprovedFlamestrikeSpellId = [ImprovedFlamestrikeRanks + 1]int32{11108}
+var ImprovedFlamestrikeLevel = [ImprovedFlamestrikeRanks + 1]int{1}
+var ImprovedFlamestrikeCastTime = [ImprovedFlamestrikeRanks + 1]int32{0}
+var ImprovedFlamestrikeCooldownMS = [ImprovedFlamestrikeRanks + 1]int32{0}
+var ImprovedFlamestrikeManaCost = [ImprovedFlamestrikeRanks + 1]float64{0}
+var ImprovedFlamestrikeSpellCoeff = [ImprovedFlamestrikeRanks + 1]float64{0.4286}
+var ImprovedFlamestrikeBaseDamage = [ImprovedFlamestrikeRanks + 1][]float64{{15, 15}}
 
 // unconfirmed: Improved Flamestrike coefficient derived from the vanilla convention (rank 0)
+// Improved Flamestrike rank 0: kept id 11108 (spell_level 1); dropped 24491 (spell_level 0)
 
-// Improved Frost Nova: 1 rank(s), from build 1.60.1.69893.
-const ImprovedFrostNovaRanks = 1
+// Improved Frost Nova: ranks 0 present, from build 1.60.1.69893.
+const ImprovedFrostNovaRanks = 0
 
-var ImprovedFrostNovaSpellId = [ImprovedFrostNovaRanks + 1]int32{0, 11165}
-var ImprovedFrostNovaLevel = [ImprovedFrostNovaRanks + 1]int{0, 1}
-var ImprovedFrostNovaCastTime = [ImprovedFrostNovaRanks + 1]int32{0, 0}
-var ImprovedFrostNovaCooldownMS = [ImprovedFrostNovaRanks + 1]int32{0, 0}
-var ImprovedFrostNovaManaCost = [ImprovedFrostNovaRanks + 1]float64{0, 0}
-var ImprovedFrostNovaSpellCoeff = [ImprovedFrostNovaRanks + 1]float64{0, 0.4286}
-var ImprovedFrostNovaBaseDamage = [ImprovedFrostNovaRanks + 1][]float64{{0, 0}, {-4000, -4000}}
+var ImprovedFrostNovaSpellId = [ImprovedFrostNovaRanks + 1]int32{11165}
+var ImprovedFrostNovaLevel = [ImprovedFrostNovaRanks + 1]int{1}
+var ImprovedFrostNovaCastTime = [ImprovedFrostNovaRanks + 1]int32{0}
+var ImprovedFrostNovaCooldownMS = [ImprovedFrostNovaRanks + 1]int32{0}
+var ImprovedFrostNovaManaCost = [ImprovedFrostNovaRanks + 1]float64{0}
+var ImprovedFrostNovaSpellCoeff = [ImprovedFrostNovaRanks + 1]float64{0.4286}
+var ImprovedFrostNovaBaseDamage = [ImprovedFrostNovaRanks + 1][]float64{{-4000, -4000}}
 
 // unconfirmed: Improved Frost Nova coefficient derived from the vanilla convention (rank 0)
 
-// Improved Frostbolt: 1 rank(s), from build 1.60.1.69893.
-const ImprovedFrostboltRanks = 1
+// Improved Frostbolt: ranks 0 present, from build 1.60.1.69893.
+const ImprovedFrostboltRanks = 0
 
-var ImprovedFrostboltSpellId = [ImprovedFrostboltRanks + 1]int32{0, 11070}
-var ImprovedFrostboltLevel = [ImprovedFrostboltRanks + 1]int{0, 1}
-var ImprovedFrostboltCastTime = [ImprovedFrostboltRanks + 1]int32{0, 0}
-var ImprovedFrostboltCooldownMS = [ImprovedFrostboltRanks + 1]int32{0, 0}
-var ImprovedFrostboltManaCost = [ImprovedFrostboltRanks + 1]float64{0, 0}
-var ImprovedFrostboltSpellCoeff = [ImprovedFrostboltRanks + 1]float64{0, 0.4286}
-var ImprovedFrostboltBaseDamage = [ImprovedFrostboltRanks + 1][]float64{{0, 0}, {-100, -100}}
+var ImprovedFrostboltSpellId = [ImprovedFrostboltRanks + 1]int32{11070}
+var ImprovedFrostboltLevel = [ImprovedFrostboltRanks + 1]int{1}
+var ImprovedFrostboltCastTime = [ImprovedFrostboltRanks + 1]int32{0}
+var ImprovedFrostboltCooldownMS = [ImprovedFrostboltRanks + 1]int32{0}
+var ImprovedFrostboltManaCost = [ImprovedFrostboltRanks + 1]float64{0}
+var ImprovedFrostboltSpellCoeff = [ImprovedFrostboltRanks + 1]float64{0.4286}
+var ImprovedFrostboltBaseDamage = [ImprovedFrostboltRanks + 1][]float64{{-100, -100}}
 
 // unconfirmed: Improved Frostbolt coefficient derived from the vanilla convention (rank 0)
 
-// Improved Scorch: 1 rank(s), from build 1.60.1.69893.
-const ImprovedScorchRanks = 1
+// Improved Scorch: ranks 0 present, from build 1.60.1.69893.
+const ImprovedScorchRanks = 0
 
-var ImprovedScorchSpellId = [ImprovedScorchRanks + 1]int32{0, 11095}
-var ImprovedScorchLevel = [ImprovedScorchRanks + 1]int{0, 0}
-var ImprovedScorchCastTime = [ImprovedScorchRanks + 1]int32{0, 0}
-var ImprovedScorchCooldownMS = [ImprovedScorchRanks + 1]int32{0, 0}
-var ImprovedScorchManaCost = [ImprovedScorchRanks + 1]float64{0, 0}
-var ImprovedScorchSpellCoeff = [ImprovedScorchRanks + 1]float64{0, 0.4286}
-var ImprovedScorchBaseDamage = [ImprovedScorchRanks + 1][]float64{{0, 0}, {100, 100}}
+var ImprovedScorchSpellId = [ImprovedScorchRanks + 1]int32{11095}
+var ImprovedScorchLevel = [ImprovedScorchRanks + 1]int{0}
+var ImprovedScorchCastTime = [ImprovedScorchRanks + 1]int32{0}
+var ImprovedScorchCooldownMS = [ImprovedScorchRanks + 1]int32{0}
+var ImprovedScorchManaCost = [ImprovedScorchRanks + 1]float64{0}
+var ImprovedScorchSpellCoeff = [ImprovedScorchRanks + 1]float64{0.4286}
+var ImprovedScorchBaseDamage = [ImprovedScorchRanks + 1][]float64{{100, 100}}
 
 // unconfirmed: Improved Scorch coefficient derived from the vanilla convention (rank 0)
 
-// Incinerate: 1 rank(s), from build 1.60.1.69893.
-const IncinerateRanks = 1
+// Incinerate: ranks 0 present, from build 1.60.1.69893.
+const IncinerateRanks = 0
 
-var IncinerateSpellId = [IncinerateRanks + 1]int32{0, 415750}
-var IncinerateLevel = [IncinerateRanks + 1]int{0, 1}
-var IncinerateCastTime = [IncinerateRanks + 1]int32{0, 0}
-var IncinerateCooldownMS = [IncinerateRanks + 1]int32{0, 0}
-var IncinerateManaCost = [IncinerateRanks + 1]float64{0, 0}
-var IncinerateSpellCoeff = [IncinerateRanks + 1]float64{0, 0.4286}
-var IncinerateBaseDamage = [IncinerateRanks + 1][]float64{{0, 0}, {412758, 412758}}
+var IncinerateSpellId = [IncinerateRanks + 1]int32{415750}
+var IncinerateLevel = [IncinerateRanks + 1]int{1}
+var IncinerateCastTime = [IncinerateRanks + 1]int32{0}
+var IncinerateCooldownMS = [IncinerateRanks + 1]int32{0}
+var IncinerateManaCost = [IncinerateRanks + 1]float64{0}
+var IncinerateSpellCoeff = [IncinerateRanks + 1]float64{0.4286}
+var IncinerateBaseDamage = [IncinerateRanks + 1][]float64{{412758, 412758}}
 
 // unconfirmed: Incinerate coefficient derived from the vanilla convention (rank 0)
 
-// Incineration: 1 rank(s), from build 1.60.1.69893.
-const IncinerationRanks = 1
+// Incineration: ranks 0 present, from build 1.60.1.69893.
+const IncinerationRanks = 0
 
-var IncinerationSpellId = [IncinerationRanks + 1]int32{0, 18459}
-var IncinerationLevel = [IncinerationRanks + 1]int{0, 0}
-var IncinerationCastTime = [IncinerationRanks + 1]int32{0, 0}
-var IncinerationCooldownMS = [IncinerationRanks + 1]int32{0, 0}
-var IncinerationManaCost = [IncinerationRanks + 1]float64{0, 0}
-var IncinerationSpellCoeff = [IncinerationRanks + 1]float64{0, 1}
-var IncinerationBaseDamage = [IncinerationRanks + 1][]float64{{0, 0}, {6, 6}}
+var IncinerationSpellId = [IncinerationRanks + 1]int32{18459}
+var IncinerationLevel = [IncinerationRanks + 1]int{0}
+var IncinerationCastTime = [IncinerationRanks + 1]int32{0}
+var IncinerationCooldownMS = [IncinerationRanks + 1]int32{0}
+var IncinerationManaCost = [IncinerationRanks + 1]float64{0}
+var IncinerationSpellCoeff = [IncinerationRanks + 1]float64{1}
+var IncinerationBaseDamage = [IncinerationRanks + 1][]float64{{6, 6}}
 
-// Increased Area: 1 rank(s), from build 1.60.1.69893.
-const IncreasedAreaRanks = 1
+// Increased Area: ranks 0 present, from build 1.60.1.69893.
+const IncreasedAreaRanks = 0
 
-var IncreasedAreaSpellId = [IncreasedAreaRanks + 1]int32{0, 23549}
-var IncreasedAreaLevel = [IncreasedAreaRanks + 1]int{0, 0}
-var IncreasedAreaCastTime = [IncreasedAreaRanks + 1]int32{0, 0}
-var IncreasedAreaCooldownMS = [IncreasedAreaRanks + 1]int32{0, 0}
-var IncreasedAreaManaCost = [IncreasedAreaRanks + 1]float64{0, 0}
-var IncreasedAreaSpellCoeff = [IncreasedAreaRanks + 1]float64{0, 1}
-var IncreasedAreaBaseDamage = [IncreasedAreaRanks + 1][]float64{{0, 0}, {25, 25}}
+var IncreasedAreaSpellId = [IncreasedAreaRanks + 1]int32{23549}
+var IncreasedAreaLevel = [IncreasedAreaRanks + 1]int{0}
+var IncreasedAreaCastTime = [IncreasedAreaRanks + 1]int32{0}
+var IncreasedAreaCooldownMS = [IncreasedAreaRanks + 1]int32{0}
+var IncreasedAreaManaCost = [IncreasedAreaRanks + 1]float64{0}
+var IncreasedAreaSpellCoeff = [IncreasedAreaRanks + 1]float64{1}
+var IncreasedAreaBaseDamage = [IncreasedAreaRanks + 1][]float64{{25, 25}}
 
-// Infernal Armor: 1 rank(s), from build 1.60.1.69893.
-const InfernalArmorRanks = 1
+// Infernal Armor: ranks 0 present, from build 1.60.1.69893.
+const InfernalArmorRanks = 0
 
-var InfernalArmorSpellId = [InfernalArmorRanks + 1]int32{0, 440927}
-var InfernalArmorLevel = [InfernalArmorRanks + 1]int{0, 1}
-var InfernalArmorCastTime = [InfernalArmorRanks + 1]int32{0, 0}
-var InfernalArmorCooldownMS = [InfernalArmorRanks + 1]int32{0, 0}
-var InfernalArmorManaCost = [InfernalArmorRanks + 1]float64{0, 0}
-var InfernalArmorSpellCoeff = [InfernalArmorRanks + 1]float64{0, 0.4286}
-var InfernalArmorBaseDamage = [InfernalArmorRanks + 1][]float64{{0, 0}, {440882, 440882}}
+var InfernalArmorSpellId = [InfernalArmorRanks + 1]int32{440927}
+var InfernalArmorLevel = [InfernalArmorRanks + 1]int{1}
+var InfernalArmorCastTime = [InfernalArmorRanks + 1]int32{0}
+var InfernalArmorCooldownMS = [InfernalArmorRanks + 1]int32{0}
+var InfernalArmorManaCost = [InfernalArmorRanks + 1]float64{0}
+var InfernalArmorSpellCoeff = [InfernalArmorRanks + 1]float64{0.4286}
+var InfernalArmorBaseDamage = [InfernalArmorRanks + 1][]float64{{440882, 440882}}
 
 // unconfirmed: Infernal Armor coefficient derived from the vanilla convention (rank 0)
 
-// Infusion of Souls: 1 rank(s), from build 1.60.1.69893.
-const InfusionOfSoulsRanks = 1
+// Infusion of Souls: ranks 0 present, from build 1.60.1.69893.
+const InfusionOfSoulsRanks = 0
 
-var InfusionOfSoulsSpellId = [InfusionOfSoulsRanks + 1]int32{0, 1230948}
-var InfusionOfSoulsLevel = [InfusionOfSoulsRanks + 1]int{0, 0}
-var InfusionOfSoulsCastTime = [InfusionOfSoulsRanks + 1]int32{0, 0}
-var InfusionOfSoulsCooldownMS = [InfusionOfSoulsRanks + 1]int32{0, 0}
-var InfusionOfSoulsManaCost = [InfusionOfSoulsRanks + 1]float64{0, 0}
-var InfusionOfSoulsSpellCoeff = [InfusionOfSoulsRanks + 1]float64{0, 0.4286}
-var InfusionOfSoulsBaseDamage = [InfusionOfSoulsRanks + 1][]float64{{0, 0}, {0, 0}}
+var InfusionOfSoulsSpellId = [InfusionOfSoulsRanks + 1]int32{1230948}
+var InfusionOfSoulsLevel = [InfusionOfSoulsRanks + 1]int{0}
+var InfusionOfSoulsCastTime = [InfusionOfSoulsRanks + 1]int32{0}
+var InfusionOfSoulsCooldownMS = [InfusionOfSoulsRanks + 1]int32{0}
+var InfusionOfSoulsManaCost = [InfusionOfSoulsRanks + 1]float64{0}
+var InfusionOfSoulsSpellCoeff = [InfusionOfSoulsRanks + 1]float64{0.4286}
+var InfusionOfSoulsBaseDamage = [InfusionOfSoulsRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Infusion of Souls coefficient derived from the vanilla convention (rank 0)
 
-// Invisibility: 1 rank(s), from build 1.60.1.69893.
-const InvisibilityRanks = 1
+// Invisibility: ranks 0 present, from build 1.60.1.69893.
+const InvisibilityRanks = 0
 
-var InvisibilitySpellId = [InvisibilityRanks + 1]int32{0, 885}
-var InvisibilityLevel = [InvisibilityRanks + 1]int{0, 99}
-var InvisibilityCastTime = [InvisibilityRanks + 1]int32{0, 3000}
-var InvisibilityCooldownMS = [InvisibilityRanks + 1]int32{0, 0}
-var InvisibilityManaCost = [InvisibilityRanks + 1]float64{0, 200}
-var InvisibilitySpellCoeff = [InvisibilityRanks + 1]float64{0, 8}
-var InvisibilityBaseDamage = [InvisibilityRanks + 1][]float64{{0, 0}, {200, 200}}
+var InvisibilitySpellId = [InvisibilityRanks + 1]int32{885}
+var InvisibilityLevel = [InvisibilityRanks + 1]int{99}
+var InvisibilityCastTime = [InvisibilityRanks + 1]int32{3000}
+var InvisibilityCooldownMS = [InvisibilityRanks + 1]int32{0}
+var InvisibilityManaCost = [InvisibilityRanks + 1]float64{200}
+var InvisibilitySpellCoeff = [InvisibilityRanks + 1]float64{8}
+var InvisibilityBaseDamage = [InvisibilityRanks + 1][]float64{{200, 200}}
 
 // unconfirmed: Invisibility coefficient derived from the vanilla convention (rank 0)
 
-// Juju Guile: 1 rank(s), from build 1.60.1.69893.
-const JujuGuileRanks = 1
+// Juju Guile: ranks 0 present, from build 1.60.1.69893.
+const JujuGuileRanks = 0
 
-var JujuGuileSpellId = [JujuGuileRanks + 1]int32{0, 16327}
-var JujuGuileLevel = [JujuGuileRanks + 1]int{0, 42}
-var JujuGuileCastTime = [JujuGuileRanks + 1]int32{0, 0}
-var JujuGuileCooldownMS = [JujuGuileRanks + 1]int32{0, 0}
-var JujuGuileManaCost = [JujuGuileRanks + 1]float64{0, 0}
-var JujuGuileSpellCoeff = [JujuGuileRanks + 1]float64{0, 120}
-var JujuGuileBaseDamage = [JujuGuileRanks + 1][]float64{{0, 0}, {30, 30}}
+var JujuGuileSpellId = [JujuGuileRanks + 1]int32{16327}
+var JujuGuileLevel = [JujuGuileRanks + 1]int{42}
+var JujuGuileCastTime = [JujuGuileRanks + 1]int32{0}
+var JujuGuileCooldownMS = [JujuGuileRanks + 1]int32{0}
+var JujuGuileManaCost = [JujuGuileRanks + 1]float64{0}
+var JujuGuileSpellCoeff = [JujuGuileRanks + 1]float64{120}
+var JujuGuileBaseDamage = [JujuGuileRanks + 1][]float64{{30, 30}}
 
 // unconfirmed: Juju Guile coefficient derived from the vanilla convention (rank 0)
 
-// Khadgar's Unlocking: 4 rank(s), from build 1.60.1.69893.
+// Khadgar's Unlocking: ranks 1-4 present, from build 1.60.1.69893.
 const KhadgarSUnlockingRanks = 4
 
 var KhadgarSUnlockingSpellId = [KhadgarSUnlockingRanks + 1]int32{0, 491, 857, 10165, 10166}
@@ -2396,46 +2456,46 @@ var KhadgarSUnlockingBaseDamage = [KhadgarSUnlockingRanks + 1][]float64{{0, 0}, 
 
 // unconfirmed: Khadgar's Unlocking coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4)
 
-// Kill Shot: 1 rank(s), from build 1.60.1.69893.
-const KillShotRanks = 1
+// Kill Shot: ranks 0 present, from build 1.60.1.69893.
+const KillShotRanks = 0
 
-var KillShotSpellId = [KillShotRanks + 1]int32{0, 415720}
-var KillShotLevel = [KillShotRanks + 1]int{0, 1}
-var KillShotCastTime = [KillShotRanks + 1]int32{0, 0}
-var KillShotCooldownMS = [KillShotRanks + 1]int32{0, 0}
-var KillShotManaCost = [KillShotRanks + 1]float64{0, 0}
-var KillShotSpellCoeff = [KillShotRanks + 1]float64{0, 0.4286}
-var KillShotBaseDamage = [KillShotRanks + 1][]float64{{0, 0}, {409593, 409593}}
+var KillShotSpellId = [KillShotRanks + 1]int32{415720}
+var KillShotLevel = [KillShotRanks + 1]int{1}
+var KillShotCastTime = [KillShotRanks + 1]int32{0}
+var KillShotCooldownMS = [KillShotRanks + 1]int32{0}
+var KillShotManaCost = [KillShotRanks + 1]float64{0}
+var KillShotSpellCoeff = [KillShotRanks + 1]float64{0.4286}
+var KillShotBaseDamage = [KillShotRanks + 1][]float64{{409593, 409593}}
 
 // unconfirmed: Kill Shot coefficient derived from the vanilla convention (rank 0)
 
-// Lacerate: 1 rank(s), from build 1.60.1.69893.
-const LacerateRanks = 1
+// Lacerate: ranks 0 present, from build 1.60.1.69893.
+const LacerateRanks = 0
 
-var LacerateSpellId = [LacerateRanks + 1]int32{0, 415760}
-var LacerateLevel = [LacerateRanks + 1]int{0, 1}
-var LacerateCastTime = [LacerateRanks + 1]int32{0, 0}
-var LacerateCooldownMS = [LacerateRanks + 1]int32{0, 0}
-var LacerateManaCost = [LacerateRanks + 1]float64{0, 0}
-var LacerateSpellCoeff = [LacerateRanks + 1]float64{0, 0.4286}
-var LacerateBaseDamage = [LacerateRanks + 1][]float64{{0, 0}, {414644, 414644}}
+var LacerateSpellId = [LacerateRanks + 1]int32{415760}
+var LacerateLevel = [LacerateRanks + 1]int{1}
+var LacerateCastTime = [LacerateRanks + 1]int32{0}
+var LacerateCooldownMS = [LacerateRanks + 1]int32{0}
+var LacerateManaCost = [LacerateRanks + 1]float64{0}
+var LacerateSpellCoeff = [LacerateRanks + 1]float64{0.4286}
+var LacerateBaseDamage = [LacerateRanks + 1][]float64{{414644, 414644}}
 
 // unconfirmed: Lacerate coefficient derived from the vanilla convention (rank 0)
 
-// Lesser Invisibility: 1 rank(s), from build 1.60.1.69893.
-const LesserInvisibilityRanks = 1
+// Lesser Invisibility: ranks 0 present, from build 1.60.1.69893.
+const LesserInvisibilityRanks = 0
 
-var LesserInvisibilitySpellId = [LesserInvisibilityRanks + 1]int32{0, 66}
-var LesserInvisibilityLevel = [LesserInvisibilityRanks + 1]int{0, 99}
-var LesserInvisibilityCastTime = [LesserInvisibilityRanks + 1]int32{0, 3000}
-var LesserInvisibilityCooldownMS = [LesserInvisibilityRanks + 1]int32{0, 0}
-var LesserInvisibilityManaCost = [LesserInvisibilityRanks + 1]float64{0, 110}
-var LesserInvisibilitySpellCoeff = [LesserInvisibilityRanks + 1]float64{0, 8}
-var LesserInvisibilityBaseDamage = [LesserInvisibilityRanks + 1][]float64{{0, 0}, {100, 100}}
+var LesserInvisibilitySpellId = [LesserInvisibilityRanks + 1]int32{66}
+var LesserInvisibilityLevel = [LesserInvisibilityRanks + 1]int{99}
+var LesserInvisibilityCastTime = [LesserInvisibilityRanks + 1]int32{3000}
+var LesserInvisibilityCooldownMS = [LesserInvisibilityRanks + 1]int32{0}
+var LesserInvisibilityManaCost = [LesserInvisibilityRanks + 1]float64{110}
+var LesserInvisibilitySpellCoeff = [LesserInvisibilityRanks + 1]float64{8}
+var LesserInvisibilityBaseDamage = [LesserInvisibilityRanks + 1][]float64{{100, 100}}
 
 // unconfirmed: Lesser Invisibility coefficient derived from the vanilla convention (rank 0)
 
-// Lightning Volley: 1 rank(s), from build 1.60.1.69893.
+// Lightning Volley: ranks 1 present, from build 1.60.1.69893.
 const LightningVolleyRanks = 1
 
 var LightningVolleySpellId = [LightningVolleyRanks + 1]int32{0, 469058}
@@ -2448,70 +2508,72 @@ var LightningVolleyBaseDamage = [LightningVolleyRanks + 1][]float64{{0, 0}, {0, 
 
 // unconfirmed: Lightning Volley coefficient derived from the vanilla convention (rank 1)
 
-// Living Bomb: 3 rank(s), from build 1.60.1.69893.
-const LivingBombRanks = 3
+// Living Bomb: ranks 0 present, from build 1.60.1.69893.
+const LivingBombRanks = 0
 
-var LivingBombSpellId = [LivingBombRanks + 1]int32{0, 400613, 401731, 400614}
-var LivingBombLevel = [LivingBombRanks + 1]int{0, 1, 1, 1}
-var LivingBombCastTime = [LivingBombRanks + 1]int32{0, 0, 0, 0}
-var LivingBombCooldownMS = [LivingBombRanks + 1]int32{0, 0, 0, 0}
-var LivingBombManaCost = [LivingBombRanks + 1]float64{0, 0, 0, 0}
-var LivingBombSpellCoeff = [LivingBombRanks + 1]float64{0, 0.2, 0.4286, 0.4}
-var LivingBombBaseDamage = [LivingBombRanks + 1][]float64{{0, 0}, {85, 85}, {400613, 400613}, {171, 171}}
+var LivingBombSpellId = [LivingBombRanks + 1]int32{401731}
+var LivingBombLevel = [LivingBombRanks + 1]int{1}
+var LivingBombCastTime = [LivingBombRanks + 1]int32{0}
+var LivingBombCooldownMS = [LivingBombRanks + 1]int32{0}
+var LivingBombManaCost = [LivingBombRanks + 1]float64{0}
+var LivingBombSpellCoeff = [LivingBombRanks + 1]float64{0.4286}
+var LivingBombBaseDamage = [LivingBombRanks + 1][]float64{{400613, 400613}}
 
 // unconfirmed: Living Bomb coefficient derived from the vanilla convention (rank 0)
+// Living Bomb rank 0: kept id 401731 (spell_level 1); dropped 400613 (spell_level 1), 400614 (spell_level 1)
 
-// Living Flame: 3 rank(s), from build 1.60.1.69893.
-const LivingFlameRanks = 3
+// Living Flame: ranks 0 present, from build 1.60.1.69893.
+const LivingFlameRanks = 0
 
-var LivingFlameSpellId = [LivingFlameRanks + 1]int32{0, 401744, 401558, 401556}
-var LivingFlameLevel = [LivingFlameRanks + 1]int{0, 1, 0, 1}
-var LivingFlameCastTime = [LivingFlameRanks + 1]int32{0, 0, 0, 0}
-var LivingFlameCooldownMS = [LivingFlameRanks + 1]int32{0, 0, 0, 30000}
-var LivingFlameManaCost = [LivingFlameRanks + 1]float64{0, 0, 0, 0}
-var LivingFlameSpellCoeff = [LivingFlameRanks + 1]float64{0, 0.4286, 0.143, 0.6667}
-var LivingFlameBaseDamage = [LivingFlameRanks + 1][]float64{{0, 0}, {401556, 401556}, {100, 100}, {40, 40}}
+var LivingFlameSpellId = [LivingFlameRanks + 1]int32{401744}
+var LivingFlameLevel = [LivingFlameRanks + 1]int{1}
+var LivingFlameCastTime = [LivingFlameRanks + 1]int32{0}
+var LivingFlameCooldownMS = [LivingFlameRanks + 1]int32{0}
+var LivingFlameManaCost = [LivingFlameRanks + 1]float64{0}
+var LivingFlameSpellCoeff = [LivingFlameRanks + 1]float64{0.4286}
+var LivingFlameBaseDamage = [LivingFlameRanks + 1][]float64{{401556, 401556}}
 
-// unconfirmed: Living Flame coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Living Flame coefficient derived from the vanilla convention (rank 0)
+// Living Flame rank 0: kept id 401744 (spell_level 1); dropped 401556 (spell_level 1), 401558 (spell_level 0)
 
-// Living Seed: 1 rank(s), from build 1.60.1.69893.
-const LivingSeedRanks = 1
+// Living Seed: ranks 0 present, from build 1.60.1.69893.
+const LivingSeedRanks = 0
 
-var LivingSeedSpellId = [LivingSeedRanks + 1]int32{0, 415761}
-var LivingSeedLevel = [LivingSeedRanks + 1]int{0, 1}
-var LivingSeedCastTime = [LivingSeedRanks + 1]int32{0, 0}
-var LivingSeedCooldownMS = [LivingSeedRanks + 1]int32{0, 0}
-var LivingSeedManaCost = [LivingSeedRanks + 1]float64{0, 0}
-var LivingSeedSpellCoeff = [LivingSeedRanks + 1]float64{0, 0.4286}
-var LivingSeedBaseDamage = [LivingSeedRanks + 1][]float64{{0, 0}, {414677, 414677}}
+var LivingSeedSpellId = [LivingSeedRanks + 1]int32{415761}
+var LivingSeedLevel = [LivingSeedRanks + 1]int{1}
+var LivingSeedCastTime = [LivingSeedRanks + 1]int32{0}
+var LivingSeedCooldownMS = [LivingSeedRanks + 1]int32{0}
+var LivingSeedManaCost = [LivingSeedRanks + 1]float64{0}
+var LivingSeedSpellCoeff = [LivingSeedRanks + 1]float64{0.4286}
+var LivingSeedBaseDamage = [LivingSeedRanks + 1][]float64{{414677, 414677}}
 
 // unconfirmed: Living Seed coefficient derived from the vanilla convention (rank 0)
 
-// Lock and Load: 1 rank(s), from build 1.60.1.69893.
-const LockAndLoadRanks = 1
+// Lock and Load: ranks 0 present, from build 1.60.1.69893.
+const LockAndLoadRanks = 0
 
-var LockAndLoadSpellId = [LockAndLoadRanks + 1]int32{0, 415719}
-var LockAndLoadLevel = [LockAndLoadRanks + 1]int{0, 1}
-var LockAndLoadCastTime = [LockAndLoadRanks + 1]int32{0, 0}
-var LockAndLoadCooldownMS = [LockAndLoadRanks + 1]int32{0, 0}
-var LockAndLoadManaCost = [LockAndLoadRanks + 1]float64{0, 0}
-var LockAndLoadSpellCoeff = [LockAndLoadRanks + 1]float64{0, 0.4286}
-var LockAndLoadBaseDamage = [LockAndLoadRanks + 1][]float64{{0, 0}, {415413, 415413}}
+var LockAndLoadSpellId = [LockAndLoadRanks + 1]int32{415719}
+var LockAndLoadLevel = [LockAndLoadRanks + 1]int{1}
+var LockAndLoadCastTime = [LockAndLoadRanks + 1]int32{0}
+var LockAndLoadCooldownMS = [LockAndLoadRanks + 1]int32{0}
+var LockAndLoadManaCost = [LockAndLoadRanks + 1]float64{0}
+var LockAndLoadSpellCoeff = [LockAndLoadRanks + 1]float64{0.4286}
+var LockAndLoadBaseDamage = [LockAndLoadRanks + 1][]float64{{415413, 415413}}
 
 // unconfirmed: Lock and Load coefficient derived from the vanilla convention (rank 0)
 
-// Lunar Invititation: 1 rank(s), from build 1.60.1.69893.
-const LunarInvititationRanks = 1
+// Lunar Invititation: ranks 0 present, from build 1.60.1.69893.
+const LunarInvititationRanks = 0
 
-var LunarInvititationSpellId = [LunarInvititationRanks + 1]int32{0, 26373}
-var LunarInvititationLevel = [LunarInvititationRanks + 1]int{0, 10}
-var LunarInvititationCastTime = [LunarInvititationRanks + 1]int32{0, 5000}
-var LunarInvititationCooldownMS = [LunarInvititationRanks + 1]int32{0, 0}
-var LunarInvititationManaCost = [LunarInvititationRanks + 1]float64{0, 0}
-var LunarInvititationSpellCoeff = [LunarInvititationRanks + 1]float64{0, 1}
-var LunarInvititationBaseDamage = [LunarInvititationRanks + 1][]float64{{0, 0}, {0, 0}}
+var LunarInvititationSpellId = [LunarInvititationRanks + 1]int32{26373}
+var LunarInvititationLevel = [LunarInvititationRanks + 1]int{10}
+var LunarInvititationCastTime = [LunarInvititationRanks + 1]int32{5000}
+var LunarInvititationCooldownMS = [LunarInvititationRanks + 1]int32{0}
+var LunarInvititationManaCost = [LunarInvititationRanks + 1]float64{0}
+var LunarInvititationSpellCoeff = [LunarInvititationRanks + 1]float64{1}
+var LunarInvititationBaseDamage = [LunarInvititationRanks + 1][]float64{{0, 0}}
 
-// Mage Armor: 3 rank(s), from build 1.60.1.69893.
+// Mage Armor: ranks 1-3 present, from build 1.60.1.69893.
 const MageArmorRanks = 3
 
 var MageArmorSpellId = [MageArmorRanks + 1]int32{0, 6117, 22782, 22783}
@@ -2524,1211 +2586,1228 @@ var MageArmorBaseDamage = [MageArmorRanks + 1][]float64{{0, 0}, {5, 5}, {10, 10}
 
 // unconfirmed: Mage Armor coefficient derived from the vanilla convention (rank 1, rank 2, rank 3)
 
-// Magic Absorption: 1 rank(s), from build 1.60.1.69893.
-const MagicAbsorptionRanks = 1
+// Magic Absorption: ranks 0 present, from build 1.60.1.69893.
+const MagicAbsorptionRanks = 0
 
-var MagicAbsorptionSpellId = [MagicAbsorptionRanks + 1]int32{0, 29441}
-var MagicAbsorptionLevel = [MagicAbsorptionRanks + 1]int{0, 1}
-var MagicAbsorptionCastTime = [MagicAbsorptionRanks + 1]int32{0, 0}
-var MagicAbsorptionCooldownMS = [MagicAbsorptionRanks + 1]int32{0, 0}
-var MagicAbsorptionManaCost = [MagicAbsorptionRanks + 1]float64{0, 0}
-var MagicAbsorptionSpellCoeff = [MagicAbsorptionRanks + 1]float64{0, 0.4286}
-var MagicAbsorptionBaseDamage = [MagicAbsorptionRanks + 1][]float64{{0, 0}, {1, 1}}
+var MagicAbsorptionSpellId = [MagicAbsorptionRanks + 1]int32{29441}
+var MagicAbsorptionLevel = [MagicAbsorptionRanks + 1]int{1}
+var MagicAbsorptionCastTime = [MagicAbsorptionRanks + 1]int32{0}
+var MagicAbsorptionCooldownMS = [MagicAbsorptionRanks + 1]int32{0}
+var MagicAbsorptionManaCost = [MagicAbsorptionRanks + 1]float64{0}
+var MagicAbsorptionSpellCoeff = [MagicAbsorptionRanks + 1]float64{0.4286}
+var MagicAbsorptionBaseDamage = [MagicAbsorptionRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Magic Absorption coefficient derived from the vanilla convention (rank 0)
 
-// Magic Attunement: 1 rank(s), from build 1.60.1.69893.
-const MagicAttunementRanks = 1
+// Magic Attunement: ranks 2 present, from build 1.60.1.69893.
+const MagicAttunementRanks = 2
 
-var MagicAttunementSpellId = [MagicAttunementRanks + 1]int32{0, 12606}
-var MagicAttunementLevel = [MagicAttunementRanks + 1]int{0, 1}
-var MagicAttunementCastTime = [MagicAttunementRanks + 1]int32{0, 0}
-var MagicAttunementCooldownMS = [MagicAttunementRanks + 1]int32{0, 0}
-var MagicAttunementManaCost = [MagicAttunementRanks + 1]float64{0, 0}
-var MagicAttunementSpellCoeff = [MagicAttunementRanks + 1]float64{0, 0.4286}
-var MagicAttunementBaseDamage = [MagicAttunementRanks + 1][]float64{{0, 0}, {50, 50}}
+var MagicAttunementSpellId = [MagicAttunementRanks + 1]int32{0, 0, 12606}
+var MagicAttunementLevel = [MagicAttunementRanks + 1]int{0, 0, 1}
+var MagicAttunementCastTime = [MagicAttunementRanks + 1]int32{0, 0, 0}
+var MagicAttunementCooldownMS = [MagicAttunementRanks + 1]int32{0, 0, 0}
+var MagicAttunementManaCost = [MagicAttunementRanks + 1]float64{0, 0, 0}
+var MagicAttunementSpellCoeff = [MagicAttunementRanks + 1]float64{0, 0, 0.4286}
+var MagicAttunementBaseDamage = [MagicAttunementRanks + 1][]float64{{0, 0}, {0, 0}, {50, 50}}
 
 // unconfirmed: Magic Attunement coefficient derived from the vanilla convention (rank 2)
 
-// Mana Reduction 3%: 1 rank(s), from build 1.60.1.69893.
-const ManaReduction3Ranks = 1
+// Mana Reduction 3%: ranks 0 present, from build 1.60.1.69893.
+const ManaReduction3Ranks = 0
 
-var ManaReduction3SpellId = [ManaReduction3Ranks + 1]int32{0, 27514}
-var ManaReduction3Level = [ManaReduction3Ranks + 1]int{0, 1}
-var ManaReduction3CastTime = [ManaReduction3Ranks + 1]int32{0, 0}
-var ManaReduction3CooldownMS = [ManaReduction3Ranks + 1]int32{0, 0}
-var ManaReduction3ManaCost = [ManaReduction3Ranks + 1]float64{0, 0}
-var ManaReduction3SpellCoeff = [ManaReduction3Ranks + 1]float64{0, 0.4286}
-var ManaReduction3BaseDamage = [ManaReduction3Ranks + 1][]float64{{0, 0}, {3, 3}}
+var ManaReduction3SpellId = [ManaReduction3Ranks + 1]int32{27514}
+var ManaReduction3Level = [ManaReduction3Ranks + 1]int{1}
+var ManaReduction3CastTime = [ManaReduction3Ranks + 1]int32{0}
+var ManaReduction3CooldownMS = [ManaReduction3Ranks + 1]int32{0}
+var ManaReduction3ManaCost = [ManaReduction3Ranks + 1]float64{0}
+var ManaReduction3SpellCoeff = [ManaReduction3Ranks + 1]float64{0.4286}
+var ManaReduction3BaseDamage = [ManaReduction3Ranks + 1][]float64{{3, 3}}
 
 // unconfirmed: Mana Reduction 3% coefficient derived from the vanilla convention (rank 0)
 
-// Mana Shield: 14 rank(s), from build 1.60.1.69893.
-const ManaShieldRanks = 14
+// Mana Shield: ranks 0-6 present, from build 1.60.1.69893.
+const ManaShieldRanks = 6
 
-var ManaShieldSpellId = [ManaShieldRanks + 1]int32{0, 17740, 17741, 1463, 412116, 8494, 412118, 412120, 8495, 10191, 412121, 10192, 412122, 10193, 412123}
-var ManaShieldLevel = [ManaShieldRanks + 1]int{0, 20, 20, 20, 20, 28, 28, 36, 36, 44, 44, 52, 52, 60, 60}
-var ManaShieldCastTime = [ManaShieldRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-var ManaShieldCooldownMS = [ManaShieldRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-var ManaShieldManaCost = [ManaShieldRanks + 1]float64{0, 40, 40, 40, 40, 60, 60, 80, 80, 100, 100, 120, 120, 140, 140}
-var ManaShieldSpellCoeff = [ManaShieldRanks + 1]float64{0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4}
-var ManaShieldBaseDamage = [ManaShieldRanks + 1][]float64{{0, 0}, {120, 120}, {120, 120}, {120, 120}, {240, 240}, {210, 210}, {420, 420}, {600, 600}, {300, 300}, {390, 390}, {780, 780}, {480, 480}, {960, 960}, {570, 570}, {1140, 1140}}
+var ManaShieldSpellId = [ManaShieldRanks + 1]int32{17741, 412116, 412118, 412120, 412121, 412122, 412123}
+var ManaShieldLevel = [ManaShieldRanks + 1]int{20, 20, 28, 36, 44, 52, 60}
+var ManaShieldCastTime = [ManaShieldRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
+var ManaShieldCooldownMS = [ManaShieldRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
+var ManaShieldManaCost = [ManaShieldRanks + 1]float64{40, 40, 60, 80, 100, 120, 140}
+var ManaShieldSpellCoeff = [ManaShieldRanks + 1]float64{4, 4, 4, 4, 4, 4, 4}
+var ManaShieldBaseDamage = [ManaShieldRanks + 1][]float64{{120, 120}, {240, 240}, {420, 420}, {600, 600}, {780, 780}, {960, 960}, {1140, 1140}}
 
-// unconfirmed: Mana Shield coefficient derived from the vanilla convention (rank 0, rank 0, rank 1, rank 1, rank 2, rank 2, rank 3, rank 3, rank 4, rank 4, rank 5, rank 5, rank 6, rank 6)
+// unconfirmed: Mana Shield coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3, rank 4, rank 5, rank 6)
+// Mana Shield rank 0: kept id 17741 (spell_level 20); dropped 17740 (spell_level 20)
+// Mana Shield rank 1: kept id 412116 (spell_level 20); dropped 1463 (spell_level 20)
+// Mana Shield rank 2: kept id 412118 (spell_level 28); dropped 8494 (spell_level 28)
+// Mana Shield rank 3: kept id 412120 (spell_level 36); dropped 8495 (spell_level 36)
+// Mana Shield rank 4: kept id 412121 (spell_level 44); dropped 10191 (spell_level 44)
+// Mana Shield rank 5: kept id 412122 (spell_level 52); dropped 10192 (spell_level 52)
+// Mana Shield rank 6: kept id 412123 (spell_level 60); dropped 10193 (spell_level 60)
 
-// Mana Shield Absorb Increase: 2 rank(s), from build 1.60.1.69893.
-const ManaShieldAbsorbIncreaseRanks = 2
+// Mana Shield Absorb Increase: ranks 0 present, from build 1.60.1.69893.
+const ManaShieldAbsorbIncreaseRanks = 0
 
-var ManaShieldAbsorbIncreaseSpellId = [ManaShieldAbsorbIncreaseRanks + 1]int32{0, 459599, 23037}
-var ManaShieldAbsorbIncreaseLevel = [ManaShieldAbsorbIncreaseRanks + 1]int{0, 1, 1}
-var ManaShieldAbsorbIncreaseCastTime = [ManaShieldAbsorbIncreaseRanks + 1]int32{0, 0, 0}
-var ManaShieldAbsorbIncreaseCooldownMS = [ManaShieldAbsorbIncreaseRanks + 1]int32{0, 0, 0}
-var ManaShieldAbsorbIncreaseManaCost = [ManaShieldAbsorbIncreaseRanks + 1]float64{0, 0, 0}
-var ManaShieldAbsorbIncreaseSpellCoeff = [ManaShieldAbsorbIncreaseRanks + 1]float64{0, 0.4286, 0.4286}
-var ManaShieldAbsorbIncreaseBaseDamage = [ManaShieldAbsorbIncreaseRanks + 1][]float64{{0, 0}, {285, 285}, {285, 285}}
+var ManaShieldAbsorbIncreaseSpellId = [ManaShieldAbsorbIncreaseRanks + 1]int32{459599}
+var ManaShieldAbsorbIncreaseLevel = [ManaShieldAbsorbIncreaseRanks + 1]int{1}
+var ManaShieldAbsorbIncreaseCastTime = [ManaShieldAbsorbIncreaseRanks + 1]int32{0}
+var ManaShieldAbsorbIncreaseCooldownMS = [ManaShieldAbsorbIncreaseRanks + 1]int32{0}
+var ManaShieldAbsorbIncreaseManaCost = [ManaShieldAbsorbIncreaseRanks + 1]float64{0}
+var ManaShieldAbsorbIncreaseSpellCoeff = [ManaShieldAbsorbIncreaseRanks + 1]float64{0.4286}
+var ManaShieldAbsorbIncreaseBaseDamage = [ManaShieldAbsorbIncreaseRanks + 1][]float64{{285, 285}}
 
-// unconfirmed: Mana Shield Absorb Increase coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Mana Shield Absorb Increase coefficient derived from the vanilla convention (rank 0)
+// Mana Shield Absorb Increase rank 0: kept id 459599 (spell_level 1); dropped 23037 (spell_level 1)
 
-// Mangle: 1 rank(s), from build 1.60.1.69893.
-const MangleRanks = 1
+// Mangle: ranks 0 present, from build 1.60.1.69893.
+const MangleRanks = 0
 
-var MangleSpellId = [MangleRanks + 1]int32{0, 409828}
-var MangleLevel = [MangleRanks + 1]int{0, 1}
-var MangleCastTime = [MangleRanks + 1]int32{0, 0}
-var MangleCooldownMS = [MangleRanks + 1]int32{0, 0}
-var MangleManaCost = [MangleRanks + 1]float64{0, 0}
-var MangleSpellCoeff = [MangleRanks + 1]float64{0, 0.4286}
-var MangleBaseDamage = [MangleRanks + 1][]float64{{0, 0}, {407995, 407995}}
+var MangleSpellId = [MangleRanks + 1]int32{409828}
+var MangleLevel = [MangleRanks + 1]int{1}
+var MangleCastTime = [MangleRanks + 1]int32{0}
+var MangleCooldownMS = [MangleRanks + 1]int32{0}
+var MangleManaCost = [MangleRanks + 1]float64{0}
+var MangleSpellCoeff = [MangleRanks + 1]float64{0.4286}
+var MangleBaseDamage = [MangleRanks + 1][]float64{{407995, 407995}}
 
 // unconfirmed: Mangle coefficient derived from the vanilla convention (rank 0)
 
-// Maraudon Portal: 1 rank(s), from build 1.60.1.69893.
-const MaraudonPortalRanks = 1
+// Maraudon Portal: ranks 0 present, from build 1.60.1.69893.
+const MaraudonPortalRanks = 0
 
-var MaraudonPortalSpellId = [MaraudonPortalRanks + 1]int32{0, 21127}
-var MaraudonPortalLevel = [MaraudonPortalRanks + 1]int{0, 40}
-var MaraudonPortalCastTime = [MaraudonPortalRanks + 1]int32{0, 0}
-var MaraudonPortalCooldownMS = [MaraudonPortalRanks + 1]int32{0, 0}
-var MaraudonPortalManaCost = [MaraudonPortalRanks + 1]float64{0, 0}
-var MaraudonPortalSpellCoeff = [MaraudonPortalRanks + 1]float64{0, 4}
-var MaraudonPortalBaseDamage = [MaraudonPortalRanks + 1][]float64{{0, 0}, {0, 0}}
+var MaraudonPortalSpellId = [MaraudonPortalRanks + 1]int32{21127}
+var MaraudonPortalLevel = [MaraudonPortalRanks + 1]int{40}
+var MaraudonPortalCastTime = [MaraudonPortalRanks + 1]int32{0}
+var MaraudonPortalCooldownMS = [MaraudonPortalRanks + 1]int32{0}
+var MaraudonPortalManaCost = [MaraudonPortalRanks + 1]float64{0}
+var MaraudonPortalSpellCoeff = [MaraudonPortalRanks + 1]float64{4}
+var MaraudonPortalBaseDamage = [MaraudonPortalRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Maraudon Portal coefficient derived from the vanilla convention (rank 0)
 
-// Mark of Chaos: 1 rank(s), from build 1.60.1.69893.
-const MarkOfChaosRanks = 1
+// Mark of Chaos: ranks 0 present, from build 1.60.1.69893.
+const MarkOfChaosRanks = 0
 
-var MarkOfChaosSpellId = [MarkOfChaosRanks + 1]int32{0, 440925}
-var MarkOfChaosLevel = [MarkOfChaosRanks + 1]int{0, 1}
-var MarkOfChaosCastTime = [MarkOfChaosRanks + 1]int32{0, 0}
-var MarkOfChaosCooldownMS = [MarkOfChaosRanks + 1]int32{0, 0}
-var MarkOfChaosManaCost = [MarkOfChaosRanks + 1]float64{0, 0}
-var MarkOfChaosSpellCoeff = [MarkOfChaosRanks + 1]float64{0, 0.4286}
-var MarkOfChaosBaseDamage = [MarkOfChaosRanks + 1][]float64{{0, 0}, {440892, 440892}}
+var MarkOfChaosSpellId = [MarkOfChaosRanks + 1]int32{440925}
+var MarkOfChaosLevel = [MarkOfChaosRanks + 1]int{1}
+var MarkOfChaosCastTime = [MarkOfChaosRanks + 1]int32{0}
+var MarkOfChaosCooldownMS = [MarkOfChaosRanks + 1]int32{0}
+var MarkOfChaosManaCost = [MarkOfChaosRanks + 1]float64{0}
+var MarkOfChaosSpellCoeff = [MarkOfChaosRanks + 1]float64{0.4286}
+var MarkOfChaosBaseDamage = [MarkOfChaosRanks + 1][]float64{{440892, 440892}}
 
 // unconfirmed: Mark of Chaos coefficient derived from the vanilla convention (rank 0)
 
-// Mass Regeneration: 2 rank(s), from build 1.60.1.69893.
-const MassRegenerationRanks = 2
+// Mass Regeneration: ranks 0 present, from build 1.60.1.69893.
+const MassRegenerationRanks = 0
 
-var MassRegenerationSpellId = [MassRegenerationRanks + 1]int32{0, 412510, 415467}
-var MassRegenerationLevel = [MassRegenerationRanks + 1]int{0, 1, 1}
-var MassRegenerationCastTime = [MassRegenerationRanks + 1]int32{0, 0, 0}
-var MassRegenerationCooldownMS = [MassRegenerationRanks + 1]int32{0, 12000, 0}
-var MassRegenerationManaCost = [MassRegenerationRanks + 1]float64{0, 0, 0}
-var MassRegenerationSpellCoeff = [MassRegenerationRanks + 1]float64{0, 0.198, 0.4286}
-var MassRegenerationBaseDamage = [MassRegenerationRanks + 1][]float64{{0, 0}, {42, 42}, {412510, 412510}}
+var MassRegenerationSpellId = [MassRegenerationRanks + 1]int32{415467}
+var MassRegenerationLevel = [MassRegenerationRanks + 1]int{1}
+var MassRegenerationCastTime = [MassRegenerationRanks + 1]int32{0}
+var MassRegenerationCooldownMS = [MassRegenerationRanks + 1]int32{0}
+var MassRegenerationManaCost = [MassRegenerationRanks + 1]float64{0}
+var MassRegenerationSpellCoeff = [MassRegenerationRanks + 1]float64{0.4286}
+var MassRegenerationBaseDamage = [MassRegenerationRanks + 1][]float64{{412510, 412510}}
 
 // unconfirmed: Mass Regeneration coefficient derived from the vanilla convention (rank 0)
+// Mass Regeneration rank 0: kept id 415467 (spell_level 1); dropped 412510 (spell_level 1)
 
-// Master of Elements: 1 rank(s), from build 1.60.1.69893.
-const MasterOfElementsRanks = 1
+// Master of Elements: ranks 0 present, from build 1.60.1.69893.
+const MasterOfElementsRanks = 0
 
-var MasterOfElementsSpellId = [MasterOfElementsRanks + 1]int32{0, 29074}
-var MasterOfElementsLevel = [MasterOfElementsRanks + 1]int{0, 1}
-var MasterOfElementsCastTime = [MasterOfElementsRanks + 1]int32{0, 0}
-var MasterOfElementsCooldownMS = [MasterOfElementsRanks + 1]int32{0, 0}
-var MasterOfElementsManaCost = [MasterOfElementsRanks + 1]float64{0, 0}
-var MasterOfElementsSpellCoeff = [MasterOfElementsRanks + 1]float64{0, 0.4286}
-var MasterOfElementsBaseDamage = [MasterOfElementsRanks + 1][]float64{{0, 0}, {10, 10}}
+var MasterOfElementsSpellId = [MasterOfElementsRanks + 1]int32{29074}
+var MasterOfElementsLevel = [MasterOfElementsRanks + 1]int{1}
+var MasterOfElementsCastTime = [MasterOfElementsRanks + 1]int32{0}
+var MasterOfElementsCooldownMS = [MasterOfElementsRanks + 1]int32{0}
+var MasterOfElementsManaCost = [MasterOfElementsRanks + 1]float64{0}
+var MasterOfElementsSpellCoeff = [MasterOfElementsRanks + 1]float64{0.4286}
+var MasterOfElementsBaseDamage = [MasterOfElementsRanks + 1][]float64{{10, 10}}
 
 // unconfirmed: Master of Elements coefficient derived from the vanilla convention (rank 0)
 
-// Meathook: 1 rank(s), from build 1.60.1.69893.
-const MeathookRanks = 1
+// Meathook: ranks 0 present, from build 1.60.1.69893.
+const MeathookRanks = 0
 
-var MeathookSpellId = [MeathookRanks + 1]int32{0, 403436}
-var MeathookLevel = [MeathookRanks + 1]int{0, 1}
-var MeathookCastTime = [MeathookRanks + 1]int32{0, 0}
-var MeathookCooldownMS = [MeathookRanks + 1]int32{0, 0}
-var MeathookManaCost = [MeathookRanks + 1]float64{0, 0}
-var MeathookSpellCoeff = [MeathookRanks + 1]float64{0, 0.4286}
-var MeathookBaseDamage = [MeathookRanks + 1][]float64{{0, 0}, {403228, 403228}}
+var MeathookSpellId = [MeathookRanks + 1]int32{403436}
+var MeathookLevel = [MeathookRanks + 1]int{1}
+var MeathookCastTime = [MeathookRanks + 1]int32{0}
+var MeathookCooldownMS = [MeathookRanks + 1]int32{0}
+var MeathookManaCost = [MeathookRanks + 1]float64{0}
+var MeathookSpellCoeff = [MeathookRanks + 1]float64{0.4286}
+var MeathookBaseDamage = [MeathookRanks + 1][]float64{{403228, 403228}}
 
 // unconfirmed: Meathook coefficient derived from the vanilla convention (rank 0)
 
-// Melee Specialist: 1 rank(s), from build 1.60.1.69893.
-const MeleeSpecialistRanks = 1
+// Melee Specialist: ranks 0 present, from build 1.60.1.69893.
+const MeleeSpecialistRanks = 0
 
-var MeleeSpecialistSpellId = [MeleeSpecialistRanks + 1]int32{0, 415723}
-var MeleeSpecialistLevel = [MeleeSpecialistRanks + 1]int{0, 1}
-var MeleeSpecialistCastTime = [MeleeSpecialistRanks + 1]int32{0, 0}
-var MeleeSpecialistCooldownMS = [MeleeSpecialistRanks + 1]int32{0, 0}
-var MeleeSpecialistManaCost = [MeleeSpecialistRanks + 1]float64{0, 0}
-var MeleeSpecialistSpellCoeff = [MeleeSpecialistRanks + 1]float64{0, 0.4286}
-var MeleeSpecialistBaseDamage = [MeleeSpecialistRanks + 1][]float64{{0, 0}, {415352, 415352}}
+var MeleeSpecialistSpellId = [MeleeSpecialistRanks + 1]int32{415723}
+var MeleeSpecialistLevel = [MeleeSpecialistRanks + 1]int{1}
+var MeleeSpecialistCastTime = [MeleeSpecialistRanks + 1]int32{0}
+var MeleeSpecialistCooldownMS = [MeleeSpecialistRanks + 1]int32{0}
+var MeleeSpecialistManaCost = [MeleeSpecialistRanks + 1]float64{0}
+var MeleeSpecialistSpellCoeff = [MeleeSpecialistRanks + 1]float64{0.4286}
+var MeleeSpecialistBaseDamage = [MeleeSpecialistRanks + 1][]float64{{415352, 415352}}
 
 // unconfirmed: Melee Specialist coefficient derived from the vanilla convention (rank 0)
 
-// Mental Dexterity: 1 rank(s), from build 1.60.1.69893.
-const MentalDexterityRanks = 1
+// Mental Dexterity: ranks 0 present, from build 1.60.1.69893.
+const MentalDexterityRanks = 0
 
-var MentalDexteritySpellId = [MentalDexterityRanks + 1]int32{0, 415713}
-var MentalDexterityLevel = [MentalDexterityRanks + 1]int{0, 1}
-var MentalDexterityCastTime = [MentalDexterityRanks + 1]int32{0, 0}
-var MentalDexterityCooldownMS = [MentalDexterityRanks + 1]int32{0, 0}
-var MentalDexterityManaCost = [MentalDexterityRanks + 1]float64{0, 0}
-var MentalDexteritySpellCoeff = [MentalDexterityRanks + 1]float64{0, 0.4286}
-var MentalDexterityBaseDamage = [MentalDexterityRanks + 1][]float64{{0, 0}, {415140, 415140}}
+var MentalDexteritySpellId = [MentalDexterityRanks + 1]int32{415713}
+var MentalDexterityLevel = [MentalDexterityRanks + 1]int{1}
+var MentalDexterityCastTime = [MentalDexterityRanks + 1]int32{0}
+var MentalDexterityCooldownMS = [MentalDexterityRanks + 1]int32{0}
+var MentalDexterityManaCost = [MentalDexterityRanks + 1]float64{0}
+var MentalDexteritySpellCoeff = [MentalDexterityRanks + 1]float64{0.4286}
+var MentalDexterityBaseDamage = [MentalDexterityRanks + 1][]float64{{415140, 415140}}
 
 // unconfirmed: Mental Dexterity coefficient derived from the vanilla convention (rank 0)
 
-// Mind Sear: 1 rank(s), from build 1.60.1.69893.
-const MindSearRanks = 1
+// Mind Sear: ranks 0 present, from build 1.60.1.69893.
+const MindSearRanks = 0
 
-var MindSearSpellId = [MindSearRanks + 1]int32{0, 415738}
-var MindSearLevel = [MindSearRanks + 1]int{0, 1}
-var MindSearCastTime = [MindSearRanks + 1]int32{0, 0}
-var MindSearCooldownMS = [MindSearRanks + 1]int32{0, 0}
-var MindSearManaCost = [MindSearRanks + 1]float64{0, 0}
-var MindSearSpellCoeff = [MindSearRanks + 1]float64{0, 0.4286}
-var MindSearBaseDamage = [MindSearRanks + 1][]float64{{0, 0}, {413259, 413259}}
+var MindSearSpellId = [MindSearRanks + 1]int32{415738}
+var MindSearLevel = [MindSearRanks + 1]int{1}
+var MindSearCastTime = [MindSearRanks + 1]int32{0}
+var MindSearCooldownMS = [MindSearRanks + 1]int32{0}
+var MindSearManaCost = [MindSearRanks + 1]float64{0}
+var MindSearSpellCoeff = [MindSearRanks + 1]float64{0.4286}
+var MindSearBaseDamage = [MindSearRanks + 1][]float64{{413259, 413259}}
 
 // unconfirmed: Mind Sear coefficient derived from the vanilla convention (rank 0)
 
-// Missile Barrage: 4 rank(s), from build 1.60.1.69893.
-const MissileBarrageRanks = 4
+// Missile Barrage: ranks 0 present, from build 1.60.1.69893.
+const MissileBarrageRanks = 0
 
-var MissileBarrageSpellId = [MissileBarrageRanks + 1]int32{0, 400589, 467409, 400588, 401736}
-var MissileBarrageLevel = [MissileBarrageRanks + 1]int{0, 1, 1, 1, 1}
-var MissileBarrageCastTime = [MissileBarrageRanks + 1]int32{0, 0, 0, 0, 0}
-var MissileBarrageCooldownMS = [MissileBarrageRanks + 1]int32{0, 0, 0, 0, 0}
-var MissileBarrageManaCost = [MissileBarrageRanks + 1]float64{0, 0, 0, 0, 0}
-var MissileBarrageSpellCoeff = [MissileBarrageRanks + 1]float64{0, 1, 1, 0.4286, 0.4286}
-var MissileBarrageBaseDamage = [MissileBarrageRanks + 1][]float64{{0, 0}, {-50, -50}, {-50, -50}, {40, 40}, {400588, 400588}}
+var MissileBarrageSpellId = [MissileBarrageRanks + 1]int32{467409}
+var MissileBarrageLevel = [MissileBarrageRanks + 1]int{1}
+var MissileBarrageCastTime = [MissileBarrageRanks + 1]int32{0}
+var MissileBarrageCooldownMS = [MissileBarrageRanks + 1]int32{0}
+var MissileBarrageManaCost = [MissileBarrageRanks + 1]float64{0}
+var MissileBarrageSpellCoeff = [MissileBarrageRanks + 1]float64{1}
+var MissileBarrageBaseDamage = [MissileBarrageRanks + 1][]float64{{-50, -50}}
 
-// unconfirmed: Missile Barrage coefficient derived from the vanilla convention (rank 0, rank 0, rank 0, rank 0)
+// unconfirmed: Missile Barrage coefficient derived from the vanilla convention (rank 0)
+// Missile Barrage rank 0: kept id 467409 (spell_level 1); dropped 400588 (spell_level 1), 400589 (spell_level 1), 401736 (spell_level 1)
 
-// Molten Armor: 3 rank(s), from build 1.60.1.69893.
-const MoltenArmorRanks = 3
+// Molten Armor: ranks 0 present, from build 1.60.1.69893.
+const MoltenArmorRanks = 0
 
-var MoltenArmorSpellId = [MoltenArmorRanks + 1]int32{0, 429307, 428743, 428741}
-var MoltenArmorLevel = [MoltenArmorRanks + 1]int{0, 1, 1, 1}
-var MoltenArmorCastTime = [MoltenArmorRanks + 1]int32{0, 0, 0, 0}
-var MoltenArmorCooldownMS = [MoltenArmorRanks + 1]int32{0, 0, 0, 0}
-var MoltenArmorManaCost = [MoltenArmorRanks + 1]float64{0, 0, 0, 0}
-var MoltenArmorSpellCoeff = [MoltenArmorRanks + 1]float64{0, 0.4286, 0.4286, 120}
-var MoltenArmorBaseDamage = [MoltenArmorRanks + 1][]float64{{0, 0}, {428741, 428741}, {10, 10}, {0, 0}}
+var MoltenArmorSpellId = [MoltenArmorRanks + 1]int32{429307}
+var MoltenArmorLevel = [MoltenArmorRanks + 1]int{1}
+var MoltenArmorCastTime = [MoltenArmorRanks + 1]int32{0}
+var MoltenArmorCooldownMS = [MoltenArmorRanks + 1]int32{0}
+var MoltenArmorManaCost = [MoltenArmorRanks + 1]float64{0}
+var MoltenArmorSpellCoeff = [MoltenArmorRanks + 1]float64{0.4286}
+var MoltenArmorBaseDamage = [MoltenArmorRanks + 1][]float64{{428741, 428741}}
 
-// unconfirmed: Molten Armor coefficient derived from the vanilla convention (rank 0, rank 0, rank 0)
+// unconfirmed: Molten Armor coefficient derived from the vanilla convention (rank 0)
+// Molten Armor rank 0: kept id 429307 (spell_level 1); dropped 428741 (spell_level 1), 428743 (spell_level 1)
 
-// Nature's Fury: 1 rank(s), from build 1.60.1.69893.
-const NatureSFuryRanks = 1
+// Nature's Fury: ranks 0 present, from build 1.60.1.69893.
+const NatureSFuryRanks = 0
 
-var NatureSFurySpellId = [NatureSFuryRanks + 1]int32{0, 409826}
-var NatureSFuryLevel = [NatureSFuryRanks + 1]int{0, 1}
-var NatureSFuryCastTime = [NatureSFuryRanks + 1]int32{0, 0}
-var NatureSFuryCooldownMS = [NatureSFuryRanks + 1]int32{0, 0}
-var NatureSFuryManaCost = [NatureSFuryRanks + 1]float64{0, 0}
-var NatureSFurySpellCoeff = [NatureSFuryRanks + 1]float64{0, 0.4286}
-var NatureSFuryBaseDamage = [NatureSFuryRanks + 1][]float64{{0, 0}, {408307, 408307}}
+var NatureSFurySpellId = [NatureSFuryRanks + 1]int32{409826}
+var NatureSFuryLevel = [NatureSFuryRanks + 1]int{1}
+var NatureSFuryCastTime = [NatureSFuryRanks + 1]int32{0}
+var NatureSFuryCooldownMS = [NatureSFuryRanks + 1]int32{0}
+var NatureSFuryManaCost = [NatureSFuryRanks + 1]float64{0}
+var NatureSFurySpellCoeff = [NatureSFuryRanks + 1]float64{0.4286}
+var NatureSFuryBaseDamage = [NatureSFuryRanks + 1][]float64{{408307, 408307}}
 
 // unconfirmed: Nature's Fury coefficient derived from the vanilla convention (rank 0)
 
-// Nefarius Attack 000: 1 rank(s), from build 1.60.1.69893.
-const NefariusAttack000Ranks = 1
+// Nefarius Attack 000: ranks 0 present, from build 1.60.1.69893.
+const NefariusAttack000Ranks = 0
 
-var NefariusAttack000SpellId = [NefariusAttack000Ranks + 1]int32{0, 16070}
-var NefariusAttack000Level = [NefariusAttack000Ranks + 1]int{0, 20}
-var NefariusAttack000CastTime = [NefariusAttack000Ranks + 1]int32{0, 0}
-var NefariusAttack000CooldownMS = [NefariusAttack000Ranks + 1]int32{0, 0}
-var NefariusAttack000ManaCost = [NefariusAttack000Ranks + 1]float64{0, 0}
-var NefariusAttack000SpellCoeff = [NefariusAttack000Ranks + 1]float64{0, 1}
-var NefariusAttack000BaseDamage = [NefariusAttack000Ranks + 1][]float64{{0, 0}, {1, 1}}
+var NefariusAttack000SpellId = [NefariusAttack000Ranks + 1]int32{16070}
+var NefariusAttack000Level = [NefariusAttack000Ranks + 1]int{20}
+var NefariusAttack000CastTime = [NefariusAttack000Ranks + 1]int32{0}
+var NefariusAttack000CooldownMS = [NefariusAttack000Ranks + 1]int32{0}
+var NefariusAttack000ManaCost = [NefariusAttack000Ranks + 1]float64{0}
+var NefariusAttack000SpellCoeff = [NefariusAttack000Ranks + 1]float64{1}
+var NefariusAttack000BaseDamage = [NefariusAttack000Ranks + 1][]float64{{1, 1}}
 
-// Netherwind Focus: 2 rank(s), from build 1.60.1.69893.
-const NetherwindFocusRanks = 2
+// Netherwind Focus: ranks 0 present, from build 1.60.1.69893.
+const NetherwindFocusRanks = 0
 
-var NetherwindFocusSpellId = [NetherwindFocusRanks + 1]int32{0, 22007, 22008}
-var NetherwindFocusLevel = [NetherwindFocusRanks + 1]int{0, 0, 0}
-var NetherwindFocusCastTime = [NetherwindFocusRanks + 1]int32{0, 0, 0}
-var NetherwindFocusCooldownMS = [NetherwindFocusRanks + 1]int32{0, 10000, 0}
-var NetherwindFocusManaCost = [NetherwindFocusRanks + 1]float64{0, 0, 0}
-var NetherwindFocusSpellCoeff = [NetherwindFocusRanks + 1]float64{0, 1, 1}
-var NetherwindFocusBaseDamage = [NetherwindFocusRanks + 1][]float64{{0, 0}, {10, 10}, {-10000, -10000}}
+var NetherwindFocusSpellId = [NetherwindFocusRanks + 1]int32{22008}
+var NetherwindFocusLevel = [NetherwindFocusRanks + 1]int{0}
+var NetherwindFocusCastTime = [NetherwindFocusRanks + 1]int32{0}
+var NetherwindFocusCooldownMS = [NetherwindFocusRanks + 1]int32{0}
+var NetherwindFocusManaCost = [NetherwindFocusRanks + 1]float64{0}
+var NetherwindFocusSpellCoeff = [NetherwindFocusRanks + 1]float64{1}
+var NetherwindFocusBaseDamage = [NetherwindFocusRanks + 1][]float64{{-10000, -10000}}
 
-// No Steps Puzzle Aura: 1 rank(s), from build 1.60.1.69893.
-const NoStepsPuzzleAuraRanks = 1
+// Netherwind Focus rank 0: kept id 22008 (spell_level 0); dropped 22007 (spell_level 0)
 
-var NoStepsPuzzleAuraSpellId = [NoStepsPuzzleAuraRanks + 1]int32{0, 421041}
-var NoStepsPuzzleAuraLevel = [NoStepsPuzzleAuraRanks + 1]int{0, 0}
-var NoStepsPuzzleAuraCastTime = [NoStepsPuzzleAuraRanks + 1]int32{0, 0}
-var NoStepsPuzzleAuraCooldownMS = [NoStepsPuzzleAuraRanks + 1]int32{0, 0}
-var NoStepsPuzzleAuraManaCost = [NoStepsPuzzleAuraRanks + 1]float64{0, 0}
-var NoStepsPuzzleAuraSpellCoeff = [NoStepsPuzzleAuraRanks + 1]float64{0, 0.4286}
-var NoStepsPuzzleAuraBaseDamage = [NoStepsPuzzleAuraRanks + 1][]float64{{0, 0}, {0, 0}}
+// No Steps Puzzle Aura: ranks 0 present, from build 1.60.1.69893.
+const NoStepsPuzzleAuraRanks = 0
+
+var NoStepsPuzzleAuraSpellId = [NoStepsPuzzleAuraRanks + 1]int32{421041}
+var NoStepsPuzzleAuraLevel = [NoStepsPuzzleAuraRanks + 1]int{0}
+var NoStepsPuzzleAuraCastTime = [NoStepsPuzzleAuraRanks + 1]int32{0}
+var NoStepsPuzzleAuraCooldownMS = [NoStepsPuzzleAuraRanks + 1]int32{0}
+var NoStepsPuzzleAuraManaCost = [NoStepsPuzzleAuraRanks + 1]float64{0}
+var NoStepsPuzzleAuraSpellCoeff = [NoStepsPuzzleAuraRanks + 1]float64{0.4286}
+var NoStepsPuzzleAuraBaseDamage = [NoStepsPuzzleAuraRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: No Steps Puzzle Aura coefficient derived from the vanilla convention (rank 0)
 
-// Not There: 1 rank(s), from build 1.60.1.69893.
-const NotThereRanks = 1
+// Not There: ranks 0 present, from build 1.60.1.69893.
+const NotThereRanks = 0
 
-var NotThereSpellId = [NotThereRanks + 1]int32{0, 28762}
-var NotThereLevel = [NotThereRanks + 1]int{0, 1}
-var NotThereCastTime = [NotThereRanks + 1]int32{0, 0}
-var NotThereCooldownMS = [NotThereRanks + 1]int32{0, 0}
-var NotThereManaCost = [NotThereRanks + 1]float64{0, 0}
-var NotThereSpellCoeff = [NotThereRanks + 1]float64{0, 0.5333}
-var NotThereBaseDamage = [NotThereRanks + 1][]float64{{0, 0}, {-100, -100}}
+var NotThereSpellId = [NotThereRanks + 1]int32{28762}
+var NotThereLevel = [NotThereRanks + 1]int{1}
+var NotThereCastTime = [NotThereRanks + 1]int32{0}
+var NotThereCooldownMS = [NotThereRanks + 1]int32{0}
+var NotThereManaCost = [NotThereRanks + 1]float64{0}
+var NotThereSpellCoeff = [NotThereRanks + 1]float64{0.5333}
+var NotThereBaseDamage = [NotThereRanks + 1][]float64{{-100, -100}}
 
 // unconfirmed: Not There coefficient derived from the vanilla convention (rank 0)
 
-// Nourish: 1 rank(s), from build 1.60.1.69893.
-const NourishRanks = 1
+// Nourish: ranks 0 present, from build 1.60.1.69893.
+const NourishRanks = 0
 
-var NourishSpellId = [NourishRanks + 1]int32{0, 409830}
-var NourishLevel = [NourishRanks + 1]int{0, 1}
-var NourishCastTime = [NourishRanks + 1]int32{0, 0}
-var NourishCooldownMS = [NourishRanks + 1]int32{0, 0}
-var NourishManaCost = [NourishRanks + 1]float64{0, 0}
-var NourishSpellCoeff = [NourishRanks + 1]float64{0, 0.4286}
-var NourishBaseDamage = [NourishRanks + 1][]float64{{0, 0}, {408247, 408247}}
+var NourishSpellId = [NourishRanks + 1]int32{409830}
+var NourishLevel = [NourishRanks + 1]int{1}
+var NourishCastTime = [NourishRanks + 1]int32{0}
+var NourishCooldownMS = [NourishRanks + 1]int32{0}
+var NourishManaCost = [NourishRanks + 1]float64{0}
+var NourishSpellCoeff = [NourishRanks + 1]float64{0.4286}
+var NourishBaseDamage = [NourishRanks + 1][]float64{{408247, 408247}}
 
 // unconfirmed: Nourish coefficient derived from the vanilla convention (rank 0)
 
-// Noxious Breath: 1 rank(s), from build 1.60.1.69893.
-const NoxiousBreathRanks = 1
+// Noxious Breath: ranks 0 present, from build 1.60.1.69893.
+const NoxiousBreathRanks = 0
 
-var NoxiousBreathSpellId = [NoxiousBreathRanks + 1]int32{0, 1216481}
-var NoxiousBreathLevel = [NoxiousBreathRanks + 1]int{0, 0}
-var NoxiousBreathCastTime = [NoxiousBreathRanks + 1]int32{0, 0}
-var NoxiousBreathCooldownMS = [NoxiousBreathRanks + 1]int32{0, 0}
-var NoxiousBreathManaCost = [NoxiousBreathRanks + 1]float64{0, 0}
-var NoxiousBreathSpellCoeff = [NoxiousBreathRanks + 1]float64{0, 1}
-var NoxiousBreathBaseDamage = [NoxiousBreathRanks + 1][]float64{{0, 0}, {10000, 10000}}
+var NoxiousBreathSpellId = [NoxiousBreathRanks + 1]int32{1216481}
+var NoxiousBreathLevel = [NoxiousBreathRanks + 1]int{0}
+var NoxiousBreathCastTime = [NoxiousBreathRanks + 1]int32{0}
+var NoxiousBreathCooldownMS = [NoxiousBreathRanks + 1]int32{0}
+var NoxiousBreathManaCost = [NoxiousBreathRanks + 1]float64{0}
+var NoxiousBreathSpellCoeff = [NoxiousBreathRanks + 1]float64{1}
+var NoxiousBreathBaseDamage = [NoxiousBreathRanks + 1][]float64{{10000, 10000}}
 
-// Overheat: 2 rank(s), from build 1.60.1.69893.
-const OverheatRanks = 2
+// Overheat: ranks 0 present, from build 1.60.1.69893.
+const OverheatRanks = 0
 
-var OverheatSpellId = [OverheatRanks + 1]int32{0, 400615, 401737}
-var OverheatLevel = [OverheatRanks + 1]int{0, 1, 1}
-var OverheatCastTime = [OverheatRanks + 1]int32{0, 0, 0}
-var OverheatCooldownMS = [OverheatRanks + 1]int32{0, 0, 0}
-var OverheatManaCost = [OverheatRanks + 1]float64{0, 0, 0}
-var OverheatSpellCoeff = [OverheatRanks + 1]float64{0, 0.4286, 0.4286}
-var OverheatBaseDamage = [OverheatRanks + 1][]float64{{0, 0}, {1000, 1000}, {400615, 400615}}
+var OverheatSpellId = [OverheatRanks + 1]int32{401737}
+var OverheatLevel = [OverheatRanks + 1]int{1}
+var OverheatCastTime = [OverheatRanks + 1]int32{0}
+var OverheatCooldownMS = [OverheatRanks + 1]int32{0}
+var OverheatManaCost = [OverheatRanks + 1]float64{0}
+var OverheatSpellCoeff = [OverheatRanks + 1]float64{0.4286}
+var OverheatBaseDamage = [OverheatRanks + 1][]float64{{400615, 400615}}
 
-// unconfirmed: Overheat coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Overheat coefficient derived from the vanilla convention (rank 0)
+// Overheat rank 0: kept id 401737 (spell_level 1); dropped 400615 (spell_level 1)
 
-// Pain and Suffering: 1 rank(s), from build 1.60.1.69893.
-const PainAndSufferingRanks = 1
+// Pain and Suffering: ranks 0 present, from build 1.60.1.69893.
+const PainAndSufferingRanks = 0
 
-var PainAndSufferingSpellId = [PainAndSufferingRanks + 1]int32{0, 415481}
-var PainAndSufferingLevel = [PainAndSufferingRanks + 1]int{0, 1}
-var PainAndSufferingCastTime = [PainAndSufferingRanks + 1]int32{0, 0}
-var PainAndSufferingCooldownMS = [PainAndSufferingRanks + 1]int32{0, 0}
-var PainAndSufferingManaCost = [PainAndSufferingRanks + 1]float64{0, 0}
-var PainAndSufferingSpellCoeff = [PainAndSufferingRanks + 1]float64{0, 0.4286}
-var PainAndSufferingBaseDamage = [PainAndSufferingRanks + 1][]float64{{0, 0}, {413251, 413251}}
+var PainAndSufferingSpellId = [PainAndSufferingRanks + 1]int32{415481}
+var PainAndSufferingLevel = [PainAndSufferingRanks + 1]int{1}
+var PainAndSufferingCastTime = [PainAndSufferingRanks + 1]int32{0}
+var PainAndSufferingCooldownMS = [PainAndSufferingRanks + 1]int32{0}
+var PainAndSufferingManaCost = [PainAndSufferingRanks + 1]float64{0}
+var PainAndSufferingSpellCoeff = [PainAndSufferingRanks + 1]float64{0.4286}
+var PainAndSufferingBaseDamage = [PainAndSufferingRanks + 1][]float64{{413251, 413251}}
 
 // unconfirmed: Pain and Suffering coefficient derived from the vanilla convention (rank 0)
 
-// Path of no Steps: 1 rank(s), from build 1.60.1.69893.
-const PathOfNoStepsRanks = 1
+// Path of no Steps: ranks 0 present, from build 1.60.1.69893.
+const PathOfNoStepsRanks = 0
 
-var PathOfNoStepsSpellId = [PathOfNoStepsRanks + 1]int32{0, 421063}
-var PathOfNoStepsLevel = [PathOfNoStepsRanks + 1]int{0, 0}
-var PathOfNoStepsCastTime = [PathOfNoStepsRanks + 1]int32{0, 0}
-var PathOfNoStepsCooldownMS = [PathOfNoStepsRanks + 1]int32{0, 0}
-var PathOfNoStepsManaCost = [PathOfNoStepsRanks + 1]float64{0, 0}
-var PathOfNoStepsSpellCoeff = [PathOfNoStepsRanks + 1]float64{0, 0.4286}
-var PathOfNoStepsBaseDamage = [PathOfNoStepsRanks + 1][]float64{{0, 0}, {1, 1}}
+var PathOfNoStepsSpellId = [PathOfNoStepsRanks + 1]int32{421063}
+var PathOfNoStepsLevel = [PathOfNoStepsRanks + 1]int{0}
+var PathOfNoStepsCastTime = [PathOfNoStepsRanks + 1]int32{0}
+var PathOfNoStepsCooldownMS = [PathOfNoStepsRanks + 1]int32{0}
+var PathOfNoStepsManaCost = [PathOfNoStepsRanks + 1]float64{0}
+var PathOfNoStepsSpellCoeff = [PathOfNoStepsRanks + 1]float64{0.4286}
+var PathOfNoStepsBaseDamage = [PathOfNoStepsRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Path of no Steps coefficient derived from the vanilla convention (rank 0)
 
-// Penance: 1 rank(s), from build 1.60.1.69893.
-const PenanceRanks = 1
+// Penance: ranks 0 present, from build 1.60.1.69893.
+const PenanceRanks = 0
 
-var PenanceSpellId = [PenanceRanks + 1]int32{0, 402844}
-var PenanceLevel = [PenanceRanks + 1]int{0, 1}
-var PenanceCastTime = [PenanceRanks + 1]int32{0, 0}
-var PenanceCooldownMS = [PenanceRanks + 1]int32{0, 0}
-var PenanceManaCost = [PenanceRanks + 1]float64{0, 0}
-var PenanceSpellCoeff = [PenanceRanks + 1]float64{0, 0.4286}
-var PenanceBaseDamage = [PenanceRanks + 1][]float64{{0, 0}, {402174, 402174}}
+var PenanceSpellId = [PenanceRanks + 1]int32{402844}
+var PenanceLevel = [PenanceRanks + 1]int{1}
+var PenanceCastTime = [PenanceRanks + 1]int32{0}
+var PenanceCooldownMS = [PenanceRanks + 1]int32{0}
+var PenanceManaCost = [PenanceRanks + 1]float64{0}
+var PenanceSpellCoeff = [PenanceRanks + 1]float64{0.4286}
+var PenanceBaseDamage = [PenanceRanks + 1][]float64{{402174, 402174}}
 
 // unconfirmed: Penance coefficient derived from the vanilla convention (rank 0)
 
-// Permafrost: 1 rank(s), from build 1.60.1.69893.
-const PermafrostRanks = 1
+// Permafrost: ranks 0 present, from build 1.60.1.69893.
+const PermafrostRanks = 0
 
-var PermafrostSpellId = [PermafrostRanks + 1]int32{0, 11175}
-var PermafrostLevel = [PermafrostRanks + 1]int{0, 1}
-var PermafrostCastTime = [PermafrostRanks + 1]int32{0, 0}
-var PermafrostCooldownMS = [PermafrostRanks + 1]int32{0, 0}
-var PermafrostManaCost = [PermafrostRanks + 1]float64{0, 0}
-var PermafrostSpellCoeff = [PermafrostRanks + 1]float64{0, 0.4286}
-var PermafrostBaseDamage = [PermafrostRanks + 1][]float64{{0, 0}, {33, 33}}
+var PermafrostSpellId = [PermafrostRanks + 1]int32{11175}
+var PermafrostLevel = [PermafrostRanks + 1]int{1}
+var PermafrostCastTime = [PermafrostRanks + 1]int32{0}
+var PermafrostCooldownMS = [PermafrostRanks + 1]int32{0}
+var PermafrostManaCost = [PermafrostRanks + 1]float64{0}
+var PermafrostSpellCoeff = [PermafrostRanks + 1]float64{0.4286}
+var PermafrostBaseDamage = [PermafrostRanks + 1][]float64{{33, 33}}
 
 // unconfirmed: Permafrost coefficient derived from the vanilla convention (rank 0)
 
-// Persistent Shield: 2 rank(s), from build 1.60.1.69893.
-const PersistentShieldRanks = 2
+// Persistent Shield: ranks 0 present, from build 1.60.1.69893.
+const PersistentShieldRanks = 0
 
-var PersistentShieldSpellId = [PersistentShieldRanks + 1]int32{0, 26470, 26467}
-var PersistentShieldLevel = [PersistentShieldRanks + 1]int{0, 1, 0}
-var PersistentShieldCastTime = [PersistentShieldRanks + 1]int32{0, 0, 0}
-var PersistentShieldCooldownMS = [PersistentShieldRanks + 1]int32{0, 0, 0}
-var PersistentShieldManaCost = [PersistentShieldRanks + 1]float64{0, 0, 0}
-var PersistentShieldSpellCoeff = [PersistentShieldRanks + 1]float64{0, 0.5333, 2}
-var PersistentShieldBaseDamage = [PersistentShieldRanks + 1][]float64{{0, 0}, {1, 1}, {0, 0}}
+var PersistentShieldSpellId = [PersistentShieldRanks + 1]int32{26470}
+var PersistentShieldLevel = [PersistentShieldRanks + 1]int{1}
+var PersistentShieldCastTime = [PersistentShieldRanks + 1]int32{0}
+var PersistentShieldCooldownMS = [PersistentShieldRanks + 1]int32{0}
+var PersistentShieldManaCost = [PersistentShieldRanks + 1]float64{0}
+var PersistentShieldSpellCoeff = [PersistentShieldRanks + 1]float64{0.5333}
+var PersistentShieldBaseDamage = [PersistentShieldRanks + 1][]float64{{1, 1}}
 
-// unconfirmed: Persistent Shield coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Persistent Shield coefficient derived from the vanilla convention (rank 0)
+// Persistent Shield rank 0: kept id 26470 (spell_level 1); dropped 26467 (spell_level 0)
 
-// Piercing Ice: 1 rank(s), from build 1.60.1.69893.
-const PiercingIceRanks = 1
+// Piercing Ice: ranks 0 present, from build 1.60.1.69893.
+const PiercingIceRanks = 0
 
-var PiercingIceSpellId = [PiercingIceRanks + 1]int32{0, 11151}
-var PiercingIceLevel = [PiercingIceRanks + 1]int{0, 1}
-var PiercingIceCastTime = [PiercingIceRanks + 1]int32{0, 0}
-var PiercingIceCooldownMS = [PiercingIceRanks + 1]int32{0, 0}
-var PiercingIceManaCost = [PiercingIceRanks + 1]float64{0, 0}
-var PiercingIceSpellCoeff = [PiercingIceRanks + 1]float64{0, 0.4286}
-var PiercingIceBaseDamage = [PiercingIceRanks + 1][]float64{{0, 0}, {2, 2}}
+var PiercingIceSpellId = [PiercingIceRanks + 1]int32{11151}
+var PiercingIceLevel = [PiercingIceRanks + 1]int{1}
+var PiercingIceCastTime = [PiercingIceRanks + 1]int32{0}
+var PiercingIceCooldownMS = [PiercingIceRanks + 1]int32{0}
+var PiercingIceManaCost = [PiercingIceRanks + 1]float64{0}
+var PiercingIceSpellCoeff = [PiercingIceRanks + 1]float64{0.4286}
+var PiercingIceBaseDamage = [PiercingIceRanks + 1][]float64{{2, 2}}
 
 // unconfirmed: Piercing Ice coefficient derived from the vanilla convention (rank 0)
 
-// Polymorph: 7 rank(s), from build 1.60.1.69893.
-const PolymorphRanks = 7
+// Polymorph: ranks 0-4 present, from build 1.60.1.69893.
+const PolymorphRanks = 4
 
-var PolymorphSpellId = [PolymorphRanks + 1]int32{0, 28272, 29124, 28271, 118, 12824, 12825, 12826}
-var PolymorphLevel = [PolymorphRanks + 1]int{0, 60, 1, 60, 8, 20, 40, 60}
-var PolymorphCastTime = [PolymorphRanks + 1]int32{0, 1500, 0, 1500, 1500, 1500, 1500, 1500}
-var PolymorphCooldownMS = [PolymorphRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
-var PolymorphManaCost = [PolymorphRanks + 1]float64{0, 150, 0, 150, 60, 90, 120, 150}
-var PolymorphSpellCoeff = [PolymorphRanks + 1]float64{0, 3.3333, 1.3333, 3.3333, 1.3333, 2, 2.6667, 3.3333}
-var PolymorphBaseDamage = [PolymorphRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
+var PolymorphSpellId = [PolymorphRanks + 1]int32{28272, 118, 12824, 12825, 12826}
+var PolymorphLevel = [PolymorphRanks + 1]int{60, 8, 20, 40, 60}
+var PolymorphCastTime = [PolymorphRanks + 1]int32{1500, 1500, 1500, 1500, 1500}
+var PolymorphCooldownMS = [PolymorphRanks + 1]int32{0, 0, 0, 0, 0}
+var PolymorphManaCost = [PolymorphRanks + 1]float64{150, 60, 90, 120, 150}
+var PolymorphSpellCoeff = [PolymorphRanks + 1]float64{3.3333, 1.3333, 2, 2.6667, 3.3333}
+var PolymorphBaseDamage = [PolymorphRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
 
-// unconfirmed: Polymorph coefficient derived from the vanilla convention (rank 0, rank 0, rank 0, rank 1, rank 2, rank 3, rank 4)
+// unconfirmed: Polymorph coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3, rank 4)
+// Polymorph rank 0: kept id 28272 (spell_level 60); dropped 28271 (spell_level 60), 29124 (spell_level 1)
 
-// Polymorph: Cow: 1 rank(s), from build 1.60.1.69893.
-const PolymorphCowRanks = 1
+// Polymorph: Cow: ranks 0 present, from build 1.60.1.69893.
+const PolymorphCowRanks = 0
 
-var PolymorphCowSpellId = [PolymorphCowRanks + 1]int32{0, 28270}
-var PolymorphCowLevel = [PolymorphCowRanks + 1]int{0, 60}
-var PolymorphCowCastTime = [PolymorphCowRanks + 1]int32{0, 1500}
-var PolymorphCowCooldownMS = [PolymorphCowRanks + 1]int32{0, 0}
-var PolymorphCowManaCost = [PolymorphCowRanks + 1]float64{0, 150}
-var PolymorphCowSpellCoeff = [PolymorphCowRanks + 1]float64{0, 3.3333}
-var PolymorphCowBaseDamage = [PolymorphCowRanks + 1][]float64{{0, 0}, {0, 0}}
+var PolymorphCowSpellId = [PolymorphCowRanks + 1]int32{28270}
+var PolymorphCowLevel = [PolymorphCowRanks + 1]int{60}
+var PolymorphCowCastTime = [PolymorphCowRanks + 1]int32{1500}
+var PolymorphCowCooldownMS = [PolymorphCowRanks + 1]int32{0}
+var PolymorphCowManaCost = [PolymorphCowRanks + 1]float64{150}
+var PolymorphCowSpellCoeff = [PolymorphCowRanks + 1]float64{3.3333}
+var PolymorphCowBaseDamage = [PolymorphCowRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Polymorph: Cow coefficient derived from the vanilla convention (rank 0)
 
-// Portal: Darnassus: 1 rank(s), from build 1.60.1.69893.
-const PortalDarnassusRanks = 1
+// Portal: Darnassus: ranks 0 present, from build 1.60.1.69893.
+const PortalDarnassusRanks = 0
 
-var PortalDarnassusSpellId = [PortalDarnassusRanks + 1]int32{0, 11419}
-var PortalDarnassusLevel = [PortalDarnassusRanks + 1]int{0, 50}
-var PortalDarnassusCastTime = [PortalDarnassusRanks + 1]int32{0, 10000}
-var PortalDarnassusCooldownMS = [PortalDarnassusRanks + 1]int32{0, 60000}
-var PortalDarnassusManaCost = [PortalDarnassusRanks + 1]float64{0, 850}
-var PortalDarnassusSpellCoeff = [PortalDarnassusRanks + 1]float64{0, 4}
-var PortalDarnassusBaseDamage = [PortalDarnassusRanks + 1][]float64{{0, 0}, {0, 0}}
+var PortalDarnassusSpellId = [PortalDarnassusRanks + 1]int32{11419}
+var PortalDarnassusLevel = [PortalDarnassusRanks + 1]int{50}
+var PortalDarnassusCastTime = [PortalDarnassusRanks + 1]int32{10000}
+var PortalDarnassusCooldownMS = [PortalDarnassusRanks + 1]int32{60000}
+var PortalDarnassusManaCost = [PortalDarnassusRanks + 1]float64{850}
+var PortalDarnassusSpellCoeff = [PortalDarnassusRanks + 1]float64{4}
+var PortalDarnassusBaseDamage = [PortalDarnassusRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Portal: Darnassus coefficient derived from the vanilla convention (rank 0)
 
-// Portal: Ironforge: 1 rank(s), from build 1.60.1.69893.
-const PortalIronforgeRanks = 1
+// Portal: Ironforge: ranks 0 present, from build 1.60.1.69893.
+const PortalIronforgeRanks = 0
 
-var PortalIronforgeSpellId = [PortalIronforgeRanks + 1]int32{0, 11416}
-var PortalIronforgeLevel = [PortalIronforgeRanks + 1]int{0, 40}
-var PortalIronforgeCastTime = [PortalIronforgeRanks + 1]int32{0, 10000}
-var PortalIronforgeCooldownMS = [PortalIronforgeRanks + 1]int32{0, 60000}
-var PortalIronforgeManaCost = [PortalIronforgeRanks + 1]float64{0, 850}
-var PortalIronforgeSpellCoeff = [PortalIronforgeRanks + 1]float64{0, 4}
-var PortalIronforgeBaseDamage = [PortalIronforgeRanks + 1][]float64{{0, 0}, {0, 0}}
+var PortalIronforgeSpellId = [PortalIronforgeRanks + 1]int32{11416}
+var PortalIronforgeLevel = [PortalIronforgeRanks + 1]int{40}
+var PortalIronforgeCastTime = [PortalIronforgeRanks + 1]int32{10000}
+var PortalIronforgeCooldownMS = [PortalIronforgeRanks + 1]int32{60000}
+var PortalIronforgeManaCost = [PortalIronforgeRanks + 1]float64{850}
+var PortalIronforgeSpellCoeff = [PortalIronforgeRanks + 1]float64{4}
+var PortalIronforgeBaseDamage = [PortalIronforgeRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Portal: Ironforge coefficient derived from the vanilla convention (rank 0)
 
-// Portal: Karazhan: 1 rank(s), from build 1.60.1.69893.
-const PortalKarazhanRanks = 1
+// Portal: Karazhan: ranks 0 present, from build 1.60.1.69893.
+const PortalKarazhanRanks = 0
 
-var PortalKarazhanSpellId = [PortalKarazhanRanks + 1]int32{0, 28148}
-var PortalKarazhanLevel = [PortalKarazhanRanks + 1]int{0, 40}
-var PortalKarazhanCastTime = [PortalKarazhanRanks + 1]int32{0, 10000}
-var PortalKarazhanCooldownMS = [PortalKarazhanRanks + 1]int32{0, 60000}
-var PortalKarazhanManaCost = [PortalKarazhanRanks + 1]float64{0, 0}
-var PortalKarazhanSpellCoeff = [PortalKarazhanRanks + 1]float64{0, 4}
-var PortalKarazhanBaseDamage = [PortalKarazhanRanks + 1][]float64{{0, 0}, {0, 0}}
+var PortalKarazhanSpellId = [PortalKarazhanRanks + 1]int32{28148}
+var PortalKarazhanLevel = [PortalKarazhanRanks + 1]int{40}
+var PortalKarazhanCastTime = [PortalKarazhanRanks + 1]int32{10000}
+var PortalKarazhanCooldownMS = [PortalKarazhanRanks + 1]int32{60000}
+var PortalKarazhanManaCost = [PortalKarazhanRanks + 1]float64{0}
+var PortalKarazhanSpellCoeff = [PortalKarazhanRanks + 1]float64{4}
+var PortalKarazhanBaseDamage = [PortalKarazhanRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Portal: Karazhan coefficient derived from the vanilla convention (rank 0)
 
-// Portal: Orgrimmar: 1 rank(s), from build 1.60.1.69893.
-const PortalOrgrimmarRanks = 1
+// Portal: Orgrimmar: ranks 0 present, from build 1.60.1.69893.
+const PortalOrgrimmarRanks = 0
 
-var PortalOrgrimmarSpellId = [PortalOrgrimmarRanks + 1]int32{0, 11417}
-var PortalOrgrimmarLevel = [PortalOrgrimmarRanks + 1]int{0, 40}
-var PortalOrgrimmarCastTime = [PortalOrgrimmarRanks + 1]int32{0, 10000}
-var PortalOrgrimmarCooldownMS = [PortalOrgrimmarRanks + 1]int32{0, 60000}
-var PortalOrgrimmarManaCost = [PortalOrgrimmarRanks + 1]float64{0, 850}
-var PortalOrgrimmarSpellCoeff = [PortalOrgrimmarRanks + 1]float64{0, 4}
-var PortalOrgrimmarBaseDamage = [PortalOrgrimmarRanks + 1][]float64{{0, 0}, {0, 0}}
+var PortalOrgrimmarSpellId = [PortalOrgrimmarRanks + 1]int32{11417}
+var PortalOrgrimmarLevel = [PortalOrgrimmarRanks + 1]int{40}
+var PortalOrgrimmarCastTime = [PortalOrgrimmarRanks + 1]int32{10000}
+var PortalOrgrimmarCooldownMS = [PortalOrgrimmarRanks + 1]int32{60000}
+var PortalOrgrimmarManaCost = [PortalOrgrimmarRanks + 1]float64{850}
+var PortalOrgrimmarSpellCoeff = [PortalOrgrimmarRanks + 1]float64{4}
+var PortalOrgrimmarBaseDamage = [PortalOrgrimmarRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Portal: Orgrimmar coefficient derived from the vanilla convention (rank 0)
 
-// Portal: Stormwind: 1 rank(s), from build 1.60.1.69893.
-const PortalStormwindRanks = 1
+// Portal: Stormwind: ranks 0 present, from build 1.60.1.69893.
+const PortalStormwindRanks = 0
 
-var PortalStormwindSpellId = [PortalStormwindRanks + 1]int32{0, 10059}
-var PortalStormwindLevel = [PortalStormwindRanks + 1]int{0, 40}
-var PortalStormwindCastTime = [PortalStormwindRanks + 1]int32{0, 10000}
-var PortalStormwindCooldownMS = [PortalStormwindRanks + 1]int32{0, 60000}
-var PortalStormwindManaCost = [PortalStormwindRanks + 1]float64{0, 850}
-var PortalStormwindSpellCoeff = [PortalStormwindRanks + 1]float64{0, 4}
-var PortalStormwindBaseDamage = [PortalStormwindRanks + 1][]float64{{0, 0}, {0, 0}}
+var PortalStormwindSpellId = [PortalStormwindRanks + 1]int32{10059}
+var PortalStormwindLevel = [PortalStormwindRanks + 1]int{40}
+var PortalStormwindCastTime = [PortalStormwindRanks + 1]int32{10000}
+var PortalStormwindCooldownMS = [PortalStormwindRanks + 1]int32{60000}
+var PortalStormwindManaCost = [PortalStormwindRanks + 1]float64{850}
+var PortalStormwindSpellCoeff = [PortalStormwindRanks + 1]float64{4}
+var PortalStormwindBaseDamage = [PortalStormwindRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Portal: Stormwind coefficient derived from the vanilla convention (rank 0)
 
-// Portal: Thunder Bluff: 1 rank(s), from build 1.60.1.69893.
-const PortalThunderBluffRanks = 1
+// Portal: Thunder Bluff: ranks 0 present, from build 1.60.1.69893.
+const PortalThunderBluffRanks = 0
 
-var PortalThunderBluffSpellId = [PortalThunderBluffRanks + 1]int32{0, 11420}
-var PortalThunderBluffLevel = [PortalThunderBluffRanks + 1]int{0, 50}
-var PortalThunderBluffCastTime = [PortalThunderBluffRanks + 1]int32{0, 10000}
-var PortalThunderBluffCooldownMS = [PortalThunderBluffRanks + 1]int32{0, 60000}
-var PortalThunderBluffManaCost = [PortalThunderBluffRanks + 1]float64{0, 850}
-var PortalThunderBluffSpellCoeff = [PortalThunderBluffRanks + 1]float64{0, 4}
-var PortalThunderBluffBaseDamage = [PortalThunderBluffRanks + 1][]float64{{0, 0}, {0, 0}}
+var PortalThunderBluffSpellId = [PortalThunderBluffRanks + 1]int32{11420}
+var PortalThunderBluffLevel = [PortalThunderBluffRanks + 1]int{50}
+var PortalThunderBluffCastTime = [PortalThunderBluffRanks + 1]int32{10000}
+var PortalThunderBluffCooldownMS = [PortalThunderBluffRanks + 1]int32{60000}
+var PortalThunderBluffManaCost = [PortalThunderBluffRanks + 1]float64{850}
+var PortalThunderBluffSpellCoeff = [PortalThunderBluffRanks + 1]float64{4}
+var PortalThunderBluffBaseDamage = [PortalThunderBluffRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Portal: Thunder Bluff coefficient derived from the vanilla convention (rank 0)
 
-// Portal: Undercity: 1 rank(s), from build 1.60.1.69893.
-const PortalUndercityRanks = 1
+// Portal: Undercity: ranks 0 present, from build 1.60.1.69893.
+const PortalUndercityRanks = 0
 
-var PortalUndercitySpellId = [PortalUndercityRanks + 1]int32{0, 11418}
-var PortalUndercityLevel = [PortalUndercityRanks + 1]int{0, 40}
-var PortalUndercityCastTime = [PortalUndercityRanks + 1]int32{0, 10000}
-var PortalUndercityCooldownMS = [PortalUndercityRanks + 1]int32{0, 60000}
-var PortalUndercityManaCost = [PortalUndercityRanks + 1]float64{0, 850}
-var PortalUndercitySpellCoeff = [PortalUndercityRanks + 1]float64{0, 4}
-var PortalUndercityBaseDamage = [PortalUndercityRanks + 1][]float64{{0, 0}, {0, 0}}
+var PortalUndercitySpellId = [PortalUndercityRanks + 1]int32{11418}
+var PortalUndercityLevel = [PortalUndercityRanks + 1]int{40}
+var PortalUndercityCastTime = [PortalUndercityRanks + 1]int32{10000}
+var PortalUndercityCooldownMS = [PortalUndercityRanks + 1]int32{60000}
+var PortalUndercityManaCost = [PortalUndercityRanks + 1]float64{850}
+var PortalUndercitySpellCoeff = [PortalUndercityRanks + 1]float64{4}
+var PortalUndercityBaseDamage = [PortalUndercityRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Portal: Undercity coefficient derived from the vanilla convention (rank 0)
 
-// Power Word: Barrier: 1 rank(s), from build 1.60.1.69893.
-const PowerWordBarrierRanks = 1
+// Power Word: Barrier: ranks 0 present, from build 1.60.1.69893.
+const PowerWordBarrierRanks = 0
 
-var PowerWordBarrierSpellId = [PowerWordBarrierRanks + 1]int32{0, 425212}
-var PowerWordBarrierLevel = [PowerWordBarrierRanks + 1]int{0, 1}
-var PowerWordBarrierCastTime = [PowerWordBarrierRanks + 1]int32{0, 0}
-var PowerWordBarrierCooldownMS = [PowerWordBarrierRanks + 1]int32{0, 0}
-var PowerWordBarrierManaCost = [PowerWordBarrierRanks + 1]float64{0, 0}
-var PowerWordBarrierSpellCoeff = [PowerWordBarrierRanks + 1]float64{0, 0.4286}
-var PowerWordBarrierBaseDamage = [PowerWordBarrierRanks + 1][]float64{{0, 0}, {425207, 425207}}
+var PowerWordBarrierSpellId = [PowerWordBarrierRanks + 1]int32{425212}
+var PowerWordBarrierLevel = [PowerWordBarrierRanks + 1]int{1}
+var PowerWordBarrierCastTime = [PowerWordBarrierRanks + 1]int32{0}
+var PowerWordBarrierCooldownMS = [PowerWordBarrierRanks + 1]int32{0}
+var PowerWordBarrierManaCost = [PowerWordBarrierRanks + 1]float64{0}
+var PowerWordBarrierSpellCoeff = [PowerWordBarrierRanks + 1]float64{0.4286}
+var PowerWordBarrierBaseDamage = [PowerWordBarrierRanks + 1][]float64{{425207, 425207}}
 
 // unconfirmed: Power Word: Barrier coefficient derived from the vanilla convention (rank 0)
 
-// Prayer of Mending: 1 rank(s), from build 1.60.1.69893.
-const PrayerOfMendingRanks = 1
+// Prayer of Mending: ranks 0 present, from build 1.60.1.69893.
+const PrayerOfMendingRanks = 0
 
-var PrayerOfMendingSpellId = [PrayerOfMendingRanks + 1]int32{0, 402832}
-var PrayerOfMendingLevel = [PrayerOfMendingRanks + 1]int{0, 1}
-var PrayerOfMendingCastTime = [PrayerOfMendingRanks + 1]int32{0, 0}
-var PrayerOfMendingCooldownMS = [PrayerOfMendingRanks + 1]int32{0, 0}
-var PrayerOfMendingManaCost = [PrayerOfMendingRanks + 1]float64{0, 0}
-var PrayerOfMendingSpellCoeff = [PrayerOfMendingRanks + 1]float64{0, 0.4286}
-var PrayerOfMendingBaseDamage = [PrayerOfMendingRanks + 1][]float64{{0, 0}, {401859, 401859}}
+var PrayerOfMendingSpellId = [PrayerOfMendingRanks + 1]int32{402832}
+var PrayerOfMendingLevel = [PrayerOfMendingRanks + 1]int{1}
+var PrayerOfMendingCastTime = [PrayerOfMendingRanks + 1]int32{0}
+var PrayerOfMendingCooldownMS = [PrayerOfMendingRanks + 1]int32{0}
+var PrayerOfMendingManaCost = [PrayerOfMendingRanks + 1]float64{0}
+var PrayerOfMendingSpellCoeff = [PrayerOfMendingRanks + 1]float64{0.4286}
+var PrayerOfMendingBaseDamage = [PrayerOfMendingRanks + 1][]float64{{401859, 401859}}
 
 // unconfirmed: Prayer of Mending coefficient derived from the vanilla convention (rank 0)
 
-// Presence of Mind: 1 rank(s), from build 1.60.1.69893.
-const PresenceOfMindRanks = 1
+// Presence of Mind: ranks 0 present, from build 1.60.1.69893.
+const PresenceOfMindRanks = 0
 
-var PresenceOfMindSpellId = [PresenceOfMindRanks + 1]int32{0, 12043}
-var PresenceOfMindLevel = [PresenceOfMindRanks + 1]int{0, 1}
-var PresenceOfMindCastTime = [PresenceOfMindRanks + 1]int32{0, 0}
-var PresenceOfMindCooldownMS = [PresenceOfMindRanks + 1]int32{0, 180000}
-var PresenceOfMindManaCost = [PresenceOfMindRanks + 1]float64{0, 0}
-var PresenceOfMindSpellCoeff = [PresenceOfMindRanks + 1]float64{0, 0.4286}
-var PresenceOfMindBaseDamage = [PresenceOfMindRanks + 1][]float64{{0, 0}, {-100, -100}}
+var PresenceOfMindSpellId = [PresenceOfMindRanks + 1]int32{12043}
+var PresenceOfMindLevel = [PresenceOfMindRanks + 1]int{1}
+var PresenceOfMindCastTime = [PresenceOfMindRanks + 1]int32{0}
+var PresenceOfMindCooldownMS = [PresenceOfMindRanks + 1]int32{180000}
+var PresenceOfMindManaCost = [PresenceOfMindRanks + 1]float64{0}
+var PresenceOfMindSpellCoeff = [PresenceOfMindRanks + 1]float64{0.4286}
+var PresenceOfMindBaseDamage = [PresenceOfMindRanks + 1][]float64{{-100, -100}}
 
 // unconfirmed: Presence of Mind coefficient derived from the vanilla convention (rank 0)
 
-// Princess Summons Portal: 1 rank(s), from build 1.60.1.69893.
-const PrincessSummonsPortalRanks = 1
+// Princess Summons Portal: ranks 0 present, from build 1.60.1.69893.
+const PrincessSummonsPortalRanks = 0
 
-var PrincessSummonsPortalSpellId = [PrincessSummonsPortalRanks + 1]int32{0, 13912}
-var PrincessSummonsPortalLevel = [PrincessSummonsPortalRanks + 1]int{0, 40}
-var PrincessSummonsPortalCastTime = [PrincessSummonsPortalRanks + 1]int32{0, 10000}
-var PrincessSummonsPortalCooldownMS = [PrincessSummonsPortalRanks + 1]int32{0, 2000000}
-var PrincessSummonsPortalManaCost = [PrincessSummonsPortalRanks + 1]float64{0, 0}
-var PrincessSummonsPortalSpellCoeff = [PrincessSummonsPortalRanks + 1]float64{0, 40}
-var PrincessSummonsPortalBaseDamage = [PrincessSummonsPortalRanks + 1][]float64{{0, 0}, {0, 0}}
+var PrincessSummonsPortalSpellId = [PrincessSummonsPortalRanks + 1]int32{13912}
+var PrincessSummonsPortalLevel = [PrincessSummonsPortalRanks + 1]int{40}
+var PrincessSummonsPortalCastTime = [PrincessSummonsPortalRanks + 1]int32{10000}
+var PrincessSummonsPortalCooldownMS = [PrincessSummonsPortalRanks + 1]int32{2000000}
+var PrincessSummonsPortalManaCost = [PrincessSummonsPortalRanks + 1]float64{0}
+var PrincessSummonsPortalSpellCoeff = [PrincessSummonsPortalRanks + 1]float64{40}
+var PrincessSummonsPortalBaseDamage = [PrincessSummonsPortalRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Princess Summons Portal coefficient derived from the vanilla convention (rank 0)
 
-// Purged by Fire: 1 rank(s), from build 1.60.1.69893.
-const PurgedByFireRanks = 1
+// Purged by Fire: ranks 0 present, from build 1.60.1.69893.
+const PurgedByFireRanks = 0
 
-var PurgedByFireSpellId = [PurgedByFireRanks + 1]int32{0, 460338}
-var PurgedByFireLevel = [PurgedByFireRanks + 1]int{0, 63}
-var PurgedByFireCastTime = [PurgedByFireRanks + 1]int32{0, 0}
-var PurgedByFireCooldownMS = [PurgedByFireRanks + 1]int32{0, 0}
-var PurgedByFireManaCost = [PurgedByFireRanks + 1]float64{0, 0}
-var PurgedByFireSpellCoeff = [PurgedByFireRanks + 1]float64{0, 0.6667}
-var PurgedByFireBaseDamage = [PurgedByFireRanks + 1][]float64{{0, 0}, {303, 303}}
+var PurgedByFireSpellId = [PurgedByFireRanks + 1]int32{460338}
+var PurgedByFireLevel = [PurgedByFireRanks + 1]int{63}
+var PurgedByFireCastTime = [PurgedByFireRanks + 1]int32{0}
+var PurgedByFireCooldownMS = [PurgedByFireRanks + 1]int32{0}
+var PurgedByFireManaCost = [PurgedByFireRanks + 1]float64{0}
+var PurgedByFireSpellCoeff = [PurgedByFireRanks + 1]float64{0.6667}
+var PurgedByFireBaseDamage = [PurgedByFireRanks + 1][]float64{{303, 303}}
 
 // unconfirmed: Purged by Fire coefficient derived from the vanilla convention (rank 0)
 
 // skipped: "Pyroblast" already has a hand-written PyroblastRanks elsewhere in this package.
 
-// QADebug Instant Cast: 1 rank(s), from build 1.60.1.69893.
-const QADebugInstantCastRanks = 1
+// QADebug Instant Cast: ranks 0 present, from build 1.60.1.69893.
+const QADebugInstantCastRanks = 0
 
-var QADebugInstantCastSpellId = [QADebugInstantCastRanks + 1]int32{0, 27204}
-var QADebugInstantCastLevel = [QADebugInstantCastRanks + 1]int{0, 1}
-var QADebugInstantCastCastTime = [QADebugInstantCastRanks + 1]int32{0, 0}
-var QADebugInstantCastCooldownMS = [QADebugInstantCastRanks + 1]int32{0, 180000}
-var QADebugInstantCastManaCost = [QADebugInstantCastRanks + 1]float64{0, 0}
-var QADebugInstantCastSpellCoeff = [QADebugInstantCastRanks + 1]float64{0, 0.4286}
-var QADebugInstantCastBaseDamage = [QADebugInstantCastRanks + 1][]float64{{0, 0}, {-99, -99}}
+var QADebugInstantCastSpellId = [QADebugInstantCastRanks + 1]int32{27204}
+var QADebugInstantCastLevel = [QADebugInstantCastRanks + 1]int{1}
+var QADebugInstantCastCastTime = [QADebugInstantCastRanks + 1]int32{0}
+var QADebugInstantCastCooldownMS = [QADebugInstantCastRanks + 1]int32{180000}
+var QADebugInstantCastManaCost = [QADebugInstantCastRanks + 1]float64{0}
+var QADebugInstantCastSpellCoeff = [QADebugInstantCastRanks + 1]float64{0.4286}
+var QADebugInstantCastBaseDamage = [QADebugInstantCastRanks + 1][]float64{{-99, -99}}
 
 // unconfirmed: QADebug Instant Cast coefficient derived from the vanilla convention (rank 0)
 
-// Quick Strike: 1 rank(s), from build 1.60.1.69893.
-const QuickStrikeRanks = 1
+// Quick Strike: ranks 0 present, from build 1.60.1.69893.
+const QuickStrikeRanks = 0
 
-var QuickStrikeSpellId = [QuickStrikeRanks + 1]int32{0, 425428}
-var QuickStrikeLevel = [QuickStrikeRanks + 1]int{0, 1}
-var QuickStrikeCastTime = [QuickStrikeRanks + 1]int32{0, 0}
-var QuickStrikeCooldownMS = [QuickStrikeRanks + 1]int32{0, 0}
-var QuickStrikeManaCost = [QuickStrikeRanks + 1]float64{0, 0}
-var QuickStrikeSpellCoeff = [QuickStrikeRanks + 1]float64{0, 0.4286}
-var QuickStrikeBaseDamage = [QuickStrikeRanks + 1][]float64{{0, 0}, {429765, 429765}}
+var QuickStrikeSpellId = [QuickStrikeRanks + 1]int32{425428}
+var QuickStrikeLevel = [QuickStrikeRanks + 1]int{1}
+var QuickStrikeCastTime = [QuickStrikeRanks + 1]int32{0}
+var QuickStrikeCooldownMS = [QuickStrikeRanks + 1]int32{0}
+var QuickStrikeManaCost = [QuickStrikeRanks + 1]float64{0}
+var QuickStrikeSpellCoeff = [QuickStrikeRanks + 1]float64{0.4286}
+var QuickStrikeBaseDamage = [QuickStrikeRanks + 1][]float64{{429765, 429765}}
 
 // unconfirmed: Quick Strike coefficient derived from the vanilla convention (rank 0)
 
-// Raging Blow: 1 rank(s), from build 1.60.1.69893.
-const RagingBlowRanks = 1
+// Raging Blow: ranks 0 present, from build 1.60.1.69893.
+const RagingBlowRanks = 0
 
-var RagingBlowSpellId = [RagingBlowRanks + 1]int32{0, 425429}
-var RagingBlowLevel = [RagingBlowRanks + 1]int{0, 1}
-var RagingBlowCastTime = [RagingBlowRanks + 1]int32{0, 0}
-var RagingBlowCooldownMS = [RagingBlowRanks + 1]int32{0, 0}
-var RagingBlowManaCost = [RagingBlowRanks + 1]float64{0, 0}
-var RagingBlowSpellCoeff = [RagingBlowRanks + 1]float64{0, 0.4286}
-var RagingBlowBaseDamage = [RagingBlowRanks + 1][]float64{{0, 0}, {402911, 402911}}
+var RagingBlowSpellId = [RagingBlowRanks + 1]int32{425429}
+var RagingBlowLevel = [RagingBlowRanks + 1]int{1}
+var RagingBlowCastTime = [RagingBlowRanks + 1]int32{0}
+var RagingBlowCooldownMS = [RagingBlowRanks + 1]int32{0}
+var RagingBlowManaCost = [RagingBlowRanks + 1]float64{0}
+var RagingBlowSpellCoeff = [RagingBlowRanks + 1]float64{0.4286}
+var RagingBlowBaseDamage = [RagingBlowRanks + 1][]float64{{402911, 402911}}
 
 // unconfirmed: Raging Blow coefficient derived from the vanilla convention (rank 0)
 
-// Rapid Killing: 1 rank(s), from build 1.60.1.69893.
-const RapidKillingRanks = 1
+// Rapid Killing: ranks 0 present, from build 1.60.1.69893.
+const RapidKillingRanks = 0
 
-var RapidKillingSpellId = [RapidKillingRanks + 1]int32{0, 415817}
-var RapidKillingLevel = [RapidKillingRanks + 1]int{0, 1}
-var RapidKillingCastTime = [RapidKillingRanks + 1]int32{0, 0}
-var RapidKillingCooldownMS = [RapidKillingRanks + 1]int32{0, 0}
-var RapidKillingManaCost = [RapidKillingRanks + 1]float64{0, 0}
-var RapidKillingSpellCoeff = [RapidKillingRanks + 1]float64{0, 0.4286}
-var RapidKillingBaseDamage = [RapidKillingRanks + 1][]float64{{0, 0}, {415405, 415405}}
+var RapidKillingSpellId = [RapidKillingRanks + 1]int32{415817}
+var RapidKillingLevel = [RapidKillingRanks + 1]int{1}
+var RapidKillingCastTime = [RapidKillingRanks + 1]int32{0}
+var RapidKillingCooldownMS = [RapidKillingRanks + 1]int32{0}
+var RapidKillingManaCost = [RapidKillingRanks + 1]float64{0}
+var RapidKillingSpellCoeff = [RapidKillingRanks + 1]float64{0.4286}
+var RapidKillingBaseDamage = [RapidKillingRanks + 1][]float64{{415405, 415405}}
 
 // unconfirmed: Rapid Killing coefficient derived from the vanilla convention (rank 0)
 
-// Rapid Regeneration: 1 rank(s), from build 1.60.1.69893.
-const RapidRegenerationRanks = 1
+// Rapid Regeneration: ranks 0 present, from build 1.60.1.69893.
+const RapidRegenerationRanks = 0
 
-var RapidRegenerationSpellId = [RapidRegenerationRanks + 1]int32{0, 401460}
-var RapidRegenerationLevel = [RapidRegenerationRanks + 1]int{0, 1}
-var RapidRegenerationCastTime = [RapidRegenerationRanks + 1]int32{0, 0}
-var RapidRegenerationCooldownMS = [RapidRegenerationRanks + 1]int32{0, 0}
-var RapidRegenerationManaCost = [RapidRegenerationRanks + 1]float64{0, 0}
-var RapidRegenerationSpellCoeff = [RapidRegenerationRanks + 1]float64{0, 0.215}
-var RapidRegenerationBaseDamage = [RapidRegenerationRanks + 1][]float64{{0, 0}, {75, 75}}
+var RapidRegenerationSpellId = [RapidRegenerationRanks + 1]int32{401460}
+var RapidRegenerationLevel = [RapidRegenerationRanks + 1]int{1}
+var RapidRegenerationCastTime = [RapidRegenerationRanks + 1]int32{0}
+var RapidRegenerationCooldownMS = [RapidRegenerationRanks + 1]int32{0}
+var RapidRegenerationManaCost = [RapidRegenerationRanks + 1]float64{0}
+var RapidRegenerationSpellCoeff = [RapidRegenerationRanks + 1]float64{0.215}
+var RapidRegenerationBaseDamage = [RapidRegenerationRanks + 1][]float64{{75, 75}}
 
-// Raptor Fury: 1 rank(s), from build 1.60.1.69893.
-const RaptorFuryRanks = 1
+// Raptor Fury: ranks 0 present, from build 1.60.1.69893.
+const RaptorFuryRanks = 0
 
-var RaptorFurySpellId = [RaptorFuryRanks + 1]int32{0, 415822}
-var RaptorFuryLevel = [RaptorFuryRanks + 1]int{0, 1}
-var RaptorFuryCastTime = [RaptorFuryRanks + 1]int32{0, 0}
-var RaptorFuryCooldownMS = [RaptorFuryRanks + 1]int32{0, 0}
-var RaptorFuryManaCost = [RaptorFuryRanks + 1]float64{0, 0}
-var RaptorFurySpellCoeff = [RaptorFuryRanks + 1]float64{0, 0.4286}
-var RaptorFuryBaseDamage = [RaptorFuryRanks + 1][]float64{{0, 0}, {415358, 415358}}
+var RaptorFurySpellId = [RaptorFuryRanks + 1]int32{415822}
+var RaptorFuryLevel = [RaptorFuryRanks + 1]int{1}
+var RaptorFuryCastTime = [RaptorFuryRanks + 1]int32{0}
+var RaptorFuryCooldownMS = [RaptorFuryRanks + 1]int32{0}
+var RaptorFuryManaCost = [RaptorFuryRanks + 1]float64{0}
+var RaptorFurySpellCoeff = [RaptorFuryRanks + 1]float64{0.4286}
+var RaptorFuryBaseDamage = [RaptorFuryRanks + 1][]float64{{415358, 415358}}
 
 // unconfirmed: Raptor Fury coefficient derived from the vanilla convention (rank 0)
 
-// Reagent Economy: 1 rank(s), from build 1.60.1.69893.
-const ReagentEconomyRanks = 1
+// Reagent Economy: ranks 0 present, from build 1.60.1.69893.
+const ReagentEconomyRanks = 0
 
-var ReagentEconomySpellId = [ReagentEconomyRanks + 1]int32{0, 1262638}
-var ReagentEconomyLevel = [ReagentEconomyRanks + 1]int{0, 0}
-var ReagentEconomyCastTime = [ReagentEconomyRanks + 1]int32{0, 0}
-var ReagentEconomyCooldownMS = [ReagentEconomyRanks + 1]int32{0, 300000}
-var ReagentEconomyManaCost = [ReagentEconomyRanks + 1]float64{0, 0}
-var ReagentEconomySpellCoeff = [ReagentEconomyRanks + 1]float64{0, 1}
-var ReagentEconomyBaseDamage = [ReagentEconomyRanks + 1][]float64{{0, 0}, {-100, -100}}
+var ReagentEconomySpellId = [ReagentEconomyRanks + 1]int32{1262638}
+var ReagentEconomyLevel = [ReagentEconomyRanks + 1]int{0}
+var ReagentEconomyCastTime = [ReagentEconomyRanks + 1]int32{0}
+var ReagentEconomyCooldownMS = [ReagentEconomyRanks + 1]int32{300000}
+var ReagentEconomyManaCost = [ReagentEconomyRanks + 1]float64{0}
+var ReagentEconomySpellCoeff = [ReagentEconomyRanks + 1]float64{1}
+var ReagentEconomyBaseDamage = [ReagentEconomyRanks + 1][]float64{{-100, -100}}
 
-// Regeneration: 3 rank(s), from build 1.60.1.69893.
-const RegenerationRanks = 3
+// Regeneration: ranks 0 present, from build 1.60.1.69893.
+const RegenerationRanks = 0
 
-var RegenerationSpellId = [RegenerationRanks + 1]int32{0, 401743, 401417, 456485}
-var RegenerationLevel = [RegenerationRanks + 1]int{0, 1, 1, 1}
-var RegenerationCastTime = [RegenerationRanks + 1]int32{0, 0, 0, 0}
-var RegenerationCooldownMS = [RegenerationRanks + 1]int32{0, 0, 0, 0}
-var RegenerationManaCost = [RegenerationRanks + 1]float64{0, 0, 0, 0}
-var RegenerationSpellCoeff = [RegenerationRanks + 1]float64{0, 0.4286, 0.594, 0.594}
-var RegenerationBaseDamage = [RegenerationRanks + 1][]float64{{0, 0}, {401417, 401417}, {42, 42}, {42, 42}}
+var RegenerationSpellId = [RegenerationRanks + 1]int32{456485}
+var RegenerationLevel = [RegenerationRanks + 1]int{1}
+var RegenerationCastTime = [RegenerationRanks + 1]int32{0}
+var RegenerationCooldownMS = [RegenerationRanks + 1]int32{0}
+var RegenerationManaCost = [RegenerationRanks + 1]float64{0}
+var RegenerationSpellCoeff = [RegenerationRanks + 1]float64{0.594}
+var RegenerationBaseDamage = [RegenerationRanks + 1][]float64{{42, 42}}
 
-// unconfirmed: Regeneration coefficient derived from the vanilla convention (rank 0)
+// Regeneration rank 0: kept id 456485 (spell_level 1); dropped 401417 (spell_level 1), 401743 (spell_level 1)
 
-// Remove Greater Curse: 1 rank(s), from build 1.60.1.69893.
-const RemoveGreaterCurseRanks = 1
+// Remove Greater Curse: ranks 0 present, from build 1.60.1.69893.
+const RemoveGreaterCurseRanks = 0
 
-var RemoveGreaterCurseSpellId = [RemoveGreaterCurseRanks + 1]int32{0, 412113}
-var RemoveGreaterCurseLevel = [RemoveGreaterCurseRanks + 1]int{0, 1}
-var RemoveGreaterCurseCastTime = [RemoveGreaterCurseRanks + 1]int32{0, 0}
-var RemoveGreaterCurseCooldownMS = [RemoveGreaterCurseRanks + 1]int32{0, 0}
-var RemoveGreaterCurseManaCost = [RemoveGreaterCurseRanks + 1]float64{0, 0}
-var RemoveGreaterCurseSpellCoeff = [RemoveGreaterCurseRanks + 1]float64{0, 0.4286}
-var RemoveGreaterCurseBaseDamage = [RemoveGreaterCurseRanks + 1][]float64{{0, 0}, {1, 1}}
+var RemoveGreaterCurseSpellId = [RemoveGreaterCurseRanks + 1]int32{412113}
+var RemoveGreaterCurseLevel = [RemoveGreaterCurseRanks + 1]int{1}
+var RemoveGreaterCurseCastTime = [RemoveGreaterCurseRanks + 1]int32{0}
+var RemoveGreaterCurseCooldownMS = [RemoveGreaterCurseRanks + 1]int32{0}
+var RemoveGreaterCurseManaCost = [RemoveGreaterCurseRanks + 1]float64{0}
+var RemoveGreaterCurseSpellCoeff = [RemoveGreaterCurseRanks + 1]float64{0.4286}
+var RemoveGreaterCurseBaseDamage = [RemoveGreaterCurseRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Remove Greater Curse coefficient derived from the vanilla convention (rank 0)
 
-// Remove Lesser Curse: 1 rank(s), from build 1.60.1.69893.
-const RemoveLesserCurseRanks = 1
+// Remove Lesser Curse: ranks 0 present, from build 1.60.1.69893.
+const RemoveLesserCurseRanks = 0
 
-var RemoveLesserCurseSpellId = [RemoveLesserCurseRanks + 1]int32{0, 475}
-var RemoveLesserCurseLevel = [RemoveLesserCurseRanks + 1]int{0, 18}
-var RemoveLesserCurseCastTime = [RemoveLesserCurseRanks + 1]int32{0, 0}
-var RemoveLesserCurseCooldownMS = [RemoveLesserCurseRanks + 1]int32{0, 0}
-var RemoveLesserCurseManaCost = [RemoveLesserCurseRanks + 1]float64{0, 0}
-var RemoveLesserCurseSpellCoeff = [RemoveLesserCurseRanks + 1]float64{0, 0.4286}
-var RemoveLesserCurseBaseDamage = [RemoveLesserCurseRanks + 1][]float64{{0, 0}, {1, 1}}
+var RemoveLesserCurseSpellId = [RemoveLesserCurseRanks + 1]int32{475}
+var RemoveLesserCurseLevel = [RemoveLesserCurseRanks + 1]int{18}
+var RemoveLesserCurseCastTime = [RemoveLesserCurseRanks + 1]int32{0}
+var RemoveLesserCurseCooldownMS = [RemoveLesserCurseRanks + 1]int32{0}
+var RemoveLesserCurseManaCost = [RemoveLesserCurseRanks + 1]float64{0}
+var RemoveLesserCurseSpellCoeff = [RemoveLesserCurseRanks + 1]float64{0.4286}
+var RemoveLesserCurseBaseDamage = [RemoveLesserCurseRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Remove Lesser Curse coefficient derived from the vanilla convention (rank 0)
 
-// Rend and Tear: 1 rank(s), from build 1.60.1.69893.
-const RendAndTearRanks = 1
+// Rend and Tear: ranks 0 present, from build 1.60.1.69893.
+const RendAndTearRanks = 0
 
-var RendAndTearSpellId = [RendAndTearRanks + 1]int32{0, 1223246}
-var RendAndTearLevel = [RendAndTearRanks + 1]int{0, 1}
-var RendAndTearCastTime = [RendAndTearRanks + 1]int32{0, 0}
-var RendAndTearCooldownMS = [RendAndTearRanks + 1]int32{0, 0}
-var RendAndTearManaCost = [RendAndTearRanks + 1]float64{0, 0}
-var RendAndTearSpellCoeff = [RendAndTearRanks + 1]float64{0, 0.4286}
-var RendAndTearBaseDamage = [RendAndTearRanks + 1][]float64{{0, 0}, {20, 20}}
+var RendAndTearSpellId = [RendAndTearRanks + 1]int32{1223246}
+var RendAndTearLevel = [RendAndTearRanks + 1]int{1}
+var RendAndTearCastTime = [RendAndTearRanks + 1]int32{0}
+var RendAndTearCooldownMS = [RendAndTearRanks + 1]int32{0}
+var RendAndTearManaCost = [RendAndTearRanks + 1]float64{0}
+var RendAndTearSpellCoeff = [RendAndTearRanks + 1]float64{0.4286}
+var RendAndTearBaseDamage = [RendAndTearRanks + 1][]float64{{20, 20}}
 
 // unconfirmed: Rend and Tear coefficient derived from the vanilla convention (rank 0)
 
-// Rewind Time: 2 rank(s), from build 1.60.1.69893.
-const RewindTimeRanks = 2
+// Rewind Time: ranks 0 present, from build 1.60.1.69893.
+const RewindTimeRanks = 0
 
-var RewindTimeSpellId = [RewindTimeRanks + 1]int32{0, 401734, 401462}
-var RewindTimeLevel = [RewindTimeRanks + 1]int{0, 1, 1}
-var RewindTimeCastTime = [RewindTimeRanks + 1]int32{0, 0, 0}
-var RewindTimeCooldownMS = [RewindTimeRanks + 1]int32{0, 0, 30000}
-var RewindTimeManaCost = [RewindTimeRanks + 1]float64{0, 0, 0}
-var RewindTimeSpellCoeff = [RewindTimeRanks + 1]float64{0, 0.4286, 0.4286}
-var RewindTimeBaseDamage = [RewindTimeRanks + 1][]float64{{0, 0}, {401462, 401462}, {5, 5}}
+var RewindTimeSpellId = [RewindTimeRanks + 1]int32{401734}
+var RewindTimeLevel = [RewindTimeRanks + 1]int{1}
+var RewindTimeCastTime = [RewindTimeRanks + 1]int32{0}
+var RewindTimeCooldownMS = [RewindTimeRanks + 1]int32{0}
+var RewindTimeManaCost = [RewindTimeRanks + 1]float64{0}
+var RewindTimeSpellCoeff = [RewindTimeRanks + 1]float64{0.4286}
+var RewindTimeBaseDamage = [RewindTimeRanks + 1][]float64{{401462, 401462}}
 
-// unconfirmed: Rewind Time coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Rewind Time coefficient derived from the vanilla convention (rank 0)
+// Rewind Time rank 0: kept id 401734 (spell_level 1); dropped 401462 (spell_level 1)
 
-// S03 - Item - Naxxramas - Mage - Arcane 2P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemNaxxramasMageArcane2PBonusRanks = 1
+// S03 - Item - Naxxramas - Mage - Arcane 2P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemNaxxramasMageArcane2PBonusRanks = 0
 
-var S03ItemNaxxramasMageArcane2PBonusSpellId = [S03ItemNaxxramasMageArcane2PBonusRanks + 1]int32{0, 1218592}
-var S03ItemNaxxramasMageArcane2PBonusLevel = [S03ItemNaxxramasMageArcane2PBonusRanks + 1]int{0, 1}
-var S03ItemNaxxramasMageArcane2PBonusCastTime = [S03ItemNaxxramasMageArcane2PBonusRanks + 1]int32{0, 0}
-var S03ItemNaxxramasMageArcane2PBonusCooldownMS = [S03ItemNaxxramasMageArcane2PBonusRanks + 1]int32{0, 0}
-var S03ItemNaxxramasMageArcane2PBonusManaCost = [S03ItemNaxxramasMageArcane2PBonusRanks + 1]float64{0, 0}
-var S03ItemNaxxramasMageArcane2PBonusSpellCoeff = [S03ItemNaxxramasMageArcane2PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemNaxxramasMageArcane2PBonusBaseDamage = [S03ItemNaxxramasMageArcane2PBonusRanks + 1][]float64{{0, 0}, {67, 67}}
+var S03ItemNaxxramasMageArcane2PBonusSpellId = [S03ItemNaxxramasMageArcane2PBonusRanks + 1]int32{1218592}
+var S03ItemNaxxramasMageArcane2PBonusLevel = [S03ItemNaxxramasMageArcane2PBonusRanks + 1]int{1}
+var S03ItemNaxxramasMageArcane2PBonusCastTime = [S03ItemNaxxramasMageArcane2PBonusRanks + 1]int32{0}
+var S03ItemNaxxramasMageArcane2PBonusCooldownMS = [S03ItemNaxxramasMageArcane2PBonusRanks + 1]int32{0}
+var S03ItemNaxxramasMageArcane2PBonusManaCost = [S03ItemNaxxramasMageArcane2PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasMageArcane2PBonusSpellCoeff = [S03ItemNaxxramasMageArcane2PBonusRanks + 1]float64{0.4286}
+var S03ItemNaxxramasMageArcane2PBonusBaseDamage = [S03ItemNaxxramasMageArcane2PBonusRanks + 1][]float64{{67, 67}}
 
 // unconfirmed: S03 - Item - Naxxramas - Mage - Arcane 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - Naxxramas - Mage - Arcane 4P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemNaxxramasMageArcane4PBonusRanks = 1
+// S03 - Item - Naxxramas - Mage - Arcane 4P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemNaxxramasMageArcane4PBonusRanks = 0
 
-var S03ItemNaxxramasMageArcane4PBonusSpellId = [S03ItemNaxxramasMageArcane4PBonusRanks + 1]int32{0, 1218693}
-var S03ItemNaxxramasMageArcane4PBonusLevel = [S03ItemNaxxramasMageArcane4PBonusRanks + 1]int{0, 1}
-var S03ItemNaxxramasMageArcane4PBonusCastTime = [S03ItemNaxxramasMageArcane4PBonusRanks + 1]int32{0, 0}
-var S03ItemNaxxramasMageArcane4PBonusCooldownMS = [S03ItemNaxxramasMageArcane4PBonusRanks + 1]int32{0, 0}
-var S03ItemNaxxramasMageArcane4PBonusManaCost = [S03ItemNaxxramasMageArcane4PBonusRanks + 1]float64{0, 0}
-var S03ItemNaxxramasMageArcane4PBonusSpellCoeff = [S03ItemNaxxramasMageArcane4PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemNaxxramasMageArcane4PBonusBaseDamage = [S03ItemNaxxramasMageArcane4PBonusRanks + 1][]float64{{0, 0}, {60, 60}}
+var S03ItemNaxxramasMageArcane4PBonusSpellId = [S03ItemNaxxramasMageArcane4PBonusRanks + 1]int32{1218693}
+var S03ItemNaxxramasMageArcane4PBonusLevel = [S03ItemNaxxramasMageArcane4PBonusRanks + 1]int{1}
+var S03ItemNaxxramasMageArcane4PBonusCastTime = [S03ItemNaxxramasMageArcane4PBonusRanks + 1]int32{0}
+var S03ItemNaxxramasMageArcane4PBonusCooldownMS = [S03ItemNaxxramasMageArcane4PBonusRanks + 1]int32{0}
+var S03ItemNaxxramasMageArcane4PBonusManaCost = [S03ItemNaxxramasMageArcane4PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasMageArcane4PBonusSpellCoeff = [S03ItemNaxxramasMageArcane4PBonusRanks + 1]float64{0.4286}
+var S03ItemNaxxramasMageArcane4PBonusBaseDamage = [S03ItemNaxxramasMageArcane4PBonusRanks + 1][]float64{{60, 60}}
 
 // unconfirmed: S03 - Item - Naxxramas - Mage - Arcane 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - Naxxramas - Mage - Arcane 6P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemNaxxramasMageArcane6PBonusRanks = 1
+// S03 - Item - Naxxramas - Mage - Arcane 6P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemNaxxramasMageArcane6PBonusRanks = 0
 
-var S03ItemNaxxramasMageArcane6PBonusSpellId = [S03ItemNaxxramasMageArcane6PBonusRanks + 1]int32{0, 1218697}
-var S03ItemNaxxramasMageArcane6PBonusLevel = [S03ItemNaxxramasMageArcane6PBonusRanks + 1]int{0, 1}
-var S03ItemNaxxramasMageArcane6PBonusCastTime = [S03ItemNaxxramasMageArcane6PBonusRanks + 1]int32{0, 0}
-var S03ItemNaxxramasMageArcane6PBonusCooldownMS = [S03ItemNaxxramasMageArcane6PBonusRanks + 1]int32{0, 0}
-var S03ItemNaxxramasMageArcane6PBonusManaCost = [S03ItemNaxxramasMageArcane6PBonusRanks + 1]float64{0, 0}
-var S03ItemNaxxramasMageArcane6PBonusSpellCoeff = [S03ItemNaxxramasMageArcane6PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemNaxxramasMageArcane6PBonusBaseDamage = [S03ItemNaxxramasMageArcane6PBonusRanks + 1][]float64{{0, 0}, {25, 25}}
+var S03ItemNaxxramasMageArcane6PBonusSpellId = [S03ItemNaxxramasMageArcane6PBonusRanks + 1]int32{1218697}
+var S03ItemNaxxramasMageArcane6PBonusLevel = [S03ItemNaxxramasMageArcane6PBonusRanks + 1]int{1}
+var S03ItemNaxxramasMageArcane6PBonusCastTime = [S03ItemNaxxramasMageArcane6PBonusRanks + 1]int32{0}
+var S03ItemNaxxramasMageArcane6PBonusCooldownMS = [S03ItemNaxxramasMageArcane6PBonusRanks + 1]int32{0}
+var S03ItemNaxxramasMageArcane6PBonusManaCost = [S03ItemNaxxramasMageArcane6PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasMageArcane6PBonusSpellCoeff = [S03ItemNaxxramasMageArcane6PBonusRanks + 1]float64{0.4286}
+var S03ItemNaxxramasMageArcane6PBonusBaseDamage = [S03ItemNaxxramasMageArcane6PBonusRanks + 1][]float64{{25, 25}}
 
 // unconfirmed: S03 - Item - Naxxramas - Mage - Arcane 6P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - Naxxramas - Mage - Damage 2P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemNaxxramasMageDamage2PBonusRanks = 1
+// S03 - Item - Naxxramas - Mage - Damage 2P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemNaxxramasMageDamage2PBonusRanks = 0
 
-var S03ItemNaxxramasMageDamage2PBonusSpellId = [S03ItemNaxxramasMageDamage2PBonusRanks + 1]int32{0, 1218993}
-var S03ItemNaxxramasMageDamage2PBonusLevel = [S03ItemNaxxramasMageDamage2PBonusRanks + 1]int{0, 1}
-var S03ItemNaxxramasMageDamage2PBonusCastTime = [S03ItemNaxxramasMageDamage2PBonusRanks + 1]int32{0, 0}
-var S03ItemNaxxramasMageDamage2PBonusCooldownMS = [S03ItemNaxxramasMageDamage2PBonusRanks + 1]int32{0, 0}
-var S03ItemNaxxramasMageDamage2PBonusManaCost = [S03ItemNaxxramasMageDamage2PBonusRanks + 1]float64{0, 0}
-var S03ItemNaxxramasMageDamage2PBonusSpellCoeff = [S03ItemNaxxramasMageDamage2PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemNaxxramasMageDamage2PBonusBaseDamage = [S03ItemNaxxramasMageDamage2PBonusRanks + 1][]float64{{0, 0}, {-80, -80}}
+var S03ItemNaxxramasMageDamage2PBonusSpellId = [S03ItemNaxxramasMageDamage2PBonusRanks + 1]int32{1218993}
+var S03ItemNaxxramasMageDamage2PBonusLevel = [S03ItemNaxxramasMageDamage2PBonusRanks + 1]int{1}
+var S03ItemNaxxramasMageDamage2PBonusCastTime = [S03ItemNaxxramasMageDamage2PBonusRanks + 1]int32{0}
+var S03ItemNaxxramasMageDamage2PBonusCooldownMS = [S03ItemNaxxramasMageDamage2PBonusRanks + 1]int32{0}
+var S03ItemNaxxramasMageDamage2PBonusManaCost = [S03ItemNaxxramasMageDamage2PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasMageDamage2PBonusSpellCoeff = [S03ItemNaxxramasMageDamage2PBonusRanks + 1]float64{0.4286}
+var S03ItemNaxxramasMageDamage2PBonusBaseDamage = [S03ItemNaxxramasMageDamage2PBonusRanks + 1][]float64{{-80, -80}}
 
 // unconfirmed: S03 - Item - Naxxramas - Mage - Damage 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - Naxxramas - Mage - Damage 4P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemNaxxramasMageDamage4PBonusRanks = 1
+// S03 - Item - Naxxramas - Mage - Damage 4P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemNaxxramasMageDamage4PBonusRanks = 0
 
-var S03ItemNaxxramasMageDamage4PBonusSpellId = [S03ItemNaxxramasMageDamage4PBonusRanks + 1]int32{0, 1218700}
-var S03ItemNaxxramasMageDamage4PBonusLevel = [S03ItemNaxxramasMageDamage4PBonusRanks + 1]int{0, 1}
-var S03ItemNaxxramasMageDamage4PBonusCastTime = [S03ItemNaxxramasMageDamage4PBonusRanks + 1]int32{0, 0}
-var S03ItemNaxxramasMageDamage4PBonusCooldownMS = [S03ItemNaxxramasMageDamage4PBonusRanks + 1]int32{0, 0}
-var S03ItemNaxxramasMageDamage4PBonusManaCost = [S03ItemNaxxramasMageDamage4PBonusRanks + 1]float64{0, 0}
-var S03ItemNaxxramasMageDamage4PBonusSpellCoeff = [S03ItemNaxxramasMageDamage4PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemNaxxramasMageDamage4PBonusBaseDamage = [S03ItemNaxxramasMageDamage4PBonusRanks + 1][]float64{{0, 0}, {67, 67}}
+var S03ItemNaxxramasMageDamage4PBonusSpellId = [S03ItemNaxxramasMageDamage4PBonusRanks + 1]int32{1218700}
+var S03ItemNaxxramasMageDamage4PBonusLevel = [S03ItemNaxxramasMageDamage4PBonusRanks + 1]int{1}
+var S03ItemNaxxramasMageDamage4PBonusCastTime = [S03ItemNaxxramasMageDamage4PBonusRanks + 1]int32{0}
+var S03ItemNaxxramasMageDamage4PBonusCooldownMS = [S03ItemNaxxramasMageDamage4PBonusRanks + 1]int32{0}
+var S03ItemNaxxramasMageDamage4PBonusManaCost = [S03ItemNaxxramasMageDamage4PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasMageDamage4PBonusSpellCoeff = [S03ItemNaxxramasMageDamage4PBonusRanks + 1]float64{0.4286}
+var S03ItemNaxxramasMageDamage4PBonusBaseDamage = [S03ItemNaxxramasMageDamage4PBonusRanks + 1][]float64{{67, 67}}
 
 // unconfirmed: S03 - Item - Naxxramas - Mage - Damage 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - Naxxramas - Mage - Damage 6P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemNaxxramasMageDamage6PBonusRanks = 1
+// S03 - Item - Naxxramas - Mage - Damage 6P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemNaxxramasMageDamage6PBonusRanks = 0
 
-var S03ItemNaxxramasMageDamage6PBonusSpellId = [S03ItemNaxxramasMageDamage6PBonusRanks + 1]int32{0, 1218995}
-var S03ItemNaxxramasMageDamage6PBonusLevel = [S03ItemNaxxramasMageDamage6PBonusRanks + 1]int{0, 1}
-var S03ItemNaxxramasMageDamage6PBonusCastTime = [S03ItemNaxxramasMageDamage6PBonusRanks + 1]int32{0, 0}
-var S03ItemNaxxramasMageDamage6PBonusCooldownMS = [S03ItemNaxxramasMageDamage6PBonusRanks + 1]int32{0, 0}
-var S03ItemNaxxramasMageDamage6PBonusManaCost = [S03ItemNaxxramasMageDamage6PBonusRanks + 1]float64{0, 0}
-var S03ItemNaxxramasMageDamage6PBonusSpellCoeff = [S03ItemNaxxramasMageDamage6PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemNaxxramasMageDamage6PBonusBaseDamage = [S03ItemNaxxramasMageDamage6PBonusRanks + 1][]float64{{0, 0}, {20, 20}}
+var S03ItemNaxxramasMageDamage6PBonusSpellId = [S03ItemNaxxramasMageDamage6PBonusRanks + 1]int32{1218995}
+var S03ItemNaxxramasMageDamage6PBonusLevel = [S03ItemNaxxramasMageDamage6PBonusRanks + 1]int{1}
+var S03ItemNaxxramasMageDamage6PBonusCastTime = [S03ItemNaxxramasMageDamage6PBonusRanks + 1]int32{0}
+var S03ItemNaxxramasMageDamage6PBonusCooldownMS = [S03ItemNaxxramasMageDamage6PBonusRanks + 1]int32{0}
+var S03ItemNaxxramasMageDamage6PBonusManaCost = [S03ItemNaxxramasMageDamage6PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasMageDamage6PBonusSpellCoeff = [S03ItemNaxxramasMageDamage6PBonusRanks + 1]float64{0.4286}
+var S03ItemNaxxramasMageDamage6PBonusBaseDamage = [S03ItemNaxxramasMageDamage6PBonusRanks + 1][]float64{{20, 20}}
 
 // unconfirmed: S03 - Item - Naxxramas - Mage - Damage 6P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - RAQ - Mage - Fire 3P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemRAQMageFire3PBonusRanks = 1
+// S03 - Item - RAQ - Mage - Fire 3P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemRAQMageFire3PBonusRanks = 0
 
-var S03ItemRAQMageFire3PBonusSpellId = [S03ItemRAQMageFire3PBonusRanks + 1]int32{0, 1213321}
-var S03ItemRAQMageFire3PBonusLevel = [S03ItemRAQMageFire3PBonusRanks + 1]int{0, 1}
-var S03ItemRAQMageFire3PBonusCastTime = [S03ItemRAQMageFire3PBonusRanks + 1]int32{0, 0}
-var S03ItemRAQMageFire3PBonusCooldownMS = [S03ItemRAQMageFire3PBonusRanks + 1]int32{0, 0}
-var S03ItemRAQMageFire3PBonusManaCost = [S03ItemRAQMageFire3PBonusRanks + 1]float64{0, 0}
-var S03ItemRAQMageFire3PBonusSpellCoeff = [S03ItemRAQMageFire3PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemRAQMageFire3PBonusBaseDamage = [S03ItemRAQMageFire3PBonusRanks + 1][]float64{{0, 0}, {3, 3}}
+var S03ItemRAQMageFire3PBonusSpellId = [S03ItemRAQMageFire3PBonusRanks + 1]int32{1213321}
+var S03ItemRAQMageFire3PBonusLevel = [S03ItemRAQMageFire3PBonusRanks + 1]int{1}
+var S03ItemRAQMageFire3PBonusCastTime = [S03ItemRAQMageFire3PBonusRanks + 1]int32{0}
+var S03ItemRAQMageFire3PBonusCooldownMS = [S03ItemRAQMageFire3PBonusRanks + 1]int32{0}
+var S03ItemRAQMageFire3PBonusManaCost = [S03ItemRAQMageFire3PBonusRanks + 1]float64{0}
+var S03ItemRAQMageFire3PBonusSpellCoeff = [S03ItemRAQMageFire3PBonusRanks + 1]float64{0.4286}
+var S03ItemRAQMageFire3PBonusBaseDamage = [S03ItemRAQMageFire3PBonusRanks + 1][]float64{{3, 3}}
 
 // unconfirmed: S03 - Item - RAQ - Mage - Fire 3P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - Scarlet Enclave - Mage - Damage 2P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemScarletEnclaveMageDamage2PBonusRanks = 1
+// S03 - Item - Scarlet Enclave - Mage - Damage 2P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemScarletEnclaveMageDamage2PBonusRanks = 0
 
-var S03ItemScarletEnclaveMageDamage2PBonusSpellId = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1]int32{0, 1226423}
-var S03ItemScarletEnclaveMageDamage2PBonusLevel = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1]int{0, 1}
-var S03ItemScarletEnclaveMageDamage2PBonusCastTime = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1]int32{0, 0}
-var S03ItemScarletEnclaveMageDamage2PBonusCooldownMS = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1]int32{0, 0}
-var S03ItemScarletEnclaveMageDamage2PBonusManaCost = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1]float64{0, 0}
-var S03ItemScarletEnclaveMageDamage2PBonusSpellCoeff = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemScarletEnclaveMageDamage2PBonusBaseDamage = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1][]float64{{0, 0}, {4000, 4000}}
+var S03ItemScarletEnclaveMageDamage2PBonusSpellId = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1]int32{1226423}
+var S03ItemScarletEnclaveMageDamage2PBonusLevel = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1]int{1}
+var S03ItemScarletEnclaveMageDamage2PBonusCastTime = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1]int32{0}
+var S03ItemScarletEnclaveMageDamage2PBonusCooldownMS = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1]int32{0}
+var S03ItemScarletEnclaveMageDamage2PBonusManaCost = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclaveMageDamage2PBonusSpellCoeff = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1]float64{0.4286}
+var S03ItemScarletEnclaveMageDamage2PBonusBaseDamage = [S03ItemScarletEnclaveMageDamage2PBonusRanks + 1][]float64{{4000, 4000}}
 
 // unconfirmed: S03 - Item - Scarlet Enclave - Mage - Damage 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - Scarlet Enclave - Mage - Damage 4P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemScarletEnclaveMageDamage4PBonusRanks = 1
+// S03 - Item - Scarlet Enclave - Mage - Damage 4P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemScarletEnclaveMageDamage4PBonusRanks = 0
 
-var S03ItemScarletEnclaveMageDamage4PBonusSpellId = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1]int32{0, 1226446}
-var S03ItemScarletEnclaveMageDamage4PBonusLevel = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1]int{0, 1}
-var S03ItemScarletEnclaveMageDamage4PBonusCastTime = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1]int32{0, 0}
-var S03ItemScarletEnclaveMageDamage4PBonusCooldownMS = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1]int32{0, 0}
-var S03ItemScarletEnclaveMageDamage4PBonusManaCost = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1]float64{0, 0}
-var S03ItemScarletEnclaveMageDamage4PBonusSpellCoeff = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemScarletEnclaveMageDamage4PBonusBaseDamage = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1][]float64{{0, 0}, {10000, 10000}}
+var S03ItemScarletEnclaveMageDamage4PBonusSpellId = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1]int32{1226446}
+var S03ItemScarletEnclaveMageDamage4PBonusLevel = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1]int{1}
+var S03ItemScarletEnclaveMageDamage4PBonusCastTime = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1]int32{0}
+var S03ItemScarletEnclaveMageDamage4PBonusCooldownMS = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1]int32{0}
+var S03ItemScarletEnclaveMageDamage4PBonusManaCost = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclaveMageDamage4PBonusSpellCoeff = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1]float64{0.4286}
+var S03ItemScarletEnclaveMageDamage4PBonusBaseDamage = [S03ItemScarletEnclaveMageDamage4PBonusRanks + 1][]float64{{10000, 10000}}
 
 // unconfirmed: S03 - Item - Scarlet Enclave - Mage - Damage 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - Scarlet Enclave - Mage - Damage 6P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemScarletEnclaveMageDamage6PBonusRanks = 1
+// S03 - Item - Scarlet Enclave - Mage - Damage 6P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemScarletEnclaveMageDamage6PBonusRanks = 0
 
-var S03ItemScarletEnclaveMageDamage6PBonusSpellId = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1]int32{0, 1226432}
-var S03ItemScarletEnclaveMageDamage6PBonusLevel = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1]int{0, 1}
-var S03ItemScarletEnclaveMageDamage6PBonusCastTime = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1]int32{0, 0}
-var S03ItemScarletEnclaveMageDamage6PBonusCooldownMS = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1]int32{0, 0}
-var S03ItemScarletEnclaveMageDamage6PBonusManaCost = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1]float64{0, 0}
-var S03ItemScarletEnclaveMageDamage6PBonusSpellCoeff = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemScarletEnclaveMageDamage6PBonusBaseDamage = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1][]float64{{0, 0}, {10, 10}}
+var S03ItemScarletEnclaveMageDamage6PBonusSpellId = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1]int32{1226432}
+var S03ItemScarletEnclaveMageDamage6PBonusLevel = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1]int{1}
+var S03ItemScarletEnclaveMageDamage6PBonusCastTime = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1]int32{0}
+var S03ItemScarletEnclaveMageDamage6PBonusCooldownMS = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1]int32{0}
+var S03ItemScarletEnclaveMageDamage6PBonusManaCost = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclaveMageDamage6PBonusSpellCoeff = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1]float64{0.4286}
+var S03ItemScarletEnclaveMageDamage6PBonusBaseDamage = [S03ItemScarletEnclaveMageDamage6PBonusRanks + 1][]float64{{10, 10}}
 
 // unconfirmed: S03 - Item - Scarlet Enclave - Mage - Damage 6P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - Scarlet Enclave - Mage - Healer 2P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemScarletEnclaveMageHealer2PBonusRanks = 1
+// S03 - Item - Scarlet Enclave - Mage - Healer 2P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemScarletEnclaveMageHealer2PBonusRanks = 0
 
-var S03ItemScarletEnclaveMageHealer2PBonusSpellId = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1]int32{0, 1226407}
-var S03ItemScarletEnclaveMageHealer2PBonusLevel = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1]int{0, 1}
-var S03ItemScarletEnclaveMageHealer2PBonusCastTime = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1]int32{0, 0}
-var S03ItemScarletEnclaveMageHealer2PBonusCooldownMS = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1]int32{0, 0}
-var S03ItemScarletEnclaveMageHealer2PBonusManaCost = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1]float64{0, 0}
-var S03ItemScarletEnclaveMageHealer2PBonusSpellCoeff = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemScarletEnclaveMageHealer2PBonusBaseDamage = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1][]float64{{0, 0}, {20, 20}}
+var S03ItemScarletEnclaveMageHealer2PBonusSpellId = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1]int32{1226407}
+var S03ItemScarletEnclaveMageHealer2PBonusLevel = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1]int{1}
+var S03ItemScarletEnclaveMageHealer2PBonusCastTime = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1]int32{0}
+var S03ItemScarletEnclaveMageHealer2PBonusCooldownMS = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1]int32{0}
+var S03ItemScarletEnclaveMageHealer2PBonusManaCost = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclaveMageHealer2PBonusSpellCoeff = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1]float64{0.4286}
+var S03ItemScarletEnclaveMageHealer2PBonusBaseDamage = [S03ItemScarletEnclaveMageHealer2PBonusRanks + 1][]float64{{20, 20}}
 
 // unconfirmed: S03 - Item - Scarlet Enclave - Mage - Healer 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - Scarlet Enclave - Mage - Healer 4P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemScarletEnclaveMageHealer4PBonusRanks = 1
+// S03 - Item - Scarlet Enclave - Mage - Healer 4P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemScarletEnclaveMageHealer4PBonusRanks = 0
 
-var S03ItemScarletEnclaveMageHealer4PBonusSpellId = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1]int32{0, 1226415}
-var S03ItemScarletEnclaveMageHealer4PBonusLevel = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1]int{0, 1}
-var S03ItemScarletEnclaveMageHealer4PBonusCastTime = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1]int32{0, 0}
-var S03ItemScarletEnclaveMageHealer4PBonusCooldownMS = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1]int32{0, 0}
-var S03ItemScarletEnclaveMageHealer4PBonusManaCost = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1]float64{0, 0}
-var S03ItemScarletEnclaveMageHealer4PBonusSpellCoeff = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemScarletEnclaveMageHealer4PBonusBaseDamage = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1][]float64{{0, 0}, {20, 20}}
+var S03ItemScarletEnclaveMageHealer4PBonusSpellId = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1]int32{1226415}
+var S03ItemScarletEnclaveMageHealer4PBonusLevel = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1]int{1}
+var S03ItemScarletEnclaveMageHealer4PBonusCastTime = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1]int32{0}
+var S03ItemScarletEnclaveMageHealer4PBonusCooldownMS = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1]int32{0}
+var S03ItemScarletEnclaveMageHealer4PBonusManaCost = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclaveMageHealer4PBonusSpellCoeff = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1]float64{0.4286}
+var S03ItemScarletEnclaveMageHealer4PBonusBaseDamage = [S03ItemScarletEnclaveMageHealer4PBonusRanks + 1][]float64{{20, 20}}
 
 // unconfirmed: S03 - Item - Scarlet Enclave - Mage - Healer 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - Scarlet Enclave - Mage - Healer 6P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemScarletEnclaveMageHealer6PBonusRanks = 1
+// S03 - Item - Scarlet Enclave - Mage - Healer 6P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemScarletEnclaveMageHealer6PBonusRanks = 0
 
-var S03ItemScarletEnclaveMageHealer6PBonusSpellId = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1]int32{0, 1226378}
-var S03ItemScarletEnclaveMageHealer6PBonusLevel = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1]int{0, 1}
-var S03ItemScarletEnclaveMageHealer6PBonusCastTime = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1]int32{0, 0}
-var S03ItemScarletEnclaveMageHealer6PBonusCooldownMS = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1]int32{0, 0}
-var S03ItemScarletEnclaveMageHealer6PBonusManaCost = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1]float64{0, 0}
-var S03ItemScarletEnclaveMageHealer6PBonusSpellCoeff = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemScarletEnclaveMageHealer6PBonusBaseDamage = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1][]float64{{0, 0}, {20, 20}}
+var S03ItemScarletEnclaveMageHealer6PBonusSpellId = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1]int32{1226378}
+var S03ItemScarletEnclaveMageHealer6PBonusLevel = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1]int{1}
+var S03ItemScarletEnclaveMageHealer6PBonusCastTime = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1]int32{0}
+var S03ItemScarletEnclaveMageHealer6PBonusCooldownMS = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1]int32{0}
+var S03ItemScarletEnclaveMageHealer6PBonusManaCost = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclaveMageHealer6PBonusSpellCoeff = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1]float64{0.4286}
+var S03ItemScarletEnclaveMageHealer6PBonusBaseDamage = [S03ItemScarletEnclaveMageHealer6PBonusRanks + 1][]float64{{20, 20}}
 
 // unconfirmed: S03 - Item - Scarlet Enclave - Mage - Healer 6P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - T1 - Mage - Damage 2P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemT1MageDamage2PBonusRanks = 1
+// S03 - Item - T1 - Mage - Damage 2P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemT1MageDamage2PBonusRanks = 0
 
-var S03ItemT1MageDamage2PBonusSpellId = [S03ItemT1MageDamage2PBonusRanks + 1]int32{0, 456396}
-var S03ItemT1MageDamage2PBonusLevel = [S03ItemT1MageDamage2PBonusRanks + 1]int{0, 0}
-var S03ItemT1MageDamage2PBonusCastTime = [S03ItemT1MageDamage2PBonusRanks + 1]int32{0, 0}
-var S03ItemT1MageDamage2PBonusCooldownMS = [S03ItemT1MageDamage2PBonusRanks + 1]int32{0, 0}
-var S03ItemT1MageDamage2PBonusManaCost = [S03ItemT1MageDamage2PBonusRanks + 1]float64{0, 0}
-var S03ItemT1MageDamage2PBonusSpellCoeff = [S03ItemT1MageDamage2PBonusRanks + 1]float64{0, 1}
-var S03ItemT1MageDamage2PBonusBaseDamage = [S03ItemT1MageDamage2PBonusRanks + 1][]float64{{0, 0}, {100, 100}}
+var S03ItemT1MageDamage2PBonusSpellId = [S03ItemT1MageDamage2PBonusRanks + 1]int32{456396}
+var S03ItemT1MageDamage2PBonusLevel = [S03ItemT1MageDamage2PBonusRanks + 1]int{0}
+var S03ItemT1MageDamage2PBonusCastTime = [S03ItemT1MageDamage2PBonusRanks + 1]int32{0}
+var S03ItemT1MageDamage2PBonusCooldownMS = [S03ItemT1MageDamage2PBonusRanks + 1]int32{0}
+var S03ItemT1MageDamage2PBonusManaCost = [S03ItemT1MageDamage2PBonusRanks + 1]float64{0}
+var S03ItemT1MageDamage2PBonusSpellCoeff = [S03ItemT1MageDamage2PBonusRanks + 1]float64{1}
+var S03ItemT1MageDamage2PBonusBaseDamage = [S03ItemT1MageDamage2PBonusRanks + 1][]float64{{100, 100}}
 
-// S03 - Item - T1 - Mage - Damage 4P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemT1MageDamage4PBonusRanks = 1
+// S03 - Item - T1 - Mage - Damage 4P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemT1MageDamage4PBonusRanks = 0
 
-var S03ItemT1MageDamage4PBonusSpellId = [S03ItemT1MageDamage4PBonusRanks + 1]int32{0, 456398}
-var S03ItemT1MageDamage4PBonusLevel = [S03ItemT1MageDamage4PBonusRanks + 1]int{0, 0}
-var S03ItemT1MageDamage4PBonusCastTime = [S03ItemT1MageDamage4PBonusRanks + 1]int32{0, 0}
-var S03ItemT1MageDamage4PBonusCooldownMS = [S03ItemT1MageDamage4PBonusRanks + 1]int32{0, 0}
-var S03ItemT1MageDamage4PBonusManaCost = [S03ItemT1MageDamage4PBonusRanks + 1]float64{0, 0}
-var S03ItemT1MageDamage4PBonusSpellCoeff = [S03ItemT1MageDamage4PBonusRanks + 1]float64{0, 1}
-var S03ItemT1MageDamage4PBonusBaseDamage = [S03ItemT1MageDamage4PBonusRanks + 1][]float64{{0, 0}, {100, 100}}
+var S03ItemT1MageDamage4PBonusSpellId = [S03ItemT1MageDamage4PBonusRanks + 1]int32{456398}
+var S03ItemT1MageDamage4PBonusLevel = [S03ItemT1MageDamage4PBonusRanks + 1]int{0}
+var S03ItemT1MageDamage4PBonusCastTime = [S03ItemT1MageDamage4PBonusRanks + 1]int32{0}
+var S03ItemT1MageDamage4PBonusCooldownMS = [S03ItemT1MageDamage4PBonusRanks + 1]int32{0}
+var S03ItemT1MageDamage4PBonusManaCost = [S03ItemT1MageDamage4PBonusRanks + 1]float64{0}
+var S03ItemT1MageDamage4PBonusSpellCoeff = [S03ItemT1MageDamage4PBonusRanks + 1]float64{1}
+var S03ItemT1MageDamage4PBonusBaseDamage = [S03ItemT1MageDamage4PBonusRanks + 1][]float64{{100, 100}}
 
-// S03 - Item - T1 - Mage - Damage 6P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemT1MageDamage6PBonusRanks = 1
+// S03 - Item - T1 - Mage - Damage 6P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemT1MageDamage6PBonusRanks = 0
 
-var S03ItemT1MageDamage6PBonusSpellId = [S03ItemT1MageDamage6PBonusRanks + 1]int32{0, 456402}
-var S03ItemT1MageDamage6PBonusLevel = [S03ItemT1MageDamage6PBonusRanks + 1]int{0, 0}
-var S03ItemT1MageDamage6PBonusCastTime = [S03ItemT1MageDamage6PBonusRanks + 1]int32{0, 0}
-var S03ItemT1MageDamage6PBonusCooldownMS = [S03ItemT1MageDamage6PBonusRanks + 1]int32{0, 0}
-var S03ItemT1MageDamage6PBonusManaCost = [S03ItemT1MageDamage6PBonusRanks + 1]float64{0, 0}
-var S03ItemT1MageDamage6PBonusSpellCoeff = [S03ItemT1MageDamage6PBonusRanks + 1]float64{0, 1}
-var S03ItemT1MageDamage6PBonusBaseDamage = [S03ItemT1MageDamage6PBonusRanks + 1][]float64{{0, 0}, {15, 15}}
+var S03ItemT1MageDamage6PBonusSpellId = [S03ItemT1MageDamage6PBonusRanks + 1]int32{456402}
+var S03ItemT1MageDamage6PBonusLevel = [S03ItemT1MageDamage6PBonusRanks + 1]int{0}
+var S03ItemT1MageDamage6PBonusCastTime = [S03ItemT1MageDamage6PBonusRanks + 1]int32{0}
+var S03ItemT1MageDamage6PBonusCooldownMS = [S03ItemT1MageDamage6PBonusRanks + 1]int32{0}
+var S03ItemT1MageDamage6PBonusManaCost = [S03ItemT1MageDamage6PBonusRanks + 1]float64{0}
+var S03ItemT1MageDamage6PBonusSpellCoeff = [S03ItemT1MageDamage6PBonusRanks + 1]float64{1}
+var S03ItemT1MageDamage6PBonusBaseDamage = [S03ItemT1MageDamage6PBonusRanks + 1][]float64{{15, 15}}
 
-// S03 - Item - T1 - Mage - Healer 2P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemT1MageHealer2PBonusRanks = 1
+// S03 - Item - T1 - Mage - Healer 2P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemT1MageHealer2PBonusRanks = 0
 
-var S03ItemT1MageHealer2PBonusSpellId = [S03ItemT1MageHealer2PBonusRanks + 1]int32{0, 456404}
-var S03ItemT1MageHealer2PBonusLevel = [S03ItemT1MageHealer2PBonusRanks + 1]int{0, 0}
-var S03ItemT1MageHealer2PBonusCastTime = [S03ItemT1MageHealer2PBonusRanks + 1]int32{0, 0}
-var S03ItemT1MageHealer2PBonusCooldownMS = [S03ItemT1MageHealer2PBonusRanks + 1]int32{0, 0}
-var S03ItemT1MageHealer2PBonusManaCost = [S03ItemT1MageHealer2PBonusRanks + 1]float64{0, 0}
-var S03ItemT1MageHealer2PBonusSpellCoeff = [S03ItemT1MageHealer2PBonusRanks + 1]float64{0, 1}
-var S03ItemT1MageHealer2PBonusBaseDamage = [S03ItemT1MageHealer2PBonusRanks + 1][]float64{{0, 0}, {20, 20}}
+var S03ItemT1MageHealer2PBonusSpellId = [S03ItemT1MageHealer2PBonusRanks + 1]int32{456404}
+var S03ItemT1MageHealer2PBonusLevel = [S03ItemT1MageHealer2PBonusRanks + 1]int{0}
+var S03ItemT1MageHealer2PBonusCastTime = [S03ItemT1MageHealer2PBonusRanks + 1]int32{0}
+var S03ItemT1MageHealer2PBonusCooldownMS = [S03ItemT1MageHealer2PBonusRanks + 1]int32{0}
+var S03ItemT1MageHealer2PBonusManaCost = [S03ItemT1MageHealer2PBonusRanks + 1]float64{0}
+var S03ItemT1MageHealer2PBonusSpellCoeff = [S03ItemT1MageHealer2PBonusRanks + 1]float64{1}
+var S03ItemT1MageHealer2PBonusBaseDamage = [S03ItemT1MageHealer2PBonusRanks + 1][]float64{{20, 20}}
 
-// S03 - Item - T1 - Mage - Healer 4P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemT1MageHealer4PBonusRanks = 1
+// S03 - Item - T1 - Mage - Healer 4P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemT1MageHealer4PBonusRanks = 0
 
-var S03ItemT1MageHealer4PBonusSpellId = [S03ItemT1MageHealer4PBonusRanks + 1]int32{0, 456477}
-var S03ItemT1MageHealer4PBonusLevel = [S03ItemT1MageHealer4PBonusRanks + 1]int{0, 0}
-var S03ItemT1MageHealer4PBonusCastTime = [S03ItemT1MageHealer4PBonusRanks + 1]int32{0, 0}
-var S03ItemT1MageHealer4PBonusCooldownMS = [S03ItemT1MageHealer4PBonusRanks + 1]int32{0, 0}
-var S03ItemT1MageHealer4PBonusManaCost = [S03ItemT1MageHealer4PBonusRanks + 1]float64{0, 0}
-var S03ItemT1MageHealer4PBonusSpellCoeff = [S03ItemT1MageHealer4PBonusRanks + 1]float64{0, 1}
-var S03ItemT1MageHealer4PBonusBaseDamage = [S03ItemT1MageHealer4PBonusRanks + 1][]float64{{0, 0}, {10, 10}}
+var S03ItemT1MageHealer4PBonusSpellId = [S03ItemT1MageHealer4PBonusRanks + 1]int32{456477}
+var S03ItemT1MageHealer4PBonusLevel = [S03ItemT1MageHealer4PBonusRanks + 1]int{0}
+var S03ItemT1MageHealer4PBonusCastTime = [S03ItemT1MageHealer4PBonusRanks + 1]int32{0}
+var S03ItemT1MageHealer4PBonusCooldownMS = [S03ItemT1MageHealer4PBonusRanks + 1]int32{0}
+var S03ItemT1MageHealer4PBonusManaCost = [S03ItemT1MageHealer4PBonusRanks + 1]float64{0}
+var S03ItemT1MageHealer4PBonusSpellCoeff = [S03ItemT1MageHealer4PBonusRanks + 1]float64{1}
+var S03ItemT1MageHealer4PBonusBaseDamage = [S03ItemT1MageHealer4PBonusRanks + 1][]float64{{10, 10}}
 
-// S03 - Item - T1 - Mage - Healer 6P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemT1MageHealer6PBonusRanks = 1
+// S03 - Item - T1 - Mage - Healer 6P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemT1MageHealer6PBonusRanks = 0
 
-var S03ItemT1MageHealer6PBonusSpellId = [S03ItemT1MageHealer6PBonusRanks + 1]int32{0, 456481}
-var S03ItemT1MageHealer6PBonusLevel = [S03ItemT1MageHealer6PBonusRanks + 1]int{0, 0}
-var S03ItemT1MageHealer6PBonusCastTime = [S03ItemT1MageHealer6PBonusRanks + 1]int32{0, 0}
-var S03ItemT1MageHealer6PBonusCooldownMS = [S03ItemT1MageHealer6PBonusRanks + 1]int32{0, 0}
-var S03ItemT1MageHealer6PBonusManaCost = [S03ItemT1MageHealer6PBonusRanks + 1]float64{0, 0}
-var S03ItemT1MageHealer6PBonusSpellCoeff = [S03ItemT1MageHealer6PBonusRanks + 1]float64{0, 1}
-var S03ItemT1MageHealer6PBonusBaseDamage = [S03ItemT1MageHealer6PBonusRanks + 1][]float64{{0, 0}, {1, 1}}
+var S03ItemT1MageHealer6PBonusSpellId = [S03ItemT1MageHealer6PBonusRanks + 1]int32{456481}
+var S03ItemT1MageHealer6PBonusLevel = [S03ItemT1MageHealer6PBonusRanks + 1]int{0}
+var S03ItemT1MageHealer6PBonusCastTime = [S03ItemT1MageHealer6PBonusRanks + 1]int32{0}
+var S03ItemT1MageHealer6PBonusCooldownMS = [S03ItemT1MageHealer6PBonusRanks + 1]int32{0}
+var S03ItemT1MageHealer6PBonusManaCost = [S03ItemT1MageHealer6PBonusRanks + 1]float64{0}
+var S03ItemT1MageHealer6PBonusSpellCoeff = [S03ItemT1MageHealer6PBonusRanks + 1]float64{1}
+var S03ItemT1MageHealer6PBonusBaseDamage = [S03ItemT1MageHealer6PBonusRanks + 1][]float64{{1, 1}}
 
-// S03 - Item - TAQ - Mage - Arcane 2P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemTAQMageArcane2PBonusRanks = 1
+// S03 - Item - TAQ - Mage - Arcane 2P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemTAQMageArcane2PBonusRanks = 0
 
-var S03ItemTAQMageArcane2PBonusSpellId = [S03ItemTAQMageArcane2PBonusRanks + 1]int32{0, 1213312}
-var S03ItemTAQMageArcane2PBonusLevel = [S03ItemTAQMageArcane2PBonusRanks + 1]int{0, 1}
-var S03ItemTAQMageArcane2PBonusCastTime = [S03ItemTAQMageArcane2PBonusRanks + 1]int32{0, 0}
-var S03ItemTAQMageArcane2PBonusCooldownMS = [S03ItemTAQMageArcane2PBonusRanks + 1]int32{0, 0}
-var S03ItemTAQMageArcane2PBonusManaCost = [S03ItemTAQMageArcane2PBonusRanks + 1]float64{0, 0}
-var S03ItemTAQMageArcane2PBonusSpellCoeff = [S03ItemTAQMageArcane2PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemTAQMageArcane2PBonusBaseDamage = [S03ItemTAQMageArcane2PBonusRanks + 1][]float64{{0, 0}, {10, 10}}
+var S03ItemTAQMageArcane2PBonusSpellId = [S03ItemTAQMageArcane2PBonusRanks + 1]int32{1213312}
+var S03ItemTAQMageArcane2PBonusLevel = [S03ItemTAQMageArcane2PBonusRanks + 1]int{1}
+var S03ItemTAQMageArcane2PBonusCastTime = [S03ItemTAQMageArcane2PBonusRanks + 1]int32{0}
+var S03ItemTAQMageArcane2PBonusCooldownMS = [S03ItemTAQMageArcane2PBonusRanks + 1]int32{0}
+var S03ItemTAQMageArcane2PBonusManaCost = [S03ItemTAQMageArcane2PBonusRanks + 1]float64{0}
+var S03ItemTAQMageArcane2PBonusSpellCoeff = [S03ItemTAQMageArcane2PBonusRanks + 1]float64{0.4286}
+var S03ItemTAQMageArcane2PBonusBaseDamage = [S03ItemTAQMageArcane2PBonusRanks + 1][]float64{{10, 10}}
 
 // unconfirmed: S03 - Item - TAQ - Mage - Arcane 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - TAQ - Mage - Arcane 4P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemTAQMageArcane4PBonusRanks = 1
+// S03 - Item - TAQ - Mage - Arcane 4P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemTAQMageArcane4PBonusRanks = 0
 
-var S03ItemTAQMageArcane4PBonusSpellId = [S03ItemTAQMageArcane4PBonusRanks + 1]int32{0, 1213314}
-var S03ItemTAQMageArcane4PBonusLevel = [S03ItemTAQMageArcane4PBonusRanks + 1]int{0, 1}
-var S03ItemTAQMageArcane4PBonusCastTime = [S03ItemTAQMageArcane4PBonusRanks + 1]int32{0, 0}
-var S03ItemTAQMageArcane4PBonusCooldownMS = [S03ItemTAQMageArcane4PBonusRanks + 1]int32{0, 0}
-var S03ItemTAQMageArcane4PBonusManaCost = [S03ItemTAQMageArcane4PBonusRanks + 1]float64{0, 0}
-var S03ItemTAQMageArcane4PBonusSpellCoeff = [S03ItemTAQMageArcane4PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemTAQMageArcane4PBonusBaseDamage = [S03ItemTAQMageArcane4PBonusRanks + 1][]float64{{0, 0}, {50, 50}}
+var S03ItemTAQMageArcane4PBonusSpellId = [S03ItemTAQMageArcane4PBonusRanks + 1]int32{1213314}
+var S03ItemTAQMageArcane4PBonusLevel = [S03ItemTAQMageArcane4PBonusRanks + 1]int{1}
+var S03ItemTAQMageArcane4PBonusCastTime = [S03ItemTAQMageArcane4PBonusRanks + 1]int32{0}
+var S03ItemTAQMageArcane4PBonusCooldownMS = [S03ItemTAQMageArcane4PBonusRanks + 1]int32{0}
+var S03ItemTAQMageArcane4PBonusManaCost = [S03ItemTAQMageArcane4PBonusRanks + 1]float64{0}
+var S03ItemTAQMageArcane4PBonusSpellCoeff = [S03ItemTAQMageArcane4PBonusRanks + 1]float64{0.4286}
+var S03ItemTAQMageArcane4PBonusBaseDamage = [S03ItemTAQMageArcane4PBonusRanks + 1][]float64{{50, 50}}
 
 // unconfirmed: S03 - Item - TAQ - Mage - Arcane 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - TAQ - Mage - Fire 2P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemTAQMageFire2PBonusRanks = 1
+// S03 - Item - TAQ - Mage - Fire 2P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemTAQMageFire2PBonusRanks = 0
 
-var S03ItemTAQMageFire2PBonusSpellId = [S03ItemTAQMageFire2PBonusRanks + 1]int32{0, 1213318}
-var S03ItemTAQMageFire2PBonusLevel = [S03ItemTAQMageFire2PBonusRanks + 1]int{0, 1}
-var S03ItemTAQMageFire2PBonusCastTime = [S03ItemTAQMageFire2PBonusRanks + 1]int32{0, 0}
-var S03ItemTAQMageFire2PBonusCooldownMS = [S03ItemTAQMageFire2PBonusRanks + 1]int32{0, 0}
-var S03ItemTAQMageFire2PBonusManaCost = [S03ItemTAQMageFire2PBonusRanks + 1]float64{0, 0}
-var S03ItemTAQMageFire2PBonusSpellCoeff = [S03ItemTAQMageFire2PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemTAQMageFire2PBonusBaseDamage = [S03ItemTAQMageFire2PBonusRanks + 1][]float64{{0, 0}, {10, 10}}
+var S03ItemTAQMageFire2PBonusSpellId = [S03ItemTAQMageFire2PBonusRanks + 1]int32{1213318}
+var S03ItemTAQMageFire2PBonusLevel = [S03ItemTAQMageFire2PBonusRanks + 1]int{1}
+var S03ItemTAQMageFire2PBonusCastTime = [S03ItemTAQMageFire2PBonusRanks + 1]int32{0}
+var S03ItemTAQMageFire2PBonusCooldownMS = [S03ItemTAQMageFire2PBonusRanks + 1]int32{0}
+var S03ItemTAQMageFire2PBonusManaCost = [S03ItemTAQMageFire2PBonusRanks + 1]float64{0}
+var S03ItemTAQMageFire2PBonusSpellCoeff = [S03ItemTAQMageFire2PBonusRanks + 1]float64{0.4286}
+var S03ItemTAQMageFire2PBonusBaseDamage = [S03ItemTAQMageFire2PBonusRanks + 1][]float64{{10, 10}}
 
 // unconfirmed: S03 - Item - TAQ - Mage - Fire 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - TAQ - Mage - Fire 4P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemTAQMageFire4PBonusRanks = 1
+// S03 - Item - TAQ - Mage - Fire 4P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemTAQMageFire4PBonusRanks = 0
 
-var S03ItemTAQMageFire4PBonusSpellId = [S03ItemTAQMageFire4PBonusRanks + 1]int32{0, 1213319}
-var S03ItemTAQMageFire4PBonusLevel = [S03ItemTAQMageFire4PBonusRanks + 1]int{0, 1}
-var S03ItemTAQMageFire4PBonusCastTime = [S03ItemTAQMageFire4PBonusRanks + 1]int32{0, 0}
-var S03ItemTAQMageFire4PBonusCooldownMS = [S03ItemTAQMageFire4PBonusRanks + 1]int32{0, 0}
-var S03ItemTAQMageFire4PBonusManaCost = [S03ItemTAQMageFire4PBonusRanks + 1]float64{0, 0}
-var S03ItemTAQMageFire4PBonusSpellCoeff = [S03ItemTAQMageFire4PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemTAQMageFire4PBonusBaseDamage = [S03ItemTAQMageFire4PBonusRanks + 1][]float64{{0, 0}, {10, 10}}
+var S03ItemTAQMageFire4PBonusSpellId = [S03ItemTAQMageFire4PBonusRanks + 1]int32{1213319}
+var S03ItemTAQMageFire4PBonusLevel = [S03ItemTAQMageFire4PBonusRanks + 1]int{1}
+var S03ItemTAQMageFire4PBonusCastTime = [S03ItemTAQMageFire4PBonusRanks + 1]int32{0}
+var S03ItemTAQMageFire4PBonusCooldownMS = [S03ItemTAQMageFire4PBonusRanks + 1]int32{0}
+var S03ItemTAQMageFire4PBonusManaCost = [S03ItemTAQMageFire4PBonusRanks + 1]float64{0}
+var S03ItemTAQMageFire4PBonusSpellCoeff = [S03ItemTAQMageFire4PBonusRanks + 1]float64{0.4286}
+var S03ItemTAQMageFire4PBonusBaseDamage = [S03ItemTAQMageFire4PBonusRanks + 1][]float64{{10, 10}}
 
 // unconfirmed: S03 - Item - TAQ - Mage - Fire 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - ZG - Mage - Frost 2P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemZGMageFrost2PBonusRanks = 1
+// S03 - Item - ZG - Mage - Frost 2P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemZGMageFrost2PBonusRanks = 0
 
-var S03ItemZGMageFrost2PBonusSpellId = [S03ItemZGMageFrost2PBonusRanks + 1]int32{0, 468397}
-var S03ItemZGMageFrost2PBonusLevel = [S03ItemZGMageFrost2PBonusRanks + 1]int{0, 0}
-var S03ItemZGMageFrost2PBonusCastTime = [S03ItemZGMageFrost2PBonusRanks + 1]int32{0, 0}
-var S03ItemZGMageFrost2PBonusCooldownMS = [S03ItemZGMageFrost2PBonusRanks + 1]int32{0, 0}
-var S03ItemZGMageFrost2PBonusManaCost = [S03ItemZGMageFrost2PBonusRanks + 1]float64{0, 0}
-var S03ItemZGMageFrost2PBonusSpellCoeff = [S03ItemZGMageFrost2PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemZGMageFrost2PBonusBaseDamage = [S03ItemZGMageFrost2PBonusRanks + 1][]float64{{0, 0}, {14, 14}}
+var S03ItemZGMageFrost2PBonusSpellId = [S03ItemZGMageFrost2PBonusRanks + 1]int32{468397}
+var S03ItemZGMageFrost2PBonusLevel = [S03ItemZGMageFrost2PBonusRanks + 1]int{0}
+var S03ItemZGMageFrost2PBonusCastTime = [S03ItemZGMageFrost2PBonusRanks + 1]int32{0}
+var S03ItemZGMageFrost2PBonusCooldownMS = [S03ItemZGMageFrost2PBonusRanks + 1]int32{0}
+var S03ItemZGMageFrost2PBonusManaCost = [S03ItemZGMageFrost2PBonusRanks + 1]float64{0}
+var S03ItemZGMageFrost2PBonusSpellCoeff = [S03ItemZGMageFrost2PBonusRanks + 1]float64{0.4286}
+var S03ItemZGMageFrost2PBonusBaseDamage = [S03ItemZGMageFrost2PBonusRanks + 1][]float64{{14, 14}}
 
 // unconfirmed: S03 - Item - ZG - Mage - Frost 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - ZG - Mage - Frost 3P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemZGMageFrost3PBonusRanks = 1
+// S03 - Item - ZG - Mage - Frost 3P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemZGMageFrost3PBonusRanks = 0
 
-var S03ItemZGMageFrost3PBonusSpellId = [S03ItemZGMageFrost3PBonusRanks + 1]int32{0, 468425}
-var S03ItemZGMageFrost3PBonusLevel = [S03ItemZGMageFrost3PBonusRanks + 1]int{0, 0}
-var S03ItemZGMageFrost3PBonusCastTime = [S03ItemZGMageFrost3PBonusRanks + 1]int32{0, 0}
-var S03ItemZGMageFrost3PBonusCooldownMS = [S03ItemZGMageFrost3PBonusRanks + 1]int32{0, 0}
-var S03ItemZGMageFrost3PBonusManaCost = [S03ItemZGMageFrost3PBonusRanks + 1]float64{0, 0}
-var S03ItemZGMageFrost3PBonusSpellCoeff = [S03ItemZGMageFrost3PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemZGMageFrost3PBonusBaseDamage = [S03ItemZGMageFrost3PBonusRanks + 1][]float64{{0, 0}, {15, 15}}
+var S03ItemZGMageFrost3PBonusSpellId = [S03ItemZGMageFrost3PBonusRanks + 1]int32{468425}
+var S03ItemZGMageFrost3PBonusLevel = [S03ItemZGMageFrost3PBonusRanks + 1]int{0}
+var S03ItemZGMageFrost3PBonusCastTime = [S03ItemZGMageFrost3PBonusRanks + 1]int32{0}
+var S03ItemZGMageFrost3PBonusCooldownMS = [S03ItemZGMageFrost3PBonusRanks + 1]int32{0}
+var S03ItemZGMageFrost3PBonusManaCost = [S03ItemZGMageFrost3PBonusRanks + 1]float64{0}
+var S03ItemZGMageFrost3PBonusSpellCoeff = [S03ItemZGMageFrost3PBonusRanks + 1]float64{0.4286}
+var S03ItemZGMageFrost3PBonusBaseDamage = [S03ItemZGMageFrost3PBonusRanks + 1][]float64{{15, 15}}
 
 // unconfirmed: S03 - Item - ZG - Mage - Frost 3P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Item - ZG - Mage - Frost 5P Bonus: 1 rank(s), from build 1.60.1.69893.
-const S03ItemZGMageFrost5PBonusRanks = 1
+// S03 - Item - ZG - Mage - Frost 5P Bonus: ranks 0 present, from build 1.60.1.69893.
+const S03ItemZGMageFrost5PBonusRanks = 0
 
-var S03ItemZGMageFrost5PBonusSpellId = [S03ItemZGMageFrost5PBonusRanks + 1]int32{0, 468427}
-var S03ItemZGMageFrost5PBonusLevel = [S03ItemZGMageFrost5PBonusRanks + 1]int{0, 0}
-var S03ItemZGMageFrost5PBonusCastTime = [S03ItemZGMageFrost5PBonusRanks + 1]int32{0, 0}
-var S03ItemZGMageFrost5PBonusCooldownMS = [S03ItemZGMageFrost5PBonusRanks + 1]int32{0, 0}
-var S03ItemZGMageFrost5PBonusManaCost = [S03ItemZGMageFrost5PBonusRanks + 1]float64{0, 0}
-var S03ItemZGMageFrost5PBonusSpellCoeff = [S03ItemZGMageFrost5PBonusRanks + 1]float64{0, 0.4286}
-var S03ItemZGMageFrost5PBonusBaseDamage = [S03ItemZGMageFrost5PBonusRanks + 1][]float64{{0, 0}, {65, 65}}
+var S03ItemZGMageFrost5PBonusSpellId = [S03ItemZGMageFrost5PBonusRanks + 1]int32{468427}
+var S03ItemZGMageFrost5PBonusLevel = [S03ItemZGMageFrost5PBonusRanks + 1]int{0}
+var S03ItemZGMageFrost5PBonusCastTime = [S03ItemZGMageFrost5PBonusRanks + 1]int32{0}
+var S03ItemZGMageFrost5PBonusCooldownMS = [S03ItemZGMageFrost5PBonusRanks + 1]int32{0}
+var S03ItemZGMageFrost5PBonusManaCost = [S03ItemZGMageFrost5PBonusRanks + 1]float64{0}
+var S03ItemZGMageFrost5PBonusSpellCoeff = [S03ItemZGMageFrost5PBonusRanks + 1]float64{0.4286}
+var S03ItemZGMageFrost5PBonusBaseDamage = [S03ItemZGMageFrost5PBonusRanks + 1][]float64{{65, 65}}
 
 // unconfirmed: S03 - Item - ZG - Mage - Frost 5P Bonus coefficient derived from the vanilla convention (rank 0)
 
-// S03 - Tuning and Overrides Passive - Mage: 1 rank(s), from build 1.60.1.69893.
-const S03TuningAndOverridesPassiveMageRanks = 1
+// S03 - Tuning and Overrides Passive - Mage: ranks 0 present, from build 1.60.1.69893.
+const S03TuningAndOverridesPassiveMageRanks = 0
 
-var S03TuningAndOverridesPassiveMageSpellId = [S03TuningAndOverridesPassiveMageRanks + 1]int32{0, 442543}
-var S03TuningAndOverridesPassiveMageLevel = [S03TuningAndOverridesPassiveMageRanks + 1]int{0, 1}
-var S03TuningAndOverridesPassiveMageCastTime = [S03TuningAndOverridesPassiveMageRanks + 1]int32{0, 0}
-var S03TuningAndOverridesPassiveMageCooldownMS = [S03TuningAndOverridesPassiveMageRanks + 1]int32{0, 0}
-var S03TuningAndOverridesPassiveMageManaCost = [S03TuningAndOverridesPassiveMageRanks + 1]float64{0, 0}
-var S03TuningAndOverridesPassiveMageSpellCoeff = [S03TuningAndOverridesPassiveMageRanks + 1]float64{0, 0.4286}
-var S03TuningAndOverridesPassiveMageBaseDamage = [S03TuningAndOverridesPassiveMageRanks + 1][]float64{{0, 0}, {-100, -100}}
+var S03TuningAndOverridesPassiveMageSpellId = [S03TuningAndOverridesPassiveMageRanks + 1]int32{442543}
+var S03TuningAndOverridesPassiveMageLevel = [S03TuningAndOverridesPassiveMageRanks + 1]int{1}
+var S03TuningAndOverridesPassiveMageCastTime = [S03TuningAndOverridesPassiveMageRanks + 1]int32{0}
+var S03TuningAndOverridesPassiveMageCooldownMS = [S03TuningAndOverridesPassiveMageRanks + 1]int32{0}
+var S03TuningAndOverridesPassiveMageManaCost = [S03TuningAndOverridesPassiveMageRanks + 1]float64{0}
+var S03TuningAndOverridesPassiveMageSpellCoeff = [S03TuningAndOverridesPassiveMageRanks + 1]float64{0.4286}
+var S03TuningAndOverridesPassiveMageBaseDamage = [S03TuningAndOverridesPassiveMageRanks + 1][]float64{{-100, -100}}
 
 // unconfirmed: S03 - Tuning and Overrides Passive - Mage coefficient derived from the vanilla convention (rank 0)
 
-// Savage Roar: 1 rank(s), from build 1.60.1.69893.
-const SavageRoarRanks = 1
+// Savage Roar: ranks 0 present, from build 1.60.1.69893.
+const SavageRoarRanks = 0
 
-var SavageRoarSpellId = [SavageRoarRanks + 1]int32{0, 409819}
-var SavageRoarLevel = [SavageRoarRanks + 1]int{0, 1}
-var SavageRoarCastTime = [SavageRoarRanks + 1]int32{0, 0}
-var SavageRoarCooldownMS = [SavageRoarRanks + 1]int32{0, 0}
-var SavageRoarManaCost = [SavageRoarRanks + 1]float64{0, 0}
-var SavageRoarSpellCoeff = [SavageRoarRanks + 1]float64{0, 0.4286}
-var SavageRoarBaseDamage = [SavageRoarRanks + 1][]float64{{0, 0}, {407988, 407988}}
+var SavageRoarSpellId = [SavageRoarRanks + 1]int32{409819}
+var SavageRoarLevel = [SavageRoarRanks + 1]int{1}
+var SavageRoarCastTime = [SavageRoarRanks + 1]int32{0}
+var SavageRoarCooldownMS = [SavageRoarRanks + 1]int32{0}
+var SavageRoarManaCost = [SavageRoarRanks + 1]float64{0}
+var SavageRoarSpellCoeff = [SavageRoarRanks + 1]float64{0.4286}
+var SavageRoarBaseDamage = [SavageRoarRanks + 1][]float64{{407988, 407988}}
 
 // unconfirmed: Savage Roar coefficient derived from the vanilla convention (rank 0)
 
-// Scald: 1 rank(s), from build 1.60.1.69893.
-const ScaldRanks = 1
+// Scald: ranks 0 present, from build 1.60.1.69893.
+const ScaldRanks = 0
 
-var ScaldSpellId = [ScaldRanks + 1]int32{0, 17276}
-var ScaldLevel = [ScaldRanks + 1]int{0, 20}
-var ScaldCastTime = [ScaldRanks + 1]int32{0, 0}
-var ScaldCooldownMS = [ScaldRanks + 1]int32{0, 0}
-var ScaldManaCost = [ScaldRanks + 1]float64{0, 0}
-var ScaldSpellCoeff = [ScaldRanks + 1]float64{0, 0.2667}
-var ScaldBaseDamage = [ScaldRanks + 1][]float64{{0, 0}, {585, 585}}
+var ScaldSpellId = [ScaldRanks + 1]int32{17276}
+var ScaldLevel = [ScaldRanks + 1]int{20}
+var ScaldCastTime = [ScaldRanks + 1]int32{0}
+var ScaldCooldownMS = [ScaldRanks + 1]int32{0}
+var ScaldManaCost = [ScaldRanks + 1]float64{0}
+var ScaldSpellCoeff = [ScaldRanks + 1]float64{0.2667}
+var ScaldBaseDamage = [ScaldRanks + 1][]float64{{585, 585}}
 
 // unconfirmed: Scald coefficient derived from the vanilla convention (rank 0)
 
 // skipped: "Scorch" already has a hand-written ScorchRanks elsewhere in this package.
 
-// Scorch Talent Test (PT): 1 rank(s), from build 1.60.1.69893.
-const ScorchTalentTestPTRanks = 1
+// Scorch Talent Test (PT): ranks 0 present, from build 1.60.1.69893.
+const ScorchTalentTestPTRanks = 0
 
-var ScorchTalentTestPTSpellId = [ScorchTalentTestPTRanks + 1]int32{0, 12379}
-var ScorchTalentTestPTLevel = [ScorchTalentTestPTRanks + 1]int{0, 0}
-var ScorchTalentTestPTCastTime = [ScorchTalentTestPTRanks + 1]int32{0, 0}
-var ScorchTalentTestPTCooldownMS = [ScorchTalentTestPTRanks + 1]int32{0, 0}
-var ScorchTalentTestPTManaCost = [ScorchTalentTestPTRanks + 1]float64{0, 0}
-var ScorchTalentTestPTSpellCoeff = [ScorchTalentTestPTRanks + 1]float64{0, 0.4286}
-var ScorchTalentTestPTBaseDamage = [ScorchTalentTestPTRanks + 1][]float64{{0, 0}, {0, 0}}
+var ScorchTalentTestPTSpellId = [ScorchTalentTestPTRanks + 1]int32{12379}
+var ScorchTalentTestPTLevel = [ScorchTalentTestPTRanks + 1]int{0}
+var ScorchTalentTestPTCastTime = [ScorchTalentTestPTRanks + 1]int32{0}
+var ScorchTalentTestPTCooldownMS = [ScorchTalentTestPTRanks + 1]int32{0}
+var ScorchTalentTestPTManaCost = [ScorchTalentTestPTRanks + 1]float64{0}
+var ScorchTalentTestPTSpellCoeff = [ScorchTalentTestPTRanks + 1]float64{0.4286}
+var ScorchTalentTestPTBaseDamage = [ScorchTalentTestPTRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Scorch Talent Test (PT) coefficient derived from the vanilla convention (rank 0)
 
-// Searing Blast: 1 rank(s), from build 1.60.1.69893.
-const SearingBlastRanks = 1
+// Searing Blast: ranks 0 present, from build 1.60.1.69893.
+const SearingBlastRanks = 0
 
-var SearingBlastSpellId = [SearingBlastRanks + 1]int32{0, 16454}
-var SearingBlastLevel = [SearingBlastRanks + 1]int{0, 30}
-var SearingBlastCastTime = [SearingBlastRanks + 1]int32{0, 0}
-var SearingBlastCooldownMS = [SearingBlastRanks + 1]int32{0, 0}
-var SearingBlastManaCost = [SearingBlastRanks + 1]float64{0, 0}
-var SearingBlastSpellCoeff = [SearingBlastRanks + 1]float64{0, 2}
-var SearingBlastBaseDamage = [SearingBlastRanks + 1][]float64{{0, 0}, {56, 56}}
+var SearingBlastSpellId = [SearingBlastRanks + 1]int32{16454}
+var SearingBlastLevel = [SearingBlastRanks + 1]int{30}
+var SearingBlastCastTime = [SearingBlastRanks + 1]int32{0}
+var SearingBlastCooldownMS = [SearingBlastRanks + 1]int32{0}
+var SearingBlastManaCost = [SearingBlastRanks + 1]float64{0}
+var SearingBlastSpellCoeff = [SearingBlastRanks + 1]float64{2}
+var SearingBlastBaseDamage = [SearingBlastRanks + 1][]float64{{56, 56}}
 
 // unconfirmed: Searing Blast coefficient derived from the vanilla convention (rank 0)
 
-// Serendipity: 1 rank(s), from build 1.60.1.69893.
-const SerendipityRanks = 1
+// Serendipity: ranks 0 present, from build 1.60.1.69893.
+const SerendipityRanks = 0
 
-var SerendipitySpellId = [SerendipityRanks + 1]int32{0, 415737}
-var SerendipityLevel = [SerendipityRanks + 1]int{0, 1}
-var SerendipityCastTime = [SerendipityRanks + 1]int32{0, 0}
-var SerendipityCooldownMS = [SerendipityRanks + 1]int32{0, 0}
-var SerendipityManaCost = [SerendipityRanks + 1]float64{0, 0}
-var SerendipitySpellCoeff = [SerendipityRanks + 1]float64{0, 0.4286}
-var SerendipityBaseDamage = [SerendipityRanks + 1][]float64{{0, 0}, {413248, 413248}}
+var SerendipitySpellId = [SerendipityRanks + 1]int32{415737}
+var SerendipityLevel = [SerendipityRanks + 1]int{1}
+var SerendipityCastTime = [SerendipityRanks + 1]int32{0}
+var SerendipityCooldownMS = [SerendipityRanks + 1]int32{0}
+var SerendipityManaCost = [SerendipityRanks + 1]float64{0}
+var SerendipitySpellCoeff = [SerendipityRanks + 1]float64{0.4286}
+var SerendipityBaseDamage = [SerendipityRanks + 1][]float64{{413248, 413248}}
 
 // unconfirmed: Serendipity coefficient derived from the vanilla convention (rank 0)
 
-// Shadow Word: Death: 1 rank(s), from build 1.60.1.69893.
-const ShadowWordDeathRanks = 1
+// Shadow Word: Death: ranks 0 present, from build 1.60.1.69893.
+const ShadowWordDeathRanks = 0
 
-var ShadowWordDeathSpellId = [ShadowWordDeathRanks + 1]int32{0, 402833}
-var ShadowWordDeathLevel = [ShadowWordDeathRanks + 1]int{0, 1}
-var ShadowWordDeathCastTime = [ShadowWordDeathRanks + 1]int32{0, 0}
-var ShadowWordDeathCooldownMS = [ShadowWordDeathRanks + 1]int32{0, 0}
-var ShadowWordDeathManaCost = [ShadowWordDeathRanks + 1]float64{0, 0}
-var ShadowWordDeathSpellCoeff = [ShadowWordDeathRanks + 1]float64{0, 0.4286}
-var ShadowWordDeathBaseDamage = [ShadowWordDeathRanks + 1][]float64{{0, 0}, {401955, 401955}}
+var ShadowWordDeathSpellId = [ShadowWordDeathRanks + 1]int32{402833}
+var ShadowWordDeathLevel = [ShadowWordDeathRanks + 1]int{1}
+var ShadowWordDeathCastTime = [ShadowWordDeathRanks + 1]int32{0}
+var ShadowWordDeathCooldownMS = [ShadowWordDeathRanks + 1]int32{0}
+var ShadowWordDeathManaCost = [ShadowWordDeathRanks + 1]float64{0}
+var ShadowWordDeathSpellCoeff = [ShadowWordDeathRanks + 1]float64{0.4286}
+var ShadowWordDeathBaseDamage = [ShadowWordDeathRanks + 1][]float64{{401955, 401955}}
 
 // unconfirmed: Shadow Word: Death coefficient derived from the vanilla convention (rank 0)
 
-// Shared Pain: 1 rank(s), from build 1.60.1.69893.
-const SharedPainRanks = 1
+// Shared Pain: ranks 0 present, from build 1.60.1.69893.
+const SharedPainRanks = 0
 
-var SharedPainSpellId = [SharedPainRanks + 1]int32{0, 402838}
-var SharedPainLevel = [SharedPainRanks + 1]int{0, 1}
-var SharedPainCastTime = [SharedPainRanks + 1]int32{0, 0}
-var SharedPainCooldownMS = [SharedPainRanks + 1]int32{0, 0}
-var SharedPainManaCost = [SharedPainRanks + 1]float64{0, 0}
-var SharedPainSpellCoeff = [SharedPainRanks + 1]float64{0, 0.4286}
-var SharedPainBaseDamage = [SharedPainRanks + 1][]float64{{0, 0}, {401969, 401969}}
+var SharedPainSpellId = [SharedPainRanks + 1]int32{402838}
+var SharedPainLevel = [SharedPainRanks + 1]int{1}
+var SharedPainCastTime = [SharedPainRanks + 1]int32{0}
+var SharedPainCooldownMS = [SharedPainRanks + 1]int32{0}
+var SharedPainManaCost = [SharedPainRanks + 1]float64{0}
+var SharedPainSpellCoeff = [SharedPainRanks + 1]float64{0.4286}
+var SharedPainBaseDamage = [SharedPainRanks + 1][]float64{{401969, 401969}}
 
 // unconfirmed: Shared Pain coefficient derived from the vanilla convention (rank 0)
 
-// Shatter: 1 rank(s), from build 1.60.1.69893.
-const ShatterRanks = 1
+// Shatter: ranks 0 present, from build 1.60.1.69893.
+const ShatterRanks = 0
 
-var ShatterSpellId = [ShatterRanks + 1]int32{0, 11170}
-var ShatterLevel = [ShatterRanks + 1]int{0, 1}
-var ShatterCastTime = [ShatterRanks + 1]int32{0, 0}
-var ShatterCooldownMS = [ShatterRanks + 1]int32{0, 0}
-var ShatterManaCost = [ShatterRanks + 1]float64{0, 0}
-var ShatterSpellCoeff = [ShatterRanks + 1]float64{0, 0.4286}
-var ShatterBaseDamage = [ShatterRanks + 1][]float64{{0, 0}, {1, 1}}
+var ShatterSpellId = [ShatterRanks + 1]int32{11170}
+var ShatterLevel = [ShatterRanks + 1]int{1}
+var ShatterCastTime = [ShatterRanks + 1]int32{0}
+var ShatterCooldownMS = [ShatterRanks + 1]int32{0}
+var ShatterManaCost = [ShatterRanks + 1]float64{0}
+var ShatterSpellCoeff = [ShatterRanks + 1]float64{0.4286}
+var ShatterBaseDamage = [ShatterRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Shatter coefficient derived from the vanilla convention (rank 0)
 
-// Shield Mastery: 1 rank(s), from build 1.60.1.69893.
-const ShieldMasteryRanks = 1
+// Shield Mastery: ranks 0 present, from build 1.60.1.69893.
+const ShieldMasteryRanks = 0
 
-var ShieldMasterySpellId = [ShieldMasteryRanks + 1]int32{0, 415596}
-var ShieldMasteryLevel = [ShieldMasteryRanks + 1]int{0, 1}
-var ShieldMasteryCastTime = [ShieldMasteryRanks + 1]int32{0, 0}
-var ShieldMasteryCooldownMS = [ShieldMasteryRanks + 1]int32{0, 0}
-var ShieldMasteryManaCost = [ShieldMasteryRanks + 1]float64{0, 0}
-var ShieldMasterySpellCoeff = [ShieldMasteryRanks + 1]float64{0, 0.4286}
-var ShieldMasteryBaseDamage = [ShieldMasteryRanks + 1][]float64{{0, 0}, {409069, 409069}}
+var ShieldMasterySpellId = [ShieldMasteryRanks + 1]int32{415596}
+var ShieldMasteryLevel = [ShieldMasteryRanks + 1]int{1}
+var ShieldMasteryCastTime = [ShieldMasteryRanks + 1]int32{0}
+var ShieldMasteryCooldownMS = [ShieldMasteryRanks + 1]int32{0}
+var ShieldMasteryManaCost = [ShieldMasteryRanks + 1]float64{0}
+var ShieldMasterySpellCoeff = [ShieldMasteryRanks + 1]float64{0.4286}
+var ShieldMasteryBaseDamage = [ShieldMasteryRanks + 1][]float64{{409069, 409069}}
 
 // unconfirmed: Shield Mastery coefficient derived from the vanilla convention (rank 0)
 
-// Single-Minded Fury: 1 rank(s), from build 1.60.1.69893.
-const SingleMindedFuryRanks = 1
+// Single-Minded Fury: ranks 0 present, from build 1.60.1.69893.
+const SingleMindedFuryRanks = 0
 
-var SingleMindedFurySpellId = [SingleMindedFuryRanks + 1]int32{0, 415599}
-var SingleMindedFuryLevel = [SingleMindedFuryRanks + 1]int{0, 1}
-var SingleMindedFuryCastTime = [SingleMindedFuryRanks + 1]int32{0, 0}
-var SingleMindedFuryCooldownMS = [SingleMindedFuryRanks + 1]int32{0, 0}
-var SingleMindedFuryManaCost = [SingleMindedFuryRanks + 1]float64{0, 0}
-var SingleMindedFurySpellCoeff = [SingleMindedFuryRanks + 1]float64{0, 0.4286}
-var SingleMindedFuryBaseDamage = [SingleMindedFuryRanks + 1][]float64{{0, 0}, {413404, 413404}}
+var SingleMindedFurySpellId = [SingleMindedFuryRanks + 1]int32{415599}
+var SingleMindedFuryLevel = [SingleMindedFuryRanks + 1]int{1}
+var SingleMindedFuryCastTime = [SingleMindedFuryRanks + 1]int32{0}
+var SingleMindedFuryCooldownMS = [SingleMindedFuryRanks + 1]int32{0}
+var SingleMindedFuryManaCost = [SingleMindedFuryRanks + 1]float64{0}
+var SingleMindedFurySpellCoeff = [SingleMindedFuryRanks + 1]float64{0.4286}
+var SingleMindedFuryBaseDamage = [SingleMindedFuryRanks + 1][]float64{{413404, 413404}}
 
 // unconfirmed: Single-Minded Fury coefficient derived from the vanilla convention (rank 0)
 
-// Skull Bash: 1 rank(s), from build 1.60.1.69893.
-const SkullBashRanks = 1
+// Skull Bash: ranks 0 present, from build 1.60.1.69893.
+const SkullBashRanks = 0
 
-var SkullBashSpellId = [SkullBashRanks + 1]int32{0, 415759}
-var SkullBashLevel = [SkullBashRanks + 1]int{0, 1}
-var SkullBashCastTime = [SkullBashRanks + 1]int32{0, 0}
-var SkullBashCooldownMS = [SkullBashRanks + 1]int32{0, 0}
-var SkullBashManaCost = [SkullBashRanks + 1]float64{0, 0}
-var SkullBashSpellCoeff = [SkullBashRanks + 1]float64{0, 0.4286}
-var SkullBashBaseDamage = [SkullBashRanks + 1][]float64{{0, 0}, {410176, 410176}}
+var SkullBashSpellId = [SkullBashRanks + 1]int32{415759}
+var SkullBashLevel = [SkullBashRanks + 1]int{1}
+var SkullBashCastTime = [SkullBashRanks + 1]int32{0}
+var SkullBashCooldownMS = [SkullBashRanks + 1]int32{0}
+var SkullBashManaCost = [SkullBashRanks + 1]float64{0}
+var SkullBashSpellCoeff = [SkullBashRanks + 1]float64{0.4286}
+var SkullBashBaseDamage = [SkullBashRanks + 1][]float64{{410176, 410176}}
 
 // unconfirmed: Skull Bash coefficient derived from the vanilla convention (rank 0)
 
-// Sleep: 3 rank(s), from build 1.60.1.69893.
+// Sleep: ranks 1-3 present, from build 1.60.1.69893.
 const SleepRanks = 3
 
 var SleepSpellId = [SleepRanks + 1]int32{0, 700, 1090, 448572}
@@ -3741,592 +3820,598 @@ var SleepBaseDamage = [SleepRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}}
 
 // unconfirmed: Sleep coefficient derived from the vanilla convention (rank 1, rank 2, rank 3)
 
-// Slow Fall: 1 rank(s), from build 1.60.1.69893.
-const SlowFallRanks = 1
+// Slow Fall: ranks 0 present, from build 1.60.1.69893.
+const SlowFallRanks = 0
 
-var SlowFallSpellId = [SlowFallRanks + 1]int32{0, 130}
-var SlowFallLevel = [SlowFallRanks + 1]int{0, 12}
-var SlowFallCastTime = [SlowFallRanks + 1]int32{0, 0}
-var SlowFallCooldownMS = [SlowFallRanks + 1]int32{0, 0}
-var SlowFallManaCost = [SlowFallRanks + 1]float64{0, 40}
-var SlowFallSpellCoeff = [SlowFallRanks + 1]float64{0, 2}
-var SlowFallBaseDamage = [SlowFallRanks + 1][]float64{{0, 0}, {0, 0}}
+var SlowFallSpellId = [SlowFallRanks + 1]int32{130}
+var SlowFallLevel = [SlowFallRanks + 1]int{12}
+var SlowFallCastTime = [SlowFallRanks + 1]int32{0}
+var SlowFallCooldownMS = [SlowFallRanks + 1]int32{0}
+var SlowFallManaCost = [SlowFallRanks + 1]float64{40}
+var SlowFallSpellCoeff = [SlowFallRanks + 1]float64{2}
+var SlowFallBaseDamage = [SlowFallRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Slow Fall coefficient derived from the vanilla convention (rank 0)
 
-// Sniper Training: 1 rank(s), from build 1.60.1.69893.
-const SniperTrainingRanks = 1
+// Sniper Training: ranks 0 present, from build 1.60.1.69893.
+const SniperTrainingRanks = 0
 
-var SniperTrainingSpellId = [SniperTrainingRanks + 1]int32{0, 415818}
-var SniperTrainingLevel = [SniperTrainingRanks + 1]int{0, 1}
-var SniperTrainingCastTime = [SniperTrainingRanks + 1]int32{0, 0}
-var SniperTrainingCooldownMS = [SniperTrainingRanks + 1]int32{0, 0}
-var SniperTrainingManaCost = [SniperTrainingRanks + 1]float64{0, 0}
-var SniperTrainingSpellCoeff = [SniperTrainingRanks + 1]float64{0, 0.4286}
-var SniperTrainingBaseDamage = [SniperTrainingRanks + 1][]float64{{0, 0}, {415399, 415399}}
+var SniperTrainingSpellId = [SniperTrainingRanks + 1]int32{415818}
+var SniperTrainingLevel = [SniperTrainingRanks + 1]int{1}
+var SniperTrainingCastTime = [SniperTrainingRanks + 1]int32{0}
+var SniperTrainingCooldownMS = [SniperTrainingRanks + 1]int32{0}
+var SniperTrainingManaCost = [SniperTrainingRanks + 1]float64{0}
+var SniperTrainingSpellCoeff = [SniperTrainingRanks + 1]float64{0.4286}
+var SniperTrainingBaseDamage = [SniperTrainingRanks + 1][]float64{{415399, 415399}}
 
 // unconfirmed: Sniper Training coefficient derived from the vanilla convention (rank 0)
 
-// Soul Warding: 1 rank(s), from build 1.60.1.69893.
-const SoulWardingRanks = 1
+// Soul Warding: ranks 0 present, from build 1.60.1.69893.
+const SoulWardingRanks = 0
 
-var SoulWardingSpellId = [SoulWardingRanks + 1]int32{0, 402834}
-var SoulWardingLevel = [SoulWardingRanks + 1]int{0, 1}
-var SoulWardingCastTime = [SoulWardingRanks + 1]int32{0, 0}
-var SoulWardingCooldownMS = [SoulWardingRanks + 1]int32{0, 0}
-var SoulWardingManaCost = [SoulWardingRanks + 1]float64{0, 0}
-var SoulWardingSpellCoeff = [SoulWardingRanks + 1]float64{0, 0.4286}
-var SoulWardingBaseDamage = [SoulWardingRanks + 1][]float64{{0, 0}, {402000, 402000}}
+var SoulWardingSpellId = [SoulWardingRanks + 1]int32{402834}
+var SoulWardingLevel = [SoulWardingRanks + 1]int{1}
+var SoulWardingCastTime = [SoulWardingRanks + 1]int32{0}
+var SoulWardingCooldownMS = [SoulWardingRanks + 1]int32{0}
+var SoulWardingManaCost = [SoulWardingRanks + 1]float64{0}
+var SoulWardingSpellCoeff = [SoulWardingRanks + 1]float64{0.4286}
+var SoulWardingBaseDamage = [SoulWardingRanks + 1][]float64{{402000, 402000}}
 
 // unconfirmed: Soul Warding coefficient derived from the vanilla convention (rank 0)
 
-// Spell Power: 2 rank(s), from build 1.60.1.69893.
-const SpellPowerRanks = 2
+// Spell Power: ranks 0 present, from build 1.60.1.69893.
+const SpellPowerRanks = 0
 
-var SpellPowerSpellId = [SpellPowerRanks + 1]int32{0, 415459, 412322}
-var SpellPowerLevel = [SpellPowerRanks + 1]int{0, 1, 1}
-var SpellPowerCastTime = [SpellPowerRanks + 1]int32{0, 0, 0}
-var SpellPowerCooldownMS = [SpellPowerRanks + 1]int32{0, 0, 0}
-var SpellPowerManaCost = [SpellPowerRanks + 1]float64{0, 0, 0}
-var SpellPowerSpellCoeff = [SpellPowerRanks + 1]float64{0, 0.4286, 0.4286}
-var SpellPowerBaseDamage = [SpellPowerRanks + 1][]float64{{0, 0}, {412322, 412322}, {50, 50}}
+var SpellPowerSpellId = [SpellPowerRanks + 1]int32{415459}
+var SpellPowerLevel = [SpellPowerRanks + 1]int{1}
+var SpellPowerCastTime = [SpellPowerRanks + 1]int32{0}
+var SpellPowerCooldownMS = [SpellPowerRanks + 1]int32{0}
+var SpellPowerManaCost = [SpellPowerRanks + 1]float64{0}
+var SpellPowerSpellCoeff = [SpellPowerRanks + 1]float64{0.4286}
+var SpellPowerBaseDamage = [SpellPowerRanks + 1][]float64{{412322, 412322}}
 
-// unconfirmed: Spell Power coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Spell Power coefficient derived from the vanilla convention (rank 0)
+// Spell Power rank 0: kept id 415459 (spell_level 1); dropped 412322 (spell_level 1)
 
-// Spellfrost Bolt: 2 rank(s), from build 1.60.1.69893.
-const SpellfrostBoltRanks = 2
+// Spellfrost Bolt: ranks 0 present, from build 1.60.1.69893.
+const SpellfrostBoltRanks = 0
 
-var SpellfrostBoltSpellId = [SpellfrostBoltRanks + 1]int32{0, 415734, 412532}
-var SpellfrostBoltLevel = [SpellfrostBoltRanks + 1]int{0, 1, 1}
-var SpellfrostBoltCastTime = [SpellfrostBoltRanks + 1]int32{0, 0, 2500}
-var SpellfrostBoltCooldownMS = [SpellfrostBoltRanks + 1]int32{0, 0, 0}
-var SpellfrostBoltManaCost = [SpellfrostBoltRanks + 1]float64{0, 0, 0}
-var SpellfrostBoltSpellCoeff = [SpellfrostBoltRanks + 1]float64{0, 0.4286, 0.814}
-var SpellfrostBoltBaseDamage = [SpellfrostBoltRanks + 1][]float64{{0, 0}, {412532, 412532}, {330, 330}}
+var SpellfrostBoltSpellId = [SpellfrostBoltRanks + 1]int32{415734}
+var SpellfrostBoltLevel = [SpellfrostBoltRanks + 1]int{1}
+var SpellfrostBoltCastTime = [SpellfrostBoltRanks + 1]int32{0}
+var SpellfrostBoltCooldownMS = [SpellfrostBoltRanks + 1]int32{0}
+var SpellfrostBoltManaCost = [SpellfrostBoltRanks + 1]float64{0}
+var SpellfrostBoltSpellCoeff = [SpellfrostBoltRanks + 1]float64{0.4286}
+var SpellfrostBoltBaseDamage = [SpellfrostBoltRanks + 1][]float64{{412532, 412532}}
 
 // unconfirmed: Spellfrost Bolt coefficient derived from the vanilla convention (rank 0)
+// Spellfrost Bolt rank 0: kept id 415734 (spell_level 1); dropped 412532 (spell_level 1)
 
-// Staff of Order: 1 rank(s), from build 1.60.1.69893.
-const StaffOfOrderRanks = 1
+// Staff of Order: ranks 0 present, from build 1.60.1.69893.
+const StaffOfOrderRanks = 0
 
-var StaffOfOrderSpellId = [StaffOfOrderRanks + 1]int32{0, 469236}
-var StaffOfOrderLevel = [StaffOfOrderRanks + 1]int{0, 0}
-var StaffOfOrderCastTime = [StaffOfOrderRanks + 1]int32{0, 0}
-var StaffOfOrderCooldownMS = [StaffOfOrderRanks + 1]int32{0, 0}
-var StaffOfOrderManaCost = [StaffOfOrderRanks + 1]float64{0, 0}
-var StaffOfOrderSpellCoeff = [StaffOfOrderRanks + 1]float64{0, 1}
-var StaffOfOrderBaseDamage = [StaffOfOrderRanks + 1][]float64{{0, 0}, {1, 1}}
+var StaffOfOrderSpellId = [StaffOfOrderRanks + 1]int32{469236}
+var StaffOfOrderLevel = [StaffOfOrderRanks + 1]int{0}
+var StaffOfOrderCastTime = [StaffOfOrderRanks + 1]int32{0}
+var StaffOfOrderCooldownMS = [StaffOfOrderRanks + 1]int32{0}
+var StaffOfOrderManaCost = [StaffOfOrderRanks + 1]float64{0}
+var StaffOfOrderSpellCoeff = [StaffOfOrderRanks + 1]float64{1}
+var StaffOfOrderBaseDamage = [StaffOfOrderRanks + 1][]float64{{1, 1}}
 
-// Strength of Soul: 1 rank(s), from build 1.60.1.69893.
-const StrengthOfSoulRanks = 1
+// Strength of Soul: ranks 0 present, from build 1.60.1.69893.
+const StrengthOfSoulRanks = 0
 
-var StrengthOfSoulSpellId = [StrengthOfSoulRanks + 1]int32{0, 415740}
-var StrengthOfSoulLevel = [StrengthOfSoulRanks + 1]int{0, 1}
-var StrengthOfSoulCastTime = [StrengthOfSoulRanks + 1]int32{0, 0}
-var StrengthOfSoulCooldownMS = [StrengthOfSoulRanks + 1]int32{0, 0}
-var StrengthOfSoulManaCost = [StrengthOfSoulRanks + 1]float64{0, 0}
-var StrengthOfSoulSpellCoeff = [StrengthOfSoulRanks + 1]float64{0, 0.4286}
-var StrengthOfSoulBaseDamage = [StrengthOfSoulRanks + 1][]float64{{0, 0}, {415739, 415739}}
+var StrengthOfSoulSpellId = [StrengthOfSoulRanks + 1]int32{415740}
+var StrengthOfSoulLevel = [StrengthOfSoulRanks + 1]int{1}
+var StrengthOfSoulCastTime = [StrengthOfSoulRanks + 1]int32{0}
+var StrengthOfSoulCooldownMS = [StrengthOfSoulRanks + 1]int32{0}
+var StrengthOfSoulManaCost = [StrengthOfSoulRanks + 1]float64{0}
+var StrengthOfSoulSpellCoeff = [StrengthOfSoulRanks + 1]float64{0.4286}
+var StrengthOfSoulBaseDamage = [StrengthOfSoulRanks + 1][]float64{{415739, 415739}}
 
 // unconfirmed: Strength of Soul coefficient derived from the vanilla convention (rank 0)
 
-// Stygian Grasp: 3 rank(s), from build 1.60.1.69893.
-const StygianGraspRanks = 3
+// Stygian Grasp: ranks 0 present, from build 1.60.1.69893.
+const StygianGraspRanks = 0
 
-var StygianGraspSpellId = [StygianGraspRanks + 1]int32{0, 1220520, 29164, 1219270}
-var StygianGraspLevel = [StygianGraspRanks + 1]int{0, 1, 1, 1}
-var StygianGraspCastTime = [StygianGraspRanks + 1]int32{0, 0, 0, 0}
-var StygianGraspCooldownMS = [StygianGraspRanks + 1]int32{0, 0, 0, 0}
-var StygianGraspManaCost = [StygianGraspRanks + 1]float64{0, 0, 0, 0}
-var StygianGraspSpellCoeff = [StygianGraspRanks + 1]float64{0, 0.3333, 0.3333, 0.4}
-var StygianGraspBaseDamage = [StygianGraspRanks + 1][]float64{{0, 0}, {-50, -50}, {-50, -50}, {-50, -50}}
+var StygianGraspSpellId = [StygianGraspRanks + 1]int32{1220520}
+var StygianGraspLevel = [StygianGraspRanks + 1]int{1}
+var StygianGraspCastTime = [StygianGraspRanks + 1]int32{0}
+var StygianGraspCooldownMS = [StygianGraspRanks + 1]int32{0}
+var StygianGraspManaCost = [StygianGraspRanks + 1]float64{0}
+var StygianGraspSpellCoeff = [StygianGraspRanks + 1]float64{0.3333}
+var StygianGraspBaseDamage = [StygianGraspRanks + 1][]float64{{-50, -50}}
 
-// unconfirmed: Stygian Grasp coefficient derived from the vanilla convention (rank 0, rank 0, rank 0)
+// unconfirmed: Stygian Grasp coefficient derived from the vanilla convention (rank 0)
+// Stygian Grasp rank 0: kept id 1220520 (spell_level 1); dropped 29164 (spell_level 1), 1219270 (spell_level 1)
 
-// Sunfire: 1 rank(s), from build 1.60.1.69893.
-const SunfireRanks = 1
+// Sunfire: ranks 0 present, from build 1.60.1.69893.
+const SunfireRanks = 0
 
-var SunfireSpellId = [SunfireRanks + 1]int32{0, 414692}
-var SunfireLevel = [SunfireRanks + 1]int{0, 1}
-var SunfireCastTime = [SunfireRanks + 1]int32{0, 0}
-var SunfireCooldownMS = [SunfireRanks + 1]int32{0, 0}
-var SunfireManaCost = [SunfireRanks + 1]float64{0, 0}
-var SunfireSpellCoeff = [SunfireRanks + 1]float64{0, 0.4286}
-var SunfireBaseDamage = [SunfireRanks + 1][]float64{{0, 0}, {414684, 414684}}
+var SunfireSpellId = [SunfireRanks + 1]int32{414692}
+var SunfireLevel = [SunfireRanks + 1]int{1}
+var SunfireCastTime = [SunfireRanks + 1]int32{0}
+var SunfireCooldownMS = [SunfireRanks + 1]int32{0}
+var SunfireManaCost = [SunfireRanks + 1]float64{0}
+var SunfireSpellCoeff = [SunfireRanks + 1]float64{0.4286}
+var SunfireBaseDamage = [SunfireRanks + 1][]float64{{414684, 414684}}
 
 // unconfirmed: Sunfire coefficient derived from the vanilla convention (rank 0)
 
-// Survival of the Fittest: 1 rank(s), from build 1.60.1.69893.
-const SurvivalOfTheFittestRanks = 1
+// Survival of the Fittest: ranks 0 present, from build 1.60.1.69893.
+const SurvivalOfTheFittestRanks = 0
 
-var SurvivalOfTheFittestSpellId = [SurvivalOfTheFittestRanks + 1]int32{0, 415709}
-var SurvivalOfTheFittestLevel = [SurvivalOfTheFittestRanks + 1]int{0, 1}
-var SurvivalOfTheFittestCastTime = [SurvivalOfTheFittestRanks + 1]int32{0, 0}
-var SurvivalOfTheFittestCooldownMS = [SurvivalOfTheFittestRanks + 1]int32{0, 0}
-var SurvivalOfTheFittestManaCost = [SurvivalOfTheFittestRanks + 1]float64{0, 0}
-var SurvivalOfTheFittestSpellCoeff = [SurvivalOfTheFittestRanks + 1]float64{0, 0.4286}
-var SurvivalOfTheFittestBaseDamage = [SurvivalOfTheFittestRanks + 1][]float64{{0, 0}, {411115, 411115}}
+var SurvivalOfTheFittestSpellId = [SurvivalOfTheFittestRanks + 1]int32{415709}
+var SurvivalOfTheFittestLevel = [SurvivalOfTheFittestRanks + 1]int{1}
+var SurvivalOfTheFittestCastTime = [SurvivalOfTheFittestRanks + 1]int32{0}
+var SurvivalOfTheFittestCooldownMS = [SurvivalOfTheFittestRanks + 1]int32{0}
+var SurvivalOfTheFittestManaCost = [SurvivalOfTheFittestRanks + 1]float64{0}
+var SurvivalOfTheFittestSpellCoeff = [SurvivalOfTheFittestRanks + 1]float64{0.4286}
+var SurvivalOfTheFittestBaseDamage = [SurvivalOfTheFittestRanks + 1][]float64{{411115, 411115}}
 
 // unconfirmed: Survival of the Fittest coefficient derived from the vanilla convention (rank 0)
 
-// TEST Scorch: 1 rank(s), from build 1.60.1.69893.
-const TESTScorchRanks = 1
+// TEST Scorch: ranks 0 present, from build 1.60.1.69893.
+const TESTScorchRanks = 0
 
-var TESTScorchSpellId = [TESTScorchRanks + 1]int32{0, 29515}
-var TESTScorchLevel = [TESTScorchRanks + 1]int{0, 1}
-var TESTScorchCastTime = [TESTScorchRanks + 1]int32{0, 0}
-var TESTScorchCooldownMS = [TESTScorchRanks + 1]int32{0, 0}
-var TESTScorchManaCost = [TESTScorchRanks + 1]float64{0, 1}
-var TESTScorchSpellCoeff = [TESTScorchRanks + 1]float64{0, 0.4286}
-var TESTScorchBaseDamage = [TESTScorchRanks + 1][]float64{{0, 0}, {100, 100}}
+var TESTScorchSpellId = [TESTScorchRanks + 1]int32{29515}
+var TESTScorchLevel = [TESTScorchRanks + 1]int{1}
+var TESTScorchCastTime = [TESTScorchRanks + 1]int32{0}
+var TESTScorchCooldownMS = [TESTScorchRanks + 1]int32{0}
+var TESTScorchManaCost = [TESTScorchRanks + 1]float64{1}
+var TESTScorchSpellCoeff = [TESTScorchRanks + 1]float64{0.4286}
+var TESTScorchBaseDamage = [TESTScorchRanks + 1][]float64{{100, 100}}
 
 // unconfirmed: TEST Scorch coefficient derived from the vanilla convention (rank 0)
 
-// Tangled Causality: 1 rank(s), from build 1.60.1.69893.
-const TangledCausalityRanks = 1
+// Tangled Causality: ranks 0 present, from build 1.60.1.69893.
+const TangledCausalityRanks = 0
 
-var TangledCausalitySpellId = [TangledCausalityRanks + 1]int32{0, 432069}
-var TangledCausalityLevel = [TangledCausalityRanks + 1]int{0, 1}
-var TangledCausalityCastTime = [TangledCausalityRanks + 1]int32{0, 0}
-var TangledCausalityCooldownMS = [TangledCausalityRanks + 1]int32{0, 0}
-var TangledCausalityManaCost = [TangledCausalityRanks + 1]float64{0, 0}
-var TangledCausalitySpellCoeff = [TangledCausalityRanks + 1]float64{0, 20}
-var TangledCausalityBaseDamage = [TangledCausalityRanks + 1][]float64{{0, 0}, {-50, -50}}
+var TangledCausalitySpellId = [TangledCausalityRanks + 1]int32{432069}
+var TangledCausalityLevel = [TangledCausalityRanks + 1]int{1}
+var TangledCausalityCastTime = [TangledCausalityRanks + 1]int32{0}
+var TangledCausalityCooldownMS = [TangledCausalityRanks + 1]int32{0}
+var TangledCausalityManaCost = [TangledCausalityRanks + 1]float64{0}
+var TangledCausalitySpellCoeff = [TangledCausalityRanks + 1]float64{20}
+var TangledCausalityBaseDamage = [TangledCausalityRanks + 1][]float64{{-50, -50}}
 
 // unconfirmed: Tangled Causality coefficient derived from the vanilla convention (rank 0)
 
-// Teleport: Dalaran: 2 rank(s), from build 1.60.1.69893.
-const TeleportDalaranRanks = 2
+// Teleport: Dalaran: ranks 0 present, from build 1.60.1.69893.
+const TeleportDalaranRanks = 0
 
-var TeleportDalaranSpellId = [TeleportDalaranRanks + 1]int32{0, 1297659, 1308652}
-var TeleportDalaranLevel = [TeleportDalaranRanks + 1]int{0, 50, 50}
-var TeleportDalaranCastTime = [TeleportDalaranRanks + 1]int32{0, 10000, 10000}
-var TeleportDalaranCooldownMS = [TeleportDalaranRanks + 1]int32{0, 0, 0}
-var TeleportDalaranManaCost = [TeleportDalaranRanks + 1]float64{0, 120, 120}
-var TeleportDalaranSpellCoeff = [TeleportDalaranRanks + 1]float64{0, 2.8571, 1}
-var TeleportDalaranBaseDamage = [TeleportDalaranRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}}
+var TeleportDalaranSpellId = [TeleportDalaranRanks + 1]int32{1308652}
+var TeleportDalaranLevel = [TeleportDalaranRanks + 1]int{50}
+var TeleportDalaranCastTime = [TeleportDalaranRanks + 1]int32{10000}
+var TeleportDalaranCooldownMS = [TeleportDalaranRanks + 1]int32{0}
+var TeleportDalaranManaCost = [TeleportDalaranRanks + 1]float64{120}
+var TeleportDalaranSpellCoeff = [TeleportDalaranRanks + 1]float64{1}
+var TeleportDalaranBaseDamage = [TeleportDalaranRanks + 1][]float64{{0, 0}}
 
-// unconfirmed: Teleport: Dalaran coefficient derived from the vanilla convention (rank 0)
+// Teleport: Dalaran rank 0: kept id 1308652 (spell_level 50); dropped 1297659 (spell_level 50)
 
-// Teleport: Darnassus: 1 rank(s), from build 1.60.1.69893.
-const TeleportDarnassusRanks = 1
+// Teleport: Darnassus: ranks 0 present, from build 1.60.1.69893.
+const TeleportDarnassusRanks = 0
 
-var TeleportDarnassusSpellId = [TeleportDarnassusRanks + 1]int32{0, 3565}
-var TeleportDarnassusLevel = [TeleportDarnassusRanks + 1]int{0, 30}
-var TeleportDarnassusCastTime = [TeleportDarnassusRanks + 1]int32{0, 10000}
-var TeleportDarnassusCooldownMS = [TeleportDarnassusRanks + 1]int32{0, 0}
-var TeleportDarnassusManaCost = [TeleportDarnassusRanks + 1]float64{0, 120}
-var TeleportDarnassusSpellCoeff = [TeleportDarnassusRanks + 1]float64{0, 2.8571}
-var TeleportDarnassusBaseDamage = [TeleportDarnassusRanks + 1][]float64{{0, 0}, {0, 0}}
+var TeleportDarnassusSpellId = [TeleportDarnassusRanks + 1]int32{3565}
+var TeleportDarnassusLevel = [TeleportDarnassusRanks + 1]int{30}
+var TeleportDarnassusCastTime = [TeleportDarnassusRanks + 1]int32{10000}
+var TeleportDarnassusCooldownMS = [TeleportDarnassusRanks + 1]int32{0}
+var TeleportDarnassusManaCost = [TeleportDarnassusRanks + 1]float64{120}
+var TeleportDarnassusSpellCoeff = [TeleportDarnassusRanks + 1]float64{2.8571}
+var TeleportDarnassusBaseDamage = [TeleportDarnassusRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Teleport: Darnassus coefficient derived from the vanilla convention (rank 0)
 
-// Teleport: Ironforge: 1 rank(s), from build 1.60.1.69893.
-const TeleportIronforgeRanks = 1
+// Teleport: Ironforge: ranks 0 present, from build 1.60.1.69893.
+const TeleportIronforgeRanks = 0
 
-var TeleportIronforgeSpellId = [TeleportIronforgeRanks + 1]int32{0, 3562}
-var TeleportIronforgeLevel = [TeleportIronforgeRanks + 1]int{0, 20}
-var TeleportIronforgeCastTime = [TeleportIronforgeRanks + 1]int32{0, 10000}
-var TeleportIronforgeCooldownMS = [TeleportIronforgeRanks + 1]int32{0, 0}
-var TeleportIronforgeManaCost = [TeleportIronforgeRanks + 1]float64{0, 120}
-var TeleportIronforgeSpellCoeff = [TeleportIronforgeRanks + 1]float64{0, 2.8571}
-var TeleportIronforgeBaseDamage = [TeleportIronforgeRanks + 1][]float64{{0, 0}, {0, 0}}
+var TeleportIronforgeSpellId = [TeleportIronforgeRanks + 1]int32{3562}
+var TeleportIronforgeLevel = [TeleportIronforgeRanks + 1]int{20}
+var TeleportIronforgeCastTime = [TeleportIronforgeRanks + 1]int32{10000}
+var TeleportIronforgeCooldownMS = [TeleportIronforgeRanks + 1]int32{0}
+var TeleportIronforgeManaCost = [TeleportIronforgeRanks + 1]float64{120}
+var TeleportIronforgeSpellCoeff = [TeleportIronforgeRanks + 1]float64{2.8571}
+var TeleportIronforgeBaseDamage = [TeleportIronforgeRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Teleport: Ironforge coefficient derived from the vanilla convention (rank 0)
 
-// Teleport: Orgrimmar: 1 rank(s), from build 1.60.1.69893.
-const TeleportOrgrimmarRanks = 1
+// Teleport: Orgrimmar: ranks 0 present, from build 1.60.1.69893.
+const TeleportOrgrimmarRanks = 0
 
-var TeleportOrgrimmarSpellId = [TeleportOrgrimmarRanks + 1]int32{0, 3567}
-var TeleportOrgrimmarLevel = [TeleportOrgrimmarRanks + 1]int{0, 20}
-var TeleportOrgrimmarCastTime = [TeleportOrgrimmarRanks + 1]int32{0, 10000}
-var TeleportOrgrimmarCooldownMS = [TeleportOrgrimmarRanks + 1]int32{0, 0}
-var TeleportOrgrimmarManaCost = [TeleportOrgrimmarRanks + 1]float64{0, 120}
-var TeleportOrgrimmarSpellCoeff = [TeleportOrgrimmarRanks + 1]float64{0, 2.8571}
-var TeleportOrgrimmarBaseDamage = [TeleportOrgrimmarRanks + 1][]float64{{0, 0}, {0, 0}}
+var TeleportOrgrimmarSpellId = [TeleportOrgrimmarRanks + 1]int32{3567}
+var TeleportOrgrimmarLevel = [TeleportOrgrimmarRanks + 1]int{20}
+var TeleportOrgrimmarCastTime = [TeleportOrgrimmarRanks + 1]int32{10000}
+var TeleportOrgrimmarCooldownMS = [TeleportOrgrimmarRanks + 1]int32{0}
+var TeleportOrgrimmarManaCost = [TeleportOrgrimmarRanks + 1]float64{120}
+var TeleportOrgrimmarSpellCoeff = [TeleportOrgrimmarRanks + 1]float64{2.8571}
+var TeleportOrgrimmarBaseDamage = [TeleportOrgrimmarRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Teleport: Orgrimmar coefficient derived from the vanilla convention (rank 0)
 
-// Teleport: Stormwind: 1 rank(s), from build 1.60.1.69893.
-const TeleportStormwindRanks = 1
+// Teleport: Stormwind: ranks 0 present, from build 1.60.1.69893.
+const TeleportStormwindRanks = 0
 
-var TeleportStormwindSpellId = [TeleportStormwindRanks + 1]int32{0, 3561}
-var TeleportStormwindLevel = [TeleportStormwindRanks + 1]int{0, 20}
-var TeleportStormwindCastTime = [TeleportStormwindRanks + 1]int32{0, 10000}
-var TeleportStormwindCooldownMS = [TeleportStormwindRanks + 1]int32{0, 0}
-var TeleportStormwindManaCost = [TeleportStormwindRanks + 1]float64{0, 120}
-var TeleportStormwindSpellCoeff = [TeleportStormwindRanks + 1]float64{0, 2.8571}
-var TeleportStormwindBaseDamage = [TeleportStormwindRanks + 1][]float64{{0, 0}, {0, 0}}
+var TeleportStormwindSpellId = [TeleportStormwindRanks + 1]int32{3561}
+var TeleportStormwindLevel = [TeleportStormwindRanks + 1]int{20}
+var TeleportStormwindCastTime = [TeleportStormwindRanks + 1]int32{10000}
+var TeleportStormwindCooldownMS = [TeleportStormwindRanks + 1]int32{0}
+var TeleportStormwindManaCost = [TeleportStormwindRanks + 1]float64{120}
+var TeleportStormwindSpellCoeff = [TeleportStormwindRanks + 1]float64{2.8571}
+var TeleportStormwindBaseDamage = [TeleportStormwindRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Teleport: Stormwind coefficient derived from the vanilla convention (rank 0)
 
-// Teleport: Thunder Bluff: 1 rank(s), from build 1.60.1.69893.
-const TeleportThunderBluffRanks = 1
+// Teleport: Thunder Bluff: ranks 0 present, from build 1.60.1.69893.
+const TeleportThunderBluffRanks = 0
 
-var TeleportThunderBluffSpellId = [TeleportThunderBluffRanks + 1]int32{0, 3566}
-var TeleportThunderBluffLevel = [TeleportThunderBluffRanks + 1]int{0, 30}
-var TeleportThunderBluffCastTime = [TeleportThunderBluffRanks + 1]int32{0, 10000}
-var TeleportThunderBluffCooldownMS = [TeleportThunderBluffRanks + 1]int32{0, 0}
-var TeleportThunderBluffManaCost = [TeleportThunderBluffRanks + 1]float64{0, 120}
-var TeleportThunderBluffSpellCoeff = [TeleportThunderBluffRanks + 1]float64{0, 2.8571}
-var TeleportThunderBluffBaseDamage = [TeleportThunderBluffRanks + 1][]float64{{0, 0}, {0, 0}}
+var TeleportThunderBluffSpellId = [TeleportThunderBluffRanks + 1]int32{3566}
+var TeleportThunderBluffLevel = [TeleportThunderBluffRanks + 1]int{30}
+var TeleportThunderBluffCastTime = [TeleportThunderBluffRanks + 1]int32{10000}
+var TeleportThunderBluffCooldownMS = [TeleportThunderBluffRanks + 1]int32{0}
+var TeleportThunderBluffManaCost = [TeleportThunderBluffRanks + 1]float64{120}
+var TeleportThunderBluffSpellCoeff = [TeleportThunderBluffRanks + 1]float64{2.8571}
+var TeleportThunderBluffBaseDamage = [TeleportThunderBluffRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Teleport: Thunder Bluff coefficient derived from the vanilla convention (rank 0)
 
-// Teleport: Undercity: 1 rank(s), from build 1.60.1.69893.
-const TeleportUndercityRanks = 1
+// Teleport: Undercity: ranks 0 present, from build 1.60.1.69893.
+const TeleportUndercityRanks = 0
 
-var TeleportUndercitySpellId = [TeleportUndercityRanks + 1]int32{0, 3563}
-var TeleportUndercityLevel = [TeleportUndercityRanks + 1]int{0, 20}
-var TeleportUndercityCastTime = [TeleportUndercityRanks + 1]int32{0, 10000}
-var TeleportUndercityCooldownMS = [TeleportUndercityRanks + 1]int32{0, 0}
-var TeleportUndercityManaCost = [TeleportUndercityRanks + 1]float64{0, 120}
-var TeleportUndercitySpellCoeff = [TeleportUndercityRanks + 1]float64{0, 2.8571}
-var TeleportUndercityBaseDamage = [TeleportUndercityRanks + 1][]float64{{0, 0}, {0, 0}}
+var TeleportUndercitySpellId = [TeleportUndercityRanks + 1]int32{3563}
+var TeleportUndercityLevel = [TeleportUndercityRanks + 1]int{20}
+var TeleportUndercityCastTime = [TeleportUndercityRanks + 1]int32{10000}
+var TeleportUndercityCooldownMS = [TeleportUndercityRanks + 1]int32{0}
+var TeleportUndercityManaCost = [TeleportUndercityRanks + 1]float64{120}
+var TeleportUndercitySpellCoeff = [TeleportUndercityRanks + 1]float64{2.8571}
+var TeleportUndercityBaseDamage = [TeleportUndercityRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Teleport: Undercity coefficient derived from the vanilla convention (rank 0)
 
-// Temporal Anchor: 1 rank(s), from build 1.60.1.69893.
-const TemporalAnchorRanks = 1
+// Temporal Anchor: ranks 0 present, from build 1.60.1.69893.
+const TemporalAnchorRanks = 0
 
-var TemporalAnchorSpellId = [TemporalAnchorRanks + 1]int32{0, 1226414}
-var TemporalAnchorLevel = [TemporalAnchorRanks + 1]int{0, 0}
-var TemporalAnchorCastTime = [TemporalAnchorRanks + 1]int32{0, 0}
-var TemporalAnchorCooldownMS = [TemporalAnchorRanks + 1]int32{0, 0}
-var TemporalAnchorManaCost = [TemporalAnchorRanks + 1]float64{0, 0}
-var TemporalAnchorSpellCoeff = [TemporalAnchorRanks + 1]float64{0, 1}
-var TemporalAnchorBaseDamage = [TemporalAnchorRanks + 1][]float64{{0, 0}, {-20, -20}}
+var TemporalAnchorSpellId = [TemporalAnchorRanks + 1]int32{1226414}
+var TemporalAnchorLevel = [TemporalAnchorRanks + 1]int{0}
+var TemporalAnchorCastTime = [TemporalAnchorRanks + 1]int32{0}
+var TemporalAnchorCooldownMS = [TemporalAnchorRanks + 1]int32{0}
+var TemporalAnchorManaCost = [TemporalAnchorRanks + 1]float64{0}
+var TemporalAnchorSpellCoeff = [TemporalAnchorRanks + 1]float64{1}
+var TemporalAnchorBaseDamage = [TemporalAnchorRanks + 1][]float64{{-20, -20}}
 
-// Temporal Anomaly: 4 rank(s), from build 1.60.1.69893.
-const TemporalAnomalyRanks = 4
+// Temporal Anomaly: ranks 0 present, from build 1.60.1.69893.
+const TemporalAnomalyRanks = 0
 
-var TemporalAnomalySpellId = [TemporalAnomalyRanks + 1]int32{0, 428895, 428885, 429305, 428888}
-var TemporalAnomalyLevel = [TemporalAnomalyRanks + 1]int{0, 1, 1, 1, 1}
-var TemporalAnomalyCastTime = [TemporalAnomalyRanks + 1]int32{0, 0, 0, 0, 0}
-var TemporalAnomalyCooldownMS = [TemporalAnomalyRanks + 1]int32{0, 0, 30000, 0, 0}
-var TemporalAnomalyManaCost = [TemporalAnomalyRanks + 1]float64{0, 0, 0, 0, 0}
-var TemporalAnomalySpellCoeff = [TemporalAnomalyRanks + 1]float64{0, 1, 1.0667, 0.4286, 0.4286}
-var TemporalAnomalyBaseDamage = [TemporalAnomalyRanks + 1][]float64{{0, 0}, {100, 100}, {1, 1}, {428885, 428885}, {100, 100}}
+var TemporalAnomalySpellId = [TemporalAnomalyRanks + 1]int32{429305}
+var TemporalAnomalyLevel = [TemporalAnomalyRanks + 1]int{1}
+var TemporalAnomalyCastTime = [TemporalAnomalyRanks + 1]int32{0}
+var TemporalAnomalyCooldownMS = [TemporalAnomalyRanks + 1]int32{0}
+var TemporalAnomalyManaCost = [TemporalAnomalyRanks + 1]float64{0}
+var TemporalAnomalySpellCoeff = [TemporalAnomalyRanks + 1]float64{0.4286}
+var TemporalAnomalyBaseDamage = [TemporalAnomalyRanks + 1][]float64{{428885, 428885}}
 
-// unconfirmed: Temporal Anomaly coefficient derived from the vanilla convention (rank 0, rank 0, rank 0, rank 0)
+// unconfirmed: Temporal Anomaly coefficient derived from the vanilla convention (rank 0)
+// Temporal Anomaly rank 0: kept id 429305 (spell_level 1); dropped 428885 (spell_level 1), 428888 (spell_level 1), 428895 (spell_level 1)
 
-// Temporal Beacon: 1 rank(s), from build 1.60.1.69893.
-const TemporalBeaconRanks = 1
+// Temporal Beacon: ranks 0 present, from build 1.60.1.69893.
+const TemporalBeaconRanks = 0
 
-var TemporalBeaconSpellId = [TemporalBeaconRanks + 1]int32{0, 400735}
-var TemporalBeaconLevel = [TemporalBeaconRanks + 1]int{0, 1}
-var TemporalBeaconCastTime = [TemporalBeaconRanks + 1]int32{0, 0}
-var TemporalBeaconCooldownMS = [TemporalBeaconRanks + 1]int32{0, 0}
-var TemporalBeaconManaCost = [TemporalBeaconRanks + 1]float64{0, 0}
-var TemporalBeaconSpellCoeff = [TemporalBeaconRanks + 1]float64{0, 2}
-var TemporalBeaconBaseDamage = [TemporalBeaconRanks + 1][]float64{{0, 0}, {8, 8}}
+var TemporalBeaconSpellId = [TemporalBeaconRanks + 1]int32{400735}
+var TemporalBeaconLevel = [TemporalBeaconRanks + 1]int{1}
+var TemporalBeaconCastTime = [TemporalBeaconRanks + 1]int32{0}
+var TemporalBeaconCooldownMS = [TemporalBeaconRanks + 1]int32{0}
+var TemporalBeaconManaCost = [TemporalBeaconRanks + 1]float64{0}
+var TemporalBeaconSpellCoeff = [TemporalBeaconRanks + 1]float64{2}
+var TemporalBeaconBaseDamage = [TemporalBeaconRanks + 1][]float64{{8, 8}}
 
 // unconfirmed: Temporal Beacon coefficient derived from the vanilla convention (rank 0)
 
-// The Quick and the Dead: 1 rank(s), from build 1.60.1.69893.
-const TheQuickAndTheDeadRanks = 1
+// The Quick and the Dead: ranks 0 present, from build 1.60.1.69893.
+const TheQuickAndTheDeadRanks = 0
 
-var TheQuickAndTheDeadSpellId = [TheQuickAndTheDeadRanks + 1]int32{0, 1262243}
-var TheQuickAndTheDeadLevel = [TheQuickAndTheDeadRanks + 1]int{0, 1}
-var TheQuickAndTheDeadCastTime = [TheQuickAndTheDeadRanks + 1]int32{0, 0}
-var TheQuickAndTheDeadCooldownMS = [TheQuickAndTheDeadRanks + 1]int32{0, 0}
-var TheQuickAndTheDeadManaCost = [TheQuickAndTheDeadRanks + 1]float64{0, 0}
-var TheQuickAndTheDeadSpellCoeff = [TheQuickAndTheDeadRanks + 1]float64{0, 8}
-var TheQuickAndTheDeadBaseDamage = [TheQuickAndTheDeadRanks + 1][]float64{{0, 0}, {-100, -100}}
+var TheQuickAndTheDeadSpellId = [TheQuickAndTheDeadRanks + 1]int32{1262243}
+var TheQuickAndTheDeadLevel = [TheQuickAndTheDeadRanks + 1]int{1}
+var TheQuickAndTheDeadCastTime = [TheQuickAndTheDeadRanks + 1]int32{0}
+var TheQuickAndTheDeadCooldownMS = [TheQuickAndTheDeadRanks + 1]int32{0}
+var TheQuickAndTheDeadManaCost = [TheQuickAndTheDeadRanks + 1]float64{0}
+var TheQuickAndTheDeadSpellCoeff = [TheQuickAndTheDeadRanks + 1]float64{8}
+var TheQuickAndTheDeadBaseDamage = [TheQuickAndTheDeadRanks + 1][]float64{{-100, -100}}
 
 // unconfirmed: The Quick and the Dead coefficient derived from the vanilla convention (rank 0)
 
-// Tidal Waves: 1 rank(s), from build 1.60.1.69893.
-const TidalWavesRanks = 1
+// Tidal Waves: ranks 0 present, from build 1.60.1.69893.
+const TidalWavesRanks = 0
 
-var TidalWavesSpellId = [TidalWavesRanks + 1]int32{0, 432233}
-var TidalWavesLevel = [TidalWavesRanks + 1]int{0, 1}
-var TidalWavesCastTime = [TidalWavesRanks + 1]int32{0, 0}
-var TidalWavesCooldownMS = [TidalWavesRanks + 1]int32{0, 0}
-var TidalWavesManaCost = [TidalWavesRanks + 1]float64{0, 0}
-var TidalWavesSpellCoeff = [TidalWavesRanks + 1]float64{0, 0.4286}
-var TidalWavesBaseDamage = [TidalWavesRanks + 1][]float64{{0, 0}, {432042, 432042}}
+var TidalWavesSpellId = [TidalWavesRanks + 1]int32{432233}
+var TidalWavesLevel = [TidalWavesRanks + 1]int{1}
+var TidalWavesCastTime = [TidalWavesRanks + 1]int32{0}
+var TidalWavesCooldownMS = [TidalWavesRanks + 1]int32{0}
+var TidalWavesManaCost = [TidalWavesRanks + 1]float64{0}
+var TidalWavesSpellCoeff = [TidalWavesRanks + 1]float64{0.4286}
+var TidalWavesBaseDamage = [TidalWavesRanks + 1][]float64{{432042, 432042}}
 
 // unconfirmed: Tidal Waves coefficient derived from the vanilla convention (rank 0)
 
-// Timey-Bearimy: 1 rank(s), from build 1.60.1.69893.
-const TimeyBearimyRanks = 1
+// Timey-Bearimy: ranks 0 present, from build 1.60.1.69893.
+const TimeyBearimyRanks = 0
 
-var TimeyBearimySpellId = [TimeyBearimyRanks + 1]int32{0, 1226377}
-var TimeyBearimyLevel = [TimeyBearimyRanks + 1]int{0, 0}
-var TimeyBearimyCastTime = [TimeyBearimyRanks + 1]int32{0, 0}
-var TimeyBearimyCooldownMS = [TimeyBearimyRanks + 1]int32{0, 0}
-var TimeyBearimyManaCost = [TimeyBearimyRanks + 1]float64{0, 0}
-var TimeyBearimySpellCoeff = [TimeyBearimyRanks + 1]float64{0, 1}
-var TimeyBearimyBaseDamage = [TimeyBearimyRanks + 1][]float64{{0, 0}, {20, 20}}
+var TimeyBearimySpellId = [TimeyBearimyRanks + 1]int32{1226377}
+var TimeyBearimyLevel = [TimeyBearimyRanks + 1]int{0}
+var TimeyBearimyCastTime = [TimeyBearimyRanks + 1]int32{0}
+var TimeyBearimyCooldownMS = [TimeyBearimyRanks + 1]int32{0}
+var TimeyBearimyManaCost = [TimeyBearimyRanks + 1]float64{0}
+var TimeyBearimySpellCoeff = [TimeyBearimyRanks + 1]float64{1}
+var TimeyBearimyBaseDamage = [TimeyBearimyRanks + 1][]float64{{20, 20}}
 
-// Trappings of Vaulted Secrets Mana Shield Bonus: 1 rank(s), from build 1.60.1.69893.
-const TrappingsOfVaultedSecretsManaShieldBonusRanks = 1
+// Trappings of Vaulted Secrets Mana Shield Bonus: ranks 0 present, from build 1.60.1.69893.
+const TrappingsOfVaultedSecretsManaShieldBonusRanks = 0
 
-var TrappingsOfVaultedSecretsManaShieldBonusSpellId = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1]int32{0, 26131}
-var TrappingsOfVaultedSecretsManaShieldBonusLevel = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1]int{0, 0}
-var TrappingsOfVaultedSecretsManaShieldBonusCastTime = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1]int32{0, 0}
-var TrappingsOfVaultedSecretsManaShieldBonusCooldownMS = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1]int32{0, 0}
-var TrappingsOfVaultedSecretsManaShieldBonusManaCost = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1]float64{0, 0}
-var TrappingsOfVaultedSecretsManaShieldBonusSpellCoeff = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1]float64{0, 0.4286}
-var TrappingsOfVaultedSecretsManaShieldBonusBaseDamage = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1][]float64{{0, 0}, {15, 15}}
+var TrappingsOfVaultedSecretsManaShieldBonusSpellId = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1]int32{26131}
+var TrappingsOfVaultedSecretsManaShieldBonusLevel = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1]int{0}
+var TrappingsOfVaultedSecretsManaShieldBonusCastTime = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1]int32{0}
+var TrappingsOfVaultedSecretsManaShieldBonusCooldownMS = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1]int32{0}
+var TrappingsOfVaultedSecretsManaShieldBonusManaCost = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1]float64{0}
+var TrappingsOfVaultedSecretsManaShieldBonusSpellCoeff = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1]float64{0.4286}
+var TrappingsOfVaultedSecretsManaShieldBonusBaseDamage = [TrappingsOfVaultedSecretsManaShieldBonusRanks + 1][]float64{{15, 15}}
 
 // unconfirmed: Trappings of Vaulted Secrets Mana Shield Bonus coefficient derived from the vanilla convention (rank 0)
 
-// Twisted Faith: 1 rank(s), from build 1.60.1.69893.
-const TwistedFaithRanks = 1
+// Twisted Faith: ranks 0 present, from build 1.60.1.69893.
+const TwistedFaithRanks = 0
 
-var TwistedFaithSpellId = [TwistedFaithRanks + 1]int32{0, 425210}
-var TwistedFaithLevel = [TwistedFaithRanks + 1]int{0, 1}
-var TwistedFaithCastTime = [TwistedFaithRanks + 1]int32{0, 0}
-var TwistedFaithCooldownMS = [TwistedFaithRanks + 1]int32{0, 0}
-var TwistedFaithManaCost = [TwistedFaithRanks + 1]float64{0, 0}
-var TwistedFaithSpellCoeff = [TwistedFaithRanks + 1]float64{0, 0.4286}
-var TwistedFaithBaseDamage = [TwistedFaithRanks + 1][]float64{{0, 0}, {425198, 425198}}
+var TwistedFaithSpellId = [TwistedFaithRanks + 1]int32{425210}
+var TwistedFaithLevel = [TwistedFaithRanks + 1]int{1}
+var TwistedFaithCastTime = [TwistedFaithRanks + 1]int32{0}
+var TwistedFaithCooldownMS = [TwistedFaithRanks + 1]int32{0}
+var TwistedFaithManaCost = [TwistedFaithRanks + 1]float64{0}
+var TwistedFaithSpellCoeff = [TwistedFaithRanks + 1]float64{0.4286}
+var TwistedFaithBaseDamage = [TwistedFaithRanks + 1][]float64{{425198, 425198}}
 
 // unconfirmed: Twisted Faith coefficient derived from the vanilla convention (rank 0)
 
-// Unmaking the Simulacrum: 1 rank(s), from build 1.60.1.69893.
-const UnmakingTheSimulacrumRanks = 1
+// Unmaking the Simulacrum: ranks 0 present, from build 1.60.1.69893.
+const UnmakingTheSimulacrumRanks = 0
 
-var UnmakingTheSimulacrumSpellId = [UnmakingTheSimulacrumRanks + 1]int32{0, 468466}
-var UnmakingTheSimulacrumLevel = [UnmakingTheSimulacrumRanks + 1]int{0, 20}
-var UnmakingTheSimulacrumCastTime = [UnmakingTheSimulacrumRanks + 1]int32{0, 0}
-var UnmakingTheSimulacrumCooldownMS = [UnmakingTheSimulacrumRanks + 1]int32{0, 480000}
-var UnmakingTheSimulacrumManaCost = [UnmakingTheSimulacrumRanks + 1]float64{0, 0}
-var UnmakingTheSimulacrumSpellCoeff = [UnmakingTheSimulacrumRanks + 1]float64{0, 0.5333}
-var UnmakingTheSimulacrumBaseDamage = [UnmakingTheSimulacrumRanks + 1][]float64{{0, 0}, {1500, 1500}}
+var UnmakingTheSimulacrumSpellId = [UnmakingTheSimulacrumRanks + 1]int32{468466}
+var UnmakingTheSimulacrumLevel = [UnmakingTheSimulacrumRanks + 1]int{20}
+var UnmakingTheSimulacrumCastTime = [UnmakingTheSimulacrumRanks + 1]int32{0}
+var UnmakingTheSimulacrumCooldownMS = [UnmakingTheSimulacrumRanks + 1]int32{480000}
+var UnmakingTheSimulacrumManaCost = [UnmakingTheSimulacrumRanks + 1]float64{0}
+var UnmakingTheSimulacrumSpellCoeff = [UnmakingTheSimulacrumRanks + 1]float64{0.5333}
+var UnmakingTheSimulacrumBaseDamage = [UnmakingTheSimulacrumRanks + 1][]float64{{1500, 1500}}
 
 // unconfirmed: Unmaking the Simulacrum coefficient derived from the vanilla convention (rank 0)
 
-// Vampiric Touch: 1 rank(s), from build 1.60.1.69893.
-const VampiricTouchRanks = 1
+// Vampiric Touch: ranks 0 present, from build 1.60.1.69893.
+const VampiricTouchRanks = 0
 
-var VampiricTouchSpellId = [VampiricTouchRanks + 1]int32{0, 402841}
-var VampiricTouchLevel = [VampiricTouchRanks + 1]int{0, 1}
-var VampiricTouchCastTime = [VampiricTouchRanks + 1]int32{0, 0}
-var VampiricTouchCooldownMS = [VampiricTouchRanks + 1]int32{0, 0}
-var VampiricTouchManaCost = [VampiricTouchRanks + 1]float64{0, 0}
-var VampiricTouchSpellCoeff = [VampiricTouchRanks + 1]float64{0, 0.4286}
-var VampiricTouchBaseDamage = [VampiricTouchRanks + 1][]float64{{0, 0}, {402668, 402668}}
+var VampiricTouchSpellId = [VampiricTouchRanks + 1]int32{402841}
+var VampiricTouchLevel = [VampiricTouchRanks + 1]int{1}
+var VampiricTouchCastTime = [VampiricTouchRanks + 1]int32{0}
+var VampiricTouchCooldownMS = [VampiricTouchRanks + 1]int32{0}
+var VampiricTouchManaCost = [VampiricTouchRanks + 1]float64{0}
+var VampiricTouchSpellCoeff = [VampiricTouchRanks + 1]float64{0.4286}
+var VampiricTouchBaseDamage = [VampiricTouchRanks + 1][]float64{{402668, 402668}}
 
 // unconfirmed: Vampiric Touch coefficient derived from the vanilla convention (rank 0)
 
-// Vengeance: 1 rank(s), from build 1.60.1.69893.
-const VengeanceRanks = 1
+// Vengeance: ranks 0 present, from build 1.60.1.69893.
+const VengeanceRanks = 0
 
-var VengeanceSpellId = [VengeanceRanks + 1]int32{0, 435112}
-var VengeanceLevel = [VengeanceRanks + 1]int{0, 1}
-var VengeanceCastTime = [VengeanceRanks + 1]int32{0, 0}
-var VengeanceCooldownMS = [VengeanceRanks + 1]int32{0, 0}
-var VengeanceManaCost = [VengeanceRanks + 1]float64{0, 0}
-var VengeanceSpellCoeff = [VengeanceRanks + 1]float64{0, 1.3333}
-var VengeanceBaseDamage = [VengeanceRanks + 1][]float64{{0, 0}, {0, 0}}
+var VengeanceSpellId = [VengeanceRanks + 1]int32{435112}
+var VengeanceLevel = [VengeanceRanks + 1]int{1}
+var VengeanceCastTime = [VengeanceRanks + 1]int32{0}
+var VengeanceCooldownMS = [VengeanceRanks + 1]int32{0}
+var VengeanceManaCost = [VengeanceRanks + 1]float64{0}
+var VengeanceSpellCoeff = [VengeanceRanks + 1]float64{1.3333}
+var VengeanceBaseDamage = [VengeanceRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Vengeance coefficient derived from the vanilla convention (rank 0)
 
-// Victory Rush: 1 rank(s), from build 1.60.1.69893.
-const VictoryRushRanks = 1
+// Victory Rush: ranks 0 present, from build 1.60.1.69893.
+const VictoryRushRanks = 0
 
-var VictoryRushSpellId = [VictoryRushRanks + 1]int32{0, 403434}
-var VictoryRushLevel = [VictoryRushRanks + 1]int{0, 1}
-var VictoryRushCastTime = [VictoryRushRanks + 1]int32{0, 0}
-var VictoryRushCooldownMS = [VictoryRushRanks + 1]int32{0, 0}
-var VictoryRushManaCost = [VictoryRushRanks + 1]float64{0, 0}
-var VictoryRushSpellCoeff = [VictoryRushRanks + 1]float64{0, 0.4286}
-var VictoryRushBaseDamage = [VictoryRushRanks + 1][]float64{{0, 0}, {402927, 402927}}
+var VictoryRushSpellId = [VictoryRushRanks + 1]int32{403434}
+var VictoryRushLevel = [VictoryRushRanks + 1]int{1}
+var VictoryRushCastTime = [VictoryRushRanks + 1]int32{0}
+var VictoryRushCooldownMS = [VictoryRushRanks + 1]int32{0}
+var VictoryRushManaCost = [VictoryRushRanks + 1]float64{0}
+var VictoryRushSpellCoeff = [VictoryRushRanks + 1]float64{0.4286}
+var VictoryRushBaseDamage = [VictoryRushRanks + 1][]float64{{402927, 402927}}
 
 // unconfirmed: Victory Rush coefficient derived from the vanilla convention (rank 0)
 
-// Void Plague: 1 rank(s), from build 1.60.1.69893.
-const VoidPlagueRanks = 1
+// Void Plague: ranks 0 present, from build 1.60.1.69893.
+const VoidPlagueRanks = 0
 
-var VoidPlagueSpellId = [VoidPlagueRanks + 1]int32{0, 425211}
-var VoidPlagueLevel = [VoidPlagueRanks + 1]int{0, 1}
-var VoidPlagueCastTime = [VoidPlagueRanks + 1]int32{0, 0}
-var VoidPlagueCooldownMS = [VoidPlagueRanks + 1]int32{0, 0}
-var VoidPlagueManaCost = [VoidPlagueRanks + 1]float64{0, 0}
-var VoidPlagueSpellCoeff = [VoidPlagueRanks + 1]float64{0, 0.4286}
-var VoidPlagueBaseDamage = [VoidPlagueRanks + 1][]float64{{0, 0}, {425204, 425204}}
+var VoidPlagueSpellId = [VoidPlagueRanks + 1]int32{425211}
+var VoidPlagueLevel = [VoidPlagueRanks + 1]int{1}
+var VoidPlagueCastTime = [VoidPlagueRanks + 1]int32{0}
+var VoidPlagueCooldownMS = [VoidPlagueRanks + 1]int32{0}
+var VoidPlagueManaCost = [VoidPlagueRanks + 1]float64{0}
+var VoidPlagueSpellCoeff = [VoidPlagueRanks + 1]float64{0.4286}
+var VoidPlagueBaseDamage = [VoidPlagueRanks + 1][]float64{{425204, 425204}}
 
 // unconfirmed: Void Plague coefficient derived from the vanilla convention (rank 0)
 
-// Void Zone: 1 rank(s), from build 1.60.1.69893.
-const VoidZoneRanks = 1
+// Void Zone: ranks 0 present, from build 1.60.1.69893.
+const VoidZoneRanks = 0
 
-var VoidZoneSpellId = [VoidZoneRanks + 1]int32{0, 28863}
-var VoidZoneLevel = [VoidZoneRanks + 1]int{0, 60}
-var VoidZoneCastTime = [VoidZoneRanks + 1]int32{0, 0}
-var VoidZoneCooldownMS = [VoidZoneRanks + 1]int32{0, 0}
-var VoidZoneManaCost = [VoidZoneRanks + 1]float64{0, 0}
-var VoidZoneSpellCoeff = [VoidZoneRanks + 1]float64{0, 6}
-var VoidZoneBaseDamage = [VoidZoneRanks + 1][]float64{{0, 0}, {1, 1}}
+var VoidZoneSpellId = [VoidZoneRanks + 1]int32{28863}
+var VoidZoneLevel = [VoidZoneRanks + 1]int{60}
+var VoidZoneCastTime = [VoidZoneRanks + 1]int32{0}
+var VoidZoneCooldownMS = [VoidZoneRanks + 1]int32{0}
+var VoidZoneManaCost = [VoidZoneRanks + 1]float64{0}
+var VoidZoneSpellCoeff = [VoidZoneRanks + 1]float64{6}
+var VoidZoneBaseDamage = [VoidZoneRanks + 1][]float64{{1, 1}}
 
 // unconfirmed: Void Zone coefficient derived from the vanilla convention (rank 0)
 
-// Wake of Fire: 2 rank(s), from build 1.60.1.69893.
-const WakeOfFireRanks = 2
+// Wake of Fire: ranks 0 present, from build 1.60.1.69893.
+const WakeOfFireRanks = 0
 
-var WakeOfFireSpellId = [WakeOfFireRanks + 1]int32{0, 1312934, 11078}
-var WakeOfFireLevel = [WakeOfFireRanks + 1]int{0, 0, 1}
-var WakeOfFireCastTime = [WakeOfFireRanks + 1]int32{0, 0, 0}
-var WakeOfFireCooldownMS = [WakeOfFireRanks + 1]int32{0, 0, 0}
-var WakeOfFireManaCost = [WakeOfFireRanks + 1]float64{0, 0, 0}
-var WakeOfFireSpellCoeff = [WakeOfFireRanks + 1]float64{0, 1, 0.4286}
-var WakeOfFireBaseDamage = [WakeOfFireRanks + 1][]float64{{0, 0}, {50, 50}, {-2000, -2000}}
+var WakeOfFireSpellId = [WakeOfFireRanks + 1]int32{11078}
+var WakeOfFireLevel = [WakeOfFireRanks + 1]int{1}
+var WakeOfFireCastTime = [WakeOfFireRanks + 1]int32{0}
+var WakeOfFireCooldownMS = [WakeOfFireRanks + 1]int32{0}
+var WakeOfFireManaCost = [WakeOfFireRanks + 1]float64{0}
+var WakeOfFireSpellCoeff = [WakeOfFireRanks + 1]float64{0.4286}
+var WakeOfFireBaseDamage = [WakeOfFireRanks + 1][]float64{{-2000, -2000}}
 
 // unconfirmed: Wake of Fire coefficient derived from the vanilla convention (rank 0)
+// Wake of Fire rank 0: kept id 11078 (spell_level 1); dropped 1312934 (spell_level 0)
 
-// Warbringer: 1 rank(s), from build 1.60.1.69893.
-const WarbringerRanks = 1
+// Warbringer: ranks 0 present, from build 1.60.1.69893.
+const WarbringerRanks = 0
 
-var WarbringerSpellId = [WarbringerRanks + 1]int32{0, 425430}
-var WarbringerLevel = [WarbringerRanks + 1]int{0, 1}
-var WarbringerCastTime = [WarbringerRanks + 1]int32{0, 0}
-var WarbringerCooldownMS = [WarbringerRanks + 1]int32{0, 0}
-var WarbringerManaCost = [WarbringerRanks + 1]float64{0, 0}
-var WarbringerSpellCoeff = [WarbringerRanks + 1]float64{0, 0.4286}
-var WarbringerBaseDamage = [WarbringerRanks + 1][]float64{{0, 0}, {425421, 425421}}
+var WarbringerSpellId = [WarbringerRanks + 1]int32{425430}
+var WarbringerLevel = [WarbringerRanks + 1]int{1}
+var WarbringerCastTime = [WarbringerRanks + 1]int32{0}
+var WarbringerCooldownMS = [WarbringerRanks + 1]int32{0}
+var WarbringerManaCost = [WarbringerRanks + 1]float64{0}
+var WarbringerSpellCoeff = [WarbringerRanks + 1]float64{0.4286}
+var WarbringerBaseDamage = [WarbringerRanks + 1][]float64{{425421, 425421}}
 
 // unconfirmed: Warbringer coefficient derived from the vanilla convention (rank 0)
 
-// Waterbolt: 1 rank(s), from build 1.60.1.69893.
-const WaterboltRanks = 1
+// Waterbolt: ranks 0 present, from build 1.60.1.69893.
+const WaterboltRanks = 0
 
-var WaterboltSpellId = [WaterboltRanks + 1]int32{0, 412437}
-var WaterboltLevel = [WaterboltRanks + 1]int{0, 1}
-var WaterboltCastTime = [WaterboltRanks + 1]int32{0, 2500}
-var WaterboltCooldownMS = [WaterboltRanks + 1]int32{0, 0}
-var WaterboltManaCost = [WaterboltRanks + 1]float64{0, 0}
-var WaterboltSpellCoeff = [WaterboltRanks + 1]float64{0, 0.833}
-var WaterboltBaseDamage = [WaterboltRanks + 1][]float64{{0, 0}, {238, 238}}
+var WaterboltSpellId = [WaterboltRanks + 1]int32{412437}
+var WaterboltLevel = [WaterboltRanks + 1]int{1}
+var WaterboltCastTime = [WaterboltRanks + 1]int32{2500}
+var WaterboltCooldownMS = [WaterboltRanks + 1]int32{0}
+var WaterboltManaCost = [WaterboltRanks + 1]float64{0}
+var WaterboltSpellCoeff = [WaterboltRanks + 1]float64{0.833}
+var WaterboltBaseDamage = [WaterboltRanks + 1][]float64{{238, 238}}
 
-// Wild Polymorph: 1 rank(s), from build 1.60.1.69893.
-const WildPolymorphRanks = 1
+// Wild Polymorph: ranks 0 present, from build 1.60.1.69893.
+const WildPolymorphRanks = 0
 
-var WildPolymorphSpellId = [WildPolymorphRanks + 1]int32{0, 23603}
-var WildPolymorphLevel = [WildPolymorphRanks + 1]int{0, 8}
-var WildPolymorphCastTime = [WildPolymorphRanks + 1]int32{0, 0}
-var WildPolymorphCooldownMS = [WildPolymorphRanks + 1]int32{0, 0}
-var WildPolymorphManaCost = [WildPolymorphRanks + 1]float64{0, 150}
-var WildPolymorphSpellCoeff = [WildPolymorphRanks + 1]float64{0, 1.3333}
-var WildPolymorphBaseDamage = [WildPolymorphRanks + 1][]float64{{0, 0}, {0, 0}}
+var WildPolymorphSpellId = [WildPolymorphRanks + 1]int32{23603}
+var WildPolymorphLevel = [WildPolymorphRanks + 1]int{8}
+var WildPolymorphCastTime = [WildPolymorphRanks + 1]int32{0}
+var WildPolymorphCooldownMS = [WildPolymorphRanks + 1]int32{0}
+var WildPolymorphManaCost = [WildPolymorphRanks + 1]float64{150}
+var WildPolymorphSpellCoeff = [WildPolymorphRanks + 1]float64{1.3333}
+var WildPolymorphBaseDamage = [WildPolymorphRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: Wild Polymorph coefficient derived from the vanilla convention (rank 0)
 
-// Windstriker: 1 rank(s), from build 1.60.1.69893.
-const WindstrikerRanks = 1
+// Windstriker: ranks 0 present, from build 1.60.1.69893.
+const WindstrikerRanks = 0
 
-var WindstrikerSpellId = [WindstrikerRanks + 1]int32{0, 468971}
-var WindstrikerLevel = [WindstrikerRanks + 1]int{0, 60}
-var WindstrikerCastTime = [WindstrikerRanks + 1]int32{0, 0}
-var WindstrikerCooldownMS = [WindstrikerRanks + 1]int32{0, 0}
-var WindstrikerManaCost = [WindstrikerRanks + 1]float64{0, 0}
-var WindstrikerSpellCoeff = [WindstrikerRanks + 1]float64{0, 0.2}
-var WindstrikerBaseDamage = [WindstrikerRanks + 1][]float64{{0, 0}, {100, 100}}
+var WindstrikerSpellId = [WindstrikerRanks + 1]int32{468971}
+var WindstrikerLevel = [WindstrikerRanks + 1]int{60}
+var WindstrikerCastTime = [WindstrikerRanks + 1]int32{0}
+var WindstrikerCooldownMS = [WindstrikerRanks + 1]int32{0}
+var WindstrikerManaCost = [WindstrikerRanks + 1]float64{0}
+var WindstrikerSpellCoeff = [WindstrikerRanks + 1]float64{0.2}
+var WindstrikerBaseDamage = [WindstrikerRanks + 1][]float64{{100, 100}}
 
 // unconfirmed: Windstriker coefficient derived from the vanilla convention (rank 0)
 
-// Winter's Chill: 2 rank(s), from build 1.60.1.69893.
-const WinterSChillRanks = 2
+// Winter's Chill: ranks 0 present, from build 1.60.1.69893.
+const WinterSChillRanks = 0
 
-var WinterSChillSpellId = [WinterSChillRanks + 1]int32{0, 11180, 12579}
-var WinterSChillLevel = [WinterSChillRanks + 1]int{0, 1, 1}
-var WinterSChillCastTime = [WinterSChillRanks + 1]int32{0, 0, 0}
-var WinterSChillCooldownMS = [WinterSChillRanks + 1]int32{0, 0, 0}
-var WinterSChillManaCost = [WinterSChillRanks + 1]float64{0, 0, 0}
-var WinterSChillSpellCoeff = [WinterSChillRanks + 1]float64{0, 0.4286, 1}
-var WinterSChillBaseDamage = [WinterSChillRanks + 1][]float64{{0, 0}, {5, 5}, {2, 2}}
+var WinterSChillSpellId = [WinterSChillRanks + 1]int32{12579}
+var WinterSChillLevel = [WinterSChillRanks + 1]int{1}
+var WinterSChillCastTime = [WinterSChillRanks + 1]int32{0}
+var WinterSChillCooldownMS = [WinterSChillRanks + 1]int32{0}
+var WinterSChillManaCost = [WinterSChillRanks + 1]float64{0}
+var WinterSChillSpellCoeff = [WinterSChillRanks + 1]float64{1}
+var WinterSChillBaseDamage = [WinterSChillRanks + 1][]float64{{2, 2}}
 
-// unconfirmed: Winter's Chill coefficient derived from the vanilla convention (rank 0, rank 0)
+// unconfirmed: Winter's Chill coefficient derived from the vanilla convention (rank 0)
+// Winter's Chill rank 0: kept id 12579 (spell_level 1); dropped 11180 (spell_level 1)
 
-// Wit's End: 1 rank(s), from build 1.60.1.69893.
-const WitSEndRanks = 1
+// Wit's End: ranks 0 present, from build 1.60.1.69893.
+const WitSEndRanks = 0
 
-var WitSEndSpellId = [WitSEndRanks + 1]int32{0, 1300140}
-var WitSEndLevel = [WitSEndRanks + 1]int{0, 57}
-var WitSEndCastTime = [WitSEndRanks + 1]int32{0, 0}
-var WitSEndCooldownMS = [WitSEndRanks + 1]int32{0, 0}
-var WitSEndManaCost = [WitSEndRanks + 1]float64{0, 0}
-var WitSEndSpellCoeff = [WitSEndRanks + 1]float64{0, 1}
-var WitSEndBaseDamage = [WitSEndRanks + 1][]float64{{0, 0}, {-1000, -1000}}
+var WitSEndSpellId = [WitSEndRanks + 1]int32{1300140}
+var WitSEndLevel = [WitSEndRanks + 1]int{57}
+var WitSEndCastTime = [WitSEndRanks + 1]int32{0}
+var WitSEndCooldownMS = [WitSEndRanks + 1]int32{0}
+var WitSEndManaCost = [WitSEndRanks + 1]float64{0}
+var WitSEndSpellCoeff = [WitSEndRanks + 1]float64{1}
+var WitSEndBaseDamage = [WitSEndRanks + 1][]float64{{-1000, -1000}}
 
 // unconfirmed: Wit's End coefficient derived from the vanilla convention (rank 0)
 
-// Worm Blast: 1 rank(s), from build 1.60.1.69893.
-const WormBlastRanks = 1
+// Worm Blast: ranks 0 present, from build 1.60.1.69893.
+const WormBlastRanks = 0
 
-var WormBlastSpellId = [WormBlastRanks + 1]int32{0, 31378}
-var WormBlastLevel = [WormBlastRanks + 1]int{0, 20}
-var WormBlastCastTime = [WormBlastRanks + 1]int32{0, 0}
-var WormBlastCooldownMS = [WormBlastRanks + 1]int32{0, 0}
-var WormBlastManaCost = [WormBlastRanks + 1]float64{0, 0}
-var WormBlastSpellCoeff = [WormBlastRanks + 1]float64{0, 0.4286}
-var WormBlastBaseDamage = [WormBlastRanks + 1][]float64{{0, 0}, {800, 800}}
+var WormBlastSpellId = [WormBlastRanks + 1]int32{31378}
+var WormBlastLevel = [WormBlastRanks + 1]int{20}
+var WormBlastCastTime = [WormBlastRanks + 1]int32{0}
+var WormBlastCooldownMS = [WormBlastRanks + 1]int32{0}
+var WormBlastManaCost = [WormBlastRanks + 1]float64{0}
+var WormBlastSpellCoeff = [WormBlastRanks + 1]float64{0.4286}
+var WormBlastBaseDamage = [WormBlastRanks + 1][]float64{{800, 800}}
 
 // unconfirmed: Worm Blast coefficient derived from the vanilla convention (rank 0)
 
-// Wyvern Strike: 1 rank(s), from build 1.60.1.69893.
-const WyvernStrikeRanks = 1
+// Wyvern Strike: ranks 0 present, from build 1.60.1.69893.
+const WyvernStrikeRanks = 0
 
-var WyvernStrikeSpellId = [WyvernStrikeRanks + 1]int32{0, 415816}
-var WyvernStrikeLevel = [WyvernStrikeRanks + 1]int{0, 1}
-var WyvernStrikeCastTime = [WyvernStrikeRanks + 1]int32{0, 0}
-var WyvernStrikeCooldownMS = [WyvernStrikeRanks + 1]int32{0, 0}
-var WyvernStrikeManaCost = [WyvernStrikeRanks + 1]float64{0, 0}
-var WyvernStrikeSpellCoeff = [WyvernStrikeRanks + 1]float64{0, 0.4286}
-var WyvernStrikeBaseDamage = [WyvernStrikeRanks + 1][]float64{{0, 0}, {458479, 458479}}
+var WyvernStrikeSpellId = [WyvernStrikeRanks + 1]int32{415816}
+var WyvernStrikeLevel = [WyvernStrikeRanks + 1]int{1}
+var WyvernStrikeCastTime = [WyvernStrikeRanks + 1]int32{0}
+var WyvernStrikeCooldownMS = [WyvernStrikeRanks + 1]int32{0}
+var WyvernStrikeManaCost = [WyvernStrikeRanks + 1]float64{0}
+var WyvernStrikeSpellCoeff = [WyvernStrikeRanks + 1]float64{0.4286}
+var WyvernStrikeBaseDamage = [WyvernStrikeRanks + 1][]float64{{458479, 458479}}
 
 // unconfirmed: Wyvern Strike coefficient derived from the vanilla convention (rank 0)
 
-// [DNT] Arcane Shard Trigger A: 1 rank(s), from build 1.60.1.69893.
-const DNTArcaneShardTriggerARanks = 1
+// [DNT] Arcane Shard Trigger A: ranks 0 present, from build 1.60.1.69893.
+const DNTArcaneShardTriggerARanks = 0
 
-var DNTArcaneShardTriggerASpellId = [DNTArcaneShardTriggerARanks + 1]int32{0, 430134}
-var DNTArcaneShardTriggerALevel = [DNTArcaneShardTriggerARanks + 1]int{0, 0}
-var DNTArcaneShardTriggerACastTime = [DNTArcaneShardTriggerARanks + 1]int32{0, 0}
-var DNTArcaneShardTriggerACooldownMS = [DNTArcaneShardTriggerARanks + 1]int32{0, 0}
-var DNTArcaneShardTriggerAManaCost = [DNTArcaneShardTriggerARanks + 1]float64{0, 0}
-var DNTArcaneShardTriggerASpellCoeff = [DNTArcaneShardTriggerARanks + 1]float64{0, 0.4286}
-var DNTArcaneShardTriggerABaseDamage = [DNTArcaneShardTriggerARanks + 1][]float64{{0, 0}, {0, 0}}
+var DNTArcaneShardTriggerASpellId = [DNTArcaneShardTriggerARanks + 1]int32{430134}
+var DNTArcaneShardTriggerALevel = [DNTArcaneShardTriggerARanks + 1]int{0}
+var DNTArcaneShardTriggerACastTime = [DNTArcaneShardTriggerARanks + 1]int32{0}
+var DNTArcaneShardTriggerACooldownMS = [DNTArcaneShardTriggerARanks + 1]int32{0}
+var DNTArcaneShardTriggerAManaCost = [DNTArcaneShardTriggerARanks + 1]float64{0}
+var DNTArcaneShardTriggerASpellCoeff = [DNTArcaneShardTriggerARanks + 1]float64{0.4286}
+var DNTArcaneShardTriggerABaseDamage = [DNTArcaneShardTriggerARanks + 1][]float64{{0, 0}}
 
 // unconfirmed: [DNT] Arcane Shard Trigger A coefficient derived from the vanilla convention (rank 0)
 
-// [DNT] Arcane Shard Trigger B: 1 rank(s), from build 1.60.1.69893.
-const DNTArcaneShardTriggerBRanks = 1
+// [DNT] Arcane Shard Trigger B: ranks 0 present, from build 1.60.1.69893.
+const DNTArcaneShardTriggerBRanks = 0
 
-var DNTArcaneShardTriggerBSpellId = [DNTArcaneShardTriggerBRanks + 1]int32{0, 430182}
-var DNTArcaneShardTriggerBLevel = [DNTArcaneShardTriggerBRanks + 1]int{0, 0}
-var DNTArcaneShardTriggerBCastTime = [DNTArcaneShardTriggerBRanks + 1]int32{0, 0}
-var DNTArcaneShardTriggerBCooldownMS = [DNTArcaneShardTriggerBRanks + 1]int32{0, 0}
-var DNTArcaneShardTriggerBManaCost = [DNTArcaneShardTriggerBRanks + 1]float64{0, 0}
-var DNTArcaneShardTriggerBSpellCoeff = [DNTArcaneShardTriggerBRanks + 1]float64{0, 0.4286}
-var DNTArcaneShardTriggerBBaseDamage = [DNTArcaneShardTriggerBRanks + 1][]float64{{0, 0}, {0, 0}}
+var DNTArcaneShardTriggerBSpellId = [DNTArcaneShardTriggerBRanks + 1]int32{430182}
+var DNTArcaneShardTriggerBLevel = [DNTArcaneShardTriggerBRanks + 1]int{0}
+var DNTArcaneShardTriggerBCastTime = [DNTArcaneShardTriggerBRanks + 1]int32{0}
+var DNTArcaneShardTriggerBCooldownMS = [DNTArcaneShardTriggerBRanks + 1]int32{0}
+var DNTArcaneShardTriggerBManaCost = [DNTArcaneShardTriggerBRanks + 1]float64{0}
+var DNTArcaneShardTriggerBSpellCoeff = [DNTArcaneShardTriggerBRanks + 1]float64{0.4286}
+var DNTArcaneShardTriggerBBaseDamage = [DNTArcaneShardTriggerBRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: [DNT] Arcane Shard Trigger B coefficient derived from the vanilla convention (rank 0)
 
-// [DNT] Arcane Shard Trigger C: 1 rank(s), from build 1.60.1.69893.
-const DNTArcaneShardTriggerCRanks = 1
+// [DNT] Arcane Shard Trigger C: ranks 0 present, from build 1.60.1.69893.
+const DNTArcaneShardTriggerCRanks = 0
 
-var DNTArcaneShardTriggerCSpellId = [DNTArcaneShardTriggerCRanks + 1]int32{0, 430185}
-var DNTArcaneShardTriggerCLevel = [DNTArcaneShardTriggerCRanks + 1]int{0, 0}
-var DNTArcaneShardTriggerCCastTime = [DNTArcaneShardTriggerCRanks + 1]int32{0, 0}
-var DNTArcaneShardTriggerCCooldownMS = [DNTArcaneShardTriggerCRanks + 1]int32{0, 0}
-var DNTArcaneShardTriggerCManaCost = [DNTArcaneShardTriggerCRanks + 1]float64{0, 0}
-var DNTArcaneShardTriggerCSpellCoeff = [DNTArcaneShardTriggerCRanks + 1]float64{0, 0.4286}
-var DNTArcaneShardTriggerCBaseDamage = [DNTArcaneShardTriggerCRanks + 1][]float64{{0, 0}, {0, 0}}
+var DNTArcaneShardTriggerCSpellId = [DNTArcaneShardTriggerCRanks + 1]int32{430185}
+var DNTArcaneShardTriggerCLevel = [DNTArcaneShardTriggerCRanks + 1]int{0}
+var DNTArcaneShardTriggerCCastTime = [DNTArcaneShardTriggerCRanks + 1]int32{0}
+var DNTArcaneShardTriggerCCooldownMS = [DNTArcaneShardTriggerCRanks + 1]int32{0}
+var DNTArcaneShardTriggerCManaCost = [DNTArcaneShardTriggerCRanks + 1]float64{0}
+var DNTArcaneShardTriggerCSpellCoeff = [DNTArcaneShardTriggerCRanks + 1]float64{0.4286}
+var DNTArcaneShardTriggerCBaseDamage = [DNTArcaneShardTriggerCRanks + 1][]float64{{0, 0}}
 
 // unconfirmed: [DNT] Arcane Shard Trigger C coefficient derived from the vanilla convention (rank 0)
 
-// [DNT] Demitrian Summon: 1 rank(s), from build 1.60.1.69893.
-const DNTDemitrianSummonRanks = 1
+// [DNT] Demitrian Summon: ranks 0 present, from build 1.60.1.69893.
+const DNTDemitrianSummonRanks = 0
 
-var DNTDemitrianSummonSpellId = [DNTDemitrianSummonRanks + 1]int32{0, 468710}
-var DNTDemitrianSummonLevel = [DNTDemitrianSummonRanks + 1]int{0, 0}
-var DNTDemitrianSummonCastTime = [DNTDemitrianSummonRanks + 1]int32{0, 0}
-var DNTDemitrianSummonCooldownMS = [DNTDemitrianSummonRanks + 1]int32{0, 0}
-var DNTDemitrianSummonManaCost = [DNTDemitrianSummonRanks + 1]float64{0, 0}
-var DNTDemitrianSummonSpellCoeff = [DNTDemitrianSummonRanks + 1]float64{0, 0.2667}
-var DNTDemitrianSummonBaseDamage = [DNTDemitrianSummonRanks + 1][]float64{{0, 0}, {1500, 1500}}
+var DNTDemitrianSummonSpellId = [DNTDemitrianSummonRanks + 1]int32{468710}
+var DNTDemitrianSummonLevel = [DNTDemitrianSummonRanks + 1]int{0}
+var DNTDemitrianSummonCastTime = [DNTDemitrianSummonRanks + 1]int32{0}
+var DNTDemitrianSummonCooldownMS = [DNTDemitrianSummonRanks + 1]int32{0}
+var DNTDemitrianSummonManaCost = [DNTDemitrianSummonRanks + 1]float64{0}
+var DNTDemitrianSummonSpellCoeff = [DNTDemitrianSummonRanks + 1]float64{0.2667}
+var DNTDemitrianSummonBaseDamage = [DNTDemitrianSummonRanks + 1][]float64{{1500, 1500}}
 
 // unconfirmed: [DNT] Demitrian Summon coefficient derived from the vanilla convention (rank 0)

@@ -1,7 +1,10 @@
 package spellconst
 
 import (
+	"encoding/json"
 	"math"
+	"os"
+	"path/filepath"
 	"testing"
 )
 
@@ -190,5 +193,89 @@ func TestInstantCastUsesTheGlobalCooldown(t *testing.T) {
 func TestLoadRejectsAMissingFile(t *testing.T) {
 	if _, err := Load("testdata/nope.json"); err == nil {
 		t.Fatal("loading a missing file returned no error")
+	}
+}
+
+// loadFixtureSpells reads the real-fixture testdata as a generic tree, so
+// a test can mutate one spell's fields (inject an unknown one, delete a
+// required one) without hand-maintaining a second copy of the fixture
+// that would drift from testdata/warrior.json over time.
+func loadFixtureSpells(t *testing.T) (top map[string]json.RawMessage, spells map[string]json.RawMessage) {
+	t.Helper()
+	b, err := os.ReadFile("testdata/warrior.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := json.Unmarshal(b, &top); err != nil {
+		t.Fatal(err)
+	}
+	if err := json.Unmarshal(top["spells"], &spells); err != nil {
+		t.Fatal(err)
+	}
+	return top, spells
+}
+
+// writeFixture re-serializes a mutated copy of the fixture's top-level
+// tree, with spells substituted back in, to a temp file Load can read.
+func writeFixture(t *testing.T, top map[string]json.RawMessage, spells map[string]json.RawMessage) string {
+	t.Helper()
+	spellsJSON, err := json.Marshal(spells)
+	if err != nil {
+		t.Fatal(err)
+	}
+	top["spells"] = spellsJSON
+	out, err := json.Marshal(top)
+	if err != nil {
+		t.Fatal(err)
+	}
+	path := filepath.Join(t.TempDir(), "mutated.json")
+	if err := os.WriteFile(path, out, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	return path
+}
+
+// The pipeline's shape changed once already without this loader
+// noticing (an array became an object) — that is the entire reason this
+// package needed a contract follow-up. An unrecognized field in a future
+// shape change must fail loudly here rather than be silently dropped.
+func TestLoadRejectsAnUnknownField(t *testing.T) {
+	top, spells := loadFixtureSpells(t)
+	var bloodthirst4 map[string]json.RawMessage
+	if err := json.Unmarshal(spells["23894"], &bloodthirst4); err != nil {
+		t.Fatal(err)
+	}
+	bloodthirst4["totally_unknown_field"] = json.RawMessage(`123`)
+	b, err := json.Marshal(bloodthirst4)
+	if err != nil {
+		t.Fatal(err)
+	}
+	spells["23894"] = b
+
+	path := writeFixture(t, top, spells)
+	if _, err := Load(path); err == nil {
+		t.Fatal("Load() accepted a spell body with an unrecognized field")
+	}
+}
+
+// A required field silently missing is indistinguishable, once decoded,
+// from that field legitimately being zero (an instant cast, a free
+// spell) — Load must catch the absence before it is decoded away.
+func TestLoadRejectsAMissingRequiredField(t *testing.T) {
+	top, spells := loadFixtureSpells(t)
+	var bloodthirst4 map[string]json.RawMessage
+	if err := json.Unmarshal(spells["23894"], &bloodthirst4); err != nil {
+		t.Fatal(err)
+	}
+	delete(bloodthirst4, "cast_time_ms")
+	b, err := json.Marshal(bloodthirst4)
+	if err != nil {
+		t.Fatal(err)
+	}
+	spells["23894"] = b
+
+	path := writeFixture(t, top, spells)
+	if _, err := Load(path); err == nil {
+		t.Fatal("Load() accepted a spell body missing its required cast_time_ms field")
 	}
 }
