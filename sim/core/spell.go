@@ -16,17 +16,22 @@ type SpellConfig struct {
 	// See definition of Spell (below) for comments on these.
 	ActionID
 	// Used to identify spells with multiple ranks that need to be referenced
-	SpellCode     int32
-	SpellSchool   SpellSchool
-	DefenseType   DefenseType
-	ProcMask      ProcMask
-	Flags         SpellFlag
-	CastType      proto.CastType
-	MissileSpeed  float64
-	BaseCost      float64
-	MetricSplits  int
-	Rank          int
-	RequiredLevel int
+	SpellCode int32
+	// ClassSpellMask is a bitmask a SpellMod's ClassMask is tested
+	// against, so one talent config can target a set of spells. It is
+	// additional to SpellCode, which the existing class code uses as a
+	// scalar identity; the two do not overlap in purpose.
+	ClassSpellMask uint64
+	SpellSchool    SpellSchool
+	DefenseType    DefenseType
+	ProcMask       ProcMask
+	Flags          SpellFlag
+	CastType       proto.CastType
+	MissileSpeed   float64
+	BaseCost       float64
+	MetricSplits   int
+	Rank           int
+	RequiredLevel  int
 
 	ManaCost   ManaCostOptions
 	EnergyCost EnergyCostOptions
@@ -70,6 +75,10 @@ type SpellConfig struct {
 	Shield ShieldConfig
 
 	RelatedAuras []AuraArray
+
+	// RelatedSelfBuff is the aura this spell applies to its caster, if
+	// any. SpellMod_BuffDuration_Flat extends it.
+	RelatedSelfBuff *Aura
 }
 
 type Spell struct {
@@ -78,6 +87,12 @@ type Spell struct {
 
 	// Used to identify spells with multiple ranks that need to be referenced
 	SpellCode int32
+
+	// ClassSpellMask is a bitmask a SpellMod's ClassMask is tested
+	// against, so one talent config can target a set of spells. It is
+	// additional to SpellCode, which the existing class code uses as a
+	// scalar identity; the two do not overlap in purpose.
+	ClassSpellMask uint64
 
 	// The unit who will perform this spell.
 	Unit *Unit
@@ -171,6 +186,10 @@ type Spell struct {
 	// Per-target auras that are related to this spell, usually buffs or debuffs applied by the spell.
 	RelatedAuras []AuraArray
 
+	// RelatedSelfBuff is the aura this spell applies to its caster, if
+	// any. SpellMod_BuffDuration_Flat extends it.
+	RelatedSelfBuff *Aura
+
 	// Reference to a spell to be considered as the CD
 	// Defaults to this spell (Used for Next Melee spells)
 	CdSpell *Spell
@@ -234,14 +253,15 @@ func (unit *Unit) RegisterSpell(config SpellConfig) *Spell {
 	}
 
 	spell := &Spell{
-		ActionID:     config.ActionID,
-		SpellCode:    config.SpellCode,
-		DefenseType:  config.DefenseType,
-		Unit:         unit,
-		ProcMask:     config.ProcMask,
-		Flags:        config.Flags,
-		CastType:     config.CastType,
-		MissileSpeed: config.MissileSpeed,
+		ActionID:       config.ActionID,
+		SpellCode:      config.SpellCode,
+		ClassSpellMask: config.ClassSpellMask,
+		DefenseType:    config.DefenseType,
+		Unit:           unit,
+		ProcMask:       config.ProcMask,
+		Flags:          config.Flags,
+		CastType:       config.CastType,
+		MissileSpeed:   config.MissileSpeed,
 
 		SpellSchool:       config.SpellSchool,
 		SchoolIndex:       config.SpellSchool.GetSchoolIndex(),
@@ -281,7 +301,8 @@ func (unit *Unit) RegisterSpell(config SpellConfig) *Spell {
 		splitSpellMetrics: make([][]SpellMetrics, max(1, config.MetricSplits)),
 		splitTags:         make([]int32, max(1, config.MetricSplits)),
 
-		RelatedAuras: config.RelatedAuras,
+		RelatedAuras:    config.RelatedAuras,
+		RelatedSelfBuff: config.RelatedSelfBuff,
 	}
 
 	spell.Rank = config.Rank
@@ -685,4 +706,46 @@ func (sc *SpellCost) GetCurrentCost() float64 {
 
 func (spell *Spell) IssueRefund(sim *Simulation) {
 	spell.Cost.IssueRefund(sim, spell)
+}
+
+// Matches reports whether this spell is in the given ClassSpellMask set.
+// An empty mask matches nothing, so a SpellMod with no ClassMask must use
+// ClassSpellsOnly or a School/Flags filter instead.
+func (spell *Spell) Matches(mask uint64) bool {
+	return spell.ClassSpellMask&mask > 0
+}
+
+// The five damage-bonus helpers below are the SpellMod system's write
+// path into a spell's damage. Season of Discovery, which this system is
+// ported from, keeps private int64 percent accumulators and recomputes a
+// cached multiplier; classic keeps exported float64 multipliers that are
+// read at damage time, so these convert a SpellMod's percent once and
+// write the multiplier directly. `percent` is an offset from zero: 20
+// means plus twenty percent, -50 means minus fifty.
+
+// ApplyAdditiveBaseDamageBonus is "Modifies Spell Effectiveness (8)".
+func (spell *Spell) ApplyAdditiveBaseDamageBonus(percent int64) {
+	spell.BaseDamageMultiplierAdditive += float64(percent) / 100
+}
+
+// ApplyMultiplicativeDamageBonus is "Mod Damage Done %": it multiplies
+// direct and periodic damage together.
+func (spell *Spell) ApplyMultiplicativeDamageBonus(multiplier float64) {
+	spell.DamageMultiplier *= multiplier
+}
+
+// ApplyAdditiveDamageBonus is "Modifies Damage/Healing Done (22)",
+// applying to direct and periodic damage together.
+func (spell *Spell) ApplyAdditiveDamageBonus(percent int64) {
+	spell.DamageMultiplierAdditive += float64(percent) / 100
+}
+
+// ApplyAdditiveImpactDamageBonus applies to direct damage only.
+func (spell *Spell) ApplyAdditiveImpactDamageBonus(percent int64) {
+	spell.ImpactDamageMultiplierAdditive += float64(percent) / 100
+}
+
+// ApplyAdditivePeriodicDamageBonus applies to periodic damage only.
+func (spell *Spell) ApplyAdditivePeriodicDamageBonus(percent int64) {
+	spell.PeriodicDamageMultiplierAdditive += float64(percent) / 100
 }
