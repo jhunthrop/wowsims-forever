@@ -752,3 +752,24 @@ func FillTalentsProto(data protoreflect.Message, talentsStr string, treeSizes [3
 		offset += treeSizes[treeIdx]
 	}
 }
+
+// WeaponSubclass reports the equipped main-hand weapon's type, or
+// WeaponTypeUnknown when nothing is equipped.
+func (character *Character) WeaponSubclass() proto.WeaponType {
+	return character.MainHand().WeaponType
+}
+
+// OnWeaponSubclass runs apply only when the equipped main hand is one of
+// the given types.
+//
+// Forever's Weaponmaster and Hack and Slash switch effect on the
+// equipped weapon type inside a single talent, which the engine's
+// one-talent-one-effect ApplyTalents shape does not express. Rather
+// than each such talent re-writing the condition, they register through
+// here, so the rule is written once and a talent reads as what it does
+// rather than as how it checks.
+func (character *Character) OnWeaponSubclass(types []proto.WeaponType, apply func()) {
+	if slices.Contains(types, character.WeaponSubclass()) {
+		apply()
+	}
+}

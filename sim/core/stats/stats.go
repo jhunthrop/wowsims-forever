@@ -419,6 +419,14 @@ type PseudoStats struct {
 	IncreasedMissChance  float64 // Insect Swarm and Scorpid Sting
 	DodgeReduction       float64 // Target dodge reduction effects e.g. "reduces its target's chance to Dodge by X%"
 
+	// ArmorIgnorePercent is the fraction of a target's armour this
+	// attacker ignores: 0 ignores nothing, 0.25 a quarter. Forever's
+	// three armour-ignore talents work this way, and a flat
+	// stats.ArmorPenetration cannot express it because the amount
+	// depends on the target. It is per-attacker and reachable from a
+	// weapon-subclass-conditional talent, which a stat is not.
+	ArmorIgnorePercent float64
+
 	ThreatMultiplier float64 // Modulates the threat generated. Affected by things like salv.
 
 	DamageDealtMultiplier       float64                   // All damage

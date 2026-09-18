@@ -1,5 +1,7 @@
 package core
 
+import "testing"
+
 // TODO: Make these tests work for Classic. Currently they fail because AddStatsDynamic() can't be called without a fully initialized sim.
 /*
 import (
@@ -250,3 +252,31 @@ func TestExposeArmor(t *testing.T) {
 // 	}
 
 // }
+
+// Forever's armour-ignore talents ignore a percentage of the target's
+// armour, not a flat amount. stats.ArmorPenetration is flat, and a flat
+// stat cannot express "ignore a quarter of whatever this target has",
+// so the percentage lives in PseudoStats, per attacker, where a
+// weapon-conditional talent can also reach it.
+func TestArmorIgnorePercent(t *testing.T) {
+	const targetArmor = 4000.0
+	cases := []struct {
+		name    string
+		ignore  float64
+		wantEff float64
+	}{
+		{"none", 0, targetArmor},
+		{"a quarter", 0.25, targetArmor * 0.75},
+		{"all of it", 1.0, 0},
+		{"more than all of it is clamped", 1.5, 0},
+		{"negative is clamped", -0.5, targetArmor},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			got := effectiveArmor(targetArmor, tc.ignore)
+			if got != tc.wantEff {
+				t.Errorf("effectiveArmor(%v, %v) = %v, want %v", targetArmor, tc.ignore, got, tc.wantEff)
+			}
+		})
+	}
+}

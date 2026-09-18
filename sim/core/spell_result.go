@@ -700,3 +700,11 @@ func (spell *Spell) applyTargetHealingModifiers(damage float64, attackTable *Att
 		attackTable.Defender.PseudoStats.HealingTakenMultiplier *
 		attackTable.HealingDealtMultiplier
 }
+
+// effectiveArmor applies the attacker's percentage armour ignore. The
+// fraction is clamped to [0, 1]: two talents stacking past 100% must
+// reduce armour to zero, never below it, or mitigation inverts and the
+// target takes a bonus.
+func effectiveArmor(armor, ignorePercent float64) float64 {
+	return armor * (1 - min(1, max(0, ignorePercent)))
+}
