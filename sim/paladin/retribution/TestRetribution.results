@@ -15,7 +15,7 @@ character_stats_results: {
   final_stats: 0
   final_stats: 49.6
   final_stats: 3
-  final_stats: 52.23366
+  final_stats: 42.23366
   final_stats: 0
   final_stats: 0
   final_stats: 1669.638
@@ -47,12 +47,12 @@ character_stats_results: {
 stat_weights_results: {
  key: "TestRetribution-Phase5-StatWeights-Default"
  value: {
-  weights: 0.41388
-  weights: 0.18226
+  weights: 0.38012
+  weights: 0.13637
   weights: 0
   weights: 0
   weights: 0
-  weights: 0.30834
+  weights: 0.29107
   weights: 0
   weights: 0
   weights: 0
@@ -60,11 +60,11 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 4.74987
-  weights: 1.83013
+  weights: 3.86879
+  weights: 2.70304
   weights: 0
   weights: 0
-  weights: 0.14872
+  weights: 0.13659
   weights: 0
   weights: 0
   weights: 0
@@ -93,92 +93,92 @@ stat_weights_results: {
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-Avenger'sBattlegear"
  value: {
-  dps: 491.2082
-  tps: 516.89779
+  dps: 477.59799
+  tps: 503.28758
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-BattlegearofEternalJustice"
  value: {
-  dps: 490.56
-  tps: 502.67409
+  dps: 453.18405
+  tps: 465.29814
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-FieldMarshal'sAegis"
  value: {
-  dps: 492.26416
-  tps: 518.35691
+  dps: 472.566
+  tps: 498.65875
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-Freethinker'sArmor"
  value: {
-  dps: 406.42459
-  tps: 431.56351
+  dps: 382.54687
+  tps: 407.68579
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-JudgementArmor"
  value: {
-  dps: 509.03476
-  tps: 535.4176
+  dps: 479.81219
+  tps: 506.19502
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-LawbringerArmor"
  value: {
-  dps: 426.57417
-  tps: 452.67184
+  dps: 403.27057
+  tps: 429.36824
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-LieutenantCommander'sRedoubt"
  value: {
-  dps: 462.72626
-  tps: 487.86026
+  dps: 433.71465
+  tps: 458.84865
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-RedemptionArmor"
  value: {
-  dps: 407.39536
-  tps: 434.09541
+  dps: 398.13347
+  tps: 424.83352
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-SanctifiedOrb-20512"
  value: {
-  dps: 374.5856
-  tps: 399.35577
+  dps: 346.40687
+  tps: 371.17703
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Average-Default"
  value: {
-  dps: 372.45914
-  tps: 397.14055
+  dps: 345.14372
+  tps: 369.82513
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Dwarf-blank-P5 Seal of Righteousness Ret-basic_ret-FullBuffs-P5-Consumes-LongMultiTarget"
  value: {
-  dps: 40.61437
-  tps: 58.60937
+  dps: 38.88732
+  tps: 56.88232
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Dwarf-blank-P5 Seal of Righteousness Ret-basic_ret-FullBuffs-P5-Consumes-LongSingleTarget"
  value: {
-  dps: 26.879
-  tps: 27.80333
+  dps: 25.53091
+  tps: 26.45525
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Dwarf-blank-P5 Seal of Righteousness Ret-basic_ret-FullBuffs-P5-Consumes-ShortSingleTarget"
  value: {
-  dps: 36.54478
-  tps: 37.65103
+  dps: 33.86178
+  tps: 34.96803
  }
 }
 dps_results: {
@@ -205,22 +205,22 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Human-blank-P5 Seal of Righteousness Ret-basic_ret-FullBuffs-P5-Consumes-LongMultiTarget"
  value: {
-  dps: 39.49471
-  tps: 57.39138
+  dps: 37.82131
+  tps: 55.71798
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Human-blank-P5 Seal of Righteousness Ret-basic_ret-FullBuffs-P5-Consumes-LongSingleTarget"
  value: {
-  dps: 25.47806
-  tps: 26.39256
+  dps: 24.17587
+  tps: 25.09037
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Human-blank-P5 Seal of Righteousness Ret-basic_ret-FullBuffs-P5-Consumes-ShortSingleTarget"
  value: {
-  dps: 37.50262
-  tps: 38.63345
+  dps: 35.18469
+  tps: 36.31552
  }
 }
 dps_results: {
@@ -247,7 +247,7 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-Phase5-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 289.89328
-  tps: 313.23269
+  dps: 283.32469
+  tps: 306.66411
  }
 }

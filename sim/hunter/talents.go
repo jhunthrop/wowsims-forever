@@ -13,7 +13,8 @@ func (hunter *Hunter) ApplyTalents() {
 		hunter.applyFrenzy()
 		hunter.registerBestialWrathCD()
 
-		hunter.pet.AddStat(stats.Crit, core.CritRatingPerCritChance*3*float64(hunter.Talents.Ferocity))
+		// Forever: merged from MeleeCrit 3/rank + SpellCrit 3/rank. One
+		// effect under a unified stat gets one write.
 		hunter.pet.AddStat(stats.Crit, core.CritRatingPerCritChance*3*float64(hunter.Talents.Ferocity))
 
 		hunter.pet.PseudoStats.DamageDealtMultiplier *= 1 + 0.04*float64(hunter.Talents.UnleashedFury)
@@ -55,7 +56,8 @@ func (hunter *Hunter) ApplyTalents() {
 		}))
 	}
 
-	hunter.AddStat(stats.Hit, float64(hunter.Talents.Surefooted)*1*core.HitRatingPerHitChance)
+	// Forever: merged from MeleeHit 1/rank + SpellHit 1/rank. One effect
+	// under a unified stat gets one write.
 	hunter.AddStat(stats.Hit, float64(hunter.Talents.Surefooted)*1*core.HitRatingPerHitChance)
 
 	hunter.AddStat(stats.Crit, float64(hunter.Talents.KillerInstinct)*1*core.CritRatingPerCritChance)

@@ -57,7 +57,8 @@ func (shaman *Shaman) ApplyTalents() {
 		})
 	}
 
-	shaman.AddStat(stats.Hit, float64(shaman.Talents.NaturesGuidance))
+	// Forever: merged from MeleeHit + SpellHit, both float64(NaturesGuidance).
+	// One effect under a unified stat gets one write.
 	shaman.AddStat(stats.Hit, float64(shaman.Talents.NaturesGuidance))
 
 	if shaman.Talents.HealingGrace > 0 {

@@ -272,11 +272,18 @@ func (item WowheadItemResponse) GetStats() Stats {
 		proto.Stat_StatNaturePower: float64(item.GetIntValue(natureSpellPowerRegex)),
 		proto.Stat_StatShadowPower: float64(item.GetIntValue(shadowSpellPowerRegex)),
 		// Forever: merged from the spell-hit, melee-hit, and generic-hit
-		// tooltip phrasings into one Hit stat.
-		proto.Stat_StatHit: float64(item.GetIntValue(hitRegex) + item.GetIntValue(hitRegex2) + item.GetIntValue(spellHitRegex) + item.GetIntValue(physicalHitRegex)),
+		// tooltip phrasings into one Hit stat. The generic phrasing
+		// ("hit with spells and melee") is additive with either
+		// school-specific line — an item never carries both a
+		// school-specific line and the opposite school's, so max(spell,
+		// melee) is safe and matches an item that names only one school.
+		proto.Stat_StatHit: float64(item.GetIntValue(hitRegex)+item.GetIntValue(hitRegex2)) + float64(max(item.GetIntValue(spellHitRegex), item.GetIntValue(physicalHitRegex))),
 		// Forever: merged from the spell-crit, melee-crit, and generic-crit
-		// tooltip phrasings into one Crit stat.
-		proto.Stat_StatCrit:              float64(item.GetIntValue(critRegex) + item.GetIntValue(critRegex2) + item.GetIntValue(spellCritRegex) + item.GetIntValue(meleeCritRegex)),
+		// tooltip phrasings into one Crit stat, same max(spell, melee) rule
+		// as Hit above — see fix round 1, review finding M1: 11 items in
+		// the client data name both a spell-crit and a melee-crit line and
+		// were double-counted by summing instead of taking the larger.
+		proto.Stat_StatCrit:              float64(item.GetIntValue(critRegex)+item.GetIntValue(critRegex2)) + float64(max(item.GetIntValue(spellCritRegex), item.GetIntValue(meleeCritRegex))),
 		+proto.Stat_StatSpellHaste:       float64(item.GetIntValue(hasteRegex)),
 		+proto.Stat_StatMeleeHaste:       float64(item.GetIntValue(hasteRegex)),
 		proto.Stat_StatSpellPenetration:  float64(item.GetIntValue(spellPenetrationRegex)),

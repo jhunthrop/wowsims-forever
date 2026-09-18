@@ -1636,8 +1636,9 @@ func ApplyRallyingCryOfTheDragonslayer(unit *Unit, category string) {
 	makeExclusiveBuff(aura, BuffConfig{
 		Category: category,
 		Stats: []StatConfig{
+			// Forever: merged from SpellCrit 10 + MeleeCrit 5. One effect
+			// under a unified stat gets one write, at the larger value.
 			{stats.Crit, 10 * CritRatingPerCritChance, false},
-			{stats.Crit, 5 * CritRatingPerCritChance, false},
 			// TODO: {stats.RangedCrit, 5*CritRatingPerCritChance, false},
 			{stats.AttackPower, 140, false},
 			{stats.RangedAttackPower, 140, false},
@@ -1682,9 +1683,10 @@ func ApplySongflowerSerenade(unit *Unit) {
 			{stats.Spirit, 15, false},
 			{stats.Stamina, 15, false},
 			{stats.Strength, 15, false},
+			// Forever: merged from MeleeCrit 5 + SpellCrit 5. One effect
+			// under a unified stat gets one write, at the larger value.
 			{stats.Crit, 5, false},
 			// TODO: {stats.RangedCrit, 5, false},
-			{stats.Crit, 5, false},
 		},
 	})
 }

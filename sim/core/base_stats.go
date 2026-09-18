@@ -200,6 +200,49 @@ var DodgePerAgiAtLevel = map[proto.Class]float64{
 	proto.Class_ClassDruid:   0.0500,
 }
 
+// CritStatSources names which primary stat(s) feed a class's unified Crit
+// stat via AddStatDependency. Pre-merge, Agility fed MeleeCrit and
+// Intellect fed SpellCrit as two independent pools; Forever unifies both
+// into one Crit stat (Task 4), so a class listed with both sources here
+// now stacks them on that one stat. research/08-stats.md §7 states the
+// baseline conversions ("agility→crit … intellect→spell crit") are
+// "entirely unpublished" for the unified model, so this keeps every
+// class's pre-merge sources rather than picking one — unconfirmed hybrid
+// stacking until a later ruling measures it. This table, plus
+// AddCritStatDependencies below, is the single place that ruling edits;
+// it replaces five duplicated AddStatDependency call-site pairs across
+// sim/druid, sim/shaman, sim/paladin, sim/warlock and sim/hunter. It does
+// not cover pet units, which borrow a different (non-owner) class's rate
+// and are wired directly at their own call sites.
+type CritStatSources struct {
+	Agility   bool
+	Intellect bool
+}
+
+// unconfirmed: every entry below stacks Agility- and Intellect-derived
+// Crit on the one unified stat, per the ruling above.
+var ClassCritStatSources = map[proto.Class]CritStatSources{
+	proto.Class_ClassDruid:   {Agility: true, Intellect: true},
+	proto.Class_ClassShaman:  {Agility: true, Intellect: true},
+	proto.Class_ClassPaladin: {Agility: true, Intellect: true},
+	proto.Class_ClassWarlock: {Agility: true, Intellect: true},
+	proto.Class_ClassHunter:  {Agility: true, Intellect: true},
+}
+
+// AddCritStatDependencies wires character's Crit stat to whichever base
+// stat(s) ClassCritStatSources names for its class, at that table's rate.
+// See ClassCritStatSources' comment for the unconfirmed-hybrid-stacking
+// caveat this keeps in place from before the Hit/Crit merge.
+func AddCritStatDependencies(character *Character, class proto.Class) {
+	src := ClassCritStatSources[class]
+	if src.Agility {
+		character.AddStatDependency(stats.Agility, stats.Crit, CritPerAgiAtLevel[class]*CritRatingPerCritChance)
+	}
+	if src.Intellect {
+		character.AddStatDependency(stats.Intellect, stats.Crit, CritPerIntAtLevel[class]*CritRatingPerCritChance)
+	}
+}
+
 var ClassBaseStats = map[proto.Class]stats.Stats{
 	proto.Class_ClassUnknown: {},
 	proto.Class_ClassWarrior: {

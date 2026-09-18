@@ -104,7 +104,11 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 		wp.AddStat(stats.AttackPower, -20)
 		wp.AddStatDependency(stats.Strength, stats.AttackPower, 2)
 
-		// Warrior crit scaling
+		// Warrior crit scaling.
+		// unconfirmed: this pet stacks Agility- and Intellect-derived Crit
+		// on the one unified stat, same as core.ClassCritStatSources'
+		// hybrid classes (see that table's comment) — pre-merge these were
+		// the independent MeleeCrit and SpellCrit pools.
 		wp.AddStatDependency(stats.Agility, stats.Crit, core.CritPerAgiAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
 		wp.AddStatDependency(stats.Intellect, stats.Crit, core.CritPerIntAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
 

@@ -77,6 +77,11 @@ func TestStatsEqualsWithTolerance_Failure(t *testing.T) {
 	}
 }
 
+// The Go Stat enum and proto.Stat are index-synced: Stat(v) is how a
+// proto value becomes a Go one (see ProtoArrayToStatsList), so a
+// divergence silently reads the wrong stat. Forever merges MeleeHit and
+// SpellHit into Hit and MeleeCrit and SpellCrit into Crit, which shifts
+// every later index, so the sync is checked rather than commented.
 func TestStatsProtoInSync(t *testing.T) {
 	d := proto.Stat_StatStrength.Descriptor().Values()
 	if d.Len() != int(Len) {
@@ -90,30 +95,6 @@ func TestStatsProtoInSync(t *testing.T) {
 		sanitizedGoName := strings.ReplaceAll(goName, " ", "")
 		if string(protoName) != "Stat"+sanitizedGoName {
 			t.Fatalf("Encountered stat enum %d in proto.Stats with name %s differs from Go enum name %s (ignoring Stat prefix)", enum.Number(), protoName, goName)
-		}
-	}
-}
-
-// The Go Stat enum and proto.Stat are index-synced: Stat(v) is how a
-// proto value becomes a Go one (see ProtoArrayToStatsList), so a
-// divergence silently reads the wrong stat. Forever merges MeleeHit and
-// SpellHit into Hit and MeleeCrit and SpellCrit into Crit, which shifts
-// every later index, so the sync is checked rather than commented.
-func TestStatEnumIsSyncedWithProto(t *testing.T) {
-	names := proto.Stat_name
-	if len(names) != int(Len) {
-		t.Fatalf("proto.Stat has %d values, Go Stat has %d", len(names), int(Len))
-	}
-	for i := Stat(0); i < Len; i++ {
-		protoName, ok := names[int32(i)]
-		if !ok {
-			t.Errorf("index %d: proto.Stat has no value", int(i))
-			continue
-		}
-		// proto names are "StatFoo"; Go names are "Foo".
-		want := "Stat" + i.StatName()
-		if protoName != want {
-			t.Errorf("index %d: proto has %q, Go has %q (want %q)", int(i), protoName, i.StatName(), want)
 		}
 	}
 }

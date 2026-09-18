@@ -15,7 +15,7 @@ character_stats_results: {
   final_stats: 0
   final_stats: 45.25
   final_stats: 2
-  final_stats: 46.64824
+  final_stats: 36.64824
   final_stats: 0
   final_stats: 0
   final_stats: 897.1
@@ -50,18 +50,18 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 0.63363
+  weights: 0.54629
   weights: 0
-  weights: 0.40931
-  weights: 0
-  weights: 0
-  weights: 0.40931
+  weights: 0.37548
   weights: 0
   weights: 0
+  weights: 0.37548
   weights: 0
   weights: 0
-  weights: 7.50438
-  weights: 4.62858
+  weights: 0
+  weights: 0
+  weights: 6.26802
+  weights: 3.73532
   weights: 0
   weights: 0
   weights: 0
@@ -93,106 +93,106 @@ stat_weights_results: {
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-ArcanistRegalia"
  value: {
-  dps: 562.60196
-  tps: 361.41688
+  dps: 512.05784
+  tps: 329.69636
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-Champion'sArcanum"
  value: {
-  dps: 541.7843
-  tps: 400.56165
+  dps: 494.38569
+  tps: 366.45616
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-EnigmaVestments"
  value: {
-  dps: 595.9066
-  tps: 438.9
+  dps: 543.04836
+  tps: 400.83268
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-FieldMarshal'sRegalia"
  value: {
-  dps: 570.10772
-  tps: 420.39869
+  dps: 520.08002
+  tps: 384.41911
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-FrostfireRegalia"
  value: {
-  dps: 682.52184
-  tps: 427.79013
+  dps: 623.63126
+  tps: 393.25881
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-Illusionist'sAttire"
  value: {
-  dps: 526.02407
-  tps: 389.07323
+  dps: 484.89144
+  tps: 359.4211
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-IronweaveBattlesuit"
  value: {
-  dps: 435.43095
-  tps: 325.48493
+  dps: 400.20379
+  tps: 299.96844
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-LieutenantCommander'sArcanum"
  value: {
-  dps: 541.7843
-  tps: 400.56165
+  dps: 494.38569
+  tps: 366.45616
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-NetherwindRegalia"
  value: {
-  dps: 592.85528
-  tps: 408.75028
+  dps: 536.99932
+  tps: 369.15137
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-Sorcerer'sRegalia"
  value: {
-  dps: 532.28119
-  tps: 394.00569
+  dps: 484.87134
+  tps: 359.78981
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-Warlord'sRegalia"
  value: {
-  dps: 570.10772
-  tps: 420.39869
+  dps: 520.08002
+  tps: 384.41911
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Average-Default"
  value: {
-  dps: 535.53833
-  tps: 395.64057
+  dps: 493.34671
+  tps: 365.27518
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-p1-FullBuffs-P1-Consumes-LongMultiTarget"
  value: {
-  dps: 571.14663
-  tps: 825.53877
+  dps: 524.88377
+  tps: 774.59336
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-p1-FullBuffs-P1-Consumes-LongSingleTarget"
  value: {
-  dps: 571.14663
-  tps: 421.08945
+  dps: 524.88377
+  tps: 387.77738
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-p1-FullBuffs-P1-Consumes-ShortSingleTarget"
  value: {
-  dps: 617.14267
-  tps: 459.27597
+  dps: 577.40173
+  tps: 430.60476
  }
 }
 dps_results: {
@@ -219,22 +219,22 @@ dps_results: {
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Troll-p0.bis-DPS-p1-FullBuffs-P1-Consumes-LongMultiTarget"
  value: {
-  dps: 531.93027
-  tps: 786.21282
+  dps: 485.86475
+  tps: 736.06436
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Troll-p0.bis-DPS-p1-FullBuffs-P1-Consumes-LongSingleTarget"
  value: {
-  dps: 531.93027
-  tps: 393.04427
+  dps: 485.86475
+  tps: 359.90327
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Troll-p0.bis-DPS-p1-FullBuffs-P1-Consumes-ShortSingleTarget"
  value: {
-  dps: 644.33555
-  tps: 478.68926
+  dps: 604.55703
+  tps: 450.01674
  }
 }
 dps_results: {
@@ -261,7 +261,7 @@ dps_results: {
 dps_results: {
  key: "TestP1Mage-Phase1-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 533.28192
-  tps: 394.02442
+  dps: 487.91492
+  tps: 361.3658
  }
 }

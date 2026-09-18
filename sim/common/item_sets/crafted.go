@@ -83,7 +83,8 @@ var ItemSetBloodTigerHarness = core.NewItemSet(core.ItemSet{
 		// Improves your chance to get a critical strike with spells by 1%.
 		2: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.Crit, 1*core.CritRatingPerCritChance)
+			// Forever: merged from MeleeCrit 1% + SpellCrit 1%. One effect
+			// under a unified stat gets one write.
 			character.AddStat(stats.Crit, 1*core.CritRatingPerCritChance)
 		},
 	},

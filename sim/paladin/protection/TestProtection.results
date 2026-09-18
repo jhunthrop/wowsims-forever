@@ -15,7 +15,7 @@ character_stats_results: {
   final_stats: 0
   final_stats: 49.6
   final_stats: 3
-  final_stats: 52.23366
+  final_stats: 42.23366
   final_stats: 0
   final_stats: 0
   final_stats: 1622.58
@@ -47,24 +47,24 @@ character_stats_results: {
 stat_weights_results: {
  key: "TestProtection-Phase4-StatWeights-Default"
  value: {
-  weights: 0.31807
-  weights: 0.18058
+  weights: 0.2922
+  weights: 0.13362
   weights: 0
-  weights: 0.04819
+  weights: 0.03986
   weights: 0
-  weights: 0.42919
-  weights: 0
-  weights: 0
-  weights: 0
-  weights: 0.35801
+  weights: 0.40268
   weights: 0
   weights: 0
   weights: 0
-  weights: 4.18534
-  weights: 1.80901
+  weights: 0.33422
   weights: 0
   weights: 0
-  weights: 0.12572
+  weights: 0
+  weights: 3.32691
+  weights: 2.49481
+  weights: 0
+  weights: 0
+  weights: 0.11549
   weights: 0
   weights: 0
   weights: 0
@@ -93,92 +93,92 @@ stat_weights_results: {
 dps_results: {
  key: "TestProtection-Phase4-AllItems-Avenger'sBattlegear"
  value: {
-  dps: 461.58267
-  tps: 739.17562
+  dps: 446.21786
+  tps: 706.33072
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-AllItems-BattlegearofEternalJustice"
  value: {
-  dps: 469.4066
-  tps: 618.36058
+  dps: 435.54424
+  tps: 574.77153
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-AllItems-FieldMarshal'sAegis"
  value: {
-  dps: 451.88045
-  tps: 713.16861
+  dps: 432.34974
+  tps: 677.91751
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-AllItems-Freethinker'sArmor"
  value: {
-  dps: 370.9603
-  tps: 557.4662
+  dps: 348.82681
+  tps: 524.05478
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-AllItems-JudgementArmor"
  value: {
-  dps: 470.03583
-  tps: 759.26137
+  dps: 442.14628
+  tps: 713.42501
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-AllItems-LawbringerArmor"
  value: {
-  dps: 377.8947
-  tps: 566.21003
+  dps: 356.44261
+  tps: 532.57602
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-AllItems-LieutenantCommander'sRedoubt"
  value: {
-  dps: 439.51889
-  tps: 693.6098
+  dps: 411.96863
+  tps: 650.4713
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-AllItems-RedemptionArmor"
  value: {
-  dps: 358.07126
-  tps: 551.17176
+  dps: 348.74455
+  tps: 530.96141
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-AllItems-SanctifiedOrb-20512"
  value: {
-  dps: 350.15594
-  tps: 533.61105
+  dps: 324.22466
+  tps: 496.27139
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-Average-Default"
  value: {
-  dps: 349.63696
-  tps: 533.16365
+  dps: 323.88447
+  tps: 495.91406
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-Settings-Dwarf-blank-Basic Prot Rotation-basic_prot-FullBuffs-P4-Consumes-LongMultiTarget"
  value: {
-  dps: 14.86635
-  tps: 43.5459
+  dps: 14.45786
+  tps: 42.56553
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-Settings-Dwarf-blank-Basic Prot Rotation-basic_prot-FullBuffs-P4-Consumes-LongSingleTarget"
  value: {
-  dps: 14.86635
-  tps: 36.07257
+  dps: 14.45786
+  tps: 35.09219
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-Settings-Dwarf-blank-Basic Prot Rotation-basic_prot-FullBuffs-P4-Consumes-ShortSingleTarget"
  value: {
-  dps: 14.79715
-  tps: 35.80816
+  dps: 14.28435
+  tps: 34.57744
  }
 }
 dps_results: {
@@ -205,22 +205,22 @@ dps_results: {
 dps_results: {
  key: "TestProtection-Phase4-Settings-Human-blank-Basic Prot Rotation-basic_prot-FullBuffs-P4-Consumes-LongMultiTarget"
  value: {
-  dps: 14.86635
-  tps: 43.5459
+  dps: 14.45786
+  tps: 42.56553
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-Settings-Human-blank-Basic Prot Rotation-basic_prot-FullBuffs-P4-Consumes-LongSingleTarget"
  value: {
-  dps: 14.86635
-  tps: 36.07257
+  dps: 14.45786
+  tps: 35.09219
  }
 }
 dps_results: {
  key: "TestProtection-Phase4-Settings-Human-blank-Basic Prot Rotation-basic_prot-FullBuffs-P4-Consumes-ShortSingleTarget"
  value: {
-  dps: 14.79715
-  tps: 35.80816
+  dps: 14.28435
+  tps: 34.57744
  }
 }
 dps_results: {
@@ -247,7 +247,7 @@ dps_results: {
 dps_results: {
  key: "TestProtection-Phase4-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 275.28595
-  tps: 432.64075
+  dps: 267.81881
+  tps: 415.55487
  }
 }

@@ -5,14 +5,14 @@ export const BOSS_LEVEL = MAX_CHARACTER_LEVEL + 3;
 
 export const EXPERTISE_PER_QUARTER_PERCENT_REDUCTION = 0.25;
 // Forever merges spell and melee hit into one Hit stat and spell and melee
-// crit into one Crit stat. SPELL_HIT_RATING_PER_HIT_CHANCE remains split
+// crit into one Crit stat. SCHOOL_HIT_RATING_PER_HIT_CHANCE remains split
 // out below because it also feeds the PseudoStatSchoolHit* talent
 // conversions, which are unrelated pseudo stats this merge does not touch.
 export const CRIT_RATING_PER_CRIT_CHANCE = 1;
 export const HIT_RATING_PER_HIT_CHANCE = 1;
 export const ARMOR_PEN_PER_PERCENT_ARMOR = 13.99;
 
-export const SPELL_HIT_RATING_PER_HIT_CHANCE = 1;
+export const SCHOOL_HIT_RATING_PER_HIT_CHANCE = 1;
 
 export const HASTE_RATING_PER_HASTE_PERCENT = 1;
 
