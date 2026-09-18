@@ -50,12 +50,13 @@ func (mage *Mage) newPyroblastSpellConfig(rank int) core.SpellConfig {
 	actionID := core.ActionID{SpellID: spellId}
 
 	spellConfig := core.SpellConfig{
-		ActionID:     actionID,
-		SpellSchool:  core.SpellSchoolFire,
-		DefenseType:  core.DefenseTypeMagic,
-		ProcMask:     core.ProcMaskSpellDamage,
-		Flags:        SpellFlagMage | core.SpellFlagAPL,
-		MissileSpeed: 24,
+		ActionID:       actionID,
+		ClassSpellMask: MageSpellMaskPyroblast,
+		SpellSchool:    core.SpellSchoolFire,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          SpellFlagMage | core.SpellFlagAPL,
+		MissileSpeed:   24,
 
 		RequiredLevel: level,
 		Rank:          rank,

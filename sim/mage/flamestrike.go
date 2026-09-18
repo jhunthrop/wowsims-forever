@@ -45,12 +45,13 @@ func (mage *Mage) newFlamestrikeSpellConfig(rank int) core.SpellConfig {
 	castTime := time.Second * 3
 
 	return core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellId},
-		SpellSchool: core.SpellSchoolFire,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       SpellFlagMage | core.SpellFlagAPL,
-		SpellCode:   SpellCode_MageFlamestrike,
+		ActionID:       core.ActionID{SpellID: spellId},
+		ClassSpellMask: MageSpellMaskFlamestrike,
+		SpellSchool:    core.SpellSchoolFire,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          SpellFlagMage | core.SpellFlagAPL,
+		SpellCode:      SpellCode_MageFlamestrike,
 
 		RequiredLevel: level,
 		Rank:          rank,

@@ -40,12 +40,13 @@ func (mage *Mage) newFireBlastSpellConfig(rank int, cdTimer *core.Timer) core.Sp
 	flags := SpellFlagMage | core.SpellFlagAPL
 
 	return core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellId},
-		SpellCode:   SpellCode_MageFireBlast,
-		SpellSchool: core.SpellSchoolFire,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       flags,
+		ActionID:       core.ActionID{SpellID: spellId},
+		ClassSpellMask: MageSpellMaskFireBlast,
+		SpellCode:      SpellCode_MageFireBlast,
+		SpellSchool:    core.SpellSchoolFire,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          flags,
 
 		Rank:          rank,
 		RequiredLevel: level,

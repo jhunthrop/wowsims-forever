@@ -51,12 +51,13 @@ func (mage *Mage) applyIgnite() {
 	})
 
 	mage.igniteTick = mage.RegisterSpell(core.SpellConfig{
-		SpellCode:   SpellCode_MageIgnite,
-		ActionID:    core.ActionID{SpellID: 12654},
-		SpellSchool: core.SpellSchoolFire,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellProc,
-		Flags:       core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell | SpellFlagMage,
+		SpellCode:      SpellCode_MageIgnite,
+		ClassSpellMask: MageSpellMaskIgnite,
+		ActionID:       core.ActionID{SpellID: 12654},
+		SpellSchool:    core.SpellSchoolFire,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellProc,
+		Flags:          core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell | SpellFlagMage,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,

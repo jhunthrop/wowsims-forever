@@ -6,6 +6,14 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// Frostbolt keeps its hand-written per-rank arrays rather than taking
+// the generated ones. The generator deliberately skips a name a package
+// already declares ("skipped: \"Frostbolt\" already has a hand-written
+// FrostboltRanks elsewhere in this package" in constants_auto_gen.go),
+// and the two agree where it matters: rank 11 is spell 25304 at level
+// 60, which TestFrostboltHasElevenRanks asserts. The client's rows stay
+// resolvable through spellconst.Load for anything that needs the rest
+// of the effect.
 const FrostboltRanks = 11
 
 var FrostboltSpellId = [FrostboltRanks + 1]int32{0, 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304}
@@ -38,13 +46,14 @@ func (mage *Mage) getFrostboltConfig(rank int) core.SpellConfig {
 	level := FrostboltLevel[rank]
 
 	return core.SpellConfig{
-		ActionID:     core.ActionID{SpellID: spellId},
-		SpellCode:    SpellCode_MageFrostbolt,
-		SpellSchool:  core.SpellSchoolFrost,
-		DefenseType:  core.DefenseTypeMagic,
-		ProcMask:     core.ProcMaskSpellDamage,
-		Flags:        SpellFlagMage | SpellFlagChillSpell | core.SpellFlagBinary | core.SpellFlagAPL,
-		MissileSpeed: 28,
+		ActionID:       core.ActionID{SpellID: spellId},
+		ClassSpellMask: MageSpellMaskFrostbolt,
+		SpellCode:      SpellCode_MageFrostbolt,
+		SpellSchool:    core.SpellSchoolFrost,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          SpellFlagMage | SpellFlagChillSpell | core.SpellFlagBinary | core.SpellFlagAPL,
+		MissileSpeed:   28,
 
 		RequiredLevel: level,
 		Rank:          rank,
@@ -54,8 +63,11 @@ func (mage *Mage) getFrostboltConfig(rank int) core.SpellConfig {
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD:      core.GCDDefault,
-				CastTime: time.Millisecond*time.Duration(castTime) - time.Millisecond*100*time.Duration(mage.Talents.ImprovedFrostbolt),
+				GCD: core.GCDDefault,
+				// Improved Frostbolt's reduction is a CastTime_Flat mod
+				// in applyDeclarativeTalents, not an arithmetic term
+				// here: one talent, one place.
+				CastTime: time.Millisecond * time.Duration(castTime),
 			},
 		},
 
