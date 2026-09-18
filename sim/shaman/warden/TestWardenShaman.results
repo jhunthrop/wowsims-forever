@@ -121,15 +121,15 @@ dps_results: {
 dps_results: {
  key: "TestWardenShaman-Phase1-AllItems-TheEarthfury"
  value: {
-  dps: 242.23611
-  tps: 250.35848
+  dps: 245.06052
+  tps: 251.96696
  }
 }
 dps_results: {
  key: "TestWardenShaman-Phase1-AllItems-TheEarthshatterer"
  value: {
-  dps: 234.73009
-  tps: 247.1481
+  dps: 245.65303
+  tps: 254.05755
  }
 }
 dps_results: {
@@ -142,8 +142,8 @@ dps_results: {
 dps_results: {
  key: "TestWardenShaman-Phase1-AllItems-TheTenStorms"
  value: {
-  dps: 248.76331
-  tps: 253.7164
+  dps: 250.52848
+  tps: 254.73652
  }
 }
 dps_results: {

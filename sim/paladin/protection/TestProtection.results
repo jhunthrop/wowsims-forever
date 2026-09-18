@@ -85,7 +85,7 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 0
+  weights: 0.13664
   weights: 0
   weights: 0
  }
@@ -114,8 +114,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-Phase4-AllItems-Freethinker'sArmor"
  value: {
-  dps: 357.07576
-  tps: 535.24236
+  dps: 362.23684
+  tps: 546.43185
  }
 }
 dps_results: {
@@ -128,8 +128,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-Phase4-AllItems-LawbringerArmor"
  value: {
-  dps: 364.6792
-  tps: 543.92141
+  dps: 384.04627
+  tps: 585.93189
  }
 }
 dps_results: {
@@ -142,8 +142,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-Phase4-AllItems-RedemptionArmor"
  value: {
-  dps: 352.05773
-  tps: 537.34351
+  dps: 408.43298
+  tps: 659.718
  }
 }
 dps_results: {

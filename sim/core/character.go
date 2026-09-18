@@ -278,6 +278,19 @@ func (character *Character) applyEquipment() {
 
 }
 
+// HealingToSpellDamageRatio is Forever's rule that bonus healing carries
+// one third as bonus damage. Confirmed from the Deep Dive panel and,
+// independently, three ways in research/08-stats.md sections 7 and 9,
+// so it is not marked unconfirmed.
+//
+// Watch for double application. Priest's Spiritual Guidance bakes a
+// spirit-to-healing and spirit-to-damage conversion into the talent at
+// 25% and 8%, which is the one place this rule appears as a talent
+// rather than being derived. When Shadow Priest is written, that talent
+// must not stack its own conversion on top of this global dependency
+// (research/08-stats.md 12.2 item 3).
+const HealingToSpellDamageRatio = 1.0 / 3.0
+
 func (character *Character) addUniversalStatDependencies() {
 	character.AddStat(stats.Health, 20-10*20)
 	character.AddStatDependency(stats.Stamina, stats.Health, 10)
@@ -285,6 +298,10 @@ func (character *Character) addUniversalStatDependencies() {
 	character.AddStatDependency(stats.Defense, stats.Dodge, MissDodgeParryBlockCritChancePerDefense)
 	character.AddStatDependency(stats.Defense, stats.Parry, MissDodgeParryBlockCritChancePerDefense)
 	character.AddStatDependency(stats.Defense, stats.Block, MissDodgeParryBlockCritChancePerDefense)
+	// Forever: bonus healing grants one third as bonus damage. Applied to
+	// every character, because healing power appears on gear worn by
+	// classes that also deal damage.
+	character.AddStatDependency(stats.HealingPower, stats.SpellDamage, HealingToSpellDamageRatio)
 
 	character.AddStat(stats.Parry, 5*ParryRatingPerParryChance)
 	character.AddStat(stats.Block, 5*BlockRatingPerBlockChance)
