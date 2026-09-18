@@ -36,8 +36,10 @@ func (paladin *Paladin) registerLayOnHands() {
 				GCD: core.GCDDefault,
 			},
 			CD: core.Cooldown{
-				Timer:    paladin.NewTimer(),
-				Duration: time.Minute * time.Duration(60-10*paladin.Talents.ImprovedLayOnHands),
+				Timer: paladin.NewTimer(),
+				// FOREVER: Improved Lay on Hands is not in the client's trees.
+				// Duration: time.Minute * time.Duration(60-10*paladin.Talents.ImprovedLayOnHands),
+				Duration: time.Minute * 60,
 			},
 		},
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {

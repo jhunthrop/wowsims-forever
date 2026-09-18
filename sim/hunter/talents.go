@@ -4,9 +4,17 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
-	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
 )
+
+// FOREVER: the client's trait trees replaced vanilla's, so some of the
+// talents this file reaches for no longer exist under these names, and
+// some changed their rank count and so their proto type. Their behaviour
+// is rewritten when this spec is brought up, in rankings-population order
+// (design section 2.3). Every site is commented rather than deleted, so
+// the diff shows a reviewer exactly what the old tree did, and each is
+// left reading the value an untalented character would have read - which
+// is what a talent nobody can now take is worth.
 
 func (hunter *Hunter) ApplyTalents() {
 	if hunter.pet != nil {
@@ -24,26 +32,28 @@ func (hunter *Hunter) ApplyTalents() {
 		}
 	}
 
-	if hunter.Talents.MonsterSlaying+hunter.Talents.HumanoidSlaying > 0 {
-		hunter.Env.RegisterPostFinalizeEffect(func() {
-			for _, t := range hunter.Env.Encounter.Targets {
-				switch t.MobType {
-				case proto.MobType_MobTypeHumanoid:
-					multiplier := []float64{1, 1.01, 1.02, 1.03}[hunter.Talents.HumanoidSlaying]
-					for _, at := range hunter.AttackTables[t.UnitIndex] {
-						at.DamageDealtMultiplier *= multiplier
-						at.CritMultiplier *= multiplier
-					}
-				case proto.MobType_MobTypeBeast, proto.MobType_MobTypeGiant, proto.MobType_MobTypeDragonkin:
-					multiplier := []float64{1, 1.01, 1.02, 1.03}[hunter.Talents.MonsterSlaying]
-					for _, at := range hunter.AttackTables[t.UnitIndex] {
-						at.DamageDealtMultiplier *= multiplier
-						at.CritMultiplier *= multiplier
+	/*
+		if hunter.Talents.MonsterSlaying+hunter.Talents.HumanoidSlaying > 0 {
+			hunter.Env.RegisterPostFinalizeEffect(func() {
+				for _, t := range hunter.Env.Encounter.Targets {
+					switch t.MobType {
+					case proto.MobType_MobTypeHumanoid:
+						multiplier := []float64{1, 1.01, 1.02, 1.03}[hunter.Talents.HumanoidSlaying]
+						for _, at := range hunter.AttackTables[t.UnitIndex] {
+							at.DamageDealtMultiplier *= multiplier
+							at.CritMultiplier *= multiplier
+						}
+					case proto.MobType_MobTypeBeast, proto.MobType_MobTypeGiant, proto.MobType_MobTypeDragonkin:
+						multiplier := []float64{1, 1.01, 1.02, 1.03}[hunter.Talents.MonsterSlaying]
+						for _, at := range hunter.AttackTables[t.UnitIndex] {
+							at.DamageDealtMultiplier *= multiplier
+							at.CritMultiplier *= multiplier
+						}
 					}
 				}
-			}
-		})
-	}
+			})
+		}
+	*/
 
 	if hunter.Talents.BestialDiscipline > 0 {
 		core.MakePermanent(hunter.RegisterAura(core.Aura{
@@ -60,17 +70,21 @@ func (hunter *Hunter) ApplyTalents() {
 	// under a unified stat gets one write.
 	hunter.AddStat(stats.Hit, float64(hunter.Talents.Surefooted)*1*core.HitRatingPerHitChance)
 
-	hunter.AddStat(stats.Crit, float64(hunter.Talents.KillerInstinct)*1*core.CritRatingPerCritChance)
+	/*
+		hunter.AddStat(stats.Crit, float64(hunter.Talents.KillerInstinct)*1*core.CritRatingPerCritChance)
+	*/
 
-	if hunter.Talents.LethalShots > 0 {
-		lethalBonus := 1 * float64(hunter.Talents.LethalShots) * core.CritRatingPerCritChance
-		hunter.OnSpellRegistered(func(spell *core.Spell) {
-			if spell.Flags.Matches(SpellFlagShot) {
-				spell.BonusCritRating += lethalBonus
-			}
-		})
-		hunter.AutoAttacks.RangedConfig().BonusCritRating += lethalBonus
-	}
+	/*
+		if hunter.Talents.LethalShots > 0 {
+			lethalBonus := 1 * float64(hunter.Talents.LethalShots) * core.CritRatingPerCritChance
+			hunter.OnSpellRegistered(func(spell *core.Spell) {
+				if spell.Flags.Matches(SpellFlagShot) {
+					spell.BonusCritRating += lethalBonus
+				}
+			})
+			hunter.AutoAttacks.RangedConfig().BonusCritRating += lethalBonus
+		}
+	*/
 
 	if hunter.Talents.RangedWeaponSpecialization > 0 {
 		mult := 1 + 0.01*float64(hunter.Talents.RangedWeaponSpecialization)
@@ -175,15 +189,17 @@ func (hunter *Hunter) mortalShots() float64 {
 }
 
 func (hunter *Hunter) applyTrapMastery() {
-	if hunter.Talents.TrapMastery == 0 {
-		return
-	}
-
-	hunter.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.Flags.Matches(SpellFlagTrap) {
-			spell.BonusHitRating += 5 * float64(hunter.Talents.TrapMastery)
+	/*
+		if hunter.Talents.TrapMastery == 0 {
+			return
 		}
-	})
+
+		hunter.OnSpellRegistered(func(spell *core.Spell) {
+			if spell.Flags.Matches(SpellFlagTrap) {
+				spell.BonusHitRating += 5 * float64(hunter.Talents.TrapMastery)
+			}
+		})
+	*/
 }
 
 func (hunter *Hunter) applyCleverTraps() {

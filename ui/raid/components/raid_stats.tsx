@@ -330,15 +330,18 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 				{
 					label: 'Stats',
 					effects: [
-						{
-							label: 'Improved Gift of the Wild',
-							actionId: ActionId.fromSpellId(17051),
-							playerData: playerClassAndTalent(Class.ClassDruid, 'improvedMarkOfTheWild'),
-						},
+						// FOREVER: Improved Mark of the Wild is not in the client's trait trees
+						// (plan 2026-09-14-sim-engine, task 17), so nobody can have it and every
+						// druid falls into the untalented row below.
+						// {
+						// 	label: 'Improved Gift of the Wild',
+						// 	actionId: ActionId.fromSpellId(17051),
+						// 	playerData: playerClassAndTalent(Class.ClassDruid, 'improvedMarkOfTheWild'),
+						// },
 						{
 							label: 'Gift of the Wild',
 							actionId: ActionId.fromSpellId(48470),
-							playerData: playerClassAndMissingTalent(Class.ClassDruid, 'improvedMarkOfTheWild'),
+							playerData: playerClass(Class.ClassDruid),
 						},
 					],
 				},
@@ -355,23 +358,21 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 				{
 					label: 'Armor',
 					effects: [
-						{
-							label: 'Improved Devotion Aura',
-							actionId: ActionId.fromSpellId(20140),
-							playerData: playerClassAndTalent(
-								Class.ClassPaladin,
-								'improvedDevotionAura',
-								player => player.getSpecOptions().aura == PaladinAura.DevotionAura,
-							),
-						},
+						// FOREVER: Improved Devotion Aura is not in the client's trait trees
+						// (plan 2026-09-14-sim-engine, task 17).
+						// {
+						// 	label: 'Improved Devotion Aura',
+						// 	actionId: ActionId.fromSpellId(20140),
+						// 	playerData: playerClassAndTalent(
+						// 		Class.ClassPaladin,
+						// 		'improvedDevotionAura',
+						// 		player => player.getSpecOptions().aura == PaladinAura.DevotionAura,
+						// 	),
+						// },
 						{
 							label: 'Devotion Aura',
 							actionId: ActionId.fromSpellId(48942),
-							playerData: playerClassAndMissingTalent(
-								Class.ClassPaladin,
-								'improvedDevotionAura',
-								player => player.getSpecOptions().aura == PaladinAura.DevotionAura,
-							),
+							playerData: playerClass(Class.ClassPaladin, player => player.getSpecOptions().aura == PaladinAura.DevotionAura),
 						},
 						{
 							label: 'Scroll of Protection',
@@ -383,15 +384,17 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 				{
 					label: 'Stamina',
 					effects: [
-						{
-							label: 'Improved Power Word Fortitude',
-							actionId: ActionId.fromSpellId(14767),
-							playerData: playerClassAndTalent(Class.ClassPriest, 'improvedPowerWordFortitude'),
-						},
+						// FOREVER: Improved Power Word: Fortitude is not in the client's trait
+						// trees (plan 2026-09-14-sim-engine, task 17).
+						// {
+						// 	label: 'Improved Power Word Fortitude',
+						// 	actionId: ActionId.fromSpellId(14767),
+						// 	playerData: playerClassAndTalent(Class.ClassPriest, 'improvedPowerWordFortitude'),
+						// },
 						{
 							label: 'Power Word Fortitude',
 							actionId: ActionId.fromSpellId(48161),
-							playerData: playerClassAndMissingTalent(Class.ClassPriest, 'improvedPowerWordFortitude'),
+							playerData: playerClass(Class.ClassPriest),
 						},
 						{
 							label: 'Scroll of Stamina',
@@ -458,23 +461,21 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 							actionId: ActionId.fromSpellId(48934),
 							playerData: playerClass(Class.ClassPaladin),
 						},
-						{
-							label: 'Improved Battle Shout',
-							actionId: ActionId.fromSpellId(12861),
-							playerData: playerClassAndTalent(
-								Class.ClassWarrior,
-								'improvedBattleShout',
-								player => player.getSpecOptions().shout == WarriorShout.WarriorShoutBattle,
-							),
-						},
+						// FOREVER: Improved Battle Shout is not in the client's trait trees
+						// (plan 2026-09-14-sim-engine, task 17).
+						// {
+						// 	label: 'Improved Battle Shout',
+						// 	actionId: ActionId.fromSpellId(12861),
+						// 	playerData: playerClassAndTalent(
+						// 		Class.ClassWarrior,
+						// 		'improvedBattleShout',
+						// 		player => player.getSpecOptions().shout == WarriorShout.WarriorShoutBattle,
+						// 	),
+						// },
 						{
 							label: 'Battle Shout',
 							actionId: ActionId.fromSpellId(47436),
-							playerData: playerClassAndMissingTalent(
-								Class.ClassWarrior,
-								'improvedBattleShout',
-								player => player.getSpecOptions().shout == WarriorShout.WarriorShoutBattle,
-							),
+							playerData: playerClass(Class.ClassWarrior, player => player.getSpecOptions().shout == WarriorShout.WarriorShoutBattle),
 						},
 					],
 				},
@@ -501,15 +502,17 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 				{
 					label: 'MP5',
 					effects: [
-						{
-							label: 'Improved Blessing of Wisdom',
-							actionId: ActionId.fromSpellId(20245),
-							playerData: playerClassAndTalent(Class.ClassPaladin, 'improvedBlessingOfWisdom'),
-						},
+						// FOREVER: Improved Blessing of Wisdom is not in the client's trait
+						// trees (plan 2026-09-14-sim-engine, task 17).
+						// {
+						// 	label: 'Improved Blessing of Wisdom',
+						// 	actionId: ActionId.fromSpellId(20245),
+						// 	playerData: playerClassAndTalent(Class.ClassPaladin, 'improvedBlessingOfWisdom'),
+						// },
 						{
 							label: 'Blessing of Wisdom',
 							actionId: ActionId.fromSpellId(48938),
-							playerData: playerClassAndMissingTalent(Class.ClassPaladin, 'improvedBlessingOfWisdom'),
+							playerData: playerClass(Class.ClassPaladin),
 						},
 					],
 				},
@@ -646,34 +649,38 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 								[Spec.SpecRetributionPaladin, Spec.SpecProtectionPaladin].includes(player.spec),
 							),
 						},
-						{
-							label: 'Improved Demoralizing Shout',
-							actionId: ActionId.fromSpellId(12879),
-							playerData: playerClassAndTalent(Class.ClassWarrior, 'improvedDemoralizingShout'),
-						},
+						// FOREVER: neither Improved Demoralizing Shout nor Feral Aggression is
+						// in the client's trait trees (plan 2026-09-14-sim-engine, task 17), so
+						// the improved rows are gone and the plain ones no longer ask whether a
+						// talent nobody can take was taken.
+						// {
+						// 	label: 'Improved Demoralizing Shout',
+						// 	actionId: ActionId.fromSpellId(12879),
+						// 	playerData: playerClassAndTalent(Class.ClassWarrior, 'improvedDemoralizingShout'),
+						// },
 						{
 							label: 'Demoralizing Shout',
 							actionId: ActionId.fromSpellId(11556),
-							playerData: playerClassAndMissingTalent(Class.ClassWarrior, 'improvedDemoralizingShout'),
+							playerData: playerClass(Class.ClassWarrior),
 						},
-						{
-							label: 'Improved Demoralizing Roar',
-							actionId: ActionId.fromSpellId(16862),
-							playerData: playerSpecAndTalent(
-								Spec.SpecFeralTankDruid,
-								'feralAggression',
-								player => player.getSimpleRotation().maintainDemoralizingRoar,
-							),
-						},
-						{
-							label: 'Demoralizing Roar',
-							actionId: ActionId.fromSpellId(9898),
-							playerData: playerSpecAndMissingTalent(
-								Spec.SpecFeralTankDruid,
-								'feralAggression',
-								player => player.getSimpleRotation().maintainDemoralizingRoar,
-							),
-						},
+						// {
+						// 	label: 'Improved Demoralizing Roar',
+						// 	actionId: ActionId.fromSpellId(16862),
+						// 	playerData: playerSpecAndTalent(
+						// 		Spec.SpecFeralTankDruid,
+						// 		'feralAggression',
+						// 		player => player.getSimpleRotation().maintainDemoralizingRoar,
+						// 	),
+						// },
+						// {
+						// 	label: 'Demoralizing Roar',
+						// 	actionId: ActionId.fromSpellId(9898),
+						// 	playerData: playerSpecAndMissingTalent(
+						// 		Spec.SpecFeralTankDruid,
+						// 		'feralAggression',
+						// 		player => player.getSimpleRotation().maintainDemoralizingRoar,
+						// 	),
+						// },
 						// {
 						// 	label: 'Improved Curse of Weakness',
 						// 	actionId: ActionId.fromSpellId(18180),

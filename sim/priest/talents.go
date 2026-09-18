@@ -8,6 +8,15 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
+// FOREVER: the client's trait trees replaced vanilla's, so some of the
+// talents this file reaches for no longer exist under these names, and
+// some changed their rank count and so their proto type. Their behaviour
+// is rewritten when this spec is brought up, in rankings-population order
+// (design section 2.3). Every site is commented rather than deleted, so
+// the diff shows a reviewer exactly what the old tree did, and each is
+// left reading the value an untalented character would have read - which
+// is what a talent nobody can now take is worth.
+
 func (priest *Priest) ApplyTalents() {
 	// Discipline
 	priest.registerInnerFocus()
@@ -18,9 +27,11 @@ func (priest *Priest) ApplyTalents() {
 		priest.PseudoStats.ThreatMultiplier *= 1 - (.04 * float64(priest.Talents.SilentResolve))
 	}
 
-	if priest.Talents.ImprovedPowerWordFortitude > 0 {
-		priest.MultiplyStat(stats.Stamina, 1.0+.15*float64(priest.Talents.ImprovedPowerWordFortitude))
-	}
+	/*
+		if priest.Talents.ImprovedPowerWordFortitude > 0 {
+			priest.MultiplyStat(stats.Stamina, 1.0+.15*float64(priest.Talents.ImprovedPowerWordFortitude))
+		}
+	*/
 
 	priest.PseudoStats.SpiritRegenRateCasting = []float64{0.0, 0.17, 0.33, 0.5}[priest.Talents.Meditation]
 
@@ -62,16 +73,18 @@ func (priest *Priest) applyMentalAgility() {
 }
 
 func (priest *Priest) applyForceOfWill() {
-	if priest.Talents.ForceOfWill == 0 {
-		return
-	}
-
-	priest.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.Flags.Matches(SpellFlagPriest) {
-			spell.DamageMultiplierAdditive += 0.01 * float64(priest.Talents.ForceOfWill)
-			spell.BonusCritRating += 1 * float64(priest.Talents.ForceOfWill) * core.CritRatingPerCritChance
+	/*
+		if priest.Talents.ForceOfWill == 0 {
+			return
 		}
-	})
+
+		priest.OnSpellRegistered(func(spell *core.Spell) {
+			if spell.Flags.Matches(SpellFlagPriest) {
+				spell.DamageMultiplierAdditive += 0.01 * float64(priest.Talents.ForceOfWill)
+				spell.BonusCritRating += 1 * float64(priest.Talents.ForceOfWill) * core.CritRatingPerCritChance
+			}
+		})
+	*/
 }
 
 func (priest *Priest) applyHolySpecialization() {

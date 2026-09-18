@@ -141,6 +141,21 @@ binary_dist: $(OUT_DIR)/.dirstamp
 .PHONY: proto
 proto: sim/core/proto/api.pb.go ui/core/proto/api.ts
 
+# Where the site repository is checked out, for the data lane's outputs.
+SITE_DIR ?= /Users/jh/code/forever
+# Which client build's trees to generate from.
+TALENT_BUILD ?= 1.60.1.69893
+
+.PHONY: talents
+# talents regenerates the nine <Class>Talents proto messages, the nine
+# sim/<class>/talents_auto_gen.go files and the nine UI tree JSONs from
+# the client's mined trait tables. A Forever patch that moves a talent is
+# this target plus `make proto`, not a code edit.
+talents:
+	go run ./tools/talentgen -builds "$(SITE_DIR)/data/builds" -build "$(TALENT_BUILD)"
+	$(MAKE) proto
+	gofmt -w ./sim/core/talents ./tools/talentgen ./sim/*/talents_auto_gen.go
+
 # Builds the web server with the compiled client.
 .PHONY: wowsimclassic
 wowsimclassic: binary_dist devserver

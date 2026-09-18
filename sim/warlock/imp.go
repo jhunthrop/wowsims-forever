@@ -104,8 +104,10 @@ func (wp *WarlockPet) registerImpFireboltSpell() {
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD:      time.Millisecond * 1000,
-				CastTime: time.Millisecond * (2000 - time.Duration(500*wp.owner.Talents.ImprovedFirebolt)),
+				GCD: time.Millisecond * 1000,
+				// FOREVER: Improved Firebolt is not in the client's trees.
+				// CastTime: time.Millisecond * (2000 - time.Duration(500*wp.owner.Talents.ImprovedFirebolt)),
+				CastTime: time.Millisecond * 2000,
 			},
 			// Adding an artificial CD to account for real delay in imp casts in-game
 			CD: core.Cooldown{

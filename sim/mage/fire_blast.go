@@ -58,12 +58,15 @@ func (mage *Mage) newFireBlastSpellConfig(rank int, cdTimer *core.Timer) core.Sp
 				GCD: core.GCDDefault,
 			},
 			CD: core.Cooldown{
-				Timer:    cdTimer,
-				Duration: cooldown - time.Millisecond*500*time.Duration(mage.Talents.ImprovedFireBlast),
+				Timer: cdTimer,
+				// FOREVER: Improved Fire Blast is not in the client's trees.
+				// Duration: cooldown - time.Millisecond*500*time.Duration(mage.Talents.ImprovedFireBlast),
+				Duration: cooldown,
 			},
 		},
 
-		BonusCritRating: 2 * float64(mage.Talents.Incinerate) * core.CritRatingPerCritChance,
+		// FOREVER: Incinerate is not in the client's trees.
+		// BonusCritRating: 2 * float64(mage.Talents.Incinerate) * core.CritRatingPerCritChance,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,

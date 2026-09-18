@@ -48,7 +48,8 @@ func (rogue *Rogue) registerBackstabSpell() {
 			return !rogue.PseudoStats.InFrontOfTarget
 		},
 
-		BonusCritRating: 10 * core.CritRatingPerCritChance * float64(rogue.Talents.ImprovedBackstab),
+		// FOREVER: Improved Backstab is not in the client's trees.
+		// BonusCritRating: 10 * core.CritRatingPerCritChance * float64(rogue.Talents.ImprovedBackstab),
 
 		CritDamageBonus: rogue.lethality(),
 

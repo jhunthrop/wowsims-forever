@@ -17,7 +17,9 @@ func (priest *Priest) registerVampiricEmbraceSpell() {
 
 	partyPlayers := priest.Env.Raid.GetPlayerParty(&priest.Unit).Players
 	healthMetrics := priest.NewHealthMetrics(actionID)
-	healthReturnedMultuplier := 0.05 + 0.05*float64(priest.Talents.ImprovedVampiricEmbrace)
+	// FOREVER: Improved Vampiric Embrace is not in the client's trees.
+	// healthReturnedMultuplier := 0.05 + 0.05*float64(priest.Talents.ImprovedVampiricEmbrace)
+	healthReturnedMultuplier := 0.05
 
 	priest.VampiricEmbraceAuras = priest.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
 		return target.GetOrRegisterAura(core.Aura{

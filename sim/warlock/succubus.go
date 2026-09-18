@@ -133,8 +133,10 @@ func (wp *WarlockPet) registerSuccubusLashOfPainSpell() {
 			},
 			IgnoreHaste: true,
 			CD: core.Cooldown{
-				Timer:    wp.NewTimer(),
-				Duration: time.Second * (12 - time.Duration(3*wp.owner.Talents.ImprovedLashOfPain)),
+				Timer: wp.NewTimer(),
+				// FOREVER: Improved Lash of Pain is not in the client's trees.
+				// Duration: time.Second * (12 - time.Duration(3*wp.owner.Talents.ImprovedLashOfPain)),
+				Duration: time.Second * 12,
 			},
 		},
 

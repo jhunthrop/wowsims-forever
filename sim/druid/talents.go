@@ -7,6 +7,15 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
+// FOREVER: the client's trait trees replaced vanilla's, so some of the
+// talents this file reaches for no longer exist under these names, and
+// some changed their rank count and so their proto type. Their behaviour
+// is rewritten when this spec is brought up, in rankings-population order
+// (design section 2.3). Every site is commented rather than deleted, so
+// the diff shows a reviewer exactly what the old tree did, and each is
+// left reading the value an untalented character would have read - which
+// is what a talent nobody can now take is worth.
+
 func (druid *Druid) ApplyTalents() {
 	// Balance
 	druid.registerMoonkinFormSpell()
@@ -17,7 +26,9 @@ func (druid *Druid) ApplyTalents() {
 	druid.applyMoonglow()
 	druid.applyMoonfury()
 
-	druid.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + 0.02*float64(druid.Talents.NaturalWeapons)
+	/*
+		druid.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + 0.02*float64(druid.Talents.NaturalWeapons)
+	*/
 
 	// Feral
 	druid.applyBloodFrenzy()
@@ -210,26 +221,28 @@ func (druid *Druid) applyNaturesGrace() {
 // }
 
 func (druid *Druid) applyBloodFrenzy() {
-	if druid.Talents.BloodFrenzy == 0 {
-		return
-	}
+	/*
+		if druid.Talents.BloodFrenzy == 0 {
+			return
+		}
 
-	procChance := []float64{0, 0.5, 1}[druid.Talents.BloodFrenzy]
-	actionID := core.ActionID{SpellID: 16953}
-	cpMetrics := druid.NewComboPointMetrics(actionID)
+		procChance := []float64{0, 0.5, 1}[druid.Talents.BloodFrenzy]
+		actionID := core.ActionID{SpellID: 16953}
+		cpMetrics := druid.NewComboPointMetrics(actionID)
 
-	core.MakePermanent(druid.RegisterAura(core.Aura{
-		Label: "Blood Frenzy",
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if druid.InForm(Cat) &&
-				result.Target == aura.Unit.CurrentTarget &&
-				spell.Flags.Matches(SpellFlagBuilder) &&
-				result.Outcome.Matches(core.OutcomeCrit) &&
-				sim.Proc(procChance, "Blood Frenzy") {
-				druid.AddComboPoints(sim, 1, result.Target, cpMetrics)
-			}
-		},
-	}))
+		core.MakePermanent(druid.RegisterAura(core.Aura{
+			Label: "Blood Frenzy",
+			OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+				if druid.InForm(Cat) &&
+					result.Target == aura.Unit.CurrentTarget &&
+					spell.Flags.Matches(SpellFlagBuilder) &&
+					result.Outcome.Matches(core.OutcomeCrit) &&
+					sim.Proc(procChance, "Blood Frenzy") {
+					druid.AddComboPoints(sim, 1, result.Target, cpMetrics)
+				}
+			},
+		}))
+	*/
 }
 
 // We're using an aura so that the APL can know if the Druid has furor for powershifting logic
@@ -251,63 +264,65 @@ func (druid *Druid) applyFuror() {
 }
 
 func (druid *Druid) applyOmenOfClarity() {
-	if !druid.Talents.OmenOfClarity {
-		return
-	}
+	/*
+		if !druid.Talents.OmenOfClarity {
+			return
+		}
 
-	var affectedSpells []*core.Spell
-	druid.ClearcastingAura = druid.RegisterAura(core.Aura{
-		Label:    "Clearcasting",
-		ActionID: core.ActionID{SpellID: 16870},
-		Duration: time.Second * 15,
-		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			affectedSpells = core.FilterSlice(druid.Spellbook, func(spell *core.Spell) bool { return spell.Flags.Matches(SpellFlagOmen) })
-		},
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			for _, spell := range affectedSpells {
-				spell.Cost.Multiplier -= 100
-			}
-		},
-		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			for _, spell := range affectedSpells {
-				spell.Cost.Multiplier += 100
-			}
-		},
-		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			// OnCastComplete is called after OnSpellHitDealt / etc, so don't deactivate if it was just activated.
-			if aura.RemainingDuration(sim) == aura.Duration {
-				return
-			}
+		var affectedSpells []*core.Spell
+		druid.ClearcastingAura = druid.RegisterAura(core.Aura{
+			Label:    "Clearcasting",
+			ActionID: core.ActionID{SpellID: 16870},
+			Duration: time.Second * 15,
+			OnInit: func(aura *core.Aura, sim *core.Simulation) {
+				affectedSpells = core.FilterSlice(druid.Spellbook, func(spell *core.Spell) bool { return spell.Flags.Matches(SpellFlagOmen) })
+			},
+			OnGain: func(aura *core.Aura, sim *core.Simulation) {
+				for _, spell := range affectedSpells {
+					spell.Cost.Multiplier -= 100
+				}
+			},
+			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+				for _, spell := range affectedSpells {
+					spell.Cost.Multiplier += 100
+				}
+			},
+			OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
+				// OnCastComplete is called after OnSpellHitDealt / etc, so don't deactivate if it was just activated.
+				if aura.RemainingDuration(sim) == aura.Duration {
+					return
+				}
 
-			if spell.Flags.Matches(SpellFlagOmen) && spell.DefaultCast.Cost > 0 {
-				aura.Deactivate(sim)
-			}
-		},
-	})
+				if spell.Flags.Matches(SpellFlagOmen) && spell.DefaultCast.Cost > 0 {
+					aura.Deactivate(sim)
+				}
+			},
+		})
 
-	ppmm := druid.AutoAttacks.NewPPMManager(2.0, core.ProcMaskMelee)
-	icd := core.Cooldown{
-		Timer:    druid.NewTimer(),
-		Duration: time.Second * 10,
-	}
+		ppmm := druid.AutoAttacks.NewPPMManager(2.0, core.ProcMaskMelee)
+		icd := core.Cooldown{
+			Timer:    druid.NewTimer(),
+			Duration: time.Second * 10,
+		}
 
-	druid.RegisterAura(core.Aura{
-		Label:    "Omen of Clarity",
-		Duration: core.NeverExpires,
-		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Activate(sim)
-		},
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !result.Landed() || !icd.IsReady(sim) {
-				return
-			}
-			// TODO: Phase 3 "and non-instant spell casts" but we need to find out how the procs work for those
-			if spell.ProcMask.Matches(core.ProcMaskMelee) && ppmm.ProcWithWeaponSpecials(sim, spell.ProcMask, "Omen of Clarity") {
-				icd.Use(sim)
-				druid.ClearcastingAura.Activate(sim)
-			}
-		},
-	})
+		druid.RegisterAura(core.Aura{
+			Label:    "Omen of Clarity",
+			Duration: core.NeverExpires,
+			OnReset: func(aura *core.Aura, sim *core.Simulation) {
+				aura.Activate(sim)
+			},
+			OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+				if !result.Landed() || !icd.IsReady(sim) {
+					return
+				}
+				// TODO: Phase 3 "and non-instant spell casts" but we need to find out how the procs work for those
+				if spell.ProcMask.Matches(core.ProcMaskMelee) && ppmm.ProcWithWeaponSpecials(sim, spell.ProcMask, "Omen of Clarity") {
+					icd.Use(sim)
+					druid.ClearcastingAura.Activate(sim)
+				}
+			},
+		})
+	*/
 }
 
 func (druid *Druid) applyMoonfury() {

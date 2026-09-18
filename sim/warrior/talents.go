@@ -9,6 +9,15 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
+// FOREVER: the client's trait trees replaced vanilla's, so some of the
+// talents this file reaches for no longer exist under these names, and
+// some changed their rank count and so their proto type. Their behaviour
+// is rewritten when this spec is brought up, in rankings-population order
+// (design section 2.3). Every site is commented rather than deleted, so
+// the diff shows a reviewer exactly what the old tree did, and each is
+// left reading the value an untalented character would have read - which
+// is what a talent nobody can now take is worth.
+
 func (warrior *Warrior) ToughnessArmorMultiplier() float64 {
 	return 1.0 + 0.02*float64(warrior.Talents.Toughness)
 }
@@ -66,98 +75,108 @@ func (warrior *Warrior) applyTwoHandedWeaponSpecialization() {
 }
 
 func (warrior *Warrior) applyOneHandedWeaponSpecialization() {
-	if warrior.Talents.OneHandedWeaponSpecialization == 0 || warrior.MainHand().HandType == proto.HandType_HandTypeTwoHand {
-		return
-	}
-
-	multiplier := 1 + 0.02*float64(warrior.Talents.OneHandedWeaponSpecialization)
-	warrior.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.BonusCoefficient > 0 {
-			spell.DamageMultiplier *= multiplier
+	/*
+		if warrior.Talents.OneHandedWeaponSpecialization == 0 || warrior.MainHand().HandType == proto.HandType_HandTypeTwoHand {
+			return
 		}
-	})
+
+		multiplier := 1 + 0.02*float64(warrior.Talents.OneHandedWeaponSpecialization)
+		warrior.OnSpellRegistered(func(spell *core.Spell) {
+			if spell.BonusCoefficient > 0 {
+				spell.DamageMultiplier *= multiplier
+			}
+		})
+	*/
 }
 
 func (warrior *Warrior) applyWeaponSpecializations() {
-	if ss := warrior.Talents.SwordSpecialization; ss > 0 {
-		if mask := warrior.GetProcMaskForTypes(proto.WeaponType_WeaponTypeSword); mask != core.ProcMaskUnknown {
-			warrior.registerSwordSpecialization(mask)
+	/*
+		if ss := warrior.Talents.SwordSpecialization; ss > 0 {
+			if mask := warrior.GetProcMaskForTypes(proto.WeaponType_WeaponTypeSword); mask != core.ProcMaskUnknown {
+				warrior.registerSwordSpecialization(mask)
+			}
 		}
-	}
+	*/
 
-	if as := warrior.Talents.AxeSpecialization; as > 0 {
-		// the default character panel displays critical strike chance for main hand only
-		switch warrior.GetProcMaskForTypes(proto.WeaponType_WeaponTypeAxe) {
-		case core.ProcMaskMelee:
-			warrior.AddStat(stats.Crit, 1*core.CritRatingPerCritChance*float64(as))
-		case core.ProcMaskMeleeMH:
-			warrior.AddStat(stats.Crit, 1*core.CritRatingPerCritChance*float64(as))
-			warrior.OnSpellRegistered(func(spell *core.Spell) {
-				if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
-					spell.BonusCritRating -= 1 * core.CritRatingPerCritChance * float64(as)
-				}
-			})
-		case core.ProcMaskMeleeOH:
-			warrior.OnSpellRegistered(func(spell *core.Spell) {
-				if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
-					spell.BonusCritRating += 1 * core.CritRatingPerCritChance * float64(as)
-				}
-			})
+	/*
+		if as := warrior.Talents.AxeSpecialization; as > 0 {
+			// the default character panel displays critical strike chance for main hand only
+			switch warrior.GetProcMaskForTypes(proto.WeaponType_WeaponTypeAxe) {
+			case core.ProcMaskMelee:
+				warrior.AddStat(stats.Crit, 1*core.CritRatingPerCritChance*float64(as))
+			case core.ProcMaskMeleeMH:
+				warrior.AddStat(stats.Crit, 1*core.CritRatingPerCritChance*float64(as))
+				warrior.OnSpellRegistered(func(spell *core.Spell) {
+					if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
+						spell.BonusCritRating -= 1 * core.CritRatingPerCritChance * float64(as)
+					}
+				})
+			case core.ProcMaskMeleeOH:
+				warrior.OnSpellRegistered(func(spell *core.Spell) {
+					if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
+						spell.BonusCritRating += 1 * core.CritRatingPerCritChance * float64(as)
+					}
+				})
+			}
 		}
-	}
+	*/
 
-	if ps := warrior.Talents.PolearmSpecialization; ps > 0 {
-		// the default character panel displays critical strike chance for main hand only
-		switch warrior.GetProcMaskForTypes(proto.WeaponType_WeaponTypePolearm) {
-		case core.ProcMaskMelee:
-			warrior.AddStat(stats.Crit, 1*core.CritRatingPerCritChance*float64(ps))
-		case core.ProcMaskMeleeMH:
-			warrior.AddStat(stats.Crit, 1*core.CritRatingPerCritChance*float64(ps))
-			warrior.OnSpellRegistered(func(spell *core.Spell) {
-				if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
-					spell.BonusCritRating -= 1 * core.CritRatingPerCritChance * float64(ps)
-				}
-			})
-		case core.ProcMaskMeleeOH:
-			warrior.OnSpellRegistered(func(spell *core.Spell) {
-				if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
-					spell.BonusCritRating += 1 * core.CritRatingPerCritChance * float64(ps)
-				}
-			})
+	/*
+		if ps := warrior.Talents.PolearmSpecialization; ps > 0 {
+			// the default character panel displays critical strike chance for main hand only
+			switch warrior.GetProcMaskForTypes(proto.WeaponType_WeaponTypePolearm) {
+			case core.ProcMaskMelee:
+				warrior.AddStat(stats.Crit, 1*core.CritRatingPerCritChance*float64(ps))
+			case core.ProcMaskMeleeMH:
+				warrior.AddStat(stats.Crit, 1*core.CritRatingPerCritChance*float64(ps))
+				warrior.OnSpellRegistered(func(spell *core.Spell) {
+					if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
+						spell.BonusCritRating -= 1 * core.CritRatingPerCritChance * float64(ps)
+					}
+				})
+			case core.ProcMaskMeleeOH:
+				warrior.OnSpellRegistered(func(spell *core.Spell) {
+					if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
+						spell.BonusCritRating += 1 * core.CritRatingPerCritChance * float64(ps)
+					}
+				})
+			}
 		}
-	}
+	*/
 
 }
 
 func (warrior *Warrior) registerSwordSpecialization(procMask core.ProcMask) {
-	icd := core.Cooldown{
-		Timer:    warrior.NewTimer(),
-		Duration: time.Millisecond * 200,
-	}
-	procChance := 0.01 * float64(warrior.Talents.SwordSpecialization)
+	/*
+		icd := core.Cooldown{
+			Timer:    warrior.NewTimer(),
+			Duration: time.Millisecond * 200,
+		}
+		procChance := 0.01 * float64(warrior.Talents.SwordSpecialization)
 
-	warrior.RegisterAura(core.Aura{
-		Label:    "Sword Specialization",
-		Duration: core.NeverExpires,
-		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Activate(sim)
-		},
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !result.Landed() {
-				return
-			}
-			if !spell.ProcMask.Matches(procMask) {
-				return
-			}
-			if !icd.IsReady(sim) {
-				return
-			}
-			if sim.RandomFloat("Sword Specialization") < procChance {
-				icd.Use(sim)
-				warrior.AutoAttacks.ExtraMHAttack(sim, 1, core.ActionID{SpellID: 12815}, spell.ActionID)
-			}
-		},
-	})
+		warrior.RegisterAura(core.Aura{
+			Label:    "Sword Specialization",
+			Duration: core.NeverExpires,
+			OnReset: func(aura *core.Aura, sim *core.Simulation) {
+				aura.Activate(sim)
+			},
+			OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+				if !result.Landed() {
+					return
+				}
+				if !spell.ProcMask.Matches(procMask) {
+					return
+				}
+				if !icd.IsReady(sim) {
+					return
+				}
+				if sim.RandomFloat("Sword Specialization") < procChance {
+					icd.Use(sim)
+					warrior.AutoAttacks.ExtraMHAttack(sim, 1, core.ActionID{SpellID: 12815}, spell.ActionID)
+				}
+			},
+		})
+	*/
 }
 
 func (warrior *Warrior) applyUnbridledWrath() {

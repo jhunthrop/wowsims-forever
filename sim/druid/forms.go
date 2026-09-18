@@ -118,7 +118,8 @@ func (druid *Druid) registerCatFormSpell() {
 			druid.AutoAttacks.SetMH(clawWeapon)
 
 			druid.PseudoStats.ThreatMultiplier *= 0.71
-			druid.AddStatDynamic(sim, stats.Dodge, 2*float64(druid.Talents.FelineSwiftness))
+			// FOREVER: Feline Swiftness is not in the client's trees.
+			// druid.AddStatDynamic(sim, stats.Dodge, 2*float64(druid.Talents.FelineSwiftness))
 			druid.SetShapeshift(aura)
 
 			predBonus = druid.GetDynamicPredStrikeStats()
@@ -146,7 +147,8 @@ func (druid *Druid) registerCatFormSpell() {
 			druid.AutoAttacks.SetMH(druid.WeaponFromMainHand())
 
 			druid.PseudoStats.ThreatMultiplier /= 0.71
-			druid.AddStatDynamic(sim, stats.Dodge, -2*float64(druid.Talents.FelineSwiftness))
+			// FOREVER: Feline Swiftness is not in the client's trees.
+			// druid.AddStatDynamic(sim, stats.Dodge, -2*float64(druid.Talents.FelineSwiftness))
 			druid.SetShapeshift(nil)
 
 			druid.AddStatsDynamic(sim, predBonus.Invert())

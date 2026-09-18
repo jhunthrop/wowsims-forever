@@ -9,6 +9,15 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
+// FOREVER: the client's trait trees replaced vanilla's, so some of the
+// talents this file reaches for no longer exist under these names, and
+// some changed their rank count and so their proto type. Their behaviour
+// is rewritten when this spec is brought up, in rankings-population order
+// (design section 2.3). Every site is commented rather than deleted, so
+// the diff shows a reviewer exactly what the old tree did, and each is
+// left reading the value an untalented character would have read - which
+// is what a talent nobody can now take is worth.
+
 func (warlock *Warlock) ApplyTalents() {
 	warlock.applyWeaponImbue()
 
@@ -65,7 +74,9 @@ func (warlock *Warlock) applyFirestone() {
 	// TODO: Test PPM
 	ppm := warlock.AutoAttacks.NewPPMManager(8, core.ProcMaskMelee)
 
-	firestoneMulti := 1.0 + float64(warlock.Talents.ImprovedFirestone)*0.15
+	// FOREVER: Improved Firestone is not in the client's trees.
+	// firestoneMulti := 1.0 + float64(warlock.Talents.ImprovedFirestone)*0.15
+	firestoneMulti := 1.0
 
 	if level >= 56 {
 		warlock.AddStat(stats.FirePower, 21*firestoneMulti)
@@ -221,25 +232,29 @@ func (warlock *Warlock) applyDemonicEmbrace() {
 }
 
 func (warlock *Warlock) applyFelIntellect() {
-	if warlock.Talents.FelIntellect == 0 {
-		return
-	}
+	/*
+		if warlock.Talents.FelIntellect == 0 {
+			return
+		}
 
-	multiplier := 1 + 0.03*float64(warlock.Talents.FelIntellect)
-	for _, pet := range warlock.BasePets {
-		pet.MultiplyStat(stats.Mana, multiplier)
-	}
+		multiplier := 1 + 0.03*float64(warlock.Talents.FelIntellect)
+		for _, pet := range warlock.BasePets {
+			pet.MultiplyStat(stats.Mana, multiplier)
+		}
+	*/
 }
 
 func (warlock *Warlock) applyFelStamina() {
-	if warlock.Talents.FelStamina == 0 {
-		return
-	}
+	/*
+		if warlock.Talents.FelStamina == 0 {
+			return
+		}
 
-	multiplier := 1 + 0.03*float64(warlock.Talents.FelStamina)
-	for _, pet := range warlock.BasePets {
-		pet.MultiplyStat(stats.Health, multiplier)
-	}
+		multiplier := 1 + 0.03*float64(warlock.Talents.FelStamina)
+		for _, pet := range warlock.BasePets {
+			pet.MultiplyStat(stats.Health, multiplier)
+		}
+	*/
 }
 
 func (warlock *Warlock) applyMasterSummoner() {
@@ -619,24 +634,30 @@ func (warlock *Warlock) applyBane() {
 }
 
 func (warlock *Warlock) applyDevastation() {
-	if warlock.Talents.Devastation == 0 {
-		return
-	}
-
-	points := float64(warlock.Talents.Devastation)
-	warlock.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.Flags.Matches(WarlockFlagDestruction) {
-			spell.BonusCritRating += points * core.CritRatingPerCritChance
+	/*
+		if warlock.Talents.Devastation == 0 {
+			return
 		}
-	})
+
+		points := float64(warlock.Talents.Devastation)
+		warlock.OnSpellRegistered(func(spell *core.Spell) {
+			if spell.Flags.Matches(WarlockFlagDestruction) {
+				spell.BonusCritRating += points * core.CritRatingPerCritChance
+			}
+		})
+	*/
 }
 
 func (warlock *Warlock) improvedImmolateBonus() float64 {
-	return 0.05 * float64(warlock.Talents.ImprovedImmolate)
+	// FOREVER: Improved Immolate is not in the client's trees.
+	// return 0.05 * float64(warlock.Talents.ImprovedImmolate)
+	return 0
 }
 
 func (warlock *Warlock) applyRuin() {
-	if !warlock.Talents.Ruin {
+	// FOREVER: Ruin has ranks in the client's trees, so the field is an
+	// int32 now rather than a bool.
+	if warlock.Talents.Ruin == 0 {
 		return
 	}
 	warlock.OnSpellRegistered(func(spell *core.Spell) {
@@ -647,14 +668,16 @@ func (warlock *Warlock) applyRuin() {
 }
 
 func (warlock *Warlock) applyEmberstorm() {
-	if warlock.Talents.Emberstorm == 0 {
-		return
-	}
-
-	points := float64(warlock.Talents.Emberstorm)
-	warlock.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.SpellSchool.Matches(core.SpellSchoolFire) && isWarlockSpell(spell) {
-			spell.DamageMultiplierAdditive += 0.02 * points
+	/*
+		if warlock.Talents.Emberstorm == 0 {
+			return
 		}
-	})
+
+		points := float64(warlock.Talents.Emberstorm)
+		warlock.OnSpellRegistered(func(spell *core.Spell) {
+			if spell.SpellSchool.Matches(core.SpellSchoolFire) && isWarlockSpell(spell) {
+				spell.DamageMultiplierAdditive += 0.02 * points
+			}
+		})
+	*/
 }

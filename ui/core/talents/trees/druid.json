@@ -1,676 +1,325 @@
 [
   {
     "name": "Balance",
-    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/283.jpg",
+    "backgroundUrl": "",
     "talents": [
       {
         "fieldName": "improvedWrath",
-        "location": {
-          "rowIdx": 0,
-          "colIdx": 0
-        },
-        "spellIds": [
-          16814,
-          16815,
-          16816,
-          16817,
-          16818
-        ],
+        "location": { "rowIdx": 0, "colIdx": 1 },
+        "spellIds": [16814, 16814, 16814, 16814, 16814],
         "maxPoints": 5
       },
       {
-        "fieldName": "naturesGrasp",
-        "location": {
-          "rowIdx": 0,
-          "colIdx": 1
-        },
-        "spellIds": [
-          16689
-        ],
-        "maxPoints": 1
+        "fieldName": "genesis",
+        "location": { "rowIdx": 0, "colIdx": 2 },
+        "spellIds": [1223081, 1223081, 1223081, 1223081, 1223081],
+        "maxPoints": 5
       },
       {
-        "fieldName": "improvedNaturesGrasp",
-        "location": {
-          "rowIdx": 0,
-          "colIdx": 2
-        },
-        "spellIds": [
-          17245,
-          17247,
-          17248,
-          17249
-        ],
-        "maxPoints": 4,
-        "prereqLocation": {
-          "rowIdx": 0,
-          "colIdx": 1
-        }
-      },
-      {
-        "fieldName": "improvedEntanglingRoots",
-        "location": {
-          "rowIdx": 1,
-          "colIdx": 0
-        },
-        "spellIds": [
-          16918,
-          16919,
-          16920
-        ],
+        "fieldName": "moonglow",
+        "location": { "rowIdx": 1, "colIdx": 0 },
+        "spellIds": [16845, 16845, 16845],
         "maxPoints": 3
       },
       {
         "fieldName": "improvedMoonfire",
-        "location": {
-          "rowIdx": 1,
-          "colIdx": 1
-        },
-        "spellIds": [
-          16821,
-          16822,
-          16823,
-          16824,
-          16825
-        ],
-        "maxPoints": 5
-      },
-      {
-        "fieldName": "naturalWeapons",
-        "location": {
-          "rowIdx": 1,
-          "colIdx": 2
-        },
-        "spellIds": [
-          16902,
-          16903,
-          16904,
-          16905,
-          16906
-        ],
-        "maxPoints": 5
-      },
-      {
-        "fieldName": "naturalShapeshifter",
-        "location": {
-          "rowIdx": 1,
-          "colIdx": 3
-        },
-        "spellIds": [
-          16833,
-          16834,
-          16835
-        ],
-        "maxPoints": 3
-      },
-      {
-        "fieldName": "improvedThorns",
-        "location": {
-          "rowIdx": 2,
-          "colIdx": 0
-        },
-        "spellIds": [
-          16836,
-          16839,
-          16840
-        ],
-        "maxPoints": 3
-      },
-      {
-        "fieldName": "omenOfClarity",
-        "location": {
-          "rowIdx": 2,
-          "colIdx": 2
-        },
-        "spellIds": [
-          16864
-        ],
-        "maxPoints": 1,
-        "prereqLocation": {
-          "rowIdx": 1,
-          "colIdx": 2
-        }
-      },
-      {
-        "fieldName": "naturesReach",
-        "location": {
-          "rowIdx": 2,
-          "colIdx": 3
-        },
-        "spellIds": [
-          16819,
-          16820
-        ],
+        "location": { "rowIdx": 1, "colIdx": 1 },
+        "spellIds": [16821, 16821],
         "maxPoints": 2
       },
       {
-        "fieldName": "vengeance",
-        "location": {
-          "rowIdx": 3,
-          "colIdx": 1
-        },
-        "spellIds": [
-          16909,
-          16910,
-          16911,
-          16912,
-          16913
-        ],
-        "maxPoints": 5,
-        "prereqLocation": {
-          "rowIdx": 1,
-          "colIdx": 1
-        }
+        "fieldName": "naturesMajesty",
+        "location": { "rowIdx": 1, "colIdx": 2 },
+        "spellIds": [1223082, 1223082],
+        "maxPoints": 2
       },
       {
-        "fieldName": "improvedStarfire",
-        "location": {
-          "rowIdx": 3,
-          "colIdx": 2
-        },
-        "spellIds": [
-          16850,
-          16923,
-          16924,
-          16925,
-          16926
-        ],
-        "maxPoints": 5
+        "fieldName": "naturesReach",
+        "location": { "rowIdx": 1, "colIdx": 3 },
+        "spellIds": [16819, 16819],
+        "maxPoints": 2
       },
       {
-        "fieldName": "naturesGrace",
-        "location": {
-          "rowIdx": 4,
-          "colIdx": 1
-        },
-        "spellIds": [
-          16880
-        ],
+        "fieldName": "improvedEntanglingRoots",
+        "location": { "rowIdx": 2, "colIdx": 0 },
+        "spellIds": [16918, 16918, 16918],
+        "maxPoints": 3
+      },
+      {
+        "fieldName": "naturesSplendor",
+        "location": { "rowIdx": 2, "colIdx": 2 },
+        "spellIds": [1223083],
         "maxPoints": 1
       },
       {
-        "fieldName": "moonglow",
-        "location": {
-          "rowIdx": 4,
-          "colIdx": 2
-        },
-        "spellIds": [
-          16845,
-          16846,
-          16847
-        ],
+        "fieldName": "insectSwarm",
+        "location": { "rowIdx": 3, "colIdx": 0 },
+        "spellIds": [5570],
+        "maxPoints": 1
+      },
+      {
+        "fieldName": "vengeance",
+        "location": { "rowIdx": 3, "colIdx": 1 },
+        "spellIds": [16909, 16909, 16909, 16909, 16909],
+        "maxPoints": 5
+      },
+      {
+        "fieldName": "improvedStarfire",
+        "location": { "rowIdx": 3, "colIdx": 2 },
+        "spellIds": [16850, 16850, 16850, 16850, 16850],
+        "maxPoints": 5
+      },
+      {
+        "fieldName": "overgrowth",
+        "location": { "rowIdx": 4, "colIdx": 0 },
+        "spellIds": [17245, 17245],
+        "maxPoints": 2
+      },
+      {
+        "fieldName": "naturesGrace",
+        "location": { "rowIdx": 4, "colIdx": 1 },
+        "spellIds": [16880],
+        "maxPoints": 1
+      },
+      {
+        "fieldName": "eclipse",
+        "location": { "rowIdx": 4, "colIdx": 2 },
+        "spellIds": [408248, 408248, 408248],
         "maxPoints": 3
       },
       {
         "fieldName": "moonfury",
-        "location": {
-          "rowIdx": 5,
-          "colIdx": 1
-        },
-        "spellIds": [
-          16896,
-          16897,
-          16899,
-          16900,
-          16901
-        ],
-        "maxPoints": 5,
-        "prereqLocation": {
-          "rowIdx": 4,
-          "colIdx": 1
-        }
+        "location": { "rowIdx": 5, "colIdx": 1 },
+        "spellIds": [16896, 16896, 16896, 16896, 16896],
+        "maxPoints": 5
       },
       {
         "fieldName": "moonkinForm",
-        "location": {
-          "rowIdx": 6,
-          "colIdx": 1
-        },
-        "spellIds": [
-          24858
-        ],
+        "location": { "rowIdx": 6, "colIdx": 1 },
+        "spellIds": [24858],
         "maxPoints": 1
       }
     ]
   },
   {
     "name": "Feral Combat",
-    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/281.jpg",
+    "backgroundUrl": "",
     "talents": [
       {
         "fieldName": "ferocity",
-        "location": {
-          "rowIdx": 0,
-          "colIdx": 1
-        },
-        "spellIds": [
-          16934,
-          16935,
-          16936,
-          16937,
-          16938
-        ],
+        "location": { "rowIdx": 0, "colIdx": 1 },
+        "spellIds": [16934, 16934, 16934, 16934, 16934],
         "maxPoints": 5
       },
       {
-        "fieldName": "feralAggression",
-        "location": {
-          "rowIdx": 0,
-          "colIdx": 2
-        },
-        "spellIds": [
-          16858,
-          16859,
-          16860,
-          16861,
-          16862
-        ],
+        "fieldName": "heartOfTheWild",
+        "location": { "rowIdx": 0, "colIdx": 2 },
+        "spellIds": [17003, 17003, 17003, 17003, 17003],
         "maxPoints": 5
+      },
+      {
+        "fieldName": "feralSwiftness",
+        "location": { "rowIdx": 1, "colIdx": 0 },
+        "spellIds": [17002, 17002],
+        "maxPoints": 2
       },
       {
         "fieldName": "feralInstinct",
-        "location": {
-          "rowIdx": 1,
-          "colIdx": 0
-        },
-        "spellIds": [
-          16947,
-          16948,
-          16949,
-          16950,
-          16951
-        ],
-        "maxPoints": 5
+        "location": { "rowIdx": 1, "colIdx": 1 },
+        "spellIds": [16947, 16947, 16947],
+        "maxPoints": 3
       },
       {
         "fieldName": "brutalImpact",
-        "location": {
-          "rowIdx": 1,
-          "colIdx": 1
-        },
-        "spellIds": [
-          16940,
-          16941
-        ],
+        "location": { "rowIdx": 1, "colIdx": 2 },
+        "spellIds": [16940, 16940],
         "maxPoints": 2
       },
       {
         "fieldName": "thickHide",
-        "location": {
-          "rowIdx": 1,
-          "colIdx": 2
-        },
-        "spellIds": [
-          16929,
-          16930,
-          16931,
-          16932,
-          16933
-        ],
-        "maxPoints": 5
+        "location": { "rowIdx": 1, "colIdx": 3 },
+        "spellIds": [16929, 16929, 16929],
+        "maxPoints": 3
       },
       {
-        "fieldName": "felineSwiftness",
-        "location": {
-          "rowIdx": 2,
-          "colIdx": 0
-        },
-        "spellIds": [
-          17002,
-          24866
-        ],
+        "fieldName": "savageFury",
+        "location": { "rowIdx": 2, "colIdx": 1 },
+        "spellIds": [16998, 16998],
         "maxPoints": 2
       },
       {
         "fieldName": "feralCharge",
-        "location": {
-          "rowIdx": 2,
-          "colIdx": 1
-        },
-        "spellIds": [
-          16979
-        ],
+        "location": { "rowIdx": 2, "colIdx": 2 },
+        "spellIds": [1238122],
         "maxPoints": 1
       },
       {
         "fieldName": "sharpenedClaws",
-        "location": {
-          "rowIdx": 2,
-          "colIdx": 2
-        },
-        "spellIds": [
-          16942,
-          16943,
-          16944
-        ],
+        "location": { "rowIdx": 2, "colIdx": 3 },
+        "spellIds": [16942, 16942],
+        "maxPoints": 2
+      },
+      {
+        "fieldName": "shreddingAttacks",
+        "location": { "rowIdx": 3, "colIdx": 0 },
+        "spellIds": [16966, 16966, 16966],
         "maxPoints": 3
       },
       {
-        "fieldName": "improvedShred",
-        "location": {
-          "rowIdx": 3,
-          "colIdx": 0
-        },
-        "spellIds": [
-          16966,
-          16968
-        ],
-        "maxPoints": 2
-      },
-      {
-        "fieldName": "predatoryStrikes",
-        "location": {
-          "rowIdx": 3,
-          "colIdx": 1
-        },
-        "spellIds": [
-          16972,
-          16974,
-          16975
-        ],
-        "maxPoints": 3
-      },
-      {
-        "fieldName": "bloodFrenzy",
-        "location": {
-          "rowIdx": 3,
-          "colIdx": 2
-        },
-        "spellIds": [
-          16952,
-          16954
-        ],
-        "maxPoints": 2,
-        "prereqLocation": {
-          "rowIdx": 2,
-          "colIdx": 2
-        }
-      },
-      {
-        "fieldName": "primalFury",
-        "location": {
-          "rowIdx": 3,
-          "colIdx": 3
-        },
-        "spellIds": [
-          16958,
-          16961
-        ],
-        "maxPoints": 2
-      },
-      {
-        "fieldName": "savageFury",
-        "location": {
-          "rowIdx": 4,
-          "colIdx": 0
-        },
-        "spellIds": [
-          16998,
-          16999
-        ],
-        "maxPoints": 2
-      },
-      {
-        "fieldName": "faerieFireFeral",
-        "location": {
-          "rowIdx": 4,
-          "colIdx": 2
-        },
-        "spellIds": [
-          16857
-        ],
+        "fieldName": "mangle",
+        "location": { "rowIdx": 3, "colIdx": 1 },
+        "spellIds": [407995],
         "maxPoints": 1
       },
       {
-        "fieldName": "heartOfTheWild",
-        "location": {
-          "rowIdx": 5,
-          "colIdx": 1
-        },
-        "spellIds": [
-          17003,
-          17004,
-          17005,
-          17006,
-          24894
-        ],
-        "maxPoints": 5,
-        "prereqLocation": {
-          "rowIdx": 3,
-          "colIdx": 1
-        }
+        "fieldName": "predatoryStrikes",
+        "location": { "rowIdx": 3, "colIdx": 2 },
+        "spellIds": [16972, 16972, 16972],
+        "maxPoints": 3
+      },
+      {
+        "fieldName": "primalFury",
+        "location": { "rowIdx": 3, "colIdx": 3 },
+        "spellIds": [16958, 16958],
+        "maxPoints": 2
+      },
+      {
+        "fieldName": "predatoryInstincts",
+        "location": { "rowIdx": 4, "colIdx": 0 },
+        "spellIds": [1223242, 1223242],
+        "maxPoints": 2
       },
       {
         "fieldName": "leaderOfThePack",
-        "location": {
-          "rowIdx": 6,
-          "colIdx": 1
-        },
-        "spellIds": [
-          17007
-        ],
+        "location": { "rowIdx": 4, "colIdx": 1 },
+        "spellIds": [17007],
+        "maxPoints": 1
+      },
+      {
+        "fieldName": "kingOfTheJungle",
+        "location": { "rowIdx": 4, "colIdx": 3 },
+        "spellIds": [417046, 417046, 417046],
+        "maxPoints": 3
+      },
+      {
+        "fieldName": "naturalReaction",
+        "location": { "rowIdx": 5, "colIdx": 0 },
+        "spellIds": [417051, 417051, 417051, 417051, 417051],
+        "maxPoints": 5
+      },
+      {
+        "fieldName": "rendAndTear",
+        "location": { "rowIdx": 5, "colIdx": 2 },
+        "spellIds": [1223246, 1223246, 1223246, 1223246, 1223246],
+        "maxPoints": 5
+      },
+      {
+        "fieldName": "berserk",
+        "location": { "rowIdx": 6, "colIdx": 1 },
+        "spellIds": [417141],
         "maxPoints": 1
       }
     ]
   },
   {
     "name": "Restoration",
-    "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/282.jpg",
+    "backgroundUrl": "",
     "talents": [
       {
-        "fieldName": "improvedMarkOfTheWild",
-        "location": {
-          "rowIdx": 0,
-          "colIdx": 1
-        },
-        "spellIds": [
-          17050,
-          17051,
-          17053,
-          17054,
-          17055
-        ],
+        "fieldName": "naturesFocus",
+        "location": { "rowIdx": 0, "colIdx": 1 },
+        "spellIds": [17063, 17063, 17063, 17063, 17063],
         "maxPoints": 5
       },
       {
         "fieldName": "furor",
-        "location": {
-          "rowIdx": 0,
-          "colIdx": 2
-        },
-        "spellIds": [
-          17056,
-          17058,
-          17059,
-          17060,
-          17061
-        ],
+        "location": { "rowIdx": 0, "colIdx": 2 },
+        "spellIds": [17056, 17056, 17056, 17056, 17056],
         "maxPoints": 5
       },
       {
-        "fieldName": "improvedHealingTouch",
-        "location": {
-          "rowIdx": 1,
-          "colIdx": 0
-        },
-        "spellIds": [
-          17069,
-          17070,
-          17071,
-          17072,
-          17073
-        ],
+        "fieldName": "naturalist",
+        "location": { "rowIdx": 1, "colIdx": 0 },
+        "spellIds": [17069, 17069, 17069, 17069, 17069],
         "maxPoints": 5
-      },
-      {
-        "fieldName": "naturesFocus",
-        "location": {
-          "rowIdx": 1,
-          "colIdx": 1
-        },
-        "spellIds": [
-          17063,
-          17065,
-          17066,
-          17067,
-          17068
-        ],
-        "maxPoints": 5
-      },
-      {
-        "fieldName": "improvedEnrage",
-        "location": {
-          "rowIdx": 1,
-          "colIdx": 2
-        },
-        "spellIds": [
-          17079,
-          17082
-        ],
-        "maxPoints": 2
-      },
-      {
-        "fieldName": "reflection",
-        "location": {
-          "rowIdx": 2,
-          "colIdx": 1
-        },
-        "spellIds": [
-          17106,
-          17107,
-          17108
-        ],
-        "maxPoints": 3
-      },
-      {
-        "fieldName": "insectSwarm",
-        "location": {
-          "rowIdx": 2,
-          "colIdx": 2
-        },
-        "spellIds": [
-          5570
-        ],
-        "maxPoints": 1
       },
       {
         "fieldName": "subtlety",
-        "location": {
-          "rowIdx": 2,
-          "colIdx": 3
-        },
-        "spellIds": [
-          17118,
-          17119,
-          17120,
-          17121,
-          17122
-        ],
+        "location": { "rowIdx": 1, "colIdx": 1 },
+        "spellIds": [17118, 17118, 17118],
+        "maxPoints": 3
+      },
+      {
+        "fieldName": "naturalShapeshifter",
+        "location": { "rowIdx": 1, "colIdx": 2 },
+        "spellIds": [16833, 16833, 16833],
+        "maxPoints": 3
+      },
+      {
+        "fieldName": "reflection",
+        "location": { "rowIdx": 2, "colIdx": 1 },
+        "spellIds": [17106, 17106, 17106],
+        "maxPoints": 3
+      },
+      {
+        "fieldName": "giftOfNature",
+        "location": { "rowIdx": 2, "colIdx": 2 },
+        "spellIds": [17104, 17104, 17104, 17104, 17104],
         "maxPoints": 5
       },
       {
+        "fieldName": "giftOfTheEarthmother",
+        "location": { "rowIdx": 2, "colIdx": 3 },
+        "spellIds": [414673],
+        "maxPoints": 1
+      },
+      {
         "fieldName": "tranquilSpirit",
-        "location": {
-          "rowIdx": 3,
-          "colIdx": 1
-        },
-        "spellIds": [
-          24968,
-          24969,
-          24970,
-          24971,
-          24972
-        ],
+        "location": { "rowIdx": 3, "colIdx": 1 },
+        "spellIds": [24968, 24968, 24968, 24968, 24968],
         "maxPoints": 5
       },
       {
         "fieldName": "improvedRejuvenation",
-        "location": {
-          "rowIdx": 3,
-          "colIdx": 3
-        },
-        "spellIds": [
-          17111,
-          17112,
-          17113
-        ],
+        "location": { "rowIdx": 3, "colIdx": 2 },
+        "spellIds": [17111, 17111, 17111],
         "maxPoints": 3
       },
       {
-        "fieldName": "naturesSwiftness",
-        "location": {
-          "rowIdx": 4,
-          "colIdx": 0
-        },
-        "spellIds": [
-          17116
-        ],
-        "maxPoints": 1,
-        "prereqLocation": {
-          "rowIdx": 1,
-          "colIdx": 0
-        }
+        "fieldName": "swiftmend",
+        "location": { "rowIdx": 3, "colIdx": 3 },
+        "spellIds": [18562],
+        "maxPoints": 1
       },
       {
-        "fieldName": "giftOfNature",
-        "location": {
-          "rowIdx": 4,
-          "colIdx": 2
-        },
-        "spellIds": [
-          17104,
-          24943,
-          24944,
-          24945,
-          24946
-        ],
-        "maxPoints": 5,
-        "prereqLocation": {
-          "rowIdx": 2,
-          "colIdx": 2
-        }
+        "fieldName": "naturesSwiftness",
+        "location": { "rowIdx": 4, "colIdx": 0 },
+        "spellIds": [17116],
+        "maxPoints": 1
+      },
+      {
+        "fieldName": "livingSpirit",
+        "location": { "rowIdx": 4, "colIdx": 1 },
+        "spellIds": [1309631, 1309631, 1309631],
+        "maxPoints": 3
       },
       {
         "fieldName": "improvedTranquility",
-        "location": {
-          "rowIdx": 4,
-          "colIdx": 3
-        },
-        "spellIds": [
-          17123,
-          17124
-        ],
+        "location": { "rowIdx": 4, "colIdx": 3 },
+        "spellIds": [17123, 17123],
         "maxPoints": 2
       },
       {
         "fieldName": "improvedRegrowth",
-        "location": {
-          "rowIdx": 5,
-          "colIdx": 2
-        },
-        "spellIds": [
-          17074,
-          17075,
-          17076,
-          17077,
-          17078
-        ],
+        "location": { "rowIdx": 5, "colIdx": 2 },
+        "spellIds": [17074, 17074, 17074, 17074, 17074],
         "maxPoints": 5
       },
       {
-        "fieldName": "swiftmend",
-        "location": {
-          "rowIdx": 6,
-          "colIdx": 1
-        },
-        "spellIds": [
-          18562
-        ],
-        "maxPoints": 1,
-        "prereqLocation": {
-          "rowIdx": 3,
-          "colIdx": 1
-        }
+        "fieldName": "wildGrowth",
+        "location": { "rowIdx": 6, "colIdx": 1 },
+        "spellIds": [408120],
+        "maxPoints": 1
       }
     ]
   }
