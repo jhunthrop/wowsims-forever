@@ -230,3 +230,122 @@ func TestEnduranceGrantsTheOneHitStat(t *testing.T) {
 		t.Errorf("Endurance's finalized Health is %v, want %v (5%% of %v base Health); the demo reads it as 5%% Health and 1%% Hit", got, want, baseHealth)
 	}
 }
+
+// newGnomeEurekaTestCaster builds a bare Gnome spellcaster with just enough
+// wired up to exercise RegisterSpell/AddMajorCooldown/OnCastComplete - the
+// same "bare Unit plus Env{MeasuringStats:true}" pattern buffs_test.go's
+// newBareTestUnit and spell_school_test.go's casters use, rather than
+// standing up a full running Simulation.
+func newGnomeEurekaTestCaster() *Character {
+	character := &Character{
+		Unit: Unit{
+			Type:        PlayerUnit,
+			Level:       60,
+			auraTracker: newAuraTracker(),
+			PseudoStats: stats.NewPseudoStats(),
+			Env:         &Environment{MeasuringStats: true},
+		},
+		Race: proto.Race_RaceGnome,
+	}
+	character.BaseMana = 1000
+	// AddMajorCooldown reads character.Env directly off this manager
+	// without a nil check; NewCharacter wires it via initialize(), which
+	// this bare test caster stands in for.
+	character.majorCooldownManager = majorCooldownManager{character: character}
+	return character
+}
+
+// Regression for the goldens-reconciliation defect: Eureka! is a permanent
+// (Duration: NeverExpires) aura, turned off by its stack count reaching
+// zero rather than by a timer. The "just activated by this same cast"
+// guard other one-shot procs in this codebase use on OnCastComplete
+// (RemainingDuration(sim) == Duration, see mage.ClearcastingAura) is
+// always true for a NeverExpires aura - RemainingDuration returns
+// NeverExpires whenever Duration is NeverExpires - so it silently
+// swallowed every stack forever: Eureka!'s -50% magic-school cost and
+// +10% magic damage stayed up for the whole fight instead of three
+// casts, moving the Gnome mage goldens +72.6% NoBuffs / +25.2% FullBuffs
+// against 0900ba8b8. This casts four qualifying spells on a bare Gnome
+// caster and checks the aura's stacks go 3 -> 2 -> 1 -> gone, and that
+// the fourth cast (after the aura is gone) pays full cost.
+func TestEurekaConsumesOneStackPerQualifyingCast(t *testing.T) {
+	character := newGnomeEurekaTestCaster()
+
+	var eureka *Racial
+	for _, r := range RacialsFor(proto.Race_RaceGnome) {
+		if r.Name == "Eureka!" {
+			r := r
+			eureka = &r
+		}
+	}
+	if eureka == nil {
+		t.Fatal("Gnome has no Eureka!")
+	}
+	eureka.Apply(character)
+
+	eurekaSpell := character.GetSpell(ActionID{SpellID: 1_000_101})
+	if eurekaSpell == nil {
+		t.Fatal("Eureka! did not register its own spell (unexpected SpellID; check racials.go)")
+	}
+
+	// A qualifying "ability": any spell with a resource cost, in a magic
+	// school - what Eureka!'s -50% cost / +10% damage actually touches.
+	testSpell := character.RegisterSpell(SpellConfig{
+		ActionID:         ActionID{SpellID: 1_000_102},
+		SpellSchool:      SpellSchoolArcane,
+		ProcMask:         ProcMaskSpellDamage,
+		DamageMultiplier: 1,
+		ThreatMultiplier: 1,
+		Flags:            SpellFlagAPL,
+		ManaCost:         ManaCostOptions{BaseCost: 0.1},
+		Cast: CastConfig{
+			DefaultCast: Cast{GCD: GCDDefault},
+		},
+		ApplyEffects: func(*Simulation, *Unit, *Spell) {},
+	})
+	if testSpell.Cost == nil {
+		t.Fatal("test spell has no Cost; Eureka!'s stack consumption is gated on spell.Cost != nil")
+	}
+	fullCost := testSpell.Cost.GetCurrentCost()
+	if fullCost <= 0 {
+		t.Fatalf("test spell's base cost is %v, want > 0", fullCost)
+	}
+
+	sim := &Simulation{}
+	eurekaSpell.ApplyEffects(sim, nil, eurekaSpell) // the same activation path the Eureka! major cooldown runs when cast
+
+	aura := character.GetAura("Eureka!")
+	if aura == nil {
+		t.Fatal("Eureka! aura was not registered")
+	}
+	if !aura.IsActive() || aura.GetStacks() != 3 {
+		t.Fatalf("after activating, Eureka! has %d stacks (active=%v), want 3 stacks active", aura.GetStacks(), aura.IsActive())
+	}
+	if got, want := testSpell.Cost.GetCurrentCost(), fullCost/2; got != want {
+		t.Errorf("Eureka! active: test spell costs %v, want %v (50%% of %v)", got, want, fullCost)
+	}
+
+	for i, wantStacks := range []int32{2, 1, 0} {
+		character.OnCastComplete(sim, testSpell)
+		if got := aura.GetStacks(); got != wantStacks {
+			t.Errorf("after qualifying cast %d, Eureka! has %d stacks, want %d", i+1, got, wantStacks)
+		}
+	}
+	if aura.IsActive() {
+		t.Error("Eureka! is still active after its third stack was consumed, want it gone")
+	}
+	if got := testSpell.Cost.GetCurrentCost(); got != fullCost {
+		t.Errorf("Eureka! gone: test spell costs %v, want the full %v", got, fullCost)
+	}
+
+	// A fourth qualifying cast: the aura is already gone (removed from
+	// character.onCastCompleteAuras when it deactivated), so this must be
+	// a no-op rather than a fourth stack removal.
+	character.OnCastComplete(sim, testSpell)
+	if aura.IsActive() {
+		t.Error("a cast after Eureka! is gone must not reactivate it")
+	}
+	if got := testSpell.Cost.GetCurrentCost(); got != fullCost {
+		t.Errorf("fourth cast: test spell costs %v, want the full %v (Eureka! already consumed)", got, fullCost)
+	}
+}

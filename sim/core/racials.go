@@ -509,14 +509,20 @@ var racialsByRace = map[proto.Race][]Racial{
 						character.PseudoStats.SchoolDamageDealtMultiplier.MultiplyMagicSchools(1 / 1.1)
 					},
 					OnCastComplete: func(aura *Aura, sim *Simulation, spell *Spell) {
-						if aura.RemainingDuration(sim) == aura.Duration {
-							// Just activated by this same cast; don't consume a stack for it.
-							return
-						}
+						// Eureka! is a permanent (NeverExpires) aura toggled
+						// off by stacks reaching zero, not by a timer, so
+						// the "just activated by this same cast" guard other
+						// one-shot procs in this codebase use
+						// (RemainingDuration == Duration) is always true for
+						// a NeverExpires aura and would silently swallow
+						// every stack forever. It isn't needed anyway: the
+						// spell that activates this aura carries
+						// SpellFlagNoOnCastComplete, so its own completion
+						// never reaches this callback in the first place.
 						if spell.Cost == nil {
 							return
 						}
-						aura.RemoveStack(sim)
+						aura.RemoveStack(sim) // SetStacks deactivates the aura once stacks hit 0.
 					},
 				})
 
