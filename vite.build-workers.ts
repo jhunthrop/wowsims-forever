@@ -1,4 +1,5 @@
-import fs from 'node:fs/promises';
+import fs from 'node:fs';
+import fsPromises from 'node:fs/promises';
 
 import { exec as syncExec } from 'child_process';
 import { promisify } from 'util';
@@ -22,8 +23,11 @@ const args = minimist(process.argv.slice(2), { boolean: ['watch'] });
 const buildWorkers = async () => {
 	const { stdout } = await execAsync('go env GOROOT');
 	const GO_ROOT = stdout.replace('\n', '');
-	const wasmExecutablePath = path.join(GO_ROOT, '/misc/wasm/wasm_exec.js');
-	const wasmFile = await fs.readFile(wasmExecutablePath, 'utf8');
+	// Go moved wasm_exec.js from misc/wasm to lib/wasm in Go 1.24.
+	// Prefer the new location and fall back for older toolchains.
+	const wasmExecCandidates = [path.join(GO_ROOT, 'lib', 'wasm', 'wasm_exec.js'), path.join(GO_ROOT, 'misc', 'wasm', 'wasm_exec.js')];
+	const wasmExecutablePath = wasmExecCandidates.find(p => fs.existsSync(p)) ?? wasmExecCandidates[0];
+	const wasmFile = await fsPromises.readFile(wasmExecutablePath, 'utf8');
 
 	Object.entries(workers).forEach(async ([name, sourcePath]) => {
 		const baseConfig = getBaseConfig({ command: 'build', mode: 'production' });

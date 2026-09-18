@@ -1,2 +1,7 @@
-# This directory is for Go code generated from the *.proto files in /proto.
-*.pb.go
+# NOTE FOR UPSTREAM MERGES: this file used to be `*.pb.go`.
+# The Forever fork commits the generated protobuf code on purpose. The site
+# repository consumes this module at a pinned pseudo-version, and the Go
+# module system resolves packages from the commit, so a generated-but-
+# ignored package makes the module unusable as a dependency.
+# `make proto` regenerates; sim/core/proto/generated_test.go fails if the
+# committed output drifts from proto/*.proto.

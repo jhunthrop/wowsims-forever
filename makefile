@@ -195,6 +195,11 @@ release: wowsimclassic wowsimclassic-windows.exe
 	zip wowsimcli-windows.exe.zip wowsimcli-windows.exe
 
 sim/core/proto/api.pb.go: proto/*.proto
+	@command -v protoc-gen-go >/dev/null || { \
+	  echo "protoc-gen-go not on PATH."; \
+	  echo "  go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.6"; \
+	  echo "  export PATH=\$$PATH:\$$(go env GOPATH)/bin"; \
+	  exit 1; }
 	protoc -I=./proto --go_out=./sim/core ./proto/*.proto
 
 # Only useful for building the lib on a host platform that matches the target platform
