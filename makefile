@@ -269,3 +269,34 @@ endif
 
 webworkers:
 	npx tsx vite.build-workers.ts --watch=$(if $(WATCH),true,false)
+
+# Where the site repository is checked out, for the data lane's outputs.
+SITE_DIR ?= /Users/jh/code/forever
+# Which build's constants to generate from. The active build is the
+# mined beta client; an Era regeneration is an explicit override, never
+# the default, because a default that points at Era would quietly ship
+# Era numbers the day the data lane's output appears.
+BUILD ?= 1.60.1.69893
+
+.PHONY: spellconst
+# spellconst regenerates the per-class constants files from the data
+# lane's spellconst output. A Forever patch that changes a number is a
+# pipeline run and this target, not a code edit.
+#
+# The class list is whatever the data lane emitted, not a hardcoded pair:
+# the generator is per class and there is no reason for this target to
+# know which specs the plan happens to cover.
+spellconst:
+	@dir="$(SITE_DIR)/data/builds/$(BUILD)/spellconst"; \
+	if [ ! -d "$$dir" ]; then \
+	  echo "no $$dir: the data lane has not run its simconst command for build $(BUILD) yet."; \
+	  echo "The per-class constants files keep their placeholder headers and the"; \
+	  echo "ability files keep their literals, each already marked unconfirmed."; \
+	  exit 1; \
+	fi; \
+	for src in "$$dir"/*.json; do \
+	  class=$$(basename "$$src" .json); \
+	  test -d "sim/$$class" || { echo "no sim/$$class for $$src"; exit 1; }; \
+	  go run ./sim/core/spellconst/gen -in "$$src" -out "sim/$$class/constants_auto_gen.go" -package "$$class" || exit 1; \
+	done
+	gofmt -w ./sim

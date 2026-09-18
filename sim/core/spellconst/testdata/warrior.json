@@ -1,0 +1,51 @@
+{
+  "class_slug": "warrior",
+  "build": "1.15.9.69722",
+  "spells": [
+    {
+      "id": 23881,
+      "name": "Bloodthirst",
+      "rank": 1,
+      "base_points_low": 160,
+      "base_points_high": 160,
+      "coefficient": 0.15,
+      "cooldown_ms": 6000,
+      "cast_time_ms": 0,
+      "duration_ms": 0,
+      "cost": 30,
+      "school": 1,
+      "family_mask": 2,
+      "level": 40
+    },
+    {
+      "id": 23894,
+      "name": "Bloodthirst",
+      "rank": 2,
+      "base_points_low": 210,
+      "base_points_high": 210,
+      "coefficient": 0.15,
+      "cooldown_ms": 6000,
+      "cast_time_ms": 0,
+      "duration_ms": 0,
+      "cost": 30,
+      "school": 1,
+      "family_mask": 2,
+      "level": 48
+    },
+    {
+      "id": 11605,
+      "name": "Slam",
+      "rank": 4,
+      "base_points_low": 87,
+      "base_points_high": 87,
+      "coefficient": 0,
+      "cooldown_ms": 0,
+      "cast_time_ms": 1500,
+      "duration_ms": 0,
+      "cost": 15,
+      "school": 1,
+      "family_mask": 2097152,
+      "level": 54
+    }
+  ]
+}
