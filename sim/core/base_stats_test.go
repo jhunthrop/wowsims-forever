@@ -142,11 +142,20 @@ func TestBaseStatsFileIsGenerated(t *testing.T) {
 }
 
 // Ratings are straight percentages in the Classic lineage and Forever
-// keeps that (research/08-stats.md 2 and 12.4), so each of these is
-// exactly 1: one point of rating is one percent. A regeneration that
-// produced anything else - a later-expansion conversion factor, say -
-// would silently scale every hit and crit chance in the engine, so the
-// exact value is asserted rather than its sign.
+// keeps that (research/08-stats.md 2: "FLAT PERCENTAGES...the major
+// engine decision and it is settled"), so each of these eight is exactly
+// 1: one point of rating is one percent. Defense/Dodge/Parry/Block are
+// here too, not exempted: combatratings.txt carries those four columns
+// for build 1.60.1.69893, but the table is level-invariant lineage
+// boilerplate (identical across all 123 rows) sitting next to Mastery/
+// Versatility/Corruption/PvP-Power columns Forever provably does not
+// have - it is not the rule, exactly like the Hit/Crit columns of the
+// same table this generator already declines to apply. A regeneration
+// that silently started reading any of these eight from a table would
+// scale every hit, crit, dodge, parry, block and defense chance in the
+// engine, so the exact value is asserted rather than its sign, and the
+// header's disclaimer is asserted too so a change of heart cannot happen
+// silently.
 func TestRatingConstantsAreOneToOnePercentages(t *testing.T) {
 	cases := []struct {
 		name string
@@ -156,43 +165,64 @@ func TestRatingConstantsAreOneToOnePercentages(t *testing.T) {
 		{"HitRatingPerHitChance", HitRatingPerHitChance},
 		{"HasteRatingPerHastePercent", HasteRatingPerHastePercent},
 		{"ExpertiseRatingPerExpertiseChance", ExpertiseRatingPerExpertiseChance},
+		{"DefenseRatingPerDefense", DefenseRatingPerDefense},
+		{"DodgeRatingPerDodgeChance", DodgeRatingPerDodgeChance},
+		{"ParryRatingPerParryChance", ParryRatingPerParryChance},
+		{"BlockRatingPerBlockChance", BlockRatingPerBlockChance},
 	}
 	for _, c := range cases {
 		if c.got != 1 {
-			t.Errorf("%s = %v, want exactly 1 (Forever uses flat percentages)", c.name, c.got)
+			t.Errorf("%s = %v, want exactly 1 (Forever uses flat percentages, research/08-stats.md 2)", c.name, c.got)
 		}
+	}
+
+	b, err := os.ReadFile("base_stats_auto_gen.go")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(b), "is not the rule") {
+		t.Error("base_stats_auto_gen.go no longer documents combatratings.txt as present-but-not-the-rule; if it now reads Defense/Dodge/Parry/Block from that table, research/08-stats.md 2 (flat percentages) has been silently reversed")
 	}
 }
 
-// The four defensive conversions are read from combatratings.txt for
-// build 1.60.1.69893, so the test pins them against that table rather
-// than against a literal: a regeneration that silently zeroed one would
-// otherwise pass.
-//
-// DefenseRatingPerDefense is allowed to equal 1: the pinned 1.60.1.69893
-// combatratings.txt table carries "Defense Skill" as a flat 1 across
-// every level (verified directly against the vendored file), unlike
-// Dodge/Parry/Block, which are not 1. That is a real measured value for
-// this constant, not the flat-percentage sentinel the other three are
-// checked against.
-func TestDefensiveConversionsComeFromTheTable(t *testing.T) {
-	cases := []struct {
-		name        string
-		got         float64
-		canEqualOne bool
-	}{
-		{"DefenseRatingPerDefense", DefenseRatingPerDefense, true},
-		{"DodgeRatingPerDodgeChance", DodgeRatingPerDodgeChance, false},
-		{"ParryRatingPerParryChance", ParryRatingPerParryChance, false},
-		{"BlockRatingPerBlockChance", BlockRatingPerBlockChance, false},
+// basemp.txt and hppersta.txt are two of the three GameTables files the
+// data lane has confirmed exist for build 1.60.1.69893. They are not
+// wired in as new runtime constants - ClassBaseStats' Mana fields and
+// character.go's Stamina->Health dependency already carry these exact
+// values, and duplicating them would just be a second source of truth -
+// but this test pins that the vendored tables and the fork's hand-typed
+// values still agree, so a future drift is caught rather than silently
+// mislabelled unconfirmed.
+func TestBaseManaAndHealthPerStaminaConfirmedAgainstTheTable(t *testing.T) {
+	// basemp.txt, build 1.60.1.69893, level 60.
+	wantMana := map[proto.Class]float64{
+		proto.Class_ClassWarrior: 0,
+		proto.Class_ClassPaladin: 1512,
+		proto.Class_ClassHunter:  1720,
+		proto.Class_ClassRogue:   0,
+		proto.Class_ClassPriest:  1376,
+		proto.Class_ClassShaman:  1520,
+		proto.Class_ClassMage:    1213,
+		proto.Class_ClassWarlock: 1373,
+		proto.Class_ClassDruid:   1244,
 	}
-	for _, c := range cases {
-		if c.got <= 0 {
-			t.Errorf("%s = %v; a conversion read from combatratings.txt is positive", c.name, c.got)
+	for class, want := range wantMana {
+		got := ClassBaseStats[class][stats.Mana]
+		if got != want {
+			t.Errorf("ClassBaseStats[%v][stats.Mana] = %v, want %v (basemp.txt, build 1.60.1.69893, level 60)", class, got, want)
 		}
-		if c.got == 1 && !c.canEqualOne {
-			t.Errorf("%s = 1; that is the flat-percentage value, which means the generator did not read the table for it", c.name)
-		}
+	}
+
+	// hppersta.txt, build 1.60.1.69893, level 60, is a flat 10 (verified
+	// flat across every level in the vendored file). character.go itself
+	// is outside this task's file list, so this is asserted by reading
+	// its source rather than by adding a named constant there.
+	b, err := os.ReadFile("character.go")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(b), "AddStatDependency(stats.Stamina, stats.Health, 10)") {
+		t.Error("character.go's Stamina->Health dependency no longer reads 10; hppersta.txt (build 1.60.1.69893) confirms 10, so update this test's expectation together with the source")
 	}
 }
 
@@ -245,9 +275,17 @@ func TestProvisionalConstantsAreDeclared(t *testing.T) {
 // a vanilla row, marked, and named by ProvisionalConstants, so nobody
 // mistakes a Skyborne sim's numbers for measured ones. When the real
 // table lands this test fails, which is the point.
+//
+// Asserted against RaceOffsets and getBaseStatsCombo - what
+// character.go:153 actually reads to compute a character's base stats -
+// rather than the BaseStatsKey-keyed BaseStats map: that map is
+// unpopulated and unread by any runtime path in this fork, so comparing
+// through it would pass vacuously (two absent entries are both the zero
+// value). Standing ruling (Task 9): no production behaviour, including a
+// package init(), exists purely to give a test something to compare.
 func TestSkyborneBaseStatsAreDeclaredClones(t *testing.T) {
-	al := BaseStats[BaseStatsKey{Race: proto.Race_RaceHighOrderSkyborne, Class: proto.Class_ClassWarrior, Level: 60}]
-	human := BaseStats[BaseStatsKey{Race: proto.Race_RaceHuman, Class: proto.Class_ClassWarrior, Level: 60}]
+	al := getBaseStatsCombo(proto.Race_RaceHighOrderSkyborne, proto.Class_ClassWarrior)
+	human := getBaseStatsCombo(proto.Race_RaceHuman, proto.Class_ClassWarrior)
 	if al != human {
 		t.Log("Skyborne base stats are no longer a clone of Human: a real table has landed. Remove the clone, remove this test, and drop the two entries from ProvisionalConstants.")
 		t.Fail()

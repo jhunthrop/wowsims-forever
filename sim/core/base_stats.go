@@ -83,61 +83,58 @@ var RaceOffsets = map[proto.Race]stats.Stats{
 
 // Forever's unified base Crit is not published, so each class below keeps
 // its Era melee-crit value (the attack table is the load-bearing one for
-// the two launch specs) and drops the spell-crit value; Task 5's
-// regeneration replaces these from the client tables.
+// the two launch specs) and drops the spell-crit value.
+//
+// unconfirmed: chancetomeleecrit.txt and chancetospellcrit.txt do not
+// exist for build 1.60.1.69893 - they 404 on wago and are not among the
+// three GameTables files the data lane has mined (combatratings.txt,
+// basemp.txt, hppersta.txt; see base_stats_provisional.go). Every value
+// in this table is therefore still Era's. Named once here, on the table,
+// rather than repeated on each of the nine class entries below.
 var ClassBaseCrit = map[proto.Class]stats.Stats{
 	proto.Class_ClassUnknown: {},
 	proto.Class_ClassWarrior: {
 		// Forever: merged from SpellCrit 0.0000 + MeleeCrit 0.0000, max().
-		// unconfirmed
 		stats.Crit:  0.0000 * CritRatingPerCritChance,
 		stats.Dodge: 0.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassPaladin: {
 		// Forever: merged from SpellCrit 3.5000 + MeleeCrit 0.7000, max().
-		// unconfirmed
 		stats.Crit:  3.5000 * CritRatingPerCritChance,
 		stats.Dodge: 0.7000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassHunter: {
 		// Forever: merged from SpellCrit 3.6000 + MeleeCrit 0.0000, max().
-		// unconfirmed
 		stats.Crit:  3.6000 * CritRatingPerCritChance,
 		stats.Dodge: 0.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassRogue: {
 		// Forever: merged from SpellCrit 0.0000 + MeleeCrit 0.0000, max().
-		// unconfirmed
 		stats.Crit:  0.0000 * CritRatingPerCritChance,
 		stats.Dodge: 0.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassPriest: {
 		// Forever: merged from SpellCrit 0.8000 + MeleeCrit 3.0000, max().
-		// unconfirmed
 		stats.Crit:  3.0000 * CritRatingPerCritChance,
 		stats.Dodge: 3.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassShaman: {
 		// Forever: merged from SpellCrit 2.3000 + MeleeCrit 1.7000, max().
-		// unconfirmed
 		stats.Crit:  2.3000 * CritRatingPerCritChance,
 		stats.Dodge: 1.7000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassMage: {
 		// Forever: merged from SpellCrit 0.2000 + MeleeCrit 3.2000, max().
-		// unconfirmed
 		stats.Crit:  3.2000 * CritRatingPerCritChance,
 		stats.Dodge: 3.2000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassWarlock: {
 		// Forever: merged from SpellCrit 1.7000 + MeleeCrit 2.0000, max().
-		// unconfirmed
 		stats.Crit:  2.0000 * CritRatingPerCritChance,
 		stats.Dodge: 2.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassDruid: {
 		// Forever: merged from SpellCrit 1.8000 + MeleeCrit 0.9000, max().
-		// unconfirmed
 		stats.Crit:  1.8000 * CritRatingPerCritChance,
 		stats.Dodge: 0.9000 * DodgeRatingPerDodgeChance,
 	},
