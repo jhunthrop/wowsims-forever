@@ -88,48 +88,57 @@ var RaceOffsets = map[proto.Race]stats.Stats{
 var ClassBaseCrit = map[proto.Class]stats.Stats{
 	proto.Class_ClassUnknown: {},
 	proto.Class_ClassWarrior: {
-		// unconfirmed: Era had base SpellCrit 0.0000 and MeleeCrit 0.0000.
+		// Forever: merged from SpellCrit 0.0000 + MeleeCrit 0.0000, max().
+		// unconfirmed
 		stats.Crit:  0.0000 * CritRatingPerCritChance,
 		stats.Dodge: 0.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassPaladin: {
-		// unconfirmed: Era had base SpellCrit 3.5000 and MeleeCrit 0.7000.
-		stats.Crit:  0.7000 * CritRatingPerCritChance,
+		// Forever: merged from SpellCrit 3.5000 + MeleeCrit 0.7000, max().
+		// unconfirmed
+		stats.Crit:  3.5000 * CritRatingPerCritChance,
 		stats.Dodge: 0.7000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassHunter: {
-		// unconfirmed: Era had base SpellCrit 3.6000 and MeleeCrit 0.0000.
-		stats.Crit:  0.0000 * CritRatingPerCritChance,
+		// Forever: merged from SpellCrit 3.6000 + MeleeCrit 0.0000, max().
+		// unconfirmed
+		stats.Crit:  3.6000 * CritRatingPerCritChance,
 		stats.Dodge: 0.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassRogue: {
-		// unconfirmed: Era had base SpellCrit 0.0000 and MeleeCrit 0.0000.
+		// Forever: merged from SpellCrit 0.0000 + MeleeCrit 0.0000, max().
+		// unconfirmed
 		stats.Crit:  0.0000 * CritRatingPerCritChance,
 		stats.Dodge: 0.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassPriest: {
-		// unconfirmed: Era had base SpellCrit 0.8000 and MeleeCrit 3.0000.
+		// Forever: merged from SpellCrit 0.8000 + MeleeCrit 3.0000, max().
+		// unconfirmed
 		stats.Crit:  3.0000 * CritRatingPerCritChance,
 		stats.Dodge: 3.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassShaman: {
-		// unconfirmed: Era had base SpellCrit 2.3000 and MeleeCrit 1.7000.
-		stats.Crit:  1.7000 * CritRatingPerCritChance,
+		// Forever: merged from SpellCrit 2.3000 + MeleeCrit 1.7000, max().
+		// unconfirmed
+		stats.Crit:  2.3000 * CritRatingPerCritChance,
 		stats.Dodge: 1.7000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassMage: {
-		// unconfirmed: Era had base SpellCrit 0.2000 and MeleeCrit 3.2000.
+		// Forever: merged from SpellCrit 0.2000 + MeleeCrit 3.2000, max().
+		// unconfirmed
 		stats.Crit:  3.2000 * CritRatingPerCritChance,
 		stats.Dodge: 3.2000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassWarlock: {
-		// unconfirmed: Era had base SpellCrit 1.7000 and MeleeCrit 2.0000.
+		// Forever: merged from SpellCrit 1.7000 + MeleeCrit 2.0000, max().
+		// unconfirmed
 		stats.Crit:  2.0000 * CritRatingPerCritChance,
 		stats.Dodge: 2.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassDruid: {
-		// unconfirmed: Era had base SpellCrit 1.8000 and MeleeCrit 0.9000.
-		stats.Crit:  0.9000 * CritRatingPerCritChance,
+		// Forever: merged from SpellCrit 1.8000 + MeleeCrit 0.9000, max().
+		// unconfirmed
+		stats.Crit:  1.8000 * CritRatingPerCritChance,
 		stats.Dodge: 0.9000 * DodgeRatingPerDodgeChance,
 	},
 }
@@ -203,15 +212,19 @@ var DodgePerAgiAtLevel = map[proto.Class]float64{
 // CritStatSources names which primary stat(s) feed a class's unified Crit
 // stat via AddStatDependency. Pre-merge, Agility fed MeleeCrit and
 // Intellect fed SpellCrit as two independent pools; Forever unifies both
-// into one Crit stat (Task 4), so a class listed with both sources here
-// now stacks them on that one stat. research/08-stats.md §7 states the
+// into one Crit stat (Task 4). research/08-stats.md §7 states the
 // baseline conversions ("agility→crit … intellect→spell crit") are
 // "entirely unpublished" for the unified model, so this keeps every
-// class's pre-merge sources rather than picking one — unconfirmed hybrid
-// stacking until a later ruling measures it. This table, plus
-// AddCritStatDependencies below, is the single place that ruling edits;
-// it replaces five duplicated AddStatDependency call-site pairs across
-// sim/druid, sim/shaman, sim/paladin, sim/warlock and sim/hunter. It does
+// class's pre-merge sources rather than picking one. A class listed with
+// both sources true (Druid, Shaman, Paladin, Warlock, Hunter) stacks them
+// on the one Crit stat — unconfirmed until a later ruling measures it. A
+// class listed with only one (Rogue, Mage, Priest, Warrior) is unchanged
+// from before the merge: it converted only that stat and still does. All
+// nine classes that wire a base-stat-to-Crit dependency are listed here;
+// this table, plus AddCritStatDependencies below, is the single place a
+// later ruling edits, replacing nine duplicated AddStatDependency call
+// sites across sim/druid, sim/shaman, sim/paladin, sim/warlock,
+// sim/hunter, sim/rogue, sim/mage, sim/priest and sim/warrior. It does
 // not cover pet units, which borrow a different (non-owner) class's rate
 // and are wired directly at their own call sites.
 type CritStatSources struct {
@@ -219,14 +232,19 @@ type CritStatSources struct {
 	Intellect bool
 }
 
-// unconfirmed: every entry below stacks Agility- and Intellect-derived
-// Crit on the one unified stat, per the ruling above.
 var ClassCritStatSources = map[proto.Class]CritStatSources{
+	// unconfirmed: stacks Agility- and Intellect-derived Crit on the one
+	// unified stat, per the ruling above.
 	proto.Class_ClassDruid:   {Agility: true, Intellect: true},
 	proto.Class_ClassShaman:  {Agility: true, Intellect: true},
 	proto.Class_ClassPaladin: {Agility: true, Intellect: true},
 	proto.Class_ClassWarlock: {Agility: true, Intellect: true},
 	proto.Class_ClassHunter:  {Agility: true, Intellect: true},
+	// single-source, unchanged from before the merge.
+	proto.Class_ClassRogue:   {Agility: true},
+	proto.Class_ClassWarrior: {Agility: true},
+	proto.Class_ClassMage:    {Intellect: true},
+	proto.Class_ClassPriest:  {Intellect: true},
 }
 
 // AddCritStatDependencies wires character's Crit stat to whichever base

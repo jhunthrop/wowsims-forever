@@ -9,18 +9,28 @@ import (
 
 // Pins the H3 ruling from the Task 4 fix round: research/08-stats.md §7
 // leaves the baseline Agility/Intellect-to-Crit conversion "entirely
-// unpublished" for the unified model, so every class that converted both
-// before the merge keeps both, stacking on the one Crit stat, and this
-// table is the single place a later ruling edits instead of the five
-// AddStatDependency call sites in sim/druid, sim/shaman, sim/paladin,
-// sim/warlock and sim/hunter.
+// unpublished" for the unified model, so every class keeps its pre-merge
+// sources — a hybrid that converted both keeps both (stacking, marked
+// unconfirmed); a class that converted only one keeps only that one,
+// unchanged. All nine classes that wire a base-stat-to-Crit dependency are
+// asserted here against the one table (sim/core/base_stats.go), which is
+// the single place a later ruling edits instead of the nine
+// AddStatDependency call sites across sim/druid, sim/shaman,
+// sim/paladin, sim/warlock, sim/hunter, sim/rogue, sim/mage, sim/priest
+// and sim/warrior.
 func TestCritStatSourcesArePinned(t *testing.T) {
 	expected := map[proto.Class]CritStatSources{
+		// Hybrids: stack Agility- and Intellect-derived Crit, unconfirmed.
 		proto.Class_ClassDruid:   {Agility: true, Intellect: true},
 		proto.Class_ClassShaman:  {Agility: true, Intellect: true},
 		proto.Class_ClassPaladin: {Agility: true, Intellect: true},
 		proto.Class_ClassWarlock: {Agility: true, Intellect: true},
 		proto.Class_ClassHunter:  {Agility: true, Intellect: true},
+		// Single-source: unchanged from before the merge.
+		proto.Class_ClassRogue:   {Agility: true},
+		proto.Class_ClassWarrior: {Agility: true},
+		proto.Class_ClassMage:    {Intellect: true},
+		proto.Class_ClassPriest:  {Intellect: true},
 	}
 
 	if len(ClassCritStatSources) != len(expected) {
@@ -65,12 +75,13 @@ func TestCritStatSourcesStackForHybrids(t *testing.T) {
 	}
 }
 
-// A class absent from ClassCritStatSources (e.g. Rogue, Mage, Priest —
-// none of which wire a base-stat-to-Crit dependency today) gets neither
-// dependency, and the helper must not panic on an unlisted class.
+// A class absent from ClassCritStatSources (every class that wires a
+// base-stat-to-Crit dependency is listed — see TestCritStatSourcesArePinned)
+// gets neither dependency, and the helper must not panic on an unlisted
+// class.
 func TestCritStatSourcesNoOpForUnlistedClass(t *testing.T) {
 	character := &Character{}
-	AddCritStatDependencies(character, proto.Class_ClassRogue)
+	AddCritStatDependencies(character, proto.Class_ClassUnknown)
 
 	result := character.SortAndApplyStatDependencies(stats.Stats{
 		stats.Agility:   100,
@@ -78,5 +89,26 @@ func TestCritStatSourcesNoOpForUnlistedClass(t *testing.T) {
 	})
 	if result[stats.Crit] != 0 {
 		t.Fatalf("Crit = %v, want 0 for a class with no CritStatSources entry", result[stats.Crit])
+	}
+}
+
+// A single-source class (e.g. Rogue: Agility only) draws Crit from only
+// that stat — the Intellect it also has does not leak in, unlike a
+// hybrid's deliberate stacking in TestCritStatSourcesStackForHybrids.
+func TestCritStatSourcesSingleSourceDoesNotStack(t *testing.T) {
+	class := proto.Class_ClassRogue
+	agi, intel := 100.0, 200.0
+
+	character := &Character{}
+	AddCritStatDependencies(character, class)
+
+	result := character.SortAndApplyStatDependencies(stats.Stats{
+		stats.Agility:   agi,
+		stats.Intellect: intel,
+	})
+
+	wantCrit := agi * CritPerAgiAtLevel[class] * CritRatingPerCritChance
+	if result[stats.Crit] != wantCrit {
+		t.Fatalf("Crit = %v, want %v (Agility only; Intellect must not contribute)", result[stats.Crit], wantCrit)
 	}
 }
