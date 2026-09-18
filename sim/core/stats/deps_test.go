@@ -134,3 +134,21 @@ func TestHealingToSpellDamageAppliesOneThird(t *testing.T) {
 		t.Errorf("SpellDamage = %v, want 150 (50 base + 300/3)", got[SpellDamage])
 	}
 }
+
+// A unit with no healing power must gain nothing from this dependency. This
+// guards against a future edit that turns HealingPower/3 into "HealingPower/3
+// plus some constant offset" — a regression the nonzero-case test above
+// cannot catch on its own, since it never observes the dependency at zero.
+func TestHealingToSpellDamageAppliesNothingAtZeroHealingPower(t *testing.T) {
+	sdm := NewStatDependencyManager()
+	sdm.AddStatDependency(HealingPower, SpellDamage, 1.0/3.0)
+	sdm.FinalizeStatDeps()
+
+	got := sdm.ApplyStatDependencies(Stats{SpellDamage: 50})
+	if got[HealingPower] != 0 {
+		t.Errorf("HealingPower = %v, want it unchanged at 0", got[HealingPower])
+	}
+	if got[SpellDamage] != 50 {
+		t.Errorf("SpellDamage = %v, want 50 unchanged; zero HealingPower must grant zero bonus damage", got[SpellDamage])
+	}
+}
