@@ -140,9 +140,12 @@ func TestTheNamedRacialsAreAllPresent(t *testing.T) {
 	}
 }
 
-// The seven entries whose numbers the demo did not settle are named out
-// loud, so the spec support page can say what the sim is guessing at.
-func TestUnconfirmedRacialsNamesTheSeven(t *testing.T) {
+// The eight entries whose numbers - or, for Undead's fourth racial, whose
+// very name - the demo did not settle are named out loud, so the spec
+// support page can say what the sim is guessing at. An unnamed or
+// unpublished racial is Confirmed: false exactly like an unpublished
+// percentage; a name is exactly as unconfirmed as a number.
+func TestUnconfirmedRacialsNamesTheEight(t *testing.T) {
 	got := UnconfirmedRacials()
 	if len(got) == 0 {
 		t.Skip("nothing is unconfirmed: the beta settled the numbers and this test has done its job")
@@ -153,19 +156,20 @@ func TestUnconfirmedRacialsNamesTheSeven(t *testing.T) {
 		t.Log(line)
 	}
 	joined := strings.Join(got, "\n")
-	// All seven by name, and exactly seven. The count is asserted
-	// because an eighth means a number was marked unconfirmed without
-	// anyone deciding it was, and a sixth means one was quietly promoted
-	// to confirmed - and a test named for seven that checks five would
+	// All eight by name, and exactly eight. The count is asserted because
+	// a ninth means a number was marked unconfirmed without anyone
+	// deciding it was, and a seventh means one was quietly promoted to
+	// confirmed - and a test named for eight that checks six would
 	// notice neither.
 	want := []string{
-		"Mace Specialization", // Dwarf: the crit percentage is unread
-		"Big Game Hunter",     // Dwarf: the damage percentage is unread
-		"Quickness",           // Night Elf: 1% or 2% dodge, the two readings disagree
-		"Berserking",          // Troll: 10 s or 12 s, the two readings disagree
-		"Touch of the Grave",  // Undead: proc chance and amount unread
-		"Cultivation",         // Tauren: which of these two is the second
-		"Plainsrunning",       //   active is unread; both are listed
+		"Mace Specialization",       // Dwarf: the crit percentage is unread
+		"Big Game Hunter",           // Dwarf: the damage percentage is unread
+		"Quickness",                 // Night Elf: 1% or 2% dodge, the two readings disagree
+		"Berserking",                // Troll: 10 s or 12 s, the two readings disagree
+		"Touch of the Grave",        // Undead: proc chance and amount unread
+		"Unannounced Fourth Racial", // Undead: no source names this racial at all
+		"Cultivation",               // Tauren: which of these two is the second
+		"Plainsrunning",             //   active is unread; both are listed
 	}
 	for _, w := range want {
 		if !strings.Contains(joined, w) {
@@ -188,6 +192,14 @@ func TestUnconfirmedRacialsNamesTheSeven(t *testing.T) {
 // for every Tauren - and the test therefore applies it to a character
 // and reads stats.Hit back, rather than only checking that an entry of
 // that name exists, which was all an earlier draft did.
+//
+// Endurance's Health bonus is a genuine multiplicative stat dependency
+// (MultiplyStat), not a flat AddStat - production code carries no extra
+// behaviour whose only purpose is to make an unfinalized GetStat read
+// succeed. So this test gives the character a known base Health, finalizes
+// the character's stat dependencies the same way the real engine does
+// before a sim runs, and reads the finalized Health back, instead of
+// reading GetStat on a character that was never finalized.
 func TestEnduranceGrantsTheOneHitStat(t *testing.T) {
 	var endurance *Racial
 	for _, r := range RacialsFor(proto.Race_RaceTauren) {
@@ -204,14 +216,17 @@ func TestEnduranceGrantsTheOneHitStat(t *testing.T) {
 	}
 
 	character := &Character{}
+	const baseHealth = 4000.0
+	character.AddStat(stats.Health, baseHealth)
 	beforeHit := character.GetStat(stats.Hit)
-	beforeHealth := character.GetStat(stats.Health)
 	endurance.Apply(character)
 
 	if got, want := character.GetStat(stats.Hit)-beforeHit, 1.0*HitRatingPerHitChance; got != want {
 		t.Errorf("Endurance granted %v Hit, want %v (1%% at %v rating per percent)", got, want, HitRatingPerHitChance)
 	}
-	if character.GetStat(stats.Health) == beforeHealth {
-		t.Error("Endurance granted no Health; the demo reads it as 5% Health and 1% Hit")
+
+	finalStats := character.StatDependencyManager.SortAndApplyStatDependencies(character.GetStats())
+	if got, want := finalStats[stats.Health], baseHealth*1.05; got != want {
+		t.Errorf("Endurance's finalized Health is %v, want %v (5%% of %v base Health); the demo reads it as 5%% Health and 1%% Hit", got, want, baseHealth)
 	}
 }

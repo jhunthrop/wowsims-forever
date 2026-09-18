@@ -19,12 +19,16 @@ import (
 // and are recorded with their citations in data/curated/races.json in the
 // site repository. Most numbers are corroborated by both transcriptions
 // (and several by the Deep Dive panel directly) and ship as Confirmed.
-// Seven entries, across the whole table, are not: either the two
-// transcriptions disagree, or neither gives a number at all. Those seven
-// carry `Confirmed: false` and a Note explaining what is unread, and
-// UnconfirmedRacials() reports exactly those seven for the spec support
+// Eight entries, across the whole table, are not: either the two
+// transcriptions disagree, neither gives a number at all, or (Undead's
+// fourth racial) no source names the racial itself. Those eight carry
+// `Confirmed: false` and a Note explaining what is unread, and
+// UnconfirmedRacials() reports exactly those eight for the spec support
 // page. Where the two transcriptions disagree on a number, the lower
-// reading ships and the disagreement is in the entry's Note.
+// reading ships and the disagreement is in the entry's Note. An unnamed
+// or unpublished racial is always Confirmed: false, regardless of whether
+// it happens to have a number attached - a name is exactly as unconfirmed
+// as a percentage.
 //
 // TEN RACES. Skyborne is one neutral race whose faction is chosen at
 // character creation and whose second active differs by faction, so the
@@ -62,8 +66,9 @@ type Racial struct {
 	// Forever racial's id is above a million or it is unknown.
 	SpellID int32
 	// Confirmed is true when the entry's numbers (if it has any) are
-	// corroborated rather than contested or simply missing. See the
-	// SOURCING note above the seven that are false.
+	// corroborated rather than contested or simply missing, and when the
+	// racial itself is named by a source. See the SOURCING note above
+	// the eight that are false.
 	Confirmed bool
 	// Note says what is unread. Required when Confirmed is false.
 	Note  string
@@ -144,18 +149,30 @@ func skyborneShared() []Racial {
 			Note: "",
 			Apply: func(character *Character) {
 				// 5% damage against Elementals, demo transcription.
-				character.Env.RegisterPostFinalizeEffect(func() {
-					for _, t := range character.Env.Encounter.Targets {
-						if t.MobType == proto.MobType_MobTypeElemental {
-							for _, at := range character.AttackTables[t.UnitIndex] {
-								at.DamageDealtMultiplier *= 1.05
-							}
-						}
-					}
-				})
+				applyMobTypeDamageMultiplier(character, proto.MobType_MobTypeElemental, 1.05, 1)
 			},
 		},
 	}
+}
+
+// applyMobTypeDamageMultiplier registers a post-finalize effect that
+// multiplies DamageDealtMultiplier (and, when critMultiplier != 1, also
+// CritMultiplier) against every target of the given MobType. Shared by
+// Elemental Insight and Beast Slaying, the two racials that key off mob
+// type the way Task 8's item-side NewMobTypeDamageEffect does.
+func applyMobTypeDamageMultiplier(character *Character, mobType proto.MobType, damageMultiplier, critMultiplier float64) {
+	character.Env.RegisterPostFinalizeEffect(func() {
+		for _, t := range character.Env.Encounter.Targets {
+			if t.MobType == mobType {
+				for _, at := range character.AttackTables[t.UnitIndex] {
+					at.DamageDealtMultiplier *= damageMultiplier
+					if critMultiplier != 1 {
+						at.CritMultiplier *= critMultiplier
+					}
+				}
+			}
+		}
+	})
 }
 
 var racialsByRace = map[proto.Race][]Racial{
@@ -410,9 +427,13 @@ var racialsByRace = map[proto.Race][]Racial{
 			},
 		},
 		{
-			Name: "Unannounced Fourth Racial", Kind: RacialPassive, Confirmed: true,
-			Note:  "",
-			Apply: func(*Character) {}, // name and effect are unannounced; no effect until one is
+			Name: "Unannounced Fourth Racial", Kind: RacialPassive, Confirmed: false,
+			Note: "no source names a fourth Undead racial or its effect; data/builds/1.60.1.69893/races.json's Undead row (id 5) names only Will of the Forsaken, Cannibalize and Touch of the Grave",
+			Apply: func(*Character) {
+				// unconfirmed: neither a name nor an effect is published
+				// for this slot, so it is declared - not omitted - with
+				// no effect until one is.
+			},
 		},
 	},
 
@@ -435,17 +456,15 @@ var racialsByRace = map[proto.Race][]Racial{
 			Name: "Endurance", Kind: RacialPassive, Confirmed: true,
 			Note: "",
 			Apply: func(character *Character) {
-				// 5% Health and 1% Hit, demo transcription. The Health
-				// bonus is the usual multiplicative stat dependency every
-				// other "+X%" racial in this file uses, resolved once the
-				// character's stats finalize; the tiny AddStat top-up
-				// below exists only so the racial is visibly non-empty
-				// immediately, including on a bare Character with no
-				// simulation environment (see
-				// TestEnduranceGrantsTheOneHitStat) - it is negligible
-				// next to any real character's Health total.
+				// 5% Health and 1% Hit, demo transcription. Health is the
+				// usual multiplicative stat dependency every other "+X%"
+				// racial in this file uses, resolved once the character's
+				// stats finalize - see TestEnduranceGrantsTheOneHitStat,
+				// which finalizes a character's stat dependencies and
+				// reads the result back, rather than reading GetStat on a
+				// never-finalized character (no production behaviour
+				// exists here purely to make an unfinalized read succeed).
 				character.MultiplyStat(stats.Health, 1.05)
-				character.AddStat(stats.Health, enduranceHealthVisibilityBonus)
 				// After the Task 4 Hit/Crit merge there is one Hit stat
 				// covering melee, ranged and spell, so this is one line
 				// where vanilla would have needed two.
@@ -534,7 +553,7 @@ var racialsByRace = map[proto.Race][]Racial{
 				// point value of 5% of Classic's 100-point cap.
 				character.MultiplyStat(stats.Mana, 1.05)
 				character.AddStat(stats.Rage, 0.05*MaxRage)
-				character.AddStat(stats.Energy, 0.05*BaseEnergyCap)
+				character.AddStat(stats.Energy, 0.05*expansiveMindEnergyCap)
 			},
 		},
 		{
@@ -574,16 +593,7 @@ var racialsByRace = map[proto.Race][]Racial{
 			Note: "",
 			Apply: func(character *Character) {
 				// +5% damage against Beasts.
-				character.Env.RegisterPostFinalizeEffect(func() {
-					for _, t := range character.Env.Encounter.Targets {
-						if t.MobType == proto.MobType_MobTypeBeast {
-							for _, at := range character.AttackTables[t.UnitIndex] {
-								at.DamageDealtMultiplier *= 1.05
-								at.CritMultiplier *= 1.05
-							}
-						}
-					}
-				})
+				applyMobTypeDamageMultiplier(character, proto.MobType_MobTypeBeast, 1.05, 1.05)
 			},
 		},
 		{
@@ -619,17 +629,13 @@ var racialsByRace = map[proto.Race][]Racial{
 	}}, skyborneShared()...),
 }
 
-// enduranceHealthVisibilityBonus keeps Endurance's Health bonus visible
-// even on a bare Character with no base Health set yet (see
-// TestEnduranceGrantsTheOneHitStat); the real effect is the MultiplyStat
-// dependency next to it, which only resolves once the sim's stats
-// finalize.
-const enduranceHealthVisibilityBonus = 1
-
-// BaseEnergyCap is Classic's fixed Energy pool size, used to convert
-// Expansive Mind's "+5% Energy" into a flat point value the same way
-// MaxRage is used for Rage.
-const BaseEnergyCap = 100
+// expansiveMindEnergyCap is Classic's fixed Energy pool size, used to
+// convert Expansive Mind's "+5% Energy" into a flat point value the same
+// way MaxRage is used for Rage. Unexported and file-local rather than a
+// new shared constant: sim/core/energy.go and sim/rogue/rogue.go already
+// hardcode this same 100-point baseline inline, and unifying all three
+// into one shared constant is a cleanup outside this file's scope.
+const expansiveMindEnergyCap = 100
 
 // If customPercentage is 0, use the baseline Berserking calculations from health missing
 // otherwise create a cooldown hard-coded to the custom percentage.
