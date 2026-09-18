@@ -1,7 +1,10 @@
 package spellconst
 
 import (
+	"encoding/json"
 	"math"
+	"os"
+	"path/filepath"
 	"testing"
 )
 
@@ -57,25 +60,73 @@ func TestRanksAreOrdered(t *testing.T) {
 	}
 }
 
+// The emitted shape carries cast time, GCD, the two cooldown columns,
+// cost and every effect verbatim for the top rank of the fixture's
+// Bloodthirst, matching the real build 1.60.1.69893 warrior.json. A
+// player's actual cooldown comes from category_cooldown_ms here, because
+// CooldownMS itself is 0 — the ranks share one cooldown.
+func TestBloodthirstEffectsResolve(t *testing.T) {
+	c, err := Load("testdata/warrior.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	s, ok := c.ByID(23894)
+	if !ok {
+		t.Fatal("spell 23894 (Bloodthirst) not found")
+	}
+	if s.CastTimeMS != 0 {
+		t.Errorf("CastTimeMS = %d, want 0", s.CastTimeMS)
+	}
+	if s.GCDMS != 1500 {
+		t.Errorf("GCDMS = %d, want 1500", s.GCDMS)
+	}
+	if s.CategoryCooldownMS != 6000 {
+		t.Errorf("CategoryCooldownMS = %d, want 6000", s.CategoryCooldownMS)
+	}
+	if s.EffectiveCooldownMS() != 6000 {
+		t.Errorf("EffectiveCooldownMS() = %d, want 6000 (falls back to the category cooldown when CooldownMS is 0)", s.EffectiveCooldownMS())
+	}
+	if s.Cost != 300 {
+		t.Errorf("Cost = %v, want 300", s.Cost)
+	}
+	if len(s.Effects) != 3 {
+		t.Fatalf("len(Effects) = %d, want 3", len(s.Effects))
+	}
+	wantAmounts := []float64{48, 35, 10}
+	for i, want := range wantAmounts {
+		if s.Effects[i].Amount != want {
+			t.Errorf("Effects[%d].Amount = %v, want %v", i, s.Effects[i].Amount, want)
+		}
+	}
+}
+
 // The data lane emits the DB2 coefficient columns verbatim, zeros
 // included, because EffectBonusCoefficient is routinely 0 or wrong for
 // Classic-lineage spells. A zero therefore means "absent", and the
 // vanilla convention fills it in — never a literal zero coefficient,
-// which would silently remove all spell-power scaling from a spell.
+// which would silently remove all spell-power scaling from an effect.
 func TestZeroCoefficientFallsBackToTheConvention(t *testing.T) {
 	c, err := Load("testdata/warrior.json")
 	if err != nil {
 		t.Fatal(err)
 	}
-	s, ok := c.ByID(11605) // Slam rank 4 in the fixture, coefficient 0
+	s, ok := c.ByID(772) // Rend rank 1 in the fixture, coefficient 0, a 3s-tick 9s dot
 	if !ok {
-		t.Fatal("spell 11605 not found")
+		t.Fatal("spell 772 not found")
 	}
-	if s.Coefficient == 0 {
+	if len(s.Effects) != 1 {
+		t.Fatalf("len(Effects) = %d, want 1", len(s.Effects))
+	}
+	e := s.Effects[0]
+	if e.ResolvedSPCoefficient == 0 {
 		t.Error("a zero DB2 coefficient was kept as zero; it must fall back to the convention")
 	}
-	if s.CoefficientSource != "convention" {
-		t.Errorf("CoefficientSource = %q, want %q", s.CoefficientSource, "convention")
+	if e.CoefficientSource != "convention" {
+		t.Errorf("CoefficientSource = %q, want %q", e.CoefficientSource, "convention")
+	}
+	want, _ := CoefficientFor(s.CastTimeMS, s.DurationMS, false)
+	if math.Abs(e.ResolvedSPCoefficient-want) > 1e-9 {
+		t.Errorf("ResolvedSPCoefficient = %v, want the duration/15 convention's %v", e.ResolvedSPCoefficient, want)
 	}
 }
 
@@ -84,15 +135,17 @@ func TestNonZeroCoefficientIsKept(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	s, ok := c.ByID(23881) // Bloodthirst rank 1 in the fixture, coefficient 0.15
+	s, ok := c.ByID(23881) // Bloodthirst rank 1 in the fixture, coefficient 1.0 on every effect
 	if !ok {
 		t.Fatal("spell 23881 not found")
 	}
-	if math.Abs(s.Coefficient-0.15) > 1e-9 {
-		t.Errorf("Coefficient = %v, want the table's 0.15", s.Coefficient)
-	}
-	if s.CoefficientSource != "table" {
-		t.Errorf("CoefficientSource = %q, want %q", s.CoefficientSource, "table")
+	for i, e := range s.Effects {
+		if math.Abs(e.ResolvedSPCoefficient-1.0) > 1e-9 {
+			t.Errorf("Effects[%d].ResolvedSPCoefficient = %v, want the table's 1.0", i, e.ResolvedSPCoefficient)
+		}
+		if e.CoefficientSource != "table" {
+			t.Errorf("Effects[%d].CoefficientSource = %q, want %q", i, e.CoefficientSource, "table")
+		}
 	}
 }
 
@@ -140,5 +193,89 @@ func TestInstantCastUsesTheGlobalCooldown(t *testing.T) {
 func TestLoadRejectsAMissingFile(t *testing.T) {
 	if _, err := Load("testdata/nope.json"); err == nil {
 		t.Fatal("loading a missing file returned no error")
+	}
+}
+
+// loadFixtureSpells reads the real-fixture testdata as a generic tree, so
+// a test can mutate one spell's fields (inject an unknown one, delete a
+// required one) without hand-maintaining a second copy of the fixture
+// that would drift from testdata/warrior.json over time.
+func loadFixtureSpells(t *testing.T) (top map[string]json.RawMessage, spells map[string]json.RawMessage) {
+	t.Helper()
+	b, err := os.ReadFile("testdata/warrior.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := json.Unmarshal(b, &top); err != nil {
+		t.Fatal(err)
+	}
+	if err := json.Unmarshal(top["spells"], &spells); err != nil {
+		t.Fatal(err)
+	}
+	return top, spells
+}
+
+// writeFixture re-serializes a mutated copy of the fixture's top-level
+// tree, with spells substituted back in, to a temp file Load can read.
+func writeFixture(t *testing.T, top map[string]json.RawMessage, spells map[string]json.RawMessage) string {
+	t.Helper()
+	spellsJSON, err := json.Marshal(spells)
+	if err != nil {
+		t.Fatal(err)
+	}
+	top["spells"] = spellsJSON
+	out, err := json.Marshal(top)
+	if err != nil {
+		t.Fatal(err)
+	}
+	path := filepath.Join(t.TempDir(), "mutated.json")
+	if err := os.WriteFile(path, out, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	return path
+}
+
+// The pipeline's shape changed once already without this loader
+// noticing (an array became an object) — that is the entire reason this
+// package needed a contract follow-up. An unrecognized field in a future
+// shape change must fail loudly here rather than be silently dropped.
+func TestLoadRejectsAnUnknownField(t *testing.T) {
+	top, spells := loadFixtureSpells(t)
+	var bloodthirst4 map[string]json.RawMessage
+	if err := json.Unmarshal(spells["23894"], &bloodthirst4); err != nil {
+		t.Fatal(err)
+	}
+	bloodthirst4["totally_unknown_field"] = json.RawMessage(`123`)
+	b, err := json.Marshal(bloodthirst4)
+	if err != nil {
+		t.Fatal(err)
+	}
+	spells["23894"] = b
+
+	path := writeFixture(t, top, spells)
+	if _, err := Load(path); err == nil {
+		t.Fatal("Load() accepted a spell body with an unrecognized field")
+	}
+}
+
+// A required field silently missing is indistinguishable, once decoded,
+// from that field legitimately being zero (an instant cast, a free
+// spell) — Load must catch the absence before it is decoded away.
+func TestLoadRejectsAMissingRequiredField(t *testing.T) {
+	top, spells := loadFixtureSpells(t)
+	var bloodthirst4 map[string]json.RawMessage
+	if err := json.Unmarshal(spells["23894"], &bloodthirst4); err != nil {
+		t.Fatal(err)
+	}
+	delete(bloodthirst4, "cast_time_ms")
+	b, err := json.Marshal(bloodthirst4)
+	if err != nil {
+		t.Fatal(err)
+	}
+	spells["23894"] = b
+
+	path := writeFixture(t, top, spells)
+	if _, err := Load(path); err == nil {
+		t.Fatal("Load() accepted a spell body missing its required cast_time_ms field")
 	}
 }
