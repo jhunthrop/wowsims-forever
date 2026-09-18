@@ -14,6 +14,10 @@ type Encounter struct {
 	Targets           []*Target
 	TargetUnits       []*Unit
 
+	// Biome is where this fight happens, for Forever's biome-conditional
+	// item effects. BiomeUnknown matches nothing.
+	Biome proto.Biome
+
 	ExecuteProportion_20 float64
 	ExecuteProportion_25 float64
 	ExecuteProportion_35 float64
@@ -40,6 +44,7 @@ func NewEncounter(options *proto.Encounter) Encounter {
 		ExecuteProportion_25: max(options.ExecuteProportion_25, 0),
 		ExecuteProportion_35: max(options.ExecuteProportion_35, 0),
 		Targets:              []*Target{},
+		Biome:                options.Biome,
 	}
 	// If UseHealth is set, we use the sum of targets health.
 	if options.UseHealth {
@@ -288,6 +293,80 @@ type AttackTable struct {
 	DamageDoneByCasterMultiplier func(spell *Spell, attackTable *AttackTable) float64
 }
 
+// AttackTableConstants are the nine numbers the vanilla one-roll attack
+// table is derived from. They are extracted rather than inline because
+// Forever keeps weapon skill but adds a second dodge-reduction lever and
+// cut per-item weapon skill sevenfold, so the fitted values may move --
+// and when they do, the change must be a config edit and a regenerated
+// fixture, not a patch to the formulas.
+//
+// Fit them from a real log with forever-measure (sim/cmd/forever-measure
+// in the site repository): a thousand auto-attacks against a level-63
+// dummy with a known character sheet gives the five observed rates these
+// are fitted to. Until then these are Era's, which is what the
+// regression fixture pins.
+//
+// unconfirmed: every field, until a beta measurement fits them.
+type AttackTableConstants struct {
+	// Version names the source these came from, so a fixture diff says
+	// which set it is comparing.
+	// unconfirmed
+	Version string
+
+	// unconfirmed
+	BaseMissChance float64
+	// unconfirmed
+	BaseDodgeChance float64
+	// unconfirmed
+	BaseParryChance float64
+	// unconfirmed
+	BaseGlanceChance float64
+
+	// unconfirmed
+	GlanceMultiplierMin float64
+	// unconfirmed
+	GlanceMultiplierMax float64
+
+	// HitSuppression and MeleeCritSuppression are the per-level-gap
+	// penalties applied above the base rates.
+	// unconfirmed
+	HitSuppression float64
+	// unconfirmed
+	MeleeCritSuppression float64
+
+	// DualWieldMissPenalty is the flat extra miss chance on a white
+	// swing with an off-hand equipped. It is 0.19 in vanilla and is a
+	// literal in applyAttackTableMiss today; Forever's Dual Wield
+	// Specialization grants off-hand hit specifically, so the structure
+	// is right and only the number is in question
+	// (research/08-stats.md 12.3 item 3).
+	// unconfirmed
+	DualWieldMissPenalty float64
+}
+
+// EraAttackTable is the set derived from twenty years of vanilla
+// theorycraft, and the default until a Forever measurement replaces it.
+var EraAttackTable = AttackTableConstants{
+	Version: "era",
+
+	BaseMissChance:   0.05,
+	BaseDodgeChance:  0.05,
+	BaseParryChance:  0.05,
+	BaseGlanceChance: 0.1,
+
+	GlanceMultiplierMin: 1.3,
+	GlanceMultiplierMax: 1.2,
+
+	HitSuppression:       0.002,
+	MeleeCritSuppression: 0.002,
+
+	DualWieldMissPenalty: 0.19,
+}
+
+// activeAttackTable is what NewAttackTable reads. A beta fit replaces it
+// in one assignment.
+var activeAttackTable = EraAttackTable
+
 func NewAttackTable(attacker *Unit, defender *Unit, weapon *Item) *AttackTable {
 	// Source: https://github.com/magey/classic-warrior/wiki/Attack-table
 	table := &AttackTable{
@@ -308,29 +387,29 @@ func NewAttackTable(attacker *Unit, defender *Unit, weapon *Item) *AttackTable {
 		targetDefense := float64(defender.Level * 5)
 
 		if targetDefense-weaponSkill > 10 {
-			table.HitSuppression = (targetDefense - weaponSkill - 10) * 0.002
-			table.BaseMissChance = 0.05 + (targetDefense-weaponSkill)*0.002
+			table.HitSuppression = (targetDefense - weaponSkill - 10) * activeAttackTable.HitSuppression
+			table.BaseMissChance = activeAttackTable.BaseMissChance + (targetDefense-weaponSkill)*0.002
 		} else {
 			table.HitSuppression = 0
-			table.BaseMissChance = 0.05 + (targetDefense-weaponSkill)*0.001
+			table.BaseMissChance = activeAttackTable.BaseMissChance + (targetDefense-weaponSkill)*0.001
 		}
 
 		if targetDefense-baseWeaponSkill > 10 {
-			table.BaseParryChance = 0.05 + (targetDefense-baseWeaponSkill)*0.006 // = 14
+			table.BaseParryChance = activeAttackTable.BaseParryChance + (targetDefense-baseWeaponSkill)*0.006 // = 14
 		} else {
-			table.BaseParryChance = 0.05 + (targetDefense-baseWeaponSkill)*0.001 // = 5 / 5.5 / 6
+			table.BaseParryChance = activeAttackTable.BaseParryChance + (targetDefense-baseWeaponSkill)*0.001 // = 5 / 5.5 / 6
 		}
 
 		table.BaseSpellMissChance = UnitLevelFloat64(defender.Level-attacker.Level, 0.04, 0.05, 0.06, 0.17)
 		table.BaseBlockChance = 0.05
-		table.BaseDodgeChance = 0.05 + (targetDefense-weaponSkill)*0.001
-		table.BaseGlanceChance = 0.1 + (targetDefense-baseWeaponSkill)*0.02
+		table.BaseDodgeChance = activeAttackTable.BaseDodgeChance + (targetDefense-weaponSkill)*0.001
+		table.BaseGlanceChance = activeAttackTable.BaseGlanceChance + (targetDefense-baseWeaponSkill)*0.02
 
-		table.GlanceMultiplierMin = max(min(1.3-0.05*(targetDefense-weaponSkill), 0.91), 0.01)
-		table.GlanceMultiplierMax = max(min(1.2-0.03*(targetDefense-weaponSkill), 0.99), 0.2)
+		table.GlanceMultiplierMin = max(min(activeAttackTable.GlanceMultiplierMin-0.05*(targetDefense-weaponSkill), 0.91), 0.01)
+		table.GlanceMultiplierMax = max(min(activeAttackTable.GlanceMultiplierMax-0.03*(targetDefense-weaponSkill), 0.99), 0.2)
 
 		if targetDefense > baseWeaponSkill {
-			table.MeleeCritSuppression = (targetDefense - baseWeaponSkill) * 0.002
+			table.MeleeCritSuppression = (targetDefense - baseWeaponSkill) * activeAttackTable.MeleeCritSuppression
 		} else {
 			table.MeleeCritSuppression = (targetDefense - baseWeaponSkill) * 0.0004
 		}
@@ -370,6 +449,73 @@ func NewAttackTable(attacker *Unit, defender *Unit, weapon *Item) *AttackTable {
 		table.BaseDodgeChance = levelDelta // base dodge applied with class base stats
 		table.BaseCritChance = 0.05 - levelDelta
 	}
+
+	return table
+}
+
+// derivedTable is the set of level/skill-dependent numbers NewAttackTable
+// computes for a melee attack against an enemy (the EnemyUnit branch of
+// NewAttackTable). deriveAttackTable pulls that arithmetic out on its own,
+// independent of *Unit and *Item, so attack_table_test.go can pin it as a
+// regression fixture.
+type derivedTable struct {
+	BaseMissChance   float64
+	BaseDodgeChance  float64
+	BaseParryChance  float64
+	BaseGlanceChance float64
+
+	GlanceMultiplierMin float64
+	GlanceMultiplierMax float64
+
+	HitSuppression       float64
+	MeleeCritSuppression float64
+	SpellCritSuppression float64
+}
+
+// deriveAttackTable reproduces the EnemyUnit branch of NewAttackTable for a
+// level 60 attacker, which is the matchup the fixture in
+// attack_table_test.go pins. weaponSkill is the attacker's total effective
+// weapon skill (level-based skill plus any item or talent bonus);
+// targetLevel is the defender's level. Do not touch this arithmetic
+// without touching NewAttackTable's identically -- the two are meant to
+// stay in lockstep, which is exactly what TestAttackTableConstantsAreUnchanged
+// verifies.
+func deriveAttackTable(weaponSkill float64, targetLevel int32) derivedTable {
+	const attackerLevel = 60
+	baseWeaponSkill := float64(attackerLevel * 5)
+	targetDefense := float64(targetLevel * 5)
+
+	var table derivedTable
+
+	if targetDefense-weaponSkill > 10 {
+		table.HitSuppression = (targetDefense - weaponSkill - 10) * activeAttackTable.HitSuppression
+		table.BaseMissChance = activeAttackTable.BaseMissChance + (targetDefense-weaponSkill)*0.002
+	} else {
+		table.HitSuppression = 0
+		table.BaseMissChance = activeAttackTable.BaseMissChance + (targetDefense-weaponSkill)*0.001
+	}
+
+	if targetDefense-baseWeaponSkill > 10 {
+		table.BaseParryChance = activeAttackTable.BaseParryChance + (targetDefense-baseWeaponSkill)*0.006
+	} else {
+		table.BaseParryChance = activeAttackTable.BaseParryChance + (targetDefense-baseWeaponSkill)*0.001
+	}
+
+	table.BaseDodgeChance = activeAttackTable.BaseDodgeChance + (targetDefense-weaponSkill)*0.001
+	table.BaseGlanceChance = activeAttackTable.BaseGlanceChance + (targetDefense-baseWeaponSkill)*0.02
+
+	table.GlanceMultiplierMin = max(min(activeAttackTable.GlanceMultiplierMin-0.05*(targetDefense-weaponSkill), 0.91), 0.01)
+	table.GlanceMultiplierMax = max(min(activeAttackTable.GlanceMultiplierMax-0.03*(targetDefense-weaponSkill), 0.99), 0.2)
+
+	if targetDefense > baseWeaponSkill {
+		table.MeleeCritSuppression = (targetDefense - baseWeaponSkill) * activeAttackTable.MeleeCritSuppression
+	} else {
+		table.MeleeCritSuppression = (targetDefense - baseWeaponSkill) * 0.0004
+	}
+	if (targetLevel - attackerLevel) >= 3 {
+		table.MeleeCritSuppression += 0.018
+	}
+	table.SpellCritSuppression = UnitLevelFloat64(targetLevel-attackerLevel, 0, 0, 0.003, 0.021)
 
 	return table
 }

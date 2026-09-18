@@ -759,6 +759,27 @@ enum MobType {
 	MobTypeUndead = 8;
 }
 
+// Forever re-itemised the world and added trinkets whose effect depends on
+// where the fight is. A biome is a property of the encounter, not of one
+// target: a multi-target pull happens in one place, and putting this on
+// Target would let two targets in one fight disagree about where they are.
+// The creature-type half of the same mechanic is Target.mob_type, which
+// already exists and is already read by conditional effects.
+enum Biome {
+	BiomeUnknown = 0;
+	BiomeForest = 1;
+	BiomeDesert = 2;
+	BiomeSnow = 3;
+	BiomeSwamp = 4;
+	BiomeUnderground = 5;
+	BiomeCoastal = 6;
+	BiomeMountain = 7;
+	BiomeVolcanic = 8;
+	BiomePlains = 9;
+	BiomeIndoors = 10;
+	BiomeAbyssal = 11;
+}
+
 enum InputType {
 	Bool = 0;
 	Number = 1;
@@ -825,6 +846,10 @@ message Encounter {
 
 	// If type != Simple or Custom, then this may be empty.
 	repeated Target targets = 6;
+
+	// Where this fight happens, for Forever's biome-conditional item
+	// effects. Unset means BiomeUnknown, which matches nothing.
+	Biome biome = 20;
 }
 
 message PresetTarget {

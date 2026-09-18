@@ -212,3 +212,45 @@ func NewMobTypeSpellPowerEffect(itemID int32, mobTypes []proto.MobType, bonus fl
 		}))
 	})
 }
+
+// NewMobTypeDamageEffect registers an item that multiplies the wearer's
+// damage against a set of creature types. The flat-stat equivalents are
+// NewMobTypeAttackPowerEffect and NewMobTypeSpellPowerEffect above; this
+// is the multiplier form Forever's specialised trinkets use.
+//
+// character.AttackTables is only allocated later, by
+// Environment.setupAttackTables() during finalize() -- item effects run
+// earlier, during initialize() -- so the mutation is deferred to a
+// RegisterPostFinalizeEffect callback, which runs immediately after
+// setupAttackTables() has populated it. This is the same pattern
+// racials.go's Troll "Beast Slaying" uses for the identical
+// at.DamageDealtMultiplier *= X mutation.
+func NewMobTypeDamageEffect(itemID int32, mobTypes []proto.MobType, multiplier float64) {
+	NewItemEffect(itemID, func(agent Agent) {
+		character := agent.GetCharacter()
+		character.Env.RegisterPostFinalizeEffect(func() {
+			for _, target := range character.Env.Encounter.TargetUnits {
+				if !slices.Contains(mobTypes, target.MobType) {
+					continue
+				}
+				for _, at := range character.AttackTables[target.UnitIndex] {
+					at.DamageDealtMultiplier *= multiplier
+				}
+			}
+		})
+	})
+}
+
+// NewBiomeDamageEffect registers an item that multiplies the wearer's
+// damage in a set of biomes. Forever's biome trinkets are the reason the
+// encounter carries a biome at all; an encounter with no biome set reads
+// BiomeUnknown and matches nothing, so a vanilla fight is unaffected.
+func NewBiomeDamageEffect(itemID int32, biomes []proto.Biome, multiplier float64) {
+	NewItemEffect(itemID, func(agent Agent) {
+		character := agent.GetCharacter()
+		if !slices.Contains(biomes, character.Biome()) {
+			return
+		}
+		character.PseudoStats.DamageDealtMultiplier *= multiplier
+	})
+}
