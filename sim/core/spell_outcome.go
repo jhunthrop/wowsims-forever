@@ -100,6 +100,44 @@ func (dot *Dot) OutcomeMagicHitAndSnapshotCrit(sim *Simulation, result *SpellRes
 	}
 }
 
+// OutcomeMagicCritPerTick rolls crit on every tick rather than
+// snapshotting it at application.
+//
+// OutcomeMagicHitAndSnapshotCrit (above) rolls crit once, at application,
+// and every tick of that application either crits or doesn't. Forever may
+// instead roll crit fresh per tick, which forever-measure distinguishes
+// from a snapshot by whether a dot's ticks show runs of identical
+// outcomes (snapshot) or an interleaved mix (per tick). Like its sibling
+// dot tick outcomes (OutcomeTickPhysicalCrit, OutcomeSnapshotCrit), hit
+// is decided once at the dot's application - by the spell's own
+// ApplyEffects outcome - so this only resolves crit vs. a plain tick.
+func (dot *Dot) OutcomeMagicCritPerTick(sim *Simulation, result *SpellResult, attackTable *AttackTable) {
+	isPartialResist := result.DidResist()
+
+	if sim.RandomFloat("Magic Dot Crit") < dot.Spell.SpellCritChance(result.Target) {
+		result.Outcome = OutcomeCrit
+		// Only asks the spell for its multiplier when the dot didn't
+		// choose one: spell.CritMultiplier() requires a DefenseType and
+		// panics without one, and a dot that set its own multiplier has
+		// no reason to need it.
+		spellCritMultiplier := 0.0
+		if dot.CritMultiplier == 0 {
+			spellCritMultiplier = dot.Spell.CritMultiplier(attackTable)
+		}
+		result.Damage *= dotCritMultiplier(dot.CritMultiplier, spellCritMultiplier)
+		dot.Spell.SpellMetrics[result.Target.UnitIndex].CritTicks++
+		if isPartialResist {
+			dot.Spell.SpellMetrics[result.Target.UnitIndex].ResistedCritTicks++
+		}
+	} else {
+		result.Outcome = OutcomeHit
+		dot.Spell.SpellMetrics[result.Target.UnitIndex].Ticks++
+		if isPartialResist {
+			dot.Spell.SpellMetrics[result.Target.UnitIndex].ResistedTicks++
+		}
+	}
+}
+
 func (spell *Spell) OutcomeMagicHitAndCrit(sim *Simulation, result *SpellResult, attackTable *AttackTable) {
 	spell.outcomeMagicHitAndCrit(sim, result, attackTable, true)
 }
