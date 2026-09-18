@@ -2789,6 +2789,88 @@ func (MobType) EnumDescriptor() ([]byte, []int) {
 	return file_common_proto_rawDescGZIP(), []int{39}
 }
 
+// Forever re-itemised the world and added trinkets whose effect depends on
+// where the fight is. A biome is a property of the encounter, not of one
+// target: a multi-target pull happens in one place, and putting this on
+// Target would let two targets in one fight disagree about where they are.
+// The creature-type half of the same mechanic is Target.mob_type, which
+// already exists and is already read by conditional effects.
+type Biome int32
+
+const (
+	Biome_BiomeUnknown     Biome = 0
+	Biome_BiomeForest      Biome = 1
+	Biome_BiomeDesert      Biome = 2
+	Biome_BiomeSnow        Biome = 3
+	Biome_BiomeSwamp       Biome = 4
+	Biome_BiomeUnderground Biome = 5
+	Biome_BiomeCoastal     Biome = 6
+	Biome_BiomeMountain    Biome = 7
+	Biome_BiomeVolcanic    Biome = 8
+	Biome_BiomePlains      Biome = 9
+	Biome_BiomeIndoors     Biome = 10
+	Biome_BiomeAbyssal     Biome = 11
+)
+
+// Enum value maps for Biome.
+var (
+	Biome_name = map[int32]string{
+		0:  "BiomeUnknown",
+		1:  "BiomeForest",
+		2:  "BiomeDesert",
+		3:  "BiomeSnow",
+		4:  "BiomeSwamp",
+		5:  "BiomeUnderground",
+		6:  "BiomeCoastal",
+		7:  "BiomeMountain",
+		8:  "BiomeVolcanic",
+		9:  "BiomePlains",
+		10: "BiomeIndoors",
+		11: "BiomeAbyssal",
+	}
+	Biome_value = map[string]int32{
+		"BiomeUnknown":     0,
+		"BiomeForest":      1,
+		"BiomeDesert":      2,
+		"BiomeSnow":        3,
+		"BiomeSwamp":       4,
+		"BiomeUnderground": 5,
+		"BiomeCoastal":     6,
+		"BiomeMountain":    7,
+		"BiomeVolcanic":    8,
+		"BiomePlains":      9,
+		"BiomeIndoors":     10,
+		"BiomeAbyssal":     11,
+	}
+)
+
+func (x Biome) Enum() *Biome {
+	p := new(Biome)
+	*p = x
+	return p
+}
+
+func (x Biome) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Biome) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_proto_enumTypes[40].Descriptor()
+}
+
+func (Biome) Type() protoreflect.EnumType {
+	return &file_common_proto_enumTypes[40]
+}
+
+func (x Biome) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Biome.Descriptor instead.
+func (Biome) EnumDescriptor() ([]byte, []int) {
+	return file_common_proto_rawDescGZIP(), []int{40}
+}
+
 type InputType int32
 
 const (
@@ -2822,11 +2904,11 @@ func (x InputType) String() string {
 }
 
 func (InputType) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_proto_enumTypes[40].Descriptor()
+	return file_common_proto_enumTypes[41].Descriptor()
 }
 
 func (InputType) Type() protoreflect.EnumType {
-	return &file_common_proto_enumTypes[40]
+	return &file_common_proto_enumTypes[41]
 }
 
 func (x InputType) Number() protoreflect.EnumNumber {
@@ -2835,7 +2917,7 @@ func (x InputType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use InputType.Descriptor instead.
 func (InputType) EnumDescriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{40}
+	return file_common_proto_rawDescGZIP(), []int{41}
 }
 
 // Extra enum for describing which items are eligible for an enchant, when
@@ -2879,11 +2961,11 @@ func (x EnchantType) String() string {
 }
 
 func (EnchantType) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_proto_enumTypes[41].Descriptor()
+	return file_common_proto_enumTypes[42].Descriptor()
 }
 
 func (EnchantType) Type() protoreflect.EnumType {
-	return &file_common_proto_enumTypes[41]
+	return &file_common_proto_enumTypes[42]
 }
 
 func (x EnchantType) Number() protoreflect.EnumNumber {
@@ -2892,7 +2974,7 @@ func (x EnchantType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use EnchantType.Descriptor instead.
 func (EnchantType) EnumDescriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{41}
+	return file_common_proto_rawDescGZIP(), []int{42}
 }
 
 // ID for actions that aren't spells or items.
@@ -2977,11 +3059,11 @@ func (x OtherAction) String() string {
 }
 
 func (OtherAction) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_proto_enumTypes[42].Descriptor()
+	return file_common_proto_enumTypes[43].Descriptor()
 }
 
 func (OtherAction) Type() protoreflect.EnumType {
-	return &file_common_proto_enumTypes[42]
+	return &file_common_proto_enumTypes[43]
 }
 
 func (x OtherAction) Number() protoreflect.EnumNumber {
@@ -2990,7 +3072,7 @@ func (x OtherAction) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use OtherAction.Descriptor instead.
 func (OtherAction) EnumDescriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{42}
+	return file_common_proto_rawDescGZIP(), []int{43}
 }
 
 type UnitReference_Type int32
@@ -3041,11 +3123,11 @@ func (x UnitReference_Type) String() string {
 }
 
 func (UnitReference_Type) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_proto_enumTypes[43].Descriptor()
+	return file_common_proto_enumTypes[44].Descriptor()
 }
 
 func (UnitReference_Type) Type() protoreflect.EnumType {
-	return &file_common_proto_enumTypes[43]
+	return &file_common_proto_enumTypes[44]
 }
 
 func (x UnitReference_Type) Number() protoreflect.EnumNumber {
@@ -4547,7 +4629,10 @@ type Encounter struct {
 	// If set, will use the targets health value instead of a duration for fight length.
 	UseHealth bool `protobuf:"varint,5,opt,name=use_health,json=useHealth,proto3" json:"use_health,omitempty"`
 	// If type != Simple or Custom, then this may be empty.
-	Targets       []*Target `protobuf:"bytes,6,rep,name=targets,proto3" json:"targets,omitempty"`
+	Targets []*Target `protobuf:"bytes,6,rep,name=targets,proto3" json:"targets,omitempty"`
+	// Where this fight happens, for Forever's biome-conditional item
+	// effects. Unset means BiomeUnknown, which matches nothing.
+	Biome         Biome `protobuf:"varint,20,opt,name=biome,proto3,enum=proto.Biome" json:"biome,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4629,6 +4714,13 @@ func (x *Encounter) GetTargets() []*Target {
 		return x.Targets
 	}
 	return nil
+}
+
+func (x *Encounter) GetBiome() Biome {
+	if x != nil {
+		return x.Biome
+	}
+	return Biome_BiomeUnknown
 }
 
 type PresetTarget struct {
@@ -5927,7 +6019,7 @@ const file_common_proto_rawDesc = "" +
 	"\fspell_school\x18\f \x01(\x0e2\x12.proto.SpellSchoolR\vspellSchool\x12\x1d\n" +
 	"\n" +
 	"tank_index\x18\r \x01(\x05R\ttankIndex\x127\n" +
-	"\rtarget_inputs\x18\x0e \x03(\v2\x12.proto.TargetInputR\ftargetInputs\"\xba\x02\n" +
+	"\rtarget_inputs\x18\x0e \x03(\v2\x12.proto.TargetInputR\ftargetInputs\"\xde\x02\n" +
 	"\tEncounter\x12\x1a\n" +
 	"\bduration\x18\x01 \x01(\x01R\bduration\x12-\n" +
 	"\x12duration_variation\x18\x02 \x01(\x01R\x11durationVariation\x122\n" +
@@ -5936,7 +6028,8 @@ const file_common_proto_rawDesc = "" +
 	"\x15execute_proportion_35\x18\x04 \x01(\x01R\x13executeProportion35\x12\x1d\n" +
 	"\n" +
 	"use_health\x18\x05 \x01(\bR\tuseHealth\x12'\n" +
-	"\atargets\x18\x06 \x03(\v2\r.proto.TargetR\atargets\"I\n" +
+	"\atargets\x18\x06 \x03(\v2\r.proto.TargetR\atargets\x12\"\n" +
+	"\x05biome\x18\x14 \x01(\x0e2\f.proto.BiomeR\x05biome\"I\n" +
 	"\fPresetTarget\x12\x12\n" +
 	"\x04path\x18\x01 \x01(\tR\x04path\x12%\n" +
 	"\x06target\x18\x02 \x01(\v2\r.proto.TargetR\x06target\"T\n" +
@@ -6469,7 +6562,22 @@ const file_common_proto_rawDesc = "" +
 	"\fMobTypeGiant\x10\x05\x12\x13\n" +
 	"\x0fMobTypeHumanoid\x10\x06\x12\x15\n" +
 	"\x11MobTypeMechanical\x10\a\x12\x11\n" +
-	"\rMobTypeUndead\x10\b*+\n" +
+	"\rMobTypeUndead\x10\b*\xdd\x01\n" +
+	"\x05Biome\x12\x10\n" +
+	"\fBiomeUnknown\x10\x00\x12\x0f\n" +
+	"\vBiomeForest\x10\x01\x12\x0f\n" +
+	"\vBiomeDesert\x10\x02\x12\r\n" +
+	"\tBiomeSnow\x10\x03\x12\x0e\n" +
+	"\n" +
+	"BiomeSwamp\x10\x04\x12\x14\n" +
+	"\x10BiomeUnderground\x10\x05\x12\x10\n" +
+	"\fBiomeCoastal\x10\x06\x12\x11\n" +
+	"\rBiomeMountain\x10\a\x12\x11\n" +
+	"\rBiomeVolcanic\x10\b\x12\x0f\n" +
+	"\vBiomePlains\x10\t\x12\x10\n" +
+	"\fBiomeIndoors\x10\n" +
+	"\x12\x10\n" +
+	"\fBiomeAbyssal\x10\v*+\n" +
 	"\tInputType\x12\b\n" +
 	"\x04Bool\x10\x00\x12\n" +
 	"\n" +
@@ -6515,7 +6623,7 @@ func file_common_proto_rawDescGZIP() []byte {
 	return file_common_proto_rawDescData
 }
 
-var file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 44)
+var file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 45)
 var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_common_proto_goTypes = []any{
 	(Spec)(0),                // 0: proto.Spec
@@ -6558,38 +6666,39 @@ var file_common_proto_goTypes = []any{
 	(Food)(0),                // 37: proto.Food
 	(SaygesFortune)(0),       // 38: proto.SaygesFortune
 	(MobType)(0),             // 39: proto.MobType
-	(InputType)(0),           // 40: proto.InputType
-	(EnchantType)(0),         // 41: proto.EnchantType
-	(OtherAction)(0),         // 42: proto.OtherAction
-	(UnitReference_Type)(0),  // 43: proto.UnitReference.Type
-	(*UnitStats)(nil),        // 44: proto.UnitStats
-	(*MiscConsumes)(nil),     // 45: proto.MiscConsumes
-	(*PetMiscConsumes)(nil),  // 46: proto.PetMiscConsumes
-	(*RaidBuffs)(nil),        // 47: proto.RaidBuffs
-	(*PartyBuffs)(nil),       // 48: proto.PartyBuffs
-	(*IndividualBuffs)(nil),  // 49: proto.IndividualBuffs
-	(*Consumes)(nil),         // 50: proto.Consumes
-	(*Debuffs)(nil),          // 51: proto.Debuffs
-	(*TargetInput)(nil),      // 52: proto.TargetInput
-	(*Target)(nil),           // 53: proto.Target
-	(*Encounter)(nil),        // 54: proto.Encounter
-	(*PresetTarget)(nil),     // 55: proto.PresetTarget
-	(*PresetEncounter)(nil),  // 56: proto.PresetEncounter
-	(*ItemRandomSuffix)(nil), // 57: proto.ItemRandomSuffix
-	(*ItemSpec)(nil),         // 58: proto.ItemSpec
-	(*EquipmentSpec)(nil),    // 59: proto.EquipmentSpec
-	(*SimDatabase)(nil),      // 60: proto.SimDatabase
-	(*SimItem)(nil),          // 61: proto.SimItem
-	(*SimEnchant)(nil),       // 62: proto.SimEnchant
-	(*UnitReference)(nil),    // 63: proto.UnitReference
-	(*ActionID)(nil),         // 64: proto.ActionID
-	(*Cooldown)(nil),         // 65: proto.Cooldown
-	(*Cooldowns)(nil),        // 66: proto.Cooldowns
-	(*HealingModel)(nil),     // 67: proto.HealingModel
-	(*CustomRotation)(nil),   // 68: proto.CustomRotation
-	(*CustomSpell)(nil),      // 69: proto.CustomSpell
-	(*ItemSwap)(nil),         // 70: proto.ItemSwap
-	(*Duration)(nil),         // 71: proto.Duration
+	(Biome)(0),               // 40: proto.Biome
+	(InputType)(0),           // 41: proto.InputType
+	(EnchantType)(0),         // 42: proto.EnchantType
+	(OtherAction)(0),         // 43: proto.OtherAction
+	(UnitReference_Type)(0),  // 44: proto.UnitReference.Type
+	(*UnitStats)(nil),        // 45: proto.UnitStats
+	(*MiscConsumes)(nil),     // 46: proto.MiscConsumes
+	(*PetMiscConsumes)(nil),  // 47: proto.PetMiscConsumes
+	(*RaidBuffs)(nil),        // 48: proto.RaidBuffs
+	(*PartyBuffs)(nil),       // 49: proto.PartyBuffs
+	(*IndividualBuffs)(nil),  // 50: proto.IndividualBuffs
+	(*Consumes)(nil),         // 51: proto.Consumes
+	(*Debuffs)(nil),          // 52: proto.Debuffs
+	(*TargetInput)(nil),      // 53: proto.TargetInput
+	(*Target)(nil),           // 54: proto.Target
+	(*Encounter)(nil),        // 55: proto.Encounter
+	(*PresetTarget)(nil),     // 56: proto.PresetTarget
+	(*PresetEncounter)(nil),  // 57: proto.PresetEncounter
+	(*ItemRandomSuffix)(nil), // 58: proto.ItemRandomSuffix
+	(*ItemSpec)(nil),         // 59: proto.ItemSpec
+	(*EquipmentSpec)(nil),    // 60: proto.EquipmentSpec
+	(*SimDatabase)(nil),      // 61: proto.SimDatabase
+	(*SimItem)(nil),          // 62: proto.SimItem
+	(*SimEnchant)(nil),       // 63: proto.SimEnchant
+	(*UnitReference)(nil),    // 64: proto.UnitReference
+	(*ActionID)(nil),         // 65: proto.ActionID
+	(*Cooldown)(nil),         // 66: proto.Cooldown
+	(*Cooldowns)(nil),        // 67: proto.Cooldowns
+	(*HealingModel)(nil),     // 68: proto.HealingModel
+	(*CustomRotation)(nil),   // 69: proto.CustomRotation
+	(*CustomSpell)(nil),      // 70: proto.CustomSpell
+	(*ItemSwap)(nil),         // 71: proto.ItemSwap
+	(*Duration)(nil),         // 72: proto.Duration
 }
 var file_common_proto_depIdxs = []int32{
 	17, // 0: proto.RaidBuffs.gift_of_the_wild:type_name -> proto.TristateEffect
@@ -6622,12 +6731,12 @@ var file_common_proto_depIdxs = []int32{
 	36, // 27: proto.Consumes.off_hand_imbue:type_name -> proto.WeaponImbue
 	20, // 28: proto.Consumes.default_potion:type_name -> proto.Potions
 	21, // 29: proto.Consumes.default_conjured:type_name -> proto.Conjured
-	45, // 30: proto.Consumes.misc_consumes:type_name -> proto.MiscConsumes
+	46, // 30: proto.Consumes.misc_consumes:type_name -> proto.MiscConsumes
 	34, // 31: proto.Consumes.zanza_buff:type_name -> proto.ZanzaBuff
 	25, // 32: proto.Consumes.armor_elixir:type_name -> proto.ArmorElixir
 	26, // 33: proto.Consumes.health_elixir:type_name -> proto.HealthElixir
 	23, // 34: proto.Consumes.alcohol:type_name -> proto.Alcohol
-	46, // 35: proto.Consumes.pet_misc_consumes:type_name -> proto.PetMiscConsumes
+	47, // 35: proto.Consumes.pet_misc_consumes:type_name -> proto.PetMiscConsumes
 	18, // 36: proto.Consumes.sapper_explosive:type_name -> proto.SapperExplosive
 	35, // 37: proto.Consumes.hit_consumable:type_name -> proto.HitConsumable
 	17, // 38: proto.Debuffs.judgement_of_the_crusader:type_name -> proto.TristateEffect
@@ -6637,37 +6746,38 @@ var file_common_proto_depIdxs = []int32{
 	17, // 42: proto.Debuffs.demoralizing_shout:type_name -> proto.TristateEffect
 	17, // 43: proto.Debuffs.thunder_clap:type_name -> proto.TristateEffect
 	17, // 44: proto.Debuffs.hunters_mark:type_name -> proto.TristateEffect
-	40, // 45: proto.TargetInput.input_type:type_name -> proto.InputType
+	41, // 45: proto.TargetInput.input_type:type_name -> proto.InputType
 	39, // 46: proto.Target.mob_type:type_name -> proto.MobType
 	16, // 47: proto.Target.spell_school:type_name -> proto.SpellSchool
-	52, // 48: proto.Target.target_inputs:type_name -> proto.TargetInput
-	53, // 49: proto.Encounter.targets:type_name -> proto.Target
-	53, // 50: proto.PresetTarget.target:type_name -> proto.Target
-	55, // 51: proto.PresetEncounter.targets:type_name -> proto.PresetTarget
-	58, // 52: proto.EquipmentSpec.items:type_name -> proto.ItemSpec
-	61, // 53: proto.SimDatabase.items:type_name -> proto.SimItem
-	57, // 54: proto.SimDatabase.random_suffixes:type_name -> proto.ItemRandomSuffix
-	62, // 55: proto.SimDatabase.enchants:type_name -> proto.SimEnchant
-	3,  // 56: proto.SimItem.class_allowlist:type_name -> proto.Class
-	7,  // 57: proto.SimItem.type:type_name -> proto.ItemType
-	8,  // 58: proto.SimItem.armor_type:type_name -> proto.ArmorType
-	9,  // 59: proto.SimItem.weapon_type:type_name -> proto.WeaponType
-	11, // 60: proto.SimItem.hand_type:type_name -> proto.HandType
-	12, // 61: proto.SimItem.ranged_weapon_type:type_name -> proto.RangedWeaponType
-	43, // 62: proto.UnitReference.type:type_name -> proto.UnitReference.Type
-	63, // 63: proto.UnitReference.owner:type_name -> proto.UnitReference
-	42, // 64: proto.ActionID.other_id:type_name -> proto.OtherAction
-	64, // 65: proto.Cooldown.id:type_name -> proto.ActionID
-	65, // 66: proto.Cooldowns.cooldowns:type_name -> proto.Cooldown
-	69, // 67: proto.CustomRotation.spells:type_name -> proto.CustomSpell
-	58, // 68: proto.ItemSwap.mh_item:type_name -> proto.ItemSpec
-	58, // 69: proto.ItemSwap.oh_item:type_name -> proto.ItemSpec
-	58, // 70: proto.ItemSwap.ranged_item:type_name -> proto.ItemSpec
-	71, // [71:71] is the sub-list for method output_type
-	71, // [71:71] is the sub-list for method input_type
-	71, // [71:71] is the sub-list for extension type_name
-	71, // [71:71] is the sub-list for extension extendee
-	0,  // [0:71] is the sub-list for field type_name
+	53, // 48: proto.Target.target_inputs:type_name -> proto.TargetInput
+	54, // 49: proto.Encounter.targets:type_name -> proto.Target
+	40, // 50: proto.Encounter.biome:type_name -> proto.Biome
+	54, // 51: proto.PresetTarget.target:type_name -> proto.Target
+	56, // 52: proto.PresetEncounter.targets:type_name -> proto.PresetTarget
+	59, // 53: proto.EquipmentSpec.items:type_name -> proto.ItemSpec
+	62, // 54: proto.SimDatabase.items:type_name -> proto.SimItem
+	58, // 55: proto.SimDatabase.random_suffixes:type_name -> proto.ItemRandomSuffix
+	63, // 56: proto.SimDatabase.enchants:type_name -> proto.SimEnchant
+	3,  // 57: proto.SimItem.class_allowlist:type_name -> proto.Class
+	7,  // 58: proto.SimItem.type:type_name -> proto.ItemType
+	8,  // 59: proto.SimItem.armor_type:type_name -> proto.ArmorType
+	9,  // 60: proto.SimItem.weapon_type:type_name -> proto.WeaponType
+	11, // 61: proto.SimItem.hand_type:type_name -> proto.HandType
+	12, // 62: proto.SimItem.ranged_weapon_type:type_name -> proto.RangedWeaponType
+	44, // 63: proto.UnitReference.type:type_name -> proto.UnitReference.Type
+	64, // 64: proto.UnitReference.owner:type_name -> proto.UnitReference
+	43, // 65: proto.ActionID.other_id:type_name -> proto.OtherAction
+	65, // 66: proto.Cooldown.id:type_name -> proto.ActionID
+	66, // 67: proto.Cooldowns.cooldowns:type_name -> proto.Cooldown
+	70, // 68: proto.CustomRotation.spells:type_name -> proto.CustomSpell
+	59, // 69: proto.ItemSwap.mh_item:type_name -> proto.ItemSpec
+	59, // 70: proto.ItemSwap.oh_item:type_name -> proto.ItemSpec
+	59, // 71: proto.ItemSwap.ranged_item:type_name -> proto.ItemSpec
+	72, // [72:72] is the sub-list for method output_type
+	72, // [72:72] is the sub-list for method input_type
+	72, // [72:72] is the sub-list for extension type_name
+	72, // [72:72] is the sub-list for extension extendee
+	0,  // [0:72] is the sub-list for field type_name
 }
 
 func init() { file_common_proto_init() }
@@ -6685,7 +6795,7 @@ func file_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_proto_rawDesc), len(file_common_proto_rawDesc)),
-			NumEnums:      44,
+			NumEnums:      45,
 			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   0,

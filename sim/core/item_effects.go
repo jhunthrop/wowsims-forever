@@ -212,3 +212,39 @@ func NewMobTypeSpellPowerEffect(itemID int32, mobTypes []proto.MobType, bonus fl
 		}))
 	})
 }
+
+// NewMobTypeDamageEffect registers an item that multiplies the wearer's
+// damage against a set of creature types. The flat-stat equivalents are
+// NewMobTypeAttackPowerEffect and NewMobTypeSpellPowerEffect above; this
+// is the multiplier form Forever's specialised trinkets use. Applied once
+// at item-effect registration (applyItemEffects runs once per Character,
+// not per sim iteration), so a plain multiply is correct here the same
+// way the flat-stat effects above use OnGain/OnExpire only because they
+// are aura-gated rather than because of iteration lifetime.
+func NewMobTypeDamageEffect(itemID int32, mobTypes []proto.MobType, multiplier float64) {
+	NewItemEffect(itemID, func(agent Agent) {
+		character := agent.GetCharacter()
+		for _, target := range character.Env.Encounter.TargetUnits {
+			if !slices.Contains(mobTypes, target.MobType) {
+				continue
+			}
+			for _, at := range character.AttackTables[target.UnitIndex] {
+				at.DamageDealtMultiplier *= multiplier
+			}
+		}
+	})
+}
+
+// NewBiomeDamageEffect registers an item that multiplies the wearer's
+// damage in a set of biomes. Forever's biome trinkets are the reason the
+// encounter carries a biome at all; an encounter with no biome set reads
+// BiomeUnknown and matches nothing, so a vanilla fight is unaffected.
+func NewBiomeDamageEffect(itemID int32, biomes []proto.Biome, multiplier float64) {
+	NewItemEffect(itemID, func(agent Agent) {
+		character := agent.GetCharacter()
+		if !slices.Contains(biomes, character.Biome()) {
+			return
+		}
+		character.PseudoStats.DamageDealtMultiplier *= multiplier
+	})
+}

@@ -612,3 +612,15 @@ func (unit *Unit) GetMetadata() *proto.UnitMetadata {
 func (unit *Unit) ExecuteCustomRotation(_ *Simulation) {
 	panic("Unimplemented ExecuteCustomRotation")
 }
+
+// Biome reports where the current encounter is happening, for Forever's
+// biome-conditional item effects. A unit whose environment has not been
+// constructed yet — which is every unit during spell registration —
+// reports BiomeUnknown rather than panicking, so an effect may read it at
+// registration time and get a safe answer.
+func (unit *Unit) Biome() proto.Biome {
+	if unit.Env == nil {
+		return proto.Biome_BiomeUnknown
+	}
+	return unit.Env.Encounter.Biome
+}
