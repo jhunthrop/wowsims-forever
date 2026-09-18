@@ -418,10 +418,10 @@ var ItemSetUnstoppableMight = core.NewItemSet(core.ItemSet{
 				Label:    "Berserker Forecast",
 				Duration: duration,
 				OnGain: func(aura *core.Aura, sim *core.Simulation) {
-					warrior.AddStatDynamic(sim, stats.MeleeCrit, 10*core.CritRatingPerCritChance)
+					warrior.AddStatDynamic(sim, stats.Crit, 10*core.CritRatingPerCritChance)
 				},
 				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-					warrior.AddStatDynamic(sim, stats.MeleeCrit, -10*core.CritRatingPerCritChance)
+					warrior.AddStatDynamic(sim, stats.Crit, -10*core.CritRatingPerCritChance)
 				},
 			})
 

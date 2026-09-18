@@ -131,31 +131,41 @@ const (
 	Race_RaceTauren   Race = 6
 	Race_RaceTroll    Race = 7
 	Race_RaceUndead   Race = 8
+	// Forever's neutral race. Skyborne choose Horde or Alliance at
+	// character creation and their second active racial differs by
+	// faction, so the client's race table carries two rows and this
+	// enum follows. Additive: nothing before this is renumbered.
+	Race_RaceHighOrderSkyborne  Race = 9  // Alliance
+	Race_RaceWindshaperSkyborne Race = 10 // Horde
 )
 
 // Enum value maps for Race.
 var (
 	Race_name = map[int32]string{
-		0: "RaceUnknown",
-		1: "RaceDwarf",
-		2: "RaceGnome",
-		3: "RaceHuman",
-		4: "RaceNightElf",
-		5: "RaceOrc",
-		6: "RaceTauren",
-		7: "RaceTroll",
-		8: "RaceUndead",
+		0:  "RaceUnknown",
+		1:  "RaceDwarf",
+		2:  "RaceGnome",
+		3:  "RaceHuman",
+		4:  "RaceNightElf",
+		5:  "RaceOrc",
+		6:  "RaceTauren",
+		7:  "RaceTroll",
+		8:  "RaceUndead",
+		9:  "RaceHighOrderSkyborne",
+		10: "RaceWindshaperSkyborne",
 	}
 	Race_value = map[string]int32{
-		"RaceUnknown":  0,
-		"RaceDwarf":    1,
-		"RaceGnome":    2,
-		"RaceHuman":    3,
-		"RaceNightElf": 4,
-		"RaceOrc":      5,
-		"RaceTauren":   6,
-		"RaceTroll":    7,
-		"RaceUndead":   8,
+		"RaceUnknown":            0,
+		"RaceDwarf":              1,
+		"RaceGnome":              2,
+		"RaceHuman":              3,
+		"RaceNightElf":           4,
+		"RaceOrc":                5,
+		"RaceTauren":             6,
+		"RaceTroll":              7,
+		"RaceUndead":             8,
+		"RaceHighOrderSkyborne":  9,
+		"RaceWindshaperSkyborne": 10,
 	}
 )
 
@@ -376,54 +386,59 @@ func (Profession) EnumDescriptor() ([]byte, []int) {
 }
 
 // Keep in sync with sim/core/stats/stats.go.
-// NextIndex: 44
+// NextIndex: 41
+// NOTE: the values of this enum are array indexes into stats.Stats, not
+// stable wire identities. They are renumbered when a stat is added or
+// merged, and both the Go engine and the web are rebuilt from this file at
+// the same ENGINE_VERSION, so nothing persists a raw value across builds.
 type Stat int32
 
 const (
-	Stat_StatStrength          Stat = 0
-	Stat_StatAgility           Stat = 1
-	Stat_StatStamina           Stat = 2
-	Stat_StatIntellect         Stat = 3
-	Stat_StatSpirit            Stat = 4
-	Stat_StatSpellPower        Stat = 5
-	Stat_StatArcanePower       Stat = 6
-	Stat_StatFirePower         Stat = 7
-	Stat_StatFrostPower        Stat = 8
-	Stat_StatHolyPower         Stat = 9
-	Stat_StatNaturePower       Stat = 10
-	Stat_StatShadowPower       Stat = 11
-	Stat_StatMP5               Stat = 12
-	Stat_StatSpellHit          Stat = 13
-	Stat_StatSpellCrit         Stat = 14
+	Stat_StatStrength    Stat = 0
+	Stat_StatAgility     Stat = 1
+	Stat_StatStamina     Stat = 2
+	Stat_StatIntellect   Stat = 3
+	Stat_StatSpirit      Stat = 4
+	Stat_StatSpellPower  Stat = 5
+	Stat_StatArcanePower Stat = 6
+	Stat_StatFirePower   Stat = 7
+	Stat_StatFrostPower  Stat = 8
+	Stat_StatHolyPower   Stat = 9
+	Stat_StatNaturePower Stat = 10
+	Stat_StatShadowPower Stat = 11
+	Stat_StatMP5         Stat = 12
+	// Forever merges spell, melee and ranged hit into one stat, and
+	// likewise crit. This enum must stay index-synced with the Go Stat
+	// enum in sim/core/stats/stats.go; stats_test.go enforces it.
+	Stat_StatHit               Stat = 13
+	Stat_StatCrit              Stat = 14
 	Stat_StatSpellHaste        Stat = 15
 	Stat_StatSpellPenetration  Stat = 16
 	Stat_StatAttackPower       Stat = 17
-	Stat_StatMeleeHit          Stat = 18
-	Stat_StatMeleeCrit         Stat = 19
-	Stat_StatMeleeHaste        Stat = 20
-	Stat_StatArmorPenetration  Stat = 21
-	Stat_StatExpertise         Stat = 22
-	Stat_StatMana              Stat = 23
-	Stat_StatEnergy            Stat = 24
-	Stat_StatRage              Stat = 25
-	Stat_StatArmor             Stat = 26
-	Stat_StatRangedAttackPower Stat = 27
-	Stat_StatDefense           Stat = 28
-	Stat_StatBlock             Stat = 29
-	Stat_StatBlockValue        Stat = 30
-	Stat_StatDodge             Stat = 31
-	Stat_StatParry             Stat = 32
-	Stat_StatResilience        Stat = 33
-	Stat_StatHealth            Stat = 34
-	Stat_StatArcaneResistance  Stat = 35
-	Stat_StatFireResistance    Stat = 36
-	Stat_StatFrostResistance   Stat = 37
-	Stat_StatNatureResistance  Stat = 38
-	Stat_StatShadowResistance  Stat = 39
-	Stat_StatBonusArmor        Stat = 40
-	Stat_StatHealingPower      Stat = 41
-	Stat_StatSpellDamage       Stat = 42
-	Stat_StatFeralAttackPower  Stat = 43
+	Stat_StatMeleeHaste        Stat = 18
+	Stat_StatArmorPenetration  Stat = 19
+	Stat_StatExpertise         Stat = 20
+	Stat_StatMana              Stat = 21
+	Stat_StatEnergy            Stat = 22
+	Stat_StatRage              Stat = 23
+	Stat_StatArmor             Stat = 24
+	Stat_StatRangedAttackPower Stat = 25
+	Stat_StatDefense           Stat = 26
+	Stat_StatBlock             Stat = 27
+	Stat_StatBlockValue        Stat = 28
+	Stat_StatDodge             Stat = 29
+	Stat_StatParry             Stat = 30
+	// StatResilience is deleted: Forever adds no resilience.
+	Stat_StatHealth           Stat = 31
+	Stat_StatArcaneResistance Stat = 32
+	Stat_StatFireResistance   Stat = 33
+	Stat_StatFrostResistance  Stat = 34
+	Stat_StatNatureResistance Stat = 35
+	Stat_StatShadowResistance Stat = 36
+	Stat_StatBonusArmor       Stat = 37
+	Stat_StatHealingPower     Stat = 38
+	Stat_StatSpellDamage      Stat = 39
+	Stat_StatFeralAttackPower Stat = 40
 )
 
 // Enum value maps for Stat.
@@ -442,37 +457,34 @@ var (
 		10: "StatNaturePower",
 		11: "StatShadowPower",
 		12: "StatMP5",
-		13: "StatSpellHit",
-		14: "StatSpellCrit",
+		13: "StatHit",
+		14: "StatCrit",
 		15: "StatSpellHaste",
 		16: "StatSpellPenetration",
 		17: "StatAttackPower",
-		18: "StatMeleeHit",
-		19: "StatMeleeCrit",
-		20: "StatMeleeHaste",
-		21: "StatArmorPenetration",
-		22: "StatExpertise",
-		23: "StatMana",
-		24: "StatEnergy",
-		25: "StatRage",
-		26: "StatArmor",
-		27: "StatRangedAttackPower",
-		28: "StatDefense",
-		29: "StatBlock",
-		30: "StatBlockValue",
-		31: "StatDodge",
-		32: "StatParry",
-		33: "StatResilience",
-		34: "StatHealth",
-		35: "StatArcaneResistance",
-		36: "StatFireResistance",
-		37: "StatFrostResistance",
-		38: "StatNatureResistance",
-		39: "StatShadowResistance",
-		40: "StatBonusArmor",
-		41: "StatHealingPower",
-		42: "StatSpellDamage",
-		43: "StatFeralAttackPower",
+		18: "StatMeleeHaste",
+		19: "StatArmorPenetration",
+		20: "StatExpertise",
+		21: "StatMana",
+		22: "StatEnergy",
+		23: "StatRage",
+		24: "StatArmor",
+		25: "StatRangedAttackPower",
+		26: "StatDefense",
+		27: "StatBlock",
+		28: "StatBlockValue",
+		29: "StatDodge",
+		30: "StatParry",
+		31: "StatHealth",
+		32: "StatArcaneResistance",
+		33: "StatFireResistance",
+		34: "StatFrostResistance",
+		35: "StatNatureResistance",
+		36: "StatShadowResistance",
+		37: "StatBonusArmor",
+		38: "StatHealingPower",
+		39: "StatSpellDamage",
+		40: "StatFeralAttackPower",
 	}
 	Stat_value = map[string]int32{
 		"StatStrength":          0,
@@ -488,37 +500,34 @@ var (
 		"StatNaturePower":       10,
 		"StatShadowPower":       11,
 		"StatMP5":               12,
-		"StatSpellHit":          13,
-		"StatSpellCrit":         14,
+		"StatHit":               13,
+		"StatCrit":              14,
 		"StatSpellHaste":        15,
 		"StatSpellPenetration":  16,
 		"StatAttackPower":       17,
-		"StatMeleeHit":          18,
-		"StatMeleeCrit":         19,
-		"StatMeleeHaste":        20,
-		"StatArmorPenetration":  21,
-		"StatExpertise":         22,
-		"StatMana":              23,
-		"StatEnergy":            24,
-		"StatRage":              25,
-		"StatArmor":             26,
-		"StatRangedAttackPower": 27,
-		"StatDefense":           28,
-		"StatBlock":             29,
-		"StatBlockValue":        30,
-		"StatDodge":             31,
-		"StatParry":             32,
-		"StatResilience":        33,
-		"StatHealth":            34,
-		"StatArcaneResistance":  35,
-		"StatFireResistance":    36,
-		"StatFrostResistance":   37,
-		"StatNatureResistance":  38,
-		"StatShadowResistance":  39,
-		"StatBonusArmor":        40,
-		"StatHealingPower":      41,
-		"StatSpellDamage":       42,
-		"StatFeralAttackPower":  43,
+		"StatMeleeHaste":        18,
+		"StatArmorPenetration":  19,
+		"StatExpertise":         20,
+		"StatMana":              21,
+		"StatEnergy":            22,
+		"StatRage":              23,
+		"StatArmor":             24,
+		"StatRangedAttackPower": 25,
+		"StatDefense":           26,
+		"StatBlock":             27,
+		"StatBlockValue":        28,
+		"StatDodge":             29,
+		"StatParry":             30,
+		"StatHealth":            31,
+		"StatArcaneResistance":  32,
+		"StatFireResistance":    33,
+		"StatFrostResistance":   34,
+		"StatNatureResistance":  35,
+		"StatShadowResistance":  36,
+		"StatBonusArmor":        37,
+		"StatHealingPower":      38,
+		"StatSpellDamage":       39,
+		"StatFeralAttackPower":  40,
 	}
 )
 
@@ -6039,7 +6048,7 @@ const file_common_proto_rawDesc = "" +
 	"\x10SpecShadowPriest\x10\x04\x12\x0f\n" +
 	"\vSpecWarlock\x10\x05\x12\x0f\n" +
 	"\vSpecWarrior\x10\x06\x12\x13\n" +
-	"\x0fSpecTankWarrior\x10\v*\x92\x01\n" +
+	"\x0fSpecTankWarrior\x10\v*\xc9\x01\n" +
 	"\x04Race\x12\x0f\n" +
 	"\vRaceUnknown\x10\x00\x12\r\n" +
 	"\tRaceDwarf\x10\x01\x12\r\n" +
@@ -6051,7 +6060,10 @@ const file_common_proto_rawDesc = "" +
 	"RaceTauren\x10\x06\x12\r\n" +
 	"\tRaceTroll\x10\a\x12\x0e\n" +
 	"\n" +
-	"RaceUndead\x10\b*/\n" +
+	"RaceUndead\x10\b\x12\x19\n" +
+	"\x15RaceHighOrderSkyborne\x10\t\x12\x1a\n" +
+	"\x16RaceWindshaperSkyborne\x10\n" +
+	"*/\n" +
 	"\aFaction\x12\v\n" +
 	"\aUnknown\x10\x00\x12\f\n" +
 	"\bAlliance\x10\x01\x12\t\n" +
@@ -6083,7 +6095,7 @@ const file_common_proto_rawDesc = "" +
 	"\x06Mining\x10\t\x12\f\n" +
 	"\bSkinning\x10\n" +
 	"\x12\r\n" +
-	"\tTailoring\x10\v*\xe9\x06\n" +
+	"\tTailoring\x10\v*\xa6\x06\n" +
 	"\x04Stat\x12\x10\n" +
 	"\fStatStrength\x10\x00\x12\x0f\n" +
 	"\vStatAgility\x10\x01\x12\x0f\n" +
@@ -6099,40 +6111,37 @@ const file_common_proto_rawDesc = "" +
 	"\x0fStatNaturePower\x10\n" +
 	"\x12\x13\n" +
 	"\x0fStatShadowPower\x10\v\x12\v\n" +
-	"\aStatMP5\x10\f\x12\x10\n" +
-	"\fStatSpellHit\x10\r\x12\x11\n" +
-	"\rStatSpellCrit\x10\x0e\x12\x12\n" +
+	"\aStatMP5\x10\f\x12\v\n" +
+	"\aStatHit\x10\r\x12\f\n" +
+	"\bStatCrit\x10\x0e\x12\x12\n" +
 	"\x0eStatSpellHaste\x10\x0f\x12\x18\n" +
 	"\x14StatSpellPenetration\x10\x10\x12\x13\n" +
-	"\x0fStatAttackPower\x10\x11\x12\x10\n" +
-	"\fStatMeleeHit\x10\x12\x12\x11\n" +
-	"\rStatMeleeCrit\x10\x13\x12\x12\n" +
-	"\x0eStatMeleeHaste\x10\x14\x12\x18\n" +
-	"\x14StatArmorPenetration\x10\x15\x12\x11\n" +
-	"\rStatExpertise\x10\x16\x12\f\n" +
-	"\bStatMana\x10\x17\x12\x0e\n" +
+	"\x0fStatAttackPower\x10\x11\x12\x12\n" +
+	"\x0eStatMeleeHaste\x10\x12\x12\x18\n" +
+	"\x14StatArmorPenetration\x10\x13\x12\x11\n" +
+	"\rStatExpertise\x10\x14\x12\f\n" +
+	"\bStatMana\x10\x15\x12\x0e\n" +
 	"\n" +
-	"StatEnergy\x10\x18\x12\f\n" +
-	"\bStatRage\x10\x19\x12\r\n" +
-	"\tStatArmor\x10\x1a\x12\x19\n" +
-	"\x15StatRangedAttackPower\x10\x1b\x12\x0f\n" +
-	"\vStatDefense\x10\x1c\x12\r\n" +
-	"\tStatBlock\x10\x1d\x12\x12\n" +
-	"\x0eStatBlockValue\x10\x1e\x12\r\n" +
-	"\tStatDodge\x10\x1f\x12\r\n" +
-	"\tStatParry\x10 \x12\x12\n" +
-	"\x0eStatResilience\x10!\x12\x0e\n" +
+	"StatEnergy\x10\x16\x12\f\n" +
+	"\bStatRage\x10\x17\x12\r\n" +
+	"\tStatArmor\x10\x18\x12\x19\n" +
+	"\x15StatRangedAttackPower\x10\x19\x12\x0f\n" +
+	"\vStatDefense\x10\x1a\x12\r\n" +
+	"\tStatBlock\x10\x1b\x12\x12\n" +
+	"\x0eStatBlockValue\x10\x1c\x12\r\n" +
+	"\tStatDodge\x10\x1d\x12\r\n" +
+	"\tStatParry\x10\x1e\x12\x0e\n" +
 	"\n" +
-	"StatHealth\x10\"\x12\x18\n" +
-	"\x14StatArcaneResistance\x10#\x12\x16\n" +
-	"\x12StatFireResistance\x10$\x12\x17\n" +
-	"\x13StatFrostResistance\x10%\x12\x18\n" +
-	"\x14StatNatureResistance\x10&\x12\x18\n" +
-	"\x14StatShadowResistance\x10'\x12\x12\n" +
-	"\x0eStatBonusArmor\x10(\x12\x14\n" +
-	"\x10StatHealingPower\x10)\x12\x13\n" +
-	"\x0fStatSpellDamage\x10*\x12\x18\n" +
-	"\x14StatFeralAttackPower\x10+*\xb9\a\n" +
+	"StatHealth\x10\x1f\x12\x18\n" +
+	"\x14StatArcaneResistance\x10 \x12\x16\n" +
+	"\x12StatFireResistance\x10!\x12\x17\n" +
+	"\x13StatFrostResistance\x10\"\x12\x18\n" +
+	"\x14StatNatureResistance\x10#\x12\x18\n" +
+	"\x14StatShadowResistance\x10$\x12\x12\n" +
+	"\x0eStatBonusArmor\x10%\x12\x14\n" +
+	"\x10StatHealingPower\x10&\x12\x13\n" +
+	"\x0fStatSpellDamage\x10'\x12\x18\n" +
+	"\x14StatFeralAttackPower\x10(*\xb9\a\n" +
 	"\n" +
 	"PseudoStat\x12\x19\n" +
 	"\x15PseudoStatMainHandDps\x10\x00\x12\x18\n" +

@@ -27,7 +27,7 @@ func (shaman *Shaman) ApplyTalents() {
 
 	shaman.AddStat(stats.Block, 1*float64(shaman.Talents.ShieldSpecialization))
 
-	shaman.AddStat(stats.MeleeCrit, core.CritRatingPerCritChance*1*float64(shaman.Talents.ThunderingStrikes))
+	shaman.AddStat(stats.Crit, core.CritRatingPerCritChance*1*float64(shaman.Talents.ThunderingStrikes))
 
 	shaman.AddStat(stats.Dodge, 1*float64(shaman.Talents.Anticipation))
 
@@ -57,8 +57,8 @@ func (shaman *Shaman) ApplyTalents() {
 		})
 	}
 
-	shaman.AddStat(stats.MeleeHit, float64(shaman.Talents.NaturesGuidance))
-	shaman.AddStat(stats.SpellHit, float64(shaman.Talents.NaturesGuidance))
+	shaman.AddStat(stats.Hit, float64(shaman.Talents.NaturesGuidance))
+	shaman.AddStat(stats.Hit, float64(shaman.Talents.NaturesGuidance))
 
 	if shaman.Talents.HealingGrace > 0 {
 		threatMultiplier := 1 - .05*float64(shaman.Talents.HealingGrace)
@@ -175,7 +175,7 @@ func (shaman *Shaman) applyElementalDevastation() {
 
 	spellID := []int32{0, 30165, 29177, 29178}[shaman.Talents.ElementalDevastation]
 	critBonus := 3.0 * float64(shaman.Talents.ElementalDevastation) * core.CritRatingPerCritChance
-	procAura := shaman.NewTemporaryStatsAura("Elemental Devastation Proc", core.ActionID{SpellID: spellID}, stats.Stats{stats.MeleeCrit: critBonus}, time.Second*10)
+	procAura := shaman.NewTemporaryStatsAura("Elemental Devastation Proc", core.ActionID{SpellID: spellID}, stats.Stats{stats.Crit: critBonus}, time.Second*10)
 
 	shaman.RegisterAura(core.Aura{
 		Label:    "Elemental Devastation",

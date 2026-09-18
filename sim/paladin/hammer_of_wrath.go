@@ -59,7 +59,7 @@ func (paladin *Paladin) registerHammerOfWrath() {
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 			BonusCoefficient: 0.429,
-			BonusHitRating:   -float64(paladin.Talents.Precision) * core.MeleeHitRatingPerHitChance,
+			BonusHitRating:   -float64(paladin.Talents.Precision) * core.HitRatingPerHitChance,
 
 			ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 				return sim.IsExecutePhase20()

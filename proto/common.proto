@@ -36,6 +36,12 @@ enum Race {
 	RaceTauren = 6;
 	RaceTroll = 7;
 	RaceUndead = 8;
+	// Forever's neutral race. Skyborne choose Horde or Alliance at
+	// character creation and their second active racial differs by
+	// faction, so the client's race table carries two rows and this
+	// enum follows. Additive: nothing before this is renumbered.
+	RaceHighOrderSkyborne = 9;   // Alliance
+	RaceWindshaperSkyborne = 10; // Horde
 }
 
 enum Faction {
@@ -71,7 +77,11 @@ enum Profession {
 }
 
 // Keep in sync with sim/core/stats/stats.go.
-// NextIndex: 44
+// NextIndex: 41
+// NOTE: the values of this enum are array indexes into stats.Stats, not
+// stable wire identities. They are renumbered when a stat is added or
+// merged, and both the Go engine and the web are rebuilt from this file at
+// the same ENGINE_VERSION, so nothing persists a raw value across builds.
 enum Stat {
 	StatStrength = 0;
 	StatAgility = 1;
@@ -86,37 +96,38 @@ enum Stat {
 	StatNaturePower = 10;
 	StatShadowPower = 11;
 	StatMP5 = 12;
-	StatSpellHit = 13;
-	StatSpellCrit = 14;
+	// Forever merges spell, melee and ranged hit into one stat, and
+	// likewise crit. This enum must stay index-synced with the Go Stat
+	// enum in sim/core/stats/stats.go; stats_test.go enforces it.
+	StatHit = 13;
+	StatCrit = 14;
 	StatSpellHaste = 15;
 	StatSpellPenetration = 16;
 	StatAttackPower = 17;
-	StatMeleeHit = 18;
-	StatMeleeCrit = 19;
-	StatMeleeHaste = 20;
-	StatArmorPenetration = 21;
-	StatExpertise = 22;
-	StatMana = 23;
-	StatEnergy = 24;
-	StatRage = 25;
-	StatArmor = 26;
-	StatRangedAttackPower = 27;
-	StatDefense = 28;
-	StatBlock = 29;
-	StatBlockValue = 30;
-	StatDodge = 31;
-	StatParry = 32;
-	StatResilience = 33;
-	StatHealth = 34;
-	StatArcaneResistance = 35;
-	StatFireResistance = 36;
-	StatFrostResistance = 37;
-	StatNatureResistance = 38;
-	StatShadowResistance = 39;
-	StatBonusArmor = 40;
-	StatHealingPower = 41;
-	StatSpellDamage = 42;
-	StatFeralAttackPower = 43;
+	StatMeleeHaste = 18;
+	StatArmorPenetration = 19;
+	StatExpertise = 20;
+	StatMana = 21;
+	StatEnergy = 22;
+	StatRage = 23;
+	StatArmor = 24;
+	StatRangedAttackPower = 25;
+	StatDefense = 26;
+	StatBlock = 27;
+	StatBlockValue = 28;
+	StatDodge = 29;
+	StatParry = 30;
+	// StatResilience is deleted: Forever adds no resilience.
+	StatHealth = 31;
+	StatArcaneResistance = 32;
+	StatFireResistance = 33;
+	StatFrostResistance = 34;
+	StatNatureResistance = 35;
+	StatShadowResistance = 36;
+	StatBonusArmor = 37;
+	StatHealingPower = 38;
+	StatSpellDamage = 39;
+	StatFeralAttackPower = 40;
 	// DO NOT add new stats here without discussing it first; new stats come with
 	// a performance penalty.
 }

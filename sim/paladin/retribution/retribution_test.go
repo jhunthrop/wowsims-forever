@@ -115,9 +115,7 @@ var Stats = []proto.Stat{
 	proto.Stat_StatStrength,
 	proto.Stat_StatAgility,
 	proto.Stat_StatAttackPower,
-	proto.Stat_StatMeleeHit,
-	proto.Stat_StatMeleeCrit,
+	proto.Stat_StatHit,
+	proto.Stat_StatCrit,
 	proto.Stat_StatSpellPower,
-	proto.Stat_StatSpellHit,
-	proto.Stat_StatSpellCrit,
 }

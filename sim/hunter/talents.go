@@ -13,8 +13,8 @@ func (hunter *Hunter) ApplyTalents() {
 		hunter.applyFrenzy()
 		hunter.registerBestialWrathCD()
 
-		hunter.pet.AddStat(stats.MeleeCrit, core.CritRatingPerCritChance*3*float64(hunter.Talents.Ferocity))
-		hunter.pet.AddStat(stats.SpellCrit, core.SpellCritRatingPerCritChance*3*float64(hunter.Talents.Ferocity))
+		hunter.pet.AddStat(stats.Crit, core.CritRatingPerCritChance*3*float64(hunter.Talents.Ferocity))
+		hunter.pet.AddStat(stats.Crit, core.CritRatingPerCritChance*3*float64(hunter.Talents.Ferocity))
 
 		hunter.pet.PseudoStats.DamageDealtMultiplier *= 1 + 0.04*float64(hunter.Talents.UnleashedFury)
 
@@ -55,10 +55,10 @@ func (hunter *Hunter) ApplyTalents() {
 		}))
 	}
 
-	hunter.AddStat(stats.MeleeHit, float64(hunter.Talents.Surefooted)*1*core.MeleeHitRatingPerHitChance)
-	hunter.AddStat(stats.SpellHit, float64(hunter.Talents.Surefooted)*1*core.SpellHitRatingPerHitChance)
+	hunter.AddStat(stats.Hit, float64(hunter.Talents.Surefooted)*1*core.HitRatingPerHitChance)
+	hunter.AddStat(stats.Hit, float64(hunter.Talents.Surefooted)*1*core.HitRatingPerHitChance)
 
-	hunter.AddStat(stats.MeleeCrit, float64(hunter.Talents.KillerInstinct)*1*core.CritRatingPerCritChance)
+	hunter.AddStat(stats.Crit, float64(hunter.Talents.KillerInstinct)*1*core.CritRatingPerCritChance)
 
 	if hunter.Talents.LethalShots > 0 {
 		lethalBonus := 1 * float64(hunter.Talents.LethalShots) * core.CritRatingPerCritChance

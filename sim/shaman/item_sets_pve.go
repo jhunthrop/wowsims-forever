@@ -73,7 +73,7 @@ var ItemSetTheTenStorms = core.NewItemSet(core.ItemSet{
 		// Improves your chance to get a critical strike with Nature spells by 3%.
 		5: func(agent core.Agent) {
 			shaman := agent.(ShamanAgent).GetShaman()
-			shaman.PseudoStats.SchoolBonusCritChance[stats.SchoolIndexNature] += 3 * core.SpellCritRatingPerCritChance
+			shaman.PseudoStats.SchoolBonusCritChance[stats.SchoolIndexNature] += 3 * core.CritRatingPerCritChance
 		},
 		// When you cast a Healing Wave or Lesser Healing Wave, there is a 25% chance the target also receives a free Lightning Shield that causes 50 Nature damage to attacker on hit.
 		8: func(agent core.Agent) {

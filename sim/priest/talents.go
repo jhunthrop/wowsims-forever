@@ -165,7 +165,7 @@ func (priest *Priest) applyShadowFocus() {
 		return
 	}
 
-	bonusHit := 2 * float64(priest.Talents.ShadowFocus) * core.SpellHitRatingPerHitChance
+	bonusHit := 2 * float64(priest.Talents.ShadowFocus) * core.HitRatingPerHitChance
 	priest.OnSpellRegistered(func(spell *core.Spell) {
 		if spell.Flags.Matches(SpellFlagPriest) || spell.SpellSchool.Matches(core.SpellSchoolShadow) {
 			spell.BonusHitRating += bonusHit
@@ -273,7 +273,7 @@ func (priest *Priest) registerInnerFocus() {
 			for _, spell := range priest.Spellbook {
 				if spell.Flags.Matches(SpellFlagPriest) && spell.Cost != nil {
 					spell.Cost.Multiplier -= 100
-					spell.BonusCritRating += 25 * core.SpellCritRatingPerCritChance
+					spell.BonusCritRating += 25 * core.CritRatingPerCritChance
 				}
 			}
 		},
@@ -281,7 +281,7 @@ func (priest *Priest) registerInnerFocus() {
 			for _, spell := range priest.Spellbook {
 				if spell.Flags.Matches(SpellFlagPriest) && spell.Cost != nil {
 					spell.Cost.Multiplier += 100
-					spell.BonusCritRating -= 25 * core.SpellCritRatingPerCritChance
+					spell.BonusCritRating -= 25 * core.CritRatingPerCritChance
 				}
 			}
 		},

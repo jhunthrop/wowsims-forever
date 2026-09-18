@@ -239,7 +239,7 @@ func NewWarrior(character *core.Character, talents string, inputs WarriorInputs)
 
 	warrior.AddStatDependency(stats.Strength, stats.AttackPower, core.APPerStrength[character.Class])
 	warrior.PseudoStats.BlockValuePerStrength = .05 // 20 str = 1 block
-	warrior.AddStatDependency(stats.Agility, stats.MeleeCrit, core.CritPerAgiAtLevel[character.Class]*core.CritRatingPerCritChance)
+	warrior.AddStatDependency(stats.Agility, stats.Crit, core.CritPerAgiAtLevel[character.Class]*core.CritRatingPerCritChance)
 	warrior.AddStatDependency(stats.Agility, stats.Dodge, core.DodgePerAgiAtLevel[character.Class]*core.DodgeRatingPerDodgeChance)
 	warrior.AddStatDependency(stats.BonusArmor, stats.Armor, 1)
 

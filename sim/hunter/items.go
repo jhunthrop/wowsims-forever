@@ -125,7 +125,7 @@ func init() {
 		procBonus := stats.Stats{
 			stats.AttackPower:       150,
 			stats.RangedAttackPower: 150,
-			stats.MeleeHit:          2,
+			stats.Hit:          2,
 		}
 		aura := hunter.GetOrRegisterAura(core.Aura{
 			Label:    "Devilsaur Fury",

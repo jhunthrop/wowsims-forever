@@ -40,7 +40,7 @@ func init() {
 // 			proto.Stat_StatIntellect,
 // 			proto.Stat_StatSpellPower,
 // 			proto.Stat_StatSpellHaste,
-// 			proto.Stat_StatSpellCrit,
+// 			proto.Stat_StatCrit,
 // 		},
 // 	}))
 // }

@@ -52,7 +52,7 @@ func (druid *Druid) GetCatWeapon() core.Weapon {
 func (druid *Druid) GetFormShiftStats() stats.Stats {
 	s := stats.Stats{
 		stats.AttackPower: float64(druid.Talents.PredatoryStrikes) * 0.5 * float64(druid.Level),
-		stats.MeleeCrit:   float64(druid.Talents.SharpenedClaws) * 2 * core.CritRatingPerCritChance,
+		stats.Crit:        float64(druid.Talents.SharpenedClaws) * 2 * core.CritRatingPerCritChance,
 	}
 	/*
 		if weapon := druid.GetMHWeapon(); weapon != nil {

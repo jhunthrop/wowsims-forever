@@ -76,6 +76,6 @@ var Stats = []proto.Stat{
 	proto.Stat_StatArcanePower,
 	proto.Stat_StatFirePower,
 	proto.Stat_StatFrostPower,
-	proto.Stat_StatSpellHit,
-	proto.Stat_StatSpellCrit,
+	proto.Stat_StatHit,
+	proto.Stat_StatCrit,
 }

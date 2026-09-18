@@ -83,8 +83,8 @@ var Stats = []proto.Stat{
 	proto.Stat_StatAttackPower,
 	proto.Stat_StatAgility,
 	proto.Stat_StatStrength,
-	proto.Stat_StatMeleeHit,
-	proto.Stat_StatMeleeCrit,
+	proto.Stat_StatHit,
+	proto.Stat_StatCrit,
 }
 
 var Phase1Consumes = core.ConsumesCombo{

@@ -14,7 +14,7 @@ func (warrior *Warrior) ToughnessArmorMultiplier() float64 {
 }
 
 func (warrior *Warrior) ApplyTalents() {
-	warrior.AddStat(stats.MeleeCrit, core.CritRatingPerCritChance*1*float64(warrior.Talents.Cruelty))
+	warrior.AddStat(stats.Crit, core.CritRatingPerCritChance*1*float64(warrior.Talents.Cruelty))
 	warrior.ApplyEquipScaling(stats.Armor, warrior.ToughnessArmorMultiplier())
 	warrior.AddStat(stats.Defense, 2*float64(warrior.Talents.Anticipation))
 	warrior.AddStat(stats.Parry, 1*float64(warrior.Talents.Deflection))
@@ -89,9 +89,9 @@ func (warrior *Warrior) applyWeaponSpecializations() {
 		// the default character panel displays critical strike chance for main hand only
 		switch warrior.GetProcMaskForTypes(proto.WeaponType_WeaponTypeAxe) {
 		case core.ProcMaskMelee:
-			warrior.AddStat(stats.MeleeCrit, 1*core.CritRatingPerCritChance*float64(as))
+			warrior.AddStat(stats.Crit, 1*core.CritRatingPerCritChance*float64(as))
 		case core.ProcMaskMeleeMH:
-			warrior.AddStat(stats.MeleeCrit, 1*core.CritRatingPerCritChance*float64(as))
+			warrior.AddStat(stats.Crit, 1*core.CritRatingPerCritChance*float64(as))
 			warrior.OnSpellRegistered(func(spell *core.Spell) {
 				if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
 					spell.BonusCritRating -= 1 * core.CritRatingPerCritChance * float64(as)
@@ -110,9 +110,9 @@ func (warrior *Warrior) applyWeaponSpecializations() {
 		// the default character panel displays critical strike chance for main hand only
 		switch warrior.GetProcMaskForTypes(proto.WeaponType_WeaponTypePolearm) {
 		case core.ProcMaskMelee:
-			warrior.AddStat(stats.MeleeCrit, 1*core.CritRatingPerCritChance*float64(ps))
+			warrior.AddStat(stats.Crit, 1*core.CritRatingPerCritChance*float64(ps))
 		case core.ProcMaskMeleeMH:
-			warrior.AddStat(stats.MeleeCrit, 1*core.CritRatingPerCritChance*float64(ps))
+			warrior.AddStat(stats.Crit, 1*core.CritRatingPerCritChance*float64(ps))
 			warrior.OnSpellRegistered(func(spell *core.Spell) {
 				if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
 					spell.BonusCritRating -= 1 * core.CritRatingPerCritChance * float64(ps)

@@ -33,8 +33,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 		// Physical
 		Stat.StatAttackPower,
 		Stat.StatFeralAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatExpertise,
 		// Spell
 		Stat.StatMP5,
@@ -54,8 +54,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 		// Physical
 		Stat.StatAttackPower,
 		Stat.StatFeralAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatExpertise,
 		// Spell
 		Stat.StatMP5,
@@ -74,8 +74,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 				[Stat.StatSpirit]: 0.38,
 				[Stat.StatMP5]: 0.79,
 				[Stat.StatAttackPower]: 1,
-				[Stat.StatMeleeHit]: 26.59,
-				[Stat.StatMeleeCrit]: 28.68,
+				[Stat.StatHit]: 26.59,
+				[Stat.StatCrit]: 28.68,
 				[Stat.StatExpertise]: 26.59,
 				[Stat.StatMana]: 0.03,
 				[Stat.StatFeralAttackPower]: 1,
@@ -247,7 +247,7 @@ export class FeralDruidSimUI extends IndividualSimUI<Spec.SpecFeralDruid> {
 			agiProcs += 300;
 		}
 
-		return new Stats().withStat(Stat.StatMeleeCrit, (baseCritCapPercentage - (agiProcs * 1.1 * 1.06 * 1.02) / 83.33) * 45.91);
+		return new Stats().withStat(Stat.StatCrit, (baseCritCapPercentage - (agiProcs * 1.1 * 1.06 * 1.02) / 83.33) * 45.91);
 	}
 
 	async updateGear(gear: Gear): Promise<Stats> {

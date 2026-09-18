@@ -344,7 +344,7 @@ func (druid *Druid) applyImprovedMoonfire() {
 	}
 
 	damageMultiplier := 0.02 * float64(druid.Talents.ImprovedMoonfire)
-	bonusCrit := 2 * float64(druid.Talents.ImprovedMoonfire) * core.SpellCritRatingPerCritChance
+	bonusCrit := 2 * float64(druid.Talents.ImprovedMoonfire) * core.CritRatingPerCritChance
 
 	druid.RegisterAura(core.Aura{
 		Label: "Improved moonfire",

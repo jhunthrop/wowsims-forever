@@ -30,9 +30,9 @@ const statGroups = new Map<string, Array<UnitStat>>([
 			UnitStat.fromStat(Stat.StatAttackPower),
 			UnitStat.fromStat(Stat.StatFeralAttackPower),
 			UnitStat.fromStat(Stat.StatRangedAttackPower),
-			UnitStat.fromStat(Stat.StatMeleeHit),
+			UnitStat.fromStat(Stat.StatHit),
 			UnitStat.fromStat(Stat.StatExpertise),
-			UnitStat.fromStat(Stat.StatMeleeCrit),
+			UnitStat.fromStat(Stat.StatCrit),
 			UnitStat.fromStat(Stat.StatMeleeHaste),
 			UnitStat.fromPseudoStat(PseudoStat.PseudoStatMeleeSpeedMultiplier),
 			UnitStat.fromPseudoStat(PseudoStat.PseudoStatRangedSpeedMultiplier),
@@ -50,8 +50,6 @@ const statGroups = new Map<string, Array<UnitStat>>([
 			UnitStat.fromStat(Stat.StatHolyPower),
 			UnitStat.fromStat(Stat.StatNaturePower),
 			UnitStat.fromStat(Stat.StatShadowPower),
-			UnitStat.fromStat(Stat.StatSpellHit),
-			UnitStat.fromStat(Stat.StatSpellCrit),
 			UnitStat.fromPseudoStat(PseudoStat.PseudoStatCastSpeedMultiplier),
 			UnitStat.fromStat(Stat.StatSpellPenetration),
 			UnitStat.fromStat(Stat.StatMP5),
@@ -121,7 +119,7 @@ export class CharacterStats extends Component {
 				const valueElem = row.getElementsByClassName('character-stats-table-value')[0] as HTMLTableCellElement;
 				this.valueElems.push(valueElem);
 
-				if (stat.isStat() && stat.getStat() === Stat.StatMeleeCrit && this.shouldShowMeleeCritCap(player)) {
+				if (stat.isStat() && stat.getStat() === Stat.StatCrit && this.shouldShowMeleeCritCap(player)) {
 					const critCapRow = (
 						<tr className="character-stats-table-row">
 							<td className="character-stats-table-label">Melee Crit Cap</td>
@@ -243,7 +241,7 @@ export class CharacterStats extends Component {
 				</div>
 			);
 
-			if (stat.isStat() && stat.getStat() === Stat.StatMeleeHit) {
+			if (stat.isStat() && stat.getStat() === Stat.StatHit) {
 				tooltipContent.appendChild(
 					<div className="ps-2">
 						<div className="character-stats-tooltip-row">
@@ -292,7 +290,10 @@ export class CharacterStats extends Component {
 						</div>
 					</div>,
 				);
-			} else if (stat.isStat() && stat.getStat() === Stat.StatSpellHit) {
+			}
+			// Forever: Hit is now one stat, so both the weapon-skill breakdown
+			// above and the spell-school breakdown below show on its tooltip.
+			if (stat.isStat() && stat.getStat() === Stat.StatHit) {
 				tooltipContent.appendChild(
 					<div className="ps-2">
 						<div className="character-stats-tooltip-row">
@@ -345,7 +346,7 @@ export class CharacterStats extends Component {
 						)}
 					</div>,
 				);
-			} else if (stat.isStat() && stat.getStat() === Stat.StatMeleeCrit && this.shouldShowMeleeCritCap(player)) {
+			} else if (stat.isStat() && stat.getStat() === Stat.StatCrit && this.shouldShowMeleeCritCap(player)) {
 				idx++;
 
 				const gear = player.getGear();
@@ -450,10 +451,8 @@ export class CharacterStats extends Component {
 				const mult = stats.getPseudoStat(PseudoStat.PseudoStatBlockValueMultiplier) || 1;
 				const perStr = Math.max(0, stats.getPseudoStat(PseudoStat.PseudoStatBlockValuePerStrength) * deltaStats.getStat(Stat.StatStrength) - 1);
 				displayStr = String(Math.round(rawValue * mult + perStr));
-			} else if (stat === Stat.StatMeleeHit) {
-				displayStr = `${(rawValue / Mechanics.MELEE_HIT_RATING_PER_HIT_CHANCE).toFixed(2)}%`;
-			} else if (stat === Stat.StatSpellHit) {
-				displayStr = `${(rawValue / Mechanics.SPELL_HIT_RATING_PER_HIT_CHANCE).toFixed(2)}%`;
+			} else if (stat === Stat.StatHit) {
+				displayStr = `${(rawValue / Mechanics.HIT_RATING_PER_HIT_CHANCE).toFixed(2)}%`;
 			} else if (stat === Stat.StatSpellDamage) {
 				const spDmg = Math.round(rawValue);
 				const baseSp = Math.round(deltaStats.getStat(Stat.StatSpellPower));
@@ -469,8 +468,8 @@ export class CharacterStats extends Component {
 				const spDmg = Math.round(rawValue);
 				const baseSp = Math.round(deltaStats.getStat(Stat.StatSpellPower) + deltaStats.getStat(Stat.StatSpellDamage));
 				displayStr = baseSp + spDmg + ` (+${spDmg})`;
-			} else if (stat === Stat.StatMeleeCrit || stat === Stat.StatSpellCrit) {
-				displayStr = `${(rawValue / Mechanics.SPELL_CRIT_RATING_PER_CRIT_CHANCE).toFixed(2)}%`;
+			} else if (stat === Stat.StatCrit) {
+				displayStr = `${(rawValue / Mechanics.CRIT_RATING_PER_CRIT_CHANCE).toFixed(2)}%`;
 			} else if (stat === Stat.StatMeleeHaste) {
 				// Melee Haste doesn't actually exist in vanilla so use the melee speed pseudostat
 				displayStr = `${(deltaStats.getPseudoStat(PseudoStat.PseudoStatMeleeSpeedMultiplier) * 100).toFixed(2)}%`;
@@ -489,8 +488,6 @@ export class CharacterStats extends Component {
 				displayStr = `${(rawValue / Mechanics.DODGE_RATING_PER_DODGE_CHANCE).toFixed(2)}%`;
 			} else if (stat === Stat.StatParry) {
 				displayStr = `${(rawValue / Mechanics.PARRY_RATING_PER_PARRY_CHANCE).toFixed(2)}%`;
-			} else if (stat === Stat.StatResilience) {
-				displayStr = `${rawValue} (${(rawValue / Mechanics.RESILIENCE_RATING_PER_CRIT_REDUCTION_CHANCE).toFixed(2)}%)`;
 			}
 		} else {
 			const pseudoStat = unitStat.getPseudoStat();
@@ -518,7 +515,7 @@ export class CharacterStats extends Component {
 	}
 
 	private spellSchoolHitDisplayString(stats: Stats, pseudoStat: PseudoStat): string {
-		return `${(stats.getPseudoStat(pseudoStat) + stats.getStat(Stat.StatSpellHit)).toFixed(2)}%`;
+		return `${(stats.getPseudoStat(pseudoStat) + stats.getStat(Stat.StatHit)).toFixed(2)}%`;
 	}
 
 	private critCapTooltip(mhCritCapInfo: MeleeCritCapInfo, ohCritCapInfo: MeleeCritCapInfo): JSX.Element {
@@ -614,7 +611,7 @@ export class CharacterStats extends Component {
 		// TODO: Classic ui debuffs
 		// const debuffs = this.player.sim.raid.getDebuffs();
 		// if (debuffs.improvedScorch || debuffs.wintersChill || debuffs.shadowMastery) {
-		// 	debuffStats = debuffStats.addStat(Stat.StatSpellCrit, 5 * Mechanics.SPELL_CRIT_RATING_PER_CRIT_CHANCE);
+		// 	debuffStats = debuffStats.addStat(Stat.StatCrit, 5 * Mechanics.CRIT_RATING_PER_CRIT_CHANCE);
 		// }
 
 		return debuffStats;

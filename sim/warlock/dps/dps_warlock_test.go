@@ -97,6 +97,6 @@ var ItemFilters = core.ItemFilter{
 var Stats = []proto.Stat{
 	proto.Stat_StatIntellect,
 	proto.Stat_StatSpellPower,
-	proto.Stat_StatSpellHit,
-	proto.Stat_StatSpellCrit,
+	proto.Stat_StatHit,
+	proto.Stat_StatCrit,
 }

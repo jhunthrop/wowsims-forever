@@ -55,8 +55,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRogue, {
 		Stat.StatStrength,
 		// Physical
 		Stat.StatAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		// Spell
 		Stat.StatSpellPower,
 	],
@@ -70,8 +70,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRogue, {
 		Stat.StatStrength,
 		// Physical
 		Stat.StatAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 	],
 	displayPseudoStats: [PseudoStat.PseudoStatMeleeSpeedMultiplier],
 
@@ -84,10 +84,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRogue, {
 				[Stat.StatAgility]: 2.38,
 				[Stat.StatStrength]: 1.26,
 				[Stat.StatAttackPower]: 1.0,
-				[Stat.StatSpellCrit]: 0.41,
-				[Stat.StatSpellHit]: 0.94,
-				[Stat.StatMeleeHit]: 29.44,
-				[Stat.StatMeleeCrit]: 17.92,
+				// Forever: merged from MeleeHit 29.44 + SpellHit 0.94. unconfirmed
+				[Stat.StatHit]: 29.44,
+				// Forever: merged from MeleeCrit 17.92 + SpellCrit 0.41. unconfirmed
+				[Stat.StatCrit]: 17.92,
 				[Stat.StatFireResistance]: 0.5,
 			},
 			{

@@ -81,52 +81,56 @@ var RaceOffsets = map[proto.Race]stats.Stats{
 	},
 }
 
+// Forever's unified base Crit is not published, so each class below keeps
+// its Era melee-crit value (the attack table is the load-bearing one for
+// the two launch specs) and drops the spell-crit value; Task 5's
+// regeneration replaces these from the client tables.
 var ClassBaseCrit = map[proto.Class]stats.Stats{
 	proto.Class_ClassUnknown: {},
 	proto.Class_ClassWarrior: {
-		stats.SpellCrit: 0.0000 * CritRatingPerCritChance,
-		stats.MeleeCrit: 0.0000 * CritRatingPerCritChance,
-		stats.Dodge:     0.0000 * DodgeRatingPerDodgeChance,
+		// unconfirmed: Era had base SpellCrit 0.0000 and MeleeCrit 0.0000.
+		stats.Crit:  0.0000 * CritRatingPerCritChance,
+		stats.Dodge: 0.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassPaladin: {
-		stats.SpellCrit: 3.5000 * CritRatingPerCritChance,
-		stats.MeleeCrit: 0.7000 * CritRatingPerCritChance,
-		stats.Dodge:     0.7000 * DodgeRatingPerDodgeChance,
+		// unconfirmed: Era had base SpellCrit 3.5000 and MeleeCrit 0.7000.
+		stats.Crit:  0.7000 * CritRatingPerCritChance,
+		stats.Dodge: 0.7000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassHunter: {
-		stats.SpellCrit: 3.6000 * CritRatingPerCritChance,
-		stats.MeleeCrit: 0.0000 * CritRatingPerCritChance,
-		stats.Dodge:     0.0000 * DodgeRatingPerDodgeChance,
+		// unconfirmed: Era had base SpellCrit 3.6000 and MeleeCrit 0.0000.
+		stats.Crit:  0.0000 * CritRatingPerCritChance,
+		stats.Dodge: 0.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassRogue: {
-		stats.SpellCrit: 0.0000 * CritRatingPerCritChance,
-		stats.MeleeCrit: 0.0000 * CritRatingPerCritChance,
-		stats.Dodge:     0.0000 * DodgeRatingPerDodgeChance,
+		// unconfirmed: Era had base SpellCrit 0.0000 and MeleeCrit 0.0000.
+		stats.Crit:  0.0000 * CritRatingPerCritChance,
+		stats.Dodge: 0.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassPriest: {
-		stats.SpellCrit: 0.8000 * CritRatingPerCritChance,
-		stats.MeleeCrit: 3.0000 * CritRatingPerCritChance,
-		stats.Dodge:     3.0000 * DodgeRatingPerDodgeChance,
+		// unconfirmed: Era had base SpellCrit 0.8000 and MeleeCrit 3.0000.
+		stats.Crit:  3.0000 * CritRatingPerCritChance,
+		stats.Dodge: 3.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassShaman: {
-		stats.SpellCrit: 2.3000 * CritRatingPerCritChance,
-		stats.MeleeCrit: 1.7000 * CritRatingPerCritChance,
-		stats.Dodge:     1.7000 * DodgeRatingPerDodgeChance,
+		// unconfirmed: Era had base SpellCrit 2.3000 and MeleeCrit 1.7000.
+		stats.Crit:  1.7000 * CritRatingPerCritChance,
+		stats.Dodge: 1.7000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassMage: {
-		stats.SpellCrit: 0.2000 * CritRatingPerCritChance,
-		stats.MeleeCrit: 3.2000 * CritRatingPerCritChance,
-		stats.Dodge:     3.2000 * DodgeRatingPerDodgeChance,
+		// unconfirmed: Era had base SpellCrit 0.2000 and MeleeCrit 3.2000.
+		stats.Crit:  3.2000 * CritRatingPerCritChance,
+		stats.Dodge: 3.2000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassWarlock: {
-		stats.SpellCrit: 1.7000 * CritRatingPerCritChance,
-		stats.MeleeCrit: 2.0000 * CritRatingPerCritChance,
-		stats.Dodge:     2.0000 * DodgeRatingPerDodgeChance,
+		// unconfirmed: Era had base SpellCrit 1.7000 and MeleeCrit 2.0000.
+		stats.Crit:  2.0000 * CritRatingPerCritChance,
+		stats.Dodge: 2.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassDruid: {
-		stats.SpellCrit: 1.8000 * CritRatingPerCritChance,
-		stats.MeleeCrit: 0.9000 * CritRatingPerCritChance,
-		stats.Dodge:     0.9000 * DodgeRatingPerDodgeChance,
+		// unconfirmed: Era had base SpellCrit 1.8000 and MeleeCrit 0.9000.
+		stats.Crit:  0.9000 * CritRatingPerCritChance,
+		stats.Dodge: 0.9000 * DodgeRatingPerDodgeChance,
 	},
 }
 

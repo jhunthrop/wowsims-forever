@@ -23,9 +23,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWarrior, {
 		Stat.StatAgility,
 		// Physical
 		Stat.StatAttackPower,
-		Stat.StatMeleeHit,
+		Stat.StatHit,
 		Stat.StatExpertise,
-		Stat.StatMeleeCrit,
+		Stat.StatCrit,
 	],
 	epPseudoStats: [PseudoStat.PseudoStatMainHandDps, PseudoStat.PseudoStatOffHandDps, PseudoStat.PseudoStatMeleeSpeedMultiplier],
 	// Reference stat against which to calculate EP. I think all classes use either spell power or attack power.
@@ -37,8 +37,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWarrior, {
 		Stat.StatAgility,
 		// Physical
 		Stat.StatAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatExpertise,
 	],
 	displayPseudoStats: [PseudoStat.PseudoStatMeleeSpeedMultiplier],
@@ -53,8 +53,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWarrior, {
 				[Stat.StatStrength]: 2.51,
 				[Stat.StatAgility]: 1.86,
 				[Stat.StatAttackPower]: 1,
-				[Stat.StatMeleeHit]: 28.67,
-				[Stat.StatMeleeCrit]: 25.1,
+				[Stat.StatHit]: 28.67,
+				[Stat.StatCrit]: 25.1,
 				[Stat.StatFireResistance]: 0.5,
 			},
 			{
@@ -81,7 +81,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWarrior, {
 		let stats = new Stats();
 		const stance = player.getSpecOptions().stance;
 		if (stance === WarriorStance.WarriorStanceBerserker || (stance === WarriorStance.WarriorStanceNone && player.getTalentTree() === 1)) {
-			stats = stats.addStat(Stat.StatMeleeCrit, 3);
+			stats = stats.addStat(Stat.StatCrit, 3);
 		}
 
 		return {

@@ -993,6 +993,10 @@ export const raceToFaction: Record<Race, Faction> = {
 	[Race.RaceTauren]: Faction.Horde,
 	[Race.RaceTroll]: Faction.Horde,
 	[Race.RaceUndead]: Faction.Horde,
+	// Skyborne is neutral: faction is chosen at character creation, so the
+	// client carries it as two race rows, one per faction.
+	[Race.RaceHighOrderSkyborne]: Faction.Alliance,
+	[Race.RaceWindshaperSkyborne]: Faction.Horde,
 };
 
 const ALLIANCE_FACTIONS = new Set([509, 730, 889]);

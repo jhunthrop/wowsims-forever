@@ -16,12 +16,12 @@ var ItemSetBlackDragonMail = core.NewItemSet(core.ItemSet{
 		// Improves your chance to hit by 1%.
 		2: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeHit, 1)
+			character.AddStat(stats.Hit, 1)
 		},
 		// Improves your chance to get a critical strike by 2%.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeCrit, 2*core.CritRatingPerCritChance)
+			character.AddStat(stats.Crit, 2*core.CritRatingPerCritChance)
 		},
 		// +10 Fire Resistance.
 		4: func(agent core.Agent) {
@@ -69,7 +69,7 @@ var ItemSetBloodvineGarb = core.NewItemSet(core.ItemSet{
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
 			if character.HasProfession(proto.Profession_Tailoring) {
-				character.AddStat(stats.SpellCrit, 2*core.SpellCritRatingPerCritChance)
+				character.AddStat(stats.Crit, 2*core.CritRatingPerCritChance)
 			}
 		},
 	},
@@ -83,8 +83,8 @@ var ItemSetBloodTigerHarness = core.NewItemSet(core.ItemSet{
 		// Improves your chance to get a critical strike with spells by 1%.
 		2: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeCrit, 1*core.CritRatingPerCritChance)
-			character.AddStat(stats.SpellCrit, 1*core.SpellCritRatingPerCritChance)
+			character.AddStat(stats.Crit, 1*core.CritRatingPerCritChance)
+			character.AddStat(stats.Crit, 1*core.CritRatingPerCritChance)
 		},
 	},
 })
@@ -97,7 +97,7 @@ var ItemSetDevilsaurArmor = core.NewItemSet(core.ItemSet{
 		// Improves your chance to hit by 2%.
 		2: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeHit, 2*core.MeleeHitRatingPerHitChance)
+			character.AddStat(stats.Hit, 2*core.HitRatingPerHitChance)
 		},
 	},
 })

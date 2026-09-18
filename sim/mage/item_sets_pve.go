@@ -211,8 +211,8 @@ var ItemSetEnigmaVestments = core.NewItemSet(core.ItemSet{
 				Duration:  time.Second * 20,
 				MaxStacks: 4,
 				OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks, newStacks int32) {
-					mage.AddStatDynamic(sim, stats.SpellHit, float64(-5*oldStacks))
-					mage.AddStatDynamic(sim, stats.SpellHit, float64(5*newStacks))
+					mage.AddStatDynamic(sim, stats.Hit, float64(-5*oldStacks))
+					mage.AddStatDynamic(sim, stats.Hit, float64(5*newStacks))
 				},
 			})
 

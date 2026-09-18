@@ -25,16 +25,14 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecEnhancementShaman, {
 		Stat.StatStrength,
 		// Physical
 		Stat.StatAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatExpertise,
 		// Spell
 		Stat.StatSpellPower,
 		Stat.StatSpellDamage,
 		Stat.StatFirePower,
 		Stat.StatNaturePower,
-		Stat.StatSpellCrit,
-		Stat.StatSpellHit,
 		Stat.StatMP5,
 	],
 	epPseudoStats: [PseudoStat.PseudoStatMainHandDps, PseudoStat.PseudoStatOffHandDps, PseudoStat.PseudoStatMeleeSpeedMultiplier],
@@ -50,15 +48,13 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecEnhancementShaman, {
 		Stat.StatIntellect,
 		// Physical
 		Stat.StatAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatExpertise,
 		// Spell
 		Stat.StatSpellDamage,
 		Stat.StatNaturePower,
 		Stat.StatFirePower,
-		Stat.StatSpellHit,
-		Stat.StatSpellCrit,
 		Stat.StatMP5,
 	],
 	displayPseudoStats: [PseudoStat.PseudoStatMeleeSpeedMultiplier],
@@ -77,12 +73,12 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecEnhancementShaman, {
 				[Stat.StatSpellDamage]: 1.15,
 				[Stat.StatFirePower]: 0.63,
 				[Stat.StatNaturePower]: 0.48,
-				[Stat.StatSpellHit]: 0.03, //default EP assumes cap
-				[Stat.StatSpellCrit]: 1.94,
 				[Stat.StatMP5]: 0.01,
 				[Stat.StatAttackPower]: 1.0,
-				[Stat.StatMeleeHit]: 9.62,
-				[Stat.StatMeleeCrit]: 14.8,
+				// Forever: merged from MeleeHit 9.62 + SpellHit 0.03. unconfirmed
+				[Stat.StatHit]: 9.62,
+				// Forever: merged from MeleeCrit 14.8 + SpellCrit 1.94. unconfirmed
+				[Stat.StatCrit]: 14.8,
 				[Stat.StatFireResistance]: 0.5,
 			},
 			{

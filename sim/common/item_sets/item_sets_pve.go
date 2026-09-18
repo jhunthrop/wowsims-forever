@@ -109,7 +109,7 @@ var ItemSetCadaverousGarb = core.NewItemSet(core.ItemSet{
 		// Improves your chance to hit by 2%.
 		5: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeHit, 2)
+			character.AddStat(stats.Hit, 2)
 		},
 	},
 })
@@ -348,8 +348,7 @@ var ItemSetZanzilsConcentration = core.NewItemSet(core.ItemSet{
 			character := agent.GetCharacter()
 			character.AddStats(stats.Stats{
 				stats.SpellPower: 6,
-				stats.SpellHit:   1 * core.SpellHitRatingPerHitChance,
-				stats.MeleeHit:   1 * core.MeleeHitRatingPerHitChance,
+				stats.Hit:        1 * core.HitRatingPerHitChance,
 			})
 		},
 	},

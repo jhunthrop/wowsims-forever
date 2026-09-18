@@ -273,12 +273,12 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 	}
 
 	if raidBuffs.MoonkinAura {
-		character.AddStat(stats.SpellCrit, 3*SpellCritRatingPerCritChance)
+		character.AddStat(stats.Crit, 3*CritRatingPerCritChance)
 	}
 
 	if raidBuffs.LeaderOfThePack {
 		character.AddStats(stats.Stats{
-			stats.MeleeCrit: 3 * CritRatingPerCritChance,
+			stats.Crit: 3 * CritRatingPerCritChance,
 		})
 	}
 
@@ -1636,8 +1636,8 @@ func ApplyRallyingCryOfTheDragonslayer(unit *Unit, category string) {
 	makeExclusiveBuff(aura, BuffConfig{
 		Category: category,
 		Stats: []StatConfig{
-			{stats.SpellCrit, 10 * SpellCritRatingPerCritChance, false},
-			{stats.MeleeCrit, 5 * CritRatingPerCritChance, false},
+			{stats.Crit, 10 * CritRatingPerCritChance, false},
+			{stats.Crit, 5 * CritRatingPerCritChance, false},
 			// TODO: {stats.RangedCrit, 5*CritRatingPerCritChance, false},
 			{stats.AttackPower, 140, false},
 			{stats.RangedAttackPower, 140, false},
@@ -1682,9 +1682,9 @@ func ApplySongflowerSerenade(unit *Unit) {
 			{stats.Spirit, 15, false},
 			{stats.Stamina, 15, false},
 			{stats.Strength, 15, false},
-			{stats.MeleeCrit, 5, false},
+			{stats.Crit, 5, false},
 			// TODO: {stats.RangedCrit, 5, false},
-			{stats.SpellCrit, 5, false},
+			{stats.Crit, 5, false},
 		},
 	})
 }
@@ -1758,7 +1758,7 @@ func ApplySlipkiksSavvy(unit *Unit) {
 	makeExclusiveBuff(aura, BuffConfig{
 		Category: "SlipkiksSavvy",
 		Stats: []StatConfig{
-			{stats.SpellCrit, 3 * SpellCritRatingPerCritChance, false},
+			{stats.Crit, 3 * CritRatingPerCritChance, false},
 		},
 	})
 }
@@ -1866,7 +1866,7 @@ func AtieshSpellCritEffect(unit *Unit, idx int32) *Aura {
 		return unit.GetAura(label)
 	}
 
-	stats := stats.Stats{stats.SpellCrit: 2 * SpellCritRatingPerCritChance}
+	stats := stats.Stats{stats.Crit: 2 * CritRatingPerCritChance}
 
 	return MakePermanent(unit.RegisterAura(Aura{
 		ActionID:   ActionID{SpellID: 28142}.WithTag(idx),

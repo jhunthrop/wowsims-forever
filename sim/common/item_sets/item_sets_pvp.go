@@ -20,7 +20,7 @@ var ItemSetTheHighlandersIntent = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Spells.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.SpellCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })
@@ -36,7 +36,7 @@ var ItemSetTheDefilersIntent = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Spells.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.SpellCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })
@@ -56,7 +56,7 @@ var ItemSetTheHighlandersPurpose = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Melee.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })
@@ -72,7 +72,7 @@ var ItemSetTheHighlandersWill = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Spells.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.SpellCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })
@@ -88,7 +88,7 @@ var ItemSetTheDefilersPurpose = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Melee.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })
@@ -104,7 +104,7 @@ var ItemSetTheDefilersWill = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Spells.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.SpellCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })
@@ -125,7 +125,7 @@ var ItemSetTheHighlandersFortitude = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Spells.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.SpellCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })
@@ -141,7 +141,7 @@ var ItemSetTheHighlandersDetermination = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Melee.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })
@@ -157,7 +157,7 @@ var ItemSetTheDefilersFortitude = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Melee.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })
@@ -173,7 +173,7 @@ var ItemSetTheDefilersDetermination = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Melee.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })
@@ -193,7 +193,7 @@ var ItemSetTheHighlandersResolve = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Melee.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })
@@ -209,7 +209,7 @@ var ItemSetTheHighlandersResolution = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Melee
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })
@@ -225,7 +225,7 @@ var ItemSetTheDefilersResolution = core.NewItemSet(core.ItemSet{
 		// +1 Crit with Melee
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.MeleeCrit, 1)
+			character.AddStat(stats.Crit, 1)
 		},
 	},
 })

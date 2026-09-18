@@ -104,8 +104,8 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 	hp.AddStatDependency(stats.Strength, stats.AttackPower, 2)
 
 	// Warrior crit scaling
-	hp.AddStatDependency(stats.Agility, stats.MeleeCrit, core.CritPerAgiAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
-	hp.AddStatDependency(stats.Intellect, stats.SpellCrit, core.CritPerIntAtLevel[proto.Class_ClassWarrior]*core.SpellCritRatingPerCritChance)
+	hp.AddStatDependency(stats.Agility, stats.Crit, core.CritPerAgiAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
+	hp.AddStatDependency(stats.Intellect, stats.Crit, core.CritPerIntAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
 
 	core.ApplyPetConsumeEffects(&hp.Character, hunter.Consumes)
 

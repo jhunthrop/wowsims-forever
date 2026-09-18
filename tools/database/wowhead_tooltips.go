@@ -236,7 +236,6 @@ var blockValueRegex = regexp.MustCompile(`Increases the block value of your shie
 var blockValueRegex2 = regexp.MustCompile(`<br>([0-9]+) Block(<br>|<!--ebstats-->)`)
 var dodgeRegex = regexp.MustCompile(`Increases your chance to dodge an attack by ([0-9]+)%\.`)
 var parryRegex = regexp.MustCompile(`Increases your chance to parry an attack by ([0-9]+)%\.`)
-var resilienceRegex = regexp.MustCompile(`Improves your resilience rating by <!--rtg35-->([0-9]+)\.`)
 var arcaneResistanceRegex = regexp.MustCompile(`\+([0-9]+) Arcane Resistance`)
 var fireResistanceRegex = regexp.MustCompile(`\+([0-9]+) Fire Resistance`)
 var frostResistanceRegex = regexp.MustCompile(`\+([0-9]+) Frost Resistance`)
@@ -258,24 +257,26 @@ func (item WowheadItemResponse) GetStats() Stats {
 	armor, bonusArmor := item.GetArmorValues()
 
 	return Stats{
-		proto.Stat_StatArmor:             float64(armor),
-		proto.Stat_StatBonusArmor:        float64(bonusArmor),
-		proto.Stat_StatStrength:          float64(item.GetIntValue(strengthRegex)),
-		proto.Stat_StatAgility:           float64(item.GetIntValue(agilityRegex)),
-		proto.Stat_StatStamina:           float64(item.GetIntValue(staminaRegex)),
-		proto.Stat_StatIntellect:         float64(item.GetIntValue(intellectRegex)),
-		proto.Stat_StatSpirit:            float64(item.GetIntValue(spiritRegex)),
-		proto.Stat_StatSpellPower:        sp,
-		proto.Stat_StatArcanePower:       float64(item.GetIntValue(arcaneSpellPowerRegex)),
-		proto.Stat_StatFirePower:         float64(item.GetIntValue(fireSpellPowerRegex)),
-		proto.Stat_StatFrostPower:        float64(item.GetIntValue(frostSpellPowerRegex)),
-		proto.Stat_StatHolyPower:         float64(item.GetIntValue(holySpellPowerRegex)),
-		proto.Stat_StatNaturePower:       float64(item.GetIntValue(natureSpellPowerRegex)),
-		proto.Stat_StatShadowPower:       float64(item.GetIntValue(shadowSpellPowerRegex)),
-		proto.Stat_StatSpellHit:          float64(item.GetIntValue(hitRegex) + item.GetIntValue(hitRegex2) + item.GetIntValue(spellHitRegex)),
-		proto.Stat_StatMeleeHit:          float64(item.GetIntValue(hitRegex) + item.GetIntValue(hitRegex2) + item.GetIntValue(physicalHitRegex)),
-		proto.Stat_StatSpellCrit:         float64(item.GetIntValue(critRegex) + item.GetIntValue(critRegex2) + item.GetIntValue(spellCritRegex)),
-		proto.Stat_StatMeleeCrit:         float64(item.GetIntValue(critRegex) + item.GetIntValue(critRegex2) + item.GetIntValue(meleeCritRegex)),
+		proto.Stat_StatArmor:       float64(armor),
+		proto.Stat_StatBonusArmor:  float64(bonusArmor),
+		proto.Stat_StatStrength:    float64(item.GetIntValue(strengthRegex)),
+		proto.Stat_StatAgility:     float64(item.GetIntValue(agilityRegex)),
+		proto.Stat_StatStamina:     float64(item.GetIntValue(staminaRegex)),
+		proto.Stat_StatIntellect:   float64(item.GetIntValue(intellectRegex)),
+		proto.Stat_StatSpirit:      float64(item.GetIntValue(spiritRegex)),
+		proto.Stat_StatSpellPower:  sp,
+		proto.Stat_StatArcanePower: float64(item.GetIntValue(arcaneSpellPowerRegex)),
+		proto.Stat_StatFirePower:   float64(item.GetIntValue(fireSpellPowerRegex)),
+		proto.Stat_StatFrostPower:  float64(item.GetIntValue(frostSpellPowerRegex)),
+		proto.Stat_StatHolyPower:   float64(item.GetIntValue(holySpellPowerRegex)),
+		proto.Stat_StatNaturePower: float64(item.GetIntValue(natureSpellPowerRegex)),
+		proto.Stat_StatShadowPower: float64(item.GetIntValue(shadowSpellPowerRegex)),
+		// Forever: merged from the spell-hit, melee-hit, and generic-hit
+		// tooltip phrasings into one Hit stat.
+		proto.Stat_StatHit: float64(item.GetIntValue(hitRegex) + item.GetIntValue(hitRegex2) + item.GetIntValue(spellHitRegex) + item.GetIntValue(physicalHitRegex)),
+		// Forever: merged from the spell-crit, melee-crit, and generic-crit
+		// tooltip phrasings into one Crit stat.
+		proto.Stat_StatCrit:              float64(item.GetIntValue(critRegex) + item.GetIntValue(critRegex2) + item.GetIntValue(spellCritRegex) + item.GetIntValue(meleeCritRegex)),
 		+proto.Stat_StatSpellHaste:       float64(item.GetIntValue(hasteRegex)),
 		+proto.Stat_StatMeleeHaste:       float64(item.GetIntValue(hasteRegex)),
 		proto.Stat_StatSpellPenetration:  float64(item.GetIntValue(spellPenetrationRegex)),
@@ -289,7 +290,6 @@ func (item WowheadItemResponse) GetStats() Stats {
 		proto.Stat_StatBlockValue:        float64(item.GetIntValue(blockValueRegex) + item.GetIntValue(blockValueRegex2)),
 		proto.Stat_StatDodge:             float64(item.GetIntValue(dodgeRegex)),
 		proto.Stat_StatParry:             float64(item.GetIntValue(parryRegex)),
-		proto.Stat_StatResilience:        float64(item.GetIntValue(resilienceRegex)),
 		proto.Stat_StatArcaneResistance:  float64(item.GetIntValue(arcaneResistanceRegex)),
 		proto.Stat_StatFireResistance:    float64(item.GetIntValue(fireResistanceRegex)),
 		proto.Stat_StatFrostResistance:   float64(item.GetIntValue(frostResistanceRegex)),

@@ -22,8 +22,8 @@ var ItemSetLawbringerArmor = core.NewItemSet(core.ItemSet{
 		// Improves your chance to get a critical strike by 1%.
 		5: func(agent core.Agent) {
 			paladin := agent.(PaladinAgent).GetPaladin()
-			paladin.AddStat(stats.MeleeCrit, 1)
-			paladin.AddStat(stats.SpellCrit, 1)
+			paladin.AddStat(stats.Crit, 1)
+			paladin.AddStat(stats.Crit, 1)
 		},
 		// Gives the Paladin a chance on every melee hit to heal your party for 189 to 211.
 		8: func(agent core.Agent) {

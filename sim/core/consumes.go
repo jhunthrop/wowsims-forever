@@ -103,7 +103,7 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 		case proto.WeaponImbue_BrilliantWizardOil:
 			character.AddStats(stats.Stats{
 				stats.SpellPower: 36,
-				stats.SpellCrit:  1 * SpellCritRatingPerCritChance,
+				stats.Crit:       1 * CritRatingPerCritChance,
 			})
 		case proto.WeaponImbue_BlessedWizardOil:
 			character.Env.RegisterPostFinalizeEffect(func() {
@@ -155,7 +155,7 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 		case proto.WeaponImbue_ElementalSharpeningStone:
 			if !character.PseudoStats.FeralCombatEnabled {
 				character.AddStats(stats.Stats{
-					stats.MeleeCrit: 2 * CritRatingPerCritChance,
+					stats.Crit: 2 * CritRatingPerCritChance,
 				})
 				character.AddBonusRangedCritRating(-2.0)
 			}
@@ -498,8 +498,8 @@ func applyPhysicalBuffConsumes(character *Character, consumes *proto.Consumes) {
 		switch consumes.AgilityElixir {
 		case proto.AgilityElixir_ElixirOfTheMongoose:
 			character.AddStats(stats.Stats{
-				stats.Agility:   25,
-				stats.MeleeCrit: 2 * CritRatingPerCritChance,
+				stats.Agility: 25,
+				stats.Crit:    2 * CritRatingPerCritChance,
 			})
 		case proto.AgilityElixir_ElixirOfGreaterAgility:
 			character.AddStats(stats.Stats{
@@ -651,11 +651,11 @@ func applyHitConsumableConsumes(character *Character, consumes *proto.Consumes) 
 	switch consumes.HitConsumable {
 	case proto.HitConsumable_FireToastedBun:
 		character.AddStats(stats.Stats{
-			stats.MeleeHit: 2 * MeleeHitRatingPerHitChance,
+			stats.Hit: 2 * HitRatingPerHitChance,
 		})
 	case proto.HitConsumable_DarkDesire:
 		character.AddStats(stats.Stats{
-			stats.MeleeHit: 2 * MeleeHitRatingPerHitChance,
+			stats.Hit: 2 * HitRatingPerHitChance,
 		})
 	}
 }
@@ -864,7 +864,7 @@ func (character *Character) newBasicExplosiveSpellConfig(sharedTimer *Timer, act
 		},
 
 		// Explosives always have 1% resist chance, so just give them hit cap.
-		BonusHitRating: 100 * SpellHitRatingPerHitChance,
+		BonusHitRating: 100 * HitRatingPerHitChance,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,

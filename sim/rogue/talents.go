@@ -19,8 +19,8 @@ func (rogue *Rogue) ApplyTalents() {
 
 	rogue.AddStat(stats.Dodge, 1*float64(rogue.Talents.LightningReflexes))
 	rogue.AddStat(stats.Parry, 1*float64(rogue.Talents.Deflection))
-	rogue.AddStat(stats.MeleeCrit, 1*float64(rogue.Talents.Malice))
-	rogue.AddStat(stats.MeleeHit, 1*float64(rogue.Talents.Precision))
+	rogue.AddStat(stats.Crit, 1*float64(rogue.Talents.Malice))
+	rogue.AddStat(stats.Hit, 1*float64(rogue.Talents.Precision))
 	// TODO: Test the Armor reduction amount
 	rogue.AddStat(stats.ArmorPenetration, float64(5/3*rogue.Talents.SerratedBlades*rogue.Level))
 	rogue.AutoAttacks.OHConfig().DamageMultiplier *= rogue.dwsMultiplier()
@@ -222,10 +222,10 @@ func (rogue *Rogue) applyWeaponSpecializations() {
 	if daggerSpec := rogue.Talents.DaggerSpecialization; daggerSpec > 0 {
 		switch rogue.GetProcMaskForTypes(proto.WeaponType_WeaponTypeDagger) {
 		case core.ProcMaskMelee:
-			rogue.AddStat(stats.MeleeCrit, core.CritRatingPerCritChance*float64(daggerSpec))
+			rogue.AddStat(stats.Crit, core.CritRatingPerCritChance*float64(daggerSpec))
 		case core.ProcMaskMeleeMH:
 			// the default character pane displays critical strike chance for main hand only
-			rogue.AddStat(stats.MeleeCrit, core.CritRatingPerCritChance*float64(daggerSpec))
+			rogue.AddStat(stats.Crit, core.CritRatingPerCritChance*float64(daggerSpec))
 			rogue.OnSpellRegistered(func(spell *core.Spell) {
 				if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
 					spell.BonusCritRating -= core.CritRatingPerCritChance * float64(daggerSpec)
@@ -244,10 +244,10 @@ func (rogue *Rogue) applyWeaponSpecializations() {
 	if fistSpec := rogue.Talents.FistWeaponSpecialization; fistSpec > 0 {
 		switch rogue.GetProcMaskForTypes(proto.WeaponType_WeaponTypeFist) {
 		case core.ProcMaskMelee:
-			rogue.AddStat(stats.MeleeCrit, core.CritRatingPerCritChance*float64(fistSpec))
+			rogue.AddStat(stats.Crit, core.CritRatingPerCritChance*float64(fistSpec))
 		case core.ProcMaskMeleeMH:
 			// the default character pane displays critical strike chance for main hand only
-			rogue.AddStat(stats.MeleeCrit, core.CritRatingPerCritChance*float64(fistSpec))
+			rogue.AddStat(stats.Crit, core.CritRatingPerCritChance*float64(fistSpec))
 			rogue.OnSpellRegistered(func(spell *core.Spell) {
 				if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
 					spell.BonusCritRating -= core.CritRatingPerCritChance * float64(fistSpec)

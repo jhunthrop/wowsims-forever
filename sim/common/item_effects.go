@@ -986,7 +986,7 @@ func init() {
 	core.NewItemEffect(Felstriker, func(agent core.Agent) {
 		character := agent.GetCharacter()
 
-		effectAura := character.NewTemporaryStatsAura("Felstriker", core.ActionID{SpellID: 16551}, stats.Stats{stats.MeleeCrit: 100 * core.CritRatingPerCritChance, stats.MeleeHit: 100 * core.MeleeHitRatingPerHitChance}, time.Second*3)
+		effectAura := character.NewTemporaryStatsAura("Felstriker", core.ActionID{SpellID: 16551}, stats.Stats{stats.Crit: 100 * core.CritRatingPerCritChance, stats.Hit: 100 * core.HitRatingPerHitChance}, time.Second*3)
 		procMask := character.GetProcMaskForItem(Felstriker)
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 			Name:              "Felstriker Trigger",
@@ -2955,8 +2955,7 @@ func init() {
 
 	// https://www.wowhead.com/classic/item=19947/nat-pagles-broken-reel
 	core.NewSimpleStatOffensiveTrinketEffect(NatPaglesBrokenReel, stats.Stats{
-		stats.SpellHit: 10 * core.SpellHitRatingPerHitChance,
-		stats.MeleeHit: 10 * core.MeleeHitRatingPerHitChance,
+		stats.Hit: 10 * core.HitRatingPerHitChance,
 	}, time.Second*15, time.Second*90)
 
 	// https://www.wowhead.com/classic/item=19812/rune-of-the-dawn

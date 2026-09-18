@@ -31,7 +31,7 @@ func (mage *Mage) applyArcaneTalents() {
 
 	// Arcane Focus
 	if mage.Talents.ArcaneFocus > 0 {
-		bonusHit := 2 * float64(mage.Talents.ArcaneFocus) * core.SpellHitRatingPerHitChance
+		bonusHit := 2 * float64(mage.Talents.ArcaneFocus) * core.HitRatingPerHitChance
 		mage.OnSpellRegistered(func(spell *core.Spell) {
 			if spell.SpellSchool.Matches(core.SpellSchoolArcane) && spell.Flags.Matches(SpellFlagMage) {
 				spell.BonusHitRating += bonusHit
@@ -55,7 +55,7 @@ func (mage *Mage) applyArcaneTalents() {
 	// Arcane Instability
 	if mage.Talents.ArcaneInstability > 0 {
 		bonusDamageMultiplierAdditive := .01 * float64(mage.Talents.ArcaneInstability)
-		bonusCritRating := 1 * float64(mage.Talents.ArcaneInstability) * core.SpellCritRatingPerCritChance
+		bonusCritRating := 1 * float64(mage.Talents.ArcaneInstability) * core.CritRatingPerCritChance
 
 		mage.OnSpellRegistered(func(spell *core.Spell) {
 			if spell.Flags.Matches(SpellFlagMage) {
@@ -85,7 +85,7 @@ func (mage *Mage) applyFireTalents() {
 
 	// Critical Mass
 	if mage.Talents.CriticalMass > 0 {
-		bonusCrit := 2 * float64(mage.Talents.CriticalMass) * core.SpellCritRatingPerCritChance
+		bonusCrit := 2 * float64(mage.Talents.CriticalMass) * core.CritRatingPerCritChance
 		mage.OnSpellRegistered(func(spell *core.Spell) {
 			if spell.SpellSchool.Matches(core.SpellSchoolFire) && spell.Flags.Matches(SpellFlagMage) {
 				spell.BonusCritRating += bonusCrit
@@ -112,7 +112,7 @@ func (mage *Mage) applyFrostTalents() {
 
 	// Elemental Precision
 	if mage.Talents.ElementalPrecision > 0 {
-		bonusHit := 2 * float64(mage.Talents.ElementalPrecision) * core.SpellHitRatingPerHitChance
+		bonusHit := 2 * float64(mage.Talents.ElementalPrecision) * core.HitRatingPerHitChance
 
 		mage.OnSpellRegistered(func(spell *core.Spell) {
 			if spell.Flags.Matches(SpellFlagMage) && (spell.SpellSchool.Matches(core.SpellSchoolFire) || spell.SpellSchool.Matches(core.SpellSchoolFrost)) {
@@ -390,7 +390,7 @@ func (mage *Mage) registerCombustionCD() {
 	})
 
 	numCrits := 0
-	critPerStack := 10.0 * core.SpellCritRatingPerCritChance
+	critPerStack := 10.0 * core.CritRatingPerCritChance
 
 	mage.CombustionAura = mage.RegisterAura(core.Aura{
 		Label:     "Combustion",

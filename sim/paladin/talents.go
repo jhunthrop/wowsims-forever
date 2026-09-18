@@ -9,10 +9,10 @@ import (
 )
 
 func (paladin *Paladin) ApplyTalents() {
-	paladin.AddStat(stats.MeleeHit, float64(paladin.Talents.Precision)*core.MeleeHitRatingPerHitChance)
-	// TODO: paladin.AddStat(stats.RangedHit, float64(paladin.Talents.Precision)*core.MeleeHitRatingPerHitChance)
+	paladin.AddStat(stats.Hit, float64(paladin.Talents.Precision)*core.HitRatingPerHitChance)
+	// TODO: paladin.AddStat(stats.RangedHit, float64(paladin.Talents.Precision)*core.HitRatingPerHitChance)
 
-	paladin.AddStat(stats.MeleeCrit, float64(paladin.Talents.Conviction)*core.CritRatingPerCritChance)
+	paladin.AddStat(stats.Crit, float64(paladin.Talents.Conviction)*core.CritRatingPerCritChance)
 	// TODO: paladin.AddStat(stats.RangedCrit, float64(paladin.Talents.Conviction)*core.CritRatingPerCritChance)
 
 	if paladin.Talents.Toughness > 0 {
@@ -37,7 +37,7 @@ func (paladin *Paladin) ApplyTalents() {
 	if paladin.Talents.Vindication > 0 {
 		paladin.applyVindication()
 	}
-	paladin.PseudoStats.SchoolBonusCritChance[stats.SchoolIndexHoly] += core.SpellCritRatingPerCritChance * float64(paladin.Talents.HolyPower)
+	paladin.PseudoStats.SchoolBonusCritChance[stats.SchoolIndexHoly] += core.CritRatingPerCritChance * float64(paladin.Talents.HolyPower)
 
 	paladin.applyRedoubt()
 	paladin.applyReckoning()

@@ -31,13 +31,13 @@ const (
 	NaturePower
 	ShadowPower
 	MP5
-	SpellHit
-	SpellCrit
+	// Forever merges spell, melee and ranged hit into one stat, and
+	// likewise crit.
+	Hit
+	Crit
 	SpellHaste
 	SpellPenetration
 	AttackPower
-	MeleeHit
-	MeleeCrit
 	MeleeHaste
 	ArmorPenetration
 	Expertise
@@ -51,7 +51,6 @@ const (
 	BlockValue
 	Dodge
 	Parry
-	Resilience
 	Health
 	ArcaneResistance
 	FireResistance
@@ -191,10 +190,10 @@ func (s Stat) StatName() string {
 		return "Intellect"
 	case Spirit:
 		return "Spirit"
-	case SpellCrit:
-		return "SpellCrit"
-	case SpellHit:
-		return "SpellHit"
+	case Hit:
+		return "Hit"
+	case Crit:
+		return "Crit"
 	case SpellPower:
 		return "SpellPower"
 	case ArcanePower:
@@ -221,12 +220,8 @@ func (s Stat) StatName() string {
 		return "SpellPenetration"
 	case AttackPower:
 		return "AttackPower"
-	case MeleeHit:
-		return "MeleeHit"
 	case MeleeHaste:
 		return "MeleeHaste"
-	case MeleeCrit:
-		return "MeleeCrit"
 	case Expertise:
 		return "Expertise"
 	case ArmorPenetration:
@@ -253,8 +248,6 @@ func (s Stat) StatName() string {
 		return "Dodge"
 	case Parry:
 		return "Parry"
-	case Resilience:
-		return "Resilience"
 	case Health:
 		return "Health"
 	case FireResistance:

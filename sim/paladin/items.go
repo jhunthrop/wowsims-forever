@@ -15,5 +15,5 @@ const (
 )
 
 func init() {
-	core.NewSimpleStatOffensiveTrinketEffect(SanctifiedOrb, stats.Stats{stats.MeleeCrit: 3 * core.CritRatingPerCritChance, stats.SpellCrit: 3 * core.CritRatingPerCritChance}, time.Second*25, time.Minute*3)
+	core.NewSimpleStatOffensiveTrinketEffect(SanctifiedOrb, stats.Stats{stats.Crit: 3 * core.CritRatingPerCritChance}, time.Second*25, time.Minute*3)
 }

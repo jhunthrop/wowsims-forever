@@ -93,3 +93,67 @@ func TestStatsProtoInSync(t *testing.T) {
 		}
 	}
 }
+
+// The Go Stat enum and proto.Stat are index-synced: Stat(v) is how a
+// proto value becomes a Go one (see ProtoArrayToStatsList), so a
+// divergence silently reads the wrong stat. Forever merges MeleeHit and
+// SpellHit into Hit and MeleeCrit and SpellCrit into Crit, which shifts
+// every later index, so the sync is checked rather than commented.
+func TestStatEnumIsSyncedWithProto(t *testing.T) {
+	names := proto.Stat_name
+	if len(names) != int(Len) {
+		t.Fatalf("proto.Stat has %d values, Go Stat has %d", len(names), int(Len))
+	}
+	for i := Stat(0); i < Len; i++ {
+		protoName, ok := names[int32(i)]
+		if !ok {
+			t.Errorf("index %d: proto.Stat has no value", int(i))
+			continue
+		}
+		// proto names are "StatFoo"; Go names are "Foo".
+		want := "Stat" + i.StatName()
+		if protoName != want {
+			t.Errorf("index %d: proto has %q, Go has %q (want %q)", int(i), protoName, i.StatName(), want)
+		}
+	}
+}
+
+// Forever has one hit stat and one crit stat.
+func TestForeverHasOneHitAndOneCritStat(t *testing.T) {
+	if Hit >= Len || Crit >= Len {
+		t.Fatal("Hit and Crit must be real stats")
+	}
+	if Hit.StatName() != "Hit" {
+		t.Errorf("Hit.StatName() = %q, want %q", Hit.StatName(), "Hit")
+	}
+	if Crit.StatName() != "Crit" {
+		t.Errorf("Crit.StatName() = %q, want %q", Crit.StatName(), "Crit")
+	}
+	for i := Stat(0); i < Len; i++ {
+		switch i.StatName() {
+		case "MeleeHit", "SpellHit", "MeleeCrit", "SpellCrit":
+			t.Errorf("index %d still has the split stat %q", int(i), i.StatName())
+		}
+	}
+}
+
+// Forever has ten races. Skyborne is one neutral race carried as two
+// rows because its second active differs by faction; the data lane's
+// races.json has the same ten and the same two, and a mismatch would
+// let the site offer a race the engine cannot build.
+func TestForeverHasTenRaces(t *testing.T) {
+	var n int
+	for v := range proto.Race_name {
+		if v != int32(proto.Race_RaceUnknown) {
+			n++
+		}
+	}
+	if n != 10 {
+		t.Errorf("proto.Race has %d playable values, want 10", n)
+	}
+	for _, want := range []proto.Race{proto.Race_RaceHighOrderSkyborne, proto.Race_RaceWindshaperSkyborne} {
+		if _, ok := proto.Race_name[int32(want)]; !ok {
+			t.Errorf("proto.Race is missing %v", want)
+		}
+	}
+}

@@ -79,7 +79,7 @@ var ItemSetCenarionRaiment = core.NewItemSet(core.ItemSet{
 		// (5) Set : Improves your chance to get a critical strike with spells by 2%.
 		5: func(agent core.Agent) {
 			c := agent.GetCharacter()
-			c.AddStat(stats.SpellCrit, 2*core.SpellCritRatingPerCritChance)
+			c.AddStat(stats.Crit, 2*core.CritRatingPerCritChance)
 		},
 		// (8) Set : Reduces the cooldown of your Tranquility and Hurricane spells by 50%.
 		8: func(agent core.Agent) {

@@ -98,15 +98,15 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 		}
 
 		// Mage spell crit scaling for imp
-		wp.AddStatDependency(stats.Intellect, stats.SpellCrit, core.CritPerIntAtLevel[proto.Class_ClassMage]*core.SpellCritRatingPerCritChance)
+		wp.AddStatDependency(stats.Intellect, stats.Crit, core.CritPerIntAtLevel[proto.Class_ClassMage]*core.CritRatingPerCritChance)
 	} else {
 		// Warrior scaling for all other pets
 		wp.AddStat(stats.AttackPower, -20)
 		wp.AddStatDependency(stats.Strength, stats.AttackPower, 2)
 
 		// Warrior crit scaling
-		wp.AddStatDependency(stats.Agility, stats.MeleeCrit, core.CritPerAgiAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
-		wp.AddStatDependency(stats.Intellect, stats.SpellCrit, core.CritPerIntAtLevel[proto.Class_ClassWarrior]*core.SpellCritRatingPerCritChance)
+		wp.AddStatDependency(stats.Agility, stats.Crit, core.CritPerAgiAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
+		wp.AddStatDependency(stats.Intellect, stats.Crit, core.CritPerIntAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
 
 		// Imps generally don't melee
 		wp.EnableAutoAttacks(wp, cfg.AutoAttacks)

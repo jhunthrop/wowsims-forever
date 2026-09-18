@@ -29,12 +29,12 @@ func (paladin *Paladin) registerDivineFavor() {
 		Duration: core.NeverExpires,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			core.Each(affectedSpells, func(spell *core.Spell) {
-				spell.BonusCritRating += core.SpellCritRatingPerCritChance * 100
+				spell.BonusCritRating += core.CritRatingPerCritChance * 100
 			})
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			core.Each(affectedSpells, func(spell *core.Spell) {
-				spell.BonusCritRating -= core.SpellCritRatingPerCritChance * 100
+				spell.BonusCritRating -= core.CritRatingPerCritChance * 100
 			})
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {

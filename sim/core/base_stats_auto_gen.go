@@ -6,16 +6,15 @@ package core
 
 const ExpertisePerQuarterPercentReduction = 2.500000
 
-// Crit/Hit/Haste ratings are straight percentage values in classic
+// Crit/Hit/Haste ratings are straight percentage values in classic.
+// Forever merges spell and melee hit into one rating and spell and melee
+// crit into one rating; Task 5 regenerates these from the client tables.
 // TODO: Update Defense/Dodge/Parry rates
 const HasteRatingPerHastePercent = 1
 const CritRatingPerCritChance = 1
-const SpellCritRatingPerCritChance = 1
-const MeleeHitRatingPerHitChance = 1
-const SpellHitRatingPerHitChance = 1
+const HitRatingPerHitChance = 1
 const ExpertiseRatingPerExpertiseChance = 1
 const DefenseRatingPerDefense = 1
 const DodgeRatingPerDodgeChance = 1
 const ParryRatingPerParryChance = 1
 const BlockRatingPerBlockChance = 1
-const ResilienceRatingPerCritReductionChance = 28.750002

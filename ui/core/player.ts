@@ -703,8 +703,8 @@ export class Player<SpecType extends Spec> {
 		const suppression = levelDiff === 3 ? levelDiff + 1.8 : levelDiff;
 
 		let weaponSkill = 300.0;
-		const meleeCrit = (this.currentStats.finalStats?.stats[Stat.StatMeleeCrit] || 0.0) / Mechanics.MELEE_CRIT_RATING_PER_CRIT_CHANCE;
-		const meleeHit = (this.currentStats.finalStats?.stats[Stat.StatMeleeHit] || 0.0) / Mechanics.MELEE_HIT_RATING_PER_HIT_CHANCE;
+		const meleeCrit = (this.currentStats.finalStats?.stats[Stat.StatCrit] || 0.0) / Mechanics.CRIT_RATING_PER_CRIT_CHANCE;
+		const meleeHit = (this.currentStats.finalStats?.stats[Stat.StatHit] || 0.0) / Mechanics.HIT_RATING_PER_HIT_CHANCE;
 		const expertise = (this.currentStats.finalStats?.stats[Stat.StatExpertise] || 0.0) / Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION / 4;
 
 		const getWeaponSkillForWeaponType = (skill: PseudoStat) => this.currentStats.talentsStats?.pseudoStats[skill] || 0.0;

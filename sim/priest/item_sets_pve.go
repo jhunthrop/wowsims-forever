@@ -21,7 +21,7 @@ var ItemSetVestmentsOfProphecy = core.NewItemSet(core.ItemSet{
 		// Improves your chance to get a critical strike with Holy spells by 2%.
 		5: func(agent core.Agent) {
 			priest := agent.(PriestAgent).GetPriest()
-			priest.PseudoStats.SchoolBonusCritChance[stats.SchoolIndexHoly] += 2 * core.SpellCritRatingPerCritChance
+			priest.PseudoStats.SchoolBonusCritChance[stats.SchoolIndexHoly] += 2 * core.CritRatingPerCritChance
 		},
 		// Increases your chance of a critical hit with Prayer of Healing by 25%.
 		8: func(agent core.Agent) {
