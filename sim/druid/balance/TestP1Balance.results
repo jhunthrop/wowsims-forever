@@ -93,8 +93,8 @@ stat_weights_results: {
 dps_results: {
  key: "TestP1Balance-Phase1-AllItems-CenarionRaiment"
  value: {
-  dps: 245.84615
-  tps: 258.51913
+  dps: 264.57287
+  tps: 277.24584
  }
 }
 dps_results: {
@@ -128,8 +128,8 @@ dps_results: {
 dps_results: {
  key: "TestP1Balance-Phase1-AllItems-StormrageRaiment"
  value: {
-  dps: 229.1189
-  tps: 238.59331
+  dps: 281.38096
+  tps: 290.85538
  }
 }
 dps_results: {

@@ -21,8 +21,12 @@ var safeDepsOrder = []Stat{
 	AttackPower,
 	RangedAttackPower,
 	SpellPower,
-	SpellDamage,
+	// HealingPower comes before SpellDamage because Forever's bonus
+	// healing carries one third as bonus damage (see
+	// Character.addUniversalStatDependencies). Nothing depends on
+	// HealingPower, so it is free to move up.
 	HealingPower,
+	SpellDamage,
 	Health,
 	Mana,
 	MP5,
