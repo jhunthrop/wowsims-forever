@@ -57,25 +57,73 @@ func TestRanksAreOrdered(t *testing.T) {
 	}
 }
 
+// The emitted shape carries cast time, GCD, the two cooldown columns,
+// cost and every effect verbatim for the top rank of the fixture's
+// Bloodthirst, matching the real build 1.60.1.69893 warrior.json. A
+// player's actual cooldown comes from category_cooldown_ms here, because
+// CooldownMS itself is 0 — the ranks share one cooldown.
+func TestBloodthirstEffectsResolve(t *testing.T) {
+	c, err := Load("testdata/warrior.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	s, ok := c.ByID(23894)
+	if !ok {
+		t.Fatal("spell 23894 (Bloodthirst) not found")
+	}
+	if s.CastTimeMS != 0 {
+		t.Errorf("CastTimeMS = %d, want 0", s.CastTimeMS)
+	}
+	if s.GCDMS != 1500 {
+		t.Errorf("GCDMS = %d, want 1500", s.GCDMS)
+	}
+	if s.CategoryCooldownMS != 6000 {
+		t.Errorf("CategoryCooldownMS = %d, want 6000", s.CategoryCooldownMS)
+	}
+	if s.EffectiveCooldownMS() != 6000 {
+		t.Errorf("EffectiveCooldownMS() = %d, want 6000 (falls back to the category cooldown when CooldownMS is 0)", s.EffectiveCooldownMS())
+	}
+	if s.Cost != 300 {
+		t.Errorf("Cost = %v, want 300", s.Cost)
+	}
+	if len(s.Effects) != 3 {
+		t.Fatalf("len(Effects) = %d, want 3", len(s.Effects))
+	}
+	wantAmounts := []float64{48, 35, 10}
+	for i, want := range wantAmounts {
+		if s.Effects[i].Amount != want {
+			t.Errorf("Effects[%d].Amount = %v, want %v", i, s.Effects[i].Amount, want)
+		}
+	}
+}
+
 // The data lane emits the DB2 coefficient columns verbatim, zeros
 // included, because EffectBonusCoefficient is routinely 0 or wrong for
 // Classic-lineage spells. A zero therefore means "absent", and the
 // vanilla convention fills it in — never a literal zero coefficient,
-// which would silently remove all spell-power scaling from a spell.
+// which would silently remove all spell-power scaling from an effect.
 func TestZeroCoefficientFallsBackToTheConvention(t *testing.T) {
 	c, err := Load("testdata/warrior.json")
 	if err != nil {
 		t.Fatal(err)
 	}
-	s, ok := c.ByID(11605) // Slam rank 4 in the fixture, coefficient 0
+	s, ok := c.ByID(772) // Rend rank 1 in the fixture, coefficient 0, a 3s-tick 9s dot
 	if !ok {
-		t.Fatal("spell 11605 not found")
+		t.Fatal("spell 772 not found")
 	}
-	if s.Coefficient == 0 {
+	if len(s.Effects) != 1 {
+		t.Fatalf("len(Effects) = %d, want 1", len(s.Effects))
+	}
+	e := s.Effects[0]
+	if e.ResolvedSPCoefficient == 0 {
 		t.Error("a zero DB2 coefficient was kept as zero; it must fall back to the convention")
 	}
-	if s.CoefficientSource != "convention" {
-		t.Errorf("CoefficientSource = %q, want %q", s.CoefficientSource, "convention")
+	if e.CoefficientSource != "convention" {
+		t.Errorf("CoefficientSource = %q, want %q", e.CoefficientSource, "convention")
+	}
+	want, _ := CoefficientFor(s.CastTimeMS, s.DurationMS, false)
+	if math.Abs(e.ResolvedSPCoefficient-want) > 1e-9 {
+		t.Errorf("ResolvedSPCoefficient = %v, want the duration/15 convention's %v", e.ResolvedSPCoefficient, want)
 	}
 }
 
@@ -84,15 +132,17 @@ func TestNonZeroCoefficientIsKept(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	s, ok := c.ByID(23881) // Bloodthirst rank 1 in the fixture, coefficient 0.15
+	s, ok := c.ByID(23881) // Bloodthirst rank 1 in the fixture, coefficient 1.0 on every effect
 	if !ok {
 		t.Fatal("spell 23881 not found")
 	}
-	if math.Abs(s.Coefficient-0.15) > 1e-9 {
-		t.Errorf("Coefficient = %v, want the table's 0.15", s.Coefficient)
-	}
-	if s.CoefficientSource != "table" {
-		t.Errorf("CoefficientSource = %q, want %q", s.CoefficientSource, "table")
+	for i, e := range s.Effects {
+		if math.Abs(e.ResolvedSPCoefficient-1.0) > 1e-9 {
+			t.Errorf("Effects[%d].ResolvedSPCoefficient = %v, want the table's 1.0", i, e.ResolvedSPCoefficient)
+		}
+		if e.CoefficientSource != "table" {
+			t.Errorf("Effects[%d].CoefficientSource = %q, want %q", i, e.CoefficientSource, "table")
+		}
 	}
 }
 

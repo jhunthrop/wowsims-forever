@@ -7,16 +7,31 @@
 //	  -in  ../forever/data/builds/1.60.1.69893/spellconst/warrior.json \
 //	  -out sim/warrior/constants_auto_gen.go \
 //	  -package warrior
+//
+// A spell rank can carry several effects (Bloodthirst's rank 4, spell
+// id 23894, has three: a direct-damage effect, a second damage
+// component, and a rage-generation aura). The per-rank arrays this
+// command emits — BaseDamage and SpellCoeff among them — describe one
+// effect per rank, so it prefers that rank's school-damage effect
+// (effect type 2) as its primary one, falling back to the first effect
+// in the client's own order when there is no school-damage effect; the
+// full effect list stays available from spellconst.Load for anything
+// that needs the rest.
 package main
 
 import (
 	"bytes"
 	"flag"
 	"fmt"
+	"go/ast"
 	"go/format"
+	"go/parser"
+	"go/token"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
+	"unicode"
 
 	"github.com/wowsims/classic/sim/core/spellconst"
 )
@@ -31,6 +46,16 @@ func main() {
 	}
 
 	class, err := spellconst.Load(*in)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Most abilities in this package already declare their own per-rank
+	// constants by hand, in the shape sim/mage/frostbolt.go established,
+	// before this generator existed for their class. Tasks 11 and 12 move
+	// those into this file one ability at a time; until an ability's hand
+	// declaration is removed, generating one here too would not compile.
+	existing, err := existingTopLevelIdentifiers(filepath.Dir(*out), filepath.Base(*out))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -50,14 +75,42 @@ func main() {
 	fmt.Fprintf(&b, "// Regenerate with `make spellconst`. A coefficient marked\n")
 	fmt.Fprintf(&b, "// \"convention\" was derived from the vanilla cast_time/3.5 and\n")
 	fmt.Fprintf(&b, "// duration/15 rules because the client table's column was zero;\n")
-	fmt.Fprintf(&b, "// per-spell overrides stay in the ability files.\n\n")
+	fmt.Fprintf(&b, "// per-spell overrides stay in the ability files. Each rank's arrays\n")
+	fmt.Fprintf(&b, "// describe its school-damage effect (falling back to its first effect\n")
+	fmt.Fprintf(&b, "// when it has none); sim/core/spellconst.Load exposes every effect for\n")
+	fmt.Fprintf(&b, "// ability files that need a different one.\n\n")
 	fmt.Fprintf(&b, "package %s\n\n", *pkg)
 	fmt.Fprintf(&b, "// ConstantsBuild is the client build these numbers came from.\n")
 	fmt.Fprintf(&b, "const ConstantsBuild = %q\n\n", class.Build)
 
+	claimed := map[string]string{} // Go identifier -> the spell name that claimed it
 	for _, name := range order {
 		ranks := class.Ranks(name)
 		ident := goIdent(name)
+		if ident == "" {
+			continue
+		}
+		if owner, ok := claimed[ident]; ok {
+			// Two distinct spell names collapse to the same identifier once
+			// punctuation is stripped (e.g. "Fireball" and "Fireball!" are
+			// different spells in the client). Rather than guess a
+			// disambiguating suffix a caller wouldn't expect, this rank is
+			// left out of the generated arrays; spellconst.Load still
+			// returns it by id or by its exact name.
+			fmt.Fprintf(&b, "// skipped: %q collides with %q as the Go identifier %q; look it up by id via spellconst.Load instead.\n\n", name, owner, ident)
+			continue
+		}
+		if existing[ident+"Ranks"] {
+			// This ability already declares its own per-rank constants by
+			// hand elsewhere in the package (sim/mage/frostbolt.go's own
+			// shape, before this generator existed for this class).
+			// Generating it here too would redeclare the same identifiers;
+			// the hand-written file stays authoritative until an engine
+			// task removes it in favor of this one.
+			fmt.Fprintf(&b, "// skipped: %q already has a hand-written %sRanks elsewhere in this package.\n\n", name, ident)
+			continue
+		}
+		claimed[ident] = name
 		n := len(ranks)
 		fmt.Fprintf(&b, "// %s: %d rank(s), from build %s.\n", name, n, class.Build)
 		fmt.Fprintf(&b, "const %sRanks = %d\n\n", ident, n)
@@ -65,15 +118,16 @@ func main() {
 		// Index 0 is unused so a rank number indexes directly, which is
 		// the convention sim/mage/frostbolt.go established.
 		writeArray(&b, ident, "SpellId", "int32", n, func(i int) string { return fmt.Sprint(ranks[i].ID) })
-		writeArray(&b, ident, "Level", "int", n, func(i int) string { return fmt.Sprint(ranks[i].Level) })
+		writeArray(&b, ident, "Level", "int", n, func(i int) string { return fmt.Sprint(ranks[i].SpellLevel) })
 		writeArray(&b, ident, "CastTime", "int32", n, func(i int) string { return fmt.Sprint(ranks[i].CastTimeMS) })
-		writeArray(&b, ident, "CooldownMS", "int32", n, func(i int) string { return fmt.Sprint(ranks[i].CooldownMS) })
+		writeArray(&b, ident, "CooldownMS", "int32", n, func(i int) string { return fmt.Sprint(ranks[i].EffectiveCooldownMS()) })
 		writeArray(&b, ident, "ManaCost", "float64", n, func(i int) string { return trimFloat(ranks[i].Cost) })
-		writeArray(&b, ident, "SpellCoeff", "float64", n, func(i int) string { return trimFloat(ranks[i].Coefficient) })
+		writeArray(&b, ident, "SpellCoeff", "float64", n, func(i int) string { return trimFloat(primaryCoefficient(ranks[i])) })
 
 		fmt.Fprintf(&b, "var %sBaseDamage = [%sRanks + 1][]float64{{0, 0}", ident, ident)
 		for i := 0; i < n; i++ {
-			fmt.Fprintf(&b, ", {%s, %s}", trimFloat(ranks[i].BasePointsLow), trimFloat(ranks[i].BasePointsHigh))
+			amount := trimFloat(primaryAmount(ranks[i]))
+			fmt.Fprintf(&b, ", {%s, %s}", amount, amount)
 		}
 		fmt.Fprintf(&b, "}\n")
 
@@ -81,7 +135,7 @@ func main() {
 		// so a reader of the ability file knows which numbers are derived.
 		var derived []string
 		for _, r := range ranks {
-			if r.CoefficientSource == "convention" {
+			if e, ok := primaryEffect(r); ok && e.CoefficientSource == "convention" {
 				derived = append(derived, fmt.Sprintf("rank %d", r.Rank))
 			}
 		}
@@ -102,6 +156,99 @@ func main() {
 	log.Printf("wrote %s: %d spells, %d ranks, build %s", *out, len(order), len(class.Spells), class.Build)
 }
 
+// schoolDamageEffect is the client's own effect-type code for a direct
+// school-damage effect (Frostbolt's damage effect and Bloodthirst's both
+// carry it). A rank with more than one effect almost always has exactly
+// one of these — the rest are secondary components (a snare, a proc, a
+// rage-generation aura) that are not what a single BaseDamage/SpellCoeff
+// pair should describe.
+const schoolDamageEffect = 2
+
+// primaryEffect is the effect a rank's per-rank arrays describe: its
+// school-damage effect if it has one, otherwise the first effect in the
+// client's own order. A rank with no effects (none exist in the warrior
+// or mage builds this command has generated against, but a future class
+// file is not guaranteed the same) reports false rather than panicking.
+//
+// This is a best-effort default, not a claim about what every spell
+// means: spellconst.Load exposes every effect on every rank, and an
+// ability file that needs a different one (Mortal Strike's bonus damage
+// is on its second effect, not a school-damage effect at all) reads
+// spellconst directly rather than this package's generated arrays.
+func primaryEffect(s spellconst.Spell) (spellconst.Effect, bool) {
+	if len(s.Effects) == 0 {
+		return spellconst.Effect{}, false
+	}
+	for _, e := range s.Effects {
+		if e.Effect == schoolDamageEffect {
+			return e, true
+		}
+	}
+	return s.Effects[0], true
+}
+
+func primaryAmount(s spellconst.Spell) float64 {
+	e, ok := primaryEffect(s)
+	if !ok {
+		return 0
+	}
+	return e.Amount
+}
+
+func primaryCoefficient(s spellconst.Spell) float64 {
+	e, ok := primaryEffect(s)
+	if !ok {
+		return 0
+	}
+	return e.ResolvedSPCoefficient
+}
+
+// existingTopLevelIdentifiers collects every top-level const, var, type
+// and func name already declared in dir's .go files, other than
+// skipFile itself (the generated file this run is about to overwrite).
+// A directory that does not exist yet (a class with no package at all)
+// is not an error: it has nothing to collide with.
+func existingTopLevelIdentifiers(dir, skipFile string) (map[string]bool, error) {
+	idents := map[string]bool{}
+	entries, err := os.ReadDir(dir)
+	if os.IsNotExist(err) {
+		return idents, nil
+	}
+	if err != nil {
+		return nil, fmt.Errorf("reading %s: %w", dir, err)
+	}
+	fset := token.NewFileSet()
+	for _, entry := range entries {
+		if entry.IsDir() || entry.Name() == skipFile || filepath.Ext(entry.Name()) != ".go" {
+			continue
+		}
+		f, err := parser.ParseFile(fset, filepath.Join(dir, entry.Name()), nil, 0)
+		if err != nil {
+			return nil, fmt.Errorf("parsing %s: %w", entry.Name(), err)
+		}
+		for _, decl := range f.Decls {
+			switch d := decl.(type) {
+			case *ast.GenDecl:
+				for _, spec := range d.Specs {
+					switch s := spec.(type) {
+					case *ast.ValueSpec:
+						for _, name := range s.Names {
+							idents[name.Name] = true
+						}
+					case *ast.TypeSpec:
+						idents[s.Name.Name] = true
+					}
+				}
+			case *ast.FuncDecl:
+				if d.Recv == nil {
+					idents[d.Name.Name] = true
+				}
+			}
+		}
+	}
+	return idents, nil
+}
+
 // writeArray emits `var <ident><field> = [<ident>Ranks + 1]<typ>{0, a, b}`.
 // Index 0 is a placeholder so a rank number indexes the array directly,
 // which is the convention sim/mage/frostbolt.go established.
@@ -117,14 +264,30 @@ func trimFloat(f float64) string {
 	return strings.TrimRight(strings.TrimRight(fmt.Sprintf("%.4f", f), "0"), ".")
 }
 
-// goIdent turns "Mortal Strike" into "MortalStrike".
+// goIdent turns "Mortal Strike" into "MortalStrike". Leading/trailing
+// whitespace in the client's own spell name (a handful of warrior spells
+// carry it, e.g. a stray leading space on one "Increased Spell Hit
+// Chance") is trimmed by spellconst.Load before this ever sees the name,
+// so two spells that differ only by that whitespace still collide into
+// one identifier deliberately, not by accident.
+//
+// A set-bonus tooltip's name can start with a version string and carry
+// punctuation Go identifiers do not allow, e.g. "1.60.0 - Item - Tier 1
+// - Warrior - Arms/Fury 2P Bonus - Haste": every rune that is not a
+// letter or digit is treated as a separator, and an identifier that
+// still starts with a digit gets an "X" prefix, since Go identifiers
+// never may.
 func goIdent(name string) string {
 	var out strings.Builder
 	for _, part := range strings.FieldsFunc(name, func(r rune) bool {
-		return r == ' ' || r == '-' || r == '\'' || r == ':'
+		return !unicode.IsLetter(r) && !unicode.IsDigit(r)
 	}) {
 		out.WriteString(strings.ToUpper(part[:1]))
 		out.WriteString(part[1:])
 	}
-	return out.String()
+	ident := out.String()
+	if ident != "" && unicode.IsDigit(rune(ident[0])) {
+		ident = "X" + ident
+	}
+	return ident
 }
