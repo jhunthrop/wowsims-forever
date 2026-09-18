@@ -1,6 +1,9 @@
 package core
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 // eraAttackTableFixture pins today's Era-derived attack-table numbers so a
 // Forever divergence -- the per-item weapon skill cut sevenfold, or the
@@ -78,6 +81,50 @@ func TestAttackTableConstantsAreUnchanged(t *testing.T) {
 				t.Errorf("the derived attack table moved.\n got %+v\nwant %+v\n"+
 					"If this is a deliberate Forever fit, update the fixture in the same commit "+
 					"and say in the body which measurement produced it.", got, want)
+			}
+		})
+	}
+}
+
+// deriveAttackTable is a deliberate, independent extraction of
+// NewAttackTable's EnemyUnit-branch arithmetic (research/08-stats.md's
+// weapon-skill-vs-defense derivation must stay usable without a full *Unit
+// and *Item, so the two live in two places -- see deriveAttackTable's doc
+// comment in target.go). That duplication means a future formula edit to
+// one and not the other would silently desync them. This test builds a
+// real *Unit attacker and defender and compares NewAttackTable's actual
+// output against deriveAttackTable's for the same matchup, so any such
+// desync fails here rather than only being caught by a reviewer rereading
+// both functions side by side.
+func TestDeriveAttackTableMatchesNewAttackTable(t *testing.T) {
+	attacker := &Unit{Type: PlayerUnit, Level: 60}
+
+	for _, targetLevel := range []int32{60, 63} {
+		t.Run(fmt.Sprintf("level %d", targetLevel), func(t *testing.T) {
+			defender := &Unit{Type: EnemyUnit, Level: targetLevel}
+			real := NewAttackTable(attacker, defender, nil)
+			weaponSkill := float64(attacker.Level*5) + GetWeaponSkill(attacker, nil)
+			derived := deriveAttackTable(weaponSkill, targetLevel)
+
+			got := derivedTable{
+				BaseMissChance:   real.BaseMissChance,
+				BaseDodgeChance:  real.BaseDodgeChance,
+				BaseParryChance:  real.BaseParryChance,
+				BaseGlanceChance: real.BaseGlanceChance,
+
+				GlanceMultiplierMin: real.GlanceMultiplierMin,
+				GlanceMultiplierMax: real.GlanceMultiplierMax,
+
+				HitSuppression:       real.HitSuppression,
+				MeleeCritSuppression: real.MeleeCritSuppression,
+				SpellCritSuppression: real.SpellCritSuppression,
+			}
+
+			if got != derived {
+				t.Errorf("deriveAttackTable drifted from NewAttackTable's EnemyUnit branch at target level %d.\n"+
+					"from NewAttackTable: %+v\nfrom deriveAttackTable: %+v\n"+
+					"the two are meant to stay in lockstep; if one formula changed, change the other identically.",
+					targetLevel, got, derived)
 			}
 		})
 	}

@@ -216,22 +216,28 @@ func NewMobTypeSpellPowerEffect(itemID int32, mobTypes []proto.MobType, bonus fl
 // NewMobTypeDamageEffect registers an item that multiplies the wearer's
 // damage against a set of creature types. The flat-stat equivalents are
 // NewMobTypeAttackPowerEffect and NewMobTypeSpellPowerEffect above; this
-// is the multiplier form Forever's specialised trinkets use. Applied once
-// at item-effect registration (applyItemEffects runs once per Character,
-// not per sim iteration), so a plain multiply is correct here the same
-// way the flat-stat effects above use OnGain/OnExpire only because they
-// are aura-gated rather than because of iteration lifetime.
+// is the multiplier form Forever's specialised trinkets use.
+//
+// character.AttackTables is only allocated later, by
+// Environment.setupAttackTables() during finalize() -- item effects run
+// earlier, during initialize() -- so the mutation is deferred to a
+// RegisterPostFinalizeEffect callback, which runs immediately after
+// setupAttackTables() has populated it. This is the same pattern
+// racials.go's Troll "Beast Slaying" uses for the identical
+// at.DamageDealtMultiplier *= X mutation.
 func NewMobTypeDamageEffect(itemID int32, mobTypes []proto.MobType, multiplier float64) {
 	NewItemEffect(itemID, func(agent Agent) {
 		character := agent.GetCharacter()
-		for _, target := range character.Env.Encounter.TargetUnits {
-			if !slices.Contains(mobTypes, target.MobType) {
-				continue
+		character.Env.RegisterPostFinalizeEffect(func() {
+			for _, target := range character.Env.Encounter.TargetUnits {
+				if !slices.Contains(mobTypes, target.MobType) {
+					continue
+				}
+				for _, at := range character.AttackTables[target.UnitIndex] {
+					at.DamageDealtMultiplier *= multiplier
+				}
 			}
-			for _, at := range character.AttackTables[target.UnitIndex] {
-				at.DamageDealtMultiplier *= multiplier
-			}
-		}
+		})
 	})
 }
 
