@@ -824,6 +824,19 @@ message Target {
 	repeated TargetInput target_inputs = 14;
 }
 
+// MovementPattern is a repeating out-of-range window on an encounter.
+message MovementPattern {
+	double interval_seconds = 1;
+	double duration_seconds = 2;
+	bool casting_only = 3;
+}
+
+// TargetCountAt is one step of an encounter's target-count timeline.
+message TargetCountAt {
+	double at_seconds = 1;
+	int32 count = 2;
+}
+
 message Encounter {
 	double duration = 1;
 
@@ -850,6 +863,24 @@ message Encounter {
 	// Where this fight happens, for Forever's biome-conditional item
 	// effects. Unset means BiomeUnknown, which matches nothing.
 	Biome biome = 20;
+
+	// A repeating window in which the player is away from the target.
+	// interval_seconds is the gap between window starts; duration_seconds
+	// is how long each window lasts. casting_only interrupts casting in
+	// place instead of moving out of range, so melee continues.
+	// Forever addition; see PORTING.md.
+	MovementPattern movement = 10;
+
+	// A timeline of how many of `targets` are active. Entries are
+	// (at_seconds, count); the pool is sized to the largest count. When
+	// set it overrides the plain target list's count.
+	// Forever addition; see PORTING.md.
+	repeated TargetCountAt targets_over_time = 11;
+
+	// Target-dummy mode: the raid debuff panel is not applied, there is
+	// no execute window, and nothing reduces the target's armor.
+	// Forever addition; see PORTING.md.
+	bool target_dummy = 12;
 }
 
 message PresetTarget {

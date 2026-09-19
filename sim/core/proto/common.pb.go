@@ -3136,7 +3136,7 @@ func (x UnitReference_Type) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use UnitReference_Type.Descriptor instead.
 func (UnitReference_Type) EnumDescriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{19, 0}
+	return file_common_proto_rawDescGZIP(), []int{21, 0}
 }
 
 type UnitStats struct {
@@ -4613,6 +4613,120 @@ func (x *Target) GetTargetInputs() []*TargetInput {
 	return nil
 }
 
+// MovementPattern is a repeating out-of-range window on an encounter.
+type MovementPattern struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	IntervalSeconds float64                `protobuf:"fixed64,1,opt,name=interval_seconds,json=intervalSeconds,proto3" json:"interval_seconds,omitempty"`
+	DurationSeconds float64                `protobuf:"fixed64,2,opt,name=duration_seconds,json=durationSeconds,proto3" json:"duration_seconds,omitempty"`
+	CastingOnly     bool                   `protobuf:"varint,3,opt,name=casting_only,json=castingOnly,proto3" json:"casting_only,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *MovementPattern) Reset() {
+	*x = MovementPattern{}
+	mi := &file_common_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MovementPattern) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MovementPattern) ProtoMessage() {}
+
+func (x *MovementPattern) ProtoReflect() protoreflect.Message {
+	mi := &file_common_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MovementPattern.ProtoReflect.Descriptor instead.
+func (*MovementPattern) Descriptor() ([]byte, []int) {
+	return file_common_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *MovementPattern) GetIntervalSeconds() float64 {
+	if x != nil {
+		return x.IntervalSeconds
+	}
+	return 0
+}
+
+func (x *MovementPattern) GetDurationSeconds() float64 {
+	if x != nil {
+		return x.DurationSeconds
+	}
+	return 0
+}
+
+func (x *MovementPattern) GetCastingOnly() bool {
+	if x != nil {
+		return x.CastingOnly
+	}
+	return false
+}
+
+// TargetCountAt is one step of an encounter's target-count timeline.
+type TargetCountAt struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AtSeconds     float64                `protobuf:"fixed64,1,opt,name=at_seconds,json=atSeconds,proto3" json:"at_seconds,omitempty"`
+	Count         int32                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TargetCountAt) Reset() {
+	*x = TargetCountAt{}
+	mi := &file_common_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TargetCountAt) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TargetCountAt) ProtoMessage() {}
+
+func (x *TargetCountAt) ProtoReflect() protoreflect.Message {
+	mi := &file_common_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TargetCountAt.ProtoReflect.Descriptor instead.
+func (*TargetCountAt) Descriptor() ([]byte, []int) {
+	return file_common_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *TargetCountAt) GetAtSeconds() float64 {
+	if x != nil {
+		return x.AtSeconds
+	}
+	return 0
+}
+
+func (x *TargetCountAt) GetCount() int32 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
 type Encounter struct {
 	state    protoimpl.MessageState `protogen:"open.v1"`
 	Duration float64                `protobuf:"fixed64,1,opt,name=duration,proto3" json:"duration,omitempty"`
@@ -4632,14 +4746,29 @@ type Encounter struct {
 	Targets []*Target `protobuf:"bytes,6,rep,name=targets,proto3" json:"targets,omitempty"`
 	// Where this fight happens, for Forever's biome-conditional item
 	// effects. Unset means BiomeUnknown, which matches nothing.
-	Biome         Biome `protobuf:"varint,20,opt,name=biome,proto3,enum=proto.Biome" json:"biome,omitempty"`
+	Biome Biome `protobuf:"varint,20,opt,name=biome,proto3,enum=proto.Biome" json:"biome,omitempty"`
+	// A repeating window in which the player is away from the target.
+	// interval_seconds is the gap between window starts; duration_seconds
+	// is how long each window lasts. casting_only interrupts casting in
+	// place instead of moving out of range, so melee continues.
+	// Forever addition; see PORTING.md.
+	Movement *MovementPattern `protobuf:"bytes,10,opt,name=movement,proto3" json:"movement,omitempty"`
+	// A timeline of how many of `targets` are active. Entries are
+	// (at_seconds, count); the pool is sized to the largest count. When
+	// set it overrides the plain target list's count.
+	// Forever addition; see PORTING.md.
+	TargetsOverTime []*TargetCountAt `protobuf:"bytes,11,rep,name=targets_over_time,json=targetsOverTime,proto3" json:"targets_over_time,omitempty"`
+	// Target-dummy mode: the raid debuff panel is not applied, there is
+	// no execute window, and nothing reduces the target's armor.
+	// Forever addition; see PORTING.md.
+	TargetDummy   bool `protobuf:"varint,12,opt,name=target_dummy,json=targetDummy,proto3" json:"target_dummy,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Encounter) Reset() {
 	*x = Encounter{}
-	mi := &file_common_proto_msgTypes[10]
+	mi := &file_common_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4651,7 +4780,7 @@ func (x *Encounter) String() string {
 func (*Encounter) ProtoMessage() {}
 
 func (x *Encounter) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[10]
+	mi := &file_common_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4664,7 +4793,7 @@ func (x *Encounter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Encounter.ProtoReflect.Descriptor instead.
 func (*Encounter) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{10}
+	return file_common_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *Encounter) GetDuration() float64 {
@@ -4723,6 +4852,27 @@ func (x *Encounter) GetBiome() Biome {
 	return Biome_BiomeUnknown
 }
 
+func (x *Encounter) GetMovement() *MovementPattern {
+	if x != nil {
+		return x.Movement
+	}
+	return nil
+}
+
+func (x *Encounter) GetTargetsOverTime() []*TargetCountAt {
+	if x != nil {
+		return x.TargetsOverTime
+	}
+	return nil
+}
+
+func (x *Encounter) GetTargetDummy() bool {
+	if x != nil {
+		return x.TargetDummy
+	}
+	return false
+}
+
 type PresetTarget struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Path          string                 `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
@@ -4733,7 +4883,7 @@ type PresetTarget struct {
 
 func (x *PresetTarget) Reset() {
 	*x = PresetTarget{}
-	mi := &file_common_proto_msgTypes[11]
+	mi := &file_common_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4745,7 +4895,7 @@ func (x *PresetTarget) String() string {
 func (*PresetTarget) ProtoMessage() {}
 
 func (x *PresetTarget) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[11]
+	mi := &file_common_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4758,7 +4908,7 @@ func (x *PresetTarget) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PresetTarget.ProtoReflect.Descriptor instead.
 func (*PresetTarget) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{11}
+	return file_common_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *PresetTarget) GetPath() string {
@@ -4785,7 +4935,7 @@ type PresetEncounter struct {
 
 func (x *PresetEncounter) Reset() {
 	*x = PresetEncounter{}
-	mi := &file_common_proto_msgTypes[12]
+	mi := &file_common_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4797,7 +4947,7 @@ func (x *PresetEncounter) String() string {
 func (*PresetEncounter) ProtoMessage() {}
 
 func (x *PresetEncounter) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[12]
+	mi := &file_common_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4810,7 +4960,7 @@ func (x *PresetEncounter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PresetEncounter.ProtoReflect.Descriptor instead.
 func (*PresetEncounter) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{12}
+	return file_common_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *PresetEncounter) GetPath() string {
@@ -4838,7 +4988,7 @@ type ItemRandomSuffix struct {
 
 func (x *ItemRandomSuffix) Reset() {
 	*x = ItemRandomSuffix{}
-	mi := &file_common_proto_msgTypes[13]
+	mi := &file_common_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4850,7 +5000,7 @@ func (x *ItemRandomSuffix) String() string {
 func (*ItemRandomSuffix) ProtoMessage() {}
 
 func (x *ItemRandomSuffix) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[13]
+	mi := &file_common_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4863,7 +5013,7 @@ func (x *ItemRandomSuffix) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemRandomSuffix.ProtoReflect.Descriptor instead.
 func (*ItemRandomSuffix) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{13}
+	return file_common_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ItemRandomSuffix) GetId() int32 {
@@ -4898,7 +5048,7 @@ type ItemSpec struct {
 
 func (x *ItemSpec) Reset() {
 	*x = ItemSpec{}
-	mi := &file_common_proto_msgTypes[14]
+	mi := &file_common_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4910,7 +5060,7 @@ func (x *ItemSpec) String() string {
 func (*ItemSpec) ProtoMessage() {}
 
 func (x *ItemSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[14]
+	mi := &file_common_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4923,7 +5073,7 @@ func (x *ItemSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemSpec.ProtoReflect.Descriptor instead.
 func (*ItemSpec) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{14}
+	return file_common_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ItemSpec) GetId() int32 {
@@ -4956,7 +5106,7 @@ type EquipmentSpec struct {
 
 func (x *EquipmentSpec) Reset() {
 	*x = EquipmentSpec{}
-	mi := &file_common_proto_msgTypes[15]
+	mi := &file_common_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4968,7 +5118,7 @@ func (x *EquipmentSpec) String() string {
 func (*EquipmentSpec) ProtoMessage() {}
 
 func (x *EquipmentSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[15]
+	mi := &file_common_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4981,7 +5131,7 @@ func (x *EquipmentSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EquipmentSpec.ProtoReflect.Descriptor instead.
 func (*EquipmentSpec) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{15}
+	return file_common_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *EquipmentSpec) GetItems() []*ItemSpec {
@@ -5002,7 +5152,7 @@ type SimDatabase struct {
 
 func (x *SimDatabase) Reset() {
 	*x = SimDatabase{}
-	mi := &file_common_proto_msgTypes[16]
+	mi := &file_common_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5014,7 +5164,7 @@ func (x *SimDatabase) String() string {
 func (*SimDatabase) ProtoMessage() {}
 
 func (x *SimDatabase) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[16]
+	mi := &file_common_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5027,7 +5177,7 @@ func (x *SimDatabase) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SimDatabase.ProtoReflect.Descriptor instead.
 func (*SimDatabase) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{16}
+	return file_common_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *SimDatabase) GetItems() []*SimItem {
@@ -5077,7 +5227,7 @@ type SimItem struct {
 
 func (x *SimItem) Reset() {
 	*x = SimItem{}
-	mi := &file_common_proto_msgTypes[17]
+	mi := &file_common_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5089,7 +5239,7 @@ func (x *SimItem) String() string {
 func (*SimItem) ProtoMessage() {}
 
 func (x *SimItem) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[17]
+	mi := &file_common_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5102,7 +5252,7 @@ func (x *SimItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SimItem.ProtoReflect.Descriptor instead.
 func (*SimItem) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{17}
+	return file_common_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *SimItem) GetId() int32 {
@@ -5228,7 +5378,7 @@ type SimEnchant struct {
 
 func (x *SimEnchant) Reset() {
 	*x = SimEnchant{}
-	mi := &file_common_proto_msgTypes[18]
+	mi := &file_common_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5240,7 +5390,7 @@ func (x *SimEnchant) String() string {
 func (*SimEnchant) ProtoMessage() {}
 
 func (x *SimEnchant) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[18]
+	mi := &file_common_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5253,7 +5403,7 @@ func (x *SimEnchant) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SimEnchant.ProtoReflect.Descriptor instead.
 func (*SimEnchant) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{18}
+	return file_common_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *SimEnchant) GetEffectId() int32 {
@@ -5284,7 +5434,7 @@ type UnitReference struct {
 
 func (x *UnitReference) Reset() {
 	*x = UnitReference{}
-	mi := &file_common_proto_msgTypes[19]
+	mi := &file_common_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5296,7 +5446,7 @@ func (x *UnitReference) String() string {
 func (*UnitReference) ProtoMessage() {}
 
 func (x *UnitReference) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[19]
+	mi := &file_common_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5309,7 +5459,7 @@ func (x *UnitReference) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnitReference.ProtoReflect.Descriptor instead.
 func (*UnitReference) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{19}
+	return file_common_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *UnitReference) GetType() UnitReference_Type {
@@ -5354,7 +5504,7 @@ type ActionID struct {
 
 func (x *ActionID) Reset() {
 	*x = ActionID{}
-	mi := &file_common_proto_msgTypes[20]
+	mi := &file_common_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5366,7 +5516,7 @@ func (x *ActionID) String() string {
 func (*ActionID) ProtoMessage() {}
 
 func (x *ActionID) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[20]
+	mi := &file_common_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5379,7 +5529,7 @@ func (x *ActionID) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionID.ProtoReflect.Descriptor instead.
 func (*ActionID) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{20}
+	return file_common_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ActionID) GetRawId() isActionID_RawId {
@@ -5468,7 +5618,7 @@ type Cooldown struct {
 
 func (x *Cooldown) Reset() {
 	*x = Cooldown{}
-	mi := &file_common_proto_msgTypes[21]
+	mi := &file_common_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5480,7 +5630,7 @@ func (x *Cooldown) String() string {
 func (*Cooldown) ProtoMessage() {}
 
 func (x *Cooldown) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[21]
+	mi := &file_common_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5493,7 +5643,7 @@ func (x *Cooldown) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Cooldown.ProtoReflect.Descriptor instead.
 func (*Cooldown) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{21}
+	return file_common_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *Cooldown) GetId() *ActionID {
@@ -5521,7 +5671,7 @@ type Cooldowns struct {
 
 func (x *Cooldowns) Reset() {
 	*x = Cooldowns{}
-	mi := &file_common_proto_msgTypes[22]
+	mi := &file_common_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5533,7 +5683,7 @@ func (x *Cooldowns) String() string {
 func (*Cooldowns) ProtoMessage() {}
 
 func (x *Cooldowns) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[22]
+	mi := &file_common_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5546,7 +5696,7 @@ func (x *Cooldowns) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Cooldowns.ProtoReflect.Descriptor instead.
 func (*Cooldowns) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{22}
+	return file_common_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *Cooldowns) GetCooldowns() []*Cooldown {
@@ -5581,7 +5731,7 @@ type HealingModel struct {
 
 func (x *HealingModel) Reset() {
 	*x = HealingModel{}
-	mi := &file_common_proto_msgTypes[23]
+	mi := &file_common_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5593,7 +5743,7 @@ func (x *HealingModel) String() string {
 func (*HealingModel) ProtoMessage() {}
 
 func (x *HealingModel) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[23]
+	mi := &file_common_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5606,7 +5756,7 @@ func (x *HealingModel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HealingModel.ProtoReflect.Descriptor instead.
 func (*HealingModel) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{23}
+	return file_common_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *HealingModel) GetHps() float64 {
@@ -5653,7 +5803,7 @@ type CustomRotation struct {
 
 func (x *CustomRotation) Reset() {
 	*x = CustomRotation{}
-	mi := &file_common_proto_msgTypes[24]
+	mi := &file_common_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5665,7 +5815,7 @@ func (x *CustomRotation) String() string {
 func (*CustomRotation) ProtoMessage() {}
 
 func (x *CustomRotation) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[24]
+	mi := &file_common_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5678,7 +5828,7 @@ func (x *CustomRotation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomRotation.ProtoReflect.Descriptor instead.
 func (*CustomRotation) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{24}
+	return file_common_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *CustomRotation) GetSpells() []*CustomSpell {
@@ -5701,7 +5851,7 @@ type CustomSpell struct {
 
 func (x *CustomSpell) Reset() {
 	*x = CustomSpell{}
-	mi := &file_common_proto_msgTypes[25]
+	mi := &file_common_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5713,7 +5863,7 @@ func (x *CustomSpell) String() string {
 func (*CustomSpell) ProtoMessage() {}
 
 func (x *CustomSpell) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[25]
+	mi := &file_common_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5726,7 +5876,7 @@ func (x *CustomSpell) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomSpell.ProtoReflect.Descriptor instead.
 func (*CustomSpell) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{25}
+	return file_common_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *CustomSpell) GetSpell() int32 {
@@ -5754,7 +5904,7 @@ type ItemSwap struct {
 
 func (x *ItemSwap) Reset() {
 	*x = ItemSwap{}
-	mi := &file_common_proto_msgTypes[26]
+	mi := &file_common_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5766,7 +5916,7 @@ func (x *ItemSwap) String() string {
 func (*ItemSwap) ProtoMessage() {}
 
 func (x *ItemSwap) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[26]
+	mi := &file_common_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5779,7 +5929,7 @@ func (x *ItemSwap) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemSwap.ProtoReflect.Descriptor instead.
 func (*ItemSwap) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{26}
+	return file_common_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ItemSwap) GetMhItem() *ItemSpec {
@@ -5812,7 +5962,7 @@ type Duration struct {
 
 func (x *Duration) Reset() {
 	*x = Duration{}
-	mi := &file_common_proto_msgTypes[27]
+	mi := &file_common_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5824,7 +5974,7 @@ func (x *Duration) String() string {
 func (*Duration) ProtoMessage() {}
 
 func (x *Duration) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[27]
+	mi := &file_common_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5837,7 +5987,7 @@ func (x *Duration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Duration.ProtoReflect.Descriptor instead.
 func (*Duration) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{27}
+	return file_common_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *Duration) GetMs() float64 {
@@ -6019,7 +6169,15 @@ const file_common_proto_rawDesc = "" +
 	"\fspell_school\x18\f \x01(\x0e2\x12.proto.SpellSchoolR\vspellSchool\x12\x1d\n" +
 	"\n" +
 	"tank_index\x18\r \x01(\x05R\ttankIndex\x127\n" +
-	"\rtarget_inputs\x18\x0e \x03(\v2\x12.proto.TargetInputR\ftargetInputs\"\xde\x02\n" +
+	"\rtarget_inputs\x18\x0e \x03(\v2\x12.proto.TargetInputR\ftargetInputs\"\x8a\x01\n" +
+	"\x0fMovementPattern\x12)\n" +
+	"\x10interval_seconds\x18\x01 \x01(\x01R\x0fintervalSeconds\x12)\n" +
+	"\x10duration_seconds\x18\x02 \x01(\x01R\x0fdurationSeconds\x12!\n" +
+	"\fcasting_only\x18\x03 \x01(\bR\vcastingOnly\"D\n" +
+	"\rTargetCountAt\x12\x1d\n" +
+	"\n" +
+	"at_seconds\x18\x01 \x01(\x01R\tatSeconds\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x05R\x05count\"\xf7\x03\n" +
 	"\tEncounter\x12\x1a\n" +
 	"\bduration\x18\x01 \x01(\x01R\bduration\x12-\n" +
 	"\x12duration_variation\x18\x02 \x01(\x01R\x11durationVariation\x122\n" +
@@ -6029,7 +6187,11 @@ const file_common_proto_rawDesc = "" +
 	"\n" +
 	"use_health\x18\x05 \x01(\bR\tuseHealth\x12'\n" +
 	"\atargets\x18\x06 \x03(\v2\r.proto.TargetR\atargets\x12\"\n" +
-	"\x05biome\x18\x14 \x01(\x0e2\f.proto.BiomeR\x05biome\"I\n" +
+	"\x05biome\x18\x14 \x01(\x0e2\f.proto.BiomeR\x05biome\x122\n" +
+	"\bmovement\x18\n" +
+	" \x01(\v2\x16.proto.MovementPatternR\bmovement\x12@\n" +
+	"\x11targets_over_time\x18\v \x03(\v2\x14.proto.TargetCountAtR\x0ftargetsOverTime\x12!\n" +
+	"\ftarget_dummy\x18\f \x01(\bR\vtargetDummy\"I\n" +
 	"\fPresetTarget\x12\x12\n" +
 	"\x04path\x18\x01 \x01(\tR\x04path\x12%\n" +
 	"\x06target\x18\x02 \x01(\v2\r.proto.TargetR\x06target\"T\n" +
@@ -6624,7 +6786,7 @@ func file_common_proto_rawDescGZIP() []byte {
 }
 
 var file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 45)
-var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_common_proto_goTypes = []any{
 	(Spec)(0),                // 0: proto.Spec
 	(Race)(0),                // 1: proto.Race
@@ -6681,24 +6843,26 @@ var file_common_proto_goTypes = []any{
 	(*Debuffs)(nil),          // 52: proto.Debuffs
 	(*TargetInput)(nil),      // 53: proto.TargetInput
 	(*Target)(nil),           // 54: proto.Target
-	(*Encounter)(nil),        // 55: proto.Encounter
-	(*PresetTarget)(nil),     // 56: proto.PresetTarget
-	(*PresetEncounter)(nil),  // 57: proto.PresetEncounter
-	(*ItemRandomSuffix)(nil), // 58: proto.ItemRandomSuffix
-	(*ItemSpec)(nil),         // 59: proto.ItemSpec
-	(*EquipmentSpec)(nil),    // 60: proto.EquipmentSpec
-	(*SimDatabase)(nil),      // 61: proto.SimDatabase
-	(*SimItem)(nil),          // 62: proto.SimItem
-	(*SimEnchant)(nil),       // 63: proto.SimEnchant
-	(*UnitReference)(nil),    // 64: proto.UnitReference
-	(*ActionID)(nil),         // 65: proto.ActionID
-	(*Cooldown)(nil),         // 66: proto.Cooldown
-	(*Cooldowns)(nil),        // 67: proto.Cooldowns
-	(*HealingModel)(nil),     // 68: proto.HealingModel
-	(*CustomRotation)(nil),   // 69: proto.CustomRotation
-	(*CustomSpell)(nil),      // 70: proto.CustomSpell
-	(*ItemSwap)(nil),         // 71: proto.ItemSwap
-	(*Duration)(nil),         // 72: proto.Duration
+	(*MovementPattern)(nil),  // 55: proto.MovementPattern
+	(*TargetCountAt)(nil),    // 56: proto.TargetCountAt
+	(*Encounter)(nil),        // 57: proto.Encounter
+	(*PresetTarget)(nil),     // 58: proto.PresetTarget
+	(*PresetEncounter)(nil),  // 59: proto.PresetEncounter
+	(*ItemRandomSuffix)(nil), // 60: proto.ItemRandomSuffix
+	(*ItemSpec)(nil),         // 61: proto.ItemSpec
+	(*EquipmentSpec)(nil),    // 62: proto.EquipmentSpec
+	(*SimDatabase)(nil),      // 63: proto.SimDatabase
+	(*SimItem)(nil),          // 64: proto.SimItem
+	(*SimEnchant)(nil),       // 65: proto.SimEnchant
+	(*UnitReference)(nil),    // 66: proto.UnitReference
+	(*ActionID)(nil),         // 67: proto.ActionID
+	(*Cooldown)(nil),         // 68: proto.Cooldown
+	(*Cooldowns)(nil),        // 69: proto.Cooldowns
+	(*HealingModel)(nil),     // 70: proto.HealingModel
+	(*CustomRotation)(nil),   // 71: proto.CustomRotation
+	(*CustomSpell)(nil),      // 72: proto.CustomSpell
+	(*ItemSwap)(nil),         // 73: proto.ItemSwap
+	(*Duration)(nil),         // 74: proto.Duration
 }
 var file_common_proto_depIdxs = []int32{
 	17, // 0: proto.RaidBuffs.gift_of_the_wild:type_name -> proto.TristateEffect
@@ -6752,32 +6916,34 @@ var file_common_proto_depIdxs = []int32{
 	53, // 48: proto.Target.target_inputs:type_name -> proto.TargetInput
 	54, // 49: proto.Encounter.targets:type_name -> proto.Target
 	40, // 50: proto.Encounter.biome:type_name -> proto.Biome
-	54, // 51: proto.PresetTarget.target:type_name -> proto.Target
-	56, // 52: proto.PresetEncounter.targets:type_name -> proto.PresetTarget
-	59, // 53: proto.EquipmentSpec.items:type_name -> proto.ItemSpec
-	62, // 54: proto.SimDatabase.items:type_name -> proto.SimItem
-	58, // 55: proto.SimDatabase.random_suffixes:type_name -> proto.ItemRandomSuffix
-	63, // 56: proto.SimDatabase.enchants:type_name -> proto.SimEnchant
-	3,  // 57: proto.SimItem.class_allowlist:type_name -> proto.Class
-	7,  // 58: proto.SimItem.type:type_name -> proto.ItemType
-	8,  // 59: proto.SimItem.armor_type:type_name -> proto.ArmorType
-	9,  // 60: proto.SimItem.weapon_type:type_name -> proto.WeaponType
-	11, // 61: proto.SimItem.hand_type:type_name -> proto.HandType
-	12, // 62: proto.SimItem.ranged_weapon_type:type_name -> proto.RangedWeaponType
-	44, // 63: proto.UnitReference.type:type_name -> proto.UnitReference.Type
-	64, // 64: proto.UnitReference.owner:type_name -> proto.UnitReference
-	43, // 65: proto.ActionID.other_id:type_name -> proto.OtherAction
-	65, // 66: proto.Cooldown.id:type_name -> proto.ActionID
-	66, // 67: proto.Cooldowns.cooldowns:type_name -> proto.Cooldown
-	70, // 68: proto.CustomRotation.spells:type_name -> proto.CustomSpell
-	59, // 69: proto.ItemSwap.mh_item:type_name -> proto.ItemSpec
-	59, // 70: proto.ItemSwap.oh_item:type_name -> proto.ItemSpec
-	59, // 71: proto.ItemSwap.ranged_item:type_name -> proto.ItemSpec
-	72, // [72:72] is the sub-list for method output_type
-	72, // [72:72] is the sub-list for method input_type
-	72, // [72:72] is the sub-list for extension type_name
-	72, // [72:72] is the sub-list for extension extendee
-	0,  // [0:72] is the sub-list for field type_name
+	55, // 51: proto.Encounter.movement:type_name -> proto.MovementPattern
+	56, // 52: proto.Encounter.targets_over_time:type_name -> proto.TargetCountAt
+	54, // 53: proto.PresetTarget.target:type_name -> proto.Target
+	58, // 54: proto.PresetEncounter.targets:type_name -> proto.PresetTarget
+	61, // 55: proto.EquipmentSpec.items:type_name -> proto.ItemSpec
+	64, // 56: proto.SimDatabase.items:type_name -> proto.SimItem
+	60, // 57: proto.SimDatabase.random_suffixes:type_name -> proto.ItemRandomSuffix
+	65, // 58: proto.SimDatabase.enchants:type_name -> proto.SimEnchant
+	3,  // 59: proto.SimItem.class_allowlist:type_name -> proto.Class
+	7,  // 60: proto.SimItem.type:type_name -> proto.ItemType
+	8,  // 61: proto.SimItem.armor_type:type_name -> proto.ArmorType
+	9,  // 62: proto.SimItem.weapon_type:type_name -> proto.WeaponType
+	11, // 63: proto.SimItem.hand_type:type_name -> proto.HandType
+	12, // 64: proto.SimItem.ranged_weapon_type:type_name -> proto.RangedWeaponType
+	44, // 65: proto.UnitReference.type:type_name -> proto.UnitReference.Type
+	66, // 66: proto.UnitReference.owner:type_name -> proto.UnitReference
+	43, // 67: proto.ActionID.other_id:type_name -> proto.OtherAction
+	67, // 68: proto.Cooldown.id:type_name -> proto.ActionID
+	68, // 69: proto.Cooldowns.cooldowns:type_name -> proto.Cooldown
+	72, // 70: proto.CustomRotation.spells:type_name -> proto.CustomSpell
+	61, // 71: proto.ItemSwap.mh_item:type_name -> proto.ItemSpec
+	61, // 72: proto.ItemSwap.oh_item:type_name -> proto.ItemSpec
+	61, // 73: proto.ItemSwap.ranged_item:type_name -> proto.ItemSpec
+	74, // [74:74] is the sub-list for method output_type
+	74, // [74:74] is the sub-list for method input_type
+	74, // [74:74] is the sub-list for extension type_name
+	74, // [74:74] is the sub-list for extension extendee
+	0,  // [0:74] is the sub-list for field type_name
 }
 
 func init() { file_common_proto_init() }
@@ -6785,7 +6951,7 @@ func file_common_proto_init() {
 	if File_common_proto != nil {
 		return
 	}
-	file_common_proto_msgTypes[20].OneofWrappers = []any{
+	file_common_proto_msgTypes[22].OneofWrappers = []any{
 		(*ActionID_SpellId)(nil),
 		(*ActionID_ItemId)(nil),
 		(*ActionID_OtherId)(nil),
@@ -6796,7 +6962,7 @@ func file_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_proto_rawDesc), len(file_common_proto_rawDesc)),
 			NumEnums:      45,
-			NumMessages:   28,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
