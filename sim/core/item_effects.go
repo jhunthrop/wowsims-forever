@@ -158,8 +158,12 @@ func NewMobTypeAttackPowerEffect(itemID int32, mobTypes []proto.MobType, bonus f
 	NewItemEffect(itemID, func(agent Agent) {
 		character := agent.GetCharacter()
 
+		// The pool, not the active prefix: this is set up once, before
+		// the pull, and permanently mutates attack tables keyed by
+		// UnitIndex, so it means every target in the fight - including
+		// the adds a target timeline has not brought in yet.
 		matchingTargets := FilterSlice(
-			character.Env.Encounter.TargetUnits,
+			character.Env.Encounter.AllTargetUnits,
 			func(unit *Unit) bool { return slices.Contains(mobTypes, unit.MobType) },
 		)
 
@@ -188,8 +192,10 @@ func NewMobTypeSpellPowerEffect(itemID int32, mobTypes []proto.MobType, bonus fl
 	NewItemEffect(itemID, func(agent Agent) {
 		character := agent.GetCharacter()
 
+		// The pool, not the active prefix; see
+		// NewMobTypeAttackPowerEffect above.
 		matchingTargets := FilterSlice(
-			character.Env.Encounter.TargetUnits,
+			character.Env.Encounter.AllTargetUnits,
 			func(unit *Unit) bool { return slices.Contains(mobTypes, unit.MobType) },
 		)
 
@@ -229,7 +235,9 @@ func NewMobTypeDamageEffect(itemID int32, mobTypes []proto.MobType, multiplier f
 	NewItemEffect(itemID, func(agent Agent) {
 		character := agent.GetCharacter()
 		character.Env.RegisterPostFinalizeEffect(func() {
-			for _, target := range character.Env.Encounter.TargetUnits {
+			// The pool, not the active prefix - the same slice
+			// racials.go's Beast Slaying walks.
+			for _, target := range character.Env.Encounter.AllTargetUnits {
 				if !slices.Contains(mobTypes, target.MobType) {
 					continue
 				}

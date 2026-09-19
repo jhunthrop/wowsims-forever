@@ -516,7 +516,12 @@ func (sim *Simulation) Cleanup() {
 	for _, unit := range sim.Raid.AllUnits {
 		unit.Metrics.doneIteration(unit, sim)
 	}
-	for _, target := range sim.Encounter.TargetUnits {
+	// The whole pool, not the active prefix: Encounter.doneIteration
+	// just above and Encounter.GetMetricsProto afterwards both walk
+	// every pooled target, so finishing only the active ones leaves a
+	// target the timeline deactivated with no samples at all - its
+	// mean divides by zero and the report carries NaN out to the site.
+	for _, target := range sim.Encounter.AllTargetUnits {
 		target.Metrics.doneIteration(target, sim)
 	}
 }

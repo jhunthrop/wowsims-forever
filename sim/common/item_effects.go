@@ -233,8 +233,11 @@ func init() {
 	// Chance on hit: Increases Attack Power against Undead by 200 for 10 sec.
 	// 1 PPM from Armaments Discord
 	itemhelpers.CreateWeaponProcAura(ArgentAvenger, "Argent Avenger", 1.0, func(character *core.Character) *core.Aura {
+		// The pool, not the active prefix: the proc aura is built once,
+		// before the pull, and its OnGain mutates attack tables keyed
+		// by UnitIndex, so it means every undead in the fight.
 		matchingTargets := core.FilterSlice(
-			character.Env.Encounter.TargetUnits,
+			character.Env.Encounter.AllTargetUnits,
 			func(unit *core.Unit) bool { return unit.MobType == proto.MobType_MobTypeUndead },
 		)
 
@@ -301,9 +304,11 @@ func init() {
 	itemhelpers.CreateWeaponProcSpell(BarovianFamilySword, "Barovian Family Sword", 0.5, func(character *core.Character) *core.Spell {
 		actionID := core.ActionID{SpellID: 18652}
 
-		// Keep track of damage taken by each enemy
+		// Keep track of damage taken by each enemy. The pool, not the
+		// active prefix: the DoT can be on an add a target timeline
+		// brings in later, and its tally has to have a slot too.
 		enemyDamageTaken := map[int32]float64{}
-		for _, target := range character.Env.Encounter.TargetUnits {
+		for _, target := range character.Env.Encounter.AllTargetUnits {
 			enemyDamageTaken[target.UnitIndex] = 0
 		}
 

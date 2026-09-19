@@ -363,7 +363,9 @@ var ItemSetRegaliaOfUndeadCleansing = core.NewItemSet(core.ItemSet{
 			delta := 1.02
 
 			character.Env.RegisterPostFinalizeEffect(func() {
-				for _, target := range character.Env.Encounter.TargetUnits {
+				// The pool, not the active prefix: a set bonus is
+				// applied once and means every undead in the fight.
+				for _, target := range character.Env.Encounter.AllTargetUnits {
 					if target.MobType != proto.MobType_MobTypeUndead {
 						continue
 					}
@@ -387,7 +389,9 @@ var ItemSetUndeadSlayersArmor = core.NewItemSet(core.ItemSet{
 			delta := 1.02
 
 			character.Env.RegisterPostFinalizeEffect(func() {
-				for _, target := range character.Env.Encounter.TargetUnits {
+				// The pool, not the active prefix: a set bonus is
+				// applied once and means every undead in the fight.
+				for _, target := range character.Env.Encounter.AllTargetUnits {
 					if target.MobType != proto.MobType_MobTypeUndead {
 						continue
 					}
@@ -411,7 +415,9 @@ var ItemSetGarbOfTheUndeadSlayer = core.NewItemSet(core.ItemSet{
 			delta := 1.02
 
 			character.Env.RegisterPostFinalizeEffect(func() {
-				for _, target := range character.Env.Encounter.TargetUnits {
+				// The pool, not the active prefix: a set bonus is
+				// applied once and means every undead in the fight.
+				for _, target := range character.Env.Encounter.AllTargetUnits {
 					if target.MobType != proto.MobType_MobTypeUndead {
 						continue
 					}
@@ -435,7 +441,9 @@ var ItemSetBattlegearOfUndeadSlaying = core.NewItemSet(core.ItemSet{
 			delta := 1.02
 
 			character.Env.RegisterPostFinalizeEffect(func() {
-				for _, target := range character.Env.Encounter.TargetUnits {
+				// The pool, not the active prefix: a set bonus is
+				// applied once and means every undead in the fight.
+				for _, target := range character.Env.Encounter.AllTargetUnits {
 					if target.MobType != proto.MobType_MobTypeUndead {
 						continue
 					}

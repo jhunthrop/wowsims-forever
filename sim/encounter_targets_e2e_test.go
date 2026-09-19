@@ -1,6 +1,7 @@
 package sim
 
 import (
+	"math"
 	"testing"
 
 	"github.com/wowsims/classic/sim/core"
@@ -140,6 +141,30 @@ func TestGrowingTimelineGivesCappedAoEItsTargets(t *testing.T) {
 	}
 	if swungAt < 4 {
 		t.Errorf("Whirlwind swung at %d targets, want its cap of 4 once the timeline grew to five", swungAt)
+	}
+}
+
+// Every pooled target must be finished at the end of an iteration, not
+// just the active prefix: Encounter.doneIteration and GetMetricsProto
+// either side of the loop both walk the whole pool, so a target that is
+// never finished divides by zero and reports NaN DPS to the site.
+func TestEveryPooledTargetReportsFiniteMetrics(t *testing.T) {
+	encounter := parityEncounter()
+	encounter.TargetsOverTime = []*proto.TargetCountAt{
+		{AtSeconds: 0, Count: 1},
+		{AtSeconds: 40, Count: 5},
+		{AtSeconds: 160, Count: 1},
+	}
+
+	result := runParityResult(t, furyWarriorPlayer(), encounter)
+	if got := len(result.EncounterMetrics.Targets); got != 5 {
+		t.Fatalf("EncounterMetrics has %d targets, want the whole pool of 5", got)
+	}
+	for i, target := range result.EncounterMetrics.Targets {
+		dps := target.GetDps().GetAvg()
+		if math.IsNaN(dps) || math.IsInf(dps, 0) {
+			t.Errorf("target %d reports dps.avg = %v; every pooled target must finish the iteration", i, dps)
+		}
 	}
 }
 

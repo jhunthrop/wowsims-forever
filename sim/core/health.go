@@ -91,7 +91,11 @@ var ChanceOfDeathAuraLabel = "Chance of Death"
 
 func (character *Character) trackChanceOfDeath(healingModel *proto.HealingModel) {
 	character.Unit.Metrics.isTanking = false
-	for _, target := range character.Env.Encounter.TargetUnits {
+	// The pool, not the active prefix: this runs once during raid
+	// construction and decides whether the character is tracked as a
+	// tank for the whole fight, so an add that a target timeline brings
+	// in later and points at this character still counts.
+	for _, target := range character.Env.Encounter.AllTargetUnits {
 		if target.CurrentTarget == &character.Unit {
 			character.Unit.Metrics.isTanking = true
 		}

@@ -107,7 +107,10 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 			})
 		case proto.WeaponImbue_BlessedWizardOil:
 			character.Env.RegisterPostFinalizeEffect(func() {
-				for _, target := range character.Env.Encounter.TargetUnits {
+				// The pool, not the active prefix: an imbue is set up
+				// once and means every undead in the fight, including
+				// the ones a target timeline brings in later.
+				for _, target := range character.Env.Encounter.AllTargetUnits {
 					if target.MobType != proto.MobType_MobTypeUndead {
 						continue
 					}
@@ -161,7 +164,9 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 			}
 		case proto.WeaponImbue_ConsecratedSharpeningStone:
 			character.Env.RegisterPostFinalizeEffect(func() {
-				for _, target := range character.Env.Encounter.TargetUnits {
+				// The pool, not the active prefix; see
+				// BlessedWizardOil above.
+				for _, target := range character.Env.Encounter.AllTargetUnits {
 					if target.MobType != proto.MobType_MobTypeUndead {
 						continue
 					}
