@@ -1,0 +1,58 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": { "castSpell": { "spellId": { "spellId": 25296, "rank": 7 } } },
+      "doAtValue": { "const": { "val": "-10s" } }
+    },
+    {
+      "action": { "castSpell": { "spellId": { "spellId": 20904, "rank": 6 } } },
+      "doAtValue": { "const": { "val": "-3.5s" } }
+    }
+  ],
+  "priorityList": [
+    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "notes": "Rapid Fire timed to land with an incoming auto shot just as Aimed Shot is about to come off cooldown, so both benefit.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "cmp": { "op": "OpLt", "lhs": { "autoTimeToNext": { "autoType": "Ranged" } }, "rhs": { "const": { "val": "0.1" } } } },
+              { "cmp": { "op": "OpLt", "lhs": { "spellTimeToReady": { "spellId": { "spellId": 20904, "rank": 6 } } }, "rhs": { "const": { "val": "0.5" } } } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 3045 } }
+      }
+    },
+    {
+      "notes": "Aimed Shot on cooldown, timed so its cast does not clip the next auto shot.",
+      "action": {
+        "condition": { "cmp": { "op": "OpGt", "lhs": { "autoTimeToNext": { "autoType": "Ranged" } }, "rhs": { "const": { "val": "1s" } } } },
+        "castSpell": { "spellId": { "spellId": 20904, "rank": 6 } }
+      }
+    },
+    {
+      "notes": "Serpent Sting kept up whenever it is about to fall off and neither shot above is close to ready.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "cmp": { "op": "OpLt", "lhs": { "dotRemainingTime": { "spellId": { "spellId": 25295, "rank": 9 } } }, "rhs": { "const": { "val": "5s" } } } },
+              { "cmp": { "op": "OpGe", "lhs": { "spellTimeToReady": { "spellId": { "spellId": 20904, "rank": 6 } } }, "rhs": { "const": { "val": "0.5" } } } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 25295, "rank": 9 } }
+      }
+    },
+    {
+      "notes": "Multi-Shot as the filler between Aimed Shots.",
+      "action": {
+        "condition": { "cmp": { "op": "OpGt", "lhs": { "autoTimeToNext": { "autoType": "Ranged" } }, "rhs": { "const": { "val": "0.5s" } } } },
+        "castSpell": { "spellId": { "spellId": 2643, "rank": 1 } }
+      }
+    }
+  ]
+}

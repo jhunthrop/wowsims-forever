@@ -1,0 +1,43 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    {
+      "notes": "Potion at the top of the fight if mana is already below 75 percent.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "cmp": { "op": "OpGe", "lhs": { "remainingTime": {} }, "rhs": { "const": { "val": "15s" } } } },
+              { "cmp": { "op": "OpLe", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "75%" } } } },
+              { "isExecutePhase": { "threshold": "E35" } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "otherId": "OtherActionPotion" } }
+      }
+    },
+    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "notes": "Life Tap to keep casting once mana runs low.",
+      "action": {
+        "condition": { "cmp": { "op": "OpLt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "10%" } } } },
+        "castSpell": { "spellId": { "spellId": 11689, "rank": 6 } }
+      }
+    },
+    {
+      "notes": "Corruption is cheap sustained damage that does not compete with Shadow Bolt casts.",
+      "action": {
+        "condition": { "not": { "val": { "dotIsActive": { "spellId": { "spellId": 25311, "rank": 7 } } } } },
+        "castSpell": { "spellId": { "spellId": 25311, "rank": 7 } }
+      }
+    },
+    {
+      "notes": "Soul Fire on cooldown. Future-proofed for Decimation (440870), which is meant to drop this 60 second cooldown to near nothing after a Shadow Bolt or Searing Pain crit -- not yet implemented in this engine build (sim/warlock/soul_fire.go has a flat, unshortened cooldown), so today this simply casts once a minute.",
+      "action": { "castSpell": { "spellId": { "spellId": 17924, "rank": 2 } } }
+    },
+    {
+      "notes": "Shadow Bolt is the default filler and what feeds Decimation's proc.",
+      "action": { "castSpell": { "spellId": { "spellId": 25307, "rank": 10 } } }
+    }
+  ]
+}

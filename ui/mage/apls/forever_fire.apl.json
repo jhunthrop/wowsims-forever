@@ -1,0 +1,54 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "notes": "Pop Combustion once Improved Scorch's debuff is fully stacked, for a guaranteed run of Fire crits. Fix round 1: tracks the engine's own debuff id (12873, sim/core/debuffs.go's ImprovedScorchAura), not the client's Fire Vulnerability (22959) the preset's stale reference resembled -- 12873 is not in spellconst, a flagged engine/data reconciliation gap, not an authoring error.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": { "auraNumStacks": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } },
+            "rhs": { "const": { "val": "5" } }
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 11129 } }
+      }
+    },
+    {
+      "notes": "Scorch to apply or refresh the five stacks of Improved Scorch's debuff before it falls off.",
+      "action": {
+        "condition": {
+          "or": {
+            "vals": [
+              { "not": { "val": { "auraIsActive": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } } } },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": { "auraNumStacks": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } },
+                  "rhs": { "const": { "val": "5" } }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": { "auraRemainingTime": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } },
+                  "rhs": { "const": { "val": "1.5s" } }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 10207, "rank": 7 } }
+      }
+    },
+    {
+      "notes": "Fire Blast on cooldown as a free extra nuke that does not compete for Scorch or Fireball casts.",
+      "action": { "castSpell": { "spellId": { "spellId": 10199, "rank": 7 } } }
+    },
+    {
+      "notes": "Fireball is the primary filler once Improved Scorch's debuff is up.",
+      "action": { "castSpell": { "spellId": { "spellId": 25306, "rank": 12 } } }
+    }
+  ]
+}

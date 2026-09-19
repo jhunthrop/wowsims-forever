@@ -1,0 +1,29 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "notes": "Arcane Power on cooldown: a flat 30 percent damage cooldown with no cast time of its own.",
+      "action": { "castSpell": { "spellId": { "spellId": 12042 } } }
+    },
+    {
+      "notes": "Presence of Mind on cooldown: free (no GCD) and makes the next cast instant.",
+      "action": { "castSpell": { "spellId": { "spellId": 12043 } } }
+    },
+    {
+      "notes": "Inert until the engine implements Missile Barrage (sim/mage/talents.go): no aura is ever registered under 400589, so this condition never fires today. Kept because it is where the Arcane guide places the empowered-Missiles payoff.",
+      "action": {
+        "condition": { "auraIsActive": { "auraId": { "spellId": 400589 } } },
+        "castSpell": { "spellId": { "spellId": 10212, "rank": 7 } }
+      }
+    },
+    {
+      "notes": "Inert until the engine implements Arcane Blast (sim/mage/talents.go says the spell is not registered yet). Kept because it is where the Arcane guide places its default filler.",
+      "action": { "castSpell": { "spellId": { "spellId": 400574, "rank": 1 } } }
+    },
+    {
+      "notes": "Arcane Missiles is the engine-castable Era filler that keeps this rotation dealing damage while Arcane Blast and Missile Barrage are inert -- the pre-Arcane-Blast Era Arcane rotation was itself Missiles spam. Uses rank 7 (10212), the highest rank the engine's registration loop actually registers; rank 8 (25345) is excluded by an off-by-one there, recorded as an engine follow-up.",
+      "action": { "castSpell": { "spellId": { "spellId": 10212, "rank": 7 } } }
+    }
+  ]
+}

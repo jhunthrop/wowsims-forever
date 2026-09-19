@@ -1,0 +1,193 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 15208,
+            "rank": 10
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-2.5s"
+        }
+      }
+    }
+  ],
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Single target: Searing Totem is the higher damage fire totem.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpEq",
+                  "lhs": {
+                    "numberTargets": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "1"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 10438,
+                        "rank": 6
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10438,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "2 or more targets: Magma Totem hits everyone standing in it instead.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "numberTargets": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "2"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 10587,
+                        "rank": 4
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10587,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
+      "notes": "Keep Flame Shock on the target; it is cheap relative to its damage and does not compete with the GCD budget much.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 29228,
+                  "rank": 6
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 29228,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "2 or more targets: Chain Lightning hits all of them for close to single-target Lightning Bolt damage.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "numberTargets": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "2"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10605,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
+      "notes": "Earth Shock is a mana dump once mana is comfortably above half; it shares a cooldown with Flame Shock only, not Chain Lightning, so it is safe to slot in here.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "50%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10414,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "Lightning Bolt is the rest of the single-target rotation.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 15208,
+            "rank": 10
+          }
+        }
+      }
+    }
+  ]
+}

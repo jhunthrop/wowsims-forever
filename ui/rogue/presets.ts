@@ -24,8 +24,11 @@ import { SavedTalents } from '../core/proto/ui.js';
 import BackstabAPL from './apls/combat_backstab.apl.json';
 import BackstabSweatyAPL from './apls/combat_backstab_sweaty.apl.json';
 import SinisterStrikeAPL from './apls/combat_sinister_strike.apl.json';
-import SinisterStrikeSweatyAPL from './apls/combat_sinister_strike_sweaty.apl.json';
 import SinisterStrikeIEAAPL from './apls/combat_sinister_strike_iea.apl.json';
+import SinisterStrikeSweatyAPL from './apls/combat_sinister_strike_sweaty.apl.json';
+import ForeverAssassinationAPL from './apls/forever_assassination.apl.json';
+import ForeverCombatAPL from './apls/forever_combat.apl.json';
+import ForeverSubtletyAPL from './apls/forever_subtlety.apl.json';
 import BlankGear from './gear_sets/blank.gear.json';
 import BackstabGearPreBiS from './gear_sets/combat_backstab_prebis.gear.json';
 import SinisterStrikeGearPreBiS from './gear_sets/combat_sinister_strike_prebis.gear.json';
@@ -67,15 +70,47 @@ export const ROTATION_PRESET_BACKSTAB_SWEATY = PresetUtils.makePresetAPLRotation
 export const ROTATION_PRESET_SINISTER_STRIKE_SWEATY = PresetUtils.makePresetAPLRotation('Sinister Strike (Sweaty)', SinisterStrikeSweatyAPL, {});
 export const ROTATION_PRESET_SINISTER_STRIKE_IEA = PresetUtils.makePresetAPLRotation('Improved Expose Armor (SS)', SinisterStrikeIEAAPL, {});
 
+// The Forever rotations below are the launch defaults. Each is a copy of
+// data/curated/apl/<class>-<spec>.json's `rotation` in the Forever Sixty site
+// repository, written here by that repository's `make apl-sync` and proved by
+// its `make apl-check`; edit the curated file, never this copy. The Era lists
+// are kept because a Forever character can still be compared against them.
+// One rogue package serves all three specs, so all three Forever rotations
+// live here. Combat is the default: every Era preset and talent build in this
+// file is a Combat one, so it is this package's primary DPS spec.
+// The Forever presets are appended to each phase rather than prepended
+// because DefaultAPLBackstab and its siblings below index these arrays.
+export const AplForeverAssassination = PresetUtils.makePresetAPLRotation('Forever Assassination', ForeverAssassinationAPL, {});
+export const AplForeverCombat = PresetUtils.makePresetAPLRotation('Forever Combat', ForeverCombatAPL, {});
+export const AplForeverSubtlety = PresetUtils.makePresetAPLRotation('Forever Subtlety', ForeverSubtletyAPL, {});
+
 export const APLPresets = {
-	[Phase.Phase1]: [ROTATION_PRESET_BACKSTAB, ROTATION_PRESET_SINISTER_STRIKE, ROTATION_PRESET_BACKSTAB_SWEATY, ROTATION_PRESET_SINISTER_STRIKE_SWEATY, ROTATION_PRESET_SINISTER_STRIKE_IEA],
-	[Phase.Phase2]: [ROTATION_PRESET_BACKSTAB, ROTATION_PRESET_SINISTER_STRIKE, ROTATION_PRESET_BACKSTAB_SWEATY, ROTATION_PRESET_SINISTER_STRIKE_SWEATY, ROTATION_PRESET_SINISTER_STRIKE_IEA],
+	[Phase.Phase1]: [
+		ROTATION_PRESET_BACKSTAB,
+		ROTATION_PRESET_SINISTER_STRIKE,
+		ROTATION_PRESET_BACKSTAB_SWEATY,
+		ROTATION_PRESET_SINISTER_STRIKE_SWEATY,
+		ROTATION_PRESET_SINISTER_STRIKE_IEA,
+		AplForeverAssassination,
+		AplForeverCombat,
+		AplForeverSubtlety,
+	],
+	[Phase.Phase2]: [
+		ROTATION_PRESET_BACKSTAB,
+		ROTATION_PRESET_SINISTER_STRIKE,
+		ROTATION_PRESET_BACKSTAB_SWEATY,
+		ROTATION_PRESET_SINISTER_STRIKE_SWEATY,
+		ROTATION_PRESET_SINISTER_STRIKE_IEA,
+		AplForeverAssassination,
+		AplForeverCombat,
+		AplForeverSubtlety,
+	],
 };
 
 //Need to add main hand equip logic or talent/rotation logic to map to Auto APL
 export const DefaultAPLs: Record<number, PresetUtils.PresetRotation> = {
-	[0]: ROTATION_PRESET_SINISTER_STRIKE,
-	[1]: ROTATION_PRESET_BACKSTAB,
+	[0]: AplForeverCombat,
+	[1]: AplForeverCombat,
 };
 
 export const DefaultAPLBackstab = APLPresets[Phase.Phase2][0];

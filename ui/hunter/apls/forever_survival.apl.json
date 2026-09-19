@@ -1,0 +1,44 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": { "castSpell": { "spellId": { "spellId": 25296, "rank": 7 } } },
+      "doAtValue": { "const": { "val": "-10s" } }
+    },
+    {
+      "action": { "castSpell": { "spellId": { "spellId": 20904, "rank": 6 } } },
+      "doAtValue": { "const": { "val": "-3.5s" } }
+    }
+  ],
+  "priorityList": [
+    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "notes": "Aimed Shot on cooldown, timed so its cast does not clip the next auto shot.",
+      "action": {
+        "condition": { "cmp": { "op": "OpGt", "lhs": { "autoTimeToNext": { "autoType": "Ranged" } }, "rhs": { "const": { "val": "1s" } } } },
+        "castSpell": { "spellId": { "spellId": 20904, "rank": 6 } }
+      }
+    },
+    {
+      "notes": "Raptor Strike as the melee filler while Survival's talents make meleeing worthwhile; queued at tag 3, the engine's odd one out for on-next-swing abilities. Never below 20 percent mana, so it does not starve the ranged shots.",
+      "action": {
+        "condition": { "cmp": { "op": "OpGe", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "20" } } } },
+        "castSpell": { "spellId": { "spellId": 14266, "rank": 8, "tag": 3 } }
+      }
+    },
+    {
+      "notes": "Multi-Shot as the filler between Aimed Shots.",
+      "action": {
+        "condition": { "cmp": { "op": "OpGt", "lhs": { "autoTimeToNext": { "autoType": "Ranged" } }, "rhs": { "const": { "val": "0.5s" } } } },
+        "castSpell": { "spellId": { "spellId": 2643, "rank": 1 } }
+      }
+    },
+    {
+      "notes": "Serpent Sting kept up whenever it is about to fall off -- never ahead of Aimed Shot or Multi-Shot above, per the cited guide.",
+      "action": {
+        "condition": { "cmp": { "op": "OpLt", "lhs": { "dotRemainingTime": { "spellId": { "spellId": 25295, "rank": 9 } } }, "rhs": { "const": { "val": "5s" } } } },
+        "castSpell": { "spellId": { "spellId": 25295, "rank": 9 } }
+      }
+    }
+  ]
+}

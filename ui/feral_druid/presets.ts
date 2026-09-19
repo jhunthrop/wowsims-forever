@@ -24,6 +24,7 @@ import {
 import { FeralDruid_Options as FeralDruidOptions, FeralDruid_Rotation as FeralDruidRotation } from '../core/proto/druid.js';
 import { SavedTalents } from '../core/proto/ui.js';
 import FeralAPL from './apls/feral.apl.json';
+import ForeverFeralAPL from './apls/forever_feral.apl.json';
 import SimpleVaelAPL from './apls/simple_vael.apl.json';
 import P2BISGear from './gear_sets/p2.bis.gear.json';
 import P2PreBISGear from './gear_sets/p2.pre-bis.gear.json';
@@ -57,14 +58,20 @@ export const DefaultGear = GearP4BIS;
 //                                 APL Presets
 ///////////////////////////////////////////////////////////////////////////
 
+// The Forever rotations below are the launch defaults. Each is a copy of
+// data/curated/apl/<class>-<spec>.json's `rotation` in the Forever Sixty site
+// repository, written here by that repository's `make apl-sync` and proved by
+// its `make apl-check`; edit the curated file, never this copy. The Era lists
+// are kept because a Forever character can still be compared against them.
 export const APLFeral = PresetUtils.makePresetAPLRotation('Feral', FeralAPL);
 export const APLSimpleVael = PresetUtils.makePresetAPLRotation('Simple Vaelastrasz', SimpleVaelAPL);
+export const AplForeverFeral = PresetUtils.makePresetAPLRotation('Forever Feral', ForeverFeralAPL);
 
 export const APLPresets = {
-	[Phase.Phase4]: [APLFeral, APLSimpleVael],
+	[Phase.Phase4]: [APLFeral, APLSimpleVael, AplForeverFeral],
 };
 
-export const DefaultAPL = APLFeral;
+export const DefaultAPL = AplForeverFeral;
 
 export const DefaultRotation = FeralDruidRotation.create({
 	maintainFaerieFire: false,

@@ -1,0 +1,63 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": { "castSpell": { "spellId": { "spellId": 25309, "rank": 8 } } },
+      "doAtValue": { "const": { "val": "-1.5s" } }
+    }
+  ],
+  "priorityList": [
+    {
+      "notes": "Potion at the top of the fight if mana is already below 75 percent.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "cmp": { "op": "OpGe", "lhs": { "remainingTime": {} }, "rhs": { "const": { "val": "15s" } } } },
+              { "cmp": { "op": "OpLe", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "75%" } } } },
+              { "isExecutePhase": { "threshold": "E35" } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "otherId": "OtherActionPotion" } }
+      }
+    },
+    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "notes": "Life Tap to keep casting once mana runs low.",
+      "action": {
+        "condition": { "cmp": { "op": "OpLt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "10%" } } } },
+        "castSpell": { "spellId": { "spellId": 11689, "rank": 6 } }
+      }
+    },
+    {
+      "notes": "Immolate is the DoT both Conflagrate and Incinerate need on the target, so it is refreshed the moment it falls off.",
+      "action": {
+        "condition": { "not": { "val": { "dotIsActive": { "spellId": { "spellId": 25309, "rank": 8 } } } } },
+        "castSpell": { "spellId": { "spellId": 25309, "rank": 8 } }
+      }
+    },
+    {
+      "notes": "Conflagrate consumes part of Immolate's remaining damage as instant burst; only worth casting while Immolate is up.",
+      "action": {
+        "condition": { "dotIsActive": { "spellId": { "spellId": 25309, "rank": 8 } } },
+        "castSpell": { "spellId": { "spellId": 1293817, "rank": 1 } }
+      }
+    },
+    {
+      "notes": "Shadowburn as the execute finisher below 20 percent target health.",
+      "action": {
+        "condition": { "isExecutePhase": { "threshold": "E20" } },
+        "castSpell": { "spellId": { "spellId": 18871, "rank": 6 } }
+      }
+    },
+    {
+      "notes": "Inert until the engine registers Incinerate (found only in sim/warlock's talent metadata table, no spell registration). Kept as Destruction's signature filler, dealing bonus damage while Immolate is active.",
+      "action": { "castSpell": { "spellId": { "spellId": 412758, "rank": 1 } } }
+    },
+    {
+      "notes": "Shadow Bolt is the engine-castable Era filler while Incinerate is inert -- without it this rotation has nothing left to cast once Immolate is up and Conflagrate is on cooldown.",
+      "action": { "castSpell": { "spellId": { "spellId": 25307, "rank": 10 } } }
+    }
+  ]
+}

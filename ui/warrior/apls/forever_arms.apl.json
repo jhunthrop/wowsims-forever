@@ -1,0 +1,59 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": { "castSpell": { "spellId": { "spellId": 25289, "rank": 7 } } },
+      "doAtValue": { "const": { "val": "-1s" } }
+    }
+  ],
+  "priorityList": [
+    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "notes": "Bloodrage on cooldown: rage is the limiting resource, same as Fury.",
+      "action": {
+        "condition": { "cmp": { "op": "OpLt", "lhs": { "currentRage": {} }, "rhs": { "const": { "val": "80" } } } },
+        "castSpell": { "spellId": { "spellId": 2687 } }
+      }
+    },
+    {
+      "notes": "Recklessness on cooldown: Arms has no Death Wish, so this is the burst cooldown.",
+      "action": { "castSpell": { "spellId": { "spellId": 1719 } } }
+    },
+    {
+      "notes": "Keep Battle Shout up.",
+      "action": {
+        "condition": { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 25289, "rank": 7 } } } } },
+        "castSpell": { "spellId": { "spellId": 25289, "rank": 7 } }
+      }
+    },
+    {
+      "notes": "Keep Rend up: Improved Rend and Deep Wounds both want the bleed ticking.",
+      "action": {
+        "condition": { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 11574, "rank": 7 } } } } },
+        "castSpell": { "spellId": { "spellId": 11574, "rank": 7 } }
+      }
+    },
+    {
+      "notes": "Mortal Strike is the highest damage per rage button and comes off a six second cooldown.",
+      "action": { "castSpell": { "spellId": { "spellId": 21553, "rank": 4 } } }
+    },
+    {
+      "notes": "Overpower is a bare cast: the engine's ExtraCastCondition only lets it land while the dodge-triggered proc aura is up, so it is a free line that falls through otherwise.",
+      "action": { "castSpell": { "spellId": { "spellId": 11585, "rank": 4 } } }
+    },
+    {
+      "notes": "Execute below 20 percent.",
+      "action": {
+        "condition": { "isExecutePhase": { "threshold": "E20" } },
+        "castSpell": { "spellId": { "spellId": 20662, "rank": 5 } }
+      }
+    },
+    {
+      "notes": "Heroic Strike as the rage dump, never below 40 rage.",
+      "action": {
+        "condition": { "cmp": { "op": "OpGe", "lhs": { "currentRage": {} }, "rhs": { "const": { "val": "40" } } } },
+        "castSpell": { "spellId": { "spellId": 25286, "rank": 9, "tag": 1 } }
+      }
+    }
+  ]
+}

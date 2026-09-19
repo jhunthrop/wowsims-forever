@@ -21,6 +21,8 @@ import {
 } from '../core/proto/common';
 import { Mage_Options as MageOptions, Mage_Options_ArmorType as ArmorType } from '../core/proto/mage';
 import { SavedTalents } from '../core/proto/ui';
+import ForeverArcaneAPL from './apls/forever_arcane.apl.json';
+import ForeverFireAPL from './apls/forever_fire.apl.json';
 import ForeverFrostAPL from './apls/forever_frost.apl.json';
 import P1APL from './apls/p1.apl.json';
 import P0BISGear from './gear_sets/p0.bis.gear.json';
@@ -49,11 +51,16 @@ export const DefaultGear = GearP0BIS;
 // the rotation this fork's numbers were measured on. The canonical source is
 // data/curated/apl/mage-frost.json's `rotation` in the Forever Sixty site
 // repository; this file is a copy of it.
+// One mage package serves all three specs, so all three Forever rotations live
+// here. Frost stays the default: it is the spec the regression suite runs
+// (sim/mage/mage_test.go) and the one this fork's numbers were measured on.
 export const APLForeverFrost = PresetUtils.makePresetAPLRotation('Forever Frost', ForeverFrostAPL);
+export const AplForeverArcane = PresetUtils.makePresetAPLRotation('Forever Arcane', ForeverArcaneAPL);
+export const AplForeverFire = PresetUtils.makePresetAPLRotation('Forever Fire', ForeverFireAPL);
 export const APLP1DPS = PresetUtils.makePresetAPLRotation('DPS', P1APL);
 
 export const APLPresets = {
-	[Phase.Phase1]: [APLForeverFrost, APLP1DPS],
+	[Phase.Phase1]: [APLForeverFrost, AplForeverArcane, AplForeverFire, APLP1DPS],
 };
 
 export const DefaultAPL = APLForeverFrost;

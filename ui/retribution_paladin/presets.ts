@@ -24,6 +24,7 @@ import {
 import { PaladinAura, PaladinOptions as RetributionPaladinOptions, PaladinSeal } from '../core/proto/paladin.js';
 import { SavedTalents } from '../core/proto/ui.js';
 import APLBasicRetJson from './apls/basic_ret.apl.json';
+import ForeverRetributionAPL from './apls/forever_retribution.apl.json';
 import BlankGear from './gear_sets/blank.gear.json';
 
 // Preset options for this spec.
@@ -44,17 +45,23 @@ export const DefaultGear = GearBlank;
 //                                 APL Presets
 ///////////////////////////////////////////////////////////////////////////
 
+// The Forever rotations below are the launch defaults. Each is a copy of
+// data/curated/apl/<class>-<spec>.json's `rotation` in the Forever Sixty site
+// repository, written here by that repository's `make apl-sync` and proved by
+// its `make apl-check`; edit the curated file, never this copy. The Era lists
+// are kept because a Forever character can still be compared against them.
 export const APLBasicRet = PresetUtils.makePresetAPLRotation('Basic Ret', APLBasicRetJson);
+export const AplForeverRetribution = PresetUtils.makePresetAPLRotation('Forever Retribution', ForeverRetributionAPL);
 
 export const APLPresets = {
-	[Phase.Phase1]: [],
+	[Phase.Phase1]: [AplForeverRetribution],
 	[Phase.Phase2]: [],
 	[Phase.Phase3]: [],
 	[Phase.Phase4]: [APLBasicRet],
 	[Phase.Phase5]: [],
 };
 
-export const DefaultAPL = APLPresets[Phase.Phase4][0];
+export const DefaultAPL = AplForeverRetribution;
 
 ///////////////////////////////////////////////////////////////////////////
 //                                 Talent presets

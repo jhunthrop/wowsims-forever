@@ -1,0 +1,49 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "notes": "Keep Slice and Dice up so every combo point spent on it is not wasted swing time.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "cmp": { "op": "OpGe", "lhs": { "currentComboPoints": {} }, "rhs": { "const": { "val": "1" } } } },
+              { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 6774, "rank": 2 } } } } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 6774, "rank": 2 } }
+      }
+    },
+    {
+      "notes": "Cold Blood right before the finisher for a guaranteed crit -- the Assassination burst button, since the spec has no Adrenaline Rush.",
+      "action": {
+        "condition": { "cmp": { "op": "OpGe", "lhs": { "currentComboPoints": {} }, "rhs": { "const": { "val": "5" } } } },
+        "castSpell": { "spellId": { "spellId": 14177 } }
+      }
+    },
+    {
+      "notes": "Venom as an alternate finisher the Forever Assassination tree grants: named per the brief's rule for a talent-added ability the engine cannot cast yet (no dedicated sim/rogue implementation), so this line will warn and skip until it is implemented, and Eviscerate below is what actually spends the combo points today.",
+      "action": {
+        "condition": { "cmp": { "op": "OpGe", "lhs": { "currentComboPoints": {} }, "rhs": { "const": { "val": "5" } } } },
+        "castSpell": { "spellId": { "spellId": 1310703 } }
+      }
+    },
+    {
+      "notes": "Eviscerate at five combo points: the functional finisher while Venom is not yet implemented.",
+      "action": {
+        "condition": { "cmp": { "op": "OpGe", "lhs": { "currentComboPoints": {} }, "rhs": { "const": { "val": "5" } } } },
+        "castSpell": { "spellId": { "spellId": 31016, "rank": 9 } }
+      }
+    },
+    {
+      "notes": "Mutilate as the Forever Assassination talent's intended combo-point builder: named per the brief's rule for a talent-added ability the engine cannot cast yet (no dedicated sim/rogue implementation), so this line will warn and skip until it is implemented, and Sinister Strike below is what actually builds combo points today.",
+      "action": { "castSpell": { "spellId": { "spellId": 1310707, "rank": 1 } } }
+    },
+    {
+      "notes": "Sinister Strike as the combo point builder while Mutilate is not yet implemented.",
+      "action": { "castSpell": { "spellId": { "spellId": 11294, "rank": 8 } } }
+    }
+  ]
+}

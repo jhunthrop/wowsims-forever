@@ -1,0 +1,92 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Less than 1.5 seconds left in the fight: only the instant-cast Moonfire will land in time.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "remainingTime": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "1.5"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9835,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
+      "notes": "Less than 3.5 seconds left: Wrath's 2 second cast still finishes, Starfire's 3.5 second cast would not.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "remainingTime": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "3.5"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9912,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
+      "notes": "Keep Moonfire on the target; it is the cheapest DoT available and ticks the whole fight.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 9835,
+                  "rank": 10
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9835,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
+      "notes": "Starfire is the whole rest of the rotation once Moonfire is ticking.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 25298,
+            "rank": 7
+          }
+        }
+      }
+    }
+  ]
+}

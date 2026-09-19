@@ -1,0 +1,170 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 25361,
+            "rank": 5
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-3s"
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10614,
+            "rank": 3
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1.5s"
+        }
+      }
+    }
+  ],
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Keep Strength of Earth Totem down; totemRemainingTime is the engine's own primitive for 'does this totem slot need refreshing', and needs no aura or spell id to check.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "totemRemainingTime": {
+                "totemType": "Earth"
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "1.5"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 25361,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Keep Windfury Totem down; it is the melee group's biggest damage totem and occupies the same Air slot Grace of Air would.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "totemRemainingTime": {
+                "totemType": "Air"
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "1.5"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10614,
+            "rank": 3
+          }
+        }
+      }
+    },
+    {
+      "notes": "Stormstrike on cooldown: it is the highest damage per global Enhancement has, on an 8 second cooldown.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 17364
+          }
+        }
+      }
+    },
+    {
+      "notes": "Keep Searing Totem down for the extra fire damage, but not with less than 20 seconds left -- no point paying for a totem that will barely tick.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 10438,
+                        "rank": 6
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "20"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10438,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Earth Shock is the mana dump once mana is comfortably above half.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "50%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10414,
+            "rank": 7
+          }
+        }
+      }
+    }
+  ]
+}

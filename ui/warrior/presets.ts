@@ -25,6 +25,7 @@ import { SavedTalents } from '../core/proto/ui.js';
 import { Warrior_Options as WarriorOptions, WarriorShout, WarriorStance } from '../core/proto/warrior.js';
 import APLNoReckJSON from './apls/dps_no_reck.apl.json';
 import APLReckJSON from './apls/dps_reck.apl.json';
+import ForeverArmsAPL from './apls/forever_arms.apl.json';
 import APLForeverFuryJSON from './apls/forever_fury.apl.json';
 import P0BISGear from './gear_sets/p0.bis.gear.json';
 import Phase1Gear from './gear_sets/phase_1.gear.json';
@@ -72,12 +73,16 @@ export const DefaultGear = GearP0BIS;
 // reconfigured must run the rotation this fork's numbers were measured on.
 // The canonical source is data/curated/apl/warrior-fury.json's `rotation`
 // in the Forever Sixty site repository; this file is a copy of it.
+// This package is the DPS warrior, Arms and Fury both, so both Forever
+// rotations live here; Fury stays the default and the one the regression
+// suite runs (sim/warrior/dps_warrior/dps_warrior_test.go).
 export const AplForeverFury = PresetUtils.makePresetAPLRotation('Forever Fury', APLForeverFuryJSON);
+export const AplForeverArms = PresetUtils.makePresetAPLRotation('Forever Arms', ForeverArmsAPL);
 export const AplReck = PresetUtils.makePresetAPLRotation('DPS (With Reck)', APLReckJSON);
 export const APLNoReck = PresetUtils.makePresetAPLRotation('DPS (No Reck)', APLNoReckJSON);
 
 export const APLPresets = {
-	[Phase.Phase1]: [AplForeverFury, APLNoReck, AplReck],
+	[Phase.Phase1]: [AplForeverFury, AplForeverArms, APLNoReck, AplReck],
 };
 
 export const DefaultAPLs = [AplForeverFury];

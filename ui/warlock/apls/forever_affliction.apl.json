@@ -1,0 +1,59 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": { "castSpell": { "spellId": { "spellId": 18288 } } },
+      "doAtValue": { "const": { "val": "-5s" } }
+    }
+  ],
+  "priorityList": [
+    {
+      "notes": "Potion at the top of the fight if mana is already below 75 percent, or a mana gem below 60 percent, saved for the closing burn if the fight is nearly over.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "cmp": { "op": "OpGe", "lhs": { "remainingTime": {} }, "rhs": { "const": { "val": "15s" } } } },
+              { "cmp": { "op": "OpLe", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "75%" } } } },
+              { "isExecutePhase": { "threshold": "E35" } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "otherId": "OtherActionPotion" } }
+      }
+    },
+    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "notes": "Life Tap to keep casting once mana runs low; health is not a concern with three DoTs and Drain Life available.",
+      "action": {
+        "condition": { "cmp": { "op": "OpLt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "10%" } } } },
+        "castSpell": { "spellId": { "spellId": 11689, "rank": 6 } }
+      }
+    },
+    {
+      "notes": "Bane of Agony ramps up over its duration, so it goes down first and is refreshed on cooldown.",
+      "action": {
+        "condition": { "not": { "val": { "dotIsActive": { "spellId": { "spellId": 11713, "rank": 6 } } } } },
+        "castSpell": { "spellId": { "spellId": 11713, "rank": 6 } }
+      }
+    },
+    {
+      "notes": "Corruption is the cheapest DoT per damage and is kept up throughout.",
+      "action": {
+        "condition": { "not": { "val": { "dotIsActive": { "spellId": { "spellId": 25311, "rank": 7 } } } } },
+        "castSpell": { "spellId": { "spellId": 25311, "rank": 7 } }
+      }
+    },
+    {
+      "notes": "Inert until the engine registers Wrack (found only in sim/warlock's talent metadata table, no spell registration). Kept because it is Forever's own Affliction capstone; Shadow Bolt below already fills the globals this would otherwise use.",
+      "action": {
+        "condition": { "not": { "val": { "dotIsActive": { "spellId": { "spellId": 1316697, "rank": 1 } } } } },
+        "castSpell": { "spellId": { "spellId": 1316697, "rank": 1 } }
+      }
+    },
+    {
+      "notes": "Shadow Bolt fills every remaining global while the DoTs run their course.",
+      "action": { "castSpell": { "spellId": { "spellId": 25307, "rank": 10 } } }
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": { "castPaladinPrimarySeal": {} },
+      "doAtValue": { "const": { "val": "-1.5s" } }
+    }
+  ],
+  "priorityList": [
+    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "notes": "Judgement on cooldown: it is a free global that unloads the seal's judgement effect and starts its ten second cooldown again.",
+      "action": {
+        "condition": { "spellCanCast": { "spellId": { "spellId": 20271 } } },
+        "castSpell": { "spellId": { "spellId": 20271 } }
+      }
+    },
+    {
+      "notes": "Hammer of Wrath below 20 percent: the other button Retribution has besides seals and Judgement.",
+      "action": {
+        "condition": { "isExecutePhase": { "threshold": "E20" } },
+        "castSpell": { "spellId": { "spellId": 24239, "rank": 3 } }
+      }
+    },
+    {
+      "notes": "Reapply the primary seal once it is about to expire.",
+      "action": {
+        "condition": { "cmp": { "op": "OpLe", "lhs": { "currentSealRemainingTime": {} }, "rhs": { "const": { "val": "1" } } } },
+        "castPaladinPrimarySeal": {}
+      }
+    },
+    {
+      "notes": "Seal twist: swap to Seal of Command right before a melee swing lands, if Seal of Righteousness is currently up.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "cmp": { "op": "OpLt", "lhs": { "autoTimeToNext": { "autoType": "Melee" } }, "rhs": { "const": { "val": "0.4s" } } } },
+              { "auraIsActive": { "auraId": { "spellId": 20293, "rank": 8 } } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 20375, "rank": 1 } }
+      }
+    },
+    {
+      "notes": "Seal twist: swap back to Seal of Righteousness right before the next melee swing lands, if Seal of Command is currently up.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "cmp": { "op": "OpLt", "lhs": { "autoTimeToNext": { "autoType": "Melee" } }, "rhs": { "const": { "val": "0.4s" } } } },
+              { "auraIsActive": { "auraId": { "spellId": 20375, "rank": 1 } } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 20293, "rank": 8 } }
+      }
+    },
+    {
+      "notes": "Fallback: if neither seal is active (the twist above has not fired yet), keep Seal of Command up so the paladin is never seal-less.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 20375, "rank": 1 } } } } },
+              { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 20293, "rank": 8 } } } } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 20375, "rank": 1 } }
+      }
+    }
+  ]
+}

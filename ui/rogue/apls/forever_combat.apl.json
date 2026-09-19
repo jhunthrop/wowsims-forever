@@ -1,0 +1,35 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "notes": "Keep Slice and Dice up so every combo point spent on it is not wasted swing time.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "cmp": { "op": "OpGe", "lhs": { "currentComboPoints": {} }, "rhs": { "const": { "val": "1" } } } },
+              { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 6774, "rank": 2 } } } } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 6774, "rank": 2 } }
+      }
+    },
+    {
+      "notes": "Adrenaline Rush on cooldown: the Combat burst button, doubles energy regen for its duration.",
+      "action": { "castSpell": { "spellId": { "spellId": 13750 } } }
+    },
+    {
+      "notes": "Eviscerate at five combo points.",
+      "action": {
+        "condition": { "cmp": { "op": "OpGe", "lhs": { "currentComboPoints": {} }, "rhs": { "const": { "val": "5" } } } },
+        "castSpell": { "spellId": { "spellId": 31016, "rank": 9 } }
+      }
+    },
+    {
+      "notes": "Sinister Strike as the combo point builder.",
+      "action": { "castSpell": { "spellId": { "spellId": 11294, "rank": 8 } } }
+    }
+  ]
+}

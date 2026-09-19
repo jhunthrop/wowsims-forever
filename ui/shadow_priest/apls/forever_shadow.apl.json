@@ -1,0 +1,59 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": { "castSpell": { "spellId": { "spellId": 15473 } } },
+      "doAtValue": { "const": { "val": "-1s" } }
+    }
+  ],
+  "priorityList": [
+    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "notes": "Shadow Word: Pain is kept up unless the fight is about to end, when refreshing it would waste most of the DoT.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "not": { "val": { "dotIsActive": { "spellId": { "spellId": 10894, "rank": 8 } } } } },
+              { "cmp": { "op": "OpGe", "lhs": { "remainingTime": {} }, "rhs": { "const": { "val": "10" } } } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 10894, "rank": 8 } }
+      }
+    },
+    {
+      "notes": "Inert until the engine registers Shadow Word: Death (not found under any candidate id in sim/priest). Kept because Forever's Early Demise talent (tier 5) clearly intends a below-20-percent execute that the base classic Shadow tree has no equivalent for.",
+      "action": {
+        "condition": { "isExecutePhase": { "threshold": "E20" } },
+        "castSpell": { "spellId": { "spellId": 1309636, "rank": 4 } }
+      }
+    },
+    {
+      "notes": "Engine-castable Era fallback for the execute window while Shadow Word: Death is inert: Mind Blast on cooldown, else Mind Flay.",
+      "action": {
+        "condition": { "isExecutePhase": { "threshold": "E20" } },
+        "castSpell": { "spellId": { "spellId": 10947, "rank": 9 } }
+      }
+    },
+    {
+      "notes": "Inner Focus into Devouring Plague: a free, empowered cast of the priest's biggest single-target nuke. Fix round 1: rank 6 (19280, spellconst's current top rank) is excluded by an off-by-one in the engine's registration loop; rank 5 (19279) is the highest rank the engine actually registers, and the excluded rank is an engine follow-up.",
+      "action": {
+        "strictSequence": {
+          "actions": [
+            { "castSpell": { "spellId": { "spellId": 14751 } } },
+            { "castSpell": { "spellId": { "spellId": 19279, "rank": 5 } } }
+          ]
+        }
+      }
+    },
+    {
+      "notes": "Mind Blast on cooldown.",
+      "action": { "castSpell": { "spellId": { "spellId": 10947, "rank": 9 } } }
+    },
+    {
+      "notes": "Mind Flay fills every remaining global, including the rest of the execute fallback above.",
+      "action": { "castSpell": { "spellId": { "spellId": 18807, "rank": 6 } } }
+    }
+  ]
+}
