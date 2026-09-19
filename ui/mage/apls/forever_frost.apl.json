@@ -1,45 +1,10 @@
 {
   "type": "TypeAPL",
   "priorityList": [
+    { "action": { "autocastOtherCooldowns": {} } },
     {
-      "action": {
-        "autocastOtherCooldowns": {}
-      }
-    },
-    {
-      "notes": "Fire Blast on cooldown while mana is comfortable: it is instant and a gain with spell power.",
-      "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentManaPercent": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "30%"
-              }
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 10199,
-            "rank": 7
-          }
-        }
-      }
-    },
-    {
-      "notes": "Frostbolt is the whole rotation otherwise.",
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 25304,
-            "rank": 11
-          }
-        }
-      }
+      "notes": "Frostbolt is the whole rotation.",
+      "action": { "castSpell": { "spellId": { "spellId": 25304, "rank": 11 } } }
     }
   ]
 }

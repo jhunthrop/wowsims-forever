@@ -21,6 +21,7 @@ import {
 } from '../core/proto/common';
 import { Mage_Options as MageOptions, Mage_Options_ArmorType as ArmorType } from '../core/proto/mage';
 import { SavedTalents } from '../core/proto/ui';
+import ForeverFrostAPL from './apls/forever_frost.apl.json';
 import P1APL from './apls/p1.apl.json';
 import P0BISGear from './gear_sets/p0.bis.gear.json';
 import P1BISGear from './gear_sets/p1.bis.gear.json';
@@ -42,13 +43,20 @@ export const DefaultGear = GearP0BIS;
 //                                 APL Presets
 ///////////////////////////////////////////////////////////////////////////
 
+// forever_frost is the Forever Sixty launch rotation and the one the
+// regression suite runs (sim/mage/mage_test.go). It is the default: the Era
+// list below is kept for comparison, but a sim nobody reconfigured must run
+// the rotation this fork's numbers were measured on. The canonical source is
+// data/curated/apl/mage-frost.json's `rotation` in the Forever Sixty site
+// repository; this file is a copy of it.
+export const APLForeverFrost = PresetUtils.makePresetAPLRotation('Forever Frost', ForeverFrostAPL);
 export const APLP1DPS = PresetUtils.makePresetAPLRotation('DPS', P1APL);
 
 export const APLPresets = {
-	[Phase.Phase1]: [APLP1DPS],
+	[Phase.Phase1]: [APLForeverFrost, APLP1DPS],
 };
 
-export const DefaultAPL = APLPresets[Phase.Phase1][0];
+export const DefaultAPL = APLForeverFrost;
 
 ///////////////////////////////////////////////////////////////////////////
 //                                 Talent Presets
