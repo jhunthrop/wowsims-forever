@@ -95,6 +95,74 @@ func TestDummyModeSkipsTheRaidDebuffPanel(t *testing.T) {
 	}
 }
 
+// The positive half of switch 1: a debuff applied the way a player's own
+// rotation applies one (not through the raid panel) must still register
+// AND still take effect on a dummy target. Switch 3 (the armor gate)
+// separately pins Armor() to its initial value regardless, so this test
+// checks the aura and the stat it mutates directly, proving switch 1
+// isn't accidentally gated by env.Encounter.Dummy the same way the raid
+// panel is — a regression that would route the player's own debuffs
+// through that gate would pass every other test in this file but fail
+// here.
+func TestDummyModePlayerDebuffStillLands(t *testing.T) {
+	raidProto := SinglePlayerRaidProto(&proto.Player{
+		Name:      "Dummy Test",
+		Race:      proto.Race_RaceOrc,
+		Class:     proto.Class_ClassShaman,
+		Spec:      &proto.Player_ElementalShaman{ElementalShaman: &proto.ElementalShaman{}},
+		Equipment: &proto.EquipmentSpec{},
+	}, &proto.PartyBuffs{}, &proto.RaidBuffs{}, &proto.Debuffs{})
+	encounterProto := &proto.Encounter{
+		Duration:    180,
+		Targets:     []*proto.Target{DefaultTargetProtoLvl60},
+		TargetDummy: true,
+	}
+
+	// Build the environment in its normal three phases by hand (instead of
+	// through NewEnvironment/dummyEnv) so the aura can be registered
+	// between initialize and finalize — exactly when a real spec spell's
+	// constructor registers its aura (auraTracker.registerAura panics on
+	// any registration after finalize). Activating it and adding a stack
+	// still happens after finalize, same as a real cast during combat.
+	env := &Environment{State: Created}
+	env.construct(raidProto, encounterProto)
+	raidStats := env.initialize(raidProto, encounterProto)
+	target := &env.Encounter.Targets[0].Unit
+
+	// This is the same aura constructor a warrior's own Sunder Armor spell
+	// calls when its own spell object is built (sim/warrior can't be
+	// imported from sim/core, so this reaches for the core-package aura
+	// directly, the way the other tests in this file do).
+	sunder := SunderArmorAura(target)
+
+	env.finalize(raidProto, encounterProto, raidStats, false)
+	sim := &Simulation{Environment: env}
+
+	beforeArmor := target.stats[stats.Armor]
+
+	// This mirrors the player's rotation landing the hit during combat.
+	sunder.Activate(sim)
+	sunder.AddStack(sim)
+
+	// HasAura alone would prove nothing here: the aura object was already
+	// registered pre-finalize, before Activate ran. HasActiveAura reflects
+	// whether the cast actually landed.
+	if !target.HasActiveAura("Sunder Armor") {
+		t.Fatal("a player-cast Sunder Armor did not land on a dummy target, want it active")
+	}
+	if got := target.stats[stats.Armor]; got >= beforeArmor {
+		t.Errorf("Sunder Armor stack did not lower the dummy's stats.Armor (before=%v, after=%v); a player's own debuff must still take effect even though the raid panel is skipped",
+			beforeArmor, got)
+	}
+
+	// Switch 3 still holds: even though the player's own debuff just
+	// lowered stats.Armor, Armor() (what the damage formula reads) stays
+	// pinned to the initial value.
+	if got := target.Armor(); got != beforeArmor {
+		t.Errorf("Armor() on a dummy = %v after a player-cast Sunder Armor, want the unreduced %v", got, beforeArmor)
+	}
+}
+
 func dummyEnv(t *testing.T, dummy bool, debuffs *proto.Debuffs) *Environment {
 	t.Helper()
 	env, _, _ := NewEnvironment(
