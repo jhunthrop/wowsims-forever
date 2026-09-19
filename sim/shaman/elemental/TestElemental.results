@@ -1,3 +1,10 @@
+# UNVALIDATED. This recording was machine-regenerated against an
+# intermediate engine during the stat merge (plan
+# 2026-09-14-sim-engine), and the suite that reads it is skipped
+# awaiting its Forever talent rewrite - so nothing has run against it
+# and no one has checked the numbers. It is kept only so the spec's
+# bring-up task has a before-and-after; every row here will move when
+# that task regenerates it. Do not cite these numbers.
 character_stats_results: {
  key: "TestElemental-Phase1-CharacterStats-Default"
  value: {
