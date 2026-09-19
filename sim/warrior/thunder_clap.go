@@ -20,14 +20,16 @@ func (warrior *Warrior) registerThunderClapSpell() {
 	results := make([]*core.SpellResult, min(4, warrior.Env.GetNumTargets()))
 
 	warrior.ThunderClap = warrior.RegisterSpell(stanceMask, core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       core.SpellFlagAPL | SpellFlagOffensive,
+		ActionID:       core.ActionID{SpellID: spellID},
+		ClassSpellMask: WarriorSpellMaskThunderClap,
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          core.SpellFlagAPL | SpellFlagOffensive,
 
 		RageCost: core.RageCostOptions{
-			Cost: 20 - []float64{0, 1, 2, 4}[warrior.Talents.ImprovedThunderClap],
+			// Improved Thunder Clap's discount is a SpellMod in talents.go.
+			Cost: 20,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

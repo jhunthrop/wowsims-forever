@@ -30,12 +30,13 @@ func (warrior *Warrior) registerOverpowerSpell(cdTimer *core.Timer) {
 	})
 
 	warrior.Overpower = warrior.RegisterSpell(BattleStance, core.SpellConfig{
-		SpellCode:   SpellCode_WarriorOverpower,
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
+		SpellCode:      SpellCode_WarriorOverpower,
+		ClassSpellMask: WarriorSpellMaskOverpower,
+		ActionID:       core.ActionID{SpellID: spellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
 
 		RageCost: core.RageCostOptions{
 			Cost:   5,

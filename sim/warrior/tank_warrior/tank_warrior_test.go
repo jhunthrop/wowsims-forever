@@ -6,6 +6,7 @@ import (
 	_ "github.com/wowsims/classic/sim/common" // imported to get item effects included.
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/warrior"
 )
 
 func init() {
@@ -13,13 +14,19 @@ func init() {
 }
 
 func TestP1TankWarrior(t *testing.T) {
-	// FOREVER: this spec's talents were regenerated from the client's trait
-	// trees (plan docs/superpowers/plans/2026-09-14-sim-engine.md, task 17)
-	// and its DPS goldens still describe vanilla's tree. Task 11 of the same
-	// plan rewrites this spec's talent behaviour and deletes this skip;
-	// until then the suite is skipped rather than left failing, because a
-	// suite that is always red is a suite nobody reads.
-	t.Skip("sim/warrior/tank_warrior awaits its Forever talent rewrite (plan 2026-09-14-sim-engine, tasks 17 then 11)")
+	// FOREVER: task 11 of plan 2026-09-14-sim-engine rewrote the Fury
+	// spec's talent behaviour and un-skipped sim/warrior/dps_warrior. It
+	// did NOT rewrite Protection's: Improved Revenge went from a stun
+	// chance to +60% Revenge damage, Improved Bloodrage from flat rage
+	// to +50% of Bloodrage's own, Improved Shield Wall from duration to
+	// cooldown, Defiance from 3% threat a point to 5%, and Master of
+	// Defense, Vanguard, Improved Shield Bash, Focused Rage and Bastion
+	// are new. Un-skipping this suite now would bless vanilla's numbers
+	// as Forever's, so it waits for the warrior-protection spec's own
+	// task; the reference build below is already the client's shape, so
+	// that task is a behaviour rewrite and a golden run, not a hunt for
+	// why the talent string no longer parses.
+	t.Skip("sim/warrior/tank_warrior awaits the warrior-protection spec's talent rewrite; task 11 covered Fury only")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassWarrior,
@@ -44,7 +51,11 @@ func TestP1TankWarrior(t *testing.T) {
 	}))
 }
 
-var P1Talents = "20304300302-03-55200110530201051"
+// P1Talents is warrior.ForeverProtectionTalents. The string that stood
+// here was vanilla-shaped - three segments of 11, 2 and 17 characters
+// against the client's 17, 18 and 18 - so core.FillTalentsProto read
+// every talent after the eleventh from the wrong position.
+var P1Talents = warrior.ForeverProtectionTalents
 
 var PlayerOptionsBasic = &proto.Player_TankWarrior{
 	TankWarrior: &proto.TankWarrior{

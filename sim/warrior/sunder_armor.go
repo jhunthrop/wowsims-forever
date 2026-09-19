@@ -13,15 +13,16 @@ func (warrior *Warrior) registerSunderArmorSpell() {
 
 	var canApplySunder bool
 
-
 	warrior.SunderArmor = warrior.RegisterSpell(AnyStance, core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolPhysical,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
+		ActionID:       core.ActionID{SpellID: spellID},
+		ClassSpellMask: WarriorSpellMaskSunderArmor,
+		SpellSchool:    core.SpellSchoolPhysical,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
 
 		RageCost: core.RageCostOptions{
-			Cost:   15 - float64(warrior.Talents.ImprovedSunderArmor),
+			// Improved Sunder Armor's discount is a SpellMod in talents.go.
+			Cost:   15,
 			Refund: 0.8,
 		},
 		Cast: core.CastConfig{

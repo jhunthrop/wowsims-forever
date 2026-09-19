@@ -1,0 +1,163 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 25289,
+            "rank": 7
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1s"
+        }
+      }
+    }
+  ],
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Bloodrage on cooldown: rage is the limiting resource for Fury.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentRage": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "80"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 2687
+          }
+        }
+      }
+    },
+    {
+      "notes": "Death Wish on cooldown.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 12328
+          }
+        }
+      }
+    },
+    {
+      "notes": "Keep Battle Shout up.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsActive": {
+                "auraId": {
+                  "spellId": 25289,
+                  "rank": 7
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 25289,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "Bloodthirst is the highest damage per rage button and comes off a six second cooldown.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 23894,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
+      "notes": "Whirlwind while Bloodthirst is down.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "spellTimeToReady": {
+                "spellId": {
+                  "spellId": 23894,
+                  "rank": 4
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "1.5s"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 1680
+          }
+        }
+      }
+    },
+    {
+      "notes": "Execute below 20 percent.",
+      "action": {
+        "condition": {
+          "isExecutePhase": {
+            "threshold": "E20"
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20662,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Heroic Strike as the rage dump, never below 40 rage. PINNED WITH ONE CORRECTION, see sim/warrior/talents_test.go's TestTheForeverFuryRotationQueuesHeroicStrike: the curated data/curated/apl/warrior-fury.json omits tag 1, and without it the engine resolves spell 25286 to the direct Heroic Strike rather than to its on-next-swing queue. The direct spell costs no global cooldown, so an APL that names it casts it every iteration as a free extra weapon swing: measured on the phase-1 Fury profile that is 5,664 DPS against 1,759 with the tag. The data lane owns the fix; until it lands, re-pinning this file must keep the tag and the test says so.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentRage": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "40"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 25286,
+            "tag": 1,
+            "rank": 9
+          }
+        }
+      }
+    }
+  ]
+}

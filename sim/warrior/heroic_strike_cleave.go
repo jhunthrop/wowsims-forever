@@ -4,21 +4,36 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// heroicStrikeSpellID and cleaveSpellID are the ids the two
+// on-next-swing abilities register under. They are named so a rotation
+// test can check the pinned APL against the spellbook rather than
+// against a retyped id.
+func heroicStrikeSpellID() int32 {
+	return core.TernaryInt32(core.IncludeAQ, 25286, 11567)
+}
+
+func cleaveSpellID() int32 {
+	return 20569
+}
+
 func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
 	flatDamageBonus := core.TernaryFloat64(core.IncludeAQ, 157, 138)
-	spellID := core.TernaryInt32(core.IncludeAQ, 25286, 11567)
+	spellID := heroicStrikeSpellID()
 	// No known equation
 	threat := core.TernaryFloat64(core.IncludeAQ, 173, 145)
 
 	warrior.HeroicStrike = warrior.RegisterSpell(AnyStance, core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete | SpellFlagOffensive,
+		ClassSpellMask: WarriorSpellMaskHeroicStrike,
+		ActionID:       core.ActionID{SpellID: spellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete | SpellFlagOffensive,
 
 		RageCost: core.RageCostOptions{
-			Cost:   15 - float64(warrior.Talents.ImprovedHeroicStrike),
+			// Improved Heroic Strike's discount is a SpellMod in
+			// talents.go; applying it here as well would double it.
+			Cost:   15,
 			Refund: 0.8,
 		},
 
@@ -48,19 +63,22 @@ func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
 
 func (warrior *Warrior) registerCleaveSpell(realismICD *core.Cooldown) {
 	flatDamageBonus := 50.0
-	spellID := int32(20569)
+	spellID := cleaveSpellID()
 	threat := 100.0
 
-	flatDamageBonus *= []float64{1, 1.4, 1.8, 2.2}[warrior.Talents.ImprovedCleave]
+	// FOREVER: the client's Improved Cleave is a rage discount, not a
+	// damage bonus (see applyDeclarativeTalents); the vanilla
+	// multiplier that stood here is gone rather than renamed.
 
 	results := make([]*core.SpellResult, min(int32(2), warrior.Env.GetNumTargets()))
 
 	warrior.Cleave = warrior.RegisterSpell(AnyStance, core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto,
-		Flags:       core.SpellFlagMeleeMetrics | SpellFlagOffensive,
+		ClassSpellMask: WarriorSpellMaskCleave,
+		ActionID:       core.ActionID{SpellID: spellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto,
+		Flags:          core.SpellFlagMeleeMetrics | SpellFlagOffensive,
 
 		RageCost: core.RageCostOptions{
 			Cost: 20,
@@ -122,9 +140,14 @@ func (warrior *Warrior) makeQueueSpellsAndAura(srcSpell *WarriorSpell, realismIC
 		Flags:    core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagCastTimeNoGCD,
 
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
+			// GetCurrentCost, not DefaultCast.Cost: the rage discounts
+			// from Improved Heroic Strike and Improved Cleave are
+			// SpellMods now, and a mod writes Cost.FlatModifier rather
+			// than the default cast. Gating on the undiscounted number
+			// would queue the ability less often than the talent says.
 			return warrior.curQueueAura == nil &&
 				!isQueueQueued &&
-				warrior.CurrentRage() >= srcSpell.DefaultCast.Cost &&
+				warrior.CurrentRage() >= srcSpell.Cost.GetCurrentCost() &&
 				!warrior.IsCasting(sim) &&
 				realismICD.IsReady(sim)
 		},

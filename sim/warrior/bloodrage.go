@@ -21,6 +21,10 @@ func (warrior *Warrior) registerBloodrageCD() {
 
 	warrior.Bloodrage = warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		ActionID: actionID,
+		// The Forever Fury rotation casts Bloodrage by id rather than
+		// leaving it to the cooldown autocaster, so it has to be a spell
+		// the APL can name.
+		Flags: core.SpellFlagAPL,
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    warrior.NewTimer(),

@@ -10,12 +10,13 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 	results := make([]*core.SpellResult, min(4, warrior.Env.GetNumTargets()))
 
 	warrior.Whirlwind = warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
-		SpellCode:   SpellCode_WarriorWhirlwind,
-		ActionID:    core.ActionID{SpellID: 1680},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagAPL | SpellFlagOffensive,
+		SpellCode:      SpellCode_WarriorWhirlwind,
+		ClassSpellMask: WarriorSpellMaskWhirlwind,
+		ActionID:       core.ActionID{SpellID: 1680},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagAPL | SpellFlagOffensive,
 
 		RageCost: core.RageCostOptions{
 			Cost: 25,
