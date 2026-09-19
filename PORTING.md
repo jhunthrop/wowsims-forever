@@ -85,3 +85,24 @@ The fixtures are copies of the site pipeline's output and
 one is present, so the test needs no network to run and cannot quietly
 pin stale data. Task 1's `TestGeneratedProtosMatchSources` closes the
 remaining link, from `.proto` to the committed `.pb.go`.
+
+## No Forever artifacts are built here
+
+This repository stays a clean, upstreamable Go library plus its own UI.
+The Forever Sixty site builds both of its artifacts from its own `sim/`
+module, which imports this one at a pinned version:
+
+- `sim/cmd/wasm` -> sim.wasm + sim.js, exporting four JSON functions
+- `sim/cmd/forever-sim` -> the native binary
+
+That is what lets the site's request builder and result adapter run
+inside the browser's wasm, so no protobuf crosses into TypeScript. This
+repository's own `sim/wasm` and `cmd/wowsimcli` are untouched and are
+still what upstream ships.
+
+`.github/workflows/test.yml` is this fork's own gate and builds nothing:
+the committed-protobuf freshness test, `go test --tags=with_db
+./sim/...`, and a `GOOS=js GOARCH=wasm` compile so the site's wasm build
+cannot break here unnoticed. It deliberately runs no `gofmt` or `go vet`
+step, because upstream's tree passes neither and reformatting it would
+make every merge a conflict.
