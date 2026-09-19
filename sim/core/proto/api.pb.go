@@ -860,8 +860,13 @@ type SimOptions struct {
 	SaveAllValues       bool                   `protobuf:"varint,7,opt,name=save_all_values,json=saveAllValues,proto3" json:"save_all_values,omitempty"`       // Only used internally.
 	Interactive         bool                   `protobuf:"varint,8,opt,name=interactive,proto3" json:"interactive,omitempty"`                                  // Enables interactive mode.
 	UseLabeledRands     bool                   `protobuf:"varint,9,opt,name=use_labeled_rands,json=useLabeledRands,proto3" json:"use_labeled_rands,omitempty"` // Use test level RNG.
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Produce RaidSimResult.sample_iteration: one extra iteration, re-run
+	// at the median iteration's seed with a cast recorder attached.
+	// Off by default because it costs an iteration and an environment.
+	// Forever addition; see PORTING.md.
+	SampleIteration bool `protobuf:"varint,10,opt,name=sample_iteration,json=sampleIteration,proto3" json:"sample_iteration,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *SimOptions) Reset() {
@@ -946,6 +951,13 @@ func (x *SimOptions) GetInteractive() bool {
 func (x *SimOptions) GetUseLabeledRands() bool {
 	if x != nil {
 		return x.UseLabeledRands
+	}
+	return false
+}
+
+func (x *SimOptions) GetSampleIteration() bool {
+	if x != nil {
+		return x.SampleIteration
 	}
 	return false
 }
@@ -2128,6 +2140,142 @@ func (x *RaidSimRequest) GetSimOptions() *SimOptions {
 	return nil
 }
 
+// SampleCast is one cast in the sampled iteration, with the caster's
+// resources as they stood immediately after it.
+type SampleCast struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Milliseconds from the pull; negative during the pre-pull.
+	AtMs     int64     `protobuf:"varint,1,opt,name=at_ms,json=atMs,proto3" json:"at_ms,omitempty"`
+	ActionId *ActionID `protobuf:"bytes,2,opt,name=action_id,json=actionId,proto3" json:"action_id,omitempty"`
+	Target   string    `protobuf:"bytes,3,opt,name=target,proto3" json:"target,omitempty"`
+	// Keyed by resource name: rage, energy, mana, combo_points. Only the
+	// bars the caster actually has are present.
+	Resources     map[string]int32 `protobuf:"bytes,4,rep,name=resources,proto3" json:"resources,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SampleCast) Reset() {
+	*x = SampleCast{}
+	mi := &file_api_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SampleCast) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SampleCast) ProtoMessage() {}
+
+func (x *SampleCast) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SampleCast.ProtoReflect.Descriptor instead.
+func (*SampleCast) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *SampleCast) GetAtMs() int64 {
+	if x != nil {
+		return x.AtMs
+	}
+	return 0
+}
+
+func (x *SampleCast) GetActionId() *ActionID {
+	if x != nil {
+		return x.ActionId
+	}
+	return nil
+}
+
+func (x *SampleCast) GetTarget() string {
+	if x != nil {
+		return x.Target
+	}
+	return ""
+}
+
+func (x *SampleCast) GetResources() map[string]int32 {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
+// SampleIteration is one iteration's cast log. The engine picks the
+// median-DPS iteration and replays it, so the log is representative
+// rather than lucky.
+type SampleIteration struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Dps             float64                `protobuf:"fixed64,1,opt,name=dps,proto3" json:"dps,omitempty"`
+	DurationSeconds float64                `protobuf:"fixed64,2,opt,name=duration_seconds,json=durationSeconds,proto3" json:"duration_seconds,omitempty"`
+	Casts           []*SampleCast          `protobuf:"bytes,3,rep,name=casts,proto3" json:"casts,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *SampleIteration) Reset() {
+	*x = SampleIteration{}
+	mi := &file_api_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SampleIteration) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SampleIteration) ProtoMessage() {}
+
+func (x *SampleIteration) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SampleIteration.ProtoReflect.Descriptor instead.
+func (*SampleIteration) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *SampleIteration) GetDps() float64 {
+	if x != nil {
+		return x.Dps
+	}
+	return 0
+}
+
+func (x *SampleIteration) GetDurationSeconds() float64 {
+	if x != nil {
+		return x.DurationSeconds
+	}
+	return 0
+}
+
+func (x *SampleIteration) GetCasts() []*SampleCast {
+	if x != nil {
+		return x.Casts
+	}
+	return nil
+}
+
 // Result from running the raid sim.
 type RaidSimResult struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
@@ -2140,13 +2288,16 @@ type RaidSimResult struct {
 	AvgIterationDuration   float64       `protobuf:"fixed64,6,opt,name=avg_iteration_duration,json=avgIterationDuration,proto3" json:"avg_iteration_duration,omitempty"`
 	Error                  *ErrorOutcome `protobuf:"bytes,5,opt,name=error,proto3" json:"error,omitempty"`
 	IterationsDone         int32         `protobuf:"varint,7,opt,name=iterations_done,json=iterationsDone,proto3" json:"iterations_done,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// The median-DPS iteration's cast log, when sim_options.sample_iteration
+	// asked for it. Forever addition; see PORTING.md.
+	SampleIteration *SampleIteration `protobuf:"bytes,8,opt,name=sample_iteration,json=sampleIteration,proto3" json:"sample_iteration,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *RaidSimResult) Reset() {
 	*x = RaidSimResult{}
-	mi := &file_api_proto_msgTypes[16]
+	mi := &file_api_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2158,7 +2309,7 @@ func (x *RaidSimResult) String() string {
 func (*RaidSimResult) ProtoMessage() {}
 
 func (x *RaidSimResult) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[16]
+	mi := &file_api_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2171,7 +2322,7 @@ func (x *RaidSimResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RaidSimResult.ProtoReflect.Descriptor instead.
 func (*RaidSimResult) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{16}
+	return file_api_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RaidSimResult) GetRaidMetrics() *RaidMetrics {
@@ -2223,6 +2374,13 @@ func (x *RaidSimResult) GetIterationsDone() int32 {
 	return 0
 }
 
+func (x *RaidSimResult) GetSampleIteration() *SampleIteration {
+	if x != nil {
+		return x.SampleIteration
+	}
+	return nil
+}
+
 type RaidSimRequestSplitRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SplitCount    int32                  `protobuf:"varint,1,opt,name=split_count,json=splitCount,proto3" json:"split_count,omitempty"`
@@ -2233,7 +2391,7 @@ type RaidSimRequestSplitRequest struct {
 
 func (x *RaidSimRequestSplitRequest) Reset() {
 	*x = RaidSimRequestSplitRequest{}
-	mi := &file_api_proto_msgTypes[17]
+	mi := &file_api_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2245,7 +2403,7 @@ func (x *RaidSimRequestSplitRequest) String() string {
 func (*RaidSimRequestSplitRequest) ProtoMessage() {}
 
 func (x *RaidSimRequestSplitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[17]
+	mi := &file_api_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2258,7 +2416,7 @@ func (x *RaidSimRequestSplitRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RaidSimRequestSplitRequest.ProtoReflect.Descriptor instead.
 func (*RaidSimRequestSplitRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{17}
+	return file_api_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *RaidSimRequestSplitRequest) GetSplitCount() int32 {
@@ -2287,7 +2445,7 @@ type RaidSimRequestSplitResult struct {
 
 func (x *RaidSimRequestSplitResult) Reset() {
 	*x = RaidSimRequestSplitResult{}
-	mi := &file_api_proto_msgTypes[18]
+	mi := &file_api_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2299,7 +2457,7 @@ func (x *RaidSimRequestSplitResult) String() string {
 func (*RaidSimRequestSplitResult) ProtoMessage() {}
 
 func (x *RaidSimRequestSplitResult) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[18]
+	mi := &file_api_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2312,7 +2470,7 @@ func (x *RaidSimRequestSplitResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RaidSimRequestSplitResult.ProtoReflect.Descriptor instead.
 func (*RaidSimRequestSplitResult) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{18}
+	return file_api_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *RaidSimRequestSplitResult) GetSplitsDone() int32 {
@@ -2345,7 +2503,7 @@ type RaidSimResultCombinationRequest struct {
 
 func (x *RaidSimResultCombinationRequest) Reset() {
 	*x = RaidSimResultCombinationRequest{}
-	mi := &file_api_proto_msgTypes[19]
+	mi := &file_api_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2357,7 +2515,7 @@ func (x *RaidSimResultCombinationRequest) String() string {
 func (*RaidSimResultCombinationRequest) ProtoMessage() {}
 
 func (x *RaidSimResultCombinationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[19]
+	mi := &file_api_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2370,7 +2528,7 @@ func (x *RaidSimResultCombinationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RaidSimResultCombinationRequest.ProtoReflect.Descriptor instead.
 func (*RaidSimResultCombinationRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{19}
+	return file_api_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *RaidSimResultCombinationRequest) GetResults() []*RaidSimResult {
@@ -2389,7 +2547,7 @@ type AbortRequest struct {
 
 func (x *AbortRequest) Reset() {
 	*x = AbortRequest{}
-	mi := &file_api_proto_msgTypes[20]
+	mi := &file_api_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2401,7 +2559,7 @@ func (x *AbortRequest) String() string {
 func (*AbortRequest) ProtoMessage() {}
 
 func (x *AbortRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[20]
+	mi := &file_api_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2414,7 +2572,7 @@ func (x *AbortRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AbortRequest.ProtoReflect.Descriptor instead.
 func (*AbortRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{20}
+	return file_api_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *AbortRequest) GetRequestId() string {
@@ -2434,7 +2592,7 @@ type AbortResponse struct {
 
 func (x *AbortResponse) Reset() {
 	*x = AbortResponse{}
-	mi := &file_api_proto_msgTypes[21]
+	mi := &file_api_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2446,7 +2604,7 @@ func (x *AbortResponse) String() string {
 func (*AbortResponse) ProtoMessage() {}
 
 func (x *AbortResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[21]
+	mi := &file_api_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2459,7 +2617,7 @@ func (x *AbortResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AbortResponse.ProtoReflect.Descriptor instead.
 func (*AbortResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{21}
+	return file_api_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *AbortResponse) GetRequestId() string {
@@ -2487,7 +2645,7 @@ type ComputeStatsRequest struct {
 
 func (x *ComputeStatsRequest) Reset() {
 	*x = ComputeStatsRequest{}
-	mi := &file_api_proto_msgTypes[22]
+	mi := &file_api_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2499,7 +2657,7 @@ func (x *ComputeStatsRequest) String() string {
 func (*ComputeStatsRequest) ProtoMessage() {}
 
 func (x *ComputeStatsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[22]
+	mi := &file_api_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2512,7 +2670,7 @@ func (x *ComputeStatsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ComputeStatsRequest.ProtoReflect.Descriptor instead.
 func (*ComputeStatsRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{22}
+	return file_api_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ComputeStatsRequest) GetRaid() *Raid {
@@ -2541,7 +2699,7 @@ type AuraStats struct {
 
 func (x *AuraStats) Reset() {
 	*x = AuraStats{}
-	mi := &file_api_proto_msgTypes[23]
+	mi := &file_api_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2553,7 +2711,7 @@ func (x *AuraStats) String() string {
 func (*AuraStats) ProtoMessage() {}
 
 func (x *AuraStats) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[23]
+	mi := &file_api_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2566,7 +2724,7 @@ func (x *AuraStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuraStats.ProtoReflect.Descriptor instead.
 func (*AuraStats) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{23}
+	return file_api_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *AuraStats) GetId() *ActionID {
@@ -2613,7 +2771,7 @@ type SpellStats struct {
 
 func (x *SpellStats) Reset() {
 	*x = SpellStats{}
-	mi := &file_api_proto_msgTypes[24]
+	mi := &file_api_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2625,7 +2783,7 @@ func (x *SpellStats) String() string {
 func (*SpellStats) ProtoMessage() {}
 
 func (x *SpellStats) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[24]
+	mi := &file_api_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2638,7 +2796,7 @@ func (x *SpellStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpellStats.ProtoReflect.Descriptor instead.
 func (*SpellStats) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{24}
+	return file_api_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *SpellStats) GetId() *ActionID {
@@ -2706,7 +2864,7 @@ type APLActionStats struct {
 
 func (x *APLActionStats) Reset() {
 	*x = APLActionStats{}
-	mi := &file_api_proto_msgTypes[25]
+	mi := &file_api_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2718,7 +2876,7 @@ func (x *APLActionStats) String() string {
 func (*APLActionStats) ProtoMessage() {}
 
 func (x *APLActionStats) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[25]
+	mi := &file_api_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2731,7 +2889,7 @@ func (x *APLActionStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLActionStats.ProtoReflect.Descriptor instead.
 func (*APLActionStats) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{25}
+	return file_api_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *APLActionStats) GetWarnings() []string {
@@ -2751,7 +2909,7 @@ type APLStats struct {
 
 func (x *APLStats) Reset() {
 	*x = APLStats{}
-	mi := &file_api_proto_msgTypes[26]
+	mi := &file_api_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2763,7 +2921,7 @@ func (x *APLStats) String() string {
 func (*APLStats) ProtoMessage() {}
 
 func (x *APLStats) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[26]
+	mi := &file_api_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2776,7 +2934,7 @@ func (x *APLStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLStats.ProtoReflect.Descriptor instead.
 func (*APLStats) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{26}
+	return file_api_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *APLStats) GetPrepullActions() []*APLActionStats {
@@ -2804,7 +2962,7 @@ type UnitMetadata struct {
 
 func (x *UnitMetadata) Reset() {
 	*x = UnitMetadata{}
-	mi := &file_api_proto_msgTypes[27]
+	mi := &file_api_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2816,7 +2974,7 @@ func (x *UnitMetadata) String() string {
 func (*UnitMetadata) ProtoMessage() {}
 
 func (x *UnitMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[27]
+	mi := &file_api_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2829,7 +2987,7 @@ func (x *UnitMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnitMetadata.ProtoReflect.Descriptor instead.
 func (*UnitMetadata) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{27}
+	return file_api_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *UnitMetadata) GetName() string {
@@ -2862,7 +3020,7 @@ type PetStats struct {
 
 func (x *PetStats) Reset() {
 	*x = PetStats{}
-	mi := &file_api_proto_msgTypes[28]
+	mi := &file_api_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2874,7 +3032,7 @@ func (x *PetStats) String() string {
 func (*PetStats) ProtoMessage() {}
 
 func (x *PetStats) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[28]
+	mi := &file_api_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2887,7 +3045,7 @@ func (x *PetStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PetStats.ProtoReflect.Descriptor instead.
 func (*PetStats) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{28}
+	return file_api_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *PetStats) GetMetadata() *UnitMetadata {
@@ -2917,7 +3075,7 @@ type PlayerStats struct {
 
 func (x *PlayerStats) Reset() {
 	*x = PlayerStats{}
-	mi := &file_api_proto_msgTypes[29]
+	mi := &file_api_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2929,7 +3087,7 @@ func (x *PlayerStats) String() string {
 func (*PlayerStats) ProtoMessage() {}
 
 func (x *PlayerStats) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[29]
+	mi := &file_api_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2942,7 +3100,7 @@ func (x *PlayerStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlayerStats.ProtoReflect.Descriptor instead.
 func (*PlayerStats) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{29}
+	return file_api_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *PlayerStats) GetBaseStats() *UnitStats {
@@ -3031,7 +3189,7 @@ type PartyStats struct {
 
 func (x *PartyStats) Reset() {
 	*x = PartyStats{}
-	mi := &file_api_proto_msgTypes[30]
+	mi := &file_api_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3043,7 +3201,7 @@ func (x *PartyStats) String() string {
 func (*PartyStats) ProtoMessage() {}
 
 func (x *PartyStats) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[30]
+	mi := &file_api_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3056,7 +3214,7 @@ func (x *PartyStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PartyStats.ProtoReflect.Descriptor instead.
 func (*PartyStats) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{30}
+	return file_api_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *PartyStats) GetPlayers() []*PlayerStats {
@@ -3075,7 +3233,7 @@ type RaidStats struct {
 
 func (x *RaidStats) Reset() {
 	*x = RaidStats{}
-	mi := &file_api_proto_msgTypes[31]
+	mi := &file_api_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3087,7 +3245,7 @@ func (x *RaidStats) String() string {
 func (*RaidStats) ProtoMessage() {}
 
 func (x *RaidStats) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[31]
+	mi := &file_api_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3100,7 +3258,7 @@ func (x *RaidStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RaidStats.ProtoReflect.Descriptor instead.
 func (*RaidStats) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{31}
+	return file_api_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *RaidStats) GetParties() []*PartyStats {
@@ -3119,7 +3277,7 @@ type TargetStats struct {
 
 func (x *TargetStats) Reset() {
 	*x = TargetStats{}
-	mi := &file_api_proto_msgTypes[32]
+	mi := &file_api_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3131,7 +3289,7 @@ func (x *TargetStats) String() string {
 func (*TargetStats) ProtoMessage() {}
 
 func (x *TargetStats) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[32]
+	mi := &file_api_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3144,7 +3302,7 @@ func (x *TargetStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TargetStats.ProtoReflect.Descriptor instead.
 func (*TargetStats) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{32}
+	return file_api_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *TargetStats) GetMetadata() *UnitMetadata {
@@ -3163,7 +3321,7 @@ type EncounterStats struct {
 
 func (x *EncounterStats) Reset() {
 	*x = EncounterStats{}
-	mi := &file_api_proto_msgTypes[33]
+	mi := &file_api_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3175,7 +3333,7 @@ func (x *EncounterStats) String() string {
 func (*EncounterStats) ProtoMessage() {}
 
 func (x *EncounterStats) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[33]
+	mi := &file_api_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3188,7 +3346,7 @@ func (x *EncounterStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EncounterStats.ProtoReflect.Descriptor instead.
 func (*EncounterStats) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{33}
+	return file_api_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *EncounterStats) GetTargets() []*TargetStats {
@@ -3209,7 +3367,7 @@ type ComputeStatsResult struct {
 
 func (x *ComputeStatsResult) Reset() {
 	*x = ComputeStatsResult{}
-	mi := &file_api_proto_msgTypes[34]
+	mi := &file_api_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3221,7 +3379,7 @@ func (x *ComputeStatsResult) String() string {
 func (*ComputeStatsResult) ProtoMessage() {}
 
 func (x *ComputeStatsResult) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[34]
+	mi := &file_api_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3234,7 +3392,7 @@ func (x *ComputeStatsResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ComputeStatsResult.ProtoReflect.Descriptor instead.
 func (*ComputeStatsResult) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{34}
+	return file_api_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ComputeStatsResult) GetRaidStats() *RaidStats {
@@ -3277,7 +3435,7 @@ type StatWeightsRequest struct {
 
 func (x *StatWeightsRequest) Reset() {
 	*x = StatWeightsRequest{}
-	mi := &file_api_proto_msgTypes[35]
+	mi := &file_api_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3289,7 +3447,7 @@ func (x *StatWeightsRequest) String() string {
 func (*StatWeightsRequest) ProtoMessage() {}
 
 func (x *StatWeightsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[35]
+	mi := &file_api_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3302,7 +3460,7 @@ func (x *StatWeightsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatWeightsRequest.ProtoReflect.Descriptor instead.
 func (*StatWeightsRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{35}
+	return file_api_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *StatWeightsRequest) GetPlayer() *Player {
@@ -3386,7 +3544,7 @@ type StatWeightsStatData struct {
 
 func (x *StatWeightsStatData) Reset() {
 	*x = StatWeightsStatData{}
-	mi := &file_api_proto_msgTypes[36]
+	mi := &file_api_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3398,7 +3556,7 @@ func (x *StatWeightsStatData) String() string {
 func (*StatWeightsStatData) ProtoMessage() {}
 
 func (x *StatWeightsStatData) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[36]
+	mi := &file_api_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3411,7 +3569,7 @@ func (x *StatWeightsStatData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatWeightsStatData.ProtoReflect.Descriptor instead.
 func (*StatWeightsStatData) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{36}
+	return file_api_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *StatWeightsStatData) GetUnitStat() int32 {
@@ -3446,7 +3604,7 @@ type StatWeightsStatRequestData struct {
 
 func (x *StatWeightsStatRequestData) Reset() {
 	*x = StatWeightsStatRequestData{}
-	mi := &file_api_proto_msgTypes[37]
+	mi := &file_api_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3458,7 +3616,7 @@ func (x *StatWeightsStatRequestData) String() string {
 func (*StatWeightsStatRequestData) ProtoMessage() {}
 
 func (x *StatWeightsStatRequestData) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[37]
+	mi := &file_api_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3471,7 +3629,7 @@ func (x *StatWeightsStatRequestData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatWeightsStatRequestData.ProtoReflect.Descriptor instead.
 func (*StatWeightsStatRequestData) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{37}
+	return file_api_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *StatWeightsStatRequestData) GetStatData() *StatWeightsStatData {
@@ -3506,7 +3664,7 @@ type StatWeightRequestsData struct {
 
 func (x *StatWeightRequestsData) Reset() {
 	*x = StatWeightRequestsData{}
-	mi := &file_api_proto_msgTypes[38]
+	mi := &file_api_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3518,7 +3676,7 @@ func (x *StatWeightRequestsData) String() string {
 func (*StatWeightRequestsData) ProtoMessage() {}
 
 func (x *StatWeightRequestsData) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[38]
+	mi := &file_api_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3531,7 +3689,7 @@ func (x *StatWeightRequestsData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatWeightRequestsData.ProtoReflect.Descriptor instead.
 func (*StatWeightRequestsData) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{38}
+	return file_api_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *StatWeightRequestsData) GetBaseRequest() *RaidSimRequest {
@@ -3566,7 +3724,7 @@ type StatWeightsStatResultData struct {
 
 func (x *StatWeightsStatResultData) Reset() {
 	*x = StatWeightsStatResultData{}
-	mi := &file_api_proto_msgTypes[39]
+	mi := &file_api_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3578,7 +3736,7 @@ func (x *StatWeightsStatResultData) String() string {
 func (*StatWeightsStatResultData) ProtoMessage() {}
 
 func (x *StatWeightsStatResultData) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[39]
+	mi := &file_api_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3591,7 +3749,7 @@ func (x *StatWeightsStatResultData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatWeightsStatResultData.ProtoReflect.Descriptor instead.
 func (*StatWeightsStatResultData) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{39}
+	return file_api_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *StatWeightsStatResultData) GetStatData() *StatWeightsStatData {
@@ -3626,7 +3784,7 @@ type StatWeightsCalcRequest struct {
 
 func (x *StatWeightsCalcRequest) Reset() {
 	*x = StatWeightsCalcRequest{}
-	mi := &file_api_proto_msgTypes[40]
+	mi := &file_api_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3638,7 +3796,7 @@ func (x *StatWeightsCalcRequest) String() string {
 func (*StatWeightsCalcRequest) ProtoMessage() {}
 
 func (x *StatWeightsCalcRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[40]
+	mi := &file_api_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3651,7 +3809,7 @@ func (x *StatWeightsCalcRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatWeightsCalcRequest.ProtoReflect.Descriptor instead.
 func (*StatWeightsCalcRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{40}
+	return file_api_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *StatWeightsCalcRequest) GetBaseResult() *RaidSimResult {
@@ -3690,7 +3848,7 @@ type StatWeightsResult struct {
 
 func (x *StatWeightsResult) Reset() {
 	*x = StatWeightsResult{}
-	mi := &file_api_proto_msgTypes[41]
+	mi := &file_api_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3702,7 +3860,7 @@ func (x *StatWeightsResult) String() string {
 func (*StatWeightsResult) ProtoMessage() {}
 
 func (x *StatWeightsResult) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[41]
+	mi := &file_api_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3715,7 +3873,7 @@ func (x *StatWeightsResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatWeightsResult.ProtoReflect.Descriptor instead.
 func (*StatWeightsResult) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{41}
+	return file_api_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *StatWeightsResult) GetDps() *StatWeightValues {
@@ -3779,7 +3937,7 @@ type StatWeightValues struct {
 
 func (x *StatWeightValues) Reset() {
 	*x = StatWeightValues{}
-	mi := &file_api_proto_msgTypes[42]
+	mi := &file_api_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3791,7 +3949,7 @@ func (x *StatWeightValues) String() string {
 func (*StatWeightValues) ProtoMessage() {}
 
 func (x *StatWeightValues) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[42]
+	mi := &file_api_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3804,7 +3962,7 @@ func (x *StatWeightValues) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatWeightValues.ProtoReflect.Descriptor instead.
 func (*StatWeightValues) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{42}
+	return file_api_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *StatWeightValues) GetWeights() *UnitStats {
@@ -3844,7 +4002,7 @@ type AsyncAPIResult struct {
 
 func (x *AsyncAPIResult) Reset() {
 	*x = AsyncAPIResult{}
-	mi := &file_api_proto_msgTypes[43]
+	mi := &file_api_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3856,7 +4014,7 @@ func (x *AsyncAPIResult) String() string {
 func (*AsyncAPIResult) ProtoMessage() {}
 
 func (x *AsyncAPIResult) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[43]
+	mi := &file_api_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3869,7 +4027,7 @@ func (x *AsyncAPIResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AsyncAPIResult.ProtoReflect.Descriptor instead.
 func (*AsyncAPIResult) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{43}
+	return file_api_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *AsyncAPIResult) GetProgressId() string {
@@ -3900,7 +4058,7 @@ type ProgressMetrics struct {
 
 func (x *ProgressMetrics) Reset() {
 	*x = ProgressMetrics{}
-	mi := &file_api_proto_msgTypes[44]
+	mi := &file_api_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3912,7 +4070,7 @@ func (x *ProgressMetrics) String() string {
 func (*ProgressMetrics) ProtoMessage() {}
 
 func (x *ProgressMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[44]
+	mi := &file_api_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3925,7 +4083,7 @@ func (x *ProgressMetrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProgressMetrics.ProtoReflect.Descriptor instead.
 func (*ProgressMetrics) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{44}
+	return file_api_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *ProgressMetrics) GetCompletedIterations() int32 {
@@ -4009,7 +4167,7 @@ type BulkSimRequest struct {
 
 func (x *BulkSimRequest) Reset() {
 	*x = BulkSimRequest{}
-	mi := &file_api_proto_msgTypes[45]
+	mi := &file_api_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4021,7 +4179,7 @@ func (x *BulkSimRequest) String() string {
 func (*BulkSimRequest) ProtoMessage() {}
 
 func (x *BulkSimRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[45]
+	mi := &file_api_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4034,7 +4192,7 @@ func (x *BulkSimRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BulkSimRequest.ProtoReflect.Descriptor instead.
 func (*BulkSimRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{45}
+	return file_api_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *BulkSimRequest) GetBaseSettings() *RaidSimRequest {
@@ -4061,7 +4219,7 @@ type TalentLoadout struct {
 
 func (x *TalentLoadout) Reset() {
 	*x = TalentLoadout{}
-	mi := &file_api_proto_msgTypes[46]
+	mi := &file_api_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4073,7 +4231,7 @@ func (x *TalentLoadout) String() string {
 func (*TalentLoadout) ProtoMessage() {}
 
 func (x *TalentLoadout) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[46]
+	mi := &file_api_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4086,7 +4244,7 @@ func (x *TalentLoadout) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TalentLoadout.ProtoReflect.Descriptor instead.
 func (*TalentLoadout) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{46}
+	return file_api_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *TalentLoadout) GetTalentsString() string {
@@ -4123,7 +4281,7 @@ type BulkSettings struct {
 
 func (x *BulkSettings) Reset() {
 	*x = BulkSettings{}
-	mi := &file_api_proto_msgTypes[47]
+	mi := &file_api_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4135,7 +4293,7 @@ func (x *BulkSettings) String() string {
 func (*BulkSettings) ProtoMessage() {}
 
 func (x *BulkSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[47]
+	mi := &file_api_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4148,7 +4306,7 @@ func (x *BulkSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BulkSettings.ProtoReflect.Descriptor instead.
 func (*BulkSettings) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{47}
+	return file_api_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *BulkSettings) GetItems() []*ItemSpec {
@@ -4211,7 +4369,7 @@ type BulkSimResult struct {
 
 func (x *BulkSimResult) Reset() {
 	*x = BulkSimResult{}
-	mi := &file_api_proto_msgTypes[48]
+	mi := &file_api_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4223,7 +4381,7 @@ func (x *BulkSimResult) String() string {
 func (*BulkSimResult) ProtoMessage() {}
 
 func (x *BulkSimResult) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[48]
+	mi := &file_api_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4236,7 +4394,7 @@ func (x *BulkSimResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BulkSimResult.ProtoReflect.Descriptor instead.
 func (*BulkSimResult) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{48}
+	return file_api_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *BulkSimResult) GetResults() []*BulkComboResult {
@@ -4271,7 +4429,7 @@ type BulkComboResult struct {
 
 func (x *BulkComboResult) Reset() {
 	*x = BulkComboResult{}
-	mi := &file_api_proto_msgTypes[49]
+	mi := &file_api_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4283,7 +4441,7 @@ func (x *BulkComboResult) String() string {
 func (*BulkComboResult) ProtoMessage() {}
 
 func (x *BulkComboResult) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[49]
+	mi := &file_api_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4296,7 +4454,7 @@ func (x *BulkComboResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BulkComboResult.ProtoReflect.Descriptor instead.
 func (*BulkComboResult) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{49}
+	return file_api_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *BulkComboResult) GetItemsAdded() []*ItemSpecWithSlot {
@@ -4330,7 +4488,7 @@ type ItemSpecWithSlot struct {
 
 func (x *ItemSpecWithSlot) Reset() {
 	*x = ItemSpecWithSlot{}
-	mi := &file_api_proto_msgTypes[50]
+	mi := &file_api_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4342,7 +4500,7 @@ func (x *ItemSpecWithSlot) String() string {
 func (*ItemSpecWithSlot) ProtoMessage() {}
 
 func (x *ItemSpecWithSlot) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[50]
+	mi := &file_api_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4355,7 +4513,7 @@ func (x *ItemSpecWithSlot) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemSpecWithSlot.ProtoReflect.Descriptor instead.
 func (*ItemSpecWithSlot) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{50}
+	return file_api_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *ItemSpecWithSlot) GetItem() *ItemSpec {
@@ -4438,7 +4596,7 @@ const file_api_proto_rawDesc = "" +
 	"\adebuffs\x18\x05 \x01(\v2\x0e.proto.DebuffsR\adebuffs\x12*\n" +
 	"\x05tanks\x18\x04 \x03(\v2\x14.proto.UnitReferenceR\x05tanks\x121\n" +
 	"\x14stagger_stormstrikes\x18\x03 \x01(\bR\x13staggerStormstrikes\x12%\n" +
-	"\x0etarget_dummies\x18\x06 \x01(\x05R\rtargetDummies\"\xa6\x02\n" +
+	"\x0etarget_dummies\x18\x06 \x01(\x05R\rtargetDummies\"\xd1\x02\n" +
 	"\n" +
 	"SimOptions\x12\x1e\n" +
 	"\n" +
@@ -4451,7 +4609,9 @@ const file_api_proto_rawDesc = "" +
 	"\ais_test\x18\x05 \x01(\bR\x06isTest\x12&\n" +
 	"\x0fsave_all_values\x18\a \x01(\bR\rsaveAllValues\x12 \n" +
 	"\vinteractive\x18\b \x01(\bR\vinteractive\x12*\n" +
-	"\x11use_labeled_rands\x18\t \x01(\bR\x0fuseLabeledRands\"\xc5\x01\n" +
+	"\x11use_labeled_rands\x18\t \x01(\bR\x0fuseLabeledRands\x12)\n" +
+	"\x10sample_iteration\x18\n" +
+	" \x01(\bR\x0fsampleIteration\"\xc5\x01\n" +
 	"\rActionMetrics\x12\x1f\n" +
 	"\x02id\x18\x01 \x01(\v2\x0f.proto.ActionIDR\x02id\x12\x19\n" +
 	"\bis_melee\x18\x02 \x01(\bR\aisMelee\x126\n" +
@@ -4565,7 +4725,20 @@ const file_api_proto_rawDesc = "" +
 	"\x04raid\x18\x01 \x01(\v2\v.proto.RaidR\x04raid\x12.\n" +
 	"\tencounter\x18\x02 \x01(\v2\x10.proto.EncounterR\tencounter\x122\n" +
 	"\vsim_options\x18\x03 \x01(\v2\x11.proto.SimOptionsR\n" +
-	"simOptions\"\xe4\x02\n" +
+	"simOptions\"\xe5\x01\n" +
+	"\n" +
+	"SampleCast\x12\x13\n" +
+	"\x05at_ms\x18\x01 \x01(\x03R\x04atMs\x12,\n" +
+	"\taction_id\x18\x02 \x01(\v2\x0f.proto.ActionIDR\bactionId\x12\x16\n" +
+	"\x06target\x18\x03 \x01(\tR\x06target\x12>\n" +
+	"\tresources\x18\x04 \x03(\v2 .proto.SampleCast.ResourcesEntryR\tresources\x1a<\n" +
+	"\x0eResourcesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"w\n" +
+	"\x0fSampleIteration\x12\x10\n" +
+	"\x03dps\x18\x01 \x01(\x01R\x03dps\x12)\n" +
+	"\x10duration_seconds\x18\x02 \x01(\x01R\x0fdurationSeconds\x12'\n" +
+	"\x05casts\x18\x03 \x03(\v2\x11.proto.SampleCastR\x05casts\"\xa7\x03\n" +
 	"\rRaidSimResult\x125\n" +
 	"\fraid_metrics\x18\x01 \x01(\v2\x12.proto.RaidMetricsR\vraidMetrics\x12D\n" +
 	"\x11encounter_metrics\x18\x02 \x01(\v2\x17.proto.EncounterMetricsR\x10encounterMetrics\x12\x12\n" +
@@ -4573,7 +4746,8 @@ const file_api_proto_rawDesc = "" +
 	"\x18first_iteration_duration\x18\x04 \x01(\x01R\x16firstIterationDuration\x124\n" +
 	"\x16avg_iteration_duration\x18\x06 \x01(\x01R\x14avgIterationDuration\x12)\n" +
 	"\x05error\x18\x05 \x01(\v2\x13.proto.ErrorOutcomeR\x05error\x12'\n" +
-	"\x0fiterations_done\x18\a \x01(\x05R\x0eiterationsDone\"n\n" +
+	"\x0fiterations_done\x18\a \x01(\x05R\x0eiterationsDone\x12A\n" +
+	"\x10sample_iteration\x18\b \x01(\v2\x16.proto.SampleIterationR\x0fsampleIteration\"n\n" +
 	"\x1aRaidSimRequestSplitRequest\x12\x1f\n" +
 	"\vsplit_count\x18\x01 \x01(\x05R\n" +
 	"splitCount\x12/\n" +
@@ -4777,7 +4951,7 @@ func file_api_proto_rawDescGZIP() []byte {
 }
 
 var file_api_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_api_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
+var file_api_proto_msgTypes = make([]protoimpl.MessageInfo, 55)
 var file_api_proto_goTypes = []any{
 	(ResourceType)(0),                       // 0: proto.ResourceType
 	(ErrorOutcomeType)(0),                   // 1: proto.ErrorOutcomeType
@@ -4797,130 +4971,133 @@ var file_api_proto_goTypes = []any{
 	(*EncounterMetrics)(nil),                // 15: proto.EncounterMetrics
 	(*ErrorOutcome)(nil),                    // 16: proto.ErrorOutcome
 	(*RaidSimRequest)(nil),                  // 17: proto.RaidSimRequest
-	(*RaidSimResult)(nil),                   // 18: proto.RaidSimResult
-	(*RaidSimRequestSplitRequest)(nil),      // 19: proto.RaidSimRequestSplitRequest
-	(*RaidSimRequestSplitResult)(nil),       // 20: proto.RaidSimRequestSplitResult
-	(*RaidSimResultCombinationRequest)(nil), // 21: proto.RaidSimResultCombinationRequest
-	(*AbortRequest)(nil),                    // 22: proto.AbortRequest
-	(*AbortResponse)(nil),                   // 23: proto.AbortResponse
-	(*ComputeStatsRequest)(nil),             // 24: proto.ComputeStatsRequest
-	(*AuraStats)(nil),                       // 25: proto.AuraStats
-	(*SpellStats)(nil),                      // 26: proto.SpellStats
-	(*APLActionStats)(nil),                  // 27: proto.APLActionStats
-	(*APLStats)(nil),                        // 28: proto.APLStats
-	(*UnitMetadata)(nil),                    // 29: proto.UnitMetadata
-	(*PetStats)(nil),                        // 30: proto.PetStats
-	(*PlayerStats)(nil),                     // 31: proto.PlayerStats
-	(*PartyStats)(nil),                      // 32: proto.PartyStats
-	(*RaidStats)(nil),                       // 33: proto.RaidStats
-	(*TargetStats)(nil),                     // 34: proto.TargetStats
-	(*EncounterStats)(nil),                  // 35: proto.EncounterStats
-	(*ComputeStatsResult)(nil),              // 36: proto.ComputeStatsResult
-	(*StatWeightsRequest)(nil),              // 37: proto.StatWeightsRequest
-	(*StatWeightsStatData)(nil),             // 38: proto.StatWeightsStatData
-	(*StatWeightsStatRequestData)(nil),      // 39: proto.StatWeightsStatRequestData
-	(*StatWeightRequestsData)(nil),          // 40: proto.StatWeightRequestsData
-	(*StatWeightsStatResultData)(nil),       // 41: proto.StatWeightsStatResultData
-	(*StatWeightsCalcRequest)(nil),          // 42: proto.StatWeightsCalcRequest
-	(*StatWeightsResult)(nil),               // 43: proto.StatWeightsResult
-	(*StatWeightValues)(nil),                // 44: proto.StatWeightValues
-	(*AsyncAPIResult)(nil),                  // 45: proto.AsyncAPIResult
-	(*ProgressMetrics)(nil),                 // 46: proto.ProgressMetrics
-	(*BulkSimRequest)(nil),                  // 47: proto.BulkSimRequest
-	(*TalentLoadout)(nil),                   // 48: proto.TalentLoadout
-	(*BulkSettings)(nil),                    // 49: proto.BulkSettings
-	(*BulkSimResult)(nil),                   // 50: proto.BulkSimResult
-	(*BulkComboResult)(nil),                 // 51: proto.BulkComboResult
-	(*ItemSpecWithSlot)(nil),                // 52: proto.ItemSpecWithSlot
-	nil,                                     // 53: proto.DistributionMetrics.HistEntry
-	(Race)(0),                               // 54: proto.Race
-	(Class)(0),                              // 55: proto.Class
-	(*EquipmentSpec)(nil),                   // 56: proto.EquipmentSpec
-	(*Consumes)(nil),                        // 57: proto.Consumes
-	(*UnitStats)(nil),                       // 58: proto.UnitStats
-	(*ItemSwap)(nil),                        // 59: proto.ItemSwap
-	(*IndividualBuffs)(nil),                 // 60: proto.IndividualBuffs
-	(Profession)(0),                         // 61: proto.Profession
-	(*Cooldowns)(nil),                       // 62: proto.Cooldowns
-	(*APLRotation)(nil),                     // 63: proto.APLRotation
-	(*SimDatabase)(nil),                     // 64: proto.SimDatabase
-	(*HealingModel)(nil),                    // 65: proto.HealingModel
-	(*BalanceDruid)(nil),                    // 66: proto.BalanceDruid
-	(*FeralDruid)(nil),                      // 67: proto.FeralDruid
-	(*FeralTankDruid)(nil),                  // 68: proto.FeralTankDruid
-	(*RestorationDruid)(nil),                // 69: proto.RestorationDruid
-	(*Hunter)(nil),                          // 70: proto.Hunter
-	(*Mage)(nil),                            // 71: proto.Mage
-	(*RetributionPaladin)(nil),              // 72: proto.RetributionPaladin
-	(*ProtectionPaladin)(nil),               // 73: proto.ProtectionPaladin
-	(*HolyPaladin)(nil),                     // 74: proto.HolyPaladin
-	(*HealingPriest)(nil),                   // 75: proto.HealingPriest
-	(*ShadowPriest)(nil),                    // 76: proto.ShadowPriest
-	(*Rogue)(nil),                           // 77: proto.Rogue
-	(*ElementalShaman)(nil),                 // 78: proto.ElementalShaman
-	(*EnhancementShaman)(nil),               // 79: proto.EnhancementShaman
-	(*RestorationShaman)(nil),               // 80: proto.RestorationShaman
-	(*WardenShaman)(nil),                    // 81: proto.WardenShaman
-	(*Warlock)(nil),                         // 82: proto.Warlock
-	(*Warrior)(nil),                         // 83: proto.Warrior
-	(*TankWarrior)(nil),                     // 84: proto.TankWarrior
-	(*PartyBuffs)(nil),                      // 85: proto.PartyBuffs
-	(*RaidBuffs)(nil),                       // 86: proto.RaidBuffs
-	(*Debuffs)(nil),                         // 87: proto.Debuffs
-	(*UnitReference)(nil),                   // 88: proto.UnitReference
-	(*ActionID)(nil),                        // 89: proto.ActionID
-	(*Encounter)(nil),                       // 90: proto.Encounter
-	(Stat)(0),                               // 91: proto.Stat
-	(PseudoStat)(0),                         // 92: proto.PseudoStat
-	(*ItemSpec)(nil),                        // 93: proto.ItemSpec
-	(ItemSlot)(0),                           // 94: proto.ItemSlot
+	(*SampleCast)(nil),                      // 18: proto.SampleCast
+	(*SampleIteration)(nil),                 // 19: proto.SampleIteration
+	(*RaidSimResult)(nil),                   // 20: proto.RaidSimResult
+	(*RaidSimRequestSplitRequest)(nil),      // 21: proto.RaidSimRequestSplitRequest
+	(*RaidSimRequestSplitResult)(nil),       // 22: proto.RaidSimRequestSplitResult
+	(*RaidSimResultCombinationRequest)(nil), // 23: proto.RaidSimResultCombinationRequest
+	(*AbortRequest)(nil),                    // 24: proto.AbortRequest
+	(*AbortResponse)(nil),                   // 25: proto.AbortResponse
+	(*ComputeStatsRequest)(nil),             // 26: proto.ComputeStatsRequest
+	(*AuraStats)(nil),                       // 27: proto.AuraStats
+	(*SpellStats)(nil),                      // 28: proto.SpellStats
+	(*APLActionStats)(nil),                  // 29: proto.APLActionStats
+	(*APLStats)(nil),                        // 30: proto.APLStats
+	(*UnitMetadata)(nil),                    // 31: proto.UnitMetadata
+	(*PetStats)(nil),                        // 32: proto.PetStats
+	(*PlayerStats)(nil),                     // 33: proto.PlayerStats
+	(*PartyStats)(nil),                      // 34: proto.PartyStats
+	(*RaidStats)(nil),                       // 35: proto.RaidStats
+	(*TargetStats)(nil),                     // 36: proto.TargetStats
+	(*EncounterStats)(nil),                  // 37: proto.EncounterStats
+	(*ComputeStatsResult)(nil),              // 38: proto.ComputeStatsResult
+	(*StatWeightsRequest)(nil),              // 39: proto.StatWeightsRequest
+	(*StatWeightsStatData)(nil),             // 40: proto.StatWeightsStatData
+	(*StatWeightsStatRequestData)(nil),      // 41: proto.StatWeightsStatRequestData
+	(*StatWeightRequestsData)(nil),          // 42: proto.StatWeightRequestsData
+	(*StatWeightsStatResultData)(nil),       // 43: proto.StatWeightsStatResultData
+	(*StatWeightsCalcRequest)(nil),          // 44: proto.StatWeightsCalcRequest
+	(*StatWeightsResult)(nil),               // 45: proto.StatWeightsResult
+	(*StatWeightValues)(nil),                // 46: proto.StatWeightValues
+	(*AsyncAPIResult)(nil),                  // 47: proto.AsyncAPIResult
+	(*ProgressMetrics)(nil),                 // 48: proto.ProgressMetrics
+	(*BulkSimRequest)(nil),                  // 49: proto.BulkSimRequest
+	(*TalentLoadout)(nil),                   // 50: proto.TalentLoadout
+	(*BulkSettings)(nil),                    // 51: proto.BulkSettings
+	(*BulkSimResult)(nil),                   // 52: proto.BulkSimResult
+	(*BulkComboResult)(nil),                 // 53: proto.BulkComboResult
+	(*ItemSpecWithSlot)(nil),                // 54: proto.ItemSpecWithSlot
+	nil,                                     // 55: proto.DistributionMetrics.HistEntry
+	nil,                                     // 56: proto.SampleCast.ResourcesEntry
+	(Race)(0),                               // 57: proto.Race
+	(Class)(0),                              // 58: proto.Class
+	(*EquipmentSpec)(nil),                   // 59: proto.EquipmentSpec
+	(*Consumes)(nil),                        // 60: proto.Consumes
+	(*UnitStats)(nil),                       // 61: proto.UnitStats
+	(*ItemSwap)(nil),                        // 62: proto.ItemSwap
+	(*IndividualBuffs)(nil),                 // 63: proto.IndividualBuffs
+	(Profession)(0),                         // 64: proto.Profession
+	(*Cooldowns)(nil),                       // 65: proto.Cooldowns
+	(*APLRotation)(nil),                     // 66: proto.APLRotation
+	(*SimDatabase)(nil),                     // 67: proto.SimDatabase
+	(*HealingModel)(nil),                    // 68: proto.HealingModel
+	(*BalanceDruid)(nil),                    // 69: proto.BalanceDruid
+	(*FeralDruid)(nil),                      // 70: proto.FeralDruid
+	(*FeralTankDruid)(nil),                  // 71: proto.FeralTankDruid
+	(*RestorationDruid)(nil),                // 72: proto.RestorationDruid
+	(*Hunter)(nil),                          // 73: proto.Hunter
+	(*Mage)(nil),                            // 74: proto.Mage
+	(*RetributionPaladin)(nil),              // 75: proto.RetributionPaladin
+	(*ProtectionPaladin)(nil),               // 76: proto.ProtectionPaladin
+	(*HolyPaladin)(nil),                     // 77: proto.HolyPaladin
+	(*HealingPriest)(nil),                   // 78: proto.HealingPriest
+	(*ShadowPriest)(nil),                    // 79: proto.ShadowPriest
+	(*Rogue)(nil),                           // 80: proto.Rogue
+	(*ElementalShaman)(nil),                 // 81: proto.ElementalShaman
+	(*EnhancementShaman)(nil),               // 82: proto.EnhancementShaman
+	(*RestorationShaman)(nil),               // 83: proto.RestorationShaman
+	(*WardenShaman)(nil),                    // 84: proto.WardenShaman
+	(*Warlock)(nil),                         // 85: proto.Warlock
+	(*Warrior)(nil),                         // 86: proto.Warrior
+	(*TankWarrior)(nil),                     // 87: proto.TankWarrior
+	(*PartyBuffs)(nil),                      // 88: proto.PartyBuffs
+	(*RaidBuffs)(nil),                       // 89: proto.RaidBuffs
+	(*Debuffs)(nil),                         // 90: proto.Debuffs
+	(*UnitReference)(nil),                   // 91: proto.UnitReference
+	(*ActionID)(nil),                        // 92: proto.ActionID
+	(*Encounter)(nil),                       // 93: proto.Encounter
+	(Stat)(0),                               // 94: proto.Stat
+	(PseudoStat)(0),                         // 95: proto.PseudoStat
+	(*ItemSpec)(nil),                        // 96: proto.ItemSpec
+	(ItemSlot)(0),                           // 97: proto.ItemSlot
 }
 var file_api_proto_depIdxs = []int32{
-	54,  // 0: proto.Player.race:type_name -> proto.Race
-	55,  // 1: proto.Player.class:type_name -> proto.Class
-	56,  // 2: proto.Player.equipment:type_name -> proto.EquipmentSpec
-	57,  // 3: proto.Player.consumes:type_name -> proto.Consumes
-	58,  // 4: proto.Player.bonus_stats:type_name -> proto.UnitStats
-	59,  // 5: proto.Player.item_swap:type_name -> proto.ItemSwap
-	60,  // 6: proto.Player.buffs:type_name -> proto.IndividualBuffs
-	61,  // 7: proto.Player.profession1:type_name -> proto.Profession
-	61,  // 8: proto.Player.profession2:type_name -> proto.Profession
-	62,  // 9: proto.Player.cooldowns:type_name -> proto.Cooldowns
-	63,  // 10: proto.Player.rotation:type_name -> proto.APLRotation
-	64,  // 11: proto.Player.database:type_name -> proto.SimDatabase
-	65,  // 12: proto.Player.healing_model:type_name -> proto.HealingModel
-	66,  // 13: proto.Player.balance_druid:type_name -> proto.BalanceDruid
-	67,  // 14: proto.Player.feral_druid:type_name -> proto.FeralDruid
-	68,  // 15: proto.Player.feral_tank_druid:type_name -> proto.FeralTankDruid
-	69,  // 16: proto.Player.restoration_druid:type_name -> proto.RestorationDruid
-	70,  // 17: proto.Player.hunter:type_name -> proto.Hunter
-	71,  // 18: proto.Player.mage:type_name -> proto.Mage
-	72,  // 19: proto.Player.retribution_paladin:type_name -> proto.RetributionPaladin
-	73,  // 20: proto.Player.protection_paladin:type_name -> proto.ProtectionPaladin
-	74,  // 21: proto.Player.holy_paladin:type_name -> proto.HolyPaladin
-	75,  // 22: proto.Player.healing_priest:type_name -> proto.HealingPriest
-	76,  // 23: proto.Player.shadow_priest:type_name -> proto.ShadowPriest
-	77,  // 24: proto.Player.rogue:type_name -> proto.Rogue
-	78,  // 25: proto.Player.elemental_shaman:type_name -> proto.ElementalShaman
-	79,  // 26: proto.Player.enhancement_shaman:type_name -> proto.EnhancementShaman
-	80,  // 27: proto.Player.restoration_shaman:type_name -> proto.RestorationShaman
-	81,  // 28: proto.Player.warden_shaman:type_name -> proto.WardenShaman
-	82,  // 29: proto.Player.warlock:type_name -> proto.Warlock
-	83,  // 30: proto.Player.warrior:type_name -> proto.Warrior
-	84,  // 31: proto.Player.tank_warrior:type_name -> proto.TankWarrior
+	57,  // 0: proto.Player.race:type_name -> proto.Race
+	58,  // 1: proto.Player.class:type_name -> proto.Class
+	59,  // 2: proto.Player.equipment:type_name -> proto.EquipmentSpec
+	60,  // 3: proto.Player.consumes:type_name -> proto.Consumes
+	61,  // 4: proto.Player.bonus_stats:type_name -> proto.UnitStats
+	62,  // 5: proto.Player.item_swap:type_name -> proto.ItemSwap
+	63,  // 6: proto.Player.buffs:type_name -> proto.IndividualBuffs
+	64,  // 7: proto.Player.profession1:type_name -> proto.Profession
+	64,  // 8: proto.Player.profession2:type_name -> proto.Profession
+	65,  // 9: proto.Player.cooldowns:type_name -> proto.Cooldowns
+	66,  // 10: proto.Player.rotation:type_name -> proto.APLRotation
+	67,  // 11: proto.Player.database:type_name -> proto.SimDatabase
+	68,  // 12: proto.Player.healing_model:type_name -> proto.HealingModel
+	69,  // 13: proto.Player.balance_druid:type_name -> proto.BalanceDruid
+	70,  // 14: proto.Player.feral_druid:type_name -> proto.FeralDruid
+	71,  // 15: proto.Player.feral_tank_druid:type_name -> proto.FeralTankDruid
+	72,  // 16: proto.Player.restoration_druid:type_name -> proto.RestorationDruid
+	73,  // 17: proto.Player.hunter:type_name -> proto.Hunter
+	74,  // 18: proto.Player.mage:type_name -> proto.Mage
+	75,  // 19: proto.Player.retribution_paladin:type_name -> proto.RetributionPaladin
+	76,  // 20: proto.Player.protection_paladin:type_name -> proto.ProtectionPaladin
+	77,  // 21: proto.Player.holy_paladin:type_name -> proto.HolyPaladin
+	78,  // 22: proto.Player.healing_priest:type_name -> proto.HealingPriest
+	79,  // 23: proto.Player.shadow_priest:type_name -> proto.ShadowPriest
+	80,  // 24: proto.Player.rogue:type_name -> proto.Rogue
+	81,  // 25: proto.Player.elemental_shaman:type_name -> proto.ElementalShaman
+	82,  // 26: proto.Player.enhancement_shaman:type_name -> proto.EnhancementShaman
+	83,  // 27: proto.Player.restoration_shaman:type_name -> proto.RestorationShaman
+	84,  // 28: proto.Player.warden_shaman:type_name -> proto.WardenShaman
+	85,  // 29: proto.Player.warlock:type_name -> proto.Warlock
+	86,  // 30: proto.Player.warrior:type_name -> proto.Warrior
+	87,  // 31: proto.Player.tank_warrior:type_name -> proto.TankWarrior
 	2,   // 32: proto.Party.players:type_name -> proto.Player
-	85,  // 33: proto.Party.buffs:type_name -> proto.PartyBuffs
+	88,  // 33: proto.Party.buffs:type_name -> proto.PartyBuffs
 	3,   // 34: proto.Raid.parties:type_name -> proto.Party
-	86,  // 35: proto.Raid.buffs:type_name -> proto.RaidBuffs
-	87,  // 36: proto.Raid.debuffs:type_name -> proto.Debuffs
-	88,  // 37: proto.Raid.tanks:type_name -> proto.UnitReference
-	89,  // 38: proto.ActionMetrics.id:type_name -> proto.ActionID
+	89,  // 35: proto.Raid.buffs:type_name -> proto.RaidBuffs
+	90,  // 36: proto.Raid.debuffs:type_name -> proto.Debuffs
+	91,  // 37: proto.Raid.tanks:type_name -> proto.UnitReference
+	92,  // 38: proto.ActionMetrics.id:type_name -> proto.ActionID
 	7,   // 39: proto.ActionMetrics.targets:type_name -> proto.TargetedActionMetrics
-	89,  // 40: proto.AuraMetrics.id:type_name -> proto.ActionID
+	92,  // 40: proto.AuraMetrics.id:type_name -> proto.ActionID
 	8,   // 41: proto.AuraMetrics.aggregator_data:type_name -> proto.AggregatorData
-	89,  // 42: proto.ResourceMetrics.id:type_name -> proto.ActionID
+	92,  // 42: proto.ResourceMetrics.id:type_name -> proto.ActionID
 	0,   // 43: proto.ResourceMetrics.type:type_name -> proto.ResourceType
-	53,  // 44: proto.DistributionMetrics.hist:type_name -> proto.DistributionMetrics.HistEntry
+	55,  // 44: proto.DistributionMetrics.hist:type_name -> proto.DistributionMetrics.HistEntry
 	8,   // 45: proto.DistributionMetrics.aggregator_data:type_name -> proto.AggregatorData
 	11,  // 46: proto.UnitMetrics.dps:type_name -> proto.DistributionMetrics
 	11,  // 47: proto.UnitMetrics.dpasp:type_name -> proto.DistributionMetrics
@@ -4942,92 +5119,96 @@ var file_api_proto_depIdxs = []int32{
 	12,  // 63: proto.EncounterMetrics.targets:type_name -> proto.UnitMetrics
 	1,   // 64: proto.ErrorOutcome.type:type_name -> proto.ErrorOutcomeType
 	4,   // 65: proto.RaidSimRequest.raid:type_name -> proto.Raid
-	90,  // 66: proto.RaidSimRequest.encounter:type_name -> proto.Encounter
+	93,  // 66: proto.RaidSimRequest.encounter:type_name -> proto.Encounter
 	5,   // 67: proto.RaidSimRequest.sim_options:type_name -> proto.SimOptions
-	14,  // 68: proto.RaidSimResult.raid_metrics:type_name -> proto.RaidMetrics
-	15,  // 69: proto.RaidSimResult.encounter_metrics:type_name -> proto.EncounterMetrics
-	16,  // 70: proto.RaidSimResult.error:type_name -> proto.ErrorOutcome
-	17,  // 71: proto.RaidSimRequestSplitRequest.request:type_name -> proto.RaidSimRequest
-	17,  // 72: proto.RaidSimRequestSplitResult.requests:type_name -> proto.RaidSimRequest
-	18,  // 73: proto.RaidSimResultCombinationRequest.results:type_name -> proto.RaidSimResult
-	4,   // 74: proto.ComputeStatsRequest.raid:type_name -> proto.Raid
-	90,  // 75: proto.ComputeStatsRequest.encounter:type_name -> proto.Encounter
-	89,  // 76: proto.AuraStats.id:type_name -> proto.ActionID
-	89,  // 77: proto.SpellStats.id:type_name -> proto.ActionID
-	27,  // 78: proto.APLStats.prepull_actions:type_name -> proto.APLActionStats
-	27,  // 79: proto.APLStats.priority_list:type_name -> proto.APLActionStats
-	26,  // 80: proto.UnitMetadata.spells:type_name -> proto.SpellStats
-	25,  // 81: proto.UnitMetadata.auras:type_name -> proto.AuraStats
-	29,  // 82: proto.PetStats.metadata:type_name -> proto.UnitMetadata
-	58,  // 83: proto.PlayerStats.base_stats:type_name -> proto.UnitStats
-	58,  // 84: proto.PlayerStats.gear_stats:type_name -> proto.UnitStats
-	58,  // 85: proto.PlayerStats.talents_stats:type_name -> proto.UnitStats
-	58,  // 86: proto.PlayerStats.buffs_stats:type_name -> proto.UnitStats
-	58,  // 87: proto.PlayerStats.consumes_stats:type_name -> proto.UnitStats
-	58,  // 88: proto.PlayerStats.final_stats:type_name -> proto.UnitStats
-	60,  // 89: proto.PlayerStats.buffs:type_name -> proto.IndividualBuffs
-	29,  // 90: proto.PlayerStats.metadata:type_name -> proto.UnitMetadata
-	28,  // 91: proto.PlayerStats.rotation_stats:type_name -> proto.APLStats
-	30,  // 92: proto.PlayerStats.pets:type_name -> proto.PetStats
-	31,  // 93: proto.PartyStats.players:type_name -> proto.PlayerStats
-	32,  // 94: proto.RaidStats.parties:type_name -> proto.PartyStats
-	29,  // 95: proto.TargetStats.metadata:type_name -> proto.UnitMetadata
-	34,  // 96: proto.EncounterStats.targets:type_name -> proto.TargetStats
-	33,  // 97: proto.ComputeStatsResult.raid_stats:type_name -> proto.RaidStats
-	35,  // 98: proto.ComputeStatsResult.encounter_stats:type_name -> proto.EncounterStats
-	2,   // 99: proto.StatWeightsRequest.player:type_name -> proto.Player
-	86,  // 100: proto.StatWeightsRequest.raid_buffs:type_name -> proto.RaidBuffs
-	85,  // 101: proto.StatWeightsRequest.party_buffs:type_name -> proto.PartyBuffs
-	87,  // 102: proto.StatWeightsRequest.debuffs:type_name -> proto.Debuffs
-	90,  // 103: proto.StatWeightsRequest.encounter:type_name -> proto.Encounter
-	5,   // 104: proto.StatWeightsRequest.sim_options:type_name -> proto.SimOptions
-	88,  // 105: proto.StatWeightsRequest.tanks:type_name -> proto.UnitReference
-	91,  // 106: proto.StatWeightsRequest.stats_to_weigh:type_name -> proto.Stat
-	92,  // 107: proto.StatWeightsRequest.pseudo_stats_to_weigh:type_name -> proto.PseudoStat
-	91,  // 108: proto.StatWeightsRequest.ep_reference_stat:type_name -> proto.Stat
-	38,  // 109: proto.StatWeightsStatRequestData.stat_data:type_name -> proto.StatWeightsStatData
-	17,  // 110: proto.StatWeightsStatRequestData.request_low:type_name -> proto.RaidSimRequest
-	17,  // 111: proto.StatWeightsStatRequestData.request_high:type_name -> proto.RaidSimRequest
-	17,  // 112: proto.StatWeightRequestsData.base_request:type_name -> proto.RaidSimRequest
-	91,  // 113: proto.StatWeightRequestsData.ep_reference_stat:type_name -> proto.Stat
-	39,  // 114: proto.StatWeightRequestsData.stat_sim_requests:type_name -> proto.StatWeightsStatRequestData
-	38,  // 115: proto.StatWeightsStatResultData.stat_data:type_name -> proto.StatWeightsStatData
-	18,  // 116: proto.StatWeightsStatResultData.result_low:type_name -> proto.RaidSimResult
-	18,  // 117: proto.StatWeightsStatResultData.result_high:type_name -> proto.RaidSimResult
-	18,  // 118: proto.StatWeightsCalcRequest.base_result:type_name -> proto.RaidSimResult
-	91,  // 119: proto.StatWeightsCalcRequest.ep_reference_stat:type_name -> proto.Stat
-	41,  // 120: proto.StatWeightsCalcRequest.stat_sim_results:type_name -> proto.StatWeightsStatResultData
-	44,  // 121: proto.StatWeightsResult.dps:type_name -> proto.StatWeightValues
-	44,  // 122: proto.StatWeightsResult.hps:type_name -> proto.StatWeightValues
-	44,  // 123: proto.StatWeightsResult.tps:type_name -> proto.StatWeightValues
-	44,  // 124: proto.StatWeightsResult.dtps:type_name -> proto.StatWeightValues
-	44,  // 125: proto.StatWeightsResult.tmi:type_name -> proto.StatWeightValues
-	44,  // 126: proto.StatWeightsResult.p_death:type_name -> proto.StatWeightValues
-	16,  // 127: proto.StatWeightsResult.error:type_name -> proto.ErrorOutcome
-	58,  // 128: proto.StatWeightValues.weights:type_name -> proto.UnitStats
-	58,  // 129: proto.StatWeightValues.weights_stdev:type_name -> proto.UnitStats
-	58,  // 130: proto.StatWeightValues.ep_values:type_name -> proto.UnitStats
-	58,  // 131: proto.StatWeightValues.ep_values_stdev:type_name -> proto.UnitStats
-	18,  // 132: proto.ProgressMetrics.final_raid_result:type_name -> proto.RaidSimResult
-	43,  // 133: proto.ProgressMetrics.final_weight_result:type_name -> proto.StatWeightsResult
-	50,  // 134: proto.ProgressMetrics.final_bulk_result:type_name -> proto.BulkSimResult
-	17,  // 135: proto.BulkSimRequest.base_settings:type_name -> proto.RaidSimRequest
-	49,  // 136: proto.BulkSimRequest.bulk_settings:type_name -> proto.BulkSettings
-	93,  // 137: proto.BulkSettings.items:type_name -> proto.ItemSpec
-	48,  // 138: proto.BulkSettings.talents_to_sim:type_name -> proto.TalentLoadout
-	51,  // 139: proto.BulkSimResult.results:type_name -> proto.BulkComboResult
-	51,  // 140: proto.BulkSimResult.equipped_gear_result:type_name -> proto.BulkComboResult
-	16,  // 141: proto.BulkSimResult.error:type_name -> proto.ErrorOutcome
-	52,  // 142: proto.BulkComboResult.items_added:type_name -> proto.ItemSpecWithSlot
-	12,  // 143: proto.BulkComboResult.unit_metrics:type_name -> proto.UnitMetrics
-	48,  // 144: proto.BulkComboResult.talent_loadout:type_name -> proto.TalentLoadout
-	93,  // 145: proto.ItemSpecWithSlot.item:type_name -> proto.ItemSpec
-	94,  // 146: proto.ItemSpecWithSlot.slot:type_name -> proto.ItemSlot
-	147, // [147:147] is the sub-list for method output_type
-	147, // [147:147] is the sub-list for method input_type
-	147, // [147:147] is the sub-list for extension type_name
-	147, // [147:147] is the sub-list for extension extendee
-	0,   // [0:147] is the sub-list for field type_name
+	92,  // 68: proto.SampleCast.action_id:type_name -> proto.ActionID
+	56,  // 69: proto.SampleCast.resources:type_name -> proto.SampleCast.ResourcesEntry
+	18,  // 70: proto.SampleIteration.casts:type_name -> proto.SampleCast
+	14,  // 71: proto.RaidSimResult.raid_metrics:type_name -> proto.RaidMetrics
+	15,  // 72: proto.RaidSimResult.encounter_metrics:type_name -> proto.EncounterMetrics
+	16,  // 73: proto.RaidSimResult.error:type_name -> proto.ErrorOutcome
+	19,  // 74: proto.RaidSimResult.sample_iteration:type_name -> proto.SampleIteration
+	17,  // 75: proto.RaidSimRequestSplitRequest.request:type_name -> proto.RaidSimRequest
+	17,  // 76: proto.RaidSimRequestSplitResult.requests:type_name -> proto.RaidSimRequest
+	20,  // 77: proto.RaidSimResultCombinationRequest.results:type_name -> proto.RaidSimResult
+	4,   // 78: proto.ComputeStatsRequest.raid:type_name -> proto.Raid
+	93,  // 79: proto.ComputeStatsRequest.encounter:type_name -> proto.Encounter
+	92,  // 80: proto.AuraStats.id:type_name -> proto.ActionID
+	92,  // 81: proto.SpellStats.id:type_name -> proto.ActionID
+	29,  // 82: proto.APLStats.prepull_actions:type_name -> proto.APLActionStats
+	29,  // 83: proto.APLStats.priority_list:type_name -> proto.APLActionStats
+	28,  // 84: proto.UnitMetadata.spells:type_name -> proto.SpellStats
+	27,  // 85: proto.UnitMetadata.auras:type_name -> proto.AuraStats
+	31,  // 86: proto.PetStats.metadata:type_name -> proto.UnitMetadata
+	61,  // 87: proto.PlayerStats.base_stats:type_name -> proto.UnitStats
+	61,  // 88: proto.PlayerStats.gear_stats:type_name -> proto.UnitStats
+	61,  // 89: proto.PlayerStats.talents_stats:type_name -> proto.UnitStats
+	61,  // 90: proto.PlayerStats.buffs_stats:type_name -> proto.UnitStats
+	61,  // 91: proto.PlayerStats.consumes_stats:type_name -> proto.UnitStats
+	61,  // 92: proto.PlayerStats.final_stats:type_name -> proto.UnitStats
+	63,  // 93: proto.PlayerStats.buffs:type_name -> proto.IndividualBuffs
+	31,  // 94: proto.PlayerStats.metadata:type_name -> proto.UnitMetadata
+	30,  // 95: proto.PlayerStats.rotation_stats:type_name -> proto.APLStats
+	32,  // 96: proto.PlayerStats.pets:type_name -> proto.PetStats
+	33,  // 97: proto.PartyStats.players:type_name -> proto.PlayerStats
+	34,  // 98: proto.RaidStats.parties:type_name -> proto.PartyStats
+	31,  // 99: proto.TargetStats.metadata:type_name -> proto.UnitMetadata
+	36,  // 100: proto.EncounterStats.targets:type_name -> proto.TargetStats
+	35,  // 101: proto.ComputeStatsResult.raid_stats:type_name -> proto.RaidStats
+	37,  // 102: proto.ComputeStatsResult.encounter_stats:type_name -> proto.EncounterStats
+	2,   // 103: proto.StatWeightsRequest.player:type_name -> proto.Player
+	89,  // 104: proto.StatWeightsRequest.raid_buffs:type_name -> proto.RaidBuffs
+	88,  // 105: proto.StatWeightsRequest.party_buffs:type_name -> proto.PartyBuffs
+	90,  // 106: proto.StatWeightsRequest.debuffs:type_name -> proto.Debuffs
+	93,  // 107: proto.StatWeightsRequest.encounter:type_name -> proto.Encounter
+	5,   // 108: proto.StatWeightsRequest.sim_options:type_name -> proto.SimOptions
+	91,  // 109: proto.StatWeightsRequest.tanks:type_name -> proto.UnitReference
+	94,  // 110: proto.StatWeightsRequest.stats_to_weigh:type_name -> proto.Stat
+	95,  // 111: proto.StatWeightsRequest.pseudo_stats_to_weigh:type_name -> proto.PseudoStat
+	94,  // 112: proto.StatWeightsRequest.ep_reference_stat:type_name -> proto.Stat
+	40,  // 113: proto.StatWeightsStatRequestData.stat_data:type_name -> proto.StatWeightsStatData
+	17,  // 114: proto.StatWeightsStatRequestData.request_low:type_name -> proto.RaidSimRequest
+	17,  // 115: proto.StatWeightsStatRequestData.request_high:type_name -> proto.RaidSimRequest
+	17,  // 116: proto.StatWeightRequestsData.base_request:type_name -> proto.RaidSimRequest
+	94,  // 117: proto.StatWeightRequestsData.ep_reference_stat:type_name -> proto.Stat
+	41,  // 118: proto.StatWeightRequestsData.stat_sim_requests:type_name -> proto.StatWeightsStatRequestData
+	40,  // 119: proto.StatWeightsStatResultData.stat_data:type_name -> proto.StatWeightsStatData
+	20,  // 120: proto.StatWeightsStatResultData.result_low:type_name -> proto.RaidSimResult
+	20,  // 121: proto.StatWeightsStatResultData.result_high:type_name -> proto.RaidSimResult
+	20,  // 122: proto.StatWeightsCalcRequest.base_result:type_name -> proto.RaidSimResult
+	94,  // 123: proto.StatWeightsCalcRequest.ep_reference_stat:type_name -> proto.Stat
+	43,  // 124: proto.StatWeightsCalcRequest.stat_sim_results:type_name -> proto.StatWeightsStatResultData
+	46,  // 125: proto.StatWeightsResult.dps:type_name -> proto.StatWeightValues
+	46,  // 126: proto.StatWeightsResult.hps:type_name -> proto.StatWeightValues
+	46,  // 127: proto.StatWeightsResult.tps:type_name -> proto.StatWeightValues
+	46,  // 128: proto.StatWeightsResult.dtps:type_name -> proto.StatWeightValues
+	46,  // 129: proto.StatWeightsResult.tmi:type_name -> proto.StatWeightValues
+	46,  // 130: proto.StatWeightsResult.p_death:type_name -> proto.StatWeightValues
+	16,  // 131: proto.StatWeightsResult.error:type_name -> proto.ErrorOutcome
+	61,  // 132: proto.StatWeightValues.weights:type_name -> proto.UnitStats
+	61,  // 133: proto.StatWeightValues.weights_stdev:type_name -> proto.UnitStats
+	61,  // 134: proto.StatWeightValues.ep_values:type_name -> proto.UnitStats
+	61,  // 135: proto.StatWeightValues.ep_values_stdev:type_name -> proto.UnitStats
+	20,  // 136: proto.ProgressMetrics.final_raid_result:type_name -> proto.RaidSimResult
+	45,  // 137: proto.ProgressMetrics.final_weight_result:type_name -> proto.StatWeightsResult
+	52,  // 138: proto.ProgressMetrics.final_bulk_result:type_name -> proto.BulkSimResult
+	17,  // 139: proto.BulkSimRequest.base_settings:type_name -> proto.RaidSimRequest
+	51,  // 140: proto.BulkSimRequest.bulk_settings:type_name -> proto.BulkSettings
+	96,  // 141: proto.BulkSettings.items:type_name -> proto.ItemSpec
+	50,  // 142: proto.BulkSettings.talents_to_sim:type_name -> proto.TalentLoadout
+	53,  // 143: proto.BulkSimResult.results:type_name -> proto.BulkComboResult
+	53,  // 144: proto.BulkSimResult.equipped_gear_result:type_name -> proto.BulkComboResult
+	16,  // 145: proto.BulkSimResult.error:type_name -> proto.ErrorOutcome
+	54,  // 146: proto.BulkComboResult.items_added:type_name -> proto.ItemSpecWithSlot
+	12,  // 147: proto.BulkComboResult.unit_metrics:type_name -> proto.UnitMetrics
+	50,  // 148: proto.BulkComboResult.talent_loadout:type_name -> proto.TalentLoadout
+	96,  // 149: proto.ItemSpecWithSlot.item:type_name -> proto.ItemSpec
+	97,  // 150: proto.ItemSpecWithSlot.slot:type_name -> proto.ItemSlot
+	151, // [151:151] is the sub-list for method output_type
+	151, // [151:151] is the sub-list for method input_type
+	151, // [151:151] is the sub-list for extension type_name
+	151, // [151:151] is the sub-list for extension extendee
+	0,   // [0:151] is the sub-list for field type_name
 }
 
 func init() { file_api_proto_init() }
@@ -5073,7 +5254,7 @@ func file_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_proto_rawDesc), len(file_api_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   52,
+			NumMessages:   55,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -126,6 +126,12 @@ message SimOptions {
 	bool save_all_values = 7; // Only used internally.
 	bool interactive = 8; // Enables interactive mode.
 	bool use_labeled_rands = 9; // Use test level RNG.
+
+	// Produce RaidSimResult.sample_iteration: one extra iteration, re-run
+	// at the median iteration's seed with a cast recorder attached.
+	// Off by default because it costs an iteration and an environment.
+	// Forever addition; see PORTING.md.
+	bool sample_iteration = 10;
 }
 
 // The aggregated results from all uses of a particular action.
@@ -370,6 +376,27 @@ message RaidSimRequest {
 	SimOptions sim_options = 3;
 }
 
+// SampleCast is one cast in the sampled iteration, with the caster's
+// resources as they stood immediately after it.
+message SampleCast {
+	// Milliseconds from the pull; negative during the pre-pull.
+	int64 at_ms = 1;
+	ActionID action_id = 2;
+	string target = 3;
+	// Keyed by resource name: rage, energy, mana, combo_points. Only the
+	// bars the caster actually has are present.
+	map<string, int32> resources = 4;
+}
+
+// SampleIteration is one iteration's cast log. The engine picks the
+// median-DPS iteration and replays it, so the log is representative
+// rather than lucky.
+message SampleIteration {
+	double dps = 1;
+	double duration_seconds = 2;
+	repeated SampleCast casts = 3;
+}
+
 // Result from running the raid sim.
 message RaidSimResult {
 	RaidMetrics raid_metrics = 1;
@@ -385,6 +412,10 @@ message RaidSimResult {
 	ErrorOutcome error = 5;
 
 	int32 iterations_done = 7;
+
+	// The median-DPS iteration's cast log, when sim_options.sample_iteration
+	// asked for it. Forever addition; see PORTING.md.
+	SampleIteration sample_iteration = 8;
 }
 
 message RaidSimRequestSplitRequest {
