@@ -359,6 +359,20 @@ func CombineConcurrentSimResults(results []*proto.RaidSimResult, isDebug bool) *
 // combine: the one whose iteration is closest to the combined mean. Each
 // shard picked its own median, and the median of one eighth of the run is
 // not the median of the run.
+//
+// This is a KNOWN APPROXIMATION, not the genuine global median, and it is
+// accepted as such rather than fixed here. Each shard already replayed its
+// own local median and discarded its raw (dps, seed) list before this
+// function ever runs (see runSampleIteration, called per-shard inside
+// runSim), so the true global median is unrecoverable at this point -
+// recovering it would mean shards recording (dps, seed) without replaying,
+// this combiner picking the global median, and the replay happening once
+// afterwards against the owning shard's request. That is a change to the
+// concurrency architecture, not to this function, and no task in this plan
+// scopes it. RunRaidSimConcurrent/RunRaidSimConcurrentAsync (sim/core/api.go),
+// the non-WASM server-side entry points, go through this approximation; the
+// single-threaded path (RunSim, sim/core/sim.go) computes the exact median
+// and never calls this function at all.
 func pickSampleIteration(results []*proto.RaidSimResult, mean float64) *proto.SampleIteration {
 	var best *proto.SampleIteration
 	bestDistance := math.Inf(1)
