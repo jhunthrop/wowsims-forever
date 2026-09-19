@@ -7,16 +7,17 @@ import (
 func (warrior *Warrior) registerHamstringSpell() {
 	rank := rankAtLevel(HamstringLevel[:], warrior.Level)
 	damage := HamstringBaseDamage[rank][0]
-	// The engine keeps spell 7373, the id the preset rotations name; the
-	// generated HamstringSpellId[3] is 27584, the reissue the dedup kept
-	// over it. Same rank, same 45 damage.
+	// The engine keeps spell 7373, the id the preset rotations name and
+	// the one that carries the client's 100-tenths cost; the generated
+	// HamstringSpellId[3] is the free reissue 27584, which the dedup
+	// preferred on the higher id. Same rank, same 45 damage.
 	spellID := int32(7373)
 	spell_level := float64(HamstringLevel[rank])
 
 	// HamstringManaCost[3] is 0 and is NOT read here: two rank-3 rows
-	// share spell_level 54 - the 100-tenths 7373/27584 and a free
-	// reissue - and the dedup kept the free one, so the cost below is
-	// read by hand from the client's own 100. Listed for the data lane.
+	// share spell_level 54 - 7373 at cost 100 and 27584 at cost 0 - and
+	// the dedup kept the free 27584, so the cost below is read by hand
+	// from 7373's own 100 tenths. Listed for the data lane.
 	const hamstringRageCost = 10.0
 
 	warrior.Hamstring = warrior.RegisterSpell(BattleStance|BerserkerStance, core.SpellConfig{

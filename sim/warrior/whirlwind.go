@@ -6,17 +6,22 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// Whirlwind's generated rows are the third the data lane owes a fix
-// for. Two rows share the name, the rank (0) and spell_level 36 - the
-// 250-tenths 1680 and a free reissue - and the dedup kept the free one,
-// so WhirlwindManaCost[0] and WhirlwindCooldownMS[0] are both 0 where
-// the client's own row says 250 tenths and a 10 s category cooldown.
-// Both numbers below are therefore read by hand from
-// data/builds/1.60.1.69893/spellconst/warrior.json.
+// Whirlwind is the one ability in this package that reads NOTHING out
+// of constants_auto_gen.go, and the third row the data lane owes a fix
+// for. Column by column:
 //
-// WhirlwindBaseDamage IS sound and IS read - it is {0, 0}, which is the
-// client saying Whirlwind is pure weapon damage with no flat term, and
-// that is why no base damage appears in ApplyEffects.
+//   - WhirlwindManaCost[0] and WhirlwindCooldownMS[0] are both 0. Two
+//     rows share the name, the rank (0) and spell_level 36 - the
+//     250-tenths, 10 s 1680 and a free reissue, 462891 - and the dedup
+//     kept the free one. The two constants below are therefore read by
+//     hand from data/builds/1.60.1.69893/spellconst/warrior.json, which
+//     gives 1680 cost 250 tenths and category_cooldown_ms 10000.
+//   - WhirlwindSpellId[0] is 462891 for the same reason, where the UI
+//     and the pinned rotation both name 1680. Ids are not swapped here.
+//   - WhirlwindBaseDamage is {0, 0}, and that IS sound: the client says
+//     Whirlwind is pure weapon damage with no flat term. There is
+//     simply nothing to read, which is why ApplyEffects adds no base
+//     damage rather than adding a generated zero.
 const (
 	whirlwindRageCost = 25.0
 	whirlwindCooldown = time.Second * 10

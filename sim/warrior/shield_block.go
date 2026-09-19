@@ -8,8 +8,8 @@ import (
 )
 
 func (warrior *Warrior) RegisterShieldBlockCD() {
-	actionID := core.ActionID{SpellID: 2565}
-	cooldownDur := time.Second * 5
+	actionID := core.ActionID{SpellID: ShieldBlockSpellId[0]}
+	cooldownDur := time.Duration(ShieldBlockCooldownMS[0]) * time.Millisecond
 
 	warrior.ShieldBlockAura = warrior.RegisterAura(core.Aura{
 		Label:    "Shield Block",

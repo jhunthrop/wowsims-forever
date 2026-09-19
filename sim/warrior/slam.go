@@ -34,17 +34,21 @@ func (warrior *Warrior) registerSlamSpell() {
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-				// SlamCooldownMS[5] is 15000 and is NOT read here: the
-				// rank-5 row the dedup kept is Forever's reissue
-				// 1310200, which carries a 15 s cooldown the ability
-				// itself does not have. Listed for the data lane.
+				GCD:      core.GCDDefault,
 				CastTime: time.Millisecond*time.Duration(SlamCastTime[rank]) - time.Millisecond*100*time.Duration(warrior.Talents.ImprovedSlam),
 			},
 			ModifyCast: func(sim *core.Simulation, spell *core.Spell, cast *core.Cast) {
 				if spell.CastTime() > 0 {
 					warrior.AutoAttacks.StopMeleeUntil(sim, sim.CurrentTime+cast.CastTime, true)
 				}
+			},
+			// The client gives Slam a 15 s category cooldown, and it
+			// gives it to 11605 - the very id this file keeps - not
+			// only to the reissue the dedup preferred. The engine had
+			// no cooldown here at all; the generated value wins.
+			CD: core.Cooldown{
+				Timer:    warrior.NewTimer(),
+				Duration: time.Duration(SlamCooldownMS[rank]) * time.Millisecond,
 			},
 		},
 

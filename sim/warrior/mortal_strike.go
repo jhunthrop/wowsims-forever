@@ -16,13 +16,14 @@ import (
 //     damage plus 160" at rank 4), which the generated arrays do not
 //     carry at all.
 //   - MortalStrikeManaCost is 0 at rank 4. Two rank-4 rows share
-//     spell_level 60 - the 300-cost 27580 and a 0-cost reissue - and the
-//     dedup kept the free one.
+//     spell_level 60 - 21553 at cost 300 and 27580 at cost 0 - and the
+//     dedup broke the tie on the higher id, so it kept the free 27580.
 //
 // Both figures below are therefore read by hand from
-// data/builds/1.60.1.69893/spellconst/warrior.json: 160 is spell 27580's
-// effect 121 amount and 30 rage is its 300-tenths cost. The cooldown is
-// read from the generated array, which is sound.
+// data/builds/1.60.1.69893/spellconst/warrior.json: 160 is the effect
+// 121 amount both rank-4 rows carry, and 30 rage is the 300-tenths cost
+// of 21553, the row the engine keeps. The cooldown is read from the
+// generated array, which is sound.
 const (
 	mortalStrikeBonusDamage = 160.0
 	mortalStrikeRageCost    = 30.0
@@ -36,9 +37,9 @@ func (warrior *Warrior) registerMortalStrikeSpell(cdTimer *core.Timer) {
 	rank := rankAtLevel(MortalStrikeLevel[:], warrior.Level)
 	// The engine keeps spell 21553 rather than the generated
 	// MortalStrikeSpellId[4] of 27580: the two are the same rank-4
-	// Mortal Strike and the id the UI and the preset rotations name is
-	// this one. Swapping the ids is the data lane's call, not this
-	// file's.
+	// Mortal Strike, 21553 is the one that carries the client's 300
+	// cost, and it is the id the UI and the preset rotations name.
+	// Swapping the ids is the data lane's call, not this file's.
 	spellID := int32(21553)
 
 	warrior.MortalStrike = warrior.RegisterSpell(AnyStance, core.SpellConfig{
