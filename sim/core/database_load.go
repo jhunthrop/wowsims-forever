@@ -38,6 +38,9 @@ func init() {
 			SetName:             item.SetName,
 			SetId:               item.SetId,
 			WeaponSkills:        item.WeaponSkills,
+			Unique:              item.Unique,
+			FactionRestriction:  proto.SimItem_FactionRestriction(item.FactionRestriction),
+			RandomSuffixOptions: item.RandomSuffixOptions,
 		}
 	}
 

@@ -3075,6 +3075,59 @@ func (OtherAction) EnumDescriptor() ([]byte, []int) {
 	return file_common_proto_rawDescGZIP(), []int{43}
 }
 
+// Redeclared rather than imported from UIItem: ui.proto imports
+// common.proto, so common.proto cannot import ui.proto back. The
+// values and numbers are UIItem.FactionRestriction's, and
+// TestSimItemFactionRestrictionMatchesUIItem keeps them in step.
+type SimItem_FactionRestriction int32
+
+const (
+	SimItem_FACTION_RESTRICTION_UNSPECIFIED   SimItem_FactionRestriction = 0
+	SimItem_FACTION_RESTRICTION_ALLIANCE_ONLY SimItem_FactionRestriction = 1
+	SimItem_FACTION_RESTRICTION_HORDE_ONLY    SimItem_FactionRestriction = 2
+)
+
+// Enum value maps for SimItem_FactionRestriction.
+var (
+	SimItem_FactionRestriction_name = map[int32]string{
+		0: "FACTION_RESTRICTION_UNSPECIFIED",
+		1: "FACTION_RESTRICTION_ALLIANCE_ONLY",
+		2: "FACTION_RESTRICTION_HORDE_ONLY",
+	}
+	SimItem_FactionRestriction_value = map[string]int32{
+		"FACTION_RESTRICTION_UNSPECIFIED":   0,
+		"FACTION_RESTRICTION_ALLIANCE_ONLY": 1,
+		"FACTION_RESTRICTION_HORDE_ONLY":    2,
+	}
+)
+
+func (x SimItem_FactionRestriction) Enum() *SimItem_FactionRestriction {
+	p := new(SimItem_FactionRestriction)
+	*p = x
+	return p
+}
+
+func (x SimItem_FactionRestriction) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SimItem_FactionRestriction) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_proto_enumTypes[44].Descriptor()
+}
+
+func (SimItem_FactionRestriction) Type() protoreflect.EnumType {
+	return &file_common_proto_enumTypes[44]
+}
+
+func (x SimItem_FactionRestriction) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SimItem_FactionRestriction.Descriptor instead.
+func (SimItem_FactionRestriction) EnumDescriptor() ([]byte, []int) {
+	return file_common_proto_rawDescGZIP(), []int{19, 0}
+}
+
 type UnitReference_Type int32
 
 const (
@@ -3123,11 +3176,11 @@ func (x UnitReference_Type) String() string {
 }
 
 func (UnitReference_Type) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_proto_enumTypes[44].Descriptor()
+	return file_common_proto_enumTypes[45].Descriptor()
 }
 
 func (UnitReference_Type) Type() protoreflect.EnumType {
-	return &file_common_proto_enumTypes[44]
+	return &file_common_proto_enumTypes[45]
 }
 
 func (x UnitReference_Type) Number() protoreflect.EnumNumber {
@@ -5202,7 +5255,7 @@ func (x *SimDatabase) GetEnchants() []*SimEnchant {
 }
 
 // Contains only the Item info needed by the sim.
-// NextIndex: 20
+// NextIndex: 24
 type SimItem struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	Id                  int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -5221,6 +5274,12 @@ type SimItem struct {
 	SetName             string                 `protobuf:"bytes,14,opt,name=set_name,json=setName,proto3" json:"set_name,omitempty"`
 	SetId               int32                  `protobuf:"varint,18,opt,name=set_id,json=setId,proto3" json:"set_id,omitempty"`
 	WeaponSkills        []float64              `protobuf:"fixed64,15,rep,packed,name=weapon_skills,json=weaponSkills,proto3" json:"weapon_skills,omitempty"`
+	// The four fields sim/bulk's Expand needs to decide whether a
+	// candidate may occupy a slot. Forever additions; see PORTING.md.
+	Unique              bool                       `protobuf:"varint,20,opt,name=unique,proto3" json:"unique,omitempty"`
+	RequiredLevel       int32                      `protobuf:"varint,21,opt,name=required_level,json=requiredLevel,proto3" json:"required_level,omitempty"`
+	FactionRestriction  SimItem_FactionRestriction `protobuf:"varint,22,opt,name=faction_restriction,json=factionRestriction,proto3,enum=proto.SimItem_FactionRestriction" json:"faction_restriction,omitempty"`
+	RandomSuffixOptions []int32                    `protobuf:"varint,23,rep,packed,name=random_suffix_options,json=randomSuffixOptions,proto3" json:"random_suffix_options,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -5363,6 +5422,34 @@ func (x *SimItem) GetSetId() int32 {
 func (x *SimItem) GetWeaponSkills() []float64 {
 	if x != nil {
 		return x.WeaponSkills
+	}
+	return nil
+}
+
+func (x *SimItem) GetUnique() bool {
+	if x != nil {
+		return x.Unique
+	}
+	return false
+}
+
+func (x *SimItem) GetRequiredLevel() int32 {
+	if x != nil {
+		return x.RequiredLevel
+	}
+	return 0
+}
+
+func (x *SimItem) GetFactionRestriction() SimItem_FactionRestriction {
+	if x != nil {
+		return x.FactionRestriction
+	}
+	return SimItem_FACTION_RESTRICTION_UNSPECIFIED
+}
+
+func (x *SimItem) GetRandomSuffixOptions() []int32 {
+	if x != nil {
+		return x.RandomSuffixOptions
 	}
 	return nil
 }
@@ -6211,7 +6298,7 @@ const file_common_proto_rawDesc = "" +
 	"\vSimDatabase\x12$\n" +
 	"\x05items\x18\x01 \x03(\v2\x0e.proto.SimItemR\x05items\x12@\n" +
 	"\x0frandom_suffixes\x18\x05 \x03(\v2\x17.proto.ItemRandomSuffixR\x0erandomSuffixes\x12-\n" +
-	"\benchants\x18\x02 \x03(\v2\x11.proto.SimEnchantR\benchants\"\xff\x04\n" +
+	"\benchants\x18\x02 \x03(\v2\x11.proto.SimEnchantR\benchants\"\xcd\a\n" +
 	"\aSimItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x125\n" +
 	"\x0fclass_allowlist\x18\x11 \x03(\x0e2\f.proto.ClassR\x0eclassAllowlist\x12\x12\n" +
@@ -6230,7 +6317,15 @@ const file_common_proto_rawDesc = "" +
 	"\x15bonus_physical_damage\x18\x13 \x01(\x01R\x13bonusPhysicalDamage\x12\x19\n" +
 	"\bset_name\x18\x0e \x01(\tR\asetName\x12\x15\n" +
 	"\x06set_id\x18\x12 \x01(\x05R\x05setId\x12#\n" +
-	"\rweapon_skills\x18\x0f \x03(\x01R\fweaponSkills\"?\n" +
+	"\rweapon_skills\x18\x0f \x03(\x01R\fweaponSkills\x12\x16\n" +
+	"\x06unique\x18\x14 \x01(\bR\x06unique\x12%\n" +
+	"\x0erequired_level\x18\x15 \x01(\x05R\rrequiredLevel\x12R\n" +
+	"\x13faction_restriction\x18\x16 \x01(\x0e2!.proto.SimItem.FactionRestrictionR\x12factionRestriction\x122\n" +
+	"\x15random_suffix_options\x18\x17 \x03(\x05R\x13randomSuffixOptions\"\x84\x01\n" +
+	"\x12FactionRestriction\x12#\n" +
+	"\x1fFACTION_RESTRICTION_UNSPECIFIED\x10\x00\x12%\n" +
+	"!FACTION_RESTRICTION_ALLIANCE_ONLY\x10\x01\x12\"\n" +
+	"\x1eFACTION_RESTRICTION_HORDE_ONLY\x10\x02\"?\n" +
 	"\n" +
 	"SimEnchant\x12\x1b\n" +
 	"\teffect_id\x18\x01 \x01(\x05R\beffectId\x12\x14\n" +
@@ -6785,84 +6880,85 @@ func file_common_proto_rawDescGZIP() []byte {
 	return file_common_proto_rawDescData
 }
 
-var file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 45)
+var file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 46)
 var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_common_proto_goTypes = []any{
-	(Spec)(0),                // 0: proto.Spec
-	(Race)(0),                // 1: proto.Race
-	(Faction)(0),             // 2: proto.Faction
-	(Class)(0),               // 3: proto.Class
-	(Profession)(0),          // 4: proto.Profession
-	(Stat)(0),                // 5: proto.Stat
-	(PseudoStat)(0),          // 6: proto.PseudoStat
-	(ItemType)(0),            // 7: proto.ItemType
-	(ArmorType)(0),           // 8: proto.ArmorType
-	(WeaponType)(0),          // 9: proto.WeaponType
-	(WeaponSkill)(0),         // 10: proto.WeaponSkill
-	(HandType)(0),            // 11: proto.HandType
-	(RangedWeaponType)(0),    // 12: proto.RangedWeaponType
-	(CastType)(0),            // 13: proto.CastType
-	(ItemSlot)(0),            // 14: proto.ItemSlot
-	(ItemQuality)(0),         // 15: proto.ItemQuality
-	(SpellSchool)(0),         // 16: proto.SpellSchool
-	(TristateEffect)(0),      // 17: proto.TristateEffect
-	(SapperExplosive)(0),     // 18: proto.SapperExplosive
-	(Explosive)(0),           // 19: proto.Explosive
-	(Potions)(0),             // 20: proto.Potions
-	(Conjured)(0),            // 21: proto.Conjured
-	(Flask)(0),               // 22: proto.Flask
-	(Alcohol)(0),             // 23: proto.Alcohol
-	(AgilityElixir)(0),       // 24: proto.AgilityElixir
-	(ArmorElixir)(0),         // 25: proto.ArmorElixir
-	(HealthElixir)(0),        // 26: proto.HealthElixir
-	(ManaRegenElixir)(0),     // 27: proto.ManaRegenElixir
-	(StrengthBuff)(0),        // 28: proto.StrengthBuff
-	(AttackPowerBuff)(0),     // 29: proto.AttackPowerBuff
-	(SpellPowerBuff)(0),      // 30: proto.SpellPowerBuff
-	(ShadowPowerBuff)(0),     // 31: proto.ShadowPowerBuff
-	(FirePowerBuff)(0),       // 32: proto.FirePowerBuff
-	(FrostPowerBuff)(0),      // 33: proto.FrostPowerBuff
-	(ZanzaBuff)(0),           // 34: proto.ZanzaBuff
-	(HitConsumable)(0),       // 35: proto.HitConsumable
-	(WeaponImbue)(0),         // 36: proto.WeaponImbue
-	(Food)(0),                // 37: proto.Food
-	(SaygesFortune)(0),       // 38: proto.SaygesFortune
-	(MobType)(0),             // 39: proto.MobType
-	(Biome)(0),               // 40: proto.Biome
-	(InputType)(0),           // 41: proto.InputType
-	(EnchantType)(0),         // 42: proto.EnchantType
-	(OtherAction)(0),         // 43: proto.OtherAction
-	(UnitReference_Type)(0),  // 44: proto.UnitReference.Type
-	(*UnitStats)(nil),        // 45: proto.UnitStats
-	(*MiscConsumes)(nil),     // 46: proto.MiscConsumes
-	(*PetMiscConsumes)(nil),  // 47: proto.PetMiscConsumes
-	(*RaidBuffs)(nil),        // 48: proto.RaidBuffs
-	(*PartyBuffs)(nil),       // 49: proto.PartyBuffs
-	(*IndividualBuffs)(nil),  // 50: proto.IndividualBuffs
-	(*Consumes)(nil),         // 51: proto.Consumes
-	(*Debuffs)(nil),          // 52: proto.Debuffs
-	(*TargetInput)(nil),      // 53: proto.TargetInput
-	(*Target)(nil),           // 54: proto.Target
-	(*MovementPattern)(nil),  // 55: proto.MovementPattern
-	(*TargetCountAt)(nil),    // 56: proto.TargetCountAt
-	(*Encounter)(nil),        // 57: proto.Encounter
-	(*PresetTarget)(nil),     // 58: proto.PresetTarget
-	(*PresetEncounter)(nil),  // 59: proto.PresetEncounter
-	(*ItemRandomSuffix)(nil), // 60: proto.ItemRandomSuffix
-	(*ItemSpec)(nil),         // 61: proto.ItemSpec
-	(*EquipmentSpec)(nil),    // 62: proto.EquipmentSpec
-	(*SimDatabase)(nil),      // 63: proto.SimDatabase
-	(*SimItem)(nil),          // 64: proto.SimItem
-	(*SimEnchant)(nil),       // 65: proto.SimEnchant
-	(*UnitReference)(nil),    // 66: proto.UnitReference
-	(*ActionID)(nil),         // 67: proto.ActionID
-	(*Cooldown)(nil),         // 68: proto.Cooldown
-	(*Cooldowns)(nil),        // 69: proto.Cooldowns
-	(*HealingModel)(nil),     // 70: proto.HealingModel
-	(*CustomRotation)(nil),   // 71: proto.CustomRotation
-	(*CustomSpell)(nil),      // 72: proto.CustomSpell
-	(*ItemSwap)(nil),         // 73: proto.ItemSwap
-	(*Duration)(nil),         // 74: proto.Duration
+	(Spec)(0),                       // 0: proto.Spec
+	(Race)(0),                       // 1: proto.Race
+	(Faction)(0),                    // 2: proto.Faction
+	(Class)(0),                      // 3: proto.Class
+	(Profession)(0),                 // 4: proto.Profession
+	(Stat)(0),                       // 5: proto.Stat
+	(PseudoStat)(0),                 // 6: proto.PseudoStat
+	(ItemType)(0),                   // 7: proto.ItemType
+	(ArmorType)(0),                  // 8: proto.ArmorType
+	(WeaponType)(0),                 // 9: proto.WeaponType
+	(WeaponSkill)(0),                // 10: proto.WeaponSkill
+	(HandType)(0),                   // 11: proto.HandType
+	(RangedWeaponType)(0),           // 12: proto.RangedWeaponType
+	(CastType)(0),                   // 13: proto.CastType
+	(ItemSlot)(0),                   // 14: proto.ItemSlot
+	(ItemQuality)(0),                // 15: proto.ItemQuality
+	(SpellSchool)(0),                // 16: proto.SpellSchool
+	(TristateEffect)(0),             // 17: proto.TristateEffect
+	(SapperExplosive)(0),            // 18: proto.SapperExplosive
+	(Explosive)(0),                  // 19: proto.Explosive
+	(Potions)(0),                    // 20: proto.Potions
+	(Conjured)(0),                   // 21: proto.Conjured
+	(Flask)(0),                      // 22: proto.Flask
+	(Alcohol)(0),                    // 23: proto.Alcohol
+	(AgilityElixir)(0),              // 24: proto.AgilityElixir
+	(ArmorElixir)(0),                // 25: proto.ArmorElixir
+	(HealthElixir)(0),               // 26: proto.HealthElixir
+	(ManaRegenElixir)(0),            // 27: proto.ManaRegenElixir
+	(StrengthBuff)(0),               // 28: proto.StrengthBuff
+	(AttackPowerBuff)(0),            // 29: proto.AttackPowerBuff
+	(SpellPowerBuff)(0),             // 30: proto.SpellPowerBuff
+	(ShadowPowerBuff)(0),            // 31: proto.ShadowPowerBuff
+	(FirePowerBuff)(0),              // 32: proto.FirePowerBuff
+	(FrostPowerBuff)(0),             // 33: proto.FrostPowerBuff
+	(ZanzaBuff)(0),                  // 34: proto.ZanzaBuff
+	(HitConsumable)(0),              // 35: proto.HitConsumable
+	(WeaponImbue)(0),                // 36: proto.WeaponImbue
+	(Food)(0),                       // 37: proto.Food
+	(SaygesFortune)(0),              // 38: proto.SaygesFortune
+	(MobType)(0),                    // 39: proto.MobType
+	(Biome)(0),                      // 40: proto.Biome
+	(InputType)(0),                  // 41: proto.InputType
+	(EnchantType)(0),                // 42: proto.EnchantType
+	(OtherAction)(0),                // 43: proto.OtherAction
+	(SimItem_FactionRestriction)(0), // 44: proto.SimItem.FactionRestriction
+	(UnitReference_Type)(0),         // 45: proto.UnitReference.Type
+	(*UnitStats)(nil),               // 46: proto.UnitStats
+	(*MiscConsumes)(nil),            // 47: proto.MiscConsumes
+	(*PetMiscConsumes)(nil),         // 48: proto.PetMiscConsumes
+	(*RaidBuffs)(nil),               // 49: proto.RaidBuffs
+	(*PartyBuffs)(nil),              // 50: proto.PartyBuffs
+	(*IndividualBuffs)(nil),         // 51: proto.IndividualBuffs
+	(*Consumes)(nil),                // 52: proto.Consumes
+	(*Debuffs)(nil),                 // 53: proto.Debuffs
+	(*TargetInput)(nil),             // 54: proto.TargetInput
+	(*Target)(nil),                  // 55: proto.Target
+	(*MovementPattern)(nil),         // 56: proto.MovementPattern
+	(*TargetCountAt)(nil),           // 57: proto.TargetCountAt
+	(*Encounter)(nil),               // 58: proto.Encounter
+	(*PresetTarget)(nil),            // 59: proto.PresetTarget
+	(*PresetEncounter)(nil),         // 60: proto.PresetEncounter
+	(*ItemRandomSuffix)(nil),        // 61: proto.ItemRandomSuffix
+	(*ItemSpec)(nil),                // 62: proto.ItemSpec
+	(*EquipmentSpec)(nil),           // 63: proto.EquipmentSpec
+	(*SimDatabase)(nil),             // 64: proto.SimDatabase
+	(*SimItem)(nil),                 // 65: proto.SimItem
+	(*SimEnchant)(nil),              // 66: proto.SimEnchant
+	(*UnitReference)(nil),           // 67: proto.UnitReference
+	(*ActionID)(nil),                // 68: proto.ActionID
+	(*Cooldown)(nil),                // 69: proto.Cooldown
+	(*Cooldowns)(nil),               // 70: proto.Cooldowns
+	(*HealingModel)(nil),            // 71: proto.HealingModel
+	(*CustomRotation)(nil),          // 72: proto.CustomRotation
+	(*CustomSpell)(nil),             // 73: proto.CustomSpell
+	(*ItemSwap)(nil),                // 74: proto.ItemSwap
+	(*Duration)(nil),                // 75: proto.Duration
 }
 var file_common_proto_depIdxs = []int32{
 	17, // 0: proto.RaidBuffs.gift_of_the_wild:type_name -> proto.TristateEffect
@@ -6895,12 +6991,12 @@ var file_common_proto_depIdxs = []int32{
 	36, // 27: proto.Consumes.off_hand_imbue:type_name -> proto.WeaponImbue
 	20, // 28: proto.Consumes.default_potion:type_name -> proto.Potions
 	21, // 29: proto.Consumes.default_conjured:type_name -> proto.Conjured
-	46, // 30: proto.Consumes.misc_consumes:type_name -> proto.MiscConsumes
+	47, // 30: proto.Consumes.misc_consumes:type_name -> proto.MiscConsumes
 	34, // 31: proto.Consumes.zanza_buff:type_name -> proto.ZanzaBuff
 	25, // 32: proto.Consumes.armor_elixir:type_name -> proto.ArmorElixir
 	26, // 33: proto.Consumes.health_elixir:type_name -> proto.HealthElixir
 	23, // 34: proto.Consumes.alcohol:type_name -> proto.Alcohol
-	47, // 35: proto.Consumes.pet_misc_consumes:type_name -> proto.PetMiscConsumes
+	48, // 35: proto.Consumes.pet_misc_consumes:type_name -> proto.PetMiscConsumes
 	18, // 36: proto.Consumes.sapper_explosive:type_name -> proto.SapperExplosive
 	35, // 37: proto.Consumes.hit_consumable:type_name -> proto.HitConsumable
 	17, // 38: proto.Debuffs.judgement_of_the_crusader:type_name -> proto.TristateEffect
@@ -6913,37 +7009,38 @@ var file_common_proto_depIdxs = []int32{
 	41, // 45: proto.TargetInput.input_type:type_name -> proto.InputType
 	39, // 46: proto.Target.mob_type:type_name -> proto.MobType
 	16, // 47: proto.Target.spell_school:type_name -> proto.SpellSchool
-	53, // 48: proto.Target.target_inputs:type_name -> proto.TargetInput
-	54, // 49: proto.Encounter.targets:type_name -> proto.Target
+	54, // 48: proto.Target.target_inputs:type_name -> proto.TargetInput
+	55, // 49: proto.Encounter.targets:type_name -> proto.Target
 	40, // 50: proto.Encounter.biome:type_name -> proto.Biome
-	55, // 51: proto.Encounter.movement:type_name -> proto.MovementPattern
-	56, // 52: proto.Encounter.targets_over_time:type_name -> proto.TargetCountAt
-	54, // 53: proto.PresetTarget.target:type_name -> proto.Target
-	58, // 54: proto.PresetEncounter.targets:type_name -> proto.PresetTarget
-	61, // 55: proto.EquipmentSpec.items:type_name -> proto.ItemSpec
-	64, // 56: proto.SimDatabase.items:type_name -> proto.SimItem
-	60, // 57: proto.SimDatabase.random_suffixes:type_name -> proto.ItemRandomSuffix
-	65, // 58: proto.SimDatabase.enchants:type_name -> proto.SimEnchant
+	56, // 51: proto.Encounter.movement:type_name -> proto.MovementPattern
+	57, // 52: proto.Encounter.targets_over_time:type_name -> proto.TargetCountAt
+	55, // 53: proto.PresetTarget.target:type_name -> proto.Target
+	59, // 54: proto.PresetEncounter.targets:type_name -> proto.PresetTarget
+	62, // 55: proto.EquipmentSpec.items:type_name -> proto.ItemSpec
+	65, // 56: proto.SimDatabase.items:type_name -> proto.SimItem
+	61, // 57: proto.SimDatabase.random_suffixes:type_name -> proto.ItemRandomSuffix
+	66, // 58: proto.SimDatabase.enchants:type_name -> proto.SimEnchant
 	3,  // 59: proto.SimItem.class_allowlist:type_name -> proto.Class
 	7,  // 60: proto.SimItem.type:type_name -> proto.ItemType
 	8,  // 61: proto.SimItem.armor_type:type_name -> proto.ArmorType
 	9,  // 62: proto.SimItem.weapon_type:type_name -> proto.WeaponType
 	11, // 63: proto.SimItem.hand_type:type_name -> proto.HandType
 	12, // 64: proto.SimItem.ranged_weapon_type:type_name -> proto.RangedWeaponType
-	44, // 65: proto.UnitReference.type:type_name -> proto.UnitReference.Type
-	66, // 66: proto.UnitReference.owner:type_name -> proto.UnitReference
-	43, // 67: proto.ActionID.other_id:type_name -> proto.OtherAction
-	67, // 68: proto.Cooldown.id:type_name -> proto.ActionID
-	68, // 69: proto.Cooldowns.cooldowns:type_name -> proto.Cooldown
-	72, // 70: proto.CustomRotation.spells:type_name -> proto.CustomSpell
-	61, // 71: proto.ItemSwap.mh_item:type_name -> proto.ItemSpec
-	61, // 72: proto.ItemSwap.oh_item:type_name -> proto.ItemSpec
-	61, // 73: proto.ItemSwap.ranged_item:type_name -> proto.ItemSpec
-	74, // [74:74] is the sub-list for method output_type
-	74, // [74:74] is the sub-list for method input_type
-	74, // [74:74] is the sub-list for extension type_name
-	74, // [74:74] is the sub-list for extension extendee
-	0,  // [0:74] is the sub-list for field type_name
+	44, // 65: proto.SimItem.faction_restriction:type_name -> proto.SimItem.FactionRestriction
+	45, // 66: proto.UnitReference.type:type_name -> proto.UnitReference.Type
+	67, // 67: proto.UnitReference.owner:type_name -> proto.UnitReference
+	43, // 68: proto.ActionID.other_id:type_name -> proto.OtherAction
+	68, // 69: proto.Cooldown.id:type_name -> proto.ActionID
+	69, // 70: proto.Cooldowns.cooldowns:type_name -> proto.Cooldown
+	73, // 71: proto.CustomRotation.spells:type_name -> proto.CustomSpell
+	62, // 72: proto.ItemSwap.mh_item:type_name -> proto.ItemSpec
+	62, // 73: proto.ItemSwap.oh_item:type_name -> proto.ItemSpec
+	62, // 74: proto.ItemSwap.ranged_item:type_name -> proto.ItemSpec
+	75, // [75:75] is the sub-list for method output_type
+	75, // [75:75] is the sub-list for method input_type
+	75, // [75:75] is the sub-list for extension type_name
+	75, // [75:75] is the sub-list for extension extendee
+	0,  // [0:75] is the sub-list for field type_name
 }
 
 func init() { file_common_proto_init() }
@@ -6961,7 +7058,7 @@ func file_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_proto_rawDesc), len(file_common_proto_rawDesc)),
-			NumEnums:      45,
+			NumEnums:      46,
 			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   0,

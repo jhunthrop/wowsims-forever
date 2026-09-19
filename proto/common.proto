@@ -915,7 +915,7 @@ message SimDatabase {
 }
 
 // Contains only the Item info needed by the sim.
-// NextIndex: 20
+// NextIndex: 24
 message SimItem {
 	int32 id = 1;
 	repeated Class class_allowlist = 17;
@@ -937,6 +937,24 @@ message SimItem {
 	string set_name = 14;
 	int32 set_id = 18;
 	repeated double weapon_skills = 15;
+
+	// The four fields sim/bulk's Expand needs to decide whether a
+	// candidate may occupy a slot. Forever additions; see PORTING.md.
+	bool unique = 20;
+	int32 required_level = 21;
+
+	// Redeclared rather than imported from UIItem: ui.proto imports
+	// common.proto, so common.proto cannot import ui.proto back. The
+	// values and numbers are UIItem.FactionRestriction's, and
+	// TestSimItemFactionRestrictionMatchesUIItem keeps them in step.
+	enum FactionRestriction {
+		FACTION_RESTRICTION_UNSPECIFIED = 0;
+		FACTION_RESTRICTION_ALLIANCE_ONLY = 1;
+		FACTION_RESTRICTION_HORDE_ONLY = 2;
+	}
+	FactionRestriction faction_restriction = 22;
+
+	repeated int32 random_suffix_options = 23;
 }
 
 // Extra enum for describing which items are eligible for an enchant, when

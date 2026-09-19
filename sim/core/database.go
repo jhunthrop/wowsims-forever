@@ -65,6 +65,12 @@ type Item struct {
 	SetID               int32  // 0 if not part of a set.
 	WeaponSkills        stats.WeaponSkills
 
+	// The fields sim/bulk's Expand reads to decide whether a candidate
+	// item may occupy a slot.
+	Unique              bool
+	FactionRestriction  proto.SimItem_FactionRestriction
+	RandomSuffixOptions []int32
+
 	// Modified for each instance of the item.
 	RandomSuffix RandomSuffix
 	Enchant      Enchant
@@ -91,6 +97,9 @@ func ItemFromProto(pData *proto.SimItem) Item {
 		SetName:             pData.SetName,
 		SetID:               pData.SetId,
 		WeaponSkills:        stats.WeaponSkillsFloatArray(pData.WeaponSkills),
+		Unique:              pData.Unique,
+		FactionRestriction:  pData.FactionRestriction,
+		RandomSuffixOptions: pData.RandomSuffixOptions,
 	}
 }
 
