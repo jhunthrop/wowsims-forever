@@ -1,6 +1,8 @@
 package sim
 
 import (
+	"sync"
+
 	_ "github.com/wowsims/classic/sim/common"
 	"github.com/wowsims/classic/sim/druid/balance"
 	"github.com/wowsims/classic/sim/paladin/retribution"
@@ -28,14 +30,21 @@ import (
 	tankWarrior "github.com/wowsims/classic/sim/warrior/tank_warrior"
 )
 
-var registered = false
+// registerOnce guards the agent-factory registrations, which are writes
+// to package-level maps in core. The site's Cloud Run job calls
+// RegisterAll from inside its per-run Execute rather than once in
+// main(), so two concurrent runs reach this at the same time; the plain
+// bool this replaced made that a data race and a possible double
+// registration.
+var registerOnce sync.Once
 
+// RegisterAll registers every playable spec's agent factory. It is safe
+// to call from more than one goroutine and does its work exactly once.
 func RegisterAll() {
-	if registered {
-		return
-	}
-	registered = true
+	registerOnce.Do(registerAll)
+}
 
+func registerAll() {
 	balance.RegisterBalanceDruid()
 	feral.RegisterFeralDruid()
 	// feralTank.RegisterFeralTankDruid()
