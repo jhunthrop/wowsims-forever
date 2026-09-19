@@ -21,9 +21,19 @@ func TestP1DPSWarrior(t *testing.T) {
 			Race:       proto.Race_RaceOrc,
 			OtherRaces: []proto.Race{proto.Race_RaceHuman},
 
-			Talents:     P1Talents,
-			GearSet:     core.GetGearSet("../../../ui/warrior/gear_sets", "phase_1"),
-			Rotation:    core.GetAplRotation("../../../ui/warrior/apls", "forever_fury"),
+			Talents:  P1Talents,
+			GearSet:  core.GetGearSet("../../../ui/warrior/gear_sets", "phase_1"),
+			Rotation: core.GetAplRotation("../../../ui/warrior/apls", "forever_fury"),
+			// dps_reck is the suite's in-file control. It is the old
+			// vanilla-shaped preset and it is stale on ranks, which is
+			// exactly why it is useful: it is not the rotation this
+			// spec is tuning, so the next time the Forever row moves,
+			// the two rows together separate "the rotation changed"
+			// from "the engine changed". Its own number is not a
+			// recommendation and nothing should be tuned against it.
+			OtherRotations: []core.RotationCombo{
+				core.GetAplRotation("../../../ui/warrior/apls", "dps_reck"),
+			},
 			Buffs:       core.FullBuffs,
 			Consumes:    P1Consumes,
 			SpecOptions: core.SpecOptionsCombo{Label: "DPS", SpecOptions: PlayerOptionsFury},
