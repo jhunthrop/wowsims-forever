@@ -28,11 +28,16 @@ type DotConfig struct {
 	DamageMultiplier float64 // periodic damage multiplier
 	BonusCoefficient float64 // EffectBonusCoefficient in SpellEffect client DB table, "SP mod" on Wowhead (not necessarily shown there even if > 0)
 
-	// CanCrit opts this dot into periodic critical strikes. Forever
-	// enables them per spell rather than per school; which spells is a
-	// beta measurement (sim/cmd/forever-measure in the site repository
-	// reports, per spell, whether any tick carried the critical flag),
-	// so the default is off and every existing spec is unchanged.
+	// CanCrit opts this dot into periodic critical strikes under
+	// Dot.OutcomeMagicCritPerTick, which reads it and ticks flat when it
+	// is false. Forever enables them per spell rather than per school;
+	// which spells is a beta measurement (sim/cmd/forever-measure in the
+	// site repository reports, per spell, whether any tick carried the
+	// critical flag), so the default is off and every existing spec is
+	// unchanged. It does not gate the upstream snapshot-crit outcomes,
+	// which pre-date Forever and whose specs are already tuned around
+	// them; for those, the outcome function a dot's OnTick passes is
+	// still the switch.
 	CanCrit bool
 
 	// CritMultiplier is the multiplier a critical tick uses. Zero means
@@ -75,8 +80,9 @@ type Dot struct {
 	DamageMultiplier float64 // periodic damage multiplier
 	BonusCoefficient float64 // EffectBonusCoefficient in SpellEffect client DB table, "SP mod" on Wowhead (not necessarily shown there even if > 0)
 
-	// CanCrit opts this dot into periodic critical strikes. See
-	// DotConfig.CanCrit; copied through from there when the Dot is built.
+	// CanCrit opts this dot into periodic critical strikes under
+	// OutcomeMagicCritPerTick. See DotConfig.CanCrit; copied through from
+	// there when the Dot is built.
 	CanCrit bool
 
 	// CritMultiplier is this dot's own critical multiplier. Zero means

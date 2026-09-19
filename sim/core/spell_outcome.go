@@ -112,6 +112,16 @@ func (dot *Dot) OutcomeMagicHitAndSnapshotCrit(sim *Simulation, result *SpellRes
 // is decided once at the dot's application - by the spell's own
 // ApplyEffects outcome - so this only resolves crit vs. a plain tick.
 func (dot *Dot) OutcomeMagicCritPerTick(sim *Simulation, result *SpellResult, attackTable *AttackTable) {
+	// CanCrit is the opt-in, and this is where it is read. Forever
+	// enables periodic crits per spell rather than per school, so a dot
+	// that has not been measured as critting must tick flat however
+	// much crit the caster has - the same rule
+	// TestDotsDoNotCritByDefault holds for the plain OutcomeTick.
+	if !dot.CanCrit {
+		dot.OutcomeTick(sim, result, attackTable)
+		return
+	}
+
 	isPartialResist := result.DidResist()
 
 	if sim.RandomFloat("Magic Dot Crit") < dot.Spell.SpellCritChance(result.Target) {
@@ -119,12 +129,13 @@ func (dot *Dot) OutcomeMagicCritPerTick(sim *Simulation, result *SpellResult, at
 		// Only asks the spell for its multiplier when the dot didn't
 		// choose one: spell.CritMultiplier() requires a DefenseType and
 		// panics without one, and a dot that set its own multiplier has
-		// no reason to need it.
-		spellCritMultiplier := 0.0
+		// no reason to need it. Zero here means "not asked", which is
+		// also what dotCritMultiplier reads it as.
+		parentCritMultiplier := 0.0
 		if dot.CritMultiplier == 0 {
-			spellCritMultiplier = dot.Spell.CritMultiplier(attackTable)
+			parentCritMultiplier = dot.Spell.CritMultiplier(attackTable)
 		}
-		result.Damage *= dotCritMultiplier(dot.CritMultiplier, spellCritMultiplier)
+		result.Damage *= dotCritMultiplier(dot.CritMultiplier, parentCritMultiplier)
 		dot.Spell.SpellMetrics[result.Target.UnitIndex].CritTicks++
 		if isPartialResist {
 			dot.Spell.SpellMetrics[result.Target.UnitIndex].ResistedCritTicks++

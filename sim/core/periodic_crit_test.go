@@ -228,6 +228,10 @@ func newPeriodicCritFixture(t *testing.T, crit float64) (*Simulation, *Unit, *Un
 	pendingFixtureFinalize[sim] = func() {
 		env.finalize(raidProto, encounterProto, raidStats, false)
 	}
+	// A test that fails before its first advanceOneTick would otherwise
+	// leave its entry in the package-level map for the life of the
+	// binary, holding the whole environment alive.
+	t.Cleanup(func() { delete(pendingFixtureFinalize, sim) })
 
 	return sim, caster, target
 }
@@ -248,4 +252,49 @@ func advanceOneTick(sim *Simulation, dot *Dot) {
 	sim.CurrentTime = dot.NextTickAt()
 	dot.TickCount++
 	dot.TickOnce(sim)
+}
+
+// CanCrit's doc comment calls it the opt-in, and until this test existed
+// nothing read it: OutcomeMagicCritPerTick rolled crit unconditionally,
+// so whether a dot critted depended solely on which outcome function its
+// OnTick happened to pass. A dot with CanCrit false that uses the
+// per-tick outcome — the shape the next spec author writes when
+// forever-measure reports a spell's ticks never crit — must tick flat.
+func TestOutcomeMagicCritPerTickHonoursCanCrit(t *testing.T) {
+	sim, caster, target := newPeriodicCritFixture(t, 100 /* percent crit */)
+	spell := caster.RegisterSpell(SpellConfig{
+		ActionID:         ActionID{SpellID: 25311},
+		SpellSchool:      SpellSchoolShadow,
+		DefenseType:      DefenseTypeMagic,
+		ProcMask:         ProcMaskSpellDamage,
+		DamageMultiplier: 1,
+		ThreatMultiplier: 1,
+		Dot: DotConfig{
+			Aura:          Aura{Label: "Opted-out Per-tick Dot"},
+			NumberOfTicks: 5,
+			TickLength:    time.Second * 3,
+			// CanCrit deliberately left false while the outcome
+			// function is the per-tick crit one.
+			CritMultiplier: 2,
+			OnTick: func(sim *Simulation, target *Unit, dot *Dot) {
+				dot.Spell.CalcAndDealPeriodicDamage(sim, target, 100, dot.OutcomeMagicCritPerTick)
+			},
+		},
+	})
+
+	spell.Dot(target).Apply(sim)
+	for i := 0; i < 5; i++ {
+		advanceOneTick(sim, spell.Dot(target))
+	}
+
+	m := spell.SpellMetrics[target.UnitIndex]
+	if m.CritTicks != 0 {
+		t.Errorf("a dot with CanCrit false produced %d critical ticks at 100%% crit through OutcomeMagicCritPerTick", m.CritTicks)
+	}
+	if m.Ticks != 5 {
+		t.Errorf("plain Ticks = %d, want 5", m.Ticks)
+	}
+	if m.TotalTickDamage != 500 {
+		t.Errorf("TotalTickDamage = %v, want 500 (five flat ticks of 100)", m.TotalTickDamage)
+	}
 }
