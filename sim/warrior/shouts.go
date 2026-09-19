@@ -8,6 +8,20 @@ import (
 
 const ShoutExpirationThreshold = time.Second * 3
 
+// battleShoutRageCost reads the client's cost column for a rank of
+// Battle Shout. Rank 6 is the one rank whose column is a dedup
+// artifact: 11551 (cost 100) and 27578 (cost 0) share spell_level 52
+// and the generator kept the free one, so BattleShoutManaCost[6] is 0
+// where every other rank says 100 tenths. That rank falls back to the
+// 100 the client gives 11551; listed for the data lane.
+func battleShoutRageCost(rank int32) float64 {
+	tenths := BattleShoutManaCost[rank]
+	if tenths == 0 {
+		tenths = 100
+	}
+	return rageCost(tenths)
+}
+
 func (warrior *Warrior) newShoutSpellConfig(actionID core.ActionID, rank int32, allyAuras core.AuraArray) *WarriorSpell {
 	// Use extra hits to simulate buffing your party for threat
 	extraHits := 5 - len(allyAuras)
@@ -17,7 +31,7 @@ func (warrior *Warrior) newShoutSpellConfig(actionID core.ActionID, rank int32, 
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL | core.SpellFlagHelpful,
 
 		RageCost: core.RageCostOptions{
-			Cost: 10,
+			Cost: battleShoutRageCost(rank),
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

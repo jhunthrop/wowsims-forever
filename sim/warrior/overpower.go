@@ -7,8 +7,9 @@ import (
 )
 
 func (warrior *Warrior) registerOverpowerSpell(cdTimer *core.Timer) {
-	bonusDamage := 35.0
-	spellID := int32(11585)
+	rank := rankAtLevel(OverpowerLevel[:], warrior.Level)
+	bonusDamage := OverpowerBaseDamage[rank][0]
+	spellID := OverpowerSpellId[rank]
 
 	warrior.RegisterAura(core.Aura{
 		Label:    "Overpower Trigger",
@@ -30,15 +31,19 @@ func (warrior *Warrior) registerOverpowerSpell(cdTimer *core.Timer) {
 	})
 
 	warrior.Overpower = warrior.RegisterSpell(BattleStance, core.SpellConfig{
-		SpellCode:   SpellCode_WarriorOverpower,
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
+		SpellCode:      SpellCode_WarriorOverpower,
+		ClassSpellMask: WarriorSpellMaskOverpower,
+		ActionID:       core.ActionID{SpellID: spellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
+
+		RequiredLevel: OverpowerLevel[rank],
+		Rank:          rank,
 
 		RageCost: core.RageCostOptions{
-			Cost:   5,
+			Cost:   rageCost(OverpowerManaCost[rank]),
 			Refund: 0.8,
 		},
 		Cast: core.CastConfig{
@@ -48,7 +53,7 @@ func (warrior *Warrior) registerOverpowerSpell(cdTimer *core.Timer) {
 			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    cdTimer,
-				Duration: time.Second * 5,
+				Duration: time.Duration(OverpowerCooldownMS[rank]) * time.Millisecond,
 			},
 		},
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {

@@ -7,8 +7,12 @@ import (
 )
 
 func (warrior *Warrior) registerThunderClapSpell() {
+	rank := rankAtLevel(ThunderClapLevel[:], warrior.Level)
+	// The engine keeps spell 11581, the id the UI names; the generated
+	// ThunderClapSpellId[6] is Forever's reissue 461810, which the
+	// dedup kept over it. Same rank, same 103 damage.
 	spellID := int32(11581)
-	baseDamage := 103.0
+	baseDamage := ThunderClapBaseDamage[rank][0]
 	has5pcConq := warrior.HasSetBonus(ItemSetConquerorsBattleGear, 5)
 	attackSpeedReduction := core.TernaryInt32(has5pcConq, 15, 10)
 	stanceMask := BattleStance
@@ -20,14 +24,19 @@ func (warrior *Warrior) registerThunderClapSpell() {
 	results := make([]*core.SpellResult, min(4, warrior.Env.GetNumTargets()))
 
 	warrior.ThunderClap = warrior.RegisterSpell(stanceMask, core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       core.SpellFlagAPL | SpellFlagOffensive,
+		ActionID:       core.ActionID{SpellID: spellID},
+		ClassSpellMask: WarriorSpellMaskThunderClap,
+		RequiredLevel:  ThunderClapLevel[rank],
+		Rank:           rank,
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          core.SpellFlagAPL | SpellFlagOffensive,
 
 		RageCost: core.RageCostOptions{
-			Cost: 20 - []float64{0, 1, 2, 4}[warrior.Talents.ImprovedThunderClap],
+			// Improved Thunder Clap's discount is a SpellMod in
+			// talents.go, so this is the client's undiscounted cost.
+			Cost: rageCost(ThunderClapManaCost[rank]),
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -36,7 +45,7 @@ func (warrior *Warrior) registerThunderClapSpell() {
 			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    warrior.NewTimer(),
-				Duration: time.Second * 4,
+				Duration: time.Duration(ThunderClapCooldownMS[rank]) * time.Millisecond,
 			},
 		},
 

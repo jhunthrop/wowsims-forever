@@ -6,6 +6,17 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// Revenge is the one warrior ability constants_auto_gen.go does not
+// cover: the generator skips a spell whose <Name>Ranks it would collide
+// with, and this hand-written table is that collision (the generated
+// file records it as `skipped: "Revenge" already has a hand-written
+// RevengeRanks elsewhere in this package`). So the numbers below are
+// still vanilla's, and the client disagrees with them - spell 25288's
+// school-damage effect reads 153 at rank 6 where this table rolls
+// 81-99. Freeing the name so the generator can emit Revenge, and then
+// re-deriving the damage, belongs to the warrior-protection spec's task
+// together with the rest of that tree; sim/warrior/tank_warrior is
+// skipped until then, so nothing is validating these numbers today.
 const RevengeRanks = 6
 
 var RevengeSpellId = [RevengeRanks + 1]int32{0, 6572, 6574, 7379, 11600, 11601, 25288}
@@ -15,8 +26,8 @@ var RevengeLevel = [RevengeRanks + 1]int{0, 14, 24, 34, 44, 54, 60}
 func (warrior *Warrior) registerRevengeSpell(cdTimer *core.Timer) {
 	actionID := core.ActionID{SpellID: core.TernaryInt32(core.IncludeAQ, 25288, 11601)}
 	has2pcDreadnaught := warrior.HasSetBonus(ItemSetDreadnaughtsBattlegear, 2)
-	basedamageLow := core.TernaryFloat64(core.IncludeAQ, 81, 64) + core.TernaryFloat64(has2pcDreadnaught, 75, 0) 
-	basedamageHigh := core.TernaryFloat64(core.IncludeAQ, 99, 78) + core.TernaryFloat64(has2pcDreadnaught, 75, 0) 
+	basedamageLow := core.TernaryFloat64(core.IncludeAQ, 81, 64) + core.TernaryFloat64(has2pcDreadnaught, 75, 0)
+	basedamageHigh := core.TernaryFloat64(core.IncludeAQ, 99, 78) + core.TernaryFloat64(has2pcDreadnaught, 75, 0)
 	revengeLevel := core.TernaryFloat64(core.IncludeAQ, 60.0, 54.0)
 
 	warrior.revengeProcAura = warrior.RegisterAura(core.Aura{
@@ -39,12 +50,13 @@ func (warrior *Warrior) registerRevengeSpell(cdTimer *core.Timer) {
 	})
 
 	warrior.Revenge = warrior.RegisterSpell(DefensiveStance, core.SpellConfig{
-		SpellCode:   SpellCode_WarriorRevenge,
-		ActionID:    actionID,
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
+		SpellCode:      SpellCode_WarriorRevenge,
+		ClassSpellMask: WarriorSpellMaskRevenge,
+		ActionID:       actionID,
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
 
 		RageCost: core.RageCostOptions{
 			Cost:   5,

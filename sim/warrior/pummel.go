@@ -7,17 +7,21 @@ import (
 )
 
 func (warrior *Warrior) registerPummelSpell() {
-	damage := 50.0
+	rank := rankAtLevel(PummelLevel[:], warrior.Level)
+	damage := PummelBaseDamage[rank][0]
 
 	warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: 6554},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagBinary | SpellFlagOffensive,
+		ActionID:       core.ActionID{SpellID: PummelSpellId[rank]},
+		ClassSpellMask: WarriorSpellMaskPummel,
+		RequiredLevel:  PummelLevel[rank],
+		Rank:           rank,
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagBinary | SpellFlagOffensive,
 
 		RageCost: core.RageCostOptions{
-			Cost:   10,
+			Cost:   rageCost(PummelManaCost[rank]),
 			Refund: 0.8,
 		},
 		Cast: core.CastConfig{
@@ -27,7 +31,7 @@ func (warrior *Warrior) registerPummelSpell() {
 			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    warrior.NewTimer(),
-				Duration: time.Second * 10,
+				Duration: time.Duration(PummelCooldownMS[rank]) * time.Millisecond,
 			},
 		},
 

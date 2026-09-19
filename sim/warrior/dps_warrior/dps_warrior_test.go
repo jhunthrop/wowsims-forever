@@ -6,6 +6,7 @@ import (
 	_ "github.com/wowsims/classic/sim/common" // imported to get item effects included.
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/warrior"
 )
 
 func init() {
@@ -13,13 +14,6 @@ func init() {
 }
 
 func TestP1DPSWarrior(t *testing.T) {
-	// FOREVER: this spec's talents were regenerated from the client's trait
-	// trees (plan docs/superpowers/plans/2026-09-14-sim-engine.md, task 17)
-	// and its DPS goldens still describe vanilla's tree. Task 11 of the same
-	// plan rewrites this spec's talent behaviour and deletes this skip;
-	// until then the suite is skipped rather than left failing, because a
-	// suite that is always red is a suite nobody reads.
-	t.Skip("sim/warrior/dps_warrior awaits its Forever talent rewrite (plan 2026-09-14-sim-engine, tasks 17 then 11)")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassWarrior,
@@ -29,9 +23,16 @@ func TestP1DPSWarrior(t *testing.T) {
 
 			Talents:  P1Talents,
 			GearSet:  core.GetGearSet("../../../ui/warrior/gear_sets", "phase_1"),
-			Rotation: core.GetAplRotation("../../../ui/warrior/apls", "dps_reck"),
+			Rotation: core.GetAplRotation("../../../ui/warrior/apls", "forever_fury"),
+			// dps_reck is the suite's in-file control. It is the old
+			// vanilla-shaped preset and it is stale on ranks, which is
+			// exactly why it is useful: it is not the rotation this
+			// spec is tuning, so the next time the Forever row moves,
+			// the two rows together separate "the rotation changed"
+			// from "the engine changed". Its own number is not a
+			// recommendation and nothing should be tuned against it.
 			OtherRotations: []core.RotationCombo{
-				core.GetAplRotation("../../../ui/warrior/apls", "dps_no_reck"),
+				core.GetAplRotation("../../../ui/warrior/apls", "dps_reck"),
 			},
 			Buffs:       core.FullBuffs,
 			Consumes:    P1Consumes,
@@ -44,7 +45,15 @@ func TestP1DPSWarrior(t *testing.T) {
 	}))
 }
 
-var P1Talents = "30305001302-05050005525010051"
+// P1Talents is warrior.ForeverFuryTalents, not a string of its own: the
+// reference build belongs beside the tree it is written against, and two
+// copies of a talent string drift the first time a tier moves.
+//
+// The old vanilla-shaped string that stood here ("30305001302-...")
+// could not be parsed against the client's 17/18/18 trees at all - its
+// first segment was 11 characters - so every talent after the first
+// eleven was read from the wrong position.
+var P1Talents = warrior.ForeverFuryTalents
 
 var P1Consumes = core.ConsumesCombo{
 	Label: "P1-Consumes",
