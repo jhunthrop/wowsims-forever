@@ -90,26 +90,85 @@ func TestEveryTalentThisSpecAppliesExists(t *testing.T) {
 	}
 }
 
-func TestFrostSpellsCarryTheirMasks(t *testing.T) {
-	cases := []struct {
-		name string
-		mask uint64
-	}{
-		{"Frostbolt", MageSpellMaskFrostbolt},
-		{"Ice Lance", MageSpellMaskIceLance},
-		{"Frost Nova", MageSpellMaskFrostNova},
-		{"Blizzard", MageSpellMaskBlizzard},
-		{"Cone of Cold", MageSpellMaskConeOfCold},
+// Every ability a talent modifies must carry its ClassSpellMask, or the
+// declarative mod in talents.go silently applies to nothing.
+//
+// This is asserted against the spells a built mage actually registers.
+// The version of this test that shipped first read the `1 << iota`
+// constants back and checked they were non-zero and pairwise distinct —
+// true by construction of an iota block, and green with every
+// `ClassSpellMask:` line deleted from frostbolt.go. Tasks 11 and 12's
+// declarative-talent design rests on these masks.
+func TestFrostSpellsCarryTheirMasksWhenRegistered(t *testing.T) {
+	mage := buildMageForTalentTest(t, ForeverFrostTalents)
+
+	// mask bit -> the registered spells carrying it.
+	carriers := map[uint64][]string{}
+	for _, spell := range mage.GetCharacter().Spellbook {
+		if spell.ClassSpellMask == 0 {
+			continue
+		}
+		for bit := uint64(1); bit != 0; bit <<= 1 {
+			if spell.ClassSpellMask&bit != 0 {
+				carriers[bit] = append(carriers[bit], spell.ActionID.String())
+			}
+		}
 	}
-	seen := uint64(0)
-	for _, c := range cases {
-		if c.mask == 0 {
-			t.Errorf("%s has a zero mask; an empty mask matches nothing", c.name)
+
+	named := map[string]uint64{
+		"Frostbolt":   MageSpellMaskFrostbolt,
+		"Ice Lance":   MageSpellMaskIceLance,
+		"Blizzard":    MageSpellMaskBlizzard,
+		"Ice Barrier": MageSpellMaskIceBarrier,
+	}
+	// Frost Nova and Cone of Cold have a mask bit and a talent that
+	// names them (Improved Frost Nova, Improved Cone of Cold — two of
+	// the nine documented-inert points in ForeverFrostTalents) but no
+	// ability file in this package, so nothing registers them. That is
+	// recorded here rather than left as a hole in the loop above: when
+	// either lands, this fails and the bit moves into `named`.
+	unimplemented := map[string]uint64{
+		"Frost Nova":   MageSpellMaskFrostNova,
+		"Cone of Cold": MageSpellMaskConeOfCold,
+	}
+	for name, mask := range unimplemented {
+		if len(carriers[mask]) != 0 {
+			t.Errorf("%s is now registered (as %v); move its mask into the asserted set", name, carriers[mask])
 		}
-		if seen&c.mask != 0 {
-			t.Errorf("%s reuses a bit already taken", c.name)
+	}
+	for name, mask := range named {
+		if len(carriers[mask]) == 0 {
+			t.Errorf("no registered mage spell carries %s's mask; every talent mod that names it applies to nothing", name)
 		}
-		seen |= c.mask
+		for other, otherMask := range named {
+			if name < other && mask == otherMask {
+				t.Errorf("%s and %s share mask %#x", name, other, mask)
+			}
+		}
+	}
+
+	// The two Frost groups the talents target: every bit in them must be
+	// carried by a registered spell, or the mod binds to nothing. Only
+	// the Frost groups are checked, because a Frost mage registers no
+	// Fire or Arcane damage spell beyond Fire Blast.
+	for name, group := range map[string]uint64{
+		"MageSpellMaskFrostDamage": MageSpellMaskFrostDamage,
+		"MageSpellMaskFrost":       MageSpellMaskFrost,
+	} {
+		for bit := uint64(1); bit != 0; bit <<= 1 {
+			if group&bit == 0 {
+				continue
+			}
+			// Frostfire Bolt, Frost Nova and Cone of Cold are in the
+			// group but have no ability file in this package; the
+			// `unimplemented` check above is what watches for them.
+			if bit == MageSpellMaskFrostfireBolt || bit == MageSpellMaskFrostNova || bit == MageSpellMaskConeOfCold {
+				continue
+			}
+			if len(carriers[bit]) == 0 {
+				t.Errorf("%s names bit %#x, which no registered spell carries", name, bit)
+			}
+		}
 	}
 }
 

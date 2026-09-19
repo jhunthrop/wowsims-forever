@@ -104,52 +104,16 @@ func TestEveryTalentThisSpecAppliesExists(t *testing.T) {
 	}
 }
 
-// Every ability a talent modifies must carry a ClassSpellMask, or the
-// declarative mod silently applies to nothing.
-func TestFurySpellsCarryTheirMasks(t *testing.T) {
-	cases := []struct {
-		name string
-		mask uint64
-	}{
-		{"Bloodthirst", WarriorSpellMaskBloodthirst},
-		{"Whirlwind", WarriorSpellMaskWhirlwind},
-		{"Execute", WarriorSpellMaskExecute},
-		{"Heroic Strike", WarriorSpellMaskHeroicStrike},
-		{"Cleave", WarriorSpellMaskCleave},
-		{"Mortal Strike", WarriorSpellMaskMortalStrike},
-		{"Overpower", WarriorSpellMaskOverpower},
-		{"Rend", WarriorSpellMaskRend},
-		{"Revenge", WarriorSpellMaskRevenge},
-		{"Shield Slam", WarriorSpellMaskShieldSlam},
-		{"Slam", WarriorSpellMaskSlam},
-		{"Sunder Armor", WarriorSpellMaskSunderArmor},
-		{"Thunder Clap", WarriorSpellMaskThunderClap},
-		{"Hamstring", WarriorSpellMaskHamstring},
-		{"Pummel", WarriorSpellMaskPummel},
-		{"Piercing Howl", WarriorSpellMaskPiercingHowl},
-	}
-	seen := uint64(0)
-	for _, c := range cases {
-		if c.mask == 0 {
-			t.Errorf("%s has a zero mask; an empty mask matches nothing", c.name)
-		}
-		if seen&c.mask != 0 {
-			t.Errorf("%s reuses a bit already taken", c.name)
-		}
-		seen |= c.mask
-	}
-
-	// The groups must be subsets of the single-spell bits, or a talent
-	// config targets a bit no spell carries.
-	for name, group := range map[string]uint64{
-		"WarriorSpellMaskSpecials":    WarriorSpellMaskSpecials,
-		"WarriorSpellMaskOnNextSwing": WarriorSpellMaskOnNextSwing,
-	} {
-		if group&^seen != 0 {
-			t.Errorf("%s names a bit no ability carries", name)
-		}
-	}
-}
+// The spell-mask invariant — every ability a talent modifies carries its
+// ClassSpellMask, or the declarative mod in talents.go applies to
+// nothing — is asserted in
+// sim/warrior/dps_warrior.TestFurySpellsCarryTheirMasksWhenRegistered,
+// against the spells a built warrior registers. The test that used to
+// live here read the `1 << iota` constants back and checked they were
+// non-zero and pairwise distinct, which is true by construction of an
+// iota block: it stayed green with every `ClassSpellMask:` line deleted
+// from every ability file. It needed a character, and a character needs
+// the agent factory, which lives in the spec package.
 
 // The reference Fury build must spend exactly 51 points and must reach
 // the 31-point talent in Fury, or the suite is validating a build nobody
