@@ -185,6 +185,22 @@ func TestFrostboltHasElevenRanks(t *testing.T) {
 	if FrostboltLevel[11] > 60 {
 		t.Errorf("Frostbolt rank 11 requires level %d; a level-60 mage cannot cast it", FrostboltLevel[11])
 	}
+
+	// The three assertions above are over the generated table. Rank 11
+	// is also gated at registration by core.IncludeAQ, which is a build
+	// constant, so the table can be right and the spellbook still stop
+	// at rank 10 - the shape a reviewer raised and this pins.
+	mage := buildMageForTalentTest(t, ForeverFrostTalents)
+	var registered bool
+	for _, spell := range mage.GetCharacter().Spellbook {
+		if spell.ActionID.SpellID == FrostboltSpellId[11] {
+			registered = true
+			break
+		}
+	}
+	if !registered {
+		t.Errorf("Frostbolt rank 11 (spell %d) is in the table but not in the registered spellbook", FrostboltSpellId[11])
+	}
 }
 
 func TestForeverFrostTalentsAreAValidBuild(t *testing.T) {

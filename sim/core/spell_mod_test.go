@@ -189,3 +189,45 @@ func closeEnough(a, b float64) bool {
 }
 
 var _ = proto.CastType_CastTypeUnknown
+
+// RemoveSpellByClassMask deletes from the slice it walks. Walking it
+// forwards, each removal shifted the tail down under the loop index and
+// the next element was skipped, so two adjacent matching spells left the
+// second attached and still modified. No engine code calls this today —
+// it arrived with the upstream spell-mod system — which is why nothing
+// caught it.
+func TestRemoveSpellByClassMaskRemovesAdjacentMatches(t *testing.T) {
+	unit := &Unit{Type: PlayerUnit}
+
+	mod := unit.AddDynamicMod(SpellModConfig{
+		Kind:      SpellMod_DamageDone_Flat,
+		ClassMask: testMaskBloodthirst | testMaskWhirlwind,
+		IntValue:  30,
+	})
+	mod.Activate()
+
+	// Three spells, all matching, registered back to back: with the
+	// forward loop the second survived the sweep.
+	first := modTestSpell(unit, testMaskBloodthirst, 0)
+	second := modTestSpell(unit, testMaskBloodthirst, 0)
+	third := modTestSpell(unit, testMaskBloodthirst, 0)
+	kept := modTestSpell(unit, testMaskWhirlwind, 0)
+
+	if len(mod.AffectedSpells) != 4 {
+		t.Fatalf("the mod bound to %d spells, want 4", len(mod.AffectedSpells))
+	}
+
+	mod.RemoveSpellByClassMask(testMaskBloodthirst)
+
+	if len(mod.AffectedSpells) != 1 {
+		t.Errorf("after removing the Bloodthirst-masked spells the mod still holds %d, want 1", len(mod.AffectedSpells))
+	}
+	for _, spell := range []*Spell{first, second, third} {
+		if got, want := spell.DamageMultiplierAdditive, 1.0; !closeEnough(got, want) {
+			t.Errorf("a removed spell still carries the mod: %v, want %v", got, want)
+		}
+	}
+	if got, want := kept.DamageMultiplierAdditive, 1.3; !closeEnough(got, want) {
+		t.Errorf("the non-matching spell lost the mod: %v, want %v", got, want)
+	}
+}

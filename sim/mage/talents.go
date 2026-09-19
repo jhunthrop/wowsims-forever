@@ -652,6 +652,16 @@ func (mage *Mage) applyDeclarativeTalents() {
 	if t.ArcaneInstability > 0 {
 		// "your spells", with no school named, so every spell this
 		// class registers rather than a named set.
+		//
+		// ClassSpellsOnly matches on "has a non-zero ClassSpellMask",
+		// so the six mage spells that carry none are skipped: Presence
+		// of Mind, Arcane Power and Combustion (the cooldown
+		// activators below) and the three trinket activators in
+		// items.go. That is correct rather than a gap - all six are
+		// SpellFlagNoOnCastComplete activators that deal no damage, so
+		// a damage and crit bonus on them would change nothing, and
+		// giving a trinket a mage class mask would make it a mage
+		// spell for every other mod too.
 		mage.AddStaticMod(core.SpellModConfig{
 			Kind:            core.SpellMod_DamageDone_Flat,
 			ClassSpellsOnly: true,

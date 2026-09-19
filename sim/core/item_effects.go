@@ -245,6 +245,16 @@ func NewMobTypeDamageEffect(itemID int32, mobTypes []proto.MobType, multiplier f
 // damage in a set of biomes. Forever's biome trinkets are the reason the
 // encounter carries a biome at all; an encounter with no biome set reads
 // BiomeUnknown and matches nothing, so a vanilla fight is unaffected.
+//
+// Unlike NewMobTypeDamageEffect above, this reads its condition eagerly
+// rather than deferring to RegisterPostFinalizeEffect. That is safe, and
+// the difference is not an oversight: the sibling defers because
+// character.AttackTables does not exist until setupAttackTables(), while
+// Environment.construct() builds the Encounter and wires each unit's Env
+// before initialize() runs any item effect, so the biome is readable
+// here. TestBiomeDamageEffectAppliesOnlyInItsBiome pins that ordering, so
+// a change to it fails a test instead of silently turning every biome
+// trinket off.
 func NewBiomeDamageEffect(itemID int32, biomes []proto.Biome, multiplier float64) {
 	NewItemEffect(itemID, func(agent Agent) {
 		character := agent.GetCharacter()

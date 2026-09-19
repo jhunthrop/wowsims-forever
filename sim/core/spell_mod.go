@@ -176,8 +176,14 @@ func shouldApply(spell *Spell, mod *SpellMod) bool {
 	return true
 }
 
+// RemoveSpellByClassMask detaches every affected spell matching the
+// mask. It iterates backwards because it deletes from the slice it is
+// walking: forwards, each removal shifted the tail down under the
+// index and the next element was skipped, so two adjacent matches only
+// ever removed the first.
 func (mod *SpellMod) RemoveSpellByClassMask(classMask uint64) {
-	for i, spell := range mod.AffectedSpells {
+	for i := len(mod.AffectedSpells) - 1; i >= 0; i-- {
+		spell := mod.AffectedSpells[i]
 		if spell.Matches(classMask) {
 			mod.Remove(mod, spell)
 			mod.AffectedSpells = append(mod.AffectedSpells[:i], mod.AffectedSpells[i+1:]...)
@@ -348,7 +354,12 @@ const (
 	// Uses: FloatValue
 	SpellMod_Threat_Flat
 
-	// Increases or decreases the spell.ThreatMultiplier by % amount. +50% = 0.5
+	// Multiplies spell.ThreatMultiplier by FloatValue, so the value is
+	// the multiplier itself and not a delta: -50% threat is 0.5, +50% is
+	// 1.5, and no change is 1.0 (NOT 0, which zeroes the multiplier).
+	// The "+50% = 0.5" this comment used to carry described a delta the
+	// implementation has never applied - applyThreatPct multiplies and
+	// removeThreatPct divides.
 	// Uses: FloatValue
 	SpellMod_Threat_Pct
 

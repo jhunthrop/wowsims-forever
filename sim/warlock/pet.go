@@ -105,10 +105,17 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 		wp.AddStatDependency(stats.Strength, stats.AttackPower, 2)
 
 		// Warrior crit scaling.
-		// unconfirmed: this pet stacks Agility- and Intellect-derived Crit
-		// on the one unified stat, same as core.ClassCritStatSources'
-		// hybrid classes (see that table's comment) — pre-merge these were
-		// the independent MeleeCrit and SpellCrit pools.
+		//
+		// The Intellect line is a no-op and is kept only so the pet's
+		// two dependencies read as the pair the merge left behind:
+		// CritPerIntAtLevel[ClassWarrior] is 0.0, and ClassCritStatSources
+		// lists the warrior as Agility-only — it is not one of that
+		// table's hybrids, so the earlier note here claiming the pet
+		// "stacks Agility- and Intellect-derived Crit ... same as the
+		// hybrid classes" described something that does not happen.
+		// unconfirmed: whether a Forever warrior-scaled pet should convert
+		// Intellect to Crit at all is unpublished; if it should, the
+		// coefficient belongs in CritPerIntAtLevel, not here.
 		wp.AddStatDependency(stats.Agility, stats.Crit, core.CritPerAgiAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
 		wp.AddStatDependency(stats.Intellect, stats.Crit, core.CritPerIntAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
 
