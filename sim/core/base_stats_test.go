@@ -300,3 +300,54 @@ func TestSkyborneBaseStatsAreDeclaredClones(t *testing.T) {
 		t.Errorf("ProvisionalConstants names %d Skyborne entries, want 2", named)
 	}
 }
+
+// The Crit column of ClassBaseCrit is max(SpellCrit, MeleeCrit) over Era's
+// pair, with one exception the table documents: upstream's MeleeCrit column
+// is its Dodge column duplicated for all nine classes, so where that value
+// would win the max it is discarded and the spell value taken. This test
+// pins the nine merged values, and separately pins the rule that no class
+// takes a Crit equal to its Dodge while a lower spell value exists — the
+// shape that would mean the duplicated column crept back in.
+func TestClassBaseCritDropsTheDuplicatedMeleeColumn(t *testing.T) {
+	// Era's pair per class, read from master:sim/core/base_stats.go:84-130.
+	type eraPair struct{ spell, melee float64 }
+	era := map[proto.Class]eraPair{
+		proto.Class_ClassWarrior: {0.0, 0.0},
+		proto.Class_ClassPaladin: {3.5, 0.7},
+		proto.Class_ClassHunter:  {3.6, 0.0},
+		proto.Class_ClassRogue:   {0.0, 0.0},
+		proto.Class_ClassPriest:  {0.8, 3.0},
+		proto.Class_ClassShaman:  {2.3, 1.7},
+		proto.Class_ClassMage:    {0.2, 3.2},
+		proto.Class_ClassWarlock: {1.7, 2.0},
+		proto.Class_ClassDruid:   {1.8, 0.9},
+	}
+	want := map[proto.Class]float64{
+		proto.Class_ClassWarrior: 0.0,
+		proto.Class_ClassPaladin: 3.5,
+		proto.Class_ClassHunter:  3.6,
+		proto.Class_ClassRogue:   0.0,
+		proto.Class_ClassPriest:  0.8, // melee 3.0 == Dodge 3.0, discarded
+		proto.Class_ClassShaman:  2.3,
+		proto.Class_ClassMage:    0.2, // melee 3.2 == Dodge 3.2, discarded
+		proto.Class_ClassWarlock: 1.7, // melee 2.0 == Dodge 2.0, discarded
+		proto.Class_ClassDruid:   1.8,
+	}
+	for class, wantCrit := range want {
+		row := ClassBaseCrit[class]
+		gotCrit := row[stats.Crit] / CritRatingPerCritChance
+		if gotCrit != wantCrit {
+			t.Errorf("%v base Crit is %.4f, want %.4f", class, gotCrit, wantCrit)
+		}
+		gotDodge := row[stats.Dodge] / DodgeRatingPerDodgeChance
+		if gotDodge != era[class].melee {
+			t.Errorf("%v base Dodge is %.4f, want Era's %.4f", class, gotDodge, era[class].melee)
+		}
+		if gotCrit == gotDodge && era[class].spell < gotDodge {
+			t.Errorf("%v takes base Crit %.4f, which is its Dodge value, over a lower spell value %.4f: the duplicated melee column is back", class, gotCrit, era[class].spell)
+		}
+	}
+	if len(ClassBaseCrit) != len(want)+1 { // +1 for ClassUnknown
+		t.Errorf("ClassBaseCrit has %d entries, want %d; a new class needs a row here", len(ClassBaseCrit), len(want)+1)
+	}
+}
