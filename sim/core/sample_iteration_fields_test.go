@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/wowsims/classic/sim/core/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
 func TestSampleIterationFieldsExist(t *testing.T) {
@@ -44,5 +45,32 @@ func TestSampleIterationFieldsExist(t *testing.T) {
 func TestSimOptionsHasTheSampleFlag(t *testing.T) {
 	if !(&proto.SimOptions{SampleIteration: true}).GetSampleIteration() {
 		t.Error("SimOptions.SampleIteration did not round-trip")
+	}
+}
+
+// The two field numbers themselves, read off the descriptor rather than
+// off the .proto text. They are a wire contract with the site - the
+// numbers are pinned in
+// docs/superpowers/specs/2026-09-19-simulator-parity-interfaces.md
+// section 5 - and the getters above go on compiling through a
+// renumbering, so this is the only thing that notices one. Same shape as
+// TestEncounterParityFieldNumbers.
+func TestSampleIterationFieldNumbers(t *testing.T) {
+	for _, tc := range []struct {
+		message protoreflect.ProtoMessage
+		field   string
+		want    int32
+	}{
+		{&proto.RaidSimResult{}, "sample_iteration", 8},
+		{&proto.SimOptions{}, "sample_iteration", 10},
+	} {
+		descriptor := tc.message.ProtoReflect().Descriptor()
+		field := descriptor.Fields().ByName(protoreflect.Name(tc.field))
+		if field == nil {
+			t.Fatalf("%s has no field %q", descriptor.Name(), tc.field)
+		}
+		if got := int32(field.Number()); got != tc.want {
+			t.Errorf("%s.%s is field %d, want %d", descriptor.Name(), tc.field, got, tc.want)
+		}
 	}
 }

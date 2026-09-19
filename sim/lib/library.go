@@ -119,6 +119,7 @@ func getDatabase(itemIds *int32, numItems int32, enchantIds *int32, numEnchants 
 			SetName:             item.SetName,
 			SetId:               item.SetID,
 			Unique:              item.Unique,
+			RequiredLevel:       item.RequiredLevel,
 			FactionRestriction:  item.FactionRestriction,
 			RandomSuffixOptions: item.RandomSuffixOptions,
 		}

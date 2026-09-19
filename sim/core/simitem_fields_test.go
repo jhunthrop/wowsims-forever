@@ -84,6 +84,36 @@ func TestSimItemFactionRestrictionMatchesUIItem(t *testing.T) {
 	}
 }
 
+// ItemFromProto is the module boundary a downstream consumer crosses to
+// turn a SimItem its own data lane filled back into a core.Item. A field
+// with no home on core.Item is dropped there in silence, which is what
+// happened to required_level: this fork has no source for it, but a
+// level restriction the site's pipeline does fill must survive the
+// crossing. All four expansion fields are checked, not just the three
+// this fork can populate itself.
+func TestItemFromProtoCarriesEveryExpansionField(t *testing.T) {
+	item := ItemFromProto(&proto.SimItem{
+		Id:                  12640,
+		Unique:              true,
+		RequiredLevel:       60,
+		FactionRestriction:  proto.SimItem_FACTION_RESTRICTION_HORDE_ONLY,
+		RandomSuffixOptions: []int32{1825, 1826},
+	})
+
+	if !item.Unique {
+		t.Error("Unique did not survive ItemFromProto")
+	}
+	if item.RequiredLevel != 60 {
+		t.Errorf("RequiredLevel = %d, want 60", item.RequiredLevel)
+	}
+	if item.FactionRestriction != proto.SimItem_FACTION_RESTRICTION_HORDE_ONLY {
+		t.Errorf("FactionRestriction = %v, want HORDE_ONLY", item.FactionRestriction)
+	}
+	if len(item.RandomSuffixOptions) != 2 || item.RandomSuffixOptions[1] != 1826 {
+		t.Errorf("RandomSuffixOptions = %v, want [1825 1826]", item.RandomSuffixOptions)
+	}
+}
+
 // The loaded database carries the three fields the fork already knows.
 // This is what stops the copy in database_load.go being written and then
 // silently dropped in a later upstream merge.

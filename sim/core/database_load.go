@@ -39,6 +39,9 @@ func init() {
 			SetId:               item.SetId,
 			WeaponSkills:        item.WeaponSkills,
 			Unique:              item.Unique,
+			// RequiredLevel is not copied: UIItem has no such field in
+			// this fork, so it stays zero here and is filled only by a
+			// consumer whose own data lane sources it.
 			FactionRestriction:  proto.SimItem_FactionRestriction(item.FactionRestriction),
 			RandomSuffixOptions: item.RandomSuffixOptions,
 		}

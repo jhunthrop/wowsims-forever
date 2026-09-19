@@ -91,8 +91,10 @@ remaining link, from `.proto` to the committed `.pb.go`.
 The Forever Sixty site's fight styles, sample-iteration report and Top
 Gear planner need nine fields upstream has no equivalent for. They are
 additive: an encounter that sets none behaves exactly as it did before,
-and nothing in this repository reads the item fields, which is why no
-`*.results` golden moved when they landed.
+and the item fields are only carried - `database_load.go`,
+`ItemFromProto` and `sim/lib/library.go` copy them across the module
+boundary, and nothing in this repository makes a decision on one - which
+is why no `*.results` golden moved when they landed.
 
 | Field | Message | Number | What it does |
 | --- | --- | --- | --- |
@@ -102,7 +104,7 @@ and nothing in this repository reads the item fields, which is why no
 | `sample_iteration` | `RaidSimResult` | 8 | The median-DPS iteration's cast log, with resources after each cast |
 | `sample_iteration` | `SimOptions` | 10 | Opt in to the above; it costs one extra iteration and one environment |
 | `unique` | `SimItem` | 20 | Unique-equipped, for the site's combination planner |
-| `required_level` | `SimItem` | 21 | Filled by the site's data pipeline; this fork has no source for it |
+| `required_level` | `SimItem` | 21 | Filled by the site's data pipeline; this fork has no source for it, so it stays zero here, but `core.Item` carries it so `ItemFromProto` does not drop one that is filled |
 | `faction_restriction` | `SimItem` | 22 | Alliance-only / Horde-only |
 | `random_suffix_options` | `SimItem` | 23 | Which suffixes the item rolls |
 
