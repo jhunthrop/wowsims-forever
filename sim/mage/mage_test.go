@@ -13,13 +13,6 @@ func init() {
 }
 
 func TestP1Mage(t *testing.T) {
-	// FOREVER: this spec's talents were regenerated from the client's trait
-	// trees (plan docs/superpowers/plans/2026-09-14-sim-engine.md, task 17)
-	// and its DPS goldens still describe vanilla's tree. Task 12 of the same
-	// plan rewrites this spec's talent behaviour and deletes this skip;
-	// until then the suite is skipped rather than left failing, because a
-	// suite that is always red is a suite nobody reads.
-	t.Skip("sim/mage awaits its Forever talent rewrite (plan 2026-09-14-sim-engine, tasks 17 then 12)")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassMage,
@@ -27,9 +20,12 @@ func TestP1Mage(t *testing.T) {
 			Race:       proto.Race_RaceTroll,
 			OtherRaces: []proto.Race{proto.Race_RaceGnome},
 
-			Talents:     P1Talents,
-			GearSet:     core.GetGearSet("../../ui/mage/gear_sets", "p0.bis"),
-			Rotation:    core.GetAplRotation("../../ui/mage/apls", "p1"),
+			Talents:  ForeverFrostTalents,
+			GearSet:  core.GetGearSet("../../ui/mage/gear_sets", "p0.bis"),
+			Rotation: core.GetAplRotation("../../ui/mage/apls", "forever_frost"),
+			OtherRotations: []core.RotationCombo{
+				core.GetAplRotation("../../ui/mage/apls", "p1"),
+			},
 			Buffs:       core.FullBuffs,
 			Consumes:    P1Consumes,
 			SpecOptions: core.SpecOptionsCombo{Label: "DPS", SpecOptions: PlayerOptions},
@@ -40,8 +36,6 @@ func TestP1Mage(t *testing.T) {
 		},
 	}))
 }
-
-var P1Talents = "-0550320003021-2035020310035105"
 
 var PlayerOptions = &proto.Player_Mage{
 	Mage: &proto.Mage{

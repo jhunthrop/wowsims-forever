@@ -46,13 +46,14 @@ func (mage *Mage) newFireballSpellConfig(rank int) core.SpellConfig {
 	actionID := core.ActionID{SpellID: spellId}
 
 	return core.SpellConfig{
-		ActionID:     actionID,
-		SpellCode:    SpellCode_MageFireball,
-		SpellSchool:  core.SpellSchoolFire,
-		DefenseType:  core.DefenseTypeMagic,
-		ProcMask:     core.ProcMaskSpellDamage,
-		Flags:        core.SpellFlagAPL | SpellFlagMage,
-		MissileSpeed: 24,
+		ActionID:       actionID,
+		ClassSpellMask: MageSpellMaskFireball,
+		SpellCode:      SpellCode_MageFireball,
+		SpellSchool:    core.SpellSchoolFire,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          core.SpellFlagAPL | SpellFlagMage,
+		MissileSpeed:   24,
 
 		RequiredLevel: level,
 		Rank:          rank,

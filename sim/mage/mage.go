@@ -31,6 +31,68 @@ const (
 // message's field order and the planner's talent string have to agree,
 // and they only can if one file produces all three.
 
+// Spell masks for the declarative talent mods. One bit per ability, so
+// a talent that reads "increases the damage done by your Frost spells"
+// is a line of config against a set of bits rather than a closure that
+// re-derives the set from the school every time a spell registers.
+//
+// Bits are never renumbered: a mask is also how a saved mod config and
+// a log line name an ability. Masks exist for the abilities Forever
+// adds that this package does not register yet (Frost Nova, Cone of
+// Cold, Frostfire Bolt) so the talents that name them can be written
+// once and start working the day the ability lands.
+const (
+	// Bit 0 is reserved so no mask ever equals the zero value, which
+	// AddStaticMod's ClassMask treats as "no filter" rather than "no
+	// abilities".
+	MageSpellMaskFrostbolt uint64 = 1 << (iota + 1)
+	MageSpellMaskIceLance
+	MageSpellMaskFrostNova
+	MageSpellMaskBlizzard
+	MageSpellMaskConeOfCold
+	MageSpellMaskIceBarrier
+	MageSpellMaskFireball
+	MageSpellMaskFrostfireBolt
+	MageSpellMaskScorch
+	MageSpellMaskPyroblast
+	MageSpellMaskFireBlast
+	MageSpellMaskFlamestrike
+	MageSpellMaskBlastWave
+	MageSpellMaskIgnite
+	MageSpellMaskArcaneExplosion
+	MageSpellMaskArcaneMissiles
+	MageSpellMaskArcaneMissilesTick
+	MageSpellMaskArcaneBlast
+	MageSpellMaskEvocation
+	MageSpellMaskColdSnap
+	MageSpellMaskCounterspell
+	MageSpellMaskManaGem
+)
+
+// Groups, named after the tooltip phrases they stand for.
+const (
+	// "your Frost spells" for damage purposes. Ice Barrier is Frost
+	// school but deals none, so it is not here; Piercing Ice would
+	// otherwise be applying a damage bonus to an absorb.
+	MageSpellMaskFrostDamage = MageSpellMaskFrostbolt | MageSpellMaskIceLance |
+		MageSpellMaskFrostNova | MageSpellMaskBlizzard | MageSpellMaskConeOfCold |
+		MageSpellMaskFrostfireBolt
+
+	// "your Fire spells" for damage purposes. Ignite is excluded: it is
+	// a consequence of a Fire crit rather than a Fire spell the mage
+	// casts, and Fire Power has never applied to it.
+	MageSpellMaskFireDamage = MageSpellMaskFireball | MageSpellMaskScorch |
+		MageSpellMaskPyroblast | MageSpellMaskFrostfireBolt | MageSpellMaskFireBlast |
+		MageSpellMaskFlamestrike | MageSpellMaskBlastWave
+
+	MageSpellMaskArcaneDamage = MageSpellMaskArcaneExplosion | MageSpellMaskArcaneMissiles |
+		MageSpellMaskArcaneMissilesTick | MageSpellMaskArcaneBlast
+
+	// "your Frost spells" for cost and threat purposes, which the
+	// tooltips do not restrict to the damaging ones.
+	MageSpellMaskFrost = MageSpellMaskFrostDamage | MageSpellMaskIceBarrier
+)
+
 func RegisterMage() {
 	core.RegisterAgentFactory(
 		proto.Player_Mage{},
@@ -67,7 +129,9 @@ type Mage struct {
 	FireBlast               []*core.Spell
 	Flamestrike             []*core.Spell
 	Frostbolt               []*core.Spell
+	ColdSnap                *core.Spell
 	IceBarrier              []*core.Spell
+	IceLance                []*core.Spell
 	Ignite                  *core.Spell
 	igniteTick              *core.Spell
 	ManaGem                 []*core.Spell
@@ -132,7 +196,7 @@ func NewMage(character *core.Character, options *proto.Player) *Mage {
 		Talents:   &proto.MageTalents{},
 		Options:   mageOptions.Options,
 	}
-	core.FillTalentsProto(mage.Talents.ProtoReflect(), options.TalentsString, TalentTreeSizes)
+	fillMageTalents(mage.Talents, options.TalentsString)
 
 	mage.EnableManaBar()
 
@@ -154,4 +218,10 @@ func NewMage(character *core.Character, options *proto.Player) *Mage {
 	guardians.ConstructGuardians(&mage.Character)
 
 	return mage
+}
+
+// fillMageTalents is the one place a talent string is sliced, so the
+// regression suite's build and a player's build are read the same way.
+func fillMageTalents(talents *proto.MageTalents, talentsString string) {
+	core.FillTalentsProto(talents.ProtoReflect(), talentsString, TalentTreeSizes)
 }

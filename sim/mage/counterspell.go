@@ -10,10 +10,11 @@ import (
 // Not relevant in classic currently but will keep
 func (mage *Mage) registerCounterspellSpell() {
 	mage.Counterspell = mage.RegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: 2139},
-		SpellSchool: core.SpellSchoolArcane,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       core.SpellFlagAPL | SpellFlagMage | core.SpellFlagCastTimeNoGCD,
+		ActionID:       core.ActionID{SpellID: 2139},
+		ClassSpellMask: MageSpellMaskCounterspell,
+		SpellSchool:    core.SpellSchoolArcane,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          core.SpellFlagAPL | SpellFlagMage | core.SpellFlagCastTimeNoGCD,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: 100,

@@ -51,8 +51,9 @@ func (mage *Mage) newManaGemCooldown(rank int) core.SpellConfig {
 	})
 
 	return core.SpellConfig{
-		ActionID: actionID,
-		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
+		ActionID:       actionID,
+		ClassSpellMask: MageSpellMaskManaGem,
+		Flags:          core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
 
 		RequiredLevel: ManaGemLevel[rank],
 
