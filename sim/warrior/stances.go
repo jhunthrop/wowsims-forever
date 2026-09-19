@@ -144,7 +144,12 @@ func (warrior *Warrior) registerBerserkerStanceAura() {
 		},
 		OnExpire: func(ee *core.ExclusiveEffect, sim *core.Simulation) {
 			ee.Aura.Unit.PseudoStats.ThreatMultiplier /= 0.8
-			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier *= 1.1
+			// Divide, not multiply: this line read `*= 1.1` and so
+			// compounded +10% damage taken on every stance change
+			// instead of undoing the OnGain. Pre-existing at master;
+			// only the tank suite would show it, and that suite is
+			// skipped awaiting the Forever talent rewrite.
+			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier /= 1.1
 			ee.Aura.Unit.AddStatDynamic(sim, stats.Crit, -core.CritRatingPerCritChance*3)
 		},
 	})
