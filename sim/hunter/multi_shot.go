@@ -13,8 +13,10 @@ func (hunter *Hunter) getMultiShotConfig(rank int, timer *core.Timer) core.Spell
 	manaCost := [6]float64{0, 100, 140, 175, 210, 230}[rank]
 	level := [6]int{0, 18, 30, 42, 54, 60}[rank]
 
-	numHits := min(3, hunter.Env.GetNumTargets())
-	results := make([]*core.SpellResult, numHits)
+	// Pool-sized ceiling, live-bounded loop; see APLActionMultidot and
+	// warrior registerWhirlwindSpell.
+	maxHits := min(3, len(hunter.Env.Encounter.AllTargetUnits))
+	results := make([]*core.SpellResult, maxHits)
 
 	return core.SpellConfig{
 		SpellCode:     SpellCode_HunterMultiShot,
@@ -62,7 +64,10 @@ func (hunter *Hunter) getMultiShotConfig(rank int, timer *core.Timer) core.Spell
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			curTarget := target
 
-			for hitIndex := int32(0); hitIndex < numHits; hitIndex++ {
+			// Fixed for this cast so the landing loop below deals
+			// exactly the results the hit loop calculated.
+			numHits := min(maxHits, len(sim.Encounter.TargetUnits))
+			for hitIndex := 0; hitIndex < numHits; hitIndex++ {
 				baseDamage := baseDamage +
 					hunter.AutoAttacks.Ranged().CalculateNormalizedWeaponDamage(sim, spell.RangedAttackPower(target, false)) +
 					hunter.AmmoDamageBonus
@@ -73,13 +78,12 @@ func (hunter *Hunter) getMultiShotConfig(rank int, timer *core.Timer) core.Spell
 			}
 			hunter.Unit.AutoAttacks.EnableAutoSwing(sim)
 			spell.WaitTravelTime(sim, func(s *core.Simulation) {
-				for hitIndex := int32(0); hitIndex < numHits; hitIndex++ {
+				for hitIndex := 0; hitIndex < numHits; hitIndex++ {
 					spell.DealDamage(sim, results[hitIndex])
 
 					curTarget = sim.Environment.NextTargetUnit(curTarget)
 				}
 			})
-			
 		},
 	}
 }

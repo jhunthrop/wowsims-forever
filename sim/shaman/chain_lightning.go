@@ -58,18 +58,20 @@ func (shaman *Shaman) newChainLightningSpellConfig(rank int, cdTimer *core.Timer
 		Duration: cooldown,
 	}
 
-	results := make([]*core.SpellResult, min(targetCount, shaman.Env.GetNumTargets()))
+	// Pool-sized ceiling, live-bounded loop; see APLActionMultidot.
+	results := make([]*core.SpellResult, min(int(targetCount), len(shaman.Env.Encounter.AllTargetUnits)))
 
 	spell.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 		origMult := spell.DamageMultiplier
-		for hitIndex := range results {
+		numHits := min(len(results), len(sim.Encounter.TargetUnits))
+		for hitIndex := 0; hitIndex < numHits; hitIndex++ {
 			baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
 			results[hitIndex] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 			target = sim.Environment.NextTargetUnit(target)
 			spell.DamageMultiplier *= shaman.ChainLightningBounceCoefficient
 		}
 
-		for _, result := range results {
+		for _, result := range results[:numHits] {
 			spell.DealDamage(sim, result)
 		}
 

@@ -83,3 +83,102 @@ func TestNumTargetsFollowsTheTimeline(t *testing.T) {
 		t.Errorf("EncounterMetrics has %d targets, want the whole pool of 5 so the report can name the adds", got)
 	}
 }
+
+// whirlwindSpellID is the warrior ability the capped-AoE tests below use:
+// a hard cap of four swings, so it exercises both halves of the bound.
+const whirlwindSpellID = 1680
+
+// A capped AoE ability may swing at any one target at most once per cast.
+// The hit loop is sized once, at spell-registration time, but it walks
+// targets with NextTargetUnit, which wraps at the LIVE target count - so
+// when a timeline shrinks the active prefix below the registration count
+// the surplus swings used to wrap back onto the surviving mob and inflate
+// its damage.
+func TestShrinkingTimelineDoesNotRepeatHitsOnOneTarget(t *testing.T) {
+	encounter := parityEncounter()
+	encounter.TargetsOverTime = []*proto.TargetCountAt{
+		{AtSeconds: 0, Count: 5},
+		{AtSeconds: 1, Count: 1},
+	}
+
+	whirlwind := actionMetrics(t, runParityResult(t, furyWarriorPlayer(), encounter), whirlwindSpellID)
+
+	var casts, swingsOnSurvivor int32
+	for _, target := range whirlwind.Targets {
+		casts += target.Casts
+		if target.UnitIndex == 0 {
+			swingsOnSurvivor = swingCount(target)
+		}
+	}
+	if casts == 0 {
+		t.Fatal("the fury warrior cast no Whirlwind; the test cannot say anything")
+	}
+	if swingsOnSurvivor > casts {
+		t.Errorf("Whirlwind swung %d times at the one surviving target over %d casts; a capped AoE may swing at a target at most once per cast",
+			swingsOnSurvivor, casts)
+	}
+}
+
+// The other half of the same bound: a timeline that grows past the count
+// the pull started with must give a capped AoE its extra targets, up to
+// the ability's own cap. Whirlwind's cap is four, so four of the five
+// pooled targets must see swings.
+func TestGrowingTimelineGivesCappedAoEItsTargets(t *testing.T) {
+	encounter := parityEncounter()
+	encounter.TargetsOverTime = []*proto.TargetCountAt{
+		{AtSeconds: 0, Count: 1},
+		{AtSeconds: 1, Count: 5},
+	}
+
+	whirlwind := actionMetrics(t, runParityResult(t, furyWarriorPlayer(), encounter), whirlwindSpellID)
+
+	var swungAt int
+	for _, target := range whirlwind.Targets {
+		if swingCount(target) > 0 {
+			swungAt++
+		}
+	}
+	if swungAt < 4 {
+		t.Errorf("Whirlwind swung at %d targets, want its cap of 4 once the timeline grew to five", swungAt)
+	}
+}
+
+// swingCount is every attempt this action made against one target,
+// whatever the outcome. A capped AoE's attempts are what the hit loop
+// bounds, so this is the number the two tests above compare.
+func swingCount(target *proto.TargetedActionMetrics) int32 {
+	return target.Hits + target.Crits + target.Misses + target.Dodges +
+		target.Parries + target.Blocks + target.BlockedCrits + target.Glances + target.Crushes
+}
+
+// actionMetrics finds one spell's metrics in the first player's report.
+func actionMetrics(t *testing.T, result *proto.RaidSimResult, spellID int32) *proto.ActionMetrics {
+	t.Helper()
+	player := result.RaidMetrics.Parties[0].Players[0]
+	for _, action := range player.Actions {
+		if action.Id.GetSpellId() == spellID {
+			return action
+		}
+	}
+	t.Fatalf("player %s has no metrics for spell %d", player.Name, spellID)
+	return nil
+}
+
+// runParityResult is runParitySim's sibling for the tests that need the
+// whole report rather than just the raid's DPS.
+func runParityResult(t *testing.T, player *proto.Player, encounter *proto.Encounter) *proto.RaidSimResult {
+	t.Helper()
+	result := core.RunSim(&proto.RaidSimRequest{
+		Raid:      core.SinglePlayerRaidProto(player, &proto.PartyBuffs{}, &proto.RaidBuffs{}, &proto.Debuffs{}),
+		Encounter: encounter,
+		SimOptions: &proto.SimOptions{
+			Iterations: parityIterations,
+			IsTest:     true,
+			RandomSeed: 1,
+		},
+	}, nil, simsignals.CreateSignals())
+	if result.Error != nil {
+		t.Fatalf("sim failed: %s", result.Error.Message)
+	}
+	return result
+}

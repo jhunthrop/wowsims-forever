@@ -11,8 +11,6 @@ func (warrior *Warrior) registerSweepingStrikesCD() {
 		return
 	}
 
-	numTargets := min(2, warrior.Env.GetNumTargets())
-
 	// Procs from auto attacks and most abilities https://www.wowhead.com/classic/spell=12723/sweeping-strikes
 	var curDmg float64
 	hitSchoolDamagWithValue := warrior.RegisterSpell(AnyStance, core.SpellConfig{
@@ -71,7 +69,10 @@ func (warrior *Warrior) registerSweepingStrikesCD() {
 				spellToUse = hitSchoolDamagWithValue
 			}
 
-			if numTargets > 1 {
+			// Read live rather than at registration time: the extra
+			// swing exists exactly while a second target is active,
+			// which a target timeline changes mid-fight.
+			if len(sim.Encounter.TargetUnits) > 1 {
 				target := warrior.Env.NextTargetUnit(result.Target)
 				spellToUse.Cast(sim, target)
 				spellToUse.SpellMetrics[target.UnitIndex].Casts--

@@ -128,23 +128,34 @@ The behaviour lives in `sim/core/encounter_movement.go`,
 three of which are Forever files with no upstream counterpart, so an
 upstream merge cannot conflict with them.
 
-### Known limitations
+### How capped AoE follows the timeline
 
-Capped AoE abilities do not grow with a target timeline. Some abilities
-size their hit count once, at spell-registration time, from
-`min(N, Env.GetNumTargets())` (or, for Explosive Trap, from
-`Env.GetNumTargets()` alone) — warrior Whirlwind, Thunder Clap, Cleave
-and Sweeping Strikes; hunter Multi-Shot and Explosive Trap; druid Swipe
+Abilities that iterate `Encounter.TargetUnits` (the large majority)
+needed no change: that slice is the active prefix and is re-read on
+every cast. The ones that do not iterate it size a fixed hit count in
+their spell registration — warrior Whirlwind, Thunder Clap, Cleave and
+Sweeping Strikes; hunter Multi-Shot and Explosive Trap; druid Swipe
 (bear form); shaman Chain Lightning; and three item procs in
 `sim/common/item_effects.go` (Masterwork Stormhammer, The Hand of
-Antu'sul, Thunderfury). None of these re-read `Env.GetNumTargets()` once
-registration has run, so when `targets_over_time` activates more targets
-mid-fight they keep hitting the count the pool had at registration.
-Abilities that iterate `Encounter.TargetUnits` (the large majority) are
-correct, because that slice is the active prefix and is re-read on every
-cast. The practical effect: a fight style whose timeline grows past its
-starting target count under-reports capped melee cleave and the AoE
-abilities named above.
+Antu'sul, Thunderfury). Each of those follows the two-part shape
+`APLActionMultidot` established in `sim/core/apl_actions_casting.go`:
+
+- the ceiling is sized once from the target **pool**,
+  `len(Encounter.AllTargetUnits)`, so a timeline that grows past the
+  count it pulled at is not capped at that starting count; and
+- the per-cast loop is bounded by the **live** active count,
+  `len(sim.Encounter.TargetUnits)`, so a timeline that shrinks does not
+  keep walking the longer slice. `Environment.NextTargetUnit` wraps at
+  the live count, so those surplus hits would otherwise land back on
+  the survivors — a five-to-one timeline reported 484 DPS against a
+  true 385 before this was bounded.
+
+An ability's own design cap (Whirlwind's four, Cleave's two) is the
+other half of each `min` and is unchanged. `Env.GetNumTargets()` is the
+active count: correct to read at run time, wrong to read at
+registration time, and no spell registration reads it any more.
+
+### Known limitations
 
 The sample iteration is exact only on the single-threaded path.
 `SimOptions.sample_iteration` replays the median-DPS iteration exactly

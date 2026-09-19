@@ -91,7 +91,8 @@ func (warrior *Warrior) registerCleaveSpell(realismICD *core.Cooldown) {
 	// damage bonus (see applyDeclarativeTalents); the vanilla
 	// multiplier that stood here is gone rather than renamed.
 
-	results := make([]*core.SpellResult, min(int32(2), warrior.Env.GetNumTargets()))
+	// Pool-sized ceiling, live-bounded loop; see registerWhirlwindSpell.
+	results := make([]*core.SpellResult, min(2, len(warrior.Env.Encounter.AllTargetUnits)))
 
 	warrior.Cleave = warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		ClassSpellMask: WarriorSpellMaskCleave,
@@ -117,13 +118,14 @@ func (warrior *Warrior) registerCleaveSpell(realismICD *core.Cooldown) {
 		BonusCoefficient: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			for idx := range results {
+			numHits := min(len(results), len(sim.Encounter.TargetUnits))
+			for idx := 0; idx < numHits; idx++ {
 				baseDamage := flatDamageBonus + spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
 				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 				target = sim.Environment.NextTargetUnit(target)
 			}
 
-			for _, result := range results {
+			for _, result := range results[:numHits] {
 				spell.DealDamage(sim, result)
 			}
 

@@ -27,8 +27,8 @@ func (druid *Druid) registerSwipeBearSpell() {
 	baseDamage := SwipeBaseDamage[rank]
 
 	rageCost := 20 - float64(druid.Talents.Ferocity)
-	numHits := min(3, druid.Env.GetNumTargets())
-	results := make([]*core.SpellResult, numHits)
+	// Pool-sized ceiling, live-bounded loop; see APLActionMultidot.
+	results := make([]*core.SpellResult, min(3, len(druid.Env.Encounter.AllTargetUnits)))
 
 	switch druid.Ranged().ID {
 	case IdolOfBrutality:
@@ -60,12 +60,13 @@ func (druid *Druid) registerSwipeBearSpell() {
 		ThreatMultiplier: SwipeThreatMultiplier,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			for idx := range results {
+			numHits := min(len(results), len(sim.Encounter.TargetUnits))
+			for idx := 0; idx < numHits; idx++ {
 				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 				target = sim.Environment.NextTargetUnit(target)
 			}
 
-			for _, result := range results {
+			for _, result := range results[:numHits] {
 				spell.DealDamage(sim, result)
 			}
 		},

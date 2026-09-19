@@ -28,7 +28,13 @@ const (
 )
 
 func (warrior *Warrior) registerWhirlwindSpell() {
-	results := make([]*core.SpellResult, min(4, warrior.Env.GetNumTargets()))
+	// Sized from the target POOL, not the active prefix: a timeline can
+	// start small and grow, and a slice fixed at the starting count
+	// would cap the ability there for the rest of the fight. The cast
+	// loop below bounds itself by however many targets are active at
+	// that moment, so a shrinking timeline does not wrap surplus swings
+	// back onto the survivors. Same shape as APLActionMultidot.
+	results := make([]*core.SpellResult, min(4, len(warrior.Env.Encounter.AllTargetUnits)))
 
 	warrior.Whirlwind = warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
 		SpellCode:      SpellCode_WarriorWhirlwind,
@@ -59,13 +65,14 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 		BonusCoefficient: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			for idx := range results {
+			numHits := min(len(results), len(sim.Encounter.TargetUnits))
+			for idx := 0; idx < numHits; idx++ {
 				baseDamage := spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 				target = sim.Environment.NextTargetUnit(target)
 			}
 
-			for _, result := range results {
+			for _, result := range results[:numHits] {
 				spell.DealDamage(sim, result)
 			}
 		},

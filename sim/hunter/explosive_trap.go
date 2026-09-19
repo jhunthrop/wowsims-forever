@@ -16,8 +16,6 @@ func (hunter *Hunter) getExplosiveTrapConfig(rank int, timer *core.Timer) core.S
 	manaCost := [4]float64{0, 275, 395, 520}[rank]
 	level := [4]int{0, 34, 44, 54}[rank]
 
-	numHits := hunter.Env.GetNumTargets()
-
 	return core.SpellConfig{
 		SpellCode:     SpellCode_HunterExplosiveTrap,
 		ActionID:      core.ActionID{SpellID: spellId},
@@ -75,10 +73,15 @@ func (hunter *Hunter) getExplosiveTrapConfig(rank int, timer *core.Timer) core.S
 
 			spell.WaitTravelTime(sim, func(s *core.Simulation) {
 				curTarget := target
+				// Read at detonation, beside the AoE cap multiplier
+				// below: a target timeline changes the count mid-fight,
+				// and the old registration-time read both missed later
+				// adds and wrapped surplus hits onto the survivors.
+				numHits := len(sim.Encounter.TargetUnits)
 				// Traps gain no benefit from hit bonuses except for the Trap Mastery talent, since this is a unique interaction this is my workaround
 				spellHit := spell.Unit.GetStat(stats.Hit) + target.PseudoStats.BonusSpellHitRatingTaken
 				spell.Unit.AddStatDynamic(sim, stats.Hit, spellHit*-1)
-				for hitIndex := int32(0); hitIndex < numHits; hitIndex++ {
+				for hitIndex := 0; hitIndex < numHits; hitIndex++ {
 					baseDamage := sim.Roll(minDamage, maxDamage)
 					baseDamage *= sim.Encounter.AOECapMultiplier()
 					spell.CalcAndDealDamage(sim, curTarget, baseDamage, spell.OutcomeMagicHitAndCrit)

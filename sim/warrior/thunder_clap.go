@@ -21,7 +21,8 @@ func (warrior *Warrior) registerThunderClapSpell() {
 		return core.ThunderClapAura(target, spellID, attackSpeedReduction)
 	})
 
-	results := make([]*core.SpellResult, min(4, warrior.Env.GetNumTargets()))
+	// Pool-sized ceiling, live-bounded loop; see registerWhirlwindSpell.
+	results := make([]*core.SpellResult, min(4, len(warrior.Env.Encounter.AllTargetUnits)))
 
 	warrior.ThunderClap = warrior.RegisterSpell(stanceMask, core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: spellID},
@@ -55,12 +56,13 @@ func (warrior *Warrior) registerThunderClapSpell() {
 		ThreatMultiplier: 2.5,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			for idx := range results {
+			numHits := min(len(results), len(sim.Encounter.TargetUnits))
+			for idx := 0; idx < numHits; idx++ {
 				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 				target = sim.Environment.NextTargetUnit(target)
 			}
 
-			for _, result := range results {
+			for _, result := range results[:numHits] {
 				spell.DealDamage(sim, result)
 				if result.Landed() {
 					warrior.ThunderClapAuras.Get(result.Target).Activate(sim)

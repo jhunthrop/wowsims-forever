@@ -1690,7 +1690,8 @@ func init() {
 	// Chance on hit: Blasts up to 3 targets for 105 to 145 Nature damage.
 	// Estimated based on data from WoW Armaments Discord
 	itemhelpers.CreateWeaponProcSpell(MasterworkStormhammer, "Masterwork Stormhammer", 0.5, func(character *core.Character) *core.Spell {
-		maxHits := int(min(3, character.Env.GetNumTargets()))
+		// Pool-sized ceiling, live-bounded loop; see APLActionMultidot.
+		maxHits := min(3, len(character.Env.Encounter.AllTargetUnits))
 		return character.RegisterSpell(core.SpellConfig{
 			ActionID:         core.ActionID{SpellID: 463946},
 			SpellSchool:      core.SpellSchoolNature,
@@ -1699,7 +1700,8 @@ func init() {
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				for numHits := 0; numHits < maxHits; numHits++ {
+				hits := min(maxHits, len(sim.Encounter.TargetUnits))
+				for numHits := 0; numHits < hits; numHits++ {
 					spell.CalcAndDealDamage(sim, target, sim.Roll(105, 145), spell.OutcomeMagicHitAndCrit)
 					target = character.Env.NextTargetUnit(target)
 				}
@@ -2330,7 +2332,8 @@ func init() {
 			return aura
 		})
 
-		results := make([]*core.SpellResult, min(4, character.Env.GetNumTargets()))
+		// Pool-sized ceiling, live-bounded loop; see APLActionMultidot.
+		results := make([]*core.SpellResult, min(4, len(character.Env.Encounter.AllTargetUnits)))
 
 		return character.GetOrRegisterSpell(core.SpellConfig{
 			ActionID:         core.ActionID{SpellID: 13532},
@@ -2340,11 +2343,12 @@ func init() {
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				for idx := range results {
+				numHits := min(len(results), len(sim.Encounter.TargetUnits))
+				for idx := 0; idx < numHits; idx++ {
 					results[idx] = spell.CalcDamage(sim, target, 7, spell.OutcomeMagicHitAndCrit)
 					target = character.Env.NextTargetUnit(target)
 				}
-				for _, result := range results {
+				for _, result := range results[:numHits] {
 					spell.DealDamage(sim, result)
 					if result.Landed() {
 						debuffAuras.Get(result.Target).Activate(sim)
@@ -2442,7 +2446,8 @@ func init() {
 			})
 		})
 
-		results := make([]*core.SpellResult, min(5, character.Env.GetNumTargets()))
+		// Pool-sized ceiling, live-bounded loop; see APLActionMultidot.
+		results := make([]*core.SpellResult, min(5, len(character.Env.Encounter.AllTargetUnits)))
 
 		bounceSpell := character.GetOrRegisterSpell(core.SpellConfig{
 			ActionID:    procActionID.WithTag(2),
@@ -2453,11 +2458,12 @@ func init() {
 			FlatThreatBonus:  126,
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				for idx := range results {
+				numHits := min(len(results), len(sim.Encounter.TargetUnits))
+				for idx := 0; idx < numHits; idx++ {
 					results[idx] = spell.CalcDamage(sim, target, 0, spell.OutcomeMagicHit)
 					target = sim.Environment.NextTargetUnit(target)
 				}
-				for _, result := range results {
+				for _, result := range results[:numHits] {
 					if result.Landed() {
 						debuffAuras[result.Target.Index].Activate(sim)
 					}
