@@ -390,7 +390,11 @@ func (unit *Unit) SwingSpeed() float64 {
 }
 
 func (unit *Unit) Armor() float64 {
-	return max(unit.PseudoStats.ArmorMultiplier*unit.stats[stats.Armor], 0.0)
+	armor := unit.stats[stats.Armor]
+	if unit.PseudoStats.ArmorReductionDisabled {
+		armor = unit.initialStats[stats.Armor]
+	}
+	return max(unit.PseudoStats.ArmorMultiplier*armor, 0.0)
 }
 
 func (unit *Unit) BlockValue() float64 {

@@ -26,6 +26,12 @@ type Encounter struct {
 	// parity work.
 	TargetsOverTime []TargetCount
 
+	// Dummy is target-dummy mode: the raid debuff panel is not applied,
+	// there is no execute window, and nothing reduces the target's armor.
+	// The player's own rotation still debuffs the target, because a real
+	// dummy parse has the player's own Sunder and Curse on it.
+	Dummy bool
+
 	// Biome is where this fight happens, for Forever's biome-conditional
 	// item effects. BiomeUnknown matches nothing.
 	Biome proto.Biome
@@ -79,6 +85,11 @@ func newMovementPattern(options *proto.MovementPattern) *MovementPattern {
 }
 
 func NewEncounter(options *proto.Encounter) Encounter {
+	if options.TargetDummy {
+		options.ExecuteProportion_20 = 0
+		options.ExecuteProportion_25 = 0
+		options.ExecuteProportion_35 = 0
+	}
 	options.ExecuteProportion_25 = max(options.ExecuteProportion_25, options.ExecuteProportion_20)
 	options.ExecuteProportion_35 = max(options.ExecuteProportion_35, options.ExecuteProportion_25)
 	padTargetsForTimeline(options)
@@ -93,6 +104,7 @@ func NewEncounter(options *proto.Encounter) Encounter {
 		Biome:                options.Biome,
 		TargetsOverTime:      newTargetTimeline(options.TargetsOverTime),
 		Movement:             newMovementPattern(options.Movement),
+		Dummy:                options.TargetDummy,
 	}
 	// If UseHealth is set, we use the sum of targets health.
 	if options.UseHealth {
@@ -117,6 +129,12 @@ func NewEncounter(options *proto.Encounter) Encounter {
 		encounter.AllTargetUnits = append(encounter.AllTargetUnits, &target.Unit)
 	}
 	encounter.TargetUnits = encounter.AllTargetUnits[:encounter.initialActiveCount()]
+
+	if encounter.Dummy {
+		for _, target := range encounter.Targets {
+			target.PseudoStats.ArmorReductionDisabled = true
+		}
+	}
 
 	if encounter.EndFightAtHealth > 0 {
 		// Until we pre-sim set duration to 10m

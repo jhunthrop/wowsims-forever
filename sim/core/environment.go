@@ -86,8 +86,9 @@ func (env *Environment) construct(raidProto *proto.Raid, encounterProto *proto.E
 		unit.CurrentTarget = env.Encounter.AllTargetUnits[0]
 	}
 
-	// Apply extra debuffs from raid.
-	if raidProto.Debuffs != nil && len(env.Encounter.AllTargetUnits) > 0 {
+	// Apply extra debuffs from raid. A target dummy gets none: the panel
+	// models the other twenty-nine raiders, and a dummy stands alone.
+	if raidProto.Debuffs != nil && !env.Encounter.Dummy && len(env.Encounter.AllTargetUnits) > 0 {
 		for targetIdx, targetUnit := range env.Encounter.AllTargetUnits {
 			applyDebuffEffects(targetUnit, targetIdx, raidProto.Debuffs, raidProto)
 		}

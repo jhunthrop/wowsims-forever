@@ -499,6 +499,12 @@ type PseudoStats struct {
 
 	ArmorMultiplier float64 // Major/minor/special multiplicative armor modifiers
 
+	// ArmorReductionDisabled pins a unit's armor to what it started the
+	// iteration with. Target-dummy encounters set it: a dummy takes no
+	// Sunder, no Expose and no Faerie Fire, so nothing lowers the number
+	// the damage formula reads.
+	ArmorReductionDisabled bool
+
 	HealingTakenMultiplier float64
 }
 
