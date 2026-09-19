@@ -86,6 +86,76 @@ one is present, so the test needs no network to run and cannot quietly
 pin stale data. Task 1's `TestGeneratedProtosMatchSources` closes the
 remaining link, from `.proto` to the committed `.pb.go`.
 
+## Encounter, result and item fields upstream does not have
+
+The Forever Sixty site's fight styles, sample-iteration report and Top
+Gear planner need nine fields upstream has no equivalent for. They are
+additive: an encounter that sets none behaves exactly as it did before,
+and nothing in this repository reads the item fields, which is why no
+`*.results` golden moved when they landed.
+
+| Field | Message | Number | What it does |
+| --- | --- | --- | --- |
+| `movement` | `Encounter` | 10 | A repeating window out of melee, or (with `casting_only`) an interrupt in place |
+| `targets_over_time` | `Encounter` | 11 | A target-count timeline; the pool is sized to the largest count |
+| `target_dummy` | `Encounter` | 12 | No raid debuff panel, no execute window, no armor reduction |
+| `sample_iteration` | `RaidSimResult` | 8 | The median-DPS iteration's cast log, with resources after each cast |
+| `sample_iteration` | `SimOptions` | 10 | Opt in to the above; it costs one extra iteration and one environment |
+| `unique` | `SimItem` | 20 | Unique-equipped, for the site's combination planner |
+| `required_level` | `SimItem` | 21 | Filled by the site's data pipeline; this fork has no source for it |
+| `faction_restriction` | `SimItem` | 22 | Alliance-only / Horde-only |
+| `random_suffix_options` | `SimItem` | 23 | Which suffixes the item rolls |
+
+Supporting messages: `MovementPattern` and `TargetCountAt` in
+`common.proto`, `SampleCast` and `SampleIteration` in `api.proto`.
+
+`SimItem.FactionRestriction` is a **redeclaration** of
+`UIItem.FactionRestriction`, nested in `SimItem` with the same value
+names and the same numbers. It is not an import, because `ui.proto`
+imports `common.proto` and the reverse would be a cycle, and it is not a
+move, because moving the enum would touch about twenty upstream call
+sites. `TestSimItemFactionRestrictionMatchesUIItem` fails if the two ever
+stop agreeing.
+
+A `SampleCast` carries the whole `ActionID`, not a display name: this
+engine has none — `core.Spell` has no name field at all. The site renders
+the id as an action key (`spell:23881`, `item:13503`, `other:melee`) and
+resolves the display name itself, the same way it already does for cast
+timeline rows.
+
+The behaviour lives in `sim/core/encounter_movement.go`,
+`sim/core/encounter_targets.go` and `sim/core/sample_iteration.go`, all
+three of which are Forever files with no upstream counterpart, so an
+upstream merge cannot conflict with them.
+
+### Known limitations
+
+Capped AoE abilities do not grow with a target timeline. Some abilities
+size their hit count once, at spell-registration time, from
+`min(N, Env.GetNumTargets())` (or, for Explosive Trap, from
+`Env.GetNumTargets()` alone) — warrior Whirlwind, Thunder Clap, Cleave
+and Sweeping Strikes; hunter Multi-Shot and Explosive Trap; druid Swipe
+(bear form); shaman Chain Lightning; and three item procs in
+`sim/common/item_effects.go` (Masterwork Stormhammer, The Hand of
+Antu'sul, Thunderfury). None of these re-read `Env.GetNumTargets()` once
+registration has run, so when `targets_over_time` activates more targets
+mid-fight they keep hitting the count the pool had at registration.
+Abilities that iterate `Encounter.TargetUnits` (the large majority) are
+correct, because that slice is the active prefix and is re-read on every
+cast. The practical effect: a fight style whose timeline grows past its
+starting target count under-reports capped melee cleave and the AoE
+abilities named above.
+
+The sample iteration is exact only on the single-threaded path.
+`SimOptions.sample_iteration` replays the median-DPS iteration exactly
+when the run is not sharded. On the sharded concurrent path
+(`RunRaidSimConcurrent`, the server-side entry point), each shard
+replays its own local median and the combiner keeps whichever of those
+is closest to the combined mean, because the raw per-iteration
+`(dps, seed)` lists are discarded before combining — so the sample is
+near-median rather than the true global median. See
+`pickSampleIteration` in `sim/core/sim_concurrent.go`.
+
 ## No Forever artifacts are built here
 
 This repository stays a clean, upstreamable Go library plus its own UI.
