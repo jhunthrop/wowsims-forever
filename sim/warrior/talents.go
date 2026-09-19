@@ -236,13 +236,20 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 	// Two-Handed Weapon Specialization: "+3% damage with two-handed
 	// melee weapons" at rank 3. The hand-type check cannot be expressed
 	// as config, so the talent is skipped rather than applied and
-	// filtered. SpellMod_DamageDone_Flat is additive percent: 1 = +1%.
+	// filtered.
+	//
+	// It is a school multiplier, not a spell mod: the tooltip says
+	// "damage with two-handed melee weapons", and for a 2H warrior the
+	// largest share of that is auto-attacks, which carry no
+	// ClassSpellMask at all - a mask-based mod reaches neither them nor
+	// Rend, Thunder Clap, Revenge or Sunder Armor, which is every
+	// warrior ability outside the two mask groups it named. The
+	// hand-type guard is what keeps it from also covering the spells a
+	// dual-wielding or sword-and-board warrior casts, and
+	// SchoolDamageDealtMultiplier[Physical] is the pattern Death Wish
+	// (applyDeathWish) and Enrage (applyEnrage) already use.
 	if t.TwoHandedWeaponSpecialization > 0 && warrior.MainHand().HandType == proto.HandType_HandTypeTwoHand {
-		warrior.AddStaticMod(core.SpellModConfig{
-			Kind:      core.SpellMod_DamageDone_Flat,
-			ClassMask: WarriorSpellMaskSpecials | WarriorSpellMaskOnNextSwing,
-			IntValue:  int64(t.TwoHandedWeaponSpecialization),
-		})
+		warrior.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + 0.01*float64(t.TwoHandedWeaponSpecialization)
 	}
 
 	// Improved Overpower is applied in overpower.go, where the crit
@@ -413,7 +420,15 @@ func (warrior *Warrior) applyDualWieldSpecialization() {
 			return
 		}
 		spell.BonusHitRating += bonusHit
-		if spell.BonusCoefficient > 0 {
+		// The damage half is weapon damage, so it is narrowed by school
+		// rather than by BonusCoefficient, which is what this line used
+		// to read. The two select the same spells today - an
+		// auto-attack's coefficient is 1 exactly when its school is
+		// Physical (core/attack.go:494), and the off-hand auto is the
+		// only ProcMaskMeleeOH spell a warrior registers - but the
+		// coefficient is a proxy for the school and reads as though a
+		// physical swing were excluded from its own talent.
+		if spell.SpellSchool.Matches(core.SpellSchoolPhysical) {
 			spell.DamageMultiplier *= multiplier
 		}
 	})
