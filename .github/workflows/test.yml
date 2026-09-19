@@ -30,10 +30,13 @@ jobs:
       # the site's build. The test skips itself if protoc-gen-go is
       # missing, so the step above is what makes it a gate.
       - run: go test --tags=with_db ./sim/core/proto/ -run TestGeneratedProtosMatchSources -v
-      - run: go test --tags=with_db -count=1 ./sim/...
       # sim/web embeds binary_dist, which is generated and gitignored, so
-      # a fresh checkout cannot build ./sim/... until this exists.
+      # a fresh checkout cannot build - let alone test - ./sim/... until
+      # this exists. It has to come BEFORE anything that names ./sim/...:
+      # a developer's checkout already has it from an earlier make, so
+      # getting the order wrong fails only in CI.
       - run: make binary_dist/dist.go
+      - run: go test --tags=with_db -count=1 ./sim/...
       # The site builds our wasm from its own sim/ module, but the engine
       # must still compile for js/wasm or that build breaks downstream.
       - name: the engine cross-compiles for wasm
