@@ -4,22 +4,37 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// heroicStrikeRank and cleaveRank are the ranks of the two on-next-swing
+// abilities a level-60 warrior casts, as labels into the generated rank
+// arrays in constants_auto_gen.go. Heroic Strike's rank 9 arrived with
+// AQ, so the phase flag picks the rank and every column - id, damage,
+// cost - is then read at that one index rather than being a second
+// ternary of typed numbers.
+func heroicStrikeRank() int {
+	return core.TernaryInt(core.IncludeAQ, HeroicStrikeRanks, HeroicStrikeRanks-1)
+}
+
+func cleaveRank() int {
+	return CleaveRanks
+}
+
 // heroicStrikeSpellID and cleaveSpellID are the ids the two
 // on-next-swing abilities register under. They are named so a rotation
 // test can check the pinned APL against the spellbook rather than
 // against a retyped id.
 func heroicStrikeSpellID() int32 {
-	return core.TernaryInt32(core.IncludeAQ, 25286, 11567)
+	return HeroicStrikeSpellId[heroicStrikeRank()]
 }
 
 func cleaveSpellID() int32 {
-	return 20569
+	return CleaveSpellId[cleaveRank()]
 }
 
 func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
-	flatDamageBonus := core.TernaryFloat64(core.IncludeAQ, 157, 138)
+	rank := heroicStrikeRank()
+	flatDamageBonus := HeroicStrikeBaseDamage[rank][0]
 	spellID := heroicStrikeSpellID()
-	// No known equation
+	// No known equation, and the client's table has no threat column.
 	threat := core.TernaryFloat64(core.IncludeAQ, 173, 145)
 
 	warrior.HeroicStrike = warrior.RegisterSpell(AnyStance, core.SpellConfig{
@@ -30,10 +45,14 @@ func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
 		ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto,
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete | SpellFlagOffensive,
 
+		RequiredLevel: HeroicStrikeLevel[rank],
+		Rank:          rank,
+
 		RageCost: core.RageCostOptions{
 			// Improved Heroic Strike's discount is a SpellMod in
-			// talents.go; applying it here as well would double it.
-			Cost:   15,
+			// talents.go; applying it here as well would double it, so
+			// this is the client's undiscounted cost.
+			Cost:   rageCost(HeroicStrikeManaCost[rank]),
 			Refund: 0.8,
 		},
 
@@ -62,8 +81,10 @@ func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
 }
 
 func (warrior *Warrior) registerCleaveSpell(realismICD *core.Cooldown) {
-	flatDamageBonus := 50.0
+	rank := cleaveRank()
+	flatDamageBonus := CleaveBaseDamage[rank][0]
 	spellID := cleaveSpellID()
+	// No known equation, and the client's table has no threat column.
 	threat := 100.0
 
 	// FOREVER: the client's Improved Cleave is a rage discount, not a
@@ -80,8 +101,12 @@ func (warrior *Warrior) registerCleaveSpell(realismICD *core.Cooldown) {
 		ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto,
 		Flags:          core.SpellFlagMeleeMetrics | SpellFlagOffensive,
 
+		RequiredLevel: CleaveLevel[rank],
+		Rank:          rank,
+
 		RageCost: core.RageCostOptions{
-			Cost: 20,
+			// Improved Cleave's discount is a SpellMod in talents.go.
+			Cost: rageCost(CleaveManaCost[rank]),
 		},
 
 		CritDamageBonus: warrior.impale(),

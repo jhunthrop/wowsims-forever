@@ -7,9 +7,10 @@ import (
 func (warrior *Warrior) registerSunderArmorSpell() {
 	warrior.SunderArmorAuras = warrior.NewEnemyAuraArray(core.SunderArmorAura)
 
-	spellID := int32(11597)
+	rank := rankAtLevel(SunderArmorLevel[:], warrior.Level)
+	spellID := SunderArmorSpellId[rank]
 
-	spell_level := 58
+	spell_level := SunderArmorLevel[rank]
 
 	var canApplySunder bool
 
@@ -20,9 +21,15 @@ func (warrior *Warrior) registerSunderArmorSpell() {
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
 
+		RequiredLevel: SunderArmorLevel[rank],
+		Rank:          rank,
+
 		RageCost: core.RageCostOptions{
-			// Improved Sunder Armor's discount is a SpellMod in talents.go.
-			Cost:   15,
+			// Improved Sunder Armor's discount is a SpellMod in
+			// talents.go, so this is the client's undiscounted cost.
+			// SunderArmorBaseDamage is the -450 armour the aura strips,
+			// not damage; the ability itself deals none.
+			Cost:   rageCost(SunderArmorManaCost[rank]),
 			Refund: 0.8,
 		},
 		Cast: core.CastConfig{

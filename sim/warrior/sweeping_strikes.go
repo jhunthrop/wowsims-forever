@@ -87,12 +87,12 @@ func (warrior *Warrior) registerSweepingStrikesCD() {
 		Flags:       core.SpellFlagHelpful,
 
 		RageCost: core.RageCostOptions{
-			Cost: 30,
+			Cost: rageCost(SweepingStrikesManaCost[0]),
 		},
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    warrior.NewTimer(),
-				Duration: time.Second * 30,
+				Duration: time.Duration(SweepingStrikesCooldownMS[0]) * time.Millisecond,
 			},
 		},
 

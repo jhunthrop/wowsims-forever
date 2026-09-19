@@ -6,6 +6,22 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// Whirlwind's generated rows are the third the data lane owes a fix
+// for. Two rows share the name, the rank (0) and spell_level 36 - the
+// 250-tenths 1680 and a free reissue - and the dedup kept the free one,
+// so WhirlwindManaCost[0] and WhirlwindCooldownMS[0] are both 0 where
+// the client's own row says 250 tenths and a 10 s category cooldown.
+// Both numbers below are therefore read by hand from
+// data/builds/1.60.1.69893/spellconst/warrior.json.
+//
+// WhirlwindBaseDamage IS sound and IS read - it is {0, 0}, which is the
+// client saying Whirlwind is pure weapon damage with no flat term, and
+// that is why no base damage appears in ApplyEffects.
+const (
+	whirlwindRageCost = 25.0
+	whirlwindCooldown = time.Second * 10
+)
+
 func (warrior *Warrior) registerWhirlwindSpell() {
 	results := make([]*core.SpellResult, min(4, warrior.Env.GetNumTargets()))
 
@@ -19,7 +35,7 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 		Flags:          core.SpellFlagAPL | SpellFlagOffensive,
 
 		RageCost: core.RageCostOptions{
-			Cost: 25,
+			Cost: whirlwindRageCost,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -28,7 +44,7 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    warrior.NewTimer(),
-				Duration: time.Second * 10,
+				Duration: whirlwindCooldown,
 			},
 		},
 		CritDamageBonus: warrior.impale(),

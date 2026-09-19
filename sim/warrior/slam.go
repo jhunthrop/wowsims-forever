@@ -7,9 +7,14 @@ import (
 )
 
 func (warrior *Warrior) registerSlamSpell() {
-	requiredLevel := 54
+	rank := rankAtLevel(SlamLevel[:], warrior.Level)
+	requiredLevel := SlamLevel[rank]
+	// The engine keeps spell 11605, the id the UI and the preset
+	// rotations name; the generated SlamSpellId[5] is Forever's reissue
+	// 1310200. Same rank, same 87 damage - which id ships is the data
+	// lane's call.
 	spellID := int32(11605)
-	flatDamageBonus := 87.0
+	flatDamageBonus := SlamBaseDamage[rank][0]
 
 	warrior.Slam = warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		SpellCode:      SpellCode_WarriorSlam,
@@ -21,15 +26,20 @@ func (warrior *Warrior) registerSlamSpell() {
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
 
 		RequiredLevel: requiredLevel,
+		Rank:          rank,
 
 		RageCost: core.RageCostOptions{
-			Cost:   15,
+			Cost:   rageCost(SlamManaCost[rank]),
 			Refund: 0.8,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD:      core.GCDDefault,
-				CastTime: time.Millisecond*1500 - time.Millisecond*100*time.Duration(warrior.Talents.ImprovedSlam),
+				GCD: core.GCDDefault,
+				// SlamCooldownMS[5] is 15000 and is NOT read here: the
+				// rank-5 row the dedup kept is Forever's reissue
+				// 1310200, which carries a 15 s cooldown the ability
+				// itself does not have. Listed for the data lane.
+				CastTime: time.Millisecond*time.Duration(SlamCastTime[rank]) - time.Millisecond*100*time.Duration(warrior.Talents.ImprovedSlam),
 			},
 			ModifyCast: func(sim *core.Simulation, spell *core.Spell, cast *core.Cast) {
 				if spell.CastTime() > 0 {

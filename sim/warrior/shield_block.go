@@ -40,7 +40,7 @@ func (warrior *Warrior) RegisterShieldBlockCD() {
 		SpellSchool: core.SpellSchoolPhysical,
 
 		RageCost: core.RageCostOptions{
-			Cost: 10,
+			Cost: rageCost(ShieldBlockManaCost[0]),
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{},

@@ -6,6 +6,17 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// Revenge is the one warrior ability constants_auto_gen.go does not
+// cover: the generator skips a spell whose <Name>Ranks it would collide
+// with, and this hand-written table is that collision (the generated
+// file records it as `skipped: "Revenge" already has a hand-written
+// RevengeRanks elsewhere in this package`). So the numbers below are
+// still vanilla's, and the client disagrees with them - spell 25288's
+// school-damage effect reads 153 at rank 6 where this table rolls
+// 81-99. Freeing the name so the generator can emit Revenge, and then
+// re-deriving the damage, belongs to the warrior-protection spec's task
+// together with the rest of that tree; sim/warrior/tank_warrior is
+// skipped until then, so nothing is validating these numbers today.
 const RevengeRanks = 6
 
 var RevengeSpellId = [RevengeRanks + 1]int32{0, 6572, 6574, 7379, 11600, 11601, 25288}
