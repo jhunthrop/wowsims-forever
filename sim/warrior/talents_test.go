@@ -60,6 +60,8 @@ var foreverFuryTalentsApplied = []string{
 	"improved_thunder_clap",
 	"improved_sunder_armor",
 	"two_handed_weapon_specialization",
+	// Read by stances.go's rage retention.
+	"improved_tactical_mastery",
 	// Read by an ability file rather than by a mod.
 	"impale",
 	"improved_overpower",
@@ -218,6 +220,18 @@ func assertWarriorBuildIsLegal(t *testing.T, build string) {
 			byLocation[[2]int{talent.Location.RowIdx, talent.Location.ColIdx}] = talent
 		}
 
+		// The tier gate below accumulates points in list order, so it
+		// is only correct while the generator emits a tree sorted by
+		// row. It does today; this is the assertion that says so rather
+		// than the check silently going soft if that ever changes.
+		for i := 1; i < len(tree.Talents); i++ {
+			if tree.Talents[i].Location.RowIdx < tree.Talents[i-1].Location.RowIdx {
+				t.Fatalf("%s: the generated tree is not sorted by row (talent %d is tier %d after tier %d); "+
+					"the cumulative tier-gate check below depends on that order",
+					tree.Name, i, tree.Talents[i].Location.RowIdx, tree.Talents[i-1].Location.RowIdx)
+			}
+		}
+
 		var cumulative int
 		for _, talent := range tree.Talents {
 			field := snakeCase(talent.FieldName)
@@ -234,6 +248,11 @@ func assertWarriorBuildIsLegal(t *testing.T, build string) {
 				t.Errorf("%s is tier %d in %s and needs %d points spent there, but the build has spent %d",
 					field, talent.Location.RowIdx, tree.Name, gate, cumulative)
 			}
+			// The PrereqRank > 0 guard is load-bearing, not defensive:
+			// a talent with no prerequisite leaves PrereqLocation at
+			// its zero value, which is a real grid position (tier 0,
+			// column 0) and would otherwise be read as "requires the
+			// first talent in the tree".
 			if prereq, ok := byLocation[[2]int{talent.PrereqLocation.RowIdx, talent.PrereqLocation.ColIdx}]; ok && talent.PrereqRank > 0 {
 				if got := spends[snakeCase(prereq.FieldName)]; got < talent.PrereqRank {
 					t.Errorf("%s needs %s at rank %d, the build has rank %d",
@@ -373,12 +392,19 @@ func sum(segment string) int {
 // SpellFlagNoOnCastComplete, costs no global cooldown, and can therefore
 // be cast on every APL iteration as a free extra weapon swing.
 //
-// On the phase-1 Fury profile that mistake is worth 5,664 DPS against
-// 1,759, so it is not a rounding error a reviewer would spot in a
-// golden. ui/warrior/apls/forever_fury.apl.json is pinned from
-// data/curated/apl/warrior-fury.json, which omits the tag; the pin adds
-// it and this test is what stops the next `make engine-pin` from
-// quietly taking it away again.
+// On the phase-1 Fury profile that mistake is worth 5,996 DPS against
+// 1,739 - measured one run each, everything but the tag held fixed - so
+// it is not a rounding error a reviewer would spot in a golden.
+//
+// ui/warrior/apls/forever_fury.apl.json is pinned from
+// data/curated/apl/warrior-fury.json. That file omitted the tag when
+// this task landed and the pin added it by hand; the data lane has
+// since corrected the canonical (site main, commit ed49176), so the
+// pinned copy is now that file's `rotation` value verbatim, dedented by
+// the two spaces the wrapper adds and nothing else. It carries no note
+// of its own precisely so the next `make engine-pin` is a byte-for-byte
+// copy - the reasoning lives here instead, and this test is what stops
+// a future re-pin from quietly dropping the tag again.
 func TestTheForeverFuryRotationQueuesHeroicStrike(t *testing.T) {
 	raw, err := os.ReadFile("../../ui/warrior/apls/forever_fury.apl.json")
 	if err != nil {
