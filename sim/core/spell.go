@@ -595,6 +595,10 @@ func (spell *Spell) applyEffects(sim *Simulation, target *Unit) {
 	spell.casts++
 
 	spell.ApplyEffects(sim, target, spell)
+
+	// After the effects, so the resources recorded are the ones the
+	// player saw after the cast.
+	sim.recordSampleCast(spell, target)
 }
 
 func (spell *Spell) ApplyAOEThreatIgnoreMultipliers(threatAmount float64) {

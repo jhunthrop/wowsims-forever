@@ -43,6 +43,15 @@ type Simulation struct {
 
 	Log func(string, ...interface{})
 
+	// sample, when set, collects one unit's casts for the sample-iteration
+	// log. It is only ever set on the throwaway Simulation the replay
+	// builds, never on the one whose metrics are reported.
+	sample *sampleRecorder
+
+	// iterationSamples is (dps, seed) per iteration, filled only when the
+	// request asked for a sample log.
+	iterationSamples []iterationSample
+
 	executePhase int32 // 20, 25, or 35 for the respective execute range, 100 otherwise
 
 	executePhaseCallbacks []func(*Simulation, int32) // 2nd parameter is 35 for 35%, 25 for 25% and 20 for 20%
@@ -179,6 +188,10 @@ func runSim(rsr *proto.RaidSimRequest, progress chan *proto.ProgressMetrics, ski
 	// using a variable here allows us to mutate it in the deferred recover, sending out error info
 	result = sim.run()
 
+	if rsr.SimOptions.SampleIteration && result.Error == nil {
+		result.SampleIteration = runSampleIteration(rsr, sim.iterationSamples, sim.BaseDuration, signals)
+	}
+
 	return result
 }
 
@@ -232,7 +245,13 @@ func (sim *Simulation) labelRand(label string) Rand {
 }
 
 func (sim *Simulation) reseedRands(i int64) {
-	rseed := sim.Options.RandomSeed + i
+	sim.reseedTo(sim.Options.RandomSeed + i)
+}
+
+// reseedTo puts the RNGs at an exact seed. reseedRands derives one from
+// an iteration index; the sample replay uses the seed directly, which is
+// what lets it reproduce a chosen iteration on a fresh Simulation.
+func (sim *Simulation) reseedTo(rseed int64) {
 	sim.rand.Seed(rseed)
 
 	if sim.isTest {
@@ -240,6 +259,17 @@ func (sim *Simulation) reseedRands(i int64) {
 			rng.Seed(makeTestRandSeed(rseed, label))
 		}
 	}
+}
+
+// iterationSeed is the seed iteration i ran at. Iteration 0 runs at the
+// seed the Simulation was constructed with - which is time-based when the
+// request left RandomSeed at zero - and every later iteration at
+// RandomSeed+i, because that is what the run loop does.
+func (sim *Simulation) iterationSeed(i int32) int64 {
+	if i == 0 {
+		return sim.rseed
+	}
+	return sim.Options.RandomSeed + int64(i)
 }
 
 func makeTestRandSeed(rseed int64, label string) int64 {
@@ -296,12 +326,25 @@ func (sim *Simulation) run() *proto.RaidSimResult {
 	// 	fmt.Printf(fmt.Sprintf("[%0.1f] "+message+"\n", append([]interface{}{sim.CurrentTime.Seconds()}, vals...)...))
 	// }
 
+	sampling := sim.Options.SampleIteration
+	if sampling {
+		sim.iterationSamples = make([]iterationSample, 0, sim.Options.Iterations)
+	}
+	sampleUnit := sim.sampleUnit()
+	if sampleUnit == nil {
+		sampling = false
+	}
+
 	sim.runOnce()
 	firstIterationDuration := sim.Duration
 	if sim.Encounter.EndFightAtHealth != 0 {
 		firstIterationDuration = sim.CurrentTime
 	}
 	totalDuration := firstIterationDuration
+
+	if sampling {
+		sim.recordIterationSample(sampleUnit, sim.iterationSeed(0))
+	}
 
 	if !sim.Options.Debug {
 		sim.Log = nil
@@ -338,6 +381,10 @@ func (sim *Simulation) run() *proto.RaidSimResult {
 			iterDuration = sim.CurrentTime
 		}
 		totalDuration += iterDuration
+
+		if sampling {
+			sim.recordIterationSample(sampleUnit, sim.iterationSeed(i))
+		}
 	}
 	result := &proto.RaidSimResult{
 		RaidMetrics:      sim.Raid.GetMetrics(),

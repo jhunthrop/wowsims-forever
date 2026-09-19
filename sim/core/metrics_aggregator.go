@@ -16,6 +16,11 @@ type DistributionMetrics struct {
 	// Values for the current iteration. These are cleared after each iteration.
 	Total float64
 
+	// LastIterationValue is the value doneIteration last computed. The
+	// sample-iteration replay reads it to learn which iteration was the
+	// median one, without buffering anything per iteration.
+	LastIterationValue float64
+
 	// Aggregate values. These are updated after each iteration.
 	aggregator
 	max     float64
@@ -33,6 +38,7 @@ func (distMetrics *DistributionMetrics) reset() {
 // This should be called when a Sim iteration is complete.
 func (distMetrics *DistributionMetrics) doneIteration(sim *Simulation) {
 	dps := distMetrics.Total / sim.Duration.Seconds()
+	distMetrics.LastIterationValue = dps
 	distMetrics.add(dps)
 
 	if sim.Options.SaveAllValues {

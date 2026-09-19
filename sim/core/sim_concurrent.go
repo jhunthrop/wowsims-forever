@@ -350,7 +350,28 @@ func CombineConcurrentSimResults(results []*proto.RaidSimResult, isDebug bool) *
 		rsrc.AddResult(result, i == numResults-1, resultWeight)
 	}
 
+	rsrc.Combined.SampleIteration = pickSampleIteration(results, rsrc.Combined.RaidMetrics.Dps.Avg)
+
 	return rsrc.Combined
+}
+
+// pickSampleIteration chooses which shard's sample log survives the
+// combine: the one whose iteration is closest to the combined mean. Each
+// shard picked its own median, and the median of one eighth of the run is
+// not the median of the run.
+func pickSampleIteration(results []*proto.RaidSimResult, mean float64) *proto.SampleIteration {
+	var best *proto.SampleIteration
+	bestDistance := math.Inf(1)
+	for _, result := range results {
+		sample := result.SampleIteration
+		if sample == nil {
+			continue
+		}
+		if distance := math.Abs(sample.Dps - mean); distance < bestDistance {
+			best, bestDistance = sample, distance
+		}
+	}
+	return best
 }
 
 type concurrentSimData struct {
