@@ -1,8 +1,6 @@
 package warrior
 
 import (
-	"time"
-
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -13,26 +11,22 @@ import (
 // spell in this package.
 //
 // "Causes all nearby enemies to be Dazed, reducing movement speed by 50%
-// for 6 sec." It deals no damage, so it changes nothing on a
-// single-target fight; it is registered so the APL validator knows the
-// character has it and so a movement-aware encounter profile can use it.
+// for 6 sec." THE SNARE IS NOT MODELLED: no encounter in this sim moves,
+// so a movement-speed debuff has nothing to act on and applying an aura
+// for it would be machinery with no reader. The ability deals no damage
+// either, so it changes nothing on a single-target fight; it is
+// registered so the APL validator knows the character has it, and the
+// day a movement-aware encounter profile exists, the "50% for 6 sec"
+// quoted above is the number to give it.
 //
-// Every number comes from the generated constants
+// Every number that IS used comes from the generated constants
 // (sim/warrior/constants_auto_gen.go, build 1.60.1.69893) rather than a
-// literal, except the snare's own duration and magnitude, which the
-// generated arrays do not carry - those are quoted from the client's
-// rank description above and are what the row's BaseDamage of -50 says
-// as well.
+// literal.
 const (
 	// piercingHowlRank is the index into the generated rank arrays. The
 	// client gives Piercing Howl a single, unnumbered rank, which the
 	// generator emits at label 0.
 	piercingHowlRank = 0
-
-	// piercingHowlSnareDuration is the "for 6 sec" of the rank
-	// description; the generated arrays carry cast time, cooldown and
-	// cost but not aura duration.
-	piercingHowlSnareDuration = time.Second * 6
 )
 
 // piercingHowlRageCost converts the client's cost column, which stores

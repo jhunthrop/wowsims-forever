@@ -36,8 +36,6 @@ const (
 // a scalar identity; a mask is what lets one talent config target a set
 // of spells at once.
 const (
-	WarriorSpellMaskNone uint64 = 0
-
 	WarriorSpellMaskBloodthirst uint64 = 1 << iota
 	WarriorSpellMaskWhirlwind
 	WarriorSpellMaskExecute
