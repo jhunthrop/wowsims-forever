@@ -37,6 +37,14 @@ jobs:
       # getting the order wrong fails only in CI.
       - run: make binary_dist/dist.go
       - run: go test --tags=with_db -count=1 ./sim/...
+      # tools/talentgen holds the generator's own guarantees -
+      # TestRegeneratingEveryClassIsByteIdentical,
+      # TestUITreeJSONCarriesEveryPrerequisite and
+      # TestTalentStringRoundTripsThroughFillTalentsProto among them,
+      # over ~11k lines of per-class fixtures. Without this step a hand
+      # edit to any of the nine talents_auto_gen.go, the nine .proto
+      # talent messages or the nine UI talent JSONs passes green.
+      - run: go test --tags=with_db -count=1 ./tools/...
       # The site builds our wasm from its own sim/ module, but the engine
       # must still compile for js/wasm or that build breaks downstream.
       - name: the engine cross-compiles for wasm
