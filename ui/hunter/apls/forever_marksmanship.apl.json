@@ -2,6 +2,10 @@
   "type": "TypeAPL",
   "prepullActions": [
     {
+      "action": { "move": { "rangeFromTarget": { "const": { "val": "30" } } } },
+      "doAtValue": { "const": { "val": "-15s" } }
+    },
+    {
       "action": { "castSpell": { "spellId": { "spellId": 25296, "rank": 7 } } },
       "doAtValue": { "const": { "val": "-10s" } }
     },

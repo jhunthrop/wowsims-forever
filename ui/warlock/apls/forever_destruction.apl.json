@@ -38,10 +38,10 @@
       }
     },
     {
-      "notes": "Conflagrate consumes part of Immolate's remaining damage as instant burst; only worth casting while Immolate is up.",
+      "notes": "Conflagrate consumes part of Immolate's remaining damage as instant burst; only worth casting while Immolate is up. Fix round 3: cast as 18932 rank 6, the highest of the vanilla ids sim/warlock/conflagrate.go actually registers (17962/18930/18931/18932), not 1293817 -- the id the Forever talent-tree metadata table carries, which nothing in sim/warlock ever casts. Talent-gated (sim/warlock/conflagrate.go's registerConflagrateSpell returns immediately without warlock.Talents.Conflagrate), so it stays unresolved under this build's no-talent smoke run the same way Shadowburn below does.",
       "action": {
         "condition": { "dotIsActive": { "spellId": { "spellId": 25309, "rank": 8 } } },
-        "castSpell": { "spellId": { "spellId": 1293817, "rank": 1 } }
+        "castSpell": { "spellId": { "spellId": 18932, "rank": 6 } }
       }
     },
     {

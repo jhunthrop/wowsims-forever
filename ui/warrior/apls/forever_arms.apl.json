@@ -27,9 +27,9 @@
       }
     },
     {
-      "notes": "Keep Rend up: Improved Rend and Deep Wounds both want the bleed ticking.",
+      "notes": "Keep Rend up: Improved Rend and Deep Wounds both want the bleed ticking. Fix round 3: Rend's DoT lives on the target, not the warrior, so the gate is dotIsActive against the current target rather than auraIsActive against the caster -- the same shape shaman-elemental and druid-feral already use for their own DoT upkeep checks. The old auraIsActive gate never resolved (nil condition, read as always true), so Rend was recast on every free global.",
       "action": {
-        "condition": { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 11574, "rank": 7 } } } } },
+        "condition": { "not": { "val": { "dotIsActive": { "spellId": { "spellId": 11574, "rank": 7 } } } } },
         "castSpell": { "spellId": { "spellId": 11574, "rank": 7 } }
       }
     },
