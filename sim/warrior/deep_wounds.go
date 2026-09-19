@@ -12,11 +12,7 @@ func (warrior *Warrior) applyDeepWounds() {
 		return
 	}
 
-	spellID := map[int32]int32{
-		1: 12834,
-		2: 12849,
-		3: 12867,
-	}[warrior.Talents.DeepWounds]
+	spellID := deepWoundsSpellIDs[rankIndex(warrior.Talents.DeepWounds, deepWoundsSpellIDs[:])]
 
 	warrior.DeepWounds = warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		SpellCode:   SpellCode_WarriorDeepWounds,

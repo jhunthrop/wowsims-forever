@@ -122,6 +122,54 @@ func (warrior *Warrior) ApplyTalents() {
 	warrior.registerLastStandCD()
 }
 
+// Talents whose ranks do not scale linearly, or whose values are the
+// client's own per-rank figures, need a table rather than a
+// multiplication. They live here, in one block, so rankIndex below is
+// the only way any of them is read; each is named at the site that
+// reads it, which may be another file in this package.
+var (
+	// Improved Bloodrage: "+5 Rage instantly" at rank 2, so the ranks
+	// are 2 and 5 on top of Bloodrage's own 10.
+	improvedBloodrageInstantRage = [3]float64{0, 2, 5}
+	// Improved Execute: "by 3" at rank 1 and "by 5" at rank 2 - not
+	// vanilla's 2 and 5, which is what the old inline table said.
+	improvedExecuteRageReduction = [3]int64{0, 3, 5}
+	// Improved Rend: "Increases the damage of your Rend ability by
+	// 35%" at rank 3.
+	improvedRendDamageMultiplier = [4]float64{1, 1.12, 1.23, 1.35}
+	// Improved Shield Wall: "+5 sec" at rank 2.
+	improvedShieldWallDuration = [3]float64{0, 3, 5}
+	// Defiance: "+15% threat caused in Defensive Stance" at rank 5.
+	defianceThreatMultiplier = [6]float64{1, 1.03, 1.06, 1.09, 1.12, 1.15}
+	// Flurry: "+25% melee attack speed for your next swings" at rank 5,
+	// so 5% a point. See makeFlurryAura.
+	flurryAttackSpeed = [6]float64{1, 1.05, 1.10, 1.15, 1.20, 1.25}
+	// Deep Wounds has a distinct rank spell per rank, unlike the ranks
+	// in TalentSpellIDs, which the client reissued as one id.
+	deepWoundsSpellIDs = [4]int32{0, 12834, 12849, 12867}
+)
+
+// rankIndex clamps a talent rank to a lookup table's highest index.
+// core.FillTalentsProto does not validate a talent string against the
+// client's max rank per node, so a string with more points in a talent
+// than the talent allows (a corrupt or hand-edited one, and the string
+// arrives from the web) would otherwise index one of this package's
+// rank tables out of range and panic instead of reading the talent's
+// max-rank value. This is the mage's helper (sim/mage/talents.go),
+// mirrored here: the mage half of the bug was fixed and the warrior
+// half was not.
+//
+// Tables written one-based - the TalentSpellIDs arrays, which have no
+// rank-0 entry - are read as rankIndex(rank-1, table), and every such
+// call site returns early on rank 0, so the negative index never
+// reaches here.
+func rankIndex[T any](rank int32, table []T) int {
+	if i := int(rank); i >= 0 && i < len(table) {
+		return i
+	}
+	return len(table) - 1
+}
+
 // applyDeclarativeTalents is every talent that is a modifier on a set of
 // spells. Before the spell-mod system these were OnSpellRegistered
 // closures or arithmetic inlined into the ability file; as config they
@@ -157,13 +205,12 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 		})
 	}
 
-	// Improved Execute: "by 3" at rank 1 and "by 5" at rank 2 - not
-	// vanilla's 2 and 5, which is what the old inline table said.
+	// Improved Execute: the ranks are improvedExecuteRageReduction.
 	if t.ImprovedExecute > 0 {
 		warrior.AddStaticMod(core.SpellModConfig{
 			Kind:      core.SpellMod_PowerCost_Flat,
 			ClassMask: WarriorSpellMaskExecute,
-			IntValue:  -[]int64{0, 3, 5}[t.ImprovedExecute],
+			IntValue:  -improvedExecuteRageReduction[rankIndex(t.ImprovedExecute, improvedExecuteRageReduction[:])],
 		})
 	}
 
@@ -392,7 +439,7 @@ func (warrior *Warrior) applyEnrage() {
 
 	warrior.EnrageAura = warrior.GetOrRegisterAura(core.Aura{
 		Label:     "Enrage",
-		ActionID:  core.ActionID{SpellID: TalentSpellIDs["enrage"][warrior.Talents.Enrage-1]},
+		ActionID:  core.ActionID{SpellID: TalentSpellIDs["enrage"][rankIndex(warrior.Talents.Enrage-1, TalentSpellIDs["enrage"])]},
 		Duration:  time.Second * 12,
 		MaxStacks: 12,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
@@ -484,8 +531,8 @@ func (warrior *Warrior) makeFlurryAura(points int32) *core.Aura {
 	// this same function, and GetOrRegisterAura keys on the label, so
 	// two ranks sharing a label would silently become one aura at
 	// whichever attack speed registered first.
-	spellID := TalentSpellIDs["flurry"][points-1]
-	attackSpeed := []float64{1.05, 1.10, 1.15, 1.20, 1.25}[points-1]
+	spellID := TalentSpellIDs["flurry"][rankIndex(points-1, TalentSpellIDs["flurry"])]
+	attackSpeed := flurryAttackSpeed[rankIndex(points, flurryAttackSpeed[:])]
 
 	aura := warrior.GetOrRegisterAura(core.Aura{
 		Label:     fmt.Sprintf("Flurry Proc (%d points)", points),
@@ -537,7 +584,7 @@ func (warrior *Warrior) applyShieldSpecialization() {
 	warrior.AddStat(stats.Block, core.BlockRatingPerBlockChance*1*float64(warrior.Talents.ShieldSpecialization))
 
 	procChance := 0.2 * float64(warrior.Talents.ShieldSpecialization)
-	rageMetrics := warrior.NewRageMetrics(core.ActionID{SpellID: TalentSpellIDs["shield_specialization"][warrior.Talents.ShieldSpecialization-1]})
+	rageMetrics := warrior.NewRageMetrics(core.ActionID{SpellID: TalentSpellIDs["shield_specialization"][rankIndex(warrior.Talents.ShieldSpecialization-1, TalentSpellIDs["shield_specialization"])]})
 
 	warrior.RegisterAura(core.Aura{
 		Label:    "Shield Specialization",

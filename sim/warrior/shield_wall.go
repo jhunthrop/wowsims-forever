@@ -8,7 +8,7 @@ import (
 
 // TODO: Classic Update
 func (warrior *Warrior) RegisterShieldWallCD() {
-	duration := time.Duration(10+[]float64{0, 3, 5}[warrior.Talents.ImprovedShieldWall]) * time.Second
+	duration := time.Duration(10+improvedShieldWallDuration[rankIndex(warrior.Talents.ImprovedShieldWall, improvedShieldWallDuration[:])]) * time.Second
 	//This is the inverse of the tooltip since it is a damage TAKEN coefficient
 	damageTaken := 0.25
 

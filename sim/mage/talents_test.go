@@ -226,6 +226,62 @@ func TestMageWithOverRankTalentsConstructsWithoutPanicking(t *testing.T) {
 	talentsStr := talentStringWithRank(t, ForeverFrostTalents, "arcane_meditation", 9)
 	talentsStr = talentStringWithRank(t, talentsStr, "improved_cone_of_cold", 9)
 
+	defer func() {
+		if r := recover(); r != nil {
+			t.Fatalf("constructing a mage with ArcaneMeditation=9 and ImprovedConeOfCold=9 panicked: %v", r)
+		}
+	}()
+
+	built := buildMageForTalentTest(t, talentsStr)
+
+	if got, want := built.PseudoStats.SpiritRegenRateCasting, arcaneMeditationRegenWhileCasting[len(arcaneMeditationRegenWhileCasting)-1]; got != want {
+		t.Errorf("SpiritRegenRateCasting with ArcaneMeditation=9 = %v, want the max-rank value %v", got, want)
+	}
+}
+
+// The three SpellMod_Threat_Pct talents multiply 1 - perRank*rank, so an
+// unvalidated talent string (core.FillTalentsProto does no max-rank
+// check) could drive the multiplier negative — rank 9 of Arcane Subtlety
+// is 1 - 0.15*9 = -0.35 — and core.removeThreatPct then divides by it.
+// rankOf clamps the rank to the talent's own max. A talent string holds
+// one digit per node, so 9 is the worst an attacker can write; at
+// 0.15/rank Arcane Subtlety inverts there, and the other two "only"
+// reduce threat by 90% instead of 30%. The last assertion is what keeps
+// this from being a tautology: it fails if the clamp stops changing the
+// value, at which point the test needs a new witness rather than a
+// quiet pass.
+func TestOverRankedThreatTalentsCannotInvertTheThreatMultiplier(t *testing.T) {
+	for _, c := range []struct {
+		talent  string
+		perRank float64
+	}{
+		{"arcane_subtlety", arcaneSubtletyThreatReductionPerRank},
+		{"burning_soul", burningSoulThreatReductionPerRank},
+		{"frost_channeling", frostChannelingThreatReductionPerRank},
+	} {
+		maxRank := int32(len(TalentSpellIDs[c.talent]))
+		if maxRank == 0 {
+			t.Errorf("TalentSpellIDs has no entry for %q, so rankOf clamps to 0", c.talent)
+			continue
+		}
+		if got := rankOf(c.talent, 9); got != maxRank {
+			t.Errorf("rankOf(%q, 9) = %d, want the talent's max rank %d", c.talent, got, maxRank)
+		}
+		if mult := 1 - c.perRank*float64(rankOf(c.talent, 9)); mult <= 0 {
+			t.Errorf("%s over-ranked to 9 leaves a threat multiplier of %v, which must stay positive", c.talent, mult)
+		}
+		if clamped, unclamped := 1-c.perRank*float64(rankOf(c.talent, 9)), 1-c.perRank*9; clamped == unclamped {
+			t.Errorf("%s at rank 9 gives %v clamped and unclamped alike: this test no longer witnesses the clamp", c.talent, clamped)
+		}
+	}
+}
+
+// buildMageForTalentTest stands up one mage through the shipping agent
+// factory, in the P1 gear and consumes the regression suite uses, so the
+// spells and stats under test are the ones a sim sees.
+func buildMageForTalentTest(t *testing.T, talentsStr string) *Mage {
+	t.Helper()
+
 	player := core.WithSpec(
 		&proto.Player{
 			Class:              proto.Class_ClassMage,
@@ -240,20 +296,11 @@ func TestMageWithOverRankTalentsConstructsWithoutPanicking(t *testing.T) {
 	)
 	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
 
-	defer func() {
-		if r := recover(); r != nil {
-			t.Fatalf("constructing a mage with ArcaneMeditation=9 and ImprovedConeOfCold=9 panicked: %v", r)
-		}
-	}()
-
 	env, _, _ := core.NewEnvironment(raid, &proto.Encounter{}, true)
 
 	built, ok := env.Raid.Parties[0].Players[0].(*Mage)
 	if !ok {
 		t.Fatal("player 0 did not build as a *Mage")
 	}
-
-	if got, want := built.PseudoStats.SpiritRegenRateCasting, arcaneMeditationRegenWhileCasting[len(arcaneMeditationRegenWhileCasting)-1]; got != want {
-		t.Errorf("SpiritRegenRateCasting with ArcaneMeditation=9 = %v, want the max-rank value %v", got, want)
-	}
+	return built
 }

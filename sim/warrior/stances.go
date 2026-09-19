@@ -109,7 +109,7 @@ func (warrior *Warrior) registerBattleStanceAura() {
 }
 
 func (warrior *Warrior) registerDefensiveStanceAura() {
-	warrior.defensiveStanceThreatMultiplier = 1.3 * []float64{1, 1.03, 1.06, 1.09, 1.12, 1.15}[warrior.Talents.Defiance]
+	warrior.defensiveStanceThreatMultiplier = 1.3 * defianceThreatMultiplier[rankIndex(warrior.Talents.Defiance, defianceThreatMultiplier[:])]
 
 	warrior.DefensiveStanceAura = warrior.RegisterAura(core.Aura{
 		Label:    "Defensive Stance",

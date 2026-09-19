@@ -592,6 +592,22 @@ func rankIndex[T any](rank int32, table []T) int {
 	return len(table) - 1
 }
 
+// rankOf clamps a talent rank to that talent's own max rank, read as the
+// length of its generated rank-spell list so it cannot drift from the
+// tree. rankIndex above covers the talents this file reads through a
+// lookup table; the three SpellMod_Threat_Pct sites multiply a per-rank
+// figure instead, and there an over-ranked string is worse than a
+// too-large number: rank 9 of Arcane Subtlety gives 1 - 0.15*9 = -0.35,
+// a negative threat multiplier, which core.removeThreatPct then divides
+// by. Same root cause as the rank-table clamp - an unvalidated talent
+// string from the web - and the same local answer.
+func rankOf(talent string, rank int32) int32 {
+	if max := int32(len(TalentSpellIDs[talent])); rank > max {
+		return max
+	}
+	return rank
+}
+
 // applyDeclarativeTalents is every talent that is a modifier on a set of
 // spells. As config these can be read against a tooltip line by line,
 // which is what Forever's weekly number changes need; talents with
@@ -605,7 +621,7 @@ func (mage *Mage) applyDeclarativeTalents() {
 		mage.AddStaticMod(core.SpellModConfig{
 			Kind:       core.SpellMod_Threat_Pct,
 			ClassMask:  MageSpellMaskArcaneDamage,
-			FloatValue: 1 - arcaneSubtletyThreatReductionPerRank*float64(t.ArcaneSubtlety),
+			FloatValue: 1 - arcaneSubtletyThreatReductionPerRank*float64(rankOf("arcane_subtlety", t.ArcaneSubtlety)),
 		})
 	}
 
@@ -654,7 +670,7 @@ func (mage *Mage) applyDeclarativeTalents() {
 		mage.AddStaticMod(core.SpellModConfig{
 			Kind:       core.SpellMod_Threat_Pct,
 			ClassMask:  MageSpellMaskFireDamage,
-			FloatValue: 1 - burningSoulThreatReductionPerRank*float64(t.BurningSoul),
+			FloatValue: 1 - burningSoulThreatReductionPerRank*float64(rankOf("burning_soul", t.BurningSoul)),
 		})
 	}
 
@@ -753,7 +769,7 @@ func (mage *Mage) applyDeclarativeTalents() {
 		mage.AddStaticMod(core.SpellModConfig{
 			Kind:       core.SpellMod_Threat_Pct,
 			ClassMask:  MageSpellMaskFrost,
-			FloatValue: 1 - frostChannelingThreatReductionPerRank*float64(t.FrostChanneling),
+			FloatValue: 1 - frostChannelingThreatReductionPerRank*float64(rankOf("frost_channeling", t.FrostChanneling)),
 		})
 	}
 

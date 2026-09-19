@@ -22,7 +22,7 @@ func (warrior *Warrior) registerRendSpell() {
 	// ability by 12%" at rank 1, "by 23%" at rank 2 and "by 35%" at
 	// rank 3 (Arms node 105956). Vanilla's 15/25/35 is what stood here;
 	// only the top rank happens to agree.
-	damageMultiplier := []float64{1, 1.12, 1.23, 1.35}[warrior.Talents.ImprovedRend]
+	damageMultiplier := improvedRendDamageMultiplier[rankIndex(warrior.Talents.ImprovedRend, improvedRendDamageMultiplier[:])]
 
 	warrior.Rend = warrior.RegisterSpell(BattleStance|DefensiveStance, core.SpellConfig{
 		SpellCode:      SpellCode_WarriorRend,
