@@ -12,7 +12,19 @@ type Encounter struct {
 	Duration          time.Duration
 	DurationVariation time.Duration
 	Targets           []*Target
-	TargetUnits       []*Unit
+
+	// TargetUnits is the ACTIVE prefix of AllTargetUnits. Every AoE loop
+	// and every GetNumTargets reads it, so shrinking it is how a target
+	// stops existing for the rotation. AllTargetUnits is the whole pool
+	// and is what the environment indexes and builds attack tables for.
+	TargetUnits    []*Unit
+	AllTargetUnits []*Unit
+
+	// TargetsOverTime, when set, is the timeline of how many targets are
+	// active, sorted by time. Empty means every pooled target is active
+	// for the whole fight, which is every encounter that predates the
+	// parity work.
+	TargetsOverTime []TargetCount
 
 	// Biome is where this fight happens, for Forever's biome-conditional
 	// item effects. BiomeUnknown matches nothing.
@@ -39,6 +51,12 @@ type Encounter struct {
 	aoeCapMultiplier float64
 }
 
+// TargetCount is one step of an encounter's target-count timeline.
+type TargetCount struct {
+	At    time.Duration
+	Count int32
+}
+
 // MovementPattern is proto.MovementPattern in sim time units. Only a
 // pattern with a positive interval and a positive duration is a pattern;
 // anything else is an unset one, because a zero-length window repeated
@@ -63,6 +81,7 @@ func newMovementPattern(options *proto.MovementPattern) *MovementPattern {
 func NewEncounter(options *proto.Encounter) Encounter {
 	options.ExecuteProportion_25 = max(options.ExecuteProportion_25, options.ExecuteProportion_20)
 	options.ExecuteProportion_35 = max(options.ExecuteProportion_35, options.ExecuteProportion_25)
+	padTargetsForTimeline(options)
 
 	encounter := Encounter{
 		Duration:             DurationFromSeconds(options.Duration),
@@ -72,6 +91,7 @@ func NewEncounter(options *proto.Encounter) Encounter {
 		ExecuteProportion_35: max(options.ExecuteProportion_35, 0),
 		Targets:              []*Target{},
 		Biome:                options.Biome,
+		TargetsOverTime:      newTargetTimeline(options.TargetsOverTime),
 		Movement:             newMovementPattern(options.Movement),
 	}
 	// If UseHealth is set, we use the sum of targets health.
@@ -87,15 +107,16 @@ func NewEncounter(options *proto.Encounter) Encounter {
 	for targetIndex, targetOptions := range options.Targets {
 		target := NewTarget(targetOptions, int32(targetIndex))
 		encounter.Targets = append(encounter.Targets, target)
-		encounter.TargetUnits = append(encounter.TargetUnits, &target.Unit)
+		encounter.AllTargetUnits = append(encounter.AllTargetUnits, &target.Unit)
 	}
 	if len(encounter.Targets) == 0 {
 		// Add a dummy target. The only case where targets aren't specified is when
 		// computing character stats, and targets won't matter there.
 		target := NewTarget(&proto.Target{}, 0)
 		encounter.Targets = append(encounter.Targets, target)
-		encounter.TargetUnits = append(encounter.TargetUnits, &target.Unit)
+		encounter.AllTargetUnits = append(encounter.AllTargetUnits, &target.Unit)
 	}
+	encounter.TargetUnits = encounter.AllTargetUnits[:encounter.initialActiveCount()]
 
 	if encounter.EndFightAtHealth > 0 {
 		// Until we pre-sim set duration to 10m
@@ -112,7 +133,7 @@ func (encounter *Encounter) AOECapMultiplier() float64 {
 	return encounter.aoeCapMultiplier
 }
 func (encounter *Encounter) updateAOECapMultiplier() {
-	encounter.aoeCapMultiplier = min(10/float64(len(encounter.Targets)), 1)
+	encounter.aoeCapMultiplier = min(10/float64(len(encounter.TargetUnits)), 1)
 }
 
 func (encounter *Encounter) doneIteration(sim *Simulation) {

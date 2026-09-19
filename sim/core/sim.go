@@ -421,6 +421,7 @@ func (sim *Simulation) reset() {
 
 	sim.initManaTickAction()
 	sim.initEncounterMovement()
+	sim.initEncounterTargets()
 }
 
 func (sim *Simulation) PrePull() {

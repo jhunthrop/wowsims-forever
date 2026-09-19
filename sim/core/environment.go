@@ -75,7 +75,7 @@ func (env *Environment) construct(raidProto *proto.Raid, encounterProto *proto.E
 
 	env.Raid.updatePlayersAndPets()
 
-	env.AllUnits = append(env.Encounter.TargetUnits, env.Raid.AllUnits...)
+	env.AllUnits = append(env.Encounter.AllTargetUnits, env.Raid.AllUnits...)
 
 	for unitIndex, unit := range env.AllUnits {
 		unit.Env = env
@@ -83,12 +83,12 @@ func (env *Environment) construct(raidProto *proto.Raid, encounterProto *proto.E
 	}
 
 	for _, unit := range env.Raid.AllUnits {
-		unit.CurrentTarget = env.Encounter.TargetUnits[0]
+		unit.CurrentTarget = env.Encounter.AllTargetUnits[0]
 	}
 
 	// Apply extra debuffs from raid.
-	if raidProto.Debuffs != nil && len(env.Encounter.TargetUnits) > 0 {
-		for targetIdx, targetUnit := range env.Encounter.TargetUnits {
+	if raidProto.Debuffs != nil && len(env.Encounter.AllTargetUnits) > 0 {
+		for targetIdx, targetUnit := range env.Encounter.AllTargetUnits {
 			applyDebuffEffects(targetUnit, targetIdx, raidProto.Debuffs, raidProto)
 		}
 	}
@@ -274,7 +274,7 @@ func (env *Environment) GetMaxDuration() time.Duration {
 }
 
 func (env *Environment) GetNumTargets() int32 {
-	return int32(len(env.Encounter.Targets))
+	return int32(len(env.Encounter.TargetUnits))
 }
 
 func (env *Environment) GetTarget(index int32) *Target {
@@ -335,8 +335,12 @@ func (env *Environment) GetUnit(ref *proto.UnitReference, contextUnit *Unit) *Un
 			return nil
 		}
 	case proto.UnitReference_Target:
-		if int(ref.Index) < len(env.Encounter.TargetUnits) {
-			return env.Encounter.TargetUnits[ref.Index]
+		// Indexed by the target's fixed identity in the pool, not by its
+		// current active/inactive state: a reference to "Target 3" must
+		// keep resolving to the same unit even while the timeline has it
+		// deactivated, the same way Tanks assignments and GetTarget do.
+		if int(ref.Index) < len(env.Encounter.AllTargetUnits) {
+			return env.Encounter.AllTargetUnits[ref.Index]
 		} else {
 			return nil
 		}
