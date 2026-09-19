@@ -12,17 +12,7 @@ func init() {
 }
 
 func TestCombatSinisterStrike(t *testing.T) {
-	// FOREVER: this spec's talents were regenerated from the client's trait
-	// trees (plan docs/superpowers/plans/2026-09-14-sim-engine.md, task 17)
-	// and its behaviour has not been rewritten yet, so its DPS goldens
-	// describe a spec that no longer exists. Skipped rather than left
-	// failing: a suite that is always red is a suite nobody reads, and the
-	// next real regression would hide in it.
-	//
-	// Delete this when this spec is brought up, in the order design section
-	// 2.3 gives: Rogue, Hunter, Warlock, Shadow Priest, Balance and Feral
-	// Druid, Elemental and Enhancement Shaman, Retribution Paladin.
-	t.Skip("sim/rogue/dps_rogue awaits its Forever talent rewrite (plan 2026-09-14-sim-engine, task 17)")
+	core.SkipAwaitingForeverTalentRewrite(t, "sim/rogue/dps_rogue")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassRogue,
@@ -45,17 +35,7 @@ func TestCombatSinisterStrike(t *testing.T) {
 }
 
 func TestCombatDaggers(t *testing.T) {
-	// FOREVER: this spec's talents were regenerated from the client's trait
-	// trees (plan docs/superpowers/plans/2026-09-14-sim-engine.md, task 17)
-	// and its behaviour has not been rewritten yet, so its DPS goldens
-	// describe a spec that no longer exists. Skipped rather than left
-	// failing: a suite that is always red is a suite nobody reads, and the
-	// next real regression would hide in it.
-	//
-	// Delete this when this spec is brought up, in the order design section
-	// 2.3 gives: Rogue, Hunter, Warlock, Shadow Priest, Balance and Feral
-	// Druid, Elemental and Enhancement Shaman, Retribution Paladin.
-	t.Skip("sim/rogue/dps_rogue awaits its Forever talent rewrite (plan 2026-09-14-sim-engine, task 17)")
+	core.SkipAwaitingForeverTalentRewrite(t, "sim/rogue/dps_rogue")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassRogue,
