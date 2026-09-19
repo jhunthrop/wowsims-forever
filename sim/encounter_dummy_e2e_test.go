@@ -65,6 +65,17 @@ func TestDummyModeIsWorseThanARealBossForBothSpecs(t *testing.T) {
 // The execute half of the claim, isolated: a fury warrior's Execute is
 // the largest single thing the window buys, so on a dummy the spell must
 // never be cast at all.
+//
+// What this does and does not prove: with this fury build's gear, talents
+// and priority list (Bloodthirst and Whirlwind fill every GCD ahead of
+// Execute in ui/warrior/apls/forever_fury.apl.json), the rotation never
+// reaches Execute whether or not an execute window exists — a control run
+// against a real boss with a permanent execute window also casts it zero
+// times. So this test is a regression guard against a future bug that
+// makes Execute fire on a dummy; it is not, by itself, a demonstration
+// that the dummy's execute suppression works. That is proven at the unit
+// level in sim/core/encounter_dummy_test.go
+// (TestDummyModeHasNoExecuteWindow / TestNonDummyKeepsItsExecuteWindow).
 func TestDummyModeNeverLetsTheWarriorExecute(t *testing.T) {
 	dummy := parityEncounter()
 	dummy.ExecuteProportion_20 = 1.0
