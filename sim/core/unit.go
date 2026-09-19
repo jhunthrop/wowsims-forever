@@ -518,6 +518,7 @@ func (unit *Unit) reset(sim *Simulation, _ Agent) {
 	}
 
 	unit.DistanceFromTarget = unit.StartDistanceFromTarget
+	unit.MovementHandler.reset()
 
 	unit.manaBar.reset()
 	unit.focusBar.reset(sim)

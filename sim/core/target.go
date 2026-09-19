@@ -18,6 +18,12 @@ type Encounter struct {
 	// item effects. BiomeUnknown matches nothing.
 	Biome proto.Biome
 
+	// Movement is a repeating window in which players are away from the
+	// target (or, with CastingOnly, are interrupted in place). nil means
+	// a stand-still fight, which is every encounter that predates the
+	// parity work.
+	Movement *MovementPattern
+
 	ExecuteProportion_20 float64
 	ExecuteProportion_25 float64
 	ExecuteProportion_35 float64
@@ -33,6 +39,27 @@ type Encounter struct {
 	aoeCapMultiplier float64
 }
 
+// MovementPattern is proto.MovementPattern in sim time units. Only a
+// pattern with a positive interval and a positive duration is a pattern;
+// anything else is an unset one, because a zero-length window repeated
+// forever is not a fight, it is a hang.
+type MovementPattern struct {
+	Interval    time.Duration
+	Duration    time.Duration
+	CastingOnly bool
+}
+
+func newMovementPattern(options *proto.MovementPattern) *MovementPattern {
+	if options == nil || options.IntervalSeconds <= 0 || options.DurationSeconds <= 0 {
+		return nil
+	}
+	return &MovementPattern{
+		Interval:    DurationFromSeconds(options.IntervalSeconds),
+		Duration:    DurationFromSeconds(options.DurationSeconds),
+		CastingOnly: options.CastingOnly,
+	}
+}
+
 func NewEncounter(options *proto.Encounter) Encounter {
 	options.ExecuteProportion_25 = max(options.ExecuteProportion_25, options.ExecuteProportion_20)
 	options.ExecuteProportion_35 = max(options.ExecuteProportion_35, options.ExecuteProportion_25)
@@ -45,6 +72,7 @@ func NewEncounter(options *proto.Encounter) Encounter {
 		ExecuteProportion_35: max(options.ExecuteProportion_35, 0),
 		Targets:              []*Target{},
 		Biome:                options.Biome,
+		Movement:             newMovementPattern(options.Movement),
 	}
 	// If UseHealth is set, we use the sum of targets health.
 	if options.UseHealth {

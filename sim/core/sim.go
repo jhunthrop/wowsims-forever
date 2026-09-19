@@ -420,6 +420,7 @@ func (sim *Simulation) reset() {
 	sim.Environment.reset(sim)
 
 	sim.initManaTickAction()
+	sim.initEncounterMovement()
 }
 
 func (sim *Simulation) PrePull() {

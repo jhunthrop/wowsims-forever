@@ -534,7 +534,7 @@ func (spell *Spell) CanCast(sim *Simulation, target *Unit) bool {
 	}
 
 	// While moving only instant casts are possible
-	if spell.DefaultCast.CastTime > 0 && spell.Unit.IsMoving() {
+	if spell.DefaultCast.CastTime > 0 && spell.Unit.IsCastingBlocked() {
 		//if sim.Log != nil {
 		//	sim.Log("Cant cast because moving")
 		//}
