@@ -25,6 +25,12 @@ var StanceCodes = []int32{SpellCode_WarriorStanceBattle, SpellCode_WarriorStance
 
 const stanceEffectCategory = "Stance"
 
+// improvedTacticalMasteryRagePerPoint is the "additional 3 Rage" of
+// Improved Tactical Mastery's rank-1 description. The talent's rank
+// spell (12295) carries the figure only in its text, not in a
+// spellconst effect amount, so it is typed here with the quote above.
+const improvedTacticalMasteryRagePerPoint = 3.0
+
 func (warrior *Warrior) StanceMatches(other Stance) bool {
 	return warrior.Stance.Matches(other)
 }
@@ -36,10 +42,13 @@ func (warrior *Warrior) makeStanceSpell(stance Stance, aura *core.Aura, stanceCD
 		BerserkerStance: SpellCode_WarriorStanceBerserker,
 	}[stance]
 	actionID := aura.ActionID
-	// FOREVER: Tactical Mastery is Improved Tactical Mastery in the client's
-	// trees; retained rage is 0 until the warrior's talents are rewritten.
-	// maxRetainedRage := 5 * float64(warrior.Talents.TacticalMastery)
-	maxRetainedRage := 0.0
+	// Improved Tactical Mastery: "Tactical Mastery lets you retain up to
+	// an additional 3 Rage when you change stances" at rank 1, rising by
+	// 3 a rank to 15 at rank 5 (Arms node 105954). The client's text is
+	// a plain retained-rage number, so it is modelled here rather than
+	// listed as not modelled. Vanilla's Tactical Mastery retained 5 a
+	// point; the talent is renamed AND renumbered.
+	maxRetainedRage := improvedTacticalMasteryRagePerPoint * float64(warrior.Talents.ImprovedTacticalMastery)
 	rageMetrics := warrior.NewRageMetrics(actionID)
 
 	stanceSpell := warrior.RegisterSpell(AnyStance, core.SpellConfig{

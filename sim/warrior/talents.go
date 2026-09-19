@@ -392,7 +392,7 @@ func (warrior *Warrior) applyEnrage() {
 
 	warrior.EnrageAura = warrior.GetOrRegisterAura(core.Aura{
 		Label:     "Enrage",
-		ActionID:  core.ActionID{SpellID: 13048},
+		ActionID:  core.ActionID{SpellID: TalentSpellIDs["enrage"][warrior.Talents.Enrage-1]},
 		Duration:  time.Second * 12,
 		MaxStacks: 12,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
@@ -477,11 +477,18 @@ func (warrior *Warrior) makeFlurryAura(points int32) *core.Aura {
 		return nil
 	}
 
-	spellID := []int32{12319, 12971, 12972, 12973, 12974}[points-1]
+	// The client gives every rank of Flurry the same rank spell, 12319,
+	// so the id no longer distinguishes one rank's aura from another's
+	// and the label carries the rank instead. It has to: the
+	// Protection T2 4pc registers its own five-point Flurry through
+	// this same function, and GetOrRegisterAura keys on the label, so
+	// two ranks sharing a label would silently become one aura at
+	// whichever attack speed registered first.
+	spellID := TalentSpellIDs["flurry"][points-1]
 	attackSpeed := []float64{1.05, 1.10, 1.15, 1.20, 1.25}[points-1]
 
 	aura := warrior.GetOrRegisterAura(core.Aura{
-		Label:     fmt.Sprintf("Flurry Proc (%d)", spellID),
+		Label:     fmt.Sprintf("Flurry Proc (%d points)", points),
 		ActionID:  core.ActionID{SpellID: spellID},
 		Duration:  core.NeverExpires,
 		MaxStacks: 3,
@@ -508,7 +515,7 @@ func (warrior *Warrior) makeFlurryConsumptionTrigger(flurryAura *core.Aura) *cor
 		Duration: time.Millisecond * 500,
 	}
 	return core.MakePermanent(warrior.GetOrRegisterAura(core.Aura{
-		Label: fmt.Sprintf("Flurry Consume Trigger - %d", flurryAura.ActionID.SpellID),
+		Label: "Flurry Consume Trigger - " + flurryAura.Label,
 		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			// Remove a stack.
 			if flurryAura.IsActive() && spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) && icd.IsReady(sim) {
@@ -530,7 +537,7 @@ func (warrior *Warrior) applyShieldSpecialization() {
 	warrior.AddStat(stats.Block, core.BlockRatingPerBlockChance*1*float64(warrior.Talents.ShieldSpecialization))
 
 	procChance := 0.2 * float64(warrior.Talents.ShieldSpecialization)
-	rageMetrics := warrior.NewRageMetrics(core.ActionID{SpellID: 12727})
+	rageMetrics := warrior.NewRageMetrics(core.ActionID{SpellID: TalentSpellIDs["shield_specialization"][warrior.Talents.ShieldSpecialization-1]})
 
 	warrior.RegisterAura(core.Aura{
 		Label:    "Shield Specialization",
@@ -649,8 +656,19 @@ func (warrior *Warrior) registerLastStandCD() {
 
 // Not modelled, and deliberately so rather than by omission. Each is in
 // the client's tree and each would need machinery this spec does not
-// have; none is in ForeverFuryTalents, so none silently costs the
-// regression suite a point:
+// have.
+//
+// Three of them ARE in a reference build, so the cost is stated rather
+// than denied. ForeverFuryTalents spends 1 point on Booming Voice - the
+// cheapest legal filler on the Fury tier-0 row - and that is the one
+// point of the Fury build's 51 that buys nothing at all.
+// ForeverProtectionTalents spends 1 on Concussion Blow and 2 on
+// Bastion, which cost nothing today only because sim/warrior/tank_warrior
+// is skipped; the warrior-protection spec's task inherits them.
+//
+// Improved Tactical Mastery used to belong on this list and no longer
+// does: its rank text is a plain retained-rage number and stances.go
+// models it.
 //
 //	Booming Voice        - "+50% Battle Shout and Demoralizing Shout
 //	                       radius" at rank 5. Vanilla's raised their
