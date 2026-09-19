@@ -69,6 +69,39 @@ func TestNoTimelineLeavesEveryTargetActive(t *testing.T) {
 	}
 }
 
+// A malformed initial count (zero) must not leave the encounter with no
+// active targets: NewEncounter runs before sim.reset() and its self-healing
+// SetActiveTargetCount ever get a chance to run, so the clamp has to hold
+// here too, not just at run time.
+func TestZeroInitialCountClampsToOneAtConstruction(t *testing.T) {
+	enc := NewEncounter(&proto.Encounter{
+		Duration: 180,
+		Targets:  []*proto.Target{DefaultTargetProtoLvl60},
+		TargetsOverTime: []*proto.TargetCountAt{
+			{AtSeconds: 0, Count: 0},
+		},
+	})
+	if got := len(enc.TargetUnits); got != 1 {
+		t.Errorf("active count at construction = %d, want the clamped 1", got)
+	}
+}
+
+// A malformed initial count (negative) must not panic NewEncounter: a
+// negative count previously produced AllTargetUnits[:-1], an invalid slice
+// expression that crashes construction itself, before a run ever starts.
+func TestNegativeInitialCountClampsToOneAtConstruction(t *testing.T) {
+	enc := NewEncounter(&proto.Encounter{
+		Duration: 180,
+		Targets:  []*proto.Target{DefaultTargetProtoLvl60},
+		TargetsOverTime: []*proto.TargetCountAt{
+			{AtSeconds: 0, Count: -1},
+		},
+	})
+	if got := len(enc.TargetUnits); got != 1 {
+		t.Errorf("active count at construction = %d, want the clamped 1", got)
+	}
+}
+
 // Activating and deactivating is what the timeline does at run time: the
 // active prefix grows and shrinks, GetNumTargets follows it, and the AoE
 // cap multiplier is recomputed against the active count, not the pool.

@@ -47,9 +47,13 @@ func newTargetTimeline(entries []*proto.TargetCountAt) []TargetCount {
 
 // initialActiveCount is how many targets are up when the pull starts: the
 // last timeline entry at or before zero, or the whole pool when there is
-// no timeline.
+// no timeline. Clamped the same way SetActiveTargetCount clamps at run
+// time: a bad count in the request (missing, zero, negative) must not
+// crash NewEncounter itself, before the run-time self-healing in
+// SetActiveTargetCount ever gets a chance to run.
 func (encounter *Encounter) initialActiveCount() int32 {
-	count := int32(len(encounter.AllTargetUnits))
+	poolSize := int32(len(encounter.AllTargetUnits))
+	count := poolSize
 	if len(encounter.TargetsOverTime) == 0 {
 		return count
 	}
@@ -60,7 +64,7 @@ func (encounter *Encounter) initialActiveCount() int32 {
 		}
 		count = entry.Count
 	}
-	return count
+	return min(max(count, 1), poolSize)
 }
 
 // SetActiveTargetCount makes the first `count` pooled targets active and
