@@ -4,7 +4,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
 // The generated tree must be the client's: Arcane 18, Fire 17, Frost 19,
@@ -172,4 +174,86 @@ func sum(segment string) int {
 		n += int(c - '0')
 	}
 	return n
+}
+
+// rankIndex clamps a table lookup to the table's max rank rather than
+// indexing out of range, because core.FillTalentsProto does not
+// validate a talent string against the client's per-node max rank.
+func TestRankIndexClampsAnOverRankToTheTablesMaxEntry(t *testing.T) {
+	if got, want := improvedConeOfColdDamage[rankIndex(9, improvedConeOfColdDamage[:])], improvedConeOfColdDamage[len(improvedConeOfColdDamage)-1]; got != want {
+		t.Errorf("improvedConeOfColdDamage at rank 9 = %d, want the max-rank value %d", got, want)
+	}
+	if got, want := arcaneMeditationRegenWhileCasting[rankIndex(9, arcaneMeditationRegenWhileCasting[:])], arcaneMeditationRegenWhileCasting[len(arcaneMeditationRegenWhileCasting)-1]; got != want {
+		t.Errorf("arcaneMeditationRegenWhileCasting at rank 9 = %v, want the max-rank value %v", got, want)
+	}
+	// A rank inside the table still reads its own entry, not the max.
+	if got, want := improvedConeOfColdDamage[rankIndex(1, improvedConeOfColdDamage[:])], improvedConeOfColdDamage[1]; got != want {
+		t.Errorf("improvedConeOfColdDamage at rank 1 = %d, want %d", got, want)
+	}
+}
+
+// talentStringWithRank returns a copy of talentsStr with the named
+// MageTalents field's digit set to rank, found positionally the same
+// way core.FillTalentsProto reads it (proto field number against the
+// tree-segment offsets in TalentTreeSizes).
+func talentStringWithRank(t *testing.T, talentsStr string, fieldName string, rank int) string {
+	t.Helper()
+
+	fd := (&proto.MageTalents{}).ProtoReflect().Descriptor().Fields().ByName(protoreflect.Name(fieldName))
+	if fd == nil {
+		t.Fatalf("MageTalents has no field named %q", fieldName)
+	}
+
+	pos := int(fd.Number()) - 1
+	treeIdx := 0
+	for treeIdx < len(TalentTreeSizes) && pos >= TalentTreeSizes[treeIdx] {
+		pos -= TalentTreeSizes[treeIdx]
+		treeIdx++
+	}
+
+	parts := strings.Split(talentsStr, "-")
+	chars := []rune(parts[treeIdx])
+	chars[pos] = rune('0' + rank)
+	parts[treeIdx] = string(chars)
+	return strings.Join(parts, "-")
+}
+
+// A talent string with more points in a talent than the client allows
+// (a corrupt or hand-edited string, since FillTalentsProto does not
+// validate against the per-node max rank) must clamp to the talent's
+// max rank rather than panic with an index out of range.
+func TestMageWithOverRankTalentsConstructsWithoutPanicking(t *testing.T) {
+	talentsStr := talentStringWithRank(t, ForeverFrostTalents, "arcane_meditation", 9)
+	talentsStr = talentStringWithRank(t, talentsStr, "improved_cone_of_cold", 9)
+
+	player := core.WithSpec(
+		&proto.Player{
+			Class:              proto.Class_ClassMage,
+			Race:               proto.Race_RaceTroll,
+			Equipment:          core.GetGearSet("../../ui/mage/gear_sets", "p0.bis").GearSet,
+			Consumes:           P1Consumes.Consumes,
+			Buffs:              core.FullBuffs.Player,
+			TalentsString:      talentsStr,
+			DistanceFromTarget: 5,
+		},
+		PlayerOptions,
+	)
+	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
+
+	defer func() {
+		if r := recover(); r != nil {
+			t.Fatalf("constructing a mage with ArcaneMeditation=9 and ImprovedConeOfCold=9 panicked: %v", r)
+		}
+	}()
+
+	env, _, _ := core.NewEnvironment(raid, &proto.Encounter{}, true)
+
+	built, ok := env.Raid.Parties[0].Players[0].(*Mage)
+	if !ok {
+		t.Fatal("player 0 did not build as a *Mage")
+	}
+
+	if got, want := built.PseudoStats.SpiritRegenRateCasting, arcaneMeditationRegenWhileCasting[len(arcaneMeditationRegenWhileCasting)-1]; got != want {
+		t.Errorf("SpiritRegenRateCasting with ArcaneMeditation=9 = %v, want the max-rank value %v", got, want)
+	}
 }

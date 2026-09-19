@@ -42,9 +42,10 @@ const (
 // Cold, Frostfire Bolt) so the talents that name them can be written
 // once and start working the day the ability lands.
 const (
-	MageSpellMaskNone uint64 = 0
-
-	MageSpellMaskFrostbolt uint64 = 1 << iota
+	// Bit 0 is reserved so no mask ever equals the zero value, which
+	// AddStaticMod's ClassMask treats as "no filter" rather than "no
+	// abilities".
+	MageSpellMaskFrostbolt uint64 = 1 << (iota + 1)
 	MageSpellMaskIceLance
 	MageSpellMaskFrostNova
 	MageSpellMaskBlizzard

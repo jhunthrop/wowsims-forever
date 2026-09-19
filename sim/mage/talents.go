@@ -67,7 +67,7 @@ func (mage *Mage) applyArcaneTalents() {
 
 	// Arcane Meditation: "Allows 17%/33%/50% of your Mana regeneration
 	// to continue while casting." Not 5% a rank, which was vanilla's.
-	mage.PseudoStats.SpiritRegenRateCasting += arcaneMeditationRegenWhileCasting[mage.Talents.ArcaneMeditation]
+	mage.PseudoStats.SpiritRegenRateCasting += arcaneMeditationRegenWhileCasting[rankIndex(mage.Talents.ArcaneMeditation, arcaneMeditationRegenWhileCasting[:])]
 
 	// Arcane Mind: "Increases your Intellect by 2%" per rank. Vanilla's
 	// raised Mana directly; Forever's raises Intellect, which reaches
@@ -76,6 +76,21 @@ func (mage *Mage) applyArcaneTalents() {
 	if mage.Talents.ArcaneMind > 0 {
 		mage.MultiplyStat(stats.Intellect, 1.0+arcaneMindIntellectPerRank*float64(mage.Talents.ArcaneMind))
 	}
+
+	// Wand Specialization increases wand damage; this sim does not
+	// model wand casts.
+	_ = mage.Talents.WandSpecialization
+
+	// Arcane Blast is a bool talent that grants a new cast of Arcane
+	// Blast (MageSpellMaskArcaneBlast exists and Incineration targets
+	// it), but this package does not register the spell yet.
+	_ = mage.Talents.ArcaneBlast
+
+	// Arcane Shielding is Improved Mana Shield, and the reference build
+	// (ForeverFrostTalents) spends its point here; Mana Shield itself is
+	// not registered in this package, so there is nothing for it to
+	// improve.
+	_ = mage.Talents.ArcaneShielding
 
 	// Arcane Geometry and Improved Counterspell are range and a silence:
 	// the sim models neither, and no mod kind would model them.
@@ -564,6 +579,19 @@ var (
 	improvedConeOfColdDamage = [4]int64{0, 12, 23, 35}
 )
 
+// rankIndex clamps a talent rank to a lookup table's highest index.
+// core.FillTalentsProto does not validate a talent string against the
+// client's max rank per node, so a string with more points in a talent
+// than the talent allows (or a corrupt/hand-edited one) would otherwise
+// index one of the tables above out of range instead of reading the
+// talent's max-rank value.
+func rankIndex[T any](rank int32, table []T) int {
+	if i := int(rank); i >= 0 && i < len(table) {
+		return i
+	}
+	return len(table) - 1
+}
+
 // applyDeclarativeTalents is every talent that is a modifier on a set of
 // spells. As config these can be read against a tooltip line by line,
 // which is what Forever's weekly number changes need; talents with
@@ -733,7 +761,7 @@ func (mage *Mage) applyDeclarativeTalents() {
 		mage.AddStaticMod(core.SpellModConfig{
 			Kind:      core.SpellMod_DamageDone_Flat,
 			ClassMask: MageSpellMaskConeOfCold,
-			IntValue:  improvedConeOfColdDamage[t.ImprovedConeOfCold],
+			IntValue:  improvedConeOfColdDamage[rankIndex(t.ImprovedConeOfCold, improvedConeOfColdDamage[:])],
 		})
 	}
 
