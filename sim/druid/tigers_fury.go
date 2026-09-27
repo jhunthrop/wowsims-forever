@@ -6,20 +6,29 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-func (druid *Druid) registerTigersFurySpell() {
-	actionID := core.ActionID{SpellID: map[int32]int32{
-		25: 5217,
-		40: 6793,
-		50: 9845,
-		60: 9846,
-	}[druid.Level]}
+// tigersFuryLearnLevels: source 1.60.1.70009 client spell data. "Tiger's
+// Fury" carries only rank-0 entries (id 5217, level 24) -- per the reference
+// caveat, an all-rank-0 name is a spell without ranks. The old code's other
+// three ids (6793/9845/9846) do not exist anywhere in this client's spell
+// data at all; they are a stale four-tier SoD scaling that the client no
+// longer models. Tiger's Fury is now a single spell learned at level 24.
+var tigersFuryLearnLevels = []int{24}
 
-	dmgBonus := map[int32]float64{
-		25: 10.0,
-		40: 20.0,
-		50: 30.0,
-		60: 40.0,
-	}[druid.Level]
+const tigersFurySpellID = 5217
+
+// tigersFuryDamageBonus is the bonus paired with tigersFurySpellID in the
+// old bracket-25 entry (the only bracket whose id is real); the old
+// bracket-60 value (40, tied to the now-nonexistent id 9846) cannot be kept.
+const tigersFuryDamageBonus = 10.0
+
+func (druid *Druid) registerTigersFurySpell() {
+	rank := core.HighestRankAtLevel(tigersFuryLearnLevels, druid.Level)
+	if rank == 0 {
+		return
+	}
+
+	actionID := core.ActionID{SpellID: tigersFurySpellID}
+	dmgBonus := tigersFuryDamageBonus
 
 	druid.TigersFuryAura = druid.RegisterAura(core.Aura{
 		Label:    "Tiger's Fury Aura",

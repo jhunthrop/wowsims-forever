@@ -6,20 +6,28 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-func (rogue *Rogue) registerAmbushSpell() {
-	flatDamageBonus := map[int32]float64{
-		25: 28,
-		40: 50,
-		50: 92,
-		60: 116,
-	}[rogue.Level]
+// ambushLearnLevels are Ambush's six rank learn levels; source:
+// 1.60.1.70009 client spell data ("Ambush", ranks 1-6). Each rank's level
+// also carries a duplicate id in the 460000s (e.g. 462718 beside rank 1's
+// 8676); those are a clone of the same rank, not an extra rank -- dropped.
+var ambushLearnLevels = []int{18, 26, 34, 42, 50, 58}
 
-	spellID := map[int32]int32{
-		25: 8676,
-		40: 8725,
-		50: 11268,
-		60: 11269,
-	}[rogue.Level]
+// ambushSpellID is Ambush's rank -> spell id, index 0 unused.
+var ambushSpellID = [7]int32{0, 8676, 8724, 8725, 11267, 11268, 11269}
+
+// ambushFlatDamageBonus is Ambush's rank -> flat damage bonus, index 0
+// unused. Ranks 2 and 4 have no tuned value in this file; they carry the
+// preceding rank's bonus forward until real numbers are sourced.
+var ambushFlatDamageBonus = [7]float64{0, 28, 28, 50, 50, 92, 116}
+
+func (rogue *Rogue) registerAmbushSpell() {
+	rank := core.HighestRankAtLevel(ambushLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
+
+	flatDamageBonus := ambushFlatDamageBonus[rank]
+	spellID := ambushSpellID[rank]
 
 	damageMultiplier := 2.5 * []float64{1, 1.04, 1.08, 1.12, 1.16, 1.2}[rogue.Talents.Opportunity]
 

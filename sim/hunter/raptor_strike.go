@@ -132,12 +132,13 @@ func (hunter *Hunter) makeQueueSpellsAndAura() *core.Spell {
 }
 
 func (hunter *Hunter) registerRaptorStrikeSpell() {
-	rank := map[int32]int{
-		25: 4,
-		40: 6,
-		50: 7,
-		60: 8,
-	}[hunter.Level]
+	// RaptorStrikeLevel[1:] is already the rank -> learn-level table (source:
+	// 1.60.1.70009 client spell data, "Raptor Strike", ranks 1-8); reuse it
+	// instead of a second copy.
+	rank := core.HighestRankAtLevel(RaptorStrikeLevel[1:], hunter.Level)
+	if rank == 0 {
+		return
+	}
 
 	config := hunter.getRaptorStrikeConfig(rank)
 	hunter.RaptorStrike = hunter.GetOrRegisterSpell(config)

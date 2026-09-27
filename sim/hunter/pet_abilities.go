@@ -44,27 +44,29 @@ func (hp *HunterPet) NewPetAbility(abilityType PetAbilityType, isPrimary bool) *
 	}
 }
 
+// petClawLearnLevels are Cat/Pet Claw's eight rank learn levels; source:
+// 1.60.1.70009 client spell data ("Claw", ranks 1-8).
+var petClawLearnLevels = []int{1, 8, 16, 24, 32, 40, 48, 56}
+
+// petClawSpellID is Claw's rank -> spell id, index 0 unused.
+var petClawSpellID = [9]int32{0, 16827, 16828, 16829, 16830, 16831, 16832, 3010, 3009}
+
+// petClawBaseDamageMin/Max are Claw's rank -> damage roll bounds, index 0
+// unused. Only ranks 4, 6, 7 and 8 have a tuned value in this file; ranks
+// 1-3 and 5 carry the nearest known rank's numbers forward until real ones
+// are sourced.
+var petClawBaseDamageMin = [9]float64{0, 16, 16, 16, 16, 16, 26, 35, 43}
+var petClawBaseDamageMax = [9]float64{0, 22, 22, 22, 22, 22, 36, 49, 59}
+
 func (hp *HunterPet) newClaw() *core.Spell {
-	baseDamageMin := map[int32]float64{
-		25: 16,
-		40: 26,
-		50: 35,
-		60: 43,
-	}[hp.Owner.Level]
+	rank := core.HighestRankAtLevel(petClawLearnLevels, hp.Owner.Level)
+	if rank == 0 {
+		return nil
+	}
 
-	baseDamageMax := map[int32]float64{
-		25: 22,
-		40: 36,
-		50: 49,
-		60: 59,
-	}[hp.Owner.Level]
-
-	spellID := map[int32]int32{
-		25: 16830,
-		40: 16832,
-		50: 3010,
-		60: 3009,
-	}[hp.Owner.Level]
+	baseDamageMin := petClawBaseDamageMin[rank]
+	baseDamageMax := petClawBaseDamageMax[rank]
+	spellID := petClawSpellID[rank]
 
 	return hp.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: spellID},
@@ -95,27 +97,29 @@ func (hp *HunterPet) newClaw() *core.Spell {
 	})
 }
 
+// petBiteLearnLevels are Pet Bite's eight rank learn levels; source:
+// 1.60.1.70009 client spell data ("Bite", ranks 1-8).
+var petBiteLearnLevels = []int{1, 8, 16, 24, 32, 40, 48, 56}
+
+// petBiteSpellID is Bite's rank -> spell id, index 0 unused.
+var petBiteSpellID = [9]int32{0, 17253, 17255, 17256, 17257, 17258, 17259, 17260, 17261}
+
+// petBiteBaseDamageMin/Max are Bite's rank -> damage roll bounds, index 0
+// unused. Only ranks 4, 6, 7 and 8 have a tuned value in this file; ranks
+// 1-3 and 5 carry the nearest known rank's numbers forward until real ones
+// are sourced.
+var petBiteBaseDamageMin = [9]float64{0, 31, 31, 31, 31, 31, 49, 66, 81}
+var petBiteBaseDamageMax = [9]float64{0, 37, 37, 37, 37, 37, 59, 80, 91}
+
 func (hp *HunterPet) newBite() *core.Spell {
-	baseDamageMin := map[int32]float64{
-		25: 31,
-		40: 49,
-		50: 66,
-		60: 81,
-	}[hp.Owner.Level]
+	rank := core.HighestRankAtLevel(petBiteLearnLevels, hp.Owner.Level)
+	if rank == 0 {
+		return nil
+	}
 
-	baseDamageMax := map[int32]float64{
-		25: 37,
-		40: 59,
-		50: 80,
-		60: 91,
-	}[hp.Owner.Level]
-
-	spellID := map[int32]int32{
-		25: 17257,
-		40: 17259,
-		50: 17260,
-		60: 17261,
-	}[hp.Owner.Level]
+	baseDamageMin := petBiteBaseDamageMin[rank]
+	baseDamageMax := petBiteBaseDamageMax[rank]
+	spellID := petBiteSpellID[rank]
 
 	return hp.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: spellID},
@@ -150,27 +154,34 @@ func (hp *HunterPet) newBite() *core.Spell {
 	})
 }
 
+// petLightningBreathLearnLevels are Lightning Breath's six rank learn
+// levels; source: 1.60.1.70009 client spell data ("Lightning Breath",
+// ranks 1-6).
+var petLightningBreathLearnLevels = []int{1, 12, 24, 36, 48, 60}
+
+// petLightningBreathSpellID is Lightning Breath's rank -> spell id, index 0
+// unused. The old code deliberately reused rank 3's id for rank 4 with a
+// "not available in SoD Phase 2" comment; SoD's phases are all released in
+// this client now, so rank 4 gets its own real id (25010).
+var petLightningBreathSpellID = [7]int32{0, 24844, 25008, 25009, 25010, 25011, 25012}
+
+// petLightningBreathBaseDamageMin/Max are Lightning Breath's rank ->
+// damage roll bounds, index 0 unused. Only ranks 3, 5 and 6 have a tuned
+// value in this file; ranks 1-2 carry rank 3's numbers backward, and rank 4
+// carries rank 3's numbers forward (matching the old code's own rank-3/4
+// reuse), until real ones are sourced.
+var petLightningBreathBaseDamageMin = [7]float64{0, 36, 36, 36, 36, 78, 99}
+var petLightningBreathBaseDamageMax = [7]float64{0, 41, 41, 41, 41, 91, 113}
+
 func (hp *HunterPet) newLightningBreath() *core.Spell {
-	baseDamageMin := map[int32]float64{
-		25: 36,
-		40: 36,
-		50: 78,
-		60: 99,
-	}[hp.Owner.Level]
+	rank := core.HighestRankAtLevel(petLightningBreathLearnLevels, hp.Owner.Level)
+	if rank == 0 {
+		return nil
+	}
 
-	baseDamageMax := map[int32]float64{
-		25: 41,
-		40: 41,
-		50: 91,
-		60: 113,
-	}[hp.Owner.Level]
-
-	spellID := map[int32]int32{
-		25: 25009,
-		40: 25009, // rank 4 not available in SoD Phase 2
-		50: 25011,
-		60: 25012,
-	}[hp.Owner.Level]
+	baseDamageMin := petLightningBreathBaseDamageMin[rank]
+	baseDamageMax := petLightningBreathBaseDamageMax[rank]
+	spellID := petLightningBreathSpellID[rank]
 
 	return hp.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: spellID},
@@ -298,19 +309,27 @@ func (hp *HunterPet) newScreech() *core.Spell {
 // 	return nil
 // }
 
+// petScorpidPoisonLearnLevels are Scorpid Poison's four rank learn levels;
+// source: 1.60.1.70009 client spell data ("Scorpid Poison", ranks 1-4).
+var petScorpidPoisonLearnLevels = []int{8, 24, 40, 56}
+
+// petScorpidPoisonSpellID is Scorpid Poison's rank -> spell id, index 0
+// unused.
+var petScorpidPoisonSpellID = [5]int32{0, 24640, 24583, 24586, 24587}
+
+// petScorpidPoisonBaseDamageTick is Scorpid Poison's rank -> tick damage,
+// index 0 unused. Rank 1 has no tuned value in this file; it carries rank
+// 2's number backward until a real one is sourced.
+var petScorpidPoisonBaseDamageTick = [5]float64{0, 3, 3, 6, 8}
+
 func (hp *HunterPet) newScorpidPoison() *core.Spell {
-	baseDamageTick := map[int32]float64{
-		25: 3,
-		40: 6,
-		50: 6,
-		60: 8,
-	}[hp.Owner.Level]
-	spellID := map[int32]int32{
-		25: 24583,
-		40: 24586,
-		50: 24586,
-		60: 24587,
-	}[hp.Owner.Level]
+	rank := core.HighestRankAtLevel(petScorpidPoisonLearnLevels, hp.Owner.Level)
+	if rank == 0 {
+		return nil
+	}
+
+	baseDamageTick := petScorpidPoisonBaseDamageTick[rank]
+	spellID := petScorpidPoisonSpellID[rank]
 
 	return hp.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: spellID},

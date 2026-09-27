@@ -6,21 +6,29 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// sinisterStrikeLearnLevels are Sinister Strike's eight rank learn levels;
+// source: 1.60.1.70009 client spell data ("Sinister Strike", ranks 1-8; the
+// level-20 rank-0 ids are internal copies, not player ranks).
+var sinisterStrikeLearnLevels = []int{1, 6, 14, 22, 30, 38, 46, 54}
+
+// sinisterStrikeSpellID is Sinister Strike's rank -> spell id, index 0
+// unused.
+var sinisterStrikeSpellID = [9]int32{0, 1752, 1757, 1758, 1759, 1760, 8621, 11293, 11294}
+
+// sinisterStrikeFlatDamageBonus is Sinister Strike's rank -> flat damage
+// bonus, index 0 unused. Only ranks 4, 6, 7 and 8 have a tuned value in
+// this file; ranks 1-3 carry rank 4's bonus backward, and rank 5 carries
+// rank 4's bonus forward, until real numbers are sourced.
+var sinisterStrikeFlatDamageBonus = [9]float64{0, 15, 15, 15, 15, 15, 33, 52, 68}
+
 func (rogue *Rogue) registerSinisterStrikeSpell() {
+	rank := core.HighestRankAtLevel(sinisterStrikeLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
 
-	flatDamageBonus := map[int32]float64{
-		25: 15,
-		40: 33,
-		50: 52,
-		60: 68,
-	}[rogue.Level]
-
-	spellID := map[int32]int32{
-		25: 1759,
-		40: 8621,
-		50: 11293,
-		60: 11294,
-	}[rogue.Level]
+	flatDamageBonus := sinisterStrikeFlatDamageBonus[rank]
+	spellID := sinisterStrikeSpellID[rank]
 
 	rogue.SinisterStrike = rogue.RegisterSpell(core.SpellConfig{
 		SpellCode:   SpellCode_RogueSinisterStrike,

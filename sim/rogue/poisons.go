@@ -147,19 +147,33 @@ func (rogue *Rogue) registerInstantPoisonSpell() {
 	rogue.InstantPoison = rogue.makeInstantPoison()
 }
 
+// deadlyPoisonLearnLevels are Deadly Poison's five rank learn levels;
+// source: 1.60.1.70009 client spell data. Each rank is a separate name
+// ("Deadly Poison", "Deadly Poison II", ... "V"), each with several
+// weapon-slot-variant ids at the same level; deadlyPoisonSpellID picks one
+// representative id per rank. Rank 5 only exists with AQ content, same as
+// the old code's ternary (which reused rank 4's id, 11356, for the
+// pre-AQ 60 case since only 4 ranks existed then).
+var deadlyPoisonLearnLevels = []int{30, 38, 46, 54, 60}
+
+// deadlyPoisonSpellID is Deadly Poison's rank -> spell id, index 0 unused.
+var deadlyPoisonSpellID = [6]int32{0, 2823, 2824, 11355, 11356, core.TernaryInt32(core.IncludeAQ, 25347, 11356)}
+
+// deadlyPoisonBaseDamageTick is Deadly Poison's rank -> tick damage, index 0
+// unused. The old bracket-25 entry (2823/9) was for a level below Deadly
+// Poison's real learn level (30) and cannot be rank 1's value; rank 1
+// instead carries rank 2's number backward, and rank 4 carries rank 3's
+// number forward, until real numbers are sourced.
+var deadlyPoisonBaseDamageTick = [6]float64{0, 13, 13, 20, 20, core.TernaryFloat64(core.IncludeAQ, 34, 27)}
+
 func (rogue *Rogue) registerDeadlyPoisonSpell() {
-	baseDamageTick := map[int32]float64{
-		25: 9,
-		40: 13,
-		50: 20,
-		60: core.TernaryFloat64(core.IncludeAQ, 34, 27),
-	}[rogue.Level]
-	spellID := map[int32]int32{
-		25: 2823,
-		40: 2824,
-		50: 11355,
-		60: core.TernaryInt32(core.IncludeAQ, 25347, 11356),
-	}[rogue.Level]
+	rank := core.HighestRankAtLevel(deadlyPoisonLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
+
+	baseDamageTick := deadlyPoisonBaseDamageTick[rank]
+	spellID := deadlyPoisonSpellID[rank]
 
 	rogue.deadlyPoisonTick = rogue.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: spellID, Tag: 100},
@@ -228,28 +242,33 @@ func (rogue *Rogue) registerWoundPoisonSpell() {
 //                              Make Poisons
 ///////////////////////////////////////////////////////////////////////////
 
+// instantPoisonLearnLevels are Instant Poison's six rank learn levels;
+// source: 1.60.1.70009 client spell data. Each rank is a separate name
+// ("Instant Poison", "Instant Poison II", ... "VI"), each with three
+// weapon-slot-variant ids at the same level; instantPoisonSpellID picks one
+// representative id per rank.
+var instantPoisonLearnLevels = []int{20, 28, 36, 44, 52, 60}
+
+// instantPoisonSpellID is Instant Poison's rank -> spell id, index 0 unused.
+var instantPoisonSpellID = [7]int32{0, 8679, 8686, 8688, 11338, 11339, 11340}
+
+// instantPoisonBaseDamageByLevel/DamageVariance are Instant Poison's rank ->
+// damage terms, index 0 unused. Only ranks 1, 3, 4 and 6 have a tuned value
+// in this file; rank 2 carries rank 1's terms forward, and rank 5 carries
+// rank 4's terms forward, until real numbers are sourced.
+var instantPoisonBaseDamageByLevel = [7]float64{0, 19, 19, 44, 67, 67, 112}
+var instantPoisonDamageVariance = [7]float64{0, 6, 6, 12, 18, 18, 36}
+
 // Make a source based variant of Instant Poison
 func (rogue *Rogue) makeInstantPoison() *core.Spell {
-	baseDamageByLevel := map[int32]float64{
-		25: 19,
-		40: 44,
-		50: 67,
-		60: 112,
-	}[rogue.Level]
+	rank := core.HighestRankAtLevel(instantPoisonLearnLevels, rogue.Level)
+	if rank == 0 {
+		return nil
+	}
 
-	damageVariance := map[int32]float64{
-		25: 6,
-		40: 12,
-		50: 18,
-		60: 36,
-	}[rogue.Level]
-
-	spellID := map[int32]int32{
-		25: 8679,
-		40: 8688,
-		50: 11338,
-		60: 11340,
-	}[rogue.Level]
+	baseDamageByLevel := instantPoisonBaseDamageByLevel[rank]
+	damageVariance := instantPoisonDamageVariance[rank]
+	spellID := instantPoisonSpellID[rank]
 
 	return rogue.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: spellID},

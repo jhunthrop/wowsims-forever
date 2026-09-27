@@ -4,6 +4,11 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// wingClipLearnLevels are Wing Clip's three rank learn levels; source:
+// 1.60.1.70009 client spell data ("Wing Clip", ranks 1-3; the level-12
+// rank-0 id is an internal copy, not a player rank).
+var wingClipLearnLevels = []int{12, 38, 60}
+
 func (hunter *Hunter) getWingClipConfig(rank int) core.SpellConfig {
 	spellId := [4]int32{0, 2974, 14267, 14268}[rank]
 	baseDamage := [4]float64{0, 5, 25, 50}[rank]
@@ -45,12 +50,10 @@ func (hunter *Hunter) getWingClipConfig(rank int) core.SpellConfig {
 }
 
 func (hunter *Hunter) registerWingClipSpell() {
-	rank := map[int32]int{
-		25: 1,
-		40: 2,
-		50: 3,
-		60: 3,
-	}[hunter.Level]
+	rank := core.HighestRankAtLevel(wingClipLearnLevels, hunter.Level)
+	if rank == 0 {
+		return
+	}
 
 	config := hunter.getWingClipConfig(rank)
 	hunter.WingClip = hunter.GetOrRegisterSpell(config)
