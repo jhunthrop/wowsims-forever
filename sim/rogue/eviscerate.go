@@ -6,34 +6,34 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// eviscerateLearnLevels are Eviscerate's nine rank learn levels; source:
+// 1.60.1.70009 client spell data ("Eviscerate", ranks 1-9; the level-1
+// rank-0 ids are internal copies, not player ranks).
+var eviscerateLearnLevels = []int{1, 8, 16, 24, 32, 40, 48, 56, 60}
+
+// eviscerateSpellID is Eviscerate's rank -> spell id, index 0 unused.
+// Rank 9 only exists with AQ content, same as the old code's ternary.
+var eviscerateSpellID = [10]int32{0, 2098, 6760, 6761, 6762, 8623, 8624, 11299, 11300, core.TernaryInt32(core.IncludeAQ, 31016, 11300)}
+
+// eviscerateFlatDamage/ComboDamageBonus/DamageVariance are Eviscerate's
+// rank -> damage terms, index 0 unused. Only ranks 4, 6, 7 and 9 have a
+// tuned value in this file; ranks 1-3 carry rank 4's terms backward, rank 5
+// carries rank 4's terms forward, and rank 8 carries rank 7's terms
+// forward, until real numbers are sourced.
+var eviscerateFlatDamage = [10]float64{0, 10, 10, 10, 10, 10, 22, 34, 34, core.TernaryFloat64(core.IncludeAQ, 54, 48)}
+var eviscerateComboDamageBonus = [10]float64{0, 31, 31, 31, 31, 31, 77, 110, 110, core.TernaryFloat64(core.IncludeAQ, 170, 151)}
+var eviscerateDamageVariance = [10]float64{0, 20, 20, 20, 20, 20, 44, 68, 68, core.TernaryFloat64(core.IncludeAQ, 108, 96)}
+
 func (rogue *Rogue) registerEviscerate() {
-	flatDamage := map[int32]float64{
-		25: 10,
-		40: 22,
-		50: 34,
-		60: core.TernaryFloat64(core.IncludeAQ, 54, 48),
-	}[rogue.Level]
+	rank := core.HighestRankAtLevel(eviscerateLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
 
-	comboDamageBonus := map[int32]float64{
-		25: 31,
-		40: 77,
-		50: 110,
-		60: core.TernaryFloat64(core.IncludeAQ, 170, 151),
-	}[rogue.Level]
-
-	damageVariance := map[int32]float64{
-		25: 20,
-		40: 44,
-		50: 68,
-		60: core.TernaryFloat64(core.IncludeAQ, 108, 96),
-	}[rogue.Level]
-
-	spellID := map[int32]int32{
-		25: 6762,
-		40: 8624,
-		50: 11299,
-		60: core.TernaryInt32(core.IncludeAQ, 31016, 11300),
-	}[rogue.Level]
+	flatDamage := eviscerateFlatDamage[rank]
+	comboDamageBonus := eviscerateComboDamageBonus[rank]
+	damageVariance := eviscerateDamageVariance[rank]
+	spellID := eviscerateSpellID[rank]
 
 	rogue.Eviscerate = rogue.RegisterSpell(core.SpellConfig{
 		SpellCode:    SpellCode_RogueEviscerate,

@@ -6,20 +6,30 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-func (rogue *Rogue) registerBackstabSpell() {
-	flatDamageBonus := map[int32]float64{
-		25: 32,
-		40: 60,
-		50: 90,
-		60: core.TernaryFloat64(core.IncludeAQ, 150, 140),
-	}[rogue.Level]
+// backstabLearnLevels are Backstab's eight rank learn levels; source:
+// 1.60.1.70009 client spell data ("Backstab", ranks 1-8). Each rank's level
+// also carries a duplicate id in the 460000s (e.g. 462709 beside rank 1's
+// 53); those are a clone of the same rank, not an extra rank -- dropped.
+var backstabLearnLevels = []int{4, 12, 20, 28, 36, 44, 52, 60}
 
-	spellID := map[int32]int32{
-		25: 2590,
-		40: 8721,
-		50: 11279,
-		60: core.TernaryInt32(core.IncludeAQ, 25300, 11281),
-	}[rogue.Level]
+// backstabSpellID is Backstab's rank -> spell id, index 0 unused. Rank 8's
+// id depends on whether AQ content is included, same as the old code.
+var backstabSpellID = [9]int32{0, 53, 2589, 2590, 2591, 8721, 11279, 11280, core.TernaryInt32(core.IncludeAQ, 25300, 11281)}
+
+// backstabFlatDamageBonus is Backstab's rank -> flat damage bonus, index 0
+// unused. Only ranks 3, 5, 6 and 8 have a tuned value in this file; ranks
+// 1-2 carry rank 3's bonus backward, rank 4 carries rank 3's bonus forward,
+// and rank 7 carries rank 6's bonus forward, until real numbers are sourced.
+var backstabFlatDamageBonus = [9]float64{0, 32, 32, 32, 32, 60, 90, 90, core.TernaryFloat64(core.IncludeAQ, 150, 140)}
+
+func (rogue *Rogue) registerBackstabSpell() {
+	rank := core.HighestRankAtLevel(backstabLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
+
+	flatDamageBonus := backstabFlatDamageBonus[rank]
+	spellID := backstabSpellID[rank]
 
 	damageMultiplier := 1.5 * []float64{1, 1.04, 1.08, 1.12, 1.16, 1.2}[rogue.Talents.Opportunity]
 

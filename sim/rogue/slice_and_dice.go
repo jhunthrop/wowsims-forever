@@ -6,20 +6,23 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-func (rogue *Rogue) registerSliceAndDice() {
-	hasteBonusByRank := map[int32]float64{
-		25: 0.20,
-		40: 0.20,
-		50: 0.30,
-		60: 0.30,
-	}[rogue.Level]
+// sliceAndDiceLearnLevels are Slice and Dice's two rank learn levels;
+// source: 1.60.1.70009 client spell data ("Slice and Dice", ranks 1-2).
+var sliceAndDiceLearnLevels = []int{10, 42}
 
-	spellID := map[int32]int32{
-		25: 5171,
-		40: 5171,
-		50: 6774,
-		60: 6774,
-	}[rogue.Level]
+// sliceAndDiceSpellID and sliceAndDiceHasteBonus are Slice and Dice's rank
+// -> spell id / haste bonus, index 0 unused.
+var sliceAndDiceSpellID = [3]int32{0, 5171, 6774}
+var sliceAndDiceHasteBonus = [3]float64{0, 0.20, 0.30}
+
+func (rogue *Rogue) registerSliceAndDice() {
+	rank := core.HighestRankAtLevel(sliceAndDiceLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
+
+	hasteBonusByRank := sliceAndDiceHasteBonus[rank]
+	spellID := sliceAndDiceSpellID[rank]
 
 	actionID := core.ActionID{SpellID: spellID}
 

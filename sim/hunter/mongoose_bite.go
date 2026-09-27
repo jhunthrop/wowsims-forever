@@ -6,6 +6,10 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// mongooseBiteLearnLevels are Mongoose Bite's four rank learn levels;
+// source: 1.60.1.70009 client spell data ("Mongoose Bite", ranks 1-4).
+var mongooseBiteLearnLevels = []int{16, 30, 44, 58}
+
 func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 	spellId := [5]int32{0, 1495, 14269, 14270, 14271}[rank]
 	baseDamage := [5]float64{0, 25, 45, 75, 115}[rank]
@@ -68,12 +72,10 @@ func (hunter *Hunter) registerMongooseBiteSpell() {
 		},
 	})
 
-	rank := map[int32]int{
-		25: 1,
-		40: 2,
-		50: 3,
-		60: 4,
-	}[hunter.Level]
+	rank := core.HighestRankAtLevel(mongooseBiteLearnLevels, hunter.Level)
+	if rank == 0 {
+		return
+	}
 
 	config := hunter.getMongooseBiteConfig(rank)
 	hunter.MongooseBite = hunter.GetOrRegisterSpell(config)

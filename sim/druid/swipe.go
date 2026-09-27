@@ -15,12 +15,13 @@ var SwipeLevel = [SwipeRanks + 1]int{0, 16, 24, 34, 44, 54}
 const SwipeThreatMultiplier = 2.0
 
 func (druid *Druid) registerSwipeBearSpell() {
-	rank := map[int32]int{
-		25: 2,
-		40: 3,
-		50: 4,
-		60: 6,
-	}[druid.Level]
+	// SwipeLevel[1:] is already the rank -> learn-level table (source:
+	// 1.60.1.70009 client spell data, "Swipe", ranks 1-5); reuse it instead
+	// of a second copy.
+	rank := core.HighestRankAtLevel(SwipeLevel[1:], druid.Level)
+	if rank == 0 {
+		return
+	}
 
 	level := SwipeLevel[rank]
 	spellID := SwipeSpellId[rank]

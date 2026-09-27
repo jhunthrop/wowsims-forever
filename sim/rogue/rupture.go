@@ -6,13 +6,28 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// ruptureLearnLevels are Rupture's six rank learn levels; source:
+// 1.60.1.70009 client spell data ("Rupture", ranks 1-6; the level-20
+// rank-0 ids are internal copies, not player ranks).
+var ruptureLearnLevels = []int{20, 28, 36, 44, 52, 60}
+
+// ruptureSpellID is Rupture's rank -> spell id, index 0 unused.
+var ruptureSpellID = [7]int32{0, 1943, 8639, 8640, 11273, 11274, 11275}
+
+// ruptureBaseTickDamage/ComboTickDamage are Rupture's rank -> damage terms,
+// index 0 unused. Only ranks 1, 3, 4 and 6 have a tuned value in this file;
+// rank 2 carries rank 1's terms forward, and rank 5 carries rank 4's terms
+// forward, until real numbers are sourced.
+var ruptureBaseTickDamage = [7]float64{0, 8, 8, 18, 27, 27, 60}
+var ruptureComboTickDamage = [7]float64{0, 2, 2, 4, 5, 5, 8}
+
 func (rogue *Rogue) registerRupture() {
-	spellID := map[int32]int32{
-		25: 1943,
-		40: 8640,
-		50: 11273,
-		60: 11275,
-	}[rogue.Level]
+	rank := core.HighestRankAtLevel(ruptureLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
+
+	spellID := ruptureSpellID[rank]
 
 	rogue.Rupture = rogue.RegisterSpell(core.SpellConfig{
 		SpellCode:    SpellCode_RogueRupture,
@@ -77,19 +92,9 @@ func (rogue *Rogue) registerRupture() {
 }
 
 func (rogue *Rogue) RuptureDamage(target *core.Unit, comboPoints int32) float64 {
-	baseTickDamage := map[int32]float64{
-		25: 8,
-		40: 18,
-		50: 27,
-		60: 60,
-	}[rogue.Level]
-
-	comboTickDamage := map[int32]float64{
-		25: 2,
-		40: 4,
-		50: 5,
-		60: 8,
-	}[rogue.Level]
+	rank := core.HighestRankAtLevel(ruptureLearnLevels, rogue.Level)
+	baseTickDamage := ruptureBaseTickDamage[rank]
+	comboTickDamage := ruptureComboTickDamage[rank]
 
 	return baseTickDamage + comboTickDamage*float64(comboPoints) +
 		[]float64{0, 0.04 / 4, 0.10 / 5, 0.18 / 6, 0.21 / 7, 0.24 / 8}[comboPoints]*rogue.Rupture.MeleeAttackPower(target)

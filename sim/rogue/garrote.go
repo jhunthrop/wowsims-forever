@@ -6,20 +6,28 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-func (rogue *Rogue) registerGarrote() {
-	baseDamage := map[int32]float64{
-		25: 34,
-		40: 59,
-		50: 74,
-		60: 92,
-	}[rogue.Level]
+// garroteLearnLevels are Garrote's six rank learn levels; source:
+// 1.60.1.70009 client spell data ("Garrote", ranks 1-6). Each rank's level
+// also carries a duplicate id in the 460000s (e.g. 462724 beside rank 1's
+// 703); those are a clone of the same rank, not an extra rank -- dropped.
+var garroteLearnLevels = []int{14, 22, 30, 38, 46, 54}
 
-	spellID := map[int32]int32{
-		25: 8631,
-		40: 8633,
-		50: 11289,
-		60: 11290,
-	}[rogue.Level]
+// garroteSpellID is Garrote's rank -> spell id, index 0 unused.
+var garroteSpellID = [7]int32{0, 703, 8631, 8632, 8633, 11289, 11290}
+
+// garroteBaseDamage is Garrote's rank -> base tick damage, index 0 unused.
+// Ranks 1 and 3 have no tuned value in this file; they carry rank 2's
+// number backward and forward respectively, until real numbers are sourced.
+var garroteBaseDamage = [7]float64{0, 34, 34, 34, 59, 74, 92}
+
+func (rogue *Rogue) registerGarrote() {
+	rank := core.HighestRankAtLevel(garroteLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
+
+	baseDamage := garroteBaseDamage[rank]
+	spellID := garroteSpellID[rank]
 
 	rogue.Garrote = rogue.GetOrRegisterSpell(core.SpellConfig{
 		SpellCode:   SpellCode_RogueGarrote,
