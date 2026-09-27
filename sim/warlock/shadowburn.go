@@ -12,7 +12,9 @@ func (warlock *Warlock) registerShadowBurnBaseConfig(rank int) core.SpellConfig 
 	spellId := [ShadowburnRanks + 1]int32{0, 17877, 18867, 18868, 18869, 18870, 18871}[rank]
 	baseDamage := [ShadowburnRanks + 1][]float64{{0}, {91, 104}, {123, 140}, {196, 221}, {274, 307}, {365, 408}, {462, 514}}[rank]
 	manaCost := [ShadowburnRanks + 1]float64{0, 105, 130, 190, 245, 305, 365}[rank]
-	level := [ShadowburnRanks + 1]int{0, 15, 24, 32, 40, 48, 56}[rank]
+	// Rank 1 (17877) is learned at level 20 in the client's own data
+	// (1.60.1.70009), not 15.
+	level := [ShadowburnRanks + 1]int{0, 20, 24, 32, 40, 48, 56}[rank]
 
 	spellCoeff := 0.429
 
