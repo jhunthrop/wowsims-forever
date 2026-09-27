@@ -54,6 +54,24 @@ func (shaman *Shaman) getImbueProcMask(imbue proto.WeaponImbue) core.ProcMask {
 	return mask
 }
 
+// weaponImbueRankAtLevel is the highest index in a generated per-rank
+// level table (RockbiterWeaponLevel, WindfuryWeaponLevel) the character
+// has learned. It replaces the old SoD-bracket (25/40/50/60) lookup a
+// weapon imbue file used before its own per-rank levels were generated:
+// a level between two brackets - the level-aware sim design doc's
+// worked example is exactly this shape - fell back to the map's zero
+// value, rank 0, silently applying an unlearned (or wrong) rank's
+// enchant instead of the highest one actually learned.
+func weaponImbueRankAtLevel(levels []int32, level int32) int32 {
+	var best int32
+	for rank, required := range levels {
+		if required <= level {
+			best = int32(rank)
+		}
+	}
+	return best
+}
+
 // Indexes into NextTotemDrops for self buffs
 const (
 	AirTotem int = iota
