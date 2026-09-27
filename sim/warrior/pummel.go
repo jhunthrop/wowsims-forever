@@ -10,6 +10,21 @@ func (warrior *Warrior) registerPummelSpell() {
 	rank := rankAtLevel(PummelLevel[:], warrior.Level)
 	damage := PummelBaseDamage[rank][0]
 
+	castConfig := core.CastConfig{
+		DefaultCast: core.Cast{
+			GCD: core.GCDDefault,
+		},
+		IgnoreHaste: true,
+	}
+	// Rank 0 - a warrior below the lowest real PummelLevel entry (20) -
+	// carries a zero cooldown; guard as slam.go does.
+	if cooldownMS := PummelCooldownMS[rank]; cooldownMS > 0 {
+		castConfig.CD = core.Cooldown{
+			Timer:    warrior.NewTimer(),
+			Duration: time.Duration(cooldownMS) * time.Millisecond,
+		}
+	}
+
 	warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: PummelSpellId[rank]},
 		ClassSpellMask: WarriorSpellMaskPummel,
@@ -24,16 +39,7 @@ func (warrior *Warrior) registerPummelSpell() {
 			Cost:   rageCost(PummelManaCost[rank]),
 			Refund: 0.8,
 		},
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-			IgnoreHaste: true,
-			CD: core.Cooldown{
-				Timer:    warrior.NewTimer(),
-				Duration: time.Duration(PummelCooldownMS[rank]) * time.Millisecond,
-			},
-		},
+		Cast: castConfig,
 
 		CritDamageBonus: warrior.impale(),
 

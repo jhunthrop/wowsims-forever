@@ -33,6 +33,23 @@ func (warrior *Warrior) registerBloodthirstSpell(cdTimer *core.Timer) {
 	rank := rankAtLevel(BloodthirstLevel[:], warrior.Level)
 	baseDamage := BloodthirstBaseDamage[rank][0]
 
+	castConfig := core.CastConfig{
+		DefaultCast: core.Cast{
+			GCD: core.GCDDefault,
+		},
+		IgnoreHaste: true,
+	}
+	// Rank 0 of the generated table - what a warrior below
+	// BloodthirstLevel[1]=40 resolves to if the talent is already spent -
+	// carries a zero cooldown; a Cooldown with a Timer but no Duration
+	// panics in RegisterSpell (see slam.go for the same guard).
+	if cooldownMS := BloodthirstCooldownMS[rank]; cooldownMS > 0 {
+		castConfig.CD = core.Cooldown{
+			Timer:    cdTimer,
+			Duration: time.Duration(cooldownMS) * time.Millisecond,
+		}
+	}
+
 	warrior.Bloodthirst = warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		SpellCode:      SpellCode_WarriorBloodthirst,
 		ClassSpellMask: WarriorSpellMaskBloodthirst,
@@ -49,16 +66,7 @@ func (warrior *Warrior) registerBloodthirstSpell(cdTimer *core.Timer) {
 			Cost:   rageCost(BloodthirstManaCost[rank]),
 			Refund: 0.8,
 		},
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-			IgnoreHaste: true,
-			CD: core.Cooldown{
-				Timer:    cdTimer,
-				Duration: time.Duration(BloodthirstCooldownMS[rank]) * time.Millisecond,
-			},
-		},
+		Cast: castConfig,
 
 		CritDamageBonus: warrior.impale(),
 

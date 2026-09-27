@@ -42,6 +42,21 @@ func (warrior *Warrior) registerMortalStrikeSpell(cdTimer *core.Timer) {
 	// Swapping the ids is the data lane's call, not this file's.
 	spellID := int32(21553)
 
+	castConfig := core.CastConfig{
+		DefaultCast: core.Cast{
+			GCD: core.GCDDefault,
+		},
+		IgnoreHaste: true,
+	}
+	// Rank 0 - a warrior below MortalStrikeLevel[1]=40 with the talent
+	// already spent - carries a zero cooldown; guard as slam.go does.
+	if cooldownMS := MortalStrikeCooldownMS[rank]; cooldownMS > 0 {
+		castConfig.CD = core.Cooldown{
+			Timer:    cdTimer,
+			Duration: time.Duration(cooldownMS) * time.Millisecond,
+		}
+	}
+
 	warrior.MortalStrike = warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		SpellCode:      SpellCode_WarriorMortalStrike,
 		ClassSpellMask: WarriorSpellMaskMortalStrike,
@@ -58,16 +73,7 @@ func (warrior *Warrior) registerMortalStrikeSpell(cdTimer *core.Timer) {
 			Cost:   mortalStrikeRageCost,
 			Refund: 0.8,
 		},
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-			IgnoreHaste: true,
-			CD: core.Cooldown{
-				Timer:    cdTimer,
-				Duration: time.Duration(MortalStrikeCooldownMS[rank]) * time.Millisecond,
-			},
-		},
+		Cast: castConfig,
 
 		CritDamageBonus: warrior.impale(),
 

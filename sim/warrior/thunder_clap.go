@@ -24,6 +24,23 @@ func (warrior *Warrior) registerThunderClapSpell() {
 	// Pool-sized ceiling, live-bounded loop; see registerWhirlwindSpell.
 	results := make([]*core.SpellResult, min(4, len(warrior.Env.Encounter.AllTargetUnits)))
 
+	castConfig := core.CastConfig{
+		DefaultCast: core.Cast{
+			GCD: core.GCDDefault,
+		},
+		IgnoreHaste: true,
+	}
+	// Rank 0 (level 1, ThunderClapLevel[0]=1 but ThunderClapCooldownMS[0]
+	// is still 0) carries a zero cooldown; guard as slam.go does, since
+	// Thunder Clap is unconditionally registered (no talent gate) and so
+	// is the one spell in this file every level-1 warrior actually hits.
+	if cooldownMS := ThunderClapCooldownMS[rank]; cooldownMS > 0 {
+		castConfig.CD = core.Cooldown{
+			Timer:    warrior.NewTimer(),
+			Duration: time.Duration(cooldownMS) * time.Millisecond,
+		}
+	}
+
 	warrior.ThunderClap = warrior.RegisterSpell(stanceMask, core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: spellID},
 		ClassSpellMask: WarriorSpellMaskThunderClap,
@@ -39,16 +56,7 @@ func (warrior *Warrior) registerThunderClapSpell() {
 			// talents.go, so this is the client's undiscounted cost.
 			Cost: rageCost(ThunderClapManaCost[rank]),
 		},
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-			IgnoreHaste: true,
-			CD: core.Cooldown{
-				Timer:    warrior.NewTimer(),
-				Duration: time.Duration(ThunderClapCooldownMS[rank]) * time.Millisecond,
-			},
-		},
+		Cast: castConfig,
 
 		CritDamageBonus: warrior.impale(),
 

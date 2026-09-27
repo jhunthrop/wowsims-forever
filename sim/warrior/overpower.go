@@ -11,6 +11,21 @@ func (warrior *Warrior) registerOverpowerSpell(cdTimer *core.Timer) {
 	bonusDamage := OverpowerBaseDamage[rank][0]
 	spellID := OverpowerSpellId[rank]
 
+	castConfig := core.CastConfig{
+		DefaultCast: core.Cast{
+			GCD: core.GCDDefault,
+		},
+		IgnoreHaste: true,
+	}
+	// Rank 0 - a warrior below the lowest real OverpowerLevel entry -
+	// carries a zero cooldown; guard as slam.go does.
+	if cooldownMS := OverpowerCooldownMS[rank]; cooldownMS > 0 {
+		castConfig.CD = core.Cooldown{
+			Timer:    cdTimer,
+			Duration: time.Duration(cooldownMS) * time.Millisecond,
+		}
+	}
+
 	warrior.RegisterAura(core.Aura{
 		Label:    "Overpower Trigger",
 		Duration: core.NeverExpires,
@@ -46,16 +61,7 @@ func (warrior *Warrior) registerOverpowerSpell(cdTimer *core.Timer) {
 			Cost:   rageCost(OverpowerManaCost[rank]),
 			Refund: 0.8,
 		},
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-			IgnoreHaste: true,
-			CD: core.Cooldown{
-				Timer:    cdTimer,
-				Duration: time.Duration(OverpowerCooldownMS[rank]) * time.Millisecond,
-			},
-		},
+		Cast: castConfig,
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 			return warrior.OverpowerAura.IsActive()
 		},

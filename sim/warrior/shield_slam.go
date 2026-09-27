@@ -24,6 +24,23 @@ func (warrior *Warrior) registerShieldSlamSpell() {
 	threat := 254.0
 	apCoef := 0.15
 
+	castConfig := core.CastConfig{
+		DefaultCast: core.Cast{
+			GCD: core.GCDDefault,
+		},
+		IgnoreHaste: true,
+	}
+	// Same guard as Slam (slam.go): rank 0 of the generated table (the
+	// entry a character below ShieldSlamLevel[1]=40 would resolve to, if
+	// the talent were somehow already spent) carries a zero cooldown, and
+	// a Cooldown with a Timer but no Duration panics in RegisterSpell.
+	if cooldownMS := ShieldSlamCooldownMS[rank]; cooldownMS > 0 {
+		castConfig.CD = core.Cooldown{
+			Timer:    warrior.NewTimer(),
+			Duration: time.Duration(cooldownMS) * time.Millisecond,
+		}
+	}
+
 	warrior.ShieldSlam = warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		SpellCode:      SpellCode_WarriorShieldSlam,
 		ClassSpellMask: WarriorSpellMaskShieldSlam,
@@ -40,16 +57,7 @@ func (warrior *Warrior) registerShieldSlamSpell() {
 			Cost:   rageCost(ShieldSlamManaCost[rank]),
 			Refund: 0.8,
 		},
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-			IgnoreHaste: true,
-			CD: core.Cooldown{
-				Timer:    warrior.NewTimer(),
-				Duration: time.Duration(ShieldSlamCooldownMS[rank]) * time.Millisecond,
-			},
-		},
+		Cast: castConfig,
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 			return warrior.PseudoStats.CanBlock
 		},

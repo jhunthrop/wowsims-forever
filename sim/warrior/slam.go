@@ -16,6 +16,32 @@ func (warrior *Warrior) registerSlamSpell() {
 	spellID := int32(11605)
 	flatDamageBonus := SlamBaseDamage[rank][0]
 
+	castConfig := core.CastConfig{
+		DefaultCast: core.Cast{
+			GCD:      core.GCDDefault,
+			CastTime: time.Millisecond*time.Duration(SlamCastTime[rank]) - time.Millisecond*100*time.Duration(warrior.Talents.ImprovedSlam),
+		},
+		ModifyCast: func(sim *core.Simulation, spell *core.Spell, cast *core.Cast) {
+			if spell.CastTime() > 0 {
+				warrior.AutoAttacks.StopMeleeUntil(sim, sim.CurrentTime+cast.CastTime, true)
+			}
+		},
+	}
+	// The client gives Slam a 15 s category cooldown, and it gives it to
+	// 11605 - the very id this file keeps - not only to the reissue the
+	// dedup preferred. The engine had no cooldown here at all; the
+	// generated value wins. But that value is per rank, and ranks below
+	// the last (SlamCooldownMS[rank] == 0, e.g. rank 2, learned at level
+	// 38) genuinely have none: a Cooldown with a Timer and a zero
+	// Duration panics in RegisterSpell ("Cast.CD w/o Duration"), so the
+	// CD is only attached when the rank's generated duration is real.
+	if cooldownMS := SlamCooldownMS[rank]; cooldownMS > 0 {
+		castConfig.CD = core.Cooldown{
+			Timer:    warrior.NewTimer(),
+			Duration: time.Duration(cooldownMS) * time.Millisecond,
+		}
+	}
+
 	warrior.Slam = warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		SpellCode:      SpellCode_WarriorSlam,
 		ClassSpellMask: WarriorSpellMaskSlam,
@@ -32,25 +58,7 @@ func (warrior *Warrior) registerSlamSpell() {
 			Cost:   rageCost(SlamManaCost[rank]),
 			Refund: 0.8,
 		},
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD:      core.GCDDefault,
-				CastTime: time.Millisecond*time.Duration(SlamCastTime[rank]) - time.Millisecond*100*time.Duration(warrior.Talents.ImprovedSlam),
-			},
-			ModifyCast: func(sim *core.Simulation, spell *core.Spell, cast *core.Cast) {
-				if spell.CastTime() > 0 {
-					warrior.AutoAttacks.StopMeleeUntil(sim, sim.CurrentTime+cast.CastTime, true)
-				}
-			},
-			// The client gives Slam a 15 s category cooldown, and it
-			// gives it to 11605 - the very id this file keeps - not
-			// only to the reissue the dedup preferred. The engine had
-			// no cooldown here at all; the generated value wins.
-			CD: core.Cooldown{
-				Timer:    warrior.NewTimer(),
-				Duration: time.Duration(SlamCooldownMS[rank]) * time.Millisecond,
-			},
-		},
+		Cast: castConfig,
 
 		CritDamageBonus: warrior.impale(),
 
