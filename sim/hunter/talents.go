@@ -217,7 +217,10 @@ func (hunter *Hunter) applyCleverTraps() {
 func (hunter *Hunter) applyEfficiency() {
 	hunter.OnSpellRegistered(func(spell *core.Spell) {
 		// applies to Stings, Shots, and Volley
-		if spell.Cost != nil && spell.Flags.Matches(SpellFlagSting|SpellFlagShot) || spell.SpellCode == SpellCode_HunterVolley {
+		// Parenthesised on purpose: `a && b || c` read Cost through a nil pointer whenever the
+		// Volley clause matched a spell registered without a cost, which a character built
+		// below 60 was the first to do.
+		if spell.Cost != nil && (spell.Flags.Matches(SpellFlagSting|SpellFlagShot) || spell.SpellCode == SpellCode_HunterVolley) {
 			spell.Cost.Multiplier -= 2 * hunter.Talents.Efficiency
 		}
 	})
