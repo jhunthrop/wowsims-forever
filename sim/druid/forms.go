@@ -142,7 +142,11 @@ func (druid *Druid) registerCatFormSpell() {
 			druid.form = Humanoid
 			druid.SetCurrentPowerBar(core.ManaBar)
 
-			druid.TigersFuryAura.Deactivate(sim)
+			// Tiger's Fury is learned at level 24 (tigers_fury.go); below
+			// that, druid.TigersFuryAura is never registered.
+			if druid.TigersFuryAura != nil {
+				druid.TigersFuryAura.Deactivate(sim)
+			}
 
 			druid.AutoAttacks.SetMH(druid.WeaponFromMainHand())
 
