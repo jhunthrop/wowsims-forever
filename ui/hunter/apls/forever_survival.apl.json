@@ -34,7 +34,7 @@
       "notes": "Multi-Shot as the filler between Aimed Shots.",
       "action": {
         "condition": { "cmp": { "op": "OpGt", "lhs": { "autoTimeToNext": { "autoType": "Ranged" } }, "rhs": { "const": { "val": "0.5s" } } } },
-        "castSpell": { "spellId": { "spellId": 2643, "rank": 1 } }
+        "castSpell": { "spellId": { "spellId": 2643, "rank": 0 } }
       }
     },
     {
