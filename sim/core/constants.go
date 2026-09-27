@@ -6,6 +6,22 @@ import (
 
 const CharacterMaxLevel = 60
 
+// EffectiveCharacterLevel resolves a proto.Player.Level value the way
+// NewCharacter builds a character: 1..CharacterMaxLevel is used as given,
+// and anything else - 0 (the field's zero value, so every request that
+// predates this field, and every hand-built test fixture, still means
+// "unset"), negative, or above CharacterMaxLevel - becomes
+// CharacterMaxLevel, the sim's long-standing default. Every level-aware
+// lookup in this package (base stats, attack power, spell crit per
+// intellect) resolves through this so an out-of-range or zero-value level
+// never becomes a table miss.
+func EffectiveCharacterLevel(level int32) int32 {
+	if level < 1 || level > CharacterMaxLevel {
+		return CharacterMaxLevel
+	}
+	return level
+}
+
 const GCDMin = time.Second * 1
 const GCDDefault = time.Millisecond * 1500
 const SpellBatchWindow = time.Millisecond * 10
