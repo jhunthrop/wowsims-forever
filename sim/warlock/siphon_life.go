@@ -13,7 +13,10 @@ func (warlock *Warlock) getSiphonLifeBaseConfig(rank int) core.SpellConfig {
 	spellId := [SiphonLifeRanks + 1]int32{0, 18265, 18879, 18880, 18881}[rank]
 	baseDamage := [SiphonLifeRanks + 1]float64{0, 15, 22, 33, 45}[rank]
 	manaCost := [SiphonLifeRanks + 1]float64{0, 150, 205, 285, 365}[rank]
-	level := [SiphonLifeRanks + 1]int{0, 0, 38, 48, 58}[rank]
+	// Rank 1 (18265) is learned at level 30 in the client's own data
+	// (1.60.1.70009); the 0 here was a stale gate that let rank 1
+	// register at any level.
+	level := [SiphonLifeRanks + 1]int{0, 30, 38, 48, 58}[rank]
 
 	spellCoeff := 0.05
 	actionID := core.ActionID{SpellID: spellId}

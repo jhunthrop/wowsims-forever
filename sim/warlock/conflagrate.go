@@ -13,7 +13,10 @@ func (warlock *Warlock) getConflagrateConfig(rank int) core.SpellConfig {
 	baseDamageMin := [ConflagrateRanks + 1]float64{0, 249, 319, 395, 447}[rank]
 	baseDamageMax := [ConflagrateRanks + 1]float64{0, 316, 400, 491, 557}[rank]
 	manaCost := [ConflagrateRanks + 1]float64{0, 165, 200, 230, 255}[rank]
-	level := [ConflagrateRanks + 1]int{0, 0, 48, 54, 60}[rank]
+	// Rank 1 here is the client's rank 3 (17962, ranks 1-2 are unimplemented);
+	// it is learned at level 40 in the client's own data (1.60.1.70009),
+	// not 0.
+	level := [ConflagrateRanks + 1]int{0, 40, 48, 54, 60}[rank]
 
 	spCoeff := 0.429
 
