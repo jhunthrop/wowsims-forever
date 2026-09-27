@@ -323,8 +323,15 @@ func (wa *WeaponAttack) swing(sim *Simulation) time.Duration {
 	attackSpell := wa.spell
 
 	if wa.replaceSwing != nil {
-		// Need to check APL here to allow last-moment HS queue casts.
-		wa.unit.Rotation.DoNextAction(sim)
+		// Need to check APL here to allow last-moment HS queue casts. A
+		// request that omits rotation entirely (proto3 leaves an unset
+		// message nil) still builds a character - Player.level's own
+		// smoke test builds one with no rotation at every level - so
+		// this guards the same way the other Rotation.DoNextAction call
+		// sites in this package already do (e.g. line 376 below).
+		if wa.unit.Rotation != nil {
+			wa.unit.Rotation.DoNextAction(sim)
+		}
 
 		// Allow MH swing to be overridden for abilities like Heroic Strike.
 		attackSpell = wa.replaceSwing(sim, attackSpell)
