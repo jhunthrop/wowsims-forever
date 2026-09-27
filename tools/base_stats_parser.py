@@ -20,19 +20,65 @@ dependency in character.go). This generator reads and records both, but
 does not redefine either: sim/core/base_stats_test.go pins the match
 instead, so a future mismatch is caught rather than silently ignored.
 
+This script also generates sim/core/base_stats_levels_auto_gen.go from a
+levels.json-shaped file: wowhead's Forever gear planner payload
+(wow.gearPlanner.classic.baseStats and .critSpell), giving every class's
+Health, Mana, Agility, Strength, Intellect, Spirit, Stamina and
+spell-crit-per-Intellect rate at every level 1..60, not just 60. The site
+repo's data lane emits this same content as builds/<build>/levels.json;
+this fork vendors a copy (assets/db_inputs/levels/<build>.json) so the
+generated file is reproducible from something checked into this repo.
+Race offsets and Attack Power are not read from it: race offsets stay
+base_stats.go's RaceOffsets (wowhead's raceOffsets table matches it,
+checked by hand, not regenerated - see docs/superpowers/specs/
+2026-09-27-level-aware-sim-design.md's lane report), and Attack Power has
+no wowhead table at all - it is a function of level in base_stats.go.
+
 Usage:
     python3 tools/base_stats_parser.py                                  # 1.60.1.69893, vendored copy
     python3 tools/base_stats_parser.py --inputs assets/db_inputs/gametables/1.60.2.70000
     python3 tools/base_stats_parser.py --build 1.60.2.70000 \\
         --inputs assets/db_inputs/gametables/1.60.2.70000
+    python3 tools/base_stats_parser.py --levels-json assets/db_inputs/levels/1.60.1.69893.json
 """
 
 import argparse
 import csv
+import json
 import os
 import sys
 
 MAX_LEVEL = 60
+
+# wowhead's gear planner classId -> proto.Class name (proto/api.proto's
+# Class enum). Classes the client has no gear planner data for (Death
+# Knight, Monk, Demon Hunter, Evoker: not in Classic) are absent from
+# both sides and never appear in the generated tables.
+LEVELS_CLASS_ID_TO_PROTO_NAME = {
+    "1": "ClassWarrior",
+    "2": "ClassPaladin",
+    "3": "ClassHunter",
+    "4": "ClassRogue",
+    "5": "ClassPriest",
+    "7": "ClassShaman",
+    "8": "ClassMage",
+    "9": "ClassWarlock",
+    "11": "ClassDruid",
+}
+
+# wowhead's gear planner statId -> stats.Stat field name (sim/core/stats),
+# in the order base_stats_levels_auto_gen.go writes each level's struct
+# literal. statId 2 (Stamina in some wowhead tables) is not used by the
+# baseStats table this fork reads; only these seven appear in it.
+LEVELS_STAT_ID_TO_FIELD = [
+    ("1", "Health"),
+    ("0", "Mana"),
+    ("3", "Agility"),
+    ("4", "Strength"),
+    ("5", "Intellect"),
+    ("6", "Spirit"),
+    ("7", "Stamina"),
+]
 
 COMBAT_RATINGS = "combatratings.txt"
 BASE_MP = "basemp.txt"
@@ -182,6 +228,121 @@ def generate(build, inputs_path, combat_ratings, base_mp, hp_per_sta):
     return "\n".join(lines)
 
 
+def read_levels_json(path):
+    """A levels.json-shaped file (see the module docstring). Return
+    (base_stats, crit_spell) where base_stats[className][level] is a dict
+    of field name -> value and crit_spell[className][level] is a float,
+    for level in 1..MAX_LEVEL."""
+    with open(path) as fh:
+        data = json.load(fh)
+
+    stats_by_class_id = data["baseStats"]["stats"]
+    base_stats = {}
+    for class_id, class_name in LEVELS_CLASS_ID_TO_PROTO_NAME.items():
+        if class_id not in stats_by_class_id:
+            continue
+        by_stat_id = stats_by_class_id[class_id]
+        by_level = {}
+        for level in range(1, MAX_LEVEL + 1):
+            row = {}
+            for stat_id, field in LEVELS_STAT_ID_TO_FIELD:
+                values = by_stat_id.get(stat_id)
+                if values is None or level >= len(values):
+                    raise SystemExit(
+                        f"{path}: baseStats.stats[{class_id}][{stat_id}] "
+                        f"({class_name}) has no level {level} entry")
+                row[field] = values[level]
+            by_level[level] = row
+        base_stats[class_name] = by_level
+
+    crit_spell_by_class_id = data.get("critSpell", {})
+    crit_spell = {}
+    for class_id, class_name in LEVELS_CLASS_ID_TO_PROTO_NAME.items():
+        values = crit_spell_by_class_id.get(class_id)
+        if values is None:
+            continue
+        by_level = {}
+        for level in range(1, MAX_LEVEL + 1):
+            if level >= len(values):
+                raise SystemExit(
+                    f"{path}: critSpell[{class_id}] ({class_name}) has no "
+                    f"level {level} entry")
+            by_level[level] = values[level]
+        crit_spell[class_name] = by_level
+
+    return base_stats, crit_spell
+
+
+def go_number(value):
+    """A JSON number formatted as a Go literal: Python's float repr is
+    already the shortest string that round-trips, so a source value like
+    0.075 is never turned into 0.07500000000000001 or similar."""
+    if isinstance(value, float) and value.is_integer():
+        return repr(int(value))
+    return repr(value)
+
+
+def generate_levels(source_path, base_stats, crit_spell):
+    lines = [
+        "// Code generated by tools/base_stats_parser.py. DO NOT EDIT.",
+        "//",
+        f"// Source: {source_path} (wowhead's Forever gear planner payload:",
+        "// wow.gearPlanner.classic.baseStats and .critSpell)",
+        "//",
+        "// Regenerate with:",
+        f"//     python3 tools/base_stats_parser.py --levels-json {source_path}",
+        "",
+        "package core",
+        "",
+        "import (",
+        '\t"github.com/wowsims/classic/sim/core/proto"',
+        '\t"github.com/wowsims/classic/sim/core/stats"',
+        ")",
+        "",
+        "// LevelStatsSource names the wowhead gear-planner payload",
+        "// baseStatsByClassLevel and spellCritPerIntByClassLevel were read from.",
+        f'const LevelStatsSource = "{source_path} (wow.gearPlanner.classic.baseStats, .critSpell)"',
+        "",
+        "// baseStatsByClassLevel[class][level] is wowhead's gear planner Health,",
+        "// Mana, Agility, Strength, Intellect, Spirit and Stamina for that class at",
+        "// that level, level 1..CharacterMaxLevel (index 0 is unused, the zero",
+        "// Stats{}, matching the source array's own unused index 0). Level",
+        "// CharacterMaxLevel reproduces base_stats.go's ClassBaseStats exactly for",
+        "// every class here - TestGeneratedLevel60MatchesTheOldClassBaseStats pins",
+        "// it. Attack Power is not part of this table: wowhead's gear planner does",
+        "// not carry it, and base_stats.go derives it from level instead",
+        "// (classAttackPowerOffsetAtLevel).",
+        "var baseStatsByClassLevel = map[proto.Class][CharacterMaxLevel + 1]stats.Stats{",
+    ]
+    for class_name, by_level in base_stats.items():
+        lines.append(f"\tproto.Class_{class_name}: {{")
+        for level in range(1, MAX_LEVEL + 1):
+            row = by_level[level]
+            fields = ", ".join(
+                f"stats.{field}: {go_number(row[field])}"
+                for _, field in LEVELS_STAT_ID_TO_FIELD
+                if row[field] != 0
+            )
+            lines.append(f"\t\t{level}: {{{fields}}},")
+        lines.append("\t},")
+    lines.append("}")
+    lines.append("")
+
+    lines.append("// spellCritPerIntByClassLevel[class][level] is the fraction of spell crit")
+    lines.append("// chance one point of Intellect grants at that level (same unit as the")
+    lines.append("// pre-generator flat CritPerIntAtLevel), level 1..CharacterMaxLevel. A")
+    lines.append("// class absent here (Warrior, Rogue) grants none at any level -")
+    lines.append("// SpellCritPerIntAtLevel returns 0 for it, matching CritPerIntAtLevel's")
+    lines.append("// old 0.0 rows for those two classes.")
+    lines.append("var spellCritPerIntByClassLevel = map[proto.Class][CharacterMaxLevel + 1]float64{")
+    for class_name, by_level in crit_spell.items():
+        values = ", ".join(f"{level}: {go_number(by_level[level])}" for level in range(1, MAX_LEVEL + 1))
+        lines.append(f"\tproto.Class_{class_name}: {{{values}}},")
+    lines.append("}")
+    lines.append("")
+    return "\n".join(lines)
+
+
 def resolve_build(build, inputs_path):
     if build:
         return build
@@ -205,6 +366,10 @@ def main():
                      help="client build string, e.g. 1.60.1.69893; inferred from "
                           "--inputs' basename, or an --inputs/BUILD file, when omitted")
     ap.add_argument("--out", default="sim/core/base_stats_auto_gen.go")
+    ap.add_argument("--levels-json", default="assets/db_inputs/levels/1.60.1.69893.json",
+                     help="wowhead gear-planner payload (levels.json shape); "
+                          "pass an empty string to skip this file's generation")
+    ap.add_argument("--levels-out", default="sim/core/base_stats_levels_auto_gen.go")
     args = ap.parse_args()
 
     build = resolve_build(args.build, args.inputs)
@@ -217,6 +382,13 @@ def main():
     with open(args.out, "w") as fh:
         fh.write(out)
     print(f"wrote {args.out} from build {build}", file=sys.stderr)
+
+    if args.levels_json:
+        base_stats, crit_spell = read_levels_json(args.levels_json)
+        levels_out = generate_levels(args.levels_json, base_stats, crit_spell)
+        with open(args.levels_out, "w") as fh:
+            fh.write(levels_out)
+        print(f"wrote {args.levels_out} from {args.levels_json}", file=sys.stderr)
 
 
 if __name__ == "__main__":

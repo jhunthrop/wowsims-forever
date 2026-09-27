@@ -63,7 +63,7 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 
 	baseMinDamage = 18.17 * attackSpeed
 	baseMaxDamage = 27.66 * attackSpeed
-	
+
 	hunterPetBaseStats = stats.Stats{
 		stats.Strength:  136,
 		stats.Agility:   100,
@@ -107,16 +107,16 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 	//
 	// The Intellect line is a no-op and is kept only so the pet's
 	// two dependencies read as the pair the merge left behind:
-	// CritPerIntAtLevel[ClassWarrior] is 0.0, and ClassCritStatSources
-	// lists the warrior as Agility-only — it is not one of that
-	// table's hybrids, so the earlier note here claiming the pet
-	// "stacks Agility- and Intellect-derived Crit ... same as the
+	// SpellCritPerIntAtLevel(ClassWarrior, _) is 0.0 at every level, and
+	// ClassCritStatSources lists the warrior as Agility-only — it is not
+	// one of that table's hybrids, so the earlier note here claiming the
+	// pet "stacks Agility- and Intellect-derived Crit ... same as the
 	// hybrid classes" described something that does not happen.
 	// unconfirmed: whether a Forever warrior-scaled pet should convert
 	// Intellect to Crit at all is unpublished; if it should, the
-	// coefficient belongs in CritPerIntAtLevel, not here.
+	// coefficient belongs in SpellCritPerIntAtLevel, not here.
 	hp.AddStatDependency(stats.Agility, stats.Crit, core.CritPerAgiAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
-	hp.AddStatDependency(stats.Intellect, stats.Crit, core.CritPerIntAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
+	hp.AddStatDependency(stats.Intellect, stats.Crit, core.SpellCritPerIntAtLevel(proto.Class_ClassWarrior, hp.Level)*core.CritRatingPerCritChance)
 
 	core.ApplyPetConsumeEffects(&hp.Character, hunter.Consumes)
 

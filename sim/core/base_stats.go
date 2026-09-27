@@ -185,7 +185,13 @@ var APPerAgility = map[proto.Class]float64{
 	proto.Class_ClassDruid:   1,
 }
 
-// Melee/Ranged crit agi scaling
+// Melee/Ranged crit agi scaling. Unconfirmed below 60: wowhead's gear
+// planner payload (base_stats_levels_auto_gen.go's source) carries a
+// per-level table for Intellect's spell-crit rate (see
+// SpellCritPerIntAtLevel) but none for Agility's physical-crit rate, so
+// this fork keeps its one hand-typed level-60 value for every level
+// rather than inventing a curve with no source. If a per-level physical
+// crit table is ever mined, this is the map a generator replaces.
 var CritPerAgiAtLevel = map[proto.Class]float64{
 	proto.Class_ClassUnknown: 0.0,
 	proto.Class_ClassWarrior: 0.0500,
@@ -197,20 +203,6 @@ var CritPerAgiAtLevel = map[proto.Class]float64{
 	proto.Class_ClassMage:    0.0514,
 	proto.Class_ClassWarlock: 0.0500,
 	proto.Class_ClassDruid:   0.0500,
-}
-
-// Spell crit int scaling
-var CritPerIntAtLevel = map[proto.Class]float64{
-	proto.Class_ClassUnknown: 0.0,
-	proto.Class_ClassWarrior: 0.0,
-	proto.Class_ClassPaladin: 0.0167,
-	proto.Class_ClassHunter:  0.0165,
-	proto.Class_ClassRogue:   0.0,
-	proto.Class_ClassPriest:  0.0168,
-	proto.Class_ClassShaman:  0.0169,
-	proto.Class_ClassMage:    0.0168,
-	proto.Class_ClassWarlock: 0.0165,
-	proto.Class_ClassDruid:   0.0167,
 }
 
 // Dodge agility scaling
@@ -269,113 +261,136 @@ var ClassCritStatSources = map[proto.Class]CritStatSources{
 // stat(s) ClassCritStatSources names for its class, at that table's rate.
 // See ClassCritStatSources' comment for the unconfirmed-hybrid-stacking
 // caveat this keeps in place from before the Hit/Crit merge.
+//
+// The Intellect side reads SpellCritPerIntAtLevel at character.Level: wowhead's
+// gear planner reports a different rate per level (a level-1 character
+// needs far less Intellect for 1% crit than a level-60 one), unlike the
+// Agility side, which has no per-level source and stays level-60 for
+// every level (CritPerAgiAtLevel's comment).
 func AddCritStatDependencies(character *Character, class proto.Class) {
 	src := ClassCritStatSources[class]
 	if src.Agility {
 		character.AddStatDependency(stats.Agility, stats.Crit, CritPerAgiAtLevel[class]*CritRatingPerCritChance)
 	}
 	if src.Intellect {
-		character.AddStatDependency(stats.Intellect, stats.Crit, CritPerIntAtLevel[class]*CritRatingPerCritChance)
+		character.AddStatDependency(stats.Intellect, stats.Crit, SpellCritPerIntAtLevel(class, character.Level)*CritRatingPerCritChance)
 	}
 }
 
-var ClassBaseStats = map[proto.Class]stats.Stats{
-	proto.Class_ClassUnknown: {},
-	proto.Class_ClassWarrior: {
-		stats.Health:      1689,
-		stats.Mana:        0,
-		stats.Agility:     80,
-		stats.Strength:    120,
-		stats.Intellect:   30,
-		stats.Spirit:      45,
-		stats.Stamina:     110,
-		stats.AttackPower: 60*3 - 20,
-	},
-	proto.Class_ClassPaladin: {
-		stats.Health:      1381,
-		stats.Mana:        1512,
-		stats.Agility:     65,
-		stats.Strength:    105,
-		stats.Intellect:   70,
-		stats.Spirit:      75,
-		stats.Stamina:     100,
-		stats.AttackPower: 60*3 - 20,
-	},
-	proto.Class_ClassHunter: {
-		stats.Health:            1467,
-		stats.Mana:              1720,
-		stats.Agility:           125,
-		stats.Strength:          55,
-		stats.Intellect:         65,
-		stats.Spirit:            70,
-		stats.Stamina:           90,
-		stats.AttackPower:       60*2 - 20,
-		stats.RangedAttackPower: 60*2 - 20,
-	},
-	proto.Class_ClassRogue: {
-		stats.Health:      1523,
-		stats.Mana:        0,
-		stats.Agility:     130,
-		stats.Strength:    80,
-		stats.Intellect:   35,
-		stats.Spirit:      50,
-		stats.Stamina:     75,
-		stats.AttackPower: 60*2 - 20,
-	},
-	proto.Class_ClassPriest: {
-		stats.Health:      1397,
-		stats.Mana:        1376,
-		stats.Agility:     40,
-		stats.Strength:    35,
-		stats.Intellect:   120,
-		stats.Spirit:      125,
-		stats.Stamina:     50,
-		stats.AttackPower: -10,
-	},
-	proto.Class_ClassShaman: {
-		stats.Health:      1280,
-		stats.Mana:        1520,
-		stats.Agility:     55,
-		stats.Strength:    85,
-		stats.Intellect:   90,
-		stats.Spirit:      100,
-		stats.Stamina:     95,
-		stats.AttackPower: 60*2 - 20,
-	},
-	proto.Class_ClassMage: {
-		stats.Health:      1370,
-		stats.Mana:        1213,
-		stats.Agility:     35,
-		stats.Strength:    30,
-		stats.Intellect:   125,
-		stats.Spirit:      120,
-		stats.Stamina:     45,
-		stats.AttackPower: -10,
-	},
-	proto.Class_ClassWarlock: {
-		stats.Health:      1414,
-		stats.Mana:        1373,
-		stats.Agility:     50,
-		stats.Strength:    45,
-		stats.Intellect:   110,
-		stats.Spirit:      115,
-		stats.Stamina:     65,
-		stats.AttackPower: -10,
-	},
-	proto.Class_ClassDruid: {
-		stats.Health:      1483,
-		stats.Mana:        1244,
-		stats.Agility:     60,
-		stats.Strength:    65,
-		stats.Intellect:   100,
-		stats.Spirit:      110,
-		stats.Stamina:     70,
-		stats.AttackPower: -20,
-	},
+// allClasses lists every class the per-level tables (and the classAttack
+// PowerOffsetAtLevel switch below) carry a row for. ClassUnknown is
+// deliberately excluded: it stays the zero Stats{} at every level, the
+// same as before this table existed.
+var allClasses = []proto.Class{
+	proto.Class_ClassWarrior,
+	proto.Class_ClassPaladin,
+	proto.Class_ClassHunter,
+	proto.Class_ClassRogue,
+	proto.Class_ClassPriest,
+	proto.Class_ClassShaman,
+	proto.Class_ClassMage,
+	proto.Class_ClassWarlock,
+	proto.Class_ClassDruid,
 }
 
-// Retrieves base stats, with race offsets, and crit rating adjustments per level
-func getBaseStatsCombo(r proto.Race, c proto.Class) stats.Stats {
-	starting := ClassBaseStats[c]
+// BaseStatsAtLevel returns the six base stats (Health, Mana, Agility,
+// Strength, Intellect, Spirit, Stamina) wowhead's gear planner reports for
+// class at level (base_stats_levels_auto_gen.go), without race offsets,
+// ClassBaseCrit, or Attack Power - getBaseStatsCombo adds those. A class
+// absent from the generated table (ClassUnknown) returns the zero
+// Stats{}.
+func BaseStatsAtLevel(class proto.Class, level int32) stats.Stats {
+	level = EffectiveCharacterLevel(level)
+	if perLevel, ok := baseStatsByClassLevel[class]; ok {
+		return perLevel[level]
+	}
+	return stats.Stats{}
+}
+
+// SpellCritPerIntAtLevel is the fraction of spell crit chance one point of
+// Intellect grants class at level, from wowhead's gear planner
+// (base_stats_levels_auto_gen.go). Unlike CritPerAgiAtLevel, wowhead does
+// carry a per-level table for this, so it varies by level rather than
+// being pinned to the level-60 value. A class absent from the generated
+// table (Warrior, Rogue, ClassUnknown) grants none at any level.
+func SpellCritPerIntAtLevel(class proto.Class, level int32) float64 {
+	level = EffectiveCharacterLevel(level)
+	if perLevel, ok := spellCritPerIntByClassLevel[class]; ok {
+		return perLevel[level]
+	}
+	return 0
+}
+
+// classAttackPowerOffsetAtLevel is the level-dependent term ClassBaseStats'
+// old AttackPower field baked in at level 60 only. Warrior, Paladin,
+// Hunter, Rogue and Shaman wrote that field as a visible multiplication
+// by 60 (60*3-20, 60*2-20) - the Classic ruleset's own formula, so it is
+// expressed here as a function of level rather than re-derived. Priest,
+// Mage, Warlock and Druid wrote theirs as bare literals (-10, -10, -10,
+// -20) with no such multiplication, so nothing is invented for them: they
+// keep the same flat value at every level, exactly as they did when
+// CharacterMaxLevel was the only level that existed.
+func classAttackPowerOffsetAtLevel(class proto.Class, level int32) float64 {
+	level = EffectiveCharacterLevel(level)
+	switch class {
+	case proto.Class_ClassWarrior, proto.Class_ClassPaladin:
+		return float64(level)*3 - 20
+	case proto.Class_ClassHunter, proto.Class_ClassRogue, proto.Class_ClassShaman:
+		return float64(level)*2 - 20
+	case proto.Class_ClassPriest, proto.Class_ClassMage, proto.Class_ClassWarlock:
+		return -10
+	case proto.Class_ClassDruid:
+		return -20
+	default:
+		return 0
+	}
+}
+
+// BaseAttackPowerAtLevel is classAttackPowerOffsetAtLevel exported for
+// class packages that need a level-aware base Attack Power outside a full
+// getBaseStatsCombo call.
+func BaseAttackPowerAtLevel(class proto.Class, level int32) float64 {
+	return classAttackPowerOffsetAtLevel(class, level)
+}
+
+// classBaseStatsAtLevel composes one class's full base-stat row at level:
+// the six stats wowhead's gear planner reports per level
+// (BaseStatsAtLevel; base_stats_levels_auto_gen.go) plus the Attack Power
+// (and, for Hunter, Ranged Attack Power) offset for that level. It does
+// not add race offsets or ClassBaseCrit - getBaseStatsCombo does that.
+func classBaseStatsAtLevel(class proto.Class, level int32) stats.Stats {
+	row := BaseStatsAtLevel(class, level)
+	row[stats.AttackPower] = classAttackPowerOffsetAtLevel(class, level)
+	if class == proto.Class_ClassHunter {
+		row[stats.RangedAttackPower] = classAttackPowerOffsetAtLevel(class, level)
+	}
+	return row
+}
+
+// ClassBaseStats is classBaseStatsAtLevel at CharacterMaxLevel, computed
+// rather than hand-typed: base_stats_test.go's
+// TestGeneratedLevel60MatchesTheOldClassBaseStats pins it against the
+// literal values this map held before base_stats_levels_auto_gen.go
+// existed, so a generator regression is caught rather than silently
+// changing every level-60 sim.
+var ClassBaseStats = buildClassBaseStats()
+
+func buildClassBaseStats() map[proto.Class]stats.Stats {
+	out := map[proto.Class]stats.Stats{
+		proto.Class_ClassUnknown: {},
+	}
+	for _, class := range allClasses {
+		out[class] = classBaseStatsAtLevel(class, CharacterMaxLevel)
+	}
+	return out
+}
+
+// getBaseStatsCombo retrieves base stats at level, with race offsets and
+// crit rating adjustments. Race offsets are unaffected by level: wowhead's
+// gear planner carries only one raceOffsets table (not one per level), and
+// research/08-stats.md names no per-level racial drift, so RaceOffsets
+// stays exactly as it was before per-level base stats existed.
+func getBaseStatsCombo(r proto.Race, c proto.Class, level int32) stats.Stats {
+	starting := classBaseStatsAtLevel(c, level)
 	return starting.Add(RaceOffsets[r]).Add(ClassBaseCrit[c])
 }
