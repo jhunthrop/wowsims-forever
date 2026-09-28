@@ -37,6 +37,8 @@ const (
 	SpellCode_WarlockShadowBolt
 	SpellCode_WarlockShadowburn
 	SpellCode_WarlockSoulFire
+	SpellCode_WarlockWrack
+	SpellCode_WarlockIncinerate
 )
 
 type Warlock struct {
@@ -59,6 +61,7 @@ type Warlock struct {
 	DarkPact    *core.Spell
 	DrainSoul   []*core.Spell
 	Immolate    []*core.Spell
+	Incinerate  []*core.Spell
 	LifeTap     []*core.Spell
 	SearingPain []*core.Spell
 	ShadowBolt  []*core.Spell
@@ -68,6 +71,7 @@ type Warlock struct {
 	RainOfFire  []*core.Spell
 	SiphonLife  []*core.Spell
 	DeathCoil   []*core.Spell
+	Wrack       *core.Spell
 
 	ActiveCurseAura          core.AuraArray
 	CurseOfElements          *core.Spell
@@ -93,6 +97,7 @@ type Warlock struct {
 	ImprovedShadowBoltAuras core.AuraArray
 	SoulLinkAura            *core.Aura
 	MasterDemonologistAura  *core.Aura
+	WrackVulnerabilityAuras core.AuraArray
 }
 
 func (warlock *Warlock) GetCharacter() *core.Character {
@@ -106,10 +111,12 @@ func (warlock *Warlock) GetWarlock() *Warlock {
 func (warlock *Warlock) Initialize() {
 	warlock.registerCorruptionSpell()
 	warlock.registerImmolateSpell()
+	warlock.registerIncinerateSpell()
 	warlock.registerShadowBoltSpell()
 	warlock.registerLifeTapSpell()
 	warlock.registerSoulFireSpell()
 	warlock.registerShadowBurnSpell()
+	warlock.registerWrackSpell()
 	// warlock.registerSeedSpell()
 	warlock.registerDrainSoulSpell()
 	warlock.registerConflagrateSpell()
