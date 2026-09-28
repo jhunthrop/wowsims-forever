@@ -40,7 +40,7 @@
       }
     },
     {
-      "notes": "At 5 combo points, Rip if it is not already ticking.",
+      "notes": "At 5 combo points, Rip once it has under 6s left. Fix round: the engine's Rip carries a fixed 12s duration rather than one that scales with combo points (engine lane 1's report), and this bare build's only combo generator is Shred, which reaches 5 combo points slower than a talented/geared build would -- gating the refresh on `not dotIsActive` meant Rip was ALWAYS already expired by the time 5 combo points arrived, so the branch below (Ferocious Bite with Rip up) was unreachable every time, not just occasionally. dotRemainingTime < 6s refreshes a little before the DoT actually falls off, the same clip-avoidance shape as warrior-arms' Rend upkeep, and leaves the Bite branch below reachable whenever Rip still has real time on it.",
       "action": {
         "condition": {
           "and": {
@@ -59,13 +59,19 @@
                 }
               },
               {
-                "not": {
-                  "val": {
-                    "dotIsActive": {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "dotRemainingTime": {
                       "spellId": {
                         "spellId": 9896,
                         "rank": 6
                       }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "6s"
                     }
                   }
                 }
@@ -82,19 +88,43 @@
       }
     },
     {
-      "notes": "At 5 combo points with Rip already up, Ferocious Bite dumps them instead of capping out.",
+      "notes": "At 5 combo points with Rip having more than 6s left, Ferocious Bite dumps them instead of capping out. Fix round: paired with the dotRemainingTime rewrite above, this is the branch engine lane 1's report found unreachable under the engine's fixed 12s Rip.",
       "action": {
         "condition": {
-          "cmp": {
-            "op": "OpEq",
-            "lhs": {
-              "currentComboPoints": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "5"
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpEq",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "5"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "dotRemainingTime": {
+                      "spellId": {
+                        "spellId": 9896,
+                        "rank": 6
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "6s"
+                    }
+                  }
+                }
               }
-            }
+            ]
           }
         },
         "castSpell": {

@@ -41,8 +41,18 @@
       }
     },
     {
-      "notes": "Hemorrhage as the combo point builder: Subtlety's talent-granted replacement for Sinister Strike, and its bleed needs reapplying once its charges run out.",
-      "action": { "castSpell": { "spellId": { "spellId": 16511 } } }
+      "notes": "Hemorrhage as the combo point builder: Subtlety's talent-granted replacement for Sinister Strike, and its bleed needs reapplying once its charges run out. Gated on spellIsKnown so a bare build without the talent falls through to the Sinister Strike/Backstab line below instead of losing its only builder.",
+      "action": {
+        "condition": { "spellIsKnown": { "spellId": { "spellId": 16511 } } },
+        "castSpell": { "spellId": { "spellId": 16511 } }
+      }
+    },
+    {
+      "notes": "Fix round: the ladder's bare build has zero points in Hemorrhage below the level its tier is reachable (tier 4 of the Subtlety tree), leaving no combo-point builder at all -- Sinister Strike as the fallback builder whenever Hemorrhage is not known, the same auraIsKnown/spellIsKnown gate shape mage-fire uses for Improved Scorch (12873).",
+      "action": {
+        "condition": { "not": { "val": { "spellIsKnown": { "spellId": { "spellId": 16511 } } } } },
+        "castSpell": { "spellId": { "spellId": 11294, "rank": 8 } }
+      }
     }
   ]
 }
