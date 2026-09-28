@@ -15,7 +15,16 @@ func (paladin *Paladin) registerJudgement() {
 		ActionID:    core.ActionID{SpellID: 20271},
 		SpellSchool: core.SpellSchoolHoly,
 		ProcMask:    core.ProcMaskEmpty,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell | core.SpellFlagCastTimeNoGCD,
+		// core.SpellFlagPassiveSpell used to sit here too. That flag
+		// tells core/metrics_aggregator.go's addSpellMetrics to drop
+		// the spell's OWN Casts count ("applied as a result of another
+		// spell"), which is correct for the seal-specific judgement
+		// spells this ApplyEffects triggers (castSpecificJudgement,
+		// below) but wrong for THIS wrapper: it is the ability the
+		// rotation names directly (SpellFlagAPL, right beside it), so
+		// its Casts count is a real player cast, not a side effect.
+		// The identical, identically-caused bug is sim/warrior/execute.go's.
+		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagNoOnCastComplete | core.SpellFlagCastTimeNoGCD,
 
 		ManaCost: core.ManaCostOptions{
 			BaseCost:   0.06,
