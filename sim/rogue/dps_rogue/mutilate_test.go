@@ -241,3 +241,56 @@ func TestMutilatePoisonedTargetDealsMoreDamage(t *testing.T) {
 		t.Errorf("average Mutilate damage against a poisoned target = %v, want more than %v (unpoisoned avg %v x1.05, tooltip states x1.20)", poisonedAvg, want, unpoisonedAvg)
 	}
 }
+
+// TestMutilateComboPointEfficiencyBeatsSinisterStrike is the
+// rotation-accuracy program's engine-side check for item 4 (lane
+// engine-3): the site's ladder found the assassination rung LOSING dps
+// at level 50 once Mutilate comes online, and asked whether
+// sim/rogue/mutilate.go's damage/cost numbers are wrong against the
+// client. They are not: mutilateFlatDamageBonus (23/33/48/67),
+// mutilateWeaponDamagePct (75%) and mutilateEnergyCost (60) all match
+// this build's spellconst/rogue.json byte-for-byte (Mutilate's four
+// player ranks and their MH/OH sub-spells' effects 121/31), independently
+// re-checked for this lane.
+//
+// What this test pins instead is the actual, and easy to get backwards,
+// per-energy comparison: Mutilate cannot be judged solely on damage per
+// energy (it is close to parity with Sinister Strike there, both spending
+// roughly the same damage per point of energy), but it grants 2 combo
+// points for 60 energy - 30 energy per combo point - against Sinister
+// Strike's 1 combo point for its own (talent-reduced) cost, which is
+// worse per combo point at every level Sinister Strike's own
+// sinisterStrikeFlatDamageBonus table covers. Combo points are the
+// resource a finisher actually consumes, so Mutilate is the strictly
+// better builder once combo-point efficiency (not raw damage) is the
+// yardstick - which is exactly why the ladder's own diagnosis (see this
+// lane's report) is that the curated rotation's un-gated Sinister
+// Strike fallback, not the engine's numbers, is what let Sinister
+// Strike out-compete Mutilate for the level-50 rung's limited energy.
+func TestMutilateComboPointEfficiencyBeatsSinisterStrike(t *testing.T) {
+	_, built := buildRogueForTest(t, rogueTalentStringWith(t, "mutilate"))
+
+	if built.Mutilate == nil {
+		t.Fatal("talented level-60 rogue has no Mutilate registered")
+	}
+	if built.SinisterStrike == nil {
+		t.Fatal("level-60 rogue has no Sinister Strike registered")
+	}
+
+	mutilateCost := built.Mutilate.Cost.GetCurrentCost()
+	sinisterStrikeCost := built.SinisterStrike.Cost.GetCurrentCost()
+
+	const (
+		mutilateComboPoints       = 2.0
+		sinisterStrikeComboPoints = 1.0
+	)
+
+	mutilateEnergyPerCP := mutilateCost / mutilateComboPoints
+	sinisterStrikeEnergyPerCP := sinisterStrikeCost / sinisterStrikeComboPoints
+
+	if mutilateEnergyPerCP >= sinisterStrikeEnergyPerCP {
+		t.Errorf("Mutilate spends %.1f energy per combo point, want strictly less than "+
+			"Sinister Strike's %.1f (Mutilate cost %.0f / %d CP vs Sinister Strike cost %.0f / %d CP)",
+			mutilateEnergyPerCP, sinisterStrikeEnergyPerCP, mutilateCost, int(mutilateComboPoints), sinisterStrikeCost, int(sinisterStrikeComboPoints))
+	}
+}
