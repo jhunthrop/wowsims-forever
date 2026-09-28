@@ -45,8 +45,11 @@
       "action": { "castSpell": { "spellId": { "spellId": 1241584, "rank": 4 } } }
     },
     {
-      "notes": "Sinister Strike as the combo point builder for a rogue without the Mutilate talent.",
-      "action": { "castSpell": { "spellId": { "spellId": 11294, "rank": 8 } } }
+      "notes": "Sinister Strike as the combo point builder for a rogue without the Mutilate talent. Gated on Mutilate being unknown: once the talent is taken, an unguarded Sinister Strike (cheaper still with Improved Sinister Strike) out-competes Mutilate for the energy pool and Mutilate fires once per fight (the ladder's level-50 rung lost 3.4 dps to exactly that).",
+      "action": {
+        "condition": { "not": { "val": { "spellIsKnown": { "spellId": { "spellId": 1241584, "rank": 4 } } } } },
+        "castSpell": { "spellId": { "spellId": 11294, "rank": 8 } }
+      }
     }
   ]
 }

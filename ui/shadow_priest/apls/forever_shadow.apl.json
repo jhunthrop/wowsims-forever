@@ -42,7 +42,7 @@
         "strictSequence": {
           "actions": [
             { "castSpell": { "spellId": { "spellId": 14751 } } },
-            { "castSpell": { "spellId": { "spellId": 19279, "rank": 5 } } }
+            { "castSpell": { "spellId": { "spellId": 19280, "rank": 6 } } }
           ]
         }
       }
