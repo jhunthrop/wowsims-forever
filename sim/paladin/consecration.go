@@ -22,25 +22,24 @@ const (
 // synergy talent giving Holy spells bonus damage against enemies standing
 // in Consecration); it does not gate Consecration itself.
 //
-// tickDamage is each rank's effect-index-2 base_points (periodic damage).
-// The client data gives the same value, 4, for every one of the five
-// ranks -- only manaCost and the level requirement scale by rank. That is
-// unusual for a ranked damage spell (the old, pre-Forever engine code this
-// replaces scaled per-tick damage from 8 up to 48 across the same five
-// ranks) and could not be confirmed against any other source in this
-// client's data, so it is implemented literally rather than guessed at;
-// see brief-1's report.
+// tickDamage is Classic's per-rank Consecration damage over 8 s divided by
+// its 8 ticks (64/120/192/280/384 at ranks 1-5). The Forever client's
+// periodic effect (index 2) carries only a "periodic dummy" of 4-5 per
+// second with a server-side script (wowhead.com/forever/spell=20924 shows
+// the same), so the client does not state the damage at all, and the one
+// number it does carry is not it. Classic's values are the best-known
+// answer until Forever's own numbers are measured in a log.
 var consecrationRanks = []struct {
 	level      int32
 	spellID    int32
 	manaCost   float64
 	tickDamage float64
 }{
-	{level: 20, spellID: 26573, manaCost: 135, tickDamage: 4},
-	{level: 30, spellID: 20116, manaCost: 235, tickDamage: 4},
-	{level: 40, spellID: 20922, manaCost: 320, tickDamage: 4},
-	{level: 50, spellID: 20923, manaCost: 435, tickDamage: 4},
-	{level: 60, spellID: 20924, manaCost: 565, tickDamage: 4},
+	{level: 20, spellID: 26573, manaCost: 135, tickDamage: 64 / 8},
+	{level: 30, spellID: 20116, manaCost: 235, tickDamage: 120 / 8},
+	{level: 40, spellID: 20922, manaCost: 320, tickDamage: 192 / 8},
+	{level: 50, spellID: 20923, manaCost: 435, tickDamage: 280 / 8},
+	{level: 60, spellID: 20924, manaCost: 565, tickDamage: 384 / 8},
 }
 
 func (paladin *Paladin) registerConsecration() {
