@@ -266,6 +266,14 @@ func (wa *WeaponAttack) setWeapon(weapon Weapon) {
 
 // inlineable stub for swing
 func (wa *WeaponAttack) trySwing(sim *Simulation) time.Duration {
+	if wa.SwingSpeed <= 0 {
+		// A weapon the database carries with no swing speed (an item it
+		// never itemised as a weapon, or a placeholder row) would
+		// otherwise swing again at the same instant forever: the swing
+		// duration is SwingSpeed / haste, so it would be zero. Such a
+		// weapon never swings.
+		return NeverExpires
+	}
 	if sim.CurrentTime < wa.swingAt {
 		return wa.swingAt
 	}
