@@ -136,13 +136,19 @@ func TestMutilateNotRegisteredWithoutTheTalent(t *testing.T) {
 // talented level-60 rogue must have Mutilate registered, and casting it
 // must land on both weapons, deal damage, and award the 2 combo points
 // the talent's tooltip states.
+//
+// The registered id is rank 4's (1241584), not rank 1's (1310707):
+// Mutilate is a four-rank ability learned by level
+// (spellranks.json's chain, 1310707@30/399956@40/1241582@50/1241584@60),
+// not the single always-known ability this test used to assume, and a
+// level-60 rogue has learned every rank.
 func TestMutilateLevel60DealsDamageAndAwardsComboPoints(t *testing.T) {
 	sim, built := buildRogueForTest(t, rogueTalentStringWith(t, "mutilate"))
 
 	if built.Mutilate == nil {
 		t.Fatal("talented level-60 rogue has no Mutilate registered")
 	}
-	if got, want := built.Mutilate.ActionID.SpellID, int32(1310707); got != want {
+	if got, want := built.Mutilate.ActionID.SpellID, int32(1241584); got != want {
 		t.Errorf("Mutilate spell ID = %d, want %d", got, want)
 	}
 	if !built.AutoAttacks.IsDualWielding {
