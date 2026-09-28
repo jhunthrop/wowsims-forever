@@ -98,12 +98,29 @@ func (warlock *Warlock) registerSoulFireSpell() {
 //     tooltip's "costs no Soul Shards" is legacy flavor text and the
 //     coded -40% is used instead of treating the cast free.
 //
-// NOT implemented: the "Shadow Bolt or Searing Pain deal 3%/6% increased
-// damage" half of the talent. That is a conditional buff to Shadow
-// Bolt's/Searing Pain's own damage (their ApplyEffects would need the
-// target's health at cast time), which sits in shadowbolt.go and
-// searing_pain.go -- outside this lane's file scope ("wire it into
-// soul_fire.go"). Flagged in report-warlock.md.
+// decimationDamageMultiplier is Decimation's other half: "Shadow Bolt or
+// Searing Pain on an enemy below 35% health, they deal 3%/6% increased
+// damage" (rank 1/2) - a flat multiplier on the qualifying cast's OWN
+// damage, evaluated at cast time against the target's current health,
+// not the 10 s proc window applyDecimation wires above (that window is
+// Soul Fire's cast-time/cost discount only). shadowbolt.go and
+// searing_pain.go each call this from their own ApplyEffects, the same
+// way soul_fire.go's own ApplyEffects would if this talent modified
+// Soul Fire's own damage instead.
+func (warlock *Warlock) decimationDamageMultiplier(target *core.Unit) float64 {
+	rank := int(warlock.Talents.Decimation)
+	if rank == 0 {
+		return 1
+	}
+	// Enemy dummies in the ladder/conformance encounters generally
+	// don't track health (HasHealthBar() false); treated as eligible
+	// the same way applyDecimation's own proc trigger does.
+	if target.HasHealthBar() && target.CurrentHealthPercent() > 0.35 {
+		return 1
+	}
+	return 1 + [3]float64{0, 0.03, 0.06}[rank]
+}
+
 func (warlock *Warlock) applyDecimation() {
 	rank := int(warlock.Talents.Decimation)
 	if rank == 0 {

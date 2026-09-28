@@ -13,7 +13,12 @@ var LightningShieldSpellId = [LightningShieldRanks + 1]int32{0, 324, 325, 905, 9
 var LightningShieldProcSpellId = [LightningShieldRanks + 1]int32{0, 26364, 26365, 26366, 26367, 26369, 26370, 26363}
 var LightningShieldBaseDamage = [LightningShieldRanks + 1]float64{0, 13, 29, 51, 80, 114, 154, 198}
 var LightningShieldSpellCoef = [LightningShieldRanks + 1]float64{0, .147, .227, .267, .267, .267, .267, .267}
-var LightningShieldManaCost = [LightningShieldRanks + 1]float64{0, 45, 80, 125, 180, 240, 305}
+// The literal here used to stop at rank 6 (305), leaving rank 7's
+// ManaCost at the array's zero value instead of the client's 370
+// (spellconst/shaman.json build 1.60.1.70009) -- conformance golden
+// sim/core/testdata/conformance/shaman.golden.md flagged rank 7 (10432)
+// as cost 370.00->0.00; cost_type mana->none.
+var LightningShieldManaCost = [LightningShieldRanks + 1]float64{0, 45, 80, 125, 180, 240, 305, 370}
 var LightningShieldLevel = [LightningShieldRanks + 1]int{0, 8, 16, 24, 32, 40, 48, 56}
 
 func (shaman *Shaman) registerLightningShieldSpell() {
@@ -98,10 +103,17 @@ func (shaman *Shaman) registerNewLightningShieldSpell(rank int) {
 	})
 
 	shaman.LightningShield[rank] = shaman.RegisterSpell(core.SpellConfig{
-		ActionID:  core.ActionID{SpellID: spellId},
-		SpellCode: SpellCode_ShamanLightningShield,
-		ProcMask:  core.ProcMaskEmpty,
-		Flags:     core.SpellFlagAPL | SpellFlagShaman | SpellFlagLightning,
+		ActionID:        core.ActionID{SpellID: spellId},
+		SpellCode:       SpellCode_ShamanLightningShield,
+		ProcMask:        core.ProcMaskEmpty,
+		Flags:           core.SpellFlagAPL | SpellFlagShaman | SpellFlagLightning,
+		// conformance/compare.go's engineDuration reads a cast's own
+		// RelatedSelfBuff to find its duration; without this the golden
+		// saw every rank's duration_ms as 0 against the client's 600000
+		// (10 min) even though the buff aura below is already Duration:
+		// time.Minute*10 - the cast spell and its aura were simply never
+		// linked for the conformance reader.
+		RelatedSelfBuff: shaman.LightningShieldAuras[rank],
 
 		RequiredLevel: level,
 		Rank:          rank,

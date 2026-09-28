@@ -41,7 +41,12 @@ func (warlock *Warlock) getShadowBoltBaseConfig(rank int) core.SpellConfig {
 		BonusCoefficient: spellCoeff,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			// Decimation (talents/warlock.json 440870/440873): +3%/+6%
+			// damage against a target below 35% health.
+			oldMultiplier := spell.DamageMultiplier
+			spell.DamageMultiplier *= warlock.decimationDamageMultiplier(target)
 			result := spell.CalcDamage(sim, target, sim.Roll(baseDamage[0], baseDamage[1]), spell.OutcomeMagicHitAndCrit)
+			spell.DamageMultiplier = oldMultiplier
 			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
 				spell.DealDamage(sim, result)
 			})

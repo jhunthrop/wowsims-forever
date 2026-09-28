@@ -110,8 +110,21 @@ func engineCostTypeName(t core.CostType) string {
 // racial ability, an id this class file does not carry, or an id belonging
 // to another class's family) — the golden only carries spells the client
 // actually names for this class, per the lane brief.
+//
+// A spell flagged SpellFlagPassiveSpell ("applied/cast as a result of
+// another spell", sim/core/flags.go) is also skipped: it is an internal
+// helper the ability's own ApplyEffects drives directly (Death Coil's
+// self-heal, sim/warlock/death_coil.go, registers one with the SAME
+// SpellID as the cast itself, just a different ActionID Tag), not a
+// player action the client's per-rank table describes cost/cooldown/cast
+// time for. Without this, that helper produced its own all-zero row
+// against the real cast's client entry - Death Coil looked
+// "unregistered" in the golden even where the real cast matched.
 func rowFor(clientClass spellconst.Class, spec Preset, level int32, spell *core.Spell) (Row, bool) {
 	if spell.ActionID.SpellID == 0 {
+		return Row{}, false
+	}
+	if spell.Flags.Matches(core.SpellFlagPassiveSpell) {
 		return Row{}, false
 	}
 	clientSpell, ok := clientClass.ByID(spell.ActionID.SpellID)

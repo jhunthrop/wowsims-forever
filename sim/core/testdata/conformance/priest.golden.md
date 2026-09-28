@@ -10,23 +10,23 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | ShadowPriest | 10 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 10→10 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 10 | Shadow Weaving | 0 | 15257 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ShadowPriest | 10 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 10 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→33000 | mismatch | duration_ms 18000->33000 |
+| ShadowPriest | 10 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 10 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→24000 | mismatch | duration_ms 18000->24000 |
 | ShadowPriest | 10 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
 | ShadowPriest | 10 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  |
-| ShadowPriest | 20 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
+| ShadowPriest | 20 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  |
 | ShadowPriest | 20 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  |
 | ShadowPriest | 20 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 10→10 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 20 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 16→16 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 20 | Shadow Weaving | 0 | 15257 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ShadowPriest | 20 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 20 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 20 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→33000 | mismatch | duration_ms 18000->33000 |
+| ShadowPriest | 20 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 20 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 20 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→24000 | mismatch | duration_ms 18000->24000 |
 | ShadowPriest | 20 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
 | ShadowPriest | 20 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  |
 | ShadowPriest | 20 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  |
-| ShadowPriest | 30 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 30 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
+| ShadowPriest | 30 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  |
+| ShadowPriest | 30 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  |
 | ShadowPriest | 30 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  |
 | ShadowPriest | 30 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  |
 | ShadowPriest | 30 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  |
@@ -35,18 +35,18 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ShadowPriest | 30 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 22→22 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 30 | Mind Blast | 4 | 8104 | 150.00→150.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 28→28 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 30 | Shadow Weaving | 0 | 15257 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ShadowPriest | 30 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 30 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 30 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 30 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→33000 | mismatch | duration_ms 18000->33000 |
+| ShadowPriest | 30 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 30 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 30 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 30 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→24000 | mismatch | duration_ms 18000->24000 |
 | ShadowPriest | 30 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
 | ShadowPriest | 30 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  |
 | ShadowPriest | 30 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  |
 | ShadowPriest | 30 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  |
 | ShadowPriest | 30 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  |
-| ShadowPriest | 38 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 38 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 38 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
+| ShadowPriest | 38 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  |
+| ShadowPriest | 38 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  |
+| ShadowPriest | 38 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  |
 | ShadowPriest | 38 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  |
 | ShadowPriest | 38 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  |
 | ShadowPriest | 38 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  |
@@ -57,20 +57,21 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ShadowPriest | 38 | Mind Blast | 4 | 8104 | 150.00→150.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 28→28 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 38 | Mind Blast | 5 | 8105 | 185.00→185.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 34→34 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 38 | Shadow Weaving | 0 | 15257 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ShadowPriest | 38 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 38 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 38 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 38 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 38 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→33000 | mismatch | duration_ms 18000->33000 |
+| ShadowPriest | 38 | Shadow Word: Death | 1 | 1309595 | 175.00→175.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  |
+| ShadowPriest | 38 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 38 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 38 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 38 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 38 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→24000 | mismatch | duration_ms 18000->24000 |
 | ShadowPriest | 38 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
 | ShadowPriest | 38 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  |
 | ShadowPriest | 38 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  |
 | ShadowPriest | 38 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  |
 | ShadowPriest | 38 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  |
 | ShadowPriest | 38 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  |
-| ShadowPriest | 40 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 40 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 40 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
+| ShadowPriest | 40 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  |
+| ShadowPriest | 40 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  |
+| ShadowPriest | 40 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  |
 | ShadowPriest | 40 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  |
 | ShadowPriest | 40 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  |
 | ShadowPriest | 40 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  |
@@ -82,21 +83,23 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ShadowPriest | 40 | Mind Blast | 5 | 8105 | 185.00→185.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 34→34 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 40 | Mind Blast | 6 | 8106 | 225.00→225.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 40→40 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 40 | Shadow Weaving | 0 | 15257 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ShadowPriest | 40 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 40 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 40 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 40 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 40 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→33000 | mismatch | duration_ms 18000->33000 |
+| ShadowPriest | 40 | Shadow Word: Death | 1 | 1309595 | 175.00→175.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  |
+| ShadowPriest | 40 | Shadow Word: Death | 2 | 1309633 | 205.00→205.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  |
+| ShadowPriest | 40 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 40 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 40 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 40 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 40 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→24000 | mismatch | duration_ms 18000->24000 |
 | ShadowPriest | 40 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
 | ShadowPriest | 40 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  |
 | ShadowPriest | 40 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  |
 | ShadowPriest | 40 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  |
 | ShadowPriest | 40 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  |
 | ShadowPriest | 40 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  |
-| ShadowPriest | 50 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 50 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 50 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 50 | Devouring Plague | 4 | 19278 | 645.00→645.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 44→44 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
+| ShadowPriest | 50 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  |
+| ShadowPriest | 50 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  |
+| ShadowPriest | 50 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  |
+| ShadowPriest | 50 | Devouring Plague | 4 | 19278 | 645.00→645.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 44→44 | 24000→24000 | match |  |
 | ShadowPriest | 50 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  |
 | ShadowPriest | 50 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  |
 | ShadowPriest | 50 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  |
@@ -111,13 +114,16 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ShadowPriest | 50 | Mind Blast | 6 | 8106 | 225.00→225.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 40→40 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 50 | Mind Blast | 7 | 10945 | 265.00→265.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 46→46 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 50 | Shadow Weaving | 0 | 15257 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ShadowPriest | 50 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 50 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 50 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 50 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 50 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 50 | Shadow Word: Pain | 6 | 10892 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 50 | Shadow Word: Pain | 7 | 10893 | 385.00→385.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 18000→33000 | mismatch | duration_ms 18000->33000 |
+| ShadowPriest | 50 | Shadow Word: Death | 1 | 1309595 | 175.00→175.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  |
+| ShadowPriest | 50 | Shadow Word: Death | 2 | 1309633 | 205.00→205.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  |
+| ShadowPriest | 50 | Shadow Word: Death | 3 | 1309635 | 250.00→250.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  |
+| ShadowPriest | 50 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 50 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 50 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 50 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 50 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 50 | Shadow Word: Pain | 6 | 10892 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 50 | Shadow Word: Pain | 7 | 10893 | 385.00→385.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 18000→24000 | mismatch | duration_ms 18000->24000 |
 | ShadowPriest | 50 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
 | ShadowPriest | 50 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  |
 | ShadowPriest | 50 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  |
@@ -125,12 +131,12 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ShadowPriest | 50 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  |
 | ShadowPriest | 50 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  |
 | ShadowPriest | 50 | Smite | 7 | 10933 | 230.00→230.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 46→46 | n/a | match |  |
-| ShadowPriest | 60 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 60 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 60 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 60 | Devouring Plague | 4 | 19278 | 645.00→645.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 44→44 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 60 | Devouring Plague | 5 | 19279 | 810.00→810.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 52→52 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
-| ShadowPriest | 60 | Devouring Plague | 6 | 19280 | 985.00→985.00 | mana→mana | 60000→180000 | 0→0 | 1500→1500 | 60→60 | 24000→24000 | mismatch | cooldown_ms 60000->180000 |
+| ShadowPriest | 60 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  |
+| ShadowPriest | 60 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  |
+| ShadowPriest | 60 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  |
+| ShadowPriest | 60 | Devouring Plague | 4 | 19278 | 645.00→645.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 44→44 | 24000→24000 | match |  |
+| ShadowPriest | 60 | Devouring Plague | 5 | 19279 | 810.00→810.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 52→52 | 24000→24000 | match |  |
+| ShadowPriest | 60 | Devouring Plague | 6 | 19280 | 985.00→985.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 60→60 | 24000→24000 | match |  |
 | ShadowPriest | 60 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  |
 | ShadowPriest | 60 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  |
 | ShadowPriest | 60 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  |
@@ -149,14 +155,18 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ShadowPriest | 60 | Mind Blast | 8 | 10946 | 310.00→310.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 52→52 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 60 | Mind Blast | 9 | 10947 | 350.00→350.00 | mana→mana | 8000→6000 | 1500→1500 | 1500→1500 | 58→58 | n/a | mismatch | cooldown_ms 8000->6000 |
 | ShadowPriest | 60 | Shadow Weaving | 0 | 15257 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ShadowPriest | 60 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 60 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 60 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 60 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 60 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 60 | Shadow Word: Pain | 6 | 10892 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 60 | Shadow Word: Pain | 7 | 10893 | 385.00→385.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 18000→33000 | mismatch | duration_ms 18000->33000 |
-| ShadowPriest | 60 | Shadow Word: Pain | 8 | 10894 | 470.00→470.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 18000→33000 | mismatch | duration_ms 18000->33000 |
+| ShadowPriest | 60 | Shadow Word: Death | 1 | 1309595 | 175.00→175.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  |
+| ShadowPriest | 60 | Shadow Word: Death | 2 | 1309633 | 205.00→205.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  |
+| ShadowPriest | 60 | Shadow Word: Death | 3 | 1309635 | 250.00→250.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  |
+| ShadowPriest | 60 | Shadow Word: Death | 4 | 1309636 | 340.00→340.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 56→56 | n/a | match |  |
+| ShadowPriest | 60 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 60 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 60 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 60 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 60 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 60 | Shadow Word: Pain | 6 | 10892 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 60 | Shadow Word: Pain | 7 | 10893 | 385.00→385.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 18000→24000 | mismatch | duration_ms 18000->24000 |
+| ShadowPriest | 60 | Shadow Word: Pain | 8 | 10894 | 470.00→470.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 18000→24000 | mismatch | duration_ms 18000->24000 |
 | ShadowPriest | 60 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
 | ShadowPriest | 60 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  |
 | ShadowPriest | 60 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  |
