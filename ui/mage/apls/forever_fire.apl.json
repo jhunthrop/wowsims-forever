@@ -16,24 +16,31 @@
       }
     },
     {
-      "notes": "Scorch to apply or refresh the five stacks of Improved Scorch's debuff before it falls off. Fix round 4: restored (see top-level notes) -- this only ever stacks with the Improved Scorch talent taken, so it is functionally inert under this build's no-talent smoke run the same way Combustion above is, not a permanently uncastable line.",
+      "notes": "Scorch to apply or refresh the five stacks of Improved Scorch's debuff before it falls off. Fix round 4 restored the mechanic (see top-level notes) but left the refresh gated on a bare `or` of auraIsActive/auraNumStacks/auraRemainingTime against 12873 -- under this build's no-talent smoke run those three all fail to construct (GetAPLAura's aura.Get() is nil before the talent ever registers ImprovedScorchAura on the target), newValueOr filters every nil sub-value out of its list, and an `or` with zero surviving vals returns nil, which APLAction.IsReady reads as always-ready -- so Scorch, not 'inert', became 100% of every cast and Fire Blast/Fireball never fired once Scorch was learned. Fix round 5 wraps the same `or` in `and(auraIsKnown(12873), or(...))`: auraIsKnown (sim/core/apl_values_aura.go) never returns nil, only true/false, because it just reads whether the Aura object exists on the target rather than requiring an active instance -- and applyImprovedScorch (sim/mage/talents.go:341-343) registers that object via NewEnemyAuraArray the moment the talent is present, independent of stacks. Once the inner `or` goes nil under no talent, newValueAnd's own nil filter (same mechanism as `or`, sim/core/apl_values_operators.go) drops it and the `and` degrades to the single surviving auraIsKnown value, which is false without the talent, so the whole line is skipped and the priority list falls through to Fire Blast then Fireball -- proven with the scratch castSet at level 60 untalented.",
       "action": {
         "condition": {
-          "or": {
+          "and": {
             "vals": [
-              { "not": { "val": { "auraIsActive": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } } } },
+              { "auraIsKnown": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } },
               {
-                "cmp": {
-                  "op": "OpLt",
-                  "lhs": { "auraNumStacks": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } },
-                  "rhs": { "const": { "val": "5" } }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpLe",
-                  "lhs": { "auraRemainingTime": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } },
-                  "rhs": { "const": { "val": "1.5s" } }
+                "or": {
+                  "vals": [
+                    { "not": { "val": { "auraIsActive": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } } } },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": { "auraNumStacks": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } },
+                        "rhs": { "const": { "val": "5" } }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLe",
+                        "lhs": { "auraRemainingTime": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } },
+                        "rhs": { "const": { "val": "1.5s" } }
+                      }
+                    }
+                  ]
                 }
               }
             ]

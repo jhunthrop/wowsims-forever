@@ -16,6 +16,13 @@
       }
     },
     {
+      "notes": "Exorcism on cooldown vs Undead and Demons (paladin.md audit finding 3): implemented, learnable at 20, 15s cooldown, real Holy nuke -- sim/paladin/exorcism.go's ExtraCastCondition already gates it on target.MobType == Demon || Undead, and sim/core/spell.go routes ExtraCastCondition through Spell.CanCast, so spellCanCast naturally no-ops on any other target with no new APL condition type needed. Free damage on the right encounters; the smoke build's default target is not Undead or Demon, so this cannot be proven to fire against it -- proven structurally instead (the action survives the rank rewrite at 60 and 20, spellCanCast resolves with no validation warning).",
+      "action": {
+        "condition": { "spellCanCast": { "spellId": { "spellId": 10314, "rank": 6 } } },
+        "castSpell": { "spellId": { "spellId": 10314, "rank": 6 } }
+      }
+    },
+    {
       "notes": "Hammer of Wrath below 20 percent: the other button Retribution has besides seals and Judgement.",
       "action": {
         "condition": { "isExecutePhase": { "threshold": "E20" } },

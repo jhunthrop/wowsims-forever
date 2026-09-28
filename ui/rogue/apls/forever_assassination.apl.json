@@ -3,21 +3,7 @@
   "priorityList": [
     { "action": { "autocastOtherCooldowns": {} } },
     {
-      "notes": "Keep Slice and Dice up so every combo point spent on it is not wasted swing time.",
-      "action": {
-        "condition": {
-          "and": {
-            "vals": [
-              { "cmp": { "op": "OpGe", "lhs": { "currentComboPoints": {} }, "rhs": { "const": { "val": "1" } } } },
-              { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 6774, "rank": 2 } } } } }
-            ]
-          }
-        },
-        "castSpell": { "spellId": { "spellId": 6774, "rank": 2 } }
-      }
-    },
-    {
-      "notes": "Cold Blood right before the finisher for a guaranteed crit -- the Assassination burst button, since the spec has no Adrenaline Rush.",
+      "notes": "Cold Blood right before the finisher for a guaranteed crit -- the Assassination burst button, since the spec has no Adrenaline Rush. Does not spend combo points, so it is safe to check ahead of the finishers below regardless of which one ends up spending them.",
       "action": {
         "condition": { "cmp": { "op": "OpGe", "lhs": { "currentComboPoints": {} }, "rhs": { "const": { "val": "5" } } } },
         "castSpell": { "spellId": { "spellId": 14177 } }
@@ -31,10 +17,27 @@
       }
     },
     {
-      "notes": "Eviscerate at five combo points: the functional finisher while Venom is not yet implemented.",
+      "notes": "Eviscerate at five combo points: the functional finisher while Venom is not yet implemented. Checked ahead of Slice and Dice's refresh so a full five-point finisher is never given up in favor of a refresh. Was starved entirely: Slice and Dice used to sit ahead of this line instead, re-applying itself at currentComboPoints >= 1 with no floor, so it looped at 1-3 combo points forever and this line never saw five.",
       "action": {
         "condition": { "cmp": { "op": "OpGe", "lhs": { "currentComboPoints": {} }, "rhs": { "const": { "val": "5" } } } },
         "castSpell": { "spellId": { "spellId": 31016, "rank": 9 } }
+      }
+    },
+    {
+      "notes": "Slice and Dice: only ever spend combo points on it once there are five banked, and only when it actually needs it -- down entirely, or under 3s remaining. Kept at the same five-combo-point floor as Eviscerate above so combo points are never spent below five on either finisher; Eviscerate above claims the combo points whenever both are ready in the same instant.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "cmp": { "op": "OpGe", "lhs": { "currentComboPoints": {} }, "rhs": { "const": { "val": "5" } } } },
+              { "or": { "vals": [
+                { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 6774, "rank": 2 } } } } },
+                { "cmp": { "op": "OpLt", "lhs": { "auraRemainingTime": { "auraId": { "spellId": 6774, "rank": 2 } } }, "rhs": { "const": { "val": "3" } } } }
+              ] } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 6774, "rank": 2 } }
       }
     },
     {

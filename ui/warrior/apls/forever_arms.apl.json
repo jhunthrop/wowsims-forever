@@ -16,10 +16,6 @@
       }
     },
     {
-      "notes": "Recklessness on cooldown: Arms has no Death Wish, so this is the burst cooldown.",
-      "action": { "castSpell": { "spellId": { "spellId": 1719 } } }
-    },
-    {
       "notes": "Keep Battle Shout up.",
       "action": {
         "condition": { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 25289, "rank": 7 } } } } },

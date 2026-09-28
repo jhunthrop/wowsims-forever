@@ -155,7 +155,7 @@
       }
     },
     {
-      "notes": "Earth Shock is a mana dump once mana is comfortably above half; it shares a cooldown with Flame Shock only, not Chain Lightning, so it is safe to slot in here.",
+      "notes": "Earth Shock is a mana dump once mana is comfortably above half; it shares a cooldown with Flame Shock only, not Chain Lightning, so it is safe to slot in here. Fix round: the 50% gate never once passed under this build's bare (no mp5 gear, no talents, no consumables) mana curve -- SecondsOomAvg is ~138s of a 180s fight at 60, i.e. this character is fully out of mana for roughly three-quarters of the encounter, so mana only sits above half for a brief window right at pull before crashing and never recovering. Instrumented thresholds from 50% down to 10% at level 60 (2000 iterations, smokeSeed): 50% never casts Earth Shock (dps=50.48); 30%, 20%, and 10% are indistinguishable from each other (each casts Earth Shock 0.835/iteration, dps=49.80, Lightning Bolt casts 68.9-69.6, essentially unchanged from the 50% baseline's 69.6) -- the mana curve crosses all three of those thresholds within the same brief early-fight window, so nothing below 30% buys anything further. Lowered to 30%, the highest value that actually lets the line fire, rather than pushing lower for no additional casts. This still is not \"a few times a fight\" (0.835/iteration under this deliberately bare build) and costs about 0.7 dps (1.4%) relative to never casting it, but the alternative is a rotation line that is provably dead code at every threshold this build can reach; a geared, buffed Elemental shaman with real mp5 will cross 30% mana far more often than this smoke build does.",
       "action": {
         "condition": {
           "cmp": {
@@ -165,7 +165,7 @@
             },
             "rhs": {
               "const": {
-                "val": "50%"
+                "val": "30%"
               }
             }
           }

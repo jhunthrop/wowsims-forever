@@ -115,6 +115,17 @@
           }
         }
       }
+    },
+    {
+      "notes": "Claw is a fallback builder below level 22, before Shred is learned (druid.md audit finding 2). Shred (learn level 22) is dropped by rewriteRotationRanks below that level, leaving nothing castable at 20-21 without this line. The audit's own recommendation named spellranks.json's rank-1 id (1082, learn level 20); investigating that with the scratch test at level 20 found it does NOT actually cast under this engine build. sim/druid/claw.go's registerClawSpell() registers ONE spell with a hardcoded ActionID{SpellID: 9850} -- spellranks.json's own rank-5/level-58 Claw id -- called unconditionally with no per-rank loop at all, unlike sim/druid/shred.go (shredSpellID[rank]) and sim/druid/rake.go (rakeRank.id) in the same package, which both register one spell per rank the way the rank-rewrite system expects. request.go's rotation() only calls rewriteRotationRanks below api.MaxLevel ('the rotation was authored for exactly the ranks it already carries' at 60, so the rewrite is skipped there) -- every OTHER entry in this file is written at its level-60 rank (Shred rank5/9830, Rake rank4/9904, ...) for exactly that reason, so this line is written the same way, at 9850/rank5, the id the engine actually registers, rather than at the audit's rank-1 id. That makes it fire correctly at level 60 (see cast tables) and, below level 58, rewriteRotationRanks's family-based lookup (any id belonging to a ranked spell resolves to the CURRENTLY LEARNED rank, regardless of which specific rank id the source names) still rewrites it down to 1082-9849, none of which the engine ever registers -- so the line remains genuinely inert for the level 20-21 window it exists for, an engine gap (Claw needs the same per-rank registration Shred and Rake already have), not something fixable from the rotation lane. Left in at 9850/rank5 since it is both the textually correct current-max reference and the id that already works at 60; it becomes real below level 58 too the moment claw.go is fixed to register one spell per rank the way Shred and Rake do. Flagged for the engine lane.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9850,
+            "rank": 5
+          }
+        }
+      }
     }
   ]
 }

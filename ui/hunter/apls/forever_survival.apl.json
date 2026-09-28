@@ -26,7 +26,7 @@
     {
       "notes": "Raptor Strike as the melee filler while Survival's talents make meleeing worthwhile; queued at tag 3, the engine's odd one out for on-next-swing abilities. Never below 20 percent mana, so it does not starve the ranged shots.",
       "action": {
-        "condition": { "cmp": { "op": "OpGe", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "20" } } } },
+        "condition": { "cmp": { "op": "OpGe", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "20%" } } } },
         "castSpell": { "spellId": { "spellId": 14266, "rank": 8, "tag": 3 } }
       }
     },
@@ -42,6 +42,21 @@
       "action": {
         "condition": { "cmp": { "op": "OpLt", "lhs": { "dotRemainingTime": { "spellId": { "spellId": 25295, "rank": 9 } } }, "rhs": { "const": { "val": "5s" } } } },
         "castSpell": { "spellId": { "spellId": 25295, "rank": 9 } }
+      }
+    },
+    {
+      "notes": "Arcane Shot as the last filler, only when neither shot above will be ready within a global and mana is above the floor: it is instant, so it never clips an auto shot, but it is the least mana-efficient shot, and a Classic-length fight runs dry without the floor.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "cmp": { "op": "OpGt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "40%" } } } },
+              { "cmp": { "op": "OpGt", "lhs": { "spellTimeToReady": { "spellId": { "spellId": 2643, "rank": 0 } } }, "rhs": { "const": { "val": "1.5s" } } } },
+              { "cmp": { "op": "OpGt", "lhs": { "spellTimeToReady": { "spellId": { "spellId": 20904, "rank": 6 } } }, "rhs": { "const": { "val": "1.5s" } } } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 14287, "rank": 8 } }
       }
     }
   ]

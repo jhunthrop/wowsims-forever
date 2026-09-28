@@ -78,7 +78,30 @@
       }
     },
     {
-      "notes": "Starfire is the whole rest of the rotation once Moonfire is ticking.",
+      "notes": "Keep Insect Swarm ticking alongside Moonfire; it is a second cheap DoT with no GCD contention beyond application (audit finding druid.md #3 -- a real, engine-implemented level-20 DoT that was entirely absent from both this rotation and the guide).",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 24977,
+                  "rank": 5
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 24977,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Starfire is the whole rest of the rotation once Moonfire and Insect Swarm are ticking.",
       "action": {
         "castSpell": {
           "spellId": {

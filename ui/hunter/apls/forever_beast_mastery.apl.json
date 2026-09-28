@@ -61,6 +61,21 @@
         "condition": { "cmp": { "op": "OpGt", "lhs": { "autoTimeToNext": { "autoType": "Ranged" } }, "rhs": { "const": { "val": "0.5s" } } } },
         "castSpell": { "spellId": { "spellId": 2643, "rank": 0 } }
       }
+    },
+    {
+      "notes": "Arcane Shot as the last filler, only when neither shot above will be ready within a global and mana is above the floor: it is instant, so it never clips an auto shot, but it is the least mana-efficient shot, and a Classic-length fight runs dry without the floor.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              { "cmp": { "op": "OpGt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "40%" } } } },
+              { "cmp": { "op": "OpGt", "lhs": { "spellTimeToReady": { "spellId": { "spellId": 2643, "rank": 0 } } }, "rhs": { "const": { "val": "1.5s" } } } },
+              { "cmp": { "op": "OpGt", "lhs": { "spellTimeToReady": { "spellId": { "spellId": 20904, "rank": 6 } } }, "rhs": { "const": { "val": "1.5s" } } } }
+            ]
+          }
+        },
+        "castSpell": { "spellId": { "spellId": 14287, "rank": 8 } }
+      }
     }
   ]
 }
