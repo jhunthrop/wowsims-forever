@@ -29,7 +29,18 @@ func (warrior *Warrior) registerExecuteSpell() {
 		SpellSchool:    core.SpellSchoolPhysical,
 		DefenseType:    core.DefenseTypeMelee,
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
-		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagPassiveSpell | SpellFlagOffensive,
+		// core.SpellFlagPassiveSpell used to sit here too. It tells
+		// core/metrics_aggregator.go's addSpellMetrics to drop the
+		// spell's OWN Casts count ("applied as a result of another
+		// spell", not a direct player cast) - correct for a proc, wrong
+		// for Execute, which is cast directly off the APL
+		// (SpellFlagAPL, right below). ApplyEffects ran and dealt
+		// damage every time the execute-phase window was open (checked
+		// with a temporary debug counter), but the ladder's cast tally
+		// reads the same Casts field addSpellMetrics was zeroing, so
+		// every level reported Execute as never cast even though it
+		// was landing hits and dealing damage the whole time.
+		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
 
 		RequiredLevel: ExecuteLevel[rank],
 		Rank:          rank,
