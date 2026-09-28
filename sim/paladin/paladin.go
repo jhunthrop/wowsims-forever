@@ -25,6 +25,7 @@ const (
 	SpellCode_PaladinJudgementOfCommand
 	SpellCode_PaladinJudgementOfRighteousness
 	SpellCode_PaladinConsecration
+	SpellCode_PaladinHolyStrike
 	SpellCode_PaladinHolyShield
 	SpellCode_PaladinHolyShieldProc
 	SpellCode_PaladinLayOnHands
@@ -115,6 +116,7 @@ func (paladin *Paladin) Initialize() {
 	// Active abilities
 	paladin.registerForbearance()
 	paladin.registerConsecration()
+	paladin.registerHolyStrike()
 	paladin.registerHolyShock()
 	paladin.registerExorcism()
 	paladin.registerDivineFavor()
