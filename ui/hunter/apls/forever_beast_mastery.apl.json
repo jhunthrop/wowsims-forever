@@ -2,23 +2,67 @@
   "type": "TypeAPL",
   "prepullActions": [
     {
-      "action": { "move": { "rangeFromTarget": { "const": { "val": "30" } } } },
-      "doAtValue": { "const": { "val": "-15s" } }
+      "action": {
+        "move": {
+          "rangeFromTarget": {
+            "const": {
+              "val": "30"
+            }
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-15s"
+        }
+      }
     },
     {
-      "action": { "castSpell": { "spellId": { "spellId": 25296, "rank": 7 } } },
-      "doAtValue": { "const": { "val": "-10s" } }
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 25296,
+            "rank": 7
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-10s"
+        }
+      }
     },
     {
-      "action": { "castSpell": { "spellId": { "spellId": 20904, "rank": 6 } } },
-      "doAtValue": { "const": { "val": "-3.5s" } }
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 20904,
+            "rank": 6
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-3.5s"
+        }
+      }
     }
   ],
   "priorityList": [
-    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
     {
       "notes": "Bestial Wrath on cooldown: with Rapid Fire below, this is the one burst window a Classic-length fight allows.",
-      "action": { "castSpell": { "spellId": { "spellId": 19574 } } }
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 19574
+          }
+        }
+      }
     },
     {
       "notes": "Rapid Fire timed to land with an incoming auto shot just as Aimed Shot is about to come off cooldown, so both benefit.",
@@ -26,19 +70,73 @@
         "condition": {
           "and": {
             "vals": [
-              { "cmp": { "op": "OpLt", "lhs": { "autoTimeToNext": { "autoType": "Ranged" } }, "rhs": { "const": { "val": "0.1" } } } },
-              { "cmp": { "op": "OpLt", "lhs": { "spellTimeToReady": { "spellId": { "spellId": 20904, "rank": 6 } } }, "rhs": { "const": { "val": "0.5" } } } }
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "autoTimeToNext": {
+                      "autoType": "Ranged"
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.1"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "spellTimeToReady": {
+                      "spellId": {
+                        "spellId": 20904,
+                        "rank": 6
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.5"
+                    }
+                  }
+                }
+              }
             ]
           }
         },
-        "castSpell": { "spellId": { "spellId": 3045 } }
+        "castSpell": {
+          "spellId": {
+            "spellId": 3045
+          }
+        }
       }
     },
     {
       "notes": "Aimed Shot on cooldown, timed so its cast does not clip the next auto shot.",
       "action": {
-        "condition": { "cmp": { "op": "OpGt", "lhs": { "autoTimeToNext": { "autoType": "Ranged" } }, "rhs": { "const": { "val": "1s" } } } },
-        "castSpell": { "spellId": { "spellId": 20904, "rank": 6 } }
+        "condition": {
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "autoTimeToNext": {
+                "autoType": "Ranged"
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "1s"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20904,
+            "rank": 6
+          }
+        }
       }
     },
     {
@@ -47,19 +145,77 @@
         "condition": {
           "and": {
             "vals": [
-              { "cmp": { "op": "OpLt", "lhs": { "dotRemainingTime": { "spellId": { "spellId": 25295, "rank": 9 } } }, "rhs": { "const": { "val": "5s" } } } },
-              { "cmp": { "op": "OpGe", "lhs": { "spellTimeToReady": { "spellId": { "spellId": 20904, "rank": 6 } } }, "rhs": { "const": { "val": "0.5" } } } }
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "dotRemainingTime": {
+                      "spellId": {
+                        "spellId": 25295,
+                        "rank": 9
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "5s"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "spellTimeToReady": {
+                      "spellId": {
+                        "spellId": 20904,
+                        "rank": 6
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.5"
+                    }
+                  }
+                }
+              }
             ]
           }
         },
-        "castSpell": { "spellId": { "spellId": 25295, "rank": 9 } }
+        "castSpell": {
+          "spellId": {
+            "spellId": 25295,
+            "rank": 9
+          }
+        }
       }
     },
     {
       "notes": "Multi-Shot as the filler between Aimed Shots.",
       "action": {
-        "condition": { "cmp": { "op": "OpGt", "lhs": { "autoTimeToNext": { "autoType": "Ranged" } }, "rhs": { "const": { "val": "0.5s" } } } },
-        "castSpell": { "spellId": { "spellId": 2643, "rank": 0 } }
+        "condition": {
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "autoTimeToNext": {
+                "autoType": "Ranged"
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "0.5s"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 2643,
+            "rank": 0
+          }
+        }
       }
     },
     {
@@ -68,13 +224,64 @@
         "condition": {
           "and": {
             "vals": [
-              { "cmp": { "op": "OpGt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "40%" } } } },
-              { "cmp": { "op": "OpGt", "lhs": { "spellTimeToReady": { "spellId": { "spellId": 2643, "rank": 0 } } }, "rhs": { "const": { "val": "1.5s" } } } },
-              { "cmp": { "op": "OpGt", "lhs": { "spellTimeToReady": { "spellId": { "spellId": 20904, "rank": 6 } } }, "rhs": { "const": { "val": "1.5s" } } } }
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "40%"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "spellTimeToReady": {
+                      "spellId": {
+                        "spellId": 2643,
+                        "rank": 0
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "1.5s"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "spellTimeToReady": {
+                      "spellId": {
+                        "spellId": 20904,
+                        "rank": 6
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "1.5s"
+                    }
+                  }
+                }
+              }
             ]
           }
         },
-        "castSpell": { "spellId": { "spellId": 14287, "rank": 8 } }
+        "castSpell": {
+          "spellId": {
+            "spellId": 14287,
+            "rank": 8
+          }
+        }
       }
     }
   ]

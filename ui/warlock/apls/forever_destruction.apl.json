@@ -2,8 +2,19 @@
   "type": "TypeAPL",
   "prepullActions": [
     {
-      "action": { "castSpell": { "spellId": { "spellId": 25309, "rank": 8 } } },
-      "doAtValue": { "const": { "val": "-1.5s" } }
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 25309,
+            "rank": 8
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1.5s"
+        }
+      }
     }
   ],
   "priorityList": [
@@ -13,51 +24,166 @@
         "condition": {
           "and": {
             "vals": [
-              { "cmp": { "op": "OpGe", "lhs": { "remainingTime": {} }, "rhs": { "const": { "val": "15s" } } } },
-              { "cmp": { "op": "OpLe", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "75%" } } } },
-              { "isExecutePhase": { "threshold": "E35" } }
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "15s"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "75%"
+                    }
+                  }
+                }
+              },
+              {
+                "isExecutePhase": {
+                  "threshold": "E35"
+                }
+              }
             ]
           }
         },
-        "castSpell": { "spellId": { "otherId": "OtherActionPotion" } }
+        "castSpell": {
+          "spellId": {
+            "otherId": "OtherActionPotion"
+          }
+        }
       }
     },
-    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
     {
       "notes": "Life Tap to keep casting once mana runs low.",
       "action": {
-        "condition": { "cmp": { "op": "OpLt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "10%" } } } },
-        "castSpell": { "spellId": { "spellId": 11689, "rank": 6 } }
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "10%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11689,
+            "rank": 6
+          }
+        }
       }
     },
     {
       "notes": "Immolate is the DoT both Conflagrate and Incinerate need on the target, so it is refreshed the moment it falls off.",
       "action": {
-        "condition": { "not": { "val": { "dotIsActive": { "spellId": { "spellId": 25309, "rank": 8 } } } } },
-        "castSpell": { "spellId": { "spellId": 25309, "rank": 8 } }
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 25309,
+                  "rank": 8
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 25309,
+            "rank": 8
+          }
+        }
       }
     },
     {
       "notes": "Conflagrate consumes part of Immolate's remaining damage as instant burst; only worth casting while Immolate is up. Fix round 3: cast as 18932 rank 6, the highest of the vanilla ids sim/warlock/conflagrate.go actually registers (17962/18930/18931/18932), not 1293817 -- the id the Forever talent-tree metadata table carries, which nothing in sim/warlock ever casts. Talent-gated (sim/warlock/conflagrate.go's registerConflagrateSpell returns immediately without warlock.Talents.Conflagrate), so it stays unresolved under this build's no-talent smoke run the same way Shadowburn below does.",
       "action": {
-        "condition": { "dotIsActive": { "spellId": { "spellId": 25309, "rank": 8 } } },
-        "castSpell": { "spellId": { "spellId": 18932, "rank": 6 } }
+        "condition": {
+          "dotIsActive": {
+            "spellId": {
+              "spellId": 25309,
+              "rank": 8
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 18932,
+            "rank": 6
+          }
+        }
       }
     },
     {
       "notes": "Shadowburn as the execute finisher below 20 percent target health.",
       "action": {
-        "condition": { "isExecutePhase": { "threshold": "E20" } },
-        "castSpell": { "spellId": { "spellId": 18871, "rank": 6 } }
+        "condition": {
+          "isExecutePhase": {
+            "threshold": "E20"
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 18871,
+            "rank": 6
+          }
+        }
       }
     },
     {
-      "notes": "Inert until the engine registers Incinerate (found only in sim/warlock's talent metadata table, no spell registration). Kept as Destruction's signature filler, dealing bonus damage while Immolate is active.",
-      "action": { "castSpell": { "spellId": { "spellId": 1293813, "rank": 3 } } }
+      "notes": "Rotation-accuracy program fix round: sim/warlock/incinerate.go now registers Incinerate for real (talent-gated on warlock.Talents.Incinerate, level-gated 40/50/60 per rank) -- the 'inert, no spell registration' note above this line described an earlier engine state and is stale; the ladder's own cast sets show 412758/1293812/1293813 actually firing at level 38+ once the truncated build's talent walk reaches Incinerate's row. Destruction's signature filler, dealing bonus damage while Immolate is active.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1293813,
+            "rank": 3
+          }
+        }
+      }
     },
     {
-      "notes": "Shadow Bolt is the engine-castable Era filler while Incinerate is inert -- without it this rotation has nothing left to cast once Immolate is up and Conflagrate is on cooldown.",
-      "action": { "castSpell": { "spellId": { "spellId": 25307, "rank": 10 } } }
+      "notes": "Shadow Bolt as the pre-Incinerate filler: this line always sat directly beneath Incinerate's unconditional cast, so once Incinerate stopped being inert (see above) it claimed every GCD Shadow Bolt used to get, leaving Shadow Bolt's own authored id a zero_casts ladder violation at every level from 40 on -- not a bug in Shadow Bolt, just an unreachable line now that the ability above it always wins. Gated on spellIsKnown(412758) so Shadow Bolt is the filler while Incinerate's talent has not been taken (or its level-40 row not yet reached) and correctly yields once it has, the same not-spellIsKnown shape rogue-subtlety's Sinister Strike/Hemorrhage line and mage-fire's Improved Scorch/Fireball line use.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "spellIsKnown": {
+                "spellId": {
+                  "spellId": 412758
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 25307,
+            "rank": 10
+          }
+        }
+      }
     }
   ]
 }
