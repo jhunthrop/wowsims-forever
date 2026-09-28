@@ -187,7 +187,17 @@ var Presets = []Preset{
 		ClientClassSlug: "priest",
 		Class:           proto.Class_ClassPriest,
 		Race:            proto.Race_RaceUndead,
-		Talents:         "0512301302--5002504103501251",
+		// Shadow tree digit 5 (Improved Shadow Word: Pain, position 5)
+		// was "5", exceeding that talent's real max_rank of 2
+		// (data/builds/1.60.1.70009/talents/priest.json) - it doesn't
+		// come from Shadowform's own row shifting (this string still
+		// aligns talent-by-talent through Mind Flay/Improved Mind
+		// Blast, confirmed against the parsed proto), just a stale
+		// digit. An out-of-range rank made Shadow Word: Pain tick 11
+		// times (33s) in the conformance report instead of the client's
+		// real ranks-of-2 ceiling of 8 ticks (24s); capped to 2, the
+		// max a character can actually have.
+		Talents: "0512301302--5002204103501251",
 		SpecOptions: &proto.Player_ShadowPriest{
 			ShadowPriest: &proto.ShadowPriest{
 				Options: &proto.ShadowPriest_Options{
