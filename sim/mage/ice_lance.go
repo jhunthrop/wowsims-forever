@@ -104,16 +104,19 @@ func (mage *Mage) getIceLanceConfig(rank int) core.SpellConfig {
 // isTargetFrozen reports whether a Frost snare or root this mage applied
 // is on the target.
 //
-// It is always false today, and that is the honest answer rather than a
-// missing feature: this package registers neither Frost Nova nor
-// Frostbite, so nothing here applies a Freeze, and a raid boss is immune
-// to both in any case. Ice Lance's Frozen bonus, Shatter and Fingers of
-// Frost therefore all read the same false, from this one place. When a
-// Freeze aura exists, it is added to frozenAuras and all three start
-// working together.
+// frost_nova.go's Frozen aura is the one source today; Frostbite (the
+// Frost tree talent of the same idea, applied by Frostbolt/Blizzard
+// procs) has no ability file in this package yet and so contributes
+// nothing here. Shatter (talents.go) is written against this same
+// check but, unlike Ice Lance's damage bonus, is not wired to it: the
+// engine has no per-target conditional crit-chance mechanism (the
+// SpellMod system and PseudoStats.SchoolBonusCritChance are both
+// caster-side and unconditional), so Shatter stays inert until one
+// exists. Fingers of Frost is inert for the same reason plus its own
+// missing Chill-proc.
 func (mage *Mage) isTargetFrozen(target *core.Unit) bool {
 	for _, aura := range mage.frozenAuras(target) {
-		if aura.IsActive() {
+		if aura != nil && aura.IsActive() {
 			return true
 		}
 	}
@@ -121,7 +124,10 @@ func (mage *Mage) isTargetFrozen(target *core.Unit) bool {
 }
 
 // frozenAuras is the set of auras that mean "this target is Frozen".
-// Empty until a Freeze effect is registered; see isTargetFrozen.
-func (mage *Mage) frozenAuras(_ *core.Unit) []*core.Aura {
-	return nil
+// See isTargetFrozen for what reads it and what still does not.
+func (mage *Mage) frozenAuras(target *core.Unit) []*core.Aura {
+	if mage.FrozenAuras == nil {
+		return nil
+	}
+	return []*core.Aura{mage.FrozenAuras.Get(target)}
 }

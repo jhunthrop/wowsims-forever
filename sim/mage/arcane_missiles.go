@@ -88,7 +88,18 @@ func (mage *Mage) getArcaneMissilesSpellConfig(rank int) core.SpellConfig {
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.Dot(target).Apply(sim)
+			dot := spell.Dot(target)
+			// Missile Barrage (missile_barrage.go): "missiles fire every
+			// 0.5 sec" while its buff is up. The buff's own Cost.Multiplier
+			// swap is what makes this particular cast free; checked here
+			// too because OnCastComplete (which consumes the buff) does
+			// not run until after this function returns.
+			if mage.MissileBarrageAura != nil && mage.MissileBarrageAura.IsActive() {
+				dot.TickLength = missileBarrageTickLength
+			} else {
+				dot.TickLength = tickLength
+			}
+			dot.Apply(sim)
 		},
 		ExpectedTickDamage: func(sim *core.Simulation, target *core.Unit, spell *core.Spell, _ bool) *core.SpellResult {
 			return tickSpell.CalcDamage(sim, target, baseTickDamage, spell.OutcomeExpectedMagicHitAndCrit)

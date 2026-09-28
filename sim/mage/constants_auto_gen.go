@@ -119,19 +119,19 @@ var ArcaneBarrageBaseDamage = [ArcaneBarrageRanks + 1][]float64{{400610, 400610}
 // unconfirmed: Arcane Barrage coefficient derived from the vanilla convention (rank 0)
 // Arcane Barrage rank 0: kept id 401719 (spell_level 1); dropped 400610 (spell_level 1)
 
-// Arcane Blast: ranks 0-5 present, from build 1.60.1.69893.
-const ArcaneBlastRanks = 5
-
-var ArcaneBlastSpellId = [ArcaneBlastRanks + 1]int32{18091, 400574, 1239696, 42896, 1239699, 1239700}
-var ArcaneBlastLevel = [ArcaneBlastRanks + 1]int{35, 20, 30, 76, 50, 60}
-var ArcaneBlastCastTime = [ArcaneBlastRanks + 1]int32{0, 2500, 2500, 2500, 2500, 2500}
-var ArcaneBlastCooldownMS = [ArcaneBlastRanks + 1]int32{8000, 0, 0, 0, 0, 0}
-var ArcaneBlastManaCost = [ArcaneBlastRanks + 1]float64{80, 0, 0, 0, 0, 0}
-var ArcaneBlastSpellCoeff = [ArcaneBlastRanks + 1]float64{0.4286, 0.714, 0.714, 0.714, 0.714, 0.714}
-var ArcaneBlastBaseDamage = [ArcaneBlastRanks + 1][]float64{{85, 85}, {54, 54}, {130, 130}, {1131, 1131}, {274, 274}, {394, 394}}
-
-// unconfirmed: Arcane Blast coefficient derived from the vanilla convention (rank 0)
-// Arcane Blast rank 0: kept id 18091 (spell_level 35); dropped 16067 (spell_level 35), 400573 (spell_level 1), 400586 (spell_level 1), 401729 (spell_level 1), 1300176 (spell_level 1), 1300177 (spell_level 1)
+// skipped: "Arcane Blast" already has a hand-written ArcaneBlastRanks elsewhere in this package.
+//
+// The client's own rank table collides on both ends: "rank 0" is seven
+// different ids sharing this name (18091, 16067, 400573, 400586,
+// 401729, 1300176, 1300177) - an unrelated legacy/NPC spell and the
+// stacking buff aura among them, none of them a player-learned rank -
+// and "rank 3" is 1239697 (level 40, the player's, family mask
+// 1610612736 like every other rank) versus 42896 (level 76, an
+// NPC/enrage variant, family mask 536870912). This generator's
+// deterministic "higher spell_level wins" tie-break would pick the
+// wrong side of both, so sim/mage/arcane_blast.go keeps its own
+// verified arrays instead. spellconst.Load still resolves every id by
+// name or id for anything that needs the rest.
 // Arcane Blast rank 3: kept id 42896 (spell_level 76); dropped 1239697 (spell_level 40)
 
 // Arcane Blast Cast Pushback Reduction: ranks 0 present, from build 1.60.1.69893.

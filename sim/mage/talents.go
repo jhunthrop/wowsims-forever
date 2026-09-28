@@ -82,9 +82,9 @@ func (mage *Mage) applyArcaneTalents() {
 	_ = mage.Talents.WandSpecialization
 
 	// Arcane Blast is a bool talent that grants a new cast of Arcane
-	// Blast (MageSpellMaskArcaneBlast exists and Incineration targets
-	// it), but this package does not register the spell yet.
-	_ = mage.Talents.ArcaneBlast
+	// Blast; registerArcaneBlastSpell (arcane_blast.go) is what
+	// MageSpellMaskArcaneBlast and Incineration's mask both target.
+	mage.registerArcaneBlastSpell()
 
 	// Arcane Shielding is Improved Mana Shield, and the reference build
 	// (ForeverFrostTalents) spends its point here; Mana Shield itself is
@@ -101,10 +101,10 @@ func (mage *Mage) applyArcaneTalents() {
 	// a Patchwerk fight.
 	_, _ = mage.Talents.ImprovedChanneling, mage.Talents.ArcaneResilience
 
-	// Missile Barrage would need the Arcane Missiles channel to be
-	// re-costed and re-timed mid-fight, which this package's Arcane
-	// Missiles does not support yet. Inert, not forgotten.
-	_ = mage.Talents.MissileBarrage
+	// Missile Barrage: registerMissileBarrage (missile_barrage.go) is
+	// the proc that re-costs and re-times the next Arcane Missiles
+	// channel; arcane_missiles.go's ApplyEffects is what reads it.
+	mage.registerMissileBarrage()
 }
 
 func (mage *Mage) applyFireTalents() {
@@ -149,10 +149,16 @@ func (mage *Mage) applyFrostTalents() {
 	_ = mage.Talents.IceBlock
 
 	// Frostbite, Shatter and Fingers of Frost all turn on a target being
-	// Frozen. Nothing in this sim freezes a raid boss - Frost Nova and
-	// Frostbite are not registered, and a boss is immune to both - so
-	// all three are inert here rather than guessed. isTargetFrozen in
-	// ice_lance.go is the single place that would start returning true.
+	// Frozen. Frost Nova (frost_nova.go) now applies that state - and a
+	// raid boss, built above core.CharacterMaxLevel, is immune to it the
+	// way every CC in this sim treats a boss - so Ice Lance's Frozen
+	// bonus is live on a freezable target. Shatter and Fingers of Frost
+	// stay inert: both need a conditional bonus on the mage's own crit
+	// chance per target-Frozen-state, which nothing in the SpellMod or
+	// PseudoStats system expresses yet (see isTargetFrozen's comment in
+	// ice_lance.go), and Frostbite itself has no ability file here to
+	// proc from. isTargetFrozen is where a future engine change would
+	// start reading true for Shatter too.
 	_, _, _ = mage.Talents.Frostbite, mage.Talents.Shatter, mage.Talents.FingersOfFrost
 }
 

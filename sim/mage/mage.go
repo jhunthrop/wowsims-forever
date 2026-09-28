@@ -14,6 +14,7 @@ const (
 
 const (
 	SpellCode_MageNone int32 = iota
+	SpellCode_MageArcaneBlast
 	SpellCode_MageArcaneExplosion
 	SpellCode_MageArcaneMissiles
 	SpellCode_MageArcaneMissilesTick
@@ -22,6 +23,7 @@ const (
 	SpellCode_MageFireBlast
 	SpellCode_MageFlamestrike
 	SpellCode_MageFrostbolt
+	SpellCode_MageFrostNova
 	SpellCode_MageIgnite
 	SpellCode_MageScorch
 )
@@ -118,6 +120,7 @@ type Mage struct {
 
 	activeBarrier *core.Aura
 
+	ArcaneBlast             []*core.Spell
 	ArcaneExplosion         []*core.Spell
 	ArcaneMissiles          []*core.Spell
 	ArcaneMissilesTickSpell []*core.Spell
@@ -129,6 +132,7 @@ type Mage struct {
 	FireBlast               []*core.Spell
 	Flamestrike             []*core.Spell
 	Frostbolt               []*core.Spell
+	FrostNova               []*core.Spell
 	ColdSnap                *core.Spell
 	IceBarrier              []*core.Spell
 	IceLance                []*core.Spell
@@ -139,13 +143,16 @@ type Mage struct {
 	Pyroblast               []*core.Spell
 	Scorch                  []*core.Spell
 
+	ArcaneBlastAura     *core.Aura
 	ArcanePowerAura     *core.Aura
 	ClearcastingAura    *core.Aura
 	CombustionAura      *core.Aura
+	FrozenAuras         core.AuraArray
 	IceArmorAura        *core.Aura
 	IceBarrierAuras     []*core.Aura
 	ImprovedScorchAuras core.AuraArray
 	MageArmorAura       *core.Aura
+	MissileBarrageAura  *core.Aura
 }
 
 // Agent is a generic way to access underlying mage on any of the agents.
@@ -172,6 +179,7 @@ func (mage *Mage) Initialize() {
 	mage.registerFireballSpell()
 	mage.registerFireBlastSpell()
 	mage.registerFrostboltSpell()
+	mage.registerFrostNovaSpell()
 	mage.registerPyroblastSpell()
 	mage.registerScorchSpell()
 

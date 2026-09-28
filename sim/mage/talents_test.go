@@ -120,15 +120,17 @@ func TestFrostSpellsCarryTheirMasksWhenRegistered(t *testing.T) {
 		"Ice Lance":   MageSpellMaskIceLance,
 		"Blizzard":    MageSpellMaskBlizzard,
 		"Ice Barrier": MageSpellMaskIceBarrier,
+		// Frost Nova is a baseline spell (frost_nova.go), registered
+		// from Initialize regardless of talents, so it carries its mask
+		// on every built mage the way the four above do.
+		"Frost Nova": MageSpellMaskFrostNova,
 	}
-	// Frost Nova and Cone of Cold have a mask bit and a talent that
-	// names them (Improved Frost Nova, Improved Cone of Cold — two of
-	// the nine documented-inert points in ForeverFrostTalents) but no
-	// ability file in this package, so nothing registers them. That is
-	// recorded here rather than left as a hole in the loop above: when
-	// either lands, this fails and the bit moves into `named`.
+	// Cone of Cold has a mask bit and a talent that names it (Improved
+	// Cone of Cold, one of ForeverFrostTalents' documented-inert points)
+	// but no ability file in this package, so nothing registers it. That
+	// is recorded here rather than left as a hole in the loop above:
+	// when it lands, this fails and the bit moves into `named`.
 	unimplemented := map[string]uint64{
-		"Frost Nova":   MageSpellMaskFrostNova,
 		"Cone of Cold": MageSpellMaskConeOfCold,
 	}
 	for name, mask := range unimplemented {
@@ -159,10 +161,10 @@ func TestFrostSpellsCarryTheirMasksWhenRegistered(t *testing.T) {
 			if group&bit == 0 {
 				continue
 			}
-			// Frostfire Bolt, Frost Nova and Cone of Cold are in the
-			// group but have no ability file in this package; the
-			// `unimplemented` check above is what watches for them.
-			if bit == MageSpellMaskFrostfireBolt || bit == MageSpellMaskFrostNova || bit == MageSpellMaskConeOfCold {
+			// Frostfire Bolt and Cone of Cold are in the group but have
+			// no ability file in this package; the `unimplemented` check
+			// above is what watches for them.
+			if bit == MageSpellMaskFrostfireBolt || bit == MageSpellMaskConeOfCold {
 				continue
 			}
 			if len(carriers[bit]) == 0 {
