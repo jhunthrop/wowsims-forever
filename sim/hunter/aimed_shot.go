@@ -9,9 +9,9 @@ import (
 
 func (hunter *Hunter) getAimedShotConfig(rank int, timer *core.Timer) core.SpellConfig {
 	spellId := [7]int32{0, 19434, 20900, 20901, 20902, 20903, 20904}[rank]
-	baseDamage := [7]float64{0, 70, 125, 200, 330, 460, 600}[rank]
+	baseDamage := [7]float64{0, 20, 34, 55, 89, 125, 166}[rank]
 	manaCost := [7]float64{0, 75, 115, 160, 210, 260, 310}[rank]
-	level := [7]int{0, 0, 28, 36, 44, 52, 60}[rank]
+	level := [7]int{0, 20, 28, 36, 44, 52, 60}[rank]
 
 	return core.SpellConfig{
 		SpellCode:     SpellCode_HunterAimedShot,
@@ -31,7 +31,7 @@ func (hunter *Hunter) getAimedShotConfig(rank int, timer *core.Timer) core.Spell
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD:      core.GCDDefault,
-				CastTime: time.Millisecond * 3500,
+				CastTime: time.Millisecond * 2000,
 			},
 			CD: core.Cooldown{
 				Timer:    timer,
@@ -71,19 +71,17 @@ func (hunter *Hunter) getAimedShotConfig(rank int, timer *core.Timer) core.Spell
 }
 
 func (hunter *Hunter) registerAimedShotSpell(timer *core.Timer) {
-	/*
-		if !hunter.Talents.AimedShot {
-			return
+	// Aimed Shot is trainer-taught in Forever, not a talent (it does not
+	// appear as its own talent node in data/builds/.../talents/hunter.json;
+	// it is only referenced by Barrage's tooltip as a spell the talent
+	// boosts), so registration is baseline and gated on level alone.
+	maxRank := 6
+
+	for i := 1; i <= maxRank; i++ {
+		config := hunter.getAimedShotConfig(i, timer)
+
+		if config.RequiredLevel <= int(hunter.Level) {
+			hunter.AimedShot = hunter.GetOrRegisterSpell(config)
 		}
-
-		maxRank := 6
-
-		for i := 1; i <= maxRank; i++ {
-			config := hunter.getAimedShotConfig(i, timer)
-
-			if config.RequiredLevel <= int(hunter.Level) {
-				hunter.AimedShot = hunter.GetOrRegisterSpell(config)
-			}
-		}
-	*/
+	}
 }
