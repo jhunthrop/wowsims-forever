@@ -53,7 +53,7 @@
     },
     {
       "notes": "Inert until the engine registers Incinerate (found only in sim/warlock's talent metadata table, no spell registration). Kept as Destruction's signature filler, dealing bonus damage while Immolate is active.",
-      "action": { "castSpell": { "spellId": { "spellId": 412758, "rank": 1 } } }
+      "action": { "castSpell": { "spellId": { "spellId": 1293813, "rank": 3 } } }
     },
     {
       "notes": "Shadow Bolt is the engine-castable Era filler while Incinerate is inert -- without it this rotation has nothing left to cast once Immolate is up and Conflagrate is on cooldown.",

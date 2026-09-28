@@ -11,19 +11,19 @@
       "action": { "castSpell": { "spellId": { "spellId": 12043 } } }
     },
     {
-      "notes": "Inert until the engine implements Missile Barrage (sim/mage/talents.go): no aura is ever registered under 400589, so this condition never fires today. Kept because it is where the Arcane guide places the empowered-Missiles payoff.",
+      "notes": "Missile Barrage (400589) is the talent proc the engine registers since 2026-09-28; the empowered Missiles fire under it, where the Arcane guide places the payoff.",
       "action": {
         "condition": { "auraIsActive": { "auraId": { "spellId": 400589 } } },
-        "castSpell": { "spellId": { "spellId": 10212, "rank": 7 } }
+        "castSpell": { "spellId": { "spellId": 25345, "rank": 8 } }
       }
     },
     {
-      "notes": "Inert until the engine implements Arcane Blast (sim/mage/talents.go says the spell is not registered yet). Kept because it is where the Arcane guide places its default filler.",
-      "action": { "castSpell": { "spellId": { "spellId": 400574, "rank": 1 } } }
+      "notes": "Arcane Blast is the client rank chain 1239696..1239700 (levels 40..60); this file names the top rank and the level rewrite picks the learned one. The engine registers the chain since the accuracy program (engine-caster lane).",
+      "action": { "castSpell": { "spellId": { "spellId": 1239700, "rank": 5 } } }
     },
     {
-      "notes": "Arcane Missiles is the engine-castable Era filler that keeps this rotation dealing damage when the build has not taken Arcane Blast and Missile Barrage (both live in the engine since 2026-09-28) -- the pre-Arcane-Blast Era Arcane rotation was itself Missiles spam. Uses rank 7 (10212), the highest rank the engine's registration loop actually registers; rank 8 (25345) is excluded by an off-by-one there, recorded as an engine follow-up.",
-      "action": { "castSpell": { "spellId": { "spellId": 10212, "rank": 7 } } }
+      "notes": "Arcane Missiles is the engine-castable Era filler that keeps this rotation dealing damage when the build has not taken Arcane Blast and Missile Barrage (both live in the engine since 2026-09-28) -- the pre-Arcane-Blast Era Arcane rotation was itself Missiles spam. Uses the top rank (25345, rank 8); the engine's rank loop registers all eight since 2026-09-28.",
+      "action": { "castSpell": { "spellId": { "spellId": 25345, "rank": 8 } } }
     }
   ]
 }

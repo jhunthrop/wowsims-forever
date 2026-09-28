@@ -42,7 +42,7 @@
     },
     {
       "notes": "Mutilate as the Forever Assassination talent's intended combo-point builder (sim/rogue/mutilate.go): a talented rogue strikes with both weapons here for 2 combo points; an untalented rogue has no Mutilate spell registered and falls through to Sinister Strike.",
-      "action": { "castSpell": { "spellId": { "spellId": 1310707, "rank": 1 } } }
+      "action": { "castSpell": { "spellId": { "spellId": 1241584, "rank": 4 } } }
     },
     {
       "notes": "Sinister Strike as the combo point builder for a rogue without the Mutilate talent.",
