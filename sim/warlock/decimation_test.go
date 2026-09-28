@@ -7,6 +7,7 @@ import (
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/simsignals"
+	"github.com/wowsims/classic/sim/core/stats"
 )
 
 // DecimationRank2TalentsString sets only Decimation rank 2 (field 12 of
@@ -143,5 +144,37 @@ func TestDecimationProcReducesSoulFireCastTimeAndCost(t *testing.T) {
 	}
 	if got := soulFire.Cost.Multiplier; got != baseCostMultiplier {
 		t.Errorf("Soul Fire cost multiplier after Decimation expired = %d, want %d", got, baseCostMultiplier)
+	}
+}
+
+// TestDecimationDamageBonusBelowHealthThreshold checks the talent's other
+// half: Shadow Bolt (and Searing Pain, same mechanism) deals 6% more
+// damage (rank 2) against a target below 35% health, and no bonus at
+// all above it.
+func TestDecimationDamageBonusBelowHealthThreshold(t *testing.T) {
+	sim, built, target := newDecimationTestWarlock(t)
+	if got, want := built.decimationDamageMultiplier(target), 1.06; got != want {
+		t.Errorf("decimationDamageMultiplier(no health bar, treated eligible) = %v, want %v", got, want)
+	}
+
+	// The default level-60 target proto tracks no Health stat (a pure
+	// tank-a-dummy encounter has no need to), so decimationDamageMultiplier
+	// would otherwise see a 0/0 (NaN) health percent; give it one here so
+	// RemoveHealth below actually moves CurrentHealthPercent.
+	target.AddStatDynamic(sim, stats.Health, 1000)
+	target.EnableHealthBar()
+	metrics := target.NewHealthMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionDamageTaken})
+	maxHealth := target.MaxHealth()
+	target.GainHealth(sim, maxHealth, metrics)
+
+	target.RemoveHealth(sim, maxHealth*0.50)
+	if got, want := built.decimationDamageMultiplier(target), 1.0; got != want {
+		t.Errorf("decimationDamageMultiplier(50%% health) = %v, want %v (no bonus above 35%%)", got, want)
+	}
+
+	target.GainHealth(sim, maxHealth, metrics)
+	target.RemoveHealth(sim, maxHealth*0.80)
+	if got, want := built.decimationDamageMultiplier(target), 1.06; got != want {
+		t.Errorf("decimationDamageMultiplier(20%% health) = %v, want %v", got, want)
 	}
 }

@@ -10,17 +10,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | DSRuinWarlock | 10 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  |
 | DSRuinWarlock | 10 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  |
-| DSRuinWarlock | 10 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| DSRuinWarlock | 10 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| DSRuinWarlock | 10 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| DSRuinWarlock | 10 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| DSRuinWarlock | 10 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| DSRuinWarlock | 10 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
-| DSRuinWarlock | 10 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
-| DSRuinWarlock | 10 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
-| DSRuinWarlock | 10 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
 | DSRuinWarlock | 10 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  |
-| DSRuinWarlock | 10 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→900000 | 0→0 | 0→0 | 0→0 | 15000→0 | mismatch | cooldown_ms 300000->900000; duration_ms 15000->0 |
+| DSRuinWarlock | 10 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 0→0 | 0→0 | 15000→15000 | match |  |
 | DSRuinWarlock | 10 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 1→1 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 10 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 10→10 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 10 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
@@ -34,18 +25,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | DSRuinWarlock | 20 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  |
 | DSRuinWarlock | 20 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  |
 | DSRuinWarlock | 20 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  |
-| DSRuinWarlock | 20 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| DSRuinWarlock | 20 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| DSRuinWarlock | 20 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| DSRuinWarlock | 20 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
-| DSRuinWarlock | 20 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
-| DSRuinWarlock | 20 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
-| DSRuinWarlock | 20 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| DSRuinWarlock | 20 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
-| DSRuinWarlock | 20 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
 | DSRuinWarlock | 20 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | DSRuinWarlock | 20 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  |
-| DSRuinWarlock | 20 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→900000 | 0→0 | 0→0 | 0→0 | 15000→0 | mismatch | cooldown_ms 300000->900000; duration_ms 15000->0 |
+| DSRuinWarlock | 20 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 0→0 | 0→0 | 15000→15000 | match |  |
 | DSRuinWarlock | 20 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 1→1 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 20 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 10→10 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 20 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 20→20 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
@@ -68,21 +50,12 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | DSRuinWarlock | 30 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  |
 | DSRuinWarlock | 30 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  |
 | DSRuinWarlock | 30 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  |
-| DSRuinWarlock | 30 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| DSRuinWarlock | 30 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| DSRuinWarlock | 30 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| DSRuinWarlock | 30 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
-| DSRuinWarlock | 30 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
-| DSRuinWarlock | 30 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| DSRuinWarlock | 30 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
-| DSRuinWarlock | 30 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| DSRuinWarlock | 30 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
 | DSRuinWarlock | 30 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | DSRuinWarlock | 30 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | DSRuinWarlock | 30 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
 | DSRuinWarlock | 30 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  |
 | DSRuinWarlock | 30 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  |
-| DSRuinWarlock | 30 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→900000 | 0→0 | 0→0 | 0→0 | 15000→0 | mismatch | cooldown_ms 300000->900000; duration_ms 15000->0 |
+| DSRuinWarlock | 30 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 0→0 | 0→0 | 15000→15000 | match |  |
 | DSRuinWarlock | 30 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 1→1 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 30 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 10→10 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 30 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 20→20 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
@@ -112,15 +85,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | DSRuinWarlock | 38 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  |
 | DSRuinWarlock | 38 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  |
 | DSRuinWarlock | 38 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  |
-| DSRuinWarlock | 38 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| DSRuinWarlock | 38 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| DSRuinWarlock | 38 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| DSRuinWarlock | 38 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| DSRuinWarlock | 38 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
-| DSRuinWarlock | 38 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
-| DSRuinWarlock | 38 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| DSRuinWarlock | 38 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
-| DSRuinWarlock | 38 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
 | DSRuinWarlock | 38 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | DSRuinWarlock | 38 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | DSRuinWarlock | 38 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -128,7 +92,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | DSRuinWarlock | 38 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  |
 | DSRuinWarlock | 38 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  |
 | DSRuinWarlock | 38 | Drain Soul | 3 | 8289 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  |
-| DSRuinWarlock | 38 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→900000 | 0→0 | 0→0 | 0→0 | 15000→0 | mismatch | cooldown_ms 300000->900000; duration_ms 15000->0 |
+| DSRuinWarlock | 38 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 0→0 | 0→0 | 15000→15000 | match |  |
 | DSRuinWarlock | 38 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 1→1 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 38 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 10→10 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 38 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 20→20 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
@@ -164,15 +128,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | DSRuinWarlock | 40 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  |
 | DSRuinWarlock | 40 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  |
 | DSRuinWarlock | 40 | Curse of Recklessness | 2 | 7658 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→0 | 120000→0 | mismatch | required_level 28->0; duration_ms 120000->0 |
-| DSRuinWarlock | 40 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| DSRuinWarlock | 40 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| DSRuinWarlock | 40 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| DSRuinWarlock | 40 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| DSRuinWarlock | 40 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
-| DSRuinWarlock | 40 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
-| DSRuinWarlock | 40 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| DSRuinWarlock | 40 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
-| DSRuinWarlock | 40 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
 | DSRuinWarlock | 40 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | DSRuinWarlock | 40 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | DSRuinWarlock | 40 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -180,7 +135,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | DSRuinWarlock | 40 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  |
 | DSRuinWarlock | 40 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  |
 | DSRuinWarlock | 40 | Drain Soul | 3 | 8289 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  |
-| DSRuinWarlock | 40 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→900000 | 0→0 | 0→0 | 0→0 | 15000→0 | mismatch | cooldown_ms 300000->900000; duration_ms 15000->0 |
+| DSRuinWarlock | 40 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 0→0 | 0→0 | 15000→15000 | match |  |
 | DSRuinWarlock | 40 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 1→1 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 40 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 10→10 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 40 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 20→20 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
@@ -220,17 +175,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | DSRuinWarlock | 50 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  |
 | DSRuinWarlock | 50 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  |
 | DSRuinWarlock | 50 | Curse of Recklessness | 3 | 7659 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→0 | 120000→0 | mismatch | required_level 42->0; duration_ms 120000->0 |
-| DSRuinWarlock | 50 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| DSRuinWarlock | 50 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| DSRuinWarlock | 50 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| DSRuinWarlock | 50 | Death Coil | 1 | 6789 | 435.00→430.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | cost 435.00->430.00; duration_ms 3000->0 |
-| DSRuinWarlock | 50 | Death Coil | 2 | 17925 | 525.00→495.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | cost 525.00->495.00; duration_ms 3000->0 |
-| DSRuinWarlock | 50 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
-| DSRuinWarlock | 50 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| DSRuinWarlock | 50 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
-| DSRuinWarlock | 50 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
-| DSRuinWarlock | 50 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| DSRuinWarlock | 50 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
+| DSRuinWarlock | 50 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 |
+| DSRuinWarlock | 50 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 |
 | DSRuinWarlock | 50 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | DSRuinWarlock | 50 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | DSRuinWarlock | 50 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -239,7 +185,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | DSRuinWarlock | 50 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  |
 | DSRuinWarlock | 50 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  |
 | DSRuinWarlock | 50 | Drain Soul | 3 | 8289 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  |
-| DSRuinWarlock | 50 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→900000 | 0→0 | 0→0 | 0→0 | 15000→0 | mismatch | cooldown_ms 300000->900000; duration_ms 15000->0 |
+| DSRuinWarlock | 50 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 0→0 | 0→0 | 15000→15000 | match |  |
 | DSRuinWarlock | 50 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 1→1 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 50 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 10→10 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 50 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 20→20 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
@@ -291,18 +237,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | DSRuinWarlock | 60 | Corruption | 6 | 11672 | 290.00→290.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | 18000→18000 | match |  |
 | DSRuinWarlock | 60 | Corruption | 7 | 25311 | 340.00→340.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 18000→18000 | match |  |
 | DSRuinWarlock | 60 | Curse of Recklessness | 4 | 11717 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→0 | 120000→0 | mismatch | required_level 56->0; duration_ms 120000->0 |
-| DSRuinWarlock | 60 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| DSRuinWarlock | 60 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| DSRuinWarlock | 60 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| DSRuinWarlock | 60 | Death Coil | 1 | 6789 | 435.00→430.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | cost 435.00->430.00; duration_ms 3000->0 |
-| DSRuinWarlock | 60 | Death Coil | 2 | 17925 | 525.00→495.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | cost 525.00->495.00; duration_ms 3000->0 |
-| DSRuinWarlock | 60 | Death Coil | 3 | 17926 | 600.00→565.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 58→58 | 3000→0 | mismatch | cost 600.00->565.00; duration_ms 3000->0 |
-| DSRuinWarlock | 60 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
-| DSRuinWarlock | 60 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| DSRuinWarlock | 60 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
-| DSRuinWarlock | 60 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| DSRuinWarlock | 60 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
-| DSRuinWarlock | 60 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
+| DSRuinWarlock | 60 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 |
+| DSRuinWarlock | 60 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 |
+| DSRuinWarlock | 60 | Death Coil | 3 | 17926 | 600.00→600.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 58→58 | 3000→0 | mismatch | duration_ms 3000->0 |
 | DSRuinWarlock | 60 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | DSRuinWarlock | 60 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | DSRuinWarlock | 60 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -313,7 +250,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | DSRuinWarlock | 60 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  |
 | DSRuinWarlock | 60 | Drain Soul | 3 | 8289 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  |
 | DSRuinWarlock | 60 | Drain Soul | 4 | 11675 | 290.00→290.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 15000→15000 | match |  |
-| DSRuinWarlock | 60 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→900000 | 0→0 | 0→0 | 0→0 | 15000→0 | mismatch | cooldown_ms 300000->900000; duration_ms 15000->0 |
+| DSRuinWarlock | 60 | Fel Domination | 0 | 18708 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 0→0 | 0→0 | 15000→15000 | match |  |
 | DSRuinWarlock | 60 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 1→1 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 60 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 10→10 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | DSRuinWarlock | 60 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 20→20 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
@@ -363,15 +300,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | SMRuinWarlock | 10 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→0 | mismatch | duration_ms 30000->0 |
 | SMRuinWarlock | 10 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  |
 | SMRuinWarlock | 10 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  |
-| SMRuinWarlock | 10 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| SMRuinWarlock | 10 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| SMRuinWarlock | 10 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| SMRuinWarlock | 10 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| SMRuinWarlock | 10 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
-| SMRuinWarlock | 10 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
-| SMRuinWarlock | 10 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| SMRuinWarlock | 10 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
-| SMRuinWarlock | 10 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
 | SMRuinWarlock | 10 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  |
 | SMRuinWarlock | 10 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 1→1 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
 | SMRuinWarlock | 10 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 10→10 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
@@ -387,15 +315,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | SMRuinWarlock | 20 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  |
 | SMRuinWarlock | 20 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  |
 | SMRuinWarlock | 20 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  |
-| SMRuinWarlock | 20 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| SMRuinWarlock | 20 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| SMRuinWarlock | 20 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| SMRuinWarlock | 20 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
-| SMRuinWarlock | 20 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| SMRuinWarlock | 20 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
-| SMRuinWarlock | 20 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
-| SMRuinWarlock | 20 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
-| SMRuinWarlock | 20 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
 | SMRuinWarlock | 20 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | SMRuinWarlock | 20 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  |
 | SMRuinWarlock | 20 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 1→1 | 15000→15000 | mismatch | cast_time_ms 2000->1500 |
@@ -421,15 +340,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | SMRuinWarlock | 30 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  |
 | SMRuinWarlock | 30 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  |
 | SMRuinWarlock | 30 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  |
-| SMRuinWarlock | 30 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| SMRuinWarlock | 30 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| SMRuinWarlock | 30 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| SMRuinWarlock | 30 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
-| SMRuinWarlock | 30 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| SMRuinWarlock | 30 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
-| SMRuinWarlock | 30 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
-| SMRuinWarlock | 30 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| SMRuinWarlock | 30 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
 | SMRuinWarlock | 30 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | SMRuinWarlock | 30 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | SMRuinWarlock | 30 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -466,15 +376,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | SMRuinWarlock | 38 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  |
 | SMRuinWarlock | 38 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  |
 | SMRuinWarlock | 38 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  |
-| SMRuinWarlock | 38 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| SMRuinWarlock | 38 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| SMRuinWarlock | 38 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| SMRuinWarlock | 38 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| SMRuinWarlock | 38 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
-| SMRuinWarlock | 38 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| SMRuinWarlock | 38 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
-| SMRuinWarlock | 38 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
-| SMRuinWarlock | 38 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
 | SMRuinWarlock | 38 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | SMRuinWarlock | 38 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | SMRuinWarlock | 38 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -520,15 +421,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | SMRuinWarlock | 40 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  |
 | SMRuinWarlock | 40 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  |
 | SMRuinWarlock | 40 | Curse of Recklessness | 2 | 7658 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→0 | 120000→0 | mismatch | required_level 28->0; duration_ms 120000->0 |
-| SMRuinWarlock | 40 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| SMRuinWarlock | 40 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| SMRuinWarlock | 40 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| SMRuinWarlock | 40 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| SMRuinWarlock | 40 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
-| SMRuinWarlock | 40 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| SMRuinWarlock | 40 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
-| SMRuinWarlock | 40 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
-| SMRuinWarlock | 40 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
 | SMRuinWarlock | 40 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | SMRuinWarlock | 40 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | SMRuinWarlock | 40 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -578,17 +470,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | SMRuinWarlock | 50 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  |
 | SMRuinWarlock | 50 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  |
 | SMRuinWarlock | 50 | Curse of Recklessness | 3 | 7659 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→0 | 120000→0 | mismatch | required_level 42->0; duration_ms 120000->0 |
-| SMRuinWarlock | 50 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| SMRuinWarlock | 50 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| SMRuinWarlock | 50 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| SMRuinWarlock | 50 | Death Coil | 1 | 6789 | 435.00→430.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | cost 435.00->430.00; duration_ms 3000->0 |
-| SMRuinWarlock | 50 | Death Coil | 2 | 17925 | 525.00→495.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | cost 525.00->495.00; duration_ms 3000->0 |
-| SMRuinWarlock | 50 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
-| SMRuinWarlock | 50 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| SMRuinWarlock | 50 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
-| SMRuinWarlock | 50 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| SMRuinWarlock | 50 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
-| SMRuinWarlock | 50 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
+| SMRuinWarlock | 50 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 |
+| SMRuinWarlock | 50 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 |
 | SMRuinWarlock | 50 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | SMRuinWarlock | 50 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | SMRuinWarlock | 50 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -652,18 +535,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | SMRuinWarlock | 60 | Corruption | 6 | 11672 | 290.00→290.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | 18000→18000 | match |  |
 | SMRuinWarlock | 60 | Corruption | 7 | 25311 | 340.00→340.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 18000→18000 | match |  |
 | SMRuinWarlock | 60 | Curse of Recklessness | 4 | 11717 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→0 | 120000→0 | mismatch | required_level 56->0; duration_ms 120000->0 |
-| SMRuinWarlock | 60 | Death Coil | 0 | 6789 | 435.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 42→0 | 3000→0 | mismatch | cost 435.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 42->0; duration_ms 3000->0 |
-| SMRuinWarlock | 60 | Death Coil | 0 | 17926 | 600.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 58→0 | 3000→0 | mismatch | cost 600.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 58->0; duration_ms 3000->0 |
-| SMRuinWarlock | 60 | Death Coil | 0 | 17925 | 525.00→0.00 | mana→none | 120000→0 | 0→0 | 1500→0 | 50→0 | 3000→0 | mismatch | cost 525.00->0.00; cost_type mana->none; cooldown_ms 120000->0; gcd_ms 1500->0; required_level 50->0; duration_ms 3000->0 |
-| SMRuinWarlock | 60 | Death Coil | 1 | 6789 | 435.00→430.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | cost 435.00->430.00; duration_ms 3000->0 |
-| SMRuinWarlock | 60 | Death Coil | 2 | 17925 | 525.00→495.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | cost 525.00->495.00; duration_ms 3000->0 |
-| SMRuinWarlock | 60 | Death Coil | 3 | 17926 | 600.00→565.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 58→58 | 3000→0 | mismatch | cost 600.00->565.00; duration_ms 3000->0 |
-| SMRuinWarlock | 60 | Drain Life | 0 | 11699 | 240.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 46→0 | 5000→0 | mismatch | cost 240.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 46->0; duration_ms 5000->0 |
-| SMRuinWarlock | 60 | Drain Life | 0 | 11700 | 300.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 5000→0 | mismatch | cost 300.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 5000->0 |
-| SMRuinWarlock | 60 | Drain Life | 0 | 699 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 22→0 | 5000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 22->0; duration_ms 5000->0 |
-| SMRuinWarlock | 60 | Drain Life | 0 | 709 | 135.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 30→0 | 5000→0 | mismatch | cost 135.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 30->0; duration_ms 5000->0 |
-| SMRuinWarlock | 60 | Drain Life | 0 | 7651 | 185.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 38→0 | 5000→0 | mismatch | cost 185.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 38->0; duration_ms 5000->0 |
-| SMRuinWarlock | 60 | Drain Life | 0 | 689 | 55.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 14→0 | 5000→0 | mismatch | cost 55.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 14->0; duration_ms 5000->0 |
+| SMRuinWarlock | 60 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 |
+| SMRuinWarlock | 60 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 |
+| SMRuinWarlock | 60 | Death Coil | 3 | 17926 | 600.00→600.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 58→58 | 3000→0 | mismatch | duration_ms 3000->0 |
 | SMRuinWarlock | 60 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | SMRuinWarlock | 60 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | SMRuinWarlock | 60 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |

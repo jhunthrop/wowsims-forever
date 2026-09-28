@@ -45,8 +45,13 @@ func (warlock *Warlock) getSearingPainBaseConfig(rank int) core.SpellConfig {
 		BonusCoefficient: spellCoeff,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			// Decimation (talents/warlock.json 440870/440873): +3%/+6%
+			// damage against a target below 35% health.
+			oldMultiplier := spell.DamageMultiplier
+			spell.DamageMultiplier *= warlock.decimationDamageMultiplier(target)
 			damage := sim.Roll(baseDamage[0], baseDamage[1])
 			spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMagicHitAndCrit)
+			spell.DamageMultiplier = oldMultiplier
 		},
 	}
 }
