@@ -25,6 +25,7 @@ const (
 	SpellCode_PriestHolyFire
 	SpellCode_PriestMindBlast
 	SpellCode_PriestMindFlay
+	SpellCode_PriestShadowWordDeath
 	SpellCode_PriestShadowWordPain
 	SpellCode_PriestSmite
 	SpellCode_PriestStarshards
@@ -52,6 +53,7 @@ type Priest struct {
 	Renew             []*core.Spell
 	Shadowform        *core.Spell
 	ShadowWeavingProc *core.Spell
+	ShadowWordDeath   []*core.Spell
 	ShadowWordPain    []*core.Spell
 	Smite             []*core.Spell
 	Starshards        [][]*core.Spell
@@ -89,6 +91,7 @@ func (priest *Priest) AddPartyBuffs(_ *proto.PartyBuffs) {
 func (priest *Priest) Initialize() {
 	priest.registerMindBlast()
 	priest.registerMindFlay()
+	priest.registerShadowWordDeathSpell()
 	priest.registerShadowWordPainSpell()
 	if priest.GetCharacter().Race == proto.Race_RaceUndead {
 		priest.registerDevouringPlagueSpell()

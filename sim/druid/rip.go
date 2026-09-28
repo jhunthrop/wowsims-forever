@@ -52,7 +52,29 @@ var ripRanks = []RipRankInfo{
 	},
 }
 
-const RipTicks int32 = 6
+// RipBaseTicks/RipTicks/RipDuration: Classic's well-documented Rip
+// duration scales with combo points the same way Rogue's Rupture does
+// (sim/rogue/rupture.go's RuptureTicks): 3 ticks @ 2s (6s) base, +1 tick
+// (2s) per combo point, giving 8/10/12/14/16 sec for 1-5 combo points.
+// The client's duration_ms (12000ms, identical on every one of Rip's six
+// ranks in spellconst) carries no combo-point-scaling effect field --
+// unlike an ability whose client data ties a term to a misc_value, this
+// number is a server-side-script placeholder the client alone can't
+// source, so per this lane's rule for that case Classic's own published
+// formula is kept instead, and the fixed six ticks (12s regardless of
+// combo points) the engine had is the bug this closes: it made
+// Ferocious Bite (which reads whether Rip is about to expire)
+// unreachable, since Rip never got close to expiring at low combo point
+// counts the way it should.
+const RipBaseTicks int32 = 3
+
+func (druid *Druid) RipTicks(comboPoints int32) int32 {
+	return RipBaseTicks + comboPoints
+}
+
+func (druid *Druid) RipDuration(comboPoints int32) time.Duration {
+	return time.Duration(druid.RipTicks(comboPoints)) * time.Second * 2
+}
 
 func (druid *Druid) registerRipSpell() {
 	// Add highest available Rip rank for level.
@@ -97,7 +119,7 @@ func (druid *Druid) newRipSpellConfig(ripRank RipRankInfo) core.SpellConfig {
 			Aura: core.Aura{
 				Label: "Rip",
 			},
-			NumberOfTicks: RipTicks,
+			NumberOfTicks: 0, // Set dynamically, by combo points, in ApplyEffects.
 			TickLength:    time.Second * 2,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
@@ -117,6 +139,7 @@ func (druid *Druid) newRipSpellConfig(ripRank RipRankInfo) core.SpellConfig {
 			result := spell.CalcOutcome(sim, target, spell.OutcomeMeleeSpecialHitNoHitCounter)
 			if result.Landed() {
 				dot := spell.Dot(target)
+				dot.NumberOfTicks = druid.RipTicks(druid.ComboPoints())
 				dot.Apply(sim)
 				druid.SpendComboPoints(sim, spell)
 			} else {

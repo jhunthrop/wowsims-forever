@@ -43,7 +43,10 @@ func NewFeralDruid(character *core.Character, options *proto.Player) *FeralDruid
 		cat.SelfBuffs.InnervateTarget = feralOptions.Options.InnervateTarget
 	}
 
-	cat.maxRipTicks = druid.RipTicks
+	// Rip's tick count now varies with combo points (druid.RipTicks); the
+	// rotation's "how long could Rip's current application still run"
+	// math below wants the longest it can ever be, at 5 combo points.
+	cat.maxRipTicks = cat.RipTicks(5)
 
 	cat.EnableEnergyBar(100.0)
 	cat.EnableRageBar(core.RageBarOptions{DamageDealtMultiplier: 1, DamageTakenMultiplier: 1})
