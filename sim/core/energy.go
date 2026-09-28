@@ -61,7 +61,15 @@ func (unit *Unit) EnableEnergyBar(maxEnergy float64) {
 
 // Computes the energy thresholds.
 func (eb *energyBar) setupEnergyThresholds() {
-	if eb.unit == nil {
+	// eb.unit.Rotation is nil for an energy-bar unit built with no
+	// rotation configured at all (e.g. a test character that drives
+	// ApplyEffects directly rather than through the APL - see
+	// sim/rogue/dps_rogue/mutilate_test.go's buildRogueForTest, which
+	// has to pass an empty-but-non-nil &proto.APLRotation{} to work
+	// around exactly this). allAPLActions() dereferences the receiver's
+	// own fields (priorityList) with no nil check of its own, so a
+	// genuinely nil Rotation panicked here before this guard existed.
+	if eb.unit == nil || eb.unit.Rotation == nil {
 		return
 	}
 	var energyThresholds []int
