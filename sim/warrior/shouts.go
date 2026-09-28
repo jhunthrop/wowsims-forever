@@ -58,7 +58,14 @@ func (warrior *Warrior) newShoutSpellConfig(actionID core.ActionID, rank int32, 
 }
 
 func (warrior *Warrior) registerBattleShout() {
-	rank := core.TernaryInt32(core.IncludeAQ, 7, 6)
+	// rankAtLevel picks the rank this warrior's level has actually
+	// learned; the AQ phase flag still caps the ceiling at 60, the way
+	// it always has. Before this, rank was pinned to the top rank
+	// regardless of level, so a levelling character's Battle Shout
+	// always registered under the level-60 id and every lower level's
+	// rotation (which the ladder rewrites to the rank it has learned)
+	// could never find it.
+	rank := min(int32(rankAtLevel(core.BattleShoutLevel[:], warrior.Level)), core.TernaryInt32(core.IncludeAQ, 7, 6))
 	actionId := core.BattleShoutSpellId[rank]
 	has3pcWrath := warrior.HasSetBonus(ItemSetBattleGearOfWrath, 3)
 

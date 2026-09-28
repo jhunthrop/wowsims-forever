@@ -4,12 +4,14 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// heroicStrikeRank and cleaveRank are the ranks of the two on-next-swing
-// abilities a level-60 warrior casts, as labels into the generated rank
-// arrays in constants_auto_gen.go. Heroic Strike's rank 9 arrived with
-// AQ, so the phase flag picks the rank and every column - id, damage,
-// cost - is then read at that one index rather than being a second
-// ternary of typed numbers.
+// heroicStrikeRank and cleaveRank are the TOP ranks of the two
+// on-next-swing abilities a level-60 warrior casts, as labels into the
+// generated rank arrays in constants_auto_gen.go. Heroic Strike's rank
+// 9 arrived with AQ, so the phase flag picks the rank and every column
+// - id, damage, cost - is then read at that one index rather than
+// being a second ternary of typed numbers. Used by
+// TestTheForeverFuryRotationQueuesHeroicStrike (a level-60 pinned
+// rotation) and as the ceiling heroicStrikeRankForLevel clamps to.
 func heroicStrikeRank() int {
 	return core.TernaryInt(core.IncludeAQ, HeroicStrikeRanks, HeroicStrikeRanks-1)
 }
@@ -18,10 +20,21 @@ func cleaveRank() int {
 	return CleaveRanks
 }
 
+// heroicStrikeRankForLevel is the rank a warrior of level has actually
+// learned: rankAtLevel against HeroicStrikeLevel, capped at
+// heroicStrikeRank() so the AQ phase flag still wins at 60. Without
+// this, registerHeroicStrikeSpell always registered the level-60 rank
+// (heroicStrikeRank() ignores the character's level entirely), so a
+// levelling character's queued Heroic Strike never matched the rank
+// id the ladder's rotation casts at its own level.
+func heroicStrikeRankForLevel(level int32) int {
+	return min(rankAtLevel(HeroicStrikeLevel[:], level), heroicStrikeRank())
+}
+
 // heroicStrikeSpellID and cleaveSpellID are the ids the two
-// on-next-swing abilities register under. They are named so a rotation
-// test can check the pinned APL against the spellbook rather than
-// against a retyped id.
+// on-next-swing abilities register under at their TOP rank. They are
+// named so a rotation test can check the pinned (level-60) APL against
+// the spellbook rather than against a retyped id.
 func heroicStrikeSpellID() int32 {
 	return HeroicStrikeSpellId[heroicStrikeRank()]
 }
@@ -30,10 +43,35 @@ func cleaveSpellID() int32 {
 	return CleaveSpellId[cleaveRank()]
 }
 
+// heroicStrikeRankSpellID reads a Heroic Strike rank's id, correcting
+// the one rank where the generator's dedup kept the wrong duplicate:
+// rank 3's client row (285, spell_level 16, cost 150) and 25712 (same
+// spell_level, cost 0 - a "free" duplicate the client also carries)
+// tie on spell_level, and the generator's tie-break kept 25712 in
+// HeroicStrikeSpellId[3]. 285 is the id spellranks.json names and the
+// one the site's ladder rewrites a levelling rotation's castSpell to,
+// so it is the one this package registers.
+func heroicStrikeRankSpellID(rank int) int32 {
+	if rank == 3 {
+		return 285
+	}
+	return HeroicStrikeSpellId[rank]
+}
+
+// heroicStrikeRankManaCost mirrors heroicStrikeRankSpellID for cost:
+// the generated HeroicStrikeManaCost[3] is 0, read off the same free
+// duplicate (25712) rather than 285's real 150.
+func heroicStrikeRankManaCost(rank int) float64 {
+	if rank == 3 {
+		return 150
+	}
+	return HeroicStrikeManaCost[rank]
+}
+
 func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
-	rank := heroicStrikeRank()
+	rank := heroicStrikeRankForLevel(warrior.Level)
 	flatDamageBonus := HeroicStrikeBaseDamage[rank][0]
-	spellID := heroicStrikeSpellID()
+	spellID := heroicStrikeRankSpellID(rank)
 	// No known equation, and the client's table has no threat column.
 	threat := core.TernaryFloat64(core.IncludeAQ, 173, 145)
 
@@ -52,7 +90,7 @@ func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
 			// Improved Heroic Strike's discount is a SpellMod in
 			// talents.go; applying it here as well would double it, so
 			// this is the client's undiscounted cost.
-			Cost:   rageCost(HeroicStrikeManaCost[rank]),
+			Cost:   rageCost(heroicStrikeRankManaCost(rank)),
 			Refund: 0.8,
 		},
 
