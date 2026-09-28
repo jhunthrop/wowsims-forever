@@ -20,7 +20,7 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 		SpellSchool:   core.SpellSchoolFire,
 		DefenseType:   core.DefenseTypeMagic,
 		ProcMask:      core.ProcMaskSpellDamage,
-		Flags:         core.SpellFlagAPL | core.SpellFlagPassiveSpell | SpellFlagTrap,
+		Flags:         core.SpellFlagAPL | SpellFlagTrap,
 		Rank:          rank,
 		RequiredLevel: level,
 		MissileSpeed:  24,
