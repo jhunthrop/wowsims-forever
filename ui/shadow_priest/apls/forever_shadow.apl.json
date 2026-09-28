@@ -23,14 +23,14 @@
       }
     },
     {
-      "notes": "Inert until the engine registers Shadow Word: Death (not found under any candidate id in sim/priest). Kept because Forever's Early Demise talent (tier 5) clearly intends a below-20-percent execute that the base classic Shadow tree has no equivalent for.",
+      "notes": "Shadow Word: Death (sim/priest/shadow_word_death.go): Forever's tier 5 Early Demise talent gives it bonus crit chance below 20% target health, read through the engine's execute-phase approximation (isExecutePhase E20, the same primitive this line already used).",
       "action": {
         "condition": { "isExecutePhase": { "threshold": "E20" } },
         "castSpell": { "spellId": { "spellId": 1309636, "rank": 4 } }
       }
     },
     {
-      "notes": "Engine-castable Era fallback for the execute window while Shadow Word: Death is inert: Mind Blast on cooldown, else Mind Flay.",
+      "notes": "Era fallback for the execute window when Shadow Word: Death is on its own 15 s cooldown: Mind Blast on cooldown, else Mind Flay.",
       "action": {
         "condition": { "isExecutePhase": { "threshold": "E20" } },
         "castSpell": { "spellId": { "spellId": 10947, "rank": 9 } }

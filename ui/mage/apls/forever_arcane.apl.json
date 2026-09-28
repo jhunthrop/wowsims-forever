@@ -22,7 +22,7 @@
       "action": { "castSpell": { "spellId": { "spellId": 400574, "rank": 1 } } }
     },
     {
-      "notes": "Arcane Missiles is the engine-castable Era filler that keeps this rotation dealing damage while Arcane Blast and Missile Barrage are inert -- the pre-Arcane-Blast Era Arcane rotation was itself Missiles spam. Uses rank 7 (10212), the highest rank the engine's registration loop actually registers; rank 8 (25345) is excluded by an off-by-one there, recorded as an engine follow-up.",
+      "notes": "Arcane Missiles is the engine-castable Era filler that keeps this rotation dealing damage when the build has not taken Arcane Blast and Missile Barrage (both live in the engine since 2026-09-28) -- the pre-Arcane-Blast Era Arcane rotation was itself Missiles spam. Uses rank 7 (10212), the highest rank the engine's registration loop actually registers; rank 8 (25345) is excluded by an off-by-one there, recorded as an engine follow-up.",
       "action": { "castSpell": { "spellId": { "spellId": 10212, "rank": 7 } } }
     }
   ]
