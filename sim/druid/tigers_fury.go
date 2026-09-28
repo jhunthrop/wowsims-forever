@@ -16,10 +16,11 @@ var tigersFuryLearnLevels = []int{24}
 
 const tigersFurySpellID = 5217
 
-// tigersFuryDamageBonus is the bonus paired with tigersFurySpellID in the
-// old bracket-25 entry (the only bracket whose id is real); the old
-// bracket-60 value (40, tied to the now-nonexistent id 9846) cannot be kept.
-const tigersFuryDamageBonus = 10.0
+// tigersFuryDamageBonus is spell 5217's effect 0 (aura 4, mod damage done,
+// school physical): base_points/amount 15 (16 on wowhead's Forever tooltip; the
+// client stores the float 15.x). Forever made Tiger's Fury free
+// (cost 0) on a 30 s cooldown; it no longer spends or requires energy.
+const tigersFuryDamageBonus = 16.0
 
 func (druid *Druid) registerTigersFurySpell() {
 	rank := core.HighestRankAtLevel(tigersFuryLearnLevels, druid.Level)
@@ -46,13 +47,10 @@ func (druid *Druid) registerTigersFurySpell() {
 		ActionID: actionID,
 		Flags:    core.SpellFlagAPL,
 
-		EnergyCost: core.EnergyCostOptions{
-			Cost: 30,
-		},
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    druid.NewTimer(),
-				Duration: time.Second,
+				Duration: 30 * time.Second,
 			},
 		},
 
