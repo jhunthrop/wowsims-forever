@@ -58,10 +58,31 @@ var ferociousBiteRanks = []FerociousBiteRankInfo{
 	},
 }
 
+// ferociousBiteLearnLevels is core.HighestRankAtLevel's input shape
+// (rank r, 1-based, learned at ferociousBiteLearnLevels[r-1]), read off
+// ferociousBiteRanks' own level column so the two never drift apart.
+var ferociousBiteLearnLevels = []int{
+	int(ferociousBiteRanks[0].level),
+	int(ferociousBiteRanks[1].level),
+	int(ferociousBiteRanks[2].level),
+	int(ferociousBiteRanks[3].level),
+	int(ferociousBiteRanks[4].level),
+}
+
 func (druid *Druid) registerFerociousBiteSpell() {
-	// Ferocious Bite Rank V is not available until AQ release
-	rank := core.TernaryInt(core.IncludeAQ, 4, 3)
-	config := druid.newFerociousBiteSpellConfig(ferociousBiteRanks[rank])
+	// rank was pinned to the top rank (5, or 4 without AQ - rank V is
+	// not available until AQ release) regardless of the character's
+	// level, so a levelling druid's Ferocious Bite always registered
+	// under the level-60 id (31018) and the rotation's own castSpell
+	// for its OWN learned rank (22568/22827/22828 at 32/40/48) could
+	// never find it. HighestRankAtLevel picks the rank actually
+	// learned, capped at the same AQ-flag ceiling as before.
+	maxRank := core.TernaryInt(core.IncludeAQ, 5, 4)
+	rank := min(core.HighestRankAtLevel(ferociousBiteLearnLevels, druid.Level), maxRank)
+	if rank == 0 {
+		return
+	}
+	config := druid.newFerociousBiteSpellConfig(ferociousBiteRanks[rank-1])
 	druid.FerociousBite = druid.RegisterSpell(Cat, config)
 }
 

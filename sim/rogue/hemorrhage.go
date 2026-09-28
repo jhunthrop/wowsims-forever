@@ -11,7 +11,13 @@ func (rogue *Rogue) registerHemorrhageSpell() {
 		return
 	}
 
-	spellID := int32(17348)
+	// 16511 is Forever's one and only Hemorrhage rank
+	// (data/builds/1.60.1.70009/spellranks.json, level 30); 17348 -
+	// what stood here before - is a different, later-patch rank this
+	// client does not carry, so the rotation's castSpell (and every
+	// ExtraCastCondition/auraIsActive check keyed to it) could never
+	// find this spell.
+	spellID := int32(16511)
 
 	actionID := core.ActionID{SpellID: spellID}
 

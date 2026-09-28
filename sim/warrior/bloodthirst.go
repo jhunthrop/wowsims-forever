@@ -31,6 +31,18 @@ func (warrior *Warrior) registerBloodthirstSpell(cdTimer *core.Timer) {
 	}
 
 	rank := rankAtLevel(BloodthirstLevel[:], warrior.Level)
+	if rank == 0 {
+		// The talent can be spent (Fury's tree has no level floor of
+		// its own) well before BloodthirstLevel[1]=40, the client's own
+		// minimum character level for the ability. Registering rank 0
+		// here would give the spell BloodthirstSpellId[0]=0 - an empty
+		// ActionID - which the rotation's own castSpell (rewritten to
+		// the real id 23881-23894 by the site's spellranks table) can
+		// never match, so it is reported as an unresolved id rather
+		// than the talent-gating the ladder already expects and
+		// excuses for every other levelling talent.
+		return
+	}
 	baseDamage := BloodthirstBaseDamage[rank][0]
 
 	castConfig := core.CastConfig{

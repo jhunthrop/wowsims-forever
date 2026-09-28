@@ -1,9 +1,11 @@
 package warrior
 
 import (
+	"math"
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/stats"
 )
 
 const ShoutExpirationThreshold = time.Second * 3
@@ -57,15 +59,57 @@ func (warrior *Warrior) newShoutSpellConfig(actionID core.ActionID, rank int32, 
 	})
 }
 
+// battleShoutAllyAura is core.BattleShoutAura (sim/core/buffs.go),
+// keyed to the RANK this warrior's own level has actually learned
+// instead of that function's own hardcoded top rank. Without this, a
+// levelling warrior's Battle Shout cast under its correct rank id
+// (registerBattleShout, above) while the buff it grants stayed
+// registered under core.BattleShoutAura's permanent top-rank id, so
+// the rotation's own "is Battle Shout up" check (auraIsActive against
+// the rank it just cast, since spellranks.json's Battle Shout chain
+// rewrites that condition's id the same way it rewrites the cast)
+// could never find a match - reported as an unresolved id at every
+// level below 60. Duplicated here rather than editing
+// core.BattleShoutAura because this lane's brief does not permit
+// sim/core changes beyond the energy-bar guard; Improved Battle Shout
+// (impBattleShout) is dropped because the Forever client's talent
+// trees don't carry it (core.BattleShoutAura's own call site already
+// passes 0 for it, per the FOREVER comment below).
+func battleShoutAllyAura(unit *core.Unit, actionID core.ActionID, baseAP float64, boomingVoicePts int32, has3pcWrath bool) *core.Aura {
+	return unit.GetOrRegisterAura(core.Aura{
+		Label:      "Battle Shout",
+		ActionID:   actionID,
+		Duration:   time.Duration(float64(time.Minute*2) * (1 + 0.1*float64(boomingVoicePts))),
+		BuildPhase: core.CharacterBuildPhaseBuffs,
+		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+			aura.Unit.AddStatsDynamic(sim, stats.Stats{
+				stats.AttackPower: math.Floor(baseAP + core.TernaryFloat64(has3pcWrath, 30, 0)),
+			})
+		},
+		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+			aura.Unit.AddStatsDynamic(sim, stats.Stats{
+				stats.AttackPower: -1 * math.Floor(baseAP+core.TernaryFloat64(has3pcWrath, 30, 0)),
+			})
+		},
+	})
+}
+
 func (warrior *Warrior) registerBattleShout() {
-	rank := core.TernaryInt32(core.IncludeAQ, 7, 6)
+	// rankAtLevel picks the rank this warrior's level has actually
+	// learned; the AQ phase flag still caps the ceiling at 60, the way
+	// it always has. Before this, rank was pinned to the top rank
+	// regardless of level, so a levelling character's Battle Shout
+	// always registered under the level-60 id and every lower level's
+	// rotation (which the ladder rewrites to the rank it has learned)
+	// could never find it.
+	rank := min(int32(rankAtLevel(core.BattleShoutLevel[:], warrior.Level)), core.TernaryInt32(core.IncludeAQ, 7, 6))
 	actionId := core.BattleShoutSpellId[rank]
+	baseAP := core.BattleShoutBaseAP[rank]
 	has3pcWrath := warrior.HasSetBonus(ItemSetBattleGearOfWrath, 3)
 
 	warrior.BattleShout = warrior.newShoutSpellConfig(core.ActionID{SpellID: actionId}, rank, warrior.NewPartyAuraArray(func(unit *core.Unit) *core.Aura {
 		// FOREVER: Improved Battle Shout is not in the client's trees.
-		// return core.BattleShoutAura(unit, warrior.Talents.ImprovedBattleShout, warrior.Talents.BoomingVoice, has3pcWrath)
-		return core.BattleShoutAura(unit, 0, warrior.Talents.BoomingVoice, has3pcWrath)
+		return battleShoutAllyAura(unit, core.ActionID{SpellID: actionId}, baseAP, warrior.Talents.BoomingVoice, has3pcWrath)
 	}))
 }
 

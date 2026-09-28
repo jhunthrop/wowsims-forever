@@ -153,11 +153,26 @@ func (hunter *Hunter) Initialize() {
 
 	multiShotTimer := hunter.NewTimer()
 	arcaneShotTimer := hunter.NewTimer()
+	aimedShotTimer := hunter.NewTimer()
 
 	hunter.registerSerpentStingSpell()
 
+	// Arcane Shot, Aimed Shot and Multi-Shot each carry their own timer:
+	// they used to share arcaneShotTimer between Arcane Shot and Aimed
+	// Shot (Multi-Shot already had its own), which - despite the
+	// client's spellconst carrying the same category_cooldown_ms (6000)
+	// on all three, a real Classic "shot" category - could never let
+	// Arcane Shot itself fire. Marksmanship's rotation casts Arcane
+	// Shot specifically as the filler for the gap BETWEEN Aimed Shot
+	// and Multi-Shot's own cooldowns (spellTimeToReady on both > 1.5s);
+	// with a shared timer, Arcane Shot's own IsReady() read the exact
+	// same clock the rotation was checking was NOT ready, so the two
+	// conditions could never both be true - Arcane Shot was
+	// structurally uncastable at every level, confirmed with a
+	// temporary debug counter (ExtraCastCondition true, CanCast's own
+	// CD.IsReady false, every single attempt).
 	hunter.registerArcaneShotSpell(arcaneShotTimer)
-	hunter.registerAimedShotSpell(arcaneShotTimer)
+	hunter.registerAimedShotSpell(aimedShotTimer)
 	hunter.registerMultiShotSpell(multiShotTimer)
 
 	hunter.registerRaptorStrikeSpell()
