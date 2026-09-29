@@ -8,7 +8,13 @@ const LifeTapRanks = 6
 
 var LifeTapSpellId = [LifeTapRanks + 1]int32{0, 1454, 1455, 1456, 11687, 11688, 11689}
 
-var LifeTapBaseDamage = [LifeTapRanks + 1]float64{0, 30, 75, 140, 220, 310, 424}
+// LifeTapBaseDamage was a slightly-stale set of classic tooltip values
+// ({30, 75, 140, 220, 310, 424}) until the rotation-accuracy audit
+// compared it against spellconst/warlock.json's own per-rank flat
+// "amount" (rank 6, 11689, amount 420 unchanged) - a small drift, not
+// the ~2x halving the rest of the kit's nukes carried, but still a
+// mismatch against the client's own number.
+var LifeTapBaseDamage = [LifeTapRanks + 1]float64{0, 20, 65, 130, 210, 300, 420}
 
 func (warlock *Warlock) getLifeTapBaseConfig(rank int) core.SpellConfig {
 	spellId := LifeTapSpellId[rank]
