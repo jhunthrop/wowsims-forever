@@ -16,9 +16,10 @@ var ambushLearnLevels = []int{18, 26, 34, 42, 50, 58}
 var ambushSpellID = [7]int32{0, 8676, 8724, 8725, 11267, 11268, 11269}
 
 // ambushFlatDamageBonus is Ambush's rank -> flat damage bonus, index 0
-// unused. Ranks 2 and 4 have no tuned value in this file; they carry the
-// preceding rank's bonus forward until real numbers are sourced.
-var ambushFlatDamageBonus = [7]float64{0, 28, 28, 50, 50, 92, 116}
+// unused; source: 1.60.1.70009 spellconst (each rank's own effect 121
+// amount: 28, 40, 50, 74, 92, 116). All six ranks have a real, per-rank
+// client number.
+var ambushFlatDamageBonus = [7]float64{0, 28, 40, 50, 74, 92, 116}
 
 func (rogue *Rogue) registerAmbushSpell() {
 	rank := core.HighestRankAtLevel(ambushLearnLevels, rogue.Level)

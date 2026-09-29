@@ -15,10 +15,11 @@ var garroteLearnLevels = []int{14, 22, 30, 38, 46, 54}
 // garroteSpellID is Garrote's rank -> spell id, index 0 unused.
 var garroteSpellID = [7]int32{0, 703, 8631, 8632, 8633, 11289, 11290}
 
-// garroteBaseDamage is Garrote's rank -> base tick damage, index 0 unused.
-// Ranks 1 and 3 have no tuned value in this file; they carry rank 2's
-// number backward and forward respectively, until real numbers are sourced.
-var garroteBaseDamage = [7]float64{0, 34, 34, 34, 59, 74, 92}
+// garroteBaseDamage is Garrote's rank -> base tick damage, index 0 unused;
+// source: 1.60.1.70009 spellconst (each rank's own periodic-damage effect
+// amount: 24, 34, 47, 59, 74, 92). All six ranks have a real, per-rank
+// client number.
+var garroteBaseDamage = [7]float64{0, 24, 34, 47, 59, 74, 92}
 
 func (rogue *Rogue) registerGarrote() {
 	rank := core.HighestRankAtLevel(garroteLearnLevels, rogue.Level)

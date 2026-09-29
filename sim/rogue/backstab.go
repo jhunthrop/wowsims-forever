@@ -17,10 +17,11 @@ var backstabLearnLevels = []int{4, 12, 20, 28, 36, 44, 52, 60}
 var backstabSpellID = [9]int32{0, 53, 2589, 2590, 2591, 8721, 11279, 11280, core.TernaryInt32(core.IncludeAQ, 25300, 11281)}
 
 // backstabFlatDamageBonus is Backstab's rank -> flat damage bonus, index 0
-// unused. Only ranks 3, 5, 6 and 8 have a tuned value in this file; ranks
-// 1-2 carry rank 3's bonus backward, rank 4 carries rank 3's bonus forward,
-// and rank 7 carries rank 6's bonus forward, until real numbers are sourced.
-var backstabFlatDamageBonus = [9]float64{0, 32, 32, 32, 32, 60, 90, 90, core.TernaryFloat64(core.IncludeAQ, 150, 140)}
+// unused; source: 1.60.1.70009 spellconst (each rank's own effect 121
+// amount: 10, 20, 32, 46, 60, 90, 110, and rank 8's own id carries 140
+// without AQ or 150 with it, same ternary the old code already had). All
+// eight ranks have a real, per-rank client number.
+var backstabFlatDamageBonus = [9]float64{0, 10, 20, 32, 46, 60, 90, 110, core.TernaryFloat64(core.IncludeAQ, 150, 140)}
 
 func (rogue *Rogue) registerBackstabSpell() {
 	rank := core.HighestRankAtLevel(backstabLearnLevels, rogue.Level)

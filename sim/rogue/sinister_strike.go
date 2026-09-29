@@ -16,10 +16,11 @@ var sinisterStrikeLearnLevels = []int{1, 6, 14, 22, 30, 38, 46, 54}
 var sinisterStrikeSpellID = [9]int32{0, 1752, 1757, 1758, 1759, 1760, 8621, 11293, 11294}
 
 // sinisterStrikeFlatDamageBonus is Sinister Strike's rank -> flat damage
-// bonus, index 0 unused. Only ranks 4, 6, 7 and 8 have a tuned value in
-// this file; ranks 1-3 carry rank 4's bonus backward, and rank 5 carries
-// rank 4's bonus forward, until real numbers are sourced.
-var sinisterStrikeFlatDamageBonus = [9]float64{0, 15, 15, 15, 15, 15, 33, 52, 68}
+// bonus, index 0 unused; source: 1.60.1.70009 spellconst (each rank's own
+// effect 121 amount: 3, 6, 10, 15, 22, 33, 52, 68). All eight ranks have a
+// real, per-rank client number -- unlike Backstab/Ambush/Garrote's
+// low-rank gaps, nothing here is carried forward from a neighboring rank.
+var sinisterStrikeFlatDamageBonus = [9]float64{0, 3, 6, 10, 15, 22, 33, 52, 68}
 
 func (rogue *Rogue) registerSinisterStrikeSpell() {
 	rank := core.HighestRankAtLevel(sinisterStrikeLearnLevels, rogue.Level)
