@@ -37,7 +37,12 @@ func (priest *Priest) getDevouringPlagueConfig(rank int, cdTimer *core.Timer) co
 	manaCost := DevouringPlagueManaCost[rank]
 	level := DevouringPlagueLevel[rank]
 
-	spellCoeff := 0.063
+	// The Forever client's spellconst (1.60.1.70009, priest.json spells
+	// 2944/19276/19277/19278/19279/19280, effect 0's sp_coefficient) is
+	// a flat 0.1 on every one of Devouring Plague's six ranks, not
+	// 0.063 - verified directly against the build's own data. Rotation-
+	// accuracy program, 2026-09-28 (audit-priest).
+	spellCoeff := 0.1
 
 	return core.SpellConfig{
 		SpellCode:   SpellCode_PriestDevouringPlague,
