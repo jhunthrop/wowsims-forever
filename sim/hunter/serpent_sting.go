@@ -10,7 +10,14 @@ import (
 
 func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 	spellId := [10]int32{0, 1978, 13549, 13550, 13551, 13552, 13553, 13554, 13555, 25295}[rank]
-	baseDamage := [10]float64{0, 20, 40, 80, 140, 210, 290, 385, 490, 555}[rank] / 5
+	// baseDamage is spellconst/hunter.json's own per-tick effect amount
+	// (period_ms 3000, 5 ticks over the 15s duration) for each rank:
+	// 2/6/12/22/34/48/64/83/111. The old array held each rank's *total*
+	// tick-1978-through-25295-style Classic value and divided it by 5 to
+	// get a per-tick number, which undershot every rank but the top one
+	// (555/5 = 111 happens to match rank 9's real per-tick amount by
+	// coincidence; every other rank was low).
+	baseDamage := [10]float64{0, 2, 6, 12, 22, 34, 48, 64, 83, 111}[rank]
 	spellCoeff := [10]float64{0, .4, .625, .925, 1, 1, 1, 1, 1, 1}[rank] / 5
 	manaCost := [10]float64{0, 15, 30, 50, 80, 115, 150, 190, 230, 250}[rank]
 	level := [10]int{0, 4, 10, 18, 26, 34, 42, 50, 58, 60}[rank]

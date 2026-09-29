@@ -25,7 +25,14 @@ func (hunter *Hunter) createImprovedHawkAura(auraLabel string, actionID core.Act
 
 // Function to get the maximum attack power for Aspect of the Hawk based on rank
 func (hunter *Hunter) getMaxAspectOfTheHawkAttackPower(rank int) float64 {
-	attackPower := [8]float64{0, 20, 35, 50, 70, 90, 110, 120}
+	// spellconst/hunter.json's per-rank effect amount for spells
+	// 13165/14318/14319/14320/14321/14322/25296. Rank 6 (14322, level 58)
+	// is 55, not Classic's 110 -- confirmed against Wowhead's Forever
+	// tooltip for 14322 ("Mod Ranged Attack Power Value: 56", cost 110
+	// mana unchanged), so this is a genuine Forever-side rebalance of
+	// that one rank, not a data error the client wins over Classic
+	// knowledge either way.
+	attackPower := [8]float64{0, 20, 35, 50, 70, 90, 55, 120}
 
 	if rank < 1 || rank > 7 {
 		return 0.0
@@ -33,6 +40,11 @@ func (hunter *Hunter) getMaxAspectOfTheHawkAttackPower(rank int) float64 {
 
 	return attackPower[rank]
 }
+
+// aspectOfTheHawkManaCost is spellconst/hunter.json's per-rank flat mana
+// cost for the same seven spells (20/35/50/70/90/110/120). The engine
+// never charged mana for this aura at all before this fix.
+var aspectOfTheHawkManaCost = [8]float64{0, 20, 35, 50, 70, 90, 110, 120}
 
 func (hunter *Hunter) getMaxHawkRank() int {
 	maxRank := core.TernaryInt(core.IncludeAQ, 7, 6)
@@ -100,6 +112,9 @@ func (hunter *Hunter) getAspectOfTheHawkSpellConfig(rank int) core.SpellConfig {
 		Rank:          rank,
 		RequiredLevel: level,
 
+		ManaCost: core.ManaCostOptions{
+			FlatCost: aspectOfTheHawkManaCost[rank],
+		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,
