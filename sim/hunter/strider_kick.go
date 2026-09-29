@@ -12,12 +12,17 @@ const striderKickLevel = 30
 
 // Strider Kick is a 1-point, single-rank Survival talent (max_rank 1):
 // "A powerful kick that deals 100% melee weapon damage and increases
-// movement speed by 30% for 3 sec." The client's effects are a 100%
-// weapon-damage-percent hit (effect index 1, amount 100) plus a 3 sec
-// speed buff (effect index 2); the speed half isn't modeled -- this
-// engine's sim doesn't move a static-distance target, so a self-speed
-// buff has no mechanical effect here, the same simplification Wing
-// Clip's snare and Counterattack's root already make.
+// movement speed by 30% for 3 sec." The client's effect 0 is a code-121
+// "Normalized Weapon Damage" baseline of 0 (see mongoose_bite.go and
+// counterattack.go's comments on that effect code, cross-checked against
+// aimed_shot.go's own CalculateNormalizedWeaponDamage use), and effect 1
+// is a code-31 weapon-damage-percent coefficient of 100 on that same
+// baseline -- 0 + 100% of normalized weapon damage, matching "100%
+// melee weapon damage" exactly. The 3s speed buff (effect index 2) isn't
+// modeled -- this engine's sim doesn't move a static-distance target, so
+// a self-speed buff has no mechanical effect here, the same
+// simplification Wing Clip's snare and Counterattack's root already
+// make.
 func (hunter *Hunter) registerStriderKickSpell() {
 	if !hunter.Talents.StriderKick {
 		return
@@ -54,8 +59,8 @@ func (hunter *Hunter) registerStriderKickSpell() {
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := 1.0 * hunter.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
-			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+			damage := hunter.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
+			spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 		},
 	})
 }

@@ -63,7 +63,15 @@ func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+			// Effect code 121 ("Normalized Weapon Damage", wowhead's
+			// Forever tooltip literally names it that) is this build's
+			// same normalized-weapon-speed effect Aimed Shot's own
+			// ApplyEffects reads through CalculateNormalizedWeaponDamage
+			// -- Mongoose Bite is an instant special that used to deal
+			// only its flat rank amount with no weapon scaling at all,
+			// which undersells it relative to the client's own tooltip.
+			damage := baseDamage + hunter.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
+			result := spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 			hunter.tryProcLaceratingStrikes(sim, target, result)
 		},
 	}
