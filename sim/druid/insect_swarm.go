@@ -15,6 +15,17 @@ var InsectSwarmManaCost = [InsectSwarmRanks + 1]float64{0, 45, 85, 100, 140, 160
 var InsectSwarmLevel = [InsectSwarmRanks + 1]int{0, 20, 30, 40, 50, 60}
 
 func (druid *Druid) registerInsectSwarmSpell() {
+	// Insect Swarm is a real, single-point Balance talent in this build
+	// (data/builds/<build>/talents/druid.json, id 104930), not a
+	// baseline spell every druid learns by level like Moonfire/Wrath -
+	// this was the one thing the level-gate below did not check, so a
+	// zero-talent character could already cast it fine (confirmed
+	// against a level-60 zero-talent build: no unresolved warning
+	// before this fix). Gated the same way every other real talent in
+	// this file is (see talents.go's Talents.X == 0 early returns).
+	if !druid.Talents.InsectSwarm {
+		return
+	}
 	druid.InsectSwarm = make([]*DruidSpell, InsectSwarmRanks+1)
 
 	druid.InsectSwarmAuras = druid.NewEnemyAuraArray(core.InsectSwarmAura)
