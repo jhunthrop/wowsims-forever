@@ -209,7 +209,7 @@
       }
     },
     {
-      "notes": "Arcane Shot as the last filler, only when neither shot above will be ready within a global and mana is above the floor: it is instant, so it never clips an auto shot, but it is the least mana-efficient shot, and a Classic-length fight runs dry without the floor.",
+      "notes": "Arcane Shot as the last filler, only when Aimed Shot will not be ready within a global and mana is above a 25% reserve (Multi-Shot and Serpent Sting are the shots worth saving for): it is instant, so it never clips an auto shot and can hold Multi-Shot back by at most one global (Multi-Shot's real 6 s cooldown, corrected 2026-09-29, kept it 'about to be ready' so often that a wait-for-Multi-Shot clause zeroed Arcane Shot at 40 and 60), but it is the least mana-efficient shot, and a Classic-length fight runs dry without the floor.",
       "action": {
         "condition": {
           "and": {
@@ -222,25 +222,7 @@
                   },
                   "rhs": {
                     "const": {
-                      "val": "40%"
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "spellTimeToReady": {
-                      "spellId": {
-                        "spellId": 2643,
-                        "rank": 0
-                      }
-                    }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "1.5s"
+                      "val": "25%"
                     }
                   }
                 }
