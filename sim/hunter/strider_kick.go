@@ -38,6 +38,7 @@ func (hunter *Hunter) registerStriderKickSpell() {
 		DefenseType:   core.DefenseTypeMelee,
 		ProcMask:      core.ProcMaskMeleeMHSpecial,
 		Flags:         core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+		Rank:          1, // client spellconst rank for 1317257 is 1, not 0 (a genuinely unranked ability, like Bloodrage/Whirlwind, reads 0).
 		RequiredLevel: striderKickLevel,
 
 		Cast: core.CastConfig{
