@@ -55,6 +55,17 @@
       }
     },
     {
+      "notes": "Immolation Trap on cooldown: within 5 yards it lands as a melee-range filler, gated only by its own 30-second cooldown and mana cost.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 14305,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
       "notes": "Strider Kick as the lowest-priority filler on its own 8s cooldown.",
       "action": {
         "castSpell": {
