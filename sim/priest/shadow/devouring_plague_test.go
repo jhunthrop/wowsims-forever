@@ -152,3 +152,49 @@ func TestDevouringPlagueRank6ResolvesDistinctlyFromRank5ViaGetSpell(t *testing.T
 		t.Errorf("rank 6 Devouring Plague mana cost = %v, want more than rank 5's %v", rank6Cost, rank5Cost)
 	}
 }
+
+// TestDevouringPlagueSpellCoefficientMatchesClient guards the
+// rotation-accuracy program's engine-numbers fix (2026-09-28,
+// audit-priest): the Forever client's spellconst (1.60.1.70009,
+// priest.json spells 2944/19276/19277/19278/19279/19280, effect 0's
+// sp_coefficient) is a flat 0.1 on every one of Devouring Plague's six
+// ranks, not the 0.063 this file used to hardcode (a value with no
+// client backing found anywhere in this build's data).
+func TestDevouringPlagueSpellCoefficientMatchesClient(t *testing.T) {
+	player := core.WithSpec(&proto.Player{
+		Class:         proto.Class_ClassPriest,
+		Race:          proto.Race_RaceUndead,
+		Level:         60,
+		Equipment:     &proto.EquipmentSpec{},
+		Buffs:         core.FullBuffs.Player,
+		TalentsString: P1Talents,
+	}, PlayerOptionsBasic)
+
+	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
+	encounter := &proto.Encounter{
+		Duration: 10,
+		Targets:  []*proto.Target{core.NewDefaultTarget()},
+	}
+
+	env, _, _ := core.NewEnvironment(raid, encounter, true)
+	agent := env.Raid.Parties[0].Players[0]
+	spriest, ok := agent.(*ShadowPriest)
+	if !ok {
+		t.Fatalf("player agent is %T, want *ShadowPriest", agent)
+	}
+
+	target := env.Encounter.TargetUnits[0]
+	for rank := 1; rank <= priest.DevouringPlagueRanks; rank++ {
+		spell := spriest.DevouringPlague[rank]
+		if spell == nil {
+			continue // not registered below this level's rank floor; other tests cover that.
+		}
+		dot := spell.Dot(target)
+		if dot == nil {
+			t.Fatalf("Devouring Plague rank %d has no Dot template on the default target", rank)
+		}
+		if got, want := dot.BonusCoefficient, 0.1; got != want {
+			t.Errorf("Devouring Plague rank %d BonusCoefficient = %v, want %v (client's flat sp_coefficient)", rank, got, want)
+		}
+	}
+}
