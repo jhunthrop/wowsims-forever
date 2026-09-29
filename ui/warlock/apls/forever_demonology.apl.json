@@ -78,6 +78,29 @@
       }
     },
     {
+      "notes": "Bane of Agony ramps up over its duration, so it goes down first and is refreshed the moment it drops; the fork's own shared warlock preset (ui/warlock/apls/rotation.apl.json) already maintains this curse for every spec, and it is not a spec-locked ability -- only Affliction's own maintenance kept it after the three files were split apart.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 11713,
+                  "rank": 6
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11713,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
       "notes": "Corruption is cheap sustained damage that does not compete with Shadow Bolt casts.",
       "action": {
         "condition": {
