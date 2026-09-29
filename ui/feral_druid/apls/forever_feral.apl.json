@@ -7,6 +7,55 @@
       }
     },
     {
+      "notes": "Rotation-accuracy program finding (2026-09-28): below level 20 a feral druid has no Cat Form yet (spellconst: Cat Form, spell 768, learn level 20) and Bear Form's own damage kit is not modeled in this engine (Maul lives in the underscore-prefixed, excluded sim/druid/_maul.go), so the only real option for a leveling feral before 20 is the same baseline caster kit every druid has -- Moonfire kept ticking, matching balance's own upkeep line. Previously this rotation named nothing here at all, leaving the level-10 ladder rung at auto-attack only (the level-10 golden's own 'learned but unused' list already flagged Moonfire and Wrath as learned and unused). Gated on `not spellIsKnown(Claw)`: Claw and Cat Form share the same learn level (20), so it doubles as a level check without a level primitive the APL language does not have, and correctly falls silent from 20 on once real Cat Form abilities take over. sim/druid/druid.go's RegisterFeralCatSpells did not register Moonfire/Wrath at all before this fix (feral's spec entry called only the Cat-form kit) -- fixed there too, adding the same registerMoonfireSpell()/registerWrathSpell() calls RegisterBalanceSpells already makes, self-gated by their own per-rank learn levels exactly like Claw and Shred. The engine auto-unshifts a Cat-Form character to cast a Humanoid-only spell (druid.go's RegisterSpell ModifyCast, existing behavior, not changed here) and there is nothing below level 20 to shift back INTO Cat Form for, so the character settles into Humanoid form for the rest of a sub-20 fight after this cast -- correct for a character who cannot yet be in Cat Form at all. A residual, deliberately unfixed inaccuracy: NewFeralDruid still hardcodes StartingForm to Cat regardless of level (an existing engine simplification, out of this fix's scope), so the very first GCD or so of a sub-20 iteration still auto-attacks with the Cat Form claw weapon before this line's first cast unshifts it -- a few seconds out of a multi-minute ladder run, not touched here to keep this fix to the rotation-accuracy program's own scope.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "spellIsKnown": { "spellId": { "spellId": 9850, "rank": 5 } }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": { "spellId": { "spellId": 9835, "rank": 10 } }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9835,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
+      "notes": "Wrath as the pre-Cat-Form filler once Moonfire is already ticking; see the Moonfire line above for the full diagnosis. Gated the same way, `not spellIsKnown(Claw)`.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "spellIsKnown": { "spellId": { "spellId": 9850, "rank": 5 } }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9912,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
       "notes": "Tiger's Fury on cooldown for the free energy; it costs nothing and the engine gates it on its own 30 second cooldown.",
       "action": {
         "castSpell": {
@@ -147,8 +196,20 @@
       }
     },
     {
-      "notes": "Claw is a fallback builder below level 22, before Shred is learned (druid.md audit finding 2). Shred (learn level 22) is dropped by rewriteRotationRanks below that level, leaving nothing castable at 20-21 without this line. The audit's own recommendation named spellranks.json's rank-1 id (1082, learn level 20); investigating that with the scratch test at level 20 found it does NOT actually cast under this engine build. sim/druid/claw.go's registerClawSpell() registers ONE spell with a hardcoded ActionID{SpellID: 9850} -- spellranks.json's own rank-5/level-58 Claw id -- called unconditionally with no per-rank loop at all, unlike sim/druid/shred.go (shredSpellID[rank]) and sim/druid/rake.go (rakeRank.id) in the same package, which both register one spell per rank the way the rank-rewrite system expects. request.go's rotation() only calls rewriteRotationRanks below api.MaxLevel ('the rotation was authored for exactly the ranks it already carries' at 60, so the rewrite is skipped there) -- every OTHER entry in this file is written at its level-60 rank (Shred rank5/9830, Rake rank4/9904, ...) for exactly that reason, so this line is written the same way, at 9850/rank5, the id the engine actually registers, rather than at the audit's rank-1 id. That makes it fire correctly at level 60 (see cast tables) and, below level 58, rewriteRotationRanks's family-based lookup (any id belonging to a ranked spell resolves to the CURRENTLY LEARNED rank, regardless of which specific rank id the source names) still rewrites it down to 1082-9849, none of which the engine ever registers -- so the line remains genuinely inert for the level 20-21 window it exists for, an engine gap (Claw needs the same per-rank registration Shred and Rake already have), not something fixable from the rotation lane. Left in at 9850/rank5 since it is both the textually correct current-max reference and the id that already works at 60; it becomes real below level 58 too the moment claw.go is fixed to register one spell per rank the way Shred and Rake do. Flagged for the engine lane.",
+      "notes": "Claw is meant only as the fallback builder below level 22, before Shred is learned (druid.md audit finding 2) -- the earlier notes here (superseded) diagnosed sim/druid/claw.go's registerClawSpell as a single hardcoded-id registration with no per-rank loop, unlike Shred and Rake; re-checked against the pinned engine (rotation-accuracy program, 2026-09-28) and that has since been fixed -- registerClawSpell now does the same core.HighestRankAtLevel(clawLearnLevels, druid.Level) per-rank lookup Shred and Rake use, with a real clawSpellID[rank] table (1082/3029/5201/9849/9850 at levels 20/28/38/48/58), so Claw casts correctly at every level from 20 on, not just 20-21. That fix exposed a real rotation defect this line did not have before: with no upper gate, Claw kept competing with Shred at every level Shred is also known, and Claw's 45-energy cost (spellconst) undercuts Shred's 60 -- the ladder's own level-60 run (before this fix) showed Claw firing 26.5 times/iteration against Shred's 1.4, Claw winning the energy race almost every time it was available and starving the strictly stronger filler (Shred's 2.25x damage multiplier vs Claw's 1x) out of the rotation entirely. Gated on `not spellIsKnown(Shred)` the same way rogue-subtlety gates its Sinister Strike fallback on `not spellIsKnown(Hemorrhage)`: rewriteRotationRanks resolves the referenced Shred id to whichever rank is currently learned (or leaves it unrewritten and unresolvable below level 22, where Shred is not learned at all), so the gate reads correctly at every level without hardcoding a level check the APL language does not have.",
       "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "spellIsKnown": {
+                "spellId": {
+                  "spellId": 9830,
+                  "rank": 5
+                }
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 9850,
