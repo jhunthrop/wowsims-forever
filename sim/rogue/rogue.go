@@ -33,6 +33,7 @@ const (
 	SpellCode_RogueRupture
 	SpellCode_RogueSinisterStrike
 	SpellCode_RogueSliceandDice
+	SpellCode_RogueStealth
 	SpellCode_RogueVanish
 	SpellCode_RogueVenom
 )
@@ -67,6 +68,7 @@ type Rogue struct {
 	Preparation    *core.Spell
 	Premeditation  *core.Spell
 	ColdBlood      *core.Spell
+	Stealth        *core.Spell
 	Vanish         *core.Spell
 
 	Eviscerate   *core.Spell
@@ -141,6 +143,7 @@ func (rogue *Rogue) Initialize() {
 
 	// Stealth
 	rogue.registerStealthAura()
+	rogue.registerStealthSpell()
 	rogue.registerVanishSpell()
 }
 
