@@ -499,3 +499,47 @@ func TestExplosiveTrapInstantDamageMatchesSpellconst(t *testing.T) {
 		}
 	}
 }
+
+// TestFreezingTrapActionIDsMatchSpellconst guards freezing_trap.go
+// against regressing to the old fake id 409510 (absent from
+// spellconst/hunter.json, so an unresolved_id violation against the
+// rotation ladder) and its 15s cooldown. The real ids, mana cost and
+// required level below are spellconst/hunter.json's own spells table
+// entries for Freezing Trap ranks 1-3 (1499/14310/14311); the
+// cooldown is the shared "Traps" category cooldown of 30s, matching
+// Immolation/Explosive Trap's own fix, not the stale duplicate rank-3
+// entry 27753 (different family_mask, 15000ms category_cooldown_ms).
+func TestFreezingTrapActionIDsMatchSpellconst(t *testing.T) {
+	_, built, _ := newBareHunterAtLevel(t, 60)
+	timer := built.NewTimer()
+
+	const oldSpellID = int32(409510)
+	cases := []struct {
+		rank     int
+		spellID  int32
+		manaCost float64
+		level    int
+	}{
+		{1, 1499, 50, 20},
+		{2, 14310, 75, 40},
+		{3, 14311, 100, 60},
+	}
+	for _, c := range cases {
+		config := built.getFreezingTrapConfig(c.rank, timer)
+		if got := config.ActionID.SpellID; got != c.spellID {
+			t.Errorf("Freezing Trap rank %d spell ID = %d, want %d (not the old client-absent %d)", c.rank, got, c.spellID, oldSpellID)
+		}
+		if got := config.ManaCost.FlatCost; got != c.manaCost {
+			t.Errorf("Freezing Trap rank %d mana cost = %.0f, want %.0f", c.rank, got, c.manaCost)
+		}
+		if got := config.RequiredLevel; got != c.level {
+			t.Errorf("Freezing Trap rank %d required level = %d, want %d", c.rank, got, c.level)
+		}
+		if got, want := config.Cast.CD.Duration, 30*time.Second; got != want {
+			t.Errorf("Freezing Trap rank %d cooldown = %v, want %v (spellconst category_cooldown_ms 30000, shared Traps timer)", c.rank, got, want)
+		}
+		if config.Cast.CD.Timer != timer {
+			t.Errorf("Freezing Trap rank %d does not share the Traps timer with Immolation/Explosive Trap", c.rank)
+		}
+	}
+}
