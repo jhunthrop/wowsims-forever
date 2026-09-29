@@ -27,6 +27,7 @@ const (
 	SpellCode_DruidInsectSwarm
 	SpellCode_DruidMoonfire
 	SpellCode_DruidRake
+	SpellCode_DruidRavage
 	SpellCode_DruidRip
 	SpellCode_DruidShred
 	SpellCode_DruidStarfire
@@ -64,8 +65,10 @@ type Druid struct {
 	Maul                 *DruidSpell
 	MaulQueueSpell       *DruidSpell
 	Moonfire             []*DruidSpell
+	Prowl                *DruidSpell
 	Rebirth              *DruidSpell
 	Rake                 *DruidSpell
+	Ravage               *DruidSpell
 	Rip                  *DruidSpell
 	Shred                *DruidSpell
 	Claw                 *DruidSpell
@@ -93,6 +96,7 @@ type Druid struct {
 	MoonkinFormAura          *core.Aura
 	NaturesGraceProcAura     *core.Aura
 	PredatoryInstinctsAura   *core.Aura
+	ProwlAura                *core.Aura
 	TigersFuryAura           *core.Aura
 
 	BleedCategories core.ExclusiveCategoryArray
@@ -184,7 +188,10 @@ func (druid *Druid) RegisterFeralCatSpells() {
 	druid.registerFerociousBiteSpell()
 	// druid.registerMangleBearSpell()
 	// druid.registerMaulSpell()
+	druid.registerProwlAura()
+	druid.registerProwlSpell()
 	druid.registerRakeSpell()
+	druid.registerRavageSpell()
 	druid.registerRipSpell()
 	druid.registerShredSpell()
 	druid.registerClawSpell()
@@ -216,6 +223,21 @@ func (druid *Druid) RegisterFeralTankSpells() {
 	// druid.registerRakeSpell()
 	// druid.registerRipSpell()
 	// druid.registerSwipeBearSpell()
+}
+
+// BreakProwl deactivates Prowl if it is active. This must be called from
+// every Cat Form ability whose damage would alert the target (mirrors
+// sim/rogue/rogue.go's BreakStealth).
+func (druid *Druid) BreakProwl(sim *core.Simulation) {
+	if druid.ProwlAura.IsActive() {
+		druid.ProwlAura.Deactivate(sim)
+	}
+}
+
+// IsProwling reports whether the druid is considered Prowling for the
+// purpose of casting abilities that require it (e.g. Ravage).
+func (druid *Druid) IsProwling() bool {
+	return druid.ProwlAura.IsActive()
 }
 
 func (druid *Druid) Reset(_ *core.Simulation) {

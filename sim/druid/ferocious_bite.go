@@ -117,6 +117,8 @@ func (druid *Druid) newFerociousBiteSpellConfig(rank FerociousBiteRankInfo) core
 		BonusCoefficient:         1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			druid.BreakProwl(sim)
+
 			comboPoints := float64(druid.ComboPoints())
 			attackPower := spell.MeleeAttackPower(target)
 			excessEnergy := druid.CurrentEnergy()
