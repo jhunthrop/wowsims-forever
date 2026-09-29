@@ -197,7 +197,17 @@ var Presets = []Preset{
 		// times (33s) in the conformance report instead of the client's
 		// real ranks-of-2 ceiling of 8 ticks (24s); capped to 2, the
 		// max a character can actually have.
-		Talents: "0512301302--5002204103501251",
+		//
+		// Discipline tree digit 2 (Wand Specialization, position 2,
+		// max_rank 2 in the same talents.json) was also "5" - the same
+		// stale-digit defect, just in the other tree. Nothing panicked
+		// on it before tonight because no engine code read
+		// Talents.WandSpecialization until sim/priest/shoot.go started
+		// wand-weaving casters; an out-of-range 5 indexes past the
+		// engine's [3]float64 rank table and panics every build,
+		// skipping every level for this preset. Capped to 2, the same
+		// fix as the Shadow tree digit above.
+		Talents: "0212301302--5002204103501251",
 		SpecOptions: &proto.Player_ShadowPriest{
 			ShadowPriest: &proto.ShadowPriest{
 				Options: &proto.ShadowPriest_Options{
