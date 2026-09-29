@@ -54,6 +54,13 @@
     {
       "notes": "Mind Flay fills every remaining global, including the rest of the execute fallback above.",
       "action": { "castSpell": { "spellId": { "spellId": 18807, "rank": 6 } } }
+    },
+    {
+      "notes": "Shoot (5019, core.RegisterShootSpell) is the wand-weaving fallback added by the rotation-accuracy program's caster-wand finding (2026-09-28): sim/priest never enabled a ranged auto attack or registered a Shoot action, so a leveling shadow priest's equipped wand dealt zero damage even though the ladder harness always equips one. Gated below 20 percent mana so it only fills globals Mind Flay could no longer afford; the engine multiplies its damage by the Wand Specialization talent's 13/25 percent bonus when taken.",
+      "action": {
+        "condition": { "cmp": { "op": "OpLt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "20%" } } } },
+        "castSpell": { "spellId": { "spellId": 5019 } }
+      }
     }
   ]
 }

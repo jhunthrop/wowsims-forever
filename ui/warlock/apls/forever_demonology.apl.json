@@ -38,6 +38,13 @@
     {
       "notes": "Shadow Bolt is the default filler and what feeds Decimation's proc.",
       "action": { "castSpell": { "spellId": { "spellId": 25307, "rank": 10 } } }
+    },
+    {
+      "notes": "Shoot (5019, core.RegisterShootSpell) is the wand-weaving fallback added by the rotation-accuracy program's caster-wand finding (2026-09-28): sim/warlock never enabled a ranged auto attack or registered a Shoot action, so a leveling warlock's equipped wand dealt zero damage even though the ladder harness always equips one. Placed beneath Life Tap's own 10 percent gate above and gated below 20 percent mana itself, so Life Tap keeps first claim on refueling mana with health and Shoot only fills the band above that where Shadow Bolt is no longer affordable. Warlocks have no Wand Specialization equivalent, so this casts at the wand's plain damage.",
+      "action": {
+        "condition": { "cmp": { "op": "OpLt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "20%" } } } },
+        "castSpell": { "spellId": { "spellId": 5019 } }
+      }
     }
   ]
 }

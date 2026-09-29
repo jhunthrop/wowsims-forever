@@ -56,6 +56,13 @@
     {
       "notes": "Fireball is the primary filler once Improved Scorch's debuff is up.",
       "action": { "castSpell": { "spellId": { "spellId": 25306, "rank": 12 } } }
+    },
+    {
+      "notes": "Shoot (5019, core.RegisterShootSpell) is the wand-weaving fallback added by the rotation-accuracy program's caster-wand finding (2026-09-28): sim/mage never enabled a ranged auto attack or registered a Shoot action, so a leveling Fire mage's equipped wand dealt zero damage even though the ladder harness always equips one. Gated below 20 percent mana so it only fills globals Fireball could no longer afford; the engine multiplies its damage by the Wand Specialization talent's 13/25 percent bonus when taken.",
+      "action": {
+        "condition": { "cmp": { "op": "OpLt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "20%" } } } },
+        "castSpell": { "spellId": { "spellId": 5019 } }
+      }
     }
   ]
 }
