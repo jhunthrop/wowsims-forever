@@ -8,9 +8,15 @@ import (
 
 const SearingPainRanks = 6
 
+// baseDamage was the classic tooltip roll (rank 6 {208, 244}) until
+// the rotation-accuracy audit compared it against spellconst/
+// warlock.json's own per-rank flat "amount" (rank 6, 17923, amount 114,
+// sp_coefficient 0.429 unchanged) - see shadowbolt.go's comment for
+// the corroborating wowhead check and the same halving across the
+// rest of the kit.
 func (warlock *Warlock) getSearingPainBaseConfig(rank int) core.SpellConfig {
 	spellCoeff := [SearingPainRanks + 1]float64{0, .396, .429, .429, .429, .429, .429}[rank]
-	baseDamage := [SearingPainRanks + 1][]float64{{0}, {38, 47}, {65, 77}, {93, 112}, {131, 155}, {168, 199}, {208, 244}}[rank]
+	baseDamage := [SearingPainRanks + 1]float64{0, 23, 33, 44, 62, 85, 114}[rank]
 	spellId := [SearingPainRanks + 1]int32{0, 5676, 17919, 17920, 17921, 17922, 17923}[rank]
 	manaCost := [SearingPainRanks + 1]float64{0, 45, 68, 91, 118, 141, 168}[rank]
 	// Rank 3 (17920) is learned at level 34 in the client's own data
@@ -49,8 +55,7 @@ func (warlock *Warlock) getSearingPainBaseConfig(rank int) core.SpellConfig {
 			// damage against a target below 35% health.
 			oldMultiplier := spell.DamageMultiplier
 			spell.DamageMultiplier *= warlock.decimationDamageMultiplier(target)
-			damage := sim.Roll(baseDamage[0], baseDamage[1])
-			spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMagicHitAndCrit)
+			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 			spell.DamageMultiplier = oldMultiplier
 		},
 	}

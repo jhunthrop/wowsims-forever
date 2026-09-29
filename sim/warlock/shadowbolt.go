@@ -8,9 +8,21 @@ import (
 
 const ShadowBoltRanks = 10
 
+// baseDamage was the classic tooltip roll (e.g. rank 10 {482, 538})
+// until the rotation-accuracy audit compared it against spellconst/
+// warlock.json's own per-rank "amount": every rank here is a single
+// flat scalar (rank 10 amount 268, sp_coefficient 0.857 - unchanged),
+// roughly half the classic roll's average, and corroborated by
+// wowhead's Forever page for 25307 showing a single "Value: 269 (SP
+// mod: 0.857)" with no min-max tooltip at all. The same halving shows
+// up across every other warlock nuke that still carried a classic
+// roll (Searing Pain, Soul Fire, Shadowburn, Conflagrate's classic
+// ranks, Imp's Firebolt) and the DoTs (Corruption, Bane of Agony,
+// Immolate) - Forever's client states a single number here the same
+// way it does for Wrack and Incinerate, and the client wins.
 func (warlock *Warlock) getShadowBoltBaseConfig(rank int) core.SpellConfig {
 	spellCoeff := [ShadowBoltRanks + 1]float64{0, .14, .299, .56, .857, .857, .857, .857, .857, .857, .857}[rank]
-	baseDamage := [ShadowBoltRanks + 1][]float64{{0}, {13, 18}, {26, 32}, {52, 61}, {92, 104}, {150, 170}, {213, 240}, {292, 327}, {373, 415}, {455, 507}, {482, 538}}[rank]
+	baseDamage := [ShadowBoltRanks + 1]float64{0, 13, 25, 41, 56, 78, 101, 141, 191, 251, 268}[rank]
 	spellId := [ShadowBoltRanks + 1]int32{0, 686, 695, 705, 1088, 1106, 7641, 11659, 11660, 11661, 25307}[rank]
 	manaCost := [ShadowBoltRanks + 1]float64{0, 25, 40, 70, 110, 160, 210, 265, 315, 370, 380}[rank]
 	level := [ShadowBoltRanks + 1]int{0, 1, 6, 12, 20, 28, 36, 44, 52, 60, 60}[rank]
@@ -45,7 +57,7 @@ func (warlock *Warlock) getShadowBoltBaseConfig(rank int) core.SpellConfig {
 			// damage against a target below 35% health.
 			oldMultiplier := spell.DamageMultiplier
 			spell.DamageMultiplier *= warlock.decimationDamageMultiplier(target)
-			result := spell.CalcDamage(sim, target, sim.Roll(baseDamage[0], baseDamage[1]), spell.OutcomeMagicHitAndCrit)
+			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 			spell.DamageMultiplier = oldMultiplier
 			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
 				spell.DealDamage(sim, result)

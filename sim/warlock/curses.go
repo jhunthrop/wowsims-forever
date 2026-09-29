@@ -17,7 +17,13 @@ func (warlock *Warlock) getCurseOfAgonyBaseConfig(rank int) core.SpellConfig {
 	spellCoeff := [CurseOfAgonyRanks + 1]float64{0, .046, .077, .083, .083, .083, .083}[rank]
 	// FOREVER: Improved Curse of Agony is not in the client's trees.
 	// baseDamage := [CurseOfAgonyRanks + 1]float64{0, 7, 15, 27, 42, 65, 87}[rank] * (1 + .03*float64(warlock.Talents.ImprovedCurseOfAgony))
-	baseDamage := [CurseOfAgonyRanks + 1]float64{0, 7, 15, 27, 42, 65, 87}[rank]
+	// baseDamage (the steady-state per-tick value the ramp below scales
+	// around) was the classic tooltip's per-tick value until the
+	// rotation-accuracy audit compared it against spellconst/
+	// warlock.json's own per-rank flat per-tick "amount" (rank 6,
+	// 11713, amount 46, period_ms 2000 unchanged) - the same halving
+	// shadowbolt.go's comment documents across the rest of the kit.
+	baseDamage := [CurseOfAgonyRanks + 1]float64{0, 6, 10, 14, 21, 33, 46}[rank]
 	manaCost := [CurseOfAgonyRanks + 1]float64{0, 25, 50, 90, 130, 170, 215}[rank]
 	level := [CurseOfAgonyRanks + 1]int{0, 8, 18, 28, 38, 48, 58}[rank]
 

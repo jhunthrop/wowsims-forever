@@ -7,26 +7,26 @@ import (
 )
 
 // ConflagrateRanks was 4 (the client's ranks 3-6, all classic ids,
-// their baseDamage a known Classic tooltip roll rather than this
-// pipeline's flat spellconst "amount" - Conflagrate's real mechanic
-// consumes a percentage of the target's remaining Immolate damage, a
-// server-scripted behavior this package does not model at all, so its
-// flat roll was already a "keep Classic's known behavior" stand-in
-// before this comment). spellranks.json's own "Conflagrate" chain
-// (build 1.60.1.70009) carries two MORE ranks below that: 1293817
-// (rank 1, level 25) and 1293818 (rank 2, level 32) - Forever ids with
-// no Classic precedent, so there is no known tooltip roll to fall back
-// on for them. Registered here as a flat (non-rolled) base damage
-// taken directly from spellconst/warlock.json's own "amount" (95 and
-// 122), the same convention sim/warlock/incinerate.go uses for a
-// Forever-original ability with a single scalar effect - until a
-// Forever combat log gives a real min/max to replace it with.
+// their baseDamage a known Classic tooltip roll {249,316}/{319,400}/
+// {395,491}/{447,557} - Conflagrate's real mechanic consumes a
+// percentage of the target's remaining Immolate damage, a
+// server-scripted behavior this package does not model at all).
+// Rotation-accuracy audit: spellconst/warlock.json's own "amount" for
+// 17962/18930/18931/18932 is a single flat 146/194/239/282 (rank 6,
+// 18932, corroborated by wowhead's Forever page showing a single
+// "Value: 283" with no min-max tooltip), not that classic roll's
+// ~280-500 average - the same halving shadowbolt.go's comment
+// documents across the rest of the kit. spellranks.json's own
+// "Conflagrate" chain (build 1.60.1.70009) carries two MORE ranks
+// below that: 1293817 (rank 1, level 25) and 1293818 (rank 2, level
+// 32) - Forever ids with no Classic precedent, registered flat from
+// spellconst's "amount" (95 and 122) since day one. All six ranks are
+// now the same flat-amount convention sim/warlock/incinerate.go uses.
 const ConflagrateRanks = 6
 
 func (warlock *Warlock) getConflagrateConfig(rank int) core.SpellConfig {
 	spellId := [ConflagrateRanks + 1]int32{0, 1293817, 1293818, 17962, 18930, 18931, 18932}[rank]
-	baseDamageMin := [ConflagrateRanks + 1]float64{0, 95, 122, 249, 319, 395, 447}[rank]
-	baseDamageMax := [ConflagrateRanks + 1]float64{0, 95, 122, 316, 400, 491, 557}[rank]
+	baseDamage := [ConflagrateRanks + 1]float64{0, 95, 122, 146, 194, 239, 282}[rank]
 	manaCost := [ConflagrateRanks + 1]float64{0, 100, 130, 165, 200, 230, 255}[rank]
 	// Ranks 3-6 here are the client's ranks 3-6 (17962/18930/18931/18932);
 	// rank 3 is learned at level 40 in the client's own data
@@ -66,8 +66,6 @@ func (warlock *Warlock) getConflagrateConfig(rank int) core.SpellConfig {
 		BonusCoefficient: spCoeff,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := sim.Roll(baseDamageMin, baseDamageMax)
-
 			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 
 			immoSpell := warlock.getActiveImmolateSpell(target)
