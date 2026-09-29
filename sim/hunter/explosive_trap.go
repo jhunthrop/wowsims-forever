@@ -9,10 +9,25 @@ import (
 )
 
 func (hunter *Hunter) getExplosiveTrapConfig(rank int, timer *core.Timer) core.SpellConfig {
-	spellId := [4]int32{0, 409532, 409534, 409535}[rank]
+	// Ids, mana cost and level match spellconst/hunter.json's own
+	// spells table exactly (13813/14316/14317; the old
+	// 409532/409534/409535 ids do not exist in the client at all). The
+	// cast spell's own effect 104 (trigger spell) points at a
+	// server-side script spell (164839/164879/164880) with no entry
+	// anywhere in spellconst, but the actual damage lives in a
+	// separate, real "Explosive Trap Effect" spell per rank
+	// (13812/14314/14315, spell_level matching): effect index 0 is a
+	// flat, non-random instant hit (effect 2, sp/ap coefficient both
+	// 0) of 115/163/229, and effect index 1 is the 10-tick, 2s-period
+	// AoE dot of 15/24/33 per tick - both corroborated on Wowhead's
+	// Forever pages (spell=13812/14315: "School Damage ... Value: 116"
+	// / "230", "16 every 2 seconds" / "34 every 2 seconds"). The old
+	// code rolled a min/max range (104-135/145-193/208-265) that
+	// approximated but never matched this flat value; instantDamage
+	// below replaces it.
+	spellId := [4]int32{0, 13813, 14316, 14317}[rank]
 	dotDamage := [4]float64{0, 15, 24, 33}[rank]
-	minDamage := [4]float64{0, 104, 145, 208}[rank]
-	maxDamage := [4]float64{0, 135, 193, 265}[rank]
+	instantDamage := [4]float64{0, 115, 163, 229}[rank]
 	manaCost := [4]float64{0, 275, 395, 520}[rank]
 	level := [4]int{0, 34, 44, 54}[rank]
 
@@ -32,8 +47,12 @@ func (hunter *Hunter) getExplosiveTrapConfig(rank int, timer *core.Timer) core.S
 		},
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
-				Timer:    timer,
-				Duration: time.Second * 15,
+				Timer: timer,
+				// spellconst's category_cooldown_ms is 30000 for every
+				// rank (confirmed on Wowhead's Forever pages: "Cooldown:
+				// 30 seconds"), not the old 15s - this is the shared
+				// "Traps" category cooldown, not a per-rank value.
+				Duration: time.Second * 30,
 			},
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,
@@ -82,8 +101,7 @@ func (hunter *Hunter) getExplosiveTrapConfig(rank int, timer *core.Timer) core.S
 				spellHit := spell.Unit.GetStat(stats.Hit) + target.PseudoStats.BonusSpellHitRatingTaken
 				spell.Unit.AddStatDynamic(sim, stats.Hit, spellHit*-1)
 				for hitIndex := 0; hitIndex < numHits; hitIndex++ {
-					baseDamage := sim.Roll(minDamage, maxDamage)
-					baseDamage *= sim.Encounter.AOECapMultiplier()
+					baseDamage := instantDamage * sim.Encounter.AOECapMultiplier()
 					spell.CalcAndDealDamage(sim, curTarget, baseDamage, spell.OutcomeMagicHitAndCrit)
 					curTarget = sim.Environment.NextTargetUnit(curTarget)
 				}
