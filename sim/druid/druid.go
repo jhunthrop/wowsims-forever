@@ -190,6 +190,17 @@ func (druid *Druid) RegisterFeralCatSpells() {
 	druid.registerClawSpell()
 	// druid.registerSwipeBearSpell()
 	druid.registerTigersFurySpell()
+	// Cat Form is not learned until level 20 (spellconst: spell 768) and
+	// Bear Form's own damage kit is not modeled in this package (Maul
+	// lives in the excluded sim/druid/_maul.go), so a leveling feral
+	// druid below 20 has nothing else to cast; register the same
+	// baseline caster kit RegisterBalanceSpells does. Both self-gate by
+	// their own per-rank learn level exactly like the Cat-form spells
+	// above, and RegisterSpell's existing Humanoid-form auto-unshift
+	// (this file, above) lets them fire even while StartingForm still
+	// defaults a feral character into Cat Form at every level.
+	druid.registerMoonfireSpell()
+	druid.registerWrathSpell()
 }
 
 // TODO: Classic feral tank
