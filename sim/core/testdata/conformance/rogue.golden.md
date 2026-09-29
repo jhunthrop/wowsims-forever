@@ -6,13 +6,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 
 ## Skipped (could not build)
 
-- CombatDaggersRogue/L10: panic building CombatDaggersRogue at level 10: runtime error: invalid memory address or nil pointer dereference
-- CombatDaggersRogue/L20: panic building CombatDaggersRogue at level 20: runtime error: invalid memory address or nil pointer dereference
-- CombatDaggersRogue/L30: panic building CombatDaggersRogue at level 30: runtime error: invalid memory address or nil pointer dereference
-- CombatDaggersRogue/L38: panic building CombatDaggersRogue at level 38: runtime error: invalid memory address or nil pointer dereference
-- CombatDaggersRogue/L40: panic building CombatDaggersRogue at level 40: runtime error: invalid memory address or nil pointer dereference
-- CombatDaggersRogue/L50: panic building CombatDaggersRogue at level 50: runtime error: invalid memory address or nil pointer dereference
-- CombatDaggersRogue/L60: panic building CombatDaggersRogue at level 60: runtime error: invalid memory address or nil pointer dereference
 - CombatSwordsRogue/L10: panic building CombatSwordsRogue at level 10: runtime error: index out of range [5] with length 3
 - CombatSwordsRogue/L20: panic building CombatSwordsRogue at level 20: runtime error: index out of range [5] with length 3
 - CombatSwordsRogue/L30: panic building CombatSwordsRogue at level 30: runtime error: index out of range [5] with length 3
@@ -25,3 +18,69 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| CombatDaggersRogue | 10 | Backstab | 0 | 53 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 4→0 | n/a | mismatch | required_level 4->0 |
+| CombatDaggersRogue | 10 | Eviscerate | 0 | 6760 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 8→0 | n/a | mismatch | required_level 8->0 |
+| CombatDaggersRogue | 10 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→0 | n/a | mismatch | required_level 16->0 |
+| CombatDaggersRogue | 10 | Sinister Strike | 0 | 1757 | 45.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 6→0 | n/a | mismatch | cost 45.00->40.00; required_level 6->0 |
+| CombatDaggersRogue | 10 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→0 | 6000→0 | mismatch | required_level 10->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 10 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
+| CombatDaggersRogue | 20 | Ambush | 0 | 8676 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 18→0 | n/a | mismatch | required_level 18->0 |
+| CombatDaggersRogue | 20 | Backstab | 0 | 2590 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→0 | n/a | mismatch | required_level 20->0 |
+| CombatDaggersRogue | 20 | Eviscerate | 0 | 6761 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 16→0 | n/a | mismatch | required_level 16->0 |
+| CombatDaggersRogue | 20 | Expose Armor | 0 | 8647 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→0 | 30000→0 | mismatch | required_level 14->0; duration_ms 30000->0 |
+| CombatDaggersRogue | 20 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→0 | n/a | mismatch | required_level 16->0 |
+| CombatDaggersRogue | 20 | Garrote | 0 | 703 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→0 | 18000→18000 | mismatch | required_level 14->0 |
+| CombatDaggersRogue | 20 | Rupture | 0 | 1943 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→0 | 6000→0 | mismatch | required_level 20->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 20 | Sinister Strike | 0 | 1758 | 45.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→0 | n/a | mismatch | cost 45.00->40.00; required_level 14->0 |
+| CombatDaggersRogue | 20 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→0 | 6000→0 | mismatch | required_level 10->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 20 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
+| CombatDaggersRogue | 30 | Ambush | 0 | 8724 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 26→0 | n/a | mismatch | required_level 26->0 |
+| CombatDaggersRogue | 30 | Backstab | 0 | 2591 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→0 | n/a | mismatch | required_level 28->0 |
+| CombatDaggersRogue | 30 | Eviscerate | 0 | 6762 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 24→0 | n/a | mismatch | required_level 24->0 |
+| CombatDaggersRogue | 30 | Expose Armor | 0 | 8649 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 26→0 | 30000→0 | mismatch | required_level 26->0; duration_ms 30000->0 |
+| CombatDaggersRogue | 30 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→0 | n/a | mismatch | required_level 16->0 |
+| CombatDaggersRogue | 30 | Garrote | 0 | 8632 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→0 | 18000→18000 | mismatch | required_level 30->0 |
+| CombatDaggersRogue | 30 | Rupture | 0 | 8639 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→0 | 6000→0 | mismatch | required_level 28->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 30 | Sinister Strike | 0 | 1760 | 45.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→0 | n/a | mismatch | cost 45.00->40.00; required_level 30->0 |
+| CombatDaggersRogue | 30 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→0 | 6000→0 | mismatch | required_level 10->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 30 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
+| CombatDaggersRogue | 38 | Ambush | 0 | 8725 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→0 | n/a | mismatch | required_level 34->0 |
+| CombatDaggersRogue | 38 | Backstab | 0 | 8721 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | n/a | mismatch | required_level 36->0 |
+| CombatDaggersRogue | 38 | Eviscerate | 0 | 8623 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→0 | n/a | mismatch | required_level 32->0 |
+| CombatDaggersRogue | 38 | Expose Armor | 0 | 8650 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 30000→0 | mismatch | required_level 36->0; duration_ms 30000->0 |
+| CombatDaggersRogue | 38 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→0 | n/a | mismatch | required_level 16->0 |
+| CombatDaggersRogue | 38 | Garrote | 0 | 8633 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | 18000→18000 | mismatch | required_level 38->0 |
+| CombatDaggersRogue | 38 | Rupture | 0 | 8640 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 6000→0 | mismatch | required_level 36->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 38 | Sinister Strike | 0 | 8621 | 45.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | cost 45.00->40.00; required_level 38->0 |
+| CombatDaggersRogue | 38 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→0 | 6000→0 | mismatch | required_level 10->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 38 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
+| CombatDaggersRogue | 40 | Ambush | 0 | 8725 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→0 | n/a | mismatch | required_level 34->0 |
+| CombatDaggersRogue | 40 | Backstab | 0 | 8721 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | n/a | mismatch | required_level 36->0 |
+| CombatDaggersRogue | 40 | Eviscerate | 0 | 8624 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 40→0 | n/a | mismatch | required_level 40->0 |
+| CombatDaggersRogue | 40 | Expose Armor | 0 | 8650 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 30000→0 | mismatch | required_level 36->0; duration_ms 30000->0 |
+| CombatDaggersRogue | 40 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→0 | n/a | mismatch | required_level 16->0 |
+| CombatDaggersRogue | 40 | Garrote | 0 | 8633 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | 18000→18000 | mismatch | required_level 38->0 |
+| CombatDaggersRogue | 40 | Rupture | 0 | 8640 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 6000→0 | mismatch | required_level 36->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 40 | Sinister Strike | 0 | 8621 | 45.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | cost 45.00->40.00; required_level 38->0 |
+| CombatDaggersRogue | 40 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→0 | 6000→0 | mismatch | required_level 10->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 40 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
+| CombatDaggersRogue | 50 | Ambush | 0 | 11268 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 50→0 | n/a | mismatch | required_level 50->0 |
+| CombatDaggersRogue | 50 | Backstab | 0 | 11279 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | n/a | mismatch | required_level 44->0 |
+| CombatDaggersRogue | 50 | Eviscerate | 0 | 11299 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 48→0 | n/a | mismatch | required_level 48->0 |
+| CombatDaggersRogue | 50 | Expose Armor | 0 | 11197 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→0 | 30000→0 | mismatch | required_level 46->0; duration_ms 30000->0 |
+| CombatDaggersRogue | 50 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→0 | n/a | mismatch | required_level 16->0 |
+| CombatDaggersRogue | 50 | Garrote | 0 | 11289 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→0 | 18000→18000 | mismatch | required_level 46->0 |
+| CombatDaggersRogue | 50 | Rupture | 0 | 11273 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 6000→0 | mismatch | required_level 44->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 50 | Sinister Strike | 0 | 11293 | 45.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→0 | n/a | mismatch | cost 45.00->40.00; required_level 46->0 |
+| CombatDaggersRogue | 50 | Slice and Dice | 0 | 6774 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 42→0 | 6000→0 | mismatch | required_level 42->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 50 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
+| CombatDaggersRogue | 60 | Ambush | 0 | 11269 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 58→0 | n/a | mismatch | required_level 58->0 |
+| CombatDaggersRogue | 60 | Backstab | 0 | 25300 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
+| CombatDaggersRogue | 60 | Eviscerate | 0 | 31016 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
+| CombatDaggersRogue | 60 | Expose Armor | 0 | 11198 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 56→0 | 30000→0 | mismatch | required_level 56->0; duration_ms 30000->0 |
+| CombatDaggersRogue | 60 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→0 | n/a | mismatch | required_level 16->0 |
+| CombatDaggersRogue | 60 | Garrote | 0 | 11290 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | 18000→18000 | mismatch | required_level 54->0 |
+| CombatDaggersRogue | 60 | Rupture | 0 | 11275 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | 6000→0 | mismatch | required_level 60->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 60 | Sinister Strike | 0 | 11294 | 45.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | n/a | mismatch | cost 45.00->40.00; required_level 54->0 |
+| CombatDaggersRogue | 60 | Slice and Dice | 0 | 6774 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 42→0 | 6000→0 | mismatch | required_level 42->0; duration_ms 6000->0 |
+| CombatDaggersRogue | 60 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |

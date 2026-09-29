@@ -38,7 +38,21 @@ func clientPath(classSlug string) string {
 }
 
 // sortRows orders a class's rows for a deterministic golden: spec, then
-// level, then spell name, then rank.
+// level, then spell name, then rank, then spell ID. The spell ID is the
+// final tiebreaker rather than an afterthought: several spec/level
+// pairs genuinely register more than one spell sharing a name and rank
+// (e.g. every Judgement seal-variant reads as "Judgement of X" rank 0,
+// and Arcane Missiles rank 1 has eight distinct tick-count ranks all
+// named identically) -- distinct rows the seen-map in collectRows never
+// collapses, since it keys on spell ID. Without a final tiebreaker,
+// sort.Slice (an unstable pdqsort) leaves those rows' relative order
+// resting on sort-internal pivot choices rather than any field the
+// comparator actually looked at; that direction can flip across Go
+// versions or once anything upstream changes the rows' pre-sort order,
+// which is the "randomly reports stale" failure mode this fixes. Since
+// collectRows' seen-map already guarantees spell ID is unique within a
+// tied (spec, level, name, rank) group, it is always a valid total-order
+// tiebreaker.
 func sortRows(rows []Row) {
 	sort.Slice(rows, func(i, j int) bool {
 		a, b := rows[i], rows[j]
@@ -51,7 +65,10 @@ func sortRows(rows []Row) {
 		if a.SpellName != b.SpellName {
 			return a.SpellName < b.SpellName
 		}
-		return a.Rank < b.Rank
+		if a.Rank != b.Rank {
+			return a.Rank < b.Rank
+		}
+		return a.SpellID < b.SpellID
 	})
 }
 

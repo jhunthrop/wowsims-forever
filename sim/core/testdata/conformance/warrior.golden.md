@@ -8,7 +8,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| FuryWarrior | 10 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→0 | 180000→0 | mismatch | required_level 60->0; duration_ms 180000->0 |
+| FuryWarrior | 10 | Battle Shout | 0 | 6673 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 1→0 | 180000→0 | mismatch | required_level 1->0; duration_ms 180000->0 |
 | FuryWarrior | 10 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | FuryWarrior | 10 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | FuryWarrior | 10 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→0 | n/a | mismatch | required_level 10->0 |
@@ -19,8 +19,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 10 | Demoralizing Shout | 0 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→0 | 45000→0 | mismatch | required_level 54->0; duration_ms 45000->0 |
 | FuryWarrior | 10 | Execute | 0 | 20647 | 0.10→0.10 | rage→rage | 0→0 | 0→0 | 0→1500 | 1→1 | n/a | mismatch | gcd_ms 0->1500 |
 | FuryWarrior | 10 | Hamstring | 1 | 7373 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→8 | 15000→0 | mismatch | required_level 54->8; duration_ms 15000->0 |
-| FuryWarrior | 10 | Heroic Strike | 0 | 25286 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 60->0 |
-| FuryWarrior | 10 | Heroic Strike | 9 | 25286 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
+| FuryWarrior | 10 | Heroic Strike | 0 | 284 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 8→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 8->0 |
+| FuryWarrior | 10 | Heroic Strike | 2 | 284 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 8→8 | n/a | match |  |
 | FuryWarrior | 10 | Overpower | 0 | 24407 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 20→20 | n/a | mismatch | gcd_ms 0->1500 |
 | FuryWarrior | 10 | Piercing Howl | 0 | 12323 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 20→0 | 6000→0 | mismatch | required_level 20->0; duration_ms 6000->0 |
 | FuryWarrior | 10 | Pummel | 0 | 19639 | 0.00→0.00 | rage→none | 0→0 | 0→0 | 0→1500 | 20→20 | 5000→0 | mismatch | gcd_ms 0->1500; duration_ms 5000->0 |
@@ -30,7 +30,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 10 | Sunder Armor | 1 | 7386 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→0 | mismatch | duration_ms 30000->0 |
 | FuryWarrior | 10 | Thunder Clap | 1 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→6 | 30000→0 | mismatch | cooldown_ms 6000->4000; required_level 58->6; duration_ms 30000->0 |
 | FuryWarrior | 10 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |
-| FuryWarrior | 20 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→0 | 180000→0 | mismatch | required_level 60->0; duration_ms 180000->0 |
+| FuryWarrior | 20 | Battle Shout | 0 | 5242 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 12→0 | 180000→0 | mismatch | required_level 12->0; duration_ms 180000->0 |
 | FuryWarrior | 20 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | FuryWarrior | 20 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | FuryWarrior | 20 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→0 | n/a | mismatch | required_level 10->0 |
@@ -41,8 +41,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 20 | Demoralizing Shout | 0 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→0 | 45000→0 | mismatch | required_level 54->0; duration_ms 45000->0 |
 | FuryWarrior | 20 | Execute | 0 | 20647 | 0.10→0.10 | rage→rage | 0→0 | 0→0 | 0→1500 | 1→1 | n/a | mismatch | gcd_ms 0->1500 |
 | FuryWarrior | 20 | Hamstring | 1 | 7373 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→8 | 15000→0 | mismatch | required_level 54->8; duration_ms 15000->0 |
-| FuryWarrior | 20 | Heroic Strike | 0 | 25286 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 60->0 |
-| FuryWarrior | 20 | Heroic Strike | 9 | 25286 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
+| FuryWarrior | 20 | Heroic Strike | 0 | 285 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 16→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 16->0 |
+| FuryWarrior | 20 | Heroic Strike | 3 | 285 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 16→16 | n/a | match |  |
 | FuryWarrior | 20 | Overpower | 1 | 7384 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  |
 | FuryWarrior | 20 | Piercing Howl | 0 | 12323 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 20→0 | 6000→0 | mismatch | required_level 20->0; duration_ms 6000->0 |
 | FuryWarrior | 20 | Pummel | 0 | 19639 | 0.00→0.00 | rage→none | 0→0 | 0→0 | 0→1500 | 20→20 | 5000→0 | mismatch | gcd_ms 0->1500; duration_ms 5000->0 |
@@ -52,7 +52,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 20 | Sunder Armor | 1 | 7386 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→0 | mismatch | duration_ms 30000->0 |
 | FuryWarrior | 20 | Thunder Clap | 2 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→18 | 30000→0 | mismatch | cooldown_ms 6000->4000; required_level 58->18; duration_ms 30000->0 |
 | FuryWarrior | 20 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |
-| FuryWarrior | 30 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→0 | 180000→0 | mismatch | required_level 60->0; duration_ms 180000->0 |
+| FuryWarrior | 30 | Battle Shout | 0 | 6192 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→0 | 180000→0 | mismatch | required_level 22->0; duration_ms 180000->0 |
 | FuryWarrior | 30 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | FuryWarrior | 30 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | FuryWarrior | 30 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→0 | n/a | mismatch | required_level 10->0 |
@@ -63,8 +63,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 30 | Demoralizing Shout | 0 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→0 | 45000→0 | mismatch | required_level 54->0; duration_ms 45000->0 |
 | FuryWarrior | 30 | Execute | 1 | 5308 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 24→24 | n/a | match |  |
 | FuryWarrior | 30 | Hamstring | 1 | 7373 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→8 | 15000→0 | mismatch | required_level 54->8; duration_ms 15000->0 |
-| FuryWarrior | 30 | Heroic Strike | 0 | 25286 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 60->0 |
-| FuryWarrior | 30 | Heroic Strike | 9 | 25286 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
+| FuryWarrior | 30 | Heroic Strike | 0 | 1608 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 24→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 24->0 |
+| FuryWarrior | 30 | Heroic Strike | 4 | 1608 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 24→24 | n/a | match |  |
 | FuryWarrior | 30 | Overpower | 2 | 7887 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  |
 | FuryWarrior | 30 | Piercing Howl | 0 | 12323 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 20→0 | 6000→0 | mismatch | required_level 20->0; duration_ms 6000->0 |
 | FuryWarrior | 30 | Pummel | 0 | 19639 | 0.00→0.00 | rage→none | 0→0 | 0→0 | 0→1500 | 20→20 | 5000→0 | mismatch | gcd_ms 0->1500; duration_ms 5000->0 |
@@ -74,7 +74,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 30 | Sunder Armor | 2 | 7405 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→0 | mismatch | duration_ms 30000->0 |
 | FuryWarrior | 30 | Thunder Clap | 3 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→28 | 30000→0 | mismatch | cooldown_ms 6000->4000; required_level 58->28; duration_ms 30000->0 |
 | FuryWarrior | 30 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |
-| FuryWarrior | 38 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→0 | 180000→0 | mismatch | required_level 60->0; duration_ms 180000->0 |
+| FuryWarrior | 38 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→0 | 180000→0 | mismatch | required_level 32->0; duration_ms 180000->0 |
 | FuryWarrior | 38 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | FuryWarrior | 38 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→0 | 10000→0 | mismatch | required_level 32->0; duration_ms 10000->0 |
 | FuryWarrior | 38 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
@@ -86,8 +86,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 38 | Demoralizing Shout | 0 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→0 | 45000→0 | mismatch | required_level 54->0; duration_ms 45000->0 |
 | FuryWarrior | 38 | Execute | 2 | 20658 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | n/a | match |  |
 | FuryWarrior | 38 | Hamstring | 2 | 7373 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→32 | 15000→0 | mismatch | required_level 54->32; duration_ms 15000->0 |
-| FuryWarrior | 38 | Heroic Strike | 0 | 25286 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 60->0 |
-| FuryWarrior | 38 | Heroic Strike | 9 | 25286 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
+| FuryWarrior | 38 | Heroic Strike | 0 | 11564 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 32→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 32->0 |
+| FuryWarrior | 38 | Heroic Strike | 5 | 11564 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  |
 | FuryWarrior | 38 | Overpower | 2 | 7887 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  |
 | FuryWarrior | 38 | Piercing Howl | 0 | 12323 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 20→0 | 6000→0 | mismatch | required_level 20->0; duration_ms 6000->0 |
 | FuryWarrior | 38 | Pummel | 1 | 6552 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 38→38 | 4000→0 | mismatch | duration_ms 4000->0 |
@@ -97,7 +97,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 38 | Sunder Armor | 3 | 8380 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→0 | mismatch | duration_ms 30000->0 |
 | FuryWarrior | 38 | Thunder Clap | 4 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→38 | 30000→0 | mismatch | cooldown_ms 6000->4000; required_level 58->38; duration_ms 30000->0 |
 | FuryWarrior | 38 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |
-| FuryWarrior | 40 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→0 | 180000→0 | mismatch | required_level 60->0; duration_ms 180000->0 |
+| FuryWarrior | 40 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→0 | 180000→0 | mismatch | required_level 32->0; duration_ms 180000->0 |
 | FuryWarrior | 40 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | FuryWarrior | 40 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→0 | 10000→0 | mismatch | required_level 32->0; duration_ms 10000->0 |
 | FuryWarrior | 40 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
@@ -110,8 +110,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 40 | Demoralizing Shout | 0 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→0 | 45000→0 | mismatch | required_level 54->0; duration_ms 45000->0 |
 | FuryWarrior | 40 | Execute | 3 | 20660 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 40→40 | n/a | match |  |
 | FuryWarrior | 40 | Hamstring | 2 | 7373 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→32 | 15000→0 | mismatch | required_level 54->32; duration_ms 15000->0 |
-| FuryWarrior | 40 | Heroic Strike | 0 | 25286 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 60->0 |
-| FuryWarrior | 40 | Heroic Strike | 9 | 25286 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
+| FuryWarrior | 40 | Heroic Strike | 0 | 11565 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 40->0 |
+| FuryWarrior | 40 | Heroic Strike | 6 | 11565 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  |
 | FuryWarrior | 40 | Overpower | 2 | 7887 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  |
 | FuryWarrior | 40 | Piercing Howl | 0 | 12323 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 20→0 | 6000→0 | mismatch | required_level 20->0; duration_ms 6000->0 |
 | FuryWarrior | 40 | Pummel | 1 | 6552 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 38→38 | 4000→0 | mismatch | duration_ms 4000->0 |
@@ -121,7 +121,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 40 | Sunder Armor | 3 | 8380 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→0 | mismatch | duration_ms 30000->0 |
 | FuryWarrior | 40 | Thunder Clap | 4 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→38 | 30000→0 | mismatch | cooldown_ms 6000->4000; required_level 58->38; duration_ms 30000->0 |
 | FuryWarrior | 40 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |
-| FuryWarrior | 50 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→0 | 180000→0 | mismatch | required_level 60->0; duration_ms 180000->0 |
+| FuryWarrior | 50 | Battle Shout | 0 | 11550 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 42→0 | 180000→0 | mismatch | required_level 42->0; duration_ms 180000->0 |
 | FuryWarrior | 50 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | FuryWarrior | 50 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→0 | 10000→0 | mismatch | required_level 32->0; duration_ms 10000->0 |
 | FuryWarrior | 50 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
@@ -134,8 +134,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 50 | Demoralizing Shout | 0 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→0 | 45000→0 | mismatch | required_level 54->0; duration_ms 45000->0 |
 | FuryWarrior | 50 | Execute | 4 | 20661 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 48→48 | n/a | match |  |
 | FuryWarrior | 50 | Hamstring | 2 | 7373 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→32 | 15000→0 | mismatch | required_level 54->32; duration_ms 15000->0 |
-| FuryWarrior | 50 | Heroic Strike | 0 | 25286 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 60->0 |
-| FuryWarrior | 50 | Heroic Strike | 9 | 25286 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
+| FuryWarrior | 50 | Heroic Strike | 0 | 11566 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 48→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 48->0 |
+| FuryWarrior | 50 | Heroic Strike | 7 | 11566 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 48→48 | n/a | match |  |
 | FuryWarrior | 50 | Overpower | 3 | 11584 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  |
 | FuryWarrior | 50 | Piercing Howl | 0 | 12323 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 20→0 | 6000→0 | mismatch | required_level 20->0; duration_ms 6000->0 |
 | FuryWarrior | 50 | Pummel | 1 | 6552 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 38→38 | 4000→0 | mismatch | duration_ms 4000->0 |
@@ -171,7 +171,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 60 | Sunder Armor | 5 | 11597 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 58→58 | 30000→0 | mismatch | duration_ms 30000->0 |
 | FuryWarrior | 60 | Thunder Clap | 6 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→58 | 30000→0 | mismatch | cooldown_ms 6000->4000; duration_ms 30000->0 |
 | FuryWarrior | 60 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |
-| ProtectionWarrior | 10 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→0 | 180000→0 | mismatch | required_level 60->0; duration_ms 180000->0 |
+| ProtectionWarrior | 10 | Battle Shout | 0 | 6673 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 1→0 | 180000→0 | mismatch | required_level 1->0; duration_ms 180000->0 |
 | ProtectionWarrior | 10 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionWarrior | 10 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | ProtectionWarrior | 10 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→0 | n/a | mismatch | required_level 10->0 |
@@ -181,8 +181,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionWarrior | 10 | Demoralizing Shout | 0 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→0 | 45000→0 | mismatch | required_level 54->0; duration_ms 45000->0 |
 | ProtectionWarrior | 10 | Execute | 0 | 20647 | 0.10→0.10 | rage→rage | 0→0 | 0→0 | 0→1500 | 1→1 | n/a | mismatch | gcd_ms 0->1500 |
 | ProtectionWarrior | 10 | Hamstring | 1 | 7373 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→8 | 15000→0 | mismatch | required_level 54->8; duration_ms 15000->0 |
-| ProtectionWarrior | 10 | Heroic Strike | 0 | 25286 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 60->0 |
-| ProtectionWarrior | 10 | Heroic Strike | 9 | 25286 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
+| ProtectionWarrior | 10 | Heroic Strike | 0 | 284 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 8→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 8->0 |
+| ProtectionWarrior | 10 | Heroic Strike | 2 | 284 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 8→8 | n/a | match |  |
 | ProtectionWarrior | 10 | Last Stand | 0 | 12975 | 0.00→0.00 | mana→none | 180000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | cooldown_ms 180000->600000; required_level 1->0 |
 | ProtectionWarrior | 10 | Overpower | 0 | 24407 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 20→20 | n/a | mismatch | gcd_ms 0->1500 |
 | ProtectionWarrior | 10 | Pummel | 0 | 19639 | 0.00→0.00 | rage→none | 0→0 | 0→0 | 0→1500 | 20→20 | 5000→0 | mismatch | gcd_ms 0->1500; duration_ms 5000->0 |
@@ -194,7 +194,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionWarrior | 10 | Sunder Armor | 1 | 7386 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→0 | mismatch | duration_ms 30000->0 |
 | ProtectionWarrior | 10 | Thunder Clap | 1 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→6 | 30000→0 | mismatch | cooldown_ms 6000->4000; required_level 58->6; duration_ms 30000->0 |
 | ProtectionWarrior | 10 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |
-| ProtectionWarrior | 20 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→0 | 180000→0 | mismatch | required_level 60->0; duration_ms 180000->0 |
+| ProtectionWarrior | 20 | Battle Shout | 0 | 5242 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 12→0 | 180000→0 | mismatch | required_level 12->0; duration_ms 180000->0 |
 | ProtectionWarrior | 20 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionWarrior | 20 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | ProtectionWarrior | 20 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→0 | n/a | mismatch | required_level 10->0 |
@@ -204,8 +204,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionWarrior | 20 | Demoralizing Shout | 0 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→0 | 45000→0 | mismatch | required_level 54->0; duration_ms 45000->0 |
 | ProtectionWarrior | 20 | Execute | 0 | 20647 | 0.10→0.10 | rage→rage | 0→0 | 0→0 | 0→1500 | 1→1 | n/a | mismatch | gcd_ms 0->1500 |
 | ProtectionWarrior | 20 | Hamstring | 1 | 7373 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→8 | 15000→0 | mismatch | required_level 54->8; duration_ms 15000->0 |
-| ProtectionWarrior | 20 | Heroic Strike | 0 | 25286 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 60->0 |
-| ProtectionWarrior | 20 | Heroic Strike | 9 | 25286 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
+| ProtectionWarrior | 20 | Heroic Strike | 0 | 285 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 16→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 16->0 |
+| ProtectionWarrior | 20 | Heroic Strike | 3 | 285 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 16→16 | n/a | match |  |
 | ProtectionWarrior | 20 | Last Stand | 0 | 12975 | 0.00→0.00 | mana→none | 180000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | cooldown_ms 180000->600000; required_level 1->0 |
 | ProtectionWarrior | 20 | Overpower | 1 | 7384 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  |
 | ProtectionWarrior | 20 | Pummel | 0 | 19639 | 0.00→0.00 | rage→none | 0→0 | 0→0 | 0→1500 | 20→20 | 5000→0 | mismatch | gcd_ms 0->1500; duration_ms 5000->0 |
@@ -217,7 +217,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionWarrior | 20 | Sunder Armor | 1 | 7386 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→0 | mismatch | duration_ms 30000->0 |
 | ProtectionWarrior | 20 | Thunder Clap | 2 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→18 | 30000→0 | mismatch | cooldown_ms 6000->4000; required_level 58->18; duration_ms 30000->0 |
 | ProtectionWarrior | 20 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |
-| ProtectionWarrior | 30 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→0 | 180000→0 | mismatch | required_level 60->0; duration_ms 180000->0 |
+| ProtectionWarrior | 30 | Battle Shout | 0 | 6192 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→0 | 180000→0 | mismatch | required_level 22->0; duration_ms 180000->0 |
 | ProtectionWarrior | 30 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionWarrior | 30 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | ProtectionWarrior | 30 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→0 | n/a | mismatch | required_level 10->0 |
@@ -227,8 +227,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionWarrior | 30 | Demoralizing Shout | 0 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→0 | 45000→0 | mismatch | required_level 54->0; duration_ms 45000->0 |
 | ProtectionWarrior | 30 | Execute | 1 | 5308 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 24→24 | n/a | match |  |
 | ProtectionWarrior | 30 | Hamstring | 1 | 7373 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→8 | 15000→0 | mismatch | required_level 54->8; duration_ms 15000->0 |
-| ProtectionWarrior | 30 | Heroic Strike | 0 | 25286 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 60->0 |
-| ProtectionWarrior | 30 | Heroic Strike | 9 | 25286 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
+| ProtectionWarrior | 30 | Heroic Strike | 0 | 1608 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 24→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 24->0 |
+| ProtectionWarrior | 30 | Heroic Strike | 4 | 1608 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 24→24 | n/a | match |  |
 | ProtectionWarrior | 30 | Last Stand | 0 | 12975 | 0.00→0.00 | mana→none | 180000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | cooldown_ms 180000->600000; required_level 1->0 |
 | ProtectionWarrior | 30 | Overpower | 2 | 7887 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  |
 | ProtectionWarrior | 30 | Pummel | 0 | 19639 | 0.00→0.00 | rage→none | 0→0 | 0→0 | 0→1500 | 20→20 | 5000→0 | mismatch | gcd_ms 0->1500; duration_ms 5000->0 |
@@ -240,7 +240,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionWarrior | 30 | Sunder Armor | 2 | 7405 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→0 | mismatch | duration_ms 30000->0 |
 | ProtectionWarrior | 30 | Thunder Clap | 3 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→28 | 30000→0 | mismatch | cooldown_ms 6000->4000; required_level 58->28; duration_ms 30000->0 |
 | ProtectionWarrior | 30 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |
-| ProtectionWarrior | 38 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→0 | 180000→0 | mismatch | required_level 60->0; duration_ms 180000->0 |
+| ProtectionWarrior | 38 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→0 | 180000→0 | mismatch | required_level 32->0; duration_ms 180000->0 |
 | ProtectionWarrior | 38 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionWarrior | 38 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→0 | 10000→0 | mismatch | required_level 32->0; duration_ms 10000->0 |
 | ProtectionWarrior | 38 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
@@ -251,8 +251,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionWarrior | 38 | Demoralizing Shout | 0 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→0 | 45000→0 | mismatch | required_level 54->0; duration_ms 45000->0 |
 | ProtectionWarrior | 38 | Execute | 2 | 20658 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | n/a | match |  |
 | ProtectionWarrior | 38 | Hamstring | 2 | 7373 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→32 | 15000→0 | mismatch | required_level 54->32; duration_ms 15000->0 |
-| ProtectionWarrior | 38 | Heroic Strike | 0 | 25286 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 60->0 |
-| ProtectionWarrior | 38 | Heroic Strike | 9 | 25286 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
+| ProtectionWarrior | 38 | Heroic Strike | 0 | 11564 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 32→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 32->0 |
+| ProtectionWarrior | 38 | Heroic Strike | 5 | 11564 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  |
 | ProtectionWarrior | 38 | Last Stand | 0 | 12975 | 0.00→0.00 | mana→none | 180000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | cooldown_ms 180000->600000; required_level 1->0 |
 | ProtectionWarrior | 38 | Overpower | 2 | 7887 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  |
 | ProtectionWarrior | 38 | Pummel | 1 | 6552 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 38→38 | 4000→0 | mismatch | duration_ms 4000->0 |
@@ -264,7 +264,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionWarrior | 38 | Sunder Armor | 3 | 8380 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→0 | mismatch | duration_ms 30000->0 |
 | ProtectionWarrior | 38 | Thunder Clap | 4 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→38 | 30000→0 | mismatch | cooldown_ms 6000->4000; required_level 58->38; duration_ms 30000->0 |
 | ProtectionWarrior | 38 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |
-| ProtectionWarrior | 40 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→0 | 180000→0 | mismatch | required_level 60->0; duration_ms 180000->0 |
+| ProtectionWarrior | 40 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→0 | 180000→0 | mismatch | required_level 32->0; duration_ms 180000->0 |
 | ProtectionWarrior | 40 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionWarrior | 40 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→0 | 10000→0 | mismatch | required_level 32->0; duration_ms 10000->0 |
 | ProtectionWarrior | 40 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
@@ -275,8 +275,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionWarrior | 40 | Demoralizing Shout | 0 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→0 | 45000→0 | mismatch | required_level 54->0; duration_ms 45000->0 |
 | ProtectionWarrior | 40 | Execute | 3 | 20660 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 40→40 | n/a | match |  |
 | ProtectionWarrior | 40 | Hamstring | 2 | 7373 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→32 | 15000→0 | mismatch | required_level 54->32; duration_ms 15000->0 |
-| ProtectionWarrior | 40 | Heroic Strike | 0 | 25286 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 60->0 |
-| ProtectionWarrior | 40 | Heroic Strike | 9 | 25286 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
+| ProtectionWarrior | 40 | Heroic Strike | 0 | 11565 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 40->0 |
+| ProtectionWarrior | 40 | Heroic Strike | 6 | 11565 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  |
 | ProtectionWarrior | 40 | Last Stand | 0 | 12975 | 0.00→0.00 | mana→none | 180000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | cooldown_ms 180000->600000; required_level 1->0 |
 | ProtectionWarrior | 40 | Overpower | 2 | 7887 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  |
 | ProtectionWarrior | 40 | Pummel | 1 | 6552 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 38→38 | 4000→0 | mismatch | duration_ms 4000->0 |
@@ -289,7 +289,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionWarrior | 40 | Sunder Armor | 3 | 8380 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→0 | mismatch | duration_ms 30000->0 |
 | ProtectionWarrior | 40 | Thunder Clap | 4 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→38 | 30000→0 | mismatch | cooldown_ms 6000->4000; required_level 58->38; duration_ms 30000->0 |
 | ProtectionWarrior | 40 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |
-| ProtectionWarrior | 50 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→0 | 180000→0 | mismatch | required_level 60->0; duration_ms 180000->0 |
+| ProtectionWarrior | 50 | Battle Shout | 0 | 11550 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 42→0 | 180000→0 | mismatch | required_level 42->0; duration_ms 180000->0 |
 | ProtectionWarrior | 50 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionWarrior | 50 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→0 | 10000→0 | mismatch | required_level 32->0; duration_ms 10000->0 |
 | ProtectionWarrior | 50 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
@@ -300,8 +300,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionWarrior | 50 | Demoralizing Shout | 0 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→0 | 45000→0 | mismatch | required_level 54->0; duration_ms 45000->0 |
 | ProtectionWarrior | 50 | Execute | 4 | 20661 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 48→48 | n/a | match |  |
 | ProtectionWarrior | 50 | Hamstring | 2 | 7373 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→32 | 15000→0 | mismatch | required_level 54->32; duration_ms 15000->0 |
-| ProtectionWarrior | 50 | Heroic Strike | 0 | 25286 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 60->0 |
-| ProtectionWarrior | 50 | Heroic Strike | 9 | 25286 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
+| ProtectionWarrior | 50 | Heroic Strike | 0 | 11566 | 15.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 48→0 | n/a | mismatch | cost 15.00->0.00; cost_type rage->none; required_level 48->0 |
+| ProtectionWarrior | 50 | Heroic Strike | 7 | 11566 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 48→48 | n/a | match |  |
 | ProtectionWarrior | 50 | Last Stand | 0 | 12975 | 0.00→0.00 | mana→none | 180000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | cooldown_ms 180000->600000; required_level 1->0 |
 | ProtectionWarrior | 50 | Overpower | 3 | 11584 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  |
 | ProtectionWarrior | 50 | Pummel | 1 | 6552 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 38→38 | 4000→0 | mismatch | duration_ms 4000->0 |

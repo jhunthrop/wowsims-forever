@@ -86,7 +86,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Hunter | 50 | Multi-Shot | 1 | 2643 | 0.00→100.00 | mana→mana | 6000→10000 | 500→500 | 1500→1500 | 18→18 | n/a | mismatch | cost 0.00->100.00; cooldown_ms 6000->10000 |
 | Hunter | 50 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→0 | 15000→0 | mismatch | required_level 26->0; duration_ms 15000->0 |
 | Hunter | 50 | Raptor Strike | 0 | 14265 | 85.00→0.00 | mana→none | 6000→0 | 0→0 | 0→0 | 48→0 | n/a | mismatch | cost 85.00->0.00; cost_type mana->none; cooldown_ms 6000->0; required_level 48->0 |
-| Hunter | 50 | Raptor Strike | 7 | 14265 | 85.00→80.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 48→48 | n/a | mismatch | cost 85.00->80.00 |
+| Hunter | 50 | Raptor Strike | 7 | 14265 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 48→48 | n/a | match |  |
 | Hunter | 50 | Serpent Sting | 7 | 13554 | 190.00→190.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 50→50 | 15000→15000 | match |  |
 | Hunter | 50 | Volley | 2 | 14294 | 420.00→420.00 | mana→mana | 0→60000 | 0→0 | 1500→1500 | 50→50 | 6000→0 | mismatch | cooldown_ms 0->60000; duration_ms 6000->0 |
 | Hunter | 50 | Wing Clip | 2 | 14267 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 10000→0 | mismatch | duration_ms 10000->0 |
