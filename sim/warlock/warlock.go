@@ -72,6 +72,7 @@ type Warlock struct {
 	SiphonLife  []*core.Spell
 	DeathCoil   []*core.Spell
 	Wrack       *core.Spell
+	Shoot       *core.Spell
 
 	ActiveCurseAura          core.AuraArray
 	CurseOfElements          *core.Spell
@@ -128,6 +129,7 @@ func (warlock *Warlock) Initialize() {
 	warlock.registerDrainLifeSpell()
 	warlock.registerRainOfFireSpell()
 	warlock.registerDeathCoilSpell()
+	warlock.registerShootSpell()
 
 	warlock.registerCurseOfElementsSpell()
 	warlock.registerCurseOfShadowSpell()

@@ -142,6 +142,7 @@ type Mage struct {
 	PresenceOfMind          *core.Spell
 	Pyroblast               []*core.Spell
 	Scorch                  []*core.Spell
+	Shoot                   *core.Spell
 
 	ArcaneBlastAura     *core.Aura
 	ArcanePowerAura     *core.Aura
@@ -191,6 +192,7 @@ func (mage *Mage) Initialize() {
 	mage.registerEvocationCD()
 	mage.registerManaGemCD()
 	mage.registerCounterspellSpell()
+	mage.registerShootSpell()
 }
 
 func (mage *Mage) Reset(sim *core.Simulation) {
