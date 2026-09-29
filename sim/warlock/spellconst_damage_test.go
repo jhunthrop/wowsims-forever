@@ -16,14 +16,29 @@ import (
 // crit rating or talent multiplier in the way.
 func newBareWarlockForDamageTest(t *testing.T) (*core.Simulation, *Warlock, *core.Unit) {
 	t.Helper()
+	return newWarlockForDamageTest(t, "")
+}
+
+// newWarlockForDamageTest is newBareWarlockForDamageTest with a talent
+// string, for a spell that (like Siphon Life) only registers when its
+// own talent is set: the talent has to be present before the character
+// builds, since a spell with a Dot registers an aura, and the engine
+// panics on registering a new aura once the environment has finalized
+// (RegisterAura's own guard, sim/core/aura.go) -- setting the talent
+// field and calling the spell's registerX function by hand afterwards,
+// the way the Shadowburn/Conflagrate damage tests above do for their
+// own (aura-free) talent spells, does not work here.
+func newWarlockForDamageTest(t *testing.T, talents string) (*core.Simulation, *Warlock, *core.Unit) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
-			Class:     proto.Class_ClassWarlock,
-			Race:      proto.Race_RaceOrc,
-			Level:     60,
-			Equipment: &proto.EquipmentSpec{},
-			Buffs:     core.FullBuffs.Player,
+			Class:         proto.Class_ClassWarlock,
+			Race:          proto.Race_RaceOrc,
+			Level:         60,
+			Equipment:     &proto.EquipmentSpec{},
+			Buffs:         core.FullBuffs.Player,
+			TalentsString: talents,
 		},
 		&proto.Player_Warlock{
 			Warlock: &proto.Warlock{
@@ -218,6 +233,101 @@ func TestConflagrateRank6DamageMatchesSpellconst(t *testing.T) {
 	if got > oldClassicAverage*0.75 {
 		t.Errorf("Conflagrate rank 6 average damage = %.1f, still in range of the old classic roll's ~%.1f average - the fix did not take", got, oldClassicAverage)
 	}
+}
+
+// TestDrainLifeRank6SnapshotMatchesSpellconst guards drain_life.go's
+// baseDamage against drifting from spellconst's own flat rank-6
+// per-tick amount (11700: 51, sp_coefficient 0.1 unchanged) back
+// towards a stale tooltip-derived per-tick value (71) that ran 39%
+// high of the client's number.
+func TestDrainLifeRank6SnapshotMatchesSpellconst(t *testing.T) {
+	const want = 51.0
+
+	for attempt := 0; attempt < 20; attempt++ {
+		sim, built, target := newBareWarlockForDamageTest(t)
+		if len(built.DrainLife) == 0 {
+			t.Fatal("level-60 warlock has no Drain Life registered")
+		}
+		spell := built.DrainLife[len(built.DrainLife)-1]
+		spell.ApplyEffects(sim, target, spell)
+
+		dot := spell.Dot(target)
+		if !dot.IsActive() {
+			continue
+		}
+		if got := dot.SnapshotBaseDamage; got != want {
+			t.Errorf("Drain Life rank 6 per-tick snapshot damage = %.2f, want %.2f (spellconst 11700 amount)", got, want)
+		}
+		return
+	}
+	t.Fatal("Drain Life never landed in 20 attempts")
+}
+
+// TestDrainSoulRank4SnapshotMatchesSpellconst guards drain_soul.go's
+// baseDamage against drifting from spellconst's own flat rank-4
+// per-tick amount (11675: 84, sp_coefficient 0.1 unchanged) back
+// towards the classic tooltip total (455) divided by tick count, which
+// gave 91 - 8% high of the client's number.
+func TestDrainSoulRank4SnapshotMatchesSpellconst(t *testing.T) {
+	const want = 84.0
+
+	for attempt := 0; attempt < 20; attempt++ {
+		sim, built, target := newBareWarlockForDamageTest(t)
+		if len(built.DrainSoul) == 0 {
+			t.Fatal("level-60 warlock has no Drain Soul registered")
+		}
+		spell := built.DrainSoul[len(built.DrainSoul)-1]
+		spell.ApplyEffects(sim, target, spell)
+
+		dot := spell.Dot(target)
+		if !dot.IsActive() {
+			continue
+		}
+		if got := dot.SnapshotBaseDamage; got != want {
+			t.Errorf("Drain Soul rank 4 per-tick snapshot damage = %.2f, want %.2f (spellconst 11675 amount)", got, want)
+		}
+		return
+	}
+	t.Fatal("Drain Soul never landed in 20 attempts")
+}
+
+// TestSiphonLifeRank1SnapshotMatchesSpellconst guards siphon_life.go's
+// baseDamage against drifting from spellconst's own flat rank-1
+// per-tick amount (18265: 11, sp_coefficient 0.05 unchanged) back
+// towards its old value of 15 - 36% high of the client's number.
+// Siphon Life needs the talent to register at all, matching the
+// Shadowburn/Conflagrate talent-gated tests above.
+func TestSiphonLifeRank1SnapshotMatchesSpellconst(t *testing.T) {
+	const want = 11.0
+
+	// Affliction talent string with only Siphon Life (proto field 14 of
+	// 17, sim/warlock/talents_auto_gen.go's TalentTreeSizes) set - the
+	// character build applies talents before the environment finalizes,
+	// which registering the spell by hand after the fact (this file's
+	// Shadowburn/Conflagrate pattern) cannot do for a Dot spell.
+	const siphonLifeOnlyTalents = "00000000000001"
+
+	for attempt := 0; attempt < 20; attempt++ {
+		sim, built, target := newWarlockForDamageTest(t, siphonLifeOnlyTalents)
+		if !built.Talents.SiphonLife {
+			t.Fatal("talent string did not set Warlock Talents.SiphonLife")
+		}
+		if len(built.SiphonLife) == 0 {
+			t.Fatal("level-60 warlock with the Siphon Life talent has no Siphon Life registered")
+		}
+		spell := built.SiphonLife[0]
+		spell.ApplyEffects(sim, target, spell)
+
+		dot := spell.Dot(target)
+		if !dot.IsActive() {
+			continue
+		}
+		if got := dot.SnapshotBaseDamage; got != want {
+			t.Errorf("Siphon Life rank 1 per-tick snapshot damage = %.2f, want %.2f (spellconst 18265 amount)", got, want)
+		}
+		return
+	}
+	t.Fatal("Siphon Life never landed in 20 attempts")
 }
 
 // TestCorruptionRank7SnapshotMatchesSpellconst checks the exact
