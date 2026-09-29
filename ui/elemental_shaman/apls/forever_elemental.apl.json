@@ -131,6 +131,25 @@
       }
     },
     {
+      "notes": "Lava Burst on cooldown while Flame Shock is up: the talent's own tooltip is a flat +20% damage bonus against a Flame-Shocked target, and Flame Shock is kept up continuously by the line above, so gating on the dot rather than casting unconditionally keeps this from firing before Flame Shock's own first landed cast.",
+      "action": {
+        "condition": {
+          "dotIsActive": {
+            "spellId": {
+              "spellId": 29228,
+              "rank": 6
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 1238300,
+            "rank": 3
+          }
+        }
+      }
+    },
+    {
       "notes": "2 or more targets: Chain Lightning hits all of them for close to single-target Lightning Bolt damage.",
       "action": {
         "condition": {
