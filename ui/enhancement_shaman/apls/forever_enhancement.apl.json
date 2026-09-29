@@ -101,6 +101,29 @@
       }
     },
     {
+      "notes": "Keep Flame Shock ticking: this file's own notes above cite the community guide's order as totems, Stormstrike, Flame Shock (dot), then Frost/Earth Shock, but the dot line itself was missing from this priority list until the rotation-accuracy program's unused-ability pass (2026-09-28) -- checked ahead of Earth Shock below, the same shape as the totem/Rend/Rake dot-maintenance lines elsewhere in this lane, so the direct-damage tick and the dot both land instead of every shock going to the flat Earth Shock hit. Flame Shock shares its 6s cooldown with Earth Shock (sim/shaman/shocks.go's shockTimer), so this does not add an extra global -- it just decides which shock spell the next available one is.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 29228,
+                  "rank": 6
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 29228,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
       "notes": "Keep Searing Totem down for the extra fire damage, but not with less than 20 seconds left -- no point paying for a totem that will barely tick.",
       "action": {
         "condition": {
