@@ -10,34 +10,29 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | BalanceDruid | 10 | Cat Form | 0 | 768 | 0.00→81.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | n/a | mismatch | cost 0.00->81.95; required_level 20->0 |
 | BalanceDruid | 10 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→0 | 40000→0 | mismatch | required_level 54->0; duration_ms 40000->0 |
-| BalanceDruid | 10 | Ferocious Bite | 0 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
 | BalanceDruid | 10 | Innervate | 0 | 29166 | 0.00→7.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->7.45; required_level 40->0; duration_ms 20000->0 |
 | BalanceDruid | 10 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  |
 | BalanceDruid | 10 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
 | BalanceDruid | 10 | Moonkin Form | 0 | 24858 | 0.00→52.15 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->52.15; required_level 40->0 |
-| BalanceDruid | 10 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | BalanceDruid | 10 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | BalanceDruid | 10 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
 | BalanceDruid | 20 | Cat Form | 0 | 768 | 0.00→194.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | n/a | mismatch | cost 0.00->194.70; required_level 20->0 |
 | BalanceDruid | 20 | Claw | 1 | 1082 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | n/a | match |  |
 | BalanceDruid | 20 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→0 | 40000→0 | mismatch | required_level 54->0; duration_ms 40000->0 |
-| BalanceDruid | 20 | Ferocious Bite | 0 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
 | BalanceDruid | 20 | Innervate | 0 | 29166 | 0.00→17.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->17.70; required_level 40->0; duration_ms 20000->0 |
 | BalanceDruid | 20 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
 | BalanceDruid | 20 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  |
 | BalanceDruid | 20 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
 | BalanceDruid | 20 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  |
 | BalanceDruid | 20 | Moonkin Form | 0 | 24858 | 0.00→123.90 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->123.90; required_level 40->0 |
-| BalanceDruid | 20 | Rip | 0 | 1079 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
+| BalanceDruid | 20 | Rip | 0 | 1079 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→0 | 12000→0 | mismatch | required_level 20->0; duration_ms 12000->0 |
 | BalanceDruid | 20 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cast_time_ms 3500->3000 |
-| BalanceDruid | 20 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | BalanceDruid | 20 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | BalanceDruid | 20 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
 | BalanceDruid | 20 | Wrath | 3 | 5178 | 40.00→55.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 14→14 | n/a | mismatch | cost 40.00->55.00; cast_time_ms 2000->1500 |
 | BalanceDruid | 30 | Cat Form | 0 | 768 | 0.00→337.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | n/a | mismatch | cost 0.00->337.70; required_level 20->0 |
 | BalanceDruid | 30 | Claw | 2 | 3029 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | n/a | match |  |
 | BalanceDruid | 30 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→0 | 40000→0 | mismatch | required_level 54->0; duration_ms 40000->0 |
-| BalanceDruid | 30 | Ferocious Bite | 0 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
 | BalanceDruid | 30 | Innervate | 0 | 29166 | 0.00→30.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->30.70; required_level 40->0; duration_ms 20000->0 |
 | BalanceDruid | 30 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
 | BalanceDruid | 30 | Insect Swarm | 0 | 24974 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→0 | 12000→12000 | mismatch | required_level 30->0 |
@@ -48,11 +43,10 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 30 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
 | BalanceDruid | 30 | Moonkin Form | 0 | 24858 | 0.00→214.90 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->214.90; required_level 40->0 |
 | BalanceDruid | 30 | Rake | 0 | 1822 | 40.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 24→0 | 9000→9000 | mismatch | required_level 24->0 |
-| BalanceDruid | 30 | Rip | 0 | 9492 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→0 | 12000→12000 | mismatch | required_level 28->0 |
+| BalanceDruid | 30 | Rip | 0 | 9492 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→0 | 12000→0 | mismatch | required_level 28->0; duration_ms 12000->0 |
 | BalanceDruid | 30 | Shred | 0 | 6800 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→0 | n/a | mismatch | required_level 30->0 |
 | BalanceDruid | 30 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 30 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 26→26 | n/a | mismatch | cast_time_ms 3500->3000 |
-| BalanceDruid | 30 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | BalanceDruid | 30 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→0 | 6000→0 | mismatch | required_level 24->0; duration_ms 6000->0 |
 | BalanceDruid | 30 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | BalanceDruid | 30 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
@@ -62,7 +56,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 38 | Cat Form | 0 | 768 | 0.00→444.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | n/a | mismatch | cost 0.00->444.95; required_level 20->0 |
 | BalanceDruid | 38 | Claw | 3 | 5201 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | n/a | match |  |
 | BalanceDruid | 38 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→0 | 40000→0 | mismatch | required_level 54->0; duration_ms 40000->0 |
-| BalanceDruid | 38 | Ferocious Bite | 0 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
+| BalanceDruid | 38 | Ferocious Bite | 0 | 22568 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→0 | n/a | mismatch | required_level 32->0 |
 | BalanceDruid | 38 | Innervate | 0 | 29166 | 0.00→40.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->40.45; required_level 40->0; duration_ms 20000->0 |
 | BalanceDruid | 38 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
 | BalanceDruid | 38 | Insect Swarm | 0 | 24974 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→0 | 12000→12000 | mismatch | required_level 30->0 |
@@ -74,12 +68,11 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 38 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  |
 | BalanceDruid | 38 | Moonkin Form | 0 | 24858 | 0.00→283.15 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->283.15; required_level 40->0 |
 | BalanceDruid | 38 | Rake | 0 | 1823 | 40.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→0 | 9000→9000 | mismatch | required_level 34->0 |
-| BalanceDruid | 38 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→12000 | mismatch | required_level 36->0 |
+| BalanceDruid | 38 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→0 | mismatch | required_level 36->0; duration_ms 12000->0 |
 | BalanceDruid | 38 | Shred | 0 | 8992 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | required_level 38->0 |
 | BalanceDruid | 38 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 38 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 26→26 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 38 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 34→34 | n/a | mismatch | cast_time_ms 3500->3000 |
-| BalanceDruid | 38 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | BalanceDruid | 38 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→0 | 6000→0 | mismatch | required_level 24->0; duration_ms 6000->0 |
 | BalanceDruid | 38 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | BalanceDruid | 38 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
@@ -90,12 +83,12 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 40 | Cat Form | 0 | 768 | 0.00→469.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | n/a | mismatch | cost 0.00->469.70; required_level 20->0 |
 | BalanceDruid | 40 | Claw | 3 | 5201 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | n/a | match |  |
 | BalanceDruid | 40 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→0 | 40000→0 | mismatch | required_level 54->0; duration_ms 40000->0 |
-| BalanceDruid | 40 | Ferocious Bite | 0 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
+| BalanceDruid | 40 | Ferocious Bite | 0 | 22827 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 40→0 | n/a | mismatch | required_level 40->0 |
 | BalanceDruid | 40 | Hurricane | 1 | 16914 | 880.00→880.00 | mana→mana | 0→60000 | 0→0 | 1500→1500 | 40→40 | 10000→0 | mismatch | cooldown_ms 0->60000; duration_ms 10000->0 |
 | BalanceDruid | 40 | Innervate | 0 | 29166 | 0.00→42.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->42.70; required_level 40->0; duration_ms 20000->0 |
+| BalanceDruid | 40 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
 | BalanceDruid | 40 | Insect Swarm | 0 | 24974 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→0 | 12000→12000 | mismatch | required_level 30->0 |
 | BalanceDruid | 40 | Insect Swarm | 0 | 24975 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | 12000→12000 | mismatch | required_level 40->0 |
-| BalanceDruid | 40 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
 | BalanceDruid | 40 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  |
 | BalanceDruid | 40 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
 | BalanceDruid | 40 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  |
@@ -105,12 +98,11 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 40 | Moonfire | 7 | 8929 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  |
 | BalanceDruid | 40 | Moonkin Form | 0 | 24858 | 0.00→298.90 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->298.90; required_level 40->0 |
 | BalanceDruid | 40 | Rake | 0 | 1823 | 40.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→0 | 9000→9000 | mismatch | required_level 34->0 |
-| BalanceDruid | 40 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→12000 | mismatch | required_level 36->0 |
+| BalanceDruid | 40 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→0 | mismatch | required_level 36->0; duration_ms 12000->0 |
 | BalanceDruid | 40 | Shred | 0 | 8992 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | required_level 38->0 |
 | BalanceDruid | 40 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 40 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 26→26 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 40 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 34→34 | n/a | mismatch | cast_time_ms 3500->3000 |
-| BalanceDruid | 40 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | BalanceDruid | 40 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→0 | 6000→0 | mismatch | required_level 24->0; duration_ms 6000->0 |
 | BalanceDruid | 40 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | BalanceDruid | 40 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
@@ -121,7 +113,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 50 | Cat Form | 0 | 768 | 0.00→585.20 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | n/a | mismatch | cost 0.00->585.20; required_level 20->0 |
 | BalanceDruid | 50 | Claw | 4 | 9849 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 48→48 | n/a | match |  |
 | BalanceDruid | 50 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→0 | 40000→0 | mismatch | required_level 54->0; duration_ms 40000->0 |
-| BalanceDruid | 50 | Ferocious Bite | 0 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
+| BalanceDruid | 50 | Ferocious Bite | 0 | 22828 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 48→0 | n/a | mismatch | required_level 48->0 |
 | BalanceDruid | 50 | Hurricane | 1 | 16914 | 880.00→880.00 | mana→mana | 0→60000 | 0→0 | 1500→1500 | 40→40 | 10000→0 | mismatch | cooldown_ms 0->60000; duration_ms 10000->0 |
 | BalanceDruid | 50 | Hurricane | 2 | 17401 | 1180.00→1180.00 | mana→mana | 0→60000 | 0→0 | 1500→1500 | 50→50 | 10000→0 | mismatch | cooldown_ms 0->60000; duration_ms 10000->0 |
 | BalanceDruid | 50 | Innervate | 0 | 29166 | 0.00→53.20 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->53.20; required_level 40->0; duration_ms 20000->0 |
@@ -139,14 +131,13 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 50 | Moonfire | 8 | 9833 | 280.00→280.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 12000→12000 | match |  |
 | BalanceDruid | 50 | Moonkin Form | 0 | 24858 | 0.00→372.40 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->372.40; required_level 40->0 |
 | BalanceDruid | 50 | Rake | 0 | 1824 | 40.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 9000→9000 | mismatch | required_level 44->0 |
-| BalanceDruid | 50 | Rip | 0 | 9752 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 12000→12000 | mismatch | required_level 44->0 |
+| BalanceDruid | 50 | Rip | 0 | 9752 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 12000→0 | mismatch | required_level 44->0; duration_ms 12000->0 |
 | BalanceDruid | 50 | Shred | 0 | 9829 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→0 | n/a | mismatch | required_level 46->0 |
 | BalanceDruid | 50 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 50 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 26→26 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 50 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 34→34 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 50 | Starfire | 4 | 8951 | 230.00→230.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 42→42 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 50 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 50→50 | n/a | mismatch | cast_time_ms 3500->3000 |
-| BalanceDruid | 50 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | BalanceDruid | 50 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→0 | 6000→0 | mismatch | required_level 24->0; duration_ms 6000->0 |
 | BalanceDruid | 50 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | BalanceDruid | 50 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
@@ -163,11 +154,11 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 60 | Hurricane | 2 | 17401 | 1180.00→1180.00 | mana→mana | 0→60000 | 0→0 | 1500→1500 | 50→50 | 10000→0 | mismatch | cooldown_ms 0->60000; duration_ms 10000->0 |
 | BalanceDruid | 60 | Hurricane | 3 | 17402 | 1495.00→1495.00 | mana→mana | 0→60000 | 0→0 | 1500→1500 | 60→60 | 10000→0 | mismatch | cooldown_ms 0->60000; duration_ms 10000->0 |
 | BalanceDruid | 60 | Innervate | 0 | 29166 | 0.00→62.20 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->62.20; required_level 40->0; duration_ms 20000->0 |
+| BalanceDruid | 60 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
 | BalanceDruid | 60 | Insect Swarm | 0 | 24974 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→0 | 12000→12000 | mismatch | required_level 30->0 |
 | BalanceDruid | 60 | Insect Swarm | 0 | 24975 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | 12000→12000 | mismatch | required_level 40->0 |
 | BalanceDruid | 60 | Insect Swarm | 0 | 24976 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→0 | 12000→12000 | mismatch | required_level 50->0 |
 | BalanceDruid | 60 | Insect Swarm | 0 | 24977 | 160.00→160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→0 | 12000→12000 | mismatch | required_level 60->0 |
-| BalanceDruid | 60 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
 | BalanceDruid | 60 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  |
 | BalanceDruid | 60 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
 | BalanceDruid | 60 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  |
@@ -180,7 +171,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 60 | Moonfire | 10 | 9835 | 375.00→375.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 12000→12000 | match |  |
 | BalanceDruid | 60 | Moonkin Form | 0 | 24858 | 0.00→435.40 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->435.40; required_level 40->0 |
 | BalanceDruid | 60 | Rake | 0 | 9904 | 40.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | 9000→9000 | mismatch | required_level 54->0 |
-| BalanceDruid | 60 | Rip | 0 | 9896 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | 12000→12000 | mismatch | required_level 60->0 |
+| BalanceDruid | 60 | Rip | 0 | 9896 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | 12000→0 | mismatch | required_level 60->0; duration_ms 12000->0 |
 | BalanceDruid | 60 | Shred | 0 | 9830 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | n/a | mismatch | required_level 54->0 |
 | BalanceDruid | 60 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 60 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 26→26 | n/a | mismatch | cast_time_ms 3500->3000 |
@@ -189,7 +180,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 60 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 50→50 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 60 | Starfire | 6 | 9876 | 315.00→315.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 58→58 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 60 | Starfire | 7 | 25298 | 340.00→340.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 60→60 | n/a | mismatch | cast_time_ms 3500->3000 |
-| BalanceDruid | 60 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | BalanceDruid | 60 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→0 | 6000→0 | mismatch | required_level 24->0; duration_ms 6000->0 |
 | BalanceDruid | 60 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | BalanceDruid | 60 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
@@ -201,32 +191,27 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 60 | Wrath | 8 | 9912 | 120.00→180.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 54→54 | n/a | mismatch | cost 120.00->180.00; cast_time_ms 2000->1500 |
 | FeralDruid | 10 | Cat Form | 0 | 768 | 0.00→81.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | n/a | mismatch | cost 0.00->81.95; required_level 20->0 |
 | FeralDruid | 10 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→0 | 40000→0 | mismatch | required_level 54->0; duration_ms 40000->0 |
-| FeralDruid | 10 | Ferocious Bite | 0 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
 | FeralDruid | 10 | Innervate | 0 | 29166 | 0.00→7.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->7.45; required_level 40->0; duration_ms 20000->0 |
 | FeralDruid | 10 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  |
 | FeralDruid | 10 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
-| FeralDruid | 10 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | FeralDruid | 10 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | FeralDruid | 10 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
 | FeralDruid | 20 | Cat Form | 0 | 768 | 0.00→194.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | n/a | mismatch | cost 0.00->194.70; required_level 20->0 |
 | FeralDruid | 20 | Claw | 1 | 1082 | 45.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | n/a | mismatch | cost 45.00->40.00 |
 | FeralDruid | 20 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→0 | 40000→0 | mismatch | required_level 54->0; duration_ms 40000->0 |
-| FeralDruid | 20 | Ferocious Bite | 0 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
 | FeralDruid | 20 | Innervate | 0 | 29166 | 0.00→17.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->17.70; required_level 40->0; duration_ms 20000->0 |
 | FeralDruid | 20 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
 | FeralDruid | 20 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  |
 | FeralDruid | 20 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
 | FeralDruid | 20 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  |
-| FeralDruid | 20 | Rip | 0 | 1079 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
+| FeralDruid | 20 | Rip | 0 | 1079 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→0 | 12000→0 | mismatch | required_level 20->0; duration_ms 12000->0 |
 | FeralDruid | 20 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
-| FeralDruid | 20 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | FeralDruid | 20 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | FeralDruid | 20 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
 | FeralDruid | 20 | Wrath | 3 | 5178 | 40.00→55.00 | mana→mana | 0→0 | 2000→1500 | 1500→1500 | 14→14 | n/a | mismatch | cost 40.00->55.00; cast_time_ms 2000->1500 |
 | FeralDruid | 30 | Cat Form | 0 | 768 | 0.00→337.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | n/a | mismatch | cost 0.00->337.70; required_level 20->0 |
 | FeralDruid | 30 | Claw | 2 | 3029 | 45.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | n/a | mismatch | cost 45.00->40.00 |
 | FeralDruid | 30 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→0 | 40000→0 | mismatch | required_level 54->0; duration_ms 40000->0 |
-| FeralDruid | 30 | Ferocious Bite | 0 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
 | FeralDruid | 30 | Innervate | 0 | 29166 | 0.00→30.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->30.70; required_level 40->0; duration_ms 20000->0 |
 | FeralDruid | 30 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
 | FeralDruid | 30 | Insect Swarm | 0 | 24974 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→0 | 12000→12000 | mismatch | required_level 30->0 |
@@ -236,11 +221,10 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 30 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  |
 | FeralDruid | 30 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
 | FeralDruid | 30 | Rake | 0 | 1822 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 24→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 24->0 |
-| FeralDruid | 30 | Rip | 0 | 9492 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→0 | 12000→12000 | mismatch | required_level 28->0 |
+| FeralDruid | 30 | Rip | 0 | 9492 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→0 | 12000→0 | mismatch | required_level 28->0; duration_ms 12000->0 |
 | FeralDruid | 30 | Shred | 0 | 6800 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→0 | n/a | mismatch | required_level 30->0 |
 | FeralDruid | 30 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
 | FeralDruid | 30 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  |
-| FeralDruid | 30 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | FeralDruid | 30 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→0 | 6000→0 | mismatch | required_level 24->0; duration_ms 6000->0 |
 | FeralDruid | 30 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | FeralDruid | 30 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
@@ -250,7 +234,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 38 | Cat Form | 0 | 768 | 0.00→444.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | n/a | mismatch | cost 0.00->444.95; required_level 20->0 |
 | FeralDruid | 38 | Claw | 3 | 5201 | 45.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | n/a | mismatch | cost 45.00->40.00 |
 | FeralDruid | 38 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→0 | 40000→0 | mismatch | required_level 54->0; duration_ms 40000->0 |
-| FeralDruid | 38 | Ferocious Bite | 0 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
+| FeralDruid | 38 | Ferocious Bite | 0 | 22568 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→0 | n/a | mismatch | required_level 32->0 |
 | FeralDruid | 38 | Innervate | 0 | 29166 | 0.00→40.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->40.45; required_level 40->0; duration_ms 20000->0 |
 | FeralDruid | 38 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
 | FeralDruid | 38 | Insect Swarm | 0 | 24974 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→0 | 12000→12000 | mismatch | required_level 30->0 |
@@ -261,12 +245,11 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 38 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
 | FeralDruid | 38 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  |
 | FeralDruid | 38 | Rake | 0 | 1823 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 34->0 |
-| FeralDruid | 38 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→12000 | mismatch | required_level 36->0 |
+| FeralDruid | 38 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→0 | mismatch | required_level 36->0; duration_ms 12000->0 |
 | FeralDruid | 38 | Shred | 0 | 8992 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | required_level 38->0 |
 | FeralDruid | 38 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
 | FeralDruid | 38 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  |
 | FeralDruid | 38 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  |
-| FeralDruid | 38 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | FeralDruid | 38 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→0 | 6000→0 | mismatch | required_level 24->0; duration_ms 6000->0 |
 | FeralDruid | 38 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | FeralDruid | 38 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
@@ -277,12 +260,12 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 40 | Cat Form | 0 | 768 | 0.00→469.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | n/a | mismatch | cost 0.00->469.70; required_level 20->0 |
 | FeralDruid | 40 | Claw | 3 | 5201 | 45.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | n/a | mismatch | cost 45.00->40.00 |
 | FeralDruid | 40 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→0 | 40000→0 | mismatch | required_level 54->0; duration_ms 40000->0 |
-| FeralDruid | 40 | Ferocious Bite | 0 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
+| FeralDruid | 40 | Ferocious Bite | 0 | 22827 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 40→0 | n/a | mismatch | required_level 40->0 |
 | FeralDruid | 40 | Hurricane | 1 | 16914 | 880.00→880.00 | mana→mana | 0→60000 | 0→0 | 1500→1500 | 40→40 | 10000→0 | mismatch | cooldown_ms 0->60000; duration_ms 10000->0 |
 | FeralDruid | 40 | Innervate | 0 | 29166 | 0.00→42.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->42.70; required_level 40->0; duration_ms 20000->0 |
-| FeralDruid | 40 | Insect Swarm | 0 | 24975 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | 12000→12000 | mismatch | required_level 40->0 |
-| FeralDruid | 40 | Insect Swarm | 0 | 24974 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→0 | 12000→12000 | mismatch | required_level 30->0 |
 | FeralDruid | 40 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
+| FeralDruid | 40 | Insect Swarm | 0 | 24974 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→0 | 12000→12000 | mismatch | required_level 30->0 |
+| FeralDruid | 40 | Insect Swarm | 0 | 24975 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | 12000→12000 | mismatch | required_level 40->0 |
 | FeralDruid | 40 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  |
 | FeralDruid | 40 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
 | FeralDruid | 40 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  |
@@ -291,12 +274,11 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 40 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  |
 | FeralDruid | 40 | Moonfire | 7 | 8929 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  |
 | FeralDruid | 40 | Rake | 0 | 1823 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 34->0 |
-| FeralDruid | 40 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→12000 | mismatch | required_level 36->0 |
+| FeralDruid | 40 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→0 | mismatch | required_level 36->0; duration_ms 12000->0 |
 | FeralDruid | 40 | Shred | 0 | 8992 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | required_level 38->0 |
 | FeralDruid | 40 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
 | FeralDruid | 40 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  |
 | FeralDruid | 40 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  |
-| FeralDruid | 40 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | FeralDruid | 40 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→0 | 6000→0 | mismatch | required_level 24->0; duration_ms 6000->0 |
 | FeralDruid | 40 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | FeralDruid | 40 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
@@ -307,14 +289,14 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 50 | Cat Form | 0 | 768 | 0.00→585.20 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | n/a | mismatch | cost 0.00->585.20; required_level 20->0 |
 | FeralDruid | 50 | Claw | 4 | 9849 | 45.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 48→48 | n/a | mismatch | cost 45.00->40.00 |
 | FeralDruid | 50 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→0 | 40000→0 | mismatch | required_level 54->0; duration_ms 40000->0 |
-| FeralDruid | 50 | Ferocious Bite | 0 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | n/a | mismatch | required_level 60->0 |
+| FeralDruid | 50 | Ferocious Bite | 0 | 22828 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 48→0 | n/a | mismatch | required_level 48->0 |
 | FeralDruid | 50 | Hurricane | 1 | 16914 | 880.00→880.00 | mana→mana | 0→60000 | 0→0 | 1500→1500 | 40→40 | 10000→0 | mismatch | cooldown_ms 0->60000; duration_ms 10000->0 |
 | FeralDruid | 50 | Hurricane | 2 | 17401 | 1180.00→1180.00 | mana→mana | 0→60000 | 0→0 | 1500→1500 | 50→50 | 10000→0 | mismatch | cooldown_ms 0->60000; duration_ms 10000->0 |
 | FeralDruid | 50 | Innervate | 0 | 29166 | 0.00→53.20 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->53.20; required_level 40->0; duration_ms 20000->0 |
 | FeralDruid | 50 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
-| FeralDruid | 50 | Insect Swarm | 0 | 24976 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→0 | 12000→12000 | mismatch | required_level 50->0 |
-| FeralDruid | 50 | Insect Swarm | 0 | 24975 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | 12000→12000 | mismatch | required_level 40->0 |
 | FeralDruid | 50 | Insect Swarm | 0 | 24974 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→0 | 12000→12000 | mismatch | required_level 30->0 |
+| FeralDruid | 50 | Insect Swarm | 0 | 24975 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | 12000→12000 | mismatch | required_level 40->0 |
+| FeralDruid | 50 | Insect Swarm | 0 | 24976 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→0 | 12000→12000 | mismatch | required_level 50->0 |
 | FeralDruid | 50 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  |
 | FeralDruid | 50 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
 | FeralDruid | 50 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  |
@@ -324,14 +306,13 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 50 | Moonfire | 7 | 8929 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  |
 | FeralDruid | 50 | Moonfire | 8 | 9833 | 280.00→280.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 12000→12000 | match |  |
 | FeralDruid | 50 | Rake | 0 | 1824 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 44->0 |
-| FeralDruid | 50 | Rip | 0 | 9752 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 12000→12000 | mismatch | required_level 44->0 |
+| FeralDruid | 50 | Rip | 0 | 9752 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 12000→0 | mismatch | required_level 44->0; duration_ms 12000->0 |
 | FeralDruid | 50 | Shred | 0 | 9829 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→0 | n/a | mismatch | required_level 46->0 |
 | FeralDruid | 50 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
 | FeralDruid | 50 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  |
 | FeralDruid | 50 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  |
 | FeralDruid | 50 | Starfire | 4 | 8951 | 230.00→230.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | n/a | match |  |
 | FeralDruid | 50 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  |
-| FeralDruid | 50 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | FeralDruid | 50 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→0 | 6000→0 | mismatch | required_level 24->0; duration_ms 6000->0 |
 | FeralDruid | 50 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | FeralDruid | 50 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |
@@ -348,11 +329,11 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 60 | Hurricane | 2 | 17401 | 1180.00→1180.00 | mana→mana | 0→60000 | 0→0 | 1500→1500 | 50→50 | 10000→0 | mismatch | cooldown_ms 0->60000; duration_ms 10000->0 |
 | FeralDruid | 60 | Hurricane | 3 | 17402 | 1495.00→1495.00 | mana→mana | 0→60000 | 0→0 | 1500→1500 | 60→60 | 10000→0 | mismatch | cooldown_ms 0->60000; duration_ms 10000->0 |
 | FeralDruid | 60 | Innervate | 0 | 29166 | 0.00→62.20 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→0 | 20000→0 | mismatch | cost 0.00->62.20; required_level 40->0; duration_ms 20000->0 |
+| FeralDruid | 60 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
+| FeralDruid | 60 | Insect Swarm | 0 | 24974 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→0 | 12000→12000 | mismatch | required_level 30->0 |
 | FeralDruid | 60 | Insect Swarm | 0 | 24975 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | 12000→12000 | mismatch | required_level 40->0 |
 | FeralDruid | 60 | Insect Swarm | 0 | 24976 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→0 | 12000→12000 | mismatch | required_level 50->0 |
 | FeralDruid | 60 | Insect Swarm | 0 | 24977 | 160.00→160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→0 | 12000→12000 | mismatch | required_level 60->0 |
-| FeralDruid | 60 | Insect Swarm | 0 | 24974 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→0 | 12000→12000 | mismatch | required_level 30->0 |
-| FeralDruid | 60 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→0 | 12000→12000 | mismatch | required_level 20->0 |
 | FeralDruid | 60 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  |
 | FeralDruid | 60 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
 | FeralDruid | 60 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  |
@@ -364,7 +345,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 60 | Moonfire | 9 | 9834 | 325.00→325.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 12000→12000 | match |  |
 | FeralDruid | 60 | Moonfire | 10 | 9835 | 375.00→375.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 12000→12000 | match |  |
 | FeralDruid | 60 | Rake | 0 | 9904 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 54->0 |
-| FeralDruid | 60 | Rip | 0 | 9896 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | 12000→12000 | mismatch | required_level 60->0 |
+| FeralDruid | 60 | Rip | 0 | 9896 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | 12000→0 | mismatch | required_level 60->0; duration_ms 12000->0 |
 | FeralDruid | 60 | Shred | 0 | 9830 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | n/a | mismatch | required_level 54->0 |
 | FeralDruid | 60 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
 | FeralDruid | 60 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  |
@@ -373,7 +354,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 60 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  |
 | FeralDruid | 60 | Starfire | 6 | 9876 | 315.00→315.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 58→58 | n/a | match |  |
 | FeralDruid | 60 | Starfire | 7 | 25298 | 340.00→340.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 60→60 | n/a | match |  |
-| FeralDruid | 60 | Thorns | 0 | 9910 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 54→0 | 600000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 54->0; duration_ms 600000->0 |
 | FeralDruid | 60 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→0 | 6000→0 | mismatch | required_level 24->0; duration_ms 6000->0 |
 | FeralDruid | 60 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
 | FeralDruid | 60 | Wrath | 2 | 5177 | 20.00→35.00 | mana→mana | 0→0 | 1700→1200 | 1500→1500 | 6→6 | n/a | mismatch | cost 20.00->35.00; cast_time_ms 1700->1200 |

@@ -8,31 +8,32 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Mage | 10 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 10 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
 | Mage | 10 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
 | Mage | 10 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
 | Mage | 10 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
 | Mage | 10 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
 | Mage | 10 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
 | Mage | 10 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
-| Mage | 10 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
+| Mage | 10 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 10 | Cold Snap | 0 | 12472 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | Mage | 10 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 |
 | Mage | 10 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→0 | mismatch | required_level 20->0; duration_ms 8000->0 |
 | Mage | 10 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
 | Mage | 10 | Fireball | 1 | 133 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | 4000→8000 | mismatch | duration_ms 4000->8000 |
 | Mage | 10 | Fireball | 2 | 143 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | 6000→8000 | mismatch | duration_ms 6000->8000 |
+| Mage | 10 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 10 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 4→4 | 5000→0 | mismatch | cast_time_ms 1500->1000; duration_ms 5000->0 |
 | Mage | 10 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1300 | 1500→1500 | 8→8 | 6000→0 | mismatch | cast_time_ms 1800->1300; duration_ms 6000->0 |
 | Mage | 20 | Arcane Explosion | 1 | 1449 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | n/a | match |  |
-| Mage | 20 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
 | Mage | 20 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
 | Mage | 20 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
-| Mage | 20 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 20 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
-| Mage | 20 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 20 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
 | Mage | 20 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
 | Mage | 20 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
+| Mage | 20 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 20 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 20 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  |
 | Mage | 20 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 20 | Cold Snap | 0 | 12472 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
@@ -45,6 +46,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Mage | 20 | Fireball | 3 | 145 | 65.00→65.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 12→12 | 6000→8000 | mismatch | duration_ms 6000->8000 |
 | Mage | 20 | Fireball | 4 | 3140 | 95.00→95.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 18→18 | 8000→8000 | match |  |
 | Mage | 20 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 20 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 20 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 4→4 | 5000→0 | mismatch | cast_time_ms 1500->1000; duration_ms 5000->0 |
 | Mage | 20 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1300 | 1500→1500 | 8→8 | 6000→0 | mismatch | cast_time_ms 1800->1300; duration_ms 6000->0 |
 | Mage | 20 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→1700 | 1500→1500 | 14→14 | 6000→0 | mismatch | cast_time_ms 2200->1700; duration_ms 6000->0 |
@@ -53,14 +55,14 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Mage | 30 | Arcane Explosion | 1 | 1449 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | n/a | match |  |
 | Mage | 30 | Arcane Explosion | 2 | 8437 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | n/a | match |  |
 | Mage | 30 | Arcane Explosion | 3 | 8438 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
-| Mage | 30 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
-| Mage | 30 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
-| Mage | 30 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
 | Mage | 30 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
+| Mage | 30 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
+| Mage | 30 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
 | Mage | 30 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
 | Mage | 30 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
 | Mage | 30 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
 | Mage | 30 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 30 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 30 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  |
 | Mage | 30 | Arcane Missiles | 3 | 5145 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 5000→5000 | match |  |
 | Mage | 30 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
@@ -80,6 +82,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Mage | 30 | Fireball | 6 | 8401 | 185.00→185.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 8000→8000 | match |  |
 | Mage | 30 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 30 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 30 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 30 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 30 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 4→4 | 5000→0 | mismatch | cast_time_ms 1500->1000; duration_ms 5000->0 |
 | Mage | 30 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1300 | 1500→1500 | 8→8 | 6000→0 | mismatch | cast_time_ms 1800->1300; duration_ms 6000->0 |
 | Mage | 30 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→1700 | 1500→1500 | 14→14 | 6000→0 | mismatch | cast_time_ms 2200->1700; duration_ms 6000->0 |
@@ -95,12 +99,12 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Mage | 38 | Arcane Explosion | 4 | 8439 | 250.00→250.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  |
 | Mage | 38 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
 | Mage | 38 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
-| Mage | 38 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
 | Mage | 38 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
-| Mage | 38 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 38 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
-| Mage | 38 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 38 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
+| Mage | 38 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
+| Mage | 38 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 38 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 38 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  |
 | Mage | 38 | Arcane Missiles | 3 | 5145 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 5000→5000 | match |  |
 | Mage | 38 | Arcane Missiles | 4 | 8416 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 5000→5000 | match |  |
@@ -125,6 +129,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Mage | 38 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 38 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 38 | Flamestrike | 3 | 8422 | 490.00→490.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 38 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 38 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 38 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 4→4 | 5000→0 | mismatch | cast_time_ms 1500->1000; duration_ms 5000->0 |
 | Mage | 38 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1300 | 1500→1500 | 8→8 | 6000→0 | mismatch | cast_time_ms 1800->1300; duration_ms 6000->0 |
 | Mage | 38 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→1700 | 1500→1500 | 14→14 | 6000→0 | mismatch | cast_time_ms 2200->1700; duration_ms 6000->0 |
@@ -142,14 +148,14 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Mage | 40 | Arcane Explosion | 2 | 8437 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | n/a | match |  |
 | Mage | 40 | Arcane Explosion | 3 | 8438 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
 | Mage | 40 | Arcane Explosion | 4 | 8439 | 250.00→250.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  |
-| Mage | 40 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
-| Mage | 40 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 40 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
+| Mage | 40 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
 | Mage | 40 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
 | Mage | 40 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
 | Mage | 40 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
-| Mage | 40 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 40 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
+| Mage | 40 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 40 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 40 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  |
 | Mage | 40 | Arcane Missiles | 3 | 5145 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 5000→5000 | match |  |
 | Mage | 40 | Arcane Missiles | 4 | 8416 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 5000→5000 | match |  |
@@ -176,6 +182,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Mage | 40 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 40 | Flamestrike | 3 | 8422 | 490.00→490.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 40 | Flamestrike | 4 | 8423 | 650.00→650.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 40 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 40 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 40 | Frost Nova | 3 | 6131 | 115.00→115.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 40 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 4→4 | 5000→0 | mismatch | cast_time_ms 1500->1000; duration_ms 5000->0 |
 | Mage | 40 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1300 | 1500→1500 | 8→8 | 6000→0 | mismatch | cast_time_ms 1800->1300; duration_ms 6000->0 |
 | Mage | 40 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→1700 | 1500→1500 | 14→14 | 6000→0 | mismatch | cast_time_ms 2200->1700; duration_ms 6000->0 |
@@ -196,14 +205,14 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Mage | 50 | Arcane Explosion | 3 | 8438 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
 | Mage | 50 | Arcane Explosion | 4 | 8439 | 250.00→250.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  |
 | Mage | 50 | Arcane Explosion | 5 | 10201 | 315.00→315.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | n/a | match |  |
-| Mage | 50 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
-| Mage | 50 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 50 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
-| Mage | 50 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 50 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
 | Mage | 50 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
 | Mage | 50 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
 | Mage | 50 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
 | Mage | 50 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
+| Mage | 50 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 50 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 50 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  |
 | Mage | 50 | Arcane Missiles | 3 | 5145 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 5000→5000 | match |  |
 | Mage | 50 | Arcane Missiles | 4 | 8416 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 5000→5000 | match |  |
@@ -236,6 +245,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Mage | 50 | Flamestrike | 3 | 8422 | 490.00→490.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 50 | Flamestrike | 4 | 8423 | 650.00→650.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 50 | Flamestrike | 5 | 10215 | 815.00→815.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 48→48 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 50 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 50 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 50 | Frost Nova | 3 | 6131 | 115.00→115.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 50 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 4→4 | 5000→0 | mismatch | cast_time_ms 1500->1000; duration_ms 5000->0 |
 | Mage | 50 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1300 | 1500→1500 | 8→8 | 6000→0 | mismatch | cast_time_ms 1800->1300; duration_ms 6000->0 |
 | Mage | 50 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→1700 | 1500→1500 | 14→14 | 6000→0 | mismatch | cast_time_ms 2200->1700; duration_ms 6000->0 |
@@ -263,14 +275,14 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Mage | 60 | Arcane Explosion | 4 | 8439 | 250.00→250.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  |
 | Mage | 60 | Arcane Explosion | 5 | 10201 | 315.00→315.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | n/a | match |  |
 | Mage | 60 | Arcane Explosion | 6 | 10202 | 390.00→390.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | n/a | match |  |
-| Mage | 60 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
-| Mage | 60 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
-| Mage | 60 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
-| Mage | 60 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
-| Mage | 60 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
 | Mage | 60 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
 | Mage | 60 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
 | Mage | 60 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
+| Mage | 60 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
+| Mage | 60 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
+| Mage | 60 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
+| Mage | 60 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 60 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
 | Mage | 60 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  |
 | Mage | 60 | Arcane Missiles | 3 | 5145 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 5000→5000 | match |  |
 | Mage | 60 | Arcane Missiles | 4 | 8416 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 5000→5000 | match |  |
@@ -312,6 +324,10 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Mage | 60 | Flamestrike | 4 | 8423 | 650.00→650.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 60 | Flamestrike | 5 | 10215 | 815.00→815.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 48→48 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 60 | Flamestrike | 6 | 10216 | 990.00→990.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 56→56 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 60 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 60 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 60 | Frost Nova | 3 | 6131 | 115.00→115.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 60 | Frost Nova | 4 | 10230 | 145.00→145.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 54→54 | 8000→0 | mismatch | duration_ms 8000->0 |
 | Mage | 60 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 4→4 | 5000→0 | mismatch | cast_time_ms 1500->1000; duration_ms 5000->0 |
 | Mage | 60 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1300 | 1500→1500 | 8→8 | 6000→0 | mismatch | cast_time_ms 1800->1300; duration_ms 6000->0 |
 | Mage | 60 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→1700 | 1500→1500 | 14→14 | 6000→0 | mismatch | cast_time_ms 2200->1700; duration_ms 6000->0 |

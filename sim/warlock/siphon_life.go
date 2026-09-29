@@ -11,7 +11,11 @@ const SiphonLifeRanks = 4
 
 func (warlock *Warlock) getSiphonLifeBaseConfig(rank int) core.SpellConfig {
 	spellId := [SiphonLifeRanks + 1]int32{0, 18265, 18879, 18880, 18881}[rank]
-	baseDamage := [SiphonLifeRanks + 1]float64{0, 15, 22, 33, 45}[rank]
+	// Per-tick base damage, straight from spellconst/warlock.json's own
+	// flat "amount" for each rank's effect (period_ms 3000, 10 ticks):
+	// 18265/18879/18880/18881 -> 11/19/29/41. Every rank here used to run
+	// ~4 higher than the client's own number (rank 1: 15 vs 11).
+	baseDamage := [SiphonLifeRanks + 1]float64{0, 11, 19, 29, 41}[rank]
 	manaCost := [SiphonLifeRanks + 1]float64{0, 150, 205, 285, 365}[rank]
 	// Rank 1 (18265) is learned at level 30 in the client's own data
 	// (1.60.1.70009); the 0 here was a stale gate that let rank 1

@@ -14,7 +14,13 @@ func (warlock *Warlock) getDrainLifeBaseConfig(rank int) core.SpellConfig {
 
 	spellId := [DrainLifeRanks + 1]int32{0, 689, 699, 709, 7651, 11699, 11700}[rank]
 	spellCoeff := [DrainLifeRanks + 1]float64{0, .078, .1, .1, .1, .1, .1}[rank]
-	baseDamage := [DrainLifeRanks + 1]float64{0, 10, 17, 29, 41, 55, 71}[rank]
+	// Per-tick base damage, straight from spellconst/warlock.json's own
+	// flat "amount" for each rank's effect (period_ms 1000, 5 ticks):
+	// 689/699/709/7651/11699/11700 -> 10/14/22/28/39/51. Ranks 2-6 here
+	// used to be 17/29/41/55/71 -- drifted 10-45% high, closest to a
+	// stale pre-Forever classic tooltip-total/5 rather than the client's
+	// own per-rank number.
+	baseDamage := [DrainLifeRanks + 1]float64{0, 10, 14, 22, 28, 39, 51}[rank]
 	manaCost := [DrainLifeRanks + 1]float64{0, 55, 85, 135, 185, 240, 300}[rank]
 	level := [DrainLifeRanks + 1]int{0, 14, 22, 30, 38, 46, 54}[rank]
 

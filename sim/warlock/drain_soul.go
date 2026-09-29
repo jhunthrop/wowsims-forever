@@ -16,7 +16,13 @@ func (warlock *Warlock) getDrainSoulBaseConfig(rank int) core.SpellConfig {
 
 	spellId := [DrainSoulRanks + 1]int32{0, 1120, 8288, 8289, 11675}[rank]
 	spellCoeff := [DrainSoulRanks + 1]float64{0, 0.063, 0.1, 0.1, 0.1}[rank]
-	baseDamage := [DrainSoulRanks + 1]float64{0, 55, 155, 295, 455}[rank] / float64(baseNumTicks)
+	// Per-tick base damage, straight from spellconst/warlock.json's own
+	// flat "amount" for each rank's damage effect (period_ms 3000, 5
+	// ticks): 1120/8288/8289/11675 -> 17/34/54/84. This used to be a
+	// classic-tooltip total (55/155/295/455) divided by baseNumTicks,
+	// which drifted 10-30% high of the client's real per-tick number
+	// (rank 4: 91 vs 84).
+	baseDamage := [DrainSoulRanks + 1]float64{0, 17, 34, 54, 84}[rank]
 	manaCost := [DrainSoulRanks + 1]float64{0, 55, 125, 210, 290}[rank]
 	level := [DrainSoulRanks + 1]int{0, 10, 24, 38, 52}[rank]
 
