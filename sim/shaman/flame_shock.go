@@ -54,6 +54,18 @@ func (shaman *Shaman) newFlameShockSpell(rank int, shockTimer *core.Timer) core.
 
 	spell.BonusCoefficient = baseSpellCoeff
 
+	// Call of Flame's tooltip (talents/shaman.json node 104770) names
+	// "Fire Totems and ... Flame Shock, Fire Nova, and Lava Burst"
+	// explicitly; Lava Burst and the fire totems already apply this
+	// multiplicatively via shaman.callOfFlameMultiplier() (lava_burst.go,
+	// fire_totems.go), but Flame Shock was left on newShockSpellConfig's
+	// flat DamageMultiplier: 1. AttackerDamageMultiplier multiplies
+	// spell.DamageMultiplier into both the initial hit
+	// (calcDamageInternal) and the DoT's own snapshot
+	// (dot.Snapshot -> AttackerDamageMultiplier), so setting it here
+	// covers both without touching the DotConfig.
+	spell.DamageMultiplier = shaman.callOfFlameMultiplier()
+
 	spell.Dot = core.DotConfig{
 		Aura: core.Aura{
 			Label: fmt.Sprintf("Flame Shock (Rank %d)", rank),

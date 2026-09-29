@@ -18,6 +18,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Hunter | 20 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→5400 | -1000000→0 | 1500→1500 | 12→12 | n/a | mismatch | cooldown_ms 6000->5400 |
 | Hunter | 20 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→5400 | -1000000→0 | 1500→1500 | 20→20 | n/a | mismatch | cooldown_ms 6000->5400 |
 | Hunter | 20 | Aspect of the Hawk | 2 | 14318 | 35.00→35.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | n/a | match |  |
+| Hunter | 20 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 |
 | Hunter | 20 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 20 | Mongoose Bite | 1 | 1495 | 30.00→30.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 16→16 | n/a | match |  |
 | Hunter | 20 | Multi-Shot | 0 | 2643 | 0.00→62.69 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | mismatch | cost 0.00->62.69 |
@@ -32,6 +33,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Hunter | 30 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→5400 | -1000000→0 | 1500→1500 | 20→20 | n/a | mismatch | cooldown_ms 6000->5400 |
 | Hunter | 30 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→5400 | -1000000→0 | 1500→1500 | 28→28 | n/a | mismatch | cooldown_ms 6000->5400 |
 | Hunter | 30 | Aspect of the Hawk | 3 | 14319 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | n/a | match |  |
+| Hunter | 30 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 |
 | Hunter | 30 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 30 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 30 | Mongoose Bite | 2 | 14269 | 40.00→40.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
@@ -51,6 +53,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Hunter | 38 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→5400 | -1000000→0 | 1500→1500 | 36→36 | n/a | mismatch | cooldown_ms 6000->5400 |
 | Hunter | 38 | Aspect of the Hawk | 4 | 14320 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  |
 | Hunter | 38 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→0 | mismatch | duration_ms 60000->0 |
+| Hunter | 38 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 |
 | Hunter | 38 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 38 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 38 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 |
@@ -71,6 +74,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Hunter | 40 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→5400 | -1000000→0 | 1500→1500 | 36→36 | n/a | mismatch | cooldown_ms 6000->5400 |
 | Hunter | 40 | Aspect of the Hawk | 4 | 14320 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  |
 | Hunter | 40 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→0 | mismatch | duration_ms 60000->0 |
+| Hunter | 40 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 |
+| Hunter | 40 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→0 | mismatch | duration_ms 60000->0 |
 | Hunter | 40 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 40 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 40 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 |
@@ -95,6 +100,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Hunter | 50 | Aspect of the Hawk | 5 | 14321 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | n/a | match |  |
 | Hunter | 50 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→0 | mismatch | duration_ms 60000->0 |
 | Hunter | 50 | Explosive Trap | 2 | 14316 | 395.00→395.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 44→44 | 60000→0 | mismatch | duration_ms 60000->0 |
+| Hunter | 50 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 |
+| Hunter | 50 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→0 | mismatch | duration_ms 60000->0 |
 | Hunter | 50 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 50 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 50 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 |
@@ -125,6 +132,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | Hunter | 60 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→0 | mismatch | duration_ms 60000->0 |
 | Hunter | 60 | Explosive Trap | 2 | 14316 | 395.00→395.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 44→44 | 60000→0 | mismatch | duration_ms 60000->0 |
 | Hunter | 60 | Explosive Trap | 3 | 14317 | 520.00→520.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 54→54 | 60000→0 | mismatch | duration_ms 60000->0 |
+| Hunter | 60 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 |
+| Hunter | 60 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→0 | mismatch | duration_ms 60000->0 |
+| Hunter | 60 | Freezing Trap | 3 | 14311 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 60→60 | 60000→0 | mismatch | duration_ms 60000->0 |
 | Hunter | 60 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 60 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 60 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 |
