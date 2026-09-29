@@ -12,7 +12,11 @@ const SoulFireCastTime = time.Millisecond * 6000
 
 func (warlock *Warlock) getSoulFireBaseConfig(rank int) core.SpellConfig {
 	spellId := [SoulFireRanks + 1]int32{0, 6353, 17924}[rank]
-	baseDamage := [SoulFireRanks + 1][]float64{{0, 0}, {628, 789}, {715, 894}}[rank]
+	// baseDamage was the classic tooltip roll ({628, 789} / {715, 894})
+	// until the rotation-accuracy audit compared it against spellconst/
+	// warlock.json's own per-rank flat "amount" (rank 2, 17924, amount
+	// 431, sp_coefficient 1.0 unchanged) - see shadowbolt.go's comment.
+	baseDamage := [SoulFireRanks + 1]float64{0, 377, 431}[rank]
 	manaCost := [SoulFireRanks + 1]float64{0, 305, 335}[rank]
 	level := [SoulFireRanks + 1]int{0, 48, 56}[rank]
 	spellCoeff := 1.0
@@ -43,8 +47,7 @@ func (warlock *Warlock) getSoulFireBaseConfig(rank int) core.SpellConfig {
 		BonusCoefficient: spellCoeff,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			damage := sim.Roll(baseDamage[0], baseDamage[1])
-			results := spell.CalcDamage(sim, target, damage, spell.OutcomeMagicHitAndCrit)
+			results := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 			spell.WaitTravelTime(sim, func(s *core.Simulation) {
 				spell.DealDamage(sim, results)
 			})

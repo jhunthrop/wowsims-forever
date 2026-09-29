@@ -32,7 +32,7 @@
       }
     },
     {
-      "notes": "Soul Fire on cooldown. Future-proofed for Decimation (440870), which is meant to drop this 60 second cooldown to near nothing after a Shadow Bolt or Searing Pain crit -- not yet implemented in this engine build (sim/warlock/soul_fire.go has a flat, unshortened cooldown), so today this simply casts once a minute.",
+      "notes": "Soul Fire on cooldown. The engine implements Decimation (440870, sim/warlock/soul_fire.go's applyDecimation) for a build that takes it, but the guide's own level-60 build spends 0 of its 2 points to rush Demonic Pact instead, so on this build Soul Fire just casts on its flat, unshortened 60 second cooldown.",
       "action": { "castSpell": { "spellId": { "spellId": 17924, "rank": 2 } } }
     },
     {
