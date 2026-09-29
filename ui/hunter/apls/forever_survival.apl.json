@@ -1,53 +1,6 @@
 {
   "type": "TypeAPL",
-  "prepullActions": [
-    {
-      "action": {
-        "move": {
-          "rangeFromTarget": {
-            "const": {
-              "val": "30"
-            }
-          }
-        }
-      },
-      "doAtValue": {
-        "const": {
-          "val": "-15s"
-        }
-      }
-    },
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 25296,
-            "rank": 7
-          }
-        }
-      },
-      "doAtValue": {
-        "const": {
-          "val": "-10s"
-        }
-      }
-    },
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 20904,
-            "rank": 6
-          }
-        }
-      },
-      "doAtValue": {
-        "const": {
-          "val": "-3.5s"
-        }
-      }
-    }
-  ],
+  "prepullActions": [],
   "priorityList": [
     {
       "action": {
@@ -55,33 +8,7 @@
       }
     },
     {
-      "notes": "Aimed Shot on cooldown, timed so its cast does not clip the next auto shot.",
-      "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "autoTimeToNext": {
-                "autoType": "Ranged"
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "1s"
-              }
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 20904,
-            "rank": 6
-          }
-        }
-      }
-    },
-    {
-      "notes": "Raptor Strike as the melee filler while Survival's talents make meleeing worthwhile; queued at tag 3, the engine's odd one out for on-next-swing abilities. Never below 20 percent mana, so it does not starve the ranged shots.",
+      "notes": "Raptor Strike queued on the swing timer (tag 3, the on-next-swing queue tag), gated at 20% mana so it does not starve Mongoose Bite below.",
       "action": {
         "condition": {
           "cmp": {
@@ -106,122 +33,33 @@
       }
     },
     {
-      "notes": "Multi-Shot as the filler between Aimed Shots.",
+      "notes": "Counterattack: a bare cast that only lands while its parry-triggered proc aura is active, the same shape warrior-arms.json's own Overpower line uses.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "autoTimeToNext": {
-                "autoType": "Ranged"
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "0.5s"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
-            "spellId": 2643,
-            "rank": 0
+            "spellId": 20910,
+            "rank": 4
           }
         }
       }
     },
     {
-      "notes": "Serpent Sting kept up whenever it is about to fall off -- never ahead of Aimed Shot or Multi-Shot above, per the cited guide.",
+      "notes": "Mongoose Bite on cooldown: no dodge requirement in this build, so its own 5s cooldown and mana cost are the only gates.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "dotRemainingTime": {
-                "spellId": {
-                  "spellId": 25295,
-                  "rank": 9
-                }
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "5s"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
-            "spellId": 25295,
-            "rank": 9
+            "spellId": 14271,
+            "rank": 4
           }
         }
       }
     },
     {
-      "notes": "Arcane Shot as the last filler, only when neither shot above will be ready within a global and mana is above the floor: it is instant, so it never clips an auto shot, but it is the least mana-efficient shot, and a Classic-length fight runs dry without the floor.",
+      "notes": "Strider Kick as the lowest-priority filler on its own 8s cooldown.",
       "action": {
-        "condition": {
-          "and": {
-            "vals": [
-              {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "40%"
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "spellTimeToReady": {
-                      "spellId": {
-                        "spellId": 2643,
-                        "rank": 0
-                      }
-                    }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "1.5s"
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "spellTimeToReady": {
-                      "spellId": {
-                        "spellId": 20904,
-                        "rank": 6
-                      }
-                    }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "1.5s"
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        },
         "castSpell": {
           "spellId": {
-            "spellId": 14287,
-            "rank": 8
+            "spellId": 1317257
           }
         }
       }
