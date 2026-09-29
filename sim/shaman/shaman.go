@@ -90,6 +90,7 @@ const (
 	SpellCode_ShamanFlameShock
 	SpellCode_ShamanFrostShock
 	SpellCode_ShamanHealingWave
+	SpellCode_ShamanLavaBurst
 	SpellCode_ShamanLesserHealingWave
 	SpellCode_ShamanLightningBolt
 	SpellCode_ShamanLightningShield
@@ -116,6 +117,7 @@ type Shaman struct {
 	GraceOfAirTotem      []*core.Spell
 	HealingStreamTotem   []*core.Spell
 	HealingWave          []*core.Spell
+	LavaBurst            []*core.Spell
 	LesserHealingWave    []*core.Spell
 	LightningBolt        []*core.Spell
 	LightningShield      []*core.Spell
@@ -176,6 +178,7 @@ func (shaman *Shaman) AddRaidBuffs(_ *proto.RaidBuffs) {
 func (shaman *Shaman) Initialize() {
 	// Core abilities
 	shaman.registerChainLightningSpell()
+	shaman.registerLavaBurstSpell()
 	shaman.registerLightningBoltSpell()
 	shaman.registerLightningShieldSpell()
 	shaman.registerShocks()
