@@ -32,6 +32,9 @@ const (
 	// Strikes
 	SpellCode_HunterRaptorStrike
 	SpellCode_HunterRaptorStrikeHit
+	SpellCode_HunterCounterattack
+	SpellCode_HunterStriderKick
+	SpellCode_HunterLaceratingStrikes
 
 	// Stings
 	SpellCode_HunterSerpentSting
@@ -111,8 +114,11 @@ type Hunter struct {
 	MeleeSpells []*core.Spell
 	LastShot    *core.Spell
 
-	// The aura that allows you to cast Mongoose Bite
-	DefensiveState *core.Aura
+	Counterattack     *core.Spell
+	StriderKick       *core.Spell
+	LaceratingStrikes *core.Spell
+
+	CounterattackProcAura *core.Aura
 
 	RapidFireAura       *core.Aura
 	BestialWrathPetAura *core.Aura
@@ -178,6 +184,8 @@ func (hunter *Hunter) Initialize() {
 	hunter.registerRaptorStrikeSpell()
 	hunter.registerMongooseBiteSpell()
 	hunter.registerWingClipSpell()
+	hunter.registerCounterattackSpell()
+	hunter.registerStriderKickSpell()
 	hunter.registerVolleySpell()
 
 	traps := hunter.NewTimer()

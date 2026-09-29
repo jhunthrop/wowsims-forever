@@ -100,9 +100,14 @@ func (hunter *Hunter) ApplyTalents() {
 	}
 
 	if hunter.Talents.LightningReflexes > 0 {
-		agiBonus := 0.03 * float64(hunter.Talents.LightningReflexes)
+		// Client text: "Increases your Agility by 2%" per rank (was 3%
+		// here, from before the Survival tree was rewritten to Forever's
+		// trait tree -- source: 1.60.1.70009 talents/hunter.json).
+		agiBonus := 0.02 * float64(hunter.Talents.LightningReflexes)
 		hunter.MultiplyStat(stats.Agility, 1.0+agiBonus)
 	}
+
+	hunter.applyPredatorsEdge()
 
 	hunter.applyEfficiency()
 	hunter.applyTrapMastery()
@@ -186,6 +191,35 @@ func (hunter *Hunter) registerBestialWrathCD() {
 
 func (hunter *Hunter) mortalShots() float64 {
 	return 0.06 * float64(hunter.Talents.MortalShots)
+}
+
+// predatorsEdgeCritDamage is Predator's Edge's melee-critical-strike-damage
+// half (client text: "Increases your melee critical strike damage by
+// 6/12/18/24/30%", spell 1310627). It is added directly into each melee
+// special's CritDamageBonus, the same way mortalShots() is, rather than
+// through applyPredatorsEdge's OnSpellRegistered hook, because it must
+// exclude ranged shots (mortalShots applies to those too) and every
+// melee special file already reads mortalShots() by hand.
+func (hunter *Hunter) predatorsEdgeCritDamage() float64 {
+	return 0.06 * float64(hunter.Talents.PredatorsEdge)
+}
+
+// applyPredatorsEdge wires the other half of Predator's Edge -- the
+// off-hand weapon damage bonus (10/20/30/40/50% per rank) -- onto every
+// spell this hunter registers with an off-hand proc mask, including the
+// off-hand auto attack itself (same OnSpellRegistered pattern as
+// sim/warrior/talents.go's applyWeaponmaster).
+func (hunter *Hunter) applyPredatorsEdge() {
+	if hunter.Talents.PredatorsEdge == 0 {
+		return
+	}
+
+	offHandMultiplier := 1 + 0.1*float64(hunter.Talents.PredatorsEdge)
+	hunter.OnSpellRegistered(func(spell *core.Spell) {
+		if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
+			spell.DamageMultiplier *= offHandMultiplier
+		}
+	})
 }
 
 func (hunter *Hunter) applyTrapMastery() {
