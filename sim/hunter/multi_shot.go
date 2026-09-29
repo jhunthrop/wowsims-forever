@@ -7,11 +7,33 @@ import (
 	"github.com/wowsims/classic/sim/core/proto"
 )
 
-func (hunter *Hunter) getMultiShotConfig(rank int, timer *core.Timer) core.SpellConfig {
-	spellId := [6]int32{0, 2643, 14288, 14289, 14290, 25294}[rank]
-	baseDamage := [6]float64{0, 0, 40, 80, 120, 150}[rank]
-	manaCost := [6]float64{0, 100, 140, 175, 210, 230}[rank]
-	level := [6]int{0, 18, 30, 42, 54, 60}[rank]
+// multiShotLevel is Multi-Shot's single learn level; source: 1.60.1.70009
+// client spell data. Classic's five-rank progression (2643/14288/14289/
+// 14290/25294, levels 18/30/42/54/60, flat mana 100-230, flat bonus
+// damage 0-150) does not exist in Forever's spellconst/hunter.json:
+// spell 2643 is the *only* Multi-Shot entry the client carries, still
+// learned at 18, with cost_type 0 (mana) but cost 0 -- see
+// multiShotBaseManaCostPercent below for why the flat "cost" column is
+// not the real number here -- category_cooldown_ms 6000 (6s, not
+// Classic's 10s) and effect amount 0 (code 121, "weapon damage + flat
+// amount": pure weapon/ranged-AP damage, no per-rank flat bonus). The
+// engine used to keep Classic's 4 extra rank ids and their mana/damage
+// numbers; none of those ids resolve in the pinned client, so a level-30+
+// hunter was overpaying (140-230 mana, still on a 10s clock) for a shot
+// Forever prices at a fraction of that on a 6s clock.
+const multiShotLevel = 18
+
+// multiShotBaseManaCostPercent is Multi-Shot's cost as a fraction of base
+// mana. spellconst's flat "cost" field is 0 for spell 2643 (the pipeline
+// only carries the client's flat-mana column, not its percent-of-base-
+// mana column), so this is corroborated directly against Wowhead's
+// Forever tooltip for spell 2643 ("13.9% of base mana") instead --
+// scaling with level the same way Classic's percent-cost spells always
+// did, just via one spell id instead of Classic's five.
+const multiShotBaseManaCostPercent = 0.139
+
+func (hunter *Hunter) getMultiShotConfig(timer *core.Timer) core.SpellConfig {
+	const spellId = 2643
 
 	// Pool-sized ceiling, live-bounded loop; see APLActionMultidot and
 	// warrior registerWhirlwindSpell.
@@ -26,12 +48,11 @@ func (hunter *Hunter) getMultiShotConfig(rank int, timer *core.Timer) core.Spell
 		ProcMask:      core.ProcMaskRangedSpecial,
 		Flags:         core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagShot,
 		CastType:      proto.CastType_CastTypeRanged,
-		Rank:          rank,
-		RequiredLevel: level,
+		RequiredLevel: multiShotLevel,
 		MissileSpeed:  24,
 
 		ManaCost: core.ManaCostOptions{
-			FlatCost: manaCost,
+			BaseCost: multiShotBaseManaCostPercent,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -45,7 +66,7 @@ func (hunter *Hunter) getMultiShotConfig(rank int, timer *core.Timer) core.Spell
 			IgnoreHaste: true, // Hunter GCD is locked at 1.5s
 			CD: core.Cooldown{
 				Timer:    timer,
-				Duration: time.Second * 10,
+				Duration: time.Second * 6,
 			},
 			CastTime: func(spell *core.Spell) time.Duration {
 				return time.Duration(float64(spell.DefaultCast.CastTime) / hunter.RangedSwingSpeed())
@@ -68,8 +89,9 @@ func (hunter *Hunter) getMultiShotConfig(rank int, timer *core.Timer) core.Spell
 			// exactly the results the hit loop calculated.
 			numHits := min(maxHits, len(sim.Encounter.TargetUnits))
 			for hitIndex := 0; hitIndex < numHits; hitIndex++ {
-				baseDamage := baseDamage +
-					hunter.AutoAttacks.Ranged().CalculateNormalizedWeaponDamage(sim, spell.RangedAttackPower(target, false)) +
+				// spellconst's effect amount is 0 (no flat bonus): every
+				// target takes pure normalized weapon + ammo damage.
+				baseDamage := hunter.AutoAttacks.Ranged().CalculateNormalizedWeaponDamage(sim, spell.RangedAttackPower(target, false)) +
 					hunter.AmmoDamageBonus
 
 				results[hitIndex] = spell.CalcDamage(sim, curTarget, baseDamage, spell.OutcomeRangedHitAndCrit)
@@ -89,12 +111,8 @@ func (hunter *Hunter) getMultiShotConfig(rank int, timer *core.Timer) core.Spell
 }
 
 func (hunter *Hunter) registerMultiShotSpell(timer *core.Timer) {
-	maxRank := core.TernaryInt(core.IncludeAQ, 5, 4)
-	for rank := 1; rank <= maxRank; rank++ {
-		config := hunter.getMultiShotConfig(rank, timer)
-
-		if config.RequiredLevel <= int(hunter.Level) {
-			hunter.MultiShot = hunter.GetOrRegisterSpell(config)
-		}
+	if int(hunter.Level) < multiShotLevel {
+		return
 	}
+	hunter.MultiShot = hunter.GetOrRegisterSpell(hunter.getMultiShotConfig(timer))
 }

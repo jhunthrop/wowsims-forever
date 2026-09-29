@@ -46,10 +46,12 @@ func (hunter *Hunter) getVolleyConfig(rank int) core.SpellConfig {
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,
 			},
-			CD: core.Cooldown{
-				Timer:    hunter.NewTimer(),
-				Duration: time.Second * 60,
-			},
+			// spellconst/hunter.json carries cooldown_ms 0 and
+			// category_cooldown_ms 0 for all three ranks (1510/14294/
+			// 14295), and Wowhead's Forever tooltip for 1510 states
+			// "n/a" for cooldown -- Volley is gated purely by its mana
+			// cost and the 6s channel (below), the same as Classic. The
+			// engine used to give it a fictitious 60s cooldown.
 		},
 
 		Dot: core.DotConfig{
