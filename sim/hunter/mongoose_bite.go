@@ -10,9 +10,15 @@ import (
 // source: 1.60.1.70009 client spell data ("Mongoose Bite", ranks 1-4).
 var mongooseBiteLearnLevels = []int{16, 30, 44, 58}
 
+// mongooseBiteBaseDamage is ranks 1-4's flat bonus damage; source:
+// 1.60.1.70009 client spell data (spells 1495/14269-14271). Forever's
+// numbers are well below vanilla Classic's here too (rank 4 is +57, not
+// vanilla's +115); corrected against the client.
+var mongooseBiteBaseDamage = [5]float64{0, 15, 22, 37, 57}
+
 func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 	spellId := [5]int32{0, 1495, 14269, 14270, 14271}[rank]
-	baseDamage := [5]float64{0, 25, 45, 75, 115}[rank]
+	baseDamage := mongooseBiteBaseDamage[rank]
 	manaCost := [5]float64{0, 30, 40, 50, 65}[rank]
 	level := [5]int{0, 16, 30, 44, 58}[rank]
 
@@ -40,18 +46,25 @@ func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 			},
 		},
 
+		// FOREVER: vanilla Classic's Mongoose Bite could only be cast
+		// after the hunter dodged an attack ("Defensive State"). The
+		// client's Forever tooltip (wowhead.com/forever/spell=1495) no
+		// longer lists that requirement -- only "Requires main hand
+		// weapon" and "Cannot be used while shapeshifted" -- so the
+		// dodge-gating aura this file used to require is removed; range
+		// and the normal cooldown/GCD/mana are the only gates left.
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance && hunter.DefensiveState.IsActive()
+			return hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance
 		},
 
 		BonusCritRating:  float64(hunter.Talents.SavageStrikes) * 10 * core.CritRatingPerCritChance,
-		CritDamageBonus:  hunter.mortalShots(),
+		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			hunter.DefensiveState.Deactivate(sim)
-			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+			hunter.tryProcLaceratingStrikes(sim, target, result)
 		},
 	}
 
@@ -59,19 +72,6 @@ func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 }
 
 func (hunter *Hunter) registerMongooseBiteSpell() {
-	// Aura is only used as a pre-requisite for Mongoose Bite
-	hunter.DefensiveState = hunter.RegisterAura(core.Aura{
-		Label:    "Defensive State",
-		ActionID: core.ActionID{SpellID: 5302},
-		Duration: time.Second * 5,
-
-		OnSpellHitTaken: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if result.DidDodge() {
-				aura.Activate(sim)
-			}
-		},
-	})
-
 	rank := core.HighestRankAtLevel(mongooseBiteLearnLevels, hunter.Level)
 	if rank == 0 {
 		return
@@ -79,4 +79,5 @@ func (hunter *Hunter) registerMongooseBiteSpell() {
 
 	config := hunter.getMongooseBiteConfig(rank)
 	hunter.MongooseBite = hunter.GetOrRegisterSpell(config)
+	hunter.registerLaceratingStrikesDot()
 }
