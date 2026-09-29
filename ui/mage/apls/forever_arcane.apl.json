@@ -67,7 +67,7 @@
       }
     },
     {
-      "notes": "Shoot (5019, core.RegisterShootSpell) is the wand-weaving fallback added by the rotation-accuracy program's caster-wand finding (2026-09-28): sim/mage never enabled a ranged auto attack or registered a Shoot action, so a leveling Arcane mage's equipped wand dealt zero damage even though the ladder harness always equips one. Gated below 20 percent mana so it only fills globals Arcane Missiles could no longer afford; the engine multiplies its damage by the Wand Specialization talent's 13/25 percent bonus when taken.",
+      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while you regenerate, and Wand Specialization adds to it.",
       "action": {
         "condition": {
           "cmp": {

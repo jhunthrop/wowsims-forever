@@ -1,18 +1,39 @@
 {
   "type": "TypeAPL",
   "priorityList": [
-    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
     {
       "notes": "Pop Combustion once Improved Scorch's debuff is fully stacked on the current target, for a guaranteed run of Fire crits. Fix round 4: tracks the engine's own debuff id (12873, sim/core/debuffs.go's ImprovedScorchAura), which the mage's own Scorch casts stack when Improved Scorch is talented (sim/mage/talents.go's applyImprovedScorch, sim/mage/scorch.go's ApplyEffects) -- restored after fix round 3 mistakenly treated this as impossible. 12873 is not in spellconst (it is an engine-side aura id, not a client spell), a known, deliberate exception for this one condition.",
       "action": {
         "condition": {
           "cmp": {
             "op": "OpGe",
-            "lhs": { "auraNumStacks": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } },
-            "rhs": { "const": { "val": "5" } }
+            "lhs": {
+              "auraNumStacks": {
+                "sourceUnit": {
+                  "type": "CurrentTarget"
+                },
+                "auraId": {
+                  "spellId": 12873
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "5"
+              }
+            }
           }
         },
-        "castSpell": { "spellId": { "spellId": 11129 } }
+        "castSpell": {
+          "spellId": {
+            "spellId": 11129
+          }
+        }
       }
     },
     {
@@ -21,23 +42,71 @@
         "condition": {
           "and": {
             "vals": [
-              { "auraIsKnown": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } },
+              {
+                "auraIsKnown": {
+                  "sourceUnit": {
+                    "type": "CurrentTarget"
+                  },
+                  "auraId": {
+                    "spellId": 12873
+                  }
+                }
+              },
               {
                 "or": {
                   "vals": [
-                    { "not": { "val": { "auraIsActive": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } } } },
+                    {
+                      "not": {
+                        "val": {
+                          "auraIsActive": {
+                            "sourceUnit": {
+                              "type": "CurrentTarget"
+                            },
+                            "auraId": {
+                              "spellId": 12873
+                            }
+                          }
+                        }
+                      }
+                    },
                     {
                       "cmp": {
                         "op": "OpLt",
-                        "lhs": { "auraNumStacks": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } },
-                        "rhs": { "const": { "val": "5" } }
+                        "lhs": {
+                          "auraNumStacks": {
+                            "sourceUnit": {
+                              "type": "CurrentTarget"
+                            },
+                            "auraId": {
+                              "spellId": 12873
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "5"
+                          }
+                        }
                       }
                     },
                     {
                       "cmp": {
                         "op": "OpLe",
-                        "lhs": { "auraRemainingTime": { "sourceUnit": { "type": "CurrentTarget" }, "auraId": { "spellId": 12873 } } },
-                        "rhs": { "const": { "val": "1.5s" } }
+                        "lhs": {
+                          "auraRemainingTime": {
+                            "sourceUnit": {
+                              "type": "CurrentTarget"
+                            },
+                            "auraId": {
+                              "spellId": 12873
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "1.5s"
+                          }
+                        }
                       }
                     }
                   ]
@@ -46,22 +115,57 @@
             ]
           }
         },
-        "castSpell": { "spellId": { "spellId": 10207, "rank": 7 } }
+        "castSpell": {
+          "spellId": {
+            "spellId": 10207,
+            "rank": 7
+          }
+        }
       }
     },
     {
       "notes": "Fire Blast on cooldown as a free extra nuke that does not compete for Scorch or Fireball casts.",
-      "action": { "castSpell": { "spellId": { "spellId": 10199, "rank": 7 } } }
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10199,
+            "rank": 7
+          }
+        }
+      }
     },
     {
       "notes": "Fireball is the primary filler once Improved Scorch's debuff is up.",
-      "action": { "castSpell": { "spellId": { "spellId": 25306, "rank": 12 } } }
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 25306,
+            "rank": 12
+          }
+        }
+      }
     },
     {
-      "notes": "Shoot (5019, core.RegisterShootSpell) is the wand-weaving fallback added by the rotation-accuracy program's caster-wand finding (2026-09-28): sim/mage never enabled a ranged auto attack or registered a Shoot action, so a leveling Fire mage's equipped wand dealt zero damage even though the ladder harness always equips one. Gated below 20 percent mana so it only fills globals Fireball could no longer afford; the engine multiplies its damage by the Wand Specialization talent's 13/25 percent bonus when taken.",
+      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while you regenerate, and Wand Specialization adds to it.",
       "action": {
-        "condition": { "cmp": { "op": "OpLt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "20%" } } } },
-        "castSpell": { "spellId": { "spellId": 5019 } }
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "20%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 5019
+          }
+        }
       }
     }
   ]

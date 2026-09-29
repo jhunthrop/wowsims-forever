@@ -187,7 +187,7 @@
       }
     },
     {
-      "notes": "Shoot (5019, core.RegisterShootSpell) is the wand-weaving fallback added by the rotation-accuracy program's caster-wand finding (2026-09-28): sim/warlock never enabled a ranged auto attack or registered a Shoot action, so a leveling warlock's equipped wand dealt zero damage even though the ladder harness always equips one. Placed beneath Life Tap's own 10 percent gate above and gated below 20 percent mana itself, so Life Tap keeps first claim on refueling mana with health and Shoot only fills the band above that where neither Incinerate nor Shadow Bolt is affordable. Warlocks have no Wand Specialization equivalent, so this casts at the wand's plain damage.",
+      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while your DoTs tick and you regenerate.",
       "action": {
         "condition": {
           "cmp": {

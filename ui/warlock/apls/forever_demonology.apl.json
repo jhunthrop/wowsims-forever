@@ -7,43 +7,142 @@
         "condition": {
           "and": {
             "vals": [
-              { "cmp": { "op": "OpGe", "lhs": { "remainingTime": {} }, "rhs": { "const": { "val": "15s" } } } },
-              { "cmp": { "op": "OpLe", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "75%" } } } },
-              { "isExecutePhase": { "threshold": "E35" } }
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "15s"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "75%"
+                    }
+                  }
+                }
+              },
+              {
+                "isExecutePhase": {
+                  "threshold": "E35"
+                }
+              }
             ]
           }
         },
-        "castSpell": { "spellId": { "otherId": "OtherActionPotion" } }
+        "castSpell": {
+          "spellId": {
+            "otherId": "OtherActionPotion"
+          }
+        }
       }
     },
-    { "action": { "autocastOtherCooldowns": {} } },
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
     {
       "notes": "Life Tap to keep casting once mana runs low.",
       "action": {
-        "condition": { "cmp": { "op": "OpLt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "10%" } } } },
-        "castSpell": { "spellId": { "spellId": 11689, "rank": 6 } }
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "10%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11689,
+            "rank": 6
+          }
+        }
       }
     },
     {
       "notes": "Corruption is cheap sustained damage that does not compete with Shadow Bolt casts.",
       "action": {
-        "condition": { "not": { "val": { "dotIsActive": { "spellId": { "spellId": 25311, "rank": 7 } } } } },
-        "castSpell": { "spellId": { "spellId": 25311, "rank": 7 } }
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 25311,
+                  "rank": 7
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 25311,
+            "rank": 7
+          }
+        }
       }
     },
     {
       "notes": "Soul Fire on cooldown. The engine implements Decimation (440870, sim/warlock/soul_fire.go's applyDecimation) for a build that takes it, but the guide's own level-60 build spends 0 of its 2 points to rush Demonic Pact instead, so on this build Soul Fire just casts on its flat, unshortened 60 second cooldown.",
-      "action": { "castSpell": { "spellId": { "spellId": 17924, "rank": 2 } } }
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 17924,
+            "rank": 2
+          }
+        }
+      }
     },
     {
       "notes": "Shadow Bolt is the default filler and what feeds Decimation's proc.",
-      "action": { "castSpell": { "spellId": { "spellId": 25307, "rank": 10 } } }
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 25307,
+            "rank": 10
+          }
+        }
+      }
     },
     {
-      "notes": "Shoot (5019, core.RegisterShootSpell) is the wand-weaving fallback added by the rotation-accuracy program's caster-wand finding (2026-09-28): sim/warlock never enabled a ranged auto attack or registered a Shoot action, so a leveling warlock's equipped wand dealt zero damage even though the ladder harness always equips one. Placed beneath Life Tap's own 10 percent gate above and gated below 20 percent mana itself, so Life Tap keeps first claim on refueling mana with health and Shoot only fills the band above that where Shadow Bolt is no longer affordable. Warlocks have no Wand Specialization equivalent, so this casts at the wand's plain damage.",
+      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while your DoTs tick and you regenerate.",
       "action": {
-        "condition": { "cmp": { "op": "OpLt", "lhs": { "currentManaPercent": {} }, "rhs": { "const": { "val": "20%" } } } },
-        "castSpell": { "spellId": { "spellId": 5019 } }
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "20%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 5019
+          }
+        }
       }
     }
   ]
