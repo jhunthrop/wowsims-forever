@@ -9,7 +9,22 @@ import (
 )
 
 func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.SpellConfig {
-	spellId := [6]int32{0, 409521, 409524, 409526, 409528, 409530}[rank]
+	// Ids, mana cost and level match spellconst/hunter.json's own
+	// spells table exactly (13795/14302/14303/14304/14305; the old
+	// 409521-409530 ids do not exist in the client at all). The cast
+	// spell's own effect 104 (trigger spell) points at a server-side
+	// script spell (164638/164872/164873/164874/164875) with no entry
+	// anywhere in spellconst, but the actual dot damage lives in a
+	// separate, real "Immolation Trap Effect" spell per rank
+	// (13797/14298/14299/14300/14301, spell_level matching): a 5-tick,
+	// 3s-period periodic-damage aura (effect 6, aura 3) of 21/43/68/
+	// 102/138 per tick - dotDamage below (already the client's own
+	// per-tick amount * 5 ticks, unchanged from before this fix) and
+	// TickLength (fixed from 1.5s to the real 3s below) both now match
+	// exactly. Corroborated on Wowhead's Forever pages (spell=13797/
+	// 14301: "22 every 3 seconds" / "139 every 3 seconds", 15s/5-tick
+	// duration).
+	spellId := [6]int32{0, 13795, 14302, 14303, 14304, 14305}[rank]
 	dotDamage := [6]float64{0, 105, 215, 340, 510, 690}[rank]
 	manaCost := [6]float64{0, 50, 90, 135, 190, 245}[rank]
 	level := [6]int{0, 16, 26, 36, 46, 56}[rank]
@@ -30,8 +45,12 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 		},
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
-				Timer:    timer,
-				Duration: time.Second * 15,
+				Timer: timer,
+				// spellconst's category_cooldown_ms is 30000 for every
+				// rank (confirmed on Wowhead's Forever pages: "Cooldown:
+				// 30 seconds"), not the old 15s - this is the shared
+				// "Traps" category cooldown, not a per-rank value.
+				Duration: time.Second * 30,
 			},
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,
@@ -48,7 +67,7 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 				Tag:   "ImmolationTrap",
 			},
 			NumberOfTicks: 5,
-			TickLength:    time.Millisecond * 1500,
+			TickLength:    time.Second * 3,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				tickDamage := dotDamage / float64(dot.NumberOfTicks)

@@ -54,6 +54,48 @@ func newBareHunterAtLevel(t *testing.T, level int32) (*core.Simulation, *Hunter,
 	return sim, built, target
 }
 
+// newBareMeleeHunterAtLevel is newBareHunterAtLevel's shape (zero
+// talents, zero gear, zero buffs, so a flat "amount" isolates cleanly)
+// but in melee range (DistanceFromTarget: 5, matching
+// core.MaxMeleeAttackDistance), which the trap spells' own ApplyEffects
+// require (hunter.DistanceFromTarget > 5 is a no-op) - unlike
+// newBareHunterAtLevel's ranged 25, which the traps' own gate rejects.
+func newBareMeleeHunterAtLevel(t *testing.T, level int32) (*core.Simulation, *Hunter, *core.Unit) {
+	t.Helper()
+
+	player := core.WithSpec(
+		&proto.Player{
+			Class:              proto.Class_ClassHunter,
+			Race:               proto.Race_RaceOrc,
+			Level:              level,
+			Equipment:          &proto.EquipmentSpec{},
+			Buffs:              &proto.IndividualBuffs{},
+			DistanceFromTarget: 5,
+		},
+		P1PlayerOptions,
+	)
+	raid := core.SinglePlayerRaidProto(player, &proto.PartyBuffs{}, &proto.RaidBuffs{}, &proto.Debuffs{})
+
+	sim := core.NewSim(&proto.RaidSimRequest{
+		Raid: raid,
+		Encounter: &proto.Encounter{
+			Duration: 60,
+			Targets:  []*proto.Target{core.DefaultTargetProtoLvl60},
+		},
+		SimOptions: &proto.SimOptions{RandomSeed: 1, IsTest: true},
+	}, simsignals.CreateSignals())
+	sim.Reset()
+	sim.PrePull()
+
+	agent, ok := sim.Raid.Parties[0].Players[0].(HunterAgent)
+	if !ok {
+		t.Fatal("the raid's first player is not a hunter agent")
+	}
+	built := agent.GetHunter()
+	target := sim.Encounter.TargetUnits[0]
+	return sim, built, target
+}
+
 // averageArcaneShotRank8Damage casts Arcane Shot's max rank n times (a
 // fresh bare level-60 hunter each time, so cooldown never gates a later
 // cast) and returns the mean landed TotalDamage, the same shape as
@@ -273,6 +315,187 @@ func TestSerpentStingPerTickDamageMatchesSpellconst(t *testing.T) {
 		}
 		if !found {
 			t.Fatalf("Serpent Sting (spell %d) never landed in 20 attempts", c.spellID)
+		}
+	}
+}
+
+// TestImmolationTrapActionIDsMatchSpellconst guards immolation_trap.go
+// against regressing to the old 409521/409524/409526/409528/409530
+// ids, which do not exist anywhere in spellconst/hunter.json (and so
+// are unresolved_id violations against the rotation ladder). The real
+// ids, mana cost and required level below are spellconst/hunter.json's
+// own spells table entries for Immolation Trap ranks 1-5.
+func TestImmolationTrapActionIDsMatchSpellconst(t *testing.T) {
+	_, built, _ := newBareHunterAtLevel(t, 60)
+	timer := built.NewTimer()
+
+	cases := []struct {
+		rank          int
+		spellID       int32
+		manaCost      float64
+		level         int
+		oldSpellID    int32
+		perTickDamage float64
+	}{
+		{1, 13795, 50, 16, 409521, 21},
+		{2, 14302, 90, 26, 409524, 43},
+		{3, 14303, 135, 36, 409526, 68},
+		{4, 14304, 190, 46, 409528, 102},
+		{5, 14305, 245, 56, 409530, 138},
+	}
+	for _, c := range cases {
+		config := built.getImmolationTrapConfig(c.rank, timer)
+		if got := config.ActionID.SpellID; got != c.spellID {
+			t.Errorf("Immolation Trap rank %d spell ID = %d, want %d (not the old client-absent %d)", c.rank, got, c.spellID, c.oldSpellID)
+		}
+		if got := config.ManaCost.FlatCost; got != c.manaCost {
+			t.Errorf("Immolation Trap rank %d mana cost = %.0f, want %.0f", c.rank, got, c.manaCost)
+		}
+		if got := config.RequiredLevel; got != c.level {
+			t.Errorf("Immolation Trap rank %d required level = %d, want %d", c.rank, got, c.level)
+		}
+		if got, want := config.Cast.CD.Duration, 30*time.Second; got != want {
+			t.Errorf("Immolation Trap rank %d cooldown = %v, want %v (spellconst category_cooldown_ms 30000)", c.rank, got, want)
+		}
+		if got, want := config.Dot.NumberOfTicks, int32(5); got != want {
+			t.Errorf("Immolation Trap rank %d NumberOfTicks = %d, want %d", c.rank, got, want)
+		}
+		// spellconst's own child "Immolation Trap Effect" spell
+		// (13797/14298/14299/14300/14301) carries period_ms 3000, not
+		// the old 1500 - Wowhead's Forever page for it reads "22/139
+		// every 3 seconds".
+		if got, want := config.Dot.TickLength, 3*time.Second; got != want {
+			t.Errorf("Immolation Trap rank %d TickLength = %v, want %v", c.rank, got, want)
+		}
+
+		sim, sameHunter, target := newBareHunterAtLevel(t, 60)
+		spell := sameHunter.GetSpell(core.ActionID{SpellID: c.spellID})
+		if spell == nil {
+			t.Fatalf("level-60 hunter has no registered spell for Immolation Trap rank %d (id %d)", c.rank, c.spellID)
+		}
+		dot := spell.Dot(target)
+		dot.Apply(sim)
+		if got := dot.SnapshotBaseDamage; got != c.perTickDamage {
+			t.Errorf("Immolation Trap rank %d per-tick snapshot damage = %.2f, want %.2f (spellconst per-tick amount)", c.rank, got, c.perTickDamage)
+		}
+	}
+}
+
+// TestExplosiveTrapActionIDsMatchSpellconst guards explosive_trap.go
+// against regressing to the old 409532/409534/409535 ids, which do not
+// exist anywhere in spellconst/hunter.json. The real ids, mana cost and
+// required level below are spellconst/hunter.json's own spells table
+// entries for Explosive Trap ranks 1-3.
+func TestExplosiveTrapActionIDsMatchSpellconst(t *testing.T) {
+	_, built, _ := newBareHunterAtLevel(t, 60)
+	timer := built.NewTimer()
+
+	cases := []struct {
+		rank          int
+		spellID       int32
+		manaCost      float64
+		level         int
+		oldSpellID    int32
+		perTickDamage float64
+	}{
+		{1, 13813, 275, 34, 409532, 15},
+		{2, 14316, 395, 44, 409534, 24},
+		{3, 14317, 520, 54, 409535, 33},
+	}
+	for _, c := range cases {
+		config := built.getExplosiveTrapConfig(c.rank, timer)
+		if got := config.ActionID.SpellID; got != c.spellID {
+			t.Errorf("Explosive Trap rank %d spell ID = %d, want %d (not the old client-absent %d)", c.rank, got, c.spellID, c.oldSpellID)
+		}
+		if got := config.ManaCost.FlatCost; got != c.manaCost {
+			t.Errorf("Explosive Trap rank %d mana cost = %.0f, want %.0f", c.rank, got, c.manaCost)
+		}
+		if got := config.RequiredLevel; got != c.level {
+			t.Errorf("Explosive Trap rank %d required level = %d, want %d", c.rank, got, c.level)
+		}
+		if got, want := config.Cast.CD.Duration, 30*time.Second; got != want {
+			t.Errorf("Explosive Trap rank %d cooldown = %v, want %v (spellconst category_cooldown_ms 30000)", c.rank, got, want)
+		}
+		if got, want := config.Dot.NumberOfTicks, int32(10); got != want {
+			t.Errorf("Explosive Trap rank %d NumberOfTicks = %d, want %d", c.rank, got, want)
+		}
+		if got, want := config.Dot.TickLength, 2*time.Second; got != want {
+			t.Errorf("Explosive Trap rank %d TickLength = %v, want %v", c.rank, got, want)
+		}
+
+		sim, sameHunter, _ := newBareHunterAtLevel(t, 60)
+		spell := sameHunter.GetSpell(core.ActionID{SpellID: c.spellID})
+		if spell == nil {
+			t.Fatalf("level-60 hunter has no registered spell for Explosive Trap rank %d (id %d)", c.rank, c.spellID)
+		}
+		// Explosive Trap's Dot is IsAOE (its Aura lives on the caster,
+		// not per-target), so it is reached via AOEDot(), not
+		// Dot(target) - unlike Immolation Trap above.
+		dot := spell.AOEDot()
+		dot.Apply(sim)
+		if got := dot.SnapshotBaseDamage; got != c.perTickDamage {
+			t.Errorf("Explosive Trap rank %d per-tick snapshot damage = %.2f, want %.2f (spellconst per-tick amount)", c.rank, got, c.perTickDamage)
+		}
+	}
+}
+
+// TestExplosiveTrapInstantDamageMatchesSpellconst guards
+// explosive_trap.go's instant hit against regressing to the old
+// min/max roll (104-135/145-193/208-265), which never landed on
+// spellconst/hunter.json's own "Explosive Trap Effect" flat amount
+// (115/163/229, sp/ap coefficient both 0 - a single non-random value,
+// corroborated on Wowhead's Forever pages: "School Damage ... Value:
+// 116" / "230"). Averaged over many casts (in melee range, a bare
+// single-target encounter so numHits is always 1) to smooth out the
+// hit/crit table's own variance around that flat value, the same shape
+// TestArcaneShotRank8DamageMatchesSpellconst uses.
+func TestExplosiveTrapInstantDamageMatchesSpellconst(t *testing.T) {
+	cases := []struct {
+		rank     int
+		spellID  int32
+		wantFlat float64
+	}{
+		{1, 13813, 115},
+		{2, 14316, 163},
+		{3, 14317, 229},
+	}
+	for _, c := range cases {
+		total := 0.0
+		landed := 0
+		const attempts = 40
+		for i := 0; i < attempts; i++ {
+			sim, built, target := newBareMeleeHunterAtLevel(t, 60)
+			spell := built.GetSpell(core.ActionID{SpellID: c.spellID})
+			if spell == nil {
+				t.Fatalf("level-60 hunter has no registered spell for Explosive Trap rank %d (id %d)", c.rank, c.spellID)
+			}
+			spell.ApplyEffects(sim, target, spell)
+			for step := 0; step < 50; step++ {
+				if spell.SpellMetrics[target.UnitIndex].TotalDamage > 0 {
+					break
+				}
+				if done := sim.Step(); done {
+					break
+				}
+			}
+			if got := spell.SpellMetrics[target.UnitIndex].TotalDamage; got > 0 {
+				total += got
+				landed++
+			}
+		}
+		if landed == 0 {
+			t.Fatalf("Explosive Trap rank %d never landed in %d attempts", c.rank, attempts)
+		}
+		avg := total / float64(landed)
+		if avg < c.wantFlat*0.85 || avg > c.wantFlat*1.6 {
+			// Upper bound is wide: OutcomeMagicHitAndCrit can crit at
+			// up to 2x on a landed hit, and this loop stops at the
+			// FIRST damage tick recorded, which on rare seeds can be
+			// the AoE dot's own first (2s-later) tick rather than the
+			// instant hit if the instant hit itself never landed - a
+			// true failure (id resolves to nothing near wantFlat) is
+			// still well outside this band on the low side.
+			t.Errorf("Explosive Trap rank %d average landed damage = %.1f, want close to the client's flat %.1f", c.rank, avg, c.wantFlat)
 		}
 	}
 }
