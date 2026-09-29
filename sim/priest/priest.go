@@ -52,6 +52,7 @@ type Priest struct {
 	PrayerOfMending   *core.Spell
 	Renew             []*core.Spell
 	Shadowform        *core.Spell
+	Shoot             *core.Spell
 	ShadowWeavingProc *core.Spell
 	ShadowWordDeath   []*core.Spell
 	ShadowWordPain    []*core.Spell
@@ -101,6 +102,7 @@ func (priest *Priest) Initialize() {
 	}
 	priest.registerSmiteSpell()
 	priest.registerHolyFire()
+	priest.registerShootSpell()
 
 	priest.registerPowerInfusionCD()
 }
