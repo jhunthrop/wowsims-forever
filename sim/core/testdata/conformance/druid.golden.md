@@ -25,6 +25,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 20 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
 | BalanceDruid | 20 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  |
 | BalanceDruid | 20 | Moonkin Form | 0 | 24858 | 0.00→123.90 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->123.90; required_level 40->0 |
+| BalanceDruid | 20 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 20->0 |
 | BalanceDruid | 20 | Rip | 0 | 1079 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→0 | 12000→0 | mismatch | required_level 20->0; duration_ms 12000->0 |
 | BalanceDruid | 20 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cast_time_ms 3500->3000 |
 | BalanceDruid | 20 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
@@ -42,6 +43,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 30 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  |
 | BalanceDruid | 30 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
 | BalanceDruid | 30 | Moonkin Form | 0 | 24858 | 0.00→214.90 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->214.90; required_level 40->0 |
+| BalanceDruid | 30 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 20->0 |
 | BalanceDruid | 30 | Rake | 0 | 1822 | 40.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 24→0 | 9000→9000 | mismatch | required_level 24->0 |
 | BalanceDruid | 30 | Rip | 0 | 9492 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→0 | 12000→0 | mismatch | required_level 28->0; duration_ms 12000->0 |
 | BalanceDruid | 30 | Shred | 0 | 6800 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→0 | n/a | mismatch | required_level 30->0 |
@@ -67,7 +69,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 38 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
 | BalanceDruid | 38 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  |
 | BalanceDruid | 38 | Moonkin Form | 0 | 24858 | 0.00→283.15 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->283.15; required_level 40->0 |
+| BalanceDruid | 38 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 20->0 |
 | BalanceDruid | 38 | Rake | 0 | 1823 | 40.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→0 | 9000→9000 | mismatch | required_level 34->0 |
+| BalanceDruid | 38 | Ravage | 0 | 6785 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→0 | n/a | mismatch | required_level 32->0 |
 | BalanceDruid | 38 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→0 | mismatch | required_level 36->0; duration_ms 12000->0 |
 | BalanceDruid | 38 | Shred | 0 | 8992 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | required_level 38->0 |
 | BalanceDruid | 38 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cast_time_ms 3500->3000 |
@@ -97,7 +101,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 40 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  |
 | BalanceDruid | 40 | Moonfire | 7 | 8929 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  |
 | BalanceDruid | 40 | Moonkin Form | 0 | 24858 | 0.00→298.90 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->298.90; required_level 40->0 |
+| BalanceDruid | 40 | Prowl | 0 | 6783 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 40->0 |
 | BalanceDruid | 40 | Rake | 0 | 1823 | 40.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→0 | 9000→9000 | mismatch | required_level 34->0 |
+| BalanceDruid | 40 | Ravage | 0 | 6785 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→0 | n/a | mismatch | required_level 32->0 |
 | BalanceDruid | 40 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→0 | mismatch | required_level 36->0; duration_ms 12000->0 |
 | BalanceDruid | 40 | Shred | 0 | 8992 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | required_level 38->0 |
 | BalanceDruid | 40 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cast_time_ms 3500->3000 |
@@ -130,7 +136,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 50 | Moonfire | 7 | 8929 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  |
 | BalanceDruid | 50 | Moonfire | 8 | 9833 | 280.00→280.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 12000→12000 | match |  |
 | BalanceDruid | 50 | Moonkin Form | 0 | 24858 | 0.00→372.40 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->372.40; required_level 40->0 |
+| BalanceDruid | 50 | Prowl | 0 | 6783 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 40->0 |
 | BalanceDruid | 50 | Rake | 0 | 1824 | 40.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 9000→9000 | mismatch | required_level 44->0 |
+| BalanceDruid | 50 | Ravage | 0 | 9866 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 50→0 | n/a | mismatch | required_level 50->0 |
 | BalanceDruid | 50 | Rip | 0 | 9752 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 12000→0 | mismatch | required_level 44->0; duration_ms 12000->0 |
 | BalanceDruid | 50 | Shred | 0 | 9829 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→0 | n/a | mismatch | required_level 46->0 |
 | BalanceDruid | 50 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cast_time_ms 3500->3000 |
@@ -170,7 +178,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | BalanceDruid | 60 | Moonfire | 9 | 9834 | 325.00→325.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 12000→12000 | match |  |
 | BalanceDruid | 60 | Moonfire | 10 | 9835 | 375.00→375.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 12000→12000 | match |  |
 | BalanceDruid | 60 | Moonkin Form | 0 | 24858 | 0.00→435.40 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→0 | n/a | mismatch | cost 0.00->435.40; required_level 40->0 |
+| BalanceDruid | 60 | Prowl | 0 | 9913 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 60->0 |
 | BalanceDruid | 60 | Rake | 0 | 9904 | 40.00→40.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | 9000→9000 | mismatch | required_level 54->0 |
+| BalanceDruid | 60 | Ravage | 0 | 9867 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 58→0 | n/a | mismatch | required_level 58->0 |
 | BalanceDruid | 60 | Rip | 0 | 9896 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | 12000→0 | mismatch | required_level 60->0; duration_ms 12000->0 |
 | BalanceDruid | 60 | Shred | 0 | 9830 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | n/a | mismatch | required_level 54->0 |
 | BalanceDruid | 60 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cast_time_ms 3500->3000 |
@@ -204,6 +214,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 20 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  |
 | FeralDruid | 20 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
 | FeralDruid | 20 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  |
+| FeralDruid | 20 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 20->0 |
 | FeralDruid | 20 | Rip | 0 | 1079 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→0 | 12000→0 | mismatch | required_level 20->0; duration_ms 12000->0 |
 | FeralDruid | 20 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
 | FeralDruid | 20 | Wrath | 1 | 5176 | 10.00→20.00 | mana→mana | 0→0 | 1500→1000 | 1500→1500 | 1→1 | n/a | mismatch | cost 10.00->20.00; cast_time_ms 1500->1000 |
@@ -220,6 +231,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 30 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  |
 | FeralDruid | 30 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  |
 | FeralDruid | 30 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
+| FeralDruid | 30 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 20->0 |
 | FeralDruid | 30 | Rake | 0 | 1822 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 24→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 24->0 |
 | FeralDruid | 30 | Rip | 0 | 9492 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→0 | 12000→0 | mismatch | required_level 28->0; duration_ms 12000->0 |
 | FeralDruid | 30 | Shred | 0 | 6800 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→0 | n/a | mismatch | required_level 30->0 |
@@ -244,7 +256,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 38 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  |
 | FeralDruid | 38 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
 | FeralDruid | 38 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  |
+| FeralDruid | 38 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 20->0 |
 | FeralDruid | 38 | Rake | 0 | 1823 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 34->0 |
+| FeralDruid | 38 | Ravage | 0 | 6785 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→0 | n/a | mismatch | required_level 32->0 |
 | FeralDruid | 38 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→0 | mismatch | required_level 36->0; duration_ms 12000->0 |
 | FeralDruid | 38 | Shred | 0 | 8992 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | required_level 38->0 |
 | FeralDruid | 38 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
@@ -273,7 +287,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 40 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
 | FeralDruid | 40 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  |
 | FeralDruid | 40 | Moonfire | 7 | 8929 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  |
+| FeralDruid | 40 | Prowl | 0 | 6783 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 40->0 |
 | FeralDruid | 40 | Rake | 0 | 1823 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 34->0 |
+| FeralDruid | 40 | Ravage | 0 | 6785 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→0 | n/a | mismatch | required_level 32->0 |
 | FeralDruid | 40 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→0 | mismatch | required_level 36->0; duration_ms 12000->0 |
 | FeralDruid | 40 | Shred | 0 | 8992 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | required_level 38->0 |
 | FeralDruid | 40 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
@@ -305,7 +321,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 50 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  |
 | FeralDruid | 50 | Moonfire | 7 | 8929 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  |
 | FeralDruid | 50 | Moonfire | 8 | 9833 | 280.00→280.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 12000→12000 | match |  |
+| FeralDruid | 50 | Prowl | 0 | 6783 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 40->0 |
 | FeralDruid | 50 | Rake | 0 | 1824 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 44->0 |
+| FeralDruid | 50 | Ravage | 0 | 9866 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 50→0 | n/a | mismatch | required_level 50->0 |
 | FeralDruid | 50 | Rip | 0 | 9752 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 12000→0 | mismatch | required_level 44->0; duration_ms 12000->0 |
 | FeralDruid | 50 | Shred | 0 | 9829 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→0 | n/a | mismatch | required_level 46->0 |
 | FeralDruid | 50 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
@@ -344,7 +362,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 60 | Moonfire | 8 | 9833 | 280.00→280.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 12000→12000 | match |  |
 | FeralDruid | 60 | Moonfire | 9 | 9834 | 325.00→325.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 12000→12000 | match |  |
 | FeralDruid | 60 | Moonfire | 10 | 9835 | 375.00→375.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 12000→12000 | match |  |
+| FeralDruid | 60 | Prowl | 0 | 9913 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 60->0 |
 | FeralDruid | 60 | Rake | 0 | 9904 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 54->0 |
+| FeralDruid | 60 | Ravage | 0 | 9867 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 58→0 | n/a | mismatch | required_level 58->0 |
 | FeralDruid | 60 | Rip | 0 | 9896 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | 12000→0 | mismatch | required_level 60->0; duration_ms 12000->0 |
 | FeralDruid | 60 | Shred | 0 | 9830 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | n/a | mismatch | required_level 54->0 |
 | FeralDruid | 60 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
