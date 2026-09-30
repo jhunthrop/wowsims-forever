@@ -4,6 +4,7 @@ import (
 	"regexp"
 
 	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/core/stats"
 )
 
 var OtherItemIdsToFetch = []string{}
@@ -97,6 +98,44 @@ var ItemOverrides = []*proto.UIItem{
 	// Crafted
 	{Id: 22191, Phase: 5},
 	{Id: 22195, Phase: 5},
+
+	// Forever's own enchanting-crafted "Heart of the Mountain" family
+	// (level-50 trinkets; data/builds/1.60.1.70009/items/*.json in the
+	// forever data repo, ids 249469/249470). No Wowhead/Wago page exists
+	// for a Forever-original item, so MergeItem's "not already in db.Items"
+	// branch inserts these wholesale instead of patching a scraped entry.
+	// Name/icon/ilvl/stats copied verbatim from the client data; quality is
+	// proto.ItemQuality_ItemQualityRare (3), matching that data's own
+	// "quality": 3 (Rare/blue), not Epic.
+	{
+		Id:      249469,
+		Name:    "Frozen Heart of the Mountain",
+		Icon:    "inv_misc_gem_sapphire_01",
+		Type:    proto.ItemType_ItemTypeTrinket,
+		Ilvl:    55,
+		Quality: proto.ItemQuality_ItemQualityRare,
+		Stats: stats.Stats{
+			stats.Hit:              9,
+			stats.FireResistance:   7,
+			stats.FrostResistance:  7,
+			stats.NatureResistance: 7,
+			stats.ShadowResistance: 7,
+		}.ToFloatArray(),
+	},
+	{
+		Id:      249470,
+		Name:    "Molten Heart of the Mountain",
+		Icon:    "inv_misc_gem_ruby_01",
+		Type:    proto.ItemType_ItemTypeTrinket,
+		Ilvl:    55,
+		Quality: proto.ItemQuality_ItemQualityRare,
+		Stats: stats.Stats{
+			stats.FireResistance:   7,
+			stats.FrostResistance:  7,
+			stats.NatureResistance: 7,
+			stats.ShadowResistance: 7,
+		}.ToFloatArray(),
+	},
 }
 
 // Keep these sorted by item ID.
