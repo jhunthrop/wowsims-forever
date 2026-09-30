@@ -47,6 +47,7 @@ const (
 	Ironfoe                   = 11684
 	Bloodfist                 = 11744
 	FlameWrath                = 11809
+	SmokingHeartOfTheMountain = 11811
 	HandOfJustice             = 11815
 	LordGeneralsSword         = 11817
 	SecondWind                = 11819
@@ -167,6 +168,11 @@ const (
 	MarkOfTheChampionSpell     = 23207
 	MisplacedServoArm          = 23221
 	JomGabbar                  = 23570
+
+	// Forever's own enchanting-crafted "Heart of the Mountain" family
+	// (level-50 trinkets, not Vanilla items; data/builds/1.60.1.70009/items/*.json).
+	FrozenHeartOfTheMountain = 249469
+	MoltenHeartOfTheMountain = 249470
 )
 
 func init() {
@@ -3640,6 +3646,107 @@ func init() {
 			Type:  core.CooldownTypeDPS,
 		})
 	})
+
+	// Forever's own enchanting-crafted "Heart of the Mountain" family
+	// (level-50 trinkets; data/builds/1.60.1.70009/items/*.json ids
+	// 249469, 249470, 249473, and the reused Vanilla id 11811). Client spell
+	// data (raw/ItemXItemEffect.csv + raw/ItemEffect.csv) gives each Use its
+	// cooldown and backing spell; raw/SpellEffect.csv + raw/SpellDuration.csv
+	// confirm the base points and the 15/20 sec durations below.
+
+	// data/builds/1.60.1.70009/items/*.json, id 11811 ("Smoking Heart of the
+	// Mountain" -- reuses the Vanilla item=11811 id, but Forever's own
+	// client data (not Wowhead's Vanilla text, which was not consulted here)
+	// is authoritative: ItemEffect.csv row 235047 gives a 360000ms/6 min
+	// cooldown (no CategoryCoolDownMSec, so no biome-style shared category)
+	// and SpellID 1300752 ("Heart of the Mountain"); SpellEffect.csv gives
+	// 520 base points on Mod Resistance (misc value 1 = armor) and
+	// SpellDuration.csv index 18 is 20000ms.
+	// Use: "Increases armor by 520 for 20 sec." (6 Min Cooldown, no biome)
+	core.NewSimpleStatDefensiveTrinketEffect(SmokingHeartOfTheMountain, stats.Stats{stats.Armor: 520}, time.Second*20, time.Minute*6)
+
+	// data/builds/1.60.1.70009/items/*.json, id 249470 ("Molten Heart of the
+	// Mountain"). ItemEffect.csv row 213860: 300000ms/5 min cooldown,
+	// SpellID 1249113 ("Molten Fury"); SpellEffect.csv gives 55 base points
+	// on both Mod Attack Power and Mod Ranged Attack Power.
+	// Use: "Increase Attack Power by 55 for 15 sec. This effect is doubled
+	// in Volcanic areas."
+	core.NewItemEffect(MoltenHeartOfTheMountain, func(agent core.Agent) {
+		character := agent.GetCharacter()
+		apBonus := 55.0
+		// Biome read eagerly at registration, matching SecondWind's approach
+		// above: Environment.construct() wires each unit's Env and biome
+		// before initialize() runs item effects, so character.Biome() is
+		// safe to read here.
+		if character.Biome() == proto.Biome_BiomeVolcanic {
+			apBonus *= 2
+		}
+		registerCD := core.MakeTemporaryStatsOnUseCDRegistration(
+			"Molten Fury",
+			stats.Stats{stats.AttackPower: apBonus, stats.RangedAttackPower: apBonus},
+			time.Second*15,
+			core.SpellConfig{
+				ActionID: core.ActionID{SpellID: 1249113},
+				Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagOffensiveEquipment,
+			},
+			func(character *core.Character) core.Cooldown {
+				return core.Cooldown{Timer: character.NewTimer(), Duration: time.Minute * 5}
+			},
+			func(character *core.Character) core.Cooldown {
+				return core.Cooldown{Timer: character.GetOffensiveTrinketCD(), Duration: time.Second * 15}
+			},
+		)
+		registerCD(agent)
+	})
+
+	// data/builds/1.60.1.70009/items/*.json, id 249469 ("Frozen Heart of the
+	// Mountain"). The "+9 hit rating" half of the tooltip is a plain equip
+	// stat already carried by the item's own stats block, so no code is
+	// needed for it here. ItemEffect.csv row 213858: 300000ms/5 min
+	// cooldown, SpellID 1249110 ("Chthonic Power"); SpellEffect.csv gives 29
+	// base points on Frost (16) + Shadow (32) school mask 48.
+	// Use: "Increases Frost and Shadow spell damage done by up to 29 for 15
+	// sec. This effect is doubled in Snowy areas."
+	core.NewItemEffect(FrozenHeartOfTheMountain, func(agent core.Agent) {
+		character := agent.GetCharacter()
+		spellPowerBonus := 29.0
+		if character.Biome() == proto.Biome_BiomeSnow {
+			spellPowerBonus *= 2
+		}
+		registerCD := core.MakeTemporaryStatsOnUseCDRegistration(
+			"Chthonic Power",
+			stats.Stats{stats.FrostPower: spellPowerBonus, stats.ShadowPower: spellPowerBonus},
+			time.Second*15,
+			core.SpellConfig{
+				ActionID: core.ActionID{SpellID: 1249110},
+				Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagOffensiveEquipment,
+			},
+			func(character *core.Character) core.Cooldown {
+				return core.Cooldown{Timer: character.NewTimer(), Duration: time.Minute * 5}
+			},
+			func(character *core.Character) core.Cooldown {
+				return core.Cooldown{Timer: character.GetOffensiveTrinketCD(), Duration: time.Second * 15}
+			},
+		)
+		registerCD(agent)
+	})
+
+	// data/builds/1.60.1.70009/items/*.json, id 249473 ("Dormant Heart of
+	// the Mountain") is NOT implemented. Client text: "Your casts of
+	// $?s2060[Greater Heal]?s5185[Healing Touch]?s331[Healing Wave]?s635[Holy
+	// Light][Greater Heal, Healing Touch, Healing Wave, or Holy Light] in
+	// combat grant up to 40 increased healing and up to 13 increased damage
+	// for 15 sec." (an equip proc, SpellID 1249118 "Eternal Power", 100%
+	// proc chance on casting the class's named heal, triggering SpellID
+	// 1249119). Of the four named heals, this fork models none as a real,
+	// registered spell: priest's GreaterHeal is fully commented out
+	// (sim/priest/greater_heal.go), druid has no Healing Touch spell at all,
+	// shaman declares SpellCode_ShamanHealingWave and a HealingWave field
+	// but no registration function ever builds it, and paladin has no Holy
+	// Light spell at all (only comments referencing it on set bonuses). With
+	// no heal spell to hook CallbackOnSpellHitDealt/OnCastComplete against
+	// for any of the four classes, there is nothing to proc this trinket off
+	// of, so it is left unregistered rather than guessed at.
 
 	core.AddEffectsToTest = true
 }
