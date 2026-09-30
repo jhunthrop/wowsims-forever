@@ -82,3 +82,62 @@ func TestBuildStatWeightRequestsScalesHitLikeArmor(t *testing.T) {
 		}
 	}
 }
+
+// TestBuildStatWeightRequestsScalesIntellectLikeArmor pins this lane's
+// fix (bis-ranker-integrity-6, item 8): sim/cmd/leveling-bis's own
+// nightly stat-weights sweep reported Intellect "insignificant or
+// negative" in 32 of 70 caster band tables (mage-fire band 40's own
+// measurement: -0.083 ± 0.167 DPS per point - a stdev roughly twice
+// the mean, so the default ±1-point sweep cannot even recover the
+// correct sign). Unlike Hit's hard floor (HitSuppression), Intellect
+// is not capped at all here - its own true per-point DPS effect for a
+// caster is simply too small for defaultStatMod=1 to resolve above
+// this sweep's own sampling noise, the same shape Armor/BonusArmor/
+// Mana's existing x20 scale already exists to fix. This test pins
+// that Intellect now gets the identical treatment, and that unrelated
+// stats are not swept up by it.
+func TestBuildStatWeightRequestsScalesIntellectLikeArmor(t *testing.T) {
+	scaledStats := []proto.Stat{proto.Stat_StatArmor, proto.Stat_StatBonusArmor, proto.Stat_StatMana, proto.Stat_StatHit, proto.Stat_StatIntellect}
+	unscaledStats := []proto.Stat{proto.Stat_StatAgility, proto.Stat_StatCrit, proto.Stat_StatSpellPower, proto.Stat_StatSpirit}
+
+	req := &proto.StatWeightsRequest{
+		Player: &proto.Player{
+			BonusStats: &proto.UnitStats{},
+		},
+		SimOptions:      &proto.SimOptions{Iterations: 2},
+		EpReferenceStat: proto.Stat_StatSpellPower,
+		StatsToWeigh:    append(append([]proto.Stat{}, scaledStats...), unscaledStats...),
+	}
+
+	data := buildStatWeightRequests(req)
+
+	modFor := func(stat proto.Stat) (low, high float64, found bool) {
+		unitStat := stats.UnitStatFromStat(stats.Stat(stat))
+		for _, sr := range data.StatSimRequests {
+			if stats.UnitStatFromIdx(int(sr.StatData.UnitStat)) == unitStat {
+				return sr.StatData.ModLow, sr.StatData.ModHigh, true
+			}
+		}
+		return 0, 0, false
+	}
+
+	for _, stat := range scaledStats {
+		low, high, found := modFor(stat)
+		if !found {
+			t.Fatalf("%s: no stat sim request built", stat)
+		}
+		if high != 20 || low != -20 {
+			t.Errorf("%s: mod = (%v, %v), want (-20, 20) - the same x20 scale Armor/BonusArmor/Mana/Hit already get", stat, low, high)
+		}
+	}
+
+	for _, stat := range unscaledStats {
+		low, high, found := modFor(stat)
+		if !found {
+			t.Fatalf("%s: no stat sim request built", stat)
+		}
+		if high != 1 || low != -1 {
+			t.Errorf("%s: mod = (%v, %v), want (-1, 1) - unrelated stats (including Spirit, not weighed by any DPS caster spec today - this lane's report) must not be swept up by the Intellect fix", stat, low, high)
+		}
+	}
+}

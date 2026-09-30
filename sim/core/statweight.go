@@ -181,6 +181,27 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 		if stat.EqualsStat(stats.Hit) {
 			statMod = defaultStatMod * 20
 		}
+		// Intellect needs the same larger nudge, for a different reason
+		// than Hit's floor: Intellect's own per-point DPS effect for a
+		// caster is simply tiny relative to this sweep's own sampling
+		// noise at defaultStatMod=1, not hard-capped at all - a mage-
+		// fire band-40 leveling character (sim/cmd/leveling-bis lane
+		// bis-ranker-integrity-6's own measurement) reported intellect
+		// -0.083 ± 0.167 DPS per point: the stdev is roughly TWICE the
+		// mean, so the ±1 sweep cannot even recover the correct SIGN,
+		// let alone a usable weight - every one of the 32 (of 70)
+		// caster band tables that lane found "insignificant or
+		// negative" intellect on shares this identical shape. Widening
+		// the sweep to ±20 points (the same factor Armor/BonusArmor/
+		// Mana/Hit already use) does not change intellect's own true
+		// per-point value, but it does average the same DPS-per-point
+		// noise over a much larger, more clearly-resolved perturbation,
+		// exactly the way it already does for Mana - see that lane's
+		// own report for the before/after re-measurement across all 32
+		// tables.
+		if stat.EqualsStat(stats.Intellect) {
+			statMod = defaultStatMod * 20
+		}
 		statModsHigh[stat] = statMod
 		statModsLow[stat] = -statMod
 	}
