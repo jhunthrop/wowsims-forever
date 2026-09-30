@@ -156,6 +156,31 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 		if stat.EqualsStat(stats.Armor) || stat.EqualsStat(stats.BonusArmor) || stat.EqualsStat(stats.Mana) {
 			statMod = defaultStatMod * 20
 		}
+		// Hit needs the same larger nudge, for a reason specific to
+		// physical hit: HitRatingPerHitChance is 1, so one raw point is
+		// exactly 1% hit chance, and PhysicalHitChance
+		// (spell_result.go) floors at max(hitChance-HitSuppression, 0).
+		// NewAttackTable (target.go) sets HitSuppression to
+		// (targetDefense-weaponSkill-10)*0.002, which is exactly 0.01
+		// (1%) for the ordinary "3 levels higher" raid-boss gap this
+		// package's default encounter uses. A character with no other
+		// source of hit therefore has its first raw point of Hit
+		// entirely cancelled by suppression - the low direction
+		// (-defaultStatMod) can't push an already-floored hit chance
+		// any lower, and the high direction (+defaultStatMod) lands
+		// exactly back on the floor too, so both directions read
+		// bit-identical to the unmodified baseline. That is what
+		// computeStatWeights' hard-cap detector below
+		// (modPlayerHigh.Dps.Avg == baselinePlayer.Dps.Avg) exists to
+		// catch, but here the stat is not actually hard-capped - the
+		// very next point already moves it - so the detector's finding
+		// is a false positive caused by the size of the mod, not a
+		// real cap. Scaling Hit's mod the same way Armor/BonusArmor/
+		// Mana's already is clears the floor with room to spare and
+		// gives a real, if noisier, weight instead of a false 0/0.
+		if stat.EqualsStat(stats.Hit) {
+			statMod = defaultStatMod * 20
+		}
 		statModsHigh[stat] = statMod
 		statModsLow[stat] = -statMod
 	}
