@@ -4,11 +4,18 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
-	"github.com/wowsims/classic/sim/core/stats"
 )
 
 const (
-	FireRuby              = 20036
+	// Fire Ruby (20036) has no item effect here. The engine previously
+	// registered wowsims-classic's Season of Discovery rework of this item
+	// (a mana restore plus a "Chaos Fire" +100 Fire Power aura consumed by
+	// the next Fire spell, spell ID 24389). Forever's own Era client text
+	// for 20036 is "Refreshes the cooldown of Fire Ward and causes Fire
+	// damage absorbed by it to increase the damage of your next Fire Blast
+	// cast within 1 min by 50% of the damage absorbed." -- an absorb-driven
+	// effect with no DPS to model, so it is intentionally left unregistered
+	// rather than crediting a rework Forever does not grant.
 	MindQuickeningGem     = 19339
 	HazzarahsCharmOfMagic = 19959
 	JewelOfKajaro         = 19601
@@ -16,53 +23,6 @@ const (
 
 func init() {
 	core.AddEffectsToTest = false
-
-	core.NewItemEffect(FireRuby, func(agent core.Agent) {
-		character := agent.GetCharacter()
-
-		actionID := core.ActionID{ItemID: FireRuby}
-		manaMetrics := character.NewManaMetrics(actionID)
-
-		damageAura := character.GetOrRegisterAura(core.Aura{
-			Label:    "Chaos Fire",
-			ActionID: core.ActionID{SpellID: 24389},
-			Duration: time.Minute * 1,
-			OnGain: func(aura *core.Aura, sim *core.Simulation) {
-				character.AddStatDynamic(sim, stats.FirePower, 100)
-			},
-			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-				character.AddStatDynamic(sim, stats.FirePower, -100)
-			},
-			OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-				if spell.SpellSchool.Matches(core.SpellSchoolFire) {
-					aura.Deactivate(sim)
-				}
-			},
-		})
-
-		spell := character.RegisterSpell(core.SpellConfig{
-			ActionID:    actionID,
-			SpellSchool: core.SpellSchoolPhysical,
-			Flags:       core.SpellFlagNoOnCastComplete | core.SpellFlagOffensiveEquipment,
-
-			Cast: core.CastConfig{
-				CD: core.Cooldown{
-					Timer:    character.NewTimer(),
-					Duration: time.Minute * 3,
-				},
-			},
-
-			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				character.AddMana(sim, sim.Roll(1, 500), manaMetrics)
-				damageAura.Activate(sim)
-			},
-		})
-
-		character.AddMajorCooldown(core.MajorCooldown{
-			Type:  core.CooldownTypeDPS,
-			Spell: spell,
-		})
-	})
 
 	// https://www.wowhead.com/classic/item=19959/hazzarahs-charm-of-magic
 	// Increases the critical hit chance of your Arcane spells by 5%, and increases the critical hit damage of your Arcane spells by 50% for 20 sec.

@@ -2683,17 +2683,18 @@ func init() {
 	core.NewSimpleStatOffensiveTrinketEffect(DraconicInfusedEmblem, stats.Stats{stats.SpellDamage: 100, stats.HealingPower: 190}, time.Second*15, time.Second*90)
 
 	// https://www.wowhead.com/classic/item=19288/darkmoon-card-blue-dragon
-	// Equip: 2% chance on successful spellcast to allow 100% of your Mana regeneration to continue while casting for 15 sec.
+	// Equip: 2% chance on successful spellcast to increase your Spirit by 150 for 15 sec.
+	// Forever's Era client text (items/*.json, id 19288) is the Vanilla 1.12
+	// tooltip above. The engine previously implemented the Burning
+	// Crusade-era rework of this trinket ("100% of your Mana regeneration
+	// continues while casting"), which is a different item generation's
+	// effect, not Era's -- rewritten to the stat proc the client describes.
 	core.NewItemEffect(DarkmoonCardBlueDragon, func(agent core.Agent) {
 		character := agent.GetCharacter()
 
 		actionID := core.ActionID{SpellID: 23688}
 
-		procAura := character.GetOrRegisterAura(core.Aura{
-			Label:    "Aura of the Blue Dragon",
-			ActionID: actionID,
-			Duration: time.Second * 15,
-		}).AttachAdditivePseudoStatBuff(&character.PseudoStats.SpiritRegenRateCasting, 1)
+		procAura := character.NewTemporaryStatsAura("Aura of the Blue Dragon", actionID, stats.Stats{stats.Spirit: 150}, time.Second*15)
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 			Name:       "Aura of the Blue Dragon Trigger",
