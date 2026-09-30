@@ -1945,8 +1945,7 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=13505/runeblade-of-baron-rivendare
-	// Equip: Increases movement speed and life regeneration rate.
-	// TODO: Movement speed not implemented
+	// Equip: Increases movement speed by 8% and restores 60 health every 5 sec.
 	core.NewItemEffect(RunebladeOfBaronRivendare, func(agent core.Agent) {
 		character := agent.GetCharacter()
 		actionID := core.ActionID{SpellID: 17625}
@@ -1954,12 +1953,15 @@ func init() {
 		character.RegisterAura(core.Aura{
 			ActionID: actionID,
 			Label:    "Unholy Aura",
+			OnInit: func(aura *core.Aura, sim *core.Simulation) {
+				character.AddMoveSpeedModifier(&aura.ActionID, 1.08)
+			},
 			OnReset: func(aura *core.Aura, sim *core.Simulation) {
 				core.StartPeriodicAction(sim, core.PeriodicActionOptions{
 					Period:   time.Second * 5,
 					Priority: core.ActionPriorityAuto,
 					OnAction: func(sim *core.Simulation) {
-						character.GainHealth(sim, 20, healthMetrics)
+						character.GainHealth(sim, 60, healthMetrics)
 					},
 				})
 			},
@@ -2631,7 +2633,7 @@ func init() {
 	///////////////////////////////////////////////////////////////////////////
 
 	// https://www.wowhead.com/classic/item=11832/burst-of-knowledge
-	// Use: Reduces mana cost of all spells by 100 for 10 sec. (5 Min Cooldown)
+	// Use: Reduces mana cost of all spells by 150 for 10 sec. (5 Min Cooldown)
 	core.NewItemEffect(BurstOfKnowledge, func(agent core.Agent) {
 		character := agent.GetCharacter()
 
@@ -2642,14 +2644,14 @@ func init() {
 			OnGain: func(aura *core.Aura, sim *core.Simulation) {
 				for _, spell := range aura.Unit.Spellbook {
 					if spell.Cost != nil && spell.Cost.CostType() == core.CostTypeMana {
-						spell.Cost.FlatModifier -= 100
+						spell.Cost.FlatModifier -= 150
 					}
 				}
 			},
 			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 				for _, spell := range aura.Unit.Spellbook {
 					if spell.Cost != nil && spell.Cost.CostType() == core.CostTypeMana {
-						spell.Cost.FlatModifier += 100
+						spell.Cost.FlatModifier += 150
 					}
 				}
 			},
@@ -2842,7 +2844,7 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=22321/heart-of-wyrmthalak
-	// Equip: Chance to bathe your melee target in flames for 120 to 180 Fire damage.
+	// Equip: Melee and Ranged attacks have a chance to deal 120 to 180 Fire damage. Deals 3 times as much damage to Orcs (Orc multiplier not implemented -- see gap comment below).
 	// TODO: Proc rate assumed from a wowhead comment and needs testing
 	core.NewItemEffect(HeartOfWyrmthalak, func(agent core.Agent) {
 		character := agent.GetCharacter()
@@ -2854,6 +2856,12 @@ func init() {
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+				// Gap: client text also triples this damage vs Orcs, but the
+				// fork's proto.MobType enum (see NewMobTypeDamageEffect) has
+				// no MobTypeOrc value -- only broad creature categories
+				// (Orcs are MobTypeHumanoid along with every other humanoid
+				// race), so there is no way to key off "Orc" specifically
+				// without over-firing against all Humanoids. Not implemented.
 				spell.CalcAndDealDamage(sim, target, sim.Roll(120, 180), spell.OutcomeMagicHitAndCrit)
 			},
 		})
@@ -2861,7 +2869,7 @@ func init() {
 			Name:              "Heart of Wyrmthalak Trigger",
 			Callback:          core.CallbackOnSpellHitDealt,
 			Outcome:           core.OutcomeLanded,
-			ProcMask:          core.ProcMaskMelee,
+			ProcMask:          core.ProcMaskMeleeOrRanged,
 			SpellFlagsExclude: core.SpellFlagSuppressEquipProcs,
 			PPM:               0.4,
 			Handler: func(sim *core.Simulation, _ *core.Spell, result *core.SpellResult) {
@@ -3030,11 +3038,19 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=11819/second-wind
-	// Use: Restores 30 mana every 1 sec for 10 sec. (15 Min Cooldown)
+	// Use: Restores 63 mana every 1 sec for 10 sec. This effect is doubled in Mountainous areas. (15 Min Cooldown)
 	core.NewItemEffect(SecondWind, func(agent core.Agent) {
 		character := agent.GetCharacter()
 		actionID := core.ActionID{SpellID: 15604}
 		manaMetrics := character.NewManaMetrics(actionID)
+		manaPerTick := 63.0
+		// Biome read eagerly at registration, matching NewBiomeDamageEffect's
+		// approach in sim/core/item_effects.go: Environment.construct() wires
+		// each unit's Env and biome before initialize() runs item effects, so
+		// character.Biome() is safe to read here.
+		if character.Biome() == proto.Biome_BiomeMountain {
+			manaPerTick *= 2
+		}
 		spell := character.RegisterSpell(core.SpellConfig{
 			ActionID: actionID,
 			ProcMask: core.ProcMaskEmpty,
@@ -3050,7 +3066,7 @@ func init() {
 					NumTicks: 10,
 					Priority: core.ActionPriorityAuto,
 					OnAction: func(sim *core.Simulation) {
-						character.AddMana(sim, 30, manaMetrics)
+						character.AddMana(sim, manaPerTick, manaMetrics)
 					},
 				})
 			},
@@ -3479,8 +3495,8 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=1168/skullflame-shield
-	// Equip: When struck in combat has a 3% chance of stealing 35 life from target enemy. (Proc chance: 3%)
-	// Equip: When struck in combat has a 1% chance of dealing 75 to 125 Fire damage to all targets around you. (Proc chance: 1%)
+	// Equip: When struck in melee combat, has a 3% chance of stealing 270 life from target enemy. (Proc chance: 3%)
+	// Equip: When struck in combat has a 2% chance of dealing 115 Fire damage to all targets around you. (Proc chance: 2%)
 	core.NewItemEffect(SkullflameShield, func(agent core.Agent) {
 		character := agent.GetCharacter()
 
@@ -3498,7 +3514,7 @@ func init() {
 			BonusCoefficient: 1,
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				result := spell.CalcAndDealDamage(sim, target, 35, spell.OutcomeAlwaysHit)
+				result := spell.CalcAndDealDamage(sim, target, 270, spell.OutcomeAlwaysHit)
 				character.GainHealth(sim, result.Damage, healthMetrics)
 			},
 		})
@@ -3515,7 +3531,7 @@ func init() {
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				for _, aoeTarget := range sim.Encounter.TargetUnits {
-					spell.CalcAndDealDamage(sim, aoeTarget, sim.Roll(75, 125), spell.OutcomeMagicHit)
+					spell.CalcAndDealDamage(sim, aoeTarget, 115, spell.OutcomeMagicHit)
 				}
 			},
 		})
@@ -3536,7 +3552,7 @@ func init() {
 			Callback:   core.CallbackOnSpellHitTaken,
 			Outcome:    core.OutcomeLanded,
 			ProcMask:   core.ProcMaskMelee,
-			ProcChance: 0.01,
+			ProcChance: 0.02,
 			Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 				flamestrikeSpell.Cast(sim, spell.Unit)
 			},
