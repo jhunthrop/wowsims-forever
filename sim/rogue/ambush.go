@@ -57,7 +57,11 @@ func (rogue *Rogue) registerAmbushSpell() {
 			if rogue.IsStealthed() {
 				return true
 			}
-			return !rogue.PseudoStats.InFrontOfTarget && rogue.IsStealthed()
+			// Cutthroat (talents.go's applyCutthroat): a landed Backstab
+			// has a chance to let the next Ambush within 10 sec skip the
+			// stealth requirement. CutthroatAura is nil for a build with
+			// no points in the talent, so this is a no-op there.
+			return rogue.CutthroatAura != nil && rogue.CutthroatAura.IsActive()
 		},
 
 		BonusCritRating:  15 * core.CritRatingPerCritChance * float64(rogue.Talents.ImprovedAmbush),
@@ -66,6 +70,12 @@ func (rogue *Rogue) registerAmbushSpell() {
 		BonusCoefficient: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			// Consume the Cutthroat bypass before BreakStealth, which
+			// would otherwise make "not stealthed" ambiguous between
+			// "never stealthed" and "was stealthed, now broken".
+			if !rogue.IsStealthed() && rogue.CutthroatAura != nil && rogue.CutthroatAura.IsActive() {
+				rogue.CutthroatAura.Deactivate(sim)
+			}
 			rogue.BreakStealth(sim)
 			baseDamage := (flatDamageBonus + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target)))
 
