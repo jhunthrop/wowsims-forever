@@ -95,6 +95,10 @@ type Rogue struct {
 	StealthAura        *core.Aura
 	VanishAura         *core.Aura
 	VenomAura          *core.Aura
+	// CutthroatAura is nil unless the Cutthroat talent is spent; set in
+	// talents.go's applyCutthroat, read by ambush.go to let Ambush bypass
+	// its stealth requirement.
+	CutthroatAura *core.Aura
 
 	woundPoisonDebuffAuras core.AuraArray
 }
