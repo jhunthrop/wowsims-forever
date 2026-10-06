@@ -39,6 +39,7 @@ const (
 	SpellCode_WarlockSoulFire
 	SpellCode_WarlockWrack
 	SpellCode_WarlockIncinerate
+	SpellCode_WarlockSiphonLife
 )
 
 type Warlock struct {
@@ -99,6 +100,28 @@ type Warlock struct {
 	SoulLinkAura            *core.Aura
 	MasterDemonologistAura  *core.Aura
 	WrackVulnerabilityAuras core.AuraArray
+
+	// Bane of Havoc (Destruction talent): BaneOfHavoc casts the curse,
+	// BaneOfHavocAuras tracks which enemy currently carries it, and
+	// baneOfHavocTarget is that same enemy, cached so the damage-redirect
+	// hook (applyBaneOfHavoc, talents.go) doesn't have to search the
+	// array on every hit.
+	BaneOfHavoc       *core.Spell
+	BaneOfHavocAuras  core.AuraArray
+	baneOfHavocTarget *core.Unit
+
+	// sacrificedPet is the demon Demonic Sacrifice (demonic_sacrifice
+	// in talents.go) last consumed. Demonic Pact reads it to tell
+	// "summoned a different demon" (keeps the sacrifice buff) from
+	// "resummoned the sacrificed one" (cancels it).
+	sacrificedPet *WarlockPet
+
+	// shadowAndFlameShadowAura and shadowAndFlameFireAura are Shadow
+	// and Flame's (talents.go) two self-buffs, triggered from
+	// conflagrate.go and shadowburn.go respectively. Nil when the
+	// talent is untaken.
+	shadowAndFlameShadowAura *core.Aura
+	shadowAndFlameFireAura   *core.Aura
 }
 
 func (warlock *Warlock) GetCharacter() *core.Character {

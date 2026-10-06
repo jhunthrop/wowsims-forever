@@ -66,10 +66,16 @@ func (warlock *Warlock) getConflagrateConfig(rank int) core.SpellConfig {
 		BonusCoefficient: spCoeff,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+
+			if result.Landed() {
+				// Shadow and Flame (talents.go): hitting with
+				// Conflagrate buffs the warlock's own Shadow damage.
+				warlock.triggerShadowAndFlame(sim, SpellCode_WarlockConflagrate)
+			}
 
 			immoSpell := warlock.getActiveImmolateSpell(target)
-			if immoSpell != nil {
+			if immoSpell != nil && !warlock.shadowAndFlamePreservesImmolate(sim) {
 				immoSpell.Dot(target).Deactivate(sim)
 			}
 		},

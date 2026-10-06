@@ -30,6 +30,7 @@ func (warlock *Warlock) getSiphonLifeBaseConfig(rank int) core.SpellConfig {
 
 	return core.SpellConfig{
 		ActionID:      actionID,
+		SpellCode:     SpellCode_WarlockSiphonLife,
 		SpellSchool:   core.SpellSchoolShadow,
 		DefenseType:   core.DefenseTypeMagic,
 		ProcMask:      core.ProcMaskSpellDamage,
