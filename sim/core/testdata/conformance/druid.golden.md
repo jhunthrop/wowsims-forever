@@ -234,7 +234,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 30 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | cooldown_ms 10000->0; required_level 20->0 |
 | FeralDruid | 30 | Rake | 0 | 1822 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 24→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 24->0 |
 | FeralDruid | 30 | Rip | 0 | 9492 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→0 | 12000→0 | mismatch | required_level 28->0; duration_ms 12000->0 |
-| FeralDruid | 30 | Shred | 0 | 6800 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→0 | n/a | mismatch | required_level 30->0 |
+| FeralDruid | 30 | Shred | 0 | 6800 | 60.00→42.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→0 | n/a | mismatch | cost 60.00->42.00; required_level 30->0 |
 | FeralDruid | 30 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
 | FeralDruid | 30 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  |
 | FeralDruid | 30 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→0 | 6000→0 | mismatch | required_level 24->0; duration_ms 6000->0 |
@@ -260,7 +260,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 38 | Rake | 0 | 1823 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 34->0 |
 | FeralDruid | 38 | Ravage | 0 | 6785 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→0 | n/a | mismatch | required_level 32->0 |
 | FeralDruid | 38 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→0 | mismatch | required_level 36->0; duration_ms 12000->0 |
-| FeralDruid | 38 | Shred | 0 | 8992 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | required_level 38->0 |
+| FeralDruid | 38 | Shred | 0 | 8992 | 60.00→42.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | cost 60.00->42.00; required_level 38->0 |
 | FeralDruid | 38 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
 | FeralDruid | 38 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  |
 | FeralDruid | 38 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -291,7 +291,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 40 | Rake | 0 | 1823 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 34->0 |
 | FeralDruid | 40 | Ravage | 0 | 6785 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→0 | n/a | mismatch | required_level 32->0 |
 | FeralDruid | 40 | Rip | 0 | 9493 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→0 | 12000→0 | mismatch | required_level 36->0; duration_ms 12000->0 |
-| FeralDruid | 40 | Shred | 0 | 8992 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | required_level 38->0 |
+| FeralDruid | 40 | Shred | 0 | 8992 | 60.00→42.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→0 | n/a | mismatch | cost 60.00->42.00; required_level 38->0 |
 | FeralDruid | 40 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
 | FeralDruid | 40 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  |
 | FeralDruid | 40 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -325,7 +325,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 50 | Rake | 0 | 1824 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 44->0 |
 | FeralDruid | 50 | Ravage | 0 | 9866 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 50→0 | n/a | mismatch | required_level 50->0 |
 | FeralDruid | 50 | Rip | 0 | 9752 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→0 | 12000→0 | mismatch | required_level 44->0; duration_ms 12000->0 |
-| FeralDruid | 50 | Shred | 0 | 9829 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→0 | n/a | mismatch | required_level 46->0 |
+| FeralDruid | 50 | Shred | 0 | 9829 | 60.00→42.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→0 | n/a | mismatch | cost 60.00->42.00; required_level 46->0 |
 | FeralDruid | 50 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
 | FeralDruid | 50 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  |
 | FeralDruid | 50 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -366,7 +366,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FeralDruid | 60 | Rake | 0 | 9904 | 40.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | 9000→9000 | mismatch | cost 40.00->35.00; required_level 54->0 |
 | FeralDruid | 60 | Ravage | 0 | 9867 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 58→0 | n/a | mismatch | required_level 58->0 |
 | FeralDruid | 60 | Rip | 0 | 9896 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→0 | 12000→0 | mismatch | required_level 60->0; duration_ms 12000->0 |
-| FeralDruid | 60 | Shred | 0 | 9830 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | n/a | mismatch | required_level 54->0 |
+| FeralDruid | 60 | Shred | 0 | 9830 | 60.00→42.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→0 | n/a | mismatch | cost 60.00->42.00; required_level 54->0 |
 | FeralDruid | 60 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  |
 | FeralDruid | 60 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  |
 | FeralDruid | 60 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  |

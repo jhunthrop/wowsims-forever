@@ -25,15 +25,12 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionPaladin | 20 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  |
 | ProtectionPaladin | 20 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  |
 | ProtectionPaladin | 20 | Judgement | 0 | 20271 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  |
-| ProtectionPaladin | 20 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | required_level 20->0 |
 | ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→0 | n/a | mismatch | required_level 10->0 |
 | ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→0 | n/a | mismatch | required_level 18->0 |
 | ProtectionPaladin | 20 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→0 | 40000→0 | mismatch | required_level 12->0; duration_ms 40000->0 |
 | ProtectionPaladin | 20 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→0 | 40000→0 | mismatch | required_level 6->0; duration_ms 40000->0 |
 | ProtectionPaladin | 20 | Lay on Hands | 0 | 633 | 0.00→0.00 | mana→none | 1200000→3600000 | 0→0 | 1500→1500 | 10→0 | n/a | mismatch | cooldown_ms 1200000->3600000; required_level 10->0 |
-| ProtectionPaladin | 20 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ProtectionPaladin | 20 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→0 | mismatch | duration_ms 30000->0 |
 | ProtectionPaladin | 20 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 20 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 20 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
@@ -51,8 +48,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionPaladin | 30 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  |
 | ProtectionPaladin | 30 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  |
 | ProtectionPaladin | 30 | Judgement | 0 | 20271 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  |
-| ProtectionPaladin | 30 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | required_level 20->0 |
-| ProtectionPaladin | 30 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→0 | n/a | mismatch | required_level 10->0 |
 | ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→0 | n/a | mismatch | required_level 18->0 |
@@ -61,9 +56,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionPaladin | 30 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→0 | 40000→0 | mismatch | required_level 22->0; duration_ms 40000->0 |
 | ProtectionPaladin | 30 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→0 | 40000→0 | mismatch | required_level 6->0; duration_ms 40000->0 |
 | ProtectionPaladin | 30 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→3600000 | 0→0 | 1500→1500 | 30→0 | n/a | mismatch | cooldown_ms 1200000->3600000; required_level 30->0 |
-| ProtectionPaladin | 30 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ProtectionPaladin | 30 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→0 | mismatch | duration_ms 30000->0 |
-| ProtectionPaladin | 30 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→0 | mismatch | duration_ms 30000->0 |
 | ProtectionPaladin | 30 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 30 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 30 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
@@ -86,8 +78,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionPaladin | 38 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  |
 | ProtectionPaladin | 38 | Holy Strike | 5 | 2495 | 16.00→16.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  |
 | ProtectionPaladin | 38 | Judgement | 0 | 20271 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  |
-| ProtectionPaladin | 38 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | required_level 20->0 |
-| ProtectionPaladin | 38 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→0 | n/a | mismatch | required_level 10->0 |
 | ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→0 | n/a | mismatch | required_level 18->0 |
@@ -98,9 +88,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→0 | 40000→0 | mismatch | required_level 32->0; duration_ms 40000->0 |
 | ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→0 | 40000→0 | mismatch | required_level 6->0; duration_ms 40000->0 |
 | ProtectionPaladin | 38 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→3600000 | 0→0 | 1500→1500 | 30→0 | n/a | mismatch | cooldown_ms 1200000->3600000; required_level 30->0 |
-| ProtectionPaladin | 38 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ProtectionPaladin | 38 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→0 | mismatch | duration_ms 30000->0 |
-| ProtectionPaladin | 38 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→0 | mismatch | duration_ms 30000->0 |
 | ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
@@ -127,9 +114,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionPaladin | 40 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  |
 | ProtectionPaladin | 40 | Holy Strike | 5 | 2495 | 16.00→16.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  |
 | ProtectionPaladin | 40 | Judgement | 0 | 20271 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  |
-| ProtectionPaladin | 40 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | required_level 20->0 |
-| ProtectionPaladin | 40 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
-| ProtectionPaladin | 40 | Judgement of Command | 0 | 20964 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
 | ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→0 | n/a | mismatch | required_level 10->0 |
 | ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→0 | n/a | mismatch | required_level 18->0 |
@@ -140,10 +124,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→0 | 40000→0 | mismatch | required_level 32->0; duration_ms 40000->0 |
 | ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→0 | 40000→0 | mismatch | required_level 6->0; duration_ms 40000->0 |
 | ProtectionPaladin | 40 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→3600000 | 0→0 | 1500→1500 | 30→0 | n/a | mismatch | cooldown_ms 1200000->3600000; required_level 30->0 |
-| ProtectionPaladin | 40 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ProtectionPaladin | 40 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→0 | mismatch | duration_ms 30000->0 |
-| ProtectionPaladin | 40 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→0 | mismatch | duration_ms 30000->0 |
-| ProtectionPaladin | 40 | Seal of Command | 3 | 20918 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 30000→0 | mismatch | duration_ms 30000->0 |
 | ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
@@ -175,10 +155,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionPaladin | 50 | Holy Strike | 6 | 5569 | 17.00→17.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  |
 | ProtectionPaladin | 50 | Holy Wrath | 1 | 2812 | 645.00→645.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 50→50 | n/a | match |  |
 | ProtectionPaladin | 50 | Judgement | 0 | 20271 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  |
-| ProtectionPaladin | 50 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | required_level 20->0 |
-| ProtectionPaladin | 50 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
-| ProtectionPaladin | 50 | Judgement of Command | 0 | 20964 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
-| ProtectionPaladin | 50 | Judgement of Command | 0 | 20965 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→0 | n/a | mismatch | required_level 50->0 |
 | ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→0 | n/a | mismatch | required_level 10->0 |
 | ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→0 | n/a | mismatch | required_level 18->0 |
@@ -192,11 +168,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 20302 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→0 | 40000→0 | mismatch | required_level 42->0; duration_ms 40000->0 |
 | ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→0 | 40000→0 | mismatch | required_level 6->0; duration_ms 40000->0 |
 | ProtectionPaladin | 50 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→3600000 | 0→0 | 1500→1500 | 50→0 | n/a | mismatch | cooldown_ms 1200000->3600000; required_level 50->0 |
-| ProtectionPaladin | 50 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ProtectionPaladin | 50 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→0 | mismatch | duration_ms 30000->0 |
-| ProtectionPaladin | 50 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→0 | mismatch | duration_ms 30000->0 |
-| ProtectionPaladin | 50 | Seal of Command | 3 | 20918 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 30000→0 | mismatch | duration_ms 30000->0 |
-| ProtectionPaladin | 50 | Seal of Command | 4 | 20919 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 30000→0 | mismatch | duration_ms 30000->0 |
 | ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25735 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25736 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
@@ -241,11 +212,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionPaladin | 60 | Holy Wrath | 1 | 2812 | 645.00→645.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 50→50 | n/a | match |  |
 | ProtectionPaladin | 60 | Holy Wrath | 2 | 10318 | 805.00→805.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 60→60 | n/a | match |  |
 | ProtectionPaladin | 60 | Judgement | 0 | 20271 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  |
-| ProtectionPaladin | 60 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | required_level 20->0 |
-| ProtectionPaladin | 60 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
-| ProtectionPaladin | 60 | Judgement of Command | 0 | 20964 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
-| ProtectionPaladin | 60 | Judgement of Command | 0 | 20965 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→0 | n/a | mismatch | required_level 50->0 |
-| ProtectionPaladin | 60 | Judgement of Command | 0 | 20966 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | required_level 60->0 |
 | ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→0 | n/a | mismatch | required_level 10->0 |
 | ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→0 | n/a | mismatch | required_level 18->0 |
@@ -261,12 +227,6 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20303 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→0 | 40000→0 | mismatch | required_level 52->0; duration_ms 40000->0 |
 | ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→0 | 40000→0 | mismatch | required_level 6->0; duration_ms 40000->0 |
 | ProtectionPaladin | 60 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→3600000 | 0→0 | 1500→1500 | 50→0 | n/a | mismatch | cooldown_ms 1200000->3600000; required_level 50->0 |
-| ProtectionPaladin | 60 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ProtectionPaladin | 60 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→0 | mismatch | duration_ms 30000->0 |
-| ProtectionPaladin | 60 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→0 | mismatch | duration_ms 30000->0 |
-| ProtectionPaladin | 60 | Seal of Command | 3 | 20918 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 30000→0 | mismatch | duration_ms 30000->0 |
-| ProtectionPaladin | 60 | Seal of Command | 4 | 20919 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 30000→0 | mismatch | duration_ms 30000->0 |
-| ProtectionPaladin | 60 | Seal of Command | 5 | 20920 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 30000→0 | mismatch | duration_ms 30000->0 |
 | ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25713 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25735 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25736 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
