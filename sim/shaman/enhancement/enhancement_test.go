@@ -13,7 +13,6 @@ func init() {
 }
 
 func TestEnhancement(t *testing.T) {
-	core.SkipAwaitingForeverTalentRewrite(t, "sim/shaman/enhancement")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassShaman,
@@ -98,7 +97,21 @@ func TestEnhancement(t *testing.T) {
 	}))
 }
 
-var DefaultTalents = "05-5025002105023051-05105301"
+// DefaultTalents predates the client trait-tree rewrite and positionally
+// scrambled once sim/shaman/talents.go started reading the new nodes -
+// its old Enhancement segment left Stormstrike untalented (an
+// Enhancement build with no Stormstrike) and put 5 points in Mental
+// Quickness, which overflowed that talent's new 0-2 range and panicked.
+// Rebuilt for the new trait tree along the lines
+// web/src/content/guides/shaman/enhancement.md describes: Elemental's
+// Convection and Concussion maxed plus Elemental Warding, Reverberation,
+// Call of Flame and Elemental Devastation (20 points) under Enhancement's
+// Thundering Strikes, Ancestral Knowledge, Mental Dexterity (Flurry's
+// prereq), Elemental Weapons, Shamanistic Focus, Anticipation, Flurry,
+// Stormstrike, Spirit Weapons, Mental Quickness 2/2 (Rage of the
+// Farseer's prereq), Improved Stormstrike, Maelstrom Weapon and Rage of
+// the Farseer itself (31 points) - 51 total, none in Restoration.
+var DefaultTalents = "552422-054010011304112251-"
 
 var PlayerOptionsSyncDelayOH = &proto.Player_EnhancementShaman{
 	EnhancementShaman: &proto.EnhancementShaman{

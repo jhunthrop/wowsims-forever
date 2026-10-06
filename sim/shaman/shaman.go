@@ -126,9 +126,11 @@ type Shaman struct {
 	ManaSpringTotem      []*core.Spell
 	SearingTotem         []*core.Spell
 	StoneskinTotem       []*core.Spell
+	RageOfTheFarseer     *core.Spell
 	Stormstrike          *core.Spell
 	StrengthOfEarthTotem []*core.Spell
 	TremorTotem          *core.Spell
+	WaterShield          *core.Spell
 	WindfuryTotem        []*core.Spell
 	WindfuryWeaponMH     *core.Spell
 	WindfuryWeaponOH     *core.Spell
@@ -136,6 +138,7 @@ type Shaman struct {
 
 	// Auras
 	ClearcastingAura     *core.Aura
+	MaelstromWeaponAura  *core.Aura
 	LightningShieldAuras []*core.Aura
 
 	// Totems

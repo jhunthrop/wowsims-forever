@@ -13,6 +13,7 @@ var LightningShieldSpellId = [LightningShieldRanks + 1]int32{0, 324, 325, 905, 9
 var LightningShieldProcSpellId = [LightningShieldRanks + 1]int32{0, 26364, 26365, 26366, 26367, 26369, 26370, 26363}
 var LightningShieldBaseDamage = [LightningShieldRanks + 1]float64{0, 13, 29, 51, 80, 114, 154, 198}
 var LightningShieldSpellCoef = [LightningShieldRanks + 1]float64{0, .147, .227, .267, .267, .267, .267, .267}
+
 // The literal here used to stop at rank 6 (305), leaving rank 7's
 // ManaCost at the array's zero value instead of the client's 370
 // (spellconst/shaman.json build 1.60.1.70009) -- conformance golden
@@ -103,10 +104,10 @@ func (shaman *Shaman) registerNewLightningShieldSpell(rank int) {
 	})
 
 	shaman.LightningShield[rank] = shaman.RegisterSpell(core.SpellConfig{
-		ActionID:        core.ActionID{SpellID: spellId},
-		SpellCode:       SpellCode_ShamanLightningShield,
-		ProcMask:        core.ProcMaskEmpty,
-		Flags:           core.SpellFlagAPL | SpellFlagShaman | SpellFlagLightning,
+		ActionID:  core.ActionID{SpellID: spellId},
+		SpellCode: SpellCode_ShamanLightningShield,
+		ProcMask:  core.ProcMaskEmpty,
+		Flags:     core.SpellFlagAPL | SpellFlagShaman | SpellFlagLightning,
 		// conformance/compare.go's engineDuration reads a cast's own
 		// RelatedSelfBuff to find its duration; without this the golden
 		// saw every rank's duration_ms as 0 against the client's 600000

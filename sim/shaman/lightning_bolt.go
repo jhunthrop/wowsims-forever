@@ -54,6 +54,18 @@ func (shaman *Shaman) newLightningBoltSpellConfig(rank int) core.SpellConfig {
 		spell.WaitTravelTime(sim, func(sim *core.Simulation) {
 			spell.DealDamage(sim, result)
 		})
+
+		// Lightning Overload (talents.go): "a second, similar spell ...
+		// at no additional cost that causes half damage", through this
+		// same spell object so every multiplier the primary hit already
+		// has applies identically.
+		if shaman.rollLightningOverload(sim) {
+			overloadDamage := sim.Roll(baseDamageLow, baseDamageHigh) * 0.5
+			overloadResult := spell.CalcDamage(sim, target, overloadDamage, spell.OutcomeMagicHitAndCrit)
+			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
+				spell.DealDamage(sim, overloadResult)
+			})
+		}
 	}
 
 	return spell

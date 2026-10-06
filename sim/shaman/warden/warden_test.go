@@ -40,7 +40,15 @@ var PlayerOptionsBasic = &proto.Player_WardenShaman{
 	},
 }
 
-var DefaultTalents = "5203015-0505000145503151"
+// DefaultTalents predates the client trait-tree rewrite; its
+// Enhancement segment's position 14 used to be a different vanilla
+// talent and read 5, which overflowed Mental Quickness's new 0-2
+// range once sim/shaman/talents.go started reading it (shaman is
+// untouched otherwise - Warden itself awaits its own bring-up, see
+// warden_test.go's SkipAwaitingForeverTalentRewrite below). Changed
+// to 0, the only value that keeps this fixture's intent (this spec
+// never meant to invest in whichever talent used to live there).
+var DefaultTalents = "5203015-0505000145503101"
 
 var Phase1Consumes = core.ConsumesCombo{
 	Label: "P1-Consumes",

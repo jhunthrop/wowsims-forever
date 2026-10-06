@@ -15,7 +15,7 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 		return core.StormstrikeAura(target)
 	})
 
-	shaman.RegisterSpell(core.SpellConfig{
+	shaman.Stormstrike = shaman.RegisterSpell(core.SpellConfig{
 		SpellCode:   SpellCode_ShamanStormstrike,
 		ActionID:    core.ActionID{SpellID: 17364},
 		SpellSchool: core.SpellSchoolPhysical,
