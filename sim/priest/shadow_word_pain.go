@@ -11,6 +11,7 @@ const ShadowWordPainRanks = 8
 
 var ShadowWordPainSpellId = [ShadowWordPainRanks + 1]int32{0, 589, 594, 970, 992, 2767, 10892, 10893, 10894}
 var ShadowWordPainBaseDamage = [ShadowWordPainRanks + 1]float64{0, 30, 66, 132, 234, 366, 510, 672, 852}
+
 // ShadowWordPainSpellCoef was the escalating-then-0.167 table vanilla
 // Classic's own ranks used (source of the values this replaced). The
 // Forever client's spellconst (1.60.1.70009, priest.json spells

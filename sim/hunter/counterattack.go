@@ -25,6 +25,7 @@ var counterattackLearnLevels = []int{30, 30, 42, 54}
 // not a second stacked weapon-damage roll.
 var counterattackBaseDamage = [5]float64{0, 26, 40, 70, 110}
 var counterattackManaCost = [5]float64{0, 30, 45, 65, 85}
+
 const counterattackWeaponPercent = 0.5
 
 func (hunter *Hunter) getCounterattackConfig(rank int) core.SpellConfig {

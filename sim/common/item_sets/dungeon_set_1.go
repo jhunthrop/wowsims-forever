@@ -158,13 +158,13 @@ var ItemSetLightforgeArmor = core.NewItemSet(core.ItemSet{
 			}
 
 			core.MakeProcTriggerAura(&c.Unit, core.ProcTrigger{
-				ActionID:   actionID,
-				Name:       "Item - Crusader's Wrath Proc - Lightforge Armor",
-				Callback:   core.CallbackOnSpellHitDealt,
-				Outcome:    core.OutcomeLanded,
-				ProcMask:   core.ProcMaskMeleeWhiteHit,
-				PPM:        3, //6% is the sod proc rate, best data I could find online says 3 ppm
-				Handler:    handler,
+				ActionID: actionID,
+				Name:     "Item - Crusader's Wrath Proc - Lightforge Armor",
+				Callback: core.CallbackOnSpellHitDealt,
+				Outcome:  core.OutcomeLanded,
+				ProcMask: core.ProcMaskMeleeWhiteHit,
+				PPM:      3, //6% is the sod proc rate, best data I could find online says 3 ppm
+				Handler:  handler,
 			})
 		},
 		// +8 All Resistances.

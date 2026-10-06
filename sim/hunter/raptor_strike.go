@@ -10,6 +10,7 @@ const RaptorStrikeRanks = 8
 
 var RaptorStrikeSpellId = [RaptorStrikeRanks + 1]int32{0, 2973, 14260, 14261, 14262, 14263, 14264, 14265, 14266}
 var RaptorStrikeSpellIdMeleeSpecialist = [RaptorStrikeRanks + 1]int32{0, 415335, 415336, 415337, 415338, 415340, 415341, 415342, 415343}
+
 // RaptorStrikeBaseDamage and RaptorStrikeManaCost are ranks 1-8's flat
 // bonus damage and mana cost; source: 1.60.1.70009 client spell data
 // ("Raptor Strike", spells 2973/14260-14266). Forever's own numbers are

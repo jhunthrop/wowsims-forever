@@ -65,7 +65,7 @@ func (paladin *Paladin) registerExorcism() {
 
 			BonusCoefficient: 0.429,
 
-			ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool { 
+			ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 				return target.MobType == proto.MobType_MobTypeDemon || target.MobType == proto.MobType_MobTypeUndead
 			},
 
