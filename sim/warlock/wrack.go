@@ -38,7 +38,6 @@ const WrackTickCoefficient = 0.14300000668
 const WrackNumTicks = 6
 const WrackTickLength = time.Second * 1
 const WrackDuration = WrackTickLength * WrackNumTicks
-const WrackManaCost = 200.0
 const WrackVulnerabilityBonus = 0.10
 const WrackSpellID = 1316697
 
@@ -73,7 +72,7 @@ func (warlock *Warlock) registerWrackSpell() {
 		RequiredLevel: 40,
 
 		ManaCost: core.ManaCostOptions{
-			FlatCost: WrackManaCost,
+			FlatCost: WrackManaCost[1],
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

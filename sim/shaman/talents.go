@@ -206,7 +206,7 @@ func (shaman *Shaman) applyElementalDevastation() {
 		return
 	}
 
-	spellID := []int32{0, 30165, 29177, 29178}[shaman.Talents.ElementalDevastation]
+	spellID := []int32{0, 30165, 29177, 29178}[rankIndex(shaman.Talents.ElementalDevastation, 4)]
 	critBonus := 3.0 * float64(shaman.Talents.ElementalDevastation) * core.CritRatingPerCritChance
 	procAura := shaman.NewTemporaryStatsAura("Elemental Devastation Proc", core.ActionID{SpellID: spellID}, stats.Stats{stats.Crit: critBonus}, time.Second*10)
 
@@ -576,7 +576,7 @@ func (shaman *Shaman) applyElementalAlacrity() {
 		return
 	}
 
-	reduction := elementalAlacrityCastTimeReduction[shaman.Talents.ElementalAlacrity]
+	reduction := elementalAlacrityCastTimeReduction[rankIndex(shaman.Talents.ElementalAlacrity, len(elementalAlacrityCastTimeReduction))]
 	affectedSpellCodes := []int32{SpellCode_ShamanLightningBolt, SpellCode_ShamanChainLightning, SpellCode_ShamanLavaBurst}
 	shaman.OnSpellRegistered(func(spell *core.Spell) {
 		if slices.Contains(affectedSpellCodes, spell.SpellCode) && spell.DefaultCast.CastTime > 0 {
@@ -598,7 +598,7 @@ func (shaman *Shaman) applyEyeOfTheStorm() {
 		return
 	}
 
-	reduction := eyeOfTheStormPushbackReduction[shaman.Talents.EyeOfTheStorm]
+	reduction := eyeOfTheStormPushbackReduction[rankIndex(shaman.Talents.EyeOfTheStorm, len(eyeOfTheStormPushbackReduction))]
 	affectedSpellCodes := []int32{SpellCode_ShamanLightningBolt, SpellCode_ShamanChainLightning, SpellCode_ShamanLavaBurst}
 	shaman.OnSpellRegistered(func(spell *core.Spell) {
 		if slices.Contains(affectedSpellCodes, spell.SpellCode) {
@@ -628,7 +628,7 @@ func (shaman *Shaman) rollLightningOverload(sim *core.Simulation) bool {
 	if shaman.Talents.LightningOverload == 0 {
 		return false
 	}
-	return sim.Proc(lightningOverloadChance[shaman.Talents.LightningOverload], "Lightning Overload")
+	return sim.Proc(lightningOverloadChance[rankIndex(shaman.Talents.LightningOverload, len(lightningOverloadChance))], "Lightning Overload")
 }
 
 // mentalDexterityAttackPowerPercent is Mental Dexterity's three ranks
@@ -640,7 +640,7 @@ func (shaman *Shaman) applyMentalDexterity() {
 	if shaman.Talents.MentalDexterity == 0 {
 		return
 	}
-	shaman.AddStatDependency(stats.Intellect, stats.AttackPower, mentalDexterityAttackPowerPercent[shaman.Talents.MentalDexterity])
+	shaman.AddStatDependency(stats.Intellect, stats.AttackPower, mentalDexterityAttackPowerPercent[rankIndex(shaman.Talents.MentalDexterity, len(mentalDexterityAttackPowerPercent))])
 }
 
 // mentalQuicknessSpellDamagePercent is Mental Quickness's two ranks
@@ -657,7 +657,7 @@ func (shaman *Shaman) applyMentalQuickness() {
 	if shaman.Talents.MentalQuickness == 0 {
 		return
 	}
-	pct := mentalQuicknessSpellDamagePercent[shaman.Talents.MentalQuickness]
+	pct := mentalQuicknessSpellDamagePercent[rankIndex(shaman.Talents.MentalQuickness, len(mentalQuicknessSpellDamagePercent))]
 	shaman.AddStatDependency(stats.Intellect, stats.SpellDamage, pct)
 	shaman.AddStatDependency(stats.Intellect, stats.HealingPower, pct)
 }
@@ -713,7 +713,7 @@ func (shaman *Shaman) applyImprovedStormstrike() {
 	if shaman.Talents.ImprovedStormstrike == 0 {
 		return
 	}
-	chance := improvedStormstrikeChance[shaman.Talents.ImprovedStormstrike]
+	chance := improvedStormstrikeChance[rankIndex(shaman.Talents.ImprovedStormstrike, len(improvedStormstrikeChance))]
 
 	// "50% mana regeneration while casting" is the same mechanic
 	// Priest's Meditation/Shadow Form grant through
@@ -912,4 +912,15 @@ func (shaman *Shaman) applyUnmodeledTalents() {
 	_ = t.ManaTideTotem         // raid mana cooldown; doesn't change the caster's own DPS (registerManaTideTotemCD above is already commented out as out of scope).
 	_ = t.HealingWay            // increases Healing Wave's healing done; no DPS effect.
 	_ = t.Riptide               // a heal and heal-over-time spell, not a damage spell, for Elemental or Enhancement.
+}
+
+// rankIndex clamps a talent rank to a per-rank table's last entry, the
+// same guard sim/mage/talents.go carries: a talent string written for an
+// older tree can carry a rank the current table does not have, and a
+// panic there takes the whole character build down with it.
+func rankIndex(rank int32, tableLen int) int {
+	if i := int(rank); i >= 0 && i < tableLen {
+		return i
+	}
+	return tableLen - 1
 }

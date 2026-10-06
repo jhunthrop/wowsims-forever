@@ -233,7 +233,7 @@ var Presets = []Preset{
 		ClientClassSlug: "shaman",
 		Class:           proto.Class_ClassShaman,
 		Race:            proto.Race_RaceTroll,
-		Talents:         "05-5025002105023051-05105301",
+		Talents:         "552422-054010011304112251-",
 		SpecOptions: &proto.Player_EnhancementShaman{
 			EnhancementShaman: &proto.EnhancementShaman{
 				Options: &proto.EnhancementShaman_Options{
@@ -247,7 +247,7 @@ var Presets = []Preset{
 		ClientClassSlug: "shaman",
 		Class:           proto.Class_ClassShaman,
 		Race:            proto.Race_RaceTroll,
-		Talents:         "5203015-0505000145503151",
+		Talents:         "5203015-0505000145503101",
 		SpecOptions: &proto.Player_WardenShaman{
 			WardenShaman: &proto.WardenShaman{
 				Options: &proto.WardenShaman_Options{},

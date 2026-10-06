@@ -167,7 +167,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | FuryWarrior | 60 | Recklessness | 0 | 1719 | 0.00→0.00 | rage→none | 1800000→1800000 | 0→0 | 1500→1500 | 50→0 | 15000→0 | mismatch | required_level 50->0; duration_ms 15000->0 |
 | FuryWarrior | 60 | Rend | 7 | 11574 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→60 | 21000→21000 | match |  |
 | FuryWarrior | 60 | Revenge | 0 | 25288 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 60→0 | n/a | mismatch | required_level 60->0 |
-| FuryWarrior | 60 | Slam | 5 | 11605 | 15.00→15.00 | rage→rage | 18000→15000 | 1500→1500 | 1500→1500 | 54→54 | n/a | mismatch | cooldown_ms 18000->15000 |
+| FuryWarrior | 60 | Slam | 5 | 11605 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 54→54 | n/a | match |  |
 | FuryWarrior | 60 | Sunder Armor | 5 | 11597 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 58→58 | 30000→0 | mismatch | duration_ms 30000->0 |
 | FuryWarrior | 60 | Thunder Clap | 6 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→58 | 30000→0 | mismatch | cooldown_ms 6000->4000; duration_ms 30000->0 |
 | FuryWarrior | 60 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |
@@ -337,7 +337,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ProtectionWarrior | 60 | Shield Block | 0 | 2565 | 10.00→10.00 | rage→rage | 5000→5000 | 0→0 | 0→0 | 16→0 | 7000→0 | mismatch | required_level 16->0; duration_ms 7000->0 |
 | ProtectionWarrior | 60 | Shield Slam | 4 | 23925 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  |
 | ProtectionWarrior | 60 | Shield Wall | 0 | 871 | 0.00→0.00 | rage→none | 900000→1800000 | 0→0 | 1500→0 | 28→0 | 12000→0 | mismatch | cooldown_ms 900000->1800000; gcd_ms 1500->0; required_level 28->0; duration_ms 12000->0 |
-| ProtectionWarrior | 60 | Slam | 5 | 11605 | 15.00→15.00 | rage→rage | 18000→15000 | 1500→1500 | 1500→1500 | 54→54 | n/a | mismatch | cooldown_ms 18000->15000 |
+| ProtectionWarrior | 60 | Slam | 5 | 11605 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 54→54 | n/a | match |  |
 | ProtectionWarrior | 60 | Sunder Armor | 5 | 11597 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 58→58 | 30000→0 | mismatch | duration_ms 30000->0 |
 | ProtectionWarrior | 60 | Thunder Clap | 6 | 11581 | 20.00→20.00 | rage→rage | 6000→4000 | 0→0 | 1500→1500 | 58→58 | 30000→0 | mismatch | cooldown_ms 6000->4000; duration_ms 30000->0 |
 | ProtectionWarrior | 60 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→0 | n/a | mismatch | required_level 36->0 |

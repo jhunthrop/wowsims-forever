@@ -27,8 +27,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ElementalShaman | 10 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
 | ElementalShaman | 10 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→0 | n/a | mismatch | required_level 50->0 |
 | ElementalShaman | 10 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | required_level 60->0 |
-| ElementalShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
-| ElementalShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  |
+| ElementalShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1330 | 1500→1500 | 1→1 | n/a | mismatch | cast_time_ms 1500->1330 |
+| ElementalShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→1830 | 1500→1500 | 8→8 | n/a | mismatch | cast_time_ms 2000->1830 |
 | ElementalShaman | 10 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  |
 | ElementalShaman | 10 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→0 | n/a | mismatch | required_level 26->0 |
 | ElementalShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→0 | n/a | mismatch | required_level 36->0 |
@@ -61,10 +61,10 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ElementalShaman | 20 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→0 | n/a | mismatch | required_level 50->0 |
 | ElementalShaman | 20 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | required_level 60->0 |
 | ElementalShaman | 20 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 20→20 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
-| ElementalShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
-| ElementalShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  |
-| ElementalShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  |
-| ElementalShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→75.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cost 60.00->75.00; cast_time_ms 2500->3000 |
+| ElementalShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1330 | 1500→1500 | 1→1 | n/a | mismatch | cast_time_ms 1500->1330 |
+| ElementalShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→1830 | 1500→1500 | 8→8 | n/a | mismatch | cast_time_ms 2000->1830 |
+| ElementalShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2330 | 1500→1500 | 14→14 | n/a | mismatch | cast_time_ms 2500->2330 |
+| ElementalShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→75.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 20→20 | n/a | mismatch | cost 60.00->75.00; cast_time_ms 2500->2830 |
 | ElementalShaman | 20 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  |
 | ElementalShaman | 20 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  |
 | ElementalShaman | 20 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→0 | n/a | mismatch | required_level 26->0 |
@@ -103,11 +103,11 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ElementalShaman | 30 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | required_level 60->0 |
 | ElementalShaman | 30 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 20→20 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | ElementalShaman | 30 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 30→30 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
-| ElementalShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
-| ElementalShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  |
-| ElementalShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  |
-| ElementalShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→75.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cost 60.00->75.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→105.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 26→26 | n/a | mismatch | cost 85.00->105.00; cast_time_ms 2500->3000 |
+| ElementalShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1330 | 1500→1500 | 1→1 | n/a | mismatch | cast_time_ms 1500->1330 |
+| ElementalShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→1830 | 1500→1500 | 8→8 | n/a | mismatch | cast_time_ms 2000->1830 |
+| ElementalShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2330 | 1500→1500 | 14→14 | n/a | mismatch | cast_time_ms 2500->2330 |
+| ElementalShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→75.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 20→20 | n/a | mismatch | cost 60.00->75.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→105.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 26→26 | n/a | mismatch | cost 85.00->105.00; cast_time_ms 2500->2830 |
 | ElementalShaman | 30 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  |
 | ElementalShaman | 30 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  |
 | ElementalShaman | 30 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  |
@@ -132,7 +132,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ElementalShaman | 38 | Attack | 0 | 6352 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 40→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 40->0 |
 | ElementalShaman | 38 | Attack | 0 | 10435 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 50→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 50->0 |
 | ElementalShaman | 38 | Attack | 0 | 10436 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 60→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 60->0 |
-| ElementalShaman | 38 | Chain Lightning | 1 | 421 | 225.00→280.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 32→32 | n/a | mismatch | cost 225.00->280.00; cast_time_ms 2000->2500 |
+| ElementalShaman | 38 | Chain Lightning | 1 | 421 | 225.00→280.00 | mana→mana | 6000→6000 | 2000→2330 | 1500→1500 | 32→32 | n/a | mismatch | cost 225.00->280.00; cast_time_ms 2000->2330 |
 | ElementalShaman | 38 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→5400 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | cooldown_ms 6000->5400; duration_ms 2000->0 |
 | ElementalShaman | 38 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→5400 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | cooldown_ms 6000->5400; duration_ms 2000->0 |
 | ElementalShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→5400 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | cooldown_ms 6000->5400; duration_ms 2000->0 |
@@ -155,13 +155,13 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ElementalShaman | 38 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→0 | n/a | mismatch | required_level 60->0 |
 | ElementalShaman | 38 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 20→20 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | ElementalShaman | 38 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 30→30 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
-| ElementalShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
-| ElementalShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  |
-| ElementalShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  |
-| ElementalShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→75.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cost 60.00->75.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→105.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 26→26 | n/a | mismatch | cost 85.00->105.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 38 | Lightning Bolt | 6 | 6041 | 110.00→135.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 32→32 | n/a | mismatch | cost 110.00->135.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 38 | Lightning Bolt | 7 | 10391 | 135.00→165.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 38→38 | n/a | mismatch | cost 135.00->165.00; cast_time_ms 2500->3000 |
+| ElementalShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1330 | 1500→1500 | 1→1 | n/a | mismatch | cast_time_ms 1500->1330 |
+| ElementalShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→1830 | 1500→1500 | 8→8 | n/a | mismatch | cast_time_ms 2000->1830 |
+| ElementalShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2330 | 1500→1500 | 14→14 | n/a | mismatch | cast_time_ms 2500->2330 |
+| ElementalShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→75.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 20→20 | n/a | mismatch | cost 60.00->75.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→105.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 26→26 | n/a | mismatch | cost 85.00->105.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 38 | Lightning Bolt | 6 | 6041 | 110.00→135.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 32→32 | n/a | mismatch | cost 110.00->135.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 38 | Lightning Bolt | 7 | 10391 | 135.00→165.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 38→38 | n/a | mismatch | cost 135.00->165.00; cast_time_ms 2500->2830 |
 | ElementalShaman | 38 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  |
 | ElementalShaman | 38 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  |
 | ElementalShaman | 38 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  |
@@ -193,8 +193,8 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ElementalShaman | 40 | Attack | 0 | 6352 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 40→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 40->0 |
 | ElementalShaman | 40 | Attack | 0 | 10435 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 50→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 50->0 |
 | ElementalShaman | 40 | Attack | 0 | 10436 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 60→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 60->0 |
-| ElementalShaman | 40 | Chain Lightning | 1 | 421 | 225.00→280.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 32→32 | n/a | mismatch | cost 225.00->280.00; cast_time_ms 2000->2500 |
-| ElementalShaman | 40 | Chain Lightning | 2 | 930 | 305.00→380.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 40→40 | n/a | mismatch | cost 305.00->380.00; cast_time_ms 2000->2500 |
+| ElementalShaman | 40 | Chain Lightning | 1 | 421 | 225.00→280.00 | mana→mana | 6000→6000 | 2000→2330 | 1500→1500 | 32→32 | n/a | mismatch | cost 225.00->280.00; cast_time_ms 2000->2330 |
+| ElementalShaman | 40 | Chain Lightning | 2 | 930 | 305.00→380.00 | mana→mana | 6000→6000 | 2000→2330 | 1500→1500 | 40→40 | n/a | mismatch | cost 305.00->380.00; cast_time_ms 2000->2330 |
 | ElementalShaman | 40 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→5400 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | cooldown_ms 6000->5400; duration_ms 2000->0 |
 | ElementalShaman | 40 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→5400 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | cooldown_ms 6000->5400; duration_ms 2000->0 |
 | ElementalShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→5400 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | cooldown_ms 6000->5400; duration_ms 2000->0 |
@@ -219,13 +219,13 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ElementalShaman | 40 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 20→20 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | ElementalShaman | 40 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 30→30 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | ElementalShaman | 40 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 40→40 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
-| ElementalShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
-| ElementalShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  |
-| ElementalShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  |
-| ElementalShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→75.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cost 60.00->75.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→105.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 26→26 | n/a | mismatch | cost 85.00->105.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 40 | Lightning Bolt | 6 | 6041 | 110.00→135.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 32→32 | n/a | mismatch | cost 110.00->135.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 40 | Lightning Bolt | 7 | 10391 | 135.00→165.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 38→38 | n/a | mismatch | cost 135.00->165.00; cast_time_ms 2500->3000 |
+| ElementalShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1330 | 1500→1500 | 1→1 | n/a | mismatch | cast_time_ms 1500->1330 |
+| ElementalShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→1830 | 1500→1500 | 8→8 | n/a | mismatch | cast_time_ms 2000->1830 |
+| ElementalShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2330 | 1500→1500 | 14→14 | n/a | mismatch | cast_time_ms 2500->2330 |
+| ElementalShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→75.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 20→20 | n/a | mismatch | cost 60.00->75.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→105.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 26→26 | n/a | mismatch | cost 85.00->105.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 40 | Lightning Bolt | 6 | 6041 | 110.00→135.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 32→32 | n/a | mismatch | cost 110.00->135.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 40 | Lightning Bolt | 7 | 10391 | 135.00→165.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 38→38 | n/a | mismatch | cost 135.00->165.00; cast_time_ms 2500->2830 |
 | ElementalShaman | 40 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  |
 | ElementalShaman | 40 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  |
 | ElementalShaman | 40 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  |
@@ -259,9 +259,9 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ElementalShaman | 50 | Attack | 0 | 6352 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 40→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 40->0 |
 | ElementalShaman | 50 | Attack | 0 | 10435 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 50→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 50->0 |
 | ElementalShaman | 50 | Attack | 0 | 10436 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 60→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 60->0 |
-| ElementalShaman | 50 | Chain Lightning | 1 | 421 | 225.00→280.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 32→32 | n/a | mismatch | cost 225.00->280.00; cast_time_ms 2000->2500 |
-| ElementalShaman | 50 | Chain Lightning | 2 | 930 | 305.00→380.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 40→40 | n/a | mismatch | cost 305.00->380.00; cast_time_ms 2000->2500 |
-| ElementalShaman | 50 | Chain Lightning | 3 | 2860 | 390.00→490.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 48→48 | n/a | mismatch | cost 390.00->490.00; cast_time_ms 2000->2500 |
+| ElementalShaman | 50 | Chain Lightning | 1 | 421 | 225.00→280.00 | mana→mana | 6000→6000 | 2000→2330 | 1500→1500 | 32→32 | n/a | mismatch | cost 225.00->280.00; cast_time_ms 2000->2330 |
+| ElementalShaman | 50 | Chain Lightning | 2 | 930 | 305.00→380.00 | mana→mana | 6000→6000 | 2000→2330 | 1500→1500 | 40→40 | n/a | mismatch | cost 305.00->380.00; cast_time_ms 2000->2330 |
+| ElementalShaman | 50 | Chain Lightning | 3 | 2860 | 390.00→490.00 | mana→mana | 6000→6000 | 2000→2330 | 1500→1500 | 48→48 | n/a | mismatch | cost 390.00->490.00; cast_time_ms 2000->2330 |
 | ElementalShaman | 50 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→5400 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | cooldown_ms 6000->5400; duration_ms 2000->0 |
 | ElementalShaman | 50 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→5400 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | cooldown_ms 6000->5400; duration_ms 2000->0 |
 | ElementalShaman | 50 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→5400 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | cooldown_ms 6000->5400; duration_ms 2000->0 |
@@ -290,15 +290,15 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ElementalShaman | 50 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 30→30 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | ElementalShaman | 50 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 40→40 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | ElementalShaman | 50 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 50→50 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
-| ElementalShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
-| ElementalShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  |
-| ElementalShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  |
-| ElementalShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→75.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cost 60.00->75.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→105.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 26→26 | n/a | mismatch | cost 85.00->105.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 50 | Lightning Bolt | 6 | 6041 | 110.00→135.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 32→32 | n/a | mismatch | cost 110.00->135.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 50 | Lightning Bolt | 7 | 10391 | 135.00→165.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 38→38 | n/a | mismatch | cost 135.00->165.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 50 | Lightning Bolt | 8 | 10392 | 160.00→195.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 44→44 | n/a | mismatch | cost 160.00->195.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 50 | Lightning Bolt | 9 | 15207 | 190.00→230.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 50→50 | n/a | mismatch | cost 190.00->230.00; cast_time_ms 2500->3000 |
+| ElementalShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1330 | 1500→1500 | 1→1 | n/a | mismatch | cast_time_ms 1500->1330 |
+| ElementalShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→1830 | 1500→1500 | 8→8 | n/a | mismatch | cast_time_ms 2000->1830 |
+| ElementalShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2330 | 1500→1500 | 14→14 | n/a | mismatch | cast_time_ms 2500->2330 |
+| ElementalShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→75.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 20→20 | n/a | mismatch | cost 60.00->75.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→105.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 26→26 | n/a | mismatch | cost 85.00->105.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 50 | Lightning Bolt | 6 | 6041 | 110.00→135.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 32→32 | n/a | mismatch | cost 110.00->135.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 50 | Lightning Bolt | 7 | 10391 | 135.00→165.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 38→38 | n/a | mismatch | cost 135.00->165.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 50 | Lightning Bolt | 8 | 10392 | 160.00→195.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 44→44 | n/a | mismatch | cost 160.00->195.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 50 | Lightning Bolt | 9 | 15207 | 190.00→230.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 50→50 | n/a | mismatch | cost 190.00->230.00; cast_time_ms 2500->2830 |
 | ElementalShaman | 50 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  |
 | ElementalShaman | 50 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  |
 | ElementalShaman | 50 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  |
@@ -339,10 +339,10 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ElementalShaman | 60 | Attack | 0 | 6352 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 40→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 40->0 |
 | ElementalShaman | 60 | Attack | 0 | 10435 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 50→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 50->0 |
 | ElementalShaman | 60 | Attack | 0 | 10436 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 60→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 60->0 |
-| ElementalShaman | 60 | Chain Lightning | 1 | 421 | 225.00→280.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 32→32 | n/a | mismatch | cost 225.00->280.00; cast_time_ms 2000->2500 |
-| ElementalShaman | 60 | Chain Lightning | 2 | 930 | 305.00→380.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 40→40 | n/a | mismatch | cost 305.00->380.00; cast_time_ms 2000->2500 |
-| ElementalShaman | 60 | Chain Lightning | 3 | 2860 | 390.00→490.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 48→48 | n/a | mismatch | cost 390.00->490.00; cast_time_ms 2000->2500 |
-| ElementalShaman | 60 | Chain Lightning | 4 | 10605 | 485.00→605.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 56→56 | n/a | mismatch | cost 485.00->605.00; cast_time_ms 2000->2500 |
+| ElementalShaman | 60 | Chain Lightning | 1 | 421 | 225.00→280.00 | mana→mana | 6000→6000 | 2000→2330 | 1500→1500 | 32→32 | n/a | mismatch | cost 225.00->280.00; cast_time_ms 2000->2330 |
+| ElementalShaman | 60 | Chain Lightning | 2 | 930 | 305.00→380.00 | mana→mana | 6000→6000 | 2000→2330 | 1500→1500 | 40→40 | n/a | mismatch | cost 305.00->380.00; cast_time_ms 2000->2330 |
+| ElementalShaman | 60 | Chain Lightning | 3 | 2860 | 390.00→490.00 | mana→mana | 6000→6000 | 2000→2330 | 1500→1500 | 48→48 | n/a | mismatch | cost 390.00->490.00; cast_time_ms 2000->2330 |
+| ElementalShaman | 60 | Chain Lightning | 4 | 10605 | 485.00→605.00 | mana→mana | 6000→6000 | 2000→2330 | 1500→1500 | 56→56 | n/a | mismatch | cost 485.00->605.00; cast_time_ms 2000->2330 |
 | ElementalShaman | 60 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→5400 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | cooldown_ms 6000->5400; duration_ms 2000->0 |
 | ElementalShaman | 60 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→5400 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | cooldown_ms 6000->5400; duration_ms 2000->0 |
 | ElementalShaman | 60 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→5400 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | cooldown_ms 6000->5400; duration_ms 2000->0 |
@@ -378,16 +378,16 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | ElementalShaman | 60 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 40→40 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | ElementalShaman | 60 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 50→50 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | ElementalShaman | 60 | Healing Stream Totem | 5 | 10463 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 60→60 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
-| ElementalShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  |
-| ElementalShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  |
-| ElementalShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  |
-| ElementalShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→75.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 20→20 | n/a | mismatch | cost 60.00->75.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→105.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 26→26 | n/a | mismatch | cost 85.00->105.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 60 | Lightning Bolt | 6 | 6041 | 110.00→135.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 32→32 | n/a | mismatch | cost 110.00->135.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 60 | Lightning Bolt | 7 | 10391 | 135.00→165.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 38→38 | n/a | mismatch | cost 135.00->165.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 60 | Lightning Bolt | 8 | 10392 | 160.00→195.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 44→44 | n/a | mismatch | cost 160.00->195.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 60 | Lightning Bolt | 9 | 15207 | 190.00→230.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 50→50 | n/a | mismatch | cost 190.00->230.00; cast_time_ms 2500->3000 |
-| ElementalShaman | 60 | Lightning Bolt | 10 | 15208 | 220.00→265.00 | mana→mana | 0→0 | 2500→3000 | 1500→1500 | 56→56 | n/a | mismatch | cost 220.00->265.00; cast_time_ms 2500->3000 |
+| ElementalShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1330 | 1500→1500 | 1→1 | n/a | mismatch | cast_time_ms 1500->1330 |
+| ElementalShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→1830 | 1500→1500 | 8→8 | n/a | mismatch | cast_time_ms 2000->1830 |
+| ElementalShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2330 | 1500→1500 | 14→14 | n/a | mismatch | cast_time_ms 2500->2330 |
+| ElementalShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→75.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 20→20 | n/a | mismatch | cost 60.00->75.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→105.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 26→26 | n/a | mismatch | cost 85.00->105.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 60 | Lightning Bolt | 6 | 6041 | 110.00→135.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 32→32 | n/a | mismatch | cost 110.00->135.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 60 | Lightning Bolt | 7 | 10391 | 135.00→165.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 38→38 | n/a | mismatch | cost 135.00->165.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 60 | Lightning Bolt | 8 | 10392 | 160.00→195.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 44→44 | n/a | mismatch | cost 160.00->195.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 60 | Lightning Bolt | 9 | 15207 | 190.00→230.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 50→50 | n/a | mismatch | cost 190.00->230.00; cast_time_ms 2500->2830 |
+| ElementalShaman | 60 | Lightning Bolt | 10 | 15208 | 220.00→265.00 | mana→mana | 0→0 | 2500→2830 | 1500→1500 | 56→56 | n/a | mismatch | cost 220.00->265.00; cast_time_ms 2500->2830 |
 | ElementalShaman | 60 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  |
 | ElementalShaman | 60 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  |
 | ElementalShaman | 60 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  |
@@ -437,14 +437,14 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 10 | Attack | 0 | 6352 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 40→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 40->0 |
 | EnhancementShaman | 10 | Attack | 0 | 10435 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 50→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 50->0 |
 | EnhancementShaman | 10 | Attack | 0 | 10436 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 60→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 60->0 |
-| EnhancementShaman | 10 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 10 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 |
+| EnhancementShaman | 10 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 10 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
 | EnhancementShaman | 10 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→0 | n/a | mismatch | required_level 12->0 |
 | EnhancementShaman | 10 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
 | EnhancementShaman | 10 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→0 | n/a | mismatch | required_level 32->0 |
 | EnhancementShaman | 10 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→0 | n/a | mismatch | required_level 42->0 |
 | EnhancementShaman | 10 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→0 | n/a | mismatch | required_level 52->0 |
-| EnhancementShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
+| EnhancementShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
 | EnhancementShaman | 10 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | required_level 20->0 |
 | EnhancementShaman | 10 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | EnhancementShaman | 10 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
@@ -457,8 +457,10 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→0 | n/a | mismatch | required_level 36->0 |
 | EnhancementShaman | 10 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→0 | n/a | mismatch | required_level 46->0 |
 | EnhancementShaman | 10 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→0 | n/a | mismatch | required_level 56->0 |
+| EnhancementShaman | 10 | Rage of the Farseer | 0 | 425336 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→1500 | 1→0 | 25000→25000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
 | EnhancementShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 30000→30000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 10 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 4→4 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
+| EnhancementShaman | 10 | Stormstrike | 0 | 17364 | 125.00→36.75 | mana→mana | 8000→20000 | 0→0 | 1500→1500 | 40→0 | 12000→0 | mismatch | cost 125.00->36.75; cooldown_ms 8000->20000; required_level 40->0; duration_ms 12000->0 |
 | EnhancementShaman | 10 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 10 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 18→18 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 20 | Attack | 0 | 3606 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 10→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 10->0 |
@@ -467,17 +469,17 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 20 | Attack | 0 | 6352 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 40→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 40->0 |
 | EnhancementShaman | 20 | Attack | 0 | 10435 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 50→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 50->0 |
 | EnhancementShaman | 20 | Attack | 0 | 10436 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 60→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 60->0 |
-| EnhancementShaman | 20 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 |
+| EnhancementShaman | 20 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
 | EnhancementShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→0 | n/a | mismatch | required_level 12->0 |
 | EnhancementShaman | 20 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
 | EnhancementShaman | 20 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→0 | n/a | mismatch | required_level 32->0 |
 | EnhancementShaman | 20 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→0 | n/a | mismatch | required_level 42->0 |
 | EnhancementShaman | 20 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→0 | n/a | mismatch | required_level 52->0 |
-| EnhancementShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
-| EnhancementShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  |
-| EnhancementShaman | 20 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
+| EnhancementShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 20 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
 | EnhancementShaman | 20 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | required_level 20->0 |
 | EnhancementShaman | 20 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | EnhancementShaman | 20 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
@@ -494,10 +496,12 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 20 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→0 | n/a | mismatch | required_level 36->0 |
 | EnhancementShaman | 20 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→0 | n/a | mismatch | required_level 46->0 |
 | EnhancementShaman | 20 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→0 | n/a | mismatch | required_level 56->0 |
+| EnhancementShaman | 20 | Rage of the Farseer | 0 | 425336 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→1500 | 1→0 | 25000→25000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
 | EnhancementShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 30000→30000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 20→20 | 35000→35000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 20 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 4→4 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 20 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 14→14 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
+| EnhancementShaman | 20 | Stormstrike | 0 | 17364 | 125.00→77.70 | mana→mana | 8000→20000 | 0→0 | 1500→1500 | 40→0 | 12000→0 | mismatch | cost 125.00->77.70; cooldown_ms 8000->20000; required_level 40->0; duration_ms 12000->0 |
 | EnhancementShaman | 20 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 20 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 18→18 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 30 | Attack | 0 | 3606 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 10→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 10->0 |
@@ -506,19 +510,19 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 30 | Attack | 0 | 6352 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 40→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 40->0 |
 | EnhancementShaman | 30 | Attack | 0 | 10435 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 50→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 50->0 |
 | EnhancementShaman | 30 | Attack | 0 | 10436 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 60→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 60->0 |
-| EnhancementShaman | 30 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 30 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 30 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 |
+| EnhancementShaman | 30 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 30 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 30 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
 | EnhancementShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→0 | n/a | mismatch | required_level 12->0 |
 | EnhancementShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
 | EnhancementShaman | 30 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→0 | n/a | mismatch | required_level 32->0 |
 | EnhancementShaman | 30 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→0 | n/a | mismatch | required_level 42->0 |
 | EnhancementShaman | 30 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→0 | n/a | mismatch | required_level 52->0 |
-| EnhancementShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
-| EnhancementShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  |
-| EnhancementShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
-| EnhancementShaman | 30 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
+| EnhancementShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 30 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
 | EnhancementShaman | 30 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | required_level 20->0 |
 | EnhancementShaman | 30 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | EnhancementShaman | 30 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
@@ -540,12 +544,14 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→0 | n/a | mismatch | required_level 56->0 |
 | EnhancementShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 26→26 | 20000→20000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 26→26 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
+| EnhancementShaman | 30 | Rage of the Farseer | 0 | 425336 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→1500 | 1→0 | 25000→25000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
 | EnhancementShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 30000→30000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 20→20 | 35000→35000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 30→30 | 40000→40000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 30 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 4→4 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 30 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 14→14 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 30 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 24→24 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
+| EnhancementShaman | 30 | Stormstrike | 0 | 17364 | 125.00→150.78 | mana→mana | 8000→20000 | 0→0 | 1500→1500 | 40→0 | 12000→0 | mismatch | cost 125.00->150.78; cooldown_ms 8000->20000; required_level 40->0; duration_ms 12000->0 |
 | EnhancementShaman | 30 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 30 | Strength of Earth Totem | 2 | 8160 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 24→24 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 30 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 18→18 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
@@ -556,21 +562,21 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 38 | Attack | 0 | 10435 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 50→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 50->0 |
 | EnhancementShaman | 38 | Attack | 0 | 10436 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 60→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 60->0 |
 | EnhancementShaman | 38 | Chain Lightning | 1 | 421 | 225.00→280.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 32→32 | n/a | mismatch | cost 225.00->280.00; cast_time_ms 2000->2500 |
-| EnhancementShaman | 38 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 38 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 38 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 38 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 |
+| EnhancementShaman | 38 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 38 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 38 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 38 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
 | EnhancementShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→0 | n/a | mismatch | required_level 12->0 |
 | EnhancementShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
 | EnhancementShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→0 | n/a | mismatch | required_level 32->0 |
 | EnhancementShaman | 38 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→0 | n/a | mismatch | required_level 42->0 |
 | EnhancementShaman | 38 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→0 | n/a | mismatch | required_level 52->0 |
-| EnhancementShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
-| EnhancementShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  |
-| EnhancementShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
-| EnhancementShaman | 38 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| EnhancementShaman | 38 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 |
+| EnhancementShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 38 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
+| EnhancementShaman | 38 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
 | EnhancementShaman | 38 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | required_level 20->0 |
 | EnhancementShaman | 38 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | EnhancementShaman | 38 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
@@ -597,6 +603,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 36→36 | 20000→20000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 26→26 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 36→36 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
+| EnhancementShaman | 38 | Rage of the Farseer | 0 | 425336 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→1500 | 1→0 | 25000→25000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
 | EnhancementShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 30000→30000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 20→20 | 35000→35000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 30→30 | 40000→40000 | mismatch | gcd_ms 1000->1500 |
@@ -604,6 +611,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 38 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 14→14 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 38 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 24→24 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 38 | Stoneskin Totem | 4 | 10406 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 34→34 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
+| EnhancementShaman | 38 | Stormstrike | 0 | 17364 | 125.00→193.62 | mana→mana | 8000→20000 | 0→0 | 1500→1500 | 40→0 | 12000→0 | mismatch | cost 125.00->193.62; cooldown_ms 8000->20000; required_level 40->0; duration_ms 12000->0 |
 | EnhancementShaman | 38 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 38 | Strength of Earth Totem | 2 | 8160 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 24→24 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 38 | Strength of Earth Totem | 3 | 8161 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 38→38 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
@@ -618,22 +626,22 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 40 | Attack | 0 | 10436 | 0.00→0.00 | mana→none | 0→0 | 2200→0 | 0→0 | 60→0 | n/a | mismatch | cast_time_ms 2200->0; required_level 60->0 |
 | EnhancementShaman | 40 | Chain Lightning | 1 | 421 | 225.00→280.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 32→32 | n/a | mismatch | cost 225.00->280.00; cast_time_ms 2000->2500 |
 | EnhancementShaman | 40 | Chain Lightning | 2 | 930 | 305.00→380.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 40→40 | n/a | mismatch | cost 305.00->380.00; cast_time_ms 2000->2500 |
-| EnhancementShaman | 40 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 40 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 40 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 40 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 |
+| EnhancementShaman | 40 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 40 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 40 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 40 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
 | EnhancementShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→0 | n/a | mismatch | required_level 12->0 |
 | EnhancementShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
 | EnhancementShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→0 | n/a | mismatch | required_level 32->0 |
 | EnhancementShaman | 40 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→0 | n/a | mismatch | required_level 42->0 |
 | EnhancementShaman | 40 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→0 | n/a | mismatch | required_level 52->0 |
-| EnhancementShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
-| EnhancementShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  |
-| EnhancementShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
-| EnhancementShaman | 40 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  |
-| EnhancementShaman | 40 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| EnhancementShaman | 40 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 |
+| EnhancementShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 40 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 40 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
+| EnhancementShaman | 40 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
 | EnhancementShaman | 40 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | required_level 20->0 |
 | EnhancementShaman | 40 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
 | EnhancementShaman | 40 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
@@ -662,6 +670,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 36→36 | 20000→20000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 26→26 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 36→36 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
+| EnhancementShaman | 40 | Rage of the Farseer | 0 | 425336 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→1500 | 1→0 | 25000→25000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
 | EnhancementShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 30000→30000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 20→20 | 35000→35000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 30→30 | 40000→40000 | mismatch | gcd_ms 1000->1500 |
@@ -670,6 +679,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 40 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 14→14 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 40 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 24→24 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 40 | Stoneskin Totem | 4 | 10406 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 34→34 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
+| EnhancementShaman | 40 | Stormstrike | 0 | 17364 | 125.00→204.75 | mana→mana | 8000→20000 | 0→0 | 1500→1500 | 40→0 | 12000→0 | mismatch | cost 125.00->204.75; cooldown_ms 8000->20000; required_level 40->0; duration_ms 12000->0 |
 | EnhancementShaman | 40 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 40 | Strength of Earth Totem | 2 | 8160 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 24→24 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 40 | Strength of Earth Totem | 3 | 8161 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 38→38 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
@@ -685,24 +695,24 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 50 | Chain Lightning | 1 | 421 | 225.00→280.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 32→32 | n/a | mismatch | cost 225.00->280.00; cast_time_ms 2000->2500 |
 | EnhancementShaman | 50 | Chain Lightning | 2 | 930 | 305.00→380.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 40→40 | n/a | mismatch | cost 305.00->380.00; cast_time_ms 2000->2500 |
 | EnhancementShaman | 50 | Chain Lightning | 3 | 2860 | 390.00→490.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 48→48 | n/a | mismatch | cost 390.00->490.00; cast_time_ms 2000->2500 |
-| EnhancementShaman | 50 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 50 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 50 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 50 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 50 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 50 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 |
+| EnhancementShaman | 50 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 50 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 50 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 50 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 50 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 50 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
 | EnhancementShaman | 50 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→0 | n/a | mismatch | required_level 12->0 |
 | EnhancementShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
 | EnhancementShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→0 | n/a | mismatch | required_level 32->0 |
 | EnhancementShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→0 | n/a | mismatch | required_level 42->0 |
 | EnhancementShaman | 50 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→0 | n/a | mismatch | required_level 52->0 |
-| EnhancementShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
-| EnhancementShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  |
-| EnhancementShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
-| EnhancementShaman | 50 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  |
-| EnhancementShaman | 50 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| EnhancementShaman | 50 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 |
-| EnhancementShaman | 50 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 |
+| EnhancementShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 50 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 50 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
+| EnhancementShaman | 50 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
+| EnhancementShaman | 50 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
 | EnhancementShaman | 50 | Grace of Air Totem | 1 | 8835 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 42→42 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 50 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→0 | n/a | mismatch | required_level 20->0 |
 | EnhancementShaman | 50 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→0 | n/a | mismatch | required_level 30->0 |
@@ -738,6 +748,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 26→26 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 36→36 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 46→46 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
+| EnhancementShaman | 50 | Rage of the Farseer | 0 | 425336 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→1500 | 1→0 | 25000→25000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
 | EnhancementShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 30000→30000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 20→20 | 35000→35000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 30→30 | 40000→40000 | mismatch | gcd_ms 1000->1500 |
@@ -748,6 +759,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 50 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 24→24 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 50 | Stoneskin Totem | 4 | 10406 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 34→34 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 50 | Stoneskin Totem | 5 | 10407 | 160.00→160.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 44→44 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
+| EnhancementShaman | 50 | Stormstrike | 0 | 17364 | 125.00→263.55 | mana→mana | 8000→20000 | 0→0 | 1500→1500 | 40→0 | 12000→0 | mismatch | cost 125.00->263.55; cooldown_ms 8000->20000; required_level 40->0; duration_ms 12000->0 |
 | EnhancementShaman | 50 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 50 | Strength of Earth Totem | 2 | 8160 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 24→24 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 50 | Strength of Earth Totem | 3 | 8161 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 38→38 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
@@ -766,28 +778,28 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 60 | Chain Lightning | 2 | 930 | 305.00→380.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 40→40 | n/a | mismatch | cost 305.00->380.00; cast_time_ms 2000->2500 |
 | EnhancementShaman | 60 | Chain Lightning | 3 | 2860 | 390.00→490.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 48→48 | n/a | mismatch | cost 390.00->490.00; cast_time_ms 2000->2500 |
 | EnhancementShaman | 60 | Chain Lightning | 4 | 10605 | 485.00→605.00 | mana→mana | 6000→6000 | 2000→2500 | 1500→1500 | 56→56 | n/a | mismatch | cost 485.00->605.00; cast_time_ms 2000->2500 |
-| EnhancementShaman | 60 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 60 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 60 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 60 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 60 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 60 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 |
-| EnhancementShaman | 60 | Earth Shock | 7 | 10414 | 450.00→450.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 2000→0 | mismatch | duration_ms 2000->0 |
+| EnhancementShaman | 60 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 60 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 60 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 60 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 60 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 60 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
+| EnhancementShaman | 60 | Earth Shock | 7 | 10414 | 450.00→450.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 60→60 | 2000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 2000->0 |
 | EnhancementShaman | 60 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→0 | n/a | mismatch | required_level 12->0 |
 | EnhancementShaman | 60 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→0 | n/a | mismatch | required_level 22->0 |
 | EnhancementShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→0 | n/a | mismatch | required_level 32->0 |
 | EnhancementShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→0 | n/a | mismatch | required_level 42->0 |
 | EnhancementShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→0 | n/a | mismatch | required_level 52->0 |
-| EnhancementShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  |
-| EnhancementShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  |
-| EnhancementShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  |
-| EnhancementShaman | 60 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  |
-| EnhancementShaman | 60 | Flame Shock | 5 | 10448 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 52→52 | 12000→12000 | match |  |
-| EnhancementShaman | 60 | Flame Shock | 6 | 29228 | 410.00→410.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 12000→12000 | match |  |
-| EnhancementShaman | 60 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| EnhancementShaman | 60 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 |
-| EnhancementShaman | 60 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 |
-| EnhancementShaman | 60 | Frost Shock | 4 | 10473 | 430.00→430.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 58→58 | 8000→0 | mismatch | duration_ms 8000->0 |
+| EnhancementShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 60 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 60 | Flame Shock | 5 | 10448 | 345.00→345.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 52→52 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 60 | Flame Shock | 6 | 29228 | 410.00→410.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 60→60 | 12000→12000 | mismatch | cooldown_ms 6000->5200 |
+| EnhancementShaman | 60 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
+| EnhancementShaman | 60 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
+| EnhancementShaman | 60 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
+| EnhancementShaman | 60 | Frost Shock | 4 | 10473 | 430.00→430.00 | mana→mana | 6000→5200 | 0→0 | 1500→1500 | 58→58 | 8000→0 | mismatch | cooldown_ms 6000->5200; duration_ms 8000->0 |
 | EnhancementShaman | 60 | Grace of Air Totem | 1 | 8835 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 42→42 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 60 | Grace of Air Totem | 2 | 10627 | 250.00→250.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 56→56 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 60 | Grace of Air Totem | 3 | 25359 | 310.00→310.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 60→60 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
@@ -830,6 +842,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 36→36 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 46→46 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 56→56 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
+| EnhancementShaman | 60 | Rage of the Farseer | 0 | 425336 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→1500 | 1→0 | 25000→25000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
 | EnhancementShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 30000→30000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 20→20 | 35000→35000 | mismatch | gcd_ms 1000->1500 |
 | EnhancementShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 30→30 | 40000→40000 | mismatch | gcd_ms 1000->1500 |
@@ -842,6 +855,7 @@ Comparison rules: cost (amount and type: client's cost_type 0/1/2/3 = mana/rage/
 | EnhancementShaman | 60 | Stoneskin Totem | 4 | 10406 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 34→34 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 60 | Stoneskin Totem | 5 | 10407 | 160.00→160.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 44→44 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 60 | Stoneskin Totem | 6 | 10408 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 54→54 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
+| EnhancementShaman | 60 | Stormstrike | 0 | 17364 | 125.00→319.20 | mana→mana | 8000→20000 | 0→0 | 1500→1500 | 40→0 | 12000→0 | mismatch | cost 125.00->319.20; cooldown_ms 8000->20000; required_level 40->0; duration_ms 12000->0 |
 | EnhancementShaman | 60 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 10→10 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 60 | Strength of Earth Totem | 2 | 8160 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 24→24 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
 | EnhancementShaman | 60 | Strength of Earth Totem | 3 | 8161 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1000→1500 | 38→38 | 300000→0 | mismatch | gcd_ms 1000->1500; duration_ms 300000->0 |
