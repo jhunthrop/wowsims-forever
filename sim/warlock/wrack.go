@@ -97,6 +97,13 @@ func (warlock *Warlock) registerWrackSpell() {
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, WrackTickBaseDamage, isRollover)
+				if !isRollover {
+					// Soul Siphon (talents.go): see drain_life.go's
+					// identical hook for the talent's wording. Wrack is
+					// itself an Affliction effect, so soulSiphonMultiplier
+					// excludes it from its own count of "other" effects.
+					dot.SnapshotAttackerMultiplier *= warlock.soulSiphonMultiplier(target, dot.Spell)
+				}
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)

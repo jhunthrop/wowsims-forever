@@ -52,7 +52,18 @@ func (warlock *Warlock) registerShadowBurnBaseConfig(rank int) core.SpellConfig 
 		BonusCoefficient: spellCoeff,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+
+			if result.Landed() {
+				// Shadow and Flame (talents.go): hitting with
+				// Shadowburn buffs the warlock's own Fire damage. The
+				// talent's other half - a chance to instantly refund a
+				// Soul Shard - is not modelled: this fork's Shadowburn
+				// costs mana, not Soul Shards (see soul_fire.go's own
+				// comment on the same point), and no Soul Shard
+				// resource exists anywhere in this package.
+				warlock.triggerShadowAndFlame(sim, SpellCode_WarlockShadowburn)
+			}
 		},
 	}
 }

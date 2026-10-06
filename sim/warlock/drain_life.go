@@ -77,6 +77,13 @@ func (warlock *Warlock) getDrainLifeBaseConfig(rank int) core.SpellConfig {
 				// Drain Life heals so it snapshots target modifiers
 				// Update 2024-06-29: It no longer snapshots on PTR
 				// dot.SnapshotAttackerMultiplier *= dot.Spell.TargetDamageMultiplier(dot.Spell.Unit.AttackTables[target.UnitIndex][dot.Spell.CastType], true)
+				if !isRollover {
+					// Soul Siphon (talents.go): "+4/8/12% per each of
+					// your other Affliction effects active on the
+					// target". Evaluated once per cast, same as every
+					// other snapshot field here, rather than per tick.
+					dot.SnapshotAttackerMultiplier *= warlock.soulSiphonMultiplier(target, dot.Spell)
+				}
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				result := dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)

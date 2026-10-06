@@ -79,7 +79,12 @@ func (warlock *Warlock) getImmolateConfig(rank int) core.SpellConfig {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			oldMultiplier := spell.DamageMultiplier
-			spell.DamageMultiplier *= 1 + warlock.improvedImmolateBonus()
+			// Aftermath (talents.go): "Increases the initial damage of
+			// your Immolate spell by 10/20/30/40/50%." Immolate's own
+			// initial hit, not its periodic tick - the same multiplier
+			// slot improvedImmolateBonus (a talent the client's trees
+			// don't have) already uses for the same reason.
+			spell.DamageMultiplier *= 1 + warlock.improvedImmolateBonus() + warlock.aftermathInitialDamageBonus()
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 			spell.DamageMultiplier = oldMultiplier
 

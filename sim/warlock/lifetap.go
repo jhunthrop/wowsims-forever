@@ -60,6 +60,7 @@ func (warlock *Warlock) getLifeTapBaseConfig(rank int) core.SpellConfig {
 			}
 
 			warlock.AddMana(sim, restore, manaMetrics)
+			warlock.shareDemonicEnergiesMana(sim, restore)
 		},
 	}
 }
