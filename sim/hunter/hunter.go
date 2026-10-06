@@ -28,6 +28,8 @@ const (
 	SpellCode_HunterAimedShot
 	SpellCode_HunterArcaneShot
 	SpellCode_HunterMultiShot
+	SpellCode_HunterSniperShot
+	SpellCode_HunterSummonHawk
 
 	// Strikes
 	SpellCode_HunterRaptorStrike
@@ -106,6 +108,8 @@ type Hunter struct {
 	ScorpidSting    *core.Spell
 	SerpentSting    *core.Spell
 	SilencingShot   *core.Spell
+	SniperShot      *core.Spell
+	SummonHawk      *core.Spell
 	Volley          *core.Spell
 	WingClip        *core.Spell
 
@@ -133,6 +137,18 @@ func (hunter *Hunter) GetHunter() *Hunter {
 }
 
 func (hunter *Hunter) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
+	// Trueshot Aura (talents/hunter.json node 105004, Marksmanship,
+	// bool, spell 1299346): "Increases the Ranged Attack Power of party
+	// members within 45 yards by 30." proto.RaidBuffs.TrueshotAura and
+	// core.TrueshotAura (buffs.go) already carry the aura itself - this
+	// is already a raid buff flag, just not one this talent set
+	// before now. raid.go's GetRaidBuffs calls every player's
+	// AddRaidBuffs with the shared struct before applying it, exactly
+	// so a talented hunter's aura reaches the raid without a manual
+	// checkbox.
+	if hunter.Talents.TrueshotAura {
+		raidBuffs.TrueshotAura = true
+	}
 }
 
 func (hunter *Hunter) AddPartyBuffs(_ *proto.PartyBuffs) {
@@ -180,6 +196,16 @@ func (hunter *Hunter) Initialize() {
 	hunter.registerArcaneShotSpell(arcaneShotTimer)
 	hunter.registerAimedShotSpell(aimedShotTimer)
 	hunter.registerMultiShotSpell(multiShotTimer)
+
+	// Summon Hawk (talent) genuinely shares Arcane Shot's own category
+	// cooldown per the client's tooltip ("Summon Hawk shares its
+	// cooldown with Arcane Shot") and spellconst/hunter.json agrees
+	// (both carry category_cooldown_ms 6000) - unlike the Aimed
+	// Shot/Multi-Shot timer-sharing bug documented above, where two
+	// unrelated shots coincidentally carried the same category and
+	// sharing broke Arcane Shot's own readiness check.
+	hunter.registerSummonHawkSpell(arcaneShotTimer)
+	hunter.registerSniperShotSpell()
 
 	hunter.registerRaptorStrikeSpell()
 	hunter.registerMongooseBiteSpell()
