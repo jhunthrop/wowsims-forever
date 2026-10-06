@@ -13,7 +13,6 @@ func init() {
 }
 
 func TestElemental(t *testing.T) {
-	core.SkipAwaitingForeverTalentRewrite(t, "sim/shaman/elemental")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassShaman,

@@ -64,18 +64,32 @@ func (shaman *Shaman) newChainLightningSpellConfig(rank int, cdTimer *core.Timer
 	spell.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 		origMult := spell.DamageMultiplier
 		numHits := min(len(results), len(sim.Encounter.TargetUnits))
-		for hitIndex := 0; hitIndex < numHits; hitIndex++ {
-			baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
-			results[hitIndex] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
-			target = sim.Environment.NextTargetUnit(target)
-			spell.DamageMultiplier *= shaman.ChainLightningBounceCoefficient
+
+		// Shared by the primary bounce and Lightning Overload's second,
+		// half-damage one (talents.go's rollLightningOverload) - a local
+		// bounce-target cursor so the second pass restarts from the same
+		// primary target instead of the first pass's final one.
+		dealBounces := func(startTarget *core.Unit, damageScale float64) {
+			bounceTarget := startTarget
+			for hitIndex := 0; hitIndex < numHits; hitIndex++ {
+				baseDamage := sim.Roll(baseDamageLow, baseDamageHigh) * damageScale
+				results[hitIndex] = spell.CalcDamage(sim, bounceTarget, baseDamage, spell.OutcomeMagicHitAndCrit)
+				bounceTarget = sim.Environment.NextTargetUnit(bounceTarget)
+				spell.DamageMultiplier *= shaman.ChainLightningBounceCoefficient
+			}
+
+			for _, result := range results[:numHits] {
+				spell.DealDamage(sim, result)
+			}
+
+			spell.DamageMultiplier = origMult
 		}
 
-		for _, result := range results[:numHits] {
-			spell.DealDamage(sim, result)
-		}
+		dealBounces(target, 1.0)
 
-		spell.DamageMultiplier = origMult
+		if shaman.rollLightningOverload(sim) {
+			dealBounces(target, 0.5)
+		}
 	}
 
 	return spell
