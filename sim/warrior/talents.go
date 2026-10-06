@@ -53,11 +53,12 @@ import (
 const ForeverFuryTalents = "33305013002000000-150531000051310051-000000000000000000"
 
 // ForeverProtectionTalents is the same fixed input for the tank spec.
-// The spec's own talent behaviour is still vanilla's - Improved Revenge,
-// Defiance, Bastion, Focused Rage, Master of Defense, Improved
-// Bloodrage, Improved Shield Wall, Improved Thunder Clap and
+// The spec's own talent behaviour is still mostly vanilla's - Defiance,
+// Master of Defense, Improved Bloodrage, Improved Shield Wall and
 // Anticipation all changed meaning in the client's tree and only
-// Anticipation and Improved Thunder Clap are rewritten here - so
+// Anticipation and Improved Thunder Clap are rewritten here, though
+// Improved Revenge, Bastion and Focused Rage are now live declarative
+// mods (talents.go's applyDeclarativeTalents) rather than stale - so
 // sim/warrior/tank_warrior stays skipped until the warrior-protection
 // spec is brought up. The string is declared now, and checked by
 // TestTheReferenceBuildsRespectTheTiersAndPrerequisites, because the
@@ -117,9 +118,54 @@ func (warrior *Warrior) ApplyTalents() {
 	warrior.applyEnrage()
 	warrior.applyFlurry()
 	warrior.applyShieldSpecialization()
+	warrior.applyImprovedCharge()
+	warrior.applyBloodthrill()
+	warrior.applyBloodCraze()
 	warrior.registerDeathWishCD()
 	warrior.registerSweepingStrikesCD()
 	warrior.registerLastStandCD()
+}
+
+// applyImprovedCharge is Improved Charge: "Increases the Rage generated
+// by your Charge ability by 3/6" at ranks 1-2 (Arms node 105955).
+//
+// This package registers no Charge spell at all - neither this fork nor
+// upstream models the gap-closer, which would need a movement primitive
+// core does not have (PORTING.md's Encounter.movement is the target
+// moving, not the player) - so the rage is granted once per sim, at
+// Reset, standing in for the opening Charge every melee profile uses to
+// start the pull. It is granted unconditionally rather than gated on the
+// fight's starting stance: the charge-in happens before combat and
+// before Reset's stance switch runs, so by the time a stance check could
+// read Vanguard or the input stance, the rage would already be in the
+// bar. Improved Intercept, the Fury-side sibling, grants no rage at all
+// (just a cooldown reduction) and is in the not-modelled list below.
+var improvedChargeRagePerRank = [3]float64{0, 3, 6}
+
+func (warrior *Warrior) applyImprovedCharge() {
+	if warrior.Talents.ImprovedCharge == 0 {
+		return
+	}
+
+	rage := improvedChargeRagePerRank[rankIndex(warrior.Talents.ImprovedCharge, improvedChargeRagePerRank[:])]
+	rageMetrics := warrior.NewRageMetrics(core.ActionID{SpellID: TalentSpellIDs["improved_charge"][0]})
+
+	warrior.RegisterResetEffect(func(sim *core.Simulation) {
+		// Deferred one event past Reset itself: Unit.reset runs the
+		// registered reset effects before unit.rageBar.reset (sim/core/
+		// unit.go), so an AddRage called directly here would be
+		// overwritten the moment the rage bar resets to its own
+		// starting value a few lines later in the same Reset pass.
+		// DoAt at the current (reset) time queues this for the start of
+		// the event loop instead, strictly after every Reset call has
+		// run.
+		core.StartDelayedAction(sim, core.DelayedActionOptions{
+			DoAt: sim.CurrentTime,
+			OnAction: func(sim *core.Simulation) {
+				warrior.AddRage(sim, rage, rageMetrics)
+			},
+		})
+	})
 }
 
 // Talents whose ranks do not scale linearly, or whose values are the
@@ -252,11 +298,124 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 		warrior.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + 0.01*float64(t.TwoHandedWeaponSpecialization)
 	}
 
+	// Raging Blows: "...reduces the Rage cost of your Cleave ability by
+	// 2." The off-hand strike half of the talent is Whirlwind's own
+	// ApplyEffects (whirlwind.go), because a rage-cost discount is a
+	// tooltip-line SpellMod and an extra weapon swing is not.
+	if t.RagingBlows {
+		warrior.AddStaticMod(core.SpellModConfig{
+			Kind:      core.SpellMod_PowerCost_Flat,
+			ClassMask: WarriorSpellMaskCleave,
+			IntValue:  -2,
+		})
+	}
+
+	// Improved Revenge: "Increases damage dealt by your Revenge ability
+	// by 20%/40%/60%" at ranks 1-3 (Protection node 105969, tank-only,
+	// sim/warrior/tank_warrior is skipped). It is kept rather than
+	// named-with-reason because, unlike the other Protection talents in
+	// the not-modelled list, it is nothing but a flat percentage on one
+	// named spell - the same shape as every other declarative mod here.
+	if t.ImprovedRevenge > 0 {
+		warrior.AddStaticMod(core.SpellModConfig{
+			Kind:      core.SpellMod_DamageDone_Flat,
+			ClassMask: WarriorSpellMaskRevenge,
+			IntValue:  20 * int64(t.ImprovedRevenge),
+		})
+	}
+
+	// Bastion: "Increases all damage you deal by 2%/4%/6%/8%/10% while a
+	// shield is equipped" at ranks 1-5 (Protection node 105962,
+	// tank-only). Like Two-Handed Weapon Specialization above, "all
+	// damage" is wider than any ClassMask or ClassSpellsOnly reaches -
+	// neither covers the auto-attack that is most of a shield warrior's
+	// damage - and the shield check is gear state a SpellModConfig
+	// cannot express, so this goes directly on PseudoStats instead of
+	// becoming a SpellMod. warrior.PseudoStats.CanBlock is already
+	// exactly this condition (character.go sets it from
+	// OffHand().WeaponType == WeaponTypeShield), reused rather than
+	// re-read.
+	if t.Bastion > 0 && warrior.PseudoStats.CanBlock {
+		warrior.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + 0.02*float64(t.Bastion)
+	}
+
+	// Focused Rage: "Reduces the Rage cost of your offensive abilities
+	// by 1/2/3" at ranks 1-3 (Protection node 105961, tank-only).
+	// SpellFlagOffensive (warrior.go) is carried by every rage-costing
+	// special in this package - exactly "your offensive abilities" - so
+	// the SpellFlags filter reaches the whole set in one mod instead of
+	// a ClassMask union of every offensive spell's own mask.
+	if t.FocusedRage > 0 {
+		warrior.AddStaticMod(core.SpellModConfig{
+			Kind:       core.SpellMod_PowerCost_Flat,
+			SpellFlags: SpellFlagOffensive,
+			IntValue:   -int64(t.FocusedRage),
+		})
+	}
+
 	// Improved Overpower is applied in overpower.go, where the crit
 	// bonus is a field of the one spell it names, and Impale in each
 	// ability's CritDamageBonus: the client's Impale reads "your
 	// abilities", which is every warrior spell rather than a mask group,
 	// and a mask group would silently be the narrower of the two.
+
+	// Improved Intercept: "Reduces the cooldown of your Intercept
+	// ability by 5/10 sec." This package registers no Intercept spell -
+	// see applyImprovedCharge's comment on why Charge and Intercept are
+	// both unregistered - and even with one, a stationary Patchwerk
+	// target gives no reason to re-engage from range a second time, so a
+	// cooldown on an ability the rotation never recasts changes nothing.
+	_ = t.ImprovedIntercept
+
+	// Iron Will: "Reduces the duration of Stun and Fear effects
+	// inflicted on you by 3%/6%/9%/12%/15%." No encounter in this
+	// package stuns or fears the player.
+	_ = t.IronWill
+
+	// Improved Hamstring: "Gives your Hamstring ability a 5/10/15%
+	// chance to immobilize the target for 5 sec." A root changes nothing
+	// on this package's stationary-target encounters; nothing here
+	// simulates the movement a root would prevent.
+	_ = t.ImprovedHamstring
+
+	// Boundless Rage: "Increases your maximum Rage by 10/20/30."
+	// core.MaxRage (sim/core/rage.go) is a package-level constant every
+	// RageBar clamps AddRage against, not a per-unit field, so raising it
+	// for one warrior needs a sim/core change (a per-unit max-rage field
+	// RageBar reads instead of the constant) that is out of this lane's
+	// reach. Reported rather than patched around.
+	_ = t.BoundlessRage
+
+	// Master of Defense: "a 50%/100% chance to generate 5 Rage when you
+	// Dodge or Parry while a shield is equipped" (Protection node 105971,
+	// tank-only). A conditional rage proc is not a SpellMod, so it stays
+	// unmodeled with sim/warrior/tank_warrior.
+	_ = t.MasterOfDefense
+
+	// Improved Disarm: "Reduces the cooldown of your Disarm ability by
+	// 7/13/20 secs." Tank-only, and this package registers no Disarm
+	// spell for a cooldown to shorten.
+	_ = t.ImprovedDisarm
+
+	// Vanguard: "Your Charge ability is now usable while in Defensive
+	// Stance" (Protection node 105966, tank-only). Moot here either way:
+	// applyImprovedCharge's rage grant is unconditional on stance, so
+	// there is no stance gate left for Vanguard to lift.
+	_ = t.Vanguard
+
+	// Concussion Blow: "Stuns the target for 5 sec." Tank-only, and a
+	// whole attack of its own rather than a modifier - the pre-existing
+	// Warrior.ConcussionBlow field (warrior.go) has never been
+	// registered - so there is no SpellMod shape for it, and a stun is
+	// threat/survival utility this package's DPS goldens have no use
+	// for.
+	_ = t.ConcussionBlow
+
+	// Improved Shield Bash: "Gives your Shield Bash ability a 50%/100%
+	// chance to Silence the target for 3 sec." Tank-only, and this
+	// package registers no Shield Bash spell for the silence to attach
+	// to.
+	_ = t.ImprovedShieldBash
 }
 
 // impale is Impale: "Increases the critical strike damage bonus of your
@@ -718,42 +877,26 @@ func (warrior *Warrior) registerLastStandCD() {
 
 // Not modelled, and deliberately so rather than by omission. Each is in
 // the client's tree and each would need machinery this spec does not
-// have.
+// have. Every other talent this task was asked to account for - Improved
+// Intercept, Iron Will, Improved Hamstring, Boundless Rage, Master of
+// Defense, Improved Disarm, Vanguard, Concussion Blow and Improved Shield
+// Bash - is named at the `_ = t.X` lines at the end of
+// applyDeclarativeTalents instead, with its reason beside it, which is
+// where a reader already is when a mask or a mod is missing for one of
+// them.
 //
-// Three of them ARE in a reference build, so the cost is stated rather
-// than denied. ForeverFuryTalents spends 1 point on Booming Voice - the
-// cheapest legal filler on the Fury tier-0 row - and that is the one
-// point of the Fury build's 51 that buys nothing at all.
-// ForeverProtectionTalents spends 1 on Concussion Blow and 2 on
-// Bastion, which cost nothing today only because sim/warrior/tank_warrior
-// is skipped; the warrior-protection spec's task inherits them.
+// ForeverFuryTalents spends 1 point on Booming Voice - the cheapest
+// legal filler on the Fury tier-0 row - and that is the one point of the
+// Fury build's 51 that buys nothing at all.
 //
 // Improved Tactical Mastery used to belong on this list and no longer
 // does: its rank text is a plain retained-rage number and stances.go
 // models it.
 //
-//	Booming Voice        - "+50% Battle Shout and Demoralizing Shout
-//	                       radius" at rank 5. Vanilla's raised their
-//	                       duration, which core.BattleShoutAura still
-//	                       takes a points argument for; radius has no
-//	                       meaning in a raid sim, so shouts.go passes 0.
-//	Iron Will            - stun and fear duration; no encounter models one.
-//	Blood Craze          - a self heal-over-time.
-//	Boundless Rage       - "+30 maximum Rage" at rank 3. core.MaxRage is
-//	                       a package constant, so this needs a core
-//	                       change, which is another task's file.
-//	Raging Blows         - Whirlwind also strikes off-hand.
-//	Bloodthrill          - an Overpower activation proc off Rend.
-//	Improved Intercept,
-//	Improved Charge,
-//	Improved Hamstring,
-//	Improved Disarm,
-//	Vanguard,
-//	Improved Shield Bash - abilities or situations no Patchwerk profile uses.
-//	Spearing Strike,
-//	Concussion Blow,
-//	Master of Defense,
-//	Focused Rage,
-//	Bastion,
+//	Booming Voice     - "+50% Battle Shout and Demoralizing Shout
+//	                    radius" at rank 5. Vanilla's raised their
+//	                    duration, which core.BattleShoutAura still takes
+//	                    a points argument for; radius has no meaning in
+//	                    a raid sim, so shouts.go passes 0.
 //	Weaponmaster's
-//	 dismount clause      - Protection and utility, for the warrior-protection spec.
+//	 dismount clause - Protection and utility, for the warrior-protection spec.

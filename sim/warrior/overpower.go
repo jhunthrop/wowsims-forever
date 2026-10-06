@@ -63,7 +63,10 @@ func (warrior *Warrior) registerOverpowerSpell(cdTimer *core.Timer) {
 		},
 		Cast: castConfig,
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return warrior.OverpowerAura.IsActive()
+			// Bloodthrill opens the same window off a separate 6s aura
+			// (bloodthrill.go), since it is not the vanilla 5s dodge
+			// proc; nil when Bloodthrill is not talented.
+			return warrior.OverpowerAura.IsActive() || (warrior.BloodthrillAura != nil && warrior.BloodthrillAura.IsActive())
 		},
 
 		BonusCritRating: 25 * core.CritRatingPerCritChance * float64(warrior.Talents.ImprovedOverpower),
@@ -79,6 +82,9 @@ func (warrior *Warrior) registerOverpowerSpell(cdTimer *core.Timer) {
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
 
 			warrior.OverpowerAura.Deactivate(sim)
+			if warrior.BloodthrillAura != nil {
+				warrior.BloodthrillAura.Deactivate(sim)
+			}
 			if !result.Landed() {
 				spell.IssueRefund(sim)
 			}
