@@ -632,6 +632,14 @@ func (sim *Simulation) nextExecutePhase() {
 	sim.nextExecuteDuration = NeverExpires
 	sim.nextExecuteDamage = math.MaxFloat64
 
+	// A target dummy has no execute window. Its proportions are all zero,
+	// and (1 - 0) * Duration would still open every phase on the fight's
+	// last tick, so a dummy stays at 100 for the whole fight instead.
+	if sim.Encounter.Dummy {
+		sim.executePhase = 100
+		return
+	}
+
 	switch sim.executePhase {
 	case 0: // reset, waiting for 35%
 		setup(100, 0.35, sim.Encounter.ExecuteProportion_35)
