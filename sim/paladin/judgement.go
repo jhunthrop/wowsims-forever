@@ -48,6 +48,7 @@ func (paladin *Paladin) registerJudgement() {
 		},
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, _ *core.Spell) {
 			paladin.castSpecificJudgement(sim, target, paladin.currentJudgement, paladin.currentSeal)
+			paladin.trySanctifiedJudgementManaReturn(sim)
 		},
 	})
 }

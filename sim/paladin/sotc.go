@@ -85,9 +85,10 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 		paladin.aurasSotC = append(paladin.aurasSotC, aura)
 
 		paladin.RegisterSpell(core.SpellConfig{
-			ActionID:    aura.ActionID,
-			SpellSchool: core.SpellSchoolHoly,
-			Flags:       core.SpellFlagAPL,
+			ClassSpellMask: PaladinSpellMaskSealOfTheCrusaderCast,
+			ActionID:       aura.ActionID,
+			SpellSchool:    core.SpellSchoolHoly,
+			Flags:          core.SpellFlagAPL,
 
 			RequiredLevel: int(rank.level),
 			Rank:          i + 1,
@@ -102,8 +103,8 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 				},
 			},
 
-			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-				paladin.applySeal(aura, judgeSpell, sim)
+			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
+				paladin.applySeal(aura, judgeSpell, spell, sim)
 			},
 		})
 

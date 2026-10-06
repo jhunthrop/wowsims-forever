@@ -71,12 +71,13 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 		maxDamage := rank.judge.maxDamage + rank.judge.scale*float64(min(paladin.Level, rank.scaleLevel)-rank.level)
 
 		judgeSpell := paladin.RegisterSpell(core.SpellConfig{
-			SpellCode:   SpellCode_PaladinJudgementOfRighteousness,
-			ActionID:    core.ActionID{SpellID: rank.judge.spellID},
-			SpellSchool: core.SpellSchoolHoly,
-			DefenseType: core.DefenseTypeMagic,
-			ProcMask:    core.ProcMaskSpellDamage,
-			Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagSuppressWeaponProcs | core.SpellFlagSuppressEquipProcs | core.SpellFlagBinary,
+			SpellCode:      SpellCode_PaladinJudgementOfRighteousness,
+			ClassSpellMask: PaladinSpellMaskJudgementOfRighteousness,
+			ActionID:       core.ActionID{SpellID: rank.judge.spellID},
+			SpellSchool:    core.SpellSchoolHoly,
+			DefenseType:    core.DefenseTypeMagic,
+			ProcMask:       core.ProcMaskSpellDamage,
+			Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagSuppressWeaponProcs | core.SpellFlagSuppressEquipProcs | core.SpellFlagBinary,
 
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
@@ -99,11 +100,12 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 		}
 
 		procSpell := paladin.RegisterSpell(core.SpellConfig{
-			ActionID:    core.ActionID{SpellID: rank.proc.spellID},
-			SpellSchool: core.SpellSchoolHoly,
-			DefenseType: core.DefenseTypeMelee,
-			ProcMask:    core.ProcMaskMeleeMHSpecial,                                   //changed to ProcMaskMeleeMHSpecial, to allow procs from weapons/oils which do proc from SoR,
-			Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagSuppressEquipProcs, // but Wild Strikes does not proc, nor equip procs
+			ClassSpellMask: PaladinSpellMaskSealOfRighteousnessProc,
+			ActionID:       core.ActionID{SpellID: rank.proc.spellID},
+			SpellSchool:    core.SpellSchoolHoly,
+			DefenseType:    core.DefenseTypeMelee,
+			ProcMask:       core.ProcMaskMeleeMHSpecial,                                   //changed to ProcMaskMeleeMHSpecial, to allow procs from weapons/oils which do proc from SoR,
+			Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagSuppressEquipProcs, // but Wild Strikes does not proc, nor equip procs
 
 			//BonusCritRating: paladin.holyCrit(), // TODO to be tested, but unlikely
 
@@ -135,11 +137,13 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 		})
 
 		paladin.aurasSoR = append(paladin.aurasSoR, aura)
+		paladin.sealOfRighteousnessProc = procSpell
 
 		paladin.sealOfRighteousness = paladin.RegisterSpell(core.SpellConfig{
-			ActionID:    aura.ActionID,
-			SpellSchool: core.SpellSchoolHoly,
-			Flags:       core.SpellFlagAPL,
+			ClassSpellMask: PaladinSpellMaskSealOfRighteousnessCast,
+			ActionID:       aura.ActionID,
+			SpellSchool:    core.SpellSchoolHoly,
+			Flags:          core.SpellFlagAPL,
 
 			RequiredLevel: int(rank.level),
 			Rank:          i + 1,
@@ -154,8 +158,8 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 				},
 			},
 
-			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-				paladin.applySeal(aura, judgeSpell, sim)
+			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
+				paladin.applySeal(aura, judgeSpell, spell, sim)
 			},
 		})
 

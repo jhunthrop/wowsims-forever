@@ -66,12 +66,13 @@ func (paladin *Paladin) registerSealOfCommand() {
 		maxDamage := rank.judge.maxDamage + float64(min(paladin.Level, rank.scaleLevel)-rank.level)*rank.judge.scale
 
 		judgeSpell := paladin.RegisterSpell(core.SpellConfig{
-			SpellCode:   SpellCode_PaladinJudgementOfCommand, // used in judgement.go
-			ActionID:    core.ActionID{SpellID: rank.judge.spellID},
-			SpellSchool: core.SpellSchoolHoly,
-			DefenseType: core.DefenseTypeMelee,
-			ProcMask:    core.ProcMaskMeleeMHSpecial,
-			Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete,
+			SpellCode:      SpellCode_PaladinJudgementOfCommand, // used in judgement.go
+			ClassSpellMask: PaladinSpellMaskJudgementOfCommand,
+			ActionID:       core.ActionID{SpellID: rank.judge.spellID},
+			SpellSchool:    core.SpellSchoolHoly,
+			DefenseType:    core.DefenseTypeMelee,
+			ProcMask:       core.ProcMaskMeleeMHSpecial,
+			Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete,
 
 			DamageMultiplier: paladin.getWeaponSpecializationModifier(),
 			ThreatMultiplier: 1,
@@ -93,11 +94,12 @@ func (paladin *Paladin) registerSealOfCommand() {
 		})
 
 		procSpell := paladin.RegisterSpell(core.SpellConfig{
-			ActionID:    core.ActionID{SpellID: rank.proc.spellID},
-			SpellSchool: core.SpellSchoolHoly,
-			DefenseType: core.DefenseTypeMelee,
-			ProcMask:    core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeProc | core.ProcMaskMeleeDamageProc,
-			Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagNotAProc,
+			ClassSpellMask: PaladinSpellMaskSealOfCommandProc,
+			ActionID:       core.ActionID{SpellID: rank.proc.spellID},
+			SpellSchool:    core.SpellSchoolHoly,
+			DefenseType:    core.DefenseTypeMelee,
+			ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeProc | core.ProcMaskMeleeDamageProc,
+			Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagNotAProc,
 
 			DamageMultiplier: 0.7 * paladin.getWeaponSpecializationModifier(),
 			ThreatMultiplier: 1,
@@ -136,11 +138,13 @@ func (paladin *Paladin) registerSealOfCommand() {
 		})
 
 		paladin.aurasSoC = append(paladin.aurasSoC, aura)
+		paladin.sealOfCommandProc = procSpell
 
 		paladin.sealOfCommand = paladin.RegisterSpell(core.SpellConfig{
-			ActionID:    aura.ActionID,
-			SpellSchool: core.SpellSchoolHoly,
-			Flags:       core.SpellFlagAPL,
+			ClassSpellMask: PaladinSpellMaskSealOfCommandCast,
+			ActionID:       aura.ActionID,
+			SpellSchool:    core.SpellSchoolHoly,
+			Flags:          core.SpellFlagAPL,
 
 			RequiredLevel: int(rank.level),
 			Rank:          i + 1,
@@ -155,8 +159,8 @@ func (paladin *Paladin) registerSealOfCommand() {
 				},
 			},
 
-			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-				paladin.applySeal(aura, judgeSpell, sim)
+			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
+				paladin.applySeal(aura, judgeSpell, spell, sim)
 			},
 		})
 
