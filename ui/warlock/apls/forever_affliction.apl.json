@@ -140,7 +140,7 @@
       }
     },
     {
-      "notes": "Wrack is live (sim/warlock/wrack.go, talent-gated, RequiredLevel 40): an instant, no-cooldown 6 second DoT that also applies a +10% Shadow-damage-taken vulnerability to the target, so it is refreshed the moment it drops rather than waiting behind the longer Bane of Agony/Corruption timers above it. The level-60 ladder golden confirms high uptime and it as the spec's #2 damage source behind Shadow Bolt.",
+      "notes": "Wrack (talent, learned at level 40) is an instant, no-cooldown 6 second DoT that also applies a 10% Shadow-damage-taken vulnerability to the target, so refresh it the moment it drops rather than waiting behind the longer Bane of Agony and Corruption timers above it.",
       "action": {
         "condition": {
           "not": {

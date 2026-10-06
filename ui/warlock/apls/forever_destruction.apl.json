@@ -95,7 +95,7 @@
       }
     },
     {
-      "notes": "Bane of Agony ramps up over its duration, so it goes down first and is refreshed the moment it drops; the fork's own shared warlock preset (ui/warlock/apls/rotation.apl.json) already maintains this curse for every spec, and it is not a spec-locked ability -- only Affliction's own maintenance kept it after the three files were split apart.",
+      "notes": "Bane of Agony ramps up over its duration, so it goes down first and is refreshed the moment it drops. It is not a spec-locked ability -- every Warlock spec keeps this curse up.",
       "action": {
         "condition": {
           "not": {
@@ -141,7 +141,7 @@
       }
     },
     {
-      "notes": "Conflagrate consumes part of Immolate's remaining damage as instant burst; only worth casting while Immolate is up. Fix round 3: cast as 18932 rank 6, the highest of the vanilla ids sim/warlock/conflagrate.go actually registers (17962/18930/18931/18932), not 1293817 -- the id the Forever talent-tree metadata table carries, which nothing in sim/warlock ever casts. Talent-gated (sim/warlock/conflagrate.go's registerConflagrateSpell returns immediately without warlock.Talents.Conflagrate), so it stays unresolved under this build's no-talent smoke run the same way Shadowburn below does.",
+      "notes": "Conflagrate consumes part of Immolate's remaining damage as instant burst; only worth casting while Immolate is up. It requires the Conflagrate talent.",
       "action": {
         "condition": {
           "dotIsActive": {
@@ -176,7 +176,7 @@
       }
     },
     {
-      "notes": "Rotation-accuracy program fix round: sim/warlock/incinerate.go now registers Incinerate for real (talent-gated on warlock.Talents.Incinerate, level-gated 40/50/60 per rank) -- the 'inert, no spell registration' note above this line described an earlier engine state and is stale; the ladder's own cast sets show 412758/1293812/1293813 actually firing at level 38+ once the truncated build's talent walk reaches Incinerate's row. Destruction's signature filler, dealing bonus damage while Immolate is active.",
+      "notes": "Incinerate is Destruction's signature filler, dealing bonus damage while Immolate is active. It requires the Incinerate talent, learned at level 40 and ranking up at 50 and 60.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -187,7 +187,7 @@
       }
     },
     {
-      "notes": "Shadow Bolt as the pre-Incinerate filler: this line always sat directly beneath Incinerate's unconditional cast, so once Incinerate stopped being inert (see above) it claimed every GCD Shadow Bolt used to get, leaving Shadow Bolt's own authored id a zero_casts ladder violation at every level from 40 on -- not a bug in Shadow Bolt, just an unreachable line now that the ability above it always wins. Gated on spellIsKnown(412758) so Shadow Bolt is the filler while Incinerate's talent has not been taken (or its level-40 row not yet reached) and correctly yields once it has, the same not-spellIsKnown shape rogue-subtlety's Sinister Strike/Hemorrhage line and mage-fire's Improved Scorch/Fireball line use.",
+      "notes": "Shadow Bolt is the filler while you have not yet learned the Incinerate talent (or have not reached its level-40 requirement); once you have, Incinerate takes priority instead.",
       "action": {
         "condition": {
           "not": {

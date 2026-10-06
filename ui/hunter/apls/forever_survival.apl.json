@@ -33,7 +33,7 @@
       }
     },
     {
-      "notes": "Counterattack: a bare cast that only lands while its parry-triggered proc aura is active, the same shape warrior-arms.json's own Overpower line uses.",
+      "notes": "Counterattack: a bare cast that only lands while its parry-triggered proc aura is active.",
       "action": {
         "castSpell": {
           "spellId": {

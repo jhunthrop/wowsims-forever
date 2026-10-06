@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Pop Combustion once Improved Scorch's debuff is fully stacked on the current target, for a guaranteed run of Fire crits. Fix round 4: tracks the engine's own debuff id (12873, sim/core/debuffs.go's ImprovedScorchAura), which the mage's own Scorch casts stack when Improved Scorch is talented (sim/mage/talents.go's applyImprovedScorch, sim/mage/scorch.go's ApplyEffects) -- restored after fix round 3 mistakenly treated this as impossible. 12873 is not in spellconst (it is an engine-side aura id, not a client spell), a known, deliberate exception for this one condition.",
+      "notes": "Pop Combustion once Improved Scorch's debuff is fully stacked on the current target, for a guaranteed run of Fire crits.",
       "action": {
         "condition": {
           "cmp": {
@@ -37,7 +37,7 @@
       }
     },
     {
-      "notes": "Scorch to apply or refresh the five stacks of Improved Scorch's debuff before it falls off. Fix round 4 restored the mechanic (see top-level notes) but left the refresh gated on a bare `or` of auraIsActive/auraNumStacks/auraRemainingTime against 12873 -- under this build's no-talent smoke run those three all fail to construct (GetAPLAura's aura.Get() is nil before the talent ever registers ImprovedScorchAura on the target), newValueOr filters every nil sub-value out of its list, and an `or` with zero surviving vals returns nil, which APLAction.IsReady reads as always-ready -- so Scorch, not 'inert', became 100% of every cast and Fire Blast/Fireball never fired once Scorch was learned. Fix round 5 wraps the same `or` in `and(auraIsKnown(12873), or(...))`: auraIsKnown (sim/core/apl_values_aura.go) never returns nil, only true/false, because it just reads whether the Aura object exists on the target rather than requiring an active instance -- and applyImprovedScorch (sim/mage/talents.go:341-343) registers that object via NewEnemyAuraArray the moment the talent is present, independent of stacks. Once the inner `or` goes nil under no talent, newValueAnd's own nil filter (same mechanism as `or`, sim/core/apl_values_operators.go) drops it and the `and` degrades to the single surviving auraIsKnown value, which is false without the talent, so the whole line is skipped and the priority list falls through to Fire Blast then Fireball -- proven with the scratch castSet at level 60 untalented.",
+      "notes": "Scorch to apply or refresh the five stacks of Improved Scorch's debuff before it falls off.",
       "action": {
         "condition": {
           "and": {

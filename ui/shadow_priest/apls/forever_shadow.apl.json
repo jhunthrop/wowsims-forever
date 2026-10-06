@@ -65,7 +65,7 @@
       }
     },
     {
-      "notes": "Shadow Word: Death (sim/priest/shadow_word_death.go): Forever's tier 5 Early Demise talent gives it bonus crit chance below 20% target health, read through the engine's execute-phase approximation (isExecutePhase E20, the same primitive this line already used).",
+      "notes": "Shadow Word: Death gets bonus crit chance below 20% target health from the Early Demise talent.",
       "action": {
         "condition": {
           "isExecutePhase": {
@@ -97,7 +97,7 @@
       }
     },
     {
-      "notes": "Inner Focus into Devouring Plague: a free, empowered cast of the priest's biggest single-target nuke, at rank 6 (19280), spellconst's top rank and the highest the engine registers at level 60.",
+      "notes": "Inner Focus into Devouring Plague: a free, empowered cast of the priest's biggest single-target nuke, using your highest learned rank at level 60.",
       "action": {
         "strictSequence": {
           "actions": [
@@ -143,21 +143,8 @@
       }
     },
     {
-      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while you regenerate, and Wand Specialization adds to it.",
+      "notes": "Shoot with your wand whenever nothing else is ready: it costs no mana and always beats standing idle. Mind Flay and Mind Blast still come first whenever they are available, and Wand Specialization adds to it.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentManaPercent": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "20%"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 5019

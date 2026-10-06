@@ -78,7 +78,7 @@
       }
     },
     {
-      "notes": "Bane of Agony ramps up over its duration, so it goes down first and is refreshed the moment it drops; the fork's own shared warlock preset (ui/warlock/apls/rotation.apl.json) already maintains this curse for every spec, and it is not a spec-locked ability -- only Affliction's own maintenance kept it after the three files were split apart.",
+      "notes": "Bane of Agony ramps up over its duration, so it goes down first and is refreshed the moment it drops. It is not a spec-locked ability -- every Warlock spec keeps this curse up.",
       "action": {
         "condition": {
           "not": {
@@ -124,7 +124,7 @@
       }
     },
     {
-      "notes": "Soul Fire on cooldown. The engine implements Decimation (440870, sim/warlock/soul_fire.go's applyDecimation) for a build that takes it, but the guide's own level-60 build spends 0 of its 2 points to rush Demonic Pact instead, so on this build Soul Fire just casts on its flat, unshortened 60 second cooldown.",
+      "notes": "Soul Fire on cooldown. This build spends its Demonology talent points on Demonic Pact rather than Decimation, so Soul Fire casts on its flat, unshortened 60 second cooldown.",
       "action": {
         "castSpell": {
           "spellId": {

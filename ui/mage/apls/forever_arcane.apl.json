@@ -27,7 +27,7 @@
       }
     },
     {
-      "notes": "Missile Barrage (400589) is the talent proc the engine registers since 2026-09-28; the empowered Missiles fire under it, where the Arcane guide places the payoff.",
+      "notes": "Missile Barrage is the talent proc that empowers your next Arcane Missiles cast -- fire the empowered Missiles under it, where the Arcane guide places the payoff.",
       "action": {
         "condition": {
           "auraIsActive": {
@@ -45,7 +45,7 @@
       }
     },
     {
-      "notes": "Arcane Blast is the client rank chain 400574..1239700 (levels 20/30/40/50/60 per spellranks.json); this file names the top rank and the level rewrite picks the learned one. The engine registers the chain since the accuracy program (engine-caster lane). Rotation-accuracy program correction (2026-09-28): this note previously said the 1239696..1239700 portion covers levels 40..60 -- spellranks.json actually puts rank 2 (1239696) at level 30, not 40; see the top-level notes' inert entry for the level-30 harness gap this produces.",
+      "notes": "Arcane Blast is learned at level 20 and gains new ranks through level 60 -- always cast your current highest learned rank.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -56,7 +56,7 @@
       }
     },
     {
-      "notes": "Arcane Missiles is the engine-castable Era filler that keeps this rotation dealing damage when the build has not taken Arcane Blast and Missile Barrage (both live in the engine since 2026-09-28) -- the pre-Arcane-Blast Era Arcane rotation was itself Missiles spam. Uses the top rank (25345, rank 8); the engine's rank loop registers all eight since 2026-09-28.",
+      "notes": "Arcane Missiles is your filler before you have learned Arcane Blast and Missile Barrage -- the classic Arcane rotation from before Arcane Blast existed was itself Missiles spam. Cast your highest learned rank.",
       "action": {
         "castSpell": {
           "spellId": {
