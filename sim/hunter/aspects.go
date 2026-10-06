@@ -7,6 +7,12 @@ import (
 	"time"
 )
 
+// AspectOfTheHawkAuraTag is the Aura.Tag every rank of Aspect of the Hawk
+// shares, so a caller outside this file (talents.go's Deadly Aspects)
+// can test "is Aspect of the Hawk active" without knowing which rank's
+// spell id is current.
+const AspectOfTheHawkAuraTag = "AspectOfTheHawk"
+
 // Utility function to create an Improved Hawk Aura
 func (hunter *Hunter) createImprovedHawkAura(auraLabel string, actionID core.ActionID) *core.Aura {
 	bonusMultiplier := 1.3
@@ -84,7 +90,13 @@ func (hunter *Hunter) getAspectOfTheHawkSpellConfig(rank int) core.SpellConfig {
 
 	actionID := core.ActionID{SpellID: spellId}
 	aspectOfTheHawkAura := hunter.GetOrRegisterAura(core.Aura{
-		Label:    "Aspect of the Hawk" + strconv.Itoa(rank),
+		Label: "Aspect of the Hawk" + strconv.Itoa(rank),
+		// Tag, not the "Aspect" ExclusiveEffect category below (a
+		// different namespace - NewExclusiveEffect only groups mutually
+		// exclusive aspects, it does not set Aura.Tag): Deadly Aspects
+		// (talents.go) reads this tag with HasActiveAuraWithTag to gate
+		// its Auto Shot proc on "while Aspect of the Hawk is active."
+		Tag:      AspectOfTheHawkAuraTag,
 		ActionID: actionID,
 		Duration: core.NeverExpires,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
