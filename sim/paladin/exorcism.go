@@ -44,7 +44,8 @@ func (paladin *Paladin) registerExorcism() {
 			RequiredLevel: int(rank.level),
 			Rank:          i + 1,
 
-			SpellCode: SpellCode_PaladinExorcism,
+			SpellCode:      SpellCode_PaladinExorcism,
+			ClassSpellMask: PaladinSpellMaskExorcism,
 			ManaCost: core.ManaCostOptions{
 				FlatCost: rank.manaCost,
 			},

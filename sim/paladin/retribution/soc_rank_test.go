@@ -37,13 +37,19 @@ import (
 // APL always references the highest, since it is authored for
 // MaxLevel").
 func TestSealOfCommandRanksResolveDistinctlyAtMaxLevel(t *testing.T) {
+	// Seal of Command (node 105696) is a Forever talent that GRANTS the
+	// seal (paladin.go's Initialize gates registerSealOfCommand on
+	// paladin.Talents.SealOfCommand); without it, this engine registers
+	// no Seal of Command spells at any rank, so this test's player must
+	// carry the talent.
 	player := core.WithSpec(
 		&proto.Player{
-			Class:     proto.Class_ClassPaladin,
-			Race:      proto.Race_RaceHuman,
-			Level:     60,
-			Equipment: &proto.EquipmentSpec{},
-			Buffs:     core.FullBuffs.Player,
+			Class:         proto.Class_ClassPaladin,
+			Race:          proto.Race_RaceHuman,
+			Level:         60,
+			Equipment:     &proto.EquipmentSpec{},
+			Buffs:         core.FullBuffs.Player,
+			TalentsString: retributionTalentString(t, "seal_of_command", 1),
 		},
 		&proto.Player_RetributionPaladin{
 			RetributionPaladin: &proto.RetributionPaladin{

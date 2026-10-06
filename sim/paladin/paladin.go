@@ -32,6 +32,45 @@ const (
 	SpellCode_PaladinHammerOfWrath
 )
 
+// PaladinSpellMask* bits exist only for the spells a Forever talent
+// (talents.go's applyDeclarativeTalents) needs to target with a
+// core.SpellModConfig ClassMask. This is not every Paladin spell -- only
+// what a ported talent reaches for -- so a new talent that needs a mask
+// adds one here rather than this set trying to anticipate every future
+// one.
+const (
+	PaladinSpellMaskJudgementOfRighteousness uint64 = 1 << iota
+	PaladinSpellMaskJudgementOfCommand
+	PaladinSpellMaskSealOfRighteousnessProc
+	PaladinSpellMaskSealOfCommandProc
+	PaladinSpellMaskSealOfRighteousnessCast
+	PaladinSpellMaskSealOfCommandCast
+	PaladinSpellMaskSealOfTheCrusaderCast
+	PaladinSpellMaskConsecration
+	PaladinSpellMaskHolyWrath
+	PaladinSpellMaskExorcism
+	PaladinSpellMaskHammerOfWrath
+)
+
+const (
+	// Improved Seals: "Increases the damage done by your Seals and
+	// Judgements". Seal of the Crusader's judgement and buff deal no
+	// damage, so it carries no mask here -- there is nothing for this
+	// mod to multiply.
+	PaladinSpellMaskSealsAndJudgementsDamage = PaladinSpellMaskJudgementOfRighteousness | PaladinSpellMaskJudgementOfCommand |
+		PaladinSpellMaskSealOfRighteousnessProc | PaladinSpellMaskSealOfCommandProc
+
+	// Holy Conduit: "Reduces the mana cost of your Consecration, Holy
+	// Wrath, Exorcism, and Hammer of Wrath spells".
+	PaladinSpellMaskHolyConduitCost = PaladinSpellMaskConsecration | PaladinSpellMaskHolyWrath |
+		PaladinSpellMaskExorcism | PaladinSpellMaskHammerOfWrath
+
+	// Twist of Light: "Reduces the Mana cost of your Seal spells by
+	// 20%". Only the two Seals this package registers a cast spell for.
+	PaladinSpellMaskSealCast = PaladinSpellMaskSealOfRighteousnessCast | PaladinSpellMaskSealOfCommandCast |
+		PaladinSpellMaskSealOfTheCrusaderCast
+)
+
 type SealJudgeCode uint8
 
 const (
@@ -51,11 +90,23 @@ type Paladin struct {
 	primaryPaladinAura proto.PaladinAura
 	currentPaladinAura *core.Aura
 
-	currentSeal  *core.Aura
-	allSealAuras [][]*core.Aura
-	aurasSoR     []*core.Aura
-	aurasSoC     []*core.Aura
-	aurasSotC    []*core.Aura
+	currentSeal      *core.Aura
+	currentSealSpell *core.Spell // the seal-cast spell that activated currentSeal; read by Sanctified Judgement and Twist of Light's Echo
+	allSealAuras     [][]*core.Aura
+	aurasSoR         []*core.Aura
+	aurasSoC         []*core.Aura
+	aurasSotC        []*core.Aura
+
+	// Highest-rank weapon-proc spell for each Echo-eligible Seal (Twist
+	// of Light names Command, Righteousness, Fury and Justice; this
+	// package implements only the first two). Set by
+	// registerSealOfRighteousness/registerSealOfCommand.
+	sealOfRighteousnessProc *core.Spell
+	sealOfCommandProc       *core.Spell
+	echoOfSealAura          *core.Aura
+	pendingEchoOfSealProc   *core.Spell
+
+	sanctifiedJudgementManaMetrics *core.ResourceMetrics
 
 	currentJudgement *core.Spell
 	allJudgeSpells   [][]*core.Spell
@@ -102,7 +153,12 @@ func (paladin *Paladin) Initialize() {
 	paladin.registerJudgement()
 
 	paladin.registerSealOfRighteousness()
-	paladin.registerSealOfCommand()
+	// Seal of Command (node 105696, Retribution tier 2 col 2): "Gives the
+	// Paladin a chance to deal additional Holy damage..." is the talent
+	// that GRANTS the seal, not a modifier on an always-available one.
+	if paladin.Talents.SealOfCommand {
+		paladin.registerSealOfCommand()
+	}
 	paladin.registerSealOfTheCrusader()
 
 	paladin.allJudgeSpells = append(paladin.allJudgeSpells, paladin.spellsJoR)
@@ -204,12 +260,23 @@ func (paladin *Paladin) getPrimarySealSpell(primarySeal proto.PaladinSeal) *core
 	}
 }
 
-func (paladin *Paladin) applySeal(newSeal *core.Aura, judgement *core.Spell, sim *core.Simulation) {
-	if paladin.currentSeal != nil {
-		paladin.currentSeal.Deactivate(sim)
+// sealSpell is the cast spell (sealOfRighteousness/sealOfCommand/the SotC
+// cast spell) that activated newSeal, not the judgement -- Sanctified
+// Judgement reads its Cost for "the mana cost of the judged seal", and
+// Twist of Light's Echo reads which Seal is being REPLACED before this
+// overwrites currentSeal.
+func (paladin *Paladin) applySeal(newSeal *core.Aura, judgement *core.Spell, sealSpell *core.Spell, sim *core.Simulation) {
+	oldSeal := paladin.currentSeal
+	if oldSeal != nil {
+		oldSeal.Deactivate(sim)
+	}
+
+	if paladin.Talents.TwistOfLight && oldSeal != nil && oldSeal != newSeal {
+		paladin.grantEchoOfSeal(sim, oldSeal)
 	}
 
 	paladin.currentSeal = newSeal
+	paladin.currentSealSpell = sealSpell
 	paladin.currentJudgement = judgement
 	paladin.currentSeal.Activate(sim)
 }
