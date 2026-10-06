@@ -42,12 +42,13 @@ func (druid *Druid) registerInsectSwarmSpell() {
 			spellCoef := .158
 
 			druid.InsectSwarm[rank] = druid.RegisterSpell(Humanoid|Moonkin, core.SpellConfig{
-				SpellCode:   SpellCode_DruidInsectSwarm,
-				ActionID:    core.ActionID{SpellID: spellID},
-				SpellSchool: core.SpellSchoolNature,
-				DefenseType: core.DefenseTypeMagic,
-				ProcMask:    core.ProcMaskSpellDamage,
-				Flags:       SpellFlagOmen | core.SpellFlagAPL | core.SpellFlagBinary,
+				SpellCode:      SpellCode_DruidInsectSwarm,
+				ClassSpellMask: DruidSpellMaskInsectSwarm,
+				ActionID:       core.ActionID{SpellID: spellID},
+				SpellSchool:    core.SpellSchoolNature,
+				DefenseType:    core.DefenseTypeMagic,
+				ProcMask:       core.ProcMaskSpellDamage,
+				Flags:          SpellFlagOmen | core.SpellFlagAPL | core.SpellFlagBinary,
 
 				ManaCost: core.ManaCostOptions{
 					FlatCost: manaCost,
