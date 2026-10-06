@@ -30,12 +30,13 @@ func (druid *Druid) registerRavageSpell() {
 	flatDamageBonus := ravageFlatDamageBonus[rank]
 
 	druid.Ravage = druid.RegisterSpell(Cat, core.SpellConfig{
-		SpellCode:   SpellCode_DruidRavage,
-		ActionID:    core.ActionID{SpellID: ravageSpellID[rank]},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOmen | SpellFlagBuilder,
+		SpellCode:      SpellCode_DruidRavage,
+		ClassSpellMask: DruidSpellMaskRavage,
+		ActionID:       core.ActionID{SpellID: ravageSpellID[rank]},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOmen | SpellFlagBuilder,
 
 		EnergyCost: core.EnergyCostOptions{
 			// Every client rank of Ravage costs 60 energy; source:

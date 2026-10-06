@@ -88,11 +88,15 @@ func TestRavageOnlyCastableWhileProwling(t *testing.T) {
 
 // TestRavageDealsDamageGrantsComboPointAndBreaksProwl covers the other
 // three parts of this lane's brief: a landed Ravage deals damage in the
-// rank's band, grants exactly 1 combo point (client data: spellconst
-// effect 30/misc_value 4/amount 1, the same single-combo-point flag every
-// other Cat Form builder carries -- not the 2 combo points live retail
-// Ravage grants, since this fork follows its own client data over
-// out-of-game knowledge), and breaks Prowl on the hit.
+// rank's band, grants a combo point (client data: spellconst effect
+// 30/misc_value 4/amount 1, the same single-combo-point flag every other
+// Cat Form builder carries -- not the 2 combo points live retail Ravage
+// grants, since this fork follows its own client data over out-of-game
+// knowledge), and breaks Prowl on the hit. P1Talents carries 2/2 Blood
+// Frenzy (proto field PrimalFury, node 104947; talents.go's
+// applyBloodFrenzy), a 100% chance for a Cat Form builder's crit to add a
+// second combo point, and this fixed seed's Ravage crits, so the landed
+// hit here grants 2, not 1.
 func TestRavageDealsDamageGrantsComboPointAndBreaksProwl(t *testing.T) {
 	built, sim, target := newFeralDruidSimAtLevel(t, 60)
 
@@ -113,8 +117,8 @@ func TestRavageDealsDamageGrantsComboPointAndBreaksProwl(t *testing.T) {
 	if metrics.TotalDamage <= 0 {
 		t.Errorf("Ravage dealt %v damage, want > 0", metrics.TotalDamage)
 	}
-	if got, want := built.ComboPoints(), int32(1); got != want {
-		t.Errorf("combo points after a landed Ravage = %d, want %d", got, want)
+	if got, want := built.ComboPoints(), int32(2); got != want {
+		t.Errorf("combo points after a landed, critical Ravage with 2/2 Blood Frenzy = %d, want %d", got, want)
 	}
 	if built.ProwlAura.IsActive() {
 		t.Fatal("ProwlAura is still active after a landed Ravage; Ravage must break Prowl")

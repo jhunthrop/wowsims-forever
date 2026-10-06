@@ -34,6 +34,43 @@ const (
 	SpellCode_DruidWrath
 )
 
+// DruidSpellMask* identify the subset of this package's spells that a
+// declarative talent in talents.go needs to find by ClassMask (PORTING.md
+// section spell_mod.go). Only spells a talent implemented below actually
+// targets are tagged; a spell with no talent reading its ClassSpellMask
+// is left untagged.
+const (
+	DruidSpellMaskClaw uint64 = 1 << iota
+	DruidSpellMaskFerociousBite
+	DruidSpellMaskInsectSwarm
+	DruidSpellMaskMoonfire
+	DruidSpellMaskRake
+	DruidSpellMaskRavage
+	DruidSpellMaskRip
+	DruidSpellMaskShred
+	DruidSpellMaskStarfire
+	DruidSpellMaskWrath
+)
+
+const (
+	// Wrath, Starfire and Moonfire: Nature's Reach's "offensive Balance
+	// spells".
+	DruidSpellMaskBalanceDirectDamage = DruidSpellMaskWrath | DruidSpellMaskStarfire | DruidSpellMaskMoonfire
+
+	// Every damage-over-time effect this package registers, for
+	// Genesis's "periodic damage".
+	DruidSpellMaskPeriodicDamage = DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm | DruidSpellMaskRake | DruidSpellMaskRip
+
+	// Every Cat Form melee special this package registers, for
+	// Predatory Instincts' "melee abilities".
+	DruidSpellMaskMeleeAbilities = DruidSpellMaskClaw | DruidSpellMaskRake | DruidSpellMaskRavage | DruidSpellMaskShred | DruidSpellMaskFerociousBite
+
+	// Claw, Rake, Ravage and Shred: the Cat Form specials that generate
+	// a Combo Point, for Berserk's crit bonus and Blood Frenzy's bonus
+	// Combo Point chance.
+	DruidSpellMaskComboPointBuilders = DruidSpellMaskClaw | DruidSpellMaskRake | DruidSpellMaskRavage | DruidSpellMaskShred
+)
+
 type Druid struct {
 	core.Character
 	SelfBuffs
@@ -51,6 +88,7 @@ type Druid struct {
 	ReplaceBearMHFunc core.ReplaceMHSwing
 
 	Barkskin             *DruidSpell
+	Berserk              *DruidSpell
 	DemoralizingRoar     *DruidSpell
 	Enrage               *DruidSpell
 	FaerieFire           *DruidSpell
@@ -65,6 +103,7 @@ type Druid struct {
 	Maul                 *DruidSpell
 	MaulQueueSpell       *DruidSpell
 	Moonfire             []*DruidSpell
+	NaturesSwiftness     *DruidSpell
 	Prowl                *DruidSpell
 	Rebirth              *DruidSpell
 	Rake                 *DruidSpell

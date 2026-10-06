@@ -26,12 +26,13 @@ func (druid *Druid) registerClawSpell() {
 	flatDamageBonus := clawFlatDamageBonus[rank]
 
 	druid.Claw = druid.RegisterSpell(Cat, core.SpellConfig{
-		SpellCode:   SpellCode_DruidClaw,
-		ActionID:    core.ActionID{SpellID: clawSpellID[rank]},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOmen | SpellFlagBuilder,
+		SpellCode:      SpellCode_DruidClaw,
+		ClassSpellMask: DruidSpellMaskClaw,
+		ActionID:       core.ActionID{SpellID: clawSpellID[rank]},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOmen | SpellFlagBuilder,
 
 		Rank:          rank,
 		RequiredLevel: clawLearnLevels[rank-1],

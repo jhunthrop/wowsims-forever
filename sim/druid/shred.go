@@ -29,17 +29,22 @@ func (druid *Druid) registerShredSpell() {
 	flatDamageBonus := shredFlatDamageBonus[rank]
 
 	druid.Shred = druid.RegisterSpell(Cat, core.SpellConfig{
-		SpellCode:   SpellCode_DruidShred,
-		ActionID:    core.ActionID{SpellID: shredSpellID[rank]},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOmen | SpellFlagBuilder,
+		SpellCode:      SpellCode_DruidShred,
+		ClassSpellMask: DruidSpellMaskShred,
+		ActionID:       core.ActionID{SpellID: shredSpellID[rank]},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOmen | SpellFlagBuilder,
 
 		EnergyCost: core.EnergyCostOptions{
-			// FOREVER: Improved Shred is not in the client's trees.
-			// Cost:   60 - 6*float64(druid.Talents.ImprovedShred),
-			Cost:   60,
+			// Shredding Attacks (node 104945, proto field
+			// shredding_attacks): "Reduces the Energy cost of your
+			// Shred ability by 6/12/18." The Lacerate half of the same
+			// talent is not modeled: Bear Form's own damage kit is not
+			// modeled in this package (see RegisterFeralCatSpells's
+			// comment above).
+			Cost:   60 - 6*float64(clampRank(druid.Talents.ShreddingAttacks, 3)),
 			Refund: 0.8,
 		},
 		Cast: core.CastConfig{
