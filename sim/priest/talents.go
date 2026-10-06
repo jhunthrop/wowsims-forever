@@ -39,6 +39,65 @@ func (priest *Priest) ApplyTalents() {
 		priest.MultiplyStat(stats.Intellect, 1.0+0.02*float64(priest.Talents.MentalStrength))
 	}
 
+	// Power in Light: "Your Smite and Penance spells deal X% increased
+	// damage to targets afflicted with your Holy Fire." Both named
+	// spells are Holy school, conditioned on a Holy school DoT; it
+	// touches neither a Shadow spell nor Intellect/Spirit. Shadowform
+	// also drops the moment a Holy spell completes (registerShadowform,
+	// below), so a Shadow rotation never casts either and this talent
+	// changes no number this package computes. Named, not modeled.
+	_ = priest.Talents.PowerInLight
+
+	// Holy Precision: "Improves your chance to hit with Holy spells by
+	// X%." Shadow's spells are Shadow school; this is Holy spell hit
+	// only, so it never reaches the rotation. Named, not modeled.
+	_ = priest.Talents.HolyPrecision
+
+	// Improved Power Word Shield and Soul Warding both shorten PW:Shield's
+	// cooldown/cost; PW:Shield is not registered in this package
+	// (RegisterHealingSpells is a no-op). Named, not modeled.
+	_, _ = priest.Talents.ImprovedPowerWordShield, priest.Talents.SoulWarding
+
+	// Martyrdom: a chance, on being critically struck, to resist
+	// pushback and interrupt effects for 6 sec. The only lever core has
+	// for pushback resistance (Spell.PushbackReduction) is read from the
+	// ATTACKING spell in applySpellPushback (sim/core/cast.go), not from
+	// anything a target-side talent can set, so there is no mod kind
+	// this talent could use without a core change. See PORTING.md-style
+	// note in the engine-lane report for Twilight Focus below, which
+	// hits the identical gap. Named, not modeled.
+	_ = priest.Talents.Martyrdom
+
+	// Improved Inner Fire: more Armor and more charges on Inner Fire.
+	// This package registers no Inner Fire spell or buff at all, so
+	// there is nothing to improve. Named, not modeled.
+	_ = priest.Talents.ImprovedInnerFire
+
+	// Improved Mana Burn: shortens Mana Burn's cast time. Mana Burn is
+	// not registered in this package (a PvP ability with no mana-pool
+	// target on a Patchwerk-style dummy). Named, not modeled.
+	_ = priest.Talents.ImprovedManaBurn
+
+	// Penance: a Discipline/Holy burst-heal-or-damage channel, not
+	// registered in this package. Named, not modeled.
+	_ = priest.Talents.Penance
+
+	// Renewed Hope and Divine Aegis both modify critical heals; this
+	// package registers no healing spells. Named, not modeled.
+	_, _ = priest.Talents.RenewedHope, priest.Talents.DivineAegis
+
+	// Twilight Focus: "a X% chance to avoid interruption caused by
+	// damage while casting any spell." The only pushback-resistance
+	// lever core exposes, Spell.PushbackReduction, is read off the
+	// ATTACKING spell in applySpellPushback (sim/core/cast.go) - no
+	// class can set a value there for its own casts, since nothing in
+	// this repository registers a boss ability with a non-zero
+	// PushbackReduction. Modelling this talent correctly needs core to
+	// read a caster-side value (e.g. a PseudoStats field) in that roll
+	// instead; that is a sim/core change, out of scope for this lane.
+	// Named, not modeled; reported as a core gap.
+	_ = priest.Talents.TwilightFocus
+
 	// Holy
 	priest.applyInspiration()
 	priest.applyHolySpecialization()
@@ -50,6 +109,18 @@ func (priest *Priest) ApplyTalents() {
 		priest.AddStatDependency(stats.Spirit, stats.SpellPower, 0.05*float64(priest.Talents.SpiritualGuidance))
 	}
 
+	// Improved Renew, Holy Nova, Blessed Recovery, Holy Reach, Improved
+	// Healing, Binding Heal, Litany of Light, Spirit of Redemption,
+	// Spiritual Healing and Prayer of Mending are all healing, AoE-heal,
+	// range or on-death effects; this package registers no healing
+	// spells, no Holy Nova and models no character death (a Patchwerk
+	// dummy fight does not end from the priest's own death). Named, not
+	// modeled.
+	_, _, _ = priest.Talents.ImprovedRenew, priest.Talents.HolyNova, priest.Talents.BlessedRecovery
+	_, _, _ = priest.Talents.HolyReach, priest.Talents.ImprovedHealing, priest.Talents.BindingHeal
+	_, _, _ = priest.Talents.LitanyOfLight, priest.Talents.SpiritOfRedemption, priest.Talents.SpiritualHealing
+	_ = priest.Talents.PrayerOfMending
+
 	// Shadow
 	priest.registerVampiricEmbraceSpell()
 	priest.registerShadowform()
@@ -58,7 +129,128 @@ func (priest *Priest) ApplyTalents() {
 	priest.applyShadowFocus()
 	priest.applyShadowWeaving()
 	priest.applyDarkness()
+	priest.applyDeclarativeShadowTalents()
+
+	// Blackout and Silence both land a stun/silence on the target; a
+	// raid boss, built above core.CharacterMaxLevel, is immune to every
+	// CC effect in this sim (see sim/mage/talents.go's Frostbite/Shatter
+	// note for the same rule), so neither changes a damage, hit, crit or
+	// mana number here. Named, not modeled.
+	_, _ = priest.Talents.Blackout, priest.Talents.Silence
+
+	// Shadow Reach is range only, like Mage's Arctic Reach: the mod
+	// system has no range kind and adding one would model nothing on a
+	// stationary target. Named, not modeled.
+	_ = priest.Talents.ShadowReach
+
+	// Improved Psychic Scream shortens the cooldown of a fear effect;
+	// Psychic Scream is not registered in this package, and a fear is
+	// CC a raid boss is immune to regardless. Named, not modeled.
+	_ = priest.Talents.ImprovedPsychicScream
+
+	// Improved Fade shortens Fade's cooldown; Fade is a threat-dump
+	// cooldown this package does not register and would not change a
+	// damage or mana number if it did. Named, not modeled.
+	_ = priest.Talents.ImprovedFade
 }
+
+// applyDeclarativeShadowTalents is every Shadow talent that is a pure
+// modifier on a set of spells, following sim/mage/talents.go's model:
+// config that can be read against a tooltip line by line. Talents with
+// state or a proc keep their own function (applySpiritTap,
+// applyShadowWeaving, applyDarkness, above).
+func (priest *Priest) applyDeclarativeShadowTalents() {
+	t := priest.Talents
+
+	if t.TwinDisciplines > 0 {
+		// "Increases the damage and healing of your instant cast spells
+		// by 1%/2%/3%/4%/5%." The healing half reaches spells this
+		// package does not register; the Shadow damage half is Mind
+		// Flay, Devouring Plague, Shadow Word: Pain and Shadow Word:
+		// Death - see PriestSpellMaskInstantShadowDamage's comment.
+		//
+		// SpellMod_DamageDone_Pct's FloatValue reaches
+		// Spell.ApplyMultiplicativeDamageBonus, which does
+		// `DamageMultiplier *= multiplier` (sim/core/spell.go,
+		// TestApplyDamageBonusHelpers in spell_mod_test.go pins x1.5 ->
+		// 1.5): the mod kind's own "+5% = 0.05" doc comment describes
+		// SoD's additive accumulator, not this fork's direct-multiplier
+		// port (PORTING.md's spell_mod.go section), so the value passed
+		// here is a full multiplier, not an offset.
+		priest.AddStaticMod(core.SpellModConfig{
+			Kind:       core.SpellMod_DamageDone_Pct,
+			ClassMask:  PriestSpellMaskInstantShadowDamage,
+			FloatValue: 1 + twinDisciplinesDamagePerRank*float64(rankOf("twin_disciplines", t.TwinDisciplines)),
+		})
+	}
+
+	if t.ImprovedMindFlay > 0 {
+		// "Your Mind Flay now deals 10%/20% more damage, gains 5/10
+		// yards increased range, but slows the target's movement speed
+		// by 35%/20%." The range bonus and the snare change nothing a
+		// sim computes against a stationary, in-range target; the
+		// damage bonus is the half that moves Shadow DPS.
+		priest.AddStaticMod(core.SpellModConfig{
+			Kind:       core.SpellMod_DamageDone_Pct,
+			ClassMask:  PriestSpellMaskMindFlay,
+			FloatValue: 1 + improvedMindFlayDamagePerRank*float64(rankOf("improved_mind_flay", t.ImprovedMindFlay)),
+		})
+	}
+
+	if t.DevouringContagion > 0 {
+		// "Reduces the mana cost of your Devouring Plague by 25%/50%."
+		// The mana-cost half is modelled directly below; the second
+		// half of the tooltip - the DoT spreading to a nearby enemy
+		// when its target dies - needs a second target in range and a
+		// kill mid-DoT, neither of which this package's reference
+		// encounters (single target, no scripted death) ever produce,
+		// the same gap Mage's Wake of Fire kill-crit documents. Not
+		// modelled; nothing in the standard rotation depends on it.
+		priest.AddStaticMod(core.SpellModConfig{
+			Kind:      core.SpellMod_PowerCost_Pct,
+			ClassMask: PriestSpellMaskDevouringPlague,
+			IntValue:  devouringContagionCostPctPerRank * int64(rankOf("devouring_contagion", t.DevouringContagion)),
+		})
+	}
+}
+
+// rankOf clamps a talent rank to that talent's own max rank, read as the
+// length of its generated rank-spell list so it cannot drift from the
+// tree - sim/mage/talents.go's rankOf, the same fix for the same cause.
+// core.FillTalentsProto does not validate a talent string against the
+// client's max rank per node, so an unvalidated or stale string (shadow
+// priest's P1Talents here still predates the client talent-tree rewrite;
+// SkipAwaitingForeverTalentRewrite in sim/priest/shadow names it) can
+// hand a proto field a rank past its talent's real maximum. Caught live
+// in this package: with no clamp, P1Talents reads DevouringContagion as
+// rank 5 against a max of 2, and devouringContagionCostPctPerRank * 5
+// drove Spell.Cost.Multiplier negative, zeroing Devouring Plague's mana
+// cost outright (TestDevouringPlagueRank6ResolvesDistinctlyFromRank5ViaGetSpell
+// in sim/priest/shadow caught exactly this).
+func rankOf(talent string, rank int32) int32 {
+	if max := int32(len(TalentSpellIDs[talent])); rank > max {
+		return max
+	}
+	return rank
+}
+
+// Per-rank talent values, all read off the client's own rank
+// descriptions for build 1.60.1.70009 (data/builds/1.60.1.70009/
+// talents/priest.json). A Forever patch that changes a number changes a
+// line here and nothing else.
+const (
+	// "Increases the damage and healing of your instant cast spells by
+	// 1%" per rank.
+	twinDisciplinesDamagePerRank = 0.01
+	// "Your Mind Flay now deals 10%/20% more damage" - not a flat
+	// per-rank multiple beyond rank 2, but 10% a rank happens to hold
+	// for both of this talent's two ranks.
+	improvedMindFlayDamagePerRank = 0.10
+	// "Reduces the mana cost of your Devouring Plague by 25%" per rank.
+	// SpellMod_PowerCost_Pct's IntValue is signed percentage points:
+	// "-5% = -5".
+	devouringContagionCostPctPerRank = -25
+)
 
 func (priest *Priest) applyMentalAgility() {
 	if priest.Talents.MentalAgility == 0 {

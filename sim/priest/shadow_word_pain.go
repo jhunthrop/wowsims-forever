@@ -47,12 +47,13 @@ func (priest *Priest) getShadowWordPainConfig(rank int) core.SpellConfig {
 	level := ShadowWordPainLevel[rank]
 
 	return core.SpellConfig{
-		SpellCode:   SpellCode_PriestShadowWordPain,
-		ActionID:    core.ActionID{SpellID: spellId},
-		SpellSchool: core.SpellSchoolShadow,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       SpellFlagPriest | core.SpellFlagAPL | core.SpellFlagPureDot,
+		SpellCode:      SpellCode_PriestShadowWordPain,
+		ActionID:       core.ActionID{SpellID: spellId},
+		SpellSchool:    core.SpellSchoolShadow,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          SpellFlagPriest | core.SpellFlagAPL | core.SpellFlagPureDot,
+		ClassSpellMask: PriestSpellMaskShadowWordPain,
 
 		RequiredLevel: level,
 		Rank:          rank,
