@@ -25,6 +25,7 @@ const (
 	SpellCode_WarriorRevenge
 	SpellCode_WarriorShieldSlam
 	SpellCode_WarriorSlam
+	SpellCode_WarriorSpearingStrike
 	SpellCode_WarriorStanceBattle
 	SpellCode_WarriorStanceBerserker
 	SpellCode_WarriorStanceDefensive
@@ -52,6 +53,7 @@ const (
 	WarriorSpellMaskHamstring
 	WarriorSpellMaskPummel
 	WarriorSpellMaskPiercingHowl
+	WarriorSpellMaskSpearingStrike
 
 	// Groups, for talents that target a category rather than one spell.
 	WarriorSpellMaskSpecials = WarriorSpellMaskBloodthirst | WarriorSpellMaskWhirlwind |
@@ -89,6 +91,11 @@ type Warrior struct {
 	PreviousStance  Stance // Used for Warrior T1 DPS 4P
 	revengeProcAura *core.Aura
 	OverpowerAura   *core.Aura
+	// BloodthrillAura is Bloodthrill's own 6s Overpower-enabling window,
+	// separate from OverpowerAura's vanilla 5s dodge-proc window: one
+	// Aura cannot carry two durations, so Overpower's cast condition and
+	// ApplyEffects check both. Nil when Bloodthrill is not talented.
+	BloodthrillAura *core.Aura
 
 	// Enrage Auras
 	BerserkerRageAura *core.Aura
@@ -131,6 +138,7 @@ type Warrior struct {
 	ConcussionBlow    *WarriorSpell
 	Hamstring         *WarriorSpell
 	PiercingHowl      *WarriorSpell
+	SpearingStrike    *WarriorSpell
 
 	HeroicStrike       *WarriorSpell
 	HeroicStrikeQueue  *WarriorSpell
@@ -218,6 +226,7 @@ func (warrior *Warrior) Initialize() {
 	warrior.registerHamstringSpell()
 	warrior.registerPummelSpell()
 	warrior.registerPiercingHowlSpell()
+	warrior.registerSpearingStrikeSpell()
 
 	// The sim often re-enables heroic strike in an unrealistic amount of time.
 	// This can cause an unrealistic immediate double-hit around wild strikes procs

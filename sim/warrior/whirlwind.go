@@ -35,6 +35,9 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 	// that moment, so a shrinking timeline does not wrap surplus swings
 	// back onto the survivors. Same shape as APLActionMultidot.
 	results := make([]*core.SpellResult, min(4, len(warrior.Env.Encounter.AllTargetUnits)))
+	// ohResults backs Raging Blows' off-hand strike (below); sized the
+	// same as results so the two loops share one numHits bound.
+	ohResults := make([]*core.SpellResult, len(results))
 
 	warrior.Whirlwind = warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
 		SpellCode:      SpellCode_WarriorWhirlwind,
@@ -65,15 +68,30 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 		BonusCoefficient: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			// Raging Blows: "Causes your Whirlwind to also strike with
+			// your off-hand weapon." A dual-wielding check, not just the
+			// talent, because the client's clause presumes a weapon is
+			// there to strike with; a 2H Whirlwind under the talent
+			// swings with the main hand only, same as always.
+			offHand := warrior.Talents.RagingBlows && warrior.AutoAttacks.IsDualWielding
+
 			numHits := min(len(results), len(sim.Encounter.TargetUnits))
 			for idx := 0; idx < numHits; idx++ {
 				baseDamage := spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+				if offHand {
+					ohResults[idx] = spell.CalcDamage(sim, target, spell.Unit.OHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target)), spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+				}
 				target = sim.Environment.NextTargetUnit(target)
 			}
 
 			for _, result := range results[:numHits] {
 				spell.DealDamage(sim, result)
+			}
+			if offHand {
+				for _, result := range ohResults[:numHits] {
+					spell.DealDamage(sim, result)
+				}
 			}
 		},
 	})

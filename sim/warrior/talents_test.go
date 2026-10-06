@@ -60,6 +60,12 @@ var foreverFuryTalentsApplied = []string{
 	"improved_thunder_clap",
 	"improved_sunder_armor",
 	"two_handed_weapon_specialization",
+	// raging_blows is also read directly by whirlwind.go, for the
+	// off-hand strike half of the talent.
+	"raging_blows",
+	"improved_revenge",
+	"bastion",
+	"focused_rage",
 	// Read by stances.go's rage retention.
 	"improved_tactical_mastery",
 	// Read by an ability file rather than by a mod.
@@ -88,6 +94,11 @@ var foreverFuryTalentsApplied = []string{
 	"death_wish",
 	"sweeping_strikes",
 	"last_stand",
+	"improved_charge",
+	"bloodthrill",
+	"blood_craze",
+	// A new attack, registered by spearing_strike.go.
+	"spearing_strike",
 }
 
 // Every talent this spec's behaviour reads must exist in the generated
