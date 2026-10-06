@@ -60,12 +60,13 @@ func (priest *Priest) getShadowWordDeathConfig(rank int, cdTimer *core.Timer) co
 	level := ShadowWordDeathLevel[rank]
 
 	return core.SpellConfig{
-		SpellCode:   SpellCode_PriestShadowWordDeath,
-		ActionID:    core.ActionID{SpellID: spellId},
-		SpellSchool: core.SpellSchoolShadow,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       SpellFlagPriest | core.SpellFlagAPL,
+		SpellCode:      SpellCode_PriestShadowWordDeath,
+		ActionID:       core.ActionID{SpellID: spellId},
+		SpellSchool:    core.SpellSchoolShadow,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          SpellFlagPriest | core.SpellFlagAPL,
+		ClassSpellMask: PriestSpellMaskShadowWordDeath,
 
 		RequiredLevel: level,
 		Rank:          rank,

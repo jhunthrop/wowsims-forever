@@ -32,6 +32,34 @@ const (
 	SpellCode_PriestVampiricTouch
 )
 
+// Spell masks for the declarative Shadow talent mods below. One bit per
+// ability, so a talent that reads "your instant cast spells" or "your
+// Devouring Plague" is a line of SpellModConfig against a set of bits
+// rather than a closure that re-derives the set every time a spell
+// registers. Bits are never renumbered: a mask is also how a saved mod
+// config and a log line name an ability.
+const (
+	// Bit 0 is reserved so no mask ever equals the zero value, which
+	// AddStaticMod's ClassMask treats as "no filter" rather than "no
+	// abilities".
+	PriestSpellMaskMindFlay uint64 = 1 << (iota + 1)
+	PriestSpellMaskDevouringPlague
+	PriestSpellMaskShadowWordPain
+	PriestSpellMaskShadowWordDeath
+)
+
+// PriestSpellMaskInstantShadowDamage is every Shadow damage spell this
+// package registers whose client cast_time_ms is 0 (talents/priest.json
+// build 1.60.1.70009's spellconst: Mind Flay, Devouring Plague, Shadow
+// Word: Pain and Shadow Word: Death all carry cast_time_ms 0, unlike
+// Mind Blast, Smite and Holy Fire). This is what Twin Disciplines'
+// "your instant cast spells" reads for the Shadow spec; the talent also
+// reaches healing spells this package does not register
+// (RegisterHealingSpells is a no-op), so there is nothing more to add
+// to the set.
+const PriestSpellMaskInstantShadowDamage = PriestSpellMaskMindFlay | PriestSpellMaskDevouringPlague |
+	PriestSpellMaskShadowWordPain | PriestSpellMaskShadowWordDeath
+
 type Priest struct {
 	core.Character
 	Talents *proto.PriestTalents
