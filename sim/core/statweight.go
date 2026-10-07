@@ -156,31 +156,6 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 		if stat.EqualsStat(stats.Armor) || stat.EqualsStat(stats.BonusArmor) || stat.EqualsStat(stats.Mana) {
 			statMod = defaultStatMod * 20
 		}
-		// Hit needs the same larger nudge, for a reason specific to
-		// physical hit: HitRatingPerHitChance is 1, so one raw point is
-		// exactly 1% hit chance, and PhysicalHitChance
-		// (spell_result.go) floors at max(hitChance-HitSuppression, 0).
-		// NewAttackTable (target.go) sets HitSuppression to
-		// (targetDefense-weaponSkill-10)*0.002, which is exactly 0.01
-		// (1%) for the ordinary "3 levels higher" raid-boss gap this
-		// package's default encounter uses. A character with no other
-		// source of hit therefore has its first raw point of Hit
-		// entirely cancelled by suppression - the low direction
-		// (-defaultStatMod) can't push an already-floored hit chance
-		// any lower, and the high direction (+defaultStatMod) lands
-		// exactly back on the floor too, so both directions read
-		// bit-identical to the unmodified baseline. That is what
-		// computeStatWeights' hard-cap detector below
-		// (modPlayerHigh.Dps.Avg == baselinePlayer.Dps.Avg) exists to
-		// catch, but here the stat is not actually hard-capped - the
-		// very next point already moves it - so the detector's finding
-		// is a false positive caused by the size of the mod, not a
-		// real cap. Scaling Hit's mod the same way Armor/BonusArmor/
-		// Mana's already is clears the floor with room to spare and
-		// gives a real, if noisier, weight instead of a false 0/0.
-		if stat.EqualsStat(stats.Hit) {
-			statMod = defaultStatMod * 20
-		}
 		// Intellect needs the same larger nudge, for a different reason
 		// than Hit's floor: Intellect's own per-point DPS effect for a
 		// caster is simply tiny relative to this sweep's own sampling
@@ -226,6 +201,9 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 		}
 		statModsHigh[stat] = statMod
 		statModsLow[stat] = -statMod
+		if stat.EqualsStat(stats.Hit) {
+			statModsLow[stat], statModsHigh[stat] = hitStatMods(swr)
+		}
 	}
 	for _, s := range swr.PseudoStatsToWeigh {
 		stat := stats.UnitStatFromPseudoStat(s)
@@ -236,7 +214,7 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 
 	for i := range statModsLow {
 		stat := stats.UnitStatFromIdx(i)
-		if statModsLow[stat] == 0 {
+		if statModsLow[stat] == 0 && statModsHigh[stat] == 0 {
 			continue
 		}
 
@@ -260,6 +238,30 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 	return swBaseResponse
 }
 
+// hitStatMods is the sweep's low and high hit offsets: hit's marginal DPS
+// value at the character's actual hit, not an average over a wide step.
+//
+// Hit is the one stat whose response is not a line: PhysicalHitChance floors
+// at max(hit - suppression, 0), and a special attack stops missing at the
+// miss-table cap, so a wide symmetric step (the sweep used +-20) averages a
+// saturated response into a small weight - 0.46 per rating point for a
+// level-60 Fury warrior with 60 more points of miss to remove. See
+// hitStepWindow for the window rules. A window with both offsets zero means
+// the stat is capped and is left unmeasured (weight 0). When the request
+// cannot be profiled (no player) the step is the plain +-1 of the other
+// secondary stats.
+func hitStatMods(swr *proto.StatWeightsRequest) (low, high float64) {
+	profile, err := ComputeHitProfile(swr)
+	if err != nil {
+		return -hitStepPoints, hitStepPoints
+	}
+	low, high, ok := hitStepWindow(profile)
+	if !ok {
+		return 0, 0
+	}
+	return low, high
+}
+
 func computeStatWeights(swcr *proto.StatWeightsCalcRequest) *proto.StatWeightsResult {
 	haveRefStat := false
 	for _, statResult := range swcr.StatSimResults {
@@ -280,13 +282,32 @@ func computeStatWeights(swcr *proto.StatWeightsCalcRequest) *proto.StatWeightsRe
 		modPlayerLow := statResult.ResultLow.RaidMetrics.Parties[0].Players[0]
 		modPlayerHigh := statResult.ResultHigh.RaidMetrics.Parties[0].Players[0]
 
+		// A window that is not symmetric about the baseline (hit, next to a
+		// floor or a cap) is read as the slope between its two simulations.
+		window := statResult.StatData.ModLow != -statResult.StatData.ModHigh
+
 		// Check for hard caps. Hard caps will have results identical to the baseline because RNG is fixed.
 		// When we find a hard-capped stat, just skip it (will return 0).
-		if modPlayerHigh.Dps.Avg == baselinePlayer.Dps.Avg && modPlayerHigh.Hps.Avg == baselinePlayer.Hps.Avg && modPlayerHigh.Tmi.Avg == baselinePlayer.Tmi.Avg {
+		if window {
+			if modPlayerHigh.Dps.Avg == modPlayerLow.Dps.Avg && modPlayerHigh.Hps.Avg == modPlayerLow.Hps.Avg && modPlayerHigh.Tmi.Avg == modPlayerLow.Tmi.Avg {
+				continue
+			}
+		} else if modPlayerHigh.Dps.Avg == baselinePlayer.Dps.Avg && modPlayerHigh.Hps.Avg == baselinePlayer.Hps.Avg && modPlayerHigh.Tmi.Avg == baselinePlayer.Tmi.Avg {
 			continue
 		}
 
 		calcWeightResults := func(baselineMetrics *proto.DistributionMetrics, modLowMetrics *proto.DistributionMetrics, modHighMetrics *proto.DistributionMetrics, weightResults *StatWeightValues) {
+			if window {
+				var slope aggregator
+				for i := 0; i < len(baselineMetrics.AllValues); i++ {
+					slope.add(modHighMetrics.AllValues[i] - modLowMetrics.AllValues[i])
+				}
+				slope.scale(1 / (statResult.StatData.ModHigh - statResult.StatData.ModLow))
+				mean, stdev := slope.meanAndStdDev()
+				weightResults.Weights.AddStat(stat, mean)
+				weightResults.WeightsStdev.AddStat(stat, stdev)
+				return
+			}
 			var lo, hi aggregator
 			for i := 0; i < len(baselineMetrics.AllValues); i++ {
 				lo.add(modLowMetrics.AllValues[i] - baselineMetrics.AllValues[i])
@@ -307,9 +328,13 @@ func computeStatWeights(swcr *proto.StatWeightsCalcRequest) *proto.StatWeightsRe
 		calcWeightResults(baselinePlayer.Threat, modPlayerLow.Threat, modPlayerHigh.Threat, &result.Tps)
 		calcWeightResults(baselinePlayer.Dtps, modPlayerLow.Dtps, modPlayerHigh.Dtps, &result.Dtps)
 		calcWeightResults(baselinePlayer.Tmi, modPlayerLow.Tmi, modPlayerHigh.Tmi, &result.Tmi)
-		meanLow := (modPlayerLow.ChanceOfDeath - baselinePlayer.ChanceOfDeath) / statResult.StatData.ModLow
-		meanHigh := (modPlayerHigh.ChanceOfDeath - baselinePlayer.ChanceOfDeath) / statResult.StatData.ModHigh
-		result.PDeath.Weights.AddStat(stat, (meanLow+meanHigh)/2)
+		if window {
+			result.PDeath.Weights.AddStat(stat, (modPlayerHigh.ChanceOfDeath-modPlayerLow.ChanceOfDeath)/(statResult.StatData.ModHigh-statResult.StatData.ModLow))
+		} else {
+			meanLow := (modPlayerLow.ChanceOfDeath - baselinePlayer.ChanceOfDeath) / statResult.StatData.ModLow
+			meanHigh := (modPlayerHigh.ChanceOfDeath - baselinePlayer.ChanceOfDeath) / statResult.StatData.ModHigh
+			result.PDeath.Weights.AddStat(stat, (meanLow+meanHigh)/2)
+		}
 		result.PDeath.WeightsStdev.AddStat(stat, 0)
 	}
 
