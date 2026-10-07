@@ -402,7 +402,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | Mage (Pyroblast talent) | 60 | Pyroblast | 8 | 18809 | 440.00→440.00 | mana→mana | 0→0 | 6000→6000 | 1500→1500 | 60→60 | 12000→12000 | match |  | 519.84-646.16→519.84-646.16 | 1.000→1.000 | declared, matches |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 55 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 54 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
@@ -448,7 +448,6 @@ Active trainables (pipeline.trainables: SkillLineAbility on the class skill line
 | Teleport: Thunder Bluff (3566) | 30→30 | 1 | Arcane | skill_line_ability | 120 mana | 10000 | 0 | power cost, cast time |
 | Mage Armor (6117) | 34→58 | 3 | Arcane | skill_line_ability | 490 mana | 0 | 0 | power cost |
 | Conjure Mana Jade (3552) | 38→38 | 1 | Arcane | skill_line_ability | 800 mana | 3000 | 0 | power cost, cast time |
-| Frostfire Bolt (401502) | 40→60 | 3 | Fire | skill_line_ability | 370 mana | 3000 | 0 | power cost, cast time |
 | Portal: Ironforge (11416) | 40→40 | 1 | Arcane | skill_line_ability | 850 mana | 10000 | 60000 | power cost, cast time, cooldown |
 | Portal: Orgrimmar (11417) | 40→40 | 1 | Arcane | skill_line_ability | 850 mana | 10000 | 60000 | power cost, cast time, cooldown |
 | Portal: Stormwind (10059) | 40→40 | 1 | Arcane | skill_line_ability | 850 mana | 10000 | 60000 | power cost, cast time, cooldown |

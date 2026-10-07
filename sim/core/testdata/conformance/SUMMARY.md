@@ -558,7 +558,7 @@ Per class, the active trainables (power cost, cast time or cooldown; pipeline.tr
 | Class | Active trainables | Not registered |
 |---|---|---|
 | Hunter | 58 | 40 |
-| Mage | 75 | 55 |
+| Mage | 75 | 54 |
 | Warlock | 65 | 41 |
 | Paladin | 57 | 44 |
 | Warrior | 51 | 21 |
@@ -566,6 +566,6 @@ Per class, the active trainables (power cost, cast time or cooldown; pipeline.tr
 | Priest | 67 | 57 |
 | Shaman | 64 | 42 |
 | Rogue | 63 | 33 |
-| **Total** | 564 | 377 |
+| **Total** | 564 | 376 |
 
 <!-- trainables-summary:end -->
