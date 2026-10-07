@@ -22,6 +22,13 @@ func (mage *Mage) registerBlizzardSpell() {
 
 		if config.RequiredLevel <= int(mage.Level) {
 			mage.Blizzard[rank] = mage.GetOrRegisterSpell(config)
+			// The channel's duration lives on the AOE dot's own Aura
+			// (registered on the caster, since IsAOE dots key off the
+			// caster rather than a target - sim/core/dot.go's
+			// createDots), not a RelatedSelfBuff set at config time;
+			// wired here, post-registration, so the conformance report
+			// can read it like any other self-buff spell's duration.
+			mage.Blizzard[rank].RelatedSelfBuff = mage.Blizzard[rank].AOEDot().Aura
 		}
 	}
 }

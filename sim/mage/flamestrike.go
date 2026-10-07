@@ -25,6 +25,11 @@ func (mage *Mage) registerFlamestrikeSpell() {
 
 		if config.RequiredLevel <= int(mage.Level) {
 			mage.Flamestrike[rank] = mage.GetOrRegisterSpell(config)
+			// See blizzard.go's identical wiring: the AOE dot's Aura
+			// lives on the caster, not a target, so it is wired as a
+			// RelatedSelfBuff post-registration for the conformance
+			// report to read.
+			mage.Flamestrike[rank].RelatedSelfBuff = mage.Flamestrike[rank].AOEDot().Aura
 		}
 	}
 }

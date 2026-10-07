@@ -259,8 +259,16 @@ func (mage *Mage) registerPresenceOfMindCD() {
 	})
 
 	mage.PresenceOfMind = mage.RegisterSpell(core.SpellConfig{
-		ActionID: actionID,
-		Flags:    core.SpellFlagNoOnCastComplete,
+		ActionID:      actionID,
+		Flags:         core.SpellFlagNoOnCastComplete,
+		RequiredLevel: 1,
+		// No RelatedSelfBuff: the client's own duration_ms for this
+		// spell is -1 ("until removed"), matching how pomAura really
+		// behaves (it ends on the mage's next applicable cast via
+		// OnCastComplete, not a fixed timer) - wiring pomAura's 15s
+		// safety-net Duration here would turn this row's real match
+		// (-1 client vs. 0 engine, both read as "no fixed duration" by
+		// compare.go's verdictFor) into a false mismatch.
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    mage.NewTimer(),
@@ -320,8 +328,10 @@ func (mage *Mage) registerArcanePowerCD() {
 	core.RegisterPercentDamageModifierEffect(mage.ArcanePowerAura, 1.3)
 
 	spell := mage.RegisterSpell(core.SpellConfig{
-		ActionID: actionID,
-		Flags:    core.SpellFlagNoOnCastComplete,
+		ActionID:        actionID,
+		Flags:           core.SpellFlagNoOnCastComplete,
+		RequiredLevel:   1,
+		RelatedSelfBuff: mage.ArcanePowerAura,
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    mage.NewTimer(),
@@ -446,8 +456,9 @@ func (mage *Mage) registerCombustionCD() {
 	})
 
 	spell := mage.RegisterSpell(core.SpellConfig{
-		ActionID: actionID,
-		Flags:    core.SpellFlagNoOnCastComplete,
+		ActionID:      actionID,
+		Flags:         core.SpellFlagNoOnCastComplete,
+		RequiredLevel: 40,
 		Cast: core.CastConfig{
 			CD: cd,
 		},
