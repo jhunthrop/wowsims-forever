@@ -258,7 +258,7 @@ func (shaman *Shaman) applyImprovedFireTotems() {
 		}
 
 		shaman.OnSpellRegistered(func(spell *core.Spell) {
-			if spell.SpellCode == SpellCode_ShamanFireNovaTotem {
+			if spell.SpellCode == SpellCode_ShamanFireNova {
 				for _, dot := range spell.Dots() {
 					if dot == nil {
 						continue
@@ -971,7 +971,6 @@ func (shaman *Shaman) registerRageOfTheFarseer() {
 func (shaman *Shaman) applyUnmodeledTalents() {
 	t := shaman.Talents
 	_ = t.ElementalWarding      // reduces damage taken from Fire/Frost/Nature; no outgoing-DPS effect.
-	_ = t.ImprovedFireNova      // Fire Nova Totem is not in the modeled rotation; no APL casts it.
 	_ = t.ElementalReach        // spell range and Flame Shock range only; the sim has no positioning.
 	_ = t.Earthbound            // Earthbind Totem immobilize is a CC utility, not damage.
 	_ = t.EarthsGrasp           // Stoneclaw Totem health and Earthbind Totem radius; no DPS effect.

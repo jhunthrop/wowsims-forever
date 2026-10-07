@@ -2,6 +2,7 @@ package shaman
 
 import (
 	"testing"
+	"time"
 
 	"github.com/wowsims/classic/sim/common/clientdamage/clientdamagetest"
 )
@@ -57,5 +58,25 @@ func TestFireTotemDamageMatchesClient(t *testing.T) {
 	clientdamagetest.AssertTable(t, class, clientdamagetest.Direct, "Magma Totem",
 		MagmaTotemAoeSpellId[:], MagmaTotemDamage[:], MagmaTotemSpellCoeff[:])
 	clientdamagetest.AssertTable(t, class, clientdamagetest.Direct, "Fire Nova",
-		FireNovaTotemAoeSpellId[:], FireNovaTotemDamage[:], FireNovaTotemSpellCoeff[:])
+		FireNovaDamageSpellId[:], FireNovaDamage[:], FireNovaDamageCoeff[:])
+}
+
+func TestFireNovaCastMatchesClient(t *testing.T) {
+	class := clientdamagetest.Load(t, clientShamanSpellconst)
+	for rank := 1; rank <= FireNovaLearnRanks; rank++ {
+		id := FireNovaLearnSpellId[rank]
+		spell, ok := class.ByID(id)
+		if !ok {
+			t.Fatalf("Fire Nova rank %d (%d) is not in the client table", rank, id)
+		}
+		if spell.Cost != FireNovaLearnManaCost[rank] {
+			t.Errorf("rank %d cost = %v, client %v", rank, FireNovaLearnManaCost[rank], spell.Cost)
+		}
+		if spell.SpellLevel != FireNovaLearnLevel[rank] {
+			t.Errorf("rank %d level = %d, client %d", rank, FireNovaLearnLevel[rank], spell.SpellLevel)
+		}
+		if got := time.Duration(spell.EffectiveCooldownMS()) * time.Millisecond; got != FireNovaCooldown {
+			t.Errorf("rank %d cooldown = %v, client %v", rank, FireNovaCooldown, got)
+		}
+	}
 }
