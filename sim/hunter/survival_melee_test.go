@@ -89,13 +89,11 @@ func TestRaptorStrikeLevel60DealsClientDamage(t *testing.T) {
 	}
 }
 
-// TestMongooseBiteLevel60CastableWithoutADodgeAndDealsClientDamage
-// guards two fixes: MongooseBiteDamage now reads the client's lower
-// numbers (was vanilla Classic's), and the dodge-gated "Defensive State"
-// aura is gone -- the Forever client's own tooltip
-// (wowhead.com/forever/spell=1495) does not list a dodge requirement, so
-// Mongoose Bite's ExtraCastCondition no longer requires one.
-func TestMongooseBiteLevel60CastableWithoutADodgeAndDealsClientDamage(t *testing.T) {
+// TestMongooseBiteLevel60DealsClientDamageInsideItsWindow
+// guards MongooseBiteDamage reading the client's lower numbers (was
+// vanilla Classic's) and the cast working inside the dodge/Expose Prey
+// window (mongoose_bite_window_test.go covers the gate itself).
+func TestMongooseBiteLevel60DealsClientDamageInsideItsWindow(t *testing.T) {
 	sim, built, target := buildSurvivalMeleeHunter(t)
 
 	if built.MongooseBite == nil {
@@ -107,10 +105,9 @@ func TestMongooseBiteLevel60CastableWithoutADodgeAndDealsClientDamage(t *testing
 	if got, want := MongooseBiteDamage[4].Amount, 57.0; got != want {
 		t.Errorf("Mongoose Bite rank 4 base damage = %v, want %v (client's spellconst amount)", got, want)
 	}
-	// No dodge, no "Defensive State" aura activated: CanCast must still
-	// succeed, proving the removed gate is actually gone.
+	built.MongooseBiteWindowAura.Activate(sim)
 	if !built.MongooseBite.CanCast(sim, target) {
-		t.Fatal("Mongoose Bite is not castable without a prior dodge; the removed gate must still be present somewhere")
+		t.Fatal("Mongoose Bite is not castable inside its dodge/Expose Prey window")
 	}
 
 	built.MongooseBite.ApplyEffects(sim, target, built.MongooseBite)

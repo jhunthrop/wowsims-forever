@@ -46,16 +46,13 @@ func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 			},
 		},
 
-		// FOREVER: vanilla Classic's Mongoose Bite could only be cast
-		// after the hunter dodged an attack ("Defensive State"). The
-		// client's Forever tooltip (wowhead.com/forever/spell=1495) no
-		// longer lists that requirement -- only "Requires main hand
-		// weapon" and "Cannot be used while shapeshifted" -- so the
-		// dodge-gating aura this file used to require is removed; range
-		// and the normal cooldown/GCD/mana are the only gates left.
+		// Every rank's client text is "Can only be performed after you
+		// dodge" (spells 1495/14269-14271): the cast is gated on the
+		// window a dodge or Expose Prey opens (MongooseBiteWindowAura).
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance
+			return hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance && hunter.MongooseBiteWindowAura.IsActive()
 		},
+		RelatedSelfBuff: hunter.MongooseBiteWindowAura,
 
 		BonusCritRating:  float64(hunter.Talents.SavageStrikes) * 10 * core.CritRatingPerCritChance,
 		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
@@ -64,6 +61,9 @@ func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			// The window's single charge is spent before the hit lands,
+			// so an Expose Prey proc off this very hit opens a fresh one.
+			hunter.MongooseBiteWindowAura.Deactivate(sim)
 			// Effect code 121 ("Normalized Weapon Damage", wowhead's
 			// Forever tooltip literally names it that) is this build's
 			// same normalized-weapon-speed effect Aimed Shot's own
@@ -80,11 +80,45 @@ func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 	return spellConfig
 }
 
+const (
+	// mongooseBiteWindowSpellId is Defensive State (client spell 5302):
+	// 5 sec, one charge a melee spell consumes. Expose Prey's own
+	// "Mongoose Bite activated" (1310726) carries identical rows, so both
+	// sources share this one aura.
+	mongooseBiteWindowSpellId int32 = 5302
+	mongooseBiteWindowLength        = 5 * time.Second
+)
+
+// registerMongooseBiteWindow registers the aura the APL gates Mongoose
+// Bite on, opened by a dodge (client text) or by Expose Prey.
+func (hunter *Hunter) registerMongooseBiteWindow() {
+	hunter.MongooseBiteWindowAura = hunter.RegisterAura(core.Aura{
+		Label:    "Mongoose Bite Ready",
+		ActionID: core.ActionID{SpellID: mongooseBiteWindowSpellId},
+		Duration: mongooseBiteWindowLength,
+	})
+
+	hunter.RegisterAura(core.Aura{
+		Label:    "Mongoose Bite Dodge Trigger",
+		Duration: core.NeverExpires,
+		OnReset: func(aura *core.Aura, sim *core.Simulation) {
+			aura.Activate(sim)
+		},
+		OnSpellHitTaken: func(_ *core.Aura, sim *core.Simulation, _ *core.Spell, result *core.SpellResult) {
+			if result.DidDodge() {
+				hunter.MongooseBiteWindowAura.Activate(sim)
+			}
+		},
+	})
+}
+
 func (hunter *Hunter) registerMongooseBiteSpell() {
 	rank := core.HighestRankAtLevel(mongooseBiteLearnLevels, hunter.Level)
 	if rank == 0 {
 		return
 	}
+
+	hunter.registerMongooseBiteWindow()
 
 	config := hunter.getMongooseBiteConfig(rank)
 	hunter.MongooseBite = hunter.GetOrRegisterSpell(config)

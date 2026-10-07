@@ -400,40 +400,6 @@ func TestResourcefulnessGrantsRegenOnCritsAtMaxRank(t *testing.T) {
 	}
 }
 
-func TestExposePreyResetsMongooseBiteOnHuntersMarkTargets(t *testing.T) {
-	// Hunter's Mark is registered pre-finalize through the normal
-	// Debuffs pipeline (debuffs.go), not by calling core.HuntersMarkAura
-	// directly here: that would try to RegisterAura after finalize
-	// (sim.PrePull has already run), which core.Unit.RegisterAura
-	// forbids.
-	sim, hunter, target := newRunningHunterForTalentTest(t, 30, "expose_prey", 2, proto.Hunter_Options_PetNone, 5,
-		&proto.Debuffs{HuntersMark: proto.TristateEffect_TristateEffectRegular})
-	if hunter.MongooseBite == nil {
-		t.Fatal("level-30 hunter has no Mongoose Bite registered")
-	}
-
-	if !target.HasActiveAuraWithTag(core.HuntersMarkAuraTag) {
-		t.Fatal("target did not carry an active Hunter's Mark aura")
-	}
-
-	hunter.MongooseBite.CD.Use(sim) // put it on cooldown so a reset is observable
-	if hunter.MongooseBite.CD.IsReady(sim) {
-		t.Fatal("test setup: Mongoose Bite should be on cooldown")
-	}
-
-	landedMelee := &core.SpellResult{Outcome: core.OutcomeLanded, Target: target}
-	meleeSpell := &core.Spell{}
-
-	reset := false
-	for i := 0; i < 300 && !reset; i++ {
-		hunter.OnSpellHitDealt(sim, meleeSpell, landedMelee)
-		reset = hunter.MongooseBite.CD.IsReady(sim)
-	}
-	if !reset {
-		t.Error("Expose Prey at max rank never reset Mongoose Bite's cooldown over 300 landed attacks against a Hunter's Mark target")
-	}
-}
-
 func TestSurvivalistsDisciplineReducesTrapCooldown(t *testing.T) {
 	withTalent := buildHunterForTalentTest(t, 60, "survivalists_discipline", 2, proto.Hunter_Options_PetNone)
 	withoutTalent := buildHunterForTalentTest(t, 60, "survivalists_discipline", 0, proto.Hunter_Options_PetNone)

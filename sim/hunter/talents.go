@@ -657,19 +657,15 @@ func (hunter *Hunter) applyResourcefulness() {
 // your Mongoose Bite for 5 sec."
 var exposePreyMongooseBiteProcChance = [3]float64{0, 0.05, 0.10}
 
-// applyExposePrey translates "activate your Mongoose Bite" as resetting
-// its cooldown: mongoose_bite.go's own comment records that this
-// client's tooltip dropped vanilla's dodge-gating requirement, so
-// Mongoose Bite is already freely castable within its own 5s cooldown -
-// there is no "activation state" left to grant beyond making it
-// available right now, the same core.Cooldown.Reset() idiom
-// sim/mage/cold_snap_baseline.go (Cold Snap) and sim/rogue/preparation.go
-// use for an identical instant-reset proc.
-//
-// hunter.MongooseBite stays nil until Initialize() registers it
-// (ApplyTalents runs first) and stays nil for BM/MM hunters and a
-// Survival hunter below level 16, so it is read inside the proc
-// closure rather than guarded at the top of this function.
+// exposePreyProcMask is the client's proc type mask for Expose Prey
+// (SpellAuraOptions 340): melee and ranged auto attacks and specials.
+const exposePreyProcMask = core.ProcMaskMeleeOrRanged
+
+// applyExposePrey opens Mongoose Bite's activation window (the same
+// 5 sec Defensive State aura a dodge opens) on a landed melee or ranged
+// attack against a Hunter's Mark target. The window aura stays nil
+// until Initialize() registers Mongoose Bite (ApplyTalents runs first)
+// and for a hunter below level 16, so it is read inside the proc closure.
 func (hunter *Hunter) applyExposePrey() {
 	if hunter.Talents.ExposePrey == 0 {
 		return
@@ -684,14 +680,14 @@ func (hunter *Hunter) applyExposePrey() {
 			aura.Activate(sim)
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if hunter.MongooseBite == nil || !result.Landed() {
+			if hunter.MongooseBiteWindowAura == nil || !result.Landed() || !spell.ProcMask.Matches(exposePreyProcMask) {
 				return
 			}
 			if !result.Target.HasActiveAuraWithTag(core.HuntersMarkAuraTag) {
 				return
 			}
 			if sim.Proc(procChance, "Expose Prey") {
-				hunter.MongooseBite.CD.Reset()
+				hunter.MongooseBiteWindowAura.Activate(sim)
 			}
 		},
 	})

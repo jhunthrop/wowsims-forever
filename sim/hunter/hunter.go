@@ -129,6 +129,10 @@ type Hunter struct {
 
 	CounterattackProcAura *core.Aura
 
+	// MongooseBiteWindowAura is the 5 sec window a dodge or Expose Prey
+	// opens; nil below Mongoose Bite's first rank.
+	MongooseBiteWindowAura *core.Aura
+
 	RapidFireAura       *core.Aura
 	BestialWrathPetAura *core.Aura
 }
