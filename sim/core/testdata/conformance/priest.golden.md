@@ -220,27 +220,16 @@ Each spell below is built with exactly one point in the single talent that grant
 | ShadowPriest (Vampiric Embrace talent) | 60 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 57 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 45 of the class's 53 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Silence (15487) | 0→0 | 1 | Shadow Magic | skill_line_ability | 225 mana | 0 | 45000 | power cost, cooldown |
-| Circle of Healing (401946) | 1→1 | 1 | Holy | skill_line_ability | 0 | 0 | 6000 | cooldown |
-| Dispersion (425294) | 1→1 | 1 | Shadow Magic | skill_line_ability | 0 | 0 | 120000 | cooldown |
-| Eye of the Void (402789) | 1→1 | 1 | Shadow Magic | skill_line_ability | 0 | 0 | 180000 | cooldown |
-| Homunculi (402799) | 1→1 | 1 | Shadow Magic | skill_line_ability | 0 | 0 | 120000 | cooldown |
-| Lesser Heal (2050) | 1→10 | 3 | Holy | skill_line_ability | 75 mana | 2500 | 0 | power cost, cast time |
-| Mind Sear (413259) | 1→1 | 2 | Shadow Magic | skill_line_ability | 0 | 0 | 0 |  |
-| Mind Spike (431655) | 1→1 | 1 | Shadow Magic | skill_line_ability | 0 | 1500 | 0 | cast time |
-| Pain Suppression (402004) | 1→1 | 1 | Discipline | skill_line_ability | 0 | 0 | 180000 | cooldown |
-| Power Word: Barrier (425207) | 1→1 | 1 | Discipline | skill_line_ability | 0 | 0 | 180000 | cooldown |
 | Power Word: Fortitude (1243) | 1→60 | 8 | Discipline | skill_line_ability | 1695 mana | 0 | 0 | power cost |
 | Shadowfiend (401977) | 1→1 | 1 | Shadow Magic | skill_line_ability | 0 | 0 | 300000 | cooldown |
-| Vampiric Touch (402668) | 1→1 | 1 | Shadow Magic | skill_line_ability | 0 | 1500 | 0 | cast time |
-| Void Plague (425204) | 1→1 | 1 | Shadow Magic | skill_line_ability | 0 | 0 | 6000 | cooldown |
+| Lesser Heal (2052) | 4→10 | 2 | Holy | skill_line_ability | 75 mana | 2500 | 0 | power cost, cast time |
 | Power Word: Shield (17) | 6→60 | 11 | Discipline | skill_line_ability | 500 mana | 0 | 4000 | power cost, cooldown |
 | Fade (586) | 8→60 | 6 | Shadow Magic | skill_line_ability | 275 mana | 0 | 30000 | power cost, cooldown |
-| Renew (139) | 8→60 | 22 | Holy | skill_line_ability | 410 mana | 0 | 0 | power cost |
+| Renew (139) | 8→60 | 12 | Holy | skill_line_ability | 410 mana | 0 | 0 | power cost |
 | Confounding Flash (1277455) | 10→10 | 1 | Discipline | skill_line_ability | 0 | 500 | 120000 | cast time, cooldown |
 | Desperate Prayer (13908) | 10→58 | 7 | Holy | skill_line_ability | 0 | 0 | 600000 | cooldown |
 | Divine Grace (1277370) | 10→58 | 7 | Holy | skill_line_ability | 0 | 0 | 600000 | cooldown |
@@ -269,7 +258,7 @@ Active trainables (pipeline.trainables: SkillLineAbility on the class skill line
 | Binding Heal (401937) | 25→56 | 6 | Holy | skill_line_ability | 380 mana | 1500 | 0 | power cost, cast time |
 | Divine Spirit (14752) | 30→60 | 4 | Discipline | skill_line_ability | 970 mana | 0 | 0 | power cost |
 | Mind Control (605) | 30→58 | 3 | Shadow Magic | skill_line_ability | 750 mana | 3000 | 0 | power cost, cast time |
-| Penance (402174) | 30→60 | 12 | Discipline | skill_line_ability | 355 mana | 0 | 12000 | power cost, cooldown |
+| Penance (402174) | 30→60 | 4 | Discipline | skill_line_ability | 355 mana | 0 | 12000 | power cost, cooldown |
 | Prayer of Healing (596) | 30→60 | 5 | Holy | skill_line_ability | 1070 mana | 3000 | 0 | power cost, cast time |
 | Shadow Protection (976) | 30→56 | 3 | Shadow Magic | skill_line_ability | 650 mana | 0 | 0 | power cost |
 | Abolish Disease (552) | 32→32 | 1 | Holy | skill_line_ability | 0 | 0 | 0 |  |
@@ -277,8 +266,13 @@ Active trainables (pipeline.trainables: SkillLineAbility on the class skill line
 | Greater Heal (2060) | 40→60 | 5 | Holy | skill_line_ability | 710 mana | 3000 | 0 | power cost, cast time |
 | Lightwell (724) | 40→60 | 3 | Holy | skill_line_ability | 365 mana | 1500 | 600000 | power cost, cast time, cooldown |
 | Power Infusion (10060) | 40→40 | 1 | Discipline | skill_line_ability | 0 | 0 | 180000 | cooldown |
-| Prayer of Mending (401863) | 40→60 | 4 | Holy | skill_line_ability | 390 mana | 0 | 10000 | power cost, cooldown |
 | Prayer of Fortitude (21562) | 48→60 | 3 | Discipline | skill_line_ability | 3400 mana | 0 | 0 | power cost |
 | Prayer of Shadow Protection (27683) | 56→56 | 1 | Shadow Magic | skill_line_ability | 1300 mana | 0 | 0 | power cost |
 | Prayer of Spirit (27681) | 60→60 | 1 | Discipline | skill_line_ability | 1940 mana | 0 | 0 | power cost |
+
+### In the client, no learn row
+
+Active, ranked, levelled class-family spells the client lists on no SkillLineAbility row (Unstable Affliction, Hydra Shot) that the engine does not register. They are not counted above or in SUMMARY.md; the list also carries spells that are probably not player spellbook entries (rogue poisons, NPC volleys).
+
+None.
 

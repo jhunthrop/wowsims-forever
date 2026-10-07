@@ -112,10 +112,19 @@ func (t Trainable) whyItMatters() string {
 type TrainableGaps struct {
 	// Active is the number of active trainables the class has.
 	Active int
-	// Unregistered lists the active trainables the engine registers no rank
-	// of, ordered by first level, then name.
+	// Unregistered lists the active trainables with a client learn row
+	// (source skill_line_ability) the engine registers no rank of, ordered
+	// by first level, then name.
 	Unregistered []Trainable
+	// NoLearnRow lists the active class-family spells the client lists on no
+	// learn row (source class_spell) that the engine does not register. They
+	// are not counted in Active or Unregistered.
+	NoLearnRow []Trainable
 }
+
+// sourceClassSpell is the pipeline's tag for a spell found through its class
+// family rather than a SkillLineAbility learn row.
+const sourceClassSpell = "class_spell"
 
 // registeredSpellIDs is every spell id the class's presets register in their
 // spellbook at any level in Levels (empty-talent builds), plus every id a
@@ -149,13 +158,25 @@ func compareTrainables(trainables ClassTrainables, registered map[int32]bool) Tr
 		if !t.Active {
 			continue
 		}
+		if t.Source == sourceClassSpell {
+			if !t.registeredIn(registered) {
+				gaps.NoLearnRow = append(gaps.NoLearnRow, t)
+			}
+			continue
+		}
 		gaps.Active++
 		if !t.registeredIn(registered) {
 			gaps.Unregistered = append(gaps.Unregistered, t)
 		}
 	}
-	sort.Slice(gaps.Unregistered, func(i, j int) bool {
-		a, b := gaps.Unregistered[i], gaps.Unregistered[j]
+	sortTrainables(gaps.Unregistered)
+	sortTrainables(gaps.NoLearnRow)
+	return gaps
+}
+
+func sortTrainables(list []Trainable) {
+	sort.Slice(list, func(i, j int) bool {
+		a, b := list[i], list[j]
 		if a.firstLevel() != b.firstLevel() {
 			return a.firstLevel() < b.firstLevel()
 		}
@@ -164,7 +185,6 @@ func compareTrainables(trainables ClassTrainables, registered map[int32]bool) Tr
 		}
 		return a.Ranks[0].ID < b.Ranks[0].ID
 	})
-	return gaps
 }
 
 // trainableGaps runs the comparison for one class end to end.
@@ -174,17 +194,25 @@ func trainableGaps(trainables ClassTrainables, presets []Preset, gatedRows []Row
 }
 
 // renderTrainableGaps writes the "Trainable abilities the engine does not
-// register" section.
+// register" section and its "In the client, no learn row" subsection.
 func renderTrainableGaps(b *strings.Builder, gaps TrainableGaps) {
 	fmt.Fprintf(b, "## Trainable abilities the engine does not register\n\n")
-	fmt.Fprintf(b, "Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. %d of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).\n\n", len(gaps.Unregistered))
-	if len(gaps.Unregistered) == 0 {
+	fmt.Fprintf(b, "Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. %d of the class's %d active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).\n\n", len(gaps.Unregistered), gaps.Active)
+	renderTrainableTable(b, gaps.Unregistered)
+
+	fmt.Fprintf(b, "### In the client, no learn row\n\n")
+	fmt.Fprintf(b, "Active, ranked, levelled class-family spells the client lists on no SkillLineAbility row (Unstable Affliction, Hydra Shot) that the engine does not register. They are not counted above or in SUMMARY.md; the list also carries spells that are probably not player spellbook entries (rogue poisons, NPC volleys).\n\n")
+	renderTrainableTable(b, gaps.NoLearnRow)
+}
+
+func renderTrainableTable(b *strings.Builder, list []Trainable) {
+	if len(list) == 0 {
 		fmt.Fprintf(b, "None.\n\n")
 		return
 	}
 	fmt.Fprintf(b, "| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |\n")
 	fmt.Fprintf(b, "|---|---|---|---|---|---|---|---|---|\n")
-	for _, t := range gaps.Unregistered {
+	for _, t := range list {
 		last := t.Ranks[len(t.Ranks)-1]
 		cost := "0"
 		if t.Cost > 0 {

@@ -62,65 +62,6 @@
       ]
     },
     {
-      "name": "Blackout",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 15268,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 15323,
-          "rank": 2,
-          "level": 0
-        },
-        {
-          "id": 15324,
-          "rank": 3,
-          "level": 0
-        },
-        {
-          "id": 15325,
-          "rank": 4,
-          "level": 0
-        },
-        {
-          "id": 15326,
-          "rank": 5,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Blessed Recovery",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 27811,
-          "rank": 0,
-          "level": 0
-        },
-        {
-          "id": 27813,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Chastise",
       "skill_line": "Holy",
       "source": "skill_line_ability",
@@ -154,23 +95,6 @@
           "id": 1277335,
           "rank": 5,
           "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Circle of Healing",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 6000,
-      "ranks": [
-        {
-          "id": 401946,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -279,23 +203,6 @@
           "id": 1277328,
           "rank": 5,
           "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Darkness",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 15259,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -416,40 +323,6 @@
       ]
     },
     {
-      "name": "Dispersion",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 120000,
-      "ranks": [
-        {
-          "id": 425294,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Divine Fury",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 18530,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Divine Grace",
       "skill_line": "Holy",
       "source": "skill_line_ability",
@@ -542,23 +415,6 @@
           "id": 2651,
           "rank": 0,
           "level": 20
-        }
-      ]
-    },
-    {
-      "name": "Eye of the Void",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 180000,
-      "ranks": [
-        {
-          "id": 402789,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -712,60 +568,6 @@
           "id": 27608,
           "rank": 7,
           "level": 56
-        }
-      ]
-    },
-    {
-      "name": "Focused Casting",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 27828,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Force of Will",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 18544,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 18547,
-          "rank": 2,
-          "level": 0
-        },
-        {
-          "id": 18548,
-          "rank": 3,
-          "level": 0
-        },
-        {
-          "id": 18549,
-          "rank": 4,
-          "level": 0
-        },
-        {
-          "id": 18550,
-          "rank": 5,
-          "level": 0
         }
       ]
     },
@@ -1010,266 +812,6 @@
       ]
     },
     {
-      "name": "Holy Reach",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 27789,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Holy Specialization",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14889,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Homunculi",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 120000,
-      "ranks": [
-        {
-          "id": 402799,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Improved Fade",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 15274,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Healing",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14912,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Inner Fire",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14747,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Mana Burn",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14750,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Mind Blast",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 15273,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Power Word: Fortitude",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14749,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 14767,
-          "rank": 2,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Power Word: Shield",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14748,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Psychic Scream",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 15392,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Renew",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14908,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Shadow Word: Pain",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 15275,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Vampiric Embrace",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 27839,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Increased Fortitude",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 436951,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Inner Fire",
       "skill_line": "Discipline",
       "source": "skill_line_ability",
@@ -1312,40 +854,6 @@
       ]
     },
     {
-      "name": "Inner Focus",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 180000,
-      "ranks": [
-        {
-          "id": 14751,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Inspiration",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14892,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Lesser Heal",
       "skill_line": "Holy",
       "source": "skill_line_ability",
@@ -1355,11 +863,6 @@
       "cast_time_ms": 2500,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 2050,
-          "rank": 1,
-          "level": 1
-        },
         {
           "id": 2052,
           "rank": 2,
@@ -1434,23 +937,6 @@
       ]
     },
     {
-      "name": "Litany of Light",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 1317006,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Mana Burn",
       "skill_line": "Discipline",
       "source": "skill_line_ability",
@@ -1484,40 +970,6 @@
           "id": 10876,
           "rank": 5,
           "level": 56
-        }
-      ]
-    },
-    {
-      "name": "Martyrdom",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14531,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Mental Agility",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14520,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -1648,28 +1100,6 @@
       ]
     },
     {
-      "name": "Mind Sear",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 413259,
-          "rank": 0,
-          "level": 1
-        },
-        {
-          "id": 413260,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Mind Soothe",
       "skill_line": "Shadow Magic",
       "source": "skill_line_ability",
@@ -1697,23 +1127,6 @@
       ]
     },
     {
-      "name": "Mind Spike",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 1500,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 431655,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Mind Vision",
       "skill_line": "Shadow Magic",
       "source": "skill_line_ability",
@@ -1736,23 +1149,6 @@
       ]
     },
     {
-      "name": "Pain Suppression",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 180000,
-      "ranks": [
-        {
-          "id": 402004,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Penance",
       "skill_line": "Discipline",
       "source": "skill_line_ability",
@@ -1768,27 +1164,7 @@
           "level": 30
         },
         {
-          "id": 402284,
-          "rank": 1,
-          "level": 30
-        },
-        {
-          "id": 402289,
-          "rank": 1,
-          "level": 30
-        },
-        {
           "id": 1240720,
-          "rank": 2,
-          "level": 40
-        },
-        {
-          "id": 1240723,
-          "rank": 2,
-          "level": 40
-        },
-        {
-          "id": 1240727,
           "rank": 2,
           "level": 40
         },
@@ -1796,26 +1172,6 @@
           "id": 1240721,
           "rank": 3,
           "level": 50
-        },
-        {
-          "id": 1240724,
-          "rank": 3,
-          "level": 50
-        },
-        {
-          "id": 1240730,
-          "rank": 3,
-          "level": 50
-        },
-        {
-          "id": 1316991,
-          "rank": 4,
-          "level": 60
-        },
-        {
-          "id": 1316993,
-          "rank": 4,
-          "level": 60
         },
         {
           "id": 1316995,
@@ -1838,23 +1194,6 @@
           "id": 10060,
           "rank": 0,
           "level": 40
-        }
-      ]
-    },
-    {
-      "name": "Power Word: Barrier",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 180000,
-      "ranks": [
-        {
-          "id": 425207,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -2042,38 +1381,6 @@
       ]
     },
     {
-      "name": "Prayer of Mending",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 390,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 10000,
-      "ranks": [
-        {
-          "id": 401863,
-          "rank": 0,
-          "level": 40
-        },
-        {
-          "id": 401859,
-          "rank": 1,
-          "level": 40
-        },
-        {
-          "id": 1240826,
-          "rank": 2,
-          "level": 50
-        },
-        {
-          "id": 1240827,
-          "rank": 3,
-          "level": 60
-        }
-      ]
-    },
-    {
       "name": "Prayer of Shadow Protection",
       "skill_line": "Shadow Magic",
       "source": "skill_line_ability",
@@ -2160,17 +1467,7 @@
           "level": 8
         },
         {
-          "id": 425268,
-          "rank": 1,
-          "level": 8
-        },
-        {
           "id": 6074,
-          "rank": 2,
-          "level": 14
-        },
-        {
-          "id": 425269,
           "rank": 2,
           "level": 14
         },
@@ -2180,17 +1477,7 @@
           "level": 20
         },
         {
-          "id": 425270,
-          "rank": 3,
-          "level": 20
-        },
-        {
           "id": 6076,
-          "rank": 4,
-          "level": 26
-        },
-        {
-          "id": 425271,
           "rank": 4,
           "level": 26
         },
@@ -2200,17 +1487,7 @@
           "level": 32
         },
         {
-          "id": 425272,
-          "rank": 5,
-          "level": 32
-        },
-        {
           "id": 6078,
-          "rank": 6,
-          "level": 38
-        },
-        {
-          "id": 425273,
           "rank": 6,
           "level": 38
         },
@@ -2220,17 +1497,7 @@
           "level": 44
         },
         {
-          "id": 425274,
-          "rank": 7,
-          "level": 44
-        },
-        {
           "id": 10928,
-          "rank": 8,
-          "level": 50
-        },
-        {
-          "id": 425275,
           "rank": 8,
           "level": 50
         },
@@ -2245,22 +1512,12 @@
           "level": 56
         },
         {
-          "id": 425276,
-          "rank": 9,
-          "level": 56
-        },
-        {
           "id": 1289450,
           "rank": 9,
           "level": 56
         },
         {
           "id": 25315,
-          "rank": 10,
-          "level": 60
-        },
-        {
-          "id": 425277,
           "rank": 10,
           "level": 60
         }
@@ -2304,23 +1561,6 @@
       ]
     },
     {
-      "name": "Searing Light",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14909,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Shackle Undead",
       "skill_line": "Discipline",
       "source": "skill_line_ability",
@@ -2344,40 +1584,6 @@
           "id": 10955,
           "rank": 3,
           "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Shadow Affinity",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 15318,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Shadow Focus",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 15260,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -2409,40 +1615,6 @@
       ]
     },
     {
-      "name": "Shadow Reach",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 17322,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Shadow Weaving",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 15257,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Shadow Word: Death",
       "skill_line": "Shadow Magic",
       "source": "skill_line_ability",
@@ -2452,11 +1624,6 @@
       "cast_time_ms": 0,
       "cooldown_ms": 15000,
       "ranks": [
-        {
-          "id": 401955,
-          "rank": 0,
-          "level": 1
-        },
         {
           "id": 1309595,
           "rank": 1,
@@ -2554,23 +1721,6 @@
       ]
     },
     {
-      "name": "Shadowform",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 1500,
-      "ranks": [
-        {
-          "id": 15473,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Shadowguard",
       "skill_line": "Shadow Magic",
       "source": "skill_line_ability",
@@ -2643,40 +1793,6 @@
       ]
     },
     {
-      "name": "Silence",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 225,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 45000,
-      "ranks": [
-        {
-          "id": 15487,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Silent Resolve",
-      "skill_line": "Discipline",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14523,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Smite",
       "skill_line": "Holy",
       "source": "skill_line_ability",
@@ -2686,11 +1802,6 @@
       "cast_time_ms": 2500,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 585,
-          "rank": 1,
-          "level": 1
-        },
         {
           "id": 591,
           "rank": 2,
@@ -2725,74 +1836,6 @@
           "id": 10934,
           "rank": 8,
           "level": 54
-        }
-      ]
-    },
-    {
-      "name": "Spell Warding",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 27900,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Spirit Tap",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 15270,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Spiritual Guidance",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14901,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Spiritual Healing",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14898,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -2916,23 +1959,6 @@
       ]
     },
     {
-      "name": "Twilight Focus",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14913,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Vampiric Embrace",
       "skill_line": "Shadow Magic",
       "source": "skill_line_ability",
@@ -2946,40 +1972,6 @@
           "id": 15286,
           "rank": 0,
           "level": 30
-        }
-      ]
-    },
-    {
-      "name": "Vampiric Touch",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 1500,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 402668,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Void Plague",
-      "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 6000,
-      "ranks": [
-        {
-          "id": 425204,
-          "rank": 0,
-          "level": 1
         }
       ]
     }

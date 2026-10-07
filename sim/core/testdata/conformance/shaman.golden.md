@@ -1197,20 +1197,13 @@ Each spell below is built with exactly one point in the single talent that grant
 | ElementalShaman (Water Shield talent) | 60 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 15000→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | mismatch | cooldown_ms 15000->0 | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 42 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 34 of the class's 54 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Healing Rain (415236) | 0→1 | 2 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
-| Ancestral Guidance (409324) | 1→1 | 3 | Elemental Combat | skill_line_ability | 0 | 0 | 0 |  |
-| Decoy Totem (425874) | 1→1 | 1 | Enhancement | skill_line_ability | 0 | 0 | 20000 | cooldown |
-| Earth Shield (408514) | 1→50 | 3 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
-| Healing Wave (331) | 1→60 | 10 | Restoration | skill_line_ability | 620 mana | 3000 | 0 | power cost, cast time |
-| Lava Lash (408507) | 1→1 | 1 | Enhancement | skill_line_ability | 0 | 0 | 6000 | cooldown |
-| Molten Blast (425339) | 1→1 | 2 | Elemental Combat | skill_line_ability | 0 | 0 | 6000 | cooldown |
 | Rockbiter Weapon (8017) | 1→54 | 7 | Enhancement | skill_line_ability | 150 mana | 0 | 0 | power cost |
-| Spirit of the Alpha (408696) | 1→1 | 1 | Enhancement | skill_line_ability | 0 | 0 | 0 |  |
 | Earthbind Totem (2484) | 6→6 | 1 | Elemental Combat | skill_line_ability | 0 | 0 | 15000 | cooldown |
+| Healing Wave (332) | 6→60 | 9 | Restoration | skill_line_ability | 620 mana | 3000 | 0 | power cost, cast time |
 | Stoneclaw Totem (5730) | 8→58 | 6 | Elemental Combat | skill_line_ability | 140 mana | 0 | 30000 | power cost, cooldown |
 | Flametongue Weapon (8024) | 10→56 | 6 | Enhancement | skill_line_ability | 155 mana | 0 | 0 | power cost |
 | Ancestral Spirit (2008) | 12→60 | 5 | Restoration | skill_line_ability | 0 | 10000 | 0 | cast time |
@@ -1242,5 +1235,13 @@ Active trainables (pipeline.trainables: SkillLineAbility on the class skill line
 | Chain Heal (1064) | 40→54 | 3 | Restoration | skill_line_ability | 405 mana | 2500 | 0 | power cost, cast time |
 | Mana Tide Totem (16190) | 40→58 | 3 | Restoration | skill_line_ability | 60 mana | 0 | 300000 | power cost, cooldown |
 | Riptide (408521) | 40→60 | 3 | Restoration | skill_line_ability | 385 mana | 0 | 6000 | power cost, cooldown |
+
+### In the client, no learn row
+
+Active, ranked, levelled class-family spells the client lists on no SkillLineAbility row (Unstable Affliction, Hydra Shot) that the engine does not register. They are not counted above or in SUMMARY.md; the list also carries spells that are probably not player spellbook entries (rogue poisons, NPC volleys).
+
+| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
+|---|---|---|---|---|---|---|---|---|
+| Earth Shield (974) | 50→50 | 1 | n/a | class_spell | 0 | 0 | 0 |  |
 | Fire Nova Totem (27623) | 52→52 | 1 | n/a | class_spell | 640 mana | 0 | 15000 | power cost, cooldown |
 

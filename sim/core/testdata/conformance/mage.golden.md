@@ -396,36 +396,19 @@ Each spell below is built with exactly one point in the single talent that grant
 | Mage (Pyroblast talent) | 60 | Pyroblast | 8 | 18809 | 440.00→440.00 | mana→mana | 0→0 | 6000→6000 | 1500→1500 | 60→60 | 12000→12000 | match |  | 519.84-646.16→519.84-646.16 | 1.000→1.000 | declared, matches |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 55 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 38 of the class's 58 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Living Flame (401558) | 0→1 | 2 | Fire | skill_line_ability | 0 | 0 | 30000 | cooldown |
-| Arcane Barrage (400610) | 1→1 | 1 | Arcane | skill_line_ability | 0 | 0 | 3000 | cooldown |
 | Arcane Intellect (1459) | 1→56 | 6 | Arcane | skill_line_ability | 1510 mana | 0 | 0 | power cost |
-| Arcane Surge (425124) | 1→1 | 1 | Arcane | skill_line_ability | 0 | 0 | 120000 | cooldown |
-| Balefire Bolt (428878) | 1→1 | 1 | Fire | skill_line_ability | 0 | 2500 | 0 | cast time |
-| Frost Armor (168) | 1→20 | 3 | Frost | skill_line_ability | 170 mana | 0 | 0 | power cost |
-| Frozen Orb (440802) | 1→1 | 3 | Frost | skill_line_ability | 0 | 0 | 0 |  |
-| Icy Veins (425121) | 1→1 | 1 | Frost | skill_line_ability | 0 | 0 | 180000 | cooldown |
-| Living Bomb (400613) | 1→1 | 2 | Fire | skill_line_ability | 0 | 0 | 0 |  |
-| Mass Regeneration (412510) | 1→1 | 1 | Arcane | skill_line_ability | 0 | 0 | 12000 | cooldown |
-| Regeneration (401417) | 1→1 | 1 | Arcane | skill_line_ability | 0 | 0 | 0 |  |
-| Rewind Time (401462) | 1→1 | 1 | Arcane | skill_line_ability | 0 | 0 | 30000 | cooldown |
-| Spellfrost Bolt (412532) | 1→1 | 1 | Frost | skill_line_ability | 0 | 2500 | 0 | cast time |
 | Conjure Water (5504) | 4→60 | 8 | Arcane | skill_line_ability | 845 mana | 3000 | 0 | power cost, cast time |
 | Ice Block (11958) | 4→4 | 1 | Frost | skill_line_ability | 15 mana | 0 | 300000 | power cost, cooldown |
 | Conjure Food (587) | 6→60 | 7 | Arcane | skill_line_ability | 705 mana | 3000 | 0 | power cost, cast time |
-| Earth Volley (469057) | 8→8 | 1 | n/a | class_spell | 85 mana | 0 | 0 | power cost |
-| Fire Volley (469055) | 8→8 | 1 | n/a | class_spell | 85 mana | 0 | 0 | power cost |
-| Frost Volley (469056) | 8→8 | 1 | n/a | class_spell | 85 mana | 0 | 0 | power cost |
-| Lightning Volley (469058) | 8→8 | 1 | n/a | class_spell | 85 mana | 0 | 0 | power cost |
 | Polymorph (28271) | 8→60 | 6 | Arcane | skill_line_ability | 150 mana | 1500 | 0 | power cost, cast time |
-| Sleep (700) | 8→20 | 3 | n/a | class_spell | 90 mana | 0 | 0 | power cost |
+| Frost Armor (7300) | 10→20 | 2 | Frost | skill_line_ability | 170 mana | 0 | 0 | power cost |
 | Dampen Magic (604) | 12→60 | 5 | Arcane | skill_line_ability | 500 mana | 0 | 0 | power cost |
 | Slow Fall (130) | 12→12 | 1 | Arcane | skill_line_ability | 40 mana | 0 | 0 | power cost |
 | Amplify Magic (1008) | 18→54 | 4 | Arcane | skill_line_ability | 450 mana | 0 | 0 | power cost |
-| Khadgar's Unlocking (491) | 18→54 | 4 | n/a | class_spell | 460 mana | 10000 | 0 | power cost, cast time |
 | Remove Lesser Curse (475) | 18→18 | 1 | Arcane | skill_line_ability | 0 | 0 | 0 |  |
 | Blink (1953) | 20→20 | 1 | Arcane | skill_line_ability | 0 | 0 | 15000 | cooldown |
 | Fire Ward (543) | 20→60 | 10 | Fire | skill_line_ability | 320 mana | 0 | 30000 | power cost, cooldown |
@@ -455,4 +438,17 @@ Active trainables (pipeline.trainables: SkillLineAbility on the class skill line
 | Conjure Mana Ruby (10054) | 58→58 | 1 | Arcane | skill_line_ability | 1470 mana | 3000 | 0 | power cost, cast time |
 | Felfire (24530) | 60→60 | 1 | Fire | skill_line_ability | 100 mana | 0 | 0 | power cost |
 | Polymorph: Cow (28270) | 60→60 | 1 | Arcane | skill_line_ability | 150 mana | 1500 | 0 | power cost, cast time |
+
+### In the client, no learn row
+
+Active, ranked, levelled class-family spells the client lists on no SkillLineAbility row (Unstable Affliction, Hydra Shot) that the engine does not register. They are not counted above or in SUMMARY.md; the list also carries spells that are probably not player spellbook entries (rogue poisons, NPC volleys).
+
+| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
+|---|---|---|---|---|---|---|---|---|
+| Earth Volley (469057) | 8→8 | 1 | n/a | class_spell | 85 mana | 0 | 0 | power cost |
+| Fire Volley (469055) | 8→8 | 1 | n/a | class_spell | 85 mana | 0 | 0 | power cost |
+| Frost Volley (469056) | 8→8 | 1 | n/a | class_spell | 85 mana | 0 | 0 | power cost |
+| Lightning Volley (469058) | 8→8 | 1 | n/a | class_spell | 85 mana | 0 | 0 | power cost |
+| Sleep (700) | 8→20 | 3 | n/a | class_spell | 90 mana | 0 | 0 | power cost |
+| Khadgar's Unlocking (491) | 18→54 | 4 | n/a | class_spell | 460 mana | 10000 | 0 | power cost, cast time |
 

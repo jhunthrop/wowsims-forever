@@ -20,40 +20,6 @@
       ]
     },
     {
-      "name": "Avenging Wrath",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 180000,
-      "ranks": [
-        {
-          "id": 407788,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Benediction",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20101,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Blessing of Freedom",
       "skill_line": "Protection",
       "source": "skill_line_ability",
@@ -408,23 +374,6 @@
       ]
     },
     {
-      "name": "Divine Favor",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 120000,
-      "ranks": [
-        {
-          "id": 20216,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Divine Intervention",
       "skill_line": "Protection",
       "source": "skill_line_ability",
@@ -438,23 +387,6 @@
           "id": 19752,
           "rank": 0,
           "level": 30
-        }
-      ]
-    },
-    {
-      "name": "Divine Light",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 2500,
-      "cooldown_ms": 8000,
-      "ranks": [
-        {
-          "id": 458856,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -491,23 +423,6 @@
       ]
     },
     {
-      "name": "Divine Sacrifice",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 120000,
-      "ranks": [
-        {
-          "id": 407804,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Divine Shield",
       "skill_line": "Protection",
       "source": "skill_line_ability",
@@ -530,45 +445,6 @@
       ]
     },
     {
-      "name": "Divine Storm",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 407778,
-          "rank": 0,
-          "level": 1
-        },
-        {
-          "id": 407784,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Enhanced Blessings",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 435984,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Exorcism",
       "skill_line": "Holy",
       "source": "skill_line_ability",
@@ -584,17 +460,7 @@
           "level": 20
         },
         {
-          "id": 415068,
-          "rank": 1,
-          "level": 20
-        },
-        {
           "id": 5614,
-          "rank": 2,
-          "level": 28
-        },
-        {
-          "id": 415069,
           "rank": 2,
           "level": 28
         },
@@ -604,17 +470,7 @@
           "level": 36
         },
         {
-          "id": 415070,
-          "rank": 3,
-          "level": 36
-        },
-        {
           "id": 10312,
-          "rank": 4,
-          "level": 44
-        },
-        {
-          "id": 415071,
           "rank": 4,
           "level": 44
         },
@@ -624,58 +480,9 @@
           "level": 52
         },
         {
-          "id": 415072,
-          "rank": 5,
-          "level": 52
-        },
-        {
           "id": 10314,
           "rank": 6,
           "level": 60
-        },
-        {
-          "id": 415073,
-          "rank": 6,
-          "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Exorcist",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 415076,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Eye for an Eye",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 9799,
-          "rank": 0,
-          "level": 0
-        },
-        {
-          "id": 25997,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -716,41 +523,6 @@
       "cast_time_ms": 1500,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 412020,
-          "rank": 0,
-          "level": 1
-        },
-        {
-          "id": 19993,
-          "rank": 0,
-          "level": 20
-        },
-        {
-          "id": 1313342,
-          "rank": 0,
-          "level": 26
-        },
-        {
-          "id": 1313343,
-          "rank": 0,
-          "level": 34
-        },
-        {
-          "id": 1313344,
-          "rank": 0,
-          "level": 42
-        },
-        {
-          "id": 1313345,
-          "rank": 0,
-          "level": 50
-        },
-        {
-          "id": 1313346,
-          "rank": 0,
-          "level": 58
-        },
         {
           "id": 19750,
           "rank": 1,
@@ -906,23 +678,6 @@
       ]
     },
     {
-      "name": "Guardian's Favor",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20174,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Hammer of Justice",
       "skill_line": "Protection",
       "source": "skill_line_ability",
@@ -999,23 +754,6 @@
       ]
     },
     {
-      "name": "Healing Light",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20237,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Holy Light",
       "skill_line": "Holy",
       "source": "skill_line_ability",
@@ -1025,56 +763,6 @@
       "cast_time_ms": 2500,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 19982,
-          "rank": 0,
-          "level": 1
-        },
-        {
-          "id": 19981,
-          "rank": 0,
-          "level": 6
-        },
-        {
-          "id": 19980,
-          "rank": 0,
-          "level": 14
-        },
-        {
-          "id": 19968,
-          "rank": 0,
-          "level": 22
-        },
-        {
-          "id": 1313348,
-          "rank": 0,
-          "level": 30
-        },
-        {
-          "id": 1313349,
-          "rank": 0,
-          "level": 38
-        },
-        {
-          "id": 1313350,
-          "rank": 0,
-          "level": 46
-        },
-        {
-          "id": 1313352,
-          "rank": 0,
-          "level": 50
-        },
-        {
-          "id": 1313351,
-          "rank": 0,
-          "level": 54
-        },
-        {
-          "id": 635,
-          "rank": 1,
-          "level": 1
-        },
         {
           "id": 635,
           "rank": 1,
@@ -1123,23 +811,6 @@
       ]
     },
     {
-      "name": "Holy Power",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 5923,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Holy Shield",
       "skill_line": "Protection",
       "source": "skill_line_ability",
@@ -1171,10 +842,10 @@
       "skill_line": "Holy",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 0,
+      "cost": 325,
       "cost_type": 0,
       "cast_time_ms": 0,
-      "cooldown_ms": 0,
+      "cooldown_ms": 10000,
       "ranks": [
         {
           "id": 1311606,
@@ -1187,42 +858,12 @@
           "level": 40
         },
         {
-          "id": 25912,
-          "rank": 2,
-          "level": 40
-        },
-        {
-          "id": 25914,
-          "rank": 2,
-          "level": 40
-        },
-        {
           "id": 20929,
           "rank": 3,
           "level": 48
         },
         {
-          "id": 25911,
-          "rank": 3,
-          "level": 48
-        },
-        {
-          "id": 25913,
-          "rank": 3,
-          "level": 48
-        },
-        {
           "id": 20930,
-          "rank": 4,
-          "level": 56
-        },
-        {
-          "id": 25902,
-          "rank": 4,
-          "level": 56
-        },
-        {
-          "id": 25903,
           "rank": 4,
           "level": 56
         }
@@ -1313,311 +954,6 @@
       ]
     },
     {
-      "name": "Horn of Lordaeron",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 20000,
-      "ranks": [
-        {
-          "id": 425600,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Illumination",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20210,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Blessing of Might",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20042,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 20045,
-          "rank": 2,
-          "level": 0
-        },
-        {
-          "id": 20046,
-          "rank": 3,
-          "level": 0
-        },
-        {
-          "id": 20047,
-          "rank": 4,
-          "level": 0
-        },
-        {
-          "id": 20048,
-          "rank": 5,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Blessing of Wisdom",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20244,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 20245,
-          "rank": 2,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Concentration Aura",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20254,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Devotion Aura",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20138,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Flash of Light",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20249,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 20250,
-          "rank": 2,
-          "level": 0
-        },
-        {
-          "id": 20251,
-          "rank": 3,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Hammer of Justice",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20487,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Judgement",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 25956,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Retribution Aura",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20091,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 20092,
-          "rank": 2,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Righteous Fury",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20468,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Seal of Fury",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 1314103,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Seal of the Crusader",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20335,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 20336,
-          "rank": 2,
-          "level": 0
-        },
-        {
-          "id": 20337,
-          "rank": 3,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Seals",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20224,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Inspiration Exemplar",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 407880,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Judgement",
       "skill_line": "Retribution",
       "source": "skill_line_ability",
@@ -1631,314 +967,6 @@
           "id": 20271,
           "rank": 0,
           "level": 4
-        }
-      ]
-    },
-    {
-      "name": "Judgement of Command",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20425,
-          "rank": 1,
-          "level": 20
-        },
-        {
-          "id": 20467,
-          "rank": 1,
-          "level": 20
-        },
-        {
-          "id": 20962,
-          "rank": 2,
-          "level": 30
-        },
-        {
-          "id": 20963,
-          "rank": 2,
-          "level": 30
-        },
-        {
-          "id": 20961,
-          "rank": 3,
-          "level": 40
-        },
-        {
-          "id": 20964,
-          "rank": 3,
-          "level": 40
-        },
-        {
-          "id": 20965,
-          "rank": 4,
-          "level": 50
-        },
-        {
-          "id": 20967,
-          "rank": 4,
-          "level": 50
-        },
-        {
-          "id": 20966,
-          "rank": 5,
-          "level": 60
-        },
-        {
-          "id": 20968,
-          "rank": 5,
-          "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Judgement of Fury",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20183,
-          "rank": 3,
-          "level": 25
-        },
-        {
-          "id": 20411,
-          "rank": 4,
-          "level": 34
-        },
-        {
-          "id": 20412,
-          "rank": 5,
-          "level": 42
-        },
-        {
-          "id": 20413,
-          "rank": 6,
-          "level": 50
-        },
-        {
-          "id": 20414,
-          "rank": 7,
-          "level": 58
-        }
-      ]
-    },
-    {
-      "name": "Judgement of Justice",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20184,
-          "rank": 1,
-          "level": 22
-        }
-      ]
-    },
-    {
-      "name": "Judgement of Light",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20185,
-          "rank": 1,
-          "level": 30
-        },
-        {
-          "id": 20344,
-          "rank": 2,
-          "level": 40
-        },
-        {
-          "id": 20345,
-          "rank": 3,
-          "level": 50
-        },
-        {
-          "id": 20346,
-          "rank": 4,
-          "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Judgement of Martyrdom",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 407803,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Judgement of Righteousness",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20187,
-          "rank": 1,
-          "level": 1
-        },
-        {
-          "id": 20280,
-          "rank": 2,
-          "level": 10
-        },
-        {
-          "id": 20281,
-          "rank": 3,
-          "level": 18
-        },
-        {
-          "id": 20282,
-          "rank": 4,
-          "level": 26
-        },
-        {
-          "id": 20283,
-          "rank": 5,
-          "level": 34
-        },
-        {
-          "id": 20284,
-          "rank": 6,
-          "level": 42
-        },
-        {
-          "id": 20285,
-          "rank": 7,
-          "level": 50
-        },
-        {
-          "id": 20286,
-          "rank": 8,
-          "level": 58
-        }
-      ]
-    },
-    {
-      "name": "Judgement of Wisdom",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20186,
-          "rank": 1,
-          "level": 38
-        },
-        {
-          "id": 20354,
-          "rank": 2,
-          "level": 48
-        },
-        {
-          "id": 20355,
-          "rank": 3,
-          "level": 58
-        }
-      ]
-    },
-    {
-      "name": "Judgement of the Crusader",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20188,
-          "rank": 2,
-          "level": 12
-        },
-        {
-          "id": 20300,
-          "rank": 3,
-          "level": 22
-        },
-        {
-          "id": 20301,
-          "rank": 4,
-          "level": 32
-        },
-        {
-          "id": 20302,
-          "rank": 5,
-          "level": 42
-        },
-        {
-          "id": 20303,
-          "rank": 6,
-          "level": 52
-        }
-      ]
-    },
-    {
-      "name": "Lasting Judgement",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20359,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 20360,
-          "rank": 2,
-          "level": 0
-        },
-        {
-          "id": 20361,
-          "rank": 3,
-          "level": 0
         }
       ]
     },
@@ -1997,23 +1025,6 @@
       ]
     },
     {
-      "name": "Precision",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20189,
-          "rank": 1,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Purify",
       "skill_line": "Holy",
       "source": "skill_line_ability",
@@ -2027,40 +1038,6 @@
           "id": 1152,
           "rank": 0,
           "level": 8
-        }
-      ]
-    },
-    {
-      "name": "Pursuit of Justice",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 26022,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Rebuke",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 15000,
-      "ranks": [
-        {
-          "id": 425609,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -2166,11 +1143,6 @@
       "cooldown_ms": 0,
       "ranks": [
         {
-          "id": 407627,
-          "rank": 0,
-          "level": 1
-        },
-        {
           "id": 25780,
           "rank": 0,
           "level": 16
@@ -2178,26 +1150,9 @@
       ]
     },
     {
-      "name": "Righteous Judgement",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 440677,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Sacred Shield",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
+      "skill_line": "",
+      "source": "class_spell",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -2205,31 +1160,9 @@
       "cooldown_ms": 0,
       "ranks": [
         {
-          "id": 412019,
-          "rank": 0,
-          "level": 1
-        },
-        {
           "id": 53601,
           "rank": 1,
           "level": 80
-        }
-      ]
-    },
-    {
-      "name": "Sanctified Judgement",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 1311074,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -2367,28 +1300,6 @@
       ]
     },
     {
-      "name": "Seal of Martyrdom",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 407799,
-          "rank": 0,
-          "level": 0
-        },
-        {
-          "id": 407798,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Seal of Righteousness",
       "skill_line": "Holy",
       "source": "skill_line_ability",
@@ -2398,11 +1309,6 @@
       "cast_time_ms": 0,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 20154,
-          "rank": 1,
-          "level": 1
-        },
         {
           "id": 21084,
           "rank": 1,
@@ -2528,11 +1434,6 @@
           "id": 5502,
           "rank": 0,
           "level": 20
-        },
-        {
-          "id": 5502,
-          "rank": 0,
-          "level": 20
         }
       ]
     },
@@ -2560,40 +1461,6 @@
           "id": 19896,
           "rank": 3,
           "level": 52
-        }
-      ]
-    },
-    {
-      "name": "Shield of Righteousness",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 6000,
-      "ranks": [
-        {
-          "id": 440658,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Spiritual Focus",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20205,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -2655,79 +1522,6 @@
           "id": 10326,
           "rank": 3,
           "level": 52
-        }
-      ]
-    },
-    {
-      "name": "Twist of Light",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 1310735,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Unyielding Faith",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 9453,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Vengeance",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20049,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Vindication",
-      "skill_line": "Retribution",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 9452,
-          "rank": 0,
-          "level": 0
-        },
-        {
-          "id": 67,
-          "rank": 1,
-          "level": 0
         }
       ]
     },

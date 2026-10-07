@@ -288,40 +288,6 @@
       ]
     },
     {
-      "name": "Auto Shot",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 75,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Barrage",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19461,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Beast Lore",
       "skill_line": "Beast Mastery",
       "source": "skill_line_ability",
@@ -335,40 +301,6 @@
           "id": 1462,
           "rank": 0,
           "level": 24
-        }
-      ]
-    },
-    {
-      "name": "Bestial Discipline",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19590,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Bestial Swiftness",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19596,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -429,108 +361,6 @@
       ]
     },
     {
-      "name": "Carve",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 6000,
-      "ranks": [
-        {
-          "id": 425711,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Chimera Shot",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": -1000000,
-      "cooldown_ms": 6000,
-      "ranks": [
-        {
-          "id": 409433,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Chimera Shot - Scorpid",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": -1000000,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 409495,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Chimera Shot - Serpent",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": -1000000,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 409493,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Chimera Shot - Viper",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": -1000000,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 409494,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Clever Traps",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19239,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Concussive Shot",
       "skill_line": "Marksmanship",
       "source": "skill_line_ability",
@@ -576,23 +406,6 @@
           "id": 20910,
           "rank": 4,
           "level": 54
-        }
-      ]
-    },
-    {
-      "name": "Deadly Aspects",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19552,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -717,23 +530,6 @@
       ]
     },
     {
-      "name": "Efficiency",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19416,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Enchanted Flare",
       "skill_line": "Marksmanship",
       "source": "skill_line_ability",
@@ -747,40 +543,6 @@
           "id": 1221404,
           "rank": 0,
           "level": 32
-        }
-      ]
-    },
-    {
-      "name": "Endurance Training",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19583,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Entrapment",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19184,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -890,40 +652,6 @@
       ]
     },
     {
-      "name": "Ferocity",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19598,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Flanking Strike",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 30000,
-      "ranks": [
-        {
-          "id": 415320,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Flare",
       "skill_line": "Marksmanship",
       "source": "skill_line_ability",
@@ -973,23 +701,6 @@
       ]
     },
     {
-      "name": "Frenzy",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19621,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Frost Trap",
       "skill_line": "Survival",
       "source": "skill_line_ability",
@@ -1007,23 +718,6 @@
       ]
     },
     {
-      "name": "Hawk Eye",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19498,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Heart of the Lion",
       "skill_line": "Survival",
       "source": "skill_line_ability",
@@ -1037,33 +731,6 @@
           "id": 409580,
           "rank": 0,
           "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Humanoid Slaying",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19151,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 19152,
-          "rank": 2,
-          "level": 0
-        },
-        {
-          "id": 19153,
-          "rank": 3,
-          "level": 0
         }
       ]
     },
@@ -1196,118 +863,6 @@
       ]
     },
     {
-      "name": "Improved Arcane Shot",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19454,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Aspect of the Monkey",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19549,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Concussive Shot",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19407,
-          "rank": 1,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Eyes of the Beast",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19557,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 19558,
-          "rank": 2,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Feign Death",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19286,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 19287,
-          "rank": 2,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Hunter's Mark",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19421,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Improved Mend Pet",
       "skill_line": "Beast Mastery",
       "source": "skill_line_ability",
@@ -1318,82 +873,9 @@
       "cooldown_ms": 0,
       "ranks": [
         {
-          "id": 19572,
-          "rank": 0,
-          "level": 0
-        },
-        {
           "id": 24406,
           "rank": 0,
           "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Improved Revive Pet",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 24443,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Serpent Sting",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19464,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Tracking",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 24293,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Wing Clip",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19228,
-          "rank": 1,
-          "level": 0
         }
       ]
     },
@@ -1411,23 +893,6 @@
           "id": 19577,
           "rank": 0,
           "level": 30
-        }
-      ]
-    },
-    {
-      "name": "Kill Command",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 60000,
-      "ranks": [
-        {
-          "id": 409379,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -1460,40 +925,6 @@
           "id": 1299332,
           "rank": 4,
           "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Lethal Attacks",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19426,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Lightning Reflexes",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19168,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -1577,45 +1008,6 @@
       ]
     },
     {
-      "name": "Monster Slaying",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 24294,
-          "rank": 2,
-          "level": 0
-        },
-        {
-          "id": 24295,
-          "rank": 3,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Mortal Shots",
-      "skill_line": "Marksmanship",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19485,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Multi-Shot",
       "skill_line": "Marksmanship",
       "source": "skill_line_ability",
@@ -1629,23 +1021,6 @@
           "id": 2643,
           "rank": 0,
           "level": 18
-        }
-      ]
-    },
-    {
-      "name": "Pathfinding",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19559,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -1677,32 +1052,7 @@
       "cooldown_ms": 6000,
       "ranks": [
         {
-          "id": 2973,
-          "rank": 1,
-          "level": 1
-        },
-        {
-          "id": 409691,
-          "rank": 1,
-          "level": 1
-        },
-        {
-          "id": 415335,
-          "rank": 1,
-          "level": 1
-        },
-        {
           "id": 14260,
-          "rank": 2,
-          "level": 8
-        },
-        {
-          "id": 409693,
-          "rank": 2,
-          "level": 8
-        },
-        {
-          "id": 415336,
           "rank": 2,
           "level": 8
         },
@@ -1712,27 +1062,7 @@
           "level": 16
         },
         {
-          "id": 409748,
-          "rank": 3,
-          "level": 16
-        },
-        {
-          "id": 415337,
-          "rank": 3,
-          "level": 16
-        },
-        {
           "id": 14262,
-          "rank": 4,
-          "level": 24
-        },
-        {
-          "id": 409750,
-          "rank": 4,
-          "level": 24
-        },
-        {
-          "id": 415338,
           "rank": 4,
           "level": 24
         },
@@ -1742,27 +1072,7 @@
           "level": 32
         },
         {
-          "id": 409751,
-          "rank": 5,
-          "level": 32
-        },
-        {
-          "id": 415340,
-          "rank": 5,
-          "level": 32
-        },
-        {
           "id": 14264,
-          "rank": 6,
-          "level": 40
-        },
-        {
-          "id": 409752,
-          "rank": 6,
-          "level": 40
-        },
-        {
-          "id": 415341,
           "rank": 6,
           "level": 40
         },
@@ -1772,46 +1082,9 @@
           "level": 48
         },
         {
-          "id": 409754,
-          "rank": 7,
-          "level": 48
-        },
-        {
-          "id": 415342,
-          "rank": 7,
-          "level": 48
-        },
-        {
           "id": 14266,
           "rank": 8,
           "level": 56
-        },
-        {
-          "id": 409755,
-          "rank": 8,
-          "level": 56
-        },
-        {
-          "id": 415343,
-          "rank": 8,
-          "level": 56
-        }
-      ]
-    },
-    {
-      "name": "Readiness",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 300000,
-      "ranks": [
-        {
-          "id": 23989,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -1829,23 +1102,6 @@
           "id": 982,
           "rank": 0,
           "level": 10
-        }
-      ]
-    },
-    {
-      "name": "Savage Strikes",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19159,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -1915,7 +1171,7 @@
       "skill_line": "Marksmanship",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 0,
+      "cost": 250,
       "cost_type": 0,
       "cast_time_ms": -1000000,
       "cooldown_ms": 0,
@@ -1926,17 +1182,7 @@
           "level": 4
         },
         {
-          "id": 425728,
-          "rank": 1,
-          "level": 4
-        },
-        {
           "id": 13549,
-          "rank": 2,
-          "level": 10
-        },
-        {
-          "id": 425729,
           "rank": 2,
           "level": 10
         },
@@ -1946,17 +1192,7 @@
           "level": 18
         },
         {
-          "id": 425730,
-          "rank": 3,
-          "level": 18
-        },
-        {
           "id": 13551,
-          "rank": 4,
-          "level": 26
-        },
-        {
-          "id": 425732,
           "rank": 4,
           "level": 26
         },
@@ -1966,17 +1202,7 @@
           "level": 34
         },
         {
-          "id": 425733,
-          "rank": 5,
-          "level": 34
-        },
-        {
           "id": 13553,
-          "rank": 6,
-          "level": 42
-        },
-        {
-          "id": 425734,
           "rank": 6,
           "level": 42
         },
@@ -1986,27 +1212,12 @@
           "level": 50
         },
         {
-          "id": 425735,
-          "rank": 7,
-          "level": 50
-        },
-        {
           "id": 13555,
           "rank": 8,
           "level": 58
         },
         {
-          "id": 425736,
-          "rank": 8,
-          "level": 58
-        },
-        {
           "id": 25295,
-          "rank": 9,
-          "level": 60
-        },
-        {
-          "id": 425737,
           "rank": 9,
           "level": 60
         }
@@ -2031,11 +1242,6 @@
           "id": 1310785,
           "rank": 2,
           "level": 48
-        },
-        {
-          "id": 1310786,
-          "rank": 3,
-          "level": 58
         }
       ]
     },
@@ -2073,23 +1279,6 @@
           "id": 1264482,
           "rank": 5,
           "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Spirit Bond",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19578,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -2143,57 +1332,6 @@
       ]
     },
     {
-      "name": "Surefooted",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19290,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Survival Tactics",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19376,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Survivalist",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19255,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Tame Beast",
       "skill_line": "Beast Mastery",
       "source": "skill_line_ability",
@@ -2204,11 +1342,6 @@
       "cooldown_ms": 0,
       "ranks": [
         {
-          "id": 13535,
-          "rank": 0,
-          "level": 0
-        },
-        {
           "id": 1515,
           "rank": 0,
           "level": 10
@@ -2217,23 +1350,6 @@
           "id": 13481,
           "rank": 0,
           "level": 10
-        }
-      ]
-    },
-    {
-      "name": "Thick Hide",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19609,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -2424,23 +1540,6 @@
           "id": 20906,
           "rank": 5,
           "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Unleashed Fury",
-      "skill_line": "Beast Mastery",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19616,
-          "rank": 0,
-          "level": 0
         }
       ]
     },

@@ -50,23 +50,6 @@
       ]
     },
     {
-      "name": "Battle Stance",
-      "skill_line": "Arms",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 1,
-      "cast_time_ms": 0,
-      "cooldown_ms": 1000,
-      "ranks": [
-        {
-          "id": 2457,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Battle Stance Passive",
       "skill_line": "Arms",
       "source": "skill_line_ability",
@@ -282,23 +265,6 @@
       ]
     },
     {
-      "name": "Commanding Shout",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 403215,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Concussion Blow",
       "skill_line": "Protection",
       "source": "skill_line_ability",
@@ -422,19 +388,14 @@
     },
     {
       "name": "Devastate",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "skill_line": "",
+      "source": "class_spell",
       "active": true,
       "cost": 150,
       "cost_type": 1,
       "cast_time_ms": 0,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 403196,
-          "rank": 0,
-          "level": 1
-        },
         {
           "id": 20243,
           "rank": 1,
@@ -460,40 +421,6 @@
       ]
     },
     {
-      "name": "Dual Wield Specialization",
-      "skill_line": "Fury",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 23584,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Enraged Regeneration",
-      "skill_line": "Fury",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 180000,
-      "ranks": [
-        {
-          "id": 402913,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Execute",
       "skill_line": "Fury",
       "source": "skill_line_ability",
@@ -503,11 +430,6 @@
       "cast_time_ms": 0,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 20647,
-          "rank": 0,
-          "level": 1
-        },
         {
           "id": 5308,
           "rank": 1,
@@ -573,11 +495,6 @@
       "cooldown_ms": 0,
       "ranks": [
         {
-          "id": 78,
-          "rank": 1,
-          "level": 1
-        },
-        {
           "id": 284,
           "rank": 2,
           "level": 8
@@ -637,23 +554,6 @@
       ]
     },
     {
-      "name": "Impale",
-      "skill_line": "Arms",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16493,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Improved Battle Shout",
       "skill_line": "Fury",
       "source": "skill_line_ability",
@@ -687,23 +587,6 @@
           "id": 12861,
           "rank": 5,
           "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Improved Berserker Rage",
-      "skill_line": "Fury",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20500,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -835,23 +718,6 @@
       ]
     },
     {
-      "name": "Improved Execute",
-      "skill_line": "Fury",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20502,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Improved Hamstring",
       "skill_line": "Arms",
       "source": "skill_line_ability",
@@ -882,45 +748,6 @@
           "id": 12282,
           "rank": 0,
           "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Improved Intercept",
-      "skill_line": "Fury",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 20504,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Intimidating Shout",
-      "skill_line": "Fury",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19870,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 19871,
-          "rank": 2,
-          "level": 0
         }
       ]
     },
@@ -1220,23 +1047,6 @@
       ]
     },
     {
-      "name": "Meathook",
-      "skill_line": "Arms",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 150,
-      "cost_type": 1,
-      "cast_time_ms": 0,
-      "cooldown_ms": 35000,
-      "ranks": [
-        {
-          "id": 403228,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Mocking Blow",
       "skill_line": "Arms",
       "source": "skill_line_ability",
@@ -1378,57 +1188,6 @@
           "id": 6554,
           "rank": 2,
           "level": 58
-        }
-      ]
-    },
-    {
-      "name": "Quick Strike",
-      "skill_line": "Arms",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 200,
-      "cost_type": 1,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 429765,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Raging Blow",
-      "skill_line": "Fury",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 8000,
-      "ranks": [
-        {
-          "id": 402911,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Rallying Cry",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 180000,
-      "ranks": [
-        {
-          "id": 426490,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -1662,23 +1421,6 @@
           "id": 871,
           "rank": 0,
           "level": 28
-        }
-      ]
-    },
-    {
-      "name": "Shockwave",
-      "skill_line": "Arms",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 150,
-      "cost_type": 1,
-      "cast_time_ms": 0,
-      "cooldown_ms": 20000,
-      "ranks": [
-        {
-          "id": 440488,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -1918,23 +1660,6 @@
           "id": 461810,
           "rank": 6,
           "level": 58
-        }
-      ]
-    },
-    {
-      "name": "Valor of Azeroth",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 60000,
-      "ranks": [
-        {
-          "id": 461475,
-          "rank": 0,
-          "level": 2
         }
       ]
     },
