@@ -108,48 +108,6 @@
       }
     },
     {
-      "notes": "Keep Flame Shock on the target; it is cheap relative to its damage and does not compete with the GCD budget much.",
-      "action": {
-        "condition": {
-          "not": {
-            "val": {
-              "dotIsActive": {
-                "spellId": {
-                  "spellId": 29228,
-                  "rank": 6
-                }
-              }
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 29228,
-            "rank": 6
-          }
-        }
-      }
-    },
-    {
-      "notes": "Lava Burst on cooldown while Flame Shock is up: the talent's own tooltip is a flat +20% damage bonus against a Flame-Shocked target, and Flame Shock is kept up continuously by the line above, so gating on the dot rather than casting unconditionally keeps this from firing before Flame Shock's own first landed cast.",
-      "action": {
-        "condition": {
-          "dotIsActive": {
-            "spellId": {
-              "spellId": 29228,
-              "rank": 6
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 1238300,
-            "rank": 3
-          }
-        }
-      }
-    },
-    {
       "notes": "2 or more targets: Chain Lightning hits all of them for close to single-target Lightning Bolt damage.",
       "action": {
         "condition": {
@@ -174,7 +132,18 @@
       }
     },
     {
-      "notes": "Earth Shock is a mana dump once mana falls under 30 percent; it shares a cooldown with Flame Shock only, not Chain Lightning, so it's safe to slot in here.",
+      "notes": "Lightning Bolt is the rest of the single-target rotation.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 15208,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
+      "notes": "Earth Shock sits below Lightning Bolt, so it only fires when Lightning Bolt cannot be cast; the search found Lightning Bolt on every global beats shocking at low mana.",
       "action": {
         "condition": {
           "cmp": {
@@ -193,17 +162,6 @@
           "spellId": {
             "spellId": 10414,
             "rank": 7
-          }
-        }
-      }
-    },
-    {
-      "notes": "Lightning Bolt is the rest of the single-target rotation.",
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 15208,
-            "rank": 10
           }
         }
       }

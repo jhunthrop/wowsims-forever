@@ -129,31 +129,6 @@
           }
         }
       }
-    },
-    {
-      "notes": "Heroic Strike as the rage dump, never below 40 rage.",
-      "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentRage": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "40"
-              }
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 25286,
-            "rank": 9,
-            "tag": 1
-          }
-        }
-      }
     }
   ]
 }

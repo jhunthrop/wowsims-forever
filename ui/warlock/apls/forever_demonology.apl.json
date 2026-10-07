@@ -124,18 +124,36 @@
       }
     },
     {
-      "notes": "Soul Fire on cooldown. This build spends its Demonology talent points on Demonic Pact rather than Decimation, so Soul Fire casts on its flat, unshortened 60 second cooldown.",
+      "notes": "Immolate follows the two curses and is recast when under 3 seconds remain: its damage over time is worth more than the Soul Fire and Shadow Bolt globals it displaces.",
       "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "dotRemainingTime": {
+                "spellId": {
+                  "spellId": 25309,
+                  "rank": 8
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "3s"
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
-            "spellId": 17924,
-            "rank": 2
+            "spellId": 25309,
+            "rank": 8
           }
         }
       }
     },
     {
-      "notes": "Shadow Bolt is the default filler and what feeds Decimation's proc.",
+      "notes": "Shadow Bolt is the filler between DoT refreshes.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -146,7 +164,7 @@
       }
     },
     {
-      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while your DoTs tick and you regenerate.",
+      "notes": "Shoot with your wand once mana is under 50 percent: it costs nothing, so mana regenerates while it keeps damage going. Life Tap is only the backstop below 10 percent.",
       "action": {
         "condition": {
           "cmp": {
@@ -156,7 +174,7 @@
             },
             "rhs": {
               "const": {
-                "val": "20%"
+                "val": "50%"
               }
             }
           }

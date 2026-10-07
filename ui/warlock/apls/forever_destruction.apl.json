@@ -19,6 +19,29 @@
   ],
   "priorityList": [
     {
+      "notes": "Corruption goes down first and is kept up throughout: it is cheap sustained damage that does not compete with your casts.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 25311,
+                  "rank": 7
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 25311,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
       "notes": "Potion at the top of the fight if mana is already below 75 percent.",
       "action": {
         "condition": {
@@ -95,7 +118,7 @@
       }
     },
     {
-      "notes": "Bane of Agony ramps up over its duration, so it goes down first and is refreshed the moment it drops. It is not a spec-locked ability -- every Warlock spec keeps this curse up.",
+      "notes": "Bane of Agony ramps up over its duration, so it is refreshed the moment it drops. It is not a spec-locked ability -- every Warlock spec keeps this curse up.",
       "action": {
         "condition": {
           "not": {
@@ -118,16 +141,22 @@
       }
     },
     {
-      "notes": "Immolate is the DoT both Conflagrate and Incinerate need on the target, so it is refreshed the moment it falls off.",
+      "notes": "Immolate is the DoT both Conflagrate and Incinerate need on the target, so it is recast when under 3 seconds remain.",
       "action": {
         "condition": {
-          "not": {
-            "val": {
-              "dotIsActive": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "dotRemainingTime": {
                 "spellId": {
                   "spellId": 25309,
                   "rank": 8
                 }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "3s"
               }
             }
           }
@@ -160,13 +189,8 @@
       }
     },
     {
-      "notes": "Shadowburn as the execute finisher below 20 percent target health.",
+      "notes": "Shadowburn is cast on cooldown whenever its reagent cost is acceptable, with no execute-phase gate: it is strong burst at any target health.",
       "action": {
-        "condition": {
-          "isExecutePhase": {
-            "threshold": "E20"
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 18871,
@@ -210,7 +234,7 @@
       }
     },
     {
-      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while your DoTs tick and you regenerate.",
+      "notes": "Shoot with your wand once mana is under 40 percent: it costs nothing, so mana regenerates while it keeps damage going. Life Tap is only the backstop below 10 percent.",
       "action": {
         "condition": {
           "cmp": {
@@ -220,7 +244,7 @@
             },
             "rhs": {
               "const": {
-                "val": "20%"
+                "val": "40%"
               }
             }
           }

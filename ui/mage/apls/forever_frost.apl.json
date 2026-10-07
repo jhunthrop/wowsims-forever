@@ -18,6 +18,17 @@
       }
     },
     {
+      "notes": "Arcane Blast costs no mana in this build, so it is what you cast once you cannot afford another Frostbolt; it keeps casting for free until the wand takes over.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1239700,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
       "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while you regenerate, and Wand Specialization adds to it.",
       "action": {
         "condition": {

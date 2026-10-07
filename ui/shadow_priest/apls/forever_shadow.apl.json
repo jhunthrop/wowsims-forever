@@ -121,23 +121,23 @@
       }
     },
     {
-      "notes": "Mind Blast on cooldown.",
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 10947,
-            "rank": 9
-          }
-        }
-      }
-    },
-    {
       "notes": "Mind Flay fills every remaining global, including the rest of the execute fallback above.",
       "action": {
         "castSpell": {
           "spellId": {
             "spellId": 18807,
             "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Mind Blast only when Mind Flay cannot be cast: in our level-60 search run Mind Flay on every free global beat Mind Blast on cooldown, so outside the execute window this line rarely fires.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10947,
+            "rank": 9
           }
         }
       }

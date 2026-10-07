@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Less than 1.5 seconds left in the fight: only the instant-cast Moonfire will land in time.",
+      "notes": "Moonfire only to clip the last seconds; maintaining it costs more mana than it returns in this sim. With under 1.5 seconds left only the instant cast lands in time.",
       "action": {
         "condition": {
           "cmp": {
@@ -55,30 +55,7 @@
       }
     },
     {
-      "notes": "Keep Moonfire on the target; it is the cheapest DoT available and ticks the whole fight.",
-      "action": {
-        "condition": {
-          "not": {
-            "val": {
-              "dotIsActive": {
-                "spellId": {
-                  "spellId": 9835,
-                  "rank": 10
-                }
-              }
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 9835,
-            "rank": 10
-          }
-        }
-      }
-    },
-    {
-      "notes": "Keep Insect Swarm ticking alongside Moonfire; it is a second cheap DoT with no GCD contention beyond application.",
+      "notes": "Keep Insect Swarm ticking; it is a cheap DoT with no GCD contention beyond its application.",
       "action": {
         "condition": {
           "not": {
@@ -101,7 +78,7 @@
       }
     },
     {
-      "notes": "Starfire is the whole rest of the rotation once Moonfire and Insect Swarm are ticking.",
+      "notes": "Starfire is the whole rest of the rotation once Insect Swarm is ticking.",
       "action": {
         "castSpell": {
           "spellId": {

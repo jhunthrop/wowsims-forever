@@ -71,25 +71,6 @@
       }
     },
     {
-      "notes": "Holy Strike on cooldown: an instant Holy weapon attack on its own 10 second cooldown, learnable from level 6. Judgement and seal maintenance alone leave GCDs idle every ten-second window; Holy Strike is the filler that spends them.",
-      "action": {
-        "condition": {
-          "spellCanCast": {
-            "spellId": {
-              "spellId": 10333,
-              "rank": 8
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 10333,
-            "rank": 8
-          }
-        }
-      }
-    },
-    {
       "notes": "Reapply Seal of Righteousness once it is about to expire -- this is now the only seal-maintenance line (see notes for why the seal twist that used to sit here was removed). It also catches the seal being deactivated by Judgement's own cast, which fires this same condition on the very next decision.",
       "action": {
         "condition": {
@@ -106,6 +87,25 @@
           }
         },
         "castPaladinPrimarySeal": {}
+      }
+    },
+    {
+      "notes": "Holy Strike on cooldown: an instant Holy weapon attack on its own 10 second cooldown, learnable from level 6. Judgement and seal maintenance alone leave GCDs idle every ten-second window; Holy Strike is the filler that spends them.",
+      "action": {
+        "condition": {
+          "spellCanCast": {
+            "spellId": {
+              "spellId": 10333,
+              "rank": 8
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10333,
+            "rank": 8
+          }
+        }
       }
     }
   ]

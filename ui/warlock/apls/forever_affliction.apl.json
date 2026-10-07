@@ -94,30 +94,7 @@
       }
     },
     {
-      "notes": "Bane of Agony ramps up over its duration, so it goes down first and is refreshed on cooldown.",
-      "action": {
-        "condition": {
-          "not": {
-            "val": {
-              "dotIsActive": {
-                "spellId": {
-                  "spellId": 11713,
-                  "rank": 6
-                }
-              }
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 11713,
-            "rank": 6
-          }
-        }
-      }
-    },
-    {
-      "notes": "Corruption is the cheapest DoT per damage and is kept up throughout.",
+      "notes": "Corruption is the cheapest DoT per damage and goes down first, then is kept up throughout.",
       "action": {
         "condition": {
           "not": {
@@ -140,16 +117,45 @@
       }
     },
     {
-      "notes": "Wrack (talent, learned at level 40) is an instant, no-cooldown 6 second DoT that also applies a 10% Shadow-damage-taken vulnerability to the target, so refresh it the moment it drops rather than waiting behind the longer Bane of Agony and Corruption timers above it.",
+      "notes": "Bane of Agony ramps up over its duration, so it is refreshed the moment it drops.",
       "action": {
         "condition": {
           "not": {
             "val": {
               "dotIsActive": {
                 "spellId": {
+                  "spellId": 11713,
+                  "rank": 6
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11713,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Wrack (talent, learned at level 40) is an instant, no-cooldown 6 second DoT that also applies a 10% Shadow-damage-taken vulnerability to the target, so recast it in its last second to keep the vulnerability up without a gap.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "dotRemainingTime": {
+                "spellId": {
                   "spellId": 1316697,
                   "rank": 1
                 }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "1s"
               }
             }
           }
@@ -158,6 +164,29 @@
           "spellId": {
             "spellId": 1316697,
             "rank": 1
+          }
+        }
+      }
+    },
+    {
+      "notes": "Immolate is kept up as a fourth DoT: its damage over time is worth more than the Shadow Bolt it replaces for a global.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 25309,
+                  "rank": 8
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 25309,
+            "rank": 8
           }
         }
       }
@@ -174,7 +203,7 @@
       }
     },
     {
-      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while your DoTs tick and you regenerate.",
+      "notes": "Shoot with your wand once mana is under 40 percent: it costs nothing, so mana regenerates while it keeps damage going. Life Tap is only the backstop below 10 percent.",
       "action": {
         "condition": {
           "cmp": {
@@ -184,7 +213,7 @@
             },
             "rhs": {
               "const": {
-                "val": "20%"
+                "val": "40%"
               }
             }
           }
