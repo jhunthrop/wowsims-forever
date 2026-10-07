@@ -141,6 +141,8 @@ func (druid *Druid) registerCatFormSpell() {
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			druid.form = Humanoid
 			druid.SetCurrentPowerBar(core.ManaBar)
+			druid.energyOnLeavingCat = druid.CurrentEnergy()
+			druid.leftCatFormAt = sim.CurrentTime
 
 			// Tiger's Fury is learned at level 24 (tigers_fury.go); below
 			// that, druid.TigersFuryAura is never registered.
@@ -176,12 +178,15 @@ func (druid *Druid) registerCatFormSpell() {
 
 	energyMetrics := druid.NewEnergyMetrics(actionID)
 
-	furorProcChance := 0.2 * float64(druid.Talents.Furor)
-
 	hasWolfheadBonus := false
 	if head := druid.Equipment.Head(); head != nil && (head.ID == WolfsheadHelm) {
 		hasWolfheadBonus = true
 	}
+
+	druid.RegisterResetEffect(func(sim *core.Simulation) {
+		druid.energyOnLeavingCat = 0
+		druid.leftCatFormAt = 0
+	})
 
 	druid.CatForm = druid.RegisterSpell(Any, core.SpellConfig{
 		ActionID: actionID,
@@ -215,9 +220,9 @@ func (druid *Druid) registerCatFormSpell() {
 				druid.CancelShapeshift(sim)
 				spell.Cost.Multiplier += 100
 			} else {
-				maxShiftEnergy := core.TernaryFloat64(sim.RandomFloat("Furor") < furorProcChance, 40, 0)
-				maxShiftEnergy = core.TernaryFloat64(hasWolfheadBonus, maxShiftEnergy+20, maxShiftEnergy)
-				energyDelta := maxShiftEnergy - druid.CurrentEnergy()
+				shiftEnergy := furorCatFormEnergy(druid.Talents.Furor, druid.energyOnLeavingCat, sim.CurrentTime-druid.leftCatFormAt)
+				shiftEnergy = core.TernaryFloat64(hasWolfheadBonus, shiftEnergy+20, shiftEnergy)
+				energyDelta := shiftEnergy - druid.CurrentEnergy()
 
 				if energyDelta > 0 {
 					druid.AddEnergy(sim, energyDelta, energyMetrics)
