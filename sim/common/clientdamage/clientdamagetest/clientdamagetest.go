@@ -21,12 +21,16 @@ const (
 	// Periodic is the spell's periodic-damage aura (effect 6, aura 3);
 	// its Amount is per tick.
 	Periodic
+	// NormalizedWeapon is the flat bonus of a normalized-weapon-damage
+	// effect (effect 121), the part that is not the weapon.
+	NormalizedWeapon
 )
 
 const (
-	clientSchoolDamage   = 2
-	clientApplyAura      = 6
-	clientPeriodicDamage = 3
+	clientSchoolDamage     = 2
+	clientApplyAura        = 6
+	clientPeriodicDamage   = 3
+	clientNormalizedWeapon = 121
 
 	// rollTolerance is how far a rolled bound may sit from the client's
 	// float: the tables round the client's variance and growth to six
@@ -57,6 +61,8 @@ func clientEffect(spell spellconst.Spell, kind Kind) (spellconst.Effect, bool) {
 	for _, effect := range spell.Effects {
 		switch {
 		case kind == Direct && effect.Effect == clientSchoolDamage:
+			return effect, true
+		case kind == NormalizedWeapon && effect.Effect == clientNormalizedWeapon:
 			return effect, true
 		case kind == Periodic && effect.Effect == clientApplyAura && effect.Aura == clientPeriodicDamage:
 			return effect, true

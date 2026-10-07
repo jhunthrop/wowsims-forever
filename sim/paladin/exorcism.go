@@ -3,26 +3,38 @@ package paladin
 import (
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 )
 
+// ExorcismDamage is spellconst/paladin.json's own roll for ids 879
+// through 10314: the centre at the spell's level, the per-level growth to
+// five levels above it, and the width of the roll (rank 6 rolls
+// 474.7-529.3 at level 60: the centre of 502 plus 3.2 a level for the five
+// levels above its own, 0.1086 wide).
+var ExorcismDamage = [ExorcismRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 79, Variance: 0.133333, PerLevel: 1.2, SpellLevel: 20, MaxLevel: 25},
+	{Amount: 141, Variance: 0.123457, PerLevel: 1.6, SpellLevel: 28, MaxLevel: 33},
+	{Amount: 202, Variance: 0.121212, PerLevel: 2, SpellLevel: 36, MaxLevel: 41},
+	{Amount: 291, Variance: 0.117647, PerLevel: 2.4, SpellLevel: 44, MaxLevel: 49},
+	{Amount: 384, Variance: 0.110577, PerLevel: 2.8, SpellLevel: 52, MaxLevel: 57},
+	{Amount: 502, Variance: 0.108614, PerLevel: 3.2, SpellLevel: 60, MaxLevel: 65},
+}
+
 func (paladin *Paladin) registerExorcism() {
 	ranks := []struct {
-		level      int32
-		spellID    int32
-		manaCost   float64
-		scaleLevel int32
-		minDamage  float64
-		maxDamage  float64
-		scale      float64
+		level    int32
+		spellID  int32
+		manaCost float64
 	}{
-		{level: 20, spellID: 879, manaCost: 85, scaleLevel: 25, minDamage: 84, maxDamage: 96, scale: 1.2},
-		{level: 28, spellID: 5614, manaCost: 135, scaleLevel: 33, minDamage: 152, maxDamage: 172, scale: 1.6},
-		{level: 36, spellID: 5615, manaCost: 180, scaleLevel: 41, minDamage: 217, maxDamage: 245, scale: 2.0},
-		{level: 44, spellID: 10312, manaCost: 235, scaleLevel: 49, minDamage: 304, maxDamage: 342, scale: 2.4},
-		{level: 52, spellID: 10313, manaCost: 285, scaleLevel: 57, minDamage: 393, maxDamage: 439, scale: 2.8},
-		{level: 60, spellID: 10314, manaCost: 345, scaleLevel: 60, minDamage: 505, maxDamage: 563, scale: 3.2},
+		{level: 20, spellID: 879, manaCost: 85},
+		{level: 28, spellID: 5614, manaCost: 135},
+		{level: 36, spellID: 5615, manaCost: 180},
+		{level: 44, spellID: 10312, manaCost: 235},
+		{level: 52, spellID: 10313, manaCost: 285},
+		{level: 60, spellID: 10314, manaCost: 345},
 	}
 
 	for i, rank := range ranks {
@@ -31,8 +43,8 @@ func (paladin *Paladin) registerExorcism() {
 			break
 		}
 
-		minDamage := rank.minDamage + float64(min(paladin.Level, rank.scaleLevel)-rank.level)*rank.scale
-		maxDamage := rank.maxDamage + float64(min(paladin.Level, rank.scaleLevel)-rank.level)*rank.scale
+		damage := ExorcismDamage[i+1]
+		casterLevel := int(paladin.Level)
 
 		spell := paladin.RegisterSpell(core.SpellConfig{
 			ActionID:    core.ActionID{SpellID: rank.spellID},
@@ -64,13 +76,14 @@ func (paladin *Paladin) registerExorcism() {
 			ThreatMultiplier: 1,
 
 			BonusCoefficient: 0.429,
+			ClientBaseDamage: damage.Range(casterLevel),
 
 			ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 				return target.MobType == proto.MobType_MobTypeDemon || target.MobType == proto.MobType_MobTypeUndead
 			},
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				spell.CalcAndDealDamage(sim, target, sim.Roll(minDamage, maxDamage), spell.OutcomeMagicHitAndCrit)
+				spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 			},
 		})
 

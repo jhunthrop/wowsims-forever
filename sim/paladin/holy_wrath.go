@@ -5,21 +5,27 @@ import (
 
 	"github.com/wowsims/classic/sim/core/proto"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
+// HolyWrathDamage is spellconst/paladin.json's own roll for ids 2812 and
+// 10318 (rank 2 rolls 490-576 at level 60: a centre of 533 at its own
+// level, growing 1.9 a level to level 64, 0.1614 wide).
+var HolyWrathDamage = [HolyWrathRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 395, Variance: 0.167089, PerLevel: 1.6, SpellLevel: 50, MaxLevel: 54},
+	{Amount: 533, Variance: 0.161351, PerLevel: 1.9, SpellLevel: 60, MaxLevel: 64},
+}
+
 func (paladin *Paladin) registerHolyWrath() {
 	ranks := []struct {
-		level      int32
-		spellID    int32
-		manaCost   float64
-		scaleLevel int32
-		minDamage  float64
-		maxDamage  float64
-		scale      float64
+		level    int32
+		spellID  int32
+		manaCost float64
 	}{
-		{level: 50, spellID: 2812, manaCost: 645, scaleLevel: 54, minDamage: 362, maxDamage: 428, scale: 1.6},
-		{level: 60, spellID: 10318, manaCost: 805, scaleLevel: 60, minDamage: 490, maxDamage: 576, scale: 1.9},
+		{level: 50, spellID: 2812, manaCost: 645},
+		{level: 60, spellID: 10318, manaCost: 805},
 	}
 
 	var results []*core.SpellResult
@@ -30,8 +36,8 @@ func (paladin *Paladin) registerHolyWrath() {
 			break
 		}
 
-		minDamage := rank.minDamage + float64(min(paladin.Level, rank.scaleLevel)-rank.level)*rank.scale
-		maxDamage := rank.maxDamage + float64(min(paladin.Level, rank.scaleLevel)-rank.level)*rank.scale
+		damage := HolyWrathDamage[i+1]
+		casterLevel := int(paladin.Level)
 
 		holyWrathSpell := paladin.GetOrRegisterSpell(core.SpellConfig{
 			SpellCode:      SpellCode_PaladinHolyWrath,
@@ -63,13 +69,13 @@ func (paladin *Paladin) registerHolyWrath() {
 			DamageMultiplier: 1.0,
 			ThreatMultiplier: 1,
 			BonusCoefficient: 0.19,
+			ClientBaseDamage: damage.Range(casterLevel),
 
 			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
 				results = results[:0]
 				for _, target := range paladin.Env.Encounter.TargetUnits {
 					if target.MobType == proto.MobType_MobTypeDemon || target.MobType == proto.MobType_MobTypeUndead {
-						damage := sim.Roll(minDamage, maxDamage)
-						result := spell.CalcDamage(sim, target, damage, spell.OutcomeMagicHitAndCrit)
+						result := spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 						results = append(results, result)
 					}
 				}

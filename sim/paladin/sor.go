@@ -4,7 +4,30 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
+)
+
+// JudgementOfRighteousnessDamage is spellconst/paladin.json's own roll for
+// the judgement's ids 20187 through 20286 (rank 8 rolls 162-178 at level 60:
+// a centre of 170 at its own level, growing 4.1 a level to level 64). The
+// client states the same 0.5 spell-power coefficient on every rank; the
+// downranked 0.144-0.462 coefficients the Classic port carried are gone.
+var JudgementOfRighteousnessDamage = [judgementOfRighteousnessRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 15, Variance: 0.077, PerLevel: 1.8, SpellLevel: 1, MaxLevel: 7},
+	{Amount: 26, Variance: 0.076923, PerLevel: 1.9, SpellLevel: 10, MaxLevel: 16},
+	{Amount: 41, Variance: 0.097561, PerLevel: 2.4, SpellLevel: 18, MaxLevel: 24},
+	{Amount: 60, Variance: 0.1, PerLevel: 2.8, SpellLevel: 26, MaxLevel: 32},
+	{Amount: 82, Variance: 0.097561, PerLevel: 3.1, SpellLevel: 34, MaxLevel: 40},
+	{Amount: 107, Variance: 0.093458, PerLevel: 3.8, SpellLevel: 42, MaxLevel: 48},
+	{Amount: 137, Variance: 0.087591, PerLevel: 4.1, SpellLevel: 50, MaxLevel: 56},
+	{Amount: 170, Variance: 0.094118, PerLevel: 4.1, SpellLevel: 58, MaxLevel: 64},
+}
+
+const (
+	judgementOfRighteousnessRanks       = 8
+	judgementOfRighteousnessCoefficient = 0.5
 )
 
 func (paladin *Paladin) registerSealOfRighteousness() {
@@ -15,30 +38,22 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 		coeff   float64
 	}
 
-	type judge struct {
-		spellID   int32
-		minDamage float64
-		maxDamage float64
-		scale     float64
-		coeff     float64
-	}
-
 	var ranks = []struct {
-		level      int32
-		spellID    int32
-		manaCost   float64
-		scaleLevel int32
-		proc       proc
-		judge      judge
+		level        int32
+		spellID      int32
+		manaCost     float64
+		scaleLevel   int32
+		proc         proc
+		judgeSpellID int32
 	}{
-		{level: 1, spellID: 20154, manaCost: 20, scaleLevel: 7, proc: proc{spellID: 25742, value: 108, scale: 18, coeff: 0.029}, judge: judge{spellID: 20187, minDamage: 15, maxDamage: 15, scale: 1.8, coeff: 0.144}},
-		{level: 10, spellID: 20287, manaCost: 40, scaleLevel: 16, proc: proc{spellID: 25740, value: 216, scale: 17, coeff: 0.063}, judge: judge{spellID: 20280, minDamage: 25, maxDamage: 27, scale: 1.9, coeff: 0.312}},
-		{level: 18, spellID: 20288, manaCost: 60, scaleLevel: 24, proc: proc{spellID: 25739, value: 352, scale: 23, coeff: 0.093}, judge: judge{spellID: 20281, minDamage: 39, maxDamage: 43, scale: 2.4, coeff: 0.462}},
-		{level: 26, spellID: 20289, manaCost: 90, scaleLevel: 32, proc: proc{spellID: 25738, value: 541, scale: 31, coeff: 0.1}, judge: judge{spellID: 20282, minDamage: 57, maxDamage: 63, scale: 2.8, coeff: 0.5}},
-		{level: 34, spellID: 20290, manaCost: 120, scaleLevel: 40, proc: proc{spellID: 25737, value: 785, scale: 37, coeff: 0.1}, judge: judge{spellID: 20283, minDamage: 78, maxDamage: 86, scale: 3.1, coeff: 0.5}},
-		{level: 42, spellID: 20291, manaCost: 140, scaleLevel: 48, proc: proc{spellID: 25736, value: 1082, scale: 41, coeff: 0.1}, judge: judge{spellID: 20284, minDamage: 102, maxDamage: 112, scale: 3.8, coeff: 0.5}},
-		{level: 50, spellID: 20292, manaCost: 170, scaleLevel: 56, proc: proc{spellID: 25735, value: 1407, scale: 47, coeff: 0.1}, judge: judge{spellID: 20285, minDamage: 131, maxDamage: 143, scale: 4.1, coeff: 0.5}},
-		{level: 58, spellID: 20293, manaCost: 200, scaleLevel: 60, proc: proc{spellID: 25713, value: 1786, scale: 47, coeff: 0.1}, judge: judge{spellID: 20286, minDamage: 162, maxDamage: 178, scale: 4.1, coeff: 0.5}},
+		{level: 1, spellID: 20154, manaCost: 20, scaleLevel: 7, proc: proc{spellID: 25742, value: 108, scale: 18, coeff: 0.029}, judgeSpellID: 20187},
+		{level: 10, spellID: 20287, manaCost: 40, scaleLevel: 16, proc: proc{spellID: 25740, value: 216, scale: 17, coeff: 0.063}, judgeSpellID: 20280},
+		{level: 18, spellID: 20288, manaCost: 60, scaleLevel: 24, proc: proc{spellID: 25739, value: 352, scale: 23, coeff: 0.093}, judgeSpellID: 20281},
+		{level: 26, spellID: 20289, manaCost: 90, scaleLevel: 32, proc: proc{spellID: 25738, value: 541, scale: 31, coeff: 0.1}, judgeSpellID: 20282},
+		{level: 34, spellID: 20290, manaCost: 120, scaleLevel: 40, proc: proc{spellID: 25737, value: 785, scale: 37, coeff: 0.1}, judgeSpellID: 20283},
+		{level: 42, spellID: 20291, manaCost: 140, scaleLevel: 48, proc: proc{spellID: 25736, value: 1082, scale: 41, coeff: 0.1}, judgeSpellID: 20284},
+		{level: 50, spellID: 20292, manaCost: 170, scaleLevel: 56, proc: proc{spellID: 25735, value: 1407, scale: 47, coeff: 0.1}, judgeSpellID: 20285},
+		{level: 58, spellID: 20293, manaCost: 200, scaleLevel: 60, proc: proc{spellID: 25713, value: 1786, scale: 47, coeff: 0.1}, judgeSpellID: 20286},
 	}
 
 	improvedSoR := paladin.improvedSoR()
@@ -67,13 +82,13 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 		 *      then feeds that value as base damage into the proc spell.
 		 */
 
-		minDamage := rank.judge.minDamage + rank.judge.scale*float64(min(paladin.Level, rank.scaleLevel)-rank.level)
-		maxDamage := rank.judge.maxDamage + rank.judge.scale*float64(min(paladin.Level, rank.scaleLevel)-rank.level)
+		judgeDamage := JudgementOfRighteousnessDamage[i+1]
+		casterLevel := int(paladin.Level)
 
 		judgeSpell := paladin.RegisterSpell(core.SpellConfig{
 			SpellCode:      SpellCode_PaladinJudgementOfRighteousness,
 			ClassSpellMask: PaladinSpellMaskJudgementOfRighteousness,
-			ActionID:       core.ActionID{SpellID: rank.judge.spellID},
+			ActionID:       core.ActionID{SpellID: rank.judgeSpellID},
 			SpellSchool:    core.SpellSchoolHoly,
 			DefenseType:    core.DefenseTypeMagic,
 			ProcMask:       core.ProcMaskSpellDamage,
@@ -89,10 +104,11 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 
-			BonusCoefficient: rank.judge.coeff,
+			BonusCoefficient: judgementOfRighteousnessCoefficient,
+			ClientBaseDamage: judgeDamage.Range(casterLevel),
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				baseDamage := sim.Roll(minDamage, maxDamage) * improvedSoR
+				baseDamage := judgeDamage.Roll(sim, casterLevel) * improvedSoR
 				spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 			},
 		})
