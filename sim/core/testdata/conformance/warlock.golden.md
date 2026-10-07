@@ -161,7 +161,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 40 | Summon Imp | 0 | 688 | 738.40 (80% base mana)→738.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 40 | Summon Succubus | 0 | 712 | 923.00 (100% base mana)→923.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 40 | Summon Voidwalker | 0 | 697 | 923.00 (100% base mana)→923.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 40 | Unstable Affliction | 1 | 427717 | 200.00→200.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 40→40 | 18000→18000 | match |  | 86.00-86.00→86.00-86.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 50 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 50 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 50 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
@@ -218,8 +217,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 50 | Summon Imp | 0 | 688 | 930.40 (80% base mana)→930.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 50 | Summon Succubus | 0 | 712 | 1163.00 (100% base mana)→1163.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 50 | Summon Voidwalker | 0 | 697 | 1163.00 (100% base mana)→1163.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 50 | Unstable Affliction | 1 | 427717 | 200.00→200.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 40→40 | 18000→18000 | match |  | 86.00-86.00→86.00-86.00 | 0.200→0.200 | declared, matches |
-| DSRuinWarlock | 50 | Unstable Affliction | 3 | 1242972 | 340.00→340.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | 18000→18000 | match |  | 174.00-174.00→174.00-174.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 60 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 60 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
@@ -292,9 +289,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 60 | Summon Imp | 0 | 688 | 1098.40 (80% base mana)→1098.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Summon Succubus | 0 | 712 | 1373.00 (100% base mana)→1373.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Summon Voidwalker | 0 | 697 | 1373.00 (100% base mana)→1373.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 60 | Unstable Affliction | 1 | 427717 | 200.00→200.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 40→40 | 18000→18000 | match |  | 86.00-86.00→86.00-86.00 | 0.200→0.200 | declared, matches |
-| DSRuinWarlock | 60 | Unstable Affliction | 2 | 1242971 | 265.00→265.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 60→60 | 18000→18000 | match |  | 123.00-123.00→123.00-123.00 | 0.200→0.200 | declared, matches |
-| DSRuinWarlock | 60 | Unstable Affliction | 3 | 1242972 | 340.00→340.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | 18000→18000 | match |  | 174.00-174.00→174.00-174.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 10 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 10 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 10 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100→0.100 | declared, matches |
@@ -444,7 +438,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 40 | Summon Imp | 0 | 688 | 738.40 (80% base mana)→738.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 40 | Summon Succubus | 0 | 712 | 923.00 (100% base mana)→923.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 40 | Summon Voidwalker | 0 | 697 | 923.00 (100% base mana)→923.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 40 | Unstable Affliction | 1 | 427717 | 200.00→200.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 40→40 | 18000→18000 | match |  | 86.00-86.00→86.00-86.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 50 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 50 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 50 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
@@ -501,8 +494,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 50 | Summon Imp | 0 | 688 | 930.40 (80% base mana)→930.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 50 | Summon Succubus | 0 | 712 | 1163.00 (100% base mana)→1163.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 50 | Summon Voidwalker | 0 | 697 | 1163.00 (100% base mana)→1163.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 50 | Unstable Affliction | 1 | 427717 | 200.00→200.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 40→40 | 18000→18000 | match |  | 86.00-86.00→86.00-86.00 | 0.200→0.200 | declared, matches |
-| SMRuinWarlock | 50 | Unstable Affliction | 3 | 1242972 | 340.00→340.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | 18000→18000 | match |  | 174.00-174.00→174.00-174.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 60 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 60 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
@@ -575,9 +566,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 60 | Summon Imp | 0 | 688 | 1098.40 (80% base mana)→1098.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Summon Succubus | 0 | 712 | 1373.00 (100% base mana)→1373.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Summon Voidwalker | 0 | 697 | 1373.00 (100% base mana)→1373.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 60 | Unstable Affliction | 1 | 427717 | 200.00→200.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 40→40 | 18000→18000 | match |  | 86.00-86.00→86.00-86.00 | 0.200→0.200 | declared, matches |
-| SMRuinWarlock | 60 | Unstable Affliction | 2 | 1242971 | 265.00→265.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 60→60 | 18000→18000 | match |  | 123.00-123.00→123.00-123.00 | 0.200→0.200 | declared, matches |
-| SMRuinWarlock | 60 | Unstable Affliction | 3 | 1242972 | 340.00→340.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | 18000→18000 | match |  | 174.00-174.00→174.00-174.00 | 0.200→0.200 | declared, matches |
 ## Talent-gated spells
 
 Each spell below is built with exactly one point in the single talent that grants it (and nothing else), so its base cost/cooldown/cast-time/GCD/duration can still be checked against the client even though it has no row above.

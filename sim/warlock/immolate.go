@@ -116,7 +116,6 @@ func (warlock *Warlock) getImmolateConfig(rank int) core.SpellConfig {
 
 			if result.Landed() {
 				dot := spell.Dot(target)
-				warlock.cancelExclusiveDots(sim, target, dot)
 				dot.Apply(sim)
 			}
 

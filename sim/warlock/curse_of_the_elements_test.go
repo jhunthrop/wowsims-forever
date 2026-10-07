@@ -118,3 +118,17 @@ func TestCurseOfTheElementsGivesWayToAnotherCurse(t *testing.T) {
 	}
 	t.Fatal("Curse of Agony never landed over Curse of the Elements")
 }
+
+const landAttempts = 20
+
+// spellByID is the registered spell among spells with the given id.
+func spellByID(t *testing.T, spells []*core.Spell, id int32) *core.Spell {
+	t.Helper()
+	for _, spell := range spells {
+		if spell.ActionID.SpellID == id {
+			return spell
+		}
+	}
+	t.Fatalf("no registered spell with id %d", id)
+	return nil
+}

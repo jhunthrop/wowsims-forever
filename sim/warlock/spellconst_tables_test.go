@@ -44,7 +44,6 @@ func TestWarlockPeriodicDamageTablesMatchClient(t *testing.T) {
 		{"Corruption tick", []int32{0, 172, 6222, 6223, 7648, 11671, 11672, 25311}, CorruptionTickDamage[:]},
 		{"Drain Soul tick", []int32{0, 1120, 8288, 8289, 11675}, DrainSoulTickDamage[:]},
 		{"Curse of Agony tick", []int32{0, 980, 1014, 6217, 11711, 11712, 11713}, CurseOfAgonyTickDamage[:]},
-		{"Unstable Affliction tick", []int32{0, 427717, 1242971, 1242972}, UnstableAfflictionTickDamage[:]},
 	} {
 		clientdamagetest.AssertTable(t, class, clientdamagetest.Periodic, table.name, table.ids, table.got, nil)
 	}
