@@ -117,7 +117,7 @@ func (druid *Druid) ApplyTalents() {
 	// Restoration
 	druid.applyFuror()
 
-	druid.PseudoStats.SpiritRegenRateCasting += .05 * float64(druid.Talents.Reflection)
+	druid.applyReflection()
 
 	// Nature's Focus (node 104957): a 14/28/42/56/70% chance to avoid
 	// pushback on Arcane/Nature casts from taking damage. core/cast.go
@@ -131,16 +131,14 @@ func (druid *Druid) ApplyTalents() {
 	// spells. Threat, not damage, mana or a cooldown.
 	_ = druid.Talents.Subtlety
 
-	// Gift of Nature, Gift of the Earthmother, Tranquil Spirit, Improved
-	// Rejuvenation, Swiftmend, Improved Tranquility, Improved Regrowth
-	// and Wild Growth are all healing-spell modifiers or a healing
-	// finishing move. This package registers no healing spells -
-	// Restoration is not brought up yet, the same state
-	// RegisterFeralTankSpells's "TODO: Classic feral tank" comment
-	// records for the Bear tank spec - so none of the eight has
-	// anything to modify.
-	_, _, _, _ = druid.Talents.GiftOfNature, druid.Talents.GiftOfTheEarthmother, druid.Talents.TranquilSpirit, druid.Talents.ImprovedRejuvenation
-	_, _, _, _ = druid.Talents.Swiftmend, druid.Talents.ImprovedTranquility, druid.Talents.ImprovedRegrowth, druid.Talents.WildGrowth
+	druid.applyGiftOfNature()
+	druid.applyGiftOfTheEarthmother()
+	druid.applyTranquilSpirit()
+	druid.applyImprovedRejuvenation()
+	druid.applyImprovedTranquility()
+	druid.applyImprovedRegrowth()
+	// Swiftmend and Wild Growth are the spells their talents grant; they
+	// register in RegisterHealingSpells (swiftmend.go, wild_growth.go).
 }
 
 func (druid *Druid) ThickHideMultiplier() float64 {
@@ -157,6 +155,10 @@ func (druid *Druid) BearArmorMultiplier() float64 {
 	sotfMulti := 1.0 + 0.33/3.0
 	return 4.7 * sotfMulti
 }
+
+// naturesSplendorRegrowthTicks is Nature's Splendor's 6 sec on Regrowth in
+// its 3 sec ticks.
+const naturesSplendorRegrowthTicks = 2
 
 // naturesGraceCastSpeed is Nature's Grace's proc (spell 16886): "Casting
 // speed increased by 10% and global cooldown reduced by 10%" for 3 sec.
@@ -211,24 +213,25 @@ func (druid *Druid) applyNaturesGrace() {
 
 // registerNaturesSwiftnessCD implements Nature's Swiftness (node 104921,
 // bool, proto field NaturesSwiftness): "When activated, your next
-// Nature spell becomes an instant cast spell." Wrath is this package's
-// only Nature-school damage spell (Starfire is Arcane, Moonfire is
-// Arcane), so only Wrath is affected - narrower than vanilla's version,
-// which keyed off any spell school.
+// Nature spell becomes an instant cast spell." The Nature spells with a
+// cast time are Wrath (Starfire and Moonfire are Arcane) and the two cast-time
+// heals, Healing Touch and Regrowth - DruidSpellMaskNatureCasts.
 func (druid *Druid) registerNaturesSwiftnessCD() {
 	if !druid.Talents.NaturesSwiftness {
 		return
 	}
 	actionID := core.ActionID{SpellID: 17116}
 
-	var affectedSpells []*DruidSpell
+	var affectedSpells []*core.Spell
 	var nsSpell *DruidSpell
 	nsAura := druid.RegisterAura(core.Aura{
 		Label:    "Natures Swiftness",
 		ActionID: actionID,
 		Duration: core.NeverExpires,
 		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			affectedSpells = core.FilterSlice(druid.Wrath, func(ds *DruidSpell) bool { return ds != nil })
+			affectedSpells = core.FilterSlice(druid.Spellbook, func(spell *core.Spell) bool {
+				return spell.Matches(DruidSpellMaskNatureCasts)
+			})
 		},
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			for _, spell := range affectedSpells {
@@ -241,7 +244,7 @@ func (druid *Druid) registerNaturesSwiftnessCD() {
 			}
 		},
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			if spell.SpellCode != SpellCode_DruidWrath {
+			if !spell.Matches(DruidSpellMaskNatureCasts) {
 				return
 			}
 
@@ -275,6 +278,11 @@ func (druid *Druid) registerNaturesSwiftnessCD() {
 		Spell: nsSpell.Spell,
 		Type:  core.CooldownTypeDPS,
 		ShouldActivate: func(sim *core.Simulation, character *core.Character) bool {
+			// A healer's rotation casts it by hand, ahead of the emergency
+			// heal it makes instant.
+			if druid.CastsNaturesSwiftnessByHand {
+				return false
+			}
 			// Don't use NS unless we're casting a full-length Wrath.
 			return !character.HasTemporarySpellCastSpeedIncrease()
 		},
@@ -547,10 +555,10 @@ func (druid *Druid) applyNaturesReach() {
 
 // applyGenesis implements Genesis (node 104924, 5 ranks, proto field
 // Genesis): "Increases the periodic damage and healing done by your
-// spells and abilities by 1/2/3/4/5%." Only the damage half is modeled:
-// this package registers no healing spells (see ApplyTalents's
-// Restoration note). Scoped to every damage-over-time effect this
-// package has - Moonfire, Insect Swarm, Rake and Rip.
+// spells and abilities by 1/2/3/4/5%." Scoped to every damage-over-time
+// and heal-over-time effect this package has - Moonfire, Insect Swarm, Rake
+// and Rip, Rejuvenation, Regrowth's heal over time, Tranquility and Wild
+// Growth.
 func (druid *Druid) applyGenesis() {
 	if druid.Talents.Genesis == 0 {
 		return
@@ -559,7 +567,7 @@ func (druid *Druid) applyGenesis() {
 	rank := clampRank(druid.Talents.Genesis, 5)
 	druid.AddStaticMod(core.SpellModConfig{
 		Kind:      core.SpellMod_PeriodicDamageDone_Flat,
-		ClassMask: DruidSpellMaskPeriodicDamage,
+		ClassMask: DruidSpellMaskPeriodicDamage | DruidSpellMaskPeriodicHealing,
 		IntValue:  int64(rank),
 	})
 }
@@ -567,10 +575,10 @@ func (druid *Druid) applyGenesis() {
 // applyNaturesSplendor implements Nature's Splendor (node 104928, bool,
 // proto field NaturesSplendor): "Increases the duration of your
 // Moonfire and Rejuvenation spells by 3 sec, your Regrowth spell by 6
-// sec, and your Insect Swarm spell by 2 sec." Rejuvenation and Regrowth
-// are not modeled (no healing spells registered). Moonfire ticks every
-// 3 sec and Insect Swarm every 2 sec, so +3/+2 sec is exactly +1 tick on
-// each.
+// sec, and your Insect Swarm spell by 2 sec." Moonfire and Rejuvenation
+// tick every 3 sec, Regrowth every 3 sec and Insect Swarm every 2 sec, so
+// the extra time is one tick on Moonfire, Rejuvenation and Insect Swarm
+// and two on Regrowth.
 func (druid *Druid) applyNaturesSplendor() {
 	if !druid.Talents.NaturesSplendor {
 		return
@@ -578,8 +586,13 @@ func (druid *Druid) applyNaturesSplendor() {
 
 	druid.AddStaticMod(core.SpellModConfig{
 		Kind:      core.SpellMod_DotNumberOfTicks_Flat,
-		ClassMask: DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm,
+		ClassMask: DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm | DruidSpellMaskRejuvenation,
 		IntValue:  1,
+	})
+	druid.AddStaticMod(core.SpellModConfig{
+		Kind:      core.SpellMod_DotNumberOfTicks_Flat,
+		ClassMask: DruidSpellMaskRegrowth,
+		IntValue:  naturesSplendorRegrowthTicks,
 	})
 }
 
@@ -723,12 +736,14 @@ func (druid *Druid) registerBerserkCD() {
 	})
 }
 
+// naturalistCastTimeCut is Naturalist's 0.1 sec a rank off Healing Touch.
+const naturalistCastTimeCut = 100 * time.Millisecond
+
 // applyNaturalist implements Naturalist (node 104922, 5 ranks, proto
 // field Naturalist): "Reduces the cast time of your Healing Touch spell
 // by 0.1/.../0.5 sec and increases all damage you deal by 1/2/3/4/5%."
-// Healing Touch is not modeled (no healing spells registered); the
-// damage half applies to literally everything the character does, so
-// it is a flat PseudoStats multiplier rather than a per-spell mask.
+// The damage half applies to literally everything the character does,
+// so it is a flat PseudoStats multiplier rather than a per-spell mask.
 func (druid *Druid) applyNaturalist() {
 	if druid.Talents.Naturalist == 0 {
 		return
@@ -736,6 +751,11 @@ func (druid *Druid) applyNaturalist() {
 
 	rank := clampRank(druid.Talents.Naturalist, 5)
 	druid.PseudoStats.DamageDealtMultiplier *= 1 + 0.01*float64(rank)
+	druid.AddStaticMod(core.SpellModConfig{
+		Kind:      core.SpellMod_CastTime_Flat,
+		ClassMask: DruidSpellMaskHealingTouch,
+		TimeValue: -naturalistCastTimeCut * time.Duration(rank),
+	})
 }
 
 // applyLivingSpirit implements Living Spirit (node 104911, 3 ranks,
