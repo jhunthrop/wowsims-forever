@@ -103,7 +103,13 @@ func TestHeavyMovementCostsTheFuryWarrior(t *testing.T) {
 }
 
 // A casting-only window costs a melee nothing: it never leaves melee and
-// it has no cast times to interrupt.
+// it has no cast times to interrupt. "Nothing" is within a fraction of a
+// percent, not bit-identical: closing a window re-evaluates the rotation
+// once (encounter_movement.go's startMovementWindow, so a caster resumes),
+// and under Forever's normalized rage (rage.go, 2026-10-07) that extra
+// evaluation can land on a different side of a rage threshold than the
+// swing-driven one would have, moving a Heroic Strike queue by one swing.
+// Before normalization the two runs happened to coincide exactly.
 func TestCastingOnlyMovementIsFreeForTheFuryWarrior(t *testing.T) {
 	still := runParitySim(t, furyWarriorPlayer(), parityEncounter())
 
@@ -111,8 +117,9 @@ func TestCastingOnlyMovementIsFreeForTheFuryWarrior(t *testing.T) {
 	interrupted.Movement = &proto.MovementPattern{IntervalSeconds: 20, DurationSeconds: 5, CastingOnly: true}
 	interruptedDps := runParitySim(t, furyWarriorPlayer(), interrupted)
 
-	if interruptedDps != still {
-		t.Errorf("casting-only DPS %.4f differs from the standing DPS %.4f; a melee with no cast times should be untouched", interruptedDps, still)
+	const tolerance = 0.005
+	if diff := interruptedDps - still; diff > still*tolerance || diff < -still*tolerance {
+		t.Errorf("casting-only DPS %.4f differs from the standing DPS %.4f by more than %.1f%%; a melee with no cast times should be untouched", interruptedDps, still, tolerance*100)
 	}
 }
 

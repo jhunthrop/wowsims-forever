@@ -56,6 +56,12 @@ func (g TalentGatedSpell) talentsString() string {
 }
 
 // TalentGatedSpells is every talent-only ability this package found,
+// addressed by 1-based position in the trees generated from build
+// 1.60.1.70009 with the live Wowhead overlay (2026-10-07: the Fury,
+// Protection, Feral, Marksmanship and Holy layouts moved, so Sniper Shot,
+// Divine Favor, Holy Shock, Death Wish, Bloodthirst, Last Stand and
+// Berserk changed position; an out-of-range position is skipped silently,
+// so a layout change shows up here as a vanished golden row).
 // one representative preset's class worth at a time (see
 // repPresetForClass). Grouped and ordered by class slug, then by tree,
 // then by position, so a diff against a future regeneration reads in
@@ -64,7 +70,7 @@ var TalentGatedSpells = []TalentGatedSpell{
 	// Hunter (Beast Mastery 16, Marksmanship 17, Survival 18).
 	{ClassSlug: "hunter", Label: "Summon Hawk", Tree: 0, Pos: 11},
 	{ClassSlug: "hunter", Label: "Bestial Wrath", Tree: 0, Pos: 16},
-	{ClassSlug: "hunter", Label: "Sniper Shot", Tree: 1, Pos: 17},
+	{ClassSlug: "hunter", Label: "Sniper Shot", Tree: 1, Pos: 16},
 	{ClassSlug: "hunter", Label: "Counterattack", Tree: 2, Pos: 12},
 	{ClassSlug: "hunter", Label: "Strider Kick", Tree: 2, Pos: 16},
 
@@ -92,8 +98,8 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "warlock", Label: "Incinerate", Tree: 2, Pos: 16},
 
 	// Paladin (Holy 18, Protection 16, Retribution 18).
-	{ClassSlug: "paladin", Label: "Divine Favor", Tree: 0, Pos: 13},
-	{ClassSlug: "paladin", Label: "Holy Shock", Tree: 0, Pos: 15},
+	{ClassSlug: "paladin", Label: "Divine Favor", Tree: 0, Pos: 12},
+	{ClassSlug: "paladin", Label: "Holy Shock", Tree: 0, Pos: 14},
 	{ClassSlug: "paladin", Label: "Holy Shield", Tree: 1, Pos: 16},
 	{ClassSlug: "paladin", Label: "Seal of Command", Tree: 2, Pos: 8},
 
@@ -102,15 +108,15 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "warrior", Label: "Sweeping Strikes", Tree: 0, Pos: 13},
 	{ClassSlug: "warrior", Label: "Mortal Strike", Tree: 0, Pos: 17},
 	{ClassSlug: "warrior", Label: "Piercing Howl", Tree: 1, Pos: 6},
-	{ClassSlug: "warrior", Label: "Death Wish", Tree: 1, Pos: 14},
-	{ClassSlug: "warrior", Label: "Bloodthirst", Tree: 1, Pos: 18},
-	{ClassSlug: "warrior", Label: "Last Stand", Tree: 2, Pos: 6},
+	{ClassSlug: "warrior", Label: "Death Wish", Tree: 1, Pos: 13},
+	{ClassSlug: "warrior", Label: "Bloodthirst", Tree: 1, Pos: 17},
+	{ClassSlug: "warrior", Label: "Last Stand", Tree: 2, Pos: 7},
 	{ClassSlug: "warrior", Label: "Shield Slam", Tree: 2, Pos: 18},
 
 	// Druid (Balance 16, Feral Combat 19, Restoration 16).
 	{ClassSlug: "druid", Label: "Insect Swarm", Tree: 0, Pos: 9},
 	{ClassSlug: "druid", Label: "Moonkin Form", Tree: 0, Pos: 16},
-	{ClassSlug: "druid", Label: "Berserk", Tree: 1, Pos: 19},
+	{ClassSlug: "druid", Label: "Berserk", Tree: 1, Pos: 20},
 	{ClassSlug: "druid", Label: "Nature's Swiftness", Tree: 2, Pos: 12},
 
 	// Priest (Discipline 18, Holy 17, Shadow 18).

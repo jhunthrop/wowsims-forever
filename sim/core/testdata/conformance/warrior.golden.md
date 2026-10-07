@@ -49,6 +49,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FuryWarrior | 20 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior | 30 | Battle Shout | 0 | 6192 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→22 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
 | FuryWarrior | 30 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
+| FuryWarrior | 30 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | FuryWarrior | 30 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 30 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | FuryWarrior | 30 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
@@ -67,7 +68,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FuryWarrior | 30 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior | 38 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
 | FuryWarrior | 38 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| FuryWarrior | 38 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→32 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FuryWarrior | 38 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | FuryWarrior | 38 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 38 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | FuryWarrior | 38 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
@@ -86,7 +87,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FuryWarrior | 38 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior | 40 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
 | FuryWarrior | 40 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| FuryWarrior | 40 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→32 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FuryWarrior | 40 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | FuryWarrior | 40 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 40 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | FuryWarrior | 40 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
@@ -105,7 +106,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FuryWarrior | 40 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior | 50 | Battle Shout | 0 | 11550 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 42→42 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
 | FuryWarrior | 50 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| FuryWarrior | 50 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→32 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FuryWarrior | 50 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | FuryWarrior | 50 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 50 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | FuryWarrior | 50 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
@@ -125,7 +126,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FuryWarrior | 50 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior | 60 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→60 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
 | FuryWarrior | 60 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| FuryWarrior | 60 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→32 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FuryWarrior | 60 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | FuryWarrior | 60 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 60 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | FuryWarrior | 60 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
@@ -184,6 +185,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionWarrior | 20 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Battle Shout | 0 | 6192 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→22 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
+| ProtectionWarrior | 30 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
@@ -204,7 +206,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionWarrior | 30 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 38 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→32 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionWarrior | 38 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
@@ -225,7 +227,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionWarrior | 38 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 40 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→32 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionWarrior | 40 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
@@ -246,7 +248,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionWarrior | 40 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Battle Shout | 0 | 11550 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 42→42 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 50 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→32 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionWarrior | 50 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
@@ -268,7 +270,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionWarrior | 50 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Battle Shout | 0 | 25289 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→60 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 60 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→32 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionWarrior | 60 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
