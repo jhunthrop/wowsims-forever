@@ -27,12 +27,18 @@ func (rogue *Rogue) registerHemorrhageSpell() {
 	})
 
 	rogue.Hemorrhage = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:   SpellCode_RogueHemorrhage,
-		ActionID:    actionID,
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       rogue.builderFlags(),
+		SpellCode:     SpellCode_RogueHemorrhage,
+		ActionID:      actionID,
+		SpellSchool:   core.SpellSchoolPhysical,
+		DefenseType:   core.DefenseTypeMelee,
+		ProcMask:      core.ProcMaskMeleeMHSpecial,
+		Flags:         rogue.builderFlags(),
+		RequiredLevel: 30,
+
+		// The bleed debuff lives on the target, not the caster; see
+		// priest/vampiric_embrace.go's RelatedSelfBuff comment for why
+		// that field is used here anyway.
+		RelatedSelfBuff: hemoAuras.Get(rogue.CurrentTarget),
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   35.0,

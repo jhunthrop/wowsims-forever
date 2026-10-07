@@ -1,6 +1,8 @@
 package rogue
 
 import (
+	"time"
+
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -41,15 +43,20 @@ func (rogue *Rogue) registerStealthSpell() {
 	}
 
 	rogue.Stealth = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode: SpellCode_RogueStealth,
-		ActionID:  core.ActionID{SpellID: stealthSpellID[rank]},
-		Flags:     core.SpellFlagAPL,
+		SpellCode:     SpellCode_RogueStealth,
+		ActionID:      core.ActionID{SpellID: stealthSpellID[rank]},
+		Flags:         core.SpellFlagAPL,
+		RequiredLevel: stealthLearnLevels[rank-1],
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD: 0,
 			},
 			IgnoreHaste: true,
+			CD: core.Cooldown{
+				Timer:    rogue.NewTimer(),
+				Duration: time.Second * 10,
+			},
 		},
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 			return sim.CurrentTime < 0 && !rogue.IsStealthed()

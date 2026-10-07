@@ -202,17 +202,17 @@ Each spell below is built with exactly one point in the single talent that grant
 | ShadowPriest (Mind Flay talent) | 60 | Mind Flay | 4 | 17313 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 44→44 | 3000→3000 | match |  |
 | ShadowPriest (Mind Flay talent) | 60 | Mind Flay | 5 | 17314 | 165.00→165.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 3000→3000 | match |  |
 | ShadowPriest (Mind Flay talent) | 60 | Mind Flay | 6 | 18807 | 205.00→205.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3000→3000 | match |  |
-| ShadowPriest (Shadowform talent) | 10 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→0 | 0→0 | 1500→0 | 0→0 | -1→-1 | mismatch | cooldown_ms 1500->0; gcd_ms 1500->0 |
-| ShadowPriest (Shadowform talent) | 20 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→0 | 0→0 | 1500→0 | 0→0 | -1→-1 | mismatch | cooldown_ms 1500->0; gcd_ms 1500->0 |
-| ShadowPriest (Shadowform talent) | 30 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→0 | 0→0 | 1500→0 | 0→0 | -1→-1 | mismatch | cooldown_ms 1500->0; gcd_ms 1500->0 |
-| ShadowPriest (Shadowform talent) | 38 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→0 | 0→0 | 1500→0 | 0→0 | -1→-1 | mismatch | cooldown_ms 1500->0; gcd_ms 1500->0 |
-| ShadowPriest (Shadowform talent) | 40 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→0 | 0→0 | 1500→0 | 0→0 | -1→-1 | mismatch | cooldown_ms 1500->0; gcd_ms 1500->0 |
-| ShadowPriest (Shadowform talent) | 50 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→0 | 0→0 | 1500→0 | 0→0 | -1→-1 | mismatch | cooldown_ms 1500->0; gcd_ms 1500->0 |
-| ShadowPriest (Shadowform talent) | 60 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→0 | 0→0 | 1500→0 | 0→0 | -1→-1 | mismatch | cooldown_ms 1500->0; gcd_ms 1500->0 |
-| ShadowPriest (Vampiric Embrace talent) | 10 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→0 | 0→0 | 1500→1500 | 30→0 | 30000→60000 | mismatch | cooldown_ms 60000->0; required_level 30->0; duration_ms 30000->60000 |
-| ShadowPriest (Vampiric Embrace talent) | 20 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→0 | 0→0 | 1500→1500 | 30→0 | 30000→60000 | mismatch | cooldown_ms 60000->0; required_level 30->0; duration_ms 30000->60000 |
-| ShadowPriest (Vampiric Embrace talent) | 30 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→0 | 0→0 | 1500→1500 | 30→0 | 30000→60000 | mismatch | cooldown_ms 60000->0; required_level 30->0; duration_ms 30000->60000 |
-| ShadowPriest (Vampiric Embrace talent) | 38 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→0 | 0→0 | 1500→1500 | 30→0 | 30000→60000 | mismatch | cooldown_ms 60000->0; required_level 30->0; duration_ms 30000->60000 |
-| ShadowPriest (Vampiric Embrace talent) | 40 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→0 | 0→0 | 1500→1500 | 30→0 | 30000→60000 | mismatch | cooldown_ms 60000->0; required_level 30->0; duration_ms 30000->60000 |
-| ShadowPriest (Vampiric Embrace talent) | 50 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→0 | 0→0 | 1500→1500 | 30→0 | 30000→60000 | mismatch | cooldown_ms 60000->0; required_level 30->0; duration_ms 30000->60000 |
-| ShadowPriest (Vampiric Embrace talent) | 60 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→0 | 0→0 | 1500→1500 | 30→0 | 30000→60000 | mismatch | cooldown_ms 60000->0; required_level 30->0; duration_ms 30000->60000 |
+| ShadowPriest (Shadowform talent) | 10 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→1500 | 0→0 | 1500→1500 | 0→0 | -1→-1 | match |  |
+| ShadowPriest (Shadowform talent) | 20 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→1500 | 0→0 | 1500→1500 | 0→0 | -1→-1 | match |  |
+| ShadowPriest (Shadowform talent) | 30 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→1500 | 0→0 | 1500→1500 | 0→0 | -1→-1 | match |  |
+| ShadowPriest (Shadowform talent) | 38 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→1500 | 0→0 | 1500→1500 | 0→0 | -1→-1 | match |  |
+| ShadowPriest (Shadowform talent) | 40 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→1500 | 0→0 | 1500→1500 | 0→0 | -1→-1 | match |  |
+| ShadowPriest (Shadowform talent) | 50 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→1500 | 0→0 | 1500→1500 | 0→0 | -1→-1 | match |  |
+| ShadowPriest (Shadowform talent) | 60 | Shadowform | 0 | 15473 | 0.00→0.00 | mana→none | 1500→1500 | 0→0 | 1500→1500 | 0→0 | -1→-1 | match |  |
+| ShadowPriest (Vampiric Embrace talent) | 10 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
+| ShadowPriest (Vampiric Embrace talent) | 20 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
+| ShadowPriest (Vampiric Embrace talent) | 30 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
+| ShadowPriest (Vampiric Embrace talent) | 38 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
+| ShadowPriest (Vampiric Embrace talent) | 40 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
+| ShadowPriest (Vampiric Embrace talent) | 50 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
+| ShadowPriest (Vampiric Embrace talent) | 60 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |

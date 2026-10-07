@@ -30,13 +30,14 @@ func (rogue *Rogue) registerRupture() {
 	spellID := ruptureSpellID[rank]
 
 	rogue.Rupture = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:    SpellCode_RogueRupture,
-		ActionID:     core.ActionID{SpellID: spellID},
-		SpellSchool:  core.SpellSchoolPhysical,
-		DefenseType:  core.DefenseTypeMelee,
-		ProcMask:     core.ProcMaskMeleeMHSpecial,
-		Flags:        rogue.finisherFlags(),
-		MetricSplits: 6,
+		SpellCode:     SpellCode_RogueRupture,
+		ActionID:      core.ActionID{SpellID: spellID},
+		SpellSchool:   core.SpellSchoolPhysical,
+		DefenseType:   core.DefenseTypeMelee,
+		ProcMask:      core.ProcMaskMeleeMHSpecial,
+		Flags:         rogue.finisherFlags(),
+		MetricSplits:  6,
+		RequiredLevel: ruptureLearnLevels[rank-1],
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   25,
@@ -62,7 +63,13 @@ func (rogue *Rogue) registerRupture() {
 			Aura: core.Aura{
 				Label: "Rupture",
 			},
-			NumberOfTicks: 0, // Set dynamically
+			// RuptureTicks(0) (3 ticks, 6s) is this rank's registered
+			// default so the conformance report's engineDuration - which
+			// reads this Dot's Aura.Duration directly, before any sim runs
+			// - sees the same 6000ms duration_ms the client carries for
+			// every Rupture rank; ApplyEffects below always overwrites
+			// this with the real per-cast combo-point value before Apply.
+			NumberOfTicks: 3,
 			TickLength:    time.Second * 2,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {

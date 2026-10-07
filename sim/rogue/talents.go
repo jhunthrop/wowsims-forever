@@ -353,9 +353,15 @@ func (rogue *Rogue) applyWeaponSpecializations() {
 func (rogue *Rogue) applyWeaponExpertise() {
 	if wepExpertise := rogue.Talents.WeaponExpertise; wepExpertise > 0 {
 		wepBonus := []float64{0, 3, 5}
-		rogue.PseudoStats.SwordsSkill += wepBonus[wepExpertise]
-		rogue.PseudoStats.DaggersSkill += wepBonus[wepExpertise]
-		rogue.PseudoStats.UnarmedSkill += wepBonus[wepExpertise]
+		// rankIndex clamps: Forever's client tree gives Weapon Expertise up
+		// to 5 points (see sim/rogue/dps_rogue/level_smoke_test.go), but
+		// this table only has tuned values for the original 2 ranks, so an
+		// over-ranked talent string (CombatSwordsRogue/CombatDaggersRogue
+		// both spend all 5) would otherwise index past the end of wepBonus.
+		bonus := wepBonus[rankIndex(wepExpertise, wepBonus)]
+		rogue.PseudoStats.SwordsSkill += bonus
+		rogue.PseudoStats.DaggersSkill += bonus
+		rogue.PseudoStats.UnarmedSkill += bonus
 	}
 }
 
@@ -410,9 +416,10 @@ func (rogue *Rogue) registerBladeFlurryCD() {
 
 	cooldownDur := time.Minute * 2
 	rogue.BladeFlurry = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode: SpellCode_RogueBladeFlurry,
-		ActionID:  core.ActionID{SpellID: 13877},
-		Flags:     core.SpellFlagAPL,
+		SpellCode:     SpellCode_RogueBladeFlurry,
+		ActionID:      core.ActionID{SpellID: 13877},
+		Flags:         core.SpellFlagAPL,
+		RequiredLevel: 1,
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost: 25,
@@ -427,6 +434,9 @@ func (rogue *Rogue) registerBladeFlurryCD() {
 				Duration: cooldownDur,
 			},
 		},
+
+		// See Adrenaline Rush's RelatedSelfBuff comment above.
+		RelatedSelfBuff: rogue.BladeFlurryAura,
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
 			rogue.BreakStealth(sim)
@@ -483,6 +493,12 @@ func (rogue *Rogue) registerAdrenalineRushCD() {
 				Duration: time.Minute * 5,
 			},
 		},
+
+		// The conformance report (sim/conformance/compare.go's
+		// engineDuration) only reads a spell's duration off
+		// RelatedSelfBuff or a current-target Dot; without this, Adrenaline
+		// Rush's real 15s buff was invisible to it.
+		RelatedSelfBuff: rogue.AdrenalineRushAura,
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
 			rogue.BreakStealth(sim)

@@ -45,11 +45,16 @@ func (rogue *Rogue) applyRiposte() {
 		},
 	})
 
+	// 6s, matching the client's own duration_ms for spell 14251 -
+	// RiposteDurationMS isn't in constants_auto_gen.go (duration isn't a
+	// generated field for any class), so this is read off
+	// sim/core/testdata/conformance/client/rogue.json by hand.
 	riposteReady = rogue.RegisterAura(core.Aura{
 		Label:    "Riposte Ready Aura",
 		ActionID: riposte.ActionID,
-		Duration: time.Second * 5,
+		Duration: time.Second * 6,
 	})
+	riposte.RelatedSelfBuff = riposteReady
 
 	rogue.RegisterAura(core.Aura{
 		Label:    "Riposte Trigger",

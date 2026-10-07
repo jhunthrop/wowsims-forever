@@ -552,9 +552,17 @@ func (priest *Priest) registerShadowform() {
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
 
+		// Shadowform is cast like any other instant: the client's own
+		// ShadowformCooldownMS (constants_auto_gen.go) carries 1500ms for
+		// both the GCD and a same-length cooldown, not the GCD-less,
+		// cooldown-less toggle this previously modeled.
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: 0,
+				GCD: core.GCDDefault,
+			},
+			CD: core.Cooldown{
+				Timer:    priest.NewTimer(),
+				Duration: time.Millisecond * time.Duration(ShadowformCooldownMS[0]),
 			},
 		},
 
