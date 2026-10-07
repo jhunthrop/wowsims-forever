@@ -13,11 +13,14 @@ func TestLevelSixtyBuffsAreTheClientTopRanks(t *testing.T) {
 	if got := ArcaneIntellectStats(60)[stats.Intellect]; got != 31 {
 		t.Errorf("Arcane Intellect at 60 = %v, want 31", got)
 	}
-	if got := BlessingOfMightAttackPower(60); got != 133 {
-		t.Errorf("Blessing of Might at 60 = %v, want 133", got)
+	// Rank 7 of both is an Ahn'Qiraj book rank, so the level-60 value
+	// follows IncludeAQ: the book rank with it on, rank 6 (grown to 60 for
+	// Battle Shout) with it off.
+	if got, want := BlessingOfMightAttackPower(60), TernaryFloat64(IncludeAQ, 133, 112); got != want {
+		t.Errorf("Blessing of Might at 60 = %v, want %v", got, want)
 	}
-	if got := BattleShoutAttackPower(60); got != 139 {
-		t.Errorf("Battle Shout at 60 = %v, want 139", got)
+	if got, want := BattleShoutAttackPower(60), TernaryFloat64(IncludeAQ, 139, 115); got != want {
+		t.Errorf("Battle Shout at 60 = %v, want %v", got, want)
 	}
 	mark := MarkOfTheWildStats(60)
 	if mark[stats.BonusArmor] != 385 || mark[stats.Strength] != 16 || mark[stats.FrostResistance] != 27 {
@@ -44,7 +47,7 @@ func TestBlessingOfMightFollowsClientRanks(t *testing.T) {
 	cases := []struct {
 		level int
 		want  float64
-	}{{4, 14}, {11, 14}, {12, 25}, {22, 40}, {32, 61}, {42, 83}, {51, 83}, {52, 112}, {60, 133}}
+	}{{4, 14}, {11, 14}, {12, 25}, {22, 40}, {32, 61}, {42, 83}, {51, 83}, {52, 112}, {60, TernaryFloat64(IncludeAQ, 133, 112)}}
 	for _, c := range cases {
 		if got := BlessingOfMightAttackPower(c.level); got != c.want {
 			t.Errorf("Blessing of Might at level %d = %v, want %v", c.level, got, c.want)
@@ -69,7 +72,7 @@ func TestBattleShoutGrowsWithinARank(t *testing.T) {
 	cases := []struct {
 		level int
 		want  float64
-	}{{1, 9}, {11, 12}, {12, 21}, {32, 51}, {41, 56}, {52, 111}, {60, 139}, {70, 139}}
+	}{{1, 9}, {11, 12}, {12, 21}, {32, 51}, {41, 56}, {52, 111}, {60, TernaryFloat64(IncludeAQ, 139, 115)}, {70, TernaryFloat64(IncludeAQ, 139, 116)}}
 	for _, c := range cases {
 		if got := BattleShoutAttackPower(c.level); got != c.want {
 			t.Errorf("Battle Shout at level %d = %v, want %v", c.level, got, c.want)
