@@ -22,6 +22,10 @@ type Weapon struct {
 	SwingSpeed           float64
 	NormalizedSwingSpeed float64
 	SpellSchool          SpellSchool
+	// TwoHanded is true for a two-hand weapon; Forever's normalized rage
+	// (rage.go's normalizedSwingRage) pays two-handers a higher per-swing
+	// constant. False for the unarmed default and for every one-hander.
+	TwoHanded bool
 }
 
 func (weapon *Weapon) DPS() float64 {
@@ -58,6 +62,7 @@ func newWeaponFromItem(item *Item, bonusDps float64) Weapon {
 		SwingSpeed:           item.SwingSpeed,
 		NormalizedSwingSpeed: normalizedWeaponSpeed,
 		AttackPowerPerDPS:    DefaultAttackPowerPerDPS,
+		TwoHanded:            item.HandType == proto.HandType_HandTypeTwoHand,
 	}
 }
 

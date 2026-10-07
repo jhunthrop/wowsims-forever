@@ -54,9 +54,59 @@ func GetRageConversion(attacker_level int32) float64 {
 	}
 }
 
+// Forever's normalized rage. The beta replaced vanilla's damage-based
+// rage (GetRageConversion above, now used only for rage from damage
+// TAKEN) with a fixed amount per successful auto-attack that depends on
+// the weapon's speed and hand, not on the damage it dealt, so a level-60
+// epic and a grey of the same speed generate the same rage per swing.
+//
+// Sources, in order of confidence:
+//   - Blizzard's 1 October 2026 beta development notes: "Additional
+//     Rage generated from landing Critical Strikes increased to 100%
+//     increased Rage (was 75%)" - a crit pays double
+//     (normalizedRageCritMultiplier).
+//   - Community measurement on the 24 September beta build (Icy Veins,
+//     25 September 2026): one-handers generate weapon speed x 3.46 per
+//     landed swing, two-handers weapon speed x 4.50
+//     (normalizedRagePerSpeedOneHand / TwoHand). These are measured, not
+//     stated, numbers; the owner's own combat log is the check.
+//   - The off-hand constant is NOT measured anywhere public. It is taken
+//     as half the one-hand constant, the ratio Blizzard's own TBC-era
+//     normalization used for off-hand swings (hit factor 1.75 against a
+//     main hand's 3.5, which the measured 3.46 all but names); an
+//     assumption until a log settles it.
+//
+// Talents that add rage on top (Unbridled Wrath, Dual Wield
+// Specialization's off-hand clause) keep their own hooks.
+const (
+	normalizedRagePerSpeedOneHand = 3.46
+	normalizedRagePerSpeedTwoHand = 4.50
+	normalizedRageOffHandFactor   = 0.5
+	normalizedRageCritMultiplier  = 2.0
+)
+
+// normalizedSwingRage is the rage one landed auto-attack with weapon
+// generates before any multiplier or flat bonus the rage bar carries.
+func normalizedSwingRage(weapon *Weapon, offHand bool, crit bool) float64 {
+	if weapon == nil || weapon.SwingSpeed <= 0 {
+		return 0
+	}
+	perSpeed := normalizedRagePerSpeedOneHand
+	if weapon.TwoHanded {
+		perSpeed = normalizedRagePerSpeedTwoHand
+	}
+	rage := weapon.SwingSpeed * perSpeed
+	if offHand {
+		rage *= normalizedRageOffHandFactor
+	}
+	if crit {
+		rage *= normalizedRageCritMultiplier
+	}
+	return rage
+}
+
 func (unit *Unit) EnableRageBar(options RageBarOptions) {
 	rageFromDamageTakenMetrics := unit.NewRageMetrics(ActionID{OtherID: proto.OtherAction_OtherActionDamageTaken})
-	rageConversion := GetRageConversion(unit.Level)
 
 	unit.SetCurrentPowerBar(RageBar)
 	unit.RegisterAura(Aura{
@@ -88,15 +138,20 @@ func (unit *Unit) EnableRageBar(options RageBarOptions) {
 				return
 			}
 
-			damage := result.Damage
-			if result.Outcome.Matches(OutcomeDodge | OutcomeParry) {
-				// Rage is still generated for dodges/parries, based on the damage it WOULD have done.
-				damage = result.PreOutcomeDamage
+			// Forever normalizes rage from auto-attacks: a fixed amount
+			// per swing from the weapon's own speed and hand, doubled on
+			// a critical strike, with no damage term at all (see
+			// normalizedSwingRage). A dodged or parried swing still pays
+			// its base, as vanilla's damage-based formula did through
+			// PreOutcomeDamage; a miss pays nothing (returned above).
+			offHand := spell.ProcMask == ProcMaskMeleeOHAuto
+			weapon := unit.AutoAttacks.MH()
+			if offHand {
+				weapon = unit.AutoAttacks.OH()
 			}
-
-			generatedRage := damage * 7.5 / rageConversion
+			generatedRage := normalizedSwingRage(weapon, offHand, result.DidCrit())
 			generatedRage *= unit.rageBar.damageDealtMultiplier
-			if spell.ProcMask == ProcMaskMeleeOHAuto {
+			if offHand {
 				generatedRage *= unit.rageBar.offHandDamageDealtMultiplier
 			}
 			generatedRage += unit.rageBar.flatDamageDealtBonusRage
