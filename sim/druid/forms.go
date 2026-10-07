@@ -187,6 +187,12 @@ func (druid *Druid) registerCatFormSpell() {
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
 
+		RequiredLevel: CatFormLevel[0],
+
+		// CatFormManaCost (constants_auto_gen.go) reads 0 for this
+		// spell in 1.60.1.70009 spellconst/druid.json; the
+		// percent-of-base-mana model below is kept because no nonzero
+		// flat cost exists to replace it with.
 		ManaCost: core.ManaCostOptions{
 			BaseCost:   0.55,
 			Multiplier: 100 - 10*druid.Talents.NaturalShapeshifter,
@@ -415,6 +421,12 @@ func (druid *Druid) registerMoonkinFormSpell() {
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
 
+		RequiredLevel: MoonkinFormLevel[0],
+
+		// MoonkinFormManaCost (constants_auto_gen.go) reads 0 for this
+		// spell in 1.60.1.70009 spellconst/druid.json; the
+		// percent-of-base-mana model below is kept because no nonzero
+		// flat cost exists to replace it with.
 		ManaCost: core.ManaCostOptions{
 			BaseCost:   0.35,
 			Multiplier: 100 - 10*druid.Talents.NaturalShapeshifter,

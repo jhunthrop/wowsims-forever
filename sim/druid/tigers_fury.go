@@ -47,6 +47,8 @@ func (druid *Druid) registerTigersFurySpell() {
 		ActionID: actionID,
 		Flags:    core.SpellFlagAPL,
 
+		RequiredLevel: tigersFuryLearnLevels[rank-1],
+
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    druid.NewTimer(),

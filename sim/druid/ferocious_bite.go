@@ -96,6 +96,8 @@ func (druid *Druid) newFerociousBiteSpellConfig(rank FerociousBiteRankInfo) core
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
 		Flags:          SpellFlagOmen | core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
 
+		RequiredLevel: int(rank.level),
+
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   35,
 			Refund: 0,

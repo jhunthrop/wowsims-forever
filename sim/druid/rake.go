@@ -67,6 +67,8 @@ func (druid *Druid) newRakeSpellConfig(rakeRank RakeRankInfo) core.SpellConfig {
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagIgnoreResists | core.SpellFlagBinary | core.SpellFlagAPL | SpellFlagOmen | SpellFlagBuilder,
 
+		RequiredLevel: int(rakeRank.level),
+
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   energyCost,
 			Refund: 0.8,

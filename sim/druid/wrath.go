@@ -11,7 +11,15 @@ const WrathRanks = 8
 var WrathSpellId = [WrathRanks + 1]int32{0, 5176, 5177, 5178, 5179, 5180, 6780, 8905, 9912}
 var WrathBaseDamage = [WrathRanks + 1][]float64{{0}, {13, 16}, {28, 33}, {48, 57}, {69, 79}, {108, 123}, {148, 167}, {198, 221}, {248, 277}}
 var WrathSpellCoeff = [WrathRanks + 1]float64{0, 0.123, 0.231, 0.443, 0.571, 0.571, 0.571, 0.571, 0.571}
-var WrathManaCost = [WrathRanks + 1]float64{0, 20, 35, 55, 70, 100, 125, 155, 180}
+// WrathManaCost was a stale pre-Forever table (roughly 40-75% above the
+// client's real per-rank cost at every rank); corrected against
+// 1.60.1.70009 spellconst/druid.json (ids 5176-9912). The generator
+// skips Wrath's own name ("skipped: \"Wrath\" already has a
+// hand-written WrathRanks elsewhere in this package" in
+// constants_auto_gen.go), so this hand table is the source of truth
+// and must be kept in sync by hand, the same situation as Frostbolt's
+// in sim/mage/frostbolt.go.
+var WrathManaCost = [WrathRanks + 1]float64{0, 10, 20, 40, 50, 70, 80, 100, 120}
 var WrathCastTime = [WrathRanks + 1]int{0, 1500, 1700, 2000, 2000, 2000, 2000, 2000, 2000}
 var WrathLevel = [WrathRanks + 1]int{0, 1, 6, 14, 22, 30, 38, 46, 54}
 

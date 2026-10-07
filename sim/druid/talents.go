@@ -263,6 +263,10 @@ func (druid *Druid) registerNaturesSwiftnessCD() {
 	nsSpell = druid.RegisterSpell(Humanoid|Moonkin, core.SpellConfig{
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
+		// Every client id for "Nature's Swiftness" (17116, 29274) is
+		// spell_level 1; NatureSSwiftnessLevel[0] (constants_auto_gen.go)
+		// reads the same.
+		RequiredLevel: NatureSSwiftnessLevel[0],
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    druid.NewTimer(),
@@ -705,6 +709,10 @@ func (druid *Druid) registerBerserkCD() {
 	druid.Berserk = druid.RegisterSpell(Cat, core.SpellConfig{
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
+		// Every client id for "Berserk" (417141, 424759, 442211) is
+		// spell_level 1; BerserkLevel[0] (constants_auto_gen.go) reads
+		// the same.
+		RequiredLevel: BerserkLevel[0],
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    druid.NewTimer(),

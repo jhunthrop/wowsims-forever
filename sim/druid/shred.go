@@ -37,6 +37,8 @@ func (druid *Druid) registerShredSpell() {
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOmen | SpellFlagBuilder,
 
+		RequiredLevel: shredLearnLevels[rank-1],
+
 		EnergyCost: core.EnergyCostOptions{
 			// Shredding Attacks (node 104945, proto field
 			// shredding_attacks): "Reduces the Energy cost of your

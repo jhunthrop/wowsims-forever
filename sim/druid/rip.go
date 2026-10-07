@@ -99,6 +99,8 @@ func (druid *Druid) newRipSpellConfig(ripRank RipRankInfo) core.SpellConfig {
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
 		Flags:          SpellFlagOmen | core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagPureDot,
 
+		RequiredLevel: int(ripRank.level),
+
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   energyCost,
 			Refund: 0,

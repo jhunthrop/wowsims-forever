@@ -49,6 +49,11 @@ func (druid *Druid) registerFaerieFireSpell() {
 		ProcMask:    core.ProcMaskSpellDamage,
 		Flags:       flags,
 
+		// This file always registers the top (rank 4, id 9907) Faerie
+		// Fire; FaerieFireLevel[4] (constants_auto_gen.go) is that
+		// rank's required level, 54.
+		RequiredLevel: FaerieFireLevel[4],
+
 		ManaCost: manaCostOptions,
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

@@ -38,6 +38,13 @@ func (druid *Druid) registerInnervateCD() {
 	druid.Innervate = druid.RegisterSpell(Humanoid|Moonkin, core.SpellConfig{
 		ActionID: actionID,
 
+		RequiredLevel: InnervateLevel[0],
+
+		// Innervate's flat cost column (constants_auto_gen.go's
+		// InnervateManaCost) reads 0 on every variant of this spell in
+		// 1.60.1.70009 spellconst/druid.json; the percent-of-base-mana
+		// model below is kept because no nonzero flat cost exists to
+		// replace it with.
 		ManaCost: core.ManaCostOptions{
 			BaseCost: 0.05,
 		},

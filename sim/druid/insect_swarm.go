@@ -50,6 +50,8 @@ func (druid *Druid) registerInsectSwarmSpell() {
 				ProcMask:       core.ProcMaskSpellDamage,
 				Flags:          SpellFlagOmen | core.SpellFlagAPL | core.SpellFlagBinary,
 
+				RequiredLevel: level,
+
 				ManaCost: core.ManaCostOptions{
 					FlatCost: manaCost,
 				},
