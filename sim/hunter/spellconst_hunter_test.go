@@ -217,8 +217,9 @@ func TestAspectOfTheHawkChargesManaMatchingSpellconst(t *testing.T) {
 		wantCost float64
 	}{
 		{10, 13165, 20},
-		{58, 14322, 110},
-		{60, core.TernaryInt32(core.IncludeAQ, 25296, 14322), core.TernaryFloat64(core.IncludeAQ, 120, 110)},
+		{48, 14321, 90},
+		{58, 14321, 90},
+		{60, core.TernaryInt32(core.IncludeAQ, 25296, 14321), core.TernaryFloat64(core.IncludeAQ, 120, 90)},
 	}
 	for _, c := range cases {
 		_, built, _ := newBareHunterAtLevel(t, c.level)
@@ -242,6 +243,22 @@ func TestAspectOfTheHawkRank6AttackPowerMatchesSpellconst(t *testing.T) {
 	_, built, _ := newBareHunterAtLevel(t, 60)
 	if got, want := built.getMaxAspectOfTheHawkAttackPower(6), 55.0; got != want {
 		t.Errorf("Aspect of the Hawk rank 6 attack power = %.0f, want %.0f", got, want)
+	}
+}
+
+// TestAspectOfTheHawkSkipsTheInferiorRank6 guards the registration rule:
+// rank 6 (14322) gives 55 ranged attack power against rank 5's 90, so a
+// hunter who has learned both casts rank 5, the way a player does. Rank 6
+// is never the registered spell, and rank 5 is.
+func TestAspectOfTheHawkSkipsTheInferiorRank6(t *testing.T) {
+	for _, level := range []int32{58, 59, 60} {
+		_, built, _ := newBareHunterAtLevel(t, level)
+		if built.GetSpell(core.ActionID{SpellID: 14322}) != nil {
+			t.Errorf("level-%d hunter registered Aspect of the Hawk rank 6 (14322), weaker than rank 5", level)
+		}
+		if built.GetSpell(core.ActionID{SpellID: 14321}) == nil {
+			t.Errorf("level-%d hunter has no Aspect of the Hawk rank 5 (14321)", level)
+		}
 	}
 }
 

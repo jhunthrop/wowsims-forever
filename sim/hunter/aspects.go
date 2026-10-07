@@ -52,16 +52,24 @@ func (hunter *Hunter) getMaxAspectOfTheHawkAttackPower(rank int) float64 {
 // never charged mana for this aura at all before this fix.
 var aspectOfTheHawkManaCost = [8]float64{0, 20, 35, 50, 70, 90, 110, 120}
 
+// getMaxHawkRank is the rank a hunter casts: the strongest rank learned by
+// their level, not the highest. Rank 6 gives 55 ranged attack power
+// against rank 5's 90 in the client, so a player keeps rank 5
+// (data/curated/inferior-ranks.json on the site names the same fact).
 func (hunter *Hunter) getMaxHawkRank() int {
 	maxRank := core.TernaryInt(core.IncludeAQ, 7, 6)
 
-	for i := maxRank; i > 0; i-- {
-		config := hunter.getAspectOfTheHawkSpellConfig(i)
-		if config.RequiredLevel <= int(hunter.Level) {
-			return i
+	best := 1
+	for rank := 1; rank <= maxRank; rank++ {
+		config := hunter.getAspectOfTheHawkSpellConfig(rank)
+		if config.RequiredLevel > int(hunter.Level) {
+			continue
+		}
+		if hunter.getMaxAspectOfTheHawkAttackPower(rank) > hunter.getMaxAspectOfTheHawkAttackPower(best) {
+			best = rank
 		}
 	}
-	return 1
+	return best
 }
 
 func (hunter *Hunter) getAspectOfTheHawkSpellConfig(rank int) core.SpellConfig {
