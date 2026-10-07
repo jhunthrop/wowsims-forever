@@ -77,11 +77,9 @@ func (rogue *Rogue) registerMutilateSpell() {
 
 	// Opportunity (talent node 105760): "Increases the damage dealt by
 	// your Backstab, Garrote, Ambush, and Mutilate abilities by 5%/10%."
-	// Two ranks per the client's tree, unlike the stale 4/8/12/16/20%,
-	// five-rank array ambush.go reuses for the same talent -- that array
-	// predates the Forever rewrite and is out of scope for this lane, so
-	// it is not copied here.
-	opportunityMultiplier := []float64{1, 1.05, 1.10}[rogue.Talents.Opportunity]
+	// Two ranks per the client's tree; the same table (client_values.go)
+	// serves Backstab, Garrote and Ambush.
+	opportunityDamage := opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])]
 
 	rogue.MutilateMH = rogue.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: mutilateMHSpellID[rank]},
@@ -91,7 +89,7 @@ func (rogue *Rogue) registerMutilateSpell() {
 		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell,
 
 		CritDamageBonus:  rogue.lethality(),
-		DamageMultiplier: opportunityMultiplier,
+		DamageMultiplier: opportunityDamage,
 		ThreatMultiplier: 1,
 	})
 
@@ -103,7 +101,7 @@ func (rogue *Rogue) registerMutilateSpell() {
 		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell,
 
 		CritDamageBonus:  rogue.lethality(),
-		DamageMultiplier: opportunityMultiplier,
+		DamageMultiplier: opportunityDamage,
 		ThreatMultiplier: 1,
 	})
 

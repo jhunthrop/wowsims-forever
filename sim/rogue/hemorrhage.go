@@ -21,10 +21,17 @@ func (rogue *Rogue) registerHemorrhageSpell() {
 
 	actionID := core.ActionID{SpellID: spellID}
 
-	var hemoAuras core.AuraArray
-	hemoAuras = rogue.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-		return core.HemorrhageAura(target)
+	// The client's Hemorrhage is a Rupture amplifier, not the vanilla
+	// "+7 physical damage on the next 30 hits" (core.HemorrhageAura), so
+	// the rogue keeps its own debuff; see RuptureDamageTakenMultiplier.
+	hemoAuras := rogue.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
+		return target.GetOrRegisterAura(core.Aura{
+			Label:    "Hemorrhage (Rupture)",
+			ActionID: actionID,
+			Duration: hemorrhageDebuffDuration,
+		})
 	})
+	rogue.hemorrhageAuras = hemoAuras
 
 	rogue.Hemorrhage = rogue.RegisterSpell(core.SpellConfig{
 		SpellCode:     SpellCode_RogueHemorrhage,
@@ -53,7 +60,7 @@ func (rogue *Rogue) registerHemorrhageSpell() {
 
 		CritDamageBonus: rogue.lethality(),
 
-		DamageMultiplier: 1,
+		DamageMultiplier: rogue.mainHandStrikePct(hemorrhageWeaponDamagePct, hemorrhageDaggerWeaponDamagePct),
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
 
@@ -65,14 +72,19 @@ func (rogue *Rogue) registerHemorrhageSpell() {
 
 			if result.Landed() {
 				rogue.AddComboPoints(sim, 1, target, spell.ComboPointMetrics())
-				if len(hemoAuras) > 0 {
-					hemoAura := hemoAuras.Get(target)
-					hemoAura.Activate(sim)
-					hemoAura.SetStacks(sim, 30)
-				}
+				hemoAuras.Get(target).Activate(sim)
 			} else {
 				spell.IssueRefund(sim)
 			}
 		},
 	})
+}
+
+// RuptureDamageTakenMultiplier is the factor the target's Hemorrhage debuff
+// puts on this rogue's Rupture damage (1 when it is not up).
+func (rogue *Rogue) RuptureDamageTakenMultiplier(target *core.Unit) float64 {
+	if rogue.hemorrhageAuras != nil && rogue.hemorrhageAuras.Get(target).IsActive() {
+		return 1 + hemorrhageRuptureDamageBonus
+	}
+	return 1
 }

@@ -76,7 +76,11 @@ func (rogue *Rogue) registerRupture() {
 				dot.Snapshot(target, rogue.RuptureDamage(target, rogue.ComboPoints()), isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
+				// Hemorrhage's debuff is read at each tick, not snapshotted.
+				bonus := rogue.RuptureDamageTakenMultiplier(target)
+				dot.Spell.DamageMultiplier *= bonus
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
+				dot.Spell.DamageMultiplier /= bonus
 			},
 		},
 

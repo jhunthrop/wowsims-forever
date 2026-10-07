@@ -32,7 +32,7 @@ func (rogue *Rogue) registerBackstabSpell() {
 	flatDamageBonus := backstabFlatDamageBonus[rank]
 	spellID := backstabSpellID[rank]
 
-	damageMultiplier := 1.5 * []float64{1, 1.04, 1.08, 1.12, 1.16, 1.2}[rogue.Talents.Opportunity]
+	damageMultiplier := 1.5 * opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])]
 
 	rogue.Backstab = rogue.RegisterSpell(core.SpellConfig{
 		SpellCode:     SpellCode_RogueBackstab,

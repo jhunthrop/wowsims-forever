@@ -30,7 +30,7 @@ func (rogue *Rogue) registerAmbushSpell() {
 	flatDamageBonus := ambushFlatDamageBonus[rank]
 	spellID := ambushSpellID[rank]
 
-	damageMultiplier := 2.5 * []float64{1, 1.04, 1.08, 1.12, 1.16, 1.2}[rogue.Talents.Opportunity]
+	damageMultiplier := 2.5 * opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])]
 
 	rogue.Ambush = rogue.RegisterSpell(core.SpellConfig{
 		SpellCode:     SpellCode_RogueAmbush,
