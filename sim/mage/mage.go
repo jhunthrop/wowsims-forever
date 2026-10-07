@@ -149,6 +149,7 @@ type Mage struct {
 	ClearcastingAura    *core.Aura
 	CombustionAura      *core.Aura
 	FrozenAuras         core.AuraArray
+	HeatingUpAura       *core.Aura
 	IceArmorAura        *core.Aura
 	IceBarrierAuras     []*core.Aura
 	ImprovedScorchAuras core.AuraArray
