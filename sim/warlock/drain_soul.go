@@ -4,10 +4,21 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
 const DrainSoulRanks = 4
+
+// DrainSoulTickDamage is spellconst/warlock.json's own per-tick amount for
+// ids 1120 through 11675 (rank 4: 84 over 5 ticks, no growth).
+var DrainSoulTickDamage = [DrainSoulRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 17, SpellLevel: 10},
+	{Amount: 34, SpellLevel: 24},
+	{Amount: 54, SpellLevel: 38},
+	{Amount: 84, SpellLevel: 52},
+}
 
 func (warlock *Warlock) getDrainSoulBaseConfig(rank int) core.SpellConfig {
 	baseNumTicks := int32(5)
@@ -15,14 +26,16 @@ func (warlock *Warlock) getDrainSoulBaseConfig(rank int) core.SpellConfig {
 	tickLength := time.Second * 3
 
 	spellId := [DrainSoulRanks + 1]int32{0, 1120, 8288, 8289, 11675}[rank]
-	spellCoeff := [DrainSoulRanks + 1]float64{0, 0.063, 0.1, 0.1, 0.1}[rank]
+	spellCoeff := [DrainSoulRanks + 1]float64{0, 0.1, 0.1, 0.1, 0.1}[rank]
 	// Per-tick base damage, straight from spellconst/warlock.json's own
 	// flat "amount" for each rank's damage effect (period_ms 3000, 5
 	// ticks): 1120/8288/8289/11675 -> 17/34/54/84. This used to be a
 	// classic-tooltip total (55/155/295/455) divided by baseNumTicks,
 	// which drifted 10-30% high of the client's real per-tick number
 	// (rank 4: 91 vs 84).
-	baseDamage := [DrainSoulRanks + 1]float64{0, 17, 34, 54, 84}[rank]
+	damage := DrainSoulTickDamage[rank]
+	casterLevel := int(warlock.Level)
+	baseDamage := damage.Center(casterLevel)
 	manaCost := [DrainSoulRanks + 1]float64{0, 55, 125, 210, 290}[rank]
 	level := [DrainSoulRanks + 1]int{0, 10, 24, 38, 52}[rank]
 
@@ -34,8 +47,9 @@ func (warlock *Warlock) getDrainSoulBaseConfig(rank int) core.SpellConfig {
 		ProcMask:    core.ProcMaskSpellDamage,
 		Flags:       core.SpellFlagAPL | core.SpellFlagChanneled | core.SpellFlagResetAttackSwing | WarlockFlagAffliction,
 
-		RequiredLevel: level,
-		Rank:          rank,
+		RequiredLevel:    level,
+		Rank:             rank,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,
@@ -48,6 +62,7 @@ func (warlock *Warlock) getDrainSoulBaseConfig(rank int) core.SpellConfig {
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		BonusCoefficient: spellCoeff, // the report compares the spell's, which a pure DoT never reads
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{

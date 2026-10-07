@@ -3,6 +3,7 @@ package warlock
 import (
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -26,19 +27,22 @@ import (
 //   - every rank's effect 1 is effect=3 (Dummy), amount 25 -- the flat
 //     "+25% if Immolate" from the talent text, present unchanged at
 //     every rank.
-//
-// The pipeline's spellconst effects carry no dice/variance columns (see
-// sim/core/spellconst's Effect shape), and wowhead's Forever page for
-// 412758 shows a single base value with no min-max tooltip either, so
-// Incinerate is implemented as a flat per-rank amount (no sim.Roll),
-// the same convention Wrack's DoT tick uses, rather than the classic
-// min/max-roll convention ShadowBolt/SearingPain use for their
-// pre-Forever ranks.
 const IncinerateRanks = 3
+
+// IncinerateDamage is the client's own roll for those ids (rank 3 rolls
+// 200.7-233.3 at level 60: a centre of 217 at its own level, growing 1.4 a
+// level, 0.15 wide), read from spellconst/warlock.json's effect 0.
+var IncinerateDamage = [IncinerateRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 97, Variance: 0.15, PerLevel: 1.1, SpellLevel: 40, MaxLevel: 49},
+	{Amount: 145, Variance: 0.15, PerLevel: 1.3, SpellLevel: 50, MaxLevel: 59},
+	{Amount: 217, Variance: 0.15, PerLevel: 1.4, SpellLevel: 60, MaxLevel: 69},
+}
 
 func (warlock *Warlock) getIncinerateBaseConfig(rank int) core.SpellConfig {
 	spellId := [IncinerateRanks + 1]int32{0, 412758, 1293812, 1293813}[rank]
-	baseDamage := [IncinerateRanks + 1]float64{0, 97, 145, 217}[rank]
+	damage := IncinerateDamage[rank]
+	casterLevel := int(warlock.Level)
 	manaCost := [IncinerateRanks + 1]float64{0, 205, 265, 325}[rank]
 	level := [IncinerateRanks + 1]int{0, 40, 50, 60}[rank]
 	spellCoeff := 0.71399998665
@@ -46,14 +50,15 @@ func (warlock *Warlock) getIncinerateBaseConfig(rank int) core.SpellConfig {
 	const immolateBonusMultiplier = 1.25
 
 	return core.SpellConfig{
-		SpellCode:     SpellCode_WarlockIncinerate,
-		ActionID:      core.ActionID{SpellID: spellId},
-		SpellSchool:   core.SpellSchoolFire,
-		DefenseType:   core.DefenseTypeMagic,
-		ProcMask:      core.ProcMaskSpellDamage,
-		Flags:         core.SpellFlagAPL | core.SpellFlagResetAttackSwing | WarlockFlagDestruction,
-		RequiredLevel: level,
-		Rank:          rank,
+		SpellCode:        SpellCode_WarlockIncinerate,
+		ActionID:         core.ActionID{SpellID: spellId},
+		SpellSchool:      core.SpellSchoolFire,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		Flags:            core.SpellFlagAPL | core.SpellFlagResetAttackSwing | WarlockFlagDestruction,
+		RequiredLevel:    level,
+		Rank:             rank,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,
@@ -75,7 +80,7 @@ func (warlock *Warlock) getIncinerateBaseConfig(rank int) core.SpellConfig {
 				spell.DamageMultiplier *= immolateBonusMultiplier
 			}
 
-			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			result := spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 			spell.DamageMultiplier = oldMultiplier
 
 			spell.DealDamage(sim, result)

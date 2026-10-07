@@ -4,22 +4,33 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
 const CorruptionRanks = 7
 
+// CorruptionTickDamage is spellconst/warlock.json's own per-tick amount for
+// ids 172 through 25311 (rank 7: 73, period 3 s, no growth), roughly half the
+// classic total-over-duration divided by the tick count - the same halving
+// shadowbolt.go's comment documents across the rest of the kit.
+var CorruptionTickDamage = [CorruptionRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 10, SpellLevel: 4, MaxLevel: 9},
+	{Amount: 13, SpellLevel: 14, MaxLevel: 19},
+	{Amount: 22, SpellLevel: 24, MaxLevel: 29},
+	{Amount: 28, SpellLevel: 34, MaxLevel: 39},
+	{Amount: 40, SpellLevel: 44, MaxLevel: 49},
+	{Amount: 57, SpellLevel: 54, MaxLevel: 59},
+	{Amount: 73, SpellLevel: 60, MaxLevel: 65},
+}
+
 func (warlock *Warlock) getCorruptionConfig(rank int) core.SpellConfig {
-	dotTickCoeff := [CorruptionRanks + 1]float64{0, .08, .155, .167, .167, .167, .167, .167}[rank] // per tick
+	dotTickCoeff := [CorruptionRanks + 1]float64{0, .2, .2, .2, .2, .2, .2, .2}[rank] // per tick
 	ticks := [CorruptionRanks + 1]int32{0, 4, 5, 6, 6, 6, 6, 6}[rank]
-	// baseDamage (per tick) was a classic total-over-duration
-	// ({40,90,222,324,486,666,822}) divided by the tick count until the
-	// rotation-accuracy audit compared it against spellconst/
-	// warlock.json's own per-rank flat per-tick "amount" (rank 7,
-	// 25311, amount 73, period_ms 3000 unchanged) - roughly half the
-	// classic total's implied per-tick value, the same halving
-	// shadowbolt.go's comment documents across the rest of the kit.
-	baseDamage := [CorruptionRanks + 1]float64{0, 10, 13, 22, 28, 40, 57, 73}[rank]
+	damage := CorruptionTickDamage[rank]
+	casterLevel := int(warlock.Level)
+	baseDamage := damage.Center(casterLevel)
 	spellId := [CorruptionRanks + 1]int32{0, 172, 6222, 6223, 7648, 11671, 11672, 25311}[rank]
 	manaCost := [CorruptionRanks + 1]float64{0, 35, 55, 100, 160, 225, 290, 340}[rank]
 	level := [CorruptionRanks + 1]int{0, 4, 14, 24, 34, 44, 54, 60}[rank]
@@ -27,14 +38,15 @@ func (warlock *Warlock) getCorruptionConfig(rank int) core.SpellConfig {
 	castTime := time.Millisecond * (2000 - (400 * time.Duration(warlock.Talents.ImprovedCorruption)))
 
 	return core.SpellConfig{
-		ActionID:      core.ActionID{SpellID: spellId},
-		SpellSchool:   core.SpellSchoolShadow,
-		SpellCode:     SpellCode_WarlockCorruption,
-		ProcMask:      core.ProcMaskSpellDamage,
-		DefenseType:   core.DefenseTypeMagic,
-		Flags:         core.SpellFlagAPL | core.SpellFlagResetAttackSwing | core.SpellFlagPureDot | WarlockFlagAffliction,
-		Rank:          rank,
-		RequiredLevel: level,
+		ActionID:         core.ActionID{SpellID: spellId},
+		SpellSchool:      core.SpellSchoolShadow,
+		SpellCode:        SpellCode_WarlockCorruption,
+		ProcMask:         core.ProcMaskSpellDamage,
+		DefenseType:      core.DefenseTypeMagic,
+		Flags:            core.SpellFlagAPL | core.SpellFlagResetAttackSwing | core.SpellFlagPureDot | WarlockFlagAffliction,
+		Rank:             rank,
+		ClientBaseDamage: damage.Range(casterLevel),
+		RequiredLevel:    level,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,
@@ -46,7 +58,8 @@ func (warlock *Warlock) getCorruptionConfig(rank int) core.SpellConfig {
 			},
 		},
 
-		CritDamageBonus: 0,
+		CritDamageBonus:  0,
+		BonusCoefficient: dotTickCoeff, // the report compares the spell's, which a pure DoT never reads
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
@@ -81,7 +94,6 @@ func (warlock *Warlock) getCorruptionConfig(rank int) core.SpellConfig {
 				dot := spell.Dot(target)
 				return dot.CalcSnapshotDamage(sim, target, dot.Spell.OutcomeExpectedMagicAlwaysHit)
 			} else {
-				baseDamage := baseDamage / float64(ticks)
 				return spell.CalcPeriodicDamage(sim, target, baseDamage, spell.OutcomeExpectedMagicAlwaysHit)
 			}
 		},

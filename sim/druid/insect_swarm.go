@@ -77,6 +77,7 @@ func (druid *Druid) registerInsectSwarmSpell() {
 
 				DamageMultiplier: 1,
 				ThreatMultiplier: 1,
+				BonusCoefficient: spellCoef, // the report compares the spell's, which a pure DoT never reads
 				ClientBaseDamage: tickDamage.Range(casterLevel),
 
 				Dot: core.DotConfig{

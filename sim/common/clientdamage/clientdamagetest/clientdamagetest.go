@@ -12,26 +12,30 @@ import (
 	"github.com/wowsims/classic/sim/core/spellconst"
 )
 
-// Kind picks which of a client spell's effects a table models.
-type Kind int
+// Kind picks which of a client spell's effects a table models: the
+// effect code and, when non-zero, the aura code that goes with it.
+type Kind struct {
+	effect int32
+	aura   int32
+}
 
-const (
+var (
 	// Direct is the spell's school-damage effect (effect 2).
-	Direct Kind = iota
+	Direct = Kind{effect: 2}
 	// Periodic is the spell's periodic-damage aura (effect 6, aura 3);
 	// its Amount is per tick.
-	Periodic
+	Periodic = Kind{effect: 6, aura: 3}
+	// PeriodicLeech is a periodic health-leech aura (effect 6, aura 53),
+	// the drains: Amount is per tick.
+	PeriodicLeech = Kind{effect: 6, aura: 53}
+	// HealthLeech is a direct health-leech effect (effect 9), Death Coil.
+	HealthLeech = Kind{effect: 9}
 	// NormalizedWeapon is the flat bonus of a normalized-weapon-damage
 	// effect (effect 121), the part that is not the weapon.
-	NormalizedWeapon
+	NormalizedWeapon = Kind{effect: 121}
 )
 
 const (
-	clientSchoolDamage     = 2
-	clientApplyAura        = 6
-	clientPeriodicDamage   = 3
-	clientNormalizedWeapon = 121
-
 	// rollTolerance is how far a rolled bound may sit from the client's
 	// float: the tables round the client's variance and growth to six
 	// decimals.
@@ -59,12 +63,7 @@ func Load(t *testing.T, path string) spellconst.Class {
 // clientEffect is the effect of the given kind on a client spell.
 func clientEffect(spell spellconst.Spell, kind Kind) (spellconst.Effect, bool) {
 	for _, effect := range spell.Effects {
-		switch {
-		case kind == Direct && effect.Effect == clientSchoolDamage:
-			return effect, true
-		case kind == NormalizedWeapon && effect.Effect == clientNormalizedWeapon:
-			return effect, true
-		case kind == Periodic && effect.Effect == clientApplyAura && effect.Aura == clientPeriodicDamage:
+		if effect.Effect == kind.effect && (kind.aura == 0 || effect.Aura == kind.aura) {
 			return effect, true
 		}
 	}
@@ -86,7 +85,7 @@ func AssertTable(t *testing.T, class spellconst.Class, kind Kind, name string, i
 		}
 		client, ok := clientEffect(spell, kind)
 		if !ok {
-			t.Fatalf("%s rank %d (%d): the client spell has no effect of kind %d", name, rank, ids[rank], kind)
+			t.Fatalf("%s rank %d (%d): the client spell has no effect %d (aura %d)", name, rank, ids[rank], kind.effect, kind.aura)
 		}
 		assertRolls(t, name, rank, spell, client, effects[rank])
 		if coefficients != nil && math.Abs(coefficients[rank]-client.ResolvedSPCoefficient) > coefficientTolerance {

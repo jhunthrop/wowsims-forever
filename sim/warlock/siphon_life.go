@@ -4,10 +4,21 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
 const SiphonLifeRanks = 4
+
+// SiphonLifeTickDamage is spellconst/warlock.json's own per-tick amount for
+// ids 18265 through 18881 (11/19/29/41 every 3 s, no growth).
+var SiphonLifeTickDamage = [SiphonLifeRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 11, SpellLevel: 30, MaxLevel: 38},
+	{Amount: 19, SpellLevel: 38, MaxLevel: 48},
+	{Amount: 29, SpellLevel: 48, MaxLevel: 58},
+	{Amount: 41, SpellLevel: 58, MaxLevel: 68},
+}
 
 func (warlock *Warlock) getSiphonLifeBaseConfig(rank int) core.SpellConfig {
 	spellId := [SiphonLifeRanks + 1]int32{0, 18265, 18879, 18880, 18881}[rank]
@@ -15,7 +26,9 @@ func (warlock *Warlock) getSiphonLifeBaseConfig(rank int) core.SpellConfig {
 	// flat "amount" for each rank's effect (period_ms 3000, 10 ticks):
 	// 18265/18879/18880/18881 -> 11/19/29/41. Every rank here used to run
 	// ~4 higher than the client's own number (rank 1: 15 vs 11).
-	baseDamage := [SiphonLifeRanks + 1]float64{0, 11, 19, 29, 41}[rank]
+	damage := SiphonLifeTickDamage[rank]
+	casterLevel := int(warlock.Level)
+	baseDamage := damage.Center(casterLevel)
 	manaCost := [SiphonLifeRanks + 1]float64{0, 150, 205, 285, 365}[rank]
 	// Rank 1 (18265) is learned at level 30 in the client's own data
 	// (1.60.1.70009); the 0 here was a stale gate that let rank 1
@@ -29,14 +42,15 @@ func (warlock *Warlock) getSiphonLifeBaseConfig(rank int) core.SpellConfig {
 	baseDamage *= 1 + warlock.shadowMasteryBonus()
 
 	return core.SpellConfig{
-		ActionID:      actionID,
-		SpellCode:     SpellCode_WarlockSiphonLife,
-		SpellSchool:   core.SpellSchoolShadow,
-		DefenseType:   core.DefenseTypeMagic,
-		ProcMask:      core.ProcMaskSpellDamage,
-		Flags:         core.SpellFlagAPL | core.SpellFlagResetAttackSwing | core.SpellFlagBinary | WarlockFlagAffliction,
-		RequiredLevel: level,
-		Rank:          rank,
+		ActionID:         actionID,
+		SpellCode:        SpellCode_WarlockSiphonLife,
+		SpellSchool:      core.SpellSchoolShadow,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		Flags:            core.SpellFlagAPL | core.SpellFlagResetAttackSwing | core.SpellFlagBinary | WarlockFlagAffliction,
+		RequiredLevel:    level,
+		Rank:             rank,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,

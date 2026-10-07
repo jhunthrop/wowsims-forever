@@ -4,17 +4,32 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
 const CurseOfAgonyRanks = 6
+
+// CurseOfAgonyTickDamage is spellconst/warlock.json's own per-tick amount for
+// ids 980 through 11713 (rank 6: 46 every 2 s over 12 ticks, no growth),
+// the figure the engine's ramp (half, then full, then one and a half times)
+// is built on.
+var CurseOfAgonyTickDamage = [CurseOfAgonyRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 6, SpellLevel: 8},
+	{Amount: 10, SpellLevel: 18},
+	{Amount: 14, SpellLevel: 28},
+	{Amount: 21, SpellLevel: 38},
+	{Amount: 33, SpellLevel: 48},
+	{Amount: 46, SpellLevel: 58},
+}
 
 func (warlock *Warlock) getCurseOfAgonyBaseConfig(rank int) core.SpellConfig {
 	numTicks := int32(12)
 	tickLength := time.Second * 2
 
 	spellId := [CurseOfAgonyRanks + 1]int32{0, 980, 1014, 6217, 11711, 11712, 11713}[rank]
-	spellCoeff := [CurseOfAgonyRanks + 1]float64{0, .046, .077, .083, .083, .083, .083}[rank]
+	spellCoeff := [CurseOfAgonyRanks + 1]float64{0, .133, .133, .133, .133, .133, .133}[rank]
 	// FOREVER: Improved Curse of Agony is not in the client's trees.
 	// baseDamage := [CurseOfAgonyRanks + 1]float64{0, 7, 15, 27, 42, 65, 87}[rank] * (1 + .03*float64(warlock.Talents.ImprovedCurseOfAgony))
 	// baseDamage (the steady-state per-tick value the ramp below scales
@@ -23,7 +38,9 @@ func (warlock *Warlock) getCurseOfAgonyBaseConfig(rank int) core.SpellConfig {
 	// warlock.json's own per-rank flat per-tick "amount" (rank 6,
 	// 11713, amount 46, period_ms 2000 unchanged) - the same halving
 	// shadowbolt.go's comment documents across the rest of the kit.
-	baseDamage := [CurseOfAgonyRanks + 1]float64{0, 6, 10, 14, 21, 33, 46}[rank]
+	damage := CurseOfAgonyTickDamage[rank]
+	casterLevel := int(warlock.Level)
+	baseDamage := damage.Center(casterLevel)
 	manaCost := [CurseOfAgonyRanks + 1]float64{0, 25, 50, 90, 130, 170, 215}[rank]
 	level := [CurseOfAgonyRanks + 1]int{0, 8, 18, 28, 38, 48, 58}[rank]
 
@@ -31,14 +48,15 @@ func (warlock *Warlock) getCurseOfAgonyBaseConfig(rank int) core.SpellConfig {
 	snapshotBaseDmgNoBonus := 0.0
 
 	return core.SpellConfig{
-		SpellCode:     SpellCode_WarlockCurseOfAgony,
-		ActionID:      core.ActionID{SpellID: spellId},
-		SpellSchool:   core.SpellSchoolShadow,
-		DefenseType:   core.DefenseTypeMagic,
-		Flags:         core.SpellFlagAPL | core.SpellFlagResetAttackSwing | core.SpellFlagPureDot | WarlockFlagAffliction,
-		ProcMask:      core.ProcMaskSpellDamage,
-		RequiredLevel: level,
-		Rank:          rank,
+		SpellCode:        SpellCode_WarlockCurseOfAgony,
+		ActionID:         core.ActionID{SpellID: spellId},
+		SpellSchool:      core.SpellSchoolShadow,
+		DefenseType:      core.DefenseTypeMagic,
+		Flags:            core.SpellFlagAPL | core.SpellFlagResetAttackSwing | core.SpellFlagPureDot | WarlockFlagAffliction,
+		ProcMask:         core.ProcMaskSpellDamage,
+		RequiredLevel:    level,
+		Rank:             rank,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,
@@ -49,7 +67,8 @@ func (warlock *Warlock) getCurseOfAgonyBaseConfig(rank int) core.SpellConfig {
 			},
 		},
 
-		CritDamageBonus: 0,
+		CritDamageBonus:  0,
+		BonusCoefficient: spellCoeff, // the report compares the spell's, which a pure DoT never reads
 
 		DamageMultiplierAdditive: 1,
 		DamageMultiplier:         1,
