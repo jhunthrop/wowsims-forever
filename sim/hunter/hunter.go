@@ -30,7 +30,6 @@ const (
 	SpellCode_HunterMultiShot
 	SpellCode_HunterSniperShot
 	SpellCode_HunterSummonHawk
-	SpellCode_HunterHydraShot
 
 	// Strikes
 	SpellCode_HunterRaptorStrike
@@ -106,7 +105,6 @@ type Hunter struct {
 	FreezingTrap    *core.Spell
 	KillCommand     *core.Spell
 	MultiShot       *core.Spell
-	HydraShot       *core.Spell
 	Lacerate        *core.Spell
 	RapidFire       *core.Spell
 	RaptorStrike    *core.Spell
@@ -212,7 +210,6 @@ func (hunter *Hunter) Initialize() {
 	// unrelated shots coincidentally carried the same category and
 	// sharing broke Arcane Shot's own readiness check.
 	hunter.registerSummonHawkSpell(arcaneShotTimer)
-	hunter.registerHydraShotSpell(arcaneShotTimer)
 	hunter.registerSniperShotSpell()
 
 	hunter.registerRaptorStrikeSpell()

@@ -69,11 +69,6 @@ func TestSummonHawkDamageMatchesClient(t *testing.T) {
 	assertTable(t, clientdamagetest.Direct, "Summon Hawk", SummonHawkSpellId[:], SummonHawkDamage)
 }
 
-func TestHydraShotDamageMatchesClient(t *testing.T) {
-	assertTable(t, clientdamagetest.NormalizedWeapon, "Hydra Shot",
-		[]int32{0, HydraShotSpellId[HydraShotRanks]}, []clientdamage.Effect{{}, HydraShotDamage[HydraShotRanks]})
-}
-
 func TestLacerateDamageMatchesClient(t *testing.T) {
 	assertTable(t, clientdamagetest.Periodic, "Lacerate", LacerateSpellId[:], LacerateDamage)
 }

@@ -137,7 +137,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 60 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
 | Hunter | 60 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
 | Hunter | 60 | Freezing Trap | 3 | 14311 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 60→60 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter | 60 | Hydra Shot | 4 | 1293020 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 60 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 60 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
