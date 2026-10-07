@@ -468,7 +468,7 @@ func TestSummonHawkRegistersOnlyWhenTalented(t *testing.T) {
 	if talented.SummonHawk == nil {
 		t.Fatal("SummonHawk=true did not register Summon Hawk")
 	}
-	if got, want := talented.SummonHawk.Cost.BaseCost, summonHawkManaCost; got != want {
+	if got, want := talented.SummonHawk.Cost.BaseCost, SummonHawkManaCost[SummonHawkRanks]; got != want {
 		t.Errorf("Summon Hawk mana cost = %f, want %f", got, want)
 	}
 

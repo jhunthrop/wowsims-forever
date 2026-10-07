@@ -18,6 +18,7 @@ var (
 	CounterattackDamage = generatedDamage(CounterattackBaseDamage[:], CounterattackPointsPerLevel[:], CounterattackLevel[:], CounterattackMaxLevel[:])
 	WingClipDamage      = generatedDamage(WingClipBaseDamage[:], WingClipPointsPerLevel[:], WingClipLevel[:], WingClipMaxLevel[:])
 	SniperShotDamage    = generatedDamage(SniperShotBaseDamage[:], SniperShotPointsPerLevel[:], SniperShotLevel[:], SniperShotMaxLevel[:])
+	SummonHawkDamage    = generatedDamage(SummonHawkBaseDamage[:], SummonHawkPointsPerLevel[:], SummonHawkLevel[:], SummonHawkMaxLevel[:])
 	VolleyDamage        = generatedDamage(VolleyBaseDamage[:], VolleyPointsPerLevel[:], VolleyLevel[:], VolleyMaxLevel[:])
 )
 

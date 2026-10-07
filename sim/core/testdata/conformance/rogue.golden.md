@@ -13,7 +13,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | CombatDaggersRogue | 10 | Backstab | 0 | 53 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 10 | Eviscerate | 0 | 6760 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 8→8 | n/a | match |  | 3.00-11.00→- | 1.000→1.000 | not declared |
+| CombatDaggersRogue | 10 | Eviscerate | 0 | 6760 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 8→8 | n/a | match |  | 3.00-11.00→3.00-11.00 | 1.000→1.000 | declared, matches |
 | CombatDaggersRogue | 10 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 10 | Sinister Strike | 0 | 1757 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 10 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
@@ -21,72 +21,72 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | CombatDaggersRogue | 10 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatDaggersRogue | 20 | Ambush | 0 | 8676 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 20 | Backstab | 0 | 2590 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 20 | Eviscerate | 0 | 6761 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | 6.00-20.00→- | 1.000→1.000 | not declared |
+| CombatDaggersRogue | 20 | Eviscerate | 0 | 6761 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | 6.00-20.00→6.00-20.00 | 1.000→1.000 | declared, matches |
 | CombatDaggersRogue | 20 | Expose Armor | 0 | 8647 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→14 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 20 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 20 | Garrote | 0 | 703 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→14 | 18000→18000 | match |  | 24.00-24.00→- | 1.200 (convention)→0.000 | not declared |
-| CombatDaggersRogue | 20 | Rupture | 0 | 1943 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | 6000→6000 | match |  | 5.00-5.00→- | 0.400 (convention)→0.000 | not declared |
+| CombatDaggersRogue | 20 | Garrote | 0 | 703 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→14 | 18000→18000 | match |  | 24.00-24.00→24.00-24.00 | 1.200 (convention)→0.000 | declared, matches |
+| CombatDaggersRogue | 20 | Rupture | 0 | 1943 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | 6000→6000 | match |  | 5.00-5.00→5.00-5.00 | 0.400 (convention)→0.000 | declared, matches |
 | CombatDaggersRogue | 20 | Sinister Strike | 0 | 1758 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→14 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 20 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 20 | Stealth | 0 | 1785 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 20 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatDaggersRogue | 30 | Ambush | 0 | 8724 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 26→26 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 30 | Backstab | 0 | 2591 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 30 | Eviscerate | 0 | 6762 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 24→24 | n/a | match |  | 10.00-30.00→- | 1.000→1.000 | not declared |
+| CombatDaggersRogue | 30 | Eviscerate | 0 | 6762 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 24→24 | n/a | match |  | 10.00-30.00→10.00-30.00 | 1.000→1.000 | declared, matches |
 | CombatDaggersRogue | 30 | Expose Armor | 0 | 8649 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 26→26 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 30 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 30 | Garrote | 0 | 8632 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→30 | 18000→18000 | match |  | 47.00-47.00→- | 1.200 (convention)→0.000 | not declared |
-| CombatDaggersRogue | 30 | Rupture | 0 | 8639 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | 6000→6000 | match |  | 7.00-7.00→- | 0.400 (convention)→0.000 | not declared |
+| CombatDaggersRogue | 30 | Garrote | 0 | 8632 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→30 | 18000→18000 | match |  | 47.00-47.00→47.00-47.00 | 1.200 (convention)→0.000 | declared, matches |
+| CombatDaggersRogue | 30 | Rupture | 0 | 8639 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | 6000→6000 | match |  | 7.00-7.00→7.00-7.00 | 0.400 (convention)→0.000 | declared, matches |
 | CombatDaggersRogue | 30 | Sinister Strike | 0 | 1760 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 30 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 30 | Stealth | 0 | 1785 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 30 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatDaggersRogue | 38 | Ambush | 0 | 8725 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→34 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 38 | Backstab | 0 | 8721 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 38 | Eviscerate | 0 | 8623 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→32 | n/a | match |  | 15.00-45.00→- | 1.000→1.000 | not declared |
+| CombatDaggersRogue | 38 | Eviscerate | 0 | 8623 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→32 | n/a | match |  | 15.00-45.00→15.00-45.00 | 1.000→1.000 | declared, matches |
 | CombatDaggersRogue | 38 | Expose Armor | 0 | 8650 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 38 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 38 | Garrote | 0 | 8633 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | 18000→18000 | match |  | 59.00-59.00→- | 1.200 (convention)→0.000 | not declared |
-| CombatDaggersRogue | 38 | Rupture | 0 | 8640 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | 6000→6000 | match |  | 11.00-11.00→- | 0.400 (convention)→0.000 | not declared |
+| CombatDaggersRogue | 38 | Garrote | 0 | 8633 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | 18000→18000 | match |  | 59.00-59.00→59.00-59.00 | 1.200 (convention)→0.000 | declared, matches |
+| CombatDaggersRogue | 38 | Rupture | 0 | 8640 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | 6000→6000 | match |  | 11.00-11.00→11.00-11.00 | 0.400 (convention)→0.000 | declared, matches |
 | CombatDaggersRogue | 38 | Sinister Strike | 0 | 8621 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 38 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 38 | Stealth | 0 | 1785 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 38 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatDaggersRogue | 40 | Ambush | 0 | 8725 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→34 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 40 | Backstab | 0 | 8721 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 40 | Eviscerate | 0 | 8624 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 40→40 | n/a | match |  | 22.00-66.00→- | 1.000→1.000 | not declared |
+| CombatDaggersRogue | 40 | Eviscerate | 0 | 8624 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 40→40 | n/a | match |  | 22.00-66.00→22.00-66.00 | 1.000→1.000 | declared, matches |
 | CombatDaggersRogue | 40 | Expose Armor | 0 | 8650 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 40 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 40 | Garrote | 0 | 8633 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | 18000→18000 | match |  | 59.00-59.00→- | 1.200 (convention)→0.000 | not declared |
-| CombatDaggersRogue | 40 | Rupture | 0 | 8640 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | 6000→6000 | match |  | 11.00-11.00→- | 0.400 (convention)→0.000 | not declared |
+| CombatDaggersRogue | 40 | Garrote | 0 | 8633 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | 18000→18000 | match |  | 59.00-59.00→59.00-59.00 | 1.200 (convention)→0.000 | declared, matches |
+| CombatDaggersRogue | 40 | Rupture | 0 | 8640 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | 6000→6000 | match |  | 11.00-11.00→11.00-11.00 | 0.400 (convention)→0.000 | declared, matches |
 | CombatDaggersRogue | 40 | Sinister Strike | 0 | 8621 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 40 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 40 | Stealth | 0 | 1786 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 40→40 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 40 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatDaggersRogue | 50 | Ambush | 0 | 11268 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 50→50 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 50 | Backstab | 0 | 11279 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→44 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 50 | Eviscerate | 0 | 11299 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 48→48 | n/a | match |  | 34.00-102.00→- | 1.000→1.000 | not declared |
+| CombatDaggersRogue | 50 | Eviscerate | 0 | 11299 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 48→48 | n/a | match |  | 34.00-102.00→34.00-102.00 | 1.000→1.000 | declared, matches |
 | CombatDaggersRogue | 50 | Expose Armor | 0 | 11197 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→46 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 50 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 50 | Garrote | 0 | 11289 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→46 | 18000→18000 | match |  | 74.00-74.00→- | 1.200 (convention)→0.000 | not declared |
-| CombatDaggersRogue | 50 | Rupture | 0 | 11273 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→44 | 6000→6000 | match |  | 16.00-16.00→- | 0.400 (convention)→0.000 | not declared |
+| CombatDaggersRogue | 50 | Garrote | 0 | 11289 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→46 | 18000→18000 | match |  | 74.00-74.00→74.00-74.00 | 1.200 (convention)→0.000 | declared, matches |
+| CombatDaggersRogue | 50 | Rupture | 0 | 11273 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→44 | 6000→6000 | match |  | 16.00-16.00→16.00-16.00 | 0.400 (convention)→0.000 | declared, matches |
 | CombatDaggersRogue | 50 | Sinister Strike | 0 | 11293 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→46 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 50 | Slice and Dice | 0 | 6774 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 42→42 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 50 | Stealth | 0 | 1786 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 40→40 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 50 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatDaggersRogue | 60 | Ambush | 0 | 11269 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 58→58 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 60 | Backstab | 0 | 25300 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 60 | Eviscerate | 0 | 31016 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | 54.00-162.00→- | 1.000→1.000 | not declared |
+| CombatDaggersRogue | 60 | Eviscerate | 0 | 31016 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | 54.00-162.00→54.00-162.00 | 1.000→1.000 | declared, matches |
 | CombatDaggersRogue | 60 | Expose Armor | 0 | 11198 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 56→56 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 60 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 60 | Garrote | 0 | 11290 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→54 | 18000→18000 | match |  | 92.00-92.00→- | 1.200 (convention)→0.000 | not declared |
-| CombatDaggersRogue | 60 | Rupture | 0 | 11275 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | 6000→6000 | match |  | 35.00-35.00→- | 0.400 (convention)→0.000 | not declared |
+| CombatDaggersRogue | 60 | Garrote | 0 | 11290 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→54 | 18000→18000 | match |  | 92.00-92.00→92.00-92.00 | 1.200 (convention)→0.000 | declared, matches |
+| CombatDaggersRogue | 60 | Rupture | 0 | 11275 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | 6000→6000 | match |  | 35.00-35.00→35.00-35.00 | 0.400 (convention)→0.000 | declared, matches |
 | CombatDaggersRogue | 60 | Sinister Strike | 0 | 11294 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→54 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 60 | Slice and Dice | 0 | 6774 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 42→42 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 60 | Stealth | 0 | 1787 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 60→60 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 60 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatSwordsRogue | 10 | Backstab | 0 | 53 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 10 | Eviscerate | 0 | 6760 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 8→8 | n/a | match |  | 3.00-11.00→- | 1.000→1.000 | not declared |
+| CombatSwordsRogue | 10 | Eviscerate | 0 | 6760 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 8→8 | n/a | match |  | 3.00-11.00→3.00-11.00 | 1.000→1.000 | declared, matches |
 | CombatSwordsRogue | 10 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 10 | Sinister Strike | 0 | 1757 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 10 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
@@ -94,66 +94,66 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | CombatSwordsRogue | 10 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatSwordsRogue | 20 | Ambush | 0 | 8676 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 20 | Backstab | 0 | 2590 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 20 | Eviscerate | 0 | 6761 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | 6.00-20.00→- | 1.000→1.000 | not declared |
+| CombatSwordsRogue | 20 | Eviscerate | 0 | 6761 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | 6.00-20.00→6.00-20.00 | 1.000→1.000 | declared, matches |
 | CombatSwordsRogue | 20 | Expose Armor | 0 | 8647 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→14 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 20 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 20 | Garrote | 0 | 703 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→14 | 18000→18000 | match |  | 24.00-24.00→- | 1.200 (convention)→0.000 | not declared |
-| CombatSwordsRogue | 20 | Rupture | 0 | 1943 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | 6000→6000 | match |  | 5.00-5.00→- | 0.400 (convention)→0.000 | not declared |
+| CombatSwordsRogue | 20 | Garrote | 0 | 703 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→14 | 18000→18000 | match |  | 24.00-24.00→24.00-24.00 | 1.200 (convention)→0.000 | declared, matches |
+| CombatSwordsRogue | 20 | Rupture | 0 | 1943 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | 6000→6000 | match |  | 5.00-5.00→5.00-5.00 | 0.400 (convention)→0.000 | declared, matches |
 | CombatSwordsRogue | 20 | Sinister Strike | 0 | 1758 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→14 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 20 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 20 | Stealth | 0 | 1785 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 20 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatSwordsRogue | 30 | Ambush | 0 | 8724 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 26→26 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 30 | Backstab | 0 | 2591 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 30 | Eviscerate | 0 | 6762 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 24→24 | n/a | match |  | 10.00-30.00→- | 1.000→1.000 | not declared |
+| CombatSwordsRogue | 30 | Eviscerate | 0 | 6762 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 24→24 | n/a | match |  | 10.00-30.00→10.00-30.00 | 1.000→1.000 | declared, matches |
 | CombatSwordsRogue | 30 | Expose Armor | 0 | 8649 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 26→26 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 30 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 30 | Garrote | 0 | 8632 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→30 | 18000→18000 | match |  | 47.00-47.00→- | 1.200 (convention)→0.000 | not declared |
-| CombatSwordsRogue | 30 | Rupture | 0 | 8639 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | 6000→6000 | match |  | 7.00-7.00→- | 0.400 (convention)→0.000 | not declared |
+| CombatSwordsRogue | 30 | Garrote | 0 | 8632 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→30 | 18000→18000 | match |  | 47.00-47.00→47.00-47.00 | 1.200 (convention)→0.000 | declared, matches |
+| CombatSwordsRogue | 30 | Rupture | 0 | 8639 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | 6000→6000 | match |  | 7.00-7.00→7.00-7.00 | 0.400 (convention)→0.000 | declared, matches |
 | CombatSwordsRogue | 30 | Sinister Strike | 0 | 1760 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 30 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 30 | Stealth | 0 | 1785 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 30 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatSwordsRogue | 38 | Ambush | 0 | 8725 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→34 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 38 | Backstab | 0 | 8721 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 38 | Eviscerate | 0 | 8623 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→32 | n/a | match |  | 15.00-45.00→- | 1.000→1.000 | not declared |
+| CombatSwordsRogue | 38 | Eviscerate | 0 | 8623 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→32 | n/a | match |  | 15.00-45.00→15.00-45.00 | 1.000→1.000 | declared, matches |
 | CombatSwordsRogue | 38 | Expose Armor | 0 | 8650 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 38 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 38 | Garrote | 0 | 8633 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | 18000→18000 | match |  | 59.00-59.00→- | 1.200 (convention)→0.000 | not declared |
-| CombatSwordsRogue | 38 | Rupture | 0 | 8640 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | 6000→6000 | match |  | 11.00-11.00→- | 0.400 (convention)→0.000 | not declared |
+| CombatSwordsRogue | 38 | Garrote | 0 | 8633 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | 18000→18000 | match |  | 59.00-59.00→59.00-59.00 | 1.200 (convention)→0.000 | declared, matches |
+| CombatSwordsRogue | 38 | Rupture | 0 | 8640 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | 6000→6000 | match |  | 11.00-11.00→11.00-11.00 | 0.400 (convention)→0.000 | declared, matches |
 | CombatSwordsRogue | 38 | Sinister Strike | 0 | 8621 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 38 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 38 | Stealth | 0 | 1785 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 38 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatSwordsRogue | 40 | Ambush | 0 | 8725 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 34→34 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 40 | Backstab | 0 | 8721 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 40 | Eviscerate | 0 | 8624 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 40→40 | n/a | match |  | 22.00-66.00→- | 1.000→1.000 | not declared |
+| CombatSwordsRogue | 40 | Eviscerate | 0 | 8624 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 40→40 | n/a | match |  | 22.00-66.00→22.00-66.00 | 1.000→1.000 | declared, matches |
 | CombatSwordsRogue | 40 | Expose Armor | 0 | 8650 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 40 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 40 | Garrote | 0 | 8633 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | 18000→18000 | match |  | 59.00-59.00→- | 1.200 (convention)→0.000 | not declared |
-| CombatSwordsRogue | 40 | Rupture | 0 | 8640 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | 6000→6000 | match |  | 11.00-11.00→- | 0.400 (convention)→0.000 | not declared |
+| CombatSwordsRogue | 40 | Garrote | 0 | 8633 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | 18000→18000 | match |  | 59.00-59.00→59.00-59.00 | 1.200 (convention)→0.000 | declared, matches |
+| CombatSwordsRogue | 40 | Rupture | 0 | 8640 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 36→36 | 6000→6000 | match |  | 11.00-11.00→11.00-11.00 | 0.400 (convention)→0.000 | declared, matches |
 | CombatSwordsRogue | 40 | Sinister Strike | 0 | 8621 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 40 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 40 | Stealth | 0 | 1786 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 40→40 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 40 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatSwordsRogue | 50 | Ambush | 0 | 11268 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 50→50 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 50 | Backstab | 0 | 11279 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→44 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 50 | Eviscerate | 0 | 11299 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 48→48 | n/a | match |  | 34.00-102.00→- | 1.000→1.000 | not declared |
+| CombatSwordsRogue | 50 | Eviscerate | 0 | 11299 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 48→48 | n/a | match |  | 34.00-102.00→34.00-102.00 | 1.000→1.000 | declared, matches |
 | CombatSwordsRogue | 50 | Expose Armor | 0 | 11197 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→46 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 50 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 50 | Garrote | 0 | 11289 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→46 | 18000→18000 | match |  | 74.00-74.00→- | 1.200 (convention)→0.000 | not declared |
-| CombatSwordsRogue | 50 | Rupture | 0 | 11273 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→44 | 6000→6000 | match |  | 16.00-16.00→- | 0.400 (convention)→0.000 | not declared |
+| CombatSwordsRogue | 50 | Garrote | 0 | 11289 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→46 | 18000→18000 | match |  | 74.00-74.00→74.00-74.00 | 1.200 (convention)→0.000 | declared, matches |
+| CombatSwordsRogue | 50 | Rupture | 0 | 11273 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 44→44 | 6000→6000 | match |  | 16.00-16.00→16.00-16.00 | 0.400 (convention)→0.000 | declared, matches |
 | CombatSwordsRogue | 50 | Sinister Strike | 0 | 11293 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 46→46 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 50 | Slice and Dice | 0 | 6774 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 42→42 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 50 | Stealth | 0 | 1786 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 40→40 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 50 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatSwordsRogue | 60 | Ambush | 0 | 11269 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 58→58 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 60 | Backstab | 0 | 25300 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 60 | Eviscerate | 0 | 31016 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | 54.00-162.00→- | 1.000→1.000 | not declared |
+| CombatSwordsRogue | 60 | Eviscerate | 0 | 31016 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | 54.00-162.00→54.00-162.00 | 1.000→1.000 | declared, matches |
 | CombatSwordsRogue | 60 | Expose Armor | 0 | 11198 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 56→56 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 60 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 60 | Garrote | 0 | 11290 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→54 | 18000→18000 | match |  | 92.00-92.00→- | 1.200 (convention)→0.000 | not declared |
-| CombatSwordsRogue | 60 | Rupture | 0 | 11275 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | 6000→6000 | match |  | 35.00-35.00→- | 0.400 (convention)→0.000 | not declared |
+| CombatSwordsRogue | 60 | Garrote | 0 | 11290 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→54 | 18000→18000 | match |  | 92.00-92.00→92.00-92.00 | 1.200 (convention)→0.000 | declared, matches |
+| CombatSwordsRogue | 60 | Rupture | 0 | 11275 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | 6000→6000 | match |  | 35.00-35.00→35.00-35.00 | 0.400 (convention)→0.000 | declared, matches |
 | CombatSwordsRogue | 60 | Sinister Strike | 0 | 11294 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→54 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 60 | Slice and Dice | 0 | 6774 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 42→42 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 60 | Stealth | 0 | 1787 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 60→60 | -1→-1 | match |  | n/a | n/a | n/a |

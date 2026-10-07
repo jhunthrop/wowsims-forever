@@ -34,27 +34,28 @@ import (
 // this file; the sustained portion is the one piece of this talent
 // that needs a decision above this lane (see PORTING.md's "no changes
 // to sim/core" boundary).
-const (
-	summonHawkBaseDamage    = 32.0
-	summonHawkRangedAPCoeff = 0.05
-	summonHawkManaCost      = 80.0
-	summonHawkRequiredLevel = 25
-)
+// summonHawkRangedAPCoeff is the tooltip's 5% of Ranged Attack Power, the
+// one share the client's table does not carry; the flat, cost and level
+// follow the rank (SummonHawkDamage, SummonHawkManaCost, SummonHawkLevel).
+const summonHawkRangedAPCoeff = 0.05
 
-func (hunter *Hunter) getSummonHawkConfig(timer *core.Timer) core.SpellConfig {
+func (hunter *Hunter) getSummonHawkConfig(rank int, timer *core.Timer) core.SpellConfig {
+	flatDamage := SummonHawkDamage[rank]
+	casterLevel := int(hunter.Level)
 	return core.SpellConfig{
 		SpellCode:     SpellCode_HunterSummonHawk,
-		ActionID:      core.ActionID{SpellID: 1293241},
+		ActionID:      core.ActionID{SpellID: SummonHawkSpellId[rank]},
 		SpellSchool:   core.SpellSchoolPhysical,
 		DefenseType:   core.DefenseTypeRanged,
 		ProcMask:      core.ProcMaskRangedSpecial,
 		Flags:         core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagShot,
 		CastType:      proto.CastType_CastTypeRanged,
-		RequiredLevel: summonHawkRequiredLevel,
+		Rank:          rank,
+		RequiredLevel: SummonHawkLevel[rank],
 		MissileSpeed:  24,
 
 		ManaCost: core.ManaCostOptions{
-			FlatCost: summonHawkManaCost,
+			FlatCost: SummonHawkManaCost[rank],
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -80,9 +81,10 @@ func (hunter *Hunter) getSummonHawkConfig(timer *core.Timer) core.SpellConfig {
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: flatDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := summonHawkBaseDamage + summonHawkRangedAPCoeff*spell.RangedAttackPower(target, false)
+			baseDamage := flatDamage.Roll(sim, casterLevel) + summonHawkRangedAPCoeff*spell.RangedAttackPower(target, false)
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeRangedHitAndCrit)
 
 			spell.WaitTravelTime(sim, func(s *core.Simulation) {
@@ -96,9 +98,10 @@ func (hunter *Hunter) registerSummonHawkSpell(arcaneShotTimer *core.Timer) {
 	if !hunter.Talents.SummonHawk {
 		return
 	}
-	if hunter.Level < summonHawkRequiredLevel {
+	rank := core.HighestRankAtLevel(SummonHawkLevel[1:], hunter.Level)
+	if rank == 0 {
 		return
 	}
 
-	hunter.SummonHawk = hunter.GetOrRegisterSpell(hunter.getSummonHawkConfig(arcaneShotTimer))
+	hunter.SummonHawk = hunter.GetOrRegisterSpell(hunter.getSummonHawkConfig(rank, arcaneShotTimer))
 }
