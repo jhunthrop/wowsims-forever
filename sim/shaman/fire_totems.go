@@ -78,7 +78,7 @@ func (shaman *Shaman) newSearingTotemSpellConfig(rank int) core.SpellConfig {
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
+				GCD: totemGCD,
 			},
 			IgnoreHaste: true,
 		},
@@ -150,11 +150,12 @@ func (shaman *Shaman) newMagmaTotemSpellConfig(rank int) core.SpellConfig {
 	attackInterval := time.Second * 2
 
 	aoeSpell := shaman.RegisterSpell(core.SpellConfig{
-		SpellCode:   SpellCode_ShamanMagmaTotem,
-		ActionID:    core.ActionID{SpellID: MagmaTotemAoeSpellId[rank]},
-		SpellSchool: core.SpellSchoolFire,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskEmpty,
+		SpellCode:     SpellCode_ShamanMagmaTotem,
+		ActionID:      core.ActionID{SpellID: MagmaTotemAoeSpellId[rank]},
+		SpellSchool:   core.SpellSchoolFire,
+		DefenseType:   core.DefenseTypeMagic,
+		ProcMask:      core.ProcMaskEmpty,
+		RequiredLevel: level,
 
 		DamageMultiplier: shaman.callOfFlameMultiplier(),
 		BonusCoefficient: spellCoeff,
@@ -184,7 +185,7 @@ func (shaman *Shaman) newMagmaTotemSpellConfig(rank int) core.SpellConfig {
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
+				GCD: totemGCD,
 			},
 			IgnoreHaste: true,
 		},
@@ -254,11 +255,12 @@ func (shaman *Shaman) newFireNovaTotemSpellConfig(rank int) core.SpellConfig {
 	attackInterval := duration
 
 	novaSpell := shaman.RegisterSpell(core.SpellConfig{
-		SpellCode:   SpellCode_ShamanFireNovaTotem,
-		ActionID:    core.ActionID{SpellID: FireNovaTotemAoeSpellId[rank]},
-		SpellSchool: core.SpellSchoolFire,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskEmpty,
+		SpellCode:     SpellCode_ShamanFireNovaTotem,
+		ActionID:      core.ActionID{SpellID: FireNovaTotemAoeSpellId[rank]},
+		SpellSchool:   core.SpellSchoolFire,
+		DefenseType:   core.DefenseTypeMagic,
+		ProcMask:      core.ProcMaskEmpty,
+		RequiredLevel: level,
 
 		DamageMultiplier: shaman.callOfFlameMultiplier(),
 		BonusCoefficient: spellCoeff,
@@ -289,7 +291,7 @@ func (shaman *Shaman) newFireNovaTotemSpellConfig(rank int) core.SpellConfig {
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
+				GCD: totemGCD,
 			},
 			IgnoreHaste: true,
 			CD: core.Cooldown{

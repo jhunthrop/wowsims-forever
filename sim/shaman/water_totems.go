@@ -49,10 +49,11 @@ func (shaman *Shaman) newHealingStreamTotemSpellConfig(rank int) core.SpellConfi
 	config.Rank = rank
 
 	healSpell := shaman.RegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: healId},
-		SpellSchool: core.SpellSchoolNature,
-		ProcMask:    core.ProcMaskSpellHealing,
-		Flags:       core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete | core.SpellFlagNoLogs | core.SpellFlagNoMetrics,
+		ActionID:      core.ActionID{SpellID: healId},
+		SpellSchool:   core.SpellSchoolNature,
+		ProcMask:      core.ProcMaskSpellHealing,
+		Flags:         core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete | core.SpellFlagNoLogs | core.SpellFlagNoMetrics,
+		RequiredLevel: level,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,

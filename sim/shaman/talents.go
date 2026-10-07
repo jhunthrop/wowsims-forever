@@ -378,8 +378,9 @@ func (shaman *Shaman) registerNaturesSwiftnessCD() {
 	})
 
 	nsSpell := shaman.RegisterSpell(core.SpellConfig{
-		ActionID: actionID,
-		Flags:    core.SpellFlagNoOnCastComplete,
+		ActionID:      actionID,
+		Flags:         core.SpellFlagNoOnCastComplete,
+		RequiredLevel: 1,
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    cdTimer,
@@ -872,9 +873,13 @@ func (shaman *Shaman) registerRageOfTheFarseer() {
 	shaman.RageOfTheFarseer = shaman.RegisterSpell(core.SpellConfig{
 		ActionID:        actionID,
 		Flags:           SpellFlagShaman | core.SpellFlagAPL | core.SpellFlagNoOnCastComplete,
+		RequiredLevel:   1,
 		RelatedSelfBuff: rotfAura,
 		Cast: core.CastConfig{
-			DefaultCast: core.Cast{GCD: core.GCDDefault},
+			// FOREVER: spellconst/shaman.json spell 425336's gcd_ms is 0 -
+			// a cooldown-only burst ability the client flags GCD-less, the
+			// same shape as Warlock's Bane of Havoc.
+			DefaultCast: core.Cast{GCD: 0},
 			CD: core.Cooldown{
 				Timer:    cdTimer,
 				Duration: time.Minute * 3,

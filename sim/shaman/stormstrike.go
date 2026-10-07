@@ -23,8 +23,13 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 		ProcMask:    core.ProcMaskMeleeMHSpecial,
 		Flags:       SpellFlagShaman | core.SpellFlagAPL | core.SpellFlagMeleeMetrics,
 
+		RequiredLevel: 40,
+
+		// FOREVER: spellconst/shaman.json spell 17364 carries a nonzero
+		// flat cost (125), not the percent-of-base-mana BaseCost: .21
+		// vanilla used - Forever's client flattened Stormstrike's cost.
 		ManaCost: core.ManaCostOptions{
-			BaseCost: .21,
+			FlatCost: 125,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -32,7 +37,7 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 			},
 			CD: core.Cooldown{
 				Timer:    shaman.NewTimer(),
-				Duration: time.Second * 20,
+				Duration: time.Second * 8,
 			},
 		},
 
