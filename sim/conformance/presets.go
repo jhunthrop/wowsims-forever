@@ -31,8 +31,16 @@ type Preset struct {
 	// against paladin.json).
 	ClientClassSlug string
 
-	Class              proto.Class
-	Race               proto.Race
+	Class       proto.Class
+	Race        proto.Race
+	// Talents is the spec's real, fully-spent talent build - never used
+	// to build the character this package actually compares (see
+	// build.go's buildForComparison, which always tries an empty talent
+	// string first), only as that function's last-resort fallback if an
+	// empty-talent build cannot register at all. Kept as a verbatim copy
+	// of each spec's own level_smoke_test.go build, same as before this
+	// package went talent-free, since that fallback needs a build that
+	// is known to work.
 	Talents            string
 	SpecOptions        interface{}
 	DistanceFromTarget float64
