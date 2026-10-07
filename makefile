@@ -296,6 +296,14 @@ SITE_DIR ?= /Users/jh/code/forever
 # Era numbers the day the data lane's output appears.
 BUILD ?= 1.60.1.69893
 
+.PHONY: relicmods
+# relicmods regenerates sim/<class>/relic_mods_auto_gen.go, the equip-effect
+# spell modifiers of every libram, totem and idol, from the client's raw
+# tables in the site's build directory. Run `python3 -I` from outside the
+# fork so no stray module shadows the standard library.
+relicmods:
+	cd /tmp && python3 -I "$(CURDIR)/tools/relicmods/gen.py" "$(SITE_DIR)/data/builds/$(BUILD)"
+
 .PHONY: spellconst
 # spellconst regenerates the per-class constants files from the data
 # lane's spellconst output. A Forever patch that changes a number is a

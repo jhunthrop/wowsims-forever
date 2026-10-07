@@ -58,6 +58,11 @@ type Dot struct {
 	NumberOfTicks         int32         // number of ticks over the whole duration
 	TickLength            time.Duration // time between each tick
 
+	// ModNumberOfTicks is the net ticks the spell's SpellMods have added.
+	// A spell that assigns NumberOfTicks on every cast adds it back so a
+	// duration modifier survives the assignment.
+	ModNumberOfTicks int32
+
 	// If true, tick length will be shortened based on casting speed.
 	AffectedByCastSpeed bool
 

@@ -375,6 +375,12 @@ const (
 	// Uses: TimeValue
 	SpellMod_BuffDuration_Flat
 
+	// Add/subtract a whole number of ticks to the spell's dots so the dot
+	// lasts TimeValue longer (or shorter). TimeValue must be a whole
+	// multiple of the dot's TickLength.
+	// Uses: TimeValue
+	SpellMod_DotDuration_Flat
+
 	// User-defined implementation
 	// Uses: ApplyCustom | RemoveCustom
 	SpellMod_Custom
@@ -464,6 +470,11 @@ var spellModMap = map[SpellModType]*SpellModFunctions{
 	SpellMod_DotTickLength_Pct: {
 		Apply:  applyDotTickLengthPercent,
 		Remove: removeDotTickLengthPercent,
+	},
+
+	SpellMod_DotDuration_Flat: {
+		Apply:  applyDotDurationFlat,
+		Remove: removeDotDurationFlat,
 	},
 
 	SpellMod_GlobalCooldown_Flat: {
@@ -640,32 +651,55 @@ func removeBonusHitFlat(mod *SpellMod, spell *Spell) {
 }
 
 func applyDotNumberOfTicks(mod *SpellMod, spell *Spell) {
-	if spell.dots != nil {
-		for _, dot := range spell.dots {
-			if dot != nil {
-				dot.NumberOfTicks += int32(mod.intValue)
-				dot.RecomputeAuraDuration()
-			}
-		}
-	}
-	if spell.aoeDot != nil {
-		spell.aoeDot.NumberOfTicks += int32(mod.intValue)
-		spell.aoeDot.RecomputeAuraDuration()
-	}
+	spell.addDotTicks(int32(mod.intValue))
 }
 
 func removeDotNumberOfTicks(mod *SpellMod, spell *Spell) {
-	if spell.dots != nil {
-		for _, dot := range spell.dots {
-			if dot != nil {
-				dot.NumberOfTicks -= int32(mod.intValue)
-				dot.RecomputeAuraDuration()
-			}
+	spell.addDotTicks(-int32(mod.intValue))
+}
+
+func applyDotDurationFlat(mod *SpellMod, spell *Spell) {
+	spell.addDotDuration(mod.timeValue)
+}
+
+func removeDotDurationFlat(mod *SpellMod, spell *Spell) {
+	spell.addDotDuration(-mod.timeValue)
+}
+
+// addDotTicks adds delta ticks to every dot the spell owns and records it
+// in ModNumberOfTicks, so a spell that sets NumberOfTicks per cast (Rip,
+// by combo points) can add the modifier back on top of its own count.
+func (spell *Spell) addDotTicks(delta int32) {
+	spell.eachDot(func(dot *Dot) {
+		dot.NumberOfTicks += delta
+		dot.ModNumberOfTicks += delta
+		dot.RecomputeAuraDuration()
+	})
+}
+
+// addDotDuration lengthens every dot by whole ticks. A duration that is not
+// a whole multiple of a dot's TickLength panics: the client states these
+// as milliseconds and a partial tick is a table error, not a rounding.
+func (spell *Spell) addDotDuration(delta time.Duration) {
+	spell.eachDot(func(dot *Dot) {
+		if dot.TickLength <= 0 || delta%dot.TickLength != 0 {
+			panic("SpellMod_DotDuration_Flat: " + delta.String() + " is not a whole number of " +
+				dot.TickLength.String() + " ticks for " + spell.ActionID.String())
+		}
+		dot.NumberOfTicks += int32(delta / dot.TickLength)
+		dot.ModNumberOfTicks += int32(delta / dot.TickLength)
+		dot.RecomputeAuraDuration()
+	})
+}
+
+func (spell *Spell) eachDot(visit func(*Dot)) {
+	for _, dot := range spell.dots {
+		if dot != nil {
+			visit(dot)
 		}
 	}
 	if spell.aoeDot != nil {
-		spell.aoeDot.NumberOfTicks -= int32(mod.intValue)
-		spell.aoeDot.RecomputeAuraDuration()
+		visit(spell.aoeDot)
 	}
 }
 
