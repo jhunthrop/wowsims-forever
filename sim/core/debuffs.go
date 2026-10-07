@@ -472,7 +472,9 @@ func JudgementOfTheCrusaderAura(caster *Unit, target *Unit, mult float64, extraB
 		Label:    "Judgement of the Crusader",
 		ActionID: ActionID{SpellID: spellId},
 		Tag:      JudgementAuraTag,
-		Duration: 10 * time.Second,
+		// The client gives Judgement of the Crusader a 40 s debuff (spellconst
+		// duration_ms 40000 at every rank); vanilla remembered 10 s.
+		Duration: 40 * time.Second,
 
 		OnGain: func(aura *Aura, sim *Simulation) {
 			aura.Unit.PseudoStats.SchoolBonusDamageTaken[stats.SchoolIndexHoly] += bonus
