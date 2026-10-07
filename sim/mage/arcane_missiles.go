@@ -50,7 +50,10 @@ func (mage *Mage) getArcaneMissilesSpellConfig(rank int) core.SpellConfig {
 		SpellSchool:    core.SpellSchoolArcane,
 		DefenseType:    core.DefenseTypeMagic,
 		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          SpellFlagMage | core.SpellFlagAPL | core.SpellFlagChanneled | core.SpellFlagNoMetrics,
+		// The channel carries the cast count and, with its tick a passive
+		// spell, the damage too; without metrics here the ladder reads
+		// Arcane Missiles as never cast.
+		Flags: SpellFlagMage | core.SpellFlagAPL | core.SpellFlagChanneled,
 
 		RequiredLevel: level,
 		Rank:          rank,
