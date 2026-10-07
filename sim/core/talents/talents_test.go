@@ -35,11 +35,11 @@ func TestTreesAreInTheClientsOrder(t *testing.T) {
 // A wrong size does not error, it reads the wrong talent.
 func TestTreeSizesMatchTheClient(t *testing.T) {
 	c := warrior(t)
-	want := [3]int{17, 18, 18}
+	want := [3]int{17, 17, 18}
 	if got := c.TreeSizes(); got != want {
 		t.Errorf("TreeSizes() = %v, want %v", got, want)
 	}
-	if c.Build != "1.60.1.69893" {
+	if c.Build != "1.60.1.70009" {
 		t.Errorf("Build = %q; the reader must carry the client build through", c.Build)
 	}
 }
