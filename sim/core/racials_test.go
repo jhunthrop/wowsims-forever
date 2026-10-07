@@ -140,12 +140,12 @@ func TestTheNamedRacialsAreAllPresent(t *testing.T) {
 	}
 }
 
-// The eight entries whose numbers - or, for Undead's fourth racial, whose
+// The seven entries whose numbers - or, for Undead's fourth racial, whose
 // very name - the demo did not settle are named out loud, so the spec
 // support page can say what the sim is guessing at. An unnamed or
 // unpublished racial is Confirmed: false exactly like an unpublished
 // percentage; a name is exactly as unconfirmed as a number.
-func TestUnconfirmedRacialsNamesTheEight(t *testing.T) {
+func TestUnconfirmedRacialsNamesTheSeven(t *testing.T) {
 	got := UnconfirmedRacials()
 	if len(got) == 0 {
 		t.Skip("nothing is unconfirmed: the beta settled the numbers and this test has done its job")
@@ -156,13 +156,13 @@ func TestUnconfirmedRacialsNamesTheEight(t *testing.T) {
 		t.Log(line)
 	}
 	joined := strings.Join(got, "\n")
-	// All eight by name, and exactly eight. The count is asserted because
-	// a ninth means a number was marked unconfirmed without anyone
-	// deciding it was, and a seventh means one was quietly promoted to
-	// confirmed - and a test named for eight that checks six would
-	// notice neither.
+	// All seven by name, and exactly seven (Mace Specialization left the
+	// list on 2026-10-07 when the client stated its 1%). The count is
+	// asserted because an eighth means a number was marked unconfirmed
+	// without anyone deciding it was, and a sixth means one was quietly
+	// promoted to confirmed - and a test named for seven that checks five
+	// would notice neither.
 	want := []string{
-		"Mace Specialization",       // Dwarf: the crit percentage is unread
 		"Big Game Hunter",           // Dwarf: the damage percentage is unread
 		"Quickness",                 // Night Elf: 1% or 2% dodge, the two readings disagree
 		"Berserking",                // Troll: 10 s or 12 s, the two readings disagree

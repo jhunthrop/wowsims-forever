@@ -193,11 +193,8 @@ var racialsByRace = map[proto.Race][]Racial{
 			Name: "Sword Specialization", Kind: RacialPassive, Confirmed: true,
 			Note: "",
 			Apply: func(character *Character) {
-				// 2% crit with a sword equipped - one stat, melee and
-				// spell, after the Task 4 Hit/Crit merge. The engine
-				// already models weapon specialization as bonus weapon
-				// skill rather than a flat crit percentage, so this
-				// reuses that existing mechanic.
+				// Client 20597: 2% crit with all spells and attacks while
+				// a sword or two-handed sword is equipped (specializations.go).
 				character.SwordSpecializationAura()
 			},
 		},
@@ -323,13 +320,9 @@ var racialsByRace = map[proto.Race][]Racial{
 			Apply: func(*Character) {}, // finds treasure, stacks with other tracking: no combat effect
 		},
 		{
-			Name: "Mace Specialization", Kind: RacialPassive, Confirmed: false,
-			Note: "crit chance with a mace read from the demo, but no outlet gives a percentage",
+			Name: "Mace Specialization", Kind: RacialPassive, Confirmed: true,
+			Note: "client 1259719: 1% crit with all spells and attacks while a mace or two-handed mace is equipped",
 			Apply: func(character *Character) {
-				// unconfirmed: percentage unread. The engine models weapon
-				// specialization as bonus weapon skill rather than a flat
-				// crit percentage, so the existing mechanic still applies
-				// even without the tooltip number.
 				character.MaceSpecializationAura()
 			},
 		},

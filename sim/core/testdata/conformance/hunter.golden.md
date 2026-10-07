@@ -130,7 +130,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 60 | Arcane Shot | 6 | 14285 | 135.00→135.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 44→44 | n/a | match |  | 134.00-134.00→134.00-134.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 60 | Arcane Shot | 7 | 14286 | 160.00→160.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 52→52 | n/a | match |  | 170.00-170.00→170.00-170.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 60 | Arcane Shot | 8 | 14287 | 190.00→190.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 60→60 | n/a | match |  | 217.00-217.00→217.00-217.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 60 | Aspect of the Hawk | 6 | 14322 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | -1→-1 | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Aspect of the Hawk | 5 | 14321 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
 | Hunter | 60 | Explosive Trap | 2 | 14316 | 395.00→395.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 44→44 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
 | Hunter | 60 | Explosive Trap | 3 | 14317 | 520.00→520.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 54→54 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
