@@ -7,7 +7,25 @@
       }
     },
     {
-      "notes": "Frostbolt is the whole rotation.",
+      "notes": "Ice Lance on a Fingers of Frost charge: the charge makes the target count as Frozen, so Ice Lance deals triple damage and Shatter's crit bonus applies. Only fires with the Fingers of Frost talent; without it the buff never appears and the line stays idle.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1240047,
+            "rank": 6
+          }
+        },
+        "condition": {
+          "auraIsActive": {
+            "auraId": {
+              "spellId": 400669
+            }
+          }
+        }
+      }
+    },
+    {
+      "notes": "Frostbolt is the filler between Fingers of Frost charges.",
       "action": {
         "castSpell": {
           "spellId": {
