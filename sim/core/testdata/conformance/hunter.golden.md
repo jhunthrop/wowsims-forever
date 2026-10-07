@@ -130,7 +130,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 60 | Arcane Shot | 6 | 14285 | 135.00→135.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 44→44 | n/a | match |  | 134.00-134.00→134.00-134.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 60 | Arcane Shot | 7 | 14286 | 160.00→160.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 52→52 | n/a | match |  | 170.00-170.00→170.00-170.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 60 | Arcane Shot | 8 | 14287 | 190.00→190.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 60→60 | n/a | match |  | 217.00-217.00→217.00-217.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 60 | Aspect of the Hawk | 7 | 25296 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | -1→-1 | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Aspect of the Hawk | 6 | 14322 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
 | Hunter | 60 | Explosive Trap | 2 | 14316 | 395.00→395.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 44→44 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
 | Hunter | 60 | Explosive Trap | 3 | 14317 | 520.00→520.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 54→54 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
@@ -147,7 +147,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 60 | Multi-Shot | 0 | 2643 | 239.08 (13.89999961853% base mana)→239.08 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Raptor Strike | 8 | 14266 | 100.00→100.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 56→56 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
-| Hunter | 60 | Serpent Sting | 9 | 25295 | 250.00→250.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 60→60 | 15000→15000 | match |  | 111.00-111.00→111.00-111.00 | 1.000 (convention)→0.000 | declared, matches |
+| Hunter | 60 | Serpent Sting | 8 | 13555 | 230.00→230.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 58→58 | 15000→15000 | match |  | 83.00-83.00→83.00-83.00 | 1.000 (convention)→0.000 | declared, matches |
 | Hunter | 60 | Volley | 3 | 14295 | 490.00→490.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 6000→6000 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Wing Clip | 3 | 14268 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 10000→0 | mismatch | duration_ms 10000->0 (no aura registered) | 50.00-50.00→50.00-50.00 | 1.000→1.000 | declared, matches |
 ## Talent-gated spells

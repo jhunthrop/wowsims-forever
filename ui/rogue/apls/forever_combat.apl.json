@@ -10,7 +10,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 31016,
+            "spellId": 11300,
             "rank": 9
           }
         },
@@ -142,7 +142,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 25300,
+            "spellId": 11281,
             "rank": 9
           }
         }
@@ -165,7 +165,7 @@
                   "val": {
                     "spellCanCast": {
                       "spellId": {
-                        "spellId": 25300,
+                        "spellId": 11281,
                         "rank": 9
                       }
                     }

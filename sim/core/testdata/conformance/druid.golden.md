@@ -143,7 +143,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 60 | Cat Form | 0 | 768 | 684.20 (55% base mana)→684.20 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 60 | Claw | 5 | 9850 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 58→58 | n/a | match |  | n/a | n/a | n/a |
 | BalanceDruid | 60 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
-| BalanceDruid | 60 | Ferocious Bite | 5 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | 52.00-112.00→52.00-112.00 | 1.000→1.000 | declared, matches |
+| BalanceDruid | 60 | Ferocious Bite | 4 | 22829 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 56→56 | n/a | match |  | 45.00-95.00→45.00-95.00 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 60 | Hurricane | 1 | 16914 | 880.00→880.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 60 | Hurricane | 2 | 17401 | 1180.00→1180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 60 | Hurricane | 3 | 17402 | 1495.00→1495.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 10000→10000 | match |  | n/a | n/a | n/a |
@@ -169,7 +169,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 60 | Starfire | 4 | 8951 | 230.00→230.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | n/a | match |  | 190.44-227.16→190.44-227.16 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 60 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  | 255.87-302.53→255.87-302.53 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 60 | Starfire | 6 | 9876 | 315.00→315.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 58→58 | n/a | match |  | 313.43-369.77→313.43-369.77 | 1.000→1.000 | declared, matches |
-| BalanceDruid | 60 | Starfire | 7 | 25298 | 340.00→340.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 60→60 | n/a | match |  | 349.96-412.04→349.96-412.04 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 60 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→24 | 6000→6000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 60 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.32-17.88→15.32-17.88 | 0.429→0.429 | declared, matches |
 | BalanceDruid | 60 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 24.63-28.57→24.63-28.57 | 0.486→0.486 | declared, matches |
@@ -310,7 +309,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 60 | Cat Form | 0 | 768 | 684.20 (55% base mana)→684.20 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 60 | Claw | 5 | 9850 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 58→58 | n/a | match |  | n/a | n/a | n/a |
 | FeralDruid | 60 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
-| FeralDruid | 60 | Ferocious Bite | 5 | 31018 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | 52.00-112.00→52.00-112.00 | 1.000→1.000 | declared, matches |
+| FeralDruid | 60 | Ferocious Bite | 4 | 22829 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 56→56 | n/a | match |  | 45.00-95.00→45.00-95.00 | 1.000→1.000 | declared, matches |
 | FeralDruid | 60 | Hurricane | 1 | 16914 | 880.00→880.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 60 | Hurricane | 2 | 17401 | 1180.00→1180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 60 | Hurricane | 3 | 17402 | 1495.00→1495.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 10000→10000 | match |  | n/a | n/a | n/a |
@@ -336,7 +335,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 60 | Starfire | 4 | 8951 | 230.00→230.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | n/a | match |  | 190.44-227.16→190.44-227.16 | 1.000→1.000 | declared, matches |
 | FeralDruid | 60 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  | 255.87-302.53→255.87-302.53 | 1.000→1.000 | declared, matches |
 | FeralDruid | 60 | Starfire | 6 | 9876 | 315.00→315.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 58→58 | n/a | match |  | 313.43-369.77→313.43-369.77 | 1.000→1.000 | declared, matches |
-| FeralDruid | 60 | Starfire | 7 | 25298 | 340.00→340.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 60→60 | n/a | match |  | 349.96-412.04→349.96-412.04 | 1.000→1.000 | declared, matches |
 | FeralDruid | 60 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→24 | 6000→6000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 60 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.32-17.88→15.32-17.88 | 0.429→0.429 | declared, matches |
 | FeralDruid | 60 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 24.63-28.57→24.63-28.57 | 0.486→0.486 | declared, matches |

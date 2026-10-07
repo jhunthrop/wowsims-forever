@@ -230,7 +230,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 60 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  | 40.00-40.00→40.00-40.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Corruption | 6 | 11672 | 290.00→290.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | 18000→18000 | match |  | 57.00-57.00→57.00-57.00 | 0.200→0.200 | declared, matches |
-| DSRuinWarlock | 60 | Corruption | 7 | 25311 | 340.00→340.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 18000→18000 | match |  | 73.00-73.00→73.00-73.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Curse of Recklessness | 4 | 11717 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 120000→-1 | mismatch | duration_ms 120000->-1 | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -256,7 +255,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 60 | Immolate | 5 | 11665 | 220.00→220.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 40→40 | 15000→15000 | match |  | 80.00-80.00→80.00-80.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Immolate | 6 | 11667 | 295.00→295.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 50→50 | 15000→15000 | match |  | 115.50-115.50→115.50-115.50 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Immolate | 7 | 11668 | 370.00→370.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 15000→15000 | match |  | 146.00-146.00→146.00-146.00 | 0.200→0.200 | declared, matches |
-| DSRuinWarlock | 60 | Immolate | 8 | 25309 | 380.00→380.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 15000→15000 | match |  | 158.00-158.00→158.00-158.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Life Tap | 3 | 1456 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | n/a | n/a | n/a |
@@ -282,7 +280,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 60 | Shadow Bolt | 7 | 11659 | 265.00→265.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 44→44 | n/a | match |  | 139.56-156.44→139.56-156.44 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 60 | Shadow Bolt | 8 | 11660 | 315.00→315.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 52→52 | n/a | match |  | 188.03-209.97→188.03-209.97 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 60 | Shadow Bolt | 9 | 11661 | 370.00→370.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | n/a | match |  | 237.43-264.57→237.43-264.57 | 0.857→0.857 | declared, matches |
-| DSRuinWarlock | 60 | Shadow Bolt | 10 | 25307 | 380.00→380.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | n/a | match |  | 253.29-282.71→253.29-282.71 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 60 | Soul Fire | 1 | 6353 | 305.00→305.00 | mana→mana | 60000→60000 | 6000→6000 | 1500→1500 | 48→48 | n/a | match |  | 343.14-431.26→343.14-431.26 | 1.000→1.000 | declared, matches |
 | DSRuinWarlock | 60 | Soul Fire | 2 | 17924 | 335.00→335.00 | mana→mana | 60000→60000 | 6000→6000 | 1500→1500 | 56→56 | n/a | match |  | 389.31-487.89→389.31-487.89 | 1.000→1.000 | declared, matches |
 | DSRuinWarlock | 60 | Summon Felhunter | 0 | 691 | 1373.00 (100% base mana)→1373.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
@@ -507,7 +504,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 60 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  | 40.00-40.00→40.00-40.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Corruption | 6 | 11672 | 290.00→290.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | 18000→18000 | match |  | 57.00-57.00→57.00-57.00 | 0.200→0.200 | declared, matches |
-| SMRuinWarlock | 60 | Corruption | 7 | 25311 | 340.00→340.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 18000→18000 | match |  | 73.00-73.00→73.00-73.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Curse of Recklessness | 4 | 11717 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 120000→-1 | mismatch | duration_ms 120000->-1 | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -533,7 +529,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 60 | Immolate | 5 | 11665 | 220.00→220.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 40→40 | 15000→15000 | match |  | 80.00-80.00→80.00-80.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Immolate | 6 | 11667 | 295.00→295.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 50→50 | 15000→15000 | match |  | 115.50-115.50→115.50-115.50 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Immolate | 7 | 11668 | 370.00→370.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 15000→15000 | match |  | 146.00-146.00→146.00-146.00 | 0.200→0.200 | declared, matches |
-| SMRuinWarlock | 60 | Immolate | 8 | 25309 | 380.00→380.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 15000→15000 | match |  | 158.00-158.00→158.00-158.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Life Tap | 3 | 1456 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | n/a | n/a | n/a |
@@ -559,7 +554,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 60 | Shadow Bolt | 7 | 11659 | 265.00→265.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 44→44 | n/a | match |  | 139.56-156.44→139.56-156.44 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 60 | Shadow Bolt | 8 | 11660 | 315.00→315.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 52→52 | n/a | match |  | 188.03-209.97→188.03-209.97 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 60 | Shadow Bolt | 9 | 11661 | 370.00→370.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | n/a | match |  | 237.43-264.57→237.43-264.57 | 0.857→0.857 | declared, matches |
-| SMRuinWarlock | 60 | Shadow Bolt | 10 | 25307 | 380.00→380.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | n/a | match |  | 253.29-282.71→253.29-282.71 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 60 | Soul Fire | 1 | 6353 | 305.00→305.00 | mana→mana | 60000→60000 | 6000→6000 | 1500→1500 | 48→48 | n/a | match |  | 343.14-431.26→343.14-431.26 | 1.000→1.000 | declared, matches |
 | SMRuinWarlock | 60 | Soul Fire | 2 | 17924 | 335.00→335.00 | mana→mana | 60000→60000 | 6000→6000 | 1500→1500 | 56→56 | n/a | match |  | 389.31-487.89→389.31-487.89 | 1.000→1.000 | declared, matches |
 | SMRuinWarlock | 60 | Summon Felhunter | 0 | 691 | 1373.00 (100% base mana)→1373.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |

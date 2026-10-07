@@ -2,7 +2,7 @@
   "type": "TypeAPL",
   "prepullActions": [
     {
-      "action": { "castSpell": { "spellId": { "spellId": 25289, "rank": 7 } } },
+      "action": { "castSpell": { "spellId": { "spellId": 11551, "rank": 7 } } },
       "doAtValue": { "const": { "val": "-1s" } }
     }
   ],
@@ -22,8 +22,8 @@
     {
       "notes": "Keep Battle Shout up.",
       "action": {
-        "condition": { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 25289, "rank": 7 } } } } },
-        "castSpell": { "spellId": { "spellId": 25289, "rank": 7 } }
+        "condition": { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 11551, "rank": 7 } } } } },
+        "castSpell": { "spellId": { "spellId": 11551, "rank": 7 } }
       }
     },
     {
@@ -48,7 +48,7 @@
       "notes": "Heroic Strike as the rage dump, never below 40 rage.",
       "action": {
         "condition": { "cmp": { "op": "OpGe", "lhs": { "currentRage": {} }, "rhs": { "const": { "val": "40" } } } },
-        "castSpell": { "spellId": { "spellId": 25286, "rank": 9, "tag": 1 } }
+        "castSpell": { "spellId": { "spellId": 11567, "rank": 9, "tag": 1 } }
       }
     }
   ]
