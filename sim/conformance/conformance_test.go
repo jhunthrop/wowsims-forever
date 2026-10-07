@@ -125,3 +125,36 @@ func loadClientClass(t *testing.T, classSlug string) (spellconst.Class, bool) {
 	}
 	return clientClass, true
 }
+
+// TestConformanceSummaryDamageBlock keeps SUMMARY.md's generated damage
+// block equal to the counts the goldens' own rows give, regenerating it
+// under FOREVER_UPDATE_GOLDEN=1 like the goldens.
+func TestConformanceSummaryDamageBlock(t *testing.T) {
+	var slugs []string
+	counts := map[string]DamageCounts{}
+	for _, classSlug := range presetOrder() {
+		clientClass, ok := loadClientClass(t, classSlug)
+		if !ok {
+			return
+		}
+		rows, _, _ := collectRows(clientClass, presetsByClass()[classSlug])
+		gated, _ := collectTalentGatedRows(clientClass, classSlug)
+		slugs = append(slugs, classSlug)
+		counts[classSlug] = countDamage(append(rows, gated...))
+	}
+
+	current, err := readSummary()
+	if err != nil {
+		t.Fatalf("reading SUMMARY.md: %v", err)
+	}
+	want := spliceDamageBlock(current, renderDamageBlock(slugs, counts))
+	if os.Getenv("FOREVER_UPDATE_GOLDEN") == "1" {
+		if err := writeSummary(want); err != nil {
+			t.Fatalf("writing SUMMARY.md: %v", err)
+		}
+		return
+	}
+	if current != want {
+		t.Errorf("SUMMARY.md's damage block is stale; run FOREVER_UPDATE_GOLDEN=1 go test --tags=with_db ./sim/conformance/ and review the diff")
+	}
+}

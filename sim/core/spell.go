@@ -55,6 +55,15 @@ type SpellConfig struct {
 	BonusDamage      float64 // Bonus scaling power e.g. Idol of the Moon "Increases the damage of X spell by N" https://www.wowhead.com/classic/item=23197/idol-of-the-moon
 	BonusCoefficient float64 // EffectBonusCoefficient in SpellEffect client DB table, "SP mod" on Wowhead (not necessarily shown there even if > 0)
 
+	// ClientBaseDamage is the {min, max} base roll this registration uses
+	// for the effect the client's SpellEffect row describes, before spell
+	// power, talents and level scaling (per tick for a periodic effect).
+	// Ability files MAY set it; it changes nothing at runtime and exists
+	// only so sim/conformance can compare it against the client's
+	// EffectBasePointsF, Variance and EffectRealPointsPerLevel. {0, 0}
+	// reads as "not declared".
+	ClientBaseDamage [2]float64
+
 	ThreatMultiplier float64
 
 	FlatThreatBonus float64
@@ -162,6 +171,9 @@ type Spell struct {
 
 	BonusDamage      float64 // Bonus scaling power e.g. Idol of the Moon "Increases the damage of X spell by N" https://www.wowhead.com/classic/item=23197/idol-of-the-moon
 	BonusCoefficient float64 // EffectBonusCoefficient in SpellEffect client DB table, "SP mod" on Wowhead (not necessarily shown there even if > 0)
+
+	// ClientBaseDamage: see SpellConfig.
+	ClientBaseDamage [2]float64
 
 	CritDamageBonus float64
 
@@ -292,6 +304,7 @@ func (unit *Unit) RegisterSpell(config SpellConfig) *Spell {
 		PeriodicDamageMultiplierAdditive: config.PeriodicDamageMultiplierAdditive,
 
 		BonusCoefficient: config.BonusCoefficient,
+		ClientBaseDamage: config.ClientBaseDamage,
 
 		ThreatMultiplier: config.ThreatMultiplier,
 		FlatThreatBonus:  config.FlatThreatBonus,

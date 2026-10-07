@@ -62,6 +62,10 @@ type Row struct {
 	// spell, so the duration columns and Verdict ignore each other.
 	HasDuration bool
 
+	// Damage is the base-damage comparison (damage.go). It is reported in
+	// its own columns and does not move Verdict.
+	Damage DamageComparison
+
 	// Verdict is "match", "mismatch", or "client-scripted" (every field
 	// besides duration matches, and the client's own duration is absent
 	// while the engine keeps Classic's known value).
@@ -229,6 +233,8 @@ func rowFor(clientClass spellconst.Class, spec Preset, level int32, character *c
 	if row.ClientDurationMS > 0 {
 		row.HasDuration = true
 	}
+
+	row.Damage = compareDamage(clientSpell, int(level), spell)
 
 	row.Verdict, row.Diff = verdictFor(row)
 	return row, true
