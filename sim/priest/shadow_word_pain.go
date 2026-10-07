@@ -55,6 +55,9 @@ func (priest *Priest) getShadowWordPainConfig(rank int) core.SpellConfig {
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		// The dot below carries the coefficient the damage uses; the spell
+		// states it too so the conformance report reads it.
+		BonusCoefficient: spellCoeff,
 		ClientBaseDamage: roll,
 
 		Dot: core.DotConfig{
