@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -11,13 +12,31 @@ const FlameShockRanks = 6
 
 var FlameShockSpellId = [FlameShockRanks + 1]int32{0, 8050, 8052, 8053, 10447, 10448, 29228}
 
-// The direct hit's damage and coefficient, and the per-tick damage and
+// The direct hit's roll and coefficient, and the per-tick damage and
 // coefficient of the 12 s DoT's four 3 s ticks, are spellconst/shaman.json's
-// own: rank 6 is 166 at 0.214 up front and 44 at 0.1 a tick (176 over the
-// DoT), where the Classic numbers these replaced were 292 and 320 over the
-// DoT, with rank 1-2 coefficients below the client's 0.214.
-var FlameShockBaseDamage = [FlameShockRanks + 1]float64{0, 20, 33, 43, 82, 128, 166}
-var FlameShockTickDamage = [FlameShockRanks + 1]float64{0, 7, 8, 14, 21, 34, 44}
+// own: rank 6 rolls 166 at level 60 at 0.214 up front (the client states no
+// width) and 44 at 0.1 a tick (176 over the DoT), where the Classic numbers
+// these replaced were 292 and 320 over the DoT, with rank 1-2 coefficients
+// below the client's 0.214. The direct hit grows per level to five levels
+// above the rank's own; the ticks do not grow.
+var FlameShockDamage = [FlameShockRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 20, PerLevel: 0.8, SpellLevel: 10, MaxLevel: 15},
+	{Amount: 33, PerLevel: 1, SpellLevel: 18, MaxLevel: 23},
+	{Amount: 43, PerLevel: 1.2, SpellLevel: 28, MaxLevel: 33},
+	{Amount: 82, PerLevel: 1.4, SpellLevel: 40, MaxLevel: 45},
+	{Amount: 128, PerLevel: 1.7, SpellLevel: 52, MaxLevel: 57},
+	{Amount: 166, PerLevel: 2.1, SpellLevel: 60, MaxLevel: 67},
+}
+var FlameShockTickDamage = [FlameShockRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 7, SpellLevel: 10, MaxLevel: 15},
+	{Amount: 8, SpellLevel: 18, MaxLevel: 23},
+	{Amount: 14, SpellLevel: 28, MaxLevel: 33},
+	{Amount: 21, SpellLevel: 40, MaxLevel: 45},
+	{Amount: 34, SpellLevel: 52, MaxLevel: 57},
+	{Amount: 44, SpellLevel: 60, MaxLevel: 67},
+}
 var FlameShockBaseSpellCoef = [FlameShockRanks + 1]float64{0, .214, .214, .214, .214, .214, .214}
 var FlameShockDotSpellCoef = [FlameShockRanks + 1]float64{0, .1, .1, .1, .1, .1, .1}
 var FlameShockManaCost = [FlameShockRanks + 1]float64{0, 55, 95, 160, 250, 345, 410}
@@ -38,8 +57,9 @@ func (shaman *Shaman) newFlameShockSpell(rank int, shockTimer *core.Timer) core.
 	tickDuration := time.Second * 3
 
 	spellId := FlameShockSpellId[rank]
-	baseDamage := FlameShockBaseDamage[rank]
-	baseDotDamage := FlameShockTickDamage[rank]
+	damage := FlameShockDamage[rank]
+	tickDamage := FlameShockTickDamage[rank]
+	casterLevel := int(shaman.Level)
 	baseSpellCoeff := FlameShockBaseSpellCoef[rank]
 	dotSpellCoeff := FlameShockDotSpellCoef[rank]
 	manaCost := FlameShockManaCost[rank]
@@ -59,6 +79,7 @@ func (shaman *Shaman) newFlameShockSpell(rank int, shockTimer *core.Timer) core.
 	spell.Cast.IgnoreHaste = true
 
 	spell.BonusCoefficient = baseSpellCoeff
+	spell.ClientBaseDamage = damage.Range(casterLevel)
 
 	// Call of Flame's tooltip (talents/shaman.json node 104770) names
 	// "Fire Totems and ... Flame Shock, Fire Nova, and Lava Burst"
@@ -82,7 +103,7 @@ func (shaman *Shaman) newFlameShockSpell(rank int, shockTimer *core.Timer) core.
 		BonusCoefficient: dotSpellCoeff,
 
 		OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-			dot.Snapshot(target, baseDotDamage, isRollover)
+			dot.Snapshot(target, tickDamage.Center(casterLevel), isRollover)
 		},
 
 		OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
@@ -91,7 +112,7 @@ func (shaman *Shaman) newFlameShockSpell(rank int, shockTimer *core.Timer) core.
 	}
 
 	spell.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-		result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+		result := spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 		if result.Landed() {
 			spell.Dot(result.Target).Apply(sim)
 		}
