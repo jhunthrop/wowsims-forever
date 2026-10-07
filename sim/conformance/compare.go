@@ -40,9 +40,18 @@ type Row struct {
 	// removed" (a stance, a permanent aura), 0 means the client states no
 	// duration, and a positive value is milliseconds.
 	ClientDurationMS int32
-	// EngineDurationMS is 0 when the spell has neither a RelatedSelfBuff nor
-	// a Dot the engine can read without running the sim (see rowFor).
+	// EngineDurationMS is 0 when engineDuration found no aura or Dot
+	// anywhere it looked (see its doc comment for the full search order).
 	EngineDurationMS int32
+	// EngineDurationFound is true when engineDuration located a real aura
+	// or Dot for this spell, on any unit it checked - the caster, the
+	// caster's current target, or a pet the caster's Character owns -
+	// false when none of those has anything at all. It exists only to
+	// tell a genuine "both sides have a number but they disagree"
+	// mismatch apart from "this report found no engine-side duration to
+	// compare in the first place" in the rendered Diff text; it is not
+	// itself rendered as a column.
+	EngineDurationFound bool
 	// HasDuration is false when neither side names a duration for this
 	// spell, so the duration columns and Verdict ignore each other.
 	HasDuration bool
@@ -55,6 +64,52 @@ type Row struct {
 	Diff string
 }
 
+// JOB 2 finding - the "percent-of-mana cost vs. flat client column" open
+// question from SUMMARY.md's first pass is answered, not just flagged:
+//
+// Forever's data pipeline's raw client table, SpellPower.csv, has its
+// own PowerCostPct column, and every spell this report's spellconst
+// cost reads as a flat 0 has a real, nonzero PowerCostPct in that raw
+// table - it is simply never carried into spellconst.Spell's Cost/
+// CostType fields, which only read SpellPower.csv's flat ManaCost
+// column. Checked directly against build 1.60.1.70009's SpellPower.csv:
+//
+//	Spell                 PowerCostPct  Engine ManaCostOptions.BaseCost
+//	Bestial Wrath (19574)         12%   0.12  (sim/hunter/bestial_wrath.go)
+//	Multi-Shot      (2643)      13.9%   0.139 (multiShotBaseManaCostPercent)
+//	Summon Felhunter (691)       100%   1.0   (shares warlock's manaCost var)
+//	Summon Voidwalker(697)       100%   1.0   (same)
+//	Summon Succubus  (712)       100%   1.0   (same)
+//	Summon Imp       (688)        80%   1.0   (BUG: shares the other three's
+//	                                            100%-of-base-mana cost var
+//	                                            instead of its own 80% -
+//	                                            sim/warlock/summon_demon.go;
+//	                                            a real defect for the
+//	                                            warlock lane, not a
+//	                                            visibility gap)
+//	Cat Form         (768)        55%   0.55  (sim/druid/forms.go)
+//	Moonkin Form     (24858)      35%   0.35  (same)
+//	Innervate        (29166)       5%   0.05  (sim/druid/innervate.go)
+//
+// Every one of those (Summon Imp aside) is the engine's percent model
+// matching the client's real percent-cost field exactly - these are
+// correct engine behavior this report could not previously verify, not
+// stale formulas. The fix that would surface this directly in the
+// table above (rather than in this comment) is extending the data
+// pipeline that generates data/builds/<build>/spellconst/<class>.json
+// (a different repo, out of this lane's scope) to also emit
+// PowerCostPct, and spellconst.Spell to carry it, so verdictFor could
+// compare percent-to-percent instead of amount-to-amount for these
+// rows.
+//
+// Shaman's Stormstrike (17364) is NOT one of these: its raw
+// SpellPower.csv row has PowerCostPct 0 and a real flat ManaCost of
+// 125, matching spellconst's own cost column already. The row still
+// mismatches (client 125 vs. engine 319.20) because
+// sim/shaman/stormstrike.go's ManaCost.BaseCost: .21 treats it as a
+// 21%-of-base-mana spell anyway - a stale vanilla-era literal, not a
+// visibility gap, and the shaman lane's to fix.
+//
 // costTypeName maps both sides' cost-type encodings to one comparable
 // label. The client's cost_type column (0 mana, 1 rage, 3 energy, per the
 // Forever spellconst pipeline) and the engine's core.CostType enum (Mana=1,
@@ -120,7 +175,7 @@ func engineCostTypeName(t core.CostType) string {
 // time for. Without this, that helper produced its own all-zero row
 // against the real cast's client entry - Death Coil looked
 // "unregistered" in the golden even where the real cast matched.
-func rowFor(clientClass spellconst.Class, spec Preset, level int32, spell *core.Spell) (Row, bool) {
+func rowFor(clientClass spellconst.Class, spec Preset, level int32, character *core.Character, spell *core.Spell) (Row, bool) {
 	if spell.ActionID.SpellID == 0 {
 		return Row{}, false
 	}
@@ -129,6 +184,19 @@ func rowFor(clientClass spellconst.Class, spec Preset, level int32, spell *core.
 	}
 	clientSpell, ok := clientClass.ByID(spell.ActionID.SpellID)
 	if !ok {
+		return Row{}, false
+	}
+
+	// JOB 3: the client's per-class table carries a generic "Attack"
+	// entry - the basic melee-swing button, not a player-cast spell -
+	// reused verbatim across many contexts. It sometimes even shares a
+	// SpellID with a real engine-registered ability (shaman's Searing
+	// Totem reuses "Attack"'s ids for its own instant totem-attack
+	// sub-spell), which produced a spurious mismatch comparing the
+	// client's melee-swing timer against that ability's real cast time.
+	// It was never meant to be compared against any one engine spell, so
+	// this report excludes it rather than scoring it.
+	if clientSpell.Name == "Attack" {
 		return Row{}, false
 	}
 
@@ -164,7 +232,8 @@ func rowFor(clientClass spellconst.Class, spec Preset, level int32, spell *core.
 		row.EngineCostType = "none"
 	}
 
-	row.EngineDurationMS, row.HasDuration = engineDuration(spell)
+	row.EngineDurationMS, row.EngineDurationFound = engineDuration(spell, character, siblingSpellIDs(clientClass, clientSpell.Name))
+	row.HasDuration = row.EngineDurationFound
 	if row.ClientDurationMS > 0 {
 		row.HasDuration = true
 	}
@@ -173,23 +242,113 @@ func rowFor(clientClass spellconst.Class, spec Preset, level int32, spell *core.
 	return row, true
 }
 
-// engineDuration reads a spell's duration without running a sim: the aura
-// it applies to its own caster (RelatedSelfBuff), or failing that the dot
-// it applies to the current target (Dot(target)), both of which are
-// populated at spell-registration time (sim/core/dot.go's createDots),
-// before any iteration runs. A spell with neither is not a duration
-// ability at all (an instant nuke, a cooldown-only ability), so
-// HasDuration is false rather than 0 meaning "0ms".
-func engineDuration(spell *core.Spell) (ms int32, has bool) {
+// siblingSpellIDs returns every SpellID spellconst's client table lists
+// under name - every rank of the same ability, not just the one rank
+// being compared - so engineDuration can match an aura that is pinned to
+// one fixed rank's SpellID regardless of which rank actually cast it
+// (see engineDuration's doc comment, step 3-5, for why that happens).
+func siblingSpellIDs(clientClass spellconst.Class, name string) map[int32]bool {
+	ranks := clientClass.Ranks(name)
+	ids := make(map[int32]bool, len(ranks))
+	for _, r := range ranks {
+		ids[r.ID] = true
+	}
+	return ids
+}
+
+// engineDuration locates, without running a sim, the aura or Dot a
+// spell's effect actually lives on. found is false only when none of
+// the following has anything for this spell at all:
+//
+//  1. RelatedSelfBuff - a buff the spell links to itself at
+//     registration time (sim/core/dot.go's createDots, before any
+//     iteration runs). Checked first, alone, exactly as before this
+//     report looked any further: most registered durations live here.
+//  2. Dot(currentTarget) - a damage-over-time aura on the sim's one
+//     default target, populated at that same registration time.
+//  3. Every aura already registered on the spell's own caster
+//     (Unit.GetAuras()) - this is where a totem's lifetime lives in
+//     this codebase: totems are not separate units here, they are
+//     auras the totem's own ApplyEffects activates directly on the
+//     shaman's Unit (core.StrengthOfEarthTotemAura and its siblings in
+//     sim/core/buffs.go), and a self buff registered without
+//     RelatedSelfBuff (Rapid Fire, Berserk, Slice and Dice, Shield
+//     Wall) also lives here.
+//  4. Every aura already registered on the spell's current target - a
+//     target debuff that is not itself a Dot (Earth Shock's interrupt
+//     silence, Frost Shock's slow, Expose Armor, Faerie Fire).
+//  5. Every aura registered on a Pet the caster's Character owns - the
+//     one other unit type this report can reach, for any class whose
+//     minion or totem is modeled as a real Pet rather than a
+//     caster-side aura.
+//
+// Steps 3-5 match an aura by ActionID.SpellID against siblingIDs
+// (siblingSpellIDs), not against spell.ActionID.SpellID alone, because
+// several of the engine's own shared-aura helpers register one aura
+// pinned to a single fixed rank's SpellID no matter which rank actually
+// triggered it.
+//
+// A spell with no duration ability at all (an instant nuke, a
+// cooldown-only button) is indistinguishable from one whose armed
+// lifetime this report cannot see (a trap before it triggers) by this
+// function alone - rowFor's HasDuration/ClientDurationMS combination,
+// not found, is what tells those apart for the golden.
+func engineDuration(spell *core.Spell, character *core.Character, siblingIDs map[int32]bool) (ms int32, found bool) {
 	if spell.RelatedSelfBuff != nil {
-		return int32(spell.RelatedSelfBuff.Duration / time.Millisecond), true
+		return auraDurationMS(spell.RelatedSelfBuff), true
 	}
 	if spell.Dots() != nil && spell.Unit != nil && spell.Unit.CurrentTarget != nil {
 		if dot := spell.Dot(spell.Unit.CurrentTarget); dot != nil && dot.Aura != nil {
-			return int32(dot.Aura.Duration / time.Millisecond), true
+			return auraDurationMS(dot.Aura), true
+		}
+	}
+
+	if spell.Unit == nil {
+		return 0, false
+	}
+
+	if aura := matchingAura(spell.Unit.GetAuras(), siblingIDs); aura != nil {
+		return auraDurationMS(aura), true
+	}
+	if target := spell.Unit.CurrentTarget; target != nil {
+		if aura := matchingAura(target.GetAuras(), siblingIDs); aura != nil {
+			return auraDurationMS(aura), true
+		}
+	}
+	if character != nil {
+		for _, pet := range character.Pets {
+			if aura := matchingAura(pet.GetAuras(), siblingIDs); aura != nil {
+				return auraDurationMS(aura), true
+			}
 		}
 	}
 	return 0, false
+}
+
+// auraDurationMS converts an aura's Duration to the client's own
+// millisecond convention, including its sentinel: core.NeverExpires (a
+// proc-style aura with no natural timeout, such as Inner Focus or
+// Shadowform, removed by code rather than by expiring) is reported as
+// -1, the client's own "until removed" value, rather than truncating
+// MaxInt64 nanoseconds into an int32 and returning millisecond garbage.
+func auraDurationMS(aura *core.Aura) int32 {
+	if aura.Duration == core.NeverExpires {
+		return -1
+	}
+	return int32(aura.Duration / time.Millisecond)
+}
+
+// matchingAura returns the first aura in auras whose ActionID.SpellID is
+// a member of ids, or nil. Tag is deliberately ignored: the search
+// cares only which spell an aura belongs to, not which proc or stack
+// instance of it this particular Aura value is.
+func matchingAura(auras []*core.Aura, ids map[int32]bool) *core.Aura {
+	for _, aura := range auras {
+		if aura.ActionID.SpellID != 0 && ids[aura.ActionID.SpellID] {
+			return aura
+		}
+	}
+	return nil
 }
 
 // verdictFor compares every column rowFor filled in and decides match,
@@ -241,15 +400,19 @@ func verdictFor(row Row) (verdict string, diff string) {
 			// The client states no duration (0) or a permanent one (-1
 			// stances aside, which this program does not try to score).
 			// The engine keeping a known value here is the documented
-			// "server-side script" case, not a defect.
+			// "server-side script" case, not a defect. A client -1 also
+			// matches an engine 0: before Job 1 widened engineDuration's
+			// search, "not found" (0) was the only way a permanent buff
+			// ever read here at all, and that convention stays valid for
+			// whatever still reads 0 today (nothing found, anywhere).
 			clientStatesNoDuration = row.ClientDurationMS == 0
-			durationMatches = row.ClientDurationMS == -1 && row.EngineDurationMS == 0
+			durationMatches = row.ClientDurationMS == -1 && (row.EngineDurationMS == 0 || row.EngineDurationMS == -1)
 			if !durationMatches && !clientStatesNoDuration {
-				diffs = append(diffs, fmt.Sprintf("duration_ms %d->%d", row.ClientDurationMS, row.EngineDurationMS))
+				diffs = append(diffs, fmt.Sprintf("duration_ms %d->%d%s", row.ClientDurationMS, row.EngineDurationMS, noAuraNote(row)))
 			}
 		} else if row.ClientDurationMS != row.EngineDurationMS {
 			durationMatches = false
-			diffs = append(diffs, fmt.Sprintf("duration_ms %d->%d", row.ClientDurationMS, row.EngineDurationMS))
+			diffs = append(diffs, fmt.Sprintf("duration_ms %d->%d%s", row.ClientDurationMS, row.EngineDurationMS, noAuraNote(row)))
 		}
 	}
 
@@ -264,6 +427,22 @@ func verdictFor(row Row) (verdict string, diff string) {
 	default:
 		return "mismatch", joinDiffs(diffs)
 	}
+}
+
+// noAuraNote annotates a duration mismatch that engineDuration could not
+// back with any real aura or Dot - " (no aura registered)" - versus a
+// mismatch where an aura was found but the two sides' numbers simply
+// disagree, which gets no note. This is the "new column or note" the
+// lane brief calls for: a trap's armed lifetime (Explosive Trap,
+// Freezing Trap - see SUMMARY.md's Hunter section) is the known case
+// still reading this way after engineDuration's wider search; anything
+// a future registration adds a real aura for stops reading it
+// automatically, with no further change here.
+func noAuraNote(row Row) string {
+	if row.EngineDurationFound {
+		return ""
+	}
+	return " (no aura registered)"
 }
 
 func joinDiffs(diffs []string) string {

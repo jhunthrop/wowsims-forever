@@ -219,7 +219,7 @@ func collectTalentGatedRows(clientClass spellconst.Class, classSlug string) (row
 				if baseline[level][spell.ActionID.SpellID] {
 					continue // registers with no talents too; not this talent's gate
 				}
-				row, ok := rowFor(clientClass, gatedPreset, level, spell)
+				row, ok := rowFor(clientClass, gatedPreset, level, built, spell)
 				if !ok {
 					continue
 				}

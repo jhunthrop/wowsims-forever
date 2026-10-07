@@ -14,10 +14,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 10 | Judgement | 0 | 20271 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  |
 | ProtectionPaladin | 10 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
 | ProtectionPaladin | 10 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  |
-| ProtectionPaladin | 10 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| ProtectionPaladin | 10 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | ProtectionPaladin | 10 | Lay on Hands | 0 | 633 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  |
-| ProtectionPaladin | 10 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 10 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| ProtectionPaladin | 10 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 10 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin | 10 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | ProtectionPaladin | 10 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | ProtectionPaladin | 10 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  |
@@ -30,12 +30,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
 | ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  |
 | ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  |
-| ProtectionPaladin | 20 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 20 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| ProtectionPaladin | 20 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 20 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | ProtectionPaladin | 20 | Lay on Hands | 0 | 633 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  |
-| ProtectionPaladin | 20 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 20 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 20 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| ProtectionPaladin | 20 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 20 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 20 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin | 20 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | ProtectionPaladin | 20 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | ProtectionPaladin | 20 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  |
@@ -54,14 +54,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  |
 | ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  |
 | ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  |
-| ProtectionPaladin | 30 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 30 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 30 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| ProtectionPaladin | 30 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 30 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 30 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | ProtectionPaladin | 30 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
-| ProtectionPaladin | 30 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 30 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 30 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 30 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| ProtectionPaladin | 30 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 30 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 30 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 30 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin | 30 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | ProtectionPaladin | 30 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | ProtectionPaladin | 30 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  |
@@ -85,16 +85,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  |
 | ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  |
 | ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  |
-| ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | ProtectionPaladin | 38 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
-| ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 38 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin | 38 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | ProtectionPaladin | 38 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | ProtectionPaladin | 38 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  |
@@ -121,16 +121,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  |
 | ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  |
 | ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  |
-| ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | ProtectionPaladin | 40 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
-| ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 40 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin | 40 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | ProtectionPaladin | 40 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | ProtectionPaladin | 40 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  |
@@ -164,19 +164,19 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  |
 | ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  |
 | ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  |
-| ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 20302 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 20302 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | ProtectionPaladin | 50 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  |
-| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25735 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25736 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25735 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25736 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 50 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin | 50 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | ProtectionPaladin | 50 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | ProtectionPaladin | 50 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  |
@@ -222,21 +222,21 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  |
 | ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  |
 | ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20286 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  |
-| ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20302 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20303 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | 40000→0 | mismatch | duration_ms 40000->0 |
-| ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20302 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20303 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | ProtectionPaladin | 60 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  |
-| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25713 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25735 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25736 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25713 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25735 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25736 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| ProtectionPaladin | 60 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin | 60 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | ProtectionPaladin | 60 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | ProtectionPaladin | 60 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  |
@@ -255,10 +255,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 10 | Judgement | 0 | 20271 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  |
 | RetributionPaladin | 10 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
 | RetributionPaladin | 10 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  |
-| RetributionPaladin | 10 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| RetributionPaladin | 10 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | RetributionPaladin | 10 | Lay on Hands | 0 | 633 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  |
-| RetributionPaladin | 10 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 10 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| RetributionPaladin | 10 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 10 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | RetributionPaladin | 10 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | RetributionPaladin | 10 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | RetributionPaladin | 10 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  |
@@ -271,12 +271,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 20 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
 | RetributionPaladin | 20 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  |
 | RetributionPaladin | 20 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  |
-| RetributionPaladin | 20 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 20 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| RetributionPaladin | 20 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 20 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | RetributionPaladin | 20 | Lay on Hands | 0 | 633 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  |
-| RetributionPaladin | 20 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 20 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 20 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| RetributionPaladin | 20 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 20 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 20 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | RetributionPaladin | 20 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | RetributionPaladin | 20 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | RetributionPaladin | 20 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  |
@@ -295,14 +295,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  |
 | RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  |
 | RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  |
-| RetributionPaladin | 30 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 30 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 30 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| RetributionPaladin | 30 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 30 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 30 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | RetributionPaladin | 30 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
-| RetributionPaladin | 30 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 30 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 30 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 30 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| RetributionPaladin | 30 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 30 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 30 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 30 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | RetributionPaladin | 30 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | RetributionPaladin | 30 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | RetributionPaladin | 30 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  |
@@ -326,16 +326,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  |
 | RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  |
 | RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  |
-| RetributionPaladin | 38 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 38 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 38 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 38 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| RetributionPaladin | 38 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 38 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 38 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 38 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | RetributionPaladin | 38 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
-| RetributionPaladin | 38 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 38 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 38 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 38 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 38 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| RetributionPaladin | 38 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 38 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 38 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 38 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 38 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | RetributionPaladin | 38 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | RetributionPaladin | 38 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | RetributionPaladin | 38 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  |
@@ -362,16 +362,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  |
 | RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  |
 | RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  |
-| RetributionPaladin | 40 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 40 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 40 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 40 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| RetributionPaladin | 40 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 40 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 40 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 40 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | RetributionPaladin | 40 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
-| RetributionPaladin | 40 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 40 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 40 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 40 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 40 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| RetributionPaladin | 40 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 40 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 40 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 40 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 40 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | RetributionPaladin | 40 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | RetributionPaladin | 40 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | RetributionPaladin | 40 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  |
@@ -405,19 +405,19 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  |
 | RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  |
 | RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  |
-| RetributionPaladin | 50 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 50 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 50 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 50 | Judgement of the Crusader | 0 | 20302 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 50 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| RetributionPaladin | 50 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 50 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 50 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 50 | Judgement of the Crusader | 0 | 20302 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 50 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | RetributionPaladin | 50 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  |
-| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25735 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25736 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25735 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25736 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 50 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | RetributionPaladin | 50 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | RetributionPaladin | 50 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | RetributionPaladin | 50 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  |
@@ -463,21 +463,21 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  |
 | RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  |
 | RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20286 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  |
-| RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20302 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20303 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | 40000→0 | mismatch | duration_ms 40000->0 |
-| RetributionPaladin | 60 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 |
+| RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20302 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20303 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | 40000→-1 | mismatch | duration_ms 40000->-1 |
+| RetributionPaladin | 60 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 |
 | RetributionPaladin | 60 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  |
-| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25713 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25735 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25736 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
-| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  |
+| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25713 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25735 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25736 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
+| RetributionPaladin | 60 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | RetributionPaladin | 60 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  |
 | RetributionPaladin | 60 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  |
 | RetributionPaladin | 60 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  |
@@ -498,13 +498,13 @@ Each spell below is built with exactly one point in the single talent that grant
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| ProtectionPaladin (Divine Favor talent) | 10 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ProtectionPaladin (Divine Favor talent) | 20 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ProtectionPaladin (Divine Favor talent) | 30 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ProtectionPaladin (Divine Favor talent) | 38 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ProtectionPaladin (Divine Favor talent) | 40 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ProtectionPaladin (Divine Favor talent) | 50 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | n/a | match |  |
-| ProtectionPaladin (Divine Favor talent) | 60 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | n/a | match |  |
+| ProtectionPaladin (Divine Favor talent) | 10 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  |
+| ProtectionPaladin (Divine Favor talent) | 20 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  |
+| ProtectionPaladin (Divine Favor talent) | 30 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  |
+| ProtectionPaladin (Divine Favor talent) | 38 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  |
+| ProtectionPaladin (Divine Favor talent) | 40 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  |
+| ProtectionPaladin (Divine Favor talent) | 50 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  |
+| ProtectionPaladin (Divine Favor talent) | 60 | Divine Favor | 0 | 20216 | 0.00→0.00 | mana→none | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  |
 | ProtectionPaladin (Holy Shield talent) | 40 | Holy Shield | 1 | 20925 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  |
 | ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 1 | 20925 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  |
 | ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 2 | 20927 | 195.00→195.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  |
@@ -518,22 +518,22 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Holy Shock talent) | 60 | Holy Shock | 2 | 20929 | 275.00→275.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  |
 | ProtectionPaladin (Holy Shock talent) | 60 | Holy Shock | 3 | 20930 | 325.00→325.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 56→56 | n/a | match |  |
 | ProtectionPaladin (Seal of Command talent) | 20 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  |
-| ProtectionPaladin (Seal of Command talent) | 20 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
+| ProtectionPaladin (Seal of Command talent) | 20 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin (Seal of Command talent) | 20 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→30000 | match |  |
 | ProtectionPaladin (Seal of Command talent) | 30 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  |
 | ProtectionPaladin (Seal of Command talent) | 30 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  |
-| ProtectionPaladin (Seal of Command talent) | 30 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
+| ProtectionPaladin (Seal of Command talent) | 30 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin (Seal of Command talent) | 30 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→30000 | match |  |
 | ProtectionPaladin (Seal of Command talent) | 30 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
 | ProtectionPaladin (Seal of Command talent) | 38 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  |
 | ProtectionPaladin (Seal of Command talent) | 38 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  |
-| ProtectionPaladin (Seal of Command talent) | 38 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
+| ProtectionPaladin (Seal of Command talent) | 38 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin (Seal of Command talent) | 38 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→30000 | match |  |
 | ProtectionPaladin (Seal of Command talent) | 38 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
 | ProtectionPaladin (Seal of Command talent) | 40 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  |
 | ProtectionPaladin (Seal of Command talent) | 40 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  |
 | ProtectionPaladin (Seal of Command talent) | 40 | Judgement of Command | 0 | 20964 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  |
-| ProtectionPaladin (Seal of Command talent) | 40 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
+| ProtectionPaladin (Seal of Command talent) | 40 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin (Seal of Command talent) | 40 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→30000 | match |  |
 | ProtectionPaladin (Seal of Command talent) | 40 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
 | ProtectionPaladin (Seal of Command talent) | 40 | Seal of Command | 3 | 20918 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 30000→30000 | match |  |
@@ -541,7 +541,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Seal of Command talent) | 50 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  |
 | ProtectionPaladin (Seal of Command talent) | 50 | Judgement of Command | 0 | 20964 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  |
 | ProtectionPaladin (Seal of Command talent) | 50 | Judgement of Command | 0 | 20965 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  |
-| ProtectionPaladin (Seal of Command talent) | 50 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
+| ProtectionPaladin (Seal of Command talent) | 50 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin (Seal of Command talent) | 50 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→30000 | match |  |
 | ProtectionPaladin (Seal of Command talent) | 50 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
 | ProtectionPaladin (Seal of Command talent) | 50 | Seal of Command | 3 | 20918 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 30000→30000 | match |  |
@@ -551,7 +551,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20964 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  |
 | ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20965 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  |
 | ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20966 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  |
-| ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | n/a | match |  |
+| ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms |
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→30000 | match |  |
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 3 | 20918 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 30000→30000 | match |  |
