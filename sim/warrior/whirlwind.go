@@ -35,7 +35,7 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 	// that moment, so a shrinking timeline does not wrap surplus swings
 	// back onto the survivors. Same shape as APLActionMultidot.
 	results := make([]*core.SpellResult, min(4, len(warrior.Env.Encounter.AllTargetUnits)))
-	// ohResults backs Raging Blows' off-hand strike (below); sized the
+	// ohResults backs the baseline off-hand strike (below); sized the
 	// same as results so the two loops share one numHits bound.
 	ohResults := make([]*core.SpellResult, len(results))
 
@@ -70,12 +70,12 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 		BonusCoefficient: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			// Raging Blows: "Causes your Whirlwind to also strike with
-			// your off-hand weapon." A dual-wielding check, not just the
-			// talent, because the client's clause presumes a weapon is
-			// there to strike with; a 2H Whirlwind under the talent
-			// swings with the main hand only, same as always.
-			offHand := warrior.Talents.RagingBlows && warrior.AutoAttacks.IsDualWielding
+			// Whirlwind strikes with both weapons baseline (Blizzard's
+			// 1 October 2026 notes; it was Raging Blows' clause before).
+			// A dual-wielding check because the clause presumes a weapon
+			// is there to strike with; a 2H Whirlwind swings with the
+			// main hand only, same as always.
+			offHand := warrior.AutoAttacks.IsDualWielding
 
 			numHits := min(len(results), len(sim.Encounter.TargetUnits))
 			for idx := 0; idx < numHits; idx++ {

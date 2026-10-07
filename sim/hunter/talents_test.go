@@ -48,62 +48,19 @@ func TestEveryTalentThisPackageAppliesExists(t *testing.T) {
 	}
 }
 
-// talentPositions maps a proto field name to its 1-indexed position
-// within its own tree's talent-string segment, exactly as
-// proto/hunter.proto lists HunterTalents' fields (BM, then MM, then
-// Survival; each tree restarts at 1). Only the positions this test file
-// actually spends points on are listed.
-var talentPositions = map[string]struct {
-	tree int // 0 = Beast Mastery, 1 = Marksmanship, 2 = Survival
-	pos  int
-}{
-	"deadly_aspects":          {0, 1},
-	"focused_fire":            {0, 3},
-	"summon_hawk":             {0, 11},
-	"lethal_attacks":          {1, 3},
-	"improved_stings":         {1, 4},
-	"careful_aim":             {1, 6},
-	"rapid_killing":           {1, 7},
-	"lone_wolf":               {1, 9},
-	"trueshot_aura":           {1, 10},
-	"rapid_recuperation":      {1, 13},
-	"sniper_shot":             {1, 17},
-	"improved_tracking":       {2, 1},
-	"resourcefulness":         {2, 13},
-	"expose_prey":             {2, 14},
-	"survivalists_discipline": {2, 15},
-}
-
 // buildTalentsString spends `rank` points in `field` and nothing else,
-// positionally, against TalentTreeSizes - the same positional contract
-// core.FillTalentsProto reads (no prerequisite validation, confirmed by
-// sim/mage/talents.go's own rankOf comment), so a single-talent build
-// needs no other point spent to be legal.
+// by generated proto field name (core.TalentsStringFromRanks), against
+// the same positional contract core.FillTalentsProto reads (no
+// prerequisite validation, confirmed by sim/mage/talents.go's own rankOf
+// comment), so a single-talent build needs no other point spent to be
+// legal and a tree layout change cannot retarget it.
 func buildTalentsString(t *testing.T, field string, rank int32) string {
 	t.Helper()
-	p, ok := talentPositions[field]
-	if !ok {
-		t.Fatalf("talentPositions has no entry for %q", field)
+	str, err := core.TalentsStringFromRanks((&proto.HunterTalents{}).ProtoReflect(), TalentTreeSizes, map[string]int{field: int(rank)})
+	if err != nil {
+		t.Fatal(err)
 	}
-	if rank < 0 || rank > 9 {
-		t.Fatalf("rank %d does not fit one talent-string digit", rank)
-	}
-
-	segments := make([][]byte, len(TalentTreeSizes))
-	for i, size := range TalentTreeSizes {
-		seg := make([]byte, size)
-		for j := range seg {
-			seg[j] = '0'
-		}
-		segments[i] = seg
-	}
-	segments[p.tree][p.pos-1] = byte('0' + rank)
-
-	out := string(segments[0])
-	for i := 1; i < len(segments); i++ {
-		out += "-" + string(segments[i])
-	}
-	return out
+	return str
 }
 
 // buildHunterForTalentTest builds a bare (no gear, no buffs) hunter with

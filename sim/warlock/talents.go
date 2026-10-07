@@ -33,7 +33,7 @@ func (warlock *Warlock) ApplyTalents() {
 	warlock.applyMalevolence()
 	warlock.applySoulSiphon()
 
-	// Soul Harvesting (2 ranks): "You gain Soul Harvest for 10 sec if a
+	// Soul Harvest (2 ranks; "Soul Harvesting" before the live tree renamed it): "You gain Soul Harvest for 10 sec if a
 	// victim is killed while afflicted with your Drain Soul... 50%/100%
 	// increase to your Mana regeneration." This sim has no mid-encounter
 	// kill event to trigger from: the only target in a DPS test suite is
@@ -41,7 +41,7 @@ func (warlock *Warlock) ApplyTalents() {
 	// ends, by which point there is no more casting left to regen mana
 	// for. The talent is a no-op against every target this engine ever
 	// simulates, not merely unmodelled.
-	_ = warlock.Talents.SoulHarvesting
+	_ = warlock.Talents.SoulHarvest
 
 	// Curse of Exhaustion (1 rank) grants a pure movement-speed snare
 	// with no damage, hit, crit or resource component; this package

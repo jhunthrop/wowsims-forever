@@ -500,11 +500,6 @@ func (paladin *Paladin) grantEchoOfSeal(sim *core.Simulation, oldSeal *core.Aura
 func (paladin *Paladin) markUnmodeledForeverTalents() {
 	t := paladin.Talents
 
-	// Stale proto fields: gone from the 1.60.1.70009 client's talent
-	// trees entirely (see holy_strike.go's comment on ImprovedHolyStrike;
-	// Crusade is the same situation under a different name).
-	_, _ = t.ImprovedHolyStrike, t.Crusade
-
 	// Healing talents: this package has no healer rotation and sims a
 	// Patchwerk-style fight where nothing the Paladin heals matters to
 	// DPS, so none of these change a simmed number.

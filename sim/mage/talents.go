@@ -118,10 +118,10 @@ func (mage *Mage) applyFireTalents() {
 	// reflect: none of the three changes a damage number here.
 	_, _, _ = mage.Talents.FlameThrowing, mage.Talents.Impact, mage.Talents.ImprovedFireWard
 
-	// Hot Streak would need Pyroblast's cast time to change on a
+	// Heating Up (renamed from Hot Streak in the live tree) would need Pyroblast's cast time to change on a
 	// stacking buff driven by non-periodic Fire crits. Inert until
 	// Pyroblast carries a dynamic cast-time mod.
-	_ = mage.Talents.HotStreak
+	_ = mage.Talents.HeatingUp
 }
 
 func (mage *Mage) applyFrostTalents() {

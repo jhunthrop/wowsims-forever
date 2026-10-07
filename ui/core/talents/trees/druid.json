@@ -146,6 +146,12 @@
         "maxPoints": 3
       },
       {
+        "fieldName": "shreddingAttacks",
+        "location": { "rowIdx": 2, "colIdx": 0 },
+        "spellIds": [16966, 16966, 16966],
+        "maxPoints": 3
+      },
+      {
         "fieldName": "savageFury",
         "location": { "rowIdx": 2, "colIdx": 1 },
         "spellIds": [16998, 16998],
@@ -164,13 +170,15 @@
         "maxPoints": 2
       },
       {
-        "fieldName": "shreddingAttacks",
+        "fieldName": "shiftingPower",
         "location": { "rowIdx": 3, "colIdx": 0 },
-        "spellIds": [16966, 16966, 16966],
-        "maxPoints": 3
+        "spellIds": [1322605],
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 0 },
+        "prereqRank": 3
       },
       {
-        "fieldName": "mangle",
+        "fieldName": "primalBite",
         "location": { "rowIdx": 3, "colIdx": 1 },
         "spellIds": [407995],
         "maxPoints": 1,
@@ -184,7 +192,7 @@
         "maxPoints": 3
       },
       {
-        "fieldName": "primalFury",
+        "fieldName": "bloodFrenzy",
         "location": { "rowIdx": 3, "colIdx": 3 },
         "spellIds": [16958, 16958],
         "maxPoints": 2,
@@ -192,10 +200,12 @@
         "prereqRank": 2
       },
       {
-        "fieldName": "predatoryInstincts",
+        "fieldName": "improvedShiftingPower",
         "location": { "rowIdx": 4, "colIdx": 0 },
-        "spellIds": [1223242, 1223242],
-        "maxPoints": 2
+        "spellIds": [1322670, 1322670],
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 0 },
+        "prereqRank": 1
       },
       {
         "fieldName": "leaderOfThePack",
@@ -204,10 +214,10 @@
         "maxPoints": 1
       },
       {
-        "fieldName": "kingOfTheJungle",
+        "fieldName": "predatoryInstincts",
         "location": { "rowIdx": 4, "colIdx": 3 },
-        "spellIds": [417046, 417046, 417046],
-        "maxPoints": 3
+        "spellIds": [1223242, 1223242],
+        "maxPoints": 2
       },
       {
         "fieldName": "naturalReaction",

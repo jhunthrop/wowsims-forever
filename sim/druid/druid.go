@@ -114,6 +114,7 @@ type Druid struct {
 	Rake                 *DruidSpell
 	Ravage               *DruidSpell
 	Rip                  *DruidSpell
+	ShiftingPower        *DruidSpell
 	Shred                *DruidSpell
 	Claw                 *DruidSpell
 	Starfire             []*DruidSpell
@@ -237,6 +238,7 @@ func (druid *Druid) RegisterFeralCatSpells() {
 	druid.registerRakeSpell()
 	druid.registerRavageSpell()
 	druid.registerRipSpell()
+	druid.registerShiftingPowerSpell()
 	druid.registerShredSpell()
 	druid.registerClawSpell()
 	// druid.registerSwipeBearSpell()

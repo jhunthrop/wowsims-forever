@@ -20,12 +20,14 @@ import (
 // 1240193, 1464, 8820, 11604, 11605) and spellranks.json, which never
 // lists 462893-462897 at all. 11605 is also the id the UI and the
 // preset rotations name for rank 5.
-// Improved Slam's per-point numbers, from the talent's own rank text
-// (see registerSlamSpell): the cast time and GCD each lose 0.25 s a
-// point, the cooldown loses 1.5 s a point.
+// Improved Slam's per-point numbers: the cast time and GCD each lose
+// 0.25 s a point (the talent's own rank text, see registerSlamSpell),
+// the cooldown loses 3 s a point (Blizzard's 1 October 2026 notes,
+// "Improved Slam 3 s off the cooldown per rank"; the client text still
+// says 1.5 s and the note is the live state).
 const (
 	improvedSlamCastReductionPerPoint     = 250 * time.Millisecond
-	improvedSlamCooldownReductionPerPoint = 1500 * time.Millisecond
+	improvedSlamCooldownReductionPerPoint = 3 * time.Second
 )
 
 // improvedSlamReductions is the talent's effect at a given point count,
@@ -61,7 +63,8 @@ func (warrior *Warrior) registerSlamSpell() {
 	// Arms tree, spell 12862): "Reduces the global cooldown and cast time
 	// of your Slam ability by 0.25/0.5 sec. In addition, Slam no longer
 	// interrupts or delays your melee swing and Slam's cooldown is
-	// reduced by 1.5/3 sec." Before 2026-10-07 this file took 0.1 s a
+	// reduced by 1.5/3 sec." (3/6 s live, see
+	// improvedSlamCooldownReductionPerPoint.) Before 2026-10-07 this file took 0.1 s a
 	// point off the cast time only, kept the full GCD and cooldown, and
 	// stopped the swing timer for every Slam regardless of the talent.
 	castReduction, gcdReduction, cooldownReduction := improvedSlamReductions(warrior.Talents.ImprovedSlam)

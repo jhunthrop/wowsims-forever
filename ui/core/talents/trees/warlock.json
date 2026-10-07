@@ -28,7 +28,7 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "soulHarvesting",
+        "fieldName": "soulHarvest",
         "location": { "rowIdx": 1, "colIdx": 1 },
         "spellIds": [437032, 437032],
         "maxPoints": 2
