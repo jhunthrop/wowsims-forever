@@ -49,6 +49,15 @@ type Effect struct {
 	PeriodMS      int32   `json:"period_ms"`
 	MiscValue     int32   `json:"misc_value"`
 	TriggerSpell  int32   `json:"trigger_spell"`
+	// Variance is SpellEffect.Variance: the roll runs from Amount x
+	// (1 - Variance/2) to Amount x (1 + Variance/2). Appended last by the
+	// data pipeline (2026-10-07), so it is optional on decode like
+	// Spell.CostPct: a file emitted before it reads 0, a flat amount.
+	Variance float64 `json:"variance,omitempty"`
+	// PointsPerLevel is SpellEffect.EffectRealPointsPerLevel: added to
+	// Amount for every caster level above the spell's own, up to the
+	// spell's MaxLevel. Optional on decode, as Variance is.
+	PointsPerLevel float64 `json:"points_per_level,omitempty"`
 
 	// ResolvedSPCoefficient is SPCoefficient when the table supplied a
 	// nonzero value, or the vanilla convention's value when it did not.
@@ -78,6 +87,9 @@ type spellBody struct {
 	// pipeline (2026-10-07); a file emitted before it lacks the key and
 	// reads as 0, so it is optional here on purpose.
 	CostPct float64 `json:"cost_pct,omitempty"`
+	// MaxLevel is SpellLevels.MaxLevel, appended last by the data
+	// pipeline (2026-10-07); optional on decode for the same reason.
+	MaxLevel int `json:"max_level,omitempty"`
 }
 
 // Spell is one rank of one ability, with its id resolved from the
@@ -99,6 +111,9 @@ type Spell struct {
 	// summons 80/100); Cost is 0 for those. 0 for a flat-cost spell.
 	CostPct    float64
 	SpellLevel int
+	// MaxLevel is the highest caster level that still adds an effect's
+	// PointsPerLevel; 0 means the client states no cap.
+	MaxLevel int
 	// FamilyMask is the client's four mask columns verbatim; they are
 	// kept separate rather than folded into one uint64 because the
 	// client itself never combines them.
@@ -116,6 +131,43 @@ func (s Spell) EffectiveCooldownMS() int32 {
 		return s.CooldownMS
 	}
 	return s.CategoryCooldownMS
+}
+
+// DamageRange is the damage an effect rolls for a caster of the given
+// level, before spell power, talents or any other modifier: the client's
+// base amount plus PointsPerLevel for every level the caster stands
+// above the spell's own (never counting levels past MaxLevel when the
+// client states one, and never counting a level below the spell's
+// own), then spread by Variance, which the client states as the whole
+// width of the roll around that center.
+//
+// A caster below the spell's level (a Fireball rank trained early, a
+// downranked cast) gets the amount at the spell's own level: the
+// per-level term is clamped at zero rather than going negative.
+func (s Spell) DamageRange(effectIndex int, casterLevel int) (min, max float64, ok bool) {
+	for _, e := range s.Effects {
+		if e.Index != effectIndex {
+			continue
+		}
+		center := e.Amount + e.PointsPerLevel*float64(s.levelsAboveSpell(casterLevel))
+		if center < 0 {
+			center = 0
+		}
+		return center * (1 - e.Variance/2), center * (1 + e.Variance/2), true
+	}
+	return 0, 0, false
+}
+
+// levelsAboveSpell is how many caster levels past the spell's own count
+// towards an effect's PointsPerLevel.
+func (s Spell) levelsAboveSpell(casterLevel int) int {
+	if s.MaxLevel > 0 && casterLevel > s.MaxLevel {
+		casterLevel = s.MaxLevel
+	}
+	if casterLevel <= s.SpellLevel {
+		return 0
+	}
+	return casterLevel - s.SpellLevel
 }
 
 // rawClass is the JSON envelope of one generated class file. Spells is
@@ -267,6 +319,7 @@ func Load(path string) (Class, error) {
 			CostType:           body.CostType,
 			CostPct:            body.CostPct,
 			SpellLevel:         body.SpellLevel,
+			MaxLevel:           body.MaxLevel,
 			FamilyMask:         body.FamilyMask,
 			Effects:            append([]Effect(nil), body.Effects...),
 		}

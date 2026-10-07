@@ -184,3 +184,36 @@ func TestConstantsAutoGenRegeneratesByteIdenticallyAndDeterministically(t *testi
 		})
 	}
 }
+
+// BaseDamage is the client's roll at the spell's own level, not a
+// degenerate {amount, amount}, and the per-level growth and its cap ride
+// beside it. Fireball rank 12 (spell 25306): centre 483, variance
+// 0.24188791215, 3 per level, capped at caster level 64.
+func TestGenerateEmitsTheClientsRollAndItsPerLevelGrowth(t *testing.T) {
+	class := spellconst.Class{
+		Slug:  "mage",
+		Build: "9.9.9.9",
+		Spells: []spellconst.Spell{{
+			ID: 25306, Name: "Fireball", Rank: 12, SpellLevel: 60, MaxLevel: 64,
+			Effects: []spellconst.Effect{{
+				Index: 0, Effect: 2, Amount: 483, Variance: 0.24188791215, PointsPerLevel: 3,
+				ResolvedSPCoefficient: 1, CoefficientSource: "table",
+			}},
+		}},
+	}
+	src, err := generate(class, t.TempDir(), "constants_auto_gen.go", "mage", "testdata/mage.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	text := string(src)
+	for _, want := range []string{
+		"{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {424.5841, 541.4159}}",
+		"var FireballPointsPerLevel = [FireballRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3}",
+		"var FireballMaxLevel = [FireballRanks + 1]int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64}",
+		"BaseDamage convention",
+	} {
+		if !strings.Contains(text, want) {
+			t.Errorf("generated source lacks %q:\n%s", want, text)
+		}
+	}
+}

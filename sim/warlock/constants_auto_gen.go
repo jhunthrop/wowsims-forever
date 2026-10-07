@@ -2,7 +2,7 @@
 //
 // Class: warlock
 // Client build: 1.60.1.70009
-// Source: /Users/jh/code/forever/data/builds/1.60.1.70009/spellconst/warlock.json
+// Source: /Users/jh/code/forever/.worktrees/damage-conformance/data/builds/1.60.1.70009/spellconst/warlock.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -11,6 +11,14 @@
 // describe its school-damage effect (falling back to its first effect
 // when it has none); sim/core/spellconst.Load exposes every effect for
 // ability files that need a different one.
+//
+// BaseDamage convention: <Spell>BaseDamage[rank] is {min, max}, the
+// client's roll at the spell's own level. The client states a centre
+// (EffectBasePointsF) and a Variance; the roll is centre x (1 -
+// Variance/2) through centre x (1 + Variance/2). Each caster level
+// above the spell's own adds <Spell>PointsPerLevel[rank] to the
+// centre, up to <Spell>MaxLevel[rank] (0: the client states no cap);
+// spellconst.Spell.DamageRange applies exactly that at any level.
 //
 // Every array is indexed by the rank label itself (rank 0 included,
 // common for a spell with no numbered progression), not by position:
@@ -37,6 +45,8 @@ var X1600ItemTier1Warlock2PBonusHitManaCost = [X1600ItemTier1Warlock2PBonusHitRa
 var X1600ItemTier1Warlock2PBonusHitManaCostPct = [X1600ItemTier1Warlock2PBonusHitRanks + 1]float64{0}
 var X1600ItemTier1Warlock2PBonusHitSpellCoeff = [X1600ItemTier1Warlock2PBonusHitRanks + 1]float64{0.4286}
 var X1600ItemTier1Warlock2PBonusHitBaseDamage = [X1600ItemTier1Warlock2PBonusHitRanks + 1][]float64{{1, 1}}
+var X1600ItemTier1Warlock2PBonusHitPointsPerLevel = [X1600ItemTier1Warlock2PBonusHitRanks + 1]float64{0}
+var X1600ItemTier1Warlock2PBonusHitMaxLevel = [X1600ItemTier1Warlock2PBonusHitRanks + 1]int{0}
 
 // unconfirmed: 1.60.0 - Item - Tier 1 - Warlock 2P Bonus - Hit coefficient derived from the vanilla convention (rank 0)
 
@@ -50,7 +60,9 @@ var X1600ItemTier1Warlock3PBonusBanishCooldownMS = [X1600ItemTier1Warlock3PBonus
 var X1600ItemTier1Warlock3PBonusBanishManaCost = [X1600ItemTier1Warlock3PBonusBanishRanks + 1]float64{0}
 var X1600ItemTier1Warlock3PBonusBanishManaCostPct = [X1600ItemTier1Warlock3PBonusBanishRanks + 1]float64{0}
 var X1600ItemTier1Warlock3PBonusBanishSpellCoeff = [X1600ItemTier1Warlock3PBonusBanishRanks + 1]float64{0.4286}
-var X1600ItemTier1Warlock3PBonusBanishBaseDamage = [X1600ItemTier1Warlock3PBonusBanishRanks + 1][]float64{{-1500, -1500}}
+var X1600ItemTier1Warlock3PBonusBanishBaseDamage = [X1600ItemTier1Warlock3PBonusBanishRanks + 1][]float64{{0, 0}}
+var X1600ItemTier1Warlock3PBonusBanishPointsPerLevel = [X1600ItemTier1Warlock3PBonusBanishRanks + 1]float64{0}
+var X1600ItemTier1Warlock3PBonusBanishMaxLevel = [X1600ItemTier1Warlock3PBonusBanishRanks + 1]int{0}
 
 // unconfirmed: 1.60.0 - Item - Tier 1 - Warlock 3P Bonus - Banish coefficient derived from the vanilla convention (rank 0)
 
@@ -65,6 +77,8 @@ var X1600ItemTier1Warlock4PBonusSPVsDemonsManaCost = [X1600ItemTier1Warlock4PBon
 var X1600ItemTier1Warlock4PBonusSPVsDemonsManaCostPct = [X1600ItemTier1Warlock4PBonusSPVsDemonsRanks + 1]float64{0}
 var X1600ItemTier1Warlock4PBonusSPVsDemonsSpellCoeff = [X1600ItemTier1Warlock4PBonusSPVsDemonsRanks + 1]float64{0.4286}
 var X1600ItemTier1Warlock4PBonusSPVsDemonsBaseDamage = [X1600ItemTier1Warlock4PBonusSPVsDemonsRanks + 1][]float64{{21, 21}}
+var X1600ItemTier1Warlock4PBonusSPVsDemonsPointsPerLevel = [X1600ItemTier1Warlock4PBonusSPVsDemonsRanks + 1]float64{0}
+var X1600ItemTier1Warlock4PBonusSPVsDemonsMaxLevel = [X1600ItemTier1Warlock4PBonusSPVsDemonsRanks + 1]int{0}
 
 // unconfirmed: 1.60.0 - Item - Tier 1 - Warlock 4P Bonus - SP vs. Demons coefficient derived from the vanilla convention (rank 0)
 
@@ -79,6 +93,8 @@ var X1600ItemTier1Warlock5PBonusLifeTapManaCost = [X1600ItemTier1Warlock5PBonusL
 var X1600ItemTier1Warlock5PBonusLifeTapManaCostPct = [X1600ItemTier1Warlock5PBonusLifeTapRanks + 1]float64{0}
 var X1600ItemTier1Warlock5PBonusLifeTapSpellCoeff = [X1600ItemTier1Warlock5PBonusLifeTapRanks + 1]float64{0.4286}
 var X1600ItemTier1Warlock5PBonusLifeTapBaseDamage = [X1600ItemTier1Warlock5PBonusLifeTapRanks + 1][]float64{{20, 20}}
+var X1600ItemTier1Warlock5PBonusLifeTapPointsPerLevel = [X1600ItemTier1Warlock5PBonusLifeTapRanks + 1]float64{0}
+var X1600ItemTier1Warlock5PBonusLifeTapMaxLevel = [X1600ItemTier1Warlock5PBonusLifeTapRanks + 1]int{0}
 
 // unconfirmed: 1.60.0 - Item - Tier 1 - Warlock 5P Bonus - Life Tap coefficient derived from the vanilla convention (rank 0)
 
@@ -93,6 +109,8 @@ var AODManaCost = [AODRanks + 1]float64{0}
 var AODManaCostPct = [AODRanks + 1]float64{0}
 var AODSpellCoeff = [AODRanks + 1]float64{1}
 var AODBaseDamage = [AODRanks + 1][]float64{{0, 0}}
+var AODPointsPerLevel = [AODRanks + 1]float64{0}
+var AODMaxLevel = [AODRanks + 1]int{0}
 
 // Add Moogly Radius (PT): ranks 0 present, from build 1.60.1.70009.
 const AddMooglyRadiusPTRanks = 0
@@ -105,6 +123,8 @@ var AddMooglyRadiusPTManaCost = [AddMooglyRadiusPTRanks + 1]float64{0}
 var AddMooglyRadiusPTManaCostPct = [AddMooglyRadiusPTRanks + 1]float64{0}
 var AddMooglyRadiusPTSpellCoeff = [AddMooglyRadiusPTRanks + 1]float64{0.4286}
 var AddMooglyRadiusPTBaseDamage = [AddMooglyRadiusPTRanks + 1][]float64{{50, 50}}
+var AddMooglyRadiusPTPointsPerLevel = [AddMooglyRadiusPTRanks + 1]float64{0}
+var AddMooglyRadiusPTMaxLevel = [AddMooglyRadiusPTRanks + 1]int{0}
 
 // unconfirmed: Add Moogly Radius (PT) coefficient derived from the vanilla convention (rank 0)
 
@@ -119,6 +139,8 @@ var AftermathManaCost = [AftermathRanks + 1]float64{0}
 var AftermathManaCostPct = [AftermathRanks + 1]float64{0}
 var AftermathSpellCoeff = [AftermathRanks + 1]float64{1}
 var AftermathBaseDamage = [AftermathRanks + 1][]float64{{100, 100}}
+var AftermathPointsPerLevel = [AftermathRanks + 1]float64{0}
+var AftermathMaxLevel = [AftermathRanks + 1]int{0}
 
 // Agonizing Flames: ranks 0 present, from build 1.60.1.70009.
 const AgonizingFlamesRanks = 0
@@ -131,6 +153,8 @@ var AgonizingFlamesManaCost = [AgonizingFlamesRanks + 1]float64{0}
 var AgonizingFlamesManaCostPct = [AgonizingFlamesRanks + 1]float64{0}
 var AgonizingFlamesSpellCoeff = [AgonizingFlamesRanks + 1]float64{1}
 var AgonizingFlamesBaseDamage = [AgonizingFlamesRanks + 1][]float64{{10, 10}}
+var AgonizingFlamesPointsPerLevel = [AgonizingFlamesRanks + 1]float64{0}
+var AgonizingFlamesMaxLevel = [AgonizingFlamesRanks + 1]int{0}
 
 // Altar of Thorns: ranks 0 present, from build 1.60.1.70009.
 const AltarOfThornsRanks = 0
@@ -143,6 +167,8 @@ var AltarOfThornsManaCost = [AltarOfThornsRanks + 1]float64{0}
 var AltarOfThornsManaCostPct = [AltarOfThornsRanks + 1]float64{0}
 var AltarOfThornsSpellCoeff = [AltarOfThornsRanks + 1]float64{0.4286}
 var AltarOfThornsBaseDamage = [AltarOfThornsRanks + 1][]float64{{1, 1}}
+var AltarOfThornsPointsPerLevel = [AltarOfThornsRanks + 1]float64{0}
+var AltarOfThornsMaxLevel = [AltarOfThornsRanks + 1]int{0}
 
 // unconfirmed: Altar of Thorns coefficient derived from the vanilla convention (rank 0)
 
@@ -157,6 +183,8 @@ var AmplifyCurseManaCost = [AmplifyCurseRanks + 1]float64{0}
 var AmplifyCurseManaCostPct = [AmplifyCurseRanks + 1]float64{0}
 var AmplifyCurseSpellCoeff = [AmplifyCurseRanks + 1]float64{1}
 var AmplifyCurseBaseDamage = [AmplifyCurseRanks + 1][]float64{{50, 50}}
+var AmplifyCursePointsPerLevel = [AmplifyCurseRanks + 1]float64{0}
+var AmplifyCurseMaxLevel = [AmplifyCurseRanks + 1]int{0}
 
 // Anguish: ranks 0 present, from build 1.60.1.70009.
 const AnguishRanks = 0
@@ -169,6 +197,8 @@ var AnguishManaCost = [AnguishRanks + 1]float64{0}
 var AnguishManaCostPct = [AnguishRanks + 1]float64{10}
 var AnguishSpellCoeff = [AnguishRanks + 1]float64{0.4286}
 var AnguishBaseDamage = [AnguishRanks + 1][]float64{{25, 25}}
+var AnguishPointsPerLevel = [AnguishRanks + 1]float64{5}
+var AnguishMaxLevel = [AnguishRanks + 1]int{0}
 
 // unconfirmed: Anguish coefficient derived from the vanilla convention (rank 0)
 
@@ -183,6 +213,8 @@ var ApocalypseManaCost = [ApocalypseRanks + 1]float64{0}
 var ApocalypseManaCostPct = [ApocalypseRanks + 1]float64{0}
 var ApocalypseSpellCoeff = [ApocalypseRanks + 1]float64{1}
 var ApocalypseBaseDamage = [ApocalypseRanks + 1][]float64{{10, 10}}
+var ApocalypsePointsPerLevel = [ApocalypseRanks + 1]float64{0}
+var ApocalypseMaxLevel = [ApocalypseRanks + 1]int{0}
 
 // Apparition: ranks 0 present, from build 1.60.1.70009.
 const ApparitionRanks = 0
@@ -195,6 +227,8 @@ var ApparitionManaCost = [ApparitionRanks + 1]float64{0}
 var ApparitionManaCostPct = [ApparitionRanks + 1]float64{0}
 var ApparitionSpellCoeff = [ApparitionRanks + 1]float64{0.4286}
 var ApparitionBaseDamage = [ApparitionRanks + 1][]float64{{100, 100}}
+var ApparitionPointsPerLevel = [ApparitionRanks + 1]float64{0}
+var ApparitionMaxLevel = [ApparitionRanks + 1]int{0}
 
 // unconfirmed: Apparition coefficient derived from the vanilla convention (rank 0)
 // Apparition rank 0: kept id 1264530 (spell_level 15); dropped 1266050 (spell_level 0), 1269135 (spell_level 0)
@@ -210,6 +244,8 @@ var ArcaneAnimationManaCost = [ArcaneAnimationRanks + 1]float64{0}
 var ArcaneAnimationManaCostPct = [ArcaneAnimationRanks + 1]float64{0}
 var ArcaneAnimationSpellCoeff = [ArcaneAnimationRanks + 1]float64{0.4286}
 var ArcaneAnimationBaseDamage = [ArcaneAnimationRanks + 1][]float64{{0, 0}}
+var ArcaneAnimationPointsPerLevel = [ArcaneAnimationRanks + 1]float64{0}
+var ArcaneAnimationMaxLevel = [ArcaneAnimationRanks + 1]int{0}
 
 // unconfirmed: Arcane Animation coefficient derived from the vanilla convention (rank 0)
 
@@ -224,6 +260,8 @@ var AreaDeathTESTManaCost = [AreaDeathTESTRanks + 1]float64{0}
 var AreaDeathTESTManaCostPct = [AreaDeathTESTRanks + 1]float64{0}
 var AreaDeathTESTSpellCoeff = [AreaDeathTESTRanks + 1]float64{0.4286}
 var AreaDeathTESTBaseDamage = [AreaDeathTESTRanks + 1][]float64{{1, 1}}
+var AreaDeathTESTPointsPerLevel = [AreaDeathTESTRanks + 1]float64{0}
+var AreaDeathTESTMaxLevel = [AreaDeathTESTRanks + 1]int{0}
 
 // unconfirmed: Area Death (TEST) coefficient derived from the vanilla convention (rank 0)
 
@@ -237,7 +275,9 @@ var AvoidanceCooldownMS = [AvoidanceRanks + 1]int32{0}
 var AvoidanceManaCost = [AvoidanceRanks + 1]float64{0}
 var AvoidanceManaCostPct = [AvoidanceRanks + 1]float64{0}
 var AvoidanceSpellCoeff = [AvoidanceRanks + 1]float64{0.4286}
-var AvoidanceBaseDamage = [AvoidanceRanks + 1][]float64{{-50, -50}}
+var AvoidanceBaseDamage = [AvoidanceRanks + 1][]float64{{0, 0}}
+var AvoidancePointsPerLevel = [AvoidanceRanks + 1]float64{0}
+var AvoidanceMaxLevel = [AvoidanceRanks + 1]int{0}
 
 // unconfirmed: Avoidance coefficient derived from the vanilla convention (rank 0)
 
@@ -252,6 +292,8 @@ var BackdraftManaCost = [BackdraftRanks + 1]float64{0}
 var BackdraftManaCostPct = [BackdraftRanks + 1]float64{0}
 var BackdraftSpellCoeff = [BackdraftRanks + 1]float64{0.4286}
 var BackdraftBaseDamage = [BackdraftRanks + 1][]float64{{427713, 427713}}
+var BackdraftPointsPerLevel = [BackdraftRanks + 1]float64{0}
+var BackdraftMaxLevel = [BackdraftRanks + 1]int{0}
 
 // unconfirmed: Backdraft coefficient derived from the vanilla convention (rank 0)
 // Backdraft rank 0: kept id 431742 (spell_level 1); dropped 427713 (spell_level 0), 427714 (spell_level 1)
@@ -266,7 +308,9 @@ var BaneCooldownMS = [BaneRanks + 1]int32{0}
 var BaneManaCost = [BaneRanks + 1]float64{0}
 var BaneManaCostPct = [BaneRanks + 1]float64{0}
 var BaneSpellCoeff = [BaneRanks + 1]float64{1}
-var BaneBaseDamage = [BaneRanks + 1][]float64{{-500, -500}}
+var BaneBaseDamage = [BaneRanks + 1][]float64{{0, 0}}
+var BanePointsPerLevel = [BaneRanks + 1]float64{0}
+var BaneMaxLevel = [BaneRanks + 1]int{0}
 
 // Bane of Agony: ranks 1-6 present, from build 1.60.1.70009.
 const BaneOfAgonyRanks = 6
@@ -279,6 +323,8 @@ var BaneOfAgonyManaCost = [BaneOfAgonyRanks + 1]float64{0, 25, 50, 90, 130, 170,
 var BaneOfAgonyManaCostPct = [BaneOfAgonyRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var BaneOfAgonySpellCoeff = [BaneOfAgonyRanks + 1]float64{0, 0.133, 0.133, 0.133, 0.133, 0.133, 0.133}
 var BaneOfAgonyBaseDamage = [BaneOfAgonyRanks + 1][]float64{{0, 0}, {6, 6}, {10, 10}, {14, 14}, {21, 21}, {33, 33}, {46, 46}}
+var BaneOfAgonyPointsPerLevel = [BaneOfAgonyRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var BaneOfAgonyMaxLevel = [BaneOfAgonyRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
 
 // Bane of Doom: ranks 0 present, from build 1.60.1.70009.
 const BaneOfDoomRanks = 0
@@ -291,6 +337,8 @@ var BaneOfDoomManaCost = [BaneOfDoomRanks + 1]float64{300}
 var BaneOfDoomManaCostPct = [BaneOfDoomRanks + 1]float64{0}
 var BaneOfDoomSpellCoeff = [BaneOfDoomRanks + 1]float64{4}
 var BaneOfDoomBaseDamage = [BaneOfDoomRanks + 1][]float64{{1742, 1742}}
+var BaneOfDoomPointsPerLevel = [BaneOfDoomRanks + 1]float64{0}
+var BaneOfDoomMaxLevel = [BaneOfDoomRanks + 1]int{0}
 
 // Bane of Havoc: ranks 0 present, from build 1.60.1.70009.
 const BaneOfHavocRanks = 0
@@ -303,6 +351,8 @@ var BaneOfHavocManaCost = [BaneOfHavocRanks + 1]float64{0}
 var BaneOfHavocManaCostPct = [BaneOfHavocRanks + 1]float64{0}
 var BaneOfHavocSpellCoeff = [BaneOfHavocRanks + 1]float64{0.4286}
 var BaneOfHavocBaseDamage = [BaneOfHavocRanks + 1][]float64{{0, 0}}
+var BaneOfHavocPointsPerLevel = [BaneOfHavocRanks + 1]float64{0}
+var BaneOfHavocMaxLevel = [BaneOfHavocRanks + 1]int{0}
 
 // unconfirmed: Bane of Havoc coefficient derived from the vanilla convention (rank 0)
 // Bane of Havoc rank 0: kept id 1243339 (spell_level 1); dropped 1225228 (spell_level 1), 1243338 (spell_level 0)
@@ -318,6 +368,8 @@ var BanishManaCost = [BanishRanks + 1]float64{0, 100, 200}
 var BanishManaCostPct = [BanishRanks + 1]float64{0, 0, 0}
 var BanishSpellCoeff = [BanishRanks + 1]float64{0, 1.3333, 2}
 var BanishBaseDamage = [BanishRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}}
+var BanishPointsPerLevel = [BanishRanks + 1]float64{0, 0, 0}
+var BanishMaxLevel = [BanishRanks + 1]int{0, 0, 0}
 
 // unconfirmed: Banish coefficient derived from the vanilla convention (rank 1, rank 2)
 // Banish rank 1: kept id 457569 (spell_level 28); dropped 710 (spell_level 28)
@@ -334,6 +386,8 @@ var BlackSapphireManaCost = [BlackSapphireRanks + 1]float64{0}
 var BlackSapphireManaCostPct = [BlackSapphireRanks + 1]float64{0}
 var BlackSapphireSpellCoeff = [BlackSapphireRanks + 1]float64{1}
 var BlackSapphireBaseDamage = [BlackSapphireRanks + 1][]float64{{222, 222}}
+var BlackSapphirePointsPerLevel = [BlackSapphireRanks + 1]float64{0}
+var BlackSapphireMaxLevel = [BlackSapphireRanks + 1]int{0}
 
 // Blood Pact: ranks 1-5 present, from build 1.60.1.70009.
 const BloodPactRanks = 5
@@ -346,6 +400,8 @@ var BloodPactManaCost = [BloodPactRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var BloodPactManaCostPct = [BloodPactRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var BloodPactSpellCoeff = [BloodPactRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286}
 var BloodPactBaseDamage = [BloodPactRanks + 1][]float64{{0, 0}, {3, 3}, {9, 9}, {21, 21}, {35, 35}, {49, 49}}
+var BloodPactPointsPerLevel = [BloodPactRanks + 1]float64{0, 0.1, 0.3, 0.4, 0.4, 0.5}
+var BloodPactMaxLevel = [BloodPactRanks + 1]int{0, 14, 24, 36, 48, 60}
 
 // unconfirmed: Blood Pact coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4, rank 5)
 
@@ -360,6 +416,8 @@ var BloodthirstyManaCost = [BloodthirstyRanks + 1]float64{0}
 var BloodthirstyManaCostPct = [BloodthirstyRanks + 1]float64{0}
 var BloodthirstySpellCoeff = [BloodthirstyRanks + 1]float64{0.4}
 var BloodthirstyBaseDamage = [BloodthirstyRanks + 1][]float64{{20, 20}}
+var BloodthirstyPointsPerLevel = [BloodthirstyRanks + 1]float64{0}
+var BloodthirstyMaxLevel = [BloodthirstyRanks + 1]int{0}
 
 // unconfirmed: Bloodthirsty coefficient derived from the vanilla convention (rank 0)
 
@@ -374,6 +432,8 @@ var BrimstoneCarvingManaCost = [BrimstoneCarvingRanks + 1]float64{0}
 var BrimstoneCarvingManaCostPct = [BrimstoneCarvingRanks + 1]float64{0}
 var BrimstoneCarvingSpellCoeff = [BrimstoneCarvingRanks + 1]float64{0.4286}
 var BrimstoneCarvingBaseDamage = [BrimstoneCarvingRanks + 1][]float64{{0, 0}}
+var BrimstoneCarvingPointsPerLevel = [BrimstoneCarvingRanks + 1]float64{0}
+var BrimstoneCarvingMaxLevel = [BrimstoneCarvingRanks + 1]int{0}
 
 // unconfirmed: Brimstone Carving coefficient derived from the vanilla convention (rank 0)
 
@@ -388,6 +448,8 @@ var BurnManaCost = [BurnRanks + 1]float64{0}
 var BurnManaCostPct = [BurnRanks + 1]float64{0}
 var BurnSpellCoeff = [BurnRanks + 1]float64{0.4286}
 var BurnBaseDamage = [BurnRanks + 1][]float64{{1, 1}}
+var BurnPointsPerLevel = [BurnRanks + 1]float64{0}
+var BurnMaxLevel = [BurnRanks + 1]int{0}
 
 // unconfirmed: Burn coefficient derived from the vanilla convention (rank 0)
 
@@ -402,6 +464,8 @@ var BurningShadowManaCost = [BurningShadowRanks + 1]float64{0}
 var BurningShadowManaCostPct = [BurningShadowRanks + 1]float64{0}
 var BurningShadowSpellCoeff = [BurningShadowRanks + 1]float64{1}
 var BurningShadowBaseDamage = [BurningShadowRanks + 1][]float64{{15, 15}}
+var BurningShadowPointsPerLevel = [BurningShadowRanks + 1]float64{0}
+var BurningShadowMaxLevel = [BurningShadowRanks + 1]int{0}
 
 // Cataclysm: ranks 0 present, from build 1.60.1.70009.
 const CataclysmRanks = 0
@@ -413,7 +477,9 @@ var CataclysmCooldownMS = [CataclysmRanks + 1]int32{0}
 var CataclysmManaCost = [CataclysmRanks + 1]float64{0}
 var CataclysmManaCostPct = [CataclysmRanks + 1]float64{0}
 var CataclysmSpellCoeff = [CataclysmRanks + 1]float64{1}
-var CataclysmBaseDamage = [CataclysmRanks + 1][]float64{{-10, -10}}
+var CataclysmBaseDamage = [CataclysmRanks + 1][]float64{{0, 0}}
+var CataclysmPointsPerLevel = [CataclysmRanks + 1]float64{0}
+var CataclysmMaxLevel = [CataclysmRanks + 1]int{0}
 
 // Chaos Bolt: ranks 0 present, from build 1.60.1.70009.
 const ChaosBoltRanks = 0
@@ -426,6 +492,8 @@ var ChaosBoltManaCost = [ChaosBoltRanks + 1]float64{0}
 var ChaosBoltManaCostPct = [ChaosBoltRanks + 1]float64{0}
 var ChaosBoltSpellCoeff = [ChaosBoltRanks + 1]float64{0.4286}
 var ChaosBoltBaseDamage = [ChaosBoltRanks + 1][]float64{{403629, 403629}}
+var ChaosBoltPointsPerLevel = [ChaosBoltRanks + 1]float64{0}
+var ChaosBoltMaxLevel = [ChaosBoltRanks + 1]int{0}
 
 // unconfirmed: Chaos Bolt coefficient derived from the vanilla convention (rank 0)
 // Chaos Bolt rank 0: kept id 403860 (spell_level 1); dropped 403629 (spell_level 1), 403630 (spell_level 0)
@@ -441,6 +509,8 @@ var CharmToleranceDNDManaCost = [CharmToleranceDNDRanks + 1]float64{0}
 var CharmToleranceDNDManaCostPct = [CharmToleranceDNDRanks + 1]float64{0}
 var CharmToleranceDNDSpellCoeff = [CharmToleranceDNDRanks + 1]float64{120}
 var CharmToleranceDNDBaseDamage = [CharmToleranceDNDRanks + 1][]float64{{10, 10}}
+var CharmToleranceDNDPointsPerLevel = [CharmToleranceDNDRanks + 1]float64{0}
+var CharmToleranceDNDMaxLevel = [CharmToleranceDNDRanks + 1]int{0}
 
 // unconfirmed: Charm Tolerance (DND) coefficient derived from the vanilla convention (rank 0)
 
@@ -455,6 +525,8 @@ var CheatDeathManaCost = [CheatDeathRanks + 1]float64{0}
 var CheatDeathManaCostPct = [CheatDeathRanks + 1]float64{0}
 var CheatDeathSpellCoeff = [CheatDeathRanks + 1]float64{0.4286}
 var CheatDeathBaseDamage = [CheatDeathRanks + 1][]float64{{100, 100}}
+var CheatDeathPointsPerLevel = [CheatDeathRanks + 1]float64{0}
+var CheatDeathMaxLevel = [CheatDeathRanks + 1]int{0}
 
 // unconfirmed: Cheat Death coefficient derived from the vanilla convention (rank 0)
 
@@ -469,6 +541,8 @@ var CleaveManaCost = [CleaveRanks + 1]float64{0}
 var CleaveManaCostPct = [CleaveRanks + 1]float64{10}
 var CleaveSpellCoeff = [CleaveRanks + 1]float64{1}
 var CleaveBaseDamage = [CleaveRanks + 1][]float64{{2, 2}}
+var CleavePointsPerLevel = [CleaveRanks + 1]float64{0.6}
+var CleaveMaxLevel = [CleaveRanks + 1]int{0}
 
 // skipped: "Conflagrate" already has a hand-written ConflagrateRanks elsewhere in this package.
 
@@ -483,6 +557,8 @@ var ConsumeShadowsManaCost = [ConsumeShadowsRanks + 1]float64{0, 85, 150, 215, 2
 var ConsumeShadowsManaCostPct = [ConsumeShadowsRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var ConsumeShadowsSpellCoeff = [ConsumeShadowsRanks + 1]float64{0, 0.6667, 0.6667, 0.6667, 0.6667, 0.6667, 0.6667}
 var ConsumeShadowsBaseDamage = [ConsumeShadowsRanks + 1][]float64{{0, 0}, {62, 62}, {111, 111}, {163, 163}, {220, 220}, {299, 299}, {386, 386}}
+var ConsumeShadowsPointsPerLevel = [ConsumeShadowsRanks + 1]float64{0, 0.5, 0.7, 0.8, 1, 1.1, 1.3}
+var ConsumeShadowsMaxLevel = [ConsumeShadowsRanks + 1]int{0, 24, 32, 40, 48, 56, 64}
 
 // unconfirmed: Consume Shadows coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4, rank 5, rank 6)
 
@@ -497,6 +573,8 @@ var ConundrumManaCost = [ConundrumRanks + 1]float64{0}
 var ConundrumManaCostPct = [ConundrumRanks + 1]float64{0}
 var ConundrumSpellCoeff = [ConundrumRanks + 1]float64{0.4286}
 var ConundrumBaseDamage = [ConundrumRanks + 1][]float64{{10, 10}}
+var ConundrumPointsPerLevel = [ConundrumRanks + 1]float64{0}
+var ConundrumMaxLevel = [ConundrumRanks + 1]int{0}
 
 // unconfirmed: Conundrum coefficient derived from the vanilla convention (rank 0)
 
@@ -513,6 +591,8 @@ var CreateFirestoneManaCost = [CreateFirestoneRanks + 1]float64{0, 500, 700, 900
 var CreateFirestoneManaCostPct = [CreateFirestoneRanks + 1]float64{0, 0, 0, 0, 0}
 var CreateFirestoneSpellCoeff = [CreateFirestoneRanks + 1]float64{0, 1, 1, 1, 1}
 var CreateFirestoneBaseDamage = [CreateFirestoneRanks + 1][]float64{{0, 0}, {1, 1}, {1, 1}, {1, 1}, {1, 1}}
+var CreateFirestonePointsPerLevel = [CreateFirestoneRanks + 1]float64{0, 0, 0, 0, 0}
+var CreateFirestoneMaxLevel = [CreateFirestoneRanks + 1]int{0, 0, 0, 0, 0}
 
 // Create Healthstone: ranks 0-5 present, from build 1.60.1.70009.
 const CreateHealthstoneRanks = 5
@@ -525,6 +605,8 @@ var CreateHealthstoneManaCost = [CreateHealthstoneRanks + 1]float64{95, 95, 240,
 var CreateHealthstoneManaCostPct = [CreateHealthstoneRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var CreateHealthstoneSpellCoeff = [CreateHealthstoneRanks + 1]float64{1, 1, 0.8571, 1, 1, 1}
 var CreateHealthstoneBaseDamage = [CreateHealthstoneRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
+var CreateHealthstonePointsPerLevel = [CreateHealthstoneRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var CreateHealthstoneMaxLevel = [CreateHealthstoneRanks + 1]int{0, 0, 0, 0, 0, 0}
 
 // unconfirmed: Create Healthstone coefficient derived from the vanilla convention (rank 2)
 // Create Healthstone rank 0: kept id 28023 (spell_level 10); dropped 23813 (spell_level 10), 23814 (spell_level 10), 23815 (spell_level 10)
@@ -540,6 +622,8 @@ var CreateHealthstoneGreaterManaCost = [CreateHealthstoneGreaterRanks + 1]float6
 var CreateHealthstoneGreaterManaCostPct = [CreateHealthstoneGreaterRanks + 1]float64{0}
 var CreateHealthstoneGreaterSpellCoeff = [CreateHealthstoneGreaterRanks + 1]float64{0.4286}
 var CreateHealthstoneGreaterBaseDamage = [CreateHealthstoneGreaterRanks + 1][]float64{{1, 1}}
+var CreateHealthstoneGreaterPointsPerLevel = [CreateHealthstoneGreaterRanks + 1]float64{0}
+var CreateHealthstoneGreaterMaxLevel = [CreateHealthstoneGreaterRanks + 1]int{0}
 
 // unconfirmed: Create Healthstone (Greater) coefficient derived from the vanilla convention (rank 0)
 // Create Healthstone (Greater) rank 0: kept id 23818 (spell_level 10); dropped 23816 (spell_level 10), 23817 (spell_level 10)
@@ -555,6 +639,8 @@ var CreateHealthstoneLesserManaCost = [CreateHealthstoneLesserRanks + 1]float64{
 var CreateHealthstoneLesserManaCostPct = [CreateHealthstoneLesserRanks + 1]float64{0}
 var CreateHealthstoneLesserSpellCoeff = [CreateHealthstoneLesserRanks + 1]float64{0.4286}
 var CreateHealthstoneLesserBaseDamage = [CreateHealthstoneLesserRanks + 1][]float64{{1, 1}}
+var CreateHealthstoneLesserPointsPerLevel = [CreateHealthstoneLesserRanks + 1]float64{0}
+var CreateHealthstoneLesserMaxLevel = [CreateHealthstoneLesserRanks + 1]int{0}
 
 // unconfirmed: Create Healthstone (Lesser) coefficient derived from the vanilla convention (rank 0)
 // Create Healthstone (Lesser) rank 0: kept id 23522 (spell_level 10); dropped 23520 (spell_level 10), 23521 (spell_level 10)
@@ -570,6 +656,8 @@ var CreateHealthstoneMajorManaCost = [CreateHealthstoneMajorRanks + 1]float64{0}
 var CreateHealthstoneMajorManaCostPct = [CreateHealthstoneMajorRanks + 1]float64{0}
 var CreateHealthstoneMajorSpellCoeff = [CreateHealthstoneMajorRanks + 1]float64{0.4286}
 var CreateHealthstoneMajorBaseDamage = [CreateHealthstoneMajorRanks + 1][]float64{{1, 1}}
+var CreateHealthstoneMajorPointsPerLevel = [CreateHealthstoneMajorRanks + 1]float64{0}
+var CreateHealthstoneMajorMaxLevel = [CreateHealthstoneMajorRanks + 1]int{0}
 
 // unconfirmed: Create Healthstone (Major) coefficient derived from the vanilla convention (rank 0)
 // Create Healthstone (Major) rank 0: kept id 23821 (spell_level 10); dropped 20018 (spell_level 1), 23819 (spell_level 10), 23820 (spell_level 10)
@@ -585,6 +673,8 @@ var CreateHealthstoneMinorManaCost = [CreateHealthstoneMinorRanks + 1]float64{0}
 var CreateHealthstoneMinorManaCostPct = [CreateHealthstoneMinorRanks + 1]float64{0}
 var CreateHealthstoneMinorSpellCoeff = [CreateHealthstoneMinorRanks + 1]float64{0.4286}
 var CreateHealthstoneMinorBaseDamage = [CreateHealthstoneMinorRanks + 1][]float64{{1, 1}}
+var CreateHealthstoneMinorPointsPerLevel = [CreateHealthstoneMinorRanks + 1]float64{0}
+var CreateHealthstoneMinorMaxLevel = [CreateHealthstoneMinorRanks + 1]int{0}
 
 // unconfirmed: Create Healthstone (Minor) coefficient derived from the vanilla convention (rank 0)
 // Create Healthstone (Minor) rank 0: kept id 23519 (spell_level 10); dropped 23517 (spell_level 10), 23518 (spell_level 10)
@@ -600,6 +690,8 @@ var CreateSoulstoneManaCost = [CreateSoulstoneRanks + 1]float64{0, 0, 0, 0, 0, 0
 var CreateSoulstoneManaCostPct = [CreateSoulstoneRanks + 1]float64{0, 85, 85, 85, 85, 85}
 var CreateSoulstoneSpellCoeff = [CreateSoulstoneRanks + 1]float64{0.4286, 0.8571, 0.8571, 0.8571, 0.8571, 0.8571}
 var CreateSoulstoneBaseDamage = [CreateSoulstoneRanks + 1][]float64{{1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}}
+var CreateSoulstonePointsPerLevel = [CreateSoulstoneRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var CreateSoulstoneMaxLevel = [CreateSoulstoneRanks + 1]int{0, 0, 0, 0, 0, 0}
 
 // unconfirmed: Create Soulstone coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3, rank 4, rank 5)
 
@@ -614,6 +706,8 @@ var CreateSpellstoneManaCost = [CreateSpellstoneRanks + 1]float64{0, 500, 750, 1
 var CreateSpellstoneManaCostPct = [CreateSpellstoneRanks + 1]float64{0, 0, 0, 0}
 var CreateSpellstoneSpellCoeff = [CreateSpellstoneRanks + 1]float64{0, 1.4286, 1.4286, 1.4286}
 var CreateSpellstoneBaseDamage = [CreateSpellstoneRanks + 1][]float64{{0, 0}, {1, 1}, {1, 1}, {1, 1}}
+var CreateSpellstonePointsPerLevel = [CreateSpellstoneRanks + 1]float64{0, 0, 0, 0}
+var CreateSpellstoneMaxLevel = [CreateSpellstoneRanks + 1]int{0, 0, 0, 0}
 
 // unconfirmed: Create Spellstone coefficient derived from the vanilla convention (rank 1, rank 2, rank 3)
 
@@ -630,6 +724,8 @@ var CurseOfDoomManaCost = [CurseOfDoomRanks + 1]float64{300}
 var CurseOfDoomManaCostPct = [CurseOfDoomRanks + 1]float64{0}
 var CurseOfDoomSpellCoeff = [CurseOfDoomRanks + 1]float64{1}
 var CurseOfDoomBaseDamage = [CurseOfDoomRanks + 1][]float64{{3200, 3200}}
+var CurseOfDoomPointsPerLevel = [CurseOfDoomRanks + 1]float64{0}
+var CurseOfDoomMaxLevel = [CurseOfDoomRanks + 1]int{0}
 
 // Curse of Exhaustion: ranks 0 present, from build 1.60.1.70009.
 const CurseOfExhaustionRanks = 0
@@ -641,7 +737,9 @@ var CurseOfExhaustionCooldownMS = [CurseOfExhaustionRanks + 1]int32{0}
 var CurseOfExhaustionManaCost = [CurseOfExhaustionRanks + 1]float64{0}
 var CurseOfExhaustionManaCostPct = [CurseOfExhaustionRanks + 1]float64{8}
 var CurseOfExhaustionSpellCoeff = [CurseOfExhaustionRanks + 1]float64{1}
-var CurseOfExhaustionBaseDamage = [CurseOfExhaustionRanks + 1][]float64{{-30, -30}}
+var CurseOfExhaustionBaseDamage = [CurseOfExhaustionRanks + 1][]float64{{0, 0}}
+var CurseOfExhaustionPointsPerLevel = [CurseOfExhaustionRanks + 1]float64{0}
+var CurseOfExhaustionMaxLevel = [CurseOfExhaustionRanks + 1]int{0}
 
 // Curse of Idiocy: ranks 1 present, from build 1.60.1.70009.
 const CurseOfIdiocyRanks = 1
@@ -653,7 +751,9 @@ var CurseOfIdiocyCooldownMS = [CurseOfIdiocyRanks + 1]int32{0, 0}
 var CurseOfIdiocyManaCost = [CurseOfIdiocyRanks + 1]float64{0, 110}
 var CurseOfIdiocyManaCostPct = [CurseOfIdiocyRanks + 1]float64{0, 0}
 var CurseOfIdiocySpellCoeff = [CurseOfIdiocyRanks + 1]float64{0, 8}
-var CurseOfIdiocyBaseDamage = [CurseOfIdiocyRanks + 1][]float64{{0, 0}, {-6, -6}}
+var CurseOfIdiocyBaseDamage = [CurseOfIdiocyRanks + 1][]float64{{0, 0}, {0, 0}}
+var CurseOfIdiocyPointsPerLevel = [CurseOfIdiocyRanks + 1]float64{0, 0}
+var CurseOfIdiocyMaxLevel = [CurseOfIdiocyRanks + 1]int{0, 0}
 
 // unconfirmed: Curse of Idiocy coefficient derived from the vanilla convention (rank 1)
 
@@ -668,6 +768,8 @@ var CurseOfRecklessnessManaCost = [CurseOfRecklessnessRanks + 1]float64{0, 35, 6
 var CurseOfRecklessnessManaCostPct = [CurseOfRecklessnessRanks + 1]float64{0, 0, 0, 0, 0}
 var CurseOfRecklessnessSpellCoeff = [CurseOfRecklessnessRanks + 1]float64{0, 8, 8, 8, 8}
 var CurseOfRecklessnessBaseDamage = [CurseOfRecklessnessRanks + 1][]float64{{0, 0}, {20, 20}, {45, 45}, {65, 65}, {90, 90}}
+var CurseOfRecklessnessPointsPerLevel = [CurseOfRecklessnessRanks + 1]float64{0, 0, 0, 0, 0}
+var CurseOfRecklessnessMaxLevel = [CurseOfRecklessnessRanks + 1]int{0, 0, 0, 0, 0}
 
 // unconfirmed: Curse of Recklessness coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4)
 // Curse of Recklessness rank 4: kept id 1225841 (spell_level 56); dropped 11717 (spell_level 56)
@@ -682,7 +784,9 @@ var CurseOfTonguesCooldownMS = [CurseOfTonguesRanks + 1]int32{0, 0, 0}
 var CurseOfTonguesManaCost = [CurseOfTonguesRanks + 1]float64{0, 80, 110}
 var CurseOfTonguesManaCostPct = [CurseOfTonguesRanks + 1]float64{0, 0, 0}
 var CurseOfTonguesSpellCoeff = [CurseOfTonguesRanks + 1]float64{0, 2, 2}
-var CurseOfTonguesBaseDamage = [CurseOfTonguesRanks + 1][]float64{{0, 0}, {-50, -50}, {-60, -60}}
+var CurseOfTonguesBaseDamage = [CurseOfTonguesRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}}
+var CurseOfTonguesPointsPerLevel = [CurseOfTonguesRanks + 1]float64{0, 0, 0}
+var CurseOfTonguesMaxLevel = [CurseOfTonguesRanks + 1]int{0, 0, 0}
 
 // unconfirmed: Curse of Tongues coefficient derived from the vanilla convention (rank 1, rank 2)
 
@@ -696,7 +800,9 @@ var CurseOfWeaknessCooldownMS = [CurseOfWeaknessRanks + 1]int32{0, 0, 0, 0, 0, 0
 var CurseOfWeaknessManaCost = [CurseOfWeaknessRanks + 1]float64{0, 20, 35, 70, 95, 130, 175}
 var CurseOfWeaknessManaCostPct = [CurseOfWeaknessRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var CurseOfWeaknessSpellCoeff = [CurseOfWeaknessRanks + 1]float64{0, 8, 8, 8, 8, 8, 8}
-var CurseOfWeaknessBaseDamage = [CurseOfWeaknessRanks + 1][]float64{{0, 0}, {-4, -4}, {-7, -7}, {-12, -12}, {-18, -18}, {-26, -26}, {-37, -37}}
+var CurseOfWeaknessBaseDamage = [CurseOfWeaknessRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
+var CurseOfWeaknessPointsPerLevel = [CurseOfWeaknessRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var CurseOfWeaknessMaxLevel = [CurseOfWeaknessRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
 
 // unconfirmed: Curse of Weakness coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4, rank 5, rank 6)
 
@@ -710,7 +816,9 @@ var CurseOfTheElementsCooldownMS = [CurseOfTheElementsRanks + 1]int32{0, 0, 0, 0
 var CurseOfTheElementsManaCost = [CurseOfTheElementsRanks + 1]float64{0, 50, 100, 150, 200}
 var CurseOfTheElementsManaCostPct = [CurseOfTheElementsRanks + 1]float64{0, 0, 0, 0, 0}
 var CurseOfTheElementsSpellCoeff = [CurseOfTheElementsRanks + 1]float64{0, 20, 20, 20, 20}
-var CurseOfTheElementsBaseDamage = [CurseOfTheElementsRanks + 1][]float64{{0, 0}, {-30, -30}, {-45, -45}, {-60, -60}, {-75, -75}}
+var CurseOfTheElementsBaseDamage = [CurseOfTheElementsRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
+var CurseOfTheElementsPointsPerLevel = [CurseOfTheElementsRanks + 1]float64{0, 0, 0, 0, 0}
+var CurseOfTheElementsMaxLevel = [CurseOfTheElementsRanks + 1]int{0, 0, 0, 0, 0}
 
 // unconfirmed: Curse of the Elements coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4)
 
@@ -725,6 +833,8 @@ var CursedDiscoveryManaCost = [CursedDiscoveryRanks + 1]float64{0}
 var CursedDiscoveryManaCostPct = [CursedDiscoveryRanks + 1]float64{0}
 var CursedDiscoverySpellCoeff = [CursedDiscoveryRanks + 1]float64{1}
 var CursedDiscoveryBaseDamage = [CursedDiscoveryRanks + 1][]float64{{0, 0}}
+var CursedDiscoveryPointsPerLevel = [CursedDiscoveryRanks + 1]float64{0}
+var CursedDiscoveryMaxLevel = [CursedDiscoveryRanks + 1]int{0}
 
 // Damage Over Time Increase: ranks 0 present, from build 1.60.1.70009.
 const DamageOverTimeIncreaseRanks = 0
@@ -737,6 +847,8 @@ var DamageOverTimeIncreaseManaCost = [DamageOverTimeIncreaseRanks + 1]float64{0}
 var DamageOverTimeIncreaseManaCostPct = [DamageOverTimeIncreaseRanks + 1]float64{0}
 var DamageOverTimeIncreaseSpellCoeff = [DamageOverTimeIncreaseRanks + 1]float64{1}
 var DamageOverTimeIncreaseBaseDamage = [DamageOverTimeIncreaseRanks + 1][]float64{{4, 4}}
+var DamageOverTimeIncreasePointsPerLevel = [DamageOverTimeIncreaseRanks + 1]float64{0}
+var DamageOverTimeIncreaseMaxLevel = [DamageOverTimeIncreaseRanks + 1]int{0}
 
 // Damage Over Time Increase rank 0: kept id 1222977 (spell_level 60); dropped 1222974 (spell_level 60), 1222975 (spell_level 60), 1222976 (spell_level 60)
 
@@ -751,6 +863,8 @@ var DanceOfTheWickedManaCost = [DanceOfTheWickedRanks + 1]float64{0}
 var DanceOfTheWickedManaCostPct = [DanceOfTheWickedRanks + 1]float64{0}
 var DanceOfTheWickedSpellCoeff = [DanceOfTheWickedRanks + 1]float64{0.4286}
 var DanceOfTheWickedBaseDamage = [DanceOfTheWickedRanks + 1][]float64{{412798, 412798}}
+var DanceOfTheWickedPointsPerLevel = [DanceOfTheWickedRanks + 1]float64{0}
+var DanceOfTheWickedMaxLevel = [DanceOfTheWickedRanks + 1]int{0}
 
 // unconfirmed: Dance of the Wicked coefficient derived from the vanilla convention (rank 0)
 // Dance of the Wicked rank 0: kept id 415751 (spell_level 1); dropped 412798 (spell_level 0), 412800 (spell_level 1)
@@ -768,6 +882,8 @@ var DeathCoilDamageIncreaseManaCost = [DeathCoilDamageIncreaseRanks + 1]float64{
 var DeathCoilDamageIncreaseManaCostPct = [DeathCoilDamageIncreaseRanks + 1]float64{0}
 var DeathCoilDamageIncreaseSpellCoeff = [DeathCoilDamageIncreaseRanks + 1]float64{1}
 var DeathCoilDamageIncreaseBaseDamage = [DeathCoilDamageIncreaseRanks + 1][]float64{{8, 8}}
+var DeathCoilDamageIncreasePointsPerLevel = [DeathCoilDamageIncreaseRanks + 1]float64{0}
+var DeathCoilDamageIncreaseMaxLevel = [DeathCoilDamageIncreaseRanks + 1]int{0}
 
 // Decimation: ranks 0 present, from build 1.60.1.70009.
 const DecimationRanks = 0
@@ -780,6 +896,8 @@ var DecimationManaCost = [DecimationRanks + 1]float64{0}
 var DecimationManaCostPct = [DecimationRanks + 1]float64{0}
 var DecimationSpellCoeff = [DecimationRanks + 1]float64{0.4286}
 var DecimationBaseDamage = [DecimationRanks + 1][]float64{{40, 40}}
+var DecimationPointsPerLevel = [DecimationRanks + 1]float64{0}
+var DecimationMaxLevel = [DecimationRanks + 1]int{0}
 
 // unconfirmed: Decimation coefficient derived from the vanilla convention (rank 0)
 // Decimation rank 0: kept id 440870 (spell_level 1); dropped 440873 (spell_level 0)
@@ -794,7 +912,9 @@ var DecreasedDestructionThreatCooldownMS = [DecreasedDestructionThreatRanks + 1]
 var DecreasedDestructionThreatManaCost = [DecreasedDestructionThreatRanks + 1]float64{0}
 var DecreasedDestructionThreatManaCostPct = [DecreasedDestructionThreatRanks + 1]float64{0}
 var DecreasedDestructionThreatSpellCoeff = [DecreasedDestructionThreatRanks + 1]float64{1}
-var DecreasedDestructionThreatBaseDamage = [DecreasedDestructionThreatRanks + 1][]float64{{-20, -20}}
+var DecreasedDestructionThreatBaseDamage = [DecreasedDestructionThreatRanks + 1][]float64{{0, 0}}
+var DecreasedDestructionThreatPointsPerLevel = [DecreasedDestructionThreatRanks + 1]float64{0}
+var DecreasedDestructionThreatMaxLevel = [DecreasedDestructionThreatRanks + 1]int{0}
 
 // Demon Armor: ranks 1-5 present, from build 1.60.1.70009.
 const DemonArmorRanks = 5
@@ -807,6 +927,8 @@ var DemonArmorManaCost = [DemonArmorRanks + 1]float64{0, 275, 520, 800, 1150, 15
 var DemonArmorManaCostPct = [DemonArmorRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var DemonArmorSpellCoeff = [DemonArmorRanks + 1]float64{0, 120, 120, 120, 120, 120}
 var DemonArmorBaseDamage = [DemonArmorRanks + 1][]float64{{0, 0}, {210, 210}, {300, 300}, {390, 390}, {480, 480}, {570, 570}}
+var DemonArmorPointsPerLevel = [DemonArmorRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var DemonArmorMaxLevel = [DemonArmorRanks + 1]int{0, 0, 0, 0, 0, 0}
 
 // unconfirmed: Demon Armor coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4, rank 5)
 
@@ -821,6 +943,8 @@ var DemonChargeManaCost = [DemonChargeRanks + 1]float64{0}
 var DemonChargeManaCostPct = [DemonChargeRanks + 1]float64{5}
 var DemonChargeSpellCoeff = [DemonChargeRanks + 1]float64{0.4286}
 var DemonChargeBaseDamage = [DemonChargeRanks + 1][]float64{{0, 0}}
+var DemonChargePointsPerLevel = [DemonChargeRanks + 1]float64{0}
+var DemonChargeMaxLevel = [DemonChargeRanks + 1]int{0}
 
 // unconfirmed: Demon Charge coefficient derived from the vanilla convention (rank 0)
 
@@ -835,6 +959,8 @@ var DemonSkinManaCost = [DemonSkinRanks + 1]float64{0, 50, 120}
 var DemonSkinManaCostPct = [DemonSkinRanks + 1]float64{0, 0, 0}
 var DemonSkinSpellCoeff = [DemonSkinRanks + 1]float64{0, 120, 120}
 var DemonSkinBaseDamage = [DemonSkinRanks + 1][]float64{{0, 0}, {40, 40}, {120, 120}}
+var DemonSkinPointsPerLevel = [DemonSkinRanks + 1]float64{0, 0, 0}
+var DemonSkinMaxLevel = [DemonSkinRanks + 1]int{0, 0, 0}
 
 // unconfirmed: Demon Skin coefficient derived from the vanilla convention (rank 1, rank 2)
 
@@ -849,6 +975,8 @@ var DemonicAegisManaCost = [DemonicAegisRanks + 1]float64{0}
 var DemonicAegisManaCostPct = [DemonicAegisRanks + 1]float64{0}
 var DemonicAegisSpellCoeff = [DemonicAegisRanks + 1]float64{0.8}
 var DemonicAegisBaseDamage = [DemonicAegisRanks + 1][]float64{{20, 20}}
+var DemonicAegisPointsPerLevel = [DemonicAegisRanks + 1]float64{0}
+var DemonicAegisMaxLevel = [DemonicAegisRanks + 1]int{0}
 
 // unconfirmed: Demonic Aegis coefficient derived from the vanilla convention (rank 0)
 // Demonic Aegis rank 0: kept id 470279 (spell_level 1); dropped 1235316 (spell_level 0)
@@ -864,6 +992,8 @@ var DemonicBrandManaCost = [DemonicBrandRanks + 1]float64{0}
 var DemonicBrandManaCostPct = [DemonicBrandRanks + 1]float64{0}
 var DemonicBrandSpellCoeff = [DemonicBrandRanks + 1]float64{0.4286}
 var DemonicBrandBaseDamage = [DemonicBrandRanks + 1][]float64{{1, 1}}
+var DemonicBrandPointsPerLevel = [DemonicBrandRanks + 1]float64{0}
+var DemonicBrandMaxLevel = [DemonicBrandRanks + 1]int{60}
 
 // unconfirmed: Demonic Brand coefficient derived from the vanilla convention (rank 0)
 // Demonic Brand rank 0: kept id 1293699 (spell_level 26); dropped 1293695 (spell_level 0), 1293696 (spell_level 26), 1293697 (spell_level 26), 1293698 (spell_level 26)
@@ -879,6 +1009,8 @@ var DemonicEnergiesManaCost = [DemonicEnergiesRanks + 1]float64{0}
 var DemonicEnergiesManaCostPct = [DemonicEnergiesRanks + 1]float64{0}
 var DemonicEnergiesSpellCoeff = [DemonicEnergiesRanks + 1]float64{0.4286}
 var DemonicEnergiesBaseDamage = [DemonicEnergiesRanks + 1][]float64{{0, 0}}
+var DemonicEnergiesPointsPerLevel = [DemonicEnergiesRanks + 1]float64{0}
+var DemonicEnergiesMaxLevel = [DemonicEnergiesRanks + 1]int{0}
 
 // unconfirmed: Demonic Energies coefficient derived from the vanilla convention (rank 0)
 
@@ -893,6 +1025,8 @@ var DemonicFrenzyManaCost = [DemonicFrenzyRanks + 1]float64{0}
 var DemonicFrenzyManaCostPct = [DemonicFrenzyRanks + 1]float64{0}
 var DemonicFrenzySpellCoeff = [DemonicFrenzyRanks + 1]float64{0.4286}
 var DemonicFrenzyBaseDamage = [DemonicFrenzyRanks + 1][]float64{{0, 0}}
+var DemonicFrenzyPointsPerLevel = [DemonicFrenzyRanks + 1]float64{0}
+var DemonicFrenzyMaxLevel = [DemonicFrenzyRanks + 1]int{0}
 
 // unconfirmed: Demonic Frenzy coefficient derived from the vanilla convention (rank 0)
 
@@ -907,6 +1041,8 @@ var DemonicGraceManaCost = [DemonicGraceRanks + 1]float64{0}
 var DemonicGraceManaCostPct = [DemonicGraceRanks + 1]float64{0}
 var DemonicGraceSpellCoeff = [DemonicGraceRanks + 1]float64{0.4}
 var DemonicGraceBaseDamage = [DemonicGraceRanks + 1][]float64{{0, 0}}
+var DemonicGracePointsPerLevel = [DemonicGraceRanks + 1]float64{0}
+var DemonicGraceMaxLevel = [DemonicGraceRanks + 1]int{0}
 
 // unconfirmed: Demonic Grace coefficient derived from the vanilla convention (rank 0)
 // Demonic Grace rank 0: kept id 430025 (spell_level 0); dropped 425463 (spell_level 0)
@@ -922,6 +1058,8 @@ var DemonicHowlManaCost = [DemonicHowlRanks + 1]float64{0}
 var DemonicHowlManaCostPct = [DemonicHowlRanks + 1]float64{5}
 var DemonicHowlSpellCoeff = [DemonicHowlRanks + 1]float64{0.4}
 var DemonicHowlBaseDamage = [DemonicHowlRanks + 1][]float64{{0, 0}}
+var DemonicHowlPointsPerLevel = [DemonicHowlRanks + 1]float64{0}
+var DemonicHowlMaxLevel = [DemonicHowlRanks + 1]int{0}
 
 // unconfirmed: Demonic Howl coefficient derived from the vanilla convention (rank 0)
 
@@ -936,6 +1074,8 @@ var DemonicKnowledgeManaCost = [DemonicKnowledgeRanks + 1]float64{0}
 var DemonicKnowledgeManaCostPct = [DemonicKnowledgeRanks + 1]float64{0}
 var DemonicKnowledgeSpellCoeff = [DemonicKnowledgeRanks + 1]float64{0.4286}
 var DemonicKnowledgeBaseDamage = [DemonicKnowledgeRanks + 1][]float64{{10, 10}}
+var DemonicKnowledgePointsPerLevel = [DemonicKnowledgeRanks + 1]float64{0}
+var DemonicKnowledgeMaxLevel = [DemonicKnowledgeRanks + 1]int{0}
 
 // unconfirmed: Demonic Knowledge coefficient derived from the vanilla convention (rank 0)
 // Demonic Knowledge rank 0: kept id 1243120 (spell_level 1); dropped 412732 (spell_level 0), 415749 (spell_level 1)
@@ -951,6 +1091,8 @@ var DemonicPactManaCost = [DemonicPactRanks + 1]float64{0}
 var DemonicPactManaCostPct = [DemonicPactRanks + 1]float64{0}
 var DemonicPactSpellCoeff = [DemonicPactRanks + 1]float64{1}
 var DemonicPactBaseDamage = [DemonicPactRanks + 1][]float64{{0, 0}}
+var DemonicPactPointsPerLevel = [DemonicPactRanks + 1]float64{0}
+var DemonicPactMaxLevel = [DemonicPactRanks + 1]int{0}
 
 // Demonic Pact rank 0: kept id 425466 (spell_level 0); dropped 425464 (spell_level 0)
 
@@ -965,6 +1107,8 @@ var DemonicTacticsManaCost = [DemonicTacticsRanks + 1]float64{0}
 var DemonicTacticsManaCostPct = [DemonicTacticsRanks + 1]float64{0}
 var DemonicTacticsSpellCoeff = [DemonicTacticsRanks + 1]float64{0.4286}
 var DemonicTacticsBaseDamage = [DemonicTacticsRanks + 1][]float64{{10, 10}}
+var DemonicTacticsPointsPerLevel = [DemonicTacticsRanks + 1]float64{0}
+var DemonicTacticsMaxLevel = [DemonicTacticsRanks + 1]int{0}
 
 // unconfirmed: Demonic Tactics coefficient derived from the vanilla convention (rank 0)
 // Demonic Tactics rank 0: kept id 1243030 (spell_level 1); dropped 412727 (spell_level 0)
@@ -980,6 +1124,8 @@ var DestructiveReachManaCost = [DestructiveReachRanks + 1]float64{0}
 var DestructiveReachManaCostPct = [DestructiveReachRanks + 1]float64{0}
 var DestructiveReachSpellCoeff = [DestructiveReachRanks + 1]float64{1}
 var DestructiveReachBaseDamage = [DestructiveReachRanks + 1][]float64{{20, 20}}
+var DestructiveReachPointsPerLevel = [DestructiveReachRanks + 1]float64{0}
+var DestructiveReachMaxLevel = [DestructiveReachRanks + 1]int{0}
 
 // Devastation: ranks 0 present, from build 1.60.1.70009.
 const DevastationRanks = 0
@@ -992,6 +1138,8 @@ var DevastationManaCost = [DevastationRanks + 1]float64{0}
 var DevastationManaCostPct = [DevastationRanks + 1]float64{0}
 var DevastationSpellCoeff = [DevastationRanks + 1]float64{1}
 var DevastationBaseDamage = [DevastationRanks + 1][]float64{{5, 5}}
+var DevastationPointsPerLevel = [DevastationRanks + 1]float64{0}
+var DevastationMaxLevel = [DevastationRanks + 1]int{0}
 
 // Devour Magic: ranks 1-4 present, from build 1.60.1.70009.
 const DevourMagicRanks = 4
@@ -1004,6 +1152,8 @@ var DevourMagicManaCost = [DevourMagicRanks + 1]float64{0, 100, 130, 170, 215}
 var DevourMagicManaCostPct = [DevourMagicRanks + 1]float64{0, 0, 0, 0, 0}
 var DevourMagicSpellCoeff = [DevourMagicRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 0.4286}
 var DevourMagicBaseDamage = [DevourMagicRanks + 1][]float64{{0, 0}, {1, 1}, {1, 1}, {1, 1}, {1, 1}}
+var DevourMagicPointsPerLevel = [DevourMagicRanks + 1]float64{0, 0, 0, 0, 0}
+var DevourMagicMaxLevel = [DevourMagicRanks + 1]int{0, 36, 44, 52, 60}
 
 // unconfirmed: Devour Magic coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4)
 
@@ -1018,6 +1168,8 @@ var DevourMagicEffectManaCost = [DevourMagicEffectRanks + 1]float64{0, 0, 0, 0, 
 var DevourMagicEffectManaCostPct = [DevourMagicEffectRanks + 1]float64{0, 0, 0, 0, 0}
 var DevourMagicEffectSpellCoeff = [DevourMagicEffectRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 0.4286}
 var DevourMagicEffectBaseDamage = [DevourMagicEffectRanks + 1][]float64{{0, 0}, {234, 234}, {319, 319}, {438, 438}, {579, 579}}
+var DevourMagicEffectPointsPerLevel = [DevourMagicEffectRanks + 1]float64{0, 4, 4.8, 5.7, 6.6}
+var DevourMagicEffectMaxLevel = [DevourMagicEffectRanks + 1]int{0, 36, 44, 52, 60}
 
 // unconfirmed: Devour Magic Effect coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4)
 
@@ -1032,6 +1184,8 @@ var DispelMagicManaCost = [DispelMagicRanks + 1]float64{0, 120}
 var DispelMagicManaCostPct = [DispelMagicRanks + 1]float64{0, 0}
 var DispelMagicSpellCoeff = [DispelMagicRanks + 1]float64{0, 0.4286}
 var DispelMagicBaseDamage = [DispelMagicRanks + 1][]float64{{0, 0}, {1, 1}}
+var DispelMagicPointsPerLevel = [DispelMagicRanks + 1]float64{0, 0}
+var DispelMagicMaxLevel = [DispelMagicRanks + 1]int{0, 0}
 
 // unconfirmed: Dispel Magic coefficient derived from the vanilla convention (rank 1)
 
@@ -1046,6 +1200,8 @@ var DisruptManaCost = [DisruptRanks + 1]float64{0}
 var DisruptManaCostPct = [DisruptRanks + 1]float64{5}
 var DisruptSpellCoeff = [DisruptRanks + 1]float64{0.1}
 var DisruptBaseDamage = [DisruptRanks + 1][]float64{{10, 10}}
+var DisruptPointsPerLevel = [DisruptRanks + 1]float64{0}
+var DisruptMaxLevel = [DisruptRanks + 1]int{0}
 
 // Doomcaller Immolate Bonus: ranks 0 present, from build 1.60.1.70009.
 const DoomcallerImmolateBonusRanks = 0
@@ -1058,6 +1214,8 @@ var DoomcallerImmolateBonusManaCost = [DoomcallerImmolateBonusRanks + 1]float64{
 var DoomcallerImmolateBonusManaCostPct = [DoomcallerImmolateBonusRanks + 1]float64{0}
 var DoomcallerImmolateBonusSpellCoeff = [DoomcallerImmolateBonusRanks + 1]float64{0.4286}
 var DoomcallerImmolateBonusBaseDamage = [DoomcallerImmolateBonusRanks + 1][]float64{{5, 5}}
+var DoomcallerImmolateBonusPointsPerLevel = [DoomcallerImmolateBonusRanks + 1]float64{0}
+var DoomcallerImmolateBonusMaxLevel = [DoomcallerImmolateBonusRanks + 1]int{0}
 
 // unconfirmed: Doomcaller Immolate Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -1071,7 +1229,9 @@ var DoomcallerReducedShadowBoltCostCooldownMS = [DoomcallerReducedShadowBoltCost
 var DoomcallerReducedShadowBoltCostManaCost = [DoomcallerReducedShadowBoltCostRanks + 1]float64{0}
 var DoomcallerReducedShadowBoltCostManaCostPct = [DoomcallerReducedShadowBoltCostRanks + 1]float64{0}
 var DoomcallerReducedShadowBoltCostSpellCoeff = [DoomcallerReducedShadowBoltCostRanks + 1]float64{0.4286}
-var DoomcallerReducedShadowBoltCostBaseDamage = [DoomcallerReducedShadowBoltCostRanks + 1][]float64{{-15, -15}}
+var DoomcallerReducedShadowBoltCostBaseDamage = [DoomcallerReducedShadowBoltCostRanks + 1][]float64{{0, 0}}
+var DoomcallerReducedShadowBoltCostPointsPerLevel = [DoomcallerReducedShadowBoltCostRanks + 1]float64{0}
+var DoomcallerReducedShadowBoltCostMaxLevel = [DoomcallerReducedShadowBoltCostRanks + 1]int{0}
 
 // unconfirmed: Doomcaller Reduced Shadow Bolt Cost coefficient derived from the vanilla convention (rank 0)
 
@@ -1088,6 +1248,8 @@ var DrainManaManaCost = [DrainManaRanks + 1]float64{0, 95, 155, 225, 310}
 var DrainManaManaCostPct = [DrainManaRanks + 1]float64{0, 0, 0, 0, 0}
 var DrainManaSpellCoeff = [DrainManaRanks + 1]float64{0, 0.3333, 0.3333, 0.3333, 0.3333}
 var DrainManaBaseDamage = [DrainManaRanks + 1][]float64{{0, 0}, {42, 42}, {68, 68}, {99, 99}, {136, 136}}
+var DrainManaPointsPerLevel = [DrainManaRanks + 1]float64{0, 0.4, 0.5, 0.6, 0.7}
+var DrainManaMaxLevel = [DrainManaRanks + 1]int{0, 29, 39, 49, 59}
 
 // unconfirmed: Drain Mana coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4)
 
@@ -1104,6 +1266,8 @@ var EmberstormManaCost = [EmberstormRanks + 1]float64{0}
 var EmberstormManaCostPct = [EmberstormRanks + 1]float64{0}
 var EmberstormSpellCoeff = [EmberstormRanks + 1]float64{1}
 var EmberstormBaseDamage = [EmberstormRanks + 1][]float64{{10, 10}}
+var EmberstormPointsPerLevel = [EmberstormRanks + 1]float64{0}
+var EmberstormMaxLevel = [EmberstormRanks + 1]int{0}
 
 // Eureka!: ranks 0 present, from build 1.60.1.70009.
 const EurekaRanks = 0
@@ -1115,7 +1279,9 @@ var EurekaCooldownMS = [EurekaRanks + 1]int32{120000}
 var EurekaManaCost = [EurekaRanks + 1]float64{0}
 var EurekaManaCostPct = [EurekaRanks + 1]float64{0}
 var EurekaSpellCoeff = [EurekaRanks + 1]float64{1}
-var EurekaBaseDamage = [EurekaRanks + 1][]float64{{-10, -10}}
+var EurekaBaseDamage = [EurekaRanks + 1][]float64{{0, 0}}
+var EurekaPointsPerLevel = [EurekaRanks + 1]float64{0}
+var EurekaMaxLevel = [EurekaRanks + 1]int{0}
 
 // unconfirmed: Eureka! coefficient derived from the vanilla convention (rank 0)
 
@@ -1130,6 +1296,8 @@ var EverlastingAfflictionManaCost = [EverlastingAfflictionRanks + 1]float64{0}
 var EverlastingAfflictionManaCostPct = [EverlastingAfflictionRanks + 1]float64{0}
 var EverlastingAfflictionSpellCoeff = [EverlastingAfflictionRanks + 1]float64{1}
 var EverlastingAfflictionBaseDamage = [EverlastingAfflictionRanks + 1][]float64{{100, 100}}
+var EverlastingAfflictionPointsPerLevel = [EverlastingAfflictionRanks + 1]float64{0}
+var EverlastingAfflictionMaxLevel = [EverlastingAfflictionRanks + 1]int{0}
 
 // Exorcist: ranks 0 present, from build 1.60.1.70009.
 const ExorcistRanks = 0
@@ -1142,6 +1310,8 @@ var ExorcistManaCost = [ExorcistRanks + 1]float64{0}
 var ExorcistManaCostPct = [ExorcistRanks + 1]float64{0}
 var ExorcistSpellCoeff = [ExorcistRanks + 1]float64{0.4286}
 var ExorcistBaseDamage = [ExorcistRanks + 1][]float64{{415068, 415068}}
+var ExorcistPointsPerLevel = [ExorcistRanks + 1]float64{0}
+var ExorcistMaxLevel = [ExorcistRanks + 1]int{0}
 
 // unconfirmed: Exorcist coefficient derived from the vanilla convention (rank 0)
 
@@ -1156,6 +1326,8 @@ var FearManaCost = [FearRanks + 1]float64{0, 0, 0, 0}
 var FearManaCostPct = [FearRanks + 1]float64{0, 15, 15, 15}
 var FearSpellCoeff = [FearRanks + 1]float64{0, 0.6667, 1, 1.3333}
 var FearBaseDamage = [FearRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}}
+var FearPointsPerLevel = [FearRanks + 1]float64{0, 0, 0, 0}
+var FearMaxLevel = [FearRanks + 1]int{0, 0, 0, 0}
 
 // unconfirmed: Fear coefficient derived from the vanilla convention (rank 1, rank 2, rank 3)
 
@@ -1170,6 +1342,8 @@ var FelArmorManaCost = [FelArmorRanks + 1]float64{0}
 var FelArmorManaCostPct = [FelArmorRanks + 1]float64{28}
 var FelArmorSpellCoeff = [FelArmorRanks + 1]float64{120}
 var FelArmorBaseDamage = [FelArmorRanks + 1][]float64{{50, 50}}
+var FelArmorPointsPerLevel = [FelArmorRanks + 1]float64{0}
+var FelArmorMaxLevel = [FelArmorRanks + 1]int{0}
 
 // unconfirmed: Fel Armor coefficient derived from the vanilla convention (rank 0)
 
@@ -1184,6 +1358,8 @@ var FelConcentrationManaCost = [FelConcentrationRanks + 1]float64{0}
 var FelConcentrationManaCostPct = [FelConcentrationRanks + 1]float64{0}
 var FelConcentrationSpellCoeff = [FelConcentrationRanks + 1]float64{1}
 var FelConcentrationBaseDamage = [FelConcentrationRanks + 1][]float64{{70, 70}}
+var FelConcentrationPointsPerLevel = [FelConcentrationRanks + 1]float64{0}
+var FelConcentrationMaxLevel = [FelConcentrationRanks + 1]int{0}
 
 // Fel Domination: ranks 0 present, from build 1.60.1.70009.
 const FelDominationRanks = 0
@@ -1195,7 +1371,9 @@ var FelDominationCooldownMS = [FelDominationRanks + 1]int32{300000}
 var FelDominationManaCost = [FelDominationRanks + 1]float64{0}
 var FelDominationManaCostPct = [FelDominationRanks + 1]float64{0}
 var FelDominationSpellCoeff = [FelDominationRanks + 1]float64{1}
-var FelDominationBaseDamage = [FelDominationRanks + 1][]float64{{-5500, -5500}}
+var FelDominationBaseDamage = [FelDominationRanks + 1][]float64{{0, 0}}
+var FelDominationPointsPerLevel = [FelDominationRanks + 1]float64{0}
+var FelDominationMaxLevel = [FelDominationRanks + 1]int{0}
 
 // Fel Energy: ranks 0 present, from build 1.60.1.70009.
 const FelEnergyRanks = 0
@@ -1208,6 +1386,8 @@ var FelEnergyManaCost = [FelEnergyRanks + 1]float64{0}
 var FelEnergyManaCostPct = [FelEnergyRanks + 1]float64{0}
 var FelEnergySpellCoeff = [FelEnergyRanks + 1]float64{480}
 var FelEnergyBaseDamage = [FelEnergyRanks + 1][]float64{{2, 2}}
+var FelEnergyPointsPerLevel = [FelEnergyRanks + 1]float64{0}
+var FelEnergyMaxLevel = [FelEnergyRanks + 1]int{0}
 
 // unconfirmed: Fel Energy coefficient derived from the vanilla convention (rank 0)
 
@@ -1221,7 +1401,9 @@ var FelInvigorationCooldownMS = [FelInvigorationRanks + 1]int32{0}
 var FelInvigorationManaCost = [FelInvigorationRanks + 1]float64{0}
 var FelInvigorationManaCostPct = [FelInvigorationRanks + 1]float64{0}
 var FelInvigorationSpellCoeff = [FelInvigorationRanks + 1]float64{1}
-var FelInvigorationBaseDamage = [FelInvigorationRanks + 1][]float64{{-25, -25}}
+var FelInvigorationBaseDamage = [FelInvigorationRanks + 1][]float64{{0, 0}}
+var FelInvigorationPointsPerLevel = [FelInvigorationRanks + 1]float64{0}
+var FelInvigorationMaxLevel = [FelInvigorationRanks + 1]int{0}
 
 // unconfirmed: Fel Invigoration coefficient derived from the vanilla convention (rank 0)
 
@@ -1236,6 +1418,8 @@ var FelStaminaManaCost = [FelStaminaRanks + 1]float64{0}
 var FelStaminaManaCostPct = [FelStaminaRanks + 1]float64{0}
 var FelStaminaSpellCoeff = [FelStaminaRanks + 1]float64{480}
 var FelStaminaBaseDamage = [FelStaminaRanks + 1][]float64{{3, 3}}
+var FelStaminaPointsPerLevel = [FelStaminaRanks + 1]float64{0}
+var FelStaminaMaxLevel = [FelStaminaRanks + 1]int{0}
 
 // unconfirmed: Fel Stamina coefficient derived from the vanilla convention (rank 0)
 
@@ -1250,6 +1434,8 @@ var FelVitalityManaCost = [FelVitalityRanks + 1]float64{0}
 var FelVitalityManaCostPct = [FelVitalityRanks + 1]float64{0}
 var FelVitalitySpellCoeff = [FelVitalityRanks + 1]float64{1}
 var FelVitalityBaseDamage = [FelVitalityRanks + 1][]float64{{15, 15}}
+var FelVitalityPointsPerLevel = [FelVitalityRanks + 1]float64{0}
+var FelVitalityMaxLevel = [FelVitalityRanks + 1]int{0}
 
 // Felhunted: ranks 0 present, from build 1.60.1.70009.
 const FelhuntedRanks = 0
@@ -1262,6 +1448,8 @@ var FelhuntedManaCost = [FelhuntedRanks + 1]float64{0}
 var FelhuntedManaCostPct = [FelhuntedRanks + 1]float64{0}
 var FelhuntedSpellCoeff = [FelhuntedRanks + 1]float64{1}
 var FelhuntedBaseDamage = [FelhuntedRanks + 1][]float64{{0, 0}}
+var FelhuntedPointsPerLevel = [FelhuntedRanks + 1]float64{0}
+var FelhuntedMaxLevel = [FelhuntedRanks + 1]int{0}
 
 // Felhunted rank 0: kept id 469227 (spell_level 60); dropped 469228 (spell_level 52)
 
@@ -1276,6 +1464,8 @@ var FetishOfMischiefManaCost = [FetishOfMischiefRanks + 1]float64{0}
 var FetishOfMischiefManaCostPct = [FetishOfMischiefRanks + 1]float64{0}
 var FetishOfMischiefSpellCoeff = [FetishOfMischiefRanks + 1]float64{1}
 var FetishOfMischiefBaseDamage = [FetishOfMischiefRanks + 1][]float64{{2, 2}}
+var FetishOfMischiefPointsPerLevel = [FetishOfMischiefRanks + 1]float64{0}
+var FetishOfMischiefMaxLevel = [FetishOfMischiefRanks + 1]int{0}
 
 // Filthy Lucre: ranks 0 present, from build 1.60.1.70009.
 const FilthyLucreRanks = 0
@@ -1288,6 +1478,8 @@ var FilthyLucreManaCost = [FilthyLucreRanks + 1]float64{0}
 var FilthyLucreManaCostPct = [FilthyLucreRanks + 1]float64{0}
 var FilthyLucreSpellCoeff = [FilthyLucreRanks + 1]float64{0.4286}
 var FilthyLucreBaseDamage = [FilthyLucreRanks + 1][]float64{{1, 1}}
+var FilthyLucrePointsPerLevel = [FilthyLucreRanks + 1]float64{0}
+var FilthyLucreMaxLevel = [FilthyLucreRanks + 1]int{0}
 
 // unconfirmed: Filthy Lucre coefficient derived from the vanilla convention (rank 0)
 
@@ -1302,6 +1494,8 @@ var FireShieldManaCost = [FireShieldRanks + 1]float64{0, 60, 90, 115, 140, 165}
 var FireShieldManaCostPct = [FireShieldRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var FireShieldSpellCoeff = [FireShieldRanks + 1]float64{0, 12, 12, 12, 12, 12}
 var FireShieldBaseDamage = [FireShieldRanks + 1][]float64{{0, 0}, {5, 5}, {7, 7}, {9, 9}, {11, 11}, {13, 13}}
+var FireShieldPointsPerLevel = [FireShieldRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var FireShieldMaxLevel = [FireShieldRanks + 1]int{0, 0, 0, 0, 0, 0}
 
 // unconfirmed: Fire Shield coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4, rank 5)
 
@@ -1315,7 +1509,9 @@ var FireTranceCooldownMS = [FireTranceRanks + 1]int32{0}
 var FireTranceManaCost = [FireTranceRanks + 1]float64{0}
 var FireTranceManaCostPct = [FireTranceRanks + 1]float64{0}
 var FireTranceSpellCoeff = [FireTranceRanks + 1]float64{1}
-var FireTranceBaseDamage = [FireTranceRanks + 1][]float64{{-100, -100}}
+var FireTranceBaseDamage = [FireTranceRanks + 1][]float64{{0, 0}}
+var FireTrancePointsPerLevel = [FireTranceRanks + 1]float64{0}
+var FireTranceMaxLevel = [FireTranceRanks + 1]int{0}
 
 // Fire and Brimstone: ranks 0 present, from build 1.60.1.70009.
 const FireAndBrimstoneRanks = 0
@@ -1328,6 +1524,8 @@ var FireAndBrimstoneManaCost = [FireAndBrimstoneRanks + 1]float64{0}
 var FireAndBrimstoneManaCostPct = [FireAndBrimstoneRanks + 1]float64{0}
 var FireAndBrimstoneSpellCoeff = [FireAndBrimstoneRanks + 1]float64{1}
 var FireAndBrimstoneBaseDamage = [FireAndBrimstoneRanks + 1][]float64{{10, 10}}
+var FireAndBrimstonePointsPerLevel = [FireAndBrimstoneRanks + 1]float64{0}
+var FireAndBrimstoneMaxLevel = [FireAndBrimstoneRanks + 1]int{0}
 
 // Firebolt: ranks 0-7 present, from build 1.60.1.70009.
 const FireboltRanks = 7
@@ -1339,7 +1537,9 @@ var FireboltCooldownMS = [FireboltRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var FireboltManaCost = [FireboltRanks + 1]float64{20, 10, 20, 35, 50, 70, 95, 115}
 var FireboltManaCostPct = [FireboltRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var FireboltSpellCoeff = [FireboltRanks + 1]float64{0.529, 0.164, 0.314, 0.529, 0.571, 0.571, 0.571, 0.571}
-var FireboltBaseDamage = [FireboltRanks + 1][]float64{{152, 152}, {4, 4}, {7, 7}, {12, 12}, {17, 17}, {25, 25}, {35, 35}, {44, 44}}
+var FireboltBaseDamage = [FireboltRanks + 1][]float64{{146.1538, 157.8462}, {3.4286, 4.5714}, {6.4615, 7.5385}, {11, 13}, {16.0286, 17.9714}, {23.5294, 26.4706}, {33.0282, 36.9718}, {41.5, 46.5}}
+var FireboltPointsPerLevel = [FireboltRanks + 1]float64{0, 0.1, 0.2, 0.3, 0.3, 0.4, 0.5, 0.6}
+var FireboltMaxLevel = [FireboltRanks + 1]int{0, 5, 13, 23, 33, 43, 53, 63}
 
 // Firestone Attack: ranks 0 present, from build 1.60.1.70009.
 const FirestoneAttackRanks = 0
@@ -1351,7 +1551,9 @@ var FirestoneAttackCooldownMS = [FirestoneAttackRanks + 1]int32{0}
 var FirestoneAttackManaCost = [FirestoneAttackRanks + 1]float64{0}
 var FirestoneAttackManaCostPct = [FirestoneAttackRanks + 1]float64{0}
 var FirestoneAttackSpellCoeff = [FirestoneAttackRanks + 1]float64{0.4286}
-var FirestoneAttackBaseDamage = [FirestoneAttackRanks + 1][]float64{{50, 50}}
+var FirestoneAttackBaseDamage = [FirestoneAttackRanks + 1][]float64{{40, 60}}
+var FirestoneAttackPointsPerLevel = [FirestoneAttackRanks + 1]float64{0}
+var FirestoneAttackMaxLevel = [FirestoneAttackRanks + 1]int{0}
 
 // unconfirmed: Firestone Attack coefficient derived from the vanilla convention (rank 0)
 
@@ -1365,7 +1567,9 @@ var GreaterFirestoneAttackCooldownMS = [GreaterFirestoneAttackRanks + 1]int32{0}
 var GreaterFirestoneAttackManaCost = [GreaterFirestoneAttackRanks + 1]float64{0}
 var GreaterFirestoneAttackManaCostPct = [GreaterFirestoneAttackRanks + 1]float64{0}
 var GreaterFirestoneAttackSpellCoeff = [GreaterFirestoneAttackRanks + 1]float64{0.4286}
-var GreaterFirestoneAttackBaseDamage = [GreaterFirestoneAttackRanks + 1][]float64{{75, 75}}
+var GreaterFirestoneAttackBaseDamage = [GreaterFirestoneAttackRanks + 1][]float64{{60, 90}}
+var GreaterFirestoneAttackPointsPerLevel = [GreaterFirestoneAttackRanks + 1]float64{0}
+var GreaterFirestoneAttackMaxLevel = [GreaterFirestoneAttackRanks + 1]int{0}
 
 // unconfirmed: Greater Firestone Attack coefficient derived from the vanilla convention (rank 0)
 
@@ -1380,6 +1584,8 @@ var GreaterHealthstoneManaCost = [GreaterHealthstoneRanks + 1]float64{0}
 var GreaterHealthstoneManaCostPct = [GreaterHealthstoneRanks + 1]float64{0}
 var GreaterHealthstoneSpellCoeff = [GreaterHealthstoneRanks + 1]float64{0.4286}
 var GreaterHealthstoneBaseDamage = [GreaterHealthstoneRanks + 1][]float64{{960, 960}}
+var GreaterHealthstonePointsPerLevel = [GreaterHealthstoneRanks + 1]float64{0}
+var GreaterHealthstoneMaxLevel = [GreaterHealthstoneRanks + 1]int{0}
 
 // unconfirmed: Greater Healthstone coefficient derived from the vanilla convention (rank 0)
 // Greater Healthstone rank 0: kept id 23475 (spell_level 46); dropped 5723 (spell_level 46), 23474 (spell_level 46)
@@ -1395,6 +1601,8 @@ var GreaterSpellstoneManaCost = [GreaterSpellstoneRanks + 1]float64{0}
 var GreaterSpellstoneManaCostPct = [GreaterSpellstoneRanks + 1]float64{0}
 var GreaterSpellstoneSpellCoeff = [GreaterSpellstoneRanks + 1]float64{4}
 var GreaterSpellstoneBaseDamage = [GreaterSpellstoneRanks + 1][]float64{{100, 100}}
+var GreaterSpellstonePointsPerLevel = [GreaterSpellstoneRanks + 1]float64{0}
+var GreaterSpellstoneMaxLevel = [GreaterSpellstoneRanks + 1]int{0}
 
 // unconfirmed: Greater Spellstone coefficient derived from the vanilla convention (rank 0)
 
@@ -1409,6 +1617,8 @@ var GrimReachManaCost = [GrimReachRanks + 1]float64{0}
 var GrimReachManaCostPct = [GrimReachRanks + 1]float64{0}
 var GrimReachSpellCoeff = [GrimReachRanks + 1]float64{1}
 var GrimReachBaseDamage = [GrimReachRanks + 1][]float64{{20, 20}}
+var GrimReachPointsPerLevel = [GrimReachRanks + 1]float64{0}
+var GrimReachMaxLevel = [GrimReachRanks + 1]int{0}
 
 // Grimoire of Synergy: ranks 0 present, from build 1.60.1.70009.
 const GrimoireOfSynergyRanks = 0
@@ -1421,6 +1631,8 @@ var GrimoireOfSynergyManaCost = [GrimoireOfSynergyRanks + 1]float64{0}
 var GrimoireOfSynergyManaCostPct = [GrimoireOfSynergyRanks + 1]float64{0}
 var GrimoireOfSynergySpellCoeff = [GrimoireOfSynergyRanks + 1]float64{0.4286}
 var GrimoireOfSynergyBaseDamage = [GrimoireOfSynergyRanks + 1][]float64{{1226981, 1226981}}
+var GrimoireOfSynergyPointsPerLevel = [GrimoireOfSynergyRanks + 1]float64{0}
+var GrimoireOfSynergyMaxLevel = [GrimoireOfSynergyRanks + 1]int{0}
 
 // unconfirmed: Grimoire of Synergy coefficient derived from the vanilla convention (rank 0)
 // Grimoire of Synergy rank 0: kept id 426444 (spell_level 1); dropped 426301 (spell_level 1), 1226981 (spell_level 0)
@@ -1435,7 +1647,9 @@ var HauntCooldownMS = [HauntRanks + 1]int32{0, 15000, 15000, 15000}
 var HauntManaCost = [HauntRanks + 1]float64{0, 170, 200, 240}
 var HauntManaCostPct = [HauntRanks + 1]float64{0, 0, 0, 0}
 var HauntSpellCoeff = [HauntRanks + 1]float64{0.4286, 0.429, 0.429, 0.429}
-var HauntBaseDamage = [HauntRanks + 1][]float64{{403501, 403501}, {125, 125}, {163, 163}, {212, 212}}
+var HauntBaseDamage = [HauntRanks + 1][]float64{{403501, 403501}, {114.9267, 135.0733}, {149.8645, 176.1355}, {194.9158, 229.0842}}
+var HauntPointsPerLevel = [HauntRanks + 1]float64{0, 0, 0, 0}
+var HauntMaxLevel = [HauntRanks + 1]int{0, 0, 0, 0}
 
 // unconfirmed: Haunt coefficient derived from the vanilla convention (rank 0)
 
@@ -1450,6 +1664,8 @@ var HealRagnarosManaCost = [HealRagnarosRanks + 1]float64{0}
 var HealRagnarosManaCostPct = [HealRagnarosRanks + 1]float64{0}
 var HealRagnarosSpellCoeff = [HealRagnarosRanks + 1]float64{0.6667}
 var HealRagnarosBaseDamage = [HealRagnarosRanks + 1][]float64{{1000, 1000}}
+var HealRagnarosPointsPerLevel = [HealRagnarosRanks + 1]float64{0}
+var HealRagnarosMaxLevel = [HealRagnarosRanks + 1]int{0}
 
 // unconfirmed: Heal Ragnaros coefficient derived from the vanilla convention (rank 0)
 
@@ -1464,6 +1680,8 @@ var HealthFunnelManaCost = [HealthFunnelRanks + 1]float64{0, 11, 15, 24, 39, 45,
 var HealthFunnelManaCostPct = [HealthFunnelRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var HealthFunnelSpellCoeff = [HealthFunnelRanks + 1]float64{0, 0.6667, 0.6667, 0.6667, 0.6667, 0.6667, 0.6667, 0.6667}
 var HealthFunnelBaseDamage = [HealthFunnelRanks + 1][]float64{{0, 0}, {12, 12}, {24, 24}, {43, 43}, {64, 64}, {89, 89}, {119, 119}, {153, 153}}
+var HealthFunnelPointsPerLevel = [HealthFunnelRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
+var HealthFunnelMaxLevel = [HealthFunnelRanks + 1]int{0, 0, 0, 0, 0, 0, 0, 0}
 
 // unconfirmed: Health Funnel coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4, rank 5, rank 6, rank 7)
 
@@ -1478,6 +1696,8 @@ var HealthstoneManaCost = [HealthstoneRanks + 1]float64{0}
 var HealthstoneManaCostPct = [HealthstoneRanks + 1]float64{0}
 var HealthstoneSpellCoeff = [HealthstoneRanks + 1]float64{0.4286}
 var HealthstoneBaseDamage = [HealthstoneRanks + 1][]float64{{600, 600}}
+var HealthstonePointsPerLevel = [HealthstoneRanks + 1]float64{0}
+var HealthstoneMaxLevel = [HealthstoneRanks + 1]int{0}
 
 // unconfirmed: Healthstone coefficient derived from the vanilla convention (rank 0)
 // Healthstone rank 0: kept id 23473 (spell_level 34); dropped 5720 (spell_level 34), 23472 (spell_level 34)
@@ -1493,6 +1713,8 @@ var HellfireManaCost = [HellfireRanks + 1]float64{0, 645, 975, 1300}
 var HellfireManaCostPct = [HellfireRanks + 1]float64{0, 0, 0, 0}
 var HellfireSpellCoeff = [HellfireRanks + 1]float64{0, 1, 1, 1}
 var HellfireBaseDamage = [HellfireRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}}
+var HellfirePointsPerLevel = [HellfireRanks + 1]float64{0, 0, 0, 0}
+var HellfireMaxLevel = [HellfireRanks + 1]int{0, 40, 52, 64}
 
 // Hellfire Effect: ranks 1-3 present, from build 1.60.1.70009.
 const HellfireEffectRanks = 3
@@ -1505,6 +1727,8 @@ var HellfireEffectManaCost = [HellfireEffectRanks + 1]float64{0, 0, 0, 0}
 var HellfireEffectManaCostPct = [HellfireEffectRanks + 1]float64{0, 0, 0, 0}
 var HellfireEffectSpellCoeff = [HellfireEffectRanks + 1]float64{0, 0.022, 0.022, 0.022}
 var HellfireEffectBaseDamage = [HellfireEffectRanks + 1][]float64{{0, 0}, {82, 82}, {137, 137}, {206, 206}}
+var HellfireEffectPointsPerLevel = [HellfireEffectRanks + 1]float64{0, 0.4, 0.5, 0.7}
+var HellfireEffectMaxLevel = [HellfireEffectRanks + 1]int{0, 40, 52, 64}
 
 // Howl of Terror: ranks 1-2 present, from build 1.60.1.70009.
 const HowlOfTerrorRanks = 2
@@ -1517,6 +1741,8 @@ var HowlOfTerrorManaCost = [HowlOfTerrorRanks + 1]float64{0, 150, 200}
 var HowlOfTerrorManaCostPct = [HowlOfTerrorRanks + 1]float64{0, 0, 0}
 var HowlOfTerrorSpellCoeff = [HowlOfTerrorRanks + 1]float64{0, 0.6667, 1}
 var HowlOfTerrorBaseDamage = [HowlOfTerrorRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}}
+var HowlOfTerrorPointsPerLevel = [HowlOfTerrorRanks + 1]float64{0, 0, 0}
+var HowlOfTerrorMaxLevel = [HowlOfTerrorRanks + 1]int{0, 52, 66}
 
 // unconfirmed: Howl of Terror coefficient derived from the vanilla convention (rank 1, rank 2)
 
@@ -1531,6 +1757,8 @@ var HunterOfChaosManaCost = [HunterOfChaosRanks + 1]float64{0}
 var HunterOfChaosManaCostPct = [HunterOfChaosRanks + 1]float64{0}
 var HunterOfChaosSpellCoeff = [HunterOfChaosRanks + 1]float64{1}
 var HunterOfChaosBaseDamage = [HunterOfChaosRanks + 1][]float64{{0, 0}}
+var HunterOfChaosPointsPerLevel = [HunterOfChaosRanks + 1]float64{0}
+var HunterOfChaosMaxLevel = [HunterOfChaosRanks + 1]int{0}
 
 // skipped: "Immolate" already has a hand-written ImmolateRanks elsewhere in this package.
 
@@ -1544,7 +1772,9 @@ var ImmolateCastTimeReductionCooldownMS = [ImmolateCastTimeReductionRanks + 1]in
 var ImmolateCastTimeReductionManaCost = [ImmolateCastTimeReductionRanks + 1]float64{0}
 var ImmolateCastTimeReductionManaCostPct = [ImmolateCastTimeReductionRanks + 1]float64{0}
 var ImmolateCastTimeReductionSpellCoeff = [ImmolateCastTimeReductionRanks + 1]float64{1}
-var ImmolateCastTimeReductionBaseDamage = [ImmolateCastTimeReductionRanks + 1][]float64{{-200, -200}}
+var ImmolateCastTimeReductionBaseDamage = [ImmolateCastTimeReductionRanks + 1][]float64{{0, 0}}
+var ImmolateCastTimeReductionPointsPerLevel = [ImmolateCastTimeReductionRanks + 1]float64{0}
+var ImmolateCastTimeReductionMaxLevel = [ImmolateCastTimeReductionRanks + 1]int{0}
 
 // Immolation Aura: ranks 0 present, from build 1.60.1.70009.
 const ImmolationAuraRanks = 0
@@ -1557,6 +1787,8 @@ var ImmolationAuraManaCost = [ImmolationAuraRanks + 1]float64{0}
 var ImmolationAuraManaCostPct = [ImmolationAuraRanks + 1]float64{0}
 var ImmolationAuraSpellCoeff = [ImmolationAuraRanks + 1]float64{0.045}
 var ImmolationAuraBaseDamage = [ImmolationAuraRanks + 1][]float64{{20, 20}}
+var ImmolationAuraPointsPerLevel = [ImmolationAuraRanks + 1]float64{0}
+var ImmolationAuraMaxLevel = [ImmolationAuraRanks + 1]int{0}
 
 // Immolation Aura rank 0: kept id 427725 (spell_level 50); dropped 427726 (spell_level 1), 431757 (spell_level 1), 469357 (spell_level 1)
 
@@ -1571,6 +1803,8 @@ var ImpishDelightManaCost = [ImpishDelightRanks + 1]float64{0}
 var ImpishDelightManaCostPct = [ImpishDelightRanks + 1]float64{0}
 var ImpishDelightSpellCoeff = [ImpishDelightRanks + 1]float64{1}
 var ImpishDelightBaseDamage = [ImpishDelightRanks + 1][]float64{{15, 15}}
+var ImpishDelightPointsPerLevel = [ImpishDelightRanks + 1]float64{0}
+var ImpishDelightMaxLevel = [ImpishDelightRanks + 1]int{0}
 
 // Implements of Unspoken Names Pet Bonus: ranks 0 present, from build 1.60.1.70009.
 const ImplementsOfUnspokenNamesPetBonusRanks = 0
@@ -1583,6 +1817,8 @@ var ImplementsOfUnspokenNamesPetBonusManaCost = [ImplementsOfUnspokenNamesPetBon
 var ImplementsOfUnspokenNamesPetBonusManaCostPct = [ImplementsOfUnspokenNamesPetBonusRanks + 1]float64{0}
 var ImplementsOfUnspokenNamesPetBonusSpellCoeff = [ImplementsOfUnspokenNamesPetBonusRanks + 1]float64{0.4286}
 var ImplementsOfUnspokenNamesPetBonusBaseDamage = [ImplementsOfUnspokenNamesPetBonusRanks + 1][]float64{{5, 5}}
+var ImplementsOfUnspokenNamesPetBonusPointsPerLevel = [ImplementsOfUnspokenNamesPetBonusRanks + 1]float64{0}
+var ImplementsOfUnspokenNamesPetBonusMaxLevel = [ImplementsOfUnspokenNamesPetBonusRanks + 1]int{0}
 
 // unconfirmed: Implements of Unspoken Names Pet Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -1597,6 +1833,8 @@ var ImprovedBaneOfAgonyManaCost = [ImprovedBaneOfAgonyRanks + 1]float64{0}
 var ImprovedBaneOfAgonyManaCostPct = [ImprovedBaneOfAgonyRanks + 1]float64{0}
 var ImprovedBaneOfAgonySpellCoeff = [ImprovedBaneOfAgonyRanks + 1]float64{1}
 var ImprovedBaneOfAgonyBaseDamage = [ImprovedBaneOfAgonyRanks + 1][]float64{{2, 2}}
+var ImprovedBaneOfAgonyPointsPerLevel = [ImprovedBaneOfAgonyRanks + 1]float64{0}
+var ImprovedBaneOfAgonyMaxLevel = [ImprovedBaneOfAgonyRanks + 1]int{0}
 
 // Improved Corruption: ranks 0 present, from build 1.60.1.70009.
 const ImprovedCorruptionRanks = 0
@@ -1609,6 +1847,8 @@ var ImprovedCorruptionManaCost = [ImprovedCorruptionRanks + 1]float64{0}
 var ImprovedCorruptionManaCostPct = [ImprovedCorruptionRanks + 1]float64{0}
 var ImprovedCorruptionSpellCoeff = [ImprovedCorruptionRanks + 1]float64{1}
 var ImprovedCorruptionBaseDamage = [ImprovedCorruptionRanks + 1][]float64{{2, 2}}
+var ImprovedCorruptionPointsPerLevel = [ImprovedCorruptionRanks + 1]float64{0}
+var ImprovedCorruptionMaxLevel = [ImprovedCorruptionRanks + 1]int{0}
 
 // Improved Corruption rank 0: kept id 24486 (spell_level 0); dropped 17810 (spell_level 0)
 
@@ -1622,7 +1862,9 @@ var ImprovedCurseOfExhaustionCooldownMS = [ImprovedCurseOfExhaustionRanks + 1]in
 var ImprovedCurseOfExhaustionManaCost = [ImprovedCurseOfExhaustionRanks + 1]float64{0, 0, 0, 0, 0}
 var ImprovedCurseOfExhaustionManaCostPct = [ImprovedCurseOfExhaustionRanks + 1]float64{0, 0, 0, 0, 0}
 var ImprovedCurseOfExhaustionSpellCoeff = [ImprovedCurseOfExhaustionRanks + 1]float64{0, 1, 1, 1, 1}
-var ImprovedCurseOfExhaustionBaseDamage = [ImprovedCurseOfExhaustionRanks + 1][]float64{{0, 0}, {-5, -5}, {-10, -10}, {-15, -15}, {-20, -20}}
+var ImprovedCurseOfExhaustionBaseDamage = [ImprovedCurseOfExhaustionRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
+var ImprovedCurseOfExhaustionPointsPerLevel = [ImprovedCurseOfExhaustionRanks + 1]float64{0, 0, 0, 0, 0}
+var ImprovedCurseOfExhaustionMaxLevel = [ImprovedCurseOfExhaustionRanks + 1]int{0, 0, 0, 0, 0}
 
 // Improved Curse of Weakness: ranks 1-3 present, from build 1.60.1.70009.
 const ImprovedCurseOfWeaknessRanks = 3
@@ -1635,6 +1877,8 @@ var ImprovedCurseOfWeaknessManaCost = [ImprovedCurseOfWeaknessRanks + 1]float64{
 var ImprovedCurseOfWeaknessManaCostPct = [ImprovedCurseOfWeaknessRanks + 1]float64{0, 0, 0, 0}
 var ImprovedCurseOfWeaknessSpellCoeff = [ImprovedCurseOfWeaknessRanks + 1]float64{0, 1, 1, 1}
 var ImprovedCurseOfWeaknessBaseDamage = [ImprovedCurseOfWeaknessRanks + 1][]float64{{0, 0}, {6, 6}, {13, 13}, {20, 20}}
+var ImprovedCurseOfWeaknessPointsPerLevel = [ImprovedCurseOfWeaknessRanks + 1]float64{0, 0, 0, 0}
+var ImprovedCurseOfWeaknessMaxLevel = [ImprovedCurseOfWeaknessRanks + 1]int{0, 0, 0, 0}
 
 // Improved Death Coil: ranks 0 present, from build 1.60.1.70009.
 const ImprovedDeathCoilRanks = 0
@@ -1646,7 +1890,9 @@ var ImprovedDeathCoilCooldownMS = [ImprovedDeathCoilRanks + 1]int32{0}
 var ImprovedDeathCoilManaCost = [ImprovedDeathCoilRanks + 1]float64{0}
 var ImprovedDeathCoilManaCostPct = [ImprovedDeathCoilRanks + 1]float64{0}
 var ImprovedDeathCoilSpellCoeff = [ImprovedDeathCoilRanks + 1]float64{1}
-var ImprovedDeathCoilBaseDamage = [ImprovedDeathCoilRanks + 1][]float64{{-15, -15}}
+var ImprovedDeathCoilBaseDamage = [ImprovedDeathCoilRanks + 1][]float64{{0, 0}}
+var ImprovedDeathCoilPointsPerLevel = [ImprovedDeathCoilRanks + 1]float64{0}
+var ImprovedDeathCoilMaxLevel = [ImprovedDeathCoilRanks + 1]int{0}
 
 // Improved Drain Life: ranks 0 present, from build 1.60.1.70009.
 const ImprovedDrainLifeRanks = 0
@@ -1659,6 +1905,8 @@ var ImprovedDrainLifeManaCost = [ImprovedDrainLifeRanks + 1]float64{0}
 var ImprovedDrainLifeManaCostPct = [ImprovedDrainLifeRanks + 1]float64{0}
 var ImprovedDrainLifeSpellCoeff = [ImprovedDrainLifeRanks + 1]float64{0.4286}
 var ImprovedDrainLifeBaseDamage = [ImprovedDrainLifeRanks + 1][]float64{{15, 15}}
+var ImprovedDrainLifePointsPerLevel = [ImprovedDrainLifeRanks + 1]float64{0}
+var ImprovedDrainLifeMaxLevel = [ImprovedDrainLifeRanks + 1]int{0}
 
 // unconfirmed: Improved Drain Life coefficient derived from the vanilla convention (rank 0)
 
@@ -1673,6 +1921,8 @@ var ImprovedDrainsManaCost = [ImprovedDrainsRanks + 1]float64{0}
 var ImprovedDrainsManaCostPct = [ImprovedDrainsRanks + 1]float64{0}
 var ImprovedDrainsSpellCoeff = [ImprovedDrainsRanks + 1]float64{1}
 var ImprovedDrainsBaseDamage = [ImprovedDrainsRanks + 1][]float64{{20, 20}}
+var ImprovedDrainsPointsPerLevel = [ImprovedDrainsRanks + 1]float64{0}
+var ImprovedDrainsMaxLevel = [ImprovedDrainsRanks + 1]int{0}
 
 // Improved Felhunter: ranks 0 present, from build 1.60.1.70009.
 const ImprovedFelhunterRanks = 0
@@ -1685,6 +1935,8 @@ var ImprovedFelhunterManaCost = [ImprovedFelhunterRanks + 1]float64{0}
 var ImprovedFelhunterManaCostPct = [ImprovedFelhunterRanks + 1]float64{0}
 var ImprovedFelhunterSpellCoeff = [ImprovedFelhunterRanks + 1]float64{0.4286}
 var ImprovedFelhunterBaseDamage = [ImprovedFelhunterRanks + 1][]float64{{30, 30}}
+var ImprovedFelhunterPointsPerLevel = [ImprovedFelhunterRanks + 1]float64{0}
+var ImprovedFelhunterMaxLevel = [ImprovedFelhunterRanks + 1]int{0}
 
 // unconfirmed: Improved Felhunter coefficient derived from the vanilla convention (rank 0)
 
@@ -1698,7 +1950,9 @@ var ImprovedFireboltCooldownMS = [ImprovedFireboltRanks + 1]int32{0, 0, 0}
 var ImprovedFireboltManaCost = [ImprovedFireboltRanks + 1]float64{0, 0, 0}
 var ImprovedFireboltManaCostPct = [ImprovedFireboltRanks + 1]float64{0, 0, 0}
 var ImprovedFireboltSpellCoeff = [ImprovedFireboltRanks + 1]float64{0, 1, 1}
-var ImprovedFireboltBaseDamage = [ImprovedFireboltRanks + 1][]float64{{0, 0}, {-500, -500}, {-1000, -1000}}
+var ImprovedFireboltBaseDamage = [ImprovedFireboltRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}}
+var ImprovedFireboltPointsPerLevel = [ImprovedFireboltRanks + 1]float64{0, 0, 0}
+var ImprovedFireboltMaxLevel = [ImprovedFireboltRanks + 1]int{0, 0, 0}
 
 // Improved Firestone: ranks 1-2 present, from build 1.60.1.70009.
 const ImprovedFirestoneRanks = 2
@@ -1711,6 +1965,8 @@ var ImprovedFirestoneManaCost = [ImprovedFirestoneRanks + 1]float64{0, 0, 0}
 var ImprovedFirestoneManaCostPct = [ImprovedFirestoneRanks + 1]float64{0, 0, 0}
 var ImprovedFirestoneSpellCoeff = [ImprovedFirestoneRanks + 1]float64{0, 1, 1}
 var ImprovedFirestoneBaseDamage = [ImprovedFirestoneRanks + 1][]float64{{0, 0}, {15, 15}, {30, 30}}
+var ImprovedFirestonePointsPerLevel = [ImprovedFirestoneRanks + 1]float64{0, 0, 0}
+var ImprovedFirestoneMaxLevel = [ImprovedFirestoneRanks + 1]int{0, 0, 0}
 
 // Improved Health Funnel: ranks 0 present, from build 1.60.1.70009.
 const ImprovedHealthFunnelRanks = 0
@@ -1723,6 +1979,8 @@ var ImprovedHealthFunnelManaCost = [ImprovedHealthFunnelRanks + 1]float64{0}
 var ImprovedHealthFunnelManaCostPct = [ImprovedHealthFunnelRanks + 1]float64{0}
 var ImprovedHealthFunnelSpellCoeff = [ImprovedHealthFunnelRanks + 1]float64{1}
 var ImprovedHealthFunnelBaseDamage = [ImprovedHealthFunnelRanks + 1][]float64{{40, 40}}
+var ImprovedHealthFunnelPointsPerLevel = [ImprovedHealthFunnelRanks + 1]float64{0}
+var ImprovedHealthFunnelMaxLevel = [ImprovedHealthFunnelRanks + 1]int{0}
 
 // Improved Healthstone: ranks 1-2 present, from build 1.60.1.70009.
 const ImprovedHealthstoneRanks = 2
@@ -1735,6 +1993,8 @@ var ImprovedHealthstoneManaCost = [ImprovedHealthstoneRanks + 1]float64{0, 0, 0}
 var ImprovedHealthstoneManaCostPct = [ImprovedHealthstoneRanks + 1]float64{0, 0, 0}
 var ImprovedHealthstoneSpellCoeff = [ImprovedHealthstoneRanks + 1]float64{0, 1, 1}
 var ImprovedHealthstoneBaseDamage = [ImprovedHealthstoneRanks + 1][]float64{{0, 0}, {10, 10}, {20, 20}}
+var ImprovedHealthstonePointsPerLevel = [ImprovedHealthstoneRanks + 1]float64{0, 0, 0}
+var ImprovedHealthstoneMaxLevel = [ImprovedHealthstoneRanks + 1]int{0, 0, 0}
 
 // Improved Immolate: ranks 1-5 present, from build 1.60.1.70009.
 const ImprovedImmolateRanks = 5
@@ -1747,6 +2007,8 @@ var ImprovedImmolateManaCost = [ImprovedImmolateRanks + 1]float64{0, 0, 0, 0, 0,
 var ImprovedImmolateManaCostPct = [ImprovedImmolateRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var ImprovedImmolateSpellCoeff = [ImprovedImmolateRanks + 1]float64{0, 1, 1, 1, 1, 1}
 var ImprovedImmolateBaseDamage = [ImprovedImmolateRanks + 1][]float64{{0, 0}, {5, 5}, {10, 10}, {15, 15}, {20, 20}, {25, 25}}
+var ImprovedImmolatePointsPerLevel = [ImprovedImmolateRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var ImprovedImmolateMaxLevel = [ImprovedImmolateRanks + 1]int{0, 0, 0, 0, 0, 0}
 
 // Improved Imp: ranks 0 present, from build 1.60.1.70009.
 const ImprovedImpRanks = 0
@@ -1759,6 +2021,8 @@ var ImprovedImpManaCost = [ImprovedImpRanks + 1]float64{0}
 var ImprovedImpManaCostPct = [ImprovedImpRanks + 1]float64{0}
 var ImprovedImpSpellCoeff = [ImprovedImpRanks + 1]float64{1}
 var ImprovedImpBaseDamage = [ImprovedImpRanks + 1][]float64{{30, 30}}
+var ImprovedImpPointsPerLevel = [ImprovedImpRanks + 1]float64{0}
+var ImprovedImpMaxLevel = [ImprovedImpRanks + 1]int{0}
 
 // Improved Lash of Pain: ranks 1-2 present, from build 1.60.1.70009.
 const ImprovedLashOfPainRanks = 2
@@ -1770,7 +2034,9 @@ var ImprovedLashOfPainCooldownMS = [ImprovedLashOfPainRanks + 1]int32{0, 0, 0}
 var ImprovedLashOfPainManaCost = [ImprovedLashOfPainRanks + 1]float64{0, 0, 0}
 var ImprovedLashOfPainManaCostPct = [ImprovedLashOfPainRanks + 1]float64{0, 0, 0}
 var ImprovedLashOfPainSpellCoeff = [ImprovedLashOfPainRanks + 1]float64{0, 1, 1}
-var ImprovedLashOfPainBaseDamage = [ImprovedLashOfPainRanks + 1][]float64{{0, 0}, {-3000, -3000}, {-6000, -6000}}
+var ImprovedLashOfPainBaseDamage = [ImprovedLashOfPainRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}}
+var ImprovedLashOfPainPointsPerLevel = [ImprovedLashOfPainRanks + 1]float64{0, 0, 0}
+var ImprovedLashOfPainMaxLevel = [ImprovedLashOfPainRanks + 1]int{0, 0, 0}
 
 // Improved Life Tap: ranks 0 present, from build 1.60.1.70009.
 const ImprovedLifeTapRanks = 0
@@ -1783,6 +2049,8 @@ var ImprovedLifeTapManaCost = [ImprovedLifeTapRanks + 1]float64{0}
 var ImprovedLifeTapManaCostPct = [ImprovedLifeTapRanks + 1]float64{0}
 var ImprovedLifeTapSpellCoeff = [ImprovedLifeTapRanks + 1]float64{1}
 var ImprovedLifeTapBaseDamage = [ImprovedLifeTapRanks + 1][]float64{{0, 0}}
+var ImprovedLifeTapPointsPerLevel = [ImprovedLifeTapRanks + 1]float64{0}
+var ImprovedLifeTapMaxLevel = [ImprovedLifeTapRanks + 1]int{0}
 
 // Improved Rain of Fire/Hellfire: ranks 0 present, from build 1.60.1.70009.
 const ImprovedRainOfFireHellfireRanks = 0
@@ -1795,6 +2063,8 @@ var ImprovedRainOfFireHellfireManaCost = [ImprovedRainOfFireHellfireRanks + 1]fl
 var ImprovedRainOfFireHellfireManaCostPct = [ImprovedRainOfFireHellfireRanks + 1]float64{0}
 var ImprovedRainOfFireHellfireSpellCoeff = [ImprovedRainOfFireHellfireRanks + 1]float64{0.4286}
 var ImprovedRainOfFireHellfireBaseDamage = [ImprovedRainOfFireHellfireRanks + 1][]float64{{1, 1}}
+var ImprovedRainOfFireHellfirePointsPerLevel = [ImprovedRainOfFireHellfireRanks + 1]float64{0}
+var ImprovedRainOfFireHellfireMaxLevel = [ImprovedRainOfFireHellfireRanks + 1]int{0}
 
 // unconfirmed: Improved Rain of Fire/Hellfire coefficient derived from the vanilla convention (rank 0)
 
@@ -1809,6 +2079,8 @@ var ImprovedSayaadManaCost = [ImprovedSayaadRanks + 1]float64{0}
 var ImprovedSayaadManaCostPct = [ImprovedSayaadRanks + 1]float64{0}
 var ImprovedSayaadSpellCoeff = [ImprovedSayaadRanks + 1]float64{1}
 var ImprovedSayaadBaseDamage = [ImprovedSayaadRanks + 1][]float64{{30, 30}}
+var ImprovedSayaadPointsPerLevel = [ImprovedSayaadRanks + 1]float64{0}
+var ImprovedSayaadMaxLevel = [ImprovedSayaadRanks + 1]int{0}
 
 // Improved Shadow Bolt: ranks 0 present, from build 1.60.1.70009.
 const ImprovedShadowBoltRanks = 0
@@ -1821,6 +2093,8 @@ var ImprovedShadowBoltManaCost = [ImprovedShadowBoltRanks + 1]float64{0}
 var ImprovedShadowBoltManaCostPct = [ImprovedShadowBoltRanks + 1]float64{0}
 var ImprovedShadowBoltSpellCoeff = [ImprovedShadowBoltRanks + 1]float64{1}
 var ImprovedShadowBoltBaseDamage = [ImprovedShadowBoltRanks + 1][]float64{{0, 0}}
+var ImprovedShadowBoltPointsPerLevel = [ImprovedShadowBoltRanks + 1]float64{0}
+var ImprovedShadowBoltMaxLevel = [ImprovedShadowBoltRanks + 1]int{0}
 
 // Improved Soulstone: ranks 0 present, from build 1.60.1.70009.
 const ImprovedSoulstoneRanks = 0
@@ -1832,7 +2106,9 @@ var ImprovedSoulstoneCooldownMS = [ImprovedSoulstoneRanks + 1]int32{0}
 var ImprovedSoulstoneManaCost = [ImprovedSoulstoneRanks + 1]float64{0}
 var ImprovedSoulstoneManaCostPct = [ImprovedSoulstoneRanks + 1]float64{0}
 var ImprovedSoulstoneSpellCoeff = [ImprovedSoulstoneRanks + 1]float64{0.4286}
-var ImprovedSoulstoneBaseDamage = [ImprovedSoulstoneRanks + 1][]float64{{-20, -20}}
+var ImprovedSoulstoneBaseDamage = [ImprovedSoulstoneRanks + 1][]float64{{0, 0}}
+var ImprovedSoulstonePointsPerLevel = [ImprovedSoulstoneRanks + 1]float64{0}
+var ImprovedSoulstoneMaxLevel = [ImprovedSoulstoneRanks + 1]int{0}
 
 // unconfirmed: Improved Soulstone coefficient derived from the vanilla convention (rank 0)
 
@@ -1847,6 +2123,8 @@ var ImprovedSpellstoneManaCost = [ImprovedSpellstoneRanks + 1]float64{0, 0, 0}
 var ImprovedSpellstoneManaCostPct = [ImprovedSpellstoneRanks + 1]float64{0, 0, 0}
 var ImprovedSpellstoneSpellCoeff = [ImprovedSpellstoneRanks + 1]float64{0, 1, 1}
 var ImprovedSpellstoneBaseDamage = [ImprovedSpellstoneRanks + 1][]float64{{0, 0}, {15, 15}, {30, 30}}
+var ImprovedSpellstonePointsPerLevel = [ImprovedSpellstoneRanks + 1]float64{0, 0, 0}
+var ImprovedSpellstoneMaxLevel = [ImprovedSpellstoneRanks + 1]int{0, 0, 0}
 
 // Improved Subjugate Demon: ranks 1-5 present, from build 1.60.1.70009.
 const ImprovedSubjugateDemonRanks = 5
@@ -1859,6 +2137,8 @@ var ImprovedSubjugateDemonManaCost = [ImprovedSubjugateDemonRanks + 1]float64{0,
 var ImprovedSubjugateDemonManaCostPct = [ImprovedSubjugateDemonRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var ImprovedSubjugateDemonSpellCoeff = [ImprovedSubjugateDemonRanks + 1]float64{0, 1, 1, 1, 1, 1}
 var ImprovedSubjugateDemonBaseDamage = [ImprovedSubjugateDemonRanks + 1][]float64{{0, 0}, {2, 2}, {4, 4}, {6, 6}, {8, 8}, {10, 10}}
+var ImprovedSubjugateDemonPointsPerLevel = [ImprovedSubjugateDemonRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var ImprovedSubjugateDemonMaxLevel = [ImprovedSubjugateDemonRanks + 1]int{0, 0, 0, 0, 0, 0}
 
 // Improved Voidwalker: ranks 0 present, from build 1.60.1.70009.
 const ImprovedVoidwalkerRanks = 0
@@ -1871,6 +2151,8 @@ var ImprovedVoidwalkerManaCost = [ImprovedVoidwalkerRanks + 1]float64{0}
 var ImprovedVoidwalkerManaCostPct = [ImprovedVoidwalkerRanks + 1]float64{0}
 var ImprovedVoidwalkerSpellCoeff = [ImprovedVoidwalkerRanks + 1]float64{1}
 var ImprovedVoidwalkerBaseDamage = [ImprovedVoidwalkerRanks + 1][]float64{{30, 30}}
+var ImprovedVoidwalkerPointsPerLevel = [ImprovedVoidwalkerRanks + 1]float64{0}
+var ImprovedVoidwalkerMaxLevel = [ImprovedVoidwalkerRanks + 1]int{0}
 
 // skipped: "Incinerate" already has a hand-written IncinerateRanks elsewhere in this package.
 
@@ -1885,6 +2167,8 @@ var IncreaseFireDamManaCost = [IncreaseFireDamRanks + 1]float64{0, 0, 0, 0, 0}
 var IncreaseFireDamManaCostPct = [IncreaseFireDamRanks + 1]float64{0, 0, 0, 0, 0}
 var IncreaseFireDamSpellCoeff = [IncreaseFireDamRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 0.4286}
 var IncreaseFireDamBaseDamage = [IncreaseFireDamRanks + 1][]float64{{0, 0}, {10, 10}, {14, 14}, {17, 17}, {21, 21}}
+var IncreaseFireDamPointsPerLevel = [IncreaseFireDamRanks + 1]float64{0, 0, 0, 0, 0}
+var IncreaseFireDamMaxLevel = [IncreaseFireDamRanks + 1]int{0, 0, 0, 0, 0}
 
 // unconfirmed: Increase Fire Dam coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4)
 
@@ -1899,6 +2183,8 @@ var IncreaseShadowDamManaCost = [IncreaseShadowDamRanks + 1]float64{0, 0, 0, 0}
 var IncreaseShadowDamManaCostPct = [IncreaseShadowDamRanks + 1]float64{0, 0, 0, 0}
 var IncreaseShadowDamSpellCoeff = [IncreaseShadowDamRanks + 1]float64{0, 0.4286, 0.4286, 0.4286}
 var IncreaseShadowDamBaseDamage = [IncreaseShadowDamRanks + 1][]float64{{0, 0}, {14, 14}, {17, 17}, {21, 21}}
+var IncreaseShadowDamPointsPerLevel = [IncreaseShadowDamRanks + 1]float64{0, 0, 0, 0}
+var IncreaseShadowDamMaxLevel = [IncreaseShadowDamRanks + 1]int{0, 0, 0, 0}
 
 // unconfirmed: Increase Shadow Dam coefficient derived from the vanilla convention (rank 1, rank 2, rank 3)
 
@@ -1912,7 +2198,9 @@ var InfernalArmorCooldownMS = [InfernalArmorRanks + 1]int32{60000}
 var InfernalArmorManaCost = [InfernalArmorRanks + 1]float64{0}
 var InfernalArmorManaCostPct = [InfernalArmorRanks + 1]float64{3}
 var InfernalArmorSpellCoeff = [InfernalArmorRanks + 1]float64{0.6667}
-var InfernalArmorBaseDamage = [InfernalArmorRanks + 1][]float64{{-20, -20}}
+var InfernalArmorBaseDamage = [InfernalArmorRanks + 1][]float64{{0, 0}}
+var InfernalArmorPointsPerLevel = [InfernalArmorRanks + 1]float64{0}
+var InfernalArmorMaxLevel = [InfernalArmorRanks + 1]int{0}
 
 // unconfirmed: Infernal Armor coefficient derived from the vanilla convention (rank 0)
 
@@ -1926,7 +2214,9 @@ var InfernalFireCooldownMS = [InfernalFireRanks + 1]int32{5000}
 var InfernalFireManaCost = [InfernalFireRanks + 1]float64{0}
 var InfernalFireManaCostPct = [InfernalFireRanks + 1]float64{0}
 var InfernalFireSpellCoeff = [InfernalFireRanks + 1]float64{1}
-var InfernalFireBaseDamage = [InfernalFireRanks + 1][]float64{{2000, 2000}}
+var InfernalFireBaseDamage = [InfernalFireRanks + 1][]float64{{1651, 2349}}
+var InfernalFirePointsPerLevel = [InfernalFireRanks + 1]float64{0}
+var InfernalFireMaxLevel = [InfernalFireRanks + 1]int{60}
 
 // Infernalist: ranks 0 present, from build 1.60.1.70009.
 const InfernalistRanks = 0
@@ -1939,6 +2229,8 @@ var InfernalistManaCost = [InfernalistRanks + 1]float64{0}
 var InfernalistManaCostPct = [InfernalistRanks + 1]float64{0}
 var InfernalistSpellCoeff = [InfernalistRanks + 1]float64{1.3333}
 var InfernalistBaseDamage = [InfernalistRanks + 1][]float64{{5, 5}}
+var InfernalistPointsPerLevel = [InfernalistRanks + 1]float64{0}
+var InfernalistMaxLevel = [InfernalistRanks + 1]int{0}
 
 // unconfirmed: Infernalist coefficient derived from the vanilla convention (rank 0)
 
@@ -1953,6 +2245,8 @@ var InfernalistArmorManaCost = [InfernalistArmorRanks + 1]float64{0}
 var InfernalistArmorManaCostPct = [InfernalistArmorRanks + 1]float64{0}
 var InfernalistArmorSpellCoeff = [InfernalistArmorRanks + 1]float64{1.3333}
 var InfernalistArmorBaseDamage = [InfernalistArmorRanks + 1][]float64{{20, 20}}
+var InfernalistArmorPointsPerLevel = [InfernalistArmorRanks + 1]float64{0}
+var InfernalistArmorMaxLevel = [InfernalistArmorRanks + 1]int{0}
 
 // unconfirmed: Infernalist Armor coefficient derived from the vanilla convention (rank 0)
 
@@ -1967,6 +2261,8 @@ var InfernoManaCost = [InfernoRanks + 1]float64{0}
 var InfernoManaCostPct = [InfernoRanks + 1]float64{100}
 var InfernoSpellCoeff = [InfernoRanks + 1]float64{1}
 var InfernoBaseDamage = [InfernoRanks + 1][]float64{{50, 50}}
+var InfernoPointsPerLevel = [InfernoRanks + 1]float64{1}
+var InfernoMaxLevel = [InfernoRanks + 1]int{60}
 
 // Infusion of Souls: ranks 0 present, from build 1.60.1.70009.
 const InfusionOfSoulsRanks = 0
@@ -1979,6 +2275,8 @@ var InfusionOfSoulsManaCost = [InfusionOfSoulsRanks + 1]float64{0}
 var InfusionOfSoulsManaCostPct = [InfusionOfSoulsRanks + 1]float64{0}
 var InfusionOfSoulsSpellCoeff = [InfusionOfSoulsRanks + 1]float64{0.4286}
 var InfusionOfSoulsBaseDamage = [InfusionOfSoulsRanks + 1][]float64{{0, 0}}
+var InfusionOfSoulsPointsPerLevel = [InfusionOfSoulsRanks + 1]float64{0}
+var InfusionOfSoulsMaxLevel = [InfusionOfSoulsRanks + 1]int{0}
 
 // unconfirmed: Infusion of Souls coefficient derived from the vanilla convention (rank 0)
 
@@ -1993,6 +2291,8 @@ var IntensityManaCost = [IntensityRanks + 1]float64{0}
 var IntensityManaCostPct = [IntensityRanks + 1]float64{0}
 var IntensitySpellCoeff = [IntensityRanks + 1]float64{1}
 var IntensityBaseDamage = [IntensityRanks + 1][]float64{{70, 70}}
+var IntensityPointsPerLevel = [IntensityRanks + 1]float64{0}
+var IntensityMaxLevel = [IntensityRanks + 1]int{0}
 
 // Intercept: ranks 0 present, from build 1.60.1.70009.
 const InterceptRanks = 0
@@ -2005,6 +2305,8 @@ var InterceptManaCost = [InterceptRanks + 1]float64{0}
 var InterceptManaCostPct = [InterceptRanks + 1]float64{10}
 var InterceptSpellCoeff = [InterceptRanks + 1]float64{1}
 var InterceptBaseDamage = [InterceptRanks + 1][]float64{{0, 0}}
+var InterceptPointsPerLevel = [InterceptRanks + 1]float64{0}
+var InterceptMaxLevel = [InterceptRanks + 1]int{0}
 
 // Invocation: ranks 0 present, from build 1.60.1.70009.
 const InvocationRanks = 0
@@ -2017,6 +2319,8 @@ var InvocationManaCost = [InvocationRanks + 1]float64{0}
 var InvocationManaCostPct = [InvocationRanks + 1]float64{0}
 var InvocationSpellCoeff = [InvocationRanks + 1]float64{0.4286}
 var InvocationBaseDamage = [InvocationRanks + 1][]float64{{0, 0}}
+var InvocationPointsPerLevel = [InvocationRanks + 1]float64{0}
+var InvocationMaxLevel = [InvocationRanks + 1]int{0}
 
 // unconfirmed: Invocation coefficient derived from the vanilla convention (rank 0)
 // Invocation rank 0: kept id 454427 (spell_level 1); dropped 426241 (spell_level 1), 426243 (spell_level 0), 426245 (spell_level 1), 426246 (spell_level 1), 426247 (spell_level 1), 426331 (spell_level 1), 426442 (spell_level 1), 454197 (spell_level 1)
@@ -2032,6 +2336,8 @@ var LakeOfFireManaCost = [LakeOfFireRanks + 1]float64{0}
 var LakeOfFireManaCostPct = [LakeOfFireRanks + 1]float64{0}
 var LakeOfFireSpellCoeff = [LakeOfFireRanks + 1]float64{0.4286}
 var LakeOfFireBaseDamage = [LakeOfFireRanks + 1][]float64{{403666, 403666}}
+var LakeOfFirePointsPerLevel = [LakeOfFireRanks + 1]float64{0}
+var LakeOfFireMaxLevel = [LakeOfFireRanks + 1]int{0}
 
 // unconfirmed: Lake of Fire coefficient derived from the vanilla convention (rank 0)
 // Lake of Fire rank 0: kept id 403872 (spell_level 1); dropped 403650 (spell_level 1), 403666 (spell_level 0)
@@ -2047,6 +2353,8 @@ var LashOfPainManaCost = [LashOfPainRanks + 1]float64{0, 65, 80, 105, 125, 145, 
 var LashOfPainManaCostPct = [LashOfPainRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var LashOfPainSpellCoeff = [LashOfPainRanks + 1]float64{0, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429}
 var LashOfPainBaseDamage = [LashOfPainRanks + 1][]float64{{0, 0}, {16, 16}, {22, 22}, {30, 30}, {36, 36}, {43, 43}, {50, 50}}
+var LashOfPainPointsPerLevel = [LashOfPainRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var LashOfPainMaxLevel = [LashOfPainRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
 
 // Lesser Firestone Attack: ranks 0 present, from build 1.60.1.70009.
 const LesserFirestoneAttackRanks = 0
@@ -2058,7 +2366,9 @@ var LesserFirestoneAttackCooldownMS = [LesserFirestoneAttackRanks + 1]int32{0}
 var LesserFirestoneAttackManaCost = [LesserFirestoneAttackRanks + 1]float64{0}
 var LesserFirestoneAttackManaCostPct = [LesserFirestoneAttackRanks + 1]float64{0}
 var LesserFirestoneAttackSpellCoeff = [LesserFirestoneAttackRanks + 1]float64{0.4286}
-var LesserFirestoneAttackBaseDamage = [LesserFirestoneAttackRanks + 1][]float64{{30, 30}}
+var LesserFirestoneAttackBaseDamage = [LesserFirestoneAttackRanks + 1][]float64{{25, 35}}
+var LesserFirestoneAttackPointsPerLevel = [LesserFirestoneAttackRanks + 1]float64{0}
+var LesserFirestoneAttackMaxLevel = [LesserFirestoneAttackRanks + 1]int{0}
 
 // unconfirmed: Lesser Firestone Attack coefficient derived from the vanilla convention (rank 0)
 
@@ -2073,6 +2383,8 @@ var LesserHealthstoneManaCost = [LesserHealthstoneRanks + 1]float64{0}
 var LesserHealthstoneManaCostPct = [LesserHealthstoneRanks + 1]float64{0}
 var LesserHealthstoneSpellCoeff = [LesserHealthstoneRanks + 1]float64{0.4286}
 var LesserHealthstoneBaseDamage = [LesserHealthstoneRanks + 1][]float64{{300, 300}}
+var LesserHealthstonePointsPerLevel = [LesserHealthstoneRanks + 1]float64{0}
+var LesserHealthstoneMaxLevel = [LesserHealthstoneRanks + 1]int{0}
 
 // unconfirmed: Lesser Healthstone coefficient derived from the vanilla convention (rank 0)
 // Lesser Healthstone rank 0: kept id 23471 (spell_level 22); dropped 6263 (spell_level 22), 23470 (spell_level 22)
@@ -2088,6 +2400,8 @@ var LesserInvisibilityManaCost = [LesserInvisibilityRanks + 1]float64{100}
 var LesserInvisibilityManaCostPct = [LesserInvisibilityRanks + 1]float64{0}
 var LesserInvisibilitySpellCoeff = [LesserInvisibilityRanks + 1]float64{20}
 var LesserInvisibilityBaseDamage = [LesserInvisibilityRanks + 1][]float64{{100, 100}}
+var LesserInvisibilityPointsPerLevel = [LesserInvisibilityRanks + 1]float64{0}
+var LesserInvisibilityMaxLevel = [LesserInvisibilityRanks + 1]int{0}
 
 // unconfirmed: Lesser Invisibility coefficient derived from the vanilla convention (rank 0)
 
@@ -2104,6 +2418,8 @@ var LoathingManaCost = [LoathingRanks + 1]float64{0}
 var LoathingManaCostPct = [LoathingRanks + 1]float64{0}
 var LoathingSpellCoeff = [LoathingRanks + 1]float64{1}
 var LoathingBaseDamage = [LoathingRanks + 1][]float64{{0, 0}}
+var LoathingPointsPerLevel = [LoathingRanks + 1]float64{0}
+var LoathingMaxLevel = [LoathingRanks + 1]int{0}
 
 // Major Firestone Attack: ranks 0 present, from build 1.60.1.70009.
 const MajorFirestoneAttackRanks = 0
@@ -2115,7 +2431,9 @@ var MajorFirestoneAttackCooldownMS = [MajorFirestoneAttackRanks + 1]int32{0}
 var MajorFirestoneAttackManaCost = [MajorFirestoneAttackRanks + 1]float64{0}
 var MajorFirestoneAttackManaCostPct = [MajorFirestoneAttackRanks + 1]float64{0}
 var MajorFirestoneAttackSpellCoeff = [MajorFirestoneAttackRanks + 1]float64{0.4286}
-var MajorFirestoneAttackBaseDamage = [MajorFirestoneAttackRanks + 1][]float64{{100, 100}}
+var MajorFirestoneAttackBaseDamage = [MajorFirestoneAttackRanks + 1][]float64{{80, 120}}
+var MajorFirestoneAttackPointsPerLevel = [MajorFirestoneAttackRanks + 1]float64{0}
+var MajorFirestoneAttackMaxLevel = [MajorFirestoneAttackRanks + 1]int{0}
 
 // unconfirmed: Major Firestone Attack coefficient derived from the vanilla convention (rank 0)
 
@@ -2130,6 +2448,8 @@ var MajorHealthstoneManaCost = [MajorHealthstoneRanks + 1]float64{0}
 var MajorHealthstoneManaCostPct = [MajorHealthstoneRanks + 1]float64{0}
 var MajorHealthstoneSpellCoeff = [MajorHealthstoneRanks + 1]float64{0.4286}
 var MajorHealthstoneBaseDamage = [MajorHealthstoneRanks + 1][]float64{{1440, 1440}}
+var MajorHealthstonePointsPerLevel = [MajorHealthstoneRanks + 1]float64{0}
+var MajorHealthstoneMaxLevel = [MajorHealthstoneRanks + 1]int{0}
 
 // unconfirmed: Major Healthstone coefficient derived from the vanilla convention (rank 0)
 // Major Healthstone rank 0: kept id 23477 (spell_level 58); dropped 11732 (spell_level 58), 23476 (spell_level 58)
@@ -2145,6 +2465,8 @@ var MajorSpellstoneManaCost = [MajorSpellstoneRanks + 1]float64{0}
 var MajorSpellstoneManaCostPct = [MajorSpellstoneRanks + 1]float64{0}
 var MajorSpellstoneSpellCoeff = [MajorSpellstoneRanks + 1]float64{4}
 var MajorSpellstoneBaseDamage = [MajorSpellstoneRanks + 1][]float64{{100, 100}}
+var MajorSpellstonePointsPerLevel = [MajorSpellstoneRanks + 1]float64{0}
+var MajorSpellstoneMaxLevel = [MajorSpellstoneRanks + 1]int{0}
 
 // unconfirmed: Major Spellstone coefficient derived from the vanilla convention (rank 0)
 
@@ -2159,6 +2481,8 @@ var MaledictionManaCost = [MaledictionRanks + 1]float64{0}
 var MaledictionManaCostPct = [MaledictionRanks + 1]float64{0}
 var MaledictionSpellCoeff = [MaledictionRanks + 1]float64{0.4286}
 var MaledictionBaseDamage = [MaledictionRanks + 1][]float64{{10, 10}}
+var MaledictionPointsPerLevel = [MaledictionRanks + 1]float64{0}
+var MaledictionMaxLevel = [MaledictionRanks + 1]int{0}
 
 // unconfirmed: Malediction coefficient derived from the vanilla convention (rank 0)
 
@@ -2173,6 +2497,8 @@ var MalevolenceManaCost = [MalevolenceRanks + 1]float64{0}
 var MalevolenceManaCostPct = [MalevolenceRanks + 1]float64{0}
 var MalevolenceSpellCoeff = [MalevolenceRanks + 1]float64{0.4286}
 var MalevolenceBaseDamage = [MalevolenceRanks + 1][]float64{{5, 5}}
+var MalevolencePointsPerLevel = [MalevolenceRanks + 1]float64{0}
+var MalevolenceMaxLevel = [MalevolenceRanks + 1]int{0}
 
 // unconfirmed: Malevolence coefficient derived from the vanilla convention (rank 0)
 
@@ -2186,7 +2512,9 @@ var MarkOfChaosCooldownMS = [MarkOfChaosRanks + 1]int32{0}
 var MarkOfChaosManaCost = [MarkOfChaosRanks + 1]float64{0}
 var MarkOfChaosManaCostPct = [MarkOfChaosRanks + 1]float64{0}
 var MarkOfChaosSpellCoeff = [MarkOfChaosRanks + 1]float64{8}
-var MarkOfChaosBaseDamage = [MarkOfChaosRanks + 1][]float64{{-27, -27}}
+var MarkOfChaosBaseDamage = [MarkOfChaosRanks + 1][]float64{{0, 0}}
+var MarkOfChaosPointsPerLevel = [MarkOfChaosRanks + 1]float64{-1}
+var MarkOfChaosMaxLevel = [MarkOfChaosRanks + 1]int{56}
 
 // unconfirmed: Mark of Chaos coefficient derived from the vanilla convention (rank 0)
 // Mark of Chaos rank 0: kept id 461615 (spell_level 8); dropped 440895 (spell_level 0)
@@ -2202,6 +2530,8 @@ var MassiveDestructionManaCost = [MassiveDestructionRanks + 1]float64{0}
 var MassiveDestructionManaCostPct = [MassiveDestructionRanks + 1]float64{0}
 var MassiveDestructionSpellCoeff = [MassiveDestructionRanks + 1]float64{1}
 var MassiveDestructionBaseDamage = [MassiveDestructionRanks + 1][]float64{{10, 10}}
+var MassiveDestructionPointsPerLevel = [MassiveDestructionRanks + 1]float64{0}
+var MassiveDestructionMaxLevel = [MassiveDestructionRanks + 1]int{0}
 
 // Massive Destruction rank 0: kept id 468540 (spell_level 0); dropped 24543 (spell_level 0)
 
@@ -2216,6 +2546,8 @@ var MasterChannelerManaCost = [MasterChannelerRanks + 1]float64{0}
 var MasterChannelerManaCostPct = [MasterChannelerRanks + 1]float64{0}
 var MasterChannelerSpellCoeff = [MasterChannelerRanks + 1]float64{0.4286}
 var MasterChannelerBaseDamage = [MasterChannelerRanks + 1][]float64{{403668, 403668}}
+var MasterChannelerPointsPerLevel = [MasterChannelerRanks + 1]float64{0}
+var MasterChannelerMaxLevel = [MasterChannelerRanks + 1]int{0}
 
 // unconfirmed: Master Channeler coefficient derived from the vanilla convention (rank 0)
 // Master Channeler rank 0: kept id 403868 (spell_level 1); dropped 403668 (spell_level 0)
@@ -2230,7 +2562,9 @@ var MasterConjurorCooldownMS = [MasterConjurorRanks + 1]int32{0, 0, 0}
 var MasterConjurorManaCost = [MasterConjurorRanks + 1]float64{0, 0, 0}
 var MasterConjurorManaCostPct = [MasterConjurorRanks + 1]float64{0, 0, 0}
 var MasterConjurorSpellCoeff = [MasterConjurorRanks + 1]float64{0, 1, 1}
-var MasterConjurorBaseDamage = [MasterConjurorRanks + 1][]float64{{0, 0}, {-20, -20}, {-40, -40}}
+var MasterConjurorBaseDamage = [MasterConjurorRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}}
+var MasterConjurorPointsPerLevel = [MasterConjurorRanks + 1]float64{0, 0, 0}
+var MasterConjurorMaxLevel = [MasterConjurorRanks + 1]int{0, 0, 0}
 
 // Master Summoner: ranks 0 present, from build 1.60.1.70009.
 const MasterSummonerRanks = 0
@@ -2242,7 +2576,9 @@ var MasterSummonerCooldownMS = [MasterSummonerRanks + 1]int32{0}
 var MasterSummonerManaCost = [MasterSummonerRanks + 1]float64{0}
 var MasterSummonerManaCostPct = [MasterSummonerRanks + 1]float64{0}
 var MasterSummonerSpellCoeff = [MasterSummonerRanks + 1]float64{1}
-var MasterSummonerBaseDamage = [MasterSummonerRanks + 1][]float64{{-4000, -4000}}
+var MasterSummonerBaseDamage = [MasterSummonerRanks + 1][]float64{{0, 0}}
+var MasterSummonerPointsPerLevel = [MasterSummonerRanks + 1]float64{0}
+var MasterSummonerMaxLevel = [MasterSummonerRanks + 1]int{0}
 
 // Menace: ranks 0 present, from build 1.60.1.70009.
 const MenaceRanks = 0
@@ -2255,6 +2591,8 @@ var MenaceManaCost = [MenaceRanks + 1]float64{0}
 var MenaceManaCostPct = [MenaceRanks + 1]float64{0}
 var MenaceSpellCoeff = [MenaceRanks + 1]float64{0.2}
 var MenaceBaseDamage = [MenaceRanks + 1][]float64{{0, 0}}
+var MenacePointsPerLevel = [MenaceRanks + 1]float64{0}
+var MenaceMaxLevel = [MenaceRanks + 1]int{0}
 
 // unconfirmed: Menace coefficient derived from the vanilla convention (rank 0)
 // Menace rank 0: kept id 1219475 (spell_level 1); dropped 403828 (spell_level 1), 442226 (spell_level 1), 442233 (spell_level 1)
@@ -2270,6 +2608,8 @@ var MetamorphosisManaCost = [MetamorphosisRanks + 1]float64{0}
 var MetamorphosisManaCostPct = [MetamorphosisRanks + 1]float64{0}
 var MetamorphosisSpellCoeff = [MetamorphosisRanks + 1]float64{0.4286}
 var MetamorphosisBaseDamage = [MetamorphosisRanks + 1][]float64{{403789, 403789}}
+var MetamorphosisPointsPerLevel = [MetamorphosisRanks + 1]float64{0}
+var MetamorphosisMaxLevel = [MetamorphosisRanks + 1]int{0}
 
 // unconfirmed: Metamorphosis coefficient derived from the vanilla convention (rank 0)
 // Metamorphosis rank 0: kept id 403873 (spell_level 1); dropped 403789 (spell_level 1), 403816 (spell_level 1)
@@ -2285,6 +2625,8 @@ var MinorHealthstoneManaCost = [MinorHealthstoneRanks + 1]float64{0}
 var MinorHealthstoneManaCostPct = [MinorHealthstoneRanks + 1]float64{0}
 var MinorHealthstoneSpellCoeff = [MinorHealthstoneRanks + 1]float64{0.4286}
 var MinorHealthstoneBaseDamage = [MinorHealthstoneRanks + 1][]float64{{120, 120}}
+var MinorHealthstonePointsPerLevel = [MinorHealthstoneRanks + 1]float64{0}
+var MinorHealthstoneMaxLevel = [MinorHealthstoneRanks + 1]int{0}
 
 // unconfirmed: Minor Healthstone coefficient derived from the vanilla convention (rank 0)
 // Minor Healthstone rank 0: kept id 23469 (spell_level 10); dropped 6262 (spell_level 10), 23468 (spell_level 10)
@@ -2299,7 +2641,9 @@ var NeverendingSoulVesselCooldownMS = [NeverendingSoulVesselRanks + 1]int32{3000
 var NeverendingSoulVesselManaCost = [NeverendingSoulVesselRanks + 1]float64{0}
 var NeverendingSoulVesselManaCostPct = [NeverendingSoulVesselRanks + 1]float64{0}
 var NeverendingSoulVesselSpellCoeff = [NeverendingSoulVesselRanks + 1]float64{1}
-var NeverendingSoulVesselBaseDamage = [NeverendingSoulVesselRanks + 1][]float64{{-50, -50}}
+var NeverendingSoulVesselBaseDamage = [NeverendingSoulVesselRanks + 1][]float64{{0, 0}}
+var NeverendingSoulVesselPointsPerLevel = [NeverendingSoulVesselRanks + 1]float64{0}
+var NeverendingSoulVesselMaxLevel = [NeverendingSoulVesselRanks + 1]int{0}
 
 // Nightfall: ranks 0 present, from build 1.60.1.70009.
 const NightfallRanks = 0
@@ -2312,6 +2656,8 @@ var NightfallManaCost = [NightfallRanks + 1]float64{0}
 var NightfallManaCostPct = [NightfallRanks + 1]float64{0}
 var NightfallSpellCoeff = [NightfallRanks + 1]float64{0.4286}
 var NightfallBaseDamage = [NightfallRanks + 1][]float64{{4, 4}}
+var NightfallPointsPerLevel = [NightfallRanks + 1]float64{0}
+var NightfallMaxLevel = [NightfallRanks + 1]int{0}
 
 // unconfirmed: Nightfall coefficient derived from the vanilla convention (rank 0)
 
@@ -2326,6 +2672,8 @@ var NoxiousBreathManaCost = [NoxiousBreathRanks + 1]float64{0}
 var NoxiousBreathManaCostPct = [NoxiousBreathRanks + 1]float64{0}
 var NoxiousBreathSpellCoeff = [NoxiousBreathRanks + 1]float64{1}
 var NoxiousBreathBaseDamage = [NoxiousBreathRanks + 1][]float64{{10000, 10000}}
+var NoxiousBreathPointsPerLevel = [NoxiousBreathRanks + 1]float64{0}
+var NoxiousBreathMaxLevel = [NoxiousBreathRanks + 1]int{0}
 
 // Only Pain: ranks 0 present, from build 1.60.1.70009.
 const OnlyPainRanks = 0
@@ -2338,6 +2686,8 @@ var OnlyPainManaCost = [OnlyPainRanks + 1]float64{0}
 var OnlyPainManaCostPct = [OnlyPainRanks + 1]float64{0}
 var OnlyPainSpellCoeff = [OnlyPainRanks + 1]float64{1}
 var OnlyPainBaseDamage = [OnlyPainRanks + 1][]float64{{0, 0}}
+var OnlyPainPointsPerLevel = [OnlyPainRanks + 1]float64{0}
+var OnlyPainMaxLevel = [OnlyPainRanks + 1]int{0}
 
 // Pain Tap: ranks 0 present, from build 1.60.1.70009.
 const PainTapRanks = 0
@@ -2350,6 +2700,8 @@ var PainTapManaCost = [PainTapRanks + 1]float64{0}
 var PainTapManaCostPct = [PainTapRanks + 1]float64{0}
 var PainTapSpellCoeff = [PainTapRanks + 1]float64{0.4286}
 var PainTapBaseDamage = [PainTapRanks + 1][]float64{{100, 100}}
+var PainTapPointsPerLevel = [PainTapRanks + 1]float64{0}
+var PainTapMaxLevel = [PainTapRanks + 1]int{0}
 
 // unconfirmed: Pain Tap coefficient derived from the vanilla convention (rank 0)
 
@@ -2364,6 +2716,8 @@ var PandemicManaCost = [PandemicRanks + 1]float64{0}
 var PandemicManaCostPct = [PandemicRanks + 1]float64{0}
 var PandemicSpellCoeff = [PandemicRanks + 1]float64{0.4286}
 var PandemicBaseDamage = [PandemicRanks + 1][]float64{{427712, 427712}}
+var PandemicPointsPerLevel = [PandemicRanks + 1]float64{0}
+var PandemicMaxLevel = [PandemicRanks + 1]int{0}
 
 // unconfirmed: Pandemic coefficient derived from the vanilla convention (rank 0)
 // Pandemic rank 0: kept id 429283 (spell_level 1); dropped 427712 (spell_level 0)
@@ -2379,6 +2733,8 @@ var ParanoiaManaCost = [ParanoiaRanks + 1]float64{0}
 var ParanoiaManaCostPct = [ParanoiaRanks + 1]float64{0}
 var ParanoiaSpellCoeff = [ParanoiaRanks + 1]float64{0.4286}
 var ParanoiaBaseDamage = [ParanoiaRanks + 1][]float64{{30, 30}}
+var ParanoiaPointsPerLevel = [ParanoiaRanks + 1]float64{0}
+var ParanoiaMaxLevel = [ParanoiaRanks + 1]int{0}
 
 // unconfirmed: Paranoia coefficient derived from the vanilla convention (rank 0)
 
@@ -2393,6 +2749,8 @@ var PermanentAreaDamage50kManaCost = [PermanentAreaDamage50kRanks + 1]float64{0}
 var PermanentAreaDamage50kManaCostPct = [PermanentAreaDamage50kRanks + 1]float64{0}
 var PermanentAreaDamage50kSpellCoeff = [PermanentAreaDamage50kRanks + 1]float64{0.4286}
 var PermanentAreaDamage50kBaseDamage = [PermanentAreaDamage50kRanks + 1][]float64{{50000, 50000}}
+var PermanentAreaDamage50kPointsPerLevel = [PermanentAreaDamage50kRanks + 1]float64{0}
+var PermanentAreaDamage50kMaxLevel = [PermanentAreaDamage50kRanks + 1]int{0}
 
 // unconfirmed: Permanent Area Damage 50k coefficient derived from the vanilla convention (rank 0)
 
@@ -2407,6 +2765,8 @@ var PimgibSCollarManaCost = [PimgibSCollarRanks + 1]float64{0}
 var PimgibSCollarManaCostPct = [PimgibSCollarRanks + 1]float64{0}
 var PimgibSCollarSpellCoeff = [PimgibSCollarRanks + 1]float64{0.4286}
 var PimgibSCollarBaseDamage = [PimgibSCollarRanks + 1][]float64{{9, 9}}
+var PimgibSCollarPointsPerLevel = [PimgibSCollarRanks + 1]float64{0}
+var PimgibSCollarMaxLevel = [PimgibSCollarRanks + 1]int{0}
 
 // unconfirmed: Pimgib's Collar coefficient derived from the vanilla convention (rank 0)
 
@@ -2420,7 +2780,9 @@ var PlagueheartCooldownMS = [PlagueheartRanks + 1]int32{0}
 var PlagueheartManaCost = [PlagueheartRanks + 1]float64{0}
 var PlagueheartManaCostPct = [PlagueheartRanks + 1]float64{0}
 var PlagueheartSpellCoeff = [PlagueheartRanks + 1]float64{1}
-var PlagueheartBaseDamage = [PlagueheartRanks + 1][]float64{{-25, -25}}
+var PlagueheartBaseDamage = [PlagueheartRanks + 1][]float64{{0, 0}}
+var PlagueheartPointsPerLevel = [PlagueheartRanks + 1]float64{0}
+var PlagueheartMaxLevel = [PlagueheartRanks + 1]int{0}
 
 // Portal of Summoning: ranks 0 present, from build 1.60.1.70009.
 const PortalOfSummoningRanks = 0
@@ -2433,6 +2795,8 @@ var PortalOfSummoningManaCost = [PortalOfSummoningRanks + 1]float64{0}
 var PortalOfSummoningManaCostPct = [PortalOfSummoningRanks + 1]float64{12}
 var PortalOfSummoningSpellCoeff = [PortalOfSummoningRanks + 1]float64{8}
 var PortalOfSummoningBaseDamage = [PortalOfSummoningRanks + 1][]float64{{0, 0}}
+var PortalOfSummoningPointsPerLevel = [PortalOfSummoningRanks + 1]float64{0}
+var PortalOfSummoningMaxLevel = [PortalOfSummoningRanks + 1]int{60}
 
 // unconfirmed: Portal of Summoning coefficient derived from the vanilla convention (rank 0)
 // Portal of Summoning rank 0: kept id 437169 (spell_level 60); dropped 437311 (spell_level 1)
@@ -2448,6 +2812,8 @@ var PyroclasmManaCost = [PyroclasmRanks + 1]float64{0}
 var PyroclasmManaCostPct = [PyroclasmRanks + 1]float64{0}
 var PyroclasmSpellCoeff = [PyroclasmRanks + 1]float64{1}
 var PyroclasmBaseDamage = [PyroclasmRanks + 1][]float64{{26, 26}}
+var PyroclasmPointsPerLevel = [PyroclasmRanks + 1]float64{0}
+var PyroclasmMaxLevel = [PyroclasmRanks + 1]int{0}
 
 // skipped: "Rain of Fire" already has a hand-written RainOfFireRanks elsewhere in this package.
 
@@ -2461,7 +2827,9 @@ var ReagentEconomyCooldownMS = [ReagentEconomyRanks + 1]int32{300000}
 var ReagentEconomyManaCost = [ReagentEconomyRanks + 1]float64{0}
 var ReagentEconomyManaCostPct = [ReagentEconomyRanks + 1]float64{0}
 var ReagentEconomySpellCoeff = [ReagentEconomyRanks + 1]float64{1}
-var ReagentEconomyBaseDamage = [ReagentEconomyRanks + 1][]float64{{-100, -100}}
+var ReagentEconomyBaseDamage = [ReagentEconomyRanks + 1][]float64{{0, 0}}
+var ReagentEconomyPointsPerLevel = [ReagentEconomyRanks + 1]float64{0}
+var ReagentEconomyMaxLevel = [ReagentEconomyRanks + 1]int{0}
 
 // Reduced Cleave Cooldown: ranks 0 present, from build 1.60.1.70009.
 const ReducedCleaveCooldownRanks = 0
@@ -2473,7 +2841,9 @@ var ReducedCleaveCooldownCooldownMS = [ReducedCleaveCooldownRanks + 1]int32{0}
 var ReducedCleaveCooldownManaCost = [ReducedCleaveCooldownRanks + 1]float64{0}
 var ReducedCleaveCooldownManaCostPct = [ReducedCleaveCooldownRanks + 1]float64{0}
 var ReducedCleaveCooldownSpellCoeff = [ReducedCleaveCooldownRanks + 1]float64{0.4286}
-var ReducedCleaveCooldownBaseDamage = [ReducedCleaveCooldownRanks + 1][]float64{{-2000, -2000}}
+var ReducedCleaveCooldownBaseDamage = [ReducedCleaveCooldownRanks + 1][]float64{{0, 0}}
+var ReducedCleaveCooldownPointsPerLevel = [ReducedCleaveCooldownRanks + 1]float64{0}
+var ReducedCleaveCooldownMaxLevel = [ReducedCleaveCooldownRanks + 1]int{0}
 
 // unconfirmed: Reduced Cleave Cooldown coefficient derived from the vanilla convention (rank 0)
 
@@ -2488,6 +2858,8 @@ var RitualOfDoomManaCost = [RitualOfDoomRanks + 1]float64{0}
 var RitualOfDoomManaCostPct = [RitualOfDoomRanks + 1]float64{100}
 var RitualOfDoomSpellCoeff = [RitualOfDoomRanks + 1]float64{4}
 var RitualOfDoomBaseDamage = [RitualOfDoomRanks + 1][]float64{{1, 1}}
+var RitualOfDoomPointsPerLevel = [RitualOfDoomRanks + 1]float64{0}
+var RitualOfDoomMaxLevel = [RitualOfDoomRanks + 1]int{0}
 
 // unconfirmed: Ritual of Doom coefficient derived from the vanilla convention (rank 0)
 
@@ -2502,6 +2874,8 @@ var RitualOfSummoningManaCost = [RitualOfSummoningRanks + 1]float64{300}
 var RitualOfSummoningManaCostPct = [RitualOfSummoningRanks + 1]float64{0}
 var RitualOfSummoningSpellCoeff = [RitualOfSummoningRanks + 1]float64{40}
 var RitualOfSummoningBaseDamage = [RitualOfSummoningRanks + 1][]float64{{0, 0}}
+var RitualOfSummoningPointsPerLevel = [RitualOfSummoningRanks + 1]float64{0}
+var RitualOfSummoningMaxLevel = [RitualOfSummoningRanks + 1]int{0}
 
 // unconfirmed: Ritual of Summoning coefficient derived from the vanilla convention (rank 0)
 
@@ -2516,6 +2890,8 @@ var RuinManaCost = [RuinRanks + 1]float64{0}
 var RuinManaCostPct = [RuinRanks + 1]float64{0}
 var RuinSpellCoeff = [RuinRanks + 1]float64{1}
 var RuinBaseDamage = [RuinRanks + 1][]float64{{100, 100}}
+var RuinPointsPerLevel = [RuinRanks + 1]float64{0}
+var RuinMaxLevel = [RuinRanks + 1]int{0}
 
 // S03 - Item - Naxxramas - Warlock - Damage 2P Bonus: ranks 0 present, from build 1.60.1.70009.
 const S03ItemNaxxramasWarlockDamage2PBonusRanks = 0
@@ -2528,6 +2904,8 @@ var S03ItemNaxxramasWarlockDamage2PBonusManaCost = [S03ItemNaxxramasWarlockDamag
 var S03ItemNaxxramasWarlockDamage2PBonusManaCostPct = [S03ItemNaxxramasWarlockDamage2PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasWarlockDamage2PBonusSpellCoeff = [S03ItemNaxxramasWarlockDamage2PBonusRanks + 1]float64{0.4286}
 var S03ItemNaxxramasWarlockDamage2PBonusBaseDamage = [S03ItemNaxxramasWarlockDamage2PBonusRanks + 1][]float64{{20, 20}}
+var S03ItemNaxxramasWarlockDamage2PBonusPointsPerLevel = [S03ItemNaxxramasWarlockDamage2PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasWarlockDamage2PBonusMaxLevel = [S03ItemNaxxramasWarlockDamage2PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - Naxxramas - Warlock - Damage 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2542,6 +2920,8 @@ var S03ItemNaxxramasWarlockDamage4PBonusManaCost = [S03ItemNaxxramasWarlockDamag
 var S03ItemNaxxramasWarlockDamage4PBonusManaCostPct = [S03ItemNaxxramasWarlockDamage4PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasWarlockDamage4PBonusSpellCoeff = [S03ItemNaxxramasWarlockDamage4PBonusRanks + 1]float64{0.4286}
 var S03ItemNaxxramasWarlockDamage4PBonusBaseDamage = [S03ItemNaxxramasWarlockDamage4PBonusRanks + 1][]float64{{20, 20}}
+var S03ItemNaxxramasWarlockDamage4PBonusPointsPerLevel = [S03ItemNaxxramasWarlockDamage4PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasWarlockDamage4PBonusMaxLevel = [S03ItemNaxxramasWarlockDamage4PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - Naxxramas - Warlock - Damage 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2556,6 +2936,8 @@ var S03ItemNaxxramasWarlockDamage6PBonusManaCost = [S03ItemNaxxramasWarlockDamag
 var S03ItemNaxxramasWarlockDamage6PBonusManaCostPct = [S03ItemNaxxramasWarlockDamage6PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasWarlockDamage6PBonusSpellCoeff = [S03ItemNaxxramasWarlockDamage6PBonusRanks + 1]float64{0.4286}
 var S03ItemNaxxramasWarlockDamage6PBonusBaseDamage = [S03ItemNaxxramasWarlockDamage6PBonusRanks + 1][]float64{{20, 20}}
+var S03ItemNaxxramasWarlockDamage6PBonusPointsPerLevel = [S03ItemNaxxramasWarlockDamage6PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasWarlockDamage6PBonusMaxLevel = [S03ItemNaxxramasWarlockDamage6PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - Naxxramas - Warlock - Damage 6P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2569,7 +2951,9 @@ var S03ItemNaxxramasWarlockTank4PBonusCooldownMS = [S03ItemNaxxramasWarlockTank4
 var S03ItemNaxxramasWarlockTank4PBonusManaCost = [S03ItemNaxxramasWarlockTank4PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasWarlockTank4PBonusManaCostPct = [S03ItemNaxxramasWarlockTank4PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasWarlockTank4PBonusSpellCoeff = [S03ItemNaxxramasWarlockTank4PBonusRanks + 1]float64{0.4286}
-var S03ItemNaxxramasWarlockTank4PBonusBaseDamage = [S03ItemNaxxramasWarlockTank4PBonusRanks + 1][]float64{{-10000, -10000}}
+var S03ItemNaxxramasWarlockTank4PBonusBaseDamage = [S03ItemNaxxramasWarlockTank4PBonusRanks + 1][]float64{{0, 0}}
+var S03ItemNaxxramasWarlockTank4PBonusPointsPerLevel = [S03ItemNaxxramasWarlockTank4PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasWarlockTank4PBonusMaxLevel = [S03ItemNaxxramasWarlockTank4PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - Naxxramas - Warlock - Tank 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2584,6 +2968,8 @@ var S03ItemNaxxramasWarlockTank6PBonusManaCost = [S03ItemNaxxramasWarlockTank6PB
 var S03ItemNaxxramasWarlockTank6PBonusManaCostPct = [S03ItemNaxxramasWarlockTank6PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasWarlockTank6PBonusSpellCoeff = [S03ItemNaxxramasWarlockTank6PBonusRanks + 1]float64{0.4286}
 var S03ItemNaxxramasWarlockTank6PBonusBaseDamage = [S03ItemNaxxramasWarlockTank6PBonusRanks + 1][]float64{{20, 20}}
+var S03ItemNaxxramasWarlockTank6PBonusPointsPerLevel = [S03ItemNaxxramasWarlockTank6PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasWarlockTank6PBonusMaxLevel = [S03ItemNaxxramasWarlockTank6PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - Naxxramas - Warlock - Tank 6P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2598,6 +2984,8 @@ var S03ItemRAQWarlockTank3PBonusManaCost = [S03ItemRAQWarlockTank3PBonusRanks + 
 var S03ItemRAQWarlockTank3PBonusManaCostPct = [S03ItemRAQWarlockTank3PBonusRanks + 1]float64{0}
 var S03ItemRAQWarlockTank3PBonusSpellCoeff = [S03ItemRAQWarlockTank3PBonusRanks + 1]float64{0.4286}
 var S03ItemRAQWarlockTank3PBonusBaseDamage = [S03ItemRAQWarlockTank3PBonusRanks + 1][]float64{{50, 50}}
+var S03ItemRAQWarlockTank3PBonusPointsPerLevel = [S03ItemRAQWarlockTank3PBonusRanks + 1]float64{0}
+var S03ItemRAQWarlockTank3PBonusMaxLevel = [S03ItemRAQWarlockTank3PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - RAQ - Warlock - Tank 3P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2612,6 +3000,8 @@ var S03ItemScarletEnclaveWarlockDamage2PBonusManaCost = [S03ItemScarletEnclaveWa
 var S03ItemScarletEnclaveWarlockDamage2PBonusManaCostPct = [S03ItemScarletEnclaveWarlockDamage2PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclaveWarlockDamage2PBonusSpellCoeff = [S03ItemScarletEnclaveWarlockDamage2PBonusRanks + 1]float64{0.4286}
 var S03ItemScarletEnclaveWarlockDamage2PBonusBaseDamage = [S03ItemScarletEnclaveWarlockDamage2PBonusRanks + 1][]float64{{25, 25}}
+var S03ItemScarletEnclaveWarlockDamage2PBonusPointsPerLevel = [S03ItemScarletEnclaveWarlockDamage2PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclaveWarlockDamage2PBonusMaxLevel = [S03ItemScarletEnclaveWarlockDamage2PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - Scarlet Enclave - Warlock - Damage 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2626,6 +3016,8 @@ var S03ItemScarletEnclaveWarlockDamage4PBonusManaCost = [S03ItemScarletEnclaveWa
 var S03ItemScarletEnclaveWarlockDamage4PBonusManaCostPct = [S03ItemScarletEnclaveWarlockDamage4PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclaveWarlockDamage4PBonusSpellCoeff = [S03ItemScarletEnclaveWarlockDamage4PBonusRanks + 1]float64{0.4286}
 var S03ItemScarletEnclaveWarlockDamage4PBonusBaseDamage = [S03ItemScarletEnclaveWarlockDamage4PBonusRanks + 1][]float64{{30, 30}}
+var S03ItemScarletEnclaveWarlockDamage4PBonusPointsPerLevel = [S03ItemScarletEnclaveWarlockDamage4PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclaveWarlockDamage4PBonusMaxLevel = [S03ItemScarletEnclaveWarlockDamage4PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - Scarlet Enclave - Warlock - Damage 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2640,6 +3032,8 @@ var S03ItemScarletEnclaveWarlockDamage6PBonusManaCost = [S03ItemScarletEnclaveWa
 var S03ItemScarletEnclaveWarlockDamage6PBonusManaCostPct = [S03ItemScarletEnclaveWarlockDamage6PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclaveWarlockDamage6PBonusSpellCoeff = [S03ItemScarletEnclaveWarlockDamage6PBonusRanks + 1]float64{0.4286}
 var S03ItemScarletEnclaveWarlockDamage6PBonusBaseDamage = [S03ItemScarletEnclaveWarlockDamage6PBonusRanks + 1][]float64{{20, 20}}
+var S03ItemScarletEnclaveWarlockDamage6PBonusPointsPerLevel = [S03ItemScarletEnclaveWarlockDamage6PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclaveWarlockDamage6PBonusMaxLevel = [S03ItemScarletEnclaveWarlockDamage6PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - Scarlet Enclave - Warlock - Damage 6P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2654,6 +3048,8 @@ var S03ItemScarletEnclaveWarlockTank2PBonusManaCost = [S03ItemScarletEnclaveWarl
 var S03ItemScarletEnclaveWarlockTank2PBonusManaCostPct = [S03ItemScarletEnclaveWarlockTank2PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclaveWarlockTank2PBonusSpellCoeff = [S03ItemScarletEnclaveWarlockTank2PBonusRanks + 1]float64{0.4286}
 var S03ItemScarletEnclaveWarlockTank2PBonusBaseDamage = [S03ItemScarletEnclaveWarlockTank2PBonusRanks + 1][]float64{{5, 5}}
+var S03ItemScarletEnclaveWarlockTank2PBonusPointsPerLevel = [S03ItemScarletEnclaveWarlockTank2PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclaveWarlockTank2PBonusMaxLevel = [S03ItemScarletEnclaveWarlockTank2PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - Scarlet Enclave - Warlock - Tank 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2668,6 +3064,8 @@ var S03ItemScarletEnclaveWarlockTank4PBonusManaCost = [S03ItemScarletEnclaveWarl
 var S03ItemScarletEnclaveWarlockTank4PBonusManaCostPct = [S03ItemScarletEnclaveWarlockTank4PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclaveWarlockTank4PBonusSpellCoeff = [S03ItemScarletEnclaveWarlockTank4PBonusRanks + 1]float64{0.4286}
 var S03ItemScarletEnclaveWarlockTank4PBonusBaseDamage = [S03ItemScarletEnclaveWarlockTank4PBonusRanks + 1][]float64{{10, 10}}
+var S03ItemScarletEnclaveWarlockTank4PBonusPointsPerLevel = [S03ItemScarletEnclaveWarlockTank4PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclaveWarlockTank4PBonusMaxLevel = [S03ItemScarletEnclaveWarlockTank4PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - Scarlet Enclave - Warlock - Tank 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2682,6 +3080,8 @@ var S03ItemScarletEnclaveWarlockTank6PBonusManaCost = [S03ItemScarletEnclaveWarl
 var S03ItemScarletEnclaveWarlockTank6PBonusManaCostPct = [S03ItemScarletEnclaveWarlockTank6PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclaveWarlockTank6PBonusSpellCoeff = [S03ItemScarletEnclaveWarlockTank6PBonusRanks + 1]float64{0.4286}
 var S03ItemScarletEnclaveWarlockTank6PBonusBaseDamage = [S03ItemScarletEnclaveWarlockTank6PBonusRanks + 1][]float64{{10000, 10000}}
+var S03ItemScarletEnclaveWarlockTank6PBonusPointsPerLevel = [S03ItemScarletEnclaveWarlockTank6PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclaveWarlockTank6PBonusMaxLevel = [S03ItemScarletEnclaveWarlockTank6PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - Scarlet Enclave - Warlock - Tank 6P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2696,6 +3096,8 @@ var S03ItemT1WarlockDamage2PBonusManaCost = [S03ItemT1WarlockDamage2PBonusRanks 
 var S03ItemT1WarlockDamage2PBonusManaCostPct = [S03ItemT1WarlockDamage2PBonusRanks + 1]float64{0}
 var S03ItemT1WarlockDamage2PBonusSpellCoeff = [S03ItemT1WarlockDamage2PBonusRanks + 1]float64{0.4286}
 var S03ItemT1WarlockDamage2PBonusBaseDamage = [S03ItemT1WarlockDamage2PBonusRanks + 1][]float64{{50, 50}}
+var S03ItemT1WarlockDamage2PBonusPointsPerLevel = [S03ItemT1WarlockDamage2PBonusRanks + 1]float64{0}
+var S03ItemT1WarlockDamage2PBonusMaxLevel = [S03ItemT1WarlockDamage2PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - T1 - Warlock - Damage 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2710,6 +3112,8 @@ var S03ItemT1WarlockDamage4PBonusManaCost = [S03ItemT1WarlockDamage4PBonusRanks 
 var S03ItemT1WarlockDamage4PBonusManaCostPct = [S03ItemT1WarlockDamage4PBonusRanks + 1]float64{0}
 var S03ItemT1WarlockDamage4PBonusSpellCoeff = [S03ItemT1WarlockDamage4PBonusRanks + 1]float64{1}
 var S03ItemT1WarlockDamage4PBonusBaseDamage = [S03ItemT1WarlockDamage4PBonusRanks + 1][]float64{{2, 2}}
+var S03ItemT1WarlockDamage4PBonusPointsPerLevel = [S03ItemT1WarlockDamage4PBonusRanks + 1]float64{0}
+var S03ItemT1WarlockDamage4PBonusMaxLevel = [S03ItemT1WarlockDamage4PBonusRanks + 1]int{0}
 
 // S03 - Item - T1 - Warlock - Damage 6P Bonus: ranks 0 present, from build 1.60.1.70009.
 const S03ItemT1WarlockDamage6PBonusRanks = 0
@@ -2722,6 +3126,8 @@ var S03ItemT1WarlockDamage6PBonusManaCost = [S03ItemT1WarlockDamage6PBonusRanks 
 var S03ItemT1WarlockDamage6PBonusManaCostPct = [S03ItemT1WarlockDamage6PBonusRanks + 1]float64{0}
 var S03ItemT1WarlockDamage6PBonusSpellCoeff = [S03ItemT1WarlockDamage6PBonusRanks + 1]float64{1}
 var S03ItemT1WarlockDamage6PBonusBaseDamage = [S03ItemT1WarlockDamage6PBonusRanks + 1][]float64{{4, 4}}
+var S03ItemT1WarlockDamage6PBonusPointsPerLevel = [S03ItemT1WarlockDamage6PBonusRanks + 1]float64{0}
+var S03ItemT1WarlockDamage6PBonusMaxLevel = [S03ItemT1WarlockDamage6PBonusRanks + 1]int{0}
 
 // S03 - Item - T1 - Warlock - Tank 2P Bonus: ranks 0 present, from build 1.60.1.70009.
 const S03ItemT1WarlockTank2PBonusRanks = 0
@@ -2734,6 +3140,8 @@ var S03ItemT1WarlockTank2PBonusManaCost = [S03ItemT1WarlockTank2PBonusRanks + 1]
 var S03ItemT1WarlockTank2PBonusManaCostPct = [S03ItemT1WarlockTank2PBonusRanks + 1]float64{0}
 var S03ItemT1WarlockTank2PBonusSpellCoeff = [S03ItemT1WarlockTank2PBonusRanks + 1]float64{0.4286}
 var S03ItemT1WarlockTank2PBonusBaseDamage = [S03ItemT1WarlockTank2PBonusRanks + 1][]float64{{457569, 457569}}
+var S03ItemT1WarlockTank2PBonusPointsPerLevel = [S03ItemT1WarlockTank2PBonusRanks + 1]float64{0}
+var S03ItemT1WarlockTank2PBonusMaxLevel = [S03ItemT1WarlockTank2PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - T1 - Warlock - Tank 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2748,6 +3156,8 @@ var S03ItemT1WarlockTank4PBonusManaCost = [S03ItemT1WarlockTank4PBonusRanks + 1]
 var S03ItemT1WarlockTank4PBonusManaCostPct = [S03ItemT1WarlockTank4PBonusRanks + 1]float64{0}
 var S03ItemT1WarlockTank4PBonusSpellCoeff = [S03ItemT1WarlockTank4PBonusRanks + 1]float64{0.4286}
 var S03ItemT1WarlockTank4PBonusBaseDamage = [S03ItemT1WarlockTank4PBonusRanks + 1][]float64{{420, 420}}
+var S03ItemT1WarlockTank4PBonusPointsPerLevel = [S03ItemT1WarlockTank4PBonusRanks + 1]float64{0}
+var S03ItemT1WarlockTank4PBonusMaxLevel = [S03ItemT1WarlockTank4PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - T1 - Warlock - Tank 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2762,6 +3172,8 @@ var S03ItemT1WarlockTank6PBonusManaCost = [S03ItemT1WarlockTank6PBonusRanks + 1]
 var S03ItemT1WarlockTank6PBonusManaCostPct = [S03ItemT1WarlockTank6PBonusRanks + 1]float64{0}
 var S03ItemT1WarlockTank6PBonusSpellCoeff = [S03ItemT1WarlockTank6PBonusRanks + 1]float64{0.4286}
 var S03ItemT1WarlockTank6PBonusBaseDamage = [S03ItemT1WarlockTank6PBonusRanks + 1][]float64{{420, 420}}
+var S03ItemT1WarlockTank6PBonusPointsPerLevel = [S03ItemT1WarlockTank6PBonusRanks + 1]float64{0}
+var S03ItemT1WarlockTank6PBonusMaxLevel = [S03ItemT1WarlockTank6PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - T1 - Warlock - Tank 6P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2776,6 +3188,8 @@ var S03ItemT2WarlockDamage2PBonusManaCost = [S03ItemT2WarlockDamage2PBonusRanks 
 var S03ItemT2WarlockDamage2PBonusManaCostPct = [S03ItemT2WarlockDamage2PBonusRanks + 1]float64{0}
 var S03ItemT2WarlockDamage2PBonusSpellCoeff = [S03ItemT2WarlockDamage2PBonusRanks + 1]float64{1}
 var S03ItemT2WarlockDamage2PBonusBaseDamage = [S03ItemT2WarlockDamage2PBonusRanks + 1][]float64{{10, 10}}
+var S03ItemT2WarlockDamage2PBonusPointsPerLevel = [S03ItemT2WarlockDamage2PBonusRanks + 1]float64{0}
+var S03ItemT2WarlockDamage2PBonusMaxLevel = [S03ItemT2WarlockDamage2PBonusRanks + 1]int{0}
 
 // S03 - Item - T2 - Warlock - Damage 4P Bonus: ranks 0 present, from build 1.60.1.70009.
 const S03ItemT2WarlockDamage4PBonusRanks = 0
@@ -2788,6 +3202,8 @@ var S03ItemT2WarlockDamage4PBonusManaCost = [S03ItemT2WarlockDamage4PBonusRanks 
 var S03ItemT2WarlockDamage4PBonusManaCostPct = [S03ItemT2WarlockDamage4PBonusRanks + 1]float64{0}
 var S03ItemT2WarlockDamage4PBonusSpellCoeff = [S03ItemT2WarlockDamage4PBonusRanks + 1]float64{1}
 var S03ItemT2WarlockDamage4PBonusBaseDamage = [S03ItemT2WarlockDamage4PBonusRanks + 1][]float64{{10, 10}}
+var S03ItemT2WarlockDamage4PBonusPointsPerLevel = [S03ItemT2WarlockDamage4PBonusRanks + 1]float64{0}
+var S03ItemT2WarlockDamage4PBonusMaxLevel = [S03ItemT2WarlockDamage4PBonusRanks + 1]int{0}
 
 // S03 - Item - T2 - Warlock - Damage 6P Bonus: ranks 0 present, from build 1.60.1.70009.
 const S03ItemT2WarlockDamage6PBonusRanks = 0
@@ -2800,6 +3216,8 @@ var S03ItemT2WarlockDamage6PBonusManaCost = [S03ItemT2WarlockDamage6PBonusRanks 
 var S03ItemT2WarlockDamage6PBonusManaCostPct = [S03ItemT2WarlockDamage6PBonusRanks + 1]float64{0}
 var S03ItemT2WarlockDamage6PBonusSpellCoeff = [S03ItemT2WarlockDamage6PBonusRanks + 1]float64{1}
 var S03ItemT2WarlockDamage6PBonusBaseDamage = [S03ItemT2WarlockDamage6PBonusRanks + 1][]float64{{10, 10}}
+var S03ItemT2WarlockDamage6PBonusPointsPerLevel = [S03ItemT2WarlockDamage6PBonusRanks + 1]float64{0}
+var S03ItemT2WarlockDamage6PBonusMaxLevel = [S03ItemT2WarlockDamage6PBonusRanks + 1]int{0}
 
 // S03 - Item - T2 - Warlock - Tank 2P Bonus: ranks 0 present, from build 1.60.1.70009.
 const S03ItemT2WarlockTank2PBonusRanks = 0
@@ -2812,6 +3230,8 @@ var S03ItemT2WarlockTank2PBonusManaCost = [S03ItemT2WarlockTank2PBonusRanks + 1]
 var S03ItemT2WarlockTank2PBonusManaCostPct = [S03ItemT2WarlockTank2PBonusRanks + 1]float64{0}
 var S03ItemT2WarlockTank2PBonusSpellCoeff = [S03ItemT2WarlockTank2PBonusRanks + 1]float64{1}
 var S03ItemT2WarlockTank2PBonusBaseDamage = [S03ItemT2WarlockTank2PBonusRanks + 1][]float64{{50, 50}}
+var S03ItemT2WarlockTank2PBonusPointsPerLevel = [S03ItemT2WarlockTank2PBonusRanks + 1]float64{0}
+var S03ItemT2WarlockTank2PBonusMaxLevel = [S03ItemT2WarlockTank2PBonusRanks + 1]int{0}
 
 // S03 - Item - T2 - Warlock - Tank 4P Bonus: ranks 0 present, from build 1.60.1.70009.
 const S03ItemT2WarlockTank4PBonusRanks = 0
@@ -2823,7 +3243,9 @@ var S03ItemT2WarlockTank4PBonusCooldownMS = [S03ItemT2WarlockTank4PBonusRanks + 
 var S03ItemT2WarlockTank4PBonusManaCost = [S03ItemT2WarlockTank4PBonusRanks + 1]float64{0}
 var S03ItemT2WarlockTank4PBonusManaCostPct = [S03ItemT2WarlockTank4PBonusRanks + 1]float64{0}
 var S03ItemT2WarlockTank4PBonusSpellCoeff = [S03ItemT2WarlockTank4PBonusRanks + 1]float64{1}
-var S03ItemT2WarlockTank4PBonusBaseDamage = [S03ItemT2WarlockTank4PBonusRanks + 1][]float64{{-40, -40}}
+var S03ItemT2WarlockTank4PBonusBaseDamage = [S03ItemT2WarlockTank4PBonusRanks + 1][]float64{{0, 0}}
+var S03ItemT2WarlockTank4PBonusPointsPerLevel = [S03ItemT2WarlockTank4PBonusRanks + 1]float64{0}
+var S03ItemT2WarlockTank4PBonusMaxLevel = [S03ItemT2WarlockTank4PBonusRanks + 1]int{0}
 
 // S03 - Item - T2 - Warlock - Tank 4P Bonus rank 0: kept id 468048 (spell_level 0); dropped 468046 (spell_level 0)
 
@@ -2838,6 +3260,8 @@ var S03ItemT2WarlockTank6PBonusManaCost = [S03ItemT2WarlockTank6PBonusRanks + 1]
 var S03ItemT2WarlockTank6PBonusManaCostPct = [S03ItemT2WarlockTank6PBonusRanks + 1]float64{0}
 var S03ItemT2WarlockTank6PBonusSpellCoeff = [S03ItemT2WarlockTank6PBonusRanks + 1]float64{1}
 var S03ItemT2WarlockTank6PBonusBaseDamage = [S03ItemT2WarlockTank6PBonusRanks + 1][]float64{{30, 30}}
+var S03ItemT2WarlockTank6PBonusPointsPerLevel = [S03ItemT2WarlockTank6PBonusRanks + 1]float64{0}
+var S03ItemT2WarlockTank6PBonusMaxLevel = [S03ItemT2WarlockTank6PBonusRanks + 1]int{0}
 
 // S03 - Item - TAQ - Warlock - Damage 2P Bonus: ranks 0 present, from build 1.60.1.70009.
 const S03ItemTAQWarlockDamage2PBonusRanks = 0
@@ -2849,7 +3273,9 @@ var S03ItemTAQWarlockDamage2PBonusCooldownMS = [S03ItemTAQWarlockDamage2PBonusRa
 var S03ItemTAQWarlockDamage2PBonusManaCost = [S03ItemTAQWarlockDamage2PBonusRanks + 1]float64{0}
 var S03ItemTAQWarlockDamage2PBonusManaCostPct = [S03ItemTAQWarlockDamage2PBonusRanks + 1]float64{0}
 var S03ItemTAQWarlockDamage2PBonusSpellCoeff = [S03ItemTAQWarlockDamage2PBonusRanks + 1]float64{0.4286}
-var S03ItemTAQWarlockDamage2PBonusBaseDamage = [S03ItemTAQWarlockDamage2PBonusRanks + 1][]float64{{-50, -50}}
+var S03ItemTAQWarlockDamage2PBonusBaseDamage = [S03ItemTAQWarlockDamage2PBonusRanks + 1][]float64{{0, 0}}
+var S03ItemTAQWarlockDamage2PBonusPointsPerLevel = [S03ItemTAQWarlockDamage2PBonusRanks + 1]float64{0}
+var S03ItemTAQWarlockDamage2PBonusMaxLevel = [S03ItemTAQWarlockDamage2PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - TAQ - Warlock - Damage 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2863,7 +3289,9 @@ var S03ItemTAQWarlockDamage4PBonusCooldownMS = [S03ItemTAQWarlockDamage4PBonusRa
 var S03ItemTAQWarlockDamage4PBonusManaCost = [S03ItemTAQWarlockDamage4PBonusRanks + 1]float64{0}
 var S03ItemTAQWarlockDamage4PBonusManaCostPct = [S03ItemTAQWarlockDamage4PBonusRanks + 1]float64{0}
 var S03ItemTAQWarlockDamage4PBonusSpellCoeff = [S03ItemTAQWarlockDamage4PBonusRanks + 1]float64{0.4286}
-var S03ItemTAQWarlockDamage4PBonusBaseDamage = [S03ItemTAQWarlockDamage4PBonusRanks + 1][]float64{{-50, -50}}
+var S03ItemTAQWarlockDamage4PBonusBaseDamage = [S03ItemTAQWarlockDamage4PBonusRanks + 1][]float64{{0, 0}}
+var S03ItemTAQWarlockDamage4PBonusPointsPerLevel = [S03ItemTAQWarlockDamage4PBonusRanks + 1]float64{0}
+var S03ItemTAQWarlockDamage4PBonusMaxLevel = [S03ItemTAQWarlockDamage4PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - TAQ - Warlock - Damage 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2877,7 +3305,9 @@ var S03ItemTAQWarlockTank2PBonusCooldownMS = [S03ItemTAQWarlockTank2PBonusRanks 
 var S03ItemTAQWarlockTank2PBonusManaCost = [S03ItemTAQWarlockTank2PBonusRanks + 1]float64{0}
 var S03ItemTAQWarlockTank2PBonusManaCostPct = [S03ItemTAQWarlockTank2PBonusRanks + 1]float64{0}
 var S03ItemTAQWarlockTank2PBonusSpellCoeff = [S03ItemTAQWarlockTank2PBonusRanks + 1]float64{0.4286}
-var S03ItemTAQWarlockTank2PBonusBaseDamage = [S03ItemTAQWarlockTank2PBonusRanks + 1][]float64{{-1500, -1500}}
+var S03ItemTAQWarlockTank2PBonusBaseDamage = [S03ItemTAQWarlockTank2PBonusRanks + 1][]float64{{0, 0}}
+var S03ItemTAQWarlockTank2PBonusPointsPerLevel = [S03ItemTAQWarlockTank2PBonusRanks + 1]float64{0}
+var S03ItemTAQWarlockTank2PBonusMaxLevel = [S03ItemTAQWarlockTank2PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - TAQ - Warlock - Tank 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2891,7 +3321,9 @@ var S03ItemTAQWarlockTank4PBonusCooldownMS = [S03ItemTAQWarlockTank4PBonusRanks 
 var S03ItemTAQWarlockTank4PBonusManaCost = [S03ItemTAQWarlockTank4PBonusRanks + 1]float64{0}
 var S03ItemTAQWarlockTank4PBonusManaCostPct = [S03ItemTAQWarlockTank4PBonusRanks + 1]float64{0}
 var S03ItemTAQWarlockTank4PBonusSpellCoeff = [S03ItemTAQWarlockTank4PBonusRanks + 1]float64{0.4286}
-var S03ItemTAQWarlockTank4PBonusBaseDamage = [S03ItemTAQWarlockTank4PBonusRanks + 1][]float64{{-1500, -1500}}
+var S03ItemTAQWarlockTank4PBonusBaseDamage = [S03ItemTAQWarlockTank4PBonusRanks + 1][]float64{{0, 0}}
+var S03ItemTAQWarlockTank4PBonusPointsPerLevel = [S03ItemTAQWarlockTank4PBonusRanks + 1]float64{0}
+var S03ItemTAQWarlockTank4PBonusMaxLevel = [S03ItemTAQWarlockTank4PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - TAQ - Warlock - Tank 4P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2906,6 +3338,8 @@ var S03ItemZGWarlockDemonology2PBonusManaCost = [S03ItemZGWarlockDemonology2PBon
 var S03ItemZGWarlockDemonology2PBonusManaCostPct = [S03ItemZGWarlockDemonology2PBonusRanks + 1]float64{0}
 var S03ItemZGWarlockDemonology2PBonusSpellCoeff = [S03ItemZGWarlockDemonology2PBonusRanks + 1]float64{0.4286}
 var S03ItemZGWarlockDemonology2PBonusBaseDamage = [S03ItemZGWarlockDemonology2PBonusRanks + 1][]float64{{12, 12}}
+var S03ItemZGWarlockDemonology2PBonusPointsPerLevel = [S03ItemZGWarlockDemonology2PBonusRanks + 1]float64{0}
+var S03ItemZGWarlockDemonology2PBonusMaxLevel = [S03ItemZGWarlockDemonology2PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - ZG - Warlock - Demonology 2P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2920,6 +3354,8 @@ var S03ItemZGWarlockDemonology3PBonusManaCost = [S03ItemZGWarlockDemonology3PBon
 var S03ItemZGWarlockDemonology3PBonusManaCostPct = [S03ItemZGWarlockDemonology3PBonusRanks + 1]float64{0}
 var S03ItemZGWarlockDemonology3PBonusSpellCoeff = [S03ItemZGWarlockDemonology3PBonusRanks + 1]float64{0.4286}
 var S03ItemZGWarlockDemonology3PBonusBaseDamage = [S03ItemZGWarlockDemonology3PBonusRanks + 1][]float64{{20, 20}}
+var S03ItemZGWarlockDemonology3PBonusPointsPerLevel = [S03ItemZGWarlockDemonology3PBonusRanks + 1]float64{0}
+var S03ItemZGWarlockDemonology3PBonusMaxLevel = [S03ItemZGWarlockDemonology3PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - ZG - Warlock - Demonology 3P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2934,6 +3370,8 @@ var S03ItemZGWarlockDemonology5PBonusManaCost = [S03ItemZGWarlockDemonology5PBon
 var S03ItemZGWarlockDemonology5PBonusManaCostPct = [S03ItemZGWarlockDemonology5PBonusRanks + 1]float64{0}
 var S03ItemZGWarlockDemonology5PBonusSpellCoeff = [S03ItemZGWarlockDemonology5PBonusRanks + 1]float64{0.4286}
 var S03ItemZGWarlockDemonology5PBonusBaseDamage = [S03ItemZGWarlockDemonology5PBonusRanks + 1][]float64{{50, 50}}
+var S03ItemZGWarlockDemonology5PBonusPointsPerLevel = [S03ItemZGWarlockDemonology5PBonusRanks + 1]float64{0}
+var S03ItemZGWarlockDemonology5PBonusMaxLevel = [S03ItemZGWarlockDemonology5PBonusRanks + 1]int{0}
 
 // unconfirmed: S03 - Item - ZG - Warlock - Demonology 5P Bonus coefficient derived from the vanilla convention (rank 0)
 
@@ -2948,6 +3386,8 @@ var SacrificeManaCost = [SacrificeRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var SacrificeManaCostPct = [SacrificeRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var SacrificeSpellCoeff = [SacrificeRanks + 1]float64{0, 2, 2, 2, 2, 2, 2}
 var SacrificeBaseDamage = [SacrificeRanks + 1][]float64{{0, 0}, {305, 305}, {510, 510}, {770, 770}, {1095, 1095}, {1470, 1470}, {1905, 1905}}
+var SacrificePointsPerLevel = [SacrificeRanks + 1]float64{0, 2.3, 3.1, 3.9, 4.7, 5.5, 6.4}
+var SacrificeMaxLevel = [SacrificeRanks + 1]int{0, 22, 30, 38, 46, 54, 62}
 
 // unconfirmed: Sacrifice coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4, rank 5, rank 6)
 
@@ -2961,7 +3401,9 @@ var ScytheOfChaosCooldownMS = [ScytheOfChaosRanks + 1]int32{0}
 var ScytheOfChaosManaCost = [ScytheOfChaosRanks + 1]float64{0}
 var ScytheOfChaosManaCostPct = [ScytheOfChaosRanks + 1]float64{0}
 var ScytheOfChaosSpellCoeff = [ScytheOfChaosRanks + 1]float64{1}
-var ScytheOfChaosBaseDamage = [ScytheOfChaosRanks + 1][]float64{{-10000, -10000}}
+var ScytheOfChaosBaseDamage = [ScytheOfChaosRanks + 1][]float64{{0, 0}}
+var ScytheOfChaosPointsPerLevel = [ScytheOfChaosRanks + 1]float64{0}
+var ScytheOfChaosMaxLevel = [ScytheOfChaosRanks + 1]int{0}
 
 // Scythe of Chaos rank 0: kept id 1219101 (spell_level 0); dropped 469211 (spell_level 0), 469220 (spell_level 0)
 
@@ -2976,6 +3418,8 @@ var SealOfTheDawnManaCost = [SealOfTheDawnRanks + 1]float64{0}
 var SealOfTheDawnManaCostPct = [SealOfTheDawnRanks + 1]float64{0}
 var SealOfTheDawnSpellCoeff = [SealOfTheDawnRanks + 1]float64{0.6667}
 var SealOfTheDawnBaseDamage = [SealOfTheDawnRanks + 1][]float64{{0, 0}}
+var SealOfTheDawnPointsPerLevel = [SealOfTheDawnRanks + 1]float64{0}
+var SealOfTheDawnMaxLevel = [SealOfTheDawnRanks + 1]int{0}
 
 // unconfirmed: Seal of the Dawn coefficient derived from the vanilla convention (rank 0)
 
@@ -2989,7 +3433,9 @@ var SearingFlamesCooldownMS = [SearingFlamesRanks + 1]int32{120000}
 var SearingFlamesManaCost = [SearingFlamesRanks + 1]float64{0}
 var SearingFlamesManaCostPct = [SearingFlamesRanks + 1]float64{0}
 var SearingFlamesSpellCoeff = [SearingFlamesRanks + 1]float64{1}
-var SearingFlamesBaseDamage = [SearingFlamesRanks + 1][]float64{{-500, -500}}
+var SearingFlamesBaseDamage = [SearingFlamesRanks + 1][]float64{{0, 0}}
+var SearingFlamesPointsPerLevel = [SearingFlamesRanks + 1]float64{0}
+var SearingFlamesMaxLevel = [SearingFlamesRanks + 1]int{0}
 
 // unconfirmed: Searing Flames coefficient derived from the vanilla convention (rank 0)
 
@@ -3006,6 +3452,8 @@ var SearingPainCastPushbackReductionManaCost = [SearingPainCastPushbackReduction
 var SearingPainCastPushbackReductionManaCostPct = [SearingPainCastPushbackReductionRanks + 1]float64{0}
 var SearingPainCastPushbackReductionSpellCoeff = [SearingPainCastPushbackReductionRanks + 1]float64{1}
 var SearingPainCastPushbackReductionBaseDamage = [SearingPainCastPushbackReductionRanks + 1][]float64{{50, 50}}
+var SearingPainCastPushbackReductionPointsPerLevel = [SearingPainCastPushbackReductionRanks + 1]float64{0}
+var SearingPainCastPushbackReductionMaxLevel = [SearingPainCastPushbackReductionRanks + 1]int{0}
 
 // Searing Pain Cast Pushback Reduction rank 0: kept id 459607 (spell_level 0); dropped 23046 (spell_level 0)
 
@@ -3020,6 +3468,8 @@ var SeductionManaCost = [SeductionRanks + 1]float64{0}
 var SeductionManaCostPct = [SeductionRanks + 1]float64{24}
 var SeductionSpellCoeff = [SeductionRanks + 1]float64{1}
 var SeductionBaseDamage = [SeductionRanks + 1][]float64{{0, 0}}
+var SeductionPointsPerLevel = [SeductionRanks + 1]float64{0}
+var SeductionMaxLevel = [SeductionRanks + 1]int{0}
 
 // unconfirmed: Seduction coefficient derived from the vanilla convention (rank 0)
 
@@ -3034,6 +3484,8 @@ var SeductionOfTheShadowsManaCost = [SeductionOfTheShadowsRanks + 1]float64{0}
 var SeductionOfTheShadowsManaCostPct = [SeductionOfTheShadowsRanks + 1]float64{0}
 var SeductionOfTheShadowsSpellCoeff = [SeductionOfTheShadowsRanks + 1]float64{1}
 var SeductionOfTheShadowsBaseDamage = [SeductionOfTheShadowsRanks + 1][]float64{{15, 15}}
+var SeductionOfTheShadowsPointsPerLevel = [SeductionOfTheShadowsRanks + 1]float64{0}
+var SeductionOfTheShadowsMaxLevel = [SeductionOfTheShadowsRanks + 1]int{0}
 
 // skipped: "Shadow Bolt" already has a hand-written ShadowBoltRanks elsewhere in this package.
 
@@ -3048,6 +3500,8 @@ var ShadowBoltVolleyManaCost = [ShadowBoltVolleyRanks + 1]float64{0}
 var ShadowBoltVolleyManaCostPct = [ShadowBoltVolleyRanks + 1]float64{0}
 var ShadowBoltVolleySpellCoeff = [ShadowBoltVolleyRanks + 1]float64{0.4286}
 var ShadowBoltVolleyBaseDamage = [ShadowBoltVolleyRanks + 1][]float64{{403628, 403628}}
+var ShadowBoltVolleyPointsPerLevel = [ShadowBoltVolleyRanks + 1]float64{0}
+var ShadowBoltVolleyMaxLevel = [ShadowBoltVolleyRanks + 1]int{0}
 
 // unconfirmed: Shadow Bolt Volley coefficient derived from the vanilla convention (rank 0)
 // Shadow Bolt Volley rank 0: kept id 403871 (spell_level 1); dropped 403628 (spell_level 0)
@@ -3062,7 +3516,9 @@ var ShadowBurstCooldownMS = [ShadowBurstRanks + 1]int32{0}
 var ShadowBurstManaCost = [ShadowBurstRanks + 1]float64{380}
 var ShadowBurstManaCostPct = [ShadowBurstRanks + 1]float64{0}
 var ShadowBurstSpellCoeff = [ShadowBurstRanks + 1]float64{0.4286}
-var ShadowBurstBaseDamage = [ShadowBurstRanks + 1][]float64{{1754, 1754}}
+var ShadowBurstBaseDamage = [ShadowBurstRanks + 1][]float64{{1403.2, 2104.8}}
+var ShadowBurstPointsPerLevel = [ShadowBurstRanks + 1]float64{0}
+var ShadowBurstMaxLevel = [ShadowBurstRanks + 1]int{56}
 
 // unconfirmed: Shadow Burst coefficient derived from the vanilla convention (rank 0)
 
@@ -3077,6 +3533,8 @@ var ShadowCarvingManaCost = [ShadowCarvingRanks + 1]float64{0}
 var ShadowCarvingManaCostPct = [ShadowCarvingRanks + 1]float64{0}
 var ShadowCarvingSpellCoeff = [ShadowCarvingRanks + 1]float64{0.4286}
 var ShadowCarvingBaseDamage = [ShadowCarvingRanks + 1][]float64{{0, 0}}
+var ShadowCarvingPointsPerLevel = [ShadowCarvingRanks + 1]float64{0}
+var ShadowCarvingMaxLevel = [ShadowCarvingRanks + 1]int{0}
 
 // unconfirmed: Shadow Carving coefficient derived from the vanilla convention (rank 0)
 
@@ -3090,7 +3548,9 @@ var ShadowCleaveCooldownMS = [ShadowCleaveRanks + 1]int32{0, 6000, 6000, 6000, 6
 var ShadowCleaveManaCost = [ShadowCleaveRanks + 1]float64{0, 12, 20, 35, 55, 80, 105, 132, 157, 185, 190}
 var ShadowCleaveManaCostPct = [ShadowCleaveRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 var ShadowCleaveSpellCoeff = [ShadowCleaveRanks + 1]float64{0, 0.047, 0.1, 0.187, 0.286, 0.286, 0.286, 0.286, 0.286, 0.286, 0.286}
-var ShadowCleaveBaseDamage = [ShadowCleaveRanks + 1][]float64{{0, 0}, {4, 4}, {8, 8}, {17, 17}, {30, 30}, {50, 50}, {72, 72}, {99, 99}, {127, 127}, {160, 160}, {170, 170}}
+var ShadowCleaveBaseDamage = [ShadowCleaveRanks + 1][]float64{{0, 0}, {2.5, 5.5}, {5.5, 10.5}, {13, 21}, {23.5, 36.5}, {39.5, 60.5}, {57, 87}, {78.5, 119.5}, {101, 153}, {127.5, 192.5}, {136, 204}}
+var ShadowCleavePointsPerLevel = [ShadowCleaveRanks + 1]float64{0, 0.13, 0.2, 0.3, 0.4, 0.53, 0.63, 0.77, 0.87, 1, 1.03}
+var ShadowCleaveMaxLevel = [ShadowCleaveRanks + 1]int{0, 5, 11, 17, 25, 33, 41, 49, 57, 65, 65}
 
 // Shadow Cost Reduction: ranks 0 present, from build 1.60.1.70009.
 const ShadowCostReductionRanks = 0
@@ -3102,7 +3562,9 @@ var ShadowCostReductionCooldownMS = [ShadowCostReductionRanks + 1]int32{0}
 var ShadowCostReductionManaCost = [ShadowCostReductionRanks + 1]float64{0}
 var ShadowCostReductionManaCostPct = [ShadowCostReductionRanks + 1]float64{0}
 var ShadowCostReductionSpellCoeff = [ShadowCostReductionRanks + 1]float64{1}
-var ShadowCostReductionBaseDamage = [ShadowCostReductionRanks + 1][]float64{{-15, -15}}
+var ShadowCostReductionBaseDamage = [ShadowCostReductionRanks + 1][]float64{{0, 0}}
+var ShadowCostReductionPointsPerLevel = [ShadowCostReductionRanks + 1]float64{0}
+var ShadowCostReductionMaxLevel = [ShadowCostReductionRanks + 1]int{0}
 
 // Shadow Mastery: ranks 0 present, from build 1.60.1.70009.
 const ShadowMasteryRanks = 0
@@ -3115,6 +3577,8 @@ var ShadowMasteryManaCost = [ShadowMasteryRanks + 1]float64{0}
 var ShadowMasteryManaCostPct = [ShadowMasteryRanks + 1]float64{0}
 var ShadowMasterySpellCoeff = [ShadowMasteryRanks + 1]float64{1}
 var ShadowMasteryBaseDamage = [ShadowMasteryRanks + 1][]float64{{2, 2}}
+var ShadowMasteryPointsPerLevel = [ShadowMasteryRanks + 1]float64{0}
+var ShadowMasteryMaxLevel = [ShadowMasteryRanks + 1]int{0}
 
 // Shadow Spark: ranks 0 present, from build 1.60.1.70009.
 const ShadowSparkRanks = 0
@@ -3126,7 +3590,9 @@ var ShadowSparkCooldownMS = [ShadowSparkRanks + 1]int32{0}
 var ShadowSparkManaCost = [ShadowSparkRanks + 1]float64{0}
 var ShadowSparkManaCostPct = [ShadowSparkRanks + 1]float64{0}
 var ShadowSparkSpellCoeff = [ShadowSparkRanks + 1]float64{1}
-var ShadowSparkBaseDamage = [ShadowSparkRanks + 1][]float64{{-50, -50}}
+var ShadowSparkBaseDamage = [ShadowSparkRanks + 1][]float64{{0, 0}}
+var ShadowSparkPointsPerLevel = [ShadowSparkRanks + 1]float64{0}
+var ShadowSparkMaxLevel = [ShadowSparkRanks + 1]int{0}
 
 // Shadow Spark rank 0: kept id 450013 (spell_level 0); dropped 450012 (spell_level 0)
 
@@ -3140,7 +3606,9 @@ var ShadowTranceCooldownMS = [ShadowTranceRanks + 1]int32{0}
 var ShadowTranceManaCost = [ShadowTranceRanks + 1]float64{0}
 var ShadowTranceManaCostPct = [ShadowTranceRanks + 1]float64{0}
 var ShadowTranceSpellCoeff = [ShadowTranceRanks + 1]float64{1}
-var ShadowTranceBaseDamage = [ShadowTranceRanks + 1][]float64{{-100, -100}}
+var ShadowTranceBaseDamage = [ShadowTranceRanks + 1][]float64{{0, 0}}
+var ShadowTrancePointsPerLevel = [ShadowTranceRanks + 1]float64{0}
+var ShadowTranceMaxLevel = [ShadowTranceRanks + 1]int{0}
 
 // Shadow Vulnerability: ranks 0 present, from build 1.60.1.70009.
 const ShadowVulnerabilityRanks = 0
@@ -3153,6 +3621,8 @@ var ShadowVulnerabilityManaCost = [ShadowVulnerabilityRanks + 1]float64{0}
 var ShadowVulnerabilityManaCostPct = [ShadowVulnerabilityRanks + 1]float64{0}
 var ShadowVulnerabilitySpellCoeff = [ShadowVulnerabilityRanks + 1]float64{1}
 var ShadowVulnerabilityBaseDamage = [ShadowVulnerabilityRanks + 1][]float64{{4, 4}}
+var ShadowVulnerabilityPointsPerLevel = [ShadowVulnerabilityRanks + 1]float64{0}
+var ShadowVulnerabilityMaxLevel = [ShadowVulnerabilityRanks + 1]int{0}
 
 // Shadow and Flame: ranks 0 present, from build 1.60.1.70009.
 const ShadowAndFlameRanks = 0
@@ -3165,6 +3635,8 @@ var ShadowAndFlameManaCost = [ShadowAndFlameRanks + 1]float64{0}
 var ShadowAndFlameManaCostPct = [ShadowAndFlameRanks + 1]float64{0}
 var ShadowAndFlameSpellCoeff = [ShadowAndFlameRanks + 1]float64{0.4286}
 var ShadowAndFlameBaseDamage = [ShadowAndFlameRanks + 1][]float64{{426316, 426316}}
+var ShadowAndFlamePointsPerLevel = [ShadowAndFlameRanks + 1]float64{0}
+var ShadowAndFlameMaxLevel = [ShadowAndFlameRanks + 1]int{0}
 
 // unconfirmed: Shadow and Flame coefficient derived from the vanilla convention (rank 0)
 // Shadow and Flame rank 0: kept id 426449 (spell_level 1); dropped 426316 (spell_level 0)
@@ -3182,6 +3654,8 @@ var ShadowflameManaCost = [ShadowflameRanks + 1]float64{0}
 var ShadowflameManaCostPct = [ShadowflameRanks + 1]float64{0}
 var ShadowflameSpellCoeff = [ShadowflameRanks + 1]float64{0}
 var ShadowflameBaseDamage = [ShadowflameRanks + 1][]float64{{0, 0}}
+var ShadowflamePointsPerLevel = [ShadowflameRanks + 1]float64{0}
+var ShadowflameMaxLevel = [ShadowflameRanks + 1]int{0}
 
 // Shadowflame rank 0: kept id 1228049 (spell_level 1); dropped 426320 (spell_level 1), 426325 (spell_level 1), 426454 (spell_level 1), 1219429 (spell_level 1)
 
@@ -3197,7 +3671,9 @@ var SoothingKissCooldownMS = [SoothingKissRanks + 1]int32{0, 4000, 4000, 4000, 4
 var SoothingKissManaCost = [SoothingKissRanks + 1]float64{0, 30, 50, 75, 100}
 var SoothingKissManaCostPct = [SoothingKissRanks + 1]float64{0, 0, 0, 0, 0}
 var SoothingKissSpellCoeff = [SoothingKissRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 0.4286}
-var SoothingKissBaseDamage = [SoothingKissRanks + 1][]float64{{0, 0}, {-45, -45}, {-75, -75}, {-127, -127}, {-165, -165}}
+var SoothingKissBaseDamage = [SoothingKissRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
+var SoothingKissPointsPerLevel = [SoothingKissRanks + 1]float64{0, -1, -1, -1, -1}
+var SoothingKissMaxLevel = [SoothingKissRanks + 1]int{0, 32, 44, 0, 68}
 
 // unconfirmed: Soothing Kiss coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4)
 
@@ -3216,6 +3692,8 @@ var SoulHarvestingManaCost = [SoulHarvestingRanks + 1]float64{0}
 var SoulHarvestingManaCostPct = [SoulHarvestingRanks + 1]float64{0}
 var SoulHarvestingSpellCoeff = [SoulHarvestingRanks + 1]float64{1}
 var SoulHarvestingBaseDamage = [SoulHarvestingRanks + 1][]float64{{100, 100}}
+var SoulHarvestingPointsPerLevel = [SoulHarvestingRanks + 1]float64{0}
+var SoulHarvestingMaxLevel = [SoulHarvestingRanks + 1]int{0}
 
 // Soul Siphon: ranks 0 present, from build 1.60.1.70009.
 const SoulSiphonRanks = 0
@@ -3228,6 +3706,8 @@ var SoulSiphonManaCost = [SoulSiphonRanks + 1]float64{0}
 var SoulSiphonManaCostPct = [SoulSiphonRanks + 1]float64{0}
 var SoulSiphonSpellCoeff = [SoulSiphonRanks + 1]float64{0.4286}
 var SoulSiphonBaseDamage = [SoulSiphonRanks + 1][]float64{{403511, 403511}}
+var SoulSiphonPointsPerLevel = [SoulSiphonRanks + 1]float64{0}
+var SoulSiphonMaxLevel = [SoulSiphonRanks + 1]int{0}
 
 // unconfirmed: Soul Siphon coefficient derived from the vanilla convention (rank 0)
 // Soul Siphon rank 0: kept id 403863 (spell_level 1); dropped 17804 (spell_level 0)
@@ -3243,6 +3723,8 @@ var SoulstoneResurrectionManaCost = [SoulstoneResurrectionRanks + 1]float64{0}
 var SoulstoneResurrectionManaCostPct = [SoulstoneResurrectionRanks + 1]float64{0}
 var SoulstoneResurrectionSpellCoeff = [SoulstoneResurrectionRanks + 1]float64{1}
 var SoulstoneResurrectionBaseDamage = [SoulstoneResurrectionRanks + 1][]float64{{0, 0}}
+var SoulstoneResurrectionPointsPerLevel = [SoulstoneResurrectionRanks + 1]float64{0}
+var SoulstoneResurrectionMaxLevel = [SoulstoneResurrectionRanks + 1]int{0}
 
 // Soulstone Resurrection rank 0: kept id 20765 (spell_level 60); dropped 20707 (spell_level 18), 20762 (spell_level 30), 20763 (spell_level 40), 20764 (spell_level 50)
 
@@ -3257,6 +3739,8 @@ var SpellLockManaCost = [SpellLockRanks + 1]float64{0, 120, 200}
 var SpellLockManaCostPct = [SpellLockRanks + 1]float64{0, 0, 0}
 var SpellLockSpellCoeff = [SpellLockRanks + 1]float64{1, 0.4, 0.5333}
 var SpellLockBaseDamage = [SpellLockRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}}
+var SpellLockPointsPerLevel = [SpellLockRanks + 1]float64{0, 0, 0}
+var SpellLockMaxLevel = [SpellLockRanks + 1]int{0, 0, 0}
 
 // unconfirmed: Spell Lock coefficient derived from the vanilla convention (rank 1, rank 2)
 
@@ -3271,6 +3755,8 @@ var SpellstoneManaCost = [SpellstoneRanks + 1]float64{0}
 var SpellstoneManaCostPct = [SpellstoneRanks + 1]float64{0}
 var SpellstoneSpellCoeff = [SpellstoneRanks + 1]float64{4}
 var SpellstoneBaseDamage = [SpellstoneRanks + 1][]float64{{100, 100}}
+var SpellstonePointsPerLevel = [SpellstoneRanks + 1]float64{0}
+var SpellstoneMaxLevel = [SpellstoneRanks + 1]int{0}
 
 // unconfirmed: Spellstone coefficient derived from the vanilla convention (rank 0)
 
@@ -3285,6 +3771,8 @@ var SpreadingPainManaCost = [SpreadingPainRanks + 1]float64{0}
 var SpreadingPainManaCostPct = [SpreadingPainRanks + 1]float64{0}
 var SpreadingPainSpellCoeff = [SpreadingPainRanks + 1]float64{0.4}
 var SpreadingPainBaseDamage = [SpreadingPainRanks + 1][]float64{{1, 1}}
+var SpreadingPainPointsPerLevel = [SpreadingPainRanks + 1]float64{0}
+var SpreadingPainMaxLevel = [SpreadingPainRanks + 1]int{0}
 
 // unconfirmed: Spreading Pain coefficient derived from the vanilla convention (rank 0)
 
@@ -3299,6 +3787,8 @@ var SubjugateDemonManaCost = [SubjugateDemonRanks + 1]float64{0, 300, 500, 700}
 var SubjugateDemonManaCostPct = [SubjugateDemonRanks + 1]float64{0, 0, 0, 0}
 var SubjugateDemonSpellCoeff = [SubjugateDemonRanks + 1]float64{20, 20, 20, 20}
 var SubjugateDemonBaseDamage = [SubjugateDemonRanks + 1][]float64{{62, 62}, {32, 32}, {47, 47}, {62, 62}}
+var SubjugateDemonPointsPerLevel = [SubjugateDemonRanks + 1]float64{1, 1, 1, 1}
+var SubjugateDemonMaxLevel = [SubjugateDemonRanks + 1]int{0, 43, 56, 70}
 
 // unconfirmed: Subjugate Demon coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3)
 
@@ -3313,6 +3803,8 @@ var SufferingManaCost = [SufferingRanks + 1]float64{0, 150, 300, 450, 600}
 var SufferingManaCostPct = [SufferingRanks + 1]float64{0, 0, 0, 0, 0}
 var SufferingSpellCoeff = [SufferingRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 0.4286}
 var SufferingBaseDamage = [SufferingRanks + 1][]float64{{0, 0}, {150, 150}, {300, 300}, {450, 450}, {600, 600}}
+var SufferingPointsPerLevel = [SufferingRanks + 1]float64{0, 0, 0, 0, 0}
+var SufferingMaxLevel = [SufferingRanks + 1]int{0, 34, 46, 58, 70}
 
 // unconfirmed: Suffering coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4)
 
@@ -3327,6 +3819,8 @@ var SummonFelguardManaCost = [SummonFelguardRanks + 1]float64{0}
 var SummonFelguardManaCostPct = [SummonFelguardRanks + 1]float64{0}
 var SummonFelguardSpellCoeff = [SummonFelguardRanks + 1]float64{0.4286}
 var SummonFelguardBaseDamage = [SummonFelguardRanks + 1][]float64{{1, 1}}
+var SummonFelguardPointsPerLevel = [SummonFelguardRanks + 1]float64{0}
+var SummonFelguardMaxLevel = [SummonFelguardRanks + 1]int{0}
 
 // unconfirmed: Summon Felguard coefficient derived from the vanilla convention (rank 0)
 // Summon Felguard rank 0: kept id 427748 (spell_level 30); dropped 427733 (spell_level 10), 431754 (spell_level 1)
@@ -3342,6 +3836,8 @@ var SummonFelhunterManaCost = [SummonFelhunterRanks + 1]float64{0}
 var SummonFelhunterManaCostPct = [SummonFelhunterRanks + 1]float64{0}
 var SummonFelhunterSpellCoeff = [SummonFelhunterRanks + 1]float64{0.4286}
 var SummonFelhunterBaseDamage = [SummonFelhunterRanks + 1][]float64{{1, 1}}
+var SummonFelhunterPointsPerLevel = [SummonFelhunterRanks + 1]float64{0}
+var SummonFelhunterMaxLevel = [SummonFelhunterRanks + 1]int{0}
 
 // unconfirmed: Summon Felhunter coefficient derived from the vanilla convention (rank 0)
 // Summon Felhunter rank 0: kept id 23500 (spell_level 30); dropped 691 (spell_level 30)
@@ -3357,6 +3853,8 @@ var SummonImpManaCost = [SummonImpRanks + 1]float64{0}
 var SummonImpManaCostPct = [SummonImpRanks + 1]float64{0}
 var SummonImpSpellCoeff = [SummonImpRanks + 1]float64{0.4286}
 var SummonImpBaseDamage = [SummonImpRanks + 1][]float64{{1, 1}}
+var SummonImpPointsPerLevel = [SummonImpRanks + 1]float64{0}
+var SummonImpMaxLevel = [SummonImpRanks + 1]int{0}
 
 // unconfirmed: Summon Imp coefficient derived from the vanilla convention (rank 0)
 // Summon Imp rank 0: kept id 23503 (spell_level 30); dropped 688 (spell_level 1)
@@ -3372,6 +3870,8 @@ var SummonIncubusManaCost = [SummonIncubusRanks + 1]float64{0}
 var SummonIncubusManaCostPct = [SummonIncubusRanks + 1]float64{100}
 var SummonIncubusSpellCoeff = [SummonIncubusRanks + 1]float64{2.8571}
 var SummonIncubusBaseDamage = [SummonIncubusRanks + 1][]float64{{1, 1}}
+var SummonIncubusPointsPerLevel = [SummonIncubusRanks + 1]float64{0}
+var SummonIncubusMaxLevel = [SummonIncubusRanks + 1]int{0}
 
 // unconfirmed: Summon Incubus coefficient derived from the vanilla convention (rank 0)
 
@@ -3386,6 +3886,8 @@ var SummonSuccubusManaCost = [SummonSuccubusRanks + 1]float64{0}
 var SummonSuccubusManaCostPct = [SummonSuccubusRanks + 1]float64{0}
 var SummonSuccubusSpellCoeff = [SummonSuccubusRanks + 1]float64{0.4286}
 var SummonSuccubusBaseDamage = [SummonSuccubusRanks + 1][]float64{{1, 1}}
+var SummonSuccubusPointsPerLevel = [SummonSuccubusRanks + 1]float64{0}
+var SummonSuccubusMaxLevel = [SummonSuccubusRanks + 1]int{0}
 
 // unconfirmed: Summon Succubus coefficient derived from the vanilla convention (rank 0)
 // Summon Succubus rank 0: kept id 23502 (spell_level 30); dropped 712 (spell_level 20)
@@ -3401,6 +3903,8 @@ var SummonVoidwalkerManaCost = [SummonVoidwalkerRanks + 1]float64{0}
 var SummonVoidwalkerManaCostPct = [SummonVoidwalkerRanks + 1]float64{0}
 var SummonVoidwalkerSpellCoeff = [SummonVoidwalkerRanks + 1]float64{0.4286}
 var SummonVoidwalkerBaseDamage = [SummonVoidwalkerRanks + 1][]float64{{1, 1}}
+var SummonVoidwalkerPointsPerLevel = [SummonVoidwalkerRanks + 1]float64{0}
+var SummonVoidwalkerMaxLevel = [SummonVoidwalkerRanks + 1]int{0}
 
 // unconfirmed: Summon Voidwalker coefficient derived from the vanilla convention (rank 0)
 // Summon Voidwalker rank 0: kept id 23501 (spell_level 30); dropped 697 (spell_level 10), 25112 (spell_level 10), 1322007 (spell_level 10)
@@ -3416,6 +3920,8 @@ var SuppressionManaCost = [SuppressionRanks + 1]float64{0}
 var SuppressionManaCostPct = [SuppressionRanks + 1]float64{0}
 var SuppressionSpellCoeff = [SuppressionRanks + 1]float64{1}
 var SuppressionBaseDamage = [SuppressionRanks + 1][]float64{{5, 5}}
+var SuppressionPointsPerLevel = [SuppressionRanks + 1]float64{0}
+var SuppressionMaxLevel = [SuppressionRanks + 1]int{0}
 
 // Tainted Blood: ranks 1-4 present, from build 1.60.1.70009.
 const TaintedBloodRanks = 4
@@ -3428,6 +3934,8 @@ var TaintedBloodManaCost = [TaintedBloodRanks + 1]float64{0, 75, 105, 135, 170}
 var TaintedBloodManaCostPct = [TaintedBloodRanks + 1]float64{0, 0, 0, 0, 0}
 var TaintedBloodSpellCoeff = [TaintedBloodRanks + 1]float64{0, 4, 4, 4, 4}
 var TaintedBloodBaseDamage = [TaintedBloodRanks + 1][]float64{{0, 0}, {17, 17}, {23, 23}, {32, 32}, {40, 40}}
+var TaintedBloodPointsPerLevel = [TaintedBloodRanks + 1]float64{0, 0, 0, 0, 0}
+var TaintedBloodMaxLevel = [TaintedBloodRanks + 1]int{0, 0, 0, 0, 0}
 
 // unconfirmed: Tainted Blood coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4)
 
@@ -3441,7 +3949,9 @@ var TaintedBloodEffectCooldownMS = [TaintedBloodEffectRanks + 1]int32{0, 0, 0, 0
 var TaintedBloodEffectManaCost = [TaintedBloodEffectRanks + 1]float64{0, 0, 0, 0, 0}
 var TaintedBloodEffectManaCostPct = [TaintedBloodEffectRanks + 1]float64{0, 0, 0, 0, 0}
 var TaintedBloodEffectSpellCoeff = [TaintedBloodEffectRanks + 1]float64{0, 0.6667, 0.6667, 0.6667, 0.6667}
-var TaintedBloodEffectBaseDamage = [TaintedBloodEffectRanks + 1][]float64{{0, 0}, {-17, -17}, {-23, -23}, {-32, -32}, {-40, -40}}
+var TaintedBloodEffectBaseDamage = [TaintedBloodEffectRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
+var TaintedBloodEffectPointsPerLevel = [TaintedBloodEffectRanks + 1]float64{0, 0, 0, 0, 0}
+var TaintedBloodEffectMaxLevel = [TaintedBloodEffectRanks + 1]int{0, 0, 0, 0, 0}
 
 // unconfirmed: Tainted Blood Effect coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4)
 
@@ -3456,6 +3966,8 @@ var TamedPetPassiveDNDManaCost = [TamedPetPassiveDNDRanks + 1]float64{0}
 var TamedPetPassiveDNDManaCostPct = [TamedPetPassiveDNDRanks + 1]float64{0}
 var TamedPetPassiveDNDSpellCoeff = [TamedPetPassiveDNDRanks + 1]float64{0.4286}
 var TamedPetPassiveDNDBaseDamage = [TamedPetPassiveDNDRanks + 1][]float64{{90, 90}}
+var TamedPetPassiveDNDPointsPerLevel = [TamedPetPassiveDNDRanks + 1]float64{1.5}
+var TamedPetPassiveDNDMaxLevel = [TamedPetPassiveDNDRanks + 1]int{0}
 
 // unconfirmed: Tamed Pet Passive (DND) coefficient derived from the vanilla convention (rank 0)
 // Tamed Pet Passive (DND) rank 0: kept id 19433 (spell_level 60); dropped 18727 (spell_level 0), 18728 (spell_level 0), 18729 (spell_level 0), 18730 (spell_level 0), 18735 (spell_level 0), 18736 (spell_level 0), 18737 (spell_level 0), 18738 (spell_level 0), 18739 (spell_level 0), 18740 (spell_level 0), 18741 (spell_level 0), 18742 (spell_level 0), 19007 (spell_level 30), 19432 (spell_level 50), 412729 (spell_level 0)
@@ -3471,6 +3983,8 @@ var TauntManaCost = [TauntRanks + 1]float64{0}
 var TauntManaCostPct = [TauntRanks + 1]float64{0}
 var TauntSpellCoeff = [TauntRanks + 1]float64{0.4286}
 var TauntBaseDamage = [TauntRanks + 1][]float64{{1000, 1000}}
+var TauntPointsPerLevel = [TauntRanks + 1]float64{2}
+var TauntMaxLevel = [TauntRanks + 1]int{65}
 
 // unconfirmed: Taunt coefficient derived from the vanilla convention (rank 0)
 
@@ -3485,6 +3999,8 @@ var TestCurseOfAgonyManaCost = [TestCurseOfAgonyRanks + 1]float64{0, 0, 0, 0, 0,
 var TestCurseOfAgonyManaCostPct = [TestCurseOfAgonyRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var TestCurseOfAgonySpellCoeff = [TestCurseOfAgonyRanks + 1]float64{0, 0, 0, 0, 0, 0, 0.083}
 var TestCurseOfAgonyBaseDamage = [TestCurseOfAgonyRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {87, 87}}
+var TestCurseOfAgonyPointsPerLevel = [TestCurseOfAgonyRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var TestCurseOfAgonyMaxLevel = [TestCurseOfAgonyRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
 
 // The Molten Core: ranks 0 present, from build 1.60.1.70009.
 const TheMoltenCoreRanks = 0
@@ -3497,6 +4013,8 @@ var TheMoltenCoreManaCost = [TheMoltenCoreRanks + 1]float64{0}
 var TheMoltenCoreManaCostPct = [TheMoltenCoreRanks + 1]float64{0}
 var TheMoltenCoreSpellCoeff = [TheMoltenCoreRanks + 1]float64{0.045}
 var TheMoltenCoreBaseDamage = [TheMoltenCoreRanks + 1][]float64{{20, 20}}
+var TheMoltenCorePointsPerLevel = [TheMoltenCoreRanks + 1]float64{0}
+var TheMoltenCoreMaxLevel = [TheMoltenCoreRanks + 1]int{0}
 
 // The Quick and the Dead: ranks 0 present, from build 1.60.1.70009.
 const TheQuickAndTheDeadRanks = 0
@@ -3508,7 +4026,9 @@ var TheQuickAndTheDeadCooldownMS = [TheQuickAndTheDeadRanks + 1]int32{0}
 var TheQuickAndTheDeadManaCost = [TheQuickAndTheDeadRanks + 1]float64{0}
 var TheQuickAndTheDeadManaCostPct = [TheQuickAndTheDeadRanks + 1]float64{0}
 var TheQuickAndTheDeadSpellCoeff = [TheQuickAndTheDeadRanks + 1]float64{8}
-var TheQuickAndTheDeadBaseDamage = [TheQuickAndTheDeadRanks + 1][]float64{{-100, -100}}
+var TheQuickAndTheDeadBaseDamage = [TheQuickAndTheDeadRanks + 1][]float64{{0, 0}}
+var TheQuickAndTheDeadPointsPerLevel = [TheQuickAndTheDeadRanks + 1]float64{0}
+var TheQuickAndTheDeadMaxLevel = [TheQuickAndTheDeadRanks + 1]int{0}
 
 // unconfirmed: The Quick and the Dead coefficient derived from the vanilla convention (rank 0)
 
@@ -3523,6 +4043,8 @@ var TimewornSpellManaCost = [TimewornSpellRanks + 1]float64{0}
 var TimewornSpellManaCostPct = [TimewornSpellRanks + 1]float64{0}
 var TimewornSpellSpellCoeff = [TimewornSpellRanks + 1]float64{1}
 var TimewornSpellBaseDamage = [TimewornSpellRanks + 1][]float64{{2, 2}}
+var TimewornSpellPointsPerLevel = [TimewornSpellRanks + 1]float64{0}
+var TimewornSpellMaxLevel = [TimewornSpellRanks + 1]int{0}
 
 // Torment: ranks 1-6 present, from build 1.60.1.70009.
 const TormentRanks = 6
@@ -3535,6 +4057,8 @@ var TormentManaCost = [TormentRanks + 1]float64{0, 20, 40, 65, 90, 115, 145}
 var TormentManaCostPct = [TormentRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var TormentSpellCoeff = [TormentRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286}
 var TormentBaseDamage = [TormentRanks + 1][]float64{{0, 0}, {70, 70}, {115, 115}, {190, 190}, {320, 320}, {450, 450}, {600, 600}}
+var TormentPointsPerLevel = [TormentRanks + 1]float64{0, 3, 3, 3, 3, 3, 3}
+var TormentMaxLevel = [TormentRanks + 1]int{0, 15, 25, 35, 45, 55, 65}
 
 // unconfirmed: Torment coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4, rank 5, rank 6)
 
@@ -3549,6 +4073,8 @@ var TouchOfFireManaCost = [TouchOfFireRanks + 1]float64{0}
 var TouchOfFireManaCostPct = [TouchOfFireRanks + 1]float64{0}
 var TouchOfFireSpellCoeff = [TouchOfFireRanks + 1]float64{1}
 var TouchOfFireBaseDamage = [TouchOfFireRanks + 1][]float64{{15, 15}}
+var TouchOfFirePointsPerLevel = [TouchOfFireRanks + 1]float64{0}
+var TouchOfFireMaxLevel = [TouchOfFireRanks + 1]int{0}
 
 // Unholy Power: ranks 0 present, from build 1.60.1.70009.
 const UnholyPowerRanks = 0
@@ -3561,6 +4087,8 @@ var UnholyPowerManaCost = [UnholyPowerRanks + 1]float64{0}
 var UnholyPowerManaCostPct = [UnholyPowerRanks + 1]float64{0}
 var UnholyPowerSpellCoeff = [UnholyPowerRanks + 1]float64{1}
 var UnholyPowerBaseDamage = [UnholyPowerRanks + 1][]float64{{10, 10}}
+var UnholyPowerPointsPerLevel = [UnholyPowerRanks + 1]float64{0}
+var UnholyPowerMaxLevel = [UnholyPowerRanks + 1]int{0}
 
 // Unstable Affliction: ranks 0-3 present, from build 1.60.1.70009.
 const UnstableAfflictionRanks = 3
@@ -3573,6 +4101,8 @@ var UnstableAfflictionManaCost = [UnstableAfflictionRanks + 1]float64{0, 200, 26
 var UnstableAfflictionManaCostPct = [UnstableAfflictionRanks + 1]float64{0, 0, 0, 0}
 var UnstableAfflictionSpellCoeff = [UnstableAfflictionRanks + 1]float64{0.4286, 0.2, 0.2, 0.2}
 var UnstableAfflictionBaseDamage = [UnstableAfflictionRanks + 1][]float64{{0, 0}, {86, 86}, {123, 123}, {174, 174}}
+var UnstableAfflictionPointsPerLevel = [UnstableAfflictionRanks + 1]float64{0, 0, 0, 0}
+var UnstableAfflictionMaxLevel = [UnstableAfflictionRanks + 1]int{0, 0, 0, 0}
 
 // unconfirmed: Unstable Affliction coefficient derived from the vanilla convention (rank 0)
 // Unstable Affliction rank 0: kept id 1219436 (spell_level 1); dropped 427719 (spell_level 0), 431748 (spell_level 1)
@@ -3588,6 +4118,8 @@ var VampirismManaCost = [VampirismRanks + 1]float64{0}
 var VampirismManaCostPct = [VampirismRanks + 1]float64{0}
 var VampirismSpellCoeff = [VampirismRanks + 1]float64{0.4286}
 var VampirismBaseDamage = [VampirismRanks + 1][]float64{{100, 100}}
+var VampirismPointsPerLevel = [VampirismRanks + 1]float64{0}
+var VampirismMaxLevel = [VampirismRanks + 1]int{0}
 
 // unconfirmed: Vampirism coefficient derived from the vanilla convention (rank 0)
 
@@ -3602,6 +4134,8 @@ var VengeanceManaCost = [VengeanceRanks + 1]float64{0}
 var VengeanceManaCostPct = [VengeanceRanks + 1]float64{0}
 var VengeanceSpellCoeff = [VengeanceRanks + 1]float64{0.4286}
 var VengeanceBaseDamage = [VengeanceRanks + 1][]float64{{426195, 426195}}
+var VengeancePointsPerLevel = [VengeanceRanks + 1]float64{0}
+var VengeanceMaxLevel = [VengeanceRanks + 1]int{0}
 
 // unconfirmed: Vengeance coefficient derived from the vanilla convention (rank 0)
 // Vengeance rank 0: kept id 426469 (spell_level 1); dropped 426195 (spell_level 1)
@@ -3617,6 +4151,8 @@ var VoidWalkingManaCost = [VoidWalkingRanks + 1]float64{0}
 var VoidWalkingManaCostPct = [VoidWalkingRanks + 1]float64{0}
 var VoidWalkingSpellCoeff = [VoidWalkingRanks + 1]float64{1}
 var VoidWalkingBaseDamage = [VoidWalkingRanks + 1][]float64{{0, 0}}
+var VoidWalkingPointsPerLevel = [VoidWalkingRanks + 1]float64{0}
+var VoidWalkingMaxLevel = [VoidWalkingRanks + 1]int{0}
 
 // unconfirmed: Void Walking coefficient derived from the vanilla convention (rank 0)
 
@@ -3631,6 +4167,8 @@ var WickednessManaCost = [WickednessRanks + 1]float64{0}
 var WickednessManaCostPct = [WickednessRanks + 1]float64{0}
 var WickednessSpellCoeff = [WickednessRanks + 1]float64{1}
 var WickednessBaseDamage = [WickednessRanks + 1][]float64{{20, 20}}
+var WickednessPointsPerLevel = [WickednessRanks + 1]float64{0}
+var WickednessMaxLevel = [WickednessRanks + 1]int{0}
 
 // unconfirmed: Wickedness coefficient derived from the vanilla convention (rank 0)
 
@@ -3645,6 +4183,8 @@ var WrackManaCost = [WrackRanks + 1]float64{0, 200}
 var WrackManaCostPct = [WrackRanks + 1]float64{0, 0}
 var WrackSpellCoeff = [WrackRanks + 1]float64{0, 0.143}
 var WrackBaseDamage = [WrackRanks + 1][]float64{{0, 0}, {36, 36}}
+var WrackPointsPerLevel = [WrackRanks + 1]float64{0, 0}
+var WrackMaxLevel = [WrackRanks + 1]int{0, 60}
 
 // Zila Amanemodas: ranks 0 present, from build 1.60.1.70009.
 const ZilaAmanemodasRanks = 0
@@ -3657,6 +4197,8 @@ var ZilaAmanemodasManaCost = [ZilaAmanemodasRanks + 1]float64{0}
 var ZilaAmanemodasManaCostPct = [ZilaAmanemodasRanks + 1]float64{0}
 var ZilaAmanemodasSpellCoeff = [ZilaAmanemodasRanks + 1]float64{0.4286}
 var ZilaAmanemodasBaseDamage = [ZilaAmanemodasRanks + 1][]float64{{0, 0}}
+var ZilaAmanemodasPointsPerLevel = [ZilaAmanemodasRanks + 1]float64{0}
+var ZilaAmanemodasMaxLevel = [ZilaAmanemodasRanks + 1]int{0}
 
 // unconfirmed: Zila Amanemodas coefficient derived from the vanilla convention (rank 0)
 
@@ -3671,3 +4213,5 @@ var ZilaGularManaCost = [ZilaGularRanks + 1]float64{0}
 var ZilaGularManaCostPct = [ZilaGularRanks + 1]float64{0}
 var ZilaGularSpellCoeff = [ZilaGularRanks + 1]float64{1}
 var ZilaGularBaseDamage = [ZilaGularRanks + 1][]float64{{10, 10}}
+var ZilaGularPointsPerLevel = [ZilaGularRanks + 1]float64{0}
+var ZilaGularMaxLevel = [ZilaGularRanks + 1]int{0}

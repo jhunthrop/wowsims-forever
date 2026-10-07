@@ -107,6 +107,13 @@ func generate(class spellconst.Class, outDir, outFile, pkgName, sourcePath strin
 	fmt.Fprintf(&b, "// describe its school-damage effect (falling back to its first effect\n")
 	fmt.Fprintf(&b, "// when it has none); sim/core/spellconst.Load exposes every effect for\n")
 	fmt.Fprintf(&b, "// ability files that need a different one.\n//\n")
+	fmt.Fprintf(&b, "// BaseDamage convention: <Spell>BaseDamage[rank] is {min, max}, the\n")
+	fmt.Fprintf(&b, "// client's roll at the spell's own level. The client states a centre\n")
+	fmt.Fprintf(&b, "// (EffectBasePointsF) and a Variance; the roll is centre x (1 -\n")
+	fmt.Fprintf(&b, "// Variance/2) through centre x (1 + Variance/2). Each caster level\n")
+	fmt.Fprintf(&b, "// above the spell's own adds <Spell>PointsPerLevel[rank] to the\n")
+	fmt.Fprintf(&b, "// centre, up to <Spell>MaxLevel[rank] (0: the client states no cap);\n")
+	fmt.Fprintf(&b, "// spellconst.Spell.DamageRange applies exactly that at any level.\n//\n")
 	fmt.Fprintf(&b, "// Every array is indexed by the rank label itself (rank 0 included,\n")
 	fmt.Fprintf(&b, "// common for a spell with no numbered progression), not by position:\n")
 	fmt.Fprintf(&b, "// a gap in the client's own rank numbers is a zero-valued slot here\n")
@@ -209,20 +216,22 @@ func generate(class spellconst.Class, outDir, outFile, pkgName, sourcePath strin
 			return trimFloat(primaryCoefficient(w))
 		})
 
-		fmt.Fprintf(&b, "var %sBaseDamage = [%sRanks + 1][]float64{", ident, ident)
-		for r := 0; r <= maxRank; r++ {
-			if r > 0 {
-				fmt.Fprint(&b, ", ")
-			}
+		writeBaseDamage(&b, ident, maxRank, winners)
+		writeArray(&b, ident, "PointsPerLevel", "float64", maxRank, func(r int) string {
 			w, ok := winners[r]
 			if !ok {
-				fmt.Fprint(&b, "{0, 0}")
-				continue
+				return "0"
 			}
-			amount := trimFloat(primaryAmount(w))
-			fmt.Fprintf(&b, "{%s, %s}", amount, amount)
-		}
-		fmt.Fprintf(&b, "}\n")
+			e, _ := primaryEffect(w)
+			return trimFloat(e.PointsPerLevel)
+		})
+		writeArray(&b, ident, "MaxLevel", "int", maxRank, func(r int) string {
+			w, ok := winners[r]
+			if !ok {
+				return "0"
+			}
+			return fmt.Sprint(w.MaxLevel)
+		})
 
 		// A coefficient the table did not supply is called out by name,
 		// so a reader of the ability file knows which numbers are derived.
@@ -363,12 +372,40 @@ func primaryEffect(s spellconst.Spell) (spellconst.Effect, bool) {
 	return s.Effects[0], true
 }
 
-func primaryAmount(s spellconst.Spell) float64 {
+// writeBaseDamage emits `<Ident>BaseDamage`, one {min, max} pair per
+// rank label: the client's roll for the rank's primary effect at the
+// spell's own level (spellconst.Spell.DamageRange with variance applied),
+// not a degenerate {amount, amount}. A caster above the spell's level
+// adds <Ident>PointsPerLevel per level up to <Ident>MaxLevel (0 meaning
+// uncapped) before the same variance spread.
+func writeBaseDamage(b *bytes.Buffer, ident string, maxRank int, winners map[int]spellconst.Spell) {
+	fmt.Fprintf(b, "var %sBaseDamage = [%sRanks + 1][]float64{", ident, ident)
+	for r := 0; r <= maxRank; r++ {
+		if r > 0 {
+			fmt.Fprint(b, ", ")
+		}
+		w, ok := winners[r]
+		if !ok {
+			fmt.Fprint(b, "{0, 0}")
+			continue
+		}
+		fmt.Fprintf(b, "{%s, %s}", trimFloat(primaryDamageRange(w, 0)), trimFloat(primaryDamageRange(w, 1)))
+	}
+	fmt.Fprintf(b, "}\n")
+}
+
+// primaryDamageRange is one end (0 min, 1 max) of the primary effect's
+// roll at the spell's own level.
+func primaryDamageRange(s spellconst.Spell, end int) float64 {
 	e, ok := primaryEffect(s)
 	if !ok {
 		return 0
 	}
-	return e.Amount
+	min, max, _ := s.DamageRange(e.Index, s.SpellLevel)
+	if end == 0 {
+		return min
+	}
+	return max
 }
 
 func primaryCoefficient(s spellconst.Spell) float64 {
