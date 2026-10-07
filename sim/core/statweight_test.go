@@ -7,39 +7,21 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
-// TestBuildStatWeightRequestsScalesHitLikeArmor pins this lane's fix
-// (Forever's own leveling-bis ranker was publishing "hit" as weight 0,
-// error 0 - "no effect" - for every physical spec: hunter-beast-
-// mastery, hunter-marksmanship, warrior-arms, warrior-fury, druid-
-// feral and rogue-assassination, at every band).
+// TestBuildStatWeightRequestsStepsHitByOnePoint pins the 2026-10-07
+// ratings lane's replacement for the earlier x20 hit step.
 //
-// The root cause is not a real hard cap: HitRatingPerHitChance is 1,
-// so one raw point of Hit is exactly 1% hit chance
-// (spell_result.go's PhysicalHitChance), and NewAttackTable
-// (target.go) sets HitSuppression to (targetDefense-weaponSkill-10)*
-// 0.002, which comes out to exactly 0.01 (1%) for the ordinary
-// "3 levels higher" gap this package's default encounter fights. A
-// character with no other source of Hit has its first raw point
-// entirely cancelled by that suppression - the low direction
-// (-defaultStatMod) can't push an already-floored hit chance any
-// lower, and the high direction (+defaultStatMod) lands exactly back
-// on the floor too, so runStatWeights measures bit-identical DPS in
-// both directions and computeStatWeights' hard-cap detector
-// (modPlayerHigh.Dps.Avg == baselinePlayer.Dps.Avg) reads that as a
-// real cap - confirmed directly for hunter-marksmanship band 60 and
-// warrior-fury band 60 (see this lane's report): +1 hit point reads
-// bit-identical to +0, but +2 already shows a real, positive DPS
-// gain.
-//
-// Armor, BonusArmor and Mana already get a x20 statMod for the
-// analogous reason (their own per-point DPS effect is too small for
-// the default mod to resolve); this test pins that Hit now gets the
-// same treatment, scaled the same way, so the sweep's own perturbation
-// clears the suppression floor with room to spare instead of reading
-// back a false 0/0.
-func TestBuildStatWeightRequestsScalesHitLikeArmor(t *testing.T) {
-	scaledStats := []proto.Stat{proto.Stat_StatArmor, proto.Stat_StatBonusArmor, proto.Stat_StatMana, proto.Stat_StatHit}
-	unscaledStats := []proto.Stat{proto.Stat_StatStamina, proto.Stat_StatCrit, proto.Stat_StatMeleeHaste}
+// The x20 step existed because a +-1 step on a character with no other
+// hit read bit-identical in both directions (the first point of hit is
+// cancelled by HitSuppression) and tripped the hard-cap detector. But hit
+// is not linear: PhysicalHitChance floors at max(hit - suppression, 0) and
+// a special attack stops missing at the miss-table cap, so +-20 averaged a
+// saturated response into a weight several times too small (0.46 per
+// rating point for a Fury warrior). hitStepWindow now measures hit's
+// marginal value at the character's actual hit; with no player to profile
+// the step is the plain +-1, and Armor/BonusArmor/Mana keep their x20.
+func TestBuildStatWeightRequestsStepsHitByOnePoint(t *testing.T) {
+	scaledStats := []proto.Stat{proto.Stat_StatArmor, proto.Stat_StatBonusArmor, proto.Stat_StatMana}
+	unscaledStats := []proto.Stat{proto.Stat_StatHit, proto.Stat_StatStamina, proto.Stat_StatCrit, proto.Stat_StatMeleeHaste}
 
 	req := &proto.StatWeightsRequest{
 		Player: &proto.Player{
@@ -68,7 +50,7 @@ func TestBuildStatWeightRequestsScalesHitLikeArmor(t *testing.T) {
 			t.Fatalf("%s: no stat sim request built", stat)
 		}
 		if high != 20 || low != -20 {
-			t.Errorf("%s: mod = (%v, %v), want (-20, 20) - the same x20 scale Armor/BonusArmor/Mana already get", stat, low, high)
+			t.Errorf("%s: mod = (%v, %v), want (-20, 20)", stat, low, high)
 		}
 	}
 
@@ -78,7 +60,7 @@ func TestBuildStatWeightRequestsScalesHitLikeArmor(t *testing.T) {
 			t.Fatalf("%s: no stat sim request built", stat)
 		}
 		if high != 1 || low != -1 {
-			t.Errorf("%s: mod = (%v, %v), want (-1, 1) - unrelated stats must not be swept up by the Hit fix", stat, low, high)
+			t.Errorf("%s: mod = (%v, %v), want (-1, 1)", stat, low, high)
 		}
 	}
 }
@@ -155,7 +137,7 @@ func TestBuildStatWeightRequestsScalesMeleePrimariesLikeArmor(t *testing.T) {
 // that Intellect now gets the identical treatment, and that unrelated
 // stats are not swept up by it.
 func TestBuildStatWeightRequestsScalesIntellectLikeArmor(t *testing.T) {
-	scaledStats := []proto.Stat{proto.Stat_StatArmor, proto.Stat_StatBonusArmor, proto.Stat_StatMana, proto.Stat_StatHit, proto.Stat_StatIntellect}
+	scaledStats := []proto.Stat{proto.Stat_StatArmor, proto.Stat_StatBonusArmor, proto.Stat_StatMana, proto.Stat_StatIntellect}
 	unscaledStats := []proto.Stat{proto.Stat_StatStamina, proto.Stat_StatCrit, proto.Stat_StatSpellPower, proto.Stat_StatSpirit}
 
 	req := &proto.StatWeightsRequest{
@@ -185,7 +167,7 @@ func TestBuildStatWeightRequestsScalesIntellectLikeArmor(t *testing.T) {
 			t.Fatalf("%s: no stat sim request built", stat)
 		}
 		if high != 20 || low != -20 {
-			t.Errorf("%s: mod = (%v, %v), want (-20, 20) - the same x20 scale Armor/BonusArmor/Mana/Hit already get", stat, low, high)
+			t.Errorf("%s: mod = (%v, %v), want (-20, 20) - the same x20 scale Armor/BonusArmor/Mana already get", stat, low, high)
 		}
 	}
 
