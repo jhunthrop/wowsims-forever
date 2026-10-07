@@ -115,3 +115,20 @@ func TestAhnQirajBookRanksFollowIncludeAQ(t *testing.T) {
 		}
 	}
 }
+
+// Trueshot Aura rank 5 is weaker than rank 4 in the client, so level 60
+// keeps rank 4's 75; before level 25 there is no rank at all.
+func TestTrueshotAuraSkipsTheInferiorRank(t *testing.T) {
+	cases := []struct {
+		level int
+		want  float64
+	}{{24, 0}, {25, 30}, {32, 40}, {40, 50}, {50, 75}, {59, 75}, {60, 75}}
+	for _, c := range cases {
+		if got := TrueshotAuraRanks.At(c.level); got != c.want {
+			t.Errorf("Trueshot Aura at level %d = %v, want %v", c.level, got, c.want)
+		}
+	}
+	if rank, _ := TrueshotAuraRanks.Learned(60); rank.SpellID != 20905 {
+		t.Errorf("Trueshot Aura learned at 60 = %d, want 20905 (rank 4)", rank.SpellID)
+	}
+}

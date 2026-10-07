@@ -1405,13 +1405,21 @@ func BattleShoutAura(unit *Unit, impBattleShout int32, boomingVoicePts int32, ha
 	})
 }
 
+// TrueshotAura grants the client's amount for the strongest rank the unit's
+// level can learn (TrueshotAuraRanks), to melee and ranged attack power
+// alike as the client's single effect does.
 func TrueshotAura(unit *Unit) *Aura {
-	rangedAP := 100.0
-	meleeAP := 100.0
+	rank, ok := TrueshotAuraRanks.Learned(int(unit.Level))
+	if !ok {
+		rank = TrueshotAuraRanks[0]
+	}
+	amount := TernaryFloat64(ok, rank.At(int(unit.Level)), 0)
+	rangedAP := amount
+	meleeAP := amount
 
 	aura := MakePermanent(unit.RegisterAura(Aura{
 		Label:    "Trueshot Aura",
-		ActionID: ActionID{SpellID: 20906},
+		ActionID: ActionID{SpellID: rank.SpellID},
 	}))
 
 	makeExclusiveBuff(aura, BuffConfig{

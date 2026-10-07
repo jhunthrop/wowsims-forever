@@ -31,6 +31,10 @@ type BuffRank struct {
 	// AhnQiraj marks a book rank a launch character cannot learn: it is
 	// only reachable while IncludeAQ is set.
 	AhnQiraj bool
+	// Inferior marks a rank the client makes weaker than the rank before it
+	// (data/curated/inferior-ranks.json): a player keeps the stronger rank,
+	// so it is never the learned rank.
+	Inferior bool
 }
 
 // At is the effect amount for a caster of the given level, whole points.
@@ -59,6 +63,9 @@ func (ranks BuffRanks) learned(level int, includeAQ bool) (BuffRank, bool) {
 			break
 		}
 		if rank.AhnQiraj && !includeAQ {
+			continue
+		}
+		if rank.Inferior {
 			continue
 		}
 		learned, found = rank, true
@@ -99,6 +106,17 @@ var (
 		{SpellID: 19837, Level: 42, Amount: 83},
 		{SpellID: 19838, Level: 52, Amount: 112},
 		{SpellID: 25291, Level: 60, Amount: 133, AhnQiraj: true},
+	}
+
+	// Trueshot Aura: the Marksmanship talent's aura, ranked by trainer.
+	// Rank 5 (20906, level 60) is 50 ranged attack power against rank 4's
+	// 75 in the client, so a level-60 hunter keeps rank 4.
+	TrueshotAuraRanks = BuffRanks{
+		{SpellID: 1299346, Level: 25, Amount: 30},
+		{SpellID: 1299348, Level: 32, Amount: 40},
+		{SpellID: 19506, Level: 40, Amount: 50},
+		{SpellID: 20905, Level: 50, Amount: 75},
+		{SpellID: 20906, Level: 60, Amount: 50, Inferior: true},
 	}
 
 	MarkOfTheWildArmorRanks = BuffRanks{
