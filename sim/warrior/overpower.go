@@ -8,7 +8,8 @@ import (
 
 func (warrior *Warrior) registerOverpowerSpell(cdTimer *core.Timer) {
 	rank := rankAtLevel(OverpowerLevel[:], warrior.Level)
-	bonusDamage := OverpowerBaseDamage[rank][0]
+	bonusDamage := OverpowerDamage[rank]
+	casterLevel := int(warrior.Level)
 	spellID := OverpowerSpellId[rank]
 
 	castConfig := core.CastConfig{
@@ -79,9 +80,10 @@ func (warrior *Warrior) registerOverpowerSpell(cdTimer *core.Timer) {
 		DamageMultiplier: 1,
 		ThreatMultiplier: 0.75,
 		BonusCoefficient: 1,
+		ClientBaseDamage: bonusDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := bonusDamage + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
+			baseDamage := bonusDamage.Roll(sim, casterLevel) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
 
 			warrior.OverpowerAura.Deactivate(sim)

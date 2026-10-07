@@ -19,7 +19,8 @@ func (warrior *Warrior) registerThunderClapSpell() {
 	// already use - a convention-vs-literal bug, not a talent
 	// double-count.
 	spellID := ThunderClapSpellId[rank]
-	baseDamage := ThunderClapBaseDamage[rank][0]
+	damage := ThunderClapDamage[rank]
+	casterLevel := int(warrior.Level)
 	has5pcConq := warrior.HasSetBonus(ItemSetConquerorsBattleGear, 5)
 	attackSpeedReduction := core.TernaryInt32(has5pcConq, 15, 10)
 	stanceMask := BattleStance
@@ -69,11 +70,12 @@ func (warrior *Warrior) registerThunderClapSpell() {
 
 		DamageMultiplier: core.TernaryFloat64(has5pcConq, 1.5, 1),
 		ThreatMultiplier: 2.5,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			numHits := min(len(results), len(sim.Encounter.TargetUnits))
 			for idx := 0; idx < numHits; idx++ {
-				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+				results[idx] = spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 				target = sim.Environment.NextTargetUnit(target)
 			}
 

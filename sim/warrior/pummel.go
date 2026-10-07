@@ -8,7 +8,8 @@ import (
 
 func (warrior *Warrior) registerPummelSpell() {
 	rank := rankAtLevel(PummelLevel[:], warrior.Level)
-	damage := PummelBaseDamage[rank][0]
+	damage := PummelDamage[rank]
+	casterLevel := int(warrior.Level)
 
 	castConfig := core.CastConfig{
 		DefaultCast: core.Cast{
@@ -48,9 +49,10 @@ func (warrior *Warrior) registerPummelSpell() {
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+			result := spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
 			if !result.Landed() {
 				spell.IssueRefund(sim)

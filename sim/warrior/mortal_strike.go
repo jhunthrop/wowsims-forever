@@ -7,27 +7,18 @@ import (
 )
 
 // Mortal Strike's generated rows are two of the three the data lane owes
-// a fix for, so its numbers are the only ones in this file still typed:
+// a fix for, so two things stay typed here:
 //
-//   - MortalStrikeBaseDamage is {-50,-50} at every rank. Spell 27580's
+//   - MortalStrikeBaseDamage is {-50,-50} at every rank: spell 27580's
 //     first effect is the -50% healing-taken aura (effect 6, aura 118)
 //     and the generator emits a spell's school-damage effect or, failing
-//     that, its first; Mortal Strike's damage is effect 121 ("weapon
-//     damage plus <N>" per rank), which the generated arrays do not
-//     carry at all.
+//     that, its first. Mortal Strike's damage is effect 121 ("weapon
+//     damage plus <N>"), which MortalStrikeDamage (client_damage.go)
+//     states from the client file and spellconst_damage_test.go checks.
 //   - MortalStrikeManaCost is 0 at rank 4. Two rank-4 rows share
 //     spell_level 60 - 21553 at cost 300 and 27580 at cost 0 - and the
 //     dedup broke the tie on the higher id, so it kept the free 27580.
-//
-// Both figures below are therefore read by hand, per rank, from
-// data/builds/1.60.1.70009/spellconst/warrior.json's effect-121 amount
-// (85/110/135/160 at ranks 1-4, ids 12294/21551/21552/21553) and its
-// 300-tenths cost (30 rage at every rank). The cooldown is read from
-// the generated array, which is sound. Index 0 is the unused phantom
-// rank rankAtLevel never returns once the MortalStrike talent's own
-// level-40 floor is respected.
-var mortalStrikeBonusDamageByRank = [MortalStrikeRanks + 1]float64{0, 85, 110, 135, 160}
-
+//     The 300-tenths cost (30 rage at every rank) is read by hand.
 const mortalStrikeRageCost = 30.0
 
 func (warrior *Warrior) registerMortalStrikeSpell(cdTimer *core.Timer) {
@@ -36,6 +27,8 @@ func (warrior *Warrior) registerMortalStrikeSpell(cdTimer *core.Timer) {
 	}
 
 	rank := rankAtLevel(MortalStrikeLevel[:], warrior.Level)
+	bonusDamage := MortalStrikeDamage[rank]
+	casterLevel := int(warrior.Level)
 	// The engine keeps spell 21553 rather than the generated
 	// MortalStrikeSpellId[4] of 27580 for rank 4 only: the two are the
 	// same rank-4 Mortal Strike, 21553 is the one that carries the
@@ -88,9 +81,10 @@ func (warrior *Warrior) registerMortalStrikeSpell(cdTimer *core.Timer) {
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
+		ClientBaseDamage: bonusDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := mortalStrikeBonusDamageByRank[rank] + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
+			baseDamage := bonusDamage.Roll(sim, casterLevel) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 

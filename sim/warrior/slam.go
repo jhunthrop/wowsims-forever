@@ -57,7 +57,8 @@ func (warrior *Warrior) registerSlamSpell() {
 	rank := rankAtLevel(slamRankLevel[:], warrior.Level)
 	requiredLevel := slamRankLevel[rank]
 	spellID := slamRankSpellID[rank]
-	flatDamageBonus := SlamBaseDamage[rank][0]
+	flatDamageBonus := SlamDamage[rank]
+	casterLevel := int(warrior.Level)
 
 	// Improved Slam, per the client's own rank text (build 1.60.1.70009,
 	// Arms tree, spell 12862): "Reduces the global cooldown and cast time
@@ -119,9 +120,10 @@ func (warrior *Warrior) registerSlamSpell() {
 		ThreatMultiplier: 1,
 		FlatThreatBonus:  140, // Should this be 54 or the old 140 value from before SoD?
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamageBonus.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := flatDamageBonus + spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
+			baseDamage := flatDamageBonus.Roll(sim, casterLevel) + spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
 
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 			if !result.Landed() {

@@ -16,7 +16,8 @@ var rendTicks = [RendRanks + 1]int32{0, 3, 4, 5, 6, 7, 7, 7}
 
 func (warrior *Warrior) registerRendSpell() {
 	rank := rankAtLevel(RendLevel[:], warrior.Level)
-	baseDamage := RendBaseDamage[rank][0]
+	damage := RendDamage[rank]
+	casterLevel := int(warrior.Level)
 
 	// Improved Rend: "Increases the Bleed damage done by your Rend
 	// ability by 12%" at rank 1, "by 23%" at rank 2 and "by 35%" at
@@ -47,6 +48,7 @@ func (warrior *Warrior) registerRendSpell() {
 
 		DamageMultiplier: damageMultiplier,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
@@ -56,7 +58,7 @@ func (warrior *Warrior) registerRendSpell() {
 			NumberOfTicks: rendTicks[rank],
 			TickLength:    time.Second * 3,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				dot.Snapshot(target, baseDamage, isRollover)
+				dot.Snapshot(target, damage.Roll(sim, casterLevel), isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)

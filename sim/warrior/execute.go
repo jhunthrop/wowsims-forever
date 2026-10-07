@@ -14,7 +14,8 @@ const executeRageConversion = 15.0
 
 func (warrior *Warrior) registerExecuteSpell() {
 	rank := rankAtLevel(ExecuteLevel[:], warrior.Level)
-	flatDamage := ExecuteBaseDamage[rank][0]
+	flatDamage := ExecuteDamage[rank]
+	casterLevel := int(warrior.Level)
 	// The engine keeps spell 20662 rather than the generated
 	// ExecuteSpellId[5]; they are the same id, and the rank-0 row the
 	// client also carries (20647, a level-1 stub with an amount of 1) is
@@ -68,6 +69,7 @@ func (warrior *Warrior) registerExecuteSpell() {
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1.25,
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			extraRage := spell.Unit.CurrentRage()
@@ -78,7 +80,7 @@ func (warrior *Warrior) registerExecuteSpell() {
 				rageMetrics.Events--
 			}
 
-			baseDamage := flatDamage + executeRageConversion*(extraRage)
+			baseDamage := flatDamage.Roll(sim, casterLevel) + executeRageConversion*(extraRage)
 
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 

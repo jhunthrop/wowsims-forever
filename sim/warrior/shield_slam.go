@@ -17,7 +17,8 @@ func (warrior *Warrior) registerShieldSlamSpell() {
 	// where vanilla's rank 4 rolled 342-358. The generated table is the
 	// authority, so the roll is gone rather than re-centred: a single
 	// amount is what the client states and it carries no die width.
-	baseDamage := ShieldSlamBaseDamage[rank][0]
+	damage := ShieldSlamDamage[rank]
+	casterLevel := int(warrior.Level)
 	// No known equation for either, and the client's table carries
 	// neither a threat column nor an attack-power coefficient for this
 	// spell (its ap_coefficient is 0), so both stay typed.
@@ -68,10 +69,11 @@ func (warrior *Warrior) registerShieldSlamSpell() {
 		ThreatMultiplier: 1,
 		FlatThreatBonus:  threat * 2,
 		BonusCoefficient: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			damage := baseDamage + warrior.BlockValue()*2 + apCoef*spell.MeleeAttackPower(target)
-			result := spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMeleeSpecialHitAndCrit)
+			total := damage.Roll(sim, casterLevel) + warrior.BlockValue()*2 + apCoef*spell.MeleeAttackPower(target)
+			result := spell.CalcAndDealDamage(sim, target, total, spell.OutcomeMeleeSpecialHitAndCrit)
 
 			if !result.Landed() {
 				spell.IssueRefund(sim)

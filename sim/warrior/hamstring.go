@@ -21,7 +21,8 @@ func hamstringRankSpellID(rank int) int32 {
 
 func (warrior *Warrior) registerHamstringSpell() {
 	rank := rankAtLevel(HamstringLevel[:], warrior.Level)
-	damage := HamstringBaseDamage[rank][0]
+	damage := HamstringDamage[rank]
+	casterLevel := int(warrior.Level)
 	spellID := hamstringRankSpellID(rank)
 	spell_level := float64(HamstringLevel[rank])
 
@@ -58,9 +59,10 @@ func (warrior *Warrior) registerHamstringSpell() {
 		ThreatMultiplier: 1.25,
 		FlatThreatBonus:  1.25 * 2 * float64(spell_level),
 		BonusCoefficient: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+			result := spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
 			if !result.Landed() {
 				spell.IssueRefund(sim)

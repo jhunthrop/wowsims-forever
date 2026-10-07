@@ -47,7 +47,8 @@ func (warrior *Warrior) registerBloodthirstSpell(cdTimer *core.Timer) {
 		// excuses for every other levelling talent.
 		return
 	}
-	baseDamage := BloodthirstBaseDamage[rank][0]
+	flatDamage := BloodthirstDamage[rank]
+	casterLevel := int(warrior.Level)
 
 	castConfig := core.CastConfig{
 		DefaultCast: core.Cast{
@@ -89,9 +90,10 @@ func (warrior *Warrior) registerBloodthirstSpell(cdTimer *core.Timer) {
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			damage := baseDamage + bloodthirstAttackPowerCoefficient*spell.MeleeAttackPower(target)
+			damage := flatDamage.Roll(sim, casterLevel) + bloodthirstAttackPowerCoefficient*spell.MeleeAttackPower(target)
 			result := spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMeleeSpecialHitAndCrit)
 			if !result.Landed() {
 				spell.IssueRefund(sim)

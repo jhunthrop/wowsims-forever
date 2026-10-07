@@ -70,7 +70,8 @@ func heroicStrikeRankManaCost(rank int) float64 {
 
 func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
 	rank := heroicStrikeRankForLevel(warrior.Level)
-	flatDamageBonus := HeroicStrikeBaseDamage[rank][0]
+	flatDamageBonus := HeroicStrikeDamage[rank]
+	casterLevel := int(warrior.Level)
 	spellID := heroicStrikeRankSpellID(rank)
 	// No known equation, and the client's table has no threat column.
 	threat := core.TernaryFloat64(core.IncludeAQ, 173, 145)
@@ -100,9 +101,10 @@ func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
 		ThreatMultiplier: 1,
 		FlatThreatBonus:  threat,
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamageBonus.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := flatDamageBonus + spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
+			baseDamage := flatDamageBonus.Roll(sim, casterLevel) + spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
 			if !result.Landed() {
@@ -120,7 +122,8 @@ func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
 
 func (warrior *Warrior) registerCleaveSpell(realismICD *core.Cooldown) {
 	rank := cleaveRank()
-	flatDamageBonus := CleaveBaseDamage[rank][0]
+	flatDamageBonus := CleaveDamage[rank]
+	casterLevel := int(warrior.Level)
 	spellID := cleaveSpellID()
 	// No known equation, and the client's table has no threat column.
 	threat := 100.0
@@ -154,11 +157,12 @@ func (warrior *Warrior) registerCleaveSpell(realismICD *core.Cooldown) {
 		ThreatMultiplier: 1,
 		FlatThreatBonus:  threat,
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamageBonus.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			numHits := min(len(results), len(sim.Encounter.TargetUnits))
 			for idx := 0; idx < numHits; idx++ {
-				baseDamage := flatDamageBonus + spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
+				baseDamage := flatDamageBonus.Roll(sim, casterLevel) + spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
 				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 				target = sim.Environment.NextTargetUnit(target)
 			}

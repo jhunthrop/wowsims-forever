@@ -8,27 +8,26 @@ import (
 
 // Revenge is the one warrior ability constants_auto_gen.go does not
 // cover: the generator skips a spell whose <Name>Ranks it would collide
-// with, and this hand-written table is that collision (the generated
+// with, and this hand-written rank list is that collision (the generated
 // file records it as `skipped: "Revenge" already has a hand-written
-// RevengeRanks elsewhere in this package`). So the numbers below are
-// still vanilla's, and the client disagrees with them - spell 25288's
-// school-damage effect reads 153 at rank 6 where this table rolls
-// 81-99. Freeing the name so the generator can emit Revenge, and then
-// re-deriving the damage, belongs to the warrior-protection spec's task
-// together with the rest of that tree; sim/warrior/tank_warrior is
-// skipped until then, so nothing is validating these numbers today.
+// RevengeRanks elsewhere in this package`). Its damage is not the
+// vanilla table any more: RevengeDamage (client_damage.go) carries the
+// client's own roll, which spellconst_damage_test.go checks. Freeing
+// the name so the generator can emit Revenge belongs to the
+// warrior-protection spec's task together with the rest of that tree.
 const RevengeRanks = 6
 
 var RevengeSpellId = [RevengeRanks + 1]int32{0, 6572, 6574, 7379, 11600, 11601, 25288}
-var RevengeBaseDamage = [RevengeRanks + 1][]float64{{0, 0}, {12, 14}, {18, 22}, {25, 31}, {43, 53}, {64, 78}, {81, 99}}
 var RevengeLevel = [RevengeRanks + 1]int{0, 14, 24, 34, 44, 54, 60}
 
 func (warrior *Warrior) registerRevengeSpell(cdTimer *core.Timer) {
-	actionID := core.ActionID{SpellID: core.TernaryInt32(core.IncludeAQ, 25288, 11601)}
+	rank := core.TernaryInt(core.IncludeAQ, RevengeRanks, RevengeRanks-1)
+	actionID := core.ActionID{SpellID: RevengeSpellId[rank]}
 	has2pcDreadnaught := warrior.HasSetBonus(ItemSetDreadnaughtsBattlegear, 2)
-	basedamageLow := core.TernaryFloat64(core.IncludeAQ, 81, 64) + core.TernaryFloat64(has2pcDreadnaught, 75, 0)
-	basedamageHigh := core.TernaryFloat64(core.IncludeAQ, 99, 78) + core.TernaryFloat64(has2pcDreadnaught, 75, 0)
-	revengeLevel := core.TernaryFloat64(core.IncludeAQ, 60.0, 54.0)
+	damage := RevengeDamage[rank]
+	casterLevel := int(warrior.Level)
+	dreadnaughtBonus := core.TernaryFloat64(has2pcDreadnaught, 75, 0)
+	revengeLevel := float64(RevengeLevel[rank])
 
 	warrior.revengeProcAura = warrior.RegisterAura(core.Aura{
 		Label:    "Revenge",
@@ -84,9 +83,10 @@ func (warrior *Warrior) registerRevengeSpell(cdTimer *core.Timer) {
 		ThreatMultiplier: 2.25,
 		FlatThreatBonus:  2.25 * 2 * revengeLevel,
 		BonusCoefficient: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := sim.Roll(basedamageLow, basedamageHigh)
+			baseDamage := damage.Roll(sim, casterLevel) + dreadnaughtBonus
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
 			if !result.Landed() {
