@@ -15,6 +15,13 @@ import (
 // given talent string, so spells can be driven through ApplyEffects.
 func newMageAtLevel(t *testing.T, level int32, talentsStr string) (*core.Simulation, *Mage) {
 	t.Helper()
+	return newMageWithDebuffs(t, level, talentsStr, core.FullBuffs.Debuffs)
+}
+
+// newMageWithDebuffs is newMageAtLevel with the raid's debuffs chosen by
+// the caller.
+func newMageWithDebuffs(t *testing.T, level int32, talentsStr string, debuffs *proto.Debuffs) (*core.Simulation, *Mage) {
+	t.Helper()
 	player := core.WithSpec(
 		&proto.Player{
 			Class:              proto.Class_ClassMage,
@@ -28,7 +35,7 @@ func newMageAtLevel(t *testing.T, level int32, talentsStr string) (*core.Simulat
 		},
 		PlayerOptions,
 	)
-	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
+	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, debuffs)
 	sim := core.NewSim(&proto.RaidSimRequest{
 		Raid: raid,
 		Encounter: &proto.Encounter{
