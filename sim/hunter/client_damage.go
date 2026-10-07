@@ -20,6 +20,8 @@ var (
 	SniperShotDamage    = generatedDamage(SniperShotBaseDamage[:], SniperShotPointsPerLevel[:], SniperShotLevel[:], SniperShotMaxLevel[:])
 	SummonHawkDamage    = generatedDamage(SummonHawkBaseDamage[:], SummonHawkPointsPerLevel[:], SummonHawkLevel[:], SummonHawkMaxLevel[:])
 	VolleyDamage        = generatedDamage(VolleyBaseDamage[:], VolleyPointsPerLevel[:], VolleyLevel[:], VolleyMaxLevel[:])
+	HydraShotDamage     = generatedDamage(HydraShotBaseDamage[:], HydraShotPointsPerLevel[:], HydraShotLevel[:], HydraShotMaxLevel[:])
+	LacerateDamage      = generatedDamage(LacerateBaseDamage[:], LaceratePointsPerLevel[:], LacerateLevel[:], LacerateMaxLevel[:])
 )
 
 func generatedDamage(rolls [][]float64, perLevel []float64, spellLevels, maxLevels []int) []clientdamage.Effect {

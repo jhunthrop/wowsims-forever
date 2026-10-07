@@ -38,6 +38,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 30 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
 | Hunter | 30 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 30 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
+| Hunter | 30 | Lacerate | 1 | 24118 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 21000→21000 | match |  | 17.00-17.00→17.00-17.00 | 1.400 (convention)→0.000 | declared, matches |
 | Hunter | 30 | Mongoose Bite | 2 | 14269 | 40.00→40.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Multi-Shot | 0 | 2643 | 107.72 (13.89999961853% base mana)→107.73 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
@@ -58,6 +59,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 38 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 38 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 38 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
+| Hunter | 38 | Lacerate | 1 | 24118 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 21000→21000 | match |  | 21.00-21.00→21.00-21.00 | 1.400 (convention)→0.000 | declared, matches |
 | Hunter | 38 | Mongoose Bite | 2 | 14269 | 40.00→40.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Multi-Shot | 0 | 2643 | 145.25 (13.89999961853% base mana)→145.26 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
@@ -79,6 +81,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 40 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 40 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 40 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
+| Hunter | 40 | Lacerate | 2 | 24119 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 21000→21000 | match |  | 28.00-28.00→28.00-28.00 | 1.400 (convention)→0.000 | declared, matches |
 | Hunter | 40 | Mongoose Bite | 2 | 14269 | 40.00→40.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Multi-Shot | 0 | 2643 | 153.59 (13.89999961853% base mana)→153.60 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
@@ -105,6 +108,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 50 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 50 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 50 | Immolation Trap | 4 | 14304 | 190.00→190.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 46→46 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
+| Hunter | 50 | Lacerate | 3 | 24120 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 21000→21000 | match |  | 40.00-40.00→40.00-40.00 | 1.400 (convention)→0.000 | declared, matches |
 | Hunter | 50 | Mongoose Bite | 3 | 14270 | 50.00→50.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Multi-Shot | 0 | 2643 | 197.38 (13.89999961853% base mana)→197.38 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
@@ -133,11 +137,13 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 60 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
 | Hunter | 60 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
 | Hunter | 60 | Freezing Trap | 3 | 14311 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 60→60 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
+| Hunter | 60 | Hydra Shot | 4 | 1293020 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 60 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 60 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 60 | Immolation Trap | 4 | 14304 | 190.00→190.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 46→46 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
 | Hunter | 60 | Immolation Trap | 5 | 14305 | 245.00→245.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 56→56 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
+| Hunter | 60 | Lacerate | 4 | 1299332 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 21000→21000 | match |  | 58.00-58.00→58.00-58.00 | 1.400 (convention)→0.000 | declared, matches |
 | Hunter | 60 | Mongoose Bite | 4 | 14271 | 65.00→65.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 58→58 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Multi-Shot | 0 | 2643 | 239.08 (13.89999961853% base mana)→239.08 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
