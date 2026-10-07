@@ -53,20 +53,11 @@ const (
 
 // Stats from buffs pre-tristate buffs
 var BuffSpellValues = map[BuffName]stats.Stats{
-	ArcaneIntellect: {
-		stats.Intellect: 31,
-	},
 	DivineSpirit: {
 		stats.Spirit: 40,
 	},
 	AspectOfTheWild: {
 		stats.NatureResistance: 60,
-	},
-	BattleShout: {
-		stats.AttackPower: TernaryFloat64(IncludeAQ, 232, 193),
-	},
-	BlessingOfMight: {
-		stats.AttackPower: TernaryFloat64(IncludeAQ, 185, 155),
 	},
 	BlessingOfWisdom: {
 		stats.MP5: TernaryFloat64(IncludeAQ, 33, 30),
@@ -101,19 +92,6 @@ var BuffSpellValues = map[BuffName]stats.Stats{
 	},
 	ManaSpring: {
 		stats.MP5: 25,
-	},
-	MarkOfTheWild: {
-		stats.BonusArmor:       285,
-		stats.Stamina:          12,
-		stats.Agility:          12,
-		stats.Strength:         12,
-		stats.Intellect:        12,
-		stats.Spirit:           12,
-		stats.ArcaneResistance: 20,
-		stats.ShadowResistance: 20,
-		stats.NatureResistance: 20,
-		stats.FireResistance:   20,
-		stats.FrostResistance:  20,
 	},
 	NatureResistanceTotem: {
 		stats.NatureResistance: 60,
@@ -224,13 +202,13 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 	bonusResist := float64(0)
 
 	if raidBuffs.ArcaneBrilliance {
-		character.AddStats(BuffSpellValues[ArcaneIntellect])
+		character.AddStats(ArcaneIntellectStats(int(character.Level)))
 	} else if raidBuffs.ScrollOfIntellect {
 		character.AddStats(BuffSpellValues[ScrollOfIntellect])
 	}
 
 	if raidBuffs.GiftOfTheWild > 0 {
-		updateStats := BuffSpellValues[MarkOfTheWild]
+		updateStats := MarkOfTheWildStats(int(character.Level))
 		if raidBuffs.GiftOfTheWild == proto.TristateEffect_TristateEffectImproved {
 			updateStats = updateStats.Multiply(1.35).Floor()
 		}
@@ -1399,13 +1377,15 @@ func GraceOfAirTotemAura(unit *Unit, multiplier float64) *Aura {
 const BattleShoutRanks = 7
 
 var BattleShoutSpellId = [BattleShoutRanks + 1]int32{0, 6673, 5242, 6192, 11549, 11550, 11551, 25289}
-var BattleShoutBaseAP = [BattleShoutRanks + 1]float64{0, 20, 40, 57, 93, 138, 193, 232}
 var BattleShoutLevel = [BattleShoutRanks + 1]int{0, 1, 12, 22, 32, 42, 52, 60}
 
 func BattleShoutAura(unit *Unit, impBattleShout int32, boomingVoicePts int32, has3pcWrath bool) *Aura {
-	rank := TernaryInt32(IncludeAQ, 7, 6)
-	spellId := BattleShoutSpellId[rank]
-	baseAP := BattleShoutBaseAP[rank]
+	rank, ok := BattleShoutRankTable.Learned(int(unit.Level))
+	if !ok {
+		panic(fmt.Sprintf("Battle Shout is not learned at level %d", unit.Level))
+	}
+	spellId := rank.SpellID
+	baseAP := rank.At(int(unit.Level))
 
 	return unit.GetOrRegisterAura(Aura{
 		Label:      "Battle Shout",
@@ -1446,9 +1426,15 @@ func TrueshotAura(unit *Unit) *Aura {
 }
 
 func BlessingOfMightAura(unit *Unit, impBomPts int32) *Aura {
-	spellID := TernaryInt32(IncludeAQ, 25291, 19838)
+	// Below the first rank (level 4) the aura registers under rank 1's id
+	// and grants nothing.
+	rank, ok := BlessingOfMightRanks.Learned(int(unit.Level))
+	if !ok {
+		rank = BlessingOfMightRanks[0]
+	}
+	spellID := rank.SpellID
 
-	bonusAP := math.Floor(BuffSpellValues[BlessingOfMight][stats.AttackPower] * (1 + 0.04*float64(impBomPts)))
+	bonusAP := math.Floor(BlessingOfMightAttackPower(int(unit.Level)) * (1 + 0.04*float64(impBomPts)))
 
 	aura := MakePermanent(unit.GetOrRegisterAura(Aura{
 		Label:      "Blessing of Might",

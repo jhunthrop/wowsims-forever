@@ -96,17 +96,19 @@ func battleShoutAllyAura(unit *core.Unit, actionID core.ActionID, baseAP float64
 	})
 }
 
+// battleShoutGrant is the rank a warrior of this level has learned (the
+// rank id its rotation finds, which the ladder rewrites to the learned
+// rank; the AQ phase flag still caps the ceiling at 60), and the attack
+// power it grants: the client's amount for that rank, growing by the
+// client's points per level inside the rank (core.BattleShoutRankTable),
+// not the vanilla AQ-era 232.
+func battleShoutGrant(level int32) (rank int32, spellID int32, attackPower float64) {
+	rank = min(int32(rankAtLevel(core.BattleShoutLevel[:], level)), core.TernaryInt32(core.IncludeAQ, 7, 6))
+	return rank, core.BattleShoutSpellId[rank], core.BattleShoutAttackPower(int(level))
+}
+
 func (warrior *Warrior) registerBattleShout() {
-	// rankAtLevel picks the rank this warrior's level has actually
-	// learned; the AQ phase flag still caps the ceiling at 60, the way
-	// it always has. Before this, rank was pinned to the top rank
-	// regardless of level, so a levelling character's Battle Shout
-	// always registered under the level-60 id and every lower level's
-	// rotation (which the ladder rewrites to the rank it has learned)
-	// could never find it.
-	rank := min(int32(rankAtLevel(core.BattleShoutLevel[:], warrior.Level)), core.TernaryInt32(core.IncludeAQ, 7, 6))
-	actionId := core.BattleShoutSpellId[rank]
-	baseAP := core.BattleShoutBaseAP[rank]
+	rank, actionId, baseAP := battleShoutGrant(warrior.Level)
 	has3pcWrath := warrior.HasSetBonus(ItemSetBattleGearOfWrath, 3)
 
 	warrior.BattleShout = warrior.newShoutSpellConfig(core.ActionID{SpellID: actionId}, rank, warrior.NewPartyAuraArray(func(unit *core.Unit) *core.Aura {
