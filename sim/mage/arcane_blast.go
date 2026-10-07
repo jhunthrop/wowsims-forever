@@ -45,8 +45,10 @@ const ArcaneBlastRanks = 5
 
 var ArcaneBlastSpellId = [ArcaneBlastRanks + 1]int32{0, 400574, 1239696, 1239697, 1239699, 1239700}
 var ArcaneBlastLevel = [ArcaneBlastRanks + 1]int{0, 20, 30, 40, 50, 60}
-var ArcaneBlastBaseDamage = [ArcaneBlastRanks + 1][]float64{{0, 0}, {54, 54}, {130, 130}, {169, 169}, {274, 274}, {394, 394}}
-var ArcaneBlastSpellCoeff = [ArcaneBlastRanks + 1]float64{0, .714, .714, .714, .714, .714}
+var ArcaneBlastBaseDamage = [ArcaneBlastRanks + 1][]float64{{0, 0}, {49.9224, 58.0776}, {120.1837, 139.8163}, {156.2388, 181.7612}, {253.3102, 294.6898}, {364.249, 423.751}}
+var ArcaneBlastPointsPerLevel = [ArcaneBlastRanks + 1]float64{0, 0.9, 1.4, 1.6, 2.1, 2.6}
+var ArcaneBlastMaxLevel = [ArcaneBlastRanks + 1]int{0, 28, 38, 48, 58, 68}
+var ArcaneBlastSpellCoeff = [ArcaneBlastRanks + 1]float64{0, 0.714, 0.714, 0.714, 0.714, 0.714}
 
 // arcaneBlastBuffSpellId is 400573, the stacking buff's own id - shared
 // by every rank, the way core.WintersChillAura and
@@ -153,17 +155,18 @@ func (mage *Mage) registerArcaneBlastSpell() {
 }
 
 func (mage *Mage) getArcaneBlastConfig(rank int) core.SpellConfig {
-	baseDamageLow := ArcaneBlastBaseDamage[rank][0]
-	baseDamageHigh := ArcaneBlastBaseDamage[rank][1]
+	roll := mage.clientRoll(ArcaneBlastBaseDamage[rank], ArcaneBlastPointsPerLevel[rank], ArcaneBlastLevel[rank], ArcaneBlastMaxLevel[rank])
+	baseDamageLow, baseDamageHigh := roll[0], roll[1]
 
 	return core.SpellConfig{
-		ActionID:       core.ActionID{SpellID: ArcaneBlastSpellId[rank]},
-		ClassSpellMask: MageSpellMaskArcaneBlast,
-		SpellCode:      SpellCode_MageArcaneBlast,
-		SpellSchool:    core.SpellSchoolArcane,
-		DefenseType:    core.DefenseTypeMagic,
-		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          SpellFlagMage | core.SpellFlagAPL,
+		ActionID:         core.ActionID{SpellID: ArcaneBlastSpellId[rank]},
+		ClassSpellMask:   MageSpellMaskArcaneBlast,
+		SpellCode:        SpellCode_MageArcaneBlast,
+		SpellSchool:      core.SpellSchoolArcane,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		ClientBaseDamage: roll,
+		Flags:            SpellFlagMage | core.SpellFlagAPL,
 		// unconfirmed: the client's data carries no projectile speed for
 		// this spell; 20 is what Arcane Missiles' tick spell (the same
 		// school) uses in this package.

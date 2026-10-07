@@ -7,24 +7,16 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-const FireballRanks = 12
-
-var FireballSpellId = [FireballRanks + 1]int32{0, 133, 143, 145, 3140, 8400, 8401, 8402, 10148, 10149, 10150, 10151, 25306}
-var FireballBaseDamage = [FireballRanks + 1][]float64{{0}, {16, 25}, {34, 49}, {57, 77}, {89, 122}, {140, 189}, {207, 274}, {264, 345}, {328, 425}, {398, 512}, {488, 623}, {561, 715}, {596, 760}}
-var FireballDotDamage = [FireballRanks + 1]float64{0, 2, 3, 6, 12, 20, 28, 32, 40, 52, 60, 72, 76}
-var FireballSpellCoeff = [FireballRanks + 1]float64{0, .123, .271, .5, .793, 1, 1, 1, 1, 1, 1, 1, 1}
-var FireballCastTime = [FireballRanks + 1]int32{0, 1500, 2000, 2500, 3000, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500}
-var FireballManaCost = [FireballRanks + 1]float64{0, 30, 45, 65, 95, 140, 185, 220, 260, 305, 350, 395, 410}
-var FireballLevel = [FireballRanks + 1]int{0, 1, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 60}
+// FireballDotTickDamage is the client's per-tick amount of the periodic
+// effect (effect 1 of each rank), its own number and not a share of the
+// direct hit: flat, with no growth per caster level.
+var FireballDotTickDamage = [FireballRanks + 1]float64{0, 1, 1, 2, 3, 4, 6, 6, 8, 10, 12, 14, 15}
 
 // FireballDotTicks is the client's own per-rank tick count for the
 // Fireball dot: duration_ms / period_ms (period_ms is always 2000 -
 // see mage.json spells 133/143/145/3140's effect index 1). Ranks 1-3
 // burn for fewer than the later ranks' 4 ticks (4000/6000/6000/8000ms
-// at 2s/tick = 2/3/3/4 ticks) - the engine previously hardcoded 4
-// ticks for every rank, which overstated ranks 1-3's dot duration
-// without changing their total damage (FireballDotDamage is a total,
-// divided by the tick count below).
+// at 2s/tick = 2/3/3/4 ticks).
 var FireballDotTicks = [FireballRanks + 1]int32{0, 2, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4}
 
 func (mage *Mage) registerFireballSpell() {
@@ -45,9 +37,9 @@ func (mage *Mage) newFireballSpellConfig(rank int) core.SpellConfig {
 	tickLength := time.Second * 2
 
 	spellId := FireballSpellId[rank]
-	baseDamageLow := FireballBaseDamage[rank][0]
-	baseDamageHigh := FireballBaseDamage[rank][1]
-	baseDotDamage := FireballDotDamage[rank] / float64(numTicks)
+	roll := mage.clientRoll(FireballBaseDamage[rank], FireballPointsPerLevel[rank], FireballLevel[rank], FireballMaxLevel[rank])
+	baseDamageLow, baseDamageHigh := roll[0], roll[1]
+	baseDotDamage := FireballDotTickDamage[rank]
 	spellCoeff := FireballSpellCoeff[rank]
 	castTime := FireballCastTime[rank]
 	manaCost := FireballManaCost[rank]
@@ -56,14 +48,15 @@ func (mage *Mage) newFireballSpellConfig(rank int) core.SpellConfig {
 	actionID := core.ActionID{SpellID: spellId}
 
 	return core.SpellConfig{
-		ActionID:       actionID,
-		ClassSpellMask: MageSpellMaskFireball,
-		SpellCode:      SpellCode_MageFireball,
-		SpellSchool:    core.SpellSchoolFire,
-		DefenseType:    core.DefenseTypeMagic,
-		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          core.SpellFlagAPL | SpellFlagMage,
-		MissileSpeed:   24,
+		ActionID:         actionID,
+		ClassSpellMask:   MageSpellMaskFireball,
+		SpellCode:        SpellCode_MageFireball,
+		SpellSchool:      core.SpellSchoolFire,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		ClientBaseDamage: roll,
+		Flags:            core.SpellFlagAPL | SpellFlagMage,
+		MissileSpeed:     24,
 
 		RequiredLevel: level,
 		Rank:          rank,

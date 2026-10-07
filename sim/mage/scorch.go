@@ -6,13 +6,6 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-const ScorchRanks = 7
-
-var ScorchSpellId = [ScorchRanks + 1]int32{0, 2948, 8444, 8445, 8446, 10205, 10206, 10207}
-var ScorchBaseDamage = [ScorchRanks + 1][]float64{{0}, {55, 68}, {81, 98}, {105, 126}, {133, 159}, {168, 199}, {207, 247}, {237, 280}}
-var ScorchManaCost = [ScorchRanks + 1]float64{0, 50, 65, 80, 100, 115, 135, 150}
-var ScorchLevel = [ScorchRanks + 1]int{0, 22, 28, 34, 40, 46, 52, 58}
-
 func (mage *Mage) registerScorchSpell() {
 	mage.Scorch = make([]*core.Spell, ScorchRanks+1)
 
@@ -27,22 +20,23 @@ func (mage *Mage) registerScorchSpell() {
 
 func (mage *Mage) getScorchConfig(rank int) core.SpellConfig {
 	spellId := ScorchSpellId[rank]
-	baseDamageLow := ScorchBaseDamage[rank][0]
-	baseDamageHigh := ScorchBaseDamage[rank][1]
+	roll := mage.clientRoll(ScorchBaseDamage[rank], ScorchPointsPerLevel[rank], ScorchLevel[rank], ScorchMaxLevel[rank])
+	baseDamageLow, baseDamageHigh := roll[0], roll[1]
 	manaCost := ScorchManaCost[rank]
 	level := ScorchLevel[rank]
 
-	spellCoeff := .429
+	spellCoeff := ScorchSpellCoeff[rank]
 	debuffProcChance := []float64{0, .33, .66, 1}[mage.Talents.ImprovedScorch]
 
 	return core.SpellConfig{
-		ActionID:       core.ActionID{SpellID: spellId},
-		ClassSpellMask: MageSpellMaskScorch,
-		SpellCode:      SpellCode_MageScorch,
-		SpellSchool:    core.SpellSchoolFire,
-		DefenseType:    core.DefenseTypeMagic,
-		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          core.SpellFlagAPL | SpellFlagMage,
+		ActionID:         core.ActionID{SpellID: spellId},
+		ClassSpellMask:   MageSpellMaskScorch,
+		SpellCode:        SpellCode_MageScorch,
+		SpellSchool:      core.SpellSchoolFire,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		ClientBaseDamage: roll,
+		Flags:            core.SpellFlagAPL | SpellFlagMage,
 
 		RequiredLevel: level,
 		Rank:          rank,

@@ -10,10 +10,16 @@ import (
 const FlamestrikeRanks = 6
 
 var FlamestrikeSpellId = [FlamestrikeRanks + 1]int32{0, 2120, 2121, 8422, 8423, 10215, 10216}
-var FlamestrikeBaseDamage = [FlamestrikeRanks + 1][]float64{{0}, {55, 71}, {96, 123}, {159, 197}, {220, 272}, {294, 362}, {381, 466}}
-var FlamestrikeDotDamage = [FlamestrikeRanks + 1]float64{0, 48, 88, 140, 196, 264, 340}
-var FlamestrikeSpellCoeff = [FlamestrikeRanks + 1]float64{0, .134, .157, .157, .157, .157, .157}
-var FlamestrikeDotCoeff = [FlamestrikeRanks + 1]float64{0, .017, .02, .02, .02, .02, .02}
+var FlamestrikeBaseDamage = [FlamestrikeRanks + 1][]float64{{0, 0}, {52, 68}, {96, 122}, {154, 192}, {220, 272}, {291, 359}, {375, 459}}
+var FlamestrikePointsPerLevel = [FlamestrikeRanks + 1]float64{0, 0.6, 0.8, 1, 1.3, 1.5, 1.7}
+var FlamestrikeMaxLevel = [FlamestrikeRanks + 1]int{0, 21, 29, 37, 45, 53, 61}
+var FlamestrikeSpellCoeff = [FlamestrikeRanks + 1]float64{0, 0.157, 0.157, 0.157, 0.157, 0.157, 0.157}
+
+// FlamestrikeDotTickDamage is the client's per-tick amount of the ground
+// aura's own rows (1279983...1279990): flat, no growth with level, and not
+// the direct effect's - the dot has its own amount and coefficient.
+var FlamestrikeDotTickDamage = [FlamestrikeRanks + 1]float64{0, 11, 21, 33, 47, 64, 83}
+var FlamestrikeDotSpellCoeff = [FlamestrikeRanks + 1]float64{0, 0.032, 0.032, 0.032, 0.032, 0.032, 0.032}
 var FlamestrikeManaCost = [FlamestrikeRanks + 1]float64{0, 195, 330, 490, 650, 815, 990}
 var FlamestrikeLevel = [FlamestrikeRanks + 1]int{0, 16, 24, 32, 40, 48, 56}
 
@@ -39,24 +45,25 @@ func (mage *Mage) newFlamestrikeSpellConfig(rank int) core.SpellConfig {
 	tickLength := time.Second * 2
 
 	spellId := FlamestrikeSpellId[rank]
-	baseDamageLow := FlamestrikeBaseDamage[rank][0]
-	baseDamageHigh := FlamestrikeBaseDamage[rank][1]
-	baseDotDamage := FlamestrikeDotDamage[rank] / float64(numTicks)
+	roll := mage.clientRoll(FlamestrikeBaseDamage[rank], FlamestrikePointsPerLevel[rank], FlamestrikeLevel[rank], FlamestrikeMaxLevel[rank])
+	baseDamageLow, baseDamageHigh := roll[0], roll[1]
+	baseDotDamage := FlamestrikeDotTickDamage[rank]
 	spellCoeff := FlamestrikeSpellCoeff[rank]
-	dotCoeff := FlamestrikeDotCoeff[rank]
+	dotCoeff := FlamestrikeDotSpellCoeff[rank]
 	manaCost := FlamestrikeManaCost[rank]
 	level := FlamestrikeLevel[rank]
 
 	castTime := time.Second * 3
 
 	return core.SpellConfig{
-		ActionID:       core.ActionID{SpellID: spellId},
-		ClassSpellMask: MageSpellMaskFlamestrike,
-		SpellSchool:    core.SpellSchoolFire,
-		DefenseType:    core.DefenseTypeMagic,
-		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          SpellFlagMage | core.SpellFlagAPL,
-		SpellCode:      SpellCode_MageFlamestrike,
+		ActionID:         core.ActionID{SpellID: spellId},
+		ClassSpellMask:   MageSpellMaskFlamestrike,
+		SpellSchool:      core.SpellSchoolFire,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		ClientBaseDamage: roll,
+		Flags:            SpellFlagMage | core.SpellFlagAPL,
+		SpellCode:        SpellCode_MageFlamestrike,
 
 		RequiredLevel: level,
 		Rank:          rank,

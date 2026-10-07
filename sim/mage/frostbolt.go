@@ -14,14 +14,6 @@ import (
 // 60, which TestFrostboltHasElevenRanks asserts. The client's rows stay
 // resolvable through spellconst.Load for anything that needs the rest
 // of the effect.
-const FrostboltRanks = 11
-
-var FrostboltSpellId = [FrostboltRanks + 1]int32{0, 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304}
-var FrostboltBaseDamage = [FrostboltRanks + 1][]float64{{0, 0}, {20, 22}, {33, 38}, {54, 61}, {78, 87}, {132, 144}, {180, 197}, {231, 251}, {301, 326}, {353, 383}, {440, 475}, {515, 555}}
-var FrostboltSpellCoeff = [FrostboltRanks + 1]float64{0, .163, .269, .463, .706, .814, .814, .814, .814, .814, .814, .814}
-var FrostboltCastTime = [FrostboltRanks + 1]int32{0, 1500, 1800, 2200, 2600, 3000, 3000, 3000, 3000, 3000, 3000, 3000}
-var FrostboltManaCost = [FrostboltRanks + 1]float64{0, 25, 35, 50, 65, 100, 130, 160, 195, 225, 260, 290}
-var FrostboltLevel = [FrostboltRanks + 1]int{0, 4, 8, 14, 20, 26, 32, 38, 44, 50, 56, 60}
 
 func (mage *Mage) registerFrostboltSpell() {
 	mage.Frostbolt = make([]*core.Spell, FrostboltRanks+1)
@@ -38,22 +30,23 @@ func (mage *Mage) registerFrostboltSpell() {
 
 func (mage *Mage) getFrostboltConfig(rank int) core.SpellConfig {
 	spellId := FrostboltSpellId[rank]
-	baseDamageLow := FrostboltBaseDamage[rank][0]
-	baseDamageHigh := FrostboltBaseDamage[rank][1]
+	roll := mage.clientRoll(FrostboltBaseDamage[rank], FrostboltPointsPerLevel[rank], FrostboltLevel[rank], FrostboltMaxLevel[rank])
+	baseDamageLow, baseDamageHigh := roll[0], roll[1]
 	spellCoeff := FrostboltSpellCoeff[rank]
 	castTime := FrostboltCastTime[rank]
 	manaCost := FrostboltManaCost[rank]
 	level := FrostboltLevel[rank]
 
 	return core.SpellConfig{
-		ActionID:       core.ActionID{SpellID: spellId},
-		ClassSpellMask: MageSpellMaskFrostbolt,
-		SpellCode:      SpellCode_MageFrostbolt,
-		SpellSchool:    core.SpellSchoolFrost,
-		DefenseType:    core.DefenseTypeMagic,
-		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          SpellFlagMage | SpellFlagChillSpell | core.SpellFlagBinary | core.SpellFlagAPL,
-		MissileSpeed:   28,
+		ActionID:         core.ActionID{SpellID: spellId},
+		ClassSpellMask:   MageSpellMaskFrostbolt,
+		SpellCode:        SpellCode_MageFrostbolt,
+		SpellSchool:      core.SpellSchoolFrost,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		ClientBaseDamage: roll,
+		Flags:            SpellFlagMage | SpellFlagChillSpell | core.SpellFlagBinary | core.SpellFlagAPL,
+		MissileSpeed:     28,
 
 		RequiredLevel: level,
 		Rank:          rank,

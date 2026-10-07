@@ -7,13 +7,10 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-const PyroblastRanks = 8
-
-var PyroblastSpellId = [PyroblastRanks + 1]int32{0, 11366, 12505, 12522, 12523, 12524, 12525, 12526, 18809}
-var PyroblastBaseDamage = [PyroblastRanks + 1][]float64{{0}, {148, 195}, {184, 241}, {270, 343}, {341, 431}, {427, 536}, {510, 639}, {625, 776}, {716, 890}}
-var PyroblastDotDamage = [PyroblastRanks + 1]float64{0, 56, 72, 96, 124, 156, 188, 228, 268}
-var PyroblastManaCost = [PyroblastRanks + 1]float64{0, 125, 150, 195, 240, 285, 335, 385, 440}
-var PyroblastLevel = [PyroblastRanks + 1]int{0, 20, 24, 30, 36, 42, 48, 54, 60}
+// PyroblastDotTickDamage is the client's per-tick amount of the
+// periodic effect (effect 1 of each rank): flat, with no growth per caster
+// level, and four ticks at three seconds.
+var PyroblastDotTickDamage = [PyroblastRanks + 1]float64{0, 11, 14, 19, 25, 31, 38, 46, 53}
 
 func (mage *Mage) registerPyroblastSpell() {
 	if !mage.Talents.Pyroblast {
@@ -37,26 +34,27 @@ func (mage *Mage) newPyroblastSpellConfig(rank int) core.SpellConfig {
 	tickLength := time.Second * 3
 
 	spellId := PyroblastSpellId[rank]
-	baseDamageLow := PyroblastBaseDamage[rank][0]
-	baseDamageHigh := PyroblastBaseDamage[rank][1]
-	baseDotDamage := PyroblastDotDamage[rank] / float64(numTicks)
+	roll := mage.clientRoll(PyroblastBaseDamage[rank], PyroblastPointsPerLevel[rank], PyroblastLevel[rank], PyroblastMaxLevel[rank])
+	baseDamageLow, baseDamageHigh := roll[0], roll[1]
+	baseDotDamage := PyroblastDotTickDamage[rank]
 	manaCost := PyroblastManaCost[rank]
 	level := PyroblastLevel[rank]
 
-	spellCoeff := 1.0
+	spellCoeff := PyroblastSpellCoeff[rank]
 	dotCoeff := .15
 	castTime := time.Second * 6
 
 	actionID := core.ActionID{SpellID: spellId}
 
 	spellConfig := core.SpellConfig{
-		ActionID:       actionID,
-		ClassSpellMask: MageSpellMaskPyroblast,
-		SpellSchool:    core.SpellSchoolFire,
-		DefenseType:    core.DefenseTypeMagic,
-		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          SpellFlagMage | core.SpellFlagAPL,
-		MissileSpeed:   24,
+		ActionID:         actionID,
+		ClassSpellMask:   MageSpellMaskPyroblast,
+		SpellSchool:      core.SpellSchoolFire,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		ClientBaseDamage: roll,
+		Flags:            SpellFlagMage | core.SpellFlagAPL,
+		MissileSpeed:     24,
 
 		RequiredLevel: level,
 		Rank:          rank,

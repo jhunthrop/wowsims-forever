@@ -6,13 +6,6 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-const BlastWaveRanks = 5
-
-var BlastWaveSpellId = [BlastWaveRanks + 1]int32{0, 11113, 13018, 13019, 13020, 13021}
-var BlastWaveBaseDamage = [BlastWaveRanks + 1][]float64{{0}, {160, 192}, {205, 246}, {285, 338}, {374, 443}, {462, 544}}
-var BlastWaveManaCost = [BlastWaveRanks + 1]float64{0, 215, 270, 355, 450, 545}
-var BlastWaveLevel = [BlastWaveRanks + 1]int{0, 30, 36, 44, 52, 60}
-
 func (mage *Mage) registerBlastWaveSpell() {
 	if !mage.Talents.BlastWave {
 		return
@@ -32,22 +25,23 @@ func (mage *Mage) registerBlastWaveSpell() {
 
 func (mage *Mage) newBlastWaveSpellConfig(rank int, cooldownTimer *core.Timer) core.SpellConfig {
 	spellId := BlastWaveSpellId[rank]
-	baseDamageLow := BlastWaveBaseDamage[rank][0]
-	baseDamageHigh := BlastWaveBaseDamage[rank][1]
+	roll := mage.clientRoll(BlastWaveBaseDamage[rank], BlastWavePointsPerLevel[rank], BlastWaveLevel[rank], BlastWaveMaxLevel[rank])
+	baseDamageLow, baseDamageHigh := roll[0], roll[1]
 	manaCost := BlastWaveManaCost[rank]
 	level := BlastWaveLevel[rank]
 
-	spellCoeff := .129
+	spellCoeff := BlastWaveSpellCoeff[rank]
 	cooldown := time.Second * 45
 
 	return core.SpellConfig{
-		SpellCode:      SpellCode_MageBlastWave,
-		ClassSpellMask: MageSpellMaskBlastWave,
-		ActionID:       core.ActionID{SpellID: spellId},
-		SpellSchool:    core.SpellSchoolFire,
-		DefenseType:    core.DefenseTypeMagic,
-		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          SpellFlagMage | core.SpellFlagBinary | core.SpellFlagAPL,
+		SpellCode:        SpellCode_MageBlastWave,
+		ClassSpellMask:   MageSpellMaskBlastWave,
+		ActionID:         core.ActionID{SpellID: spellId},
+		SpellSchool:      core.SpellSchoolFire,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		ClientBaseDamage: roll,
+		Flags:            SpellFlagMage | core.SpellFlagBinary | core.SpellFlagAPL,
 
 		RequiredLevel: level,
 		Rank:          rank,

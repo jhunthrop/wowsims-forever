@@ -50,16 +50,17 @@ func (mage *Mage) registerIceLanceSpell() {
 }
 
 func (mage *Mage) getIceLanceConfig(rank int) core.SpellConfig {
-	baseDamageLow := IceLanceBaseDamage[rank][0]
-	baseDamageHigh := IceLanceBaseDamage[rank][1]
+	roll := mage.clientRoll(IceLanceBaseDamage[rank], IceLancePointsPerLevel[rank], IceLanceLevel[rank], IceLanceMaxLevel[rank])
+	baseDamageLow, baseDamageHigh := roll[0], roll[1]
 
 	return core.SpellConfig{
-		ActionID:       core.ActionID{SpellID: IceLanceSpellId[rank]},
-		ClassSpellMask: MageSpellMaskIceLance,
-		SpellSchool:    core.SpellSchoolFrost,
-		DefenseType:    core.DefenseTypeMagic,
-		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          SpellFlagMage | core.SpellFlagAPL,
+		ActionID:         core.ActionID{SpellID: IceLanceSpellId[rank]},
+		ClassSpellMask:   MageSpellMaskIceLance,
+		SpellSchool:      core.SpellSchoolFrost,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		ClientBaseDamage: roll,
+		Flags:            SpellFlagMage | core.SpellFlagAPL,
 		// unconfirmed: the client's data carries no projectile speed;
 		// 38 is the value every previous implementation used.
 		MissileSpeed: 38,

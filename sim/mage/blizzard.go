@@ -10,7 +10,10 @@ import (
 const BlizzardRanks = 6
 
 var BlizzardSpellId = [BlizzardRanks + 1]int32{0, 10, 6141, 8427, 10185, 10186, 10187}
-var BlizzardBaseDamage = [BlizzardRanks + 1]float64{0, 200, 352, 520, 720, 936, 1192}
+var BlizzardTickBaseDamage = [BlizzardRanks + 1][]float64{{0, 0}, {24, 24}, {42, 42}, {62, 62}, {87, 87}, {114, 114}, {146, 146}}
+var BlizzardTickPointsPerLevel = [BlizzardRanks + 1]float64{0, 0.1, 0.2, 0.2, 0.3, 0.3, 0.4}
+var BlizzardTickMaxLevel = [BlizzardRanks + 1]int{0, 25, 33, 41, 49, 57, 65}
+var BlizzardTickSpellCoeff = [BlizzardRanks + 1]float64{0, 0.042, 0.042, 0.042, 0.042, 0.042, 0.042}
 var BlizzardManaCost = [BlizzardRanks + 1]float64{0, 320, 520, 720, 935, 1160, 1400}
 var BlizzardLevel = [BlizzardRanks + 1]int{0, 20, 28, 36, 44, 52, 60}
 
@@ -38,11 +41,12 @@ func (mage *Mage) newBlizzardSpellConfig(rank int) core.SpellConfig {
 	tickLength := time.Second * 1
 
 	spellId := BlizzardSpellId[rank]
-	baseDamage := BlizzardBaseDamage[rank] / float64(numTicks)
+	tickRoll := mage.clientRoll(BlizzardTickBaseDamage[rank], BlizzardTickPointsPerLevel[rank], BlizzardLevel[rank], BlizzardTickMaxLevel[rank])
+	baseDamage := tickRoll[0]
 	manaCost := BlizzardManaCost[rank]
 	level := BlizzardLevel[rank]
 
-	spellCoeff := .042
+	spellCoeff := BlizzardTickSpellCoeff[rank]
 
 	var improvedBlizzardProcApplication *core.Spell
 	if mage.Talents.ImprovedBlizzard > 0 {
@@ -65,11 +69,12 @@ func (mage *Mage) newBlizzardSpellConfig(rank int) core.SpellConfig {
 	}
 
 	return core.SpellConfig{
-		ActionID:       core.ActionID{SpellID: spellId},
-		ClassSpellMask: MageSpellMaskBlizzard,
-		SpellSchool:    core.SpellSchoolFrost,
-		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          SpellFlagMage | core.SpellFlagChanneled | core.SpellFlagAPL,
+		ActionID:         core.ActionID{SpellID: spellId},
+		ClassSpellMask:   MageSpellMaskBlizzard,
+		SpellSchool:      core.SpellSchoolFrost,
+		ProcMask:         core.ProcMaskSpellDamage,
+		ClientBaseDamage: tickRoll,
+		Flags:            SpellFlagMage | core.SpellFlagChanneled | core.SpellFlagAPL,
 
 		RequiredLevel: level,
 		Rank:          rank,

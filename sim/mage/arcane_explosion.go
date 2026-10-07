@@ -4,14 +4,6 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-const ArcaneExplosionRanks = 6
-
-var ArcaneExplosionSpellId = [ArcaneExplosionRanks + 1]int32{0, 1449, 8437, 8438, 8439, 10201, 10202}
-var ArcaneExplosionBaseDamage = [ArcaneExplosionRanks + 1][]float64{{0}, {34, 38}, {58, 65}, {101, 110}, {140, 153}, {190, 207}, {249, 270}}
-var ArcaneExplosionSpellCoeff = [ArcaneExplosionRanks + 1]float64{0, .111, .143, .143, .143, .143, .143}
-var ArcaneExplosionManaCost = [ArcaneExplosionRanks + 1]float64{0, 75, 120, 185, 250, 315, 390}
-var ArcaneExplosionLevel = [ArcaneExplosionRanks + 1]int{0, 14, 22, 30, 38, 46, 54}
-
 func (mage *Mage) registerArcaneExplosionSpell() {
 	mage.ArcaneExplosion = make([]*core.Spell, ArcaneExplosionRanks+1)
 
@@ -26,20 +18,21 @@ func (mage *Mage) registerArcaneExplosionSpell() {
 
 func (mage *Mage) newArcaneExplosionSpellConfig(rank int) core.SpellConfig {
 	spellId := ArcaneExplosionSpellId[rank]
-	baseDamageLow := ArcaneExplosionBaseDamage[rank][0]
-	baseDamageHigh := ArcaneExplosionBaseDamage[rank][1]
+	roll := mage.clientRoll(ArcaneExplosionBaseDamage[rank], ArcaneExplosionPointsPerLevel[rank], ArcaneExplosionLevel[rank], ArcaneExplosionMaxLevel[rank])
+	baseDamageLow, baseDamageHigh := roll[0], roll[1]
 	spellCoeff := ArcaneExplosionSpellCoeff[rank]
 	manaCost := ArcaneExplosionManaCost[rank]
 	level := ArcaneExplosionLevel[rank]
 
 	return core.SpellConfig{
-		ActionID:       core.ActionID{SpellID: spellId},
-		ClassSpellMask: MageSpellMaskArcaneExplosion,
-		SpellCode:      SpellCode_MageArcaneExplosion,
-		SpellSchool:    core.SpellSchoolArcane,
-		DefenseType:    core.DefenseTypeMagic,
-		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          SpellFlagMage | core.SpellFlagAPL,
+		ActionID:         core.ActionID{SpellID: spellId},
+		ClassSpellMask:   MageSpellMaskArcaneExplosion,
+		SpellCode:        SpellCode_MageArcaneExplosion,
+		SpellSchool:      core.SpellSchoolArcane,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		ClientBaseDamage: roll,
+		Flags:            SpellFlagMage | core.SpellFlagAPL,
 
 		RequiredLevel: level,
 		Rank:          rank,

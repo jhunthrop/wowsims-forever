@@ -198,7 +198,19 @@ var ArcaneConcentrationMaxLevel = [ArcaneConcentrationRanks + 1]int{0}
 
 // unconfirmed: Arcane Concentration coefficient derived from the vanilla convention (rank 0)
 
-// skipped: "Arcane Explosion" already has a hand-written ArcaneExplosionRanks elsewhere in this package.
+// Arcane Explosion: ranks 0-6 present, from build 1.60.1.70009.
+const ArcaneExplosionRanks = 6
+
+var ArcaneExplosionSpellId = [ArcaneExplosionRanks + 1]int32{22460, 1449, 8437, 8438, 8439, 10201, 10202}
+var ArcaneExplosionLevel = [ArcaneExplosionRanks + 1]int{54, 14, 22, 30, 38, 46, 54}
+var ArcaneExplosionCastTime = [ArcaneExplosionRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
+var ArcaneExplosionCooldownMS = [ArcaneExplosionRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
+var ArcaneExplosionManaCost = [ArcaneExplosionRanks + 1]float64{390, 75, 120, 185, 250, 315, 390}
+var ArcaneExplosionManaCostPct = [ArcaneExplosionRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var ArcaneExplosionSpellCoeff = [ArcaneExplosionRanks + 1]float64{0.143, 0.143, 0.143, 0.143, 0.143, 0.143, 0.143}
+var ArcaneExplosionBaseDamage = [ArcaneExplosionRanks + 1][]float64{{243, 263}, {30.1176, 33.8824}, {52.25, 57.75}, {90.2772, 97.7228}, {129.4138, 140.5862}, {175.4536, 190.5464}, {232.4348, 251.5652}}
+var ArcaneExplosionPointsPerLevel = [ArcaneExplosionRanks + 1]float64{1.3, 0.4, 0.6, 0.9, 0.9, 1.1, 1.3}
+var ArcaneExplosionMaxLevel = [ArcaneExplosionRanks + 1]int{59, 19, 27, 35, 43, 51, 59}
 
 // Arcane Focus: ranks 0 present, from build 1.60.1.70009.
 const ArcaneFocusRanks = 0
@@ -328,7 +340,29 @@ var ArcaneMissileBaseDamage = [ArcaneMissileRanks + 1][]float64{{24, 24}, {24, 2
 var ArcaneMissilePointsPerLevel = [ArcaneMissileRanks + 1]float64{0.3, 0.3}
 var ArcaneMissileMaxLevel = [ArcaneMissileRanks + 1]int{12, 12}
 
-// skipped: "Arcane Missiles" already has a hand-written ArcaneMissilesRanks elsewhere in this package.
+// Arcane Missiles: ranks 0-8 present, from build 1.60.1.70009.
+const ArcaneMissilesRanks = 8
+
+var ArcaneMissilesSpellId = [ArcaneMissilesRanks + 1]int32{22273, 5143, 7269, 7270, 8419, 8418, 10273, 10274, 25346}
+var ArcaneMissilesLevel = [ArcaneMissilesRanks + 1]int{20, 8, 16, 24, 32, 40, 48, 56, 60}
+var ArcaneMissilesCastTime = [ArcaneMissilesRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var ArcaneMissilesCooldownMS = [ArcaneMissilesRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var ArcaneMissilesManaCost = [ArcaneMissilesRanks + 1]float64{0, 85, 0, 0, 0, 0, 0, 0, 0}
+var ArcaneMissilesManaCostPct = [ArcaneMissilesRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var ArcaneMissilesSpellCoeff = [ArcaneMissilesRanks + 1]float64{0.2, 0.2, 0.286, 0.286, 0.286, 0.286, 0.286, 0.286, 0.286}
+var ArcaneMissilesBaseDamage = [ArcaneMissilesRanks + 1][]float64{{1310, 1310}, {0, 0}, {31, 31}, {44, 44}, {66, 66}, {95, 95}, {130, 130}, {171, 171}, {209, 209}}
+var ArcaneMissilesPointsPerLevel = [ArcaneMissilesRanks + 1]float64{0, 0, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}
+var ArcaneMissilesMaxLevel = [ArcaneMissilesRanks + 1]int{0, 12, 20, 28, 36, 44, 52, 60, 64}
+
+// unconfirmed: Arcane Missiles coefficient derived from the vanilla convention (rank 1)
+// Arcane Missiles rank 0: kept id 22273 (spell_level 20); dropped 15735 (spell_level 20), 15736 (spell_level 20), 15790 (spell_level 20), 15791 (spell_level 20), 22272 (spell_level 20), 31751 (spell_level 1)
+// Arcane Missiles rank 2: kept id 7269 (spell_level 16); dropped 5144 (spell_level 16)
+// Arcane Missiles rank 3: kept id 7270 (spell_level 24); dropped 5145 (spell_level 24)
+// Arcane Missiles rank 4: kept id 8419 (spell_level 32); dropped 8416 (spell_level 32)
+// Arcane Missiles rank 5: kept id 8418 (spell_level 40); dropped 8417 (spell_level 40)
+// Arcane Missiles rank 6: kept id 10273 (spell_level 48); dropped 10211 (spell_level 48)
+// Arcane Missiles rank 7: kept id 10274 (spell_level 56); dropped 10212 (spell_level 56)
+// Arcane Missiles rank 8: kept id 25346 (spell_level 60); dropped 25345 (spell_level 56)
 
 // Arcane Missiles +1: ranks 0 present, from build 1.60.1.70009.
 const ArcaneMissiles1Ranks = 0
@@ -530,7 +564,21 @@ var BindingHealMaxLevel = [BindingHealRanks + 1]int{0}
 
 // unconfirmed: Binding Heal coefficient derived from the vanilla convention (rank 0)
 
-// skipped: "Blast Wave" already has a hand-written BlastWaveRanks elsewhere in this package.
+// Blast Wave: ranks 0-5 present, from build 1.60.1.70009.
+const BlastWaveRanks = 5
+
+var BlastWaveSpellId = [BlastWaveRanks + 1]int32{20229, 11113, 13018, 13019, 13020, 13021}
+var BlastWaveLevel = [BlastWaveRanks + 1]int{62, 30, 36, 44, 52, 60}
+var BlastWaveCastTime = [BlastWaveRanks + 1]int32{0, 0, 0, 0, 0, 0}
+var BlastWaveCooldownMS = [BlastWaveRanks + 1]int32{0, 45000, 45000, 45000, 45000, 45000}
+var BlastWaveManaCost = [BlastWaveRanks + 1]float64{0, 215, 270, 355, 450, 545}
+var BlastWaveManaCostPct = [BlastWaveRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var BlastWaveSpellCoeff = [BlastWaveRanks + 1]float64{1, 0.129, 0.129, 0.129, 0.129, 0.129}
+var BlastWaveBaseDamage = [BlastWaveRanks + 1][]float64{{694, 806}, {147.6588, 178.3412}, {192.8145, 231.1855}, {267.8581, 318.1419}, {355.8521, 422.1479}, {452.8151, 533.1849}}
+var BlastWavePointsPerLevel = [BlastWaveRanks + 1]float64{0, 1, 1.2, 1.4, 1.6, 1.9}
+var BlastWaveMaxLevel = [BlastWaveRanks + 1]int{0, 36, 42, 50, 58, 66}
+
+// Blast Wave rank 0: kept id 20229 (spell_level 62); dropped 15091 (spell_level 20), 15744 (spell_level 20), 16046 (spell_level 20), 17145 (spell_level 20), 17277 (spell_level 20), 22424 (spell_level 20), 23039 (spell_level 20), 23113 (spell_level 20), 23331 (spell_level 60), 25049 (spell_level 20), 30092 (spell_level 60), 469161 (spell_level 20), 1235318 (spell_level 0)
 
 // Blink: ranks 0 present, from build 1.60.1.70009.
 const BlinkRanks = 0
@@ -1734,9 +1782,24 @@ var FireWardMaxLevel = [FireWardRanks + 1]int{0, 0, 0, 0, 0, 0}
 // Fire Ward rank 4: kept id 412231 (spell_level 50); dropped 10223 (spell_level 50)
 // Fire Ward rank 5: kept id 412232 (spell_level 60); dropped 10225 (spell_level 60)
 
-// skipped: "Fireball" already has a hand-written FireballRanks elsewhere in this package.
+// Fireball: ranks 0-12 present, from build 1.60.1.70009.
+const FireballRanks = 12
 
-// skipped: "Fireball!" already has a hand-written FireballRanks elsewhere in this package.
+var FireballSpellId = [FireballRanks + 1]int32{21162, 133, 143, 145, 3140, 8400, 8401, 8402, 10148, 10149, 10150, 10151, 25306}
+var FireballLevel = [FireballRanks + 1]int{63, 1, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 60}
+var FireballCastTime = [FireballRanks + 1]int32{2000, 1500, 2000, 2500, 3000, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500}
+var FireballCooldownMS = [FireballRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+var FireballManaCost = [FireballRanks + 1]float64{45, 30, 45, 65, 95, 140, 185, 220, 260, 305, 350, 395, 410}
+var FireballManaCostPct = [FireballRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+var FireballSpellCoeff = [FireballRanks + 1]float64{0.6667, 0.429, 0.571, 0.714, 0.857, 1, 1, 1, 1, 1, 1, 1, 1}
+var FireballBaseDamage = [FireballRanks + 1][]float64{{273, 333}, {14, 22}, {30.1842, 43.8158}, {44.5873, 61.4127}, {62.16, 85.84}, {92.0982, 123.9018}, {131.2371, 174.7629}, {161.6441, 212.3559}, {204.1803, 265.8197}, {261.9154, 338.0846}, {327.7675, 420.2325}, {396.569, 505.431}, {424.5841, 541.4159}}
+var FireballPointsPerLevel = [FireballRanks + 1]float64{0, 0.6, 0.7, 0.9, 1.1, 1.5, 1.8, 2.3, 2.2, 2.4, 2.7, 3, 3}
+var FireballMaxLevel = [FireballRanks + 1]int{0, 5, 10, 16, 22, 28, 34, 40, 46, 52, 58, 64, 64}
+
+// unconfirmed: Fireball coefficient derived from the vanilla convention (rank 0)
+// Fireball rank 0: kept id 21162 (spell_level 63); dropped 15662 (spell_level 30), 16412 (spell_level 45), 16413 (spell_level 55), 16415 (spell_level 60), 18082 (spell_level 30), 18105 (spell_level 60), 18108 (spell_level 60), 18199 (spell_level 30), 18796 (spell_level 45), 21159 (spell_level 60), 1299850 (spell_level 55)
+
+// skipped: "Fireball!" collides with "Fireball" as the Go identifier "Fireball"; look it up by id via spellconst.Load instead.
 
 // Fireball, Improved DoT: ranks 0 present, from build 1.60.1.70009.
 const FireballImprovedDoTRanks = 0
@@ -2059,7 +2122,22 @@ var FrostbiteMaxLevel = [FrostbiteRanks + 1]int{0}
 
 // unconfirmed: Frostbite coefficient derived from the vanilla convention (rank 0)
 
-// skipped: "Frostbolt" already has a hand-written FrostboltRanks elsewhere in this package.
+// Frostbolt: ranks 0-11 present, from build 1.60.1.70009.
+const FrostboltRanks = 11
+
+var FrostboltSpellId = [FrostboltRanks + 1]int32{1298416, 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304}
+var FrostboltLevel = [FrostboltRanks + 1]int{30, 4, 8, 14, 20, 26, 32, 38, 44, 50, 56, 60}
+var FrostboltCastTime = [FrostboltRanks + 1]int32{0, 1500, 1800, 2200, 2600, 3000, 3000, 3000, 3000, 3000, 3000, 3000}
+var FrostboltCooldownMS = [FrostboltRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+var FrostboltManaCost = [FrostboltRanks + 1]float64{0, 25, 35, 50, 65, 100, 130, 160, 195, 225, 260, 290}
+var FrostboltManaCostPct = [FrostboltRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+var FrostboltSpellCoeff = [FrostboltRanks + 1]float64{0.3333, 0.407, 0.489, 0.597, 0.706, 0.814, 0.814, 0.814, 0.814, 0.814, 0.814, 0.814}
+var FrostboltBaseDamage = [FrostboltRanks + 1][]float64{{73.5, 136.5}, {18, 20}, {31, 35}, {43.4444, 48.5556}, {56.9231, 63.0769}, {90.6818, 99.3182}, {128.1099, 139.8901}, {173.3629, 188.6371}, {234.3684, 253.6316}, {295.4457, 320.5543}, {371.287, 400.713}, {457.243, 492.757}}
+var FrostboltPointsPerLevel = [FrostboltRanks + 1]float64{0, 0.5, 0.7, 0.9, 1.1, 1.5, 1.7, 2, 2.3, 2.6, 2.9, 3.2}
+var FrostboltMaxLevel = [FrostboltRanks + 1]int{0, 8, 12, 18, 24, 30, 36, 42, 48, 54, 60, 64}
+
+// unconfirmed: Frostbolt coefficient derived from the vanilla convention (rank 0)
+// Frostbolt rank 0: kept id 1298416 (spell_level 30); dropped 13439 (spell_level 30), 350025 (spell_level 8), 1293790 (spell_level 30)
 
 // Frostbolt, Improved: ranks 0 present, from build 1.60.1.70009.
 const FrostboltImprovedRanks = 0
@@ -3906,7 +3984,21 @@ var PurgedByFireMaxLevel = [PurgedByFireRanks + 1]int{0}
 
 // unconfirmed: Purged by Fire coefficient derived from the vanilla convention (rank 0)
 
-// skipped: "Pyroblast" already has a hand-written PyroblastRanks elsewhere in this package.
+// Pyroblast: ranks 0-8 present, from build 1.60.1.70009.
+const PyroblastRanks = 8
+
+var PyroblastSpellId = [PyroblastRanks + 1]int32{460860, 11366, 12505, 12522, 12523, 12524, 12525, 12526, 18809}
+var PyroblastLevel = [PyroblastRanks + 1]int{62, 20, 24, 30, 36, 42, 48, 54, 60}
+var PyroblastCastTime = [PyroblastRanks + 1]int32{0, 6000, 6000, 6000, 6000, 6000, 6000, 6000, 6000}
+var PyroblastCooldownMS = [PyroblastRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var PyroblastManaCost = [PyroblastRanks + 1]float64{0, 125, 150, 195, 240, 285, 335, 385, 440}
+var PyroblastManaCostPct = [PyroblastRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var PyroblastSpellCoeff = [PyroblastRanks + 1]float64{0.05, 1, 1, 1, 1, 1, 1, 1, 1}
+var PyroblastBaseDamage = [PyroblastRanks + 1][]float64{{200, 200}, {94.5732, 125.4268}, {115.9615, 152.0385}, {167.3711, 214.6289}, {215.5214, 274.4786}, {274.5705, 347.4295}, {349.5273, 438.4727}, {427.5556, 534.4444}, {519.8356, 646.1644}}
+var PyroblastPointsPerLevel = [PyroblastRanks + 1]float64{0, 1.5, 1.7, 2.1, 2.4, 2.7, 3, 3.4, 4.6}
+var PyroblastMaxLevel = [PyroblastRanks + 1]int{0, 24, 30, 36, 42, 48, 54, 60, 66}
+
+// Pyroblast rank 0: kept id 460860 (spell_level 62); dropped 17273 (spell_level 20), 17274 (spell_level 20), 20228 (spell_level 62), 434443 (spell_level 20), 460858 (spell_level 62), 1236173 (spell_level 0), 1236291 (spell_level 0)
 
 // QADebug Instant Cast: ranks 0 present, from build 1.60.1.70009.
 const QADebugInstantCastRanks = 0
@@ -4549,7 +4641,21 @@ var ScaldMaxLevel = [ScaldRanks + 1]int{0}
 
 // unconfirmed: Scald coefficient derived from the vanilla convention (rank 0)
 
-// skipped: "Scorch" already has a hand-written ScorchRanks elsewhere in this package.
+// Scorch: ranks 0-7 present, from build 1.60.1.70009.
+const ScorchRanks = 7
+
+var ScorchSpellId = [ScorchRanks + 1]int32{17195, 2948, 8444, 8445, 8446, 10205, 10206, 10207}
+var ScorchLevel = [ScorchRanks + 1]int{22, 22, 28, 34, 40, 46, 52, 58}
+var ScorchCastTime = [ScorchRanks + 1]int32{1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500}
+var ScorchCooldownMS = [ScorchRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
+var ScorchManaCost = [ScorchRanks + 1]float64{50, 50, 65, 80, 100, 115, 135, 150}
+var ScorchManaCostPct = [ScorchRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
+var ScorchSpellCoeff = [ScorchRanks + 1]float64{1, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429}
+var ScorchBaseDamage = [ScorchRanks + 1][]float64{{672.1111, 905.8889}, {35.0339, 42.9661}, {49.8235, 60.1765}, {62.7273, 75.2727}, {84.7192, 101.2808}, {106.1695, 125.8305}, {136.6438, 163.3562}, {163.2835, 192.7165}}
+var ScorchPointsPerLevel = [ScorchRanks + 1]float64{0, 0.8, 1, 1, 1.2, 1.4, 1.5, 1.7}
+var ScorchMaxLevel = [ScorchRanks + 1]int{26, 26, 32, 38, 44, 50, 56, 62}
+
+// Scorch rank 0: kept id 17195 (spell_level 22); dropped 13878 (spell_level 22), 15241 (spell_level 22)
 
 // Scorch Talent Test (PT): ranks 0 present, from build 1.60.1.70009.
 const ScorchTalentTestPTRanks = 0

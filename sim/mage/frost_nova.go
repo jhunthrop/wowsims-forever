@@ -40,17 +40,18 @@ func (mage *Mage) registerFrostNovaSpell() {
 }
 
 func (mage *Mage) getFrostNovaConfig(rank int, cdTimer *core.Timer) core.SpellConfig {
-	baseDamageLow := FrostNovaBaseDamage[rank][0]
-	baseDamageHigh := FrostNovaBaseDamage[rank][1]
+	roll := mage.clientRoll(FrostNovaBaseDamage[rank], FrostNovaPointsPerLevel[rank], FrostNovaLevel[rank], FrostNovaMaxLevel[rank])
+	baseDamageLow, baseDamageHigh := roll[0], roll[1]
 
 	return core.SpellConfig{
-		ActionID:       core.ActionID{SpellID: FrostNovaSpellId[rank]},
-		ClassSpellMask: MageSpellMaskFrostNova,
-		SpellCode:      SpellCode_MageFrostNova,
-		SpellSchool:    core.SpellSchoolFrost,
-		DefenseType:    core.DefenseTypeMagic,
-		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          SpellFlagMage | SpellFlagChillSpell | core.SpellFlagAPL,
+		ActionID:         core.ActionID{SpellID: FrostNovaSpellId[rank]},
+		ClassSpellMask:   MageSpellMaskFrostNova,
+		SpellCode:        SpellCode_MageFrostNova,
+		SpellSchool:      core.SpellSchoolFrost,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		ClientBaseDamage: roll,
+		Flags:            SpellFlagMage | SpellFlagChillSpell | core.SpellFlagAPL,
 
 		RequiredLevel: FrostNovaLevel[rank],
 		Rank:          rank,

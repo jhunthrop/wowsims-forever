@@ -40,7 +40,7 @@ func TestArcaneMissilesTopRankRegisteredAtMaxLevel(t *testing.T) {
 	if topRank == nil {
 		t.Fatalf("ArcaneMissiles[%d] not registered at level 60", ArcaneMissilesRanks)
 	}
-	if topRank.SpellID != ArcaneMissilesSpellId[ArcaneMissilesRanks] {
-		t.Errorf("top rank SpellID = %d, want %d", topRank.SpellID, ArcaneMissilesSpellId[ArcaneMissilesRanks])
+	if topRank.SpellID != ArcaneMissilesChannelSpellId[ArcaneMissilesRanks] {
+		t.Errorf("top rank SpellID = %d, want %d", topRank.SpellID, ArcaneMissilesChannelSpellId[ArcaneMissilesRanks])
 	}
 }
