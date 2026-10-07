@@ -19,7 +19,8 @@ var wingClipLearnLevels = []int{12, 38, 60}
 
 func (hunter *Hunter) getWingClipConfig(rank int) core.SpellConfig {
 	spellId := [4]int32{0, 2974, 14267, 14268}[rank]
-	baseDamage := [4]float64{0, 5, 25, 50}[rank]
+	damage := WingClipDamage[rank]
+	casterLevel := int(hunter.Level)
 	manaCost := [4]float64{0, 40, 60, 80}[rank]
 	level := [4]int{0, 12, 38, 60}[rank]
 
@@ -49,10 +50,12 @@ func (hunter *Hunter) getWingClipConfig(rank int) core.SpellConfig {
 
 		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
+		BonusCoefficient: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+			spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 		},
 	}
 }

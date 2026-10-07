@@ -9,12 +9,8 @@ import (
 
 func (hunter *Hunter) getArcaneShotConfig(rank int, timer *core.Timer) core.SpellConfig {
 	spellId := [9]int32{0, 3044, 14281, 14282, 14283, 14284, 14285, 14286, 14287}[rank]
-	// baseDamage is spellconst/hunter.json's flat per-rank "amount" (effect
-	// code 2, School Damage, no weapon component): 20/26/39/65/94/134/170/217
-	// for spells 3044/14281/14282/14283/14284/14285/14286/14287. The old
-	// values here (13/21/33/59/83/115/145/183) were the classic tooltip's
-	// pre-Forever numbers.
-	baseDamage := [9]float64{0, 20, 26, 39, 65, 94, 134, 170, 217}[rank]
+	damage := ArcaneShotDamage[rank]
+	casterLevel := int(hunter.Level)
 	spellCoeff := [9]float64{0, .204, .3, .429, .429, .429, .429, .429, .429}[rank]
 	manaCost := [9]float64{0, 25, 35, 50, 80, 105, 135, 160, 190}[rank]
 	level := [9]int{0, 6, 12, 20, 28, 36, 44, 52, 60}[rank]
@@ -61,9 +57,10 @@ func (hunter *Hunter) getArcaneShotConfig(rank int, timer *core.Timer) core.Spel
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		BonusCoefficient: spellCoeff,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeRangedHitAndCrit)
+			result := spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeRangedHitAndCrit)
 
 			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
 				spell.DealDamage(sim, result)

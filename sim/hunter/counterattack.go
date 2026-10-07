@@ -23,14 +23,14 @@ var counterattackLearnLevels = []int{30, 30, 42, 54}
 // effect is a coefficient on the same normalized-weapon-damage baseline
 // the code-121 effect (counterattackBaseDamage) adds its flat amount to,
 // not a second stacked weapon-damage roll.
-var counterattackBaseDamage = [5]float64{0, 26, 40, 70, 110}
 var counterattackManaCost = [5]float64{0, 30, 45, 65, 85}
 
 const counterattackWeaponPercent = 0.5
 
 func (hunter *Hunter) getCounterattackConfig(rank int) core.SpellConfig {
 	spellId := [5]int32{0, 19306, 1242634, 20909, 20910}[rank]
-	baseDamage := counterattackBaseDamage[rank]
+	flatDamage := CounterattackDamage[rank]
+	casterLevel := int(hunter.Level)
 	manaCost := counterattackManaCost[rank]
 	level := counterattackLearnLevels[rank-1]
 
@@ -72,13 +72,14 @@ func (hunter *Hunter) getCounterattackConfig(rank int) core.SpellConfig {
 		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: flatDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			// Client tooltip: "Counterattack cannot be blocked, dodged,
 			// or parried" -- OutcomeMeleeSpecialNoBlockDodgeParry is this
 			// engine's outcome for exactly that (miss and crit still
 			// possible, block/dodge/parry excluded).
-			damage := baseDamage + counterattackWeaponPercent*hunter.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
+			damage := flatDamage.Roll(sim, casterLevel) + counterattackWeaponPercent*hunter.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 			spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
 			hunter.CounterattackProcAura.Deactivate(sim)
 		},

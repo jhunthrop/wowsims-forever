@@ -10,14 +10,8 @@ import (
 
 func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 	spellId := [10]int32{0, 1978, 13549, 13550, 13551, 13552, 13553, 13554, 13555, 25295}[rank]
-	// baseDamage is spellconst/hunter.json's own per-tick effect amount
-	// (period_ms 3000, 5 ticks over the 15s duration) for each rank:
-	// 2/6/12/22/34/48/64/83/111. The old array held each rank's *total*
-	// tick-1978-through-25295-style Classic value and divided it by 5 to
-	// get a per-tick number, which undershot every rank but the top one
-	// (555/5 = 111 happens to match rank 9's real per-tick amount by
-	// coincidence; every other rank was low).
-	baseDamage := [10]float64{0, 2, 6, 12, 22, 34, 48, 64, 83, 111}[rank]
+	damage := SerpentStingDamage[rank]
+	casterLevel := int(hunter.Level)
 	spellCoeff := [10]float64{0, .4, .625, .925, 1, 1, 1, 1, 1, 1}[rank] / 5
 	manaCost := [10]float64{0, 15, 30, 50, 80, 115, 150, 190, 230, 250}[rank]
 	level := [10]int{0, 4, 10, 18, 26, 34, 42, 50, 58, 60}[rank]
@@ -49,6 +43,7 @@ func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
@@ -60,8 +55,7 @@ func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 			BonusCoefficient: spellCoeff,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				damage := baseDamage
-				dot.Snapshot(target, damage, isRollover)
+				dot.Snapshot(target, damage.Roll(sim, casterLevel), isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)

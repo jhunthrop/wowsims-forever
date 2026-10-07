@@ -74,7 +74,7 @@ func TestRaptorStrikeLevel60DealsClientDamage(t *testing.T) {
 	if got, want := built.RaptorStrikeHit.ActionID.SpellID, int32(14266); got != want {
 		t.Errorf("Raptor Strike spell ID = %d, want max rank %d", got, want)
 	}
-	if got, want := RaptorStrikeBaseDamage[8], 70.0; got != want {
+	if got, want := RaptorStrikeDamage[8].Amount, 70.0; got != want {
 		t.Errorf("Raptor Strike rank 8 base damage = %v, want %v (client's spellconst amount)", got, want)
 	}
 
@@ -90,7 +90,7 @@ func TestRaptorStrikeLevel60DealsClientDamage(t *testing.T) {
 }
 
 // TestMongooseBiteLevel60CastableWithoutADodgeAndDealsClientDamage
-// guards two fixes: mongooseBiteBaseDamage now reads the client's lower
+// guards two fixes: MongooseBiteDamage now reads the client's lower
 // numbers (was vanilla Classic's), and the dodge-gated "Defensive State"
 // aura is gone -- the Forever client's own tooltip
 // (wowhead.com/forever/spell=1495) does not list a dodge requirement, so
@@ -104,7 +104,7 @@ func TestMongooseBiteLevel60CastableWithoutADodgeAndDealsClientDamage(t *testing
 	if got, want := built.MongooseBite.ActionID.SpellID, int32(14271); got != want {
 		t.Errorf("Mongoose Bite spell ID = %d, want max rank %d", got, want)
 	}
-	if got, want := mongooseBiteBaseDamage[4], 57.0; got != want {
+	if got, want := MongooseBiteDamage[4].Amount, 57.0; got != want {
 		t.Errorf("Mongoose Bite rank 4 base damage = %v, want %v (client's spellconst amount)", got, want)
 	}
 	// No dodge, no "Defensive State" aura activated: CanCast must still

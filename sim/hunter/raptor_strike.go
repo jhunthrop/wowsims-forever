@@ -17,7 +17,6 @@ var RaptorStrikeSpellIdMeleeSpecialist = [RaptorStrikeRanks + 1]int32{0, 415335,
 // lower than vanilla Classic's from rank 4 on (rank 8 is +70, not the
 // +140 vanilla gave), and rank 1's cost is 10, not 15; both corrected
 // here against the client rather than carrying vanilla's table forward.
-var RaptorStrikeBaseDamage = [RaptorStrikeRanks + 1]float64{0, 5, 11, 21, 30, 35, 40, 55, 70}
 var RaptorStrikeManaCost = [RaptorStrikeRanks + 1]float64{0, 10, 25, 35, 45, 55, 70, 85, 100}
 var RaptorStrikeLevel = [RaptorStrikeRanks + 1]int{0, 1, 8, 16, 24, 32, 40, 48, 56}
 
@@ -59,6 +58,7 @@ func (hunter *Hunter) getRaptorStrikeConfig(rank int) core.SpellConfig {
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 			return hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance
 		},
+		ClientBaseDamage: RaptorStrikeDamage[rank].Range(int(hunter.Level)),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			hunter.RaptorStrikeHit.Cast(sim, target)
@@ -74,7 +74,8 @@ func (hunter *Hunter) getRaptorStrikeConfig(rank int) core.SpellConfig {
 
 func (hunter *Hunter) newRaptorStrikeHitSpell(rank int) *core.Spell {
 	spellID := RaptorStrikeSpellId[rank]
-	baseDamage := RaptorStrikeBaseDamage[rank]
+	flatDamage := RaptorStrikeDamage[rank]
+	casterLevel := int(hunter.Level)
 
 	return hunter.RegisterSpell(core.SpellConfig{
 		SpellCode:   SpellCode_HunterRaptorStrikeHit,
@@ -98,7 +99,7 @@ func (hunter *Hunter) newRaptorStrikeHitSpell(rank int) *core.Spell {
 		BonusCoefficient: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			damage := baseDamage + hunter.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
+			damage := flatDamage.Roll(sim, casterLevel) + hunter.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
 			spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 		},
 	})

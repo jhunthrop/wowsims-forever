@@ -24,22 +24,26 @@ import (
 // scaling lives in the normalized-weapon-damage effect itself, not in a
 // separate coefficient column, so this spell's ApplyEffects is Aimed
 // Shot's shape with Aimed Shot's own per-rank baseDamage array replaced
-// by the one flat 160.
-const sniperShotBaseDamage = 160.0
+// by the rank's flat amount (160/225/295 at levels 40/48/58, read from
+// SniperShotDamage; the cost, cast time and cooldown are the same at all
+// three ranks, so only the id and the damage follow the rank).
 const sniperShotManaCost = 365.0
 const sniperShotCastTime = time.Millisecond * 4000
 const sniperShotCooldown = time.Second * 15
 
-func (hunter *Hunter) getSniperShotConfig() core.SpellConfig {
+func (hunter *Hunter) getSniperShotConfig(rank int) core.SpellConfig {
+	flatDamage := SniperShotDamage[rank]
+	casterLevel := int(hunter.Level)
 	return core.SpellConfig{
 		SpellCode:     SpellCode_HunterSniperShot,
-		ActionID:      core.ActionID{SpellID: 1310687},
+		ActionID:      core.ActionID{SpellID: SniperShotSpellId[rank]},
 		SpellSchool:   core.SpellSchoolPhysical,
 		DefenseType:   core.DefenseTypeRanged,
 		ProcMask:      core.ProcMaskRangedSpecial,
 		Flags:         core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagShot,
 		CastType:      proto.CastType_CastTypeRanged,
-		RequiredLevel: 40,
+		Rank:          rank,
+		RequiredLevel: SniperShotLevel[rank],
 		MissileSpeed:  24,
 
 		ManaCost: core.ManaCostOptions{
@@ -72,11 +76,12 @@ func (hunter *Hunter) getSniperShotConfig() core.SpellConfig {
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			baseDamage := hunter.AutoAttacks.Ranged().CalculateNormalizedWeaponDamage(sim, spell.RangedAttackPower(target, false)) +
 				hunter.AmmoDamageBonus +
-				sniperShotBaseDamage
+				flatDamage.Roll(sim, casterLevel)
 
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeRangedHitAndCrit)
 			hunter.Unit.AutoAttacks.EnableAutoSwing(sim)
@@ -91,9 +96,10 @@ func (hunter *Hunter) registerSniperShotSpell() {
 	if !hunter.Talents.SniperShot {
 		return
 	}
-	if hunter.Level < 40 {
+	rank := core.HighestRankAtLevel(SniperShotLevel[1:], hunter.Level)
+	if rank == 0 {
 		return
 	}
 
-	hunter.SniperShot = hunter.GetOrRegisterSpell(hunter.getSniperShotConfig())
+	hunter.SniperShot = hunter.GetOrRegisterSpell(hunter.getSniperShotConfig(rank))
 }

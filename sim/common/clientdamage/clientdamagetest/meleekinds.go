@@ -12,4 +12,7 @@ var (
 	// WeaponDamage is the flat bonus of a weapon-damage effect with a
 	// school (effect 58): Raptor Strike.
 	WeaponDamage = Kind{effect: 58}
+	// AreaPeriodic is a persistent-area periodic-damage aura (effect 27,
+	// aura 3): Explosive Trap's burn. Its Amount is per tick.
+	AreaPeriodic = Kind{effect: 27, aura: 3}
 )

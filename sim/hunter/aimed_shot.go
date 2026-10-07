@@ -9,7 +9,8 @@ import (
 
 func (hunter *Hunter) getAimedShotConfig(rank int, timer *core.Timer) core.SpellConfig {
 	spellId := [7]int32{0, 19434, 20900, 20901, 20902, 20903, 20904}[rank]
-	baseDamage := [7]float64{0, 20, 34, 55, 89, 125, 166}[rank]
+	flatDamage := AimedShotDamage[rank]
+	casterLevel := int(hunter.Level)
 	manaCost := [7]float64{0, 75, 115, 160, 210, 260, 310}[rank]
 	level := [7]int{0, 20, 28, 36, 44, 52, 60}[rank]
 
@@ -55,11 +56,12 @@ func (hunter *Hunter) getAimedShotConfig(rank int, timer *core.Timer) core.Spell
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			baseDamage := hunter.AutoAttacks.Ranged().CalculateNormalizedWeaponDamage(sim, spell.RangedAttackPower(target, false)) +
 				hunter.AmmoDamageBonus +
-				baseDamage
+				flatDamage.Roll(sim, casterLevel)
 
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeRangedHitAndCrit)
 			hunter.Unit.AutoAttacks.EnableAutoSwing(sim)

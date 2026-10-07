@@ -14,11 +14,11 @@ var mongooseBiteLearnLevels = []int{16, 30, 44, 58}
 // 1.60.1.70009 client spell data (spells 1495/14269-14271). Forever's
 // numbers are well below vanilla Classic's here too (rank 4 is +57, not
 // vanilla's +115); corrected against the client.
-var mongooseBiteBaseDamage = [5]float64{0, 15, 22, 37, 57}
 
 func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 	spellId := [5]int32{0, 1495, 14269, 14270, 14271}[rank]
-	baseDamage := mongooseBiteBaseDamage[rank]
+	damage := MongooseBiteDamage[rank]
+	casterLevel := int(hunter.Level)
 	manaCost := [5]float64{0, 30, 40, 50, 65}[rank]
 	level := [5]int{0, 16, 30, 44, 58}[rank]
 
@@ -61,6 +61,7 @@ func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			// Effect code 121 ("Normalized Weapon Damage", wowhead's
@@ -70,8 +71,8 @@ func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 			// -- Mongoose Bite is an instant special that used to deal
 			// only its flat rank amount with no weapon scaling at all,
 			// which undersells it relative to the client's own tooltip.
-			damage := baseDamage + hunter.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
-			result := spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+			total := damage.Roll(sim, casterLevel) + hunter.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
+			result := spell.CalcAndDealDamage(sim, target, total, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 			hunter.tryProcLaceratingStrikes(sim, target, result)
 		},
 	}

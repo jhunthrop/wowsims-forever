@@ -30,14 +30,14 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 	// separate, real "Immolation Trap Effect" spell per rank
 	// (13797/14298/14299/14300/14301, spell_level matching): a 5-tick,
 	// 3s-period periodic-damage aura (effect 6, aura 3) of 21/43/68/
-	// 102/138 per tick - dotDamage below (already the client's own
-	// per-tick amount * 5 ticks, unchanged from before this fix) and
-	// TickLength (fixed from 1.5s to the real 3s below) both now match
+	// 102/138 per tick - ImmolationTrapTickDamage
+	// (client_damage.go) and TickLength (fixed from 1.5s to the real 3s below) both now match
 	// exactly. Corroborated on Wowhead's Forever pages (spell=13797/
 	// 14301: "22 every 3 seconds" / "139 every 3 seconds", 15s/5-tick
 	// duration).
 	spellId := [6]int32{0, 13795, 14302, 14303, 14304, 14305}[rank]
-	dotDamage := [6]float64{0, 105, 215, 340, 510, 690}[rank]
+	tickDamage := ImmolationTrapTickDamage[rank]
+	casterLevel := int(hunter.Level)
 	manaCost := [6]float64{0, 50, 90, 135, 190, 245}[rank]
 	level := [6]int{0, 16, 26, 36, 46, 56}[rank]
 
@@ -72,6 +72,7 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: tickDamage.Range(casterLevel),
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
@@ -82,8 +83,7 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 			TickLength:    time.Second * 3,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				tickDamage := dotDamage / float64(dot.NumberOfTicks)
-				dot.Snapshot(target, tickDamage, isRollover)
+				dot.Snapshot(target, tickDamage.Roll(sim, casterLevel), isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
