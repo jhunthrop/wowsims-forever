@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -17,8 +18,32 @@ var MoonfireSpellId = [MoonfireRanks + 1]int32{0, 8921, 8924, 8925, 8926, 8927, 
 // Classic 195-228 and 384 these replaced).
 var MoonfireSpellCoeff = [MoonfireRanks + 1]float64{0, .15, .15, .15, .15, .15, .15, .15, .15, .15, .15}
 var MoonfireDotSpellCoeff = [MoonfireRanks + 1]float64{0, .13, .13, .13, .13, .13, .13, .13, .13, .13, .13}
-var MoonfireBaseDamage = [MoonfireRanks + 1]float64{0, 8, 13, 22, 32, 47, 59, 73, 91, 111, 135}
-var MoonfireTickDamage = [MoonfireRanks + 1]float64{0, 4, 6, 9, 13, 19, 23, 31, 39, 49, 60}
+var MoonfireDamage = [MoonfireRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 8, Variance: 0.25, PerLevel: 0.5, SpellLevel: 4, MaxLevel: 9},
+	{Amount: 13, Variance: 0.266667, PerLevel: 0.8, SpellLevel: 10, MaxLevel: 15},
+	{Amount: 22, Variance: 0.214286, PerLevel: 1, SpellLevel: 16, MaxLevel: 21},
+	{Amount: 32, Variance: 0.181818, PerLevel: 1.5, SpellLevel: 22, MaxLevel: 27},
+	{Amount: 47, Variance: 0.179104, PerLevel: 1.5, SpellLevel: 28, MaxLevel: 33},
+	{Amount: 59, Variance: 0.179775, PerLevel: 1.6, SpellLevel: 34, MaxLevel: 39},
+	{Amount: 73, Variance: 0.173913, PerLevel: 1.7, SpellLevel: 40, MaxLevel: 45},
+	{Amount: 91, Variance: 0.169014, PerLevel: 2.7, SpellLevel: 46, MaxLevel: 51},
+	{Amount: 111, Variance: 0.163743, PerLevel: 2.1, SpellLevel: 52, MaxLevel: 57},
+	{Amount: 135, Variance: 0.156098, PerLevel: 2.3, SpellLevel: 58, MaxLevel: 63},
+}
+var MoonfireTickDamage = [MoonfireRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 4, SpellLevel: 4, MaxLevel: 9},
+	{Amount: 6, SpellLevel: 10, MaxLevel: 15},
+	{Amount: 9, SpellLevel: 16, MaxLevel: 21},
+	{Amount: 13, SpellLevel: 22, MaxLevel: 27},
+	{Amount: 19, SpellLevel: 28, MaxLevel: 33},
+	{Amount: 23, SpellLevel: 34, MaxLevel: 39},
+	{Amount: 31, SpellLevel: 40, MaxLevel: 45},
+	{Amount: 39, SpellLevel: 46, MaxLevel: 51},
+	{Amount: 49, SpellLevel: 52, MaxLevel: 57},
+	{Amount: 60, SpellLevel: 58, MaxLevel: 63},
+}
 var MoonfireDotTicks = [MoonfireRanks + 1]int32{0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4}
 var MoonfireManaCost = [MoonfireRanks + 1]float64{0, 25, 50, 75, 105, 150, 190, 235, 280, 325, 375}
 var MoonfireLevel = [MoonfireRanks + 1]int{0, 4, 10, 16, 22, 28, 34, 40, 46, 52, 58}
@@ -42,8 +67,9 @@ func (druid *Druid) getMoonfireBaseConfig(rank int) core.SpellConfig {
 	spellId := MoonfireSpellId[rank]
 	spellCoeff := MoonfireSpellCoeff[rank]
 	spellDotCoeff := MoonfireDotSpellCoeff[rank]
-	baseDamage := MoonfireBaseDamage[rank]
-	baseDotDamage := MoonfireTickDamage[rank]
+	damage := MoonfireDamage[rank]
+	tickDamage := MoonfireTickDamage[rank]
+	casterLevel := int(druid.Level)
 	manaCost := MoonfireManaCost[rank]
 	level := MoonfireLevel[rank]
 
@@ -77,7 +103,7 @@ func (druid *Druid) getMoonfireBaseConfig(rank int) core.SpellConfig {
 			TickLength:       tickLength,
 			BonusCoefficient: spellDotCoeff,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				dot.Snapshot(target, baseDotDamage, isRollover)
+				dot.Snapshot(target, tickDamage.Center(casterLevel), isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
@@ -85,12 +111,13 @@ func (druid *Druid) getMoonfireBaseConfig(rank int) core.SpellConfig {
 		},
 
 		BonusCoefficient: spellCoeff,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			result := spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 
 			if result.Landed() {
 				dot := spell.Dot(target)

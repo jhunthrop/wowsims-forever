@@ -12,7 +12,11 @@
 // vendored client file by each class package's spellconst_damage_test.go.
 package clientdamage
 
-import "github.com/wowsims/classic/sim/core"
+import (
+	"fmt"
+
+	"github.com/wowsims/classic/sim/core"
+)
 
 // Effect is one rank's damage effect as the client states it.
 type Effect struct {
@@ -52,4 +56,35 @@ func (e Effect) Roll(sim *core.Simulation, casterLevel int) float64 {
 		return bounds[0]
 	}
 	return sim.Roll(bounds[0], bounds[1])
+}
+
+// FromRoll builds an Effect from a generated constants_auto_gen.go row:
+// <Spell>BaseDamage[rank] is the client's {min, max} at the spell's own
+// level, <Spell>PointsPerLevel[rank] and <Spell>MaxLevel[rank] its growth
+// and cap, and <Spell>Level[rank] the spell's own level. A row that is not
+// a two-ended roll is a programming error and panics at registration.
+func FromRoll(roll []float64, perLevel float64, spellLevel, maxLevel int) Effect {
+	if len(roll) != 2 {
+		panic(fmt.Sprintf("clientdamage: a roll needs {min, max}, got %v", roll))
+	}
+	center := (roll[0] + roll[1]) / 2
+	variance := 0.0
+	if center > 0 {
+		variance = (roll[1] - roll[0]) / center
+	}
+	return Effect{Amount: center, Variance: variance, PerLevel: perLevel, SpellLevel: spellLevel, MaxLevel: maxLevel}
+}
+
+// FromTable is FromRoll over a whole generated rank table: index i of the
+// result is the Effect of rank i, so a spell whose damage the generator
+// already carries reads one Effect per rank from its own constants.
+func FromTable(rolls [][]float64, perLevel []float64, spellLevels, maxLevels []int) []Effect {
+	if len(perLevel) != len(rolls) || len(spellLevels) != len(rolls) || len(maxLevels) != len(rolls) {
+		panic("clientdamage: generated damage columns differ in length")
+	}
+	effects := make([]Effect, len(rolls))
+	for rank := range rolls {
+		effects[rank] = FromRoll(rolls[rank], perLevel[rank], spellLevels[rank], maxLevels[rank])
+	}
+	return effects
 }
