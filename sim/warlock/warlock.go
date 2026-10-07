@@ -76,8 +76,7 @@ type Warlock struct {
 	Shoot       *core.Spell
 
 	ActiveCurseAura          core.AuraArray
-	CurseOfElements          *core.Spell
-	CurseOfElementsAuras     core.AuraArray
+	CurseOfElements          []*core.Spell
 	CurseOfShadow            *core.Spell
 	CurseOfShadowAuras       core.AuraArray
 	CurseOfRecklessness      *core.Spell

@@ -28,6 +28,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 20 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 20 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 20 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200→0.200 | declared, matches |
+| DSRuinWarlock | 20 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 20 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 20 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100→0.100 | declared, matches |
 | DSRuinWarlock | 20 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200→0.200 | declared, matches |
@@ -51,6 +52,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 30 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 30 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 30 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
+| DSRuinWarlock | 30 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
+| DSRuinWarlock | 30 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
@@ -83,6 +86,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 38 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 38 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 38 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
+| DSRuinWarlock | 38 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
+| DSRuinWarlock | 38 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 38 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 38 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 38 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
@@ -122,6 +127,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 40 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 40 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 40 | Curse of Recklessness | 2 | 7658 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 120000→-1 | mismatch | duration_ms 120000->-1 | n/a | n/a | n/a |
+| DSRuinWarlock | 40 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
+| DSRuinWarlock | 40 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
+| DSRuinWarlock | 40 | Curse of the Elements | 3 | 1311677 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 40 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 40 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 40 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
@@ -164,6 +172,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 50 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 50 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  | 40.00-40.00→40.00-40.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 50 | Curse of Recklessness | 3 | 7659 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 120000→-1 | mismatch | duration_ms 120000->-1 | n/a | n/a | n/a |
+| DSRuinWarlock | 50 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
+| DSRuinWarlock | 50 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
+| DSRuinWarlock | 50 | Curse of the Elements | 3 | 1311677 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
+| DSRuinWarlock | 50 | Curse of the Elements | 4 | 1311680 | 200.00→200.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 300000→300000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 50 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
 | DSRuinWarlock | 50 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
 | DSRuinWarlock | 50 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
@@ -220,6 +232,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 60 | Corruption | 6 | 11672 | 290.00→290.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | 18000→18000 | match |  | 57.00-57.00→57.00-57.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Corruption | 7 | 25311 | 340.00→340.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 18000→18000 | match |  | 73.00-73.00→73.00-73.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Curse of Recklessness | 4 | 11717 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 120000→-1 | mismatch | duration_ms 120000->-1 | n/a | n/a | n/a |
+| DSRuinWarlock | 60 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
+| DSRuinWarlock | 60 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
+| DSRuinWarlock | 60 | Curse of the Elements | 3 | 1311677 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
+| DSRuinWarlock | 60 | Curse of the Elements | 4 | 1311680 | 200.00→200.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 300000→300000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Death Coil | 3 | 17926 | 600.00→600.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 58→58 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
@@ -289,6 +305,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 20 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 20 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 20 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200→0.200 | declared, matches |
+| SMRuinWarlock | 20 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 20 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 20 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100→0.100 | declared, matches |
 | SMRuinWarlock | 20 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200→0.200 | declared, matches |
@@ -312,6 +329,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 30 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 30 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 30 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
+| SMRuinWarlock | 30 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
+| SMRuinWarlock | 30 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
@@ -344,6 +363,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 38 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 38 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 38 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
+| SMRuinWarlock | 38 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
+| SMRuinWarlock | 38 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 38 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 38 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 38 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
@@ -383,6 +404,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 40 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 40 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 40 | Curse of Recklessness | 2 | 7658 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 120000→-1 | mismatch | duration_ms 120000->-1 | n/a | n/a | n/a |
+| SMRuinWarlock | 40 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
+| SMRuinWarlock | 40 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
+| SMRuinWarlock | 40 | Curse of the Elements | 3 | 1311677 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 40 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 40 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 40 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
@@ -425,6 +449,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 50 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 50 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  | 40.00-40.00→40.00-40.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 50 | Curse of Recklessness | 3 | 7659 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 120000→-1 | mismatch | duration_ms 120000->-1 | n/a | n/a | n/a |
+| SMRuinWarlock | 50 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
+| SMRuinWarlock | 50 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
+| SMRuinWarlock | 50 | Curse of the Elements | 3 | 1311677 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
+| SMRuinWarlock | 50 | Curse of the Elements | 4 | 1311680 | 200.00→200.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 300000→300000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 50 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
 | SMRuinWarlock | 50 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
 | SMRuinWarlock | 50 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
@@ -481,6 +509,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 60 | Corruption | 6 | 11672 | 290.00→290.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | 18000→18000 | match |  | 57.00-57.00→57.00-57.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Corruption | 7 | 25311 | 340.00→340.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 18000→18000 | match |  | 73.00-73.00→73.00-73.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Curse of Recklessness | 4 | 11717 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 120000→-1 | mismatch | duration_ms 120000->-1 | n/a | n/a | n/a |
+| SMRuinWarlock | 60 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
+| SMRuinWarlock | 60 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
+| SMRuinWarlock | 60 | Curse of the Elements | 3 | 1311677 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
+| SMRuinWarlock | 60 | Curse of the Elements | 4 | 1311680 | 200.00→200.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 300000→300000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Death Coil | 3 | 17926 | 600.00→600.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 58→58 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
