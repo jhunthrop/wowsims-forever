@@ -45,7 +45,7 @@ func collectRows(clientClass spellconst.Class, presets []Preset) (rows []Row, no
 				notes = append(notes, note)
 			}
 			for _, spell := range built.Spellbook {
-				row, ok := rowFor(clientClass, preset, level, spell)
+				row, ok := rowFor(clientClass, preset, level, built, spell)
 				if !ok {
 					continue
 				}

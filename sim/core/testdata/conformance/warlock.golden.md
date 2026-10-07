@@ -33,7 +33,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 20 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  |
 | DSRuinWarlock | 20 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
 | DSRuinWarlock | 20 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  |
-| DSRuinWarlock | 20 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
+| DSRuinWarlock | 20 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
 | DSRuinWarlock | 20 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  |
 | DSRuinWarlock | 20 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  |
 | DSRuinWarlock | 20 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  |
@@ -61,7 +61,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 30 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
 | DSRuinWarlock | 30 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  |
 | DSRuinWarlock | 30 | Life Tap | 3 | 1456 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 26→26 | n/a | match |  |
-| DSRuinWarlock | 30 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
+| DSRuinWarlock | 30 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
 | DSRuinWarlock | 30 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  |
 | DSRuinWarlock | 30 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  |
 | DSRuinWarlock | 30 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  |
@@ -96,8 +96,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 38 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  |
 | DSRuinWarlock | 38 | Life Tap | 3 | 1456 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 26→26 | n/a | match |  |
 | DSRuinWarlock | 38 | Life Tap | 4 | 11687 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  |
-| DSRuinWarlock | 38 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| DSRuinWarlock | 38 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 |
+| DSRuinWarlock | 38 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| DSRuinWarlock | 38 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  |
 | DSRuinWarlock | 38 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  |
 | DSRuinWarlock | 38 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  |
 | DSRuinWarlock | 38 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -119,7 +119,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 40 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  |
 | DSRuinWarlock | 40 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  |
 | DSRuinWarlock | 40 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  |
-| DSRuinWarlock | 40 | Curse of Recklessness | 2 | 7658 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→0 | 120000→0 | mismatch | required_level 28->0; duration_ms 120000->0 |
+| DSRuinWarlock | 40 | Curse of Recklessness | 2 | 7658 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→0 | 120000→-1 | mismatch | required_level 28->0; duration_ms 120000->-1 |
 | DSRuinWarlock | 40 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | DSRuinWarlock | 40 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | DSRuinWarlock | 40 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -136,8 +136,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 40 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  |
 | DSRuinWarlock | 40 | Life Tap | 3 | 1456 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 26→26 | n/a | match |  |
 | DSRuinWarlock | 40 | Life Tap | 4 | 11687 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  |
-| DSRuinWarlock | 40 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| DSRuinWarlock | 40 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 |
+| DSRuinWarlock | 40 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| DSRuinWarlock | 40 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  |
 | DSRuinWarlock | 40 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  |
 | DSRuinWarlock | 40 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  |
 | DSRuinWarlock | 40 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -161,9 +161,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 50 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  |
 | DSRuinWarlock | 50 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  |
 | DSRuinWarlock | 50 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  |
-| DSRuinWarlock | 50 | Curse of Recklessness | 3 | 7659 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→0 | 120000→0 | mismatch | required_level 42->0; duration_ms 120000->0 |
-| DSRuinWarlock | 50 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 |
-| DSRuinWarlock | 50 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 |
+| DSRuinWarlock | 50 | Curse of Recklessness | 3 | 7659 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→0 | 120000→-1 | mismatch | required_level 42->0; duration_ms 120000->-1 |
+| DSRuinWarlock | 50 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) |
+| DSRuinWarlock | 50 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) |
 | DSRuinWarlock | 50 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | DSRuinWarlock | 50 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | DSRuinWarlock | 50 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -183,9 +183,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 50 | Life Tap | 3 | 1456 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 26→26 | n/a | match |  |
 | DSRuinWarlock | 50 | Life Tap | 4 | 11687 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  |
 | DSRuinWarlock | 50 | Life Tap | 5 | 11688 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 46→46 | n/a | match |  |
-| DSRuinWarlock | 50 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| DSRuinWarlock | 50 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 |
-| DSRuinWarlock | 50 | Rain of Fire | 3 | 11677 | 885.00→885.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 |
+| DSRuinWarlock | 50 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| DSRuinWarlock | 50 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  |
+| DSRuinWarlock | 50 | Rain of Fire | 3 | 11677 | 885.00→885.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 8000→8000 | match |  |
 | DSRuinWarlock | 50 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  |
 | DSRuinWarlock | 50 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  |
 | DSRuinWarlock | 50 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -217,10 +217,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 60 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  |
 | DSRuinWarlock | 60 | Corruption | 6 | 11672 | 290.00→290.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | 18000→18000 | match |  |
 | DSRuinWarlock | 60 | Corruption | 7 | 25311 | 340.00→340.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 18000→18000 | match |  |
-| DSRuinWarlock | 60 | Curse of Recklessness | 4 | 11717 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→0 | 120000→0 | mismatch | required_level 56->0; duration_ms 120000->0 |
-| DSRuinWarlock | 60 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 |
-| DSRuinWarlock | 60 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 |
-| DSRuinWarlock | 60 | Death Coil | 3 | 17926 | 600.00→600.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 58→58 | 3000→0 | mismatch | duration_ms 3000->0 |
+| DSRuinWarlock | 60 | Curse of Recklessness | 4 | 11717 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→0 | 120000→-1 | mismatch | required_level 56->0; duration_ms 120000->-1 |
+| DSRuinWarlock | 60 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) |
+| DSRuinWarlock | 60 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) |
+| DSRuinWarlock | 60 | Death Coil | 3 | 17926 | 600.00→600.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 58→58 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) |
 | DSRuinWarlock | 60 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | DSRuinWarlock | 60 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | DSRuinWarlock | 60 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -245,10 +245,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 60 | Life Tap | 4 | 11687 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  |
 | DSRuinWarlock | 60 | Life Tap | 5 | 11688 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 46→46 | n/a | match |  |
 | DSRuinWarlock | 60 | Life Tap | 6 | 11689 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 56→56 | n/a | match |  |
-| DSRuinWarlock | 60 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| DSRuinWarlock | 60 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 |
-| DSRuinWarlock | 60 | Rain of Fire | 3 | 11677 | 885.00→885.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 |
-| DSRuinWarlock | 60 | Rain of Fire | 4 | 11678 | 1185.00→1185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 8000→0 | mismatch | duration_ms 8000->0 |
+| DSRuinWarlock | 60 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| DSRuinWarlock | 60 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  |
+| DSRuinWarlock | 60 | Rain of Fire | 3 | 11677 | 885.00→885.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 8000→8000 | match |  |
+| DSRuinWarlock | 60 | Rain of Fire | 4 | 11678 | 1185.00→1185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 8000→8000 | match |  |
 | DSRuinWarlock | 60 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  |
 | DSRuinWarlock | 60 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  |
 | DSRuinWarlock | 60 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -294,7 +294,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 20 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  |
 | SMRuinWarlock | 20 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
 | SMRuinWarlock | 20 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  |
-| SMRuinWarlock | 20 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
+| SMRuinWarlock | 20 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
 | SMRuinWarlock | 20 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  |
 | SMRuinWarlock | 20 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  |
 | SMRuinWarlock | 20 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  |
@@ -322,7 +322,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 30 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
 | SMRuinWarlock | 30 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  |
 | SMRuinWarlock | 30 | Life Tap | 3 | 1456 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 26→26 | n/a | match |  |
-| SMRuinWarlock | 30 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
+| SMRuinWarlock | 30 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
 | SMRuinWarlock | 30 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  |
 | SMRuinWarlock | 30 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  |
 | SMRuinWarlock | 30 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  |
@@ -357,8 +357,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 38 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  |
 | SMRuinWarlock | 38 | Life Tap | 3 | 1456 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 26→26 | n/a | match |  |
 | SMRuinWarlock | 38 | Life Tap | 4 | 11687 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  |
-| SMRuinWarlock | 38 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock | 38 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 |
+| SMRuinWarlock | 38 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| SMRuinWarlock | 38 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  |
 | SMRuinWarlock | 38 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  |
 | SMRuinWarlock | 38 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  |
 | SMRuinWarlock | 38 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -380,7 +380,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 40 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  |
 | SMRuinWarlock | 40 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  |
 | SMRuinWarlock | 40 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  |
-| SMRuinWarlock | 40 | Curse of Recklessness | 2 | 7658 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→0 | 120000→0 | mismatch | required_level 28->0; duration_ms 120000->0 |
+| SMRuinWarlock | 40 | Curse of Recklessness | 2 | 7658 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→0 | 120000→-1 | mismatch | required_level 28->0; duration_ms 120000->-1 |
 | SMRuinWarlock | 40 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | SMRuinWarlock | 40 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | SMRuinWarlock | 40 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -397,8 +397,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 40 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  |
 | SMRuinWarlock | 40 | Life Tap | 3 | 1456 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 26→26 | n/a | match |  |
 | SMRuinWarlock | 40 | Life Tap | 4 | 11687 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  |
-| SMRuinWarlock | 40 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock | 40 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 |
+| SMRuinWarlock | 40 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| SMRuinWarlock | 40 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  |
 | SMRuinWarlock | 40 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  |
 | SMRuinWarlock | 40 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  |
 | SMRuinWarlock | 40 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -422,9 +422,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 50 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  |
 | SMRuinWarlock | 50 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  |
 | SMRuinWarlock | 50 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  |
-| SMRuinWarlock | 50 | Curse of Recklessness | 3 | 7659 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→0 | 120000→0 | mismatch | required_level 42->0; duration_ms 120000->0 |
-| SMRuinWarlock | 50 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 |
-| SMRuinWarlock | 50 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 |
+| SMRuinWarlock | 50 | Curse of Recklessness | 3 | 7659 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→0 | 120000→-1 | mismatch | required_level 42->0; duration_ms 120000->-1 |
+| SMRuinWarlock | 50 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) |
+| SMRuinWarlock | 50 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) |
 | SMRuinWarlock | 50 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | SMRuinWarlock | 50 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | SMRuinWarlock | 50 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -444,9 +444,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 50 | Life Tap | 3 | 1456 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 26→26 | n/a | match |  |
 | SMRuinWarlock | 50 | Life Tap | 4 | 11687 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  |
 | SMRuinWarlock | 50 | Life Tap | 5 | 11688 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 46→46 | n/a | match |  |
-| SMRuinWarlock | 50 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock | 50 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock | 50 | Rain of Fire | 3 | 11677 | 885.00→885.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 |
+| SMRuinWarlock | 50 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| SMRuinWarlock | 50 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  |
+| SMRuinWarlock | 50 | Rain of Fire | 3 | 11677 | 885.00→885.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 8000→8000 | match |  |
 | SMRuinWarlock | 50 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  |
 | SMRuinWarlock | 50 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  |
 | SMRuinWarlock | 50 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -478,10 +478,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 60 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  |
 | SMRuinWarlock | 60 | Corruption | 6 | 11672 | 290.00→290.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | 18000→18000 | match |  |
 | SMRuinWarlock | 60 | Corruption | 7 | 25311 | 340.00→340.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 18000→18000 | match |  |
-| SMRuinWarlock | 60 | Curse of Recklessness | 4 | 11717 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→0 | 120000→0 | mismatch | required_level 56->0; duration_ms 120000->0 |
-| SMRuinWarlock | 60 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 |
-| SMRuinWarlock | 60 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 |
-| SMRuinWarlock | 60 | Death Coil | 3 | 17926 | 600.00→600.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 58→58 | 3000→0 | mismatch | duration_ms 3000->0 |
+| SMRuinWarlock | 60 | Curse of Recklessness | 4 | 11717 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→0 | 120000→-1 | mismatch | required_level 56->0; duration_ms 120000->-1 |
+| SMRuinWarlock | 60 | Death Coil | 1 | 6789 | 435.00→435.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 42→42 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) |
+| SMRuinWarlock | 60 | Death Coil | 2 | 17925 | 525.00→525.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 50→50 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) |
+| SMRuinWarlock | 60 | Death Coil | 3 | 17926 | 600.00→600.00 | mana→mana | 120000→120000 | 0→0 | 1500→1500 | 58→58 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) |
 | SMRuinWarlock | 60 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  |
 | SMRuinWarlock | 60 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  |
 | SMRuinWarlock | 60 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
@@ -506,10 +506,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 60 | Life Tap | 4 | 11687 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  |
 | SMRuinWarlock | 60 | Life Tap | 5 | 11688 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 46→46 | n/a | match |  |
 | SMRuinWarlock | 60 | Life Tap | 6 | 11689 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 56→56 | n/a | match |  |
-| SMRuinWarlock | 60 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock | 60 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock | 60 | Rain of Fire | 3 | 11677 | 885.00→885.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock | 60 | Rain of Fire | 4 | 11678 | 1185.00→1185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 8000→0 | mismatch | duration_ms 8000->0 |
+| SMRuinWarlock | 60 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| SMRuinWarlock | 60 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  |
+| SMRuinWarlock | 60 | Rain of Fire | 3 | 11677 | 885.00→885.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 8000→8000 | match |  |
+| SMRuinWarlock | 60 | Rain of Fire | 4 | 11678 | 1185.00→1185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 8000→8000 | match |  |
 | SMRuinWarlock | 60 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  |
 | SMRuinWarlock | 60 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  |
 | SMRuinWarlock | 60 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -538,20 +538,20 @@ Each spell below is built with exactly one point in the single talent that grant
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| SMRuinWarlock (Amplify Curse talent) | 10 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→0 | mismatch | duration_ms 30000->0 |
-| SMRuinWarlock (Amplify Curse talent) | 20 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→0 | mismatch | duration_ms 30000->0 |
-| SMRuinWarlock (Amplify Curse talent) | 30 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→0 | mismatch | duration_ms 30000->0 |
-| SMRuinWarlock (Amplify Curse talent) | 38 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→0 | mismatch | duration_ms 30000->0 |
-| SMRuinWarlock (Amplify Curse talent) | 40 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→0 | mismatch | duration_ms 30000->0 |
-| SMRuinWarlock (Amplify Curse talent) | 50 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→0 | mismatch | duration_ms 30000->0 |
-| SMRuinWarlock (Amplify Curse talent) | 60 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→0 | mismatch | duration_ms 30000->0 |
-| SMRuinWarlock (Bane of Havoc talent) | 10 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→0 | mismatch | gcd_ms 0->1500; required_level 1->0; duration_ms 300000->0 |
-| SMRuinWarlock (Bane of Havoc talent) | 20 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→0 | mismatch | gcd_ms 0->1500; required_level 1->0; duration_ms 300000->0 |
-| SMRuinWarlock (Bane of Havoc talent) | 30 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→0 | mismatch | gcd_ms 0->1500; required_level 1->0; duration_ms 300000->0 |
-| SMRuinWarlock (Bane of Havoc talent) | 38 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→0 | mismatch | gcd_ms 0->1500; required_level 1->0; duration_ms 300000->0 |
-| SMRuinWarlock (Bane of Havoc talent) | 40 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→0 | mismatch | gcd_ms 0->1500; required_level 1->0; duration_ms 300000->0 |
-| SMRuinWarlock (Bane of Havoc talent) | 50 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→0 | mismatch | gcd_ms 0->1500; required_level 1->0; duration_ms 300000->0 |
-| SMRuinWarlock (Bane of Havoc talent) | 60 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→0 | mismatch | gcd_ms 0->1500; required_level 1->0; duration_ms 300000->0 |
+| SMRuinWarlock (Amplify Curse talent) | 10 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→30000 | match |  |
+| SMRuinWarlock (Amplify Curse talent) | 20 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→30000 | match |  |
+| SMRuinWarlock (Amplify Curse talent) | 30 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→30000 | match |  |
+| SMRuinWarlock (Amplify Curse talent) | 38 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→30000 | match |  |
+| SMRuinWarlock (Amplify Curse talent) | 40 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→30000 | match |  |
+| SMRuinWarlock (Amplify Curse talent) | 50 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→30000 | match |  |
+| SMRuinWarlock (Amplify Curse talent) | 60 | Amplify Curse | 0 | 18288 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 0→0 | 30000→30000 | match |  |
+| SMRuinWarlock (Bane of Havoc talent) | 10 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→300000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
+| SMRuinWarlock (Bane of Havoc talent) | 20 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→300000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
+| SMRuinWarlock (Bane of Havoc talent) | 30 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→300000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
+| SMRuinWarlock (Bane of Havoc talent) | 38 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→300000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
+| SMRuinWarlock (Bane of Havoc talent) | 40 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→300000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
+| SMRuinWarlock (Bane of Havoc talent) | 50 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→300000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
+| SMRuinWarlock (Bane of Havoc talent) | 60 | Bane of Havoc | 0 | 1225228 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→1500 | 1→0 | 300000→300000 | mismatch | gcd_ms 0->1500; required_level 1->0 |
 | SMRuinWarlock (Conflagrate talent) | 30 | Conflagrate | 1 | 1293817 | 100.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 25→25 | n/a | match |  |
 | SMRuinWarlock (Conflagrate talent) | 38 | Conflagrate | 1 | 1293817 | 100.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 25→25 | n/a | match |  |
 | SMRuinWarlock (Conflagrate talent) | 38 | Conflagrate | 2 | 1293818 | 130.00→130.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  |
@@ -581,27 +581,27 @@ Each spell below is built with exactly one point in the single talent that grant
 | SMRuinWarlock (Incinerate talent) | 60 | Incinerate | 1 | 412758 | 205.00→205.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 40→40 | n/a | match |  |
 | SMRuinWarlock (Incinerate talent) | 60 | Incinerate | 2 | 1293812 | 265.00→265.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  |
 | SMRuinWarlock (Incinerate talent) | 60 | Incinerate | 3 | 1293813 | 325.00→325.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 60→60 | n/a | match |  |
-| SMRuinWarlock (Shadowburn talent) | 20 | Shadowburn | 1 | 17877 | 105.00→105.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 30 | Shadowburn | 1 | 17877 | 105.00→105.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 30 | Shadowburn | 2 | 18867 | 130.00→130.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 38 | Shadowburn | 1 | 17877 | 105.00→105.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 38 | Shadowburn | 2 | 18867 | 130.00→130.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 38 | Shadowburn | 3 | 18868 | 190.00→190.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 40 | Shadowburn | 1 | 17877 | 105.00→105.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 40 | Shadowburn | 2 | 18867 | 130.00→130.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 40 | Shadowburn | 3 | 18868 | 190.00→190.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 40 | Shadowburn | 4 | 18869 | 245.00→245.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 50 | Shadowburn | 1 | 17877 | 105.00→105.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 50 | Shadowburn | 2 | 18867 | 130.00→130.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 50 | Shadowburn | 3 | 18868 | 190.00→190.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 50 | Shadowburn | 4 | 18869 | 245.00→245.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 50 | Shadowburn | 5 | 18870 | 305.00→305.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 48→48 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 60 | Shadowburn | 1 | 17877 | 105.00→105.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 60 | Shadowburn | 2 | 18867 | 130.00→130.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 60 | Shadowburn | 3 | 18868 | 190.00→190.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 60 | Shadowburn | 4 | 18869 | 245.00→245.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 60 | Shadowburn | 5 | 18870 | 305.00→305.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 48→48 | 8000→0 | mismatch | duration_ms 8000->0 |
-| SMRuinWarlock (Shadowburn talent) | 60 | Shadowburn | 6 | 18871 | 365.00→365.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 56→56 | 8000→0 | mismatch | duration_ms 8000->0 |
+| SMRuinWarlock (Shadowburn talent) | 20 | Shadowburn | 1 | 17877 | 105.00→105.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 30 | Shadowburn | 1 | 17877 | 105.00→105.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 30 | Shadowburn | 2 | 18867 | 130.00→130.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 38 | Shadowburn | 1 | 17877 | 105.00→105.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 38 | Shadowburn | 2 | 18867 | 130.00→130.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 38 | Shadowburn | 3 | 18868 | 190.00→190.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 40 | Shadowburn | 1 | 17877 | 105.00→105.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 40 | Shadowburn | 2 | 18867 | 130.00→130.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 40 | Shadowburn | 3 | 18868 | 190.00→190.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 40 | Shadowburn | 4 | 18869 | 245.00→245.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 50 | Shadowburn | 1 | 17877 | 105.00→105.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 50 | Shadowburn | 2 | 18867 | 130.00→130.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 50 | Shadowburn | 3 | 18868 | 190.00→190.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 50 | Shadowburn | 4 | 18869 | 245.00→245.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 50 | Shadowburn | 5 | 18870 | 305.00→305.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 48→48 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 60 | Shadowburn | 1 | 17877 | 105.00→105.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 60 | Shadowburn | 2 | 18867 | 130.00→130.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 60 | Shadowburn | 3 | 18868 | 190.00→190.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 60 | Shadowburn | 4 | 18869 | 245.00→245.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 60 | Shadowburn | 5 | 18870 | 305.00→305.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 48→48 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| SMRuinWarlock (Shadowburn talent) | 60 | Shadowburn | 6 | 18871 | 365.00→365.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 56→56 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
 | SMRuinWarlock (Siphon Life talent) | 30 | Siphon Life | 1 | 18265 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
 | SMRuinWarlock (Siphon Life talent) | 38 | Siphon Life | 1 | 18265 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  |
 | SMRuinWarlock (Siphon Life talent) | 38 | Siphon Life | 2 | 18879 | 205.00→205.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 30000→30000 | match |  |

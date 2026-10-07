@@ -10,64 +10,64 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Mage | 10 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
-| Mage | 10 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
-| Mage | 10 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
-| Mage | 10 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
-| Mage | 10 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
-| Mage | 10 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
-| Mage | 10 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
-| Mage | 10 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
-| Mage | 10 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 |
-| Mage | 10 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→0 | mismatch | required_level 20->0; duration_ms 8000->0 |
+| Mage | 10 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→3000 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0 |
+| Mage | 10 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→3000 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->3000 |
+| Mage | 10 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→3000 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->3000 |
+| Mage | 10 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→3000 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->3000 |
+| Mage | 10 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→3000 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->3000 |
+| Mage | 10 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→3000 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->3000 |
+| Mage | 10 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
+| Mage | 10 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
+| Mage | 10 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 (no aura registered) |
+| Mage | 10 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→-1 | mismatch | required_level 20->0; duration_ms 8000->-1 |
 | Mage | 10 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
 | Mage | 10 | Fireball | 1 | 133 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | 4000→8000 | mismatch | duration_ms 4000->8000 |
 | Mage | 10 | Fireball | 2 | 143 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | 6000→8000 | mismatch | duration_ms 6000->8000 |
-| Mage | 10 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 10 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 |
-| Mage | 10 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 |
+| Mage | 10 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→8000 | match |  |
+| Mage | 10 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 (no aura registered) |
+| Mage | 10 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
 | Mage | 20 | Arcane Explosion | 1 | 1449 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | n/a | match |  |
-| Mage | 20 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
-| Mage | 20 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
-| Mage | 20 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
-| Mage | 20 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
-| Mage | 20 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
-| Mage | 20 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
-| Mage | 20 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
-| Mage | 20 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 20 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→3000 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0 |
+| Mage | 20 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→3000 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->3000 |
+| Mage | 20 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→3000 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->3000 |
+| Mage | 20 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→3000 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->3000 |
+| Mage | 20 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→3000 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->3000 |
+| Mage | 20 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→3000 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->3000 |
+| Mage | 20 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
+| Mage | 20 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
 | Mage | 20 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  |
-| Mage | 20 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 20 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 |
-| Mage | 20 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→0 | mismatch | required_level 20->0; duration_ms 8000->0 |
+| Mage | 20 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| Mage | 20 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 (no aura registered) |
+| Mage | 20 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→-1 | mismatch | required_level 20->0; duration_ms 8000->-1 |
 | Mage | 20 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
 | Mage | 20 | Fire Blast | 2 | 2137 | 75.00→75.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 14→14 | n/a | match |  |
 | Mage | 20 | Fireball | 1 | 133 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | 4000→8000 | mismatch | duration_ms 4000->8000 |
 | Mage | 20 | Fireball | 2 | 143 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | 6000→8000 | mismatch | duration_ms 6000->8000 |
 | Mage | 20 | Fireball | 3 | 145 | 65.00→65.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 12→12 | 6000→8000 | mismatch | duration_ms 6000->8000 |
 | Mage | 20 | Fireball | 4 | 3140 | 95.00→95.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 18→18 | 8000→8000 | match |  |
-| Mage | 20 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 20 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 20 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 |
-| Mage | 20 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage | 20 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 14→14 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage | 20 | Frostbolt | 4 | 7322 | 65.00→65.00 | mana→mana | 0→0 | 2600→2600 | 1500→1500 | 20→20 | 7000→0 | mismatch | duration_ms 7000->0 |
+| Mage | 20 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→8000 | match |  |
+| Mage | 20 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→8000 | match |  |
+| Mage | 20 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 (no aura registered) |
+| Mage | 20 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage | 20 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 14→14 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage | 20 | Frostbolt | 4 | 7322 | 65.00→65.00 | mana→mana | 0→0 | 2600→2600 | 1500→1500 | 20→20 | 7000→0 | mismatch | duration_ms 7000->0 (no aura registered) |
 | Mage | 30 | Arcane Explosion | 1 | 1449 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | n/a | match |  |
 | Mage | 30 | Arcane Explosion | 2 | 8437 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | n/a | match |  |
 | Mage | 30 | Arcane Explosion | 3 | 8438 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
-| Mage | 30 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
-| Mage | 30 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
-| Mage | 30 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
-| Mage | 30 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
-| Mage | 30 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
-| Mage | 30 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
-| Mage | 30 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
-| Mage | 30 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 30 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→3000 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0 |
+| Mage | 30 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→3000 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->3000 |
+| Mage | 30 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→3000 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->3000 |
+| Mage | 30 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→3000 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->3000 |
+| Mage | 30 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→3000 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->3000 |
+| Mage | 30 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→3000 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->3000 |
+| Mage | 30 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
+| Mage | 30 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
 | Mage | 30 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  |
 | Mage | 30 | Arcane Missiles | 3 | 5145 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 5000→5000 | match |  |
-| Mage | 30 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 30 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 30 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 |
-| Mage | 30 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→0 | mismatch | required_level 20->0; duration_ms 8000->0 |
+| Mage | 30 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| Mage | 30 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→8000 | match |  |
+| Mage | 30 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 (no aura registered) |
+| Mage | 30 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→-1 | mismatch | required_level 20->0; duration_ms 8000->-1 |
 | Mage | 30 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
 | Mage | 30 | Fire Blast | 2 | 2137 | 75.00→75.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 14→14 | n/a | match |  |
 | Mage | 30 | Fire Blast | 3 | 2138 | 115.00→115.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  |
@@ -78,37 +78,37 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 30 | Fireball | 4 | 3140 | 95.00→95.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 18→18 | 8000→8000 | match |  |
 | Mage | 30 | Fireball | 5 | 8400 | 140.00→140.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 8000→8000 | match |  |
 | Mage | 30 | Fireball | 6 | 8401 | 185.00→185.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 8000→8000 | match |  |
-| Mage | 30 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 30 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 30 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 30 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 30 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 |
-| Mage | 30 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage | 30 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 14→14 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage | 30 | Frostbolt | 4 | 7322 | 65.00→65.00 | mana→mana | 0→0 | 2600→2600 | 1500→1500 | 20→20 | 7000→0 | mismatch | duration_ms 7000->0 |
-| Mage | 30 | Frostbolt | 5 | 8406 | 100.00→100.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 26→26 | 7000→0 | mismatch | duration_ms 7000->0 |
+| Mage | 30 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→8000 | match |  |
+| Mage | 30 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→8000 | match |  |
+| Mage | 30 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→8000 | match |  |
+| Mage | 30 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→8000 | match |  |
+| Mage | 30 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 (no aura registered) |
+| Mage | 30 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage | 30 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 14→14 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage | 30 | Frostbolt | 4 | 7322 | 65.00→65.00 | mana→mana | 0→0 | 2600→2600 | 1500→1500 | 20→20 | 7000→0 | mismatch | duration_ms 7000->0 (no aura registered) |
+| Mage | 30 | Frostbolt | 5 | 8406 | 100.00→100.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 26→26 | 7000→0 | mismatch | duration_ms 7000->0 (no aura registered) |
 | Mage | 30 | Scorch | 1 | 2948 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  |
 | Mage | 30 | Scorch | 2 | 8444 | 65.00→65.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  |
 | Mage | 38 | Arcane Explosion | 1 | 1449 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | n/a | match |  |
 | Mage | 38 | Arcane Explosion | 2 | 8437 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | n/a | match |  |
 | Mage | 38 | Arcane Explosion | 3 | 8438 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
 | Mage | 38 | Arcane Explosion | 4 | 8439 | 250.00→250.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  |
-| Mage | 38 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
-| Mage | 38 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
-| Mage | 38 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
-| Mage | 38 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
-| Mage | 38 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
-| Mage | 38 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
-| Mage | 38 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
-| Mage | 38 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 38 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→3000 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0 |
+| Mage | 38 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→3000 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->3000 |
+| Mage | 38 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→3000 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->3000 |
+| Mage | 38 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→3000 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->3000 |
+| Mage | 38 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→3000 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->3000 |
+| Mage | 38 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→3000 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->3000 |
+| Mage | 38 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
+| Mage | 38 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
 | Mage | 38 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  |
 | Mage | 38 | Arcane Missiles | 3 | 5145 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 5000→5000 | match |  |
 | Mage | 38 | Arcane Missiles | 4 | 8416 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 5000→5000 | match |  |
-| Mage | 38 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 38 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 38 | Blizzard | 3 | 8427 | 720.00→720.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 38 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 |
-| Mage | 38 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→0 | mismatch | required_level 20->0; duration_ms 8000->0 |
+| Mage | 38 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| Mage | 38 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→8000 | match |  |
+| Mage | 38 | Blizzard | 3 | 8427 | 720.00→720.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 8000→8000 | match |  |
+| Mage | 38 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 (no aura registered) |
+| Mage | 38 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→-1 | mismatch | required_level 20->0; duration_ms 8000->-1 |
 | Mage | 38 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
 | Mage | 38 | Fire Blast | 2 | 2137 | 75.00→75.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 14→14 | n/a | match |  |
 | Mage | 38 | Fire Blast | 3 | 2138 | 115.00→115.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  |
@@ -121,18 +121,18 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 38 | Fireball | 5 | 8400 | 140.00→140.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 8000→8000 | match |  |
 | Mage | 38 | Fireball | 6 | 8401 | 185.00→185.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 8000→8000 | match |  |
 | Mage | 38 | Fireball | 7 | 8402 | 220.00→220.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 8000→8000 | match |  |
-| Mage | 38 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 38 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 38 | Flamestrike | 3 | 8422 | 490.00→490.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 38 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 38 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 38 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 |
-| Mage | 38 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage | 38 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 14→14 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage | 38 | Frostbolt | 4 | 7322 | 65.00→65.00 | mana→mana | 0→0 | 2600→2600 | 1500→1500 | 20→20 | 7000→0 | mismatch | duration_ms 7000->0 |
-| Mage | 38 | Frostbolt | 5 | 8406 | 100.00→100.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 26→26 | 7000→0 | mismatch | duration_ms 7000->0 |
-| Mage | 38 | Frostbolt | 6 | 8407 | 130.00→130.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 38 | Frostbolt | 7 | 8408 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 38→38 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 38 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→8000 | match |  |
+| Mage | 38 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→8000 | match |  |
+| Mage | 38 | Flamestrike | 3 | 8422 | 490.00→490.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→8000 | match |  |
+| Mage | 38 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→8000 | match |  |
+| Mage | 38 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→8000 | match |  |
+| Mage | 38 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 (no aura registered) |
+| Mage | 38 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage | 38 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 14→14 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage | 38 | Frostbolt | 4 | 7322 | 65.00→65.00 | mana→mana | 0→0 | 2600→2600 | 1500→1500 | 20→20 | 7000→0 | mismatch | duration_ms 7000->0 (no aura registered) |
+| Mage | 38 | Frostbolt | 5 | 8406 | 100.00→100.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 26→26 | 7000→0 | mismatch | duration_ms 7000->0 (no aura registered) |
+| Mage | 38 | Frostbolt | 6 | 8407 | 130.00→130.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| Mage | 38 | Frostbolt | 7 | 8408 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 38→38 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
 | Mage | 38 | Scorch | 1 | 2948 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  |
 | Mage | 38 | Scorch | 2 | 8444 | 65.00→65.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  |
 | Mage | 38 | Scorch | 3 | 8445 | 80.00→80.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -140,23 +140,23 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 40 | Arcane Explosion | 2 | 8437 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | n/a | match |  |
 | Mage | 40 | Arcane Explosion | 3 | 8438 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
 | Mage | 40 | Arcane Explosion | 4 | 8439 | 250.00→250.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  |
-| Mage | 40 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
-| Mage | 40 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
-| Mage | 40 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
-| Mage | 40 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
-| Mage | 40 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
-| Mage | 40 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
-| Mage | 40 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
-| Mage | 40 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 40 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→3000 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0 |
+| Mage | 40 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→3000 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->3000 |
+| Mage | 40 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→3000 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->3000 |
+| Mage | 40 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→3000 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->3000 |
+| Mage | 40 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→3000 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->3000 |
+| Mage | 40 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→3000 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->3000 |
+| Mage | 40 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
+| Mage | 40 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
 | Mage | 40 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  |
 | Mage | 40 | Arcane Missiles | 3 | 5145 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 5000→5000 | match |  |
 | Mage | 40 | Arcane Missiles | 4 | 8416 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 5000→5000 | match |  |
 | Mage | 40 | Arcane Missiles | 5 | 8417 | 410.00→410.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 5000→5000 | match |  |
-| Mage | 40 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 40 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 40 | Blizzard | 3 | 8427 | 720.00→720.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 40 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 |
-| Mage | 40 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→0 | mismatch | required_level 20->0; duration_ms 8000->0 |
+| Mage | 40 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| Mage | 40 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→8000 | match |  |
+| Mage | 40 | Blizzard | 3 | 8427 | 720.00→720.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 8000→8000 | match |  |
+| Mage | 40 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 (no aura registered) |
+| Mage | 40 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→-1 | mismatch | required_level 20->0; duration_ms 8000->-1 |
 | Mage | 40 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
 | Mage | 40 | Fire Blast | 2 | 2137 | 75.00→75.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 14→14 | n/a | match |  |
 | Mage | 40 | Fire Blast | 3 | 2138 | 115.00→115.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  |
@@ -169,20 +169,20 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 40 | Fireball | 5 | 8400 | 140.00→140.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 8000→8000 | match |  |
 | Mage | 40 | Fireball | 6 | 8401 | 185.00→185.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 8000→8000 | match |  |
 | Mage | 40 | Fireball | 7 | 8402 | 220.00→220.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 8000→8000 | match |  |
-| Mage | 40 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 40 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 40 | Flamestrike | 3 | 8422 | 490.00→490.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 40 | Flamestrike | 4 | 8423 | 650.00→650.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 40 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 40 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 40 | Frost Nova | 3 | 6131 | 115.00→115.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 40 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 |
-| Mage | 40 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage | 40 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 14→14 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage | 40 | Frostbolt | 4 | 7322 | 65.00→65.00 | mana→mana | 0→0 | 2600→2600 | 1500→1500 | 20→20 | 7000→0 | mismatch | duration_ms 7000->0 |
-| Mage | 40 | Frostbolt | 5 | 8406 | 100.00→100.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 26→26 | 7000→0 | mismatch | duration_ms 7000->0 |
-| Mage | 40 | Frostbolt | 6 | 8407 | 130.00→130.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 40 | Frostbolt | 7 | 8408 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 38→38 | 8000→0 | mismatch | duration_ms 8000->0 |
+| Mage | 40 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→8000 | match |  |
+| Mage | 40 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→8000 | match |  |
+| Mage | 40 | Flamestrike | 3 | 8422 | 490.00→490.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→8000 | match |  |
+| Mage | 40 | Flamestrike | 4 | 8423 | 650.00→650.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 8000→8000 | match |  |
+| Mage | 40 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→8000 | match |  |
+| Mage | 40 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→8000 | match |  |
+| Mage | 40 | Frost Nova | 3 | 6131 | 115.00→115.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 40→40 | 8000→8000 | match |  |
+| Mage | 40 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 (no aura registered) |
+| Mage | 40 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage | 40 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 14→14 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage | 40 | Frostbolt | 4 | 7322 | 65.00→65.00 | mana→mana | 0→0 | 2600→2600 | 1500→1500 | 20→20 | 7000→0 | mismatch | duration_ms 7000->0 (no aura registered) |
+| Mage | 40 | Frostbolt | 5 | 8406 | 100.00→100.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 26→26 | 7000→0 | mismatch | duration_ms 7000->0 (no aura registered) |
+| Mage | 40 | Frostbolt | 6 | 8407 | 130.00→130.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| Mage | 40 | Frostbolt | 7 | 8408 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 38→38 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
 | Mage | 40 | Scorch | 1 | 2948 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  |
 | Mage | 40 | Scorch | 2 | 8444 | 65.00→65.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  |
 | Mage | 40 | Scorch | 3 | 8445 | 80.00→80.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -192,25 +192,25 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 50 | Arcane Explosion | 3 | 8438 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
 | Mage | 50 | Arcane Explosion | 4 | 8439 | 250.00→250.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  |
 | Mage | 50 | Arcane Explosion | 5 | 10201 | 315.00→315.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | n/a | match |  |
-| Mage | 50 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
-| Mage | 50 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
-| Mage | 50 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
-| Mage | 50 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
-| Mage | 50 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
-| Mage | 50 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
-| Mage | 50 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
-| Mage | 50 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 50 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→3000 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0 |
+| Mage | 50 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→3000 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->3000 |
+| Mage | 50 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→3000 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->3000 |
+| Mage | 50 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→3000 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->3000 |
+| Mage | 50 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→3000 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->3000 |
+| Mage | 50 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→3000 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->3000 |
+| Mage | 50 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
+| Mage | 50 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
 | Mage | 50 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  |
 | Mage | 50 | Arcane Missiles | 3 | 5145 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 5000→5000 | match |  |
 | Mage | 50 | Arcane Missiles | 4 | 8416 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 5000→5000 | match |  |
 | Mage | 50 | Arcane Missiles | 5 | 8417 | 410.00→410.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 5000→5000 | match |  |
 | Mage | 50 | Arcane Missiles | 6 | 10211 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 5000→5000 | match |  |
-| Mage | 50 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Blizzard | 3 | 8427 | 720.00→720.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Blizzard | 4 | 10185 | 935.00→935.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 44→44 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 |
-| Mage | 50 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→0 | mismatch | required_level 20->0; duration_ms 8000->0 |
+| Mage | 50 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| Mage | 50 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→8000 | match |  |
+| Mage | 50 | Blizzard | 3 | 8427 | 720.00→720.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 8000→8000 | match |  |
+| Mage | 50 | Blizzard | 4 | 10185 | 935.00→935.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 44→44 | 8000→8000 | match |  |
+| Mage | 50 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 (no aura registered) |
+| Mage | 50 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→-1 | mismatch | required_level 20->0; duration_ms 8000->-1 |
 | Mage | 50 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
 | Mage | 50 | Fire Blast | 2 | 2137 | 75.00→75.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 14→14 | n/a | match |  |
 | Mage | 50 | Fire Blast | 3 | 2138 | 115.00→115.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  |
@@ -226,23 +226,23 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 50 | Fireball | 7 | 8402 | 220.00→220.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 8000→8000 | match |  |
 | Mage | 50 | Fireball | 8 | 10148 | 260.00→260.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | 8000→8000 | match |  |
 | Mage | 50 | Fireball | 9 | 10149 | 305.00→305.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 48→48 | 8000→8000 | match |  |
-| Mage | 50 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Flamestrike | 3 | 8422 | 490.00→490.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Flamestrike | 4 | 8423 | 650.00→650.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Flamestrike | 5 | 10215 | 815.00→815.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 48→48 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Frost Nova | 3 | 6131 | 115.00→115.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 |
-| Mage | 50 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage | 50 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 14→14 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage | 50 | Frostbolt | 4 | 7322 | 65.00→65.00 | mana→mana | 0→0 | 2600→2600 | 1500→1500 | 20→20 | 7000→0 | mismatch | duration_ms 7000->0 |
-| Mage | 50 | Frostbolt | 5 | 8406 | 100.00→100.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 26→26 | 7000→0 | mismatch | duration_ms 7000->0 |
-| Mage | 50 | Frostbolt | 6 | 8407 | 130.00→130.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Frostbolt | 7 | 8408 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 38→38 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 50 | Frostbolt | 8 | 10179 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 44→44 | 9000→0 | mismatch | duration_ms 9000->0 |
-| Mage | 50 | Frostbolt | 9 | 10180 | 225.00→225.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 50→50 | 9000→0 | mismatch | duration_ms 9000->0 |
+| Mage | 50 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→8000 | match |  |
+| Mage | 50 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→8000 | match |  |
+| Mage | 50 | Flamestrike | 3 | 8422 | 490.00→490.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→8000 | match |  |
+| Mage | 50 | Flamestrike | 4 | 8423 | 650.00→650.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 8000→8000 | match |  |
+| Mage | 50 | Flamestrike | 5 | 10215 | 815.00→815.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 48→48 | 8000→8000 | match |  |
+| Mage | 50 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→8000 | match |  |
+| Mage | 50 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→8000 | match |  |
+| Mage | 50 | Frost Nova | 3 | 6131 | 115.00→115.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 40→40 | 8000→8000 | match |  |
+| Mage | 50 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 (no aura registered) |
+| Mage | 50 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage | 50 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 14→14 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage | 50 | Frostbolt | 4 | 7322 | 65.00→65.00 | mana→mana | 0→0 | 2600→2600 | 1500→1500 | 20→20 | 7000→0 | mismatch | duration_ms 7000->0 (no aura registered) |
+| Mage | 50 | Frostbolt | 5 | 8406 | 100.00→100.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 26→26 | 7000→0 | mismatch | duration_ms 7000->0 (no aura registered) |
+| Mage | 50 | Frostbolt | 6 | 8407 | 130.00→130.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| Mage | 50 | Frostbolt | 7 | 8408 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 38→38 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| Mage | 50 | Frostbolt | 8 | 10179 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 44→44 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) |
+| Mage | 50 | Frostbolt | 9 | 10180 | 225.00→225.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 50→50 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) |
 | Mage | 50 | Scorch | 1 | 2948 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  |
 | Mage | 50 | Scorch | 2 | 8444 | 65.00→65.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  |
 | Mage | 50 | Scorch | 3 | 8445 | 80.00→80.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -254,14 +254,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 60 | Arcane Explosion | 4 | 8439 | 250.00→250.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  |
 | Mage | 60 | Arcane Explosion | 5 | 10201 | 315.00→315.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | n/a | match |  |
 | Mage | 60 | Arcane Explosion | 6 | 10202 | 390.00→390.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | n/a | match |  |
-| Mage | 60 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→0 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0; duration_ms 3000->0 |
-| Mage | 60 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→0 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->0 |
-| Mage | 60 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→0 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->0 |
-| Mage | 60 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→0 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->0 |
-| Mage | 60 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→0 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->0 |
-| Mage | 60 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→0 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->0 |
-| Mage | 60 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
-| Mage | 60 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→0 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->0 |
+| Mage | 60 | Arcane Missiles | 1 | 5143 | 85.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 8→0 | 3000→3000 | mismatch | cost 85.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 8->0 |
+| Mage | 60 | Arcane Missiles | 1 | 5144 | 140.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 16→0 | 4000→3000 | mismatch | cost 140.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 16->0; duration_ms 4000->3000 |
+| Mage | 60 | Arcane Missiles | 1 | 5145 | 235.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 24→0 | 5000→3000 | mismatch | cost 235.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 24->0; duration_ms 5000->3000 |
+| Mage | 60 | Arcane Missiles | 1 | 8416 | 320.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 32→0 | 5000→3000 | mismatch | cost 320.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 32->0; duration_ms 5000->3000 |
+| Mage | 60 | Arcane Missiles | 1 | 8417 | 410.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 40→0 | 5000→3000 | mismatch | cost 410.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 40->0; duration_ms 5000->3000 |
+| Mage | 60 | Arcane Missiles | 1 | 10211 | 500.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 48→0 | 5000→3000 | mismatch | cost 500.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 48->0; duration_ms 5000->3000 |
+| Mage | 60 | Arcane Missiles | 1 | 10212 | 595.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 595.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
+| Mage | 60 | Arcane Missiles | 1 | 25345 | 655.00→0.00 | mana→none | 0→0 | 0→0 | 1500→0 | 56→0 | 5000→3000 | mismatch | cost 655.00->0.00; cost_type mana->none; gcd_ms 1500->0; required_level 56->0; duration_ms 5000->3000 |
 | Mage | 60 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  |
 | Mage | 60 | Arcane Missiles | 3 | 5145 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 5000→5000 | match |  |
 | Mage | 60 | Arcane Missiles | 4 | 8416 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 5000→5000 | match |  |
@@ -269,14 +269,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 60 | Arcane Missiles | 6 | 10211 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 5000→5000 | match |  |
 | Mage | 60 | Arcane Missiles | 7 | 10212 | 595.00→595.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 5000→5000 | match |  |
 | Mage | 60 | Arcane Missiles | 8 | 25345 | 655.00→655.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 5000→5000 | match |  |
-| Mage | 60 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Blizzard | 3 | 8427 | 720.00→720.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Blizzard | 4 | 10185 | 935.00→935.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 44→44 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Blizzard | 5 | 10186 | 1160.00→1160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Blizzard | 6 | 10187 | 1400.00→1400.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 |
-| Mage | 60 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→0 | mismatch | required_level 20->0; duration_ms 8000->0 |
+| Mage | 60 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  |
+| Mage | 60 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→8000 | match |  |
+| Mage | 60 | Blizzard | 3 | 8427 | 720.00→720.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 8000→8000 | match |  |
+| Mage | 60 | Blizzard | 4 | 10185 | 935.00→935.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 44→44 | 8000→8000 | match |  |
+| Mage | 60 | Blizzard | 5 | 10186 | 1160.00→1160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 8000→8000 | match |  |
+| Mage | 60 | Blizzard | 6 | 10187 | 1400.00→1400.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 8000→8000 | match |  |
+| Mage | 60 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→0 | 10000→0 | mismatch | required_level 24->0; duration_ms 10000->0 (no aura registered) |
+| Mage | 60 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→0 | 8000→-1 | mismatch | required_level 20->0; duration_ms 8000->-1 |
 | Mage | 60 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  |
 | Mage | 60 | Fire Blast | 2 | 2137 | 75.00→75.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 14→14 | n/a | match |  |
 | Mage | 60 | Fire Blast | 3 | 2138 | 115.00→115.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  |
@@ -296,27 +296,27 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 60 | Fireball | 10 | 10150 | 350.00→350.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 54→54 | 8000→8000 | match |  |
 | Mage | 60 | Fireball | 11 | 10151 | 395.00→395.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 60→60 | 8000→8000 | match |  |
 | Mage | 60 | Fireball | 12 | 25306 | 410.00→410.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 60→60 | 8000→8000 | match |  |
-| Mage | 60 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Flamestrike | 3 | 8422 | 490.00→490.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Flamestrike | 4 | 8423 | 650.00→650.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Flamestrike | 5 | 10215 | 815.00→815.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 48→48 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Flamestrike | 6 | 10216 | 990.00→990.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 56→56 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Frost Nova | 3 | 6131 | 115.00→115.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 40→40 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Frost Nova | 4 | 10230 | 145.00→145.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 54→54 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 |
-| Mage | 60 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage | 60 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 14→14 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage | 60 | Frostbolt | 4 | 7322 | 65.00→65.00 | mana→mana | 0→0 | 2600→2600 | 1500→1500 | 20→20 | 7000→0 | mismatch | duration_ms 7000->0 |
-| Mage | 60 | Frostbolt | 5 | 8406 | 100.00→100.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 26→26 | 7000→0 | mismatch | duration_ms 7000->0 |
-| Mage | 60 | Frostbolt | 6 | 8407 | 130.00→130.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Frostbolt | 7 | 8408 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 38→38 | 8000→0 | mismatch | duration_ms 8000->0 |
-| Mage | 60 | Frostbolt | 8 | 10179 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 44→44 | 9000→0 | mismatch | duration_ms 9000->0 |
-| Mage | 60 | Frostbolt | 9 | 10180 | 225.00→225.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 50→50 | 9000→0 | mismatch | duration_ms 9000->0 |
-| Mage | 60 | Frostbolt | 10 | 10181 | 260.00→260.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 56→56 | 9000→0 | mismatch | duration_ms 9000->0 |
-| Mage | 60 | Frostbolt | 11 | 25304 | 290.00→290.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | 9000→0 | mismatch | duration_ms 9000->0 |
+| Mage | 60 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→8000 | match |  |
+| Mage | 60 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→8000 | match |  |
+| Mage | 60 | Flamestrike | 3 | 8422 | 490.00→490.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→8000 | match |  |
+| Mage | 60 | Flamestrike | 4 | 8423 | 650.00→650.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 8000→8000 | match |  |
+| Mage | 60 | Flamestrike | 5 | 10215 | 815.00→815.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 48→48 | 8000→8000 | match |  |
+| Mage | 60 | Flamestrike | 6 | 10216 | 990.00→990.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 56→56 | 8000→8000 | match |  |
+| Mage | 60 | Frost Nova | 1 | 122 | 55.00→55.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 10→10 | 8000→8000 | match |  |
+| Mage | 60 | Frost Nova | 2 | 865 | 85.00→85.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 26→26 | 8000→8000 | match |  |
+| Mage | 60 | Frost Nova | 3 | 6131 | 115.00→115.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 40→40 | 8000→8000 | match |  |
+| Mage | 60 | Frost Nova | 4 | 10230 | 145.00→145.00 | mana→mana | 25000→25000 | 0→0 | 1500→1500 | 54→54 | 8000→8000 | match |  |
+| Mage | 60 | Frostbolt | 1 | 116 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 4→4 | 5000→0 | mismatch | duration_ms 5000->0 (no aura registered) |
+| Mage | 60 | Frostbolt | 2 | 205 | 35.00→35.00 | mana→mana | 0→0 | 1800→1800 | 1500→1500 | 8→8 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage | 60 | Frostbolt | 3 | 837 | 50.00→50.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 14→14 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage | 60 | Frostbolt | 4 | 7322 | 65.00→65.00 | mana→mana | 0→0 | 2600→2600 | 1500→1500 | 20→20 | 7000→0 | mismatch | duration_ms 7000->0 (no aura registered) |
+| Mage | 60 | Frostbolt | 5 | 8406 | 100.00→100.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 26→26 | 7000→0 | mismatch | duration_ms 7000->0 (no aura registered) |
+| Mage | 60 | Frostbolt | 6 | 8407 | 130.00→130.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| Mage | 60 | Frostbolt | 7 | 8408 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 38→38 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) |
+| Mage | 60 | Frostbolt | 8 | 10179 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 44→44 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) |
+| Mage | 60 | Frostbolt | 9 | 10180 | 225.00→225.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 50→50 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) |
+| Mage | 60 | Frostbolt | 10 | 10181 | 260.00→260.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 56→56 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) |
+| Mage | 60 | Frostbolt | 11 | 25304 | 290.00→290.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) |
 | Mage | 60 | Scorch | 1 | 2948 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  |
 | Mage | 60 | Scorch | 2 | 8444 | 65.00→65.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  |
 | Mage | 60 | Scorch | 3 | 8445 | 80.00→80.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  |
@@ -330,43 +330,43 @@ Each spell below is built with exactly one point in the single talent that grant
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Mage (Arcane Blast talent) | 20 | Arcane Blast | 1 | 400574 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  |
-| Mage (Arcane Blast talent) | 30 | Arcane Blast | 1 | 400574 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  |
-| Mage (Arcane Blast talent) | 30 | Arcane Blast | 2 | 1239696 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  |
-| Mage (Arcane Blast talent) | 38 | Arcane Blast | 1 | 400574 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  |
-| Mage (Arcane Blast talent) | 38 | Arcane Blast | 2 | 1239696 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  |
-| Mage (Arcane Blast talent) | 40 | Arcane Blast | 1 | 400574 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  |
-| Mage (Arcane Blast talent) | 40 | Arcane Blast | 2 | 1239696 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  |
-| Mage (Arcane Blast talent) | 40 | Arcane Blast | 3 | 1239697 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 40→40 | n/a | match |  |
-| Mage (Arcane Blast talent) | 50 | Arcane Blast | 1 | 400574 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  |
-| Mage (Arcane Blast talent) | 50 | Arcane Blast | 2 | 1239696 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  |
-| Mage (Arcane Blast talent) | 50 | Arcane Blast | 3 | 1239697 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 40→40 | n/a | match |  |
-| Mage (Arcane Blast talent) | 50 | Arcane Blast | 4 | 1239699 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  |
-| Mage (Arcane Blast talent) | 60 | Arcane Blast | 1 | 400574 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  |
-| Mage (Arcane Blast talent) | 60 | Arcane Blast | 2 | 1239696 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  |
-| Mage (Arcane Blast talent) | 60 | Arcane Blast | 3 | 1239697 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 40→40 | n/a | match |  |
-| Mage (Arcane Blast talent) | 60 | Arcane Blast | 4 | 1239699 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  |
-| Mage (Arcane Blast talent) | 60 | Arcane Blast | 5 | 1239700 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 60→60 | n/a | match |  |
-| Mage (Arcane Power talent) | 10 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→0 | mismatch | required_level 1->0; duration_ms 15000->0 |
-| Mage (Arcane Power talent) | 20 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→0 | mismatch | required_level 1->0; duration_ms 15000->0 |
-| Mage (Arcane Power talent) | 30 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→0 | mismatch | required_level 1->0; duration_ms 15000->0 |
-| Mage (Arcane Power talent) | 38 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→0 | mismatch | required_level 1->0; duration_ms 15000->0 |
-| Mage (Arcane Power talent) | 40 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→0 | mismatch | required_level 1->0; duration_ms 15000->0 |
-| Mage (Arcane Power talent) | 50 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→0 | mismatch | required_level 1->0; duration_ms 15000->0 |
-| Mage (Arcane Power talent) | 60 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→0 | mismatch | required_level 1->0; duration_ms 15000->0 |
-| Mage (Blast Wave talent) | 30 | Blast Wave | 1 | 11113 | 215.00→215.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 30→30 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage (Blast Wave talent) | 38 | Blast Wave | 1 | 11113 | 215.00→215.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 30→30 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage (Blast Wave talent) | 38 | Blast Wave | 2 | 13018 | 270.00→270.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 36→36 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage (Blast Wave talent) | 40 | Blast Wave | 1 | 11113 | 215.00→215.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 30→30 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage (Blast Wave talent) | 40 | Blast Wave | 2 | 13018 | 270.00→270.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 36→36 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage (Blast Wave talent) | 50 | Blast Wave | 1 | 11113 | 215.00→215.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 30→30 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage (Blast Wave talent) | 50 | Blast Wave | 2 | 13018 | 270.00→270.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 36→36 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage (Blast Wave talent) | 50 | Blast Wave | 3 | 13019 | 355.00→355.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 44→44 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage (Blast Wave talent) | 60 | Blast Wave | 1 | 11113 | 215.00→215.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 30→30 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage (Blast Wave talent) | 60 | Blast Wave | 2 | 13018 | 270.00→270.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 36→36 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage (Blast Wave talent) | 60 | Blast Wave | 3 | 13019 | 355.00→355.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 44→44 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage (Blast Wave talent) | 60 | Blast Wave | 4 | 13020 | 450.00→450.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 52→52 | 6000→0 | mismatch | duration_ms 6000->0 |
-| Mage (Blast Wave talent) | 60 | Blast Wave | 5 | 13021 | 545.00→545.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 60→60 | 6000→0 | mismatch | duration_ms 6000->0 |
+| Mage (Arcane Blast talent) | 20 | Arcane Blast | 1 | 400574 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 20→20 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 30 | Arcane Blast | 1 | 400574 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 20→20 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 30 | Arcane Blast | 2 | 1239696 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 30→30 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 38 | Arcane Blast | 1 | 400574 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 20→20 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 38 | Arcane Blast | 2 | 1239696 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 30→30 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 40 | Arcane Blast | 1 | 400574 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 20→20 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 40 | Arcane Blast | 2 | 1239696 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 30→30 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 40 | Arcane Blast | 3 | 1239697 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 40→40 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 50 | Arcane Blast | 1 | 400574 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 20→20 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 50 | Arcane Blast | 2 | 1239696 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 30→30 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 50 | Arcane Blast | 3 | 1239697 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 40→40 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 50 | Arcane Blast | 4 | 1239699 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 50→50 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 60 | Arcane Blast | 1 | 400574 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 20→20 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 60 | Arcane Blast | 2 | 1239696 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 30→30 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 60 | Arcane Blast | 3 | 1239697 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 40→40 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 60 | Arcane Blast | 4 | 1239699 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 50→50 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Blast talent) | 60 | Arcane Blast | 5 | 1239700 | 0.00→0.00 | mana→none | 0→0 | 2500→2500 | 1500→1500 | 60→60 | 0→8000 | client-scripted | duration_ms: client states none (0), engine keeps 8000ms |
+| Mage (Arcane Power talent) | 10 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→15000 | mismatch | required_level 1->0 |
+| Mage (Arcane Power talent) | 20 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→15000 | mismatch | required_level 1->0 |
+| Mage (Arcane Power talent) | 30 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→15000 | mismatch | required_level 1->0 |
+| Mage (Arcane Power talent) | 38 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→15000 | mismatch | required_level 1->0 |
+| Mage (Arcane Power talent) | 40 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→15000 | mismatch | required_level 1->0 |
+| Mage (Arcane Power talent) | 50 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→15000 | mismatch | required_level 1->0 |
+| Mage (Arcane Power talent) | 60 | Arcane Power | 0 | 12042 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | 15000→15000 | mismatch | required_level 1->0 |
+| Mage (Blast Wave talent) | 30 | Blast Wave | 1 | 11113 | 215.00→215.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 30→30 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage (Blast Wave talent) | 38 | Blast Wave | 1 | 11113 | 215.00→215.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 30→30 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage (Blast Wave talent) | 38 | Blast Wave | 2 | 13018 | 270.00→270.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 36→36 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage (Blast Wave talent) | 40 | Blast Wave | 1 | 11113 | 215.00→215.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 30→30 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage (Blast Wave talent) | 40 | Blast Wave | 2 | 13018 | 270.00→270.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 36→36 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage (Blast Wave talent) | 50 | Blast Wave | 1 | 11113 | 215.00→215.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 30→30 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage (Blast Wave talent) | 50 | Blast Wave | 2 | 13018 | 270.00→270.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 36→36 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage (Blast Wave talent) | 50 | Blast Wave | 3 | 13019 | 355.00→355.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 44→44 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage (Blast Wave talent) | 60 | Blast Wave | 1 | 11113 | 215.00→215.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 30→30 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage (Blast Wave talent) | 60 | Blast Wave | 2 | 13018 | 270.00→270.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 36→36 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage (Blast Wave talent) | 60 | Blast Wave | 3 | 13019 | 355.00→355.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 44→44 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage (Blast Wave talent) | 60 | Blast Wave | 4 | 13020 | 450.00→450.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 52→52 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
+| Mage (Blast Wave talent) | 60 | Blast Wave | 5 | 13021 | 545.00→545.00 | mana→mana | 45000→45000 | 0→0 | 1500→1500 | 60→60 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) |
 | Mage (Cold Snap talent) | 10 | Cold Snap | 0 | 12472 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | Mage (Cold Snap talent) | 20 | Cold Snap | 0 | 12472 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | Mage (Cold Snap talent) | 30 | Cold Snap | 0 | 12472 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
@@ -374,20 +374,20 @@ Each spell below is built with exactly one point in the single talent that grant
 | Mage (Cold Snap talent) | 40 | Cold Snap | 0 | 12472 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | Mage (Cold Snap talent) | 50 | Cold Snap | 0 | 12472 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
 | Mage (Cold Snap talent) | 60 | Cold Snap | 0 | 12472 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
-| Mage (Combustion talent) | 10 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
-| Mage (Combustion talent) | 20 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
-| Mage (Combustion talent) | 30 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
-| Mage (Combustion talent) | 38 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
-| Mage (Combustion talent) | 40 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
-| Mage (Combustion talent) | 50 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
-| Mage (Combustion talent) | 60 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | n/a | mismatch | required_level 40->0 |
-| Mage (Ice Barrier talent) | 40 | Ice Barrier | 1 | 11426 | 305.00→305.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→0 | mismatch | duration_ms 60000->0 |
-| Mage (Ice Barrier talent) | 50 | Ice Barrier | 1 | 11426 | 305.00→305.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→0 | mismatch | duration_ms 60000->0 |
-| Mage (Ice Barrier talent) | 50 | Ice Barrier | 2 | 13031 | 360.00→360.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 46→46 | 60000→0 | mismatch | duration_ms 60000->0 |
-| Mage (Ice Barrier talent) | 60 | Ice Barrier | 1 | 11426 | 305.00→305.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→0 | mismatch | duration_ms 60000->0 |
-| Mage (Ice Barrier talent) | 60 | Ice Barrier | 2 | 13031 | 360.00→360.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 46→46 | 60000→0 | mismatch | duration_ms 60000->0 |
-| Mage (Ice Barrier talent) | 60 | Ice Barrier | 3 | 13032 | 420.00→420.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 52→52 | 60000→0 | mismatch | duration_ms 60000->0 |
-| Mage (Ice Barrier talent) | 60 | Ice Barrier | 4 | 13033 | 480.00→480.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 58→58 | 60000→0 | mismatch | duration_ms 60000->0 |
+| Mage (Combustion talent) | 10 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | -1→-1 | mismatch | required_level 40->0 |
+| Mage (Combustion talent) | 20 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | -1→-1 | mismatch | required_level 40->0 |
+| Mage (Combustion talent) | 30 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | -1→-1 | mismatch | required_level 40->0 |
+| Mage (Combustion talent) | 38 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | -1→-1 | mismatch | required_level 40->0 |
+| Mage (Combustion talent) | 40 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | -1→-1 | mismatch | required_level 40->0 |
+| Mage (Combustion talent) | 50 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | -1→-1 | mismatch | required_level 40->0 |
+| Mage (Combustion talent) | 60 | Combustion | 0 | 11129 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 40→0 | -1→-1 | mismatch | required_level 40->0 |
+| Mage (Ice Barrier talent) | 40 | Ice Barrier | 1 | 11426 | 305.00→305.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→60000 | match |  |
+| Mage (Ice Barrier talent) | 50 | Ice Barrier | 1 | 11426 | 305.00→305.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→60000 | match |  |
+| Mage (Ice Barrier talent) | 50 | Ice Barrier | 2 | 13031 | 360.00→360.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 46→46 | 60000→60000 | match |  |
+| Mage (Ice Barrier talent) | 60 | Ice Barrier | 1 | 11426 | 305.00→305.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→60000 | match |  |
+| Mage (Ice Barrier talent) | 60 | Ice Barrier | 2 | 13031 | 360.00→360.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 46→46 | 60000→60000 | match |  |
+| Mage (Ice Barrier talent) | 60 | Ice Barrier | 3 | 13032 | 420.00→420.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 52→52 | 60000→60000 | match |  |
+| Mage (Ice Barrier talent) | 60 | Ice Barrier | 4 | 13033 | 480.00→480.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 58→58 | 60000→60000 | match |  |
 | Mage (Ice Lance talent) | 20 | Ice Lance | 1 | 1312002 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | n/a | match |  |
 | Mage (Ice Lance talent) | 30 | Ice Lance | 1 | 1312002 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | n/a | match |  |
 | Mage (Ice Lance talent) | 30 | Ice Lance | 2 | 400640 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | n/a | match |  |
@@ -408,13 +408,13 @@ Each spell below is built with exactly one point in the single talent that grant
 | Mage (Ice Lance talent) | 60 | Ice Lance | 4 | 1240045 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | n/a | match |  |
 | Mage (Ice Lance talent) | 60 | Ice Lance | 5 | 1240046 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | n/a | match |  |
 | Mage (Ice Lance talent) | 60 | Ice Lance | 6 | 1240047 | 160.00→160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | n/a | match |  |
-| Mage (Presence of Mind talent) | 10 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
-| Mage (Presence of Mind talent) | 20 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
-| Mage (Presence of Mind talent) | 30 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
-| Mage (Presence of Mind talent) | 38 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
-| Mage (Presence of Mind talent) | 40 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
-| Mage (Presence of Mind talent) | 50 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
-| Mage (Presence of Mind talent) | 60 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | n/a | mismatch | required_level 1->0 |
+| Mage (Presence of Mind talent) | 10 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | -1→15000 | mismatch | required_level 1->0; duration_ms -1->15000 |
+| Mage (Presence of Mind talent) | 20 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | -1→15000 | mismatch | required_level 1->0; duration_ms -1->15000 |
+| Mage (Presence of Mind talent) | 30 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | -1→15000 | mismatch | required_level 1->0; duration_ms -1->15000 |
+| Mage (Presence of Mind talent) | 38 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | -1→15000 | mismatch | required_level 1->0; duration_ms -1->15000 |
+| Mage (Presence of Mind talent) | 40 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | -1→15000 | mismatch | required_level 1->0; duration_ms -1->15000 |
+| Mage (Presence of Mind talent) | 50 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | -1→15000 | mismatch | required_level 1->0; duration_ms -1->15000 |
+| Mage (Presence of Mind talent) | 60 | Presence of Mind | 0 | 12043 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→0 | -1→15000 | mismatch | required_level 1->0; duration_ms -1->15000 |
 | Mage (Pyroblast talent) | 20 | Pyroblast | 1 | 11366 | 125.00→125.00 | mana→mana | 0→0 | 6000→6000 | 1500→1500 | 20→20 | 12000→12000 | match |  |
 | Mage (Pyroblast talent) | 30 | Pyroblast | 1 | 11366 | 125.00→125.00 | mana→mana | 0→0 | 6000→6000 | 1500→1500 | 20→20 | 12000→12000 | match |  |
 | Mage (Pyroblast talent) | 30 | Pyroblast | 2 | 12505 | 150.00→150.00 | mana→mana | 0→0 | 6000→6000 | 1500→1500 | 24→24 | 12000→12000 | match |  |
