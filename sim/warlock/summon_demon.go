@@ -45,7 +45,9 @@ func (warlock *Warlock) registerSummonDemon() {
 		Flags:         core.SpellFlagAPL,
 		RequiredLevel: 1,
 
-		ManaCost: manaCost,
+		// The client's SpellPower.csv gives Summon Imp PowerCostPct 80 where
+		// the other three summons are 100.
+		ManaCost: core.ManaCostOptions{FlatCost: 0.8 * warlock.BaseMana},
 		Cast:     cast,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
