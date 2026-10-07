@@ -260,3 +260,19 @@ func TestPredatorsEdgeBoostsOffHandDamage(t *testing.T) {
 		t.Errorf("off-hand-proc-mask spell's DamageMultiplier = %v, want %v (Predator's Edge rank 5: +50%% off-hand damage)", got, want)
 	}
 }
+
+// TestMongooseBiteIsAMainHandSpecial guards Mongoose Bite's proc mask:
+// the client's tooltip requires a main-hand weapon and the cast deals
+// main-hand normalized damage only. With the both-hands special mask it
+// also carried Predator's Edge's off-hand damage bonus and fired
+// off-hand weapon procs.
+func TestMongooseBiteIsAMainHandSpecial(t *testing.T) {
+	_, built, _ := buildSurvivalMeleeHunter(t)
+
+	if got, want := built.MongooseBite.ProcMask, core.ProcMaskMeleeMHSpecial; got != want {
+		t.Errorf("Mongoose Bite proc mask = %v, want %v (main hand only)", got, want)
+	}
+	if got := built.MongooseBite.DamageMultiplier; got != 1 {
+		t.Errorf("Mongoose Bite damage multiplier = %v, want 1: Predator's Edge is an off-hand bonus", got)
+	}
+}

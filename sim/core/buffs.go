@@ -1523,13 +1523,13 @@ func BattleSquawkAura(character *Unit, stackcount int32) *Aura {
 // 	})
 // }
 
-func CreateExtraAttackAuraCommon(character *Character, buffActionID ActionID, auraLabel string, rank int32, getBonusAP func(aura *Aura, rank int32) float64) *Aura {
+func CreateExtraAttackAuraCommon(character *Character, buffActionID ActionID, auraLabel string, rank int32, buffDuration time.Duration, getBonusAP func(aura *Aura, rank int32) float64) *Aura {
 	var bonusAP float64
 
 	apBuffAura := character.GetOrRegisterAura(Aura{
 		Label:     auraLabel + " Buff",
 		ActionID:  buffActionID,
-		Duration:  time.Millisecond * 1500,
+		Duration:  buffDuration,
 		MaxStacks: 2,
 		OnGain: func(aura *Aura, sim *Simulation) {
 			bonusAP = getBonusAP(aura, rank)
@@ -1552,7 +1552,7 @@ func CreateExtraAttackAuraCommon(character *Character, buffActionID ActionID, au
 
 	icd := Cooldown{
 		Timer:    character.NewTimer(),
-		Duration: time.Millisecond * 1500,
+		Duration: extraAttackProcICD,
 	}
 
 	apBuffAura.Icd = &icd
@@ -1595,9 +1595,20 @@ func GetWildStrikesAP(aura *Aura, rank int32) float64 {
 
 const WindfuryRanks = 3
 
+// extraAttackProcICD is the internal cooldown between extra-attack procs.
+// The client tables carry no internal cooldown for Windfury Totem; the
+// engine's 1.5s is vanilla Classic's.
+const extraAttackProcICD = 1500 * time.Millisecond
+
+// WindfuryBuffDuration is the Windfury Totem attack power buff's length:
+// 1 second on every rank in the 1.60.1.70009 client (spells 8516, 10608,
+// 10610), not vanilla's 1.5.
+const WindfuryBuffDuration = time.Second
+
 var (
 	WindfuryBuffSpellId = [WindfuryRanks + 1]int32{0, 8516, 10608, 10610}
-	WindfuryBuffBonusAP = [WindfuryRanks + 1]float64{0, 122, 229, 315}
+	// Attack power by rank, source: 1.60.1.70009 client spells 8516, 10608, 10610.
+	WindfuryBuffBonusAP = [WindfuryRanks + 1]float64{0, 95, 179, 246}
 )
 
 func GetWindfuryAP(aura *Aura, rank int32) float64 {
@@ -1609,7 +1620,7 @@ func ApplyWindfury(character *Character) *Aura {
 	spellId := WindfuryBuffSpellId[rank]
 	buffActionID := ActionID{SpellID: spellId}
 
-	return CreateExtraAttackAuraCommon(character, buffActionID, "Windfury", rank, GetWindfuryAP)
+	return CreateExtraAttackAuraCommon(character, buffActionID, "Windfury", rank, WindfuryBuffDuration, GetWindfuryAP)
 
 }
 
