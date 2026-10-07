@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.69893",
+  "build": "1.60.1.70009",
   "class_id": 7,
   "class_slug": "shaman",
   "trees": [
@@ -111,23 +111,23 @@
           "ranks": [
             {
               "spell_id": 16040,
-              "description": "Reduces the cooldown of your Shock spells by ${200/-1000}.1 sec."
+              "description": "Reduces the cooldown of your Shock spells by 0.2 sec."
             },
             {
               "spell_id": 16040,
-              "description": "Reduces the cooldown of your Shock spells by ${400/-1000}.1 sec."
+              "description": "Reduces the cooldown of your Shock spells by 0.4 sec."
             },
             {
               "spell_id": 16040,
-              "description": "Reduces the cooldown of your Shock spells by ${600/-1000}.1 sec."
+              "description": "Reduces the cooldown of your Shock spells by 0.6 sec."
             },
             {
               "spell_id": 16040,
-              "description": "Reduces the cooldown of your Shock spells by ${800/-1000}.1 sec."
+              "description": "Reduces the cooldown of your Shock spells by 0.8 sec."
             },
             {
               "spell_id": 16040,
-              "description": "Reduces the cooldown of your Shock spells by ${1000/-1000}.1 sec."
+              "description": "Reduces the cooldown of your Shock spells by 1.0 sec."
             }
           ],
           "spell_id": 16040
@@ -194,43 +194,35 @@
           "ranks": [
             {
               "spell_id": 16164,
-              "description": "Gives you a $h% chance to enter a Clearcasting state after casting any Fire, Frost, or Nature damage spell.  The Clearcasting state reduces the mana cost of your next damage spell by 100%."
+              "description": "Gives you a 10% chance to enter a Clearcasting state after casting any Fire, Frost, or Nature damage spell.  The Clearcasting state reduces the mana cost of your next damage spell by 100%."
             }
           ],
           "spell_id": 16164
         },
         {
-          "id": 104766,
-          "name": "Elemental Fury",
-          "icon": "spell_fire_volcano",
-          "max_rank": 5,
+          "id": 104765,
+          "name": "Elemental Alacrity",
+          "icon": "spell_lightning_lightningbolt01",
+          "max_rank": 3,
           "tier": 2,
           "column": 2,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 16089,
-              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 20%."
+              "spell_id": 16578,
+              "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by 0.17 sec."
             },
             {
-              "spell_id": 16089,
-              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 40%."
+              "spell_id": 16578,
+              "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by 0.33 sec."
             },
             {
-              "spell_id": 16089,
-              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 60%."
-            },
-            {
-              "spell_id": 16089,
-              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 80%."
-            },
-            {
-              "spell_id": 16089,
-              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 100%."
+              "spell_id": 16578,
+              "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by 0.50 sec."
             }
           ],
-          "spell_id": 16089
+          "spell_id": 16578
         },
         {
           "id": 104764,
@@ -244,11 +236,11 @@
           "ranks": [
             {
               "spell_id": 16086,
-              "description": "Increases the damage done by your Fire Nova spell by 10% and reduces its cooldown by ${2000/-1000} sec."
+              "description": "Increases the damage done by your Fire Nova spell by 10% and reduces its cooldown by 2 sec."
             },
             {
               "spell_id": 16086,
-              "description": "Increases the damage done by your Fire Nova spell by 20% and reduces its cooldown by ${4000/-1000} sec."
+              "description": "Increases the damage done by your Fire Nova spell by 20% and reduces its cooldown by 4 sec."
             }
           ],
           "spell_id": 16086
@@ -285,8 +277,8 @@
           "max_rank": 1,
           "tier": 3,
           "column": 2,
-          "prereq_talent_id": 104766,
-          "prereq_rank": 5,
+          "prereq_talent_id": 104765,
+          "prereq_rank": 3,
           "ranks": [
             {
               "spell_id": 16120,
@@ -328,15 +320,15 @@
           "ranks": [
             {
               "spell_id": 408438,
-              "description": "Gives your Lightning Bolt and Chain Lightning spells a 3% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat.\r\n"
+              "description": "Gives your Lightning Bolt and Chain Lightning spells a 3% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat."
             },
             {
               "spell_id": 408438,
-              "description": "Gives your Lightning Bolt and Chain Lightning spells a 7% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat.\r\n"
+              "description": "Gives your Lightning Bolt and Chain Lightning spells a 7% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat."
             },
             {
               "spell_id": 408438,
-              "description": "Gives your Lightning Bolt and Chain Lightning spells a 10% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat.\r\n"
+              "description": "Gives your Lightning Bolt and Chain Lightning spells a 10% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat."
             }
           ],
           "spell_id": 408438
@@ -359,29 +351,37 @@
           "spell_id": 1222988
         },
         {
-          "id": 104765,
-          "name": "Elemental Alacrity",
-          "icon": "spell_lightning_lightningbolt01",
-          "max_rank": 3,
+          "id": 104766,
+          "name": "Elemental Fury",
+          "icon": "spell_fire_volcano",
+          "max_rank": 5,
           "tier": 5,
           "column": 2,
           "prereq_talent_id": 104762,
           "prereq_rank": 1,
           "ranks": [
             {
-              "spell_id": 16578,
-              "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by ${170/-1000}.2 sec."
+              "spell_id": 16089,
+              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 20%."
             },
             {
-              "spell_id": 16578,
-              "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by ${330/-1000}.2 sec."
+              "spell_id": 16089,
+              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 40%."
             },
             {
-              "spell_id": 16578,
-              "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by ${500/-1000}.2 sec."
+              "spell_id": 16089,
+              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 60%."
+            },
+            {
+              "spell_id": 16089,
+              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 80%."
+            },
+            {
+              "spell_id": 16089,
+              "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 100%."
             }
           ],
-          "spell_id": 16578
+          "spell_id": 16089
         },
         {
           "id": 104758,
@@ -395,13 +395,14 @@
           "ranks": [
             {
               "spell_id": 408490,
-              "description": "You hurl molten lava at the target, dealing 113 Fire damage. If your Flame Shock is on the target, Lava Burst deals 20% increased damage."
+              "description": "You hurl molten lava at the target, dealing 150 to 192 Fire damage. If your Flame Shock is on the target, Lava Burst deals 20% increased damage."
             }
           ],
           "spell_id": 408490
         }
       ],
-      "background": "shamanelementalcombat"
+      "background": "shamanelementalcombat",
+      "icon": "spell_nature_lightning"
     },
     {
       "id": 263,
@@ -507,11 +508,11 @@
           "ranks": [
             {
               "spell_id": 16258,
-              "description": "Increases the amount of damage reduced by your Stoneskin Totem and Windwall Totem by 10% and reduces the cooldown of your Grounding Totem by ${1000/-1000} sec."
+              "description": "Increases the amount of damage reduced by your Stoneskin Totem and Windwall Totem by 10% and reduces the cooldown of your Grounding Totem by 1 sec."
             },
             {
               "spell_id": 16258,
-              "description": "Increases the amount of damage reduced by your Stoneskin Totem and Windwall Totem by 20% and reduces the cooldown of your Grounding Totem by ${2000/-1000} sec."
+              "description": "Increases the amount of damage reduced by your Stoneskin Totem and Windwall Totem by 20% and reduces the cooldown of your Grounding Totem by 2 sec."
             }
           ],
           "spell_id": 16258
@@ -553,11 +554,11 @@
           "ranks": [
             {
               "spell_id": 16262,
-              "description": "Reduces the cast time of your Ghost Wolf spell by ${1000/-1000}.1 sec, and Ghost Wolf may be used indoors."
+              "description": "Reduces the cast time of your Ghost Wolf spell by 1.0 sec, and Ghost Wolf may be used indoors."
             },
             {
               "spell_id": 16262,
-              "description": "Reduces the cast time of your Ghost Wolf spell by ${3000/-1000}.1 sec, and Ghost Wolf may be used indoors."
+              "description": "Reduces the cast time of your Ghost Wolf spell by 3.0 sec, and Ghost Wolf may be used indoors."
             }
           ],
           "spell_id": 16262
@@ -699,23 +700,23 @@
           "ranks": [
             {
               "spell_id": 16256,
-              "description": "Increases your attack speed by 5% for your next $16257n swings after dealing a melee critical strike."
+              "description": "Increases your attack speed by 5% for your next 3 swings after dealing a melee critical strike."
             },
             {
               "spell_id": 16256,
-              "description": "Increases your attack speed by 10% for your next $16257n swings after dealing a melee critical strike."
+              "description": "Increases your attack speed by 10% for your next 3 swings after dealing a melee critical strike."
             },
             {
               "spell_id": 16256,
-              "description": "Increases your attack speed by 15% for your next $16257n swings after dealing a melee critical strike."
+              "description": "Increases your attack speed by 15% for your next 3 swings after dealing a melee critical strike."
             },
             {
               "spell_id": 16256,
-              "description": "Increases your attack speed by 20% for your next $16257n swings after dealing a melee critical strike."
+              "description": "Increases your attack speed by 20% for your next 3 swings after dealing a melee critical strike."
             },
             {
               "spell_id": 16256,
-              "description": "Increases your attack speed by 25% for your next $16257n swings after dealing a melee critical strike."
+              "description": "Increases your attack speed by 25% for your next 3 swings after dealing a melee critical strike."
             }
           ],
           "spell_id": 16256
@@ -841,13 +842,14 @@
           "ranks": [
             {
               "spell_id": 425336,
-              "description": "Increases your melee attack speed and spell casting speed by 30% for 25 sec."
+              "description": "Increases your attack speed by 30% for 25 sec."
             }
           ],
           "spell_id": 425336
         }
       ],
-      "background": "shamanenhancement"
+      "background": "shamanenhancement",
+      "icon": "spell_nature_lightningshield"
     },
     {
       "id": 262,
@@ -866,23 +868,23 @@
           "ranks": [
             {
               "spell_id": 16182,
-              "description": "Reduces the casting time of your Healing Wave spell by ${100/-1000}.1 sec."
+              "description": "Reduces the casting time of your Healing Wave spell by 0.1 sec."
             },
             {
               "spell_id": 16182,
-              "description": "Reduces the casting time of your Healing Wave spell by ${200/-1000}.1 sec."
+              "description": "Reduces the casting time of your Healing Wave spell by 0.2 sec."
             },
             {
               "spell_id": 16182,
-              "description": "Reduces the casting time of your Healing Wave spell by ${300/-1000}.1 sec."
+              "description": "Reduces the casting time of your Healing Wave spell by 0.3 sec."
             },
             {
               "spell_id": 16182,
-              "description": "Reduces the casting time of your Healing Wave spell by ${400/-1000}.1 sec."
+              "description": "Reduces the casting time of your Healing Wave spell by 0.4 sec."
             },
             {
               "spell_id": 16182,
-              "description": "Reduces the casting time of your Healing Wave spell by ${500/-1000}.1 sec."
+              "description": "Reduces the casting time of your Healing Wave spell by 0.5 sec."
             }
           ],
           "spell_id": 16182
@@ -1015,11 +1017,11 @@
           "ranks": [
             {
               "spell_id": 16184,
-              "description": "Reduces the cooldown of your Reincarnation spell by ${600000/-60000} min, increases your maximum health by 2%, and increases the amount of health and Mana you reincarnate with by an additional 10%."
+              "description": "Reduces the cooldown of your Reincarnation spell by 10 min, increases your maximum health by 2%, and increases the amount of health and Mana you reincarnate with by an additional 10%."
             },
             {
               "spell_id": 16184,
-              "description": "Reduces the cooldown of your Reincarnation spell by ${1200000/-60000} min, increases your maximum health by 4%, and increases the amount of health and Mana you reincarnate with by an additional 20%."
+              "description": "Reduces the cooldown of your Reincarnation spell by 20 min, increases your maximum health by 4%, and increases the amount of health and Mana you reincarnate with by an additional 20%."
             }
           ],
           "spell_id": 16184
@@ -1086,7 +1088,7 @@
           "ranks": [
             {
               "spell_id": 408510,
-              "description": "The caster is surrounded by $n globes of water. When a spell, melee, or ranged attack hits the caster or when one of the caster's healing spells gets a critical result, 2% of maximum mana is restored to the caster, expending one water globe. Only one globe will activate every few seconds.  Lasts 10 min.\r\n\r\nOnly one Elemental Shield can be active on the Shaman at any one time."
+              "description": "The caster is surrounded by 3 globes of water. When a spell, melee, or ranged attack hits the caster or when one of the caster's healing spells gets a critical result, 2% of maximum mana is restored to the caster, expending one water globe. Only one globe will activate every few seconds.  Lasts 10 min.\n\nOnly one Elemental Shield can be active on the Shaman at any one time."
             }
           ],
           "spell_id": 408510
@@ -1169,7 +1171,7 @@
           "ranks": [
             {
               "spell_id": 16190,
-              "description": "Summons a Mana Tide Totem with 5 health at the feet of the caster for ${13 sec-1} sec that restores 88 mana every 3 seconds to group members within $16191a1 yards."
+              "description": "Summons a Mana Tide Totem with 5 health at the feet of the caster for 12 sec that restores 88 mana every 3 seconds to group members within 30 yards."
             }
           ],
           "spell_id": 16190
@@ -1261,13 +1263,14 @@
           "ranks": [
             {
               "spell_id": 408521,
-              "description": "Heals a friendly target for 480, an additional 445 over 15 sec, and increases the effectiveness of your Chain Heal casts directly on that target by 25%."
+              "description": "Heals a friendly target for 486 to 534, an additional 445 over 15 sec, and increases the effectiveness of your Chain Heal casts directly on that target by 25%."
             }
           ],
           "spell_id": 408521
         }
       ],
-      "background": "shamanrestoration"
+      "background": "shamanrestoration",
+      "icon": "spell_nature_magicimmunity"
     }
   ]
 }

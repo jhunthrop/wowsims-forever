@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.69893",
+  "build": "1.60.1.70009",
   "class_id": 2,
   "class_slug": "paladin",
   "trees": [
@@ -8,27 +8,6 @@
       "name": "Holy",
       "position": 0,
       "talents": [
-        {
-          "id": 105328,
-          "name": "Improved Holy Strike",
-          "icon": "classicon_paladin",
-          "max_rank": 2,
-          "tier": 0,
-          "column": 0,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 1310902,
-              "description": "Reduces the cooldown of your Holy Strike ability by ${1000/-1000} sec."
-            },
-            {
-              "spell_id": 1310902,
-              "description": "Reduces the cooldown of your Holy Strike ability by ${2000/-1000} sec."
-            }
-          ],
-          "spell_id": 1310902
-        },
         {
           "id": 105639,
           "name": "Divine Strength",
@@ -178,11 +157,11 @@
           "ranks": [
             {
               "spell_id": 9453,
-              "description": "Reduces the duration of  Fear and Disorient effects on you by 15%."
+              "description": "Reduces the duration of Fear and Disorient effects on you by 15%."
             },
             {
               "spell_id": 9453,
-              "description": "Reduces the duration of  Fear and Disorient effects on you by 30%."
+              "description": "Reduces the duration of Fear and Disorient effects on you by 30%."
             }
           ],
           "spell_id": 9453
@@ -199,7 +178,7 @@
           "ranks": [
             {
               "spell_id": 1310897,
-              "description": "Grants you immunity to Silence and Interrupt effects.  Lasts 6 sec."
+              "description": "Grants you immunity to Silence and Interrupt effects for 6 sec."
             }
           ],
           "spell_id": 1310897
@@ -262,11 +241,11 @@
           "ranks": [
             {
               "spell_id": 426065,
-              "description": "Your Holy Shock and Flash of Light critical hits reduce the cast time of your next Holy Light cast within 15 sec by ${500/-1000}.1 sec."
+              "description": "Your Holy Shock and Flash of Light critical hits reduce the cast time of your next Holy Light cast within 15 sec by 0.5 sec."
             },
             {
               "spell_id": 426065,
-              "description": "Your Holy Shock and Flash of Light critical hits reduce the cast time of your next Holy Light cast within 15 sec by ${1000/-1000}.1 sec."
+              "description": "Your Holy Shock and Flash of Light critical hits reduce the cast time of your next Holy Light cast within 15 sec by 1.0 sec."
             }
           ],
           "spell_id": 426065
@@ -358,7 +337,7 @@
           "ranks": [
             {
               "spell_id": 1311606,
-              "description": "Blasts the target with Holy energy, causing 134 Holy damage to an enemy, or 114 healing to an ally."
+              "description": "Blasts the target with Holy energy, causing 129 to 139 Holy damage to an enemy, or 110 to 118 healing to an ally."
             }
           ],
           "spell_id": 1311606
@@ -396,23 +375,23 @@
           "ranks": [
             {
               "spell_id": 5923,
-              "description": "Increases the critical strike chance of your Holy Shock spell by ${2+1}%, and all other spells by 1%."
+              "description": "Increases the critical strike chance of your Holy Shock and Holy Strike spells by 3%, and all other spells by 1%."
             },
             {
               "spell_id": 5923,
-              "description": "Increases the critical strike chance of your Holy Shock spell by ${4+2}%, and all other spells by 2%."
+              "description": "Increases the critical strike chance of your Holy Shock and Holy Strike spells by 6%, and all other spells by 2%."
             },
             {
               "spell_id": 5923,
-              "description": "Increases the critical strike chance of your Holy Shock spell by ${6+3}%, and all other spells by 3%."
+              "description": "Increases the critical strike chance of your Holy Shock and Holy Strike spells by 9%, and all other spells by 3%."
             },
             {
               "spell_id": 5923,
-              "description": "Increases the critical strike chance of your Holy Shock spell by ${8+4}%, and all other spells by 4%."
+              "description": "Increases the critical strike chance of your Holy Shock and Holy Strike spells by 12%, and all other spells by 4%."
             },
             {
               "spell_id": 5923,
-              "description": "Increases the critical strike chance of your Holy Shock spell by ${10+5}%, and all other spells by 5%."
+              "description": "Increases the critical strike chance of your Holy Shock and Holy Strike spells by 15%, and all other spells by 5%."
             }
           ],
           "spell_id": 5923
@@ -429,13 +408,14 @@
           "ranks": [
             {
               "spell_id": 1310911,
-              "description": "Applies Light's Vigil to the target for 30 sec. Your next Holy Shock cast on them triggers no cooldown and causes friendly targets to heal their party for 324, or enemy targets to suffer 182 Holy damage and refund 75% of Light's Vigil's Mana cost.  You may only have 1 Light's Vigil active per Paladin, per party."
+              "description": "Applies Light's Vigil to the target for 30 sec. Your next Holy Shock cast on them triggers no cooldown and causes enemy targets to suffer 175 to 189 Holy damage and refund 75% of Light's Vigil's Mana cost, or allied targets to heal their party for 326 to 344. You may only have one Light's Vigil active per party."
             }
           ],
           "spell_id": 1310911
         }
       ],
-      "background": "paladinholy"
+      "background": "paladinholy",
+      "icon": "spell_holy_holybolt"
     },
     {
       "id": 383,
@@ -487,23 +467,23 @@
           "ranks": [
             {
               "spell_id": 20127,
-              "description": "Damaging melee attacks against you have a $h% chance to increase your chance to block by 6%.  Lasts 10 sec or $20128n blocks."
+              "description": "Damaging melee attacks against you have a 10% chance to increase your chance to block by 4%.  Lasts 10 sec or 5 blocks."
             },
             {
               "spell_id": 20127,
-              "description": "Damaging melee attacks against you have a $h% chance to increase your chance to block by 12%.  Lasts 10 sec or $20128n blocks."
+              "description": "Damaging melee attacks against you have a 10% chance to increase your chance to block by 8%.  Lasts 10 sec or 5 blocks."
             },
             {
               "spell_id": 20127,
-              "description": "Damaging melee attacks against you have a $h% chance to increase your chance to block by 18%.  Lasts 10 sec or $20128n blocks."
+              "description": "Damaging melee attacks against you have a 10% chance to increase your chance to block by 12%.  Lasts 10 sec or 5 blocks."
             },
             {
               "spell_id": 20127,
-              "description": "Damaging melee attacks against you have a $h% chance to increase your chance to block by 24%.  Lasts 10 sec or $20128n blocks."
+              "description": "Damaging melee attacks against you have a 10% chance to increase your chance to block by 16%.  Lasts 10 sec or 5 blocks."
             },
             {
               "spell_id": 20127,
-              "description": "Damaging melee attacks against you have a $h% chance to increase your chance to block by 30%.  Lasts 10 sec or $20128n blocks."
+              "description": "Damaging melee attacks against you have a 10% chance to increase your chance to block by 20%.  Lasts 10 sec or 5 blocks."
             }
           ],
           "spell_id": 20127
@@ -599,7 +579,7 @@
           "ranks": [
             {
               "spell_id": 1314103,
-              "description": "When Seal of Fury's shield is fully absorbed, restore 0 Mana, increased by 15% per level the attacker is above you, up to ${15*3}%."
+              "description": "When Seal of Fury's shield is fully absorbed, restore 0 Mana, increased by 15% per level the attacker is above you, up to 45%."
             }
           ],
           "spell_id": 1314103
@@ -641,15 +621,15 @@
           "ranks": [
             {
               "spell_id": 20150,
-              "description": "Increases the amount of damage absorbed by your shield by 10%, and gives your blocks a 33% chance to restore 6% of your maximum Mana.  May only occur once every $proccooldown sec."
+              "description": "Increases the amount of damage absorbed by your shield by 10%, and gives your blocks a 33% chance to restore 6% of your maximum Mana.  May only occur once every 3 sec."
             },
             {
               "spell_id": 20150,
-              "description": "Increases the amount of damage absorbed by your shield by 20%, and gives your blocks a 66% chance to restore 6% of your maximum Mana.  May only occur once every $proccooldown sec."
+              "description": "Increases the amount of damage absorbed by your shield by 20%, and gives your blocks a 66% chance to restore 6% of your maximum Mana.  May only occur once every 3 sec."
             },
             {
               "spell_id": 20150,
-              "description": "Increases the amount of damage absorbed by your shield by 30%, and gives your blocks a 100% chance to restore 6% of your maximum Mana.  May only occur once every $proccooldown sec."
+              "description": "Increases the amount of damage absorbed by your shield by 30%, and gives your blocks a 100% chance to restore 6% of your maximum Mana.  May only occur once every 3 sec."
             }
           ],
           "spell_id": 20150
@@ -666,11 +646,11 @@
           "ranks": [
             {
               "spell_id": 1224697,
-              "description": "Increases your total Stamina by 2% and reduces the cooldown of your Divine Shield, Divine Protection, and Templar's Bulwark spells by ${30000/-1000} sec."
+              "description": "Increases your total Stamina by 2% and reduces the cooldown of your Divine Shield, Divine Protection, and Templar's Bulwark spells by 30 sec."
             },
             {
               "spell_id": 1224697,
-              "description": "Increases your total Stamina by 4% and reduces the cooldown of your Divine Shield, Divine Protection, and Templar's Bulwark spells by ${60000/-1000} sec."
+              "description": "Increases your total Stamina by 4% and reduces the cooldown of your Divine Shield, Divine Protection, and Templar's Bulwark spells by 60 sec."
             }
           ],
           "spell_id": 1224697
@@ -754,7 +734,7 @@
           "ranks": [
             {
               "spell_id": 1311015,
-              "description": "When activated, this ability grants you an absorb shield equal to 100% of your maximum health for 8 sec.  Applies Forbearance for 1 min. Cannot be cast while Forbearance is active."
+              "description": "When activated, this ability grants you an absorb shield equal to 100% of your maximum health for 8 sec. Applies Forbearance for 1 min. Cannot be cast while Forbearance is active."
             }
           ],
           "spell_id": 1311015
@@ -771,23 +751,23 @@
           "ranks": [
             {
               "spell_id": 20177,
-              "description": "Gives you a 8% chance to gain an extra attack after Blocking a melee attack and a ${8*2.5}% chance to gain an extra attack after being the victim of a non-periodic critical strike."
+              "description": "Gives you a 8% chance to gain an extra attack after Blocking a melee attack and a 20% chance to gain an extra attack after being the victim of a non-periodic critical strike."
             },
             {
               "spell_id": 20177,
-              "description": "Gives you a 16% chance to gain an extra attack after Blocking a melee attack and a ${16*2.5}% chance to gain an extra attack after being the victim of a non-periodic critical strike."
+              "description": "Gives you a 16% chance to gain an extra attack after Blocking a melee attack and a 40% chance to gain an extra attack after being the victim of a non-periodic critical strike."
             },
             {
               "spell_id": 20177,
-              "description": "Gives you a 24% chance to gain an extra attack after Blocking a melee attack and a ${24*2.5}% chance to gain an extra attack after being the victim of a non-periodic critical strike."
+              "description": "Gives you a 24% chance to gain an extra attack after Blocking a melee attack and a 60% chance to gain an extra attack after being the victim of a non-periodic critical strike."
             },
             {
               "spell_id": 20177,
-              "description": "Gives you a 32% chance to gain an extra attack after Blocking a melee attack and a ${32*2.5}% chance to gain an extra attack after being the victim of a non-periodic critical strike."
+              "description": "Gives you a 32% chance to gain an extra attack after Blocking a melee attack and a 80% chance to gain an extra attack after being the victim of a non-periodic critical strike."
             },
             {
               "spell_id": 20177,
-              "description": "Gives you a 40% chance to gain an extra attack after Blocking a melee attack and a ${40*2.5}% chance to gain an extra attack after being the victim of a non-periodic critical strike."
+              "description": "Gives you a 40% chance to gain an extra attack after Blocking a melee attack and a 100% chance to gain an extra attack after being the victim of a non-periodic critical strike."
             }
           ],
           "spell_id": 20177
@@ -804,23 +784,23 @@
           "ranks": [
             {
               "spell_id": 1311034,
-              "description": "Increases the threat generated by your Holy Strike ability 5%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 2% for 6 sec."
+              "description": "Increases the threat generated by your Holy Strike ability by 5%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 2% for 6 sec."
             },
             {
               "spell_id": 1311034,
-              "description": "Increases the threat generated by your Holy Strike ability 10%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 4% for 6 sec."
+              "description": "Increases the threat generated by your Holy Strike ability by 10%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 4% for 6 sec."
             },
             {
               "spell_id": 1311034,
-              "description": "Increases the threat generated by your Holy Strike ability 15%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 6% for 6 sec."
+              "description": "Increases the threat generated by your Holy Strike ability by 15%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 6% for 6 sec."
             },
             {
               "spell_id": 1311034,
-              "description": "Increases the threat generated by your Holy Strike ability 20%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 8% for 6 sec."
+              "description": "Increases the threat generated by your Holy Strike ability by 20%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 8% for 6 sec."
             },
             {
               "spell_id": 1311034,
-              "description": "Increases the threat generated by your Holy Strike ability 25%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 10% for 6 sec."
+              "description": "Increases the threat generated by your Holy Strike ability by 25%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 10% for 6 sec."
             }
           ],
           "spell_id": 1311034
@@ -837,13 +817,14 @@
           "ranks": [
             {
               "spell_id": 20925,
-              "description": "Increases chance to block by 20% for 10 sec, and deals 110 Holy damage for each attack blocked while active.  Damage caused by Holy Shield causes 20% additional threat. Each block expends a charge. $n charges."
+              "description": "Increases chance to block by 30% for 10 sec, and deals 110 Holy damage for each attack blocked while active.  Damage caused by Holy Shield causes 20% additional threat. Each block expends a charge. 4 charges."
             }
           ],
           "spell_id": 20925
         }
       ],
-      "background": "paladinprotection"
+      "background": "paladinprotection",
+      "icon": "spell_holy_devotionaura"
     },
     {
       "id": 381,
@@ -1003,15 +984,15 @@
           "ranks": [
             {
               "spell_id": 9452,
-              "description": "Gives your damaging melee attacks a chance to reduce the target's Attack Power by ${1/-3*6}, and increase your Attack Power by 1% for 30 sec."
+              "description": "Gives your damaging melee attacks a chance to reduce the target's Attack Power by (1 /- 3 *  - 204), and increase your Attack Power by 1% for 30 sec."
             },
             {
               "spell_id": 9452,
-              "description": "Gives your damaging melee attacks a chance to reduce the target's Attack Power by ${2/-3*6}, and increase your Attack Power by 2% for 30 sec."
+              "description": "Gives your damaging melee attacks a chance to reduce the target's Attack Power by (2 /- 3 *  - 204), and increase your Attack Power by 2% for 30 sec."
             },
             {
               "spell_id": 9452,
-              "description": "Gives your damaging melee attacks a chance to reduce the target's Attack Power by ${3/-3*6}, and increase your Attack Power by 3% for 30 sec."
+              "description": "Gives your damaging melee attacks a chance to reduce the target's Attack Power by (3 /- 3 *  - 204), and increase your Attack Power by 3% for 30 sec."
             }
           ],
           "spell_id": 9452
@@ -1053,7 +1034,7 @@
           "ranks": [
             {
               "spell_id": 20375,
-              "description": "Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage.  Only one Seal can be active on the Paladin at any one time.  Lasts 30 sec.\r\n\r\nUnleashing this Seal's energy will judge an enemy, instantly causing 48.5 Holy damage, 97 if the target is stunned or incapacitated."
+              "description": "Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage.  Only one Seal can be active on the Paladin at any one time.  Lasts 30 sec.\n\nUnleashing this Seal's energy will judge an enemy, instantly causing 69 to 73 Holy damage, 138 to 146 if the target is stunned or incapacitated."
             }
           ],
           "spell_id": 20375
@@ -1112,31 +1093,10 @@
           "ranks": [
             {
               "spell_id": 1311087,
-              "description": "Increases the damage of your Holy Strike ability by 10% and causes it to refresh all Judgement effects on the target."
+              "description": "Increases the damage of your Holy Strike ability by 20% and causes it to refresh all Judgement effects on the target."
             }
           ],
           "spell_id": 1311087
-        },
-        {
-          "id": 110883,
-          "name": "Crusade",
-          "icon": "spell_holy_crusade",
-          "max_rank": 2,
-          "tier": 3,
-          "column": 3,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 1311083,
-              "description": "Increases all damage dealt by 1%. Increased by an additional 1% against Demon and Undead targets."
-            },
-            {
-              "spell_id": 1311083,
-              "description": "Increases all damage dealt by 2%. Increased by an additional 2% against Demon and Undead targets."
-            }
-          ],
-          "spell_id": 1311083
         },
         {
           "id": 105697,
@@ -1150,15 +1110,15 @@
           "ranks": [
             {
               "spell_id": 20111,
-              "description": "Increases the damage you deal with two-handed melee weapons by 3%."
+              "description": "Increases the damage you deal with two-handed melee weapons by 2%."
+            },
+            {
+              "spell_id": 20111,
+              "description": "Increases the damage you deal with two-handed melee weapons by 4%."
             },
             {
               "spell_id": 20111,
               "description": "Increases the damage you deal with two-handed melee weapons by 6%."
-            },
-            {
-              "spell_id": 20111,
-              "description": "Increases the damage you deal with two-handed melee weapons by 9%."
             }
           ],
           "spell_id": 20111
@@ -1175,15 +1135,15 @@
           "ranks": [
             {
               "spell_id": 20049,
-              "description": "Increases your Physical and Holy damage dealt by 1% for 30 sec after landing a critical strike.  Stacks up to $20050u times."
+              "description": "Increases your Physical and Holy damage dealt by 1% for 30 sec after landing a non-periodic critical strike.  Stacks up to 3 times."
             },
             {
               "spell_id": 20049,
-              "description": "Increases your Physical and Holy damage dealt by 2% for 30 sec after landing a critical strike.  Stacks up to $20050u times."
+              "description": "Increases your Physical and Holy damage dealt by 2% for 30 sec after landing a non-periodic critical strike.  Stacks up to 3 times."
             },
             {
               "spell_id": 20049,
-              "description": "Increases your Physical and Holy damage dealt by 3% for 30 sec after landing a critical strike.  Stacks up to $20050u times."
+              "description": "Increases your Physical and Holy damage dealt by 3% for 30 sec after landing a non-periodic critical strike.  Stacks up to 3 times."
             }
           ],
           "spell_id": 20049
@@ -1217,15 +1177,15 @@
           "ranks": [
             {
               "spell_id": 1311084,
-              "description": "Increases your spell damage and healing by up to 33% of your Intellect."
+              "description": "Increases your spell damage by up to 20% of your Intellect."
             },
             {
               "spell_id": 1311084,
-              "description": "Increases your spell damage and healing by up to 66% of your Intellect."
+              "description": "Increases your spell damage by up to 40% of your Intellect."
             },
             {
               "spell_id": 1311084,
-              "description": "Increases your spell damage and healing by up to 100% of your Intellect."
+              "description": "Increases your spell damage by up to 60% of your Intellect."
             }
           ],
           "spell_id": 1311084
@@ -1242,11 +1202,11 @@
           "ranks": [
             {
               "spell_id": 1311085,
-              "description": "Reduces the cast time of your Hammer of Wrath by ${500/-1000}.1 sec, and reduces all threat you generate by 10% while Righteous Fury is not active."
+              "description": "Reduces the cast time of your Hammer of Wrath by 0.5 sec, and reduces all threat you generate by 10% while Righteous Fury is not active."
             },
             {
               "spell_id": 1311085,
-              "description": "Reduces the cast time of your Hammer of Wrath by ${1000/-1000}.1 sec, and reduces all threat you generate by 20% while Righteous Fury is not active."
+              "description": "Reduces the cast time of your Hammer of Wrath by 1.0 sec, and reduces all threat you generate by 20% while Righteous Fury is not active."
             }
           ],
           "spell_id": 1311085
@@ -1263,13 +1223,14 @@
           "ranks": [
             {
               "spell_id": 1310735,
-              "description": "When you replace your Seal of Command, Seal of Righteousness, Seal of Fury, or Seal of Justice with a different Seal, gain an Echo. Your next melee attack applies the replaced Seal's effects, consuming the Echo."
+              "description": "Reduces the Mana cost of your Seal spells by 20%, and when you replace your Seal of Command, Seal of Righteousness, Seal of Fury, or Seal of Justice with a different Seal, you gain an Echo of that Seal. Your next melee attack applies the replaced Seal's effects, consuming the Echo."
             }
           ],
           "spell_id": 1310735
         }
       ],
-      "background": "paladincombat"
+      "background": "paladincombat",
+      "icon": "spell_holy_auraoflight"
     }
   ]
 }

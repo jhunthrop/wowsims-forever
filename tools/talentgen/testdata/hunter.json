@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.69893",
+  "build": "1.60.1.70009",
   "class_id": 3,
   "class_slug": "hunter",
   "trees": [
@@ -278,7 +278,7 @@
           "ranks": [
             {
               "spell_id": 1293241,
-              "description": "Command a hawk to dive-bomb your targeted enemy, dealing ${32+($rap*(5/100))} Physical damage and continuing its assault for 18 sec. Only 2 hawks can be active at once. Summon Hawk shares its cooldown with Arcane Shot."
+              "description": "Command a hawk to dive-bomb your targeted enemy, dealing [32 / Ferocity: 48 / Unleashed Fury: 38 + (Ranged Attack Power * (0.05))] Physical damage and continuing its assault for 18 sec. Only 2 hawks can be active at once. Summon Hawk shares its cooldown with Arcane Shot."
             }
           ],
           "spell_id": 1293241
@@ -393,7 +393,8 @@
           "spell_id": 19574
         }
       ],
-      "background": "hunterbeastmastery"
+      "background": "hunterbeastmastery",
+      "icon": "ability_hunter_beasttaming"
     },
     {
       "id": 363,
@@ -494,7 +495,7 @@
         {
           "id": 110870,
           "name": "Improved Stings",
-          "icon": "hunter_pvp_spidersting",
+          "icon": "ability_hunter_quickshot",
           "max_rank": 3,
           "tier": 1,
           "column": 0,
@@ -503,15 +504,15 @@
           "ranks": [
             {
               "spell_id": 1310661,
-              "description": "Increased the damage of your Serpent Sting ability by 6%, reduces the cooldown of your Viper Sting ability by ${2000/-1000} sec, and increases the duration of your Scorpid Sting ability by ${15000/1000} sec."
+              "description": "Increases the damage of your Serpent Sting ability by 6%, reduces the cooldown of your Viper Sting ability by 2 sec, and increases the duration of your Scorpid Sting ability by 15 sec."
             },
             {
               "spell_id": 1310661,
-              "description": "Increased the damage of your Serpent Sting ability by 13%, reduces the cooldown of your Viper Sting ability by ${4000/-1000} sec, and increases the duration of your Scorpid Sting ability by ${30000/1000} sec."
+              "description": "Increases the damage of your Serpent Sting ability by 13%, reduces the cooldown of your Viper Sting ability by 4 sec, and increases the duration of your Scorpid Sting ability by 30 sec."
             },
             {
               "spell_id": 1310661,
-              "description": "Increased the damage of your Serpent Sting ability by 20%, reduces the cooldown of your Viper Sting ability by ${6000/-1000} sec, and increases the duration of your Scorpid Sting ability by ${45000/1000} sec."
+              "description": "Increases the damage of your Serpent Sting ability by 20%, reduces the cooldown of your Viper Sting ability by 6 sec, and increases the duration of your Scorpid Sting ability by 45 sec."
             }
           ],
           "spell_id": 1310661
@@ -594,11 +595,11 @@
           "ranks": [
             {
               "spell_id": 415405,
-              "description": "Reduces the cooldown on your Rapid Fire ability by ${60000/-60000} min. In addition, when you kill a non-trivial enemy or it dies while afflicted by your Serpent Sting, you gain Rapid Killing, increasing the damage of your next Shot ability within 20 sec by 10%."
+              "description": "Reduces the cooldown on your Rapid Fire ability by 1 min. In addition, when you kill a non-trivial enemy or it dies while afflicted by your Serpent Sting, you gain Rapid Killing, increasing the damage of your next Shot ability within 20 sec by 10%."
             },
             {
               "spell_id": 415405,
-              "description": "Reduces the cooldown on your Rapid Fire ability by ${120000/-60000} min. In addition, when you kill a non-trivial enemy or it dies while afflicted by your Serpent Sting, you gain Rapid Killing, increasing the damage of your next Shot ability within 20 sec by 20%."
+              "description": "Reduces the cooldown on your Rapid Fire ability by 2 min. In addition, when you kill a non-trivial enemy or it dies while afflicted by your Serpent Sting, you gain Rapid Killing, increasing the damage of your next Shot ability within 20 sec by 20%."
             }
           ],
           "spell_id": 415405
@@ -665,7 +666,7 @@
           "ranks": [
             {
               "spell_id": 1299346,
-              "description": "Increases the Ranged Attack Power of party members within $a1 yards by 30. Lasts 30 min."
+              "description": "Increases the Ranged Attack Power of party members within 45 yds by 30."
             }
           ],
           "spell_id": 1299346
@@ -702,39 +703,6 @@
             }
           ],
           "spell_id": 19485
-        },
-        {
-          "id": 105003,
-          "name": "Improved Serpent Sting",
-          "icon": "ability_hunter_quickshot",
-          "max_rank": 5,
-          "tier": 3,
-          "column": 3,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 19464,
-              "description": "Increases the damage done by your Serpent Sting by 2%."
-            },
-            {
-              "spell_id": 19464,
-              "description": "Increases the damage done by your Serpent Sting by 4%."
-            },
-            {
-              "spell_id": 19464,
-              "description": "Increases the damage done by your Serpent Sting by 6%."
-            },
-            {
-              "spell_id": 19464,
-              "description": "Increases the damage done by your Serpent Sting by 8%."
-            },
-            {
-              "spell_id": 19464,
-              "description": "Increases the damage done by your Serpent Sting by 10%."
-            }
-          ],
-          "spell_id": 19464
         },
         {
           "id": 104999,
@@ -844,13 +812,14 @@
           "ranks": [
             {
               "spell_id": 1310687,
-              "description": "A steady snipe that increases ranged damage by 160."
+              "description": "A long-range shot that deals ranged damage plus 160 and increases the range of your next 3 Shots by 10 yards for 10 sec."
             }
           ],
           "spell_id": 1310687
         }
       ],
-      "background": "huntermarksmanship"
+      "background": "huntermarksmanship",
+      "icon": "ability_marksmanship"
     },
     {
       "id": 362,
@@ -902,7 +871,15 @@
           "ranks": [
             {
               "spell_id": 19295,
+              "description": "Increases your Parry chance by 1%."
+            },
+            {
+              "spell_id": 19295,
               "description": "Increases your Parry chance by 2%."
+            },
+            {
+              "spell_id": 19295,
+              "description": "Increases your Parry chance by 3%."
             },
             {
               "spell_id": 19295,
@@ -910,15 +887,7 @@
             },
             {
               "spell_id": 19295,
-              "description": "Increases your Parry chance by 6%."
-            },
-            {
-              "spell_id": 19295,
-              "description": "Increases your Parry chance by 8%."
-            },
-            {
-              "spell_id": 19295,
-              "description": "Increases your Parry chance by 10%."
+              "description": "Increases your Parry chance by 5%."
             }
           ],
           "spell_id": 19295
@@ -935,23 +904,23 @@
           "ranks": [
             {
               "spell_id": 19184,
-              "description": "When your traps are triggered, all affected targets are Entrapped, preventing them from moving for ${1000/1000} sec."
+              "description": "When your traps are triggered, all affected targets are Entrapped, preventing them from moving for 1 sec."
             },
             {
               "spell_id": 19184,
-              "description": "When your traps are triggered, all affected targets are Entrapped, preventing them from moving for ${2000/1000} sec."
+              "description": "When your traps are triggered, all affected targets are Entrapped, preventing them from moving for 2 sec."
             },
             {
               "spell_id": 19184,
-              "description": "When your traps are triggered, all affected targets are Entrapped, preventing them from moving for ${3000/1000} sec."
+              "description": "When your traps are triggered, all affected targets are Entrapped, preventing them from moving for 3 sec."
             },
             {
               "spell_id": 19184,
-              "description": "When your traps are triggered, all affected targets are Entrapped, preventing them from moving for ${4000/1000} sec."
+              "description": "When your traps are triggered, all affected targets are Entrapped, preventing them from moving for 4 sec."
             },
             {
               "spell_id": 19184,
-              "description": "When your traps are triggered, all affected targets are Entrapped, preventing them from moving for ${5000/1000} sec."
+              "description": "When your traps are triggered, all affected targets are Entrapped, preventing them from moving for 5 sec."
             }
           ],
           "spell_id": 19184
@@ -1122,7 +1091,7 @@
         {
           "id": 110861,
           "name": "Predator's Edge",
-          "icon": "ability_hunter_hatchettoss",
+          "icon": "ability_dualwield",
           "max_rank": 5,
           "tier": 3,
           "column": 1,
@@ -1131,23 +1100,23 @@
           "ranks": [
             {
               "spell_id": 1310627,
-              "description": "Increases your melee critical strike damage by 6% and your offhand weapon damage by 10%."
+              "description": "Increases your melee critical strike damage by 6% and your Off Hand weapon damage by 10%."
             },
             {
               "spell_id": 1310627,
-              "description": "Increases your melee critical strike damage by 12% and your offhand weapon damage by 20%."
+              "description": "Increases your melee critical strike damage by 12% and your Off Hand weapon damage by 20%."
             },
             {
               "spell_id": 1310627,
-              "description": "Increases your melee critical strike damage by 18% and your offhand weapon damage by 30%."
+              "description": "Increases your melee critical strike damage by 18% and your Off Hand weapon damage by 30%."
             },
             {
               "spell_id": 1310627,
-              "description": "Increases your melee critical strike damage by 24% and your offhand weapon damage by 40%."
+              "description": "Increases your melee critical strike damage by 24% and your Off Hand weapon damage by 40%."
             },
             {
               "spell_id": 1310627,
-              "description": "Increases your melee critical strike damage by 30% and your offhand weapon damage by 50%."
+              "description": "Increases your melee critical strike damage by 30% and your Off Hand weapon damage by 50%."
             }
           ],
           "spell_id": 1310627
@@ -1181,11 +1150,11 @@
           "ranks": [
             {
               "spell_id": 440529,
-              "description": "Reduces the mana cost of your Trap abilities and melee abilities by 30%. In addition, your critical strikes have a 50% chance to allow 50% of your Mana regeneration to continue while casting for 30 sec."
+              "description": "Reduces the mana cost of your Trap abilities and melee abilities by 30%. In addition, your critical strikes have a 30% chance to allow 50% of your Mana regeneration to continue while casting for 30 sec."
             },
             {
               "spell_id": 440529,
-              "description": "Reduces the mana cost of your Trap abilities and melee abilities by 60%. In addition, your critical strikes have a 100% chance to allow 50% of your Mana regeneration to continue while casting for 30 sec."
+              "description": "Reduces the mana cost of your Trap abilities and melee abilities by 60%. In addition, your critical strikes have a 60% chance to allow 50% of your Mana regeneration to continue while casting for 30 sec."
             }
           ],
           "spell_id": 440529
@@ -1244,7 +1213,7 @@
           "ranks": [
             {
               "spell_id": 1317257,
-              "description": "A powerful kick that deals 100% melee weapon damage."
+              "description": "A powerful kick that deals 100% melee weapon damage and increases movement speed by 30% for 3 sec."
             }
           ],
           "spell_id": 1317257
@@ -1294,13 +1263,14 @@
           "ranks": [
             {
               "spell_id": 1310533,
-              "description": "Your Mongoose Bite also causes the target to Bleed for damage over 21 sec equal to 40% of the damage done by Mongoose Bite."
+              "description": "Your Mongoose Bite also causes the target to Bleed for damage equal to 40% of the damage done by Mongoose Bite over 21 sec"
             }
           ],
           "spell_id": 1310533
         }
       ],
-      "background": "huntersurvival"
+      "background": "huntersurvival",
+      "icon": "ability_hunter_swiftstrike"
     }
   ]
 }

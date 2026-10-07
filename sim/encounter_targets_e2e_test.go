@@ -89,6 +89,11 @@ func TestNumTargetsFollowsTheTimeline(t *testing.T) {
 // a hard cap of four swings, so it exercises both halves of the bound.
 const whirlwindSpellID = 1680
 
+// whirlwindWeaponsPerCast is how many weapons a dual-wielding warrior's
+// Whirlwind strikes with: both, baseline, since Blizzard's 1 October 2026
+// notes (it was Raging Blows' off-hand clause before).
+const whirlwindWeaponsPerCast = 2
+
 // A capped AoE ability may swing at any one target at most once per cast.
 // The hit loop is sized once, at spell-registration time, but it walks
 // targets with NextTargetUnit, which wraps at the LIVE target count - so
@@ -114,9 +119,9 @@ func TestShrinkingTimelineDoesNotRepeatHitsOnOneTarget(t *testing.T) {
 	if casts == 0 {
 		t.Fatal("the fury warrior cast no Whirlwind; the test cannot say anything")
 	}
-	if swingsOnSurvivor > casts {
-		t.Errorf("Whirlwind swung %d times at the one surviving target over %d casts; a capped AoE may swing at a target at most once per cast",
-			swingsOnSurvivor, casts)
+	if swingsOnSurvivor > casts*whirlwindWeaponsPerCast {
+		t.Errorf("Whirlwind swung %d times at the one surviving target over %d casts; a capped AoE may swing at a target at most once per weapon per cast (%d)",
+			swingsOnSurvivor, casts, whirlwindWeaponsPerCast)
 	}
 }
 

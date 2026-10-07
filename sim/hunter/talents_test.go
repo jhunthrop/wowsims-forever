@@ -371,18 +371,32 @@ func TestResourcefulnessReducesTrapAndMeleeManaCost(t *testing.T) {
 	}
 }
 
-func TestResourcefulnessGrantsRegenOnEveryCritAtMaxRank(t *testing.T) {
-	// Rank 2's proc chance is exactly 100% (0.5*2), so this is
-	// deterministic: core.Simulation.Proc returns true unconditionally
-	// once p >= 1, with no RNG draw at all.
+// The regen clause is a 30/60% chance on a critical strike (the live
+// text; the engine read 50/100% before the hotfix), so rank 2 is no
+// longer a guaranteed proc.
+func TestResourcefulnessProcChancePerRank(t *testing.T) {
+	for rank, want := range map[int32]float64{1: 0.3, 2: 0.6} {
+		if got := resourcefulnessProcChance(rank); !floatsClose(got, want) {
+			t.Errorf("rank %d proc chance = %v, want %v", rank, got, want)
+		}
+	}
+}
+
+func TestResourcefulnessGrantsRegenOnCritsAtMaxRank(t *testing.T) {
 	sim, hunter, target := newRunningHunterForTalentTest(t, 60, "resourcefulness", 2, proto.Hunter_Options_PetNone, 25, nil)
 
 	crit := &core.SpellResult{Outcome: core.OutcomeLanded | core.OutcomeCrit, Target: target}
 	anySpell := &core.Spell{}
-	hunter.OnSpellHitDealt(sim, anySpell, crit)
-
+	procced := false
+	for i := 0; i < 100 && !procced; i++ {
+		hunter.OnSpellHitDealt(sim, anySpell, crit)
+		procced = hunter.PseudoStats.SpiritRegenRateCasting != 0
+	}
+	if !procced {
+		t.Fatal("Resourcefulness never procced over 100 critical strikes at a 60% chance")
+	}
 	if got, want := hunter.PseudoStats.SpiritRegenRateCasting, 0.5; !floatsClose(got, want) {
-		t.Errorf("SpiritRegenRateCasting after a guaranteed-proc crit = %f, want %f", got, want)
+		t.Errorf("SpiritRegenRateCasting after a proc = %f, want %f", got, want)
 	}
 }
 

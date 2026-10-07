@@ -72,13 +72,17 @@ func (paladin *Paladin) benediction() int32 {
 	return []int32{100, 97, 94, 91, 88, 85}[paladin.Talents.Benediction]
 }
 
+// redoubtBlockChancePerRank is Redoubt's block bonus a rank: 4%, 20% at
+// rank 5 (the live text; Blizzard's 1 October 2026 notes, "Redoubt
+// 4-20%").
+const redoubtBlockChancePerRank = 4.0
+
 func (paladin *Paladin) applyRedoubt() {
 	if paladin.Talents.Redoubt == 0 {
 		return
 	}
 
-	// Redoubt grants 6% block chance per point.
-	blockBonus := 6.0 * float64(paladin.Talents.Redoubt) * core.BlockRatingPerBlockChance
+	blockBonus := redoubtBlockChancePerRank * float64(paladin.Talents.Redoubt) * core.BlockRatingPerBlockChance
 
 	paladin.redoubtAura = paladin.RegisterAura(core.Aura{
 		Label:     "Redoubt",
@@ -321,13 +325,13 @@ var sanctifiedJudgementRefundPctPerRank = [4]float64{0, 0.20, 0.40, 0.60}
 
 // championOfTheLightSpellPowerPctPerRank: node 110882, Retribution tier 5
 // col 1: "Increases your spell damage and healing by up to
-// 33%/66%/100% of your Intellect." Not a clean multiple of rank 1 (33*3
-// = 99, not 100), so a lookup table rather than a per-rank formula.
+// 20%/40%/60% of your Intellect." (the live text and Blizzard's 1 October
+// 2026 notes; the earlier client table read 33%/66%/100%).
 // Modelled the same way Forever's Arcane Mind reaches Mage spellpower
 // (sim/mage/talents.go): a stat dependency from Intellect, here into
 // stats.SpellPower, which Spell.GetSchoolDamage (sim/core/spell_result.go)
 // adds to every non-physical school including Holy.
-var championOfTheLightSpellPowerPctPerRank = [4]float64{0, 0.33, 0.66, 1.00}
+var championOfTheLightSpellPowerPctPerRank = [4]float64{0, 0.20, 0.40, 0.60}
 
 // purifyingPowerCooldownPctPerRank: node 105327, Holy tier 2 col 2:
 // "Reduces the mana cost of your Cleanse and Purify spells by 10%/20%

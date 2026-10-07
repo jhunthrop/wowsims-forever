@@ -186,6 +186,8 @@ func TestInstrumentOfLawReducesHammerOfWrathCastTime(t *testing.T) {
 	}
 }
 
+// Champion of the Light is 20/40/60% of Intellect: the live text and
+// Blizzard's 1 October 2026 notes; the earlier table said 33/66/100%.
 func TestChampionOfTheLightAddsSpellPowerFromIntellect(t *testing.T) {
 	_, baseUnit := newTalentTestUnit(t, "")
 	_, talentedUnit := newTalentTestUnit(t, talentString(t, map[string]int{"champion_of_the_light": 3}))
@@ -195,10 +197,10 @@ func TestChampionOfTheLightAddsSpellPowerFromIntellect(t *testing.T) {
 		t.Fatalf("base Intellect = %v, want > 0 (test needs a nonzero base to observe the dependency)", baseIntellect)
 	}
 
-	wantSpellPower := baseUnit.GetStat(stats.SpellPower) + talentedUnit.GetStat(stats.Intellect)*1.00
+	wantSpellPower := baseUnit.GetStat(stats.SpellPower) + talentedUnit.GetStat(stats.Intellect)*0.60
 	gotSpellPower := talentedUnit.GetStat(stats.SpellPower)
 	if gotSpellPower < wantSpellPower-1e-6 || gotSpellPower > wantSpellPower+1e-6 {
-		t.Errorf("rank 3 Champion of the Light SpellPower = %v, want %v (100%% of %v Intellect)", gotSpellPower, wantSpellPower, talentedUnit.GetStat(stats.Intellect))
+		t.Errorf("rank 3 Champion of the Light SpellPower = %v, want %v (60%% of %v Intellect)", gotSpellPower, wantSpellPower, talentedUnit.GetStat(stats.Intellect))
 	}
 }
 

@@ -393,6 +393,11 @@ func (mage *Mage) applyMasterOfElements() {
 	})
 }
 
+// combustionCriticalStrikes is how many non-periodic Fire critical strikes
+// end Combustion: 3 per the live text and Blizzard's 1 October 2026 notes
+// ("Combustion 3 charges"), where the earlier client tables said 4.
+const combustionCriticalStrikes = 3
+
 func (mage *Mage) registerCombustionCD() {
 	if !mage.Talents.Combustion {
 		return
@@ -433,7 +438,7 @@ func (mage *Mage) registerCombustionCD() {
 			}
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !result.Landed() || numCrits >= 3 || !spell.SpellSchool.Matches(core.SpellSchoolFire) || !spell.Flags.Matches(SpellFlagMage) {
+			if !result.Landed() || numCrits >= combustionCriticalStrikes || !spell.SpellSchool.Matches(core.SpellSchoolFire) || !spell.Flags.Matches(SpellFlagMage) {
 				return
 			}
 
@@ -448,7 +453,7 @@ func (mage *Mage) registerCombustionCD() {
 
 			if result.DidCrit() {
 				numCrits++
-				if numCrits == 3 {
+				if numCrits == combustionCriticalStrikes {
 					aura.Deactivate(sim)
 				}
 			}

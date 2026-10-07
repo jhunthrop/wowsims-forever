@@ -85,12 +85,15 @@ func (priest *Priest) getDevouringPlagueConfig(rank int, cdTimer *core.Timer) co
 			NumberOfTicks:    ticks,
 			TickLength:       time.Second * 3,
 			BonusCoefficient: spellCoeff,
+			// Blizzard's 1 October 2026 notes: "Devouring Plague can
+			// crit". Each tick rolls the priest's spell crit.
+			CanCrit: true,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, baseDotDamage, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
+				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeMagicCritPerTick)
 			},
 		},
 

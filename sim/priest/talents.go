@@ -387,23 +387,19 @@ func (priest *Priest) applyShadowWeaving() {
 		return core.ShadowWeavingAura(unit, int(priest.Talents.ShadowWeaving))
 	})
 
-	procChance := 0.2 * float64(priest.Talents.ShadowWeaving)
-
 	priest.ShadowWeavingProc = priest.GetOrRegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: core.ShadowWeavingSpellIDs[int(priest.Talents.ShadowWeaving)]},
 		Flags:       core.SpellFlagNoOnCastComplete | core.SpellFlagNoMetrics,
 		SpellSchool: core.SpellSchoolShadow,
 
+		// Blizzard's 1 October 2026 notes: "Shadow Weaving can no longer
+		// fail to apply". The client text still gives a 33/67/100% proc
+		// chance by rank and the proc used to ride a magic-hit roll of its
+		// own; both are gone, so a landed Shadow spell always adds a stack
+		// at every rank. Callers invoke this only on a landed hit.
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcAndDealOutcome(sim, target, spell.OutcomeMagicHit)
-			if !result.Landed() {
-				return
-			}
-
-			if procChance == 1.0 || sim.RollWithLabel(0, 1, "ShadowWeaving") < procChance {
-				priest.ShadowWeavingAuras.Get(target).Activate(sim)
-				priest.ShadowWeavingAuras.Get(target).AddStack(sim)
-			}
+			priest.ShadowWeavingAuras.Get(target).Activate(sim)
+			priest.ShadowWeavingAuras.Get(target).AddStack(sim)
 		},
 	})
 }
@@ -463,6 +459,19 @@ func (priest *Priest) applyDarkness() {
 	})
 }
 
+// innerFocusCritRating is Inner Focus's critical bonus: 25%, "if it is a
+// non-periodic spell and capable of a critical effect".
+var innerFocusCritRating = 25 * float64(core.CritRatingPerCritChance)
+
+// innerFocusAddsCrit is whether Inner Focus's critical bonus reaches a
+// spell. Blizzard's 1 October 2026 notes ("Inner Focus's crit bonus no
+// longer applies to periodic effects") and the live text keep it off pure
+// damage-over-time spells and channels, whose critical strikes are
+// periodic - which matters now that Devouring Plague's ticks can crit.
+func innerFocusAddsCrit(spell *core.Spell) bool {
+	return !spell.Flags.Matches(core.SpellFlagPureDot | core.SpellFlagChanneled)
+}
+
 func (priest *Priest) registerInnerFocus() {
 	if !priest.Talents.InnerFocus {
 		return
@@ -478,7 +487,9 @@ func (priest *Priest) registerInnerFocus() {
 			for _, spell := range priest.Spellbook {
 				if spell.Flags.Matches(SpellFlagPriest) && spell.Cost != nil {
 					spell.Cost.Multiplier -= 100
-					spell.BonusCritRating += 25 * core.CritRatingPerCritChance
+					if innerFocusAddsCrit(spell) {
+						spell.BonusCritRating += innerFocusCritRating
+					}
 				}
 			}
 		},
@@ -486,7 +497,9 @@ func (priest *Priest) registerInnerFocus() {
 			for _, spell := range priest.Spellbook {
 				if spell.Flags.Matches(SpellFlagPriest) && spell.Cost != nil {
 					spell.Cost.Multiplier += 100
-					spell.BonusCritRating -= 25 * core.CritRatingPerCritChance
+					if innerFocusAddsCrit(spell) {
+						spell.BonusCritRating -= innerFocusCritRating
+					}
 				}
 			}
 		},
