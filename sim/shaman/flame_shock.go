@@ -10,10 +10,16 @@ import (
 const FlameShockRanks = 6
 
 var FlameShockSpellId = [FlameShockRanks + 1]int32{0, 8050, 8052, 8053, 10447, 10448, 29228}
-var FlameShockBaseDamage = [FlameShockRanks + 1]float64{0, 25, 51, 95, 164, 245, 292}
-var FlameShockBaseDotDamage = [FlameShockRanks + 1]float64{0, 28, 48, 96, 168, 256, 320}
-var FlameShockBaseSpellCoef = [FlameShockRanks + 1]float64{0, .134, .198, .214, .214, .214, .214}
-var FlameShockDotSpellCoef = [FlameShockRanks + 1]float64{0, .063, .093, .1, .1, .1, .1}
+
+// The direct hit's damage and coefficient, and the per-tick damage and
+// coefficient of the 12 s DoT's four 3 s ticks, are spellconst/shaman.json's
+// own: rank 6 is 166 at 0.214 up front and 44 at 0.1 a tick (176 over the
+// DoT), where the Classic numbers these replaced were 292 and 320 over the
+// DoT, with rank 1-2 coefficients below the client's 0.214.
+var FlameShockBaseDamage = [FlameShockRanks + 1]float64{0, 20, 33, 43, 82, 128, 166}
+var FlameShockTickDamage = [FlameShockRanks + 1]float64{0, 7, 8, 14, 21, 34, 44}
+var FlameShockBaseSpellCoef = [FlameShockRanks + 1]float64{0, .214, .214, .214, .214, .214, .214}
+var FlameShockDotSpellCoef = [FlameShockRanks + 1]float64{0, .1, .1, .1, .1, .1, .1}
 var FlameShockManaCost = [FlameShockRanks + 1]float64{0, 55, 95, 160, 250, 345, 410}
 var FlameShockLevel = [FlameShockRanks + 1]int{0, 10, 18, 28, 40, 52, 60}
 
@@ -33,7 +39,7 @@ func (shaman *Shaman) newFlameShockSpell(rank int, shockTimer *core.Timer) core.
 
 	spellId := FlameShockSpellId[rank]
 	baseDamage := FlameShockBaseDamage[rank]
-	baseDotDamage := FlameShockBaseDotDamage[rank] / float64(numTicks)
+	baseDotDamage := FlameShockTickDamage[rank]
 	baseSpellCoeff := FlameShockBaseSpellCoef[rank]
 	dotSpellCoeff := FlameShockDotSpellCoef[rank]
 	manaCost := FlameShockManaCost[rank]

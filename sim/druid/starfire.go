@@ -9,7 +9,12 @@ import (
 const StarfireRanks = 7
 
 var StarfireSpellId = [StarfireRanks + 1]int32{0, 2912, 8949, 8950, 8951, 9875, 9876, 25298}
-var StarfireBaseDamage = [StarfireRanks + 1][]float64{{0}, {95, 115}, {146, 177}, {212, 253}, {293, 348}, {378, 445}, {451, 531}, {496, 584}}
+
+// StarfireBaseDamage is spellconst/druid.json's flat per-rank "amount"
+// (rank 7 is 381 at coefficient 1.0, against the Classic roll of 496-584
+// it replaced); the coefficient was already the client's.
+var StarfireBaseDamage = [StarfireRanks + 1]float64{0, 81, 110, 144, 198, 266, 337, 381}
+var StarfireSpellCoeff = [StarfireRanks + 1]float64{0, 1, 1, 1, 1, 1, 1, 1}
 var StarfireManaCost = [StarfireRanks + 1]float64{0, 95, 135, 180, 230, 275, 315, 340}
 var StarfireLevel = [StarfireRanks + 1]int{0, 20, 26, 34, 42, 50, 58, 60}
 
@@ -28,8 +33,7 @@ func (druid *Druid) registerStarfireSpell() {
 
 func (druid *Druid) newStarfireSpellConfig(rank int) core.SpellConfig {
 	spellId := StarfireSpellId[rank]
-	baseDamageLow := StarfireBaseDamage[rank][0]
-	baseDamageHigh := StarfireBaseDamage[rank][1]
+	baseDamage := StarfireBaseDamage[rank]
 	manaCost := StarfireManaCost[rank]
 	level := StarfireLevel[rank]
 
@@ -48,7 +52,7 @@ func (druid *Druid) newStarfireSpellConfig(rank int) core.SpellConfig {
 		Rank:          rank,
 
 		ManaCost: core.ManaCostOptions{
-			FlatCost: manaCost * (1 - 0.03*float64(druid.Talents.Moonglow)),
+			FlatCost: manaCost,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -59,10 +63,9 @@ func (druid *Druid) newStarfireSpellConfig(rank int) core.SpellConfig {
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
-		BonusCoefficient: 1,
+		BonusCoefficient: StarfireSpellCoeff[rank],
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
 			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 		},
 	}

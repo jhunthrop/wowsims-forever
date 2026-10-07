@@ -10,7 +10,12 @@ import (
 const InsectSwarmRanks = 5
 
 var InsectSwarmSpellId = [InsectSwarmRanks + 1]int32{0, 5570, 24974, 24975, 24976, 24977}
-var InsectSwarmBaseDamage = [InsectSwarmRanks + 1]float64{0, 66, 138, 174, 264, 324}
+
+// InsectSwarmTickDamage is spellconst/druid.json's per-tick amount for the
+// 2 s ticks of its 12 s DoT (rank 5: 31 at 0.158 a tick, 186 in all,
+// against the Classic 324 this replaced).
+var InsectSwarmTickDamage = [InsectSwarmRanks + 1]float64{0, 8, 15, 20, 25, 31}
+var InsectSwarmTickSpellCoeff = [InsectSwarmRanks + 1]float64{0, .158, .158, .158, .158, .158}
 var InsectSwarmManaCost = [InsectSwarmRanks + 1]float64{0, 45, 85, 100, 140, 160}
 var InsectSwarmLevel = [InsectSwarmRanks + 1]int{0, 20, 30, 40, 50, 60}
 
@@ -37,9 +42,9 @@ func (druid *Druid) registerInsectSwarmSpell() {
 			tickLength := time.Second * 2
 
 			spellID := InsectSwarmSpellId[rank]
-			baseDamage := InsectSwarmBaseDamage[rank] / float64(numTicks)
+			baseDamage := InsectSwarmTickDamage[rank]
 			manaCost := InsectSwarmManaCost[rank]
-			spellCoef := .158
+			spellCoef := InsectSwarmTickSpellCoeff[rank]
 
 			druid.InsectSwarm[rank] = druid.RegisterSpell(Humanoid|Moonkin, core.SpellConfig{
 				SpellCode:      SpellCode_DruidInsectSwarm,

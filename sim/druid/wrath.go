@@ -9,8 +9,14 @@ import (
 const WrathRanks = 8
 
 var WrathSpellId = [WrathRanks + 1]int32{0, 5176, 5177, 5178, 5179, 5180, 6780, 8905, 9912}
-var WrathBaseDamage = [WrathRanks + 1][]float64{{0}, {13, 16}, {28, 33}, {48, 57}, {69, 79}, {108, 123}, {148, 167}, {198, 221}, {248, 277}}
-var WrathSpellCoeff = [WrathRanks + 1]float64{0, 0.123, 0.231, 0.443, 0.571, 0.571, 0.571, 0.571, 0.571}
+
+// WrathBaseDamage and WrathSpellCoeff are spellconst/druid.json's flat
+// per-rank "amount" and "sp_coefficient" for ids 5176-9912 (rank 8 is 91
+// at 0.571, where the Classic roll of 248-277 it replaced was nearly three
+// times that). sim/druid/spellconst_damage_test.go checks every rank
+// against the vendored client file.
+var WrathBaseDamage = [WrathRanks + 1]float64{0, 15, 23, 30, 38, 45, 54, 68, 91}
+var WrathSpellCoeff = [WrathRanks + 1]float64{0, 0.429, 0.486, 0.571, 0.571, 0.571, 0.571, 0.571, 0.571}
 
 // WrathManaCost was a stale pre-Forever table (roughly 40-75% above the
 // client's real per-rank cost at every rank); corrected against
@@ -38,8 +44,7 @@ func (druid *Druid) registerWrathSpell() {
 
 func (druid *Druid) newWrathSpellConfig(rank int) core.SpellConfig {
 	spellId := WrathSpellId[rank]
-	baseDamageLow := WrathBaseDamage[rank][0]
-	baseDamageHigh := WrathBaseDamage[rank][1]
+	baseDamage := WrathBaseDamage[rank]
 	spellCoeff := WrathSpellCoeff[rank]
 	manaCost := WrathManaCost[rank]
 	castTime := WrathCastTime[rank]
@@ -73,13 +78,11 @@ func (druid *Druid) newWrathSpellConfig(rank int) core.SpellConfig {
 		BonusCoefficient: spellCoeff,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 
 			// NG procs when the cast finishes
 			if result.DidCrit() && druid.NaturesGraceProcAura != nil {
 				druid.NaturesGraceProcAura.Activate(sim)
-				druid.NaturesGraceProcAura.SetStacks(sim, druid.NaturesGraceProcAura.MaxStacks)
 			}
 
 			spell.WaitTravelTime(sim, func(sim *core.Simulation) {

@@ -10,10 +10,15 @@ import (
 const MoonfireRanks = 10
 
 var MoonfireSpellId = [MoonfireRanks + 1]int32{0, 8921, 8924, 8925, 8926, 8927, 8928, 8929, 9833, 9834, 9835}
-var MoonfiresSpellCoeff = [MoonfireRanks + 1]float64{0, .06, .094, .128, .15, .15, .15, .15, .15, .15, .15}
-var MoonfiresSellDotCoeff = [MoonfireRanks + 1]float64{0, .052, .081, .111, .13, .13, .13, .13, .13, .13, .13}
-var MoonfireBaseDamage = [MoonfireRanks + 1][]float64{{0}, {9, 12}, {17, 21}, {30, 37}, {44, 53}, {70, 82}, {91, 108}, {117, 137}, {143, 168}, {172, 200}, {195, 228}}
-var MoonfireBaseDotDamage = [MoonfireRanks + 1]float64{0, 12, 32, 52, 80, 124, 164, 212, 264, 320, 384}
+
+// The direct hit's damage and coefficient and the DoT's per-tick damage and
+// coefficient are spellconst/druid.json's own (rank 10: 135 at 0.15 up
+// front, then 60 at 0.13 on each of four 3 s ticks, 240 in all, against the
+// Classic 195-228 and 384 these replaced).
+var MoonfireSpellCoeff = [MoonfireRanks + 1]float64{0, .15, .15, .15, .15, .15, .15, .15, .15, .15, .15}
+var MoonfireDotSpellCoeff = [MoonfireRanks + 1]float64{0, .13, .13, .13, .13, .13, .13, .13, .13, .13, .13}
+var MoonfireBaseDamage = [MoonfireRanks + 1]float64{0, 8, 13, 22, 32, 47, 59, 73, 91, 111, 135}
+var MoonfireTickDamage = [MoonfireRanks + 1]float64{0, 4, 6, 9, 13, 19, 23, 31, 39, 49, 60}
 var MoonfireDotTicks = [MoonfireRanks + 1]int32{0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4}
 var MoonfireManaCost = [MoonfireRanks + 1]float64{0, 25, 50, 75, 105, 150, 190, 235, 280, 325, 375}
 var MoonfireLevel = [MoonfireRanks + 1]int{0, 4, 10, 16, 22, 28, 34, 40, 46, 52, 58}
@@ -35,11 +40,10 @@ func (druid *Druid) getMoonfireBaseConfig(rank int) core.SpellConfig {
 	tickLength := time.Second * 3
 
 	spellId := MoonfireSpellId[rank]
-	spellCoeff := MoonfiresSpellCoeff[rank]
-	spellDotCoeff := MoonfiresSellDotCoeff[rank]
-	baseDamageLow := MoonfireBaseDamage[rank][0]
-	baseDamageHigh := MoonfireBaseDamage[rank][1]
-	baseDotDamage := (MoonfireBaseDotDamage[rank] / float64(ticks))
+	spellCoeff := MoonfireSpellCoeff[rank]
+	spellDotCoeff := MoonfireDotSpellCoeff[rank]
+	baseDamage := MoonfireBaseDamage[rank]
+	baseDotDamage := MoonfireTickDamage[rank]
 	manaCost := MoonfireManaCost[rank]
 	level := MoonfireLevel[rank]
 
@@ -86,7 +90,6 @@ func (druid *Druid) getMoonfireBaseConfig(rank int) core.SpellConfig {
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 
 			if result.Landed() {
