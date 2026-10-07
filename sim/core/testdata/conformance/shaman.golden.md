@@ -1195,3 +1195,52 @@ Each spell below is built with exactly one point in the single talent that grant
 | ElementalShaman (Water Shield talent) | 40 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 15000→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | mismatch | cooldown_ms 15000->0 | n/a | n/a | n/a |
 | ElementalShaman (Water Shield talent) | 50 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 15000→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | mismatch | cooldown_ms 15000->0 | n/a | n/a | n/a |
 | ElementalShaman (Water Shield talent) | 60 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 15000→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | mismatch | cooldown_ms 15000->0 | n/a | n/a | n/a |
+## Trainable abilities the engine does not register
+
+Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 42 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+
+| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
+|---|---|---|---|---|---|---|---|---|
+| Healing Rain (415236) | 0→1 | 2 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
+| Ancestral Guidance (409324) | 1→1 | 3 | Elemental Combat | skill_line_ability | 0 | 0 | 0 |  |
+| Decoy Totem (425874) | 1→1 | 1 | Enhancement | skill_line_ability | 0 | 0 | 20000 | cooldown |
+| Earth Shield (408514) | 1→50 | 3 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
+| Healing Wave (331) | 1→60 | 10 | Restoration | skill_line_ability | 620 mana | 3000 | 0 | power cost, cast time |
+| Lava Lash (408507) | 1→1 | 1 | Enhancement | skill_line_ability | 0 | 0 | 6000 | cooldown |
+| Molten Blast (425339) | 1→1 | 2 | Elemental Combat | skill_line_ability | 0 | 0 | 6000 | cooldown |
+| Rockbiter Weapon (8017) | 1→54 | 7 | Enhancement | skill_line_ability | 150 mana | 0 | 0 | power cost |
+| Spirit of the Alpha (408696) | 1→1 | 1 | Enhancement | skill_line_ability | 0 | 0 | 0 |  |
+| Earthbind Totem (2484) | 6→6 | 1 | Elemental Combat | skill_line_ability | 0 | 0 | 15000 | cooldown |
+| Stoneclaw Totem (5730) | 8→58 | 6 | Elemental Combat | skill_line_ability | 140 mana | 0 | 30000 | power cost, cooldown |
+| Flametongue Weapon (8024) | 10→56 | 6 | Enhancement | skill_line_ability | 155 mana | 0 | 0 | power cost |
+| Ancestral Spirit (2008) | 12→60 | 5 | Restoration | skill_line_ability | 0 | 10000 | 0 | cast time |
+| Fire Nova (408341) | 12→52 | 5 | Elemental Combat | skill_line_ability | 520 mana | 0 | 10000 | power cost, cooldown |
+| Purge (370) | 12→32 | 3 | Elemental Combat | skill_line_ability | 0 | 0 | 0 |  |
+| Cure Poison (526) | 16→16 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
+| Call of the Elements (66842) | 20→20 | 1 | Elemental Combat | skill_line_ability | 0 | 3000 | 0 | cast time |
+| Frostbrand Weapon (8033) | 20→58 | 5 | Enhancement | skill_line_ability | 160 mana | 0 | 0 | power cost |
+| Ghost Wolf (2645) | 20→20 | 1 | Enhancement | skill_line_ability | 100 mana | 3000 | 0 | power cost, cast time |
+| Lesser Healing Wave (8004) | 20→60 | 7 | Restoration | skill_line_ability | 380 mana | 1500 | 0 | power cost, cast time |
+| Cure Disease (2870) | 22→22 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
+| Poison Cleansing Totem (8166) | 22→22 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
+| Totemic Projection (437009) | 22→22 | 1 | Enhancement | skill_line_ability | 0 | 0 | 60000 | cooldown |
+| Water Breathing (131) | 22→22 | 1 | Enhancement | skill_line_ability | 50 mana | 0 | 0 | power cost |
+| Frost Resistance Totem (8181) | 24→54 | 3 | Enhancement | skill_line_ability | 180 mana | 0 | 0 | power cost |
+| Far Sight (6196) | 26→26 | 1 | Enhancement | skill_line_ability | 80 mana | 2000 | 0 | power cost, cast time |
+| Fire Resistance Totem (8184) | 28→58 | 3 | Enhancement | skill_line_ability | 180 mana | 0 | 0 | power cost |
+| Flametongue Totem (8227) | 28→58 | 4 | Enhancement | skill_line_ability | 275 mana | 0 | 0 | power cost |
+| Water Walking (546) | 28→28 | 1 | Enhancement | skill_line_ability | 95 mana | 0 | 0 | power cost |
+| Astral Recall (556) | 30→30 | 1 | Enhancement | skill_line_ability | 150 mana | 10000 | 900000 | power cost, cast time, cooldown |
+| Call of the Ancestors (66843) | 30→30 | 1 | Elemental Combat | skill_line_ability | 0 | 3000 | 0 | cast time |
+| Grounding Totem (8177) | 30→30 | 1 | Enhancement | skill_line_ability | 0 | 0 | 15000 | cooldown |
+| Nature Resistance Totem (10595) | 30→60 | 3 | Enhancement | skill_line_ability | 180 mana | 0 | 0 | power cost |
+| Reincarnation (20608) | 30→30 | 2 | Restoration | skill_line_ability | 0 | 0 | 3600000 | cooldown |
+| Windfury Weapon (8232) | 30→60 | 5 | Enhancement | skill_line_ability | 165 mana | 0 | 0 | power cost |
+| Sentry Totem (6495) | 34→34 | 1 | Enhancement | skill_line_ability | 65 mana | 0 | 0 | power cost |
+| Disease Cleansing Totem (8170) | 38→38 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
+| Call of the Spirits (66844) | 40→40 | 1 | Elemental Combat | skill_line_ability | 0 | 3000 | 0 | cast time |
+| Chain Heal (1064) | 40→54 | 3 | Restoration | skill_line_ability | 405 mana | 2500 | 0 | power cost, cast time |
+| Mana Tide Totem (16190) | 40→58 | 3 | Restoration | skill_line_ability | 60 mana | 0 | 300000 | power cost, cooldown |
+| Riptide (408521) | 40→60 | 3 | Restoration | skill_line_ability | 385 mana | 0 | 6000 | power cost, cooldown |
+| Fire Nova Totem (27623) | 52→52 | 1 | n/a | class_spell | 640 mana | 0 | 15000 | power cost, cooldown |
+

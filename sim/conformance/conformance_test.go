@@ -32,8 +32,9 @@ func TestConformance(t *testing.T) {
 			if !ok {
 				return
 			}
+			trainables := loadTrainables(t, classSlug)
 
-			content, buildErrors := classReport(classSlug, clientClass, presets)
+			content, buildErrors := classReport(classSlug, clientClass, trainables, presets)
 
 			if update {
 				if err := writeGolden(classSlug, content); err != nil {
@@ -76,8 +77,10 @@ func TestConformanceGoldenIsDeterministic(t *testing.T) {
 				return
 			}
 
-			first, _ := classReport(classSlug, clientClass, presets)
-			second, _ := classReport(classSlug, clientClass, presets)
+			trainables := loadTrainables(t, classSlug)
+
+			first, _ := classReport(classSlug, clientClass, trainables, presets)
+			second, _ := classReport(classSlug, clientClass, trainables, presets)
 			if first != second {
 				t.Errorf("%s: classReport produced different output across two runs in the same process; sortRows is not fully deterministic", classSlug)
 			}
@@ -126,28 +129,44 @@ func loadClientClass(t *testing.T, classSlug string) (spellconst.Class, bool) {
 	return clientClass, true
 }
 
-// TestConformanceSummaryDamageBlock keeps SUMMARY.md's generated damage
-// block equal to the counts the goldens' own rows give, regenerating it
-// under FOREVER_UPDATE_GOLDEN=1 like the goldens.
-func TestConformanceSummaryDamageBlock(t *testing.T) {
+// loadTrainables loads classSlug's trainables file. Unlike the client
+// constants it is never skipped: the golden's trainables section needs it,
+// so an absent or malformed file fails the test.
+func loadTrainables(t *testing.T, classSlug string) ClassTrainables {
+	t.Helper()
+	trainables, err := loadClassTrainables(trainablesPath(classSlug))
+	if err != nil {
+		t.Fatalf("%v (copy data/builds/<build>/trainables/%s.json from the forever repo)", err, classSlug)
+	}
+	return trainables
+}
+
+// TestConformanceSummaryBlocks keeps SUMMARY.md's generated blocks (damage
+// counts, trainable-ability gaps) equal to what the goldens' own rows give,
+// regenerating them under FOREVER_UPDATE_GOLDEN=1 like the goldens.
+func TestConformanceSummaryBlocks(t *testing.T) {
 	var slugs []string
 	counts := map[string]DamageCounts{}
+	gaps := map[string]TrainableGaps{}
 	for _, classSlug := range presetOrder() {
 		clientClass, ok := loadClientClass(t, classSlug)
 		if !ok {
 			return
 		}
-		rows, _, _ := collectRows(clientClass, presetsByClass()[classSlug])
+		presets := presetsByClass()[classSlug]
+		rows, _, _ := collectRows(clientClass, presets)
 		gated, _ := collectTalentGatedRows(clientClass, classSlug)
 		slugs = append(slugs, classSlug)
 		counts[classSlug] = countDamage(append(rows, gated...))
+		gaps[classSlug], _ = trainableGaps(loadTrainables(t, classSlug), presets, gated)
 	}
 
 	current, err := readSummary()
 	if err != nil {
 		t.Fatalf("reading SUMMARY.md: %v", err)
 	}
-	want := spliceDamageBlock(current, renderDamageBlock(slugs, counts))
+	want := spliceBlock(current, damageBlockBegin, damageBlockEnd, renderDamageBlock(slugs, counts))
+	want = spliceBlock(want, trainablesBlockBegin, trainablesBlockEnd, renderTrainablesBlock(slugs, gaps))
 	if os.Getenv("FOREVER_UPDATE_GOLDEN") == "1" {
 		if err := writeSummary(want); err != nil {
 			t.Fatalf("writing SUMMARY.md: %v", err)
@@ -155,6 +174,6 @@ func TestConformanceSummaryDamageBlock(t *testing.T) {
 		return
 	}
 	if current != want {
-		t.Errorf("SUMMARY.md's damage block is stale; run FOREVER_UPDATE_GOLDEN=1 go test --tags=with_db ./sim/conformance/ and review the diff")
+		t.Errorf("SUMMARY.md's generated blocks are stale; run FOREVER_UPDATE_GOLDEN=1 go test --tags=with_db ./sim/conformance/ and review the diff")
 	}
 }

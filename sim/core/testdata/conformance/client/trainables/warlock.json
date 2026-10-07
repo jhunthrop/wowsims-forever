@@ -1,0 +1,2746 @@
+{
+  "build": "1.60.1.70009",
+  "class_slug": "warlock",
+  "trainables": [
+    {
+      "name": "Aftermath",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18119,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Agonizing Flames",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17927,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Amplify Curse",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 180000,
+      "ranks": [
+        {
+          "id": 18288,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Apocalypse",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18096,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Bane",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17788,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Bane of Agony",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 215,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 980,
+          "rank": 1,
+          "level": 8
+        },
+        {
+          "id": 1014,
+          "rank": 2,
+          "level": 18
+        },
+        {
+          "id": 6217,
+          "rank": 3,
+          "level": 28
+        },
+        {
+          "id": 11711,
+          "rank": 4,
+          "level": 38
+        },
+        {
+          "id": 11712,
+          "rank": 5,
+          "level": 48
+        },
+        {
+          "id": 11713,
+          "rank": 6,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Bane of Doom",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 300,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 60000,
+      "ranks": [
+        {
+          "id": 603,
+          "rank": 0,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Bane of Doom Effect",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18662,
+          "rank": 0,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Bane of Havoc",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1225228,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Banish",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 200,
+      "cost_type": 0,
+      "cast_time_ms": 1500,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 710,
+          "rank": 1,
+          "level": 28
+        },
+        {
+          "id": 457569,
+          "rank": 1,
+          "level": 28
+        },
+        {
+          "id": 465352,
+          "rank": 2,
+          "level": 28
+        },
+        {
+          "id": 18647,
+          "rank": 2,
+          "level": 48
+        }
+      ]
+    },
+    {
+      "name": "Cataclysm",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17778,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Chaos Bolt",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 2500,
+      "cooldown_ms": 12000,
+      "ranks": [
+        {
+          "id": 403629,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Conflagrate",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 255,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 10000,
+      "ranks": [
+        {
+          "id": 1293817,
+          "rank": 1,
+          "level": 25
+        },
+        {
+          "id": 1293818,
+          "rank": 2,
+          "level": 32
+        },
+        {
+          "id": 17962,
+          "rank": 3,
+          "level": 40
+        },
+        {
+          "id": 18930,
+          "rank": 4,
+          "level": 48
+        },
+        {
+          "id": 18931,
+          "rank": 5,
+          "level": 54
+        },
+        {
+          "id": 18932,
+          "rank": 6,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Corruption",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 340,
+      "cost_type": 0,
+      "cast_time_ms": 2000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 172,
+          "rank": 1,
+          "level": 4
+        },
+        {
+          "id": 6222,
+          "rank": 2,
+          "level": 14
+        },
+        {
+          "id": 6223,
+          "rank": 3,
+          "level": 24
+        },
+        {
+          "id": 7648,
+          "rank": 4,
+          "level": 34
+        },
+        {
+          "id": 11671,
+          "rank": 5,
+          "level": 44
+        },
+        {
+          "id": 11672,
+          "rank": 6,
+          "level": 54
+        },
+        {
+          "id": 25311,
+          "rank": 7,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Create Firestone",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 1100,
+      "cost_type": 0,
+      "cast_time_ms": 3000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 6366,
+          "rank": 1,
+          "level": 28
+        },
+        {
+          "id": 17951,
+          "rank": 2,
+          "level": 36
+        },
+        {
+          "id": 17952,
+          "rank": 3,
+          "level": 46
+        },
+        {
+          "id": 17953,
+          "rank": 4,
+          "level": 56
+        }
+      ]
+    },
+    {
+      "name": "Create Healthstone",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 1120,
+      "cost_type": 0,
+      "cast_time_ms": 3000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 6201,
+          "rank": 1,
+          "level": 10
+        },
+        {
+          "id": 6202,
+          "rank": 2,
+          "level": 22
+        },
+        {
+          "id": 5699,
+          "rank": 3,
+          "level": 34
+        },
+        {
+          "id": 11729,
+          "rank": 4,
+          "level": 46
+        },
+        {
+          "id": 11730,
+          "rank": 5,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Create Soulstone",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 3000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 693,
+          "rank": 1,
+          "level": 18
+        },
+        {
+          "id": 20752,
+          "rank": 2,
+          "level": 30
+        },
+        {
+          "id": 20755,
+          "rank": 3,
+          "level": 40
+        },
+        {
+          "id": 20756,
+          "rank": 4,
+          "level": 50
+        },
+        {
+          "id": 20757,
+          "rank": 5,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Create Spellstone",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 1000,
+      "cost_type": 0,
+      "cast_time_ms": 5000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 2362,
+          "rank": 1,
+          "level": 36
+        },
+        {
+          "id": 17727,
+          "rank": 2,
+          "level": 48
+        },
+        {
+          "id": 17728,
+          "rank": 3,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Curse of Exhaustion",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18223,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Curse of Idiocy",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 110,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1010,
+          "rank": 1,
+          "level": 38
+        }
+      ]
+    },
+    {
+      "name": "Curse of Recklessness",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 115,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 704,
+          "rank": 1,
+          "level": 14
+        },
+        {
+          "id": 7658,
+          "rank": 2,
+          "level": 28
+        },
+        {
+          "id": 7659,
+          "rank": 3,
+          "level": 42
+        },
+        {
+          "id": 11717,
+          "rank": 4,
+          "level": 56
+        }
+      ]
+    },
+    {
+      "name": "Curse of Tongues",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 110,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1714,
+          "rank": 1,
+          "level": 26
+        },
+        {
+          "id": 11719,
+          "rank": 2,
+          "level": 50
+        }
+      ]
+    },
+    {
+      "name": "Curse of Weakness",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 175,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 702,
+          "rank": 1,
+          "level": 4
+        },
+        {
+          "id": 1108,
+          "rank": 2,
+          "level": 12
+        },
+        {
+          "id": 6205,
+          "rank": 3,
+          "level": 22
+        },
+        {
+          "id": 7646,
+          "rank": 4,
+          "level": 32
+        },
+        {
+          "id": 11707,
+          "rank": 5,
+          "level": 42
+        },
+        {
+          "id": 11708,
+          "rank": 6,
+          "level": 52
+        }
+      ]
+    },
+    {
+      "name": "Curse of the Elements",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 200,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 440892,
+          "rank": 1,
+          "level": 20
+        },
+        {
+          "id": 1311676,
+          "rank": 2,
+          "level": 30
+        },
+        {
+          "id": 1311677,
+          "rank": 3,
+          "level": 40
+        },
+        {
+          "id": 1311680,
+          "rank": 4,
+          "level": 50
+        }
+      ]
+    },
+    {
+      "name": "Dance of the Wicked",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 412798,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Death Coil",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 600,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 120000,
+      "ranks": [
+        {
+          "id": 6789,
+          "rank": 1,
+          "level": 42
+        },
+        {
+          "id": 17925,
+          "rank": 2,
+          "level": 50
+        },
+        {
+          "id": 17926,
+          "rank": 3,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Demon Armor",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 1580,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 706,
+          "rank": 1,
+          "level": 20
+        },
+        {
+          "id": 1086,
+          "rank": 2,
+          "level": 30
+        },
+        {
+          "id": 11733,
+          "rank": 3,
+          "level": 40
+        },
+        {
+          "id": 11734,
+          "rank": 4,
+          "level": 50
+        },
+        {
+          "id": 11735,
+          "rank": 5,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Demon Charge",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 15000,
+      "ranks": [
+        {
+          "id": 412788,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Demon Skin",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 120,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 687,
+          "rank": 1,
+          "level": 1
+        },
+        {
+          "id": 696,
+          "rank": 2,
+          "level": 10
+        }
+      ]
+    },
+    {
+      "name": "Demonic Grace",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 20000,
+      "ranks": [
+        {
+          "id": 425463,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Demonic Howl",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 600000,
+      "ranks": [
+        {
+          "id": 412789,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Destructive Reach",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17917,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Detect Invisibility",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 140,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 132,
+          "rank": 1,
+          "level": 26
+        },
+        {
+          "id": 2970,
+          "rank": 2,
+          "level": 38
+        },
+        {
+          "id": 11743,
+          "rank": 3,
+          "level": 50
+        }
+      ]
+    },
+    {
+      "name": "Devastation",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18130,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Dispel Magic",
+      "skill_line": "",
+      "source": "class_spell",
+      "active": true,
+      "cost": 120,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 19476,
+          "rank": 1,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Drain Life",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 600,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 15000,
+      "ranks": [
+        {
+          "id": 689,
+          "rank": 1,
+          "level": 14
+        },
+        {
+          "id": 403677,
+          "rank": 1,
+          "level": 14
+        },
+        {
+          "id": 699,
+          "rank": 2,
+          "level": 22
+        },
+        {
+          "id": 403685,
+          "rank": 2,
+          "level": 22
+        },
+        {
+          "id": 709,
+          "rank": 3,
+          "level": 30
+        },
+        {
+          "id": 403686,
+          "rank": 3,
+          "level": 30
+        },
+        {
+          "id": 7651,
+          "rank": 4,
+          "level": 38
+        },
+        {
+          "id": 403687,
+          "rank": 4,
+          "level": 38
+        },
+        {
+          "id": 11699,
+          "rank": 5,
+          "level": 46
+        },
+        {
+          "id": 403688,
+          "rank": 5,
+          "level": 46
+        },
+        {
+          "id": 11700,
+          "rank": 6,
+          "level": 54
+        },
+        {
+          "id": 403689,
+          "rank": 6,
+          "level": 54
+        }
+      ]
+    },
+    {
+      "name": "Drain Mana",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 310,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5138,
+          "rank": 1,
+          "level": 24
+        },
+        {
+          "id": 6226,
+          "rank": 2,
+          "level": 34
+        },
+        {
+          "id": 11703,
+          "rank": 3,
+          "level": 44
+        },
+        {
+          "id": 11704,
+          "rank": 4,
+          "level": 54
+        }
+      ]
+    },
+    {
+      "name": "Drain Soul",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 290,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1120,
+          "rank": 1,
+          "level": 10
+        },
+        {
+          "id": 8288,
+          "rank": 2,
+          "level": 24
+        },
+        {
+          "id": 8289,
+          "rank": 3,
+          "level": 38
+        },
+        {
+          "id": 11675,
+          "rank": 4,
+          "level": 52
+        }
+      ]
+    },
+    {
+      "name": "Emberstorm",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17954,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Eye of Kilrogg",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 100,
+      "cost_type": 0,
+      "cast_time_ms": 5000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 126,
+          "rank": 0,
+          "level": 22
+        }
+      ]
+    },
+    {
+      "name": "Fear",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 1500,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5782,
+          "rank": 1,
+          "level": 8
+        },
+        {
+          "id": 6213,
+          "rank": 2,
+          "level": 32
+        },
+        {
+          "id": 6215,
+          "rank": 3,
+          "level": 56
+        }
+      ]
+    },
+    {
+      "name": "Fel Armor",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 403619,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Fel Concentration",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17783,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Fel Domination",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 300000,
+      "ranks": [
+        {
+          "id": 18708,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Fel Vitality",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18731,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Grim Reach",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18218,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Grimoire of Synergy",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 426301,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Haunt",
+      "skill_line": "",
+      "source": "class_spell",
+      "active": true,
+      "cost": 240,
+      "cost_type": 0,
+      "cast_time_ms": 1500,
+      "cooldown_ms": 15000,
+      "ranks": [
+        {
+          "id": 403501,
+          "rank": 1,
+          "level": 40
+        },
+        {
+          "id": 1293693,
+          "rank": 2,
+          "level": 50
+        },
+        {
+          "id": 1293694,
+          "rank": 3,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Health Funnel",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 79,
+      "cost_type": -2,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 755,
+          "rank": 1,
+          "level": 12
+        },
+        {
+          "id": 3698,
+          "rank": 2,
+          "level": 20
+        },
+        {
+          "id": 3699,
+          "rank": 3,
+          "level": 28
+        },
+        {
+          "id": 3700,
+          "rank": 4,
+          "level": 36
+        },
+        {
+          "id": 11693,
+          "rank": 5,
+          "level": 44
+        },
+        {
+          "id": 11694,
+          "rank": 6,
+          "level": 52
+        },
+        {
+          "id": 11695,
+          "rank": 7,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Hellfire",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 1300,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1949,
+          "rank": 1,
+          "level": 30
+        },
+        {
+          "id": 11683,
+          "rank": 2,
+          "level": 42
+        },
+        {
+          "id": 11684,
+          "rank": 3,
+          "level": 54
+        }
+      ]
+    },
+    {
+      "name": "Hellfire Effect",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5857,
+          "rank": 1,
+          "level": 30
+        },
+        {
+          "id": 11681,
+          "rank": 2,
+          "level": 42
+        },
+        {
+          "id": 11682,
+          "rank": 3,
+          "level": 54
+        }
+      ]
+    },
+    {
+      "name": "Howl of Terror",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 200,
+      "cost_type": 0,
+      "cast_time_ms": 2000,
+      "cooldown_ms": 40000,
+      "ranks": [
+        {
+          "id": 5484,
+          "rank": 1,
+          "level": 40
+        },
+        {
+          "id": 17928,
+          "rank": 2,
+          "level": 54
+        }
+      ]
+    },
+    {
+      "name": "Immolate",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 380,
+      "cost_type": 0,
+      "cast_time_ms": 2000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 348,
+          "rank": 1,
+          "level": 1
+        },
+        {
+          "id": 707,
+          "rank": 2,
+          "level": 10
+        },
+        {
+          "id": 1094,
+          "rank": 3,
+          "level": 20
+        },
+        {
+          "id": 2941,
+          "rank": 4,
+          "level": 30
+        },
+        {
+          "id": 11665,
+          "rank": 5,
+          "level": 40
+        },
+        {
+          "id": 11667,
+          "rank": 6,
+          "level": 50
+        },
+        {
+          "id": 11668,
+          "rank": 7,
+          "level": 60
+        },
+        {
+          "id": 11668,
+          "rank": 7,
+          "level": 60
+        },
+        {
+          "id": 25309,
+          "rank": 8,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Improved Bane of Agony",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18827,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Corruption",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17810,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Curse of Exhaustion",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18310,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 18311,
+          "rank": 2,
+          "level": 0
+        },
+        {
+          "id": 18312,
+          "rank": 3,
+          "level": 0
+        },
+        {
+          "id": 18313,
+          "rank": 4,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Curse of Weakness",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18179,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 18180,
+          "rank": 2,
+          "level": 0
+        },
+        {
+          "id": 18181,
+          "rank": 3,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Firebolt",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18126,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 18127,
+          "rank": 2,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Firestone",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18767,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 18768,
+          "rank": 2,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Health Funnel",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18703,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Healthstone",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18692,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 18693,
+          "rank": 2,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Immolate",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17815,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 17833,
+          "rank": 2,
+          "level": 0
+        },
+        {
+          "id": 17834,
+          "rank": 3,
+          "level": 0
+        },
+        {
+          "id": 17835,
+          "rank": 4,
+          "level": 0
+        },
+        {
+          "id": 17836,
+          "rank": 5,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Imp",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18694,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Lash of Pain",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18128,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 18129,
+          "rank": 2,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Life Tap",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18182,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Sayaad",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18754,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Shadow Bolt",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17793,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Spellstone",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18774,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 18775,
+          "rank": 2,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Subjugate Demon",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18821,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 18822,
+          "rank": 2,
+          "level": 0
+        },
+        {
+          "id": 18823,
+          "rank": 3,
+          "level": 0
+        },
+        {
+          "id": 18824,
+          "rank": 4,
+          "level": 0
+        },
+        {
+          "id": 18825,
+          "rank": 5,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Voidwalker",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18705,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Incinerate",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 325,
+      "cost_type": 0,
+      "cast_time_ms": 2500,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 412758,
+          "rank": 1,
+          "level": 40
+        },
+        {
+          "id": 1293812,
+          "rank": 2,
+          "level": 50
+        },
+        {
+          "id": 1293813,
+          "rank": 3,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Inferno",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 2000,
+      "cooldown_ms": 3600000,
+      "ranks": [
+        {
+          "id": 1122,
+          "rank": 0,
+          "level": 50
+        }
+      ]
+    },
+    {
+      "name": "Intensity",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18135,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Invocation",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 426241,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 426245,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 426246,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 426247,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 426331,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Life Tap",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": -2,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1454,
+          "rank": 1,
+          "level": 6
+        },
+        {
+          "id": 1455,
+          "rank": 2,
+          "level": 16
+        },
+        {
+          "id": 1456,
+          "rank": 3,
+          "level": 26
+        },
+        {
+          "id": 11687,
+          "rank": 4,
+          "level": 36
+        },
+        {
+          "id": 11688,
+          "rank": 5,
+          "level": 46
+        },
+        {
+          "id": 11689,
+          "rank": 6,
+          "level": 56
+        }
+      ]
+    },
+    {
+      "name": "Master Demonologist",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 23759,
+          "rank": 0,
+          "level": 0
+        },
+        {
+          "id": 23760,
+          "rank": 0,
+          "level": 0
+        },
+        {
+          "id": 23761,
+          "rank": 0,
+          "level": 0
+        },
+        {
+          "id": 23762,
+          "rank": 0,
+          "level": 0
+        },
+        {
+          "id": 23785,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Master Summoner",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18709,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Menace",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 10000,
+      "ranks": [
+        {
+          "id": 403828,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Metamorphosis",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 403789,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Nightfall",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18094,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Portal of Summoning",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 120000,
+      "ranks": [
+        {
+          "id": 437169,
+          "rank": 0,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Rain of Fire",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 850,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5740,
+          "rank": 1,
+          "level": 20
+        },
+        {
+          "id": 460692,
+          "rank": 1,
+          "level": 20
+        },
+        {
+          "id": 19474,
+          "rank": 1,
+          "level": 60
+        },
+        {
+          "id": 6219,
+          "rank": 2,
+          "level": 34
+        },
+        {
+          "id": 460698,
+          "rank": 2,
+          "level": 34
+        },
+        {
+          "id": 11677,
+          "rank": 3,
+          "level": 46
+        },
+        {
+          "id": 460699,
+          "rank": 3,
+          "level": 46
+        },
+        {
+          "id": 11678,
+          "rank": 4,
+          "level": 58
+        },
+        {
+          "id": 460700,
+          "rank": 4,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Ritual of Doom",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 10000,
+      "cooldown_ms": 3600000,
+      "ranks": [
+        {
+          "id": 18540,
+          "rank": 0,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Ritual of Doom Effect",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 10000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18541,
+          "rank": 0,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Ritual of Summoning",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 300,
+      "cost_type": 0,
+      "cast_time_ms": 5000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 698,
+          "rank": 0,
+          "level": 20
+        }
+      ]
+    },
+    {
+      "name": "Ruin",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17959,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Searing Pain",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 168,
+      "cost_type": 0,
+      "cast_time_ms": 1500,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5676,
+          "rank": 1,
+          "level": 18
+        },
+        {
+          "id": 17919,
+          "rank": 2,
+          "level": 26
+        },
+        {
+          "id": 17920,
+          "rank": 3,
+          "level": 34
+        },
+        {
+          "id": 17921,
+          "rank": 4,
+          "level": 42
+        },
+        {
+          "id": 17922,
+          "rank": 5,
+          "level": 50
+        },
+        {
+          "id": 17923,
+          "rank": 6,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Sense Demons",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5500,
+          "rank": 0,
+          "level": 24
+        }
+      ]
+    },
+    {
+      "name": "Shadow Bolt",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 380,
+      "cost_type": 0,
+      "cast_time_ms": 3000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 686,
+          "rank": 1,
+          "level": 1
+        },
+        {
+          "id": 695,
+          "rank": 2,
+          "level": 6
+        },
+        {
+          "id": 705,
+          "rank": 3,
+          "level": 12
+        },
+        {
+          "id": 1088,
+          "rank": 4,
+          "level": 20
+        },
+        {
+          "id": 1106,
+          "rank": 5,
+          "level": 28
+        },
+        {
+          "id": 7641,
+          "rank": 6,
+          "level": 36
+        },
+        {
+          "id": 11659,
+          "rank": 7,
+          "level": 44
+        },
+        {
+          "id": 11660,
+          "rank": 8,
+          "level": 52
+        },
+        {
+          "id": 11661,
+          "rank": 9,
+          "level": 60
+        },
+        {
+          "id": 25307,
+          "rank": 10,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Shadow Cleave",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 190,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 6000,
+      "ranks": [
+        {
+          "id": 403835,
+          "rank": 1,
+          "level": 1
+        },
+        {
+          "id": 403839,
+          "rank": 2,
+          "level": 6
+        },
+        {
+          "id": 403840,
+          "rank": 3,
+          "level": 12
+        },
+        {
+          "id": 403841,
+          "rank": 4,
+          "level": 20
+        },
+        {
+          "id": 403842,
+          "rank": 5,
+          "level": 28
+        },
+        {
+          "id": 403843,
+          "rank": 6,
+          "level": 36
+        },
+        {
+          "id": 403844,
+          "rank": 7,
+          "level": 44
+        },
+        {
+          "id": 403848,
+          "rank": 8,
+          "level": 52
+        },
+        {
+          "id": 403851,
+          "rank": 9,
+          "level": 60
+        },
+        {
+          "id": 403852,
+          "rank": 10,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Shadow Mastery",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18271,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Shadow Ward",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 320,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 30000,
+      "ranks": [
+        {
+          "id": 6229,
+          "rank": 1,
+          "level": 32
+        },
+        {
+          "id": 11739,
+          "rank": 2,
+          "level": 42
+        },
+        {
+          "id": 11740,
+          "rank": 3,
+          "level": 52
+        },
+        {
+          "id": 28610,
+          "rank": 4,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Shadowburn",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 365,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 15000,
+      "ranks": [
+        {
+          "id": 17877,
+          "rank": 1,
+          "level": 20
+        },
+        {
+          "id": 18867,
+          "rank": 2,
+          "level": 24
+        },
+        {
+          "id": 18868,
+          "rank": 3,
+          "level": 32
+        },
+        {
+          "id": 18869,
+          "rank": 4,
+          "level": 40
+        },
+        {
+          "id": 18870,
+          "rank": 5,
+          "level": 48
+        },
+        {
+          "id": 18871,
+          "rank": 6,
+          "level": 56
+        }
+      ]
+    },
+    {
+      "name": "Shadowflame",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 426320,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 426325,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Siphon Life",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 365,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18265,
+          "rank": 1,
+          "level": 30
+        },
+        {
+          "id": 18879,
+          "rank": 2,
+          "level": 38
+        },
+        {
+          "id": 18880,
+          "rank": 3,
+          "level": 48
+        },
+        {
+          "id": 18881,
+          "rank": 4,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Soul Fire",
+      "skill_line": "Destruction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 335,
+      "cost_type": 0,
+      "cast_time_ms": 6000,
+      "cooldown_ms": 60000,
+      "ranks": [
+        {
+          "id": 6353,
+          "rank": 1,
+          "level": 48
+        },
+        {
+          "id": 17924,
+          "rank": 2,
+          "level": 56
+        }
+      ]
+    },
+    {
+      "name": "Soul Harvesting",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 437032,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Soul Siphon",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17804,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Subjugate Demon",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 700,
+      "cost_type": 0,
+      "cast_time_ms": 3000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1098,
+          "rank": 1,
+          "level": 30
+        },
+        {
+          "id": 11725,
+          "rank": 2,
+          "level": 44
+        },
+        {
+          "id": 11726,
+          "rank": 3,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Summon Felhunter",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 10000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 691,
+          "rank": 0,
+          "level": 30
+        }
+      ]
+    },
+    {
+      "name": "Summon Imp",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 10000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 688,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Summon Incubus",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 10000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 713,
+          "rank": 0,
+          "level": 20
+        }
+      ]
+    },
+    {
+      "name": "Summon Succubus",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 10000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 712,
+          "rank": 0,
+          "level": 20
+        }
+      ]
+    },
+    {
+      "name": "Summon Voidwalker",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 10000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 697,
+          "rank": 0,
+          "level": 10
+        }
+      ]
+    },
+    {
+      "name": "Suppression",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18174,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Unending Breath",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 50,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5697,
+          "rank": 0,
+          "level": 16
+        }
+      ]
+    },
+    {
+      "name": "Unholy Power",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18769,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Unstable Affliction",
+      "skill_line": "",
+      "source": "class_spell",
+      "active": true,
+      "cost": 265,
+      "cost_type": 0,
+      "cast_time_ms": 1500,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 427717,
+          "rank": 1,
+          "level": 40
+        },
+        {
+          "id": 1242971,
+          "rank": 2,
+          "level": 60
+        },
+        {
+          "id": 1242972,
+          "rank": 3,
+          "level": 50
+        }
+      ]
+    },
+    {
+      "name": "Vengeance",
+      "skill_line": "Demonology",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 180000,
+      "ranks": [
+        {
+          "id": 426195,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Wrack",
+      "skill_line": "Affliction",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 200,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1316697,
+          "rank": 1,
+          "level": 40
+        }
+      ]
+    }
+  ]
+}

@@ -623,3 +623,51 @@ Each spell below is built with exactly one point in the single talent that grant
 | SMRuinWarlock (Wrack talent) | 40 | Wrack | 0 | 1316697 | 200.00→200.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 6000→6000 | match |  | 36.00-36.00→36.00-36.00 | 0.143→0.143 | declared, matches |
 | SMRuinWarlock (Wrack talent) | 50 | Wrack | 0 | 1316697 | 200.00→200.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 6000→6000 | match |  | 36.00-36.00→36.00-36.00 | 0.143→0.143 | declared, matches |
 | SMRuinWarlock (Wrack talent) | 60 | Wrack | 0 | 1316697 | 200.00→200.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 6000→6000 | match |  | 36.00-36.00→36.00-36.00 | 0.143→0.143 | declared, matches |
+## Trainable abilities the engine does not register
+
+Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 41 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+
+| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
+|---|---|---|---|---|---|---|---|---|
+| Curse of Exhaustion (18223) | 0→0 | 1 | Affliction | skill_line_ability | 0 | 0 | 0 |  |
+| Demonic Grace (425463) | 0→0 | 1 | Demonology | skill_line_ability | 0 | 0 | 20000 | cooldown |
+| Chaos Bolt (403629) | 1→1 | 1 | Destruction | skill_line_ability | 0 | 2500 | 12000 | cast time, cooldown |
+| Demon Charge (412788) | 1→1 | 1 | Demonology | skill_line_ability | 0 | 0 | 15000 | cooldown |
+| Demon Skin (687) | 1→10 | 2 | Demonology | skill_line_ability | 120 mana | 0 | 0 | power cost |
+| Demonic Howl (412789) | 1→1 | 1 | Demonology | skill_line_ability | 0 | 0 | 600000 | cooldown |
+| Fel Armor (403619) | 1→1 | 1 | Demonology | skill_line_ability | 0 | 0 | 0 |  |
+| Menace (403828) | 1→1 | 1 | Demonology | skill_line_ability | 0 | 0 | 10000 | cooldown |
+| Metamorphosis (403789) | 1→1 | 1 | Demonology | skill_line_ability | 0 | 0 | 0 |  |
+| Shadow Cleave (403835) | 1→60 | 10 | Demonology | skill_line_ability | 190 mana | 0 | 6000 | power cost, cooldown |
+| Shadowflame (426320) | 1→1 | 2 | Destruction | skill_line_ability | 0 | 0 | 0 |  |
+| Vengeance (426195) | 1→1 | 1 | Demonology | skill_line_ability | 0 | 0 | 180000 | cooldown |
+| Curse of Weakness (702) | 4→52 | 6 | Affliction | skill_line_ability | 175 mana | 0 | 0 | power cost |
+| Fear (5782) | 8→56 | 3 | Affliction | skill_line_ability | 0 | 1500 | 0 | cast time |
+| Create Healthstone (6201) | 10→58 | 5 | Demonology | skill_line_ability | 1120 mana | 3000 | 0 | power cost, cast time |
+| Health Funnel (755) | 12→60 | 7 | Demonology | skill_line_ability | 79 client:-2 | 0 | 0 | power cost |
+| Unending Breath (5697) | 16→16 | 1 | Demonology | skill_line_ability | 50 mana | 0 | 0 | power cost |
+| Create Soulstone (693) | 18→60 | 5 | Demonology | skill_line_ability | 0 | 3000 | 0 | cast time |
+| Curse of the Elements (440892) | 20→50 | 4 | Affliction | skill_line_ability | 200 mana | 0 | 0 | power cost |
+| Demon Armor (706) | 20→60 | 5 | Demonology | skill_line_ability | 1580 mana | 0 | 0 | power cost |
+| Ritual of Summoning (698) | 20→20 | 1 | Demonology | skill_line_ability | 300 mana | 5000 | 0 | power cost, cast time |
+| Summon Incubus (713) | 20→20 | 1 | Demonology | skill_line_ability | 0 | 10000 | 0 | cast time |
+| Eye of Kilrogg (126) | 22→22 | 1 | Demonology | skill_line_ability | 100 mana | 5000 | 0 | power cost, cast time |
+| Drain Mana (5138) | 24→54 | 4 | Affliction | skill_line_ability | 310 mana | 0 | 0 | power cost |
+| Curse of Tongues (1714) | 26→50 | 2 | Affliction | skill_line_ability | 110 mana | 0 | 0 | power cost |
+| Detect Invisibility (132) | 26→50 | 3 | Demonology | skill_line_ability | 140 mana | 0 | 0 | power cost |
+| Banish (710) | 28→48 | 4 | Demonology | skill_line_ability | 200 mana | 1500 | 0 | power cost, cast time |
+| Create Firestone (6366) | 28→56 | 4 | Demonology | skill_line_ability | 1100 mana | 3000 | 0 | power cost, cast time |
+| Hellfire (1949) | 30→54 | 3 | Destruction | skill_line_ability | 1300 mana | 0 | 0 | power cost |
+| Subjugate Demon (1098) | 30→58 | 3 | Demonology | skill_line_ability | 700 mana | 3000 | 0 | power cost, cast time |
+| Shadow Ward (6229) | 32→60 | 4 | Demonology | skill_line_ability | 320 mana | 0 | 30000 | power cost, cooldown |
+| Create Spellstone (2362) | 36→60 | 3 | Demonology | skill_line_ability | 1000 mana | 5000 | 0 | power cost, cast time |
+| Curse of Idiocy (1010) | 38→38 | 1 | Affliction | skill_line_ability | 110 mana | 0 | 0 | power cost |
+| Haunt (403501) | 40→60 | 3 | n/a | class_spell | 240 mana | 1500 | 15000 | power cost, cast time, cooldown |
+| Howl of Terror (5484) | 40→54 | 2 | Affliction | skill_line_ability | 200 mana | 2000 | 40000 | power cost, cast time, cooldown |
+| Unstable Affliction (427717) | 40→50 | 3 | n/a | class_spell | 265 mana | 1500 | 0 | power cost, cast time |
+| Inferno (1122) | 50→50 | 1 | Demonology | skill_line_ability | 0 | 2000 | 3600000 | cast time, cooldown |
+| Dispel Magic (19476) | 60→60 | 1 | n/a | class_spell | 120 mana | 0 | 0 | power cost |
+| Portal of Summoning (437169) | 60→60 | 1 | Demonology | skill_line_ability | 0 | 0 | 120000 | cooldown |
+| Ritual of Doom (18540) | 60→60 | 1 | Demonology | skill_line_ability | 0 | 10000 | 3600000 | cast time, cooldown |
+| Ritual of Doom Effect (18541) | 60→60 | 1 | Demonology | skill_line_ability | 0 | 10000 | 0 | cast time |
+

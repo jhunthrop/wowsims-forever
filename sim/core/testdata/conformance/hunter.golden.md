@@ -176,3 +176,50 @@ Each spell below is built with exactly one point in the single talent that grant
 | Hunter (Summon Hawk talent) | 40 | Summon Hawk | 2 | 1293525 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 47.00-47.00→47.00-47.00 | 0.429 (convention)→0.000 | declared, matches |
 | Hunter (Summon Hawk talent) | 50 | Summon Hawk | 3 | 1293526 | 135.00→135.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 48→48 | n/a | match |  | 85.00-85.00→85.00-85.00 | 0.429 (convention)→0.000 | declared, matches |
 | Hunter (Summon Hawk talent) | 60 | Summon Hawk | 4 | 1293527 | 190.00→190.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 60→60 | n/a | match |  | 108.00-108.00→108.00-108.00 | 0.429 (convention)→0.000 | declared, matches |
+## Trainable abilities the engine does not register
+
+Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 40 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+
+| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
+|---|---|---|---|---|---|---|---|---|
+| Readiness (23989) | 0→0 | 1 | Survival | skill_line_ability | 0 | 0 | 300000 | cooldown |
+| Tame Beast (13535) | 0→10 | 3 | Beast Mastery | skill_line_ability | 0 | 0 | 0 |  |
+| Carve (425711) | 1→1 | 1 | Survival | skill_line_ability | 0 | 0 | 6000 | cooldown |
+| Chimera Shot (409433) | 1→1 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 6000 | cooldown |
+| Flanking Strike (415320) | 1→1 | 1 | Survival | skill_line_ability | 0 | 0 | 30000 | cooldown |
+| Heart of the Lion (409580) | 1→1 | 1 | Survival | skill_line_ability | 0 | 0 | 0 |  |
+| Kill Command (409379) | 1→1 | 1 | Beast Mastery | skill_line_ability | 0 | 0 | 60000 | cooldown |
+| Wyvern Strike (458436) | 1→1 | 3 | n/a | class_spell | 100 mana | 0 | 8000 | power cost, cooldown |
+| Aspect of the Monkey (13163) | 4→4 | 1 | Beast Mastery | skill_line_ability | 20 mana | 0 | 0 | power cost |
+| Hunter's Mark (1130) | 6→58 | 5 | Marksmanship | skill_line_ability | 60 mana | 0 | 0 | power cost |
+| Concussive Shot (5116) | 8→8 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 12000 | cooldown |
+| Dismiss Pet (2641) | 10→10 | 1 | Beast Mastery | skill_line_ability | 0 | 5000 | 0 | cast time |
+| Revive Pet (982) | 10→10 | 1 | Beast Mastery | skill_line_ability | 0 | 10000 | 0 | cast time |
+| Widow Bite (26226) | 10→10 | 1 | n/a | class_spell | 40 focus | 0 | 4000 | power cost, cooldown |
+| Distracting Shot (20736) | 12→60 | 6 | Marksmanship | skill_line_ability | 110 mana | -1000000 | 8000 | power cost, cooldown |
+| Mend Pet (136) | 12→60 | 7 | Beast Mastery | skill_line_ability | 480 mana | 0 | 0 | power cost |
+| Sonic Blast (1264478) | 12→60 | 5 | n/a | class_spell | 80 focus | 0 | 30000 | power cost, cooldown |
+| Eagle Eye (6197) | 14→14 | 1 | Beast Mastery | skill_line_ability | 25 mana | 0 | 0 | power cost |
+| Eyes of the Beast (1002) | 14→14 | 1 | Beast Mastery | skill_line_ability | 20 mana | 2000 | 0 | power cost, cast time |
+| Scare Beast (1513) | 14→46 | 3 | Beast Mastery | skill_line_ability | 75 mana | 1500 | 30000 | power cost, cast time, cooldown |
+| Aspect of the Cheetah (5118) | 20→20 | 1 | Beast Mastery | skill_line_ability | 40 mana | 0 | 0 | power cost |
+| Deterrence (19263) | 20→20 | 1 | Survival | skill_line_ability | 0 | 0 | 300000 | cooldown |
+| Disengage (781) | 20→48 | 3 | Survival | skill_line_ability | 150 mana | 0 | 5000 | power cost, cooldown |
+| Scorpid Sting (3043) | 22→22 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 0 |  |
+| Beast Lore (1462) | 24→24 | 1 | Beast Mastery | skill_line_ability | 40 mana | 0 | 0 | power cost |
+| Trueshot Aura (1299346) | 25→60 | 5 | Marksmanship | skill_line_ability | 525 mana | 0 | 0 | power cost |
+| Frost Trap (13809) | 28→28 | 1 | Survival | skill_line_ability | 60 mana | 0 | 30000 | power cost, cooldown |
+| Aspect of the Beast (13161) | 30→60 | 4 | Beast Mastery | skill_line_ability | 110 mana | 0 | 0 | power cost |
+| Feign Death (5384) | 30→30 | 1 | Survival | skill_line_ability | 80 mana | 0 | 30000 | power cost, cooldown |
+| Intimidation (19577) | 30→30 | 1 | Beast Mastery | skill_line_ability | 0 | 0 | 60000 | cooldown |
+| Lacerate (24118) | 30→60 | 4 | Survival | skill_line_ability | 95 mana | 0 | 0 | power cost |
+| Scatter Shot (19503) | 30→30 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 30000 | cooldown |
+| Enchanted Flare (1221404) | 32→32 | 1 | Marksmanship | skill_line_ability | 50 mana | 0 | 30000 | power cost, cooldown |
+| Flare (1543) | 32→32 | 1 | Marksmanship | skill_line_ability | 50 mana | 0 | 15000 | power cost, cooldown |
+| Viper Sting (3034) | 36→56 | 3 | Marksmanship | skill_line_ability | 215 mana | -1000000 | 15000 | power cost, cooldown |
+| Aspect of the Pack (13159) | 40→40 | 1 | Beast Mastery | skill_line_ability | 100 mana | 0 | 0 | power cost |
+| Aspect of the Wild (20043) | 46→56 | 2 | Beast Mastery | skill_line_ability | 115 mana | 0 | 0 | power cost |
+| Aspect of the Falcon (469145) | 60→60 | 1 | Beast Mastery | skill_line_ability | 120 mana | 0 | 0 | power cost |
+| Hydra Shot (1293020) | 60→60 | 1 | n/a | class_spell | 250 mana | 0 | 6000 | power cost, cooldown |
+| Tranquilizing Shot (19801) | 60→60 | 1 | Beast Mastery | skill_line_ability | 270 mana | -1000000 | 20000 | power cost, cooldown |
+

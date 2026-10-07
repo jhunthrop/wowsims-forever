@@ -559,3 +559,54 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 3 | 20918 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 4 | 20919 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 5 | 20920 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 30000→30000 | match |  | n/a | n/a | n/a |
+## Trainable abilities the engine does not register
+
+Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 44 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+
+| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
+|---|---|---|---|---|---|---|---|---|
+| Seal of Martyrdom (407799) | 0→1 | 2 | Retribution | skill_line_ability | 0 | 0 | 0 |  |
+| Avenging Wrath (407788) | 1→1 | 1 | Retribution | skill_line_ability | 0 | 0 | 180000 | cooldown |
+| Divine Light (458856) | 1→1 | 1 | Holy | skill_line_ability | 0 | 2500 | 8000 | cast time, cooldown |
+| Divine Protection (458312) | 1→18 | 4 | Protection | skill_line_ability | 35 mana | 0 | 300000 | power cost, cooldown |
+| Divine Sacrifice (407804) | 1→1 | 1 | Retribution | skill_line_ability | 0 | 0 | 120000 | cooldown |
+| Divine Storm (407778) | 1→1 | 2 | Retribution | skill_line_ability | 0 | 0 | 0 |  |
+| Flash of Light (412020) | 1→58 | 13 | Holy | skill_line_ability | 140 mana | 1500 | 0 | power cost, cast time |
+| Holy Light (19982) | 1→60 | 19 | Holy | skill_line_ability | 660 mana | 2500 | 0 | power cost, cast time |
+| Horn of Lordaeron (425600) | 1→1 | 1 | Holy | skill_line_ability | 0 | 0 | 20000 | cooldown |
+| Inspiration Exemplar (407880) | 1→1 | 1 | Holy | skill_line_ability | 0 | 0 | 0 |  |
+| Rebuke (425609) | 1→1 | 1 | Holy | skill_line_ability | 0 | 0 | 15000 | cooldown |
+| Righteous Fury (407627) | 1→16 | 2 | Protection | skill_line_ability | 0 | 0 | 0 |  |
+| Sacred Shield (412019) | 1→80 | 2 | Holy | skill_line_ability | 0 | 0 | 0 |  |
+| Shield of Righteousness (440658) | 1→1 | 1 | Protection | skill_line_ability | 0 | 0 | 6000 | cooldown |
+| Swift Judgement (1310994) | 1→1 | 1 | Protection | skill_line_ability | 0 | 0 | 60000 | cooldown |
+| Blessing of Might (19740) | 4→60 | 7 | Retribution | skill_line_ability | 130 mana | 0 | 0 | power cost |
+| Hammer of Justice (853) | 8→54 | 4 | Protection | skill_line_ability | 100 mana | 0 | 60000 | power cost, cooldown |
+| Purify (1152) | 8→8 | 1 | Holy | skill_line_ability | 0 | 0 | 0 |  |
+| Blessing of Protection (1022) | 10→38 | 3 | Protection | skill_line_ability | 0 | 0 | 300000 | cooldown |
+| Seal of Fury (1311649) | 10→58 | 7 | Protection | skill_line_ability | 200 mana | 0 | 0 | power cost |
+| Redemption (7328) | 12→60 | 5 | Holy | skill_line_ability | 0 | 10000 | 0 | cast time |
+| Blessing of Wisdom (19742) | 14→60 | 6 | Holy | skill_line_ability | 125 mana | 0 | 0 | power cost |
+| Blessing of Freedom (1044) | 18→18 | 1 | Protection | skill_line_ability | 0 | 0 | 20000 | cooldown |
+| Blessing of Kings (20217) | 20→20 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
+| Repentance (20066) | 20→20 | 1 | Retribution | skill_line_ability | 60 mana | 0 | 60000 | power cost, cooldown |
+| Voice of Truth (1310897) | 20→20 | 1 | Holy | skill_line_ability | 0 | 0 | 180000 | cooldown |
+| Seal of Justice (20164) | 22→22 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
+| Turn Undead (2878) | 24→52 | 3 | Holy | skill_line_ability | 75 mana | 1500 | 30000 | power cost, cast time, cooldown |
+| Blessing of Salvation (1038) | 26→26 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
+| Divine Intervention (19752) | 30→30 | 1 | Protection | skill_line_ability | 0 | 0 | 3600000 | cooldown |
+| Seal of Light (20165) | 30→60 | 4 | Holy | skill_line_ability | 210 mana | 0 | 0 | power cost |
+| Templar's Bulwark (1311015) | 30→30 | 1 | Protection | skill_line_ability | 110 mana | 0 | 300000 | power cost, cooldown |
+| Divine Shield (642) | 34→50 | 2 | Protection | skill_line_ability | 110 mana | 0 | 300000 | power cost, cooldown |
+| Seal of Wisdom (20166) | 38→58 | 3 | Holy | skill_line_ability | 200 mana | 0 | 0 | power cost |
+| Blessing of Light (19977) | 40→60 | 3 | Holy | skill_line_ability | 135 mana | 0 | 0 | power cost |
+| Hammer of the Righteous (407632) | 40→40 | 1 | Protection | skill_line_ability | 0 | 0 | 6000 | cooldown |
+| Light's Vigil (1310911) | 40→60 | 3 | Holy | skill_line_ability | 1340 mana | 1500 | 6000 | power cost, cast time, cooldown |
+| Cleanse (4987) | 42→42 | 1 | Holy | skill_line_ability | 0 | 0 | 0 |  |
+| Blessing of Sacrifice (6940) | 46→54 | 2 | Protection | skill_line_ability | 100 mana | 0 | 0 | power cost |
+| Greater Blessing of Might (25782) | 52→60 | 2 | Retribution | skill_line_ability | 260 mana | 0 | 0 | power cost |
+| Greater Blessing of Wisdom (25894) | 54→60 | 2 | Holy | skill_line_ability | 250 mana | 0 | 0 | power cost |
+| Greater Blessing of Kings (25898) | 60→60 | 1 | Protection | skill_line_ability | 150 mana | 0 | 0 | power cost |
+| Greater Blessing of Light (25890) | 60→60 | 1 | Holy | skill_line_ability | 260 mana | 0 | 0 | power cost |
+| Greater Blessing of Salvation (25895) | 60→60 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
+

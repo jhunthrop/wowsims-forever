@@ -10,16 +10,19 @@ import (
 // preset at every level with an empty talent string, compare each
 // registered spell against the client, collect the class's
 // talent-gated spells (TalentGatedSpells) as their own section, sort
-// both, and render the golden markdown. It is the single code path
+// both, compare the class's trainables against everything the engine
+// registers (trainables.go), and render the golden markdown. It is the single code path
 // TestConformance and TestConformanceGoldenIsDeterministic both call,
 // so the committed golden and the determinism check can never drift
 // out of sync with each other.
-func classReport(classSlug string, clientClass spellconst.Class, presets []Preset) (content string, buildErrors []string) {
+func classReport(classSlug string, clientClass spellconst.Class, trainables ClassTrainables, presets []Preset) (content string, buildErrors []string) {
 	rows, notes, rowErrors := collectRows(clientClass, presets)
 	talentGatedRows, talentGatedErrors := collectTalentGatedRows(clientClass, classSlug)
 
 	buildErrors = append(append([]string{}, rowErrors...), talentGatedErrors...)
-	content = renderGolden(classSlug, clientClass.Build, rows, talentGatedRows, notes, buildErrors)
+	gaps, gapErrors := trainableGaps(trainables, presets, talentGatedRows)
+	buildErrors = append(buildErrors, gapErrors...)
+	content = renderGolden(classSlug, clientClass.Build, rows, talentGatedRows, gaps, notes, buildErrors)
 	return content, buildErrors
 }
 

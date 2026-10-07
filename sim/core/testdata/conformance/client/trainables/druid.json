@@ -1,0 +1,2986 @@
+{
+  "build": "1.60.1.70009",
+  "class_slug": "druid",
+  "trainables": [
+    {
+      "name": "Abolish Poison",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 2893,
+          "rank": 0,
+          "level": 26
+        }
+      ]
+    },
+    {
+      "name": "Abolish Poison Effect",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 3137,
+          "rank": 0,
+          "level": 26
+        }
+      ]
+    },
+    {
+      "name": "Aquatic Form",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1066,
+          "rank": 0,
+          "level": 16
+        }
+      ]
+    },
+    {
+      "name": "Aquatic Form (Passive)",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5421,
+          "rank": 0,
+          "level": 16
+        }
+      ]
+    },
+    {
+      "name": "Barkskin",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 60000,
+      "ranks": [
+        {
+          "id": 22812,
+          "rank": 0,
+          "level": 44
+        }
+      ]
+    },
+    {
+      "name": "Bash",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 100,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 60000,
+      "ranks": [
+        {
+          "id": 5211,
+          "rank": 1,
+          "level": 14
+        },
+        {
+          "id": 6798,
+          "rank": 2,
+          "level": 30
+        },
+        {
+          "id": 8983,
+          "rank": 3,
+          "level": 46
+        }
+      ]
+    },
+    {
+      "name": "Bear Form (Passive)",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1178,
+          "rank": 0,
+          "level": 10
+        }
+      ]
+    },
+    {
+      "name": "Bear Form (Passive2)",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 21178,
+          "rank": 0,
+          "level": 10
+        }
+      ]
+    },
+    {
+      "name": "Berserk",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 180000,
+      "ranks": [
+        {
+          "id": 417141,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Brutal Impact",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16940,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Cat Form",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 768,
+          "rank": 0,
+          "level": 20
+        }
+      ]
+    },
+    {
+      "name": "Cat Form (Passive)",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 3025,
+          "rank": 0,
+          "level": 6
+        }
+      ]
+    },
+    {
+      "name": "Challenging Roar",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 150,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 600000,
+      "ranks": [
+        {
+          "id": 5209,
+          "rank": 0,
+          "level": 28
+        }
+      ]
+    },
+    {
+      "name": "Claw",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 45,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1082,
+          "rank": 1,
+          "level": 20
+        },
+        {
+          "id": 3029,
+          "rank": 2,
+          "level": 28
+        },
+        {
+          "id": 5201,
+          "rank": 3,
+          "level": 38
+        },
+        {
+          "id": 9849,
+          "rank": 4,
+          "level": 48
+        },
+        {
+          "id": 9850,
+          "rank": 5,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Cower",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 20,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 10000,
+      "ranks": [
+        {
+          "id": 8998,
+          "rank": 1,
+          "level": 28
+        },
+        {
+          "id": 9000,
+          "rank": 2,
+          "level": 40
+        },
+        {
+          "id": 9892,
+          "rank": 3,
+          "level": 52
+        }
+      ]
+    },
+    {
+      "name": "Cure Poison",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 8946,
+          "rank": 0,
+          "level": 14
+        }
+      ]
+    },
+    {
+      "name": "Dash",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 300000,
+      "ranks": [
+        {
+          "id": 1850,
+          "rank": 1,
+          "level": 26
+        },
+        {
+          "id": 9821,
+          "rank": 2,
+          "level": 46
+        }
+      ]
+    },
+    {
+      "name": "Deeper Wilds",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 436956,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Demoralizing Roar",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 100,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 99,
+          "rank": 1,
+          "level": 10
+        },
+        {
+          "id": 1735,
+          "rank": 2,
+          "level": 20
+        },
+        {
+          "id": 9490,
+          "rank": 3,
+          "level": 32
+        },
+        {
+          "id": 9747,
+          "rank": 4,
+          "level": 42
+        },
+        {
+          "id": 9898,
+          "rank": 5,
+          "level": 52
+        }
+      ]
+    },
+    {
+      "name": "Dire Bear Form",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5487,
+          "rank": 0,
+          "level": 10
+        },
+        {
+          "id": 9634,
+          "rank": 0,
+          "level": 40
+        }
+      ]
+    },
+    {
+      "name": "Dire Bear Form (Passive)",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 9635,
+          "rank": 0,
+          "level": 40
+        }
+      ]
+    },
+    {
+      "name": "Efflorescence",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 417148,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Enhanced Restoration",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 417123,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Enrage",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 60000,
+      "ranks": [
+        {
+          "id": 5229,
+          "rank": 0,
+          "level": 12
+        }
+      ]
+    },
+    {
+      "name": "Entangling Roots",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 1500,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 339,
+          "rank": 1,
+          "level": 8
+        },
+        {
+          "id": 19975,
+          "rank": 1,
+          "level": 8
+        },
+        {
+          "id": 1062,
+          "rank": 2,
+          "level": 18
+        },
+        {
+          "id": 19974,
+          "rank": 2,
+          "level": 18
+        },
+        {
+          "id": 5195,
+          "rank": 3,
+          "level": 28
+        },
+        {
+          "id": 19973,
+          "rank": 3,
+          "level": 28
+        },
+        {
+          "id": 5196,
+          "rank": 4,
+          "level": 38
+        },
+        {
+          "id": 19972,
+          "rank": 4,
+          "level": 38
+        },
+        {
+          "id": 9852,
+          "rank": 5,
+          "level": 48
+        },
+        {
+          "id": 19971,
+          "rank": 5,
+          "level": 48
+        },
+        {
+          "id": 9853,
+          "rank": 6,
+          "level": 58
+        },
+        {
+          "id": 19970,
+          "rank": 6,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Faerie Fire",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 115,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 770,
+          "rank": 1,
+          "level": 18
+        },
+        {
+          "id": 778,
+          "rank": 2,
+          "level": 30
+        },
+        {
+          "id": 9749,
+          "rank": 3,
+          "level": 42
+        },
+        {
+          "id": 9907,
+          "rank": 4,
+          "level": 54
+        }
+      ]
+    },
+    {
+      "name": "Feline Grace",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 20719,
+          "rank": 0,
+          "level": 40
+        }
+      ]
+    },
+    {
+      "name": "Feral Aggression",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16858,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 16859,
+          "rank": 2,
+          "level": 0
+        },
+        {
+          "id": 16860,
+          "rank": 3,
+          "level": 0
+        },
+        {
+          "id": 16861,
+          "rank": 4,
+          "level": 0
+        },
+        {
+          "id": 16862,
+          "rank": 5,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Feral Charge",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 50,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 15000,
+      "ranks": [
+        {
+          "id": 1238122,
+          "rank": 0,
+          "level": 20
+        }
+      ]
+    },
+    {
+      "name": "Feral Charge (Bear)",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 50,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 15000,
+      "ranks": [
+        {
+          "id": 16979,
+          "rank": 0,
+          "level": 20
+        }
+      ]
+    },
+    {
+      "name": "Feral Instinct",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16947,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Feral Swiftness",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17002,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Ferocious Bite",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 35,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 22568,
+          "rank": 1,
+          "level": 32
+        },
+        {
+          "id": 22827,
+          "rank": 2,
+          "level": 40
+        },
+        {
+          "id": 22828,
+          "rank": 3,
+          "level": 48
+        },
+        {
+          "id": 22829,
+          "rank": 4,
+          "level": 56
+        },
+        {
+          "id": 31018,
+          "rank": 5,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Ferocity",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16934,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Frenzied Regeneration",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 180000,
+      "ranks": [
+        {
+          "id": 22845,
+          "rank": 0,
+          "level": 0
+        },
+        {
+          "id": 22842,
+          "rank": 0,
+          "level": 36
+        }
+      ]
+    },
+    {
+      "name": "Furor",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17056,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Gift of Nature",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17104,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Wild",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 1200,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 21849,
+          "rank": 1,
+          "level": 50
+        },
+        {
+          "id": 21850,
+          "rank": 2,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Growl",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 8000,
+      "ranks": [
+        {
+          "id": 6795,
+          "rank": 0,
+          "level": 10
+        }
+      ]
+    },
+    {
+      "name": "Healing Touch",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 840,
+      "cost_type": 0,
+      "cast_time_ms": 3500,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5185,
+          "rank": 1,
+          "level": 1
+        },
+        {
+          "id": 5186,
+          "rank": 2,
+          "level": 8
+        },
+        {
+          "id": 5187,
+          "rank": 3,
+          "level": 14
+        },
+        {
+          "id": 5188,
+          "rank": 4,
+          "level": 20
+        },
+        {
+          "id": 5189,
+          "rank": 5,
+          "level": 26
+        },
+        {
+          "id": 6778,
+          "rank": 6,
+          "level": 32
+        },
+        {
+          "id": 8903,
+          "rank": 7,
+          "level": 38
+        },
+        {
+          "id": 9758,
+          "rank": 8,
+          "level": 44
+        },
+        {
+          "id": 9888,
+          "rank": 9,
+          "level": 50
+        },
+        {
+          "id": 9889,
+          "rank": 10,
+          "level": 56
+        },
+        {
+          "id": 25297,
+          "rank": 11,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Hibernate",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 150,
+      "cost_type": 0,
+      "cast_time_ms": 1500,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 2637,
+          "rank": 1,
+          "level": 18
+        },
+        {
+          "id": 18657,
+          "rank": 2,
+          "level": 38
+        },
+        {
+          "id": 18658,
+          "rank": 3,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Hurricane",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 1495,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16914,
+          "rank": 1,
+          "level": 40
+        },
+        {
+          "id": 17401,
+          "rank": 2,
+          "level": 50
+        },
+        {
+          "id": 17402,
+          "rank": 3,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Improved Enrage",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17079,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 17082,
+          "rank": 2,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Entangling Roots",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16918,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Mark of the Wild",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17050,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 17051,
+          "rank": 2,
+          "level": 0
+        },
+        {
+          "id": 17053,
+          "rank": 3,
+          "level": 0
+        },
+        {
+          "id": 17054,
+          "rank": 4,
+          "level": 0
+        },
+        {
+          "id": 17055,
+          "rank": 5,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Moonfire",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16821,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Regrowth",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17074,
+          "rank": 1,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Rejuvenation",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17111,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Shred",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16968,
+          "rank": 2,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Starfire",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16850,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Thorns",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16836,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 16839,
+          "rank": 2,
+          "level": 0
+        },
+        {
+          "id": 16840,
+          "rank": 3,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Tranquility",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17123,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Improved Wrath",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16814,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Innervate",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 360000,
+      "ranks": [
+        {
+          "id": 29166,
+          "rank": 0,
+          "level": 40
+        }
+      ]
+    },
+    {
+      "name": "Insect Swarm",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 160,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5570,
+          "rank": 1,
+          "level": 20
+        },
+        {
+          "id": 24974,
+          "rank": 2,
+          "level": 30
+        },
+        {
+          "id": 24975,
+          "rank": 3,
+          "level": 40
+        },
+        {
+          "id": 24976,
+          "rank": 4,
+          "level": 50
+        },
+        {
+          "id": 24977,
+          "rank": 5,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Lacerate",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 150,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 414647,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 414644,
+          "rank": 1,
+          "level": 42
+        },
+        {
+          "id": 1235826,
+          "rank": 2,
+          "level": 50
+        },
+        {
+          "id": 1235827,
+          "rank": 3,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Leader of the Pack",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17007,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Lifebloom",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 408124,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 408245,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Living Seed",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 414683,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Mark of the Wild",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 445,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1126,
+          "rank": 1,
+          "level": 1
+        },
+        {
+          "id": 5232,
+          "rank": 2,
+          "level": 10
+        },
+        {
+          "id": 6756,
+          "rank": 3,
+          "level": 20
+        },
+        {
+          "id": 5234,
+          "rank": 4,
+          "level": 30
+        },
+        {
+          "id": 8907,
+          "rank": 5,
+          "level": 40
+        },
+        {
+          "id": 9884,
+          "rank": 6,
+          "level": 50
+        },
+        {
+          "id": 364163,
+          "rank": 6,
+          "level": 50
+        },
+        {
+          "id": 9885,
+          "rank": 7,
+          "level": 60
+        },
+        {
+          "id": 1291335,
+          "rank": 7,
+          "level": 60
+        },
+        {
+          "id": 1310503,
+          "rank": 7,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Maul",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 150,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 6807,
+          "rank": 1,
+          "level": 10
+        },
+        {
+          "id": 6808,
+          "rank": 2,
+          "level": 18
+        },
+        {
+          "id": 6809,
+          "rank": 3,
+          "level": 26
+        },
+        {
+          "id": 8972,
+          "rank": 4,
+          "level": 34
+        },
+        {
+          "id": 9745,
+          "rank": 5,
+          "level": 42
+        },
+        {
+          "id": 9880,
+          "rank": 6,
+          "level": 50
+        },
+        {
+          "id": 9881,
+          "rank": 7,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Moonfire",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 375,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 8921,
+          "rank": 1,
+          "level": 4
+        },
+        {
+          "id": 8924,
+          "rank": 2,
+          "level": 10
+        },
+        {
+          "id": 8925,
+          "rank": 3,
+          "level": 16
+        },
+        {
+          "id": 8926,
+          "rank": 4,
+          "level": 22
+        },
+        {
+          "id": 8927,
+          "rank": 5,
+          "level": 28
+        },
+        {
+          "id": 8928,
+          "rank": 6,
+          "level": 34
+        },
+        {
+          "id": 8929,
+          "rank": 7,
+          "level": 40
+        },
+        {
+          "id": 9833,
+          "rank": 8,
+          "level": 46
+        },
+        {
+          "id": 9834,
+          "rank": 9,
+          "level": 52
+        },
+        {
+          "id": 9835,
+          "rank": 10,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Moonfury",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16896,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Moonglow",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16845,
+          "rank": 1,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Moonkin Aura",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 24907,
+          "rank": 0,
+          "level": 40
+        }
+      ]
+    },
+    {
+      "name": "Moonkin Form",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 24858,
+          "rank": 0,
+          "level": 40
+        }
+      ]
+    },
+    {
+      "name": "Moonkin Form (Passive)",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 24905,
+          "rank": 0,
+          "level": 40
+        }
+      ]
+    },
+    {
+      "name": "Natural Shapeshifter",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16833,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Natural Weapons",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16902,
+          "rank": 1,
+          "level": 0
+        },
+        {
+          "id": 16903,
+          "rank": 2,
+          "level": 0
+        },
+        {
+          "id": 16904,
+          "rank": 3,
+          "level": 0
+        },
+        {
+          "id": 16905,
+          "rank": 4,
+          "level": 0
+        },
+        {
+          "id": 16906,
+          "rank": 5,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Naturalist",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17069,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Nature's Focus",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17063,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Nature's Grace",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16880,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Nature's Grasp",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 125,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 60000,
+      "ranks": [
+        {
+          "id": 16689,
+          "rank": 1,
+          "level": 10
+        },
+        {
+          "id": 16810,
+          "rank": 2,
+          "level": 18
+        },
+        {
+          "id": 16811,
+          "rank": 3,
+          "level": 28
+        },
+        {
+          "id": 16812,
+          "rank": 4,
+          "level": 38
+        },
+        {
+          "id": 16813,
+          "rank": 5,
+          "level": 48
+        },
+        {
+          "id": 17329,
+          "rank": 6,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Nature's Reach",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16819,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Nature's Swiftness",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 180000,
+      "ranks": [
+        {
+          "id": 17116,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Nourish",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 2000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 408247,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Omen of Clarity",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16864,
+          "rank": 0,
+          "level": 20
+        }
+      ]
+    },
+    {
+      "name": "Overgrowth",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17245,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Pounce",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 50,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 9005,
+          "rank": 1,
+          "level": 36
+        },
+        {
+          "id": 9823,
+          "rank": 2,
+          "level": 46
+        },
+        {
+          "id": 9827,
+          "rank": 3,
+          "level": 56
+        }
+      ]
+    },
+    {
+      "name": "Pounce Bleed",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 9007,
+          "rank": 1,
+          "level": 36
+        },
+        {
+          "id": 9824,
+          "rank": 2,
+          "level": 46
+        },
+        {
+          "id": 9826,
+          "rank": 3,
+          "level": 56
+        }
+      ]
+    },
+    {
+      "name": "Predatory Strikes",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16972,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Primal Bite",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 200,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 6000,
+      "ranks": [
+        {
+          "id": 407995,
+          "rank": 1,
+          "level": 25
+        },
+        {
+          "id": 1238069,
+          "rank": 2,
+          "level": 36
+        },
+        {
+          "id": 1238070,
+          "rank": 3,
+          "level": 48
+        },
+        {
+          "id": 1238073,
+          "rank": 4,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Prowl",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 10000,
+      "ranks": [
+        {
+          "id": 5215,
+          "rank": 1,
+          "level": 20
+        },
+        {
+          "id": 6783,
+          "rank": 2,
+          "level": 40
+        },
+        {
+          "id": 9913,
+          "rank": 3,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Rake",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 40,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1822,
+          "rank": 1,
+          "level": 24
+        },
+        {
+          "id": 1823,
+          "rank": 2,
+          "level": 34
+        },
+        {
+          "id": 1824,
+          "rank": 3,
+          "level": 44
+        },
+        {
+          "id": 9904,
+          "rank": 4,
+          "level": 54
+        }
+      ]
+    },
+    {
+      "name": "Ravage",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 60,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 6785,
+          "rank": 1,
+          "level": 32
+        },
+        {
+          "id": 6787,
+          "rank": 2,
+          "level": 42
+        },
+        {
+          "id": 9866,
+          "rank": 3,
+          "level": 50
+        },
+        {
+          "id": 9867,
+          "rank": 4,
+          "level": 58
+        }
+      ]
+    },
+    {
+      "name": "Rebirth",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 2000,
+      "cooldown_ms": 1800000,
+      "ranks": [
+        {
+          "id": 20484,
+          "rank": 1,
+          "level": 20
+        },
+        {
+          "id": 20739,
+          "rank": 2,
+          "level": 30
+        },
+        {
+          "id": 20742,
+          "rank": 3,
+          "level": 40
+        },
+        {
+          "id": 20747,
+          "rank": 4,
+          "level": 50
+        },
+        {
+          "id": 20748,
+          "rank": 5,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Regrowth",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 880,
+      "cost_type": 0,
+      "cast_time_ms": 2000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 8936,
+          "rank": 1,
+          "level": 12
+        },
+        {
+          "id": 436937,
+          "rank": 1,
+          "level": 12
+        },
+        {
+          "id": 8938,
+          "rank": 2,
+          "level": 18
+        },
+        {
+          "id": 436938,
+          "rank": 2,
+          "level": 18
+        },
+        {
+          "id": 8939,
+          "rank": 3,
+          "level": 24
+        },
+        {
+          "id": 436939,
+          "rank": 3,
+          "level": 24
+        },
+        {
+          "id": 8940,
+          "rank": 4,
+          "level": 30
+        },
+        {
+          "id": 436940,
+          "rank": 4,
+          "level": 30
+        },
+        {
+          "id": 8941,
+          "rank": 5,
+          "level": 36
+        },
+        {
+          "id": 436942,
+          "rank": 5,
+          "level": 36
+        },
+        {
+          "id": 9750,
+          "rank": 6,
+          "level": 42
+        },
+        {
+          "id": 436943,
+          "rank": 6,
+          "level": 42
+        },
+        {
+          "id": 9856,
+          "rank": 7,
+          "level": 48
+        },
+        {
+          "id": 436944,
+          "rank": 7,
+          "level": 48
+        },
+        {
+          "id": 9857,
+          "rank": 8,
+          "level": 54
+        },
+        {
+          "id": 436945,
+          "rank": 8,
+          "level": 54
+        },
+        {
+          "id": 9858,
+          "rank": 9,
+          "level": 60
+        },
+        {
+          "id": 436946,
+          "rank": 9,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Rejuvenation",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 360,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 774,
+          "rank": 1,
+          "level": 4
+        },
+        {
+          "id": 417057,
+          "rank": 1,
+          "level": 4
+        },
+        {
+          "id": 1058,
+          "rank": 2,
+          "level": 10
+        },
+        {
+          "id": 417058,
+          "rank": 2,
+          "level": 10
+        },
+        {
+          "id": 1430,
+          "rank": 3,
+          "level": 16
+        },
+        {
+          "id": 417059,
+          "rank": 3,
+          "level": 16
+        },
+        {
+          "id": 2090,
+          "rank": 4,
+          "level": 22
+        },
+        {
+          "id": 417060,
+          "rank": 4,
+          "level": 22
+        },
+        {
+          "id": 2091,
+          "rank": 5,
+          "level": 28
+        },
+        {
+          "id": 417061,
+          "rank": 5,
+          "level": 28
+        },
+        {
+          "id": 3627,
+          "rank": 6,
+          "level": 34
+        },
+        {
+          "id": 417062,
+          "rank": 6,
+          "level": 34
+        },
+        {
+          "id": 8910,
+          "rank": 7,
+          "level": 40
+        },
+        {
+          "id": 417063,
+          "rank": 7,
+          "level": 40
+        },
+        {
+          "id": 9839,
+          "rank": 8,
+          "level": 46
+        },
+        {
+          "id": 417064,
+          "rank": 8,
+          "level": 46
+        },
+        {
+          "id": 9840,
+          "rank": 9,
+          "level": 52
+        },
+        {
+          "id": 417065,
+          "rank": 9,
+          "level": 52
+        },
+        {
+          "id": 9841,
+          "rank": 10,
+          "level": 58
+        },
+        {
+          "id": 417066,
+          "rank": 10,
+          "level": 58
+        },
+        {
+          "id": 25299,
+          "rank": 11,
+          "level": 60
+        },
+        {
+          "id": 417068,
+          "rank": 11,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Remove Curse",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 2782,
+          "rank": 0,
+          "level": 24
+        }
+      ]
+    },
+    {
+      "name": "Revive",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 10000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 437138,
+          "rank": 1,
+          "level": 12
+        },
+        {
+          "id": 1237948,
+          "rank": 2,
+          "level": 24
+        },
+        {
+          "id": 1237949,
+          "rank": 3,
+          "level": 36
+        },
+        {
+          "id": 1237950,
+          "rank": 4,
+          "level": 48
+        },
+        {
+          "id": 1237951,
+          "rank": 5,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Rip",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 30,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1079,
+          "rank": 1,
+          "level": 20
+        },
+        {
+          "id": 9492,
+          "rank": 2,
+          "level": 28
+        },
+        {
+          "id": 9493,
+          "rank": 3,
+          "level": 36
+        },
+        {
+          "id": 9752,
+          "rank": 4,
+          "level": 44
+        },
+        {
+          "id": 9894,
+          "rank": 5,
+          "level": 52
+        },
+        {
+          "id": 9896,
+          "rank": 6,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Savage Fury",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16998,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Shred",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 60,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5221,
+          "rank": 1,
+          "level": 22
+        },
+        {
+          "id": 6800,
+          "rank": 2,
+          "level": 30
+        },
+        {
+          "id": 8992,
+          "rank": 3,
+          "level": 38
+        },
+        {
+          "id": 9829,
+          "rank": 4,
+          "level": 46
+        },
+        {
+          "id": 9830,
+          "rank": 5,
+          "level": 54
+        }
+      ]
+    },
+    {
+      "name": "Shredding Attacks",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16966,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Skull Bash",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 25,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 10000,
+      "ranks": [
+        {
+          "id": 410176,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Soothe Animal",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 100,
+      "cost_type": 0,
+      "cast_time_ms": 1500,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 2908,
+          "rank": 1,
+          "level": 22
+        },
+        {
+          "id": 8955,
+          "rank": 2,
+          "level": 38
+        },
+        {
+          "id": 9901,
+          "rank": 3,
+          "level": 54
+        }
+      ]
+    },
+    {
+      "name": "Starfall",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 439748,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 439753,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 439756,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Starfire",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 340,
+      "cost_type": 0,
+      "cast_time_ms": 3500,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 2912,
+          "rank": 1,
+          "level": 20
+        },
+        {
+          "id": 8949,
+          "rank": 2,
+          "level": 26
+        },
+        {
+          "id": 8950,
+          "rank": 3,
+          "level": 34
+        },
+        {
+          "id": 8951,
+          "rank": 4,
+          "level": 42
+        },
+        {
+          "id": 9875,
+          "rank": 5,
+          "level": 50
+        },
+        {
+          "id": 9876,
+          "rank": 6,
+          "level": 58
+        },
+        {
+          "id": 25298,
+          "rank": 7,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Starsurge",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 6000,
+      "ranks": [
+        {
+          "id": 417157,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Subtlety",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 17118,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Sunfire",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 40,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 414684,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 414687,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 414689,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Survival Instincts",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 180000,
+      "ranks": [
+        {
+          "id": 408024,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Swiftmend",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 15000,
+      "ranks": [
+        {
+          "id": 18562,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Swipe",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 200,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 411128,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 779,
+          "rank": 1,
+          "level": 16
+        },
+        {
+          "id": 780,
+          "rank": 2,
+          "level": 24
+        },
+        {
+          "id": 769,
+          "rank": 3,
+          "level": 34
+        },
+        {
+          "id": 9754,
+          "rank": 4,
+          "level": 44
+        },
+        {
+          "id": 9908,
+          "rank": 5,
+          "level": 54
+        }
+      ]
+    },
+    {
+      "name": "Teleport: Moonglade",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 120,
+      "cost_type": 0,
+      "cast_time_ms": 10000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18960,
+          "rank": 0,
+          "level": 10
+        }
+      ]
+    },
+    {
+      "name": "Thick Hide",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16929,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Thorns",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 320,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 467,
+          "rank": 1,
+          "level": 6
+        },
+        {
+          "id": 782,
+          "rank": 2,
+          "level": 14
+        },
+        {
+          "id": 1075,
+          "rank": 3,
+          "level": 24
+        },
+        {
+          "id": 8914,
+          "rank": 4,
+          "level": 34
+        },
+        {
+          "id": 9756,
+          "rank": 5,
+          "level": 44
+        },
+        {
+          "id": 9910,
+          "rank": 6,
+          "level": 54
+        }
+      ]
+    },
+    {
+      "name": "Tiger's Fury",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 30000,
+      "ranks": [
+        {
+          "id": 417045,
+          "rank": 0,
+          "level": 1
+        },
+        {
+          "id": 5217,
+          "rank": 0,
+          "level": 24
+        }
+      ]
+    },
+    {
+      "name": "Track Humanoids",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5225,
+          "rank": 0,
+          "level": 32
+        }
+      ]
+    },
+    {
+      "name": "Tranquil Spirit",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 24968,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Tranquility",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 925,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 300000,
+      "ranks": [
+        {
+          "id": 740,
+          "rank": 1,
+          "level": 30
+        },
+        {
+          "id": 8918,
+          "rank": 2,
+          "level": 40
+        },
+        {
+          "id": 9862,
+          "rank": 3,
+          "level": 50
+        },
+        {
+          "id": 9863,
+          "rank": 4,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Travel Form",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 783,
+          "rank": 0,
+          "level": 30
+        }
+      ]
+    },
+    {
+      "name": "Vengeance",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16909,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Wild Growth",
+      "skill_line": "Restoration",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 1050,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 6000,
+      "ranks": [
+        {
+          "id": 408120,
+          "rank": 1,
+          "level": 40
+        },
+        {
+          "id": 1238214,
+          "rank": 2,
+          "level": 50
+        },
+        {
+          "id": 1238215,
+          "rank": 3,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Wrath",
+      "skill_line": "Balance",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 120,
+      "cost_type": 0,
+      "cast_time_ms": 2000,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 5176,
+          "rank": 1,
+          "level": 1
+        },
+        {
+          "id": 5177,
+          "rank": 2,
+          "level": 6
+        },
+        {
+          "id": 5178,
+          "rank": 3,
+          "level": 14
+        },
+        {
+          "id": 5179,
+          "rank": 4,
+          "level": 22
+        },
+        {
+          "id": 5180,
+          "rank": 5,
+          "level": 30
+        },
+        {
+          "id": 6780,
+          "rank": 6,
+          "level": 38
+        },
+        {
+          "id": 8905,
+          "rank": 7,
+          "level": 46
+        },
+        {
+          "id": 9912,
+          "rank": 8,
+          "level": 54
+        }
+      ]
+    }
+  ]
+}
