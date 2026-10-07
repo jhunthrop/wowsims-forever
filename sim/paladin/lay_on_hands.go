@@ -31,6 +31,13 @@ func (paladin *Paladin) registerLayOnHands() {
 		Flags:       core.SpellFlagAPL | core.SpellFlagMCD,
 		SpellSchool: core.SpellSchoolHoly,
 		SpellCode:   SpellCode_PaladinLayOnHands,
+
+		// source 1.60.1.70009 client spell data (spellconst/paladin.json,
+		// ids 633/2800/10310): spell_level 10/30/50 per rank. Flagged by
+		// paladin.golden.md's "required_level N->0" rows - this
+		// SpellConfig never set the field at all.
+		RequiredLevel: int(minLevels[idx]),
+
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,
@@ -39,7 +46,12 @@ func (paladin *Paladin) registerLayOnHands() {
 				Timer: paladin.NewTimer(),
 				// FOREVER: Improved Lay on Hands is not in the client's trees.
 				// Duration: time.Minute * time.Duration(60-10*paladin.Talents.ImprovedLayOnHands),
-				Duration: time.Minute * 60,
+				//
+				// category_cooldown_ms is 1200000 (20 min) for every
+				// rank: source 1.60.1.70009 client spell data. 60 min
+				// was stale vanilla; Forever's client shortened it to
+				// 20 min and this literal was never updated.
+				Duration: time.Minute * 20,
 			},
 		},
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {

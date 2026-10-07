@@ -15,7 +15,13 @@ var HolyShieldValues = []struct {
 	manaCost float64
 	damage   float64
 }{
-	{level: 30, spellID: 20925, procID: 20955, manaCost: 150, damage: 65},
+	// Rank 1's level is 40, not 30: source 1.60.1.70009 client spell data
+	// (spellconst/paladin.json, spell 20925 "Holy Shield"), spell_level
+	// 40. 30 was Holy Shield's learnable level in original Classic;
+	// Forever's client moved it to 40 and this rank table was never
+	// updated. Flagged by paladin.golden.md's talent-gated table's
+	// "required_level 40->30" row.
+	{level: 40, spellID: 20925, procID: 20955, manaCost: 150, damage: 65},
 	{level: 50, spellID: 20927, procID: 20956, manaCost: 195, damage: 95},
 	{level: 60, spellID: 20928, procID: 20957, manaCost: 240, damage: 130},
 }
@@ -86,6 +92,13 @@ func (paladin *Paladin) registerHolyShield() {
 			Flags:         core.SpellFlagAPL,
 			RequiredLevel: int(level),
 			Rank:          rank,
+
+			// paladin.holyShieldAura[i]'s own Duration (10s) matches
+			// the client's duration_ms (10000) for this cast's own
+			// SpellID at every rank (spellconst/paladin.json) - wiring
+			// it through lets compare.go's engineDuration see it
+			// instead of reporting 0 for a self-buff that does exist.
+			RelatedSelfBuff: paladin.holyShieldAura[i],
 			ManaCost: core.ManaCostOptions{
 				FlatCost: manaCost,
 			},
