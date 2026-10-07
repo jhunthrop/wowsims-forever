@@ -537,7 +537,7 @@ Per spec-and-rank row at level 60 whose client spell has a school-damage or peri
 | Class | Declared | Matching | Differing | Not declared | n/a |
 |---|---|---|---|---|---|
 | Hunter | 11 | 11 | 0 | 0 | 27 |
-| Mage | 77 | 77 | 0 | 0 | 24 |
+| Mage | 80 | 80 | 0 | 0 | 24 |
 | Warlock | 102 | 102 | 0 | 2 | 55 |
 | Paladin | 43 | 43 | 0 | 16 | 83 |
 | Warrior | 12 | 12 | 0 | 0 | 38 |
@@ -545,7 +545,7 @@ Per spec-and-rank row at level 60 whose client spell has a school-damage or peri
 | Priest | 43 | 43 | 0 | 0 | 9 |
 | Shaman | 123 | 123 | 0 | 0 | 160 |
 | Rogue | 6 | 6 | 0 | 0 | 25 |
-| **Total** | 478 | 478 | 0 | 18 | 446 |
+| **Total** | 481 | 481 | 0 | 18 | 446 |
 
 <!-- damage-summary:end -->
 

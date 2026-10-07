@@ -66,8 +66,11 @@ func (mage *Mage) newFireballSpellConfig(rank int) core.SpellConfig {
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD:      core.GCDDefault,
-				CastTime: time.Millisecond*time.Duration(castTime) - time.Millisecond*100*time.Duration(mage.Talents.ImprovedFireball),
+				GCD: core.GCDDefault,
+				// Improved Fireball's reduction is a CastTime_Flat mod in
+				// applyDeclarativeTalents; subtracting it here as well took
+				// it twice.
+				CastTime: time.Millisecond * time.Duration(castTime),
 			},
 		},
 

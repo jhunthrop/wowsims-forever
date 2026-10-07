@@ -34,6 +34,10 @@ func damageLadders() []damageLadder {
 		{"Scorch", 1, ScorchRanks, ScorchSpellId[:], ScorchLevel[:], ScorchManaCost[:], ScorchSpellCoeff[:], ScorchBaseDamage[:], ScorchPointsPerLevel[:], ScorchMaxLevel[:]},
 		{"Fireball", 1, FireballRanks, FireballSpellId[:], FireballLevel[:], FireballManaCost[:], FireballSpellCoeff[:], FireballBaseDamage[:], FireballPointsPerLevel[:], FireballMaxLevel[:]},
 		{"Frostbolt", 1, FrostboltRanks, FrostboltSpellId[:], FrostboltLevel[:], FrostboltManaCost[:], FrostboltSpellCoeff[:], FrostboltBaseDamage[:], FrostboltPointsPerLevel[:], FrostboltMaxLevel[:]},
+		// Frostfire Bolt's generated rank 0 is the level-1 "Gain the
+		// ability" teaching spell, not a castable rank, so the ladder
+		// starts at rank 1 (401502, level 40).
+		{"Frostfire Bolt", 1, FrostfireBoltRanks, FrostfireBoltSpellId[:], FrostfireBoltLevel[:], FrostfireBoltManaCost[:], FrostfireBoltSpellCoeff[:], FrostfireBoltBaseDamage[:], FrostfireBoltPointsPerLevel[:], FrostfireBoltMaxLevel[:]},
 		{"Pyroblast", 1, PyroblastRanks, PyroblastSpellId[:], PyroblastLevel[:], PyroblastManaCost[:], PyroblastSpellCoeff[:], PyroblastBaseDamage[:], PyroblastPointsPerLevel[:], PyroblastMaxLevel[:]},
 		{"Arcane Explosion", 1, ArcaneExplosionRanks, ArcaneExplosionSpellId[:], ArcaneExplosionLevel[:], ArcaneExplosionManaCost[:], ArcaneExplosionSpellCoeff[:], ArcaneExplosionBaseDamage[:], ArcaneExplosionPointsPerLevel[:], ArcaneExplosionMaxLevel[:]},
 		{"Blast Wave", 1, BlastWaveRanks, BlastWaveSpellId[:], BlastWaveLevel[:], BlastWaveManaCost[:], BlastWaveSpellCoeff[:], BlastWaveBaseDamage[:], BlastWavePointsPerLevel[:], BlastWaveMaxLevel[:]},
@@ -99,6 +103,7 @@ func TestMageTickTablesMatchTheClient(t *testing.T) {
 	}{
 		{"Fireball dot", FireballSpellId[:], 1, FireballDotTickDamage[:]},
 		{"Pyroblast dot", PyroblastSpellId[:], 1, PyroblastDotTickDamage[:]},
+		{"Frostfire Bolt dot", FrostfireBoltSpellId[:], 2, FrostfireBoltDotTickDamage[:]},
 		// The ground aura's tick lives on its own client rows.
 		{"Flamestrike ground aura", []int32{0, 1279983, 1279985, 1279987, 1279988, 1279989, 1279990}, 0, FlamestrikeDotTickDamage[:]},
 	}
@@ -138,6 +143,16 @@ func TestBlizzardTickMatchesTheClient(t *testing.T) {
 		for _, casterLevel := range damageCheckLevels {
 			roll := clientdamage.Roll(BlizzardTickBaseDamage[rank], BlizzardTickPointsPerLevel[rank], BlizzardLevel[rank], BlizzardTickMaxLevel[rank], casterLevel)
 			clientdamagetest.AssertRoll(t, client, "Blizzard tick", tickIDs[rank], 0, casterLevel, roll)
+		}
+	}
+}
+
+func TestFrostfireBoltDotTicksFollowTheClientDuration(t *testing.T) {
+	client := clientdamagetest.LoadClient(t, "..", "mage")
+	for rank := 1; rank <= FrostfireBoltRanks; rank++ {
+		spell, _ := client.ByID(FrostfireBoltSpellId[rank])
+		if got := spell.DurationMS / spell.Effects[2].PeriodMS; got != FrostfireBoltDotTicks {
+			t.Errorf("Frostfire Bolt rank %d: %d ticks, client duration/period %d", rank, FrostfireBoltDotTicks, got)
 		}
 	}
 }
