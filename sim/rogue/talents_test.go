@@ -34,3 +34,15 @@ func TestSetupComboPointChanceTableValues(t *testing.T) {
 		t.Errorf("setupComboPointChance = %v, want %v", setupComboPointChance, want)
 	}
 }
+
+// TestInitiativeComboPointChanceTableValues pins the client's own 33%/
+// 67%/100% rank text (rogue.json's Initiative node), the same shape as
+// Setup above: "Gives you a 33%/67%/100% chance to add an additional combo
+// point ... when using your Ambush, Garrote, or Cheap Shot ability." The
+// engine used a flat 25% per rank (25/50/75).
+func TestInitiativeComboPointChanceTableValues(t *testing.T) {
+	want := [4]float64{0, 0.33, 0.67, 1.0}
+	if initiativeComboPointChance != want {
+		t.Errorf("initiativeComboPointChance = %v, want %v", initiativeComboPointChance, want)
+	}
+}

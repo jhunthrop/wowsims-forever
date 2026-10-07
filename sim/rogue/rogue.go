@@ -101,6 +101,8 @@ type Rogue struct {
 	CutthroatAura *core.Aura
 
 	woundPoisonDebuffAuras core.AuraArray
+	// hemorrhageAuras holds the Hemorrhage debuff per target (nil without the talent).
+	hemorrhageAuras core.AuraArray
 }
 
 func (rogue *Rogue) GetCharacter() *core.Character {
@@ -174,11 +176,8 @@ func NewRogue(character *core.Character, options *proto.Player, rogueOptions *pr
 	// TODO: Be able to Parry based on results
 	rogue.PseudoStats.CanParry = true
 	maxEnergy := 100.0
-	// FOREVER: Vigor has five ranks in the client's trees, so the field is
-	// an int32 now rather than a bool. The effect is the rewrite's to size.
-	if rogue.Talents.Vigor > 0 {
-		maxEnergy += 10
-	}
+	// FOREVER: Vigor has two ranks (+5 / +10 maximum Energy).
+	maxEnergy += vigorEnergyPerRank * float64(rogue.Talents.Vigor)
 	rogue.EnableEnergyBar(maxEnergy)
 
 	rogue.EnableAutoAttacks(rogue, core.AutoAttackOptions{

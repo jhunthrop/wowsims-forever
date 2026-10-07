@@ -118,7 +118,7 @@ func (rogue *Rogue) ApplyTalents() {
 
 // dwsMultiplier returns the offhand damage multiplier
 func (rogue *Rogue) dwsMultiplier() float64 {
-	return 1 + 0.1*float64(rogue.Talents.DualWieldSpecialization)
+	return 1 + dualWieldSpecializationPerRank*float64(rogue.Talents.DualWieldSpecialization)
 }
 
 func (rogue *Rogue) applyRuthlessness() {
@@ -196,7 +196,9 @@ func (rogue *Rogue) registerColdBloodCD() {
 			}
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if spell.Flags.Matches(SpellFlagColdBlooded) {
+			// Mutilate's main-hand hit leaves Cold Blood up for the
+			// off-hand hit that follows it in the same cast.
+			if spell.Flags.Matches(SpellFlagColdBlooded) && spell != rogue.MutilateMH {
 				aura.Deactivate(sim)
 			}
 		},
@@ -260,13 +262,17 @@ func (rogue *Rogue) applySealFate() {
 	})
 }
 
+// initiativeComboPointChance is Initiative's rank -> proc chance, index 0
+// unused: the client's 33%/67%/100% rank text.
+var initiativeComboPointChance = [4]float64{0, 0.33, 0.67, 1.0}
+
 // Initiative talent
 func (rogue *Rogue) applyInitiative() {
 	if rogue.Talents.Initiative == 0 {
 		return
 	}
 
-	procChance := 0.25 * float64(rogue.Talents.Initiative)
+	procChance := initiativeComboPointChance[rankIndex(rogue.Talents.Initiative, initiativeComboPointChance[:])]
 	cpMetrics := rogue.NewComboPointMetrics(core.ActionID{SpellID: 13980})
 
 	rogue.RegisterAura(core.Aura{
@@ -517,7 +523,7 @@ func (rogue *Rogue) registerAdrenalineRushCD() {
 }
 
 func (rogue *Rogue) lethality() float64 {
-	return 0.06 * float64(rogue.Talents.Lethality)
+	return lethalityCritBonusPerRank * float64(rogue.Talents.Lethality)
 }
 
 // Per-rank talent values below, all read off the client's own rank

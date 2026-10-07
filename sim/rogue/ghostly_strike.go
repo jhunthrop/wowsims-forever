@@ -54,7 +54,7 @@ func (rogue *Rogue) registerGhostlyStrikeSpell() {
 
 		CritDamageBonus: rogue.lethality(),
 
-		DamageMultiplier: 1.25,
+		DamageMultiplier: rogue.mainHandStrikePct(ghostlyStrikeWeaponDamagePct, ghostlyStrikeDaggerWeaponDamagePct),
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
 

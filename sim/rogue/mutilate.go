@@ -77,21 +77,21 @@ func (rogue *Rogue) registerMutilateSpell() {
 
 	// Opportunity (talent node 105760): "Increases the damage dealt by
 	// your Backstab, Garrote, Ambush, and Mutilate abilities by 5%/10%."
-	// Two ranks per the client's tree, unlike the stale 4/8/12/16/20%,
-	// five-rank array ambush.go reuses for the same talent -- that array
-	// predates the Forever rewrite and is out of scope for this lane, so
-	// it is not copied here.
-	opportunityMultiplier := []float64{1, 1.05, 1.10}[rogue.Talents.Opportunity]
+	// Two ranks per the client's tree; the same table (client_values.go)
+	// serves Backstab, Garrote and Ambush.
+	opportunityDamage := opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])]
 
 	rogue.MutilateMH = rogue.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: mutilateMHSpellID[rank]},
 		SpellSchool: core.SpellSchoolPhysical,
 		DefenseType: core.DefenseTypeMelee,
 		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell,
+		// Cold Blood's crit bonus rides on the hand spells that roll the
+		// hits; the main hand leaves it for the off hand to spend.
+		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell | SpellFlagColdBlooded,
 
 		CritDamageBonus:  rogue.lethality(),
-		DamageMultiplier: opportunityMultiplier,
+		DamageMultiplier: opportunityDamage,
 		ThreatMultiplier: 1,
 	})
 
@@ -100,10 +100,10 @@ func (rogue *Rogue) registerMutilateSpell() {
 		SpellSchool: core.SpellSchoolPhysical,
 		DefenseType: core.DefenseTypeMelee,
 		ProcMask:    core.ProcMaskMeleeOHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell,
+		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell | SpellFlagColdBlooded,
 
 		CritDamageBonus:  rogue.lethality(),
-		DamageMultiplier: opportunityMultiplier,
+		DamageMultiplier: opportunityDamage,
 		ThreatMultiplier: 1,
 	})
 

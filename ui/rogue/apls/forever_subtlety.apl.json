@@ -53,42 +53,23 @@
       }
     },
     {
-      "notes": "Ghostly Strike on cooldown: cheaper energy than Backstab and applies its own attack power debuff. Does not spend combo points, so it is safe to check ahead of the finisher below.",
       "action": {
         "castSpell": {
           "spellId": {
             "spellId": 14278
           }
         }
-      }
+      },
+      "notes": "Ghostly Strike on cooldown: cheaper than Backstab, hits for 180% weapon damage with a dagger, and builds a combo point."
     },
     {
-      "notes": "Eviscerate at five combo points, checked ahead of Slice and Dice's refresh so a full five-point finisher is never given up in favor of a refresh.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentComboPoints": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "5"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
-            "spellId": 31016,
-            "rank": 9
+            "spellId": 11275,
+            "rank": 6
           }
-        }
-      }
-    },
-    {
-      "notes": "Slice and Dice: only ever spend combo points on it once there are five banked, and only when it actually needs it -- down entirely, or under 3s remaining. Kept at the same five-combo-point floor as Eviscerate above so combo points are never spent below five on either finisher; Eviscerate above claims the combo points whenever both are ready in the same instant.",
-      "action": {
+        },
         "condition": {
           "and": {
             "vals": [
@@ -100,36 +81,84 @@
                   },
                   "rhs": {
                     "const": {
-                      "val": "5"
+                      "val": "4"
                     }
                   }
                 }
               },
               {
-                "or": {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 11275
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Rupture at four or more combo points whenever it is not running. Hemorrhage makes the target take 15% more Rupture damage, so Rupture is this tree's main finisher."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 31016,
+            "rank": 9
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3"
+                    }
+                  }
+                }
+              },
+              {
+                "dotIsActive": {
+                  "spellId": {
+                    "spellId": 11275
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Eviscerate at three or more combo points while Rupture is running, so combo points built during a Rupture are spent instead of idling."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6774,
+            "rank": 2
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "and": {
                   "vals": [
                     {
-                      "not": {
-                        "val": {
-                          "auraIsActive": {
-                            "auraId": {
-                              "spellId": 6774,
-                              "rank": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
                       "cmp": {
-                        "op": "OpLt",
+                        "op": "OpGe",
                         "lhs": {
-                          "auraRemainingTime": {
-                            "auraId": {
-                              "spellId": 6774,
-                              "rank": 2
-                            }
-                          }
+                          "currentComboPoints": {}
                         },
                         "rhs": {
                           "const": {
@@ -137,41 +166,84 @@
                           }
                         }
                       }
+                    },
+                    {
+                      "or": {
+                        "vals": [
+                          {
+                            "not": {
+                              "val": {
+                                "auraIsActive": {
+                                  "auraId": {
+                                    "spellId": 6774,
+                                    "rank": 2
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "auraRemainingTime": {
+                                  "auraId": {
+                                    "spellId": 6774,
+                                    "rank": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "3"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
                     }
                   ]
+                }
+              },
+              {
+                "dotIsActive": {
+                  "spellId": {
+                    "spellId": 11275
+                  }
                 }
               }
             ]
           }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 6774,
-            "rank": 2
-          }
         }
-      }
+      },
+      "notes": "Slice and Dice while Rupture is running: opened when it is down, refreshed under 3 seconds remaining, at three or more combo points."
     },
     {
-      "notes": "Hemorrhage as the combo point builder: Subtlety's talent-granted replacement for Sinister Strike, and its bleed needs reapplying once its charges run out. Gated on spellIsKnown so a bare build without the talent falls through to the Sinister Strike/Backstab line below instead of losing its only builder.",
       "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 16511
+          }
+        },
         "condition": {
           "spellIsKnown": {
             "spellId": {
               "spellId": 16511
             }
           }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 16511
-          }
         }
-      }
+      },
+      "notes": "Hemorrhage as the builder: 145% weapon damage with a dagger, one combo point, and the debuff that lifts Rupture damage by 15% for 15 seconds. Gated on spellIsKnown so a build without the talent falls through to Sinister Strike."
     },
     {
-      "notes": "Sinister Strike is the fallback combo-point builder whenever you have not talented into Hemorrhage.",
       "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11294,
+            "rank": 8
+          }
+        },
         "condition": {
           "not": {
             "val": {
@@ -182,14 +254,9 @@
               }
             }
           }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 11294,
-            "rank": 8
-          }
         }
-      }
+      },
+      "notes": "Sinister Strike is the fallback builder whenever you have not talented into Hemorrhage."
     }
   ]
 }

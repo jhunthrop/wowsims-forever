@@ -7,31 +7,12 @@
       }
     },
     {
-      "notes": "Cold Blood right before the finisher for a guaranteed crit -- the Assassination burst button, since the spec has no Adrenaline Rush. Does not spend combo points, so it is safe to check ahead of the finishers below regardless of which one ends up spending them.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentComboPoints": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "5"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 14177
           }
-        }
-      }
-    },
-    {
-      "notes": "Venom as an alternate finisher if the Assassination tree grants it: spend 5 combo points here instead of on Eviscerate below, for the poison damage and proc-chance buff. Without the talent, this falls through to Eviscerate.",
-      "action": {
+        },
         "condition": {
           "cmp": {
             "op": "OpGe",
@@ -40,45 +21,46 @@
             },
             "rhs": {
               "const": {
-                "val": "5"
+                "val": "4"
               }
             }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 1310703
           }
         }
-      }
+      },
+      "notes": "Cold Blood right before the finisher, for a guaranteed crit on the next Eviscerate. It costs no combo points and no global cooldown, so it is checked first and simply waits for the finisher below."
     },
     {
-      "notes": "Eviscerate at five combo points: the finisher used when Venom isn't talented, checked ahead of Slice and Dice's refresh so a full five-point finisher is never given up in favor of a refresh.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentComboPoints": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "5"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 31016,
             "rank": 9
           }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentComboPoints": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "4"
+              }
+            }
+          }
         }
-      }
+      },
+      "notes": "Eviscerate at four or more combo points, whenever its 35 energy is there. Mutilate gives two combo points a cast, so combo points arrive in steps of two; waiting for a fifth wastes one of them and a Mutilate on top."
     },
     {
-      "notes": "Slice and Dice: only ever spend combo points on it once there are five banked, and only when it actually needs it -- down entirely, or under 3s remaining. Kept at the same five-combo-point floor as Eviscerate above so combo points are never spent below five on either finisher; Eviscerate above claims the combo points whenever both are ready in the same instant.",
       "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6774,
+            "rank": 2
+          }
+        },
         "condition": {
           "and": {
             "vals": [
@@ -90,7 +72,7 @@
                   },
                   "rhs": {
                     "const": {
-                      "val": "5"
+                      "val": "4"
                     }
                   }
                 }
@@ -133,17 +115,74 @@
               }
             ]
           }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 6774,
-            "rank": 2
-          }
         }
-      }
+      },
+      "notes": "Slice and Dice when Eviscerate is out of reach on energy: opened when it is down and refreshed under 3 seconds remaining. At 25 energy it is the cheaper finisher, so it picks up the combo points on the beats where there is not yet 35 energy for Eviscerate."
     },
     {
-      "notes": "Mutilate as the Forever Assassination talent's intended combo-point builder: a talented rogue strikes with both weapons here for 2 combo points. Without the talent, this falls through to Sinister Strike.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1310703
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "4"
+                    }
+                  }
+                }
+              },
+              {
+                "or": {
+                  "vals": [
+                    {
+                      "not": {
+                        "val": {
+                          "auraIsActive": {
+                            "auraId": {
+                              "spellId": 1310703
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "auraRemainingTime": {
+                            "auraId": {
+                              "spellId": 1310703
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "0.5"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Venom, this tree's poison finisher, kept up the same way: cast when it has lapsed and Eviscerate is not affordable. It raises poison damage by 30% and poison proc chance by 10 points while it lasts."
+    },
+    {
       "action": {
         "castSpell": {
           "spellId": {
@@ -151,11 +190,17 @@
             "rank": 4
           }
         }
-      }
+      },
+      "notes": "Mutilate is this tree's builder: both weapons strike for 2 combo points a cast. Without the talent this falls through to Sinister Strike."
     },
     {
-      "notes": "Sinister Strike as the combo point builder for a rogue without the Mutilate talent. Gated on Mutilate being unknown: once the talent is taken, an unguarded Sinister Strike (cheaper still with Improved Sinister Strike) out-competes Mutilate for the energy pool and Mutilate fires once per fight (the ladder's level-50 rung lost 3.4 dps to exactly that).",
       "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11294,
+            "rank": 8
+          }
+        },
         "condition": {
           "not": {
             "val": {
@@ -167,14 +212,9 @@
               }
             }
           }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 11294,
-            "rank": 8
-          }
         }
-      }
+      },
+      "notes": "Sinister Strike builds only for a rogue without Mutilate; once the talent is taken Mutilate builds every combo point and this line is idle by design."
     }
   ]
 }

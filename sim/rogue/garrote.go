@@ -56,8 +56,7 @@ func (rogue *Rogue) registerGarrote() {
 			return !rogue.PseudoStats.InFrontOfTarget
 		},
 
-		DamageMultiplier: 1 +
-			0.04*float64(rogue.Talents.Opportunity),
+		DamageMultiplier: opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])],
 		ThreatMultiplier: 1,
 
 		Dot: core.DotConfig{
