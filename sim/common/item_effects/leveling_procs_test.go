@@ -22,6 +22,7 @@ import (
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/simsignals"
+	"github.com/wowsims/classic/sim/core/stats"
 )
 
 // buildCharacterWithWeapon equips itemID in slot (main-hand or ranged)
@@ -162,5 +163,32 @@ func TestTeebusBlazingLongswordCastsTheClientFirebolt(t *testing.T) {
 	// A hit is the 140 base (less any partial resist); a crit is a multiple of it.
 	if perHit := metrics.TotalDamage / float64(metrics.Hits+metrics.Crits); perHit < 140*0.4 || perHit > 140*2.5 {
 		t.Errorf("damage per landed proc = %v, want around 140", perHit)
+	}
+}
+
+// Blackblade of Shahram (client spell 16602, "Summons the infernal spirit of
+// Shahram") is modelled as the six spells the spirit casts, without the
+// summoned NPC. Two of them have a number a DPS spec reads: Will of Shahram's
+// +50 to every stat and Flames of Shahram's fire damage.
+func TestBlackbladeOfShahramWillAndFlamesWork(t *testing.T) {
+	sim, character := buildCharacterWithWeapon(t, proto.Class_ClassWarrior, &proto.Player_Warrior{Warrior: &proto.Warrior{Options: &proto.Warrior_Options{}}}, proto.ItemSlot_ItemSlotMainHand, 12592)
+
+	will := character.GetSpell(core.ActionID{SpellID: 16598})
+	flames := character.GetSpell(core.ActionID{SpellID: 16596})
+	if will == nil || flames == nil {
+		t.Fatalf("Blackblade equipped, but Will (%v) or Flames (%v) of Shahram is not registered", will != nil, flames != nil)
+	}
+
+	target := sim.Encounter.TargetUnits[0]
+	strengthBefore := character.GetStat(stats.Strength)
+	will.Cast(sim, target)
+	// 50 before the character's own percentage stat bonuses (buffs, racials).
+	if got := character.GetStat(stats.Strength) - strengthBefore; got < 50 {
+		t.Errorf("Will of Shahram added %v strength, want at least 50", got)
+	}
+
+	flames.Cast(sim, target)
+	if metrics := flames.SpellMetrics[target.UnitIndex]; metrics.TotalDamage <= 0 && metrics.Misses == 0 {
+		t.Errorf("Flames of Shahram dealt %v damage and recorded no miss", metrics.TotalDamage)
 	}
 }
