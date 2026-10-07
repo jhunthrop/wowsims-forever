@@ -1328,16 +1328,16 @@ func (warlock *Warlock) applyBaneOfHavoc() {
 	}))
 
 	warlock.BaneOfHavoc = warlock.RegisterSpell(core.SpellConfig{
-		ActionID:    actionID,
-		SpellSchool: core.SpellSchoolShadow,
-		ProcMask:    core.ProcMaskEmpty,
-		Flags:       core.SpellFlagAPL | WarlockFlagDestruction,
+		ActionID:      actionID,
+		SpellSchool:   core.SpellSchoolShadow,
+		ProcMask:      core.ProcMaskEmpty,
+		Flags:         core.SpellFlagAPL | WarlockFlagDestruction,
+		RequiredLevel: 1,
 
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-		},
+		// The client flags Bane of Havoc GCD-less (gcd_ms 0,
+		// spellconst/warlock.json build 1.60.1.70009) - it is a
+		// cooldown-only curse placement, not a cast - so DefaultCast is
+		// left zero-valued instead of taking core.GCDDefault.
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			warlock.baneOfHavocTarget = target

@@ -139,12 +139,24 @@ func (warlock *Warlock) registerCurseOfRecklessnessSpell() {
 		60: 115.0,
 	}[playerLevel]
 
+	// spell_level per rank, from spellconst/warlock.json build
+	// 1.60.1.70009 (704/7658/7659/11717): conformance golden
+	// sim/core/testdata/conformance/warlock.golden.md flagged every
+	// rank's RequiredLevel as unset (client 14/28/42/56 vs engine 0).
+	requiredLevel := map[int32]int{
+		25: 14,
+		40: 28,
+		50: 42,
+		60: 56,
+	}[playerLevel]
+
 	warlock.CurseOfRecklessness = warlock.RegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolShadow,
-		ProcMask:    core.ProcMaskEmpty,
-		Flags:       core.SpellFlagAPL | WarlockFlagAffliction,
-		Rank:        rank,
+		ActionID:      core.ActionID{SpellID: spellID},
+		SpellSchool:   core.SpellSchoolShadow,
+		ProcMask:      core.ProcMaskEmpty,
+		Flags:         core.SpellFlagAPL | WarlockFlagAffliction,
+		Rank:          rank,
+		RequiredLevel: requiredLevel,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,
@@ -310,9 +322,10 @@ func (warlock *Warlock) registerAmplifyCurseSpell() {
 	})
 
 	warlock.AmplifyCurse = warlock.GetOrRegisterSpell(core.SpellConfig{
-		ActionID:    actionID,
-		SpellSchool: core.SpellSchoolShadow,
-		Flags:       core.SpellFlagAPL | WarlockFlagAffliction,
+		ActionID:        actionID,
+		SpellSchool:     core.SpellSchoolShadow,
+		Flags:           core.SpellFlagAPL | WarlockFlagAffliction,
+		RelatedSelfBuff: warlock.AmplifyCurseAura,
 
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
