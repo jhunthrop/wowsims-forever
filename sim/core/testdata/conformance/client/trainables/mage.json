@@ -35,23 +35,6 @@
       ]
     },
     {
-      "name": "Arcane Barrage",
-      "skill_line": "Arcane",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 3000,
-      "ranks": [
-        {
-          "id": 400610,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Arcane Blast",
       "skill_line": "Arcane",
       "source": "skill_line_ability",
@@ -221,23 +204,6 @@
       ]
     },
     {
-      "name": "Arcane Instability",
-      "skill_line": "Arcane",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 15058,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Arcane Intellect",
       "skill_line": "Arcane",
       "source": "skill_line_ability",
@@ -366,23 +332,6 @@
       ]
     },
     {
-      "name": "Arcane Resilience",
-      "skill_line": "Arcane",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 28574,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Arcane Shielding",
       "skill_line": "Arcane",
       "source": "skill_line_ability",
@@ -411,57 +360,6 @@
       "ranks": [
         {
           "id": 11210,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Arcane Surge",
-      "skill_line": "Arcane",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 120000,
-      "ranks": [
-        {
-          "id": 425124,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Arctic Reach",
-      "skill_line": "Frost",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16757,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Balefire Bolt",
-      "skill_line": "Fire",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 2500,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 428878,
           "rank": 0,
           "level": 1
         }
@@ -980,23 +878,6 @@
       ]
     },
     {
-      "name": "Expanded Intellect",
-      "skill_line": "Arcane",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 436949,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Felfire",
       "skill_line": "Fire",
       "source": "skill_line_ability",
@@ -1021,15 +902,10 @@
       "cost": 340,
       "cost_type": 0,
       "cast_time_ms": 0,
-      "cooldown_ms": 15000,
+      "cooldown_ms": 8000,
       "ranks": [
         {
           "id": 2136,
-          "rank": 1,
-          "level": 6
-        },
-        {
-          "id": 400618,
           "rank": 1,
           "level": 6
         },
@@ -1039,17 +915,7 @@
           "level": 14
         },
         {
-          "id": 400619,
-          "rank": 2,
-          "level": 14
-        },
-        {
           "id": 2138,
-          "rank": 3,
-          "level": 22
-        },
-        {
-          "id": 400616,
           "rank": 3,
           "level": 22
         },
@@ -1059,17 +925,7 @@
           "level": 30
         },
         {
-          "id": 400620,
-          "rank": 4,
-          "level": 30
-        },
-        {
           "id": 8413,
-          "rank": 5,
-          "level": 38
-        },
-        {
-          "id": 400621,
           "rank": 5,
           "level": 38
         },
@@ -1079,17 +935,7 @@
           "level": 46
         },
         {
-          "id": 400622,
-          "rank": 6,
-          "level": 46
-        },
-        {
           "id": 10199,
-          "rank": 7,
-          "level": 54
-        },
-        {
-          "id": 400623,
           "rank": 7,
           "level": 54
         }
@@ -1126,23 +972,6 @@
           "id": 469055,
           "rank": 1,
           "level": 8
-        }
-      ]
-    },
-    {
-      "name": "Fire Vulnerability",
-      "skill_line": "Fire",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 22959,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -1218,11 +1047,6 @@
       "cast_time_ms": 3500,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 133,
-          "rank": 1,
-          "level": 1
-        },
         {
           "id": 143,
           "rank": 2,
@@ -1349,11 +1173,6 @@
       "cast_time_ms": 0,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 168,
-          "rank": 1,
-          "level": 1
-        },
         {
           "id": 7300,
           "rank": 2,
@@ -1628,33 +1447,6 @@
       ]
     },
     {
-      "name": "Frozen Orb",
-      "skill_line": "Frost",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 440802,
-          "rank": 0,
-          "level": 1
-        },
-        {
-          "id": 440802,
-          "rank": 0,
-          "level": 1
-        },
-        {
-          "id": 440809,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Ice Armor",
       "skill_line": "Frost",
       "source": "skill_line_ability",
@@ -1794,23 +1586,6 @@
       "ranks": [
         {
           "id": 11207,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Icy Veins",
-      "skill_line": "Frost",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 180000,
-      "ranks": [
-        {
-          "id": 425121,
           "rank": 0,
           "level": 1
         }
@@ -2009,40 +1784,6 @@
       ]
     },
     {
-      "name": "Improved Scorch",
-      "skill_line": "Fire",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 11095,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Incineration",
-      "skill_line": "Fire",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 18459,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Khadgar's Unlocking",
       "skill_line": "",
       "source": "class_spell",
@@ -2092,50 +1833,6 @@
       ]
     },
     {
-      "name": "Living Bomb",
-      "skill_line": "Fire",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 400613,
-          "rank": 0,
-          "level": 1
-        },
-        {
-          "id": 400614,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Living Flame",
-      "skill_line": "Fire",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 30000,
-      "ranks": [
-        {
-          "id": 401558,
-          "rank": 0,
-          "level": 0
-        },
-        {
-          "id": 401556,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Mage Armor",
       "skill_line": "Arcane",
       "source": "skill_line_ability",
@@ -2172,11 +1869,6 @@
       "cast_time_ms": 0,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 29442,
-          "rank": 0,
-          "level": 0
-        },
         {
           "id": 29441,
           "rank": 0,
@@ -2270,23 +1962,6 @@
           "id": 412123,
           "rank": 6,
           "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Mass Regeneration",
-      "skill_line": "Arcane",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 12000,
-      "ranks": [
-        {
-          "id": 412510,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -2577,23 +2252,6 @@
       ]
     },
     {
-      "name": "Regeneration",
-      "skill_line": "Arcane",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 401417,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Remove Lesser Curse",
       "skill_line": "Arcane",
       "source": "skill_line_ability",
@@ -2607,23 +2265,6 @@
           "id": 475,
           "rank": 0,
           "level": 18
-        }
-      ]
-    },
-    {
-      "name": "Rewind Time",
-      "skill_line": "Arcane",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 30000,
-      "ranks": [
-        {
-          "id": 401462,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -2732,23 +2373,6 @@
           "id": 130,
           "rank": 0,
           "level": 12
-        }
-      ]
-    },
-    {
-      "name": "Spellfrost Bolt",
-      "skill_line": "Frost",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 2500,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 412532,
-          "rank": 0,
-          "level": 1
         }
       ]
     },

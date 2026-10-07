@@ -561,24 +561,12 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 5 | 20920 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 30000→30000 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 44 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 34 of the class's 46 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Seal of Martyrdom (407799) | 0→1 | 2 | Retribution | skill_line_ability | 0 | 0 | 0 |  |
-| Avenging Wrath (407788) | 1→1 | 1 | Retribution | skill_line_ability | 0 | 0 | 180000 | cooldown |
-| Divine Light (458856) | 1→1 | 1 | Holy | skill_line_ability | 0 | 2500 | 8000 | cast time, cooldown |
 | Divine Protection (458312) | 1→18 | 4 | Protection | skill_line_ability | 35 mana | 0 | 300000 | power cost, cooldown |
-| Divine Sacrifice (407804) | 1→1 | 1 | Retribution | skill_line_ability | 0 | 0 | 120000 | cooldown |
-| Divine Storm (407778) | 1→1 | 2 | Retribution | skill_line_ability | 0 | 0 | 0 |  |
-| Flash of Light (412020) | 1→58 | 13 | Holy | skill_line_ability | 140 mana | 1500 | 0 | power cost, cast time |
-| Holy Light (19982) | 1→60 | 19 | Holy | skill_line_ability | 660 mana | 2500 | 0 | power cost, cast time |
-| Horn of Lordaeron (425600) | 1→1 | 1 | Holy | skill_line_ability | 0 | 0 | 20000 | cooldown |
-| Inspiration Exemplar (407880) | 1→1 | 1 | Holy | skill_line_ability | 0 | 0 | 0 |  |
-| Rebuke (425609) | 1→1 | 1 | Holy | skill_line_ability | 0 | 0 | 15000 | cooldown |
-| Righteous Fury (407627) | 1→16 | 2 | Protection | skill_line_ability | 0 | 0 | 0 |  |
-| Sacred Shield (412019) | 1→80 | 2 | Holy | skill_line_ability | 0 | 0 | 0 |  |
-| Shield of Righteousness (440658) | 1→1 | 1 | Protection | skill_line_ability | 0 | 0 | 6000 | cooldown |
+| Holy Light (635) | 1→60 | 9 | Holy | skill_line_ability | 660 mana | 2500 | 0 | power cost, cast time |
 | Swift Judgement (1310994) | 1→1 | 1 | Protection | skill_line_ability | 0 | 0 | 60000 | cooldown |
 | Blessing of Might (19740) | 4→60 | 7 | Retribution | skill_line_ability | 130 mana | 0 | 0 | power cost |
 | Hammer of Justice (853) | 8→54 | 4 | Protection | skill_line_ability | 100 mana | 0 | 60000 | power cost, cooldown |
@@ -587,8 +575,10 @@ Active trainables (pipeline.trainables: SkillLineAbility on the class skill line
 | Seal of Fury (1311649) | 10→58 | 7 | Protection | skill_line_ability | 200 mana | 0 | 0 | power cost |
 | Redemption (7328) | 12→60 | 5 | Holy | skill_line_ability | 0 | 10000 | 0 | cast time |
 | Blessing of Wisdom (19742) | 14→60 | 6 | Holy | skill_line_ability | 125 mana | 0 | 0 | power cost |
+| Righteous Fury (25780) | 16→16 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
 | Blessing of Freedom (1044) | 18→18 | 1 | Protection | skill_line_ability | 0 | 0 | 20000 | cooldown |
 | Blessing of Kings (20217) | 20→20 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
+| Flash of Light (19750) | 20→58 | 6 | Holy | skill_line_ability | 140 mana | 1500 | 0 | power cost, cast time |
 | Repentance (20066) | 20→20 | 1 | Retribution | skill_line_ability | 60 mana | 0 | 60000 | power cost, cooldown |
 | Voice of Truth (1310897) | 20→20 | 1 | Holy | skill_line_ability | 0 | 0 | 180000 | cooldown |
 | Seal of Justice (20164) | 22→22 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
@@ -609,4 +599,12 @@ Active trainables (pipeline.trainables: SkillLineAbility on the class skill line
 | Greater Blessing of Kings (25898) | 60→60 | 1 | Protection | skill_line_ability | 150 mana | 0 | 0 | power cost |
 | Greater Blessing of Light (25890) | 60→60 | 1 | Holy | skill_line_ability | 260 mana | 0 | 0 | power cost |
 | Greater Blessing of Salvation (25895) | 60→60 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
+
+### In the client, no learn row
+
+Active, ranked, levelled class-family spells the client lists on no SkillLineAbility row (Unstable Affliction, Hydra Shot) that the engine does not register. They are not counted above or in SUMMARY.md; the list also carries spells that are probably not player spellbook entries (rogue poisons, NPC volleys).
+
+| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
+|---|---|---|---|---|---|---|---|---|
+| Sacred Shield (53601) | 80→80 | 1 | n/a | class_spell | 0 | 0 | 0 |  |
 

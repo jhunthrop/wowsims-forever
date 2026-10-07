@@ -392,25 +392,15 @@ Each spell below is built with exactly one point in the single talent that grant
 | BalanceDruid (Nature's Swiftness talent) | 60 | Nature's Swiftness | 0 | 17116 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 44 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 35 of the class's 54 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Frenzied Regeneration (22845) | 0→36 | 2 | Feral Combat | skill_line_ability | 0 | 0 | 180000 | cooldown |
-| Healing Touch (5185) | 1→60 | 11 | Restoration | skill_line_ability | 840 mana | 3500 | 0 | power cost, cast time |
-| Lacerate (414647) | 1→58 | 4 | Feral Combat | skill_line_ability | 150 rage | 0 | 0 | power cost |
-| Lifebloom (408124) | 1→1 | 2 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
 | Mark of the Wild (1126) | 1→60 | 10 | Restoration | skill_line_ability | 445 mana | 0 | 0 | power cost |
-| Nourish (408247) | 1→1 | 1 | Restoration | skill_line_ability | 0 | 2000 | 0 | cast time |
-| Skull Bash (410176) | 1→1 | 1 | Feral Combat | skill_line_ability | 25 energy | 0 | 10000 | power cost, cooldown |
-| Starfall (439748) | 1→1 | 3 | Balance | skill_line_ability | 0 | 0 | 0 |  |
-| Starsurge (417157) | 1→1 | 1 | Balance | skill_line_ability | 0 | 0 | 6000 | cooldown |
-| Sunfire (414684) | 1→1 | 3 | Balance | skill_line_ability | 40 energy | 0 | 0 | power cost |
-| Survival Instincts (408024) | 1→1 | 1 | Feral Combat | skill_line_ability | 0 | 0 | 180000 | cooldown |
 | Swiftmend (18562) | 1→1 | 1 | Restoration | skill_line_ability | 0 | 0 | 15000 | cooldown |
-| Swipe (411128) | 1→54 | 6 | Feral Combat | skill_line_ability | 200 rage | 0 | 0 | power cost |
 | Rejuvenation (774) | 4→60 | 22 | Restoration | skill_line_ability | 360 mana | 0 | 0 | power cost |
 | Entangling Roots (339) | 8→58 | 12 | Balance | skill_line_ability | 0 | 1500 | 0 | cast time |
+| Healing Touch (5186) | 8→60 | 10 | Restoration | skill_line_ability | 840 mana | 3500 | 0 | power cost, cast time |
 | Demoralizing Roar (99) | 10→52 | 5 | Feral Combat | skill_line_ability | 100 rage | 0 | 0 | power cost |
 | Dire Bear Form (5487) | 10→40 | 2 | Feral Combat | skill_line_ability | 0 | 0 | 0 |  |
 | Growl (6795) | 10→10 | 1 | Feral Combat | skill_line_ability | 0 | 0 | 8000 | cooldown |
@@ -423,21 +413,28 @@ Active trainables (pipeline.trainables: SkillLineAbility on the class skill line
 | Bash (5211) | 14→46 | 3 | Feral Combat | skill_line_ability | 100 rage | 0 | 60000 | power cost, cooldown |
 | Cure Poison (8946) | 14→14 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
 | Aquatic Form (1066) | 16→16 | 1 | Feral Combat | skill_line_ability | 0 | 0 | 0 |  |
+| Swipe (779) | 16→54 | 5 | Feral Combat | skill_line_ability | 200 rage | 0 | 0 | power cost |
 | Hibernate (2637) | 18→58 | 3 | Balance | skill_line_ability | 150 mana | 1500 | 0 | power cost, cast time |
 | Feral Charge (1238122) | 20→20 | 1 | Feral Combat | skill_line_ability | 50 rage | 0 | 15000 | power cost, cooldown |
-| Feral Charge (Bear) (16979) | 20→20 | 1 | Feral Combat | skill_line_ability | 50 rage | 0 | 15000 | power cost, cooldown |
 | Rebirth (20484) | 20→60 | 5 | Restoration | skill_line_ability | 0 | 2000 | 1800000 | cast time, cooldown |
 | Soothe Animal (2908) | 22→54 | 3 | Balance | skill_line_ability | 100 mana | 1500 | 0 | power cost, cast time |
 | Remove Curse (2782) | 24→24 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
-| Primal Bite (407995) | 25→60 | 4 | Feral Combat | skill_line_ability | 200 rage | 0 | 6000 | power cost, cooldown |
 | Abolish Poison (2893) | 26→26 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
 | Dash (1850) | 26→46 | 2 | Feral Combat | skill_line_ability | 0 | 0 | 300000 | cooldown |
 | Challenging Roar (5209) | 28→28 | 1 | Feral Combat | skill_line_ability | 150 rage | 0 | 600000 | power cost, cooldown |
 | Cower (8998) | 28→52 | 3 | Feral Combat | skill_line_ability | 20 energy | 0 | 10000 | power cost, cooldown |
 | Tranquility (740) | 30→60 | 4 | Restoration | skill_line_ability | 925 mana | 0 | 300000 | power cost, cooldown |
 | Travel Form (783) | 30→30 | 1 | Feral Combat | skill_line_ability | 0 | 0 | 0 |  |
+| Frenzied Regeneration (22842) | 36→36 | 1 | Feral Combat | skill_line_ability | 0 | 0 | 180000 | cooldown |
 | Pounce (9005) | 36→56 | 3 | Feral Combat | skill_line_ability | 50 energy | 0 | 0 | power cost |
 | Wild Growth (408120) | 40→60 | 3 | Restoration | skill_line_ability | 1050 mana | 0 | 6000 | power cost, cooldown |
+| Lacerate (414644) | 42→58 | 3 | Feral Combat | skill_line_ability | 150 rage | 0 | 0 | power cost |
 | Barkskin (22812) | 44→44 | 1 | Balance | skill_line_ability | 0 | 0 | 60000 | cooldown |
 | Gift of the Wild (21849) | 50→60 | 2 | Restoration | skill_line_ability | 1200 mana | 0 | 0 | power cost |
+
+### In the client, no learn row
+
+Active, ranked, levelled class-family spells the client lists on no SkillLineAbility row (Unstable Affliction, Hydra Shot) that the engine does not register. They are not counted above or in SUMMARY.md; the list also carries spells that are probably not player spellbook entries (rogue poisons, NPC volleys).
+
+None.
 

@@ -3,40 +3,6 @@
   "class_slug": "rogue",
   "trainables": [
     {
-      "name": "Adrenaline Rush",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 3,
-      "cast_time_ms": 0,
-      "cooldown_ms": 300000,
-      "ranks": [
-        {
-          "id": 13750,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Aggression",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 18427,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Ambush",
       "skill_line": "Assassination",
       "source": "skill_line_ability",
@@ -211,40 +177,6 @@
       ]
     },
     {
-      "name": "Between the Eyes",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 35,
-      "cost_type": 3,
-      "cast_time_ms": -1000000,
-      "cooldown_ms": 20000,
-      "ranks": [
-        {
-          "id": 400009,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Blade Dance",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 25,
-      "cost_type": 3,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 400012,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Blade Flurry",
       "skill_line": "Combat",
       "source": "skill_line_ability",
@@ -279,23 +211,6 @@
       ]
     },
     {
-      "name": "Camouflage",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13975,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Cheap Shot",
       "skill_line": "Assassination",
       "source": "skill_line_ability",
@@ -309,23 +224,6 @@
           "id": 1833,
           "rank": 0,
           "level": 26
-        }
-      ]
-    },
-    {
-      "name": "Cold Blood",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 180000,
-      "ranks": [
-        {
-          "id": 14177,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -362,29 +260,7 @@
           "level": 20
         },
         {
-          "id": 3420,
-          "rank": 1,
-          "level": 20
-        },
-        {
           "id": 11202,
-          "rank": 2,
-          "level": 50
-        }
-      ]
-    },
-    {
-      "name": "Crippling Poison II",
-      "skill_line": "",
-      "source": "class_spell",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 3000,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 3421,
           "rank": 2,
           "level": 50
         }
@@ -404,11 +280,6 @@
           "id": 2823,
           "rank": 1,
           "level": 30
-        },
-        {
-          "id": 2835,
-          "rank": 1,
-          "level": 30
         }
       ]
     },
@@ -424,11 +295,6 @@
       "ranks": [
         {
           "id": 2824,
-          "rank": 2,
-          "level": 38
-        },
-        {
-          "id": 2837,
           "rank": 2,
           "level": 38
         }
@@ -448,11 +314,6 @@
           "id": 11355,
           "rank": 3,
           "level": 46
-        },
-        {
-          "id": 11357,
-          "rank": 3,
-          "level": 46
         }
       ]
     },
@@ -470,11 +331,6 @@
           "id": 11356,
           "rank": 4,
           "level": 54
-        },
-        {
-          "id": 11358,
-          "rank": 4,
-          "level": 54
         }
       ]
     },
@@ -488,11 +344,6 @@
       "cast_time_ms": 3000,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 25347,
-          "rank": 5,
-          "level": 60
-        },
         {
           "id": 25351,
           "rank": 5,
@@ -514,23 +365,6 @@
           "id": 2836,
           "rank": 0,
           "level": 24
-        }
-      ]
-    },
-    {
-      "name": "Dirty Deeds",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14082,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -569,57 +403,6 @@
       ]
     },
     {
-      "name": "Dual Wield Specialization",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13715,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Elusiveness",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13981,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Endurance",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13742,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Evasion",
       "skill_line": "Combat",
       "source": "skill_line_ability",
@@ -646,11 +429,6 @@
       "cast_time_ms": 0,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 2098,
-          "rank": 1,
-          "level": 1
-        },
         {
           "id": 6760,
           "rank": 2,
@@ -768,23 +546,6 @@
       ]
     },
     {
-      "name": "Flawless Execution",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 3,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 1310711,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Garrote",
       "skill_line": "Assassination",
       "source": "skill_line_ability",
@@ -857,23 +618,6 @@
       ]
     },
     {
-      "name": "Ghostly Strike",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 40,
-      "cost_type": 3,
-      "cast_time_ms": 0,
-      "cooldown_ms": 20000,
-      "ranks": [
-        {
-          "id": 14278,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Gouge",
       "skill_line": "Combat",
       "source": "skill_line_ability",
@@ -928,220 +672,6 @@
       ]
     },
     {
-      "name": "Improved Ambush",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14079,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Eviscerate",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14162,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Expose Armor",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14168,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Gouge",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13741,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Kick",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13754,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Kidney Shot",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14174,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Poisons",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14113,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Sap",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14076,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 14094,
-          "rank": 2,
-          "level": 0
-        },
-        {
-          "id": 14095,
-          "rank": 3,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Sinister Strike",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 3,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13732,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Slice and Dice",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14165,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Sprint",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13743,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Initiative",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13976,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Instant Poison",
       "skill_line": "",
       "source": "class_spell",
@@ -1153,11 +683,6 @@
       "ranks": [
         {
           "id": 8679,
-          "rank": 1,
-          "level": 20
-        },
-        {
-          "id": 8681,
           "rank": 1,
           "level": 20
         }
@@ -1177,11 +702,6 @@
           "id": 8686,
           "rank": 2,
           "level": 28
-        },
-        {
-          "id": 8687,
-          "rank": 2,
-          "level": 28
         }
       ]
     },
@@ -1197,11 +717,6 @@
       "ranks": [
         {
           "id": 8688,
-          "rank": 3,
-          "level": 36
-        },
-        {
-          "id": 8691,
           "rank": 3,
           "level": 36
         }
@@ -1221,11 +736,6 @@
           "id": 11338,
           "rank": 4,
           "level": 44
-        },
-        {
-          "id": 11341,
-          "rank": 4,
-          "level": 44
         }
       ]
     },
@@ -1243,11 +753,6 @@
           "id": 11339,
           "rank": 5,
           "level": 52
-        },
-        {
-          "id": 11342,
-          "rank": 5,
-          "level": 52
         }
       ]
     },
@@ -1263,11 +768,6 @@
       "ranks": [
         {
           "id": 11340,
-          "rank": 6,
-          "level": 60
-        },
-        {
-          "id": 11343,
           "rank": 6,
           "level": 60
         }
@@ -1333,40 +833,6 @@
       ]
     },
     {
-      "name": "Lethality",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14128,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Main Gauche",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 15,
-      "cost_type": 3,
-      "cast_time_ms": 0,
-      "cooldown_ms": 15000,
-      "ranks": [
-        {
-          "id": 424919,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Mind-numbing Poison",
       "skill_line": "",
       "source": "class_spell",
@@ -1378,11 +844,6 @@
       "ranks": [
         {
           "id": 5761,
-          "rank": 1,
-          "level": 24
-        },
-        {
-          "id": 5763,
           "rank": 1,
           "level": 24
         }
@@ -1402,11 +863,6 @@
           "id": 8693,
           "rank": 2,
           "level": 38
-        },
-        {
-          "id": 8694,
-          "rank": 2,
-          "level": 38
         }
       ]
     },
@@ -1424,28 +880,6 @@
           "id": 11399,
           "rank": 3,
           "level": 52
-        },
-        {
-          "id": 11400,
-          "rank": 3,
-          "level": 52
-        }
-      ]
-    },
-    {
-      "name": "Murder",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14158,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -1454,21 +888,11 @@
       "skill_line": "Assassination",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 0,
-      "cost_type": 0,
+      "cost": 60,
+      "cost_type": 3,
       "cast_time_ms": 0,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 1310705,
-          "rank": 1,
-          "level": 30
-        },
-        {
-          "id": 1310706,
-          "rank": 1,
-          "level": 30
-        },
         {
           "id": 1310707,
           "rank": 1,
@@ -1485,42 +909,12 @@
           "level": 40
         },
         {
-          "id": 399960,
-          "rank": 2,
-          "level": 40
-        },
-        {
-          "id": 399961,
-          "rank": 2,
-          "level": 40
-        },
-        {
           "id": 1241582,
           "rank": 3,
           "level": 50
         },
         {
-          "id": 1241585,
-          "rank": 3,
-          "level": 50
-        },
-        {
-          "id": 1241588,
-          "rank": 3,
-          "level": 50
-        },
-        {
           "id": 1241584,
-          "rank": 4,
-          "level": 60
-        },
-        {
-          "id": 1241586,
-          "rank": 4,
-          "level": 60
-        },
-        {
-          "id": 1241590,
           "rank": 4,
           "level": 60
         }
@@ -1561,23 +955,6 @@
       ]
     },
     {
-      "name": "Opportunity",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14057,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Pick Pocket",
       "skill_line": "Subtlety",
       "source": "skill_line_ability",
@@ -1591,28 +968,6 @@
           "id": 921,
           "rank": 0,
           "level": 4
-        }
-      ]
-    },
-    {
-      "name": "Poisoned Knife",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 425012,
-          "rank": 0,
-          "level": 1
-        },
-        {
-          "id": 425013,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -1634,23 +989,6 @@
       ]
     },
     {
-      "name": "Preparation",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 600000,
-      "ranks": [
-        {
-          "id": 14185,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Puncturing Wounds",
       "skill_line": "Combat",
       "source": "skill_line_ability",
@@ -1668,23 +1006,6 @@
       ]
     },
     {
-      "name": "Quick Draw",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 25,
-      "cost_type": 3,
-      "cast_time_ms": 0,
-      "cooldown_ms": 10000,
-      "ranks": [
-        {
-          "id": 398196,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Redirect",
       "skill_line": "Subtlety",
       "source": "skill_line_ability",
@@ -1696,57 +1017,6 @@
       "ranks": [
         {
           "id": 438040,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Relentless Strikes",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14179,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Riposte",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 10,
-      "cost_type": 3,
-      "cast_time_ms": 0,
-      "cooldown_ms": 6000,
-      "ranks": [
-        {
-          "id": 14251,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Rogue Passive (DND)",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 21184,
           "rank": 0,
           "level": 1
         }
@@ -1791,40 +1061,6 @@
           "id": 11275,
           "rank": 6,
           "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Ruthlessness",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14156,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Saber Slash",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 45,
-      "cost_type": 3,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 424785,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -1890,74 +1126,6 @@
       ]
     },
     {
-      "name": "Serrated Blades",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14171,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Shadowstrike",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 20,
-      "cost_type": 3,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 399985,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Shiv",
-      "skill_line": "Combat",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 20,
-      "cost_type": 3,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 424799,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Shuriken Toss",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 30,
-      "cost_type": 3,
-      "cast_time_ms": 0,
-      "cooldown_ms": 20000,
-      "ranks": [
-        {
-          "id": 399986,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Sinister Strike",
       "skill_line": "Combat",
       "source": "skill_line_ability",
@@ -1967,11 +1135,6 @@
       "cast_time_ms": 0,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 1752,
-          "rank": 1,
-          "level": 1
-        },
         {
           "id": 1757,
           "rank": 2,
@@ -2006,23 +1169,6 @@
           "id": 11294,
           "rank": 8,
           "level": 54
-        }
-      ]
-    },
-    {
-      "name": "Sleight of Hand",
-      "skill_line": "Subtlety",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 30892,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -2162,40 +1308,6 @@
       ]
     },
     {
-      "name": "Vigor",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 14983,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Vile Poisons",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16513,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Wound Poison",
       "skill_line": "",
       "source": "class_spell",
@@ -2211,11 +1323,6 @@
           "level": 32
         },
         {
-          "id": 13220,
-          "rank": 1,
-          "level": 32
-        },
-        {
           "id": 13225,
           "rank": 2,
           "level": 40
@@ -2227,57 +1334,6 @@
         },
         {
           "id": 13227,
-          "rank": 4,
-          "level": 56
-        }
-      ]
-    },
-    {
-      "name": "Wound Poison II",
-      "skill_line": "",
-      "source": "class_spell",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 3000,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13228,
-          "rank": 2,
-          "level": 40
-        }
-      ]
-    },
-    {
-      "name": "Wound Poison III",
-      "skill_line": "",
-      "source": "class_spell",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 3000,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13229,
-          "rank": 3,
-          "level": 48
-        }
-      ]
-    },
-    {
-      "name": "Wound Poison IV",
-      "skill_line": "",
-      "source": "class_spell",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 3000,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13230,
           "rank": 4,
           "level": 56
         }

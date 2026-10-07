@@ -227,41 +227,36 @@ Each spell below is built with exactly one point in the single talent that grant
 | CombatSwordsRogue (Riposte talent) | 60 | Riposte | 0 | 14251 | 10.00→10.00 | energy→energy | 6000→6000 | 0→0 | 0→0 | 0→0 | 6000→6000 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 33 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 12 of the class's 27 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Main Gauche (424919) | 0→0 | 1 | Combat | skill_line_ability | 15 energy | 0 | 15000 | power cost, cooldown |
-| Between the Eyes (400009) | 1→1 | 1 | Combat | skill_line_ability | 35 energy | -1000000 | 20000 | power cost, cooldown |
-| Blade Dance (400012) | 1→1 | 1 | Combat | skill_line_ability | 25 energy | 0 | 0 | power cost |
-| Poisoned Knife (425012) | 1→1 | 2 | Combat | skill_line_ability | 0 | 0 | 0 |  |
-| Quick Draw (398196) | 1→1 | 1 | Combat | skill_line_ability | 25 energy | 0 | 10000 | power cost, cooldown |
 | Redirect (438040) | 1→1 | 1 | Subtlety | skill_line_ability | 0 | 0 | 10000 | cooldown |
-| Saber Slash (424785) | 1→1 | 1 | Combat | skill_line_ability | 45 energy | 0 | 0 | power cost |
-| Shadowstrike (399985) | 1→1 | 1 | Subtlety | skill_line_ability | 20 energy | 0 | 0 | power cost |
-| Shiv (424799) | 1→1 | 1 | Combat | skill_line_ability | 20 energy | 0 | 0 | power cost |
-| Shuriken Toss (399986) | 1→1 | 1 | Subtlety | skill_line_ability | 30 energy | 0 | 20000 | power cost, cooldown |
 | Gouge (1776) | 6→60 | 5 | Combat | skill_line_ability | 45 energy | 0 | 10000 | power cost, cooldown |
 | Evasion (5277) | 8→8 | 1 | Combat | skill_line_ability | 0 | 0 | 300000 | cooldown |
 | Sap (6770) | 10→48 | 3 | Subtlety | skill_line_ability | 65 energy | 0 | 0 | power cost |
 | Sprint (2983) | 10→58 | 3 | Combat | skill_line_ability | 0 | 0 | 300000 | cooldown |
 | Kick (1766) | 12→58 | 4 | Combat | skill_line_ability | 25 energy | 0 | 10000 | power cost, cooldown |
-| Crippling Poison (3408) | 20→50 | 3 | n/a | class_spell | 0 | 3000 | 0 | cast time |
 | Distract (1725) | 22→22 | 1 | Subtlety | skill_line_ability | 30 energy | 0 | 30000 | power cost, cooldown |
-| Mind-numbing Poison (5761) | 24→24 | 2 | n/a | class_spell | 0 | 3000 | 0 | cast time |
 | Cheap Shot (1833) | 26→26 | 1 | Assassination | skill_line_ability | 60 energy | 0 | 0 | power cost |
 | Disarm Trap (1842) | 30→30 | 1 | Subtlety | skill_line_ability | 0 | 2000 | 0 | cast time |
 | Kidney Shot (408) | 30→50 | 3 | Assassination | skill_line_ability | 0 | 0 | 20000 | cooldown |
 | Blind (2094) | 34→34 | 1 | Subtlety | skill_line_ability | 30 energy | 0 | 300000 | power cost, cooldown |
-| Mind-numbing Poison II (8693) | 38→38 | 2 | n/a | class_spell | 0 | 3000 | 0 | cast time |
 | Venom (1310703) | 40→40 | 1 | Assassination | skill_line_ability | 25 energy | 0 | 0 | power cost |
-| Wound Poison II (13228) | 40→40 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
-| Wound Poison III (13229) | 48→48 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
-| Crippling Poison II (3421) | 50→50 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
-| Instant Poison V (11339) | 52→52 | 2 | n/a | class_spell | 0 | 3000 | 0 | cast time |
-| Mind-numbing Poison III (11399) | 52→52 | 2 | n/a | class_spell | 0 | 3000 | 0 | cast time |
-| Deadly Poison IV (11356) | 54→54 | 2 | n/a | class_spell | 0 | 3000 | 0 | cast time |
+
+### In the client, no learn row
+
+Active, ranked, levelled class-family spells the client lists on no SkillLineAbility row (Unstable Affliction, Hydra Shot) that the engine does not register. They are not counted above or in SUMMARY.md; the list also carries spells that are probably not player spellbook entries (rogue poisons, NPC volleys).
+
+| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
+|---|---|---|---|---|---|---|---|---|
+| Crippling Poison (3408) | 20→50 | 2 | n/a | class_spell | 0 | 3000 | 0 | cast time |
+| Mind-numbing Poison (5761) | 24→24 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
+| Mind-numbing Poison II (8693) | 38→38 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
+| Instant Poison V (11339) | 52→52 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
+| Mind-numbing Poison III (11399) | 52→52 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
+| Deadly Poison IV (11356) | 54→54 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
 | Occult Poison I (458821) | 54→54 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
 | Occult Poison II (1214171) | 54→54 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
-| Wound Poison IV (13230) | 56→56 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
+| Deadly Poison V (25351) | 60→60 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
 

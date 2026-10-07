@@ -3,67 +3,6 @@
   "class_slug": "shaman",
   "trainables": [
     {
-      "name": "Ancestral Fortitude",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16177,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Ancestral Guidance",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 409324,
-          "rank": 0,
-          "level": 1
-        },
-        {
-          "id": 409333,
-          "rank": 0,
-          "level": 1
-        },
-        {
-          "id": 409337,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Ancestral Healing",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16176,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Ancestral Spirit",
       "skill_line": "Restoration",
       "source": "skill_line_ability",
@@ -165,40 +104,6 @@
       ]
     },
     {
-      "name": "Call of Flame",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16038,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Call of Thunder",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16120,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Call of the Ancestors",
       "skill_line": "Elemental Combat",
       "source": "skill_line_ability",
@@ -281,18 +186,13 @@
       "skill_line": "Elemental Combat",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 0,
+      "cost": 485,
       "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
+      "cast_time_ms": 2000,
+      "cooldown_ms": 6000,
       "ranks": [
         {
           "id": 421,
-          "rank": 1,
-          "level": 32
-        },
-        {
-          "id": 408479,
           "rank": 1,
           "level": 32
         },
@@ -302,17 +202,7 @@
           "level": 40
         },
         {
-          "id": 408481,
-          "rank": 2,
-          "level": 40
-        },
-        {
           "id": 2860,
-          "rank": 3,
-          "level": 48
-        },
-        {
-          "id": 408482,
           "rank": 3,
           "level": 48
         },
@@ -320,45 +210,6 @@
           "id": 10605,
           "rank": 4,
           "level": 56
-        },
-        {
-          "id": 408484,
-          "rank": 4,
-          "level": 56
-        }
-      ]
-    },
-    {
-      "name": "Concussion",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16035,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Convection",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16039,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -397,23 +248,6 @@
       ]
     },
     {
-      "name": "Decoy Totem",
-      "skill_line": "Enhancement",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 20000,
-      "ranks": [
-        {
-          "id": 425874,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Disease Cleansing Totem",
       "skill_line": "Restoration",
       "source": "skill_line_ability",
@@ -432,24 +266,14 @@
     },
     {
       "name": "Earth Shield",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
+      "skill_line": "",
+      "source": "class_spell",
       "active": true,
       "cost": 0,
       "cost_type": 0,
       "cast_time_ms": 0,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 408514,
-          "rank": 0,
-          "level": 1
-        },
-        {
-          "id": 408519,
-          "rank": 0,
-          "level": 1
-        },
         {
           "id": 974,
           "rank": 1,
@@ -575,23 +399,6 @@
       ]
     },
     {
-      "name": "Earth's Grasp",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16043,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Earthbind Totem",
       "skill_line": "Elemental Combat",
       "source": "skill_line_ability",
@@ -609,45 +416,6 @@
       ]
     },
     {
-      "name": "Elemental Alacrity",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16578,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Elemental Devastation",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 30160,
-          "rank": 0,
-          "level": 0
-        },
-        {
-          "id": 30165,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Elemental Focus",
       "skill_line": "Elemental Combat",
       "source": "skill_line_ability",
@@ -661,113 +429,6 @@
           "id": 16164,
           "rank": 0,
           "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Elemental Fury",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16089,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Elemental Reach",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 28999,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Elemental Warding",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 28996,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Elemental Weapons",
-      "skill_line": "Enhancement",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16266,
-          "rank": 1,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Enhancing Totems",
-      "skill_line": "Enhancement",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16259,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 16295,
-          "rank": 2,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Eye of the Storm",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 29062,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -1143,84 +804,6 @@
       ]
     },
     {
-      "name": "Guardian Totems",
-      "skill_line": "Enhancement",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16258,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Healing Focus",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16181,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Healing Grace",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 29189,
-          "rank": 2,
-          "level": 0
-        },
-        {
-          "id": 29191,
-          "rank": 3,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Healing Rain",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 415236,
-          "rank": 0,
-          "level": 0
-        },
-        {
-          "id": 415242,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Healing Stream Totem",
       "skill_line": "Restoration",
       "source": "skill_line_ability",
@@ -1267,11 +850,6 @@
       "cast_time_ms": 3000,
       "cooldown_ms": 0,
       "ranks": [
-        {
-          "id": 331,
-          "rank": 1,
-          "level": 1
-        },
         {
           "id": 332,
           "rank": 2,
@@ -1320,130 +898,6 @@
       ]
     },
     {
-      "name": "Healing Way",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 29206,
-          "rank": 1,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Fire Nova",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16086,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Ghost Wolf",
-      "skill_line": "Enhancement",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16262,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Healing Wave",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16182,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Lightning Shield",
-      "skill_line": "Enhancement",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16261,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Reincarnation",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16184,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Improved Weapon Totems",
-      "skill_line": "Enhancement",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 29192,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 29193,
-          "rank": 2,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Lava Burst",
       "skill_line": "Elemental Combat",
       "source": "skill_line_ability",
@@ -1453,21 +907,6 @@
       "cast_time_ms": 2500,
       "cooldown_ms": 10000,
       "ranks": [
-        {
-          "id": 408491,
-          "rank": 0,
-          "level": 40
-        },
-        {
-          "id": 1238373,
-          "rank": 0,
-          "level": 50
-        },
-        {
-          "id": 1238376,
-          "rank": 0,
-          "level": 60
-        },
         {
           "id": 408490,
           "rank": 1,
@@ -1482,23 +921,6 @@
           "id": 1238300,
           "rank": 3,
           "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Lava Lash",
-      "skill_line": "Enhancement",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 6000,
-      "ranks": [
-        {
-          "id": 408507,
-          "rank": 0,
-          "level": 1
         }
       ]
     },
@@ -1554,28 +976,13 @@
       "skill_line": "Elemental Combat",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 0,
+      "cost": 220,
       "cost_type": 0,
-      "cast_time_ms": 0,
+      "cast_time_ms": 2500,
       "cooldown_ms": 0,
       "ranks": [
         {
-          "id": 403,
-          "rank": 1,
-          "level": 1
-        },
-        {
-          "id": 408439,
-          "rank": 1,
-          "level": 1
-        },
-        {
           "id": 529,
-          "rank": 2,
-          "level": 8
-        },
-        {
-          "id": 408440,
           "rank": 2,
           "level": 8
         },
@@ -1585,17 +992,7 @@
           "level": 14
         },
         {
-          "id": 408441,
-          "rank": 3,
-          "level": 14
-        },
-        {
           "id": 915,
-          "rank": 4,
-          "level": 20
-        },
-        {
-          "id": 408442,
           "rank": 4,
           "level": 20
         },
@@ -1605,17 +1002,7 @@
           "level": 26
         },
         {
-          "id": 408443,
-          "rank": 5,
-          "level": 26
-        },
-        {
           "id": 6041,
-          "rank": 6,
-          "level": 32
-        },
-        {
-          "id": 408472,
           "rank": 6,
           "level": 32
         },
@@ -1625,17 +1012,7 @@
           "level": 38
         },
         {
-          "id": 408473,
-          "rank": 7,
-          "level": 38
-        },
-        {
           "id": 10392,
-          "rank": 8,
-          "level": 44
-        },
-        {
-          "id": 408474,
           "rank": 8,
           "level": 44
         },
@@ -1645,51 +1022,9 @@
           "level": 50
         },
         {
-          "id": 408475,
-          "rank": 9,
-          "level": 50
-        },
-        {
           "id": 15208,
           "rank": 10,
           "level": 56
-        },
-        {
-          "id": 408477,
-          "rank": 10,
-          "level": 56
-        }
-      ]
-    },
-    {
-      "name": "Lightning Mastery",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16579,
-          "rank": 2,
-          "level": 0
-        },
-        {
-          "id": 16580,
-          "rank": 3,
-          "level": 0
-        },
-        {
-          "id": 16581,
-          "rank": 4,
-          "level": 0
-        },
-        {
-          "id": 16582,
-          "rank": 5,
-          "level": 0
         }
       ]
     },
@@ -1867,45 +1202,6 @@
       ]
     },
     {
-      "name": "Molten Blast",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 6000,
-      "ranks": [
-        {
-          "id": 425339,
-          "rank": 0,
-          "level": 1
-        },
-        {
-          "id": 425339,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Natural Grace",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 29187,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Nature Resistance Totem",
       "skill_line": "Enhancement",
       "source": "skill_line_ability",
@@ -1929,33 +1225,6 @@
           "id": 10601,
           "rank": 3,
           "level": 60
-        }
-      ]
-    },
-    {
-      "name": "Nature's Guidance",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16180,
-          "rank": 1,
-          "level": 0
-        },
-        {
-          "id": 16196,
-          "rank": 2,
-          "level": 0
-        },
-        {
-          "id": 16198,
-          "rank": 3,
-          "level": 0
         }
       ]
     },
@@ -2021,23 +1290,6 @@
       ]
     },
     {
-      "name": "Purification",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16178,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Rage of the Farseer",
       "skill_line": "Enhancement",
       "source": "skill_line_ability",
@@ -2073,40 +1325,6 @@
           "id": 21169,
           "rank": 0,
           "level": 30
-        }
-      ]
-    },
-    {
-      "name": "Restorative Totems",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16187,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Reverberation",
-      "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16040,
-          "rank": 0,
-          "level": 0
         }
       ]
     },
@@ -2261,23 +1479,6 @@
       ]
     },
     {
-      "name": "Spirit of the Alpha",
-      "skill_line": "Enhancement",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 408696,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Stoneclaw Totem",
       "skill_line": "Elemental Combat",
       "source": "skill_line_ability",
@@ -2416,57 +1617,6 @@
       ]
     },
     {
-      "name": "Tidal Focus",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16179,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Tidal Mastery",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16194,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
-      "name": "Totemic Focus",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 16173,
-          "rank": 0,
-          "level": 0
-        }
-      ]
-    },
-    {
       "name": "Totemic Mastery",
       "skill_line": "Restoration",
       "source": "skill_line_ability",
@@ -2548,23 +1698,6 @@
           "id": 131,
           "rank": 0,
           "level": 22
-        }
-      ]
-    },
-    {
-      "name": "Water Shield",
-      "skill_line": "Restoration",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 15000,
-      "ranks": [
-        {
-          "id": 408510,
-          "rank": 0,
-          "level": 20
         }
       ]
     },

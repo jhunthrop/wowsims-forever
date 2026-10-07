@@ -342,18 +342,10 @@ Each spell below is built with exactly one point in the single talent that grant
 | FuryWarrior (Sweeping Strikes talent) | 60 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→10000 | mismatch | duration_ms 20000->10000 | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 21 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 11 of the class's 40 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Devastate (403196) | 1→50 | 2 | Protection | skill_line_ability | 150 rage | 0 | 0 | power cost |
-| Enraged Regeneration (402913) | 1→1 | 1 | Fury | skill_line_ability | 0 | 0 | 180000 | cooldown |
-| Meathook (403228) | 1→1 | 1 | Arms | skill_line_ability | 150 rage | 0 | 35000 | power cost, cooldown |
-| Quick Strike (429765) | 1→1 | 1 | Arms | skill_line_ability | 200 rage | 0 | 0 | power cost |
-| Raging Blow (402911) | 1→1 | 1 | Fury | skill_line_ability | 0 | 0 | 8000 | cooldown |
-| Rallying Cry (426490) | 1→1 | 1 | Protection | skill_line_ability | 0 | 0 | 180000 | cooldown |
-| Shockwave (440488) | 1→1 | 1 | Arms | skill_line_ability | 150 rage | 0 | 20000 | power cost, cooldown |
-| Valor of Azeroth (461475) | 2→2 | 1 | Protection | skill_line_ability | 0 | 0 | 60000 | cooldown |
 | Charge (100) | 4→46 | 3 | Arms | skill_line_ability | 0 | 0 | 15000 | cooldown |
 | Taunt (355) | 10→10 | 1 | Protection | skill_line_ability | 0 | 0 | 8000 | cooldown |
 | Shield Bash (72) | 12→52 | 3 | Protection | skill_line_ability | 100 rage | 0 | 12000 | power cost, cooldown |
@@ -365,6 +357,14 @@ Active trainables (pipeline.trainables: SkillLineAbility on the class skill line
 | Challenging Shout (1161) | 26→26 | 1 | Fury | skill_line_ability | 50 rage | 0 | 600000 | power cost, cooldown |
 | Concussion Blow (12809) | 30→30 | 1 | Protection | skill_line_ability | 100 rage | 0 | 45000 | power cost, cooldown |
 | Intercept (20252) | 30→52 | 3 | Fury | skill_line_ability | 100 rage | 0 | 30000 | power cost, cooldown |
+
+### In the client, no learn row
+
+Active, ranked, levelled class-family spells the client lists on no SkillLineAbility row (Unstable Affliction, Hydra Shot) that the engine does not register. They are not counted above or in SUMMARY.md; the list also carries spells that are probably not player spellbook entries (rogue poisons, NPC volleys).
+
+| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
+|---|---|---|---|---|---|---|---|---|
 | Howling Blade (13490) | 35→35 | 1 | n/a | class_spell | 100 mana | 0 | 0 | power cost |
+| Devastate (20243) | 50→50 | 1 | n/a | class_spell | 150 rage | 0 | 0 | power cost |
 | Recycle (458882) | 60→60 | 1 | n/a | class_spell | 0 | 1300 | 6000 | cast time, cooldown |
 
