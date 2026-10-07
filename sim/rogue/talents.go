@@ -356,18 +356,17 @@ func (rogue *Rogue) applyWeaponSpecializations() {
 	*/
 }
 
+// weaponExpertisePercent is Weapon Expertise's dodge-and-parry reduction
+// per the live tree (data/builds/1.60.1.70009/talents/rogue.json): "Reduces
+// the chance for your attacks to be Dodged or Parried by 1%" and "2%" for
+// its two ranks. Vanilla's +3/+5 weapon skill is gone with the talent text.
+func weaponExpertisePercent(points int32) float64 {
+	return float64(max(0, min(points, 2)))
+}
+
 func (rogue *Rogue) applyWeaponExpertise() {
-	if wepExpertise := rogue.Talents.WeaponExpertise; wepExpertise > 0 {
-		wepBonus := []float64{0, 3, 5}
-		// rankIndex clamps: Forever's client tree gives Weapon Expertise up
-		// to 5 points (see sim/rogue/dps_rogue/level_smoke_test.go), but
-		// this table only has tuned values for the original 2 ranks, so an
-		// over-ranked talent string (CombatSwordsRogue/CombatDaggersRogue
-		// both spend all 5) would otherwise index past the end of wepBonus.
-		bonus := wepBonus[rankIndex(wepExpertise, wepBonus)]
-		rogue.PseudoStats.SwordsSkill += bonus
-		rogue.PseudoStats.DaggersSkill += bonus
-		rogue.PseudoStats.UnarmedSkill += bonus
+	if percent := weaponExpertisePercent(rogue.Talents.WeaponExpertise); percent > 0 {
+		rogue.AddStat(stats.Expertise, percent*core.ExpertiseRatingPerExpertiseChance)
 	}
 }
 
