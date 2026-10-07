@@ -34,6 +34,7 @@ func (mage *Mage) registerEvocationCD() {
 		ActionID:       actionID,
 		ClassSpellMask: MageSpellMaskEvocation,
 		Flags:          core.SpellFlagHelpful | core.SpellFlagChanneled | core.SpellFlagAPL,
+		RequiredLevel:  20,
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -65,6 +66,14 @@ func (mage *Mage) registerEvocationCD() {
 			spell.SelfHot().Apply(sim)
 		},
 	})
+
+	// The channel's own duration lives on the Hot's Aura (built above,
+	// by core's createDots, as the "Evocation" label), not a
+	// RelatedSelfBuff set at config time - this SpellConfig field is
+	// only populated post-registration so the conformance report
+	// (sim/conformance's engineDuration) can read it the same way it
+	// reads every other self-buff spell's duration.
+	mage.Evocation.RelatedSelfBuff = mage.Evocation.SelfHot().Aura
 
 	mage.AddMajorCooldown(core.MajorCooldown{
 		Spell: mage.Evocation,

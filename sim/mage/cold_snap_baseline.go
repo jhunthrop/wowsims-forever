@@ -34,6 +34,7 @@ func (mage *Mage) registerColdSnapSpell() {
 		ActionID:       core.ActionID{SpellID: ColdSnapSpellId[0]},
 		ClassSpellMask: MageSpellMaskColdSnap,
 		Flags:          core.SpellFlagNoOnCastComplete,
+		RequiredLevel:  ColdSnapLevel[0],
 
 		Cast: core.CastConfig{
 			CD: core.Cooldown{

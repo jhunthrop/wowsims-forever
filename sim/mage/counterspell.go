@@ -15,6 +15,7 @@ func (mage *Mage) registerCounterspellSpell() {
 		SpellSchool:    core.SpellSchoolArcane,
 		ProcMask:       core.ProcMaskSpellDamage,
 		Flags:          core.SpellFlagAPL | SpellFlagMage | core.SpellFlagCastTimeNoGCD,
+		RequiredLevel:  24,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: 100,

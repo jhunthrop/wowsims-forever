@@ -17,6 +17,16 @@ var FireballCastTime = [FireballRanks + 1]int32{0, 1500, 2000, 2500, 3000, 3500,
 var FireballManaCost = [FireballRanks + 1]float64{0, 30, 45, 65, 95, 140, 185, 220, 260, 305, 350, 395, 410}
 var FireballLevel = [FireballRanks + 1]int{0, 1, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 60}
 
+// FireballDotTicks is the client's own per-rank tick count for the
+// Fireball dot: duration_ms / period_ms (period_ms is always 2000 -
+// see mage.json spells 133/143/145/3140's effect index 1). Ranks 1-3
+// burn for fewer than the later ranks' 4 ticks (4000/6000/6000/8000ms
+// at 2s/tick = 2/3/3/4 ticks) - the engine previously hardcoded 4
+// ticks for every rank, which overstated ranks 1-3's dot duration
+// without changing their total damage (FireballDotDamage is a total,
+// divided by the tick count below).
+var FireballDotTicks = [FireballRanks + 1]int32{0, 2, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4}
+
 func (mage *Mage) registerFireballSpell() {
 	mage.Fireball = make([]*core.Spell, FireballRanks+1)
 
@@ -31,7 +41,7 @@ func (mage *Mage) registerFireballSpell() {
 }
 
 func (mage *Mage) newFireballSpellConfig(rank int) core.SpellConfig {
-	numTicks := int32(4)
+	numTicks := FireballDotTicks[rank]
 	tickLength := time.Second * 2
 
 	spellId := FireballSpellId[rank]

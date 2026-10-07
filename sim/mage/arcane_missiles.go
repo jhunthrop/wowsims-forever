@@ -119,7 +119,7 @@ func (mage *Mage) getArcaneMissilesTickSpell(rank int) *core.Spell {
 		SpellSchool:    core.SpellSchoolArcane,
 		DefenseType:    core.DefenseTypeMagic,
 		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          SpellFlagMage,
+		Flags:          SpellFlagMage | core.SpellFlagPassiveSpell,
 		MissileSpeed:   20,
 
 		Rank: 1,
