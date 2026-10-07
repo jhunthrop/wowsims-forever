@@ -233,9 +233,17 @@ func (spell *Spell) MagicCritCheck(sim *Simulation, target *Unit) bool {
 	return sim.RandomFloat("Magical Crit Roll") < critChance
 }
 
+// HealingPower is the bonus healing a heal adds its coefficient times.
+//
+// It is the healing stat alone. The site's item data states a spell's
+// damage and healing bonuses as separate stats (an old "damage and
+// healing" item is spell power N and healing N; a Forever healing item is
+// healing N and spell power N/3, Forever's one-third rule), so spell
+// power here is damage only, and adding it would count the same bonus
+// twice or credit a healer with damage it cannot heal with. A source
+// that grants both (Atiesh's aura, Champion of the Light) grants both.
 func (spell *Spell) HealingPower(target *Unit) float64 {
-	return spell.Unit.GetStat(stats.SpellPower) +
-		spell.Unit.GetStat(stats.HealingPower) +
+	return spell.Unit.GetStat(stats.HealingPower) +
 		target.PseudoStats.BonusHealingTaken
 }
 func (spell *Spell) healingCritRating() float64 {

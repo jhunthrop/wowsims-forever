@@ -68,19 +68,20 @@ func (rsrc *raidSimResultCombiner) newDistMetrics() *proto.DistributionMetrics {
 
 func (rsrc *raidSimResultCombiner) newUnitMetrics(baseUnit *proto.UnitMetrics) *proto.UnitMetrics {
 	newUm := &proto.UnitMetrics{
-		Name:      baseUnit.Name,
-		UnitIndex: baseUnit.UnitIndex,
-		Dps:       rsrc.newDistMetrics(),
-		Dpasp:     rsrc.newDistMetrics(),
-		Threat:    rsrc.newDistMetrics(),
-		Dtps:      rsrc.newDistMetrics(),
-		Tmi:       rsrc.newDistMetrics(),
-		Hps:       rsrc.newDistMetrics(),
-		Tto:       rsrc.newDistMetrics(),
-		Actions:   make([]*proto.ActionMetrics, 0, len(baseUnit.Actions)),
-		Auras:     make([]*proto.AuraMetrics, len(baseUnit.Auras)),
-		Resources: make([]*proto.ResourceMetrics, 0, len(baseUnit.Resources)),
-		Pets:      make([]*proto.UnitMetrics, len(baseUnit.Pets)),
+		Name:         baseUnit.Name,
+		UnitIndex:    baseUnit.UnitIndex,
+		Dps:          rsrc.newDistMetrics(),
+		Dpasp:        rsrc.newDistMetrics(),
+		Threat:       rsrc.newDistMetrics(),
+		Dtps:         rsrc.newDistMetrics(),
+		Tmi:          rsrc.newDistMetrics(),
+		Hps:          rsrc.newDistMetrics(),
+		EffectiveHps: rsrc.newDistMetrics(),
+		Tto:          rsrc.newDistMetrics(),
+		Actions:      make([]*proto.ActionMetrics, 0, len(baseUnit.Actions)),
+		Auras:        make([]*proto.AuraMetrics, len(baseUnit.Auras)),
+		Resources:    make([]*proto.ResourceMetrics, 0, len(baseUnit.Resources)),
+		Pets:         make([]*proto.UnitMetrics, len(baseUnit.Pets)),
 	}
 
 	for i, aura := range baseUnit.Auras {
@@ -203,6 +204,7 @@ func (rsrc *raidSimResultCombiner) addActionMetrics(unit *proto.UnitMetrics, add
 		baseTgt.Healing += addTgt.Healing
 		baseTgt.CritHealing += addTgt.CritHealing
 		baseTgt.Shielding += addTgt.Shielding
+		baseTgt.EffectiveHealing += addTgt.EffectiveHealing
 		baseTgt.CastTimeMs += addTgt.CastTimeMs
 	}
 }
@@ -252,6 +254,7 @@ func (rsrc *raidSimResultCombiner) combineUnitMetrics(base *proto.UnitMetrics, a
 	rsrc.combineDistMetrics(base.Dtps, add.Dtps, isLast, weight)
 	rsrc.combineDistMetrics(base.Tmi, add.Tmi, isLast, weight)
 	rsrc.combineDistMetrics(base.Hps, add.Hps, isLast, weight)
+	rsrc.combineDistMetrics(base.EffectiveHps, add.EffectiveHps, isLast, weight)
 	rsrc.combineDistMetrics(base.Tto, add.Tto, isLast, weight)
 
 	base.SecondsOomAvg += add.SecondsOomAvg * weight
