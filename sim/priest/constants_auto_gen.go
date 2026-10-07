@@ -821,7 +821,22 @@ var DevouringContagionMaxLevel = [DevouringContagionRanks + 1]int{0}
 
 // unconfirmed: Devouring Contagion coefficient derived from the vanilla convention (rank 0)
 
-// skipped: "Devouring Plague" already has a hand-written DevouringPlagueRanks elsewhere in this package.
+// Devouring Plague: ranks 0-6 present, from build 1.60.1.70009.
+const DevouringPlagueRanks = 6
+
+var DevouringPlagueSpellId = [DevouringPlagueRanks + 1]int32{1219275, 2944, 19276, 19277, 19278, 19279, 19280}
+var DevouringPlagueLevel = [DevouringPlagueRanks + 1]int{1, 20, 28, 36, 44, 52, 60}
+var DevouringPlagueCastTime = [DevouringPlagueRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
+var DevouringPlagueCooldownMS = [DevouringPlagueRanks + 1]int32{0, 60000, 60000, 60000, 60000, 60000, 60000}
+var DevouringPlagueManaCost = [DevouringPlagueRanks + 1]float64{0, 215, 350, 495, 645, 810, 985}
+var DevouringPlagueManaCostPct = [DevouringPlagueRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var DevouringPlagueSpellCoeff = [DevouringPlagueRanks + 1]float64{0.4286, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1}
+var DevouringPlagueBaseDamage = [DevouringPlagueRanks + 1][]float64{{19280, 19280}, {16, 16}, {29, 29}, {43, 43}, {61, 61}, {82, 82}, {106, 106}}
+var DevouringPlaguePointsPerLevel = [DevouringPlagueRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var DevouringPlagueMaxLevel = [DevouringPlagueRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
+
+// unconfirmed: Devouring Plague coefficient derived from the vanilla convention (rank 0)
+// Devouring Plague rank 0: kept id 1219275 (spell_level 1); dropped 459713 (spell_level 1)
 
 // Dire Maul Trap - Summon: ranks 0 present, from build 1.60.1.70009.
 const DireMaulTrapSummonRanks = 0
@@ -1407,7 +1422,21 @@ var HexOfWeaknessMaxLevel = [HexOfWeaknessRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
 // unconfirmed: Hex of Weakness coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3, rank 4, rank 5, rank 6)
 // Hex of Weakness rank 6: kept id 25816 (spell_level 60); dropped 19285 (spell_level 60)
 
-// skipped: "Holy Fire" already has a hand-written HolyFireRanks elsewhere in this package.
+// Holy Fire: ranks 0-8 present, from build 1.60.1.70009.
+const HolyFireRanks = 8
+
+var HolyFireSpellId = [HolyFireRanks + 1]int32{18167, 14914, 15262, 15263, 15264, 15265, 15266, 15267, 15261}
+var HolyFireLevel = [HolyFireRanks + 1]int{20, 20, 24, 30, 36, 42, 48, 54, 60}
+var HolyFireCastTime = [HolyFireRanks + 1]int32{0, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500}
+var HolyFireCooldownMS = [HolyFireRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var HolyFireManaCost = [HolyFireRanks + 1]float64{0, 85, 95, 125, 145, 170, 200, 230, 255}
+var HolyFireManaCostPct = [HolyFireRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var HolyFireSpellCoeff = [HolyFireRanks + 1]float64{1, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75}
+var HolyFireBaseDamage = [HolyFireRanks + 1][]float64{{0, 0}, {51.4091, 64.5909}, {56, 70}, {70.8725, 89.1275}, {81.1765, 102.8235}, {93.6104, 118.3896}, {122.5903, 155.4097}, {152.4406, 193.5594}, {183.6816, 232.3184}}
+var HolyFirePointsPerLevel = [HolyFireRanks + 1]float64{0, 1.3, 1.4, 1.5, 1.5, 1.5, 1.7, 1.9, 2}
+var HolyFireMaxLevel = [HolyFireRanks + 1]int{0, 24, 30, 36, 42, 48, 54, 60, 66}
+
+// Holy Fire rank 0: kept id 18167 (spell_level 20); dropped 17140 (spell_level 20), 17141 (spell_level 20), 17142 (spell_level 20), 18165 (spell_level 20), 23860 (spell_level 0)
 
 // Holy Nova: ranks 0-6 present, from build 1.60.1.70009.
 const HolyNovaRanks = 6
@@ -2148,7 +2177,19 @@ var MentalAgilityMaxLevel = [MentalAgilityRanks + 1]int{0}
 
 // unconfirmed: Mental Agility coefficient derived from the vanilla convention (rank 0)
 
-// skipped: "Mind Blast" already has a hand-written MindBlastRanks elsewhere in this package.
+// Mind Blast: ranks 1-9 present, from build 1.60.1.70009.
+const MindBlastRanks = 9
+
+var MindBlastSpellId = [MindBlastRanks + 1]int32{0, 8092, 8102, 8103, 8104, 8105, 8106, 10945, 10946, 10947}
+var MindBlastLevel = [MindBlastRanks + 1]int{0, 10, 16, 22, 28, 34, 40, 46, 52, 58}
+var MindBlastCastTime = [MindBlastRanks + 1]int32{0, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500}
+var MindBlastCooldownMS = [MindBlastRanks + 1]int32{0, 8000, 8000, 8000, 8000, 8000, 8000, 8000, 8000, 8000}
+var MindBlastManaCost = [MindBlastRanks + 1]float64{0, 50, 80, 110, 150, 185, 225, 265, 310, 350}
+var MindBlastManaCostPct = [MindBlastRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+var MindBlastSpellCoeff = [MindBlastRanks + 1]float64{0, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429}
+var MindBlastBaseDamage = [MindBlastRanks + 1][]float64{{0, 0}, {37.0976, 40.9024}, {65.28, 70.72}, {97.5172, 104.4828}, {146.6105, 155.3895}, {189.875, 202.125}, {249.9375, 266.0625}, {314.8989, 333.1011}, {393.8787, 416.1213}, {471.8665, 498.1335}}
+var MindBlastPointsPerLevel = [MindBlastRanks + 1]float64{0, 0.6, 0.9, 1.1, 1.4, 1.6, 1.9, 2.1, 2.4, 2.6}
+var MindBlastMaxLevel = [MindBlastRanks + 1]int{0, 15, 21, 27, 33, 39, 45, 51, 57, 63}
 
 // Mind Blast Cast Pushback Reduction: ranks 0 present, from build 1.60.1.70009.
 const MindBlastCastPushbackReductionRanks = 0
@@ -2183,7 +2224,21 @@ var MindControlMaxLevel = [MindControlRanks + 1]int{0, 42, 56, 70}
 
 // unconfirmed: Mind Control coefficient derived from the vanilla convention (rank 1, rank 2, rank 3)
 
-// skipped: "Mind Flay" already has a hand-written MindFlayRanks elsewhere in this package.
+// Mind Flay: ranks 0-6 present, from build 1.60.1.70009.
+const MindFlayRanks = 6
+
+var MindFlaySpellId = [MindFlayRanks + 1]int32{474204, 15407, 17311, 17312, 17313, 17314, 18807}
+var MindFlayLevel = [MindFlayRanks + 1]int{60, 20, 28, 36, 44, 52, 60}
+var MindFlayCastTime = [MindFlayRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
+var MindFlayCooldownMS = [MindFlayRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
+var MindFlayManaCost = [MindFlayRanks + 1]float64{60, 45, 70, 100, 135, 165, 205}
+var MindFlayManaCostPct = [MindFlayRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var MindFlaySpellCoeff = [MindFlayRanks + 1]float64{0.1, 0.167, 0.167, 0.167, 0.167, 0.167, 0.167}
+var MindFlayBaseDamage = [MindFlayRanks + 1][]float64{{468, 468}, {21, 21}, {34, 34}, {51, 51}, {75, 75}, {98, 98}, {130, 130}}
+var MindFlayPointsPerLevel = [MindFlayRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var MindFlayMaxLevel = [MindFlayRanks + 1]int{0, 28, 36, 44, 52, 60, 68}
+
+// Mind Flay rank 0: kept id 474204 (spell_level 60); dropped 16568 (spell_level 20), 17165 (spell_level 20), 22919 (spell_level 20), 23953 (spell_level 1), 26044 (spell_level 1), 26143 (spell_level 1), 28310 (spell_level 1), 29407 (spell_level 1), 412526 (spell_level 25), 474268 (spell_level 1), 1215740 (spell_level 1)
 
 // Mind Sear: ranks 0 present, from build 1.60.1.70009.
 const MindSearRanks = 0
@@ -3356,9 +3411,38 @@ var ShadowWeavingMaxLevel = [ShadowWeavingRanks + 1]int{0}
 // unconfirmed: Shadow Weaving coefficient derived from the vanilla convention (rank 0)
 // Shadow Weaving rank 0: kept id 15258 (spell_level 0); dropped 15257 (spell_level 0)
 
-// skipped: "Shadow Word: Death" already has a hand-written ShadowWordDeathRanks elsewhere in this package.
+// Shadow Word: Death: ranks 0-4 present, from build 1.60.1.70009.
+const ShadowWordDeathRanks = 4
 
-// skipped: "Shadow Word: Pain" already has a hand-written ShadowWordPainRanks elsewhere in this package.
+var ShadowWordDeathSpellId = [ShadowWordDeathRanks + 1]int32{1309598, 1309595, 1309633, 1309635, 1309636}
+var ShadowWordDeathLevel = [ShadowWordDeathRanks + 1]int{1, 32, 40, 48, 56}
+var ShadowWordDeathCastTime = [ShadowWordDeathRanks + 1]int32{0, 0, 0, 0, 0}
+var ShadowWordDeathCooldownMS = [ShadowWordDeathRanks + 1]int32{0, 15000, 15000, 15000, 15000}
+var ShadowWordDeathManaCost = [ShadowWordDeathRanks + 1]float64{0, 175, 205, 250, 340}
+var ShadowWordDeathManaCostPct = [ShadowWordDeathRanks + 1]float64{0, 0, 0, 0, 0}
+var ShadowWordDeathSpellCoeff = [ShadowWordDeathRanks + 1]float64{0.4286, 0.429, 0.429, 0.429, 0.429}
+var ShadowWordDeathBaseDamage = [ShadowWordDeathRanks + 1][]float64{{0, 0}, {286.0763, 303.9237}, {358.8075, 381.1925}, {390.8093, 415.1907}, {434.448, 461.552}}
+var ShadowWordDeathPointsPerLevel = [ShadowWordDeathRanks + 1]float64{0, 1.5, 1.9, 2.2, 2.5}
+var ShadowWordDeathMaxLevel = [ShadowWordDeathRanks + 1]int{0, 37, 45, 53, 61}
+
+// unconfirmed: Shadow Word: Death coefficient derived from the vanilla convention (rank 0)
+// Shadow Word: Death rank 0: kept id 1309598 (spell_level 1); dropped 401955 (spell_level 1), 401962 (spell_level 1)
+
+// Shadow Word: Pain: ranks 1-8 present, from build 1.60.1.70009.
+const ShadowWordPainRanks = 8
+
+var ShadowWordPainSpellId = [ShadowWordPainRanks + 1]int32{0, 589, 594, 970, 992, 2767, 10892, 10893, 1226589}
+var ShadowWordPainLevel = [ShadowWordPainRanks + 1]int{0, 4, 10, 18, 26, 34, 42, 50, 58}
+var ShadowWordPainCastTime = [ShadowWordPainRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var ShadowWordPainCooldownMS = [ShadowWordPainRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var ShadowWordPainManaCost = [ShadowWordPainRanks + 1]float64{0, 25, 50, 95, 155, 230, 305, 385, 0}
+var ShadowWordPainManaCostPct = [ShadowWordPainRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var ShadowWordPainSpellCoeff = [ShadowWordPainRanks + 1]float64{0, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.167}
+var ShadowWordPainBaseDamage = [ShadowWordPainRanks + 1][]float64{{0, 0}, {5, 5}, {10, 10}, {18, 18}, {30, 30}, {48, 48}, {71, 71}, {97, 97}, {142, 142}}
+var ShadowWordPainPointsPerLevel = [ShadowWordPainRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var ShadowWordPainMaxLevel = [ShadowWordPainRanks + 1]int{0, 0, 0, 0, 0, 0, 0, 0, 0}
+
+// Shadow Word: Pain rank 8: kept id 1226589 (spell_level 58); dropped 10894 (spell_level 58), 27605 (spell_level 58)
 
 // Shadow Wrath: ranks 0 present, from build 1.60.1.70009.
 const ShadowWrathRanks = 0
@@ -3494,7 +3578,19 @@ var SilentResolveMaxLevel = [SilentResolveRanks + 1]int{0}
 
 // unconfirmed: Silent Resolve coefficient derived from the vanilla convention (rank 0)
 
-// skipped: "Smite" already has a hand-written SmiteRanks elsewhere in this package.
+// Smite: ranks 1-8 present, from build 1.60.1.70009.
+const SmiteRanks = 8
+
+var SmiteSpellId = [SmiteRanks + 1]int32{0, 585, 591, 598, 984, 1004, 6060, 10933, 10934}
+var SmiteLevel = [SmiteRanks + 1]int{0, 1, 6, 14, 22, 30, 38, 46, 54}
+var SmiteCastTime = [SmiteRanks + 1]int32{0, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500}
+var SmiteCooldownMS = [SmiteRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var SmiteManaCost = [SmiteRanks + 1]float64{0, 20, 30, 60, 95, 140, 185, 230, 280}
+var SmiteManaCostPct = [SmiteRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var SmiteSpellCoeff = [SmiteRanks + 1]float64{0, 0.429, 0.571, 0.714, 0.714, 0.714, 0.714, 0.714, 0.714}
+var SmiteBaseDamage = [SmiteRanks + 1][]float64{{0, 0}, {13, 17}, {25, 31}, {42.8276, 49.1724}, {54.7857, 63.2143}, {75.9375, 86.0625}, {88.177, 99.823}, {118.5639, 133.4361}, {160.4835, 179.5165}}
+var SmitePointsPerLevel = [SmiteRanks + 1]float64{0, 0.5, 0.6, 0.8, 1, 1, 1.1, 1.1, 1.3}
+var SmiteMaxLevel = [SmiteRanks + 1]int{0, 6, 11, 19, 27, 35, 43, 51, 59}
 
 // Soul Warding: ranks 0 present, from build 1.60.1.70009.
 const SoulWardingRanks = 0
@@ -3605,7 +3701,22 @@ var SpiritualHealingBaseDamage = [SpiritualHealingRanks + 1][]float64{{2, 2}}
 var SpiritualHealingPointsPerLevel = [SpiritualHealingRanks + 1]float64{0}
 var SpiritualHealingMaxLevel = [SpiritualHealingRanks + 1]int{0}
 
-// skipped: "Starshards" already has a hand-written StarshardsRanks elsewhere in this package.
+// Starshards: ranks 0-7 present, from build 1.60.1.70009.
+const StarshardsRanks = 7
+
+var StarshardsSpellId = [StarshardsRanks + 1]int32{459705, 10797, 19296, 19299, 19302, 19303, 19304, 19305}
+var StarshardsLevel = [StarshardsRanks + 1]int{1, 10, 18, 26, 34, 42, 50, 58}
+var StarshardsCastTime = [StarshardsRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
+var StarshardsCooldownMS = [StarshardsRanks + 1]int32{0, 30000, 30000, 30000, 30000, 30000, 30000, 30000}
+var StarshardsManaCost = [StarshardsRanks + 1]float64{0, 50, 85, 140, 190, 245, 300, 350}
+var StarshardsManaCostPct = [StarshardsRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
+var StarshardsSpellCoeff = [StarshardsRanks + 1]float64{0.4286, 0.167, 0.167, 0.167, 0.167, 0.167, 0.167, 0.167}
+var StarshardsBaseDamage = [StarshardsRanks + 1][]float64{{19305, 19305}, {27, 27}, {50, 50}, {88, 88}, {127, 127}, {178, 178}, {240, 240}, {300, 300}}
+var StarshardsPointsPerLevel = [StarshardsRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
+var StarshardsMaxLevel = [StarshardsRanks + 1]int{0, 16, 24, 32, 40, 48, 56, 64}
+
+// unconfirmed: Starshards coefficient derived from the vanilla convention (rank 0)
+// Starshards rank 0: kept id 459705 (spell_level 1); dropped 22822 (spell_level 1), 22823 (spell_level 1), 27636 (spell_level 0)
 
 // Stormpike's Salvation: ranks 0 present, from build 1.60.1.70009.
 const StormpikeSSalvationRanks = 0

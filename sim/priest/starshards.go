@@ -8,14 +8,7 @@ import (
 	"github.com/wowsims/classic/sim/core/proto"
 )
 
-const StarshardsRanks = 7
 const StarshardsTicks = 6
-
-var StarshardsSpellId = [StarshardsRanks + 1]int32{0, 10797, 19296, 19299, 19302, 19303, 19304, 19305}
-var StarshardsTickSpellId = [StarshardsRanks + 1]int32{0, 19350, 19351, 19352, 19353, 19354, 19355, 19356}
-var StarshardsBaseDamage = [StarshardsRanks + 1]float64{0, 84, 162, 288, 414, 570, 756, 936}
-var StarshardsManaCost = [StarshardsRanks + 1]float64{0, 50, 85, 140, 190, 245, 300, 350}
-var StarshardsLevel = [StarshardsRanks + 1]int{0, 10, 18, 26, 34, 42, 50, 58}
 
 func (priest *Priest) registerStarshardsSpell() {
 	if priest.Race != proto.Race_RaceNightElf {
@@ -47,11 +40,12 @@ func (priest *Priest) newStarshardsSpellConfig(rank int, tickIdx int32) core.Spe
 	}
 
 	spellId := StarshardsSpellId[rank]
-	baseDamage := StarshardsBaseDamage[rank] / float64(ticks)
+	roll := priest.clientRoll(StarshardsBaseDamage[rank], StarshardsPointsPerLevel[rank], StarshardsLevel[rank], StarshardsMaxLevel[rank])
+	baseDamage := periodicTick(roll) // per tick, whatever the channel's length
 	manaCost := StarshardsManaCost[rank]
 	level := StarshardsLevel[rank]
 
-	spellCoeff := 0.167
+	spellCoeff := StarshardsSpellCoeff[rank]
 
 	tickLength := time.Second
 
@@ -78,6 +72,7 @@ func (priest *Priest) newStarshardsSpellConfig(rank int, tickIdx int32) core.Spe
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: roll,
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
@@ -104,7 +99,6 @@ func (priest *Priest) newStarshardsSpellConfig(rank int, tickIdx int32) core.Spe
 		},
 
 		ExpectedTickDamage: func(sim *core.Simulation, target *core.Unit, spell *core.Spell, _ bool) *core.SpellResult {
-			baseDamage := baseDamage / StarshardsTicks
 			result := spell.CalcPeriodicDamage(sim, target, baseDamage, spell.OutcomeExpectedMagicAlwaysHit)
 			return result
 		},

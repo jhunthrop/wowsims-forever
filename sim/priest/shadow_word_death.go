@@ -6,20 +6,12 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// ShadowWordDeathRanks is Shadow Word: Death's four-rank count; source:
-// 1.60.1.70009 client spellconst (priest.json spells 1309595/1309633/
-// 1309635/1309636). Instant cast (cast_time_ms 0), 1500 ms GCD, and a
-// 15 s cooldown shared across ranks (category_cooldown_ms 15000, spell
-// CooldownMS 0 on every rank -- same "cooldown lives on the category"
-// shape sim/core/spellconst.Spell.EffectiveCooldownMS documents for
-// Bloodthirst).
-const ShadowWordDeathRanks = 4
-
-var ShadowWordDeathSpellId = [ShadowWordDeathRanks + 1]int32{0, 1309595, 1309633, 1309635, 1309636}
-var ShadowWordDeathBaseDamage = [ShadowWordDeathRanks + 1]float64{0, 295, 370, 403, 448}
-var ShadowWordDeathSpellCoef = [ShadowWordDeathRanks + 1]float64{0, .429, .429, .429, .429}
-var ShadowWordDeathManaCost = [ShadowWordDeathRanks + 1]float64{0, 175, 205, 250, 340}
-var ShadowWordDeathLevel = [ShadowWordDeathRanks + 1]int{0, 32, 40, 48, 56}
+// Shadow Word: Death is an instant cast on a 1500 ms GCD with a 15 s
+// cooldown shared across ranks (category_cooldown_ms 15000, spell
+// CooldownMS 0 on every rank -- the shape
+// sim/core/spellconst.Spell.EffectiveCooldownMS documents for
+// Bloodthirst). Its ranks, levels, costs and damage are the client's,
+// from constants_auto_gen.go.
 
 // earlyDemiseCritBonusPct is Early Demise's rank -> bonus crit chance, in
 // percentage points, against a target at or below 20% health. Source:
@@ -54,8 +46,8 @@ func (priest *Priest) registerShadowWordDeathSpell() {
 
 func (priest *Priest) getShadowWordDeathConfig(rank int, cdTimer *core.Timer) core.SpellConfig {
 	spellId := ShadowWordDeathSpellId[rank]
-	baseDamage := ShadowWordDeathBaseDamage[rank]
-	spellCoeff := ShadowWordDeathSpellCoef[rank]
+	roll := priest.clientRoll(ShadowWordDeathBaseDamage[rank], ShadowWordDeathPointsPerLevel[rank], ShadowWordDeathLevel[rank], ShadowWordDeathMaxLevel[rank])
+	spellCoeff := ShadowWordDeathSpellCoeff[rank]
 	manaCost := ShadowWordDeathManaCost[rank]
 	level := ShadowWordDeathLevel[rank]
 
@@ -88,6 +80,7 @@ func (priest *Priest) getShadowWordDeathConfig(rank int, cdTimer *core.Timer) co
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		BonusCoefficient: spellCoeff,
+		ClientBaseDamage: roll,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			// Early Demise: bonus crit vs a target at/below 20% health.
@@ -104,7 +97,7 @@ func (priest *Priest) getShadowWordDeathConfig(rank int, cdTimer *core.Timer) co
 				spell.BonusCritRating += critBonus
 			}
 
-			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			result := spell.CalcAndDealDamage(sim, target, sim.Roll(roll[0], roll[1]), spell.OutcomeMagicHitAndCrit)
 
 			if critBonus != 0 {
 				spell.BonusCritRating -= critBonus

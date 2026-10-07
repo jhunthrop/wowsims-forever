@@ -7,13 +7,6 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-const DevouringPlagueRanks = 6
-
-var DevouringPlagueSpellId = [DevouringPlagueRanks + 1]int32{0, 2944, 19276, 19277, 19278, 19279, 19280}
-var DevouringPlagueBaseDamage = [DevouringPlagueRanks + 1]float64{0, 152, 272, 400, 544, 712, 904}
-var DevouringPlagueManaCost = [DevouringPlagueRanks + 1]float64{0, 215, 350, 495, 645, 810, 985}
-var DevouringPlagueLevel = [DevouringPlagueRanks + 1]int{0, 20, 28, 36, 44, 52, 60}
-
 func (priest *Priest) registerDevouringPlagueSpell() {
 	//TO DO: Implement race requirement
 	priest.DevouringPlague = make([]*core.Spell, DevouringPlagueRanks+1)
@@ -30,19 +23,17 @@ func (priest *Priest) registerDevouringPlagueSpell() {
 
 func (priest *Priest) getDevouringPlagueConfig(rank int, cdTimer *core.Timer) core.SpellConfig {
 
-	var ticks int32 = 8
+	var ticks int32 = devouringPlagueTicks
 
 	spellId := DevouringPlagueSpellId[rank]
-	baseDotDamage := (DevouringPlagueBaseDamage[rank] / float64(ticks))
+	roll := priest.clientRoll(DevouringPlagueBaseDamage[rank], DevouringPlaguePointsPerLevel[rank], DevouringPlagueLevel[rank], DevouringPlagueMaxLevel[rank])
+	baseDotDamage := periodicTick(roll)
 	manaCost := DevouringPlagueManaCost[rank]
 	level := DevouringPlagueLevel[rank]
 
-	// The Forever client's spellconst (1.60.1.70009, priest.json spells
-	// 2944/19276/19277/19278/19279/19280, effect 0's sp_coefficient) is
-	// a flat 0.1 on every one of Devouring Plague's six ranks, not
-	// 0.063 - verified directly against the build's own data. Rotation-
-	// accuracy program, 2026-09-28 (audit-priest).
-	spellCoeff := 0.1
+	// The client's per-tick amount and its coefficient (a flat 0.1 on
+	// every rank, not Classic's 0.063) are the generated ladder's.
+	spellCoeff := DevouringPlagueSpellCoeff[rank]
 
 	return core.SpellConfig{
 		SpellCode:      SpellCode_PriestDevouringPlague,
@@ -76,6 +67,7 @@ func (priest *Priest) getDevouringPlagueConfig(rank int, cdTimer *core.Timer) co
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: roll,
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{

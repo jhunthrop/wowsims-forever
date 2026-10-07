@@ -7,15 +7,6 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-const HolyFireRanks = 8
-
-var HolyFireSpellId = [HolyFireRanks + 1]int32{0, 14914, 15262, 15263, 15264, 15265, 15266, 15267, 15261}
-var HolyFireBaseDamage = [HolyFireRanks + 1][]float64{{0}, {84, 104}, {97, 122}, {144, 178}, {173, 218}, {219, 273}, {259, 328}, {323, 406}, {355, 449}}
-var HolyFireDotDamage = [HolyFireRanks + 1]float64{0, 30, 40, 55, 65, 85, 100, 125, 145}
-var HolyFireSpellCoef = [HolyFireRanks + 1]float64{0, 0.123, 0.271, 0.554, 0.714, 0.714, 0.714, 0.714, 0.714}
-var HolyFireManaCost = [HolyFireRanks + 1]float64{0, 85, 95, 125, 145, 170, 200, 230, 255}
-var HolyFireLevel = [HolyFireRanks + 1]int{0, 20, 24, 30, 36, 42, 48, 54, 60}
-
 func (priest *Priest) registerHolyFire() {
 	priest.HolyFire = make([]*core.Spell, HolyFireRanks+1)
 
@@ -29,17 +20,16 @@ func (priest *Priest) registerHolyFire() {
 }
 
 func (priest *Priest) getHolyFireConfig(rank int) core.SpellConfig {
-	ticks := int32(5)
+	ticks := int32(holyFireDotTicks)
 
 	spellId := HolyFireSpellId[rank]
-	baseDamageLow := HolyFireBaseDamage[rank][0]
-	baseDamageHigh := HolyFireBaseDamage[rank][1]
-	dotDamage := HolyFireDotDamage[rank] / float64(ticks)
+	roll := priest.clientRoll(HolyFireBaseDamage[rank], HolyFirePointsPerLevel[rank], HolyFireLevel[rank], HolyFireMaxLevel[rank])
+	dotDamage := holyFireDotTickDamage[rank]
 	manaCost := HolyFireManaCost[rank]
 	level := HolyFireLevel[rank]
 
-	directCoeff := 0.75
-	dotCoeff := 0.05
+	directCoeff := HolyFireSpellCoeff[rank]
+	dotCoeff := holyFireDotCoefficient
 	castTime := time.Millisecond * 3500
 
 	return core.SpellConfig{
@@ -65,6 +55,7 @@ func (priest *Priest) getHolyFireConfig(rank int) core.SpellConfig {
 		},
 
 		BonusCoefficient: directCoeff,
+		ClientBaseDamage: roll,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
@@ -75,7 +66,7 @@ func (priest *Priest) getHolyFireConfig(rank int) core.SpellConfig {
 			},
 
 			NumberOfTicks:    ticks,
-			TickLength:       time.Second * 2,
+			TickLength:       time.Millisecond * holyFireDotTickMS,
 			BonusCoefficient: dotCoeff,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
@@ -88,7 +79,7 @@ func (priest *Priest) getHolyFireConfig(rank int) core.SpellConfig {
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
+			baseDamage := sim.Roll(roll[0], roll[1])
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 			if result.Landed() {
 				spell.Dot(target).Apply(sim)
