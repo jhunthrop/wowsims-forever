@@ -56,7 +56,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 38 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 38 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 38 | Mind Blast | 4 | 8104 | 150.00→150.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 153.41-162.59→153.41-162.59 | 0.429→0.429 | declared, matches |
-| ShadowPriest | 38 | Mind Blast | 5 | 8105 | 185.00→185.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 196.08-208.73→196.07-208.72 | 0.429→0.429 | declared, matches |
+| ShadowPriest | 38 | Mind Blast | 5 | 8105 | 185.00→185.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 196.08-208.73→196.08-208.72 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 38 | Shadow Word: Death | 1 | 1309595 | 175.00→175.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | 293.35-311.65→293.35-311.65 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 38 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 38 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |

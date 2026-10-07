@@ -84,6 +84,8 @@ func (warlock *Warlock) registerWrackSpell() {
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: [2]float64{WrackTickBaseDamage, WrackTickBaseDamage},
+		BonusCoefficient: WrackTickCoefficient, // the report compares the spell's, which a pure DoT never reads
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{

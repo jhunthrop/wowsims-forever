@@ -538,13 +538,13 @@ Per spec-and-rank row at level 60 whose client spell has a school-damage or peri
 |---|---|---|---|---|---|
 | Hunter | 0 | 0 | 0 | 11 | 27 |
 | Mage | 77 | 77 | 0 | 0 | 24 |
-| Warlock | 0 | 0 | 0 | 104 | 55 |
-| Paladin | 0 | 0 | 0 | 59 | 83 |
+| Warlock | 102 | 102 | 0 | 2 | 55 |
+| Paladin | 43 | 43 | 0 | 16 | 83 |
 | Warrior | 0 | 0 | 0 | 12 | 38 |
-| Druid | 0 | 0 | 0 | 61 | 25 |
+| Druid | 61 | 61 | 0 | 0 | 25 |
 | Priest | 43 | 43 | 0 | 0 | 9 |
-| Shaman | 0 | 0 | 0 | 123 | 160 |
+| Shaman | 123 | 123 | 0 | 0 | 160 |
 | Rogue | 0 | 0 | 0 | 6 | 25 |
-| **Total** | 120 | 120 | 0 | 376 | 446 |
+| **Total** | 449 | 449 | 0 | 47 | 446 |
 
 <!-- damage-summary:end -->

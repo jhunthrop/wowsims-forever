@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -14,7 +15,14 @@ var InsectSwarmSpellId = [InsectSwarmRanks + 1]int32{0, 5570, 24974, 24975, 2497
 // InsectSwarmTickDamage is spellconst/druid.json's per-tick amount for the
 // 2 s ticks of its 12 s DoT (rank 5: 31 at 0.158 a tick, 186 in all,
 // against the Classic 324 this replaced).
-var InsectSwarmTickDamage = [InsectSwarmRanks + 1]float64{0, 8, 15, 20, 25, 31}
+var InsectSwarmTickDamage = [InsectSwarmRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 8, SpellLevel: 20},
+	{Amount: 15, SpellLevel: 30},
+	{Amount: 20, SpellLevel: 40},
+	{Amount: 25, SpellLevel: 50},
+	{Amount: 31, SpellLevel: 60},
+}
 var InsectSwarmTickSpellCoeff = [InsectSwarmRanks + 1]float64{0, .158, .158, .158, .158, .158}
 var InsectSwarmManaCost = [InsectSwarmRanks + 1]float64{0, 45, 85, 100, 140, 160}
 var InsectSwarmLevel = [InsectSwarmRanks + 1]int{0, 20, 30, 40, 50, 60}
@@ -42,7 +50,8 @@ func (druid *Druid) registerInsectSwarmSpell() {
 			tickLength := time.Second * 2
 
 			spellID := InsectSwarmSpellId[rank]
-			baseDamage := InsectSwarmTickDamage[rank]
+			tickDamage := InsectSwarmTickDamage[rank]
+			casterLevel := int(druid.Level)
 			manaCost := InsectSwarmManaCost[rank]
 			spellCoef := InsectSwarmTickSpellCoeff[rank]
 
@@ -68,6 +77,8 @@ func (druid *Druid) registerInsectSwarmSpell() {
 
 				DamageMultiplier: 1,
 				ThreatMultiplier: 1,
+				BonusCoefficient: spellCoef, // the report compares the spell's, which a pure DoT never reads
+				ClientBaseDamage: tickDamage.Range(casterLevel),
 
 				Dot: core.DotConfig{
 					Aura: core.Aura{
@@ -88,7 +99,7 @@ func (druid *Druid) registerInsectSwarmSpell() {
 					BonusCoefficient: spellCoef,
 
 					OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-						dot.Snapshot(target, baseDamage, isRollover)
+						dot.Snapshot(target, tickDamage.Center(casterLevel), isRollover)
 						if !druid.form.Matches(Moonkin) {
 							dot.SnapshotCritChance = 0
 						}

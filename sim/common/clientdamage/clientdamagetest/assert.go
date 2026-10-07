@@ -9,9 +9,9 @@ import (
 	"github.com/wowsims/classic/sim/core/spellconst"
 )
 
-// rollTolerance is how far a registered roll may sit from the client's:
+// assertRollTolerance is how far a registered roll may sit from the client's:
 // the generated tables are rounded to four decimals.
-const rollTolerance = 0.01
+const assertRollTolerance = 0.01
 
 // LoadClient loads the vendored copy of the site's spellconst/<class>.json
 // (the file the conformance report reads) for a class package's tests;
@@ -37,7 +37,7 @@ func AssertRoll(t *testing.T, client spellconst.Class, label string, spellID int
 	if !ok {
 		t.Fatalf("%s: spell %d has no effect %d", label, spellID, effectIndex)
 	}
-	if math.Abs(got[0]-low) > rollTolerance || math.Abs(got[1]-high) > rollTolerance {
+	if math.Abs(got[0]-low) > assertRollTolerance || math.Abs(got[1]-high) > assertRollTolerance {
 		t.Errorf("%s (%d) at level %d: engine rolls %.4f-%.4f, client %.4f-%.4f", label, spellID, casterLevel, got[0], got[1], low, high)
 	}
 }

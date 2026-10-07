@@ -12,76 +12,76 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| ElementalShaman | 10 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| ElementalShaman | 10 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 33.36-35.44→- | 0.386→0.386 | not declared |
-| ElementalShaman | 10 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 48.00-56.00→- | 0.100→0.100 | not declared |
-| ElementalShaman | 10 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 10 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 10 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 10 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 20.00-20.00→- | 0.214→0.214 | not declared |
+| ElementalShaman | 10 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 10 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 33.36-35.44→33.36-35.44 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 10 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 48.00-56.00→48.00-56.00 | 0.100→0.100 | declared, matches |
+| ElementalShaman | 10 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→102.00-116.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 10 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 10 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 10 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 20.00-20.00→20.00-20.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 10 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 10 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 10 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 10 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 10 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | n/a | n/a | n/a |
-| ElementalShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| ElementalShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 27.86-32.14→- | 0.571→0.571 | not declared |
+| ElementalShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 27.86-32.14→27.86-32.14 | 0.571→0.571 | declared, matches |
 | ElementalShaman | 10 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 10 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 10 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 10 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→- | 0.033→0.033 | not declared |
+| ElementalShaman | 10 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 10 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 10 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 10 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | ElementalShaman | 10 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | ElementalShaman | 10 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 20 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| ElementalShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| ElementalShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| ElementalShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| ElementalShaman | 20 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 20 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 20 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 20 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 20 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 63.85-68.15→- | 0.386→0.386 | not declared |
+| ElementalShaman | 20 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| ElementalShaman | 20 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→102.00-116.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 20 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 20 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 20 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→35.00-35.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 20 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 63.85-68.15→63.85-68.15 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 20 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| ElementalShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| ElementalShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| ElementalShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| ElementalShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 52.22-59.78→- | 0.714→0.714 | not declared |
+| ElementalShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 52.22-59.78→52.22-59.78 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 20 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 20 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 20 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 20 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 20 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→- | 0.033→0.033 | not declared |
+| ElementalShaman | 20 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 20 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 20 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 20 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | ElementalShaman | 20 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | ElementalShaman | 20 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | ElementalShaman | 20 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 30 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| ElementalShaman | 30 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| ElementalShaman | 30 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| ElementalShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| ElementalShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| ElementalShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| ElementalShaman | 30 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 30 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 30 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 45.40-45.40→- | 0.214→0.214 | not declared |
-| ElementalShaman | 30 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
+| ElementalShaman | 30 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 30 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 30 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| ElementalShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 30 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 30 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 30 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 45.40-45.40→45.40-45.40 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 30 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 30 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
@@ -89,18 +89,18 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 30 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | ElementalShaman | 30 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| ElementalShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| ElementalShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| ElementalShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| ElementalShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| ElementalShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 69.78-79.82→- | 0.714→0.714 | not declared |
+| ElementalShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 69.78-79.82→69.78-79.82 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 30 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 30 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 30 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| ElementalShaman | 30 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 30 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | ElementalShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
@@ -112,22 +112,22 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 30 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | ElementalShaman | 30 | Strength of Earth Totem | 2 | 8160 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | ElementalShaman | 30 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 38 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→- | 0.571→0.571 | not declared |
-| ElementalShaman | 38 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| ElementalShaman | 38 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| ElementalShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| ElementalShaman | 38 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| ElementalShaman | 38 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 130.54-138.66→- | 0.386→0.386 | not declared |
-| ElementalShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| ElementalShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| ElementalShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→- | 0.143→0.143 | not declared |
-| ElementalShaman | 38 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 38 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 38 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
-| ElementalShaman | 38 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 124.95-133.45→- | 0.386→0.386 | not declared |
+| ElementalShaman | 38 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→85.20-96.80 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 38 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 38 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 38 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 38 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 130.54-138.66→130.54-138.66 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| ElementalShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 38 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 38 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 38 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 38 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 124.95-133.45→124.95-133.45 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 38 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
@@ -135,21 +135,21 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 38 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | ElementalShaman | 38 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| ElementalShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| ElementalShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| ElementalShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| ElementalShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| ElementalShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→- | 0.714→0.714 | not declared |
-| ElementalShaman | 38 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→- | 0.714→0.714 | not declared |
-| ElementalShaman | 38 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 138.46-155.54→- | 0.714→0.714 | not declared |
+| ElementalShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→70.43-80.57 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 38 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 38 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 138.46-155.54→138.46-155.54 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 38 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 38 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 38 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 38 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| ElementalShaman | 38 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 38 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 38 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 38 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
@@ -167,24 +167,24 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 38 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | ElementalShaman | 38 | Windfury Totem | 1 | 8512 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 32→32 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | ElementalShaman | 38 | Windwall Totem | 1 | 15107 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 40 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→- | 0.571→0.571 | not declared |
-| ElementalShaman | 40 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 94.22-105.78→- | 0.571→0.571 | not declared |
-| ElementalShaman | 40 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| ElementalShaman | 40 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| ElementalShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| ElementalShaman | 40 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| ElementalShaman | 40 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 133.06-141.34→- | 0.386→0.386 | not declared |
-| ElementalShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| ElementalShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| ElementalShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→- | 0.143→0.143 | not declared |
-| ElementalShaman | 40 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 40 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 40 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 82.00-82.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 40 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
-| ElementalShaman | 40 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→- | 0.386→0.386 | not declared |
+| ElementalShaman | 40 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→85.20-96.80 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 40 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 94.22-105.78→94.22-105.78 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 40 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 40 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 40 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 40 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 133.06-141.34→133.06-141.34 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| ElementalShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 40 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 40 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 40 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 82.00-82.00→82.00-82.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 40 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 40 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→126.21-134.79 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 40 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
@@ -193,22 +193,22 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 40 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | ElementalShaman | 40 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | ElementalShaman | 40 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| ElementalShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| ElementalShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| ElementalShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| ElementalShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| ElementalShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→- | 0.714→0.714 | not declared |
-| ElementalShaman | 40 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→- | 0.714→0.714 | not declared |
-| ElementalShaman | 40 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 139.97-157.23→- | 0.714→0.714 | not declared |
+| ElementalShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→70.43-80.57 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 40 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 40 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 139.97-157.23→139.97-157.23 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 40 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 40 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 40 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 40 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| ElementalShaman | 40 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 40 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 40 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 40 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
@@ -227,27 +227,27 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 40 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | ElementalShaman | 40 | Windfury Totem | 1 | 8512 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 32→32 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | ElementalShaman | 40 | Windwall Totem | 1 | 15107 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 50 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→- | 0.571→0.571 | not declared |
-| ElementalShaman | 50 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 97.04-108.96→- | 0.571→0.571 | not declared |
-| ElementalShaman | 50 | Chain Lightning | 3 | 2860 | 390.00→390.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 48→48 | n/a | match |  | 106.90-119.90→- | 0.517→0.517 | not declared |
-| ElementalShaman | 50 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| ElementalShaman | 50 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| ElementalShaman | 50 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| ElementalShaman | 50 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| ElementalShaman | 50 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 134.32-142.68→- | 0.386→0.386 | not declared |
-| ElementalShaman | 50 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 202.01-214.39→- | 0.386→0.386 | not declared |
-| ElementalShaman | 50 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| ElementalShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| ElementalShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→- | 0.143→0.143 | not declared |
-| ElementalShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→- | 0.143→0.143 | not declared |
-| ElementalShaman | 50 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| ElementalShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 50 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 50 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
-| ElementalShaman | 50 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→- | 0.386→0.386 | not declared |
-| ElementalShaman | 50 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 188.34-199.66→- | 0.386→0.386 | not declared |
+| ElementalShaman | 50 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→85.20-96.80 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 50 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 97.04-108.96→97.04-108.96 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 50 | Chain Lightning | 3 | 2860 | 390.00→390.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 48→48 | n/a | match |  | 106.90-119.90→106.90-119.90 | 0.517→0.517 | declared, matches |
+| ElementalShaman | 50 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 50 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 50 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 50 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 50 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 50 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 202.01-214.39→202.01-214.39 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 50 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| ElementalShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 50 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 50 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→89.00-89.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 50 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 50 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→126.21-134.79 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 50 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 188.34-199.66→188.34-199.66 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 50 | Grace of Air Totem | 1 | 8835 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 42→42 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | ElementalShaman | 50 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
@@ -258,25 +258,25 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 50 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | ElementalShaman | 50 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | ElementalShaman | 50 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| ElementalShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| ElementalShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| ElementalShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| ElementalShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| ElementalShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→- | 0.714→0.714 | not declared |
-| ElementalShaman | 50 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→- | 0.714→0.714 | not declared |
-| ElementalShaman | 50 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→- | 0.714→0.714 | not declared |
-| ElementalShaman | 50 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→- | 0.714→0.714 | not declared |
-| ElementalShaman | 50 | Lightning Bolt | 9 | 15207 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 167.84-188.16→- | 0.714→0.714 | not declared |
+| ElementalShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→70.43-80.57 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 50 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 50 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 50 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 50 | Lightning Bolt | 9 | 15207 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 167.84-188.16→167.84-188.16 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 50 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Lightning Shield | 6 | 10431 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 600000→600000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 50 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 50 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 50 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 50 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| ElementalShaman | 50 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 50 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 50 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 50 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 50 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
@@ -301,32 +301,32 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 50 | Windfury Totem | 2 | 10613 | 175.00→175.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 42→42 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | ElementalShaman | 50 | Windwall Totem | 1 | 15107 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | ElementalShaman | 50 | Windwall Totem | 2 | 15111 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 60 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→- | 0.571→0.571 | not declared |
-| ElementalShaman | 60 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 97.04-108.96→- | 0.571→0.571 | not declared |
-| ElementalShaman | 60 | Chain Lightning | 3 | 2860 | 390.00→390.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 48→48 | n/a | match |  | 108.88-122.12→- | 0.517→0.517 | not declared |
-| ElementalShaman | 60 | Chain Lightning | 4 | 10605 | 485.00→485.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 56→56 | n/a | match |  | 119.19-133.21→- | 0.571→0.571 | not declared |
-| ElementalShaman | 60 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| ElementalShaman | 60 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| ElementalShaman | 60 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| ElementalShaman | 60 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| ElementalShaman | 60 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 134.32-142.68→- | 0.386→0.386 | not declared |
-| ElementalShaman | 60 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 206.67-219.33→- | 0.386→0.386 | not declared |
-| ElementalShaman | 60 | Earth Shock | 7 | 10414 | 450.00→450.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 293.06-308.94→- | 0.386→0.386 | not declared |
-| ElementalShaman | 60 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| ElementalShaman | 60 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| ElementalShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→- | 0.143→0.143 | not declared |
-| ElementalShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→- | 0.143→0.143 | not declared |
-| ElementalShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→- | 0.143→0.143 | not declared |
-| ElementalShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 60 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 60 | Flame Shock | 5 | 10448 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 52→52 | 12000→12000 | match |  | 136.50-136.50→- | 0.214→0.214 | not declared |
-| ElementalShaman | 60 | Flame Shock | 6 | 29228 | 410.00→410.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 12000→12000 | match |  | 166.00-166.00→- | 0.214→0.214 | not declared |
-| ElementalShaman | 60 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
-| ElementalShaman | 60 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→- | 0.386→0.386 | not declared |
-| ElementalShaman | 60 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 189.80-201.20→- | 0.386→0.386 | not declared |
-| ElementalShaman | 60 | Frost Shock | 4 | 10473 | 430.00→430.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 58→58 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 278.58-294.62→- | 0.386→0.386 | not declared |
+| ElementalShaman | 60 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→85.20-96.80 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 60 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 97.04-108.96→97.04-108.96 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 60 | Chain Lightning | 3 | 2860 | 390.00→390.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 48→48 | n/a | match |  | 108.88-122.12→108.88-122.12 | 0.517→0.517 | declared, matches |
+| ElementalShaman | 60 | Chain Lightning | 4 | 10605 | 485.00→485.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 56→56 | n/a | match |  | 119.19-133.21→119.19-133.21 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 60 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 60 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 60 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 60 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 60 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 60 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 206.67-219.33→206.67-219.33 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 60 | Earth Shock | 7 | 10414 | 450.00→450.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 293.06-308.94→293.06-308.94 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 60 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| ElementalShaman | 60 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→412.07-459.93 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 60 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→89.00-89.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 60 | Flame Shock | 5 | 10448 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 52→52 | 12000→12000 | match |  | 136.50-136.50→136.50-136.50 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 60 | Flame Shock | 6 | 29228 | 410.00→410.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 12000→12000 | match |  | 166.00-166.00→166.00-166.00 | 0.214→0.214 | declared, matches |
+| ElementalShaman | 60 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 60 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→126.21-134.79 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 60 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 189.80-201.20→189.80-201.20 | 0.386→0.386 | declared, matches |
+| ElementalShaman | 60 | Frost Shock | 4 | 10473 | 430.00→430.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 58→58 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 278.58-294.62→278.58-294.62 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 60 | Grace of Air Totem | 1 | 8835 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 42→42 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | ElementalShaman | 60 | Grace of Air Totem | 2 | 10627 | 250.00→250.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | ElementalShaman | 60 | Grace of Air Totem | 3 | 25359 | 310.00→310.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
@@ -340,16 +340,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 60 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | ElementalShaman | 60 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | ElementalShaman | 60 | Healing Stream Totem | 5 | 10463 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| ElementalShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| ElementalShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| ElementalShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| ElementalShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| ElementalShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→- | 0.714→0.714 | not declared |
-| ElementalShaman | 60 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→- | 0.714→0.714 | not declared |
-| ElementalShaman | 60 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→- | 0.714→0.714 | not declared |
-| ElementalShaman | 60 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→- | 0.714→0.714 | not declared |
-| ElementalShaman | 60 | Lightning Bolt | 9 | 15207 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 172.56-193.44→- | 0.714→0.714 | not declared |
-| ElementalShaman | 60 | Lightning Bolt | 10 | 15208 | 220.00→220.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 56→56 | n/a | match |  | 189.92-211.68→- | 0.714→0.714 | not declared |
+| ElementalShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→70.43-80.57 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 9 | 15207 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 172.56-193.44→172.56-193.44 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 10 | 15208 | 220.00→220.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 56→56 | n/a | match |  | 189.92-211.68→189.92-211.68 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 60 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -357,10 +357,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 60 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Lightning Shield | 6 | 10431 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Lightning Shield | 7 | 10432 | 370.00→370.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 600000→600000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 60 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 60 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 60 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| ElementalShaman | 60 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| ElementalShaman | 60 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 60 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 60 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| ElementalShaman | 60 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 60 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
@@ -393,76 +393,76 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 60 | Windwall Totem | 1 | 15107 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | ElementalShaman | 60 | Windwall Totem | 2 | 15111 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | ElementalShaman | 60 | Windwall Totem | 3 | 15112 | 225.00→225.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 10 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 10 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 33.36-35.44→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 10 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 48.00-56.00→- | 0.100→0.100 | not declared |
-| EnhancementShaman | 10 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 10 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 10 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 10 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 20.00-20.00→- | 0.214→0.214 | not declared |
+| EnhancementShaman | 10 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 10 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 33.36-35.44→33.36-35.44 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 10 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 48.00-56.00→48.00-56.00 | 0.100→0.100 | declared, matches |
+| EnhancementShaman | 10 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→102.00-116.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 10 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 10 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 10 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 20.00-20.00→20.00-20.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 10 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| EnhancementShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 27.86-32.14→- | 0.571→0.571 | not declared |
+| EnhancementShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 27.86-32.14→27.86-32.14 | 0.571→0.571 | declared, matches |
 | EnhancementShaman | 10 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 10 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 10 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 10 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→- | 0.033→0.033 | not declared |
+| EnhancementShaman | 10 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 10 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 10 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 20 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| EnhancementShaman | 20 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 20 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 20 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 20 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 20 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 63.85-68.15→- | 0.386→0.386 | not declared |
+| EnhancementShaman | 20 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| EnhancementShaman | 20 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→102.00-116.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 20 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 20 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 20 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→35.00-35.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 20 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 63.85-68.15→63.85-68.15 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 20 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| EnhancementShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| EnhancementShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 52.22-59.78→- | 0.714→0.714 | not declared |
+| EnhancementShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 52.22-59.78→52.22-59.78 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 20 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 20 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 20 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 20 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 20 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→- | 0.033→0.033 | not declared |
+| EnhancementShaman | 20 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 20 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 20 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 20 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 30 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 30 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 30 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| EnhancementShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 30 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 30 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 30 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 45.40-45.40→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 30 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
+| EnhancementShaman | 30 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 30 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 30 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| EnhancementShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 30 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 30 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 30 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 45.40-45.40→45.40-45.40 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 30 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 30 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
@@ -470,18 +470,18 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 30 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| EnhancementShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| EnhancementShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 69.78-79.82→- | 0.714→0.714 | not declared |
+| EnhancementShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 69.78-79.82→69.78-79.82 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 30 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 30 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 30 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| EnhancementShaman | 30 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 30 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
@@ -493,22 +493,22 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 30 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Strength of Earth Totem | 2 | 8160 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 38 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 38 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 38 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 38 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 38 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 130.54-138.66→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| EnhancementShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 38 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 38 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 38 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 38 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 124.95-133.45→- | 0.386→0.386 | not declared |
+| EnhancementShaman | 38 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→85.20-96.80 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 38 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 38 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 38 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 38 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 130.54-138.66→130.54-138.66 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| EnhancementShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 38 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 38 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 38 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 38 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 124.95-133.45→124.95-133.45 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 38 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
@@ -516,21 +516,21 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 38 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| EnhancementShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| EnhancementShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 38 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 38 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 138.46-155.54→- | 0.714→0.714 | not declared |
+| EnhancementShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→70.43-80.57 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 38 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 38 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 138.46-155.54→138.46-155.54 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 38 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 38 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 38 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 38 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| EnhancementShaman | 38 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 38 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 38 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 38 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
@@ -548,24 +548,24 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 38 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Windfury Totem | 1 | 8512 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 32→32 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Windwall Totem | 1 | 15107 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 40 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 40 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 94.22-105.78→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 40 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 40 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 40 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 40 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 133.06-141.34→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| EnhancementShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 40 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 40 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 40 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 82.00-82.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 40 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 40 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→- | 0.386→0.386 | not declared |
+| EnhancementShaman | 40 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→85.20-96.80 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 40 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 94.22-105.78→94.22-105.78 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 40 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 40 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 40 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 40 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 133.06-141.34→133.06-141.34 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| EnhancementShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 40 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 40 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 40 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 82.00-82.00→82.00-82.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 40 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 40 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→126.21-134.79 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 40 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
@@ -574,22 +574,22 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 40 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| EnhancementShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| EnhancementShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 40 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 40 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 139.97-157.23→- | 0.714→0.714 | not declared |
+| EnhancementShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→70.43-80.57 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 40 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 40 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 139.97-157.23→139.97-157.23 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 40 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 40 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 40 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 40 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| EnhancementShaman | 40 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 40 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 40 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 40 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
@@ -608,27 +608,27 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 40 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Windfury Totem | 1 | 8512 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 32→32 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Windwall Totem | 1 | 15107 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 50 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 97.04-108.96→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 50 | Chain Lightning | 3 | 2860 | 390.00→390.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 48→48 | n/a | match |  | 106.90-119.90→- | 0.517→0.517 | not declared |
-| EnhancementShaman | 50 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 50 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 50 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 50 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 50 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 134.32-142.68→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 50 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 202.01-214.39→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 50 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| EnhancementShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 50 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 50 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 50 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 50 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 50 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 188.34-199.66→- | 0.386→0.386 | not declared |
+| EnhancementShaman | 50 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→85.20-96.80 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 50 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 97.04-108.96→97.04-108.96 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 50 | Chain Lightning | 3 | 2860 | 390.00→390.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 48→48 | n/a | match |  | 106.90-119.90→106.90-119.90 | 0.517→0.517 | declared, matches |
+| EnhancementShaman | 50 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 50 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 50 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 50 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 50 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 50 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 202.01-214.39→202.01-214.39 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 50 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| EnhancementShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 50 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 50 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→89.00-89.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 50 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 50 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→126.21-134.79 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 50 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 188.34-199.66→188.34-199.66 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 50 | Grace of Air Totem | 1 | 8835 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 42→42 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
@@ -639,25 +639,25 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 50 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| EnhancementShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 50 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 50 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 50 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 50 | Lightning Bolt | 9 | 15207 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 167.84-188.16→- | 0.714→0.714 | not declared |
+| EnhancementShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→70.43-80.57 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 50 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 50 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 50 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 50 | Lightning Bolt | 9 | 15207 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 167.84-188.16→167.84-188.16 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 50 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Lightning Shield | 6 | 10431 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 600000→600000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 50 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 50 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 50 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| EnhancementShaman | 50 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 50 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 50 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 50 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 50 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
@@ -682,32 +682,32 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 50 | Windfury Totem | 2 | 10613 | 175.00→175.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 42→42 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Windwall Totem | 1 | 15107 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Windwall Totem | 2 | 15111 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 60 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 97.04-108.96→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 60 | Chain Lightning | 3 | 2860 | 390.00→390.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 48→48 | n/a | match |  | 108.88-122.12→- | 0.517→0.517 | not declared |
-| EnhancementShaman | 60 | Chain Lightning | 4 | 10605 | 485.00→485.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 56→56 | n/a | match |  | 119.19-133.21→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 60 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 60 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 60 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 60 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 60 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 134.32-142.68→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 60 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 206.67-219.33→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 60 | Earth Shock | 7 | 10414 | 450.00→450.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 293.06-308.94→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 60 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| EnhancementShaman | 60 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→- | 0.143→0.143 | not declared |
-| EnhancementShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 60 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 60 | Flame Shock | 5 | 10448 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 52→52 | 12000→12000 | match |  | 136.50-136.50→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 60 | Flame Shock | 6 | 29228 | 410.00→410.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 12000→12000 | match |  | 166.00-166.00→- | 0.214→0.214 | not declared |
-| EnhancementShaman | 60 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 60 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 60 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 189.80-201.20→- | 0.386→0.386 | not declared |
-| EnhancementShaman | 60 | Frost Shock | 4 | 10473 | 430.00→430.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 58→58 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 278.58-294.62→- | 0.386→0.386 | not declared |
+| EnhancementShaman | 60 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→85.20-96.80 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 60 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 97.04-108.96→97.04-108.96 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 60 | Chain Lightning | 3 | 2860 | 390.00→390.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 48→48 | n/a | match |  | 108.88-122.12→108.88-122.12 | 0.517→0.517 | declared, matches |
+| EnhancementShaman | 60 | Chain Lightning | 4 | 10605 | 485.00→485.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 56→56 | n/a | match |  | 119.19-133.21→119.19-133.21 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 60 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 60 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 60 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 60 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 60 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 60 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 206.67-219.33→206.67-219.33 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 60 | Earth Shock | 7 | 10414 | 450.00→450.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 293.06-308.94→293.06-308.94 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 60 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| EnhancementShaman | 60 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→412.07-459.93 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 60 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→89.00-89.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 60 | Flame Shock | 5 | 10448 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 52→52 | 12000→12000 | match |  | 136.50-136.50→136.50-136.50 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 60 | Flame Shock | 6 | 29228 | 410.00→410.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 12000→12000 | match |  | 166.00-166.00→166.00-166.00 | 0.214→0.214 | declared, matches |
+| EnhancementShaman | 60 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 60 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→126.21-134.79 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 60 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 189.80-201.20→189.80-201.20 | 0.386→0.386 | declared, matches |
+| EnhancementShaman | 60 | Frost Shock | 4 | 10473 | 430.00→430.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 58→58 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 278.58-294.62→278.58-294.62 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 60 | Grace of Air Totem | 1 | 8835 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 42→42 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Grace of Air Totem | 2 | 10627 | 250.00→250.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Grace of Air Totem | 3 | 25359 | 310.00→310.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
@@ -721,16 +721,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 60 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Healing Stream Totem | 5 | 10463 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| EnhancementShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| EnhancementShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 60 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 60 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 60 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 60 | Lightning Bolt | 9 | 15207 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 172.56-193.44→- | 0.714→0.714 | not declared |
-| EnhancementShaman | 60 | Lightning Bolt | 10 | 15208 | 220.00→220.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 56→56 | n/a | match |  | 189.92-211.68→- | 0.714→0.714 | not declared |
+| EnhancementShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→70.43-80.57 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 9 | 15207 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 172.56-193.44→172.56-193.44 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 10 | 15208 | 220.00→220.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 56→56 | n/a | match |  | 189.92-211.68→189.92-211.68 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 60 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -738,10 +738,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 60 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Lightning Shield | 6 | 10431 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Lightning Shield | 7 | 10432 | 370.00→370.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 600000→600000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 60 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 60 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| EnhancementShaman | 60 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| EnhancementShaman | 60 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 60 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 60 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| EnhancementShaman | 60 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 60 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
@@ -774,76 +774,76 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 60 | Windwall Totem | 1 | 15107 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Windwall Totem | 2 | 15111 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Windwall Totem | 3 | 15112 | 225.00→225.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 10 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| WardenShaman | 10 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 33.36-35.44→- | 0.386→0.386 | not declared |
-| WardenShaman | 10 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 48.00-56.00→- | 0.100→0.100 | not declared |
-| WardenShaman | 10 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 10 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 10 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 10 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 20.00-20.00→- | 0.214→0.214 | not declared |
+| WardenShaman | 10 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| WardenShaman | 10 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 33.36-35.44→33.36-35.44 | 0.386→0.386 | declared, matches |
+| WardenShaman | 10 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 48.00-56.00→48.00-56.00 | 0.100→0.100 | declared, matches |
+| WardenShaman | 10 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→102.00-116.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 10 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 10 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 10 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 20.00-20.00→20.00-20.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 10 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 10 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 10 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 10 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 10 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | n/a | n/a | n/a |
-| WardenShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| WardenShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 27.86-32.14→- | 0.571→0.571 | not declared |
+| WardenShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| WardenShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 27.86-32.14→27.86-32.14 | 0.571→0.571 | declared, matches |
 | WardenShaman | 10 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 10 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 10 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 10 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→- | 0.033→0.033 | not declared |
+| WardenShaman | 10 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 10 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 10 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 10 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | WardenShaman | 10 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | WardenShaman | 10 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 20 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| WardenShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| WardenShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| WardenShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| WardenShaman | 20 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 20 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 20 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 20 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 20 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 63.85-68.15→- | 0.386→0.386 | not declared |
+| WardenShaman | 20 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| WardenShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| WardenShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| WardenShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| WardenShaman | 20 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→102.00-116.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 20 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 20 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 20 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→35.00-35.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 20 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 63.85-68.15→63.85-68.15 | 0.386→0.386 | declared, matches |
 | WardenShaman | 20 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| WardenShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| WardenShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| WardenShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| WardenShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 52.22-59.78→- | 0.714→0.714 | not declared |
+| WardenShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| WardenShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| WardenShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| WardenShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 52.22-59.78→52.22-59.78 | 0.714→0.714 | declared, matches |
 | WardenShaman | 20 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 20 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 20 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 20 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 20 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→- | 0.033→0.033 | not declared |
+| WardenShaman | 20 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 20 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 20 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 20 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | WardenShaman | 20 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | WardenShaman | 20 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | WardenShaman | 20 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 30 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| WardenShaman | 30 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| WardenShaman | 30 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| WardenShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| WardenShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| WardenShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| WardenShaman | 30 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 30 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 30 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 45.40-45.40→- | 0.214→0.214 | not declared |
-| WardenShaman | 30 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
+| WardenShaman | 30 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| WardenShaman | 30 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| WardenShaman | 30 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| WardenShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| WardenShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| WardenShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| WardenShaman | 30 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 30 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 30 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 45.40-45.40→45.40-45.40 | 0.214→0.214 | declared, matches |
+| WardenShaman | 30 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
 | WardenShaman | 30 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
@@ -851,18 +851,18 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 30 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | WardenShaman | 30 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| WardenShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| WardenShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| WardenShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| WardenShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| WardenShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 69.78-79.82→- | 0.714→0.714 | not declared |
+| WardenShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| WardenShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| WardenShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| WardenShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| WardenShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 69.78-79.82→69.78-79.82 | 0.714→0.714 | declared, matches |
 | WardenShaman | 30 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 30 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 30 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| WardenShaman | 30 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 30 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | WardenShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
@@ -874,22 +874,22 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 30 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | WardenShaman | 30 | Strength of Earth Totem | 2 | 8160 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | WardenShaman | 30 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 38 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→- | 0.571→0.571 | not declared |
-| WardenShaman | 38 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| WardenShaman | 38 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| WardenShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| WardenShaman | 38 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| WardenShaman | 38 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 130.54-138.66→- | 0.386→0.386 | not declared |
-| WardenShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| WardenShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| WardenShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→- | 0.143→0.143 | not declared |
-| WardenShaman | 38 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 38 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 38 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
-| WardenShaman | 38 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 124.95-133.45→- | 0.386→0.386 | not declared |
+| WardenShaman | 38 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→85.20-96.80 | 0.571→0.571 | declared, matches |
+| WardenShaman | 38 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| WardenShaman | 38 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| WardenShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| WardenShaman | 38 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| WardenShaman | 38 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 130.54-138.66→130.54-138.66 | 0.386→0.386 | declared, matches |
+| WardenShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| WardenShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| WardenShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| WardenShaman | 38 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 38 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 38 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
+| WardenShaman | 38 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 124.95-133.45→124.95-133.45 | 0.386→0.386 | declared, matches |
 | WardenShaman | 38 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
@@ -897,21 +897,21 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 38 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | WardenShaman | 38 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| WardenShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| WardenShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| WardenShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| WardenShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| WardenShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→- | 0.714→0.714 | not declared |
-| WardenShaman | 38 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→- | 0.714→0.714 | not declared |
-| WardenShaman | 38 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 138.46-155.54→- | 0.714→0.714 | not declared |
+| WardenShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| WardenShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| WardenShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| WardenShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| WardenShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→70.43-80.57 | 0.714→0.714 | declared, matches |
+| WardenShaman | 38 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
+| WardenShaman | 38 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 138.46-155.54→138.46-155.54 | 0.714→0.714 | declared, matches |
 | WardenShaman | 38 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 38 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 38 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 38 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| WardenShaman | 38 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 38 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 38 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 38 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
@@ -929,24 +929,24 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 38 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | WardenShaman | 38 | Windfury Totem | 1 | 8512 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 32→32 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | WardenShaman | 38 | Windwall Totem | 1 | 15107 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 40 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→- | 0.571→0.571 | not declared |
-| WardenShaman | 40 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 94.22-105.78→- | 0.571→0.571 | not declared |
-| WardenShaman | 40 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| WardenShaman | 40 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| WardenShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| WardenShaman | 40 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| WardenShaman | 40 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 133.06-141.34→- | 0.386→0.386 | not declared |
-| WardenShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| WardenShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| WardenShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→- | 0.143→0.143 | not declared |
-| WardenShaman | 40 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 40 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 40 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 82.00-82.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 40 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
-| WardenShaman | 40 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→- | 0.386→0.386 | not declared |
+| WardenShaman | 40 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→85.20-96.80 | 0.571→0.571 | declared, matches |
+| WardenShaman | 40 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 94.22-105.78→94.22-105.78 | 0.571→0.571 | declared, matches |
+| WardenShaman | 40 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| WardenShaman | 40 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| WardenShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| WardenShaman | 40 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| WardenShaman | 40 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 133.06-141.34→133.06-141.34 | 0.386→0.386 | declared, matches |
+| WardenShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| WardenShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| WardenShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| WardenShaman | 40 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 40 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 40 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 82.00-82.00→82.00-82.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 40 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
+| WardenShaman | 40 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→126.21-134.79 | 0.386→0.386 | declared, matches |
 | WardenShaman | 40 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | n/a | n/a | n/a |
@@ -955,22 +955,22 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 40 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | WardenShaman | 40 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | WardenShaman | 40 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| WardenShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| WardenShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| WardenShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| WardenShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| WardenShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→- | 0.714→0.714 | not declared |
-| WardenShaman | 40 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→- | 0.714→0.714 | not declared |
-| WardenShaman | 40 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 139.97-157.23→- | 0.714→0.714 | not declared |
+| WardenShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| WardenShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| WardenShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| WardenShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| WardenShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→70.43-80.57 | 0.714→0.714 | declared, matches |
+| WardenShaman | 40 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
+| WardenShaman | 40 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 139.97-157.23→139.97-157.23 | 0.714→0.714 | declared, matches |
 | WardenShaman | 40 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 40 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 40 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 40 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| WardenShaman | 40 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 40 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 40 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 40 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
@@ -989,27 +989,27 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 40 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | WardenShaman | 40 | Windfury Totem | 1 | 8512 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 32→32 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | WardenShaman | 40 | Windwall Totem | 1 | 15107 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 50 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→- | 0.571→0.571 | not declared |
-| WardenShaman | 50 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 97.04-108.96→- | 0.571→0.571 | not declared |
-| WardenShaman | 50 | Chain Lightning | 3 | 2860 | 390.00→390.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 48→48 | n/a | match |  | 106.90-119.90→- | 0.517→0.517 | not declared |
-| WardenShaman | 50 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| WardenShaman | 50 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| WardenShaman | 50 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| WardenShaman | 50 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| WardenShaman | 50 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 134.32-142.68→- | 0.386→0.386 | not declared |
-| WardenShaman | 50 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 202.01-214.39→- | 0.386→0.386 | not declared |
-| WardenShaman | 50 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| WardenShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| WardenShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→- | 0.143→0.143 | not declared |
-| WardenShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→- | 0.143→0.143 | not declared |
-| WardenShaman | 50 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→- | 0.143→0.143 | not declared |
-| WardenShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 50 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 50 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
-| WardenShaman | 50 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→- | 0.386→0.386 | not declared |
-| WardenShaman | 50 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 188.34-199.66→- | 0.386→0.386 | not declared |
+| WardenShaman | 50 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→85.20-96.80 | 0.571→0.571 | declared, matches |
+| WardenShaman | 50 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 97.04-108.96→97.04-108.96 | 0.571→0.571 | declared, matches |
+| WardenShaman | 50 | Chain Lightning | 3 | 2860 | 390.00→390.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 48→48 | n/a | match |  | 106.90-119.90→106.90-119.90 | 0.517→0.517 | declared, matches |
+| WardenShaman | 50 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| WardenShaman | 50 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| WardenShaman | 50 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| WardenShaman | 50 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| WardenShaman | 50 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
+| WardenShaman | 50 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 202.01-214.39→202.01-214.39 | 0.386→0.386 | declared, matches |
+| WardenShaman | 50 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| WardenShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| WardenShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| WardenShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
+| WardenShaman | 50 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 50 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→89.00-89.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 50 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
+| WardenShaman | 50 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→126.21-134.79 | 0.386→0.386 | declared, matches |
+| WardenShaman | 50 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 188.34-199.66→188.34-199.66 | 0.386→0.386 | declared, matches |
 | WardenShaman | 50 | Grace of Air Totem | 1 | 8835 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 42→42 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | WardenShaman | 50 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
@@ -1020,25 +1020,25 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 50 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | WardenShaman | 50 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | WardenShaman | 50 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| WardenShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| WardenShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| WardenShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| WardenShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| WardenShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→- | 0.714→0.714 | not declared |
-| WardenShaman | 50 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→- | 0.714→0.714 | not declared |
-| WardenShaman | 50 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→- | 0.714→0.714 | not declared |
-| WardenShaman | 50 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→- | 0.714→0.714 | not declared |
-| WardenShaman | 50 | Lightning Bolt | 9 | 15207 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 167.84-188.16→- | 0.714→0.714 | not declared |
+| WardenShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| WardenShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| WardenShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| WardenShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| WardenShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→70.43-80.57 | 0.714→0.714 | declared, matches |
+| WardenShaman | 50 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
+| WardenShaman | 50 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
+| WardenShaman | 50 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
+| WardenShaman | 50 | Lightning Bolt | 9 | 15207 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 167.84-188.16→167.84-188.16 | 0.714→0.714 | declared, matches |
 | WardenShaman | 50 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Lightning Shield | 6 | 10431 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 600000→600000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 50 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 50 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 50 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 50 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| WardenShaman | 50 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 50 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 50 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 50 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 50 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
@@ -1063,32 +1063,32 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 50 | Windfury Totem | 2 | 10613 | 175.00→175.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 42→42 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | WardenShaman | 50 | Windwall Totem | 1 | 15107 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | WardenShaman | 50 | Windwall Totem | 2 | 15111 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 60 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→- | 0.571→0.571 | not declared |
-| WardenShaman | 60 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 97.04-108.96→- | 0.571→0.571 | not declared |
-| WardenShaman | 60 | Chain Lightning | 3 | 2860 | 390.00→390.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 48→48 | n/a | match |  | 108.88-122.12→- | 0.517→0.517 | not declared |
-| WardenShaman | 60 | Chain Lightning | 4 | 10605 | 485.00→485.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 56→56 | n/a | match |  | 119.19-133.21→- | 0.571→0.571 | not declared |
-| WardenShaman | 60 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→- | 0.386→0.386 | not declared |
-| WardenShaman | 60 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→- | 0.386→0.386 | not declared |
-| WardenShaman | 60 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→- | 0.386→0.386 | not declared |
-| WardenShaman | 60 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→- | 0.386→0.386 | not declared |
-| WardenShaman | 60 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 134.32-142.68→- | 0.386→0.386 | not declared |
-| WardenShaman | 60 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 206.67-219.33→- | 0.386→0.386 | not declared |
-| WardenShaman | 60 | Earth Shock | 7 | 10414 | 450.00→450.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 293.06-308.94→- | 0.386→0.386 | not declared |
-| WardenShaman | 60 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→- | 0.100→0.100 | not declared |
-| WardenShaman | 60 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→- | 0.143→0.143 | not declared |
-| WardenShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→- | 0.143→0.143 | not declared |
-| WardenShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→- | 0.143→0.143 | not declared |
-| WardenShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→- | 0.143→0.143 | not declared |
-| WardenShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 60 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 60 | Flame Shock | 5 | 10448 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 52→52 | 12000→12000 | match |  | 136.50-136.50→- | 0.214→0.214 | not declared |
-| WardenShaman | 60 | Flame Shock | 6 | 29228 | 410.00→410.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 12000→12000 | match |  | 166.00-166.00→- | 0.214→0.214 | not declared |
-| WardenShaman | 60 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→- | 0.386→0.386 | not declared |
-| WardenShaman | 60 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→- | 0.386→0.386 | not declared |
-| WardenShaman | 60 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 189.80-201.20→- | 0.386→0.386 | not declared |
-| WardenShaman | 60 | Frost Shock | 4 | 10473 | 430.00→430.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 58→58 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 278.58-294.62→- | 0.386→0.386 | not declared |
+| WardenShaman | 60 | Chain Lightning | 1 | 421 | 225.00→225.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 32→32 | n/a | match |  | 85.20-96.80→85.20-96.80 | 0.571→0.571 | declared, matches |
+| WardenShaman | 60 | Chain Lightning | 2 | 930 | 305.00→305.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 40→40 | n/a | match |  | 97.04-108.96→97.04-108.96 | 0.571→0.571 | declared, matches |
+| WardenShaman | 60 | Chain Lightning | 3 | 2860 | 390.00→390.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 48→48 | n/a | match |  | 108.88-122.12→108.88-122.12 | 0.517→0.517 | declared, matches |
+| WardenShaman | 60 | Chain Lightning | 4 | 10605 | 485.00→485.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 56→56 | n/a | match |  | 119.19-133.21→119.19-133.21 | 0.571→0.571 | declared, matches |
+| WardenShaman | 60 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
+| WardenShaman | 60 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
+| WardenShaman | 60 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
+| WardenShaman | 60 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
+| WardenShaman | 60 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
+| WardenShaman | 60 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 206.67-219.33→206.67-219.33 | 0.386→0.386 | declared, matches |
+| WardenShaman | 60 | Earth Shock | 7 | 10414 | 450.00→450.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 293.06-308.94→293.06-308.94 | 0.386→0.386 | declared, matches |
+| WardenShaman | 60 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| WardenShaman | 60 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| WardenShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| WardenShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
+| WardenShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→412.07-459.93 | 0.143→0.143 | declared, matches |
+| WardenShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 60 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→89.00-89.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 60 | Flame Shock | 5 | 10448 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 52→52 | 12000→12000 | match |  | 136.50-136.50→136.50-136.50 | 0.214→0.214 | declared, matches |
+| WardenShaman | 60 | Flame Shock | 6 | 29228 | 410.00→410.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 12000→12000 | match |  | 166.00-166.00→166.00-166.00 | 0.214→0.214 | declared, matches |
+| WardenShaman | 60 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
+| WardenShaman | 60 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→126.21-134.79 | 0.386→0.386 | declared, matches |
+| WardenShaman | 60 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 189.80-201.20→189.80-201.20 | 0.386→0.386 | declared, matches |
+| WardenShaman | 60 | Frost Shock | 4 | 10473 | 430.00→430.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 58→58 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 278.58-294.62→278.58-294.62 | 0.386→0.386 | declared, matches |
 | WardenShaman | 60 | Grace of Air Totem | 1 | 8835 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 42→42 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | WardenShaman | 60 | Grace of Air Totem | 2 | 10627 | 250.00→250.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | WardenShaman | 60 | Grace of Air Totem | 3 | 25359 | 310.00→310.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
@@ -1102,16 +1102,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 60 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | WardenShaman | 60 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
 | WardenShaman | 60 | Healing Stream Totem | 5 | 10463 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 300000→60000 | mismatch | duration_ms 300000->60000 | n/a | n/a | n/a |
-| WardenShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→- | 0.429→0.429 | not declared |
-| WardenShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→- | 0.571→0.571 | not declared |
-| WardenShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→- | 0.714→0.714 | not declared |
-| WardenShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→- | 0.714→0.714 | not declared |
-| WardenShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→- | 0.714→0.714 | not declared |
-| WardenShaman | 60 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→- | 0.714→0.714 | not declared |
-| WardenShaman | 60 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→- | 0.714→0.714 | not declared |
-| WardenShaman | 60 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→- | 0.714→0.714 | not declared |
-| WardenShaman | 60 | Lightning Bolt | 9 | 15207 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 172.56-193.44→- | 0.714→0.714 | not declared |
-| WardenShaman | 60 | Lightning Bolt | 10 | 15208 | 220.00→220.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 56→56 | n/a | match |  | 189.92-211.68→- | 0.714→0.714 | not declared |
+| WardenShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.86-17.14→14.86-17.14 | 0.429→0.429 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 29.25-33.75→29.25-33.75 | 0.571→0.571 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.08-51.92→44.08-51.92 | 0.714→0.714 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 55.02-62.98→55.02-62.98 | 0.714→0.714 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 70.43-80.57→70.43-80.57 | 0.714→0.714 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 9 | 15207 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 172.56-193.44→172.56-193.44 | 0.714→0.714 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 10 | 15208 | 220.00→220.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 56→56 | n/a | match |  | 189.92-211.68→189.92-211.68 | 0.714→0.714 | declared, matches |
 | WardenShaman | 60 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -1119,10 +1119,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 60 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Lightning Shield | 6 | 10431 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Lightning Shield | 7 | 10432 | 370.00→370.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 600000→600000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 60 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 60 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 60 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→- | 0.033→0.033 | not declared |
-| WardenShaman | 60 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→- | 0.033→0.033 | not declared |
+| WardenShaman | 60 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 60 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 60 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| WardenShaman | 60 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 60 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
@@ -1161,12 +1161,12 @@ Each spell below is built with exactly one point in the single talent that grant
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| ElementalShaman (Lava Burst talent) | 40 | Lava Burst | 1 | 408490 | 165.00→165.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 40→40 | n/a | match |  | 143.23-184.77→- | 0.714→0.714 | not declared |
-| ElementalShaman (Lava Burst talent) | 50 | Lava Burst | 1 | 408490 | 165.00→165.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 40→40 | n/a | match |  | 149.52-192.88→- | 0.714→0.714 | not declared |
-| ElementalShaman (Lava Burst talent) | 50 | Lava Burst | 2 | 1238299 | 230.00→230.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 171.18-220.82→- | 0.714→0.714 | not declared |
-| ElementalShaman (Lava Burst talent) | 60 | Lava Burst | 1 | 408490 | 165.00→165.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 40→40 | n/a | match |  | 149.52-192.88→- | 0.714→0.714 | not declared |
-| ElementalShaman (Lava Burst talent) | 60 | Lava Burst | 2 | 1238299 | 230.00→230.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 178.87-230.73→- | 0.714→0.714 | not declared |
-| ElementalShaman (Lava Burst talent) | 60 | Lava Burst | 3 | 1238300 | 265.00→265.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 60→60 | n/a | match |  | 192.14-247.86→- | 0.714→0.714 | not declared |
+| ElementalShaman (Lava Burst talent) | 40 | Lava Burst | 1 | 408490 | 165.00→165.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 40→40 | n/a | match |  | 143.23-184.77→143.23-184.77 | 0.714→0.714 | declared, matches |
+| ElementalShaman (Lava Burst talent) | 50 | Lava Burst | 1 | 408490 | 165.00→165.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 40→40 | n/a | match |  | 149.52-192.88→149.52-192.88 | 0.714→0.714 | declared, matches |
+| ElementalShaman (Lava Burst talent) | 50 | Lava Burst | 2 | 1238299 | 230.00→230.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 171.18-220.82→171.18-220.82 | 0.714→0.714 | declared, matches |
+| ElementalShaman (Lava Burst talent) | 60 | Lava Burst | 1 | 408490 | 165.00→165.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 40→40 | n/a | match |  | 149.52-192.88→149.52-192.88 | 0.714→0.714 | declared, matches |
+| ElementalShaman (Lava Burst talent) | 60 | Lava Burst | 2 | 1238299 | 230.00→230.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 178.87-230.73→178.87-230.73 | 0.714→0.714 | declared, matches |
+| ElementalShaman (Lava Burst talent) | 60 | Lava Burst | 3 | 1238300 | 265.00→265.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 60→60 | n/a | match |  | 192.14-247.86→192.14-247.86 | 0.714→0.714 | declared, matches |
 | ElementalShaman (Nature's Swiftness talent) | 10 | Nature's Swiftness | 0 | 16188 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | ElementalShaman (Nature's Swiftness talent) | 20 | Nature's Swiftness | 0 | 16188 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | ElementalShaman (Nature's Swiftness talent) | 30 | Nature's Swiftness | 0 | 16188 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |

@@ -14,8 +14,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | ProtectionPaladin | 10 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 10 | Judgement | 0 | 20271 | 11.52 (6% base mana)→11.52 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 10 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| ProtectionPaladin | 10 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 25.00-27.00→- | 0.500→0.312 | not declared |
+| ProtectionPaladin | 10 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 10 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 25.00-27.00→25.00-27.00 | 0.500→0.500 | declared, matches |
 | ProtectionPaladin | 10 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 10 | Lay on Hands | 0 | 633 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 10 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→- | 0.100→0.063 | not declared |
@@ -24,14 +24,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 10 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 10 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 20 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 20 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 73.73-84.27→- | 0.429→0.429 | not declared |
+| ProtectionPaladin | 20 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 73.73-84.27→73.73-84.27 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 20 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 20 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 20 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 20 | Judgement | 0 | 20271 | 24.72 (6% base mana)→24.72 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→- | 0.500→0.312 | not declared |
-| ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 43.57-48.03→- | 0.500→0.462 | not declared |
+| ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 43.57-48.03→43.57-48.03 | 0.500→0.500 | declared, matches |
 | ProtectionPaladin | 20 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 20 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 20 | Lay on Hands | 0 | 633 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
@@ -45,17 +45,17 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 20 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 30 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 30 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 135.30-153.10→- | 0.429→0.429 | not declared |
+| ProtectionPaladin | 30 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 30 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 135.30-153.10→135.30-153.10 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 30 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Judgement | 0 | 20271 | 42.12 (6% base mana)→42.12 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→- | 0.500→0.312 | not declared |
-| ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→- | 0.500→0.462 | not declared |
-| ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 67.64-74.76→- | 0.500→0.500 | not declared |
+| ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 67.64-74.76→67.64-74.76 | 0.500→0.500 | declared, matches |
 | ProtectionPaladin | 30 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
@@ -73,20 +73,20 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 30 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 38 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 38 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 38 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 193.52-218.48→- | 0.429→0.429 | not declared |
+| ProtectionPaladin | 38 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 38 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→139.80-158.20 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 38 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 193.52-218.48→193.52-218.48 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 38 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Holy Strike | 5 | 2495 | 16.00→16.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Judgement | 0 | 20271 | 55.98 (6% base mana)→55.98 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→- | 0.500→0.312 | not declared |
-| ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→- | 0.500→0.462 | not declared |
-| ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→- | 0.500→0.500 | not declared |
-| ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 89.80-99.00→- | 0.500→0.500 | not declared |
+| ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→72.96-80.64 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 89.80-99.00→89.80-99.00 | 0.500→0.500 | declared, matches |
 | ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
@@ -109,20 +109,20 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 40 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Consecration | 3 | 20922 | 320.00→320.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 8000→8000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 40 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 40 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 40 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 197.27-222.73→- | 0.429→0.429 | not declared |
+| ProtectionPaladin | 40 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 40 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→139.80-158.20 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 40 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 197.27-222.73→197.27-222.73 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 40 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Holy Strike | 5 | 2495 | 16.00→16.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Judgement | 0 | 20271 | 59.22 (6% base mana)→59.22 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→- | 0.500→0.312 | not declared |
-| ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→- | 0.500→0.462 | not declared |
-| ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→- | 0.500→0.500 | not declared |
-| ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→- | 0.500→0.500 | not declared |
+| ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→72.96-80.64 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→95.69-105.51 | 0.500→0.500 | declared, matches |
 | ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
@@ -146,26 +146,26 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 50 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Consecration | 3 | 20922 | 320.00→320.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 8000→8000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Consecration | 4 | 20923 | 435.00→435.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 50→50 | 8000→8000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 50 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 50 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 50 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 199.15-224.85→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 50 | Exorcism | 4 | 10312 | 235.00→235.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 285.18-320.82→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 50 | Hammer of Wrath | 1 | 24275 | 295.00→295.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 44→44 | n/a | match |  | 285.00-315.00→- | 0.429→0.429 | not declared |
+| ProtectionPaladin | 50 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 50 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→139.80-158.20 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 50 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 199.15-224.85→199.15-224.85 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 50 | Exorcism | 4 | 10312 | 235.00→235.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 285.18-320.82→285.18-320.82 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 50 | Hammer of Wrath | 1 | 24275 | 295.00→295.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 44→44 | n/a | match |  | 285.00-315.00→285.00-315.00 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 50 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Holy Strike | 5 | 2495 | 16.00→16.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Holy Strike | 6 | 5569 | 17.00→17.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 50 | Holy Wrath | 1 | 2812 | 645.00→645.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 50→50 | n/a | match |  | 362.00-428.00→- | 0.190→0.190 | not declared |
+| ProtectionPaladin | 50 | Holy Wrath | 1 | 2812 | 645.00→645.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 50→50 | n/a | match |  | 362.00-428.00→362.00-428.00 | 0.190→0.190 | declared, matches |
 | ProtectionPaladin | 50 | Judgement | 0 | 20271 | 75.42 (6% base mana)→75.42 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→- | 0.500→0.312 | not declared |
-| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→- | 0.500→0.462 | not declared |
-| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→- | 0.500→0.500 | not declared |
-| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→- | 0.500→0.500 | not declared |
-| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 123.73-135.87→- | 0.500→0.500 | not declared |
-| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 131.00-143.00→- | 0.500→0.500 | not declared |
+| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→72.96-80.64 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→95.69-105.51 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 123.73-135.87→123.73-135.87 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 50 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 131.00-143.00→131.00-143.00 | 0.500→0.500 | declared, matches |
 | ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
@@ -196,15 +196,15 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 60 | Consecration | 3 | 20922 | 320.00→320.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 8000→8000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Consecration | 4 | 20923 | 435.00→435.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 50→50 | 8000→8000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Consecration | 5 | 20924 | 565.00→565.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 60→60 | 8000→8000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 60 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 60 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 60 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 199.15-224.85→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 60 | Exorcism | 4 | 10312 | 235.00→235.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 285.18-320.82→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 60 | Exorcism | 5 | 10313 | 285.00→285.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | 376.00-420.00→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 60 | Exorcism | 6 | 10314 | 345.00→345.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | 474.74-529.26→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 60 | Hammer of Wrath | 1 | 24275 | 295.00→295.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 44→44 | n/a | match |  | 285.00-315.00→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 60 | Hammer of Wrath | 2 | 24274 | 360.00→360.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 52→52 | n/a | match |  | 381.42-421.58→- | 0.429→0.429 | not declared |
-| ProtectionPaladin | 60 | Hammer of Wrath | 3 | 24239 | 425.00→425.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 60→60 | n/a | match |  | 473.57-522.43→- | 0.429→0.429 | not declared |
+| ProtectionPaladin | 60 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 60 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→139.80-158.20 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 60 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 199.15-224.85→199.15-224.85 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 60 | Exorcism | 4 | 10312 | 235.00→235.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 285.18-320.82→285.18-320.82 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 60 | Exorcism | 5 | 10313 | 285.00→285.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | 376.00-420.00→376.00-420.00 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 60 | Exorcism | 6 | 10314 | 345.00→345.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | 474.74-529.26→474.74-529.26 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 60 | Hammer of Wrath | 1 | 24275 | 295.00→295.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 44→44 | n/a | match |  | 285.00-315.00→285.00-315.00 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 60 | Hammer of Wrath | 2 | 24274 | 360.00→360.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 52→52 | n/a | match |  | 381.42-421.58→381.42-421.58 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 60 | Hammer of Wrath | 3 | 24239 | 425.00→425.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 60→60 | n/a | match |  | 473.57-522.43→473.57-522.43 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 60 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
@@ -213,17 +213,17 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 60 | Holy Strike | 6 | 5569 | 17.00→17.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Holy Strike | 7 | 10332 | 19.00→19.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Holy Strike | 8 | 10333 | 20.00→20.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 60 | Holy Wrath | 1 | 2812 | 645.00→645.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 50→50 | n/a | match |  | 367.87-434.93→- | 0.190→0.190 | not declared |
-| ProtectionPaladin | 60 | Holy Wrath | 2 | 10318 | 805.00→805.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 60→60 | n/a | match |  | 490.00-576.00→- | 0.190→0.190 | not declared |
+| ProtectionPaladin | 60 | Holy Wrath | 1 | 2812 | 645.00→645.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 50→50 | n/a | match |  | 367.87-434.93→367.87-434.93 | 0.190→0.190 | declared, matches |
+| ProtectionPaladin | 60 | Holy Wrath | 2 | 10318 | 805.00→805.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 60→60 | n/a | match |  | 490.00-576.00→490.00-576.00 | 0.190→0.190 | declared, matches |
 | ProtectionPaladin | 60 | Judgement | 0 | 20271 | 90.72 (6% base mana)→90.72 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→- | 0.500→0.312 | not declared |
-| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→- | 0.500→0.462 | not declared |
-| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→- | 0.500→0.500 | not declared |
-| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→- | 0.500→0.500 | not declared |
-| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 123.73-135.87→- | 0.500→0.500 | not declared |
-| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 154.52-168.68→- | 0.500→0.500 | not declared |
-| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20286 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  | 169.81-186.59→- | 0.500→0.500 | not declared |
+| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→72.96-80.64 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→95.69-105.51 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 123.73-135.87→123.73-135.87 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 154.52-168.68→154.52-168.68 | 0.500→0.500 | declared, matches |
+| ProtectionPaladin | 60 | Judgement of Righteousness | 0 | 20286 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  | 169.81-186.59→169.81-186.59 | 0.500→0.500 | declared, matches |
 | ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
@@ -255,8 +255,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 60 | Seal of the Crusader | 6 | 20308 | 160.00→160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 10 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 10 | Judgement | 0 | 20271 | 11.52 (6% base mana)→11.52 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 10 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| RetributionPaladin | 10 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 25.00-27.00→- | 0.500→0.312 | not declared |
+| RetributionPaladin | 10 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 10 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 25.00-27.00→25.00-27.00 | 0.500→0.500 | declared, matches |
 | RetributionPaladin | 10 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 10 | Lay on Hands | 0 | 633 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 10 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→- | 0.100→0.063 | not declared |
@@ -265,14 +265,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 10 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 10 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 20 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 20 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 73.73-84.27→- | 0.429→0.429 | not declared |
+| RetributionPaladin | 20 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 73.73-84.27→73.73-84.27 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 20 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 20 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 20 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 20 | Judgement | 0 | 20271 | 24.72 (6% base mana)→24.72 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 20 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| RetributionPaladin | 20 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→- | 0.500→0.312 | not declared |
-| RetributionPaladin | 20 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 43.57-48.03→- | 0.500→0.462 | not declared |
+| RetributionPaladin | 20 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 20 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 20 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 43.57-48.03→43.57-48.03 | 0.500→0.500 | declared, matches |
 | RetributionPaladin | 20 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 20 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 20 | Lay on Hands | 0 | 633 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
@@ -286,17 +286,17 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 20 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 30 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 30 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 135.30-153.10→- | 0.429→0.429 | not declared |
+| RetributionPaladin | 30 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 30 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 135.30-153.10→135.30-153.10 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 30 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Judgement | 0 | 20271 | 42.12 (6% base mana)→42.12 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→- | 0.500→0.312 | not declared |
-| RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→- | 0.500→0.462 | not declared |
-| RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 67.64-74.76→- | 0.500→0.500 | not declared |
+| RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 67.64-74.76→67.64-74.76 | 0.500→0.500 | declared, matches |
 | RetributionPaladin | 30 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
@@ -314,20 +314,20 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 30 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 38 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 38 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 38 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 193.52-218.48→- | 0.429→0.429 | not declared |
+| RetributionPaladin | 38 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 38 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→139.80-158.20 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 38 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 193.52-218.48→193.52-218.48 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 38 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Holy Strike | 5 | 2495 | 16.00→16.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Judgement | 0 | 20271 | 55.98 (6% base mana)→55.98 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→- | 0.500→0.312 | not declared |
-| RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→- | 0.500→0.462 | not declared |
-| RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→- | 0.500→0.500 | not declared |
-| RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 89.80-99.00→- | 0.500→0.500 | not declared |
+| RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→72.96-80.64 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 89.80-99.00→89.80-99.00 | 0.500→0.500 | declared, matches |
 | RetributionPaladin | 38 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
@@ -350,20 +350,20 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 40 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Consecration | 3 | 20922 | 320.00→320.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 8000→8000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 40 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 40 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 40 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 197.27-222.73→- | 0.429→0.429 | not declared |
+| RetributionPaladin | 40 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 40 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→139.80-158.20 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 40 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 197.27-222.73→197.27-222.73 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 40 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Holy Strike | 5 | 2495 | 16.00→16.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Judgement | 0 | 20271 | 59.22 (6% base mana)→59.22 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→- | 0.500→0.312 | not declared |
-| RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→- | 0.500→0.462 | not declared |
-| RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→- | 0.500→0.500 | not declared |
-| RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→- | 0.500→0.500 | not declared |
+| RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→72.96-80.64 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→95.69-105.51 | 0.500→0.500 | declared, matches |
 | RetributionPaladin | 40 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
@@ -387,26 +387,26 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 50 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Consecration | 3 | 20922 | 320.00→320.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 8000→8000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Consecration | 4 | 20923 | 435.00→435.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 50→50 | 8000→8000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 50 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 50 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 50 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 199.15-224.85→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 50 | Exorcism | 4 | 10312 | 235.00→235.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 285.18-320.82→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 50 | Hammer of Wrath | 1 | 24275 | 295.00→295.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 44→44 | n/a | match |  | 285.00-315.00→- | 0.429→0.429 | not declared |
+| RetributionPaladin | 50 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 50 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→139.80-158.20 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 50 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 199.15-224.85→199.15-224.85 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 50 | Exorcism | 4 | 10312 | 235.00→235.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 285.18-320.82→285.18-320.82 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 50 | Hammer of Wrath | 1 | 24275 | 295.00→295.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 44→44 | n/a | match |  | 285.00-315.00→285.00-315.00 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 50 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Holy Strike | 5 | 2495 | 16.00→16.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Holy Strike | 6 | 5569 | 17.00→17.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 50 | Holy Wrath | 1 | 2812 | 645.00→645.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 50→50 | n/a | match |  | 362.00-428.00→- | 0.190→0.190 | not declared |
+| RetributionPaladin | 50 | Holy Wrath | 1 | 2812 | 645.00→645.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 50→50 | n/a | match |  | 362.00-428.00→362.00-428.00 | 0.190→0.190 | declared, matches |
 | RetributionPaladin | 50 | Judgement | 0 | 20271 | 75.42 (6% base mana)→75.42 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→- | 0.500→0.312 | not declared |
-| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→- | 0.500→0.462 | not declared |
-| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→- | 0.500→0.500 | not declared |
-| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→- | 0.500→0.500 | not declared |
-| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 123.73-135.87→- | 0.500→0.500 | not declared |
-| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 131.00-143.00→- | 0.500→0.500 | not declared |
+| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→72.96-80.64 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→95.69-105.51 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 123.73-135.87→123.73-135.87 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 50 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 131.00-143.00→131.00-143.00 | 0.500→0.500 | declared, matches |
 | RetributionPaladin | 50 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
@@ -437,15 +437,15 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 60 | Consecration | 3 | 20922 | 320.00→320.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 8000→8000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Consecration | 4 | 20923 | 435.00→435.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 50→50 | 8000→8000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Consecration | 5 | 20924 | 565.00→565.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 60→60 | 8000→8000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 60 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 60 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 60 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 199.15-224.85→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 60 | Exorcism | 4 | 10312 | 235.00→235.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 285.18-320.82→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 60 | Exorcism | 5 | 10313 | 285.00→285.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | 376.00-420.00→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 60 | Exorcism | 6 | 10314 | 345.00→345.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | 474.74-529.26→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 60 | Hammer of Wrath | 1 | 24275 | 295.00→295.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 44→44 | n/a | match |  | 285.00-315.00→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 60 | Hammer of Wrath | 2 | 24274 | 360.00→360.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 52→52 | n/a | match |  | 381.42-421.58→- | 0.429→0.429 | not declared |
-| RetributionPaladin | 60 | Hammer of Wrath | 3 | 24239 | 425.00→425.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 60→60 | n/a | match |  | 473.57-522.43→- | 0.429→0.429 | not declared |
+| RetributionPaladin | 60 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 60 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→139.80-158.20 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 60 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 199.15-224.85→199.15-224.85 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 60 | Exorcism | 4 | 10312 | 235.00→235.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 285.18-320.82→285.18-320.82 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 60 | Exorcism | 5 | 10313 | 285.00→285.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | 376.00-420.00→376.00-420.00 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 60 | Exorcism | 6 | 10314 | 345.00→345.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | 474.74-529.26→474.74-529.26 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 60 | Hammer of Wrath | 1 | 24275 | 295.00→295.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 44→44 | n/a | match |  | 285.00-315.00→285.00-315.00 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 60 | Hammer of Wrath | 2 | 24274 | 360.00→360.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 52→52 | n/a | match |  | 381.42-421.58→381.42-421.58 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 60 | Hammer of Wrath | 3 | 24239 | 425.00→425.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 60→60 | n/a | match |  | 473.57-522.43→473.57-522.43 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 60 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
@@ -454,17 +454,17 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 60 | Holy Strike | 6 | 5569 | 17.00→17.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Holy Strike | 7 | 10332 | 19.00→19.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Holy Strike | 8 | 10333 | 20.00→20.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 60 | Holy Wrath | 1 | 2812 | 645.00→645.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 50→50 | n/a | match |  | 367.87-434.93→- | 0.190→0.190 | not declared |
-| RetributionPaladin | 60 | Holy Wrath | 2 | 10318 | 805.00→805.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 60→60 | n/a | match |  | 490.00-576.00→- | 0.190→0.190 | not declared |
+| RetributionPaladin | 60 | Holy Wrath | 1 | 2812 | 645.00→645.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 50→50 | n/a | match |  | 367.87-434.93→367.87-434.93 | 0.190→0.190 | declared, matches |
+| RetributionPaladin | 60 | Holy Wrath | 2 | 10318 | 805.00→805.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 60→60 | n/a | match |  | 490.00-576.00→490.00-576.00 | 0.190→0.190 | declared, matches |
 | RetributionPaladin | 60 | Judgement | 0 | 20271 | 90.72 (6% base mana)→90.72 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→- | 0.500→0.144 | not declared |
-| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→- | 0.500→0.312 | not declared |
-| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→- | 0.500→0.462 | not declared |
-| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→- | 0.500→0.500 | not declared |
-| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→- | 0.500→0.500 | not declared |
-| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 123.73-135.87→- | 0.500→0.500 | not declared |
-| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 154.52-168.68→- | 0.500→0.500 | not declared |
-| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20286 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  | 169.81-186.59→- | 0.500→0.500 | not declared |
+| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→72.96-80.64 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→95.69-105.51 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 123.73-135.87→123.73-135.87 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 154.52-168.68→154.52-168.68 | 0.500→0.500 | declared, matches |
+| RetributionPaladin | 60 | Judgement of Righteousness | 0 | 20286 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  | 169.81-186.59→169.81-186.59 | 0.500→0.500 | declared, matches |
 | RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
@@ -519,40 +519,40 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Holy Shock talent) | 60 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shock talent) | 60 | Holy Shock | 2 | 20929 | 275.00→275.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shock talent) | 60 | Holy Shock | 3 | 20930 | 325.00→325.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 56→56 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Seal of Command talent) | 20 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 93.00-101.00→- | 0.429→0.429 | not declared |
+| ProtectionPaladin (Seal of Command talent) | 20 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 93.00-101.00→93.00-101.00 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin (Seal of Command talent) | 20 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 20 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Seal of Command talent) | 30 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 135.95-147.65→- | 0.429→0.429 | not declared |
-| ProtectionPaladin (Seal of Command talent) | 30 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 146.00-160.00→- | 0.429→0.429 | not declared |
+| ProtectionPaladin (Seal of Command talent) | 30 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 135.95-147.65→135.95-147.65 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin (Seal of Command talent) | 30 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 146.00-160.00→146.00-160.00 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin (Seal of Command talent) | 30 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 30 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 30 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Seal of Command talent) | 38 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 135.95-147.65→- | 0.429→0.429 | not declared |
-| ProtectionPaladin (Seal of Command talent) | 38 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 192.57-211.03→- | 0.429→0.429 | not declared |
+| ProtectionPaladin (Seal of Command talent) | 38 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 135.95-147.65→135.95-147.65 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin (Seal of Command talent) | 38 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 192.57-211.03→192.57-211.03 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin (Seal of Command talent) | 38 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 38 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 38 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Seal of Command talent) | 40 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 135.95-147.65→- | 0.429→0.429 | not declared |
-| ProtectionPaladin (Seal of Command talent) | 40 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 192.57-211.03→- | 0.429→0.429 | not declared |
-| ProtectionPaladin (Seal of Command talent) | 40 | Judgement of Command | 0 | 20964 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 204.00-224.00→- | 0.429→0.429 | not declared |
+| ProtectionPaladin (Seal of Command talent) | 40 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 135.95-147.65→135.95-147.65 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin (Seal of Command talent) | 40 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 192.57-211.03→192.57-211.03 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin (Seal of Command talent) | 40 | Judgement of Command | 0 | 20964 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 204.00-224.00→204.00-224.00 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin (Seal of Command talent) | 40 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 40 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 40 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 40 | Seal of Command | 3 | 20918 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Seal of Command talent) | 50 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 135.95-147.65→- | 0.429→0.429 | not declared |
-| ProtectionPaladin (Seal of Command talent) | 50 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 192.57-211.03→- | 0.429→0.429 | not declared |
-| ProtectionPaladin (Seal of Command talent) | 50 | Judgement of Command | 0 | 20964 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 246.71-270.89→- | 0.429→0.429 | not declared |
-| ProtectionPaladin (Seal of Command talent) | 50 | Judgement of Command | 0 | 20965 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 261.00-287.00→- | 0.429→0.429 | not declared |
+| ProtectionPaladin (Seal of Command talent) | 50 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 135.95-147.65→135.95-147.65 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin (Seal of Command talent) | 50 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 192.57-211.03→192.57-211.03 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin (Seal of Command talent) | 50 | Judgement of Command | 0 | 20964 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 246.71-270.89→246.71-270.89 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin (Seal of Command talent) | 50 | Judgement of Command | 0 | 20965 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 261.00-287.00→261.00-287.00 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin (Seal of Command talent) | 50 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 50 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 50 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 50 | Seal of Command | 3 | 20918 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 50 | Seal of Command | 4 | 20919 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 135.95-147.65→- | 0.429→0.429 | not declared |
-| ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 192.57-211.03→- | 0.429→0.429 | not declared |
-| ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20964 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 246.71-270.89→- | 0.429→0.429 | not declared |
-| ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20965 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 307.48-338.12→- | 0.429→0.429 | not declared |
-| ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20966 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 339.00-373.00→- | 0.429→0.429 | not declared |
+| ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20467 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 135.95-147.65→135.95-147.65 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20963 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 192.57-211.03→192.57-211.03 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20964 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 246.71-270.89→246.71-270.89 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20965 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 307.48-338.12→307.48-338.12 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin (Seal of Command talent) | 60 | Judgement of Command | 0 | 20966 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 339.00-373.00→339.00-373.00 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 0 | 20424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 0→0 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 1 | 20375 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 2 | 20915 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  | n/a | n/a | n/a |

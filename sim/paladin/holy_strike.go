@@ -3,8 +3,28 @@ package paladin
 import (
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
+
+// HolyStrikeFlatDamage is effect 121's flat bonus for ids 679 through
+// 10333, spellconst/paladin.json's own roll: rank 8 is 93 at level 60,
+// 0.25 wide (81.4-104.6 at the rank's own level) and growing 3.2 a level
+// to level 65, where the flat bonuses it replaced were one number per
+// rank with no width and no growth.
+var HolyStrikeFlatDamage = [holyStrikeRankCount + 1]clientdamage.Effect{
+	{},
+	{Amount: 12, Variance: 0.25, PerLevel: 0.1, SpellLevel: 6, MaxLevel: 11},
+	{Amount: 17, Variance: 0.25, PerLevel: 0.1, SpellLevel: 12, MaxLevel: 17},
+	{Amount: 19, Variance: 0.25, PerLevel: 0.2, SpellLevel: 20, MaxLevel: 25},
+	{Amount: 24, Variance: 0.25, PerLevel: 0.3, SpellLevel: 28, MaxLevel: 33},
+	{Amount: 31, Variance: 0.25, PerLevel: 1, SpellLevel: 36, MaxLevel: 41},
+	{Amount: 53, Variance: 0.25, PerLevel: 1.5, SpellLevel: 44, MaxLevel: 49},
+	{Amount: 68, Variance: 0.25, PerLevel: 2.8, SpellLevel: 52, MaxLevel: 57},
+	{Amount: 93, Variance: 0.25, PerLevel: 3.2, SpellLevel: 60, MaxLevel: 65},
+}
+
+const holyStrikeRankCount = 8
 
 // holyStrikeRanks: source 1.60.1.70009 client spell data
 // (spellconst/paladin.json, "Holy Strike"). Holy Strike is new in Forever:
@@ -31,17 +51,16 @@ var holyStrikeRanks = []struct {
 	level           int32
 	spellID         int32
 	manaCost        float64
-	flatBonus       float64
 	percentOfWeapon float64
 }{
-	{level: 6, spellID: 679, manaCost: 5, flatBonus: 12, percentOfWeapon: 25},
-	{level: 12, spellID: 678, manaCost: 9, flatBonus: 17, percentOfWeapon: 29},
-	{level: 20, spellID: 1866, manaCost: 12, flatBonus: 19, percentOfWeapon: 32},
-	{level: 28, spellID: 680, manaCost: 14, flatBonus: 24, percentOfWeapon: 36},
-	{level: 36, spellID: 2495, manaCost: 16, flatBonus: 31, percentOfWeapon: 39},
-	{level: 44, spellID: 5569, manaCost: 17, flatBonus: 53, percentOfWeapon: 43},
-	{level: 52, spellID: 10332, manaCost: 19, flatBonus: 68, percentOfWeapon: 46},
-	{level: 60, spellID: 10333, manaCost: 20, flatBonus: 93, percentOfWeapon: 50},
+	{level: 6, spellID: 679, manaCost: 5, percentOfWeapon: 25},
+	{level: 12, spellID: 678, manaCost: 9, percentOfWeapon: 29},
+	{level: 20, spellID: 1866, manaCost: 12, percentOfWeapon: 32},
+	{level: 28, spellID: 680, manaCost: 14, percentOfWeapon: 36},
+	{level: 36, spellID: 2495, manaCost: 16, percentOfWeapon: 39},
+	{level: 44, spellID: 5569, manaCost: 17, percentOfWeapon: 43},
+	{level: 52, spellID: 10332, manaCost: 19, percentOfWeapon: 46},
+	{level: 60, spellID: 10333, manaCost: 20, percentOfWeapon: 50},
 }
 
 // holyStrikeBonusCoefficient is every rank's sp_coefficient (constant
@@ -72,6 +91,9 @@ func (paladin *Paladin) registerHolyStrike() {
 			break
 		}
 
+		flatDamage := HolyStrikeFlatDamage[i+1]
+		casterLevel := int(paladin.Level)
+
 		damageMultiplier := rank.percentOfWeapon / 100
 		if hasSacredArbiter {
 			damageMultiplier *= holyStrikeSacredArbiterDamageMultiplier
@@ -101,9 +123,10 @@ func (paladin *Paladin) registerHolyStrike() {
 			DamageMultiplier: damageMultiplier,
 			ThreatMultiplier: 1,
 			BonusCoefficient: holyStrikeBonusCoefficient,
+			ClientBaseDamage: flatDamage.Range(casterLevel),
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				baseDamage := rank.flatBonus + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
+				baseDamage := flatDamage.Roll(sim, casterLevel) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 				result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
 				if hasSacredArbiter && result.Landed() {

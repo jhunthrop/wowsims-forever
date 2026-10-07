@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -13,11 +14,20 @@ var SearingTotemSpellId = [SearingTotemRanks + 1]int32{0, 3599, 6363, 6364, 6365
 var SearingTotemAttackSpellId = [SearingTotemRanks + 1]int32{0, 3606, 6350, 6351, 6352, 10435, 10436}
 
 // The Searing Totem's bolt is the client's "Attack" spell (ids above):
-// a flat amount per rank and a spell-power coefficient of 0.017, a fifth
-// of the 0.083 the Classic port carried, so a geared shaman's totem was
-// hitting for several times its real damage. The Classic min-max roll the
-// amounts replace averaged within a point of the client's.
-var SearingTotemBaseDamage = [SearingTotemRanks + 1]float64{0, 10, 15, 22, 30, 39, 47}
+// its own roll per rank (rank 6 rolls 40-54 at level 60, a centre of 47)
+// and a spell-power coefficient of 0.017, a fifth of the 0.083 the
+// Classic port carried, so a geared shaman's totem was hitting for
+// several times its real damage. The Classic min-max roll the table
+// replaces averaged within a point of the client's.
+var SearingTotemDamage = [SearingTotemRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 10, Variance: 0.2, SpellLevel: 10},
+	{Amount: 15, Variance: 0.266667, SpellLevel: 20},
+	{Amount: 22, Variance: 0.272727, SpellLevel: 30},
+	{Amount: 30, Variance: 0.266667, SpellLevel: 40},
+	{Amount: 39, Variance: 0.307692, SpellLevel: 50},
+	{Amount: 47, Variance: 0.297872, SpellLevel: 60},
+}
 var SearingTotemSpellCoef = [SearingTotemRanks + 1]float64{0, .017, .017, .017, .017, .017, .017}
 var SearingTotemManaCost = [SearingTotemRanks + 1]float64{0, 25, 45, 75, 110, 145, 170}
 var SearingTotemDuration = [SearingTotemRanks + 1]int{0, 30, 35, 40, 45, 50, 55}
@@ -42,7 +52,8 @@ func (shaman *Shaman) registerSearingTotemSpell() {
 
 func (shaman *Shaman) newSearingTotemSpellConfig(rank int) core.SpellConfig {
 	totemSpellId := SearingTotemSpellId[rank]
-	baseDamage := SearingTotemBaseDamage[rank]
+	damage := SearingTotemDamage[rank]
+	casterLevel := int(shaman.Level)
 	spellCoeff := SearingTotemSpellCoef[rank]
 	manaCost := SearingTotemManaCost[rank]
 	duration := time.Second * time.Duration(SearingTotemDuration[rank])
@@ -58,9 +69,10 @@ func (shaman *Shaman) newSearingTotemSpellConfig(rank int) core.SpellConfig {
 
 		DamageMultiplier: shaman.callOfFlameMultiplier(),
 		BonusCoefficient: spellCoeff,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 		},
 	})
 
@@ -121,7 +133,13 @@ const MagmaTotemRanks = 4
 
 var MagmaTotemSpellId = [MagmaTotemRanks + 1]int32{0, 8190, 10585, 10586, 10587}
 var MagmaTotemAoeSpellId = [MagmaTotemRanks + 1]int32{0, 8187, 10579, 10580, 10581}
-var MagmaTotemBaseDamage = [MagmaTotemRanks + 1]float64{0, 20, 35, 52, 73}
+var MagmaTotemDamage = [MagmaTotemRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 20, SpellLevel: 26},
+	{Amount: 35, SpellLevel: 36},
+	{Amount: 52, SpellLevel: 46},
+	{Amount: 73, SpellLevel: 56},
+}
 var MagmaTotemSpellCoeff = [MagmaTotemRanks + 1]float64{0, .033, .033, .033, .033}
 var MagmaTotemManaCost = [MagmaTotemRanks + 1]float64{0, 230, 360, 500, 650}
 var MagmaTotemLevel = [MagmaTotemRanks + 1]int{0, 26, 36, 46, 56}
@@ -145,7 +163,8 @@ func (shaman *Shaman) registerMagmaTotemSpell() {
 
 func (shaman *Shaman) newMagmaTotemSpellConfig(rank int) core.SpellConfig {
 	spellId := MagmaTotemSpellId[rank]
-	baseDamage := MagmaTotemBaseDamage[rank]
+	damage := MagmaTotemDamage[rank]
+	casterLevel := int(shaman.Level)
 	spellCoeff := MagmaTotemSpellCoeff[rank]
 	manaCost := MagmaTotemManaCost[rank]
 	level := MagmaTotemLevel[rank]
@@ -163,10 +182,11 @@ func (shaman *Shaman) newMagmaTotemSpellConfig(rank int) core.SpellConfig {
 
 		DamageMultiplier: shaman.callOfFlameMultiplier(),
 		BonusCoefficient: spellCoeff,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			for _, aoeTarget := range sim.Encounter.TargetUnits {
-				spell.CalcAndDealDamage(sim, aoeTarget, baseDamage, spell.OutcomeMagicHitAndCrit)
+				spell.CalcAndDealDamage(sim, aoeTarget, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 			}
 		},
 	})
@@ -224,7 +244,14 @@ const FireNovaTotemRanks = 5
 
 var FireNovaTotemSpellId = [FireNovaTotemRanks + 1]int32{0, 1535, 8498, 8499, 11314, 11315}
 var FireNovaTotemAoeSpellId = [FireNovaTotemRanks + 1]int32{0, 8349, 8502, 8503, 11306, 11307}
-var FireNovaTotemBaseDamage = [FireNovaTotemRanks + 1]float64{0, 52, 109, 196, 299, 419}
+var FireNovaTotemDamage = [FireNovaTotemRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 52, Variance: 0.153846, PerLevel: 1.1, SpellLevel: 12, MaxLevel: 17},
+	{Amount: 109, Variance: 0.12844, PerLevel: 1.6, SpellLevel: 22, MaxLevel: 27},
+	{Amount: 196, Variance: 0.122449, PerLevel: 2.2, SpellLevel: 32, MaxLevel: 37},
+	{Amount: 299, Variance: 0.120401, PerLevel: 2.8, SpellLevel: 42, MaxLevel: 47},
+	{Amount: 419, Variance: 0.109785, PerLevel: 3.4, SpellLevel: 52, MaxLevel: 57},
+}
 var FireNovaTotemSpellCoeff = [FireNovaTotemRanks + 1]float64{0, .1, .143, .143, .143, .143}
 var FireNovaTotemManaCost = [FireNovaTotemRanks + 1]float64{0, 95, 170, 280, 395, 520}
 var FireNovaTotemLevel = [FireNovaTotemRanks + 1]int{0, 12, 22, 32, 42, 52}
@@ -248,7 +275,8 @@ func (shaman *Shaman) registerFireNovaTotemSpell() {
 
 func (shaman *Shaman) newFireNovaTotemSpellConfig(rank int) core.SpellConfig {
 	spellId := FireNovaTotemSpellId[rank]
-	baseDamage := FireNovaTotemBaseDamage[rank]
+	damage := FireNovaTotemDamage[rank]
+	casterLevel := int(shaman.Level)
 	spellCoeff := FireNovaTotemSpellCoeff[rank]
 	cooldown := time.Second * 15
 	manaCost := FireNovaTotemManaCost[rank]
@@ -267,10 +295,11 @@ func (shaman *Shaman) newFireNovaTotemSpellConfig(rank int) core.SpellConfig {
 
 		DamageMultiplier: shaman.callOfFlameMultiplier(),
 		BonusCoefficient: spellCoeff,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
 			for _, aoeTarget := range sim.Encounter.TargetUnits {
-				spell.CalcAndDealDamage(sim, aoeTarget, baseDamage, spell.OutcomeMagicHitAndCrit)
+				spell.CalcAndDealDamage(sim, aoeTarget, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 			}
 		},
 	})

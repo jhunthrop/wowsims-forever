@@ -3,6 +3,7 @@ package warlock
 import (
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -14,9 +15,24 @@ const SearingPainRanks = 6
 // sp_coefficient 0.429 unchanged) - see shadowbolt.go's comment for
 // the corroborating wowhead check and the same halving across the
 // rest of the kit.
+// SearingPainDamage is spellconst/warlock.json's own roll for ids 5676
+// through 17923 (rank 6 rolls 107-125.8 at level 60: a centre of 114 at its
+// own level, growing 1.2 a level) - see shadowbolt.go's comment on the
+// classic roll it replaced.
+var SearingPainDamage = [SearingPainRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 23, Variance: 0.210526, PerLevel: 0.6, SpellLevel: 18, MaxLevel: 24},
+	{Amount: 33, Variance: 0.184615, PerLevel: 0.7, SpellLevel: 26, MaxLevel: 32},
+	{Amount: 44, Variance: 0.189474, PerLevel: 0.8, SpellLevel: 34, MaxLevel: 40},
+	{Amount: 62, Variance: 0.179104, PerLevel: 0.9, SpellLevel: 42, MaxLevel: 48},
+	{Amount: 85, Variance: 0.17341, PerLevel: 1, SpellLevel: 50, MaxLevel: 56},
+	{Amount: 114, Variance: 0.162162, PerLevel: 1.2, SpellLevel: 58, MaxLevel: 64},
+}
+
 func (warlock *Warlock) getSearingPainBaseConfig(rank int) core.SpellConfig {
-	spellCoeff := [SearingPainRanks + 1]float64{0, .396, .429, .429, .429, .429, .429}[rank]
-	baseDamage := [SearingPainRanks + 1]float64{0, 23, 33, 44, 62, 85, 114}[rank]
+	spellCoeff := [SearingPainRanks + 1]float64{0, .429, .429, .429, .429, .429, .429}[rank]
+	damage := SearingPainDamage[rank]
+	casterLevel := int(warlock.Level)
 	spellId := [SearingPainRanks + 1]int32{0, 5676, 17919, 17920, 17921, 17922, 17923}[rank]
 	manaCost := [SearingPainRanks + 1]float64{0, 45, 68, 91, 118, 141, 168}[rank]
 	// Rank 3 (17920) is learned at level 34 in the client's own data
@@ -25,14 +41,15 @@ func (warlock *Warlock) getSearingPainBaseConfig(rank int) core.SpellConfig {
 	castTime := time.Millisecond * 1500
 
 	return core.SpellConfig{
-		SpellCode:     SpellCode_WarlockSearingPain,
-		ActionID:      core.ActionID{SpellID: spellId},
-		SpellSchool:   core.SpellSchoolFire,
-		DefenseType:   core.DefenseTypeMagic,
-		ProcMask:      core.ProcMaskSpellDamage,
-		Flags:         core.SpellFlagAPL | core.SpellFlagResetAttackSwing | WarlockFlagDestruction,
-		RequiredLevel: level,
-		Rank:          rank,
+		SpellCode:        SpellCode_WarlockSearingPain,
+		ActionID:         core.ActionID{SpellID: spellId},
+		SpellSchool:      core.SpellSchoolFire,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		Flags:            core.SpellFlagAPL | core.SpellFlagResetAttackSwing | WarlockFlagDestruction,
+		RequiredLevel:    level,
+		Rank:             rank,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,
@@ -55,7 +72,7 @@ func (warlock *Warlock) getSearingPainBaseConfig(rank int) core.SpellConfig {
 			// damage against a target below 35% health.
 			oldMultiplier := spell.DamageMultiplier
 			spell.DamageMultiplier *= warlock.decimationDamageMultiplier(target)
-			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 			spell.DamageMultiplier = oldMultiplier
 		},
 	}

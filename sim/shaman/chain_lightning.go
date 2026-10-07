@@ -3,6 +3,7 @@ package shaman
 import (
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -11,13 +12,19 @@ const ChainLightningTargetCount = int32(3)
 
 var ChainLightningSpellId = [ChainLightningRanks + 1]int32{0, 421, 930, 2860, 10605}
 
-// ChainLightningBaseDamage and ChainLightningSpellCoef are spellconst/
-// shaman.json's flat per-rank "amount" and "sp_coefficient" (rank 4 is
-// 123 at 0.571, against the Classic roll of 505-564 at 0.714 these
+// ChainLightningDamage and ChainLightningSpellCoef are spellconst/
+// shaman.json's own roll and "sp_coefficient" (rank 4 rolls 119.2-133.2
+// at level 60, against the Classic roll of 505-564 at 0.714 these
 // replaced). The client's rank 3 coefficient reads 0.517, which looks
 // like a transposed 0.571, but the client wins and it is registered as
 // stated.
-var ChainLightningBaseDamage = [ChainLightningRanks + 1]float64{0, 88, 100, 112, 123}
+var ChainLightningDamage = [ChainLightningRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 88, Variance: 0.127451, PerLevel: 0.6, SpellLevel: 32, MaxLevel: 37},
+	{Amount: 100, Variance: 0.115646, PerLevel: 0.6, SpellLevel: 40, MaxLevel: 45},
+	{Amount: 112, Variance: 0.114713, PerLevel: 0.7, SpellLevel: 48, MaxLevel: 53},
+	{Amount: 123, Variance: 0.111111, PerLevel: 0.8, SpellLevel: 56, MaxLevel: 61},
+}
 var ChainLightningSpellCoef = [ChainLightningRanks + 1]float64{0, .571, .571, .517, .571}
 var ChainLightningManaCost = [ChainLightningRanks + 1]float64{0, 225, 305, 390, 485}
 var ChainLightningLevel = [ChainLightningRanks + 1]int{0, 32, 40, 48, 56}
@@ -38,7 +45,8 @@ func (shaman *Shaman) registerChainLightningSpell() {
 
 func (shaman *Shaman) newChainLightningSpellConfig(rank int, cdTimer *core.Timer) core.SpellConfig {
 	spellId := ChainLightningSpellId[rank]
-	baseDamage := ChainLightningBaseDamage[rank]
+	damage := ChainLightningDamage[rank]
+	casterLevel := int(shaman.Level)
 	spellCoeff := ChainLightningSpellCoef[rank]
 	manaCost := ChainLightningManaCost[rank]
 	level := ChainLightningLevel[rank]
@@ -59,6 +67,7 @@ func (shaman *Shaman) newChainLightningSpellConfig(rank int, cdTimer *core.Timer
 	spell.RequiredLevel = level
 	spell.Rank = rank
 	spell.BonusCoefficient = spellCoeff
+	spell.ClientBaseDamage = damage.Range(casterLevel)
 	spell.Cast.CD = core.Cooldown{
 		Timer:    cdTimer,
 		Duration: cooldown,
@@ -79,7 +88,7 @@ func (shaman *Shaman) newChainLightningSpellConfig(rank int, cdTimer *core.Timer
 			enteringMultiplier := spell.DamageMultiplier
 			bounceTarget := target
 			for hitIndex := 0; hitIndex < numHits; hitIndex++ {
-				results[hitIndex] = spell.CalcDamage(sim, bounceTarget, baseDamage, spell.OutcomeMagicHitAndCrit)
+				results[hitIndex] = spell.CalcDamage(sim, bounceTarget, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 				bounceTarget = sim.Environment.NextTargetUnit(bounceTarget)
 				spell.DamageMultiplier *= shaman.ChainLightningBounceCoefficient
 			}

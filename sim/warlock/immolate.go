@@ -4,24 +4,49 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
 const ImmolateRanks = 8
 const ImmolateCastTime = time.Millisecond * 2000
 
+// ImmolateDamage and ImmolateTickDamage are spellconst/warlock.json's own
+// direct hit and per-tick amounts for ids 348 through 25309 (rank 8: a
+// direct centre of 158 at level 60, growing 1.2 a level to level 65 before
+// that, and 55 a tick, period 3 s, with no growth) - see shadowbolt.go's
+// comment on the classic numbers they replaced. The direct hit carries no
+// width.
+var ImmolateDamage = [ImmolateRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 8, PerLevel: 0.7, SpellLevel: 1, MaxLevel: 5},
+	{Amount: 17, PerLevel: 0.8, SpellLevel: 10, MaxLevel: 15},
+	{Amount: 32, PerLevel: 1.2, SpellLevel: 20, MaxLevel: 25},
+	{Amount: 56, PerLevel: 1.5, SpellLevel: 30, MaxLevel: 35},
+	{Amount: 72, PerLevel: 1.6, SpellLevel: 40, MaxLevel: 45},
+	{Amount: 106, PerLevel: 1.9, SpellLevel: 50, MaxLevel: 55},
+	{Amount: 146, PerLevel: 2.3, SpellLevel: 60, MaxLevel: 65},
+	{Amount: 158, PerLevel: 2.3, SpellLevel: 60, MaxLevel: 65},
+}
+
+var ImmolateTickDamage = [ImmolateRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 3, SpellLevel: 1, MaxLevel: 5},
+	{Amount: 6, SpellLevel: 10, MaxLevel: 15},
+	{Amount: 12, SpellLevel: 20, MaxLevel: 25},
+	{Amount: 19, SpellLevel: 30, MaxLevel: 35},
+	{Amount: 25, SpellLevel: 40, MaxLevel: 45},
+	{Amount: 38, SpellLevel: 50, MaxLevel: 55},
+	{Amount: 52, SpellLevel: 60, MaxLevel: 65},
+	{Amount: 55, SpellLevel: 60, MaxLevel: 65},
+}
+
 func (warlock *Warlock) getImmolateConfig(rank int) core.SpellConfig {
-	directCoeff := [ImmolateRanks + 1]float64{0, .058, .125, .2, .2, .2, .2, .2, .2}[rank]
-	dotCoeff := [ImmolateRanks + 1]float64{0, .037, .081, .13, .13, .13, .13, .13, .13}[rank]
-	// baseDamage (direct hit) and dotDamage (per tick) were classic
-	// tooltip values - dotDamage a total-over-5-ticks divided down -
-	// until the rotation-accuracy audit compared both against
-	// spellconst/warlock.json's own per-rank flat amounts (rank 8,
-	// 25309: effect "amount" 158 direct, 55 per tick, period_ms 3000
-	// unchanged) - the same halving shadowbolt.go's comment documents
-	// across the rest of the kit.
-	baseDamage := [ImmolateRanks + 1]float64{0, 8, 17, 32, 56, 72, 106, 146, 158}[rank]
-	dotDamage := [ImmolateRanks + 1]float64{0, 3, 6, 12, 19, 25, 38, 52, 55}[rank]
+	directCoeff := [ImmolateRanks + 1]float64{0, .2, .2, .2, .2, .2, .2, .2, .2}[rank]
+	dotCoeff := [ImmolateRanks + 1]float64{0, .13, .13, .13, .13, .13, .13, .13, .13}[rank]
+	damage := ImmolateDamage[rank]
+	casterLevel := int(warlock.Level)
+	dotDamage := ImmolateTickDamage[rank].Center(casterLevel)
 	spellId := [ImmolateRanks + 1]int32{0, 348, 707, 1094, 2941, 11665, 11667, 11668, 25309}[rank]
 	manaCost := [ImmolateRanks + 1]float64{0, 25, 45, 90, 155, 220, 295, 370, 380}[rank]
 	level := [ImmolateRanks + 1]int{0, 1, 10, 20, 30, 40, 50, 60, 60}[rank]
@@ -34,8 +59,9 @@ func (warlock *Warlock) getImmolateConfig(rank int) core.SpellConfig {
 		ProcMask:    core.ProcMaskSpellDamage,
 		Flags:       core.SpellFlagAPL | core.SpellFlagResetAttackSwing | core.SpellFlagBinary | WarlockFlagDestruction,
 
-		Rank:          rank,
-		RequiredLevel: level,
+		Rank:             rank,
+		ClientBaseDamage: damage.Range(casterLevel),
+		RequiredLevel:    level,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,
@@ -85,7 +111,7 @@ func (warlock *Warlock) getImmolateConfig(rank int) core.SpellConfig {
 			// slot improvedImmolateBonus (a talent the client's trees
 			// don't have) already uses for the same reason.
 			spell.DamageMultiplier *= 1 + warlock.improvedImmolateBonus() + warlock.aftermathInitialDamageBonus()
-			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			result := spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 			spell.DamageMultiplier = oldMultiplier
 
 			if result.Landed() {
@@ -100,7 +126,7 @@ func (warlock *Warlock) getImmolateConfig(rank int) core.SpellConfig {
 				dot := spell.Dot(target)
 				return dot.CalcSnapshotDamage(sim, target, dot.Spell.OutcomeExpectedMagicAlwaysHit)
 			} else {
-				return spell.CalcPeriodicDamage(sim, target, baseDamage, spell.OutcomeExpectedMagicAlwaysHit)
+				return spell.CalcPeriodicDamage(sim, target, dotDamage, spell.OutcomeExpectedMagicAlwaysHit)
 			}
 		},
 	}

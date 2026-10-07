@@ -3,6 +3,7 @@ package druid
 import (
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -15,7 +16,21 @@ var WrathSpellId = [WrathRanks + 1]int32{0, 5176, 5177, 5178, 5179, 5180, 6780, 
 // at 0.571, where the Classic roll of 248-277 it replaced was nearly three
 // times that). sim/druid/spellconst_damage_test.go checks every rank
 // against the vendored client file.
-var WrathBaseDamage = [WrathRanks + 1]float64{0, 15, 23, 30, 38, 45, 54, 68, 91}
+// WrathDamage is spellconst/druid.json's own roll for ids 5176 through
+// 9912: the centre at the spell's level, the per-level growth to the cap
+// and the width of the roll (rank 8 rolls 91.6-102.4 at level 60, a
+// centre of 97 on 91 at level 54).
+var WrathDamage = [WrathRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 15, Variance: 0.153846, PerLevel: 0.4, SpellLevel: 1, MaxLevel: 5},
+	{Amount: 23, Variance: 0.148148, PerLevel: 0.6, SpellLevel: 6, MaxLevel: 12},
+	{Amount: 30, Variance: 0.166667, PerLevel: 0.7, SpellLevel: 14, MaxLevel: 20},
+	{Amount: 38, Variance: 0.147059, PerLevel: 0.9, SpellLevel: 22, MaxLevel: 28},
+	{Amount: 45, Variance: 0.12963, PerLevel: 0.9, SpellLevel: 30, MaxLevel: 36},
+	{Amount: 54, Variance: 0.121622, PerLevel: 0.9, SpellLevel: 38, MaxLevel: 44},
+	{Amount: 68, Variance: 0.110553, PerLevel: 0.9, SpellLevel: 46, MaxLevel: 52},
+	{Amount: 91, Variance: 0.112, PerLevel: 1, SpellLevel: 54, MaxLevel: 60},
+}
 var WrathSpellCoeff = [WrathRanks + 1]float64{0, 0.429, 0.486, 0.571, 0.571, 0.571, 0.571, 0.571, 0.571}
 
 // WrathManaCost was a stale pre-Forever table (roughly 40-75% above the
@@ -44,7 +59,8 @@ func (druid *Druid) registerWrathSpell() {
 
 func (druid *Druid) newWrathSpellConfig(rank int) core.SpellConfig {
 	spellId := WrathSpellId[rank]
-	baseDamage := WrathBaseDamage[rank]
+	damage := WrathDamage[rank]
+	casterLevel := int(druid.Level)
 	spellCoeff := WrathSpellCoeff[rank]
 	manaCost := WrathManaCost[rank]
 	castTime := WrathCastTime[rank]
@@ -76,9 +92,10 @@ func (druid *Druid) newWrathSpellConfig(rank int) core.SpellConfig {
 		DamageMultiplier: 1, // + core.Ternary(druid.Ranged().ID == IdolOfWrath, .02, 0),
 		ThreatMultiplier: 1,
 		BonusCoefficient: spellCoeff,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			result := spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 
 			// NG procs when the cast finishes
 			if result.DidCrit() && druid.NaturesGraceProcAura != nil {

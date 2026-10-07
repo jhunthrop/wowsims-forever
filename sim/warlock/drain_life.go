@@ -4,23 +4,35 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
 const DrainLifeRanks = 6
 
+// DrainLifeTickDamage is spellconst/warlock.json's own per-tick amount for
+// the drain's periodic health-leech effect on ids 689 through 11700
+// (10/14/22/28/39/51 at period 1 s over 5 ticks, no growth). Ranks 2-6 used
+// to be 17/29/41/55/71, 10-45% high: closest to a stale pre-Forever classic
+// tooltip total over 5.
+var DrainLifeTickDamage = [DrainLifeRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 10, SpellLevel: 14, MaxLevel: 19},
+	{Amount: 14, SpellLevel: 22, MaxLevel: 27},
+	{Amount: 22, SpellLevel: 30, MaxLevel: 35},
+	{Amount: 28, SpellLevel: 38, MaxLevel: 43},
+	{Amount: 39, SpellLevel: 46, MaxLevel: 51},
+	{Amount: 51, SpellLevel: 54, MaxLevel: 59},
+}
+
 func (warlock *Warlock) getDrainLifeBaseConfig(rank int) core.SpellConfig {
 	numTicks := int32(5)
 
 	spellId := [DrainLifeRanks + 1]int32{0, 689, 699, 709, 7651, 11699, 11700}[rank]
-	spellCoeff := [DrainLifeRanks + 1]float64{0, .078, .1, .1, .1, .1, .1}[rank]
-	// Per-tick base damage, straight from spellconst/warlock.json's own
-	// flat "amount" for each rank's effect (period_ms 1000, 5 ticks):
-	// 689/699/709/7651/11699/11700 -> 10/14/22/28/39/51. Ranks 2-6 here
-	// used to be 17/29/41/55/71 -- drifted 10-45% high, closest to a
-	// stale pre-Forever classic tooltip-total/5 rather than the client's
-	// own per-rank number.
-	baseDamage := [DrainLifeRanks + 1]float64{0, 10, 14, 22, 28, 39, 51}[rank]
+	spellCoeff := [DrainLifeRanks + 1]float64{0, .1, .1, .1, .1, .1, .1}[rank]
+	damage := DrainLifeTickDamage[rank]
+	casterLevel := int(warlock.Level)
+	baseDamage := damage.Center(casterLevel)
 	manaCost := [DrainLifeRanks + 1]float64{0, 55, 85, 135, 185, 240, 300}[rank]
 	level := [DrainLifeRanks + 1]int{0, 14, 22, 30, 38, 46, 54}[rank]
 
@@ -48,8 +60,9 @@ func (warlock *Warlock) getDrainLifeBaseConfig(rank int) core.SpellConfig {
 		ProcMask:    core.ProcMaskSpellDamage,
 		Flags:       core.SpellFlagAPL | core.SpellFlagResetAttackSwing | WarlockFlagAffliction | core.SpellFlagChanneled,
 
-		RequiredLevel: level,
-		Rank:          rank,
+		RequiredLevel:    level,
+		Rank:             rank,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,

@@ -3,54 +3,18 @@ package druid
 import (
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
-type RipRankInfo struct {
-	id              int32
-	level           int32
-	dmgTickBase     float64
-	dmgTickPerCombo float64
-}
+// RipTickDamage is constants_auto_gen.go's row as an Effect per rank.
+var RipTickDamage = clientdamage.FromTable(RipBaseDamage[:], RipPointsPerLevel[:], RipLevel[:], RipMaxLevel[:])
 
-var ripRanks = []RipRankInfo{
-	{
-		id:              1079,
-		level:           20,
-		dmgTickBase:     3.0,
-		dmgTickPerCombo: 4.0,
-	},
-	{
-		id:              9492,
-		level:           28,
-		dmgTickBase:     4.0,
-		dmgTickPerCombo: 7.0,
-	},
-	{
-		id:              9493,
-		level:           36,
-		dmgTickBase:     6.0,
-		dmgTickPerCombo: 9.0,
-	},
-	{
-		id:              9752,
-		level:           44,
-		dmgTickBase:     9.0,
-		dmgTickPerCombo: 14.0,
-	},
-	{
-		id:              9894,
-		level:           52,
-		dmgTickBase:     12.0,
-		dmgTickPerCombo: 20.0,
-	},
-	{
-		id:              9896,
-		level:           60,
-		dmgTickBase:     17.0,
-		dmgTickPerCombo: 28.0,
-	},
-}
+// The Rip ladder is constants_auto_gen.go's: RipBaseDamage is the client's
+// per-tick base (rank 6: 15, where the Era ladder this replaced had 17).
+// The client's table states no per-combo-point step, so the step below
+// stays the Era figure.
+var ripTickPerComboPoint = [RipRanks + 1]float64{0, 4, 7, 9, 14, 20, 28}
 
 // RipBaseTicks/RipTicks/RipDuration: Classic's well-documented Rip
 // duration scales with combo points the same way Rogue's Rupture does
@@ -78,28 +42,32 @@ func (druid *Druid) RipDuration(comboPoints int32) time.Duration {
 
 func (druid *Druid) registerRipSpell() {
 	// Add highest available Rip rank for level.
-	for rank := len(ripRanks) - 1; rank >= 0; rank-- {
-		if druid.Level >= ripRanks[rank].level {
-			config := druid.newRipSpellConfig(ripRanks[rank])
+	for rank := RipRanks; rank >= 1; rank-- {
+		if druid.Level >= int32(RipLevel[rank]) {
+			config := druid.newRipSpellConfig(rank)
 			druid.Rip = druid.RegisterSpell(Cat, config)
 			return
 		}
 	}
 }
 
-func (druid *Druid) newRipSpellConfig(ripRank RipRankInfo) core.SpellConfig {
+func (druid *Druid) newRipSpellConfig(rank int) core.SpellConfig {
 	energyCost := 30.0
+	tickDamage := RipTickDamage[rank]
+	casterLevel := int(druid.Level)
+	tickPerComboPoint := ripTickPerComboPoint[rank]
 
 	return core.SpellConfig{
 		SpellCode:      SpellCode_DruidRip,
 		ClassSpellMask: DruidSpellMaskRip,
-		ActionID:       core.ActionID{SpellID: ripRank.id},
+		ActionID:       core.ActionID{SpellID: RipSpellId[rank]},
 		SpellSchool:    core.SpellSchoolPhysical,
 		DefenseType:    core.DefenseTypeMelee,
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
 		Flags:          SpellFlagOmen | core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagPureDot,
 
-		RequiredLevel: int(ripRank.level),
+		RequiredLevel: RipLevel[rank],
+		Rank:          rank,
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   energyCost,
@@ -115,6 +83,8 @@ func (druid *Druid) newRipSpellConfig(ripRank RipRankInfo) core.SpellConfig {
 			return druid.ComboPoints() > 0
 		},
 
+		ClientBaseDamage: tickDamage.Range(casterLevel),
+
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 
@@ -128,7 +98,7 @@ func (druid *Druid) newRipSpellConfig(ripRank RipRankInfo) core.SpellConfig {
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				cp := float64(druid.ComboPoints())
 				cpScaling := core.TernaryFloat64(cp == 5, 4, cp)
-				baseDamage := ripRank.dmgTickBase + ripRank.dmgTickPerCombo*cp
+				baseDamage := tickDamage.Center(casterLevel) + tickPerComboPoint*cp
 				// AP scaling is 6% per combo point from 1 to 4, and 24% again for 5
 				tickDamage := baseDamage + 0.01*cpScaling*dot.Spell.MeleeAttackPower(target)
 				dot.Snapshot(target, tickDamage, isRollover)

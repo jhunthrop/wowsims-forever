@@ -3,6 +3,7 @@ package shaman
 import (
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -39,7 +40,12 @@ import (
 const LavaBurstRanks = 3
 
 var LavaBurstSpellId = [LavaBurstRanks + 1]int32{0, 408490, 1238299, 1238300}
-var LavaBurstBaseDamage = [LavaBurstRanks + 1]float64{0, 164, 196, 220}
+var LavaBurstDamage = [LavaBurstRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 164, Variance: 0.253259, PerLevel: 0.9, SpellLevel: 40, MaxLevel: 48},
+	{Amount: 196, Variance: 0.253259, PerLevel: 1.1, SpellLevel: 50, MaxLevel: 58},
+	{Amount: 220, Variance: 0.253259, PerLevel: 1.3, SpellLevel: 60, MaxLevel: 68},
+}
 var LavaBurstManaCost = [LavaBurstRanks + 1]float64{0, 165, 230, 265}
 var LavaBurstLevel = [LavaBurstRanks + 1]int{0, 40, 50, 60}
 
@@ -72,7 +78,8 @@ func (shaman *Shaman) registerLavaBurstSpell() {
 
 func (shaman *Shaman) newLavaBurstSpellConfig(rank int) core.SpellConfig {
 	spellId := LavaBurstSpellId[rank]
-	baseDamage := LavaBurstBaseDamage[rank]
+	damage := LavaBurstDamage[rank]
+	casterLevel := int(shaman.Level)
 	manaCost := LavaBurstManaCost[rank]
 	level := LavaBurstLevel[rank]
 
@@ -108,6 +115,7 @@ func (shaman *Shaman) newLavaBurstSpellConfig(rank int) core.SpellConfig {
 		DamageMultiplier: shaman.callOfFlameMultiplier(),
 		ThreatMultiplier: 1,
 		BonusCoefficient: LavaBurstSpellCoefficient,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			oldMultiplier := spell.DamageMultiplier
@@ -115,7 +123,7 @@ func (shaman *Shaman) newLavaBurstSpellConfig(rank int) core.SpellConfig {
 				spell.DamageMultiplier *= lavaBurstFlameShockDamageMultiplier
 			}
 
-			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			result := spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 			spell.DamageMultiplier = oldMultiplier
 
 			spell.DealDamage(sim, result)
