@@ -61,7 +61,7 @@
       }
     },
     {
-      "notes": "Lacerate (the trainable bleed, rank 4) whenever its own bleed is down: with Mongoose Bite held to its window the GCDs it used to fill are free, and the rotation search measured this line beyond error (2026-10-07).",
+      "notes": "Lacerate (the trainable bleed, rank 4) whenever its own bleed is down: with Mongoose Bite waiting on its window, the free globals go to keeping the bleed ticking.",
       "action": {
         "castSpell": {
           "spellId": {
