@@ -5,8 +5,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 25361,
-            "rank": 5
+            "spellId": 10442,
+            "rank": 4
           }
         }
       },
@@ -58,8 +58,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 25361,
-            "rank": 5
+            "spellId": 10442,
+            "rank": 4
           }
         }
       }
