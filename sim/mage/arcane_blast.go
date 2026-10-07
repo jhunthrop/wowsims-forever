@@ -62,15 +62,38 @@ const (
 	arcaneBlastDuration                 = time.Second * 8
 )
 
-// Every rank's ManaCost in the client is 0 (including the buff spell,
-// 400573), not merely absent - so "the mana cost of Arcane Blast is
-// increased by 175%" ramps a base cost that is genuinely zero here.
-// core.SpellConfig only builds a spell.Cost when ManaCost.BaseCost or
-// FlatCost is non-zero (sim/core/spell.go), so a zero-cost Arcane Blast
-// has spell.Cost == nil and there is nothing for a cost-ramp mod to
-// multiply; wiring one up would be dead code against a nil pointer. The
-// ramp is recorded here, not implemented, in case a future Forever
-// patch gives the spell a real base cost.
+// Every rank's flat ManaCost in the client is 0, but that column is not
+// where the client prices this spell: SpellPower.PowerCostPct is 15 for
+// every player rank (400574, 1239696, 1239697, 1239699, 1239700 in
+// build 1.60.1.70009), i.e. 15% of base mana per cast, the shape the
+// warlock summons and Multi-Shot already use. Until 2026-10-07 this file
+// read the flat column alone and registered Arcane Blast free, which the
+// conformance report could not see (0 -> 0 "match") until spellconst
+// carried cost_pct. The generator skips Arcane Blast's arrays (the
+// hand-written rank table above), so the percentage is hand-written here
+// from the same client rows.
+//
+// The buff (400573) effect 1 is "mana cost of Arcane Blast is increased
+// by 175%" per stack, up to 4 stacks: the fifth consecutive cast costs
+// 15% x (1 + 4 x 1.75) = 120% of base mana. Modeled by setting every
+// registered rank's Cost.Multiplier from the stack count, the same
+// runtime cost-multiplier knob Missile Barrage uses to make Arcane
+// Missiles free (sim/mage/talents.go).
+const (
+	arcaneBlastManaCostPct             = 15.0
+	arcaneBlastCostIncreasePctPerStack = 175
+)
+
+// setArcaneBlastCostMultiplier applies the buff's cost ramp to every
+// rank registered so far: 100 at zero stacks, +175 per stack.
+func (mage *Mage) setArcaneBlastCostMultiplier(stacks int32) {
+	multiplier := 100 + arcaneBlastCostIncreasePctPerStack*stacks
+	for _, spell := range mage.ArcaneBlast {
+		if spell != nil && spell.Cost != nil {
+			spell.Cost.Multiplier = multiplier
+		}
+	}
+}
 
 func (mage *Mage) registerArcaneBlastSpell() {
 	if !mage.Talents.ArcaneBlast {
@@ -100,6 +123,7 @@ func (mage *Mage) registerArcaneBlastSpell() {
 			for _, spell := range otherSpells {
 				spell.DamageMultiplierAdditive += bonus
 			}
+			mage.setArcaneBlastCostMultiplier(newStacks)
 		},
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
 			// The cast that refreshes/stacks the buff is Arcane Blast's
@@ -147,6 +171,10 @@ func (mage *Mage) getArcaneBlastConfig(rank int) core.SpellConfig {
 
 		RequiredLevel: ArcaneBlastLevel[rank],
 		Rank:          rank,
+
+		ManaCost: core.ManaCostOptions{
+			BaseCost: arcaneBlastManaCostPct / 100,
+		},
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

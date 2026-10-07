@@ -33,7 +33,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "139": {
       "name": "Renew",
@@ -65,7 +66,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "453": {
       "name": "Mind Soothe",
@@ -97,7 +99,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "527": {
       "name": "Dispel Magic",
@@ -129,7 +132,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 18.0
     },
     "528": {
       "name": "Cure Disease",
@@ -161,7 +165,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 15.0
     },
     "552": {
       "name": "Abolish Disease",
@@ -204,7 +209,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 15.0
     },
     "585": {
       "name": "Smite",
@@ -236,7 +242,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "586": {
       "name": "Fade",
@@ -268,7 +275,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "588": {
       "name": "Inner Fire",
@@ -300,7 +308,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "589": {
       "name": "Shadow Word: Pain",
@@ -332,7 +341,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "591": {
       "name": "Smite",
@@ -364,7 +374,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "592": {
       "name": "Power Word: Shield",
@@ -396,7 +407,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "594": {
       "name": "Shadow Word: Pain",
@@ -428,7 +440,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "596": {
       "name": "Prayer of Healing",
@@ -460,7 +473,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "598": {
       "name": "Smite",
@@ -492,7 +506,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "600": {
       "name": "Power Word: Shield",
@@ -524,7 +539,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "602": {
       "name": "Inner Fire",
@@ -556,7 +572,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "605": {
       "name": "Mind Control",
@@ -610,7 +627,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "724": {
       "name": "Lightwell",
@@ -642,7 +660,8 @@
           "misc_value": 181102,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "970": {
       "name": "Shadow Word: Pain",
@@ -674,7 +693,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "976": {
       "name": "Shadow Protection",
@@ -706,7 +726,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "984": {
       "name": "Smite",
@@ -738,7 +759,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "988": {
       "name": "Dispel Magic",
@@ -770,7 +792,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 18.0
     },
     "992": {
       "name": "Shadow Word: Pain",
@@ -802,7 +825,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "996": {
       "name": "Prayer of Healing",
@@ -834,7 +858,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1004": {
       "name": "Smite",
@@ -866,7 +891,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1006": {
       "name": "Inner Fire",
@@ -898,7 +924,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1243": {
       "name": "Power Word: Fortitude",
@@ -930,7 +957,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1244": {
       "name": "Power Word: Fortitude",
@@ -962,7 +990,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1245": {
       "name": "Power Word: Fortitude",
@@ -994,7 +1023,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1706": {
       "name": "Levitate",
@@ -1048,7 +1078,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2006": {
       "name": "Resurrection",
@@ -1080,7 +1111,8 @@
           "misc_value": 135,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 75.0
     },
     "2010": {
       "name": "Resurrection",
@@ -1112,7 +1144,8 @@
           "misc_value": 300,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 75.0
     },
     "2050": {
       "name": "Lesser Heal",
@@ -1144,7 +1177,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2052": {
       "name": "Lesser Heal",
@@ -1176,7 +1210,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2053": {
       "name": "Lesser Heal",
@@ -1208,7 +1243,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2054": {
       "name": "Heal",
@@ -1240,7 +1276,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2055": {
       "name": "Heal",
@@ -1272,7 +1309,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2060": {
       "name": "Greater Heal",
@@ -1304,7 +1342,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2061": {
       "name": "Flash Heal",
@@ -1336,7 +1375,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2096": {
       "name": "Mind Vision",
@@ -1390,7 +1430,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2651": {
       "name": "Elune's Grace",
@@ -1433,7 +1474,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 3.0
     },
     "2652": {
       "name": "Touch of Weakness",
@@ -1465,7 +1507,8 @@
           "misc_value": 0,
           "trigger_spell": 28598
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2767": {
       "name": "Shadow Word: Pain",
@@ -1497,7 +1540,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2791": {
       "name": "Power Word: Fortitude",
@@ -1529,7 +1573,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2943": {
       "name": "Touch of Weakness",
@@ -1572,7 +1617,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2944": {
       "name": "Devouring Plague",
@@ -1604,7 +1650,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3747": {
       "name": "Power Word: Shield",
@@ -1636,7 +1683,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6060": {
       "name": "Smite",
@@ -1668,7 +1716,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6063": {
       "name": "Heal",
@@ -1700,7 +1749,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6064": {
       "name": "Heal",
@@ -1732,7 +1782,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6065": {
       "name": "Power Word: Shield",
@@ -1764,7 +1815,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6066": {
       "name": "Power Word: Shield",
@@ -1796,7 +1848,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6074": {
       "name": "Renew",
@@ -1828,7 +1881,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6075": {
       "name": "Renew",
@@ -1860,7 +1914,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6076": {
       "name": "Renew",
@@ -1892,7 +1947,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6077": {
       "name": "Renew",
@@ -1924,7 +1980,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6078": {
       "name": "Renew",
@@ -1956,7 +2013,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6346": {
       "name": "Fear Ward",
@@ -1988,7 +2046,8 @@
           "misc_value": 5,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6788": {
       "name": "Weakened Soul",
@@ -2020,7 +2079,8 @@
           "misc_value": 19,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7128": {
       "name": "Inner Fire",
@@ -2052,7 +2112,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8092": {
       "name": "Mind Blast",
@@ -2084,7 +2145,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8102": {
       "name": "Mind Blast",
@@ -2116,7 +2178,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8103": {
       "name": "Mind Blast",
@@ -2148,7 +2211,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8104": {
       "name": "Mind Blast",
@@ -2180,7 +2244,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8105": {
       "name": "Mind Blast",
@@ -2212,7 +2277,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8106": {
       "name": "Mind Blast",
@@ -2244,7 +2310,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8122": {
       "name": "Psychic Scream",
@@ -2287,7 +2354,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8124": {
       "name": "Psychic Scream",
@@ -2330,7 +2398,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8129": {
       "name": "Mana Burn",
@@ -2362,7 +2431,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8131": {
       "name": "Mana Burn",
@@ -2394,7 +2464,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8192": {
       "name": "Mind Soothe",
@@ -2426,7 +2497,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "9035": {
       "name": "Hex of Weakness",
@@ -2469,7 +2541,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "9472": {
       "name": "Flash Heal",
@@ -2501,7 +2574,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "9473": {
       "name": "Flash Heal",
@@ -2533,7 +2607,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "9474": {
       "name": "Flash Heal",
@@ -2565,7 +2640,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "9484": {
       "name": "Shackle Undead",
@@ -2597,7 +2673,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "9485": {
       "name": "Shackle Undead",
@@ -2629,7 +2706,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "9578": {
       "name": "Fade",
@@ -2661,7 +2739,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "9579": {
       "name": "Fade",
@@ -2693,7 +2772,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "9592": {
       "name": "Fade",
@@ -2725,7 +2805,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10060": {
       "name": "Power Infusion",
@@ -2768,7 +2849,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 20.0
     },
     "10797": {
       "name": "Starshards",
@@ -2800,7 +2882,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10874": {
       "name": "Mana Burn",
@@ -2832,7 +2915,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10875": {
       "name": "Mana Burn",
@@ -2864,7 +2948,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10876": {
       "name": "Mana Burn",
@@ -2896,7 +2981,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10880": {
       "name": "Resurrection",
@@ -2928,7 +3014,8 @@
           "misc_value": 520,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 75.0
     },
     "10881": {
       "name": "Resurrection",
@@ -2960,7 +3047,8 @@
           "misc_value": 750,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 75.0
     },
     "10888": {
       "name": "Psychic Scream",
@@ -3003,7 +3091,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10890": {
       "name": "Psychic Scream",
@@ -3046,7 +3135,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10892": {
       "name": "Shadow Word: Pain",
@@ -3078,7 +3168,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10893": {
       "name": "Shadow Word: Pain",
@@ -3110,7 +3201,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10894": {
       "name": "Shadow Word: Pain",
@@ -3142,7 +3234,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10898": {
       "name": "Power Word: Shield",
@@ -3174,7 +3267,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10899": {
       "name": "Power Word: Shield",
@@ -3206,7 +3300,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10900": {
       "name": "Power Word: Shield",
@@ -3238,7 +3333,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10901": {
       "name": "Power Word: Shield",
@@ -3270,7 +3366,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10909": {
       "name": "Mind Vision",
@@ -3324,7 +3421,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10911": {
       "name": "Mind Control",
@@ -3378,7 +3476,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10912": {
       "name": "Mind Control",
@@ -3432,7 +3531,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10915": {
       "name": "Flash Heal",
@@ -3464,7 +3564,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10916": {
       "name": "Flash Heal",
@@ -3496,7 +3597,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10917": {
       "name": "Flash Heal",
@@ -3528,7 +3630,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10927": {
       "name": "Renew",
@@ -3560,7 +3663,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10928": {
       "name": "Renew",
@@ -3592,7 +3696,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10929": {
       "name": "Renew",
@@ -3624,7 +3729,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10933": {
       "name": "Smite",
@@ -3656,7 +3762,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10934": {
       "name": "Smite",
@@ -3688,7 +3795,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10937": {
       "name": "Power Word: Fortitude",
@@ -3720,7 +3828,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10938": {
       "name": "Power Word: Fortitude",
@@ -3752,7 +3861,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10941": {
       "name": "Fade",
@@ -3784,7 +3894,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10942": {
       "name": "Fade",
@@ -3816,7 +3927,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10945": {
       "name": "Mind Blast",
@@ -3848,7 +3960,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10946": {
       "name": "Mind Blast",
@@ -3880,7 +3993,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10947": {
       "name": "Mind Blast",
@@ -3912,7 +4026,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10951": {
       "name": "Inner Fire",
@@ -3944,7 +4059,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10952": {
       "name": "Inner Fire",
@@ -3976,7 +4092,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10953": {
       "name": "Mind Soothe",
@@ -4008,7 +4125,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10955": {
       "name": "Shackle Undead",
@@ -4040,7 +4158,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10957": {
       "name": "Shadow Protection",
@@ -4072,7 +4191,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10958": {
       "name": "Shadow Protection",
@@ -4104,7 +4224,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10960": {
       "name": "Prayer of Healing",
@@ -4136,7 +4257,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10961": {
       "name": "Prayer of Healing",
@@ -4168,7 +4290,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10963": {
       "name": "Greater Heal",
@@ -4200,7 +4323,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10964": {
       "name": "Greater Heal",
@@ -4232,7 +4356,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10965": {
       "name": "Greater Heal",
@@ -4264,7 +4389,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13896": {
       "name": "Feedback",
@@ -4296,7 +4422,8 @@
           "misc_value": 0,
           "trigger_spell": 6347
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13908": {
       "name": "Desperate Prayer",
@@ -4328,7 +4455,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14520": {
       "name": "Mental Agility",
@@ -4360,7 +4488,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14523": {
       "name": "Silent Resolve",
@@ -4425,7 +4554,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14747": {
       "name": "Improved Inner Fire",
@@ -4468,7 +4598,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14748": {
       "name": "Improved Power Word: Shield",
@@ -4500,7 +4631,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14749": {
       "name": "Improved Power Word: Fortitude",
@@ -4532,7 +4664,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14750": {
       "name": "Improved Mana Burn",
@@ -4564,7 +4697,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14751": {
       "name": "Inner Focus",
@@ -4607,7 +4741,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14752": {
       "name": "Divine Spirit",
@@ -4639,7 +4774,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14767": {
       "name": "Improved Power Word: Fortitude",
@@ -4671,7 +4807,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14816": {
       "name": "Empathy",
@@ -4703,7 +4840,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14818": {
       "name": "Divine Spirit",
@@ -4735,7 +4873,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14819": {
       "name": "Divine Spirit",
@@ -4767,7 +4906,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14889": {
       "name": "Holy Specialization",
@@ -4799,7 +4939,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14892": {
       "name": "Inspiration",
@@ -4831,7 +4972,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14898": {
       "name": "Spiritual Healing",
@@ -4874,7 +5016,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14901": {
       "name": "Spiritual Guidance",
@@ -4917,7 +5060,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14904": {
       "name": "Master Healer",
@@ -4949,7 +5093,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14908": {
       "name": "Improved Renew",
@@ -4981,7 +5126,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14909": {
       "name": "Searing Light",
@@ -5024,7 +5170,8 @@
           "misc_value": 0,
           "trigger_spell": 1284536
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14912": {
       "name": "Improved Healing",
@@ -5056,7 +5203,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14913": {
       "name": "Twilight Focus",
@@ -5088,7 +5236,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14914": {
       "name": "Holy Fire",
@@ -5131,7 +5280,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15007": {
       "name": "Resurrection Sickness",
@@ -5185,7 +5335,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15024": {
       "name": "Master Healer",
@@ -5217,7 +5368,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15025": {
       "name": "Master Healer",
@@ -5249,7 +5401,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15026": {
       "name": "Master Healer",
@@ -5281,7 +5434,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15027": {
       "name": "Master Healer",
@@ -5313,7 +5467,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15068": {
       "name": "TEST Heal Self",
@@ -5345,7 +5500,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15090": {
       "name": "Dispel Magic",
@@ -5377,7 +5533,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15229": {
       "name": "Crystal Restore",
@@ -5409,7 +5566,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15237": {
       "name": "Holy Nova",
@@ -5441,7 +5599,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15257": {
       "name": "Shadow Weaving",
@@ -5473,7 +5632,8 @@
           "misc_value": 0,
           "trigger_spell": 15258
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15258": {
       "name": "Shadow Weaving",
@@ -5505,7 +5665,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15259": {
       "name": "Darkness",
@@ -5537,7 +5698,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15260": {
       "name": "Shadow Focus",
@@ -5569,7 +5731,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15261": {
       "name": "Holy Fire",
@@ -5612,7 +5775,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15262": {
       "name": "Holy Fire",
@@ -5655,7 +5819,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15263": {
       "name": "Holy Fire",
@@ -5698,7 +5863,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15264": {
       "name": "Holy Fire",
@@ -5741,7 +5907,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15265": {
       "name": "Holy Fire",
@@ -5784,7 +5951,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15266": {
       "name": "Holy Fire",
@@ -5827,7 +5995,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15267": {
       "name": "Holy Fire",
@@ -5870,7 +6039,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15268": {
       "name": "Blackout",
@@ -5902,7 +6072,8 @@
           "misc_value": 0,
           "trigger_spell": 15269
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15273": {
       "name": "Improved Mind Blast",
@@ -5934,7 +6105,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15274": {
       "name": "Improved Fade",
@@ -5966,7 +6138,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15275": {
       "name": "Improved Shadow Word: Pain",
@@ -5998,7 +6171,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15286": {
       "name": "Vampiric Embrace",
@@ -6030,7 +6204,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15290": {
       "name": "Vampiric Embrace",
@@ -6062,7 +6237,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15318": {
       "name": "Shadow Affinity",
@@ -6094,7 +6270,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15323": {
       "name": "Blackout",
@@ -6126,7 +6303,8 @@
           "misc_value": 0,
           "trigger_spell": 15269
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15324": {
       "name": "Blackout",
@@ -6158,7 +6336,8 @@
           "misc_value": 0,
           "trigger_spell": 15269
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15325": {
       "name": "Blackout",
@@ -6190,7 +6369,8 @@
           "misc_value": 0,
           "trigger_spell": 15269
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15326": {
       "name": "Blackout",
@@ -6222,7 +6402,8 @@
           "misc_value": 0,
           "trigger_spell": 15269
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15392": {
       "name": "Improved Psychic Scream",
@@ -6254,7 +6435,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15398": {
       "name": "Psychic Scream",
@@ -6286,7 +6468,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15407": {
       "name": "Mind Flay",
@@ -6329,7 +6512,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15430": {
       "name": "Holy Nova",
@@ -6361,7 +6545,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15431": {
       "name": "Holy Nova",
@@ -6393,7 +6578,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15473": {
       "name": "Shadowform",
@@ -6469,7 +6655,8 @@
           "misc_value": 15,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 40.0
     },
     "15487": {
       "name": "Silence",
@@ -6501,7 +6688,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16053": {
       "name": "Dominion of Soul",
@@ -6555,7 +6743,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16329": {
       "name": "Juju Might",
@@ -6598,7 +6787,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16568": {
       "name": "Mind Flay",
@@ -6641,7 +6831,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16873": {
       "name": "Holy Word: Fortitude",
@@ -6684,7 +6875,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16874": {
       "name": "Shadow Protection",
@@ -6716,7 +6908,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16875": {
       "name": "Divine Spirit",
@@ -6748,7 +6941,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17137": {
       "name": "Flash Heal",
@@ -6780,7 +6974,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17138": {
       "name": "Flash Heal",
@@ -6812,7 +7007,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17140": {
       "name": "Holy Fire",
@@ -6855,7 +7051,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17141": {
       "name": "Holy Fire",
@@ -6898,7 +7095,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17142": {
       "name": "Holy Fire",
@@ -6941,7 +7139,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17151": {
       "name": "Shadow Barrier",
@@ -6973,7 +7172,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17165": {
       "name": "Mind Flay",
@@ -7016,7 +7216,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17201": {
       "name": "Dispel Magic",
@@ -7048,7 +7249,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17311": {
       "name": "Mind Flay",
@@ -7091,7 +7293,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17312": {
       "name": "Mind Flay",
@@ -7134,7 +7337,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17313": {
       "name": "Mind Flay",
@@ -7177,7 +7381,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17314": {
       "name": "Mind Flay",
@@ -7220,7 +7425,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17322": {
       "name": "Shadow Reach",
@@ -7252,7 +7458,8 @@
           "misc_value": 5,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17843": {
       "name": "Flash Heal",
@@ -7284,7 +7491,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18125": {
       "name": "Blessed Sunfruit",
@@ -7316,7 +7524,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18137": {
       "name": "Shadowguard",
@@ -7348,7 +7557,8 @@
           "misc_value": 0,
           "trigger_spell": 28376
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18141": {
       "name": "Blessed Sunfruit Juice",
@@ -7380,7 +7590,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18165": {
       "name": "Holy Fire",
@@ -7423,7 +7634,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18167": {
       "name": "Holy Fire",
@@ -7455,7 +7667,8 @@
           "misc_value": 0,
           "trigger_spell": 18165
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18388": {
       "name": "Quick Fade",
@@ -7487,7 +7700,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18530": {
       "name": "Divine Fury",
@@ -7519,7 +7733,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18544": {
       "name": "Force of Will",
@@ -7573,7 +7788,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18547": {
       "name": "Force of Will",
@@ -7627,7 +7843,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18548": {
       "name": "Force of Will",
@@ -7681,7 +7898,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18549": {
       "name": "Force of Will",
@@ -7735,7 +7953,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18550": {
       "name": "Force of Will",
@@ -7789,7 +8008,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18807": {
       "name": "Mind Flay",
@@ -7832,7 +8052,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19236": {
       "name": "Desperate Prayer",
@@ -7864,7 +8085,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19238": {
       "name": "Desperate Prayer",
@@ -7896,7 +8118,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19240": {
       "name": "Desperate Prayer",
@@ -7928,7 +8151,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19241": {
       "name": "Desperate Prayer",
@@ -7960,7 +8184,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19242": {
       "name": "Desperate Prayer",
@@ -7992,7 +8217,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19243": {
       "name": "Desperate Prayer",
@@ -8024,7 +8250,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19249": {
       "name": "Touch of Weakness",
@@ -8067,7 +8294,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19251": {
       "name": "Touch of Weakness",
@@ -8110,7 +8338,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19252": {
       "name": "Touch of Weakness",
@@ -8153,7 +8382,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19253": {
       "name": "Touch of Weakness",
@@ -8196,7 +8426,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19254": {
       "name": "Touch of Weakness",
@@ -8239,7 +8470,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19261": {
       "name": "Touch of Weakness",
@@ -8271,7 +8503,8 @@
           "misc_value": 0,
           "trigger_spell": 28598
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19262": {
       "name": "Touch of Weakness",
@@ -8303,7 +8536,8 @@
           "misc_value": 0,
           "trigger_spell": 28598
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19264": {
       "name": "Touch of Weakness",
@@ -8335,7 +8569,8 @@
           "misc_value": 0,
           "trigger_spell": 28598
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19265": {
       "name": "Touch of Weakness",
@@ -8367,7 +8602,8 @@
           "misc_value": 0,
           "trigger_spell": 28598
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19266": {
       "name": "Touch of Weakness",
@@ -8399,7 +8635,8 @@
           "misc_value": 0,
           "trigger_spell": 28598
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19271": {
       "name": "Feedback",
@@ -8431,7 +8668,8 @@
           "misc_value": 0,
           "trigger_spell": 19267
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19273": {
       "name": "Feedback",
@@ -8463,7 +8701,8 @@
           "misc_value": 0,
           "trigger_spell": 19268
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19274": {
       "name": "Feedback",
@@ -8495,7 +8734,8 @@
           "misc_value": 0,
           "trigger_spell": 19269
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19275": {
       "name": "Feedback",
@@ -8527,7 +8767,8 @@
           "misc_value": 0,
           "trigger_spell": 19270
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19276": {
       "name": "Devouring Plague",
@@ -8559,7 +8800,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19277": {
       "name": "Devouring Plague",
@@ -8591,7 +8833,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19278": {
       "name": "Devouring Plague",
@@ -8623,7 +8866,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19279": {
       "name": "Devouring Plague",
@@ -8655,7 +8899,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19280": {
       "name": "Devouring Plague",
@@ -8687,7 +8932,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19281": {
       "name": "Hex of Weakness",
@@ -8730,7 +8976,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19282": {
       "name": "Hex of Weakness",
@@ -8773,7 +9020,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19283": {
       "name": "Hex of Weakness",
@@ -8816,7 +9064,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19284": {
       "name": "Hex of Weakness",
@@ -8859,7 +9108,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19285": {
       "name": "Hex of Weakness",
@@ -8902,7 +9152,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19296": {
       "name": "Starshards",
@@ -8934,7 +9185,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19299": {
       "name": "Starshards",
@@ -8966,7 +9218,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19302": {
       "name": "Starshards",
@@ -8998,7 +9251,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19303": {
       "name": "Starshards",
@@ -9030,7 +9284,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19304": {
       "name": "Starshards",
@@ -9062,7 +9317,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19305": {
       "name": "Starshards",
@@ -9094,7 +9350,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19308": {
       "name": "Shadowguard",
@@ -9126,7 +9383,8 @@
           "misc_value": 0,
           "trigger_spell": 28376
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19309": {
       "name": "Shadowguard",
@@ -9158,7 +9416,8 @@
           "misc_value": 0,
           "trigger_spell": 28376
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19310": {
       "name": "Shadowguard",
@@ -9190,7 +9449,8 @@
           "misc_value": 0,
           "trigger_spell": 28376
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19311": {
       "name": "Shadowguard",
@@ -9222,7 +9482,8 @@
           "misc_value": 0,
           "trigger_spell": 28376
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19312": {
       "name": "Shadowguard",
@@ -9254,7 +9515,8 @@
           "misc_value": 0,
           "trigger_spell": 28376
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20694": {
       "name": "Holy Nova",
@@ -9286,7 +9548,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20706": {
       "name": "Power Word: Shield 500",
@@ -9318,7 +9581,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20770": {
       "name": "Resurrection",
@@ -9350,7 +9614,8 @@
           "misc_value": 1000,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 75.0
     },
     "20936": {
       "name": "Spirit of Greater Healing",
@@ -9382,7 +9647,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20937": {
       "name": "Hyper Resurrection 4 sec",
@@ -9414,7 +9680,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21074": {
       "name": "Test NPC Resurrection",
@@ -9446,7 +9713,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21089": {
       "name": "Retributive Smite",
@@ -9478,7 +9746,8 @@
           "misc_value": 0,
           "trigger_spell": 21091
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21091": {
       "name": "Retributive Smite",
@@ -9510,7 +9779,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21093": {
       "name": "Improved Fortitude",
@@ -9542,7 +9812,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21339": {
       "name": "Improved Prayer of Healing",
@@ -9574,7 +9845,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21562": {
       "name": "Prayer of Fortitude",
@@ -9606,7 +9878,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21564": {
       "name": "Prayer of Fortitude",
@@ -9638,7 +9911,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21853": {
       "name": "Reactive Fade",
@@ -9670,7 +9944,8 @@
           "misc_value": 0,
           "trigger_spell": 21976
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21973": {
       "name": "Prophecy Flash Heal Bonus",
@@ -9713,7 +9988,8 @@
           "misc_value": 21,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21976": {
       "name": "Reactive Fade",
@@ -9745,7 +10021,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22009": {
       "name": "Greater Heal",
@@ -9777,7 +10054,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22010": {
       "name": "Greater Heal Renew",
@@ -9809,7 +10087,8 @@
           "misc_value": 0,
           "trigger_spell": 22009
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22203": {
       "name": "Blue Beam",
@@ -9841,7 +10120,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22205": {
       "name": "Trigger Blue Beam",
@@ -9873,7 +10153,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22313": {
       "name": "Purple Hands",
@@ -9905,7 +10186,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22751": {
       "name": "Fury of the Frostwolf",
@@ -9937,7 +10219,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22752": {
       "name": "Fevered Exhaustion",
@@ -9969,7 +10252,8 @@
           "misc_value": 19,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22800": {
       "name": "Entangling Roots",
@@ -10012,7 +10296,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22802": {
       "name": "Choking Spores",
@@ -10044,7 +10329,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22803": {
       "name": "Dire Maul Trap - Summon",
@@ -10076,7 +10362,8 @@
           "misc_value": 13022,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22821": {
       "name": "Warpwood Spores",
@@ -10108,7 +10395,8 @@
           "misc_value": 14366,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22822": {
       "name": "Starshards",
@@ -10140,7 +10428,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22823": {
       "name": "Starshards",
@@ -10172,7 +10461,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22919": {
       "name": "Mind Flay",
@@ -10215,7 +10505,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23043": {
       "name": "Mind Blast Cast Pushback Reduction",
@@ -10247,7 +10538,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23044": {
       "name": "Psychic Scream Duration Increase",
@@ -10279,7 +10571,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23236": {
       "name": "Benediction",
@@ -10311,7 +10604,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23237": {
       "name": "Anathema",
@@ -10343,7 +10637,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23401": {
       "name": "Corrupted Healing",
@@ -10375,7 +10670,8 @@
           "misc_value": 3656,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23402": {
       "name": "Corrupted Healing",
@@ -10407,7 +10703,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23435": {
       "name": "Increased Holy Criticals",
@@ -10439,7 +10736,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23455": {
       "name": "Holy Nova",
@@ -10471,7 +10769,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23458": {
       "name": "Holy Nova",
@@ -10503,7 +10802,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23459": {
       "name": "Holy Nova",
@@ -10535,7 +10835,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23550": {
       "name": "Increased Prayer of Healing Criticals",
@@ -10567,7 +10868,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23642": {
       "name": "Corruption",
@@ -10599,7 +10901,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23693": {
       "name": "Stormpike's Salvation",
@@ -10631,7 +10934,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23697": {
       "name": "Alterac Spring Water",
@@ -10663,7 +10967,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23858": {
       "name": "Holy Nova",
@@ -10706,7 +11011,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23859": {
       "name": "Dispel Magic",
@@ -10738,7 +11044,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23860": {
       "name": "Holy Fire",
@@ -10781,7 +11088,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23947": {
       "name": "Power Word: Fortitude",
@@ -10813,7 +11121,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23948": {
       "name": "Power Word: Fortitude",
@@ -10845,7 +11154,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23953": {
       "name": "Mind Flay",
@@ -10888,7 +11198,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23964": {
       "name": "Bloodrager's Requiem",
@@ -10942,7 +11253,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23979": {
       "name": "Holy Wrath",
@@ -10974,7 +11286,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24022": {
       "name": "Cleanse Nova",
@@ -11017,7 +11330,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24152": {
       "name": "Whipweed Roots",
@@ -11060,7 +11374,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24191": {
       "name": "Improved Power Word: Shield",
@@ -11092,7 +11407,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24426": {
       "name": "Increased Critical Holy Spells",
@@ -11124,7 +11440,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24482": {
       "name": "Improved Smite and Holy Fire",
@@ -11156,7 +11473,8 @@
           "misc_value": 5,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24483": {
       "name": "Improved Mind Control",
@@ -11188,7 +11506,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24546": {
       "name": "Rapid Healing",
@@ -11231,7 +11550,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25314": {
       "name": "Greater Heal",
@@ -11263,7 +11583,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25315": {
       "name": "Renew",
@@ -11295,7 +11616,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25316": {
       "name": "Prayer of Healing",
@@ -11327,7 +11649,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25808": {
       "name": "Dispel",
@@ -11359,7 +11682,8 @@
           "misc_value": -1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25816": {
       "name": "Hex of Weakness",
@@ -11391,7 +11715,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26044": {
       "name": "Mind Flay",
@@ -11445,7 +11770,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26143": {
       "name": "Mind Flay",
@@ -11488,7 +11814,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26169": {
       "name": "Oracle Healing Bonus",
@@ -11520,7 +11847,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26171": {
       "name": "Increased Renew Duration",
@@ -11552,7 +11880,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26172": {
       "name": "Infinite Wisdom Shadow Word: Pain Bonus",
@@ -11584,7 +11913,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26565": {
       "name": "Heal Brethren",
@@ -11616,7 +11946,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27286": {
       "name": "Shadow Wrath",
@@ -11648,7 +11979,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27605": {
       "name": "Shadow Word: Pain",
@@ -11680,7 +12012,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27606": {
       "name": "Renew",
@@ -11712,7 +12045,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27607": {
       "name": "Power Word: Shield",
@@ -11744,7 +12078,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27608": {
       "name": "Flash Heal",
@@ -11776,7 +12111,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27609": {
       "name": "Dispel Magic",
@@ -11808,7 +12144,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 18.0
     },
     "27610": {
       "name": "Psychic Scream",
@@ -11851,7 +12188,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27636": {
       "name": "Starshards",
@@ -11883,7 +12221,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27640": {
       "name": "Baron Rivendare's Soul Drain",
@@ -11926,7 +12265,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27681": {
       "name": "Prayer of Spirit",
@@ -11958,7 +12298,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27683": {
       "name": "Prayer of Shadow Protection",
@@ -11990,7 +12331,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27779": {
       "name": "Divine Protection",
@@ -12022,7 +12364,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27789": {
       "name": "Holy Reach",
@@ -12065,7 +12408,8 @@
           "misc_value": 6,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27799": {
       "name": "Holy Nova",
@@ -12097,7 +12441,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27800": {
       "name": "Holy Nova",
@@ -12129,7 +12474,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27801": {
       "name": "Holy Nova",
@@ -12161,7 +12507,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27803": {
       "name": "Holy Nova",
@@ -12193,7 +12540,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27804": {
       "name": "Holy Nova",
@@ -12225,7 +12573,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27805": {
       "name": "Holy Nova",
@@ -12257,7 +12606,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27811": {
       "name": "Blessed Recovery",
@@ -12300,7 +12650,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27827": {
       "name": "Spirit of Redemption",
@@ -12354,7 +12705,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27828": {
       "name": "Focused Casting",
@@ -12397,7 +12749,8 @@
           "misc_value": 26,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27839": {
       "name": "Improved Vampiric Embrace",
@@ -12429,7 +12782,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27841": {
       "name": "Divine Spirit",
@@ -12461,7 +12815,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27870": {
       "name": "Lightwell",
@@ -12493,7 +12848,8 @@
           "misc_value": 181105,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27871": {
       "name": "Lightwell",
@@ -12525,7 +12881,8 @@
           "misc_value": 181106,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27900": {
       "name": "Spell Warding",
@@ -12557,7 +12914,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28133": {
       "name": "Cure Disease",
@@ -12589,7 +12947,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28309": {
       "name": "Copy of Corruption",
@@ -12621,7 +12980,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28310": {
       "name": "Mind Flay",
@@ -12664,7 +13024,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28376": {
       "name": "Shadowguard",
@@ -12696,7 +13057,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28377": {
       "name": "Shadowguard",
@@ -12728,7 +13090,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28378": {
       "name": "Shadowguard",
@@ -12760,7 +13123,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28379": {
       "name": "Shadowguard",
@@ -12792,7 +13156,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28380": {
       "name": "Shadowguard",
@@ -12824,7 +13189,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28381": {
       "name": "Shadowguard",
@@ -12856,7 +13222,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28382": {
       "name": "Shadowguard",
@@ -12888,7 +13255,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28418": {
       "name": "General's Warcry",
@@ -12931,7 +13299,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28419": {
       "name": "General's Warcry",
@@ -12974,7 +13343,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28420": {
       "name": "General's Warcry",
@@ -13017,7 +13387,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28598": {
       "name": "Touch of Weakness",
@@ -13049,7 +13420,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28802": {
       "name": "Epiphany",
@@ -13081,7 +13453,8 @@
           "misc_value": 0,
           "trigger_spell": 28804
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28804": {
       "name": "Epiphany",
@@ -13113,7 +13486,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28807": {
       "name": "Renew",
@@ -13145,7 +13519,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28808": {
       "name": "Reduced Threat",
@@ -13177,7 +13552,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28809": {
       "name": "Greater Heal",
@@ -13209,7 +13585,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28810": {
       "name": "Armor of Faith",
@@ -13241,7 +13618,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28883": {
       "name": "Holy Wrath",
@@ -13273,7 +13651,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28996": {
       "name": "Elemental Warding",
@@ -13305,7 +13684,8 @@
           "misc_value": 28,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29184": {
       "name": "Corrupted Mind",
@@ -13337,7 +13717,8 @@
           "misc_value": 4327,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29185": {
       "name": "Corrupted Mind",
@@ -13369,7 +13750,8 @@
           "misc_value": 0,
           "trigger_spell": 29184
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29407": {
       "name": "Mind Flay",
@@ -13412,7 +13794,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30238": {
       "name": "Lordaeron's Blessing",
@@ -13455,7 +13838,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "34433": {
       "name": "Shadowfiend",
@@ -13498,7 +13882,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "401859": {
       "name": "Prayer of Mending",
@@ -13541,7 +13926,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "401863": {
       "name": "Prayer of Mending",
@@ -13573,7 +13959,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "401877": {
       "name": "Prayer of Mending",
@@ -13605,7 +13992,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "401880": {
       "name": "Prayer of Mending",
@@ -13637,7 +14025,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "401937": {
       "name": "Binding Heal",
@@ -13680,7 +14069,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "401946": {
       "name": "Circle of Healing",
@@ -13712,7 +14102,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 56.0
     },
     "401955": {
       "name": "Shadow Word: Death",
@@ -13755,7 +14146,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 12.0
     },
     "401962": {
       "name": "Shadow Word: Death",
@@ -13787,7 +14179,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "401969": {
       "name": "Shared Pain",
@@ -13830,7 +14223,8 @@
           "misc_value": 35,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "401977": {
       "name": "Shadowfiend",
@@ -13862,7 +14256,8 @@
           "misc_value": 202079,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402000": {
       "name": "Soul Warding",
@@ -13905,7 +14300,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402004": {
       "name": "Pain Suppression",
@@ -13948,7 +14344,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 8.0
     },
     "402174": {
       "name": "Penance",
@@ -13980,7 +14377,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402261": {
       "name": "Penance",
@@ -14023,7 +14421,8 @@
           "misc_value": 0,
           "trigger_spell": 402284
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402277": {
       "name": "Penance",
@@ -14066,7 +14465,8 @@
           "misc_value": 0,
           "trigger_spell": 402289
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402284": {
       "name": "Penance",
@@ -14098,7 +14498,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402289": {
       "name": "Penance",
@@ -14130,7 +14531,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402362": {
       "name": "White",
@@ -14162,7 +14564,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402368": {
       "name": "Black",
@@ -14194,7 +14597,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402668": {
       "name": "Vampiric Touch",
@@ -14237,7 +14641,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 16.0
     },
     "402789": {
       "name": "Eye of the Void",
@@ -14269,7 +14674,8 @@
           "misc_value": 202387,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402791": {
       "name": "Curse of Shadow",
@@ -14312,7 +14718,8 @@
           "misc_value": 96,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 20.0
     },
     "402792": {
       "name": "Curse of the Elements",
@@ -14355,7 +14762,8 @@
           "misc_value": 20,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 20.0
     },
     "402794": {
       "name": "Curse of Tongues",
@@ -14398,7 +14806,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 20.0
     },
     "402799": {
       "name": "Homunculi",
@@ -14430,7 +14839,8 @@
           "misc_value": 202390,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402801": {
       "name": "Homunculi",
@@ -14462,7 +14872,8 @@
           "misc_value": 202391,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402802": {
       "name": "Homunculi",
@@ -14494,7 +14905,8 @@
           "misc_value": 202392,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402839": {
       "name": "Pain Suppression",
@@ -14526,7 +14938,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "402843": {
       "name": "Shadowfiend",
@@ -14558,7 +14971,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409076": {
       "name": "Pain and Suffering",
@@ -14590,7 +15004,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409317": {
       "name": "Strength of Soul",
@@ -14622,7 +15037,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "412526": {
       "name": "Mind Flay",
@@ -14665,7 +15081,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "413247": {
       "name": "Serendipity",
@@ -14708,7 +15125,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "413248": {
       "name": "Serendipity",
@@ -14740,7 +15158,8 @@
           "misc_value": 0,
           "trigger_spell": 413247
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "413251": {
       "name": "Pain and Suffering",
@@ -14772,7 +15191,8 @@
           "misc_value": 0,
           "trigger_spell": 409076
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "413259": {
       "name": "Mind Sear",
@@ -14804,7 +15224,8 @@
           "misc_value": 0,
           "trigger_spell": 413260
         }
-      ]
+      ],
+      "cost_pct": 28.0
     },
     "413260": {
       "name": "Mind Sear",
@@ -14836,7 +15257,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415739": {
       "name": "Strength of Soul",
@@ -14868,7 +15290,8 @@
           "misc_value": 0,
           "trigger_spell": 409317
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "416153": {
       "name": "Shadowfiend Scaling",
@@ -15065,7 +15488,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "420877": {
       "name": "Helping Hand",
@@ -15097,7 +15521,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "420878": {
       "name": "Helping Hand",
@@ -15129,7 +15554,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "421248": {
       "name": "Shadowguard",
@@ -15161,7 +15587,8 @@
           "misc_value": 0,
           "trigger_spell": 28376
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425198": {
       "name": "Twisted Faith",
@@ -15193,7 +15620,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425204": {
       "name": "Void Plague",
@@ -15225,7 +15653,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 13.0
     },
     "425205": {
       "name": "Power Word: Barrier",
@@ -15268,7 +15697,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425207": {
       "name": "Power Word: Barrier",
@@ -15311,7 +15741,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 4.0
     },
     "425266": {
       "name": "Empowered Renew",
@@ -15453,7 +15884,8 @@
           "misc_value": 25315,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425268": {
       "name": "Renew",
@@ -15485,7 +15917,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425269": {
       "name": "Renew",
@@ -15517,7 +15950,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425270": {
       "name": "Renew",
@@ -15549,7 +15983,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425271": {
       "name": "Renew",
@@ -15581,7 +16016,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425272": {
       "name": "Renew",
@@ -15613,7 +16049,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425273": {
       "name": "Renew",
@@ -15645,7 +16082,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425274": {
       "name": "Renew",
@@ -15677,7 +16115,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425275": {
       "name": "Renew",
@@ -15709,7 +16148,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425276": {
       "name": "Renew",
@@ -15741,7 +16181,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425277": {
       "name": "Renew",
@@ -15773,7 +16214,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425280": {
       "name": "Renewed Hope",
@@ -15816,7 +16258,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425284": {
       "name": "Spirit of the Redeemer",
@@ -15859,7 +16302,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425294": {
       "name": "Dispersion",
@@ -15935,7 +16379,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425302": {
       "name": "Empowered Renew",
@@ -15967,7 +16412,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425303": {
       "name": "Renewed Hope",
@@ -15999,7 +16445,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425304": {
       "name": "Spirit of the Redeemer",
@@ -16031,7 +16478,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425307": {
       "name": "Dispersion",
@@ -16063,7 +16511,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431622": {
       "name": "Divine Aegis",
@@ -16095,7 +16544,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431624": {
       "name": "Divine Aegis",
@@ -16127,7 +16577,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431655": {
       "name": "Mind Spike",
@@ -16170,7 +16621,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 6.0
     },
     "431662": {
       "name": "Mind Spike",
@@ -16202,7 +16654,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431664": {
       "name": "Surge of Light",
@@ -16234,7 +16687,8 @@
           "misc_value": 0,
           "trigger_spell": 431666
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431666": {
       "name": "Surge of Light",
@@ -16277,7 +16731,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431668": {
       "name": "Surge of Light",
@@ -16309,7 +16764,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431670": {
       "name": "Despair",
@@ -16352,7 +16808,8 @@
           "misc_value": 15,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431675": {
       "name": "Despair",
@@ -16384,7 +16841,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431681": {
       "name": "Void Zone",
@@ -16438,7 +16896,8 @@
           "misc_value": 223496,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 21.0
     },
     "431690": {
       "name": "Void Zone",
@@ -16470,7 +16929,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431704": {
       "name": "Void Zone",
@@ -16502,7 +16962,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436951": {
       "name": "Increased Fortitude",
@@ -16545,7 +17006,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440054": {
       "name": "Shadowfiend",
@@ -16577,7 +17039,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440247": {
       "name": "S03 - Tuning and Overrides Passive - Priest",
@@ -16686,7 +17149,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "447549": {
       "name": "Feedback",
@@ -16718,7 +17182,8 @@
           "misc_value": 0,
           "trigger_spell": 19270
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "448994": {
       "name": "[DNT] Void Zone Visual",
@@ -16750,7 +17215,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "450086": {
       "name": "Prayer of Fortitude",
@@ -16782,7 +17248,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "450108": {
       "name": "Mind Vision",
@@ -16814,7 +17281,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456545": {
       "name": "S03 - Item - T1 - Priest - Healer 2P Bonus",
@@ -16857,7 +17325,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456547": {
       "name": "S03 - Item - T1 - Priest - Healer 6P Bonus",
@@ -16889,7 +17358,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456548": {
       "name": "S03 - Item - T1 - Priest - Shadow 2P Bonus",
@@ -16921,7 +17391,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456549": {
       "name": "Melting Faces",
@@ -16975,7 +17446,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457325": {
       "name": "S03 - Item - T1 - Priest - Shadow 6P Bonus",
@@ -17007,7 +17479,8 @@
           "misc_value": 0,
           "trigger_spell": 456549
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459603": {
       "name": "Weakened Soul Duration Decrease",
@@ -17039,7 +17512,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459604": {
       "name": "Mind Blast Cast Pushback Reduction",
@@ -17071,7 +17545,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459699": {
       "name": "Fear Ward",
@@ -17103,7 +17578,8 @@
           "misc_value": 459695,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459702": {
       "name": "Desperate Prayer",
@@ -17135,7 +17611,8 @@
           "misc_value": 459695,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459703": {
       "name": "Feedback",
@@ -17167,7 +17644,8 @@
           "misc_value": 459695,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459705": {
       "name": "Starshards",
@@ -17199,7 +17677,8 @@
           "misc_value": 459695,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459706": {
       "name": "Elune's Grace",
@@ -17231,7 +17710,8 @@
           "misc_value": 459695,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459709": {
       "name": "Shadowguard",
@@ -17263,7 +17743,8 @@
           "misc_value": 459695,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459710": {
       "name": "Hex of Weakness",
@@ -17295,7 +17776,8 @@
           "misc_value": 459695,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459713": {
       "name": "Devouring Plague",
@@ -17327,7 +17809,8 @@
           "misc_value": 459695,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459714": {
       "name": "Touch of Weakness",
@@ -17359,7 +17842,8 @@
           "misc_value": 459695,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461329": {
       "name": "Levitate",
@@ -17413,7 +17897,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461966": {
       "name": "Vampiric Embrace",
@@ -17445,7 +17930,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462754": {
       "name": "Carnage",
@@ -17477,7 +17963,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467543": {
       "name": "Deliverance",
@@ -17509,7 +17996,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467586": {
       "name": "S03 - Item - T2 - Priest - Healer 6P Bonus",
@@ -17541,7 +18029,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467588": {
       "name": "Healing Echoes",
@@ -17573,7 +18062,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467604": {
       "name": "S03 - Item - T2 - Priest - Shadow 2P Bonus",
@@ -17605,7 +18095,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467608": {
       "name": "S03 - Item - T2 - Priest - Shadow 4P Bonus",
@@ -17648,7 +18139,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467624": {
       "name": "S03 - Item - T2 - Priest - Shadow 6P Bonus",
@@ -17680,7 +18172,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467632": {
       "name": "Harness the Spirit",
@@ -17712,7 +18205,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468278": {
       "name": "Improved Power Word: Shield",
@@ -17744,7 +18238,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468398": {
       "name": "S03 - Item - ZG - Priest - Discipline 2P Bonus",
@@ -17787,7 +18282,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468433": {
       "name": "S03 - Item - ZG - Priest - Discipline 3P Bonus",
@@ -17819,7 +18315,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468434": {
       "name": "S03 - Item - ZG - Priest - Discipline 5P Bonus",
@@ -17851,7 +18348,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468531": {
       "name": "Rapid Healing",
@@ -17905,7 +18403,8 @@
           "misc_value": 17,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469191": {
       "name": "Cassandra's Tome",
@@ -17937,7 +18436,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "474204": {
       "name": "Mind Flay",
@@ -17980,7 +18480,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "474268": {
       "name": "Mind Flay",
@@ -18034,7 +18535,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213624": {
       "name": "S03 - Item - TAQ - Priest - Healer 2P Bonus",
@@ -18066,7 +18568,8 @@
           "misc_value": 12,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213631": {
       "name": "S03 - Item - TAQ - Priest - Healer 4P Bonus",
@@ -18098,7 +18601,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213675": {
       "name": "S03 - Item - TAQ - Priest - Shadow 2P Bonus",
@@ -18130,7 +18634,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213705": {
       "name": "S03 - Item - TAQ - Priest - Shadow 4P Bonus",
@@ -18173,7 +18678,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213708": {
       "name": "S03 - Item - RAQ - Priest - Shadow 3P Bonus",
@@ -18216,7 +18722,8 @@
           "misc_value": 1219274,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214244": {
       "name": "Timeworn Spell",
@@ -18259,7 +18766,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1215740": {
       "name": "Mind Flay",
@@ -18302,7 +18810,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1216483": {
       "name": "Noxious Breath",
@@ -18345,7 +18854,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219230": {
       "name": "S03 - Item - Naxxramas - Priest - Healer 2P Bonus",
@@ -18377,7 +18887,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219233": {
       "name": "S03 - Item - Naxxramas - Priest - Healer 4P Bonus",
@@ -18409,7 +18920,8 @@
           "misc_value": 0,
           "trigger_spell": 1219232
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219238": {
       "name": "S03 - Item - Naxxramas - Priest - Healer 6P Bonus",
@@ -18441,7 +18953,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219242": {
       "name": "S03 - Item - Naxxramas - Priest - Shadow 2P Bonus",
@@ -18484,7 +18997,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219244": {
       "name": "S03 - Item - Naxxramas - Priest - Shadow 4P Bonus",
@@ -18516,7 +19030,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219250": {
       "name": "S03 - Item - Naxxramas - Priest - Shadow 6P Bonus",
@@ -18548,7 +19063,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219275": {
       "name": "Devouring Plague",
@@ -18580,7 +19096,8 @@
           "misc_value": 1219274,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1221421": {
       "name": "Mind Vision",
@@ -18623,7 +19140,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1221422": {
       "name": "Mind Vision",
@@ -18677,7 +19195,8 @@
           "misc_value": 0,
           "trigger_spell": 1221421
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1222994": {
       "name": "Damage Over Time Increase",
@@ -18720,7 +19239,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1222995": {
       "name": "Damage Over Time Increase",
@@ -18763,7 +19283,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1222996": {
       "name": "Damage Over Time Increase",
@@ -18806,7 +19327,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1222997": {
       "name": "Damage Over Time Increase",
@@ -18849,7 +19371,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1225132": {
       "name": "Twin Disciplines",
@@ -18892,7 +19415,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1225139": {
       "name": "Improved Mind Flay",
@@ -18957,7 +19481,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226499": {
       "name": "S03 - Item - Scarlet Enclave - Priest - Healer 2P Bonus",
@@ -19000,7 +19525,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226500": {
       "name": "Absolution",
@@ -19032,7 +19558,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226501": {
       "name": "S03 - Item - Scarlet Enclave - Priest - Healer 6P Bonus",
@@ -19086,7 +19613,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226502": {
       "name": "Devotion",
@@ -19118,7 +19646,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226565": {
       "name": "S03 - Item - Scarlet Enclave - Priest - Healer 4P Bonus",
@@ -19161,7 +19690,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226585": {
       "name": "S03 - Item - Scarlet Enclave - Priest - Shadow 2P Bonus",
@@ -19204,7 +19734,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226589": {
       "name": "Shadow Word: Pain",
@@ -19236,7 +19767,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226591": {
       "name": "S03 - Item - Scarlet Enclave - Priest - Shadow 4P Bonus",
@@ -19279,7 +19811,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226595": {
       "name": "S03 - Item - Scarlet Enclave - Priest - Shadow 6P Bonus",
@@ -19311,7 +19844,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1231657": {
       "name": "Conundrum",
@@ -19354,7 +19888,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232095": {
       "name": "Infusion of Souls",
@@ -19386,7 +19921,8 @@
           "misc_value": 21,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232758": {
       "name": "Flash Heal",
@@ -19418,7 +19954,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234542": {
       "name": "Redeemed",
@@ -19450,7 +19987,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236151": {
       "name": "Renew",
@@ -19482,7 +20020,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236153": {
       "name": "Flash Heal",
@@ -19514,7 +20053,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236154": {
       "name": "Power Word: Shield",
@@ -19546,7 +20086,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236156": {
       "name": "Dispel Magic",
@@ -19578,7 +20119,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1237618": {
       "name": "Vampiric Embrace",
@@ -19610,7 +20152,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1238817": {
       "name": "Holy Wrath",
@@ -19642,7 +20185,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240720": {
       "name": "Penance",
@@ -19674,7 +20218,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240721": {
       "name": "Penance",
@@ -19706,7 +20251,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240723": {
       "name": "Penance",
@@ -19738,7 +20284,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240724": {
       "name": "Penance",
@@ -19770,7 +20317,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240727": {
       "name": "Penance",
@@ -19802,7 +20350,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240730": {
       "name": "Penance",
@@ -19834,7 +20383,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240732": {
       "name": "Penance",
@@ -19877,7 +20427,8 @@
           "misc_value": 0,
           "trigger_spell": 1240723
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240733": {
       "name": "Penance",
@@ -19920,7 +20471,8 @@
           "misc_value": 0,
           "trigger_spell": 1240724
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240734": {
       "name": "Penance",
@@ -19963,7 +20515,8 @@
           "misc_value": 0,
           "trigger_spell": 1240727
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240736": {
       "name": "Penance",
@@ -20006,7 +20559,8 @@
           "misc_value": 0,
           "trigger_spell": 1240730
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240755": {
       "name": "Blessed Recovery",
@@ -20038,7 +20592,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240770": {
       "name": "Binding Heal",
@@ -20081,7 +20636,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240771": {
       "name": "Binding Heal",
@@ -20124,7 +20680,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240772": {
       "name": "Binding Heal",
@@ -20167,7 +20724,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240773": {
       "name": "Binding Heal",
@@ -20210,7 +20768,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240774": {
       "name": "Binding Heal",
@@ -20253,7 +20812,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240826": {
       "name": "Prayer of Mending",
@@ -20296,7 +20856,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240827": {
       "name": "Prayer of Mending",
@@ -20339,7 +20900,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240848": {
       "name": "Prayer of Mending",
@@ -20371,7 +20933,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240849": {
       "name": "Prayer of Mending",
@@ -20403,7 +20966,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240918": {
       "name": "Prayer of Mending",
@@ -20435,7 +20999,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240919": {
       "name": "Prayer of Mending",
@@ -20467,7 +21032,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1241057": {
       "name": "Interrupted",
@@ -20499,7 +21065,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1259823": {
       "name": "Eureka!",
@@ -20564,7 +21131,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1262312": {
       "name": "The Quick and the Dead",
@@ -20596,7 +21164,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1262650": {
       "name": "Reagent Economy",
@@ -20628,7 +21197,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277324": {
       "name": "Dark Sacrifice",
@@ -20671,7 +21241,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277325": {
       "name": "Dark Sacrifice",
@@ -20714,7 +21285,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277326": {
       "name": "Dark Sacrifice",
@@ -20757,7 +21329,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277327": {
       "name": "Dark Sacrifice",
@@ -20800,7 +21373,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277328": {
       "name": "Dark Sacrifice",
@@ -20843,7 +21417,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277331": {
       "name": "Chastise",
@@ -20886,7 +21461,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277332": {
       "name": "Chastise",
@@ -20929,7 +21505,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277333": {
       "name": "Chastise",
@@ -20972,7 +21549,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277334": {
       "name": "Chastise",
@@ -21015,7 +21593,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277335": {
       "name": "Chastise",
@@ -21058,7 +21637,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277370": {
       "name": "Divine Grace",
@@ -21101,7 +21681,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277371": {
       "name": "Divine Grace",
@@ -21144,7 +21725,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277372": {
       "name": "Divine Grace",
@@ -21187,7 +21769,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277374": {
       "name": "Divine Grace",
@@ -21230,7 +21813,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277376": {
       "name": "Divine Grace",
@@ -21273,7 +21857,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277377": {
       "name": "Divine Grace",
@@ -21316,7 +21901,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277378": {
       "name": "Divine Grace",
@@ -21359,7 +21945,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277455": {
       "name": "Confounding Flash",
@@ -21391,7 +21978,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 3.0
     },
     "1277456": {
       "name": "Contingency Plan",
@@ -21423,7 +22011,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277457": {
       "name": "Contingency Plan",
@@ -21455,7 +22044,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277458": {
       "name": "Contingency Plan",
@@ -21487,7 +22077,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277459": {
       "name": "Contingency Plan",
@@ -21519,7 +22110,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277460": {
       "name": "Contingency Plan",
@@ -21551,7 +22143,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277462": {
       "name": "Contingency Plan",
@@ -21594,7 +22187,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277463": {
       "name": "Contingency Plan",
@@ -21626,7 +22220,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277464": {
       "name": "Contingency Plan",
@@ -21658,7 +22253,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277465": {
       "name": "Contingency Plan",
@@ -21690,7 +22286,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277466": {
       "name": "Contingency Plan",
@@ -21722,7 +22319,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277467": {
       "name": "Contingency Plan",
@@ -21754,7 +22352,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277634": {
       "name": "Contingency Plan",
@@ -21797,7 +22396,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277638": {
       "name": "Contingency Plan",
@@ -21840,7 +22440,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277639": {
       "name": "Contingency Plan",
@@ -21883,7 +22484,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277640": {
       "name": "Contingency Plan",
@@ -21926,7 +22528,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1284536": {
       "name": "Holy Purpose",
@@ -21969,7 +22572,8 @@
           "misc_value": 26,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1286257": {
       "name": "(DNT) Prayer of Spirit - TEST RAID SPELL",
@@ -22001,7 +22605,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1287768": {
       "name": "Unholy Might",
@@ -22044,7 +22649,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1289450": {
       "name": "Renew",
@@ -22076,7 +22682,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293542": {
       "name": "Flash Heal Cast Pushback Reduction",
@@ -22108,7 +22715,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293631": {
       "name": "Improved Resurrection",
@@ -22140,7 +22748,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293973": {
       "name": "TEST Heal Self - Daves 1",
@@ -22172,7 +22781,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1300954": {
       "name": "1.60.0 - Item - Tier 1 - Priest - Discipline/Holy 2P Bonus - Spirit",
@@ -22204,7 +22814,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1300955": {
       "name": "1.60.0 - Item - Tier 1 - Priest - Shadow 2P Bonus - Hit",
@@ -22247,7 +22858,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301041": {
       "name": "1.60.0 - Item - Tier 1 - Priest - Discipline/Holy 3P Bonus - Fear Ward",
@@ -22279,7 +22891,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301045": {
       "name": "1.60.0 - Item - Tier 1 - Priest - Shadow 3P Bonus - Shackle Undead",
@@ -22311,7 +22924,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301085": {
       "name": "1.60.0 - Item - Tier 1 - Priest - Discipline/Holy 4P Bonus - Healing/Damage",
@@ -22354,7 +22968,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301087": {
       "name": "1.60.0 - Item - Tier 1 - Priest - Shadow 4P Bonus - SP vs. Undead",
@@ -22386,7 +23001,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301703": {
       "name": "1.60.0 - Item - Tier 1 - Priest - Discipline/Holy 5P Bonus - Penance and Prayer of Mending",
@@ -22418,7 +23034,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301706": {
       "name": "1.60.0 - Item - Tier 1 - Priest - Shadow 5P Bonus - Devouring Plague",
@@ -22450,7 +23067,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1309595": {
       "name": "Shadow Word: Death",
@@ -22504,7 +23122,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1309598": {
       "name": "Shadow Word: Death",
@@ -22536,7 +23155,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1309633": {
       "name": "Shadow Word: Death",
@@ -22590,7 +23210,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1309635": {
       "name": "Shadow Word: Death",
@@ -22644,7 +23265,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1309636": {
       "name": "Shadow Word: Death",
@@ -22698,7 +23320,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1309950": {
       "name": "Devouring Contagion",
@@ -22741,7 +23364,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1309957": {
       "name": "Holy Precision",
@@ -22773,7 +23397,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1309969": {
       "name": "Power in Light",
@@ -22805,7 +23430,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310076": {
       "name": "Early Demise",
@@ -22848,7 +23474,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310993": {
       "name": "Corrupted Healing",
@@ -22880,7 +23507,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1313379": {
       "name": "Prayer of Mending",
@@ -22912,7 +23540,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1313381": {
       "name": "Prayer of Mending",
@@ -22944,7 +23573,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1316991": {
       "name": "Penance",
@@ -22976,7 +23606,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1316992": {
       "name": "Penance",
@@ -23019,7 +23650,8 @@
           "misc_value": 0,
           "trigger_spell": 1316991
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1316993": {
       "name": "Penance",
@@ -23051,7 +23683,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1316994": {
       "name": "Penance",
@@ -23094,7 +23727,8 @@
           "misc_value": 0,
           "trigger_spell": 1316993
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1316995": {
       "name": "Penance",
@@ -23126,7 +23760,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1317006": {
       "name": "Litany of Light",
@@ -23158,7 +23793,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     }
   }
 }

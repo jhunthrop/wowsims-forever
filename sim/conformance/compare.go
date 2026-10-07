@@ -22,6 +22,12 @@ type Row struct {
 	ClientCostAmt  float64
 	ClientCostType string
 	EngineCostAmt  float64
+	// ClientCostPct is the client's percent-of-base-mana price when it
+	// costs the spell that way (SpellPower.PowerCostPct, carried by
+	// spellconst as CostPct); ClientCostAmt is then that percentage of
+	// the preset character's base mana, the same number the engine's
+	// ManaCostOptions.BaseCost resolves to. 0 for a flat-cost spell.
+	ClientCostPct  float64
 	EngineCostType string
 
 	ClientCooldownMS int32
@@ -64,43 +70,18 @@ type Row struct {
 	Diff string
 }
 
-// JOB 2 finding - the "percent-of-mana cost vs. flat client column" open
-// question from SUMMARY.md's first pass is answered, not just flagged:
-//
-// Forever's data pipeline's raw client table, SpellPower.csv, has its
-// own PowerCostPct column, and every spell this report's spellconst
-// cost reads as a flat 0 has a real, nonzero PowerCostPct in that raw
-// table - it is simply never carried into spellconst.Spell's Cost/
-// CostType fields, which only read SpellPower.csv's flat ManaCost
-// column. Checked directly against build 1.60.1.70009's SpellPower.csv:
-//
-//	Spell                 PowerCostPct  Engine ManaCostOptions.BaseCost
-//	Bestial Wrath (19574)         12%   0.12  (sim/hunter/bestial_wrath.go)
-//	Multi-Shot      (2643)      13.9%   0.139 (multiShotBaseManaCostPercent)
-//	Summon Felhunter (691)       100%   1.0   (shares warlock's manaCost var)
-//	Summon Voidwalker(697)       100%   1.0   (same)
-//	Summon Succubus  (712)       100%   1.0   (same)
-//	Summon Imp       (688)        80%   1.0   (BUG: shares the other three's
-//	                                            100%-of-base-mana cost var
-//	                                            instead of its own 80% -
-//	                                            sim/warlock/summon_demon.go;
-//	                                            a real defect for the
-//	                                            warlock lane, not a
-//	                                            visibility gap)
-//	Cat Form         (768)        55%   0.55  (sim/druid/forms.go)
-//	Moonkin Form     (24858)      35%   0.35  (same)
-//	Innervate        (29166)       5%   0.05  (sim/druid/innervate.go)
-//
-// Every one of those (Summon Imp aside) is the engine's percent model
-// matching the client's real percent-cost field exactly - these are
-// correct engine behavior this report could not previously verify, not
-// stale formulas. The fix that would surface this directly in the
-// table above (rather than in this comment) is extending the data
-// pipeline that generates data/builds/<build>/spellconst/<class>.json
-// (a different repo, out of this lane's scope) to also emit
-// PowerCostPct, and spellconst.Spell to carry it, so verdictFor could
-// compare percent-to-percent instead of amount-to-amount for these
-// rows.
+// Percent-of-base-mana costs: the client prices some spells through
+// SpellPower.PowerCostPct (Arcane Blast 15, Judgement 6, Shadowform 40,
+// the warlock summons 80/100, Multi-Shot 13.9, the druid forms) and
+// leaves the flat ManaCost column 0 for them. Until 2026-10-07 spellconst
+// carried only the flat column, so such a spell registered free by the
+// engine scored a clean "0 -> 0 match" here (Arcane Blast, Judgement,
+// Shadowform, Divine Favor, Bane of Havoc and Strider Kick all did). The
+// data pipeline now emits cost_pct and spellconst.Spell carries it as
+// CostPct; rowFor resolves it against the preset character's base mana
+// (ClientCostPct, ClientCostAmt) so the cost column compares the same
+// amount newManaCost derives from ManaCostOptions.BaseCost, and the
+// golden prints the percentage beside it.
 //
 // Shaman's Stormstrike (17364) is NOT one of these: its raw
 // SpellPower.csv row has PowerCostPct 0 and a real flat ManaCost of
@@ -223,6 +204,17 @@ func rowFor(clientClass spellconst.Class, spec Preset, level int32, character *c
 		EngineCooldownMS: int32(spell.CD.Duration / time.Millisecond),
 		EngineCastTimeMS: int32(spell.DefaultCast.CastTime / time.Millisecond),
 		EngineGCDMS:      int32(spell.DefaultCast.GCD / time.Millisecond),
+	}
+
+	// A percent-of-base-mana price (Arcane Blast 15%, Judgement 6%) has a
+	// flat client cost of 0, which until 2026-10-07 read as a clean
+	// "0->0 match" against an engine that charged nothing - the exact
+	// defect this column now catches. The client percentage is resolved
+	// against the preset character's own base mana, which is what
+	// newManaCost (sim/core/mana.go) multiplies BaseCost by.
+	if clientSpell.CostPct > 0 && clientSpell.CostType == 0 && spell.Unit != nil {
+		row.ClientCostPct = clientSpell.CostPct
+		row.ClientCostAmt = clientSpell.CostPct / 100 * spell.Unit.BaseMana
 	}
 
 	if spell.Cost != nil {

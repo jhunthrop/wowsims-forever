@@ -44,7 +44,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "498": {
       "name": "Divine Protection",
@@ -98,7 +99,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "633": {
       "name": "Lay on Hands",
@@ -141,7 +143,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "635": {
       "name": "Holy Light",
@@ -173,7 +176,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "639": {
       "name": "Holy Light",
@@ -205,7 +209,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "642": {
       "name": "Divine Shield",
@@ -259,7 +264,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "643": {
       "name": "Devotion Aura",
@@ -302,7 +308,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "647": {
       "name": "Holy Light",
@@ -334,7 +341,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "678": {
       "name": "Holy Strike",
@@ -388,7 +396,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "679": {
       "name": "Holy Strike",
@@ -442,7 +451,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "680": {
       "name": "Holy Strike",
@@ -496,7 +506,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "853": {
       "name": "Hammer of Justice",
@@ -528,7 +539,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "879": {
       "name": "Exorcism",
@@ -560,7 +572,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1020": {
       "name": "Divine Shield",
@@ -614,7 +627,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1022": {
       "name": "Blessing of Protection",
@@ -657,7 +671,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1026": {
       "name": "Holy Light",
@@ -689,7 +704,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1032": {
       "name": "Devotion Aura",
@@ -732,7 +748,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1038": {
       "name": "Blessing of Salvation",
@@ -764,7 +781,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 8.0
     },
     "1042": {
       "name": "Holy Light",
@@ -796,7 +814,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1044": {
       "name": "Blessing of Freedom",
@@ -839,7 +858,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 10.0
     },
     "1152": {
       "name": "Purify",
@@ -882,7 +902,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 8.0
     },
     "1866": {
       "name": "Holy Strike",
@@ -936,7 +957,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2495": {
       "name": "Holy Strike",
@@ -990,7 +1012,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2800": {
       "name": "Lay on Hands",
@@ -1033,7 +1056,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2812": {
       "name": "Holy Wrath",
@@ -1065,7 +1089,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2878": {
       "name": "Turn Undead",
@@ -1108,7 +1133,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3472": {
       "name": "Holy Light",
@@ -1140,7 +1166,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "4987": {
       "name": "Cleanse",
@@ -1194,7 +1221,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 8.0
     },
     "5569": {
       "name": "Holy Strike",
@@ -1248,7 +1276,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5573": {
       "name": "Divine Protection",
@@ -1302,7 +1331,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5588": {
       "name": "Hammer of Justice",
@@ -1334,7 +1364,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5589": {
       "name": "Hammer of Justice",
@@ -1366,7 +1397,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5599": {
       "name": "Blessing of Protection",
@@ -1409,7 +1441,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5614": {
       "name": "Exorcism",
@@ -1441,7 +1474,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5615": {
       "name": "Exorcism",
@@ -1473,7 +1507,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5627": {
       "name": "Turn Undead",
@@ -1516,7 +1551,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5923": {
       "name": "Holy Power",
@@ -1559,7 +1595,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6940": {
       "name": "Blessing of Sacrifice",
@@ -1591,7 +1628,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7294": {
       "name": "Retribution Aura",
@@ -1634,7 +1672,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7328": {
       "name": "Redemption",
@@ -1666,7 +1705,8 @@
           "misc_value": 120,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 80.0
     },
     "10278": {
       "name": "Blessing of Protection",
@@ -1709,7 +1749,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 7.0
     },
     "10290": {
       "name": "Devotion Aura",
@@ -1752,7 +1793,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10291": {
       "name": "Devotion Aura",
@@ -1795,7 +1837,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10292": {
       "name": "Devotion Aura",
@@ -1838,7 +1881,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10293": {
       "name": "Devotion Aura",
@@ -1881,7 +1925,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10298": {
       "name": "Retribution Aura",
@@ -1924,7 +1969,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10299": {
       "name": "Retribution Aura",
@@ -1967,7 +2013,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10300": {
       "name": "Retribution Aura",
@@ -2010,7 +2057,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10301": {
       "name": "Retribution Aura",
@@ -2053,7 +2101,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10308": {
       "name": "Hammer of Justice",
@@ -2085,7 +2134,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10310": {
       "name": "Lay on Hands",
@@ -2128,7 +2178,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10312": {
       "name": "Exorcism",
@@ -2160,7 +2211,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10313": {
       "name": "Exorcism",
@@ -2192,7 +2244,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10314": {
       "name": "Exorcism",
@@ -2224,7 +2277,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10318": {
       "name": "Holy Wrath",
@@ -2256,7 +2310,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10322": {
       "name": "Redemption",
@@ -2288,7 +2343,8 @@
           "misc_value": 260,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 80.0
     },
     "10324": {
       "name": "Redemption",
@@ -2320,7 +2376,8 @@
           "misc_value": 420,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 80.0
     },
     "10326": {
       "name": "Turn Undead",
@@ -2363,7 +2420,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10328": {
       "name": "Holy Light",
@@ -2395,7 +2453,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10329": {
       "name": "Holy Light",
@@ -2427,7 +2486,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10332": {
       "name": "Holy Strike",
@@ -2481,7 +2541,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10333": {
       "name": "Holy Strike",
@@ -2535,7 +2596,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19740": {
       "name": "Blessing of Might",
@@ -2567,7 +2629,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19742": {
       "name": "Blessing of Wisdom",
@@ -2599,7 +2662,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19746": {
       "name": "Concentration Aura",
@@ -2664,7 +2728,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19750": {
       "name": "Flash of Light",
@@ -2696,7 +2761,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19752": {
       "name": "Divine Intervention",
@@ -2750,7 +2816,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19834": {
       "name": "Blessing of Might",
@@ -2782,7 +2849,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19835": {
       "name": "Blessing of Might",
@@ -2814,7 +2882,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19836": {
       "name": "Blessing of Might",
@@ -2846,7 +2915,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19837": {
       "name": "Blessing of Might",
@@ -2878,7 +2948,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19838": {
       "name": "Blessing of Might",
@@ -2910,7 +2981,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19850": {
       "name": "Blessing of Wisdom",
@@ -2942,7 +3014,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19852": {
       "name": "Blessing of Wisdom",
@@ -2974,7 +3047,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19853": {
       "name": "Blessing of Wisdom",
@@ -3006,7 +3080,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19854": {
       "name": "Blessing of Wisdom",
@@ -3038,7 +3113,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19876": {
       "name": "Shadow Resistance Aura",
@@ -3081,7 +3157,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19888": {
       "name": "Frost Resistance Aura",
@@ -3124,7 +3201,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19891": {
       "name": "Fire Resistance Aura",
@@ -3167,7 +3245,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19895": {
       "name": "Shadow Resistance Aura",
@@ -3210,7 +3289,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19896": {
       "name": "Shadow Resistance Aura",
@@ -3253,7 +3333,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19897": {
       "name": "Frost Resistance Aura",
@@ -3296,7 +3377,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19898": {
       "name": "Frost Resistance Aura",
@@ -3339,7 +3421,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19899": {
       "name": "Fire Resistance Aura",
@@ -3382,7 +3465,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19900": {
       "name": "Fire Resistance Aura",
@@ -3425,7 +3509,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19939": {
       "name": "Flash of Light",
@@ -3457,7 +3542,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19940": {
       "name": "Flash of Light",
@@ -3489,7 +3575,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19941": {
       "name": "Flash of Light",
@@ -3521,7 +3608,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19942": {
       "name": "Flash of Light",
@@ -3553,7 +3641,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19943": {
       "name": "Flash of Light",
@@ -3585,7 +3674,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19968": {
       "name": "Holy Light",
@@ -3617,7 +3707,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19977": {
       "name": "Blessing of Light",
@@ -3660,7 +3751,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19978": {
       "name": "Blessing of Light",
@@ -3703,7 +3795,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19979": {
       "name": "Blessing of Light",
@@ -3746,7 +3839,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19980": {
       "name": "Holy Light",
@@ -3778,7 +3872,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19981": {
       "name": "Holy Light",
@@ -3810,7 +3905,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19982": {
       "name": "Holy Light",
@@ -3842,7 +3938,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19993": {
       "name": "Flash of Light",
@@ -3874,7 +3971,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20042": {
       "name": "Improved Blessing of Might",
@@ -3906,7 +4004,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20045": {
       "name": "Improved Blessing of Might",
@@ -3938,7 +4037,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20046": {
       "name": "Improved Blessing of Might",
@@ -3970,7 +4070,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20047": {
       "name": "Improved Blessing of Might",
@@ -4002,7 +4103,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20048": {
       "name": "Improved Blessing of Might",
@@ -4034,7 +4136,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20049": {
       "name": "Vengeance",
@@ -4066,7 +4169,8 @@
           "misc_value": 0,
           "trigger_spell": 20050
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20066": {
       "name": "Repentance",
@@ -4098,7 +4202,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20091": {
       "name": "Improved Retribution Aura",
@@ -4130,7 +4235,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20092": {
       "name": "Improved Retribution Aura",
@@ -4162,7 +4268,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20101": {
       "name": "Benediction",
@@ -4194,7 +4301,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20116": {
       "name": "Consecration",
@@ -4248,7 +4356,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20138": {
       "name": "Improved Devotion Aura",
@@ -4291,7 +4400,8 @@
           "misc_value": 12,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20154": {
       "name": "Seal of Righteousness",
@@ -4323,7 +4433,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20162": {
       "name": "Seal of the Crusader",
@@ -4377,7 +4488,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20163": {
       "name": "Seal of Fury",
@@ -4431,7 +4543,8 @@
           "misc_value": 0,
           "trigger_spell": 20231
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20164": {
       "name": "Seal of Justice",
@@ -4474,7 +4587,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 13.0
     },
     "20165": {
       "name": "Seal of Light",
@@ -4517,7 +4631,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20166": {
       "name": "Seal of Wisdom",
@@ -4560,7 +4675,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20167": {
       "name": "Seal of Light",
@@ -4592,7 +4708,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20168": {
       "name": "Seal of Wisdom",
@@ -4624,7 +4741,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20174": {
       "name": "Guardian's Favor",
@@ -4667,7 +4785,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20183": {
       "name": "Judgement of Fury",
@@ -4721,7 +4840,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20184": {
       "name": "Judgement of Justice",
@@ -4753,7 +4873,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20185": {
       "name": "Judgement of Light",
@@ -4785,7 +4906,8 @@
           "misc_value": 0,
           "trigger_spell": 5373
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20186": {
       "name": "Judgement of Wisdom",
@@ -4817,7 +4939,8 @@
           "misc_value": 0,
           "trigger_spell": 1826
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20187": {
       "name": "Judgement of Righteousness",
@@ -4860,7 +4983,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20188": {
       "name": "Judgement of the Crusader",
@@ -4892,7 +5016,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20194": {
       "name": "Improved Blessing of Salvation",
@@ -4924,7 +5049,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20195": {
       "name": "Improved Blessing of Salvation",
@@ -4956,7 +5082,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20205": {
       "name": "Spiritual Focus",
@@ -4988,7 +5115,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20210": {
       "name": "Illumination",
@@ -5053,7 +5181,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20216": {
       "name": "Divine Favor",
@@ -5085,7 +5214,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 4.0
     },
     "20217": {
       "name": "Blessing of Kings",
@@ -5117,7 +5247,8 @@
           "misc_value": -1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 8.0
     },
     "20218": {
       "name": "Sanctity Aura",
@@ -5160,7 +5291,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20224": {
       "name": "Improved Seals",
@@ -5192,7 +5324,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20231": {
       "name": "Seal of Fury",
@@ -5224,7 +5357,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20232": {
       "name": "Judgement of Fury",
@@ -5267,7 +5401,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20237": {
       "name": "Healing Light",
@@ -5299,7 +5434,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20244": {
       "name": "Improved Blessing of Wisdom",
@@ -5331,7 +5467,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20245": {
       "name": "Improved Blessing of Wisdom",
@@ -5363,7 +5500,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20249": {
       "name": "Improved Flash of Light",
@@ -5395,7 +5533,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20250": {
       "name": "Improved Flash of Light",
@@ -5427,7 +5566,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20251": {
       "name": "Improved Flash of Light",
@@ -5459,7 +5599,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20254": {
       "name": "Improved Concentration Aura",
@@ -5513,7 +5654,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20267": {
       "name": "Judgement of Light",
@@ -5545,7 +5687,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20271": {
       "name": "Judgement",
@@ -5577,7 +5720,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 6.0
     },
     "20280": {
       "name": "Judgement of Righteousness",
@@ -5620,7 +5764,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20281": {
       "name": "Judgement of Righteousness",
@@ -5663,7 +5808,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20282": {
       "name": "Judgement of Righteousness",
@@ -5706,7 +5852,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20283": {
       "name": "Judgement of Righteousness",
@@ -5749,7 +5896,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20284": {
       "name": "Judgement of Righteousness",
@@ -5792,7 +5940,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20285": {
       "name": "Judgement of Righteousness",
@@ -5835,7 +5984,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20286": {
       "name": "Judgement of Righteousness",
@@ -5878,7 +6028,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20287": {
       "name": "Seal of Righteousness",
@@ -5921,7 +6072,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20288": {
       "name": "Seal of Righteousness",
@@ -5964,7 +6116,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20289": {
       "name": "Seal of Righteousness",
@@ -6007,7 +6160,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20290": {
       "name": "Seal of Righteousness",
@@ -6050,7 +6204,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20291": {
       "name": "Seal of Righteousness",
@@ -6093,7 +6248,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20292": {
       "name": "Seal of Righteousness",
@@ -6136,7 +6292,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20293": {
       "name": "Seal of Righteousness",
@@ -6179,7 +6336,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20300": {
       "name": "Judgement of the Crusader",
@@ -6211,7 +6369,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20301": {
       "name": "Judgement of the Crusader",
@@ -6243,7 +6402,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20302": {
       "name": "Judgement of the Crusader",
@@ -6275,7 +6435,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20303": {
       "name": "Judgement of the Crusader",
@@ -6307,7 +6468,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20305": {
       "name": "Seal of the Crusader",
@@ -6361,7 +6523,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20306": {
       "name": "Seal of the Crusader",
@@ -6415,7 +6578,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20307": {
       "name": "Seal of the Crusader",
@@ -6469,7 +6633,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20308": {
       "name": "Seal of the Crusader",
@@ -6523,7 +6688,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20333": {
       "name": "Seal of Light",
@@ -6555,7 +6721,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20334": {
       "name": "Seal of Light",
@@ -6587,7 +6754,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20335": {
       "name": "Improved Seal of the Crusader",
@@ -6630,7 +6798,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20336": {
       "name": "Improved Seal of the Crusader",
@@ -6673,7 +6842,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20337": {
       "name": "Improved Seal of the Crusader",
@@ -6716,7 +6886,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20340": {
       "name": "Seal of Light",
@@ -6748,7 +6919,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20341": {
       "name": "Judgement of Light",
@@ -6780,7 +6952,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20342": {
       "name": "Judgement of Light",
@@ -6812,7 +6985,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20343": {
       "name": "Judgement of Light",
@@ -6844,7 +7018,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20344": {
       "name": "Judgement of Light",
@@ -6876,7 +7051,8 @@
           "misc_value": 0,
           "trigger_spell": 5373
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20345": {
       "name": "Judgement of Light",
@@ -6908,7 +7084,8 @@
           "misc_value": 0,
           "trigger_spell": 5373
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20346": {
       "name": "Judgement of Light",
@@ -6940,7 +7117,8 @@
           "misc_value": 0,
           "trigger_spell": 5373
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20347": {
       "name": "Seal of Light",
@@ -6983,7 +7161,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20348": {
       "name": "Seal of Light",
@@ -7026,7 +7205,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20349": {
       "name": "Seal of Light",
@@ -7069,7 +7249,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20350": {
       "name": "Seal of Wisdom",
@@ -7101,7 +7282,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20351": {
       "name": "Seal of Wisdom",
@@ -7133,7 +7315,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20354": {
       "name": "Judgement of Wisdom",
@@ -7165,7 +7348,8 @@
           "misc_value": 0,
           "trigger_spell": 1826
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20355": {
       "name": "Judgement of Wisdom",
@@ -7197,7 +7381,8 @@
           "misc_value": 0,
           "trigger_spell": 1826
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20356": {
       "name": "Seal of Wisdom",
@@ -7240,7 +7425,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20357": {
       "name": "Seal of Wisdom",
@@ -7283,7 +7469,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20359": {
       "name": "Lasting Judgement",
@@ -7315,7 +7502,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20360": {
       "name": "Lasting Judgement",
@@ -7347,7 +7535,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20361": {
       "name": "Lasting Judgement",
@@ -7379,7 +7568,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20375": {
       "name": "Seal of Command",
@@ -7422,7 +7612,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20411": {
       "name": "Judgement of Fury",
@@ -7476,7 +7667,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20412": {
       "name": "Judgement of Fury",
@@ -7530,7 +7722,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20413": {
       "name": "Judgement of Fury",
@@ -7584,7 +7777,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20414": {
       "name": "Judgement of Fury",
@@ -7638,7 +7832,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20415": {
       "name": "Seal of Fury",
@@ -7670,7 +7865,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20416": {
       "name": "Seal of Fury",
@@ -7702,7 +7898,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20417": {
       "name": "Seal of Fury",
@@ -7734,7 +7931,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20418": {
       "name": "Seal of Fury",
@@ -7766,7 +7964,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20419": {
       "name": "Seal of Fury",
@@ -7820,7 +8019,8 @@
           "misc_value": 0,
           "trigger_spell": 20411
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20421": {
       "name": "Seal of Fury",
@@ -7874,7 +8074,8 @@
           "misc_value": 0,
           "trigger_spell": 20416
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20422": {
       "name": "Seal of Fury",
@@ -7928,7 +8129,8 @@
           "misc_value": 0,
           "trigger_spell": 20417
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20423": {
       "name": "Seal of Fury",
@@ -7982,7 +8184,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20424": {
       "name": "Seal of Command",
@@ -8014,7 +8217,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20425": {
       "name": "Judgement of Command",
@@ -8046,7 +8250,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20467": {
       "name": "Judgement of Command",
@@ -8078,7 +8283,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20468": {
       "name": "Improved Righteous Fury",
@@ -8110,7 +8316,8 @@
           "misc_value": 12,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20473": {
       "name": "Holy Shock",
@@ -8142,7 +8349,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20487": {
       "name": "Improved Hammer of Justice",
@@ -8174,7 +8382,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20729": {
       "name": "Blessing of Sacrifice",
@@ -8206,7 +8415,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20772": {
       "name": "Redemption",
@@ -8238,7 +8448,8 @@
           "misc_value": 600,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 80.0
     },
     "20773": {
       "name": "Redemption",
@@ -8270,7 +8481,8 @@
           "misc_value": 800,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 80.0
     },
     "20915": {
       "name": "Seal of Command",
@@ -8313,7 +8525,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20918": {
       "name": "Seal of Command",
@@ -8356,7 +8569,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20919": {
       "name": "Seal of Command",
@@ -8399,7 +8613,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20920": {
       "name": "Seal of Command",
@@ -8442,7 +8657,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20922": {
       "name": "Consecration",
@@ -8496,7 +8712,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20923": {
       "name": "Consecration",
@@ -8550,7 +8767,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20924": {
       "name": "Consecration",
@@ -8604,7 +8822,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20925": {
       "name": "Holy Shield",
@@ -8658,7 +8877,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20927": {
       "name": "Holy Shield",
@@ -8712,7 +8932,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20928": {
       "name": "Holy Shield",
@@ -8766,7 +8987,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20929": {
       "name": "Holy Shock",
@@ -8798,7 +9020,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20930": {
       "name": "Holy Shock",
@@ -8830,7 +9053,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20961": {
       "name": "Judgement of Command",
@@ -8862,7 +9086,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20962": {
       "name": "Judgement of Command",
@@ -8894,7 +9119,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20963": {
       "name": "Judgement of Command",
@@ -8926,7 +9152,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20964": {
       "name": "Judgement of Command",
@@ -8958,7 +9185,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20965": {
       "name": "Judgement of Command",
@@ -8990,7 +9218,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20966": {
       "name": "Judgement of Command",
@@ -9022,7 +9251,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20967": {
       "name": "Judgement of Command",
@@ -9054,7 +9284,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20968": {
       "name": "Judgement of Command",
@@ -9086,7 +9317,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21082": {
       "name": "Seal of the Crusader",
@@ -9140,7 +9372,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21084": {
       "name": "Seal of Righteousness",
@@ -9183,7 +9416,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21183": {
       "name": "Judgement of the Crusader",
@@ -9215,7 +9449,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21744": {
       "name": "Spirit of Blessing",
@@ -9247,7 +9482,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22270": {
       "name": "Divine Intervention (NEWTEST)",
@@ -9279,7 +9515,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23300": {
       "name": "Seal of the Crusader Judgement Increase",
@@ -9311,7 +9548,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23302": {
       "name": "Hammer of Justice Cooldown Reduction",
@@ -9343,7 +9581,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23415": {
       "name": "Improved Blessing of Protection",
@@ -9375,7 +9614,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23564": {
       "name": "Improved Judgement of Light",
@@ -9407,7 +9647,8 @@
           "misc_value": 18,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23565": {
       "name": "Increased Aura Radii",
@@ -9439,7 +9680,8 @@
           "misc_value": 6,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23591": {
       "name": "Judgement",
@@ -9471,7 +9713,8 @@
           "misc_value": 0,
           "trigger_spell": 23590
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24188": {
       "name": "Improved Hammer of Justice",
@@ -9503,7 +9746,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24239": {
       "name": "Hammer of Wrath",
@@ -9535,7 +9779,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24274": {
       "name": "Hammer of Wrath",
@@ -9567,7 +9812,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24275": {
       "name": "Hammer of Wrath",
@@ -9599,7 +9845,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24457": {
       "name": "Improved Holy Light",
@@ -9631,7 +9878,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24460": {
       "name": "Improved Blessings",
@@ -9663,7 +9911,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24833": {
       "name": "Holy Mightstone",
@@ -9706,7 +9955,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25282": {
       "name": "Shield of Rajaxx",
@@ -9738,7 +9988,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25290": {
       "name": "Blessing of Wisdom",
@@ -9770,7 +10021,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25291": {
       "name": "Blessing of Might",
@@ -9802,7 +10054,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25292": {
       "name": "Holy Light",
@@ -9834,7 +10087,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25713": {
       "name": "Seal of Righteousness",
@@ -9866,7 +10120,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25735": {
       "name": "Seal of Righteousness",
@@ -9898,7 +10153,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25736": {
       "name": "Seal of Righteousness",
@@ -9930,7 +10186,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25737": {
       "name": "Seal of Righteousness",
@@ -9962,7 +10219,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25738": {
       "name": "Seal of Righteousness",
@@ -9994,7 +10252,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25739": {
       "name": "Seal of Righteousness",
@@ -10026,7 +10285,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25740": {
       "name": "Seal of Righteousness",
@@ -10058,7 +10318,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25741": {
       "name": "Seal of Righteousness",
@@ -10090,7 +10351,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25742": {
       "name": "Seal of Righteousness",
@@ -10122,7 +10384,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25751": {
       "name": "Copy of Judgement of Light",
@@ -10154,7 +10417,8 @@
           "misc_value": 0,
           "trigger_spell": 5373
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25752": {
       "name": "Judgement of Light",
@@ -10186,7 +10450,8 @@
           "misc_value": 0,
           "trigger_spell": 25753
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25753": {
       "name": "Judgement of Light",
@@ -10218,7 +10483,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25757": {
       "name": "Judgement of Wisdom",
@@ -10250,7 +10516,8 @@
           "misc_value": 0,
           "trigger_spell": 25758
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25758": {
       "name": "Judgement of Wisdom",
@@ -10282,7 +10549,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25771": {
       "name": "Forbearance",
@@ -10314,7 +10582,8 @@
           "misc_value": 25,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25780": {
       "name": "Righteous Fury",
@@ -10368,7 +10637,8 @@
           "misc_value": 12,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 30.0
     },
     "25782": {
       "name": "Greater Blessing of Might",
@@ -10400,7 +10670,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25890": {
       "name": "Greater Blessing of Light",
@@ -10443,7 +10714,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25894": {
       "name": "Greater Blessing of Wisdom",
@@ -10475,7 +10747,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25895": {
       "name": "Greater Blessing of Salvation",
@@ -10507,7 +10780,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 16.0
     },
     "25898": {
       "name": "Greater Blessing of Kings",
@@ -10539,7 +10813,8 @@
           "misc_value": -1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25902": {
       "name": "Holy Shock",
@@ -10571,7 +10846,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25903": {
       "name": "Holy Shock",
@@ -10603,7 +10879,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25911": {
       "name": "Holy Shock",
@@ -10635,7 +10912,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25912": {
       "name": "Holy Shock",
@@ -10667,7 +10945,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25913": {
       "name": "Holy Shock",
@@ -10699,7 +10978,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25914": {
       "name": "Holy Shock",
@@ -10731,7 +11011,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25916": {
       "name": "Greater Blessing of Might",
@@ -10763,7 +11044,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25918": {
       "name": "Greater Blessing of Wisdom",
@@ -10795,7 +11077,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25942": {
       "name": "Judgement of the Crusader",
@@ -10827,7 +11110,8 @@
           "misc_value": 0,
           "trigger_spell": 25943
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25943": {
       "name": "Judgement of the Crusader",
@@ -10859,7 +11143,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25944": {
       "name": "Judgement of Justice",
@@ -10891,7 +11176,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25945": {
       "name": "Judgement of Justice",
@@ -10923,7 +11209,8 @@
           "misc_value": 0,
           "trigger_spell": 25944
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25956": {
       "name": "Improved Judgement",
@@ -10955,7 +11242,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25997": {
       "name": "Eye for an Eye",
@@ -10987,7 +11275,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26130": {
       "name": "Avenger Judgment Bonus",
@@ -11019,7 +11308,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26135": {
       "name": "Battlegear of Eternal Justice",
@@ -11051,7 +11341,8 @@
           "misc_value": 0,
           "trigger_spell": 26975
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26573": {
       "name": "Consecration",
@@ -11105,7 +11396,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26650": {
       "name": "Blessing of Light",
@@ -11137,7 +11429,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27498": {
       "name": "Crusader's Wrath",
@@ -11169,7 +11462,8 @@
           "misc_value": 0,
           "trigger_spell": 27499
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27774": {
       "name": "The Furious Storm",
@@ -11201,7 +11495,8 @@
           "misc_value": 0,
           "trigger_spell": 27775
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27785": {
       "name": "Hunter Armor Energize",
@@ -11233,7 +11528,8 @@
           "misc_value": 0,
           "trigger_spell": 27786
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27787": {
       "name": "Rogue Armor Energize",
@@ -11265,7 +11561,8 @@
           "misc_value": 0,
           "trigger_spell": 27788
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27847": {
       "name": "Cleanse Cost Reduced",
@@ -11297,7 +11594,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27848": {
       "name": "Seal Duration Increase",
@@ -11329,7 +11627,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27850": {
       "name": "Purify and Cleanse Cost Reduced",
@@ -11361,7 +11660,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28774": {
       "name": "Lay Hands",
@@ -11393,7 +11693,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28775": {
       "name": "Judgement of Light",
@@ -11425,7 +11726,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28787": {
       "name": "Cleanse",
@@ -11457,7 +11759,8 @@
           "misc_value": 0,
           "trigger_spell": 28788
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28789": {
       "name": "Holy Power",
@@ -11489,7 +11792,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28851": {
       "name": "Increased Flash of Light Healing",
@@ -11521,7 +11825,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28852": {
       "name": "Improved Seal of the Crusader",
@@ -11564,7 +11869,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28853": {
       "name": "Libram of Divinity",
@@ -11596,7 +11902,8 @@
           "misc_value": 0,
           "trigger_spell": 1302540
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29196": {
       "name": "Corrupted Mind",
@@ -11628,7 +11935,8 @@
           "misc_value": 0,
           "trigger_spell": 29197
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29197": {
       "name": "Corrupted Mind",
@@ -11660,7 +11968,8 @@
           "misc_value": 4327,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "53489": {
       "name": "The Art of War",
@@ -11692,7 +12001,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "53601": {
       "name": "Sacred Shield",
@@ -11735,7 +12045,8 @@
           "misc_value": 127,
           "trigger_spell": 58597
         }
-      ]
+      ],
+      "cost_pct": 12.0
     },
     "53672": {
       "name": "Infusion of Light",
@@ -11778,7 +12089,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "58597": {
       "name": "Sacred Shield",
@@ -11821,7 +12133,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "407627": {
       "name": "Righteous Fury",
@@ -11930,7 +12243,8 @@
           "misc_value": 12,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "407632": {
       "name": "Hammer of the Righteous",
@@ -11984,7 +12298,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 6.0
     },
     "407774": {
       "name": "Hand of Reckoning",
@@ -12016,7 +12331,8 @@
           "misc_value": 25780,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "407778": {
       "name": "Divine Storm",
@@ -12070,7 +12386,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 12.0
     },
     "407782": {
       "name": "Divine Storm",
@@ -12102,7 +12419,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "407784": {
       "name": "Divine Storm",
@@ -12134,7 +12452,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "407788": {
       "name": "Avenging Wrath",
@@ -12188,7 +12507,8 @@
           "misc_value": 0,
           "trigger_spell": 25771
         }
-      ]
+      ],
+      "cost_pct": 8.0
     },
     "407798": {
       "name": "Seal of Martyrdom",
@@ -12253,7 +12573,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 4.0
     },
     "407799": {
       "name": "Seal of Martyrdom",
@@ -12296,7 +12617,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "407800": {
       "name": "Seal of Martyrdom",
@@ -12328,7 +12650,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "407803": {
       "name": "Judgement of Martyrdom",
@@ -12360,7 +12683,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "407804": {
       "name": "Divine Sacrifice",
@@ -12414,7 +12738,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "407805": {
       "name": "Sacrifice Redeemed",
@@ -12457,7 +12782,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "407880": {
       "name": "Inspiration Exemplar",
@@ -12489,7 +12815,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 2.0
     },
     "407881": {
       "name": "Inspiration Exemplar",
@@ -12543,7 +12870,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "407957": {
       "name": "Avenging Wrath",
@@ -12575,7 +12903,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409324": {
       "name": "Ancestral Guidance",
@@ -12618,7 +12947,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409906": {
       "name": "Beacon of Light",
@@ -12650,7 +12980,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409911": {
       "name": "Hand of Reckoning",
@@ -12682,7 +13013,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409914": {
       "name": "Crusader Strike",
@@ -12714,7 +13046,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409922": {
       "name": "Hammer of the Righteous",
@@ -12746,7 +13079,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409924": {
       "name": "Divine Storm",
@@ -12778,7 +13112,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409925": {
       "name": "Divine Light",
@@ -12810,7 +13145,8 @@
           "misc_value": 417347,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409930": {
       "name": "Libram of Judgement",
@@ -12842,7 +13178,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409932": {
       "name": "Aura Mastery",
@@ -12874,7 +13211,8 @@
           "misc_value": 399966,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409933": {
       "name": "Avenger's Shield",
@@ -12906,7 +13244,8 @@
           "misc_value": 399966,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409934": {
       "name": "Avenging Wrath",
@@ -12938,7 +13277,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409935": {
       "name": "Hand of Sacrifice",
@@ -12970,7 +13310,8 @@
           "misc_value": 399966,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409936": {
       "name": "Inspiration Exemplar",
@@ -13002,7 +13343,8 @@
           "misc_value": 399966,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "412018": {
       "name": "Sacred Shield",
@@ -13045,7 +13387,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "412019": {
       "name": "Sacred Shield",
@@ -13099,7 +13442,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 12.0
     },
     "415058": {
       "name": "Guarded by the Light",
@@ -13131,7 +13475,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415059": {
       "name": "Guarded by the Light",
@@ -13163,7 +13508,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415068": {
       "name": "Exorcism",
@@ -13206,7 +13552,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415069": {
       "name": "Exorcism",
@@ -13249,7 +13596,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415070": {
       "name": "Exorcism",
@@ -13292,7 +13640,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415071": {
       "name": "Exorcism",
@@ -13335,7 +13684,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415072": {
       "name": "Exorcism",
@@ -13378,7 +13728,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415073": {
       "name": "Exorcism",
@@ -13421,7 +13772,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415703": {
       "name": "Sacred Shield",
@@ -13453,7 +13805,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415706": {
       "name": "The Art of War",
@@ -13485,7 +13838,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415755": {
       "name": "Guarded by the Light",
@@ -13517,7 +13871,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "416863": {
       "name": "Aura Mastery",
@@ -13571,7 +13926,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "421510": {
       "name": "Libram of Blessings",
@@ -13603,7 +13959,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "421535": {
       "name": "Libram of Justice",
@@ -13635,7 +13992,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425614": {
       "name": "Hallowed Ground",
@@ -13667,7 +14025,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425615": {
       "name": "Aegis",
@@ -13699,7 +14058,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425616": {
       "name": "Rebuke",
@@ -13731,7 +14091,8 @@
           "misc_value": 399966,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426065": {
       "name": "Infusion of Light",
@@ -13763,7 +14124,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426157": {
       "name": "The Art of War",
@@ -13806,7 +14168,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426162": {
       "name": "Fanaticism",
@@ -13838,7 +14201,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426173": {
       "name": "Enlightened Judgements",
@@ -13881,7 +14245,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426174": {
       "name": "Malleable Protection",
@@ -13913,7 +14278,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426179": {
       "name": "Infusion of Light",
@@ -13945,7 +14311,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "428490": {
       "name": "Judgement",
@@ -13977,7 +14344,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "428491": {
       "name": "Increased Aura Radii",
@@ -14009,7 +14377,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "428909": {
       "name": "Light's Grace",
@@ -14041,7 +14410,8 @@
           "misc_value": 0,
           "trigger_spell": 428912
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "428912": {
       "name": "Light's Grace",
@@ -14073,7 +14443,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429133": {
       "name": "Improved Sanctuary",
@@ -14116,7 +14487,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429139": {
       "name": "Wrath",
@@ -14148,7 +14520,8 @@
           "misc_value": 12,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429142": {
       "name": "Fanaticism",
@@ -14191,7 +14564,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429144": {
       "name": "Purifying Power",
@@ -14234,7 +14608,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429145": {
       "name": "Holy Wrath",
@@ -14266,7 +14641,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429146": {
       "name": "Holy Wrath",
@@ -14298,7 +14674,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429151": {
       "name": "Hammer of Wrath",
@@ -14330,7 +14707,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 12.0
     },
     "429152": {
       "name": "Improved Hammer of Wrath",
@@ -14373,7 +14751,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429243": {
       "name": "Light's Grace",
@@ -14405,7 +14784,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429245": {
       "name": "Improved Sanctuary",
@@ -14437,7 +14817,8 @@
           "misc_value": 417345,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429248": {
       "name": "Wrath",
@@ -14469,7 +14850,8 @@
           "misc_value": 417345,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429250": {
       "name": "Fanaticism",
@@ -14501,7 +14883,8 @@
           "misc_value": 417345,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429254": {
       "name": "Purifying Power",
@@ -14533,7 +14916,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429259": {
       "name": "Improved Hammer of Wrath",
@@ -14565,7 +14949,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429578": {
       "name": "Libram of Banishment",
@@ -14597,7 +14982,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435833": {
       "name": "[DNT] Tarnished Prayer Bead II",
@@ -14629,7 +15015,8 @@
           "misc_value": 0,
           "trigger_spell": 435831
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435844": {
       "name": "[DNT] Tarnished Prayer Bead III",
@@ -14661,7 +15048,8 @@
           "misc_value": 0,
           "trigger_spell": 435839
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435962": {
       "name": "Libram of Deliverance",
@@ -14693,7 +15081,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435977": {
       "name": "Energized Hyperconductor",
@@ -14725,7 +15114,8 @@
           "misc_value": 0,
           "trigger_spell": 435978
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435982": {
       "name": "Energize",
@@ -14757,7 +15147,8 @@
           "misc_value": 0,
           "trigger_spell": 435981
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435984": {
       "name": "Enhanced Blessings",
@@ -14800,7 +15191,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435994": {
       "name": "Dormant Rune",
@@ -14832,7 +15224,8 @@
           "misc_value": 0,
           "trigger_spell": 436011
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436284": {
       "name": "Improved Holy Shock",
@@ -14864,7 +15257,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436391": {
       "name": "Decoy Totem",
@@ -14907,7 +15301,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "437059": {
       "name": "Seal Cost Reduced",
@@ -14939,7 +15334,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "437063": {
       "name": "Infusion of Light",
@@ -14971,7 +15367,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440651": {
       "name": "Sacred Shield",
@@ -15003,7 +15400,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440658": {
       "name": "Shield of Righteousness",
@@ -15035,7 +15433,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 6.0
     },
     "440672": {
       "name": "Righteous Judgement",
@@ -15067,7 +15466,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440675": {
       "name": "Righteous Judgement",
@@ -15099,7 +15499,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440677": {
       "name": "Righteous Judgement",
@@ -15131,7 +15532,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440789": {
       "name": "Shield of Righteousness",
@@ -15163,7 +15565,8 @@
           "misc_value": 417347,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440791": {
       "name": "Shock and Awe",
@@ -15195,7 +15598,8 @@
           "misc_value": 417347,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440794": {
       "name": "Righteous Vengeance",
@@ -15227,7 +15631,8 @@
           "misc_value": 417347,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "442948": {
       "name": "Blessing of Protection",
@@ -15270,7 +15675,8 @@
           "misc_value": 81573,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 7.0
     },
     "444894": {
       "name": "Holy Shock",
@@ -15302,7 +15708,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "446213": {
       "name": "Improved Holy Shield",
@@ -15334,7 +15741,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "449935": {
       "name": "The Furious Storm",
@@ -15366,7 +15774,8 @@
           "misc_value": 0,
           "trigger_spell": 449934
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "449980": {
       "name": "Libram of Holy Alacrity",
@@ -15398,7 +15807,8 @@
           "misc_value": 0,
           "trigger_spell": 449982
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "449982": {
       "name": "Libram of Holy Alacrity",
@@ -15430,7 +15840,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "450625": {
       "name": "Item - Crusader's Wrath Proc - Lightforge Armor",
@@ -15462,7 +15873,8 @@
           "misc_value": 0,
           "trigger_spell": 27499
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "450626": {
       "name": "Item - The Furious Storm Proc",
@@ -15494,7 +15906,8 @@
           "misc_value": 0,
           "trigger_spell": 27775
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456488": {
       "name": "S03 - Item - T1 - Paladin - Holy 2P Bonus",
@@ -15526,7 +15939,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456492": {
       "name": "S03 - Item - T1 - Paladin - Holy 6P Bonus",
@@ -15558,7 +15972,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456494": {
       "name": "S03 - Item - T1 - Paladin - Retribution 2P Bonus",
@@ -15590,7 +16005,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456496": {
       "name": "Judgement of the Crusader",
@@ -15622,7 +16038,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456533": {
       "name": "S03 - Item - T1 - Paladin - Retribution 6P Bonus",
@@ -15665,7 +16082,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456536": {
       "name": "S03 - Item - T1 - Paladin - Protection 2P Bonus",
@@ -15697,7 +16115,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456538": {
       "name": "S03 - Item - T1 - Paladin - Protection 4P Bonus",
@@ -15729,7 +16148,8 @@
           "misc_value": 0,
           "trigger_spell": 456540
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456541": {
       "name": "S03 - Item - T1 - Paladin - Protection 6P Bonus",
@@ -15772,7 +16192,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456544": {
       "name": "Holy Shield",
@@ -15804,7 +16225,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458285": {
       "name": "Consecration",
@@ -15836,7 +16258,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458286": {
       "name": "Consecration",
@@ -15868,7 +16291,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458287": {
       "name": "Hallowed Ground",
@@ -15900,7 +16324,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458312": {
       "name": "Divine Protection",
@@ -15932,7 +16357,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458318": {
       "name": "Malleable Protection",
@@ -15997,7 +16423,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458371": {
       "name": "Divine Protection",
@@ -16029,7 +16456,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458856": {
       "name": "Divine Light",
@@ -16072,7 +16500,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 61.0
     },
     "458857": {
       "name": "Divine Light",
@@ -16104,7 +16533,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458860": {
       "name": "Divine Light",
@@ -16136,7 +16566,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459601": {
       "name": "Judgement Damage Increase",
@@ -16168,7 +16599,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459602": {
       "name": "Holy Shock Critical Chance Increase",
@@ -16200,7 +16632,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461290": {
       "name": "Libram of the Consecrated",
@@ -16232,7 +16665,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461292": {
       "name": "Libram of the Devoted",
@@ -16264,7 +16698,8 @@
           "misc_value": 0,
           "trigger_spell": 461309
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461294": {
       "name": "Libram of Holy Alacrity",
@@ -16296,7 +16731,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462814": {
       "name": "S03 - Tuning and Overrides Passive - Paladin",
@@ -16361,7 +16797,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462834": {
       "name": "Shock and Awe",
@@ -16404,7 +16841,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462853": {
       "name": "Hand of Sacrifice",
@@ -16447,7 +16885,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 6.0
     },
     "463146": {
       "name": "Libram of the Consecrated",
@@ -16479,7 +16918,8 @@
           "misc_value": 0,
           "trigger_spell": 461290
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "466503": {
       "name": "S03 - Tuning and Overrides Passive - Paladin",
@@ -16522,7 +16962,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467506": {
       "name": "S03 - Item - T2 - Paladin - Holy 2P Bonus",
@@ -16554,7 +16995,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467507": {
       "name": "S03 - Item - T2 - Paladin - Holy 4P Bonus",
@@ -16586,7 +17028,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467513": {
       "name": "S03 - Item - T2 - Paladin - Holy 6P Bonus",
@@ -16618,7 +17061,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467518": {
       "name": "S03 - Item - T2 - Paladin - Retribution 2P Bonus",
@@ -16650,7 +17094,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467526": {
       "name": "S03 - Item - T2 - Paladin - Retribution 4P Bonus",
@@ -16693,7 +17138,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467529": {
       "name": "S03 - Item - T2 - Paladin - Retribution 6P Bonus",
@@ -16725,7 +17171,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467531": {
       "name": "S03 - Item - T2 - Paladin - Protection 2P Bonus",
@@ -16757,7 +17204,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467532": {
       "name": "S03 - Item - T2 - Paladin - Protection 4P Bonus",
@@ -16789,7 +17237,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467536": {
       "name": "S03 - Item - T2 - Paladin - Protection 6P Bonus",
@@ -16821,7 +17270,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468401": {
       "name": "S03 - Item - ZG - Paladin - Caster 2P Bonus",
@@ -16853,7 +17303,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468428": {
       "name": "S03 - Item - ZG - Paladin - Caster 3P Bonus",
@@ -16885,7 +17336,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468431": {
       "name": "S03 - Item - ZG - Paladin - Caster 5P Bonus",
@@ -16928,7 +17380,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468913": {
       "name": "Libram of Awe",
@@ -16971,7 +17424,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470078": {
       "name": "Libram of Plenty",
@@ -17003,7 +17457,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470246": {
       "name": "Libram of Wrath",
@@ -17035,7 +17490,8 @@
           "misc_value": 0,
           "trigger_spell": 470271
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470263": {
       "name": "Libram of Avenging",
@@ -17078,7 +17534,8 @@
           "misc_value": 17,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470271": {
       "name": "Libram of Wrath",
@@ -17143,7 +17600,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213349": {
       "name": "S03 - Item - TAQ - Paladin - Holy 2P Bonus",
@@ -17175,7 +17633,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213353": {
       "name": "S03 - Item - TAQ - Paladin - Holy 4P Bonus",
@@ -17207,7 +17666,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213397": {
       "name": "S03 - Item - TAQ - Paladin - Retribution 2P Bonus",
@@ -17239,7 +17699,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213406": {
       "name": "S03 - Item - TAQ - Paladin - Retribution 4P Bonus",
@@ -17271,7 +17732,8 @@
           "misc_value": 0,
           "trigger_spell": 1217927
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213408": {
       "name": "Blessing of Kings",
@@ -17303,7 +17765,8 @@
           "misc_value": -1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213410": {
       "name": "S03 - Item - TAQ - Paladin - Protection 2P Bonus",
@@ -17335,7 +17798,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213413": {
       "name": "S03 - Item - TAQ - Paladin - Protection 4P Bonus",
@@ -17367,7 +17831,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213415": {
       "name": "Shielded in Righteousness",
@@ -17399,7 +17864,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213467": {
       "name": "S03 - Item - RAQ - Paladin - Retribution 3P Bonus",
@@ -17431,7 +17897,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214058": {
       "name": "Enchanted Prayer Tome",
@@ -17463,7 +17930,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214158": {
       "name": "Libram of Purification",
@@ -17495,7 +17963,8 @@
           "misc_value": 0,
           "trigger_spell": 1214157
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214296": {
       "name": "Improved Exorcism/Crusader Strike",
@@ -17527,7 +17996,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214297": {
       "name": "Improved Holy Shock",
@@ -17559,7 +18029,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214298": {
       "name": "Libram of Sanctity",
@@ -17591,7 +18062,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214299": {
       "name": "Improved Hammer of the Righteous/Shield of Righteousness",
@@ -17623,7 +18095,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1216482": {
       "name": "Noxious Breath",
@@ -17666,7 +18139,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1217927": {
       "name": "Excommunication",
@@ -17709,7 +18183,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219010": {
       "name": "S03 - Item - Naxxramas - Paladin - Holy 2P Bonus",
@@ -17752,7 +18227,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219059": {
       "name": "S03 - Item - Naxxramas - Paladin - Holy 4P Bonus",
@@ -17784,7 +18260,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219098": {
       "name": "S03 - Item - Naxxramas - Paladin - Holy 6P Bonus",
@@ -17816,7 +18293,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219189": {
       "name": "S03 - Item - Naxxramas - Paladin - Retribution 2P Bonus",
@@ -17848,7 +18326,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219191": {
       "name": "S03 - Item - Naxxramas - Paladin - Retribution 4P Bonus",
@@ -17913,7 +18392,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219193": {
       "name": "S03 - Item - Naxxramas - Paladin - Retribution 6P Bonus",
@@ -17945,7 +18425,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219205": {
       "name": "S03 - Item - Naxxramas - Paladin - Protection 2P Bonus",
@@ -17988,7 +18469,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219206": {
       "name": "Hand of Reckoning",
@@ -18031,7 +18513,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219225": {
       "name": "S03 - Item - Naxxramas - Paladin - Protection 4P Bonus",
@@ -18074,7 +18557,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219226": {
       "name": "S03 - Item - Naxxramas - Paladin - Protection 6P Bonus",
@@ -18106,7 +18590,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1220645": {
       "name": "Improved Holy Light/Holy Shock/Sacred Shield",
@@ -18138,7 +18623,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1224553": {
       "name": "Sanctified Light",
@@ -18170,7 +18656,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1224692": {
       "name": "Divinity",
@@ -18213,7 +18700,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1224697": {
       "name": "Sacred Duty",
@@ -18256,7 +18744,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226451": {
       "name": "Emergency",
@@ -18299,7 +18788,8 @@
           "misc_value": 21,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226452": {
       "name": "S03 - Item - Scarlet Enclave - Paladin - Holy 2P Bonus",
@@ -18331,7 +18821,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226454": {
       "name": "S03 - Item - Scarlet Enclave - Paladin - Holy 4P Bonus",
@@ -18363,7 +18854,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226455": {
       "name": "Charity",
@@ -18395,7 +18887,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226459": {
       "name": "S03 - Item - Scarlet Enclave - Paladin - Holy 6P Bonus",
@@ -18427,7 +18920,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226460": {
       "name": "S03 - Item - Scarlet Enclave - Paladin - Retribution 2P Bonus",
@@ -18459,7 +18953,8 @@
           "misc_value": 0,
           "trigger_spell": 1226461
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226461": {
       "name": "Holy Power",
@@ -18502,7 +18997,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226462": {
       "name": "S03 - Item - Scarlet Enclave - Paladin - Retribution 4P Bonus",
@@ -18545,7 +19041,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226463": {
       "name": "S03 - Item - Scarlet Enclave - Paladin - Retribution 6P Bonus",
@@ -18577,7 +19074,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226464": {
       "name": "Templar",
@@ -18609,7 +19107,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226466": {
       "name": "Righteous Shield",
@@ -18641,7 +19140,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226467": {
       "name": "S03 - Item - Scarlet Enclave - Paladin - Protection 2P Bonus",
@@ -18673,7 +19173,8 @@
           "misc_value": 0,
           "trigger_spell": 1226466
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226477": {
       "name": "S03 - Item - Scarlet Enclave - Paladin - Protection 4P Bonus",
@@ -18705,7 +19206,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226479": {
       "name": "S03 - Item - Scarlet Enclave - Paladin - Protection 6P Bonus",
@@ -18737,7 +19239,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232104": {
       "name": "Infusion of Souls",
@@ -18769,7 +19272,8 @@
           "misc_value": 21,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1233525": {
       "name": "Avenging Shield",
@@ -18801,7 +19305,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234299": {
       "name": "Leogan",
@@ -18833,7 +19338,8 @@
           "misc_value": 21,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1237268": {
       "name": "Holy Conduit",
@@ -18865,7 +19371,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1239543": {
       "name": "Sunlight",
@@ -18897,7 +19404,8 @@
           "misc_value": 0,
           "trigger_spell": 1239548
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240571": {
       "name": "S03 - Item - Scarlet Enclave - Paladin - Shockadin 2P Bonus",
@@ -18929,7 +19437,8 @@
           "misc_value": 0,
           "trigger_spell": 1226461
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240573": {
       "name": "S03 - Item - Scarlet Enclave - Paladin - Shockadin 6P Bonus",
@@ -18961,7 +19470,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1240574": {
       "name": "Templar",
@@ -18993,7 +19503,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1249005": {
       "name": "Seal Cost Reduction",
@@ -19025,7 +19536,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1262310": {
       "name": "The Quick and the Dead",
@@ -19057,7 +19569,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1262647": {
       "name": "Reagent Economy",
@@ -19089,7 +19602,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1280345": {
       "name": "Consecration",
@@ -19132,7 +19646,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1280346": {
       "name": "Consecration",
@@ -19175,7 +19690,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1280347": {
       "name": "Consecration",
@@ -19218,7 +19734,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1280348": {
       "name": "Consecration",
@@ -19261,7 +19778,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1280349": {
       "name": "Consecration",
@@ -19304,7 +19822,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1280353": {
       "name": "Consecration",
@@ -19347,7 +19866,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1286253": {
       "name": "(DNT) Blessing of Might - TEST RAID SPELL",
@@ -19379,7 +19899,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1291083": {
       "name": "Swift Judgement Cooldown Reduction",
@@ -19411,7 +19932,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1291086": {
       "name": "Judgement Increased Damage",
@@ -19443,7 +19965,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1291089": {
       "name": "Holy Light Mana Cost Reduction",
@@ -19475,7 +19998,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293544": {
       "name": "Increased Flash of Light Crit Chance",
@@ -19507,7 +20031,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293630": {
       "name": "Improved Redemption",
@@ -19539,7 +20064,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1300948": {
       "name": "1.60.0 - Item - Tier 1 - Paladin - Holy 2P Bonus - Spirit",
@@ -19571,7 +20097,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1300949": {
       "name": "1.60.0 - Item - Tier 1 - Paladin - Protection 2P Bonus - Defense",
@@ -19603,7 +20130,8 @@
           "misc_value": 95,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1300951": {
       "name": "1.60.0 - Item - Tier 1 - Paladin - Retribution 2P Bonus - Haste",
@@ -19646,7 +20174,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301014": {
       "name": "1.60.0 - Item - Tier 1 - Paladin - Holy 3P Bonus - Blessing of Protection",
@@ -19678,7 +20207,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301015": {
       "name": "1.60.0 - Item - Tier 1 - Paladin - Protection 3P Bonus - Turn Undead",
@@ -19710,7 +20240,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301036": {
       "name": "1.60.0 - Item - Tier 1 - Paladin - Retribution 3P Bonus - Hammer of Justice",
@@ -19742,7 +20273,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301080": {
       "name": "1.60.0 - Item - Tier 1 - Paladin - Holy 4P Bonus - Healing/Damage",
@@ -19785,7 +20317,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301083": {
       "name": "1.60.0 - Item - Tier 1 - Paladin - Protection 4P Bonus - Expertise",
@@ -19817,7 +20350,8 @@
           "misc_value": 8388608,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301694": {
       "name": "1.60.0 - Item - Tier 1 - Paladin - Holy 5P Bonus - Holy Shock",
@@ -19849,7 +20383,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301697": {
       "name": "1.60.0 - Item - Tier 1 - Paladin - Protection 5P Bonus - Forbearance",
@@ -19881,7 +20416,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301702": {
       "name": "1.60.0 - Item - Tier 1 - Paladin - Retribution 5P Bonus - Judgement",
@@ -19913,7 +20449,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1302540": {
       "name": "Libram of Divinity",
@@ -19945,7 +20482,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1306429": {
       "name": "Holy Shock Critical Chance Increase",
@@ -19977,7 +20515,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1306433": {
       "name": "Holy Shield Block Value Increase",
@@ -20009,7 +20548,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1306687": {
       "name": "Greathelm of the Colossus",
@@ -20063,7 +20603,8 @@
           "misc_value": 5,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1306749": {
       "name": "Steadfast",
@@ -20095,7 +20636,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1306786": {
       "name": "Libram of the Wild Sky",
@@ -20127,7 +20669,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310735": {
       "name": "Twist of Light",
@@ -20159,7 +20702,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310897": {
       "name": "Voice of Truth",
@@ -20213,7 +20757,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310902": {
       "name": "Improved Holy Strike",
@@ -20245,7 +20790,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310904": {
       "name": "Divine Precision",
@@ -20277,7 +20823,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310905": {
       "name": "Consecrated Ground",
@@ -20309,7 +20856,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310909": {
       "name": "Light's Vigil",
@@ -20341,7 +20889,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310910": {
       "name": "Light's Vigil",
@@ -20373,7 +20922,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310911": {
       "name": "Light's Vigil",
@@ -20416,7 +20966,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310912": {
       "name": "Light's Vigil",
@@ -20448,7 +20999,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310914": {
       "name": "Light's Vigil",
@@ -20480,7 +21032,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310927": {
       "name": "Light's Fury",
@@ -20512,7 +21065,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310994": {
       "name": "Swift Judgement",
@@ -20544,7 +21098,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311015": {
       "name": "Templar's Bulwark",
@@ -20576,7 +21131,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311033": {
       "name": "Iron Creed",
@@ -20608,7 +21164,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311034": {
       "name": "Iron Creed",
@@ -20651,7 +21208,8 @@
           "misc_value": 0,
           "trigger_spell": 1311033
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311074": {
       "name": "Sanctified Judgement",
@@ -20694,7 +21252,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311083": {
       "name": "Crusade",
@@ -20737,7 +21296,8 @@
           "misc_value": 36,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311084": {
       "name": "Champion of the Light",
@@ -20780,7 +21340,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311085": {
       "name": "Instrument of Law",
@@ -20823,7 +21384,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311087": {
       "name": "Sacred Arbiter",
@@ -20855,7 +21417,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311590": {
       "name": "Light's Vigil",
@@ -20898,7 +21461,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311591": {
       "name": "Light's Vigil",
@@ -20930,7 +21494,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311592": {
       "name": "Light's Vigil",
@@ -20962,7 +21527,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311593": {
       "name": "Light's Vigil",
@@ -20994,7 +21560,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311594": {
       "name": "Light's Vigil",
@@ -21026,7 +21593,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311595": {
       "name": "Light's Vigil",
@@ -21069,7 +21637,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311596": {
       "name": "Light's Vigil",
@@ -21101,7 +21670,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311597": {
       "name": "Light's Vigil",
@@ -21133,7 +21703,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311598": {
       "name": "Light's Vigil",
@@ -21165,7 +21736,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311599": {
       "name": "Light's Vigil",
@@ -21197,7 +21769,8 @@
           "misc_value": 0,
           "trigger_spell": 1311601
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311604": {
       "name": "Holy Shock",
@@ -21229,7 +21802,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311605": {
       "name": "Holy Shock",
@@ -21261,7 +21835,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311606": {
       "name": "Holy Shock",
@@ -21293,7 +21868,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311647": {
       "name": "Seal of Fury",
@@ -21325,7 +21901,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311649": {
       "name": "Seal of Fury",
@@ -21379,7 +21956,8 @@
           "misc_value": 0,
           "trigger_spell": 1311647
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311650": {
       "name": "Judgement of Fury",
@@ -21433,7 +22011,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311654": {
       "name": "Seal of Fury",
@@ -21465,7 +22044,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311655": {
       "name": "Judgement of Fury",
@@ -21519,7 +22099,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311656": {
       "name": "Seal of Fury",
@@ -21573,7 +22154,8 @@
           "misc_value": 0,
           "trigger_spell": 1311654
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311806": {
       "name": "Light's Vigil",
@@ -21605,7 +22187,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1313342": {
       "name": "Flash of Light",
@@ -21637,7 +22220,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1313343": {
       "name": "Flash of Light",
@@ -21669,7 +22253,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1313344": {
       "name": "Flash of Light",
@@ -21701,7 +22286,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1313345": {
       "name": "Flash of Light",
@@ -21733,7 +22319,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1313346": {
       "name": "Flash of Light",
@@ -21765,7 +22352,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1313348": {
       "name": "Holy Light",
@@ -21797,7 +22385,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1313349": {
       "name": "Holy Light",
@@ -21829,7 +22418,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1313350": {
       "name": "Holy Light",
@@ -21861,7 +22451,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1313351": {
       "name": "Holy Light",
@@ -21893,7 +22484,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1313352": {
       "name": "Holy Light",
@@ -21925,7 +22517,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1316101": {
       "name": "Repentance Duration Increase",
@@ -21957,7 +22550,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1317271": {
       "name": "Righteous Indignation",
@@ -21989,7 +22583,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1317272": {
       "name": "Righteous Indignation",
@@ -22021,7 +22616,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     }
   }
 }

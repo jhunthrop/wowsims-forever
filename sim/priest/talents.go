@@ -552,6 +552,13 @@ func (priest *Priest) registerShadowform() {
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
 
+		// 40% of base mana: the client prices the form through
+		// SpellPower.PowerCostPct (ShadowformManaCostPct), not the flat
+		// cost column, which reads 0.
+		ManaCost: core.ManaCostOptions{
+			BaseCost: ShadowformManaCostPct[0] / 100,
+		},
+
 		// Shadowform is cast like any other instant: the client's own
 		// ShadowformCooldownMS (constants_auto_gen.go) carries 1500ms for
 		// both the GCD and a same-length cooldown, not the GCD-less,

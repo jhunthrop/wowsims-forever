@@ -43,6 +43,13 @@ func (hunter *Hunter) registerStriderKickSpell() {
 		Rank:          1, // client spellconst rank for 1317257 is 1, not 0 (a genuinely unranked ability, like Bloodrage/Whirlwind, reads 0).
 		RequiredLevel: striderKickLevel,
 
+		// 5.81% of base mana: the client prices the kick through
+		// SpellPower.PowerCostPct (StriderKickManaCostPct), not the flat
+		// cost column, which reads 0.
+		ManaCost: core.ManaCostOptions{
+			BaseCost: StriderKickManaCostPct[1] / 100,
+		},
+
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,

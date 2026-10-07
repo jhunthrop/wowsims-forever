@@ -26,15 +26,19 @@ func (paladin *Paladin) registerJudgement() {
 		// The identical, identically-caused bug is sim/warrior/execute.go's.
 		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagNoOnCastComplete | core.SpellFlagCastTimeNoGCD,
 
-		// RequiredLevel 4 and zero mana cost: source 1.60.1.70009 client
-		// spell data (spellconst/paladin.json, spell 20271 "Judgement"),
-		// cost 0/cost_type 0, spell_level 4. This spell used to carry a
-		// BaseCost of 0.06 (6% of base mana), which matched neither the
-		// client's own stated cost nor real 1.12 Classic Judgement, which
-		// is free -- gated only by its cooldown, never by mana. Flagged
-		// by sim/core/testdata/conformance/paladin.golden.md's own
-		// "cost 0.00->X.XX" row for every tested level before this fix.
+		// RequiredLevel 4: source 1.60.1.70009 client spell data
+		// (spellconst/paladin.json, spell 20271 "Judgement"), spell_level 4.
+		//
+		// Cost: 6% of base mana, from the same client row's cost_pct
+		// (SpellPower.PowerCostPct). The flat `cost` column is 0 for
+		// every percent-priced spell, and a 2026-10-06 conformance fix
+		// read that zero as "free" and removed the 0.06 BaseCost this
+		// spell had always carried; spellconst now carries cost_pct and
+		// the paladin golden flagged the free Judgement the next day.
 		RequiredLevel: 4,
+		ManaCost: core.ManaCostOptions{
+			BaseCost: JudgementManaCostPct[0] / 100,
+		},
 
 		Cast: core.CastConfig{
 			IgnoreHaste: true,

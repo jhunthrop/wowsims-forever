@@ -1275,6 +1275,10 @@ func (warlock *Warlock) shadowAndFlamePreservesImmolate(sim *core.Simulation) bo
 // redirect itself, only that casting the curse and tracking the aura
 // does not panic - but the talent is a real DPS cooldown on an AoE or
 // cleave fight, so it is implemented rather than marked unmodelled.
+// baneOfHavocManaCostPct is SpellPower.PowerCostPct for spell 1225228 in
+// build 1.60.1.70009; see the ManaCost comment in applyBaneOfHavoc.
+const baneOfHavocManaCostPct = 5.0
+
 func (warlock *Warlock) applyBaneOfHavoc() {
 	if !warlock.Talents.BaneOfHavoc {
 		return
@@ -1333,6 +1337,15 @@ func (warlock *Warlock) applyBaneOfHavoc() {
 		ProcMask:      core.ProcMaskEmpty,
 		Flags:         core.SpellFlagAPL | WarlockFlagDestruction,
 		RequiredLevel: 1,
+
+		// 5% of base mana: the client row for THIS id (1225228) carries
+		// SpellPower.PowerCostPct 5 (spellconst cost_pct) and a flat cost
+		// of 0. The generated BaneOfHavocManaCostPct reads 0 because the
+		// generator's rank winner is the sibling id 1243339, which has
+		// no power row, so the percentage is taken from 1225228 by hand.
+		ManaCost: core.ManaCostOptions{
+			BaseCost: baneOfHavocManaCostPct / 100,
+		},
 
 		// The client flags Bane of Havoc GCD-less (gcd_ms 0,
 		// spellconst/warlock.json build 1.60.1.70009) - it is a

@@ -11,6 +11,7 @@ const WrathRanks = 8
 var WrathSpellId = [WrathRanks + 1]int32{0, 5176, 5177, 5178, 5179, 5180, 6780, 8905, 9912}
 var WrathBaseDamage = [WrathRanks + 1][]float64{{0}, {13, 16}, {28, 33}, {48, 57}, {69, 79}, {108, 123}, {148, 167}, {198, 221}, {248, 277}}
 var WrathSpellCoeff = [WrathRanks + 1]float64{0, 0.123, 0.231, 0.443, 0.571, 0.571, 0.571, 0.571, 0.571}
+
 // WrathManaCost was a stale pre-Forever table (roughly 40-75% above the
 // client's real per-rank cost at every rank); corrected against
 // 1.60.1.70009 spellconst/druid.json (ids 5176-9912). The generator

@@ -74,6 +74,10 @@ type spellBody struct {
 	SpellLevel         int      `json:"spell_level"`
 	FamilyMask         [4]int64 `json:"family_mask"`
 	Effects            []Effect `json:"effects"`
+	// CostPct is SpellPower.PowerCostPct, appended last by the data
+	// pipeline (2026-10-07); a file emitted before it lacks the key and
+	// reads as 0, so it is optional here on purpose.
+	CostPct float64 `json:"cost_pct,omitempty"`
 }
 
 // Spell is one rank of one ability, with its id resolved from the
@@ -90,7 +94,11 @@ type Spell struct {
 	DurationMS         int32
 	Cost               float64
 	CostType           int32
-	SpellLevel         int
+	// CostPct is the cost as a percentage of base mana for the spells the
+	// client prices that way (Arcane Blast 15, Judgement 6, the warlock
+	// summons 80/100); Cost is 0 for those. 0 for a flat-cost spell.
+	CostPct    float64
+	SpellLevel int
 	// FamilyMask is the client's four mask columns verbatim; they are
 	// kept separate rather than folded into one uint64 because the
 	// client itself never combines them.
@@ -257,6 +265,7 @@ func Load(path string) (Class, error) {
 			DurationMS:         body.DurationMS,
 			Cost:               body.Cost,
 			CostType:           body.CostType,
+			CostPct:            body.CostPct,
 			SpellLevel:         body.SpellLevel,
 			FamilyMask:         body.FamilyMask,
 			Effects:            append([]Effect(nil), body.Effects...),

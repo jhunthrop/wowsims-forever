@@ -139,12 +139,17 @@ Every mismatch below is tagged with one of:
   Form 35%, Innervate 5%) has a real, nonzero `PowerCostPct` column in
   that raw table, matching the engine's percent almost exactly - these
   are correct engine behavior this report could not previously verify,
-  not stale formulas. `spellconst`'s generated JSON simply never
-  carries `PowerCostPct` (its pipeline reads `SpellPower.csv`'s flat
-  `ManaCost` column only), and that pipeline lives in the `forever`
-  repo, out of this lane's `sim/conformance`/`sim/core/spellconst`
-  scope - the fix is extending it to emit the percent, and
-  `spellconst.Spell` to carry it. Two exceptions this check also found,
+  not stale formulas. **2026-10-07 update:** the pipeline now emits
+  `cost_pct`, `spellconst.Spell` carries it as `CostPct`, and the cost
+  column compares it as that share of the preset's base mana (printed
+  as e.g. `181.95 (15% base mana)`). The first run with it in place
+  found six engine spells registered FREE that the client prices this
+  way - Arcane Blast 15% (plus its +175%-per-stack ramp, which a free
+  spell could never have carried), Judgement 6% (a 2026-10-06
+  "conformance fix" had removed the cost on the strength of the flat
+  zero), Shadowform 40%, Divine Favor 4%, Bane of Havoc 5%, Strider
+  Kick 5.81% - all fixed the same day; every percent-priced row the
+  engine registers now matches. Two exceptions this check also found,
   real defects rather than visibility gaps, for their own class lanes:
   **Warlock's Summon Imp** shares Felhunter/Voidwalker/Succubus's
   100%-of-base-mana cost variable (`sim/warlock/summon_demon.go`)

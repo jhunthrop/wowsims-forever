@@ -33,7 +33,8 @@
           "misc_value": 0,
           "trigger_spell": 26545
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "325": {
       "name": "Lightning Shield",
@@ -65,7 +66,8 @@
           "misc_value": 0,
           "trigger_spell": 26545
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "331": {
       "name": "Healing Wave",
@@ -97,7 +99,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "332": {
       "name": "Healing Wave",
@@ -129,7 +132,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "370": {
       "name": "Purge",
@@ -161,7 +165,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 10.0
     },
     "379": {
       "name": "Earth Shield",
@@ -193,7 +198,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403": {
       "name": "Lightning Bolt",
@@ -225,7 +231,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "421": {
       "name": "Chain Lightning",
@@ -257,7 +264,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "526": {
       "name": "Cure Poison",
@@ -289,7 +297,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 9.0
     },
     "529": {
       "name": "Lightning Bolt",
@@ -321,7 +330,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "547": {
       "name": "Healing Wave",
@@ -353,7 +363,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "548": {
       "name": "Lightning Bolt",
@@ -385,7 +396,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "905": {
       "name": "Lightning Shield",
@@ -417,7 +429,8 @@
           "misc_value": 0,
           "trigger_spell": 26545
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "913": {
       "name": "Healing Wave",
@@ -449,7 +462,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "915": {
       "name": "Lightning Bolt",
@@ -481,7 +495,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "930": {
       "name": "Chain Lightning",
@@ -513,7 +528,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "939": {
       "name": "Healing Wave",
@@ -545,7 +561,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "943": {
       "name": "Lightning Bolt",
@@ -577,7 +594,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "945": {
       "name": "Lightning Shield",
@@ -609,7 +627,8 @@
           "misc_value": 0,
           "trigger_spell": 26545
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "959": {
       "name": "Healing Wave",
@@ -641,7 +660,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "974": {
       "name": "Earth Shield",
@@ -684,7 +704,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 15.0
     },
     "1064": {
       "name": "Chain Heal",
@@ -716,7 +737,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2008": {
       "name": "Ancestral Spirit",
@@ -748,7 +770,8 @@
           "misc_value": 120,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 90.0
     },
     "2484": {
       "name": "Earthbind Totem",
@@ -780,7 +803,8 @@
           "misc_value": 2630,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 6.0
     },
     "2645": {
       "name": "Ghost Wolf",
@@ -823,7 +847,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2860": {
       "name": "Chain Lightning",
@@ -855,7 +880,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2870": {
       "name": "Cure Disease",
@@ -887,7 +913,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 9.0
     },
     "3599": {
       "name": "Searing Totem",
@@ -919,7 +946,8 @@
           "misc_value": 2523,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3600": {
       "name": "Earthbind",
@@ -951,7 +979,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3606": {
       "name": "Attack",
@@ -983,7 +1012,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5394": {
       "name": "Healing Stream Totem",
@@ -1015,7 +1045,8 @@
           "misc_value": 3527,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5672": {
       "name": "Healing Stream",
@@ -1047,7 +1078,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5675": {
       "name": "Mana Spring Totem",
@@ -1079,7 +1111,8 @@
           "misc_value": 3573,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5677": {
       "name": "Mana Spring",
@@ -1111,7 +1144,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5729": {
       "name": "Stoneclaw Totem Effect",
@@ -1143,7 +1177,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5730": {
       "name": "Stoneclaw Totem",
@@ -1175,7 +1210,8 @@
           "misc_value": 3579,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6041": {
       "name": "Lightning Bolt",
@@ -1207,7 +1243,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6350": {
       "name": "Attack",
@@ -1239,7 +1276,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6351": {
       "name": "Attack",
@@ -1271,7 +1309,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6352": {
       "name": "Attack",
@@ -1303,7 +1342,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6363": {
       "name": "Searing Totem",
@@ -1335,7 +1375,8 @@
           "misc_value": 3902,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6364": {
       "name": "Searing Totem",
@@ -1367,7 +1408,8 @@
           "misc_value": 3903,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6365": {
       "name": "Searing Totem",
@@ -1399,7 +1441,8 @@
           "misc_value": 3904,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6371": {
       "name": "Healing Stream",
@@ -1431,7 +1474,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6372": {
       "name": "Healing Stream",
@@ -1463,7 +1507,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6375": {
       "name": "Healing Stream Totem",
@@ -1495,7 +1540,8 @@
           "misc_value": 3906,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6377": {
       "name": "Healing Stream Totem",
@@ -1527,7 +1573,8 @@
           "misc_value": 3907,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6390": {
       "name": "Stoneclaw Totem",
@@ -1559,7 +1606,8 @@
           "misc_value": 3911,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6391": {
       "name": "Stoneclaw Totem",
@@ -1591,7 +1639,8 @@
           "misc_value": 3912,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6392": {
       "name": "Stoneclaw Totem",
@@ -1623,7 +1672,8 @@
           "misc_value": 3913,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6393": {
       "name": "Stoneclaw Totem Effect",
@@ -1655,7 +1705,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6394": {
       "name": "Stoneclaw Totem Effect",
@@ -1687,7 +1738,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6395": {
       "name": "Stoneclaw Totem Effect",
@@ -1719,7 +1771,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6495": {
       "name": "Sentry Totem",
@@ -1762,7 +1815,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8004": {
       "name": "Lesser Healing Wave",
@@ -1794,7 +1848,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8005": {
       "name": "Healing Wave",
@@ -1826,7 +1881,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8008": {
       "name": "Lesser Healing Wave",
@@ -1858,7 +1914,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8010": {
       "name": "Lesser Healing Wave",
@@ -1890,7 +1947,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8012": {
       "name": "Purge",
@@ -1922,7 +1980,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 10.0
     },
     "8026": {
       "name": "Flametongue Weapon Proc",
@@ -1954,7 +2013,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8028": {
       "name": "Flametongue Weapon Proc",
@@ -1986,7 +2046,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8029": {
       "name": "Flametongue Weapon Proc",
@@ -2018,7 +2079,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8034": {
       "name": "Frostbrand Attack",
@@ -2061,7 +2123,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8037": {
       "name": "Frostbrand Attack",
@@ -2104,7 +2167,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8042": {
       "name": "Earth Shock",
@@ -2147,7 +2211,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8044": {
       "name": "Earth Shock",
@@ -2190,7 +2255,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8045": {
       "name": "Earth Shock",
@@ -2233,7 +2299,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8046": {
       "name": "Earth Shock",
@@ -2276,7 +2343,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8050": {
       "name": "Flame Shock",
@@ -2330,7 +2398,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8052": {
       "name": "Flame Shock",
@@ -2384,7 +2453,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8053": {
       "name": "Flame Shock",
@@ -2438,7 +2508,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8056": {
       "name": "Frost Shock",
@@ -2481,7 +2552,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8058": {
       "name": "Frost Shock",
@@ -2524,7 +2596,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8071": {
       "name": "Stoneskin Totem",
@@ -2556,7 +2629,8 @@
           "misc_value": 5873,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8072": {
       "name": "Stoneskin",
@@ -2599,7 +2673,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8075": {
       "name": "Strength of Earth Totem",
@@ -2631,7 +2706,8 @@
           "misc_value": 5874,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8076": {
       "name": "Strength of Earth",
@@ -2663,7 +2739,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8134": {
       "name": "Lightning Shield",
@@ -2695,7 +2772,8 @@
           "misc_value": 0,
           "trigger_spell": 26545
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8143": {
       "name": "Tremor Totem",
@@ -2727,7 +2805,8 @@
           "misc_value": 5913,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8145": {
       "name": "Tremor Totem Passive",
@@ -2759,7 +2838,8 @@
           "misc_value": 0,
           "trigger_spell": 8146
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8146": {
       "name": "Tremor Totem Effect",
@@ -2813,7 +2893,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8154": {
       "name": "Stoneskin Totem",
@@ -2845,7 +2926,8 @@
           "misc_value": 5919,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8155": {
       "name": "Stoneskin Totem",
@@ -2877,7 +2959,8 @@
           "misc_value": 5920,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8156": {
       "name": "Stoneskin",
@@ -2920,7 +3003,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8157": {
       "name": "Stoneskin",
@@ -2963,7 +3047,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8160": {
       "name": "Strength of Earth Totem",
@@ -2995,7 +3080,8 @@
           "misc_value": 5921,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8161": {
       "name": "Strength of Earth Totem",
@@ -3027,7 +3113,8 @@
           "misc_value": 5922,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8162": {
       "name": "Strength of Earth",
@@ -3059,7 +3146,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8163": {
       "name": "Strength of Earth",
@@ -3091,7 +3179,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8166": {
       "name": "Poison Cleansing Totem",
@@ -3123,7 +3212,8 @@
           "misc_value": 5923,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 10.0
     },
     "8168": {
       "name": "Poison Cleansing Totem Effect",
@@ -3155,7 +3245,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8170": {
       "name": "Disease Cleansing Totem",
@@ -3187,7 +3278,8 @@
           "misc_value": 5924,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 10.0
     },
     "8171": {
       "name": "Disease Cleansing Totem Effect",
@@ -3219,7 +3311,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8177": {
       "name": "Grounding Totem",
@@ -3251,7 +3344,8 @@
           "misc_value": 5925,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 6.0
     },
     "8178": {
       "name": "Grounding Totem Effect",
@@ -3283,7 +3377,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8179": {
       "name": "Grounding Totem Passive",
@@ -3315,7 +3410,8 @@
           "misc_value": 0,
           "trigger_spell": 8178
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8181": {
       "name": "Frost Resistance Totem",
@@ -3347,7 +3443,8 @@
           "misc_value": 5926,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8182": {
       "name": "Frost Resistance",
@@ -3379,7 +3476,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8184": {
       "name": "Fire Resistance Totem",
@@ -3411,7 +3509,8 @@
           "misc_value": 5927,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8185": {
       "name": "Fire Resistance",
@@ -3443,7 +3542,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8187": {
       "name": "Magma Totem",
@@ -3475,7 +3575,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8190": {
       "name": "Magma Totem",
@@ -3507,7 +3608,8 @@
           "misc_value": 5929,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8227": {
       "name": "Flametongue Totem",
@@ -3539,7 +3641,8 @@
           "misc_value": 5950,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8230": {
       "name": "Flametongue Totem",
@@ -3571,7 +3674,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8232": {
       "name": "Windfury Weapon",
@@ -3603,7 +3707,8 @@
           "misc_value": 283,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8233": {
       "name": "Windfury Weapon",
@@ -3646,7 +3751,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8235": {
       "name": "Windfury Weapon",
@@ -3678,7 +3784,8 @@
           "misc_value": 284,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8236": {
       "name": "Windfury Weapon",
@@ -3721,7 +3828,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8248": {
       "name": "Flametongue Totem Proc",
@@ -3753,7 +3861,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8249": {
       "name": "Flametongue Totem",
@@ -3785,7 +3894,8 @@
           "misc_value": 6012,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8250": {
       "name": "Flametongue Totem",
@@ -3817,7 +3927,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8253": {
       "name": "Flametongue Totem Proc",
@@ -3849,7 +3960,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8349": {
       "name": "Fire Nova",
@@ -3881,7 +3993,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8443": {
       "name": "Fire Nova",
@@ -3913,7 +4026,8 @@
           "misc_value": 0,
           "trigger_spell": 8349
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8502": {
       "name": "Fire Nova",
@@ -3945,7 +4059,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8503": {
       "name": "Fire Nova",
@@ -3977,7 +4092,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8504": {
       "name": "Fire Nova",
@@ -4009,7 +4125,8 @@
           "misc_value": 0,
           "trigger_spell": 8502
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8505": {
       "name": "Fire Nova",
@@ -4041,7 +4158,8 @@
           "misc_value": 0,
           "trigger_spell": 8503
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8512": {
       "name": "Windfury Totem",
@@ -4073,7 +4191,8 @@
           "misc_value": 6112,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8516": {
       "name": "Windfury Totem",
@@ -4116,7 +4235,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8835": {
       "name": "Grace of Air Totem",
@@ -4148,7 +4268,8 @@
           "misc_value": 7486,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8836": {
       "name": "Grace of Air",
@@ -4180,7 +4301,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10391": {
       "name": "Lightning Bolt",
@@ -4212,7 +4334,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10392": {
       "name": "Lightning Bolt",
@@ -4244,7 +4367,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10395": {
       "name": "Healing Wave",
@@ -4276,7 +4400,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10396": {
       "name": "Healing Wave",
@@ -4308,7 +4433,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10400": {
       "name": "Rockbiter Weapon (Passive)",
@@ -4351,7 +4477,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10403": {
       "name": "Stoneskin",
@@ -4394,7 +4521,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10404": {
       "name": "Stoneskin",
@@ -4437,7 +4565,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10405": {
       "name": "Stoneskin",
@@ -4480,7 +4609,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10406": {
       "name": "Stoneskin Totem",
@@ -4512,7 +4642,8 @@
           "misc_value": 7366,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10407": {
       "name": "Stoneskin Totem",
@@ -4544,7 +4675,8 @@
           "misc_value": 7367,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10408": {
       "name": "Stoneskin Totem",
@@ -4576,7 +4708,8 @@
           "misc_value": 7368,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10412": {
       "name": "Earth Shock",
@@ -4619,7 +4752,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10413": {
       "name": "Earth Shock",
@@ -4662,7 +4796,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10414": {
       "name": "Earth Shock",
@@ -4705,7 +4840,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10423": {
       "name": "Stoneclaw Totem Effect",
@@ -4737,7 +4873,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10424": {
       "name": "Stoneclaw Totem Effect",
@@ -4769,7 +4906,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10427": {
       "name": "Stoneclaw Totem",
@@ -4801,7 +4939,8 @@
           "misc_value": 7398,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10428": {
       "name": "Stoneclaw Totem",
@@ -4833,7 +4972,8 @@
           "misc_value": 7399,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10431": {
       "name": "Lightning Shield",
@@ -4865,7 +5005,8 @@
           "misc_value": 0,
           "trigger_spell": 26545
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10432": {
       "name": "Lightning Shield",
@@ -4897,7 +5038,8 @@
           "misc_value": 0,
           "trigger_spell": 26545
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10435": {
       "name": "Attack",
@@ -4929,7 +5071,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10436": {
       "name": "Attack",
@@ -4961,7 +5104,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10437": {
       "name": "Searing Totem",
@@ -4993,7 +5137,8 @@
           "misc_value": 7400,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10438": {
       "name": "Searing Totem",
@@ -5025,7 +5170,8 @@
           "misc_value": 7402,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10441": {
       "name": "Strength of Earth",
@@ -5057,7 +5203,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10442": {
       "name": "Strength of Earth Totem",
@@ -5089,7 +5236,8 @@
           "misc_value": 7403,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10444": {
       "name": "Flametongue Attack",
@@ -5121,7 +5269,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10445": {
       "name": "Flametongue Weapon Proc",
@@ -5153,7 +5302,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10447": {
       "name": "Flame Shock",
@@ -5207,7 +5357,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10448": {
       "name": "Flame Shock",
@@ -5261,7 +5412,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10458": {
       "name": "Frostbrand Attack",
@@ -5304,7 +5456,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10460": {
       "name": "Healing Stream",
@@ -5336,7 +5489,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10461": {
       "name": "Healing Stream",
@@ -5368,7 +5522,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10462": {
       "name": "Healing Stream Totem",
@@ -5400,7 +5555,8 @@
           "misc_value": 3908,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10463": {
       "name": "Healing Stream Totem",
@@ -5432,7 +5588,8 @@
           "misc_value": 3909,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10466": {
       "name": "Lesser Healing Wave",
@@ -5464,7 +5621,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10467": {
       "name": "Lesser Healing Wave",
@@ -5496,7 +5654,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10468": {
       "name": "Lesser Healing Wave",
@@ -5528,7 +5687,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10472": {
       "name": "Frost Shock",
@@ -5571,7 +5731,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10473": {
       "name": "Frost Shock",
@@ -5614,7 +5775,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10476": {
       "name": "Frost Resistance",
@@ -5646,7 +5808,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10477": {
       "name": "Frost Resistance",
@@ -5678,7 +5841,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10478": {
       "name": "Frost Resistance Totem",
@@ -5710,7 +5874,8 @@
           "misc_value": 7412,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10479": {
       "name": "Frost Resistance Totem",
@@ -5742,7 +5907,8 @@
           "misc_value": 7413,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10484": {
       "name": "Windfury Weapon",
@@ -5785,7 +5951,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10486": {
       "name": "Windfury Weapon",
@@ -5817,7 +5984,8 @@
           "misc_value": 525,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10491": {
       "name": "Mana Spring",
@@ -5849,7 +6017,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10493": {
       "name": "Mana Spring",
@@ -5881,7 +6050,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10494": {
       "name": "Mana Spring",
@@ -5913,7 +6083,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10495": {
       "name": "Mana Spring Totem",
@@ -5945,7 +6116,8 @@
           "misc_value": 7414,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10496": {
       "name": "Mana Spring Totem",
@@ -5977,7 +6149,8 @@
           "misc_value": 7415,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10497": {
       "name": "Mana Spring Totem",
@@ -6009,7 +6182,8 @@
           "misc_value": 7416,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10521": {
       "name": "Flametongue Totem",
@@ -6041,7 +6215,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10523": {
       "name": "Flametongue Totem Proc",
@@ -6073,7 +6248,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10526": {
       "name": "Flametongue Totem",
@@ -6105,7 +6281,8 @@
           "misc_value": 7423,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10534": {
       "name": "Fire Resistance",
@@ -6137,7 +6314,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10535": {
       "name": "Fire Resistance",
@@ -6169,7 +6347,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10537": {
       "name": "Fire Resistance Totem",
@@ -6201,7 +6380,8 @@
           "misc_value": 7424,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10538": {
       "name": "Fire Resistance Totem",
@@ -6233,7 +6413,8 @@
           "misc_value": 7425,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10579": {
       "name": "Magma Totem",
@@ -6265,7 +6446,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10580": {
       "name": "Magma Totem",
@@ -6297,7 +6479,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10581": {
       "name": "Magma Totem",
@@ -6329,7 +6512,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10585": {
       "name": "Magma Totem",
@@ -6361,7 +6545,8 @@
           "misc_value": 7464,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10586": {
       "name": "Magma Totem",
@@ -6393,7 +6578,8 @@
           "misc_value": 7465,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10587": {
       "name": "Magma Totem",
@@ -6425,7 +6611,8 @@
           "misc_value": 7466,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10595": {
       "name": "Nature Resistance Totem",
@@ -6457,7 +6644,8 @@
           "misc_value": 7467,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10596": {
       "name": "Nature Resistance",
@@ -6489,7 +6677,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10598": {
       "name": "Nature Resistance",
@@ -6521,7 +6710,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10599": {
       "name": "Nature Resistance",
@@ -6553,7 +6743,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10600": {
       "name": "Nature Resistance Totem",
@@ -6585,7 +6776,8 @@
           "misc_value": 7468,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10601": {
       "name": "Nature Resistance Totem",
@@ -6617,7 +6809,8 @@
           "misc_value": 7469,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10605": {
       "name": "Chain Lightning",
@@ -6649,7 +6842,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10608": {
       "name": "Windfury Totem",
@@ -6692,7 +6886,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10610": {
       "name": "Windfury Totem",
@@ -6735,7 +6930,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10613": {
       "name": "Windfury Totem",
@@ -6767,7 +6963,8 @@
           "misc_value": 7483,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10614": {
       "name": "Windfury Totem",
@@ -6799,7 +6996,8 @@
           "misc_value": 7484,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10622": {
       "name": "Chain Heal",
@@ -6831,7 +7029,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10623": {
       "name": "Chain Heal",
@@ -6863,7 +7062,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10626": {
       "name": "Grace of Air",
@@ -6895,7 +7095,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10627": {
       "name": "Grace of Air Totem",
@@ -6927,7 +7128,8 @@
           "misc_value": 7487,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11306": {
       "name": "Fire Nova",
@@ -6959,7 +7161,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11307": {
       "name": "Fire Nova",
@@ -6991,7 +7194,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11310": {
       "name": "Fire Nova",
@@ -7023,7 +7227,8 @@
           "misc_value": 0,
           "trigger_spell": 11306
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11311": {
       "name": "Fire Nova",
@@ -7055,7 +7260,8 @@
           "misc_value": 0,
           "trigger_spell": 11307
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15036": {
       "name": "Flametongue Totem",
@@ -7087,7 +7293,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15107": {
       "name": "Windwall Totem",
@@ -7119,7 +7326,8 @@
           "misc_value": 9687,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15108": {
       "name": "Windwall",
@@ -7162,7 +7370,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15109": {
       "name": "Windwall",
@@ -7205,7 +7414,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15110": {
       "name": "Windwall",
@@ -7248,7 +7458,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15111": {
       "name": "Windwall Totem",
@@ -7280,7 +7491,8 @@
           "misc_value": 9688,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15112": {
       "name": "Windwall Totem",
@@ -7312,7 +7524,8 @@
           "misc_value": 9689,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15207": {
       "name": "Lightning Bolt",
@@ -7344,7 +7557,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15208": {
       "name": "Lightning Bolt",
@@ -7376,7 +7590,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15567": {
       "name": "Rockbiter Weapon (Passive)",
@@ -7419,7 +7634,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15568": {
       "name": "Rockbiter Weapon (Passive)",
@@ -7462,7 +7678,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15569": {
       "name": "Rockbiter Weapon (Passive)",
@@ -7505,7 +7722,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16035": {
       "name": "Concussion",
@@ -7537,7 +7755,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16038": {
       "name": "Call of Flame",
@@ -7580,7 +7799,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16039": {
       "name": "Convection",
@@ -7612,7 +7832,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16040": {
       "name": "Reverberation",
@@ -7644,7 +7865,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16043": {
       "name": "Earth's Grasp",
@@ -7687,7 +7909,8 @@
           "misc_value": 6,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16086": {
       "name": "Improved Fire Nova",
@@ -7730,7 +7953,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16089": {
       "name": "Elemental Fury",
@@ -7762,7 +7986,8 @@
           "misc_value": 15,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16120": {
       "name": "Call of Thunder",
@@ -7794,7 +8019,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16164": {
       "name": "Elemental Focus",
@@ -7826,7 +8052,8 @@
           "misc_value": 0,
           "trigger_spell": 16246
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16173": {
       "name": "Totemic Focus",
@@ -7858,7 +8085,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16176": {
       "name": "Ancestral Healing",
@@ -7890,7 +8118,8 @@
           "misc_value": 0,
           "trigger_spell": 16177
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16178": {
       "name": "Purification",
@@ -7933,7 +8162,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16179": {
       "name": "Tidal Focus",
@@ -7987,7 +8217,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16180": {
       "name": "Nature's Guidance",
@@ -8030,7 +8261,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16181": {
       "name": "Healing Focus",
@@ -8062,7 +8294,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16182": {
       "name": "Improved Healing Wave",
@@ -8094,7 +8327,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16184": {
       "name": "Improved Reincarnation",
@@ -8148,7 +8382,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16187": {
       "name": "Restorative Totems",
@@ -8191,7 +8426,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16188": {
       "name": "Nature's Swiftness",
@@ -8223,7 +8459,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16189": {
       "name": "Totemic Mastery",
@@ -8255,7 +8492,8 @@
           "misc_value": 6,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16190": {
       "name": "Mana Tide Totem",
@@ -8287,7 +8525,8 @@
           "misc_value": 10467,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16191": {
       "name": "Mana Tide",
@@ -8319,7 +8558,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16194": {
       "name": "Tidal Mastery",
@@ -8351,7 +8591,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16196": {
       "name": "Nature's Guidance",
@@ -8394,7 +8635,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16198": {
       "name": "Nature's Guidance",
@@ -8437,7 +8679,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16246": {
       "name": "Clearcasting",
@@ -8469,7 +8712,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16257": {
       "name": "Flurry",
@@ -8501,7 +8745,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16258": {
       "name": "Guardian Totems",
@@ -8544,7 +8789,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16259": {
       "name": "Enhancing Totems",
@@ -8587,7 +8833,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16261": {
       "name": "Improved Lightning Shield",
@@ -8619,7 +8866,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16262": {
       "name": "Improved Ghost Wolf",
@@ -8673,7 +8921,8 @@
           "misc_value": 1271481,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16266": {
       "name": "Elemental Weapons",
@@ -8727,7 +8976,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16268": {
       "name": "Spirit Weapons",
@@ -8781,7 +9031,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16295": {
       "name": "Enhancing Totems",
@@ -8824,7 +9075,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16311": {
       "name": "Rockbiter Weapon (Passive)",
@@ -8867,7 +9119,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16312": {
       "name": "Rockbiter Weapon (Passive)",
@@ -8910,7 +9163,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16313": {
       "name": "Rockbiter Weapon (Passive)",
@@ -8953,7 +9207,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16343": {
       "name": "Flametongue Weapon Proc",
@@ -8985,7 +9240,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16344": {
       "name": "Flametongue Weapon Proc",
@@ -9017,7 +9273,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16352": {
       "name": "Frostbrand Attack",
@@ -9060,7 +9317,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16353": {
       "name": "Frostbrand Attack",
@@ -9103,7 +9361,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16361": {
       "name": "Windfury Weapon",
@@ -9146,7 +9405,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16362": {
       "name": "Windfury Weapon",
@@ -9178,7 +9438,8 @@
           "misc_value": 1669,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16368": {
       "name": "Flametongue Attack",
@@ -9210,7 +9471,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16387": {
       "name": "Flametongue Totem",
@@ -9242,7 +9504,8 @@
           "misc_value": 10557,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16389": {
       "name": "Flametongue Totem Proc",
@@ -9274,7 +9537,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16578": {
       "name": "Elemental Alacrity",
@@ -9306,7 +9570,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16579": {
       "name": "Lightning Mastery",
@@ -9338,7 +9603,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16580": {
       "name": "Lightning Mastery",
@@ -9370,7 +9636,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16581": {
       "name": "Lightning Mastery",
@@ -9402,7 +9669,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16582": {
       "name": "Lightning Mastery",
@@ -9434,7 +9702,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17012": {
       "name": "Devour Magic",
@@ -9477,7 +9746,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17354": {
       "name": "Mana Tide Totem",
@@ -9509,7 +9779,8 @@
           "misc_value": 11100,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17355": {
       "name": "Mana Tide",
@@ -9541,7 +9812,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17359": {
       "name": "Mana Tide Totem",
@@ -9573,7 +9845,8 @@
           "misc_value": 11101,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17360": {
       "name": "Mana Tide",
@@ -9605,7 +9878,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17364": {
       "name": "Stormstrike",
@@ -9648,7 +9922,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20608": {
       "name": "Reincarnation",
@@ -9680,7 +9955,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20609": {
       "name": "Ancestral Spirit",
@@ -9712,7 +9988,8 @@
           "misc_value": 260,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 90.0
     },
     "20610": {
       "name": "Ancestral Spirit",
@@ -9744,7 +10021,8 @@
           "misc_value": 420,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 90.0
     },
     "20776": {
       "name": "Ancestral Spirit",
@@ -9776,7 +10054,8 @@
           "misc_value": 600,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 90.0
     },
     "20777": {
       "name": "Ancestral Spirit",
@@ -9808,7 +10087,8 @@
           "misc_value": 800,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 90.0
     },
     "20859": {
       "name": "Rockbiter Weapon Taunt",
@@ -9840,7 +10120,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20860": {
       "name": "Rockbiter Weapon Proc",
@@ -9872,7 +10153,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20865": {
       "name": "Rockbiter Weapon Proc",
@@ -9904,7 +10186,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20866": {
       "name": "Rockbiter Weapon Proc",
@@ -9936,7 +10219,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20867": {
       "name": "Rockbiter Weapon Proc",
@@ -9968,7 +10252,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20868": {
       "name": "Rockbiter Weapon Proc",
@@ -10000,7 +10285,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20870": {
       "name": "Rockbiter Weapon Proc",
@@ -10032,7 +10318,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20871": {
       "name": "Rockbiter Weapon Proc",
@@ -10064,7 +10351,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21169": {
       "name": "Reincarnation",
@@ -10096,7 +10384,8 @@
           "misc_value": 20,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21891": {
       "name": "Earthfury Stat Totem",
@@ -10128,7 +10417,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21895": {
       "name": "Increased Totem Radius",
@@ -10160,7 +10450,8 @@
           "misc_value": 6,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21899": {
       "name": "Improved Chain Heal",
@@ -10192,7 +10483,8 @@
           "misc_value": 20,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22047": {
       "name": "Testing Totem",
@@ -10224,7 +10516,8 @@
           "misc_value": 13838,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22048": {
       "name": "Attack",
@@ -10256,7 +10549,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22049": {
       "name": "Testing Totem Passive",
@@ -10288,7 +10582,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22050": {
       "name": "Testing Totem Dummy",
@@ -10320,7 +10615,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22801": {
       "name": "Ghost Wolf Speed",
@@ -10352,7 +10648,8 @@
           "misc_value": 12,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22804": {
       "name": "Shaman Shock Crit Bonus",
@@ -10384,7 +10681,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23419": {
       "name": "Corrupted Fire Nova Totem",
@@ -10427,7 +10725,8 @@
           "misc_value": 14667,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23420": {
       "name": "Corrupted Stoneskin Totem",
@@ -10470,7 +10769,8 @@
           "misc_value": 14663,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23422": {
       "name": "Corrupted Healing Stream Totem",
@@ -10513,7 +10813,8 @@
           "misc_value": 14664,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23423": {
       "name": "Corrupted Windfury Totem",
@@ -10556,7 +10857,8 @@
           "misc_value": 14666,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23551": {
       "name": "Lightning Shield",
@@ -10588,7 +10890,8 @@
           "misc_value": 0,
           "trigger_spell": 18350
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23552": {
       "name": "Lightning Shield",
@@ -10620,7 +10923,8 @@
           "misc_value": 0,
           "trigger_spell": 26545
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23572": {
       "name": "Mana Surge",
@@ -10652,7 +10956,8 @@
           "misc_value": 0,
           "trigger_spell": 18350
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23573": {
       "name": "Chain Healing Wave",
@@ -10684,7 +10989,8 @@
           "misc_value": 17,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23683": {
       "name": "Twisting Nether",
@@ -10716,7 +11022,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23789": {
       "name": "Stoneclaw Totem TEST",
@@ -10748,7 +11055,8 @@
           "misc_value": 14870,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24436": {
       "name": "Copy of Improved Mana/Health Totems",
@@ -10780,7 +11088,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24461": {
       "name": "Improved Frost Shock",
@@ -10812,7 +11121,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24462": {
       "name": "Improved Lightning Bolt",
@@ -10844,7 +11154,8 @@
           "misc_value": 5,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24499": {
       "name": "Energized Shield",
@@ -10876,7 +11187,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24853": {
       "name": "Mana Spring",
@@ -10908,7 +11220,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24854": {
       "name": "Mana Spring Totem",
@@ -10940,7 +11253,8 @@
           "misc_value": 15304,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25001": {
       "name": "Spirit Totem",
@@ -10972,7 +11286,8 @@
           "misc_value": 0,
           "trigger_spell": 25002
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25002": {
       "name": "Spirit Disruption",
@@ -11004,7 +11319,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25076": {
       "name": "Cobra Reflexes",
@@ -11036,7 +11352,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25102": {
       "name": "Water Mastery",
@@ -11079,7 +11396,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25357": {
       "name": "Healing Wave",
@@ -11111,7 +11429,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25359": {
       "name": "Grace of Air Totem",
@@ -11143,7 +11462,8 @@
           "misc_value": 15463,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25360": {
       "name": "Grace of Air",
@@ -11175,7 +11495,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25361": {
       "name": "Strength of Earth Totem",
@@ -11207,7 +11528,8 @@
           "misc_value": 15464,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25362": {
       "name": "Strength of Earth",
@@ -11239,7 +11561,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25909": {
       "name": "Tranquil Air",
@@ -11271,7 +11594,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26119": {
       "name": "Stormcaller Spelldamage Bonus",
@@ -11303,7 +11627,8 @@
           "misc_value": 0,
           "trigger_spell": 26121
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26122": {
       "name": "Stormcaller Chain Heal Bonus",
@@ -11335,7 +11660,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26123": {
       "name": "Gift of the Gathering Storm Chain Lightning Bonus",
@@ -11367,7 +11693,8 @@
           "misc_value": 20,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26363": {
       "name": "Lightning Shield",
@@ -11399,7 +11726,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26364": {
       "name": "Lightning Shield",
@@ -11431,7 +11759,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26365": {
       "name": "Lightning Shield",
@@ -11463,7 +11792,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26366": {
       "name": "Lightning Shield",
@@ -11495,7 +11825,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26367": {
       "name": "Lightning Shield",
@@ -11527,7 +11858,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26369": {
       "name": "Lightning Shield",
@@ -11559,7 +11891,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26370": {
       "name": "Lightning Shield",
@@ -11591,7 +11924,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26545": {
       "name": "Lightning Shield",
@@ -11623,7 +11957,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27621": {
       "name": "Windfury Totem",
@@ -11655,7 +11990,8 @@
           "misc_value": 7484,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27623": {
       "name": "Fire Nova Totem",
@@ -11687,7 +12023,8 @@
           "misc_value": 7845,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27624": {
       "name": "Lesser Healing Wave",
@@ -11719,7 +12056,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27626": {
       "name": "Purge",
@@ -11751,7 +12089,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 5.0
     },
     "27635": {
       "name": "Lightning Shield",
@@ -11783,7 +12122,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27740": {
       "name": "Reincarnation",
@@ -11815,7 +12155,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27797": {
       "name": "Reduced Riptide Cost",
@@ -11847,7 +12188,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27855": {
       "name": "Increased Lesser Healing Wave",
@@ -11879,7 +12221,8 @@
           "misc_value": 3736,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27859": {
       "name": "Increased Shock Damage",
@@ -11922,7 +12265,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28818": {
       "name": "Totemic Energy",
@@ -11954,7 +12298,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28820": {
       "name": "Lightning Shield",
@@ -11997,7 +12342,8 @@
           "misc_value": 0,
           "trigger_spell": 18350
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28821": {
       "name": "Lightning Shield",
@@ -12029,7 +12375,8 @@
           "misc_value": 0,
           "trigger_spell": 28820
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28823": {
       "name": "Totemic Power",
@@ -12061,7 +12408,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28849": {
       "name": "Lesser Healing Wave",
@@ -12093,7 +12441,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28856": {
       "name": "Increased Water Shield Charges",
@@ -12125,7 +12474,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28857": {
       "name": "Increased Lightning Damage",
@@ -12157,7 +12507,8 @@
           "misc_value": 4554,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28999": {
       "name": "Elemental Reach",
@@ -12200,7 +12551,8 @@
           "misc_value": 5,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29005": {
       "name": "Storm Mastery",
@@ -12232,7 +12584,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29062": {
       "name": "Eye of the Storm",
@@ -12264,7 +12617,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29171": {
       "name": "Strong Current",
@@ -12296,7 +12650,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29187": {
       "name": "Natural Grace",
@@ -12328,7 +12683,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29189": {
       "name": "Healing Grace",
@@ -12360,7 +12716,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29191": {
       "name": "Healing Grace",
@@ -12392,7 +12749,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29192": {
       "name": "Improved Weapon Totems",
@@ -12435,7 +12793,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29193": {
       "name": "Improved Weapon Totems",
@@ -12478,7 +12837,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29198": {
       "name": "Corrupted Mind",
@@ -12510,7 +12870,8 @@
           "misc_value": 0,
           "trigger_spell": 29199
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29199": {
       "name": "Corrupted Mind",
@@ -12542,7 +12903,8 @@
           "misc_value": 4327,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29206": {
       "name": "Healing Way",
@@ -12574,7 +12936,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29228": {
       "name": "Flame Shock",
@@ -12628,7 +12991,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29469": {
       "name": "Flametongue Attack",
@@ -12660,7 +13024,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29470": {
       "name": "Flametongue Attack",
@@ -12692,7 +13057,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30160": {
       "name": "Elemental Devastation",
@@ -12724,7 +13090,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30165": {
       "name": "Elemental Devastation",
@@ -12756,7 +13123,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30812": {
       "name": "Mental Quickness",
@@ -12799,7 +13167,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30861": {
       "name": "Elemental Shields",
@@ -12831,7 +13200,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30862": {
       "name": "Elemental Shields",
@@ -12863,7 +13233,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30863": {
       "name": "Elemental Shields",
@@ -12895,7 +13266,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30864": {
       "name": "Focused Mind",
@@ -12938,7 +13310,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30865": {
       "name": "Focused Mind",
@@ -12981,7 +13354,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30866": {
       "name": "Focused Mind",
@@ -13024,7 +13398,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30867": {
       "name": "Nature's Blessing",
@@ -13056,7 +13431,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30868": {
       "name": "Nature's Blessing",
@@ -13088,7 +13464,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30869": {
       "name": "Nature's Blessing",
@@ -13120,7 +13497,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30870": {
       "name": "Nature's Blessing",
@@ -13152,7 +13530,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30871": {
       "name": "Nature's Blessing",
@@ -13184,7 +13563,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30872": {
       "name": "Improved Chain Heal",
@@ -13216,7 +13596,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "36936": {
       "name": "Totemic Recall",
@@ -13248,7 +13629,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "66842": {
       "name": "Call of the Elements",
@@ -13280,7 +13662,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "66843": {
       "name": "Call of the Ancestors",
@@ -13312,7 +13695,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "66844": {
       "name": "Call of the Spirits",
@@ -13344,7 +13728,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408339": {
       "name": "Fire Nova",
@@ -13420,7 +13805,8 @@
           "misc_value": 11315,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408341": {
       "name": "Fire Nova",
@@ -13452,7 +13838,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408342": {
       "name": "Fire Nova",
@@ -13484,7 +13871,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408343": {
       "name": "Fire Nova",
@@ -13516,7 +13904,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408344": {
       "name": "Fire Nova",
@@ -13548,7 +13937,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408345": {
       "name": "Fire Nova",
@@ -13580,7 +13970,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408423": {
       "name": "Fire Nova",
@@ -13612,7 +14003,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408424": {
       "name": "Fire Nova",
@@ -13644,7 +14036,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408426": {
       "name": "Fire Nova",
@@ -13676,7 +14069,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408427": {
       "name": "Fire Nova",
@@ -13708,7 +14102,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408428": {
       "name": "Fire Nova",
@@ -13740,7 +14135,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408438": {
       "name": "Lightning Overload",
@@ -13772,7 +14168,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408439": {
       "name": "Lightning Bolt",
@@ -13804,7 +14201,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408440": {
       "name": "Lightning Bolt",
@@ -13836,7 +14234,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408441": {
       "name": "Lightning Bolt",
@@ -13868,7 +14267,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408442": {
       "name": "Lightning Bolt",
@@ -13900,7 +14300,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408443": {
       "name": "Lightning Bolt",
@@ -13932,7 +14333,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408472": {
       "name": "Lightning Bolt",
@@ -13964,7 +14366,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408473": {
       "name": "Lightning Bolt",
@@ -13996,7 +14399,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408474": {
       "name": "Lightning Bolt",
@@ -14028,7 +14432,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408475": {
       "name": "Lightning Bolt",
@@ -14060,7 +14465,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408477": {
       "name": "Lightning Bolt",
@@ -14092,7 +14498,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408479": {
       "name": "Chain Lightning",
@@ -14124,7 +14531,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408481": {
       "name": "Chain Lightning",
@@ -14156,7 +14564,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408482": {
       "name": "Chain Lightning",
@@ -14188,7 +14597,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408484": {
       "name": "Chain Lightning",
@@ -14220,7 +14630,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408490": {
       "name": "Lava Burst",
@@ -14263,7 +14674,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408491": {
       "name": "Lava Burst",
@@ -14295,7 +14707,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408496": {
       "name": "Dual Wield Specialization",
@@ -14349,7 +14762,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408498": {
       "name": "Maelstrom Weapon",
@@ -14403,7 +14817,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408501": {
       "name": "Maelstrom Ready!",
@@ -14435,7 +14850,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408505": {
       "name": "Maelstrom Weapon",
@@ -14478,7 +14894,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408507": {
       "name": "Lava Lash",
@@ -14521,7 +14938,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 1.0
     },
     "408510": {
       "name": "Water Shield",
@@ -14553,7 +14971,8 @@
           "misc_value": 0,
           "trigger_spell": 408511
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408511": {
       "name": "Water Shield",
@@ -14585,7 +15004,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408514": {
       "name": "Earth Shield",
@@ -14639,7 +15059,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 5.0
     },
     "408519": {
       "name": "Earth Shield",
@@ -14671,7 +15092,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408521": {
       "name": "Riptide",
@@ -14725,7 +15147,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408524": {
       "name": "Shield Mastery",
@@ -14779,7 +15202,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408525": {
       "name": "Shield Mastery",
@@ -14833,7 +15257,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408531": {
       "name": "Way of Earth",
@@ -14865,7 +15290,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408680": {
       "name": "Way of Earth",
@@ -15029,7 +15455,8 @@
           "misc_value": 5,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408681": {
       "name": "Earth Shock",
@@ -15094,7 +15521,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408683": {
       "name": "Earth Shock",
@@ -15159,7 +15587,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408685": {
       "name": "Earth Shock",
@@ -15224,7 +15653,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408687": {
       "name": "Earth Shock",
@@ -15289,7 +15719,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408688": {
       "name": "Earth Shock",
@@ -15354,7 +15785,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408689": {
       "name": "Earth Shock",
@@ -15419,7 +15851,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408690": {
       "name": "Earth Shock",
@@ -15484,7 +15917,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408693": {
       "name": "Earth Shock",
@@ -15527,7 +15961,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "408696": {
       "name": "Spirit of the Alpha",
@@ -15581,7 +16016,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 8.0
     },
     "409333": {
       "name": "Ancestral Guidance",
@@ -15613,7 +16049,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409337": {
       "name": "Ancestral Guidance",
@@ -15645,7 +16082,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409938": {
       "name": "Fire Nova",
@@ -15677,7 +16115,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409940": {
       "name": "Dual Wield Specialization",
@@ -15709,7 +16148,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409941": {
       "name": "Water Shield",
@@ -15741,7 +16181,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409943": {
       "name": "Shield Mastery",
@@ -15773,7 +16214,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409944": {
       "name": "Ancestral Guidance",
@@ -15805,7 +16247,8 @@
           "misc_value": 399966,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409945": {
       "name": "Overload",
@@ -15837,7 +16280,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409946": {
       "name": "Maelstrom Weapon",
@@ -15869,7 +16313,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409947": {
       "name": "Earth Shield",
@@ -15901,7 +16346,8 @@
           "misc_value": 399966,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409951": {
       "name": "Spirit of the Alpha",
@@ -15933,7 +16379,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409952": {
       "name": "Lava Burst",
@@ -15965,7 +16412,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409953": {
       "name": "Lava Lash",
@@ -15997,7 +16445,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409954": {
       "name": "Riptide",
@@ -16029,7 +16478,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409955": {
       "name": "Way of Earth",
@@ -16061,7 +16511,8 @@
           "misc_value": 399966,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "410156": {
       "name": "Stormstrike",
@@ -16093,7 +16544,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "413338": {
       "name": "Bulwark Icon",
@@ -16125,7 +16577,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "413429": {
       "name": "Dyadic Icon",
@@ -16157,7 +16610,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "413432": {
       "name": "Lithic Icon",
@@ -16189,7 +16643,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "413839": {
       "name": "Kajaric Icon",
@@ -16243,7 +16698,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415012": {
       "name": "Clastic Icon",
@@ -16275,7 +16731,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415015": {
       "name": "Galvanic Icon",
@@ -16307,7 +16764,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415096": {
       "name": "Coherence",
@@ -16383,7 +16841,8 @@
           "misc_value": 20,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415100": {
       "name": "Power Surge",
@@ -16426,7 +16885,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415105": {
       "name": "Power Surge",
@@ -16458,7 +16918,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415140": {
       "name": "Mental Dexterity",
@@ -16501,7 +16962,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415144": {
       "name": "Mental Dexterity",
@@ -16544,7 +17006,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415231": {
       "name": "Burn",
@@ -16642,7 +17105,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415233": {
       "name": "Ghost Wolf",
@@ -16696,7 +17160,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415236": {
       "name": "Healing Rain",
@@ -16750,7 +17215,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 21.0
     },
     "415242": {
       "name": "Healing Rain",
@@ -16782,7 +17248,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415292": {
       "name": "Earthliving",
@@ -16814,7 +17281,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415712": {
       "name": "Power Surge",
@@ -16846,7 +17314,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "416081": {
       "name": "Coherence",
@@ -16878,7 +17347,8 @@
           "misc_value": 417347,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "420799": {
       "name": "Tempest Icon",
@@ -16910,7 +17380,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425336": {
       "name": "Rage of the Farseer",
@@ -16953,7 +17424,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425339": {
       "name": "Molten Blast",
@@ -17007,7 +17479,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 18.0
     },
     "425340": {
       "name": "Molten Blast",
@@ -17039,7 +17512,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425341": {
       "name": "Greater Ghost Wolf",
@@ -17071,7 +17545,8 @@
           "misc_value": 399966,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425858": {
       "name": "Ancestral Awakening",
@@ -17103,7 +17578,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425861": {
       "name": "Ancestral Awakening",
@@ -17135,7 +17611,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425864": {
       "name": "Ancestral Awakening",
@@ -17167,7 +17644,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425874": {
       "name": "Decoy Totem",
@@ -17210,7 +17688,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 11.0
     },
     "425876": {
       "name": "Decoy Totem",
@@ -17253,7 +17732,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425879": {
       "name": "Ancestral Awakening",
@@ -17285,7 +17765,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425881": {
       "name": "Decoy Totem",
@@ -17317,7 +17798,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426257": {
       "name": "Sulfurous Icon",
@@ -17349,7 +17831,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432041": {
       "name": "Tidal Waves",
@@ -17403,7 +17886,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432042": {
       "name": "Tidal Waves",
@@ -17435,7 +17919,8 @@
           "misc_value": 0,
           "trigger_spell": 432041
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432056": {
       "name": "Rolling Thunder",
@@ -17489,7 +17974,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432129": {
       "name": "Rolling Thunder",
@@ -17521,7 +18007,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432134": {
       "name": "Static Shock",
@@ -17553,7 +18040,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432140": {
       "name": "Overcharged",
@@ -17596,7 +18084,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432143": {
       "name": "Lightning Shield",
@@ -17639,7 +18128,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432144": {
       "name": "Lightning Shield",
@@ -17682,7 +18172,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432145": {
       "name": "Lightning Shield",
@@ -17725,7 +18216,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432146": {
       "name": "Lightning Shield",
@@ -17768,7 +18260,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432147": {
       "name": "Lightning Shield",
@@ -17811,7 +18304,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432148": {
       "name": "Lightning Shield",
@@ -17854,7 +18348,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432149": {
       "name": "Lightning Shield",
@@ -17897,7 +18392,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432235": {
       "name": "Rolling Thunder",
@@ -17929,7 +18425,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432237": {
       "name": "Static Shock",
@@ -17961,7 +18458,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "432240": {
       "name": "Overcharged",
@@ -17993,7 +18491,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "433255": {
       "name": "Shamanistic Rage",
@@ -18025,7 +18524,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "434357": {
       "name": "Harness Lightning",
@@ -18068,7 +18568,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435884": {
       "name": "S03 - Tuning and Overrides Passive - Shaman",
@@ -18177,7 +18678,8 @@
           "misc_value": 16362,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435983": {
       "name": "Stormbringer Lightning Bolt Bonus",
@@ -18209,7 +18711,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435985": {
       "name": "Greatly Improved Weapon Enhancements [DOES NOT WORK]",
@@ -18241,7 +18744,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436286": {
       "name": "Flame Shock Cost Reduced",
@@ -18273,7 +18777,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436364": {
       "name": "Two-Handed Mastery",
@@ -18305,7 +18810,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436367": {
       "name": "Two-Handed Mastery",
@@ -18337,7 +18843,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436376": {
       "name": "Chain Heal Cost Reduced",
@@ -18369,7 +18876,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436390": {
       "name": "Decoy Totem",
@@ -18401,7 +18909,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436519": {
       "name": "Flametongue Weapon",
@@ -18433,7 +18942,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436520": {
       "name": "Dual Wield Specialization",
@@ -18476,7 +18986,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "437009": {
       "name": "Totemic Projection",
@@ -18508,7 +19019,8 @@
           "misc_value": 15214,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 25.0
     },
     "439431": {
       "name": "Windfury Weapon",
@@ -18540,7 +19052,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "439440": {
       "name": "Windfury Weapon",
@@ -18572,7 +19085,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "439441": {
       "name": "Windfury Weapon",
@@ -18604,7 +19118,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440285": {
       "name": "Power Surge",
@@ -18636,7 +19151,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440569": {
       "name": "Storm, Earth, and Fire",
@@ -18690,7 +19206,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440574": {
       "name": "Earthgrab",
@@ -18722,7 +19239,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440580": {
       "name": "Feral Spirit",
@@ -18754,7 +19272,8 @@
           "misc_value": 219986,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 12.0
     },
     "440591": {
       "name": "Spirit Walk",
@@ -18797,7 +19316,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440593": {
       "name": "Spirit Hunt",
@@ -18829,7 +19349,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440594": {
       "name": "Avoidance",
@@ -18861,7 +19382,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440595": {
       "name": "Shaman Pet Scaling",
@@ -19047,7 +19569,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440605": {
       "name": "Spirit Leap",
@@ -19090,7 +19613,8 @@
           "misc_value": 5,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440609": {
       "name": "Spirit Hunt",
@@ -19122,7 +19646,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "443320": {
       "name": "Loyal Beta",
@@ -19176,7 +19701,8 @@
           "misc_value": 28,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "446170": {
       "name": "Chain Heal Bonus (-0.1 sec cast time)",
@@ -19208,7 +19734,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "446220": {
       "name": "Totem of Tormented Ancestry",
@@ -19240,7 +19767,8 @@
           "misc_value": 0,
           "trigger_spell": 446219
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "446358": {
       "name": "Attack",
@@ -19272,7 +19800,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "446730": {
       "name": "Totem of Fiery Precision",
@@ -19304,7 +19833,8 @@
           "misc_value": 5,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "449930": {
       "name": "Emerald Rains",
@@ -19336,7 +19866,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "449931": {
       "name": "Fiery Strength",
@@ -19368,7 +19899,8 @@
           "misc_value": 0,
           "trigger_spell": 449932
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "452154": {
       "name": "Rolling Thunder",
@@ -19400,7 +19932,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "452466": {
       "name": "Terrestris",
@@ -19432,7 +19965,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "454042": {
       "name": "Burn",
@@ -19464,7 +19998,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456223": {
       "name": "Voltaic  Icon",
@@ -19496,7 +20031,8 @@
           "misc_value": 0,
           "trigger_spell": 408953
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457475": {
       "name": "S03 - Item - T1 - Shaman - Elemental/Enhancement/Restoration 2P Bonus",
@@ -19528,7 +20064,8 @@
           "misc_value": 6,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457478": {
       "name": "S03 - Item - T1 - Shaman - Restoration 4P Bonus",
@@ -19560,7 +20097,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457494": {
       "name": "S03 - Item - T1 - Shaman - Restoration 6P Bonus",
@@ -19614,7 +20152,8 @@
           "misc_value": 20,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457520": {
       "name": "S03 - Item - T1 - Shaman - Elemental 4P Bonus",
@@ -19657,7 +20196,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457524": {
       "name": "S03 - Item - T1 - Shaman - Elemental 6P Bonus",
@@ -19689,7 +20229,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457532": {
       "name": "S03 - Item - T1 - Shaman - Enhancement 6P Bonus",
@@ -19732,7 +20273,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457544": {
       "name": "S03 - Item - T1 - Shaman - Tank 6P Bonus",
@@ -19764,7 +20306,8 @@
           "misc_value": 12,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459606": {
       "name": "Ghost Wolf Speed",
@@ -19796,7 +20339,8 @@
           "misc_value": 12,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461295": {
       "name": "Totem of Thunder",
@@ -19828,7 +20372,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461297": {
       "name": "Totem of Raging Fire",
@@ -19860,7 +20405,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461298": {
       "name": "Totem of Raging Fire",
@@ -19892,7 +20438,8 @@
           "misc_value": 0,
           "trigger_spell": 461297
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461299": {
       "name": "Totem of Earthen Vitality",
@@ -19924,7 +20471,8 @@
           "misc_value": 0,
           "trigger_spell": 461300
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461300": {
       "name": "Totem of Earthen Vitality",
@@ -19956,7 +20504,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461301": {
       "name": "Totem of the Plains",
@@ -19988,7 +20537,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461636": {
       "name": "Windfury Weapon",
@@ -20020,7 +20570,8 @@
           "misc_value": 7569,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467804": {
       "name": "S03 - Item - T2 - Shaman - Restoration 2P Bonus",
@@ -20052,7 +20603,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467809": {
       "name": "S03 - Item - T2 - Shaman - Restoration 4P Bonus",
@@ -20084,7 +20636,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467810": {
       "name": "Grounded Lightning",
@@ -20116,7 +20669,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467814": {
       "name": "S03 - Item - T2 - Shaman - Restoration 6P Bonus",
@@ -20148,7 +20702,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467818": {
       "name": "S03 - Item - T2 - Shaman - Elemental 2P Bonus",
@@ -20180,7 +20735,8 @@
           "misc_value": 0,
           "trigger_spell": 16246
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467823": {
       "name": "S03 - Item - T2 - Shaman - Elemental 4P Bonus",
@@ -20212,7 +20768,8 @@
           "misc_value": 23,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467863": {
       "name": "S03 - Item - T2 - Shaman - Elemental 6P Bonus",
@@ -20255,7 +20812,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467877": {
       "name": "S03 - Item - T2 - Shaman - Enhancement 2P Bonus",
@@ -20287,7 +20845,8 @@
           "misc_value": 18,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467879": {
       "name": "S03 - Item - T2 - Shaman - Enhancement 4P Bonus",
@@ -20319,7 +20878,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467880": {
       "name": "Stormfury",
@@ -20351,7 +20911,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467882": {
       "name": "S03 - Item - T2 - Shaman - Enhancement 6P Bonus",
@@ -20383,7 +20944,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467889": {
       "name": "S03 - Item - T2 - Shaman - Tank 2P Bonus",
@@ -20415,7 +20977,8 @@
           "misc_value": 0,
           "trigger_spell": 467891
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467891": {
       "name": "Shield Block",
@@ -20447,7 +21010,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467909": {
       "name": "S03 - Item - T2 - Shaman - Tank 4P Bonus",
@@ -20479,7 +21043,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467910": {
       "name": "Elemental Shield",
@@ -20511,7 +21076,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467916": {
       "name": "S03 - Item - T2 - Shaman - Tank 6P Bonus",
@@ -20543,7 +21109,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468289": {
       "name": "Decreased Decoy Totem",
@@ -20575,7 +21142,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468411": {
       "name": "S03 - Item - ZG - Shaman - Tank 2P Bonus",
@@ -20607,7 +21175,8 @@
           "misc_value": 95,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468441": {
       "name": "S03 - Item - ZG - Shaman - Tank 3P Bonus",
@@ -20639,7 +21208,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468445": {
       "name": "S03 - Item - ZG - Shaman - Tank 5P Bonus",
@@ -20671,7 +21241,8 @@
           "misc_value": 18,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468460": {
       "name": "Energized Shield",
@@ -20703,7 +21274,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468526": {
       "name": "Power Surge",
@@ -20735,7 +21307,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468782": {
       "name": "Unleashed Storm",
@@ -20767,7 +21340,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469183": {
       "name": "Terrestris",
@@ -20799,7 +21373,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470081": {
       "name": "Totem of Raging Storms",
@@ -20842,7 +21417,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470082": {
       "name": "Totem of Raging Storms",
@@ -20874,7 +21450,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470104": {
       "name": "Totem of Storm and Fire",
@@ -20917,7 +21494,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470105": {
       "name": "Totem of the Elements",
@@ -20949,7 +21527,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470235": {
       "name": "Totem of Astral Flow",
@@ -20981,7 +21560,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470240": {
       "name": "Totem of Conductive Currents",
@@ -21013,7 +21593,8 @@
           "misc_value": 0,
           "trigger_spell": 470272
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470272": {
       "name": "Totem of Conductive Currents",
@@ -21067,7 +21648,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470743": {
       "name": "Lightning Shield",
@@ -21099,7 +21681,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470744": {
       "name": "Lightning Shield",
@@ -21131,7 +21714,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470745": {
       "name": "Lightning Shield",
@@ -21163,7 +21747,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470746": {
       "name": "Lightning Shield",
@@ -21195,7 +21780,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470748": {
       "name": "Lightning Shield",
@@ -21227,7 +21813,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470749": {
       "name": "Lightning Shield",
@@ -21259,7 +21846,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470753": {
       "name": "Lightning Shield",
@@ -21291,7 +21879,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213377": {
       "name": "Beacon's Companion",
@@ -21323,7 +21912,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213810": {
       "name": "S03 - Item - TAQ - Shaman - Restoration 2P Bonus",
@@ -21355,7 +21945,8 @@
           "misc_value": 23,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213894": {
       "name": "S03 - Item - TAQ - Shaman - Restoration 4P Bonus",
@@ -21387,7 +21978,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213900": {
       "name": "S03 - Item - TAQ - Shaman - Elemental 2P Bonus",
@@ -21430,7 +22022,8 @@
           "misc_value": 18,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213902": {
       "name": "S03 - Item - TAQ - Shaman - Elemental 4P Bonus",
@@ -21462,7 +22055,8 @@
           "misc_value": 15,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213910": {
       "name": "S03 - Item - TAQ - Shaman - Enhancement 2P Bonus",
@@ -21505,7 +22099,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213918": {
       "name": "S03 - Item - TAQ - Shaman - Enhancement 4P Bonus",
@@ -21537,7 +22132,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213930": {
       "name": "S03 - Item - TAQ - Shaman - Tank 2P Bonus",
@@ -21569,7 +22165,8 @@
           "misc_value": 0,
           "trigger_spell": 1213934
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213934": {
       "name": "Stormbraced",
@@ -21601,7 +22198,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213937": {
       "name": "S03 - Item - TAQ - Shaman - Tank 4P Bonus",
@@ -21633,7 +22231,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213939": {
       "name": "Pack Leader",
@@ -21687,7 +22286,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213957": {
       "name": "S03 - Item - RAQ - Shaman - Elemental 3P Bonus",
@@ -21719,7 +22319,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214059": {
       "name": "Enchanted Totem",
@@ -21751,7 +22352,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214292": {
       "name": "Totem of Life",
@@ -21794,7 +22396,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214300": {
       "name": "Improved Stormstrike/Windfury Weapon",
@@ -21826,7 +22429,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214301": {
       "name": "Improved Flame Shock/Molten Blast",
@@ -21869,7 +22473,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214302": {
       "name": "Improved Lightning Bolt/Lava Burst",
@@ -21901,7 +22506,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1216485": {
       "name": "Noxious Breath",
@@ -21944,7 +22550,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219361": {
       "name": "S03 - Item - Naxxramas - Shaman - Restoration 2P Bonus",
@@ -21976,7 +22583,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219364": {
       "name": "S03 - Item - Naxxramas - Shaman - Restoration 4P Bonus",
@@ -22008,7 +22616,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219365": {
       "name": "S03 - Item - Naxxramas - Shaman - Restoration 6P Bonus",
@@ -22040,7 +22649,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219367": {
       "name": "S03 - Item - Naxxramas - Shaman - Elemental 2P Bonus",
@@ -22072,7 +22682,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219368": {
       "name": "S03 - Item - Naxxramas - Shaman - Elemental 4P Bonus",
@@ -22104,7 +22715,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219369": {
       "name": "S03 - Item - Naxxramas - Shaman - Elemental 6P Bonus",
@@ -22136,7 +22748,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219373": {
       "name": "S03 - Item - Naxxramas - Shaman - Enhancement 2P Bonus",
@@ -22168,7 +22781,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219374": {
       "name": "S03 - Item - Naxxramas - Shaman - Enhancement 4P Bonus",
@@ -22200,7 +22814,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219376": {
       "name": "S03 - Item - Naxxramas - Shaman - Enhancement 6P Bonus",
@@ -22232,7 +22847,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219379": {
       "name": "Earth Shock",
@@ -22275,7 +22891,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219382": {
       "name": "S03 - Item - Naxxramas - Shaman - Tank 2P Bonus",
@@ -22318,7 +22935,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219413": {
       "name": "S03 - Item - Naxxramas - Shaman - Tank 4P Bonus",
@@ -22361,7 +22979,8 @@
           "misc_value": 33,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219414": {
       "name": "S03 - Item - Naxxramas - Shaman - Tank 6P Bonus",
@@ -22393,7 +23012,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219474": {
       "name": "S03 - Item - Naxxramas - Warlock - Tank 2P Bonus",
@@ -22447,7 +23067,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1220642": {
       "name": "Improved Riptide/Chain Heal/Earth Shield",
@@ -22490,7 +23111,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1220744": {
       "name": "Earth Shock",
@@ -22555,7 +23177,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1220746": {
       "name": "Earth Shock",
@@ -22620,7 +23243,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1220747": {
       "name": "Earth Shock",
@@ -22685,7 +23309,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1220748": {
       "name": "Earth Shock",
@@ -22750,7 +23375,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1220749": {
       "name": "Earth Shock",
@@ -22815,7 +23441,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1220750": {
       "name": "Earth Shock",
@@ -22880,7 +23507,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1220751": {
       "name": "Earth Shock",
@@ -22945,7 +23573,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1223030": {
       "name": "Shamanistic Focus",
@@ -22977,7 +23606,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1223031": {
       "name": "Improved Stormstrike",
@@ -23031,7 +23661,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226961": {
       "name": "S03 - Item - Scarlet Enclave - Shaman - Elemental 2P Bonus",
@@ -23063,7 +23694,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226963": {
       "name": "Flame Shock",
@@ -23095,7 +23727,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226972": {
       "name": "Flame Shock",
@@ -23127,7 +23760,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226977": {
       "name": "S03 - Item - Scarlet Enclave - Shaman - Elemental 4P Bonus",
@@ -23170,7 +23804,8 @@
           "misc_value": 0,
           "trigger_spell": 1233835
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226978": {
       "name": "S03 - Item - Scarlet Enclave - Shaman - Elemental 6P Bonus",
@@ -23213,7 +23848,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226984": {
       "name": "S03 - Item - Scarlet Enclave - Shaman - Enhancement 2P Bonus",
@@ -23245,7 +23881,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226986": {
       "name": "S03 - Item - Scarlet Enclave - Shaman - Enhancement 4P Bonus",
@@ -23321,7 +23958,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226997": {
       "name": "S03 - Item - Scarlet Enclave - Shaman - Enhancement 6P Bonus",
@@ -23386,7 +24024,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227088": {
       "name": "Swiftearth",
@@ -23418,7 +24057,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227093": {
       "name": "S03 - Item - Scarlet Enclave - Shaman - Restoration 2P Bonus",
@@ -23450,7 +24090,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227099": {
       "name": "S03 - Item - Scarlet Enclave - Shaman - Restoration 4P Bonus",
@@ -23482,7 +24123,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227108": {
       "name": "Healing Waves",
@@ -23514,7 +24156,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227111": {
       "name": "S03 - Item - Scarlet Enclave - Shaman - Restoration 6P Bonus",
@@ -23557,7 +24200,8 @@
           "misc_value": 20,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227153": {
       "name": "S03 - Item - Scarlet Enclave - Shaman - Tank 2P Bonus",
@@ -23589,7 +24233,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227159": {
       "name": "S03 - Item - Scarlet Enclave - Shaman - Tank 4P Bonus",
@@ -23632,7 +24277,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227160": {
       "name": "Spark of Life",
@@ -23664,7 +24310,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227164": {
       "name": "S03 - Item - Scarlet Enclave - Shaman - Tank 6P Bonus",
@@ -23696,7 +24343,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232096": {
       "name": "Infusion of Souls",
@@ -23728,7 +24376,8 @@
           "misc_value": 21,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232890": {
       "name": "Mercy by Fire",
@@ -23771,7 +24420,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1233835": {
       "name": "Thunder and Lava",
@@ -23803,7 +24453,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234326": {
       "name": "Scarlet Smashbringer",
@@ -23835,7 +24486,8 @@
           "misc_value": 21,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1235353": {
       "name": "Mercy by Fire",
@@ -23878,7 +24530,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1238149": {
       "name": "S03 - Item - Naxxramas - Shaman - Enhancement 2P Bonus",
@@ -23910,7 +24563,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1238289": {
       "name": "Earthbound",
@@ -23942,7 +24596,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1238299": {
       "name": "Lava Burst",
@@ -23985,7 +24640,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1238300": {
       "name": "Lava Burst",
@@ -24028,7 +24684,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1238373": {
       "name": "Lava Burst",
@@ -24060,7 +24717,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1238376": {
       "name": "Lava Burst",
@@ -24092,7 +24750,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1238640": {
       "name": "Ghost Wolf",
@@ -24135,7 +24794,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1239242": {
       "name": "Riptide",
@@ -24189,7 +24849,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1239243": {
       "name": "Riptide",
@@ -24243,7 +24904,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1249011": {
       "name": "Totem of Ancestral Protection",
@@ -24275,7 +24937,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1262315": {
       "name": "The Quick and the Dead",
@@ -24307,7 +24970,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1262643": {
       "name": "Reagent Economy",
@@ -24339,7 +25003,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1270478": {
       "name": "Charged Lightning",
@@ -24371,7 +25036,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1270492": {
       "name": "Totem Affinity",
@@ -24403,7 +25069,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1281744": {
       "name": "Natural Guidance",
@@ -24446,7 +25113,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1291076": {
       "name": "Reduced Healing Wave Cost",
@@ -24478,7 +25146,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1291077": {
       "name": "Increased Flame Shock Duration",
@@ -24510,7 +25179,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1291078": {
       "name": "Lightning Bolt Can Activate Maelstrom Weapon",
@@ -24542,7 +25212,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293635": {
       "name": "Improved Ancestral Spirit",
@@ -24574,7 +25245,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1300957": {
       "name": "1.60.0 - Item - Tier 1 - Shaman - Enhancement 2P Bonus - Haste",
@@ -24617,7 +25289,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1300959": {
       "name": "1.60.0 - Item - Tier 1 - Shaman - Elemental 2P Bonus - Hit",
@@ -24660,7 +25333,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1300960": {
       "name": "1.60.0 - Item - Tier 1 - Shaman - Restoration 2P Bonus - Spirit",
@@ -24692,7 +25366,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301051": {
       "name": "1.60.0 - Item - Tier 1 - Shaman - Enhancement 3P Bonus - Earth and Wind Totems",
@@ -24724,7 +25399,8 @@
           "misc_value": 6,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301053": {
       "name": "1.60.0 - Item - Tier 1 - Shaman - Elemental 3P Bonus - Earthbind Totem",
@@ -24756,7 +25432,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301059": {
       "name": "1.60.0 - Item - Tier 1 - Shaman - Restoration 3P Bonus - Fire and Water Totems",
@@ -24788,7 +25465,8 @@
           "misc_value": 6,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301090": {
       "name": "1.60.0 - Item - Tier 1 - Shaman - Enhancement 4P Bonus - AP vs. Elementals",
@@ -24820,7 +25498,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301092": {
       "name": "1.60.0 - Item - Tier 1 - Shaman - Elemental 4P Bonus - SP vs. Elementals",
@@ -24852,7 +25531,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301093": {
       "name": "1.60.0 - Item - Tier 1 - Shaman - Restoration 4P Bonus - Healing/Damage",
@@ -24895,7 +25575,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301709": {
       "name": "1.60.0 - Item - Tier 1 - Shaman - Enhancement 5P Bonus - Stormstrike",
@@ -24927,7 +25608,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301711": {
       "name": "1.60.0 - Item - Tier 1 - Shaman - Elemental 5P Bonus - Lava Burst",
@@ -24959,7 +25641,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301713": {
       "name": "1.60.0 - Item - Tier 1 - Shaman - Restoration 5P Bonus - Riptide",
@@ -24991,7 +25674,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1306448": {
       "name": "Lesser Healing Wave Crit Chance",
@@ -25023,7 +25707,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1307208": {
       "name": "Totem of The Undergrove",
@@ -25055,7 +25740,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1308939": {
       "name": "Totem of Elders",
@@ -25098,7 +25784,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1309422": {
       "name": "Rage of Earth",
@@ -25130,7 +25817,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1309442": {
       "name": "Storm's Grasp",
@@ -25162,7 +25850,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1309539": {
       "name": "Tidebringer's Claw",
@@ -25194,7 +25883,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     }
   }
 }

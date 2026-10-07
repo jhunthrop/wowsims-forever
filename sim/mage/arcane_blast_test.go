@@ -9,16 +9,11 @@ import (
 	"github.com/wowsims/classic/sim/core/simsignals"
 )
 
-// TestArcaneBlastAndMissileBarrageCastAndDealDamage rebuilds the case
-// talents.go used to leave stubbed: mage.Talents.ArcaneBlast and
-// mage.Talents.MissileBarrage were both read and discarded
-// (`_ = mage.Talents.ArcaneBlast`), so no mage - however talented -
-// could ever cast Arcane Blast, and Missile Barrage never affected
-// Arcane Missiles. A level-60 mage with both talents must have Arcane
-// Blast registered at its max rank and dealing damage and stacking its
-// own buff, and Missile Barrage must be able to make the next Arcane
-// Missiles cast free and double-speed.
-func TestArcaneBlastAndMissileBarrageCastAndDealDamage(t *testing.T) {
+// newArcaneBlastTestMage builds a level-60 mage with the Frost reference
+// build plus one point in Arcane Blast, prepulled and ready to drive
+// ApplyEffects directly, for every test in this file.
+func newArcaneBlastTestMage(t *testing.T) (*core.Simulation, *Mage) {
+	t.Helper()
 	// ForeverFrostTalents (talents.go) already spends its one Arcane
 	// point in Missile Barrage; this adds Arcane Blast's own point,
 	// which the Frost reference build does not take.
@@ -53,7 +48,60 @@ func TestArcaneBlastAndMissileBarrageCastAndDealDamage(t *testing.T) {
 	if !ok {
 		t.Fatal("the raid's first player is not a mage agent")
 	}
-	built := agent.GetMage()
+	return sim, agent.GetMage()
+}
+
+// TestArcaneBlastCostsFifteenPercentOfBaseManaAndRampsPerStack pins the
+// client's price for Arcane Blast (SpellPower.PowerCostPct 15 on every
+// player rank in build 1.60.1.70009; the flat cost column is 0) and the
+// buff's own "mana cost of Arcane Blast is increased by 175%" per stack
+// (spell 400573, effect 1). Before 2026-10-07 the spell registered with
+// no cost at all, so an Arcane mage spammed it for free.
+func TestArcaneBlastCostsFifteenPercentOfBaseManaAndRampsPerStack(t *testing.T) {
+	sim, built := newArcaneBlastTestMage(t)
+	arcaneBlast := built.ArcaneBlast[ArcaneBlastRanks]
+	if arcaneBlast == nil || arcaneBlast.Cost == nil {
+		t.Fatal("top-rank Arcane Blast registered with no mana cost")
+	}
+	if got, want := arcaneBlast.Cost.BaseCost, built.BaseMana*arcaneBlastManaCostPct/100; got != want {
+		t.Errorf("Arcane Blast BaseCost = %v, want %v (15%% of base mana %v)", got, want, built.BaseMana)
+	}
+	if got, want := arcaneBlast.Cost.Multiplier, int32(100); got != want {
+		t.Errorf("Arcane Blast Cost.Multiplier before any cast = %d, want %d", got, want)
+	}
+
+	target := sim.Encounter.TargetUnits[0]
+	for cast := int32(1); cast <= arcaneBlastMaxStacks; cast++ {
+		arcaneBlast.ApplyEffects(sim, target, arcaneBlast)
+		if got, want := arcaneBlast.Cost.Multiplier, 100+arcaneBlastCostIncreasePctPerStack*cast; got != want {
+			t.Errorf("Arcane Blast Cost.Multiplier after %d cast(s) = %d, want %d", cast, got, want)
+		}
+	}
+	// A fifth cast stays at the buff's stack cap.
+	arcaneBlast.ApplyEffects(sim, target, arcaneBlast)
+	if got, want := arcaneBlast.Cost.Multiplier, int32(100+arcaneBlastCostIncreasePctPerStack*arcaneBlastMaxStacks); got != want {
+		t.Errorf("Arcane Blast Cost.Multiplier at the stack cap = %d, want %d", got, want)
+	}
+
+	// Letting the buff drop (any other damage spell, or its 8 s) resets
+	// the ramp with the stacks.
+	built.ArcaneBlastAura.Deactivate(sim)
+	if got, want := arcaneBlast.Cost.Multiplier, int32(100); got != want {
+		t.Errorf("Arcane Blast Cost.Multiplier after the buff dropped = %d, want %d", got, want)
+	}
+}
+
+// TestArcaneBlastAndMissileBarrageCastAndDealDamage rebuilds the case
+// talents.go used to leave stubbed: mage.Talents.ArcaneBlast and
+// mage.Talents.MissileBarrage were both read and discarded
+// (`_ = mage.Talents.ArcaneBlast`), so no mage - however talented -
+// could ever cast Arcane Blast, and Missile Barrage never affected
+// Arcane Missiles. A level-60 mage with both talents must have Arcane
+// Blast registered at its max rank and dealing damage and stacking its
+// own buff, and Missile Barrage must be able to make the next Arcane
+// Missiles cast free and double-speed.
+func TestArcaneBlastAndMissileBarrageCastAndDealDamage(t *testing.T) {
+	sim, built := newArcaneBlastTestMage(t)
 
 	if !built.Talents.MissileBarrage {
 		t.Fatal("ForeverFrostTalents is expected to spend its one Arcane point in Missile Barrage")

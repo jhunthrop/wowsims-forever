@@ -44,7 +44,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "172": {
       "name": "Corruption",
@@ -76,7 +77,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "265": {
       "name": "Area Death (TEST)",
@@ -108,7 +110,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "348": {
       "name": "Immolate",
@@ -162,7 +165,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "603": {
       "name": "Bane of Doom",
@@ -194,7 +198,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "686": {
       "name": "Shadow Bolt",
@@ -226,7 +231,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "687": {
       "name": "Demon Skin",
@@ -269,7 +275,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "688": {
       "name": "Summon Imp",
@@ -301,7 +308,8 @@
           "misc_value": 416,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 80.0
     },
     "689": {
       "name": "Drain Life",
@@ -333,7 +341,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "691": {
       "name": "Summon Felhunter",
@@ -365,7 +374,8 @@
           "misc_value": 417,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 100.0
     },
     "693": {
       "name": "Create Soulstone",
@@ -397,7 +407,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 85.0
     },
     "695": {
       "name": "Shadow Bolt",
@@ -429,7 +440,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "696": {
       "name": "Demon Skin",
@@ -472,7 +484,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "697": {
       "name": "Summon Voidwalker",
@@ -504,7 +517,8 @@
           "misc_value": 1860,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 100.0
     },
     "698": {
       "name": "Ritual of Summoning",
@@ -536,7 +550,8 @@
           "misc_value": 36727,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "699": {
       "name": "Drain Life",
@@ -568,7 +583,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "702": {
       "name": "Curse of Weakness",
@@ -600,7 +616,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "704": {
       "name": "Curse of Recklessness",
@@ -654,7 +671,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "705": {
       "name": "Shadow Bolt",
@@ -686,7 +704,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "706": {
       "name": "Demon Armor",
@@ -740,7 +759,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "707": {
       "name": "Immolate",
@@ -794,7 +814,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "709": {
       "name": "Drain Life",
@@ -826,7 +847,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "710": {
       "name": "Banish",
@@ -869,7 +891,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "712": {
       "name": "Summon Succubus",
@@ -901,7 +924,8 @@
           "misc_value": 1863,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 100.0
     },
     "713": {
       "name": "Summon Incubus",
@@ -933,7 +957,8 @@
           "misc_value": 185317,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 100.0
     },
     "755": {
       "name": "Health Funnel",
@@ -998,7 +1023,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "980": {
       "name": "Bane of Agony",
@@ -1030,7 +1056,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1010": {
       "name": "Curse of Idiocy",
@@ -1084,7 +1111,8 @@
           "misc_value": 0,
           "trigger_spell": 1010
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1014": {
       "name": "Bane of Agony",
@@ -1116,7 +1144,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1086": {
       "name": "Demon Armor",
@@ -1170,7 +1199,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1088": {
       "name": "Shadow Bolt",
@@ -1202,7 +1232,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1094": {
       "name": "Immolate",
@@ -1256,7 +1287,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1098": {
       "name": "Subjugate Demon",
@@ -1310,7 +1342,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1106": {
       "name": "Shadow Bolt",
@@ -1342,7 +1375,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1108": {
       "name": "Curse of Weakness",
@@ -1374,7 +1408,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1120": {
       "name": "Drain Soul",
@@ -1417,7 +1452,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1122": {
       "name": "Inferno",
@@ -1449,7 +1485,8 @@
           "misc_value": 89,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 100.0
     },
     "1454": {
       "name": "Life Tap",
@@ -1481,7 +1518,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1455": {
       "name": "Life Tap",
@@ -1513,7 +1551,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1456": {
       "name": "Life Tap",
@@ -1545,7 +1584,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1714": {
       "name": "Curse of Tongues",
@@ -1588,7 +1628,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1949": {
       "name": "Hellfire",
@@ -1642,7 +1683,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2362": {
       "name": "Create Spellstone",
@@ -1674,7 +1716,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2941": {
       "name": "Immolate",
@@ -1728,7 +1771,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2947": {
       "name": "Fire Shield",
@@ -1760,7 +1804,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3110": {
       "name": "Firebolt",
@@ -1792,7 +1837,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3698": {
       "name": "Health Funnel",
@@ -1857,7 +1903,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3699": {
       "name": "Health Funnel",
@@ -1922,7 +1969,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3700": {
       "name": "Health Funnel",
@@ -1987,7 +2035,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3716": {
       "name": "Torment",
@@ -2019,7 +2068,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5138": {
       "name": "Drain Mana",
@@ -2051,7 +2101,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5484": {
       "name": "Howl of Terror",
@@ -2094,7 +2145,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5676": {
       "name": "Searing Pain",
@@ -2126,7 +2178,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5699": {
       "name": "Create Healthstone",
@@ -2158,7 +2211,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5720": {
       "name": "Healthstone",
@@ -2190,7 +2244,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5723": {
       "name": "Greater Healthstone",
@@ -2222,7 +2277,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5740": {
       "name": "Rain of Fire",
@@ -2276,7 +2332,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5782": {
       "name": "Fear",
@@ -2319,7 +2376,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 15.0
     },
     "5857": {
       "name": "Hellfire Effect",
@@ -2351,7 +2409,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6201": {
       "name": "Create Healthstone",
@@ -2383,7 +2442,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6202": {
       "name": "Create Healthstone",
@@ -2415,7 +2475,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6205": {
       "name": "Curse of Weakness",
@@ -2447,7 +2508,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6213": {
       "name": "Fear",
@@ -2490,7 +2552,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 15.0
     },
     "6215": {
       "name": "Fear",
@@ -2533,7 +2596,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 15.0
     },
     "6217": {
       "name": "Bane of Agony",
@@ -2565,7 +2629,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6219": {
       "name": "Rain of Fire",
@@ -2619,7 +2684,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6222": {
       "name": "Corruption",
@@ -2651,7 +2717,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6223": {
       "name": "Corruption",
@@ -2683,7 +2750,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6226": {
       "name": "Drain Mana",
@@ -2715,7 +2783,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6262": {
       "name": "Minor Healthstone",
@@ -2747,7 +2816,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6263": {
       "name": "Lesser Healthstone",
@@ -2779,7 +2849,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6307": {
       "name": "Blood Pact",
@@ -2811,7 +2882,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6353": {
       "name": "Soul Fire",
@@ -2843,7 +2915,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6358": {
       "name": "Seduction",
@@ -2875,7 +2948,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 24.0
     },
     "6360": {
       "name": "Soothing Kiss",
@@ -2907,7 +2981,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6366": {
       "name": "Create Firestone",
@@ -2939,7 +3014,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6789": {
       "name": "Death Coil",
@@ -2982,7 +3058,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7641": {
       "name": "Shadow Bolt",
@@ -3014,7 +3091,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7646": {
       "name": "Curse of Weakness",
@@ -3046,7 +3124,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7648": {
       "name": "Corruption",
@@ -3078,7 +3157,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7651": {
       "name": "Drain Life",
@@ -3110,7 +3190,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7658": {
       "name": "Curse of Recklessness",
@@ -3164,7 +3245,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7659": {
       "name": "Curse of Recklessness",
@@ -3218,7 +3300,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7799": {
       "name": "Firebolt",
@@ -3250,7 +3333,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7800": {
       "name": "Firebolt",
@@ -3282,7 +3366,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7801": {
       "name": "Firebolt",
@@ -3314,7 +3399,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7802": {
       "name": "Firebolt",
@@ -3346,7 +3432,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7804": {
       "name": "Blood Pact",
@@ -3378,7 +3465,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7805": {
       "name": "Blood Pact",
@@ -3410,7 +3498,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7809": {
       "name": "Torment",
@@ -3442,7 +3531,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7810": {
       "name": "Torment",
@@ -3474,7 +3564,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7811": {
       "name": "Torment",
@@ -3506,7 +3597,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7812": {
       "name": "Sacrifice",
@@ -3549,7 +3641,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7813": {
       "name": "Soothing Kiss",
@@ -3581,7 +3674,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7814": {
       "name": "Lash of Pain",
@@ -3613,7 +3707,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7815": {
       "name": "Lash of Pain",
@@ -3645,7 +3740,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7816": {
       "name": "Lash of Pain",
@@ -3677,7 +3773,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7870": {
       "name": "Lesser Invisibility",
@@ -3709,7 +3806,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8288": {
       "name": "Drain Soul",
@@ -3752,7 +3850,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8289": {
       "name": "Drain Soul",
@@ -3795,7 +3894,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8316": {
       "name": "Fire Shield",
@@ -3827,7 +3927,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8317": {
       "name": "Fire Shield",
@@ -3859,7 +3960,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11659": {
       "name": "Shadow Bolt",
@@ -3891,7 +3993,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11660": {
       "name": "Shadow Bolt",
@@ -3923,7 +4026,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11661": {
       "name": "Shadow Bolt",
@@ -3955,7 +4059,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11665": {
       "name": "Immolate",
@@ -4009,7 +4114,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11667": {
       "name": "Immolate",
@@ -4063,7 +4169,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11668": {
       "name": "Immolate",
@@ -4117,7 +4224,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11671": {
       "name": "Corruption",
@@ -4149,7 +4257,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11672": {
       "name": "Corruption",
@@ -4181,7 +4290,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11675": {
       "name": "Drain Soul",
@@ -4224,7 +4334,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11677": {
       "name": "Rain of Fire",
@@ -4278,7 +4389,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11678": {
       "name": "Rain of Fire",
@@ -4332,7 +4444,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11681": {
       "name": "Hellfire Effect",
@@ -4364,7 +4477,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11682": {
       "name": "Hellfire Effect",
@@ -4396,7 +4510,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11683": {
       "name": "Hellfire",
@@ -4450,7 +4565,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11684": {
       "name": "Hellfire",
@@ -4504,7 +4620,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11687": {
       "name": "Life Tap",
@@ -4536,7 +4653,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11688": {
       "name": "Life Tap",
@@ -4568,7 +4686,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11689": {
       "name": "Life Tap",
@@ -4600,7 +4719,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11693": {
       "name": "Health Funnel",
@@ -4665,7 +4785,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11694": {
       "name": "Health Funnel",
@@ -4730,7 +4851,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11695": {
       "name": "Health Funnel",
@@ -4795,7 +4917,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11699": {
       "name": "Drain Life",
@@ -4827,7 +4950,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11700": {
       "name": "Drain Life",
@@ -4859,7 +4983,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11703": {
       "name": "Drain Mana",
@@ -4891,7 +5016,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11704": {
       "name": "Drain Mana",
@@ -4923,7 +5049,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11707": {
       "name": "Curse of Weakness",
@@ -4955,7 +5082,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11708": {
       "name": "Curse of Weakness",
@@ -4987,7 +5115,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11711": {
       "name": "Bane of Agony",
@@ -5019,7 +5148,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11712": {
       "name": "Bane of Agony",
@@ -5051,7 +5181,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11713": {
       "name": "Bane of Agony",
@@ -5083,7 +5214,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11717": {
       "name": "Curse of Recklessness",
@@ -5137,7 +5269,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11719": {
       "name": "Curse of Tongues",
@@ -5180,7 +5313,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11725": {
       "name": "Subjugate Demon",
@@ -5234,7 +5368,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11726": {
       "name": "Subjugate Demon",
@@ -5288,7 +5423,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11729": {
       "name": "Create Healthstone",
@@ -5320,7 +5456,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11730": {
       "name": "Create Healthstone",
@@ -5352,7 +5489,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11732": {
       "name": "Major Healthstone",
@@ -5384,7 +5522,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11733": {
       "name": "Demon Armor",
@@ -5438,7 +5577,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11734": {
       "name": "Demon Armor",
@@ -5492,7 +5632,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11735": {
       "name": "Demon Armor",
@@ -5546,7 +5687,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11762": {
       "name": "Firebolt",
@@ -5578,7 +5720,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11763": {
       "name": "Firebolt",
@@ -5621,7 +5764,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11766": {
       "name": "Blood Pact",
@@ -5653,7 +5797,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11767": {
       "name": "Blood Pact",
@@ -5685,7 +5830,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11770": {
       "name": "Fire Shield",
@@ -5717,7 +5863,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11771": {
       "name": "Fire Shield",
@@ -5749,7 +5896,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11774": {
       "name": "Torment",
@@ -5781,7 +5929,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11775": {
       "name": "Torment",
@@ -5813,7 +5962,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11778": {
       "name": "Lash of Pain",
@@ -5845,7 +5995,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11779": {
       "name": "Lash of Pain",
@@ -5877,7 +6028,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11780": {
       "name": "Lash of Pain",
@@ -5909,7 +6061,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11784": {
       "name": "Soothing Kiss",
@@ -5941,7 +6094,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "11785": {
       "name": "Soothing Kiss",
@@ -5973,7 +6127,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "12256": {
       "name": "Add Moogly Radius (PT)",
@@ -6016,7 +6171,8 @@
           "misc_value": 0,
           "trigger_spell": 5
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13716": {
       "name": "AOD",
@@ -6048,7 +6204,8 @@
           "misc_value": 0,
           "trigger_spell": 5
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17727": {
       "name": "Create Spellstone",
@@ -6080,7 +6237,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17728": {
       "name": "Create Spellstone",
@@ -6112,7 +6270,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17729": {
       "name": "Greater Spellstone",
@@ -6155,7 +6314,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17730": {
       "name": "Major Spellstone",
@@ -6198,7 +6358,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17735": {
       "name": "Suffering",
@@ -6230,7 +6391,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17750": {
       "name": "Suffering",
@@ -6262,7 +6424,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17751": {
       "name": "Suffering",
@@ -6294,7 +6457,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17752": {
       "name": "Suffering",
@@ -6326,7 +6490,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17767": {
       "name": "Consume Shadows",
@@ -6358,7 +6523,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17778": {
       "name": "Cataclysm",
@@ -6390,7 +6556,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17783": {
       "name": "Fel Concentration",
@@ -6422,7 +6589,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17788": {
       "name": "Bane",
@@ -6465,7 +6633,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17793": {
       "name": "Improved Shadow Bolt",
@@ -6497,7 +6666,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17794": {
       "name": "Shadow Vulnerability",
@@ -6529,7 +6699,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17804": {
       "name": "Soul Siphon",
@@ -6561,7 +6732,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17809": {
       "name": "Lesser Firestone Attack",
@@ -6593,7 +6765,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17810": {
       "name": "Improved Corruption",
@@ -6636,7 +6809,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17815": {
       "name": "Improved Immolate",
@@ -6679,7 +6853,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17833": {
       "name": "Improved Immolate",
@@ -6722,7 +6897,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17834": {
       "name": "Improved Immolate",
@@ -6765,7 +6941,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17835": {
       "name": "Improved Immolate",
@@ -6808,7 +6985,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17836": {
       "name": "Improved Immolate",
@@ -6851,7 +7029,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17850": {
       "name": "Consume Shadows",
@@ -6883,7 +7062,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17851": {
       "name": "Consume Shadows",
@@ -6915,7 +7095,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17852": {
       "name": "Consume Shadows",
@@ -6947,7 +7128,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17853": {
       "name": "Consume Shadows",
@@ -6979,7 +7161,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17854": {
       "name": "Consume Shadows",
@@ -7011,7 +7194,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17877": {
       "name": "Shadowburn",
@@ -7054,7 +7238,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17917": {
       "name": "Destructive Reach",
@@ -7097,7 +7282,8 @@
           "misc_value": 6,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17919": {
       "name": "Searing Pain",
@@ -7129,7 +7315,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17920": {
       "name": "Searing Pain",
@@ -7161,7 +7348,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17921": {
       "name": "Searing Pain",
@@ -7193,7 +7381,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17922": {
       "name": "Searing Pain",
@@ -7225,7 +7414,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17923": {
       "name": "Searing Pain",
@@ -7257,7 +7447,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17924": {
       "name": "Soul Fire",
@@ -7289,7 +7480,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17925": {
       "name": "Death Coil",
@@ -7332,7 +7524,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17926": {
       "name": "Death Coil",
@@ -7375,7 +7568,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17927": {
       "name": "Agonizing Flames",
@@ -7429,7 +7623,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17928": {
       "name": "Howl of Terror",
@@ -7472,7 +7667,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17933": {
       "name": "Firestone Attack",
@@ -7504,7 +7700,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17934": {
       "name": "Greater Firestone Attack",
@@ -7536,7 +7733,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17935": {
       "name": "Major Firestone Attack",
@@ -7568,7 +7766,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17941": {
       "name": "Shadow Trance",
@@ -7600,7 +7799,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17951": {
       "name": "Create Firestone",
@@ -7632,7 +7832,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17952": {
       "name": "Create Firestone",
@@ -7664,7 +7865,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17953": {
       "name": "Create Firestone",
@@ -7696,7 +7898,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17954": {
       "name": "Emberstorm",
@@ -7750,7 +7953,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17959": {
       "name": "Ruin",
@@ -7782,7 +7986,8 @@
           "misc_value": 15,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17962": {
       "name": "Conflagrate",
@@ -7814,7 +8019,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18073": {
       "name": "Pyroclasm",
@@ -7857,7 +8063,8 @@
           "misc_value": 0,
           "trigger_spell": 18350
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18094": {
       "name": "Nightfall",
@@ -7889,7 +8096,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18096": {
       "name": "Apocalypse",
@@ -7921,7 +8129,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18119": {
       "name": "Aftermath",
@@ -7964,7 +8173,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18126": {
       "name": "Improved Firebolt",
@@ -7996,7 +8206,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18127": {
       "name": "Improved Firebolt",
@@ -8028,7 +8239,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18128": {
       "name": "Improved Lash of Pain",
@@ -8060,7 +8272,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18129": {
       "name": "Improved Lash of Pain",
@@ -8092,7 +8305,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18130": {
       "name": "Devastation",
@@ -8124,7 +8338,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18135": {
       "name": "Intensity",
@@ -8156,7 +8371,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18174": {
       "name": "Suppression",
@@ -8210,7 +8426,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18179": {
       "name": "Improved Curse of Weakness",
@@ -8242,7 +8459,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18180": {
       "name": "Improved Curse of Weakness",
@@ -8274,7 +8492,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18181": {
       "name": "Improved Curse of Weakness",
@@ -8306,7 +8525,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18182": {
       "name": "Improved Life Tap",
@@ -8338,7 +8558,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18218": {
       "name": "Grim Reach",
@@ -8370,7 +8591,8 @@
           "misc_value": 5,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18223": {
       "name": "Curse of Exhaustion",
@@ -8402,7 +8624,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 8.0
     },
     "18265": {
       "name": "Siphon Life",
@@ -8434,7 +8657,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18271": {
       "name": "Shadow Mastery",
@@ -8477,7 +8701,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18288": {
       "name": "Amplify Curse",
@@ -8520,7 +8745,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18310": {
       "name": "Improved Curse of Exhaustion",
@@ -8552,7 +8778,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18311": {
       "name": "Improved Curse of Exhaustion",
@@ -8584,7 +8811,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18312": {
       "name": "Improved Curse of Exhaustion",
@@ -8616,7 +8844,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18313": {
       "name": "Improved Curse of Exhaustion",
@@ -8648,7 +8877,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18376": {
       "name": "Corruption",
@@ -8680,7 +8910,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18540": {
       "name": "Ritual of Doom",
@@ -8712,7 +8943,8 @@
           "misc_value": 177193,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 100.0
     },
     "18647": {
       "name": "Banish",
@@ -8755,7 +8987,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18671": {
       "name": "Curse of Agony",
@@ -8787,7 +9020,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18692": {
       "name": "Improved Healthstone",
@@ -8819,7 +9053,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18693": {
       "name": "Improved Healthstone",
@@ -8851,7 +9086,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18694": {
       "name": "Improved Imp",
@@ -8905,7 +9141,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18703": {
       "name": "Improved Health Funnel",
@@ -8970,7 +9207,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18705": {
       "name": "Improved Voidwalker",
@@ -9002,7 +9240,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18708": {
       "name": "Fel Domination",
@@ -9045,7 +9284,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18709": {
       "name": "Master Summoner",
@@ -9088,7 +9328,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18727": {
       "name": "Tamed Pet Passive (DND)",
@@ -9120,7 +9361,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18728": {
       "name": "Tamed Pet Passive (DND)",
@@ -9152,7 +9394,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18729": {
       "name": "Tamed Pet Passive (DND)",
@@ -9184,7 +9427,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18730": {
       "name": "Tamed Pet Passive (DND)",
@@ -9216,7 +9460,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18731": {
       "name": "Fel Vitality",
@@ -9259,7 +9504,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18735": {
       "name": "Tamed Pet Passive (DND)",
@@ -9291,7 +9537,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18736": {
       "name": "Tamed Pet Passive (DND)",
@@ -9323,7 +9570,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18737": {
       "name": "Tamed Pet Passive (DND)",
@@ -9355,7 +9603,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18738": {
       "name": "Tamed Pet Passive (DND)",
@@ -9387,7 +9636,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18739": {
       "name": "Tamed Pet Passive (DND)",
@@ -9419,7 +9669,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18740": {
       "name": "Tamed Pet Passive (DND)",
@@ -9451,7 +9702,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18741": {
       "name": "Tamed Pet Passive (DND)",
@@ -9483,7 +9735,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18742": {
       "name": "Tamed Pet Passive (DND)",
@@ -9515,7 +9768,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18754": {
       "name": "Improved Sayaad",
@@ -9558,7 +9812,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18757": {
       "name": "Master Conjuror",
@@ -9601,7 +9856,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18758": {
       "name": "Master Conjuror",
@@ -9644,7 +9900,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18767": {
       "name": "Improved Firestone",
@@ -9676,7 +9933,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18768": {
       "name": "Improved Firestone",
@@ -9708,7 +9966,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18769": {
       "name": "Unholy Power",
@@ -9740,7 +9999,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18774": {
       "name": "Improved Spellstone",
@@ -9772,7 +10032,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18775": {
       "name": "Improved Spellstone",
@@ -9804,7 +10065,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18789": {
       "name": "Burning Shadow",
@@ -9847,7 +10109,8 @@
           "misc_value": 2228,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18790": {
       "name": "Fel Stamina",
@@ -9890,7 +10153,8 @@
           "misc_value": 2228,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18791": {
       "name": "Touch of Fire",
@@ -9933,7 +10197,8 @@
           "misc_value": 2228,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18792": {
       "name": "Fel Energy",
@@ -9976,7 +10241,8 @@
           "misc_value": 2228,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18821": {
       "name": "Improved Subjugate Demon",
@@ -10030,7 +10296,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18822": {
       "name": "Improved Subjugate Demon",
@@ -10084,7 +10351,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18823": {
       "name": "Improved Subjugate Demon",
@@ -10138,7 +10406,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18824": {
       "name": "Improved Subjugate Demon",
@@ -10192,7 +10461,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18825": {
       "name": "Improved Subjugate Demon",
@@ -10246,7 +10516,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18827": {
       "name": "Improved Bane of Agony",
@@ -10278,7 +10549,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18867": {
       "name": "Shadowburn",
@@ -10321,7 +10593,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18868": {
       "name": "Shadowburn",
@@ -10364,7 +10637,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18869": {
       "name": "Shadowburn",
@@ -10407,7 +10681,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18870": {
       "name": "Shadowburn",
@@ -10450,7 +10725,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18871": {
       "name": "Shadowburn",
@@ -10493,7 +10769,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18879": {
       "name": "Siphon Life",
@@ -10525,7 +10802,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18880": {
       "name": "Siphon Life",
@@ -10557,7 +10835,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18881": {
       "name": "Siphon Life",
@@ -10589,7 +10868,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18930": {
       "name": "Conflagrate",
@@ -10621,7 +10901,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18931": {
       "name": "Conflagrate",
@@ -10653,7 +10934,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18932": {
       "name": "Conflagrate",
@@ -10685,7 +10967,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19007": {
       "name": "Tamed Pet Passive (DND)",
@@ -10717,7 +11000,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19244": {
       "name": "Spell Lock",
@@ -10760,7 +11044,8 @@
           "misc_value": 0,
           "trigger_spell": 24259
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19432": {
       "name": "Tamed Pet Passive (DND)",
@@ -10792,7 +11077,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19433": {
       "name": "Tamed Pet Passive (DND)",
@@ -10835,7 +11121,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19438": {
       "name": "Sacrifice",
@@ -10878,7 +11165,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19440": {
       "name": "Sacrifice",
@@ -10921,7 +11209,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19441": {
       "name": "Sacrifice",
@@ -10964,7 +11253,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19442": {
       "name": "Sacrifice",
@@ -11007,7 +11297,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19443": {
       "name": "Sacrifice",
@@ -11050,7 +11341,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19474": {
       "name": "Rain of Fire",
@@ -11104,7 +11396,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19476": {
       "name": "Dispel Magic",
@@ -11136,7 +11429,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19478": {
       "name": "Tainted Blood",
@@ -11168,7 +11462,8 @@
           "misc_value": 0,
           "trigger_spell": 19479
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19479": {
       "name": "Tainted Blood Effect",
@@ -11200,7 +11495,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19480": {
       "name": "Paranoia",
@@ -11232,7 +11528,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19505": {
       "name": "Devour Magic",
@@ -11264,7 +11561,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19647": {
       "name": "Spell Lock",
@@ -11307,7 +11605,8 @@
           "misc_value": 0,
           "trigger_spell": 24259
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19652": {
       "name": "Tainted Blood Effect",
@@ -11339,7 +11638,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19653": {
       "name": "Tainted Blood Effect",
@@ -11371,7 +11671,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19654": {
       "name": "Tainted Blood Effect",
@@ -11403,7 +11704,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19655": {
       "name": "Tainted Blood",
@@ -11435,7 +11737,8 @@
           "misc_value": 0,
           "trigger_spell": 19652
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19656": {
       "name": "Tainted Blood",
@@ -11467,7 +11770,8 @@
           "misc_value": 0,
           "trigger_spell": 19653
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19658": {
       "name": "Devour Magic Effect",
@@ -11499,7 +11803,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19660": {
       "name": "Tainted Blood",
@@ -11531,7 +11836,8 @@
           "misc_value": 0,
           "trigger_spell": 19654
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19731": {
       "name": "Devour Magic",
@@ -11563,7 +11869,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19732": {
       "name": "Devour Magic Effect",
@@ -11595,7 +11902,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19733": {
       "name": "Devour Magic Effect",
@@ -11627,7 +11935,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19734": {
       "name": "Devour Magic",
@@ -11659,7 +11968,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19735": {
       "name": "Devour Magic Effect",
@@ -11691,7 +12001,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19736": {
       "name": "Devour Magic",
@@ -11723,7 +12034,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19952": {
       "name": "Heal Ragnaros",
@@ -11755,7 +12067,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20018": {
       "name": "Create Healthstone (Major)",
@@ -11787,7 +12100,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20022": {
       "name": "Create Soulstone",
@@ -11819,7 +12133,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20707": {
       "name": "Soulstone Resurrection",
@@ -11851,7 +12166,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20752": {
       "name": "Create Soulstone",
@@ -11883,7 +12199,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 85.0
     },
     "20755": {
       "name": "Create Soulstone",
@@ -11915,7 +12232,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 85.0
     },
     "20756": {
       "name": "Create Soulstone",
@@ -11947,7 +12265,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 85.0
     },
     "20757": {
       "name": "Create Soulstone",
@@ -11979,7 +12298,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 85.0
     },
     "20762": {
       "name": "Soulstone Resurrection",
@@ -12011,7 +12331,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20763": {
       "name": "Soulstone Resurrection",
@@ -12043,7 +12364,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20764": {
       "name": "Soulstone Resurrection",
@@ -12075,7 +12397,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20765": {
       "name": "Soulstone Resurrection",
@@ -12107,7 +12430,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20785": {
       "name": "Charm Tolerance (DND)",
@@ -12139,7 +12463,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20801": {
       "name": "Firebolt",
@@ -12171,7 +12496,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20882": {
       "name": "Subjugate Demon",
@@ -12225,7 +12551,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21068": {
       "name": "Corruption",
@@ -12257,7 +12584,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22855": {
       "name": "Pimgib's Collar",
@@ -12289,7 +12617,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23046": {
       "name": "Searing Pain Cast Pushback Reduction",
@@ -12321,7 +12650,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23047": {
       "name": "Immolate Cast Time Reduction",
@@ -12364,7 +12694,8 @@
           "misc_value": 21,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23468": {
       "name": "Minor Healthstone",
@@ -12396,7 +12727,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23469": {
       "name": "Minor Healthstone",
@@ -12428,7 +12760,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23470": {
       "name": "Lesser Healthstone",
@@ -12460,7 +12793,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23471": {
       "name": "Lesser Healthstone",
@@ -12492,7 +12826,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23472": {
       "name": "Healthstone",
@@ -12524,7 +12859,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23473": {
       "name": "Healthstone",
@@ -12556,7 +12892,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23474": {
       "name": "Greater Healthstone",
@@ -12588,7 +12925,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23475": {
       "name": "Greater Healthstone",
@@ -12620,7 +12958,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23476": {
       "name": "Major Healthstone",
@@ -12652,7 +12991,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23477": {
       "name": "Major Healthstone",
@@ -12684,7 +13024,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23480": {
       "name": "Increase Fire Dam",
@@ -12727,7 +13068,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23481": {
       "name": "Increase Fire Dam",
@@ -12770,7 +13112,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23482": {
       "name": "Increase Fire Dam",
@@ -12813,7 +13156,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23483": {
       "name": "Increase Fire Dam",
@@ -12856,7 +13200,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23500": {
       "name": "Summon Felhunter",
@@ -12888,7 +13233,8 @@
           "misc_value": 417,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23501": {
       "name": "Summon Voidwalker",
@@ -12920,7 +13266,8 @@
           "misc_value": 1860,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23502": {
       "name": "Summon Succubus",
@@ -12952,7 +13299,8 @@
           "misc_value": 1863,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23503": {
       "name": "Summon Imp",
@@ -12984,7 +13332,8 @@
           "misc_value": 416,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23517": {
       "name": "Create Healthstone (Minor)",
@@ -13016,7 +13365,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23518": {
       "name": "Create Healthstone (Minor)",
@@ -13048,7 +13398,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23519": {
       "name": "Create Healthstone (Minor)",
@@ -13080,7 +13431,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23520": {
       "name": "Create Healthstone (Lesser)",
@@ -13112,7 +13464,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23521": {
       "name": "Create Healthstone (Lesser)",
@@ -13144,7 +13497,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23522": {
       "name": "Create Healthstone (Lesser)",
@@ -13176,7 +13530,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23553": {
       "name": "Shadow Cost Reduction",
@@ -13208,7 +13563,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23554": {
       "name": "Improved Drain Life",
@@ -13240,7 +13596,8 @@
           "misc_value": 27,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23555": {
       "name": "Decreased Destruction Threat",
@@ -13272,7 +13629,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23813": {
       "name": "Create Healthstone",
@@ -13304,7 +13662,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23814": {
       "name": "Create Healthstone",
@@ -13336,7 +13695,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23815": {
       "name": "Create Healthstone",
@@ -13368,7 +13728,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23816": {
       "name": "Create Healthstone (Greater)",
@@ -13400,7 +13761,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23817": {
       "name": "Create Healthstone (Greater)",
@@ -13432,7 +13794,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23818": {
       "name": "Create Healthstone (Greater)",
@@ -13464,7 +13827,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23819": {
       "name": "Create Healthstone (Major)",
@@ -13496,7 +13860,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23820": {
       "name": "Create Healthstone (Major)",
@@ -13528,7 +13893,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23821": {
       "name": "Create Healthstone (Major)",
@@ -13560,7 +13926,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24259": {
       "name": "Spell Lock",
@@ -13592,7 +13959,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24430": {
       "name": "Improved Rain of Fire/Hellfire",
@@ -13624,7 +13992,8 @@
           "misc_value": 6,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24486": {
       "name": "Improved Corruption",
@@ -13656,7 +14025,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24487": {
       "name": "Improved Death Coil",
@@ -13688,7 +14058,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24543": {
       "name": "Massive Destruction",
@@ -13720,7 +14091,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24826": {
       "name": "Infernal Fire",
@@ -13763,7 +14135,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24893": {
       "name": "Black Sapphire",
@@ -13795,7 +14168,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25112": {
       "name": "Summon Voidwalker",
@@ -13827,7 +14201,8 @@
           "misc_value": 1860,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25307": {
       "name": "Shadow Bolt",
@@ -13859,7 +14234,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25309": {
       "name": "Immolate",
@@ -13913,7 +14289,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25311": {
       "name": "Corruption",
@@ -13945,7 +14322,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26116": {
       "name": "Doomcaller Immolate Bonus",
@@ -13977,7 +14355,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26117": {
       "name": "Doomcaller Reduced Shadow Bolt Cost",
@@ -14009,7 +14388,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26118": {
       "name": "Implements of Unspoken Names Pet Bonus",
@@ -14052,7 +14432,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26281": {
       "name": "Taunt",
@@ -14084,7 +14465,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28023": {
       "name": "Create Healthstone",
@@ -14116,7 +14498,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28412": {
       "name": "Death Coil",
@@ -14170,7 +14553,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28447": {
       "name": "Shadow Burst",
@@ -14213,7 +14597,8 @@
           "misc_value": 150,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28541": {
       "name": "Death Coil Damage Increase",
@@ -14245,7 +14630,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28608": {
       "name": "Test Curse of Agony",
@@ -14277,7 +14663,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28746": {
       "name": "Plagueheart",
@@ -14320,7 +14707,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28829": {
       "name": "Corruption",
@@ -14352,7 +14740,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28830": {
       "name": "Life Tap",
@@ -14384,7 +14773,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28831": {
       "name": "Vampirism",
@@ -14416,7 +14806,8 @@
           "misc_value": 0,
           "trigger_spell": 28839
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28845": {
       "name": "Cheat Death",
@@ -14448,7 +14839,8 @@
           "misc_value": 0,
           "trigger_spell": 28846
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "30879": {
       "name": "Permanent Area Damage 50k",
@@ -14480,7 +14872,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "31818": {
       "name": "Life Tap",
@@ -14512,7 +14905,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "350026": {
       "name": "Shadow Bolt",
@@ -14544,7 +14938,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403501": {
       "name": "Haunt",
@@ -14598,7 +14993,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403511": {
       "name": "Improved Drains",
@@ -14630,7 +15026,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403619": {
       "name": "Fel Armor",
@@ -14706,7 +15103,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 28.0
     },
     "403628": {
       "name": "Shadow Bolt Volley",
@@ -14760,7 +15158,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403629": {
       "name": "Chaos Bolt",
@@ -14792,7 +15191,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 7.0
     },
     "403630": {
       "name": "Chaos Bolt",
@@ -14824,7 +15224,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403650": {
       "name": "Lake of Fire",
@@ -14856,7 +15257,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403666": {
       "name": "Lake of Fire",
@@ -14932,7 +15334,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403668": {
       "name": "Master Channeler",
@@ -15041,7 +15444,8 @@
           "misc_value": 11700,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403677": {
       "name": "Drain Life",
@@ -15073,7 +15477,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403685": {
       "name": "Drain Life",
@@ -15105,7 +15510,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403686": {
       "name": "Drain Life",
@@ -15137,7 +15543,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403687": {
       "name": "Drain Life",
@@ -15169,7 +15576,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403688": {
       "name": "Drain Life",
@@ -15201,7 +15609,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403689": {
       "name": "Drain Life",
@@ -15233,7 +15642,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403789": {
       "name": "Metamorphosis",
@@ -15474,7 +15884,8 @@
           "misc_value": 6215,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 100.0
     },
     "403816": {
       "name": "Metamorphosis",
@@ -15561,7 +15972,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403828": {
       "name": "Menace",
@@ -15604,7 +16016,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403835": {
       "name": "Shadow Cleave",
@@ -15636,7 +16049,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403839": {
       "name": "Shadow Cleave",
@@ -15668,7 +16082,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403840": {
       "name": "Shadow Cleave",
@@ -15700,7 +16115,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403841": {
       "name": "Shadow Cleave",
@@ -15732,7 +16148,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403842": {
       "name": "Shadow Cleave",
@@ -15764,7 +16181,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403843": {
       "name": "Shadow Cleave",
@@ -15796,7 +16214,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403844": {
       "name": "Shadow Cleave",
@@ -15828,7 +16247,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403848": {
       "name": "Shadow Cleave",
@@ -15860,7 +16280,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403851": {
       "name": "Shadow Cleave",
@@ -15892,7 +16313,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403852": {
       "name": "Shadow Cleave",
@@ -15924,7 +16346,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403858": {
       "name": "Haunt",
@@ -15956,7 +16379,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403860": {
       "name": "Chaos Bolt",
@@ -15988,7 +16412,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403863": {
       "name": "Soul Siphon",
@@ -16020,7 +16445,8 @@
           "misc_value": 417347,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403868": {
       "name": "Master Channeler",
@@ -16052,7 +16478,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403871": {
       "name": "Shadow Bolt Volley",
@@ -16084,7 +16511,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403872": {
       "name": "Lake of Fire",
@@ -16116,7 +16544,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "403873": {
       "name": "Metamorphosis",
@@ -16148,7 +16577,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "412689": {
       "name": "Everlasting Affliction",
@@ -16180,7 +16610,8 @@
           "misc_value": 0,
           "trigger_spell": 412698
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "412727": {
       "name": "Demonic Tactics",
@@ -16212,7 +16643,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "412729": {
       "name": "Tamed Pet Passive (DND)",
@@ -16244,7 +16676,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "412732": {
       "name": "Demonic Knowledge",
@@ -16276,7 +16709,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "412751": {
       "name": "Fire and Brimstone",
@@ -16319,7 +16753,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "412758": {
       "name": "Incinerate",
@@ -16362,7 +16797,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "412787": {
       "name": "Disrupt",
@@ -16405,7 +16841,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 5.0
     },
     "412788": {
       "name": "Demon Charge",
@@ -16448,7 +16885,8 @@
           "misc_value": 0,
           "trigger_spell": 7922
         }
-      ]
+      ],
+      "cost_pct": 5.0
     },
     "412789": {
       "name": "Demonic Howl",
@@ -16480,7 +16918,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 5.0
     },
     "412798": {
       "name": "Dance of the Wicked",
@@ -16512,7 +16951,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "412800": {
       "name": "Dance of the Wicked",
@@ -16555,7 +16995,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415076": {
       "name": "Exorcist",
@@ -16642,7 +17083,8 @@
           "misc_value": 10314,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415749": {
       "name": "Demonic Knowledge",
@@ -16674,7 +17116,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415751": {
       "name": "Dance of the Wicked",
@@ -16706,7 +17149,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "420744": {
       "name": "Altar of Thorns",
@@ -16738,7 +17182,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "421322": {
       "name": "Cursed Discovery",
@@ -16770,7 +17215,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "423474": {
       "name": "Fetish of Mischief",
@@ -16802,7 +17248,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425463": {
       "name": "Demonic Grace",
@@ -16845,7 +17292,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425464": {
       "name": "Demonic Pact",
@@ -16877,7 +17325,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425466": {
       "name": "Demonic Pact",
@@ -16909,7 +17358,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426195": {
       "name": "Vengeance",
@@ -16941,7 +17391,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426241": {
       "name": "Invocation",
@@ -16973,7 +17424,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426243": {
       "name": "Invocation",
@@ -17005,7 +17457,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426245": {
       "name": "Invocation",
@@ -17037,7 +17490,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426246": {
       "name": "Invocation",
@@ -17069,7 +17523,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426247": {
       "name": "Invocation",
@@ -17101,7 +17556,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426301": {
       "name": "Grimoire of Synergy",
@@ -17133,7 +17589,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426316": {
       "name": "Shadow and Flame",
@@ -17198,7 +17655,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426320": {
       "name": "Shadowflame",
@@ -17252,7 +17710,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 27.0
     },
     "426325": {
       "name": "Shadowflame",
@@ -17284,7 +17743,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426331": {
       "name": "Invocation",
@@ -17316,7 +17776,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426442": {
       "name": "Invocation",
@@ -17348,7 +17809,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426444": {
       "name": "Grimoire of Synergy",
@@ -17380,7 +17842,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426449": {
       "name": "Shadow and Flame",
@@ -17412,7 +17875,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426454": {
       "name": "Shadowflame",
@@ -17455,7 +17919,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426469": {
       "name": "Vengeance",
@@ -17487,7 +17952,8 @@
           "misc_value": 417345,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "426764": {
       "name": "Only Pain",
@@ -17519,7 +17985,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "427712": {
       "name": "Pandemic",
@@ -17551,7 +18018,8 @@
           "misc_value": 15,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "427713": {
       "name": "Backdraft",
@@ -17583,7 +18051,8 @@
           "misc_value": 12,
           "trigger_spell": 427714
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "427714": {
       "name": "Backdraft",
@@ -17615,7 +18084,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "427717": {
       "name": "Unstable Affliction",
@@ -17669,7 +18139,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "427719": {
       "name": "Unstable Affliction",
@@ -17712,7 +18183,8 @@
           "misc_value": 128,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "427725": {
       "name": "Immolation Aura",
@@ -17744,7 +18216,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "427726": {
       "name": "Immolation Aura",
@@ -17798,7 +18271,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "427733": {
       "name": "Summon Felguard",
@@ -17830,7 +18304,8 @@
           "misc_value": 213450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 80.0
     },
     "427742": {
       "name": "Anguish",
@@ -17862,7 +18337,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 10.0
     },
     "427743": {
       "name": "Avoidance",
@@ -17894,7 +18370,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "427744": {
       "name": "Cleave",
@@ -17926,7 +18403,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 10.0
     },
     "427745": {
       "name": "Intercept",
@@ -17969,7 +18447,8 @@
           "misc_value": 0,
           "trigger_spell": 427746
         }
-      ]
+      ],
+      "cost_pct": 10.0
     },
     "427748": {
       "name": "Summon Felguard",
@@ -18001,7 +18480,8 @@
           "misc_value": 213450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "429283": {
       "name": "Pandemic",
@@ -18033,7 +18513,8 @@
           "misc_value": 417345,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "430025": {
       "name": "Demonic Grace",
@@ -18065,7 +18546,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431742": {
       "name": "Backdraft",
@@ -18097,7 +18579,8 @@
           "misc_value": 417345,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431748": {
       "name": "Unstable Affliction",
@@ -18129,7 +18612,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431754": {
       "name": "Summon Felguard",
@@ -18161,7 +18645,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431757": {
       "name": "Immolation Aura",
@@ -18193,7 +18678,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "433672": {
       "name": "Loathing",
@@ -18236,7 +18722,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "433813": {
       "name": "Neverending Soul Vessel",
@@ -18268,7 +18755,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435086": {
       "name": "Brimstone Carving",
@@ -18300,7 +18788,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "437032": {
       "name": "Soul Harvesting",
@@ -18343,7 +18832,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "437169": {
       "name": "Portal of Summoning",
@@ -18375,7 +18865,8 @@
           "misc_value": 425889,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 12.0
     },
     "437311": {
       "name": "Portal of Summoning",
@@ -18407,7 +18898,8 @@
           "misc_value": 425892,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440870": {
       "name": "Decimation",
@@ -18472,7 +18964,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440873": {
       "name": "Decimation",
@@ -18515,7 +19008,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440882": {
       "name": "Infernal Armor",
@@ -18558,7 +19052,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 3.0
     },
     "440892": {
       "name": "Curse of the Elements",
@@ -18601,7 +19096,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440895": {
       "name": "Mark of Chaos",
@@ -18633,7 +19129,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "442226": {
       "name": "Menace",
@@ -18676,7 +19173,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "442233": {
       "name": "Menace",
@@ -18719,7 +19217,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "448686": {
       "name": "Zila Gular",
@@ -18751,7 +19250,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "449432": {
       "name": "Curse of Doom",
@@ -18783,7 +19283,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "450012": {
       "name": "Shadow Spark",
@@ -18815,7 +19316,8 @@
           "misc_value": 0,
           "trigger_spell": 450013
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "450013": {
       "name": "Shadow Spark",
@@ -18858,7 +19360,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "454197": {
       "name": "Invocation",
@@ -18890,7 +19393,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "454427": {
       "name": "Invocation",
@@ -18922,7 +19426,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457548": {
       "name": "S03 - Item - T1 - Warlock - Damage 2P Bonus",
@@ -18965,7 +19470,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457549": {
       "name": "S03 - Item - T1 - Warlock - Damage 4P Bonus",
@@ -19008,7 +19514,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457553": {
       "name": "S03 - Item - T1 - Warlock - Damage 6P Bonus",
@@ -19051,7 +19558,8 @@
           "misc_value": 0,
           "trigger_spell": 440873
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457558": {
       "name": "Fire Trance",
@@ -19083,7 +19591,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457569": {
       "name": "Banish",
@@ -19126,7 +19635,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457571": {
       "name": "S03 - Item - T1 - Warlock - Tank 2P Bonus",
@@ -19169,7 +19679,8 @@
           "misc_value": 18647,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457572": {
       "name": "S03 - Item - T1 - Warlock - Tank 4P Bonus",
@@ -19201,7 +19712,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457573": {
       "name": "Pain Tap",
@@ -19233,7 +19745,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457642": {
       "name": "S03 - Item - T1 - Warlock - Tank 6P Bonus",
@@ -19265,7 +19778,8 @@
           "misc_value": 0,
           "trigger_spell": 457643
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457643": {
       "name": "Soul Fire!",
@@ -19308,7 +19822,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459607": {
       "name": "Searing Pain Cast Pushback Reduction",
@@ -19340,7 +19855,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "460692": {
       "name": "Rain of Fire",
@@ -19383,7 +19899,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "460698": {
       "name": "Rain of Fire",
@@ -19426,7 +19943,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "460699": {
       "name": "Rain of Fire",
@@ -19469,7 +19987,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "460700": {
       "name": "Rain of Fire",
@@ -19512,7 +20031,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "460906": {
       "name": "Demonic Frenzy",
@@ -19577,7 +20097,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461230": {
       "name": "The Molten Core",
@@ -19609,7 +20130,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461615": {
       "name": "Mark of Chaos",
@@ -19696,7 +20218,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "465352": {
       "name": "Banish",
@@ -19739,7 +20262,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467917": {
       "name": "S03 - Item - T2 - Warlock - Damage 2P Bonus",
@@ -19782,7 +20306,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467983": {
       "name": "S03 - Item - T2 - Warlock - Damage 4P Bonus",
@@ -19825,7 +20350,8 @@
           "misc_value": 4309,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467988": {
       "name": "S03 - Item - T2 - Warlock - Damage 6P Bonus",
@@ -19868,7 +20394,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468028": {
       "name": "S03 - Item - T2 - Warlock - Tank 2P Bonus",
@@ -19900,7 +20427,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468029": {
       "name": "Life Tap",
@@ -19932,7 +20460,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468046": {
       "name": "S03 - Item - T2 - Warlock - Tank 4P Bonus",
@@ -19975,7 +20504,8 @@
           "misc_value": 0,
           "trigger_spell": 468062
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468048": {
       "name": "S03 - Item - T2 - Warlock - Tank 4P Bonus",
@@ -20007,7 +20537,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468061": {
       "name": "S03 - Item - T2 - Warlock - Tank 6P Bonus",
@@ -20039,7 +20570,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468303": {
       "name": "Reduced Cleave Cooldown",
@@ -20071,7 +20603,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468400": {
       "name": "S03 - Item - ZG - Warlock - Demonology 2P Bonus",
@@ -20114,7 +20647,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468446": {
       "name": "S03 - Item - ZG - Warlock - Demonology 3P Bonus",
@@ -20146,7 +20680,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468447": {
       "name": "S03 - Item - ZG - Warlock - Demonology 5P Bonus",
@@ -20178,7 +20713,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468540": {
       "name": "Massive Destruction",
@@ -20232,7 +20768,8 @@
           "misc_value": 0,
           "trigger_spell": 468543
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469085": {
       "name": "Shadow Carving",
@@ -20264,7 +20801,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469211": {
       "name": "Scythe of Chaos",
@@ -20296,7 +20834,8 @@
           "misc_value": 0,
           "trigger_spell": 469220
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469220": {
       "name": "Scythe of Chaos",
@@ -20350,7 +20889,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469222": {
       "name": "Impish Delight",
@@ -20393,7 +20933,8 @@
           "misc_value": 65115,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469224": {
       "name": "Void Walking",
@@ -20436,7 +20977,8 @@
           "misc_value": 65115,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469225": {
       "name": "Seduction of the Shadows",
@@ -20479,7 +21021,8 @@
           "misc_value": 65115,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469227": {
       "name": "Felhunted",
@@ -20511,7 +21054,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469228": {
       "name": "Felhunted",
@@ -20554,7 +21098,8 @@
           "misc_value": 0,
           "trigger_spell": 469227
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469229": {
       "name": "Hunter of Chaos",
@@ -20597,7 +21142,8 @@
           "misc_value": 65115,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469230": {
       "name": "Fel Invigoration",
@@ -20662,7 +21208,8 @@
           "misc_value": 65115,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469357": {
       "name": "Immolation Aura",
@@ -20694,7 +21241,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470279": {
       "name": "Demonic Aegis",
@@ -20726,7 +21274,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "471699": {
       "name": "Zila Amanemodas",
@@ -20758,7 +21307,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213450": {
       "name": "Corruption",
@@ -20790,7 +21340,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214085": {
       "name": "S03 - Item - TAQ - Warlock - Damage 2P Bonus",
@@ -20844,7 +21395,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214087": {
       "name": "S03 - Item - TAQ - Warlock - Damage 4P Bonus",
@@ -20876,7 +21428,8 @@
           "misc_value": 0,
           "trigger_spell": 1214088
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214088": {
       "name": "Infernalist",
@@ -20908,7 +21461,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214091": {
       "name": "S03 - Item - TAQ - Warlock - Tank 2P Bonus",
@@ -20940,7 +21494,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214095": {
       "name": "S03 - Item - TAQ - Warlock - Tank 4P Bonus",
@@ -20972,7 +21527,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214151": {
       "name": "S03 - Item - RAQ - Warlock - Tank 3P Bonus",
@@ -21004,7 +21560,8 @@
           "misc_value": 0,
           "trigger_spell": 1214156
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214156": {
       "name": "Spreading Pain",
@@ -21036,7 +21593,8 @@
           "misc_value": 17,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214166": {
       "name": "Bloodthirsty",
@@ -21068,7 +21626,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1214245": {
       "name": "Timeworn Spell",
@@ -21100,7 +21659,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1216486": {
       "name": "Noxious Breath",
@@ -21143,7 +21703,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219101": {
       "name": "Scythe of Chaos",
@@ -21197,7 +21758,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219421": {
       "name": "S03 - Item - Naxxramas - Warlock - Damage 2P Bonus",
@@ -21251,7 +21813,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219423": {
       "name": "S03 - Item - Naxxramas - Warlock - Damage 4P Bonus",
@@ -21283,7 +21846,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219425": {
       "name": "Immolate",
@@ -21315,7 +21879,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219428": {
       "name": "Corruption",
@@ -21347,7 +21912,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219429": {
       "name": "Shadowflame",
@@ -21379,7 +21945,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219436": {
       "name": "Unstable Affliction",
@@ -21411,7 +21978,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219462": {
       "name": "S03 - Item - Naxxramas - Warlock - Damage 6P Bonus",
@@ -21443,7 +22011,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219475": {
       "name": "Menace",
@@ -21486,7 +22055,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219476": {
       "name": "S03 - Item - Naxxramas - Warlock - Tank 4P Bonus",
@@ -21529,7 +22099,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1219479": {
       "name": "S03 - Item - Naxxramas - Warlock - Tank 6P Bonus",
@@ -21561,7 +22132,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1222974": {
       "name": "Damage Over Time Increase",
@@ -21593,7 +22165,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1222975": {
       "name": "Damage Over Time Increase",
@@ -21625,7 +22198,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1222976": {
       "name": "Damage Over Time Increase",
@@ -21657,7 +22231,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1222977": {
       "name": "Damage Over Time Increase",
@@ -21689,7 +22264,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1223794": {
       "name": "Seal of the Dawn",
@@ -21721,7 +22297,8 @@
           "misc_value": 27,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1223963": {
       "name": "Corruption",
@@ -21753,7 +22330,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1225177": {
       "name": "Malediction",
@@ -21796,7 +22374,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1225217": {
       "name": "Improved Felhunter",
@@ -21839,7 +22418,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1225228": {
       "name": "Bane of Havoc",
@@ -21871,7 +22451,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 5.0
     },
     "1225841": {
       "name": "Curse of Recklessness",
@@ -21925,7 +22506,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226981": {
       "name": "Grimoire of Synergy",
@@ -21957,7 +22539,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227175": {
       "name": "S03 - Item - Scarlet Enclave - Warlock - Damage 2P Bonus",
@@ -21989,7 +22572,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227180": {
       "name": "Burn",
@@ -22021,7 +22605,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227186": {
       "name": "S03 - Item - Scarlet Enclave - Warlock - Damage 4P Bonus",
@@ -22053,7 +22638,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227196": {
       "name": "S03 - Item - Scarlet Enclave - Warlock - Damage 6P Bonus",
@@ -22096,7 +22682,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227200": {
       "name": "Wickedness",
@@ -22128,7 +22715,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227204": {
       "name": "S03 - Item - Scarlet Enclave - Warlock - Tank 4P Bonus",
@@ -22171,7 +22759,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227207": {
       "name": "Filthy Lucre",
@@ -22203,7 +22792,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227214": {
       "name": "S03 - Item - Scarlet Enclave - Warlock - Tank 2P Bonus",
@@ -22235,7 +22825,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227228": {
       "name": "S03 - Item - Scarlet Enclave - Warlock - Tank 6P Bonus",
@@ -22278,7 +22869,8 @@
           "misc_value": 0,
           "trigger_spell": 1233988
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1227369": {
       "name": "Searing Flames",
@@ -22321,7 +22913,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1228049": {
       "name": "Shadowflame",
@@ -22341,7 +22934,8 @@
         2,
         0
       ],
-      "effects": []
+      "effects": [],
+      "cost_pct": 0.0
     },
     "1231663": {
       "name": "Conundrum",
@@ -22373,7 +22967,8 @@
           "misc_value": 5,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232093": {
       "name": "Infusion of Souls",
@@ -22405,7 +23000,8 @@
           "misc_value": 21,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1233077": {
       "name": "Curse of Agony",
@@ -22437,7 +23033,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1233988": {
       "name": "Infernalist Armor",
@@ -22469,7 +23066,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1235316": {
       "name": "Demonic Aegis",
@@ -22501,7 +23099,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1237162": {
       "name": "Increase Shadow Dam",
@@ -22544,7 +23143,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1237164": {
       "name": "Increase Shadow Dam",
@@ -22587,7 +23187,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1237165": {
       "name": "Increase Shadow Dam",
@@ -22630,7 +23231,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1242957": {
       "name": "Siphon Life",
@@ -22662,7 +23264,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1242971": {
       "name": "Unstable Affliction",
@@ -22716,7 +23319,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1242972": {
       "name": "Unstable Affliction",
@@ -22770,7 +23374,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1243028": {
       "name": "Demonic Energies",
@@ -22802,7 +23407,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1243030": {
       "name": "Demonic Tactics",
@@ -22834,7 +23440,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1243120": {
       "name": "Demonic Knowledge",
@@ -22877,7 +23484,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1243338": {
       "name": "Bane of Havoc",
@@ -22909,7 +23517,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1243339": {
       "name": "Bane of Havoc",
@@ -22941,7 +23550,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1259821": {
       "name": "Eureka!",
@@ -23006,7 +23616,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1262316": {
       "name": "The Quick and the Dead",
@@ -23038,7 +23649,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1262654": {
       "name": "Reagent Economy",
@@ -23070,7 +23682,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264530": {
       "name": "Apparition",
@@ -23102,7 +23715,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1266050": {
       "name": "Apparition",
@@ -23134,7 +23748,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1268813": {
       "name": "Arcane Animation",
@@ -23166,7 +23781,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1269135": {
       "name": "Apparition",
@@ -23198,7 +23814,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1282380": {
       "name": "Rain of Fire",
@@ -23230,7 +23847,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1282381": {
       "name": "Rain of Fire",
@@ -23262,7 +23880,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1282383": {
       "name": "Rain of Fire",
@@ -23294,7 +23913,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1282384": {
       "name": "Rain of Fire",
@@ -23326,7 +23946,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1282385": {
       "name": "Rain of Fire",
@@ -23358,7 +23979,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293641": {
       "name": "Improved Soulstone",
@@ -23390,7 +24012,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293693": {
       "name": "Haunt",
@@ -23444,7 +24067,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293694": {
       "name": "Haunt",
@@ -23498,7 +24122,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293695": {
       "name": "Demonic Brand",
@@ -23541,7 +24166,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293696": {
       "name": "Demonic Brand",
@@ -23584,7 +24210,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293697": {
       "name": "Demonic Brand",
@@ -23616,7 +24243,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293698": {
       "name": "Demonic Brand",
@@ -23648,7 +24276,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293699": {
       "name": "Demonic Brand",
@@ -23680,7 +24309,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293812": {
       "name": "Incinerate",
@@ -23723,7 +24353,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293813": {
       "name": "Incinerate",
@@ -23766,7 +24397,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293817": {
       "name": "Conflagrate",
@@ -23798,7 +24430,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293818": {
       "name": "Conflagrate",
@@ -23830,7 +24463,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1300966": {
       "name": "1.60.0 - Item - Tier 1 - Warlock 2P Bonus - Hit",
@@ -23873,7 +24507,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301068": {
       "name": "1.60.0 - Item - Tier 1 - Warlock 3P Bonus - Banish",
@@ -23905,7 +24540,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301094": {
       "name": "1.60.0 - Item - Tier 1 - Warlock 4P Bonus - SP vs. Demons",
@@ -23937,7 +24573,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301715": {
       "name": "1.60.0 - Item - Tier 1 - Warlock 5P Bonus - Life Tap",
@@ -23969,7 +24606,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310949": {
       "name": "Malevolence",
@@ -24001,7 +24639,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311676": {
       "name": "Curse of the Elements",
@@ -24044,7 +24683,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311677": {
       "name": "Curse of the Elements",
@@ -24087,7 +24727,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1311680": {
       "name": "Curse of the Elements",
@@ -24130,7 +24771,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1316697": {
       "name": "Wrack",
@@ -24173,7 +24815,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1322007": {
       "name": "Summon Voidwalker",
@@ -24205,7 +24848,8 @@
           "misc_value": 276809,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     }
   }
 }

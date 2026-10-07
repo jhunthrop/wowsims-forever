@@ -33,7 +33,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "136": {
       "name": "Mend Pet",
@@ -65,7 +66,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "781": {
       "name": "Disengage",
@@ -97,7 +99,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "982": {
       "name": "Revive Pet",
@@ -129,7 +132,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 100.0
     },
     "1002": {
       "name": "Eyes of the Beast",
@@ -172,7 +176,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1130": {
       "name": "Hunter's Mark",
@@ -215,7 +220,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1494": {
       "name": "Track Beasts",
@@ -269,7 +275,8 @@
           "misc_value": 24,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1495": {
       "name": "Mongoose Bite",
@@ -301,7 +308,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1499": {
       "name": "Freezing Trap",
@@ -333,7 +341,8 @@
           "misc_value": 2561,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1510": {
       "name": "Volley",
@@ -387,7 +396,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1543": {
       "name": "Flare",
@@ -430,7 +440,8 @@
           "misc_value": 41236,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1978": {
       "name": "Serpent Sting",
@@ -462,7 +473,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2480": {
       "name": "Shoot Bow",
@@ -494,7 +506,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2643": {
       "name": "Multi-Shot",
@@ -526,7 +539,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 13.89999961853
     },
     "2649": {
       "name": "Growl",
@@ -558,7 +572,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2973": {
       "name": "Raptor Strike",
@@ -590,7 +605,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "2974": {
       "name": "Wing Clip",
@@ -633,7 +649,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3009": {
       "name": "Claw",
@@ -665,7 +682,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3010": {
       "name": "Claw",
@@ -697,7 +715,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3034": {
       "name": "Viper Sting",
@@ -729,7 +748,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3043": {
       "name": "Scorpid Sting",
@@ -761,7 +781,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 9.0
     },
     "3044": {
       "name": "Arcane Shot",
@@ -793,7 +814,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3045": {
       "name": "Rapid Fire",
@@ -858,7 +880,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3111": {
       "name": "Mend Pet",
@@ -890,7 +913,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3355": {
       "name": "Freezing Trap Effect",
@@ -922,7 +946,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3661": {
       "name": "Mend Pet",
@@ -954,7 +979,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "3662": {
       "name": "Mend Pet",
@@ -986,7 +1012,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5116": {
       "name": "Concussive Shot",
@@ -1018,7 +1045,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 8.0
     },
     "5118": {
       "name": "Aspect of the Cheetah",
@@ -1061,7 +1089,8 @@
           "misc_value": 0,
           "trigger_spell": 15571
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "5384": {
       "name": "Feign Death",
@@ -1093,7 +1122,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "6660": {
       "name": "Shoot",
@@ -1125,7 +1155,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7918": {
       "name": "Shoot Gun",
@@ -1157,7 +1188,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "7919": {
       "name": "Shoot Crossbow",
@@ -1189,7 +1221,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "8875": {
       "name": "Tamed Pet Passive (DND)",
@@ -1221,7 +1254,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "10277": {
       "name": "Throw",
@@ -1253,7 +1287,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13159": {
       "name": "Aspect of the Pack",
@@ -1296,7 +1331,8 @@
           "misc_value": 0,
           "trigger_spell": 15571
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13161": {
       "name": "Aspect of the Beast",
@@ -1350,7 +1386,8 @@
           "misc_value": 0,
           "trigger_spell": 1299448
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13163": {
       "name": "Aspect of the Monkey",
@@ -1382,7 +1419,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13165": {
       "name": "Aspect of the Hawk",
@@ -1425,7 +1463,8 @@
           "misc_value": 0,
           "trigger_spell": 6150
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13542": {
       "name": "Mend Pet",
@@ -1457,7 +1496,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13543": {
       "name": "Mend Pet",
@@ -1489,7 +1529,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13544": {
       "name": "Mend Pet",
@@ -1521,7 +1562,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13549": {
       "name": "Serpent Sting",
@@ -1553,7 +1595,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13550": {
       "name": "Serpent Sting",
@@ -1585,7 +1628,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13551": {
       "name": "Serpent Sting",
@@ -1617,7 +1661,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13552": {
       "name": "Serpent Sting",
@@ -1649,7 +1694,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13553": {
       "name": "Serpent Sting",
@@ -1681,7 +1727,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13554": {
       "name": "Serpent Sting",
@@ -1713,7 +1760,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13555": {
       "name": "Serpent Sting",
@@ -1745,7 +1793,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13795": {
       "name": "Immolation Trap",
@@ -1777,7 +1826,8 @@
           "misc_value": 164638,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13797": {
       "name": "Immolation Trap Effect",
@@ -1809,7 +1859,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13809": {
       "name": "Frost Trap",
@@ -1841,7 +1892,8 @@
           "misc_value": 164639,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13810": {
       "name": "Frost Trap Aura",
@@ -1884,7 +1936,8 @@
           "misc_value": 0,
           "trigger_spell": 18350
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13812": {
       "name": "Explosive Trap Effect",
@@ -1927,7 +1980,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "13813": {
       "name": "Explosive Trap",
@@ -1959,7 +2013,8 @@
           "misc_value": 164839,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14207": {
       "name": "OLDFrost Trap Effect",
@@ -1991,7 +2046,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14260": {
       "name": "Raptor Strike",
@@ -2023,7 +2079,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14261": {
       "name": "Raptor Strike",
@@ -2055,7 +2112,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14262": {
       "name": "Raptor Strike",
@@ -2087,7 +2145,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14263": {
       "name": "Raptor Strike",
@@ -2119,7 +2178,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14264": {
       "name": "Raptor Strike",
@@ -2151,7 +2211,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14265": {
       "name": "Raptor Strike",
@@ -2183,7 +2244,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14266": {
       "name": "Raptor Strike",
@@ -2215,7 +2277,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14267": {
       "name": "Wing Clip",
@@ -2258,7 +2321,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14268": {
       "name": "Wing Clip",
@@ -2301,7 +2365,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14269": {
       "name": "Mongoose Bite",
@@ -2333,7 +2398,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14270": {
       "name": "Mongoose Bite",
@@ -2365,7 +2431,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14271": {
       "name": "Mongoose Bite",
@@ -2397,7 +2464,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14272": {
       "name": "Disengage",
@@ -2429,7 +2497,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14273": {
       "name": "Disengage",
@@ -2461,7 +2530,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14274": {
       "name": "Distracting Shot",
@@ -2493,7 +2563,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14279": {
       "name": "Viper Sting",
@@ -2525,7 +2596,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14280": {
       "name": "Viper Sting",
@@ -2557,7 +2629,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14281": {
       "name": "Arcane Shot",
@@ -2589,7 +2662,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14282": {
       "name": "Arcane Shot",
@@ -2621,7 +2695,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14283": {
       "name": "Arcane Shot",
@@ -2653,7 +2728,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14284": {
       "name": "Arcane Shot",
@@ -2685,7 +2761,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14285": {
       "name": "Arcane Shot",
@@ -2717,7 +2794,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14286": {
       "name": "Arcane Shot",
@@ -2749,7 +2827,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14287": {
       "name": "Arcane Shot",
@@ -2781,7 +2860,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14294": {
       "name": "Volley",
@@ -2835,7 +2915,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14295": {
       "name": "Volley",
@@ -2889,7 +2970,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14298": {
       "name": "Immolation Trap Effect",
@@ -2921,7 +3003,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14299": {
       "name": "Immolation Trap Effect",
@@ -2953,7 +3036,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14300": {
       "name": "Immolation Trap Effect",
@@ -2985,7 +3069,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14301": {
       "name": "Immolation Trap Effect",
@@ -3017,7 +3102,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14302": {
       "name": "Immolation Trap",
@@ -3049,7 +3135,8 @@
           "misc_value": 164872,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14303": {
       "name": "Immolation Trap",
@@ -3081,7 +3168,8 @@
           "misc_value": 164873,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14304": {
       "name": "Immolation Trap",
@@ -3113,7 +3201,8 @@
           "misc_value": 164874,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14305": {
       "name": "Immolation Trap",
@@ -3145,7 +3234,8 @@
           "misc_value": 164875,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14308": {
       "name": "Freezing Trap Effect",
@@ -3177,7 +3267,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14309": {
       "name": "Freezing Trap Effect",
@@ -3209,7 +3300,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14310": {
       "name": "Freezing Trap",
@@ -3241,7 +3333,8 @@
           "misc_value": 164876,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14311": {
       "name": "Freezing Trap",
@@ -3273,7 +3366,8 @@
           "misc_value": 164877,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14314": {
       "name": "Explosive Trap Effect",
@@ -3316,7 +3410,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14315": {
       "name": "Explosive Trap Effect",
@@ -3359,7 +3454,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14316": {
       "name": "Explosive Trap",
@@ -3391,7 +3487,8 @@
           "misc_value": 164879,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14317": {
       "name": "Explosive Trap",
@@ -3423,7 +3520,8 @@
           "misc_value": 164880,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14318": {
       "name": "Aspect of the Hawk",
@@ -3466,7 +3564,8 @@
           "misc_value": 0,
           "trigger_spell": 6150
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14319": {
       "name": "Aspect of the Hawk",
@@ -3509,7 +3608,8 @@
           "misc_value": 0,
           "trigger_spell": 6150
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14320": {
       "name": "Aspect of the Hawk",
@@ -3552,7 +3652,8 @@
           "misc_value": 0,
           "trigger_spell": 6150
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14321": {
       "name": "Aspect of the Hawk",
@@ -3595,7 +3696,8 @@
           "misc_value": 0,
           "trigger_spell": 6150
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14322": {
       "name": "Aspect of the Hawk",
@@ -3638,7 +3740,8 @@
           "misc_value": 0,
           "trigger_spell": 6150
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14323": {
       "name": "Hunter's Mark",
@@ -3681,7 +3784,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14324": {
       "name": "Hunter's Mark",
@@ -3724,7 +3828,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14325": {
       "name": "Hunter's Mark",
@@ -3767,7 +3872,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14824": {
       "name": "Haste",
@@ -3799,7 +3905,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14825": {
       "name": "Haste",
@@ -3831,7 +3938,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14826": {
       "name": "Haste",
@@ -3863,7 +3971,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14827": {
       "name": "Haste",
@@ -3895,7 +4004,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14828": {
       "name": "Haste",
@@ -3927,7 +4037,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14829": {
       "name": "Haste",
@@ -3959,7 +4070,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14916": {
       "name": "Growl",
@@ -3991,7 +4103,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14917": {
       "name": "Growl",
@@ -4023,7 +4136,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14918": {
       "name": "Growl",
@@ -4055,7 +4169,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14919": {
       "name": "Growl",
@@ -4087,7 +4202,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14920": {
       "name": "Growl",
@@ -4119,7 +4235,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "14921": {
       "name": "Growl",
@@ -4151,7 +4268,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15547": {
       "name": "Shoot",
@@ -4183,7 +4301,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15607": {
       "name": "Throw",
@@ -4215,7 +4334,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15620": {
       "name": "Shoot",
@@ -4247,7 +4367,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15629": {
       "name": "Distracting Shot",
@@ -4279,7 +4400,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15630": {
       "name": "Distracting Shot",
@@ -4311,7 +4433,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15631": {
       "name": "Distracting Shot",
@@ -4343,7 +4466,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15632": {
       "name": "Distracting Shot",
@@ -4375,7 +4499,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15795": {
       "name": "Throw",
@@ -4407,7 +4532,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "15860": {
       "name": "Impale",
@@ -4439,7 +4565,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16000": {
       "name": "Throw",
@@ -4471,7 +4598,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16001": {
       "name": "Impale",
@@ -4503,7 +4631,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16100": {
       "name": "Shoot",
@@ -4535,7 +4664,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16496": {
       "name": "Shoot",
@@ -4567,7 +4697,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16827": {
       "name": "Claw",
@@ -4599,7 +4730,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16828": {
       "name": "Claw",
@@ -4631,7 +4763,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16829": {
       "name": "Claw",
@@ -4663,7 +4796,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16830": {
       "name": "Claw",
@@ -4695,7 +4829,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16831": {
       "name": "Claw",
@@ -4727,7 +4862,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "16832": {
       "name": "Claw",
@@ -4759,7 +4895,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17253": {
       "name": "Bite",
@@ -4791,7 +4928,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17255": {
       "name": "Bite",
@@ -4823,7 +4961,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17256": {
       "name": "Bite",
@@ -4855,7 +4994,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17257": {
       "name": "Bite",
@@ -4887,7 +5027,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17258": {
       "name": "Bite",
@@ -4919,7 +5060,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17259": {
       "name": "Bite",
@@ -4951,7 +5093,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17260": {
       "name": "Bite",
@@ -4983,7 +5126,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17261": {
       "name": "Bite",
@@ -5015,7 +5159,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17331": {
       "name": "Fang of the Crystal Spider",
@@ -5069,7 +5214,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "17353": {
       "name": "Shoot",
@@ -5101,7 +5247,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "18561": {
       "name": "Shoot",
@@ -5133,7 +5280,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19159": {
       "name": "Savage Strikes",
@@ -5165,7 +5313,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19184": {
       "name": "Entrapment",
@@ -5197,7 +5346,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19228": {
       "name": "Improved Wing Clip",
@@ -5229,7 +5379,8 @@
           "misc_value": 0,
           "trigger_spell": 19229
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19239": {
       "name": "Clever Traps",
@@ -5272,7 +5423,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19255": {
       "name": "Survivalist",
@@ -5304,7 +5456,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19263": {
       "name": "Deterrence",
@@ -5347,7 +5500,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19286": {
       "name": "Improved Feign Death",
@@ -5379,7 +5533,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19287": {
       "name": "Improved Feign Death",
@@ -5411,7 +5566,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19290": {
       "name": "Surefooted",
@@ -5476,7 +5632,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19306": {
       "name": "Counterattack",
@@ -5530,7 +5687,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19376": {
       "name": "Survival Tactics",
@@ -5562,7 +5720,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19407": {
       "name": "Improved Concussive Shot",
@@ -5594,7 +5753,8 @@
           "misc_value": 0,
           "trigger_spell": 19410
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19416": {
       "name": "Efficiency",
@@ -5626,7 +5786,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19421": {
       "name": "Improved Hunter's Mark",
@@ -5658,7 +5819,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19426": {
       "name": "Lethal Attacks",
@@ -5690,7 +5852,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19434": {
       "name": "Aimed Shot",
@@ -5722,7 +5885,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19454": {
       "name": "Improved Arcane Shot",
@@ -5754,7 +5918,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19461": {
       "name": "Barrage",
@@ -5797,7 +5962,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19464": {
       "name": "Improved Serpent Sting",
@@ -5840,7 +6006,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19485": {
       "name": "Mortal Shots",
@@ -5872,7 +6039,8 @@
           "misc_value": 15,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19498": {
       "name": "Hawk Eye",
@@ -5904,7 +6072,8 @@
           "misc_value": 5,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19503": {
       "name": "Scatter Shot",
@@ -5947,7 +6116,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 8.0
     },
     "19506": {
       "name": "Trueshot Aura",
@@ -5979,7 +6149,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19549": {
       "name": "Improved Aspect of the Monkey",
@@ -6022,7 +6193,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19552": {
       "name": "Deadly Aspects",
@@ -6065,7 +6237,8 @@
           "misc_value": 18,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19557": {
       "name": "Improved Eyes of the Beast",
@@ -6097,7 +6270,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19558": {
       "name": "Improved Eyes of the Beast",
@@ -6129,7 +6303,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19559": {
       "name": "Pathfinding",
@@ -6161,7 +6336,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19572": {
       "name": "Improved Mend Pet",
@@ -6204,7 +6380,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19574": {
       "name": "Bestial Wrath",
@@ -6368,7 +6545,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 12.0
     },
     "19577": {
       "name": "Intimidation",
@@ -6411,7 +6589,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 8.0
     },
     "19580": {
       "name": "Tamed Pet Passive (DND)",
@@ -6443,7 +6622,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19581": {
       "name": "Tamed Pet Passive (DND)",
@@ -6475,7 +6655,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19582": {
       "name": "Tamed Pet Passive (DND)",
@@ -6507,7 +6688,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19583": {
       "name": "Endurance Training",
@@ -6539,7 +6721,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19589": {
       "name": "Tamed Pet Passive (DND)",
@@ -6571,7 +6754,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19590": {
       "name": "Bestial Discipline",
@@ -6614,7 +6798,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19591": {
       "name": "Tamed Pet Passive (DND)",
@@ -6646,7 +6831,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19596": {
       "name": "Bestial Swiftness",
@@ -6678,7 +6864,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19597": {
       "name": "Tame Ice Claw Bear",
@@ -6732,7 +6919,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19598": {
       "name": "Ferocity",
@@ -6764,7 +6952,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19603": {
       "name": "Bestial Fury",
@@ -6796,7 +6985,8 @@
           "misc_value": 18,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19605": {
       "name": "Bestial Fury",
@@ -6828,7 +7018,8 @@
           "misc_value": 18,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19606": {
       "name": "Bestial Fury",
@@ -6860,7 +7051,8 @@
           "misc_value": 18,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19607": {
       "name": "Bestial Fury",
@@ -6892,7 +7084,8 @@
           "misc_value": 18,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19608": {
       "name": "Bestial Fury",
@@ -6924,7 +7117,8 @@
           "misc_value": 18,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19609": {
       "name": "Thick Hide",
@@ -6956,7 +7150,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19616": {
       "name": "Unleashed Fury",
@@ -6988,7 +7183,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19621": {
       "name": "Frenzy",
@@ -7020,7 +7216,8 @@
           "misc_value": 18,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19676": {
       "name": "Tame Snow Leopard",
@@ -7074,7 +7271,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19677": {
       "name": "Tame Large Crag Boar",
@@ -7128,7 +7326,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19678": {
       "name": "Tame Adult Plainstrider",
@@ -7182,7 +7381,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19679": {
       "name": "Tame Prairie Stalker",
@@ -7236,7 +7436,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19680": {
       "name": "Tame Swoop",
@@ -7290,7 +7491,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19681": {
       "name": "Tame Dire Mottled Boar",
@@ -7344,7 +7546,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19682": {
       "name": "Tame Surf Crawler",
@@ -7398,7 +7601,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19683": {
       "name": "Tame Armored Scorpid",
@@ -7452,7 +7656,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19684": {
       "name": "Tame Webwood Lurker",
@@ -7506,7 +7711,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19685": {
       "name": "Tame Nightsaber Stalker",
@@ -7560,7 +7766,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19686": {
       "name": "Tame Strigid Screecher",
@@ -7614,7 +7821,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19767": {
       "name": "Aynasha's Bow",
@@ -7646,7 +7854,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19781": {
       "name": "Flame Spear",
@@ -7678,7 +7887,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19785": {
       "name": "Throw",
@@ -7710,7 +7920,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19801": {
       "name": "Tranquilizing Shot",
@@ -7742,7 +7953,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19878": {
       "name": "Track Demons",
@@ -7785,7 +7997,8 @@
           "misc_value": 4,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19879": {
       "name": "Track Dragonkin",
@@ -7828,7 +8041,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19880": {
       "name": "Track Elementals",
@@ -7871,7 +8085,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19882": {
       "name": "Track Giants",
@@ -7914,7 +8129,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19883": {
       "name": "Track Humanoids",
@@ -7957,7 +8173,8 @@
           "misc_value": 64,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19884": {
       "name": "Track Undead",
@@ -8000,7 +8217,8 @@
           "misc_value": 32,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "19885": {
       "name": "Track Hidden",
@@ -8054,7 +8272,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20043": {
       "name": "Aspect of the Wild",
@@ -8086,7 +8305,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20190": {
       "name": "Aspect of the Wild",
@@ -8118,7 +8338,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20463": {
       "name": "Shoot",
@@ -8150,7 +8371,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20736": {
       "name": "Distracting Shot",
@@ -8182,7 +8404,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20782": {
       "name": "Tamed Pet Passive (DND)",
@@ -8214,7 +8437,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20784": {
       "name": "Tamed Pet Passive (DND)",
@@ -8246,7 +8470,8 @@
           "misc_value": 0,
           "trigger_spell": 19615
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20900": {
       "name": "Aimed Shot",
@@ -8278,7 +8503,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20901": {
       "name": "Aimed Shot",
@@ -8310,7 +8536,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20902": {
       "name": "Aimed Shot",
@@ -8342,7 +8569,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20903": {
       "name": "Aimed Shot",
@@ -8374,7 +8602,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20904": {
       "name": "Aimed Shot",
@@ -8406,7 +8635,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20905": {
       "name": "Trueshot Aura",
@@ -8438,7 +8668,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20906": {
       "name": "Trueshot Aura",
@@ -8470,7 +8701,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20909": {
       "name": "Counterattack",
@@ -8524,7 +8756,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "20910": {
       "name": "Counterattack",
@@ -8578,7 +8811,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "21942": {
       "name": "Hunter Giant Stalker",
@@ -8621,7 +8855,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22121": {
       "name": "Shoot",
@@ -8653,7 +8888,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22411": {
       "name": "Shoot",
@@ -8685,7 +8921,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22854": {
       "name": "Increased Hunter Pet Damage",
@@ -8717,7 +8954,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22887": {
       "name": "Throw",
@@ -8749,7 +8987,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22907": {
       "name": "Shoot",
@@ -8781,7 +9020,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22908": {
       "name": "Volley",
@@ -8813,7 +9053,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22910": {
       "name": "Immolation Trap",
@@ -8845,7 +9086,8 @@
           "misc_value": 164875,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "22996": {
       "name": "Battle Standard",
@@ -8877,7 +9119,8 @@
           "misc_value": 179604,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23005": {
       "name": "Battle Standard",
@@ -8909,7 +9152,8 @@
           "misc_value": 179624,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23034": {
       "name": "Battle Standard",
@@ -8941,7 +9185,8 @@
           "misc_value": 14465,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23035": {
       "name": "Battle Standard",
@@ -8973,7 +9218,8 @@
           "misc_value": 14466,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23073": {
       "name": "Shoot",
@@ -9005,7 +9251,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23157": {
       "name": "Arcane Shot Mana Reduction",
@@ -9037,7 +9284,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23158": {
       "name": "Concussive Shot Cooldown Reduction",
@@ -9069,7 +9317,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23337": {
       "name": "Shoot",
@@ -9112,7 +9361,8 @@
           "misc_value": 100,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23499": {
       "name": "Revive Pet",
@@ -9144,7 +9394,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23538": {
       "name": "Battle Standard",
@@ -9176,7 +9427,8 @@
           "misc_value": 14751,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23539": {
       "name": "Battle Standard",
@@ -9208,7 +9460,8 @@
           "misc_value": 14752,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23559": {
       "name": "Improved Aspect of the Hawk",
@@ -9240,7 +9493,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23560": {
       "name": "Improved Mend Pet",
@@ -9294,7 +9548,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23566": {
       "name": "Improved Volley and Multishot",
@@ -9337,7 +9592,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23578": {
       "name": "Expose Weakness",
@@ -9369,7 +9625,8 @@
           "misc_value": 0,
           "trigger_spell": 23577
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23601": {
       "name": "Scatter Shot",
@@ -9412,7 +9669,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23721": {
       "name": "Arcane Infused",
@@ -9444,7 +9702,8 @@
           "misc_value": 0,
           "trigger_spell": 23722
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "23989": {
       "name": "Readiness",
@@ -9476,7 +9735,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24049": {
       "name": "Impale",
@@ -9508,7 +9768,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24118": {
       "name": "Lacerate",
@@ -9540,7 +9801,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24119": {
       "name": "Lacerate",
@@ -9572,7 +9834,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24120": {
       "name": "Lacerate",
@@ -9604,7 +9867,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24293": {
       "name": "Improved Tracking",
@@ -9636,7 +9900,8 @@
           "misc_value": 12,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24335": {
       "name": "Wyvern Sting",
@@ -9668,7 +9933,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24336": {
       "name": "Wyvern Sting",
@@ -9700,7 +9966,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24348": {
       "name": "Cheetah Sprint",
@@ -9732,7 +9999,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24353": {
       "name": "Devilsaur Tooth",
@@ -9764,7 +10032,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24406": {
       "name": "Improved Mend Pet",
@@ -9796,7 +10065,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24416": {
       "name": "Superior Aspects",
@@ -9828,7 +10098,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24432": {
       "name": "Improved Feign Death",
@@ -9860,7 +10131,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24443": {
       "name": "Improved Revive Pet",
@@ -9914,7 +10186,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24465": {
       "name": "Improved Concussive Shot",
@@ -9946,7 +10219,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24467": {
       "name": "Improved Serpent Sting",
@@ -9978,7 +10252,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24583": {
       "name": "Scorpid Poison",
@@ -10021,7 +10296,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24586": {
       "name": "Scorpid Poison",
@@ -10064,7 +10340,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24587": {
       "name": "Scorpid Poison",
@@ -10107,7 +10384,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24640": {
       "name": "Scorpid Poison",
@@ -10150,7 +10428,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24844": {
       "name": "Lightning Breath",
@@ -10182,7 +10461,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "24992": {
       "name": "Demonic Transformation",
@@ -10214,7 +10494,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25008": {
       "name": "Lightning Breath",
@@ -10246,7 +10527,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25009": {
       "name": "Lightning Breath",
@@ -10278,7 +10560,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25010": {
       "name": "Lightning Breath",
@@ -10310,7 +10593,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25011": {
       "name": "Lightning Breath",
@@ -10342,7 +10626,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25012": {
       "name": "Lightning Breath",
@@ -10374,7 +10659,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25200": {
       "name": "Shoot Silithus Rifleman Long Range",
@@ -10406,7 +10692,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25295": {
       "name": "Serpent Sting",
@@ -10438,7 +10725,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "25296": {
       "name": "Aspect of the Hawk",
@@ -10481,7 +10769,8 @@
           "misc_value": 0,
           "trigger_spell": 6150
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26090": {
       "name": "Thunderstomp",
@@ -10513,7 +10802,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26173": {
       "name": "Striker's Arcane Shot Bonus",
@@ -10545,7 +10835,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26174": {
       "name": "Striker's Rapid Fire Bonus",
@@ -10577,7 +10868,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26176": {
       "name": "Unseen Path Pet Bonus",
@@ -10609,7 +10901,8 @@
           "misc_value": 0,
           "trigger_spell": 29233
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26180": {
       "name": "Wyvern Sting",
@@ -10641,7 +10934,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26187": {
       "name": "Thunderstomp",
@@ -10673,7 +10967,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26188": {
       "name": "Thunderstomp",
@@ -10705,7 +11000,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26226": {
       "name": "Widow Bite",
@@ -10748,7 +11044,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26233": {
       "name": "Wyvern Sting",
@@ -10780,7 +11077,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26282": {
       "name": "Shoot Tauren Rifleman",
@@ -10812,7 +11110,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "26548": {
       "name": "Impale",
@@ -10844,7 +11143,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27205": {
       "name": "Increased Pet Damage +3%",
@@ -10876,7 +11176,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27632": {
       "name": "Aimed Shot",
@@ -10908,7 +11209,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27633": {
       "name": "Wing Clip",
@@ -10951,7 +11253,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27753": {
       "name": "Freezing Trap",
@@ -10983,7 +11286,8 @@
           "misc_value": 164877,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "27919": {
       "name": "Spit",
@@ -11026,7 +11330,8 @@
           "misc_value": 100,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28317": {
       "name": "Copy of Shoot",
@@ -11058,7 +11363,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28318": {
       "name": "Slime Shot",
@@ -11101,7 +11407,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28539": {
       "name": "Multi-Shot Damage Increase",
@@ -11133,7 +11440,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28751": {
       "name": "Multi-Shot",
@@ -11165,7 +11473,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28752": {
       "name": "Adrenaline Rush",
@@ -11197,7 +11506,8 @@
           "misc_value": 0,
           "trigger_spell": 28753
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28755": {
       "name": "Rapid Fire",
@@ -11229,7 +11539,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28758": {
       "name": "Stalker's Ally",
@@ -11272,7 +11583,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "28761": {
       "name": "Not There",
@@ -11304,7 +11616,8 @@
           "misc_value": 0,
           "trigger_spell": 28762
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29233": {
       "name": "Beast of the Unseen Path",
@@ -11336,7 +11649,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29413": {
       "name": "Haste",
@@ -11368,7 +11682,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29414": {
       "name": "Haste",
@@ -11400,7 +11715,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29415": {
       "name": "Haste",
@@ -11432,7 +11748,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29416": {
       "name": "Haste",
@@ -11464,7 +11781,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29417": {
       "name": "Haste",
@@ -11496,7 +11814,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "29418": {
       "name": "Haste",
@@ -11528,7 +11847,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "34074": {
       "name": "Aspect of the Viper",
@@ -11571,7 +11891,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409365": {
       "name": "Tamed Pet Passive (DND)",
@@ -11603,7 +11924,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409368": {
       "name": "Beast Mastery",
@@ -11657,7 +11979,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409372": {
       "name": "Growl",
@@ -11700,7 +12023,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409379": {
       "name": "Kill Command",
@@ -11732,7 +12056,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 1.5
     },
     "409396": {
       "name": "Kill Command",
@@ -11786,7 +12111,8 @@
           "misc_value": 0,
           "trigger_spell": 409418
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409418": {
       "name": "Kill Command",
@@ -11818,7 +12144,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409428": {
       "name": "Master Marksman",
@@ -11861,7 +12188,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409433": {
       "name": "Chimera Shot",
@@ -11915,7 +12243,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 6.0
     },
     "409493": {
       "name": "Chimera Shot - Serpent",
@@ -11947,7 +12276,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409494": {
       "name": "Chimera Shot - Viper",
@@ -11979,7 +12309,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409495": {
       "name": "Chimera Shot - Scorpid",
@@ -12011,7 +12342,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409504": {
       "name": "Expose Weakness",
@@ -12043,7 +12375,8 @@
           "misc_value": 0,
           "trigger_spell": 409507
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409507": {
       "name": "Expose Weakness",
@@ -12086,7 +12419,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409580": {
       "name": "Heart of the Lion",
@@ -12129,7 +12463,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 8.0
     },
     "409583": {
       "name": "Heart of the Lion",
@@ -12183,7 +12518,8 @@
           "misc_value": -1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409593": {
       "name": "Kill Shot",
@@ -12259,7 +12595,8 @@
           "misc_value": 600,
           "trigger_spell": 1218240
         }
-      ]
+      ],
+      "cost_pct": 3.0
     },
     "409687": {
       "name": "Dual Wield Specialization",
@@ -12302,7 +12639,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409691": {
       "name": "Raptor Strike",
@@ -12334,7 +12672,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409693": {
       "name": "Raptor Strike",
@@ -12366,7 +12705,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409748": {
       "name": "Raptor Strike",
@@ -12398,7 +12738,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409750": {
       "name": "Raptor Strike",
@@ -12430,7 +12771,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409751": {
       "name": "Raptor Strike",
@@ -12462,7 +12804,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409752": {
       "name": "Raptor Strike",
@@ -12494,7 +12837,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409754": {
       "name": "Raptor Strike",
@@ -12526,7 +12870,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409755": {
       "name": "Raptor Strike",
@@ -12558,7 +12903,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409957": {
       "name": "Steady Shot",
@@ -12590,7 +12936,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409958": {
       "name": "Master Marksman",
@@ -12622,7 +12969,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409959": {
       "name": "Expose Weakness",
@@ -12654,7 +13002,8 @@
           "misc_value": 415449,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409960": {
       "name": "Cobra Slayer",
@@ -12686,7 +13035,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409961": {
       "name": "Dual Wield Specialization",
@@ -12718,7 +13068,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409962": {
       "name": "Beast Mastery",
@@ -12750,7 +13101,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409968": {
       "name": "Trap Launcher",
@@ -12782,7 +13134,8 @@
           "misc_value": 415450,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409974": {
       "name": "Kill Shot",
@@ -12814,7 +13167,8 @@
           "misc_value": 399966,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409976": {
       "name": "Chimera Shot",
@@ -12846,7 +13200,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "409979": {
       "name": "Lone Wolf",
@@ -12878,7 +13233,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "411622": {
       "name": "Prairie Dog Musk",
@@ -12910,7 +13266,8 @@
           "misc_value": 1515,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "413446": {
       "name": "Auto Shot",
@@ -12942,7 +13299,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415320": {
       "name": "Flanking Strike",
@@ -13007,7 +13365,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 1.5
     },
     "415326": {
       "name": "Flanking Strike",
@@ -13050,7 +13409,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415327": {
       "name": "Flanking Strike",
@@ -13082,7 +13442,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415335": {
       "name": "Raptor Strike",
@@ -13114,7 +13475,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415336": {
       "name": "Raptor Strike",
@@ -13146,7 +13508,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415337": {
       "name": "Raptor Strike",
@@ -13178,7 +13541,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415338": {
       "name": "Raptor Strike",
@@ -13210,7 +13574,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415340": {
       "name": "Raptor Strike",
@@ -13242,7 +13607,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415341": {
       "name": "Raptor Strike",
@@ -13274,7 +13640,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415342": {
       "name": "Raptor Strike",
@@ -13306,7 +13673,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415343": {
       "name": "Raptor Strike",
@@ -13338,7 +13706,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415352": {
       "name": "Melee Specialist",
@@ -13480,7 +13849,8 @@
           "misc_value": 14266,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415358": {
       "name": "Raptor Fury",
@@ -13512,7 +13882,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415362": {
       "name": "Raptor Fury",
@@ -13555,7 +13926,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415370": {
       "name": "Lone Wolf",
@@ -13598,7 +13970,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415372": {
       "name": "Lone Wolf",
@@ -13630,7 +14003,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415399": {
       "name": "Sniper Training",
@@ -13673,7 +14047,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415401": {
       "name": "Sniper's Aim",
@@ -13705,7 +14080,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415405": {
       "name": "Rapid Killing",
@@ -13748,7 +14124,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415407": {
       "name": "Rapid Killing",
@@ -13780,7 +14157,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415413": {
       "name": "Lock and Load",
@@ -13812,7 +14190,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415414": {
       "name": "Lock and Load",
@@ -13855,7 +14234,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415423": {
       "name": "Aspect of the Viper",
@@ -13898,7 +14278,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415428": {
       "name": "Catlike Reflexes",
@@ -13952,7 +14333,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415429": {
       "name": "Hunter Pet Scaling",
@@ -14182,7 +14564,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "415431": {
       "name": "Avoidance",
@@ -14214,7 +14597,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "416116": {
       "name": "Water Elemental Scaling",
@@ -14400,7 +14784,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "416189": {
       "name": "Warlock Pet Scaling",
@@ -14641,7 +15026,8 @@
           "misc_value": 126,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "416861": {
       "name": "Adder Pheromone",
@@ -14673,7 +15059,8 @@
           "misc_value": 1515,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "418236": {
       "name": "Rabbit Musk",
@@ -14705,7 +15092,8 @@
           "misc_value": 1515,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "420543": {
       "name": "On the Move",
@@ -14748,7 +15136,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "421311": {
       "name": "Deer Musk",
@@ -14780,7 +15169,8 @@
           "misc_value": 1515,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "423484": {
       "name": "Increased Hunter Pet Damage",
@@ -14812,7 +15202,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "424553": {
       "name": "Call Your Shot",
@@ -14844,7 +15235,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425711": {
       "name": "Carve",
@@ -14898,7 +15290,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 4.0
     },
     "425713": {
       "name": "Cobra Strikes",
@@ -14930,7 +15323,8 @@
           "misc_value": 0,
           "trigger_spell": 425714
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425714": {
       "name": "Cobra Strikes",
@@ -14962,7 +15356,8 @@
           "misc_value": 7,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425718": {
       "name": "Cobra Strikes",
@@ -14994,7 +15389,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425728": {
       "name": "Serpent Sting",
@@ -15026,7 +15422,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425729": {
       "name": "Serpent Sting",
@@ -15058,7 +15455,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425730": {
       "name": "Serpent Sting",
@@ -15090,7 +15488,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425732": {
       "name": "Serpent Sting",
@@ -15122,7 +15521,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425733": {
       "name": "Serpent Sting",
@@ -15154,7 +15554,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425734": {
       "name": "Serpent Sting",
@@ -15186,7 +15587,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425735": {
       "name": "Serpent Sting",
@@ -15218,7 +15620,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425736": {
       "name": "Serpent Sting",
@@ -15250,7 +15653,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425737": {
       "name": "Serpent Sting",
@@ -15282,7 +15686,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425738": {
       "name": "Serpent Spread",
@@ -15314,7 +15719,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425754": {
       "name": "Carve",
@@ -15346,7 +15752,8 @@
           "misc_value": 399967,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425755": {
       "name": "Cobra Strikes",
@@ -15378,7 +15785,8 @@
           "misc_value": 399954,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425756": {
       "name": "Serpent Spread",
@@ -15410,7 +15818,8 @@
           "misc_value": 399966,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "425757": {
       "name": "Flanking Strike",
@@ -15442,7 +15851,8 @@
           "misc_value": 399966,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "428717": {
       "name": "T.N.T.",
@@ -15496,7 +15906,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "428726": {
       "name": "Focus Fire",
@@ -15539,7 +15950,8 @@
           "misc_value": 2,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "428728": {
       "name": "Frenzy",
@@ -15571,7 +15983,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431600": {
       "name": "Focus Fire",
@@ -15603,7 +16016,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431606": {
       "name": "Frenzy",
@@ -15635,7 +16049,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "431610": {
       "name": "T.N.T.",
@@ -15667,7 +16082,8 @@
           "misc_value": 417346,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "433100": {
       "name": "Carve",
@@ -15710,7 +16126,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435428": {
       "name": "Danger!",
@@ -15742,7 +16159,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435546": {
       "name": "Danger!",
@@ -15774,7 +16192,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "435548": {
       "name": "Danger!",
@@ -15806,7 +16225,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436378": {
       "name": "Tigerblood Talisman",
@@ -15838,7 +16258,8 @@
           "misc_value": 0,
           "trigger_spell": 436377
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436379": {
       "name": "Tigerblood Talisman",
@@ -15870,7 +16291,8 @@
           "misc_value": 0,
           "trigger_spell": 436378
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436393": {
       "name": "Chimera Shot - Serpent",
@@ -15902,7 +16324,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436394": {
       "name": "Chimera Shot - Serpent",
@@ -15934,7 +16357,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "436395": {
       "name": "Chimera Shot - Serpent",
@@ -15966,7 +16390,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "437123": {
       "name": "Steady Shot",
@@ -16009,7 +16434,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 5.0
     },
     "437997": {
       "name": "Invigoration",
@@ -16041,7 +16467,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440520": {
       "name": "Improved Volley",
@@ -16117,7 +16544,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440529": {
       "name": "Resourcefulness",
@@ -16160,7 +16588,8 @@
           "misc_value": 0,
           "trigger_spell": 1242688
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440531": {
       "name": "Hit and Run",
@@ -16192,7 +16621,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440533": {
       "name": "Hit and Run",
@@ -16246,7 +16676,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440558": {
       "name": "Resourcefulness",
@@ -16278,7 +16709,8 @@
           "misc_value": 417347,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440561": {
       "name": "Improved Volley",
@@ -16310,7 +16742,8 @@
           "misc_value": 417347,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440564": {
       "name": "Hit and Run",
@@ -16342,7 +16775,8 @@
           "misc_value": 417347,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440631": {
       "name": "Feral Spirit",
@@ -16374,7 +16808,8 @@
           "misc_value": 417347,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "440633": {
       "name": "Storm, Earth, and Fire",
@@ -16406,7 +16841,8 @@
           "misc_value": 417347,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "444678": {
       "name": "Lava Breath",
@@ -16449,7 +16885,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "444681": {
       "name": "Lava Breath",
@@ -16492,7 +16929,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "446374": {
       "name": "S03 - Tuning and Overrides Passive - Hunter",
@@ -16612,7 +17050,8 @@
           "misc_value": 19801,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "447036": {
       "name": "[DNT] Stormcrow Nest",
@@ -16644,7 +17083,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "447138": {
       "name": "[DNT] Head of the Obliterator",
@@ -16676,7 +17116,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "447899": {
       "name": "[DNT]Shrine of the Warden Trigger",
@@ -16719,7 +17160,8 @@
           "misc_value": 91021,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "450083": {
       "name": "Rapid Cutting",
@@ -16751,7 +17193,8 @@
           "misc_value": 0,
           "trigger_spell": 450084
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "453165": {
       "name": "Sniper Training",
@@ -16783,7 +17226,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456337": {
       "name": "S03 - Item - T1 - Hunter - Ranged 2P Bonus",
@@ -16826,7 +17270,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456341": {
       "name": "S03 - Item - T1 - Hunter - Melee 4P Bonus",
@@ -16858,7 +17303,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456379": {
       "name": "S03 - Item - T1 - Hunter - Ranged 6P Bonus",
@@ -16890,7 +17336,8 @@
           "misc_value": 0,
           "trigger_spell": 456382
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456382": {
       "name": "Precision",
@@ -16933,7 +17380,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456389": {
       "name": "S03 - Item - T1 - Hunter - Melee 2P Bonus",
@@ -16965,7 +17413,8 @@
           "misc_value": 0,
           "trigger_spell": 456393
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "456394": {
       "name": "S03 - Item - T1 - Hunter - Melee 6P Bonus",
@@ -16997,7 +17446,8 @@
           "misc_value": 0,
           "trigger_spell": 5302
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "457324": {
       "name": "S03 - Item - T1 - Hunter - Ranged 4P Bonus",
@@ -17029,7 +17479,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458393": {
       "name": "Cobra Slayer",
@@ -17083,7 +17534,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458436": {
       "name": "Wyvern Strike",
@@ -17137,7 +17589,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458479": {
       "name": "Wyvern Strike",
@@ -17191,7 +17644,8 @@
           "misc_value": 24133,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458481": {
       "name": "Wyvern Strike",
@@ -17245,7 +17699,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "458482": {
       "name": "Wyvern Strike",
@@ -17299,7 +17754,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459584": {
       "name": "Wing Clip Duration",
@@ -17331,7 +17787,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459593": {
       "name": "Multi-Shot Damage Increase",
@@ -17363,7 +17820,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "459598": {
       "name": "Raptor Strike Damage Increase",
@@ -17395,7 +17853,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "460399": {
       "name": "Destructor's Devastation",
@@ -17427,7 +17886,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461139": {
       "name": "Flame Spear",
@@ -17459,7 +17919,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461142": {
       "name": "Flame Spear",
@@ -17491,7 +17952,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461165": {
       "name": "Hand of Injustice",
@@ -17523,7 +17985,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461189": {
       "name": "Flame Spear",
@@ -17566,7 +18029,8 @@
           "misc_value": 0,
           "trigger_spell": 461143
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "461761": {
       "name": "Destructor's Devastation",
@@ -17598,7 +18062,8 @@
           "misc_value": 34382,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462160": {
       "name": "Destructor's Devastation",
@@ -17630,7 +18095,8 @@
           "misc_value": 34386,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462225": {
       "name": "Destructor's Devastation",
@@ -17662,7 +18128,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462226": {
       "name": "Destructor's Devastation",
@@ -17694,7 +18161,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462653": {
       "name": "Lethal Shots",
@@ -17726,7 +18194,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462654": {
       "name": "Lethal Shots",
@@ -17758,7 +18227,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462656": {
       "name": "Lethal Shots",
@@ -17790,7 +18260,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462657": {
       "name": "Lethal Shots",
@@ -17822,7 +18293,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462658": {
       "name": "Lethal Shots",
@@ -17854,7 +18326,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "462659": {
       "name": "S03 - Tuning and Overrides Passive - Hunter",
@@ -17908,7 +18381,8 @@
           "misc_value": 23,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467146": {
       "name": "Heartstrike",
@@ -17940,7 +18414,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467235": {
       "name": "S03 - Item - T2- Hunter - Ranged 2P Bonus",
@@ -17972,7 +18447,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467312": {
       "name": "S03 - Item - T2- Hunter - Ranged 4P Bonus",
@@ -18004,7 +18480,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467326": {
       "name": "S03 - Item - T2- Hunter - Ranged 6P Bonus",
@@ -18036,7 +18513,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467329": {
       "name": "S03 - Item - T2- Hunter - Melee 2P Bonus",
@@ -18068,7 +18546,8 @@
           "misc_value": 0,
           "trigger_spell": 467331
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467331": {
       "name": "Clever Strikes",
@@ -18111,7 +18590,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467333": {
       "name": "S03 - Item - T2- Hunter - Melee 4P Bonus",
@@ -18143,7 +18623,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467334": {
       "name": "S03 - Item - T2- Hunter - Melee 6P Bonus",
@@ -18175,7 +18656,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "467446": {
       "name": "Arcane Infused",
@@ -18218,7 +18700,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468267": {
       "name": "Increased Pet Damage +3%",
@@ -18250,7 +18733,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468269": {
       "name": "Increased Pet Damage +2%",
@@ -18282,7 +18766,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468271": {
       "name": "Increased Pet Damage +1%",
@@ -18314,7 +18799,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468310": {
       "name": "Improved Bestial Wrath",
@@ -18346,7 +18832,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468388": {
       "name": "Locked In",
@@ -18389,7 +18876,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468407": {
       "name": "S03 - Item - ZG - Hunter - Beastmaster 2P Bonus",
@@ -18432,7 +18920,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468417": {
       "name": "S03 - Item - ZG - Hunter - Beastmaster 3P Bonus",
@@ -18464,7 +18953,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468418": {
       "name": "S03 - Item - ZG - Hunter - Beastmaster 5P Bonus",
@@ -18496,7 +18986,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "468689": {
       "name": "Lock and Load",
@@ -18528,7 +19019,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "469145": {
       "name": "Aspect of the Falcon",
@@ -18582,7 +19074,8 @@
           "misc_value": 0,
           "trigger_spell": 469144
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470788": {
       "name": "Frost Specialization",
@@ -18614,7 +19107,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "470789": {
       "name": "Fire Specialization",
@@ -18646,7 +19140,8 @@
           "misc_value": 16,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213246": {
       "name": "S03 - Item - TAQ - Hunter - Ranged 4P Bonus",
@@ -18722,7 +19217,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213268": {
       "name": "Hunter's Mark",
@@ -18765,7 +19261,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213271": {
       "name": "Immolation Trap",
@@ -18797,7 +19294,8 @@
           "misc_value": 164875,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213272": {
       "name": "Shoot",
@@ -18829,7 +19327,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213306": {
       "name": "S03 - Item - TAQ - Hunter - Ranged 2P Bonus",
@@ -18861,7 +19360,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213307": {
       "name": "S03 - Item - TAQ - Hunter - Melee 2P Bonus",
@@ -18904,7 +19404,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213309": {
       "name": "S03 - Item - TAQ - Hunter - Melee 4P Bonus",
@@ -18936,7 +19437,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213310": {
       "name": "S03 - Item - RAQ - Hunter - Beastmastery 3P Bonus",
@@ -18968,7 +19470,8 @@
           "misc_value": 8,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213393": {
       "name": "Timeworn Shot",
@@ -19000,7 +19503,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1213395": {
       "name": "Timeworn Shot",
@@ -19032,7 +19536,8 @@
           "misc_value": 0,
           "trigger_spell": 1213393
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1215753": {
       "name": "Wyvern Sting",
@@ -19064,7 +19569,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1216480": {
       "name": "Noxious Breath",
@@ -19107,7 +19613,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1218134": {
       "name": "Tranquilizing Shot",
@@ -19139,7 +19646,8 @@
           "misc_value": 9,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1218178": {
       "name": "Kill Shot",
@@ -19171,7 +19679,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1218240": {
       "name": "Kill Shot",
@@ -19203,7 +19712,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1218285": {
       "name": "Locked and Loading",
@@ -19235,7 +19745,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1218358": {
       "name": "Rabid Frenzy",
@@ -19289,7 +19800,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1218514": {
       "name": "S03 - Item - Naxxramas - Hunter - Ranged 4P Bonus",
@@ -19321,7 +19833,8 @@
           "misc_value": 22,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1218515": {
       "name": "S03 - Item - Naxxramas - Hunter - Ranged 2P Bonus",
@@ -19375,7 +19888,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1218575": {
       "name": "S03 - Item - Naxxramas - Hunter - Ranged 6P Bonus",
@@ -19407,7 +19921,8 @@
           "misc_value": 0,
           "trigger_spell": 1226739
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1218582": {
       "name": "S03 - Item - Naxxramas - Hunter - Melee 2P Bonus",
@@ -19439,7 +19954,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1218583": {
       "name": "S03 - Item - Naxxramas - Hunter - Melee 4P Bonus",
@@ -19493,7 +20009,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1218589": {
       "name": "S03 - Item - Naxxramas - Hunter - Melee 6P Bonus",
@@ -19525,7 +20042,8 @@
           "misc_value": 0,
           "trigger_spell": 1218587
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1221404": {
       "name": "Enchanted Flare",
@@ -19590,7 +20108,8 @@
           "misc_value": 0,
           "trigger_spell": 1221416
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1221416": {
       "name": "Enchanted Flare",
@@ -19622,7 +20141,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1223755": {
       "name": "Focused Fire",
@@ -19654,7 +20174,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1223758": {
       "name": "The Beast Within",
@@ -19697,7 +20218,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1223793": {
       "name": "Seal of the Dawn",
@@ -19740,7 +20262,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1223984": {
       "name": "Careful Aim",
@@ -19783,7 +20306,8 @@
           "misc_value": 3,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1223987": {
       "name": "Rapid Recuperation",
@@ -19826,7 +20350,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226132": {
       "name": "S03 - Item - Scarlet Enclave - Hunter - Ranged 2P Bonus",
@@ -19858,7 +20383,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226137": {
       "name": "S03 - Item - Scarlet Enclave - Hunter - Ranged 4P Bonus",
@@ -19890,7 +20416,8 @@
           "misc_value": 0,
           "trigger_spell": 1226136
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226138": {
       "name": "S03 - Item - Scarlet Enclave - Hunter - Ranged 6P Bonus",
@@ -19933,7 +20460,8 @@
           "misc_value": 0,
           "trigger_spell": 1233451
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226340": {
       "name": "S03 - Item - Scarlet Enclave - Hunter - Melee 2P Bonus",
@@ -19965,7 +20493,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226359": {
       "name": "S03 - Item - Scarlet Enclave - Hunter - Melee 4P Bonus",
@@ -19997,7 +20526,8 @@
           "misc_value": 0,
           "trigger_spell": 1226357
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1226365": {
       "name": "S03 - Item - Scarlet Enclave - Hunter - Melee 6P Bonus",
@@ -20029,7 +20559,8 @@
           "misc_value": 12,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1230438": {
       "name": "Shoot",
@@ -20061,7 +20592,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1231590": {
       "name": "Bestial Focus",
@@ -20093,7 +20625,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1231591": {
       "name": "Bestial Focus",
@@ -20125,7 +20658,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1231601": {
       "name": "Strand of Fate",
@@ -20157,7 +20691,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1231765": {
       "name": "Coup",
@@ -20189,7 +20724,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232050": {
       "name": "Hand of Reborn Justice",
@@ -20221,7 +20757,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232183": {
       "name": "Queensfall",
@@ -20253,7 +20790,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232186": {
       "name": "Fallen Regality",
@@ -20296,7 +20834,8 @@
           "misc_value": 23,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232959": {
       "name": "Strand of Fate",
@@ -20328,7 +20867,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232969": {
       "name": "Strand of Fate",
@@ -20360,7 +20900,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232976": {
       "name": "Strand of Fate",
@@ -20392,7 +20933,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232979": {
       "name": "Serpent Sting",
@@ -20424,7 +20966,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232980": {
       "name": "Serpent Sting",
@@ -20456,7 +20999,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232981": {
       "name": "Serpent Sting",
@@ -20488,7 +21032,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1232982": {
       "name": "Serpent Sting",
@@ -20520,7 +21065,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1233451": {
       "name": "Trick Shots",
@@ -20552,7 +21098,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234972": {
       "name": "Poultry Precision (Guns) - Auto Shot",
@@ -20584,7 +21131,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234973": {
       "name": "Poultry Precision (Guns) - Arcane Shot",
@@ -20616,7 +21164,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234976": {
       "name": "Poultry Precision (Guns) - Multi-Shot",
@@ -20648,7 +21197,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234977": {
       "name": "Poultry Precision (Guns) - Scorpid Sting",
@@ -20680,7 +21230,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234978": {
       "name": "Poultry Precision (Guns) - Serpent Sting",
@@ -20712,7 +21263,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234979": {
       "name": "Poultry Precision (Guns) - Viper Sting",
@@ -20744,7 +21296,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234980": {
       "name": "Poultry Precision (Guns) - Steady Shot",
@@ -20776,7 +21329,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234981": {
       "name": "Poultry Precision (Guns) - Kill Shot",
@@ -20808,7 +21362,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234984": {
       "name": "Poultry Precision (Guns) - Distracting Shot",
@@ -20840,7 +21395,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234987": {
       "name": "Poultry Precision (Guns) - Tranquilizing Shot",
@@ -20872,7 +21428,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234990": {
       "name": "Poultry Precision (Guns) - Aimed Shot",
@@ -20904,7 +21461,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234991": {
       "name": "Poultry Precision (Guns) - Explosive Shot",
@@ -20936,7 +21494,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234992": {
       "name": "Poultry Precision (Guns) - Explosive Shot Impact",
@@ -20968,7 +21527,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234993": {
       "name": "Poultry Precision (Guns) - Wyvern Sting",
@@ -21000,7 +21560,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234994": {
       "name": "Poultry Precision (Guns) - Trap Launcher Freezing",
@@ -21032,7 +21593,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234997": {
       "name": "Poultry Precision (Guns) - Trap Launcher Frost",
@@ -21064,7 +21626,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234998": {
       "name": "Poultry Precision (Guns) - Trap Launcher Immolation",
@@ -21096,7 +21659,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1234999": {
       "name": "Poultry Precision (Guns) - Trap Launcher Explosive",
@@ -21128,7 +21692,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1235000": {
       "name": "Poultry Precision (Guns) - Flare",
@@ -21160,7 +21725,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1235002": {
       "name": "Poultry Precision (Guns) - Volley",
@@ -21192,7 +21758,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1235003": {
       "name": "Poultry Precision (Guns) - Concussive Shot",
@@ -21224,7 +21791,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1235004": {
       "name": "Poultry Precision (Guns) - Scatter Shot",
@@ -21256,7 +21824,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1235341": {
       "name": "Crimson Crusade",
@@ -21299,7 +21868,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1235344": {
       "name": "Crimson Crusade",
@@ -21331,7 +21901,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1235359": {
       "name": "Mercy by Fire",
@@ -21374,7 +21945,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1235361": {
       "name": "Mercy by Fire",
@@ -21406,7 +21978,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1235390": {
       "name": "Mercy by Fire",
@@ -21449,7 +22022,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236188": {
       "name": "Aimed Shot",
@@ -21481,7 +22055,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236221": {
       "name": "Poultry Precision (Bows) - Auto Shot",
@@ -21513,7 +22088,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236222": {
       "name": "Poultry Precision (Bows) - Arcane Shot",
@@ -21545,7 +22121,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236223": {
       "name": "Poultry Precision (Bows) - Multi-Shot",
@@ -21577,7 +22154,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236224": {
       "name": "Poultry Precision (Bows) - Scorpid Sting",
@@ -21609,7 +22187,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236225": {
       "name": "Poultry Precision (Bows) - Serpent Sting",
@@ -21641,7 +22220,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236226": {
       "name": "Poultry Precision (Bows) - Viper Sting",
@@ -21673,7 +22253,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236232": {
       "name": "Poultry Precision (Bows) - Aimed Shot",
@@ -21705,7 +22286,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236233": {
       "name": "Poultry Precision (Bows) - Explosive Shot",
@@ -21737,7 +22319,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236234": {
       "name": "Poultry Precision (Bows) - Explosive Shot Impact",
@@ -21769,7 +22352,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236235": {
       "name": "Poultry Precision (Bows) - Wyvern Sting",
@@ -21801,7 +22385,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236236": {
       "name": "Poultry Precision (Bows) - Trap Launcher Freezing",
@@ -21833,7 +22418,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236237": {
       "name": "Poultry Precision (Bows) - Trap Launcher Immolation",
@@ -21865,7 +22451,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236238": {
       "name": "Poultry Precision (Bows) - Trap Launcher Explosive",
@@ -21897,7 +22484,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236239": {
       "name": "Poultry Precision (Bows) - Chimera Shot",
@@ -21929,7 +22517,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236241": {
       "name": "Poultry Precision (Bows) - Flare",
@@ -21961,7 +22550,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236246": {
       "name": "Poultry Precision (Guns) - Chimera Shot",
@@ -21993,7 +22583,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236510": {
       "name": "Poultry Precision (Bows) - Distracting Shot",
@@ -22025,7 +22616,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236511": {
       "name": "Poultry Precision (Bows) - Tranquilizing Shot",
@@ -22057,7 +22649,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236516": {
       "name": "Poultry Precision (Bows) - Concussive Shot",
@@ -22089,7 +22682,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236517": {
       "name": "Poultry Precision (Bows) - Scatter Shot",
@@ -22121,7 +22715,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236518": {
       "name": "Poultry Precision (Bows) - Steady Shot",
@@ -22153,7 +22748,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236519": {
       "name": "Poultry Precision (Bows) - Kill Shot",
@@ -22185,7 +22781,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236521": {
       "name": "Poultry Precision (Crossbows) - Auto Shot",
@@ -22217,7 +22814,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236522": {
       "name": "Poultry Precision (Crossbows) - Arcane Shot",
@@ -22249,7 +22847,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236523": {
       "name": "Poultry Precision (Crossbows) - Multi-Shot",
@@ -22281,7 +22880,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236524": {
       "name": "Poultry Precision (Crossbows) - Scorpid Sting",
@@ -22313,7 +22913,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236525": {
       "name": "Poultry Precision (Crossbows) - Serpent Sting",
@@ -22345,7 +22946,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236526": {
       "name": "Poultry Precision (Crossbows) - Viper Sting",
@@ -22377,7 +22979,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236528": {
       "name": "Poultry Precision (Crossbows) - Chimera Shot",
@@ -22409,7 +23012,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236530": {
       "name": "Poultry Precision (Crossbows) - Explosive Shot",
@@ -22441,7 +23045,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236531": {
       "name": "Poultry Precision (Crossbows) - Explosive Shot Impact",
@@ -22473,7 +23078,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236532": {
       "name": "Poultry Precision (Crossbows) - Aimed Shot",
@@ -22505,7 +23111,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236534": {
       "name": "Poultry Precision (Crossbows) - Wyvern Sting",
@@ -22537,7 +23144,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236536": {
       "name": "Poultry Precision (Crossbows) - Trap Launcher Freezing",
@@ -22569,7 +23177,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236537": {
       "name": "Poultry Precision (Crossbows) - Trap Launcher Immolation",
@@ -22601,7 +23210,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236538": {
       "name": "Poultry Precision (Crossbows) - Trap Launcher Explosive",
@@ -22633,7 +23243,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236539": {
       "name": "Poultry Precision (Crossbows) - Flare",
@@ -22665,7 +23276,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236541": {
       "name": "Poultry Precision (Crossbows) - Distracting Shot",
@@ -22697,7 +23309,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236542": {
       "name": "Poultry Precision (Crossbows) - Tranquilizing Shot",
@@ -22729,7 +23342,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236543": {
       "name": "Poultry Precision (Crossbows) - Concussive Shot",
@@ -22761,7 +23375,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236544": {
       "name": "Poultry Precision (Crossbows) - Scatter Shot",
@@ -22793,7 +23408,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236545": {
       "name": "Poultry Precision (Crossbows) - Steady Shot",
@@ -22825,7 +23441,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236546": {
       "name": "Poultry Precision (Crossbows) - Kill Shot",
@@ -22857,7 +23474,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236819": {
       "name": "Experiment-800M",
@@ -22889,7 +23507,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236821": {
       "name": "Experiment-800M",
@@ -22921,7 +23540,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236825": {
       "name": "Experiment-800M",
@@ -22953,7 +23573,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236828": {
       "name": "Experiment-800M",
@@ -22985,7 +23606,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236830": {
       "name": "Experiment-800M",
@@ -23017,7 +23639,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236833": {
       "name": "Experiment-800M",
@@ -23049,7 +23672,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236834": {
       "name": "Experiment-800M",
@@ -23081,7 +23705,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236837": {
       "name": "Experiment-800M",
@@ -23113,7 +23738,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236838": {
       "name": "Experiment-800M",
@@ -23145,7 +23771,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236839": {
       "name": "Experiment-800M",
@@ -23177,7 +23804,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236840": {
       "name": "Experiment-800M",
@@ -23209,7 +23837,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236841": {
       "name": "Experiment-800M",
@@ -23241,7 +23870,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236842": {
       "name": "Experiment-800M",
@@ -23273,7 +23903,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236843": {
       "name": "Experiment-800M",
@@ -23305,7 +23936,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236844": {
       "name": "Experiment-800M",
@@ -23337,7 +23969,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236845": {
       "name": "Experiment-800M",
@@ -23369,7 +24002,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236846": {
       "name": "Experiment-800M",
@@ -23401,7 +24035,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236847": {
       "name": "Experiment-800M",
@@ -23433,7 +24068,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1236848": {
       "name": "Experiment-800M",
@@ -23465,7 +24101,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1242139": {
       "name": "Focused Fire",
@@ -23497,7 +24134,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1242512": {
       "name": "Rapid Recuperation",
@@ -23529,7 +24167,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1242634": {
       "name": "Counterattack",
@@ -23583,7 +24222,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1262309": {
       "name": "The Quick and the Dead",
@@ -23615,7 +24255,8 @@
           "misc_value": 14,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264455": {
       "name": "Thunderstomp",
@@ -23647,7 +24288,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264478": {
       "name": "Sonic Blast",
@@ -23690,7 +24332,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264479": {
       "name": "Sonic Blast",
@@ -23733,7 +24376,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264480": {
       "name": "Sonic Blast",
@@ -23776,7 +24420,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264481": {
       "name": "Sonic Blast",
@@ -23819,7 +24464,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264482": {
       "name": "Sonic Blast",
@@ -23862,7 +24508,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264494": {
       "name": "Swipe",
@@ -23894,7 +24541,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264497": {
       "name": "Swipe",
@@ -23926,7 +24574,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264498": {
       "name": "Swipe",
@@ -23958,7 +24607,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264501": {
       "name": "Swipe",
@@ -23990,7 +24640,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264502": {
       "name": "Swipe",
@@ -24022,7 +24673,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264735": {
       "name": "Pinch",
@@ -24065,7 +24717,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264736": {
       "name": "Pinch",
@@ -24108,7 +24761,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264739": {
       "name": "Pinch",
@@ -24151,7 +24805,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264741": {
       "name": "Pinch",
@@ -24194,7 +24849,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264742": {
       "name": "Pinch",
@@ -24237,7 +24893,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264758": {
       "name": "Dismember",
@@ -24280,7 +24937,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264927": {
       "name": "Dismember",
@@ -24323,7 +24981,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264929": {
       "name": "Dismember",
@@ -24366,7 +25025,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264930": {
       "name": "Dismember",
@@ -24409,7 +25069,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1264933": {
       "name": "Dismember",
@@ -24452,7 +25113,8 @@
           "misc_value": 127,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265038": {
       "name": "Tendon Rip",
@@ -24495,7 +25157,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265039": {
       "name": "Tendon Rip",
@@ -24538,7 +25201,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265040": {
       "name": "Tendon Rip",
@@ -24581,7 +25245,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265041": {
       "name": "Tendon Rip",
@@ -24624,7 +25289,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265042": {
       "name": "Tendon Rip",
@@ -24667,7 +25333,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265054": {
       "name": "Mine!",
@@ -24710,7 +25377,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265055": {
       "name": "Mine!",
@@ -24753,7 +25421,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265056": {
       "name": "Mine!",
@@ -24796,7 +25465,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265057": {
       "name": "Mine!",
@@ -24839,7 +25509,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265058": {
       "name": "Mine!",
@@ -24882,7 +25553,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265065": {
       "name": "Savage Rend",
@@ -24914,7 +25586,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265066": {
       "name": "Savage Rend",
@@ -24946,7 +25619,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265067": {
       "name": "Savage Rend",
@@ -24978,7 +25652,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265068": {
       "name": "Savage Rend",
@@ -25010,7 +25685,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265069": {
       "name": "Savage Rend",
@@ -25042,7 +25718,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265843": {
       "name": "Web",
@@ -25085,7 +25762,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265878": {
       "name": "Web",
@@ -25128,7 +25806,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265880": {
       "name": "Web",
@@ -25171,7 +25850,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265881": {
       "name": "Web",
@@ -25214,7 +25894,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265883": {
       "name": "Web",
@@ -25257,7 +25938,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265899": {
       "name": "Dust Cloud",
@@ -25289,7 +25971,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265901": {
       "name": "Dust Cloud",
@@ -25321,7 +26004,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265902": {
       "name": "Dust Cloud",
@@ -25353,7 +26037,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265903": {
       "name": "Dust Cloud",
@@ -25385,7 +26070,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1265904": {
       "name": "Dust Cloud",
@@ -25417,7 +26103,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1271102": {
       "name": "Tame Vuldren",
@@ -25471,7 +26158,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1277851": {
       "name": "Tame Boar",
@@ -25525,7 +26213,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1278060": {
       "name": "Tame Wolf",
@@ -25579,7 +26268,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1278061": {
       "name": "Tame Bear",
@@ -25633,7 +26323,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1279692": {
       "name": "Flare",
@@ -25676,7 +26367,8 @@
           "misc_value": 6,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1279715": {
       "name": "Volley",
@@ -25708,7 +26400,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1279719": {
       "name": "Volley",
@@ -25740,7 +26433,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1279721": {
       "name": "Volley",
@@ -25772,7 +26466,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1280004": {
       "name": "Tame Crawler",
@@ -25826,7 +26521,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1280044": {
       "name": "Tame Galestrider",
@@ -25880,7 +26576,8 @@
           "misc_value": 0,
           "trigger_spell": 19614
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293020": {
       "name": "Hydra Shot",
@@ -25912,7 +26609,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293241": {
       "name": "Summon Hawk",
@@ -25977,7 +26675,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293525": {
       "name": "Summon Hawk",
@@ -26042,7 +26741,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293526": {
       "name": "Summon Hawk",
@@ -26107,7 +26807,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293527": {
       "name": "Summon Hawk",
@@ -26172,7 +26873,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1293639": {
       "name": "Improved Revive Pet",
@@ -26204,7 +26906,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1294124": {
       "name": "Aimed Shot",
@@ -26236,7 +26939,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1294189": {
       "name": "Poison Spear",
@@ -26279,7 +26983,8 @@
           "misc_value": 0,
           "trigger_spell": 1294208
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1299332": {
       "name": "Lacerate",
@@ -26311,7 +27016,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1299346": {
       "name": "Trueshot Aura",
@@ -26343,7 +27049,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1299348": {
       "name": "Trueshot Aura",
@@ -26375,7 +27082,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1299437": {
       "name": "Improved Aimed Shot",
@@ -26418,7 +27126,8 @@
           "misc_value": 10,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1299445": {
       "name": "Aspect of the Beast",
@@ -26472,7 +27181,8 @@
           "misc_value": 0,
           "trigger_spell": 1299448
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1299446": {
       "name": "Aspect of the Beast",
@@ -26526,7 +27236,8 @@
           "misc_value": 0,
           "trigger_spell": 1299448
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1299447": {
       "name": "Aspect of the Beast",
@@ -26580,7 +27291,8 @@
           "misc_value": 0,
           "trigger_spell": 1299448
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1300945": {
       "name": "1.60.0 - Item - Tier 1 - Hunter 2P Bonus - Haste",
@@ -26623,7 +27335,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301012": {
       "name": "1.60.0 - Item - Tier 1 - Hunter 3P Bonus - Frost and Freezing Trap",
@@ -26655,7 +27368,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301078": {
       "name": "1.60.0 - Item - Tier 1 - Hunter 4P Bonus - AP vs. Beasts",
@@ -26687,7 +27401,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1301252": {
       "name": "1.60.0 - Item - Tier 1 - Hunter 5P Bonus - Aimed and Multi-Shot",
@@ -26719,7 +27434,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1306284": {
       "name": "Shoot",
@@ -26751,7 +27467,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310180": {
       "name": "Wing Clip",
@@ -26794,7 +27511,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310496": {
       "name": "Survivalist's Discipline",
@@ -26826,7 +27544,8 @@
           "misc_value": 11,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310532": {
       "name": "Expose Prey",
@@ -26858,7 +27577,8 @@
           "misc_value": 0,
           "trigger_spell": 1310726
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310533": {
       "name": "Lacerating Strikes",
@@ -26890,7 +27610,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310536": {
       "name": "Lacerating Strikes",
@@ -26922,7 +27643,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310627": {
       "name": "Predator's Edge",
@@ -26965,7 +27687,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310661": {
       "name": "Improved Stings",
@@ -27019,7 +27742,8 @@
           "misc_value": 1,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310684": {
       "name": "Lone Wolf",
@@ -27051,7 +27775,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310687": {
       "name": "Sniper Shot",
@@ -27083,7 +27808,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310785": {
       "name": "Sniper Shot",
@@ -27115,7 +27841,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1310786": {
       "name": "Sniper Shot",
@@ -27147,7 +27874,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 0.0
     },
     "1317257": {
       "name": "Strider Kick",
@@ -27201,7 +27929,8 @@
           "misc_value": 0,
           "trigger_spell": 0
         }
-      ]
+      ],
+      "cost_pct": 5.80999994278
     }
   }
 }

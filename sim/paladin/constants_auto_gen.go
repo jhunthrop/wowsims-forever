@@ -34,6 +34,7 @@ var DNTBlessingOfMightTESTRAIDSPELLLevel = [DNTBlessingOfMightTESTRAIDSPELLRanks
 var DNTBlessingOfMightTESTRAIDSPELLCastTime = [DNTBlessingOfMightTESTRAIDSPELLRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var DNTBlessingOfMightTESTRAIDSPELLCooldownMS = [DNTBlessingOfMightTESTRAIDSPELLRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var DNTBlessingOfMightTESTRAIDSPELLManaCost = [DNTBlessingOfMightTESTRAIDSPELLRanks + 1]float64{0, 0, 0, 0, 0, 0, 130}
+var DNTBlessingOfMightTESTRAIDSPELLManaCostPct = [DNTBlessingOfMightTESTRAIDSPELLRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var DNTBlessingOfMightTESTRAIDSPELLSpellCoeff = [DNTBlessingOfMightTESTRAIDSPELLRanks + 1]float64{0, 0, 0, 0, 0, 0, 60}
 var DNTBlessingOfMightTESTRAIDSPELLBaseDamage = [DNTBlessingOfMightTESTRAIDSPELLRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {112, 112}}
 
@@ -47,6 +48,7 @@ var X1600ItemTier1PaladinHoly2PBonusSpiritLevel = [X1600ItemTier1PaladinHoly2PBo
 var X1600ItemTier1PaladinHoly2PBonusSpiritCastTime = [X1600ItemTier1PaladinHoly2PBonusSpiritRanks + 1]int32{0}
 var X1600ItemTier1PaladinHoly2PBonusSpiritCooldownMS = [X1600ItemTier1PaladinHoly2PBonusSpiritRanks + 1]int32{0}
 var X1600ItemTier1PaladinHoly2PBonusSpiritManaCost = [X1600ItemTier1PaladinHoly2PBonusSpiritRanks + 1]float64{0}
+var X1600ItemTier1PaladinHoly2PBonusSpiritManaCostPct = [X1600ItemTier1PaladinHoly2PBonusSpiritRanks + 1]float64{0}
 var X1600ItemTier1PaladinHoly2PBonusSpiritSpellCoeff = [X1600ItemTier1PaladinHoly2PBonusSpiritRanks + 1]float64{0.2143}
 var X1600ItemTier1PaladinHoly2PBonusSpiritBaseDamage = [X1600ItemTier1PaladinHoly2PBonusSpiritRanks + 1][]float64{{10, 10}}
 
@@ -60,6 +62,7 @@ var X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionLevel = [X1600ItemTier1P
 var X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionCastTime = [X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionRanks + 1]int32{0}
 var X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionCooldownMS = [X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionRanks + 1]int32{0}
 var X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionManaCost = [X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionRanks + 1]float64{0}
+var X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionManaCostPct = [X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionRanks + 1]float64{0}
 var X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionSpellCoeff = [X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionRanks + 1]float64{0.2143}
 var X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionBaseDamage = [X1600ItemTier1PaladinHoly3PBonusBlessingOfProtectionRanks + 1][]float64{{-30000, -30000}}
 
@@ -73,6 +76,7 @@ var X1600ItemTier1PaladinHoly4PBonusHealingDamageLevel = [X1600ItemTier1PaladinH
 var X1600ItemTier1PaladinHoly4PBonusHealingDamageCastTime = [X1600ItemTier1PaladinHoly4PBonusHealingDamageRanks + 1]int32{0}
 var X1600ItemTier1PaladinHoly4PBonusHealingDamageCooldownMS = [X1600ItemTier1PaladinHoly4PBonusHealingDamageRanks + 1]int32{0}
 var X1600ItemTier1PaladinHoly4PBonusHealingDamageManaCost = [X1600ItemTier1PaladinHoly4PBonusHealingDamageRanks + 1]float64{0}
+var X1600ItemTier1PaladinHoly4PBonusHealingDamageManaCostPct = [X1600ItemTier1PaladinHoly4PBonusHealingDamageRanks + 1]float64{0}
 var X1600ItemTier1PaladinHoly4PBonusHealingDamageSpellCoeff = [X1600ItemTier1PaladinHoly4PBonusHealingDamageRanks + 1]float64{0.2143}
 var X1600ItemTier1PaladinHoly4PBonusHealingDamageBaseDamage = [X1600ItemTier1PaladinHoly4PBonusHealingDamageRanks + 1][]float64{{26, 26}}
 
@@ -86,6 +90,7 @@ var X1600ItemTier1PaladinHoly5PBonusHolyShockLevel = [X1600ItemTier1PaladinHoly5
 var X1600ItemTier1PaladinHoly5PBonusHolyShockCastTime = [X1600ItemTier1PaladinHoly5PBonusHolyShockRanks + 1]int32{0}
 var X1600ItemTier1PaladinHoly5PBonusHolyShockCooldownMS = [X1600ItemTier1PaladinHoly5PBonusHolyShockRanks + 1]int32{0}
 var X1600ItemTier1PaladinHoly5PBonusHolyShockManaCost = [X1600ItemTier1PaladinHoly5PBonusHolyShockRanks + 1]float64{0}
+var X1600ItemTier1PaladinHoly5PBonusHolyShockManaCostPct = [X1600ItemTier1PaladinHoly5PBonusHolyShockRanks + 1]float64{0}
 var X1600ItemTier1PaladinHoly5PBonusHolyShockSpellCoeff = [X1600ItemTier1PaladinHoly5PBonusHolyShockRanks + 1]float64{0.2143}
 var X1600ItemTier1PaladinHoly5PBonusHolyShockBaseDamage = [X1600ItemTier1PaladinHoly5PBonusHolyShockRanks + 1][]float64{{-1000, -1000}}
 
@@ -99,6 +104,7 @@ var X1600ItemTier1PaladinProtection2PBonusDefenseLevel = [X1600ItemTier1PaladinP
 var X1600ItemTier1PaladinProtection2PBonusDefenseCastTime = [X1600ItemTier1PaladinProtection2PBonusDefenseRanks + 1]int32{0}
 var X1600ItemTier1PaladinProtection2PBonusDefenseCooldownMS = [X1600ItemTier1PaladinProtection2PBonusDefenseRanks + 1]int32{0}
 var X1600ItemTier1PaladinProtection2PBonusDefenseManaCost = [X1600ItemTier1PaladinProtection2PBonusDefenseRanks + 1]float64{0}
+var X1600ItemTier1PaladinProtection2PBonusDefenseManaCostPct = [X1600ItemTier1PaladinProtection2PBonusDefenseRanks + 1]float64{0}
 var X1600ItemTier1PaladinProtection2PBonusDefenseSpellCoeff = [X1600ItemTier1PaladinProtection2PBonusDefenseRanks + 1]float64{0.2143}
 var X1600ItemTier1PaladinProtection2PBonusDefenseBaseDamage = [X1600ItemTier1PaladinProtection2PBonusDefenseRanks + 1][]float64{{7, 7}}
 
@@ -112,6 +118,7 @@ var X1600ItemTier1PaladinProtection3PBonusTurnUndeadLevel = [X1600ItemTier1Palad
 var X1600ItemTier1PaladinProtection3PBonusTurnUndeadCastTime = [X1600ItemTier1PaladinProtection3PBonusTurnUndeadRanks + 1]int32{0}
 var X1600ItemTier1PaladinProtection3PBonusTurnUndeadCooldownMS = [X1600ItemTier1PaladinProtection3PBonusTurnUndeadRanks + 1]int32{0}
 var X1600ItemTier1PaladinProtection3PBonusTurnUndeadManaCost = [X1600ItemTier1PaladinProtection3PBonusTurnUndeadRanks + 1]float64{0}
+var X1600ItemTier1PaladinProtection3PBonusTurnUndeadManaCostPct = [X1600ItemTier1PaladinProtection3PBonusTurnUndeadRanks + 1]float64{0}
 var X1600ItemTier1PaladinProtection3PBonusTurnUndeadSpellCoeff = [X1600ItemTier1PaladinProtection3PBonusTurnUndeadRanks + 1]float64{0.2143}
 var X1600ItemTier1PaladinProtection3PBonusTurnUndeadBaseDamage = [X1600ItemTier1PaladinProtection3PBonusTurnUndeadRanks + 1][]float64{{-1500, -1500}}
 
@@ -125,6 +132,7 @@ var X1600ItemTier1PaladinProtection4PBonusExpertiseLevel = [X1600ItemTier1Paladi
 var X1600ItemTier1PaladinProtection4PBonusExpertiseCastTime = [X1600ItemTier1PaladinProtection4PBonusExpertiseRanks + 1]int32{0}
 var X1600ItemTier1PaladinProtection4PBonusExpertiseCooldownMS = [X1600ItemTier1PaladinProtection4PBonusExpertiseRanks + 1]int32{0}
 var X1600ItemTier1PaladinProtection4PBonusExpertiseManaCost = [X1600ItemTier1PaladinProtection4PBonusExpertiseRanks + 1]float64{0}
+var X1600ItemTier1PaladinProtection4PBonusExpertiseManaCostPct = [X1600ItemTier1PaladinProtection4PBonusExpertiseRanks + 1]float64{0}
 var X1600ItemTier1PaladinProtection4PBonusExpertiseSpellCoeff = [X1600ItemTier1PaladinProtection4PBonusExpertiseRanks + 1]float64{0.2143}
 var X1600ItemTier1PaladinProtection4PBonusExpertiseBaseDamage = [X1600ItemTier1PaladinProtection4PBonusExpertiseRanks + 1][]float64{{12, 12}}
 
@@ -138,6 +146,7 @@ var X1600ItemTier1PaladinProtection5PBonusForbearanceLevel = [X1600ItemTier1Pala
 var X1600ItemTier1PaladinProtection5PBonusForbearanceCastTime = [X1600ItemTier1PaladinProtection5PBonusForbearanceRanks + 1]int32{0}
 var X1600ItemTier1PaladinProtection5PBonusForbearanceCooldownMS = [X1600ItemTier1PaladinProtection5PBonusForbearanceRanks + 1]int32{0}
 var X1600ItemTier1PaladinProtection5PBonusForbearanceManaCost = [X1600ItemTier1PaladinProtection5PBonusForbearanceRanks + 1]float64{0}
+var X1600ItemTier1PaladinProtection5PBonusForbearanceManaCostPct = [X1600ItemTier1PaladinProtection5PBonusForbearanceRanks + 1]float64{0}
 var X1600ItemTier1PaladinProtection5PBonusForbearanceSpellCoeff = [X1600ItemTier1PaladinProtection5PBonusForbearanceRanks + 1]float64{0.2143}
 var X1600ItemTier1PaladinProtection5PBonusForbearanceBaseDamage = [X1600ItemTier1PaladinProtection5PBonusForbearanceRanks + 1][]float64{{-10000, -10000}}
 
@@ -151,6 +160,7 @@ var X1600ItemTier1PaladinRetribution2PBonusHasteLevel = [X1600ItemTier1PaladinRe
 var X1600ItemTier1PaladinRetribution2PBonusHasteCastTime = [X1600ItemTier1PaladinRetribution2PBonusHasteRanks + 1]int32{0}
 var X1600ItemTier1PaladinRetribution2PBonusHasteCooldownMS = [X1600ItemTier1PaladinRetribution2PBonusHasteRanks + 1]int32{0}
 var X1600ItemTier1PaladinRetribution2PBonusHasteManaCost = [X1600ItemTier1PaladinRetribution2PBonusHasteRanks + 1]float64{0}
+var X1600ItemTier1PaladinRetribution2PBonusHasteManaCostPct = [X1600ItemTier1PaladinRetribution2PBonusHasteRanks + 1]float64{0}
 var X1600ItemTier1PaladinRetribution2PBonusHasteSpellCoeff = [X1600ItemTier1PaladinRetribution2PBonusHasteRanks + 1]float64{0.2143}
 var X1600ItemTier1PaladinRetribution2PBonusHasteBaseDamage = [X1600ItemTier1PaladinRetribution2PBonusHasteRanks + 1][]float64{{1, 1}}
 
@@ -164,6 +174,7 @@ var X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeLevel = [X1600ItemTier
 var X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeCastTime = [X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeRanks + 1]int32{0}
 var X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeCooldownMS = [X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeRanks + 1]int32{0}
 var X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeManaCost = [X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeRanks + 1]float64{0}
+var X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeManaCostPct = [X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeRanks + 1]float64{0}
 var X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeSpellCoeff = [X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeRanks + 1]float64{0.2143}
 var X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeBaseDamage = [X1600ItemTier1PaladinRetribution3PBonusHammerOfJusticeRanks + 1][]float64{{-5000, -5000}}
 
@@ -177,6 +188,7 @@ var X1600ItemTier1PaladinRetribution5PBonusJudgementLevel = [X1600ItemTier1Palad
 var X1600ItemTier1PaladinRetribution5PBonusJudgementCastTime = [X1600ItemTier1PaladinRetribution5PBonusJudgementRanks + 1]int32{0}
 var X1600ItemTier1PaladinRetribution5PBonusJudgementCooldownMS = [X1600ItemTier1PaladinRetribution5PBonusJudgementRanks + 1]int32{0}
 var X1600ItemTier1PaladinRetribution5PBonusJudgementManaCost = [X1600ItemTier1PaladinRetribution5PBonusJudgementRanks + 1]float64{0}
+var X1600ItemTier1PaladinRetribution5PBonusJudgementManaCostPct = [X1600ItemTier1PaladinRetribution5PBonusJudgementRanks + 1]float64{0}
 var X1600ItemTier1PaladinRetribution5PBonusJudgementSpellCoeff = [X1600ItemTier1PaladinRetribution5PBonusJudgementRanks + 1]float64{0.2143}
 var X1600ItemTier1PaladinRetribution5PBonusJudgementBaseDamage = [X1600ItemTier1PaladinRetribution5PBonusJudgementRanks + 1][]float64{{-500, -500}}
 
@@ -190,6 +202,7 @@ var AegisLevel = [AegisRanks + 1]int{1}
 var AegisCastTime = [AegisRanks + 1]int32{0}
 var AegisCooldownMS = [AegisRanks + 1]int32{0}
 var AegisManaCost = [AegisRanks + 1]float64{0}
+var AegisManaCostPct = [AegisRanks + 1]float64{0}
 var AegisSpellCoeff = [AegisRanks + 1]float64{0.2143}
 var AegisBaseDamage = [AegisRanks + 1][]float64{{425589, 425589}}
 
@@ -203,6 +216,7 @@ var AncestralGuidanceLevel = [AncestralGuidanceRanks + 1]int{1}
 var AncestralGuidanceCastTime = [AncestralGuidanceRanks + 1]int32{0}
 var AncestralGuidanceCooldownMS = [AncestralGuidanceRanks + 1]int32{60000}
 var AncestralGuidanceManaCost = [AncestralGuidanceRanks + 1]float64{0}
+var AncestralGuidanceManaCostPct = [AncestralGuidanceRanks + 1]float64{0}
 var AncestralGuidanceSpellCoeff = [AncestralGuidanceRanks + 1]float64{0.3333}
 var AncestralGuidanceBaseDamage = [AncestralGuidanceRanks + 1][]float64{{25, 25}}
 
@@ -216,6 +230,7 @@ var AuraMasteryLevel = [AuraMasteryRanks + 1]int{1}
 var AuraMasteryCastTime = [AuraMasteryRanks + 1]int32{0}
 var AuraMasteryCooldownMS = [AuraMasteryRanks + 1]int32{0}
 var AuraMasteryManaCost = [AuraMasteryRanks + 1]float64{0}
+var AuraMasteryManaCostPct = [AuraMasteryRanks + 1]float64{0}
 var AuraMasterySpellCoeff = [AuraMasteryRanks + 1]float64{0.2}
 var AuraMasteryBaseDamage = [AuraMasteryRanks + 1][]float64{{1000, 1000}}
 
@@ -230,6 +245,7 @@ var AvengerJudgmentBonusLevel = [AvengerJudgmentBonusRanks + 1]int{0}
 var AvengerJudgmentBonusCastTime = [AvengerJudgmentBonusRanks + 1]int32{0}
 var AvengerJudgmentBonusCooldownMS = [AvengerJudgmentBonusRanks + 1]int32{0}
 var AvengerJudgmentBonusManaCost = [AvengerJudgmentBonusRanks + 1]float64{0}
+var AvengerJudgmentBonusManaCostPct = [AvengerJudgmentBonusRanks + 1]float64{0}
 var AvengerJudgmentBonusSpellCoeff = [AvengerJudgmentBonusRanks + 1]float64{1}
 var AvengerJudgmentBonusBaseDamage = [AvengerJudgmentBonusRanks + 1][]float64{{20, 20}}
 
@@ -241,6 +257,7 @@ var AvengerSShieldLevel = [AvengerSShieldRanks + 1]int{1}
 var AvengerSShieldCastTime = [AvengerSShieldRanks + 1]int32{0}
 var AvengerSShieldCooldownMS = [AvengerSShieldRanks + 1]int32{0}
 var AvengerSShieldManaCost = [AvengerSShieldRanks + 1]float64{0}
+var AvengerSShieldManaCostPct = [AvengerSShieldRanks + 1]float64{0}
 var AvengerSShieldSpellCoeff = [AvengerSShieldRanks + 1]float64{0.2143}
 var AvengerSShieldBaseDamage = [AvengerSShieldRanks + 1][]float64{{407669, 407669}}
 
@@ -254,6 +271,7 @@ var AvengingShieldLevel = [AvengingShieldRanks + 1]int{0}
 var AvengingShieldCastTime = [AvengingShieldRanks + 1]int32{0}
 var AvengingShieldCooldownMS = [AvengingShieldRanks + 1]int32{0}
 var AvengingShieldManaCost = [AvengingShieldRanks + 1]float64{0}
+var AvengingShieldManaCostPct = [AvengingShieldRanks + 1]float64{0}
 var AvengingShieldSpellCoeff = [AvengingShieldRanks + 1]float64{1}
 var AvengingShieldBaseDamage = [AvengingShieldRanks + 1][]float64{{30, 30}}
 
@@ -265,6 +283,7 @@ var AvengingWrathLevel = [AvengingWrathRanks + 1]int{1}
 var AvengingWrathCastTime = [AvengingWrathRanks + 1]int32{0}
 var AvengingWrathCooldownMS = [AvengingWrathRanks + 1]int32{0}
 var AvengingWrathManaCost = [AvengingWrathRanks + 1]float64{0}
+var AvengingWrathManaCostPct = [AvengingWrathRanks + 1]float64{0}
 var AvengingWrathSpellCoeff = [AvengingWrathRanks + 1]float64{0.2143}
 var AvengingWrathBaseDamage = [AvengingWrathRanks + 1][]float64{{407788, 407788}}
 
@@ -279,6 +298,7 @@ var BattlegearOfEternalJusticeLevel = [BattlegearOfEternalJusticeRanks + 1]int{0
 var BattlegearOfEternalJusticeCastTime = [BattlegearOfEternalJusticeRanks + 1]int32{0}
 var BattlegearOfEternalJusticeCooldownMS = [BattlegearOfEternalJusticeRanks + 1]int32{0}
 var BattlegearOfEternalJusticeManaCost = [BattlegearOfEternalJusticeRanks + 1]float64{0}
+var BattlegearOfEternalJusticeManaCostPct = [BattlegearOfEternalJusticeRanks + 1]float64{0}
 var BattlegearOfEternalJusticeSpellCoeff = [BattlegearOfEternalJusticeRanks + 1]float64{1}
 var BattlegearOfEternalJusticeBaseDamage = [BattlegearOfEternalJusticeRanks + 1][]float64{{20, 20}}
 
@@ -290,6 +310,7 @@ var BeaconOfLightLevel = [BeaconOfLightRanks + 1]int{1}
 var BeaconOfLightCastTime = [BeaconOfLightRanks + 1]int32{0}
 var BeaconOfLightCooldownMS = [BeaconOfLightRanks + 1]int32{0}
 var BeaconOfLightManaCost = [BeaconOfLightRanks + 1]float64{0}
+var BeaconOfLightManaCostPct = [BeaconOfLightRanks + 1]float64{0}
 var BeaconOfLightSpellCoeff = [BeaconOfLightRanks + 1]float64{0.2143}
 var BeaconOfLightBaseDamage = [BeaconOfLightRanks + 1][]float64{{407613, 407613}}
 
@@ -303,6 +324,7 @@ var BenedictionLevel = [BenedictionRanks + 1]int{0}
 var BenedictionCastTime = [BenedictionRanks + 1]int32{0}
 var BenedictionCooldownMS = [BenedictionRanks + 1]int32{0}
 var BenedictionManaCost = [BenedictionRanks + 1]float64{0}
+var BenedictionManaCostPct = [BenedictionRanks + 1]float64{0}
 var BenedictionSpellCoeff = [BenedictionRanks + 1]float64{1}
 var BenedictionBaseDamage = [BenedictionRanks + 1][]float64{{-10, -10}}
 
@@ -314,6 +336,7 @@ var BlessingOfFreedomLevel = [BlessingOfFreedomRanks + 1]int{18}
 var BlessingOfFreedomCastTime = [BlessingOfFreedomRanks + 1]int32{0}
 var BlessingOfFreedomCooldownMS = [BlessingOfFreedomRanks + 1]int32{20000}
 var BlessingOfFreedomManaCost = [BlessingOfFreedomRanks + 1]float64{0}
+var BlessingOfFreedomManaCostPct = [BlessingOfFreedomRanks + 1]float64{10}
 var BlessingOfFreedomSpellCoeff = [BlessingOfFreedomRanks + 1]float64{0.3333}
 var BlessingOfFreedomBaseDamage = [BlessingOfFreedomRanks + 1][]float64{{0, 0}}
 
@@ -327,6 +350,7 @@ var BlessingOfKingsLevel = [BlessingOfKingsRanks + 1]int{20}
 var BlessingOfKingsCastTime = [BlessingOfKingsRanks + 1]int32{0}
 var BlessingOfKingsCooldownMS = [BlessingOfKingsRanks + 1]int32{0}
 var BlessingOfKingsManaCost = [BlessingOfKingsRanks + 1]float64{0}
+var BlessingOfKingsManaCostPct = [BlessingOfKingsRanks + 1]float64{8}
 var BlessingOfKingsSpellCoeff = [BlessingOfKingsRanks + 1]float64{120}
 var BlessingOfKingsBaseDamage = [BlessingOfKingsRanks + 1][]float64{{10, 10}}
 
@@ -341,6 +365,7 @@ var BlessingOfLightLevel = [BlessingOfLightRanks + 1]int{60, 40, 50, 60}
 var BlessingOfLightCastTime = [BlessingOfLightRanks + 1]int32{0, 0, 0, 0}
 var BlessingOfLightCooldownMS = [BlessingOfLightRanks + 1]int32{0, 0, 0, 0}
 var BlessingOfLightManaCost = [BlessingOfLightRanks + 1]float64{0, 85, 110, 135}
+var BlessingOfLightManaCostPct = [BlessingOfLightRanks + 1]float64{0, 0, 0, 0}
 var BlessingOfLightSpellCoeff = [BlessingOfLightRanks + 1]float64{1, 120, 120, 120}
 var BlessingOfLightBaseDamage = [BlessingOfLightRanks + 1][]float64{{0, 0}, {210, 210}, {300, 300}, {400, 400}}
 
@@ -354,6 +379,7 @@ var BlessingOfMightLevel = [BlessingOfMightRanks + 1]int{0, 4, 12, 22, 32, 42, 5
 var BlessingOfMightCastTime = [BlessingOfMightRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var BlessingOfMightCooldownMS = [BlessingOfMightRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var BlessingOfMightManaCost = [BlessingOfMightRanks + 1]float64{0, 20, 30, 45, 60, 85, 110, 130}
+var BlessingOfMightManaCostPct = [BlessingOfMightRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var BlessingOfMightSpellCoeff = [BlessingOfMightRanks + 1]float64{0, 120, 120, 120, 120, 120, 120, 120}
 var BlessingOfMightBaseDamage = [BlessingOfMightRanks + 1][]float64{{0, 0}, {14, 14}, {25, 25}, {40, 40}, {61, 61}, {83, 83}, {112, 112}, {133, 133}}
 
@@ -367,6 +393,7 @@ var BlessingOfProtectionLevel = [BlessingOfProtectionRanks + 1]int{38, 10, 24, 3
 var BlessingOfProtectionCastTime = [BlessingOfProtectionRanks + 1]int32{0, 0, 0, 0}
 var BlessingOfProtectionCooldownMS = [BlessingOfProtectionRanks + 1]int32{0, 300000, 300000, 300000}
 var BlessingOfProtectionManaCost = [BlessingOfProtectionRanks + 1]float64{0, 25, 45, 0}
+var BlessingOfProtectionManaCostPct = [BlessingOfProtectionRanks + 1]float64{7, 0, 0, 7}
 var BlessingOfProtectionSpellCoeff = [BlessingOfProtectionRanks + 1]float64{0.3333, 0.2, 0.2667, 0.3333}
 var BlessingOfProtectionBaseDamage = [BlessingOfProtectionRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}}
 
@@ -380,6 +407,7 @@ var BlessingOfSacrificeLevel = [BlessingOfSacrificeRanks + 1]int{0, 46, 54}
 var BlessingOfSacrificeCastTime = [BlessingOfSacrificeRanks + 1]int32{0, 0, 0}
 var BlessingOfSacrificeCooldownMS = [BlessingOfSacrificeRanks + 1]int32{0, 0, 0}
 var BlessingOfSacrificeManaCost = [BlessingOfSacrificeRanks + 1]float64{0, 80, 100}
+var BlessingOfSacrificeManaCostPct = [BlessingOfSacrificeRanks + 1]float64{0, 0, 0}
 var BlessingOfSacrificeSpellCoeff = [BlessingOfSacrificeRanks + 1]float64{0, 1, 1}
 var BlessingOfSacrificeBaseDamage = [BlessingOfSacrificeRanks + 1][]float64{{0, 0}, {45, 45}, {55, 55}}
 
@@ -393,6 +421,7 @@ var BlessingOfSalvationLevel = [BlessingOfSalvationRanks + 1]int{26}
 var BlessingOfSalvationCastTime = [BlessingOfSalvationRanks + 1]int32{0}
 var BlessingOfSalvationCooldownMS = [BlessingOfSalvationRanks + 1]int32{0}
 var BlessingOfSalvationManaCost = [BlessingOfSalvationRanks + 1]float64{0}
+var BlessingOfSalvationManaCostPct = [BlessingOfSalvationRanks + 1]float64{8}
 var BlessingOfSalvationSpellCoeff = [BlessingOfSalvationRanks + 1]float64{120}
 var BlessingOfSalvationBaseDamage = [BlessingOfSalvationRanks + 1][]float64{{-30, -30}}
 
@@ -406,6 +435,7 @@ var BlessingOfWisdomLevel = [BlessingOfWisdomRanks + 1]int{0, 14, 24, 34, 44, 54
 var BlessingOfWisdomCastTime = [BlessingOfWisdomRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var BlessingOfWisdomCooldownMS = [BlessingOfWisdomRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var BlessingOfWisdomManaCost = [BlessingOfWisdomRanks + 1]float64{0, 30, 45, 65, 90, 115, 125}
+var BlessingOfWisdomManaCostPct = [BlessingOfWisdomRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var BlessingOfWisdomSpellCoeff = [BlessingOfWisdomRanks + 1]float64{0, 120, 120, 120, 120, 120, 120}
 var BlessingOfWisdomBaseDamage = [BlessingOfWisdomRanks + 1][]float64{{0, 0}, {12, 12}, {18, 18}, {24, 24}, {30, 30}, {36, 36}, {40, 40}}
 
@@ -419,6 +449,7 @@ var ChampionOfTheLightLevel = [ChampionOfTheLightRanks + 1]int{0}
 var ChampionOfTheLightCastTime = [ChampionOfTheLightRanks + 1]int32{0}
 var ChampionOfTheLightCooldownMS = [ChampionOfTheLightRanks + 1]int32{0}
 var ChampionOfTheLightManaCost = [ChampionOfTheLightRanks + 1]float64{0}
+var ChampionOfTheLightManaCostPct = [ChampionOfTheLightRanks + 1]float64{0}
 var ChampionOfTheLightSpellCoeff = [ChampionOfTheLightRanks + 1]float64{1}
 var ChampionOfTheLightBaseDamage = [ChampionOfTheLightRanks + 1][]float64{{100, 100}}
 
@@ -430,6 +461,7 @@ var CharityLevel = [CharityRanks + 1]int{0}
 var CharityCastTime = [CharityRanks + 1]int32{0}
 var CharityCooldownMS = [CharityRanks + 1]int32{0}
 var CharityManaCost = [CharityRanks + 1]float64{0}
+var CharityManaCostPct = [CharityRanks + 1]float64{0}
 var CharitySpellCoeff = [CharityRanks + 1]float64{1}
 var CharityBaseDamage = [CharityRanks + 1][]float64{{0, 0}}
 
@@ -441,6 +473,7 @@ var CleanseLevel = [CleanseRanks + 1]int{42}
 var CleanseCastTime = [CleanseRanks + 1]int32{0}
 var CleanseCooldownMS = [CleanseRanks + 1]int32{0}
 var CleanseManaCost = [CleanseRanks + 1]float64{0}
+var CleanseManaCostPct = [CleanseRanks + 1]float64{8}
 var CleanseSpellCoeff = [CleanseRanks + 1]float64{0.2143}
 var CleanseBaseDamage = [CleanseRanks + 1][]float64{{1, 1}}
 
@@ -455,6 +488,7 @@ var CleanseCostReducedLevel = [CleanseCostReducedRanks + 1]int{0}
 var CleanseCostReducedCastTime = [CleanseCostReducedRanks + 1]int32{0}
 var CleanseCostReducedCooldownMS = [CleanseCostReducedRanks + 1]int32{0}
 var CleanseCostReducedManaCost = [CleanseCostReducedRanks + 1]float64{0}
+var CleanseCostReducedManaCostPct = [CleanseCostReducedRanks + 1]float64{0}
 var CleanseCostReducedSpellCoeff = [CleanseCostReducedRanks + 1]float64{1}
 var CleanseCostReducedBaseDamage = [CleanseCostReducedRanks + 1][]float64{{-25, -25}}
 
@@ -466,6 +500,7 @@ var ConcentrationAuraLevel = [ConcentrationAuraRanks + 1]int{22}
 var ConcentrationAuraCastTime = [ConcentrationAuraRanks + 1]int32{0}
 var ConcentrationAuraCooldownMS = [ConcentrationAuraRanks + 1]int32{0}
 var ConcentrationAuraManaCost = [ConcentrationAuraRanks + 1]float64{0}
+var ConcentrationAuraManaCostPct = [ConcentrationAuraRanks + 1]float64{0}
 var ConcentrationAuraSpellCoeff = [ConcentrationAuraRanks + 1]float64{0.2143}
 var ConcentrationAuraBaseDamage = [ConcentrationAuraRanks + 1][]float64{{35, 35}}
 
@@ -479,6 +514,7 @@ var ConsecratedGroundLevel = [ConsecratedGroundRanks + 1]int{0}
 var ConsecratedGroundCastTime = [ConsecratedGroundRanks + 1]int32{0}
 var ConsecratedGroundCooldownMS = [ConsecratedGroundRanks + 1]int32{0}
 var ConsecratedGroundManaCost = [ConsecratedGroundRanks + 1]float64{0}
+var ConsecratedGroundManaCostPct = [ConsecratedGroundRanks + 1]float64{0}
 var ConsecratedGroundSpellCoeff = [ConsecratedGroundRanks + 1]float64{1}
 var ConsecratedGroundBaseDamage = [ConsecratedGroundRanks + 1][]float64{{10, 10}}
 
@@ -490,6 +526,7 @@ var ConsecrationLevel = [ConsecrationRanks + 1]int{1, 20, 30, 40, 50, 60}
 var ConsecrationCastTime = [ConsecrationRanks + 1]int32{0, 0, 0, 0, 0, 0}
 var ConsecrationCooldownMS = [ConsecrationRanks + 1]int32{0, 0, 0, 0, 0, 0}
 var ConsecrationManaCost = [ConsecrationRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var ConsecrationManaCostPct = [ConsecrationRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var ConsecrationSpellCoeff = [ConsecrationRanks + 1]float64{0.095, 0.2143, 0.2143, 0.2143, 0.2143, 0.2143}
 var ConsecrationBaseDamage = [ConsecrationRanks + 1][]float64{{0, 0}, {2, 2}, {3, 3}, {6, 6}, {8, 8}, {12, 12}}
 
@@ -509,6 +546,7 @@ var CopyOfJudgementOfLightLevel = [CopyOfJudgementOfLightRanks + 1]int{0, 0, 0, 
 var CopyOfJudgementOfLightCastTime = [CopyOfJudgementOfLightRanks + 1]int32{0, 0, 0, 0, 0}
 var CopyOfJudgementOfLightCooldownMS = [CopyOfJudgementOfLightRanks + 1]int32{0, 0, 0, 0, 0}
 var CopyOfJudgementOfLightManaCost = [CopyOfJudgementOfLightRanks + 1]float64{0, 0, 0, 0, 0}
+var CopyOfJudgementOfLightManaCostPct = [CopyOfJudgementOfLightRanks + 1]float64{0, 0, 0, 0, 0}
 var CopyOfJudgementOfLightSpellCoeff = [CopyOfJudgementOfLightRanks + 1]float64{0, 0, 0, 0, 1}
 var CopyOfJudgementOfLightBaseDamage = [CopyOfJudgementOfLightRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
 
@@ -522,6 +560,7 @@ var CorruptedMindLevel = [CorruptedMindRanks + 1]int{0}
 var CorruptedMindCastTime = [CorruptedMindRanks + 1]int32{0}
 var CorruptedMindCooldownMS = [CorruptedMindRanks + 1]int32{0}
 var CorruptedMindManaCost = [CorruptedMindRanks + 1]float64{0}
+var CorruptedMindManaCostPct = [CorruptedMindRanks + 1]float64{0}
 var CorruptedMindSpellCoeff = [CorruptedMindRanks + 1]float64{2}
 var CorruptedMindBaseDamage = [CorruptedMindRanks + 1][]float64{{1, 1}}
 
@@ -536,6 +575,7 @@ var CrusadeLevel = [CrusadeRanks + 1]int{0}
 var CrusadeCastTime = [CrusadeRanks + 1]int32{0}
 var CrusadeCooldownMS = [CrusadeRanks + 1]int32{0}
 var CrusadeManaCost = [CrusadeRanks + 1]float64{0}
+var CrusadeManaCostPct = [CrusadeRanks + 1]float64{0}
 var CrusadeSpellCoeff = [CrusadeRanks + 1]float64{1}
 var CrusadeBaseDamage = [CrusadeRanks + 1][]float64{{2, 2}}
 
@@ -547,6 +587,7 @@ var CrusaderStrikeLevel = [CrusaderStrikeRanks + 1]int{1}
 var CrusaderStrikeCastTime = [CrusaderStrikeRanks + 1]int32{0}
 var CrusaderStrikeCooldownMS = [CrusaderStrikeRanks + 1]int32{0}
 var CrusaderStrikeManaCost = [CrusaderStrikeRanks + 1]float64{0}
+var CrusaderStrikeManaCostPct = [CrusaderStrikeRanks + 1]float64{0}
 var CrusaderStrikeSpellCoeff = [CrusaderStrikeRanks + 1]float64{0.2143}
 var CrusaderStrikeBaseDamage = [CrusaderStrikeRanks + 1][]float64{{407676, 407676}}
 
@@ -560,6 +601,7 @@ var CrusaderSWrathLevel = [CrusaderSWrathRanks + 1]int{0}
 var CrusaderSWrathCastTime = [CrusaderSWrathRanks + 1]int32{0}
 var CrusaderSWrathCooldownMS = [CrusaderSWrathRanks + 1]int32{0}
 var CrusaderSWrathManaCost = [CrusaderSWrathRanks + 1]float64{0}
+var CrusaderSWrathManaCostPct = [CrusaderSWrathRanks + 1]float64{0}
 var CrusaderSWrathSpellCoeff = [CrusaderSWrathRanks + 1]float64{0.2143}
 var CrusaderSWrathBaseDamage = [CrusaderSWrathRanks + 1][]float64{{1, 1}}
 
@@ -573,6 +615,7 @@ var DecoyTotemLevel = [DecoyTotemRanks + 1]int{1}
 var DecoyTotemCastTime = [DecoyTotemRanks + 1]int32{0}
 var DecoyTotemCooldownMS = [DecoyTotemRanks + 1]int32{0}
 var DecoyTotemManaCost = [DecoyTotemRanks + 1]float64{0}
+var DecoyTotemManaCostPct = [DecoyTotemRanks + 1]float64{0}
 var DecoyTotemSpellCoeff = [DecoyTotemRanks + 1]float64{0.3333}
 var DecoyTotemBaseDamage = [DecoyTotemRanks + 1][]float64{{0, 0}}
 
@@ -586,6 +629,7 @@ var DevotionAuraLevel = [DevotionAuraRanks + 1]int{0, 1, 10, 20, 30, 40, 50, 60}
 var DevotionAuraCastTime = [DevotionAuraRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var DevotionAuraCooldownMS = [DevotionAuraRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var DevotionAuraManaCost = [DevotionAuraRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
+var DevotionAuraManaCostPct = [DevotionAuraRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var DevotionAuraSpellCoeff = [DevotionAuraRanks + 1]float64{0, 0.2143, 0.2143, 0.2143, 0.2143, 0.2143, 0.2143, 0.2143}
 var DevotionAuraBaseDamage = [DevotionAuraRanks + 1][]float64{{0, 0}, {55, 55}, {160, 160}, {275, 275}, {390, 390}, {505, 505}, {620, 620}, {735, 735}}
 
@@ -599,6 +643,7 @@ var DivineFavorLevel = [DivineFavorRanks + 1]int{0}
 var DivineFavorCastTime = [DivineFavorRanks + 1]int32{0}
 var DivineFavorCooldownMS = [DivineFavorRanks + 1]int32{120000}
 var DivineFavorManaCost = [DivineFavorRanks + 1]float64{0}
+var DivineFavorManaCostPct = [DivineFavorRanks + 1]float64{4}
 var DivineFavorSpellCoeff = [DivineFavorRanks + 1]float64{0.2143}
 var DivineFavorBaseDamage = [DivineFavorRanks + 1][]float64{{100, 100}}
 
@@ -612,6 +657,7 @@ var DivineInterventionLevel = [DivineInterventionRanks + 1]int{30}
 var DivineInterventionCastTime = [DivineInterventionRanks + 1]int32{0}
 var DivineInterventionCooldownMS = [DivineInterventionRanks + 1]int32{3600000}
 var DivineInterventionManaCost = [DivineInterventionRanks + 1]float64{0}
+var DivineInterventionManaCostPct = [DivineInterventionRanks + 1]float64{0}
 var DivineInterventionSpellCoeff = [DivineInterventionRanks + 1]float64{1}
 var DivineInterventionBaseDamage = [DivineInterventionRanks + 1][]float64{{0, 0}}
 
@@ -623,6 +669,7 @@ var DivineInterventionNEWTESTLevel = [DivineInterventionNEWTESTRanks + 1]int{30}
 var DivineInterventionNEWTESTCastTime = [DivineInterventionNEWTESTRanks + 1]int32{0}
 var DivineInterventionNEWTESTCooldownMS = [DivineInterventionNEWTESTRanks + 1]int32{3600000}
 var DivineInterventionNEWTESTManaCost = [DivineInterventionNEWTESTRanks + 1]float64{0}
+var DivineInterventionNEWTESTManaCostPct = [DivineInterventionNEWTESTRanks + 1]float64{0}
 var DivineInterventionNEWTESTSpellCoeff = [DivineInterventionNEWTESTRanks + 1]float64{1}
 var DivineInterventionNEWTESTBaseDamage = [DivineInterventionNEWTESTRanks + 1][]float64{{20, 20}}
 
@@ -634,6 +681,7 @@ var DivineLightLevel = [DivineLightRanks + 1]int{1}
 var DivineLightCastTime = [DivineLightRanks + 1]int32{0}
 var DivineLightCooldownMS = [DivineLightRanks + 1]int32{0}
 var DivineLightManaCost = [DivineLightRanks + 1]float64{0}
+var DivineLightManaCostPct = [DivineLightRanks + 1]float64{0}
 var DivineLightSpellCoeff = [DivineLightRanks + 1]float64{0.2143}
 var DivineLightBaseDamage = [DivineLightRanks + 1][]float64{{0, 0}}
 
@@ -648,6 +696,7 @@ var DivinePrecisionLevel = [DivinePrecisionRanks + 1]int{0}
 var DivinePrecisionCastTime = [DivinePrecisionRanks + 1]int32{0}
 var DivinePrecisionCooldownMS = [DivinePrecisionRanks + 1]int32{0}
 var DivinePrecisionManaCost = [DivinePrecisionRanks + 1]float64{0}
+var DivinePrecisionManaCostPct = [DivinePrecisionRanks + 1]float64{0}
 var DivinePrecisionSpellCoeff = [DivinePrecisionRanks + 1]float64{0.2143}
 var DivinePrecisionBaseDamage = [DivinePrecisionRanks + 1][]float64{{18, 18}}
 
@@ -661,6 +710,7 @@ var DivineProtectionLevel = [DivineProtectionRanks + 1]int{0, 6, 18}
 var DivineProtectionCastTime = [DivineProtectionRanks + 1]int32{0, 0, 0}
 var DivineProtectionCooldownMS = [DivineProtectionRanks + 1]int32{0, 300000, 300000}
 var DivineProtectionManaCost = [DivineProtectionRanks + 1]float64{0, 15, 35}
+var DivineProtectionManaCostPct = [DivineProtectionRanks + 1]float64{0, 0, 0}
 var DivineProtectionSpellCoeff = [DivineProtectionRanks + 1]float64{0, 0.2, 0.2667}
 var DivineProtectionBaseDamage = [DivineProtectionRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}}
 
@@ -676,6 +726,7 @@ var DivineSacrificeLevel = [DivineSacrificeRanks + 1]int{1}
 var DivineSacrificeCastTime = [DivineSacrificeRanks + 1]int32{0}
 var DivineSacrificeCooldownMS = [DivineSacrificeRanks + 1]int32{120000}
 var DivineSacrificeManaCost = [DivineSacrificeRanks + 1]float64{0}
+var DivineSacrificeManaCostPct = [DivineSacrificeRanks + 1]float64{0}
 var DivineSacrificeSpellCoeff = [DivineSacrificeRanks + 1]float64{0.3333}
 var DivineSacrificeBaseDamage = [DivineSacrificeRanks + 1][]float64{{30, 30}}
 
@@ -689,6 +740,7 @@ var DivineShieldLevel = [DivineShieldRanks + 1]int{0, 34, 50}
 var DivineShieldCastTime = [DivineShieldRanks + 1]int32{0, 0, 0}
 var DivineShieldCooldownMS = [DivineShieldRanks + 1]int32{0, 300000, 300000}
 var DivineShieldManaCost = [DivineShieldRanks + 1]float64{0, 75, 110}
+var DivineShieldManaCostPct = [DivineShieldRanks + 1]float64{0, 0, 0}
 var DivineShieldSpellCoeff = [DivineShieldRanks + 1]float64{0, 0.3333, 0.4}
 var DivineShieldBaseDamage = [DivineShieldRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}}
 
@@ -702,6 +754,7 @@ var DivineStormLevel = [DivineStormRanks + 1]int{1}
 var DivineStormCastTime = [DivineStormRanks + 1]int32{0}
 var DivineStormCooldownMS = [DivineStormRanks + 1]int32{0}
 var DivineStormManaCost = [DivineStormRanks + 1]float64{0}
+var DivineStormManaCostPct = [DivineStormRanks + 1]float64{0}
 var DivineStormSpellCoeff = [DivineStormRanks + 1]float64{0.2143}
 var DivineStormBaseDamage = [DivineStormRanks + 1][]float64{{407778, 407778}}
 
@@ -716,6 +769,7 @@ var DivinityLevel = [DivinityRanks + 1]int{1}
 var DivinityCastTime = [DivinityRanks + 1]int32{0}
 var DivinityCooldownMS = [DivinityRanks + 1]int32{0}
 var DivinityManaCost = [DivinityRanks + 1]float64{0}
+var DivinityManaCostPct = [DivinityRanks + 1]float64{0}
 var DivinitySpellCoeff = [DivinityRanks + 1]float64{0.2143}
 var DivinityBaseDamage = [DivinityRanks + 1][]float64{{5, 5}}
 
@@ -729,6 +783,7 @@ var DormantRuneLevel = [DormantRuneRanks + 1]int{0}
 var DormantRuneCastTime = [DormantRuneRanks + 1]int32{0}
 var DormantRuneCooldownMS = [DormantRuneRanks + 1]int32{0}
 var DormantRuneManaCost = [DormantRuneRanks + 1]float64{0}
+var DormantRuneManaCostPct = [DormantRuneRanks + 1]float64{0}
 var DormantRuneSpellCoeff = [DormantRuneRanks + 1]float64{0.2143}
 var DormantRuneBaseDamage = [DormantRuneRanks + 1][]float64{{0, 0}}
 
@@ -742,6 +797,7 @@ var EmergencyLevel = [EmergencyRanks + 1]int{0}
 var EmergencyCastTime = [EmergencyRanks + 1]int32{0}
 var EmergencyCooldownMS = [EmergencyRanks + 1]int32{0}
 var EmergencyManaCost = [EmergencyRanks + 1]float64{0}
+var EmergencyManaCostPct = [EmergencyRanks + 1]float64{0}
 var EmergencySpellCoeff = [EmergencyRanks + 1]float64{1}
 var EmergencyBaseDamage = [EmergencyRanks + 1][]float64{{20, 20}}
 
@@ -753,6 +809,7 @@ var EnchantedPrayerTomeLevel = [EnchantedPrayerTomeRanks + 1]int{0}
 var EnchantedPrayerTomeCastTime = [EnchantedPrayerTomeRanks + 1]int32{0}
 var EnchantedPrayerTomeCooldownMS = [EnchantedPrayerTomeRanks + 1]int32{0}
 var EnchantedPrayerTomeManaCost = [EnchantedPrayerTomeRanks + 1]float64{0}
+var EnchantedPrayerTomeManaCostPct = [EnchantedPrayerTomeRanks + 1]float64{0}
 var EnchantedPrayerTomeSpellCoeff = [EnchantedPrayerTomeRanks + 1]float64{0.2143}
 var EnchantedPrayerTomeBaseDamage = [EnchantedPrayerTomeRanks + 1][]float64{{3, 3}}
 
@@ -766,6 +823,7 @@ var EnergizeLevel = [EnergizeRanks + 1]int{0}
 var EnergizeCastTime = [EnergizeRanks + 1]int32{0}
 var EnergizeCooldownMS = [EnergizeRanks + 1]int32{0}
 var EnergizeManaCost = [EnergizeRanks + 1]float64{0}
+var EnergizeManaCostPct = [EnergizeRanks + 1]float64{0}
 var EnergizeSpellCoeff = [EnergizeRanks + 1]float64{0.2143}
 var EnergizeBaseDamage = [EnergizeRanks + 1][]float64{{1, 1}}
 
@@ -779,6 +837,7 @@ var EnergizedHyperconductorLevel = [EnergizedHyperconductorRanks + 1]int{0}
 var EnergizedHyperconductorCastTime = [EnergizedHyperconductorRanks + 1]int32{0}
 var EnergizedHyperconductorCooldownMS = [EnergizedHyperconductorRanks + 1]int32{0}
 var EnergizedHyperconductorManaCost = [EnergizedHyperconductorRanks + 1]float64{0}
+var EnergizedHyperconductorManaCostPct = [EnergizedHyperconductorRanks + 1]float64{0}
 var EnergizedHyperconductorSpellCoeff = [EnergizedHyperconductorRanks + 1]float64{0.2143}
 var EnergizedHyperconductorBaseDamage = [EnergizedHyperconductorRanks + 1][]float64{{1, 1}}
 
@@ -792,6 +851,7 @@ var EnhancedBlessingsLevel = [EnhancedBlessingsRanks + 1]int{0}
 var EnhancedBlessingsCastTime = [EnhancedBlessingsRanks + 1]int32{0}
 var EnhancedBlessingsCooldownMS = [EnhancedBlessingsRanks + 1]int32{0}
 var EnhancedBlessingsManaCost = [EnhancedBlessingsRanks + 1]float64{0}
+var EnhancedBlessingsManaCostPct = [EnhancedBlessingsRanks + 1]float64{0}
 var EnhancedBlessingsSpellCoeff = [EnhancedBlessingsRanks + 1]float64{1}
 var EnhancedBlessingsBaseDamage = [EnhancedBlessingsRanks + 1][]float64{{100, 100}}
 
@@ -803,6 +863,7 @@ var EnlightenedJudgementsLevel = [EnlightenedJudgementsRanks + 1]int{0}
 var EnlightenedJudgementsCastTime = [EnlightenedJudgementsRanks + 1]int32{0}
 var EnlightenedJudgementsCooldownMS = [EnlightenedJudgementsRanks + 1]int32{0}
 var EnlightenedJudgementsManaCost = [EnlightenedJudgementsRanks + 1]float64{0}
+var EnlightenedJudgementsManaCostPct = [EnlightenedJudgementsRanks + 1]float64{0}
 var EnlightenedJudgementsSpellCoeff = [EnlightenedJudgementsRanks + 1]float64{1}
 var EnlightenedJudgementsBaseDamage = [EnlightenedJudgementsRanks + 1][]float64{{30, 30}}
 
@@ -814,6 +875,7 @@ var ExcommunicationLevel = [ExcommunicationRanks + 1]int{1}
 var ExcommunicationCastTime = [ExcommunicationRanks + 1]int32{0}
 var ExcommunicationCooldownMS = [ExcommunicationRanks + 1]int32{0}
 var ExcommunicationManaCost = [ExcommunicationRanks + 1]float64{0}
+var ExcommunicationManaCostPct = [ExcommunicationRanks + 1]float64{0}
 var ExcommunicationSpellCoeff = [ExcommunicationRanks + 1]float64{0.6667}
 var ExcommunicationBaseDamage = [ExcommunicationRanks + 1][]float64{{35, 35}}
 
@@ -827,6 +889,7 @@ var ExorcismLevel = [ExorcismRanks + 1]int{0, 20, 28, 36, 44, 52, 60}
 var ExorcismCastTime = [ExorcismRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var ExorcismCooldownMS = [ExorcismRanks + 1]int32{0, 15000, 15000, 15000, 15000, 15000, 15000}
 var ExorcismManaCost = [ExorcismRanks + 1]float64{0, 85, 135, 180, 235, 285, 345}
+var ExorcismManaCostPct = [ExorcismRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var ExorcismSpellCoeff = [ExorcismRanks + 1]float64{0, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429}
 var ExorcismBaseDamage = [ExorcismRanks + 1][]float64{{0, 0}, {90, 90}, {162, 162}, {231, 231}, {323, 323}, {416, 416}, {534, 534}}
 
@@ -845,6 +908,7 @@ var EyeForAnEyeLevel = [EyeForAnEyeRanks + 1]int{1}
 var EyeForAnEyeCastTime = [EyeForAnEyeRanks + 1]int32{0}
 var EyeForAnEyeCooldownMS = [EyeForAnEyeRanks + 1]int32{0}
 var EyeForAnEyeManaCost = [EyeForAnEyeRanks + 1]float64{0}
+var EyeForAnEyeManaCostPct = [EyeForAnEyeRanks + 1]float64{0}
 var EyeForAnEyeSpellCoeff = [EyeForAnEyeRanks + 1]float64{0.2143}
 var EyeForAnEyeBaseDamage = [EyeForAnEyeRanks + 1][]float64{{1, 1}}
 
@@ -858,6 +922,7 @@ var FanaticismLevel = [FanaticismRanks + 1]int{1}
 var FanaticismCastTime = [FanaticismRanks + 1]int32{0}
 var FanaticismCooldownMS = [FanaticismRanks + 1]int32{0}
 var FanaticismManaCost = [FanaticismRanks + 1]float64{0}
+var FanaticismManaCostPct = [FanaticismRanks + 1]float64{0}
 var FanaticismSpellCoeff = [FanaticismRanks + 1]float64{0.2143}
 var FanaticismBaseDamage = [FanaticismRanks + 1][]float64{{429142, 429142}}
 
@@ -872,6 +937,7 @@ var FireResistanceAuraLevel = [FireResistanceAuraRanks + 1]int{0, 36, 48, 60}
 var FireResistanceAuraCastTime = [FireResistanceAuraRanks + 1]int32{0, 0, 0, 0}
 var FireResistanceAuraCooldownMS = [FireResistanceAuraRanks + 1]int32{0, 0, 0, 0}
 var FireResistanceAuraManaCost = [FireResistanceAuraRanks + 1]float64{0, 0, 0, 0}
+var FireResistanceAuraManaCostPct = [FireResistanceAuraRanks + 1]float64{0, 0, 0, 0}
 var FireResistanceAuraSpellCoeff = [FireResistanceAuraRanks + 1]float64{0, 0.2143, 0.2143, 0.2143}
 var FireResistanceAuraBaseDamage = [FireResistanceAuraRanks + 1][]float64{{0, 0}, {30, 30}, {45, 45}, {60, 60}}
 
@@ -885,6 +951,7 @@ var FlashOfLightLevel = [FlashOfLightRanks + 1]int{58, 20, 26, 34, 42, 50, 58}
 var FlashOfLightCastTime = [FlashOfLightRanks + 1]int32{0, 1500, 1500, 1500, 1500, 1500, 1500}
 var FlashOfLightCooldownMS = [FlashOfLightRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var FlashOfLightManaCost = [FlashOfLightRanks + 1]float64{0, 35, 50, 70, 90, 115, 140}
+var FlashOfLightManaCostPct = [FlashOfLightRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var FlashOfLightSpellCoeff = [FlashOfLightRanks + 1]float64{0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429}
 var FlashOfLightBaseDamage = [FlashOfLightRanks + 1][]float64{{1, 1}, {46, 46}, {66, 66}, {101, 101}, {151, 151}, {223, 223}, {303, 303}}
 
@@ -898,6 +965,7 @@ var ForbearanceLevel = [ForbearanceRanks + 1]int{0}
 var ForbearanceCastTime = [ForbearanceRanks + 1]int32{0}
 var ForbearanceCooldownMS = [ForbearanceRanks + 1]int32{0}
 var ForbearanceManaCost = [ForbearanceRanks + 1]float64{0}
+var ForbearanceManaCostPct = [ForbearanceRanks + 1]float64{0}
 var ForbearanceSpellCoeff = [ForbearanceRanks + 1]float64{2}
 var ForbearanceBaseDamage = [ForbearanceRanks + 1][]float64{{0, 0}}
 
@@ -911,6 +979,7 @@ var FrostResistanceAuraLevel = [FrostResistanceAuraRanks + 1]int{0, 32, 44, 56}
 var FrostResistanceAuraCastTime = [FrostResistanceAuraRanks + 1]int32{0, 0, 0, 0}
 var FrostResistanceAuraCooldownMS = [FrostResistanceAuraRanks + 1]int32{0, 0, 0, 0}
 var FrostResistanceAuraManaCost = [FrostResistanceAuraRanks + 1]float64{0, 0, 0, 0}
+var FrostResistanceAuraManaCostPct = [FrostResistanceAuraRanks + 1]float64{0, 0, 0, 0}
 var FrostResistanceAuraSpellCoeff = [FrostResistanceAuraRanks + 1]float64{0, 0.2143, 0.2143, 0.2143}
 var FrostResistanceAuraBaseDamage = [FrostResistanceAuraRanks + 1][]float64{{0, 0}, {30, 30}, {45, 45}, {60, 60}}
 
@@ -924,6 +993,7 @@ var GreaterBlessingOfKingsLevel = [GreaterBlessingOfKingsRanks + 1]int{60}
 var GreaterBlessingOfKingsCastTime = [GreaterBlessingOfKingsRanks + 1]int32{0}
 var GreaterBlessingOfKingsCooldownMS = [GreaterBlessingOfKingsRanks + 1]int32{0}
 var GreaterBlessingOfKingsManaCost = [GreaterBlessingOfKingsRanks + 1]float64{150}
+var GreaterBlessingOfKingsManaCostPct = [GreaterBlessingOfKingsRanks + 1]float64{0}
 var GreaterBlessingOfKingsSpellCoeff = [GreaterBlessingOfKingsRanks + 1]float64{120}
 var GreaterBlessingOfKingsBaseDamage = [GreaterBlessingOfKingsRanks + 1][]float64{{10, 10}}
 
@@ -937,6 +1007,7 @@ var GreaterBlessingOfLightLevel = [GreaterBlessingOfLightRanks + 1]int{60}
 var GreaterBlessingOfLightCastTime = [GreaterBlessingOfLightRanks + 1]int32{0}
 var GreaterBlessingOfLightCooldownMS = [GreaterBlessingOfLightRanks + 1]int32{0}
 var GreaterBlessingOfLightManaCost = [GreaterBlessingOfLightRanks + 1]float64{260}
+var GreaterBlessingOfLightManaCostPct = [GreaterBlessingOfLightRanks + 1]float64{0}
 var GreaterBlessingOfLightSpellCoeff = [GreaterBlessingOfLightRanks + 1]float64{120}
 var GreaterBlessingOfLightBaseDamage = [GreaterBlessingOfLightRanks + 1][]float64{{400, 400}}
 
@@ -950,6 +1021,7 @@ var GreaterBlessingOfMightLevel = [GreaterBlessingOfMightRanks + 1]int{0, 52, 60
 var GreaterBlessingOfMightCastTime = [GreaterBlessingOfMightRanks + 1]int32{0, 0, 0}
 var GreaterBlessingOfMightCooldownMS = [GreaterBlessingOfMightRanks + 1]int32{0, 0, 0}
 var GreaterBlessingOfMightManaCost = [GreaterBlessingOfMightRanks + 1]float64{0, 220, 260}
+var GreaterBlessingOfMightManaCostPct = [GreaterBlessingOfMightRanks + 1]float64{0, 0, 0}
 var GreaterBlessingOfMightSpellCoeff = [GreaterBlessingOfMightRanks + 1]float64{0, 1, 1}
 var GreaterBlessingOfMightBaseDamage = [GreaterBlessingOfMightRanks + 1][]float64{{0, 0}, {112, 112}, {133, 133}}
 
@@ -961,6 +1033,7 @@ var GreaterBlessingOfSalvationLevel = [GreaterBlessingOfSalvationRanks + 1]int{6
 var GreaterBlessingOfSalvationCastTime = [GreaterBlessingOfSalvationRanks + 1]int32{0}
 var GreaterBlessingOfSalvationCooldownMS = [GreaterBlessingOfSalvationRanks + 1]int32{0}
 var GreaterBlessingOfSalvationManaCost = [GreaterBlessingOfSalvationRanks + 1]float64{0}
+var GreaterBlessingOfSalvationManaCostPct = [GreaterBlessingOfSalvationRanks + 1]float64{16}
 var GreaterBlessingOfSalvationSpellCoeff = [GreaterBlessingOfSalvationRanks + 1]float64{120}
 var GreaterBlessingOfSalvationBaseDamage = [GreaterBlessingOfSalvationRanks + 1][]float64{{-30, -30}}
 
@@ -974,6 +1047,7 @@ var GreaterBlessingOfWisdomLevel = [GreaterBlessingOfWisdomRanks + 1]int{0, 54, 
 var GreaterBlessingOfWisdomCastTime = [GreaterBlessingOfWisdomRanks + 1]int32{0, 0, 0}
 var GreaterBlessingOfWisdomCooldownMS = [GreaterBlessingOfWisdomRanks + 1]int32{0, 0, 0}
 var GreaterBlessingOfWisdomManaCost = [GreaterBlessingOfWisdomRanks + 1]float64{0, 230, 250}
+var GreaterBlessingOfWisdomManaCostPct = [GreaterBlessingOfWisdomRanks + 1]float64{0, 0, 0}
 var GreaterBlessingOfWisdomSpellCoeff = [GreaterBlessingOfWisdomRanks + 1]float64{0, 120, 120}
 var GreaterBlessingOfWisdomBaseDamage = [GreaterBlessingOfWisdomRanks + 1][]float64{{0, 0}, {36, 36}, {40, 40}}
 
@@ -987,6 +1061,7 @@ var GreathelmOfTheColossusLevel = [GreathelmOfTheColossusRanks + 1]int{5}
 var GreathelmOfTheColossusCastTime = [GreathelmOfTheColossusRanks + 1]int32{0}
 var GreathelmOfTheColossusCooldownMS = [GreathelmOfTheColossusRanks + 1]int32{0}
 var GreathelmOfTheColossusManaCost = [GreathelmOfTheColossusRanks + 1]float64{0}
+var GreathelmOfTheColossusManaCostPct = [GreathelmOfTheColossusRanks + 1]float64{0}
 var GreathelmOfTheColossusSpellCoeff = [GreathelmOfTheColossusRanks + 1]float64{0.2143}
 var GreathelmOfTheColossusBaseDamage = [GreathelmOfTheColossusRanks + 1][]float64{{10, 10}}
 
@@ -1000,6 +1075,7 @@ var GuardedByTheLightLevel = [GuardedByTheLightRanks + 1]int{1}
 var GuardedByTheLightCastTime = [GuardedByTheLightRanks + 1]int32{0}
 var GuardedByTheLightCooldownMS = [GuardedByTheLightRanks + 1]int32{0}
 var GuardedByTheLightManaCost = [GuardedByTheLightRanks + 1]float64{0}
+var GuardedByTheLightManaCostPct = [GuardedByTheLightRanks + 1]float64{0}
 var GuardedByTheLightSpellCoeff = [GuardedByTheLightRanks + 1]float64{0.2143}
 var GuardedByTheLightBaseDamage = [GuardedByTheLightRanks + 1][]float64{{415059, 415059}}
 
@@ -1014,6 +1090,7 @@ var GuardianSFavorLevel = [GuardianSFavorRanks + 1]int{0}
 var GuardianSFavorCastTime = [GuardianSFavorRanks + 1]int32{0}
 var GuardianSFavorCooldownMS = [GuardianSFavorRanks + 1]int32{0}
 var GuardianSFavorManaCost = [GuardianSFavorRanks + 1]float64{0}
+var GuardianSFavorManaCostPct = [GuardianSFavorRanks + 1]float64{0}
 var GuardianSFavorSpellCoeff = [GuardianSFavorRanks + 1]float64{1}
 var GuardianSFavorBaseDamage = [GuardianSFavorRanks + 1][]float64{{-60000, -60000}}
 
@@ -1025,6 +1102,7 @@ var HallowedGroundLevel = [HallowedGroundRanks + 1]int{1}
 var HallowedGroundCastTime = [HallowedGroundRanks + 1]int32{0}
 var HallowedGroundCooldownMS = [HallowedGroundRanks + 1]int32{0}
 var HallowedGroundManaCost = [HallowedGroundRanks + 1]float64{0}
+var HallowedGroundManaCostPct = [HallowedGroundRanks + 1]float64{0}
 var HallowedGroundSpellCoeff = [HallowedGroundRanks + 1]float64{0.2143}
 var HallowedGroundBaseDamage = [HallowedGroundRanks + 1][]float64{{200, 200}}
 
@@ -1039,6 +1117,7 @@ var HammerOfJusticeLevel = [HammerOfJusticeRanks + 1]int{0, 8, 24, 40, 54}
 var HammerOfJusticeCastTime = [HammerOfJusticeRanks + 1]int32{0, 0, 0, 0, 0}
 var HammerOfJusticeCooldownMS = [HammerOfJusticeRanks + 1]int32{0, 60000, 60000, 60000, 60000}
 var HammerOfJusticeManaCost = [HammerOfJusticeRanks + 1]float64{0, 30, 50, 75, 100}
+var HammerOfJusticeManaCostPct = [HammerOfJusticeRanks + 1]float64{0, 0, 0, 0, 0}
 var HammerOfJusticeSpellCoeff = [HammerOfJusticeRanks + 1]float64{0, 0.1, 0.1333, 0.1667, 0.2}
 var HammerOfJusticeBaseDamage = [HammerOfJusticeRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
 
@@ -1052,6 +1131,7 @@ var HammerOfJusticeCooldownReductionLevel = [HammerOfJusticeCooldownReductionRan
 var HammerOfJusticeCooldownReductionCastTime = [HammerOfJusticeCooldownReductionRanks + 1]int32{0}
 var HammerOfJusticeCooldownReductionCooldownMS = [HammerOfJusticeCooldownReductionRanks + 1]int32{0}
 var HammerOfJusticeCooldownReductionManaCost = [HammerOfJusticeCooldownReductionRanks + 1]float64{0}
+var HammerOfJusticeCooldownReductionManaCostPct = [HammerOfJusticeCooldownReductionRanks + 1]float64{0}
 var HammerOfJusticeCooldownReductionSpellCoeff = [HammerOfJusticeCooldownReductionRanks + 1]float64{1}
 var HammerOfJusticeCooldownReductionBaseDamage = [HammerOfJusticeCooldownReductionRanks + 1][]float64{{-10000, -10000}}
 
@@ -1063,6 +1143,7 @@ var HammerOfWrathLevel = [HammerOfWrathRanks + 1]int{1, 44, 52, 60}
 var HammerOfWrathCastTime = [HammerOfWrathRanks + 1]int32{0, 1000, 1000, 1000}
 var HammerOfWrathCooldownMS = [HammerOfWrathRanks + 1]int32{0, 6000, 6000, 6000}
 var HammerOfWrathManaCost = [HammerOfWrathRanks + 1]float64{0, 295, 360, 425}
+var HammerOfWrathManaCostPct = [HammerOfWrathRanks + 1]float64{12, 0, 0, 0}
 var HammerOfWrathSpellCoeff = [HammerOfWrathRanks + 1]float64{0.15, 0.429, 0.429, 0.429}
 var HammerOfWrathBaseDamage = [HammerOfWrathRanks + 1][]float64{{300, 300}, {288, 288}, {388, 388}, {498, 498}}
 
@@ -1074,6 +1155,7 @@ var HammerOfTheRighteousLevel = [HammerOfTheRighteousRanks + 1]int{40}
 var HammerOfTheRighteousCastTime = [HammerOfTheRighteousRanks + 1]int32{0}
 var HammerOfTheRighteousCooldownMS = [HammerOfTheRighteousRanks + 1]int32{6000}
 var HammerOfTheRighteousManaCost = [HammerOfTheRighteousRanks + 1]float64{0}
+var HammerOfTheRighteousManaCostPct = [HammerOfTheRighteousRanks + 1]float64{6}
 var HammerOfTheRighteousSpellCoeff = [HammerOfTheRighteousRanks + 1]float64{0.2143}
 var HammerOfTheRighteousBaseDamage = [HammerOfTheRighteousRanks + 1][]float64{{1, 1}}
 
@@ -1088,6 +1170,7 @@ var HandOfReckoningLevel = [HandOfReckoningRanks + 1]int{1}
 var HandOfReckoningCastTime = [HandOfReckoningRanks + 1]int32{0}
 var HandOfReckoningCooldownMS = [HandOfReckoningRanks + 1]int32{10000}
 var HandOfReckoningManaCost = [HandOfReckoningRanks + 1]float64{0}
+var HandOfReckoningManaCostPct = [HandOfReckoningRanks + 1]float64{0}
 var HandOfReckoningSpellCoeff = [HandOfReckoningRanks + 1]float64{0.1}
 var HandOfReckoningBaseDamage = [HandOfReckoningRanks + 1][]float64{{0, 0}}
 
@@ -1102,6 +1185,7 @@ var HandOfSacrificeLevel = [HandOfSacrificeRanks + 1]int{1}
 var HandOfSacrificeCastTime = [HandOfSacrificeRanks + 1]int32{0}
 var HandOfSacrificeCooldownMS = [HandOfSacrificeRanks + 1]int32{120000}
 var HandOfSacrificeManaCost = [HandOfSacrificeRanks + 1]float64{0}
+var HandOfSacrificeManaCostPct = [HandOfSacrificeRanks + 1]float64{6}
 var HandOfSacrificeSpellCoeff = [HandOfSacrificeRanks + 1]float64{0.4}
 var HandOfSacrificeBaseDamage = [HandOfSacrificeRanks + 1][]float64{{30, 30}}
 
@@ -1116,6 +1200,7 @@ var HealingLightLevel = [HealingLightRanks + 1]int{0}
 var HealingLightCastTime = [HealingLightRanks + 1]int32{0}
 var HealingLightCooldownMS = [HealingLightRanks + 1]int32{0}
 var HealingLightManaCost = [HealingLightRanks + 1]float64{0}
+var HealingLightManaCostPct = [HealingLightRanks + 1]float64{0}
 var HealingLightSpellCoeff = [HealingLightRanks + 1]float64{1}
 var HealingLightBaseDamage = [HealingLightRanks + 1][]float64{{4, 4}}
 
@@ -1127,6 +1212,7 @@ var HolyConduitLevel = [HolyConduitRanks + 1]int{0}
 var HolyConduitCastTime = [HolyConduitRanks + 1]int32{0}
 var HolyConduitCooldownMS = [HolyConduitRanks + 1]int32{0}
 var HolyConduitManaCost = [HolyConduitRanks + 1]float64{0}
+var HolyConduitManaCostPct = [HolyConduitRanks + 1]float64{0}
 var HolyConduitSpellCoeff = [HolyConduitRanks + 1]float64{1}
 var HolyConduitBaseDamage = [HolyConduitRanks + 1][]float64{{-40, -40}}
 
@@ -1138,6 +1224,7 @@ var HolyLightLevel = [HolyLightRanks + 1]int{54, 1, 6, 14, 22, 30, 38, 46, 54, 6
 var HolyLightCastTime = [HolyLightRanks + 1]int32{2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500}
 var HolyLightCooldownMS = [HolyLightRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 var HolyLightManaCost = [HolyLightRanks + 1]float64{0, 35, 60, 110, 190, 275, 365, 465, 580, 660}
+var HolyLightManaCostPct = [HolyLightRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 var HolyLightSpellCoeff = [HolyLightRanks + 1]float64{0.714, 0.714, 0.714, 0.714, 0.714, 0.714, 0.714, 0.714, 0.714, 0.714}
 var HolyLightBaseDamage = [HolyLightRanks + 1][]float64{{1, 1}, {43, 43}, {83, 83}, {155, 155}, {287, 287}, {452, 452}, {646, 646}, {899, 899}, {1217, 1217}, {1580, 1580}}
 
@@ -1151,6 +1238,7 @@ var HolyLightManaCostReductionLevel = [HolyLightManaCostReductionRanks + 1]int{0
 var HolyLightManaCostReductionCastTime = [HolyLightManaCostReductionRanks + 1]int32{0}
 var HolyLightManaCostReductionCooldownMS = [HolyLightManaCostReductionRanks + 1]int32{0}
 var HolyLightManaCostReductionManaCost = [HolyLightManaCostReductionRanks + 1]float64{0}
+var HolyLightManaCostReductionManaCostPct = [HolyLightManaCostReductionRanks + 1]float64{0}
 var HolyLightManaCostReductionSpellCoeff = [HolyLightManaCostReductionRanks + 1]float64{0.2143}
 var HolyLightManaCostReductionBaseDamage = [HolyLightManaCostReductionRanks + 1][]float64{{-5, -5}}
 
@@ -1164,6 +1252,7 @@ var HolyMightstoneLevel = [HolyMightstoneRanks + 1]int{0}
 var HolyMightstoneCastTime = [HolyMightstoneRanks + 1]int32{0}
 var HolyMightstoneCooldownMS = [HolyMightstoneRanks + 1]int32{0}
 var HolyMightstoneManaCost = [HolyMightstoneRanks + 1]float64{0}
+var HolyMightstoneManaCostPct = [HolyMightstoneRanks + 1]float64{0}
 var HolyMightstoneSpellCoeff = [HolyMightstoneRanks + 1]float64{20}
 var HolyMightstoneBaseDamage = [HolyMightstoneRanks + 1][]float64{{300, 300}}
 
@@ -1177,6 +1266,7 @@ var HolyPowerLevel = [HolyPowerRanks + 1]int{0}
 var HolyPowerCastTime = [HolyPowerRanks + 1]int32{0}
 var HolyPowerCooldownMS = [HolyPowerRanks + 1]int32{0}
 var HolyPowerManaCost = [HolyPowerRanks + 1]float64{0}
+var HolyPowerManaCostPct = [HolyPowerRanks + 1]float64{0}
 var HolyPowerSpellCoeff = [HolyPowerRanks + 1]float64{1}
 var HolyPowerBaseDamage = [HolyPowerRanks + 1][]float64{{20, 20}}
 
@@ -1190,6 +1280,7 @@ var HolyShieldLevel = [HolyShieldRanks + 1]int{30, 40, 50, 60}
 var HolyShieldCastTime = [HolyShieldRanks + 1]int32{0, 0, 0, 0}
 var HolyShieldCooldownMS = [HolyShieldRanks + 1]int32{0, 10000, 10000, 10000}
 var HolyShieldManaCost = [HolyShieldRanks + 1]float64{0, 150, 195, 240}
+var HolyShieldManaCostPct = [HolyShieldRanks + 1]float64{0, 0, 0, 0}
 var HolyShieldSpellCoeff = [HolyShieldRanks + 1]float64{0.05, 0.3333, 0.3333, 0.3333}
 var HolyShieldBaseDamage = [HolyShieldRanks + 1][]float64{{1, 1}, {20, 20}, {20, 20}, {20, 20}}
 
@@ -1203,6 +1294,7 @@ var HolyShieldBlockValueIncreaseLevel = [HolyShieldBlockValueIncreaseRanks + 1]i
 var HolyShieldBlockValueIncreaseCastTime = [HolyShieldBlockValueIncreaseRanks + 1]int32{0}
 var HolyShieldBlockValueIncreaseCooldownMS = [HolyShieldBlockValueIncreaseRanks + 1]int32{0}
 var HolyShieldBlockValueIncreaseManaCost = [HolyShieldBlockValueIncreaseRanks + 1]float64{0}
+var HolyShieldBlockValueIncreaseManaCostPct = [HolyShieldBlockValueIncreaseRanks + 1]float64{0}
 var HolyShieldBlockValueIncreaseSpellCoeff = [HolyShieldBlockValueIncreaseRanks + 1]float64{0.2143}
 var HolyShieldBlockValueIncreaseBaseDamage = [HolyShieldBlockValueIncreaseRanks + 1][]float64{{15, 15}}
 
@@ -1216,6 +1308,7 @@ var HolyShockLevel = [HolyShockRanks + 1]int{56, 30, 40, 48, 56}
 var HolyShockCastTime = [HolyShockRanks + 1]int32{0, 0, 0, 0, 0}
 var HolyShockCooldownMS = [HolyShockRanks + 1]int32{0, 10000, 0, 0, 0}
 var HolyShockManaCost = [HolyShockRanks + 1]float64{325, 160, 0, 0, 0}
+var HolyShockManaCostPct = [HolyShockRanks + 1]float64{0, 0, 0, 0, 0}
 var HolyShockSpellCoeff = [HolyShockRanks + 1]float64{0.2143, 1, 0.429, 0.429, 0.429}
 var HolyShockBaseDamage = [HolyShockRanks + 1][]float64{{0, 0}, {0, 0}, {156, 156}, {230, 230}, {320, 320}}
 
@@ -1233,6 +1326,7 @@ var HolyShockCriticalChanceIncreaseLevel = [HolyShockCriticalChanceIncreaseRanks
 var HolyShockCriticalChanceIncreaseCastTime = [HolyShockCriticalChanceIncreaseRanks + 1]int32{0}
 var HolyShockCriticalChanceIncreaseCooldownMS = [HolyShockCriticalChanceIncreaseRanks + 1]int32{0}
 var HolyShockCriticalChanceIncreaseManaCost = [HolyShockCriticalChanceIncreaseRanks + 1]float64{0}
+var HolyShockCriticalChanceIncreaseManaCostPct = [HolyShockCriticalChanceIncreaseRanks + 1]float64{0}
 var HolyShockCriticalChanceIncreaseSpellCoeff = [HolyShockCriticalChanceIncreaseRanks + 1]float64{0.2143}
 var HolyShockCriticalChanceIncreaseBaseDamage = [HolyShockCriticalChanceIncreaseRanks + 1][]float64{{6, 6}}
 
@@ -1247,6 +1341,7 @@ var HolyStrikeLevel = [HolyStrikeRanks + 1]int{0, 6, 12, 20, 28, 36, 44, 52, 60}
 var HolyStrikeCastTime = [HolyStrikeRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
 var HolyStrikeCooldownMS = [HolyStrikeRanks + 1]int32{0, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000}
 var HolyStrikeManaCost = [HolyStrikeRanks + 1]float64{0, 5, 9, 12, 14, 16, 17, 19, 20}
+var HolyStrikeManaCostPct = [HolyStrikeRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
 var HolyStrikeSpellCoeff = [HolyStrikeRanks + 1]float64{0, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429}
 var HolyStrikeBaseDamage = [HolyStrikeRanks + 1][]float64{{0, 0}, {12, 12}, {17, 17}, {19, 19}, {24, 24}, {31, 31}, {53, 53}, {68, 68}, {93, 93}}
 
@@ -1258,6 +1353,7 @@ var HolyWrathLevel = [HolyWrathRanks + 1]int{0, 50, 60}
 var HolyWrathCastTime = [HolyWrathRanks + 1]int32{0, 2000, 2000}
 var HolyWrathCooldownMS = [HolyWrathRanks + 1]int32{0, 60000, 60000}
 var HolyWrathManaCost = [HolyWrathRanks + 1]float64{0, 645, 805}
+var HolyWrathManaCostPct = [HolyWrathRanks + 1]float64{0, 0, 0}
 var HolyWrathSpellCoeff = [HolyWrathRanks + 1]float64{0, 0.19, 0.19}
 var HolyWrathBaseDamage = [HolyWrathRanks + 1][]float64{{0, 0}, {395, 395}, {533, 533}}
 
@@ -1272,6 +1368,7 @@ var HunterArmorEnergizeLevel = [HunterArmorEnergizeRanks + 1]int{0}
 var HunterArmorEnergizeCastTime = [HunterArmorEnergizeRanks + 1]int32{0}
 var HunterArmorEnergizeCooldownMS = [HunterArmorEnergizeRanks + 1]int32{0}
 var HunterArmorEnergizeManaCost = [HunterArmorEnergizeRanks + 1]float64{0}
+var HunterArmorEnergizeManaCostPct = [HunterArmorEnergizeRanks + 1]float64{0}
 var HunterArmorEnergizeSpellCoeff = [HunterArmorEnergizeRanks + 1]float64{0.2143}
 var HunterArmorEnergizeBaseDamage = [HunterArmorEnergizeRanks + 1][]float64{{1, 1}}
 
@@ -1285,6 +1382,7 @@ var IlluminationLevel = [IlluminationRanks + 1]int{0}
 var IlluminationCastTime = [IlluminationRanks + 1]int32{0}
 var IlluminationCooldownMS = [IlluminationRanks + 1]int32{0}
 var IlluminationManaCost = [IlluminationRanks + 1]float64{0}
+var IlluminationManaCostPct = [IlluminationRanks + 1]float64{0}
 var IlluminationSpellCoeff = [IlluminationRanks + 1]float64{1}
 var IlluminationBaseDamage = [IlluminationRanks + 1][]float64{{0, 0}}
 
@@ -1296,6 +1394,7 @@ var ImprovedBlessingOfMightLevel = [ImprovedBlessingOfMightRanks + 1]int{0, 0, 0
 var ImprovedBlessingOfMightCastTime = [ImprovedBlessingOfMightRanks + 1]int32{0, 0, 0, 0, 0, 0}
 var ImprovedBlessingOfMightCooldownMS = [ImprovedBlessingOfMightRanks + 1]int32{0, 0, 0, 0, 0, 0}
 var ImprovedBlessingOfMightManaCost = [ImprovedBlessingOfMightRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var ImprovedBlessingOfMightManaCostPct = [ImprovedBlessingOfMightRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var ImprovedBlessingOfMightSpellCoeff = [ImprovedBlessingOfMightRanks + 1]float64{0, 1, 1, 1, 1, 1}
 var ImprovedBlessingOfMightBaseDamage = [ImprovedBlessingOfMightRanks + 1][]float64{{0, 0}, {4, 4}, {8, 8}, {12, 12}, {16, 16}, {20, 20}}
 
@@ -1307,6 +1406,7 @@ var ImprovedBlessingOfProtectionLevel = [ImprovedBlessingOfProtectionRanks + 1]i
 var ImprovedBlessingOfProtectionCastTime = [ImprovedBlessingOfProtectionRanks + 1]int32{0}
 var ImprovedBlessingOfProtectionCooldownMS = [ImprovedBlessingOfProtectionRanks + 1]int32{0}
 var ImprovedBlessingOfProtectionManaCost = [ImprovedBlessingOfProtectionRanks + 1]float64{100}
+var ImprovedBlessingOfProtectionManaCostPct = [ImprovedBlessingOfProtectionRanks + 1]float64{0}
 var ImprovedBlessingOfProtectionSpellCoeff = [ImprovedBlessingOfProtectionRanks + 1]float64{0.1667}
 var ImprovedBlessingOfProtectionBaseDamage = [ImprovedBlessingOfProtectionRanks + 1][]float64{{0, 0}}
 
@@ -1320,6 +1420,7 @@ var ImprovedBlessingOfSalvationLevel = [ImprovedBlessingOfSalvationRanks + 1]int
 var ImprovedBlessingOfSalvationCastTime = [ImprovedBlessingOfSalvationRanks + 1]int32{0, 0, 0}
 var ImprovedBlessingOfSalvationCooldownMS = [ImprovedBlessingOfSalvationRanks + 1]int32{0, 0, 0}
 var ImprovedBlessingOfSalvationManaCost = [ImprovedBlessingOfSalvationRanks + 1]float64{0, 0, 0}
+var ImprovedBlessingOfSalvationManaCostPct = [ImprovedBlessingOfSalvationRanks + 1]float64{0, 0, 0}
 var ImprovedBlessingOfSalvationSpellCoeff = [ImprovedBlessingOfSalvationRanks + 1]float64{0, 1, 1}
 var ImprovedBlessingOfSalvationBaseDamage = [ImprovedBlessingOfSalvationRanks + 1][]float64{{0, 0}, {300000, 300000}, {600000, 600000}}
 
@@ -1331,6 +1432,7 @@ var ImprovedBlessingOfWisdomLevel = [ImprovedBlessingOfWisdomRanks + 1]int{0, 0,
 var ImprovedBlessingOfWisdomCastTime = [ImprovedBlessingOfWisdomRanks + 1]int32{0, 0, 0}
 var ImprovedBlessingOfWisdomCooldownMS = [ImprovedBlessingOfWisdomRanks + 1]int32{0, 0, 0}
 var ImprovedBlessingOfWisdomManaCost = [ImprovedBlessingOfWisdomRanks + 1]float64{0, 0, 0}
+var ImprovedBlessingOfWisdomManaCostPct = [ImprovedBlessingOfWisdomRanks + 1]float64{0, 0, 0}
 var ImprovedBlessingOfWisdomSpellCoeff = [ImprovedBlessingOfWisdomRanks + 1]float64{0, 1, 1}
 var ImprovedBlessingOfWisdomBaseDamage = [ImprovedBlessingOfWisdomRanks + 1][]float64{{0, 0}, {10, 10}, {20, 20}}
 
@@ -1342,6 +1444,7 @@ var ImprovedBlessingsLevel = [ImprovedBlessingsRanks + 1]int{0}
 var ImprovedBlessingsCastTime = [ImprovedBlessingsRanks + 1]int32{0}
 var ImprovedBlessingsCooldownMS = [ImprovedBlessingsRanks + 1]int32{0}
 var ImprovedBlessingsManaCost = [ImprovedBlessingsRanks + 1]float64{0}
+var ImprovedBlessingsManaCostPct = [ImprovedBlessingsRanks + 1]float64{0}
 var ImprovedBlessingsSpellCoeff = [ImprovedBlessingsRanks + 1]float64{1}
 var ImprovedBlessingsBaseDamage = [ImprovedBlessingsRanks + 1][]float64{{10, 10}}
 
@@ -1353,6 +1456,7 @@ var ImprovedConcentrationAuraLevel = [ImprovedConcentrationAuraRanks + 1]int{0}
 var ImprovedConcentrationAuraCastTime = [ImprovedConcentrationAuraRanks + 1]int32{0}
 var ImprovedConcentrationAuraCooldownMS = [ImprovedConcentrationAuraRanks + 1]int32{0}
 var ImprovedConcentrationAuraManaCost = [ImprovedConcentrationAuraRanks + 1]float64{0}
+var ImprovedConcentrationAuraManaCostPct = [ImprovedConcentrationAuraRanks + 1]float64{0}
 var ImprovedConcentrationAuraSpellCoeff = [ImprovedConcentrationAuraRanks + 1]float64{1}
 var ImprovedConcentrationAuraBaseDamage = [ImprovedConcentrationAuraRanks + 1][]float64{{15, 15}}
 
@@ -1364,6 +1468,7 @@ var ImprovedDevotionAuraLevel = [ImprovedDevotionAuraRanks + 1]int{0}
 var ImprovedDevotionAuraCastTime = [ImprovedDevotionAuraRanks + 1]int32{0}
 var ImprovedDevotionAuraCooldownMS = [ImprovedDevotionAuraRanks + 1]int32{0}
 var ImprovedDevotionAuraManaCost = [ImprovedDevotionAuraRanks + 1]float64{0}
+var ImprovedDevotionAuraManaCostPct = [ImprovedDevotionAuraRanks + 1]float64{0}
 var ImprovedDevotionAuraSpellCoeff = [ImprovedDevotionAuraRanks + 1]float64{1}
 var ImprovedDevotionAuraBaseDamage = [ImprovedDevotionAuraRanks + 1][]float64{{5, 5}}
 
@@ -1375,6 +1480,7 @@ var ImprovedExorcismCrusaderStrikeLevel = [ImprovedExorcismCrusaderStrikeRanks +
 var ImprovedExorcismCrusaderStrikeCastTime = [ImprovedExorcismCrusaderStrikeRanks + 1]int32{0}
 var ImprovedExorcismCrusaderStrikeCooldownMS = [ImprovedExorcismCrusaderStrikeRanks + 1]int32{0}
 var ImprovedExorcismCrusaderStrikeManaCost = [ImprovedExorcismCrusaderStrikeRanks + 1]float64{0}
+var ImprovedExorcismCrusaderStrikeManaCostPct = [ImprovedExorcismCrusaderStrikeRanks + 1]float64{0}
 var ImprovedExorcismCrusaderStrikeSpellCoeff = [ImprovedExorcismCrusaderStrikeRanks + 1]float64{1}
 var ImprovedExorcismCrusaderStrikeBaseDamage = [ImprovedExorcismCrusaderStrikeRanks + 1][]float64{{3, 3}}
 
@@ -1386,6 +1492,7 @@ var ImprovedFlashOfLightLevel = [ImprovedFlashOfLightRanks + 1]int{0, 0, 0, 0}
 var ImprovedFlashOfLightCastTime = [ImprovedFlashOfLightRanks + 1]int32{0, 0, 0, 0}
 var ImprovedFlashOfLightCooldownMS = [ImprovedFlashOfLightRanks + 1]int32{0, 0, 0, 0}
 var ImprovedFlashOfLightManaCost = [ImprovedFlashOfLightRanks + 1]float64{0, 0, 0, 0}
+var ImprovedFlashOfLightManaCostPct = [ImprovedFlashOfLightRanks + 1]float64{0, 0, 0, 0}
 var ImprovedFlashOfLightSpellCoeff = [ImprovedFlashOfLightRanks + 1]float64{0, 1, 1, 1}
 var ImprovedFlashOfLightBaseDamage = [ImprovedFlashOfLightRanks + 1][]float64{{0, 0}, {2, 2}, {4, 4}, {6, 6}}
 
@@ -1397,6 +1504,7 @@ var ImprovedHammerOfJusticeLevel = [ImprovedHammerOfJusticeRanks + 1]int{0}
 var ImprovedHammerOfJusticeCastTime = [ImprovedHammerOfJusticeRanks + 1]int32{0}
 var ImprovedHammerOfJusticeCooldownMS = [ImprovedHammerOfJusticeRanks + 1]int32{0}
 var ImprovedHammerOfJusticeManaCost = [ImprovedHammerOfJusticeRanks + 1]float64{0}
+var ImprovedHammerOfJusticeManaCostPct = [ImprovedHammerOfJusticeRanks + 1]float64{0}
 var ImprovedHammerOfJusticeSpellCoeff = [ImprovedHammerOfJusticeRanks + 1]float64{0.2143}
 var ImprovedHammerOfJusticeBaseDamage = [ImprovedHammerOfJusticeRanks + 1][]float64{{500, 500}}
 
@@ -1411,6 +1519,7 @@ var ImprovedHammerOfWrathLevel = [ImprovedHammerOfWrathRanks + 1]int{1}
 var ImprovedHammerOfWrathCastTime = [ImprovedHammerOfWrathRanks + 1]int32{0}
 var ImprovedHammerOfWrathCooldownMS = [ImprovedHammerOfWrathRanks + 1]int32{0}
 var ImprovedHammerOfWrathManaCost = [ImprovedHammerOfWrathRanks + 1]float64{0}
+var ImprovedHammerOfWrathManaCostPct = [ImprovedHammerOfWrathRanks + 1]float64{0}
 var ImprovedHammerOfWrathSpellCoeff = [ImprovedHammerOfWrathRanks + 1]float64{0.2143}
 var ImprovedHammerOfWrathBaseDamage = [ImprovedHammerOfWrathRanks + 1][]float64{{429152, 429152}}
 
@@ -1425,6 +1534,7 @@ var ImprovedHammerOfTheRighteousShieldOfRighteousnessLevel = [ImprovedHammerOfTh
 var ImprovedHammerOfTheRighteousShieldOfRighteousnessCastTime = [ImprovedHammerOfTheRighteousShieldOfRighteousnessRanks + 1]int32{0}
 var ImprovedHammerOfTheRighteousShieldOfRighteousnessCooldownMS = [ImprovedHammerOfTheRighteousShieldOfRighteousnessRanks + 1]int32{0}
 var ImprovedHammerOfTheRighteousShieldOfRighteousnessManaCost = [ImprovedHammerOfTheRighteousShieldOfRighteousnessRanks + 1]float64{0}
+var ImprovedHammerOfTheRighteousShieldOfRighteousnessManaCostPct = [ImprovedHammerOfTheRighteousShieldOfRighteousnessRanks + 1]float64{0}
 var ImprovedHammerOfTheRighteousShieldOfRighteousnessSpellCoeff = [ImprovedHammerOfTheRighteousShieldOfRighteousnessRanks + 1]float64{1}
 var ImprovedHammerOfTheRighteousShieldOfRighteousnessBaseDamage = [ImprovedHammerOfTheRighteousShieldOfRighteousnessRanks + 1][]float64{{3, 3}}
 
@@ -1436,6 +1546,7 @@ var ImprovedHolyLightLevel = [ImprovedHolyLightRanks + 1]int{0}
 var ImprovedHolyLightCastTime = [ImprovedHolyLightRanks + 1]int32{0}
 var ImprovedHolyLightCooldownMS = [ImprovedHolyLightRanks + 1]int32{0}
 var ImprovedHolyLightManaCost = [ImprovedHolyLightRanks + 1]float64{0}
+var ImprovedHolyLightManaCostPct = [ImprovedHolyLightRanks + 1]float64{0}
 var ImprovedHolyLightSpellCoeff = [ImprovedHolyLightRanks + 1]float64{1}
 var ImprovedHolyLightBaseDamage = [ImprovedHolyLightRanks + 1][]float64{{-100, -100}}
 
@@ -1447,6 +1558,7 @@ var ImprovedHolyLightHolyShockSacredShieldLevel = [ImprovedHolyLightHolyShockSac
 var ImprovedHolyLightHolyShockSacredShieldCastTime = [ImprovedHolyLightHolyShockSacredShieldRanks + 1]int32{0}
 var ImprovedHolyLightHolyShockSacredShieldCooldownMS = [ImprovedHolyLightHolyShockSacredShieldRanks + 1]int32{0}
 var ImprovedHolyLightHolyShockSacredShieldManaCost = [ImprovedHolyLightHolyShockSacredShieldRanks + 1]float64{0}
+var ImprovedHolyLightHolyShockSacredShieldManaCostPct = [ImprovedHolyLightHolyShockSacredShieldRanks + 1]float64{0}
 var ImprovedHolyLightHolyShockSacredShieldSpellCoeff = [ImprovedHolyLightHolyShockSacredShieldRanks + 1]float64{1}
 var ImprovedHolyLightHolyShockSacredShieldBaseDamage = [ImprovedHolyLightHolyShockSacredShieldRanks + 1][]float64{{3, 3}}
 
@@ -1458,6 +1570,7 @@ var ImprovedHolyShieldLevel = [ImprovedHolyShieldRanks + 1]int{0}
 var ImprovedHolyShieldCastTime = [ImprovedHolyShieldRanks + 1]int32{0}
 var ImprovedHolyShieldCooldownMS = [ImprovedHolyShieldRanks + 1]int32{0}
 var ImprovedHolyShieldManaCost = [ImprovedHolyShieldRanks + 1]float64{0}
+var ImprovedHolyShieldManaCostPct = [ImprovedHolyShieldRanks + 1]float64{0}
 var ImprovedHolyShieldSpellCoeff = [ImprovedHolyShieldRanks + 1]float64{1}
 var ImprovedHolyShieldBaseDamage = [ImprovedHolyShieldRanks + 1][]float64{{2, 2}}
 
@@ -1469,6 +1582,7 @@ var ImprovedHolyShockLevel = [ImprovedHolyShockRanks + 1]int{0}
 var ImprovedHolyShockCastTime = [ImprovedHolyShockRanks + 1]int32{0}
 var ImprovedHolyShockCooldownMS = [ImprovedHolyShockRanks + 1]int32{0}
 var ImprovedHolyShockManaCost = [ImprovedHolyShockRanks + 1]float64{0}
+var ImprovedHolyShockManaCostPct = [ImprovedHolyShockRanks + 1]float64{0}
 var ImprovedHolyShockSpellCoeff = [ImprovedHolyShockRanks + 1]float64{1}
 var ImprovedHolyShockBaseDamage = [ImprovedHolyShockRanks + 1][]float64{{3, 3}}
 
@@ -1482,6 +1596,7 @@ var ImprovedHolyStrikeLevel = [ImprovedHolyStrikeRanks + 1]int{0}
 var ImprovedHolyStrikeCastTime = [ImprovedHolyStrikeRanks + 1]int32{0}
 var ImprovedHolyStrikeCooldownMS = [ImprovedHolyStrikeRanks + 1]int32{0}
 var ImprovedHolyStrikeManaCost = [ImprovedHolyStrikeRanks + 1]float64{0}
+var ImprovedHolyStrikeManaCostPct = [ImprovedHolyStrikeRanks + 1]float64{0}
 var ImprovedHolyStrikeSpellCoeff = [ImprovedHolyStrikeRanks + 1]float64{1}
 var ImprovedHolyStrikeBaseDamage = [ImprovedHolyStrikeRanks + 1][]float64{{-2000, -2000}}
 
@@ -1493,6 +1608,7 @@ var ImprovedJudgementLevel = [ImprovedJudgementRanks + 1]int{0}
 var ImprovedJudgementCastTime = [ImprovedJudgementRanks + 1]int32{0}
 var ImprovedJudgementCooldownMS = [ImprovedJudgementRanks + 1]int32{0}
 var ImprovedJudgementManaCost = [ImprovedJudgementRanks + 1]float64{0}
+var ImprovedJudgementManaCostPct = [ImprovedJudgementRanks + 1]float64{0}
 var ImprovedJudgementSpellCoeff = [ImprovedJudgementRanks + 1]float64{1}
 var ImprovedJudgementBaseDamage = [ImprovedJudgementRanks + 1][]float64{{-1000, -1000}}
 
@@ -1504,6 +1620,7 @@ var ImprovedJudgementOfLightLevel = [ImprovedJudgementOfLightRanks + 1]int{0}
 var ImprovedJudgementOfLightCastTime = [ImprovedJudgementOfLightRanks + 1]int32{0}
 var ImprovedJudgementOfLightCooldownMS = [ImprovedJudgementOfLightRanks + 1]int32{0}
 var ImprovedJudgementOfLightManaCost = [ImprovedJudgementOfLightRanks + 1]float64{0}
+var ImprovedJudgementOfLightManaCostPct = [ImprovedJudgementOfLightRanks + 1]float64{0}
 var ImprovedJudgementOfLightSpellCoeff = [ImprovedJudgementOfLightRanks + 1]float64{1}
 var ImprovedJudgementOfLightBaseDamage = [ImprovedJudgementOfLightRanks + 1][]float64{{10, 10}}
 
@@ -1515,6 +1632,7 @@ var ImprovedRedemptionLevel = [ImprovedRedemptionRanks + 1]int{0}
 var ImprovedRedemptionCastTime = [ImprovedRedemptionRanks + 1]int32{0}
 var ImprovedRedemptionCooldownMS = [ImprovedRedemptionRanks + 1]int32{0}
 var ImprovedRedemptionManaCost = [ImprovedRedemptionRanks + 1]float64{0}
+var ImprovedRedemptionManaCostPct = [ImprovedRedemptionRanks + 1]float64{0}
 var ImprovedRedemptionSpellCoeff = [ImprovedRedemptionRanks + 1]float64{0.2143}
 var ImprovedRedemptionBaseDamage = [ImprovedRedemptionRanks + 1][]float64{{-20, -20}}
 
@@ -1528,6 +1646,7 @@ var ImprovedRetributionAuraLevel = [ImprovedRetributionAuraRanks + 1]int{0, 0, 0
 var ImprovedRetributionAuraCastTime = [ImprovedRetributionAuraRanks + 1]int32{0, 0, 0}
 var ImprovedRetributionAuraCooldownMS = [ImprovedRetributionAuraRanks + 1]int32{0, 0, 0}
 var ImprovedRetributionAuraManaCost = [ImprovedRetributionAuraRanks + 1]float64{0, 0, 0}
+var ImprovedRetributionAuraManaCostPct = [ImprovedRetributionAuraRanks + 1]float64{0, 0, 0}
 var ImprovedRetributionAuraSpellCoeff = [ImprovedRetributionAuraRanks + 1]float64{0, 1, 1}
 var ImprovedRetributionAuraBaseDamage = [ImprovedRetributionAuraRanks + 1][]float64{{0, 0}, {25, 25}, {50, 50}}
 
@@ -1539,6 +1658,7 @@ var ImprovedRighteousFuryLevel = [ImprovedRighteousFuryRanks + 1]int{0}
 var ImprovedRighteousFuryCastTime = [ImprovedRighteousFuryRanks + 1]int32{0}
 var ImprovedRighteousFuryCooldownMS = [ImprovedRighteousFuryRanks + 1]int32{0}
 var ImprovedRighteousFuryManaCost = [ImprovedRighteousFuryRanks + 1]float64{0}
+var ImprovedRighteousFuryManaCostPct = [ImprovedRighteousFuryRanks + 1]float64{0}
 var ImprovedRighteousFurySpellCoeff = [ImprovedRighteousFuryRanks + 1]float64{1}
 var ImprovedRighteousFuryBaseDamage = [ImprovedRighteousFuryRanks + 1][]float64{{-6, -6}}
 
@@ -1550,6 +1670,7 @@ var ImprovedSanctuaryLevel = [ImprovedSanctuaryRanks + 1]int{1}
 var ImprovedSanctuaryCastTime = [ImprovedSanctuaryRanks + 1]int32{0}
 var ImprovedSanctuaryCooldownMS = [ImprovedSanctuaryRanks + 1]int32{0}
 var ImprovedSanctuaryManaCost = [ImprovedSanctuaryRanks + 1]float64{0}
+var ImprovedSanctuaryManaCostPct = [ImprovedSanctuaryRanks + 1]float64{0}
 var ImprovedSanctuarySpellCoeff = [ImprovedSanctuaryRanks + 1]float64{0.2143}
 var ImprovedSanctuaryBaseDamage = [ImprovedSanctuaryRanks + 1][]float64{{429133, 429133}}
 
@@ -1564,6 +1685,7 @@ var ImprovedSealOfTheCrusaderLevel = [ImprovedSealOfTheCrusaderRanks + 1]int{0, 
 var ImprovedSealOfTheCrusaderCastTime = [ImprovedSealOfTheCrusaderRanks + 1]int32{0, 0, 0, 0}
 var ImprovedSealOfTheCrusaderCooldownMS = [ImprovedSealOfTheCrusaderRanks + 1]int32{0, 0, 0, 0}
 var ImprovedSealOfTheCrusaderManaCost = [ImprovedSealOfTheCrusaderRanks + 1]float64{0, 0, 0, 0}
+var ImprovedSealOfTheCrusaderManaCostPct = [ImprovedSealOfTheCrusaderRanks + 1]float64{0, 0, 0, 0}
 var ImprovedSealOfTheCrusaderSpellCoeff = [ImprovedSealOfTheCrusaderRanks + 1]float64{1, 1, 1, 1}
 var ImprovedSealOfTheCrusaderBaseDamage = [ImprovedSealOfTheCrusaderRanks + 1][]float64{{48, 48}, {5, 5}, {10, 10}, {15, 15}}
 
@@ -1575,6 +1697,7 @@ var ImprovedSealsLevel = [ImprovedSealsRanks + 1]int{0}
 var ImprovedSealsCastTime = [ImprovedSealsRanks + 1]int32{0}
 var ImprovedSealsCooldownMS = [ImprovedSealsRanks + 1]int32{0}
 var ImprovedSealsManaCost = [ImprovedSealsRanks + 1]float64{0}
+var ImprovedSealsManaCostPct = [ImprovedSealsRanks + 1]float64{0}
 var ImprovedSealsSpellCoeff = [ImprovedSealsRanks + 1]float64{1}
 var ImprovedSealsBaseDamage = [ImprovedSealsRanks + 1][]float64{{3, 3}}
 
@@ -1586,6 +1709,7 @@ var IncreasedAuraRadiiLevel = [IncreasedAuraRadiiRanks + 1]int{0}
 var IncreasedAuraRadiiCastTime = [IncreasedAuraRadiiRanks + 1]int32{0}
 var IncreasedAuraRadiiCooldownMS = [IncreasedAuraRadiiRanks + 1]int32{0}
 var IncreasedAuraRadiiManaCost = [IncreasedAuraRadiiRanks + 1]float64{0}
+var IncreasedAuraRadiiManaCostPct = [IncreasedAuraRadiiRanks + 1]float64{0}
 var IncreasedAuraRadiiSpellCoeff = [IncreasedAuraRadiiRanks + 1]float64{1}
 var IncreasedAuraRadiiBaseDamage = [IncreasedAuraRadiiRanks + 1][]float64{{-5, -5}}
 
@@ -1599,6 +1723,7 @@ var IncreasedFlashOfLightCritChanceLevel = [IncreasedFlashOfLightCritChanceRanks
 var IncreasedFlashOfLightCritChanceCastTime = [IncreasedFlashOfLightCritChanceRanks + 1]int32{0}
 var IncreasedFlashOfLightCritChanceCooldownMS = [IncreasedFlashOfLightCritChanceRanks + 1]int32{0}
 var IncreasedFlashOfLightCritChanceManaCost = [IncreasedFlashOfLightCritChanceRanks + 1]float64{0}
+var IncreasedFlashOfLightCritChanceManaCostPct = [IncreasedFlashOfLightCritChanceRanks + 1]float64{0}
 var IncreasedFlashOfLightCritChanceSpellCoeff = [IncreasedFlashOfLightCritChanceRanks + 1]float64{0.2143}
 var IncreasedFlashOfLightCritChanceBaseDamage = [IncreasedFlashOfLightCritChanceRanks + 1][]float64{{2, 2}}
 
@@ -1612,6 +1737,7 @@ var IncreasedFlashOfLightHealingLevel = [IncreasedFlashOfLightHealingRanks + 1]i
 var IncreasedFlashOfLightHealingCastTime = [IncreasedFlashOfLightHealingRanks + 1]int32{0}
 var IncreasedFlashOfLightHealingCooldownMS = [IncreasedFlashOfLightHealingRanks + 1]int32{0}
 var IncreasedFlashOfLightHealingManaCost = [IncreasedFlashOfLightHealingRanks + 1]float64{0}
+var IncreasedFlashOfLightHealingManaCostPct = [IncreasedFlashOfLightHealingRanks + 1]float64{0}
 var IncreasedFlashOfLightHealingSpellCoeff = [IncreasedFlashOfLightHealingRanks + 1]float64{0.2143}
 var IncreasedFlashOfLightHealingBaseDamage = [IncreasedFlashOfLightHealingRanks + 1][]float64{{83, 83}}
 
@@ -1625,6 +1751,7 @@ var InfusionOfLightLevel = [InfusionOfLightRanks + 1]int{1}
 var InfusionOfLightCastTime = [InfusionOfLightRanks + 1]int32{0}
 var InfusionOfLightCooldownMS = [InfusionOfLightRanks + 1]int32{0}
 var InfusionOfLightManaCost = [InfusionOfLightRanks + 1]float64{0}
+var InfusionOfLightManaCostPct = [InfusionOfLightRanks + 1]float64{0}
 var InfusionOfLightSpellCoeff = [InfusionOfLightRanks + 1]float64{0.2143}
 var InfusionOfLightBaseDamage = [InfusionOfLightRanks + 1][]float64{{426065, 426065}}
 
@@ -1639,6 +1766,7 @@ var InfusionOfSoulsLevel = [InfusionOfSoulsRanks + 1]int{0}
 var InfusionOfSoulsCastTime = [InfusionOfSoulsRanks + 1]int32{0}
 var InfusionOfSoulsCooldownMS = [InfusionOfSoulsRanks + 1]int32{0}
 var InfusionOfSoulsManaCost = [InfusionOfSoulsRanks + 1]float64{0}
+var InfusionOfSoulsManaCostPct = [InfusionOfSoulsRanks + 1]float64{0}
 var InfusionOfSoulsSpellCoeff = [InfusionOfSoulsRanks + 1]float64{0.2143}
 var InfusionOfSoulsBaseDamage = [InfusionOfSoulsRanks + 1][]float64{{0, 0}}
 
@@ -1652,6 +1780,7 @@ var InspirationExemplarLevel = [InspirationExemplarRanks + 1]int{1}
 var InspirationExemplarCastTime = [InspirationExemplarRanks + 1]int32{0}
 var InspirationExemplarCooldownMS = [InspirationExemplarRanks + 1]int32{0}
 var InspirationExemplarManaCost = [InspirationExemplarRanks + 1]float64{0}
+var InspirationExemplarManaCostPct = [InspirationExemplarRanks + 1]float64{0}
 var InspirationExemplarSpellCoeff = [InspirationExemplarRanks + 1]float64{0.2143}
 var InspirationExemplarBaseDamage = [InspirationExemplarRanks + 1][]float64{{407880, 407880}}
 
@@ -1666,6 +1795,7 @@ var InstrumentOfLawLevel = [InstrumentOfLawRanks + 1]int{0}
 var InstrumentOfLawCastTime = [InstrumentOfLawRanks + 1]int32{0}
 var InstrumentOfLawCooldownMS = [InstrumentOfLawRanks + 1]int32{0}
 var InstrumentOfLawManaCost = [InstrumentOfLawRanks + 1]float64{0}
+var InstrumentOfLawManaCostPct = [InstrumentOfLawRanks + 1]float64{0}
 var InstrumentOfLawSpellCoeff = [InstrumentOfLawRanks + 1]float64{1}
 var InstrumentOfLawBaseDamage = [InstrumentOfLawRanks + 1][]float64{{-1000, -1000}}
 
@@ -1677,6 +1807,7 @@ var IronCreedLevel = [IronCreedRanks + 1]int{35}
 var IronCreedCastTime = [IronCreedRanks + 1]int32{0}
 var IronCreedCooldownMS = [IronCreedRanks + 1]int32{0}
 var IronCreedManaCost = [IronCreedRanks + 1]float64{0}
+var IronCreedManaCostPct = [IronCreedRanks + 1]float64{0}
 var IronCreedSpellCoeff = [IronCreedRanks + 1]float64{0.2143}
 var IronCreedBaseDamage = [IronCreedRanks + 1][]float64{{30, 30}}
 
@@ -1691,6 +1822,7 @@ var ItemCrusaderSWrathProcLightforgeArmorLevel = [ItemCrusaderSWrathProcLightfor
 var ItemCrusaderSWrathProcLightforgeArmorCastTime = [ItemCrusaderSWrathProcLightforgeArmorRanks + 1]int32{0}
 var ItemCrusaderSWrathProcLightforgeArmorCooldownMS = [ItemCrusaderSWrathProcLightforgeArmorRanks + 1]int32{0}
 var ItemCrusaderSWrathProcLightforgeArmorManaCost = [ItemCrusaderSWrathProcLightforgeArmorRanks + 1]float64{0}
+var ItemCrusaderSWrathProcLightforgeArmorManaCostPct = [ItemCrusaderSWrathProcLightforgeArmorRanks + 1]float64{0}
 var ItemCrusaderSWrathProcLightforgeArmorSpellCoeff = [ItemCrusaderSWrathProcLightforgeArmorRanks + 1]float64{0.2143}
 var ItemCrusaderSWrathProcLightforgeArmorBaseDamage = [ItemCrusaderSWrathProcLightforgeArmorRanks + 1][]float64{{0, 0}}
 
@@ -1704,6 +1836,7 @@ var ItemTheFuriousStormProcLevel = [ItemTheFuriousStormProcRanks + 1]int{0}
 var ItemTheFuriousStormProcCastTime = [ItemTheFuriousStormProcRanks + 1]int32{0}
 var ItemTheFuriousStormProcCooldownMS = [ItemTheFuriousStormProcRanks + 1]int32{0}
 var ItemTheFuriousStormProcManaCost = [ItemTheFuriousStormProcRanks + 1]float64{0}
+var ItemTheFuriousStormProcManaCostPct = [ItemTheFuriousStormProcRanks + 1]float64{0}
 var ItemTheFuriousStormProcSpellCoeff = [ItemTheFuriousStormProcRanks + 1]float64{0.2143}
 var ItemTheFuriousStormProcBaseDamage = [ItemTheFuriousStormProcRanks + 1][]float64{{0, 0}}
 
@@ -1717,6 +1850,7 @@ var JudgementLevel = [JudgementRanks + 1]int{4}
 var JudgementCastTime = [JudgementRanks + 1]int32{0}
 var JudgementCooldownMS = [JudgementRanks + 1]int32{10000}
 var JudgementManaCost = [JudgementRanks + 1]float64{0}
+var JudgementManaCostPct = [JudgementRanks + 1]float64{6}
 var JudgementSpellCoeff = [JudgementRanks + 1]float64{0.2143}
 var JudgementBaseDamage = [JudgementRanks + 1][]float64{{0, 0}}
 
@@ -1731,6 +1865,7 @@ var JudgementDamageIncreaseLevel = [JudgementDamageIncreaseRanks + 1]int{0}
 var JudgementDamageIncreaseCastTime = [JudgementDamageIncreaseRanks + 1]int32{0}
 var JudgementDamageIncreaseCooldownMS = [JudgementDamageIncreaseRanks + 1]int32{0}
 var JudgementDamageIncreaseManaCost = [JudgementDamageIncreaseRanks + 1]float64{0}
+var JudgementDamageIncreaseManaCostPct = [JudgementDamageIncreaseRanks + 1]float64{0}
 var JudgementDamageIncreaseSpellCoeff = [JudgementDamageIncreaseRanks + 1]float64{0.2143}
 var JudgementDamageIncreaseBaseDamage = [JudgementDamageIncreaseRanks + 1][]float64{{20, 20}}
 
@@ -1744,6 +1879,7 @@ var JudgementIncreasedDamageLevel = [JudgementIncreasedDamageRanks + 1]int{0}
 var JudgementIncreasedDamageCastTime = [JudgementIncreasedDamageRanks + 1]int32{0}
 var JudgementIncreasedDamageCooldownMS = [JudgementIncreasedDamageRanks + 1]int32{0}
 var JudgementIncreasedDamageManaCost = [JudgementIncreasedDamageRanks + 1]float64{0}
+var JudgementIncreasedDamageManaCostPct = [JudgementIncreasedDamageRanks + 1]float64{0}
 var JudgementIncreasedDamageSpellCoeff = [JudgementIncreasedDamageRanks + 1]float64{0.2143}
 var JudgementIncreasedDamageBaseDamage = [JudgementIncreasedDamageRanks + 1][]float64{{4, 4}}
 
@@ -1757,6 +1893,7 @@ var JudgementOfCommandLevel = [JudgementOfCommandRanks + 1]int{0, 20, 30, 40, 50
 var JudgementOfCommandCastTime = [JudgementOfCommandRanks + 1]int32{0, 0, 0, 0, 0, 0}
 var JudgementOfCommandCooldownMS = [JudgementOfCommandRanks + 1]int32{0, 0, 0, 0, 0, 0}
 var JudgementOfCommandManaCost = [JudgementOfCommandRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var JudgementOfCommandManaCostPct = [JudgementOfCommandRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var JudgementOfCommandSpellCoeff = [JudgementOfCommandRanks + 1]float64{0, 0.429, 0.429, 0.429, 1, 1}
 var JudgementOfCommandBaseDamage = [JudgementOfCommandRanks + 1][]float64{{0, 0}, {97, 97}, {153, 153}, {214, 214}, {20965, 20965}, {20966, 20966}}
 
@@ -1774,6 +1911,7 @@ var JudgementOfFuryLevel = [JudgementOfFuryRanks + 1]int{1, 10, 18, 25, 34, 42, 
 var JudgementOfFuryCastTime = [JudgementOfFuryRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var JudgementOfFuryCooldownMS = [JudgementOfFuryRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var JudgementOfFuryManaCost = [JudgementOfFuryRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
+var JudgementOfFuryManaCostPct = [JudgementOfFuryRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var JudgementOfFurySpellCoeff = [JudgementOfFuryRanks + 1]float64{0.1333, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45}
 var JudgementOfFuryBaseDamage = [JudgementOfFuryRanks + 1][]float64{{0, 0}, {23, 23}, {37, 37}, {54, 54}, {74, 74}, {96, 96}, {123, 123}, {153, 153}}
 
@@ -1787,6 +1925,7 @@ var JudgementOfJusticeLevel = [JudgementOfJusticeRanks + 1]int{1, 22}
 var JudgementOfJusticeCastTime = [JudgementOfJusticeRanks + 1]int32{0, 0}
 var JudgementOfJusticeCooldownMS = [JudgementOfJusticeRanks + 1]int32{0, 0}
 var JudgementOfJusticeManaCost = [JudgementOfJusticeRanks + 1]float64{0, 0}
+var JudgementOfJusticeManaCostPct = [JudgementOfJusticeRanks + 1]float64{0, 0}
 var JudgementOfJusticeSpellCoeff = [JudgementOfJusticeRanks + 1]float64{1, 0.3333}
 var JudgementOfJusticeBaseDamage = [JudgementOfJusticeRanks + 1][]float64{{0, 0}, {0, 0}}
 
@@ -1801,6 +1940,7 @@ var JudgementOfLightLevel = [JudgementOfLightRanks + 1]int{1, 30, 40, 50, 60}
 var JudgementOfLightCastTime = [JudgementOfLightRanks + 1]int32{0, 0, 0, 0, 0}
 var JudgementOfLightCooldownMS = [JudgementOfLightRanks + 1]int32{0, 0, 0, 0, 0}
 var JudgementOfLightManaCost = [JudgementOfLightRanks + 1]float64{0, 0, 0, 0, 0}
+var JudgementOfLightManaCostPct = [JudgementOfLightRanks + 1]float64{0, 0, 0, 0, 0}
 var JudgementOfLightSpellCoeff = [JudgementOfLightRanks + 1]float64{1, 0.2143, 1.3333, 1.3333, 1.3333}
 var JudgementOfLightBaseDamage = [JudgementOfLightRanks + 1][]float64{{0, 0}, {25, 25}, {0, 0}, {0, 0}, {0, 0}}
 
@@ -1819,6 +1959,7 @@ var JudgementOfMartyrdomLevel = [JudgementOfMartyrdomRanks + 1]int{1}
 var JudgementOfMartyrdomCastTime = [JudgementOfMartyrdomRanks + 1]int32{0}
 var JudgementOfMartyrdomCooldownMS = [JudgementOfMartyrdomRanks + 1]int32{0}
 var JudgementOfMartyrdomManaCost = [JudgementOfMartyrdomRanks + 1]float64{0}
+var JudgementOfMartyrdomManaCostPct = [JudgementOfMartyrdomRanks + 1]float64{0}
 var JudgementOfMartyrdomSpellCoeff = [JudgementOfMartyrdomRanks + 1]float64{0.2143}
 var JudgementOfMartyrdomBaseDamage = [JudgementOfMartyrdomRanks + 1][]float64{{85, 85}}
 
@@ -1832,6 +1973,7 @@ var JudgementOfRighteousnessLevel = [JudgementOfRighteousnessRanks + 1]int{0, 1,
 var JudgementOfRighteousnessCastTime = [JudgementOfRighteousnessRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
 var JudgementOfRighteousnessCooldownMS = [JudgementOfRighteousnessRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
 var JudgementOfRighteousnessManaCost = [JudgementOfRighteousnessRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
+var JudgementOfRighteousnessManaCostPct = [JudgementOfRighteousnessRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
 var JudgementOfRighteousnessSpellCoeff = [JudgementOfRighteousnessRanks + 1]float64{0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5}
 var JudgementOfRighteousnessBaseDamage = [JudgementOfRighteousnessRanks + 1][]float64{{0, 0}, {15, 15}, {26, 26}, {41, 41}, {60, 60}, {82, 82}, {107, 107}, {137, 137}, {170, 170}}
 
@@ -1843,6 +1985,7 @@ var JudgementOfWisdomLevel = [JudgementOfWisdomRanks + 1]int{1, 38, 48, 58}
 var JudgementOfWisdomCastTime = [JudgementOfWisdomRanks + 1]int32{0, 0, 0, 0}
 var JudgementOfWisdomCooldownMS = [JudgementOfWisdomRanks + 1]int32{0, 0, 0, 0}
 var JudgementOfWisdomManaCost = [JudgementOfWisdomRanks + 1]float64{0, 0, 0, 0}
+var JudgementOfWisdomManaCostPct = [JudgementOfWisdomRanks + 1]float64{0, 0, 0, 0}
 var JudgementOfWisdomSpellCoeff = [JudgementOfWisdomRanks + 1]float64{1, 1.3333, 1.3333, 1.3333}
 var JudgementOfWisdomBaseDamage = [JudgementOfWisdomRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}}
 
@@ -1857,6 +2000,7 @@ var JudgementOfTheCrusaderLevel = [JudgementOfTheCrusaderRanks + 1]int{1, 6, 12,
 var JudgementOfTheCrusaderCastTime = [JudgementOfTheCrusaderRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var JudgementOfTheCrusaderCooldownMS = [JudgementOfTheCrusaderRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var JudgementOfTheCrusaderManaCost = [JudgementOfTheCrusaderRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var JudgementOfTheCrusaderManaCostPct = [JudgementOfTheCrusaderRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var JudgementOfTheCrusaderSpellCoeff = [JudgementOfTheCrusaderRanks + 1]float64{0.3333, 1.3333, 1.3333, 1.3333, 1.3333, 1.3333, 1.3333}
 var JudgementOfTheCrusaderBaseDamage = [JudgementOfTheCrusaderRanks + 1][]float64{{140, 140}, {23, 23}, {35, 35}, {58, 58}, {92, 92}, {127, 127}, {161, 161}}
 
@@ -1871,6 +2015,7 @@ var LastingJudgementLevel = [LastingJudgementRanks + 1]int{0, 0, 0, 0}
 var LastingJudgementCastTime = [LastingJudgementRanks + 1]int32{0, 0, 0, 0}
 var LastingJudgementCooldownMS = [LastingJudgementRanks + 1]int32{0, 0, 0, 0}
 var LastingJudgementManaCost = [LastingJudgementRanks + 1]float64{0, 0, 0, 0}
+var LastingJudgementManaCostPct = [LastingJudgementRanks + 1]float64{0, 0, 0, 0}
 var LastingJudgementSpellCoeff = [LastingJudgementRanks + 1]float64{0, 1, 1, 1}
 var LastingJudgementBaseDamage = [LastingJudgementRanks + 1][]float64{{0, 0}, {10000, 10000}, {20000, 20000}, {30000, 30000}}
 
@@ -1882,6 +2027,7 @@ var LayHandsLevel = [LayHandsRanks + 1]int{0}
 var LayHandsCastTime = [LayHandsRanks + 1]int32{0}
 var LayHandsCooldownMS = [LayHandsRanks + 1]int32{0}
 var LayHandsManaCost = [LayHandsRanks + 1]float64{0}
+var LayHandsManaCostPct = [LayHandsRanks + 1]float64{0}
 var LayHandsSpellCoeff = [LayHandsRanks + 1]float64{0.2143}
 var LayHandsBaseDamage = [LayHandsRanks + 1][]float64{{-720000, -720000}}
 
@@ -1895,6 +2041,7 @@ var LayOnHandsLevel = [LayOnHandsRanks + 1]int{0, 10, 30, 50}
 var LayOnHandsCastTime = [LayOnHandsRanks + 1]int32{0, 0, 0, 0}
 var LayOnHandsCooldownMS = [LayOnHandsRanks + 1]int32{0, 1200000, 1200000, 1200000}
 var LayOnHandsManaCost = [LayOnHandsRanks + 1]float64{0, 0, 0, 0}
+var LayOnHandsManaCostPct = [LayOnHandsRanks + 1]float64{0, 0, 0, 0}
 var LayOnHandsSpellCoeff = [LayOnHandsRanks + 1]float64{0, 0.2143, 0.2143, 0.2143}
 var LayOnHandsBaseDamage = [LayOnHandsRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}}
 
@@ -1908,6 +2055,7 @@ var LeoganLevel = [LeoganRanks + 1]int{0}
 var LeoganCastTime = [LeoganRanks + 1]int32{0}
 var LeoganCooldownMS = [LeoganRanks + 1]int32{0}
 var LeoganManaCost = [LeoganRanks + 1]float64{0}
+var LeoganManaCostPct = [LeoganRanks + 1]float64{0}
 var LeoganSpellCoeff = [LeoganRanks + 1]float64{0.2143}
 var LeoganBaseDamage = [LeoganRanks + 1][]float64{{-500, -500}}
 
@@ -1921,6 +2069,7 @@ var LibramOfAvengingLevel = [LibramOfAvengingRanks + 1]int{0}
 var LibramOfAvengingCastTime = [LibramOfAvengingRanks + 1]int32{0}
 var LibramOfAvengingCooldownMS = [LibramOfAvengingRanks + 1]int32{0}
 var LibramOfAvengingManaCost = [LibramOfAvengingRanks + 1]float64{0}
+var LibramOfAvengingManaCostPct = [LibramOfAvengingRanks + 1]float64{0}
 var LibramOfAvengingSpellCoeff = [LibramOfAvengingRanks + 1]float64{1}
 var LibramOfAvengingBaseDamage = [LibramOfAvengingRanks + 1][]float64{{2, 2}}
 
@@ -1932,6 +2081,7 @@ var LibramOfAweLevel = [LibramOfAweRanks + 1]int{0}
 var LibramOfAweCastTime = [LibramOfAweRanks + 1]int32{0}
 var LibramOfAweCooldownMS = [LibramOfAweRanks + 1]int32{0}
 var LibramOfAweManaCost = [LibramOfAweRanks + 1]float64{0}
+var LibramOfAweManaCostPct = [LibramOfAweRanks + 1]float64{0}
 var LibramOfAweSpellCoeff = [LibramOfAweRanks + 1]float64{1}
 var LibramOfAweBaseDamage = [LibramOfAweRanks + 1][]float64{{20, 20}}
 
@@ -1943,6 +2093,7 @@ var LibramOfBanishmentLevel = [LibramOfBanishmentRanks + 1]int{0}
 var LibramOfBanishmentCastTime = [LibramOfBanishmentRanks + 1]int32{0}
 var LibramOfBanishmentCooldownMS = [LibramOfBanishmentRanks + 1]int32{0}
 var LibramOfBanishmentManaCost = [LibramOfBanishmentRanks + 1]float64{0}
+var LibramOfBanishmentManaCostPct = [LibramOfBanishmentRanks + 1]float64{0}
 var LibramOfBanishmentSpellCoeff = [LibramOfBanishmentRanks + 1]float64{0.2143}
 var LibramOfBanishmentBaseDamage = [LibramOfBanishmentRanks + 1][]float64{{0, 0}}
 
@@ -1956,6 +2107,7 @@ var LibramOfBlessingsLevel = [LibramOfBlessingsRanks + 1]int{0}
 var LibramOfBlessingsCastTime = [LibramOfBlessingsRanks + 1]int32{0}
 var LibramOfBlessingsCooldownMS = [LibramOfBlessingsRanks + 1]int32{0}
 var LibramOfBlessingsManaCost = [LibramOfBlessingsRanks + 1]float64{0}
+var LibramOfBlessingsManaCostPct = [LibramOfBlessingsRanks + 1]float64{0}
 var LibramOfBlessingsSpellCoeff = [LibramOfBlessingsRanks + 1]float64{0.2143}
 var LibramOfBlessingsBaseDamage = [LibramOfBlessingsRanks + 1][]float64{{0, 0}}
 
@@ -1969,6 +2121,7 @@ var LibramOfDeliveranceLevel = [LibramOfDeliveranceRanks + 1]int{0}
 var LibramOfDeliveranceCastTime = [LibramOfDeliveranceRanks + 1]int32{0}
 var LibramOfDeliveranceCooldownMS = [LibramOfDeliveranceRanks + 1]int32{0}
 var LibramOfDeliveranceManaCost = [LibramOfDeliveranceRanks + 1]float64{0}
+var LibramOfDeliveranceManaCostPct = [LibramOfDeliveranceRanks + 1]float64{0}
 var LibramOfDeliveranceSpellCoeff = [LibramOfDeliveranceRanks + 1]float64{0.2143}
 var LibramOfDeliveranceBaseDamage = [LibramOfDeliveranceRanks + 1][]float64{{0, 0}}
 
@@ -1982,6 +2135,7 @@ var LibramOfDivinityLevel = [LibramOfDivinityRanks + 1]int{0}
 var LibramOfDivinityCastTime = [LibramOfDivinityRanks + 1]int32{0}
 var LibramOfDivinityCooldownMS = [LibramOfDivinityRanks + 1]int32{0}
 var LibramOfDivinityManaCost = [LibramOfDivinityRanks + 1]float64{0}
+var LibramOfDivinityManaCostPct = [LibramOfDivinityRanks + 1]float64{0}
 var LibramOfDivinitySpellCoeff = [LibramOfDivinityRanks + 1]float64{0.2143}
 var LibramOfDivinityBaseDamage = [LibramOfDivinityRanks + 1][]float64{{25, 25}}
 
@@ -1996,6 +2150,7 @@ var LibramOfHolyAlacrityLevel = [LibramOfHolyAlacrityRanks + 1]int{0}
 var LibramOfHolyAlacrityCastTime = [LibramOfHolyAlacrityRanks + 1]int32{0}
 var LibramOfHolyAlacrityCooldownMS = [LibramOfHolyAlacrityRanks + 1]int32{0}
 var LibramOfHolyAlacrityManaCost = [LibramOfHolyAlacrityRanks + 1]float64{0}
+var LibramOfHolyAlacrityManaCostPct = [LibramOfHolyAlacrityRanks + 1]float64{0}
 var LibramOfHolyAlacritySpellCoeff = [LibramOfHolyAlacrityRanks + 1]float64{1}
 var LibramOfHolyAlacrityBaseDamage = [LibramOfHolyAlacrityRanks + 1][]float64{{0, 0}}
 
@@ -2009,6 +2164,7 @@ var LibramOfJudgementLevel = [LibramOfJudgementRanks + 1]int{0}
 var LibramOfJudgementCastTime = [LibramOfJudgementRanks + 1]int32{0}
 var LibramOfJudgementCooldownMS = [LibramOfJudgementRanks + 1]int32{0}
 var LibramOfJudgementManaCost = [LibramOfJudgementRanks + 1]float64{0}
+var LibramOfJudgementManaCostPct = [LibramOfJudgementRanks + 1]float64{0}
 var LibramOfJudgementSpellCoeff = [LibramOfJudgementRanks + 1]float64{0.2143}
 var LibramOfJudgementBaseDamage = [LibramOfJudgementRanks + 1][]float64{{0, 0}}
 
@@ -2022,6 +2178,7 @@ var LibramOfJusticeLevel = [LibramOfJusticeRanks + 1]int{0}
 var LibramOfJusticeCastTime = [LibramOfJusticeRanks + 1]int32{0}
 var LibramOfJusticeCooldownMS = [LibramOfJusticeRanks + 1]int32{0}
 var LibramOfJusticeManaCost = [LibramOfJusticeRanks + 1]float64{0}
+var LibramOfJusticeManaCostPct = [LibramOfJusticeRanks + 1]float64{0}
 var LibramOfJusticeSpellCoeff = [LibramOfJusticeRanks + 1]float64{0.2143}
 var LibramOfJusticeBaseDamage = [LibramOfJusticeRanks + 1][]float64{{0, 0}}
 
@@ -2035,6 +2192,7 @@ var LibramOfPlentyLevel = [LibramOfPlentyRanks + 1]int{0}
 var LibramOfPlentyCastTime = [LibramOfPlentyRanks + 1]int32{0}
 var LibramOfPlentyCooldownMS = [LibramOfPlentyRanks + 1]int32{0}
 var LibramOfPlentyManaCost = [LibramOfPlentyRanks + 1]float64{0}
+var LibramOfPlentyManaCostPct = [LibramOfPlentyRanks + 1]float64{0}
 var LibramOfPlentySpellCoeff = [LibramOfPlentyRanks + 1]float64{1}
 var LibramOfPlentyBaseDamage = [LibramOfPlentyRanks + 1][]float64{{10, 10}}
 
@@ -2046,6 +2204,7 @@ var LibramOfPurificationLevel = [LibramOfPurificationRanks + 1]int{0}
 var LibramOfPurificationCastTime = [LibramOfPurificationRanks + 1]int32{0}
 var LibramOfPurificationCooldownMS = [LibramOfPurificationRanks + 1]int32{0}
 var LibramOfPurificationManaCost = [LibramOfPurificationRanks + 1]float64{0}
+var LibramOfPurificationManaCostPct = [LibramOfPurificationRanks + 1]float64{0}
 var LibramOfPurificationSpellCoeff = [LibramOfPurificationRanks + 1]float64{0.2143}
 var LibramOfPurificationBaseDamage = [LibramOfPurificationRanks + 1][]float64{{200, 200}}
 
@@ -2059,6 +2218,7 @@ var LibramOfSanctityLevel = [LibramOfSanctityRanks + 1]int{30}
 var LibramOfSanctityCastTime = [LibramOfSanctityRanks + 1]int32{0}
 var LibramOfSanctityCooldownMS = [LibramOfSanctityRanks + 1]int32{0}
 var LibramOfSanctityManaCost = [LibramOfSanctityRanks + 1]float64{0}
+var LibramOfSanctityManaCostPct = [LibramOfSanctityRanks + 1]float64{0}
 var LibramOfSanctitySpellCoeff = [LibramOfSanctityRanks + 1]float64{2}
 var LibramOfSanctityBaseDamage = [LibramOfSanctityRanks + 1][]float64{{10, 10}}
 
@@ -2072,6 +2232,7 @@ var LibramOfWrathLevel = [LibramOfWrathRanks + 1]int{1}
 var LibramOfWrathCastTime = [LibramOfWrathRanks + 1]int32{0}
 var LibramOfWrathCooldownMS = [LibramOfWrathRanks + 1]int32{0}
 var LibramOfWrathManaCost = [LibramOfWrathRanks + 1]float64{0}
+var LibramOfWrathManaCostPct = [LibramOfWrathRanks + 1]float64{0}
 var LibramOfWrathSpellCoeff = [LibramOfWrathRanks + 1]float64{0.5}
 var LibramOfWrathBaseDamage = [LibramOfWrathRanks + 1][]float64{{-20, -20}}
 
@@ -2086,6 +2247,7 @@ var LibramOfTheConsecratedLevel = [LibramOfTheConsecratedRanks + 1]int{0}
 var LibramOfTheConsecratedCastTime = [LibramOfTheConsecratedRanks + 1]int32{0}
 var LibramOfTheConsecratedCooldownMS = [LibramOfTheConsecratedRanks + 1]int32{0}
 var LibramOfTheConsecratedManaCost = [LibramOfTheConsecratedRanks + 1]float64{0}
+var LibramOfTheConsecratedManaCostPct = [LibramOfTheConsecratedRanks + 1]float64{0}
 var LibramOfTheConsecratedSpellCoeff = [LibramOfTheConsecratedRanks + 1]float64{1}
 var LibramOfTheConsecratedBaseDamage = [LibramOfTheConsecratedRanks + 1][]float64{{-70, -70}}
 
@@ -2099,6 +2261,7 @@ var LibramOfTheDevotedLevel = [LibramOfTheDevotedRanks + 1]int{0}
 var LibramOfTheDevotedCastTime = [LibramOfTheDevotedRanks + 1]int32{0}
 var LibramOfTheDevotedCooldownMS = [LibramOfTheDevotedRanks + 1]int32{0}
 var LibramOfTheDevotedManaCost = [LibramOfTheDevotedRanks + 1]float64{0}
+var LibramOfTheDevotedManaCostPct = [LibramOfTheDevotedRanks + 1]float64{0}
 var LibramOfTheDevotedSpellCoeff = [LibramOfTheDevotedRanks + 1]float64{1}
 var LibramOfTheDevotedBaseDamage = [LibramOfTheDevotedRanks + 1][]float64{{2, 2}}
 
@@ -2110,6 +2273,7 @@ var LibramOfTheWildSkyLevel = [LibramOfTheWildSkyRanks + 1]int{0}
 var LibramOfTheWildSkyCastTime = [LibramOfTheWildSkyRanks + 1]int32{0}
 var LibramOfTheWildSkyCooldownMS = [LibramOfTheWildSkyRanks + 1]int32{0}
 var LibramOfTheWildSkyManaCost = [LibramOfTheWildSkyRanks + 1]float64{0}
+var LibramOfTheWildSkyManaCostPct = [LibramOfTheWildSkyRanks + 1]float64{0}
 var LibramOfTheWildSkySpellCoeff = [LibramOfTheWildSkyRanks + 1]float64{0.2143}
 var LibramOfTheWildSkyBaseDamage = [LibramOfTheWildSkyRanks + 1][]float64{{-1000, -1000}}
 
@@ -2123,6 +2287,7 @@ var LightSFuryLevel = [LightSFuryRanks + 1]int{0}
 var LightSFuryCastTime = [LightSFuryRanks + 1]int32{0}
 var LightSFuryCooldownMS = [LightSFuryRanks + 1]int32{0}
 var LightSFuryManaCost = [LightSFuryRanks + 1]float64{0}
+var LightSFuryManaCostPct = [LightSFuryRanks + 1]float64{0}
 var LightSFurySpellCoeff = [LightSFuryRanks + 1]float64{0.3333}
 var LightSFuryBaseDamage = [LightSFuryRanks + 1][]float64{{0, 0}}
 
@@ -2136,6 +2301,7 @@ var LightSGraceLevel = [LightSGraceRanks + 1]int{1}
 var LightSGraceCastTime = [LightSGraceRanks + 1]int32{0}
 var LightSGraceCooldownMS = [LightSGraceRanks + 1]int32{0}
 var LightSGraceManaCost = [LightSGraceRanks + 1]float64{0}
+var LightSGraceManaCostPct = [LightSGraceRanks + 1]float64{0}
 var LightSGraceSpellCoeff = [LightSGraceRanks + 1]float64{0.2143}
 var LightSGraceBaseDamage = [LightSGraceRanks + 1][]float64{{428909, 428909}}
 
@@ -2150,6 +2316,7 @@ var LightSVigilLevel = [LightSVigilRanks + 1]int{0, 40, 50, 60}
 var LightSVigilCastTime = [LightSVigilRanks + 1]int32{0, 0, 0, 0}
 var LightSVigilCooldownMS = [LightSVigilRanks + 1]int32{0, 0, 0, 0}
 var LightSVigilManaCost = [LightSVigilRanks + 1]float64{0, 0, 0, 0}
+var LightSVigilManaCostPct = [LightSVigilRanks + 1]float64{0, 0, 0, 0}
 var LightSVigilSpellCoeff = [LightSVigilRanks + 1]float64{0.2143, 0.429, 1, 1}
 var LightSVigilBaseDamage = [LightSVigilRanks + 1][]float64{{0, 0}, {182, 182}, {0, 0}, {0, 0}}
 
@@ -2166,6 +2333,7 @@ var MalleableProtectionLevel = [MalleableProtectionRanks + 1]int{1}
 var MalleableProtectionCastTime = [MalleableProtectionRanks + 1]int32{0}
 var MalleableProtectionCooldownMS = [MalleableProtectionRanks + 1]int32{0}
 var MalleableProtectionManaCost = [MalleableProtectionRanks + 1]float64{0}
+var MalleableProtectionManaCostPct = [MalleableProtectionRanks + 1]float64{0}
 var MalleableProtectionSpellCoeff = [MalleableProtectionRanks + 1]float64{0.2143}
 var MalleableProtectionBaseDamage = [MalleableProtectionRanks + 1][]float64{{458318, 458318}}
 
@@ -2180,6 +2348,7 @@ var NoxiousBreathLevel = [NoxiousBreathRanks + 1]int{0}
 var NoxiousBreathCastTime = [NoxiousBreathRanks + 1]int32{0}
 var NoxiousBreathCooldownMS = [NoxiousBreathRanks + 1]int32{0}
 var NoxiousBreathManaCost = [NoxiousBreathRanks + 1]float64{0}
+var NoxiousBreathManaCostPct = [NoxiousBreathRanks + 1]float64{0}
 var NoxiousBreathSpellCoeff = [NoxiousBreathRanks + 1]float64{1}
 var NoxiousBreathBaseDamage = [NoxiousBreathRanks + 1][]float64{{10000, 10000}}
 
@@ -2191,6 +2360,7 @@ var PurifyLevel = [PurifyRanks + 1]int{8}
 var PurifyCastTime = [PurifyRanks + 1]int32{0}
 var PurifyCooldownMS = [PurifyRanks + 1]int32{0}
 var PurifyManaCost = [PurifyRanks + 1]float64{0}
+var PurifyManaCostPct = [PurifyRanks + 1]float64{8}
 var PurifySpellCoeff = [PurifyRanks + 1]float64{0.2143}
 var PurifyBaseDamage = [PurifyRanks + 1][]float64{{1, 1}}
 
@@ -2204,6 +2374,7 @@ var PurifyAndCleanseCostReducedLevel = [PurifyAndCleanseCostReducedRanks + 1]int
 var PurifyAndCleanseCostReducedCastTime = [PurifyAndCleanseCostReducedRanks + 1]int32{0}
 var PurifyAndCleanseCostReducedCooldownMS = [PurifyAndCleanseCostReducedRanks + 1]int32{0}
 var PurifyAndCleanseCostReducedManaCost = [PurifyAndCleanseCostReducedRanks + 1]float64{0}
+var PurifyAndCleanseCostReducedManaCostPct = [PurifyAndCleanseCostReducedRanks + 1]float64{0}
 var PurifyAndCleanseCostReducedSpellCoeff = [PurifyAndCleanseCostReducedRanks + 1]float64{0.2143}
 var PurifyAndCleanseCostReducedBaseDamage = [PurifyAndCleanseCostReducedRanks + 1][]float64{{-10, -10}}
 
@@ -2217,6 +2388,7 @@ var PurifyingPowerLevel = [PurifyingPowerRanks + 1]int{1}
 var PurifyingPowerCastTime = [PurifyingPowerRanks + 1]int32{0}
 var PurifyingPowerCooldownMS = [PurifyingPowerRanks + 1]int32{0}
 var PurifyingPowerManaCost = [PurifyingPowerRanks + 1]float64{0}
+var PurifyingPowerManaCostPct = [PurifyingPowerRanks + 1]float64{0}
 var PurifyingPowerSpellCoeff = [PurifyingPowerRanks + 1]float64{0.2143}
 var PurifyingPowerBaseDamage = [PurifyingPowerRanks + 1][]float64{{429144, 429144}}
 
@@ -2231,6 +2403,7 @@ var ReagentEconomyLevel = [ReagentEconomyRanks + 1]int{0}
 var ReagentEconomyCastTime = [ReagentEconomyRanks + 1]int32{0}
 var ReagentEconomyCooldownMS = [ReagentEconomyRanks + 1]int32{300000}
 var ReagentEconomyManaCost = [ReagentEconomyRanks + 1]float64{0}
+var ReagentEconomyManaCostPct = [ReagentEconomyRanks + 1]float64{0}
 var ReagentEconomySpellCoeff = [ReagentEconomyRanks + 1]float64{1}
 var ReagentEconomyBaseDamage = [ReagentEconomyRanks + 1][]float64{{-100, -100}}
 
@@ -2242,6 +2415,7 @@ var RebukeLevel = [RebukeRanks + 1]int{1}
 var RebukeCastTime = [RebukeRanks + 1]int32{0}
 var RebukeCooldownMS = [RebukeRanks + 1]int32{0}
 var RebukeManaCost = [RebukeRanks + 1]float64{0}
+var RebukeManaCostPct = [RebukeRanks + 1]float64{0}
 var RebukeSpellCoeff = [RebukeRanks + 1]float64{0.2143}
 var RebukeBaseDamage = [RebukeRanks + 1][]float64{{425609, 425609}}
 
@@ -2255,6 +2429,7 @@ var RedemptionLevel = [RedemptionRanks + 1]int{0, 12, 24, 36, 48, 60}
 var RedemptionCastTime = [RedemptionRanks + 1]int32{0, 10000, 10000, 10000, 10000, 10000}
 var RedemptionCooldownMS = [RedemptionRanks + 1]int32{0, 0, 0, 0, 0, 0}
 var RedemptionManaCost = [RedemptionRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var RedemptionManaCostPct = [RedemptionRanks + 1]float64{0, 80, 80, 80, 80, 80}
 var RedemptionSpellCoeff = [RedemptionRanks + 1]float64{0, 1, 1, 1, 1, 1}
 var RedemptionBaseDamage = [RedemptionRanks + 1][]float64{{0, 0}, {65, 65}, {150, 150}, {250, 250}, {400, 400}, {600, 600}}
 
@@ -2266,6 +2441,7 @@ var RepentanceLevel = [RepentanceRanks + 1]int{20}
 var RepentanceCastTime = [RepentanceRanks + 1]int32{0}
 var RepentanceCooldownMS = [RepentanceRanks + 1]int32{60000}
 var RepentanceManaCost = [RepentanceRanks + 1]float64{60}
+var RepentanceManaCostPct = [RepentanceRanks + 1]float64{0}
 var RepentanceSpellCoeff = [RepentanceRanks + 1]float64{0.2}
 var RepentanceBaseDamage = [RepentanceRanks + 1][]float64{{0, 0}}
 
@@ -2279,6 +2455,7 @@ var RepentanceDurationIncreaseLevel = [RepentanceDurationIncreaseRanks + 1]int{0
 var RepentanceDurationIncreaseCastTime = [RepentanceDurationIncreaseRanks + 1]int32{0}
 var RepentanceDurationIncreaseCooldownMS = [RepentanceDurationIncreaseRanks + 1]int32{0}
 var RepentanceDurationIncreaseManaCost = [RepentanceDurationIncreaseRanks + 1]float64{0}
+var RepentanceDurationIncreaseManaCostPct = [RepentanceDurationIncreaseRanks + 1]float64{0}
 var RepentanceDurationIncreaseSpellCoeff = [RepentanceDurationIncreaseRanks + 1]float64{1}
 var RepentanceDurationIncreaseBaseDamage = [RepentanceDurationIncreaseRanks + 1][]float64{{1000, 1000}}
 
@@ -2290,6 +2467,7 @@ var RetributionAuraLevel = [RetributionAuraRanks + 1]int{0, 16, 26, 36, 46, 56}
 var RetributionAuraCastTime = [RetributionAuraRanks + 1]int32{0, 0, 0, 0, 0, 0}
 var RetributionAuraCooldownMS = [RetributionAuraRanks + 1]int32{0, 0, 0, 0, 0, 0}
 var RetributionAuraManaCost = [RetributionAuraRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var RetributionAuraManaCostPct = [RetributionAuraRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var RetributionAuraSpellCoeff = [RetributionAuraRanks + 1]float64{0, 0.2143, 0.2143, 0.2143, 0.2143, 0.2143}
 var RetributionAuraBaseDamage = [RetributionAuraRanks + 1][]float64{{0, 0}, {7, 7}, {12, 12}, {18, 18}, {24, 24}, {30, 30}}
 
@@ -2303,6 +2481,7 @@ var RighteousFuryLevel = [RighteousFuryRanks + 1]int{16}
 var RighteousFuryCastTime = [RighteousFuryRanks + 1]int32{0}
 var RighteousFuryCooldownMS = [RighteousFuryRanks + 1]int32{0}
 var RighteousFuryManaCost = [RighteousFuryRanks + 1]float64{0}
+var RighteousFuryManaCostPct = [RighteousFuryRanks + 1]float64{30}
 var RighteousFurySpellCoeff = [RighteousFuryRanks + 1]float64{1}
 var RighteousFuryBaseDamage = [RighteousFuryRanks + 1][]float64{{60, 60}}
 
@@ -2316,6 +2495,7 @@ var RighteousIndignationLevel = [RighteousIndignationRanks + 1]int{1}
 var RighteousIndignationCastTime = [RighteousIndignationRanks + 1]int32{0}
 var RighteousIndignationCooldownMS = [RighteousIndignationRanks + 1]int32{0}
 var RighteousIndignationManaCost = [RighteousIndignationRanks + 1]float64{0}
+var RighteousIndignationManaCostPct = [RighteousIndignationRanks + 1]float64{0}
 var RighteousIndignationSpellCoeff = [RighteousIndignationRanks + 1]float64{1}
 var RighteousIndignationBaseDamage = [RighteousIndignationRanks + 1][]float64{{1407, 1407}}
 
@@ -2330,6 +2510,7 @@ var RighteousJudgementLevel = [RighteousJudgementRanks + 1]int{1}
 var RighteousJudgementCastTime = [RighteousJudgementRanks + 1]int32{0}
 var RighteousJudgementCooldownMS = [RighteousJudgementRanks + 1]int32{0}
 var RighteousJudgementManaCost = [RighteousJudgementRanks + 1]float64{0}
+var RighteousJudgementManaCostPct = [RighteousJudgementRanks + 1]float64{0}
 var RighteousJudgementSpellCoeff = [RighteousJudgementRanks + 1]float64{0.2143}
 var RighteousJudgementBaseDamage = [RighteousJudgementRanks + 1][]float64{{0, 0}}
 
@@ -2344,6 +2525,7 @@ var RighteousShieldLevel = [RighteousShieldRanks + 1]int{0}
 var RighteousShieldCastTime = [RighteousShieldRanks + 1]int32{0}
 var RighteousShieldCooldownMS = [RighteousShieldRanks + 1]int32{0}
 var RighteousShieldManaCost = [RighteousShieldRanks + 1]float64{0}
+var RighteousShieldManaCostPct = [RighteousShieldRanks + 1]float64{0}
 var RighteousShieldSpellCoeff = [RighteousShieldRanks + 1]float64{1}
 var RighteousShieldBaseDamage = [RighteousShieldRanks + 1][]float64{{100, 100}}
 
@@ -2355,6 +2537,7 @@ var RighteousVengeanceLevel = [RighteousVengeanceRanks + 1]int{1}
 var RighteousVengeanceCastTime = [RighteousVengeanceRanks + 1]int32{0}
 var RighteousVengeanceCooldownMS = [RighteousVengeanceRanks + 1]int32{0}
 var RighteousVengeanceManaCost = [RighteousVengeanceRanks + 1]float64{0}
+var RighteousVengeanceManaCostPct = [RighteousVengeanceRanks + 1]float64{0}
 var RighteousVengeanceSpellCoeff = [RighteousVengeanceRanks + 1]float64{0.2143}
 var RighteousVengeanceBaseDamage = [RighteousVengeanceRanks + 1][]float64{{440672, 440672}}
 
@@ -2368,6 +2551,7 @@ var RogueArmorEnergizeLevel = [RogueArmorEnergizeRanks + 1]int{0}
 var RogueArmorEnergizeCastTime = [RogueArmorEnergizeRanks + 1]int32{0}
 var RogueArmorEnergizeCooldownMS = [RogueArmorEnergizeRanks + 1]int32{0}
 var RogueArmorEnergizeManaCost = [RogueArmorEnergizeRanks + 1]float64{0}
+var RogueArmorEnergizeManaCostPct = [RogueArmorEnergizeRanks + 1]float64{0}
 var RogueArmorEnergizeSpellCoeff = [RogueArmorEnergizeRanks + 1]float64{0.2143}
 var RogueArmorEnergizeBaseDamage = [RogueArmorEnergizeRanks + 1][]float64{{1, 1}}
 
@@ -2381,6 +2565,7 @@ var S03ItemNaxxramasPaladinHoly2PBonusLevel = [S03ItemNaxxramasPaladinHoly2PBonu
 var S03ItemNaxxramasPaladinHoly2PBonusCastTime = [S03ItemNaxxramasPaladinHoly2PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinHoly2PBonusCooldownMS = [S03ItemNaxxramasPaladinHoly2PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinHoly2PBonusManaCost = [S03ItemNaxxramasPaladinHoly2PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasPaladinHoly2PBonusManaCostPct = [S03ItemNaxxramasPaladinHoly2PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasPaladinHoly2PBonusSpellCoeff = [S03ItemNaxxramasPaladinHoly2PBonusRanks + 1]float64{0.2143}
 var S03ItemNaxxramasPaladinHoly2PBonusBaseDamage = [S03ItemNaxxramasPaladinHoly2PBonusRanks + 1][]float64{{-2100000, -2100000}}
 
@@ -2394,6 +2579,7 @@ var S03ItemNaxxramasPaladinHoly4PBonusLevel = [S03ItemNaxxramasPaladinHoly4PBonu
 var S03ItemNaxxramasPaladinHoly4PBonusCastTime = [S03ItemNaxxramasPaladinHoly4PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinHoly4PBonusCooldownMS = [S03ItemNaxxramasPaladinHoly4PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinHoly4PBonusManaCost = [S03ItemNaxxramasPaladinHoly4PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasPaladinHoly4PBonusManaCostPct = [S03ItemNaxxramasPaladinHoly4PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasPaladinHoly4PBonusSpellCoeff = [S03ItemNaxxramasPaladinHoly4PBonusRanks + 1]float64{0.2143}
 var S03ItemNaxxramasPaladinHoly4PBonusBaseDamage = [S03ItemNaxxramasPaladinHoly4PBonusRanks + 1][]float64{{0, 0}}
 
@@ -2407,6 +2593,7 @@ var S03ItemNaxxramasPaladinHoly6PBonusLevel = [S03ItemNaxxramasPaladinHoly6PBonu
 var S03ItemNaxxramasPaladinHoly6PBonusCastTime = [S03ItemNaxxramasPaladinHoly6PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinHoly6PBonusCooldownMS = [S03ItemNaxxramasPaladinHoly6PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinHoly6PBonusManaCost = [S03ItemNaxxramasPaladinHoly6PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasPaladinHoly6PBonusManaCostPct = [S03ItemNaxxramasPaladinHoly6PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasPaladinHoly6PBonusSpellCoeff = [S03ItemNaxxramasPaladinHoly6PBonusRanks + 1]float64{0.2143}
 var S03ItemNaxxramasPaladinHoly6PBonusBaseDamage = [S03ItemNaxxramasPaladinHoly6PBonusRanks + 1][]float64{{20, 20}}
 
@@ -2420,6 +2607,7 @@ var S03ItemNaxxramasPaladinProtection2PBonusLevel = [S03ItemNaxxramasPaladinProt
 var S03ItemNaxxramasPaladinProtection2PBonusCastTime = [S03ItemNaxxramasPaladinProtection2PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinProtection2PBonusCooldownMS = [S03ItemNaxxramasPaladinProtection2PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinProtection2PBonusManaCost = [S03ItemNaxxramasPaladinProtection2PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasPaladinProtection2PBonusManaCostPct = [S03ItemNaxxramasPaladinProtection2PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasPaladinProtection2PBonusSpellCoeff = [S03ItemNaxxramasPaladinProtection2PBonusRanks + 1]float64{0.2143}
 var S03ItemNaxxramasPaladinProtection2PBonusBaseDamage = [S03ItemNaxxramasPaladinProtection2PBonusRanks + 1][]float64{{-2, -2}}
 
@@ -2433,6 +2621,7 @@ var S03ItemNaxxramasPaladinProtection4PBonusLevel = [S03ItemNaxxramasPaladinProt
 var S03ItemNaxxramasPaladinProtection4PBonusCastTime = [S03ItemNaxxramasPaladinProtection4PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinProtection4PBonusCooldownMS = [S03ItemNaxxramasPaladinProtection4PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinProtection4PBonusManaCost = [S03ItemNaxxramasPaladinProtection4PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasPaladinProtection4PBonusManaCostPct = [S03ItemNaxxramasPaladinProtection4PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasPaladinProtection4PBonusSpellCoeff = [S03ItemNaxxramasPaladinProtection4PBonusRanks + 1]float64{0.2143}
 var S03ItemNaxxramasPaladinProtection4PBonusBaseDamage = [S03ItemNaxxramasPaladinProtection4PBonusRanks + 1][]float64{{-180000, -180000}}
 
@@ -2446,6 +2635,7 @@ var S03ItemNaxxramasPaladinProtection6PBonusLevel = [S03ItemNaxxramasPaladinProt
 var S03ItemNaxxramasPaladinProtection6PBonusCastTime = [S03ItemNaxxramasPaladinProtection6PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinProtection6PBonusCooldownMS = [S03ItemNaxxramasPaladinProtection6PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinProtection6PBonusManaCost = [S03ItemNaxxramasPaladinProtection6PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasPaladinProtection6PBonusManaCostPct = [S03ItemNaxxramasPaladinProtection6PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasPaladinProtection6PBonusSpellCoeff = [S03ItemNaxxramasPaladinProtection6PBonusRanks + 1]float64{0.2143}
 var S03ItemNaxxramasPaladinProtection6PBonusBaseDamage = [S03ItemNaxxramasPaladinProtection6PBonusRanks + 1][]float64{{50, 50}}
 
@@ -2459,6 +2649,7 @@ var S03ItemNaxxramasPaladinRetribution2PBonusLevel = [S03ItemNaxxramasPaladinRet
 var S03ItemNaxxramasPaladinRetribution2PBonusCastTime = [S03ItemNaxxramasPaladinRetribution2PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinRetribution2PBonusCooldownMS = [S03ItemNaxxramasPaladinRetribution2PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinRetribution2PBonusManaCost = [S03ItemNaxxramasPaladinRetribution2PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasPaladinRetribution2PBonusManaCostPct = [S03ItemNaxxramasPaladinRetribution2PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasPaladinRetribution2PBonusSpellCoeff = [S03ItemNaxxramasPaladinRetribution2PBonusRanks + 1]float64{0.2143}
 var S03ItemNaxxramasPaladinRetribution2PBonusBaseDamage = [S03ItemNaxxramasPaladinRetribution2PBonusRanks + 1][]float64{{100, 100}}
 
@@ -2472,6 +2663,7 @@ var S03ItemNaxxramasPaladinRetribution4PBonusLevel = [S03ItemNaxxramasPaladinRet
 var S03ItemNaxxramasPaladinRetribution4PBonusCastTime = [S03ItemNaxxramasPaladinRetribution4PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinRetribution4PBonusCooldownMS = [S03ItemNaxxramasPaladinRetribution4PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinRetribution4PBonusManaCost = [S03ItemNaxxramasPaladinRetribution4PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasPaladinRetribution4PBonusManaCostPct = [S03ItemNaxxramasPaladinRetribution4PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasPaladinRetribution4PBonusSpellCoeff = [S03ItemNaxxramasPaladinRetribution4PBonusRanks + 1]float64{0.2143}
 var S03ItemNaxxramasPaladinRetribution4PBonusBaseDamage = [S03ItemNaxxramasPaladinRetribution4PBonusRanks + 1][]float64{{-100, -100}}
 
@@ -2485,6 +2677,7 @@ var S03ItemNaxxramasPaladinRetribution6PBonusLevel = [S03ItemNaxxramasPaladinRet
 var S03ItemNaxxramasPaladinRetribution6PBonusCastTime = [S03ItemNaxxramasPaladinRetribution6PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinRetribution6PBonusCooldownMS = [S03ItemNaxxramasPaladinRetribution6PBonusRanks + 1]int32{0}
 var S03ItemNaxxramasPaladinRetribution6PBonusManaCost = [S03ItemNaxxramasPaladinRetribution6PBonusRanks + 1]float64{0}
+var S03ItemNaxxramasPaladinRetribution6PBonusManaCostPct = [S03ItemNaxxramasPaladinRetribution6PBonusRanks + 1]float64{0}
 var S03ItemNaxxramasPaladinRetribution6PBonusSpellCoeff = [S03ItemNaxxramasPaladinRetribution6PBonusRanks + 1]float64{0.2143}
 var S03ItemNaxxramasPaladinRetribution6PBonusBaseDamage = [S03ItemNaxxramasPaladinRetribution6PBonusRanks + 1][]float64{{-100, -100}}
 
@@ -2498,6 +2691,7 @@ var S03ItemRAQPaladinRetribution3PBonusLevel = [S03ItemRAQPaladinRetribution3PBo
 var S03ItemRAQPaladinRetribution3PBonusCastTime = [S03ItemRAQPaladinRetribution3PBonusRanks + 1]int32{0}
 var S03ItemRAQPaladinRetribution3PBonusCooldownMS = [S03ItemRAQPaladinRetribution3PBonusRanks + 1]int32{0}
 var S03ItemRAQPaladinRetribution3PBonusManaCost = [S03ItemRAQPaladinRetribution3PBonusRanks + 1]float64{0}
+var S03ItemRAQPaladinRetribution3PBonusManaCostPct = [S03ItemRAQPaladinRetribution3PBonusRanks + 1]float64{0}
 var S03ItemRAQPaladinRetribution3PBonusSpellCoeff = [S03ItemRAQPaladinRetribution3PBonusRanks + 1]float64{0.2143}
 var S03ItemRAQPaladinRetribution3PBonusBaseDamage = [S03ItemRAQPaladinRetribution3PBonusRanks + 1][]float64{{100, 100}}
 
@@ -2511,6 +2705,7 @@ var S03ItemScarletEnclavePaladinHoly2PBonusLevel = [S03ItemScarletEnclavePaladin
 var S03ItemScarletEnclavePaladinHoly2PBonusCastTime = [S03ItemScarletEnclavePaladinHoly2PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinHoly2PBonusCooldownMS = [S03ItemScarletEnclavePaladinHoly2PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinHoly2PBonusManaCost = [S03ItemScarletEnclavePaladinHoly2PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclavePaladinHoly2PBonusManaCostPct = [S03ItemScarletEnclavePaladinHoly2PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclavePaladinHoly2PBonusSpellCoeff = [S03ItemScarletEnclavePaladinHoly2PBonusRanks + 1]float64{0.2143}
 var S03ItemScarletEnclavePaladinHoly2PBonusBaseDamage = [S03ItemScarletEnclavePaladinHoly2PBonusRanks + 1][]float64{{20, 20}}
 
@@ -2524,6 +2719,7 @@ var S03ItemScarletEnclavePaladinHoly4PBonusLevel = [S03ItemScarletEnclavePaladin
 var S03ItemScarletEnclavePaladinHoly4PBonusCastTime = [S03ItemScarletEnclavePaladinHoly4PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinHoly4PBonusCooldownMS = [S03ItemScarletEnclavePaladinHoly4PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinHoly4PBonusManaCost = [S03ItemScarletEnclavePaladinHoly4PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclavePaladinHoly4PBonusManaCostPct = [S03ItemScarletEnclavePaladinHoly4PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclavePaladinHoly4PBonusSpellCoeff = [S03ItemScarletEnclavePaladinHoly4PBonusRanks + 1]float64{0.2143}
 var S03ItemScarletEnclavePaladinHoly4PBonusBaseDamage = [S03ItemScarletEnclavePaladinHoly4PBonusRanks + 1][]float64{{100, 100}}
 
@@ -2537,6 +2733,7 @@ var S03ItemScarletEnclavePaladinHoly6PBonusLevel = [S03ItemScarletEnclavePaladin
 var S03ItemScarletEnclavePaladinHoly6PBonusCastTime = [S03ItemScarletEnclavePaladinHoly6PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinHoly6PBonusCooldownMS = [S03ItemScarletEnclavePaladinHoly6PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinHoly6PBonusManaCost = [S03ItemScarletEnclavePaladinHoly6PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclavePaladinHoly6PBonusManaCostPct = [S03ItemScarletEnclavePaladinHoly6PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclavePaladinHoly6PBonusSpellCoeff = [S03ItemScarletEnclavePaladinHoly6PBonusRanks + 1]float64{0.2143}
 var S03ItemScarletEnclavePaladinHoly6PBonusBaseDamage = [S03ItemScarletEnclavePaladinHoly6PBonusRanks + 1][]float64{{25, 25}}
 
@@ -2550,6 +2747,7 @@ var S03ItemScarletEnclavePaladinProtection2PBonusLevel = [S03ItemScarletEnclaveP
 var S03ItemScarletEnclavePaladinProtection2PBonusCastTime = [S03ItemScarletEnclavePaladinProtection2PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinProtection2PBonusCooldownMS = [S03ItemScarletEnclavePaladinProtection2PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinProtection2PBonusManaCost = [S03ItemScarletEnclavePaladinProtection2PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclavePaladinProtection2PBonusManaCostPct = [S03ItemScarletEnclavePaladinProtection2PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclavePaladinProtection2PBonusSpellCoeff = [S03ItemScarletEnclavePaladinProtection2PBonusRanks + 1]float64{0.2143}
 var S03ItemScarletEnclavePaladinProtection2PBonusBaseDamage = [S03ItemScarletEnclavePaladinProtection2PBonusRanks + 1][]float64{{20, 20}}
 
@@ -2563,6 +2761,7 @@ var S03ItemScarletEnclavePaladinProtection4PBonusLevel = [S03ItemScarletEnclaveP
 var S03ItemScarletEnclavePaladinProtection4PBonusCastTime = [S03ItemScarletEnclavePaladinProtection4PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinProtection4PBonusCooldownMS = [S03ItemScarletEnclavePaladinProtection4PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinProtection4PBonusManaCost = [S03ItemScarletEnclavePaladinProtection4PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclavePaladinProtection4PBonusManaCostPct = [S03ItemScarletEnclavePaladinProtection4PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclavePaladinProtection4PBonusSpellCoeff = [S03ItemScarletEnclavePaladinProtection4PBonusRanks + 1]float64{0.2143}
 var S03ItemScarletEnclavePaladinProtection4PBonusBaseDamage = [S03ItemScarletEnclavePaladinProtection4PBonusRanks + 1][]float64{{20, 20}}
 
@@ -2576,6 +2775,7 @@ var S03ItemScarletEnclavePaladinProtection6PBonusLevel = [S03ItemScarletEnclaveP
 var S03ItemScarletEnclavePaladinProtection6PBonusCastTime = [S03ItemScarletEnclavePaladinProtection6PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinProtection6PBonusCooldownMS = [S03ItemScarletEnclavePaladinProtection6PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinProtection6PBonusManaCost = [S03ItemScarletEnclavePaladinProtection6PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclavePaladinProtection6PBonusManaCostPct = [S03ItemScarletEnclavePaladinProtection6PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclavePaladinProtection6PBonusSpellCoeff = [S03ItemScarletEnclavePaladinProtection6PBonusRanks + 1]float64{0.2143}
 var S03ItemScarletEnclavePaladinProtection6PBonusBaseDamage = [S03ItemScarletEnclavePaladinProtection6PBonusRanks + 1][]float64{{50, 50}}
 
@@ -2589,6 +2789,7 @@ var S03ItemScarletEnclavePaladinRetribution2PBonusLevel = [S03ItemScarletEnclave
 var S03ItemScarletEnclavePaladinRetribution2PBonusCastTime = [S03ItemScarletEnclavePaladinRetribution2PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinRetribution2PBonusCooldownMS = [S03ItemScarletEnclavePaladinRetribution2PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinRetribution2PBonusManaCost = [S03ItemScarletEnclavePaladinRetribution2PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclavePaladinRetribution2PBonusManaCostPct = [S03ItemScarletEnclavePaladinRetribution2PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclavePaladinRetribution2PBonusSpellCoeff = [S03ItemScarletEnclavePaladinRetribution2PBonusRanks + 1]float64{0.2143}
 var S03ItemScarletEnclavePaladinRetribution2PBonusBaseDamage = [S03ItemScarletEnclavePaladinRetribution2PBonusRanks + 1][]float64{{20, 20}}
 
@@ -2602,6 +2803,7 @@ var S03ItemScarletEnclavePaladinRetribution4PBonusLevel = [S03ItemScarletEnclave
 var S03ItemScarletEnclavePaladinRetribution4PBonusCastTime = [S03ItemScarletEnclavePaladinRetribution4PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinRetribution4PBonusCooldownMS = [S03ItemScarletEnclavePaladinRetribution4PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinRetribution4PBonusManaCost = [S03ItemScarletEnclavePaladinRetribution4PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclavePaladinRetribution4PBonusManaCostPct = [S03ItemScarletEnclavePaladinRetribution4PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclavePaladinRetribution4PBonusSpellCoeff = [S03ItemScarletEnclavePaladinRetribution4PBonusRanks + 1]float64{0.2143}
 var S03ItemScarletEnclavePaladinRetribution4PBonusBaseDamage = [S03ItemScarletEnclavePaladinRetribution4PBonusRanks + 1][]float64{{100, 100}}
 
@@ -2615,6 +2817,7 @@ var S03ItemScarletEnclavePaladinRetribution6PBonusLevel = [S03ItemScarletEnclave
 var S03ItemScarletEnclavePaladinRetribution6PBonusCastTime = [S03ItemScarletEnclavePaladinRetribution6PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinRetribution6PBonusCooldownMS = [S03ItemScarletEnclavePaladinRetribution6PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinRetribution6PBonusManaCost = [S03ItemScarletEnclavePaladinRetribution6PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclavePaladinRetribution6PBonusManaCostPct = [S03ItemScarletEnclavePaladinRetribution6PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclavePaladinRetribution6PBonusSpellCoeff = [S03ItemScarletEnclavePaladinRetribution6PBonusRanks + 1]float64{0.2143}
 var S03ItemScarletEnclavePaladinRetribution6PBonusBaseDamage = [S03ItemScarletEnclavePaladinRetribution6PBonusRanks + 1][]float64{{100, 100}}
 
@@ -2628,6 +2831,7 @@ var S03ItemScarletEnclavePaladinShockadin2PBonusLevel = [S03ItemScarletEnclavePa
 var S03ItemScarletEnclavePaladinShockadin2PBonusCastTime = [S03ItemScarletEnclavePaladinShockadin2PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinShockadin2PBonusCooldownMS = [S03ItemScarletEnclavePaladinShockadin2PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinShockadin2PBonusManaCost = [S03ItemScarletEnclavePaladinShockadin2PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclavePaladinShockadin2PBonusManaCostPct = [S03ItemScarletEnclavePaladinShockadin2PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclavePaladinShockadin2PBonusSpellCoeff = [S03ItemScarletEnclavePaladinShockadin2PBonusRanks + 1]float64{0.2143}
 var S03ItemScarletEnclavePaladinShockadin2PBonusBaseDamage = [S03ItemScarletEnclavePaladinShockadin2PBonusRanks + 1][]float64{{10, 10}}
 
@@ -2641,6 +2845,7 @@ var S03ItemScarletEnclavePaladinShockadin6PBonusLevel = [S03ItemScarletEnclavePa
 var S03ItemScarletEnclavePaladinShockadin6PBonusCastTime = [S03ItemScarletEnclavePaladinShockadin6PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinShockadin6PBonusCooldownMS = [S03ItemScarletEnclavePaladinShockadin6PBonusRanks + 1]int32{0}
 var S03ItemScarletEnclavePaladinShockadin6PBonusManaCost = [S03ItemScarletEnclavePaladinShockadin6PBonusRanks + 1]float64{0}
+var S03ItemScarletEnclavePaladinShockadin6PBonusManaCostPct = [S03ItemScarletEnclavePaladinShockadin6PBonusRanks + 1]float64{0}
 var S03ItemScarletEnclavePaladinShockadin6PBonusSpellCoeff = [S03ItemScarletEnclavePaladinShockadin6PBonusRanks + 1]float64{0.2143}
 var S03ItemScarletEnclavePaladinShockadin6PBonusBaseDamage = [S03ItemScarletEnclavePaladinShockadin6PBonusRanks + 1][]float64{{100, 100}}
 
@@ -2654,6 +2859,7 @@ var S03ItemT1PaladinHoly2PBonusLevel = [S03ItemT1PaladinHoly2PBonusRanks + 1]int
 var S03ItemT1PaladinHoly2PBonusCastTime = [S03ItemT1PaladinHoly2PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinHoly2PBonusCooldownMS = [S03ItemT1PaladinHoly2PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinHoly2PBonusManaCost = [S03ItemT1PaladinHoly2PBonusRanks + 1]float64{0}
+var S03ItemT1PaladinHoly2PBonusManaCostPct = [S03ItemT1PaladinHoly2PBonusRanks + 1]float64{0}
 var S03ItemT1PaladinHoly2PBonusSpellCoeff = [S03ItemT1PaladinHoly2PBonusRanks + 1]float64{1}
 var S03ItemT1PaladinHoly2PBonusBaseDamage = [S03ItemT1PaladinHoly2PBonusRanks + 1][]float64{{70, 70}}
 
@@ -2665,6 +2871,7 @@ var S03ItemT1PaladinHoly6PBonusLevel = [S03ItemT1PaladinHoly6PBonusRanks + 1]int
 var S03ItemT1PaladinHoly6PBonusCastTime = [S03ItemT1PaladinHoly6PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinHoly6PBonusCooldownMS = [S03ItemT1PaladinHoly6PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinHoly6PBonusManaCost = [S03ItemT1PaladinHoly6PBonusRanks + 1]float64{0}
+var S03ItemT1PaladinHoly6PBonusManaCostPct = [S03ItemT1PaladinHoly6PBonusRanks + 1]float64{0}
 var S03ItemT1PaladinHoly6PBonusSpellCoeff = [S03ItemT1PaladinHoly6PBonusRanks + 1]float64{1}
 var S03ItemT1PaladinHoly6PBonusBaseDamage = [S03ItemT1PaladinHoly6PBonusRanks + 1][]float64{{200, 200}}
 
@@ -2676,6 +2883,7 @@ var S03ItemT1PaladinProtection2PBonusLevel = [S03ItemT1PaladinProtection2PBonusR
 var S03ItemT1PaladinProtection2PBonusCastTime = [S03ItemT1PaladinProtection2PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinProtection2PBonusCooldownMS = [S03ItemT1PaladinProtection2PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinProtection2PBonusManaCost = [S03ItemT1PaladinProtection2PBonusRanks + 1]float64{0}
+var S03ItemT1PaladinProtection2PBonusManaCostPct = [S03ItemT1PaladinProtection2PBonusRanks + 1]float64{0}
 var S03ItemT1PaladinProtection2PBonusSpellCoeff = [S03ItemT1PaladinProtection2PBonusRanks + 1]float64{1}
 var S03ItemT1PaladinProtection2PBonusBaseDamage = [S03ItemT1PaladinProtection2PBonusRanks + 1][]float64{{30, 30}}
 
@@ -2687,6 +2895,7 @@ var S03ItemT1PaladinProtection4PBonusLevel = [S03ItemT1PaladinProtection4PBonusR
 var S03ItemT1PaladinProtection4PBonusCastTime = [S03ItemT1PaladinProtection4PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinProtection4PBonusCooldownMS = [S03ItemT1PaladinProtection4PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinProtection4PBonusManaCost = [S03ItemT1PaladinProtection4PBonusRanks + 1]float64{0}
+var S03ItemT1PaladinProtection4PBonusManaCostPct = [S03ItemT1PaladinProtection4PBonusRanks + 1]float64{0}
 var S03ItemT1PaladinProtection4PBonusSpellCoeff = [S03ItemT1PaladinProtection4PBonusRanks + 1]float64{1}
 var S03ItemT1PaladinProtection4PBonusBaseDamage = [S03ItemT1PaladinProtection4PBonusRanks + 1][]float64{{30, 30}}
 
@@ -2698,6 +2907,7 @@ var S03ItemT1PaladinProtection6PBonusLevel = [S03ItemT1PaladinProtection6PBonusR
 var S03ItemT1PaladinProtection6PBonusCastTime = [S03ItemT1PaladinProtection6PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinProtection6PBonusCooldownMS = [S03ItemT1PaladinProtection6PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinProtection6PBonusManaCost = [S03ItemT1PaladinProtection6PBonusRanks + 1]float64{0}
+var S03ItemT1PaladinProtection6PBonusManaCostPct = [S03ItemT1PaladinProtection6PBonusRanks + 1]float64{0}
 var S03ItemT1PaladinProtection6PBonusSpellCoeff = [S03ItemT1PaladinProtection6PBonusRanks + 1]float64{1}
 var S03ItemT1PaladinProtection6PBonusBaseDamage = [S03ItemT1PaladinProtection6PBonusRanks + 1][]float64{{-4, -4}}
 
@@ -2709,6 +2919,7 @@ var S03ItemT1PaladinRetribution2PBonusLevel = [S03ItemT1PaladinRetribution2PBonu
 var S03ItemT1PaladinRetribution2PBonusCastTime = [S03ItemT1PaladinRetribution2PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinRetribution2PBonusCooldownMS = [S03ItemT1PaladinRetribution2PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinRetribution2PBonusManaCost = [S03ItemT1PaladinRetribution2PBonusRanks + 1]float64{0}
+var S03ItemT1PaladinRetribution2PBonusManaCostPct = [S03ItemT1PaladinRetribution2PBonusRanks + 1]float64{0}
 var S03ItemT1PaladinRetribution2PBonusSpellCoeff = [S03ItemT1PaladinRetribution2PBonusRanks + 1]float64{1}
 var S03ItemT1PaladinRetribution2PBonusBaseDamage = [S03ItemT1PaladinRetribution2PBonusRanks + 1][]float64{{100, 100}}
 
@@ -2720,6 +2931,7 @@ var S03ItemT1PaladinRetribution6PBonusLevel = [S03ItemT1PaladinRetribution6PBonu
 var S03ItemT1PaladinRetribution6PBonusCastTime = [S03ItemT1PaladinRetribution6PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinRetribution6PBonusCooldownMS = [S03ItemT1PaladinRetribution6PBonusRanks + 1]int32{0}
 var S03ItemT1PaladinRetribution6PBonusManaCost = [S03ItemT1PaladinRetribution6PBonusRanks + 1]float64{0}
+var S03ItemT1PaladinRetribution6PBonusManaCostPct = [S03ItemT1PaladinRetribution6PBonusRanks + 1]float64{0}
 var S03ItemT1PaladinRetribution6PBonusSpellCoeff = [S03ItemT1PaladinRetribution6PBonusRanks + 1]float64{1}
 var S03ItemT1PaladinRetribution6PBonusBaseDamage = [S03ItemT1PaladinRetribution6PBonusRanks + 1][]float64{{6, 6}}
 
@@ -2731,6 +2943,7 @@ var S03ItemT2PaladinHoly2PBonusLevel = [S03ItemT2PaladinHoly2PBonusRanks + 1]int
 var S03ItemT2PaladinHoly2PBonusCastTime = [S03ItemT2PaladinHoly2PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinHoly2PBonusCooldownMS = [S03ItemT2PaladinHoly2PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinHoly2PBonusManaCost = [S03ItemT2PaladinHoly2PBonusRanks + 1]float64{0}
+var S03ItemT2PaladinHoly2PBonusManaCostPct = [S03ItemT2PaladinHoly2PBonusRanks + 1]float64{0}
 var S03ItemT2PaladinHoly2PBonusSpellCoeff = [S03ItemT2PaladinHoly2PBonusRanks + 1]float64{1}
 var S03ItemT2PaladinHoly2PBonusBaseDamage = [S03ItemT2PaladinHoly2PBonusRanks + 1][]float64{{5, 5}}
 
@@ -2742,6 +2955,7 @@ var S03ItemT2PaladinHoly4PBonusLevel = [S03ItemT2PaladinHoly4PBonusRanks + 1]int
 var S03ItemT2PaladinHoly4PBonusCastTime = [S03ItemT2PaladinHoly4PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinHoly4PBonusCooldownMS = [S03ItemT2PaladinHoly4PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinHoly4PBonusManaCost = [S03ItemT2PaladinHoly4PBonusRanks + 1]float64{0}
+var S03ItemT2PaladinHoly4PBonusManaCostPct = [S03ItemT2PaladinHoly4PBonusRanks + 1]float64{0}
 var S03ItemT2PaladinHoly4PBonusSpellCoeff = [S03ItemT2PaladinHoly4PBonusRanks + 1]float64{1}
 var S03ItemT2PaladinHoly4PBonusBaseDamage = [S03ItemT2PaladinHoly4PBonusRanks + 1][]float64{{50, 50}}
 
@@ -2753,6 +2967,7 @@ var S03ItemT2PaladinHoly6PBonusLevel = [S03ItemT2PaladinHoly6PBonusRanks + 1]int
 var S03ItemT2PaladinHoly6PBonusCastTime = [S03ItemT2PaladinHoly6PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinHoly6PBonusCooldownMS = [S03ItemT2PaladinHoly6PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinHoly6PBonusManaCost = [S03ItemT2PaladinHoly6PBonusRanks + 1]float64{0}
+var S03ItemT2PaladinHoly6PBonusManaCostPct = [S03ItemT2PaladinHoly6PBonusRanks + 1]float64{0}
 var S03ItemT2PaladinHoly6PBonusSpellCoeff = [S03ItemT2PaladinHoly6PBonusRanks + 1]float64{1}
 var S03ItemT2PaladinHoly6PBonusBaseDamage = [S03ItemT2PaladinHoly6PBonusRanks + 1][]float64{{75, 75}}
 
@@ -2764,6 +2979,7 @@ var S03ItemT2PaladinProtection2PBonusLevel = [S03ItemT2PaladinProtection2PBonusR
 var S03ItemT2PaladinProtection2PBonusCastTime = [S03ItemT2PaladinProtection2PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinProtection2PBonusCooldownMS = [S03ItemT2PaladinProtection2PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinProtection2PBonusManaCost = [S03ItemT2PaladinProtection2PBonusRanks + 1]float64{0}
+var S03ItemT2PaladinProtection2PBonusManaCostPct = [S03ItemT2PaladinProtection2PBonusRanks + 1]float64{0}
 var S03ItemT2PaladinProtection2PBonusSpellCoeff = [S03ItemT2PaladinProtection2PBonusRanks + 1]float64{1}
 var S03ItemT2PaladinProtection2PBonusBaseDamage = [S03ItemT2PaladinProtection2PBonusRanks + 1][]float64{{10, 10}}
 
@@ -2775,6 +2991,7 @@ var S03ItemT2PaladinProtection4PBonusLevel = [S03ItemT2PaladinProtection4PBonusR
 var S03ItemT2PaladinProtection4PBonusCastTime = [S03ItemT2PaladinProtection4PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinProtection4PBonusCooldownMS = [S03ItemT2PaladinProtection4PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinProtection4PBonusManaCost = [S03ItemT2PaladinProtection4PBonusRanks + 1]float64{0}
+var S03ItemT2PaladinProtection4PBonusManaCostPct = [S03ItemT2PaladinProtection4PBonusRanks + 1]float64{0}
 var S03ItemT2PaladinProtection4PBonusSpellCoeff = [S03ItemT2PaladinProtection4PBonusRanks + 1]float64{1}
 var S03ItemT2PaladinProtection4PBonusBaseDamage = [S03ItemT2PaladinProtection4PBonusRanks + 1][]float64{{10, 10}}
 
@@ -2786,6 +3003,7 @@ var S03ItemT2PaladinProtection6PBonusLevel = [S03ItemT2PaladinProtection6PBonusR
 var S03ItemT2PaladinProtection6PBonusCastTime = [S03ItemT2PaladinProtection6PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinProtection6PBonusCooldownMS = [S03ItemT2PaladinProtection6PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinProtection6PBonusManaCost = [S03ItemT2PaladinProtection6PBonusRanks + 1]float64{0}
+var S03ItemT2PaladinProtection6PBonusManaCostPct = [S03ItemT2PaladinProtection6PBonusRanks + 1]float64{0}
 var S03ItemT2PaladinProtection6PBonusSpellCoeff = [S03ItemT2PaladinProtection6PBonusRanks + 1]float64{1}
 var S03ItemT2PaladinProtection6PBonusBaseDamage = [S03ItemT2PaladinProtection6PBonusRanks + 1][]float64{{20, 20}}
 
@@ -2797,6 +3015,7 @@ var S03ItemT2PaladinRetribution2PBonusLevel = [S03ItemT2PaladinRetribution2PBonu
 var S03ItemT2PaladinRetribution2PBonusCastTime = [S03ItemT2PaladinRetribution2PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinRetribution2PBonusCooldownMS = [S03ItemT2PaladinRetribution2PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinRetribution2PBonusManaCost = [S03ItemT2PaladinRetribution2PBonusRanks + 1]float64{0}
+var S03ItemT2PaladinRetribution2PBonusManaCostPct = [S03ItemT2PaladinRetribution2PBonusRanks + 1]float64{0}
 var S03ItemT2PaladinRetribution2PBonusSpellCoeff = [S03ItemT2PaladinRetribution2PBonusRanks + 1]float64{1}
 var S03ItemT2PaladinRetribution2PBonusBaseDamage = [S03ItemT2PaladinRetribution2PBonusRanks + 1][]float64{{20, 20}}
 
@@ -2808,6 +3027,7 @@ var S03ItemT2PaladinRetribution4PBonusLevel = [S03ItemT2PaladinRetribution4PBonu
 var S03ItemT2PaladinRetribution4PBonusCastTime = [S03ItemT2PaladinRetribution4PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinRetribution4PBonusCooldownMS = [S03ItemT2PaladinRetribution4PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinRetribution4PBonusManaCost = [S03ItemT2PaladinRetribution4PBonusRanks + 1]float64{0}
+var S03ItemT2PaladinRetribution4PBonusManaCostPct = [S03ItemT2PaladinRetribution4PBonusRanks + 1]float64{0}
 var S03ItemT2PaladinRetribution4PBonusSpellCoeff = [S03ItemT2PaladinRetribution4PBonusRanks + 1]float64{1}
 var S03ItemT2PaladinRetribution4PBonusBaseDamage = [S03ItemT2PaladinRetribution4PBonusRanks + 1][]float64{{-5000, -5000}}
 
@@ -2819,6 +3039,7 @@ var S03ItemT2PaladinRetribution6PBonusLevel = [S03ItemT2PaladinRetribution6PBonu
 var S03ItemT2PaladinRetribution6PBonusCastTime = [S03ItemT2PaladinRetribution6PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinRetribution6PBonusCooldownMS = [S03ItemT2PaladinRetribution6PBonusRanks + 1]int32{0}
 var S03ItemT2PaladinRetribution6PBonusManaCost = [S03ItemT2PaladinRetribution6PBonusRanks + 1]float64{0}
+var S03ItemT2PaladinRetribution6PBonusManaCostPct = [S03ItemT2PaladinRetribution6PBonusRanks + 1]float64{0}
 var S03ItemT2PaladinRetribution6PBonusSpellCoeff = [S03ItemT2PaladinRetribution6PBonusRanks + 1]float64{1}
 var S03ItemT2PaladinRetribution6PBonusBaseDamage = [S03ItemT2PaladinRetribution6PBonusRanks + 1][]float64{{20, 20}}
 
@@ -2830,6 +3051,7 @@ var S03ItemTAQPaladinHoly2PBonusLevel = [S03ItemTAQPaladinHoly2PBonusRanks + 1]i
 var S03ItemTAQPaladinHoly2PBonusCastTime = [S03ItemTAQPaladinHoly2PBonusRanks + 1]int32{0}
 var S03ItemTAQPaladinHoly2PBonusCooldownMS = [S03ItemTAQPaladinHoly2PBonusRanks + 1]int32{0}
 var S03ItemTAQPaladinHoly2PBonusManaCost = [S03ItemTAQPaladinHoly2PBonusRanks + 1]float64{0}
+var S03ItemTAQPaladinHoly2PBonusManaCostPct = [S03ItemTAQPaladinHoly2PBonusRanks + 1]float64{0}
 var S03ItemTAQPaladinHoly2PBonusSpellCoeff = [S03ItemTAQPaladinHoly2PBonusRanks + 1]float64{0.2143}
 var S03ItemTAQPaladinHoly2PBonusBaseDamage = [S03ItemTAQPaladinHoly2PBonusRanks + 1][]float64{{-25, -25}}
 
@@ -2843,6 +3065,7 @@ var S03ItemTAQPaladinHoly4PBonusLevel = [S03ItemTAQPaladinHoly4PBonusRanks + 1]i
 var S03ItemTAQPaladinHoly4PBonusCastTime = [S03ItemTAQPaladinHoly4PBonusRanks + 1]int32{0}
 var S03ItemTAQPaladinHoly4PBonusCooldownMS = [S03ItemTAQPaladinHoly4PBonusRanks + 1]int32{0}
 var S03ItemTAQPaladinHoly4PBonusManaCost = [S03ItemTAQPaladinHoly4PBonusRanks + 1]float64{0}
+var S03ItemTAQPaladinHoly4PBonusManaCostPct = [S03ItemTAQPaladinHoly4PBonusRanks + 1]float64{0}
 var S03ItemTAQPaladinHoly4PBonusSpellCoeff = [S03ItemTAQPaladinHoly4PBonusRanks + 1]float64{0.2143}
 var S03ItemTAQPaladinHoly4PBonusBaseDamage = [S03ItemTAQPaladinHoly4PBonusRanks + 1][]float64{{90, 90}}
 
@@ -2856,6 +3079,7 @@ var S03ItemTAQPaladinProtection2PBonusLevel = [S03ItemTAQPaladinProtection2PBonu
 var S03ItemTAQPaladinProtection2PBonusCastTime = [S03ItemTAQPaladinProtection2PBonusRanks + 1]int32{0}
 var S03ItemTAQPaladinProtection2PBonusCooldownMS = [S03ItemTAQPaladinProtection2PBonusRanks + 1]int32{0}
 var S03ItemTAQPaladinProtection2PBonusManaCost = [S03ItemTAQPaladinProtection2PBonusRanks + 1]float64{0}
+var S03ItemTAQPaladinProtection2PBonusManaCostPct = [S03ItemTAQPaladinProtection2PBonusRanks + 1]float64{0}
 var S03ItemTAQPaladinProtection2PBonusSpellCoeff = [S03ItemTAQPaladinProtection2PBonusRanks + 1]float64{0.2143}
 var S03ItemTAQPaladinProtection2PBonusBaseDamage = [S03ItemTAQPaladinProtection2PBonusRanks + 1][]float64{{10, 10}}
 
@@ -2869,6 +3093,7 @@ var S03ItemTAQPaladinProtection4PBonusLevel = [S03ItemTAQPaladinProtection4PBonu
 var S03ItemTAQPaladinProtection4PBonusCastTime = [S03ItemTAQPaladinProtection4PBonusRanks + 1]int32{0}
 var S03ItemTAQPaladinProtection4PBonusCooldownMS = [S03ItemTAQPaladinProtection4PBonusRanks + 1]int32{0}
 var S03ItemTAQPaladinProtection4PBonusManaCost = [S03ItemTAQPaladinProtection4PBonusRanks + 1]float64{0}
+var S03ItemTAQPaladinProtection4PBonusManaCostPct = [S03ItemTAQPaladinProtection4PBonusRanks + 1]float64{0}
 var S03ItemTAQPaladinProtection4PBonusSpellCoeff = [S03ItemTAQPaladinProtection4PBonusRanks + 1]float64{0.2143}
 var S03ItemTAQPaladinProtection4PBonusBaseDamage = [S03ItemTAQPaladinProtection4PBonusRanks + 1][]float64{{100, 100}}
 
@@ -2882,6 +3107,7 @@ var S03ItemTAQPaladinRetribution2PBonusLevel = [S03ItemTAQPaladinRetribution2PBo
 var S03ItemTAQPaladinRetribution2PBonusCastTime = [S03ItemTAQPaladinRetribution2PBonusRanks + 1]int32{0}
 var S03ItemTAQPaladinRetribution2PBonusCooldownMS = [S03ItemTAQPaladinRetribution2PBonusRanks + 1]int32{0}
 var S03ItemTAQPaladinRetribution2PBonusManaCost = [S03ItemTAQPaladinRetribution2PBonusRanks + 1]float64{0}
+var S03ItemTAQPaladinRetribution2PBonusManaCostPct = [S03ItemTAQPaladinRetribution2PBonusRanks + 1]float64{0}
 var S03ItemTAQPaladinRetribution2PBonusSpellCoeff = [S03ItemTAQPaladinRetribution2PBonusRanks + 1]float64{0.2143}
 var S03ItemTAQPaladinRetribution2PBonusBaseDamage = [S03ItemTAQPaladinRetribution2PBonusRanks + 1][]float64{{50, 50}}
 
@@ -2895,6 +3121,7 @@ var S03ItemTAQPaladinRetribution4PBonusLevel = [S03ItemTAQPaladinRetribution4PBo
 var S03ItemTAQPaladinRetribution4PBonusCastTime = [S03ItemTAQPaladinRetribution4PBonusRanks + 1]int32{0}
 var S03ItemTAQPaladinRetribution4PBonusCooldownMS = [S03ItemTAQPaladinRetribution4PBonusRanks + 1]int32{0}
 var S03ItemTAQPaladinRetribution4PBonusManaCost = [S03ItemTAQPaladinRetribution4PBonusRanks + 1]float64{0}
+var S03ItemTAQPaladinRetribution4PBonusManaCostPct = [S03ItemTAQPaladinRetribution4PBonusRanks + 1]float64{0}
 var S03ItemTAQPaladinRetribution4PBonusSpellCoeff = [S03ItemTAQPaladinRetribution4PBonusRanks + 1]float64{0.2143}
 var S03ItemTAQPaladinRetribution4PBonusBaseDamage = [S03ItemTAQPaladinRetribution4PBonusRanks + 1][]float64{{3, 3}}
 
@@ -2908,6 +3135,7 @@ var S03ItemZGPaladinCaster2PBonusLevel = [S03ItemZGPaladinCaster2PBonusRanks + 1
 var S03ItemZGPaladinCaster2PBonusCastTime = [S03ItemZGPaladinCaster2PBonusRanks + 1]int32{0}
 var S03ItemZGPaladinCaster2PBonusCooldownMS = [S03ItemZGPaladinCaster2PBonusRanks + 1]int32{0}
 var S03ItemZGPaladinCaster2PBonusManaCost = [S03ItemZGPaladinCaster2PBonusRanks + 1]float64{0}
+var S03ItemZGPaladinCaster2PBonusManaCostPct = [S03ItemZGPaladinCaster2PBonusRanks + 1]float64{0}
 var S03ItemZGPaladinCaster2PBonusSpellCoeff = [S03ItemZGPaladinCaster2PBonusRanks + 1]float64{0.2143}
 var S03ItemZGPaladinCaster2PBonusBaseDamage = [S03ItemZGPaladinCaster2PBonusRanks + 1][]float64{{14, 14}}
 
@@ -2921,6 +3149,7 @@ var S03ItemZGPaladinCaster3PBonusLevel = [S03ItemZGPaladinCaster3PBonusRanks + 1
 var S03ItemZGPaladinCaster3PBonusCastTime = [S03ItemZGPaladinCaster3PBonusRanks + 1]int32{0}
 var S03ItemZGPaladinCaster3PBonusCooldownMS = [S03ItemZGPaladinCaster3PBonusRanks + 1]int32{0}
 var S03ItemZGPaladinCaster3PBonusManaCost = [S03ItemZGPaladinCaster3PBonusRanks + 1]float64{0}
+var S03ItemZGPaladinCaster3PBonusManaCostPct = [S03ItemZGPaladinCaster3PBonusRanks + 1]float64{0}
 var S03ItemZGPaladinCaster3PBonusSpellCoeff = [S03ItemZGPaladinCaster3PBonusRanks + 1]float64{0.2143}
 var S03ItemZGPaladinCaster3PBonusBaseDamage = [S03ItemZGPaladinCaster3PBonusRanks + 1][]float64{{50, 50}}
 
@@ -2934,6 +3163,7 @@ var S03ItemZGPaladinCaster5PBonusLevel = [S03ItemZGPaladinCaster5PBonusRanks + 1
 var S03ItemZGPaladinCaster5PBonusCastTime = [S03ItemZGPaladinCaster5PBonusRanks + 1]int32{0}
 var S03ItemZGPaladinCaster5PBonusCooldownMS = [S03ItemZGPaladinCaster5PBonusRanks + 1]int32{0}
 var S03ItemZGPaladinCaster5PBonusManaCost = [S03ItemZGPaladinCaster5PBonusRanks + 1]float64{0}
+var S03ItemZGPaladinCaster5PBonusManaCostPct = [S03ItemZGPaladinCaster5PBonusRanks + 1]float64{0}
 var S03ItemZGPaladinCaster5PBonusSpellCoeff = [S03ItemZGPaladinCaster5PBonusRanks + 1]float64{0.2143}
 var S03ItemZGPaladinCaster5PBonusBaseDamage = [S03ItemZGPaladinCaster5PBonusRanks + 1][]float64{{-3000, -3000}}
 
@@ -2947,6 +3177,7 @@ var S03TuningAndOverridesPassivePaladinLevel = [S03TuningAndOverridesPassivePala
 var S03TuningAndOverridesPassivePaladinCastTime = [S03TuningAndOverridesPassivePaladinRanks + 1]int32{0}
 var S03TuningAndOverridesPassivePaladinCooldownMS = [S03TuningAndOverridesPassivePaladinRanks + 1]int32{0}
 var S03TuningAndOverridesPassivePaladinManaCost = [S03TuningAndOverridesPassivePaladinRanks + 1]float64{0}
+var S03TuningAndOverridesPassivePaladinManaCostPct = [S03TuningAndOverridesPassivePaladinRanks + 1]float64{0}
 var S03TuningAndOverridesPassivePaladinSpellCoeff = [S03TuningAndOverridesPassivePaladinRanks + 1]float64{0.2143}
 var S03TuningAndOverridesPassivePaladinBaseDamage = [S03TuningAndOverridesPassivePaladinRanks + 1][]float64{{0, 0}}
 
@@ -2961,6 +3192,7 @@ var SacredArbiterLevel = [SacredArbiterRanks + 1]int{0}
 var SacredArbiterCastTime = [SacredArbiterRanks + 1]int32{0}
 var SacredArbiterCooldownMS = [SacredArbiterRanks + 1]int32{0}
 var SacredArbiterManaCost = [SacredArbiterRanks + 1]float64{0}
+var SacredArbiterManaCostPct = [SacredArbiterRanks + 1]float64{0}
 var SacredArbiterSpellCoeff = [SacredArbiterRanks + 1]float64{1}
 var SacredArbiterBaseDamage = [SacredArbiterRanks + 1][]float64{{20, 20}}
 
@@ -2972,6 +3204,7 @@ var SacredDutyLevel = [SacredDutyRanks + 1]int{1}
 var SacredDutyCastTime = [SacredDutyRanks + 1]int32{0}
 var SacredDutyCooldownMS = [SacredDutyRanks + 1]int32{0}
 var SacredDutyManaCost = [SacredDutyRanks + 1]float64{0}
+var SacredDutyManaCostPct = [SacredDutyRanks + 1]float64{0}
 var SacredDutySpellCoeff = [SacredDutyRanks + 1]float64{0.2143}
 var SacredDutyBaseDamage = [SacredDutyRanks + 1][]float64{{4, 4}}
 
@@ -2985,6 +3218,7 @@ var SacredShieldLevel = [SacredShieldRanks + 1]int{1, 80}
 var SacredShieldCastTime = [SacredShieldRanks + 1]int32{0, 0}
 var SacredShieldCooldownMS = [SacredShieldRanks + 1]int32{0, 0}
 var SacredShieldManaCost = [SacredShieldRanks + 1]float64{0, 0}
+var SacredShieldManaCostPct = [SacredShieldRanks + 1]float64{0, 0}
 var SacredShieldSpellCoeff = [SacredShieldRanks + 1]float64{0.0667, 0.429}
 var SacredShieldBaseDamage = [SacredShieldRanks + 1][]float64{{50, 50}, {500, 500}}
 
@@ -3000,6 +3234,7 @@ var SacrificeRedeemedLevel = [SacrificeRedeemedRanks + 1]int{1}
 var SacrificeRedeemedCastTime = [SacrificeRedeemedRanks + 1]int32{0}
 var SacrificeRedeemedCooldownMS = [SacrificeRedeemedRanks + 1]int32{180000}
 var SacrificeRedeemedManaCost = [SacrificeRedeemedRanks + 1]float64{0}
+var SacrificeRedeemedManaCostPct = [SacrificeRedeemedRanks + 1]float64{0}
 var SacrificeRedeemedSpellCoeff = [SacrificeRedeemedRanks + 1]float64{0.3333}
 var SacrificeRedeemedBaseDamage = [SacrificeRedeemedRanks + 1][]float64{{10, 10}}
 
@@ -3013,6 +3248,7 @@ var SanctifiedJudgementLevel = [SanctifiedJudgementRanks + 1]int{0}
 var SanctifiedJudgementCastTime = [SanctifiedJudgementRanks + 1]int32{0}
 var SanctifiedJudgementCooldownMS = [SanctifiedJudgementRanks + 1]int32{0}
 var SanctifiedJudgementManaCost = [SanctifiedJudgementRanks + 1]float64{0}
+var SanctifiedJudgementManaCostPct = [SanctifiedJudgementRanks + 1]float64{0}
 var SanctifiedJudgementSpellCoeff = [SanctifiedJudgementRanks + 1]float64{0.2143}
 var SanctifiedJudgementBaseDamage = [SanctifiedJudgementRanks + 1][]float64{{100, 100}}
 
@@ -3026,6 +3262,7 @@ var SanctifiedLightLevel = [SanctifiedLightRanks + 1]int{1}
 var SanctifiedLightCastTime = [SanctifiedLightRanks + 1]int32{0}
 var SanctifiedLightCooldownMS = [SanctifiedLightRanks + 1]int32{0}
 var SanctifiedLightManaCost = [SanctifiedLightRanks + 1]float64{0}
+var SanctifiedLightManaCostPct = [SanctifiedLightRanks + 1]float64{0}
 var SanctifiedLightSpellCoeff = [SanctifiedLightRanks + 1]float64{0.2143}
 var SanctifiedLightBaseDamage = [SanctifiedLightRanks + 1][]float64{{6, 6}}
 
@@ -3039,6 +3276,7 @@ var SanctityAuraLevel = [SanctityAuraRanks + 1]int{30}
 var SanctityAuraCastTime = [SanctityAuraRanks + 1]int32{0}
 var SanctityAuraCooldownMS = [SanctityAuraRanks + 1]int32{0}
 var SanctityAuraManaCost = [SanctityAuraRanks + 1]float64{0}
+var SanctityAuraManaCostPct = [SanctityAuraRanks + 1]float64{0}
 var SanctityAuraSpellCoeff = [SanctityAuraRanks + 1]float64{0.2143}
 var SanctityAuraBaseDamage = [SanctityAuraRanks + 1][]float64{{10, 10}}
 
@@ -3052,6 +3290,7 @@ var SealCostReducedLevel = [SealCostReducedRanks + 1]int{0}
 var SealCostReducedCastTime = [SealCostReducedRanks + 1]int32{0}
 var SealCostReducedCooldownMS = [SealCostReducedRanks + 1]int32{0}
 var SealCostReducedManaCost = [SealCostReducedRanks + 1]float64{0}
+var SealCostReducedManaCostPct = [SealCostReducedRanks + 1]float64{0}
 var SealCostReducedSpellCoeff = [SealCostReducedRanks + 1]float64{1}
 var SealCostReducedBaseDamage = [SealCostReducedRanks + 1][]float64{{-10, -10}}
 
@@ -3063,6 +3302,7 @@ var SealCostReductionLevel = [SealCostReductionRanks + 1]int{0}
 var SealCostReductionCastTime = [SealCostReductionRanks + 1]int32{0}
 var SealCostReductionCooldownMS = [SealCostReductionRanks + 1]int32{0}
 var SealCostReductionManaCost = [SealCostReductionRanks + 1]float64{0}
+var SealCostReductionManaCostPct = [SealCostReductionRanks + 1]float64{0}
 var SealCostReductionSpellCoeff = [SealCostReductionRanks + 1]float64{1}
 var SealCostReductionBaseDamage = [SealCostReductionRanks + 1][]float64{{-5, -5}}
 
@@ -3074,6 +3314,7 @@ var SealDurationIncreaseLevel = [SealDurationIncreaseRanks + 1]int{0}
 var SealDurationIncreaseCastTime = [SealDurationIncreaseRanks + 1]int32{0}
 var SealDurationIncreaseCooldownMS = [SealDurationIncreaseRanks + 1]int32{0}
 var SealDurationIncreaseManaCost = [SealDurationIncreaseRanks + 1]float64{0}
+var SealDurationIncreaseManaCostPct = [SealDurationIncreaseRanks + 1]float64{0}
 var SealDurationIncreaseSpellCoeff = [SealDurationIncreaseRanks + 1]float64{1}
 var SealDurationIncreaseBaseDamage = [SealDurationIncreaseRanks + 1][]float64{{4000, 4000}}
 
@@ -3085,6 +3326,7 @@ var SealOfCommandLevel = [SealOfCommandRanks + 1]int{0, 20, 30, 40, 50, 60}
 var SealOfCommandCastTime = [SealOfCommandRanks + 1]int32{0, 0, 0, 0, 0, 0}
 var SealOfCommandCooldownMS = [SealOfCommandRanks + 1]int32{0, 0, 0, 0, 0, 0}
 var SealOfCommandManaCost = [SealOfCommandRanks + 1]float64{0, 65, 110, 140, 180, 210}
+var SealOfCommandManaCostPct = [SealOfCommandRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var SealOfCommandSpellCoeff = [SealOfCommandRanks + 1]float64{0.29, 1, 1, 1, 1, 1}
 var SealOfCommandBaseDamage = [SealOfCommandRanks + 1][]float64{{70, 70}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}}
 
@@ -3098,6 +3340,7 @@ var SealOfFuryLevel = [SealOfFuryRanks + 1]int{0, 10, 18, 25, 34, 42, 50, 58}
 var SealOfFuryCastTime = [SealOfFuryRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var SealOfFuryCooldownMS = [SealOfFuryRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var SealOfFuryManaCost = [SealOfFuryRanks + 1]float64{0, 40, 60, 90, 120, 140, 170, 200}
+var SealOfFuryManaCostPct = [SealOfFuryRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var SealOfFurySpellCoeff = [SealOfFuryRanks + 1]float64{0, 0.09, 0.09, 0.09, 0.9, 0.09, 0.09, 1}
 var SealOfFuryBaseDamage = [SealOfFuryRanks + 1][]float64{{0, 0}, {194, 194}, {317, 317}, {487, 487}, {707, 707}, {974, 974}, {1266, 1266}, {1607, 1607}}
 
@@ -3118,6 +3361,7 @@ var SealOfJusticeLevel = [SealOfJusticeRanks + 1]int{22}
 var SealOfJusticeCastTime = [SealOfJusticeRanks + 1]int32{0}
 var SealOfJusticeCooldownMS = [SealOfJusticeRanks + 1]int32{0}
 var SealOfJusticeManaCost = [SealOfJusticeRanks + 1]float64{0}
+var SealOfJusticeManaCostPct = [SealOfJusticeRanks + 1]float64{13}
 var SealOfJusticeSpellCoeff = [SealOfJusticeRanks + 1]float64{1}
 var SealOfJusticeBaseDamage = [SealOfJusticeRanks + 1][]float64{{0, 0}}
 
@@ -3131,6 +3375,7 @@ var SealOfLightLevel = [SealOfLightRanks + 1]int{0, 30, 40, 50, 60}
 var SealOfLightCastTime = [SealOfLightRanks + 1]int32{0, 0, 0, 0, 0}
 var SealOfLightCooldownMS = [SealOfLightRanks + 1]int32{0, 0, 0, 0, 0}
 var SealOfLightManaCost = [SealOfLightRanks + 1]float64{0, 0, 140, 180, 210}
+var SealOfLightManaCostPct = [SealOfLightRanks + 1]float64{0, 0, 0, 0, 0}
 var SealOfLightSpellCoeff = [SealOfLightRanks + 1]float64{0, 0.2143, 1, 1, 1}
 var SealOfLightBaseDamage = [SealOfLightRanks + 1][]float64{{0, 0}, {39, 39}, {0, 0}, {0, 0}, {0, 0}}
 
@@ -3148,6 +3393,7 @@ var SealOfMartyrdomLevel = [SealOfMartyrdomRanks + 1]int{1}
 var SealOfMartyrdomCastTime = [SealOfMartyrdomRanks + 1]int32{0}
 var SealOfMartyrdomCooldownMS = [SealOfMartyrdomRanks + 1]int32{0}
 var SealOfMartyrdomManaCost = [SealOfMartyrdomRanks + 1]float64{0}
+var SealOfMartyrdomManaCostPct = [SealOfMartyrdomRanks + 1]float64{0}
 var SealOfMartyrdomSpellCoeff = [SealOfMartyrdomRanks + 1]float64{0.2143}
 var SealOfMartyrdomBaseDamage = [SealOfMartyrdomRanks + 1][]float64{{0, 0}}
 
@@ -3162,6 +3408,7 @@ var SealOfRighteousnessLevel = [SealOfRighteousnessRanks + 1]int{0, 1, 10, 18, 2
 var SealOfRighteousnessCastTime = [SealOfRighteousnessRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
 var SealOfRighteousnessCooldownMS = [SealOfRighteousnessRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0, 0}
 var SealOfRighteousnessManaCost = [SealOfRighteousnessRanks + 1]float64{0, 0, 40, 60, 90, 120, 140, 170, 200}
+var SealOfRighteousnessManaCostPct = [SealOfRighteousnessRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
 var SealOfRighteousnessSpellCoeff = [SealOfRighteousnessRanks + 1]float64{0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 1}
 var SealOfRighteousnessBaseDamage = [SealOfRighteousnessRanks + 1][]float64{{0, 0}, {4, 4}, {216, 216}, {352, 352}, {541, 541}, {785, 785}, {1082, 1082}, {1407, 1407}, {1786, 1786}}
 
@@ -3183,6 +3430,7 @@ var SealOfWisdomLevel = [SealOfWisdomRanks + 1]int{0, 38, 48, 58}
 var SealOfWisdomCastTime = [SealOfWisdomRanks + 1]int32{0, 0, 0, 0}
 var SealOfWisdomCooldownMS = [SealOfWisdomRanks + 1]int32{0, 0, 0, 0}
 var SealOfWisdomManaCost = [SealOfWisdomRanks + 1]float64{0, 0, 170, 200}
+var SealOfWisdomManaCostPct = [SealOfWisdomRanks + 1]float64{0, 0, 0, 0}
 var SealOfWisdomSpellCoeff = [SealOfWisdomRanks + 1]float64{0, 0.2143, 1, 1}
 var SealOfWisdomBaseDamage = [SealOfWisdomRanks + 1][]float64{{0, 0}, {50, 50}, {0, 0}, {0, 0}}
 
@@ -3199,6 +3447,7 @@ var SealOfTheCrusaderLevel = [SealOfTheCrusaderRanks + 1]int{0, 6, 12, 22, 32, 4
 var SealOfTheCrusaderCastTime = [SealOfTheCrusaderRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var SealOfTheCrusaderCooldownMS = [SealOfTheCrusaderRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var SealOfTheCrusaderManaCost = [SealOfTheCrusaderRanks + 1]float64{0, 25, 40, 65, 90, 125, 160}
+var SealOfTheCrusaderManaCostPct = [SealOfTheCrusaderRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var SealOfTheCrusaderSpellCoeff = [SealOfTheCrusaderRanks + 1]float64{0, 1, 1, 1, 1, 1, 1}
 var SealOfTheCrusaderBaseDamage = [SealOfTheCrusaderRanks + 1][]float64{{0, 0}, {31, 31}, {51, 51}, {94, 94}, {145, 145}, {221, 221}, {306, 306}}
 
@@ -3212,6 +3461,7 @@ var SealOfTheCrusaderJudgementIncreaseLevel = [SealOfTheCrusaderJudgementIncreas
 var SealOfTheCrusaderJudgementIncreaseCastTime = [SealOfTheCrusaderJudgementIncreaseRanks + 1]int32{0}
 var SealOfTheCrusaderJudgementIncreaseCooldownMS = [SealOfTheCrusaderJudgementIncreaseRanks + 1]int32{0}
 var SealOfTheCrusaderJudgementIncreaseManaCost = [SealOfTheCrusaderJudgementIncreaseRanks + 1]float64{0}
+var SealOfTheCrusaderJudgementIncreaseManaCostPct = [SealOfTheCrusaderJudgementIncreaseRanks + 1]float64{0}
 var SealOfTheCrusaderJudgementIncreaseSpellCoeff = [SealOfTheCrusaderJudgementIncreaseRanks + 1]float64{0.2143}
 var SealOfTheCrusaderJudgementIncreaseBaseDamage = [SealOfTheCrusaderJudgementIncreaseRanks + 1][]float64{{20, 20}}
 
@@ -3225,6 +3475,7 @@ var ShadowResistanceAuraLevel = [ShadowResistanceAuraRanks + 1]int{0, 28, 40, 52
 var ShadowResistanceAuraCastTime = [ShadowResistanceAuraRanks + 1]int32{0, 0, 0, 0}
 var ShadowResistanceAuraCooldownMS = [ShadowResistanceAuraRanks + 1]int32{0, 0, 0, 0}
 var ShadowResistanceAuraManaCost = [ShadowResistanceAuraRanks + 1]float64{0, 0, 0, 0}
+var ShadowResistanceAuraManaCostPct = [ShadowResistanceAuraRanks + 1]float64{0, 0, 0, 0}
 var ShadowResistanceAuraSpellCoeff = [ShadowResistanceAuraRanks + 1]float64{0, 0.2143, 0.2143, 0.2143}
 var ShadowResistanceAuraBaseDamage = [ShadowResistanceAuraRanks + 1][]float64{{0, 0}, {30, 30}, {45, 45}, {60, 60}}
 
@@ -3238,6 +3489,7 @@ var ShieldOfRajaxxLevel = [ShieldOfRajaxxRanks + 1]int{0}
 var ShieldOfRajaxxCastTime = [ShieldOfRajaxxRanks + 1]int32{0}
 var ShieldOfRajaxxCooldownMS = [ShieldOfRajaxxRanks + 1]int32{0}
 var ShieldOfRajaxxManaCost = [ShieldOfRajaxxRanks + 1]float64{0}
+var ShieldOfRajaxxManaCostPct = [ShieldOfRajaxxRanks + 1]float64{0}
 var ShieldOfRajaxxSpellCoeff = [ShieldOfRajaxxRanks + 1]float64{0.2}
 var ShieldOfRajaxxBaseDamage = [ShieldOfRajaxxRanks + 1][]float64{{0, 0}}
 
@@ -3251,6 +3503,7 @@ var ShieldOfRighteousnessLevel = [ShieldOfRighteousnessRanks + 1]int{1}
 var ShieldOfRighteousnessCastTime = [ShieldOfRighteousnessRanks + 1]int32{0}
 var ShieldOfRighteousnessCooldownMS = [ShieldOfRighteousnessRanks + 1]int32{0}
 var ShieldOfRighteousnessManaCost = [ShieldOfRighteousnessRanks + 1]float64{0}
+var ShieldOfRighteousnessManaCostPct = [ShieldOfRighteousnessRanks + 1]float64{0}
 var ShieldOfRighteousnessSpellCoeff = [ShieldOfRighteousnessRanks + 1]float64{0.2143}
 var ShieldOfRighteousnessBaseDamage = [ShieldOfRighteousnessRanks + 1][]float64{{440658, 440658}}
 
@@ -3265,6 +3518,7 @@ var ShieldedInRighteousnessLevel = [ShieldedInRighteousnessRanks + 1]int{40}
 var ShieldedInRighteousnessCastTime = [ShieldedInRighteousnessRanks + 1]int32{0}
 var ShieldedInRighteousnessCooldownMS = [ShieldedInRighteousnessRanks + 1]int32{0}
 var ShieldedInRighteousnessManaCost = [ShieldedInRighteousnessRanks + 1]float64{0}
+var ShieldedInRighteousnessManaCostPct = [ShieldedInRighteousnessRanks + 1]float64{0}
 var ShieldedInRighteousnessSpellCoeff = [ShieldedInRighteousnessRanks + 1]float64{0.3333}
 var ShieldedInRighteousnessBaseDamage = [ShieldedInRighteousnessRanks + 1][]float64{{-100, -100}}
 
@@ -3278,6 +3532,7 @@ var ShockAndAweLevel = [ShockAndAweRanks + 1]int{1}
 var ShockAndAweCastTime = [ShockAndAweRanks + 1]int32{0}
 var ShockAndAweCooldownMS = [ShockAndAweRanks + 1]int32{0}
 var ShockAndAweManaCost = [ShockAndAweRanks + 1]float64{0}
+var ShockAndAweManaCostPct = [ShockAndAweRanks + 1]float64{0}
 var ShockAndAweSpellCoeff = [ShockAndAweRanks + 1]float64{0.2143}
 var ShockAndAweBaseDamage = [ShockAndAweRanks + 1][]float64{{462834, 462834}}
 
@@ -3292,6 +3547,7 @@ var SpiritOfBlessingLevel = [SpiritOfBlessingRanks + 1]int{0}
 var SpiritOfBlessingCastTime = [SpiritOfBlessingRanks + 1]int32{0}
 var SpiritOfBlessingCooldownMS = [SpiritOfBlessingRanks + 1]int32{0}
 var SpiritOfBlessingManaCost = [SpiritOfBlessingRanks + 1]float64{0}
+var SpiritOfBlessingManaCostPct = [SpiritOfBlessingRanks + 1]float64{0}
 var SpiritOfBlessingSpellCoeff = [SpiritOfBlessingRanks + 1]float64{1}
 var SpiritOfBlessingBaseDamage = [SpiritOfBlessingRanks + 1][]float64{{-30, -30}}
 
@@ -3303,6 +3559,7 @@ var SpiritualFocusLevel = [SpiritualFocusRanks + 1]int{0}
 var SpiritualFocusCastTime = [SpiritualFocusRanks + 1]int32{0}
 var SpiritualFocusCooldownMS = [SpiritualFocusRanks + 1]int32{0}
 var SpiritualFocusManaCost = [SpiritualFocusRanks + 1]float64{0}
+var SpiritualFocusManaCostPct = [SpiritualFocusRanks + 1]float64{0}
 var SpiritualFocusSpellCoeff = [SpiritualFocusRanks + 1]float64{1}
 var SpiritualFocusBaseDamage = [SpiritualFocusRanks + 1][]float64{{14, 14}}
 
@@ -3314,6 +3571,7 @@ var SteadfastLevel = [SteadfastRanks + 1]int{0}
 var SteadfastCastTime = [SteadfastRanks + 1]int32{0}
 var SteadfastCooldownMS = [SteadfastRanks + 1]int32{0}
 var SteadfastManaCost = [SteadfastRanks + 1]float64{0}
+var SteadfastManaCostPct = [SteadfastRanks + 1]float64{0}
 var SteadfastSpellCoeff = [SteadfastRanks + 1]float64{1}
 var SteadfastBaseDamage = [SteadfastRanks + 1][]float64{{30, 30}}
 
@@ -3325,6 +3583,7 @@ var SunlightLevel = [SunlightRanks + 1]int{0}
 var SunlightCastTime = [SunlightRanks + 1]int32{0}
 var SunlightCooldownMS = [SunlightRanks + 1]int32{0}
 var SunlightManaCost = [SunlightRanks + 1]float64{0}
+var SunlightManaCostPct = [SunlightRanks + 1]float64{0}
 var SunlightSpellCoeff = [SunlightRanks + 1]float64{0.3333}
 var SunlightBaseDamage = [SunlightRanks + 1][]float64{{0, 0}}
 
@@ -3338,6 +3597,7 @@ var SwiftJudgementLevel = [SwiftJudgementRanks + 1]int{1}
 var SwiftJudgementCastTime = [SwiftJudgementRanks + 1]int32{0}
 var SwiftJudgementCooldownMS = [SwiftJudgementRanks + 1]int32{60000}
 var SwiftJudgementManaCost = [SwiftJudgementRanks + 1]float64{0}
+var SwiftJudgementManaCostPct = [SwiftJudgementRanks + 1]float64{0}
 var SwiftJudgementSpellCoeff = [SwiftJudgementRanks + 1]float64{0.2143}
 var SwiftJudgementBaseDamage = [SwiftJudgementRanks + 1][]float64{{-100, -100}}
 
@@ -3351,6 +3611,7 @@ var SwiftJudgementCooldownReductionLevel = [SwiftJudgementCooldownReductionRanks
 var SwiftJudgementCooldownReductionCastTime = [SwiftJudgementCooldownReductionRanks + 1]int32{0}
 var SwiftJudgementCooldownReductionCooldownMS = [SwiftJudgementCooldownReductionRanks + 1]int32{0}
 var SwiftJudgementCooldownReductionManaCost = [SwiftJudgementCooldownReductionRanks + 1]float64{0}
+var SwiftJudgementCooldownReductionManaCostPct = [SwiftJudgementCooldownReductionRanks + 1]float64{0}
 var SwiftJudgementCooldownReductionSpellCoeff = [SwiftJudgementCooldownReductionRanks + 1]float64{0.2143}
 var SwiftJudgementCooldownReductionBaseDamage = [SwiftJudgementCooldownReductionRanks + 1][]float64{{-10000, -10000}}
 
@@ -3364,6 +3625,7 @@ var TemplarLevel = [TemplarRanks + 1]int{0}
 var TemplarCastTime = [TemplarRanks + 1]int32{0}
 var TemplarCooldownMS = [TemplarRanks + 1]int32{0}
 var TemplarManaCost = [TemplarRanks + 1]float64{0}
+var TemplarManaCostPct = [TemplarRanks + 1]float64{0}
 var TemplarSpellCoeff = [TemplarRanks + 1]float64{1}
 var TemplarBaseDamage = [TemplarRanks + 1][]float64{{13, 13}}
 
@@ -3377,6 +3639,7 @@ var TemplarSBulwarkLevel = [TemplarSBulwarkRanks + 1]int{30}
 var TemplarSBulwarkCastTime = [TemplarSBulwarkRanks + 1]int32{0}
 var TemplarSBulwarkCooldownMS = [TemplarSBulwarkRanks + 1]int32{300000}
 var TemplarSBulwarkManaCost = [TemplarSBulwarkRanks + 1]float64{110}
+var TemplarSBulwarkManaCostPct = [TemplarSBulwarkRanks + 1]float64{0}
 var TemplarSBulwarkSpellCoeff = [TemplarSBulwarkRanks + 1]float64{0.2667}
 var TemplarSBulwarkBaseDamage = [TemplarSBulwarkRanks + 1][]float64{{100, 100}}
 
@@ -3390,6 +3653,7 @@ var TheArtOfWarLevel = [TheArtOfWarRanks + 1]int{1}
 var TheArtOfWarCastTime = [TheArtOfWarRanks + 1]int32{0}
 var TheArtOfWarCooldownMS = [TheArtOfWarRanks + 1]int32{0}
 var TheArtOfWarManaCost = [TheArtOfWarRanks + 1]float64{0}
+var TheArtOfWarManaCostPct = [TheArtOfWarRanks + 1]float64{0}
 var TheArtOfWarSpellCoeff = [TheArtOfWarRanks + 1]float64{0.2143}
 var TheArtOfWarBaseDamage = [TheArtOfWarRanks + 1][]float64{{426157, 426157}}
 
@@ -3404,6 +3668,7 @@ var TheFuriousStormLevel = [TheFuriousStormRanks + 1]int{0}
 var TheFuriousStormCastTime = [TheFuriousStormRanks + 1]int32{0}
 var TheFuriousStormCooldownMS = [TheFuriousStormRanks + 1]int32{0}
 var TheFuriousStormManaCost = [TheFuriousStormRanks + 1]float64{0}
+var TheFuriousStormManaCostPct = [TheFuriousStormRanks + 1]float64{0}
 var TheFuriousStormSpellCoeff = [TheFuriousStormRanks + 1]float64{0.2143}
 var TheFuriousStormBaseDamage = [TheFuriousStormRanks + 1][]float64{{1, 1}}
 
@@ -3418,6 +3683,7 @@ var TheQuickAndTheDeadLevel = [TheQuickAndTheDeadRanks + 1]int{1}
 var TheQuickAndTheDeadCastTime = [TheQuickAndTheDeadRanks + 1]int32{0}
 var TheQuickAndTheDeadCooldownMS = [TheQuickAndTheDeadRanks + 1]int32{0}
 var TheQuickAndTheDeadManaCost = [TheQuickAndTheDeadRanks + 1]float64{0}
+var TheQuickAndTheDeadManaCostPct = [TheQuickAndTheDeadRanks + 1]float64{0}
 var TheQuickAndTheDeadSpellCoeff = [TheQuickAndTheDeadRanks + 1]float64{4}
 var TheQuickAndTheDeadBaseDamage = [TheQuickAndTheDeadRanks + 1][]float64{{-100, -100}}
 
@@ -3431,6 +3697,7 @@ var TurnUndeadLevel = [TurnUndeadRanks + 1]int{0, 24, 38, 52}
 var TurnUndeadCastTime = [TurnUndeadRanks + 1]int32{0, 1500, 1500, 1500}
 var TurnUndeadCooldownMS = [TurnUndeadRanks + 1]int32{0, 30000, 30000, 30000}
 var TurnUndeadManaCost = [TurnUndeadRanks + 1]float64{0, 35, 50, 75}
+var TurnUndeadManaCostPct = [TurnUndeadRanks + 1]float64{0, 0, 0, 0}
 var TurnUndeadSpellCoeff = [TurnUndeadRanks + 1]float64{0, 0.3333, 0.5, 0.6667}
 var TurnUndeadBaseDamage = [TurnUndeadRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}}
 
@@ -3444,6 +3711,7 @@ var TwistOfLightLevel = [TwistOfLightRanks + 1]int{0}
 var TwistOfLightCastTime = [TwistOfLightRanks + 1]int32{0}
 var TwistOfLightCooldownMS = [TwistOfLightRanks + 1]int32{0}
 var TwistOfLightManaCost = [TwistOfLightRanks + 1]float64{0}
+var TwistOfLightManaCostPct = [TwistOfLightRanks + 1]float64{0}
 var TwistOfLightSpellCoeff = [TwistOfLightRanks + 1]float64{1}
 var TwistOfLightBaseDamage = [TwistOfLightRanks + 1][]float64{{-20, -20}}
 
@@ -3455,6 +3723,7 @@ var VengeanceLevel = [VengeanceRanks + 1]int{0}
 var VengeanceCastTime = [VengeanceRanks + 1]int32{0}
 var VengeanceCooldownMS = [VengeanceRanks + 1]int32{0}
 var VengeanceManaCost = [VengeanceRanks + 1]float64{0}
+var VengeanceManaCostPct = [VengeanceRanks + 1]float64{0}
 var VengeanceSpellCoeff = [VengeanceRanks + 1]float64{1}
 var VengeanceBaseDamage = [VengeanceRanks + 1][]float64{{5, 5}}
 
@@ -3466,6 +3735,7 @@ var VoiceOfTruthLevel = [VoiceOfTruthRanks + 1]int{20}
 var VoiceOfTruthCastTime = [VoiceOfTruthRanks + 1]int32{0}
 var VoiceOfTruthCooldownMS = [VoiceOfTruthRanks + 1]int32{180000}
 var VoiceOfTruthManaCost = [VoiceOfTruthRanks + 1]float64{0}
+var VoiceOfTruthManaCostPct = [VoiceOfTruthRanks + 1]float64{0}
 var VoiceOfTruthSpellCoeff = [VoiceOfTruthRanks + 1]float64{0.2}
 var VoiceOfTruthBaseDamage = [VoiceOfTruthRanks + 1][]float64{{100, 100}}
 
@@ -3479,6 +3749,7 @@ var WrathLevel = [WrathRanks + 1]int{1}
 var WrathCastTime = [WrathRanks + 1]int32{0}
 var WrathCooldownMS = [WrathRanks + 1]int32{0}
 var WrathManaCost = [WrathRanks + 1]float64{0}
+var WrathManaCostPct = [WrathRanks + 1]float64{0}
 var WrathSpellCoeff = [WrathRanks + 1]float64{0.2143}
 var WrathBaseDamage = [WrathRanks + 1][]float64{{429139, 429139}}
 
@@ -3493,6 +3764,7 @@ var DNTTarnishedPrayerBeadIILevel = [DNTTarnishedPrayerBeadIIRanks + 1]int{0}
 var DNTTarnishedPrayerBeadIICastTime = [DNTTarnishedPrayerBeadIIRanks + 1]int32{0}
 var DNTTarnishedPrayerBeadIICooldownMS = [DNTTarnishedPrayerBeadIIRanks + 1]int32{0}
 var DNTTarnishedPrayerBeadIIManaCost = [DNTTarnishedPrayerBeadIIRanks + 1]float64{0}
+var DNTTarnishedPrayerBeadIIManaCostPct = [DNTTarnishedPrayerBeadIIRanks + 1]float64{0}
 var DNTTarnishedPrayerBeadIISpellCoeff = [DNTTarnishedPrayerBeadIIRanks + 1]float64{0.2143}
 var DNTTarnishedPrayerBeadIIBaseDamage = [DNTTarnishedPrayerBeadIIRanks + 1][]float64{{1, 1}}
 
@@ -3506,6 +3778,7 @@ var DNTTarnishedPrayerBeadIIILevel = [DNTTarnishedPrayerBeadIIIRanks + 1]int{0}
 var DNTTarnishedPrayerBeadIIICastTime = [DNTTarnishedPrayerBeadIIIRanks + 1]int32{0}
 var DNTTarnishedPrayerBeadIIICooldownMS = [DNTTarnishedPrayerBeadIIIRanks + 1]int32{0}
 var DNTTarnishedPrayerBeadIIIManaCost = [DNTTarnishedPrayerBeadIIIRanks + 1]float64{0}
+var DNTTarnishedPrayerBeadIIIManaCostPct = [DNTTarnishedPrayerBeadIIIRanks + 1]float64{0}
 var DNTTarnishedPrayerBeadIIISpellCoeff = [DNTTarnishedPrayerBeadIIIRanks + 1]float64{0.2143}
 var DNTTarnishedPrayerBeadIIIBaseDamage = [DNTTarnishedPrayerBeadIIIRanks + 1][]float64{{1, 1}}
 

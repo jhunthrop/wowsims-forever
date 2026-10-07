@@ -191,6 +191,16 @@ func generate(class spellconst.Class, outDir, outFile, pkgName, sourcePath strin
 			}
 			return trimFloat(w.Cost)
 		})
+		// ManaCostPct is the client's percent-of-base-mana price for the
+		// spells it costs that way (ManaCost reads 0 for them); an ability
+		// file passes ManaCostPct[rank]/100 as ManaCostOptions.BaseCost.
+		writeArray(&b, ident, "ManaCostPct", "float64", maxRank, func(r int) string {
+			w, ok := winners[r]
+			if !ok {
+				return "0"
+			}
+			return trimFloat(w.CostPct)
+		})
 		writeArray(&b, ident, "SpellCoeff", "float64", maxRank, func(r int) string {
 			w, ok := winners[r]
 			if !ok {

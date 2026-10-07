@@ -51,6 +51,12 @@ func (paladin *Paladin) registerDivineFavor() {
 	divineFavor := paladin.RegisterSpell(core.SpellConfig{
 		ActionID: aura.ActionID,
 		Flags:    core.SpellFlagNoOnCastComplete,
+		// 4% of base mana: the client prices this through
+		// SpellPower.PowerCostPct (spellconst cost_pct), not the flat
+		// cost column, which reads 0.
+		ManaCost: core.ManaCostOptions{
+			BaseCost: DivineFavorManaCostPct[0] / 100,
+		},
 		Cast: core.CastConfig{
 			CD: cd,
 		},
