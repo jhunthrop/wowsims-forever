@@ -1,4 +1,6 @@
-package clientdamage
+// Package clientdamagetest holds the test-side assertions for clientdamage: it
+// imports testing, so it stays out of the simulator binaries.
+package clientdamagetest
 
 import (
 	"math"

@@ -3,6 +3,7 @@ package clientdamage
 import (
 	"testing"
 
+	"github.com/wowsims/classic/sim/common/clientdamage/clientdamagetest"
 	"github.com/wowsims/classic/sim/core/spellconst"
 )
 
@@ -38,7 +39,7 @@ func TestRollAgreesWithTheClientTable(t *testing.T) {
 		low, high, _ := spell.DamageRange(0, spell.SpellLevel)
 		effect := spell.Effects[0]
 		got := Roll([]float64{low, high}, effect.PointsPerLevel, spell.SpellLevel, spell.MaxLevel, level)
-		AssertRoll(t, client, "Fireball 12", 25306, 0, level, got)
+		clientdamagetest.AssertRoll(t, client, "Fireball 12", 25306, 0, level, got)
 	}
 }
 
