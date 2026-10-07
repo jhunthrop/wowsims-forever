@@ -14,7 +14,7 @@ var SearingTotemSpellId = [SearingTotemRanks + 1]int32{0, 3599, 6363, 6364, 6365
 var SearingTotemAttackSpellId = [SearingTotemRanks + 1]int32{0, 3606, 6350, 6351, 6352, 10435, 10436}
 
 // The Searing Totem's bolt is the client's "Attack" spell (ids above):
-// its own roll per rank (rank 6 rolls 33-61 at level 60, a centre of 47)
+// its own roll per rank (rank 6 rolls 40-54 at level 60, a centre of 47)
 // and a spell-power coefficient of 0.017, a fifth of the 0.083 the
 // Classic port carried, so a geared shaman's totem was hitting for
 // several times its real damage. The Classic min-max roll the table
