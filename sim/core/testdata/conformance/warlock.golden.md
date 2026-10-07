@@ -657,7 +657,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | SMRuinWarlock (Wrack talent) | 60 | Wrack | 0 | 1316697 | 200.00→200.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 6000→6000 | match |  | 36.00-36.00→36.00-36.00 | 0.143→0.143 | declared, matches |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 25 of the class's 47 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 24 of the class's 47 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
@@ -668,7 +668,6 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Health Funnel (755) | 12→60 | 7 | Demonology | skill_line_ability | 79 client:-2 | 0 | 0 | power cost |
 | Unending Breath (5697) | 16→16 | 1 | Demonology | skill_line_ability | 50 mana | 0 | 0 | power cost |
 | Create Soulstone (693) | 18→60 | 5 | Demonology | skill_line_ability | 0 | 3000 | 0 | cast time |
-| Curse of the Elements (440892) | 20→50 | 4 | Affliction | skill_line_ability | 200 mana | 0 | 0 | power cost |
 | Demon Armor (706) | 20→60 | 5 | Demonology | skill_line_ability | 1580 mana | 0 | 0 | power cost |
 | Ritual of Summoning (698) | 20→20 | 1 | Demonology | skill_line_ability | 300 mana | 5000 | 0 | power cost, cast time |
 | Summon Incubus (713) | 20→20 | 1 | Demonology | skill_line_ability | 0 | 10000 | 0 | cast time |

@@ -183,7 +183,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | Hunter (Summon Hawk talent) | 60 | Summon Hawk | 4 | 1293527 | 190.00→190.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 60→60 | n/a | match |  | 108.00-108.00→108.00-108.00 | 0.429 (convention)→0.000 | declared, matches |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 31 of the class's 49 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 30 of the class's 49 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
@@ -209,7 +209,6 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Aspect of the Beast (13161) | 30→60 | 4 | Beast Mastery | skill_line_ability | 110 mana | 0 | 0 | power cost |
 | Feign Death (5384) | 30→30 | 1 | Survival | skill_line_ability | 80 mana | 0 | 30000 | power cost, cooldown |
 | Intimidation (19577) | 30→30 | 1 | Beast Mastery | skill_line_ability | 0 | 0 | 60000 | cooldown |
-| Lacerate (24118) | 30→60 | 4 | Survival | skill_line_ability | 95 mana | 0 | 0 | power cost |
 | Scatter Shot (19503) | 30→30 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 30000 | cooldown |
 | Enchanted Flare (1221404) | 32→32 | 1 | Marksmanship | skill_line_ability | 50 mana | 0 | 30000 | power cost, cooldown |
 | Flare (1543) | 32→32 | 1 | Marksmanship | skill_line_ability | 50 mana | 0 | 15000 | power cost, cooldown |
