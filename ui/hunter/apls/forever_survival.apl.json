@@ -61,6 +61,29 @@
       }
     },
     {
+      "notes": "Lacerate (the trainable bleed, rank 4) whenever its own bleed is down: with Mongoose Bite held to its window the GCDs it used to fill are free, and the rotation search measured this line beyond error (2026-10-07).",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 4,
+            "spellId": 1299332
+          }
+        },
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "rank": 4,
+                  "spellId": 1299332
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "notes": "Strider Kick as the lowest-priority filler on its own 8s cooldown.",
       "action": {
         "castSpell": {
