@@ -136,3 +136,31 @@ func TestDarkIronRifleDealsDamageWhenCast(t *testing.T) {
 		t.Errorf("Dark Iron Rifle's proc dealt %v damage, want > 0 (item data: 26 Shadow damage)", metrics.TotalDamage)
 	}
 }
+
+// Teebu's Blazing Longsword's proc is Forever's own spell 1300753 (140 Fire
+// damage, no spell power scaling), not Vanilla's 18086.
+func TestTeebusBlazingLongswordCastsTheClientFirebolt(t *testing.T) {
+	sim, character := buildCharacterWithWeapon(t, proto.Class_ClassWarrior, &proto.Player_Warrior{Warrior: &proto.Warrior{Options: &proto.Warrior_Options{}}}, proto.ItemSlot_ItemSlotMainHand, 1728)
+
+	if character.GetSpell(core.ActionID{SpellID: 18086}) != nil {
+		t.Error("Teebu's Blazing Longsword still registers Vanilla's spell 18086")
+	}
+	spell := character.GetSpell(core.ActionID{SpellID: 1300753})
+	if spell == nil {
+		t.Fatal("Teebu's Blazing Longsword equipped, but its client proc spell 1300753 is not registered")
+	}
+	if !spell.SpellSchool.Matches(core.SpellSchoolFire) {
+		t.Errorf("proc school = %v, want Fire", spell.SpellSchool)
+	}
+
+	target := sim.Encounter.TargetUnits[0]
+	spell.Cast(sim, target)
+	metrics := spell.SpellMetrics[target.UnitIndex]
+	if metrics.Hits+metrics.Crits == 0 {
+		t.Fatalf("the proc landed neither a hit nor a crit (misses=%d)", metrics.Misses)
+	}
+	// A hit is the 140 base (less any partial resist); a crit is a multiple of it.
+	if perHit := metrics.TotalDamage / float64(metrics.Hits+metrics.Crits); perHit < 140*0.4 || perHit > 140*2.5 {
+		t.Errorf("damage per landed proc = %v, want around 140", perHit)
+	}
+}

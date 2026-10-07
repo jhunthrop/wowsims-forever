@@ -2283,9 +2283,14 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=1728/teebus-blazing-longsword
-	// Chance on hit: Blasts a target for 150 Fire damage.
+	// Chance on hit: Blasts a target for 140 Fire damage.
+	// Forever's client links the item to spell 1300753 "Firebolt" through
+	// ItemXItemEffect/ItemEffect (TriggerType 2): one Effect 2 (school
+	// damage) of 140 base points, Fire school (SpellMisc SchoolMask 4), no
+	// coefficient. Vanilla's spell 18086 (150 on Wowhead, 182 in this
+	// client's own row for that id) is not the spell the item casts here.
 	// Chance on Hit Assumed: 1 PPM
-	itemhelpers.CreateWeaponCoHProcDamage(TeebusBlazingLongsword, "Teebu's Blazing Longsword", 1.0, 18086, core.SpellSchoolFire, 150, 0, 0, core.DefenseTypeMagic)
+	itemhelpers.CreateWeaponCoHProcDamage(TeebusBlazingLongsword, "Teebu's Blazing Longsword", 1.0, 1300753, core.SpellSchoolFire, 140, 0, 0, core.DefenseTypeMagic)
 
 	// https://www.wowhead.com/classic/item=13401/the-cruel-hand-of-timmy
 	// Chance on hit: Lowers all attributes of target by 15 for 1 min.
