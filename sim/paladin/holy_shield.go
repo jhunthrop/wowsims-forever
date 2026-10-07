@@ -8,6 +8,15 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
+// HolyShieldValues: source 1.60.1.70009 client spell data
+// (spellconst/paladin.json, ids 20925/20927/20928): effect 1 (aura 43, a
+// proc-trigger damage) states the Holy damage a block deals, 110, 153 and
+// 221 by rank, with an 0.08 spell-power coefficient. Rank 1's level is
+// 40, not 30: the client moved it from Classic's 30. The vanilla 65/95/130
+// the engine carried before is gone.
+//
+// procID is the engine's own id for the damage spell: the client states
+// the damage on the aura rather than on a spell of its own.
 var HolyShieldValues = []struct {
 	level    int32
 	spellID  int32
@@ -15,24 +24,31 @@ var HolyShieldValues = []struct {
 	manaCost float64
 	damage   float64
 }{
-	// Rank 1's level is 40, not 30: source 1.60.1.70009 client spell data
-	// (spellconst/paladin.json, spell 20925 "Holy Shield"), spell_level
-	// 40. 30 was Holy Shield's learnable level in original Classic;
-	// Forever's client moved it to 40 and this rank table was never
-	// updated. Flagged by paladin.golden.md's talent-gated table's
-	// "required_level 40->30" row.
-	{level: 40, spellID: 20925, procID: 20955, manaCost: 150, damage: 65},
-	{level: 50, spellID: 20927, procID: 20956, manaCost: 195, damage: 95},
-	{level: 60, spellID: 20928, procID: 20957, manaCost: 240, damage: 130},
+	{level: 40, spellID: 20925, procID: 20955, manaCost: 150, damage: 110},
+	{level: 50, spellID: 20927, procID: 20956, manaCost: 195, damage: 153},
+	{level: 60, spellID: 20928, procID: 20957, manaCost: 240, damage: 221},
 }
+
+const (
+	// holyShieldCharges and holyShieldBlockChance are the Holy Shield
+	// talent's text (node 105628): "Increases chance to block by 30% for
+	// 10 sec, and deals 110 Holy damage for each attack blocked while
+	// active. Damage caused by Holy Shield causes 20% additional threat.
+	// Each block expends a charge. 4 charges." The rank spells' own
+	// block effect reads 20; the live text says 30 and is the one used.
+	holyShieldCharges     = 4
+	holyShieldBlockChance = 30.0
+	holyShieldThreat      = 1.2
+	holyShieldDuration    = 10 * time.Second
+	holyShieldCoefficient = 0.08
+)
 
 func (paladin *Paladin) registerHolyShield() {
 	if !paladin.Talents.HolyShield {
 		return
 	}
 
-	numCharges := int32(4)
-	blockBonus := 30.0 * core.BlockRatingPerBlockChance
+	blockBonus := holyShieldBlockChance * core.BlockRatingPerBlockChance
 
 	for i, values := range HolyShieldValues {
 		rank := i + 1
@@ -57,8 +73,8 @@ func (paladin *Paladin) registerHolyShield() {
 			Rank:          rank,
 
 			DamageMultiplier: 1,
-			ThreatMultiplier: 1.2,
-			BonusCoefficient: 0.05,
+			ThreatMultiplier: holyShieldThreat,
+			BonusCoefficient: holyShieldCoefficient,
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				// Spell damage from Holy Shield can crit, but does not miss.
@@ -69,10 +85,9 @@ func (paladin *Paladin) registerHolyShield() {
 		paladin.holyShieldAura[i] = paladin.RegisterAura(core.Aura{
 			Label:     "Holy Shield" + paladin.Label + strconv.Itoa(rank),
 			ActionID:  core.ActionID{SpellID: spellID},
-			Duration:  time.Second * 10,
-			MaxStacks: numCharges,
+			Duration:  holyShieldDuration,
+			MaxStacks: holyShieldCharges,
 			OnGain: func(aura *core.Aura, sim *core.Simulation) {
-				aura.SetStacks(sim, numCharges)
 				paladin.AddStatDynamic(sim, stats.Block, blockBonus)
 			},
 			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
@@ -108,11 +123,13 @@ func (paladin *Paladin) registerHolyShield() {
 				},
 				CD: core.Cooldown{
 					Timer:    paladin.NewTimer(),
-					Duration: time.Second * 10,
+					Duration: holyShieldDuration,
 				},
 			},
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+				// A recast brings the charges back as well as the duration.
 				paladin.holyShieldAura[i].Activate(sim)
+				paladin.holyShieldAura[i].SetStacks(sim, holyShieldCharges)
 			},
 		})
 	}

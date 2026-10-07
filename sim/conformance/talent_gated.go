@@ -47,6 +47,11 @@ type TalentGatedSpell struct {
 	Label     string
 	Tree      int
 	Pos       int
+	// PresetLabel names the preset to build from when the ability is only
+	// registered by one spec of the class (Primal Bite is a Bear Form
+	// ability, which only the bear spec registers). Empty means the class's
+	// first preset, whose class-level Initialize registers the rest.
+	PresetLabel string
 }
 
 func (g TalentGatedSpell) talentsString() string {
@@ -100,6 +105,8 @@ var TalentGatedSpells = []TalentGatedSpell{
 	// Paladin (Holy 18, Protection 16, Retribution 18).
 	{ClassSlug: "paladin", Label: "Divine Favor", Tree: 0, Pos: 12},
 	{ClassSlug: "paladin", Label: "Holy Shock", Tree: 0, Pos: 14},
+	{ClassSlug: "paladin", Label: "Swift Judgement", Tree: 1, Pos: 10},
+	{ClassSlug: "paladin", Label: "Templar's Bulwark", Tree: 1, Pos: 13},
 	{ClassSlug: "paladin", Label: "Holy Shield", Tree: 1, Pos: 16},
 	{ClassSlug: "paladin", Label: "Seal of Command", Tree: 2, Pos: 8},
 
@@ -116,6 +123,7 @@ var TalentGatedSpells = []TalentGatedSpell{
 	// Druid (Balance 16, Feral Combat 19, Restoration 16).
 	{ClassSlug: "druid", Label: "Insect Swarm", Tree: 0, Pos: 9},
 	{ClassSlug: "druid", Label: "Moonkin Form", Tree: 0, Pos: 16},
+	{ClassSlug: "druid", Label: "Primal Bite", Tree: 1, Pos: 12, PresetLabel: "FeralBearDruid"},
 	{ClassSlug: "druid", Label: "Berserk", Tree: 1, Pos: 20},
 	{ClassSlug: "druid", Label: "Nature's Swiftness", Tree: 2, Pos: 12},
 
@@ -175,6 +183,20 @@ func repPresetForClass(classSlug string) (Preset, bool) {
 	return Preset{}, false
 }
 
+// presetFor is the preset a gated spell is built from: the one it names, or
+// the class's representative.
+func presetFor(gated TalentGatedSpell) (Preset, bool) {
+	if gated.PresetLabel == "" {
+		return repPresetForClass(gated.ClassSlug)
+	}
+	for _, p := range Presets {
+		if p.Label == gated.PresetLabel {
+			return p, true
+		}
+	}
+	return Preset{}, false
+}
+
 // collectTalentGatedRows builds one single-talent character per
 // TalentGatedSpell belonging to classSlug and reports every row that
 // talent's one point registers which an otherwise-identical EMPTY-talent
@@ -188,8 +210,7 @@ func repPresetForClass(classSlug string) (Preset, bool) {
 // simply contributes no row, the same way rowFor already handles any
 // other unregistered spell.
 func collectTalentGatedRows(clientClass spellconst.Class, classSlug string) (rows []Row, buildErrors []string) {
-	preset, ok := repPresetForClass(classSlug)
-	if !ok {
+	if _, ok := repPresetForClass(classSlug); !ok {
 		return nil, nil
 	}
 
@@ -198,9 +219,7 @@ func collectTalentGatedRows(clientClass spellconst.Class, classSlug string) (row
 		return nil, []string{fmt.Sprintf("talent-gated spells for %s: no TalentTreeSizes registered", classSlug)}
 	}
 
-	baseline, baselineErrs := baselineSpellIDsByLevel(preset)
-	buildErrors = append(buildErrors, baselineErrs...)
-
+	baselines := map[string]map[int32]map[int32]bool{}
 	seen := map[string]bool{}
 	for _, gated := range TalentGatedSpells {
 		if gated.ClassSlug != classSlug {
@@ -209,6 +228,19 @@ func collectTalentGatedRows(clientClass spellconst.Class, classSlug string) (row
 		if gated.Pos < 1 || gated.Tree < 0 || gated.Tree > 2 || gated.Pos > treeSizes[gated.Tree] {
 			buildErrors = append(buildErrors, fmt.Sprintf("%s: %s's talent position (tree %d, pos %d) is out of range for tree size %d", classSlug, gated.Label, gated.Tree, gated.Pos, treeSizes[gated.Tree]))
 			continue
+		}
+
+		preset, ok := presetFor(gated)
+		if !ok {
+			buildErrors = append(buildErrors, fmt.Sprintf("%s: %s names preset %q, which does not exist", classSlug, gated.Label, gated.PresetLabel))
+			continue
+		}
+		baseline, cached := baselines[preset.Label]
+		if !cached {
+			var baselineErrs []string
+			baseline, baselineErrs = baselineSpellIDsByLevel(preset)
+			buildErrors = append(buildErrors, baselineErrs...)
+			baselines[preset.Label] = baseline
 		}
 
 		gatedPreset := preset
