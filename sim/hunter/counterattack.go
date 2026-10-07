@@ -62,6 +62,13 @@ func (hunter *Hunter) getCounterattackConfig(rank int) core.SpellConfig {
 			return hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance && hunter.CounterattackProcAura.IsActive()
 		},
 
+		// Counterattack's own 5s window is CounterattackProcAura, the
+		// self-buff registerCounterattackSpell creates below and this
+		// config consumes in ApplyEffects -- wiring it in as
+		// RelatedSelfBuff gives compare.go's engineDuration a real
+		// duration to read instead of reporting the aura as missing.
+		RelatedSelfBuff: hunter.CounterattackProcAura,
+
 		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,

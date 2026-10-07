@@ -21,8 +21,10 @@ const striderKickLevel = 30
 // melee weapon damage" exactly. The 3s speed buff (effect index 2) isn't
 // modeled -- this engine's sim doesn't move a static-distance target, so
 // a self-speed buff has no mechanical effect here, the same
-// simplification Wing Clip's snare and Counterattack's root already
-// make.
+// simplification Wing Clip's snare already makes (wing_clip.go). No
+// Aura models it, so compare.go's engineDuration reports this spell's
+// duration_ms as 0 ("missing aura duration") rather than the client's
+// 3000ms -- expected, not a defect to fix here.
 func (hunter *Hunter) registerStriderKickSpell() {
 	if !hunter.Talents.StriderKick {
 		return

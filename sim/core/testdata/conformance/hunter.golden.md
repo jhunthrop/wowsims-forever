@@ -12,7 +12,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Hunter | 10 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  |
 | Hunter | 10 | Aspect of the Hawk | 1 | 13165 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | n/a | match |  |
-| Hunter | 10 | Raptor Strike | 0 | 14260 | 25.00→0.00 | mana→none | 6000→0 | 0→0 | 0→0 | 8→0 | n/a | mismatch | cost 25.00->0.00; cost_type mana->none; cooldown_ms 6000->0; required_level 8->0 |
 | Hunter | 10 | Raptor Strike | 2 | 14260 | 25.00→25.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 8→8 | n/a | match |  |
 | Hunter | 10 | Serpent Sting | 2 | 13549 | 30.00→30.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 10→10 | 15000→15000 | match |  |
 | Hunter | 20 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  |
@@ -24,7 +23,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 20 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 20 | Mongoose Bite | 1 | 1495 | 30.00→30.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 16→16 | n/a | match |  |
 | Hunter | 20 | Multi-Shot | 0 | 2643 | 0.00→62.69 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | mismatch | cost 0.00->62.69 |
-| Hunter | 20 | Raptor Strike | 0 | 14261 | 35.00→0.00 | mana→none | 6000→0 | 0→0 | 0→0 | 16→0 | n/a | mismatch | cost 35.00->0.00; cost_type mana->none; cooldown_ms 6000->0; required_level 16->0 |
 | Hunter | 20 | Raptor Strike | 3 | 14261 | 35.00→35.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 16→16 | n/a | match |  |
 | Hunter | 20 | Serpent Sting | 3 | 13550 | 50.00→50.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 18→18 | 15000→15000 | match |  |
 | Hunter | 20 | Wing Clip | 1 | 2974 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 10000→0 | mismatch | duration_ms 10000->0 |
@@ -40,8 +38,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 30 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 30 | Mongoose Bite | 2 | 14269 | 40.00→40.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
 | Hunter | 30 | Multi-Shot | 0 | 2643 | 0.00→107.73 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | mismatch | cost 0.00->107.73 |
-| Hunter | 30 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→0 | 15000→0 | mismatch | required_level 26->0; duration_ms 15000->0 |
-| Hunter | 30 | Raptor Strike | 0 | 14262 | 45.00→0.00 | mana→none | 6000→0 | 0→0 | 0→0 | 24→0 | n/a | mismatch | cost 45.00->0.00; cost_type mana->none; cooldown_ms 6000->0; required_level 24->0 |
+| Hunter | 30 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  |
 | Hunter | 30 | Raptor Strike | 4 | 14262 | 45.00→45.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 24→24 | n/a | match |  |
 | Hunter | 30 | Serpent Sting | 4 | 13551 | 80.00→80.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 26→26 | 15000→15000 | match |  |
 | Hunter | 30 | Wing Clip | 1 | 2974 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 10000→0 | mismatch | duration_ms 10000->0 |
@@ -61,8 +58,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 38 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 38 | Mongoose Bite | 2 | 14269 | 40.00→40.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
 | Hunter | 38 | Multi-Shot | 0 | 2643 | 0.00→145.26 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | mismatch | cost 0.00->145.26 |
-| Hunter | 38 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→0 | 15000→0 | mismatch | required_level 26->0; duration_ms 15000->0 |
-| Hunter | 38 | Raptor Strike | 0 | 14263 | 55.00→0.00 | mana→none | 6000→0 | 0→0 | 0→0 | 32→0 | n/a | mismatch | cost 55.00->0.00; cost_type mana->none; cooldown_ms 6000->0; required_level 32->0 |
+| Hunter | 38 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  |
 | Hunter | 38 | Raptor Strike | 5 | 14263 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 32→32 | n/a | match |  |
 | Hunter | 38 | Serpent Sting | 5 | 13552 | 115.00→115.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 34→34 | 15000→15000 | match |  |
 | Hunter | 38 | Wing Clip | 2 | 14267 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 10000→0 | mismatch | duration_ms 10000->0 |
@@ -83,11 +79,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 40 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 40 | Mongoose Bite | 2 | 14269 | 40.00→40.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  |
 | Hunter | 40 | Multi-Shot | 0 | 2643 | 0.00→153.60 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | mismatch | cost 0.00->153.60 |
-| Hunter | 40 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→0 | 15000→0 | mismatch | required_level 26->0; duration_ms 15000->0 |
-| Hunter | 40 | Raptor Strike | 0 | 14264 | 70.00→0.00 | mana→none | 6000→0 | 0→0 | 0→0 | 40→0 | n/a | mismatch | cost 70.00->0.00; cost_type mana->none; cooldown_ms 6000->0; required_level 40->0 |
+| Hunter | 40 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  |
 | Hunter | 40 | Raptor Strike | 6 | 14264 | 70.00→70.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 40→40 | n/a | match |  |
 | Hunter | 40 | Serpent Sting | 5 | 13552 | 115.00→115.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 34→34 | 15000→15000 | match |  |
-| Hunter | 40 | Volley | 1 | 1510 | 350.00→350.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 6000→0 | mismatch | duration_ms 6000->0 |
+| Hunter | 40 | Volley | 1 | 1510 | 350.00→350.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 6000→6000 | match |  |
 | Hunter | 40 | Wing Clip | 2 | 14267 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 10000→0 | mismatch | duration_ms 10000->0 |
 | Hunter | 50 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  |
 | Hunter | 50 | Aimed Shot | 2 | 20900 | 115.00→115.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 28→28 | n/a | match |  |
@@ -110,11 +105,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 50 | Immolation Trap | 4 | 14304 | 190.00→190.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 46→46 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 50 | Mongoose Bite | 3 | 14270 | 50.00→50.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  |
 | Hunter | 50 | Multi-Shot | 0 | 2643 | 0.00→197.38 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | mismatch | cost 0.00->197.38 |
-| Hunter | 50 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→0 | 15000→0 | mismatch | required_level 26->0; duration_ms 15000->0 |
-| Hunter | 50 | Raptor Strike | 0 | 14265 | 85.00→0.00 | mana→none | 6000→0 | 0→0 | 0→0 | 48→0 | n/a | mismatch | cost 85.00->0.00; cost_type mana->none; cooldown_ms 6000->0; required_level 48->0 |
+| Hunter | 50 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  |
 | Hunter | 50 | Raptor Strike | 7 | 14265 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 48→48 | n/a | match |  |
 | Hunter | 50 | Serpent Sting | 7 | 13554 | 190.00→190.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 50→50 | 15000→15000 | match |  |
-| Hunter | 50 | Volley | 2 | 14294 | 420.00→420.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 6000→0 | mismatch | duration_ms 6000->0 |
+| Hunter | 50 | Volley | 2 | 14294 | 420.00→420.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 6000→6000 | match |  |
 | Hunter | 50 | Wing Clip | 2 | 14267 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 10000→0 | mismatch | duration_ms 10000->0 |
 | Hunter | 60 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  |
 | Hunter | 60 | Aimed Shot | 2 | 20900 | 115.00→115.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 28→28 | n/a | match |  |
@@ -144,11 +138,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 60 | Immolation Trap | 5 | 14305 | 245.00→245.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 56→56 | 60000→15000 | mismatch | duration_ms 60000->15000 |
 | Hunter | 60 | Mongoose Bite | 4 | 14271 | 65.00→65.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 58→58 | n/a | match |  |
 | Hunter | 60 | Multi-Shot | 0 | 2643 | 0.00→239.08 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | mismatch | cost 0.00->239.08 |
-| Hunter | 60 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→0 | 15000→0 | mismatch | required_level 26->0; duration_ms 15000->0 |
-| Hunter | 60 | Raptor Strike | 0 | 14266 | 100.00→0.00 | mana→none | 6000→0 | 0→0 | 0→0 | 56→0 | n/a | mismatch | cost 100.00->0.00; cost_type mana->none; cooldown_ms 6000->0; required_level 56->0 |
+| Hunter | 60 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  |
 | Hunter | 60 | Raptor Strike | 8 | 14266 | 100.00→100.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 56→56 | n/a | match |  |
 | Hunter | 60 | Serpent Sting | 9 | 25295 | 250.00→250.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 60→60 | 15000→15000 | match |  |
-| Hunter | 60 | Volley | 3 | 14295 | 490.00→490.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 6000→0 | mismatch | duration_ms 6000->0 |
+| Hunter | 60 | Volley | 3 | 14295 | 490.00→490.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 6000→6000 | match |  |
 | Hunter | 60 | Wing Clip | 3 | 14268 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 10000→0 | mismatch | duration_ms 10000->0 |
 ## Talent-gated spells
 
@@ -156,18 +149,18 @@ Each spell below is built with exactly one point in the single talent that grant
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Hunter (Bestial Wrath talent) | 10 | Bestial Wrath | 0 | 19574 | 0.00→24.72 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→0 | 18000→0 | mismatch | cost 0.00->24.72; required_level 40->0; duration_ms 18000->0 |
-| Hunter (Bestial Wrath talent) | 20 | Bestial Wrath | 0 | 19574 | 0.00→54.12 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→0 | 18000→0 | mismatch | cost 0.00->54.12; required_level 40->0; duration_ms 18000->0 |
-| Hunter (Bestial Wrath talent) | 30 | Bestial Wrath | 0 | 19574 | 0.00→93.00 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→0 | 18000→0 | mismatch | cost 0.00->93.00; required_level 40->0; duration_ms 18000->0 |
-| Hunter (Bestial Wrath talent) | 38 | Bestial Wrath | 0 | 19574 | 0.00→125.40 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→0 | 18000→0 | mismatch | cost 0.00->125.40; required_level 40->0; duration_ms 18000->0 |
-| Hunter (Bestial Wrath talent) | 40 | Bestial Wrath | 0 | 19574 | 0.00→132.60 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→0 | 18000→0 | mismatch | cost 0.00->132.60; required_level 40->0; duration_ms 18000->0 |
-| Hunter (Bestial Wrath talent) | 50 | Bestial Wrath | 0 | 19574 | 0.00→170.40 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→0 | 18000→0 | mismatch | cost 0.00->170.40; required_level 40->0; duration_ms 18000->0 |
-| Hunter (Bestial Wrath talent) | 60 | Bestial Wrath | 0 | 19574 | 0.00→206.40 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→0 | 18000→0 | mismatch | cost 0.00->206.40; required_level 40->0; duration_ms 18000->0 |
-| Hunter (Counterattack talent) | 30 | Counterattack | 2 | 1242634 | 45.00→45.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | 5000→0 | mismatch | duration_ms 5000->0 |
-| Hunter (Counterattack talent) | 38 | Counterattack | 2 | 1242634 | 45.00→45.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | 5000→0 | mismatch | duration_ms 5000->0 |
-| Hunter (Counterattack talent) | 40 | Counterattack | 2 | 1242634 | 45.00→45.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | 5000→0 | mismatch | duration_ms 5000->0 |
-| Hunter (Counterattack talent) | 50 | Counterattack | 3 | 20909 | 65.00→65.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 42→42 | 5000→0 | mismatch | duration_ms 5000->0 |
-| Hunter (Counterattack talent) | 60 | Counterattack | 4 | 20910 | 85.00→85.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 54→54 | 5000→0 | mismatch | duration_ms 5000->0 |
+| Hunter (Bestial Wrath talent) | 10 | Bestial Wrath | 0 | 19574 | 0.00→24.72 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→40 | 18000→18000 | mismatch | cost 0.00->24.72 |
+| Hunter (Bestial Wrath talent) | 20 | Bestial Wrath | 0 | 19574 | 0.00→54.12 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→40 | 18000→18000 | mismatch | cost 0.00->54.12 |
+| Hunter (Bestial Wrath talent) | 30 | Bestial Wrath | 0 | 19574 | 0.00→93.00 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→40 | 18000→18000 | mismatch | cost 0.00->93.00 |
+| Hunter (Bestial Wrath talent) | 38 | Bestial Wrath | 0 | 19574 | 0.00→125.40 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→40 | 18000→18000 | mismatch | cost 0.00->125.40 |
+| Hunter (Bestial Wrath talent) | 40 | Bestial Wrath | 0 | 19574 | 0.00→132.60 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→40 | 18000→18000 | mismatch | cost 0.00->132.60 |
+| Hunter (Bestial Wrath talent) | 50 | Bestial Wrath | 0 | 19574 | 0.00→170.40 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→40 | 18000→18000 | mismatch | cost 0.00->170.40 |
+| Hunter (Bestial Wrath talent) | 60 | Bestial Wrath | 0 | 19574 | 0.00→206.40 | mana→mana | 120000→120000 | 0→0 | 0→0 | 40→40 | 18000→18000 | mismatch | cost 0.00->206.40 |
+| Hunter (Counterattack talent) | 30 | Counterattack | 2 | 1242634 | 45.00→45.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
+| Hunter (Counterattack talent) | 38 | Counterattack | 2 | 1242634 | 45.00→45.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
+| Hunter (Counterattack talent) | 40 | Counterattack | 2 | 1242634 | 45.00→45.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  |
+| Hunter (Counterattack talent) | 50 | Counterattack | 3 | 20909 | 65.00→65.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 42→42 | 5000→5000 | match |  |
+| Hunter (Counterattack talent) | 60 | Counterattack | 4 | 20910 | 85.00→85.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 54→54 | 5000→5000 | match |  |
 | Hunter (Sniper Shot talent) | 40 | Sniper Shot | 0 | 1310687 | 365.00→365.00 | mana→mana | 15000→15000 | 4000→4000 | 1500→1500 | 40→40 | n/a | match |  |
 | Hunter (Sniper Shot talent) | 50 | Sniper Shot | 0 | 1310687 | 365.00→365.00 | mana→mana | 15000→15000 | 4000→4000 | 1500→1500 | 40→40 | n/a | match |  |
 | Hunter (Sniper Shot talent) | 60 | Sniper Shot | 0 | 1310687 | 365.00→365.00 | mana→mana | 15000→15000 | 4000→4000 | 1500→1500 | 40→40 | n/a | match |  |

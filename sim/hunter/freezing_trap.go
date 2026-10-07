@@ -7,6 +7,15 @@ import (
 )
 
 func (hunter *Hunter) getFreezingTrapConfig(rank int, timer *core.Timer) core.SpellConfig {
+	// The client's duration_ms (60000 for every rank) is the trap's
+	// armed lifetime -- how long it sits on the ground before a target
+	// walks over it or it expires unused -- the same "armed, not yet
+	// triggered" phase explosive_trap.go's comment describes. This
+	// engine does not model that phase (ApplyEffects below is empty: no
+	// delayed trigger, no CC applied, nothing to carry a lifetime on),
+	// so compare.go's engineDuration correctly reports 0, a documented
+	// "missing aura duration" rather than a defect this lane fixes.
+	//
 	// Ids, mana cost and level match spellconst/hunter.json's own
 	// spells table exactly (1499/14310/14311; the old fake id 409510
 	// does not exist in the client at all). spellranks.json also lists
