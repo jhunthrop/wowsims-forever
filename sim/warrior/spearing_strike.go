@@ -1,6 +1,8 @@
 package warrior
 
 import (
+	"time"
+
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 )
@@ -57,6 +59,8 @@ func (warrior *Warrior) registerSpearingStrikeSpell() {
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
 
+		RequiredLevel: SpearingStrikeLevel[0],
+
 		RageCost: core.RageCostOptions{
 			Cost:   spearingStrikeRageCost,
 			Refund: 0.8,
@@ -64,6 +68,12 @@ func (warrior *Warrior) registerSpearingStrikeSpell() {
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,
+			},
+			// 20000ms: SpearingStrikeCooldownMS[0] (constants_auto_gen.go).
+			// This cooldown was missing entirely.
+			CD: core.Cooldown{
+				Timer:    warrior.NewTimer(),
+				Duration: time.Duration(SpearingStrikeCooldownMS[0]) * time.Millisecond,
 			},
 		},
 

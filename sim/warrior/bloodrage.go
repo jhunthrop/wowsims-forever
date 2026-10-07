@@ -25,6 +25,8 @@ func (warrior *Warrior) registerBloodrageCD() {
 		// leaving it to the cooldown autocaster, so it has to be a spell
 		// the APL can name.
 		Flags: core.SpellFlagAPL,
+
+		RequiredLevel: BloodrageLevel[0],
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    warrior.NewTimer(),

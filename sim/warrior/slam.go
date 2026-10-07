@@ -6,20 +6,38 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// slamRankLevel, slamRankSpellID, slamRankCastTimeMS, slamRankCooldownMS
+// and slamRankManaCost correct the generator's dedup for ranks 1-4: each
+// rank's winning row (SlamSpellId/Level/CastTime/CooldownMS/ManaCost
+// above, 462893-462897) is a same-rank, same-ish-spell_level duplicate
+// with NO cost, cast time or cooldown at all - a stub, not the real
+// castable ability - that out-ranked the real id on the generator's
+// spell_level tiebreak (the stub's spell_level reads one tier high).
+// Rank 5 needs no correction: its own duplicate pair (11605/1310200)
+// both carry the real numbers. The real per-rank ids and their shared
+// 1500ms cast time / 18000ms cooldown / 150-tenths cost are confirmed
+// against both data/builds/1.60.1.70009/spellconst/warrior.json (ids
+// 1240193, 1464, 8820, 11604, 11605) and spellranks.json, which never
+// lists 462893-462897 at all. 11605 is also the id the UI and the
+// preset rotations name for rank 5.
+var (
+	slamRankLevel      = [SlamRanks + 1]int{0, 20, 30, 38, 46, 54}
+	slamRankSpellID    = [SlamRanks + 1]int32{0, 1240193, 1464, 8820, 11604, 11605}
+	slamRankCastTimeMS = [SlamRanks + 1]int32{0, 1500, 1500, 1500, 1500, 1500}
+	slamRankCooldownMS = [SlamRanks + 1]int32{0, 18000, 18000, 18000, 18000, 18000}
+	slamRankManaCost   = [SlamRanks + 1]float64{0, 150, 150, 150, 150, 150}
+)
+
 func (warrior *Warrior) registerSlamSpell() {
-	rank := rankAtLevel(SlamLevel[:], warrior.Level)
-	requiredLevel := SlamLevel[rank]
-	// The engine keeps spell 11605, the id the UI and the preset
-	// rotations name; the generated SlamSpellId[5] is Forever's reissue
-	// 1310200. Same rank, same 87 damage - which id ships is the data
-	// lane's call.
-	spellID := int32(11605)
+	rank := rankAtLevel(slamRankLevel[:], warrior.Level)
+	requiredLevel := slamRankLevel[rank]
+	spellID := slamRankSpellID[rank]
 	flatDamageBonus := SlamBaseDamage[rank][0]
 
 	castConfig := core.CastConfig{
 		DefaultCast: core.Cast{
 			GCD:      core.GCDDefault,
-			CastTime: time.Millisecond*time.Duration(SlamCastTime[rank]) - time.Millisecond*100*time.Duration(warrior.Talents.ImprovedSlam),
+			CastTime: time.Millisecond*time.Duration(slamRankCastTimeMS[rank]) - time.Millisecond*100*time.Duration(warrior.Talents.ImprovedSlam),
 		},
 		ModifyCast: func(sim *core.Simulation, spell *core.Spell, cast *core.Cast) {
 			if spell.CastTime() > 0 {
@@ -27,15 +45,12 @@ func (warrior *Warrior) registerSlamSpell() {
 			}
 		},
 	}
-	// The client gives Slam a 15 s category cooldown, and it gives it to
-	// 11605 - the very id this file keeps - not only to the reissue the
-	// dedup preferred. The engine had no cooldown here at all; the
-	// generated value wins. But that value is per rank, and ranks below
-	// the last (SlamCooldownMS[rank] == 0, e.g. rank 2, learned at level
-	// 38) genuinely have none: a Cooldown with a Timer and a zero
-	// Duration panics in RegisterSpell ("Cast.CD w/o Duration"), so the
-	// CD is only attached when the rank's generated duration is real.
-	if cooldownMS := SlamCooldownMS[rank]; cooldownMS > 0 {
+	// The client gives Slam an 18 s category cooldown at every learned
+	// rank (slamRankCooldownMS); rank 0 (unlearned) genuinely has none: a
+	// Cooldown with a Timer and a zero Duration panics in RegisterSpell
+	// ("Cast.CD w/o Duration"), so the CD is only attached when the
+	// rank's corrected duration is real.
+	if cooldownMS := slamRankCooldownMS[rank]; cooldownMS > 0 {
 		castConfig.CD = core.Cooldown{
 			Timer:    warrior.NewTimer(),
 			Duration: time.Duration(cooldownMS) * time.Millisecond,
@@ -55,7 +70,7 @@ func (warrior *Warrior) registerSlamSpell() {
 		Rank:          rank,
 
 		RageCost: core.RageCostOptions{
-			Cost:   rageCost(SlamManaCost[rank]),
+			Cost:   rageCost(slamRankManaCost[rank]),
 			Refund: 0.8,
 		},
 		Cast: castConfig,

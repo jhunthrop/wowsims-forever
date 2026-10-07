@@ -32,6 +32,9 @@ func (warrior *Warrior) RegisterRecklessnessCD() {
 
 	Recklessness := warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
 		ActionID: actionID,
+
+		RequiredLevel: RecklessnessLevel[0],
+
 		Cast: core.CastConfig{
 			IgnoreHaste: true,
 			DefaultCast: core.Cast{

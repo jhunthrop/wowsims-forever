@@ -39,6 +39,8 @@ func (warrior *Warrior) RegisterShieldBlockCD() {
 		ActionID:    actionID,
 		SpellSchool: core.SpellSchoolPhysical,
 
+		RequiredLevel: ShieldBlockLevel[0],
+
 		RageCost: core.RageCostOptions{
 			Cost: rageCost(ShieldBlockManaCost[0]),
 		},

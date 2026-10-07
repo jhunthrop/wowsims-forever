@@ -35,6 +35,15 @@ func (warrior *Warrior) StanceMatches(other Stance) bool {
 	return warrior.Stance.Matches(other)
 }
 
+// stanceRequiredLevel is each stance's own generated required level
+// (constants_auto_gen.go): Battle Stance 1, Defensive Stance 10,
+// Berserker Stance 30.
+var stanceRequiredLevel = map[Stance]int{
+	BattleStance:    BattleStanceLevel[0],
+	DefensiveStance: DefensiveStanceLevel[0],
+	BerserkerStance: BerserkerStanceLevel[0],
+}
+
 func (warrior *Warrior) makeStanceSpell(stance Stance, aura *core.Aura, stanceCD *core.Timer) *WarriorSpell {
 	spellCode := map[Stance]int32{
 		BattleStance:    SpellCode_WarriorStanceBattle,
@@ -55,6 +64,8 @@ func (warrior *Warrior) makeStanceSpell(stance Stance, aura *core.Aura, stanceCD
 		SpellCode: spellCode,
 		ActionID:  actionID,
 		Flags:     core.SpellFlagAPL,
+
+		RequiredLevel: stanceRequiredLevel[stance],
 
 		Cast: core.CastConfig{
 			CD: core.Cooldown{

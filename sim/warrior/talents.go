@@ -806,6 +806,9 @@ func (warrior *Warrior) registerDeathWishCD() {
 	warrior.DeathWish = warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		ActionID: actionID,
 		Flags:    core.SpellFlagHelpful | core.SpellFlagAPL,
+
+		RequiredLevel: DeathWishLevel[0],
+
 		RageCost: core.RageCostOptions{
 			Cost: 10,
 		},
@@ -857,10 +860,16 @@ func (warrior *Warrior) registerLastStandCD() {
 	lastStandSpell := warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		ActionID: actionID,
 
+		RequiredLevel: LastStandLevel[0],
+
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
-				Timer:    warrior.NewTimer(),
-				Duration: time.Minute * 10,
+				Timer: warrior.NewTimer(),
+				// 180000ms (3 min): LastStandCooldownMS[0]
+				// (constants_auto_gen.go). The old time.Minute*10 was
+				// vanilla's cooldown; Forever's client shortened it and
+				// this literal was never updated.
+				Duration: time.Duration(LastStandCooldownMS[0]) * time.Millisecond,
 			},
 		},
 

@@ -48,6 +48,8 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
 		Flags:          core.SpellFlagAPL | SpellFlagOffensive,
 
+		RequiredLevel: WhirlwindLevel[0],
+
 		RageCost: core.RageCostOptions{
 			Cost: whirlwindRageCost,
 		},
