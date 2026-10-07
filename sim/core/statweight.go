@@ -113,6 +113,7 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 
 	raidProto := SinglePlayerRaidProto(swr.Player, swr.PartyBuffs, swr.RaidBuffs, swr.Debuffs)
 	raidProto.Tanks = swr.Tanks
+	AddHealingFakeRaid(raidProto, swr.RaidDamageModel)
 
 	swr.SimOptions.SaveAllValues = true
 
@@ -324,7 +325,7 @@ func computeStatWeights(swcr *proto.StatWeightsCalcRequest) *proto.StatWeightsRe
 		}
 
 		calcWeightResults(baselinePlayer.Dps, modPlayerLow.Dps, modPlayerHigh.Dps, &result.Dps)
-		calcWeightResults(baselinePlayer.Hps, modPlayerLow.Hps, modPlayerHigh.Hps, &result.Hps)
+		calcWeightResults(landedHealing(baselinePlayer), landedHealing(modPlayerLow), landedHealing(modPlayerHigh), &result.Hps)
 		calcWeightResults(baselinePlayer.Threat, modPlayerLow.Threat, modPlayerHigh.Threat, &result.Tps)
 		calcWeightResults(baselinePlayer.Dtps, modPlayerLow.Dtps, modPlayerHigh.Dtps, &result.Dtps)
 		calcWeightResults(baselinePlayer.Tmi, modPlayerLow.Tmi, modPlayerHigh.Tmi, &result.Tmi)
@@ -363,6 +364,16 @@ func computeStatWeights(swcr *proto.StatWeightsCalcRequest) *proto.StatWeightsRe
 	}
 
 	return result.ToProto()
+}
+
+// landedHealing is the healing a unit's weights are measured on: what
+// landed on a health bar, so a stat that only buys overheal is worth
+// nothing. A result with no effective figure falls back to raw healing.
+func landedHealing(unit *proto.UnitMetrics) *proto.DistributionMetrics {
+	if unit.EffectiveHps != nil {
+		return unit.EffectiveHps
+	}
+	return unit.Hps
 }
 
 // Run stat weight sims and compute weights.

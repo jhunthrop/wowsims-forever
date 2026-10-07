@@ -21,8 +21,6 @@ import (
 const (
 	HealerIndex = 0
 	TankIndex   = 5
-	// FakeMembers is how many fake raid members a request adds.
-	FakeMembers = 5
 )
 
 // MemberIndices are the raid members pulses land on (the healer's party).
@@ -46,9 +44,7 @@ func TestProfile() *proto.RaidDamageModel {
 // Request builds a sim of healer against the model for duration seconds.
 func Request(healer *proto.Player, model *proto.RaidDamageModel, duration float64, iterations int32) *proto.RaidSimRequest {
 	raid := core.SinglePlayerRaidProto(healer, &proto.PartyBuffs{}, &proto.RaidBuffs{}, &proto.Debuffs{})
-	raid.Parties = append(raid.Parties, &proto.Party{})
-	raid.TargetDummies = FakeMembers
-	raid.RaidDamageModel = model
+	core.AddHealingFakeRaid(raid, model)
 	return &proto.RaidSimRequest{
 		Raid:       raid,
 		Encounter:  &proto.Encounter{Duration: duration, Targets: []*proto.Target{core.NewDefaultTarget()}},

@@ -148,6 +148,11 @@ absorb shield (`sim/core/shield.go`, now a real pool that soaks fake-member
 damage) counts for what it absorbed. `healthBar.GainHealth` returns that
 amount. `hps` is unchanged and still includes overheal.
 
+A stat-weights sweep can heal too: `StatWeightsRequest.raid_damage_model`
+(field 11) adds the same fake raid to every sub-sim
+(`core.AddHealingFakeRaid`), and the sweep's `hps` weights are then per
+point of effective healing per second (`landedHealing`), not raw.
+
 ### How capped AoE follows the timeline
 
 Abilities that iterate `Encounter.TargetUnits` (the large majority)

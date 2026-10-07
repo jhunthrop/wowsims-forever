@@ -119,3 +119,19 @@ func dealRaidDamage(sim *Simulation, unit *Unit, amount, spread float64) {
 		unit.RemoveHealth(sim, amount)
 	}
 }
+
+// fakeRaidMembers is how many fake raid members a healing request adds:
+// four fill the healer's party and the fifth, the tank, lands in the next.
+const fakeRaidMembers = 5
+
+// AddHealingFakeRaid gives raid the fake members a healing sim needs when
+// model is set: a second, empty party for the tank to stand in, the five
+// fake members and the model itself. A nil model leaves raid alone.
+func AddHealingFakeRaid(raid *proto.Raid, model *proto.RaidDamageModel) {
+	if model == nil {
+		return
+	}
+	raid.Parties = append(raid.Parties, &proto.Party{})
+	raid.TargetDummies = fakeRaidMembers
+	raid.RaidDamageModel = model
+}

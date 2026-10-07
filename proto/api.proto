@@ -547,6 +547,13 @@ message StatWeightsRequest {
 	repeated Stat stats_to_weigh = 6;
 	repeated PseudoStat pseudo_stats_to_weigh = 10;
 	Stat ep_reference_stat = 7;
+
+	// A healing sweep: the damage the fake raid takes, so the healer's
+	// effective healing is what the weights measure. When set, the sweep
+	// adds a second party and five fake raid members, and the result's
+	// `hps` weights are per point of EFFECTIVE healing per second.
+	// Forever addition; see PORTING.md.
+	RaidDamageModel raid_damage_model = 11;
 }
 
 message StatWeightsStatData {

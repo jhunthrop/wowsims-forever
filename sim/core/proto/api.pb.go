@@ -3472,8 +3472,14 @@ type StatWeightsRequest struct {
 	StatsToWeigh       []Stat                 `protobuf:"varint,6,rep,packed,name=stats_to_weigh,json=statsToWeigh,proto3,enum=proto.Stat" json:"stats_to_weigh,omitempty"`
 	PseudoStatsToWeigh []PseudoStat           `protobuf:"varint,10,rep,packed,name=pseudo_stats_to_weigh,json=pseudoStatsToWeigh,proto3,enum=proto.PseudoStat" json:"pseudo_stats_to_weigh,omitempty"`
 	EpReferenceStat    Stat                   `protobuf:"varint,7,opt,name=ep_reference_stat,json=epReferenceStat,proto3,enum=proto.Stat" json:"ep_reference_stat,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// A healing sweep: the damage the fake raid takes, so the healer's
+	// effective healing is what the weights measure. When set, the sweep
+	// adds a second party and five fake raid members, and the result's
+	// `hps` weights are per point of EFFECTIVE healing per second.
+	// Forever addition; see PORTING.md.
+	RaidDamageModel *RaidDamageModel `protobuf:"bytes,11,opt,name=raid_damage_model,json=raidDamageModel,proto3" json:"raid_damage_model,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *StatWeightsRequest) Reset() {
@@ -3574,6 +3580,13 @@ func (x *StatWeightsRequest) GetEpReferenceStat() Stat {
 		return x.EpReferenceStat
 	}
 	return Stat_StatStrength
+}
+
+func (x *StatWeightsRequest) GetRaidDamageModel() *RaidDamageModel {
+	if x != nil {
+		return x.RaidDamageModel
+	}
+	return nil
 }
 
 type StatWeightsStatData struct {
@@ -4875,7 +4888,7 @@ const file_api_proto_rawDesc = "" +
 	"\n" +
 	"raid_stats\x18\x01 \x01(\v2\x10.proto.RaidStatsR\traidStats\x12>\n" +
 	"\x0fencounter_stats\x18\x03 \x01(\v2\x15.proto.EncounterStatsR\x0eencounterStats\x12!\n" +
-	"\ferror_result\x18\x02 \x01(\tR\verrorResult\"\x8c\x04\n" +
+	"\ferror_result\x18\x02 \x01(\tR\verrorResult\"\xd0\x04\n" +
 	"\x12StatWeightsRequest\x12%\n" +
 	"\x06player\x18\x01 \x01(\v2\r.proto.PlayerR\x06player\x12/\n" +
 	"\n" +
@@ -4890,7 +4903,8 @@ const file_api_proto_rawDesc = "" +
 	"\x0estats_to_weigh\x18\x06 \x03(\x0e2\v.proto.StatR\fstatsToWeigh\x12D\n" +
 	"\x15pseudo_stats_to_weigh\x18\n" +
 	" \x03(\x0e2\x11.proto.PseudoStatR\x12pseudoStatsToWeigh\x127\n" +
-	"\x11ep_reference_stat\x18\a \x01(\x0e2\v.proto.StatR\x0fepReferenceStat\"f\n" +
+	"\x11ep_reference_stat\x18\a \x01(\x0e2\v.proto.StatR\x0fepReferenceStat\x12B\n" +
+	"\x11raid_damage_model\x18\v \x01(\v2\x16.proto.RaidDamageModelR\x0fraidDamageModel\"f\n" +
 	"\x13StatWeightsStatData\x12\x1b\n" +
 	"\tunit_stat\x18\x01 \x01(\x05R\bunitStat\x12\x17\n" +
 	"\amod_low\x18\x02 \x01(\x01R\x06modLow\x12\x19\n" +
@@ -5216,49 +5230,50 @@ var file_api_proto_depIdxs = []int32{
 	95,  // 112: proto.StatWeightsRequest.stats_to_weigh:type_name -> proto.Stat
 	96,  // 113: proto.StatWeightsRequest.pseudo_stats_to_weigh:type_name -> proto.PseudoStat
 	95,  // 114: proto.StatWeightsRequest.ep_reference_stat:type_name -> proto.Stat
-	40,  // 115: proto.StatWeightsStatRequestData.stat_data:type_name -> proto.StatWeightsStatData
-	17,  // 116: proto.StatWeightsStatRequestData.request_low:type_name -> proto.RaidSimRequest
-	17,  // 117: proto.StatWeightsStatRequestData.request_high:type_name -> proto.RaidSimRequest
-	17,  // 118: proto.StatWeightRequestsData.base_request:type_name -> proto.RaidSimRequest
-	95,  // 119: proto.StatWeightRequestsData.ep_reference_stat:type_name -> proto.Stat
-	41,  // 120: proto.StatWeightRequestsData.stat_sim_requests:type_name -> proto.StatWeightsStatRequestData
-	40,  // 121: proto.StatWeightsStatResultData.stat_data:type_name -> proto.StatWeightsStatData
-	20,  // 122: proto.StatWeightsStatResultData.result_low:type_name -> proto.RaidSimResult
-	20,  // 123: proto.StatWeightsStatResultData.result_high:type_name -> proto.RaidSimResult
-	20,  // 124: proto.StatWeightsCalcRequest.base_result:type_name -> proto.RaidSimResult
-	95,  // 125: proto.StatWeightsCalcRequest.ep_reference_stat:type_name -> proto.Stat
-	43,  // 126: proto.StatWeightsCalcRequest.stat_sim_results:type_name -> proto.StatWeightsStatResultData
-	46,  // 127: proto.StatWeightsResult.dps:type_name -> proto.StatWeightValues
-	46,  // 128: proto.StatWeightsResult.hps:type_name -> proto.StatWeightValues
-	46,  // 129: proto.StatWeightsResult.tps:type_name -> proto.StatWeightValues
-	46,  // 130: proto.StatWeightsResult.dtps:type_name -> proto.StatWeightValues
-	46,  // 131: proto.StatWeightsResult.tmi:type_name -> proto.StatWeightValues
-	46,  // 132: proto.StatWeightsResult.p_death:type_name -> proto.StatWeightValues
-	16,  // 133: proto.StatWeightsResult.error:type_name -> proto.ErrorOutcome
-	61,  // 134: proto.StatWeightValues.weights:type_name -> proto.UnitStats
-	61,  // 135: proto.StatWeightValues.weights_stdev:type_name -> proto.UnitStats
-	61,  // 136: proto.StatWeightValues.ep_values:type_name -> proto.UnitStats
-	61,  // 137: proto.StatWeightValues.ep_values_stdev:type_name -> proto.UnitStats
-	20,  // 138: proto.ProgressMetrics.final_raid_result:type_name -> proto.RaidSimResult
-	45,  // 139: proto.ProgressMetrics.final_weight_result:type_name -> proto.StatWeightsResult
-	52,  // 140: proto.ProgressMetrics.final_bulk_result:type_name -> proto.BulkSimResult
-	17,  // 141: proto.BulkSimRequest.base_settings:type_name -> proto.RaidSimRequest
-	51,  // 142: proto.BulkSimRequest.bulk_settings:type_name -> proto.BulkSettings
-	97,  // 143: proto.BulkSettings.items:type_name -> proto.ItemSpec
-	50,  // 144: proto.BulkSettings.talents_to_sim:type_name -> proto.TalentLoadout
-	53,  // 145: proto.BulkSimResult.results:type_name -> proto.BulkComboResult
-	53,  // 146: proto.BulkSimResult.equipped_gear_result:type_name -> proto.BulkComboResult
-	16,  // 147: proto.BulkSimResult.error:type_name -> proto.ErrorOutcome
-	54,  // 148: proto.BulkComboResult.items_added:type_name -> proto.ItemSpecWithSlot
-	12,  // 149: proto.BulkComboResult.unit_metrics:type_name -> proto.UnitMetrics
-	50,  // 150: proto.BulkComboResult.talent_loadout:type_name -> proto.TalentLoadout
-	97,  // 151: proto.ItemSpecWithSlot.item:type_name -> proto.ItemSpec
-	98,  // 152: proto.ItemSpecWithSlot.slot:type_name -> proto.ItemSlot
-	153, // [153:153] is the sub-list for method output_type
-	153, // [153:153] is the sub-list for method input_type
-	153, // [153:153] is the sub-list for extension type_name
-	153, // [153:153] is the sub-list for extension extendee
-	0,   // [0:153] is the sub-list for field type_name
+	92,  // 115: proto.StatWeightsRequest.raid_damage_model:type_name -> proto.RaidDamageModel
+	40,  // 116: proto.StatWeightsStatRequestData.stat_data:type_name -> proto.StatWeightsStatData
+	17,  // 117: proto.StatWeightsStatRequestData.request_low:type_name -> proto.RaidSimRequest
+	17,  // 118: proto.StatWeightsStatRequestData.request_high:type_name -> proto.RaidSimRequest
+	17,  // 119: proto.StatWeightRequestsData.base_request:type_name -> proto.RaidSimRequest
+	95,  // 120: proto.StatWeightRequestsData.ep_reference_stat:type_name -> proto.Stat
+	41,  // 121: proto.StatWeightRequestsData.stat_sim_requests:type_name -> proto.StatWeightsStatRequestData
+	40,  // 122: proto.StatWeightsStatResultData.stat_data:type_name -> proto.StatWeightsStatData
+	20,  // 123: proto.StatWeightsStatResultData.result_low:type_name -> proto.RaidSimResult
+	20,  // 124: proto.StatWeightsStatResultData.result_high:type_name -> proto.RaidSimResult
+	20,  // 125: proto.StatWeightsCalcRequest.base_result:type_name -> proto.RaidSimResult
+	95,  // 126: proto.StatWeightsCalcRequest.ep_reference_stat:type_name -> proto.Stat
+	43,  // 127: proto.StatWeightsCalcRequest.stat_sim_results:type_name -> proto.StatWeightsStatResultData
+	46,  // 128: proto.StatWeightsResult.dps:type_name -> proto.StatWeightValues
+	46,  // 129: proto.StatWeightsResult.hps:type_name -> proto.StatWeightValues
+	46,  // 130: proto.StatWeightsResult.tps:type_name -> proto.StatWeightValues
+	46,  // 131: proto.StatWeightsResult.dtps:type_name -> proto.StatWeightValues
+	46,  // 132: proto.StatWeightsResult.tmi:type_name -> proto.StatWeightValues
+	46,  // 133: proto.StatWeightsResult.p_death:type_name -> proto.StatWeightValues
+	16,  // 134: proto.StatWeightsResult.error:type_name -> proto.ErrorOutcome
+	61,  // 135: proto.StatWeightValues.weights:type_name -> proto.UnitStats
+	61,  // 136: proto.StatWeightValues.weights_stdev:type_name -> proto.UnitStats
+	61,  // 137: proto.StatWeightValues.ep_values:type_name -> proto.UnitStats
+	61,  // 138: proto.StatWeightValues.ep_values_stdev:type_name -> proto.UnitStats
+	20,  // 139: proto.ProgressMetrics.final_raid_result:type_name -> proto.RaidSimResult
+	45,  // 140: proto.ProgressMetrics.final_weight_result:type_name -> proto.StatWeightsResult
+	52,  // 141: proto.ProgressMetrics.final_bulk_result:type_name -> proto.BulkSimResult
+	17,  // 142: proto.BulkSimRequest.base_settings:type_name -> proto.RaidSimRequest
+	51,  // 143: proto.BulkSimRequest.bulk_settings:type_name -> proto.BulkSettings
+	97,  // 144: proto.BulkSettings.items:type_name -> proto.ItemSpec
+	50,  // 145: proto.BulkSettings.talents_to_sim:type_name -> proto.TalentLoadout
+	53,  // 146: proto.BulkSimResult.results:type_name -> proto.BulkComboResult
+	53,  // 147: proto.BulkSimResult.equipped_gear_result:type_name -> proto.BulkComboResult
+	16,  // 148: proto.BulkSimResult.error:type_name -> proto.ErrorOutcome
+	54,  // 149: proto.BulkComboResult.items_added:type_name -> proto.ItemSpecWithSlot
+	12,  // 150: proto.BulkComboResult.unit_metrics:type_name -> proto.UnitMetrics
+	50,  // 151: proto.BulkComboResult.talent_loadout:type_name -> proto.TalentLoadout
+	97,  // 152: proto.ItemSpecWithSlot.item:type_name -> proto.ItemSpec
+	98,  // 153: proto.ItemSpecWithSlot.slot:type_name -> proto.ItemSlot
+	154, // [154:154] is the sub-list for method output_type
+	154, // [154:154] is the sub-list for method input_type
+	154, // [154:154] is the sub-list for extension type_name
+	154, // [154:154] is the sub-list for extension extendee
+	0,   // [0:154] is the sub-list for field type_name
 }
 
 func init() { file_api_proto_init() }
