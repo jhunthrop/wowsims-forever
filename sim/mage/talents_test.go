@@ -124,6 +124,9 @@ func TestFrostSpellsCarryTheirMasksWhenRegistered(t *testing.T) {
 		// from Initialize regardless of talents, so it carries its mask
 		// on every built mage the way the four above do.
 		"Frost Nova": MageSpellMaskFrostNova,
+		// Frostfire Bolt is a baseline trainable ability from level 40;
+		// the test mage is level 60.
+		"Frostfire Bolt": MageSpellMaskFrostfireBolt,
 	}
 	// Cone of Cold has a mask bit and a talent that names it (Improved
 	// Cone of Cold, one of ForeverFrostTalents' documented-inert points)
@@ -161,10 +164,10 @@ func TestFrostSpellsCarryTheirMasksWhenRegistered(t *testing.T) {
 			if group&bit == 0 {
 				continue
 			}
-			// Frostfire Bolt and Cone of Cold are in the group but have
-			// no ability file in this package; the `unimplemented` check
-			// above is what watches for them.
-			if bit == MageSpellMaskFrostfireBolt || bit == MageSpellMaskConeOfCold {
+			// Cone of Cold is in the group but has no ability file in
+			// this package; the `unimplemented` check above is what
+			// watches for it.
+			if bit == MageSpellMaskConeOfCold {
 				continue
 			}
 			if len(carriers[bit]) == 0 {

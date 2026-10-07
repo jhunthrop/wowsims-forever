@@ -11,8 +11,6 @@ import (
 // Fireball, Frostbolt, and Frostfire Bolt spells a 20% chance to reduce
 // the channeled duration of your next Arcane Missiles spell by 50%,
 // reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
-// Frostfire Bolt has no ability file in this package, so its 20% chance
-// is inert until one exists; Arcane Blast and Frostbolt are both live.
 //
 // The buff is spell 400589 ("Missile Barrage", duration_ms 15000);
 // arcane_missiles.go's ApplyEffects is what reads it to halve the tick
@@ -90,7 +88,7 @@ func (mage *Mage) registerMissileBarrage() {
 			switch spell.SpellCode {
 			case SpellCode_MageArcaneBlast:
 				chance = missileBarrageArcaneBlastChance
-			case SpellCode_MageFireball, SpellCode_MageFrostbolt:
+			case SpellCode_MageFireball, SpellCode_MageFrostbolt, SpellCode_MageFrostfireBolt:
 				chance = missileBarrageOtherChance
 			default:
 				return
