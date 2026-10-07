@@ -1,38 +1,195 @@
 {
   "type": "TypeAPL",
   "priorityList": [
-    { "action": { "autocastOtherCooldowns": {} } },
     {
-      "notes": "Eviscerate at five combo points, checked ahead of Slice and Dice's refresh so a full five-point finisher is never given up in favor of a refresh.",
       "action": {
-        "condition": { "cmp": { "op": "OpGe", "lhs": { "currentComboPoints": {} }, "rhs": { "const": { "val": "5" } } } },
-        "castSpell": { "spellId": { "spellId": 31016, "rank": 9 } }
+        "autocastOtherCooldowns": {}
       }
     },
     {
-      "notes": "Slice and Dice: only ever spend combo points on it once there are five banked, and only when it actually needs it -- down entirely, or under 3s remaining. Kept at the same five-combo-point floor as Eviscerate above so combo points are never spent below five on either finisher; Eviscerate above claims the combo points whenever both are ready in the same instant.",
       "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 31016,
+            "rank": 9
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentComboPoints": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "5"
+              }
+            }
+          }
+        }
+      },
+      "notes": "Eviscerate at five combo points, checked ahead of Slice and Dice so a full finisher is never traded for a refresh."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6774,
+            "rank": 2
+          }
+        },
+        "condition": {
+          "or": {
+            "vals": [
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "not": {
+                        "val": {
+                          "auraIsActive": {
+                            "auraId": {
+                              "spellId": 6774,
+                              "rank": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentComboPoints": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "3"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "currentTime": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "15s"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentComboPoints": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "5"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "auraRemainingTime": {
+                            "auraId": {
+                              "spellId": 6774,
+                              "rank": 2
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "3"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Slice and Dice kept up: opened in the first 15 seconds as soon as three combo points are banked, then refreshed at five combo points once under 3 seconds remain. Always five points, so each cast lasts as long as it can."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 13750
+          }
+        }
+      },
+      "notes": "Adrenaline Rush on cooldown: it doubles energy regeneration for 15 seconds."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 25300,
+            "rank": 9
+          }
+        }
+      },
+      "notes": "Backstab is the builder when a dagger is in the main hand (Backstab refuses to cast otherwise): it hits for 150% weapon damage against Sinister Strike's 100%, and Puncturing Wounds adds crit and an extra combo point chance to it."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11294,
+            "rank": 8
+          }
+        },
         "condition": {
           "and": {
             "vals": [
-              { "cmp": { "op": "OpGe", "lhs": { "currentComboPoints": {} }, "rhs": { "const": { "val": "5" } } } },
-              { "or": { "vals": [
-                { "not": { "val": { "auraIsActive": { "auraId": { "spellId": 6774, "rank": 2 } } } } },
-                { "cmp": { "op": "OpLt", "lhs": { "auraRemainingTime": { "auraId": { "spellId": 6774, "rank": 2 } } }, "rhs": { "const": { "val": "3" } } } }
-              ] } }
+              {
+                "not": {
+                  "val": {
+                    "spellCanCast": {
+                      "spellId": {
+                        "spellId": 25300,
+                        "rank": 9
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentEnergy": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "60"
+                    }
+                  }
+                }
+              }
             ]
           }
-        },
-        "castSpell": { "spellId": { "spellId": 6774, "rank": 2 } }
-      }
-    },
-    {
-      "notes": "Adrenaline Rush on cooldown: the Combat burst button, doubles energy regen for its duration.",
-      "action": { "castSpell": { "spellId": { "spellId": 13750 } } }
-    },
-    {
-      "notes": "Sinister Strike as the combo point builder.",
-      "action": { "castSpell": { "spellId": { "spellId": 11294, "rank": 8 } } }
+        }
+      },
+      "notes": "Sinister Strike builds when Backstab cannot be cast (no dagger in the main hand). Held until 60 energy so a dagger build, which would have cast Backstab at that point, never spends the energy here."
     }
   ]
 }
