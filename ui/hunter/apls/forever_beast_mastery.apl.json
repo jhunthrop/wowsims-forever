@@ -22,7 +22,7 @@
         "castSpell": {
           "spellId": {
             "spellId": 14322,
-            "rank": 7
+            "rank": 6
           }
         }
       },
@@ -152,7 +152,7 @@
                     "dotRemainingTime": {
                       "spellId": {
                         "spellId": 13555,
-                        "rank": 9
+                        "rank": 8
                       }
                     }
                   },
@@ -187,7 +187,7 @@
         "castSpell": {
           "spellId": {
             "spellId": 13555,
-            "rank": 9
+            "rank": 8
           }
         }
       }

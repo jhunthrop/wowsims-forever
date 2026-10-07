@@ -109,7 +109,7 @@
               "dotIsActive": {
                 "spellId": {
                   "spellId": 11672,
-                  "rank": 7
+                  "rank": 6
                 }
               }
             }
@@ -118,7 +118,7 @@
         "castSpell": {
           "spellId": {
             "spellId": 11672,
-            "rank": 7
+            "rank": 6
           }
         }
       }
@@ -133,7 +133,7 @@
               "dotRemainingTime": {
                 "spellId": {
                   "spellId": 11668,
-                  "rank": 8
+                  "rank": 7
                 }
               }
             },
@@ -147,7 +147,7 @@
         "castSpell": {
           "spellId": {
             "spellId": 11668,
-            "rank": 8
+            "rank": 7
           }
         }
       }
@@ -158,7 +158,7 @@
         "castSpell": {
           "spellId": {
             "spellId": 11661,
-            "rank": 10
+            "rank": 9
           }
         }
       }

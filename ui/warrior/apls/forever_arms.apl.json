@@ -6,7 +6,7 @@
         "castSpell": {
           "spellId": {
             "spellId": 11551,
-            "rank": 7
+            "rank": 6
           }
         }
       },
@@ -55,7 +55,7 @@
               "auraIsActive": {
                 "auraId": {
                   "spellId": 11551,
-                  "rank": 7
+                  "rank": 6
                 }
               }
             }
@@ -64,7 +64,7 @@
         "castSpell": {
           "spellId": {
             "spellId": 11551,
-            "rank": 7
+            "rank": 6
           }
         }
       }
