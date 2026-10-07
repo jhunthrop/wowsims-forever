@@ -95,7 +95,7 @@ const (
 	SpellCode_ShamanChainHeal
 	SpellCode_ShamanChainLightning
 	SpellCode_ShamanEarthShock
-	SpellCode_ShamanFireNovaTotem
+	SpellCode_ShamanFireNova
 	SpellCode_ShamanFlameShock
 	SpellCode_ShamanFrostShock
 	SpellCode_ShamanHealingWave
@@ -125,7 +125,8 @@ type Shaman struct {
 	EarthShield          *core.Spell
 	EarthShock           []*core.Spell
 	ElementalMastery     *core.Spell
-	FireNovaTotem        []*core.Spell
+	FireNova             []*core.Spell
+	FireNovaBlast        []*core.Spell
 	FlameShock           []*core.Spell
 	FrostShock           []*core.Spell
 	GraceOfAirTotem      []*core.Spell
@@ -214,7 +215,7 @@ func (shaman *Shaman) Initialize() {
 	shaman.registerTremorTotemSpell()
 	shaman.registerSearingTotemSpell()
 	shaman.registerMagmaTotemSpell()
-	shaman.registerFireNovaTotemSpell()
+	shaman.registerFireNovaSpell()
 	shaman.registerHealingStreamTotemSpell()
 	shaman.registerManaSpringTotemSpell()
 	shaman.registerWindfuryTotemSpell()

@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/stats"
 )
 
 const HealingStreamTotemRanks = 5
@@ -111,21 +112,41 @@ func (shaman *Shaman) registerManaSpringTotemSpell() {
 	)
 }
 
+// manaSpringTotemDuration is the client's duration_ms (300000) on every rank.
+const manaSpringTotemDuration = 5 * time.Minute
+
+// manaSpringMP5PerRestore turns "restores N mana every 2 seconds" into the
+// engine's mana-per-5-seconds stat: 2.5 ticks every 5 seconds.
+const manaSpringMP5PerRestore = 2.5
+
 func (shaman *Shaman) newManaSpringTotemSpellConfig(rank int) core.SpellConfig {
 	spellId := ManaSpringTotemSpellId[rank]
-	// TODO: The sim won't respect the value of a totem dropped via the APL. It uses hard-coded values from buffs.go
-	// manaRestoreBase := ManaSpringTotemManaRestore[rank]
 	manaCost := ManaSpringTotemManaCost[rank]
 	level := ManaSpringTotemLevel[rank]
+	bonus := stats.Stats{stats.MP5: float64(ManaSpringTotemManaRestore[rank]) * manaSpringMP5PerRestore}
 
-	duration := time.Second * 60
+	// The totem's restore is the shaman's own mana regeneration while it
+	// stands; the group-wide raid buff in core/buffs.go stays a separate
+	// source for other players' totems.
+	buffAura := shaman.RegisterAura(core.Aura{
+		Label:    fmt.Sprintf("Mana Spring Totem (Rank %d)", rank),
+		ActionID: core.ActionID{SpellID: spellId},
+		Duration: manaSpringTotemDuration,
+		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+			shaman.AddStatsDynamic(sim, bonus)
+		},
+		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+			shaman.AddStatsDynamic(sim, bonus.Multiply(-1))
+		},
+	})
 
 	spell := shaman.newTotemSpellConfig(manaCost, spellId)
 	spell.RequiredLevel = level
 	spell.Rank = rank
 	spell.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-		shaman.TotemExpirations[WaterTotem] = sim.CurrentTime + duration
+		shaman.TotemExpirations[WaterTotem] = sim.CurrentTime + manaSpringTotemDuration
 		shaman.ActiveTotems[WaterTotem] = spell
+		buffAura.Activate(sim)
 	}
 	return spell
 }

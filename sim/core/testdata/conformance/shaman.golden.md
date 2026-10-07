@@ -14,11 +14,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | ElementalShaman | 10 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 10 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 33.36-35.44→33.36-35.44 | 0.386→0.386 | declared, matches |
-| ElementalShaman | 10 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 48.00-56.00→48.00-56.00 | 0.100→0.100 | declared, matches |
-| ElementalShaman | 10 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→102.00-116.00 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 10 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 10 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 10 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 20.00-20.00→20.00-20.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 10 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 10 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
@@ -40,10 +35,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| ElementalShaman | 20 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→102.00-116.00 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 20 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 20 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 20 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 20 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→35.00-35.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 20 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 63.85-68.15→63.85-68.15 | 0.386→0.386 | declared, matches |
@@ -75,9 +67,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
 | ElementalShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 30 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 30 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 30 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 30 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| ElementalShaman | 30 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 45.40-45.40→45.40-45.40 | 0.214→0.214 | declared, matches |
@@ -102,7 +93,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| ElementalShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -121,8 +112,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
 | ElementalShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 38 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 38 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 38 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| ElementalShaman | 38 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
+| ElementalShaman | 38 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
@@ -152,8 +144,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 38 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| ElementalShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -177,8 +169,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
 | ElementalShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 40 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 40 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 40 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| ElementalShaman | 40 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
+| ElementalShaman | 40 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
@@ -211,8 +204,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 40 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| ElementalShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -240,7 +233,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 50 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 50 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| ElementalShaman | 50 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
+| ElementalShaman | 50 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
+| ElementalShaman | 50 | Fire Nova | 4 | 408344 | 395.00→395.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 42→42 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
@@ -280,9 +276,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 50 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| ElementalShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -317,6 +313,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→412.07-459.93 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 60 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| ElementalShaman | 60 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
+| ElementalShaman | 60 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
+| ElementalShaman | 60 | Fire Nova | 4 | 408344 | 395.00→395.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 42→42 | n/a | match |  | n/a | n/a | n/a |
+| ElementalShaman | 60 | Fire Nova | 5 | 408345 | 520.00→520.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
@@ -365,10 +366,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 60 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Magma Totem | 4 | 10587 | 650.00→650.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 20000→20000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| ElementalShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -395,11 +396,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 60 | Windwall Totem | 3 | 15112 | 225.00→225.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 10 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 33.36-35.44→33.36-35.44 | 0.386→0.386 | declared, matches |
-| EnhancementShaman | 10 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 48.00-56.00→48.00-56.00 | 0.100→0.100 | declared, matches |
-| EnhancementShaman | 10 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→102.00-116.00 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 10 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 10 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 10 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 20.00-20.00→20.00-20.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 10 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
@@ -421,10 +417,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| EnhancementShaman | 20 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→102.00-116.00 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 20 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 20 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 20 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 20 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→35.00-35.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 20 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 63.85-68.15→63.85-68.15 | 0.386→0.386 | declared, matches |
@@ -456,9 +449,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
 | EnhancementShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 30 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 30 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 30 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 30 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 30 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 45.40-45.40→45.40-45.40 | 0.214→0.214 | declared, matches |
@@ -483,7 +475,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| EnhancementShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -502,8 +494,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
 | EnhancementShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 38 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 38 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 38 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 38 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 38 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
@@ -533,8 +526,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 38 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| EnhancementShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -558,8 +551,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
 | EnhancementShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 40 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 40 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 40 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 40 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 40 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
@@ -592,8 +586,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 40 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| EnhancementShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -621,7 +615,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 50 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 50 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Fire Nova | 4 | 408344 | 395.00→395.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 42→42 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
@@ -661,9 +658,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 50 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -698,6 +695,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→412.07-459.93 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 60 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Fire Nova | 4 | 408344 | 395.00→395.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 42→42 | n/a | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Fire Nova | 5 | 408345 | 520.00→520.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
@@ -746,10 +748,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 60 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Magma Totem | 4 | 10587 | 650.00→650.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 20000→20000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -776,11 +778,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 60 | Windwall Totem | 3 | 15112 | 225.00→225.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | WardenShaman | 10 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
 | WardenShaman | 10 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 33.36-35.44→33.36-35.44 | 0.386→0.386 | declared, matches |
-| WardenShaman | 10 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 48.00-56.00→48.00-56.00 | 0.100→0.100 | declared, matches |
-| WardenShaman | 10 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→102.00-116.00 | 0.143→0.143 | declared, matches |
-| WardenShaman | 10 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
-| WardenShaman | 10 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| WardenShaman | 10 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
 | WardenShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 20.00-20.00→20.00-20.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 10 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 10 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | n/a | n/a | n/a |
@@ -802,10 +799,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
 | WardenShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | WardenShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| WardenShaman | 20 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 102.00-116.00→102.00-116.00 | 0.143→0.143 | declared, matches |
-| WardenShaman | 20 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
-| WardenShaman | 20 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| WardenShaman | 20 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 20 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→35.00-35.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 20 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 63.85-68.15→63.85-68.15 | 0.386→0.386 | declared, matches |
@@ -837,9 +831,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | WardenShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
 | WardenShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| WardenShaman | 30 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 184.00-208.00→184.00-208.00 | 0.143→0.143 | declared, matches |
-| WardenShaman | 30 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| WardenShaman | 30 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 30 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| WardenShaman | 30 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 45.40-45.40→45.40-45.40 | 0.214→0.214 | declared, matches |
@@ -864,7 +857,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| WardenShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -883,8 +876,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
 | WardenShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
 | WardenShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| WardenShaman | 38 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| WardenShaman | 38 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 38 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| WardenShaman | 38 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
+| WardenShaman | 38 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
@@ -914,8 +908,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 38 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| WardenShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -939,8 +933,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
 | WardenShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
 | WardenShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| WardenShaman | 40 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 281.00-317.00→281.00-317.00 | 0.143→0.143 | declared, matches |
-| WardenShaman | 40 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 40 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| WardenShaman | 40 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
+| WardenShaman | 40 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
@@ -973,8 +968,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 40 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| WardenShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -1002,7 +997,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
 | WardenShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
 | WardenShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
-| WardenShaman | 50 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 396.00-442.00→396.00-442.00 | 0.143→0.143 | declared, matches |
+| WardenShaman | 50 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| WardenShaman | 50 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
+| WardenShaman | 50 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
+| WardenShaman | 50 | Fire Nova | 4 | 408344 | 395.00→395.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 42→42 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
@@ -1042,9 +1040,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 50 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| WardenShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -1079,6 +1077,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
 | WardenShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
 | WardenShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→412.07-459.93 | 0.143→0.143 | declared, matches |
+| WardenShaman | 60 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| WardenShaman | 60 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
+| WardenShaman | 60 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
+| WardenShaman | 60 | Fire Nova | 4 | 408344 | 395.00→395.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 42→42 | n/a | match |  | n/a | n/a | n/a |
+| WardenShaman | 60 | Fire Nova | 5 | 408345 | 520.00→520.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
@@ -1127,10 +1130,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 60 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Magma Totem | 4 | 10587 | 650.00→650.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 20000→20000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| WardenShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -1197,17 +1200,23 @@ Each spell below is built with exactly one point in the single talent that grant
 | ElementalShaman (Water Shield talent) | 60 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 15000→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | mismatch | cooldown_ms 15000->0 | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 34 of the class's 54 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility on the class skill lines, plus ranked class-family spells the client lists nowhere else; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 41 of the class's active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
+| Healing Rain (415236) | 0→1 | 2 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
+| Ancestral Guidance (409324) | 1→1 | 3 | Elemental Combat | skill_line_ability | 0 | 0 | 0 |  |
+| Decoy Totem (425874) | 1→1 | 1 | Enhancement | skill_line_ability | 0 | 0 | 20000 | cooldown |
+| Earth Shield (408514) | 1→50 | 3 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
+| Healing Wave (331) | 1→60 | 10 | Restoration | skill_line_ability | 620 mana | 3000 | 0 | power cost, cast time |
+| Lava Lash (408507) | 1→1 | 1 | Enhancement | skill_line_ability | 0 | 0 | 6000 | cooldown |
+| Molten Blast (425339) | 1→1 | 2 | Elemental Combat | skill_line_ability | 0 | 0 | 6000 | cooldown |
 | Rockbiter Weapon (8017) | 1→54 | 7 | Enhancement | skill_line_ability | 150 mana | 0 | 0 | power cost |
+| Spirit of the Alpha (408696) | 1→1 | 1 | Enhancement | skill_line_ability | 0 | 0 | 0 |  |
 | Earthbind Totem (2484) | 6→6 | 1 | Elemental Combat | skill_line_ability | 0 | 0 | 15000 | cooldown |
-| Healing Wave (332) | 6→60 | 9 | Restoration | skill_line_ability | 620 mana | 3000 | 0 | power cost, cast time |
 | Stoneclaw Totem (5730) | 8→58 | 6 | Elemental Combat | skill_line_ability | 140 mana | 0 | 30000 | power cost, cooldown |
 | Flametongue Weapon (8024) | 10→56 | 6 | Enhancement | skill_line_ability | 155 mana | 0 | 0 | power cost |
 | Ancestral Spirit (2008) | 12→60 | 5 | Restoration | skill_line_ability | 0 | 10000 | 0 | cast time |
-| Fire Nova (408341) | 12→52 | 5 | Elemental Combat | skill_line_ability | 520 mana | 0 | 10000 | power cost, cooldown |
 | Purge (370) | 12→32 | 3 | Elemental Combat | skill_line_ability | 0 | 0 | 0 |  |
 | Cure Poison (526) | 16→16 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
 | Call of the Elements (66842) | 20→20 | 1 | Elemental Combat | skill_line_ability | 0 | 3000 | 0 | cast time |
@@ -1235,13 +1244,5 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Chain Heal (1064) | 40→54 | 3 | Restoration | skill_line_ability | 405 mana | 2500 | 0 | power cost, cast time |
 | Mana Tide Totem (16190) | 40→58 | 3 | Restoration | skill_line_ability | 60 mana | 0 | 300000 | power cost, cooldown |
 | Riptide (408521) | 40→60 | 3 | Restoration | skill_line_ability | 385 mana | 0 | 6000 | power cost, cooldown |
-
-### In the client, no learn row
-
-Active, ranked, levelled class-family spells the client lists on no SkillLineAbility row (Unstable Affliction, Hydra Shot) that the engine does not register. They are not counted above or in SUMMARY.md; the list also carries spells that are probably not player spellbook entries (rogue poisons, NPC volleys).
-
-| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
-|---|---|---|---|---|---|---|---|---|
-| Earth Shield (974) | 50→50 | 1 | n/a | class_spell | 0 | 0 | 0 |  |
 | Fire Nova Totem (27623) | 52→52 | 1 | n/a | class_spell | 640 mana | 0 | 15000 | power cost, cooldown |
 
