@@ -176,7 +176,18 @@
       }
     },
     {
-      "notes": "Fireball is the primary filler once Improved Scorch's debuff is up.",
+      "notes": "Scorch is the filler: at 150 mana for a 1.5 second cast it spends mana far more efficiently than Fireball (395 mana for 3 seconds), and a Fire mage is mana-bound well before a fight ends. Every filler Scorch also renews the Improved Scorch debuff, so the refresh line above rarely has anything to do.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10207,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "Fireball only before Scorch is trained (it comes at level 22), where Scorch cannot be cast and the list would otherwise have no filler.",
       "action": {
         "castSpell": {
           "spellId": {
