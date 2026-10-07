@@ -43,12 +43,19 @@
       }
     },
     {
-      "notes": "Mongoose Bite on cooldown: no dodge requirement in this build, so its own 5s cooldown and mana cost are the only gates.",
+      "notes": "Mongoose Bite inside its window: the client allows it only after a dodge, and Expose Prey opens the same 5 second window (Defensive State, spell 5302) on a melee or ranged attack against a Hunter's Mark target; the window is one charge, spent by the cast. A target that never attacks gives no dodge, so without Expose Prey the line stays idle.",
       "action": {
         "castSpell": {
           "spellId": {
             "rank": 4,
             "spellId": 14271
+          }
+        },
+        "condition": {
+          "auraIsActive": {
+            "auraId": {
+              "spellId": 5302
+            }
           }
         }
       }
