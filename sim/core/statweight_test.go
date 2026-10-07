@@ -39,7 +39,7 @@ import (
 // back a false 0/0.
 func TestBuildStatWeightRequestsScalesHitLikeArmor(t *testing.T) {
 	scaledStats := []proto.Stat{proto.Stat_StatArmor, proto.Stat_StatBonusArmor, proto.Stat_StatMana, proto.Stat_StatHit}
-	unscaledStats := []proto.Stat{proto.Stat_StatAgility, proto.Stat_StatCrit, proto.Stat_StatMeleeHaste}
+	unscaledStats := []proto.Stat{proto.Stat_StatStamina, proto.Stat_StatCrit, proto.Stat_StatMeleeHaste}
 
 	req := &proto.StatWeightsRequest{
 		Player: &proto.Player{
@@ -83,6 +83,64 @@ func TestBuildStatWeightRequestsScalesHitLikeArmor(t *testing.T) {
 	}
 }
 
+// TestBuildStatWeightRequestsScalesMeleePrimariesLikeArmor pins the
+// 2026-10-07 fix for the warrior weights: with a ±1 step, a class whose
+// resource is damage-driven (rage) breaks the sweep's paired random
+// streams, and the level-60 Arms table published attack_power
+// 1.00 ± 0.51 and strength 1.47 ± 0.34 against an engine conversion of
+// exactly 2 AP per Strength, so the ranker preferred raw-AP items over
+// Strength items. AttackPower, RangedAttackPower, FeralAttackPower,
+// Strength and Agility now take the same x20 step Hit, Intellect,
+// Armor and Mana already do; secondary ratings keep ±1.
+func TestBuildStatWeightRequestsScalesMeleePrimariesLikeArmor(t *testing.T) {
+	scaledStats := []proto.Stat{
+		proto.Stat_StatAttackPower, proto.Stat_StatRangedAttackPower, proto.Stat_StatFeralAttackPower,
+		proto.Stat_StatStrength, proto.Stat_StatAgility,
+	}
+	unscaledStats := []proto.Stat{proto.Stat_StatCrit, proto.Stat_StatMeleeHaste, proto.Stat_StatStamina, proto.Stat_StatSpirit}
+
+	req := &proto.StatWeightsRequest{
+		Player: &proto.Player{
+			BonusStats: &proto.UnitStats{},
+		},
+		SimOptions:      &proto.SimOptions{Iterations: 2},
+		EpReferenceStat: proto.Stat_StatAttackPower,
+		StatsToWeigh:    append(append([]proto.Stat{}, scaledStats...), unscaledStats...),
+	}
+
+	data := buildStatWeightRequests(req)
+
+	modFor := func(stat proto.Stat) (low, high float64, found bool) {
+		unitStat := stats.UnitStatFromStat(stats.Stat(stat))
+		for _, sr := range data.StatSimRequests {
+			if stats.UnitStatFromIdx(int(sr.StatData.UnitStat)) == unitStat {
+				return sr.StatData.ModLow, sr.StatData.ModHigh, true
+			}
+		}
+		return 0, 0, false
+	}
+
+	for _, stat := range scaledStats {
+		low, high, found := modFor(stat)
+		if !found {
+			t.Fatalf("%s: no stat sim request built", stat)
+		}
+		if high != 20 || low != -20 {
+			t.Errorf("%s: mod = (%v, %v), want (-20, 20) - a melee/ranged primary needs the wide step to survive broken pairing", stat, low, high)
+		}
+	}
+
+	for _, stat := range unscaledStats {
+		low, high, found := modFor(stat)
+		if !found {
+			t.Fatalf("%s: no stat sim request built", stat)
+		}
+		if high != 1 || low != -1 {
+			t.Errorf("%s: mod = (%v, %v), want (-1, 1) - secondary ratings keep the default step", stat, low, high)
+		}
+	}
+}
+
 // TestBuildStatWeightRequestsScalesIntellectLikeArmor pins this lane's
 // fix (bis-ranker-integrity-6, item 8): sim/cmd/leveling-bis's own
 // nightly stat-weights sweep reported Intellect "insignificant or
@@ -98,7 +156,7 @@ func TestBuildStatWeightRequestsScalesHitLikeArmor(t *testing.T) {
 // stats are not swept up by it.
 func TestBuildStatWeightRequestsScalesIntellectLikeArmor(t *testing.T) {
 	scaledStats := []proto.Stat{proto.Stat_StatArmor, proto.Stat_StatBonusArmor, proto.Stat_StatMana, proto.Stat_StatHit, proto.Stat_StatIntellect}
-	unscaledStats := []proto.Stat{proto.Stat_StatAgility, proto.Stat_StatCrit, proto.Stat_StatSpellPower, proto.Stat_StatSpirit}
+	unscaledStats := []proto.Stat{proto.Stat_StatStamina, proto.Stat_StatCrit, proto.Stat_StatSpellPower, proto.Stat_StatSpirit}
 
 	req := &proto.StatWeightsRequest{
 		Player: &proto.Player{

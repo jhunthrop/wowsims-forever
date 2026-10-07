@@ -202,6 +202,28 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 		if stat.EqualsStat(stats.Intellect) {
 			statMod = defaultStatMod * 20
 		}
+		// The melee and ranged primaries need it for a third reason:
+		// the sweep's accuracy for every other class comes from paired
+		// random streams (low and high directions share a seed, so a
+		// deterministic +1 shows up as an almost noise-free delta -
+		// every non-warrior melee spec reports Strength at exactly its
+		// AP-per-Strength multiple with ±0.001), but a Warrior's rage is
+		// damage-driven, so one extra point of attack power changes the
+		// rage curve, the action sequence and therefore the random
+		// stream itself; the pairing collapses and the ±1 delta
+		// (0.05 DPS for a level-60 Arms warrior) drowns in the full
+		// per-iteration DPS variance. Published 2026-10-07 numbers for
+		// warrior-arms band 60: attack_power 1.00 ± 0.51, strength
+		// 1.47 ± 0.34 against an engine conversion of exactly 2 -
+		// the ranker then preferred raw-AP items over Strength items
+		// (owner-reported). A ±20 step keeps the response linear (no
+		// cap or floor in these stats) and shrinks the relative error
+		// twentyfold wherever the pairing is broken, while leaving the
+		// already-exact classes exact.
+		if stat.EqualsStat(stats.AttackPower) || stat.EqualsStat(stats.RangedAttackPower) ||
+			stat.EqualsStat(stats.FeralAttackPower) || stat.EqualsStat(stats.Strength) || stat.EqualsStat(stats.Agility) {
+			statMod = defaultStatMod * 20
+		}
 		statModsHigh[stat] = statMod
 		statModsLow[stat] = -statMod
 	}
