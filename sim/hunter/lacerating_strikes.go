@@ -32,6 +32,9 @@ func (hunter *Hunter) registerLaceratingStrikesDot() {
 		SpellCode:   SpellCode_HunterLaceratingStrikes,
 		ActionID:    core.ActionID{SpellID: 1310533},
 		SpellSchool: core.SpellSchoolPhysical,
+		// A critting tick asks the spell for its crit multiplier, which
+		// needs a DefenseType to pick the melee crit bonus.
+		DefenseType: core.DefenseTypeMelee,
 		ProcMask:    core.ProcMaskEmpty,
 		Flags:       core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell,
 
