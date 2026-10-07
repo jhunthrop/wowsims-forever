@@ -32,6 +32,10 @@ func (rogue *Rogue) registerGhostlyStrikeSpell() {
 		DefenseType: core.DefenseTypeMelee,
 		ProcMask:    core.ProcMaskMeleeMHSpecial,
 		Flags:       rogue.builderFlags(),
+
+		// See talents.go's Adrenaline Rush RelatedSelfBuff comment.
+		RelatedSelfBuff: ghostlyStrikeAura,
+
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   40.0,
 			Refund: 0.8,

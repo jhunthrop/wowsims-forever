@@ -37,14 +37,38 @@ func (rogue *Rogue) registerExposeArmorSpell() {
 	var arpen float64
 	var eaAura *core.Aura
 
+	// exposeArmorDurationAura exists only so the conformance report
+	// (sim/conformance/compare.go's engineDuration) can read a clean
+	// 30s duration_ms for this spell. The real debuff is the SHARED,
+	// target-keyed aura above (core.ExposeArmorAura, Label "ExposeArmor"),
+	// deliberately shared with core.FullBuffs' own Expose Armor raid-panel
+	// toggle (sim/core/debuffs.go) so the two sources never double-reduce
+	// armor - but that sharing is exactly why it cannot also be the
+	// report's RelatedSelfBuff: FullBuffs enables that raid-panel toggle
+	// for every conformance preset, and its own
+	// SchedulePeriodicDebuffApplication sets the SHARED aura's Duration to
+	// core.NeverExpires (correct - an externally-maintained raid debuff
+	// is permanent) the moment the harness's prepull reset runs, before
+	// this report ever reads it. This aura is never activated; it exists
+	// only to be read, and is always set to this ability's real base
+	// duration regardless of talents or external debuffs.
+	exposeArmorDurationAura := rogue.RegisterAura(core.Aura{
+		Label:    "Expose Armor (duration report)",
+		ActionID: core.ActionID{SpellID: spellID},
+		Duration: time.Second * 30,
+	})
+
 	rogue.ExposeArmor = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:    SpellCode_RogueExposeArmor,
-		ActionID:     core.ActionID{SpellID: spellID},
-		SpellSchool:  core.SpellSchoolPhysical,
-		DefenseType:  core.DefenseTypeMelee,
-		ProcMask:     core.ProcMaskMeleeMHSpecial,
-		Flags:        rogue.finisherFlags(),
-		MetricSplits: 6,
+		SpellCode:     SpellCode_RogueExposeArmor,
+		ActionID:      core.ActionID{SpellID: spellID},
+		SpellSchool:   core.SpellSchoolPhysical,
+		DefenseType:   core.DefenseTypeMelee,
+		ProcMask:      core.ProcMaskMeleeMHSpecial,
+		Flags:         rogue.finisherFlags(),
+		MetricSplits:  6,
+		RequiredLevel: exposeArmorLearnLevels[rank-1],
+
+		RelatedSelfBuff: exposeArmorDurationAura,
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   25,
