@@ -196,7 +196,9 @@ func (rogue *Rogue) registerColdBloodCD() {
 			}
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if spell.Flags.Matches(SpellFlagColdBlooded) {
+			// Mutilate's main-hand hit leaves Cold Blood up for the
+			// off-hand hit that follows it in the same cast.
+			if spell.Flags.Matches(SpellFlagColdBlooded) && spell != rogue.MutilateMH {
 				aura.Deactivate(sim)
 			}
 		},

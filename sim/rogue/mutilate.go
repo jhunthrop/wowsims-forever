@@ -86,7 +86,9 @@ func (rogue *Rogue) registerMutilateSpell() {
 		SpellSchool: core.SpellSchoolPhysical,
 		DefenseType: core.DefenseTypeMelee,
 		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell,
+		// Cold Blood's crit bonus rides on the hand spells that roll the
+		// hits; the main hand leaves it for the off hand to spend.
+		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell | SpellFlagColdBlooded,
 
 		CritDamageBonus:  rogue.lethality(),
 		DamageMultiplier: opportunityDamage,
@@ -98,7 +100,7 @@ func (rogue *Rogue) registerMutilateSpell() {
 		SpellSchool: core.SpellSchoolPhysical,
 		DefenseType: core.DefenseTypeMelee,
 		ProcMask:    core.ProcMaskMeleeOHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell,
+		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell | SpellFlagColdBlooded,
 
 		CritDamageBonus:  rogue.lethality(),
 		DamageMultiplier: opportunityDamage,
