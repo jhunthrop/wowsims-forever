@@ -103,6 +103,29 @@
       }
     },
     {
+      "notes": "Shifting Power (Feral talent, instant, converts 55% of base mana into 40 energy, 16 s cooldown) on cooldown whenever the energy bar has room for all 40, which is 60 or less. Inert for a build that has not taken the talent; no client spell row states its global cooldown, so the engine treats it as on the GCD.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "currentEnergy": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "60"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 1322605
+          }
+        }
+      }
+    },
+    {
       "notes": "Tiger's Fury on cooldown for the free energy; it costs nothing and the engine gates it on its own 30 second cooldown.",
       "action": {
         "castSpell": {
