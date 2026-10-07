@@ -119,7 +119,7 @@ func TestFrostfireBoltUsesTheLowerOfTheTwoResists(t *testing.T) {
 	target.AddStatDynamic(sim, stats.FireResistance, -target.GetStat(stats.FireResistance))
 
 	frostfire := mage.FrostfireBolt[FrostfireBoltRanks]
-	frostbolt := mage.Frostbolt[FrostboltRanks]
+	frostbolt := mage.Frostbolt[core.MaxTrainerRank(FrostboltRanks)]
 	hitChance := func(spell *core.Spell) float64 {
 		return mage.AttackTables[target.UnitIndex][spell.CastType].GetBinaryHitChance(spell)
 	}
@@ -160,7 +160,7 @@ func TestImprovedFireballShortensFrostfireBolt(t *testing.T) {
 	// The Fireball half of the same talent, in the same place: one
 	// talent, one reduction.
 	wantFireball := time.Duration(FireballCastTime[FireballRanks])*time.Millisecond - 500*time.Millisecond
-	if got := mage.Fireball[FireballRanks].CastTime(); got != wantFireball {
+	if got := mage.Fireball[core.MaxTrainerRank(FireballRanks)].CastTime(); got != wantFireball {
 		t.Errorf("Fireball cast time with 5/5 Improved Fireball = %v, want %v", got, wantFireball)
 	}
 }

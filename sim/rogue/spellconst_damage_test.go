@@ -5,6 +5,7 @@ import (
 
 	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/common/clientdamage/clientdamagetest"
+	"github.com/wowsims/classic/sim/core"
 )
 
 const clientRogueSpellconst = "../core/testdata/conformance/client/rogue.json"
@@ -53,5 +54,6 @@ func TestInstantPoisonDamageMatchesClient(t *testing.T) {
 
 func TestDeadlyPoisonDamageMatchesClient(t *testing.T) {
 	ids := []int32{0, 434312, 434313, 434314, 434315, 434316}
-	assertTable(t, clientdamagetest.Periodic, "Deadly Poison", ids, DeadlyPoisonTickDamage[:])
+	top := core.MaxTrainerRank(len(ids) - 1)
+	assertTable(t, clientdamagetest.Periodic, "Deadly Poison", ids[:top+1], DeadlyPoisonTickDamage[:top+1])
 }

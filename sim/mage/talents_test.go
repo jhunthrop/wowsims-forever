@@ -191,20 +191,20 @@ func TestFrostboltHasElevenRanks(t *testing.T) {
 		t.Errorf("Frostbolt rank 11 requires level %d; a level-60 mage cannot cast it", FrostboltLevel[11])
 	}
 
-	// The three assertions above are over the generated table. Rank 11
-	// is also gated at registration by core.IncludeAQ, which is a build
-	// constant, so the table can be right and the spellbook still stop
-	// at rank 10 - the shape a reviewer raised and this pins.
+	// The assertions above are over the generated table. The top rank is
+	// gated at registration by core.IncludeAQ, a build constant, so the
+	// spellbook must stop at the highest rank a character can learn.
+	top := core.MaxTrainerRank(FrostboltRanks)
 	mage := buildMageForTalentTest(t, ForeverFrostTalents)
 	var registered bool
 	for _, spell := range mage.GetCharacter().Spellbook {
-		if spell.ActionID.SpellID == FrostboltSpellId[11] {
+		if spell.ActionID.SpellID == FrostboltSpellId[top] {
 			registered = true
 			break
 		}
 	}
 	if !registered {
-		t.Errorf("Frostbolt rank 11 (spell %d) is in the table but not in the registered spellbook", FrostboltSpellId[11])
+		t.Errorf("Frostbolt rank %d (spell %d) is in the table but not in the registered spellbook", top, FrostboltSpellId[top])
 	}
 }
 

@@ -10,3 +10,10 @@ package core
 // learn them. If a book source appears in a future Forever raid, replace this
 // constant with a phase switch rather than flipping it.
 const IncludeAQ = false
+
+// MaxTrainerRank is the highest rank of a spell that has totalRanks ranks in
+// the data, of which only the last is an Ahn'Qiraj book rank. It is the rank
+// a level-60 character can cast: totalRanks with IncludeAQ, one fewer without.
+func MaxTrainerRank(totalRanks int) int {
+	return TernaryInt(IncludeAQ, totalRanks, totalRanks-1)
+}

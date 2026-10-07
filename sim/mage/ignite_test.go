@@ -53,7 +53,7 @@ func TestIgniteDoesNotCountDamageBonusesTwice(t *testing.T) {
 	}
 
 	target := sim.Encounter.TargetUnits[0]
-	fireball := built.Fireball[FireballRanks]
+	fireball := built.Fireball[core.MaxTrainerRank(FireballRanks)]
 	if fireball == nil {
 		t.Fatal("level-60 mage has no top-rank Fireball")
 	}
