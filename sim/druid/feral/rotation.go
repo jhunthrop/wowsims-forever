@@ -77,6 +77,14 @@ func (cat *FeralDruid) tryPowershift(sim *core.Simulation) {
 	}
 }
 
+// shiftingPowerFits is whether casting Shifting Power now would take its full
+// energy: the spell is learned, ready and affordable, and the bar has room.
+func (cat *FeralDruid) shiftingPowerFits(sim *core.Simulation) bool {
+	return cat.ShiftingPower != nil &&
+		cat.ShiftingPower.CanCast(sim, cat.CurrentTarget) &&
+		cat.CurrentEnergy()+druid.ShiftingPowerEnergy <= cat.MaxEnergy()
+}
+
 func (cat *FeralDruid) maxShifts() int32 {
 	return max(int32(cat.MaxMana()/cat.CatForm.DefaultCast.Cost), 0)
 }
@@ -238,6 +246,13 @@ func (cat *FeralDruid) doRotation(sim *core.Simulation) (bool, time.Duration) {
 	}
 
 	shiftNow := ((nextEnergy < nextAbility.DefaultCast.Cost) || (timeToNextTick > rotation.MaxWaitTime)) && (fightDur > core.GCDDefault+cat.latency)
+
+	// Out of energy: Shifting Power is a better refill than a power-shift
+	// while it is ready and the whole 40 energy fits under the cap.
+	if shiftNow && cat.shiftingPowerFits(sim) {
+		cat.ShiftingPower.Cast(sim, cat.CurrentTarget)
+		return false, nextAction
+	}
 
 	if shiftNow && (poolMana || (numShiftsToOom == 0)) {
 		shiftNow = false

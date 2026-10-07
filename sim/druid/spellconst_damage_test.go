@@ -51,3 +51,24 @@ func TestFerociousBiteDamageMatchesClient(t *testing.T) {
 	clientdamagetest.AssertTable(t, clientdamagetest.Load(t, clientDruidSpellconst), clientdamagetest.Direct, "Ferocious Bite",
 		FerociousBiteSpellId[:], FerociousBiteDamage[:], nil)
 }
+
+// The client states Ferocious Bite's damage per point of energy spent as the
+// amount (in hundredths) of the spell's dummy effect 1: 100/150/200/250/270
+// for ranks 1-5. Neither Rip nor Ferocious Bite carries a per-combo-point
+// step anywhere in its effect rows (Rip's second effect is a zero-amount
+// dummy), so ripTickPerComboPoint and ferociousBiteDamagePerComboPoint
+// remain Era figures.
+func TestFerociousBiteDamagePerEnergyMatchesClient(t *testing.T) {
+	const dummyEffectIndex = 1
+	const clientAmountPerEnergyPoint = 100.0
+	class := clientdamagetest.Load(t, clientDruidSpellconst)
+	for rank := 1; rank <= FerociousBiteRanks; rank++ {
+		spell, ok := class.ByID(FerociousBiteSpellId[rank])
+		if !ok {
+			t.Fatalf("Ferocious Bite rank %d (%d) is not in the client table", rank, FerociousBiteSpellId[rank])
+		}
+		if got, want := ferociousBiteDamagePerEnergy[rank], spell.Effects[dummyEffectIndex].Amount/clientAmountPerEnergyPoint; got != want {
+			t.Errorf("Ferocious Bite rank %d: %v damage per energy, client dummy effect states %v", rank, got, want)
+		}
+	}
+}

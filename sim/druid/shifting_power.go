@@ -21,7 +21,7 @@ import (
 const (
 	shiftingPowerSpellID               = 1322605
 	shiftingPowerManaFractionOfBase    = 0.55
-	shiftingPowerEnergy                = 40.0
+	ShiftingPowerEnergy                = 40.0
 	shiftingPowerCooldown              = 16 * time.Second
 	improvedShiftingPowerPerRankCDDrop = 4 * time.Second
 	improvedShiftingPowerMaxRank       = 2
@@ -60,7 +60,7 @@ func (druid *Druid) registerShiftingPowerSpell() {
 		},
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-			druid.AddEnergy(sim, shiftingPowerEnergy, energyMetrics)
+			druid.AddEnergy(sim, ShiftingPowerEnergy, energyMetrics)
 		},
 	})
 }

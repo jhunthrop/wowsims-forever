@@ -11,9 +11,10 @@ import (
 var FerociousBiteDamage = clientdamage.FromTable(FerociousBiteBaseDamage[:], FerociousBitePointsPerLevel[:], FerociousBiteLevel[:], FerociousBiteMaxLevel[:])
 
 // The bite's ladder and its non-combo-point roll are constants_auto_gen.go's
-// (FerociousBiteBaseDamage rank 5 is the client's 52-112); the per-combo-point
-// and per-energy steps are the Era figures the client's table does not state
-// in a form the generator reads.
+// (FerociousBiteBaseDamage rank 5 is the client's 52-112). The per-energy step
+// is the client's dummy effect 1 (amount 100/150/200/250/270 hundredths per
+// energy, pinned by spellconst_damage_test.go); the per-combo-point step is
+// stated nowhere in the client's rows and stays the Era figure.
 var ferociousBiteDamagePerComboPoint = [FerociousBiteRanks + 1]float64{0, 36, 59, 92, 128, 147}
 var ferociousBiteDamagePerEnergy = [FerociousBiteRanks + 1]float64{0, 1.0, 1.5, 2.0, 2.5, 2.7}
 

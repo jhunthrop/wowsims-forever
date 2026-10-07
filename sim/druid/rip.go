@@ -12,8 +12,8 @@ var RipTickDamage = clientdamage.FromTable(RipBaseDamage[:], RipPointsPerLevel[:
 
 // The Rip ladder is constants_auto_gen.go's: RipBaseDamage is the client's
 // per-tick base (rank 6: 15, where the Era ladder this replaced had 17).
-// The client's table states no per-combo-point step, so the step below
-// stays the Era figure.
+// The client's rows state no per-combo-point step (effect 1 is a zero-amount
+// dummy), so the step below stays the Era figure.
 var ripTickPerComboPoint = [RipRanks + 1]float64{0, 4, 7, 9, 14, 20, 28}
 
 // RipBaseTicks/RipTicks/RipDuration: Classic's well-documented Rip
