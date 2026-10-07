@@ -130,6 +130,24 @@ The behaviour lives in `sim/core/encounter_movement.go`,
 three of which are Forever files with no upstream counterpart, so an
 upstream merge cannot conflict with them.
 
+### Healing sims: the raid damage model and effective healing
+
+A healer needs something to heal. `Raid.raid_damage_model` (`RaidDamageModel`
+in `common.proto`, field 8 on `Raid`) gives the fake raid members
+(`Raid.target_dummies`) a health bar and damages them: the last fake member
+is the tank and takes `tank_hit_damage` every `tank_swing_seconds`; the other
+members take `pulse_damage` in pulses, each pulse landing on `pulse_members`
+of them chosen at random. All figures are after mitigation. A raid that sets
+no model behaves exactly as before. The behaviour lives in
+`sim/core/raid_damage.go`.
+
+Three result fields tell effective healing from overheal:
+`UnitMetrics.effective_hps` (18) and `TargetedActionMetrics.effective_healing`
+(37). A heal counts as effective for what it added to a health bar; an
+absorb shield (`sim/core/shield.go`, now a real pool that soaks fake-member
+damage) counts for what it absorbed. `healthBar.GainHealth` returns that
+amount. `hps` is unchanged and still includes overheal.
+
 ### How capped AoE follows the timeline
 
 Abilities that iterate `Encounter.TargetUnits` (the large majority)

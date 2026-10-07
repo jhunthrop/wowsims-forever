@@ -45,7 +45,9 @@ func (hb *healthBar) CurrentHealthPercent() float64 {
 	return hb.currentHealth / hb.unit.stats[stats.Health]
 }
 
-func (hb *healthBar) GainHealth(sim *Simulation, amount float64, metrics *ResourceMetrics) {
+// GainHealth raises the unit's health by up to amount and returns what
+// actually landed, which is less than amount when it overheals.
+func (hb *healthBar) GainHealth(sim *Simulation, amount float64, metrics *ResourceMetrics) float64 {
 	if amount < 0 {
 		panic("Trying to gain negative health!")
 	}
@@ -59,6 +61,7 @@ func (hb *healthBar) GainHealth(sim *Simulation, amount float64, metrics *Resour
 	}
 
 	hb.currentHealth = newHealth
+	return newHealth - oldHealth
 }
 
 func (hb *healthBar) RemoveHealth(sim *Simulation, amount float64) {

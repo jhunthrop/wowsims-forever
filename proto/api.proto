@@ -120,6 +120,11 @@ message Raid {
 
 	// Extra fake players to add. Currently only used by healing sims.
 	int32 target_dummies = 6;
+
+	// The damage the fake players take, so a healer has something to heal.
+	// Without it the fake players keep full health and no healing is ever
+	// effective. Forever addition; see PORTING.md.
+	RaidDamageModel raid_damage_model = 8;
 }
 
 message SimOptions {
@@ -261,6 +266,11 @@ message TargetedActionMetrics {
 	// Total shielding done to this target by this action.
 	double shielding = 13;
 
+	// The part of healing and shielding that landed: healing that did not
+	// overheal and shielding that absorbed damage. Forever addition; see
+	// PORTING.md.
+	double effective_healing = 37;
+
 	// Total time spent casting this action, in milliseconds, either from hard casts, GCD, or channeling.
 	double cast_time_ms = 14;
 }
@@ -330,6 +340,10 @@ message UnitMetrics {
 	DistributionMetrics tmi = 17;
 	DistributionMetrics hps = 14;
 	DistributionMetrics tto = 15; // Time To OOM, in seconds.
+
+	// Healing that landed: hps without the overheal. Equal to hps for a
+	// target without a health bar. Forever addition; see PORTING.md.
+	DistributionMetrics effective_hps = 18;
 
 	// average seconds spent oom per iteration
 	double seconds_oom_avg = 3; 

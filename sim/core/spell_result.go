@@ -555,9 +555,11 @@ func (spell *Spell) dealHealingInternal(sim *Simulation, isPeriodic bool, result
 	}
 	spell.SpellMetrics[result.Target.UnitIndex].TotalHealing += result.Damage
 	spell.SpellMetrics[result.Target.UnitIndex].TotalThreat += result.Threat
+	effective := result.Damage
 	if result.Target.HasHealthBar() {
-		result.Target.GainHealth(sim, result.Damage, spell.HealthMetrics(result.Target))
+		effective = result.Target.GainHealth(sim, result.Damage, spell.HealthMetrics(result.Target))
 	}
+	spell.SpellMetrics[result.Target.UnitIndex].TotalEffectiveHealing += effective
 
 	if sim.Log != nil {
 		if isPeriodic {

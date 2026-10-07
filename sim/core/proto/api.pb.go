@@ -778,8 +778,12 @@ type Raid struct {
 	StaggerStormstrikes bool `protobuf:"varint,3,opt,name=stagger_stormstrikes,json=staggerStormstrikes,proto3" json:"stagger_stormstrikes,omitempty"`
 	// Extra fake players to add. Currently only used by healing sims.
 	TargetDummies int32 `protobuf:"varint,6,opt,name=target_dummies,json=targetDummies,proto3" json:"target_dummies,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// The damage the fake players take, so a healer has something to heal.
+	// Without it the fake players keep full health and no healing is ever
+	// effective. Forever addition; see PORTING.md.
+	RaidDamageModel *RaidDamageModel `protobuf:"bytes,8,opt,name=raid_damage_model,json=raidDamageModel,proto3" json:"raid_damage_model,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Raid) Reset() {
@@ -859,6 +863,13 @@ func (x *Raid) GetTargetDummies() int32 {
 		return x.TargetDummies
 	}
 	return 0
+}
+
+func (x *Raid) GetRaidDamageModel() *RaidDamageModel {
+	if x != nil {
+		return x.RaidDamageModel
+	}
+	return nil
 }
 
 type SimOptions struct {
@@ -1124,6 +1135,10 @@ type TargetedActionMetrics struct {
 	CritHealing float64 `protobuf:"fixed64,16,opt,name=crit_healing,json=critHealing,proto3" json:"crit_healing,omitempty"`
 	// Total shielding done to this target by this action.
 	Shielding float64 `protobuf:"fixed64,13,opt,name=shielding,proto3" json:"shielding,omitempty"`
+	// The part of healing and shielding that landed: healing that did not
+	// overheal and shielding that absorbed damage. Forever addition; see
+	// PORTING.md.
+	EffectiveHealing float64 `protobuf:"fixed64,37,opt,name=effective_healing,json=effectiveHealing,proto3" json:"effective_healing,omitempty"`
 	// Total time spent casting this action, in milliseconds, either from hard casts, GCD, or channeling.
 	CastTimeMs    float64 `protobuf:"fixed64,14,opt,name=cast_time_ms,json=castTimeMs,proto3" json:"cast_time_ms,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1387,6 +1402,13 @@ func (x *TargetedActionMetrics) GetCritHealing() float64 {
 func (x *TargetedActionMetrics) GetShielding() float64 {
 	if x != nil {
 		return x.Shielding
+	}
+	return 0
+}
+
+func (x *TargetedActionMetrics) GetEffectiveHealing() float64 {
+	if x != nil {
+		return x.EffectiveHealing
 	}
 	return 0
 }
@@ -1725,6 +1747,9 @@ type UnitMetrics struct {
 	Tmi       *DistributionMetrics   `protobuf:"bytes,17,opt,name=tmi,proto3" json:"tmi,omitempty"`
 	Hps       *DistributionMetrics   `protobuf:"bytes,14,opt,name=hps,proto3" json:"hps,omitempty"`
 	Tto       *DistributionMetrics   `protobuf:"bytes,15,opt,name=tto,proto3" json:"tto,omitempty"` // Time To OOM, in seconds.
+	// Healing that landed: hps without the overheal. Equal to hps for a
+	// target without a health bar. Forever addition; see PORTING.md.
+	EffectiveHps *DistributionMetrics `protobuf:"bytes,18,opt,name=effective_hps,json=effectiveHps,proto3" json:"effective_hps,omitempty"`
 	// average seconds spent oom per iteration
 	SecondsOomAvg float64 `protobuf:"fixed64,3,opt,name=seconds_oom_avg,json=secondsOomAvg,proto3" json:"seconds_oom_avg,omitempty"`
 	// Chance (0-1) representing probability of death. Used for tank sims.
@@ -1826,6 +1851,13 @@ func (x *UnitMetrics) GetHps() *DistributionMetrics {
 func (x *UnitMetrics) GetTto() *DistributionMetrics {
 	if x != nil {
 		return x.Tto
+	}
+	return nil
+}
+
+func (x *UnitMetrics) GetEffectiveHps() *DistributionMetrics {
+	if x != nil {
+		return x.EffectiveHps
 	}
 	return nil
 }
@@ -4600,7 +4632,7 @@ const file_api_proto_rawDesc = "" +
 	"\x04spec\"Y\n" +
 	"\x05Party\x12'\n" +
 	"\aplayers\x18\x01 \x03(\v2\r.proto.PlayerR\aplayers\x12'\n" +
-	"\x05buffs\x18\x02 \x01(\v2\x11.proto.PartyBuffsR\x05buffs\"\xb4\x02\n" +
+	"\x05buffs\x18\x02 \x01(\v2\x11.proto.PartyBuffsR\x05buffs\"\xf8\x02\n" +
 	"\x04Raid\x12&\n" +
 	"\aparties\x18\x01 \x03(\v2\f.proto.PartyR\aparties\x12,\n" +
 	"\x12num_active_parties\x18\x02 \x01(\x05R\x10numActiveParties\x12&\n" +
@@ -4608,7 +4640,8 @@ const file_api_proto_rawDesc = "" +
 	"\adebuffs\x18\x05 \x01(\v2\x0e.proto.DebuffsR\adebuffs\x12*\n" +
 	"\x05tanks\x18\x04 \x03(\v2\x14.proto.UnitReferenceR\x05tanks\x121\n" +
 	"\x14stagger_stormstrikes\x18\x03 \x01(\bR\x13staggerStormstrikes\x12%\n" +
-	"\x0etarget_dummies\x18\x06 \x01(\x05R\rtargetDummies\"\xd1\x02\n" +
+	"\x0etarget_dummies\x18\x06 \x01(\x05R\rtargetDummies\x12B\n" +
+	"\x11raid_damage_model\x18\b \x01(\v2\x16.proto.RaidDamageModelR\x0fraidDamageModel\"\xd1\x02\n" +
 	"\n" +
 	"SimOptions\x12\x1e\n" +
 	"\n" +
@@ -4630,7 +4663,7 @@ const file_api_proto_rawDesc = "" +
 	"\atargets\x18\x03 \x03(\v2\x1c.proto.TargetedActionMetricsR\atargets\x12!\n" +
 	"\fspell_school\x18\x04 \x01(\x05R\vspellSchool\x12\x1d\n" +
 	"\n" +
-	"is_passive\x18\x05 \x01(\bR\tisPassive\"\xb1\t\n" +
+	"is_passive\x18\x05 \x01(\bR\tisPassive\"\xde\t\n" +
 	"\x15TargetedActionMetrics\x12\x1d\n" +
 	"\n" +
 	"unit_index\x18\f \x01(\x05R\tunitIndex\x12\x14\n" +
@@ -4669,7 +4702,8 @@ const file_api_proto_rawDesc = "" +
 	" \x01(\x01R\x06threat\x12\x18\n" +
 	"\ahealing\x18\v \x01(\x01R\ahealing\x12!\n" +
 	"\fcrit_healing\x18\x10 \x01(\x01R\vcritHealing\x12\x1c\n" +
-	"\tshielding\x18\r \x01(\x01R\tshielding\x12 \n" +
+	"\tshielding\x18\r \x01(\x01R\tshielding\x12+\n" +
+	"\x11effective_healing\x18% \x01(\x01R\x10effectiveHealing\x12 \n" +
 	"\fcast_time_ms\x18\x0e \x01(\x01R\n" +
 	"castTimeMsJ\x04\b\x13\x10\x14J\x04\b\x14\x10\x15R\x11crit_block_damageR\vcrit_blocks\"4\n" +
 	"\x0eAggregatorData\x12\f\n" +
@@ -4701,7 +4735,7 @@ const file_api_proto_rawDesc = "" +
 	"\x0faggregator_data\x18\t \x01(\v2\x15.proto.AggregatorDataR\x0eaggregatorData\x1a7\n" +
 	"\tHistEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x05R\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"\x96\x05\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"\xd7\x05\n" +
 	"\vUnitMetrics\x12\x12\n" +
 	"\x04name\x18\t \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
@@ -4712,7 +4746,8 @@ const file_api_proto_rawDesc = "" +
 	"\x04dtps\x18\v \x01(\v2\x1a.proto.DistributionMetricsR\x04dtps\x12,\n" +
 	"\x03tmi\x18\x11 \x01(\v2\x1a.proto.DistributionMetricsR\x03tmi\x12,\n" +
 	"\x03hps\x18\x0e \x01(\v2\x1a.proto.DistributionMetricsR\x03hps\x12,\n" +
-	"\x03tto\x18\x0f \x01(\v2\x1a.proto.DistributionMetricsR\x03tto\x12&\n" +
+	"\x03tto\x18\x0f \x01(\v2\x1a.proto.DistributionMetricsR\x03tto\x12?\n" +
+	"\reffective_hps\x18\x12 \x01(\v2\x1a.proto.DistributionMetricsR\feffectiveHps\x12&\n" +
 	"\x0fseconds_oom_avg\x18\x03 \x01(\x01R\rsecondsOomAvg\x12&\n" +
 	"\x0fchance_of_death\x18\f \x01(\x01R\rchanceOfDeath\x12.\n" +
 	"\aactions\x18\x05 \x03(\v2\x14.proto.ActionMetricsR\aactions\x12(\n" +
@@ -5057,12 +5092,13 @@ var file_api_proto_goTypes = []any{
 	(*RaidBuffs)(nil),                       // 89: proto.RaidBuffs
 	(*Debuffs)(nil),                         // 90: proto.Debuffs
 	(*UnitReference)(nil),                   // 91: proto.UnitReference
-	(*ActionID)(nil),                        // 92: proto.ActionID
-	(*Encounter)(nil),                       // 93: proto.Encounter
-	(Stat)(0),                               // 94: proto.Stat
-	(PseudoStat)(0),                         // 95: proto.PseudoStat
-	(*ItemSpec)(nil),                        // 96: proto.ItemSpec
-	(ItemSlot)(0),                           // 97: proto.ItemSlot
+	(*RaidDamageModel)(nil),                 // 92: proto.RaidDamageModel
+	(*ActionID)(nil),                        // 93: proto.ActionID
+	(*Encounter)(nil),                       // 94: proto.Encounter
+	(Stat)(0),                               // 95: proto.Stat
+	(PseudoStat)(0),                         // 96: proto.PseudoStat
+	(*ItemSpec)(nil),                        // 97: proto.ItemSpec
+	(ItemSlot)(0),                           // 98: proto.ItemSlot
 }
 var file_api_proto_depIdxs = []int32{
 	57,  // 0: proto.Player.race:type_name -> proto.Race
@@ -5103,124 +5139,126 @@ var file_api_proto_depIdxs = []int32{
 	89,  // 35: proto.Raid.buffs:type_name -> proto.RaidBuffs
 	90,  // 36: proto.Raid.debuffs:type_name -> proto.Debuffs
 	91,  // 37: proto.Raid.tanks:type_name -> proto.UnitReference
-	92,  // 38: proto.ActionMetrics.id:type_name -> proto.ActionID
-	7,   // 39: proto.ActionMetrics.targets:type_name -> proto.TargetedActionMetrics
-	92,  // 40: proto.AuraMetrics.id:type_name -> proto.ActionID
-	8,   // 41: proto.AuraMetrics.aggregator_data:type_name -> proto.AggregatorData
-	92,  // 42: proto.ResourceMetrics.id:type_name -> proto.ActionID
-	0,   // 43: proto.ResourceMetrics.type:type_name -> proto.ResourceType
-	55,  // 44: proto.DistributionMetrics.hist:type_name -> proto.DistributionMetrics.HistEntry
-	8,   // 45: proto.DistributionMetrics.aggregator_data:type_name -> proto.AggregatorData
-	11,  // 46: proto.UnitMetrics.dps:type_name -> proto.DistributionMetrics
-	11,  // 47: proto.UnitMetrics.dpasp:type_name -> proto.DistributionMetrics
-	11,  // 48: proto.UnitMetrics.threat:type_name -> proto.DistributionMetrics
-	11,  // 49: proto.UnitMetrics.dtps:type_name -> proto.DistributionMetrics
-	11,  // 50: proto.UnitMetrics.tmi:type_name -> proto.DistributionMetrics
-	11,  // 51: proto.UnitMetrics.hps:type_name -> proto.DistributionMetrics
-	11,  // 52: proto.UnitMetrics.tto:type_name -> proto.DistributionMetrics
-	6,   // 53: proto.UnitMetrics.actions:type_name -> proto.ActionMetrics
-	9,   // 54: proto.UnitMetrics.auras:type_name -> proto.AuraMetrics
-	10,  // 55: proto.UnitMetrics.resources:type_name -> proto.ResourceMetrics
-	12,  // 56: proto.UnitMetrics.pets:type_name -> proto.UnitMetrics
-	11,  // 57: proto.PartyMetrics.dps:type_name -> proto.DistributionMetrics
-	11,  // 58: proto.PartyMetrics.hps:type_name -> proto.DistributionMetrics
-	12,  // 59: proto.PartyMetrics.players:type_name -> proto.UnitMetrics
-	11,  // 60: proto.RaidMetrics.dps:type_name -> proto.DistributionMetrics
-	11,  // 61: proto.RaidMetrics.hps:type_name -> proto.DistributionMetrics
-	13,  // 62: proto.RaidMetrics.parties:type_name -> proto.PartyMetrics
-	12,  // 63: proto.EncounterMetrics.targets:type_name -> proto.UnitMetrics
-	1,   // 64: proto.ErrorOutcome.type:type_name -> proto.ErrorOutcomeType
-	4,   // 65: proto.RaidSimRequest.raid:type_name -> proto.Raid
-	93,  // 66: proto.RaidSimRequest.encounter:type_name -> proto.Encounter
-	5,   // 67: proto.RaidSimRequest.sim_options:type_name -> proto.SimOptions
-	92,  // 68: proto.SampleCast.action_id:type_name -> proto.ActionID
-	56,  // 69: proto.SampleCast.resources:type_name -> proto.SampleCast.ResourcesEntry
-	18,  // 70: proto.SampleIteration.casts:type_name -> proto.SampleCast
-	14,  // 71: proto.RaidSimResult.raid_metrics:type_name -> proto.RaidMetrics
-	15,  // 72: proto.RaidSimResult.encounter_metrics:type_name -> proto.EncounterMetrics
-	16,  // 73: proto.RaidSimResult.error:type_name -> proto.ErrorOutcome
-	19,  // 74: proto.RaidSimResult.sample_iteration:type_name -> proto.SampleIteration
-	17,  // 75: proto.RaidSimRequestSplitRequest.request:type_name -> proto.RaidSimRequest
-	17,  // 76: proto.RaidSimRequestSplitResult.requests:type_name -> proto.RaidSimRequest
-	20,  // 77: proto.RaidSimResultCombinationRequest.results:type_name -> proto.RaidSimResult
-	4,   // 78: proto.ComputeStatsRequest.raid:type_name -> proto.Raid
-	93,  // 79: proto.ComputeStatsRequest.encounter:type_name -> proto.Encounter
-	92,  // 80: proto.AuraStats.id:type_name -> proto.ActionID
-	92,  // 81: proto.SpellStats.id:type_name -> proto.ActionID
-	29,  // 82: proto.APLStats.prepull_actions:type_name -> proto.APLActionStats
-	29,  // 83: proto.APLStats.priority_list:type_name -> proto.APLActionStats
-	28,  // 84: proto.UnitMetadata.spells:type_name -> proto.SpellStats
-	27,  // 85: proto.UnitMetadata.auras:type_name -> proto.AuraStats
-	31,  // 86: proto.PetStats.metadata:type_name -> proto.UnitMetadata
-	61,  // 87: proto.PlayerStats.base_stats:type_name -> proto.UnitStats
-	61,  // 88: proto.PlayerStats.gear_stats:type_name -> proto.UnitStats
-	61,  // 89: proto.PlayerStats.talents_stats:type_name -> proto.UnitStats
-	61,  // 90: proto.PlayerStats.buffs_stats:type_name -> proto.UnitStats
-	61,  // 91: proto.PlayerStats.consumes_stats:type_name -> proto.UnitStats
-	61,  // 92: proto.PlayerStats.final_stats:type_name -> proto.UnitStats
-	63,  // 93: proto.PlayerStats.buffs:type_name -> proto.IndividualBuffs
-	31,  // 94: proto.PlayerStats.metadata:type_name -> proto.UnitMetadata
-	30,  // 95: proto.PlayerStats.rotation_stats:type_name -> proto.APLStats
-	32,  // 96: proto.PlayerStats.pets:type_name -> proto.PetStats
-	33,  // 97: proto.PartyStats.players:type_name -> proto.PlayerStats
-	34,  // 98: proto.RaidStats.parties:type_name -> proto.PartyStats
-	31,  // 99: proto.TargetStats.metadata:type_name -> proto.UnitMetadata
-	36,  // 100: proto.EncounterStats.targets:type_name -> proto.TargetStats
-	35,  // 101: proto.ComputeStatsResult.raid_stats:type_name -> proto.RaidStats
-	37,  // 102: proto.ComputeStatsResult.encounter_stats:type_name -> proto.EncounterStats
-	2,   // 103: proto.StatWeightsRequest.player:type_name -> proto.Player
-	89,  // 104: proto.StatWeightsRequest.raid_buffs:type_name -> proto.RaidBuffs
-	88,  // 105: proto.StatWeightsRequest.party_buffs:type_name -> proto.PartyBuffs
-	90,  // 106: proto.StatWeightsRequest.debuffs:type_name -> proto.Debuffs
-	93,  // 107: proto.StatWeightsRequest.encounter:type_name -> proto.Encounter
-	5,   // 108: proto.StatWeightsRequest.sim_options:type_name -> proto.SimOptions
-	91,  // 109: proto.StatWeightsRequest.tanks:type_name -> proto.UnitReference
-	94,  // 110: proto.StatWeightsRequest.stats_to_weigh:type_name -> proto.Stat
-	95,  // 111: proto.StatWeightsRequest.pseudo_stats_to_weigh:type_name -> proto.PseudoStat
-	94,  // 112: proto.StatWeightsRequest.ep_reference_stat:type_name -> proto.Stat
-	40,  // 113: proto.StatWeightsStatRequestData.stat_data:type_name -> proto.StatWeightsStatData
-	17,  // 114: proto.StatWeightsStatRequestData.request_low:type_name -> proto.RaidSimRequest
-	17,  // 115: proto.StatWeightsStatRequestData.request_high:type_name -> proto.RaidSimRequest
-	17,  // 116: proto.StatWeightRequestsData.base_request:type_name -> proto.RaidSimRequest
-	94,  // 117: proto.StatWeightRequestsData.ep_reference_stat:type_name -> proto.Stat
-	41,  // 118: proto.StatWeightRequestsData.stat_sim_requests:type_name -> proto.StatWeightsStatRequestData
-	40,  // 119: proto.StatWeightsStatResultData.stat_data:type_name -> proto.StatWeightsStatData
-	20,  // 120: proto.StatWeightsStatResultData.result_low:type_name -> proto.RaidSimResult
-	20,  // 121: proto.StatWeightsStatResultData.result_high:type_name -> proto.RaidSimResult
-	20,  // 122: proto.StatWeightsCalcRequest.base_result:type_name -> proto.RaidSimResult
-	94,  // 123: proto.StatWeightsCalcRequest.ep_reference_stat:type_name -> proto.Stat
-	43,  // 124: proto.StatWeightsCalcRequest.stat_sim_results:type_name -> proto.StatWeightsStatResultData
-	46,  // 125: proto.StatWeightsResult.dps:type_name -> proto.StatWeightValues
-	46,  // 126: proto.StatWeightsResult.hps:type_name -> proto.StatWeightValues
-	46,  // 127: proto.StatWeightsResult.tps:type_name -> proto.StatWeightValues
-	46,  // 128: proto.StatWeightsResult.dtps:type_name -> proto.StatWeightValues
-	46,  // 129: proto.StatWeightsResult.tmi:type_name -> proto.StatWeightValues
-	46,  // 130: proto.StatWeightsResult.p_death:type_name -> proto.StatWeightValues
-	16,  // 131: proto.StatWeightsResult.error:type_name -> proto.ErrorOutcome
-	61,  // 132: proto.StatWeightValues.weights:type_name -> proto.UnitStats
-	61,  // 133: proto.StatWeightValues.weights_stdev:type_name -> proto.UnitStats
-	61,  // 134: proto.StatWeightValues.ep_values:type_name -> proto.UnitStats
-	61,  // 135: proto.StatWeightValues.ep_values_stdev:type_name -> proto.UnitStats
-	20,  // 136: proto.ProgressMetrics.final_raid_result:type_name -> proto.RaidSimResult
-	45,  // 137: proto.ProgressMetrics.final_weight_result:type_name -> proto.StatWeightsResult
-	52,  // 138: proto.ProgressMetrics.final_bulk_result:type_name -> proto.BulkSimResult
-	17,  // 139: proto.BulkSimRequest.base_settings:type_name -> proto.RaidSimRequest
-	51,  // 140: proto.BulkSimRequest.bulk_settings:type_name -> proto.BulkSettings
-	96,  // 141: proto.BulkSettings.items:type_name -> proto.ItemSpec
-	50,  // 142: proto.BulkSettings.talents_to_sim:type_name -> proto.TalentLoadout
-	53,  // 143: proto.BulkSimResult.results:type_name -> proto.BulkComboResult
-	53,  // 144: proto.BulkSimResult.equipped_gear_result:type_name -> proto.BulkComboResult
-	16,  // 145: proto.BulkSimResult.error:type_name -> proto.ErrorOutcome
-	54,  // 146: proto.BulkComboResult.items_added:type_name -> proto.ItemSpecWithSlot
-	12,  // 147: proto.BulkComboResult.unit_metrics:type_name -> proto.UnitMetrics
-	50,  // 148: proto.BulkComboResult.talent_loadout:type_name -> proto.TalentLoadout
-	96,  // 149: proto.ItemSpecWithSlot.item:type_name -> proto.ItemSpec
-	97,  // 150: proto.ItemSpecWithSlot.slot:type_name -> proto.ItemSlot
-	151, // [151:151] is the sub-list for method output_type
-	151, // [151:151] is the sub-list for method input_type
-	151, // [151:151] is the sub-list for extension type_name
-	151, // [151:151] is the sub-list for extension extendee
-	0,   // [0:151] is the sub-list for field type_name
+	92,  // 38: proto.Raid.raid_damage_model:type_name -> proto.RaidDamageModel
+	93,  // 39: proto.ActionMetrics.id:type_name -> proto.ActionID
+	7,   // 40: proto.ActionMetrics.targets:type_name -> proto.TargetedActionMetrics
+	93,  // 41: proto.AuraMetrics.id:type_name -> proto.ActionID
+	8,   // 42: proto.AuraMetrics.aggregator_data:type_name -> proto.AggregatorData
+	93,  // 43: proto.ResourceMetrics.id:type_name -> proto.ActionID
+	0,   // 44: proto.ResourceMetrics.type:type_name -> proto.ResourceType
+	55,  // 45: proto.DistributionMetrics.hist:type_name -> proto.DistributionMetrics.HistEntry
+	8,   // 46: proto.DistributionMetrics.aggregator_data:type_name -> proto.AggregatorData
+	11,  // 47: proto.UnitMetrics.dps:type_name -> proto.DistributionMetrics
+	11,  // 48: proto.UnitMetrics.dpasp:type_name -> proto.DistributionMetrics
+	11,  // 49: proto.UnitMetrics.threat:type_name -> proto.DistributionMetrics
+	11,  // 50: proto.UnitMetrics.dtps:type_name -> proto.DistributionMetrics
+	11,  // 51: proto.UnitMetrics.tmi:type_name -> proto.DistributionMetrics
+	11,  // 52: proto.UnitMetrics.hps:type_name -> proto.DistributionMetrics
+	11,  // 53: proto.UnitMetrics.tto:type_name -> proto.DistributionMetrics
+	11,  // 54: proto.UnitMetrics.effective_hps:type_name -> proto.DistributionMetrics
+	6,   // 55: proto.UnitMetrics.actions:type_name -> proto.ActionMetrics
+	9,   // 56: proto.UnitMetrics.auras:type_name -> proto.AuraMetrics
+	10,  // 57: proto.UnitMetrics.resources:type_name -> proto.ResourceMetrics
+	12,  // 58: proto.UnitMetrics.pets:type_name -> proto.UnitMetrics
+	11,  // 59: proto.PartyMetrics.dps:type_name -> proto.DistributionMetrics
+	11,  // 60: proto.PartyMetrics.hps:type_name -> proto.DistributionMetrics
+	12,  // 61: proto.PartyMetrics.players:type_name -> proto.UnitMetrics
+	11,  // 62: proto.RaidMetrics.dps:type_name -> proto.DistributionMetrics
+	11,  // 63: proto.RaidMetrics.hps:type_name -> proto.DistributionMetrics
+	13,  // 64: proto.RaidMetrics.parties:type_name -> proto.PartyMetrics
+	12,  // 65: proto.EncounterMetrics.targets:type_name -> proto.UnitMetrics
+	1,   // 66: proto.ErrorOutcome.type:type_name -> proto.ErrorOutcomeType
+	4,   // 67: proto.RaidSimRequest.raid:type_name -> proto.Raid
+	94,  // 68: proto.RaidSimRequest.encounter:type_name -> proto.Encounter
+	5,   // 69: proto.RaidSimRequest.sim_options:type_name -> proto.SimOptions
+	93,  // 70: proto.SampleCast.action_id:type_name -> proto.ActionID
+	56,  // 71: proto.SampleCast.resources:type_name -> proto.SampleCast.ResourcesEntry
+	18,  // 72: proto.SampleIteration.casts:type_name -> proto.SampleCast
+	14,  // 73: proto.RaidSimResult.raid_metrics:type_name -> proto.RaidMetrics
+	15,  // 74: proto.RaidSimResult.encounter_metrics:type_name -> proto.EncounterMetrics
+	16,  // 75: proto.RaidSimResult.error:type_name -> proto.ErrorOutcome
+	19,  // 76: proto.RaidSimResult.sample_iteration:type_name -> proto.SampleIteration
+	17,  // 77: proto.RaidSimRequestSplitRequest.request:type_name -> proto.RaidSimRequest
+	17,  // 78: proto.RaidSimRequestSplitResult.requests:type_name -> proto.RaidSimRequest
+	20,  // 79: proto.RaidSimResultCombinationRequest.results:type_name -> proto.RaidSimResult
+	4,   // 80: proto.ComputeStatsRequest.raid:type_name -> proto.Raid
+	94,  // 81: proto.ComputeStatsRequest.encounter:type_name -> proto.Encounter
+	93,  // 82: proto.AuraStats.id:type_name -> proto.ActionID
+	93,  // 83: proto.SpellStats.id:type_name -> proto.ActionID
+	29,  // 84: proto.APLStats.prepull_actions:type_name -> proto.APLActionStats
+	29,  // 85: proto.APLStats.priority_list:type_name -> proto.APLActionStats
+	28,  // 86: proto.UnitMetadata.spells:type_name -> proto.SpellStats
+	27,  // 87: proto.UnitMetadata.auras:type_name -> proto.AuraStats
+	31,  // 88: proto.PetStats.metadata:type_name -> proto.UnitMetadata
+	61,  // 89: proto.PlayerStats.base_stats:type_name -> proto.UnitStats
+	61,  // 90: proto.PlayerStats.gear_stats:type_name -> proto.UnitStats
+	61,  // 91: proto.PlayerStats.talents_stats:type_name -> proto.UnitStats
+	61,  // 92: proto.PlayerStats.buffs_stats:type_name -> proto.UnitStats
+	61,  // 93: proto.PlayerStats.consumes_stats:type_name -> proto.UnitStats
+	61,  // 94: proto.PlayerStats.final_stats:type_name -> proto.UnitStats
+	63,  // 95: proto.PlayerStats.buffs:type_name -> proto.IndividualBuffs
+	31,  // 96: proto.PlayerStats.metadata:type_name -> proto.UnitMetadata
+	30,  // 97: proto.PlayerStats.rotation_stats:type_name -> proto.APLStats
+	32,  // 98: proto.PlayerStats.pets:type_name -> proto.PetStats
+	33,  // 99: proto.PartyStats.players:type_name -> proto.PlayerStats
+	34,  // 100: proto.RaidStats.parties:type_name -> proto.PartyStats
+	31,  // 101: proto.TargetStats.metadata:type_name -> proto.UnitMetadata
+	36,  // 102: proto.EncounterStats.targets:type_name -> proto.TargetStats
+	35,  // 103: proto.ComputeStatsResult.raid_stats:type_name -> proto.RaidStats
+	37,  // 104: proto.ComputeStatsResult.encounter_stats:type_name -> proto.EncounterStats
+	2,   // 105: proto.StatWeightsRequest.player:type_name -> proto.Player
+	89,  // 106: proto.StatWeightsRequest.raid_buffs:type_name -> proto.RaidBuffs
+	88,  // 107: proto.StatWeightsRequest.party_buffs:type_name -> proto.PartyBuffs
+	90,  // 108: proto.StatWeightsRequest.debuffs:type_name -> proto.Debuffs
+	94,  // 109: proto.StatWeightsRequest.encounter:type_name -> proto.Encounter
+	5,   // 110: proto.StatWeightsRequest.sim_options:type_name -> proto.SimOptions
+	91,  // 111: proto.StatWeightsRequest.tanks:type_name -> proto.UnitReference
+	95,  // 112: proto.StatWeightsRequest.stats_to_weigh:type_name -> proto.Stat
+	96,  // 113: proto.StatWeightsRequest.pseudo_stats_to_weigh:type_name -> proto.PseudoStat
+	95,  // 114: proto.StatWeightsRequest.ep_reference_stat:type_name -> proto.Stat
+	40,  // 115: proto.StatWeightsStatRequestData.stat_data:type_name -> proto.StatWeightsStatData
+	17,  // 116: proto.StatWeightsStatRequestData.request_low:type_name -> proto.RaidSimRequest
+	17,  // 117: proto.StatWeightsStatRequestData.request_high:type_name -> proto.RaidSimRequest
+	17,  // 118: proto.StatWeightRequestsData.base_request:type_name -> proto.RaidSimRequest
+	95,  // 119: proto.StatWeightRequestsData.ep_reference_stat:type_name -> proto.Stat
+	41,  // 120: proto.StatWeightRequestsData.stat_sim_requests:type_name -> proto.StatWeightsStatRequestData
+	40,  // 121: proto.StatWeightsStatResultData.stat_data:type_name -> proto.StatWeightsStatData
+	20,  // 122: proto.StatWeightsStatResultData.result_low:type_name -> proto.RaidSimResult
+	20,  // 123: proto.StatWeightsStatResultData.result_high:type_name -> proto.RaidSimResult
+	20,  // 124: proto.StatWeightsCalcRequest.base_result:type_name -> proto.RaidSimResult
+	95,  // 125: proto.StatWeightsCalcRequest.ep_reference_stat:type_name -> proto.Stat
+	43,  // 126: proto.StatWeightsCalcRequest.stat_sim_results:type_name -> proto.StatWeightsStatResultData
+	46,  // 127: proto.StatWeightsResult.dps:type_name -> proto.StatWeightValues
+	46,  // 128: proto.StatWeightsResult.hps:type_name -> proto.StatWeightValues
+	46,  // 129: proto.StatWeightsResult.tps:type_name -> proto.StatWeightValues
+	46,  // 130: proto.StatWeightsResult.dtps:type_name -> proto.StatWeightValues
+	46,  // 131: proto.StatWeightsResult.tmi:type_name -> proto.StatWeightValues
+	46,  // 132: proto.StatWeightsResult.p_death:type_name -> proto.StatWeightValues
+	16,  // 133: proto.StatWeightsResult.error:type_name -> proto.ErrorOutcome
+	61,  // 134: proto.StatWeightValues.weights:type_name -> proto.UnitStats
+	61,  // 135: proto.StatWeightValues.weights_stdev:type_name -> proto.UnitStats
+	61,  // 136: proto.StatWeightValues.ep_values:type_name -> proto.UnitStats
+	61,  // 137: proto.StatWeightValues.ep_values_stdev:type_name -> proto.UnitStats
+	20,  // 138: proto.ProgressMetrics.final_raid_result:type_name -> proto.RaidSimResult
+	45,  // 139: proto.ProgressMetrics.final_weight_result:type_name -> proto.StatWeightsResult
+	52,  // 140: proto.ProgressMetrics.final_bulk_result:type_name -> proto.BulkSimResult
+	17,  // 141: proto.BulkSimRequest.base_settings:type_name -> proto.RaidSimRequest
+	51,  // 142: proto.BulkSimRequest.bulk_settings:type_name -> proto.BulkSettings
+	97,  // 143: proto.BulkSettings.items:type_name -> proto.ItemSpec
+	50,  // 144: proto.BulkSettings.talents_to_sim:type_name -> proto.TalentLoadout
+	53,  // 145: proto.BulkSimResult.results:type_name -> proto.BulkComboResult
+	53,  // 146: proto.BulkSimResult.equipped_gear_result:type_name -> proto.BulkComboResult
+	16,  // 147: proto.BulkSimResult.error:type_name -> proto.ErrorOutcome
+	54,  // 148: proto.BulkComboResult.items_added:type_name -> proto.ItemSpecWithSlot
+	12,  // 149: proto.BulkComboResult.unit_metrics:type_name -> proto.UnitMetrics
+	50,  // 150: proto.BulkComboResult.talent_loadout:type_name -> proto.TalentLoadout
+	97,  // 151: proto.ItemSpecWithSlot.item:type_name -> proto.ItemSpec
+	98,  // 152: proto.ItemSpecWithSlot.slot:type_name -> proto.ItemSlot
+	153, // [153:153] is the sub-list for method output_type
+	153, // [153:153] is the sub-list for method input_type
+	153, // [153:153] is the sub-list for extension type_name
+	153, // [153:153] is the sub-list for extension extendee
+	0,   // [0:153] is the sub-list for field type_name
 }
 
 func init() { file_api_proto_init() }

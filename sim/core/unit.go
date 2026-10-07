@@ -132,6 +132,9 @@ type Unit struct {
 	AttackTables                []map[proto.CastType]*AttackTable
 	DynamicDamageTakenModifiers []DynamicDamageTakenModifier
 
+	// activeShields are the absorb shields currently on this unit.
+	activeShields []*Shield
+
 	GCD *Timer
 
 	// Used for applying the effect of a hardcast spell when casting finishes.
@@ -516,6 +519,7 @@ func (unit *Unit) reset(sim *Simulation, _ Agent) {
 	unit.stats = unit.initialStats
 	unit.PseudoStats = unit.initialPseudoStats
 	unit.auraTracker.reset(sim)
+	unit.activeShields = unit.activeShields[:0]
 	// Spellbook needs to be reset AFTER auras.
 	for _, spell := range unit.Spellbook {
 		spell.reset(sim)
