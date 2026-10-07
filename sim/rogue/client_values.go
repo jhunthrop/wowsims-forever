@@ -18,6 +18,14 @@ const (
 	dualWieldSpecializationPerRank = 0.05
 	// Vigor: "Increases your maximum Energy by 5." / "by 10."
 	vigorEnergyPerRank = 5.0
+	// Murder: "Increases all damage dealt by 2%/4% against Humanoid and
+	// Giant targets."
+	murderDamagePerRank = 0.02
+	// Serrated Blades: "ignore 3%/6%/9% of your target's Armor".
+	serratedBladesArmorPenPctPerRank = 3.0
+	// Aggression: "Increases the damage of your Sinister Strike, Backstab,
+	// and Eviscerate abilities by 2%/4%/6%."
+	aggressionDamagePerRank = 0.02
 
 	// Hemorrhage (16511): "100% weapon damage (145% if a Dagger is
 	// equipped) and causes the target to take 15% increased Rupture damage
@@ -38,6 +46,12 @@ var improvedEviscerateMultiplier = [4]float64{1, 1.07, 1.13, 1.20}
 // opportunityMultiplier is Opportunity's rank -> damage multiplier for
 // Backstab, Garrote, Ambush and Mutilate: "by 5%/10%" (two ranks).
 var opportunityMultiplier = [3]float64{1, 1.05, 1.10}
+
+// aggressionBonus is Aggression's additive damage bonus for Sinister Strike,
+// Backstab and Eviscerate.
+func (rogue *Rogue) aggressionBonus() float64 {
+	return aggressionDamagePerRank * float64(rogue.Talents.Aggression)
+}
 
 // mainHandStrikePct picks a main-hand strike's weapon-damage fraction: the
 // dagger figure with a dagger in the main hand, the plain one otherwise.

@@ -97,8 +97,7 @@ func (rogue *Rogue) ApplyTalents() {
 	rogue.AddStat(stats.Parry, 1*float64(rogue.Talents.Deflection))
 	rogue.AddStat(stats.Crit, 1*float64(rogue.Talents.Malice))
 	rogue.AddStat(stats.Hit, 1*float64(rogue.Talents.Precision))
-	// TODO: Test the Armor reduction amount
-	rogue.AddStat(stats.ArmorPenetration, float64(5/3*rogue.Talents.SerratedBlades*rogue.Level))
+	rogue.AddStat(stats.ArmorPenetration, serratedBladesArmorPenPctPerRank*float64(rogue.Talents.SerratedBlades)*core.ArmorPenPerPercentArmor)
 	rogue.AutoAttacks.OHConfig().DamageMultiplier *= rogue.dwsMultiplier()
 
 	/*
@@ -135,7 +134,9 @@ func (rogue *Rogue) applyRuthlessness() {
 	})
 }
 
-// Murder talent
+// Murder talent. Client text: "Increases all damage dealt by 2%/4% against
+// Humanoid and Giant targets." (talents/rogue.json), one multiplier on the
+// damage dealt and nothing on the crit multiplier.
 func (rogue *Rogue) applyMurder() {
 	if rogue.Talents.Murder == 0 {
 		return
@@ -145,11 +146,10 @@ func (rogue *Rogue) applyMurder() {
 	rogue.Env.RegisterPostFinalizeEffect(func() {
 		for _, t := range rogue.Env.Encounter.Targets {
 			switch t.MobType {
-			case proto.MobType_MobTypeHumanoid, proto.MobType_MobTypeGiant, proto.MobType_MobTypeBeast, proto.MobType_MobTypeDragonkin:
-				multiplier := []float64{1, 1.01, 1.02}[rogue.Talents.Murder]
+			case proto.MobType_MobTypeHumanoid, proto.MobType_MobTypeGiant:
+				multiplier := 1 + murderDamagePerRank*float64(rogue.Talents.Murder)
 				for _, at := range rogue.AttackTables[t.UnitIndex] {
 					at.DamageDealtMultiplier *= multiplier
-					at.CritMultiplier *= multiplier
 				}
 			}
 		}
