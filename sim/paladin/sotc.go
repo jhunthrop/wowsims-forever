@@ -58,6 +58,23 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 			ProcMask:    core.ProcMaskEmpty,
 			Flags:       core.SpellFlagMeleeMetrics,
 
+			// source 1.60.1.70009 client spell data (spellconst/paladin.json):
+			// Judgement of the Crusader's spell_level equals the
+			// owning Seal of the Crusader rank's own level at every
+			// rank. Flagged by paladin.golden.md's "required_level
+			// N->0" rows - this SpellConfig never set the field at
+			// all.
+			//
+			// Its duration_ms (40000, every rank) is NOT wired here:
+			// the debuff it applies is core.JudgementOfTheCrusaderAura
+			// (sim/core/debuffs.go), which hardcodes Duration to 10s -
+			// a stale-vanilla-literal bug in sim/core, out of scope
+			// for this lane (never edit sim/core). Wiring RelatedSelfBuff
+			// to that aura would trade today's "missing aura duration"
+			// mismatch for a numeric one (40000->10000) this lane
+			// cannot fix. Reported as a core follow-up.
+			RequiredLevel: int(rank.level),
+
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				spell.CalcAndDealOutcome(sim, target, spell.OutcomeAlwaysHit)
 				debuffs.Get(target).Activate(sim)
@@ -92,6 +109,13 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 
 			RequiredLevel: int(rank.level),
 			Rank:          i + 1,
+
+			// aura's own Duration (30s) matches the client's
+			// duration_ms (30000) for this cast's own SpellID at every
+			// rank (spellconst/paladin.json) - wiring it through lets
+			// compare.go's engineDuration see it instead of reporting
+			// 0 for a self-buff that does exist.
+			RelatedSelfBuff: aura,
 
 			ManaCost: core.ManaCostOptions{
 				FlatCost:   rank.manaCost - paladin.getLibramSealCostReduction(),

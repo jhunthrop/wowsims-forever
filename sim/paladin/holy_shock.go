@@ -50,8 +50,16 @@ func (paladin *Paladin) registerHolyShock() {
 					GCD: core.GCDDefault,
 				},
 				CD: core.Cooldown{
-					Timer:    paladin.NewTimer(),
-					Duration: time.Second * 30,
+					Timer: paladin.NewTimer(),
+					// category_cooldown_ms is 10000 for every rank's
+					// actual cast spell (spellconst/paladin.json ids
+					// 20473/20929/20930): source 1.60.1.70009 client
+					// spell data. 30s was Classic's original Holy
+					// Shock cooldown; Forever's client shortened it to
+					// 10s and this literal was never updated. Flagged
+					// by sim/core/testdata/conformance/paladin.golden.md's
+					// "cooldown_ms 10000->30000" row.
+					Duration: time.Second * 10,
 				},
 			},
 

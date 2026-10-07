@@ -57,7 +57,7 @@ func (paladin *Paladin) registerConsecration() {
 			break
 		}
 
-		paladin.RegisterSpell(core.SpellConfig{
+		consecration := paladin.RegisterSpell(core.SpellConfig{
 			ActionID:    core.ActionID{SpellID: rank.spellID},
 			SpellSchool: core.SpellSchoolHoly,
 			DefenseType: core.DefenseTypeMagic,
@@ -110,5 +110,17 @@ func (paladin *Paladin) registerConsecration() {
 				spell.AOEDot().Apply(sim)
 			},
 		})
+
+		// Consecration's ground effect is an AOE Dot (IsAOE: true,
+		// above), so sim/core/dot.go's createDots stores its Aura on
+		// spell.aoeDot rather than in spell.dots - the only two places
+		// compare.go's engineDuration looks are RelatedSelfBuff and
+		// Dot(target). The aura is on the CASTER (dot.go's
+		// `caster.GetOrRegisterAura` for IsAOE dots), so RelatedSelfBuff
+		// is the semantically correct field, not a workaround: its
+		// Duration (TickLength*NumberOfTicks = 8s, set at registration
+		// by newDot) already matches the client's duration_ms (8000,
+		// every rank).
+		consecration.RelatedSelfBuff = consecration.AOEDot().Aura
 	}
 }

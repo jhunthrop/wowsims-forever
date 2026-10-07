@@ -74,6 +74,13 @@ func (paladin *Paladin) registerSealOfCommand() {
 			ProcMask:       core.ProcMaskMeleeMHSpecial,
 			Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete,
 
+			// source 1.60.1.70009 client spell data (spellconst/paladin.json):
+			// Judgement of Command's spell_level equals the owning Seal
+			// of Command rank's own level at every rank. Flagged by
+			// paladin.golden.md's "required_level N->0" rows - this
+			// SpellConfig never set the field at all.
+			RequiredLevel: int(rank.level),
+
 			DamageMultiplier: paladin.getWeaponSpecializationModifier(),
 			ThreatMultiplier: 1,
 			BonusCoefficient: 0.429,
@@ -148,6 +155,13 @@ func (paladin *Paladin) registerSealOfCommand() {
 
 			RequiredLevel: int(rank.level),
 			Rank:          i + 1,
+
+			// aura's own Duration (30s) matches the client's
+			// duration_ms (30000) for this cast's own SpellID at every
+			// rank (spellconst/paladin.json) - wiring it through lets
+			// compare.go's engineDuration see it instead of reporting
+			// 0 for a self-buff that does exist.
+			RelatedSelfBuff: aura,
 
 			ManaCost: core.ManaCostOptions{
 				FlatCost:   rank.manaCost - paladin.getLibramSealCostReduction(),

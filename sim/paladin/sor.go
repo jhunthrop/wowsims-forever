@@ -79,6 +79,13 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 			ProcMask:       core.ProcMaskSpellDamage,
 			Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagSuppressWeaponProcs | core.SpellFlagSuppressEquipProcs | core.SpellFlagBinary,
 
+			// source 1.60.1.70009 client spell data (spellconst/paladin.json):
+			// Judgement of Righteousness's spell_level equals the
+			// owning Seal of Righteousness rank's own level at every
+			// rank. Flagged by paladin.golden.md's "required_level
+			// N->0" rows - this SpellConfig never set the field at all.
+			RequiredLevel: int(rank.level),
+
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 
@@ -106,6 +113,12 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 			DefenseType:    core.DefenseTypeMelee,
 			ProcMask:       core.ProcMaskMeleeMHSpecial,                                   //changed to ProcMaskMeleeMHSpecial, to allow procs from weapons/oils which do proc from SoR,
 			Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagSuppressEquipProcs, // but Wild Strikes does not proc, nor equip procs
+
+			// source 1.60.1.70009 client spell data: every Seal of
+			// Righteousness proc id (25713/2573x/2574x) carries
+			// spell_level 1, independent of the owning rank. Flagged by
+			// paladin.golden.md's "required_level 1->0" rows.
+			RequiredLevel: 1,
 
 			//BonusCritRating: paladin.holyCrit(), // TODO to be tested, but unlikely
 
@@ -147,6 +160,13 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 
 			RequiredLevel: int(rank.level),
 			Rank:          i + 1,
+
+			// aura's own Duration (30s) matches the client's
+			// duration_ms (30000) for this cast's own SpellID at every
+			// rank (spellconst/paladin.json) - wiring it through lets
+			// compare.go's engineDuration see it instead of reporting
+			// 0 for a self-buff that does exist.
+			RelatedSelfBuff: aura,
 
 			ManaCost: core.ManaCostOptions{
 				FlatCost:   rank.manaCost - paladin.getLibramSealCostReduction(),
