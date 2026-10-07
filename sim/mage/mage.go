@@ -121,6 +121,10 @@ type Mage struct {
 
 	activeBarrier *core.Aura
 
+	// fingersFreezeCast is true only while a cast that spent a Fingers of
+	// Frost charge resolves; isTargetFrozen reads it.
+	fingersFreezeCast bool
+
 	ArcaneBlast             []*core.Spell
 	ArcaneExplosion         []*core.Spell
 	ArcaneMissiles          []*core.Spell
@@ -150,6 +154,7 @@ type Mage struct {
 	ArcanePowerAura     *core.Aura
 	ClearcastingAura    *core.Aura
 	CombustionAura      *core.Aura
+	FingersOfFrostAura  *core.Aura
 	FrozenAuras         core.AuraArray
 	HeatingUpAura       *core.Aura
 	IceArmorAura        *core.Aura

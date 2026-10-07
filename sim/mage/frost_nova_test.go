@@ -105,6 +105,13 @@ func TestFrostNovaCannotFreezeABoss(t *testing.T) {
 // returns the built mage, a reset+pre-pulled sim, and the target unit.
 func newFrostMageSim(t *testing.T, target *proto.Target) (*Mage, *core.Simulation, *core.Unit) {
 	t.Helper()
+	return newFrostMageSimWithTalents(t, target, ForeverFrostTalents)
+}
+
+// newFrostMageSimWithTalents is newFrostMageSim with the talent string
+// chosen by the test, for the rank-dependent talents.
+func newFrostMageSimWithTalents(t *testing.T, target *proto.Target, talents string) (*Mage, *core.Simulation, *core.Unit) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
@@ -113,7 +120,7 @@ func newFrostMageSim(t *testing.T, target *proto.Target) (*Mage, *core.Simulatio
 			Level:              60,
 			Equipment:          &proto.EquipmentSpec{},
 			Buffs:              core.FullBuffs.Player,
-			TalentsString:      ForeverFrostTalents,
+			TalentsString:      talents,
 			DistanceFromTarget: 5,
 		},
 		PlayerOptions,

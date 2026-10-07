@@ -24,8 +24,9 @@ const (
 	// (x4) or in Blizzard's usual sense of "triple damage" (x3). x3 is
 	// what every previous implementation of this spell did, so it is
 	// the value here, and the nightly cast-frequency and damage
-	// comparison is what settles it. The figure is inert until
-	// something in this sim can freeze a target - see isTargetFrozen.
+	// comparison is what settles it. It applies against a Frost
+	// Nova-frozen target and on a Fingers of Frost cast - see
+	// isTargetFrozen.
 	iceLanceFrozenMultiplier = 3.0
 )
 
@@ -84,10 +85,9 @@ func (mage *Mage) getIceLanceConfig(rank int) core.SpellConfig {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
-			// Whether the Frozen bonus stacks with Shatter's crit bonus
-			// is exactly the kind of interaction rule the client's data
-			// does not carry (research/07-simulator.md 5.3), so it is
-			// written as multiplicative and marked.
+			// The Frozen bonus is a base-damage multiplier and Shatter's
+			// is crit chance, so they compose without an interaction
+			// rule.
 			if mage.isTargetFrozen(target) {
 				baseDamage *= iceLanceFrozenMultiplier
 			}
@@ -102,33 +102,20 @@ func (mage *Mage) getIceLanceConfig(rank int) core.SpellConfig {
 	}
 }
 
-// isTargetFrozen reports whether a Frost snare or root this mage applied
-// is on the target.
+// isTargetFrozen reports whether target counts as Frozen for the cast
+// that is resolving: it carries Frost Nova's Frozen aura, or the cast
+// spent a Fingers of Frost charge (fingers_of_frost.go).
 //
-// frost_nova.go's Frozen aura is the one source today; Frostbite (the
-// Frost tree talent of the same idea, applied by Frostbolt/Blizzard
-// procs) has no ability file in this package yet and so contributes
-// nothing here. Shatter (talents.go) is written against this same
-// check but, unlike Ice Lance's damage bonus, is not wired to it: the
-// engine has no per-target conditional crit-chance mechanism (the
-// SpellMod system and PseudoStats.SchoolBonusCritChance are both
-// caster-side and unconditional), so Shatter stays inert until one
-// exists. Fingers of Frost is inert for the same reason plus its own
-// missing Chill-proc.
+// Frostbite's Freeze has no source here: it is a root, and a raid boss
+// is immune to roots the way it is to Frost Nova's (canFreeze).
 func (mage *Mage) isTargetFrozen(target *core.Unit) bool {
-	for _, aura := range mage.frozenAuras(target) {
-		if aura != nil && aura.IsActive() {
-			return true
-		}
-	}
-	return false
+	return mage.fingersFreezeCast || mage.targetHasFrozenAura(target)
 }
 
-// frozenAuras is the set of auras that mean "this target is Frozen".
-// See isTargetFrozen for what reads it and what still does not.
-func (mage *Mage) frozenAuras(target *core.Unit) []*core.Aura {
+// targetHasFrozenAura is the target-side half of isTargetFrozen.
+func (mage *Mage) targetHasFrozenAura(target *core.Unit) bool {
 	if mage.FrozenAuras == nil {
-		return nil
+		return false
 	}
-	return []*core.Aura{mage.FrozenAuras.Get(target)}
+	return mage.FrozenAuras.Get(target).IsActive()
 }

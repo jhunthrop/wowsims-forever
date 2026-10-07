@@ -51,7 +51,7 @@ func (mage *Mage) getFrostNovaConfig(rank int, cdTimer *core.Timer) core.SpellCo
 		DefenseType:      core.DefenseTypeMagic,
 		ProcMask:         core.ProcMaskSpellDamage,
 		ClientBaseDamage: roll,
-		Flags:            SpellFlagMage | SpellFlagChillSpell | core.SpellFlagAPL,
+		Flags:            SpellFlagMage | core.SpellFlagAPL,
 
 		RequiredLevel: FrostNovaLevel[rank],
 		Rank:          rank,

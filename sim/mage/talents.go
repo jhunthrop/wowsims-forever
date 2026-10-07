@@ -127,6 +127,8 @@ func (mage *Mage) applyFrostTalents() {
 	// under their talent rather than from RegisterMage: an Arcane mage
 	// that never spent the point must not have the spell, or its
 	// .results golden moves for a spell it cannot cast.
+	mage.applyFingersOfFrost()
+	mage.applyFrozenStateToCasts()
 	mage.registerIceLanceSpell()
 	mage.registerColdSnapSpell()
 	mage.registerIceBarrierSpell()
@@ -145,18 +147,11 @@ func (mage *Mage) applyFrostTalents() {
 	// Ice Block is a defensive immunity the rotation never casts.
 	_ = mage.Talents.IceBlock
 
-	// Frostbite, Shatter and Fingers of Frost all turn on a target being
-	// Frozen. Frost Nova (frost_nova.go) now applies that state - and a
-	// raid boss, built above core.CharacterMaxLevel, is immune to it the
-	// way every CC in this sim treats a boss - so Ice Lance's Frozen
-	// bonus is live on a freezable target. Shatter and Fingers of Frost
-	// stay inert: both need a conditional bonus on the mage's own crit
-	// chance per target-Frozen-state, which nothing in the SpellMod or
-	// PseudoStats system expresses yet (see isTargetFrozen's comment in
-	// ice_lance.go), and Frostbite itself has no ability file here to
-	// proc from. isTargetFrozen is where a future engine change would
-	// start reading true for Shatter too.
-	_, _, _ = mage.Talents.Frostbite, mage.Talents.Shatter, mage.Talents.FingersOfFrost
+	// Fingers of Frost and Shatter wrap the casts that register after
+	// this point (fingers_of_frost.go), so they come before Ice Lance.
+	// Frostbite's Freeze is a root a raid boss is immune to; it has no
+	// source here.
+	_ = mage.Talents.Frostbite
 }
 
 func (mage *Mage) applyArcaneConcentration() {
