@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.69893",
+  "build": "1.60.1.70009",
   "class_id": 1,
   "class_slug": "warrior",
   "trees": [
@@ -220,7 +220,7 @@
           "ranks": [
             {
               "spell_id": 1310222,
-              "description": "A brutal attack that deals 40% weapon damage. Deals an additional ${40*2}% weapon damage against Giants, Dragonkin, and mounted targets. Mounted targets are dismounted."
+              "description": "A brutal attack that deals 40% weapon damage, plus an additional 80% weapon damage against Giants, Dragonkin, and mounted targets."
             }
           ],
           "spell_id": 1310222
@@ -283,23 +283,23 @@
           "ranks": [
             {
               "spell_id": 1289682,
-              "description": "Your melee attacks against targets afflicted by your Rend have a 2% chance to activate your Overpower ability for 1 attack on your current target. Lasts 6 sec."
+              "description": "Your Main Hand melee attacks against enemies afflicted by your Rend have a 4% chance to allow the use of your Overpower ability on the target. Lasts 6 sec."
             },
             {
               "spell_id": 1289682,
-              "description": "Your melee attacks against targets afflicted by your Rend have a 4% chance to activate your Overpower ability for 1 attack on your current target. Lasts 6 sec."
+              "description": "Your Main Hand melee attacks against enemies afflicted by your Rend have a 8% chance to allow the use of your Overpower ability on the target. Lasts 6 sec."
             },
             {
               "spell_id": 1289682,
-              "description": "Your melee attacks against targets afflicted by your Rend have a 6% chance to activate your Overpower ability for 1 attack on your current target. Lasts 6 sec."
+              "description": "Your Main Hand melee attacks against enemies afflicted by your Rend have a 12% chance to allow the use of your Overpower ability on the target. Lasts 6 sec."
             },
             {
               "spell_id": 1289682,
-              "description": "Your melee attacks against targets afflicted by your Rend have a 8% chance to activate your Overpower ability for 1 attack on your current target. Lasts 6 sec."
+              "description": "Your Main Hand melee attacks against enemies afflicted by your Rend have a 16% chance to allow the use of your Overpower ability on the target. Lasts 6 sec."
             },
             {
               "spell_id": 1289682,
-              "description": "Your melee attacks against targets afflicted by your Rend have a 10% chance to activate your Overpower ability for 1 attack on your current target. Lasts 6 sec."
+              "description": "Your Main Hand melee attacks against enemies afflicted by your Rend have a 20% chance to allow the use of your Overpower ability on the target. Lasts 6 sec."
             }
           ],
           "spell_id": 1289682
@@ -316,7 +316,7 @@
           "ranks": [
             {
               "spell_id": 12292,
-              "description": "Your next $n melee attacks strike an additional nearby opponent."
+              "description": "Your next 5 melee attacks strike an additional nearby opponent."
             }
           ],
           "spell_id": 12292
@@ -333,23 +333,23 @@
           "ranks": [
             {
               "spell_id": 1290261,
-              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\r\n\r\n    |CFFFFFFFFAxe/Polearm:|R Increases your\r\n    critical strike chance by 1%.\r\n\r\n    |CFFFFFFFFMace/Staff:|R Your attacks ignore\r\n    3% of your target's armor.\r\n\r\n    |CFFFFFFFFSword:|R Your successful melee \r\n    attacks have a 1% chance to \r\n    trigger an extra attack on the \r\n    target."
+              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\n\n    Axe/Polearm: Increases your\n    critical strike chance by 1%.\n\n    Mace/Staff: Your attacks ignore\n    3% of your target's armor.\n\n    Sword: Your successful melee\n    attacks have a 1% chance to\n    trigger an extra attack on the\n    target."
             },
             {
               "spell_id": 1290261,
-              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\r\n\r\n    |CFFFFFFFFAxe/Polearm:|R Increases your\r\n    critical strike chance by 2%.\r\n\r\n    |CFFFFFFFFMace/Staff:|R Your attacks ignore\r\n    6% of your target's armor.\r\n\r\n    |CFFFFFFFFSword:|R Your successful melee \r\n    attacks have a 2% chance to \r\n    trigger an extra attack on the \r\n    target."
+              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\n\n    Axe/Polearm: Increases your\n    critical strike chance by 2%.\n\n    Mace/Staff: Your attacks ignore\n    6% of your target's armor.\n\n    Sword: Your successful melee\n    attacks have a 2% chance to\n    trigger an extra attack on the\n    target."
             },
             {
               "spell_id": 1290261,
-              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\r\n\r\n    |CFFFFFFFFAxe/Polearm:|R Increases your\r\n    critical strike chance by 3%.\r\n\r\n    |CFFFFFFFFMace/Staff:|R Your attacks ignore\r\n    9% of your target's armor.\r\n\r\n    |CFFFFFFFFSword:|R Your successful melee \r\n    attacks have a 3% chance to \r\n    trigger an extra attack on the \r\n    target."
+              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\n\n    Axe/Polearm: Increases your\n    critical strike chance by 3%.\n\n    Mace/Staff: Your attacks ignore\n    9% of your target's armor.\n\n    Sword: Your successful melee\n    attacks have a 3% chance to\n    trigger an extra attack on the\n    target."
             },
             {
               "spell_id": 1290261,
-              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\r\n\r\n    |CFFFFFFFFAxe/Polearm:|R Increases your\r\n    critical strike chance by 4%.\r\n\r\n    |CFFFFFFFFMace/Staff:|R Your attacks ignore\r\n    12% of your target's armor.\r\n\r\n    |CFFFFFFFFSword:|R Your successful melee \r\n    attacks have a 4% chance to \r\n    trigger an extra attack on the \r\n    target."
+              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\n\n    Axe/Polearm: Increases your\n    critical strike chance by 4%.\n\n    Mace/Staff: Your attacks ignore\n    12% of your target's armor.\n\n    Sword: Your successful melee\n    attacks have a 4% chance to\n    trigger an extra attack on the\n    target."
             },
             {
               "spell_id": 1290261,
-              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\r\n\r\n    |CFFFFFFFFAxe/Polearm:|R Increases your\r\n    critical strike chance by 5%.\r\n\r\n    |CFFFFFFFFMace/Staff:|R Your attacks ignore\r\n    15% of your target's armor.\r\n\r\n    |CFFFFFFFFSword:|R Your successful melee \r\n    attacks have a 5% chance to \r\n    trigger an extra attack on the \r\n    target."
+              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\n\n    Axe/Polearm: Increases your\n    critical strike chance by 5%.\n\n    Mace/Staff: Your attacks ignore\n    15% of your target's armor.\n\n    Sword: Your successful melee\n    attacks have a 5% chance to\n    trigger an extra attack on the\n    target."
             }
           ],
           "spell_id": 1290261
@@ -366,11 +366,11 @@
           "ranks": [
             {
               "spell_id": 12862,
-              "description": "Reduces the global cooldown and cast time of your Slam ability by ${250/-1000}.2 sec. In addition, Slam no longer interrupts your melee swing time."
+              "description": "Reduces the global cooldown and cast time of your Slam ability by 0.25 sec. In addition, Slam no longer interrupts or delays your melee swing and Slam's cooldown is reduced by 3.0 sec."
             },
             {
               "spell_id": 12862,
-              "description": "Reduces the global cooldown and cast time of your Slam ability by ${500/-1000}.2 sec. In addition, Slam no longer interrupts your melee swing time."
+              "description": "Reduces the global cooldown and cast time of your Slam ability by 0.50 sec. In addition, Slam no longer interrupts or delays your melee swing and Slam's cooldown is reduced by 3.0 sec."
             }
           ],
           "spell_id": 12862
@@ -418,7 +418,8 @@
           "spell_id": 12294
         }
       ],
-      "background": "warriorarms"
+      "background": "warriorarms",
+      "icon": "ability_rogue_eviscerate"
     },
     {
       "id": 164,
@@ -437,23 +438,23 @@
           "ranks": [
             {
               "spell_id": 12321,
-              "description": "Increases the radius of your Battle Shout and Demoralizing Shout abilities by 10%."
+              "description": "Increases the area of effect of your Shouts by 10% and reduces their Rage cost by 5%."
             },
             {
               "spell_id": 12321,
-              "description": "Increases the radius of your Battle Shout and Demoralizing Shout abilities by 20%."
+              "description": "Increases the area of effect of your Shouts by 20% and reduces their Rage cost by 10%."
             },
             {
               "spell_id": 12321,
-              "description": "Increases the radius of your Battle Shout and Demoralizing Shout abilities by 30%."
+              "description": "Increases the area of effect of your Shouts by 30% and reduces their Rage cost by 15%."
             },
             {
               "spell_id": 12321,
-              "description": "Increases the radius of your Battle Shout and Demoralizing Shout abilities by 40%."
+              "description": "Increases the area of effect of your Shouts by 40% and reduces their Rage cost by 20%."
             },
             {
               "spell_id": 12321,
-              "description": "Increases the radius of your Battle Shout and Demoralizing Shout abilities by 50%."
+              "description": "Increases the area of effect of your Shouts by 50% and reduces their Rage cost by 25%."
             }
           ],
           "spell_id": 12321
@@ -493,8 +494,8 @@
         },
         {
           "id": 110857,
-          "name": "Iron Will",
-          "icon": "spell_magic_magearmor",
+          "name": "Lingering Rage",
+          "icon": "ability_warrior_secondwind",
           "max_rank": 5,
           "tier": 1,
           "column": 1,
@@ -502,27 +503,28 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 12962,
-              "description": "Reduces the duration of Stun and Fear effects inflicted on you by 3%."
+              "spell_id": 1323964,
+              "description": "Increases the time before your Rage begins to decay after leaving combat by 2 sec."
             },
             {
-              "spell_id": 12962,
-              "description": "Reduces the duration of Stun and Fear effects inflicted on you by 6%."
+              "spell_id": 1323964,
+              "description": "Increases the time before your Rage begins to decay after leaving combat by 4 sec."
             },
             {
-              "spell_id": 12962,
-              "description": "Reduces the duration of Stun and Fear effects inflicted on you by 9%."
+              "spell_id": 1323964,
+              "description": "Increases the time before your Rage begins to decay after leaving combat by 6 sec."
             },
             {
-              "spell_id": 12962,
-              "description": "Reduces the duration of Stun and Fear effects inflicted on you by 12%."
+              "spell_id": 1323964,
+              "description": "Increases the time before your Rage begins to decay after leaving combat by 8 sec."
             },
             {
-              "spell_id": 12962,
-              "description": "Reduces the duration of Stun and Fear effects inflicted on you by 15%."
+              "spell_id": 1323964,
+              "description": "Increases the time before your Rage begins to decay after leaving combat by 10 sec."
             }
           ],
-          "spell_id": 12962
+          "spell_id": 1323964,
+          "hotfix_only": true
         },
         {
           "id": 105937,
@@ -536,31 +538,31 @@
           "ranks": [
             {
               "spell_id": 12322,
-              "description": "Gives you a 12% chance to generate ${10/10} additional Rage when you deal melee damage with a weapon. This effect is increased to ${(10/10)*2} Rage for two-handed weapons."
+              "description": "Gives you a 12% chance to generate 1 additional Rage when you deal melee damage with a weapon."
             },
             {
               "spell_id": 12322,
-              "description": "Gives you a 24% chance to generate ${10/10} additional Rage when you deal melee damage with a weapon. This effect is increased to ${(10/10)*2} Rage for two-handed weapons."
+              "description": "Gives you a 24% chance to generate 1 additional Rage when you deal melee damage with a weapon."
             },
             {
               "spell_id": 12322,
-              "description": "Gives you a 36% chance to generate ${10/10} additional Rage when you deal melee damage with a weapon. This effect is increased to ${(10/10)*2} Rage for two-handed weapons."
+              "description": "Gives you a 36% chance to generate 1 additional Rage when you deal melee damage with a weapon."
             },
             {
               "spell_id": 12322,
-              "description": "Gives you a 48% chance to generate ${10/10} additional Rage when you deal melee damage with a weapon. This effect is increased to ${(10/10)*2} Rage for two-handed weapons."
+              "description": "Gives you a 48% chance to generate 1 additional Rage when you deal melee damage with a weapon."
             },
             {
               "spell_id": 12322,
-              "description": "Gives you a 60% chance to generate ${10/10} additional Rage when you deal melee damage with a weapon. This effect is increased to ${(10/10)*2} Rage for two-handed weapons."
+              "description": "Gives you a 60% chance to generate 1 additional Rage when you deal melee damage with a weapon."
             }
           ],
           "spell_id": 12322
         },
         {
-          "id": 105936,
-          "name": "Improved Cleave",
-          "icon": "ability_warrior_cleave",
+          "id": 105953,
+          "name": "Furious Precision",
+          "icon": "ability_warrior_incite",
           "max_rank": 3,
           "tier": 2,
           "column": 0,
@@ -568,19 +570,20 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 12329,
-              "description": "Reduces the Rage cost of your Cleave ability by ${10/-10}."
+              "spell_id": 1323963,
+              "description": "Increases your chance to hit with off-hand attacks by 4%."
             },
             {
-              "spell_id": 12329,
-              "description": "Reduces the Rage cost of your Cleave ability by ${20/-10}."
+              "spell_id": 1323963,
+              "description": "Increases your chance to hit with off-hand attacks by 7%."
             },
             {
-              "spell_id": 12329,
-              "description": "Reduces the Rage cost of your Cleave ability by ${30/-10}."
+              "spell_id": 1323963,
+              "description": "Increases your chance to hit with off-hand attacks by 10%."
             }
           ],
-          "spell_id": 12329
+          "spell_id": 1323963,
+          "hotfix_only": true
         },
         {
           "id": 105935,
@@ -611,43 +614,18 @@
           "ranks": [
             {
               "spell_id": 16487,
-              "description": "Regenerates 1% of your total Health over 6 sec after being the victim of a critical strike, dealing damage with Bloodthirst, or suffering more than 20% of your maximum Health from a single attack."
+              "description": "Regenerates 1% of your total Health over 6 sec after being the victim of a critical strike or suffering more than 20% of your maximum Health from a single attack."
             },
             {
               "spell_id": 16487,
-              "description": "Regenerates 2% of your total Health over 6 sec after being the victim of a critical strike, dealing damage with Bloodthirst, or suffering more than 20% of your maximum Health from a single attack."
+              "description": "Regenerates 2% of your total Health over 6 sec after being the victim of a critical strike or suffering more than 20% of your maximum Health from a single attack."
             },
             {
               "spell_id": 16487,
-              "description": "Regenerates 3% of your total Health over 6 sec after being the victim of a critical strike, dealing damage with Bloodthirst, or suffering more than 20% of your maximum Health from a single attack."
+              "description": "Regenerates 3% of your total Health over 6 sec after being the victim of a critical strike or suffering more than 20% of your maximum Health from a single attack."
             }
           ],
           "spell_id": 16487
-        },
-        {
-          "id": 105953,
-          "name": "Boundless Rage",
-          "icon": "ability_warrior_intensifyrage",
-          "max_rank": 3,
-          "tier": 2,
-          "column": 3,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 1310236,
-              "description": "Increases your maximum Rage by ${100/10}."
-            },
-            {
-              "spell_id": 1310236,
-              "description": "Increases your maximum Rage by ${200/10}."
-            },
-            {
-              "spell_id": 1310236,
-              "description": "Increases your maximum Rage by ${300/10}."
-            }
-          ],
-          "spell_id": 1310236
         },
         {
           "id": 105933,
@@ -661,23 +639,23 @@
           "ranks": [
             {
               "spell_id": 23584,
-              "description": "Increases your off-hand weapon damage by 5%, off-hand Rage generation by 20%, and chance to hit with off-hand attacks by 2%."
+              "description": "Increases the damage done by your off-hand weapon by 5% and the Rage generated by your off-hand attacks by 10%."
             },
             {
               "spell_id": 23584,
-              "description": "Increases your off-hand weapon damage by 10%, off-hand Rage generation by 40%, and chance to hit with off-hand attacks by 4%."
+              "description": "Increases the damage done by your off-hand weapon by 10% and the Rage generated by your off-hand attacks by 20%."
             },
             {
               "spell_id": 23584,
-              "description": "Increases your off-hand weapon damage by 15%, off-hand Rage generation by 60%, and chance to hit with off-hand attacks by 6%."
+              "description": "Increases the damage done by your off-hand weapon by 15% and the Rage generated by your off-hand attacks by 30%."
             },
             {
               "spell_id": 23584,
-              "description": "Increases your off-hand weapon damage by 20%, off-hand Rage generation by 80%, and chance to hit with off-hand attacks by 8%."
+              "description": "Increases the damage done by your off-hand weapon by 20% and the Rage generated by your off-hand attacks by 40%."
             },
             {
               "spell_id": 23584,
-              "description": "Increases your off-hand weapon damage by 25%, off-hand Rage generation by 100%, and chance to hit with off-hand attacks by 10%."
+              "description": "Increases the damage done by your off-hand weapon by 25% and the Rage generated by your off-hand attacks by 50%."
             }
           ],
           "spell_id": 23584
@@ -694,7 +672,7 @@
           "ranks": [
             {
               "spell_id": 1310315,
-              "description": "Causes your Whirlwind to also strike with your off-hand weapon, and reduces the Rage cost of your Cleave ability by ${20/-10}.\r\n"
+              "description": "Causes your Whirlwind to also strike with your Off Hand weapon, and reduces the Rage cost of your Cleave ability by 2."
             }
           ],
           "spell_id": 1310315
@@ -711,23 +689,23 @@
           "ranks": [
             {
               "spell_id": 12317,
-              "description": "Gives you a $h% chance to deal 2% increased Physical damage for 12 sec after being the victim of any damaging attack."
+              "description": "Gives you a 30% chance to deal 2% increased Physical damage for 12 sec after being the victim of any damaging attack."
             },
             {
               "spell_id": 12317,
-              "description": "Gives you a $h% chance to deal 4% increased Physical damage for 12 sec after being the victim of any damaging attack."
+              "description": "Gives you a 30% chance to deal 4% increased Physical damage for 12 sec after being the victim of any damaging attack."
             },
             {
               "spell_id": 12317,
-              "description": "Gives you a $h% chance to deal 6% increased Physical damage for 12 sec after being the victim of any damaging attack."
+              "description": "Gives you a 30% chance to deal 6% increased Physical damage for 12 sec after being the victim of any damaging attack."
             },
             {
               "spell_id": 12317,
-              "description": "Gives you a $h% chance to deal 8% increased Physical damage for 12 sec after being the victim of any damaging attack."
+              "description": "Gives you a 30% chance to deal 8% increased Physical damage for 12 sec after being the victim of any damaging attack."
             },
             {
               "spell_id": 12317,
-              "description": "Gives you a $h% chance to deal 10% increased Physical damage for 12 sec after being the victim of any damaging attack."
+              "description": "Gives you a 30% chance to deal 10% increased Physical damage for 12 sec after being the victim of any damaging attack."
             }
           ],
           "spell_id": 12317
@@ -754,29 +732,25 @@
           "spell_id": 20502
         },
         {
-          "id": 105929,
-          "name": "Precision",
-          "icon": "ability_marksmanship",
-          "max_rank": 3,
+          "id": 105978,
+          "name": "Improved Berserker Rage",
+          "icon": "spell_nature_ancestralguardian",
+          "max_rank": 2,
           "tier": 4,
           "column": 0,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 1225295,
-              "description": "Improves your chance to hit by 1%."
+              "spell_id": 20500,
+              "description": "Your Berserker Rage ability will instantly generate 5 Rage and has a 50% chance to remove all movement impairing effects when activated."
             },
             {
-              "spell_id": 1225295,
-              "description": "Improves your chance to hit by 2%."
-            },
-            {
-              "spell_id": 1225295,
-              "description": "Improves your chance to hit by 3%."
+              "spell_id": 20500,
+              "description": "Your Berserker Rage ability will instantly generate 10 Rage and has a 100% chance to remove all movement impairing effects when activated."
             }
           ],
-          "spell_id": 1225295
+          "spell_id": 20500
         },
         {
           "id": 105927,
@@ -817,58 +791,59 @@
           "spell_id": 20504
         },
         {
-          "id": 105978,
-          "name": "Improved Berserker Rage",
-          "icon": "spell_nature_ancestralguardian",
-          "max_rank": 2,
-          "tier": 5,
-          "column": 0,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 20500,
-              "description": "Your Berserker Rage ability will instantly generate 5 Rage and has a 50% chance to remove all movement impairing effects when activated."
-            },
-            {
-              "spell_id": 20500,
-              "description": "Your Berserker Rage ability will instantly generate 10 Rage and has a 100% chance to remove all movement impairing effects when activated."
-            }
-          ],
-          "spell_id": 20500
-        },
-        {
           "id": 105928,
           "name": "Flurry",
           "icon": "ability_ghoulfrenzy",
           "max_rank": 5,
+          "tier": 5,
+          "column": 1,
+          "prereq_talent_id": 105927,
+          "prereq_rank": 1,
+          "ranks": [
+            {
+              "spell_id": 12319,
+              "description": "Increases your melee attack speed by 5% for your next 3 swings after dealing a melee critical strike."
+            },
+            {
+              "spell_id": 12319,
+              "description": "Increases your melee attack speed by 10% for your next 3 swings after dealing a melee critical strike."
+            },
+            {
+              "spell_id": 12319,
+              "description": "Increases your melee attack speed by 15% for your next 3 swings after dealing a melee critical strike."
+            },
+            {
+              "spell_id": 12319,
+              "description": "Increases your melee attack speed by 20% for your next 3 swings after dealing a melee critical strike."
+            },
+            {
+              "spell_id": 12319,
+              "description": "Increases your melee attack speed by 25% for your next 3 swings after dealing a melee critical strike."
+            }
+          ],
+          "spell_id": 12319
+        },
+        {
+          "id": 113569,
+          "name": "Gore Drinker",
+          "icon": "racial_troll_berserk",
+          "max_rank": 2,
           "tier": 5,
           "column": 2,
           "prereq_talent_id": 105931,
           "prereq_rank": 5,
           "ranks": [
             {
-              "spell_id": 12319,
-              "description": "Increases your melee attack speed by 5% for your next $12966n swings after dealing a melee critical strike."
+              "spell_id": 1323967,
+              "description": "Your Enrage, Berserker Rage, Bloodrage, Death Wish, and Bloodthirst abilities cause your next 3 melee attacks to restore 0.5% of your maximum Health."
             },
             {
-              "spell_id": 12319,
-              "description": "Increases your melee attack speed by 10% for your next $12966n swings after dealing a melee critical strike."
-            },
-            {
-              "spell_id": 12319,
-              "description": "Increases your melee attack speed by 15% for your next $12966n swings after dealing a melee critical strike."
-            },
-            {
-              "spell_id": 12319,
-              "description": "Increases your melee attack speed by 20% for your next $12966n swings after dealing a melee critical strike."
-            },
-            {
-              "spell_id": 12319,
-              "description": "Increases your melee attack speed by 25% for your next $12966n swings after dealing a melee critical strike."
+              "spell_id": 1323967,
+              "description": "Your Enrage, Berserker Rage, Bloodrage, Death Wish, and Bloodthirst abilities cause your next 3 melee attacks to restore 1.0% of your maximum Health."
             }
           ],
-          "spell_id": 12319
+          "spell_id": 1323967,
+          "hotfix_only": true
         },
         {
           "id": 105930,
@@ -877,8 +852,8 @@
           "max_rank": 1,
           "tier": 6,
           "column": 1,
-          "prereq_talent_id": 105927,
-          "prereq_rank": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
           "ranks": [
             {
               "spell_id": 23881,
@@ -888,13 +863,35 @@
           "spell_id": 23881
         }
       ],
-      "background": "warriorfury"
+      "background": "warriorfury",
+      "icon": "ability_warrior_innerrage"
     },
     {
       "id": 163,
       "name": "Protection",
       "position": 2,
       "talents": [
+        {
+          "id": 105974,
+          "name": "Improved Bloodrage",
+          "icon": "ability_racial_bloodrage",
+          "max_rank": 2,
+          "tier": 0,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 12301,
+              "description": "Increases all the Rage generated by your Bloodrage ability by 25%."
+            },
+            {
+              "spell_id": 12301,
+              "description": "Increases all the Rage generated by your Bloodrage ability by 50%."
+            }
+          ],
+          "spell_id": 12301
+        },
         {
           "id": 105976,
           "name": "Shield Specialization",
@@ -907,34 +904,67 @@
           "ranks": [
             {
               "spell_id": 12298,
-              "description": "Increases your chance to Block attacks with your shield by 1% and grants you a 20% chance to generate ${50/10} Rage when you Block."
+              "description": "Increases your chance to Block attacks with your shield by 1% and grants you a 20% chance to generate 5 Rage when you Block."
             },
             {
               "spell_id": 12298,
-              "description": "Increases your chance to Block attacks with your shield by 2% and grants you a 40% chance to generate ${50/10} Rage when you Block."
+              "description": "Increases your chance to Block attacks with your shield by 2% and grants you a 40% chance to generate 5 Rage when you Block."
             },
             {
               "spell_id": 12298,
-              "description": "Increases your chance to Block attacks with your shield by 3% and grants you a 60% chance to generate ${50/10} Rage when you Block."
+              "description": "Increases your chance to Block attacks with your shield by 3% and grants you a 60% chance to generate 5 Rage when you Block."
             },
             {
               "spell_id": 12298,
-              "description": "Increases your chance to Block attacks with your shield by 4% and grants you a 80% chance to generate ${50/10} Rage when you Block."
+              "description": "Increases your chance to Block attacks with your shield by 4% and grants you a 80% chance to generate 5 Rage when you Block."
             },
             {
               "spell_id": 12298,
-              "description": "Increases your chance to Block attacks with your shield by 5% and grants you a 100% chance to generate ${50/10} Rage when you Block."
+              "description": "Increases your chance to Block attacks with your shield by 5% and grants you a 100% chance to generate 5 Rage when you Block."
             }
           ],
           "spell_id": 12298
+        },
+        {
+          "id": 113570,
+          "name": "Iron Will",
+          "icon": "spell_magic_magearmor",
+          "max_rank": 5,
+          "tier": 0,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 12962,
+              "description": "Reduces the duration of Stun and Fear effects inflicted on you by 3%."
+            },
+            {
+              "spell_id": 12962,
+              "description": "Reduces the duration of Stun and Fear effects inflicted on you by 6%."
+            },
+            {
+              "spell_id": 12962,
+              "description": "Reduces the duration of Stun and Fear effects inflicted on you by 9%."
+            },
+            {
+              "spell_id": 12962,
+              "description": "Reduces the duration of Stun and Fear effects inflicted on you by 12%."
+            },
+            {
+              "spell_id": 12962,
+              "description": "Reduces the duration of Stun and Fear effects inflicted on you by 15%."
+            }
+          ],
+          "spell_id": 12962
         },
         {
           "id": 105975,
           "name": "Anticipation",
           "icon": "spell_nature_mirrorimage",
           "max_rank": 5,
-          "tier": 0,
-          "column": 2,
+          "tier": 1,
+          "column": 0,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
@@ -962,58 +992,29 @@
           "spell_id": 12297
         },
         {
-          "id": 105974,
-          "name": "Improved Bloodrage",
-          "icon": "ability_racial_bloodrage",
-          "max_rank": 2,
-          "tier": 1,
-          "column": 0,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 12301,
-              "description": "Increases all the Rage generated by your Bloodrage ability by 25%."
-            },
-            {
-              "spell_id": 12301,
-              "description": "Increases all the Rage generated by your Bloodrage ability by 50%."
-            }
-          ],
-          "spell_id": 12301
-        },
-        {
-          "id": 105973,
-          "name": "Toughness",
-          "icon": "spell_holy_devotion",
-          "max_rank": 5,
+          "id": 105969,
+          "name": "Improved Revenge",
+          "icon": "ability_warrior_revenge",
+          "max_rank": 3,
           "tier": 1,
           "column": 2,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 12299,
-              "description": "Increases your Armor value from items by 2%."
+              "spell_id": 12797,
+              "description": "Increases damage dealt by your Revenge ability by 20%."
             },
             {
-              "spell_id": 12299,
-              "description": "Increases your Armor value from items by 4%."
+              "spell_id": 12797,
+              "description": "Increases damage dealt by your Revenge ability by 40%."
             },
             {
-              "spell_id": 12299,
-              "description": "Increases your Armor value from items by 6%."
-            },
-            {
-              "spell_id": 12299,
-              "description": "Increases your Armor value from items by 8%."
-            },
-            {
-              "spell_id": 12299,
-              "description": "Increases your Armor value from items by 10%."
+              "spell_id": 12797,
+              "description": "Increases damage dealt by your Revenge ability by 60%."
             }
           ],
-          "spell_id": 12299
+          "spell_id": 12797
         },
         {
           "id": 105972,
@@ -1047,8 +1048,8 @@
           "max_rank": 1,
           "tier": 2,
           "column": 0,
-          "prereq_talent_id": 105974,
-          "prereq_rank": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
           "ranks": [
             {
               "spell_id": 12975,
@@ -1069,19 +1070,19 @@
           "ranks": [
             {
               "spell_id": 1310316,
-              "description": "Grants you a 50% chance to generate ${50/10} Rage when you Dodge or Parry while a shield is equipped."
+              "description": "Grants you a 50% chance to generate 5 Rage when you Dodge or Parry while a shield is equipped."
             },
             {
               "spell_id": 1310316,
-              "description": "Grants you a 100% chance to generate ${50/10} Rage when you Dodge or Parry while a shield is equipped."
+              "description": "Grants you a 100% chance to generate 5 Rage when you Dodge or Parry while a shield is equipped."
             }
           ],
           "spell_id": 1310316
         },
         {
-          "id": 105969,
-          "name": "Improved Revenge",
-          "icon": "ability_warrior_revenge",
+          "id": 105967,
+          "name": "Improved Disarm",
+          "icon": "ability_warrior_disarm",
           "max_rank": 3,
           "tier": 2,
           "column": 2,
@@ -1089,19 +1090,19 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 12797,
-              "description": "Increases damage dealt by your Revenge ability by 20%."
+              "spell_id": 12313,
+              "description": "Reduces the cooldown of your Disarm ability by 7 secs."
             },
             {
-              "spell_id": 12797,
-              "description": "Increases damage dealt by your Revenge ability by 40%."
+              "spell_id": 12313,
+              "description": "Reduces the cooldown of your Disarm ability by 13 secs."
             },
             {
-              "spell_id": 12797,
-              "description": "Increases damage dealt by your Revenge ability by 60%."
+              "spell_id": 12313,
+              "description": "Reduces the cooldown of your Disarm ability by 20 secs."
             }
           ],
-          "spell_id": 12797
+          "spell_id": 12313
         },
         {
           "id": 110856,
@@ -1154,37 +1155,12 @@
           "spell_id": 12308
         },
         {
-          "id": 105967,
-          "name": "Improved Disarm",
-          "icon": "ability_warrior_disarm",
-          "max_rank": 3,
-          "tier": 3,
-          "column": 1,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 12313,
-              "description": "Reduces the cooldown of your Disarm ability by 7 secs."
-            },
-            {
-              "spell_id": 12313,
-              "description": "Reduces the cooldown of your Disarm ability by 13 secs."
-            },
-            {
-              "spell_id": 12313,
-              "description": "Reduces the cooldown of your Disarm ability by 20 secs."
-            }
-          ],
-          "spell_id": 12313
-        },
-        {
           "id": 105966,
           "name": "Vanguard",
           "icon": "ability_warrior_shieldcharge",
           "max_rank": 1,
           "tier": 3,
-          "column": 2,
+          "column": 1,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
@@ -1194,6 +1170,27 @@
             }
           ],
           "spell_id": 1310317
+        },
+        {
+          "id": 105963,
+          "name": "Improved Shield Bash",
+          "icon": "ability_warrior_shieldbash",
+          "max_rank": 2,
+          "tier": 3,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 12311,
+              "description": "Gives your Shield Bash ability a 50% chance to Silence the target for 3 sec."
+            },
+            {
+              "spell_id": 12311,
+              "description": "Gives your Shield Bash ability a 100% chance to Silence the target for 3 sec."
+            }
+          ],
+          "spell_id": 12311
         },
         {
           "id": 105964,
@@ -1207,11 +1204,11 @@
           "ranks": [
             {
               "spell_id": 12312,
-              "description": "Reduces the cooldown of your Shield Wall ability by ${330000/-60000}.1 min."
+              "description": "Reduces the cooldown of your Shield Wall ability by 5.5 min."
             },
             {
               "spell_id": 12312,
-              "description": "Reduces the cooldown of your Shield Wall ability by ${660000/-60000}.1 min."
+              "description": "Reduces the cooldown of your Shield Wall ability by 11.0 min."
             }
           ],
           "spell_id": 12312
@@ -1234,33 +1231,37 @@
           "spell_id": 12809
         },
         {
-          "id": 105963,
-          "name": "Improved Shield Bash",
-          "icon": "ability_warrior_shieldbash",
-          "max_rank": 2,
+          "id": 105961,
+          "name": "Focused Rage",
+          "icon": "ability_warrior_focusedrage",
+          "max_rank": 3,
           "tier": 4,
           "column": 2,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 12311,
-              "description": "Gives your Shield Bash ability a 50% chance to Silence the target for 3 sec."
+              "spell_id": 29787,
+              "description": "Reduces the Rage cost of your offensive abilities by 1."
             },
             {
-              "spell_id": 12311,
-              "description": "Gives your Shield Bash ability a 100% chance to Silence the target for 3 sec."
+              "spell_id": 29787,
+              "description": "Reduces the Rage cost of your offensive abilities by 2."
+            },
+            {
+              "spell_id": 29787,
+              "description": "Reduces the Rage cost of your offensive abilities by 3."
             }
           ],
-          "spell_id": 12311
+          "spell_id": 29787
         },
         {
           "id": 105962,
           "name": "Bastion",
           "icon": "inv_shield_04",
           "max_rank": 5,
-          "tier": 4,
-          "column": 3,
+          "tier": 5,
+          "column": 2,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
@@ -1288,31 +1289,6 @@
           "spell_id": 16538
         },
         {
-          "id": 105961,
-          "name": "Focused Rage",
-          "icon": "ability_warrior_focusedrage",
-          "max_rank": 3,
-          "tier": 5,
-          "column": 2,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 29787,
-              "description": "Reduces the Rage cost of your offensive abilities by 1."
-            },
-            {
-              "spell_id": 29787,
-              "description": "Reduces the Rage cost of your offensive abilities by 2."
-            },
-            {
-              "spell_id": 29787,
-              "description": "Reduces the Rage cost of your offensive abilities by 3."
-            }
-          ],
-          "spell_id": 29787
-        },
-        {
           "id": 105959,
           "name": "Shield Slam",
           "icon": "inv_shield_05",
@@ -1324,13 +1300,14 @@
           "ranks": [
             {
               "spell_id": 23922,
-              "description": "Slam the target with your shield, causing 430 damage, increased by your Block Value, and has a 50% chance of dispelling 1 magic effect on the target. Causes a very high amount of threat."
+              "description": "Slam the target with your shield, causing 421 to 439 damage, increased by your Block Value, and has a 50% chance of dispelling 1 magic effect on the target. Causes a very high amount of threat."
             }
           ],
           "spell_id": 23922
         }
       ],
-      "background": "warriorprotection"
+      "background": "warriorprotection",
+      "icon": "inv_shield_06"
     }
   ]
 }

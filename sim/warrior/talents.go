@@ -30,18 +30,24 @@ import (
 // advice; it is a fixed input, so a DPS change is attributable to the
 // engine rather than to a build edit.
 //
-// It is written against the CLIENT's tree, so its three segments are 17,
-// 18 and 18 characters (TalentTreeSizes), not vanilla's 18/19/16.
-// Spend, against the client's own tree:
+// It is written against the live tree (the client's trait tables with
+// Wowhead's hotfix overlay, build 1.60.1.70009), so its three segments
+// are 17, 17 and 18 characters (TalentTreeSizes). Spend:
 //
 //	Arms 20: Improved Heroic Strike 3, Deflection 3, Improved Rend 3,
 //	         Improved Tactical Mastery 5, Anger Management 1,
 //	         Deep Wounds 3, Impale 2
-//	Fury 31: Booming Voice 1, Cruelty 5, Unbridled Wrath 5,
-//	         Improved Cleave 3, Piercing Howl 1, Enrage 5,
-//	         Improved Execute 1, Precision 3, Death Wish 1, Flurry 5,
+//	Fury 31: Booming Voice 1, Cruelty 5, Lingering Rage 3,
+//	         Unbridled Wrath 5, Furious Precision 3, Piercing Howl 1,
+//	         Enrage 5, Improved Execute 1, Death Wish 1, Flurry 5,
 //	         Bloodthirst 1
 //	Protection 0
+//
+// The live-tree rebuild removed Improved Cleave 3 and Precision 3 from
+// the earlier reference build; their six points went to Furious
+// Precision 3 (the replacement hit talent) and Lingering Rage 3, which
+// has no effect on a simmed number, so the reference build's DPS moves
+// only by what the removed and added talents themselves are worth.
 //
 // Improved Rend is 3, not the 2 an earlier draft spent, because the
 // client makes Deep Wounds require Improved Rend at rank 3; and the Fury
@@ -50,7 +56,7 @@ import (
 // tiers 0-4. TestForeverFuryTalentsAreAValidBuild checks the widths and
 // the spend, so a segment one character short fails rather than
 // silently reading the neighbouring talent.
-const ForeverFuryTalents = "33305013002000000-150531000051310051-000000000000000000"
+const ForeverFuryTalents = "33305013002000000-15353100051010501-000000000000000000"
 
 // ForeverProtectionTalents is the same fixed input for the tank spec.
 // The spec's own talent behaviour is still mostly vanilla's - Defiance,
@@ -69,11 +75,11 @@ const ForeverFuryTalents = "33305013002000000-150531000051310051-000000000000000
 //	               Improved Rend 3, Improved Tactical Mastery 5,
 //	               Anger Management 1, Deep Wounds 3
 //	Protection 31: Shield Specialization 5, Anticipation 5,
-//	               Improved Bloodrage 2, Toughness 5,
+//	               Improved Bloodrage 2, Iron Will 5,
 //	               Improved Thunder Clap 3, Last Stand 1, Defiance 3,
 //	               Improved Sunder Armor 3, Concussion Blow 1,
 //	               Bastion 2, Shield Slam 1
-const ForeverProtectionTalents = "35305013000000000-000000000000000000-552531003300010201"
+const ForeverProtectionTalents = "35305013000000000-00000000000000000-255503100330001021"
 
 // fillWarriorTalents parses a talent string into the proto, positionally
 // against TalentTreeSizes. It is the one place that pairing happens, so
@@ -83,27 +89,15 @@ func fillWarriorTalents(talents *proto.WarriorTalents, s string) {
 	core.FillTalentsProto(talents.ProtoReflect(), s, TalentTreeSizes)
 }
 
-// ToughnessArmorMultiplier is Toughness: "Increases your Armor value
-// from items by 10%" at rank 5, so 2% a point.
-func (warrior *Warrior) ToughnessArmorMultiplier() float64 {
-	return 1.0 + 0.02*float64(warrior.Talents.Toughness)
-}
-
 func (warrior *Warrior) ApplyTalents() {
 	// Flat stats. Forever has no combat ratings, so a percentage is the
 	// stat: CritRatingPerCritChance and HitRatingPerHitChance are both 1.
 	//
 	//	Cruelty:      "+5% melee critical strike" at rank 5.
-	//	Precision:    "+3% chance to hit" at rank 3. Precision is one of
-	//	              the four talents research/08-stats.md 1.2 records as
-	//	              converting from resistance reduction to hit; it is a
-	//	              new talent here, not a renamed one.
 	//	Anticipation: "+20 Defense Skill" at rank 5, so 4 a point - twice
 	//	              vanilla's 2, which is what the old body applied.
 	//	Deflection:   "+5% Parry" at rank 5.
 	warrior.AddStat(stats.Crit, core.CritRatingPerCritChance*1*float64(warrior.Talents.Cruelty))
-	warrior.AddStat(stats.Hit, core.HitRatingPerHitChance*1*float64(warrior.Talents.Precision))
-	warrior.ApplyEquipScaling(stats.Armor, warrior.ToughnessArmorMultiplier())
 	warrior.AddStat(stats.Defense, 4*float64(warrior.Talents.Anticipation))
 	warrior.AddStat(stats.Parry, 1*float64(warrior.Talents.Deflection))
 
@@ -115,6 +109,7 @@ func (warrior *Warrior) ApplyTalents() {
 	warrior.applyWeaponmaster()
 	warrior.applyUnbridledWrath()
 	warrior.applyDualWieldSpecialization()
+	warrior.applyFuriousPrecision()
 	warrior.applyEnrage()
 	warrior.applyFlurry()
 	warrior.applyShieldSpecialization()
@@ -238,18 +233,9 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 		})
 	}
 
-	// Improved Cleave: "Reduces the Rage cost of your Cleave ability" by
-	// 1 a point. This is a CHANGED TALENT, not a renamed one: vanilla's
-	// Improved Cleave raised Cleave's flat damage by 40% a point, and
-	// the old body multiplied flatDamageBonus by {1, 1.4, 1.8, 2.2}.
-	// The client's text gives a rage discount and no damage at all.
-	if t.ImprovedCleave > 0 {
-		warrior.AddStaticMod(core.SpellModConfig{
-			Kind:      core.SpellMod_PowerCost_Flat,
-			ClassMask: WarriorSpellMaskCleave,
-			IntValue:  -int64(t.ImprovedCleave),
-		})
-	}
+	// Improved Cleave, Precision, Toughness and Boundless Rage are gone
+	// from the live tree (the 1 October 2026 Fury rebuild and the
+	// Protection rework); their fields left the generated proto.
 
 	// Improved Execute: the ranks are improvedExecuteRageReduction.
 	if t.ImprovedExecute > 0 {
@@ -298,15 +284,17 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 		warrior.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + 0.01*float64(t.TwoHandedWeaponSpecialization)
 	}
 
-	// Raging Blows: "...reduces the Rage cost of your Cleave ability by
-	// 2." The off-hand strike half of the talent is Whirlwind's own
-	// ApplyEffects (whirlwind.go), because a rage-cost discount is a
-	// tooltip-line SpellMod and an extra weapon swing is not.
+	// Raging Blows: the client text reads "reduces the Rage cost of your
+	// Cleave ability by 2"; Blizzard's 1 October 2026 notes say it now
+	// "reduces the rage cost of Cleave and Whirlwind by 3", and the note
+	// is the live state (hotfix), so both abilities lose 3. The
+	// off-hand Whirlwind strike the client text also names is baseline
+	// since the same notes (whirlwind.go).
 	if t.RagingBlows {
 		warrior.AddStaticMod(core.SpellModConfig{
 			Kind:      core.SpellMod_PowerCost_Flat,
-			ClassMask: WarriorSpellMaskCleave,
-			IntValue:  -2,
+			ClassMask: WarriorSpellMaskCleave | WarriorSpellMaskWhirlwind,
+			IntValue:  -ragingBlowsRageDiscount,
 		})
 	}
 
@@ -378,13 +366,19 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 	// simulates the movement a root would prevent.
 	_ = t.ImprovedHamstring
 
-	// Boundless Rage: "Increases your maximum Rage by 10/20/30."
-	// core.MaxRage (sim/core/rage.go) is a package-level constant every
-	// RageBar clamps AddRage against, not a per-unit field, so raising it
-	// for one warrior needs a sim/core change (a per-unit max-rage field
-	// RageBar reads instead of the constant) that is out of this lane's
-	// reach. Reported rather than patched around.
-	_ = t.BoundlessRage
+	// Lingering Rage (Fury node 110857, hotfix_only): "Increases the time
+	// before your Rage begins to decay after leaving combat by 2/4/6/8/10
+	// sec." Rage decays only out of combat, and a DPS encounter never
+	// leaves combat, so it has no effect on a simmed number.
+	_ = t.LingeringRage
+
+	// Gore Drinker (Fury node 113569, hotfix_only, needs Enrage x5):
+	// "Your Enrage, Berserker Rage, Bloodrage, Death Wish, and
+	// Bloodthirst abilities cause your next 3 melee attacks to restore
+	// 1.0% of your maximum Health." Healing the warrior changes no damage
+	// number and the sim has no warrior health model, so it is an
+	// explicit no-DPS-effect talent.
+	_ = t.GoreDrinker
 
 	// Master of Defense: "a 50%/100% chance to generate 5 Rage when you
 	// Dodge or Parry while a shield is equipped" (Protection node 105971,
@@ -521,21 +515,21 @@ func (warrior *Warrior) registerWeaponmasterExtraAttack(procMask core.ProcMask, 
 	})
 }
 
+// unbridledWrathRage is the rage one proc generates. The pre-1 October
+// client text doubled it to 2 for two-handed weapons; the live text and
+// Blizzard's 1 October 2026 notes ("Unbridled Wrath 1 rage regardless of
+// weapon") give a flat 1.
+const unbridledWrathRage = 1.0
+
 // applyUnbridledWrath is Unbridled Wrath: "a 60% chance to generate 1
-// additional Rage when you deal melee damage with a weapon ... increased
-// to 2 Rage for two-handed weapons" at rank 5. Vanilla's was 8% a point
-// and never doubled; the client's is 12% a point and does.
+// additional Rage when you deal melee damage with a weapon" at rank 5,
+// 12% a point, regardless of weapon (see unbridledWrathRage).
 func (warrior *Warrior) applyUnbridledWrath() {
 	if warrior.Talents.UnbridledWrath == 0 {
 		return
 	}
 
 	procChance := 0.12 * float64(warrior.Talents.UnbridledWrath)
-	rage := 1.0
-	if warrior.MainHand().HandType == proto.HandType_HandTypeTwoHand {
-		rage = 2.0
-	}
-
 	rageMetrics := warrior.NewRageMetrics(core.ActionID{SpellID: TalentSpellIDs["unbridled_wrath"][0]})
 
 	warrior.RegisterAura(core.Aura{
@@ -550,22 +544,50 @@ func (warrior *Warrior) applyUnbridledWrath() {
 			}
 
 			if spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) && sim.RandomFloat("Unbridled Wrath") < procChance {
-				warrior.AddRage(sim, rage, rageMetrics)
+				warrior.AddRage(sim, unbridledWrathRage, rageMetrics)
 			}
 		},
 	})
 }
 
+// dualWieldSpecializationOffHandRageMultiplier is the talent's rage
+// clause, 10% a point ("the Rage generated by your off-hand attacks by
+// 50%" at rank 5; Blizzard's 1 October 2026 notes: "off-hand rage
+// 10/20/30/40/50%").
+func dualWieldSpecializationOffHandRageMultiplier(points int32) float64 {
+	return 1 + 0.1*float64(points)
+}
+
+// furiousPrecisionOffHandHitPercent is Furious Precision's off-hand hit,
+// per the rank text "by 4%", "7%", "10%".
+func furiousPrecisionOffHandHitPercent(points int32) float64 {
+	return [4]float64{0, 4, 7, 10}[max(0, min(points, 3))]
+}
+
+// ragingBlowsRageDiscount is the rage Raging Blows takes off Cleave and
+// Whirlwind: 3 per Blizzard's 1 October 2026 notes (client text: 2, Cleave
+// only).
+const ragingBlowsRageDiscount = 3
+
+// applyFuriousPrecision is Furious Precision (Fury node 105953,
+// hotfix_only): "Increases your chance to hit with off-hand attacks by
+// 4/7/10%."
+func (warrior *Warrior) applyFuriousPrecision() {
+	bonusHit := core.HitRatingPerHitChance * furiousPrecisionOffHandHitPercent(warrior.Talents.FuriousPrecision)
+	if bonusHit == 0 {
+		return
+	}
+	warrior.OnSpellRegistered(func(spell *core.Spell) {
+		if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
+			spell.BonusHitRating += bonusHit
+		}
+	})
+}
+
 // applyDualWieldSpecialization is Dual Wield Specialization: "+25%
-// off-hand weapon damage, +100% off-hand Rage generation, and +10%
-// chance to hit with off-hand attacks" at rank 5. The damage half is
-// vanilla's; the hit half is new, and is one of the thirteen hit and
-// crit changes research/08-stats.md 1.2 records.
-//
-// unconfirmed: the off-hand rage-generation clause is not modelled. The
-// engine derives rage from damage dealt rather than from a per-hand
-// generation rate, so there is no hook for it that would not also
-// change main-hand rage.
+// off-hand weapon damage and +50% off-hand Rage generated" at rank 5.
+// The hit clause the pre-1 October text carried is gone (it is Furious
+// Precision now; Blizzard's notes: "no hit").
 func (warrior *Warrior) applyDualWieldSpecialization() {
 	points := warrior.Talents.DualWieldSpecialization
 	if points == 0 {
@@ -573,15 +595,11 @@ func (warrior *Warrior) applyDualWieldSpecialization() {
 	}
 
 	multiplier := 1 + 0.05*float64(points)
-	bonusHit := core.HitRatingPerHitChance * 2 * float64(points)
-	// "off-hand Rage generation by 20%" a point (build 1.60.1.70009 rank
-	// text): the third clause of the talent, unmodeled until 2026-10-07.
-	warrior.AddOffHandDamageDealtRageMultiplier(1 + 0.2*float64(points))
+	warrior.AddOffHandDamageDealtRageMultiplier(dualWieldSpecializationOffHandRageMultiplier(points))
 	warrior.OnSpellRegistered(func(spell *core.Spell) {
 		if !spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
 			return
 		}
-		spell.BonusHitRating += bonusHit
 		// The damage half is weapon damage, so it is narrowed by school
 		// rather than by BonusCoefficient, which is what this line used
 		// to read. The two select the same spells today - an

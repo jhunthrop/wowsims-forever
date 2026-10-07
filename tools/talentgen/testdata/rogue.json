@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.69893",
+  "build": "1.60.1.70009",
   "class_id": 4,
   "class_slug": "rogue",
   "trees": [
@@ -187,11 +187,11 @@
           "ranks": [
             {
               "spell_id": 14168,
-              "description": "Reduces the Energy cost of your Expose Armor ability by 5, and refunds 1 Combo $LPoint:Points; when cast with 5 Combo Points."
+              "description": "Reduces the Energy cost of your Expose Armor ability by 5, and refunds 1 Combo Points when cast with 5 Combo Points."
             },
             {
               "spell_id": 14168,
-              "description": "Reduces the Energy cost of your Expose Armor ability by 10, and refunds 2 Combo $LPoint:Points; when cast with 5 Combo Points."
+              "description": "Reduces the Energy cost of your Expose Armor ability by 10, and refunds 2 Combo Points when cast with 5 Combo Points."
             }
           ],
           "spell_id": 14168
@@ -345,7 +345,7 @@
           "ranks": [
             {
               "spell_id": 1310707,
-              "description": "Instantly attacks with both weapons for 75% weapon damage plus an additional ${23*75/100} with each weapon. Damage increased by 20% against Poisoned targets. Awards 2 Combo $LPoint:Points;."
+              "description": "Instantly attacks with both weapons for 75% weapon damage plus an additional 17 with each weapon. Damage increased by 20% against Poisoned targets. Awards 2 Combo Points."
             }
           ],
           "spell_id": 1310707
@@ -416,13 +416,14 @@
           "ranks": [
             {
               "spell_id": 1310703,
-              "description": "Finishing move that increases the damage of your Poisons by 30% and your chance to apply Poisons by 10%.  Lasts longer per combo point:\r\n   1 point  : 9 seconds\r\n   2 points: 12 seconds\r\n   3 points: 15 seconds\r\n   4 points: 18 seconds\r\n   5 points: 21 seconds"
+              "description": "Finishing move that increases the damage of your Poisons by 30% and your chance to apply Poisons by 10%. Lasts longer per combo point:\n   1 point  : 9 sec\n   2 points: 12 sec\n   3 points: 15 sec\n   4 points: 18 sec\n   5 points: 21 sec"
             }
           ],
           "spell_id": 1310703
         }
       ],
-      "background": "rogueassassination"
+      "background": "rogueassassination",
+      "icon": "ability_rogue_eviscerate"
     },
     {
       "id": 181,
@@ -616,7 +617,7 @@
           "ranks": [
             {
               "spell_id": 14251,
-              "description": "A strike that becomes active after parrying an opponent's attack.  This attack deals 150% weapon damage and disarms the target for $19718d."
+              "description": "A strike that becomes active after parrying an opponent's attack.  This attack deals 150% weapon damage and disarms the target for 6 sec."
             }
           ],
           "spell_id": 14251
@@ -742,23 +743,23 @@
           "ranks": [
             {
               "spell_id": 13960,
-              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\r\n\r\n    |CFFFFFFFFAxe/Sword:|R Your successful\r\n    melee attacks have a 1% chance\r\n    to trigger an extra attack on the \r\n    target.\r\n\r\n    |CFFFFFFFFDagger/Fist:|R Increases your\r\n    critical strike chance by 1%.\r\n\r\n    |CFFFFFFFFMace:|R Your attacks ignore 3% of\r\n    your target's armor."
+              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\n\n    Axe/Sword: Your successful\n    melee attacks have a 1% chance\n    to trigger an extra attack on the\n    target.\n\n    Dagger/Fist: Increases your\n    critical strike chance by 1%.\n\n    Mace: Your attacks ignore 3% of\n    your target's armor."
             },
             {
               "spell_id": 13960,
-              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\r\n\r\n    |CFFFFFFFFAxe/Sword:|R Your successful\r\n    melee attacks have a 2% chance\r\n    to trigger an extra attack on the \r\n    target.\r\n\r\n    |CFFFFFFFFDagger/Fist:|R Increases your\r\n    critical strike chance by 2%.\r\n\r\n    |CFFFFFFFFMace:|R Your attacks ignore 6% of\r\n    your target's armor."
+              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\n\n    Axe/Sword: Your successful\n    melee attacks have a 2% chance\n    to trigger an extra attack on the\n    target.\n\n    Dagger/Fist: Increases your\n    critical strike chance by 2%.\n\n    Mace: Your attacks ignore 6% of\n    your target's armor."
             },
             {
               "spell_id": 13960,
-              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\r\n\r\n    |CFFFFFFFFAxe/Sword:|R Your successful\r\n    melee attacks have a 3% chance\r\n    to trigger an extra attack on the \r\n    target.\r\n\r\n    |CFFFFFFFFDagger/Fist:|R Increases your\r\n    critical strike chance by 3%.\r\n\r\n    |CFFFFFFFFMace:|R Your attacks ignore 9% of\r\n    your target's armor."
+              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\n\n    Axe/Sword: Your successful\n    melee attacks have a 3% chance\n    to trigger an extra attack on the\n    target.\n\n    Dagger/Fist: Increases your\n    critical strike chance by 3%.\n\n    Mace: Your attacks ignore 9% of\n    your target's armor."
             },
             {
               "spell_id": 13960,
-              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\r\n\r\n    |CFFFFFFFFAxe/Sword:|R Your successful\r\n    melee attacks have a 4% chance\r\n    to trigger an extra attack on the \r\n    target.\r\n\r\n    |CFFFFFFFFDagger/Fist:|R Increases your\r\n    critical strike chance by 4%.\r\n\r\n    |CFFFFFFFFMace:|R Your attacks ignore 12% of\r\n    your target's armor."
+              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\n\n    Axe/Sword: Your successful\n    melee attacks have a 4% chance\n    to trigger an extra attack on the\n    target.\n\n    Dagger/Fist: Increases your\n    critical strike chance by 4%.\n\n    Mace: Your attacks ignore 12% of\n    your target's armor."
             },
             {
               "spell_id": 13960,
-              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\r\n\r\n    |CFFFFFFFFAxe/Sword:|R Your successful\r\n    melee attacks have a 5% chance\r\n    to trigger an extra attack on the \r\n    target.\r\n\r\n    |CFFFFFFFFDagger/Fist:|R Increases your\r\n    critical strike chance by 5%.\r\n\r\n    |CFFFFFFFFMace:|R Your attacks ignore 15% of\r\n    your target's armor."
+              "description": "Gives your melee weapon attacks a benefit depending on the weapon.\n\n    Axe/Sword: Your successful\n    melee attacks have a 5% chance\n    to trigger an extra attack on the\n    target.\n\n    Dagger/Fist: Increases your\n    critical strike chance by 5%.\n\n    Mace: Your attacks ignore 15% of\n    your target's armor."
             }
           ],
           "spell_id": 13960
@@ -827,7 +828,8 @@
           "spell_id": 13750
         }
       ],
-      "background": "roguecombat"
+      "background": "roguecombat",
+      "icon": "ability_backstab"
     },
     {
       "id": 183,
@@ -879,15 +881,15 @@
           "ranks": [
             {
               "spell_id": 13958,
-              "description": "Reduces the chance enemies have to detect you while in Stealth mode as if you were ${5/5} $llevel:levels; higher."
+              "description": "Reduces the chance enemies have to detect you while in Stealth mode as if you were 1 level higher."
             },
             {
               "spell_id": 13958,
-              "description": "Reduces the chance enemies have to detect you while in Stealth mode as if you were ${10/5} $llevel:levels; higher."
+              "description": "Reduces the chance enemies have to detect you while in Stealth mode as if you were 2 levels higher."
             },
             {
               "spell_id": 13958,
-              "description": "Reduces the chance enemies have to detect you while in Stealth mode as if you were ${15/5} $llevel:levels; higher."
+              "description": "Reduces the chance enemies have to detect you while in Stealth mode as if you were 3 levels higher."
             }
           ],
           "spell_id": 13958
@@ -925,15 +927,15 @@
           "ranks": [
             {
               "spell_id": 13983,
-              "description": "Gives you a 33% chance to add a Combo Point to your target after Dodging an attack or fully resisting a spell."
+              "description": "Gives you a 33% chance to add a Combo Point to your target after Dodging one of their attacks or fully resisting one of their spells."
             },
             {
               "spell_id": 13983,
-              "description": "Gives you a 67% chance to add a Combo Point to your target after Dodging an attack or fully resisting a spell."
+              "description": "Gives you a 67% chance to add a Combo Point to your target after Dodging one of their attacks or fully resisting one of their spells."
             },
             {
               "spell_id": 13983,
-              "description": "Gives you a 100% chance to add a Combo Point to your target after Dodging an attack or fully resisting a spell."
+              "description": "Gives you a 100% chance to add a Combo Point to your target after Dodging one of their attacks or fully resisting one of their spells."
             }
           ],
           "spell_id": 13983
@@ -1042,7 +1044,7 @@
           "ranks": [
             {
               "spell_id": 14278,
-              "description": "A strike that deals 125% (180% if a Dagger is equipped in your Main Hand) weapon damage and increases your chance to dodge by 15% for 7 sec.  Awards 1 combo $lpoint:points;."
+              "description": "A strike that deals 125% (180% if a Dagger is equipped in your Main Hand) weapon damage and increases your chance to dodge by 15% for 7 sec.  Awards 1 combo points."
             }
           ],
           "spell_id": 14278
@@ -1059,11 +1061,11 @@
           "ranks": [
             {
               "spell_id": 14084,
-              "description": "Increases the radius of your Distract ability by 3 yds, and further reduces the Stealth detection of distracted enemies as though they were an additional ${5/-5} $Llevel:levels; lower."
+              "description": "Increases the radius of your Distract ability by 3 yds, and further reduces the Stealth detection of distracted enemies as though they were an additional 1 level lower."
             },
             {
               "spell_id": 14084,
-              "description": "Increases the radius of your Distract ability by 5 yds, and further reduces the Stealth detection of distracted enemies as though they were an additional ${10/-5} $Llevel:levels; lower."
+              "description": "Increases the radius of your Distract ability by 5 yds, and further reduces the Stealth detection of distracted enemies as though they were an additional 2 levels lower."
             }
           ],
           "spell_id": 14084
@@ -1080,11 +1082,11 @@
           "ranks": [
             {
               "spell_id": 30894,
-              "description": "Increases your Stealth detection as if you were ${5/5} $llevel:levels; higher and reduces your chance to be hit by spells and ranged attacks by 2%."
+              "description": "Increases your Stealth detection as if you were 1 level higher and reduces your chance to be hit by spells and ranged attacks by 2%."
             },
             {
               "spell_id": 30894,
-              "description": "Increases your Stealth detection as if you were ${15/5} $llevel:levels; higher and reduces your chance to be hit by spells and ranged attacks by 4%."
+              "description": "Increases your Stealth detection as if you were 3 levels higher and reduces your chance to be hit by spells and ranged attacks by 4%."
             }
           ],
           "spell_id": 30894
@@ -1181,7 +1183,7 @@
           "ranks": [
             {
               "spell_id": 16511,
-              "description": "An instant strike that deals 100% weapon damage (145% if a Dagger is equipped) and causes the target to take 15% increased Rupture damage from the Rogue. Lasts 15 sec. Awards 1 Combo $lPoint:Points;."
+              "description": "An instant strike that deals 100% weapon damage (145% if a Dagger is equipped) and causes the target to take 15% increased Rupture damage from the Rogue. Lasts 15 sec. Awards 1 Combo Points."
             }
           ],
           "spell_id": 16511
@@ -1264,13 +1266,14 @@
           "ranks": [
             {
               "spell_id": 1310721,
-              "description": "When your Rupture ability deals periodic damage, the Energy cost of your next Hemorrhage or Backstab ability within 10 sec is reduced by 3, stacking up to $1310723u times."
+              "description": "When your Rupture ability deals periodic damage, the Energy cost of your next Hemorrhage or Backstab ability within 10 sec is reduced by 3, stacking up to 5 times."
             }
           ],
           "spell_id": 1310721
         }
       ],
-      "background": "roguesubtlety"
+      "background": "roguesubtlety",
+      "icon": "ability_stealth"
     }
   ]
 }

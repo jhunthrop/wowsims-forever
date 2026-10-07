@@ -54,11 +54,8 @@ const holyStrikeBonusCoefficient = 0.429
 // your Holy Strike ability by 20% and causes it to refresh all Judgement
 // effects on the target."
 //
-// "Improved Holy Strike" -- the other talent this fix was asked to check
-// for, and the reason PaladinTalents already has an ImprovedHolyStrike
-// proto field -- does not exist anywhere in this client's talent trees.
-// Like Tiger's Fury's stale bracket ids, that field is vestigial; nothing
-// in this file reads it.
+// "Improved Holy Strike" does not exist anywhere in this client's talent
+// trees, and the regenerated proto no longer carries a field for it.
 const holyStrikeSacredArbiterDamageMultiplier = 1.2
 
 func (paladin *Paladin) registerHolyStrike() {

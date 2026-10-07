@@ -188,7 +188,7 @@
         "maxPoints": 2
       },
       {
-        "fieldName": "hotStreak",
+        "fieldName": "heatingUp",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [400624],
         "maxPoints": 1,

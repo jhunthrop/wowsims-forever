@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.69893",
+  "build": "1.60.1.70009",
   "class_id": 8,
   "class_slug": "mage",
   "trees": [
@@ -249,7 +249,7 @@
           "ranks": [
             {
               "spell_id": 400574,
-              "description": "Blasts the target with energy, dealing 54 Arcane damage. Each time you cast Arcane Blast, the damage of all your other spells is increased by 10% and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to $400573u times and lasts 8 sec or until any other damage spell is cast."
+              "description": "Blasts the target with energy, dealing 57 to 65 Arcane damage. Each time you cast Arcane Blast, the damage of all your other spells is increased by 10% and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 8 sec or until any other damage spell is cast."
             }
           ],
           "spell_id": 400574
@@ -287,11 +287,11 @@
           "ranks": [
             {
               "spell_id": 11255,
-              "description": "Your Counterspell also Silences the target for ${2000/1000} sec."
+              "description": "Your Counterspell also Silences the target for 2 sec."
             },
             {
               "spell_id": 11255,
-              "description": "Your Counterspell also Silences the target for ${4000/1000} sec."
+              "description": "Your Counterspell also Silences the target for 4 sec."
             }
           ],
           "spell_id": 11255
@@ -333,7 +333,7 @@
           "ranks": [
             {
               "spell_id": 400588,
-              "description": "Gives your Arcane Blast spell a 40% chance, and your Fireball, Frostbolt, and Frostfire Bolt spells a ${40/2}% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every ${5/10}.1 sec."
+              "description": "Gives your Arcane Blast spell a 40% chance, and your Fireball, Frostbolt, and Frostfire Bolt spells a 20% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
             }
           ],
           "spell_id": 400588
@@ -431,7 +431,8 @@
           "spell_id": 12042
         }
       ],
-      "background": "magearcane"
+      "background": "magearcane",
+      "icon": "spell_holy_magicalsentry"
     },
     {
       "id": 41,
@@ -450,11 +451,11 @@
           "ranks": [
             {
               "spell_id": 11078,
-              "description": "Reduces the cooldown of your Fire Blast spell by ${1000/-1000} sec. Killing a non-trivial target increases the critical strike chance of your next Fire Blast cast within 20 sec by 25%."
+              "description": "Reduces the cooldown of your Fire Blast spell by 1 sec. Killing a non-trivial target increases the critical strike chance of your next Fire Blast cast within 30 sec by 25%."
             },
             {
               "spell_id": 11078,
-              "description": "Reduces the cooldown of your Fire Blast spell by ${2000/-1000} sec. Killing a non-trivial target increases the critical strike chance of your next Fire Blast cast within 20 sec by 50%."
+              "description": "Reduces the cooldown of your Fire Blast spell by 2 sec. Killing a non-trivial target increases the critical strike chance of your next Fire Blast cast within 30 sec by 50%."
             }
           ],
           "spell_id": 11078
@@ -658,7 +659,7 @@
           "ranks": [
             {
               "spell_id": 11366,
-              "description": "Hurls an immense fiery boulder that causes 110 Fire damage and an additional 44 Fire damage over 12 sec."
+              "description": "Hurls an immense fiery boulder that causes 101 to 131 Fire damage and an additional 44 Fire damage over 12 sec."
             }
           ],
           "spell_id": 11366
@@ -675,15 +676,15 @@
           "ranks": [
             {
               "spell_id": 11095,
-              "description": "Your Scorch spell has a 33% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to $22959u times."
+              "description": "Your Scorch spell has a 33% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to 5 times."
             },
             {
               "spell_id": 11095,
-              "description": "Your Scorch spell has a 67% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to $22959u times."
+              "description": "Your Scorch spell has a 67% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to 5 times."
             },
             {
               "spell_id": 11095,
-              "description": "Your Scorch spell has a 100% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to $22959u times."
+              "description": "Your Scorch spell has a 100% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to 5 times."
             }
           ],
           "spell_id": 11095
@@ -711,8 +712,8 @@
         },
         {
           "id": 105786,
-          "name": "Hot Streak",
-          "icon": "ability_mage_hotstreak",
+          "name": "Heating Up",
+          "icon": "spell_fire_firebolt",
           "max_rank": 1,
           "tier": 3,
           "column": 2,
@@ -721,7 +722,7 @@
           "ranks": [
             {
               "spell_id": 400624,
-              "description": "Your non-periodic critical strikes with Fireball, Frostfire Bolt, Fire Blast, and Scorch grant Hot Streak for 15 sec. Hot Streak reduces the cast time of Pyroblast by 25%, stacking up to 3 times."
+              "description": "Non-periodic critical strikes with Fireball, Frostfire Bolt, Fire Blast, and Scorch reduce the cast time of your next Pyroblast cast within 20 sec by 25%, stacking up to 3 times."
             }
           ],
           "spell_id": 400624
@@ -788,7 +789,7 @@
           "ranks": [
             {
               "spell_id": 11113,
-              "description": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 163 Fire damage, and Dazing them for 50% reduced movement speed for 6 sec."
+              "description": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 154 to 184 Fire damage, and Dazing them for 50% reduced movement speed for 6 sec."
             }
           ],
           "spell_id": 11113
@@ -838,13 +839,14 @@
           "ranks": [
             {
               "spell_id": 11129,
-              "description": "When activated, this spell causes each of your Fire damage spell hits to increase your critical strike chance with Fire damage spells by 10%.  This effect lasts until you have caused $n non-periodic critical strikes with Fire spells."
+              "description": "When activated, this spell causes each of your Fire damage spell hits to increase your critical strike chance with Fire damage spells by 10%.  This effect lasts until you have caused 3 non-periodic critical strikes with Fire spells."
             }
           ],
           "spell_id": 11129
         }
       ],
-      "background": "magefire"
+      "background": "magefire",
+      "icon": "spell_fire_firebolt02"
     },
     {
       "id": 61,
@@ -1104,7 +1106,7 @@
           "ranks": [
             {
               "spell_id": 1312002,
-              "description": "Deals 28 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets."
+              "description": "Deals 28 to 32 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets."
             }
           ],
           "spell_id": 1312002
@@ -1251,11 +1253,11 @@
           "ranks": [
             {
               "spell_id": 400647,
-              "description": "Gives your Chill effects a 15% chance to grant you the Fingers of Frost effect, which treats your next 1 $lspell:spells; cast as if the target were Frozen. Lasts 15 sec."
+              "description": "Gives your Chill effects a 15% chance to grant you the Fingers of Frost effect, which treats your next 1 spell cast as if the target were Frozen. Lasts 15 sec."
             },
             {
               "spell_id": 400647,
-              "description": "Gives your Chill effects a 15% chance to grant you the Fingers of Frost effect, which treats your next 2 $lspell:spells; cast as if the target were Frozen. Lasts 15 sec."
+              "description": "Gives your Chill effects a 15% chance to grant you the Fingers of Frost effect, which treats your next 2 spells cast as if the target were Frozen. Lasts 15 sec."
             }
           ],
           "spell_id": 400647
@@ -1305,13 +1307,14 @@
           "ranks": [
             {
               "spell_id": 11426,
-              "description": "Instantly shields you, absorbing 431 damage. Lasts 1 min. While the shield holds, your spellcasts will not be interrupted or delayed from taking damage.\r\n"
+              "description": "Instantly shields you, absorbing 448 damage. Lasts 1 min. While the shield holds, your spellcasts will not be interrupted or delayed from taking damage."
             }
           ],
           "spell_id": 11426
         }
       ],
-      "background": "magefrost"
+      "background": "magefrost",
+      "icon": "spell_frost_frostbolt02"
     }
   ]
 }

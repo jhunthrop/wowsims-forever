@@ -13,13 +13,10 @@ import (
 // elementalTalentString sets exactly one of the Elemental tree's 16
 // nodes to the given rank, the same "isolate the one talent this lane
 // added" convention flame_shock_call_of_flame_test.go's
-// callOfFlameTalentsString uses - node indices come from a direct
-// protoreflect dump of proto.ShamanTalents's field order (NOT the
-// tier/column order talents/shaman.json's build 1.60.1.70009 lists:
-// that build rearranged the Elemental tree relative to
-// talents_auto_gen.go's source build 1.60.1.69893, so Elemental Fury
-// and Elemental Alacrity are not where a tier/column reading of the
-// newer build would put them).
+// callOfFlameTalentsString uses - node indices come from the generated
+// proto.ShamanTalents's field order by name (elementalNode), which is
+// the live tree's tier-then-column order since the proto was regenerated
+// from build 1.60.1.70009.
 func elementalTalentString(index, rank int) string {
 	nodes := [16]byte{}
 	for i := range nodes {
@@ -29,12 +26,12 @@ func elementalTalentString(index, rank int) string {
 	return string(nodes[:]) + "--"
 }
 
-const (
-	nodeCallOfThunder     = 10
-	nodeEyeOfTheStorm     = 9
-	nodeLightningOverload = 12
-	nodeElementalAlacrity = 14
-	nodeLavaBurst         = 15
+var (
+	nodeCallOfThunder     = elementalNode("call_of_thunder")
+	nodeEyeOfTheStorm     = elementalNode("eye_of_the_storm")
+	nodeLightningOverload = elementalNode("lightning_overload")
+	nodeElementalAlacrity = elementalNode("elemental_alacrity")
+	nodeLavaBurst         = elementalNode("lava_burst")
 )
 
 // elementalTalentStringWithLavaBurst is elementalTalentString, plus one

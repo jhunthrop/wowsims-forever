@@ -101,14 +101,13 @@ func (druid *Druid) ApplyTalents() {
 	// package.
 	_ = druid.Talents.FeralCharge
 
-	// Primal Bite (proto field Mangle, node 104949 - the proto's own
-	// field name is stale, see this file's header): a new Bear Form
+	// Primal Bite (node 104949): a new Bear Form
 	// finishing move, Rage-costed (spellconst/druid.json's cost_type 1
 	// on spell 407995). Bear Form's own damage kit is not modeled in
 	// this package, so registering it would be a spell no rotation can
 	// ever reach - dead code this fork's conventions ask to delete
 	// rather than add.
-	_ = druid.Talents.Mangle
+	_ = druid.Talents.PrimalBite
 
 	// Natural Reaction (node 104954): Bear Form dodge chance and a
 	// chance to gain Rage on dodge. Bear Form's own damage kit is not
@@ -282,10 +281,8 @@ func (druid *Druid) registerNaturesSwiftnessCD() {
 	})
 }
 
-// applyBloodFrenzy implements the proto's PrimalFury field, which is
-// Blood Frenzy in 1.60.1.70009 (node 104947, tier 3 col 3 of the Feral
-// tree; vanilla's Primal Fury moved to node 104947's neighbor, Shredding
-// Attacks's column). Client text: "Gives you a 50/100% chance to gain an
+// applyBloodFrenzy implements Blood Frenzy (node 104947, proto field
+// BloodFrenzy). Client text: "Gives you a 50/100% chance to gain an
 // additional 5 Rage any time you get a critical strike while in Bear
 // Form or Dire Bear Form. In addition, your non-periodic critical
 // strikes from Cat Form abilities that generate Combo Points have a
@@ -293,11 +290,11 @@ func (druid *Druid) registerNaturesSwiftnessCD() {
 // half is modeled: Bear Form's own damage kit (and so its Rage economy)
 // is not modeled in this package.
 func (druid *Druid) applyBloodFrenzy() {
-	if druid.Talents.PrimalFury == 0 {
+	if druid.Talents.BloodFrenzy == 0 {
 		return
 	}
 
-	rank := clampRank(druid.Talents.PrimalFury, 2)
+	rank := clampRank(druid.Talents.BloodFrenzy, 2)
 	procChance := 0.5 * float64(rank)
 
 	core.MakePermanent(druid.RegisterAura(core.Aura{

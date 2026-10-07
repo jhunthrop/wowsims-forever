@@ -118,10 +118,10 @@ func (mage *Mage) applyFireTalents() {
 	// reflect: none of the three changes a damage number here.
 	_, _, _ = mage.Talents.FlameThrowing, mage.Talents.Impact, mage.Talents.ImprovedFireWard
 
-	// Hot Streak would need Pyroblast's cast time to change on a
+	// Heating Up (renamed from Hot Streak in the live tree) would need Pyroblast's cast time to change on a
 	// stacking buff driven by non-periodic Fire crits. Inert until
 	// Pyroblast carries a dynamic cast-time mod.
-	_ = mage.Talents.HotStreak
+	_ = mage.Talents.HeatingUp
 }
 
 func (mage *Mage) applyFrostTalents() {
@@ -393,6 +393,11 @@ func (mage *Mage) applyMasterOfElements() {
 	})
 }
 
+// combustionCriticalStrikes is how many non-periodic Fire critical strikes
+// end Combustion: 3 per the live text and Blizzard's 1 October 2026 notes
+// ("Combustion 3 charges"), where the earlier client tables said 4.
+const combustionCriticalStrikes = 3
+
 func (mage *Mage) registerCombustionCD() {
 	if !mage.Talents.Combustion {
 		return
@@ -433,7 +438,7 @@ func (mage *Mage) registerCombustionCD() {
 			}
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !result.Landed() || numCrits >= 3 || !spell.SpellSchool.Matches(core.SpellSchoolFire) || !spell.Flags.Matches(SpellFlagMage) {
+			if !result.Landed() || numCrits >= combustionCriticalStrikes || !spell.SpellSchool.Matches(core.SpellSchoolFire) || !spell.Flags.Matches(SpellFlagMage) {
 				return
 			}
 
@@ -448,7 +453,7 @@ func (mage *Mage) registerCombustionCD() {
 
 			if result.DidCrit() {
 				numCrits++
-				if numCrits == 3 {
+				if numCrits == combustionCriticalStrikes {
 					aura.Deactivate(sim)
 				}
 			}

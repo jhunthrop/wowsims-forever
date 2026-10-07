@@ -12,11 +12,13 @@ import (
 )
 
 // The generated tree must be the client's: Arms 17, Fury 18,
-// Protection 18, from build 1.60.1.69893. If Task 17 has not run, or
+// Protection 18 on the live tree (client trait tables plus Wowhead's
+// hotfix overlay, build 1.60.1.70009; Fury lost Improved Cleave and
+// Precision and gained Gore Drinker). If Task 17 has not run, or
 // ran against Era, this fails first and everything below it is noise.
 func TestTheGeneratedTreeIsTheClients(t *testing.T) {
-	if got, want := TalentTreeSizes, [3]int{17, 18, 18}; got != want {
-		t.Fatalf("TalentTreeSizes = %v, want %v (Arms 17, Fury 18, Protection 18)", got, want)
+	if got, want := TalentTreeSizes, [3]int{17, 17, 18}; got != want {
+		t.Fatalf("TalentTreeSizes = %v, want %v (Arms 17, Fury 17, Protection 18)", got, want)
 	}
 	if TalentsBuild == "" {
 		t.Error("TalentsBuild is empty; the generated file must record the client build")
@@ -36,8 +38,8 @@ func TestTalentTreeSizesMatchTheProto(t *testing.T) {
 	if fields.Len() != total {
 		t.Errorf("WarriorTalents has %d fields, TalentTreeSizes sums to %d", fields.Len(), total)
 	}
-	if total != 53 {
-		t.Errorf("the warrior has %d talents, want 53 from build %s", total, TalentsBuild)
+	if total != 52 {
+		t.Errorf("the warrior has %d talents, want 52 from build %s", total, TalentsBuild)
 	}
 }
 
@@ -49,13 +51,10 @@ func TestTalentTreeSizesMatchTheProto(t *testing.T) {
 var foreverFuryTalentsApplied = []string{
 	// Flat stats, in ApplyTalents.
 	"cruelty",
-	"precision",
-	"toughness",
 	"anticipation",
 	"deflection",
 	// Declarative mods, in applyDeclarativeTalents.
 	"improved_heroic_strike",
-	"improved_cleave",
 	"improved_execute",
 	"improved_thunder_clap",
 	"improved_sunder_armor",
@@ -88,6 +87,7 @@ var foreverFuryTalentsApplied = []string{
 	"weaponmaster",
 	"unbridled_wrath",
 	"dual_wield_specialization",
+	"furious_precision",
 	"enrage",
 	"flurry",
 	"shield_specialization",

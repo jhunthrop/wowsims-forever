@@ -6,8 +6,14 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// berserkerRageLevel is the level Berserker Rage is learned: 30 per
+// Blizzard's 1 October 2026 notes ("Berserker Rage at level 30"); the
+// client's spell table (BerserkerRageLevel) still says 32 and the note is
+// the live state.
+const berserkerRageLevel = 30
+
 func (warrior *Warrior) registerBerserkerRageSpell() {
-	if warrior.Level < 32 {
+	if warrior.Level < berserkerRageLevel {
 		return
 	}
 
@@ -42,7 +48,7 @@ func (warrior *Warrior) registerBerserkerRageSpell() {
 	warrior.BerserkerRage = warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
 		ActionID: actionID,
 
-		RequiredLevel: BerserkerRageLevel[0],
+		RequiredLevel: berserkerRageLevel,
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

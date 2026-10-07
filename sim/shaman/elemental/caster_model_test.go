@@ -5,17 +5,30 @@ import (
 	"testing"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
+	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-// Elemental tree node positions in the engine's talent string: the proto's
-// field order (proto/shaman.proto, field number - 1), which is not the
-// client JSON's tier-then-column order (Elemental Fury is field 8).
-const (
-	concussionNode           = 1
-	elementalDevastationNode = 5
-	lightningOverloadNode    = 12
-	elementalFuryNode        = 7
+// elementalNode is a talent's position in the Elemental segment of the
+// engine's talent string: the generated proto field's number - 1, looked
+// up by name so a tree layout change (the live tree moved Elemental
+// Alacrity and Elemental Fury) cannot leave a typed index pointing at
+// another talent. The Elemental tree is the first segment, so the field
+// position is the index.
+func elementalNode(field string) int {
+	fd := (&proto.ShamanTalents{}).ProtoReflect().Descriptor().Fields().ByName(protoreflect.Name(field))
+	if fd == nil {
+		panic("ShamanTalents has no field " + field)
+	}
+	return int(fd.Number()) - 1
+}
+
+var (
+	concussionNode           = elementalNode("concussion")
+	elementalDevastationNode = elementalNode("elemental_devastation")
+	lightningOverloadNode    = elementalNode("lightning_overload")
+	elementalFuryNode        = elementalNode("elemental_fury")
 )
 
 // elementalTalentsWith is a talent string with only the named Elemental

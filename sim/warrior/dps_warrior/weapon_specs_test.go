@@ -162,3 +162,36 @@ func buildWarriorWithWeapons(t *testing.T, talents string, mainHand, offHand int
 	}
 	return agent.GetWarrior()
 }
+
+// Dual Wield Specialization no longer carries a hit clause: the client
+// text for build 1.60.1.70009 and Blizzard's 1 October 2026 notes ("Dual
+// Wield Specialization off-hand rage 10/20/30/40/50% and no hit") both
+// give damage and rage only. The hit moved to Furious Precision.
+func TestDualWieldSpecializationAddsNoOffHandHit(t *testing.T) {
+	oneHander := weaponWithHandType(t, proto.HandType_HandTypeOneHand)
+
+	with := buildWarriorWithWeapons(t, talentStringWithRank(t, emptyWarriorTalents, "dual_wield_specialization", 5), oneHander, oneHander)
+	without := buildWarriorWithWeapons(t, emptyWarriorTalents, oneHander, oneHander)
+
+	if got, base := with.AutoAttacks.OHAuto().BonusHitRating, without.AutoAttacks.OHAuto().BonusHitRating; got != base {
+		t.Errorf("the off-hand auto-attack's BonusHitRating is %v with Dual Wield Specialization, want %v (no hit clause)", got, base)
+	}
+}
+
+// Furious Precision: "Increases your chance to hit with off-hand attacks
+// by 4/7/10%" (Fury node 105953, a hotfix_only talent in the live tree).
+func TestFuriousPrecisionAddsOffHandHit(t *testing.T) {
+	oneHander := weaponWithHandType(t, proto.HandType_HandTypeOneHand)
+	without := buildWarriorWithWeapons(t, emptyWarriorTalents, oneHander, oneHander)
+	base := without.AutoAttacks.OHAuto().BonusHitRating
+
+	for points, hitPercent := range map[int]float64{1: 4, 2: 7, 3: 10} {
+		with := buildWarriorWithWeapons(t, talentStringWithRank(t, emptyWarriorTalents, "furious_precision", points), oneHander, oneHander)
+		if got, want := with.AutoAttacks.OHAuto().BonusHitRating, base+hitPercent*core.HitRatingPerHitChance; got != want {
+			t.Errorf("%d point(s): off-hand BonusHitRating is %v, want %v", points, got, want)
+		}
+		if got, mhBase := with.AutoAttacks.MHAuto().BonusHitRating, without.AutoAttacks.MHAuto().BonusHitRating; got != mhBase {
+			t.Errorf("%d point(s): main-hand BonusHitRating moved from %v to %v; Furious Precision is off-hand only", points, mhBase, got)
+		}
+	}
+}

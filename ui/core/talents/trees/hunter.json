@@ -180,12 +180,6 @@
         "prereqRank": 5
       },
       {
-        "fieldName": "improvedSerpentSting",
-        "location": { "rowIdx": 3, "colIdx": 3 },
-        "spellIds": [19464, 19464, 19464, 19464, 19464],
-        "maxPoints": 5
-      },
-      {
         "fieldName": "rapidRecuperation",
         "location": { "rowIdx": 4, "colIdx": 0 },
         "spellIds": [1223987, 1223987],

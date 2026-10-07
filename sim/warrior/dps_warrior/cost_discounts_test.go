@@ -32,8 +32,8 @@ func TestTheRageDiscountTalentsLandOnTheirSpells(t *testing.T) {
 		protection   float64
 	}
 
-	// ForeverFuryTalents takes Improved Heroic Strike 3, Improved Cleave
-	// 3 and Improved Execute 1; ForeverProtectionTalents takes Improved
+	// ForeverFuryTalents takes Improved Heroic Strike 3 and Improved
+	// Execute 1 (Improved Cleave left the tree in the live rebuild); ForeverProtectionTalents takes Improved
 	// Thunder Clap 3 and Improved Sunder Armor 3. Between them the two
 	// reference builds exercise all five discounts.
 	cases := []spellCost{
@@ -41,7 +41,7 @@ func TestTheRageDiscountTalentsLandOnTheirSpells(t *testing.T) {
 		{"Heroic Strike", func(w *warrior.Warrior) *warrior.WarriorSpell { return w.HeroicStrike },
 			15, 12, 12},
 		{"Cleave", func(w *warrior.Warrior) *warrior.WarriorSpell { return w.Cleave },
-			20, 17, 20},
+			20, 20, 20},
 		{"Execute", func(w *warrior.Warrior) *warrior.WarriorSpell { return w.Execute },
 			15, 12, 15},
 		{"Thunder Clap", func(w *warrior.Warrior) *warrior.WarriorSpell { return w.ThunderClap },
@@ -98,6 +98,14 @@ func emptyTalentString() string {
 // sim registers them.
 func buildWarriorForCostTest(t *testing.T, talents string) *warrior.Warrior {
 	t.Helper()
+	return buildWarriorAtLevel(t, 0, talents)
+}
+
+// buildWarriorAtLevel is buildWarriorForCostTest at an explicit
+// character level; level 0 leaves the player's level unset, which the
+// engine reads as the client's cap of 60.
+func buildWarriorAtLevel(t *testing.T, level int32, talents string) *warrior.Warrior {
+	t.Helper()
 
 	sim := core.NewSim(&proto.RaidSimRequest{
 		SimOptions: &proto.SimOptions{RandomSeed: 1},
@@ -105,6 +113,7 @@ func buildWarriorForCostTest(t *testing.T, talents string) *warrior.Warrior {
 			Parties: []*proto.Party{{
 				Players: []*proto.Player{{
 					Name:          "Warrior",
+					Level:         level,
 					Class:         proto.Class_ClassWarrior,
 					Race:          proto.Race_RaceOrc,
 					TalentsString: talents,
@@ -128,4 +137,15 @@ func buildWarriorForCostTest(t *testing.T, talents string) *warrior.Warrior {
 		t.Fatalf("the raid's first player is not a warrior agent")
 	}
 	return agent.GetWarrior()
+}
+
+// Berserker Rage is learned at level 30: Blizzard's 1 October 2026 notes
+// ("Berserker Rage at level 30"), where the client's spell table says 32.
+func TestBerserkerRageIsLearnedAtLevelThirty(t *testing.T) {
+	if war := buildWarriorAtLevel(t, 29, emptyWarriorTalents); war.BerserkerRage != nil {
+		t.Error("a level 29 warrior has Berserker Rage")
+	}
+	if war := buildWarriorAtLevel(t, 30, emptyWarriorTalents); war.BerserkerRage == nil {
+		t.Error("a level 30 warrior has no Berserker Rage")
+	}
 }

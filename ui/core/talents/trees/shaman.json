@@ -46,10 +46,10 @@
         "maxPoints": 1
       },
       {
-        "fieldName": "elementalFury",
+        "fieldName": "elementalAlacrity",
         "location": { "rowIdx": 2, "colIdx": 2 },
-        "spellIds": [16089, 16089, 16089, 16089, 16089],
-        "maxPoints": 5
+        "spellIds": [16578, 16578, 16578],
+        "maxPoints": 3
       },
       {
         "fieldName": "improvedFireNova",
@@ -69,7 +69,7 @@
         "spellIds": [16120],
         "maxPoints": 1,
         "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
-        "prereqRank": 5
+        "prereqRank": 3
       },
       {
         "fieldName": "elementalReach",
@@ -90,10 +90,10 @@
         "maxPoints": 1
       },
       {
-        "fieldName": "elementalAlacrity",
+        "fieldName": "elementalFury",
         "location": { "rowIdx": 5, "colIdx": 2 },
-        "spellIds": [16578, 16578, 16578],
-        "maxPoints": 3,
+        "spellIds": [16089, 16089, 16089, 16089, 16089],
+        "maxPoints": 5,
         "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
         "prereqRank": 1
       },

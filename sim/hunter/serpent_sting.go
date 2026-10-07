@@ -47,7 +47,7 @@ func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 			return hunter.DistanceFromTarget >= core.MinRangedAttackDistance
 		},
 
-		DamageMultiplier: 1 + 0.02*float64(hunter.Talents.ImprovedSerpentSting),
+		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 
 		Dot: core.DotConfig{

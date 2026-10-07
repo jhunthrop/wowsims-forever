@@ -23,7 +23,11 @@ import (
 // Vanilla's Bloodthirst was a flat 45% of attack power with no base
 // term. That is a different spell, not a renamed one, so the 0.45 that
 // stood here is gone.
-const bloodthirstAttackPowerCoefficient = 0.35
+//
+// 0.45 is the live value: Blizzard's 1 October 2026 notes give
+// Bloodthirst an attack-power ratio of 45% (was 35%), a hotfix the
+// client's spell data and rank text do not carry yet. The note wins.
+const bloodthirstAttackPowerCoefficient = 0.45
 
 func (warrior *Warrior) registerBloodthirstSpell(cdTimer *core.Timer) {
 	if !warrior.Talents.Bloodthirst {

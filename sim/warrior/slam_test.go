@@ -5,9 +5,11 @@ import (
 	"time"
 )
 
-// Improved Slam, per the client's own rank text (build 1.60.1.70009,
-// spell 12862): the cast time and global cooldown each lose 0.25 s a
-// point, the cooldown loses 1.5 s a point, and with any point spent
+// Improved Slam: the cast time and global cooldown each lose 0.25 s a
+// point (client text, build 1.60.1.70009, spell 12862), the cooldown
+// loses 3 s a point (Blizzard's 1 October 2026 notes: "Improved Slam 3 s
+// off the cooldown per rank"; the client table still says 1.5 s, the
+// note is the live state), and with any point spent
 // "Slam no longer interrupts or delays your melee swing". Before
 // 2026-10-07 the engine took 0.1 s a point off the cast time only and
 // stopped the swing for every Slam.
@@ -18,8 +20,8 @@ func TestImprovedSlamReductionsPerPoint(t *testing.T) {
 		cooldown time.Duration
 	}{
 		{0, 0, 0},
-		{1, 250 * time.Millisecond, 1500 * time.Millisecond},
-		{2, 500 * time.Millisecond, 3 * time.Second},
+		{1, 250 * time.Millisecond, 3 * time.Second},
+		{2, 500 * time.Millisecond, 6 * time.Second},
 	}
 	for _, c := range cases {
 		cast, gcd, cooldown := improvedSlamReductions(c.points)
