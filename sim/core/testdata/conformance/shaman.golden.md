@@ -93,7 +93,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| ElementalShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -144,8 +144,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 38 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| ElementalShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -204,8 +204,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 40 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| ElementalShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -276,9 +276,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 50 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| ElementalShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -366,10 +366,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 60 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Magma Totem | 4 | 10587 | 650.00→650.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 20000→20000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| ElementalShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| ElementalShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -475,7 +475,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| EnhancementShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -526,8 +526,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 38 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| EnhancementShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -586,8 +586,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 40 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| EnhancementShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -658,9 +658,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 50 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -748,10 +748,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 60 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Magma Totem | 4 | 10587 | 650.00→650.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 20000→20000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -857,7 +857,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| WardenShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -908,8 +908,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 38 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| WardenShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -968,8 +968,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 40 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| WardenShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -1040,9 +1040,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 50 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| WardenShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -1130,10 +1130,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 60 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Magma Totem | 4 | 10587 | 650.00→650.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 20000→20000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
-| WardenShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
+| WardenShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |

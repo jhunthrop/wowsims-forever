@@ -7,6 +7,7 @@ import (
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/simsignals"
+	"github.com/wowsims/classic/sim/core/stats"
 	"github.com/wowsims/classic/sim/shaman"
 )
 
@@ -208,5 +209,26 @@ func TestFireNovaSharesClearcasting(t *testing.T) {
 	s.ClearcastingAura.SetStacks(sim, s.ClearcastingAura.MaxStacks)
 	if got := nova.Cost.GetCurrentCost(); got != 0 {
 		t.Errorf("Fire Nova cost under Clearcasting = %v, want 0", got)
+	}
+}
+
+// Mana Spring Totem restores "10 mana every 2 seconds" at rank 4 for
+// five minutes (spell 10497's tooltip and 300 s duration). The APL cast
+// used to only mark the water slot occupied; the restore is now a real
+// MP5 aura, so a solo shaman benefits from dropping it.
+func TestManaSpringTotemRestoresManaForFiveMinutes(t *testing.T) {
+	sim, s := newFireNovaShaman(t, 60, elementalTalentsWith(nil))
+	spring := s.ManaSpringTotem[shaman.ManaSpringTotemRanks]
+	if spring == nil {
+		t.Fatal("level-60 shaman has no Mana Spring Totem rank 4")
+	}
+
+	before := s.GetStat(stats.MP5)
+	spring.ApplyEffects(sim, sim.GetTargetUnit(0), spring)
+	if got, want := s.GetStat(stats.MP5)-before, 25.0; !near(got, want) {
+		t.Errorf("Mana Spring Totem rank 4 MP5 = +%v, want +%v (10 mana per 2 s)", got, want)
+	}
+	if got, want := s.TotemExpirations[shaman.WaterTotem], sim.CurrentTime+5*time.Minute; got != want {
+		t.Errorf("Mana Spring Totem expires at %v, want %v (client duration 300 s)", got, want)
 	}
 }
