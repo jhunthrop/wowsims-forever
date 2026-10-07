@@ -50,6 +50,7 @@ const (
 	PaladinSpellMaskHolyWrath
 	PaladinSpellMaskExorcism
 	PaladinSpellMaskHammerOfWrath
+	PaladinSpellMaskHolyShock
 )
 
 const (

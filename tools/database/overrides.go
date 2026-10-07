@@ -136,6 +136,20 @@ var ItemOverrides = []*proto.UIItem{
 			stats.ShadowResistance: 7,
 		}.ToFloatArray(),
 	},
+
+	// Forever's own relics (data/builds/1.60.1.70009/items/*.json, class 4
+	// subclass 7/8/9). None exists on Wowhead or Wago, and each has an equip
+	// effect registered in sim/<class>/items.go, which needs the item in the
+	// database. Name, icon, item level and quality are the client's.
+	foreverRelic(220606, "Idol of the Dream", "inv_relics_idolofferocity", proto.RangedWeaponType_RangedWeaponTypeIdol, 60, proto.ItemQuality_ItemQualityRare),
+	foreverRelic(228176, "Totem of Thunder", "inv_relics_totemofrebirth", proto.RangedWeaponType_RangedWeaponTypeTotem, 65, proto.ItemQuality_ItemQualityRare),
+	foreverRelic(249441, "Talons of Wrath", "spell_nature_natureswrath", proto.RangedWeaponType_RangedWeaponTypeIdol, 45, proto.ItemQuality_ItemQualityRare),
+	foreverRelic(249442, "Libram of Invocation", "inv_relics_libramofhope", proto.RangedWeaponType_RangedWeaponTypeLibram, 45, proto.ItemQuality_ItemQualityRare),
+	foreverRelic(272427, "Howling Idol", "trade_archaeology_catstatueemeraldeyes", proto.RangedWeaponType_RangedWeaponTypeIdol, 65, proto.ItemQuality_ItemQualityRare),
+	foreverRelic(272432, "Totem of the Storm", "spell_shaman_stormtotem", proto.RangedWeaponType_RangedWeaponTypeTotem, 65, proto.ItemQuality_ItemQualityRare),
+	foreverRelic(272433, "Burning Totem", "spell_fire_totemofwrath", proto.RangedWeaponType_RangedWeaponTypeTotem, 65, proto.ItemQuality_ItemQualityRare),
+	foreverRelic(272435, "Libram of Law", "inv_misc_book_04", proto.RangedWeaponType_RangedWeaponTypeLibram, 65, proto.ItemQuality_ItemQualityRare),
+	foreverRelic(279248, "Libram of Infusion", "inv_misc_book_13", proto.RangedWeaponType_RangedWeaponTypeLibram, 65, proto.ItemQuality_ItemQualityEpic),
 }
 
 // Keep these sorted by item ID.
@@ -475,4 +489,18 @@ var DenyListNameRegexes = []*regexp.Regexp{
 	regexp.MustCompile(`TEST`),
 	regexp.MustCompile(`Test`),
 	regexp.MustCompile(`zOLD`),
+}
+
+// foreverRelic is a statless relic (libram, idol or totem) in the ranged slot.
+func foreverRelic(id int32, name, icon string, kind proto.RangedWeaponType, ilvl int32, quality proto.ItemQuality) *proto.UIItem {
+	return &proto.UIItem{
+		Id:               id,
+		Name:             name,
+		Icon:             icon,
+		Type:             proto.ItemType_ItemTypeRanged,
+		RangedWeaponType: kind,
+		Ilvl:             ilvl,
+		Quality:          quality,
+		Stats:            stats.Stats{}.ToFloatArray(),
+	}
 }

@@ -37,8 +37,7 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 
 	var libramAp, libramBonus float64
 	if paladin.Ranged().ID == LibramOfFervor {
-		libramAp = 48
-		libramBonus = 33
+		libramAp, libramBonus = libramOfFervorBonuses()
 	}
 
 	for i, rank := range ranks {
@@ -95,7 +94,7 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 			OnExpire: func(_ *core.Aura, sim *core.Simulation) {
 				paladin.MultiplyMeleeSpeed(sim, 1/1.4)
 				paladin.AutoAttacks.MHAuto().DamageMultiplier *= 1.4
-				paladin.AddStatDynamic(sim, stats.AttackPower, -ap*improvedSotC+libramAp)
+				paladin.AddStatDynamic(sim, stats.AttackPower, -(ap*improvedSotC + libramAp))
 			},
 		})
 

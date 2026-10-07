@@ -73,6 +73,7 @@ func (shaman *Shaman) newFlameShockSpell(rank int, shockTimer *core.Timer) core.
 	)
 
 	spell.SpellCode = SpellCode_ShamanFlameShock
+	spell.ClassSpellMask = ShamanSpellMaskFlameShock
 	spell.RequiredLevel = level
 	spell.Rank = rank
 

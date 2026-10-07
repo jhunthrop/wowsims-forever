@@ -30,13 +30,20 @@ func feralTalentsString(t *testing.T, ranks map[string]int) string {
 // a real build.
 func newFeralDruidSimWithTalents(t *testing.T, level int32, talents string) (*FeralDruid, *core.Simulation, *core.Unit) {
 	t.Helper()
+	return newFeralDruidSimWearing(t, level, talents, &proto.EquipmentSpec{})
+}
+
+// newFeralDruidSimWearing is newFeralDruidSimWithTalents wearing the given
+// equipment.
+func newFeralDruidSimWearing(t *testing.T, level int32, talents string, equipment *proto.EquipmentSpec) (*FeralDruid, *core.Simulation, *core.Unit) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
 			Class:              proto.Class_ClassDruid,
 			Race:               proto.Race_RaceTauren,
 			Level:              level,
-			Equipment:          &proto.EquipmentSpec{},
+			Equipment:          equipment,
 			Buffs:              core.FullBuffs.Player,
 			TalentsString:      talents,
 			DistanceFromTarget: 5,

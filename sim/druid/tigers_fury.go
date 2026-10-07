@@ -44,8 +44,9 @@ func (druid *Druid) registerTigersFurySpell() {
 	})
 
 	spell := druid.RegisterSpell(Cat, core.SpellConfig{
-		ActionID: actionID,
-		Flags:    core.SpellFlagAPL,
+		ActionID:       actionID,
+		ClassSpellMask: DruidSpellMaskTigersFury,
+		Flags:          core.SpellFlagAPL,
 
 		RequiredLevel: tigersFuryLearnLevels[rank-1],
 

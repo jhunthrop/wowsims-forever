@@ -13,7 +13,31 @@ const (
 	IdolOfTheMoon       = 23197
 	IdolOfBrutality     = 23198
 	RuneOfMetamorphosis = 19340
+	TalonsOfWrath       = 249441
+	IdolOfTheDream      = 220606
+	HowlingIdol         = 272427
 )
+
+// Talons of Wrath: client spell 1248996 "Improved Wrath" procs at its
+// SpellAuraOptions.ProcChance (50) and triggers spell 1302521, whose energize
+// effect restores 35 mana.
+const (
+	talonsOfWrathProcChance = 0.5
+	talonsOfWrathMana       = 35.0
+	talonsOfWrathManaSpell  = 1302521
+)
+
+// relicClassMasks says which engine spells each client spell family is, for
+// the idols in relic_mods_auto_gen.go (SpellClassOptions masks of Rip 9896
+// and Tiger's Fury 5217). An idol whose family is missing here (Swiftmend,
+// Enrage, Healing Touch) cannot be registered, and core.NewEquipModItemEffect
+// refuses it. Swarming Idol (272430) is deliberately absent: its text names
+// Insect Swarm but its client mask is Rip's, so it is left unmodelled until
+// the client settles which spell it reaches.
+var relicClassMasks = core.ClassMaskTable{
+	{Client: core.ClientClassMask{0, 0, 1 << 21}, Engine: DruidSpellMaskRip},
+	{Client: core.ClientClassMask{0, 0, 1 << 11}, Engine: DruidSpellMaskTigersFury},
+}
 
 func init() {
 	core.AddEffectsToTest = false
@@ -39,6 +63,31 @@ func init() {
 				spell.BonusDamage += 33
 			}
 		})
+	})
+
+	// Client spell 446212. Equip: Increases the duration of Rip by 2 sec.
+	core.NewEquipModItemEffect(IdolOfTheDream, relicEquipMods[IdolOfTheDream], relicClassMasks)
+
+	// Client spell 1291059. Equip: Reduces the cooldown of your Tiger's Fury
+	// ability by 3 sec.
+	core.NewEquipModItemEffect(HowlingIdol, relicEquipMods[HowlingIdol], relicClassMasks)
+
+	// Client spell 1248996. Equip: Causes Wrath to have a 50% chance to
+	// restore 35 Mana.
+	core.NewItemEffect(TalonsOfWrath, func(agent core.Agent) {
+		druid := agent.(DruidAgent).GetDruid()
+		manaMetrics := druid.NewManaMetrics(core.ActionID{SpellID: talonsOfWrathManaSpell})
+		core.MakePermanent(druid.RegisterAura(core.Aura{
+			Label: "Talons of Wrath",
+			OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+				if !spell.Matches(DruidSpellMaskWrath) || !result.Landed() {
+					return
+				}
+				if sim.Proc(talonsOfWrathProcChance, "Talons of Wrath") {
+					druid.AddMana(sim, talonsOfWrathMana, manaMetrics)
+				}
+			},
+		}))
 	})
 
 	// https://www.wowhead.com/classic/item=23198/idol-of-brutality

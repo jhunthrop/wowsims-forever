@@ -114,7 +114,7 @@ func (druid *Druid) newRipSpellConfig(rank int) core.SpellConfig {
 			result := spell.CalcOutcome(sim, target, spell.OutcomeMeleeSpecialHitNoHitCounter)
 			if result.Landed() {
 				dot := spell.Dot(target)
-				dot.NumberOfTicks = druid.RipTicks(druid.ComboPoints())
+				dot.NumberOfTicks = druid.RipTicks(druid.ComboPoints()) + dot.ModNumberOfTicks
 				dot.Apply(sim)
 				druid.SpendComboPoints(sim, spell)
 			} else {

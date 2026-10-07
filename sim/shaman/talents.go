@@ -831,6 +831,20 @@ const maelstromWeaponProcChance = 0.5
 const maelstromWeaponDisplaySpellId = 408498
 const maelstromWeaponMaxStacks = int32(5)
 
+// maelstromWeaponChance is the chance a damaging hit by spell grants a
+// Maelstrom Weapon stack: a melee hit's own, or Lightning Bolt's reduced one
+// once Totem of the Storm lets it trigger the talent.
+func (shaman *Shaman) maelstromWeaponChance(spell *core.Spell) float64 {
+	switch {
+	case spell.ProcMask.Matches(core.ProcMaskMelee):
+		return maelstromWeaponProcChance
+	case spell.SpellCode == SpellCode_ShamanLightningBolt:
+		return shaman.LightningBoltMaelstromChance
+	default:
+		return 0
+	}
+}
+
 func (shaman *Shaman) applyMaelstromWeapon() {
 	if shaman.Talents.MaelstromWeapon == 0 {
 		return
@@ -879,10 +893,11 @@ func (shaman *Shaman) applyMaelstromWeapon() {
 	core.MakePermanent(shaman.RegisterAura(core.Aura{
 		Label: "Maelstrom Weapon Trigger",
 		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !spell.ProcMask.Matches(core.ProcMaskMelee) || result.Damage <= 0 {
+			chance := shaman.maelstromWeaponChance(spell)
+			if chance == 0 || result.Damage <= 0 {
 				return
 			}
-			if !sim.Proc(maelstromWeaponProcChance, "Maelstrom Weapon") {
+			if !sim.Proc(chance, "Maelstrom Weapon") {
 				return
 			}
 			maelstromAura.Activate(sim)

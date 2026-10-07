@@ -64,6 +64,7 @@ func (shaman *Shaman) newChainLightningSpellConfig(rank int, cdTimer *core.Timer
 	)
 
 	spell.SpellCode = SpellCode_ShamanChainLightning
+	spell.ClassSpellMask = ShamanSpellMaskChainLightning
 	spell.RequiredLevel = level
 	spell.Rank = rank
 	spell.BonusCoefficient = spellCoeff

@@ -50,6 +50,7 @@ const (
 	DruidSpellMaskShred
 	DruidSpellMaskStarfire
 	DruidSpellMaskWrath
+	DruidSpellMaskTigersFury
 )
 
 const (

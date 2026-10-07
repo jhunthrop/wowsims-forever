@@ -80,6 +80,15 @@ const (
 	WaterTotem
 )
 
+// ShamanSpellMask* tag the spells a relic's client spell family reaches
+// (items.go's relicClassMasks). Like the other classes' masks they exist
+// only for spells something targets; a new modifier adds its spell here.
+const (
+	ShamanSpellMaskLightningBolt uint64 = 1 << iota
+	ShamanSpellMaskChainLightning
+	ShamanSpellMaskFlameShock
+)
+
 const (
 	SpellCode_ShamanNone int32 = iota
 
@@ -104,6 +113,11 @@ type Shaman struct {
 	core.Character
 
 	Talents *proto.ShamanTalents
+
+	// LightningBoltMaelstromChance is the chance a damaging Lightning Bolt
+	// grants a Maelstrom Weapon stack, set by Totem of the Storm (items.go).
+	// Zero means it cannot.
+	LightningBoltMaelstromChance float64
 
 	// Spells
 	ChainHeal            []*core.Spell

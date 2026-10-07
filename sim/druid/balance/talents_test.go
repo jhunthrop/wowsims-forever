@@ -63,13 +63,20 @@ func druidTalentsString(t *testing.T, points map[int]int) string {
 // newFeralDruidSimWithTalents.
 func newBalanceDruidSimWithTalents(t *testing.T, talents string) (*BalanceDruid, *core.Simulation, *core.Unit) {
 	t.Helper()
+	return newBalanceDruidSimWearing(t, talents, &proto.EquipmentSpec{})
+}
+
+// newBalanceDruidSimWearing is newBalanceDruidSimWithTalents wearing the
+// given equipment.
+func newBalanceDruidSimWearing(t *testing.T, talents string, equipment *proto.EquipmentSpec) (*BalanceDruid, *core.Simulation, *core.Unit) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
 			Class:              proto.Class_ClassDruid,
 			Race:               proto.Race_RaceTauren,
 			Level:              60,
-			Equipment:          &proto.EquipmentSpec{},
+			Equipment:          equipment,
 			Buffs:              core.FullBuffs.Player,
 			TalentsString:      talents,
 			DistanceFromTarget: 30,
