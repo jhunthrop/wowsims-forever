@@ -13,7 +13,7 @@ func (paladin *Paladin) registerDivineFavor() {
 
 	var affectedSpells []*core.Spell
 	paladin.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.SpellCode == SpellCode_PaladinHolyShock {
+		if spell.Matches(PaladinSpellMaskDivineFavor) {
 			affectedSpells = append(affectedSpells, spell)
 		}
 	})
@@ -21,6 +21,13 @@ func (paladin *Paladin) registerDivineFavor() {
 	cd := core.Cooldown{
 		Timer:    paladin.NewTimer(),
 		Duration: time.Minute * 2,
+	}
+
+	// spend removes the buff and puts the ability on cooldown.
+	spend := func(aura *core.Aura, sim *core.Simulation) {
+		aura.Deactivate(sim)
+		cd.Set(sim.CurrentTime + cd.Duration)
+		paladin.UpdateMajorCooldowns()
 	}
 
 	aura := paladin.RegisterAura(core.Aura{
@@ -37,14 +44,17 @@ func (paladin *Paladin) registerDivineFavor() {
 				spell.BonusCritRating -= core.CritRatingPerCritChance * 100
 			})
 		},
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if spell.SpellCode != SpellCode_PaladinHolyShock {
-				return
+		// Whichever of the named spells lands first spends the buff: a
+		// Holy Shock that hits an enemy, or a heal.
+		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
+			if spell.SpellCode == SpellCode_PaladinHolyShock {
+				spend(aura, sim)
 			}
-			// Remove the buff and put skill on CD
-			aura.Deactivate(sim)
-			cd.Set(sim.CurrentTime + cd.Duration)
-			paladin.UpdateMajorCooldowns()
+		},
+		OnHealDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
+			if spell.Matches(PaladinSpellMaskHealingLight) {
+				spend(aura, sim)
+			}
 		},
 	})
 
