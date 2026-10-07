@@ -57,6 +57,11 @@ const (
 	// spells".
 	DruidSpellMaskBalanceDirectDamage = DruidSpellMaskWrath | DruidSpellMaskStarfire | DruidSpellMaskMoonfire
 
+	// Wrath, Starfire, Moonfire and Insect Swarm: the Balance damage spells
+	// Moonglow and Improved Wrath discount and Nature's Grace's global
+	// cooldown cut reaches ("your damaging spells").
+	DruidSpellMaskBalanceDamage = DruidSpellMaskWrath | DruidSpellMaskStarfire | DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm
+
 	// Every damage-over-time effect this package registers, for
 	// Genesis's "periodic damage".
 	DruidSpellMaskPeriodicDamage = DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm | DruidSpellMaskRake | DruidSpellMaskRip

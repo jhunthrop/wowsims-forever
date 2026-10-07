@@ -390,17 +390,23 @@ func (druid *Druid) manageCooldownsEnabled() {
 	}
 }
 
-// https://www.wowhead.com/classic/spell=24858/moonkin-form
-// - Moonfire costs 50% less mana and deals 50% more damage over time
-// - Sunfire costs 50% less mana and deals 50% more damage over time
-// - Your periodic damage spells can deal critical periodic damage (handled in individual dot snapshots)
-// - You gain (2 * Level) spell damage
+// moonkinFormCritChance is the form's party aura (spell 24907, apply
+// aura 290 "+3% critical strike chance", whose area includes the druid):
+// the client's text for the form is armor, Omen of Clarity and this aura,
+// and nothing else. The Classic port left a comment describing a Season of
+// Discovery form (cheaper Moonfire, periodic crits, spell damage) that
+// this client does not have and registered no effect, so the capstone
+// talent measured as worth nothing.
+const moonkinFormCritChance = 3
+
 func (druid *Druid) registerMoonkinFormSpell() {
 	if !druid.Talents.MoonkinForm {
 		return
 	}
 
 	actionID := core.ActionID{SpellID: 24858}
+
+	critBonus := stats.Stats{stats.Crit: moonkinFormCritChance * core.CritRatingPerCritChance}
 
 	druid.MoonkinFormAura = druid.RegisterAura(core.Aura{
 		Label:    "Moonkin Form",
@@ -411,9 +417,11 @@ func (druid *Druid) registerMoonkinFormSpell() {
 				druid.CancelShapeshift(sim)
 			}
 			druid.form = Moonkin
+			druid.AddStatsDynamic(sim, critBonus)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			druid.form = Humanoid
+			druid.AddStatsDynamic(sim, critBonus.Invert())
 		},
 	})
 

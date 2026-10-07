@@ -44,6 +44,7 @@ func (druid *Druid) ApplyTalents() {
 	druid.applyVengeance()
 	druid.applyNaturesGrace()
 	druid.applyMoonglow()
+	druid.applyImprovedWrath()
 	druid.applyMoonfury()
 	druid.applyGenesis()
 	druid.applyNaturesMajesty()
@@ -158,50 +159,43 @@ func (druid *Druid) BearArmorMultiplier() float64 {
 	return 4.7 * sotfMulti
 }
 
+// naturesGraceCastSpeed is Nature's Grace's proc (spell 16886): "Casting
+// speed increased by 10% and global cooldown reduced by 10%" for 3 sec.
+const (
+	naturesGraceCastSpeed = 1.10
+	naturesGraceDuration  = 3 * time.Second
+)
+
+// naturesGraceGlobalCooldownCut is 10% of the 1.5 s global cooldown.
+const naturesGraceGlobalCooldownCut = 150 * time.Millisecond
+
+// applyNaturesGrace implements Nature's Grace (node 104934, bool):
+// "All non-periodic spell criticals grace you with a blessing of nature,
+// increasing your spellcasting speed and reducing your global cooldown by
+// 10% for 3 sec." The Classic version this replaced took a flat 0.5 s off
+// the next cast's time for 15 s and ended on that cast.
 func (druid *Druid) applyNaturesGrace() {
 	if !druid.Talents.NaturesGrace {
 		return
 	}
 
-	affectedSpells := []*DruidSpell{}
-	druid.NaturesGraceProcAura = druid.RegisterAura(core.Aura{
-		Label:     "Natures Grace Proc",
-		ActionID:  core.ActionID{SpellID: 16886},
-		Duration:  time.Second * 15,
-		MaxStacks: 1,
-		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			affectedSpells = core.FilterSlice(druid.DruidSpells, func(ds *DruidSpell) bool {
-				return ds.DefaultCast.CastTime > 0
-			})
-		},
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			for _, spell := range affectedSpells {
-				spell.DefaultCast.CastTime -= time.Millisecond * 500
+	globalCooldownMod := druid.AddDynamicMod(core.SpellModConfig{
+		Kind:      core.SpellMod_GlobalCooldown_Flat,
+		ClassMask: DruidSpellMaskBalanceDamage,
+		TimeValue: -naturesGraceGlobalCooldownCut,
+	})
 
-				if spell.SpellCode == SpellCode_DruidWrath {
-					spell.DefaultCast.GCD -= time.Millisecond * 500
-				}
-			}
+	druid.NaturesGraceProcAura = druid.RegisterAura(core.Aura{
+		Label:    "Natures Grace Proc",
+		ActionID: core.ActionID{SpellID: 16886},
+		Duration: naturesGraceDuration,
+		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+			druid.MultiplyCastSpeed(naturesGraceCastSpeed)
+			globalCooldownMod.Activate()
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			for _, spell := range affectedSpells {
-				spell.DefaultCast.CastTime += time.Millisecond * 500
-
-				if spell.SpellCode == SpellCode_DruidWrath {
-					spell.DefaultCast.GCD += time.Millisecond * 500
-				}
-			}
-		},
-		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			// OnCastComplete is called after OnSpellHitDealt / etc, so don't deactivate if it was just activated.
-			if aura.RemainingDuration(sim) == aura.Duration {
-				return
-			}
-
-			// Make sure the aura actually applied to the spell being cast before deactivating
-			if spell.CurCast.CastTime > 0 && (sim.CurrentTime-spell.CurCast.CastTime >= aura.StartedAt()) {
-				aura.Deactivate(sim)
-			}
+			druid.MultiplyCastSpeed(1 / naturesGraceCastSpeed)
+			globalCooldownMod.Deactivate()
 		},
 	})
 
@@ -211,7 +205,6 @@ func (druid *Druid) applyNaturesGrace() {
 			// Spells with travel times have their own implementation because the proc occurs as the cast finishes
 			if spell.MissileSpeed == 0 && spell.ProcMask.Matches(core.ProcMaskSpellDamage) && result.DidCrit() {
 				druid.NaturesGraceProcAura.Activate(sim)
-				druid.NaturesGraceProcAura.SetStacks(sim, druid.NaturesGraceProcAura.MaxStacks)
 			}
 		},
 	}))
@@ -402,32 +395,22 @@ func (druid *Druid) applyOmenOfClarity() {
 	*/
 }
 
+// moonfuryDamagePerRank is Moonfury's 2% a rank (node 104936, five ranks).
+const moonfuryDamagePerRank = 0.02
+
+// applyMoonfury implements Moonfury: "Increases the damage done by your
+// Arcane and Nature spells by 2%" per rank. The client's spell (16896) is
+// a school-damage aura, so it is a multiplier on both schools rather than
+// an additive bonus on a list of spells: that list left out Insect Swarm,
+// and made the bonus add with Improved Moonfire's instead of multiplying.
 func (druid *Druid) applyMoonfury() {
 	if druid.Talents.Moonfury == 0 {
 		return
 	}
 
-	multiplier := 0.02 * float64(druid.Talents.Moonfury)
-
-	druid.RegisterAura(core.Aura{
-		Label: "Moonfury",
-		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			affectedSpells := core.FilterSlice(
-				core.Flatten(
-					[][]*DruidSpell{
-						druid.Wrath,
-						druid.Starfire,
-						druid.Moonfire,
-					},
-				),
-				func(spell *DruidSpell) bool { return spell != nil },
-			)
-
-			for _, spell := range affectedSpells {
-				spell.BaseDamageMultiplierAdditive += multiplier
-			}
-		},
-	})
+	multiplier := 1 + moonfuryDamagePerRank*float64(clampRank(druid.Talents.Moonfury, 5))
+	druid.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexArcane] *= multiplier
+	druid.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexNature] *= multiplier
 }
 
 func (druid *Druid) applyImprovedMoonfire() {
@@ -435,8 +418,13 @@ func (druid *Druid) applyImprovedMoonfire() {
 		return
 	}
 
-	damageMultiplier := 0.02 * float64(druid.Talents.ImprovedMoonfire)
-	bonusCrit := 2 * float64(druid.Talents.ImprovedMoonfire) * core.CritRatingPerCritChance
+	// "Increases the damage and critical strike chance of your Moonfire
+	// spell by 5%" per rank (the client's trait curve for spell 16821 reads
+	// 5 and 10 on its crit, damage and periodic effects), where the Classic
+	// tree this replaced gave 2% a rank.
+	rank := float64(clampRank(druid.Talents.ImprovedMoonfire, 2))
+	damageMultiplier := 0.05 * rank
+	bonusCrit := 5 * rank * core.CritRatingPerCritChance
 
 	druid.RegisterAura(core.Aura{
 		Label: "Improved moonfire",
@@ -490,31 +478,39 @@ func (druid *Druid) applyVengeance() {
 	})
 }
 
+// moonglowManaDiscount is Moonglow's 8/17/25% off "your damaging spells"
+// (node 104925, three ranks).
+var moonglowManaDiscount = [4]int64{0, 8, 17, 25}
+
+// improvedWrathManaDiscountPerRank is Improved Wrath's 10% a rank off
+// Wrath's mana cost; the 0.1 s a rank off its cast time is applied where
+// Wrath is registered. The Classic port took only the cast time.
+const improvedWrathManaDiscountPerRank = 10
+
+// applyMoonglow implements Moonglow. The Classic port took 3 points a rank
+// off Wrath, Starfire and Moonfire and took Starfire's off a second time
+// in starfire.go; the client's class mask also names Insect Swarm.
 func (druid *Druid) applyMoonglow() {
 	if druid.Talents.Moonglow == 0 {
 		return
 	}
 
-	multiplier := 3 * druid.Talents.Moonglow
+	druid.AddStaticMod(core.SpellModConfig{
+		Kind:      core.SpellMod_PowerCost_Pct,
+		ClassMask: DruidSpellMaskBalanceDamage,
+		IntValue:  -moonglowManaDiscount[clampRank(druid.Talents.Moonglow, 3)],
+	})
+}
 
-	druid.RegisterAura(core.Aura{
-		Label: "Moonglow",
-		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			affectedSpells := core.FilterSlice(
-				core.Flatten(
-					[][]*DruidSpell{
-						druid.Wrath,
-						druid.Starfire,
-						druid.Moonfire,
-					},
-				),
-				func(spell *DruidSpell) bool { return spell != nil },
-			)
+func (druid *Druid) applyImprovedWrath() {
+	if druid.Talents.ImprovedWrath == 0 {
+		return
+	}
 
-			for _, spell := range affectedSpells {
-				spell.Cost.Multiplier -= multiplier
-			}
-		},
+	druid.AddStaticMod(core.SpellModConfig{
+		Kind:      core.SpellMod_PowerCost_Pct,
+		ClassMask: DruidSpellMaskWrath,
+		IntValue:  -improvedWrathManaDiscountPerRank * int64(clampRank(druid.Talents.ImprovedWrath, 5)),
 	})
 }
 
