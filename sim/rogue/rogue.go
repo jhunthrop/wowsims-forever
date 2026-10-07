@@ -119,7 +119,7 @@ func (rogue *Rogue) finisherFlags() core.SpellFlag {
 }
 
 func (rogue *Rogue) builderFlags() core.SpellFlag {
-	return SpellFlagBuilder | SpellFlagColdBlooded | core.SpellFlagMeleeMetrics | core.SpellFlagAPL
+	return SpellFlagBuilder | core.SpellFlagMeleeMetrics | core.SpellFlagAPL
 }
 
 func (rogue *Rogue) Initialize() {

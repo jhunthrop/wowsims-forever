@@ -16,13 +16,15 @@ var eviscerateLearnLevels = []int{1, 8, 16, 24, 32, 40, 48, 56, 60}
 var eviscerateSpellID = [10]int32{0, 2098, 6760, 6761, 6762, 8623, 8624, 11299, 11300, core.TernaryInt32(core.IncludeAQ, 31016, 11300)}
 
 // eviscerateFlatDamage/ComboDamageBonus/DamageVariance are Eviscerate's
-// rank -> damage terms, index 0 unused. Only ranks 4, 6, 7 and 9 have a
-// tuned value in this file; ranks 1-3 carry rank 4's terms backward, rank 5
-// carries rank 4's terms forward, and rank 8 carries rank 7's terms
-// forward, until real numbers are sourced.
-var eviscerateFlatDamage = [10]float64{0, 10, 10, 10, 10, 10, 22, 34, 34, core.TernaryFloat64(core.IncludeAQ, 54, 48)}
-var eviscerateComboDamageBonus = [10]float64{0, 31, 31, 31, 31, 31, 77, 110, 110, core.TernaryFloat64(core.IncludeAQ, 170, 151)}
-var eviscerateDamageVariance = [10]float64{0, 20, 20, 20, 20, 20, 44, 68, 68, core.TernaryFloat64(core.IncludeAQ, 108, 96)}
+// rank -> damage terms, index 0 unused. Source: 1.60.1.70009 SpellEffect.csv
+// for ids 2098-31016: the roll is centred on EffectBasePointsF with a width
+// of base * Variance, so flat = base - width/2 and variance (the roll's
+// width) = base * Variance; EffectPointsPerResource is the per-combo-point
+// term. The final slot is rank 9 with AQ content, otherwise rank 8's terms
+// (the id the slot casts).
+var eviscerateFlatDamage = [10]float64{0, 1, 3, 6, 10, 15, 22, 34, 48, core.TernaryFloat64(core.IncludeAQ, 54, 48)}
+var eviscerateComboDamageBonus = [10]float64{0, 5, 11, 19, 31, 45, 71, 110, 151, core.TernaryFloat64(core.IncludeAQ, 170, 151)}
+var eviscerateDamageVariance = [10]float64{0, 4, 8, 14, 20, 30, 44, 68, 96, core.TernaryFloat64(core.IncludeAQ, 108, 96)}
 
 func (rogue *Rogue) registerEviscerate() {
 	rank := core.HighestRankAtLevel(eviscerateLearnLevels, rogue.Level)

@@ -14,12 +14,12 @@ var ruptureLearnLevels = []int{20, 28, 36, 44, 52, 60}
 // ruptureSpellID is Rupture's rank -> spell id, index 0 unused.
 var ruptureSpellID = [7]int32{0, 1943, 8639, 8640, 11273, 11274, 11275}
 
-// ruptureBaseTickDamage/ComboTickDamage are Rupture's rank -> damage terms,
-// index 0 unused. Only ranks 1, 3, 4 and 6 have a tuned value in this file;
-// rank 2 carries rank 1's terms forward, and rank 5 carries rank 4's terms
-// forward, until real numbers are sourced.
-var ruptureBaseTickDamage = [7]float64{0, 8, 8, 18, 27, 27, 60}
-var ruptureComboTickDamage = [7]float64{0, 2, 2, 4, 5, 5, 8}
+// ruptureBaseTickDamage/ComboTickDamage are Rupture's rank -> per-tick damage
+// terms, index 0 unused: the client's rank text is "(m1 + b1*cp) * ticks"
+// with m1 = EffectBasePointsF and b1 = EffectPointsPerResource (1.60.1.70009
+// SpellEffect.csv, spell ids 1943-11275).
+var ruptureBaseTickDamage = [7]float64{0, 5, 7, 11, 16, 22, 35}
+var ruptureComboTickDamage = [7]float64{0, 1.18, 1.78, 2.37, 2.96, 4.14, 4.73}
 
 func (rogue *Rogue) registerRupture() {
 	rank := core.HighestRankAtLevel(ruptureLearnLevels, rogue.Level)
