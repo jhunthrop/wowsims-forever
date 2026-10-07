@@ -42,7 +42,7 @@ func (mage *Mage) newPyroblastSpellConfig(rank int) core.SpellConfig {
 
 	spellCoeff := PyroblastSpellCoeff[rank]
 	dotCoeff := .15
-	castTime := time.Second * 6
+	castTime := time.Duration(PyroblastCastTime[rank]) * time.Millisecond
 
 	actionID := core.ActionID{SpellID: spellId}
 
