@@ -1,12 +1,14 @@
 package shadow
 
 import (
+	"math"
 	"testing"
 
 	_ "github.com/wowsims/classic/sim/common" // imported to get caster sets included.
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/simsignals"
+	"github.com/wowsims/classic/sim/core/stats"
 	"github.com/wowsims/classic/sim/priest"
 )
 
@@ -63,17 +65,37 @@ func TestDevouringPlagueTicksCanCrit(t *testing.T) {
 	}
 }
 
-// Shadow Weaving "can no longer fail to apply" (Blizzard's 1 October 2026
-// notes): every Shadow spell that lands adds a stack, at any rank - the
-// pre-hotfix engine rolled the rank's proc chance and a resist on top.
-func TestShadowWeavingAlwaysApplies(t *testing.T) {
-	sim, built, target := newShadowPriestSimWithTalents(t, map[string]int{"shadow_weaving": 1})
+// Forever's Shadow Weaving is a self buff (live talent text, build
+// 1.60.1.70009 with the Wowhead overlay): "increase the Shadow damage you
+// deal by 2% for 15 sec, stacking up to 5 times", at a 100% chance with
+// three points, and Blizzard's 1 October 2026 note removed the proc's own
+// hit roll. Every landed Shadow spell therefore adds one stack on the
+// priest, each worth 2% of the priest's own Shadow damage, and the target
+// carries nothing.
+func TestShadowWeavingStacksOnThePriestAtTwoPercent(t *testing.T) {
+	sim, built, target := newShadowPriestSimWithTalents(t, map[string]int{"shadow_weaving": 3})
 
+	base := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow]
+	// The harness's raid debuffs (Curse of Shadow) already sit on the
+	// target; the stacks must not add to them.
+	targetBefore := target.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow]
 	for i := 1; i <= 5; i++ {
 		built.AddShadowWeavingStack(sim, target)
-		if got := built.ShadowWeavingAuras.Get(target).GetStacks(); got != int32(i) {
-			t.Fatalf("after %d applications the target has %d Shadow Weaving stacks, want %d", i, got, i)
+		if got := built.ShadowWeavingAura.GetStacks(); got != int32(i) {
+			t.Fatalf("after %d applications the priest has %d Shadow Weaving stacks, want %d", i, got, i)
 		}
+		want := base * (1 + 0.02*float64(i))
+		if got := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow]; math.Abs(got-want) > 1e-9 {
+			t.Fatalf("after %d stacks the priest's Shadow damage multiplier is %v, want %v (2%% a stack)", i, got, want)
+		}
+	}
+	// A sixth application stays at the cap.
+	built.AddShadowWeavingStack(sim, target)
+	if got := built.ShadowWeavingAura.GetStacks(); got != 5 {
+		t.Fatalf("Shadow Weaving stacks past its cap: %d", got)
+	}
+	if got := target.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow]; got != targetBefore {
+		t.Errorf("the target's Shadow damage taken multiplier moved from %v to %v; Forever's Shadow Weaving is the priest's own buff", targetBefore, got)
 	}
 }
 

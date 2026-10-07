@@ -92,7 +92,7 @@ type Priest struct {
 	ShadowformAura *core.Aura
 	SpiritTapAura  *core.Aura
 
-	ShadowWeavingAuras   core.AuraArray
+	ShadowWeavingAura    *core.Aura
 	VampiricEmbraceAuras core.AuraArray
 	WeakenedSouls        core.AuraArray
 

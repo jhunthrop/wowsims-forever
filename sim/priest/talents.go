@@ -383,25 +383,56 @@ func (priest *Priest) applyShadowWeaving() {
 		return
 	}
 
-	priest.ShadowWeavingAuras = priest.NewEnemyAuraArray(func(unit *core.Unit) *core.Aura {
-		return core.ShadowWeavingAura(unit, int(priest.Talents.ShadowWeaving))
+	// Forever's Shadow Weaving is a self buff, not vanilla's target
+	// debuff: the live talent text (Wowhead overlay, build 1.60.1.70009,
+	// three ranks) reads "Your Shadow damage spells have a 33/67/100%
+	// chance to increase the Shadow damage you deal by 2% for 15 sec,
+	// stacking up to 5 times." So the stacks live on the priest, raise
+	// the priest's own Shadow damage, and are 2% a stack where vanilla's
+	// debuff (core.ShadowWeavingAura, still available as a raid debuff
+	// option) is 3%. Blizzard's 1 October 2026 note "Shadow Weaving can
+	// no longer fail to apply" removed the proc's own hit roll; the
+	// per-rank chance in the text stays, and is 100% at 3/3.
+	rank := int(priest.Talents.ShadowWeaving)
+	procChance := shadowWeavingProcChance(rank)
+	priest.ShadowWeavingAura = priest.RegisterAura(core.Aura{
+		Label:     "Shadow Weaving",
+		ActionID:  core.ActionID{SpellID: core.ShadowWeavingSpellIDs[rank]},
+		Duration:  shadowWeavingDuration,
+		MaxStacks: shadowWeavingMaxStacks,
+		OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks int32, newStacks int32) {
+			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow] /= 1 + shadowWeavingPerStack*float64(oldStacks)
+			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow] *= 1 + shadowWeavingPerStack*float64(newStacks)
+		},
 	})
 
 	priest.ShadowWeavingProc = priest.GetOrRegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: core.ShadowWeavingSpellIDs[int(priest.Talents.ShadowWeaving)]},
+		ActionID:    core.ActionID{SpellID: core.ShadowWeavingSpellIDs[rank]},
 		Flags:       core.SpellFlagNoOnCastComplete | core.SpellFlagNoMetrics,
 		SpellSchool: core.SpellSchoolShadow,
 
-		// Blizzard's 1 October 2026 notes: "Shadow Weaving can no longer
-		// fail to apply". The client text still gives a 33/67/100% proc
-		// chance by rank and the proc used to ride a magic-hit roll of its
-		// own; both are gone, so a landed Shadow spell always adds a stack
-		// at every rank. Callers invoke this only on a landed hit.
+		// Callers invoke this only on a landed Shadow hit.
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			priest.ShadowWeavingAuras.Get(target).Activate(sim)
-			priest.ShadowWeavingAuras.Get(target).AddStack(sim)
+			if procChance < 1 && !sim.Proc(procChance, "Shadow Weaving") {
+				return
+			}
+			priest.ShadowWeavingAura.Activate(sim)
+			priest.ShadowWeavingAura.AddStack(sim)
 		},
 	})
+}
+
+// Shadow Weaving's live numbers (talent text, build 1.60.1.70009 with the
+// Wowhead overlay): 2% Shadow damage a stack, five stacks, 15 seconds, and
+// a 33% chance a rank to add a stack.
+const (
+	shadowWeavingPerStack  = 0.02
+	shadowWeavingMaxStacks = 5
+	shadowWeavingDuration  = time.Second * 15
+)
+
+func shadowWeavingProcChance(rank int) float64 {
+	return min(1, float64(rank)/3)
 }
 
 func (priest *Priest) AddShadowWeavingStack(sim *core.Simulation, target *core.Unit) {
