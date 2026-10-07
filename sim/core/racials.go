@@ -135,45 +135,63 @@ func skyborneShared() []Racial {
 		},
 		{
 			Name: "Wind Blessed", Kind: RacialPassive, Confirmed: true,
-			Note: "",
+			Note: "client 1259710: 1% spellcasting, melee and ranged haste",
 			Apply: func(character *Character) {
 				// 1% haste, demo transcription. Haste is NOT merged
 				// (research/08-stats.md 12.1 item 5), so this sets both,
 				// as a racial that just says "haste" must.
+				// Client 1259710: "spellcasting, melee, and ranged
+				// Haste" by 1%.
 				character.PseudoStats.MeleeSpeedMultiplier *= 1.01
+				character.PseudoStats.RangedSpeedMultiplier *= 1.01
 				character.PseudoStats.CastSpeedMultiplier *= 1.01
 			},
 		},
 		{
 			Name: "Elemental Insight", Kind: RacialPassive, Confirmed: true,
-			Note: "",
+			Note: "client 1259707: 5% damage dealt versus Elementals",
 			Apply: func(character *Character) {
-				// 5% damage against Elementals, demo transcription.
-				applyMobTypeDamageMultiplier(character, proto.MobType_MobTypeElemental, 1.05, 1)
+				applyMobTypeDamageMultiplier(character, proto.MobType_MobTypeElemental, mobTypeDamageMultiplier)
 			},
 		},
 	}
 }
 
 // applyMobTypeDamageMultiplier registers a post-finalize effect that
-// multiplies DamageDealtMultiplier (and, when critMultiplier != 1, also
-// CritMultiplier) against every target of the given MobType. Shared by
-// Elemental Insight and Beast Slaying, the two racials that key off mob
-// type the way Task 8's item-side NewMobTypeDamageEffect does.
-func applyMobTypeDamageMultiplier(character *Character, mobType proto.MobType, damageMultiplier, critMultiplier float64) {
+// multiplies DamageDealtMultiplier against every target of the given
+// MobType: the client's "damage dealt versus <type> increased by 5%" aura
+// (aura 168). Shared by Elemental Insight, Beast Slaying and Big Game
+// Hunter, the racials that key off mob type the way the item-side
+// NewMobTypeDamageEffect does.
+func applyMobTypeDamageMultiplier(character *Character, mobType proto.MobType, damageMultiplier float64) {
 	character.Env.RegisterPostFinalizeEffect(func() {
 		for _, t := range character.Env.Encounter.Targets {
 			if t.MobType == mobType {
 				for _, at := range character.AttackTables[t.UnitIndex] {
 					at.DamageDealtMultiplier *= damageMultiplier
-					if critMultiplier != 1 {
-						at.CritMultiplier *= critMultiplier
-					}
 				}
 			}
 		}
 	})
 }
+
+// mobTypeDamageMultiplier is the client's 5% for Elemental Insight 1259707,
+// Beast Slaying 20557 and Big Game Hunter 1259721 (effect aura 168, base
+// points 5). Damage dealt covers crits already, so no separate crit
+// multiplier is applied.
+const mobTypeDamageMultiplier = 1.05
+
+// Eureka! (client 1259821, the Mana row): SpellAuraOptions ProcCharges 3,
+// duration index 8 (15 s), recovery 120000 ms, effect base points -10
+// (cost) and +10 (damage).
+const (
+	eurekaSpellID              int32 = 1259821
+	eurekaCharges              int32 = 3
+	eurekaDuration                   = 15 * time.Second
+	eurekaCooldown                   = 2 * time.Minute
+	eurekaCostReductionPercent int32 = 10
+	eurekaDamageMultiplier           = 1.1
+)
 
 var racialsByRace = map[proto.Race][]Racial{
 	// Human: Will to Survive, Perception, Sword Specialization, The
@@ -209,50 +227,8 @@ var racialsByRace = map[proto.Race][]Racial{
 	proto.Race_RaceOrc: {
 		{
 			Name: "Blood Fury", Kind: RacialActive, Confirmed: true,
-			Note: "",
-			Apply: func(character *Character) {
-				// +10% Attack Power and Spell Power for 15 s, 2 min
-				// cooldown, a major cooldown.
-				actionID := ActionID{SpellID: 20572}
-				var bloodFuryAP float64
-				bloodFuryAura := character.RegisterAura(Aura{
-					Label:    "Blood Fury",
-					ActionID: actionID,
-					Duration: time.Second * 15,
-					// Tooltip is misleading; ap bonus is base AP plus AP
-					// from current strength, does not include
-					// +attackpower on items/buffs.
-					OnGain: func(aura *Aura, sim *Simulation) {
-						bloodFuryAP = (character.GetBaseStats()[stats.AttackPower] + (character.GetStat(stats.Strength) * APPerStrength[character.Class]) + (character.GetStat(stats.Agility) * APPerAgility[character.Class])) * 0.25
-						character.AddStatDynamic(sim, stats.AttackPower, bloodFuryAP)
-					},
-					OnExpire: func(aura *Aura, sim *Simulation) {
-						character.AddStatDynamic(sim, stats.AttackPower, -bloodFuryAP)
-					},
-				})
-
-				spell := character.RegisterSpell(SpellConfig{
-					ActionID: actionID,
-					Flags:    SpellFlagNoOnCastComplete,
-					Cast: CastConfig{
-						DefaultCast: Cast{
-							GCD: GCDDefault,
-						},
-						CD: Cooldown{
-							Timer:    character.NewTimer(),
-							Duration: time.Minute * 2,
-						},
-					},
-					ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
-						bloodFuryAura.Activate(sim)
-					},
-				})
-
-				character.AddMajorCooldown(MajorCooldown{
-					Spell: spell,
-					Type:  CooldownTypeDPS,
-				})
-			},
+			Note:  "client 20572: 10% attack power, ranged attack power and spell power for 15 s, 2 min cooldown",
+			Apply: applyBloodFury,
 		},
 		{
 			Name: "Shatter Curse", Kind: RacialActive, Confirmed: true,
@@ -327,14 +303,10 @@ var racialsByRace = map[proto.Race][]Racial{
 			},
 		},
 		{
-			Name: "Big Game Hunter", Kind: RacialPassive, Confirmed: false,
-			Note: "damage percentage against Beasts read from the demo, but no outlet gives a percentage",
-			Apply: func(*Character) {
-				// unconfirmed: no percentage is published anywhere, so no
-				// multiplier is applied; inventing one would be worse than
-				// declaring the racial with no effect yet. MobTypeBeast is
-				// the condition (sim/core/racials.go's Beast Slaying uses
-				// the same one) once a number is confirmed.
+			Name: "Big Game Hunter", Kind: RacialPassive, Confirmed: true,
+			Note: "client 1259721: 5% damage dealt versus Beasts",
+			Apply: func(character *Character) {
+				applyMobTypeDamageMultiplier(character, proto.MobType_MobTypeBeast, mobTypeDamageMultiplier)
 			},
 		},
 	},
@@ -343,10 +315,10 @@ var racialsByRace = map[proto.Race][]Racial{
 	proto.Race_RaceNightElf: {
 		{
 			Name: "Elune's Light", Kind: RacialActive, Confirmed: true,
-			Note: "",
+			Note: "client 1259799: 10% crit with all spells and attacks for 15 s, 3 min cooldown",
 			Apply: func(character *Character) {
 				// +10% crit for 15 s, 3 min cooldown, a major cooldown.
-				actionID := ActionID{SpellID: 58984}
+				actionID := ActionID{SpellID: 1259799}
 				elunesLightAura := character.NewTemporaryStatsAura("Elune's Light", actionID, stats.Stats{stats.Crit: 10 * CritRatingPerCritChance}, time.Second*15)
 
 				spell := character.RegisterSpell(SpellConfig{
@@ -375,13 +347,9 @@ var racialsByRace = map[proto.Race][]Racial{
 			Apply: func(*Character) {}, // stealth until you move, usable in combat, 2 min cooldown: no combat effect
 		},
 		{
-			Name: "Quickness", Kind: RacialPassive, Confirmed: false,
-			Note: "1% dodge (Talents Forever) or 2% dodge (Icy Veins); shipping the lower reading",
+			Name: "Quickness", Kind: RacialPassive, Confirmed: true,
+			Note: "client 20582: 1% dodge and 2% movement speed (speed has no combat effect and is not modeled)",
 			Apply: func(character *Character) {
-				// unconfirmed: the two transcriptions disagree (1% vs 2%
-				// dodge; both agree on 2% run speed, which has no combat
-				// effect and is not modeled). Shipping the lower reading
-				// per this file's header.
 				character.AddStat(stats.Dodge, 1*DodgeRatingPerDodgeChance)
 			},
 		},
@@ -410,14 +378,9 @@ var racialsByRace = map[proto.Race][]Racial{
 			Apply: func(*Character) {}, // channeled heal from a nearby corpse, out of combat: no combat effect
 		},
 		{
-			Name: "Touch of the Grave", Kind: RacialPassive, Confirmed: false,
-			Note: "a life-drain proc read from a press roundup Blizzard has not confirmed; chance and amount are unread",
-			Apply: func(*Character) {
-				// unconfirmed: neither the proc chance nor the drain
-				// amount is published, so no proc is registered;
-				// inventing either number would be worse than declaring
-				// the racial with no effect yet.
-			},
+			Name: "Touch of the Grave", Kind: RacialPassive, Confirmed: true,
+			Note:  "client 1260201 (drain 1260198): 10% proc chance, 1 s internal cooldown, drains 5% of maximum Health as flat Shadow damage; see racial_touch_of_the_grave.go",
+			Apply: applyTouchOfTheGrave,
 		},
 		{
 			Name: "Unannounced Fourth Racial", Kind: RacialPassive, Confirmed: false,
@@ -481,37 +444,34 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "Eureka!", Kind: RacialActive, Confirmed: true,
-			Note: "",
+			Note: "client 1259821 (Mana): next 3 damaging abilities cost 10% less and deal 10% more, 15 s, 2 min cooldown; the Rage and Energy variants (1259813, 1259812) and the healer variant (1259823) are not modeled, so physical abilities are untouched",
 			Apply: func(character *Character) {
-				// Next 3 abilities cost 50% less Mana and deal 10% more,
+				// Client 1259821: the next eurekaCharges damaging abilities
+				// cost 10% less Mana and deal 10% more, for up to 15 s,
 				// 2 min cooldown, a major cooldown - the only racial that
 				// needs a charge-counting aura, so it uses MaxStacks and
 				// consumes one stack per completed cast.
-				actionID := ActionID{SpellID: 1_000_101}
+				actionID := ActionID{SpellID: eurekaSpellID}
 				eurekaAura := character.RegisterAura(Aura{
 					Label:     "Eureka!",
 					ActionID:  actionID,
-					Duration:  NeverExpires,
-					MaxStacks: 3,
+					Duration:  eurekaDuration,
+					MaxStacks: eurekaCharges,
 					OnGain: func(aura *Aura, sim *Simulation) {
-						character.PseudoStats.SchoolCostMultiplier.AddToMagicSchools(-50)
-						character.PseudoStats.SchoolDamageDealtMultiplier.MultiplyMagicSchools(1.1)
+						character.PseudoStats.SchoolCostMultiplier.AddToMagicSchools(-eurekaCostReductionPercent)
+						character.PseudoStats.SchoolDamageDealtMultiplier.MultiplyMagicSchools(eurekaDamageMultiplier)
 					},
 					OnExpire: func(aura *Aura, sim *Simulation) {
-						character.PseudoStats.SchoolCostMultiplier.AddToMagicSchools(50)
-						character.PseudoStats.SchoolDamageDealtMultiplier.MultiplyMagicSchools(1 / 1.1)
+						character.PseudoStats.SchoolCostMultiplier.AddToMagicSchools(eurekaCostReductionPercent)
+						character.PseudoStats.SchoolDamageDealtMultiplier.MultiplyMagicSchools(1 / eurekaDamageMultiplier)
 					},
 					OnCastComplete: func(aura *Aura, sim *Simulation, spell *Spell) {
-						// Eureka! is a permanent (NeverExpires) aura toggled
-						// off by stacks reaching zero, not by a timer, so
-						// the "just activated by this same cast" guard other
-						// one-shot procs in this codebase use
-						// (RemainingDuration == Duration) is always true for
-						// a NeverExpires aura and would silently swallow
-						// every stack forever. It isn't needed anyway: the
-						// spell that activates this aura carries
+						// The spell that activates this aura carries
 						// SpellFlagNoOnCastComplete, so its own completion
-						// never reaches this callback in the first place.
+						// never reaches this callback: no "just activated
+						// by this same cast" guard is needed. Stacks reach
+						// zero when the last charge is spent and the aura
+						// ends there, or at its duration, whichever is first.
 						if spell.Cost == nil {
 							return
 						}
@@ -525,12 +485,12 @@ var racialsByRace = map[proto.Race][]Racial{
 					Cast: CastConfig{
 						CD: Cooldown{
 							Timer:    character.NewTimer(),
-							Duration: time.Minute * 2,
+							Duration: eurekaCooldown,
 						},
 					},
 					ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
 						eurekaAura.Activate(sim)
-						eurekaAura.SetStacks(sim, 3)
+						eurekaAura.SetStacks(sim, eurekaCharges)
 					},
 				})
 
@@ -542,7 +502,7 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "Expansive Mind", Kind: RacialPassive, Confirmed: true,
-			Note: "",
+			Note: "client 20591 (Mana), 1259802 (Rage), 1259803 (Energy): +5% maximum of each",
 			Apply: func(character *Character) {
 				// 5% Mana, Rage and Energy. Mana takes the multiplicative
 				// stat dependency every other "+X%" racial in this file
@@ -565,14 +525,11 @@ var racialsByRace = map[proto.Race][]Racial{
 	// Troll: Berserking, Rapid Regeneration, Beast Slaying, Regeneration.
 	proto.Race_RaceTroll: {
 		{
-			Name: "Berserking", Kind: RacialActive, Confirmed: false,
-			Note: "10 s duration (Icy Veins) or 12 s (Talents Forever); shipping the lower reading",
+			Name: "Berserking", Kind: RacialActive, Confirmed: true,
+			Note: "client 20554: +10% spellcasting and attack speed for 10 s, 3 min cooldown, no resource cost; the engine's custom-percentage cooldowns (15 to 30) are APL compatibility tags, not client rows",
 			Apply: func(character *Character) {
-				// +10% casting and attack speed, 3 min cooldown, a major
-				// cooldown. Haste is NOT merged (research/08-stats.md
-				// 12.1 item 5), so this sets both melee and spell haste.
-				// unconfirmed: duration shipped at the lower reading, 10 s
-				// (matched by berserkingDuration below).
+				// Haste is NOT merged (research/08-stats.md 12.1 item 5),
+				// so the aura sets both melee/ranged and spell haste.
 				berserkingTimer := character.NewTimer()
 				makeBerserkingCooldown(character, 0, berserkingTimer)
 				makeBerserkingCooldown(character, .1, berserkingTimer)
@@ -589,10 +546,9 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "Beast Slaying", Kind: RacialPassive, Confirmed: true,
-			Note: "",
+			Note: "client 20557: 5% damage dealt versus Beasts",
 			Apply: func(character *Character) {
-				// +5% damage against Beasts.
-				applyMobTypeDamageMultiplier(character, proto.MobType_MobTypeBeast, 1.05, 1.05)
+				applyMobTypeDamageMultiplier(character, proto.MobType_MobTypeBeast, mobTypeDamageMultiplier)
 			},
 		},
 		{
@@ -636,100 +592,54 @@ var racialsByRace = map[proto.Race][]Racial{
 // into one shared constant is a cleanup outside this file's scope.
 const expansiveMindEnergyCap = 100
 
-// If customPercentage is 0, use the baseline Berserking calculations from health missing
-// otherwise create a cooldown hard-coded to the custom percentage.
+// Berserking (client 20554): effects aura 319, 140 and 65 at 10 each, a
+// 10 s duration (SpellDuration 1) and a 3 min cooldown, with no resource
+// cost. A customPercentage of 0 is the client row; any other value makes a
+// cooldown hard-coded to that percentage, which existing APLs address by
+// tag.
+const (
+	berserkingBasePercent = 0.10
+	berserkingDuration    = 10 * time.Second
+	berserkingCooldown    = 3 * time.Minute
+)
+
 func makeBerserkingCooldown(character *Character, customPercentage float64, timer *Timer) {
 	actionID := ActionID{SpellID: 26297, Tag: int32(customPercentage * 20)}
 
 	label := "Berserking"
+	percent := berserkingBasePercent
 	if customPercentage != 0 {
 		label = fmt.Sprintf("%s (%d)", label, int(customPercentage*100))
+		percent = customPercentage
 	}
+	haste := 1 + percent
 
-	calcBerserkingPct := func() float64 {
-		if customPercentage != 0 {
-			return customPercentage
-		}
-		// from 10% at full health to 30% at 40% or less health
-		switch hp := character.CurrentHealthPercent(); {
-		case hp >= 1:
-			return 0.1
-		case hp <= 0.4:
-			return 0.3
-		default:
-			return 0.1 + (1-hp)/3
-		}
-	}
-
-	var berserkingAura *Aura
-	var berserkingHaste float64
-	if character.HasManaBar() {
-		// Mana-using classes gain a flat % reduction in attack and cast speed
-		berserkingAura = character.RegisterAura(Aura{
-			Label:    label,
-			ActionID: actionID,
-			Duration: time.Second * 10,
-			OnGain: func(aura *Aura, sim *Simulation) {
-				berserkingHaste = 1 / (1 - calcBerserkingPct())
-
-				character.MultiplyCastSpeed(berserkingHaste)
-				character.MultiplyAttackSpeed(sim, berserkingHaste)
-
-				if sim.Log != nil {
-					character.Log(sim, "Berserking increased attack and casting speed by %.2f%% (%.2f%% hp)", berserkingHaste*100-100, character.CurrentHealthPercent()*100)
-				}
-			},
-			OnExpire: func(aura *Aura, sim *Simulation) {
-				character.MultiplyCastSpeed(1 / berserkingHaste)
-				character.MultiplyAttackSpeed(sim, 1/berserkingHaste)
-			},
-		})
-	} else {
-		// Non-mana bar classes gain a flat % reduction in attack and cast speed
-		berserkingAura = character.RegisterAura(Aura{
-			Label:    label,
-			ActionID: actionID,
-			Duration: time.Second * 10,
-			OnGain: func(aura *Aura, sim *Simulation) {
-				berserkingHaste = 1 + calcBerserkingPct()
-
-				character.MultiplyAttackSpeed(sim, berserkingHaste)
-
-				if sim.Log != nil {
-					character.Log(sim, "Berserking increased attack speed by %.2f%% (%.2f%% hp)", berserkingHaste*100-100, character.CurrentHealthPercent()*100)
-				}
-			},
-			OnExpire: func(aura *Aura, sim *Simulation) {
-				character.MultiplyAttackSpeed(sim, 1/berserkingHaste)
-			},
-		})
-	}
-
-	config := SpellConfig{
+	berserkingAura := character.RegisterAura(Aura{
+		Label:    label,
 		ActionID: actionID,
+		Duration: berserkingDuration,
+		OnGain: func(aura *Aura, sim *Simulation) {
+			character.MultiplyCastSpeed(haste)
+			character.MultiplyAttackSpeed(sim, haste)
+		},
+		OnExpire: func(aura *Aura, sim *Simulation) {
+			character.MultiplyCastSpeed(1 / haste)
+			character.MultiplyAttackSpeed(sim, 1/haste)
+		},
+	})
 
+	berserkingSpell := character.RegisterSpell(SpellConfig{
+		ActionID: actionID,
 		Cast: CastConfig{
 			CD: Cooldown{
 				Timer:    timer,
-				Duration: time.Minute * 3,
+				Duration: berserkingCooldown,
 			},
 		},
-
 		ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
 			berserkingAura.Activate(sim)
 		},
-	}
-
-	switch {
-	case character.HasManaBar():
-		config.ManaCost = ManaCostOptions{BaseCost: 0.07}
-	case character.HasRageBar():
-		config.RageCost = RageCostOptions{Cost: 5}
-	case character.HasEnergyBar():
-		config.EnergyCost = EnergyCostOptions{Cost: 10}
-	}
-
-	berserkingSpell := character.RegisterSpell(config)
+	})
 
 	character.AddMajorCooldown(MajorCooldown{
 		Spell: berserkingSpell,

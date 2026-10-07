@@ -1,8 +1,12 @@
 package core
 
 import (
+	"math"
 	"strings"
 	"testing"
+	"time"
+
+	googleProto "google.golang.org/protobuf/proto"
 
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
@@ -41,7 +45,7 @@ func TestPlayableRacesAreTheTen(t *testing.T) {
 }
 
 // Forever: two active and two passive racials per race. The shape is
-// confirmed by the Deep Dive panel; the numbers on seven of the forty
+// confirmed by the Deep Dive panel; the numbers on three of the forty
 // entries are not, and UnconfirmedRacials names exactly those.
 func TestEveryRaceHasTwoActivesAndTwoPassives(t *testing.T) {
 	for _, race := range PlayableRaces() {
@@ -140,12 +144,14 @@ func TestTheNamedRacialsAreAllPresent(t *testing.T) {
 	}
 }
 
-// The seven entries whose numbers - or, for Undead's fourth racial, whose
-// very name - the demo did not settle are named out loud, so the spec
+// The three entries the client tables do not settle - Undead's fourth
+// racial, which no source names, and Tauren's two candidate second
+// actives, of which neither is known to be the one - are named out loud,
+// so the spec
 // support page can say what the sim is guessing at. An unnamed or
 // unpublished racial is Confirmed: false exactly like an unpublished
 // percentage; a name is exactly as unconfirmed as a number.
-func TestUnconfirmedRacialsNamesTheSeven(t *testing.T) {
+func TestUnconfirmedRacialsNamesTheThree(t *testing.T) {
 	got := UnconfirmedRacials()
 	if len(got) == 0 {
 		t.Skip("nothing is unconfirmed: the beta settled the numbers and this test has done its job")
@@ -156,17 +162,14 @@ func TestUnconfirmedRacialsNamesTheSeven(t *testing.T) {
 		t.Log(line)
 	}
 	joined := strings.Join(got, "\n")
-	// All seven by name, and exactly seven (Mace Specialization left the
-	// list on 2026-10-07 when the client stated its 1%). The count is
-	// asserted because an eighth means a number was marked unconfirmed
-	// without anyone deciding it was, and a sixth means one was quietly
-	// promoted to confirmed - and a test named for seven that checks five
-	// would notice neither.
+	// All three by name, and exactly three (Mace Specialization left the
+	// list when the client stated its 1%; Big Game Hunter, Quickness,
+	// Berserking and Touch of the Grave left it on 2026-10-07 when the
+	// client rows for build 1.60.1.70009 settled them). The count is
+	// asserted because a fourth means a number was marked unconfirmed
+	// without anyone deciding it was, and a second means one was quietly
+	// promoted to confirmed.
 	want := []string{
-		"Big Game Hunter",           // Dwarf: the damage percentage is unread
-		"Quickness",                 // Night Elf: 1% or 2% dodge, the two readings disagree
-		"Berserking",                // Troll: 10 s or 12 s, the two readings disagree
-		"Touch of the Grave",        // Undead: proc chance and amount unread
 		"Unannounced Fourth Racial", // Undead: no source names this racial at all
 		"Cultivation",               // Tauren: which of these two is the second
 		"Plainsrunning",             //   active is unread; both are listed
@@ -256,13 +259,13 @@ func newGnomeEurekaTestCaster() *Character {
 }
 
 // Regression for the goldens-reconciliation defect: Eureka! is a permanent
-// (Duration: NeverExpires) aura, turned off by its stack count reaching
+// (Duration: NeverExpires) aura at the time, turned off by its stack count reaching
 // zero rather than by a timer. The "just activated by this same cast"
 // guard other one-shot procs in this codebase use on OnCastComplete
 // (RemainingDuration(sim) == Duration, see mage.ClearcastingAura) is
 // always true for a NeverExpires aura - RemainingDuration returns
 // NeverExpires whenever Duration is NeverExpires - so it silently
-// swallowed every stack forever: Eureka!'s -50% magic-school cost and
+// swallowed every stack forever: Eureka!'s -magic-school cost and
 // +10% magic damage stayed up for the whole fight instead of three
 // casts, moving the Gnome mage goldens +72.6% NoBuffs / +25.2% FullBuffs
 // against 0900ba8b8. This casts four qualifying spells on a bare Gnome
@@ -283,13 +286,13 @@ func TestEurekaConsumesOneStackPerQualifyingCast(t *testing.T) {
 	}
 	eureka.Apply(character)
 
-	eurekaSpell := character.GetSpell(ActionID{SpellID: 1_000_101})
+	eurekaSpell := character.GetSpell(ActionID{SpellID: 1259821})
 	if eurekaSpell == nil {
 		t.Fatal("Eureka! did not register its own spell (unexpected SpellID; check racials.go)")
 	}
 
 	// A qualifying "ability": any spell with a resource cost, in a magic
-	// school - what Eureka!'s -50% cost / +10% damage actually touches.
+	// school - what Eureka!'s -10% cost / +10% damage actually touches.
 	testSpell := character.RegisterSpell(SpellConfig{
 		ActionID:         ActionID{SpellID: 1_000_102},
 		SpellSchool:      SpellSchoolArcane,
@@ -321,8 +324,8 @@ func TestEurekaConsumesOneStackPerQualifyingCast(t *testing.T) {
 	if !aura.IsActive() || aura.GetStacks() != 3 {
 		t.Fatalf("after activating, Eureka! has %d stacks (active=%v), want 3 stacks active", aura.GetStacks(), aura.IsActive())
 	}
-	if got, want := testSpell.Cost.GetCurrentCost(), fullCost/2; got != want {
-		t.Errorf("Eureka! active: test spell costs %v, want %v (50%% of %v)", got, want, fullCost)
+	if got, want := testSpell.Cost.GetCurrentCost(), fullCost*0.9; math.Abs(got-want) > 1e-9 {
+		t.Errorf("Eureka! active: test spell costs %v, want %v (90%% of %v)", got, want, fullCost)
 	}
 
 	for i, wantStacks := range []int32{2, 1, 0} {
@@ -347,5 +350,264 @@ func TestEurekaConsumesOneStackPerQualifyingCast(t *testing.T) {
 	}
 	if got := testSpell.Cost.GetCurrentCost(); got != fullCost {
 		t.Errorf("fourth cast: test spell costs %v, want the full %v (Eureka! already consumed)", got, fullCost)
+	}
+}
+
+// racialByName returns one racial of a race, failing the test if absent.
+func racialByName(t *testing.T, race proto.Race, name string) Racial {
+	t.Helper()
+	for _, r := range RacialsFor(race) {
+		if r.Name == name {
+			return r
+		}
+	}
+	t.Fatalf("%v has no racial %q", race, name)
+	return Racial{}
+}
+
+// racialPlayer builds a real one-player environment for a race and returns
+// the character, with a single level 60 target of the given mob type.
+func racialPlayer(t *testing.T, race proto.Race, mob proto.MobType) (*Character, *Environment) {
+	t.Helper()
+	target := googleProto.Clone(DefaultTargetProtoLvl60).(*proto.Target)
+	target.MobType = mob
+	env, _, _ := NewEnvironment(
+		SinglePlayerRaidProto(&proto.Player{
+			Name:      "Racial Test",
+			Race:      race,
+			Class:     proto.Class_ClassShaman,
+			Spec:      &proto.Player_ElementalShaman{ElementalShaman: &proto.ElementalShaman{}},
+			Equipment: &proto.EquipmentSpec{},
+		}, &proto.PartyBuffs{}, &proto.RaidBuffs{}, &proto.Debuffs{}),
+		&proto.Encounter{Duration: 180, Targets: []*proto.Target{target}},
+		false,
+	)
+	return env.Raid.Parties[0].Players[0].GetCharacter(), env
+}
+
+func damageMultiplierAgainstTarget(character *Character, env *Environment) float64 {
+	return character.AttackTables[env.Encounter.TargetUnits[0].UnitIndex][proto.CastType_CastTypeMainHand].DamageDealtMultiplier
+}
+
+// Beast Slaying 20557, Big Game Hunter 1259721 and Elemental Insight
+// 1259707 are aura 168 with 5 base points: 5% damage dealt, gated on the
+// target's creature type, and nothing else (no separate crit multiplier).
+func TestMobTypeRacialsAreFivePercentAgainstTheirTypeOnly(t *testing.T) {
+	for _, tc := range []struct {
+		race    proto.Race
+		hit     proto.MobType
+		missing proto.MobType
+	}{
+		{proto.Race_RaceTroll, proto.MobType_MobTypeBeast, proto.MobType_MobTypeUndead},
+		{proto.Race_RaceDwarf, proto.MobType_MobTypeBeast, proto.MobType_MobTypeUndead},
+		{proto.Race_RaceHighOrderSkyborne, proto.MobType_MobTypeElemental, proto.MobType_MobTypeBeast},
+		{proto.Race_RaceWindshaperSkyborne, proto.MobType_MobTypeElemental, proto.MobType_MobTypeBeast},
+	} {
+		t.Run(tc.race.String(), func(t *testing.T) {
+			character, env := racialPlayer(t, tc.race, tc.hit)
+			if got := damageMultiplierAgainstTarget(character, env); math.Abs(got-1.05) > 1e-9 {
+				t.Errorf("against %v the damage multiplier is %v, want 1.05", tc.hit, got)
+			}
+			character, env = racialPlayer(t, tc.race, tc.missing)
+			if got := damageMultiplierAgainstTarget(character, env); got != 1 {
+				t.Errorf("against %v the damage multiplier is %v, want 1", tc.missing, got)
+			}
+		})
+	}
+}
+
+// Quickness 20582: dodge +1% (and 2% movement speed, not modeled).
+func TestQuicknessIsOnePercentDodge(t *testing.T) {
+	night, _ := racialPlayer(t, proto.Race_RaceNightElf, proto.MobType_MobTypeUnknown)
+	human, _ := racialPlayer(t, proto.Race_RaceHuman, proto.MobType_MobTypeUnknown)
+	got := (night.GetStat(stats.Dodge) - human.GetStat(stats.Dodge)) / DodgeRatingPerDodgeChance
+	if math.Abs(got-1) > 1e-9 {
+		t.Errorf("Night Elf dodge exceeds a Human's by %v%%, want 1%% (client 20582)", got)
+	}
+}
+
+// Wind Blessed 1259710: 1% spellcasting, melee and ranged haste.
+func TestWindBlessedHastesCastingMeleeAndRanged(t *testing.T) {
+	skyborne, _ := racialPlayer(t, proto.Race_RaceHighOrderSkyborne, proto.MobType_MobTypeUnknown)
+	human, _ := racialPlayer(t, proto.Race_RaceHuman, proto.MobType_MobTypeUnknown)
+	for name, ratio := range map[string]float64{
+		"melee":  skyborne.PseudoStats.MeleeSpeedMultiplier / human.PseudoStats.MeleeSpeedMultiplier,
+		"ranged": skyborne.PseudoStats.RangedSpeedMultiplier / human.PseudoStats.RangedSpeedMultiplier,
+		"cast":   skyborne.PseudoStats.CastSpeedMultiplier / human.PseudoStats.CastSpeedMultiplier,
+	} {
+		if math.Abs(ratio-1.01) > 1e-9 {
+			t.Errorf("%s speed ratio is %v, want 1.01", name, ratio)
+		}
+	}
+}
+
+// Elune's Light 1259799: crit +10% for 15 s, 3 min cooldown. Berserking
+// 20554: 10 s, 3 min, no cost. Both read back from the registered spell and
+// aura, which is where the engine holds the numbers.
+func TestElunesLightAndBerserkingMatchTheClientRows(t *testing.T) {
+	night, _ := racialPlayer(t, proto.Race_RaceNightElf, proto.MobType_MobTypeUnknown)
+	elune := night.GetSpell(ActionID{SpellID: 1259799})
+	if elune == nil {
+		t.Fatal("Elune's Light is not registered under the client id 1259799")
+	}
+	if elune.CD.Duration != 3*time.Minute {
+		t.Errorf("Elune's Light cooldown is %v, want 3m", elune.CD.Duration)
+	}
+	if aura := night.GetAura("Elune's Light"); aura == nil || aura.Duration != 15*time.Second {
+		t.Errorf("Elune's Light aura = %v, want a 15 s aura", aura)
+	}
+
+	troll, _ := racialPlayer(t, proto.Race_RaceTroll, proto.MobType_MobTypeUnknown)
+	berserking := troll.GetSpell(ActionID{SpellID: 26297})
+	if berserking == nil {
+		t.Fatal("Berserking is not registered")
+	}
+	if berserking.CD.Duration != 3*time.Minute {
+		t.Errorf("Berserking cooldown is %v, want 3m", berserking.CD.Duration)
+	}
+	if berserking.Cost != nil {
+		t.Errorf("Berserking has a resource cost; the client row has none")
+	}
+	if aura := troll.GetAura("Berserking"); aura == nil || aura.Duration != 10*time.Second {
+		t.Errorf("Berserking aura = %v, want a 10 s aura", aura)
+	}
+}
+
+// Berserking is a flat 10% to both casting and attack speed, for every
+// class, never a health-scaled value and never the old 1/(1-x) cast-time
+// reading that gave mana users 11.1%.
+func TestBerserkingIsAFlatTenPercentHaste(t *testing.T) {
+	troll, env := racialPlayer(t, proto.Race_RaceTroll, proto.MobType_MobTypeUnknown)
+	sim := &Simulation{Environment: env}
+	meleeBefore := troll.PseudoStats.MeleeSpeedMultiplier
+	castBefore := troll.PseudoStats.CastSpeedMultiplier
+	troll.GetAura("Berserking").Activate(sim)
+	if got := troll.PseudoStats.MeleeSpeedMultiplier / meleeBefore; math.Abs(got-1.1) > 1e-9 {
+		t.Errorf("Berserking attack speed ratio is %v, want 1.1", got)
+	}
+	if got := troll.PseudoStats.CastSpeedMultiplier / castBefore; math.Abs(got-1.1) > 1e-9 {
+		t.Errorf("Berserking casting speed ratio is %v, want 1.1", got)
+	}
+}
+
+// Blood Fury 20572: attack power, ranged attack power and spell power each
+// +10% of the unit's current total, for 15 s, 2 min cooldown.
+func TestBloodFuryIsTenPercentOfTotalPowers(t *testing.T) {
+	character := &Character{
+		Unit: Unit{
+			Type:        PlayerUnit,
+			Level:       60,
+			auraTracker: newAuraTracker(),
+			PseudoStats: stats.NewPseudoStats(),
+			Env:         &Environment{MeasuringStats: true},
+		},
+		Race: proto.Race_RaceOrc,
+	}
+	character.majorCooldownManager = majorCooldownManager{character: character}
+	racialByName(t, proto.Race_RaceOrc, "Blood Fury").Apply(character)
+
+	spell := character.GetSpell(ActionID{SpellID: 20572})
+	if spell == nil {
+		t.Fatal("Blood Fury is not registered")
+	}
+	if spell.CD.Duration != 2*time.Minute {
+		t.Errorf("Blood Fury cooldown is %v, want 2m", spell.CD.Duration)
+	}
+	aura := character.GetAura("Blood Fury")
+	if aura.Duration != 15*time.Second {
+		t.Errorf("Blood Fury lasts %v, want 15s", aura.Duration)
+	}
+
+	base := stats.Stats{}
+	base[stats.AttackPower] = 1000
+	base[stats.RangedAttackPower] = 800
+	base[stats.SpellPower] = 500
+	base[stats.Strength] = 200 // not a percentage target: must stay put
+
+	final := func() stats.Stats { return character.StatDependencyManager.SortAndApplyStatDependencies(base) }
+	if got := final(); got[stats.AttackPower] != 1000 {
+		t.Fatalf("before the aura attack power is %v, want 1000", got[stats.AttackPower])
+	}
+	aura.Activate(&Simulation{})
+	got := final()
+	for _, tc := range []struct {
+		stat stats.Stat
+		want float64
+	}{
+		{stats.AttackPower, 1100},
+		{stats.RangedAttackPower, 880},
+		{stats.SpellPower, 550},
+		{stats.Strength, 200},
+	} {
+		if math.Abs(got[tc.stat]-tc.want) > 1e-9 {
+			t.Errorf("with Blood Fury %v is %v, want %v", tc.stat.StatName(), got[tc.stat], tc.want)
+		}
+	}
+	aura.Deactivate(&Simulation{})
+	if got := final(); got[stats.AttackPower] != 1000 || got[stats.SpellPower] != 500 {
+		t.Errorf("after the aura attack power is %v and spell power %v, want 1000 and 500", got[stats.AttackPower], got[stats.SpellPower])
+	}
+}
+
+// Eureka! 1259821: next 3 damaging abilities, 10% cheaper and 10% stronger,
+// 15 s, 2 min cooldown.
+func TestEurekaMatchesTheClientRow(t *testing.T) {
+	character := newGnomeEurekaTestCaster()
+	racialByName(t, proto.Race_RaceGnome, "Eureka!").Apply(character)
+
+	spell := character.GetSpell(ActionID{SpellID: 1259821})
+	if spell == nil {
+		t.Fatal("Eureka! is not registered under the client id 1259821")
+	}
+	if spell.CD.Duration != 2*time.Minute {
+		t.Errorf("Eureka! cooldown is %v, want 2m", spell.CD.Duration)
+	}
+	aura := character.GetAura("Eureka!")
+	if aura.Duration != 15*time.Second {
+		t.Errorf("Eureka! lasts %v, want 15s", aura.Duration)
+	}
+	if aura.MaxStacks != 3 {
+		t.Errorf("Eureka! has %d charges, want 3 (ProcCharges)", aura.MaxStacks)
+	}
+}
+
+// Touch of the Grave 1260201 / drain 1260198: 10% chance, 1000 ms internal
+// cooldown, procs on melee, ranged and spell damage (ProcTypeMask 69972,
+// no periodic bit), drains 5% of the caster's maximum Health.
+func TestTouchOfTheGraveMatchesTheClientRows(t *testing.T) {
+	trigger := touchOfTheGraveTrigger(nil)
+	if trigger.ProcChance != 0.10 {
+		t.Errorf("proc chance is %v, want 0.10", trigger.ProcChance)
+	}
+	if trigger.ICD != time.Second {
+		t.Errorf("internal cooldown is %v, want 1s", trigger.ICD)
+	}
+	if trigger.Callback != CallbackOnSpellHitDealt {
+		t.Errorf("callback is %v, want direct hits only (the mask has no periodic bit)", trigger.Callback)
+	}
+	if want := ProcMaskMeleeOrRanged | ProcMaskSpellDamage; trigger.ProcMask != want {
+		t.Errorf("proc mask is %v, want melee, ranged and spell damage %v", trigger.ProcMask, want)
+	}
+	if trigger.Outcome != OutcomeLanded {
+		t.Errorf("outcome is %v, want landed hits only", trigger.Outcome)
+	}
+	if got := touchOfTheGraveDamage(4000); got != 200 {
+		t.Errorf("drain for 4000 maximum Health is %v, want 200 (5%%)", got)
+	}
+
+	undead, _ := racialPlayer(t, proto.Race_RaceUndead, proto.MobType_MobTypeUnknown)
+	drain := undead.GetSpell(ActionID{SpellID: 1260198})
+	if drain == nil {
+		t.Fatal("the drain spell 1260198 is not registered for Undead")
+	}
+	if drain.SpellSchool != SpellSchoolShadow {
+		t.Errorf("drain school is %v, want Shadow", drain.SpellSchool)
+	}
+	if aura := undead.GetAura("Touch of the Grave"); aura == nil {
+		t.Error("Undead has no Touch of the Grave aura")
+	}
+	human, _ := racialPlayer(t, proto.Race_RaceHuman, proto.MobType_MobTypeUnknown)
+	if human.GetAura("Touch of the Grave") != nil {
+		t.Error("a Human must not have Touch of the Grave")
 	}
 }
