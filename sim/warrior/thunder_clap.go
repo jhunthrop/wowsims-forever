@@ -8,10 +8,17 @@ import (
 
 func (warrior *Warrior) registerThunderClapSpell() {
 	rank := rankAtLevel(ThunderClapLevel[:], warrior.Level)
-	// The engine keeps spell 11581, the id the UI names; the generated
-	// ThunderClapSpellId[6] is Forever's reissue 461810, which the
-	// dedup kept over it. Same rank, same 103 damage.
-	spellID := int32(11581)
+	// Every rank of Thunder Clap has both a legacy id and a Forever
+	// reissue sharing the same rank label and spell_level; the generator
+	// keeps the reissue (ThunderClapSpellId) on the higher-id tiebreak.
+	// This file used to hardcode the level-58 legacy id (11581) for
+	// EVERY rank, which (a) mislabeled every rank below 6 and (b)
+	// compared this spell's numbers against the legacy row's stale
+	// 6000ms cooldown and -20% slow instead of the reissue's live 4000ms
+	// / -10% that ThunderClapCooldownMS and attackSpeedReduction below
+	// already use - a convention-vs-literal bug, not a talent
+	// double-count.
+	spellID := ThunderClapSpellId[rank]
 	baseDamage := ThunderClapBaseDamage[rank][0]
 	has5pcConq := warrior.HasSetBonus(ItemSetConquerorsBattleGear, 5)
 	attackSpeedReduction := core.TernaryInt32(has5pcConq, 15, 10)

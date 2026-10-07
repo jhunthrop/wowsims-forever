@@ -25,14 +25,21 @@ func (warrior *Warrior) RegisterShieldWallCD() {
 		},
 	})
 
-	cooldownDur := time.Minute * 30
+	// 900000ms (15 min): ShieldWallCooldownMS[0] (constants_auto_gen.go).
+	// The old time.Minute*30 was vanilla's cooldown; Forever's client
+	// halved it and this literal was never updated.
+	cooldownDur := time.Duration(ShieldWallCooldownMS[0]) * time.Millisecond
 
 	swSpell := warrior.RegisterSpell(DefensiveStance, core.SpellConfig{
 		ActionID: actionID,
 
+		RequiredLevel: ShieldWallLevel[0],
+
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: 0,
+				// The client gives Shield Wall the standard GCD
+				// (gcd_ms 1500); it was not off the GCD.
+				GCD: core.GCDDefault,
 			},
 			IgnoreHaste: true,
 			CD: core.Cooldown{

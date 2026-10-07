@@ -20,6 +20,8 @@ func (warrior *Warrior) registerDemoralizingShoutSpell() {
 		ProcMask:    core.ProcMaskEmpty,
 		Flags:       core.SpellFlagAPL | SpellFlagOffensive,
 
+		RequiredLevel: core.DemoralizingShoutLevel[rank],
+
 		RageCost: core.RageCostOptions{
 			Cost: 10,
 		},

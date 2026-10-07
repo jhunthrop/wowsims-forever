@@ -42,6 +42,8 @@ func (warrior *Warrior) registerBerserkerRageSpell() {
 	warrior.BerserkerRage = warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
 		ActionID: actionID,
 
+		RequiredLevel: BerserkerRageLevel[0],
+
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,

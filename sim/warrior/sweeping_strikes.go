@@ -87,6 +87,8 @@ func (warrior *Warrior) registerSweepingStrikesCD() {
 		SpellSchool: core.SpellSchoolPhysical,
 		Flags:       core.SpellFlagHelpful,
 
+		RequiredLevel: SweepingStrikesLevel[0],
+
 		RageCost: core.RageCostOptions{
 			Cost: rageCost(SweepingStrikesManaCost[0]),
 		},

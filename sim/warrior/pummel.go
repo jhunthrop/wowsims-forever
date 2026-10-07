@@ -12,7 +12,9 @@ func (warrior *Warrior) registerPummelSpell() {
 
 	castConfig := core.CastConfig{
 		DefaultCast: core.Cast{
-			GCD: core.GCDDefault,
+			// Rank 0 (level 20, the client's own lowest Pummel entry) is
+			// GCD-less (gcd_ms 0); ranks 1-2 take the standard GCD.
+			GCD: core.TernaryDuration(rank == 0, 0, core.GCDDefault),
 		},
 		IgnoreHaste: true,
 	}

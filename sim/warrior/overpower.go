@@ -13,7 +13,10 @@ func (warrior *Warrior) registerOverpowerSpell(cdTimer *core.Timer) {
 
 	castConfig := core.CastConfig{
 		DefaultCast: core.Cast{
-			GCD: core.GCDDefault,
+			// Rank 0 (OverpowerLevel[0]=20, a stub a warrior below the
+			// lowest REAL rank's level 12 defaults to) is GCD-less in the
+			// client (gcd_ms 0); every real rank takes the standard GCD.
+			GCD: core.TernaryDuration(rank == 0, 0, core.GCDDefault),
 		},
 		IgnoreHaste: true,
 	}

@@ -48,6 +48,8 @@ func (warrior *Warrior) registerPiercingHowlSpell() {
 		ProcMask:       core.ProcMaskEmpty,
 		Flags:          core.SpellFlagAPL | core.SpellFlagNoOnCastComplete,
 
+		RequiredLevel: PiercingHowlLevel[piercingHowlRank],
+
 		RageCost: core.RageCostOptions{
 			Cost: piercingHowlRageCost(),
 		},

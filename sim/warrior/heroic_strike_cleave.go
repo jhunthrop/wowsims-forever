@@ -202,7 +202,20 @@ func (warrior *Warrior) makeQueueSpellsAndAura(srcSpell *WarriorSpell, realismIC
 
 	queueSpell := warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		ActionID: srcSpell.ActionID.WithTag(1),
-		Flags:    core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagCastTimeNoGCD,
+		// Same Rank as srcSpell (not left at the zero value): this spell
+		// shares srcSpell's SpellID (just a different ActionID.Tag, which
+		// sim/conformance's rowFor does not look at), so without this the
+		// two registrations produced two report rows for the same
+		// (spec, level, SpellID) - srcSpell's real one and this queue
+		// helper's all-zero one (no Cost/RequiredLevel of its own) - and
+		// the queue helper's showed up as a bogus "no cost block"
+		// registration gap. Matching Rank collapses them onto one row via
+		// collectRows' own (spec, level, spellID, rank) dedup; it cannot
+		// be SpellFlagPassiveSpell instead (see sim/warrior/execute.go's
+		// identical note) because this spell IS cast directly by the APL
+		// and its own Casts count is real.
+		Rank:  srcSpell.Rank,
+		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagCastTimeNoGCD,
 
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 			// GetCurrentCost, not DefaultCast.Cost: the rage discounts

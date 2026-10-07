@@ -32,6 +32,8 @@ func (warrior *Warrior) newShoutSpellConfig(actionID core.ActionID, rank int32, 
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL | core.SpellFlagHelpful,
 
+		RequiredLevel: core.BattleShoutLevel[rank],
+
 		RageCost: core.RageCostOptions{
 			Cost: battleShoutRageCost(rank),
 		},

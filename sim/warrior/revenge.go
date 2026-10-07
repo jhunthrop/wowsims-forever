@@ -58,6 +58,8 @@ func (warrior *Warrior) registerRevengeSpell(cdTimer *core.Timer) {
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
 
+		RequiredLevel: int(revengeLevel),
+
 		RageCost: core.RageCostOptions{
 			Cost:   5,
 			Refund: 0.8,

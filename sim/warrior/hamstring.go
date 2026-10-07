@@ -4,14 +4,25 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// hamstringRankSpellID reads a Hamstring rank's id, correcting the one
+// rank where the generator's dedup kept the wrong duplicate: rank 3's
+// real, player-cast row (7373, spell_level 54, cost 100) and a free
+// reissue (27584, same spell_level, cost 0) tie on spell_level, and the
+// generator's tie-break kept 27584 in HamstringSpellId[3]. 7373 is the
+// id the preset rotations name, and the one this file hardcoded for
+// EVERY rank until now - which mislabeled ranks 1-2 and compared them
+// against rank 3's spell_level (54) instead of their own (8, 32).
+func hamstringRankSpellID(rank int) int32 {
+	if rank == 3 {
+		return 7373
+	}
+	return HamstringSpellId[rank]
+}
+
 func (warrior *Warrior) registerHamstringSpell() {
 	rank := rankAtLevel(HamstringLevel[:], warrior.Level)
 	damage := HamstringBaseDamage[rank][0]
-	// The engine keeps spell 7373, the id the preset rotations name and
-	// the one that carries the client's 100-tenths cost; the generated
-	// HamstringSpellId[3] is the free reissue 27584, which the dedup
-	// preferred on the higher id. Same rank, same 45 damage.
-	spellID := int32(7373)
+	spellID := hamstringRankSpellID(rank)
 	spell_level := float64(HamstringLevel[rank])
 
 	// HamstringManaCost[3] is 0 and is NOT read here: two rank-3 rows

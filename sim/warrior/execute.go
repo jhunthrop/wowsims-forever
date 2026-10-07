@@ -53,7 +53,10 @@ func (warrior *Warrior) registerExecuteSpell() {
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
+				// Rank 0 (the level-1 stub a warrior below ExecuteLevel[1]=24
+				// resolves to) is GCD-less in the client (gcd_ms 0); every
+				// real rank takes the standard GCD.
+				GCD: core.TernaryDuration(rank == 0, 0, core.GCDDefault),
 			},
 		},
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
