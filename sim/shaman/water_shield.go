@@ -89,6 +89,7 @@ func (shaman *Shaman) registerWaterShieldSpell() {
 	shaman.WaterShield = shaman.RegisterSpell(core.SpellConfig{
 		ActionID:        actionID,
 		Flags:           SpellFlagShaman | core.SpellFlagAPL,
+		RequiredLevel:   20,
 		RelatedSelfBuff: waterShieldAura,
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{GCD: core.GCDDefault},
