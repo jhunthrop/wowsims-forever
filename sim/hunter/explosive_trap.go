@@ -9,6 +9,20 @@ import (
 )
 
 func (hunter *Hunter) getExplosiveTrapConfig(rank int, timer *core.Timer) core.SpellConfig {
+	// The client's duration_ms (60000 for every rank) is the trap's
+	// armed lifetime: how long it sits on the ground, invisible, before
+	// a target walks over it or it expires unused. This engine does not
+	// model that "armed and waiting" phase at all -- ApplyEffects below
+	// resolves the trap immediately (after travel time) against the
+	// current target, there is no delayed trigger to carry a lifetime
+	// on. The Dot this config registers is also IsAOE (the burn tick,
+	// 10 * 2s = 20000ms), which compare.go's engineDuration cannot read
+	// through RelatedSelfBuff/Dot(target) regardless (see Volley's
+	// comment in volley.go for the one case where that AOE-dot gap is
+	// worth working around; it is not worth it here, since 20000 would
+	// just be a different wrong number than the client's 60000). Left
+	// as a documented "missing aura duration", not forced to match.
+	//
 	// Ids, mana cost and level match spellconst/hunter.json's own
 	// spells table exactly (13813/14316/14317; the old
 	// 409532/409534/409535 ids do not exist in the client at all). The

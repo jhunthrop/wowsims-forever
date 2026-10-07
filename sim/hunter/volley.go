@@ -28,6 +28,20 @@ func (hunter *Hunter) getVolleyConfig(rank int) core.SpellConfig {
 
 	manaCostModifer := 100 - 2*hunter.Talents.Efficiency
 
+	// auraLabel also names the Dot's own Aura below. Volley's channel
+	// Dot is AOE (core.DotConfig.IsAOE), which core.createDots
+	// registers on the caster, not on each target - a real caster-side
+	// aura, just one compare.go's engineDuration cannot see through
+	// Dots()/Dot(target) (those only read a non-AOE per-target Dot).
+	// Pre-registering the same label here and handing the returned
+	// *Aura to RelatedSelfBuff gets the same object back a second time
+	// (core.Unit.GetOrRegisterAura matches by Label), so by the time
+	// createDots sets its Duration (NumberOfTicks * TickLength), this
+	// pointer already carries it - exposing the real 6000ms instead of
+	// a false "missing aura duration".
+	auraLabel := fmt.Sprintf("Volley (Rank %d)", rank)
+	selfBuff := hunter.GetOrRegisterAura(core.Aura{Label: auraLabel})
+
 	return core.SpellConfig{
 		SpellCode:   SpellCode_HunterVolley,
 		ActionID:    core.ActionID{SpellID: spellId},
@@ -35,8 +49,9 @@ func (hunter *Hunter) getVolleyConfig(rank int) core.SpellConfig {
 		ProcMask:    core.ProcMaskSpellDamage,
 		Flags:       core.SpellFlagChanneled | core.SpellFlagAPL,
 
-		RequiredLevel: level,
-		Rank:          rank,
+		RequiredLevel:   level,
+		Rank:            rank,
+		RelatedSelfBuff: selfBuff,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost:   manaCost,
@@ -57,7 +72,7 @@ func (hunter *Hunter) getVolleyConfig(rank int) core.SpellConfig {
 		Dot: core.DotConfig{
 			IsAOE: true,
 			Aura: core.Aura{
-				Label: fmt.Sprintf("Volley (Rank %d)", rank),
+				Label: auraLabel,
 			},
 			NumberOfTicks:    6,
 			TickLength:       time.Second * 1,

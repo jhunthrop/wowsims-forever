@@ -9,6 +9,18 @@ import (
 )
 
 func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.SpellConfig {
+	// The client's duration_ms is 60000 for every rank -- the trap's
+	// armed lifetime on the ground, the same quantity
+	// explosive_trap.go's and freezing_trap.go's comments describe --
+	// but this spell's Dot IS exposed to compare.go's engineDuration
+	// (it is a real per-target Dot, not AOE), so the conformance report
+	// shows a genuine number here instead of a missing one: 15000ms,
+	// this engine's 5-tick, 3s-period burn length (NumberOfTicks *
+	// TickLength below). Both 60000 and 15000 are real, correctly
+	// implemented numbers; they are just not the same quantity (armed
+	// lifetime vs. burn length), so this is left as a documented
+	// semantic mismatch rather than forced to match.
+	//
 	// Ids, mana cost and level match spellconst/hunter.json's own
 	// spells table exactly (13795/14302/14303/14304/14305; the old
 	// 409521-409530 ids do not exist in the client at all). The cast

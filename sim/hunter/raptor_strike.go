@@ -82,7 +82,15 @@ func (hunter *Hunter) newRaptorStrikeHitSpell(rank int) *core.Spell {
 		SpellSchool: core.SpellSchoolPhysical,
 		DefenseType: core.DefenseTypeMelee,
 		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete,
+		// SpellFlagPassiveSpell: this inner hit shares its ActionID's
+		// SpellID with the real Raptor Strike cast above (only the Tag
+		// differs), the exact shape compare.go's rowFor doc comment
+		// warns about (Death Coil's self-heal sub-spell). Without this
+		// flag, rowFor kept a second, all-zero-valued row for this
+		// SpellID alongside the real one -- the client-facing numbers
+		// (cost, cooldown_ms, required_level) were never actually
+		// missing, they were just shadowed by this bogus row.
+		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell,
 
 		BonusCritRating:  float64(hunter.Talents.SavageStrikes) * 10 * core.CritRatingPerCritChance,
 		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
@@ -119,7 +127,15 @@ func (hunter *Hunter) makeQueueSpellsAndAura() *core.Spell {
 	queueSpell := hunter.RegisterSpell(core.SpellConfig{
 		SpellCode: SpellCode_HunterRaptorStrike,
 		ActionID:  hunter.RaptorStrike.WithTag(3),
-		Flags:     core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+		// SpellFlagPassiveSpell: like RaptorStrikeHit above, this
+		// queue-trigger shares RaptorStrike's SpellID (WithTag only
+		// changes the Tag), the same shape compare.go's rowFor doc
+		// comment describes. It deals no damage and sets no Cost or
+		// RequiredLevel of its own -- the real cast it queues up is
+		// hunter.RaptorStrike (tag 0), tracked under its own ActionID
+		// -- so without this flag it left a second bogus all-zero row
+		// under this SpellID even after the Hit sub-spell's fix.
+		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagPassiveSpell,
 
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 			return hunter.curQueueAura != queueAura &&

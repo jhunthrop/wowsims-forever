@@ -210,7 +210,7 @@ func (hunter *Hunter) registerBestialWrathCD() {
 		return
 	}
 
-	actionID := core.ActionID{SpellID: 19574}
+	actionID := core.ActionID{SpellID: BestialWrathSpellId[0]}
 
 	hunter.BestialWrathPetAura = hunter.pet.RegisterAura(core.Aura{
 		Label:    "Bestial Wrath Pet",
@@ -219,9 +219,15 @@ func (hunter *Hunter) registerBestialWrathCD() {
 	}).AttachMultiplicativePseudoStatBuff(&hunter.pet.PseudoStats.DamageDealtMultiplier, 1.5)
 
 	bwSpell := hunter.RegisterSpell(core.SpellConfig{
-		ActionID: actionID,
-		Flags:    core.SpellFlagAPL,
+		ActionID:      actionID,
+		Flags:         core.SpellFlagAPL,
+		RequiredLevel: BestialWrathLevel[0],
 
+		// spellconst/hunter.json's flat "cost" column reads 0 for
+		// 19574 (BestialWrathManaCost[0]); Wowhead's Forever tooltip
+		// gives Bestial Wrath as "12% of base mana", so this keeps the
+		// percent-of-mana model (ManaCostOptions.BaseCost) rather than
+		// reading the flat column as a real zero cost.
 		ManaCost: core.ManaCostOptions{
 			BaseCost: 0.12,
 		},
@@ -229,9 +235,18 @@ func (hunter *Hunter) registerBestialWrathCD() {
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    hunter.NewTimer(),
-				Duration: time.Minute * 2,
+				Duration: time.Millisecond * time.Duration(BestialWrathCooldownMS[0]),
 			},
 		},
+
+		// RelatedSelfBuff is documented as "the aura this spell applies
+		// to its caster" (sim/core/spell.go), but Bestial Wrath's own
+		// 18s buff lives on the pet, not the hunter -- there is no
+		// caster-side aura to point at instead. Wiring the pet aura in
+		// here anyway is the only hook compare.go's engineDuration
+		// reads without touching sim/core, and it reports the real
+		// 18000ms duration instead of a false "missing" one.
+		RelatedSelfBuff: hunter.BestialWrathPetAura,
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 			hunter.BestialWrathPetAura.Activate(sim)
