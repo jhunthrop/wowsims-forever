@@ -76,6 +76,7 @@ func TestLavaBurstLevel60HasMaxRankAndDealsDamage(t *testing.T) {
 
 	target := sim.Encounter.TargetUnits[0]
 	maxRank.ApplyEffects(sim, target, maxRank)
+	flushTravelTime(sim)
 
 	metrics := maxRank.SpellMetrics[target.UnitIndex]
 	if metrics.Hits+metrics.Crits == 0 {
@@ -133,6 +134,7 @@ func TestLavaBurstFlameShockInteraction(t *testing.T) {
 		t.Fatal("no Flame Shock was cast, but getActiveFlameShockSpell found one active")
 	}
 	lavaBurstWithout.ApplyEffects(simWithout, targetWithout, lavaBurstWithout)
+	flushTravelTime(simWithout)
 	baseDamage := lavaBurstWithout.SpellMetrics[targetWithout.UnitIndex].TotalDamage
 	if baseDamage <= 0 {
 		t.Fatalf("Lava Burst without Flame Shock dealt %v damage, want > 0", baseDamage)
@@ -148,10 +150,29 @@ func TestLavaBurstFlameShockInteraction(t *testing.T) {
 		t.Fatal("Flame Shock's DoT was applied directly, but getActiveFlameShockSpell found none active")
 	}
 	lavaBurstWith.ApplyEffects(simWith, targetWith, lavaBurstWith)
+	flushTravelTime(simWith)
 	bonusDamage := lavaBurstWith.SpellMetrics[targetWith.UnitIndex].TotalDamage
 
 	wantBonusDamage := baseDamage * 1.20
 	if diff := bonusDamage - wantBonusDamage; diff > 0.01 || diff < -0.01 {
 		t.Errorf("Lava Burst with Flame Shock dealt %v damage, want %v (+20%% of %v)", bonusDamage, wantBonusDamage, baseDamage)
+	}
+}
+
+// TestLavaBurstTravelsAtTheClientProjectileSpeed: SpellMisc.Speed is 20 for
+// every Lava Burst rank, as for Lightning Bolt (whose registration already
+// carries it); an instant-landing Lava Burst credits damage a flight early.
+func TestLavaBurstTravelsAtTheClientProjectileSpeed(t *testing.T) {
+	_, sh := newLavaBurstShaman(t, 60)
+	if len(sh.LavaBurst) == 0 {
+		t.Fatal("no Lava Burst registered")
+	}
+	for _, spell := range sh.LavaBurst {
+		if spell.MissileSpeed != shaman.LavaBurstMissileSpeed {
+			t.Errorf("rank %d: MissileSpeed = %v, want %v", spell.Rank, spell.MissileSpeed, shaman.LavaBurstMissileSpeed)
+		}
+	}
+	if shaman.LavaBurstMissileSpeed != 20 {
+		t.Errorf("LavaBurstMissileSpeed = %v, want the client's 20", shaman.LavaBurstMissileSpeed)
 	}
 }

@@ -55,6 +55,11 @@ const LavaBurstSpellCoefficient = 0.71399998665
 // when the caster's own Flame Shock is on the target.
 const lavaBurstFlameShockDamageMultiplier = 1.20
 
+// LavaBurstMissileSpeed is SpellMisc.Speed for every Lava Burst rank (20,
+// the same projectile Lightning Bolt throws), so the damage lands after the
+// flight rather than at the end of the cast.
+const LavaBurstMissileSpeed = 20
+
 // LavaBurstCooldown is the client's category_cooldown_ms (10000) for
 // every rank -- exported so the elemental package's test (Lava Burst's
 // only spec, since a shaman who hasn't spent the talent has no spell to
@@ -114,6 +119,7 @@ func (shaman *Shaman) newLavaBurstSpellConfig(rank int) core.SpellConfig {
 
 		DamageMultiplier: shaman.callOfFlameMultiplier(),
 		ThreatMultiplier: 1,
+		MissileSpeed:     LavaBurstMissileSpeed,
 		BonusCoefficient: LavaBurstSpellCoefficient,
 		ClientBaseDamage: damage.Range(casterLevel),
 
@@ -126,7 +132,9 @@ func (shaman *Shaman) newLavaBurstSpellConfig(rank int) core.SpellConfig {
 			result := spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 			spell.DamageMultiplier = oldMultiplier
 
-			spell.DealDamage(sim, result)
+			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
+				spell.DealDamage(sim, result)
+			})
 		},
 	}
 }
