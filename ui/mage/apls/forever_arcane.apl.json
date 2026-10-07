@@ -45,8 +45,25 @@
       }
     },
     {
-      "notes": "Arcane Blast is learned at level 20 and gains new ranks through level 60 -- always cast your current highest learned rank.",
+      "notes": "Arcane Blast twice, never a third time: the client charges it 15% of base mana and each stack of its own buff raises the next cast's cost by 175% (the buff also makes every other spell hit harder while it stands, up to four stacks), so the second Blast is affordable and the third is not. Cast your current highest learned rank.",
       "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "auraNumStacks": {
+                "auraId": {
+                  "spellId": 400573
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "2"
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 1239700,
@@ -56,12 +73,12 @@
       }
     },
     {
-      "notes": "Arcane Missiles is your filler before you have learned Arcane Blast and Missile Barrage -- the classic Arcane rotation from before Arcane Blast existed was itself Missiles spam. Cast your highest learned rank.",
+      "notes": "Frostbolt is the filler once two Blasts are up: a cheaper, faster cast than Arcane Missiles that still enjoys the Blast buff on your other spells and still has a 20% chance to proc Missile Barrage. Casting it ends the Blast buff, which is the point - the next Blast starts a fresh, cheap pair. Before Arcane Blast is learned, Arcane Missiles spam is the whole rotation.",
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 25345,
-            "rank": 8
+            "spellId": 25304,
+            "rank": 11
           }
         }
       }

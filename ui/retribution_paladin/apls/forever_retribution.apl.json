@@ -19,7 +19,7 @@
       }
     },
     {
-      "notes": "Judgement on cooldown: it is a free global that unloads the seal's judgement effect and starts its ten second cooldown again.",
+      "notes": "Judgement on cooldown: an off-the-global cast (it costs 6% of your base mana) that unloads the seal's judgement effect and starts its ten second cooldown again.",
       "action": {
         "condition": {
           "spellCanCast": {

@@ -1,6 +1,5 @@
 {
   "type": "TypeAPL",
-  "prepullActions": [],
   "priorityList": [
     {
       "action": {
@@ -10,24 +9,24 @@
     {
       "notes": "Raptor Strike queued on the swing timer (tag 3, the on-next-swing queue tag), gated at 20% mana so it does not starve Mongoose Bite below.",
       "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 8,
+            "spellId": 14266,
+            "tag": 3
+          }
+        },
         "condition": {
           "cmp": {
-            "op": "OpGe",
             "lhs": {
               "currentManaPercent": {}
             },
+            "op": "OpGe",
             "rhs": {
               "const": {
-                "val": "20%"
+                "val": "0%"
               }
             }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 14266,
-            "rank": 8,
-            "tag": 3
           }
         }
       }
@@ -37,8 +36,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 20910,
-            "rank": 4
+            "rank": 4,
+            "spellId": 20910
           }
         }
       }
@@ -48,19 +47,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 14271,
-            "rank": 4
-          }
-        }
-      }
-    },
-    {
-      "notes": "Immolation Trap on cooldown: within 5 yards it lands as a melee-range filler, gated only by its own 30-second cooldown and mana cost.",
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 14305,
-            "rank": 5
+            "rank": 4,
+            "spellId": 14271
           }
         }
       }
@@ -70,8 +58,19 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1317257,
-            "rank": 1
+            "rank": 1,
+            "spellId": 1317257
+          }
+        }
+      }
+    },
+    {
+      "notes": "Immolation Trap on cooldown: within 5 yards it lands as a melee-range filler, gated only by its own 30-second cooldown and mana cost.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 5,
+            "spellId": 14305
           }
         }
       }
