@@ -394,10 +394,20 @@ func (warlock *Warlock) registerAmplifyCurseSpell() {
 	})
 }
 
+// BaneOfDoomDamage is spellconst/warlock.json's row 603, the id the client
+// teaches: 1742 shadow damage after one minute, coefficient 4.0. (Row 449432,
+// "Curse of Doom", states 3200 at 1.0 but has no learn row.)
+var BaneOfDoomDamage = []clientdamage.Effect{{Amount: 1742, SpellLevel: 60}}
+
+const baneOfDoomCoefficient = 4.0
+
 func (warlock *Warlock) registerCurseOfDoomSpell() {
 	if warlock.Level < 60 {
 		return
 	}
+
+	damage := BaneOfDoomDamage[0]
+	casterLevel := int(warlock.Level)
 
 	warlock.CurseOfDoom = warlock.RegisterSpell(core.SpellConfig{
 		SpellCode:   SpellCode_WarlockCurseOfDoom,
@@ -407,7 +417,8 @@ func (warlock *Warlock) registerCurseOfDoomSpell() {
 		ProcMask:    core.ProcMaskSpellDamage,
 		Flags:       core.SpellFlagAPL | WarlockFlagAffliction,
 
-		RequiredLevel: 60,
+		RequiredLevel:    60,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: 300,
@@ -429,16 +440,17 @@ func (warlock *Warlock) registerCurseOfDoomSpell() {
 		// ThreatMultiplier: 1 - 0.1*float64(warlock.Talents.ImprovedDrainSoul),
 		ThreatMultiplier: 1,
 		FlatThreatBonus:  160,
-		BonusCoefficient: 1,
+		BonusCoefficient: baneOfDoomCoefficient,
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
 				Label: "CurseofDoom",
 			},
-			NumberOfTicks: 1,
-			TickLength:    time.Minute,
+			NumberOfTicks:    1,
+			TickLength:       time.Minute,
+			BonusCoefficient: baneOfDoomCoefficient,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				dot.Snapshot(target, 3200, isRollover)
+				dot.Snapshot(target, damage.Center(casterLevel), isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)

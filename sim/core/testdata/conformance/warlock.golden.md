@@ -223,7 +223,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 60 | Bane of Agony | 4 | 11711 | 130.00→130.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 24000→24000 | match |  | 21.00-21.00→21.00-21.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 60 | Bane of Agony | 5 | 11712 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 24000→24000 | match |  | 33.00-33.00→33.00-33.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 60 | Bane of Agony | 6 | 11713 | 215.00→215.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 24000→24000 | match |  | 46.00-46.00→46.00-46.00 | 0.133→0.133 | declared, matches |
-| DSRuinWarlock | 60 | Bane of Doom | 0 | 603 | 300.00→300.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 60→60 | 60000→60000 | match |  | 1742.00-1742.00→- | 4.000→1.000 | not declared |
+| DSRuinWarlock | 60 | Bane of Doom | 0 | 603 | 300.00→300.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 60→60 | 60000→60000 | match |  | 1742.00-1742.00→1742.00-1742.00 | 4.000→4.000 | declared, matches |
 | DSRuinWarlock | 60 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
@@ -500,7 +500,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 60 | Bane of Agony | 4 | 11711 | 130.00→130.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 24000→24000 | match |  | 21.00-21.00→21.00-21.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 60 | Bane of Agony | 5 | 11712 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 24000→24000 | match |  | 33.00-33.00→33.00-33.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 60 | Bane of Agony | 6 | 11713 | 215.00→215.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 24000→24000 | match |  | 46.00-46.00→46.00-46.00 | 0.133→0.133 | declared, matches |
-| SMRuinWarlock | 60 | Bane of Doom | 0 | 603 | 300.00→300.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 60→60 | 60000→60000 | match |  | 1742.00-1742.00→- | 4.000→1.000 | not declared |
+| SMRuinWarlock | 60 | Bane of Doom | 0 | 603 | 300.00→300.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 60→60 | 60000→60000 | match |  | 1742.00-1742.00→1742.00-1742.00 | 4.000→4.000 | declared, matches |
 | SMRuinWarlock | 60 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |

@@ -493,20 +493,30 @@ func JudgementOfTheCrusaderAura(caster *Unit, target *Unit, mult float64, extraB
 	})
 }
 
+// CurseOfElementsAura is the raid-debuff form of the Forever curse at its top
+// rank (spellconst 1311680): every magic school takes 10% more damage and 75
+// resistance is removed (aura 87 and aura 22 over misc value 126).
 func CurseOfElementsAura(target *Unit) *Aura {
 	resistance := 75.0
 	dmgMod := 1.1
 
 	aura := target.GetOrRegisterAura(Aura{
-		Label:    "Curse of Elements",
+		Label: "Curse of Elements",
+		// Not the client's 1311680: the conformance report matches an aura on
+		// the target by the spell's sibling ids, and this permanent one would
+		// hide the castable curse's own five-minute duration.
 		ActionID: ActionID{SpellID: 11722},
 		Duration: time.Minute * 5,
 	})
-	spellSchoolDamageEffect(aura, stats.SchoolIndexFire, dmgMod, 0.0, false)
-	spellSchoolDamageEffect(aura, stats.SchoolIndexFrost, dmgMod, 0.0, false)
+	for _, school := range []stats.SchoolIndex{
+		stats.SchoolIndexArcane, stats.SchoolIndexFire, stats.SchoolIndexFrost,
+		stats.SchoolIndexHoly, stats.SchoolIndexNature, stats.SchoolIndexShadow,
+	} {
+		spellSchoolDamageEffect(aura, school, dmgMod, 0.0, false)
+	}
 
+	// One effect: it lowers every school's resistance at once.
 	spellSchoolResistanceEffect(aura, stats.SchoolIndexFire, resistance, 0.0, false)
-	spellSchoolResistanceEffect(aura, stats.SchoolIndexFrost, resistance, 0.0, false)
 
 	return aura
 }
