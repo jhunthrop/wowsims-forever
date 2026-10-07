@@ -347,6 +347,10 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 		MakePermanent(GraceOfAirTotemAura(&character.Unit, multiplier))
 	}
 
+	if raidBuffs.WindfuryTotem && windfuryTotemReaches(character) {
+		ApplyWindfury(character)
+	}
+
 	if individualBuffs.BlessingOfWisdom > 0 {
 		updateStats := BuffSpellValues[BlessingOfWisdom]
 		if individualBuffs.BlessingOfWisdom == proto.TristateEffect_TristateEffectImproved {
@@ -1595,10 +1599,24 @@ func GetWildStrikesAP(aura *Aura, rank int32) float64 {
 
 const WindfuryRanks = 3
 
-// extraAttackProcICD is the internal cooldown between extra-attack procs.
-// The client tables carry no internal cooldown for Windfury Totem; the
-// engine's 1.5s is vanilla Classic's.
-const extraAttackProcICD = 1500 * time.Millisecond
+// extraAttackProcICD is the internal cooldown between extra-attack procs:
+// the 100 ms ProcCategoryRecovery on the totem's proc aura (spells 8515 and
+// 10612, SpellAuraOptions) in the 1.60.1.70009 client. Vanilla Classic's
+// effective 1.5 s came from the buff's own length; here the buff lasts 1 s
+// and the client states 100 ms.
+const extraAttackProcICD = 100 * time.Millisecond
+
+// windfuryTotemReaches says whether the Windfury Totem aura applies to the
+// character. A shaman whose main hand carries Windfury Weapon does not
+// receive it (the weapon's text: "When applied to main hand, disables any
+// benefit you personally receive from Windfury Totem"), and a druid in
+// feral form has no main-hand weapon to proc it.
+func windfuryTotemReaches(character *Character) bool {
+	if character.PseudoStats.FeralCombatEnabled {
+		return false
+	}
+	return character.Consumes == nil || character.Consumes.MainHandImbue != proto.WeaponImbue_WindfuryWeapon
+}
 
 // WindfuryBuffDuration is the Windfury Totem attack power buff's length:
 // 1 second on every rank in the 1.60.1.70009 client (spells 8516, 10608,
