@@ -19,6 +19,17 @@
   ],
   "priorityList": [
     {
+      "notes": "Lava Burst on cooldown: 10 s cooldown, 2.0 s cast with Elemental Alacrity, and about as much damage per mana as Lightning Bolt for more damage per second of cast. It carries no Flame Shock condition because the rotation does not keep Flame Shock up: under the raid preset the shock costs 410 mana for about 940 damage against Lightning Bolt's 220 for about 835, the character runs dry either way, and every Flame Shock variant swept (always kept up, kept up above 50/70/90% mana) lost to leaving it out. The +20% Flame Shock bonus is therefore never collected.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1238300,
+            "rank": 3
+          }
+        }
+      }
+    },
+    {
       "notes": "Mana Spring Totem restores the shaman's own mana for its five-minute life; Elemental runs dry well before a 180 s fight ends, so one 100-mana drop at the start returns about 900 mana.",
       "action": {
         "castSpell": {
