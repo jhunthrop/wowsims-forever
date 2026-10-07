@@ -113,7 +113,7 @@ func (rogue *Rogue) registerMutilateSpell() {
 		SpellSchool: core.SpellSchoolPhysical,
 		DefenseType: core.DefenseTypeMelee,
 		ProcMask:    core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeOHSpecial,
-		Flags:       rogue.builderFlags(),
+		Flags:       rogue.builderFlags() | SpellFlagColdBlooded,
 
 		RequiredLevel: mutilateLearnLevels[rank-1],
 		Rank:          rank,

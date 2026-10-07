@@ -37,7 +37,7 @@ func (rogue *Rogue) registerSinisterStrikeSpell() {
 		SpellSchool:   core.SpellSchoolPhysical,
 		DefenseType:   core.DefenseTypeMelee,
 		ProcMask:      core.ProcMaskMeleeMHSpecial,
-		Flags:         rogue.builderFlags(),
+		Flags:         rogue.builderFlags() | SpellFlagColdBlooded,
 		RequiredLevel: sinisterStrikeLearnLevels[rank-1],
 
 		EnergyCost: core.EnergyCostOptions{

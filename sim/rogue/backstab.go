@@ -40,7 +40,7 @@ func (rogue *Rogue) registerBackstabSpell() {
 		SpellSchool:   core.SpellSchoolPhysical,
 		DefenseType:   core.DefenseTypeMelee,
 		ProcMask:      core.ProcMaskMeleeMHSpecial,
-		Flags:         rogue.builderFlags(),
+		Flags:         rogue.builderFlags() | SpellFlagColdBlooded,
 		RequiredLevel: backstabLearnLevels[rank-1],
 
 		EnergyCost: core.EnergyCostOptions{
