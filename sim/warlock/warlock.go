@@ -40,6 +40,7 @@ const (
 	SpellCode_WarlockWrack
 	SpellCode_WarlockIncinerate
 	SpellCode_WarlockSiphonLife
+	SpellCode_WarlockUnstableAffliction
 )
 
 type Warlock struct {
@@ -57,27 +58,27 @@ type Warlock struct {
 	// Doomguard *DoomguardPet
 	// Infernal  *InfernalPet
 
-	Conflagrate []*core.Spell
-	Corruption  []*core.Spell
-	DarkPact    *core.Spell
-	DrainSoul   []*core.Spell
-	Immolate    []*core.Spell
-	Incinerate  []*core.Spell
-	LifeTap     []*core.Spell
-	SearingPain []*core.Spell
-	ShadowBolt  []*core.Spell
-	Shadowburn  []*core.Spell
-	SoulFire    []*core.Spell
-	DrainLife   []*core.Spell
-	RainOfFire  []*core.Spell
-	SiphonLife  []*core.Spell
-	DeathCoil   []*core.Spell
-	Wrack       *core.Spell
-	Shoot       *core.Spell
+	Conflagrate        []*core.Spell
+	Corruption         []*core.Spell
+	DarkPact           *core.Spell
+	DrainSoul          []*core.Spell
+	Immolate           []*core.Spell
+	Incinerate         []*core.Spell
+	LifeTap            []*core.Spell
+	SearingPain        []*core.Spell
+	ShadowBolt         []*core.Spell
+	Shadowburn         []*core.Spell
+	SoulFire           []*core.Spell
+	DrainLife          []*core.Spell
+	RainOfFire         []*core.Spell
+	SiphonLife         []*core.Spell
+	UnstableAffliction []*core.Spell
+	DeathCoil          []*core.Spell
+	Wrack              *core.Spell
+	Shoot              *core.Spell
 
 	ActiveCurseAura          core.AuraArray
-	CurseOfElements          *core.Spell
-	CurseOfElementsAuras     core.AuraArray
+	CurseOfElements          []*core.Spell
 	CurseOfShadow            *core.Spell
 	CurseOfShadowAuras       core.AuraArray
 	CurseOfRecklessness      *core.Spell
@@ -145,6 +146,7 @@ func (warlock *Warlock) Initialize() {
 	warlock.registerDrainSoulSpell()
 	warlock.registerConflagrateSpell()
 	warlock.registerSiphonLifeSpell()
+	warlock.registerUnstableAfflictionSpell()
 	warlock.registerDarkPactSpell()
 	warlock.registerSearingPainSpell()
 	// warlock.registerInfernoSpell()

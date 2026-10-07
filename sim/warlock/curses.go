@@ -6,6 +6,7 @@ import (
 
 	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/stats"
 )
 
 const CurseOfAgonyRanks = 6
@@ -206,66 +207,100 @@ func (warlock *Warlock) registerCurseOfRecklessnessSpell() {
 	})
 }
 
-func (warlock *Warlock) registerCurseOfElementsSpell() {
-	playerLevel := warlock.Level
-	if playerLevel < 40 {
-		return
-	}
+const curseOfTheElementsDuration = 5 * time.Minute
 
-	warlock.CurseOfElementsAuras = warlock.NewEnemyAuraArray(core.CurseOfElementsAura)
+// curseOfTheElementsEffect is what one rank of the Forever curse does, the
+// client's "Curses the target for 5 min, reducing Magic resistances by N and
+// increasing Magic damage taken by M%. Only one Curse per Warlock can be active
+// on any one target." (spellconst/warlock.json ids 440892, 1311676, 1311677 and
+// 1311680: effect 0 is aura 22 and effect 1 aura 87, both over misc value 126.)
+// Ids, levels and costs are constants_auto_gen.go's CurseOfTheElements* arrays.
+type curseOfTheElementsEffect struct {
+	resistance     float64 // magic resistance removed
+	damageTakenPct float64 // magic damage taken increase, in percent
+}
 
-	spellID := map[int32]int32{
-		40: 1490,
-		50: 11721,
-		60: 11722,
-	}[playerLevel]
+var curseOfTheElementsEffects = [CurseOfTheElementsRanks + 1]curseOfTheElementsEffect{
+	{},
+	{resistance: 30, damageTakenPct: 4},
+	{resistance: 45, damageTakenPct: 6},
+	{resistance: 60, damageTakenPct: 8},
+	{resistance: 75, damageTakenPct: 10},
+}
 
-	rank := map[int32]int{
-		40: 1,
-		50: 2,
-		60: 3,
-	}[playerLevel]
+// curseOfTheElementsSchools is every school the client's misc value 126 names,
+// which is all magic: the vanilla curse stopped at fire and frost.
+var curseOfTheElementsSchools = []stats.SchoolIndex{
+	stats.SchoolIndexArcane, stats.SchoolIndexFire, stats.SchoolIndexFrost,
+	stats.SchoolIndexHoly, stats.SchoolIndexNature, stats.SchoolIndexShadow,
+}
 
-	manaCost := map[int32]float64{
-		40: 100.0,
-		50: 150.0,
-		60: 200.0,
-	}[playerLevel]
+func (warlock *Warlock) newCurseOfTheElementsAura(rank int) func(*core.Unit) *core.Aura {
+	effect := curseOfTheElementsEffects[rank]
+	multiplier := 1 + effect.damageTakenPct/100
 
-	warlock.CurseOfElements = warlock.RegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolShadow,
-		ProcMask:    core.ProcMaskEmpty,
-		Flags:       core.SpellFlagAPL | WarlockFlagAffliction,
-		Rank:        rank,
-
-		ManaCost: core.ManaCostOptions{
-			FlatCost: manaCost,
-		},
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-		},
-
-		ThreatMultiplier: 1,
-		FlatThreatBonus:  156,
-
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcOutcome(sim, target, spell.OutcomeMagicHitNoHitCounter)
-			if result.Landed() {
-				aura := warlock.CurseOfElementsAuras.Get(target)
-				if activeCurse := warlock.ActiveCurseAura.Get(target); activeCurse != nil && activeCurse != aura {
-					activeCurse.Deactivate(sim)
+	return func(target *core.Unit) *core.Aura {
+		return target.GetOrRegisterAura(core.Aura{
+			Label:    "Curse of the Elements-" + warlock.Label + strconv.Itoa(rank),
+			ActionID: core.ActionID{SpellID: CurseOfTheElementsSpellId[rank]},
+			Duration: curseOfTheElementsDuration,
+			OnGain: func(aura *core.Aura, sim *core.Simulation) {
+				for _, school := range curseOfTheElementsSchools {
+					aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[school] *= multiplier
 				}
+				aura.Unit.AddResistancesDynamic(sim, -effect.resistance)
+			},
+			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+				for _, school := range curseOfTheElementsSchools {
+					aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[school] /= multiplier
+				}
+				aura.Unit.AddResistancesDynamic(sim, effect.resistance)
+			},
+		})
+	}
+}
 
-				warlock.ActiveCurseAura[target.UnitIndex] = aura
-				warlock.ActiveCurseAura.Get(target).Activate(sim)
+func (warlock *Warlock) registerCurseOfElementsSpell() {
+	warlock.CurseOfElements = make([]*core.Spell, 0, CurseOfTheElementsRanks)
+	for rank := 1; rank <= CurseOfTheElementsRanks; rank++ {
+		if CurseOfTheElementsLevel[rank] > int(warlock.Level) {
+			continue
+		}
+		warlock.CurseOfElements = append(warlock.CurseOfElements, warlock.registerCurseDebuff(core.SpellConfig{
+			ActionID:      core.ActionID{SpellID: CurseOfTheElementsSpellId[rank]},
+			Rank:          rank,
+			RequiredLevel: CurseOfTheElementsLevel[rank],
+			ManaCost:      core.ManaCostOptions{FlatCost: CurseOfTheElementsManaCost[rank]},
+		}, warlock.newCurseOfTheElementsAura(rank)))
+	}
+}
+
+// registerCurseDebuff registers an instant, aura-only curse: base is the
+// per-curse part of its config (id, rank, level, cost) and newAura builds the
+// debuff its hit puts on the target, replacing whichever curse was there.
+func (warlock *Warlock) registerCurseDebuff(base core.SpellConfig, newAura func(*core.Unit) *core.Aura) *core.Spell {
+	auras := warlock.NewEnemyAuraArray(newAura)
+
+	base.SpellSchool = core.SpellSchoolShadow
+	base.ProcMask = core.ProcMaskEmpty
+	base.Flags = core.SpellFlagAPL | WarlockFlagAffliction
+	base.Cast = core.CastConfig{DefaultCast: core.Cast{GCD: core.GCDDefault}}
+	base.ThreatMultiplier = 1
+	base.FlatThreatBonus = 156
+	base.RelatedAuras = []core.AuraArray{auras}
+	base.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+		result := spell.CalcOutcome(sim, target, spell.OutcomeMagicHitNoHitCounter)
+		if result.Landed() {
+			aura := auras.Get(target)
+			if activeCurse := warlock.ActiveCurseAura.Get(target); activeCurse != nil && activeCurse != aura {
+				activeCurse.Deactivate(sim)
 			}
-		},
 
-		RelatedAuras: []core.AuraArray{warlock.CurseOfElementsAuras},
-	})
+			warlock.ActiveCurseAura[target.UnitIndex] = aura
+			aura.Activate(sim)
+		}
+	}
+	return warlock.RegisterSpell(base)
 }
 
 func (warlock *Warlock) registerCurseOfShadowSpell() {
