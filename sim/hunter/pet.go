@@ -18,6 +18,7 @@ type HunterPet struct {
 
 	specialAbility *core.Spell
 	focusDump      *core.Spell
+	familyAbility  *core.Spell
 
 	uptimePercent    float64
 	hasOwnerCooldown bool
@@ -132,6 +133,7 @@ func (hp *HunterPet) GetPet() *core.Pet {
 func (hp *HunterPet) Initialize() {
 	hp.specialAbility = hp.NewPetAbility(hp.config.SpecialAbility, true)
 	hp.focusDump = hp.NewPetAbility(hp.config.FocusDump, false)
+	hp.familyAbility = hp.NewPetAbility(hp.config.FamilyAbility, false)
 
 	hp.EnableFocusBar(1, func(sim *core.Simulation) {
 		if hp.GCD.IsReady(sim) {
@@ -168,6 +170,14 @@ func (hp *HunterPet) ExecuteCustomRotation(sim *core.Simulation) {
 			panic(fmt.Sprintf("Cast failed after CanCast() for spell %d", spell.SpellID))
 		}
 		return true
+	}
+
+	if hp.familyAbility != nil && hp.familyAbility.IsReady(sim) {
+		// Pool focus for the ability rather than spending it on the dump.
+		if !tryCast(hp.familyAbility) && hp.GCD.IsReady(sim) {
+			hp.WaitUntil(sim, sim.CurrentTime+time.Millisecond*500)
+		}
+		return
 	}
 
 	if hp.focusDump == nil {
@@ -211,6 +221,9 @@ type PetConfig struct {
 
 	SpecialAbility PetAbilityType
 	FocusDump      PetAbilityType
+	// FamilyAbility is the family's trainable periodic-damage ability,
+	// cast on its cooldown ahead of the focus dump.
+	FamilyAbility PetAbilityType
 
 	Health float64
 	Armor  float64
@@ -358,7 +371,8 @@ var PetConfigs = map[proto.Hunter_Options_PetType]PetConfig{
 		Name:    "Hyena",
 		MobType: proto.MobType_MobTypeBeast,
 
-		FocusDump: Bite,
+		FamilyAbility: TendonRip,
+		FocusDump:     Bite,
 
 		Health: 1.00,
 		Armor:  1.05,
@@ -369,6 +383,7 @@ var PetConfigs = map[proto.Hunter_Options_PetType]PetConfig{
 		MobType: proto.MobType_MobTypeBeast,
 
 		SpecialAbility: Bite,
+		FamilyAbility:  SavageRend,
 		FocusDump:      Claw,
 
 		Health: 0.95,
@@ -404,7 +419,8 @@ var PetConfigs = map[proto.Hunter_Options_PetType]PetConfig{
 		Name:    "Spider",
 		MobType: proto.MobType_MobTypeBeast,
 
-		FocusDump: Bite,
+		FamilyAbility: Web,
+		FocusDump:     Bite,
 
 		Health: 1.00,
 		Armor:  1.00,

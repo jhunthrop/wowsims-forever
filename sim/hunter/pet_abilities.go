@@ -19,6 +19,9 @@ const (
 	FuriousHowl
 	LightningBreath
 	ScorpidPoison
+	SavageRend
+	TendonRip
+	Web
 )
 
 func (hp *HunterPet) NewPetAbility(abilityType PetAbilityType, isPrimary bool) *core.Spell {
@@ -35,6 +38,12 @@ func (hp *HunterPet) NewPetAbility(abilityType PetAbilityType, isPrimary bool) *
 		return hp.newLightningBreath()
 	case ScorpidPoison:
 		return hp.newScorpidPoison()
+	case SavageRend:
+		return hp.newPeriodicAbility(savageRendAbility)
+	case TendonRip:
+		return hp.newPeriodicAbility(tendonRipAbility)
+	case Web:
+		return hp.newPeriodicAbility(webAbility)
 	// case Swipe:
 	// 	return hp.newSwipe()
 	case Unknown:

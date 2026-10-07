@@ -68,3 +68,7 @@ func TestExplosiveTrapDamageMatchesClient(t *testing.T) {
 func TestSummonHawkDamageMatchesClient(t *testing.T) {
 	assertTable(t, clientdamagetest.Direct, "Summon Hawk", SummonHawkSpellId[:], SummonHawkDamage)
 }
+
+func TestLacerateDamageMatchesClient(t *testing.T) {
+	assertTable(t, clientdamagetest.Periodic, "Lacerate", LacerateSpellId[:], LacerateDamage)
+}
