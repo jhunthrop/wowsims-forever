@@ -15,19 +15,14 @@ var ambushLearnLevels = []int{18, 26, 34, 42, 50, 58}
 // ambushSpellID is Ambush's rank -> spell id, index 0 unused.
 var ambushSpellID = [7]int32{0, 8676, 8724, 8725, 11267, 11268, 11269}
 
-// ambushFlatDamageBonus is Ambush's rank -> flat damage bonus, index 0
-// unused; source: 1.60.1.70009 spellconst (each rank's own effect 121
-// amount: 28, 40, 50, 74, 92, 116). All six ranks have a real, per-rank
-// client number.
-var ambushFlatDamageBonus = [7]float64{0, 28, 40, 50, 74, 92, 116}
-
 func (rogue *Rogue) registerAmbushSpell() {
 	rank := core.HighestRankAtLevel(ambushLearnLevels, rogue.Level)
 	if rank == 0 {
 		return
 	}
 
-	flatDamageBonus := ambushFlatDamageBonus[rank]
+	flatDamage := AmbushDamage[rank]
+	casterLevel := int(rogue.Level)
 	spellID := ambushSpellID[rank]
 
 	damageMultiplier := 2.5 * opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])]
@@ -69,6 +64,7 @@ func (rogue *Rogue) registerAmbushSpell() {
 		DamageMultiplier: damageMultiplier,
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			// Consume the Cutthroat bypass before BreakStealth, which
@@ -78,7 +74,7 @@ func (rogue *Rogue) registerAmbushSpell() {
 				rogue.CutthroatAura.Deactivate(sim)
 			}
 			rogue.BreakStealth(sim)
-			baseDamage := (flatDamageBonus + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target)))
+			baseDamage := flatDamage.Roll(sim, casterLevel) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
 

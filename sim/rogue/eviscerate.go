@@ -15,16 +15,12 @@ var eviscerateLearnLevels = []int{1, 8, 16, 24, 32, 40, 48, 56, 60}
 // Rank 9 only exists with AQ content, same as the old code's ternary.
 var eviscerateSpellID = [10]int32{0, 2098, 6760, 6761, 6762, 8623, 8624, 11299, 11300, core.TernaryInt32(core.IncludeAQ, 31016, 11300)}
 
-// eviscerateFlatDamage/ComboDamageBonus/DamageVariance are Eviscerate's
-// rank -> damage terms, index 0 unused. Source: 1.60.1.70009 SpellEffect.csv
-// for ids 2098-31016: the roll is centred on EffectBasePointsF with a width
-// of base * Variance, so flat = base - width/2 and variance (the roll's
-// width) = base * Variance; EffectPointsPerResource is the per-combo-point
-// term. The final slot is rank 9 with AQ content, otherwise rank 8's terms
-// (the id the slot casts).
-var eviscerateFlatDamage = [10]float64{0, 1, 3, 6, 10, 15, 22, 34, 48, core.TernaryFloat64(core.IncludeAQ, 54, 48)}
+// eviscerateComboDamageBonus is Eviscerate's rank -> damage per combo point,
+// index 0 unused: the client's EffectPointsPerResource (1.60.1.70009
+// SpellEffect.csv, ids 2098-31016), which the vendored spellconst does not
+// carry. The roll it adds to is EviscerateDamage. The final slot is rank 9
+// with AQ content, otherwise rank 8's term (the id the slot casts).
 var eviscerateComboDamageBonus = [10]float64{0, 5, 11, 19, 31, 45, 71, 110, 151, core.TernaryFloat64(core.IncludeAQ, 170, 151)}
-var eviscerateDamageVariance = [10]float64{0, 4, 8, 14, 20, 30, 44, 68, 96, core.TernaryFloat64(core.IncludeAQ, 108, 96)}
 
 func (rogue *Rogue) registerEviscerate() {
 	rank := core.HighestRankAtLevel(eviscerateLearnLevels, rogue.Level)
@@ -32,9 +28,9 @@ func (rogue *Rogue) registerEviscerate() {
 		return
 	}
 
-	flatDamage := eviscerateFlatDamage[rank]
+	damage := EviscerateDamage[rank]
+	casterLevel := int(rogue.Level)
 	comboDamageBonus := eviscerateComboDamageBonus[rank]
-	damageVariance := eviscerateDamageVariance[rank]
 	spellID := eviscerateSpellID[rank]
 
 	rogue.Eviscerate = rogue.RegisterSpell(core.SpellConfig{
@@ -69,14 +65,13 @@ func (rogue *Rogue) registerEviscerate() {
 			[]float64{0, 0.02, 0.04, 0.06}[rogue.Talents.Aggression],
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			rogue.BreakStealth(sim)
 
 			comboPoints := rogue.ComboPoints()
-			flatBaseDamage := flatDamage + comboDamageBonus*float64(comboPoints)
-
-			baseDamage := sim.Roll(flatBaseDamage, flatBaseDamage+damageVariance) +
+			baseDamage := damage.Roll(sim, casterLevel) + comboDamageBonus*float64(comboPoints) +
 				0.03*float64(comboPoints)*spell.MeleeAttackPower(target)
 
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)

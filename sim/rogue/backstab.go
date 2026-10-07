@@ -16,20 +16,14 @@ var backstabLearnLevels = []int{4, 12, 20, 28, 36, 44, 52, 60}
 // id depends on whether AQ content is included, same as the old code.
 var backstabSpellID = [9]int32{0, 53, 2589, 2590, 2591, 8721, 11279, 11280, core.TernaryInt32(core.IncludeAQ, 25300, 11281)}
 
-// backstabFlatDamageBonus is Backstab's rank -> flat damage bonus, index 0
-// unused; source: 1.60.1.70009 spellconst (each rank's own effect 121
-// amount: 10, 20, 32, 46, 60, 90, 110, and rank 8's own id carries 140
-// without AQ or 150 with it, same ternary the old code already had). All
-// eight ranks have a real, per-rank client number.
-var backstabFlatDamageBonus = [9]float64{0, 10, 20, 32, 46, 60, 90, 110, core.TernaryFloat64(core.IncludeAQ, 150, 140)}
-
 func (rogue *Rogue) registerBackstabSpell() {
 	rank := core.HighestRankAtLevel(backstabLearnLevels, rogue.Level)
 	if rank == 0 {
 		return
 	}
 
-	flatDamageBonus := backstabFlatDamageBonus[rank]
+	flatDamage := BackstabDamage[rank]
+	casterLevel := int(rogue.Level)
 	spellID := backstabSpellID[rank]
 
 	damageMultiplier := 1.5 * opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])]
@@ -68,10 +62,11 @@ func (rogue *Rogue) registerBackstabSpell() {
 		DamageMultiplier: damageMultiplier,
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			rogue.BreakStealth(sim)
-			baseDamage := (flatDamageBonus + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target)))
+			baseDamage := flatDamage.Roll(sim, casterLevel) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
 			if result.Landed() {

@@ -15,19 +15,14 @@ var garroteLearnLevels = []int{14, 22, 30, 38, 46, 54}
 // garroteSpellID is Garrote's rank -> spell id, index 0 unused.
 var garroteSpellID = [7]int32{0, 703, 8631, 8632, 8633, 11289, 11290}
 
-// garroteBaseDamage is Garrote's rank -> base tick damage, index 0 unused;
-// source: 1.60.1.70009 spellconst (each rank's own periodic-damage effect
-// amount: 24, 34, 47, 59, 74, 92). All six ranks have a real, per-rank
-// client number.
-var garroteBaseDamage = [7]float64{0, 24, 34, 47, 59, 74, 92}
-
 func (rogue *Rogue) registerGarrote() {
 	rank := core.HighestRankAtLevel(garroteLearnLevels, rogue.Level)
 	if rank == 0 {
 		return
 	}
 
-	baseDamage := garroteBaseDamage[rank]
+	tickDamage := GarroteTickDamage[rank]
+	casterLevel := int(rogue.Level)
 	spellID := garroteSpellID[rank]
 
 	rogue.Garrote = rogue.GetOrRegisterSpell(core.SpellConfig{
@@ -58,6 +53,7 @@ func (rogue *Rogue) registerGarrote() {
 
 		DamageMultiplier: opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])],
 		ThreatMultiplier: 1,
+		ClientBaseDamage: tickDamage.Range(casterLevel),
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
@@ -66,7 +62,7 @@ func (rogue *Rogue) registerGarrote() {
 			NumberOfTicks: 6,
 			TickLength:    time.Second * 3,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				damage := baseDamage + dot.Spell.MeleeAttackPower(target)*0.03
+				damage := tickDamage.Roll(sim, casterLevel) + dot.Spell.MeleeAttackPower(target)*0.03
 				dot.Snapshot(target, damage, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {

@@ -28,11 +28,7 @@ func TestRuptureRankAtLevel(t *testing.T) {
 // carried a hand-tuned number: rank 6 was 60 + 8/cp where the client has
 // 35 + 4.73/cp.
 func TestRuptureTickDamageByRank(t *testing.T) {
-	wantBase := [7]float64{0, 5, 7, 11, 16, 22, 35}
 	wantPerComboPoint := [7]float64{0, 1.18, 1.78, 2.37, 2.96, 4.14, 4.73}
-	if ruptureBaseTickDamage != wantBase {
-		t.Errorf("ruptureBaseTickDamage = %v, want %v", ruptureBaseTickDamage, wantBase)
-	}
 	if ruptureComboTickDamage != wantPerComboPoint {
 		t.Errorf("ruptureComboTickDamage = %v, want %v", ruptureComboTickDamage, wantPerComboPoint)
 	}

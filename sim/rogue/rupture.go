@@ -14,11 +14,11 @@ var ruptureLearnLevels = []int{20, 28, 36, 44, 52, 60}
 // ruptureSpellID is Rupture's rank -> spell id, index 0 unused.
 var ruptureSpellID = [7]int32{0, 1943, 8639, 8640, 11273, 11274, 11275}
 
-// ruptureBaseTickDamage/ComboTickDamage are Rupture's rank -> per-tick damage
-// terms, index 0 unused: the client's rank text is "(m1 + b1*cp) * ticks"
-// with m1 = EffectBasePointsF and b1 = EffectPointsPerResource (1.60.1.70009
-// SpellEffect.csv, spell ids 1943-11275).
-var ruptureBaseTickDamage = [7]float64{0, 5, 7, 11, 16, 22, 35}
+// ruptureComboTickDamage is Rupture's rank -> per-combo-point tick term,
+// index 0 unused: the client's rank text is "(m1 + b1*cp) * ticks" with
+// m1 = EffectBasePointsF (RuptureTickDamage) and b1 = EffectPointsPerResource
+// (1.60.1.70009 SpellEffect.csv, spell ids 1943-11275), which the vendored
+// spellconst does not carry.
 var ruptureComboTickDamage = [7]float64{0, 1.18, 1.78, 2.37, 2.96, 4.14, 4.73}
 
 func (rogue *Rogue) registerRupture() {
@@ -58,6 +58,7 @@ func (rogue *Rogue) registerRupture() {
 
 		DamageMultiplier: []float64{1, 1.1, 1.2, 1.3}[rogue.Talents.SerratedBlades],
 		ThreatMultiplier: 1,
+		ClientBaseDamage: RuptureTickDamage[rank].Range(int(rogue.Level)),
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
@@ -104,7 +105,7 @@ func (rogue *Rogue) registerRupture() {
 
 func (rogue *Rogue) RuptureDamage(target *core.Unit, comboPoints int32) float64 {
 	rank := core.HighestRankAtLevel(ruptureLearnLevels, rogue.Level)
-	baseTickDamage := ruptureBaseTickDamage[rank]
+	baseTickDamage := RuptureTickDamage[rank].Center(int(rogue.Level))
 	comboTickDamage := ruptureComboTickDamage[rank]
 
 	return baseTickDamage + comboTickDamage*float64(comboPoints) +

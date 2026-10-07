@@ -15,20 +15,14 @@ var sinisterStrikeLearnLevels = []int{1, 6, 14, 22, 30, 38, 46, 54}
 // unused.
 var sinisterStrikeSpellID = [9]int32{0, 1752, 1757, 1758, 1759, 1760, 8621, 11293, 11294}
 
-// sinisterStrikeFlatDamageBonus is Sinister Strike's rank -> flat damage
-// bonus, index 0 unused; source: 1.60.1.70009 spellconst (each rank's own
-// effect 121 amount: 3, 6, 10, 15, 22, 33, 52, 68). All eight ranks have a
-// real, per-rank client number -- unlike Backstab/Ambush/Garrote's
-// low-rank gaps, nothing here is carried forward from a neighboring rank.
-var sinisterStrikeFlatDamageBonus = [9]float64{0, 3, 6, 10, 15, 22, 33, 52, 68}
-
 func (rogue *Rogue) registerSinisterStrikeSpell() {
 	rank := core.HighestRankAtLevel(sinisterStrikeLearnLevels, rogue.Level)
 	if rank == 0 {
 		return
 	}
 
-	flatDamageBonus := sinisterStrikeFlatDamageBonus[rank]
+	flatDamage := SinisterStrikeDamage[rank]
+	casterLevel := int(rogue.Level)
 	spellID := sinisterStrikeSpellID[rank]
 
 	rogue.SinisterStrike = rogue.RegisterSpell(core.SpellConfig{
@@ -56,11 +50,12 @@ func (rogue *Rogue) registerSinisterStrikeSpell() {
 		DamageMultiplier: []float64{1, 1.02, 1.04, 1.06}[rogue.Talents.Aggression],
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			rogue.BreakStealth(sim)
 
-			baseDamage := flatDamageBonus + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
+			baseDamage := flatDamage.Roll(sim, casterLevel) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
 			if result.Landed() {

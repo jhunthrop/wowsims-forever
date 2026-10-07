@@ -45,7 +45,6 @@ const mutilateRanks = 4
 var mutilateSpellID = [mutilateRanks + 1]int32{0, 1310707, 399956, 1241582, 1241584}
 var mutilateMHSpellID = [mutilateRanks + 1]int32{0, 1310705, 399960, 1241585, 1241586}
 var mutilateOHSpellID = [mutilateRanks + 1]int32{0, 1310706, 399961, 1241588, 1241590}
-var mutilateFlatDamageBonus = [mutilateRanks + 1]float64{0, 23, 33, 48, 67}
 
 // mutilateLearnLevels is core.HighestRankAtLevel's input shape: rank r
 // (1-based) is learned at mutilateLearnLevels[r-1], no rank-0 placeholder
@@ -73,7 +72,8 @@ func (rogue *Rogue) registerMutilateSpell() {
 	if rank == 0 {
 		return
 	}
-	flatDamageBonus := mutilateFlatDamageBonus[rank]
+	flatDamage := MutilateDamage[rank]
+	casterLevel := int(rogue.Level)
 
 	// Opportunity (talent node 105760): "Increases the damage dealt by
 	// your Backstab, Garrote, Ambush, and Mutilate abilities by 5%/10%."
@@ -115,8 +115,9 @@ func (rogue *Rogue) registerMutilateSpell() {
 		ProcMask:    core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeOHSpecial,
 		Flags:       rogue.builderFlags() | SpellFlagColdBlooded,
 
-		RequiredLevel: mutilateLearnLevels[rank-1],
-		Rank:          rank,
+		RequiredLevel:    mutilateLearnLevels[rank-1],
+		Rank:             rank,
+		ClientBaseDamage: flatDamage.Range(casterLevel),
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   mutilateEnergyCost,
@@ -150,8 +151,8 @@ func (rogue *Rogue) registerMutilateSpell() {
 			// penalty (core/attack.go), which does not apply to a
 			// special ability that explicitly swings the off-hand.
 			ap := spell.MeleeAttackPower(target)
-			mhDamage := poisonedMultiplier * (flatDamageBonus + mutilateWeaponDamagePct*rogue.AutoAttacks.MH().CalculateNormalizedWeaponDamage(sim, ap))
-			ohDamage := poisonedMultiplier * (flatDamageBonus + mutilateWeaponDamagePct*rogue.AutoAttacks.OH().CalculateNormalizedWeaponDamage(sim, ap))
+			mhDamage := poisonedMultiplier * (flatDamage.Roll(sim, casterLevel) + mutilateWeaponDamagePct*rogue.AutoAttacks.MH().CalculateNormalizedWeaponDamage(sim, ap))
+			ohDamage := poisonedMultiplier * (flatDamage.Roll(sim, casterLevel) + mutilateWeaponDamagePct*rogue.AutoAttacks.OH().CalculateNormalizedWeaponDamage(sim, ap))
 
 			mhResult := rogue.MutilateMH.CalcAndDealDamage(sim, target, mhDamage, rogue.MutilateMH.OutcomeMeleeWeaponSpecialHitAndCrit)
 			ohResult := rogue.MutilateOH.CalcAndDealDamage(sim, target, ohDamage, rogue.MutilateOH.OutcomeMeleeWeaponSpecialHitAndCrit)
