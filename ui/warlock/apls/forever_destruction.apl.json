@@ -5,8 +5,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 25309,
-            "rank": 8
+            "spellId": 11668,
+            "rank": 7
           }
         }
       },
@@ -26,8 +26,8 @@
             "val": {
               "dotIsActive": {
                 "spellId": {
-                  "spellId": 25311,
-                  "rank": 7
+                  "spellId": 11672,
+                  "rank": 6
                 }
               }
             }
@@ -35,8 +35,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 25311,
-            "rank": 7
+            "spellId": 11672,
+            "rank": 6
           }
         }
       }
@@ -147,8 +147,8 @@
             "lhs": {
               "dotRemainingTime": {
                 "spellId": {
-                  "spellId": 25309,
-                  "rank": 8
+                  "spellId": 11668,
+                  "rank": 7
                 }
               }
             },
@@ -161,8 +161,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 25309,
-            "rank": 8
+            "spellId": 11668,
+            "rank": 7
           }
         }
       }
@@ -173,8 +173,8 @@
         "condition": {
           "dotIsActive": {
             "spellId": {
-              "spellId": 25309,
-              "rank": 8
+              "spellId": 11668,
+              "rank": 7
             }
           }
         },
@@ -225,8 +225,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 25307,
-            "rank": 10
+            "spellId": 11661,
+            "rank": 9
           }
         }
       }

@@ -218,7 +218,7 @@ func TestAspectOfTheHawkChargesManaMatchingSpellconst(t *testing.T) {
 	}{
 		{10, 13165, 20},
 		{58, 14322, 110},
-		{60, 25296, 120},
+		{60, core.TernaryInt32(core.IncludeAQ, 25296, 14322), core.TernaryFloat64(core.IncludeAQ, 120, 110)},
 	}
 	for _, c := range cases {
 		_, built, _ := newBareHunterAtLevel(t, c.level)
@@ -282,9 +282,9 @@ func TestSerpentStingPerTickDamageMatchesSpellconst(t *testing.T) {
 		spellID int32
 		want    float64
 	}{
-		{10, 13549, 6},   // rank 2
-		{34, 13552, 34},  // rank 5
-		{60, 25295, 111}, // rank 9
+		{10, 13549, 6},  // rank 2
+		{34, 13552, 34}, // rank 5
+		{60, core.TernaryInt32(core.IncludeAQ, 25295, 13555), core.TernaryFloat64(core.IncludeAQ, 111, 83)}, // rank 9 (book) or 8 (trainer)
 	}
 	for _, c := range cases {
 		found := false

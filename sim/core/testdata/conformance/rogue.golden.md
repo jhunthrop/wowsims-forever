@@ -75,8 +75,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | CombatDaggersRogue | 50 | Stealth | 0 | 1786 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 40→40 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 50 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatDaggersRogue | 60 | Ambush | 0 | 11269 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 58→58 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 60 | Backstab | 0 | 25300 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 60 | Eviscerate | 0 | 31016 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | 54.00-162.00→54.00-162.00 | 1.000→1.000 | declared, matches |
+| CombatDaggersRogue | 60 | Backstab | 0 | 11281 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | n/a | n/a | n/a |
+| CombatDaggersRogue | 60 | Eviscerate | 0 | 11300 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 56→60 | n/a | mismatch | required_level 56->60 | 48.00-144.00→48.00-144.00 | 1.000→1.000 | declared, matches |
 | CombatDaggersRogue | 60 | Expose Armor | 0 | 11198 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 56→56 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 60 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 60 | Garrote | 0 | 11290 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→54 | 18000→18000 | match |  | 92.00-92.00→92.00-92.00 | 1.200 (convention)→0.000 | declared, matches |
@@ -148,8 +148,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | CombatSwordsRogue | 50 | Stealth | 0 | 1786 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 40→40 | -1→-1 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 50 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatSwordsRogue | 60 | Ambush | 0 | 11269 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 58→58 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 60 | Backstab | 0 | 25300 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 60 | Eviscerate | 0 | 31016 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | 54.00-162.00→54.00-162.00 | 1.000→1.000 | declared, matches |
+| CombatSwordsRogue | 60 | Backstab | 0 | 11281 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 60→60 | n/a | match |  | n/a | n/a | n/a |
+| CombatSwordsRogue | 60 | Eviscerate | 0 | 11300 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 56→60 | n/a | mismatch | required_level 56->60 | 48.00-144.00→48.00-144.00 | 1.000→1.000 | declared, matches |
 | CombatSwordsRogue | 60 | Expose Armor | 0 | 11198 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 56→56 | 30000→30000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 60 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 60 | Garrote | 0 | 11290 | 50.00→50.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 54→54 | 18000→18000 | match |  | 92.00-92.00→92.00-92.00 | 1.200 (convention)→0.000 | declared, matches |
@@ -255,7 +255,6 @@ Active, ranked, levelled class-family spells the client lists on no SkillLineAbi
 | Mind-numbing Poison II (8693) | 38→38 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
 | Instant Poison V (11339) | 52→52 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
 | Mind-numbing Poison III (11399) | 52→52 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
-| Deadly Poison IV (11356) | 54→54 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
 | Occult Poison I (458821) | 54→54 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
 | Occult Poison II (1214171) | 54→54 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |
 | Deadly Poison V (25351) | 60→60 | 1 | n/a | class_spell | 0 | 3000 | 0 | cast time |

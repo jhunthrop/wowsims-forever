@@ -5,8 +5,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 25289,
-            "rank": 7
+            "spellId": 11551,
+            "rank": 6
           }
         }
       },
@@ -54,8 +54,8 @@
             "val": {
               "auraIsActive": {
                 "auraId": {
-                  "spellId": 25289,
-                  "rank": 7
+                  "spellId": 11551,
+                  "rank": 6
                 }
               }
             }
@@ -63,8 +63,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 25289,
-            "rank": 7
+            "spellId": 11551,
+            "rank": 6
           }
         }
       }

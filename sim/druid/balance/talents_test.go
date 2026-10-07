@@ -1,6 +1,7 @@
 package balance
 
 import (
+	"github.com/wowsims/classic/sim/druid"
 	"testing"
 	"time"
 
@@ -160,7 +161,7 @@ func TestNaturesReachAddsHitToBalanceSpells(t *testing.T) {
 
 	base, _, _ := newBalanceDruidSimWithTalents(t, druidTalentsString(t, nil))
 	wrathRank := len(base.Wrath) - 1
-	starfireRank := len(base.Starfire) - 1
+	starfireRank := core.MaxTrainerRank(druid.StarfireRanks)
 	moonfireRank := len(base.Moonfire) - 1
 	baseWrathHit := base.Wrath[wrathRank].BonusHitRating
 	baseStarfireHit := base.Starfire[starfireRank].BonusHitRating
@@ -212,7 +213,7 @@ func TestEclipseDiscountsStarfireCastTimeAfterWrath(t *testing.T) {
 
 	built, sim, _ := newBalanceDruidSimWithTalents(t, druidTalentsString(t, map[int]int{eclipseField: 3}))
 	wrathRank := len(built.Wrath) - 1
-	starfireRank := len(built.Starfire) - 1
+	starfireRank := core.MaxTrainerRank(druid.StarfireRanks)
 	baseCastTime := built.Starfire[starfireRank].DefaultCast.CastTime
 
 	// OnCastComplete (Eclipse's trigger) is invoked from the Spell.Cast

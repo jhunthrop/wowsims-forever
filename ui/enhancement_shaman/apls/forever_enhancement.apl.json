@@ -5,23 +5,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 10497,
+            "spellId": 10442,
             "rank": 4
-          }
-        }
-      },
-      "doAtValue": {
-        "const": {
-          "val": "-4.5s"
-        }
-      }
-    },
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 25361,
-            "rank": 5
           }
         }
       },
@@ -73,8 +58,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 25361,
-            "rank": 5
+            "spellId": 10442,
+            "rank": 4
           }
         }
       }
@@ -101,32 +86,6 @@
           "spellId": {
             "spellId": 10614,
             "rank": 3
-          }
-        }
-      }
-    },
-    {
-      "notes": "Mana Spring Totem restores the shaman's own mana for five minutes; the water slot is otherwise empty.",
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 10497,
-            "rank": 4
-          }
-        },
-        "condition": {
-          "cmp": {
-            "op": "OpLe",
-            "lhs": {
-              "totemRemainingTime": {
-                "totemType": "Water"
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "1.5"
-              }
-            }
           }
         }
       }

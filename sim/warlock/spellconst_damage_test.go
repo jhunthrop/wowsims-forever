@@ -336,7 +336,8 @@ func TestSiphonLifeRank1SnapshotMatchesSpellconst(t *testing.T) {
 // total-over-ticks value (822/6 = 137/tick) instead of spellconst's own
 // flat rank-7 per-tick amount (25311: 73, period_ms 3000 unchanged).
 func TestCorruptionRank7SnapshotMatchesSpellconst(t *testing.T) {
-	const want = 73.0
+	// The book rank 7 (25311) ticks for 73; without IncludeAQ the top rank is 6 (11672) at 57.
+	want := core.TernaryFloat64(core.IncludeAQ, 73.0, 57.0)
 
 	// A hit-table miss would leave the DoT unapplied, so retry with a
 	// fresh sim (new RNG draw) until it lands - the snapshot value
@@ -354,7 +355,7 @@ func TestCorruptionRank7SnapshotMatchesSpellconst(t *testing.T) {
 			continue
 		}
 		if got := dot.SnapshotBaseDamage; got != want {
-			t.Errorf("Corruption rank 7 per-tick snapshot damage = %.2f, want %.2f (spellconst 25311 amount)", got, want)
+			t.Errorf("Corruption rank 7 per-tick snapshot damage = %.2f, want %.2f (spellconst amount)", got, want)
 		}
 		return
 	}

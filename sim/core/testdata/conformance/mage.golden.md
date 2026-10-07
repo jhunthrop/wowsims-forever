@@ -251,7 +251,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 60 | Fireball | 9 | 10149 | 305.00→305.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 48→48 | 8000→8000 | match |  | 270.30-348.90→270.30-348.90 | 1.000→1.000 | declared, matches |
 | Mage | 60 | Fireball | 10 | 10150 | 350.00→350.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 54→54 | 8000→8000 | match |  | 337.23-432.37→337.23-432.37 | 1.000→1.000 | declared, matches |
 | Mage | 60 | Fireball | 11 | 10151 | 395.00→395.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 60→60 | 8000→8000 | match |  | 396.57-505.43→396.57-505.43 | 1.000→1.000 | declared, matches |
-| Mage | 60 | Fireball | 12 | 25306 | 410.00→410.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 60→60 | 8000→8000 | match |  | 424.58-541.42→424.58-541.42 | 1.000→1.000 | declared, matches |
 | Mage | 60 | Flamestrike | 1 | 2120 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | 8000→8000 | match |  | 54.60-71.40→54.60-71.40 | 0.157→0.157 | declared, matches |
 | Mage | 60 | Flamestrike | 2 | 2121 | 330.00→330.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | 8000→8000 | match |  | 99.52-126.48→99.52-126.48 | 0.157→0.157 | declared, matches |
 | Mage | 60 | Flamestrike | 3 | 8422 | 490.00→490.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→8000 | match |  | 158.45-197.55→158.45-197.55 | 0.157→0.157 | declared, matches |
@@ -272,7 +271,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 60 | Frostbolt | 8 | 10179 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 44→44 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) | 243.21-263.19→243.21-263.19 | 0.814→0.814 | declared, matches |
 | Mage | 60 | Frostbolt | 9 | 10180 | 225.00→225.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 50→50 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) | 305.42-331.38→305.42-331.38 | 0.814→0.814 | declared, matches |
 | Mage | 60 | Frostbolt | 10 | 10181 | 260.00→260.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 56→56 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) | 382.44-412.76→382.44-412.76 | 0.814→0.814 | declared, matches |
-| Mage | 60 | Frostbolt | 11 | 25304 | 290.00→290.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) | 457.24-492.76→457.24-492.76 | 0.814→0.814 | declared, matches |
 | Mage | 60 | Frostfire Bolt | 1 | 401502 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 9000→9000 | match |  | 101.93-118.87→101.93-118.87 | 0.814→0.814 | declared, matches |
 | Mage | 60 | Frostfire Bolt | 2 | 1237312 | 285.00→285.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 50→50 | 9000→9000 | match |  | 180.60-210.60→180.60-210.60 | 0.814→0.814 | declared, matches |
 | Mage | 60 | Frostfire Bolt | 3 | 1237313 | 370.00→370.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | 9000→9000 | match |  | 269.60-314.40→269.60-314.40 | 0.814→0.814 | declared, matches |

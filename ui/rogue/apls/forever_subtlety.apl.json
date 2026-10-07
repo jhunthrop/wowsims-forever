@@ -108,8 +108,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 31016,
-            "rank": 9
+            "spellId": 11300,
+            "rank": 8
           }
         },
         "condition": {

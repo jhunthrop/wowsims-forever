@@ -149,7 +149,7 @@ export const BloodPactBuff = withLabel(
 
 export const BlessingOfMight = withLabel(
 	makeTristateIndividualBuffInput({
-		actionId: () => ActionId.fromSpellId(25291),
+		actionId: () => ActionId.fromSpellId(19838),
 		impId: ActionId.fromSpellId(20048),
 		fieldName: 'blessingOfMight',
 		showWhen: player => player.getFaction() === Faction.Alliance,
@@ -207,7 +207,7 @@ export const SpiritBuff = InputHelpers.makeMultiIconInput({
 
 export const BattleShoutBuff = withLabel(
 	makeTristateRaidBuffInput({
-		actionId: () => ActionId.fromSpellId(25289),
+		actionId: () => ActionId.fromSpellId(11551),
 		impId: ActionId.fromSpellId(12861),
 		fieldName: 'battleShout',
 	}),

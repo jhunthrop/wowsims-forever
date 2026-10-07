@@ -22,8 +22,8 @@ func TestInstantPoisonRankAtLevel(t *testing.T) {
 }
 
 func TestDeadlyPoisonRankAtLevel(t *testing.T) {
-	// Level 60 must keep the rank the old SoD-bracket map gave (5, since
-	// IncludeAQ is true in this build; id 25347).
+	// Level 60 must keep the rank the old SoD-bracket map gave (5; the id is
+	// 25347 with IncludeAQ and 11356 without).
 	if got := core.HighestRankAtLevel(deadlyPoisonLearnLevels, 60); got != 5 {
 		t.Errorf("rank at 60 = %d, want 5", got)
 	}

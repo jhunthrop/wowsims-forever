@@ -95,7 +95,7 @@ func TestHeatingUpStacksOnFireCritsAndShortensPyroblast(t *testing.T) {
 	pyroblast := mage.Pyroblast[PyroblastRanks]
 	base := time.Duration(PyroblastCastTime[PyroblastRanks]) * time.Millisecond
 
-	feeders := []*core.Spell{mage.Fireball[FireballRanks], mage.Scorch[ScorchRanks], mage.FireBlast[FireBlastRanks]}
+	feeders := []*core.Spell{mage.Fireball[core.MaxTrainerRank(FireballRanks)], mage.Scorch[ScorchRanks], mage.FireBlast[FireBlastRanks]}
 	wantCast := []time.Duration{base * 75 / 100, base * 50 / 100, base * 25 / 100}
 	for i, feeder := range feeders {
 		if feeder == nil {
@@ -122,7 +122,7 @@ func TestHeatingUpIgnoresNonCritsAndPyroblastItself(t *testing.T) {
 	sim, mage := newHeatingUpTestMage(t)
 	target := sim.Encounter.TargetUnits[0]
 
-	fireball := mage.Fireball[FireballRanks]
+	fireball := mage.Fireball[core.MaxTrainerRank(FireballRanks)]
 	forceOutcome(fireball, false)
 	castAndLand(sim, target, fireball)
 	if got := heatingUpStacks(mage); got != 0 {
@@ -140,7 +140,7 @@ func TestHeatingUpIgnoresNonCritsAndPyroblastItself(t *testing.T) {
 func TestHeatingUpIsSpentByTheNextPyroblast(t *testing.T) {
 	sim, mage := newHeatingUpTestMage(t)
 	target := sim.Encounter.TargetUnits[0]
-	fireball := mage.Fireball[FireballRanks]
+	fireball := mage.Fireball[core.MaxTrainerRank(FireballRanks)]
 	forceOutcome(fireball, true)
 	castAndLand(sim, target, fireball)
 	castAndLand(sim, target, fireball)
@@ -161,7 +161,7 @@ func TestHeatingUpIsSpentByTheNextPyroblast(t *testing.T) {
 func TestHeatingUpExpiresAfterTwentySecondsAndRefreshesOnCrit(t *testing.T) {
 	sim, mage := newHeatingUpTestMage(t)
 	target := sim.Encounter.TargetUnits[0]
-	fireball := mage.Fireball[FireballRanks]
+	fireball := mage.Fireball[core.MaxTrainerRank(FireballRanks)]
 	forceOutcome(fireball, true)
 	castAndLand(sim, target, fireball)
 

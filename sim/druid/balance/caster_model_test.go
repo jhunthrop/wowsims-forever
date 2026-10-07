@@ -1,6 +1,7 @@
 package balance
 
 import (
+	"github.com/wowsims/classic/sim/druid"
 	"math"
 	"testing"
 	"time"
@@ -35,7 +36,7 @@ func TestMoonglowDiscountsEveryBalanceDamageSpellByTheClientsPercent(t *testing.
 		talented, _, _ := newBalanceDruidSimWithTalents(t, druidTalentsString(t, map[int]int{insectSwarmField: 1, moonglowField: rank}))
 		spells := map[string][2]*core.Spell{
 			"Wrath":        {bare.Wrath[8].Spell, talented.Wrath[8].Spell},
-			"Starfire":     {bare.Starfire[7].Spell, talented.Starfire[7].Spell},
+			"Starfire":     {bare.Starfire[core.MaxTrainerRank(druid.StarfireRanks)].Spell, talented.Starfire[core.MaxTrainerRank(druid.StarfireRanks)].Spell},
 			"Moonfire":     {bare.Moonfire[len(bare.Moonfire)-1].Spell, talented.Moonfire[len(talented.Moonfire)-1].Spell},
 			"Insect Swarm": {bare.InsectSwarm[5].Spell, talented.InsectSwarm[5].Spell},
 		}
