@@ -224,13 +224,13 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 	bonusResist := float64(0)
 
 	if raidBuffs.ArcaneBrilliance {
-		character.AddStats(BuffSpellValues[ArcaneIntellect])
+		character.AddStats(ArcaneIntellectStats(int(character.Level)))
 	} else if raidBuffs.ScrollOfIntellect {
 		character.AddStats(BuffSpellValues[ScrollOfIntellect])
 	}
 
 	if raidBuffs.GiftOfTheWild > 0 {
-		updateStats := BuffSpellValues[MarkOfTheWild]
+		updateStats := MarkOfTheWildStats(int(character.Level))
 		if raidBuffs.GiftOfTheWild == proto.TristateEffect_TristateEffectImproved {
 			updateStats = updateStats.Multiply(1.35).Floor()
 		}
@@ -1448,7 +1448,7 @@ func TrueshotAura(unit *Unit) *Aura {
 func BlessingOfMightAura(unit *Unit, impBomPts int32) *Aura {
 	spellID := TernaryInt32(IncludeAQ, 25291, 19838)
 
-	bonusAP := math.Floor(BuffSpellValues[BlessingOfMight][stats.AttackPower] * (1 + 0.04*float64(impBomPts)))
+	bonusAP := math.Floor(BlessingOfMightAttackPower(int(unit.Level)) * (1 + 0.04*float64(impBomPts)))
 
 	aura := MakePermanent(unit.GetOrRegisterAura(Aura{
 		Label:      "Blessing of Might",
