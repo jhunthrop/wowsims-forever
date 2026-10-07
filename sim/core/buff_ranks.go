@@ -6,52 +6,138 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
-// Level-aware values for the three class buffs wowsims models as raid
-// buffs rather than castable spells (Arcane Intellect, Blessing of Might,
-// Mark of the Wild). Each takes the highest rank the character's level
-// can learn. Below level 60 a rank's value is the client's rank amount
-// (SpellEffect, data/builds/1.60.1.70009/raw) scaled so the top rank
-// equals the BuffSpellValues entry exactly: the level-60 value is the
-// engine's established one, lower ranks keep the client's progression.
+// Level-aware values for the class buffs wowsims models as raid buffs
+// rather than castable spells (Arcane Intellect, Blessing of Might, Mark
+// of the Wild) and for Battle Shout. Each takes the highest rank the
+// character's level can learn, and each rank states the client's amount
+// (SpellEffect base points and points-per-level, SpellLevels, in
+// data/builds/<build>/raw): Forever rebalanced these buffs, so the engine's
+// old vanilla AQ-era fixed values are gone. The site's
+// sim/leveling/buff_ranks_client_test.go pins every row below against the
+// client CSVs, so a new build moves that test instead of silently moving a
+// number here.
 
-// buffRank is one learnable rank: the level it is learned at and its
-// client effect amount.
-type buffRank struct {
-	level  int
-	amount float64
+// BuffRank is one learnable rank of a buff spell.
+type BuffRank struct {
+	SpellID int32
+	// Level is the level the rank is learned at.
+	Level int
+	// Amount is the client's base points for the effect.
+	Amount float64
+	// PerLevel is added to Amount for every caster level above Level, up to
+	// MaxLevel (0 means the client states no cap).
+	PerLevel float64
+	MaxLevel int
+	// AhnQiraj marks a book rank a launch character cannot learn: it is
+	// only reachable while IncludeAQ is set.
+	AhnQiraj bool
 }
 
-// buffRanks lists ranks in ascending level order.
-type buffRanks []buffRank
+// At is the effect amount for a caster of the given level, whole points.
+func (rank BuffRank) At(level int) float64 {
+	if rank.MaxLevel > 0 && level > rank.MaxLevel {
+		level = rank.MaxLevel
+	}
+	above := max(level-rank.Level, 0)
+	return math.Floor(rank.Amount + rank.PerLevel*float64(above))
+}
 
-// fraction is the amount of the highest rank learnable at level as a
-// share of the top rank's amount; 0 before the first rank is learned.
-func (ranks buffRanks) fraction(level int) float64 {
-	current := 0.0
+// BuffRanks lists ranks in ascending level order.
+type BuffRanks []BuffRank
+
+// Learned is the highest rank learnable at level; false before the first.
+// Ahn'Qiraj book ranks count only while IncludeAQ is set.
+func (ranks BuffRanks) Learned(level int) (BuffRank, bool) {
+	return ranks.learned(level, IncludeAQ)
+}
+
+func (ranks BuffRanks) learned(level int, includeAQ bool) (BuffRank, bool) {
+	var learned BuffRank
+	found := false
 	for _, rank := range ranks {
-		if rank.level > level {
+		if rank.Level > level {
 			break
 		}
-		current = rank.amount
+		if rank.AhnQiraj && !includeAQ {
+			continue
+		}
+		learned, found = rank, true
 	}
-	return current / ranks[len(ranks)-1].amount
+	return learned, found
 }
 
-// scaleAmount scales a level-60 value by the rank fraction, whole points.
-func (ranks buffRanks) scaleAmount(topValue float64, level int) float64 {
-	return math.Round(topValue * ranks.fraction(level))
+// At is the amount of the highest rank learnable at level; 0 before the
+// first rank is learned.
+func (ranks BuffRanks) At(level int) float64 {
+	return ranks.at(level, IncludeAQ)
 }
 
-// Client rank tables, spells 1459..10157 (Arcane Intellect), 19740..25291
-// (Blessing of Might), 1126..9885 (Mark of the Wild); Mark of the Wild's
-// stat and resistance effects only exist from the ranks shown.
+func (ranks BuffRanks) at(level int, includeAQ bool) float64 {
+	rank, ok := ranks.learned(level, includeAQ)
+	if !ok {
+		return 0
+	}
+	return rank.At(level)
+}
+
+// Client rank tables. Mark of the Wild's stat and resistance effects exist
+// only from the ranks that state them (earlier ranks carry Amount 0).
 var (
-	arcaneIntellectRanks = buffRanks{{1, 2}, {14, 7}, {28, 15}, {42, 22}, {56, 31}}
-	blessingOfMightRanks = buffRanks{{4, 14}, {12, 25}, {22, 40}, {32, 61}, {42, 83}, {52, 112}, {60, 133}}
+	ArcaneIntellectRanks = BuffRanks{
+		{SpellID: 1459, Level: 1, Amount: 2},
+		{SpellID: 1460, Level: 14, Amount: 7},
+		{SpellID: 1461, Level: 28, Amount: 15},
+		{SpellID: 10156, Level: 42, Amount: 22},
+		{SpellID: 10157, Level: 56, Amount: 31},
+	}
 
-	markOfTheWildArmorRanks  = buffRanks{{1, 34}, {10, 88}, {20, 142}, {30, 203}, {40, 263}, {50, 324}, {60, 385}}
-	markOfTheWildStatRanks   = buffRanks{{10, 3}, {20, 5}, {30, 8}, {40, 11}, {50, 14}, {60, 16}}
-	markOfTheWildResistRanks = buffRanks{{30, 7}, {40, 14}, {50, 20}, {60, 27}}
+	BlessingOfMightRanks = BuffRanks{
+		{SpellID: 19740, Level: 4, Amount: 14},
+		{SpellID: 19834, Level: 12, Amount: 25},
+		{SpellID: 19835, Level: 22, Amount: 40},
+		{SpellID: 19836, Level: 32, Amount: 61},
+		{SpellID: 19837, Level: 42, Amount: 83},
+		{SpellID: 19838, Level: 52, Amount: 112},
+		{SpellID: 25291, Level: 60, Amount: 133, AhnQiraj: true},
+	}
+
+	MarkOfTheWildArmorRanks = BuffRanks{
+		{SpellID: 1126, Level: 1, Amount: 34},
+		{SpellID: 5232, Level: 10, Amount: 88},
+		{SpellID: 6756, Level: 20, Amount: 142},
+		{SpellID: 5234, Level: 30, Amount: 203},
+		{SpellID: 8907, Level: 40, Amount: 263},
+		{SpellID: 9884, Level: 50, Amount: 324},
+		{SpellID: 9885, Level: 60, Amount: 385},
+	}
+	MarkOfTheWildStatRanks = BuffRanks{
+		{SpellID: 1126, Level: 1, Amount: 0},
+		{SpellID: 5232, Level: 10, Amount: 3},
+		{SpellID: 6756, Level: 20, Amount: 5},
+		{SpellID: 5234, Level: 30, Amount: 8},
+		{SpellID: 8907, Level: 40, Amount: 11},
+		{SpellID: 9884, Level: 50, Amount: 14},
+		{SpellID: 9885, Level: 60, Amount: 16},
+	}
+	MarkOfTheWildResistRanks = BuffRanks{
+		{SpellID: 1126, Level: 1, Amount: 0},
+		{SpellID: 5232, Level: 10, Amount: 0},
+		{SpellID: 6756, Level: 20, Amount: 0},
+		{SpellID: 5234, Level: 30, Amount: 7},
+		{SpellID: 8907, Level: 40, Amount: 14},
+		{SpellID: 9884, Level: 50, Amount: 20},
+		{SpellID: 9885, Level: 60, Amount: 27},
+	}
+
+	BattleShoutRankTable = BuffRanks{
+		{SpellID: 6673, Level: 1, Amount: 9, PerLevel: 0.3, MaxLevel: 11},
+		{SpellID: 5242, Level: 12, Amount: 21, PerLevel: 0.3, MaxLevel: 21},
+		{SpellID: 6192, Level: 22, Amount: 33, PerLevel: 0.3, MaxLevel: 31},
+		{SpellID: 11549, Level: 32, Amount: 51, PerLevel: 0.6, MaxLevel: 41},
+		{SpellID: 11550, Level: 42, Amount: 78, PerLevel: 0.6, MaxLevel: 51},
+		{SpellID: 11551, Level: 52, Amount: 111, PerLevel: 0.6, MaxLevel: 61},
+		{SpellID: 25289, Level: 60, Amount: 139, PerLevel: 0.6, MaxLevel: 61, AhnQiraj: true},
+	}
 )
 
 var markOfTheWildAttributes = []stats.Stat{
@@ -65,27 +151,31 @@ var markOfTheWildResistances = []stats.Stat{
 
 // ArcaneIntellectStats is the Arcane Intellect bonus at a character level.
 func ArcaneIntellectStats(level int) stats.Stats {
-	top := BuffSpellValues[ArcaneIntellect]
-	return stats.Stats{stats.Intellect: arcaneIntellectRanks.scaleAmount(top[stats.Intellect], level)}
+	return stats.Stats{stats.Intellect: ArcaneIntellectRanks.At(level)}
 }
 
 // BlessingOfMightAttackPower is the Blessing of Might attack power at a
 // character level, before Improved Blessing of Might.
 func BlessingOfMightAttackPower(level int) float64 {
-	return blessingOfMightRanks.scaleAmount(BuffSpellValues[BlessingOfMight][stats.AttackPower], level)
+	return BlessingOfMightRanks.At(level)
+}
+
+// BattleShoutAttackPower is the Battle Shout attack power at a character
+// level, before Improved Battle Shout.
+func BattleShoutAttackPower(level int) float64 {
+	return BattleShoutRankTable.At(level)
 }
 
 // MarkOfTheWildStats is the Mark of the Wild bonus at a character level,
 // before Improved Mark of the Wild.
 func MarkOfTheWildStats(level int) stats.Stats {
-	top := BuffSpellValues[MarkOfTheWild]
 	result := stats.Stats{}
-	result[stats.BonusArmor] = markOfTheWildArmorRanks.scaleAmount(top[stats.BonusArmor], level)
+	result[stats.BonusArmor] = MarkOfTheWildArmorRanks.At(level)
 	for _, stat := range markOfTheWildAttributes {
-		result[stat] = markOfTheWildStatRanks.scaleAmount(top[stat], level)
+		result[stat] = MarkOfTheWildStatRanks.At(level)
 	}
 	for _, stat := range markOfTheWildResistances {
-		result[stat] = markOfTheWildResistRanks.scaleAmount(top[stat], level)
+		result[stat] = MarkOfTheWildResistRanks.At(level)
 	}
 	return result
 }
