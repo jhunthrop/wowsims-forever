@@ -124,6 +124,47 @@
       }
     },
     {
+      "notes": "Pyroblast only when Heating Up has stacked three times: three Fire crits cut the 6 second cast to 1.5 seconds, and the cast spends the buff. Never at the full 6 seconds or a partial discount, which measured as no gain or a loss. The aura-is-known guard keeps the line off for a build without the talent, where the stack check alone would read as always true and Pyroblast would be spammed.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 400625
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "auraNumStacks": {
+                      "auraId": {
+                        "spellId": 400625
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 18809,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
       "notes": "Fire Blast on cooldown as a free extra nuke that does not compete for Scorch or Fireball casts.",
       "action": {
         "castSpell": {
