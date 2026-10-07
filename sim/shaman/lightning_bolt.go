@@ -9,8 +9,18 @@ import (
 const LightningBoltRanks = 10
 
 var LightningBoltSpellId = [LightningBoltRanks + 1]int32{0, 403, 529, 548, 915, 943, 6041, 10391, 10392, 15207, 15208}
-var LightningBoltBaseDamage = [LightningBoltRanks + 1][]float64{{0}, {15, 17}, {28, 33}, {48, 57}, {88, 100}, {131, 149}, {179, 202}, {230, 259}, {145, 163}, {347, 389}, {428, 477}}
-var LightningBoltSpellCoef = [LightningBoltRanks + 1]float64{0, .1233, .314, .554, .857, .857, .857, .857, .857, .857, .857}
+
+// LightningBoltBaseDamage and LightningBoltSpellCoef are spellconst/
+// shaman.json's own per-rank "amount" and "sp_coefficient" for ids 403
+// through 15208: one flat scalar per rank, not Classic's min-max roll,
+// and a coefficient of cast time / 3.5 with no downrank penalty (rank 10
+// is 196 at 0.714; the Classic roll it replaced was 428-477 at 0.857).
+// The client states no spread, so none is rolled - the same reading
+// sim/warlock/shadowbolt.go takes for Shadow Bolt. sim/shaman/
+// spellconst_damage_test.go checks every rank against the vendored client
+// file.
+var LightningBoltBaseDamage = [LightningBoltRanks + 1]float64{0, 14, 29, 45, 56, 72, 111, 147, 162, 178, 196}
+var LightningBoltSpellCoef = [LightningBoltRanks + 1]float64{0, .429, .571, .714, .714, .714, .714, .714, .714, .714, .714}
 var LightningBoltCastTime = [LightningBoltRanks + 1]int32{0, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500}
 var LightningBoltManaCost = [LightningBoltRanks + 1]float64{0, 15, 30, 45, 60, 85, 110, 135, 160, 190, 220}
 var LightningBoltLevel = [LightningBoltRanks + 1]int{0, 1, 8, 14, 20, 26, 32, 38, 44, 50, 56}
@@ -29,8 +39,7 @@ func (shaman *Shaman) registerLightningBoltSpell() {
 
 func (shaman *Shaman) newLightningBoltSpellConfig(rank int) core.SpellConfig {
 	spellId := LightningBoltSpellId[rank]
-	baseDamageLow := LightningBoltBaseDamage[rank][0]
-	baseDamageHigh := LightningBoltBaseDamage[rank][1]
+	baseDamage := LightningBoltBaseDamage[rank]
 	spellCoeff := LightningBoltSpellCoef[rank]
 	castTime := LightningBoltCastTime[rank]
 	manaCost := LightningBoltManaCost[rank]
@@ -47,24 +56,22 @@ func (shaman *Shaman) newLightningBoltSpellConfig(rank int) core.SpellConfig {
 	spell.Rank = rank
 	spell.BonusCoefficient = spellCoeff
 
-	spell.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-		baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
+	hit := func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 		result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
-
 		spell.WaitTravelTime(sim, func(sim *core.Simulation) {
 			spell.DealDamage(sim, result)
 		})
+	}
+
+	spell.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+		hit(sim, target, spell)
 
 		// Lightning Overload (talents.go): "a second, similar spell ...
 		// at no additional cost that causes half damage", through this
 		// same spell object so every multiplier the primary hit already
 		// has applies identically.
 		if shaman.rollLightningOverload(sim) {
-			overloadDamage := sim.Roll(baseDamageLow, baseDamageHigh) * 0.5
-			overloadResult := spell.CalcDamage(sim, target, overloadDamage, spell.OutcomeMagicHitAndCrit)
-			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
-				spell.DealDamage(sim, overloadResult)
-			})
+			shaman.AtLightningOverloadScale(spell, func() { hit(sim, target, spell) })
 		}
 	}
 

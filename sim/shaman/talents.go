@@ -119,7 +119,11 @@ func (shaman *Shaman) applyConcussion() {
 	}
 
 	additiveMultiplier := 0.01 * float64(shaman.Talents.Concussion)
-	affectedSpellCodes := []int32{SpellCode_ShamanLightningBolt, SpellCode_ShamanChainLightning, SpellCode_ShamanEarthShock, SpellCode_ShamanFlameShock, SpellCode_ShamanFrostShock}
+	// The client's Concussion text and class mask (spell 16035) name
+	// Lightning Bolt, Chain Lightning and Earth Shock only; Flame Shock
+	// and Frost Shock sat in this list from the Classic tree and drew a
+	// bonus they do not have.
+	affectedSpellCodes := []int32{SpellCode_ShamanLightningBolt, SpellCode_ShamanChainLightning, SpellCode_ShamanEarthShock}
 
 	shaman.OnSpellRegistered(func(spell *core.Spell) {
 		if slices.Contains(affectedSpellCodes, spell.SpellCode) {
@@ -208,7 +212,23 @@ func (shaman *Shaman) applyElementalDevastation() {
 
 	spellID := []int32{0, 30165, 29177, 29178}[rankIndex(shaman.Talents.ElementalDevastation, 4)]
 	critBonus := 3.0 * float64(shaman.Talents.ElementalDevastation) * core.CritRatingPerCritChance
-	procAura := shaman.NewTemporaryStatsAura("Elemental Devastation Proc", core.ActionID{SpellID: spellID}, stats.Stats{stats.Crit: critBonus}, time.Second*10)
+	// The client's text and effect (spell 30165, apply aura 52, melee crit)
+	// grant MELEE crit chance only. Forever's Crit stat is unified across
+	// spell, melee and ranged, so the stat bonus alone would also raise
+	// the shaman's own spell crit - the bonus an Elemental build was being
+	// credited for - and the proc takes the same amount back off every
+	// spell school while it is up.
+	procAura := shaman.NewTemporaryStatsAuraWrapped("Elemental Devastation Proc", core.ActionID{SpellID: spellID}, stats.Stats{stats.Crit: critBonus}, time.Second*10, func(aura *core.Aura) {
+		gainStat, loseStat := aura.OnGain, aura.OnExpire
+		aura.OnGain = func(aura *core.Aura, sim *core.Simulation) {
+			gainStat(aura, sim)
+			shaman.addSpellSchoolCrit(-critBonus)
+		}
+		aura.OnExpire = func(aura *core.Aura, sim *core.Simulation) {
+			loseStat(aura, sim)
+			shaman.addSpellSchoolCrit(critBonus)
+		}
+	})
 
 	shaman.RegisterAura(core.Aura{
 		Label:    "Elemental Devastation",
@@ -222,6 +242,13 @@ func (shaman *Shaman) applyElementalDevastation() {
 			}
 		},
 	})
+}
+
+// addSpellSchoolCrit adds critRating to every magic school's crit bonus
+// (the per-school term SpellCritChance reads on top of the unified Crit
+// stat), leaving melee and ranged crit alone.
+func (shaman *Shaman) addSpellSchoolCrit(critRating float64) {
+	shaman.PseudoStats.SchoolBonusCritChance.AddToMagicSchools(critRating)
 }
 
 func (shaman *Shaman) applyImprovedFireTotems() {
@@ -246,6 +273,15 @@ func (shaman *Shaman) applyImprovedFireTotems() {
 	*/
 }
 
+const (
+	elementalFuryCritDamageBonusPerRank = 0.2
+	elementalFuryMaxRank                = 5
+)
+
+func clampRank(rank int32, maxRank int32) int32 {
+	return min(max(rank, 0), maxRank)
+}
+
 func (shaman *Shaman) applyElementalFury() {
 	// FOREVER: Elemental Fury has ranks in the client's trees, so the field
 	// is an int32 now rather than a bool.
@@ -253,9 +289,14 @@ func (shaman *Shaman) applyElementalFury() {
 		return
 	}
 
+	// "Increases the critical strike damage bonus ... by 20%" per rank, five
+	// ranks, so +100% only at 5/5; the Classic one-rank +100% it replaced
+	// gave every rank the full bonus.
+	critDamageBonus := elementalFuryCritDamageBonusPerRank * float64(clampRank(shaman.Talents.ElementalFury, elementalFuryMaxRank))
+
 	shaman.OnSpellRegistered(func(spell *core.Spell) {
 		if (spell.Flags.Matches(SpellFlagShaman) || spell.Flags.Matches(SpellFlagTotem)) && spell.DefenseType == core.DefenseTypeMagic {
-			spell.CritDamageBonus += 1
+			spell.CritDamageBonus += critDamageBonus
 		}
 	})
 }
@@ -624,6 +665,24 @@ func (shaman *Shaman) applyEyeOfTheStorm() {
 // tracked separately from the damage the sim reports) and is not
 // modeled.
 var lightningOverloadChance = [4]float64{0, 0.03, 0.07, 0.10}
+
+// lightningOverloadDamageScale is the whole second hit's share of the
+// first: the client's overload spells (408477 for Lightning Bolt rank 10,
+// 408484 for Chain Lightning rank 4) carry half the primary's amount AND
+// half its spell-power coefficient (98 at 0.357 against 196 at 0.714), so
+// halving only the base damage, as the first version did, let the
+// overload keep the full spell-power share.
+const lightningOverloadDamageScale = 0.5
+
+// AtLightningOverloadScale runs hit with spell's damage multiplier cut to
+// the overload's share, then restores it. Exported so the elemental
+// package's tests can check the scale without forcing the proc.
+func (shaman *Shaman) AtLightningOverloadScale(spell *core.Spell, hit func()) {
+	enteringMultiplier := spell.DamageMultiplier
+	spell.DamageMultiplier *= lightningOverloadDamageScale
+	hit()
+	spell.DamageMultiplier = enteringMultiplier
+}
 
 func (shaman *Shaman) rollLightningOverload(sim *core.Simulation) bool {
 	if shaman.Talents.LightningOverload == 0 {
