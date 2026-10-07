@@ -117,15 +117,14 @@
       }
     },
     {
-      "notes": "Bane of Agony ramps up over its duration, so it is refreshed the moment it drops.",
+      "notes": "Bane of Doom is the one curse kept up: it deals its whole damage when the minute is out, and recasting it as it fires beats the Bane of Agony it replaced once the client's own numbers (1742 at coefficient 4.0) are in the engine. Curse of the Elements and Bane of Agony both measured lower in the rotation search (2026-10-07 review).",
       "action": {
         "condition": {
           "not": {
             "val": {
               "dotIsActive": {
                 "spellId": {
-                  "spellId": 11713,
-                  "rank": 6
+                  "spellId": 603
                 }
               }
             }
@@ -133,8 +132,7 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 11713,
-            "rank": 6
+            "spellId": 603
           }
         }
       }
