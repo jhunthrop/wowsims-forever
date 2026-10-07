@@ -38,6 +38,8 @@ func (druid *Druid) registerRavageSpell() {
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOmen | SpellFlagBuilder,
 
+		RequiredLevel: ravageLearnLevels[rank-1],
+
 		EnergyCost: core.EnergyCostOptions{
 			// Every client rank of Ravage costs 60 energy; source:
 			// 1.60.1.70009 spellconst/druid.json.

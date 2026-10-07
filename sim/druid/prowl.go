@@ -1,6 +1,8 @@
 package druid
 
 import (
+	"time"
+
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -43,11 +45,21 @@ func (druid *Druid) registerProwlSpell() {
 		ActionID: core.ActionID{SpellID: prowlSpellID[rank]},
 		Flags:    core.SpellFlagAPL,
 
+		RequiredLevel: prowlLearnLevels[rank-1],
+
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD: 0,
 			},
 			IgnoreHaste: true,
+			// Prowl's cooldown_ms column is 0 but category_cooldown_ms
+			// is 10000 on every rank (1.60.1.70009 spellconst/
+			// druid.json ids 5215/6783/9913); the engine previously had
+			// no CD at all configured.
+			CD: core.Cooldown{
+				Timer:    druid.NewTimer(),
+				Duration: time.Second * 10,
+			},
 		},
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 			return sim.CurrentTime < 0 && !druid.IsProwling()

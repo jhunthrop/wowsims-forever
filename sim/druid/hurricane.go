@@ -39,13 +39,13 @@ func (druid *Druid) registerHurricaneSpell() {
 			ManaCost: core.ManaCostOptions{
 				FlatCost: rank.manaCost,
 			},
+			// Hurricane carries no cooldown in 1.60.1.70009 spellconst/
+			// druid.json (cooldown_ms and category_cooldown_ms are both
+			// 0 on every id for this name); the 60s CD below was a
+			// stale pre-Forever value and has been removed.
 			Cast: core.CastConfig{
 				DefaultCast: core.Cast{
 					GCD: core.GCDDefault,
-				},
-				CD: core.Cooldown{
-					Timer:    druid.NewTimer(),
-					Duration: time.Second * 60,
 				},
 			},
 
