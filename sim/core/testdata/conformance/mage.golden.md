@@ -150,6 +150,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 40 | Frostbolt | 5 | 8406 | 100.00→100.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 26→26 | 7000→0 | mismatch | duration_ms 7000->0 (no aura registered) | 96.41-105.59→96.41-105.59 | 0.814→0.814 | declared, matches |
 | Mage | 40 | Frostbolt | 6 | 8407 | 130.00→130.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 134.61-146.99→134.61-146.99 | 0.814→0.814 | declared, matches |
 | Mage | 40 | Frostbolt | 7 | 8408 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 38→38 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 177.19-192.81→177.19-192.81 | 0.814→0.814 | declared, matches |
+| Mage | 40 | Frostfire Bolt | 1 | 401502 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 9000→9000 | match |  | 92.33-107.67→92.33-107.67 | 0.814→0.814 | declared, matches |
 | Mage | 40 | Scorch | 1 | 2948 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 37.91-46.49→37.91-46.49 | 0.429→0.429 | declared, matches |
 | Mage | 40 | Scorch | 2 | 8444 | 65.00→65.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 53.45-64.55→53.45-64.55 | 0.429→0.429 | declared, matches |
 | Mage | 40 | Scorch | 3 | 8445 | 80.00→80.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 66.36-79.64→66.36-79.64 | 0.429→0.429 | declared, matches |
@@ -203,6 +204,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 50 | Frostbolt | 7 | 8408 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 38→38 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 181.03-196.97→181.03-196.97 | 0.814→0.814 | declared, matches |
 | Mage | 50 | Frostbolt | 8 | 10179 | 195.00→195.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 44→44 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) | 243.21-263.19→243.21-263.19 | 0.814→0.814 | declared, matches |
 | Mage | 50 | Frostbolt | 9 | 10180 | 225.00→225.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 50→50 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) | 295.45-320.55→295.45-320.55 | 0.814→0.814 | declared, matches |
+| Mage | 50 | Frostfire Bolt | 1 | 401502 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 9000→9000 | match |  | 101.93-118.87→101.93-118.87 | 0.814→0.814 | declared, matches |
+| Mage | 50 | Frostfire Bolt | 2 | 1237312 | 285.00→285.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 50→50 | 9000→9000 | match |  | 168.04-195.96→168.04-195.96 | 0.814→0.814 | declared, matches |
 | Mage | 50 | Scorch | 1 | 2948 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 37.91-46.49→37.91-46.49 | 0.429→0.429 | declared, matches |
 | Mage | 50 | Scorch | 2 | 8444 | 65.00→65.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 53.45-64.55→53.45-64.55 | 0.429→0.429 | declared, matches |
 | Mage | 50 | Scorch | 3 | 8445 | 80.00→80.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 66.36-79.64→66.36-79.64 | 0.429→0.429 | declared, matches |
@@ -270,6 +273,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 60 | Frostbolt | 9 | 10180 | 225.00→225.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 50→50 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) | 305.42-331.38→305.42-331.38 | 0.814→0.814 | declared, matches |
 | Mage | 60 | Frostbolt | 10 | 10181 | 260.00→260.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 56→56 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) | 382.44-412.76→382.44-412.76 | 0.814→0.814 | declared, matches |
 | Mage | 60 | Frostbolt | 11 | 25304 | 290.00→290.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | 9000→0 | mismatch | duration_ms 9000->0 (no aura registered) | 457.24-492.76→457.24-492.76 | 0.814→0.814 | declared, matches |
+| Mage | 60 | Frostfire Bolt | 1 | 401502 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | 9000→9000 | match |  | 101.93-118.87→101.93-118.87 | 0.814→0.814 | declared, matches |
+| Mage | 60 | Frostfire Bolt | 2 | 1237312 | 285.00→285.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 50→50 | 9000→9000 | match |  | 180.60-210.60→180.60-210.60 | 0.814→0.814 | declared, matches |
+| Mage | 60 | Frostfire Bolt | 3 | 1237313 | 370.00→370.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | 9000→9000 | match |  | 269.60-314.40→269.60-314.40 | 0.814→0.814 | declared, matches |
 | Mage | 60 | Scorch | 1 | 2948 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 37.91-46.49→37.91-46.49 | 0.429→0.429 | declared, matches |
 | Mage | 60 | Scorch | 2 | 8444 | 65.00→65.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 53.45-64.55→53.45-64.55 | 0.429→0.429 | declared, matches |
 | Mage | 60 | Scorch | 3 | 8445 | 80.00→80.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 66.36-79.64→66.36-79.64 | 0.429→0.429 | declared, matches |
@@ -396,7 +402,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | Mage (Pyroblast talent) | 60 | Pyroblast | 8 | 18809 | 440.00→440.00 | mana→mana | 0→0 | 6000→6000 | 1500→1500 | 60→60 | 12000→12000 | match |  | 519.84-646.16→519.84-646.16 | 1.000→1.000 | declared, matches |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 38 of the class's 58 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 37 of the class's 58 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
@@ -425,7 +431,6 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Teleport: Thunder Bluff (3566) | 30→30 | 1 | Arcane | skill_line_ability | 120 mana | 10000 | 0 | power cost, cast time |
 | Mage Armor (6117) | 34→58 | 3 | Arcane | skill_line_ability | 490 mana | 0 | 0 | power cost |
 | Conjure Mana Jade (3552) | 38→38 | 1 | Arcane | skill_line_ability | 800 mana | 3000 | 0 | power cost, cast time |
-| Frostfire Bolt (401502) | 40→60 | 3 | Fire | skill_line_ability | 370 mana | 3000 | 0 | power cost, cast time |
 | Portal: Ironforge (11416) | 40→40 | 1 | Arcane | skill_line_ability | 850 mana | 10000 | 60000 | power cost, cast time, cooldown |
 | Portal: Orgrimmar (11417) | 40→40 | 1 | Arcane | skill_line_ability | 850 mana | 10000 | 60000 | power cost, cast time, cooldown |
 | Portal: Stormwind (10059) | 40→40 | 1 | Arcane | skill_line_ability | 850 mana | 10000 | 60000 | power cost, cast time, cooldown |

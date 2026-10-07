@@ -537,7 +537,7 @@ Per spec-and-rank row at level 60 whose client spell has a school-damage or peri
 | Class | Declared | Matching | Differing | Not declared | n/a |
 |---|---|---|---|---|---|
 | Hunter | 11 | 11 | 0 | 0 | 27 |
-| Mage | 77 | 77 | 0 | 0 | 24 |
+| Mage | 80 | 80 | 0 | 0 | 24 |
 | Warlock | 102 | 102 | 0 | 2 | 55 |
 | Paladin | 43 | 43 | 0 | 16 | 83 |
 | Warrior | 12 | 12 | 0 | 0 | 38 |
@@ -545,7 +545,7 @@ Per spec-and-rank row at level 60 whose client spell has a school-damage or peri
 | Priest | 43 | 43 | 0 | 0 | 9 |
 | Shaman | 123 | 123 | 0 | 0 | 160 |
 | Rogue | 6 | 6 | 0 | 0 | 25 |
-| **Total** | 478 | 478 | 0 | 18 | 446 |
+| **Total** | 481 | 481 | 0 | 18 | 446 |
 
 <!-- damage-summary:end -->
 
@@ -558,7 +558,7 @@ Per class, the active trainables (power cost, cast time or cooldown; pipeline.tr
 | Class | Active trainables | Not registered |
 |---|---|---|
 | Hunter | 49 | 31 |
-| Mage | 58 | 38 |
+| Mage | 58 | 37 |
 | Warlock | 47 | 25 |
 | Paladin | 46 | 34 |
 | Warrior | 40 | 11 |
@@ -566,6 +566,6 @@ Per class, the active trainables (power cost, cast time or cooldown; pipeline.tr
 | Priest | 53 | 45 |
 | Shaman | 54 | 34 |
 | Rogue | 27 | 12 |
-| **Total** | 428 | 265 |
+| **Total** | 428 | 264 |
 
 <!-- trainables-summary:end -->
