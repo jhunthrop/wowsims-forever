@@ -574,6 +574,9 @@ func (warrior *Warrior) applyDualWieldSpecialization() {
 
 	multiplier := 1 + 0.05*float64(points)
 	bonusHit := core.HitRatingPerHitChance * 2 * float64(points)
+	// "off-hand Rage generation by 20%" a point (build 1.60.1.70009 rank
+	// text): the third clause of the talent, unmodeled until 2026-10-07.
+	warrior.AddOffHandDamageDealtRageMultiplier(1 + 0.2*float64(points))
 	warrior.OnSpellRegistered(func(spell *core.Spell) {
 		if !spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
 			return

@@ -44,9 +44,14 @@ func (hunter *Hunter) registerLaceratingStrikesDot() {
 			},
 			NumberOfTicks: laceratingStrikesTicks,
 			TickLength:    laceratingStrikesTickLength,
+			// Forever's 24 September 2026 beta notes: "Lacerating
+			// Strikes: can now land critical hits." Each tick rolls the
+			// hunter's melee crit, the same per-tick physical roll the
+			// engine's other critting bleeds use.
+			CanCrit: true,
 
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
+				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTickPhysicalCrit)
 			},
 		},
 

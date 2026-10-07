@@ -18,6 +18,11 @@ type rageBar struct {
 
 	damageDealtMultiplier float64 // Multiplier for rage generation from damage dealt
 	damageTakenMultiplier float64 // Multiplier for rage generation from damage taken
+	// offHandDamageDealtMultiplier scales rage from off-hand auto-attacks
+	// only, on top of damageDealtMultiplier: Forever's Dual Wield
+	// Specialization "increases ... off-hand Rage generation by 20%" a
+	// point (build 1.60.1.70009 rank text). 1 when nothing has raised it.
+	offHandDamageDealtMultiplier float64
 
 	flatDamageDealtBonusRage float64
 	flatDamageTakenBonusRage float64
@@ -91,6 +96,9 @@ func (unit *Unit) EnableRageBar(options RageBarOptions) {
 
 			generatedRage := damage * 7.5 / rageConversion
 			generatedRage *= unit.rageBar.damageDealtMultiplier
+			if spell.ProcMask == ProcMaskMeleeOHAuto {
+				generatedRage *= unit.rageBar.offHandDamageDealtMultiplier
+			}
 			generatedRage += unit.rageBar.flatDamageDealtBonusRage
 
 			var metrics *ResourceMetrics
@@ -123,11 +131,12 @@ func (unit *Unit) EnableRageBar(options RageBarOptions) {
 	})
 
 	unit.rageBar = rageBar{
-		unit:                  unit,
-		damageDealtMultiplier: options.DamageDealtMultiplier,
-		damageTakenMultiplier: options.DamageTakenMultiplier,
-		startingRage:          max(0, min(options.StartingRage, MaxRage)),
-		RageRefundMetrics:     unit.NewRageMetrics(ActionID{OtherID: proto.OtherAction_OtherActionRefund}),
+		unit:                         unit,
+		damageDealtMultiplier:        options.DamageDealtMultiplier,
+		damageTakenMultiplier:        options.DamageTakenMultiplier,
+		offHandDamageDealtMultiplier: 1,
+		startingRage:                 max(0, min(options.StartingRage, MaxRage)),
+		RageRefundMetrics:            unit.NewRageMetrics(ActionID{OtherID: proto.OtherAction_OtherActionRefund}),
 	}
 }
 
@@ -141,6 +150,12 @@ func (unit *Unit) AddDamageDealtRageMultiplier(multi float64) {
 
 func (unit *Unit) AddDamageTakenRageMultiplier(multi float64) {
 	unit.rageBar.damageTakenMultiplier *= multi
+}
+
+// AddOffHandDamageDealtRageMultiplier scales rage from off-hand
+// auto-attacks only (Dual Wield Specialization's own clause).
+func (unit *Unit) AddOffHandDamageDealtRageMultiplier(multi float64) {
+	unit.rageBar.offHandDamageDealtMultiplier *= multi
 }
 
 func (unit *Unit) AddDamageDealtRageBonus(bonus float64) {

@@ -47,8 +47,8 @@ character_stats_results: {
 stat_weights_results: {
  key: "TestP1DPSWarrior-Phase1-StatWeights-Default"
  value: {
-  weights: -0.2132
-  weights: 0.56902
+  weights: 1.24324
+  weights: 0.52198
   weights: 0
   weights: 0
   weights: 0
@@ -64,7 +64,7 @@ stat_weights_results: {
   weights: 9.45875
   weights: 0
   weights: 0
-  weights: -0.46525
+  weights: 0.48972
   weights: 0
   weights: 0
   weights: 0

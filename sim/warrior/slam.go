@@ -20,6 +20,29 @@ import (
 // 1240193, 1464, 8820, 11604, 11605) and spellranks.json, which never
 // lists 462893-462897 at all. 11605 is also the id the UI and the
 // preset rotations name for rank 5.
+// Improved Slam's per-point numbers, from the talent's own rank text
+// (see registerSlamSpell): the cast time and GCD each lose 0.25 s a
+// point, the cooldown loses 1.5 s a point.
+const (
+	improvedSlamCastReductionPerPoint     = 250 * time.Millisecond
+	improvedSlamCooldownReductionPerPoint = 1500 * time.Millisecond
+)
+
+// improvedSlamReductions is the talent's effect at a given point count,
+// as the three durations it takes off Slam's cast time, global cooldown
+// and cooldown; kept as a pure function so the per-rank numbers are
+// checkable without building a warrior.
+func improvedSlamReductions(points int32) (cast, gcd, cooldown time.Duration) {
+	p := time.Duration(points)
+	return improvedSlamCastReductionPerPoint * p, improvedSlamCastReductionPerPoint * p, improvedSlamCooldownReductionPerPoint * p
+}
+
+// improvedSlamKeepsTheSwing is the talent's third clause: with any point
+// spent, Slam no longer stops the swing timer for its cast.
+func improvedSlamKeepsTheSwing(points int32) bool {
+	return points > 0
+}
+
 var (
 	slamRankLevel      = [SlamRanks + 1]int{0, 20, 30, 38, 46, 54}
 	slamRankSpellID    = [SlamRanks + 1]int32{0, 1240193, 1464, 8820, 11604, 11605}
@@ -34,13 +57,25 @@ func (warrior *Warrior) registerSlamSpell() {
 	spellID := slamRankSpellID[rank]
 	flatDamageBonus := SlamBaseDamage[rank][0]
 
+	// Improved Slam, per the client's own rank text (build 1.60.1.70009,
+	// Arms tree, spell 12862): "Reduces the global cooldown and cast time
+	// of your Slam ability by 0.25/0.5 sec. In addition, Slam no longer
+	// interrupts or delays your melee swing and Slam's cooldown is
+	// reduced by 1.5/3 sec." Before 2026-10-07 this file took 0.1 s a
+	// point off the cast time only, kept the full GCD and cooldown, and
+	// stopped the swing timer for every Slam regardless of the talent.
+	castReduction, gcdReduction, cooldownReduction := improvedSlamReductions(warrior.Talents.ImprovedSlam)
+	keepsTheSwing := improvedSlamKeepsTheSwing(warrior.Talents.ImprovedSlam)
 	castConfig := core.CastConfig{
 		DefaultCast: core.Cast{
-			GCD:      core.GCDDefault,
-			CastTime: time.Millisecond*time.Duration(slamRankCastTimeMS[rank]) - time.Millisecond*100*time.Duration(warrior.Talents.ImprovedSlam),
+			GCD:      core.GCDDefault - gcdReduction,
+			CastTime: time.Millisecond*time.Duration(slamRankCastTimeMS[rank]) - castReduction,
 		},
 		ModifyCast: func(sim *core.Simulation, spell *core.Spell, cast *core.Cast) {
-			if spell.CastTime() > 0 {
+			// Untalented Slam still resets the swing: the cast holds
+			// the weapon until it lands. With any point in Improved
+			// Slam the swing timer runs on underneath the cast.
+			if spell.CastTime() > 0 && !keepsTheSwing {
 				warrior.AutoAttacks.StopMeleeUntil(sim, sim.CurrentTime+cast.CastTime, true)
 			}
 		},
@@ -53,7 +88,7 @@ func (warrior *Warrior) registerSlamSpell() {
 	if cooldownMS := slamRankCooldownMS[rank]; cooldownMS > 0 {
 		castConfig.CD = core.Cooldown{
 			Timer:    warrior.NewTimer(),
-			Duration: time.Duration(cooldownMS) * time.Millisecond,
+			Duration: time.Duration(cooldownMS)*time.Millisecond - cooldownReduction,
 		}
 	}
 

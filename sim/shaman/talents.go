@@ -834,19 +834,15 @@ func (shaman *Shaman) applyMaelstromWeapon() {
 
 // registerRageOfTheFarseer is the Enhancement tree's tier-6 bool
 // talent (talents/shaman.json node 104740, max_rank 1, prereq Mental
-// Quickness 2/2): "Increases your attack speed by 30% for 25 sec."
-// web/src/content/guides/shaman/enhancement.md calls it "the tree's
-// new capstone ... increases both melee attack speed and spell casting
-// speed for 25 seconds as a burst cooldown" - the spell-casting-speed
-// half and the "burst cooldown" (an activated ability, not a passive
-// proc) are both missing from the talent's own rank text but confirmed
-// by that guide and, independently, by research/08-stats.md's stat
-// table ("Shaman Rage of the Farseer +30% melee attack and spell
-// casting speed (datamined)"). Its 180000ms (3 min) cooldown is
-// likewise datamined (spellconst/shaman.json spell 425336's
-// SpellCooldowns.csv row), since the rank text never states one
-// either. Modeled the same way Troll Berserking's mana-bar branch
-// raises both speeds together (sim/core/racials.go).
+// Quickness 2/2): "Increases your attack speed by 30% for 25 sec." -
+// an activated burst cooldown with a 180000ms (3 min) cooldown that is
+// datamined (spellconst/shaman.json spell 425336's SpellCooldowns.csv
+// row) rather than stated in the rank text. Melee attack speed only:
+// an earlier revision also raised casting speed, on the strength of
+// pre-beta datamining, and Forever's 24 September 2026 beta notes
+// removed exactly that ("Rage of the Farseer no longer speeds up your
+// spellcasting"); build 1.60.1.70009's own rank text names attack
+// speed alone.
 func (shaman *Shaman) registerRageOfTheFarseer() {
 	if !shaman.Talents.RageOfTheFarseer {
 		return
@@ -862,11 +858,9 @@ func (shaman *Shaman) registerRageOfTheFarseer() {
 		Duration: time.Second * 25,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			shaman.MultiplyAttackSpeed(sim, hasteBonus)
-			shaman.MultiplyCastSpeed(hasteBonus)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			shaman.MultiplyAttackSpeed(sim, 1/hasteBonus)
-			shaman.MultiplyCastSpeed(1 / hasteBonus)
 		},
 	})
 

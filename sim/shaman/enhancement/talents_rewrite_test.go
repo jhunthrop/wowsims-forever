@@ -283,7 +283,10 @@ func TestMaelstromWeaponReducesLightningBolt(t *testing.T) {
 
 // TestRageOfTheFarseerSpeedBuff guards shaman.registerRageOfTheFarseer:
 // node 104740, one rank, a 3-minute-cooldown self-cast granting 30%
-// melee and spell casting speed for 25 sec.
+// melee attack speed for 25 sec - and melee only: Forever's 24
+// September 2026 beta notes removed the casting-speed half ("Rage of
+// the Farseer no longer speeds up your spellcasting"), and build
+// 1.60.1.70009's rank text names attack speed alone.
 func TestRageOfTheFarseerSpeedBuff(t *testing.T) {
 	sim, built := newIsolatedTalentShaman(t, shamanTalentString(nil, map[int]int{enhNodeRageOfTheFarseer: 1}, nil))
 	if !built.Talents.RageOfTheFarseer {
@@ -298,11 +301,8 @@ func TestRageOfTheFarseerSpeedBuff(t *testing.T) {
 
 	built.RageOfTheFarseer.Cast(sim, &built.Unit)
 
-	// unit.CastSpeed (sim/core/unit.go) is a scale on cast *time*, not a
-	// "bigger is faster" rate - 1/CastSpeedMultiplier - so a 30% speed
-	// increase divides it rather than multiplying.
-	if got, want := built.CastSpeed, baseCastSpeed/1.30; got < want-0.0001 || got > want+0.0001 {
-		t.Errorf("Rage of the Farseer: CastSpeed = %v, want %v (cast time scaled by 1/1.3, i.e. +30%% speed)", got, want)
+	if got := built.CastSpeed; got != baseCastSpeed {
+		t.Errorf("Rage of the Farseer: CastSpeed = %v, want %v unchanged (the beta notes removed the casting-speed half)", got, baseCastSpeed)
 	}
 	if got, want := built.SwingSpeed(), baseMeleeSpeed*1.30; got < want-0.0001 || got > want+0.0001 {
 		t.Errorf("Rage of the Farseer: SwingSpeed = %v, want %v (+30%%)", got, want)

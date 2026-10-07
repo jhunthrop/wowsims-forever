@@ -186,7 +186,7 @@ stat_weights_results: {
  key: "TestEnhancement-Phase1-StatWeights-Default"
  value: {
   weights: 0.61743
-  weights: 0.12427
+  weights: 0.15628
   weights: 0
   weights: 0
   weights: 0
@@ -232,7 +232,7 @@ stat_weights_results: {
  key: "TestEnhancement-Phase2-StatWeights-Default"
  value: {
   weights: 0.62798
-  weights: 0.13475
+  weights: 0.16193
   weights: 0
   weights: 0
   weights: 0
@@ -278,7 +278,7 @@ stat_weights_results: {
  key: "TestEnhancement-Phase3-StatWeights-Default"
  value: {
   weights: 0.62579
-  weights: 0.15547
+  weights: 0.20439
   weights: 0
   weights: 0
   weights: 0
@@ -324,7 +324,7 @@ stat_weights_results: {
  key: "TestEnhancement-Phase5-StatWeights-Default"
  value: {
   weights: 0.60713
-  weights: 0.17756
+  weights: 0.19114
   weights: 0
   weights: 0
   weights: 0
