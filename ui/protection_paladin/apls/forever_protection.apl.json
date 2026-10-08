@@ -37,7 +37,7 @@
       "action": {
         "autocastOtherCooldowns": {}
       },
-      "notes": "Lay on Hands is the engine's survival cooldown and fires itself below 10 percent health."
+      "notes": "Lay on Hands is the survival cooldown of last resort and fires itself below 10 percent health."
     },
     {
       "action": {
