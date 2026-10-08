@@ -114,6 +114,10 @@ func (paladin *Paladin) registerHolyShield() {
 			// it through lets compare.go's engineDuration see it
 			// instead of reporting 0 for a self-buff that does exist.
 			RelatedSelfBuff: paladin.holyShieldAura[i],
+			// Holy Shield needs a shield: without one nothing blocks.
+			ExtraCastCondition: func(_ *core.Simulation, _ *core.Unit) bool {
+				return paladin.PseudoStats.CanBlock
+			},
 			ManaCost: core.ManaCostOptions{
 				FlatCost: manaCost,
 			},

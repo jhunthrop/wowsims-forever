@@ -1,0 +1,411 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 20423,
+            "rank": 7
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-3.5s"
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 20928,
+            "rank": 3
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-2s"
+        }
+      }
+    }
+  ],
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      },
+      "notes": "Lay on Hands is the engine's survival cooldown and fires itself below 10 percent health."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1311015
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "0.35"
+              }
+            }
+          }
+        }
+      },
+      "notes": "Templar's Bulwark, an absorb of the paladin's whole health bar for 8 seconds, as the first panic button: low health is when a late shield buys the most, and it puts Forbearance on the next two defensives for a minute."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1020,
+            "rank": 2
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "0.25"
+              }
+            }
+          }
+        }
+      },
+      "notes": "Divine Shield: 12 seconds of immunity at half damage dealt, the second panic button once Forbearance from the first has gone."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 5573,
+            "rank": 2
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "0.2"
+              }
+            }
+          }
+        }
+      },
+      "notes": "Divine Protection: 8 seconds of immunity with no attacks, the last resort."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 20423,
+            "rank": 7
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "currentSealRemainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "2s"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "math": {
+                      "op": "OpSub",
+                      "lhs": {
+                        "currentMana": {}
+                      },
+                      "rhs": {
+                        "spellCurrentCost": {
+                          "spellId": {
+                            "spellId": 20423,
+                            "rank": 7
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "spellCurrentCost": {
+                      "spellId": {
+                        "spellId": 20928,
+                        "rank": 3
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Seal of Fury kept up. Judgement no longer consumes the seal in Forever, so this recasts every 30 seconds, and only with Holy Shield's mana left over."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 20928,
+            "rank": 3
+          }
+        }
+      },
+      "notes": "Holy Shield on cooldown: its 10 second cooldown equals its duration, so it is up whenever its four charges last, and it is the first claim on mana."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10333,
+            "rank": 8
+          }
+        }
+      },
+      "notes": "Holy Strike on cooldown: the cheapest threat per mana the paladin has (20 mana)."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 407632
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "math": {
+                "op": "OpSub",
+                "lhs": {
+                  "currentMana": {}
+                },
+                "rhs": {
+                  "spellCurrentCost": {
+                    "spellId": {
+                      "spellId": 407632
+                    }
+                  }
+                }
+              }
+            },
+            "rhs": {
+              "spellCurrentCost": {
+                "spellId": {
+                  "spellId": 20928,
+                  "rank": 3
+                }
+              }
+            }
+          }
+        }
+      },
+      "notes": "Hammer of the Righteous on cooldown, once the Holy Shield mana is safe."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1310994
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "spellTimeToReady": {
+                "spellId": {
+                  "spellId": 20271
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "5s"
+              }
+            }
+          }
+        }
+      },
+      "notes": "Swift Judgement while Judgement is on cooldown: it finishes the cooldown and makes the next Judgement free, one more Judgement a minute."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 20271
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "math": {
+                "op": "OpSub",
+                "lhs": {
+                  "currentMana": {}
+                },
+                "rhs": {
+                  "spellCurrentCost": {
+                    "spellId": {
+                      "spellId": 20271
+                    }
+                  }
+                }
+              }
+            },
+            "rhs": {
+              "spellCurrentCost": {
+                "spellId": {
+                  "spellId": 20928,
+                  "rank": 3
+                }
+              }
+            }
+          }
+        }
+      },
+      "notes": "Judgement on cooldown (an off-the-global cast of 6 percent of base mana)."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10314,
+            "rank": 6
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "spellCanCast": {
+                  "spellId": {
+                    "spellId": 10314,
+                    "rank": 6
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "math": {
+                      "op": "OpSub",
+                      "lhs": {
+                        "currentMana": {}
+                      },
+                      "rhs": {
+                        "spellCurrentCost": {
+                          "spellId": {
+                            "spellId": 10314,
+                            "rank": 6
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "spellCurrentCost": {
+                      "spellId": {
+                        "spellId": 20928,
+                        "rank": 3
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Exorcism on Undead and Demons only; the engine refuses it on any other target."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 20924,
+            "rank": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.5"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "math": {
+                      "op": "OpSub",
+                      "lhs": {
+                        "currentMana": {}
+                      },
+                      "rhs": {
+                        "spellCurrentCost": {
+                          "spellId": {
+                            "spellId": 20924,
+                            "rank": 5
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "spellCurrentCost": {
+                      "spellId": {
+                        "spellId": 20928,
+                        "rank": 3
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Consecration last and only above half mana: about one threat per mana against ten for Hammer of the Righteous, so it is the use of mana the tank has to spare."
+    }
+  ]
+}

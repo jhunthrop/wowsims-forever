@@ -188,13 +188,10 @@ func (paladin *Paladin) applyRedoubt() {
 			aura.Activate(sim)
 		},
 		OnSpellHitTaken: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !spell.ProcMask.Matches(core.ProcMaskMelee) || !result.Landed() {
-				return
-			}
 			if result.DidBlock() && paladin.redoubtAura.IsActive() {
 				paladin.redoubtAura.RemoveStack(sim)
 			}
-			if sim.Proc(redoubtProcChance, "Redoubt") {
+			if spell.ProcMask.Matches(core.ProcMaskMelee) && result.Landed() && sim.Proc(redoubtProcChance, "Redoubt") {
 				paladin.redoubtAura.Activate(sim)
 				paladin.redoubtAura.SetStacks(sim, redoubtBlocks)
 			}
