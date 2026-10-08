@@ -134,6 +134,32 @@ func TestShieldWallAndLastStandCutTheChanceOfDeath(t *testing.T) {
 	}
 }
 
+// Demoralizing Shout takes attack power off the boss, so it pays only when
+// the boss has some. The curated tank boss has none, which is why the
+// rotation leaves it out; this keeps the engine honest about the other
+// case (a boss with 320 attack power, the engine's own default target).
+func TestDemoralizingShoutPaysOnlyAgainstABossWithAttackPower(t *testing.T) {
+	shout := core.APLRotationFromJsonString(`{"type":"TypeAPL","priorityList":[
+		{"action":{"condition":{"not":{"val":{"auraIsActive":{"sourceUnit":{"type":"CurrentTarget"},"auraId":{"spellId":11556,"rank":5}}}}},
+			"castSpell":{"spellId":{"spellId":11556,"rank":5}}}}]}`)
+	withShout := &proto.APLRotation{Type: tankRotation().Type, PriorityList: append(append([]*proto.APLListItem{}, shout.PriorityList...), tankRotation().PriorityList...)}
+
+	for _, attackPower := range []float64{0, 320} {
+		run := func(rotation *proto.APLRotation) fightResult {
+			return runFight(t, fightConfig{talents: P1Talents, apl: rotation, boss: siteBoss, gear: harnessGear(), bossAttackPower: attackPower})
+		}
+		base, shouted := run(tankRotation()), run(withShout)
+		t.Logf("boss attack power %3.0f: without %s", attackPower, base)
+		t.Logf("boss attack power %3.0f: with    %s", attackPower, shouted)
+		if attackPower == 0 && shouted.dtps < base.dtps*0.99 {
+			t.Errorf("Demoralizing Shout cut DTPS %v -> %v against a boss with no attack power", base.dtps, shouted.dtps)
+		}
+		if attackPower > 0 && shouted.dtps >= base.dtps {
+			t.Errorf("Demoralizing Shout did not cut DTPS (%v -> %v) against a boss with %v attack power", base.dtps, shouted.dtps, attackPower)
+		}
+	}
+}
+
 // Every line of the curated rotation names a spell this engine registers
 // for the tank at 60 - a line that does not resolve is a warning, and a
 // rotation that quietly loses a line is not the one that was measured.

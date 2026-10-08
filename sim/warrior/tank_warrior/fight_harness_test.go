@@ -60,6 +60,9 @@ type fightConfig struct {
 	level   int32
 	options *proto.Player_TankWarrior
 	noBuffs bool
+	// bossAttackPower is the boss's attack power: 0 unless a test asks,
+	// because the curated tank boss carries none.
+	bossAttackPower float64
 }
 
 // fightResult is what the harness prints and the tests assert on.
@@ -124,7 +127,7 @@ func (cfg fightConfig) request() *proto.RaidSimRequest {
 			Duration: fightSeconds,
 			Targets: []*proto.Target{{
 				Level:         63,
-				Stats:         stats.Stats{stats.Armor: bossArmor}.ToFloatArray(),
+				Stats:         stats.Stats{stats.Armor: bossArmor, stats.AttackPower: cfg.bossAttackPower}.ToFloatArray(),
 				TankIndex:     0,
 				SwingSpeed:    cfg.boss.swingSpeed,
 				MinBaseDamage: cfg.boss.minBaseDamage,
