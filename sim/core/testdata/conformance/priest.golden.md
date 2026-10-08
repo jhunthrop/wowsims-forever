@@ -13,9 +13,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | HealingPriest | 10 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 131.36-166.64→131.36-166.64 | 0.429→0.429 | declared, matches |
-| HealingPriest | 10 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→47.62-57.98 | 0.429→0.429 | declared, differs: damage 47-57->48-58 |
-| HealingPriest | 10 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→76.01-90.99 | 0.571→0.571 | declared, differs: damage 89-106->76-91 |
-| HealingPriest | 10 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 150.72-175.28→130.38-151.62 | 0.714→0.714 | declared, differs: damage 151-175->130-152 |
+| HealingPriest | 10 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429→0.429 | declared, matches |
+| HealingPriest | 10 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571→0.571 | declared, matches |
+| HealingPriest | 10 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 150.72-175.28→150.72-175.28 | 0.714→0.714 | declared, matches |
 | HealingPriest | 10 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 37.10-40.90→37.10-40.90 | 0.429→0.429 | declared, matches |
 | HealingPriest | 10 | Power Word: Shield | 1 | 17 | 45.00→45.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | 47.20-47.20→47.20-47.20 | 0.100→0.100 | declared, matches |
 | HealingPriest | 10 | Renew | 1 | 139 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 15000→15000 | match |  | 9.00-9.00→9.00-9.00 | 0.200→0.200 | declared, matches |
@@ -28,13 +28,13 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 20 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 20 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 252.98-312.62→252.98-312.62 | 0.429→0.429 | declared, matches |
 | HealingPriest | 20 | Flash Heal | 1 | 2061 | 125.00→125.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 174.15-213.85→174.15-213.85 | 0.429→0.429 | declared, matches |
-| HealingPriest | 20 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 257.89-298.11→278.86-322.34 | 0.857→0.857 | declared, differs: damage 258-298->279-322 |
+| HealingPriest | 20 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 257.89-298.11→257.89-298.11 | 0.857→0.857 | declared, matches |
 | HealingPriest | 20 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 51.41-64.59→51.41-64.59 | 0.750→0.750 | declared, matches |
 | HealingPriest | 20 | Inner Fire | 1 | 588 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 20 | Inner Fire | 2 | 7128 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 20 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→47.62-57.98 | 0.429→0.429 | declared, differs: damage 47-57->48-58 |
-| HealingPriest | 20 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→76.01-90.99 | 0.571→0.571 | declared, differs: damage 89-106->76-91 |
-| HealingPriest | 20 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→137.77-160.23 | 0.714→0.714 | declared, differs: damage 156-182->138-160 |
+| HealingPriest | 20 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429→0.429 | declared, matches |
+| HealingPriest | 20 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571→0.571 | declared, matches |
+| HealingPriest | 20 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714→0.714 | declared, matches |
 | HealingPriest | 20 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.429 | declared, matches |
 | HealingPriest | 20 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 68.74-74.46→68.74-74.46 | 0.429→0.429 | declared, matches |
 | HealingPriest | 20 | Power Word: Shield | 1 | 17 | 45.00→45.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | 48.00-48.00→48.00-48.00 | 0.100→0.100 | declared, matches |
@@ -57,8 +57,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 30 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 429.84-522.16→429.84-522.16 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Flash Heal | 1 | 2061 | 125.00→125.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 182.68-224.32→182.68-224.32 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Flash Heal | 2 | 9472 | 155.00→155.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 232.56-283.04→232.56-283.04 | 0.429→0.429 | declared, matches |
-| HealingPriest | 30 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→281.08-324.92 | 0.857→0.857 | declared, differs: damage 260-300->281-325 |
-| HealingPriest | 30 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→392.63-449.37 | 0.857→0.857 | declared, differs: damage 363-416->393-449 |
+| HealingPriest | 30 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→259.75-300.25 | 0.857→0.857 | declared, matches |
+| HealingPriest | 30 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→363.25-415.75 | 0.857→0.857 | declared, matches |
 | HealingPriest | 30 | Heal | 3 | 6063 | 255.00→255.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 497.59-564.41→497.59-564.41 | 0.857→0.857 | declared, matches |
 | HealingPriest | 30 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 56.02-70.38→56.02-70.38 | 0.750→0.750 | declared, matches |
 | HealingPriest | 30 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750→0.750 | declared, matches |
@@ -66,9 +66,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 30 | Inner Fire | 1 | 588 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 30 | Inner Fire | 2 | 7128 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 30 | Inner Fire | 3 | 602 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 600000→600000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 30 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→47.62-57.98 | 0.429→0.429 | declared, differs: damage 47-57->48-58 |
-| HealingPriest | 30 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→76.01-90.99 | 0.571→0.571 | declared, differs: damage 89-106->76-91 |
-| HealingPriest | 30 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→137.77-160.23 | 0.714→0.714 | declared, differs: damage 156-182->138-160 |
+| HealingPriest | 30 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429→0.429 | declared, matches |
+| HealingPriest | 30 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571→0.571 | declared, matches |
+| HealingPriest | 30 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714→0.714 | declared, matches |
 | HealingPriest | 30 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429→0.429 | declared, matches |
@@ -103,8 +103,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 38 | Flash Heal | 2 | 9472 | 155.00→155.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 234.55-285.45→234.55-285.45 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Flash Heal | 3 | 9473 | 185.00→185.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 32→32 | n/a | match |  | 294.75-354.25→294.75-354.25 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Flash Heal | 4 | 9474 | 215.00→215.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 38→38 | n/a | match |  | 348.97-417.03→348.97-417.03 | 0.429→0.429 | declared, matches |
-| HealingPriest | 38 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→281.08-324.92 | 0.857→0.857 | declared, differs: damage 260-300->281-325 |
-| HealingPriest | 38 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→392.63-449.37 | 0.857→0.857 | declared, differs: damage 363-416->393-449 |
+| HealingPriest | 38 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→259.75-300.25 | 0.857→0.857 | declared, matches |
+| HealingPriest | 38 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→363.25-415.75 | 0.857→0.857 | declared, matches |
 | HealingPriest | 38 | Heal | 3 | 6063 | 255.00→255.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 508.84-577.16→508.84-577.16 | 0.857→0.857 | declared, matches |
 | HealingPriest | 38 | Heal | 4 | 6064 | 305.00→305.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 34→34 | n/a | match |  | 628.40-709.60→628.40-709.60 | 0.857→0.857 | declared, matches |
 | HealingPriest | 38 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 56.02-70.38→56.02-70.38 | 0.750→0.750 | declared, matches |
@@ -114,9 +114,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 38 | Inner Fire | 1 | 588 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 38 | Inner Fire | 2 | 7128 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 38 | Inner Fire | 3 | 602 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 600000→600000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 38 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→47.62-57.98 | 0.429→0.429 | declared, differs: damage 47-57->48-58 |
-| HealingPriest | 38 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→76.01-90.99 | 0.571→0.571 | declared, differs: damage 89-106->76-91 |
-| HealingPriest | 38 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→137.77-160.23 | 0.714→0.714 | declared, differs: damage 156-182->138-160 |
+| HealingPriest | 38 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429→0.429 | declared, matches |
+| HealingPriest | 38 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571→0.571 | declared, matches |
+| HealingPriest | 38 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714→0.714 | declared, matches |
 | HealingPriest | 38 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429→0.429 | declared, matches |
@@ -160,8 +160,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 40 | Flash Heal | 3 | 9473 | 185.00→185.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 32→32 | n/a | match |  | 294.75-354.25→294.75-354.25 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Flash Heal | 4 | 9474 | 215.00→215.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 38→38 | n/a | match |  | 354.08-423.12→354.08-423.12 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Greater Heal | 1 | 2060 | 370.00→370.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | n/a | match |  | 793.68-894.32→793.68-894.32 | 0.857→0.857 | declared, matches |
-| HealingPriest | 40 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→281.08-324.92 | 0.857→0.857 | declared, differs: damage 260-300->281-325 |
-| HealingPriest | 40 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→392.63-449.37 | 0.857→0.857 | declared, differs: damage 363-416->393-449 |
+| HealingPriest | 40 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→259.75-300.25 | 0.857→0.857 | declared, matches |
+| HealingPriest | 40 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→363.25-415.75 | 0.857→0.857 | declared, matches |
 | HealingPriest | 40 | Heal | 3 | 6063 | 255.00→255.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 508.84-577.16→508.84-577.16 | 0.857→0.857 | declared, matches |
 | HealingPriest | 40 | Heal | 4 | 6064 | 305.00→305.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 34→34 | n/a | match |  | 632.63-714.37→632.63-714.37 | 0.857→0.857 | declared, matches |
 | HealingPriest | 40 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 56.02-70.38→56.02-70.38 | 0.750→0.750 | declared, matches |
@@ -172,9 +172,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 40 | Inner Fire | 2 | 7128 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 40 | Inner Fire | 3 | 602 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 40 | Inner Fire | 4 | 1006 | 165.00→165.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 40 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→47.62-57.98 | 0.429→0.429 | declared, differs: damage 47-57->48-58 |
-| HealingPriest | 40 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→76.01-90.99 | 0.571→0.571 | declared, differs: damage 89-106->76-91 |
-| HealingPriest | 40 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→137.77-160.23 | 0.714→0.714 | declared, differs: damage 156-182->138-160 |
+| HealingPriest | 40 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429→0.429 | declared, matches |
+| HealingPriest | 40 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571→0.571 | declared, matches |
+| HealingPriest | 40 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714→0.714 | declared, matches |
 | HealingPriest | 40 | Lightwell | 1 | 724 | 225.00→225.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 40→40 | 180000→180000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 40 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429→0.429 | declared, matches |
@@ -228,8 +228,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 50 | Flash Heal | 6 | 10916 | 315.00→315.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | n/a | match |  | 589.11-698.89→589.11-698.89 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Greater Heal | 1 | 2060 | 370.00→370.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | n/a | match |  | 817.66-921.34→817.66-921.34 | 0.857→0.857 | declared, matches |
 | HealingPriest | 50 | Greater Heal | 2 | 10963 | 455.00→455.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 46→46 | n/a | match |  | 1057.76-1186.64→1057.76-1186.64 | 0.857→0.857 | declared, matches |
-| HealingPriest | 50 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→281.08-324.92 | 0.857→0.857 | declared, differs: damage 260-300->281-325 |
-| HealingPriest | 50 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→392.63-449.37 | 0.857→0.857 | declared, differs: damage 363-416->393-449 |
+| HealingPriest | 50 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→259.75-300.25 | 0.857→0.857 | declared, matches |
+| HealingPriest | 50 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→363.25-415.75 | 0.857→0.857 | declared, matches |
 | HealingPriest | 50 | Heal | 3 | 6063 | 255.00→255.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 508.84-577.16→508.84-577.16 | 0.857→0.857 | declared, matches |
 | HealingPriest | 50 | Heal | 4 | 6064 | 305.00→305.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 34→34 | n/a | match |  | 632.63-714.37→632.63-714.37 | 0.857→0.857 | declared, matches |
 | HealingPriest | 50 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 56.02-70.38→56.02-70.38 | 0.750→0.750 | declared, matches |
@@ -243,9 +243,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 50 | Inner Fire | 3 | 602 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 50 | Inner Fire | 4 | 1006 | 165.00→165.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 50 | Inner Fire | 5 | 10951 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 600000→600000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 50 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→47.62-57.98 | 0.429→0.429 | declared, differs: damage 47-57->48-58 |
-| HealingPriest | 50 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→76.01-90.99 | 0.571→0.571 | declared, differs: damage 89-106->76-91 |
-| HealingPriest | 50 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→137.77-160.23 | 0.714→0.714 | declared, differs: damage 156-182->138-160 |
+| HealingPriest | 50 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429→0.429 | declared, matches |
+| HealingPriest | 50 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571→0.571 | declared, matches |
+| HealingPriest | 50 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714→0.714 | declared, matches |
 | HealingPriest | 50 | Lightwell | 1 | 724 | 225.00→225.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 40→40 | 180000→180000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 50 | Lightwell | 2 | 27870 | 295.00→295.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 50→50 | 180000→180000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 50 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.429 | declared, matches |
@@ -316,8 +316,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 60 | Greater Heal | 3 | 10964 | 545.00→545.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 52→52 | n/a | match |  | 1354.91-1517.09→1354.91-1517.09 | 0.857→0.857 | declared, matches |
 | HealingPriest | 60 | Greater Heal | 4 | 10965 | 655.00→655.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 58→58 | n/a | match |  | 1698.74-1895.26→1698.74-1895.26 | 0.857→0.857 | declared, matches |
 | HealingPriest | 60 | Greater Heal | 5 | 25314 | 710.00→710.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | n/a | match |  | 1852.58-2067.42→1852.58-2067.42 | 0.857→0.857 | declared, matches |
-| HealingPriest | 60 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→281.08-324.92 | 0.857→0.857 | declared, differs: damage 260-300->281-325 |
-| HealingPriest | 60 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→392.63-449.37 | 0.857→0.857 | declared, differs: damage 363-416->393-449 |
+| HealingPriest | 60 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→259.75-300.25 | 0.857→0.857 | declared, matches |
+| HealingPriest | 60 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→363.25-415.75 | 0.857→0.857 | declared, matches |
 | HealingPriest | 60 | Heal | 3 | 6063 | 255.00→255.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 508.84-577.16→508.84-577.16 | 0.857→0.857 | declared, matches |
 | HealingPriest | 60 | Heal | 4 | 6064 | 305.00→305.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 34→34 | n/a | match |  | 632.63-714.37→632.63-714.37 | 0.857→0.857 | declared, matches |
 | HealingPriest | 60 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 56.02-70.38→56.02-70.38 | 0.750→0.750 | declared, matches |
@@ -334,9 +334,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 60 | Inner Fire | 4 | 1006 | 165.00→165.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Inner Fire | 5 | 10951 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Inner Fire | 6 | 10952 | 315.00→315.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 600000→600000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 60 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→47.62-57.98 | 0.429→0.429 | declared, differs: damage 47-57->48-58 |
-| HealingPriest | 60 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→76.01-90.99 | 0.571→0.571 | declared, differs: damage 89-106->76-91 |
-| HealingPriest | 60 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→137.77-160.23 | 0.714→0.714 | declared, differs: damage 156-182->138-160 |
+| HealingPriest | 60 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429→0.429 | declared, matches |
+| HealingPriest | 60 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571→0.571 | declared, matches |
+| HealingPriest | 60 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714→0.714 | declared, matches |
 | HealingPriest | 60 | Lightwell | 1 | 724 | 225.00→225.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 40→40 | 180000→180000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Lightwell | 2 | 27870 | 295.00→295.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 50→50 | 180000→180000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Lightwell | 3 | 27871 | 365.00→365.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 60→60 | 180000→180000 | match |  | n/a | n/a | n/a |
@@ -622,17 +622,17 @@ Each spell below is built with exactly one point in the single talent that grant
 | HealingPriest (Holy Nova talent) | 60 | Holy Nova | 4 | 27799 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 103.02-118.58→103.02-118.58 | 0.107→0.107 | declared, matches |
 | HealingPriest (Holy Nova talent) | 60 | Holy Nova | 5 | 27800 | 635.00→635.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | 138.15-159.85→138.15-159.85 | 0.107→0.107 | declared, matches |
 | HealingPriest (Holy Nova talent) | 60 | Holy Nova | 6 | 27801 | 750.00→750.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | 173.57-200.43→173.57-200.43 | 0.107→0.107 | declared, matches |
-| HealingPriest (Penance talent) | 30 | Penance | 1 | 402174 | 150.00→100.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 30→30 | 0→2000 | mismatch | cost 150.00->100.00 | n/a | n/a | n/a |
-| HealingPriest (Penance talent) | 38 | Penance | 1 | 402174 | 150.00→100.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 30→30 | 0→2000 | mismatch | cost 150.00->100.00 | n/a | n/a | n/a |
-| HealingPriest (Penance talent) | 40 | Penance | 1 | 402174 | 150.00→100.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 30→30 | 0→2000 | mismatch | cost 150.00->100.00 | n/a | n/a | n/a |
-| HealingPriest (Penance talent) | 40 | Penance | 2 | 1240720 | 220.00→185.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 40→40 | 0→2000 | mismatch | cost 220.00->185.00 | n/a | n/a | n/a |
-| HealingPriest (Penance talent) | 50 | Penance | 1 | 402174 | 150.00→100.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 30→30 | 0→2000 | mismatch | cost 150.00->100.00 | n/a | n/a | n/a |
-| HealingPriest (Penance talent) | 50 | Penance | 2 | 1240720 | 220.00→185.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 40→40 | 0→2000 | mismatch | cost 220.00->185.00 | n/a | n/a | n/a |
+| HealingPriest (Penance talent) | 30 | Penance | 1 | 402174 | 150.00→150.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 30→30 | 0→2000 | client-scripted | duration_ms: client states none (0), engine keeps 2000ms | n/a | n/a | n/a |
+| HealingPriest (Penance talent) | 38 | Penance | 1 | 402174 | 150.00→150.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 30→30 | 0→2000 | client-scripted | duration_ms: client states none (0), engine keeps 2000ms | n/a | n/a | n/a |
+| HealingPriest (Penance talent) | 40 | Penance | 1 | 402174 | 150.00→150.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 30→30 | 0→2000 | client-scripted | duration_ms: client states none (0), engine keeps 2000ms | n/a | n/a | n/a |
+| HealingPriest (Penance talent) | 40 | Penance | 2 | 1240720 | 220.00→220.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 40→40 | 0→2000 | client-scripted | duration_ms: client states none (0), engine keeps 2000ms | n/a | n/a | n/a |
+| HealingPriest (Penance talent) | 50 | Penance | 1 | 402174 | 150.00→150.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 30→30 | 0→2000 | client-scripted | duration_ms: client states none (0), engine keeps 2000ms | n/a | n/a | n/a |
+| HealingPriest (Penance talent) | 50 | Penance | 2 | 1240720 | 220.00→220.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 40→40 | 0→2000 | client-scripted | duration_ms: client states none (0), engine keeps 2000ms | n/a | n/a | n/a |
 | HealingPriest (Penance talent) | 50 | Penance | 3 | 1240721 | 270.00→270.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 50→50 | 0→2000 | client-scripted | duration_ms: client states none (0), engine keeps 2000ms | n/a | n/a | n/a |
-| HealingPriest (Penance talent) | 60 | Penance | 1 | 402174 | 150.00→100.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 30→30 | 0→2000 | mismatch | cost 150.00->100.00 | n/a | n/a | n/a |
-| HealingPriest (Penance talent) | 60 | Penance | 2 | 1240720 | 220.00→185.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 40→40 | 0→2000 | mismatch | cost 220.00->185.00 | n/a | n/a | n/a |
+| HealingPriest (Penance talent) | 60 | Penance | 1 | 402174 | 150.00→150.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 30→30 | 0→2000 | client-scripted | duration_ms: client states none (0), engine keeps 2000ms | n/a | n/a | n/a |
+| HealingPriest (Penance talent) | 60 | Penance | 2 | 1240720 | 220.00→220.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 40→40 | 0→2000 | client-scripted | duration_ms: client states none (0), engine keeps 2000ms | n/a | n/a | n/a |
 | HealingPriest (Penance talent) | 60 | Penance | 3 | 1240721 | 270.00→270.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 50→50 | 0→2000 | client-scripted | duration_ms: client states none (0), engine keeps 2000ms | n/a | n/a | n/a |
-| HealingPriest (Penance talent) | 60 | Penance | 4 | 1316995 | 385.00→355.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 60→60 | 0→2000 | mismatch | cost 385.00->355.00 | n/a | n/a | n/a |
+| HealingPriest (Penance talent) | 60 | Penance | 4 | 1316995 | 385.00→385.00 | mana→mana | 12000→12000 | 0→0 | 1500→1500 | 60→60 | 0→2000 | client-scripted | duration_ms: client states none (0), engine keeps 2000ms | n/a | n/a | n/a |
 | HealingPriest (Prayer of Mending talent) | 40 | Prayer of Mending | 1 | 401859 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
 | HealingPriest (Prayer of Mending talent) | 50 | Prayer of Mending | 1 | 401859 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
 | HealingPriest (Prayer of Mending talent) | 50 | Prayer of Mending | 2 | 1240826 | 305.00→305.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→50 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |

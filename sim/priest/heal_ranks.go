@@ -36,18 +36,18 @@ type healRank struct {
 
 var lesserHealRanks = []healRank{
 	{spellID: 2050, level: 1, manaCost: 30, castMS: 1500, coefficient: 0.429,
-		effect: clientdamage.Effect{Amount: 51, Variance: 0.196078, PerLevel: 0.9, SpellLevel: 1, MaxLevel: 3}},
+		effect: clientdamage.Effect{Amount: 51, Variance: 0.196078, PerLevel: 0.3, SpellLevel: 1, MaxLevel: 3}},
 	{spellID: 2052, level: 4, manaCost: 45, castMS: 2000, coefficient: 0.571,
-		effect: clientdamage.Effect{Amount: 78, Variance: 0.179487, PerLevel: 1.1, SpellLevel: 4, MaxLevel: 9}},
+		effect: clientdamage.Effect{Amount: 94, Variance: 0.179487, PerLevel: 0.7, SpellLevel: 4, MaxLevel: 9}},
 	{spellID: 2053, level: 10, manaCost: 75, castMS: 2500, coefficient: 0.714,
-		effect: clientdamage.Effect{Amount: 141, Variance: 0.150685, PerLevel: 1.6, SpellLevel: 10, MaxLevel: 15}},
+		effect: clientdamage.Effect{Amount: 163, Variance: 0.150685, PerLevel: 1.2, SpellLevel: 10, MaxLevel: 15}},
 }
 
 var healRanks = []healRank{
 	{spellID: 2054, level: 16, manaCost: 155, castMS: 3000, coefficient: 0.857,
-		effect: clientdamage.Effect{Amount: 291, Variance: 0.144654, PerLevel: 2.4, SpellLevel: 16, MaxLevel: 21}},
+		effect: clientdamage.Effect{Amount: 270, Variance: 0.144654, PerLevel: 2, SpellLevel: 16, MaxLevel: 21}},
 	{spellID: 2055, level: 22, manaCost: 205, castMS: 3000, coefficient: 0.857,
-		effect: clientdamage.Effect{Amount: 405, Variance: 0.134783, PerLevel: 3.2, SpellLevel: 22, MaxLevel: 27}},
+		effect: clientdamage.Effect{Amount: 375, Variance: 0.134783, PerLevel: 2.9, SpellLevel: 22, MaxLevel: 27}},
 	{spellID: 6063, level: 28, manaCost: 255, castMS: 3000, coefficient: 0.857,
 		effect: clientdamage.Effect{Amount: 523, Variance: 0.125828, PerLevel: 4, SpellLevel: 28, MaxLevel: 33}},
 	{spellID: 6064, level: 34, manaCost: 305, castMS: 3000, coefficient: 0.857,
@@ -206,14 +206,14 @@ var holyNovaHealRanks = []healRank{
 }
 
 var penanceRanks = []healRank{
-	{spellID: 402174, effectSpellID: 402289, level: 30, manaCost: 100, castMS: 0, coefficient: 0.285,
-		effect: clientdamage.Effect{Amount: 184, Variance: 0, PerLevel: 0, SpellLevel: 30, MaxLevel: 39}},
-	{spellID: 1240720, effectSpellID: 1240723, level: 40, manaCost: 185, castMS: 0, coefficient: 0.285,
-		effect: clientdamage.Effect{Amount: 291, Variance: 0, PerLevel: 0, SpellLevel: 40, MaxLevel: 49}},
-	{spellID: 1240721, effectSpellID: 1240724, level: 50, manaCost: 270, castMS: 0, coefficient: 0.285,
-		effect: clientdamage.Effect{Amount: 482, Variance: 0, PerLevel: 0, SpellLevel: 50, MaxLevel: 59}},
-	{spellID: 1316995, effectSpellID: 1316991, level: 60, manaCost: 355, castMS: 0, coefficient: 0.285,
-		effect: clientdamage.Effect{Amount: 673, Variance: 0, PerLevel: 0, SpellLevel: 60, MaxLevel: 60}},
+	{spellID: 402174, effectSpellID: 402289, level: 30, manaCost: 150, castMS: 0, coefficient: 0.19,
+		effect: clientdamage.Effect{Amount: 126, Variance: 0, PerLevel: 0.87, SpellLevel: 30, MaxLevel: 39}},
+	{spellID: 1240720, effectSpellID: 1240723, level: 40, manaCost: 220, castMS: 0, coefficient: 0.19,
+		effect: clientdamage.Effect{Amount: 200, Variance: 0, PerLevel: 0.98, SpellLevel: 40, MaxLevel: 49}},
+	{spellID: 1240721, effectSpellID: 1240724, level: 50, manaCost: 270, castMS: 0, coefficient: 0.19,
+		effect: clientdamage.Effect{Amount: 268, Variance: 0, PerLevel: 1.27, SpellLevel: 50, MaxLevel: 59}},
+	{spellID: 1316995, effectSpellID: 1316991, level: 60, manaCost: 385, castMS: 0, coefficient: 0.19,
+		effect: clientdamage.Effect{Amount: 425, Variance: 0, PerLevel: 0, SpellLevel: 60, MaxLevel: 60}},
 }
 
 var prayerOfMendingRanks = []healRank{

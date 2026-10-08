@@ -17,8 +17,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 10 | Innervate | 0 | 29166 | 7.45 (5% base mana)→7.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 10 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
 | BalanceDruid | 10 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 11.27-14.73→11.27-14.73 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 10 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 10 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 20.56-23.84→23.52-27.28 | 0.486→0.486 | declared, differs: damage 21-24->24-27 |
+| BalanceDruid | 10 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| BalanceDruid | 10 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 20.56-23.84→20.56-23.84 | 0.486→0.486 | declared, matches |
 | BalanceDruid | 20 | Cat Form | 0 | 768 | 194.70 (55% base mana)→194.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 20 | Claw | 1 | 1082 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | BalanceDruid | 20 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -29,9 +29,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 20 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 20 | Rip | 1 | 1079 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | 12000→12000 | match |  | 3.00-3.00→3.00-3.00 | 0.400 (convention)→0.000 | declared, matches |
 | BalanceDruid | 20 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  | 72.82-89.18→72.82-89.18 | 1.000→1.000 | declared, matches |
-| BalanceDruid | 20 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 20 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→24.63-28.57 | 0.486→0.486 | declared, differs: damage 21-24->25-29 |
-| BalanceDruid | 20 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→31.35-37.05 | 0.571→0.571 | declared, differs: damage 30-36->31-37 |
+| BalanceDruid | 20 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| BalanceDruid | 20 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
+| BalanceDruid | 20 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 30 | Cat Form | 0 | 768 | 337.70 (55% base mana)→337.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 30 | Claw | 2 | 3029 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | BalanceDruid | 30 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -48,10 +48,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 30 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  | 78.66-96.34→78.66-96.34 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 30 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 104.55-127.45→104.55-127.45 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 30 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→24 | 6000→6000 | match |  | n/a | n/a | n/a |
-| BalanceDruid | 30 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 30 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→24.63-28.57 | 0.486→0.486 | declared, differs: damage 21-24->25-29 |
-| BalanceDruid | 30 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→31.35-37.05 | 0.571→0.571 | declared, differs: damage 30-36->31-37 |
-| BalanceDruid | 30 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→40.21-46.59 | 0.571→0.571 | declared, differs: damage 38-44->40-47 |
+| BalanceDruid | 30 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| BalanceDruid | 30 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
+| BalanceDruid | 30 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 30 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 30 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 42.08-47.92→42.08-47.92 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 38 | Cat Form | 0 | 768 | 444.95 (55% base mana)→444.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 38 | Claw | 3 | 5201 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | n/a | match |  | n/a | n/a | n/a |
@@ -74,11 +74,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 38 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 107.26-130.74→107.26-130.74 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 38 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  | 136.79-164.01→136.79-164.01 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 38 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→24 | 6000→6000 | match |  | n/a | n/a | n/a |
-| BalanceDruid | 38 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 38 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→24.63-28.57 | 0.486→0.486 | declared, differs: damage 21-24->25-29 |
-| BalanceDruid | 38 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→31.35-37.05 | 0.571→0.571 | declared, differs: damage 30-36->31-37 |
-| BalanceDruid | 38 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→40.21-46.59 | 0.571→0.571 | declared, differs: damage 38-44->40-47 |
-| BalanceDruid | 38 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→47.13-53.67 | 0.571→0.571 | declared, differs: damage 46-52->47-54 |
+| BalanceDruid | 38 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| BalanceDruid | 38 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
+| BalanceDruid | 38 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 38 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 38 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 38 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 50.72-57.28→50.72-57.28 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 40 | Cat Form | 0 | 768 | 469.70 (55% base mana)→469.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 40 | Claw | 3 | 5201 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | n/a | match |  | n/a | n/a | n/a |
@@ -103,11 +103,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 40 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 107.26-130.74→107.26-130.74 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 40 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  | 139.70-167.50→139.70-167.50 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 40 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→24 | 6000→6000 | match |  | n/a | n/a | n/a |
-| BalanceDruid | 40 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 40 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→24.63-28.57 | 0.486→0.486 | declared, differs: damage 21-24->25-29 |
-| BalanceDruid | 40 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→31.35-37.05 | 0.571→0.571 | declared, differs: damage 30-36->31-37 |
-| BalanceDruid | 40 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→40.21-46.59 | 0.571→0.571 | declared, differs: damage 38-44->40-47 |
-| BalanceDruid | 40 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→47.13-53.67 | 0.571→0.571 | declared, differs: damage 46-52->47-54 |
+| BalanceDruid | 40 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| BalanceDruid | 40 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
+| BalanceDruid | 40 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 40 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 40 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 40 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 52.41-59.19→52.41-59.19 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 50 | Cat Form | 0 | 768 | 585.20 (55% base mana)→585.20 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 50 | Claw | 4 | 9849 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 48→48 | n/a | match |  | n/a | n/a | n/a |
@@ -136,11 +136,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 50 | Starfire | 4 | 8951 | 230.00→230.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | n/a | match |  | 190.44-227.16→190.44-227.16 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 50 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  | 243.78-288.22→243.78-288.22 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 50 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→24 | 6000→6000 | match |  | n/a | n/a | n/a |
-| BalanceDruid | 50 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 50 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→24.63-28.57 | 0.486→0.486 | declared, differs: damage 21-24->25-29 |
-| BalanceDruid | 50 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→31.35-37.05 | 0.571→0.571 | declared, differs: damage 30-36->31-37 |
-| BalanceDruid | 50 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→40.21-46.59 | 0.571→0.571 | declared, differs: damage 38-44->40-47 |
-| BalanceDruid | 50 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→47.13-53.67 | 0.571→0.571 | declared, differs: damage 46-52->47-54 |
+| BalanceDruid | 50 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| BalanceDruid | 50 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
+| BalanceDruid | 50 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 50 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 50 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 50 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 55.79-63.01→55.79-63.01 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 50 | Wrath | 7 | 8905 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 46→46 | n/a | match |  | 67.64-75.56→67.64-75.56 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 60 | Cat Form | 0 | 768 | 684.20 (55% base mana)→684.20 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
@@ -174,11 +174,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 60 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  | 255.87-302.53→255.87-302.53 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 60 | Starfire | 6 | 9876 | 315.00→315.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 58→58 | n/a | match |  | 313.43-369.77→313.43-369.77 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 60 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→24 | 6000→6000 | match |  | n/a | n/a | n/a |
-| BalanceDruid | 60 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 60 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→24.63-28.57 | 0.486→0.486 | declared, differs: damage 21-24->25-29 |
-| BalanceDruid | 60 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→31.35-37.05 | 0.571→0.571 | declared, differs: damage 30-36->31-37 |
-| BalanceDruid | 60 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→40.21-46.59 | 0.571→0.571 | declared, differs: damage 38-44->40-47 |
-| BalanceDruid | 60 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→47.13-53.67 | 0.571→0.571 | declared, differs: damage 46-52->47-54 |
+| BalanceDruid | 60 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| BalanceDruid | 60 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
+| BalanceDruid | 60 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 60 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 60 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 60 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 55.79-63.01→55.79-63.01 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 60 | Wrath | 7 | 8905 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 46→46 | n/a | match |  | 69.34-77.46→69.34-77.46 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 60 | Wrath | 8 | 9912 | 120.00→120.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | n/a | match |  | 91.57-102.43→91.57-102.43 | 0.571→0.571 | declared, matches |
@@ -235,8 +235,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 10 | Innervate | 0 | 29166 | 7.45 (5% base mana)→7.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 10 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
 | FeralDruid | 10 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 11.27-14.73→11.27-14.73 | 0.150→0.150 | declared, matches |
-| FeralDruid | 10 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| FeralDruid | 10 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 20.56-23.84→23.52-27.28 | 0.486→0.486 | declared, differs: damage 21-24->24-27 |
+| FeralDruid | 10 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| FeralDruid | 10 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 20.56-23.84→20.56-23.84 | 0.486→0.486 | declared, matches |
 | FeralDruid | 20 | Cat Form | 0 | 768 | 194.70 (55% base mana)→194.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 20 | Claw | 1 | 1082 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | FeralDruid | 20 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -247,9 +247,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 20 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 20 | Rip | 1 | 1079 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | 12000→12000 | match |  | 3.00-3.00→3.00-3.00 | 0.400 (convention)→0.000 | declared, matches |
 | FeralDruid | 20 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  | 72.82-89.18→72.82-89.18 | 1.000→1.000 | declared, matches |
-| FeralDruid | 20 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| FeralDruid | 20 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→24.63-28.57 | 0.486→0.486 | declared, differs: damage 21-24->25-29 |
-| FeralDruid | 20 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→31.35-37.05 | 0.571→0.571 | declared, differs: damage 30-36->31-37 |
+| FeralDruid | 20 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| FeralDruid | 20 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
+| FeralDruid | 20 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
 | FeralDruid | 30 | Cat Form | 0 | 768 | 337.70 (55% base mana)→337.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 30 | Claw | 2 | 3029 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | FeralDruid | 30 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -266,10 +266,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 30 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  | 78.66-96.34→78.66-96.34 | 1.000→1.000 | declared, matches |
 | FeralDruid | 30 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 104.55-127.45→104.55-127.45 | 1.000→1.000 | declared, matches |
 | FeralDruid | 30 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→24 | 6000→6000 | match |  | n/a | n/a | n/a |
-| FeralDruid | 30 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| FeralDruid | 30 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→24.63-28.57 | 0.486→0.486 | declared, differs: damage 21-24->25-29 |
-| FeralDruid | 30 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→31.35-37.05 | 0.571→0.571 | declared, differs: damage 30-36->31-37 |
-| FeralDruid | 30 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→40.21-46.59 | 0.571→0.571 | declared, differs: damage 38-44->40-47 |
+| FeralDruid | 30 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| FeralDruid | 30 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
+| FeralDruid | 30 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| FeralDruid | 30 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
 | FeralDruid | 30 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 42.08-47.92→42.08-47.92 | 0.571→0.571 | declared, matches |
 | FeralDruid | 38 | Cat Form | 0 | 768 | 444.95 (55% base mana)→444.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 38 | Claw | 3 | 5201 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | n/a | match |  | n/a | n/a | n/a |
@@ -292,11 +292,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 38 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 107.26-130.74→107.26-130.74 | 1.000→1.000 | declared, matches |
 | FeralDruid | 38 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  | 136.79-164.01→136.79-164.01 | 1.000→1.000 | declared, matches |
 | FeralDruid | 38 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→24 | 6000→6000 | match |  | n/a | n/a | n/a |
-| FeralDruid | 38 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| FeralDruid | 38 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→24.63-28.57 | 0.486→0.486 | declared, differs: damage 21-24->25-29 |
-| FeralDruid | 38 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→31.35-37.05 | 0.571→0.571 | declared, differs: damage 30-36->31-37 |
-| FeralDruid | 38 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→40.21-46.59 | 0.571→0.571 | declared, differs: damage 38-44->40-47 |
-| FeralDruid | 38 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→47.13-53.67 | 0.571→0.571 | declared, differs: damage 46-52->47-54 |
+| FeralDruid | 38 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| FeralDruid | 38 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
+| FeralDruid | 38 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| FeralDruid | 38 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
+| FeralDruid | 38 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | FeralDruid | 38 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 50.72-57.28→50.72-57.28 | 0.571→0.571 | declared, matches |
 | FeralDruid | 40 | Cat Form | 0 | 768 | 469.70 (55% base mana)→469.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 40 | Claw | 3 | 5201 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 38→38 | n/a | match |  | n/a | n/a | n/a |
@@ -321,11 +321,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 40 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 107.26-130.74→107.26-130.74 | 1.000→1.000 | declared, matches |
 | FeralDruid | 40 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  | 139.70-167.50→139.70-167.50 | 1.000→1.000 | declared, matches |
 | FeralDruid | 40 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→24 | 6000→6000 | match |  | n/a | n/a | n/a |
-| FeralDruid | 40 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| FeralDruid | 40 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→24.63-28.57 | 0.486→0.486 | declared, differs: damage 21-24->25-29 |
-| FeralDruid | 40 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→31.35-37.05 | 0.571→0.571 | declared, differs: damage 30-36->31-37 |
-| FeralDruid | 40 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→40.21-46.59 | 0.571→0.571 | declared, differs: damage 38-44->40-47 |
-| FeralDruid | 40 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→47.13-53.67 | 0.571→0.571 | declared, differs: damage 46-52->47-54 |
+| FeralDruid | 40 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| FeralDruid | 40 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
+| FeralDruid | 40 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| FeralDruid | 40 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
+| FeralDruid | 40 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | FeralDruid | 40 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 52.41-59.19→52.41-59.19 | 0.571→0.571 | declared, matches |
 | FeralDruid | 50 | Cat Form | 0 | 768 | 585.20 (55% base mana)→585.20 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 50 | Claw | 4 | 9849 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 48→48 | n/a | match |  | n/a | n/a | n/a |
@@ -354,11 +354,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 50 | Starfire | 4 | 8951 | 230.00→230.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | n/a | match |  | 190.44-227.16→190.44-227.16 | 1.000→1.000 | declared, matches |
 | FeralDruid | 50 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  | 243.78-288.22→243.78-288.22 | 1.000→1.000 | declared, matches |
 | FeralDruid | 50 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→24 | 6000→6000 | match |  | n/a | n/a | n/a |
-| FeralDruid | 50 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| FeralDruid | 50 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→24.63-28.57 | 0.486→0.486 | declared, differs: damage 21-24->25-29 |
-| FeralDruid | 50 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→31.35-37.05 | 0.571→0.571 | declared, differs: damage 30-36->31-37 |
-| FeralDruid | 50 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→40.21-46.59 | 0.571→0.571 | declared, differs: damage 38-44->40-47 |
-| FeralDruid | 50 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→47.13-53.67 | 0.571→0.571 | declared, differs: damage 46-52->47-54 |
+| FeralDruid | 50 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| FeralDruid | 50 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
+| FeralDruid | 50 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| FeralDruid | 50 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
+| FeralDruid | 50 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | FeralDruid | 50 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 55.79-63.01→55.79-63.01 | 0.571→0.571 | declared, matches |
 | FeralDruid | 50 | Wrath | 7 | 8905 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 46→46 | n/a | match |  | 67.64-75.56→67.64-75.56 | 0.571→0.571 | declared, matches |
 | FeralDruid | 60 | Cat Form | 0 | 768 | 684.20 (55% base mana)→684.20 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
@@ -392,11 +392,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 60 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  | 255.87-302.53→255.87-302.53 | 1.000→1.000 | declared, matches |
 | FeralDruid | 60 | Starfire | 6 | 9876 | 315.00→315.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 58→58 | n/a | match |  | 313.43-369.77→313.43-369.77 | 1.000→1.000 | declared, matches |
 | FeralDruid | 60 | Tiger's Fury | 0 | 5217 | 0.00→0.00 | mana→none | 30000→30000 | 0→0 | 0→0 | 24→24 | 6000→6000 | match |  | n/a | n/a | n/a |
-| FeralDruid | 60 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→15.32-17.88 | 0.429→0.429 | declared, matches |
-| FeralDruid | 60 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→24.63-28.57 | 0.486→0.486 | declared, differs: damage 21-24->25-29 |
-| FeralDruid | 60 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→31.35-37.05 | 0.571→0.571 | declared, differs: damage 30-36->31-37 |
-| FeralDruid | 60 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→40.21-46.59 | 0.571→0.571 | declared, differs: damage 38-44->40-47 |
-| FeralDruid | 60 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→47.13-53.67 | 0.571→0.571 | declared, differs: damage 46-52->47-54 |
+| FeralDruid | 60 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
+| FeralDruid | 60 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
+| FeralDruid | 60 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| FeralDruid | 60 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
+| FeralDruid | 60 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | FeralDruid | 60 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 55.79-63.01→55.79-63.01 | 0.571→0.571 | declared, matches |
 | FeralDruid | 60 | Wrath | 7 | 8905 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 46→46 | n/a | match |  | 69.34-77.46→69.34-77.46 | 0.571→0.571 | declared, matches |
 | FeralDruid | 60 | Wrath | 8 | 9912 | 120.00→120.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | n/a | match |  | 91.57-102.43→91.57-102.43 | 0.571→0.571 | declared, matches |
@@ -591,6 +591,13 @@ Each spell below is built with exactly one point in the single talent that grant
 | FeralBearDruid (Primal Bite talent) | 40 | Primal Bite | 2 | 1238069 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | FeralBearDruid (Primal Bite talent) | 50 | Primal Bite | 3 | 1238070 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | n/a | n/a | n/a |
 | FeralBearDruid (Primal Bite talent) | 60 | Primal Bite | 4 | 1238073 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 10 | Shifting Power | 0 | 1322605 | 81.95 (55% base mana)→81.95 | mana→mana | 16000→16000 | 0→0 | 1000→1500 | 1→0 | n/a | mismatch | gcd_ms 1000->1500; required_level 1->0 | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 20 | Shifting Power | 0 | 1322605 | 194.70 (55% base mana)→194.70 | mana→mana | 16000→16000 | 0→0 | 1000→1500 | 1→0 | n/a | mismatch | gcd_ms 1000->1500; required_level 1->0 | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 30 | Shifting Power | 0 | 1322605 | 337.70 (55% base mana)→337.70 | mana→mana | 16000→16000 | 0→0 | 1000→1500 | 1→0 | n/a | mismatch | gcd_ms 1000->1500; required_level 1->0 | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 38 | Shifting Power | 0 | 1322605 | 444.95 (55% base mana)→444.95 | mana→mana | 16000→16000 | 0→0 | 1000→1500 | 1→0 | n/a | mismatch | gcd_ms 1000->1500; required_level 1->0 | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 40 | Shifting Power | 0 | 1322605 | 469.70 (55% base mana)→469.70 | mana→mana | 16000→16000 | 0→0 | 1000→1500 | 1→0 | n/a | mismatch | gcd_ms 1000->1500; required_level 1->0 | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 50 | Shifting Power | 0 | 1322605 | 585.20 (55% base mana)→585.20 | mana→mana | 16000→16000 | 0→0 | 1000→1500 | 1→0 | n/a | mismatch | gcd_ms 1000->1500; required_level 1->0 | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 60 | Shifting Power | 0 | 1322605 | 684.20 (55% base mana)→684.20 | mana→mana | 16000→16000 | 0→0 | 1000→1500 | 1→0 | n/a | mismatch | gcd_ms 1000->1500; required_level 1->0 | n/a | n/a | n/a |
 | RestorationDruid (Swiftmend talent) | 10 | Swiftmend | 0 | 18562 | 29.80 (20% base mana)→29.80 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | 1.00-1.00→1.00-1.00 | 0.214 (convention)→0.000 | declared, matches |
 | RestorationDruid (Swiftmend talent) | 20 | Swiftmend | 0 | 18562 | 70.80 (20% base mana)→70.80 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | 1.00-1.00→1.00-1.00 | 0.214 (convention)→0.000 | declared, matches |
 | RestorationDruid (Swiftmend talent) | 30 | Swiftmend | 0 | 18562 | 122.80 (20% base mana)→122.80 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | 1.00-1.00→1.00-1.00 | 0.214 (convention)→0.000 | declared, matches |
