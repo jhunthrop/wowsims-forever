@@ -87,7 +87,16 @@ const (
 	ShamanSpellMaskLightningBolt uint64 = 1 << iota
 	ShamanSpellMaskChainLightning
 	ShamanSpellMaskFlameShock
+	ShamanSpellMaskHealingWave
+	ShamanSpellMaskLesserHealingWave
+	ShamanSpellMaskChainHeal
+	ShamanSpellMaskRiptide
 )
+
+// ShamanSpellMaskHealing is every direct heal a healing talent reaches
+// ("your healing spells"); the totems' own heals are not cast spells.
+const ShamanSpellMaskHealing = ShamanSpellMaskHealingWave | ShamanSpellMaskLesserHealingWave |
+	ShamanSpellMaskChainHeal | ShamanSpellMaskRiptide
 
 const (
 	SpellCode_ShamanNone int32 = iota
@@ -122,7 +131,6 @@ type Shaman struct {
 	// Spells
 	ChainHeal            []*core.Spell
 	ChainLightning       []*core.Spell
-	EarthShield          *core.Spell
 	EarthShock           []*core.Spell
 	ElementalMastery     *core.Spell
 	FireNova             []*core.Spell
@@ -138,10 +146,12 @@ type Shaman struct {
 	LightningShield      []*core.Spell
 	LightningShieldProcs []*core.Spell // The damage component of lightning shield is a separate spell
 	MagmaTotem           []*core.Spell
+	ManaTideTotem        []*core.Spell
 	ManaSpringTotem      []*core.Spell
 	SearingTotem         []*core.Spell
 	StoneskinTotem       []*core.Spell
 	RageOfTheFarseer     *core.Spell
+	Riptide              []*core.Spell
 	Stormstrike          *core.Spell
 	StrengthOfEarthTotem []*core.Spell
 	TremorTotem          *core.Spell
@@ -160,6 +170,10 @@ type Shaman struct {
 	ActiveTotems     [4]*core.Spell
 	ActiveTotemBuffs [4]*core.Aura
 	TotemExpirations [4]time.Duration // The expiration time of each totem (earth, air, fire, water).
+
+	// dismissWaterTotem ends the water totem now standing; a new water
+	// totem calls it first because only one can stand at a time.
+	dismissWaterTotem func(*core.Simulation)
 
 	EarthTotems []*core.Spell
 	FireTotems  []*core.Spell
@@ -226,6 +240,7 @@ func (shaman *Shaman) Initialize() {
 func (shaman *Shaman) Reset(_ *core.Simulation) {
 	shaman.ActiveShield = nil
 	shaman.ActiveShieldAura = nil
+	shaman.dismissWaterTotem = nil
 
 	for i := range []int{EarthTotem, FireTotem, WaterTotem, AirTotem} {
 		shaman.ActiveTotems[i] = nil

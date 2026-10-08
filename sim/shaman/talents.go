@@ -69,46 +69,9 @@ func (shaman *Shaman) ApplyTalents() {
 	*/
 
 	// Restoration Talents
-	// TODO: Healing Way
-	// TODO: Ancestral Healing
+	shaman.applyRestorationTalents()
 	shaman.registerNaturesSwiftnessCD()
 	shaman.registerWaterShieldSpell()
-	// shaman.registerManaTideTotemCD()
-
-	if shaman.Talents.TidalFocus > 0 {
-		shaman.OnSpellRegistered(func(spell *core.Spell) {
-			if spell.Flags.Matches(SpellFlagShaman) && spell.ProcMask.Matches(core.ProcMaskSpellHealing) && spell.Cost != nil {
-				spell.Cost.Multiplier -= shaman.Talents.TidalFocus
-			}
-		})
-	}
-
-	// Forever: merged from MeleeHit + SpellHit, both float64(NaturesGuidance).
-	// One effect under a unified stat gets one write.
-	/*
-		shaman.AddStat(stats.Hit, float64(shaman.Talents.NaturesGuidance))
-	*/
-
-	/*
-		if shaman.Talents.HealingGrace > 0 {
-			threatMultiplier := 1 - .05*float64(shaman.Talents.HealingGrace)
-			shaman.OnSpellRegistered(func(spell *core.Spell) {
-				if spell.Flags.Matches(SpellFlagShaman) && spell.ProcMask.Matches(core.ProcMaskSpellHealing) {
-					spell.ThreatMultiplier *= threatMultiplier
-				}
-			})
-		}
-	*/
-
-	if shaman.Talents.TidalMastery > 0 {
-		critBonus := float64(shaman.Talents.TidalMastery) * core.CritRatingPerCritChance
-		shaman.OnSpellRegistered(func(spell *core.Spell) {
-			if spell.Flags.Matches(SpellFlagShaman) && (spell.ProcMask.Matches(core.ProcMaskSpellHealing) ||
-				spell.Flags.Matches(SpellFlagLightning)) {
-				spell.BonusCritRating += critBonus
-			}
-		})
-	}
 
 	shaman.applyUnmodeledTalents()
 }
@@ -429,8 +392,8 @@ func (shaman *Shaman) registerNaturesSwiftnessCD() {
 			},
 		},
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			// Don't use NS unless we're casting a full-length lightning bolt, which is
-			// the only spell shamans have with a cast longer than GCD.
+			// A temporary cast speed buff already shortens the cast NS would
+			// make instant, so the cooldown is better kept.
 			return !shaman.HasTemporarySpellCastSpeedIncrease()
 		},
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
@@ -441,6 +404,11 @@ func (shaman *Shaman) registerNaturesSwiftnessCD() {
 	shaman.AddMajorCooldown(core.MajorCooldown{
 		Spell: nsSpell,
 		Type:  core.CooldownTypeDPS,
+		// A healer spends Nature's Swiftness by hand on an emergency heal;
+		// autocast would burn it on the first cast of the fight.
+		ShouldActivate: func(_ *core.Simulation, _ *core.Character) bool {
+			return len(shaman.HealingWave) == 0
+		},
 	})
 }
 
@@ -527,61 +495,6 @@ func (shaman *Shaman) makeFlurryConsumptionTrigger(flurryAura *core.Aura) *core.
 func (shaman *Shaman) totemManaMultiplier() int32 {
 	return 100 - 5*shaman.Talents.TotemicFocus
 }
-
-// Restorative Totems uses Mod Spell Effectiveness (Base Value)
-func (shaman *Shaman) restorativeTotemsModifier() float64 {
-	return 0.05 * float64(shaman.Talents.RestorativeTotems)
-}
-
-// Purification uses Mod Spell Effectiveness (Base Healing)
-func (shaman *Shaman) purificationHealingModifier() float64 {
-	return .02 * float64(shaman.Talents.Purification)
-}
-
-// func (shaman *Shaman) registerManaTideTotemCD() {
-// 	if !shaman.Talents.ManaTideTotem {
-// 		return
-// 	}
-
-// 	mttAura := core.ManaTideTotemAura(shaman.GetCharacter(), shaman.Index)
-// 	mttSpell := shaman.RegisterSpell(core.SpellConfig{
-// 		ActionID: core.ManaTideTotemActionID,
-// 		Flags:    core.SpellFlagNoOnCastComplete,
-// 		Cast: core.CastConfig{
-// 			DefaultCast: core.Cast{
-// 				GCD: time.Second,
-// 			},
-// 			IgnoreHaste: true,
-// 			CD: core.Cooldown{
-// 				Timer:    shaman.NewTimer(),
-// 				Duration: time.Minute * 5,
-// 			},
-// 		},
-// 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-// 			mttAura.Activate(sim)
-
-// 			// If healing stream is active, cancel it while mana tide is up.
-// 			if shaman.HealingStreamTotem.Hot(&shaman.Unit).IsActive() {
-// 				for _, agent := range shaman.Party.Players {
-// 					shaman.HealingStreamTotem.Hot(&agent.GetCharacter().Unit).Cancel(sim)
-// 				}
-// 			}
-
-// 			// TODO: Current water totem buff needs to be removed from party/raid.
-// 			if shaman.Totems.Water != proto.WaterTotem_NoWaterTotem {
-// 				shaman.TotemExpirations[WaterTotem] = sim.CurrentTime + time.Second*12
-// 			}
-// 		},
-// 	})
-
-// 	shaman.AddMajorCooldown(core.MajorCooldown{
-// 		Spell: mttSpell,
-// 		Type:  core.CooldownTypeDPS,
-// 		ShouldActivate: func(sim *core.Simulation, character *core.Character) bool {
-// 			return sim.CurrentTime > time.Second*30
-// 		},
-// 	})
-// }
 
 // callOfThunderCritBonus is Call of Thunder's one rank (talents/shaman.json
 // node 104762, max_rank 1): "Increases the critical strike chance of
@@ -975,15 +888,9 @@ func (shaman *Shaman) applyUnmodeledTalents() {
 	_ = t.Earthbound            // Earthbind Totem immobilize is a CC utility, not damage.
 	_ = t.EarthsGrasp           // Stoneclaw Totem health and Earthbind Totem radius; no DPS effect.
 	_ = t.ImprovedGhostWolf     // Ghost Wolf cast time and indoor use; a travel buff, not combat.
-	_ = t.ImprovedHealingWave   // Restoration Healing Wave cast time; no Elemental/Enhancement DPS effect.
-	_ = t.Mindfulness           // Restoration mana-regen-while-casting; no DPS effect.
-	_ = t.NaturalGrace          // Restoration spell threat reduction; no DPS effect.
-	_ = t.ImprovedReincarnation // Reincarnation cooldown and return amount; a death-recovery utility.
-	_ = t.AncestralHealing      // armor buff on a healed target from a healing crit; no caster DPS effect.
-	_ = t.HealingFocus          // pushback resistance while casting healing spells; no DPS effect.
-	_ = t.ManaTideTotem         // raid mana cooldown; doesn't change the caster's own DPS (registerManaTideTotemCD above is already commented out as out of scope).
-	_ = t.HealingWay            // increases Healing Wave's healing done; no DPS effect.
-	_ = t.Riptide               // a heal and heal-over-time spell, not a damage spell, for Elemental or Enhancement.
+	_ = t.ImprovedReincarnation // Reincarnation cooldown and return amount; the sim has no death, so no ankh.
+	_ = t.AncestralHealing      // +armor on a healed target for 15 s after a healing crit; the raid damage model's hits are plain health loss that ignores armor, so it changes no healing outcome.
+	_ = t.HealingFocus          // avoids damage pushback while casting healing spells; the engine's pushback rolls the attacker's spell, and no fake raid damage ever hits the healer.
 }
 
 // rankIndex clamps a talent rank to a per-rank table's last entry, the
