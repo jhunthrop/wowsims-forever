@@ -1,5 +1,22 @@
 {
   "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 27871,
+            "rank": 3
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-2.5s"
+        }
+      }
+    }
+  ],
   "priorityList": [
     {
       "action": {
