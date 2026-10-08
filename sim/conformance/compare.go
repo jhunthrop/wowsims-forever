@@ -203,7 +203,7 @@ func rowFor(clientClass spellconst.Class, spec Preset, level int32, character *c
 		ClientRequiredLevel: clientSpell.SpellLevel,
 		EngineRequiredLevel: spell.RequiredLevel,
 
-		ClientDurationMS: clientSpell.DurationMS,
+		ClientDurationMS: clientDurationMS(clientClass, clientSpell, spec.SkipUnsimmedMovementDurations),
 
 		EngineCooldownMS: int32(spell.CD.Duration / time.Millisecond),
 		EngineCastTimeMS: int32(spell.DefaultCast.CastTime / time.Millisecond),
@@ -228,7 +228,7 @@ func rowFor(clientClass spellconst.Class, spec Preset, level int32, character *c
 		row.EngineCostType = "none"
 	}
 
-	row.EngineDurationMS, row.EngineDurationFound = engineDuration(spell, character, siblingSpellIDs(clientClass, clientSpell.Name))
+	row.EngineDurationMS, row.EngineDurationFound = engineDurationOn(spell, character, siblingSpellIDs(clientClass, clientSpell.Name), durationTarget(spec, spell.Unit))
 	row.HasDuration = row.EngineDurationFound
 	if row.ClientDurationMS > 0 {
 		row.HasDuration = true
@@ -292,11 +292,20 @@ func siblingSpellIDs(clientClass spellconst.Class, name string) map[int32]bool {
 // function alone - rowFor's HasDuration/ClientDurationMS combination,
 // not found, is what tells those apart for the golden.
 func engineDuration(spell *core.Spell, character *core.Character, siblingIDs map[int32]bool) (ms int32, found bool) {
+	if spell.Unit == nil {
+		return engineDurationOn(spell, character, siblingIDs, nil)
+	}
+	return engineDurationOn(spell, character, siblingIDs, spell.Unit.CurrentTarget)
+}
+
+// engineDurationOn is engineDuration reading step 2 and 4's target as the
+// given unit instead of the caster's current target.
+func engineDurationOn(spell *core.Spell, character *core.Character, siblingIDs map[int32]bool, target *core.Unit) (ms int32, found bool) {
 	if spell.RelatedSelfBuff != nil {
 		return auraDurationMS(spell.RelatedSelfBuff), true
 	}
-	if spell.Dots() != nil && spell.Unit != nil && spell.Unit.CurrentTarget != nil {
-		if dot := spell.Dot(spell.Unit.CurrentTarget); dot != nil && dot.Aura != nil {
+	if spell.Dots() != nil && spell.Unit != nil && target != nil {
+		if dot := spell.Dot(target); dot != nil && dot.Aura != nil {
 			return auraDurationMS(dot.Aura), true
 		}
 	}
@@ -308,7 +317,7 @@ func engineDuration(spell *core.Spell, character *core.Character, siblingIDs map
 	if aura := matchingAura(spell.Unit.GetAuras(), siblingIDs); aura != nil {
 		return auraDurationMS(aura), true
 	}
-	if target := spell.Unit.CurrentTarget; target != nil {
+	if target != nil {
 		if aura := matchingAura(target.GetAuras(), siblingIDs); aura != nil {
 			return auraDurationMS(aura), true
 		}
@@ -321,6 +330,26 @@ func engineDuration(spell *core.Spell, character *core.Character, siblingIDs map
 		}
 	}
 	return 0, false
+}
+
+// durationTarget is the unit whose Dot and auras rowFor reads for a
+// spell: the caster's current target, or - when the preset opts in with
+// ReadDebuffsOnEnemy - the first enemy unit in its environment, because a
+// healing spec's current target is an ally though its Faerie Fire still
+// debuffs the encounter's enemy.
+func durationTarget(spec Preset, caster *core.Unit) *core.Unit {
+	if !spec.ReadDebuffsOnEnemy || caster == nil || caster.Env == nil {
+		if caster == nil {
+			return nil
+		}
+		return caster.CurrentTarget
+	}
+	for _, unit := range caster.Env.AllUnits {
+		if unit.Type == core.EnemyUnit {
+			return unit
+		}
+	}
+	return nil
 }
 
 // auraDurationMS converts an aura's Duration to the client's own

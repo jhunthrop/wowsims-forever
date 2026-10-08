@@ -339,8 +339,8 @@ func (cat *FeralDruid) doRotation(sim *core.Simulation) (bool, time.Duration) {
 	// Additionally, don't Rake if there is insufficient time to max out
 	// our available glyph of shred extensions before rip falls off
 	if rakeNow && ripDot.IsActive() {
-		maxRipDur := time.Duration(cat.maxRipTicks) * ripDot.TickLength
-		remainingExt := cat.maxRipTicks - ripDot.NumberOfTicks
+		maxRipDur := time.Duration(druid.RipNumberOfTicks) * ripDot.TickLength
+		remainingExt := druid.RipNumberOfTicks - ripDot.NumberOfTicks
 		energyForShreds := curEnergy - cat.CurrentRakeCost() - 30 + core.EnergyForTime(ripDot.StartedAt()+maxRipDur-sim.CurrentTime) + core.Ternary(cat.tfExpectedBefore(sim, ripDot.StartedAt()+maxRipDur), 60.0, 0.0)
 		maxShredsPossible := min(energyForShreds/cat.Shred.DefaultCast.Cost, (ripDot.ExpiresAt() - (sim.CurrentTime + time.Second)).Seconds())
 		rakeNow = remainingExt == 0 || (maxShredsPossible > float64(remainingExt))

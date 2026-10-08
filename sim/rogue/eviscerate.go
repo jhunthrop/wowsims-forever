@@ -9,7 +9,11 @@ import (
 // eviscerateLearnLevels are Eviscerate's nine rank learn levels; source:
 // 1.60.1.70009 client spell data ("Eviscerate", ranks 1-9; the level-1
 // rank-0 ids are internal copies, not player ranks).
-var eviscerateLearnLevels = []int{1, 8, 16, 24, 32, 40, 48, 56, 60}
+//
+// The ninth slot is rank 9 (spell 31016, level 60) only with AQ content;
+// without it the slot casts rank 8's spell 11300, so it carries rank 8's
+// learn level (56) rather than a level the client does not state for 11300.
+var eviscerateLearnLevels = []int{1, 8, 16, 24, 32, 40, 48, 56, core.TernaryInt(core.IncludeAQ, 60, 56)}
 
 // eviscerateSpellID is Eviscerate's rank -> spell id, index 0 unused.
 // Rank 9 only exists with AQ content, same as the old code's ternary.

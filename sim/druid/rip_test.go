@@ -5,39 +5,32 @@ import (
 	"time"
 )
 
-// TestRipTicksScalesWithComboPoints pins the fix in this lane: Rip's
-// duration must follow combo points instead of the fixed 6 ticks (12 s)
-// every rank previously got regardless of how many combo points were
-// spent -- the bug that made Ferocious Bite unreachable, since Rip never
-// got close to expiring at low combo point counts.
-func TestRipTicksScalesWithComboPoints(t *testing.T) {
-	druid := &Druid{}
-
-	onePointTicks := druid.RipTicks(1)
-	fivePointTicks := druid.RipTicks(5)
-
-	if fivePointTicks <= onePointTicks {
-		t.Fatalf("a 5-combo-point Rip (%d ticks) must last longer than a 1-combo-point Rip (%d ticks)", fivePointTicks, onePointTicks)
-	}
-
-	// Classic's published table: 8/10/12/14/16 sec for 1-5 combo points,
-	// i.e. 3 base ticks @ 2s plus 1 tick per combo point.
-	for comboPoints, wantSeconds := range map[int32]int32{1: 8, 2: 10, 3: 12, 4: 14, 5: 16} {
-		if got := druid.RipTicks(comboPoints) * 2; got != wantSeconds {
-			t.Errorf("Rip duration at %d combo points = %d sec, want %d sec", comboPoints, got, wantSeconds)
-		}
+// Rip's client tooltip states "damage over $d" for one through five combo
+// points alike (spell 9896: duration 12000 ms, 2 s period), so the
+// duration is fixed and the combo points only scale the damage per tick.
+func TestRipDurationIsFixedAtTwelveSeconds(t *testing.T) {
+	if got, want := time.Duration(RipNumberOfTicks)*2*time.Second, 12*time.Second; got != want {
+		t.Errorf("Rip lasts %v, want %v (the client's duration_ms 12000 on every rank)", got, want)
 	}
 }
 
-// TestRipDurationMatchesTicksTimesTickLength pins RipDuration against
-// RipTicks directly, so the two helpers can't drift apart.
-func TestRipDurationMatchesTicksTimesTickLength(t *testing.T) {
-	druid := &Druid{}
+// ripTickPerComboPoint is the client's EffectPointsPerResource for effect 0
+// of each rank: SpellEffect.csv 1079, 9492, 9493, 9752, 9894, 9896.
+func TestRipComboPointStepsMatchClient(t *testing.T) {
+	want := [RipRanks + 1]float64{0, 4.4, 7.2, 8.5, 12.7, 18.2, 25.5}
+	if ripTickPerComboPoint != want {
+		t.Errorf("ripTickPerComboPoint = %v, want %v", ripTickPerComboPoint, want)
+	}
+}
 
-	for comboPoints := int32(1); comboPoints <= 5; comboPoints++ {
-		want := time.Duration(druid.RipTicks(comboPoints)) * time.Second * 2
-		if got := druid.RipDuration(comboPoints); got != want {
-			t.Errorf("RipDuration(%d) = %v, want %v", comboPoints, got, want)
+// PounceTickDamage is the "Pounce Bleed" spells' effect 0 (SpellEffect.csv
+// 9007, 9824, 9826), which the vendored spellconst file does not carry.
+func TestPounceTickDamage(t *testing.T) {
+	want := [PounceRanks + 1]float64{0, 15, 20, 25}
+	for rank := 1; rank <= PounceRanks; rank++ {
+		got := PounceTickDamage[rank]
+		if got.Amount != want[rank] || got.SpellLevel != PounceLevel[rank] {
+			t.Errorf("rank %d: tick %v at spell level %d, want %v at %d", rank, got.Amount, got.SpellLevel, want[rank], PounceLevel[rank])
 		}
 	}
 }

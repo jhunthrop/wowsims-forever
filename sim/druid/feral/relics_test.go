@@ -36,13 +36,14 @@ func TestIdolOfTheDreamExtendsRipByOneTickOnly(t *testing.T) {
 	}
 }
 
-// The extra tick must survive Rip's own per-cast tick count, which follows
-// the combo points spent: 5 points is 3+5 ticks, plus the idol's one.
+// The extra tick must survive Rip's own per-cast tick count, which is the
+// client's fixed six ticks (12 s) whatever the combo points: plus the idol's
+// one.
 func TestIdolOfTheDreamAddsATickToEveryRipCast(t *testing.T) {
 	for _, tc := range []struct {
 		relic int32
 		want  time.Duration
-	}{{0, 16 * time.Second}, {druid.IdolOfTheDream, 18 * time.Second}} {
+	}{{0, 12 * time.Second}, {druid.IdolOfTheDream, 14 * time.Second}} {
 		built, sim, target := newFeralDruidSimWearing(t, 60, P1Talents, core.RelicEquipment(tc.relic))
 		built.AddComboPoints(sim, 5, target, built.NewComboPointMetrics(core.ActionID{SpellID: 1}))
 		built.Rip.Cast(sim, target)

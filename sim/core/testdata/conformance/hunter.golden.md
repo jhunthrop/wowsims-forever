@@ -14,6 +14,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Hunter | 10 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.204 | declared, matches |
 | Hunter | 10 | Aspect of the Hawk | 1 | 13165 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
+| Hunter | 10 | Hunter's Mark | 1 | 1130 | 15.00→15.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 120000→120000 | match |  | n/a | n/a | n/a |
 | Hunter | 10 | Raptor Strike | 2 | 14260 | 25.00→25.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 8→8 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | Hunter | 10 | Serpent Sting | 2 | 13549 | 30.00→30.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 6.00-6.00→6.00-6.00 | 1.000 (convention)→0.000 | declared, matches |
 | Hunter | 20 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
@@ -21,13 +22,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 20 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.300 | declared, matches |
 | Hunter | 20 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 20 | Aspect of the Hawk | 2 | 14318 | 35.00→35.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | -1→-1 | match |  | n/a | n/a | n/a |
-| Hunter | 20 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter | 20 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
+| Hunter | 20 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
+| Hunter | 20 | Hunter's Mark | 1 | 1130 | 15.00→15.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 120000→120000 | match |  | n/a | n/a | n/a |
+| Hunter | 20 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 20 | Mongoose Bite | 1 | 1495 | 30.00→30.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 16→16 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | Hunter | 20 | Multi-Shot | 0 | 2643 | 62.69 (13.89999961853% base mana)→62.69 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 20 | Raptor Strike | 3 | 14261 | 35.00→35.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 16→16 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | Hunter | 20 | Serpent Sting | 3 | 13550 | 50.00→50.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 18→18 | 15000→15000 | match |  | 12.00-12.00→12.00-12.00 | 1.000 (convention)→0.000 | declared, matches |
-| Hunter | 20 | Wing Clip | 1 | 2974 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 10000→0 | mismatch | duration_ms 10000->0 (no aura registered) | 5.00-5.00→5.00-5.00 | 1.000→1.000 | declared, matches |
+| Hunter | 20 | Wing Clip | 1 | 2974 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | 5.00-5.00→5.00-5.00 | 1.000→1.000 | declared, matches |
 | Hunter | 30 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Aimed Shot | 2 | 20900 | 115.00→115.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.204 | declared, matches |
@@ -35,16 +37,17 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 30 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 30 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 30 | Aspect of the Hawk | 3 | 14319 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | -1→-1 | match |  | n/a | n/a | n/a |
-| Hunter | 30 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter | 30 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
-| Hunter | 30 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
+| Hunter | 30 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
+| Hunter | 30 | Hunter's Mark | 2 | 14323 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 120000→120000 | match |  | n/a | n/a | n/a |
+| Hunter | 30 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 15000→15000 | match |  | n/a | n/a | n/a |
+| Hunter | 30 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Lacerate | 1 | 24118 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 21000→21000 | match |  | 17.00-17.00→17.00-17.00 | 1.400 (convention)→0.000 | declared, matches |
 | Hunter | 30 | Mongoose Bite | 2 | 14269 | 40.00→40.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | Hunter | 30 | Multi-Shot | 0 | 2643 | 107.72 (13.89999961853% base mana)→107.73 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Raptor Strike | 4 | 14262 | 45.00→45.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 24→24 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | Hunter | 30 | Serpent Sting | 4 | 13551 | 80.00→80.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | 22.00-22.00→22.00-22.00 | 1.000 (convention)→0.000 | declared, matches |
-| Hunter | 30 | Wing Clip | 1 | 2974 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 10000→0 | mismatch | duration_ms 10000->0 (no aura registered) | 5.00-5.00→5.00-5.00 | 1.000→1.000 | declared, matches |
+| Hunter | 30 | Wing Clip | 1 | 2974 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | 5.00-5.00→5.00-5.00 | 1.000→1.000 | declared, matches |
 | Hunter | 38 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Aimed Shot | 2 | 20900 | 115.00→115.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Aimed Shot | 3 | 20901 | 160.00→160.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
@@ -54,18 +57,19 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 38 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 38 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 38 | Aspect of the Hawk | 4 | 14320 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | -1→-1 | match |  | n/a | n/a | n/a |
-| Hunter | 38 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
-| Hunter | 38 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter | 38 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
-| Hunter | 38 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
-| Hunter | 38 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
+| Hunter | 38 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 20000→20000 | match |  | n/a | n/a | n/a |
+| Hunter | 38 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
+| Hunter | 38 | Hunter's Mark | 2 | 14323 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 120000→120000 | match |  | n/a | n/a | n/a |
+| Hunter | 38 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 15000→15000 | match |  | n/a | n/a | n/a |
+| Hunter | 38 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
+| Hunter | 38 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Lacerate | 1 | 24118 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 21000→21000 | match |  | 21.00-21.00→21.00-21.00 | 1.400 (convention)→0.000 | declared, matches |
 | Hunter | 38 | Mongoose Bite | 2 | 14269 | 40.00→40.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | Hunter | 38 | Multi-Shot | 0 | 2643 | 145.25 (13.89999961853% base mana)→145.26 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Rapid Fire | 0 | 3045 | 100.00→100.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Raptor Strike | 5 | 14263 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 32→32 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | Hunter | 38 | Serpent Sting | 5 | 13552 | 115.00→115.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 34→34 | 15000→15000 | match |  | 34.00-34.00→34.00-34.00 | 1.000 (convention)→0.000 | declared, matches |
-| Hunter | 38 | Wing Clip | 2 | 14267 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 10000→0 | mismatch | duration_ms 10000->0 (no aura registered) | 25.00-25.00→25.00-25.00 | 1.000→1.000 | declared, matches |
+| Hunter | 38 | Wing Clip | 2 | 14267 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  | 25.00-25.00→25.00-25.00 | 1.000→1.000 | declared, matches |
 | Hunter | 40 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Aimed Shot | 2 | 20900 | 115.00→115.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Aimed Shot | 3 | 20901 | 160.00→160.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
@@ -75,12 +79,13 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 40 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 40 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 40 | Aspect of the Hawk | 4 | 14320 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | -1→-1 | match |  | n/a | n/a | n/a |
-| Hunter | 40 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
-| Hunter | 40 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter | 40 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter | 40 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
-| Hunter | 40 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
-| Hunter | 40 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
+| Hunter | 40 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 20000→20000 | match |  | n/a | n/a | n/a |
+| Hunter | 40 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
+| Hunter | 40 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
+| Hunter | 40 | Hunter's Mark | 3 | 14324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 120000→120000 | match |  | n/a | n/a | n/a |
+| Hunter | 40 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 15000→15000 | match |  | n/a | n/a | n/a |
+| Hunter | 40 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
+| Hunter | 40 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Lacerate | 2 | 24119 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 21000→21000 | match |  | 28.00-28.00→28.00-28.00 | 1.400 (convention)→0.000 | declared, matches |
 | Hunter | 40 | Mongoose Bite | 2 | 14269 | 40.00→40.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 30→30 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | Hunter | 40 | Multi-Shot | 0 | 2643 | 153.59 (13.89999961853% base mana)→153.60 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | match |  | n/a | n/a | n/a |
@@ -88,7 +93,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 40 | Raptor Strike | 6 | 14264 | 70.00→70.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 40→40 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | Hunter | 40 | Serpent Sting | 5 | 13552 | 115.00→115.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 34→34 | 15000→15000 | match |  | 34.00-34.00→34.00-34.00 | 1.000 (convention)→0.000 | declared, matches |
 | Hunter | 40 | Volley | 1 | 1510 | 350.00→350.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 6000→6000 | match |  | n/a | n/a | n/a |
-| Hunter | 40 | Wing Clip | 2 | 14267 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 10000→0 | mismatch | duration_ms 10000->0 (no aura registered) | 25.00-25.00→25.00-25.00 | 1.000→1.000 | declared, matches |
+| Hunter | 40 | Wing Clip | 2 | 14267 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  | 25.00-25.00→25.00-25.00 | 1.000→1.000 | declared, matches |
 | Hunter | 50 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Aimed Shot | 2 | 20900 | 115.00→115.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Aimed Shot | 3 | 20901 | 160.00→160.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
@@ -100,14 +105,15 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 50 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 50 | Arcane Shot | 6 | 14285 | 135.00→135.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 44→44 | n/a | match |  | 134.00-134.00→134.00-134.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 50 | Aspect of the Hawk | 5 | 14321 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | -1→-1 | match |  | n/a | n/a | n/a |
-| Hunter | 50 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
-| Hunter | 50 | Explosive Trap | 2 | 14316 | 395.00→395.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 44→44 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
-| Hunter | 50 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter | 50 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter | 50 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
-| Hunter | 50 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
-| Hunter | 50 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
-| Hunter | 50 | Immolation Trap | 4 | 14304 | 190.00→190.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 46→46 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
+| Hunter | 50 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 20000→20000 | match |  | n/a | n/a | n/a |
+| Hunter | 50 | Explosive Trap | 2 | 14316 | 395.00→395.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 44→44 | 20000→20000 | match |  | n/a | n/a | n/a |
+| Hunter | 50 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
+| Hunter | 50 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
+| Hunter | 50 | Hunter's Mark | 3 | 14324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 120000→120000 | match |  | n/a | n/a | n/a |
+| Hunter | 50 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 15000→15000 | match |  | n/a | n/a | n/a |
+| Hunter | 50 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
+| Hunter | 50 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 15000→15000 | match |  | n/a | n/a | n/a |
+| Hunter | 50 | Immolation Trap | 4 | 14304 | 190.00→190.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 46→46 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Lacerate | 3 | 24120 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 21000→21000 | match |  | 40.00-40.00→40.00-40.00 | 1.400 (convention)→0.000 | declared, matches |
 | Hunter | 50 | Mongoose Bite | 3 | 14270 | 50.00→50.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 44→44 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | Hunter | 50 | Multi-Shot | 0 | 2643 | 197.38 (13.89999961853% base mana)→197.38 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | match |  | n/a | n/a | n/a |
@@ -115,7 +121,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 50 | Raptor Strike | 7 | 14265 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 48→48 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | Hunter | 50 | Serpent Sting | 7 | 13554 | 190.00→190.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | 64.00-64.00→64.00-64.00 | 1.000 (convention)→0.000 | declared, matches |
 | Hunter | 50 | Volley | 2 | 14294 | 420.00→420.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 6000→6000 | match |  | n/a | n/a | n/a |
-| Hunter | 50 | Wing Clip | 2 | 14267 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 10000→0 | mismatch | duration_ms 10000->0 (no aura registered) | 25.00-25.00→25.00-25.00 | 1.000→1.000 | declared, matches |
+| Hunter | 50 | Wing Clip | 2 | 14267 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | n/a | match |  | 25.00-25.00→25.00-25.00 | 1.000→1.000 | declared, matches |
 | Hunter | 60 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Aimed Shot | 2 | 20900 | 115.00→115.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Aimed Shot | 3 | 20901 | 160.00→160.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
@@ -130,18 +136,20 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 60 | Arcane Shot | 6 | 14285 | 135.00→135.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 44→44 | n/a | match |  | 134.00-134.00→134.00-134.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 60 | Arcane Shot | 7 | 14286 | 160.00→160.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 52→52 | n/a | match |  | 170.00-170.00→170.00-170.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 60 | Arcane Shot | 8 | 14287 | 190.00→190.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 60→60 | n/a | match |  | 217.00-217.00→217.00-217.00 | 0.429 (convention)→0.429 | declared, matches |
+| Hunter | 60 | Aspect of the Falcon | 0 | 469145 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Aspect of the Hawk | 5 | 14321 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | -1→-1 | match |  | n/a | n/a | n/a |
-| Hunter | 60 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
-| Hunter | 60 | Explosive Trap | 2 | 14316 | 395.00→395.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 44→44 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
-| Hunter | 60 | Explosive Trap | 3 | 14317 | 520.00→520.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 54→54 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
-| Hunter | 60 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter | 60 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter | 60 | Freezing Trap | 3 | 14311 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 60→60 | 60000→0 | mismatch | duration_ms 60000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter | 60 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
-| Hunter | 60 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
-| Hunter | 60 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
-| Hunter | 60 | Immolation Trap | 4 | 14304 | 190.00→190.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 46→46 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
-| Hunter | 60 | Immolation Trap | 5 | 14305 | 245.00→245.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 56→56 | 60000→15000 | mismatch | duration_ms 60000->15000 | n/a | n/a | n/a |
+| Hunter | 60 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 20000→20000 | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Explosive Trap | 2 | 14316 | 395.00→395.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 44→44 | 20000→20000 | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Explosive Trap | 3 | 14317 | 520.00→520.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 54→54 | 20000→20000 | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Freezing Trap | 3 | 14311 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Hunter's Mark | 4 | 1213268 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 120000→120000 | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 15000→15000 | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Immolation Trap | 3 | 14303 | 135.00→135.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 36→36 | 15000→15000 | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Immolation Trap | 4 | 14304 | 190.00→190.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 46→46 | 15000→15000 | match |  | n/a | n/a | n/a |
+| Hunter | 60 | Immolation Trap | 5 | 14305 | 245.00→245.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 56→56 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Lacerate | 4 | 1299332 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 21000→21000 | match |  | 58.00-58.00→58.00-58.00 | 1.400 (convention)→0.000 | declared, matches |
 | Hunter | 60 | Mongoose Bite | 4 | 14271 | 65.00→65.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 58→58 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | Hunter | 60 | Multi-Shot | 0 | 2643 | 239.08 (13.89999961853% base mana)→239.08 | mana→mana | 6000→6000 | 500→500 | 1500→1500 | 18→18 | n/a | match |  | n/a | n/a | n/a |
@@ -149,7 +157,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 60 | Raptor Strike | 8 | 14266 | 100.00→100.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 56→56 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | Hunter | 60 | Serpent Sting | 8 | 13555 | 230.00→230.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 58→58 | 15000→15000 | match |  | 83.00-83.00→83.00-83.00 | 1.000 (convention)→0.000 | declared, matches |
 | Hunter | 60 | Volley | 3 | 14295 | 490.00→490.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 6000→6000 | match |  | n/a | n/a | n/a |
-| Hunter | 60 | Wing Clip | 3 | 14268 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 10000→0 | mismatch | duration_ms 10000->0 (no aura registered) | 50.00-50.00→50.00-50.00 | 1.000→1.000 | declared, matches |
+| Hunter | 60 | Wing Clip | 3 | 14268 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | 50.00-50.00→50.00-50.00 | 1.000→1.000 | declared, matches |
 ## Talent-gated spells
 
 Each spell below is built with exactly one point in the single talent that grants it (and nothing else), so its base cost/cooldown/cast-time/GCD/duration can still be checked against the client even though it has no row above.
@@ -171,11 +179,11 @@ Each spell below is built with exactly one point in the single talent that grant
 | Hunter (Sniper Shot talent) | 40 | Sniper Shot | 1 | 1310687 | 365.00→365.00 | mana→mana | 15000→15000 | 4000→4000 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | Hunter (Sniper Shot talent) | 50 | Sniper Shot | 2 | 1310785 | 365.00→365.00 | mana→mana | 15000→15000 | 4000→4000 | 1500→1500 | 48→48 | n/a | match |  | n/a | n/a | n/a |
 | Hunter (Sniper Shot talent) | 60 | Sniper Shot | 3 | 1310786 | 365.00→365.00 | mana→mana | 15000→15000 | 4000→4000 | 1500→1500 | 58→58 | n/a | match |  | n/a | n/a | n/a |
-| Hunter (Strider Kick talent) | 30 | Strider Kick | 1 | 1317257 | 45.03 (5.80999994278% base mana)→45.03 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter (Strider Kick talent) | 38 | Strider Kick | 1 | 1317257 | 60.71 (5.80999994278% base mana)→60.71 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter (Strider Kick talent) | 40 | Strider Kick | 1 | 1317257 | 64.20 (5.80999994278% base mana)→64.20 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter (Strider Kick talent) | 50 | Strider Kick | 1 | 1317257 | 82.50 (5.80999994278% base mana)→82.50 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
-| Hunter (Strider Kick talent) | 60 | Strider Kick | 1 | 1317257 | 99.93 (5.80999994278% base mana)→99.93 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 3000→0 | mismatch | duration_ms 3000->0 (no aura registered) | n/a | n/a | n/a |
+| Hunter (Strider Kick talent) | 30 | Strider Kick | 1 | 1317257 | 45.03 (5.80999994278% base mana)→45.03 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
+| Hunter (Strider Kick talent) | 38 | Strider Kick | 1 | 1317257 | 60.71 (5.80999994278% base mana)→60.71 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
+| Hunter (Strider Kick talent) | 40 | Strider Kick | 1 | 1317257 | 64.20 (5.80999994278% base mana)→64.20 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
+| Hunter (Strider Kick talent) | 50 | Strider Kick | 1 | 1317257 | 82.50 (5.80999994278% base mana)→82.50 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
+| Hunter (Strider Kick talent) | 60 | Strider Kick | 1 | 1317257 | 99.93 (5.80999994278% base mana)→99.93 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | Hunter (Summon Hawk talent) | 30 | Summon Hawk | 1 | 1293241 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 25→25 | n/a | match |  | 32.00-32.00→32.00-32.00 | 0.429 (convention)→0.000 | declared, matches |
 | Hunter (Summon Hawk talent) | 38 | Summon Hawk | 2 | 1293525 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 47.00-47.00→47.00-47.00 | 0.429 (convention)→0.000 | declared, matches |
 | Hunter (Summon Hawk talent) | 40 | Summon Hawk | 2 | 1293525 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 47.00-47.00→47.00-47.00 | 0.429 (convention)→0.000 | declared, matches |
@@ -183,13 +191,12 @@ Each spell below is built with exactly one point in the single talent that grant
 | Hunter (Summon Hawk talent) | 60 | Summon Hawk | 4 | 1293527 | 190.00→190.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 60→60 | n/a | match |  | 108.00-108.00→108.00-108.00 | 0.429 (convention)→0.000 | declared, matches |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 30 of the class's 49 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 27 of the class's 49 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
 | Heart of the Lion (409580) | 1→1 | 1 | Survival | skill_line_ability | 0 | 0 | 0 |  |
 | Aspect of the Monkey (13163) | 4→4 | 1 | Beast Mastery | skill_line_ability | 20 mana | 0 | 0 | power cost |
-| Hunter's Mark (1130) | 6→58 | 5 | Marksmanship | skill_line_ability | 60 mana | 0 | 0 | power cost |
 | Concussive Shot (5116) | 8→8 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 12000 | cooldown |
 | Dismiss Pet (2641) | 10→10 | 1 | Beast Mastery | skill_line_ability | 0 | 5000 | 0 | cast time |
 | Revive Pet (982) | 10→10 | 1 | Beast Mastery | skill_line_ability | 0 | 10000 | 0 | cast time |
@@ -204,7 +211,6 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Disengage (781) | 20→48 | 3 | Survival | skill_line_ability | 150 mana | 0 | 5000 | power cost, cooldown |
 | Scorpid Sting (3043) | 22→22 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 0 |  |
 | Beast Lore (1462) | 24→24 | 1 | Beast Mastery | skill_line_ability | 40 mana | 0 | 0 | power cost |
-| Trueshot Aura (1299346) | 25→60 | 5 | Marksmanship | skill_line_ability | 525 mana | 0 | 0 | power cost |
 | Frost Trap (13809) | 28→28 | 1 | Survival | skill_line_ability | 60 mana | 0 | 30000 | power cost, cooldown |
 | Aspect of the Beast (13161) | 30→60 | 4 | Beast Mastery | skill_line_ability | 110 mana | 0 | 0 | power cost |
 | Feign Death (5384) | 30→30 | 1 | Survival | skill_line_ability | 80 mana | 0 | 30000 | power cost, cooldown |
@@ -215,8 +221,15 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Viper Sting (3034) | 36→56 | 3 | Marksmanship | skill_line_ability | 215 mana | -1000000 | 15000 | power cost, cooldown |
 | Aspect of the Pack (13159) | 40→40 | 1 | Beast Mastery | skill_line_ability | 100 mana | 0 | 0 | power cost |
 | Aspect of the Wild (20043) | 46→56 | 2 | Beast Mastery | skill_line_ability | 115 mana | 0 | 0 | power cost |
-| Aspect of the Falcon (469145) | 60→60 | 1 | Beast Mastery | skill_line_ability | 120 mana | 0 | 0 | power cost |
 | Tranquilizing Shot (19801) | 60→60 | 1 | Beast Mastery | skill_line_ability | 270 mana | -1000000 | 20000 | power cost, cooldown |
+
+### Modelled as a raid buff
+
+Active trainables the engine does not register as a spell because the presets assume them as a raid buff, applied from the character's level through a core.BuffRanks table with the client's amount per rank (sim/conformance/trainable_notes.go names the tables). They are counted in the total above and not listed in the table above.
+
+| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
+|---|---|---|---|---|---|---|---|---|
+| Trueshot Aura (1299346) | 25→60 | 5 | Marksmanship | skill_line_ability | 525 mana | 0 | 0 | power cost |
 
 ### In the client, no learn row
 

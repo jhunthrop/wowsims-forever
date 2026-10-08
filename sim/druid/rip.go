@@ -12,33 +12,19 @@ var RipTickDamage = clientdamage.FromTable(RipBaseDamage[:], RipPointsPerLevel[:
 
 // The Rip ladder is constants_auto_gen.go's: RipBaseDamage is the client's
 // per-tick base (rank 6: 15, where the Era ladder this replaced had 17).
-// The client's rows state no per-combo-point step (effect 1 is a zero-amount
-// dummy), so the step below stays the Era figure.
-var ripTickPerComboPoint = [RipRanks + 1]float64{0, 4, 7, 9, 14, 20, 28}
+// ripTickPerComboPoint is the client's EffectPointsPerResource for effect 0
+// of each rank (1.60.1.70009 SpellEffect.csv, ids 1079-9896), which the
+// vendored spellconst does not carry: the tooltip reads "${6*($m1+N*$b1)}
+// damage over $d" for N combo points, so each combo point adds its step to
+// every one of the six ticks.
+var ripTickPerComboPoint = [RipRanks + 1]float64{0, 4.4, 7.2, 8.5, 12.7, 18.2, 25.5}
 
-// RipBaseTicks/RipTicks/RipDuration: Classic's well-documented Rip
-// duration scales with combo points the same way Rogue's Rupture does
-// (sim/rogue/rupture.go's RuptureTicks): 3 ticks @ 2s (6s) base, +1 tick
-// (2s) per combo point, giving 8/10/12/14/16 sec for 1-5 combo points.
-// The client's duration_ms (12000ms, identical on every one of Rip's six
-// ranks in spellconst) carries no combo-point-scaling effect field --
-// unlike an ability whose client data ties a term to a misc_value, this
-// number is a server-side-script placeholder the client alone can't
-// source, so per this lane's rule for that case Classic's own published
-// formula is kept instead, and the fixed six ticks (12s regardless of
-// combo points) the engine had is the bug this closes: it made
-// Ferocious Bite (which reads whether Rip is about to expire)
-// unreachable, since Rip never got close to expiring at low combo point
-// counts the way it should.
-const RipBaseTicks int32 = 3
-
-func (druid *Druid) RipTicks(comboPoints int32) int32 {
-	return RipBaseTicks + comboPoints
-}
-
-func (druid *Druid) RipDuration(comboPoints int32) time.Duration {
-	return time.Duration(druid.RipTicks(comboPoints)) * time.Second * 2
-}
+// RipNumberOfTicks is Rip's tick count at every combo point count: the
+// client's duration_ms is 12000 on all six ranks with 2 s periods, and its
+// tooltip states "damage over $d" for 1 through 5 points alike (unlike
+// Rupture, whose tooltip lists 8/10/12/14/16 secs). Combo points scale the
+// damage per tick, never the duration.
+const RipNumberOfTicks int32 = 6
 
 func (druid *Druid) registerRipSpell() {
 	// Add highest available Rip rank for level.
@@ -92,7 +78,7 @@ func (druid *Druid) newRipSpellConfig(rank int) core.SpellConfig {
 			Aura: core.Aura{
 				Label: "Rip",
 			},
-			NumberOfTicks: 0, // Set dynamically, by combo points, in ApplyEffects.
+			NumberOfTicks: RipNumberOfTicks,
 			TickLength:    time.Second * 2,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
@@ -114,7 +100,7 @@ func (druid *Druid) newRipSpellConfig(rank int) core.SpellConfig {
 			result := spell.CalcOutcome(sim, target, spell.OutcomeMeleeSpecialHitNoHitCounter)
 			if result.Landed() {
 				dot := spell.Dot(target)
-				dot.NumberOfTicks = druid.RipTicks(druid.ComboPoints()) + dot.ModNumberOfTicks
+				dot.NumberOfTicks = RipNumberOfTicks + dot.ModNumberOfTicks
 				dot.Apply(sim)
 				druid.SpendComboPoints(sim, spell)
 			} else {

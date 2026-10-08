@@ -681,23 +681,23 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 |---|---|---|---|---|---|---|---|---|
 | Power Word: Fortitude (1243) | 1→60 | 8 | Discipline | skill_line_ability | 1695 mana | 0 | 0 | power cost |
 | Fade (586) | 8→60 | 6 | Shadow Magic | skill_line_ability | 275 mana | 0 | 30000 | power cost, cooldown |
-| Confounding Flash (1277455) | 10→10 | 1 | Discipline | skill_line_ability | 0 | 500 | 120000 | cast time, cooldown |
-| Divine Grace (1277370) | 10→58 | 7 | Holy | skill_line_ability | 0 | 0 | 600000 | cooldown |
-| Hex of Weakness (9035) | 10→60 | 7 | Shadow Magic | skill_line_ability | 320 mana | 0 | 0 | power cost |
+| Confounding Flash (1277455) | 10→10 | 1 | Discipline | skill_line_ability | 0 | 500 | 120000 | cast time, cooldown; Gnome racial |
+| Divine Grace (1277370) | 10→58 | 7 | Holy | skill_line_ability | 0 | 0 | 600000 | cooldown; Human racial |
+| Hex of Weakness (9035) | 10→60 | 7 | Shadow Magic | skill_line_ability | 320 mana | 0 | 0 | power cost; Troll racial |
 | Resurrection (2006) | 10→58 | 5 | Holy | skill_line_ability | 0 | 10000 | 0 | cast time |
-| Starshards (10797) | 10→58 | 7 | Discipline | skill_line_ability | 350 mana | 0 | 30000 | power cost, cooldown |
-| Touch of Weakness (2652) | 10→60 | 12 | Shadow Magic | skill_line_ability | 195 mana | 0 | 0 | power cost |
+| Starshards (10797) | 10→58 | 7 | Discipline | skill_line_ability | 350 mana | 0 | 30000 | power cost, cooldown; Night Elf racial; registered by a Night Elf priest (starshards.go), absent from the Undead and Human presets |
+| Touch of Weakness (2652) | 10→60 | 12 | Shadow Magic | skill_line_ability | 195 mana | 0 | 0 | power cost; Undead racial |
 | Cure Disease (528) | 14→14 | 1 | Holy | skill_line_ability | 0 | 0 | 0 |  |
 | Psychic Scream (8122) | 14→56 | 5 | Shadow Magic | skill_line_ability | 210 mana | 0 | 30000 | power cost, cooldown |
 | Dispel Magic (527) | 18→36 | 3 | Discipline | skill_line_ability | 0 | 0 | 0 |  |
-| Chastise (1277331) | 20→60 | 5 | Holy | skill_line_ability | 225 mana | 0 | 120000 | power cost, cooldown |
-| Contingency Plan (1277462) | 20→60 | 5 | Discipline | skill_line_ability | 0 | 0 | 600000 | cooldown |
-| Elune's Grace (2651) | 20→20 | 1 | Discipline | skill_line_ability | 0 | 0 | 300000 | cooldown |
+| Chastise (1277331) | 20→60 | 5 | Holy | skill_line_ability | 225 mana | 0 | 120000 | power cost, cooldown; Dwarf racial |
+| Contingency Plan (1277462) | 20→60 | 5 | Discipline | skill_line_ability | 0 | 0 | 600000 | cooldown; Gnome racial |
+| Elune's Grace (2651) | 20→20 | 1 | Discipline | skill_line_ability | 0 | 0 | 300000 | cooldown; Night Elf racial |
 | Fear Ward (6346) | 20→20 | 1 | Holy | skill_line_ability | 100 mana | 0 | 180000 | power cost, cooldown |
-| Feedback (13896) | 20→60 | 6 | Discipline | skill_line_ability | 0 | 0 | 180000 | cooldown |
+| Feedback (13896) | 20→60 | 6 | Discipline | skill_line_ability | 0 | 0 | 180000 | cooldown; Human racial |
 | Mind Soothe (453) | 20→52 | 3 | Shadow Magic | skill_line_ability | 90 mana | 0 | 0 | power cost |
 | Shackle Undead (9484) | 20→60 | 3 | Discipline | skill_line_ability | 150 mana | 1500 | 0 | power cost, cast time |
-| Shadowguard (18137) | 20→60 | 12 | Shadow Magic | skill_line_ability | 0 | 0 | 0 |  |
+| Shadowguard (18137) | 20→60 | 12 | Shadow Magic | skill_line_ability | 0 | 0 | 0 | Troll racial |
 | Mind Vision (2096) | 22→44 | 2 | Shadow Magic | skill_line_ability | 150 mana | 0 | 0 | power cost |
 | Mana Burn (8129) | 24→56 | 5 | Discipline | skill_line_ability | 270 mana | 3000 | 0 | power cost, cast time |
 | Divine Spirit (14752) | 30→60 | 4 | Discipline | skill_line_ability | 970 mana | 0 | 0 | power cost |

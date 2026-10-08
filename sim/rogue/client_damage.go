@@ -22,6 +22,8 @@ var (
 	AmbushDamage         = generatedDamage(AmbushBaseDamage[:], AmbushPointsPerLevel[:], AmbushLevel[:], AmbushMaxLevel[:])
 	GarroteTickDamage    = generatedDamage(GarroteBaseDamage[:], GarrotePointsPerLevel[:], GarroteLevel[:], GarroteMaxLevel[:])
 	RuptureTickDamage    = generatedDamage(RuptureBaseDamage[:], RupturePointsPerLevel[:], RuptureLevel[:], RuptureMaxLevel[:])
+	GougeDamage          = generatedDamage(GougeBaseDamage[:], GougePointsPerLevel[:], GougeLevel[:], GougeMaxLevel[:])
+	KickDamage           = generatedDamage(KickBaseDamage[:], KickPointsPerLevel[:], KickLevel[:], KickMaxLevel[:])
 
 	// BackstabDamage is indexed by the engine's rank: the generator
 	// emits the client's nine, rank 9 being the AQ id (25300) the engine's

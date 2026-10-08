@@ -32,3 +32,13 @@ func TestEviscerateComboDamageBonusByRank(t *testing.T) {
 		t.Errorf("eviscerateComboDamageBonus = %v, want %v", eviscerateComboDamageBonus, want)
 	}
 }
+
+// Without AQ content the ninth slot casts rank 8's spell 11300, so it takes
+// that spell's learn level (56, the client's spell_level for 11300), not the
+// 60 of the AQ rank 31016 it would otherwise be filed under.
+func TestEviscerateNinthSlotLevelFollowsTheSpellItCasts(t *testing.T) {
+	want := core.TernaryInt(core.IncludeAQ, 60, 56)
+	if got := eviscerateLearnLevels[len(eviscerateLearnLevels)-1]; got != want {
+		t.Errorf("ninth slot learn level = %d, want %d", got, want)
+	}
+}

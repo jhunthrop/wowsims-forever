@@ -154,6 +154,7 @@ var TalentGatedSpells = []TalentGatedSpell{
 	// Rogue (Assassination 17, Combat 17, Subtlety 19).
 	{ClassSlug: "rogue", Label: "Cold Blood", Tree: 0, Pos: 11},
 	{ClassSlug: "rogue", Label: "Mutilate", Tree: 0, Pos: 14},
+	{ClassSlug: "rogue", Label: "Venom", Tree: 0, Pos: 17},
 	{ClassSlug: "rogue", Label: "Riposte", Tree: 1, Pos: 8},
 	{ClassSlug: "rogue", Label: "Blade Flurry", Tree: 1, Pos: 13},
 	{ClassSlug: "rogue", Label: "Adrenaline Rush", Tree: 1, Pos: 17},

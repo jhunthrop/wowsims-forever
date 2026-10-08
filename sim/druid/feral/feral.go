@@ -43,11 +43,6 @@ func NewFeralDruid(character *core.Character, options *proto.Player) *FeralDruid
 		cat.SelfBuffs.InnervateTarget = feralOptions.Options.InnervateTarget
 	}
 
-	// Rip's tick count now varies with combo points (druid.RipTicks); the
-	// rotation's "how long could Rip's current application still run"
-	// math below wants the longest it can ever be, at 5 combo points.
-	cat.maxRipTicks = cat.RipTicks(5)
-
 	cat.EnableEnergyBar(100.0)
 	cat.EnableRageBar(core.RageBarOptions{DamageDealtMultiplier: 1, DamageTakenMultiplier: 1})
 
@@ -74,7 +69,6 @@ type FeralDruid struct {
 	missChance    float64
 	readyToShift  bool
 	latency       time.Duration
-	maxRipTicks   int32
 	bleedAura     *core.Aura
 	lastShift     time.Duration
 	poolingMana   bool
