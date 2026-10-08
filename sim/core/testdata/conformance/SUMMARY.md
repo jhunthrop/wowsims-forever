@@ -87,8 +87,8 @@ could not see it before:
 | Hunter | 10 / 24 | 20 / 19 | 21 / 17 |
 | Mage | 42 / 45 | 55 / 53 | 70 / 33 |
 | Warlock | 77 / 77 | 127 / 32 | 136 / 23 |
-| Paladin | 40 / 95 | 42 / 100 | 86 / 55 |
-| Warrior | 13 / 38 | 13 / 41 | 7 / 41 |
+| Paladin | 40 / 95 | 42 / 100 | 1188 match + 201 client-scripted / 0 |
+| Warrior | 13 / 38 | 13 / 41 | 220 match + 77 client-scripted + 41 unmodeled-duration / 10 (Berserker Rage required_level, documented) |
 | Druid | 28 / 61 | 36 / 50 | 36 / 50 |
 | Priest | 27 / 17 | 50 / 2 | 50 / 2 |
 | Shaman | 27 / 269 | 51 / 250 | 51 / 232; 2026-10-08 engine pass: 364 match + 44 unmodeled-duration + 12 client-scripted / 0 |
@@ -199,23 +199,6 @@ config," not "change a number."
 | Hunter | Bestial Wrath | 40 |
 | Hunter | Rapid Fire | 26 |
 | Hunter | Raptor Strike | 56 (see the hunter section below - this spell has a second, bogus issue too) |
-| Paladin | Judgement of Command | 20, 30, 40, 50, 60 |
-| Paladin | Judgement of Righteousness | 1, 10, 18, 26, 34, 42, 50, 58 |
-| Paladin | Judgement of the Crusader | 6, 12, 22, 32, 42, 52 |
-| Paladin | Lay on Hands | 50 |
-| Paladin | Seal of Righteousness | 1 |
-| Warrior | Battle Shout, Cleave, Heroic Strike, Revenge | 60 |
-| Warrior | Battle Stance, Death Wish, Last Stand, Spearing Strike | 1 |
-| Warrior | Berserker Rage | 32 |
-| Warrior | Berserker Stance | 30 |
-| Warrior | Bloodrage, Defensive Stance | 10 |
-| Warrior | Demoralizing Shout | 54 |
-| Warrior | Piercing Howl | 20 |
-| Warrior | Recklessness | 50 |
-| Warrior | Shield Block | 16 |
-| Warrior | Shield Wall | 28 |
-| Warrior | Sweeping Strikes | 30 |
-| Warrior | Whirlwind | 36 |
 | Druid | Berserk, Nature's Swiftness | 1 |
 | Druid | Cat Form | 20 |
 | Druid | Faerie Fire, Shred | 54 |
@@ -245,12 +228,9 @@ config," not "change a number."
 | Rogue | Slice and Dice | 42 |
 | Rogue | Vanish | 22 |
 
-**Exception - a real numeric mismatch, not a registration gap:** Paladin
-**Holy Shield** rank 1, in the talent-gated section, reports client 40
-vs. engine 30 - both sides set a real required level, they just
-disagree by 10. Likely cause: stale vanilla literal (Holy Shield was
-learnable at 30 in original Classic; Forever's client moved it to 40
-and the engine's rank table was not updated).
+The Paladin and Warrior rows of this table were closed by the conf-wp lane: every
+spell in those two classes now sets its client `RequiredLevel`, except
+Berserker Rage (see the Warrior section).
 
 ## Remaining mismatches by class (Spells + Talent-gated tables combined)
 
@@ -313,42 +293,45 @@ correct in the engine and re-verified: the four summon costs (Imp at its own
 
 ### Paladin
 
-Job 1 confirmed Consecration, Seal of the Crusader's, and (for every
-real rank 1+) Seal of Righteousness's and Seal of Command's durations
-outright (all now `match`), and fixed Holy Shield's duration-related
-noise so only its real `required_level` mismatch (see the exception
-noted above the per-class tables) remains. Judgement of the Crusader
-shares its Seal's own debuff aura (the same name-grouping that finds
-Seal of the Crusader's buff), and that aura is what
-`core.FullBuffs.Debuffs` pre-applies permanently - see below. Judgement
-of Command has no such shared aura under its own name and still reads
-`n/a` (no duration on either side to compare), unchanged by Job 1.
+No remaining mismatch rows (conf-wp lane; level 60: 326 match, 0 mismatch,
+every ladder level 1188 match, 0 mismatch). What closed them:
 
-| Spell | Field | Client | Engine | Likely cause |
-|---|---|---|---|---|
-| Judgement of Command, Judgement of Righteousness, Judgement of the Crusader, Lay on Hands, Seal of Righteousness | required_level | see combined table | 0 | registration gap |
-| Holy Shock | cooldown_ms | 10000 | 30000 | stale vanilla literal (original Classic's Holy Shock cooldown was longer; Forever's client shortened it and the engine's cooldown constant was not) |
-| Lay on Hands | cooldown_ms | 1200000 (20 min) | 3600000 (60 min) | stale vanilla literal |
-| Judgement of the Crusader | duration_ms | 40000 | -1 | full-buffs duration artifact (see vocabulary) - the Seal of the Crusader debuff aura this Judgement applies is pre-activated permanently by `core.FullBuffs.Debuffs` |
+- Required levels, Holy Shock's and Lay on Hands' cooldowns and Holy
+  Shield's level were registered to the client's numbers earlier.
+- Judgement of the Crusader's duration read `-1` (the standard build
+  pre-applies the same debuff permanently through `core.FullBuffs`) or
+  `0` (a healer has no current target, and `engineDuration` only looked at
+  it). The paladin presets are now built without `core.FullBuffs`
+  (`Preset.WithoutFullBuffs`), and `engineDuration` also searches every
+  encounter target; the engine's own 40 s debuff was always right.
+- Righteous Fury read `-1` because the Protection preset's option makes the
+  aura permanent; the report preset leaves the option off so the cast
+  spell's own 30 minutes is compared.
+- New spells (all `match`): Blessing of Might, Wisdom, Kings, Salvation,
+  their Greater versions, and Righteous Fury as a castable spell.
 
 ### Warrior
 
-Job 1's wider search found a real, nonzero engine duration for several
-of these self-buffs that previously hid behind a blind zero - which
-flips them from "no data to compare" into "compared, and the numbers
-disagree," explaining the drop in match count at level 60 noted above.
-None of these are new engine defects; they were always there.
+10 mismatch rows remain (ladder total), all Berserker Rage; the movement,
+daze, healing-reduction and lockout durations below read `unmodeled-duration`
+with their reasons (`unsimulatedDurations` in `duration_reading.go`).
 
 | Spell | Field | Client | Engine | Likely cause |
 |---|---|---|---|---|
-| Cleave, Heroic Strike | cost, cost_type | 15.00-20.00/rage | 0.00/none | registration gap - these two rage-dump specials have no `Cost` block configured at all in this build |
-| Last Stand | cooldown_ms | 180000 (3 min) | 600000 (10 min) | stale vanilla literal |
-| Shield Wall | cooldown_ms | 900000 (15 min) | 1800000 (30 min) | stale vanilla literal |
-| Thunder Clap rank 6 | cooldown_ms | 6000 | 4000 | talent double-count suspected - 4000 is exactly 6000 minus a 2-rank Improved Thunder Clap-shaped reduction; worth checking whether this cooldown is still reading `Talents.ImprovedThunderClap` from somewhere other than the (now zero) build |
-| Spearing Strike | cooldown_ms | 20000 | 0 | registration gap - no `CD` configured |
-| Shield Wall | duration_ms | 12000 | 10000 | newly visible by Job 1: the engine has a real, nonzero duration (10s) that simply disagrees with the client's 12s - likely a stale vanilla literal, not a registration gap as it previously read |
-| Battle Shout, Berserker Rage, Bloodthirst (rank 4), Death Wish, Demoralizing Shout, Hamstring (rank 3), Mortal Strike (rank 4), Piercing Howl, Pummel (rank 2), Recklessness, Shield Block, Sunder Armor (rank 5), Sweeping Strikes, Thunder Clap (rank 6) | duration_ms | 6000-180000 | 0 (no aura registered) | missing aura duration - still true after Job 1's wider search; the warrior lane should re-verify each one individually, since a couple of these are plausible self-buffs Job 1's search should have found if a trackable aura exists |
-| Shield Wall | gcd_ms | 1500 | 0 | registration gap - Shield Wall should take the standard GCD and does not |
+| Berserker Rage | required_level | 32 | 30 | deliberate (mismatch): Blizzard's 1 October 2026 notes put Berserker Rage at level 30 (`sim/warrior/berserker_rage.go`) and the client table has not caught up; the engine follows the notes |
+| Hamstring (ranks 1-3) | duration_ms | 15000 | 0 | unmodeled-duration: the 15 s movement-speed snare has no reader in a sim with no movement |
+| Piercing Howl | duration_ms | 6000 | 0 | unmodeled-duration: the 6 s daze (see `piercing_howl.go`) |
+| Bloodthirst (ranks 1, 2, 4) | duration_ms | 10000 | 0 | unmodeled-duration: the 10 s movement-speed buff |
+| Mortal Strike (ranks 1, 2, 4) | duration_ms | 10000 | 0 | unmodeled-duration: the 10 s healing-reduction debuff, no healer on the target |
+| Pummel (all ranks) | duration_ms | 5000 (rank 1), 4000 (ranks 2-3) | 0 | unmodeled-duration: the school lockout after an interrupt |
+
+Closed by the conf-wp lane: Battle Shout (client 3 minutes, engine had 2
+minutes plus a Booming Voice duration bonus the live tree does not have;
+Booming Voice now takes 5% a point off the shouts' rage cost instead),
+Sweeping Strikes (client 20 s, engine 10 s), Sunder Armor (a
+`core.FullBuffs` artefact, see Paladin), plus new spells Charge and
+Retaliation. Earlier lanes closed the cost, cooldown, GCD and required-level
+rows this section used to list.
 
 ### Druid
 
@@ -360,8 +343,8 @@ tables; was 531 / 47). What moved, all on 2026-10-08:
   permanent in place. `Preset.WithoutRaidDebuffs` builds the druid presets
   against a target with no raid debuffs, so the spell's own aura reads; the
   engine's 40000 and 30000 were right. The resto druid's current target is an
-  ally, so `Preset.ReadDebuffsOnEnemy` reads its Faerie Fire on the
-  encounter's enemy (that row used to say "no aura registered").
+  ally, so `engineDuration` also reads the encounter's targets (`enemyTargets`) and finds its Faerie Fire on the
+  enemy (that row used to say "no aura registered").
 - Rip was a real defect: the engine scaled the duration with combo points
   (8 to 16 s, as Rupture does), but the client states 12 s on every rank and
   the tooltip reads "damage over $d" at 1 through 5 points. Rip is now six
@@ -588,13 +571,13 @@ Per spec-and-rank row at level 60 whose client spell has a school-damage, period
 | Hunter | 12 | 12 | 0 | 0 | 29 |
 | Mage | 83 | 83 | 0 | 0 | 24 |
 | Warlock | 98 | 98 | 0 | 0 | 63 |
-| Paladin | 129 | 129 | 0 | 24 | 159 |
-| Warrior | 12 | 12 | 0 | 0 | 38 |
+| Paladin | 129 | 129 | 0 | 24 | 225 |
+| Warrior | 12 | 12 | 0 | 0 | 42 |
 | Druid | 98 | 98 | 0 | 0 | 37 |
 | Priest | 143 | 143 | 0 | 0 | 34 |
 | Shaman | 185 | 185 | 0 | 20 | 215 |
 | Rogue | 10 | 10 | 0 | 0 | 28 |
-| **Total** | 770 | 770 | 0 | 44 | 627 |
+| **Total** | 770 | 770 | 0 | 44 | 697 |
 
 <!-- damage-summary:end -->
 
@@ -609,12 +592,12 @@ Per class, the active trainables (power cost, cast time or cooldown; pipeline.tr
 | Hunter | 49 | 27 |
 | Mage | 58 | 36 |
 | Warlock | 47 | 24 |
-| Paladin | 46 | 23 |
-| Warrior | 40 | 11 |
+| Paladin | 46 | 14 |
+| Warrior | 40 | 9 |
 | Druid | 54 | 18 |
 | Priest | 53 | 31 |
 | Shaman | 54 | 28 |
 | Rogue | 27 | 8 |
-| **Total** | 428 | 206 |
+| **Total** | 428 | 195 |
 
 <!-- trainables-summary:end -->

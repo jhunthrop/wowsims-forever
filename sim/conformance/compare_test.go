@@ -239,7 +239,7 @@ func TestVerdictFor_UnmodeledDurationIsNamedNotMismatched(t *testing.T) {
 // TestShamanGoldenHasNoMismatchRows holds the shaman at zero real
 // mismatches in both tables: a row that differs from the client must be
 // fixed in the engine or named as an unsimulated effect in
-// unsimulated.go, never left unexplained.
+// duration_reading.go, never left unexplained.
 func TestShamanGoldenHasNoMismatchRows(t *testing.T) {
 	golden, err := readGolden("shaman")
 	if err != nil {

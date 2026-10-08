@@ -866,10 +866,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 30 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 30 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 30 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 30 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 30 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
@@ -925,10 +925,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 38 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 38 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 38 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 38 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 38 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 38 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 38 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 38 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -996,10 +996,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 40 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 40 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 40 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 40 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 40 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 40 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 40 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 40 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -1081,10 +1081,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 50 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Lightning Shield | 6 | 10431 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 600000→600000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 50 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 50 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 50 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 50 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 50 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 50 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 50 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 50 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 50 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
@@ -1189,10 +1189,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 60 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Lightning Shield | 6 | 10431 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Lightning Shield | 7 | 10432 | 370.00→370.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 600000→600000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 60 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 60 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 60 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 60 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 60 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 60 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 60 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 60 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 60 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |

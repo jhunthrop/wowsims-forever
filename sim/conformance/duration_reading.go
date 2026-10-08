@@ -49,6 +49,12 @@ var durationPayloadSpells = map[string]string{
 var unsimulatedDurations = map[string]string{
 	"shaman/Earth Shock": "interrupt lock-out of the target's school, never applied: the sim's targets never cast",
 	"shaman/Frost Shock": "movement snare on the target, never applied: the sim's targets neither move nor flee",
+
+	"warrior/Hamstring":     "the 15 s movement-speed snare has no reader in a sim with no movement",
+	"warrior/Piercing Howl": "the 6 s daze (see piercing_howl.go) has no reader in a sim with no movement",
+	"warrior/Bloodthirst":   "the 10 s movement-speed buff has no reader in a sim with no movement",
+	"warrior/Mortal Strike": "the 10 s healing-reduction debuff has no reader: no healer on the target",
+	"warrior/Pummel":        "the school lockout after an interrupt has no reader: the sim's targets never cast",
 }
 
 // durationSpellFor returns the client spell whose duration_ms the engine is

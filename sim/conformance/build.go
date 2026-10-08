@@ -86,13 +86,26 @@ func buildEncounter() *proto.Encounter {
 // own TestLevelSmoke already skips around) is recovered and returned as
 // an error, so one spec's defect does not stop every other spec's
 // report row.
+//
+// A preset with WithoutFullBuffs set is built without core.FullBuffs:
+// FullBuffs pre-applies raid buffs and debuffs permanently
+// (core.MakePermanent turns an aura's Duration into core.NeverExpires),
+// which makes every shared buff or debuff the character also casts
+// (Battle Shout, Sunder Armor, Judgement of the Crusader) read as a -1
+// "until removed" duration instead of its own.
 func buildCharacter(preset Preset, level int32, talentsString string) (built *core.Character, err error) {
-	return buildCharacterWearing(preset, level, talentsString, &proto.EquipmentSpec{}, nil)
+	return buildCharacterBuffed(preset, level, talentsString, &proto.EquipmentSpec{}, nil, !preset.WithoutFullBuffs)
 }
 
 // buildCharacterWearing is buildCharacter with gear: equipment, and the
 // database that defines any item in it the engine does not already know.
 func buildCharacterWearing(preset Preset, level int32, talentsString string, equipment *proto.EquipmentSpec, database *proto.SimDatabase) (built *core.Character, err error) {
+	return buildCharacterBuffed(preset, level, talentsString, equipment, database, true)
+}
+
+// buildCharacterBuffed is buildCharacterWearing with the choice of
+// whether core.FullBuffs is applied to the character and its target.
+func buildCharacterBuffed(preset Preset, level int32, talentsString string, equipment *proto.EquipmentSpec, database *proto.SimDatabase, fullBuffs bool) (built *core.Character, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			err = fmt.Errorf("panic building %s at level %d: %v", preset.Label, level, r)
@@ -103,22 +116,26 @@ func buildCharacterWearing(preset Preset, level int32, talentsString string, equ
 	if distance == 0 {
 		distance = 5
 	}
+	var buffs core.BuffsCombo
+	if fullBuffs {
+		buffs = core.FullBuffs
+	}
 	player := core.WithSpec(&proto.Player{
 		Class:              preset.Class,
 		Race:               preset.Race,
 		Level:              level,
 		Equipment:          equipment,
 		Database:           database,
-		Buffs:              core.FullBuffs.Player,
+		Buffs:              buffs.Player,
 		TalentsString:      talentsString,
 		DistanceFromTarget: distance,
 	}, preset.SpecOptions)
 
-	debuffs := core.FullBuffs.Debuffs
+	debuffs := buffs.Debuffs
 	if preset.WithoutRaidDebuffs {
 		debuffs = &proto.Debuffs{}
 	}
-	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, debuffs)
+	raid := core.SinglePlayerRaidProto(player, buffs.Party, buffs.Raid, debuffs)
 
 	env, _, _ := core.NewEnvironment(raid, buildEncounter(), true)
 	built = env.Raid.Parties[0].Players[0].GetCharacter()

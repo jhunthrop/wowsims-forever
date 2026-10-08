@@ -44,10 +44,11 @@ func (warrior *Warrior) registerDemoralizingShoutSpell() {
 	})
 
 	warrior.DemoralizingShout = warrior.RegisterSpell(AnyStance, core.SpellConfig{
-		ActionID:    actionID,
-		SpellSchool: core.SpellSchoolPhysical,
-		ProcMask:    core.ProcMaskEmpty,
-		Flags:       core.SpellFlagAPL | SpellFlagOffensive,
+		ActionID:       actionID,
+		ClassSpellMask: WarriorSpellMaskDemoralizingShout,
+		SpellSchool:    core.SpellSchoolPhysical,
+		ProcMask:       core.ProcMaskEmpty,
+		Flags:          core.SpellFlagAPL | SpellFlagOffensive,
 
 		RequiredLevel: core.DemoralizingShoutLevel[rank],
 		Rank:          rank,

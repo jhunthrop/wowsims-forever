@@ -232,7 +232,7 @@ func rowFor(clientClass spellconst.Class, spec Preset, level int32, character *c
 		row.EngineCostType = "none"
 	}
 
-	row.EngineDurationMS, row.EngineDurationFound = engineDurationOn(spell, character, siblingSpellIDs(clientClass, clientSpell.Name), durationTarget(spec, spell.Unit))
+	row.EngineDurationMS, row.EngineDurationFound = engineDuration(spell, character, siblingSpellIDs(clientClass, clientSpell.Name))
 	row.HasDuration = row.EngineDurationFound
 	if row.ClientDurationMS > 0 {
 		row.HasDuration = true
@@ -298,15 +298,6 @@ func siblingSpellIDs(clientClass spellconst.Class, name string) map[int32]bool {
 // function alone - rowFor's HasDuration/ClientDurationMS combination,
 // not found, is what tells those apart for the golden.
 func engineDuration(spell *core.Spell, character *core.Character, siblingIDs map[int32]bool) (ms int32, found bool) {
-	if spell.Unit == nil {
-		return engineDurationOn(spell, character, siblingIDs, nil)
-	}
-	return engineDurationOn(spell, character, siblingIDs, spell.Unit.CurrentTarget)
-}
-
-// engineDurationOn is engineDuration reading step 2 and 4's target as the
-// given unit instead of the caster's current target.
-func engineDurationOn(spell *core.Spell, character *core.Character, siblingIDs map[int32]bool, target *core.Unit) (ms int32, found bool) {
 	if spell.RelatedSelfBuff != nil {
 		return auraDurationMS(spell.RelatedSelfBuff), true
 	}
@@ -325,7 +316,7 @@ func engineDurationOn(spell *core.Spell, character *core.Character, siblingIDs m
 	if aura := matchingAura(spell.Unit.GetAuras(), siblingIDs); aura != nil {
 		return auraDurationMS(aura), true
 	}
-	if target != nil {
+	for _, target := range enemyTargets(spell.Unit) {
 		if aura := matchingAura(target.GetAuras(), siblingIDs); aura != nil {
 			return auraDurationMS(aura), true
 		}
@@ -340,24 +331,23 @@ func engineDurationOn(spell *core.Spell, character *core.Character, siblingIDs m
 	return 0, false
 }
 
-// durationTarget is the unit whose Dot and auras rowFor reads for a
-// spell: the caster's current target, or - when the preset opts in with
-// ReadDebuffsOnEnemy - the first enemy unit in its environment, because a
-// healing spec's current target is an ally though its Faerie Fire still
-// debuffs the encounter's enemy.
-func durationTarget(spec Preset, caster *core.Unit) *core.Unit {
-	if !spec.ReadDebuffsOnEnemy || caster == nil || caster.Env == nil {
-		if caster == nil {
-			return nil
-		}
-		return caster.CurrentTarget
+// enemyTargets is the caster's current target, when it has one, followed
+// by every target of the encounter: a healing spec has no current target
+// (its debuff spells, such as Holy's Judgement of the Crusader, still
+// register their auras on the encounter's targets).
+func enemyTargets(caster *core.Unit) []*core.Unit {
+	var targets []*core.Unit
+	if caster.CurrentTarget != nil {
+		targets = append(targets, caster.CurrentTarget)
 	}
-	for _, unit := range caster.Env.AllUnits {
-		if unit.Type == core.EnemyUnit {
-			return unit
+	if caster.Env != nil {
+		for _, target := range caster.Env.Encounter.TargetUnits {
+			if target != caster.CurrentTarget {
+				targets = append(targets, target)
+			}
 		}
 	}
-	return nil
+	return targets
 }
 
 // auraDurationMS converts an aura's Duration to the client's own

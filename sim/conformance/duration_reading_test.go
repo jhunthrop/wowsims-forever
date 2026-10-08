@@ -5,7 +5,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/spellconst"
 )
 
@@ -104,22 +103,6 @@ func TestClassifiedTrainablesAreAllDispositioned(t *testing.T) {
 		if strings.Contains(string(golden), "| "+unclassifiedDisposition+" |") {
 			t.Errorf("%s golden has an ability with no disposition in dispositions.go", slug)
 		}
-	}
-}
-
-func TestDurationTarget(t *testing.T) {
-	if got := durationTarget(Preset{}, nil); got != nil {
-		t.Errorf("no caster: target %v, want nil", got)
-	}
-	ally := &core.Unit{Type: core.PlayerUnit}
-	caster := &core.Unit{CurrentTarget: ally}
-	if got := durationTarget(Preset{}, caster); got != ally {
-		t.Errorf("default preset reads %v, want the caster's current target", got)
-	}
-	// Opted in, a caster without an environment has no enemy list to
-	// search and keeps its current target.
-	if got := durationTarget(Preset{ReadDebuffsOnEnemy: true}, caster); got != ally {
-		t.Errorf("ReadDebuffsOnEnemy without an environment: target %v, want the current target", got)
 	}
 }
 
