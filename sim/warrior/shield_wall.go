@@ -30,7 +30,8 @@ func (warrior *Warrior) RegisterShieldWallCD() {
 	})
 
 	swSpell := warrior.RegisterSpell(DefensiveStance, core.SpellConfig{
-		ActionID: actionID,
+		ActionID:       actionID,
+		ClassSpellMask: WarriorSpellMaskShieldWall,
 
 		RequiredLevel: ShieldWallLevel[0],
 

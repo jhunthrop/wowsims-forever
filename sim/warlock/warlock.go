@@ -47,6 +47,14 @@ type Warlock struct {
 	Talents *proto.WarlockTalents
 	Options *proto.WarlockOptions
 
+	// lifeTapManaBonus is the fraction of extra Mana a Life Tap gains at
+	// no extra Health cost (the Tier 1 5-piece).
+	lifeTapManaBonus float64
+
+	// lifeTapHealthDiscount is the fraction of a Life Tap's Health cost
+	// the wearer does not pay (the Plagueheart Raiment 8-piece).
+	lifeTapHealthDiscount float64
+
 	BasePets   []*WarlockPet
 	ActivePet  *WarlockPet
 	Felhunter  *WarlockPet

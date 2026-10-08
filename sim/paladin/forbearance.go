@@ -5,6 +5,9 @@ import (
 	"time"
 )
 
+// forbearanceDuration is the debuff's base length.
+const forbearanceDuration = time.Minute
+
 func (paladin *Paladin) registerForbearance() {
 
 	actionID := core.ActionID{SpellID: 25771}
@@ -12,7 +15,7 @@ func (paladin *Paladin) registerForbearance() {
 	forbearanceAura := paladin.RegisterAura(core.Aura{
 		Label:    "Forbearance",
 		ActionID: actionID,
-		Duration: time.Minute * 1,
+		Duration: forbearanceDuration + paladin.forbearanceDurationMod,
 	})
 
 	paladin.OnSpellRegistered(func(spell *core.Spell) {

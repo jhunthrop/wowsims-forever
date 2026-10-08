@@ -105,6 +105,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestP1Mage-Phase1-AllItems-Champion'sRegalia"
+ value: {
+  dps: 573.50409
+  tps: 526.79577
+ }
+}
+dps_results: {
  key: "TestP1Mage-Phase1-AllItems-EnigmaVestments"
  value: {
   dps: 649.24999
@@ -135,15 +142,15 @@ dps_results: {
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-IronweaveBattlesuit"
  value: {
-  dps: 497.12051
-  tps: 458.67059
+  dps: 509.20012
+  tps: 469.54224
  }
 }
 dps_results: {
- key: "TestP1Mage-Phase1-AllItems-LieutenantCommander'sArcanum"
+ key: "TestP1Mage-Phase1-AllItems-LieutenantCommander'sRegalia"
  value: {
-  dps: 610.32008
-  tps: 559.99417
+  dps: 573.50409
+  tps: 526.79577
  }
 }
 dps_results: {

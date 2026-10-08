@@ -91,6 +91,10 @@ const (
 	ShamanSpellMaskLesserHealingWave
 	ShamanSpellMaskChainHeal
 	ShamanSpellMaskRiptide
+	ShamanSpellMaskEarthShock
+	ShamanSpellMaskFrostShock
+	ShamanSpellMaskStormstrike
+	ShamanSpellMaskLavaBurst
 )
 
 // ShamanSpellMaskHealing is every direct heal a healing talent reaches
@@ -190,6 +194,10 @@ type Shaman struct {
 	ActiveShieldAura *core.Aura
 
 	ChainLightningBounceCoefficient float64
+
+	// manaSpringSetBonus is the fraction of extra mana a Mana Spring
+	// totem restores (the Earthshatterer 4-piece).
+	manaSpringSetBonus float64
 }
 
 // Implemented by each Shaman spec.

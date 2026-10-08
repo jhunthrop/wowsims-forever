@@ -74,6 +74,7 @@ const (
 	DruidSpellMaskSwiftmend
 	DruidSpellMaskTranquility
 	DruidSpellMaskWildGrowth
+	DruidSpellMaskBerserk
 )
 
 const (

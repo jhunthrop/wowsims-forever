@@ -172,48 +172,6 @@ var ItemSetVindicatorsBattlegear = core.NewItemSet(core.ItemSet{
 //                            Phase 4 Item Sets - AQ
 ///////////////////////////////////////////////////////////////////////////
 
-var ItemSetBattlegearOfHeroism = core.NewItemSet(core.ItemSet{
-	Name: "Battlegear of Heroism",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +8 All Resistances.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddResistances(8)
-		},
-		// Chance on melee attack to heal you for 88 to 133
-		4: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			actionID := core.ActionID{SpellID: 27419}
-			healthMetrics := c.NewHealthMetrics(core.ActionID{SpellID: 27419})
-
-			core.MakeProcTriggerAura(&c.Unit, core.ProcTrigger{
-				ActionID: actionID,
-				Name:     "Warrior's Resolve",
-				Callback: core.CallbackOnSpellHitDealt,
-				Outcome:  core.OutcomeLanded,
-				ProcMask: core.ProcMaskMelee,
-				PPM:      1,
-				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
-					c.GainHealth(sim, sim.Roll(88, 133), healthMetrics)
-				},
-			})
-		},
-		// +40 Attack Power.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStats(stats.Stats{
-				stats.AttackPower:       40,
-				stats.RangedAttackPower: 40,
-			})
-		},
-		// +200 Armor.
-		8: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Armor, 200)
-		},
-	},
-})
-
 var ItemSetConquerorsBattleGear = core.NewItemSet(core.ItemSet{
 	Name: "Conqueror's Battlegear",
 	Bonuses: map[int32]core.ApplyEffect{

@@ -87,6 +87,12 @@ func buildEncounter() *proto.Encounter {
 // an error, so one spec's defect does not stop every other spec's
 // report row.
 func buildCharacter(preset Preset, level int32, talentsString string) (built *core.Character, err error) {
+	return buildCharacterWearing(preset, level, talentsString, &proto.EquipmentSpec{}, nil)
+}
+
+// buildCharacterWearing is buildCharacter with gear: equipment, and the
+// database that defines any item in it the engine does not already know.
+func buildCharacterWearing(preset Preset, level int32, talentsString string, equipment *proto.EquipmentSpec, database *proto.SimDatabase) (built *core.Character, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			err = fmt.Errorf("panic building %s at level %d: %v", preset.Label, level, r)
@@ -97,12 +103,12 @@ func buildCharacter(preset Preset, level int32, talentsString string) (built *co
 	if distance == 0 {
 		distance = 5
 	}
-
 	player := core.WithSpec(&proto.Player{
 		Class:              preset.Class,
 		Race:               preset.Race,
 		Level:              level,
-		Equipment:          &proto.EquipmentSpec{},
+		Equipment:          equipment,
+		Database:           database,
 		Buffs:              core.FullBuffs.Player,
 		TalentsString:      talentsString,
 		DistanceFromTarget: distance,

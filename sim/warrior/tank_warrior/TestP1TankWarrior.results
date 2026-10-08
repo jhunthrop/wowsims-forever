@@ -25,7 +25,7 @@ character_stats_results: {
   final_stats: 0
   final_stats: 0
   final_stats: 0
-  final_stats: 7674.49
+  final_stats: 7624.49
   final_stats: 455
   final_stats: 157
   final_stats: 18.28
@@ -33,11 +33,11 @@ character_stats_results: {
   final_stats: 24.01725
   final_stats: 17.28
   final_stats: 10093.6325
-  final_stats: 51
-  final_stats: 90
-  final_stats: 75
-  final_stats: 75
-  final_stats: 75
+  final_stats: 41
+  final_stats: 80
+  final_stats: 65
+  final_stats: 65
+  final_stats: 65
   final_stats: 519
   final_stats: 0
   final_stats: 0
@@ -47,8 +47,8 @@ character_stats_results: {
 stat_weights_results: {
  key: "TestP1TankWarrior-Phase1-StatWeights-Default"
  value: {
-  weights: 0.28384
-  weights: 0.17542
+  weights: 0.27223
+  weights: 0.18424
   weights: 0
   weights: 0
   weights: 0
@@ -60,24 +60,24 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 8.47036
-  weights: 3.41617
+  weights: 8.35466
+  weights: 3.42839
   weights: 0
   weights: 0
-  weights: 0.10604
+  weights: 0.10606
   weights: 0
   weights: 0
-  weights: 13.65856
+  weights: 13.69356
   weights: 0
   weights: 0
   weights: 0
-  weights: -0.00193
+  weights: -0.00766
   weights: 0
-  weights: 0.15116
-  weights: -0.16733
-  weights: 0.2877
-  weights: -1.1402
-  weights: 0.37739
+  weights: 0.22295
+  weights: -0.16014
+  weights: 0.083
+  weights: -0.98872
+  weights: 0.4554
   weights: 0
   weights: 0
   weights: 0
@@ -93,8 +93,8 @@ stat_weights_results: {
 dps_results: {
  key: "TestP1TankWarrior-Phase1-AllItems-BattlegearofHeroism"
  value: {
-  dps: 435.68928
-  tps: 759.45369
+  dps: 435.75742
+  tps: 759.5525
  }
 }
 dps_results: {
@@ -116,6 +116,13 @@ dps_results: {
  value: {
   dps: 422.8535
   tps: 737.74824
+ }
+}
+dps_results: {
+ key: "TestP1TankWarrior-Phase1-AllItems-Champion'sBattlegear"
+ value: {
+  dps: 410.37103
+  tps: 720.23204
  }
 }
 dps_results: {
@@ -147,6 +154,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestP1TankWarrior-Phase1-AllItems-LieutenantCommander'sBattlegear"
+ value: {
+  dps: 410.37103
+  tps: 720.23204
+ }
+}
+dps_results: {
  key: "TestP1TankWarrior-Phase1-AllItems-Vindicator'sBattlegear"
  value: {
   dps: 412.13162
@@ -163,9 +177,9 @@ dps_results: {
 dps_results: {
  key: "TestP1TankWarrior-Phase1-Average-Default"
  value: {
-  dps: 524.62421
-  tps: 1046.08433
-  dtps: 388.56242
+  dps: 524.88404
+  tps: 1046.51382
+  dtps: 389.98352
  }
 }
 dps_results: {
@@ -339,8 +353,8 @@ dps_results: {
 dps_results: {
  key: "TestP1TankWarrior-Phase1-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 620.82314
-  tps: 1226.30751
-  dtps: 361.45901
+  dps: 621.78549
+  tps: 1228.26408
+  dtps: 362.65396
  }
 }

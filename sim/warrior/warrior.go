@@ -54,6 +54,8 @@ const (
 	WarriorSpellMaskPummel
 	WarriorSpellMaskPiercingHowl
 	WarriorSpellMaskSpearingStrike
+	WarriorSpellMaskRecklessness
+	WarriorSpellMaskShieldWall
 
 	// Groups, for talents that target a category rather than one spell.
 	WarriorSpellMaskSpecials = WarriorSpellMaskBloodthirst | WarriorSpellMaskWhirlwind |

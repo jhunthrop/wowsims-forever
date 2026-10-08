@@ -3,6 +3,7 @@ package paladin
 import (
 	"slices"
 
+	"github.com/wowsims/classic/sim/common/clientsetbonus"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/stats"
 )
@@ -70,6 +71,17 @@ var ItemSetJudgementArmor = core.NewItemSet(core.ItemSet{
 //                            Classic Phase 4 Item Sets - ZG and AB
 ///////////////////////////////////////////////////////////////////////////
 
+// Freethinker's Armor 3-piece: Improved Holy Light, whose client family is
+// Holy Light's (SpellClassOptions bit 31).
+const (
+	freethinkersHolyLightBonus int32 = 24457
+	holyLightClientFamilyBit         = 1 << 31
+)
+
+var holyLightClassMasks = core.ClassMaskTable{
+	{Client: core.ClientClassMask{holyLightClientFamilyBit}, Engine: PaladinSpellMaskHolyLight},
+}
+
 var ItemSetFreethinkersArmor = core.NewItemSet(core.ItemSet{
 	Name: "Freethinker's Armor",
 	Bonuses: map[int32]core.ApplyEffect{
@@ -80,7 +92,7 @@ var ItemSetFreethinkersArmor = core.NewItemSet(core.ItemSet{
 		},
 		// Reduces the casting time of your Holy Light spell by 0.1 sec.
 		3: func(agent core.Agent) {
-			// Nothing to do
+			agent.GetCharacter().AddStaticMod(clientsetbonus.TableMod(freethinkersHolyLightBonus, holyLightClassMasks))
 		},
 		// Increases the duration of all Blessings by 10%.
 		5: func(agent core.Agent) {

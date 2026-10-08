@@ -4,46 +4,23 @@ import (
 	"slices"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientsetbonus"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
-var ItemSetTheFiveThunders = core.NewItemSet(core.ItemSet{
-	Name: "The Five Thunders",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +8 All Resistances.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddResistances(8)
-		},
-		// Chance on spell cast to increase your damage and healing by up to 95 for 10 sec.
-		// (Proc chance: 4%)
-		4: func(agent core.Agent) {
-			c := agent.GetCharacter()
+// The Tier 2.5 and Tier 3 bonuses read from the client's rows by hand.
+const (
+	stormcallerChainHealBonus     int32 = 26122
+	earthshattererManaSpringBonus int32 = 29171
+	chainHealClientFamilyBit            = 1 << 8
+)
 
-			procAura := c.NewTemporaryStatsAura("The Furious Storm", core.ActionID{SpellID: 27775}, stats.Stats{stats.SpellPower: 95}, time.Second*10)
-			core.MakeProcTriggerAura(&c.Unit, core.ProcTrigger{
-				Name:       "Item - The Furious Storm Proc (Spell Cast)",
-				Callback:   core.CallbackOnCastComplete,
-				ProcMask:   core.ProcMaskSpellDamage | core.ProcMaskSpellHealing,
-				ProcChance: 0.04,
-				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
-					procAura.Activate(sim)
-				},
-			})
-		},
-		// Increases damage and healing done by magical spells and effects by up to 23.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddResistances(8)
-		},
-		// +200 Armor.
-		8: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Armor, 200)
-		},
-	},
-})
+// chainHealClassMasks says which engine spell the client family of
+// Stormcaller's Chain Heal bonus is.
+var chainHealClassMasks = core.ClassMaskTable{
+	{Client: core.ClientClassMask{chainHealClientFamilyBit}, Engine: ShamanSpellMaskChainHeal},
+}
 
 var ItemSetTheEarthfury = core.NewItemSet(core.ItemSet{
 	Name: "The Earthfury",
@@ -116,6 +93,7 @@ var ItemSetStormcallersGarb = core.NewItemSet(core.ItemSet{
 		},
 		// -0.4 seconds on the casting time of your Chain Heal spell.
 		5: func(agent core.Agent) {
+			agent.GetCharacter().AddStaticMod(clientsetbonus.TableMod(stormcallerChainHealBonus, chainHealClassMasks))
 		},
 	},
 })
@@ -150,6 +128,7 @@ var ItemSetTheEarthshatterer = core.NewItemSet(core.ItemSet{
 		},
 		// Increases the mana gained from your Mana Spring totems by 25%.
 		4: func(agent core.Agent) {
+			agent.(ShamanAgent).GetShaman().manaSpringSetBonus = clientsetbonus.PercentModifier(earthshattererManaSpringBonus, clientsetbonus.ModOpAllEffects)
 		},
 		// Your Healing Wave and Lesser Healing Wave spells have a chance to imbue your target with Totemic Power.
 		6: func(agent core.Agent) {

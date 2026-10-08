@@ -1,88 +1,11 @@
 package druid
 
-import (
-	"github.com/wowsims/classic/sim/core"
-	"github.com/wowsims/classic/sim/core/stats"
-)
+import "github.com/wowsims/classic/sim/common/clientsetbonus"
 
-var ItemSetChampionsRefuge = core.NewItemSet(core.ItemSet{
-	Name: "Champion's Refuge",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +40 Attack Power.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.AttackPower, 40)
-		},
-		// Increases your movement speed by 15% while in Bear, Cat, or Travel Form. Only active outdoors.
-		4: func(agent core.Agent) {
-			// Nothing to do
-		},
-		// +20 Stamina.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Stamina, 20)
-		},
-	},
-})
+// The druid PvP rank sets the client defines for Phase 1, every ItemSet id of
+// each name. Their bonuses are flat stats or utility the sim never casts.
+var pvpSetIDs = []int32{1722, 1723, 1724, 1735, 1736, 1737, 1748, 1749, 1750, 1762, 1763, 1764}
 
-var ItemSetLieutenantCommandersRefuge = core.NewItemSet(core.ItemSet{
-	Name: "Lieutenant Commander's Refuge",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +40 Attack Power.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.AttackPower, 40)
-		},
-		// Increases your movement speed by 15% while in Bear, Cat, or Travel Form. Only active outdoors.
-		4: func(agent core.Agent) {
-			// Nothing to do
-		},
-		// +20 Stamina.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Stamina, 20)
-		},
-	},
-})
-
-var ItemSetFieldMarshalsSanctuary = core.NewItemSet(core.ItemSet{
-	Name: "Field Marshal's Sanctuary",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +20 Stamina.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Stamina, 20)
-		},
-		// Increases your movement speed by 15% while in Bear, Cat, or Travel Form. Only active outdoors.
-		3: func(agent core.Agent) {
-			// Nothing to do
-		},
-		// +40 Attack Power.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.AttackPower, 40)
-			c.AddStat(stats.RangedAttackPower, 40)
-		},
-	},
-})
-
-var ItemSetWarlordsSanctuary = core.NewItemSet(core.ItemSet{
-	Name: "Warlord's Sanctuary",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +20 Stamina.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Stamina, 20)
-		},
-		// Increases your movement speed by 15% while in Bear, Cat, or Travel Form. Only active outdoors.
-		3: func(agent core.Agent) {
-			// Nothing to do
-		},
-		// +40 Attack Power.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.AttackPower, 40)
-			c.AddStat(stats.RangedAttackPower, 40)
-		},
-	},
-})
+func init() {
+	clientsetbonus.RegisterPvPSets(pvpSetIDs...)
+}

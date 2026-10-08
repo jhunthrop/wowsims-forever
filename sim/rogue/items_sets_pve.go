@@ -3,6 +3,7 @@ package rogue
 import (
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientsetbonus"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/stats"
 )
@@ -182,51 +183,6 @@ var ItemSetEmblemsOfVeiledShadows = core.NewItemSet(core.ItemSet{
 	},
 })
 
-// https://www.wowhead.com/classic/item-set=512/darkmantle-armor
-var ItemSetDarkmantleArmor = core.NewItemSet(core.ItemSet{
-	Name: "Darkmantle Armor",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +8 All Resistances.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddResistances(8)
-		},
-		// Chance on melee attack to restore 35 energy.
-		4: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			actionID := core.ActionID{SpellID: 27787}
-			energyMetrics := c.NewEnergyMetrics(actionID)
-
-			core.MakeProcTriggerAura(&c.Unit, core.ProcTrigger{
-				ActionID: actionID,
-				Name:     "Rogue Armor Energize",
-				Callback: core.CallbackOnSpellHitDealt,
-				Outcome:  core.OutcomeLanded,
-				ProcMask: core.ProcMaskMeleeWhiteHit,
-				PPM:      1,
-				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
-					if c.HasEnergyBar() {
-						c.AddEnergy(sim, 35, energyMetrics)
-					}
-				},
-			})
-		},
-		// +40 Attack Power.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStats(stats.Stats{
-				stats.AttackPower:       40,
-				stats.RangedAttackPower: 40,
-			})
-		},
-		// +200 Armor.
-		8: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Armor, 200)
-		},
-	},
-})
-
 // https://www.wowhead.com/classic/item-set=497/deathdealers-embrace
 var ItemSetDeathdealersEmbrace = core.NewItemSet(core.ItemSet{
 	Name: "Deathdealer's Embrace",
@@ -260,6 +216,24 @@ var ItemSetDeathdealersEmbrace = core.NewItemSet(core.ItemSet{
 //                            Phase 5 Item Sets - Naxx
 ///////////////////////////////////////////////////////////////////////////
 
+// Bonescythe Armor's bonus spells and the spells they trigger, whose rows
+// state the numbers below by hand.
+const (
+	bonescytheHeadRushBonus      int32 = 28812
+	bonescytheReducedThreatBonus int32 = 28811
+	bonescytheRevealedFlawBuff   int32 = 28815
+)
+
+// bonescytheHeadRushCooldown is the internal cooldown of Head Rush.
+func bonescytheHeadRushCooldown() time.Duration {
+	return time.Duration(core.MustClientSpellRow(bonescytheHeadRushBonus).InternalCooldownMS) * time.Millisecond
+}
+
+// bonescytheRevealedFlawCooldown is the cooldown of the Revealed Flaw buff.
+func bonescytheRevealedFlawCooldown() time.Duration {
+	return time.Duration(core.MustClientSpellRow(bonescytheRevealedFlawBuff).CooldownMS) * time.Millisecond
+}
+
 // https://www.wowhead.com/classic/item-set=524/bonescythe-armor
 var ItemSetBonescytheArmor = core.NewItemSet(core.ItemSet{
 	Name: "Bonescythe Armor",
@@ -288,6 +262,8 @@ var ItemSetBonescytheArmor = core.NewItemSet(core.ItemSet{
 			actionID := core.ActionID{SpellID: 28813}
 			energyMetrics := c.NewEnergyMetrics(actionID)
 
+			icd := core.Cooldown{Timer: c.NewTimer(), Duration: bonescytheHeadRushCooldown()}
+
 			c.RegisterAura(core.Aura{
 				Label:    "Head Rush",
 				Duration: core.NeverExpires,
@@ -295,7 +271,8 @@ var ItemSetBonescytheArmor = core.NewItemSet(core.ItemSet{
 					aura.Activate(sim)
 				},
 				OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-					if (spell.SpellCode == SpellCode_RogueBackstab || spell.SpellCode == SpellCode_RogueSinisterStrike || spell.SpellCode == SpellCode_RogueHemorrhage) && result.DidCrit() {
+					if (spell.SpellCode == SpellCode_RogueBackstab || spell.SpellCode == SpellCode_RogueSinisterStrike || spell.SpellCode == SpellCode_RogueHemorrhage) && result.DidCrit() && icd.IsReady(sim) {
+						icd.Use(sim)
 						c.AddEnergy(sim, 5, energyMetrics)
 					}
 				},
@@ -304,15 +281,16 @@ var ItemSetBonescytheArmor = core.NewItemSet(core.ItemSet{
 		// Reduces the threat from your Backstab, Sinister Strike, Hemorrhage, and Eviscerate abilities.
 		6: func(agent core.Agent) {
 			c := agent.(RogueAgent).GetRogue()
+			threat := 1 + clientsetbonus.PercentModifier(bonescytheReducedThreatBonus, clientsetbonus.ModOpThreat)
 			c.RegisterAura(core.Aura{
 				Label: "Reduced Threat",
 				OnInit: func(aura *core.Aura, sim *core.Simulation) {
-					c.Backstab.ThreatMultiplier /= 1.08
-					c.SinisterStrike.ThreatMultiplier /= 1.08
+					c.Backstab.ThreatMultiplier *= threat
+					c.SinisterStrike.ThreatMultiplier *= threat
 					if c.Talents.Hemorrhage {
-						c.Hemorrhage.ThreatMultiplier /= 1.08
+						c.Hemorrhage.ThreatMultiplier *= threat
 					}
-					c.Eviscerate.ThreatMultiplier /= 1.08
+					c.Eviscerate.ThreatMultiplier *= threat
 				},
 			})
 		},
@@ -346,10 +324,13 @@ var ItemSetBonescytheArmor = core.NewItemSet(core.ItemSet{
 				},
 			})
 
+			// The client puts the buff spell on a cooldown of its own.
+			icd := core.Cooldown{Timer: c.NewTimer(), Duration: bonescytheRevealedFlawCooldown()}
 			c.OnComboPointsSpent(func(sim *core.Simulation, spell *core.Spell, comboPoints int32) {
-				if spell.SpellCode == SpellCode_RogueEviscerate {
+				if spell.SpellCode == SpellCode_RogueEviscerate && icd.IsReady(sim) {
 					// Proc rate from Simonize Era sheet
 					if sim.Proc(0.05*float64(comboPoints), "Revealed Flaw") {
+						icd.Use(sim)
 						aura.Activate(sim)
 					}
 				}

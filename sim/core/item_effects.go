@@ -156,67 +156,74 @@ func NewSimpleStatDefensiveTrinketEffect(itemID int32, bonus stats.Stats, durati
 // Apply Aura: Mod Ranged Attack Power vs Creature (Mob Type)
 func NewMobTypeAttackPowerEffect(itemID int32, mobTypes []proto.MobType, bonus float64) {
 	NewItemEffect(itemID, func(agent Agent) {
-		character := agent.GetCharacter()
-
-		// The pool, not the active prefix: this is set up once, before
-		// the pull, and permanently mutates attack tables keyed by
-		// UnitIndex, so it means every target in the fight - including
-		// the adds a target timeline has not brought in yet.
-		matchingTargets := FilterSlice(
-			character.Env.Encounter.AllTargetUnits,
-			func(unit *Unit) bool { return slices.Contains(mobTypes, unit.MobType) },
-		)
-
-		MakePermanent(character.GetOrRegisterAura(Aura{
-			Label: fmt.Sprintf("Mob type Attack Power Bonus - %s (%d)", mobTypes, itemID),
-			OnGain: func(aura *Aura, sim *Simulation) {
-				for _, target := range matchingTargets {
-					for _, at := range character.AttackTables[target.UnitIndex] {
-						at.BonusAttackPowerTaken += bonus
-					}
-				}
-			},
-			OnExpire: func(aura *Aura, sim *Simulation) {
-				for _, target := range matchingTargets {
-					for _, at := range character.AttackTables[target.UnitIndex] {
-						at.BonusAttackPowerTaken -= bonus
-					}
-				}
-			},
-		}))
+		ApplyMobTypeAttackPower(agent.GetCharacter(), itemID, mobTypes, bonus)
 	})
 }
 
 // Apply a +X Spell Damage when fighting Mob Type effect
 func NewMobTypeSpellPowerEffect(itemID int32, mobTypes []proto.MobType, bonus float64) {
 	NewItemEffect(itemID, func(agent Agent) {
-		character := agent.GetCharacter()
-
-		// The pool, not the active prefix; see
-		// NewMobTypeAttackPowerEffect above.
-		matchingTargets := FilterSlice(
-			character.Env.Encounter.AllTargetUnits,
-			func(unit *Unit) bool { return slices.Contains(mobTypes, unit.MobType) },
-		)
-
-		MakePermanent(character.GetOrRegisterAura(Aura{
-			Label: fmt.Sprintf("Mob type Spell Damage Bonus - %s (%d)", mobTypes, itemID),
-			OnGain: func(aura *Aura, sim *Simulation) {
-				for _, target := range matchingTargets {
-					for _, at := range character.AttackTables[target.UnitIndex] {
-						at.BonusSpellDamageTaken += bonus
-					}
-				}
-			},
-			OnExpire: func(aura *Aura, sim *Simulation) {
-				for _, target := range matchingTargets {
-					for _, at := range character.AttackTables[target.UnitIndex] {
-						at.BonusSpellDamageTaken -= bonus
-					}
-				}
-			},
-		}))
+		ApplyMobTypeSpellPower(agent.GetCharacter(), itemID, mobTypes, bonus)
 	})
+}
+
+// ApplyMobTypeAttackPower gives the character bonus attack power against
+// every target of the given creature types. id names the source (an item
+// or a set-bonus spell) so two sources never share an aura.
+//
+// The pool, not the active prefix: this is set up once, before the pull,
+// and permanently mutates attack tables keyed by UnitIndex, so it means
+// every target in the fight - including the adds a target timeline has
+// not brought in yet.
+func ApplyMobTypeAttackPower(character *Character, id int32, mobTypes []proto.MobType, bonus float64) {
+	matchingTargets := FilterSlice(
+		character.Env.Encounter.AllTargetUnits,
+		func(unit *Unit) bool { return slices.Contains(mobTypes, unit.MobType) },
+	)
+
+	MakePermanent(character.GetOrRegisterAura(Aura{
+		Label: fmt.Sprintf("Mob type Attack Power Bonus - %s (%d)", mobTypes, id),
+		OnGain: func(aura *Aura, sim *Simulation) {
+			for _, target := range matchingTargets {
+				for _, at := range character.AttackTables[target.UnitIndex] {
+					at.BonusAttackPowerTaken += bonus
+				}
+			}
+		},
+		OnExpire: func(aura *Aura, sim *Simulation) {
+			for _, target := range matchingTargets {
+				for _, at := range character.AttackTables[target.UnitIndex] {
+					at.BonusAttackPowerTaken -= bonus
+				}
+			}
+		},
+	}))
+}
+
+// ApplyMobTypeSpellPower is ApplyMobTypeAttackPower for spell damage.
+func ApplyMobTypeSpellPower(character *Character, id int32, mobTypes []proto.MobType, bonus float64) {
+	matchingTargets := FilterSlice(
+		character.Env.Encounter.AllTargetUnits,
+		func(unit *Unit) bool { return slices.Contains(mobTypes, unit.MobType) },
+	)
+
+	MakePermanent(character.GetOrRegisterAura(Aura{
+		Label: fmt.Sprintf("Mob type Spell Damage Bonus - %s (%d)", mobTypes, id),
+		OnGain: func(aura *Aura, sim *Simulation) {
+			for _, target := range matchingTargets {
+				for _, at := range character.AttackTables[target.UnitIndex] {
+					at.BonusSpellDamageTaken += bonus
+				}
+			}
+		},
+		OnExpire: func(aura *Aura, sim *Simulation) {
+			for _, target := range matchingTargets {
+				for _, at := range character.AttackTables[target.UnitIndex] {
+					at.BonusSpellDamageTaken -= bonus
+				}
+			}
+		},
+	}))
 }
 
 // NewMobTypeDamageEffect registers an item that multiplies the wearer's

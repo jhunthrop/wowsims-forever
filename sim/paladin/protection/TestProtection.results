@@ -105,13 +105,6 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestProtection-Phase1-AllItems-FieldMarshal'sAegis"
- value: {
-  dps: 519.06487
-  tps: 746.16319
- }
-}
-dps_results: {
  key: "TestProtection-Phase1-AllItems-Freethinker'sArmor"
  value: {
   dps: 447.12537
@@ -151,6 +144,13 @@ dps_results: {
  value: {
   dps: 407.49865
   tps: 577.39575
+ }
+}
+dps_results: {
+ key: "TestProtection-Phase1-AllItems-SoulforgeArmor"
+ value: {
+  dps: 497.35071
+  tps: 708.64018
  }
 }
 dps_results: {
