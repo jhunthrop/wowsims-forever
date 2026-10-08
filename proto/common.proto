@@ -1070,6 +1070,30 @@ message HealingModel {
 	int32 burst_window = 4;
 }
 
+// RaidDamageModel is the damage the fake raid members (Raid.target_dummies)
+// take. The last fake member is the tank: it takes tank_hit_damage every
+// tank_swing_seconds. Every other fake member takes pulse_damage in a pulse
+// every pulse_interval_seconds, each pulse landing on pulse_members of them
+// chosen at random. All figures are after mitigation, in health points; the
+// profile that supplies them names itself in `profile`. Forever addition;
+// see PORTING.md.
+message RaidDamageModel {
+	// The profile's name, for logs and results.
+	string profile = 1;
+	double tank_health = 2;
+	double member_health = 3;
+	// Average damage of one tank hit, after mitigation.
+	double tank_hit_damage = 4;
+	double tank_swing_seconds = 5;
+	// Each hit and each pulse rolls its damage within +/- this fraction.
+	double damage_spread = 6;
+	// Damage one pulse deals to each member it lands on.
+	double pulse_damage = 7;
+	double pulse_interval_seconds = 8;
+	// Members one pulse lands on; 0 means every non-tank fake member.
+	int32 pulse_members = 9;
+}
+
 message CustomRotation {
 	repeated CustomSpell spells = 1;
 }

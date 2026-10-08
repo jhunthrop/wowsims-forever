@@ -79,8 +79,11 @@ func (shaman *Shaman) registerWaterShieldSpell() {
 				restoreMana(sim, aura)
 			}
 		},
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if spell.ProcMask.Matches(core.ProcMaskSpellHealing) && result.Outcome.Matches(core.OutcomeCrit) {
+		// A heal reaches its caster's OnHealDealt, not OnSpellHitDealt, which
+		// is for damage; this callback was never reached before the shaman
+		// had a heal to crit.
+		OnHealDealt: func(aura *core.Aura, sim *core.Simulation, _ *core.Spell, result *core.SpellResult) {
+			if result.Outcome.Matches(core.OutcomeCrit) {
 				restoreMana(sim, aura)
 			}
 		},

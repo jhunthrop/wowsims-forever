@@ -47,7 +47,13 @@ const (
 	// Client effect and aura codes (SpellEffect.Effect / EffectAura).
 	effectSchoolDamage = 2
 	effectApplyAura    = 6
-	auraPeriodicDamage = 3
+	effectHeal         = 10
+	// effectApplyPartyAura is an aura applied to the caster's whole party,
+	// which is how the client states Tranquility's periodic heal.
+	effectApplyPartyAura = 35
+	auraPeriodicDamage   = 3
+	auraPeriodicHeal     = 8
+	auraAbsorb           = 69
 )
 
 // DamageComparison is the damage half of a Row.
@@ -69,8 +75,15 @@ type DamageComparison struct {
 }
 
 // clientDamageEffect is the effect the comparison reads: the spell's
-// school-damage effect, else its periodic-damage aura. It reports false
-// for a spell with neither (a buff, a heal, a pure utility).
+// school-damage effect, else its periodic-damage aura, else its heal
+// effect, else its periodic-heal aura. A heal is compared exactly as a
+// damage roll is: the client's centre, variance and per-level growth
+// against the {min, max} the ability file declares in
+// core.SpellConfig.ClientBaseDamage (which for a heal is its base
+// healing), and the spell-power coefficient against BonusCoefficient. It
+// reports false for a spell with none of them (a buff, a pure utility) and
+// for a heal whose client amount is zero (Lay on Hands heals the caster's
+// whole health bar, a number no table row states).
 func clientDamageEffect(spell spellconst.Spell) (spellconst.Effect, bool) {
 	for _, e := range spell.Effects {
 		if e.Effect == effectSchoolDamage {
@@ -82,6 +95,31 @@ func clientDamageEffect(spell spellconst.Spell) (spellconst.Effect, bool) {
 			return e, true
 		}
 	}
+	for _, e := range spell.Effects {
+		if e.Effect == effectHeal && e.Amount > 0 {
+			return e, true
+		}
+	}
+	for _, e := range spell.Effects {
+		isAuraEffect := e.Effect == effectApplyAura || e.Effect == effectApplyPartyAura
+		if isAuraEffect && e.Aura == auraPeriodicHeal && e.Amount > 0 {
+			return e, true
+		}
+	}
+	return spellconst.Effect{}, false
+}
+
+// clientAbsorbEffect is the spell's absorb aura (a shield). It is read only
+// for an engine spell that declares a base amount: no ability file declared
+// one for a shield before, so reading it for every absorb would turn each
+// shield of every class from n/a to "not declared" without anyone having
+// chosen to be compared.
+func clientAbsorbEffect(spell spellconst.Spell) (spellconst.Effect, bool) {
+	for _, e := range spell.Effects {
+		if e.Effect == effectApplyAura && e.Aura == auraAbsorb && e.Amount > 0 {
+			return e, true
+		}
+	}
 	return spellconst.Effect{}, false
 }
 
@@ -89,6 +127,9 @@ func clientDamageEffect(spell spellconst.Spell) (spellconst.Effect, bool) {
 // the client's at casterLevel.
 func compareDamage(clientSpell spellconst.Spell, casterLevel int, engine *core.Spell) DamageComparison {
 	effect, ok := clientDamageEffect(clientSpell)
+	if !ok && engine.ClientBaseDamage != ([2]float64{}) {
+		effect, ok = clientAbsorbEffect(clientSpell)
+	}
 	if !ok {
 		return DamageComparison{Status: DamageNone}
 	}

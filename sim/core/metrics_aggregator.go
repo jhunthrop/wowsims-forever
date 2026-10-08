@@ -95,7 +95,9 @@ type UnitMetrics struct {
 	dtps   DistributionMetrics
 	tmi    DistributionMetrics
 	hps    DistributionMetrics
-	tto    DistributionMetrics
+	// effectiveHps is hps without overheal; see TotalEffectiveHealing.
+	effectiveHps DistributionMetrics
+	tto          DistributionMetrics
 
 	tmiList   []tmiListItem
 	isTanking bool
@@ -189,7 +191,10 @@ type SpellMetrics struct {
 	TotalHealing                float64 // Healing done by all casts of this spell.
 	TotalCritHealing            float64 // Healing done by all critical casts of this spell.
 	TotalShielding              float64 // Shielding done by all casts of this spell.
-	TotalCastTime               time.Duration
+	// TotalEffectiveHealing is the part of TotalHealing that raised a
+	// health bar (no overheal) plus the shielding that absorbed damage.
+	TotalEffectiveHealing float64
+	TotalCastTime         time.Duration
 }
 
 type TargetedActionMetrics struct {
@@ -226,6 +231,7 @@ type TargetedActionMetrics struct {
 	Healing                float64
 	CritHealing            float64
 	Shielding              float64
+	EffectiveHealing       float64
 	CastTime               time.Duration
 }
 
@@ -265,20 +271,22 @@ func (tam *TargetedActionMetrics) ToProto(unitIndex int32) *proto.TargetedAction
 		Healing:                tam.Healing,
 		CritHealing:            tam.CritHealing,
 		Shielding:              tam.Shielding,
+		EffectiveHealing:       tam.EffectiveHealing,
 		CastTimeMs:             float64(tam.CastTime.Milliseconds()),
 	}
 }
 
 func NewUnitMetrics() UnitMetrics {
 	return UnitMetrics{
-		dps:     NewDistributionMetrics(),
-		dpasp:   NewDistributionMetrics(),
-		threat:  NewDistributionMetrics(),
-		dtps:    NewDistributionMetrics(),
-		tmi:     NewDistributionMetrics(),
-		hps:     NewDistributionMetrics(),
-		tto:     NewDistributionMetrics(),
-		actions: make(map[ActionID]*ActionMetrics),
+		dps:          NewDistributionMetrics(),
+		dpasp:        NewDistributionMetrics(),
+		threat:       NewDistributionMetrics(),
+		dtps:         NewDistributionMetrics(),
+		tmi:          NewDistributionMetrics(),
+		hps:          NewDistributionMetrics(),
+		effectiveHps: NewDistributionMetrics(),
+		tto:          NewDistributionMetrics(),
+		actions:      make(map[ActionID]*ActionMetrics),
 	}
 }
 
@@ -425,6 +433,7 @@ func (unitMetrics *UnitMetrics) addSpellMetrics(spell *Spell, actionID ActionID,
 		tam.Healing += spellTargetMetrics.TotalHealing
 		tam.CritHealing += spellTargetMetrics.TotalCritHealing
 		tam.Shielding += spellTargetMetrics.TotalShielding
+		tam.EffectiveHealing += spellTargetMetrics.TotalEffectiveHealing
 		if !spell.Flags.Matches(SpellFlagPassiveSpell) {
 			tam.CastTime += spellTargetMetrics.TotalCastTime
 		}
@@ -437,6 +446,7 @@ func (unitMetrics *UnitMetrics) addSpellMetrics(spell *Spell, actionID ActionID,
 			unitMetrics.threat.Total += spellTargetMetrics.TotalThreat
 		} else {
 			unitMetrics.hps.Total += spellTargetMetrics.TotalHealing + spellTargetMetrics.TotalShielding
+			unitMetrics.effectiveHps.Total += spellTargetMetrics.TotalEffectiveHealing
 		}
 	}
 }
@@ -474,6 +484,7 @@ func (unitMetrics *UnitMetrics) reset() {
 	unitMetrics.tmi.reset()
 	unitMetrics.tmiList = nil
 	unitMetrics.hps.reset()
+	unitMetrics.effectiveHps.reset()
 	unitMetrics.tto.reset()
 	unitMetrics.CharacterIterationMetrics = CharacterIterationMetrics{}
 
@@ -518,6 +529,7 @@ func (unitMetrics *UnitMetrics) doneIteration(unit *Unit, sim *Simulation) {
 	unitMetrics.dtps.doneIteration(sim)
 	unitMetrics.tmi.doneIteration(sim)
 	unitMetrics.hps.doneIteration(sim)
+	unitMetrics.effectiveHps.doneIteration(sim)
 	unitMetrics.tto.doneIteration(sim)
 
 	unitMetrics.oomTimeSum += unitMetrics.OOMTime.Seconds()
@@ -607,6 +619,7 @@ func (unitMetrics *UnitMetrics) ToProto() *proto.UnitMetrics {
 		Dtps:          unitMetrics.dtps.ToProto(),
 		Tmi:           unitMetrics.tmi.ToProto(),
 		Hps:           unitMetrics.hps.ToProto(),
+		EffectiveHps:  unitMetrics.effectiveHps.ToProto(),
 		Tto:           unitMetrics.tto.ToProto(),
 		SecondsOomAvg: unitMetrics.oomTimeSum / n,
 		ChanceOfDeath: float64(unitMetrics.numItersDead) / n,

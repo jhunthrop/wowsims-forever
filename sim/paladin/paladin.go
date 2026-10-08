@@ -33,6 +33,11 @@ const (
 	SpellCode_PaladinHammerOfTheRighteous
 	SpellCode_PaladinJudgementOfFury
 	SpellCode_PaladinSealOfFuryProc
+	SpellCode_PaladinHolyLight
+	SpellCode_PaladinFlashOfLight
+	SpellCode_PaladinHolyShockHeal
+	SpellCode_PaladinLightsVigil
+	SpellCode_PaladinLightsVigilHeal
 )
 
 // PaladinSpellMask* bits exist only for the spells a Forever talent
@@ -59,6 +64,11 @@ const (
 	PaladinSpellMaskJudgementOfFury
 	PaladinSpellMaskSealOfFuryProc
 	PaladinSpellMaskSealOfFuryCast
+	PaladinSpellMaskHolyLight
+	PaladinSpellMaskFlashOfLight
+	PaladinSpellMaskHolyShockHeal
+	PaladinSpellMaskLightsVigilCast
+	PaladinSpellMaskLightsVigilHeal
 )
 
 const (
@@ -74,6 +84,30 @@ const (
 	// Wrath, Exorcism, and Hammer of Wrath spells".
 	PaladinSpellMaskHolyConduitCost = PaladinSpellMaskConsecration | PaladinSpellMaskHolyWrath |
 		PaladinSpellMaskExorcism | PaladinSpellMaskHammerOfWrath
+
+	// Healing Light: "Increases the amount healed by your Holy Light,
+	// Flash of Light, and Holy Shock spells".
+	PaladinSpellMaskHealingLight = PaladinSpellMaskHolyLight | PaladinSpellMaskFlashOfLight | PaladinSpellMaskHolyShockHeal
+
+	// Divine Favor: "your next Flash of Light, Holy Light, or Holy Shock
+	// spell". The Holy Shock cast and its heal both carry the bonus; the
+	// cast spell is the one that rolls the damage half.
+	PaladinSpellMaskDivineFavor = PaladinSpellMaskHealingLight | PaladinSpellMaskHolyShock
+
+	// Illumination: "a critical effect from your Flash of Light, Holy
+	// Light, Light's Vigil, or Holy Shock heal spell".
+	PaladinSpellMaskIlluminating = PaladinSpellMaskHealingLight | PaladinSpellMaskLightsVigilHeal
+
+	// Infusion of Light: "Your Holy Shock and Flash of Light critical
+	// hits".
+	PaladinSpellMaskInfusionTriggers = PaladinSpellMaskFlashOfLight | PaladinSpellMaskHolyShockHeal
+
+	// Spiritual Focus: "Flash of Light, Holy Light, and Light's Vigil".
+	PaladinSpellMaskSpiritualFocus = PaladinSpellMaskHolyLight | PaladinSpellMaskFlashOfLight | PaladinSpellMaskLightsVigilCast
+
+	// Holy Power: "critical strike chance of your Holy Shock and Holy
+	// Strike spells by 3% a rank, and all other spells by 1%".
+	PaladinSpellMaskHolyPowerSpecials = PaladinSpellMaskHolyShock | PaladinSpellMaskHolyShockHeal | PaladinSpellMaskHolyStrike
 
 	// Twist of Light: "Reduces the Mana cost of your Seal spells by
 	// 20%". Every Seal this package registers a cast spell for.
@@ -134,6 +168,14 @@ type Paladin struct {
 	holyShieldProc [3]*core.Spell
 	redoubtAura    *core.Aura
 	holyWrath      []*core.Spell
+
+	// Healing, registered for the healing spec only (healing.go).
+	blessingOfLightAuras   core.AuraArray
+	blessingOfLightBonuses []blessingOfLightBonus
+	lightsVigil            lightsVigilState
+	// illuminationBaseCost is the mana cost Illumination returns half of
+	// for each heal that can trigger it.
+	illuminationBaseCost map[*core.Spell]float64
 
 	// highest rank seal spell if available
 	sealOfRighteousness *core.Spell
@@ -204,6 +246,7 @@ func (paladin *Paladin) Initialize() {
 	paladin.registerSwiftJudgement()
 	paladin.registerDefensiveCooldowns()
 	paladin.registerLayOnHands()
+	paladin.registerHealing()
 
 	paladin.registerStopAttackMacros()
 

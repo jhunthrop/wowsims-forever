@@ -298,6 +298,8 @@ func (raid *Raid) applyCharacterEffects(raidConfig *proto.Raid) *proto.RaidStats
 		raidStats.Parties = append(raidStats.Parties, partyStats)
 	}
 
+	raid.applyRaidDamageModel(raidConfig.RaidDamageModel)
+
 	return raidStats
 }
 

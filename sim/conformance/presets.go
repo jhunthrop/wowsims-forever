@@ -119,6 +119,20 @@ var Presets = []Preset{
 		},
 	},
 	{
+		Label:           "HolyPaladin",
+		ClientClassSlug: "paladin",
+		Class:           proto.Class_ClassPaladin,
+		Race:            proto.Race_RaceHuman,
+		Talents:         "05320003025101051--",
+		SpecOptions: &proto.Player_HolyPaladin{
+			HolyPaladin: &proto.HolyPaladin{
+				Options: &proto.PaladinOptions{
+					PrimarySeal: proto.PaladinSeal_Righteousness,
+				},
+			},
+		},
+	},
+	{
 		Label:           "RetributionPaladin",
 		ClientClassSlug: "paladin",
 		Class:           proto.Class_ClassPaladin,
@@ -207,6 +221,20 @@ var Presets = []Preset{
 		},
 	},
 	{
+		Label:           "RestorationDruid",
+		ClientClassSlug: "druid",
+		Class:           proto.Class_ClassDruid,
+		Race:            proto.Race_RaceTauren,
+		Talents:         "05302001--5050035153113251",
+		SpecOptions: &proto.Player_RestorationDruid{
+			RestorationDruid: &proto.RestorationDruid{
+				Options: &proto.RestorationDruid_Options{
+					InnervateTarget: &proto.UnitReference{Type: proto.UnitReference_Self},
+				},
+			},
+		},
+	},
+	{
 		Label:           "ShadowPriest",
 		ClientClassSlug: "priest",
 		Class:           proto.Class_ClassPriest,
@@ -236,6 +264,21 @@ var Presets = []Preset{
 			ShadowPriest: &proto.ShadowPriest{
 				Options: &proto.ShadowPriest_Options{
 					Armor: proto.ShadowPriest_Options_InnerFire,
+				},
+			},
+		},
+	},
+	{
+		Label:           "HealingPriest",
+		ClientClassSlug: "priest",
+		Class:           proto.Class_ClassPriest,
+		Race:            proto.Race_RaceHuman,
+		// The Holy build healing_priest.go calls HolyTalents.
+		Talents: "0052030312-33505003030121531",
+		SpecOptions: &proto.Player_HealingPriest{
+			HealingPriest: &proto.HealingPriest{
+				Options: &proto.HealingPriest_Options{
+					UseInnerFire: true,
 				},
 			},
 		},
@@ -275,6 +318,19 @@ var Presets = []Preset{
 		SpecOptions: &proto.Player_WardenShaman{
 			WardenShaman: &proto.WardenShaman{
 				Options: &proto.WardenShaman_Options{},
+			},
+		},
+	},
+	{
+		Label:           "RestorationShaman",
+		ClientClassSlug: "shaman",
+		Class:           proto.Class_ClassShaman,
+		Race:            proto.Race_RaceTroll,
+		// The whole Restoration tree, 51 points.
+		Talents: "--5533523315513151",
+		SpecOptions: &proto.Player_RestorationShaman{
+			RestorationShaman: &proto.RestorationShaman{
+				Options: &proto.RestorationShaman_Options{},
 			},
 		},
 	},

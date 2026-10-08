@@ -1,0 +1,1220 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 29166
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "0.3"
+              }
+            }
+          }
+        }
+      },
+      "notes": "Innervate on self when the bar runs low; the major-cooldown pass above only catches it below 500 mana."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 17116
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.35"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "auraIsActive": {
+                      "auraId": {
+                        "spellId": 17116
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Emergency: the tank under 35% gets Nature's Swiftness and, in the same instant, an instant Healing Touch."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9889,
+            "rank": 10
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "spellIsKnown": {
+                  "spellId": {
+                    "spellId": 17116
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 17116
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Gated on knowing the spell as well: a druid without the talent has no Nature's Swiftness aura, and an unresolved condition would let this cast run unconditionally."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 18562
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.3"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.8"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Swiftmend eats the Rejuvenation or Regrowth on the tank with the least time left for its whole heal at once, as the last-ditch button under 30%, paced like Healing Touch."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9863,
+            "rank": 4
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "or": {
+                  "vals": [
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 1
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 1
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 3
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 1
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 4
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 3
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 4
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 3
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 4
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.15"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Tranquility once two of the four party members are hurt; it heals the party every 2 seconds for 10 and sits on a 5 minute cooldown."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9858,
+            "rank": 9
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 9858,
+                        "rank": 9
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.05"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "The tank's two heals over time stay up for the whole fight: Regrowth is the most healing per mana in the kit and Rejuvenation stacks with it."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9841,
+            "rank": 10
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 9841,
+                        "rank": 10
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.05"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9889,
+            "rank": 10
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.55"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.9"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Healing Touch is the big direct heal; it is paced so the mana lasts: only while the mana bar is above the share of the fight still to come."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1238215,
+            "rank": 3
+          },
+          "target": {
+            "type": "Player",
+            "index": 1
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "or": {
+                  "vals": [
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 1
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.8"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.8"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 1
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.8"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 3
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.8"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 1
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.8"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 4
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.8"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.8"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 3
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.8"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.8"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 4
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.8"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 3
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.8"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 4
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.8"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "1.2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Wild Growth on a party member when two are hurt, at the same pace."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9841,
+            "rank": 10
+          },
+          "target": {
+            "type": "Player",
+            "index": 1
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 1
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 9841,
+                        "rank": 10
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 1
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "1.2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "A hurt party member gets Rejuvenation, at the same pace."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9841,
+            "rank": 10
+          },
+          "target": {
+            "type": "Player",
+            "index": 2
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 2
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 9841,
+                        "rank": 10
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 2
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "1.2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9841,
+            "rank": 10
+          },
+          "target": {
+            "type": "Player",
+            "index": 3
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 3
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 9841,
+                        "rank": 10
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 3
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "1.2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9841,
+            "rank": 10
+          },
+          "target": {
+            "type": "Player",
+            "index": 4
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 4
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 9841,
+                        "rank": 10
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 4
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "1.2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

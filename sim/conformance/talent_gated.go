@@ -47,11 +47,10 @@ type TalentGatedSpell struct {
 	Label     string
 	Tree      int
 	Pos       int
-	// PresetLabel names the preset to build from when the ability is only
-	// registered by one spec of the class (Primal Bite is a Bear Form
-	// ability, which only the bear spec registers). Empty means the class's
-	// first preset, whose class-level Initialize registers the rest.
-	PresetLabel string
+	// Preset is the label of the Preset to build with, for a spell only one
+	// spec of the class registers (Swiftmend belongs to the restoration
+	// druid's kit, not the balance druid's). Empty means repPresetForClass.
+	Preset string
 }
 
 func (g TalentGatedSpell) talentsString() string {
@@ -107,6 +106,9 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "paladin", Label: "Holy Shock", Tree: 0, Pos: 14},
 	{ClassSlug: "paladin", Label: "Swift Judgement", Tree: 1, Pos: 10},
 	{ClassSlug: "paladin", Label: "Templar's Bulwark", Tree: 1, Pos: 13},
+	{ClassSlug: "paladin", Label: "Divine Favor", Tree: 0, Pos: 12, Preset: "HolyPaladin"},
+	{ClassSlug: "paladin", Label: "Holy Shock", Tree: 0, Pos: 14, Preset: "HolyPaladin"},
+	{ClassSlug: "paladin", Label: "Light's Vigil", Tree: 0, Pos: 17, Preset: "HolyPaladin"},
 	{ClassSlug: "paladin", Label: "Holy Shield", Tree: 1, Pos: 16},
 	{ClassSlug: "paladin", Label: "Seal of Command", Tree: 2, Pos: 8},
 
@@ -123,12 +125,19 @@ var TalentGatedSpells = []TalentGatedSpell{
 	// Druid (Balance 16, Feral Combat 19, Restoration 16).
 	{ClassSlug: "druid", Label: "Insect Swarm", Tree: 0, Pos: 9},
 	{ClassSlug: "druid", Label: "Moonkin Form", Tree: 0, Pos: 16},
-	{ClassSlug: "druid", Label: "Primal Bite", Tree: 1, Pos: 12, PresetLabel: "FeralBearDruid"},
+	{ClassSlug: "druid", Label: "Primal Bite", Tree: 1, Pos: 12, Preset: "FeralBearDruid"},
 	{ClassSlug: "druid", Label: "Berserk", Tree: 1, Pos: 20},
+	{ClassSlug: "druid", Label: "Swiftmend", Tree: 2, Pos: 11, Preset: "RestorationDruid"},
 	{ClassSlug: "druid", Label: "Nature's Swiftness", Tree: 2, Pos: 12},
+	{ClassSlug: "druid", Label: "Wild Growth", Tree: 2, Pos: 16, Preset: "RestorationDruid"},
 
 	// Priest (Discipline 18, Holy 17, Shadow 18).
 	{ClassSlug: "priest", Label: "Inner Focus", Tree: 0, Pos: 9},
+	{ClassSlug: "priest", Label: "Penance", Tree: 0, Pos: 15, Preset: "HealingPriest"},
+	{ClassSlug: "priest", Label: "Power Infusion", Tree: 0, Pos: 18, Preset: "HealingPriest"},
+	{ClassSlug: "priest", Label: "Holy Nova", Tree: 1, Pos: 6, Preset: "HealingPriest"},
+	{ClassSlug: "priest", Label: "Binding Heal", Tree: 1, Pos: 12, Preset: "HealingPriest"},
+	{ClassSlug: "priest", Label: "Prayer of Mending", Tree: 1, Pos: 17, Preset: "HealingPriest"},
 	{ClassSlug: "priest", Label: "Mind Flay", Tree: 2, Pos: 9},
 	{ClassSlug: "priest", Label: "Vampiric Embrace", Tree: 2, Pos: 12},
 	{ClassSlug: "priest", Label: "Shadowform", Tree: 2, Pos: 18},
@@ -138,7 +147,9 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "shaman", Label: "Stormstrike", Tree: 1, Pos: 13},
 	{ClassSlug: "shaman", Label: "Rage of the Farseer", Tree: 1, Pos: 18},
 	{ClassSlug: "shaman", Label: "Water Shield", Tree: 2, Pos: 9},
+	{ClassSlug: "shaman", Label: "Mana Tide Totem", Tree: 2, Pos: 12, Preset: "RestorationShaman"},
 	{ClassSlug: "shaman", Label: "Nature's Swiftness", Tree: 2, Pos: 14},
+	{ClassSlug: "shaman", Label: "Riptide", Tree: 2, Pos: 16, Preset: "RestorationShaman"},
 
 	// Rogue (Assassination 17, Combat 17, Subtlety 19).
 	{ClassSlug: "rogue", Label: "Cold Blood", Tree: 0, Pos: 11},
@@ -183,14 +194,9 @@ func repPresetForClass(classSlug string) (Preset, bool) {
 	return Preset{}, false
 }
 
-// presetFor is the preset a gated spell is built from: the one it names, or
-// the class's representative.
-func presetFor(gated TalentGatedSpell) (Preset, bool) {
-	if gated.PresetLabel == "" {
-		return repPresetForClass(gated.ClassSlug)
-	}
+func presetByLabel(label string) (Preset, bool) {
 	for _, p := range Presets {
-		if p.Label == gated.PresetLabel {
+		if p.Label == label {
 			return p, true
 		}
 	}
@@ -220,6 +226,16 @@ func collectTalentGatedRows(clientClass spellconst.Class, classSlug string) (row
 	}
 
 	baselines := map[string]map[int32]map[int32]bool{}
+	baselineOf := func(p Preset) map[int32]map[int32]bool {
+		if cached, ok := baselines[p.Label]; ok {
+			return cached
+		}
+		byLevel, errs := baselineSpellIDsByLevel(p)
+		buildErrors = append(buildErrors, errs...)
+		baselines[p.Label] = byLevel
+		return byLevel
+	}
+
 	seen := map[string]bool{}
 	for _, gated := range TalentGatedSpells {
 		if gated.ClassSlug != classSlug {
@@ -230,21 +246,16 @@ func collectTalentGatedRows(clientClass spellconst.Class, classSlug string) (row
 			continue
 		}
 
-		preset, ok := presetFor(gated)
+		gatedPreset, ok := repPresetForClass(classSlug)
+		if gated.Preset != "" {
+			gatedPreset, ok = presetByLabel(gated.Preset)
+		}
 		if !ok {
-			buildErrors = append(buildErrors, fmt.Sprintf("%s: %s names preset %q, which does not exist", classSlug, gated.Label, gated.PresetLabel))
+			buildErrors = append(buildErrors, fmt.Sprintf("%s: %s names preset %q, which does not exist", classSlug, gated.Label, gated.Preset))
 			continue
 		}
-		baseline, cached := baselines[preset.Label]
-		if !cached {
-			var baselineErrs []string
-			baseline, baselineErrs = baselineSpellIDsByLevel(preset)
-			buildErrors = append(buildErrors, baselineErrs...)
-			baselines[preset.Label] = baseline
-		}
-
-		gatedPreset := preset
-		gatedPreset.Label = fmt.Sprintf("%s (%s talent)", preset.Label, gated.Label)
+		baseline := baselineOf(gatedPreset)
+		gatedPreset.Label = fmt.Sprintf("%s (%s talent)", gatedPreset.Label, gated.Label)
 		gatedTalents := gated.talentsString()
 
 		for _, level := range Levels {

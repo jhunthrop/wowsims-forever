@@ -1,97 +1,83 @@
 package healing
 
 import (
+	"testing"
+
 	_ "github.com/wowsims/classic/sim/common" // imported to get caster sets included.
+	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/core/simsignals"
+	"github.com/wowsims/classic/sim/core/stats"
+	"github.com/wowsims/classic/sim/healsim"
+	"github.com/wowsims/classic/sim/priest"
 )
 
 func init() {
 	RegisterHealingPriest()
 }
 
-// TODO: Classic
-// func TestDisc(t *testing.T) {
-// 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator(core.CharacterSuiteConfig{
-// 		Class:    proto.Class_ClassPriest,
-// 		Race:     proto.Race_RaceUndead,
-// 		IsHealer: true,
+// The two reference builds, each a valid level-60 spend of the live trees
+// (51 points; tier and prerequisite rules checked against
+// data/builds/1.60.1.70009/talents/priest.json). Holy puts 35 points in
+// the Holy tree and 16 in Discipline (Twin Disciplines, Improved Power
+// Word: Shield, Silent Resolve, Mental Agility, Inner Focus, Meditation);
+// Discipline puts 33 in Discipline (down to Penance, Renewed Hope, Divine
+// Aegis and Power Infusion) and 18 in Holy (Improved Renew, Holy
+// Specialization, Divine Fury, Inspiration, Improved Healing). The
+// conformance preset (sim/conformance/presets.go) carries HolyTalents.
+const (
+	HolyTalents = "0052030312-33505003030121531"
+	DiscTalents = "005203031305101531-0350500302"
+)
 
-// 		GearSet:     core.GetGearSet("../../../ui/healing_priest/gear_sets", "p1_disc"),
-// 		Talents:     DiscTalents,
-// 		Consumes:    FullConsumes,
-// 		SpecOptions: core.SpecOptionsCombo{Label: "Disc", SpecOptions: PlayerOptionsDisc},
-// 		Rotation:    core.GetAplRotation("../../../ui/healing_priest/apls", "disc"),
-
-// 		ItemFilter: core.ItemFilter{
-// 			WeaponTypes: []proto.WeaponType{
-// 				proto.WeaponType_WeaponTypeDagger,
-// 				proto.WeaponType_WeaponTypeMace,
-// 				proto.WeaponType_WeaponTypeOffHand,
-// 				proto.WeaponType_WeaponTypeStaff,
-// 			},
-// 			ArmorType: proto.ArmorType_ArmorTypeCloth,
-// 			RangedWeaponTypes: []proto.RangedWeaponType{
-// 				proto.RangedWeaponType_RangedWeaponTypeWand,
-// 			},
-// 		},
-
-// 		EPReferenceStat: proto.Stat_StatSpellPower,
-// 		StatsToWeigh: []proto.Stat{
-// 			proto.Stat_StatIntellect,
-// 			proto.Stat_StatSpellPower,
-// 			proto.Stat_StatSpellHaste,
-// 			proto.Stat_StatCrit,
-// 		},
-// 	}))
-// }
-
-// func TestHoly(t *testing.T) {
-// 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator(core.CharacterSuiteConfig{
-// 		Class:    proto.Class_ClassPriest,
-// 		Race:     proto.Race_RaceUndead,
-// 		IsHealer: true,
-
-// 		GearSet:     core.GetGearSet("../../../ui/healing_priest/gear_sets", "p1_holy"),
-// 		Talents:     HolyTalents,
-// 		Consumes:    FullConsumes,
-// 		SpecOptions: core.SpecOptionsCombo{Label: "Holy", SpecOptions: PlayerOptionsHoly},
-// 		Rotation:    core.GetAplRotation("../../../ui/healing_priest/apls", "holy"),
-
-// 		ItemFilter: core.ItemFilter{
-// 			WeaponTypes: []proto.WeaponType{
-// 				proto.WeaponType_WeaponTypeDagger,
-// 				proto.WeaponType_WeaponTypeMace,
-// 				proto.WeaponType_WeaponTypeOffHand,
-// 				proto.WeaponType_WeaponTypeStaff,
-// 			},
-// 			ArmorType: proto.ArmorType_ArmorTypeCloth,
-// 			RangedWeaponTypes: []proto.RangedWeaponType{
-// 				proto.RangedWeaponType_RangedWeaponTypeWand,
-// 			},
-// 		},
-// 	}))
-// }
-
-var DiscTalents = "0503203130300512301313231251-2351010303"
-var HolyTalents = "05032031103-234051032002152530004311051"
-
-var FullConsumes = &proto.Consumes{
-	Flask: proto.Flask_FlaskUnknown,
-	Food:  proto.Food_FoodUnknown,
+// raidHealerStats stands in for gear, which the engine's item database does
+// not supply to tests: roughly a tier-1 raid healer.
+var raidHealerStats = stats.Stats{
+	stats.Intellect:    300,
+	stats.Spirit:       200,
+	stats.HealingPower: 700,
+	stats.MP5:          40,
 }
 
-var PlayerOptionsDisc = &proto.Player_HealingPriest{
-	HealingPriest: &proto.HealingPriest{
-		Options: &proto.HealingPriest_Options{
-			UseInnerFire: true,
-		},
-	},
+// healer builds the healing priest every test drives.
+func healer(level int32, talents string, options *proto.HealingPriest_Options, rotation *proto.APLRotation) *proto.Player {
+	player := core.WithSpec(&proto.Player{
+		Class:         proto.Class_ClassPriest,
+		Race:          proto.Race_RaceHuman,
+		Level:         level,
+		Equipment:     &proto.EquipmentSpec{},
+		BonusStats:    &proto.UnitStats{Stats: raidHealerStats.ToFloatArray()},
+		TalentsString: talents,
+		Rotation:      rotation,
+	}, &proto.Player_HealingPriest{HealingPriest: &proto.HealingPriest{Options: options}})
+	return player
 }
 
-var PlayerOptionsHoly = &proto.Player_HealingPriest{
-	HealingPriest: &proto.HealingPriest{
-		Options: &proto.HealingPriest_Options{
-			UseInnerFire: true,
-		},
-	},
+// healerSim is a prepulled sim with the healer next to the fake raid and
+// no rotation, so a test drives the spells directly.
+func healerSim(t *testing.T, level int32, talents string) (*core.Simulation, *HealingPriest) {
+	t.Helper()
+	return healerSimWith(t, level, talents, &proto.HealingPriest_Options{})
 }
+
+// healerSimWith is healerSim with the spec's options set.
+func healerSimWith(t *testing.T, level int32, talents string, options *proto.HealingPriest_Options) (*core.Simulation, *HealingPriest) {
+	t.Helper()
+	return agentSim(t, healer(level, talents, options, &proto.APLRotation{}))
+}
+
+// agentSim prepulls a sim around player and returns the healing priest.
+func agentSim(t *testing.T, player *proto.Player) (*core.Simulation, *HealingPriest) {
+	t.Helper()
+	req := healsim.Request(player, healsim.TestProfile(), 300, 1)
+	sim := core.NewSim(req, simsignals.CreateSignals())
+	sim.Reset()
+	sim.PrePull()
+	agent, ok := sim.Raid.Parties[0].Players[0].(*HealingPriest)
+	if !ok {
+		t.Fatal("the raid's first player is not a healing priest")
+	}
+	return sim, agent
+}
+
+var _ priest.PriestAgent = (*HealingPriest)(nil)

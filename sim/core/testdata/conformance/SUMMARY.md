@@ -532,20 +532,20 @@ visibility gap (see the shaman section above).
 
 ## Damage conformance (level 60)
 
-Per spec-and-rank row at level 60 whose client spell has a school-damage or periodic-damage effect, compared as damage.go describes. `declared` is an ability file setting `core.SpellConfig.ClientBaseDamage`; `not declared` is the gap the fix lanes close. Rows with no client damage effect (buffs, heals, utility) are `n/a`.
+Per spec-and-rank row at level 60 whose client spell has a school-damage, periodic-damage, heal or periodic-heal effect (or an absorb the ability file declares an amount for), compared as damage.go describes. `declared` is an ability file setting `core.SpellConfig.ClientBaseDamage`; `not declared` is the gap the fix lanes close. Rows with none of those (buffs, utility) are `n/a`.
 
 | Class | Declared | Matching | Differing | Not declared | n/a |
 |---|---|---|---|---|---|
 | Hunter | 12 | 12 | 0 | 0 | 27 |
 | Mage | 78 | 78 | 0 | 0 | 24 |
 | Warlock | 98 | 98 | 0 | 0 | 63 |
-| Paladin | 73 | 73 | 0 | 16 | 103 |
+| Paladin | 129 | 129 | 0 | 24 | 159 |
 | Warrior | 12 | 12 | 0 | 0 | 38 |
-| Druid | 61 | 61 | 0 | 0 | 33 |
-| Priest | 43 | 43 | 0 | 0 | 9 |
-| Shaman | 123 | 123 | 0 | 0 | 175 |
+| Druid | 98 | 98 | 0 | 0 | 35 |
+| Priest | 143 | 143 | 0 | 0 | 22 |
+| Shaman | 185 | 185 | 0 | 20 | 215 |
 | Rogue | 6 | 6 | 0 | 0 | 25 |
-| **Total** | 506 | 506 | 0 | 16 | 497 |
+| **Total** | 761 | 761 | 0 | 44 | 608 |
 
 <!-- damage-summary:end -->
 
@@ -560,12 +560,12 @@ Per class, the active trainables (power cost, cast time or cooldown; pipeline.tr
 | Hunter | 49 | 30 |
 | Mage | 58 | 37 |
 | Warlock | 47 | 24 |
-| Paladin | 46 | 28 |
+| Paladin | 46 | 23 |
 | Warrior | 40 | 11 |
-| Druid | 54 | 27 |
-| Priest | 53 | 45 |
-| Shaman | 54 | 33 |
+| Druid | 54 | 21 |
+| Priest | 53 | 33 |
+| Shaman | 54 | 28 |
 | Rogue | 27 | 12 |
-| **Total** | 428 | 247 |
+| **Total** | 428 | 219 |
 
 <!-- trainables-summary:end -->

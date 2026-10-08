@@ -33,12 +33,13 @@ func (priest *Priest) getHolyFireConfig(rank int) core.SpellConfig {
 	castTime := time.Millisecond * 3500
 
 	return core.SpellConfig{
-		SpellCode:   SpellCode_PriestHolyFire,
-		ActionID:    core.ActionID{SpellID: spellId},
-		SpellSchool: core.SpellSchoolHoly,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       SpellFlagPriest | core.SpellFlagAPL,
+		SpellCode:      SpellCode_PriestHolyFire,
+		ClassSpellMask: PriestSpellMaskHolyFire,
+		ActionID:       core.ActionID{SpellID: spellId},
+		SpellSchool:    core.SpellSchoolHoly,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          SpellFlagPriest | core.SpellFlagAPL,
 
 		RequiredLevel: level,
 		Rank:          rank,
@@ -50,7 +51,7 @@ func (priest *Priest) getHolyFireConfig(rank int) core.SpellConfig {
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD:      core.GCDDefault,
-				CastTime: castTime - time.Millisecond*100*time.Duration(priest.Talents.DivineFury),
+				CastTime: castTime,
 			},
 		},
 

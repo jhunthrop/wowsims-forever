@@ -16,6 +16,15 @@ type Shield struct {
 
 	// Embed Aura so we can use IsActive/Refresh/etc directly.
 	*Aura
+
+	// remaining is how much damage the shield can still absorb.
+	remaining float64
+}
+
+// Remaining is the damage the shield can still absorb; 0 once it has
+// expired or been used up.
+func (shield *Shield) Remaining() float64 {
+	return shield.remaining
 }
 
 func (shield *Shield) Apply(sim *Simulation, shieldAmount float64) {
@@ -29,6 +38,8 @@ func (shield *Shield) Apply(sim *Simulation, shieldAmount float64) {
 
 	shield.Aura.Deactivate(sim)
 	shield.Aura.Activate(sim)
+	shield.remaining = shieldAmount
+	target.activeShields = append(target.activeShields, shield)
 
 	threat := 0.0 // TODO
 	shield.Spell.SpellMetrics[target.UnitIndex].TotalThreat += threat
@@ -45,6 +56,41 @@ func newShield(config Shield) *Shield {
 	*shield = config
 
 	return shield
+}
+
+// AbsorbDamage lets the unit's active shields soak up damage before it
+// reaches the health bar and returns what is left over. The absorbed part
+// counts as the shielding spell's effective healing: a shield nothing
+// hits protects nobody. A shield that is used up falls off.
+func (unit *Unit) AbsorbDamage(sim *Simulation, damage float64) float64 {
+	for _, shield := range unit.activeShields {
+		if damage <= 0 {
+			break
+		}
+		absorbed := min(damage, shield.remaining)
+		if absorbed <= 0 {
+			continue
+		}
+		shield.remaining -= absorbed
+		damage -= absorbed
+		shield.Spell.SpellMetrics[unit.UnitIndex].TotalEffectiveHealing += absorbed
+		if shield.remaining <= 0 {
+			shield.Aura.Deactivate(sim)
+		}
+	}
+	return damage
+}
+
+// dropShield forgets a shield that expired or was used up.
+func (unit *Unit) dropShield(shield *Shield) {
+	shield.remaining = 0
+	kept := unit.activeShields[:0]
+	for _, active := range unit.activeShields {
+		if active != shield {
+			kept = append(kept, active)
+		}
+	}
+	unit.activeShields = kept
 }
 
 type ShieldArray []*Shield
@@ -72,8 +118,7 @@ func (spell *Spell) createShields(config ShieldConfig) {
 
 	caster := shield.Spell.Unit
 	if config.SelfOnly {
-		shield.Aura = caster.GetOrRegisterAura(auraConfig)
-		spell.selfShield = newShield(shield)
+		spell.selfShield = registerShield(caster, auraConfig, shield)
 	} else {
 		auraConfig.Label += "-" + strconv.Itoa(int(caster.UnitIndex))
 		if spell.shields == nil {
@@ -81,9 +126,23 @@ func (spell *Spell) createShields(config ShieldConfig) {
 		}
 		for _, target := range caster.Env.AllUnits {
 			if !caster.IsOpponent(target) {
-				shield.Aura = target.GetOrRegisterAura(auraConfig)
-				spell.shields[target.UnitIndex] = newShield(shield)
+				spell.shields[target.UnitIndex] = registerShield(target, auraConfig, shield)
 			}
 		}
 	}
+}
+
+// registerShield puts the shield's aura on unit and makes the aura's end
+// the shield's end.
+func registerShield(unit *Unit, auraConfig Aura, template Shield) *Shield {
+	shield := newShield(template)
+	userOnExpire := auraConfig.OnExpire
+	auraConfig.OnExpire = func(aura *Aura, sim *Simulation) {
+		unit.dropShield(shield)
+		if userOnExpire != nil {
+			userOnExpire(aura, sim)
+		}
+	}
+	shield.Aura = unit.GetOrRegisterAura(auraConfig)
+	return shield
 }

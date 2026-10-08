@@ -38,6 +38,13 @@ const (
 	SpellCode_DruidSwipe
 	SpellCode_DruidLacerate
 	SpellCode_DruidPrimalBite
+
+	SpellCode_DruidHealingTouch
+	SpellCode_DruidRegrowth
+	SpellCode_DruidRejuvenation
+	SpellCode_DruidSwiftmend
+	SpellCode_DruidTranquility
+	SpellCode_DruidWildGrowth
 )
 
 // DruidSpellMask* identify the subset of this package's spells that a
@@ -61,6 +68,12 @@ const (
 	DruidSpellMaskSwipe
 	DruidSpellMaskLacerate
 	DruidSpellMaskPrimalBite
+	DruidSpellMaskHealingTouch
+	DruidSpellMaskRegrowth
+	DruidSpellMaskRejuvenation
+	DruidSpellMaskSwiftmend
+	DruidSpellMaskTranquility
+	DruidSpellMaskWildGrowth
 )
 
 const (
@@ -73,9 +86,23 @@ const (
 	// cooldown cut reaches ("your damaging spells").
 	DruidSpellMaskBalanceDamage = DruidSpellMaskWrath | DruidSpellMaskStarfire | DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm
 
+	// Every healing spell this package registers, for Gift of Nature's
+	// "all your healing spells".
+	DruidSpellMaskHealing = DruidSpellMaskHealingTouch | DruidSpellMaskRegrowth | DruidSpellMaskRejuvenation |
+		DruidSpellMaskSwiftmend | DruidSpellMaskTranquility | DruidSpellMaskWildGrowth
+
+	// Every healing-over-time effect this package registers, for
+	// Genesis's "periodic ... healing".
+	DruidSpellMaskPeriodicHealing = DruidSpellMaskRegrowth | DruidSpellMaskRejuvenation |
+		DruidSpellMaskTranquility | DruidSpellMaskWildGrowth
+
 	// Every damage-over-time effect this package registers, for
 	// Genesis's "periodic damage".
 	DruidSpellMaskPeriodicDamage = DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm | DruidSpellMaskRake | DruidSpellMaskRip
+
+	// Every Nature spell Nature's Swiftness can make instant: the one
+	// damage spell and the two cast-time heals the school has.
+	DruidSpellMaskNatureCasts = DruidSpellMaskWrath | DruidSpellMaskHealingTouch | DruidSpellMaskRegrowth
 
 	// Every Cat Form melee special this package registers, for
 	// Predatory Instincts' "melee abilities".
@@ -98,6 +125,10 @@ type Druid struct {
 
 	StartingForm DruidForm
 
+	// CastsNaturesSwiftnessByHand keeps Nature's Swiftness out of the generic
+	// major-cooldown pass: the spec's rotation times it itself.
+	CastsNaturesSwiftnessByHand bool
+
 	RebirthTiming     float64
 	BleedsActive      int
 	AssumeBleedActive bool
@@ -113,6 +144,7 @@ type Druid struct {
 	ForceOfNature        *DruidSpell
 	FrenziedRegeneration *DruidSpell
 	GiftOfTheWild        *DruidSpell
+	HealingTouch         []*DruidSpell
 	Hurricane            []*DruidSpell
 	Innervate            *DruidSpell
 	InsectSwarm          []*DruidSpell
@@ -125,6 +157,8 @@ type Druid struct {
 	PrimalBite           *DruidSpell
 	Prowl                *DruidSpell
 	Rebirth              *DruidSpell
+	Regrowth             []*DruidSpell
+	Rejuvenation         []*DruidSpell
 	Rake                 *DruidSpell
 	Ravage               *DruidSpell
 	Rip                  *DruidSpell
@@ -132,8 +166,11 @@ type Druid struct {
 	Shred                *DruidSpell
 	Claw                 *DruidSpell
 	Starfire             []*DruidSpell
+	Swiftmend            *DruidSpell
 	SwipeBear            *DruidSpell
 	TigersFury           *DruidSpell
+	Tranquility          []*DruidSpell
+	WildGrowth           []*DruidSpell
 	Wrath                []*DruidSpell
 
 	BearForm    *DruidSpell

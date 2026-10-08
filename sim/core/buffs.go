@@ -1912,7 +1912,7 @@ func AtieshSpellPowerEffect(unit *Unit, idx int32) *Aura {
 		return unit.GetAura(label)
 	}
 
-	stats := stats.Stats{stats.SpellPower: 33}
+	stats := stats.Stats{stats.SpellPower: 33, stats.HealingPower: 33}
 
 	return MakePermanent(unit.RegisterAura(Aura{
 		ActionID:   ActionID{SpellID: 28143}.WithTag(idx),

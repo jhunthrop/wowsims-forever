@@ -5892,6 +5892,126 @@ func (x *HealingModel) GetBurstWindow() int32 {
 	return 0
 }
 
+// RaidDamageModel is the damage the fake raid members (Raid.target_dummies)
+// take. The last fake member is the tank: it takes tank_hit_damage every
+// tank_swing_seconds. Every other fake member takes pulse_damage in a pulse
+// every pulse_interval_seconds, each pulse landing on pulse_members of them
+// chosen at random. All figures are after mitigation, in health points; the
+// profile that supplies them names itself in `profile`. Forever addition;
+// see PORTING.md.
+type RaidDamageModel struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The profile's name, for logs and results.
+	Profile      string  `protobuf:"bytes,1,opt,name=profile,proto3" json:"profile,omitempty"`
+	TankHealth   float64 `protobuf:"fixed64,2,opt,name=tank_health,json=tankHealth,proto3" json:"tank_health,omitempty"`
+	MemberHealth float64 `protobuf:"fixed64,3,opt,name=member_health,json=memberHealth,proto3" json:"member_health,omitempty"`
+	// Average damage of one tank hit, after mitigation.
+	TankHitDamage    float64 `protobuf:"fixed64,4,opt,name=tank_hit_damage,json=tankHitDamage,proto3" json:"tank_hit_damage,omitempty"`
+	TankSwingSeconds float64 `protobuf:"fixed64,5,opt,name=tank_swing_seconds,json=tankSwingSeconds,proto3" json:"tank_swing_seconds,omitempty"`
+	// Each hit and each pulse rolls its damage within +/- this fraction.
+	DamageSpread float64 `protobuf:"fixed64,6,opt,name=damage_spread,json=damageSpread,proto3" json:"damage_spread,omitempty"`
+	// Damage one pulse deals to each member it lands on.
+	PulseDamage          float64 `protobuf:"fixed64,7,opt,name=pulse_damage,json=pulseDamage,proto3" json:"pulse_damage,omitempty"`
+	PulseIntervalSeconds float64 `protobuf:"fixed64,8,opt,name=pulse_interval_seconds,json=pulseIntervalSeconds,proto3" json:"pulse_interval_seconds,omitempty"`
+	// Members one pulse lands on; 0 means every non-tank fake member.
+	PulseMembers  int32 `protobuf:"varint,9,opt,name=pulse_members,json=pulseMembers,proto3" json:"pulse_members,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RaidDamageModel) Reset() {
+	*x = RaidDamageModel{}
+	mi := &file_common_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RaidDamageModel) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RaidDamageModel) ProtoMessage() {}
+
+func (x *RaidDamageModel) ProtoReflect() protoreflect.Message {
+	mi := &file_common_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RaidDamageModel.ProtoReflect.Descriptor instead.
+func (*RaidDamageModel) Descriptor() ([]byte, []int) {
+	return file_common_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *RaidDamageModel) GetProfile() string {
+	if x != nil {
+		return x.Profile
+	}
+	return ""
+}
+
+func (x *RaidDamageModel) GetTankHealth() float64 {
+	if x != nil {
+		return x.TankHealth
+	}
+	return 0
+}
+
+func (x *RaidDamageModel) GetMemberHealth() float64 {
+	if x != nil {
+		return x.MemberHealth
+	}
+	return 0
+}
+
+func (x *RaidDamageModel) GetTankHitDamage() float64 {
+	if x != nil {
+		return x.TankHitDamage
+	}
+	return 0
+}
+
+func (x *RaidDamageModel) GetTankSwingSeconds() float64 {
+	if x != nil {
+		return x.TankSwingSeconds
+	}
+	return 0
+}
+
+func (x *RaidDamageModel) GetDamageSpread() float64 {
+	if x != nil {
+		return x.DamageSpread
+	}
+	return 0
+}
+
+func (x *RaidDamageModel) GetPulseDamage() float64 {
+	if x != nil {
+		return x.PulseDamage
+	}
+	return 0
+}
+
+func (x *RaidDamageModel) GetPulseIntervalSeconds() float64 {
+	if x != nil {
+		return x.PulseIntervalSeconds
+	}
+	return 0
+}
+
+func (x *RaidDamageModel) GetPulseMembers() int32 {
+	if x != nil {
+		return x.PulseMembers
+	}
+	return 0
+}
+
 type CustomRotation struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Spells        []*CustomSpell         `protobuf:"bytes,1,rep,name=spells,proto3" json:"spells,omitempty"`
@@ -5901,7 +6021,7 @@ type CustomRotation struct {
 
 func (x *CustomRotation) Reset() {
 	*x = CustomRotation{}
-	mi := &file_common_proto_msgTypes[26]
+	mi := &file_common_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5913,7 +6033,7 @@ func (x *CustomRotation) String() string {
 func (*CustomRotation) ProtoMessage() {}
 
 func (x *CustomRotation) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[26]
+	mi := &file_common_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5926,7 +6046,7 @@ func (x *CustomRotation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomRotation.ProtoReflect.Descriptor instead.
 func (*CustomRotation) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{26}
+	return file_common_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *CustomRotation) GetSpells() []*CustomSpell {
@@ -5949,7 +6069,7 @@ type CustomSpell struct {
 
 func (x *CustomSpell) Reset() {
 	*x = CustomSpell{}
-	mi := &file_common_proto_msgTypes[27]
+	mi := &file_common_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5961,7 +6081,7 @@ func (x *CustomSpell) String() string {
 func (*CustomSpell) ProtoMessage() {}
 
 func (x *CustomSpell) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[27]
+	mi := &file_common_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5974,7 +6094,7 @@ func (x *CustomSpell) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomSpell.ProtoReflect.Descriptor instead.
 func (*CustomSpell) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{27}
+	return file_common_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *CustomSpell) GetSpell() int32 {
@@ -6002,7 +6122,7 @@ type ItemSwap struct {
 
 func (x *ItemSwap) Reset() {
 	*x = ItemSwap{}
-	mi := &file_common_proto_msgTypes[28]
+	mi := &file_common_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6014,7 +6134,7 @@ func (x *ItemSwap) String() string {
 func (*ItemSwap) ProtoMessage() {}
 
 func (x *ItemSwap) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[28]
+	mi := &file_common_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6027,7 +6147,7 @@ func (x *ItemSwap) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemSwap.ProtoReflect.Descriptor instead.
 func (*ItemSwap) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{28}
+	return file_common_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ItemSwap) GetMhItem() *ItemSpec {
@@ -6060,7 +6180,7 @@ type Duration struct {
 
 func (x *Duration) Reset() {
 	*x = Duration{}
-	mi := &file_common_proto_msgTypes[29]
+	mi := &file_common_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6072,7 +6192,7 @@ func (x *Duration) String() string {
 func (*Duration) ProtoMessage() {}
 
 func (x *Duration) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[29]
+	mi := &file_common_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6085,7 +6205,7 @@ func (x *Duration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Duration.ProtoReflect.Descriptor instead.
 func (*Duration) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{29}
+	return file_common_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *Duration) GetMs() float64 {
@@ -6377,7 +6497,18 @@ const file_common_proto_rawDesc = "" +
 	"\x0fcadence_seconds\x18\x02 \x01(\x01R\x0ecadenceSeconds\x12+\n" +
 	"\x11cadence_variation\x18\x05 \x01(\x01R\x10cadenceVariation\x12-\n" +
 	"\x12inspiration_uptime\x18\x03 \x01(\x01R\x11inspirationUptime\x12!\n" +
-	"\fburst_window\x18\x04 \x01(\x05R\vburstWindow\"<\n" +
+	"\fburst_window\x18\x04 \x01(\x05R\vburstWindow\"\xea\x02\n" +
+	"\x0fRaidDamageModel\x12\x18\n" +
+	"\aprofile\x18\x01 \x01(\tR\aprofile\x12\x1f\n" +
+	"\vtank_health\x18\x02 \x01(\x01R\n" +
+	"tankHealth\x12#\n" +
+	"\rmember_health\x18\x03 \x01(\x01R\fmemberHealth\x12&\n" +
+	"\x0ftank_hit_damage\x18\x04 \x01(\x01R\rtankHitDamage\x12,\n" +
+	"\x12tank_swing_seconds\x18\x05 \x01(\x01R\x10tankSwingSeconds\x12#\n" +
+	"\rdamage_spread\x18\x06 \x01(\x01R\fdamageSpread\x12!\n" +
+	"\fpulse_damage\x18\a \x01(\x01R\vpulseDamage\x124\n" +
+	"\x16pulse_interval_seconds\x18\b \x01(\x01R\x14pulseIntervalSeconds\x12#\n" +
+	"\rpulse_members\x18\t \x01(\x05R\fpulseMembers\"<\n" +
 	"\x0eCustomRotation\x12*\n" +
 	"\x06spells\x18\x01 \x03(\v2\x12.proto.CustomSpellR\x06spells\"M\n" +
 	"\vCustomSpell\x12\x14\n" +
@@ -6893,7 +7024,7 @@ func file_common_proto_rawDescGZIP() []byte {
 }
 
 var file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 46)
-var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
+var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
 var file_common_proto_goTypes = []any{
 	(Spec)(0),                       // 0: proto.Spec
 	(Race)(0),                       // 1: proto.Race
@@ -6967,10 +7098,11 @@ var file_common_proto_goTypes = []any{
 	(*Cooldown)(nil),                // 69: proto.Cooldown
 	(*Cooldowns)(nil),               // 70: proto.Cooldowns
 	(*HealingModel)(nil),            // 71: proto.HealingModel
-	(*CustomRotation)(nil),          // 72: proto.CustomRotation
-	(*CustomSpell)(nil),             // 73: proto.CustomSpell
-	(*ItemSwap)(nil),                // 74: proto.ItemSwap
-	(*Duration)(nil),                // 75: proto.Duration
+	(*RaidDamageModel)(nil),         // 72: proto.RaidDamageModel
+	(*CustomRotation)(nil),          // 73: proto.CustomRotation
+	(*CustomSpell)(nil),             // 74: proto.CustomSpell
+	(*ItemSwap)(nil),                // 75: proto.ItemSwap
+	(*Duration)(nil),                // 76: proto.Duration
 }
 var file_common_proto_depIdxs = []int32{
 	17, // 0: proto.RaidBuffs.gift_of_the_wild:type_name -> proto.TristateEffect
@@ -7044,7 +7176,7 @@ var file_common_proto_depIdxs = []int32{
 	43, // 68: proto.ActionID.other_id:type_name -> proto.OtherAction
 	68, // 69: proto.Cooldown.id:type_name -> proto.ActionID
 	69, // 70: proto.Cooldowns.cooldowns:type_name -> proto.Cooldown
-	73, // 71: proto.CustomRotation.spells:type_name -> proto.CustomSpell
+	74, // 71: proto.CustomRotation.spells:type_name -> proto.CustomSpell
 	62, // 72: proto.ItemSwap.mh_item:type_name -> proto.ItemSpec
 	62, // 73: proto.ItemSwap.oh_item:type_name -> proto.ItemSpec
 	62, // 74: proto.ItemSwap.ranged_item:type_name -> proto.ItemSpec
@@ -7071,7 +7203,7 @@ func file_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_proto_rawDesc), len(file_common_proto_rawDesc)),
 			NumEnums:      46,
-			NumMessages:   30,
+			NumMessages:   31,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -8,15 +8,19 @@ import (
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/druid/balance"
 	"github.com/wowsims/classic/sim/druid/feral"
+	"github.com/wowsims/classic/sim/druid/restoration"
 	bear "github.com/wowsims/classic/sim/druid/tank"
 	"github.com/wowsims/classic/sim/hunter"
 	"github.com/wowsims/classic/sim/mage"
+	holypaladin "github.com/wowsims/classic/sim/paladin/holy"
 	"github.com/wowsims/classic/sim/paladin/protection"
 	"github.com/wowsims/classic/sim/paladin/retribution"
+	"github.com/wowsims/classic/sim/priest/healing"
 	"github.com/wowsims/classic/sim/priest/shadow"
 	dpsrogue "github.com/wowsims/classic/sim/rogue/dps_rogue"
 	"github.com/wowsims/classic/sim/shaman/elemental"
 	"github.com/wowsims/classic/sim/shaman/enhancement"
+	shamanrestoration "github.com/wowsims/classic/sim/shaman/restoration"
 	"github.com/wowsims/classic/sim/shaman/warden"
 	dpswarlock "github.com/wowsims/classic/sim/warlock/dps"
 	dpswarrior "github.com/wowsims/classic/sim/warrior/dps_warrior"
@@ -34,6 +38,7 @@ func registerAll() {
 	hunter.RegisterHunter()
 	mage.RegisterMage()
 	dpswarlock.RegisterDpsWarlock()
+	holypaladin.RegisterHolyPaladin()
 	protection.RegisterProtectionPaladin()
 	retribution.RegisterRetributionPaladin()
 	dpswarrior.RegisterDpsWarrior()
@@ -41,10 +46,13 @@ func registerAll() {
 	balance.RegisterBalanceDruid()
 	feral.RegisterFeralDruid()
 	bear.RegisterFeralTankDruid()
+	restoration.RegisterRestorationDruid()
+	healing.RegisterHealingPriest()
 	shadow.RegisterShadowPriest()
 	elemental.RegisterElementalShaman()
 	enhancement.RegisterEnhancementShaman()
 	warden.RegisterWardenShaman()
+	shamanrestoration.RegisterRestorationShaman()
 	dpsrogue.RegisterDpsRogue()
 }
 

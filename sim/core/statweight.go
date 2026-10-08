@@ -113,6 +113,7 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 
 	raidProto := SinglePlayerRaidProto(swr.Player, swr.PartyBuffs, swr.RaidBuffs, swr.Debuffs)
 	raidProto.Tanks = swr.Tanks
+	AddHealingFakeRaid(raidProto, swr.RaidDamageModel)
 
 	swr.SimOptions.SaveAllValues = true
 
@@ -175,6 +176,12 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 		// own report for the before/after re-measurement across all 32
 		// tables.
 		if stat.EqualsStat(stats.Intellect) {
+			statMod = defaultStatMod * 20
+		}
+		// A healing sweep measures mana stats through the fight's mana
+		// curve, where one point of mp5 or spirit moves the average by far
+		// less than the sampling noise, so they get the wider step too.
+		if swr.RaidDamageModel != nil && (stat.EqualsStat(stats.Spirit) || stat.EqualsStat(stats.MP5)) {
 			statMod = defaultStatMod * 20
 		}
 		// The melee and ranged primaries need it for a third reason:
@@ -324,7 +331,7 @@ func computeStatWeights(swcr *proto.StatWeightsCalcRequest) *proto.StatWeightsRe
 		}
 
 		calcWeightResults(baselinePlayer.Dps, modPlayerLow.Dps, modPlayerHigh.Dps, &result.Dps)
-		calcWeightResults(baselinePlayer.Hps, modPlayerLow.Hps, modPlayerHigh.Hps, &result.Hps)
+		calcWeightResults(landedHealing(baselinePlayer), landedHealing(modPlayerLow), landedHealing(modPlayerHigh), &result.Hps)
 		calcWeightResults(baselinePlayer.Threat, modPlayerLow.Threat, modPlayerHigh.Threat, &result.Tps)
 		calcWeightResults(baselinePlayer.Dtps, modPlayerLow.Dtps, modPlayerHigh.Dtps, &result.Dtps)
 		calcWeightResults(baselinePlayer.Tmi, modPlayerLow.Tmi, modPlayerHigh.Tmi, &result.Tmi)
@@ -363,6 +370,16 @@ func computeStatWeights(swcr *proto.StatWeightsCalcRequest) *proto.StatWeightsRe
 	}
 
 	return result.ToProto()
+}
+
+// landedHealing is the healing a unit's weights are measured on: what
+// landed on a health bar, so a stat that only buys overheal is worth
+// nothing. A result with no effective figure falls back to raw healing.
+func landedHealing(unit *proto.UnitMetrics) *proto.DistributionMetrics {
+	if unit.EffectiveHps != nil {
+		return unit.EffectiveHps
+	}
+	return unit.Hps
 }
 
 // Run stat weight sims and compute weights.

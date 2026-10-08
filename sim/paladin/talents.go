@@ -37,7 +37,6 @@ func (paladin *Paladin) ApplyTalents() {
 	if paladin.Talents.Vindication > 0 {
 		paladin.applyVindication()
 	}
-	paladin.PseudoStats.SchoolBonusCritChance[stats.SchoolIndexHoly] += core.CritRatingPerCritChance * float64(paladin.Talents.HolyPower)
 
 	paladin.applyProtectionTalents()
 	paladin.applyImprovedLayOnHands()
@@ -46,6 +45,7 @@ func (paladin *Paladin) ApplyTalents() {
 	// 1.60.1.70009). Pure spell modifiers are declarative config, below;
 	// anything with state, a timer or a proc keeps its own function.
 	paladin.applyDeclarativeTalents()
+	paladin.applyHealingTalents()
 	paladin.applySanctifiedJudgement()
 	paladin.registerTwistOfLight()
 	paladin.markUnmodeledForeverTalents()
@@ -251,15 +251,29 @@ const (
 var sanctifiedJudgementChancePerRank = [4]float64{0, 0.33, 0.66, 1.00}
 var sanctifiedJudgementRefundPctPerRank = [4]float64{0, 0.20, 0.40, 0.60}
 
-// championOfTheLightSpellPowerPctPerRank: node 110882, Retribution tier 5
-// col 1: "Increases your spell damage and healing by up to
-// 20%/40%/60% of your Intellect." (the live text and Blizzard's 1 October
-// 2026 notes; the earlier client table read 33%/66%/100%).
-// Modelled the same way Forever's Arcane Mind reaches Mage spellpower
-// (sim/mage/talents.go): a stat dependency from Intellect, here into
-// stats.SpellPower, which Spell.GetSchoolDamage (sim/core/spell_result.go)
-// adds to every non-physical school including Holy.
-var championOfTheLightSpellPowerPctPerRank = [4]float64{0, 0.20, 0.40, 0.60}
+// championOfTheLightPctPerRank: node 110882, Retribution tier 5 col 1:
+// "Increases your spell damage and healing by up to 20%/40%/60% of your
+// Intellect." (the live text and Blizzard's 1 October 2026 notes; the
+// earlier client table read 33%/66%/100%).
+var championOfTheLightPctPerRank = [4]float64{0, 0.20, 0.40, 0.60}
+
+// applyChampionOfTheLight grants the share to spell power (damage) and, for
+// the healing spec, to the healing stat. Forever gives every point of
+// healing a third of a point of spell damage
+// (Character.addUniversalStatDependencies), so a healer takes two thirds of
+// the share as spell power and the rest arrives through the healing: damage
+// and healing both read exactly the stated share. A damage spec has no use
+// for the healing stat, and granting it would add that third on top, so it
+// takes the whole share as spell power, as it always did.
+func (paladin *Paladin) applyChampionOfTheLight() {
+	share := championOfTheLightPctPerRank[paladin.Talents.ChampionOfTheLight]
+	if !paladin.isHealer() {
+		paladin.AddStatDependency(stats.Intellect, stats.SpellPower, share)
+		return
+	}
+	paladin.AddStatDependency(stats.Intellect, stats.HealingPower, share)
+	paladin.AddStatDependency(stats.Intellect, stats.SpellPower, share*(1-core.HealingToSpellDamageRatio))
+}
 
 // purifyingPowerCooldownPctPerRank: node 105327, Holy tier 2 col 2:
 // "Reduces the mana cost of your Cleanse and Purify spells by 10%/20%
@@ -331,7 +345,7 @@ func (paladin *Paladin) applyDeclarativeTalents() {
 	}
 
 	if t.ChampionOfTheLight > 0 {
-		paladin.AddStatDependency(stats.Intellect, stats.SpellPower, championOfTheLightSpellPowerPctPerRank[t.ChampionOfTheLight])
+		paladin.applyChampionOfTheLight()
 	}
 }
 
@@ -433,11 +447,6 @@ func (paladin *Paladin) grantEchoOfSeal(sim *core.Simulation, oldSeal *core.Aura
 func (paladin *Paladin) markUnmodeledForeverTalents() {
 	t := paladin.Talents
 
-	// Healing talents: this package has no healer rotation and sims a
-	// Patchwerk-style fight where nothing the Paladin heals matters to
-	// DPS, so none of these change a simmed number.
-	_, _, _, _ = t.HealingLight, t.SpiritualFocus, t.InfusionOfLight, t.Illumination
-
 	// Crowd control and escape effects a single-boss tank sim never
 	// meets: Guardian's Favor shortens Blessing of Protection's cooldown
 	// and lengthens Blessing of Freedom (neither is registered), and
@@ -450,11 +459,9 @@ func (paladin *Paladin) markUnmodeledForeverTalents() {
 	// Justice only shortens a stun's cooldown, not a damage ability's.
 	_, _ = t.Repentance, t.ImprovedHammerOfJustice
 
-	// Utility with no DPS reading: a silence/interrupt immunity window,
-	// a movement speed bonus, and a healing capstone whose enemy-damage
-	// option (182 Holy damage) is a minor side effect of a group-support
-	// cooldown this package's Retribution rotation does not cast.
-	_, _, _ = t.VoiceOfTruth, t.PursuitOfJustice, t.LightsVigil
+	// Utility with no healing or DPS reading: a silence/interrupt
+	// immunity window and a movement speed bonus.
+	_, _ = t.VoiceOfTruth, t.PursuitOfJustice
 
 	// Eye for an Eye reflects a fraction of a melee crit taken back at
 	// the attacker - a tank/defensive proc gated on being hit, not on

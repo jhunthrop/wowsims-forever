@@ -42,7 +42,7 @@ func TestJudgementOfCommandDamageMatchesClient(t *testing.T) {
 
 func TestHolyShockDamageMatchesClient(t *testing.T) {
 	clientdamagetest.AssertTable(t, clientdamagetest.Load(t, clientPaladinSpellconst), clientdamagetest.Direct, "Holy Shock",
-		[]int32{0, 25912, 25911, 25902}, HolyShockDamage[:], nil)
+		[]int32{0, 1311604, 25912, 25911, 25902}, HolyShockDamage[:], nil)
 }
 
 func TestHolyStrikeFlatDamageMatchesClient(t *testing.T) {
