@@ -47,6 +47,7 @@ func TestJudgementOfLightHealsAMeleeAttackerAboutHalfTheTime(t *testing.T) {
 	hit := &core.SpellResult{Outcome: core.OutcomeHit}
 	const swings = 400
 	for i := 0; i < swings; i++ {
+		built.RemoveHealth(sim, built.CurrentHealth()) // hurt, so there is something to heal
 		aura.OnSpellHitTaken(aura, sim, built.AutoAttacks.MHAuto(), hit)
 	}
 	metrics := built.JolHealthMetrics
@@ -68,5 +69,20 @@ func TestJudgementOfLightIgnoresSpellsAndMisses(t *testing.T) {
 	}
 	if built.JolHealthMetrics != nil && built.JolHealthMetrics.Events != 0 {
 		t.Error("Judgement of Light healed from a miss or a spell")
+	}
+}
+
+// A unit at full health gains nothing from the heal, so the debuff neither
+// rolls nor records it.
+func TestJudgementOfLightSkipsAnAttackerAtFullHealth(t *testing.T) {
+	sim, built := buildRogueUnderDebuffs(t, debuffsWithJudgement(false, true))
+	built.EnableHealthBar()
+	built.GainHealth(sim, built.MaxHealth(), built.NewHealthMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionPotion}))
+	aura := sim.GetTargetUnit(0).GetAura("Judgement of Light")
+	for i := 0; i < 200; i++ {
+		aura.OnSpellHitTaken(aura, sim, built.AutoAttacks.MHAuto(), &core.SpellResult{Outcome: core.OutcomeHit})
+	}
+	if built.JolHealthMetrics != nil && built.JolHealthMetrics.Events != 0 {
+		t.Errorf("Judgement of Light healed a full-health attacker %d times", built.JolHealthMetrics.Events)
 	}
 }

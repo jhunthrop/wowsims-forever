@@ -490,6 +490,12 @@ func JudgementOfLightAura(target *Unit) *Aura {
 			if !unit.HasHealthBar() || !spell.ProcMask.Matches(ProcMaskMelee) || !result.Landed() {
 				return
 			}
+			// A heal on a unit at full health changes nothing, so it is
+			// neither rolled nor recorded: a damage sim whose melee attackers
+			// are never hurt draws no random numbers for this debuff.
+			if unit.CurrentHealth() >= unit.MaxHealth() {
+				return
+			}
 			if sim.RandomFloat("jol") < JudgementProcChance {
 				if unit.JolHealthMetrics == nil {
 					unit.JolHealthMetrics = unit.NewHealthMetrics(actionID)
