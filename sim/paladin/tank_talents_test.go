@@ -106,8 +106,8 @@ func TestForeverProtectionTalentsAreLegal(t *testing.T) {
 // The 20 points past Holy Shield go where a tank gets something for them:
 // Deflection (the only parry talent a paladin has, in the Retribution
 // tree), Sacred Duty and Iron Creed. The reference build once spent them
-// on the Holy tree's healing talents, and the same boss killed it one fight
-// in seven where this build is killed about one fight in a hundred.
+// on the Holy tree's healing talents, and the same boss killed it many
+// times more often than it kills this build.
 func TestForeverProtectionTalentsSpendThePointsPastHolyShieldOnMitigation(t *testing.T) {
 	trees := loadPaladinTrees(t)
 	segments := strings.Split(ForeverProtectionTalents, "-")

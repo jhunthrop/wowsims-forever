@@ -30,10 +30,10 @@ import (
 // Holy Shield is the 31-point talent: it needs 30 points in the tree and
 // Templar's Bulwark. The 20 points past it went into the Holy tree's
 // healing talents in the first draft of this build, and the same boss
-// killed that tank one fight in seven; Deflection (+5% parry, the only
-// parry a paladin can take), Sacred Duty (+4% Stamina) and Iron Creed
-// (-10% damage taken for 6 s after Holy Strike) bring it to about one in a
-// hundred. Reckoning priced at threat only and is left out
+// killed that tank in a real share of fights; Deflection (+5% parry, the
+// only parry a paladin can take), Sacred Duty (+4% Stamina) and Iron Creed
+// (-10% damage taken for 6 s after Holy Strike) cut that many times over.
+// Reckoning priced at threat only and is left out
 // (TestForeverProtectionTalentsAreLegal checks the tiers and
 // prerequisites against the client's tree).
 const ForeverProtectionTalents = "50003000000000000-5530513321301051-50000000000000000"
