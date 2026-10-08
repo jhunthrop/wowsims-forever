@@ -122,3 +122,19 @@ func TestExposePreyDoesNotResetTheCooldown(t *testing.T) {
 		t.Error("Expose Prey reset Mongoose Bite's cooldown; it only opens the window")
 	}
 }
+
+// Expose Prey holds the window for 10 sec (5 sec before build 1.60.1.70291);
+// a dodge's 5 sec window never cuts it short.
+func TestExposePreyHoldsTheWindowForTenSeconds(t *testing.T) {
+	sim, hunter, target := markedExposePreyHunter(t, 2, true)
+	if !procsWithin(sim, hunter, target, core.ProcMaskMeleeMHAuto) {
+		t.Fatal("Expose Prey never opened the window")
+	}
+	if got := hunter.MongooseBiteWindowAura.RemainingDuration(sim); got < 9*time.Second || got > exposePreyWindowLength {
+		t.Errorf("window has %v left right after the proc, want about %v", got, exposePreyWindowLength)
+	}
+	hunter.openMongooseBiteWindowFor(sim, mongooseBiteWindowLength)
+	if got := hunter.MongooseBiteWindowAura.RemainingDuration(sim); got < 9*time.Second {
+		t.Errorf("a dodge's window cut the Expose Prey window to %v", got)
+	}
+}

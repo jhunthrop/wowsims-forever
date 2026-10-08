@@ -36,15 +36,16 @@ func trapClass() spellconst.Class {
 	return spellconst.Class{Spells: []spellconst.Spell{
 		{ID: 1, Name: "Immolation Trap", Rank: 1, DurationMS: 60000, Effects: []spellconst.Effect{{Effect: 104}}},
 		{ID: 2, Name: "Immolation Trap", Rank: 2, DurationMS: 60000, Effects: []spellconst.Effect{{Effect: 104}}},
-		{ID: 3, Name: "Immolation Trap Effect", Rank: 1, DurationMS: 15000, Effects: []spellconst.Effect{{Effect: 6, Aura: 3}}},
-		{ID: 4, Name: "Immolation Trap Effect", Rank: 2, DurationMS: 16000, Effects: []spellconst.Effect{{Effect: 6, Aura: 3}}},
+		{ID: 3, Name: "Immolation Trap", Rank: 1, DurationMS: 15000, Effects: []spellconst.Effect{{Effect: 6, Aura: 3}}},
+		{ID: 4, Name: "Immolation Trap", Rank: 2, DurationMS: 16000, Effects: []spellconst.Effect{{Effect: 6, Aura: 3}}},
 		{ID: 5, Name: "Freezing Trap", Rank: 1, DurationMS: 60000, Effects: []spellconst.Effect{{Effect: 104}}},
-		{ID: 6, Name: "Freezing Trap Effect", Rank: 1, DurationMS: 10000, Effects: []spellconst.Effect{{Effect: 6, Aura: auraStun}}},
+		{ID: 6, Name: "Freezing Trap", Rank: 1, DurationMS: 10000, Effects: []spellconst.Effect{{Effect: 6, Aura: auraStun}}},
 	}}
 }
 
 // A trap's duration_ms is its armed lifetime; the comparable duration is
-// the burn or freeze on the same-rank "<Trap> Effect" spell.
+// the burn or freeze on the same-rank payload spell (named "<Trap> Effect"
+// before build 1.60.1.70291, the trap's own name after).
 func TestClientDurationMS_TrapReadsItsEffectSpell(t *testing.T) {
 	class := trapClass()
 	for _, tc := range []struct {

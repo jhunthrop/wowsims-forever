@@ -87,7 +87,23 @@ const (
 	// sources share this one aura.
 	mongooseBiteWindowSpellId int32 = 5302
 	mongooseBiteWindowLength        = 5 * time.Second
+	// exposePreyWindowLength is Expose Prey's "Mongoose Bite activated"
+	// (client spell 1310726): its duration index went from 5 sec to 10 sec
+	// in build 1.60.1.70291.
+	exposePreyWindowLength = 10 * time.Second
 )
+
+// openMongooseBiteWindowFor opens the window for at least length, never
+// cutting short a longer one already open.
+func (hunter *Hunter) openMongooseBiteWindowFor(sim *core.Simulation, length time.Duration) {
+	window := hunter.MongooseBiteWindowAura
+	expires := sim.CurrentTime + length
+	if window.IsActive() {
+		expires = max(expires, window.ExpiresAt())
+	}
+	window.Activate(sim)
+	window.UpdateExpires(sim, expires)
+}
 
 // registerMongooseBiteWindow registers the aura the APL gates Mongoose
 // Bite on, opened by a dodge (client text) or by Expose Prey.
@@ -106,7 +122,7 @@ func (hunter *Hunter) registerMongooseBiteWindow() {
 		},
 		OnSpellHitTaken: func(_ *core.Aura, sim *core.Simulation, _ *core.Spell, result *core.SpellResult) {
 			if result.DidDodge() {
-				hunter.MongooseBiteWindowAura.Activate(sim)
+				hunter.openMongooseBiteWindowFor(sim, mongooseBiteWindowLength)
 			}
 		},
 	})

@@ -656,7 +656,8 @@ func (hunter *Hunter) applyResourcefulness() {
 // exposePreyMongooseBiteProcChance is Expose Prey (talents/hunter.json
 // node 104985, Survival, max rank 2, spell 1310532): "Your attacks
 // against targets with Hunter's Mark have a 5/10% chance to activate
-// your Mongoose Bite for 5 sec."
+// your Mongoose Bite for 10 sec." (5 sec before build
+// 1.60.1.70291)
 var exposePreyMongooseBiteProcChance = [3]float64{0, 0.05, 0.10}
 
 // exposePreyProcMask is the client's proc type mask for Expose Prey
@@ -664,7 +665,7 @@ var exposePreyMongooseBiteProcChance = [3]float64{0, 0.05, 0.10}
 const exposePreyProcMask = core.ProcMaskMeleeOrRanged
 
 // applyExposePrey opens Mongoose Bite's activation window (the same
-// 5 sec Defensive State aura a dodge opens) on a landed melee or ranged
+// Defensive State aura a dodge opens, held for 10 sec) on a landed melee or ranged
 // attack against a Hunter's Mark target. The window aura stays nil
 // until Initialize() registers Mongoose Bite (ApplyTalents runs first)
 // and for a hunter below level 16, so it is read inside the proc closure.
@@ -689,7 +690,7 @@ func (hunter *Hunter) applyExposePrey() {
 				return
 			}
 			if sim.Proc(procChance, "Expose Prey") {
-				hunter.MongooseBiteWindowAura.Activate(sim)
+				hunter.openMongooseBiteWindowFor(sim, exposePreyWindowLength)
 			}
 		},
 	})

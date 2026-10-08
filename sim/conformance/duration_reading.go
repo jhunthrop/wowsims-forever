@@ -35,9 +35,14 @@ const (
 // on the ground; the burn, DoT or freeze it leaves lives on a separate
 // "<Trap> Effect" spell per rank. The engine resolves the trap on cast and
 // models only the payload, so the payload's duration is the comparable one.
+//
+// Build 1.60.1.70291 renamed the Freezing and Immolation payload spells to
+// the trap's own name ("Freezing Trap Effect" became "Freezing Trap"), so
+// for those two the payload is the same-rank spell of that name with another
+// id; Explosive Trap's payload keeps its "Effect" name.
 var durationPayloadSpells = map[string]string{
-	"Freezing Trap":   "Freezing Trap Effect",
-	"Immolation Trap": "Immolation Trap Effect",
+	"Freezing Trap":   "Freezing Trap",
+	"Immolation Trap": "Immolation Trap",
 	"Explosive Trap":  "Explosive Trap Effect",
 }
 
@@ -49,6 +54,8 @@ var durationPayloadSpells = map[string]string{
 var unsimulatedDurations = map[string]string{
 	"shaman/Earth Shock": "interrupt lock-out of the target's school, never applied: the sim's targets never cast",
 	"shaman/Frost Shock": "movement snare on the target, never applied: the sim's targets neither move nor flee",
+
+	"hunter/Sniper Shot": "the 10 s range increase (a range spell mod, aura 107) has no reader: the sim's hunter never moves and has no range band",
 
 	"warrior/Hamstring":     "the 15 s movement-speed snare has no reader in a sim with no movement",
 	"warrior/Piercing Howl": "the 6 s daze (see piercing_howl.go) has no reader in a sim with no movement",
@@ -66,7 +73,7 @@ func durationSpellFor(clientClass spellconst.Class, cast spellconst.Spell) spell
 		return cast
 	}
 	for _, candidate := range clientClass.Ranks(payloadName) {
-		if candidate.Rank == cast.Rank {
+		if candidate.Rank == cast.Rank && candidate.ID != cast.ID {
 			return candidate
 		}
 	}
