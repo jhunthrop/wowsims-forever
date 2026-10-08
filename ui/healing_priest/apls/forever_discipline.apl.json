@@ -10,8 +10,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1316995,
-            "rank": 4
+            "spellId": 1316995
           },
           "target": {
             "type": "Player",
@@ -43,8 +42,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1316995,
-            "rank": 4
+            "spellId": 1316995
           },
           "target": {
             "type": "Player",
@@ -75,8 +73,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1316995,
-            "rank": 4
+            "spellId": 1316995
           },
           "target": {
             "type": "Player",
@@ -107,8 +104,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1316995,
-            "rank": 4
+            "spellId": 1316995
           },
           "target": {
             "type": "Player",
@@ -139,8 +135,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1316995,
-            "rank": 4
+            "spellId": 1316995
           },
           "target": {
             "type": "Player",
@@ -171,8 +166,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 10901,
-            "rank": 10
+            "spellId": 10901
           },
           "target": {
             "type": "Player",
@@ -214,6 +208,27 @@
                     }
                   }
                 }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.9"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             ]
           }
@@ -225,8 +240,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 10917,
-            "rank": 7
+            "spellId": 10917
           },
           "target": {
             "type": "Player",
@@ -258,8 +272,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 10917,
-            "rank": 7
+            "spellId": 10917
           },
           "target": {
             "type": "Player",
@@ -290,8 +303,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 10917,
-            "rank": 7
+            "spellId": 10917
           },
           "target": {
             "type": "Player",
@@ -322,8 +334,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 10917,
-            "rank": 7
+            "spellId": 10917
           },
           "target": {
             "type": "Player",
@@ -354,8 +365,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 10917,
-            "rank": 7
+            "spellId": 10917
           },
           "target": {
             "type": "Player",
@@ -386,8 +396,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 25316,
-            "rank": 5
+            "spellId": 25316
           },
           "target": {
             "type": "Player",
@@ -395,243 +404,270 @@
           }
         },
         "condition": {
-          "or": {
+          "and": {
             "vals": [
               {
-                "and": {
-                  "vals": [
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentHealthPercent": {
-                            "sourceUnit": {
-                              "type": "Player",
-                              "index": 1
-                            }
-                          }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.7"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentHealthPercent": {
-                            "sourceUnit": {
-                              "type": "Player",
-                              "index": 2
-                            }
-                          }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.7"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentHealthPercent": {
-                            "sourceUnit": {
-                              "type": "Player",
-                              "index": 3
-                            }
-                          }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.7"
-                          }
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.9"
                         }
                       }
                     }
-                  ]
+                  }
                 }
               },
               {
-                "and": {
+                "or": {
                   "vals": [
                     {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentHealthPercent": {
-                            "sourceUnit": {
-                              "type": "Player",
-                              "index": 1
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 1
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 3
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
                             }
                           }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.7"
-                          }
-                        }
+                        ]
                       }
                     },
                     {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentHealthPercent": {
-                            "sourceUnit": {
-                              "type": "Player",
-                              "index": 2
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 1
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 4
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
                             }
                           }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.7"
-                          }
-                        }
+                        ]
                       }
                     },
                     {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentHealthPercent": {
-                            "sourceUnit": {
-                              "type": "Player",
-                              "index": 4
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 1
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 3
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 4
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
                             }
                           }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.7"
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "and": {
-                  "vals": [
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentHealthPercent": {
-                            "sourceUnit": {
-                              "type": "Player",
-                              "index": 1
-                            }
-                          }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.7"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentHealthPercent": {
-                            "sourceUnit": {
-                              "type": "Player",
-                              "index": 3
-                            }
-                          }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.7"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentHealthPercent": {
-                            "sourceUnit": {
-                              "type": "Player",
-                              "index": 4
-                            }
-                          }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.7"
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "and": {
-                  "vals": [
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentHealthPercent": {
-                            "sourceUnit": {
-                              "type": "Player",
-                              "index": 2
-                            }
-                          }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.7"
-                          }
-                        }
+                        ]
                       }
                     },
                     {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentHealthPercent": {
-                            "sourceUnit": {
-                              "type": "Player",
-                              "index": 3
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 3
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 4
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
                             }
                           }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.7"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentHealthPercent": {
-                            "sourceUnit": {
-                              "type": "Player",
-                              "index": 4
-                            }
-                          }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.7"
-                          }
-                        }
+                        ]
                       }
                     }
                   ]
@@ -647,8 +683,298 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 6064,
-            "rank": 4
+            "spellId": 6064
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.9"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.8"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Heal rank 4 is the mana-efficient filler: the same 0.857 coefficient as Greater Heal for 305 mana, so with healing power it returns more health per mana than any Greater Heal rank (the classic downrank). It is also the top rank of Heal, so the site's rank rewrite leaves it alone. Mana pacing: while the mana bar is at least as full as the share of the fight left, the filler fires at the normal thresholds."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6064
+          },
+          "target": {
+            "type": "Player",
+            "index": 1
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.9"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 1
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.65"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6064
+          },
+          "target": {
+            "type": "Player",
+            "index": 2
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.9"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 2
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.65"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6064
+          },
+          "target": {
+            "type": "Player",
+            "index": 3
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.9"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 3
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.65"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6064
+          },
+          "target": {
+            "type": "Player",
+            "index": 4
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.9"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 4
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.65"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6064
           },
           "target": {
             "type": "Player",
@@ -668,20 +994,19 @@
             },
             "rhs": {
               "const": {
-                "val": "0.8"
+                "val": "0.5"
               }
             }
           }
         }
       },
-      "notes": "Heal rank 4 is the mana-efficient filler: the same 0.857 coefficient as Greater Heal for 305 mana, so with healing power it returns more health per mana than any Greater Heal rank (the classic downrank). It is also the top rank of Heal, so the site's rank rewrite leaves it alone."
+      "notes": "Behind the mana pace, the filler waits for a lower tank and member health, so the bar is spent on the holes that matter."
     },
     {
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 6064,
-            "rank": 4
+            "spellId": 6064
           },
           "target": {
             "type": "Player",
@@ -701,7 +1026,7 @@
             },
             "rhs": {
               "const": {
-                "val": "0.65"
+                "val": "0.35"
               }
             }
           }
@@ -712,8 +1037,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 6064,
-            "rank": 4
+            "spellId": 6064
           },
           "target": {
             "type": "Player",
@@ -733,7 +1057,7 @@
             },
             "rhs": {
               "const": {
-                "val": "0.65"
+                "val": "0.35"
               }
             }
           }
@@ -744,8 +1068,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 6064,
-            "rank": 4
+            "spellId": 6064
           },
           "target": {
             "type": "Player",
@@ -765,7 +1088,7 @@
             },
             "rhs": {
               "const": {
-                "val": "0.65"
+                "val": "0.35"
               }
             }
           }
@@ -776,8 +1099,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 6064,
-            "rank": 4
+            "spellId": 6064
           },
           "target": {
             "type": "Player",
@@ -797,7 +1119,7 @@
             },
             "rhs": {
               "const": {
-                "val": "0.65"
+                "val": "0.35"
               }
             }
           }
