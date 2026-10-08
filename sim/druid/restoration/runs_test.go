@@ -241,3 +241,19 @@ func TestDefaultRotationRunsWithoutWarnings(t *testing.T) {
 		}
 	}
 }
+
+// The written rotation opens with the autocast line, so a druid that
+// carries a Major Mana Potion and a Demonic Rune drinks both: they are
+// self-cast, and the healer's current target is a friend.
+func TestDefaultRotationUsesTheManaConsumables(t *testing.T) {
+	player := newPlayer(60, StandardTalents, healerBonusStats, loadDefaultRotation(t))
+	player.Consumes = healsim.ManaConsumables()
+	result := core.RunRaidSim(healsim.Request(player, healsim.TestProfile(), 180, 20))
+	if result.Error != nil {
+		t.Fatal(result.Error.Message)
+	}
+	metrics := result.RaidMetrics.Parties[0].Players[healsim.HealerIndex]
+	for _, name := range healsim.UnusedManaConsumables(metrics) {
+		t.Errorf("the druid never used its %s", name)
+	}
+}

@@ -107,3 +107,19 @@ func TestWrittenRotationSpendsWhatItsCastsCost(t *testing.T) {
 		t.Errorf("checked the mana of only %d spells", checked)
 	}
 }
+
+// The written rotation opens with the autocast line, so a shaman that
+// carries a Major Mana Potion and a Demonic Rune drinks both: they are
+// self-cast, and the healer's current target is a friend.
+func TestWrittenRotationUsesTheManaConsumables(t *testing.T) {
+	player := newHealerPlayer(60, FullTalents, writtenRotation())
+	player.Consumes = healsim.ManaConsumables()
+	result := core.RunRaidSim(healsim.Request(player, healsim.TestProfile(), rotationFightSeconds, rotationIterations))
+	if result.Error != nil {
+		t.Fatal(result.Error.Message)
+	}
+	metrics := result.RaidMetrics.Parties[0].Players[healsim.HealerIndex]
+	for _, name := range healsim.UnusedManaConsumables(metrics) {
+		t.Errorf("the shaman never used its %s", name)
+	}
+}

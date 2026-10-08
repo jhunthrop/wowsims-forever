@@ -25,8 +25,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 25315,
-            "rank": 10
+            "spellId": 6075,
+            "rank": 3
           },
           "target": {
             "type": "Player",
@@ -42,15 +42,15 @@
                   "index": 5
                 },
                 "spellId": {
-                  "spellId": 25315,
-                  "rank": 10
+                  "spellId": 6075,
+                  "rank": 3
                 }
               }
             }
           }
         }
       },
-      "notes": "Renew stays on the tank for the whole fight."
+      "notes": "Renew stays on the tank for the whole fight, at rank 3: a cheaper rank returns more health per mana for the spell power it is cast with, and the dearer ranks cost the mana the fight runs out of."
     },
     {
       "action": {
@@ -559,7 +559,7 @@
           }
         }
       },
-      "notes": "Heal rank 4 is the mana-efficient filler: the same 0.857 coefficient as Greater Heal for 305 mana, so with healing power it returns more health per mana than any Greater Heal rank (the classic downrank). It is also the top rank of Heal, so the site's rank rewrite leaves it alone. Mana pacing: while the mana bar is at least as full as the share of the fight left, the filler fires at the normal thresholds."
+      "notes": "Heal rank 4 is the mana-efficient filler: the same 0.857 spell power coefficient as Greater Heal for far less mana, so with healing power it returns more health per mana than any Greater Heal rank (the classic downrank). Lower ranks of Heal were tried and did not beat it by the one percent the rule asks. Mana pacing: while the mana bar is at least as full as the share of the fight left, the filler fires at the normal thresholds."
     },
     {
       "action": {

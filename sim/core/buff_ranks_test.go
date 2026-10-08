@@ -147,3 +147,22 @@ func TestDevotionAuraFollowsClientRanks(t *testing.T) {
 		}
 	}
 }
+
+// Blessing of Wisdom restores the client's mana per five seconds for the
+// rank a character has learned: the client states 12, 18, 24, 30 and 36
+// for the trainer ranks and 40 for the Ahn'Qiraj book rank, where the
+// engine used to give every level the vanilla 30.
+func TestBlessingOfWisdomFollowsTheClientRanks(t *testing.T) {
+	cases := []struct {
+		level int
+		want  float64
+	}{{13, 0}, {14, 12}, {24, 18}, {34, 24}, {44, 30}, {54, 36}, {60, 36}}
+	for _, c := range cases {
+		if got := BlessingOfWisdomMP5(c.level); got != c.want {
+			t.Errorf("Blessing of Wisdom at level %d = %v, want %v", c.level, got, c.want)
+		}
+	}
+	if got := BlessingOfWisdomRanks.at(60, true); got != 40 {
+		t.Errorf("Blessing of Wisdom at 60 with the Ahn'Qiraj book = %v, want 40", got)
+	}
+}

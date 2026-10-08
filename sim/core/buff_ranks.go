@@ -108,6 +108,18 @@ var (
 		{SpellID: 25291, Level: 60, Amount: 133, AhnQiraj: true},
 	}
 
+	// Blessing of Wisdom: mana per five seconds (aura 24, a periodic
+	// energize every five seconds). Rank 6 (25290, level 60) is the
+	// Ahn'Qiraj book rank.
+	BlessingOfWisdomRanks = BuffRanks{
+		{SpellID: 19742, Level: 14, Amount: 12},
+		{SpellID: 19850, Level: 24, Amount: 18},
+		{SpellID: 19852, Level: 34, Amount: 24},
+		{SpellID: 19853, Level: 44, Amount: 30},
+		{SpellID: 19854, Level: 54, Amount: 36},
+		{SpellID: 25290, Level: 60, Amount: 40, AhnQiraj: true},
+	}
+
 	// Trueshot Aura: the Marksmanship talent's aura, ranked by trainer.
 	// Rank 5 (20906, level 60) is 50 ranged attack power against rank 4's
 	// 75 in the client, so a level-60 hunter keeps rank 4.
@@ -187,6 +199,12 @@ func ArcaneIntellectStats(level int) stats.Stats {
 // character level, before Improved Blessing of Might.
 func BlessingOfMightAttackPower(level int) float64 {
 	return BlessingOfMightRanks.At(level)
+}
+
+// BlessingOfWisdomMP5 is the Blessing of Wisdom mana per five seconds at a
+// character level, before any improved form.
+func BlessingOfWisdomMP5(level int) float64 {
+	return BlessingOfWisdomRanks.At(level)
 }
 
 // BattleShoutAttackPower is the Battle Shout attack power at a character

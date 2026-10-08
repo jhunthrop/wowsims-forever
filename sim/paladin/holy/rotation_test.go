@@ -25,6 +25,12 @@ const (
 	manaSpentTolerance = 0.02
 
 	greaterBlessingOfLight int32 = 25890
+
+	// The ranks the written rotation downranks to (data/curated/apl/
+	// paladin-holy.json): Holy Shock rank 1, and Flash of Light rank 4 on
+	// the party members.
+	holyShockRotationCast int32 = 1311606
+	flashOfLightPartyRank int32 = 19941
 )
 
 // A healer with some gear: enough that the rotation's heals are the ones a
@@ -91,7 +97,8 @@ func TestDefaultRotationHealsTheFakeRaid(t *testing.T) {
 		t.Errorf("overheal share %.2f, want 0 to %.1f", overheal, maxOverheal)
 	}
 	for name, id := range map[string]int32{
-		"Flash of Light": flashOfLightTopRank, "Greater Blessing of Light": greaterBlessingOfLight,
+		"Flash of Light on the tank": flashOfLightTopRank, "Flash of Light on the party": flashOfLightPartyRank,
+		"Greater Blessing of Light": greaterBlessingOfLight,
 	} {
 		if totalsOf(result, id).casts == 0 {
 			t.Errorf("the default rotation never cast %s", name)
@@ -141,15 +148,31 @@ func TestDefaultRotationSpendsSpareManaOnHolyShockAndHolyLight(t *testing.T) {
 	short := rotationFight(t, 0).run(t, rotationIterations)
 	spare := rotationFight(t, manaToSpare).run(t, rotationIterations)
 
-	if casts := totalsOf(short, holyShockTopCast).casts; casts != 0 {
-		t.Errorf("a healer short of mana cast Holy Shock %d times; the paced lines should not open", casts)
-	}
-	if totalsOf(spare, holyShockTopCast).casts == 0 {
+	// Holy Shock is paced, and at rank 1 it costs about what Flash of Light
+	// does, so a healer short of mana still reaches it now and then; a
+	// healer with spare mana reaches it far more often.
+	shortCasts, spareCasts := totalsOf(short, holyShockRotationCast).casts, totalsOf(spare, holyShockRotationCast).casts
+	if spareCasts == 0 {
 		t.Errorf("a healer with spare mana never cast Holy Shock")
+	}
+	if spareCasts <= shortCasts {
+		t.Errorf("spare mana did not open the paced Holy Shock line: %d casts against %d", spareCasts, shortCasts)
 	}
 	shortHPS := short.RaidMetrics.Parties[0].Players[healsim.HealerIndex].EffectiveHps.Avg
 	spareHPS := spare.RaidMetrics.Parties[0].Players[healsim.HealerIndex].EffectiveHps.Avg
 	if spareHPS <= shortHPS {
 		t.Errorf("spare mana did not raise effective HPS: %.0f against %.0f", spareHPS, shortHPS)
+	}
+}
+
+// The written rotation opens with the autocast line, so a paladin that
+// carries a Major Mana Potion and a Demonic Rune drinks both: they are
+// self-cast, and the healer's current target is a friend.
+func TestWrittenRotationUsesTheManaConsumables(t *testing.T) {
+	f := rotationFight(t, 0)
+	f.consumes = healsim.ManaConsumables()
+	metrics := f.run(t, rotationIterations).RaidMetrics.Parties[0].Players[healsim.HealerIndex]
+	for _, name := range healsim.UnusedManaConsumables(metrics) {
+		t.Errorf("the paladin never used its %s", name)
 	}
 }

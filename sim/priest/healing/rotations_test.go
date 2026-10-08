@@ -29,9 +29,20 @@ type rotationCase struct {
 	spellIDs []int32
 }
 
+// The ranks the written rotations name (data/curated/apl in the site
+// repository): Holy renews the tank at rank 3 and heals with Heal rank 4;
+// Discipline shields at rank 4 and casts Prayer of Healing at rank 1.
+const (
+	prayerOfMendingRank3 = 1240827
+	renewRank3           = 6075
+	healRank4            = 6064
+	penanceRank4         = 1316995
+	powerWordShieldRank4 = 3747
+)
+
 var rotationCases = []rotationCase{
-	{"holy", "forever_holy", HolyTalents, []int32{1240827, 25315, 6064}},
-	{"discipline", "forever_discipline", DiscTalents, []int32{1316995, 10901, 6064}},
+	{"holy", "forever_holy", HolyTalents, []int32{prayerOfMendingRank3, renewRank3, healRank4}},
+	{"discipline", "forever_discipline", DiscTalents, []int32{penanceRank4, powerWordShieldRank4, healRank4}},
 }
 
 func loadRotation(t *testing.T, file string) *proto.APLRotation {
