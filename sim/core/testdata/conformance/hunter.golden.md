@@ -14,6 +14,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Hunter | 10 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.204 | declared, matches |
 | Hunter | 10 | Aspect of the Hawk | 1 | 13165 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
+| Hunter | 10 | Heart of the Lion | 0 | 409580 | 16.48 (8% base mana)→16.48 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 10 | Hunter's Mark | 1 | 1130 | 15.00→15.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 120000→120000 | match |  | n/a | n/a | n/a |
 | Hunter | 10 | Raptor Strike | 2 | 14260 | 25.00→25.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 8→8 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | Hunter | 10 | Serpent Sting | 2 | 13549 | 30.00→30.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 6.00-6.00→6.00-6.00 | 1.000 (convention)→0.000 | declared, matches |
@@ -23,6 +24,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 20 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 20 | Aspect of the Hawk | 2 | 14318 | 35.00→35.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 20 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
+| Hunter | 20 | Heart of the Lion | 0 | 409580 | 36.08 (8% base mana)→36.08 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 20 | Hunter's Mark | 1 | 1130 | 15.00→15.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 120000→120000 | match |  | n/a | n/a | n/a |
 | Hunter | 20 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 20 | Mongoose Bite | 1 | 1495 | 30.00→30.00 | mana→mana | 5000→5000 | 0→0 | 1500→1500 | 16→16 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
@@ -38,6 +40,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 30 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 30 | Aspect of the Hawk | 3 | 14319 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
+| Hunter | 30 | Heart of the Lion | 0 | 409580 | 62.00 (8% base mana)→62.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Hunter's Mark | 2 | 14323 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 120000→120000 | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
@@ -59,6 +62,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 38 | Aspect of the Hawk | 4 | 14320 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 20000→20000 | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
+| Hunter | 38 | Heart of the Lion | 0 | 409580 | 83.60 (8% base mana)→83.60 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Hunter's Mark | 2 | 14323 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 120000→120000 | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
@@ -82,6 +86,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 40 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 20000→20000 | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
 | Hunter | 40 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 15000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
+| Hunter | 40 | Heart of the Lion | 0 | 409580 | 88.40 (8% base mana)→88.40 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Hunter's Mark | 3 | 14324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 120000→120000 | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
@@ -109,6 +114,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 50 | Explosive Trap | 2 | 14316 | 395.00→395.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 44→44 | 20000→20000 | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
 | Hunter | 50 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 15000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
+| Hunter | 50 | Heart of the Lion | 0 | 409580 | 113.60 (8% base mana)→113.60 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Hunter's Mark | 3 | 14324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 120000→120000 | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
@@ -144,6 +150,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 60 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
 | Hunter | 60 | Freezing Trap | 2 | 14310 | 75.00→75.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 40→40 | 15000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
 | Hunter | 60 | Freezing Trap | 3 | 14311 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 60→60 | 20000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
+| Hunter | 60 | Heart of the Lion | 0 | 409580 | 137.60 (8% base mana)→137.60 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Hunter's Mark | 4 | 1213268 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 120000→120000 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Immolation Trap | 1 | 13795 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 16→16 | 15000→15000 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Immolation Trap | 2 | 14302 | 90.00→90.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | n/a | n/a | n/a |
@@ -191,11 +198,10 @@ Each spell below is built with exactly one point in the single talent that grant
 | Hunter (Summon Hawk talent) | 60 | Summon Hawk | 4 | 1293527 | 190.00→190.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 60→60 | n/a | match |  | 108.00-108.00→108.00-108.00 | 0.429 (convention)→0.000 | declared, matches |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 27 of the class's 49 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 26 of the class's 49 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Heart of the Lion (409580) | 1→1 | 1 | Survival | skill_line_ability | 0 | 0 | 0 |  |
 | Aspect of the Monkey (13163) | 4→4 | 1 | Beast Mastery | skill_line_ability | 20 mana | 0 | 0 | power cost |
 | Concussive Shot (5116) | 8→8 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 12000 | cooldown |
 | Dismiss Pet (2641) | 10→10 | 1 | Beast Mastery | skill_line_ability | 0 | 5000 | 0 | cast time |

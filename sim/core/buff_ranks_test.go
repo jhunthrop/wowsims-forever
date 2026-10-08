@@ -166,3 +166,15 @@ func TestBlessingOfWisdomFollowsTheClientRanks(t *testing.T) {
 		t.Errorf("Blessing of Wisdom at 60 with the Ahn'Qiraj book = %v, want 40", got)
 	}
 }
+
+func TestHeartOfTheLionAttackPowerFollowsClientRule(t *testing.T) {
+	cases := []struct {
+		level int
+		want  float64
+	}{{1, 40}, {2, 44}, {30, 156}, {59, 272}, {60, 276}, {61, 276}}
+	for _, c := range cases {
+		if got := HeartOfTheLionRanks.At(c.level); got != c.want {
+			t.Errorf("Heart of the Lion attack power at level %d = %v, want %v", c.level, got, c.want)
+		}
+	}
+}

@@ -19,6 +19,8 @@ import (
 // is what a talent nobody can now take is worth.
 
 func (hunter *Hunter) ApplyTalents() {
+	hunter.registerHeartOfTheLion()
+
 	if hunter.pet != nil {
 		hunter.applyFrenzy()
 		hunter.registerBestialWrathCD()

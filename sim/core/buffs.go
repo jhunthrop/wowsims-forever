@@ -261,6 +261,10 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 		TrueshotAura(&character.Unit)
 	}
 
+	if raidBuffs.HeartOfTheLion {
+		HeartOfTheLionAreaAura(&character.Unit)
+	}
+
 	if raidBuffs.PowerWordFortitude > 0 {
 		updateStats := BuffSpellValues[PowerWordFortitude]
 		if raidBuffs.PowerWordFortitude == proto.TristateEffect_TristateEffectImproved {
@@ -1434,6 +1438,87 @@ func TrueshotAura(unit *Unit) *Aura {
 			{stats.AttackPower, meleeAP, false},
 			{stats.RangedAttackPower, rangedAP, false},
 		},
+	})
+
+	return aura
+}
+
+const (
+	// HeartOfTheLionStatMultiplier is aura 137 at +10 on every stat, the
+	// effect both of the hunter's own spell (409580) and of the area buff
+	// it sends out (409583).
+	HeartOfTheLionStatMultiplier = 1.10
+
+	// HeartOfTheLionSpellID is the hunter's own spell: the extra +10% for
+	// the hunter, and the periodic dummy that re-sends the area buff.
+	HeartOfTheLionSpellID = 409580
+
+	heartOfTheLionSelfLabel    = "Heart of the Lion"
+	heartOfTheLionSelfCategory = "HeartOfTheLionSelf"
+	heartOfTheLionAreaLabel    = "Heart of the Lion (allies)"
+	heartOfTheLionAreaCategory = "HeartOfTheLion"
+)
+
+// HeartOfTheLionStatConfigs is a percentage stat modifier on all five base
+// stats (the aura's misc value -1).
+func HeartOfTheLionStatConfigs() []StatConfig {
+	return []StatConfig{
+		{stats.Stamina, HeartOfTheLionStatMultiplier, true},
+		{stats.Agility, HeartOfTheLionStatMultiplier, true},
+		{stats.Strength, HeartOfTheLionStatMultiplier, true},
+		{stats.Intellect, HeartOfTheLionStatMultiplier, true},
+		{stats.Spirit, HeartOfTheLionStatMultiplier, true},
+	}
+}
+
+// HeartOfTheLionSelfAura is the hunter's own Heart of the Lion (spell
+// 409580): a further +10% to every stat for the hunter alone, on top of the
+// area buff the hunter also receives. The two multiply, as every pair of
+// percentage stat auras here does (Blessing of Kings too), so a hunter who
+// both casts the spell and stands in its area reads 1.10 x 1.10 = 1.21
+// of the base stats, and a second hunter's area buff changes nothing
+// (HeartOfTheLionAreaAura keeps one copy per unit).
+func HeartOfTheLionSelfAura(unit *Unit) *Aura {
+	if existing := unit.GetAura(heartOfTheLionSelfLabel); existing != nil {
+		return existing
+	}
+	aura := MakePermanent(unit.RegisterAura(Aura{
+		Label:    heartOfTheLionSelfLabel,
+		ActionID: ActionID{SpellID: HeartOfTheLionSpellID},
+	}))
+
+	makeExclusiveBuff(aura, BuffConfig{
+		Category: heartOfTheLionSelfCategory,
+		Stats:    HeartOfTheLionStatConfigs(),
+	})
+
+	return aura
+}
+
+// HeartOfTheLionAreaAura is the area buff a hunter's Heart of the Lion
+// sends to every ally within 100 yards (spell 409583, target 31 reaches the
+// whole raid, not the party): +10% to every stat and the level-scaled
+// melee and ranged attack power (HeartOfTheLionRanks). The unit carries one
+// copy however many hunters send it: a second request finds the first, and
+// the exclusive category keeps two sources from adding.
+func HeartOfTheLionAreaAura(unit *Unit) *Aura {
+	if existing := unit.GetAura(heartOfTheLionAreaLabel); existing != nil {
+		return existing
+	}
+	rank := HeartOfTheLionRanks[0]
+	attackPower := rank.At(int(unit.Level))
+
+	aura := MakePermanent(unit.RegisterAura(Aura{
+		Label:    heartOfTheLionAreaLabel,
+		ActionID: ActionID{SpellID: rank.SpellID},
+	}))
+
+	makeExclusiveBuff(aura, BuffConfig{
+		Category: heartOfTheLionAreaCategory,
+		Stats: append(HeartOfTheLionStatConfigs(),
+			StatConfig{stats.AttackPower, attackPower, false},
+			StatConfig{stats.RangedAttackPower, attackPower, false},
+		),
 	})
 
 	return aura
