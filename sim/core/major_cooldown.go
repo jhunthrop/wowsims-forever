@@ -127,6 +127,13 @@ func (mcd *MajorCooldown) shouldActivateHelper(sim *Simulation, character *Chara
 		return false
 	}
 
+	// A harmful cooldown (a damage use-effect) needs an enemy to land on.
+	// A healer's current target is a friend, and casting a damage-over-time
+	// at one has no dot to apply.
+	if !mcd.Spell.Flags.Matches(SpellFlagHelpful) && !character.IsOpponent(character.CurrentTarget) {
+		return false
+	}
+
 	if mcd.numUsages < len(mcd.timings) {
 		return sim.CurrentTime >= mcd.timings[mcd.numUsages]
 	}
