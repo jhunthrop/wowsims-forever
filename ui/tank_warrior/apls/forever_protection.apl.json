@@ -1,0 +1,233 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [],
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Stay in Defensive Stance: the 30 percent threat, Revenge and Shield Wall all need it. The engine starts a tank in it, so this fires only after a stance dance.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsActive": {
+                "auraId": {
+                  "spellId": 71
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 71
+          }
+        }
+      }
+    },
+    {
+      "notes": "Last Stand below 35 percent health: 30 percent of maximum health for 20 seconds, lost afterwards. Never fires on a fight the healers hold.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "0.35"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 12975
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shield Wall below 40 percent health: 60 percent less damage taken for 12 seconds. Fifteen minute cooldown, so once a fight.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "0.4"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 871
+          }
+        }
+      }
+    },
+    {
+      "notes": "Bloodrage on cooldown while rage is under 60: ten rage now and one a second for ten seconds.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentRage": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "60"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 2687
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shield Block whenever its buff is down: 75 percent more block for 7 seconds or two blocks. Recasting over a live buff wastes rage, and the measured damage taken is the same.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsActive": {
+                "auraId": {
+                  "spellId": 2565
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 2565
+          }
+        }
+      }
+    },
+    {
+      "notes": "Revenge the moment it is available: it only lights after a dodge, parry or block, costs 5 rage (2 with Focused Rage 3) and is the most threat per rage on the bar.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11601,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shield Slam on cooldown: the biggest hit on the bar, damage plus block value and a very high amount of threat.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 23925,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
+      "notes": "Keep Thunder Clap on the boss: the 20 percent attack speed slow is the largest cut to damage taken after Shield Block, and it lasts 30 seconds, so refresh inside the last 3.",
+      "action": {
+        "condition": {
+          "or": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "auraIsActive": {
+                      "auraId": {
+                        "spellId": 11581,
+                        "rank": 6
+                      },
+                      "sourceUnit": {
+                        "type": "CurrentTarget"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "auraRemainingTime": {
+                      "sourceUnit": {
+                        "type": "CurrentTarget"
+                      },
+                      "auraId": {
+                        "spellId": 11581,
+                        "rank": 6
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3s"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11581,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Sunder Armor is the global-cooldown filler: flat threat on every cast and the armor it strips raises the tank's own damage.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11597,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Heroic Strike with spare rage: the best threat per rage after Revenge, and it costs no global cooldown. Queued only above 40 rage so the cooldown buttons are never starved.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentRage": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "40"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11567,
+            "rank": 8,
+            "tag": 1
+          }
+        }
+      }
+    }
+  ]
+}
