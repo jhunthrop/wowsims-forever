@@ -20,7 +20,38 @@ type OnComboPointsGained func(sim *Simulation)
 // stored value up to sim.CurrentTime at the current rate, so the value is
 // exact at any instant. A scheduled task only exists to wake the APL when a
 // decision threshold is crossed.
-const EnergyRegenPerSecond = 10.0
+//
+// The stored value is an integer count of energyUnitsPerEnergy-ths of an
+// Energy. Accrual, spending and the wake time are integer arithmetic, so they
+// are identical on every CPU architecture: Go fuses a float "x*y + z" into one
+// rounding on arm64 but not on amd64, and a threshold comparison such as
+// "energy >= cost" can flip on that last bit. Floats appear only when a value
+// is derived by a single division or a single rounded product, neither of
+// which can be fused.
+const EnergyRegenPerSecond = 10
+
+// energyUnitsPerEnergy is the resolution of the stored value: 1e-8 Energy.
+// At 10 Energy per second that is exactly one unit per nanosecond, the
+// resolution of sim time, so accrual never rounds.
+const energyUnitsPerEnergy int64 = 100_000_000
+
+// energyUnitsPerNanosecond is the regen of one multiplier step in units per
+// nanosecond. It must divide exactly (see TestEnergyUnitsPerNanosecondIsExact).
+const energyUnitsPerNanosecond = EnergyRegenPerSecond * energyUnitsPerEnergy / int64(time.Second)
+
+// energyToUnits converts an Energy amount to units, rounding to the nearest
+// unit. The product is its own rounded statement: it is not fused with
+// anything.
+func energyToUnits(energy float64) int64 {
+	scaled := energy * float64(energyUnitsPerEnergy)
+	return int64(math.Round(scaled))
+}
+
+// energyFromUnits derives the float Energy value by one division, which the
+// compiler cannot fuse and which is exact for whole Energy amounts.
+func energyFromUnits(units int64) float64 {
+	return float64(units) / float64(energyUnitsPerEnergy)
+}
 
 // Wake interval for units whose APL has no precomputed decision thresholds
 // (everything but rogues), so energy-conditioned decisions are re-evaluated.
@@ -28,19 +59,20 @@ const EnergyPollInterval = time.Millisecond * 100
 
 // EnergyForTime is the base Energy regenerated over a duration.
 func EnergyForTime(duration time.Duration) float64 {
-	return EnergyRegenPerSecond * duration.Seconds()
+	return energyFromUnits(int64(duration) * energyUnitsPerNanosecond)
 }
 
 // TimeForEnergy is the base time needed to regenerate an amount of Energy.
 func TimeForEnergy(amount float64) time.Duration {
-	return DurationFromSeconds(amount / EnergyRegenPerSecond)
+	return time.Duration(energyToUnits(amount) / energyUnitsPerNanosecond)
 }
 
 type energyBar struct {
 	unit *Unit
 
-	maxEnergy     float64
-	currentEnergy float64
+	maxEnergy    float64
+	maxUnits     int64
+	currentUnits int64
 
 	comboPoints      int32
 	comboPointTarget *Unit
@@ -66,7 +98,7 @@ type energyBar struct {
 
 	// Multiplies continuous energy regen (Adrenaline Rush). Change it only
 	// through AddEnergyRegenMultiplier so earlier time accrues at the old rate.
-	regenMultiplier float64
+	regenMultiplier int64
 
 	regenMetrics        *ResourceMetrics
 	EnergyRefundMetrics *ResourceMetrics
@@ -75,9 +107,11 @@ type energyBar struct {
 func (unit *Unit) EnableEnergyBar(maxEnergy float64) {
 	unit.SetCurrentPowerBar(EnergyBar)
 
+	maxEnergy = max(100, maxEnergy)
 	unit.energyBar = energyBar{
 		unit:                unit,
-		maxEnergy:           max(100, maxEnergy),
+		maxEnergy:           maxEnergy,
+		maxUnits:            energyToUnits(maxEnergy),
 		regenMultiplier:     1,
 		regenMetrics:        unit.NewEnergyMetrics(ActionID{OtherID: proto.OtherAction_OtherActionEnergyRegen}),
 		EnergyRefundMetrics: unit.NewEnergyMetrics(ActionID{OtherID: proto.OtherAction_OtherActionRefund}),
@@ -165,21 +199,24 @@ func (unit *Unit) HasEnergyBar() bool {
 
 func (eb *energyBar) CurrentEnergy() float64 {
 	eb.accrue()
-	return eb.currentEnergy
+	return energyFromUnits(eb.currentUnits)
 }
 
 func (eb *energyBar) MaxEnergy() float64 {
 	return eb.maxEnergy
 }
 
-// Current regen in Energy per second, including multipliers.
-func (eb *energyBar) EnergyRegenRate() float64 {
-	return EnergyRegenPerSecond * eb.regenMultiplier
+// regenUnitsPerNanosecond is the current regen including multipliers.
+func (eb *energyBar) regenUnitsPerNanosecond() int64 {
+	return energyUnitsPerNanosecond * eb.regenMultiplier
 }
 
-// AddEnergyRegenMultiplier changes the regen multiplier. Time up to now is
-// accrued at the old rate first.
-func (eb *energyBar) AddEnergyRegenMultiplier(delta float64) {
+// AddEnergyRegenMultiplier changes the regen multiplier by a whole number of
+// steps. Time up to now is accrued at the old rate first.
+func (eb *energyBar) AddEnergyRegenMultiplier(delta int64) {
+	if eb.regenMultiplier+delta < 0 {
+		panic("Energy regen multiplier cannot go negative!")
+	}
 	eb.accrue()
 	eb.regenMultiplier += delta
 	eb.scheduleWake()
@@ -195,21 +232,20 @@ func (eb *energyBar) accrue() {
 	if now <= eb.lastAccrualAt {
 		return
 	}
-	elapsed := now - eb.lastAccrualAt
+	accrued := int64(now-eb.lastAccrualAt) * eb.regenUnitsPerNanosecond()
 	eb.lastAccrualAt = now
 
-	amount := eb.EnergyRegenRate() * elapsed.Seconds()
-	newEnergy := min(eb.currentEnergy+amount, eb.maxEnergy)
-	eb.regenMetrics.AddEvent(amount, newEnergy-eb.currentEnergy)
-	eb.currentEnergy = newEnergy
+	newUnits := min(eb.currentUnits+accrued, eb.maxUnits)
+	eb.regenMetrics.AddEvent(energyFromUnits(accrued), energyFromUnits(newUnits-eb.currentUnits))
+	eb.currentUnits = newUnits
 }
 
-// thresholdBucket maps an energy value to its decision-threshold bucket.
-func (eb *energyBar) thresholdBucket(energy float64) int {
+// thresholdBucket maps an energy value in units to its decision-threshold bucket.
+func (eb *energyBar) thresholdBucket(units int64) int {
 	if eb.cumulativeEnergyDecisionThresholds == nil {
 		return 0
 	}
-	idx := min(max(int(energy), 0), len(eb.cumulativeEnergyDecisionThresholds)-1)
+	idx := min(max(int(units/energyUnitsPerEnergy), 0), len(eb.cumulativeEnergyDecisionThresholds)-1)
 	return eb.cumulativeEnergyDecisionThresholds[idx]
 }
 
@@ -224,13 +260,13 @@ func (eb *energyBar) notifyAPL(sim *Simulation) {
 // the next decision threshold is reached, or a poll step when no thresholds
 // were precomputed.
 func (eb *energyBar) computeWakeAt() time.Duration {
-	if !eb.active || eb.unit.Rotation == nil || eb.currentEnergy >= eb.maxEnergy {
+	if !eb.active || eb.unit.Rotation == nil || eb.currentUnits >= eb.maxUnits {
 		return NeverExpires
 	}
 	if eb.cumulativeEnergyDecisionThresholds == nil {
 		return eb.sim.CurrentTime + EnergyPollInterval
 	}
-	floor := int(eb.currentEnergy)
+	floor := int(eb.currentUnits / energyUnitsPerEnergy)
 	for _, threshold := range eb.energyDecisionThresholds {
 		if threshold <= floor {
 			continue
@@ -238,9 +274,10 @@ func (eb *energyBar) computeWakeAt() time.Duration {
 		if float64(threshold) > eb.maxEnergy {
 			break
 		}
-		seconds := (float64(threshold) - eb.currentEnergy) / eb.EnergyRegenRate()
-		// Round up plus 1 ns so float error cannot land just short of it.
-		return eb.sim.CurrentTime + time.Duration(math.Ceil(seconds*float64(time.Second))) + 1
+		missing := int64(threshold)*energyUnitsPerEnergy - eb.currentUnits
+		rate := eb.regenUnitsPerNanosecond()
+		// Round up so the wake never lands short of the threshold.
+		return eb.sim.CurrentTime + time.Duration((missing+rate-1)/rate)
 	}
 	return NeverExpires
 }
@@ -258,16 +295,16 @@ func (eb *energyBar) addEnergyInternal(sim *Simulation, amount float64, metrics 
 	}
 	eb.accrue()
 
-	newEnergy := min(eb.currentEnergy+amount, eb.maxEnergy)
-	metrics.AddEvent(amount, newEnergy-eb.currentEnergy)
+	newUnits := min(eb.currentUnits+energyToUnits(amount), eb.maxUnits)
+	metrics.AddEvent(amount, energyFromUnits(newUnits-eb.currentUnits))
 
 	if sim.Log != nil {
-		eb.unit.Log(sim, "Gained %0.3f energy from %s (%0.3f --> %0.3f).", amount, metrics.ActionID, eb.currentEnergy, newEnergy)
+		eb.unit.Log(sim, "Gained %0.3f energy from %s (%0.3f --> %0.3f).", amount, metrics.ActionID, energyFromUnits(eb.currentUnits), energyFromUnits(newUnits))
 	}
 
-	crossedThreshold := eb.cumulativeEnergyDecisionThresholds == nil || eb.thresholdBucket(eb.currentEnergy) != eb.thresholdBucket(newEnergy)
-	eb.currentEnergy = newEnergy
-	eb.notifiedBucket = eb.thresholdBucket(newEnergy)
+	crossedThreshold := eb.cumulativeEnergyDecisionThresholds == nil || eb.thresholdBucket(eb.currentUnits) != eb.thresholdBucket(newUnits)
+	eb.currentUnits = newUnits
+	eb.notifiedBucket = eb.thresholdBucket(newUnits)
 
 	return crossedThreshold
 }
@@ -285,15 +322,15 @@ func (eb *energyBar) SpendEnergy(sim *Simulation, amount float64, metrics *Resou
 	}
 	eb.accrue()
 
-	newEnergy := eb.currentEnergy - amount
+	newUnits := eb.currentUnits - energyToUnits(amount)
 	metrics.AddEvent(-amount, -amount)
 
 	if sim.Log != nil {
-		eb.unit.Log(sim, "Spent %0.3f energy from %s (%0.3f --> %0.3f).", amount, metrics.ActionID, eb.currentEnergy, newEnergy)
+		eb.unit.Log(sim, "Spent %0.3f energy from %s (%0.3f --> %0.3f).", amount, metrics.ActionID, energyFromUnits(eb.currentUnits), energyFromUnits(newUnits))
 	}
 
-	eb.currentEnergy = newEnergy
-	eb.notifiedBucket = eb.thresholdBucket(newEnergy)
+	eb.currentUnits = newUnits
+	eb.notifiedBucket = eb.thresholdBucket(newUnits)
 	eb.scheduleWake()
 }
 
@@ -384,7 +421,7 @@ func (eb *energyBar) RunTask(sim *Simulation) time.Duration {
 	}
 
 	eb.accrue()
-	bucket := eb.thresholdBucket(eb.currentEnergy)
+	bucket := eb.thresholdBucket(eb.currentUnits)
 	if eb.cumulativeEnergyDecisionThresholds == nil || bucket != eb.notifiedBucket {
 		eb.notifiedBucket = bucket
 		eb.notifyAPL(sim)
@@ -400,10 +437,10 @@ func (eb *energyBar) reset(sim *Simulation) {
 	}
 
 	eb.sim = sim
-	eb.currentEnergy = eb.maxEnergy
+	eb.currentUnits = eb.maxUnits
 	eb.comboPoints = 0
 	eb.comboPointTarget = sim.GetTargetUnit(0)
-	eb.notifiedBucket = eb.thresholdBucket(eb.currentEnergy)
+	eb.notifiedBucket = eb.thresholdBucket(eb.currentUnits)
 
 	if eb.unit.Type != PetUnit {
 		eb.enable(sim, sim.Environment.PrepullStartTime())

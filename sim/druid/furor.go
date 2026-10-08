@@ -22,7 +22,11 @@ func furorCatFormEnergy(rank int32, lastCatEnergy float64, outOfForm time.Durati
 		return 0
 	}
 	r := float64(rank)
-	regained := furorPercentOfEnergyPerRank*r*lastCatEnergy/100 + furorEnergyPerSecondPerRank*r*outOfForm.Seconds()
+	// Each term is rounded on its own: an unconverted product feeding the sum
+	// would be fused into one rounding on arm64 but not on amd64.
+	carried := float64(furorPercentOfEnergyPerRank * r * lastCatEnergy / 100)
+	regenerated := float64(furorEnergyPerSecondPerRank * r * outOfForm.Seconds())
+	regained := carried + regenerated
 	return min(regained, furorMaxEnergyPerRank*r)
 }
 

@@ -20,7 +20,7 @@ func newTestEnergyBar(t *testing.T, maxEnergy float64) (*energyBar, *Simulation)
 	bar := &char.energyBar
 	bar.sim = sim
 	bar.enable(sim, 0)
-	bar.currentEnergy = 0
+	bar.currentUnits = 0
 	return bar, sim
 }
 
@@ -106,5 +106,60 @@ func TestWakeNeverWhenFullOrWithoutAPL(t *testing.T) {
 	bar.accrue()
 	if bar.computeWakeAt() != NeverExpires {
 		t.Fatal("a full bar should never wake")
+	}
+}
+
+// assertEnergyExactly compares with ==: accrual is integer arithmetic, so any
+// float drift (for example a fused multiply-add on arm64) must fail here.
+func assertEnergyExactly(t *testing.T, bar *energyBar, want float64) {
+	t.Helper()
+	if got := bar.CurrentEnergy(); got != want {
+		t.Fatalf("energy = %v, want exactly %v", got, want)
+	}
+}
+
+func TestEnergyAccrualSequenceIsExact(t *testing.T) {
+	bar, sim := newTestEnergyBar(t, 100)
+	sim.CurrentTime = 350 * time.Millisecond
+	assertEnergyExactly(t, bar, 3.5)
+	bar.SpendEnergy(sim, 3, bar.regenMetrics)
+	assertEnergyExactly(t, bar, 0.5)
+	sim.CurrentTime = 500 * time.Millisecond
+	assertEnergyExactly(t, bar, 2.0)
+	bar.AddEnergyRegenMultiplier(1)
+	sim.CurrentTime = 1500 * time.Millisecond
+	assertEnergyExactly(t, bar, 22.0)
+	bar.SpendEnergy(sim, 42.5, bar.regenMetrics)
+	sim.CurrentTime = 1510 * time.Millisecond
+	assertEnergyExactly(t, bar, -20.3)
+}
+
+func TestEnergyAccrualHasNoDriftOverManySteps(t *testing.T) {
+	bar, sim := newTestEnergyBar(t, 1000)
+	for step := 1; step <= 10_000; step++ {
+		sim.CurrentTime = time.Duration(step) * 7 * time.Millisecond
+		bar.accrue()
+	}
+	assertEnergyExactly(t, bar, 700)
+}
+
+func TestEnergyAndTimeConversionsAreExactInverses(t *testing.T) {
+	for ms := time.Duration(0); ms <= 20_000; ms++ {
+		duration := ms * time.Millisecond
+		if got := TimeForEnergy(EnergyForTime(duration)); got != duration {
+			t.Fatalf("TimeForEnergy(EnergyForTime(%v)) = %v", duration, got)
+		}
+	}
+	for hundredths := 0; hundredths <= 20_000; hundredths++ {
+		energy := float64(hundredths) / 100
+		if got := EnergyForTime(TimeForEnergy(energy)); got != energy {
+			t.Fatalf("EnergyForTime(TimeForEnergy(%v)) = %v", energy, got)
+		}
+	}
+}
+
+func TestEnergyUnitsPerNanosecondIsExact(t *testing.T) {
+	if EnergyRegenPerSecond*energyUnitsPerEnergy%int64(time.Second) != 0 {
+		t.Fatal("regen per nanosecond is not a whole number of energy units")
 	}
 }

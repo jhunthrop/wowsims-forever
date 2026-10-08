@@ -273,9 +273,9 @@ func (value *APLValueEnergyThreshold) Type() proto.APLValueType {
 }
 func (value *APLValueEnergyThreshold) GetBool(_ *Simulation) bool {
 	if value.threshold > 0 {
-		return value.unit.currentEnergy >= value.threshold
+		return value.unit.CurrentEnergy() >= value.threshold
 	}
-	return value.unit.currentEnergy >= value.unit.maxEnergy+value.threshold
+	return value.unit.CurrentEnergy() >= value.unit.maxEnergy+value.threshold
 }
 func (value *APLValueEnergyThreshold) String() string {
 	return "Energy Threshold"

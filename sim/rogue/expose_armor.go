@@ -69,7 +69,7 @@ func (rogue *Rogue) registerExposeArmorSpell() {
 		RelatedSelfBuff: exposeArmorDurationAura,
 
 		EnergyCost: core.EnergyCostOptions{
-			Cost:   exposeArmorBaseEnergyCost - improvedExposeArmorEnergyPerRank*float64(rogue.Talents.ImprovedExposeArmor),
+			Cost:   exposeArmorBaseEnergyCost - float64(improvedExposeArmorEnergyPerRank*float64(rogue.Talents.ImprovedExposeArmor)),
 			Refund: 0,
 		},
 		Cast: core.CastConfig{
