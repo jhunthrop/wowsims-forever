@@ -98,15 +98,43 @@ func TestForeverProtectionTalentsAreLegal(t *testing.T) {
 	if total != 51 {
 		t.Errorf("the build spends %d points, want 51", total)
 	}
-	if spent[1] != 31 {
-		t.Errorf("the build spends %d points in Protection, want 31 to reach Holy Shield", spent[1])
+	if spent[1] < 31 {
+		t.Errorf("the build spends %d points in Protection, want at least 31 to reach Holy Shield", spent[1])
+	}
+}
+
+// The 20 points past Holy Shield go where a tank gets something for them:
+// Deflection (the only parry talent a paladin has, in the Retribution
+// tree), Sacred Duty and Iron Creed. The reference build once spent them
+// on the Holy tree's healing talents, and the same boss killed it many
+// times more often than it kills this build.
+func TestForeverProtectionTalentsSpendThePointsPastHolyShieldOnMitigation(t *testing.T) {
+	trees := loadPaladinTrees(t)
+	segments := strings.Split(ForeverProtectionTalents, "-")
+	rank := func(treeIndex int, field string) int {
+		for j, talent := range trees[treeIndex].Talents {
+			if talent.FieldName == field {
+				return int(segments[treeIndex][j] - '0')
+			}
+		}
+		t.Fatalf("%s has no %s", trees[treeIndex].Name, field)
+		return 0
+	}
+	for _, want := range []struct {
+		tree  int
+		field string
+		rank  int
+	}{{2, "deflection", 5}, {1, "sacredDuty", 2}, {1, "ironCreed", 5}} {
+		if got := rank(want.tree, want.field); got != want.rank {
+			t.Errorf("%s is at rank %d, want %d", want.field, got, want.rank)
+		}
 	}
 }
 
 // Every Protection talent the reference build names exists in the tree
 // the engine parses: a renamed field would silently drop out of the build.
 func TestForeverProtectionTalentsTakeTheTalentsThisSpecModels(t *testing.T) {
-	for _, field := range []string{"holy_shield", "templars_bulwark", "swift_judgement", "improved_seal_of_fury", "shield_specialization", "redoubt"} {
+	for _, field := range []string{"holy_shield", "templars_bulwark", "swift_judgement", "improved_seal_of_fury", "shield_specialization", "redoubt", "deflection", "sacred_duty", "iron_creed"} {
 		if _, ok := TalentNodeIDs[field]; !ok {
 			t.Errorf("%s is not in the generated talent table", field)
 		}

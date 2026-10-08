@@ -21,7 +21,6 @@ const (
 	HornOfLordaeron
 	BloodPact
 	CommandingShout
-	DevotionAura
 	DivineSpirit
 	GraceOfAir
 	ManaSpring
@@ -71,9 +70,6 @@ var BuffSpellValues = map[BuffName]stats.Stats{
 	},
 	CommandingShout: {
 		stats.Stamina: 42,
-	},
-	DevotionAura: {
-		stats.BonusArmor: 735,
 	},
 	GraceOfAir: {
 		stats.Agility: TernaryFloat64(IncludeAQ, 77, 67),
@@ -543,12 +539,17 @@ func ApplyInspiration(character *Character, uptime float64) {
 }
 
 func DevotionAuraAura(unit *Unit, points int32) *Aura {
-	updateStats := BuffSpellValues[DevotionAura]
+	// Below the first rank's level the aura cannot exist; level 1 learns it.
+	rank, ok := DevotionAuraRanks.Learned(int(unit.Level))
+	if !ok {
+		rank = DevotionAuraRanks[0]
+	}
+	updateStats := stats.Stats{stats.BonusArmor: DevotionAuraArmor(int(unit.Level))}
 	updateStats = updateStats.Multiply(1 + .125*float64(points))
 
 	return unit.RegisterAura(Aura{
 		Label:    "Devotion Aura",
-		ActionID: ActionID{SpellID: 10293},
+		ActionID: ActionID{SpellID: rank.SpellID},
 		Duration: NeverExpires,
 		OnGain: func(aura *Aura, sim *Simulation) {
 			aura.Unit.AddStatsDynamic(sim, updateStats)

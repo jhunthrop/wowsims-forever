@@ -147,6 +147,17 @@ var (
 		{SpellID: 9885, Level: 60, Amount: 27},
 	}
 
+	// Devotion Aura: armor to the paladin and its party (aura 22, misc 1).
+	DevotionAuraRanks = BuffRanks{
+		{SpellID: 465, Level: 1, Amount: 55},
+		{SpellID: 10290, Level: 10, Amount: 160},
+		{SpellID: 643, Level: 20, Amount: 275},
+		{SpellID: 10291, Level: 30, Amount: 390},
+		{SpellID: 1032, Level: 40, Amount: 505},
+		{SpellID: 10292, Level: 50, Amount: 620},
+		{SpellID: 10293, Level: 60, Amount: 735},
+	}
+
 	BattleShoutRankTable = BuffRanks{
 		{SpellID: 6673, Level: 1, Amount: 9, PerLevel: 0.3, MaxLevel: 11},
 		{SpellID: 5242, Level: 12, Amount: 21, PerLevel: 0.3, MaxLevel: 21},
@@ -182,6 +193,12 @@ func BlessingOfMightAttackPower(level int) float64 {
 // level, before Improved Battle Shout.
 func BattleShoutAttackPower(level int) float64 {
 	return BattleShoutRankTable.At(level)
+}
+
+// DevotionAuraArmor is the Devotion Aura armor at a character level, before
+// any improved form.
+func DevotionAuraArmor(level int) float64 {
+	return DevotionAuraRanks.At(level)
 }
 
 // MarkOfTheWildStats is the Mark of the Wild bonus at a character level,

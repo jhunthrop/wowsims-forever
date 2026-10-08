@@ -22,24 +22,49 @@ const (
 // synergy talent giving Holy spells bonus damage against enemies standing
 // in Consecration); it does not gate Consecration itself.
 //
-// tickDamage is Classic's per-rank Consecration damage over 8 s divided by
-// its 8 ticks (64/120/192/280/384 at ranks 1-5). The Forever client's
-// periodic effect (index 2) carries only a "periodic dummy" of 4-5 per
-// second with a server-side script (wowhead.com/forever/spell=20924 shows
-// the same), so the client does not state the damage at all, and the one
-// number it does carry is not it. Classic's values are the best-known
-// answer until Forever's own numbers are measured in a log.
+// The cast spell carries only a periodic dummy (the third effect: 4 for
+// the first targets, the ground effect's tick of 1 s). Its description
+// prints the damage from a companion row per rank, damageSpellID:
+// "doing ${$1280349m1*8} Holy damage over 8 sec to enemies who enter the
+// area. The first $s3 enemies who enter the area will take an additional
+// ${$1280349m2*8} damage". Effect 1 of the companion row is the damage a
+// second to every enemy in the area (tickDamage) and effect 2 the extra a
+// second the first consecrationFirstTargets enemies take
+// (firstTargetsTickDamage, with a spell-power coefficient). Classic's
+// 384 at rank 5 that this table once carried is the old design: a single
+// target takes 12 + 27 = 39 a second, 312 over the eight seconds, and the
+// area is heavy only on its first four.
 var consecrationRanks = []struct {
-	level      int32
-	spellID    int32
-	manaCost   float64
-	tickDamage float64
+	level                  int32
+	spellID                int32
+	damageSpellID          int32
+	manaCost               float64
+	tickDamage             float64
+	firstTargetsTickDamage float64
 }{
-	{level: 20, spellID: 26573, manaCost: 135, tickDamage: 64 / 8},
-	{level: 30, spellID: 20116, manaCost: 235, tickDamage: 120 / 8},
-	{level: 40, spellID: 20922, manaCost: 320, tickDamage: 192 / 8},
-	{level: 50, spellID: 20923, manaCost: 435, tickDamage: 280 / 8},
-	{level: 60, spellID: 20924, manaCost: 565, tickDamage: 384 / 8},
+	{level: 20, spellID: 26573, damageSpellID: 1280345, manaCost: 135, tickDamage: 2, firstTargetsTickDamage: 4},
+	{level: 30, spellID: 20116, damageSpellID: 1280346, manaCost: 235, tickDamage: 3, firstTargetsTickDamage: 7},
+	{level: 40, spellID: 20922, damageSpellID: 1280347, manaCost: 320, tickDamage: 6, firstTargetsTickDamage: 11},
+	{level: 50, spellID: 20923, damageSpellID: 1280348, manaCost: 435, tickDamage: 8, firstTargetsTickDamage: 20},
+	{level: 60, spellID: 20924, damageSpellID: 1280349, manaCost: 565, tickDamage: 12, firstTargetsTickDamage: 27},
+}
+
+const (
+	// consecrationFirstTargets is the cast spell's third effect: the
+	// number of enemies that take the extra damage.
+	consecrationFirstTargets = 4
+	// consecrationFirstTargetsCoefficient is the spell-power coefficient of
+	// the extra damage a second (the companion row's second effect).
+	consecrationFirstTargetsCoefficient = 0.095
+)
+
+// consecrationTickDamage is what the nth enemy (from 0, in the order the
+// encounter lists them) in the area takes each second.
+func consecrationTickDamage(tickDamage, firstTargetsTickDamage, spellPower float64, nth int) float64 {
+	if nth >= consecrationFirstTargets {
+		return tickDamage
+	}
+	return tickDamage + firstTargetsTickDamage + consecrationFirstTargetsCoefficient*spellPower
 }
 
 func (paladin *Paladin) registerConsecration() {
@@ -90,9 +115,6 @@ func (paladin *Paladin) registerConsecration() {
 				NumberOfTicks: ConsecrationNumberOfTicks,
 				TickLength:    ConsecrationTickLength,
 
-				OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-					dot.Snapshot(target, rank.tickDamage, isRollover)
-				},
 				OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 					// dot.OutcomeTick, not spell.OutcomeMagicHit: the
 					// latter is a Hits/Misses counter (sim/core/
@@ -100,8 +122,9 @@ func (paladin *Paladin) registerConsecration() {
 					// other ground-AOE dot in this fork (Rain of Fire,
 					// Blizzard) ticks through dot.OutcomeTick so its
 					// casts show up as ticks in the metrics.
-					for _, aoeTarget := range sim.Encounter.TargetUnits {
-						dot.CalcAndDealPeriodicSnapshotDamage(sim, aoeTarget, dot.OutcomeTick)
+					for nth, aoeTarget := range sim.Encounter.TargetUnits {
+						damage := consecrationTickDamage(rank.tickDamage, rank.firstTargetsTickDamage, dot.Spell.GetBonusDamage(aoeTarget), nth)
+						dot.Spell.CalcAndDealPeriodicDamage(sim, aoeTarget, damage, dot.OutcomeTick)
 					}
 				},
 			},
