@@ -162,7 +162,7 @@
       }
     },
     {
-      "notes": "Searing Pain is the filler between DoT refreshes. It replaced Shadow Bolt on 2026-10-08, when the rotation search measured it ahead of Shadow Bolt beyond error; an unconditional Searing Pain leaves the Shadow Bolt line behind it unreachable, so that line is gone.",
+      "notes": "Searing Pain is the filler between DoT refreshes: it measures ahead of Shadow Bolt here, and because it is cast whenever nothing else is due, no Shadow Bolt line sits behind it.",
       "action": {
         "castSpell": {
           "spellId": {
