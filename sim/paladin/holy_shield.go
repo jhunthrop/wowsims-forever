@@ -8,7 +8,7 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
-// HolyShieldValues: source 1.60.1.70009 client spell data
+// HolyShieldValues: source 1.60.1.70291 client spell data
 // (spellconst/paladin.json, ids 20925/20927/20928): effect 1 (aura 43, a
 // proc-trigger damage) states the Holy damage a block deals, 110, 153 and
 // 221 by rank, with an 0.08 spell-power coefficient. Rank 1's level is
@@ -35,7 +35,7 @@ const (
 	// 10 sec, and deals 110 Holy damage for each attack blocked while
 	// active. Damage caused by Holy Shield causes 20% additional threat.
 	// Each block expends a charge. 4 charges." The rank spells' own
-	// block effect reads 20; the live text says 30 and is the one used.
+	// block effect reads 30 since build 1.60.1.70291 (it read 20 before).
 	holyShieldCharges     = 4
 	holyShieldBlockChance = 30.0
 	holyShieldThreat      = 1.2
