@@ -192,6 +192,10 @@ func (spell *Spell) GetSchoolDamage(target *Unit) float64 {
 	}
 }
 
+// minSpellMissChance is the residual miss chance no amount of spell hit
+// removes: a spell always has a 1% chance to miss in classic.
+const minSpellMissChance = 0.01
+
 func (spell *Spell) SpellHitChance(target *Unit) float64 {
 	hitRating := spell.Unit.stats[stats.Hit] +
 		spell.BonusHitRating +
@@ -201,7 +205,7 @@ func (spell *Spell) SpellHitChance(target *Unit) float64 {
 	return hitRating / (HitRatingPerHitChance * 100)
 }
 func (spell *Spell) SpellChanceToMiss(attackTable *AttackTable) float64 {
-	missChance := 0.01
+	missChance := minSpellMissChance
 
 	if spell.Flags.Matches(SpellFlagBinary) {
 		baseHitChance := (1 - attackTable.BaseSpellMissChance) * attackTable.GetBinaryHitChance(spell)
@@ -211,7 +215,7 @@ func (spell *Spell) SpellChanceToMiss(attackTable *AttackTable) float64 {
 	}
 
 	// Always a 1% chance to miss in classic
-	return max(0.01, missChance)
+	return max(minSpellMissChance, missChance)
 }
 func (spell *Spell) MagicHitCheck(sim *Simulation, attackTable *AttackTable) bool {
 	return sim.Proc(1.0-spell.SpellChanceToMiss(attackTable), "Magical Hit Roll")
