@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70291",
   "class_slug": "priest",
   "trainables": [
     {
@@ -1153,7 +1153,7 @@
       "skill_line": "Discipline",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 355,
+      "cost": 385,
       "cost_type": 0,
       "cast_time_ms": 0,
       "cooldown_ms": 12000,
@@ -1508,11 +1508,6 @@
         },
         {
           "id": 27606,
-          "rank": 9,
-          "level": 56
-        },
-        {
-          "id": 1289450,
           "rank": 9,
           "level": 56
         },

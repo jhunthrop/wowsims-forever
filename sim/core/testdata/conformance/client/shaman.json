@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70291",
   "class_slug": "shaman",
   "family": 11,
   "spells": {
@@ -242,14 +242,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 14,
+          "amount": 15,
           "sp_coefficient": 0.42899999022,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.14285714924,
-          "points_per_level": 0.40000000596
+          "points_per_level": 0.10000000149
         }
       ],
       "cost_pct": 0.0,
@@ -350,14 +350,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 29,
+          "amount": 27,
           "sp_coefficient": 0.57099997997,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.14285714924,
-          "points_per_level": 0.5
+          "points_per_level": 0.10000000149
         }
       ],
       "cost_pct": 0.0,
@@ -429,7 +429,7 @@
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.16326530278,
-          "points_per_level": 0.60000002384
+          "points_per_level": 0.30000001192
         }
       ],
       "cost_pct": 0.0,
@@ -530,14 +530,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 56,
+          "amount": 61,
           "sp_coefficient": 0.71399998665,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.13483145833,
-          "points_per_level": 0.60000002384
+          "points_per_level": 0.40000000596
         }
       ],
       "cost_pct": 0.0,
@@ -638,14 +638,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 72,
+          "amount": 82,
           "sp_coefficient": 0.71399998665,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.13432836533,
-          "points_per_level": 0.69999998808
+          "points_per_level": 0.5
         }
       ],
       "cost_pct": 0.0,
@@ -3573,7 +3573,7 @@
       "gcd_ms": 1000,
       "cooldown_ms": 0,
       "category_cooldown_ms": 0,
-      "duration_ms": 120000,
+      "duration_ms": 300000,
       "cost": 0,
       "cost_type": 0,
       "spell_level": 38,
@@ -3674,7 +3674,7 @@
       "max_level": 0
     },
     "8178": {
-      "name": "Grounding Totem Effect",
+      "name": "Grounding Totem",
       "rank": 1,
       "school_mask": 8,
       "cast_time_ms": 0,
@@ -5770,7 +5770,7 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 1,
+          "amount": 0,
           "sp_coefficient": 0.10000000149,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -9336,7 +9336,7 @@
       "duration_ms": 13000,
       "cost": 10,
       "cost_type": 0,
-      "spell_level": 40,
+      "spell_level": 25,
       "family_mask": [
         536870912,
         0,
@@ -9372,7 +9372,7 @@
       "duration_ms": 0,
       "cost": 0,
       "cost_type": 0,
-      "spell_level": 40,
+      "spell_level": 25,
       "family_mask": [
         67108864,
         0,
@@ -14287,7 +14287,7 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 1,
+          "amount": 0,
           "sp_coefficient": 0.10000000149,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -14323,7 +14323,7 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 1,
+          "amount": 0,
           "sp_coefficient": 0.10000000149,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -15173,7 +15173,7 @@
       "cost_type": 0,
       "spell_level": 12,
       "family_mask": [
-        0,
+        134217728,
         262144,
         0,
         0
@@ -15209,7 +15209,7 @@
       "cost_type": 0,
       "spell_level": 22,
       "family_mask": [
-        0,
+        134217728,
         262144,
         0,
         0
@@ -15245,7 +15245,7 @@
       "cost_type": 0,
       "spell_level": 32,
       "family_mask": [
-        0,
+        134217728,
         262144,
         0,
         0
@@ -15281,7 +15281,7 @@
       "cost_type": 0,
       "spell_level": 42,
       "family_mask": [
-        0,
+        134217728,
         262144,
         0,
         0
@@ -15317,7 +15317,7 @@
       "cost_type": 0,
       "spell_level": 52,
       "family_mask": [
-        0,
+        134217728,
         262144,
         0,
         0
@@ -16410,7 +16410,7 @@
       "cast_time_ms": 0,
       "gcd_ms": 1500,
       "cooldown_ms": 0,
-      "category_cooldown_ms": 15000,
+      "category_cooldown_ms": 0,
       "duration_ms": 600000,
       "cost": 0,
       "cost_type": 0,
@@ -16432,6 +16432,19 @@
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 408511,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 4,
+          "amount": 1,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
         }
@@ -27558,7 +27571,7 @@
       "max_level": 0
     },
     "1270478": {
-      "name": "Charged Lightning",
+      "name": "Flame Charged",
       "rank": 0,
       "school_mask": 1,
       "cast_time_ms": 0,
@@ -28514,6 +28527,91 @@
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 7,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1323418": {
+      "name": "Revelation",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 15000,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 0,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 107,
+          "amount": 100,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 7,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1323420": {
+      "name": "Totemic Recall",
+      "rank": 0,
+      "school_mask": 8,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 20,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 30,
+          "aura": 0,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 3,
+          "aura": 0,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0

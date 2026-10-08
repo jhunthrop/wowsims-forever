@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70291",
   "class_slug": "warrior",
   "family": 4,
   "spells": {
@@ -31,6 +31,19 @@
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 18,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 668,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -531,6 +544,19 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": -1.39999997616
+        },
+        {
+          "index": 1,
+          "effect": 63,
+          "aura": 0,
+          "amount": 11,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.80000001192
         }
       ],
       "cost_pct": 0.0,
@@ -1286,6 +1312,19 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": -1.39999997616
+        },
+        {
+          "index": 1,
+          "effect": 63,
+          "aura": 0,
+          "amount": 19,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.80000001192
         }
       ],
       "cost_pct": 0.0,
@@ -2055,7 +2094,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": -90,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -2202,7 +2241,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": -180,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -2470,7 +2509,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": -270,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -2672,6 +2711,19 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": -1.39999997616
+        },
+        {
+          "index": 1,
+          "effect": 63,
+          "aura": 0,
+          "amount": 27,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.80000001192
         }
       ],
       "cost_pct": 0.0,
@@ -2708,6 +2760,19 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": -1.39999997616
+        },
+        {
+          "index": 1,
+          "effect": 63,
+          "aura": 0,
+          "amount": 35,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.80000001192
         }
       ],
       "cost_pct": 0.0,
@@ -2744,6 +2809,19 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": -1.39999997616
+        },
+        {
+          "index": 1,
+          "effect": 63,
+          "aura": 0,
+          "amount": 43,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.80000001192
         }
       ],
       "cost_pct": 0.0,
@@ -3255,7 +3333,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": -360,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -3304,7 +3382,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": -450,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -4265,6 +4343,19 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 108,
+          "amount": -25,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 14,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -4428,7 +4519,7 @@
       "spell_level": 1,
       "family_mask": [
         0,
-        8192,
+        139264,
         0,
         0
       ],
@@ -5349,6 +5440,42 @@
       "cost_pct": 0.0,
       "max_level": 0
     },
+    "12880": {
+      "name": "Enrage",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 12000,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 1,
+      "family_mask": [
+        0,
+        131072,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 79,
+          "amount": 10,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 1,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
     "12886": {
       "name": "Improved Challenging Shout",
       "rank": 2,
@@ -6249,10 +6376,10 @@
       "duration_ms": 10000,
       "cost": 0,
       "cost_type": 1,
-      "spell_level": 32,
+      "spell_level": 30,
       "family_mask": [
         268435456,
-        0,
+        131072,
         0,
         0
       ],
@@ -9142,19 +9269,6 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
-        },
-        {
-          "index": 2,
-          "effect": 6,
-          "aura": 54,
-          "amount": 10,
-          "sp_coefficient": 1.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -9392,7 +9506,7 @@
           "index": 1,
           "effect": 3,
           "aura": 0,
-          "amount": 35,
+          "amount": 45,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -9454,7 +9568,7 @@
           "index": 1,
           "effect": 3,
           "aura": 0,
-          "amount": 35,
+          "amount": 45,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -9516,7 +9630,7 @@
           "index": 1,
           "effect": 3,
           "aura": 0,
-          "amount": 35,
+          "amount": 45,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -9578,7 +9692,7 @@
           "index": 1,
           "effect": 3,
           "aura": 0,
-          "amount": 35,
+          "amount": 45,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -11984,7 +12098,7 @@
       "spell_level": 10,
       "family_mask": [
         256,
-        0,
+        131072,
         0,
         0
       ],
@@ -12481,7 +12595,7 @@
       "spell_level": 1,
       "family_mask": [
         0,
-        131072,
+        0,
         0,
         0
       ],
@@ -20006,12 +20120,12 @@
         {
           "index": 2,
           "effect": 6,
-          "aura": 108,
+          "aura": 4,
           "amount": 10,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 22,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -21017,7 +21131,7 @@
           "index": 1,
           "effect": 6,
           "aura": 107,
-          "amount": -20,
+          "amount": -30,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -21092,8 +21206,8 @@
       "cost_pct": 0.0,
       "max_level": 0
     },
-    "1313291": {
-      "name": "Dual Wield Specialization",
+    "1322574": {
+      "name": "Rule of Rage (DND)",
       "rank": 0,
       "school_mask": 1,
       "cast_time_ms": 0,
@@ -21102,8 +21216,8 @@
       "category_cooldown_ms": 0,
       "duration_ms": 0,
       "cost": 0,
-      "cost_type": -2,
-      "spell_level": 10,
+      "cost_type": 0,
+      "spell_level": 0,
       "family_mask": [
         0,
         0,
@@ -21113,14 +21227,207 @@
       "effects": [
         {
           "index": 0,
-          "effect": 30,
+          "effect": 6,
+          "aura": 4,
+          "amount": 100,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1323965": {
+      "name": "Lingering Rage",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 10000,
+      "cost": 0,
+      "cost_type": -2,
+      "spell_level": 0,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 94,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1323966": {
+      "name": "Lingering Rage",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": -1,
+      "cost": 0,
+      "cost_type": -2,
+      "spell_level": 0,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 4,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1323967": {
+      "name": "Gore Drinker",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 0,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 4,
+          "amount": 3,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 4,
+          "amount": 1,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1323968": {
+      "name": "Gore Drinker",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 0,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 10,
           "aura": 0,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 1,
+          "misc_value": 0,
           "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1323969": {
+      "name": "Gore Drinker",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 8000,
+      "cost": 0,
+      "cost_type": 1,
+      "spell_level": 35,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 231,
+          "amount": 0,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 1323968,
           "variance": 0.0,
           "points_per_level": 0.0
         }

@@ -7,7 +7,7 @@ import (
 )
 
 // clientBuild is the build the committed client rows come from.
-const clientBuild = "1.60.1.70009"
+const clientBuild = "1.60.1.70291"
 
 // TestSetBonusConformance holds every item set the engine registers to the
 // client's ItemSetSpell rows: each client threshold must exist, each flat

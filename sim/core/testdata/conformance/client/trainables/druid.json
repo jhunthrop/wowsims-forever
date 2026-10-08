@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70291",
   "class_slug": "druid",
   "trainables": [
     {
@@ -1115,6 +1115,38 @@
       ]
     },
     {
+      "name": "Primal Bite",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 200,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 6000,
+      "ranks": [
+        {
+          "id": 407995,
+          "rank": 1,
+          "level": 25
+        },
+        {
+          "id": 1238069,
+          "rank": 2,
+          "level": 36
+        },
+        {
+          "id": 1238070,
+          "rank": 3,
+          "level": 48
+        },
+        {
+          "id": 1238073,
+          "rank": 4,
+          "level": 60
+        }
+      ]
+    },
+    {
       "name": "Prowl",
       "skill_line": "Feral Combat",
       "source": "skill_line_ability",
@@ -1745,6 +1777,23 @@
       ]
     },
     {
+      "name": "Thick Hide",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 16929,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
       "name": "Thorns",
       "skill_line": "Balance",
       "source": "skill_line_ability",
@@ -1783,23 +1832,6 @@
           "id": 9910,
           "rank": 6,
           "level": 54
-        }
-      ]
-    },
-    {
-      "name": "Tiger's Fury",
-      "skill_line": "Feral Combat",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 30000,
-      "ranks": [
-        {
-          "id": 5217,
-          "rank": 0,
-          "level": 24
         }
       ]
     },

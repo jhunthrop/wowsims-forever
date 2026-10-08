@@ -22,7 +22,7 @@ const GoldenDir = "../core/testdata/conformance"
 
 // ClientDir is where this package's copy of the client's per-class spell
 // constants lives (sim/core/testdata/conformance/client/<slug>.json,
-// copied from the site's data/builds/1.60.1.70009/spellconst/<slug>.json
+// copied from the site's data/builds/1.60.1.70291/spellconst/<slug>.json
 // — see this package's doc comment for why a copy and not an absolute-path
 // read: this repo has no dependency on the site repo's checkout existing
 // at a fixed path, and `go test` needs the fixture whether or not

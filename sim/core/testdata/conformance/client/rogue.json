@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70291",
   "class_slug": "rogue",
   "family": 8,
   "spells": {
@@ -3461,7 +3461,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -3510,7 +3510,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -3559,7 +3559,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -4480,7 +4480,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -4529,7 +4529,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -20174,12 +20174,12 @@
         {
           "index": 2,
           "effect": 6,
-          "aura": 108,
+          "aura": 4,
           "amount": 10,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 22,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0

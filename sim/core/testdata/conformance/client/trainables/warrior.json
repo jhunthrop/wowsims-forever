@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70291",
   "class_slug": "warrior",
   "trainables": [
     {
@@ -79,7 +79,7 @@
         {
           "id": 18499,
           "rank": 0,
-          "level": 32
+          "level": 30
         }
       ]
     },

@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70291",
   "class_slug": "shaman",
   "trainables": [
     {
@@ -1187,7 +1187,7 @@
         {
           "id": 16190,
           "rank": 1,
-          "level": 40
+          "level": 25
         },
         {
           "id": 17354,

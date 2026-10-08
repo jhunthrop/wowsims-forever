@@ -8,13 +8,13 @@ never reference a rating). So every constant this generator emits is a
 flat 1:1 percentage, never a rating-to-percent conversion factor - that
 includes Defense/Dodge/Parry/Block, which earlier drafts of this
 generator read out of combatratings.txt as if they were ratings. They are
-not: combatratings.txt is present in the client (build 1.60.1.69893) but
+not: combatratings.txt is present in the client (build 1.60.1.70291) but
 is lineage boilerplate, not the rule - see PERCENTAGE_CONSTANTS below and
 the header this script writes.
 
 basemp.txt (per-class base mana) and hppersta.txt (health per point of
 stamina) are two of the same three confirmed GameTables files, and their
-build-1.60.1.69893 values genuinely do confirm two of the fork's existing
+build-1.60.1.70291 values genuinely do confirm two of the fork's existing
 hand-typed values (ClassBaseStats' Mana fields and the Stamina->Health
 dependency in character.go). This generator reads and records both, but
 does not redefine either: sim/core/base_stats_test.go pins the match
@@ -38,11 +38,11 @@ checked by hand, not regenerated - see docs/superpowers/specs/
 no wowhead table at all - it is a function of level in base_stats.go.
 
 Usage:
-    python3 tools/base_stats_parser.py                                  # 1.60.1.69893, vendored copy
+    python3 tools/base_stats_parser.py                                  # 1.60.1.70291, vendored copy
     python3 tools/base_stats_parser.py --inputs assets/db_inputs/gametables/1.60.2.70000
     python3 tools/base_stats_parser.py --build 1.60.2.70000 \\
         --inputs assets/db_inputs/gametables/1.60.2.70000
-    python3 tools/base_stats_parser.py --levels-json assets/db_inputs/levels/1.60.1.69893.json
+    python3 tools/base_stats_parser.py --levels-json assets/db_inputs/levels/1.60.1.70291.json
 """
 
 import argparse
@@ -135,7 +135,7 @@ BASE_MP_CLASSES = [
     "Shaman", "Mage", "Warlock", "Druid",
 ]
 
-# Tables that do not exist for build 1.60.1.69893 (404 on wago; not among
+# Tables that do not exist for build 1.60.1.70291 (404 on wago; not among
 # the three GameTables files the data lane has mined) and what each would
 # supply if it landed. Listed once in the generated header so a reader
 # never has to guess why a given value is still hand-typed elsewhere.
@@ -230,7 +230,7 @@ def generate(build, inputs_path, combat_ratings, base_mp, hp_per_sta):
     lines.append(f"// source build: {build} ({HP_PER_STA} level {MAX_LEVEL} Health-per-Stamina, confirms sim/core/character.go:283):")
     lines.append(f"//   Health = {hp_value:g}")
     lines.append("//")
-    lines.append("// Absent tables (do not exist for build 1.60.1.69893; not among the")
+    lines.append("// Absent tables (do not exist for build 1.60.1.70291; not among the")
     lines.append("// three confirmed GameTables files) and what each would supply:")
     for name, supplies in ABSENT_TABLES:
         lines.append(f"//   {name}")
@@ -454,13 +454,13 @@ def resolve_build(build, inputs_path):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--inputs", default="assets/db_inputs/gametables/1.60.1.69893",
+    ap.add_argument("--inputs", default="assets/db_inputs/gametables/1.60.1.70291",
                      help="directory holding the client's GameTables files")
     ap.add_argument("--build", default="",
-                     help="client build string, e.g. 1.60.1.69893; inferred from "
+                     help="client build string, e.g. 1.60.1.70291; inferred from "
                           "--inputs' basename, or an --inputs/BUILD file, when omitted")
     ap.add_argument("--out", default="sim/core/base_stats_auto_gen.go")
-    ap.add_argument("--levels-json", default="assets/db_inputs/levels/1.60.1.69893.json",
+    ap.add_argument("--levels-json", default="assets/db_inputs/levels/1.60.1.70291.json",
                      help="wowhead gear-planner payload (levels.json shape); "
                           "pass an empty string to skip this file's generation")
     ap.add_argument("--levels-out", default="sim/core/base_stats_levels_auto_gen.go")

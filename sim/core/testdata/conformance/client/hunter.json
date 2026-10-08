@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70291",
   "class_slug": "hunter",
   "family": 9,
   "spells": {
@@ -98,7 +98,7 @@
           "index": 0,
           "effect": 63,
           "aura": 0,
-          "amount": -140,
+          "amount": -280,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -1011,7 +1011,7 @@
       "max_level": 0
     },
     "3355": {
-      "name": "Freezing Trap Effect",
+      "name": "Freezing Trap",
       "rank": 1,
       "school_mask": 16,
       "cast_time_ms": 0,
@@ -2012,7 +2012,7 @@
       "max_level": 22
     },
     "13797": {
-      "name": "Immolation Trap Effect",
+      "name": "Immolation Trap",
       "rank": 1,
       "school_mask": 4,
       "cast_time_ms": 0,
@@ -2084,7 +2084,7 @@
       "max_level": 0
     },
     "13810": {
-      "name": "Frost Trap Aura",
+      "name": "Frost Trap",
       "rank": 0,
       "school_mask": 16,
       "cast_time_ms": 0,
@@ -2734,7 +2734,7 @@
           "index": 0,
           "effect": 63,
           "aura": 0,
-          "amount": -280,
+          "amount": -560,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -2770,7 +2770,7 @@
           "index": 0,
           "effect": 63,
           "aura": 0,
-          "amount": -405,
+          "amount": -810,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -3268,7 +3268,7 @@
       "max_level": 0
     },
     "14298": {
-      "name": "Immolation Trap Effect",
+      "name": "Immolation Trap",
       "rank": 2,
       "school_mask": 4,
       "cast_time_ms": 0,
@@ -3304,7 +3304,7 @@
       "max_level": 32
     },
     "14299": {
-      "name": "Immolation Trap Effect",
+      "name": "Immolation Trap",
       "rank": 3,
       "school_mask": 4,
       "cast_time_ms": 0,
@@ -3340,7 +3340,7 @@
       "max_level": 42
     },
     "14300": {
-      "name": "Immolation Trap Effect",
+      "name": "Immolation Trap",
       "rank": 4,
       "school_mask": 4,
       "cast_time_ms": 0,
@@ -3376,7 +3376,7 @@
       "max_level": 52
     },
     "14301": {
-      "name": "Immolation Trap Effect",
+      "name": "Immolation Trap",
       "rank": 5,
       "school_mask": 4,
       "cast_time_ms": 0,
@@ -3556,7 +3556,7 @@
       "max_level": 62
     },
     "14308": {
-      "name": "Freezing Trap Effect",
+      "name": "Freezing Trap",
       "rank": 2,
       "school_mask": 16,
       "cast_time_ms": 0,
@@ -3592,7 +3592,7 @@
       "max_level": 0
     },
     "14309": {
-      "name": "Freezing Trap Effect",
+      "name": "Freezing Trap",
       "rank": 3,
       "school_mask": 16,
       "cast_time_ms": 0,
@@ -7890,7 +7890,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 108,
+          "aura": 107,
           "amount": 20,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
@@ -15818,7 +15818,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 34,
+          "aura": 230,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -16342,7 +16342,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 34,
+          "aura": 230,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -28633,7 +28633,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": -65,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -28669,7 +28669,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": -175,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -28705,7 +28705,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": -285,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -28741,7 +28741,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": -395,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -28777,7 +28777,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": -505,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -30661,7 +30661,7 @@
       "gcd_ms": 1500,
       "cooldown_ms": 15000,
       "category_cooldown_ms": 0,
-      "duration_ms": 0,
+      "duration_ms": 10000,
       "cost": 365,
       "cost_type": 0,
       "spell_level": 40,
@@ -30684,6 +30684,19 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 107,
+          "amount": 10,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 5,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -30697,7 +30710,7 @@
       "gcd_ms": 1500,
       "cooldown_ms": 15000,
       "category_cooldown_ms": 0,
-      "duration_ms": 0,
+      "duration_ms": 10000,
       "cost": 365,
       "cost_type": 0,
       "spell_level": 48,
@@ -30720,6 +30733,19 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 107,
+          "amount": 10,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 5,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -30733,7 +30759,7 @@
       "gcd_ms": 1500,
       "cooldown_ms": 15000,
       "category_cooldown_ms": 0,
-      "duration_ms": 0,
+      "duration_ms": 10000,
       "cost": 365,
       "cost_type": 0,
       "spell_level": 58,
@@ -30753,6 +30779,19 @@
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 107,
+          "amount": 10,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 5,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -30821,6 +30860,42 @@
         }
       ],
       "cost_pct": 5.80999994278,
+      "max_level": 0
+    },
+    "1323410": {
+      "name": "Revelation",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 15000,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 0,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 107,
+          "amount": 100,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 7,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
       "max_level": 0
     }
   }

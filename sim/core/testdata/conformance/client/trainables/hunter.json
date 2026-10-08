@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70291",
   "class_slug": "hunter",
   "trainables": [
     {
@@ -804,38 +804,6 @@
           "level": 16
         },
         {
-          "id": 14302,
-          "rank": 2,
-          "level": 26
-        },
-        {
-          "id": 14303,
-          "rank": 3,
-          "level": 36
-        },
-        {
-          "id": 14304,
-          "rank": 4,
-          "level": 46
-        },
-        {
-          "id": 14305,
-          "rank": 5,
-          "level": 56
-        }
-      ]
-    },
-    {
-      "name": "Immolation Trap Effect",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
           "id": 13797,
           "rank": 1,
           "level": 16
@@ -846,7 +814,17 @@
           "level": 26
         },
         {
+          "id": 14302,
+          "rank": 2,
+          "level": 26
+        },
+        {
           "id": 14299,
+          "rank": 3,
+          "level": 36
+        },
+        {
+          "id": 14303,
           "rank": 3,
           "level": 36
         },
@@ -856,7 +834,17 @@
           "level": 46
         },
         {
+          "id": 14304,
+          "rank": 4,
+          "level": 46
+        },
+        {
           "id": 14301,
+          "rank": 5,
+          "level": 56
+        },
+        {
+          "id": 14305,
           "rank": 5,
           "level": 56
         }
@@ -1242,43 +1230,6 @@
           "id": 1310785,
           "rank": 2,
           "level": 48
-        }
-      ]
-    },
-    {
-      "name": "Sonic Blast",
-      "skill_line": "",
-      "source": "class_spell",
-      "active": true,
-      "cost": 80,
-      "cost_type": 2,
-      "cast_time_ms": 0,
-      "cooldown_ms": 30000,
-      "ranks": [
-        {
-          "id": 1264478,
-          "rank": 1,
-          "level": 12
-        },
-        {
-          "id": 1264479,
-          "rank": 2,
-          "level": 24
-        },
-        {
-          "id": 1264480,
-          "rank": 3,
-          "level": 36
-        },
-        {
-          "id": 1264481,
-          "rank": 4,
-          "level": 48
-        },
-        {
-          "id": 1264482,
-          "rank": 5,
-          "level": 60
         }
       ]
     },
