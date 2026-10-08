@@ -10,6 +10,8 @@ func init() {
 			models: map[int32]bonusModel{1301123: roarOfTheCrowd},
 			noSim:  map[int32]string{1301126: noSimMovement},
 		},
+		// Spider's Kiss.
+		clientSet{id: 65, models: map[int32]bonusModel{17332: armorShredOnMeleeHit}},
 		// The Postmaster.
 		clientSet{
 			id: 81,

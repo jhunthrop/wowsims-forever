@@ -13,7 +13,7 @@ Every Phase 1 client set (sim/core/client_sets_gen.go: any piece with a loot sou
 | The Gladiator | 1 | 4 | 1301123 | Roar of the Crowd | hand-written | modelled |  |
 | The Gladiator | 1 | 5 | 1314795 | Increased Critical 1 - All - Gladiator Set | stats | declared, matches |  |
 | Dal'Rend's Arms | 41 | 2 | 14056 | Attack Power 50 | stats | declared, matches |  |
-| Spider's Kiss | 65 | 2 | 17332 | Spider's Kiss | hand-written (legacy) | registered, not verified |  |
+| Spider's Kiss | 65 | 2 | 17332 | Spider's Kiss | hand-written | modelled |  |
 | The Postmaster | 81 | 2 | 1302376 | Run Speed +08% | none | no sim effect | movement, regeneration out of combat, or defence against effects the sim does not produce |
 | The Postmaster | 81 | 3 | 14047 | Increase Spell Dam 23 | stats | declared, matches |  |
 | The Postmaster | 81 | 4 | 1302380 | Return to Sender | none | no sim effect | reflects spells cast at the wearer; a sim boss casts none |

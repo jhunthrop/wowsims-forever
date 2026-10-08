@@ -293,3 +293,43 @@ func TestIronweaveThreePieceAddsSpellPenetration(t *testing.T) {
 		t.Errorf("three pieces add %v spell penetration, want the client's %v", three-two, ironweavePenetration)
 	}
 }
+
+const (
+	spidersKissSet    int32 = 65
+	spidersKissShred  int32 = 17333
+	spidersKissProc         = "Spider's Kiss (melee hit)"
+	modResistanceAura int32 = 22
+	spidersKissPieces       = 2
+)
+
+func TestSpidersKissShredsTheTargetsArmorForTheClientDuration(t *testing.T) {
+	if wear(t, warriorHost, spidersKissSet, spidersKissPieces-1).character.GetAura(spidersKissProc) != nil {
+		t.Fatal("one piece already carries Spider's Kiss")
+	}
+	w := wear(t, warriorHost, spidersKissSet, spidersKissPieces)
+	proc := w.character.GetAura(spidersKissProc)
+	if proc == nil {
+		t.Fatal("two pieces do not carry Spider's Kiss")
+	}
+	row := core.MustClientSpellRow(spidersKissShred)
+	var want float64
+	for _, effect := range row.Effects {
+		if effect.Aura == modResistanceAura {
+			want = effect.Points
+		}
+	}
+	wearerArmor := w.character.GetStat(stats.Armor)
+	armor := w.target().GetStat(stats.Armor)
+	shred := w.target().GetAura(row.Name)
+	fireUntil(t, func() bool { return shred.IsActive() }, func() { w.swing(proc, core.ProcMaskMeleeMHAuto) })
+
+	if got := w.target().GetStat(stats.Armor) - armor; got != want {
+		t.Errorf("target armor changed by %v, want the client's %v", got, want)
+	}
+	if got := w.character.GetStat(stats.Armor); got != wearerArmor {
+		t.Errorf("wearer armor changed to %v from %v: the shred is a debuff on the target", got, wearerArmor)
+	}
+	if got := shred.Duration; got != time.Duration(row.DurationMS)*time.Millisecond {
+		t.Errorf("shred lasts %v, want %dms", got, row.DurationMS)
+	}
+}

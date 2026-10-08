@@ -11,29 +11,6 @@ import (
 //                                 Other
 ///////////////////////////////////////////////////////////////////////////
 
-var ItemSetSpidersKiss = core.NewItemSet(core.ItemSet{
-	Name: "Spider's Kiss",
-	Bonuses: map[int32]core.ApplyEffect{
-		// Chance on Hit: Immobilizes the target and lowers their armor by 100 for 10 sec.
-		// Unsure about exlusive effects with this aura also looks like it might be lowering the characters armor instead of the enemy?
-		2: func(agent core.Agent) {
-			character := agent.GetCharacter()
-			procAura := character.NewTemporaryStatsAura("Spider's Kiss", core.ActionID{SpellID: 17333}, stats.Stats{stats.Armor: -100}, time.Second*10)
-			core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				ActionID:   core.ActionID{SpellID: 17333},
-				Name:       "Spider's Kiss",
-				Callback:   core.CallbackOnSpellHitDealt,
-				Outcome:    core.OutcomeLanded,
-				ProcMask:   core.ProcMaskMelee,
-				ProcChance: 0.05,
-				Handler: func(sim *core.Simulation, _ *core.Spell, result *core.SpellResult) {
-					procAura.Activate(sim)
-				},
-			})
-		},
-	},
-})
-
 var ItemSetDalRendsArms = core.NewItemSet(core.ItemSet{
 	Name: "Dal'Rend's Arms",
 	Bonuses: map[int32]core.ApplyEffect{

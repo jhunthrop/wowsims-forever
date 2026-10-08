@@ -109,6 +109,35 @@ func burstWhenStruck(bonusID int32) core.ApplyEffect {
 	}
 }
 
+// armorShredOnMeleeHit is Spider's Kiss: a chance on a melee hit to lower
+// the target's armor for the trigger spell's duration. The same spell
+// immobilizes the target, which a boss shrugs off.
+func armorShredOnMeleeHit(bonusID int32) core.ApplyEffect {
+	bonus := core.MustClientSpellRow(bonusID)
+	trigger := triggerOf(bonusID)
+	shred := effectOf(trigger.id, trigger.row, func(effect core.ClientEffect) bool {
+		return effect.Aura == clientAuraModResistance && effect.Misc0 == clientSchoolPhysical
+	}).Points
+	rate := rateOf(bonusID, procRate{})
+	return func(agent core.Agent) {
+		character := agent.GetCharacter()
+		shredded := make([]*core.Aura, len(character.Env.Encounter.AllTargetUnits))
+		for i, target := range character.Env.Encounter.AllTargetUnits {
+			shredded[i] = target.GetOrRegisterAura(core.Aura{
+				Label:    trigger.row.Name,
+				ActionID: trigger.actionID(),
+				Duration: trigger.duration(),
+				OnGain:   func(_ *core.Aura, sim *core.Simulation) { target.AddStatDynamic(sim, stats.Armor, shred) },
+				OnExpire: func(_ *core.Aura, sim *core.Simulation) { target.AddStatDynamic(sim, stats.Armor, -shred) },
+			})
+		}
+		core.MakeProcTriggerAura(&character.Unit, onMeleeHit.trigger(bonus.Name, core.ActionID{SpellID: bonusID}, rate,
+			func(sim *core.Simulation, _ *core.Spell, result *core.SpellResult) {
+				shredded[result.Target.Index].Activate(sim)
+			}))
+	}
+}
+
 // roarOfTheCrowd is The Gladiator's chance on hit to gain attack speed.
 // The client makes it twice as likely while no ally is within 20 yards;
 // a sim raid always has allies close, so that factor is not applied.

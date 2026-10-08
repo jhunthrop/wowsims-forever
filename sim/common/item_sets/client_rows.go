@@ -21,9 +21,14 @@ const (
 	clientAuraPeriodicDamage   int32 = 3
 	clientAuraPeriodicEnergize int32 = 24
 	clientAuraSkill            int32 = 30
+	clientAuraModResistance    int32 = 22
 	clientAuraModTargetResist  int32 = 123
 	clientAuraAttackSpeed      int32 = 319
 )
+
+// clientSchoolPhysical is the physical school bit of a resistance aura's
+// Misc0, which is armor.
+const clientSchoolPhysical int32 = 1
 
 // The client's power types, as an energize effect names them in Misc0.
 const (
