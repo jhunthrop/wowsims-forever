@@ -33,30 +33,6 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 11300,
-            "rank": 8
-          }
-        },
-        "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentComboPoints": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "4"
-              }
-            }
-          }
-        }
-      },
-      "notes": "Eviscerate at four or more combo points, whenever its 35 energy is there. Mutilate gives two combo points a cast, so combo points arrive in steps of two; waiting for a fifth wastes one of them and a Mutilate on top."
-    },
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
             "spellId": 6774,
             "rank": 2
           }
@@ -117,70 +93,31 @@
           }
         }
       },
-      "notes": "Slice and Dice when Eviscerate is out of reach on energy: opened when it is down and refreshed under 3 seconds remaining. At 25 energy it is the cheaper finisher, so it picks up the combo points on the beats where there is not yet 35 energy for Eviscerate."
+      "notes": "Slice and Dice ahead of Eviscerate, opened when it is down and refreshed under 3 seconds remaining, at four or more combo points. At 25 energy it is the cheaper finisher; keeping it up is worth more than the Eviscerate it delays by a beat."
     },
     {
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1310703
+            "spellId": 11300,
+            "rank": 8
           }
         },
         "condition": {
-          "and": {
-            "vals": [
-              {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "currentComboPoints": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "4"
-                    }
-                  }
-                }
-              },
-              {
-                "or": {
-                  "vals": [
-                    {
-                      "not": {
-                        "val": {
-                          "auraIsActive": {
-                            "auraId": {
-                              "spellId": 1310703
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "auraRemainingTime": {
-                            "auraId": {
-                              "spellId": 1310703
-                            }
-                          }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "0.5"
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentComboPoints": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "4"
               }
-            ]
+            }
           }
         }
       },
-      "notes": "Venom, this tree's poison finisher, kept up the same way: cast when it has lapsed and Eviscerate is not affordable. It raises poison damage by 30% and poison proc chance by 10 points while it lasts."
+      "notes": "Eviscerate at four or more combo points, whenever its 35 energy is there. Mutilate gives two combo points a cast, so combo points arrive in steps of two; waiting for a fifth wastes one of them and a Mutilate on top."
     },
     {
       "action": {
