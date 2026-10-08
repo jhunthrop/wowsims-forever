@@ -218,3 +218,39 @@ func containsAll(s string, substrs ...string) bool {
 	}
 	return true
 }
+
+func TestVerdictFor_UnsimulatedDurationIsNamedNotMismatched(t *testing.T) {
+	row := Row{
+		ClientDurationMS:     2000,
+		HasDuration:          true,
+		DurationNotSimulated: unsimulatedDurationReason("shaman", "Earth Shock"),
+	}
+	if row.DurationNotSimulated == "" {
+		t.Fatal("Earth Shock's lock-out duration should be a named unsimulated effect")
+	}
+	verdict, diff := verdictFor(row)
+	if verdict != VerdictDurationNotSimulated || !containsAll(diff, "2000", "lock-out") {
+		t.Fatalf("verdictFor = (%q, %q), want the %q verdict naming the lock-out", verdict, diff, VerdictDurationNotSimulated)
+	}
+
+	row.ClientGCDMS = 1500
+	if verdict, _ := verdictFor(row); verdict != "mismatch" {
+		t.Fatalf("a row whose GCD also differs must stay a mismatch, got %q", verdict)
+	}
+}
+
+// TestShamanGoldenHasNoMismatchRows holds the shaman at zero real
+// mismatches in both tables: a row that differs from the client must be
+// fixed in the engine or named as an unsimulated effect in
+// unsimulated.go, never left unexplained.
+func TestShamanGoldenHasNoMismatchRows(t *testing.T) {
+	golden, err := readGolden("shaman")
+	if err != nil {
+		t.Fatalf("reading the shaman golden: %v", err)
+	}
+	for _, line := range strings.Split(golden, "\n") {
+		if strings.Contains(line, "| mismatch |") {
+			t.Errorf("shaman golden carries a mismatch row: %s", line)
+		}
+	}
+}

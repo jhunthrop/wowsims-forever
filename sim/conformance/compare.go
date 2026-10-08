@@ -65,6 +65,9 @@ type Row struct {
 	// one of the report-side readings in duration_reading.go instead of
 	// being compared as numbers; it holds the reading's explanation.
 	DurationReading string
+	// DurationNotSimulated is why the client's duration has no engine
+	// aura by design (unsimulated.go), or empty when it should have one.
+	DurationNotSimulated string
 
 	// Damage is the base-damage comparison (damage.go). It is reported in
 	// its own columns and does not move Verdict.
@@ -237,6 +240,9 @@ func rowFor(clientClass spellconst.Class, spec Preset, level int32, character *c
 	if row.ClientDurationMS > 0 {
 		row.HasDuration = true
 	}
+	if !row.EngineDurationFound {
+		row.DurationNotSimulated = unsimulatedDurationReason(spec.ClientClassSlug, clientSpell.Name)
+	}
 
 	row.DurationReading = durationReading(row, clientSpell, spell, siblingSpellIDs(clientClass, clientSpell.Name))
 
@@ -301,8 +307,10 @@ func engineDuration(spell *core.Spell, character *core.Character, siblingIDs map
 	if spell.RelatedSelfBuff != nil {
 		return auraDurationMS(spell.RelatedSelfBuff), true
 	}
-	if spell.Dots() != nil && spell.Unit != nil && spell.Unit.CurrentTarget != nil {
-		if dot := spell.Dot(spell.Unit.CurrentTarget); dot != nil && dot.Aura != nil {
+	// Any target's dot carries the same duration; the caster's current
+	// target is not always an enemy (a healer's is a friend).
+	for _, dot := range spell.Dots() {
+		if dot != nil && dot.Aura != nil {
 			return auraDurationMS(dot.Aura), true
 		}
 	}
@@ -424,6 +432,10 @@ func verdictFor(row Row) (verdict string, diff string) {
 	}
 
 	otherFieldsMatch := costMatches && costTypeMatches && cooldownMatches && castMatches && gcdMatches && levelMatches
+
+	if otherFieldsMatch && !durationMatches && row.DurationNotSimulated != "" {
+		return VerdictDurationNotSimulated, fmt.Sprintf("duration_ms %d: %s", row.ClientDurationMS, row.DurationNotSimulated)
+	}
 
 	switch {
 	case otherFieldsMatch && row.DurationReading != "":

@@ -96,6 +96,9 @@ func (shaman *Shaman) registerWaterShieldSpell() {
 		RelatedSelfBuff: waterShieldAura,
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{GCD: core.GCDDefault},
+			// The client's 15s category recovery also holds the cast
+			// itself; it runs on its own timer, apart from the proc ICD.
+			CD: core.Cooldown{Timer: shaman.NewTimer(), Duration: waterShieldICD},
 		},
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 			if shaman.ActiveShieldAura != nil {
