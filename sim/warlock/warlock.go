@@ -59,7 +59,6 @@ type Warlock struct {
 
 	Conflagrate []*core.Spell
 	Corruption  []*core.Spell
-	DarkPact    *core.Spell
 	DrainSoul   []*core.Spell
 	Immolate    []*core.Spell
 	Incinerate  []*core.Spell
@@ -144,7 +143,6 @@ func (warlock *Warlock) Initialize() {
 	warlock.registerDrainSoulSpell()
 	warlock.registerConflagrateSpell()
 	warlock.registerSiphonLifeSpell()
-	warlock.registerDarkPactSpell()
 	warlock.registerSearingPainSpell()
 	// warlock.registerInfernoSpell()
 	// warlock.registerBlackBook()

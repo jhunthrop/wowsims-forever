@@ -712,6 +712,11 @@ func (warlock *Warlock) applyImprovedShadowBolt() {
 	}))
 }
 
+// cataclysmCostReductionPercent is the live tree's text by rank: "Reduces
+// the Mana cost of your Destruction spells by 3% / 6% / 10%". The third
+// rank is 10, not 9, so it is not a per-rank step.
+var cataclysmCostReductionPercent = [4]int32{0, 3, 6, 10}
+
 func (warlock *Warlock) applyCataclysm() {
 	if warlock.Talents.Cataclysm == 0 {
 		return
@@ -719,7 +724,7 @@ func (warlock *Warlock) applyCataclysm() {
 
 	warlock.OnSpellRegistered(func(spell *core.Spell) {
 		if spell.Flags.Matches(WarlockFlagDestruction) && spell.Cost != nil {
-			spell.Cost.Multiplier -= warlock.Talents.Cataclysm
+			spell.Cost.Multiplier -= cataclysmCostReductionPercent[warlock.Talents.Cataclysm]
 		}
 	})
 }
