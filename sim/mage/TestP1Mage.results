@@ -147,6 +147,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestP1Mage-Phase1-AllItems-ManaflareRegalia"
+ value: {
+  dps: 518.53848
+  tps: 477.90684
+ }
+}
+dps_results: {
  key: "TestP1Mage-Phase1-AllItems-NetherwindRegalia"
  value: {
   dps: 634.65724

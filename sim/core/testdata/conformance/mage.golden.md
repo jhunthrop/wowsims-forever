@@ -47,6 +47,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 30 | Arcane Missiles | 3 | 5145 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 5000→5000 | match |  | n/a | n/a | n/a |
 | Mage | 30 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 30 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→8000 | match |  | n/a | n/a | n/a |
+| Mage | 30 | Cone of Cold | 1 | 120 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 26→26 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 95.34-105.06→95.34-105.06 | 0.129→0.129 | declared, matches |
 | Mage | 30 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→24 | 10000→0 | mismatch | duration_ms 10000->0 (no aura registered) | n/a | n/a | n/a |
 | Mage | 30 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 30 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | 26.57-35.43→26.57-35.43 | 0.429→0.429 | declared, matches |
@@ -81,6 +82,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 38 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 38 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 38 | Blizzard | 3 | 8427 | 720.00→720.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 8000→8000 | match |  | n/a | n/a | n/a |
+| Mage | 38 | Cone of Cold | 1 | 120 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 26→26 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 96.10-105.90→96.10-105.90 | 0.129→0.129 | declared, matches |
+| Mage | 38 | Cone of Cold | 2 | 8492 | 290.00→290.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 34→34 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 141.23-154.77→141.23-154.77 | 0.129→0.129 | declared, matches |
 | Mage | 38 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→24 | 10000→0 | mismatch | duration_ms 10000->0 (no aura registered) | n/a | n/a | n/a |
 | Mage | 38 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 38 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | 26.57-35.43→26.57-35.43 | 0.429→0.429 | declared, matches |
@@ -122,6 +125,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 40 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 40 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 40 | Blizzard | 3 | 8427 | 720.00→720.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 8000→8000 | match |  | n/a | n/a | n/a |
+| Mage | 40 | Cone of Cold | 1 | 120 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 26→26 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 96.10-105.90→96.10-105.90 | 0.129→0.129 | declared, matches |
+| Mage | 40 | Cone of Cold | 2 | 8492 | 290.00→290.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 34→34 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 142.18-155.82→142.18-155.82 | 0.129→0.129 | declared, matches |
 | Mage | 40 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→24 | 10000→0 | mismatch | duration_ms 10000->0 (no aura registered) | n/a | n/a | n/a |
 | Mage | 40 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 40 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | 26.57-35.43→26.57-35.43 | 0.429→0.429 | declared, matches |
@@ -170,6 +175,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 50 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 50 | Blizzard | 3 | 8427 | 720.00→720.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 50 | Blizzard | 4 | 10185 | 935.00→935.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 44→44 | 8000→8000 | match |  | n/a | n/a | n/a |
+| Mage | 50 | Cone of Cold | 1 | 120 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 26→26 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 96.10-105.90→96.10-105.90 | 0.129→0.129 | declared, matches |
+| Mage | 50 | Cone of Cold | 2 | 8492 | 290.00→290.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 34→34 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 142.18-155.82→142.18-155.82 | 0.129→0.129 | declared, matches |
+| Mage | 50 | Cone of Cold | 3 | 10159 | 380.00→380.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 42→42 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 200.14-219.86→200.14-219.86 | 0.129→0.129 | declared, matches |
+| Mage | 50 | Cone of Cold | 4 | 10160 | 465.00→465.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→50 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 254.47-279.53→254.47-279.53 | 0.129→0.129 | declared, matches |
 | Mage | 50 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→24 | 10000→0 | mismatch | duration_ms 10000->0 (no aura registered) | n/a | n/a | n/a |
 | Mage | 50 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 50 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | 26.57-35.43→26.57-35.43 | 0.429→0.429 | declared, matches |
@@ -231,6 +240,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 60 | Blizzard | 4 | 10185 | 935.00→935.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 44→44 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 60 | Blizzard | 5 | 10186 | 1160.00→1160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 60 | Blizzard | 6 | 10187 | 1400.00→1400.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 8000→8000 | match |  | n/a | n/a | n/a |
+| Mage | 60 | Cone of Cold | 1 | 120 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 26→26 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 96.10-105.90→96.10-105.90 | 0.129→0.129 | declared, matches |
+| Mage | 60 | Cone of Cold | 2 | 8492 | 290.00→290.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 34→34 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 142.18-155.82→142.18-155.82 | 0.129→0.129 | declared, matches |
+| Mage | 60 | Cone of Cold | 3 | 10159 | 380.00→380.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 42→42 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 200.14-219.86→200.14-219.86 | 0.129→0.129 | declared, matches |
+| Mage | 60 | Cone of Cold | 4 | 10160 | 465.00→465.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→50 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 260.66-286.34→260.66-286.34 | 0.129→0.129 | declared, matches |
+| Mage | 60 | Cone of Cold | 5 | 10161 | 555.00→555.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 58→58 | 6000→0 | mismatch | duration_ms 6000->0 (no aura registered) | 328.30-357.70→328.30-357.70 | 0.129→0.129 | declared, matches |
 | Mage | 60 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→24 | 10000→0 | mismatch | duration_ms 10000->0 (no aura registered) | n/a | n/a | n/a |
 | Mage | 60 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 60 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | 26.57-35.43→26.57-35.43 | 0.429→0.429 | declared, matches |
@@ -400,7 +414,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | Mage (Pyroblast talent) | 60 | Pyroblast | 8 | 18809 | 440.00→440.00 | mana→mana | 0→0 | 6000→6000 | 1500→1500 | 60→60 | 12000→12000 | match |  | 519.84-646.16→519.84-646.16 | 1.000→1.000 | declared, matches |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 37 of the class's 58 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 36 of the class's 58 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
@@ -422,7 +436,6 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Teleport: Stormwind (3561) | 20→20 | 1 | Arcane | skill_line_ability | 120 mana | 10000 | 0 | power cost, cast time |
 | Teleport: Undercity (3563) | 20→20 | 1 | Arcane | skill_line_ability | 120 mana | 10000 | 0 | power cost, cast time |
 | Frost Ward (6143) | 22→60 | 10 | Frost | skill_line_ability | 320 mana | 0 | 30000 | power cost, cooldown |
-| Cone of Cold (120) | 26→58 | 5 | Frost | skill_line_ability | 555 mana | 0 | 10000 | power cost, cooldown |
 | Conjure Mana Agate (759) | 28→28 | 1 | Arcane | skill_line_ability | 530 mana | 3000 | 0 | power cost, cast time |
 | Ice Armor (7302) | 30→60 | 4 | Frost | skill_line_ability | 500 mana | 0 | 0 | power cost |
 | Teleport: Darnassus (3565) | 30→30 | 1 | Arcane | skill_line_ability | 120 mana | 10000 | 0 | power cost, cast time |

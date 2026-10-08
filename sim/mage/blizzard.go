@@ -64,7 +64,7 @@ func (mage *Mage) newBlizzardSpellConfig(rank int) core.SpellConfig {
 			Flags:    SpellFlagMage | core.SpellFlagNoLogs | SpellFlagChillSpell,
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				auras.Get(target).Activate(sim)
-				mage.rollFingersOfFrost(sim)
+				mage.chillApplied(sim, spell, target)
 			},
 		})
 	}

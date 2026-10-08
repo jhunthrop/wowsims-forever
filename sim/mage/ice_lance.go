@@ -106,16 +106,14 @@ func (mage *Mage) getIceLanceConfig(rank int) core.SpellConfig {
 // that is resolving: it carries Frost Nova's Frozen aura, or the cast
 // spent a Fingers of Frost charge (fingers_of_frost.go).
 //
-// Frostbite's Freeze has no source here: it is a root, and a raid boss
-// is immune to roots the way it is to Frost Nova's (canFreeze).
+// Frostbite's Freeze (chill.go) is the third source: a root a raid boss
+// is immune to, the way it is to Frost Nova's (canFreeze).
 func (mage *Mage) isTargetFrozen(target *core.Unit) bool {
 	return mage.fingersFreezeCast || mage.targetHasFrozenAura(target)
 }
 
 // targetHasFrozenAura is the target-side half of isTargetFrozen.
 func (mage *Mage) targetHasFrozenAura(target *core.Unit) bool {
-	if mage.FrozenAuras == nil {
-		return false
-	}
-	return mage.FrozenAuras.Get(target).IsActive()
+	return (mage.FrozenAuras != nil && mage.FrozenAuras.Get(target).IsActive()) ||
+		(mage.FrostbiteFrozenAuras != nil && mage.FrostbiteFrozenAuras.Get(target).IsActive())
 }

@@ -128,6 +128,8 @@ func (mage *Mage) applyFrostTalents() {
 	// that never spent the point must not have the spell, or its
 	// .results golden moves for a spell it cannot cast.
 	mage.applyFingersOfFrost()
+	mage.applyFrostbite()
+	mage.applyChillTriggers()
 	mage.applyFrozenStateToCasts()
 	mage.registerIceLanceSpell()
 	mage.registerColdSnapSpell()
@@ -149,9 +151,7 @@ func (mage *Mage) applyFrostTalents() {
 
 	// Fingers of Frost and Shatter wrap the casts that register after
 	// this point (fingers_of_frost.go), so they come before Ice Lance.
-	// Frostbite's Freeze is a root a raid boss is immune to; it has no
-	// source here.
-	_ = mage.Talents.Frostbite
+	// Frostbite's Freeze (chill.go) is a root a raid boss is immune to.
 }
 
 func (mage *Mage) applyArcaneConcentration() {
@@ -390,6 +390,18 @@ func (mage *Mage) applyMasterOfElements() {
 // ("Combustion 3 charges"), where the earlier client tables said 4.
 const combustionCriticalStrikes = 3
 
+// addManaflareFrostfireCrit shifts Frostfire Bolt's crit rating by delta
+// when the Manaflare Regalia 5-piece is worn: its bonus lasts as long as
+// Combustion does.
+func (mage *Mage) addManaflareFrostfireCrit(frostfireBolts []*core.Spell, delta float64) {
+	if !mage.manaflareFrostfire {
+		return
+	}
+	for _, spell := range frostfireBolts {
+		spell.BonusCritRating += delta
+	}
+}
+
 func (mage *Mage) registerCombustionCD() {
 	if !mage.Talents.Combustion {
 		return
@@ -401,10 +413,13 @@ func (mage *Mage) registerCombustionCD() {
 		Duration: time.Minute * 3,
 	}
 
-	var fireSpells []*core.Spell
+	var fireSpells, frostfireBolts []*core.Spell
 	mage.OnSpellRegistered(func(spell *core.Spell) {
 		if spell.SpellSchool.Matches(core.SpellSchoolFire) && spell.Flags.Matches(SpellFlagMage) {
 			fireSpells = append(fireSpells, spell)
+		}
+		if spell.SpellCode == SpellCode_MageFrostfireBolt {
+			frostfireBolts = append(frostfireBolts, spell)
 		}
 	})
 
@@ -418,8 +433,10 @@ func (mage *Mage) registerCombustionCD() {
 		MaxStacks: 20,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			numCrits = 0
+			mage.addManaflareFrostfireCrit(frostfireBolts, manaflareFrostfireCombustionCritPoints*core.CritRatingPerCritChance)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+			mage.addManaflareFrostfireCrit(frostfireBolts, -manaflareFrostfireCombustionCritPoints*core.CritRatingPerCritChance)
 			cd.Use(sim)
 			mage.UpdateMajorCooldowns()
 		},
