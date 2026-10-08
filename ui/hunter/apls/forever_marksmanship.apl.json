@@ -130,59 +130,6 @@
       }
     },
     {
-      "notes": "Serpent Sting kept up whenever it is about to fall off and neither shot above is close to ready.",
-      "action": {
-        "condition": {
-          "and": {
-            "vals": [
-              {
-                "cmp": {
-                  "op": "OpLt",
-                  "lhs": {
-                    "dotRemainingTime": {
-                      "spellId": {
-                        "spellId": 13555,
-                        "rank": 8
-                      }
-                    }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "5s"
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "spellTimeToReady": {
-                      "spellId": {
-                        "spellId": 20904,
-                        "rank": 6
-                      }
-                    }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "0.5"
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 13555,
-            "rank": 8
-          }
-        }
-      }
-    },
-    {
       "notes": "Multi-Shot as the filler between Aimed Shots.",
       "action": {
         "condition": {
