@@ -882,15 +882,24 @@ var DemoralizingShoutLevel = [DemoralizingShoutRanks + 1]int{0, 14, 24, 34, 44, 
 
 func DemoralizingShoutAura(target *Unit, boomingVoicePts int32, impDemoShoutPts int32) *Aura {
 	rank := int32(5)
-	spellId := DemoralizingShoutSpellId[rank]
-	baseAPReduction := DemoralizingShoutBaseAP[rank]
+	return DemoralizingShoutAuraFor(target,
+		"DemoralizingShout-"+strconv.Itoa(int(impDemoShoutPts)),
+		DemoralizingShoutSpellId[rank],
+		math.Floor(DemoralizingShoutBaseAP[rank]*(1+0.08*float64(impDemoShoutPts))),
+		time.Duration(float64(time.Second*30)*(1+0.1*float64(boomingVoicePts))))
+}
 
+// DemoralizingShoutAuraFor is the attack power reduction a Demoralizing
+// Shout puts on a target, for an explicit label, spell id, reduction and
+// duration, so a caster that knows the client's own rank numbers (the
+// warrior spec) is not tied to rank 5's vanilla ones above.
+func DemoralizingShoutAuraFor(target *Unit, label string, spellID int32, apReduction float64, duration time.Duration) *Aura {
 	aura := target.GetOrRegisterAura(Aura{
-		Label:    "DemoralizingShout-" + strconv.Itoa(int(impDemoShoutPts)),
-		ActionID: ActionID{SpellID: spellId},
-		Duration: time.Duration(float64(time.Second*30) * (1 + 0.1*float64(boomingVoicePts))),
+		Label:    label,
+		ActionID: ActionID{SpellID: spellID},
+		Duration: duration,
 	})
-	apReductionEffect(aura, math.Floor(baseAPReduction*(1+0.08*float64(impDemoShoutPts))))
+	apReductionEffect(aura, apReduction)
 	return aura
 }
 

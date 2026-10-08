@@ -60,7 +60,7 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 10.75249
+  weights: 15.27731
   weights: 5.77447
   weights: 0
   weights: 0
@@ -192,21 +192,21 @@ dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Human-phase_1-DPS-dps_reck-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
   dps: 77.24103
-  tps: 205.52093
+  tps: 204.47226
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Human-phase_1-DPS-dps_reck-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
   dps: 32.17158
-  tps: 42.17818
+  tps: 41.00484
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Human-phase_1-DPS-dps_reck-NoBuffs-P1-Consumes-ShortSingleTarget"
  value: {
   dps: 75.41279
-  tps: 88.14107
+  tps: 86.52774
  }
 }
 dps_results: {
@@ -276,21 +276,21 @@ dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Orc-phase_1-DPS-dps_reck-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
   dps: 82.15359
-  tps: 210.07209
+  tps: 209.03075
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Orc-phase_1-DPS-dps_reck-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
   dps: 33.59861
-  tps: 43.40252
+  tps: 42.22918
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Orc-phase_1-DPS-dps_reck-NoBuffs-P1-Consumes-ShortSingleTarget"
  value: {
   dps: 77.80721
-  tps: 90.22196
+  tps: 88.60863
  }
 }
 dps_results: {

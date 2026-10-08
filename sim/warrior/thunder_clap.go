@@ -1,32 +1,58 @@
 package warrior
 
 import (
+	"strconv"
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
 )
 
+// Thunder Clap is the CLASSIC-id family the trainer teaches: the client's
+// SkillLineAbility rows carry 6343, 8198, 8204, 8205, 11580 and 11581 and
+// none of the 4618xx ids the generator's higher-id tie-break keeps (the
+// generated ThunderClapSpellId, which sim/conformance and the damage
+// tests still read). Those 4618xx rows are a Season of Discovery
+// reissue - 4 s cooldown, 10% slow - while the learnable family has the
+// 6 s cooldown and the 20% slow the Forever Deep Dive describes ("rank 4
+// slows attacks 20% for 22 s", research/06-since-announcement.md); the
+// damage and the 200 rage cost are identical in both families, so
+// ThunderClapDamage and ThunderClapManaCost are read for either.
+var thunderClapRankSpellID = [ThunderClapRanks + 1]int32{0, 6343, 8198, 8204, 8205, 11580, 11581}
+
+// thunderClapRankDuration is the client's duration_ms for each rank of the
+// learnable family (10, 14, 18, 22, 26 and 30 seconds).
+var thunderClapRankDuration = [ThunderClapRanks + 1]time.Duration{
+	0, 10 * time.Second, 14 * time.Second, 18 * time.Second, 22 * time.Second, 26 * time.Second, 30 * time.Second,
+}
+
+const (
+	// thunderClapCooldown and thunderClapAttackSpeedSlowPercent are the
+	// learnable family's category cooldown (6000 ms) and aura 319 amount
+	// (-20).
+	thunderClapCooldown               = 6 * time.Second
+	thunderClapAttackSpeedSlowPercent = 20
+	conquerorsBattlegear5pcSlowDamage = 1.5
+)
+
 func (warrior *Warrior) registerThunderClapSpell() {
-	rank := rankAtLevel(ThunderClapLevel[:], warrior.Level)
-	// Every rank of Thunder Clap has both a legacy id and a Forever
-	// reissue sharing the same rank label and spell_level; the generator
-	// keeps the reissue (ThunderClapSpellId) on the higher-id tiebreak.
-	// This file used to hardcode the level-58 legacy id (11581) for
-	// EVERY rank, which (a) mislabeled every rank below 6 and (b)
-	// compared this spell's numbers against the legacy row's stale
-	// 6000ms cooldown and -20% slow instead of the reissue's live 4000ms
-	// / -10% that ThunderClapCooldownMS and attackSpeedReduction below
-	// already use - a convention-vs-literal bug, not a talent
-	// double-count.
-	spellID := ThunderClapSpellId[rank]
+	rank := max(1, rankAtLevel(ThunderClapLevel[:], warrior.Level))
+	spellID := thunderClapRankSpellID[rank]
 	damage := ThunderClapDamage[rank]
 	casterLevel := int(warrior.Level)
+	// Conqueror's Battlegear 5-piece: "Increase the Slow effect and damage
+	// of Thunder Clap by 50%".
 	has5pcConq := warrior.HasSetBonus(ItemSetConquerorsBattleGear, 5)
-	attackSpeedReduction := core.TernaryInt32(has5pcConq, 15, 10)
-	stanceMask := BattleStance
+	attackSpeedReduction := int32(thunderClapAttackSpeedSlowPercent)
+	if has5pcConq {
+		attackSpeedReduction = int32(thunderClapAttackSpeedSlowPercent * conquerorsBattlegear5pcSlowDamage)
+	}
+	// Forever lets a Defensive Stance warrior clap ("Thunder Clap works in
+	// Battle or Defensive Stance", research/06-since-announcement.md,
+	// single-source).
+	stanceMask := BattleStance | DefensiveStance
 
 	warrior.ThunderClapAuras = warrior.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-		return core.ThunderClapAura(target, spellID, attackSpeedReduction)
+		return thunderClapAura(target, spellID, attackSpeedReduction, thunderClapRankDuration[rank])
 	})
 
 	// Pool-sized ceiling, live-bounded loop; see registerWhirlwindSpell.
@@ -37,16 +63,10 @@ func (warrior *Warrior) registerThunderClapSpell() {
 			GCD: core.GCDDefault,
 		},
 		IgnoreHaste: true,
-	}
-	// Rank 0 (level 1, ThunderClapLevel[0]=1 but ThunderClapCooldownMS[0]
-	// is still 0) carries a zero cooldown; guard as slam.go does, since
-	// Thunder Clap is unconditionally registered (no talent gate) and so
-	// is the one spell in this file every level-1 warrior actually hits.
-	if cooldownMS := ThunderClapCooldownMS[rank]; cooldownMS > 0 {
-		castConfig.CD = core.Cooldown{
+		CD: core.Cooldown{
 			Timer:    warrior.NewTimer(),
-			Duration: time.Duration(cooldownMS) * time.Millisecond,
-		}
+			Duration: thunderClapCooldown,
+		},
 	}
 
 	warrior.ThunderClap = warrior.RegisterSpell(stanceMask, core.SpellConfig{
@@ -68,7 +88,7 @@ func (warrior *Warrior) registerThunderClapSpell() {
 
 		CritDamageBonus: warrior.impale(),
 
-		DamageMultiplier: core.TernaryFloat64(has5pcConq, 1.5, 1),
+		DamageMultiplier: core.TernaryFloat64(has5pcConq, conquerorsBattlegear5pcSlowDamage, 1),
 		ThreatMultiplier: 2.5,
 		ClientBaseDamage: damage.Range(casterLevel),
 
@@ -87,6 +107,20 @@ func (warrior *Warrior) registerThunderClapSpell() {
 			}
 		},
 
-		RelatedAuras: []core.AuraArray{warrior.ThunderClapAuras},
+		RelatedAuras:    []core.AuraArray{warrior.ThunderClapAuras},
+		RelatedSelfBuff: warrior.ThunderClapAuras.Get(warrior.CurrentTarget),
 	})
+}
+
+// thunderClapAura is the slow Thunder Clap puts on a target: the shared
+// attack-speed-reduction effect for the rank's own duration. core's
+// ThunderClapAura is the raid-debuff one with a fixed 30 s.
+func thunderClapAura(target *core.Unit, spellID int32, slowPercent int32, duration time.Duration) *core.Aura {
+	aura := target.GetOrRegisterAura(core.Aura{
+		Label:    "ThunderClap-" + strconv.Itoa(int(slowPercent)),
+		ActionID: core.ActionID{SpellID: spellID},
+		Duration: duration,
+	})
+	core.AtkSpeedReductionEffect(aura, 1+0.01*float64(slowPercent))
+	return aura
 }

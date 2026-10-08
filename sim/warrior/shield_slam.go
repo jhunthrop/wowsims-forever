@@ -6,6 +6,21 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// Shield Slam: "causing 421 to 439 damage, increased by your Block Value
+// ... Causes a very high amount of threat" (Protection node 105959, rank 1
+// text). The client's row has ap_coefficient 0, so there is no attack-power
+// term, and "increased by your Block Value" is one times it (the earlier
+// body added twice the block value and 15% of attack power, both
+// SoD-shaped).
+//
+// shieldSlamFlatThreat is UNCONFIRMED: "very high" is a text, not a
+// number, and the client's table carries no threat effect for the spell
+// (Sunder Armor's is the only warrior effect 63). 508 is the figure the
+// fork already used (254 doubled by the 2x flat-threat convention of the
+// other warrior specials); the real value is whatever a Forever combat log
+// shows. Defensive Stance and Defiance multiply it as they do every threat.
+const shieldSlamFlatThreat = 508.0
+
 func (warrior *Warrior) registerShieldSlamSpell() {
 	if !warrior.Talents.ShieldSlam {
 		return
@@ -19,12 +34,6 @@ func (warrior *Warrior) registerShieldSlamSpell() {
 	// amount is what the client states and it carries no die width.
 	damage := ShieldSlamDamage[rank]
 	casterLevel := int(warrior.Level)
-	// No known equation for either, and the client's table carries
-	// neither a threat column nor an attack-power coefficient for this
-	// spell (its ap_coefficient is 0), so both stay typed.
-	threat := 254.0
-	apCoef := 0.15
-
 	castConfig := core.CastConfig{
 		DefaultCast: core.Cast{
 			GCD: core.GCDDefault,
@@ -67,12 +76,12 @@ func (warrior *Warrior) registerShieldSlamSpell() {
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
-		FlatThreatBonus:  threat * 2,
+		FlatThreatBonus:  shieldSlamFlatThreat,
 		BonusCoefficient: 1,
 		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			total := damage.Roll(sim, casterLevel) + warrior.BlockValue()*2 + apCoef*spell.MeleeAttackPower(target)
+			total := damage.Roll(sim, casterLevel) + warrior.BlockValue()
 			result := spell.CalcAndDealDamage(sim, target, total, spell.OutcomeMeleeSpecialHitAndCrit)
 
 			if !result.Landed() {

@@ -21,6 +21,7 @@ var (
 	ExecuteDamage      = generatedDamage(ExecuteBaseDamage[:], ExecutePointsPerLevel[:], ExecuteLevel[:], ExecuteMaxLevel[:])
 	OverpowerDamage    = generatedDamage(OverpowerBaseDamage[:], OverpowerPointsPerLevel[:], OverpowerLevel[:], OverpowerMaxLevel[:])
 	BloodthirstDamage  = generatedDamage(BloodthirstBaseDamage[:], BloodthirstPointsPerLevel[:], BloodthirstLevel[:], BloodthirstMaxLevel[:])
+	RevengeDamage      = generatedDamage(RevengeBaseDamage[:], RevengePointsPerLevel[:], RevengeLevel[:], RevengeMaxLevel[:])
 	ShieldSlamDamage   = generatedDamage(ShieldSlamBaseDamage[:], ShieldSlamPointsPerLevel[:], ShieldSlamLevel[:], ShieldSlamMaxLevel[:])
 )
 
@@ -34,20 +35,6 @@ var MortalStrikeDamage = [MortalStrikeRanks + 1]clientdamage.Effect{
 	{Amount: 110, SpellLevel: 48},
 	{Amount: 135, SpellLevel: 54},
 	{Amount: 160, SpellLevel: 60},
-}
-
-// RevengeDamage is the school-damage roll of spells 6572 through 25288:
-// the centre is the client's amount and the width its Variance, about a
-// fifth of the centre at every rank. The vanilla table (12-14 through
-// 81-99) it replaces was a different spell.
-var RevengeDamage = [RevengeRanks + 1]clientdamage.Effect{
-	{},
-	{Amount: 22, Variance: 0.153846, SpellLevel: 14},
-	{Amount: 34, Variance: 0.2, SpellLevel: 24},
-	{Amount: 48, Variance: 0.214286, SpellLevel: 34},
-	{Amount: 82, Variance: 0.208333, SpellLevel: 44},
-	{Amount: 121, Variance: 0.197183, SpellLevel: 54},
-	{Amount: 153, Variance: 0.2, SpellLevel: 60},
 }
 
 func generatedDamage(rolls [][]float64, perLevel []float64, spellLevels, maxLevels []int) []clientdamage.Effect {

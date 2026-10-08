@@ -91,6 +91,7 @@ var foreverFuryTalentsApplied = []string{
 	"enrage",
 	"flurry",
 	"shield_specialization",
+	"master_of_defense",
 	"death_wish",
 	"sweeping_strikes",
 	"last_stand",

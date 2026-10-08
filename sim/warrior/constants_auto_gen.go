@@ -2,7 +2,7 @@
 //
 // Class: warrior
 // Client build: 1.60.1.70009
-// Source: /Users/jh/code/forever/.worktrees/damage-conformance/data/builds/1.60.1.70009/spellconst/warrior.json
+// Source: /Users/jh/code/forever/.worktrees/tanks/data/builds/1.60.1.70009/spellconst/warrior.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -2651,7 +2651,21 @@ var RetaliationMaxLevel = [RetaliationRanks + 1]int{0}
 
 // Retaliation rank 0: kept id 20230 (spell_level 20); dropped 20240 (spell_level 1), 22858 (spell_level 1)
 
-// skipped: "Revenge" already has a hand-written RevengeRanks elsewhere in this package.
+// Revenge: ranks 0-6 present, from build 1.60.1.70009.
+const RevengeRanks = 6
+
+var RevengeSpellId = [RevengeRanks + 1]int32{28844, 6572, 6574, 7379, 11600, 11601, 25288}
+var RevengeLevel = [RevengeRanks + 1]int{0, 14, 24, 34, 44, 54, 60}
+var RevengeCastTime = [RevengeRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
+var RevengeCooldownMS = [RevengeRanks + 1]int32{0, 5000, 5000, 5000, 5000, 5000, 5000}
+var RevengeManaCost = [RevengeRanks + 1]float64{0, 50, 50, 50, 50, 50, 50}
+var RevengeManaCostPct = [RevengeRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var RevengeSpellCoeff = [RevengeRanks + 1]float64{0.4286, 1, 1, 1, 1, 1, 1}
+var RevengeBaseDamage = [RevengeRanks + 1][]float64{{75, 75}, {20.3077, 23.6923}, {30.6, 37.4}, {42.8571, 53.1429}, {73.4583, 90.5417}, {109.0704, 132.9296}, {137.7, 168.3}}
+var RevengePointsPerLevel = [RevengeRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var RevengeMaxLevel = [RevengeRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
+
+// unconfirmed: Revenge coefficient derived from the vanilla convention (rank 0)
 
 // S03 - Item - Naxxramas - Warrior - Damage 2P Bonus: ranks 0 present, from build 1.60.1.70009.
 const S03ItemNaxxramasWarriorDamage2PBonusRanks = 0

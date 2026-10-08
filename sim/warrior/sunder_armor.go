@@ -4,13 +4,19 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// sunderArmorThreat is each rank's flat threat, the client's effect 63
+// (SPELL_EFFECT_THREAT) amount on spells 7386, 7405, 8380, 11596 and
+// 11597: 34, 75, 117, 158 and 206. The formula the fork used before
+// (2.25 x 2 x the spell's level) gave 261 at rank 5, which is vanilla's
+// figure and not Forever's. Defensive Stance and Defiance multiply it at
+// run time like every other threat.
+var sunderArmorThreat = [SunderArmorRanks + 1]float64{0, 34, 75, 117, 158, 206}
+
 func (warrior *Warrior) registerSunderArmorSpell() {
 	warrior.SunderArmorAuras = warrior.NewEnemyAuraArray(core.SunderArmorAura)
 
 	rank := rankAtLevel(SunderArmorLevel[:], warrior.Level)
 	spellID := SunderArmorSpellId[rank]
-
-	spell_level := SunderArmorLevel[rank]
 
 	var canApplySunder bool
 
@@ -51,7 +57,7 @@ func (warrior *Warrior) registerSunderArmorSpell() {
 		},
 
 		ThreatMultiplier: 1,
-		FlatThreatBonus:  2.25 * 2 * float64(spell_level),
+		FlatThreatBonus:  sunderArmorThreat[rank],
 
 		RelatedAuras: []core.AuraArray{warrior.SunderArmorAuras},
 
