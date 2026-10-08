@@ -131,6 +131,14 @@ var (
 		{SpellID: 20906, Level: 60, Amount: 50, Inferior: true},
 	}
 
+	// Heart of the Lion's area buff (409583): melee and ranged attack power
+	// are 40 base points plus 4 per caster level above the spell's level 1,
+	// capped at the spell's level 60 (276 there). The hunter's own spell
+	// (409580) carries the stat effect only.
+	HeartOfTheLionRanks = BuffRanks{
+		{SpellID: 409583, Level: 1, Amount: 40, PerLevel: 4, MaxLevel: 60},
+	}
+
 	MarkOfTheWildArmorRanks = BuffRanks{
 		{SpellID: 1126, Level: 1, Amount: 34},
 		{SpellID: 5232, Level: 10, Amount: 88},

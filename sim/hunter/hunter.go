@@ -161,6 +161,10 @@ func (hunter *Hunter) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
 	if hunter.Talents.TrueshotAura {
 		raidBuffs.TrueshotAura = true
 	}
+
+	// Heart of the Lion is every hunter's from level 1, so a hunter in the
+	// raid always sends the area buff (see registerHeartOfTheLion).
+	raidBuffs.HeartOfTheLion = true
 }
 
 func (hunter *Hunter) AddPartyBuffs(_ *proto.PartyBuffs) {
