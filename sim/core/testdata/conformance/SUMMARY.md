@@ -542,10 +542,10 @@ Per spec-and-rank row at level 60 whose client spell has a school-damage, period
 | Paladin | 129 | 129 | 0 | 24 | 159 |
 | Warrior | 12 | 12 | 0 | 0 | 38 |
 | Druid | 98 | 98 | 0 | 0 | 35 |
-| Priest | 143 | 143 | 0 | 0 | 22 |
+| Priest | 143 | 143 | 0 | 0 | 34 |
 | Shaman | 185 | 185 | 0 | 20 | 215 |
 | Rogue | 6 | 6 | 0 | 0 | 25 |
-| **Total** | 761 | 761 | 0 | 44 | 608 |
+| **Total** | 761 | 761 | 0 | 44 | 620 |
 
 <!-- damage-summary:end -->
 
@@ -563,9 +563,9 @@ Per class, the active trainables (power cost, cast time or cooldown; pipeline.tr
 | Paladin | 46 | 23 |
 | Warrior | 40 | 11 |
 | Druid | 54 | 21 |
-| Priest | 53 | 33 |
+| Priest | 53 | 31 |
 | Shaman | 54 | 28 |
 | Rogue | 27 | 12 |
-| **Total** | 428 | 219 |
+| **Total** | 428 | 217 |
 
 <!-- trainables-summary:end -->

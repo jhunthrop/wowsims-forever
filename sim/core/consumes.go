@@ -317,6 +317,11 @@ func registerFrostOil(character *Character, isMh bool) {
 // so it gives a healer nothing.
 var nightfinSoupStats = stats.Stats{stats.SpellDamage: 22}
 
+// sagesTeaStats is what Sage's Tea gives in this client: 44 healing for the
+// well-fed quarter hour (item 249870, spell 1249925, aura 227 effect of 44
+// triggering Well Fed 1249927, aura 135).
+var sagesTeaStats = stats.Stats{stats.HealingPower: 44}
+
 func applyFoodConsumes(character *Character, consumes *proto.Consumes) {
 	if consumes.Food != proto.Food_FoodUnknown {
 		switch consumes.Food {
@@ -348,6 +353,8 @@ func applyFoodConsumes(character *Character, consumes *proto.Consumes) {
 			})
 		case proto.Food_FoodNightfinSoup:
 			character.AddStats(nightfinSoupStats)
+		case proto.Food_FoodSagesTea:
+			character.AddStats(sagesTeaStats)
 		case proto.Food_FoodRunnTumTuberSurprise:
 			character.AddStats(stats.Stats{
 				stats.Intellect: 10,
@@ -595,15 +602,30 @@ func applySpellBuffConsumes(character *Character, consumes *proto.Consumes) {
 		}
 	}
 
-	if consumes.ManaRegenElixir != proto.ManaRegenElixir_ManaRegenElixirUnknown {
-		switch consumes.ManaRegenElixir {
-		case proto.ManaRegenElixir_MagebloodPotion:
-			character.AddStats(stats.Stats{
-				stats.MP5: 12,
-			})
-		}
-	}
+	character.AddStats(manaRegenElixirStats[consumes.ManaRegenElixir])
+	character.AddStats(healingPowerBuffStats[consumes.HealingPowerBuff])
+	character.AddStats(spiritElixirStats[consumes.SpiritElixir])
 }
+
+// The healer elixirs, as the client states them. Mageblood Elixir is item
+// 20007 (spell 24363, aura 85 of 12); Greater Mageblood Elixir is item
+// 250341 (spell 1250948, aura 85 of 20). Cleric's Elixir (250332, spell
+// 1250925) and Greater Cleric's Elixir (250333, spell 1250926) are aura 135
+// healing of 30 and 40. Elixir of Sages (250338, spell 1250941) is aura 29
+// spirit of 25 and aura 290 critical strike of 2 percent.
+var (
+	manaRegenElixirStats = map[proto.ManaRegenElixir]stats.Stats{
+		proto.ManaRegenElixir_MagebloodPotion:        {stats.MP5: 12},
+		proto.ManaRegenElixir_GreaterMagebloodElixir: {stats.MP5: 20},
+	}
+	healingPowerBuffStats = map[proto.HealingPowerBuff]stats.Stats{
+		proto.HealingPowerBuff_ClericsElixir:        {stats.HealingPower: 30},
+		proto.HealingPowerBuff_GreaterClericsElixir: {stats.HealingPower: 40},
+	}
+	spiritElixirStats = map[proto.SpiritElixir]stats.Stats{
+		proto.SpiritElixir_ElixirOfSages: {stats.Spirit: 25, stats.Crit: 2 * CritRatingPerCritChance},
+	}
+)
 
 ///////////////////////////////////////////////////////////////////////////
 //                             Zanza-esque Consumes

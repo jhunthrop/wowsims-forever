@@ -10,6 +10,72 @@
       "action": {
         "castSpell": {
           "spellId": {
+            "spellId": 401977
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "0.5"
+              }
+            }
+          }
+        }
+      },
+      "notes": "Shadowfiend returns a share of the whole mana bar over its fifteen seconds, so it waits until the bar has room for all of it, and its long cooldown makes it a once-a-fight cast. The engine does not summon the pet: it returns the client's mana per attack on a stated swing time, which is an assumption (design/reviews/2026-10-08-healer-kit.md)."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1277328,
+            "rank": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentHealthPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Dark Sacrifice trades the healer's own health for mana over fifteen seconds and adds the caster's Spirit to the mana. It waits for room on the mana bar and for a healer who is not hurt, and its ten minute cooldown makes it a once-a-fight cast."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
             "spellId": 1316995,
             "rank": 4
           },

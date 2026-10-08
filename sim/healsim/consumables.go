@@ -42,3 +42,18 @@ func UnusedManaConsumables(player *proto.UnitMetrics) []string {
 	}
 	return unused
 }
+
+// CastsOf is how many times the healer cast the action, summed over its
+// targets and iterations. An item's use effect is told by its item id, a
+// racial by its spell id.
+func CastsOf(player *proto.UnitMetrics, actionID *proto.ActionID) int32 {
+	var casts int32
+	for _, action := range player.Actions {
+		if action.Id.GetItemId() == actionID.GetItemId() && action.Id.GetSpellId() == actionID.GetSpellId() {
+			for _, target := range action.Targets {
+				casts += target.Casts
+			}
+		}
+	}
+	return casts
+}

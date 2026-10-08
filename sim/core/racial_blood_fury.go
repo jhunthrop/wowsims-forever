@@ -81,7 +81,8 @@ func applyBloodFury(character *Character) {
 	})
 
 	character.AddMajorCooldown(MajorCooldown{
-		Spell: spell,
-		Type:  CooldownTypeDPS,
+		Spell:    spell,
+		Type:     CooldownTypeDPS,
+		SelfBuff: true,
 	})
 }

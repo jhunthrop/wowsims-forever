@@ -63,8 +63,21 @@ type MajorCooldown struct {
 	// Number of times this MCD was used so far in the current iteration.
 	numUsages int
 
+	// SelfBuff marks a cooldown that only changes the caster (a racial, a stat
+	// trinket that helps a caster, a haste or mana effect). It needs no
+	// opponent, so a healer whose current target is a friend still uses it.
+	// A cooldown that is neither helpful nor a SelfBuff acts on its target and
+	// waits for an opponent.
+	SelfBuff bool
+
 	// Whether this MCD is currently disabled.
 	disabled bool
+}
+
+// landsOnTarget reports whether the cooldown can be cast with the character's
+// current target. A helpful spell and a self buff do not care who it is.
+func (mcd *MajorCooldown) landsOnTarget(character *Character) bool {
+	return mcd.SelfBuff || mcd.Spell.Flags.Matches(SpellFlagHelpful) || character.IsOpponent(character.CurrentTarget)
 }
 
 func (mcd *MajorCooldown) ReadyAt() time.Duration {
@@ -127,10 +140,10 @@ func (mcd *MajorCooldown) shouldActivateHelper(sim *Simulation, character *Chara
 		return false
 	}
 
-	// A harmful cooldown (a damage use-effect) needs an enemy to land on.
+	// An offensive cooldown (a damage use-effect) needs an enemy to land on.
 	// A healer's current target is a friend, and casting a damage-over-time
 	// at one has no dot to apply.
-	if !mcd.Spell.Flags.Matches(SpellFlagHelpful) && !character.IsOpponent(character.CurrentTarget) {
+	if !mcd.landsOnTarget(character) {
 		return false
 	}
 
@@ -400,10 +413,26 @@ func RegisterTemporaryStatsOnUseCD(character *Character, auraLabel string, tempS
 	spell := character.RegisterSpell(config)
 
 	character.AddMajorCooldown(MajorCooldown{
-		Spell: spell,
-		Type:  cdType,
+		Spell:    spell,
+		Type:     cdType,
+		SelfBuff: !tempStats.DotProduct(casterStats).Equals(stats.Stats{}),
 	})
 }
+
+// casterStats are the stats a spell caster profits from. A stat buff that
+// carries none of them (attack power, armor penetration, ...) is a melee or
+// ranged cooldown and stays out of a healer's rotation.
+var casterStats = func() stats.Stats {
+	var mask stats.Stats
+	for _, stat := range []stats.Stat{
+		stats.Intellect, stats.Spirit, stats.SpellPower, stats.ArcanePower, stats.FirePower,
+		stats.FrostPower, stats.HolyPower, stats.NaturePower, stats.ShadowPower, stats.MP5,
+		stats.SpellHaste, stats.Mana, stats.HealingPower, stats.SpellDamage,
+	} {
+		mask[stat] = 1
+	}
+	return mask
+}()
 
 // Helper function to make an ApplyEffect for a temporary stats on-use cooldown.
 func MakeTemporaryStatsOnUseCDRegistration(auraLabel string, tempStats stats.Stats, duration time.Duration, config SpellConfig, cdFunc func(*Character) Cooldown, sharedCDFunc func(*Character) Cooldown) ApplyEffect {

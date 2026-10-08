@@ -426,6 +426,20 @@ enum HealthElixir {
 enum ManaRegenElixir {
 	ManaRegenElixirUnknown = 0;
 	MagebloodPotion = 1;
+	GreaterMagebloodElixir = 2;
+}
+
+// The healing elixirs: Cleric's Elixir and its greater version.
+enum HealingPowerBuff {
+	HealingPowerBuffUnknown = 0;
+	ClericsElixir = 1;
+	GreaterClericsElixir = 2;
+}
+
+// Elixirs that give spirit alongside another stat.
+enum SpiritElixir {
+	SpiritElixirUnknown = 0;
+	ElixirOfSages = 1;
 }
 
 enum StrengthBuff {
@@ -542,7 +556,7 @@ enum WeaponImbue {
 	WoundPoison = 7;
 }
 
-// NextIndex: 13
+// NextIndex: 14
 enum Food {
 	FoodUnknown = 0;
 	FoodGrilledSquid = 1;
@@ -556,6 +570,7 @@ enum Food {
 	FoodTenderWolfSteak = 9;
 	FoodSmokedSagefish = 10;
 	FoodSagefishDelight = 11;
+	FoodSagesTea = 13;
 }
 
 enum SaygesFortune {
@@ -678,7 +693,7 @@ message IndividualBuffs {
 	bool slipkiks_savvy = 14;
 }
 
-// NextIndex: 34
+// NextIndex: 36
 message Consumes {
 	Flask flask = 1;
 	Food food = 2;
@@ -708,6 +723,8 @@ message Consumes {
 	PetMiscConsumes pet_misc_consumes = 27;
 	SapperExplosive sapper_explosive = 28;
 	HitConsumable hit_consumable = 29;
+	HealingPowerBuff healing_power_buff = 34;
+	SpiritElixir spirit_elixir = 35;
 }
 
 // NextIndex: 26

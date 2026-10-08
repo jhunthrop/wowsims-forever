@@ -21,8 +21,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 10 | Renew | 1 | 139 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 15000→15000 | match |  | 9.00-9.00→9.00-9.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 10 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 10 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
+| HealingPriest | 10 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 10 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | HealingPriest | 10 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.14-33.66→27.14-33.66 | 0.571→0.571 | declared, matches |
+| HealingPriest | 20 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 20 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 20 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 252.98-312.62→252.98-312.62 | 0.429→0.429 | declared, matches |
 | HealingPriest | 20 | Flash Heal | 1 | 2061 | 125.00→125.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 174.15-213.85→174.15-213.85 | 0.429→0.429 | declared, matches |
@@ -44,9 +46,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 20 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 20 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 20 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200→0.200 | declared, matches |
+| HealingPriest | 20 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 20 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | HealingPriest | 20 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.68-34.32→27.68-34.32 | 0.571→0.571 | declared, matches |
 | HealingPriest | 20 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 46.55-53.45→46.55-53.45 | 0.714→0.714 | declared, matches |
+| HealingPriest | 30 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 30 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 30 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 429.84-522.16→429.84-522.16 | 0.429→0.429 | declared, matches |
@@ -82,11 +87,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 30 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 30 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 30 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200→0.200 | declared, matches |
+| HealingPriest | 30 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 30 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.68-34.32→27.68-34.32 | 0.571→0.571 | declared, matches |
 | HealingPriest | 30 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 46.55-53.45→46.55-53.45 | 0.714→0.714 | declared, matches |
 | HealingPriest | 30 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 59.43-68.57→59.43-68.57 | 0.714→0.714 | declared, matches |
 | HealingPriest | 30 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 75.94-86.06→75.94-86.06 | 0.714→0.714 | declared, matches |
+| HealingPriest | 38 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 38 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 38 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 437.97-532.03→437.97-532.03 | 0.429→0.429 | declared, matches |
@@ -133,12 +141,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 38 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 38 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 38 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200→0.200 | declared, matches |
+| HealingPriest | 38 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 38 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.68-34.32→27.68-34.32 | 0.571→0.571 | declared, matches |
 | HealingPriest | 38 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 46.55-53.45→46.55-53.45 | 0.714→0.714 | declared, matches |
 | HealingPriest | 38 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 59.43-68.57→59.43-68.57 | 0.714→0.714 | declared, matches |
 | HealingPriest | 38 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714→0.714 | declared, matches |
 | HealingPriest | 38 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 88.18-99.82→88.18-99.82 | 0.714→0.714 | declared, matches |
+| HealingPriest | 40 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 40 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 40 | Dark Sacrifice | 3 | 1277326 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 40→40 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 40 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 437.97-532.03→437.97-532.03 | 0.429→0.429 | declared, matches |
@@ -190,12 +202,17 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 40 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 40 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 40 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200→0.200 | declared, matches |
+| HealingPriest | 40 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 40 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.68-34.32→27.68-34.32 | 0.571→0.571 | declared, matches |
 | HealingPriest | 40 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 46.55-53.45→46.55-53.45 | 0.714→0.714 | declared, matches |
 | HealingPriest | 40 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 59.43-68.57→59.43-68.57 | 0.714→0.714 | declared, matches |
 | HealingPriest | 40 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714→0.714 | declared, matches |
 | HealingPriest | 40 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 90.24-102.16→90.24-102.16 | 0.714→0.714 | declared, matches |
+| HealingPriest | 50 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 50 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 50 | Dark Sacrifice | 3 | 1277326 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 40→40 | 15000→15000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 50 | Dark Sacrifice | 4 | 1277327 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 50 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 437.97-532.03→437.97-532.03 | 0.429→0.429 | declared, matches |
@@ -264,6 +281,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 50 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 50 | Shadow Word: Pain | 6 | 10892 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 18000→18000 | match |  | 71.00-71.00→71.00-71.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 50 | Shadow Word: Pain | 7 | 10893 | 385.00→385.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 18000→18000 | match |  | 97.00-97.00→97.00-97.00 | 0.200→0.200 | declared, matches |
+| HealingPriest | 50 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 50 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.68-34.32→27.68-34.32 | 0.571→0.571 | declared, matches |
 | HealingPriest | 50 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 46.55-53.45→46.55-53.45 | 0.714→0.714 | declared, matches |
@@ -271,6 +289,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 50 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714→0.714 | declared, matches |
 | HealingPriest | 50 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 93.34-105.66→93.34-105.66 | 0.714→0.714 | declared, matches |
 | HealingPriest | 50 | Smite | 7 | 10933 | 230.00→230.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 46→46 | n/a | match |  | 122.70-138.10→122.70-138.10 | 0.714→0.714 | declared, matches |
+| HealingPriest | 60 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 60 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 60 | Dark Sacrifice | 3 | 1277326 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 40→40 | 15000→15000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 60 | Dark Sacrifice | 4 | 1277327 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 60 | Dark Sacrifice | 5 | 1277328 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 60→60 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 437.97-532.03→437.97-532.03 | 0.429→0.429 | declared, matches |
@@ -357,6 +380,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 60 | Shadow Word: Pain | 6 | 10892 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 18000→18000 | match |  | 71.00-71.00→71.00-71.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 60 | Shadow Word: Pain | 7 | 10893 | 385.00→385.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 18000→18000 | match |  | 97.00-97.00→97.00-97.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 60 | Shadow Word: Pain | 8 | 10894 | 470.00→470.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 18000→18000 | match |  | 127.00-127.00→127.00-127.00 | 0.200→0.200 | declared, matches |
+| HealingPriest | 60 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.68-34.32→27.68-34.32 | 0.571→0.571 | declared, matches |
 | HealingPriest | 60 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 46.55-53.45→46.55-53.45 | 0.714→0.714 | declared, matches |
@@ -368,8 +392,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 10 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 37.10-40.90→37.10-40.90 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 10 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 10 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
+| ShadowPriest | 10 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 10 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 10 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.14-33.66→27.14-33.66 | 0.571→0.571 | declared, matches |
+| ShadowPriest | 20 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 20 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 20 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 51.41-64.59→51.41-64.59 | 0.750→0.750 | declared, matches |
 | ShadowPriest | 20 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.429 | declared, matches |
@@ -377,9 +403,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 20 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 20 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 20 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200→0.200 | declared, matches |
+| ShadowPriest | 20 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 20 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 20 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.68-34.32→27.68-34.32 | 0.571→0.571 | declared, matches |
 | ShadowPriest | 20 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 46.55-53.45→46.55-53.45 | 0.714→0.714 | declared, matches |
+| ShadowPriest | 30 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
+| ShadowPriest | 30 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 30 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 30 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 30 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 56.02-70.38→56.02-70.38 | 0.750→0.750 | declared, matches |
@@ -393,11 +422,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 30 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 30 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 30 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200→0.200 | declared, matches |
+| ShadowPriest | 30 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 30 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 30 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.68-34.32→27.68-34.32 | 0.571→0.571 | declared, matches |
 | ShadowPriest | 30 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 46.55-53.45→46.55-53.45 | 0.714→0.714 | declared, matches |
 | ShadowPriest | 30 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 59.43-68.57→59.43-68.57 | 0.714→0.714 | declared, matches |
 | ShadowPriest | 30 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 75.94-86.06→75.94-86.06 | 0.714→0.714 | declared, matches |
+| ShadowPriest | 38 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
+| ShadowPriest | 38 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 38 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 38 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 38 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  | n/a | n/a | n/a |
@@ -416,12 +448,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 38 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 38 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 38 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200→0.200 | declared, matches |
+| ShadowPriest | 38 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 38 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 38 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.68-34.32→27.68-34.32 | 0.571→0.571 | declared, matches |
 | ShadowPriest | 38 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 46.55-53.45→46.55-53.45 | 0.714→0.714 | declared, matches |
 | ShadowPriest | 38 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 59.43-68.57→59.43-68.57 | 0.714→0.714 | declared, matches |
 | ShadowPriest | 38 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714→0.714 | declared, matches |
 | ShadowPriest | 38 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 88.18-99.82→88.18-99.82 | 0.714→0.714 | declared, matches |
+| ShadowPriest | 40 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
+| ShadowPriest | 40 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
+| ShadowPriest | 40 | Dark Sacrifice | 3 | 1277326 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 40→40 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 40 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 40 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 40 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  | n/a | n/a | n/a |
@@ -442,12 +478,17 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 40 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 40 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 40 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200→0.200 | declared, matches |
+| ShadowPriest | 40 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 40 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 40 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.68-34.32→27.68-34.32 | 0.571→0.571 | declared, matches |
 | ShadowPriest | 40 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 46.55-53.45→46.55-53.45 | 0.714→0.714 | declared, matches |
 | ShadowPriest | 40 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 59.43-68.57→59.43-68.57 | 0.714→0.714 | declared, matches |
 | ShadowPriest | 40 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714→0.714 | declared, matches |
 | ShadowPriest | 40 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 90.24-102.16→90.24-102.16 | 0.714→0.714 | declared, matches |
+| ShadowPriest | 50 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
+| ShadowPriest | 50 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
+| ShadowPriest | 50 | Dark Sacrifice | 3 | 1277326 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 40→40 | 15000→15000 | match |  | n/a | n/a | n/a |
+| ShadowPriest | 50 | Dark Sacrifice | 4 | 1277327 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 50 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 50 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 50 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  | n/a | n/a | n/a |
@@ -475,6 +516,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 50 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 50 | Shadow Word: Pain | 6 | 10892 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 18000→18000 | match |  | 71.00-71.00→71.00-71.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 50 | Shadow Word: Pain | 7 | 10893 | 385.00→385.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 18000→18000 | match |  | 97.00-97.00→97.00-97.00 | 0.200→0.200 | declared, matches |
+| ShadowPriest | 50 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 50 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 50 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.68-34.32→27.68-34.32 | 0.571→0.571 | declared, matches |
 | ShadowPriest | 50 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 46.55-53.45→46.55-53.45 | 0.714→0.714 | declared, matches |
@@ -482,6 +524,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 50 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714→0.714 | declared, matches |
 | ShadowPriest | 50 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 93.34-105.66→93.34-105.66 | 0.714→0.714 | declared, matches |
 | ShadowPriest | 50 | Smite | 7 | 10933 | 230.00→230.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 46→46 | n/a | match |  | 122.70-138.10→122.70-138.10 | 0.714→0.714 | declared, matches |
+| ShadowPriest | 60 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
+| ShadowPriest | 60 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
+| ShadowPriest | 60 | Dark Sacrifice | 3 | 1277326 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 40→40 | 15000→15000 | match |  | n/a | n/a | n/a |
+| ShadowPriest | 60 | Dark Sacrifice | 4 | 1277327 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | n/a | n/a | n/a |
+| ShadowPriest | 60 | Dark Sacrifice | 5 | 1277328 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 60→60 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 60 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 60 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 60 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  | n/a | n/a | n/a |
@@ -517,6 +564,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 60 | Shadow Word: Pain | 6 | 10892 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 18000→18000 | match |  | 71.00-71.00→71.00-71.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 60 | Shadow Word: Pain | 7 | 10893 | 385.00→385.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 18000→18000 | match |  | 97.00-97.00→97.00-97.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 60 | Shadow Word: Pain | 8 | 10894 | 470.00→470.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 18000→18000 | match |  | 127.00-127.00→127.00-127.00 | 0.200→0.200 | declared, matches |
+| ShadowPriest | 60 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 60 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 15.17-19.83→15.17-19.83 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 60 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 27.68-34.32→27.68-34.32 | 0.571→0.571 | declared, matches |
 | ShadowPriest | 60 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 46.55-53.45→46.55-53.45 | 0.714→0.714 | declared, matches |
@@ -627,12 +675,11 @@ Each spell below is built with exactly one point in the single talent that grant
 | ShadowPriest (Vampiric Embrace talent) | 60 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 33 of the class's 53 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 31 of the class's 53 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
 | Power Word: Fortitude (1243) | 1→60 | 8 | Discipline | skill_line_ability | 1695 mana | 0 | 0 | power cost |
-| Shadowfiend (401977) | 1→1 | 1 | Shadow Magic | skill_line_ability | 0 | 0 | 300000 | cooldown |
 | Fade (586) | 8→60 | 6 | Shadow Magic | skill_line_ability | 275 mana | 0 | 30000 | power cost, cooldown |
 | Confounding Flash (1277455) | 10→10 | 1 | Discipline | skill_line_ability | 0 | 500 | 120000 | cast time, cooldown |
 | Divine Grace (1277370) | 10→58 | 7 | Holy | skill_line_ability | 0 | 0 | 600000 | cooldown |
@@ -645,7 +692,6 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Dispel Magic (527) | 18→36 | 3 | Discipline | skill_line_ability | 0 | 0 | 0 |  |
 | Chastise (1277331) | 20→60 | 5 | Holy | skill_line_ability | 225 mana | 0 | 120000 | power cost, cooldown |
 | Contingency Plan (1277462) | 20→60 | 5 | Discipline | skill_line_ability | 0 | 0 | 600000 | cooldown |
-| Dark Sacrifice (1277324) | 20→60 | 5 | Shadow Magic | skill_line_ability | 0 | 0 | 600000 | cooldown |
 | Elune's Grace (2651) | 20→20 | 1 | Discipline | skill_line_ability | 0 | 0 | 300000 | cooldown |
 | Fear Ward (6346) | 20→20 | 1 | Holy | skill_line_ability | 100 mana | 0 | 180000 | power cost, cooldown |
 | Feedback (13896) | 20→60 | 6 | Discipline | skill_line_ability | 0 | 0 | 180000 | cooldown |

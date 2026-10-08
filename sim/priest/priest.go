@@ -102,6 +102,7 @@ type Priest struct {
 	Latency float64
 
 	BindingHeal       []*core.Spell
+	DarkSacrifice     []*core.Spell
 	DesperatePrayer   []*core.Spell
 	DevouringPlague   []*core.Spell
 	FlashHeal         []*core.Spell
@@ -120,6 +121,7 @@ type Priest struct {
 	PrayerOfHealing   []*core.Spell
 	PrayerOfMending   []*core.Spell
 	Renew             []*core.Spell
+	Shadowfiend       *core.Spell
 	Shadowform        *core.Spell
 	Shoot             *core.Spell
 	ShadowWeavingProc *core.Spell
@@ -174,6 +176,8 @@ func (priest *Priest) Initialize() {
 	priest.registerSmiteSpell()
 	priest.registerHolyFire()
 	priest.registerShootSpell()
+	priest.registerShadowfiend()
+	priest.registerDarkSacrifice()
 }
 
 func New(character *core.Character, talents string) *Priest {

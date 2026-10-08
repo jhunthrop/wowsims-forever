@@ -165,8 +165,11 @@ unconfirmed. What the client does state is held to it:
   whatever the current target is. A healer's current target is a friend, and
   the pass refuses a non-helpful cooldown with a friendly target (see
   `shouldActivateHelper`); before this a healer never drank its potion or
-  rune. Inner Focus is helpful for the same reason. Every other non-helpful
-  use effect (racial buffs, stat trinkets) is still refused for a healer.
+  rune. Inner Focus is helpful for the same reason. A cooldown that only
+  changes the caster (`MajorCooldown.SelfBuff`: Berserking, Blood Fury,
+  Eureka!, Stoneform, and a stat trinket that carries a caster stat) is used
+  with a friendly target too; an attack-power-only trinket and a damage use
+  effect such as Smolderweb's Eye need an opponent and stay out.
 - Blessing of Wisdom is a rank table (`BlessingOfWisdomRanks`, 12, 18, 24, 30
   and 36 mana per five seconds by trainer rank, 40 for the Ahn'Qiraj book
   rank), not a flat 30. The site's `sim/leveling` pins the table to the
@@ -175,6 +178,17 @@ unconfirmed. What the client does state is held to it:
   healing, as the item tooltips state (`manaOilStats`). Nightfin Soup gives 22
   spell damage and no mana (`nightfinSoupStats`); Forever turned the food
   into a stat meal.
+- The healer elixirs and tea state the client's amounts: Greater Mageblood
+  Elixir 20 mana per five seconds, Cleric's and Greater Cleric's Elixir 30 and
+  40 healing, Elixir of Sages 25 spirit and 2 percent critical strike, Sage's
+  Tea 44 healing (`manaRegenElixirStats`, `healingPowerBuffStats`,
+  `spiritElixirStats`, `sagesTeaStats`).
+- Shadowfiend (401977) and Dark Sacrifice (1277324 to 1277328) are priest
+  spells in `sim/priest/mana_abilities.go`. Dark Sacrifice is the client's
+  health-for-mana aura. Shadowfiend has no pet: the engine returns the
+  client's Mana Leech (5 percent of maximum mana per attack) on a swing of
+  1.5 seconds over the client's 15 second summon, because the creature's
+  swing timer is not in the client tables. That swing is an assumption.
 
 ### How capped AoE follows the timeline
 

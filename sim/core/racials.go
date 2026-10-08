@@ -281,8 +281,9 @@ var racialsByRace = map[proto.Race][]Racial{
 				})
 
 				character.AddMajorCooldown(MajorCooldown{
-					Spell: spell,
-					Type:  CooldownTypeSurvival,
+					Spell:    spell,
+					Type:     CooldownTypeSurvival,
+					SelfBuff: true,
 					ShouldActivate: func(s *Simulation, c *Character) bool {
 						// Only castable with manual APL Action
 						return false
@@ -336,8 +337,9 @@ var racialsByRace = map[proto.Race][]Racial{
 				})
 
 				character.AddMajorCooldown(MajorCooldown{
-					Spell: spell,
-					Type:  CooldownTypeDPS,
+					Spell:    spell,
+					Type:     CooldownTypeDPS,
+					SelfBuff: true,
 				})
 			},
 		},
@@ -495,8 +497,9 @@ var racialsByRace = map[proto.Race][]Racial{
 				})
 
 				character.AddMajorCooldown(MajorCooldown{
-					Spell: spell,
-					Type:  CooldownTypeDPS,
+					Spell:    spell,
+					Type:     CooldownTypeDPS,
+					SelfBuff: true,
 				})
 			},
 		},
@@ -642,8 +645,9 @@ func makeBerserkingCooldown(character *Character, customPercentage float64, time
 	})
 
 	character.AddMajorCooldown(MajorCooldown{
-		Spell: berserkingSpell,
-		Type:  CooldownTypeDPS,
+		Spell:    berserkingSpell,
+		Type:     CooldownTypeDPS,
+		SelfBuff: true,
 	})
 }
 
