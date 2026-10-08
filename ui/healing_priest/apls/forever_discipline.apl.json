@@ -27,7 +27,7 @@
           }
         }
       },
-      "notes": "Shadowfiend returns a share of the whole mana bar over its fifteen seconds, so it waits until the bar has room for all of it, and its long cooldown makes it a once-a-fight cast. The engine does not summon the pet: it returns the client's mana per attack on a stated swing time, which is an assumption (design/reviews/2026-10-08-healer-kit.md)."
+      "notes": "Shadowfiend returns a share of the whole mana bar over its fifteen seconds, so it waits until the bar has room for all of it, and its long cooldown makes it a once-a-fight cast."
     },
     {
       "action": {
