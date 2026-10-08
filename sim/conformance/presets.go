@@ -117,6 +117,20 @@ var Presets = []Preset{
 		},
 	},
 	{
+		Label:           "HolyPaladin",
+		ClientClassSlug: "paladin",
+		Class:           proto.Class_ClassPaladin,
+		Race:            proto.Race_RaceHuman,
+		Talents:         "05320003025101051--",
+		SpecOptions: &proto.Player_HolyPaladin{
+			HolyPaladin: &proto.HolyPaladin{
+				Options: &proto.PaladinOptions{
+					PrimarySeal: proto.PaladinSeal_Righteousness,
+				},
+			},
+		},
+	},
+	{
 		Label:           "RetributionPaladin",
 		ClientClassSlug: "paladin",
 		Class:           proto.Class_ClassPaladin,

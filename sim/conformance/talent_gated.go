@@ -104,6 +104,9 @@ var TalentGatedSpells = []TalentGatedSpell{
 	// Paladin (Holy 18, Protection 16, Retribution 18).
 	{ClassSlug: "paladin", Label: "Divine Favor", Tree: 0, Pos: 12},
 	{ClassSlug: "paladin", Label: "Holy Shock", Tree: 0, Pos: 14},
+	{ClassSlug: "paladin", Label: "Divine Favor", Tree: 0, Pos: 12, Preset: "HolyPaladin"},
+	{ClassSlug: "paladin", Label: "Holy Shock", Tree: 0, Pos: 14, Preset: "HolyPaladin"},
+	{ClassSlug: "paladin", Label: "Light's Vigil", Tree: 0, Pos: 17, Preset: "HolyPaladin"},
 	{ClassSlug: "paladin", Label: "Holy Shield", Tree: 1, Pos: 16},
 	{ClassSlug: "paladin", Label: "Seal of Command", Tree: 2, Pos: 8},
 

@@ -12,6 +12,312 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| HolyPaladin | 10 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 10 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 80.03-94.77→80.03-94.77 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 10 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 10 | Judgement | 0 | 20271 | 11.52 (6% base mana)→11.52 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 10 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 10 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 25.00-27.00→25.00-27.00 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 10 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 10 | Lay on Hands | 0 | 633 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 10 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→- | 0.100→0.063 | not declared |
+| HolyPaladin | 10 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 4.00-4.00→- | 0.100→0.029 | not declared |
+| HolyPaladin | 10 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 10 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 10 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 20 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 20 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 73.73-84.27→73.73-84.27 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 20 | Flash of Light | 1 | 19750 | 35.00→35.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 42.57-49.43→42.57-49.43 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 20 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 20 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 20 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 20 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 20 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 20 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 20 | Judgement | 0 | 20271 | 24.72 (6% base mana)→24.72 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 20 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 20 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 20 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 43.57-48.03→43.57-48.03 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 20 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 20 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 20 | Lay on Hands | 0 | 633 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 20 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 9.00-9.00→- | 0.100→0.093 | not declared |
+| HolyPaladin | 20 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→- | 0.100→0.063 | not declared |
+| HolyPaladin | 20 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 4.00-4.00→- | 0.100→0.029 | not declared |
+| HolyPaladin | 20 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 20 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 20 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 20 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 20 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 30 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 135.30-153.10→135.30-153.10 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 30 | Flash of Light | 1 | 19750 | 35.00→35.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 47.19-54.81→47.19-54.81 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 30 | Flash of Light | 2 | 19939 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 66.36-76.04→66.36-76.04 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 30 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 30 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 30 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 30 | Holy Light | 4 | 1026 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 278.35-319.65→278.35-319.65 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 30 | Holy Light | 5 | 1042 | 275.00→275.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 425.16-478.84→425.16-478.84 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 30 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Judgement | 0 | 20271 | 42.12 (6% base mana)→42.12 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 30 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 30 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 30 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 67.64-74.76→67.64-74.76 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 30 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 30 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 30 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 30 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 30 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 9.00-9.00→- | 0.100→0.093 | not declared |
+| HolyPaladin | 30 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→- | 0.100→0.063 | not declared |
+| HolyPaladin | 30 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 4.00-4.00→- | 0.100→0.029 | not declared |
+| HolyPaladin | 30 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Seal of Righteousness | 4 | 20289 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 38 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→139.80-158.20 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 38 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 193.52-218.48→193.52-218.48 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 38 | Flash of Light | 1 | 19750 | 35.00→35.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 47.19-54.81→47.19-54.81 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 38 | Flash of Light | 2 | 19939 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 67.57-77.43→67.57-77.43 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 38 | Flash of Light | 3 | 19940 | 70.00→70.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 101.12-113.68→101.12-113.68 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 38 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 38 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 38 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 38 | Holy Light | 4 | 1026 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 278.35-319.65→278.35-319.65 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 38 | Holy Light | 5 | 1042 | 275.00→275.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 439.74-495.26→439.74-495.26 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 38 | Holy Light | 6 | 3472 | 365.00→365.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 610.16-681.84→610.16-681.84 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 38 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Holy Strike | 5 | 2495 | 16.00→16.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Judgement | 0 | 20271 | 55.98 (6% base mana)→55.98 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 38 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 38 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 38 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→72.96-80.64 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 38 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 89.80-99.00→89.80-99.00 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 38 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 38 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 38 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 38 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 38 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 38 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 38 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 9.00-9.00→- | 0.100→0.093 | not declared |
+| HolyPaladin | 38 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→- | 0.100→0.063 | not declared |
+| HolyPaladin | 38 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 4.00-4.00→- | 0.100→0.029 | not declared |
+| HolyPaladin | 38 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Seal of Righteousness | 4 | 20289 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Seal of Righteousness | 5 | 20290 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Blessing of Light | 1 | 19977 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Consecration | 3 | 20922 | 320.00→320.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 40 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→139.80-158.20 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 40 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 197.27-222.73→197.27-222.73 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 40 | Flash of Light | 1 | 19750 | 35.00→35.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 47.19-54.81→47.19-54.81 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 40 | Flash of Light | 2 | 19939 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 67.57-77.43→67.57-77.43 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 40 | Flash of Light | 3 | 19940 | 70.00→70.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 102.63-115.37→102.63-115.37 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 40 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 40 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 40 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 40 | Holy Light | 4 | 1026 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 278.35-319.65→278.35-319.65 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 40 | Holy Light | 5 | 1042 | 275.00→275.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 439.74-495.26→439.74-495.26 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 40 | Holy Light | 6 | 3472 | 365.00→365.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 617.34-689.86→617.34-689.86 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 40 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Holy Strike | 5 | 2495 | 16.00→16.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Judgement | 0 | 20271 | 59.22 (6% base mana)→59.22 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 40 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 40 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 40 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→72.96-80.64 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 40 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→95.69-105.51 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 40 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 40 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 40 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 40 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 40 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 40 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 40 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 9.00-9.00→- | 0.100→0.093 | not declared |
+| HolyPaladin | 40 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→- | 0.100→0.063 | not declared |
+| HolyPaladin | 40 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 4.00-4.00→- | 0.100→0.029 | not declared |
+| HolyPaladin | 40 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Seal of Righteousness | 4 | 20289 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Seal of Righteousness | 5 | 20290 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Blessing of Light | 1 | 19977 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Blessing of Light | 2 | 19978 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Consecration | 3 | 20922 | 320.00→320.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Consecration | 4 | 20923 | 435.00→435.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 50→50 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 50 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→139.80-158.20 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 50 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 199.15-224.85→199.15-224.85 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 50 | Exorcism | 4 | 10312 | 235.00→235.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 285.18-320.82→285.18-320.82 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 50 | Flash of Light | 1 | 19750 | 35.00→35.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 47.19-54.81→47.19-54.81 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 50 | Flash of Light | 2 | 19939 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 67.57-77.43→67.57-77.43 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 50 | Flash of Light | 3 | 19940 | 70.00→70.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 102.63-115.37→102.63-115.37 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 50 | Flash of Light | 4 | 19941 | 90.00→90.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 42→42 | n/a | match |  | 151.28-169.72→151.28-169.72 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 50 | Flash of Light | 5 | 19942 | 115.00→115.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | n/a | match |  | 210.39-235.61→210.39-235.61 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 50 | Hammer of Wrath | 1 | 24275 | 295.00→295.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 44→44 | n/a | match |  | 285.00-315.00→285.00-315.00 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 50 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 50 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 50 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 50 | Holy Light | 4 | 1026 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 278.35-319.65→278.35-319.65 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 50 | Holy Light | 5 | 1042 | 275.00→275.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 439.74-495.26→439.74-495.26 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 50 | Holy Light | 6 | 3472 | 365.00→365.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 628.11-701.89→628.11-701.89 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 50 | Holy Light | 7 | 10328 | 465.00→465.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 46→46 | n/a | match |  | 867.81-966.99→867.81-966.99 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 50 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Holy Strike | 5 | 2495 | 16.00→16.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Holy Strike | 6 | 5569 | 17.00→17.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Holy Wrath | 1 | 2812 | 645.00→645.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 50→50 | n/a | match |  | 362.00-428.00→362.00-428.00 | 0.190→0.190 | declared, matches |
+| HolyPaladin | 50 | Judgement | 0 | 20271 | 75.42 (6% base mana)→75.42 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 50 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 50 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 50 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→72.96-80.64 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 50 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→95.69-105.51 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 50 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 123.73-135.87→123.73-135.87 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 50 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 131.00-143.00→131.00-143.00 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 50 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 50 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 50 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 50 | Judgement of the Crusader | 0 | 20302 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 50 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 50 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Seal of Righteousness | 0 | 25735 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 32.00-32.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 50 | Seal of Righteousness | 0 | 25736 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 25.00-25.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 50 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 50 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 50 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 9.00-9.00→- | 0.100→0.093 | not declared |
+| HolyPaladin | 50 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→- | 0.100→0.063 | not declared |
+| HolyPaladin | 50 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 4.00-4.00→- | 0.100→0.029 | not declared |
+| HolyPaladin | 50 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Seal of Righteousness | 4 | 20289 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Seal of Righteousness | 5 | 20290 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Seal of Righteousness | 6 | 20291 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Seal of Righteousness | 7 | 20292 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 | Seal of the Crusader | 5 | 20307 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Blessing of Light | 1 | 19977 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Blessing of Light | 2 | 19978 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Blessing of Light | 3 | 19979 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Consecration | 1 | 26573 | 135.00→135.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Consecration | 2 | 20116 | 235.00→235.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Consecration | 3 | 20922 | 320.00→320.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Consecration | 4 | 20923 | 435.00→435.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 50→50 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Consecration | 5 | 20924 | 565.00→565.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 60→60 | 8000→8000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 79.33-90.67→79.33-90.67 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 139.80-158.20→139.80-158.20 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Exorcism | 3 | 5615 | 180.00→180.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 199.15-224.85→199.15-224.85 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Exorcism | 4 | 10312 | 235.00→235.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 285.18-320.82→285.18-320.82 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Exorcism | 5 | 10313 | 285.00→285.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | 376.00-420.00→376.00-420.00 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Exorcism | 6 | 10314 | 345.00→345.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | 474.74-529.26→474.74-529.26 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Flash of Light | 1 | 19750 | 35.00→35.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 47.19-54.81→47.19-54.81 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Flash of Light | 2 | 19939 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 67.57-77.43→67.57-77.43 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Flash of Light | 3 | 19940 | 70.00→70.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 102.63-115.37→102.63-115.37 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Flash of Light | 4 | 19941 | 90.00→90.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 42→42 | n/a | match |  | 151.28-169.72→151.28-169.72 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Flash of Light | 5 | 19942 | 115.00→115.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | n/a | match |  | 220.77-247.23→220.77-247.23 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Flash of Light | 6 | 19943 | 140.00→140.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 58→58 | n/a | match |  | 291.22-325.18→291.22-325.18 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Greater Blessing of Light | 0 | 25890 | 260.00→260.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Hammer of Wrath | 1 | 24275 | 295.00→295.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 44→44 | n/a | match |  | 285.00-315.00→285.00-315.00 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Hammer of Wrath | 2 | 24274 | 360.00→360.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 52→52 | n/a | match |  | 381.42-421.58→381.42-421.58 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Hammer of Wrath | 3 | 24239 | 425.00→425.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 60→60 | n/a | match |  | 473.57-522.43→473.57-522.43 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 60 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 60 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 60 | Holy Light | 4 | 1026 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 278.35-319.65→278.35-319.65 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 60 | Holy Light | 5 | 1042 | 275.00→275.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 439.74-495.26→439.74-495.26 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 60 | Holy Light | 6 | 3472 | 365.00→365.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 628.11-701.89→628.11-701.89 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 60 | Holy Light | 7 | 10328 | 465.00→465.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 46→46 | n/a | match |  | 872.16-971.84→872.16-971.84 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 60 | Holy Light | 8 | 10329 | 580.00→580.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 54→54 | n/a | match |  | 1175.99-1310.01→1175.99-1310.01 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 60 | Holy Light | 9 | 25292 | 660.00→660.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 60→60 | n/a | match |  | 1495.36-1664.64→1495.36-1664.64 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 60 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Holy Strike | 4 | 680 | 14.00→14.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Holy Strike | 5 | 2495 | 16.00→16.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Holy Strike | 6 | 5569 | 17.00→17.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Holy Strike | 7 | 10332 | 19.00→19.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Holy Strike | 8 | 10333 | 20.00→20.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Holy Wrath | 1 | 2812 | 645.00→645.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 50→50 | n/a | match |  | 367.87-434.93→367.87-434.93 | 0.190→0.190 | declared, matches |
+| HolyPaladin | 60 | Holy Wrath | 2 | 10318 | 805.00→805.00 | mana→mana | 60000→60000 | 2000→2000 | 1500→1500 | 60→60 | n/a | match |  | 490.00-576.00→490.00-576.00 | 0.190→0.190 | declared, matches |
+| HolyPaladin | 60 | Judgement | 0 | 20271 | 90.72 (6% base mana)→90.72 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 60 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 60 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 52.70-58.10→52.70-58.10 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 60 | Judgement of Righteousness | 0 | 20282 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 72.96-80.64→72.96-80.64 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 60 | Judgement of Righteousness | 0 | 20283 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 95.69-105.51→95.69-105.51 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 60 | Judgement of Righteousness | 0 | 20284 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 123.73-135.87→123.73-135.87 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 60 | Judgement of Righteousness | 0 | 20285 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 154.52-168.68→154.52-168.68 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 60 | Judgement of Righteousness | 0 | 20286 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  | 169.81-186.59→169.81-186.59 | 0.500→0.500 | declared, matches |
+| HolyPaladin | 60 | Judgement of the Crusader | 0 | 20188 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 60 | Judgement of the Crusader | 0 | 20300 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 60 | Judgement of the Crusader | 0 | 20301 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 60 | Judgement of the Crusader | 0 | 20302 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 60 | Judgement of the Crusader | 0 | 20303 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 60 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| HolyPaladin | 60 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of Righteousness | 0 | 25713 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 35.00-35.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 60 | Seal of Righteousness | 0 | 25735 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 32.00-32.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 60 | Seal of Righteousness | 0 | 25736 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 25.00-25.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 60 | Seal of Righteousness | 0 | 25737 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 60 | Seal of Righteousness | 0 | 25738 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→- | 0.100→0.100 | not declared |
+| HolyPaladin | 60 | Seal of Righteousness | 0 | 25739 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 9.00-9.00→- | 0.100→0.093 | not declared |
+| HolyPaladin | 60 | Seal of Righteousness | 0 | 25740 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→- | 0.100→0.063 | not declared |
+| HolyPaladin | 60 | Seal of Righteousness | 0 | 25742 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 4.00-4.00→- | 0.100→0.029 | not declared |
+| HolyPaladin | 60 | Seal of Righteousness | 1 | 20154 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of Righteousness | 2 | 20287 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of Righteousness | 4 | 20289 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of Righteousness | 5 | 20290 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of Righteousness | 6 | 20291 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of Righteousness | 7 | 20292 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of Righteousness | 8 | 20293 | 200.00→200.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of the Crusader | 5 | 20307 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 | Seal of the Crusader | 6 | 20308 | 160.00→160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 10 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 10 | Judgement | 0 | 20271 | 11.52 (6% base mana)→11.52 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 10 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.500→0.500 | declared, matches |
@@ -500,6 +806,47 @@ Each spell below is built with exactly one point in the single talent that grant
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| HolyPaladin (Divine Favor talent) | 10 | Divine Favor | 0 | 20216 | 7.68 (4% base mana)→7.68 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
+| HolyPaladin (Divine Favor talent) | 20 | Divine Favor | 0 | 20216 | 16.48 (4% base mana)→16.48 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
+| HolyPaladin (Divine Favor talent) | 30 | Divine Favor | 0 | 20216 | 28.08 (4% base mana)→28.08 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
+| HolyPaladin (Divine Favor talent) | 38 | Divine Favor | 0 | 20216 | 37.32 (4% base mana)→37.32 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
+| HolyPaladin (Divine Favor talent) | 40 | Divine Favor | 0 | 20216 | 39.48 (4% base mana)→39.48 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
+| HolyPaladin (Divine Favor talent) | 50 | Divine Favor | 0 | 20216 | 50.28 (4% base mana)→50.28 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
+| HolyPaladin (Divine Favor talent) | 60 | Divine Favor | 0 | 20216 | 60.48 (4% base mana)→60.48 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
+| HolyPaladin (Holy Shock talent) | 30 | Holy Shock | 0 | 1311605 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 109.70-118.30→109.70-118.30 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 30 | Holy Shock | 0 | 1311606 | 160.00→160.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin (Holy Shock talent) | 38 | Holy Shock | 0 | 1311605 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 109.70-118.30→109.70-118.30 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 38 | Holy Shock | 0 | 1311606 | 160.00→160.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin (Holy Shock talent) | 40 | Holy Shock | 0 | 1311605 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 109.70-118.30→109.70-118.30 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 40 | Holy Shock | 0 | 1311606 | 160.00→160.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin (Holy Shock talent) | 40 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin (Holy Shock talent) | 40 | Holy Shock | 1 | 25914 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 150.11-161.89→150.11-161.89 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 0 | 1311605 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 109.70-118.30→109.70-118.30 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 0 | 1311606 | 160.00→160.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 1 | 25914 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 150.11-161.89→150.11-161.89 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 2 | 20929 | 275.00→275.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 2 | 25913 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 48→48 | n/a | match |  | 221.28-238.72→221.28-238.72 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 0 | 1311605 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 109.70-118.30→109.70-118.30 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 0 | 1311606 | 160.00→160.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 1 | 25914 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 150.11-161.89→150.11-161.89 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 2 | 20929 | 275.00→275.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 2 | 25913 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 48→48 | n/a | match |  | 221.28-238.72→221.28-238.72 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 3 | 20930 | 325.00→325.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 56→56 | n/a | match |  | n/a | n/a | n/a |
+| HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 3 | 25903 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 307.37-332.63→307.37-332.63 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Light's Vigil talent) | 40 | Light's Vigil | 0 | 1310911 | 730.00→730.00 | mana→mana | 6000→6000 | 1500→1500 | 1500→1500 | 40→40 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
+| HolyPaladin (Light's Vigil talent) | 40 | Light's Vigil | 0 | 1310912 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 314.89-333.11→314.89-333.11 | 0.143→0.143 | declared, matches |
+| HolyPaladin (Light's Vigil talent) | 50 | Light's Vigil | 0 | 1310911 | 730.00→730.00 | mana→mana | 6000→6000 | 1500→1500 | 1500→1500 | 40→40 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
+| HolyPaladin (Light's Vigil talent) | 50 | Light's Vigil | 0 | 1310912 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 325.39-344.21→325.39-344.21 | 0.143→0.143 | declared, matches |
+| HolyPaladin (Light's Vigil talent) | 50 | Light's Vigil | 0 | 1311590 | 1000.00→1000.00 | mana→mana | 6000→6000 | 1500→1500 | 1500→1500 | 50→50 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
+| HolyPaladin (Light's Vigil talent) | 50 | Light's Vigil | 0 | 1311591 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 473.31-500.69→473.31-500.69 | 0.143→0.143 | declared, matches |
+| HolyPaladin (Light's Vigil talent) | 60 | Light's Vigil | 0 | 1310911 | 730.00→730.00 | mana→mana | 6000→6000 | 1500→1500 | 1500→1500 | 40→40 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
+| HolyPaladin (Light's Vigil talent) | 60 | Light's Vigil | 0 | 1310912 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 325.39-344.21→325.39-344.21 | 0.143→0.143 | declared, matches |
+| HolyPaladin (Light's Vigil talent) | 60 | Light's Vigil | 0 | 1311590 | 1000.00→1000.00 | mana→mana | 6000→6000 | 1500→1500 | 1500→1500 | 50→50 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
+| HolyPaladin (Light's Vigil talent) | 60 | Light's Vigil | 0 | 1311591 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 486.43-514.57→486.43-514.57 | 0.143→0.143 | declared, matches |
+| HolyPaladin (Light's Vigil talent) | 60 | Light's Vigil | 0 | 1311595 | 1340.00→1340.00 | mana→mana | 6000→6000 | 1500→1500 | 1500→1500 | 60→60 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | n/a | n/a | n/a |
+| HolyPaladin (Light's Vigil talent) | 60 | Light's Vigil | 0 | 1311596 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 684.21-723.79→684.21-723.79 | 0.143→0.143 | declared, matches |
 | ProtectionPaladin (Divine Favor talent) | 10 | Divine Favor | 0 | 20216 | 7.68 (4% base mana)→7.68 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Divine Favor talent) | 20 | Divine Favor | 0 | 20216 | 16.48 (4% base mana)→16.48 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Divine Favor talent) | 30 | Divine Favor | 0 | 20216 | 28.08 (4% base mana)→28.08 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
@@ -561,12 +908,11 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 5 | 20920 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 30000→30000 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 34 of the class's 46 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 29 of the class's 46 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
 | Divine Protection (458312) | 1→18 | 4 | Protection | skill_line_ability | 35 mana | 0 | 300000 | power cost, cooldown |
-| Holy Light (635) | 1→60 | 9 | Holy | skill_line_ability | 660 mana | 2500 | 0 | power cost, cast time |
 | Swift Judgement (1310994) | 1→1 | 1 | Protection | skill_line_ability | 0 | 0 | 60000 | cooldown |
 | Blessing of Might (19740) | 4→60 | 7 | Retribution | skill_line_ability | 130 mana | 0 | 0 | power cost |
 | Hammer of Justice (853) | 8→54 | 4 | Protection | skill_line_ability | 100 mana | 0 | 60000 | power cost, cooldown |
@@ -578,7 +924,6 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Righteous Fury (25780) | 16→16 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
 | Blessing of Freedom (1044) | 18→18 | 1 | Protection | skill_line_ability | 0 | 0 | 20000 | cooldown |
 | Blessing of Kings (20217) | 20→20 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
-| Flash of Light (19750) | 20→58 | 6 | Holy | skill_line_ability | 140 mana | 1500 | 0 | power cost, cast time |
 | Repentance (20066) | 20→20 | 1 | Retribution | skill_line_ability | 60 mana | 0 | 60000 | power cost, cooldown |
 | Voice of Truth (1310897) | 20→20 | 1 | Holy | skill_line_ability | 0 | 0 | 180000 | cooldown |
 | Seal of Justice (20164) | 22→22 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
@@ -589,15 +934,12 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Templar's Bulwark (1311015) | 30→30 | 1 | Protection | skill_line_ability | 110 mana | 0 | 300000 | power cost, cooldown |
 | Divine Shield (642) | 34→50 | 2 | Protection | skill_line_ability | 110 mana | 0 | 300000 | power cost, cooldown |
 | Seal of Wisdom (20166) | 38→58 | 3 | Holy | skill_line_ability | 200 mana | 0 | 0 | power cost |
-| Blessing of Light (19977) | 40→60 | 3 | Holy | skill_line_ability | 135 mana | 0 | 0 | power cost |
 | Hammer of the Righteous (407632) | 40→40 | 1 | Protection | skill_line_ability | 0 | 0 | 6000 | cooldown |
-| Light's Vigil (1310911) | 40→60 | 3 | Holy | skill_line_ability | 1340 mana | 1500 | 6000 | power cost, cast time, cooldown |
 | Cleanse (4987) | 42→42 | 1 | Holy | skill_line_ability | 0 | 0 | 0 |  |
 | Blessing of Sacrifice (6940) | 46→54 | 2 | Protection | skill_line_ability | 100 mana | 0 | 0 | power cost |
 | Greater Blessing of Might (25782) | 52→60 | 2 | Retribution | skill_line_ability | 260 mana | 0 | 0 | power cost |
 | Greater Blessing of Wisdom (25894) | 54→60 | 2 | Holy | skill_line_ability | 250 mana | 0 | 0 | power cost |
 | Greater Blessing of Kings (25898) | 60→60 | 1 | Protection | skill_line_ability | 150 mana | 0 | 0 | power cost |
-| Greater Blessing of Light (25890) | 60→60 | 1 | Holy | skill_line_ability | 260 mana | 0 | 0 | power cost |
 | Greater Blessing of Salvation (25895) | 60→60 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
 
 ### In the client, no learn row
