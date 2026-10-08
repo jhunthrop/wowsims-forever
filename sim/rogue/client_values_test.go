@@ -159,3 +159,22 @@ func TestSerratedBladesIgnoresThreePercentOfArmorPerRank(t *testing.T) {
 	assertClose(t, "armor ignored (percent) at rank 3", got, 9)
 	assertClose(t, "Rupture.DamageMultiplier", serrated.Rupture.DamageMultiplier, 1.3)
 }
+
+// Venom and Vile Poisons: the client gives both the same two aura=108
+// (percent spell modifier) effects on the same poison spell-class masks and
+// the same misc values (Venom spell 1310703 effects 1340417/1340418, 30
+// each; Vile Poisons spell 16513 effects 693770/693771, 4 per rank). Equal
+// aura kind, misc value and mask stack additively in the client, so a poison
+// with Venom up and Vile Poisons 5/5 deals 1 + 0.30 + 0.20, not 1.30 * 1.20.
+func TestVenomAddsToVilePoisonsInsteadOfMultiplying(t *testing.T) {
+	talents := talentsWithRanks(t, map[string]int{"vile_poisons": 5, "venom": 1})
+	rogue := buildRogueForTalentTest(t, talents, "combat_backstab_prebis").GetRogue()
+
+	assertClose(t, "InstantPoison before Venom", rogue.InstantPoison.DamageMultiplier, 1.20)
+	rogue.VenomAura.OnGain(rogue.VenomAura, nil)
+	assertClose(t, "InstantPoison with Venom", rogue.InstantPoison.DamageMultiplier, 1+0.30+0.20)
+	assertClose(t, "DeadlyPoison tick with Venom", rogue.DeadlyPoisonTickMultiplierForTest(), 1+0.30+0.20)
+	assertClose(t, "WoundPoison with Venom", rogue.WoundPoison.DamageMultiplier, 1+0.30+0.20)
+	rogue.VenomAura.OnExpire(rogue.VenomAura, nil)
+	assertClose(t, "InstantPoison after Venom", rogue.InstantPoison.DamageMultiplier, 1.20)
+}

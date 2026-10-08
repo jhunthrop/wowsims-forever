@@ -15,22 +15,35 @@ import (
 // combo point, which the spellconst duration_ms (6000, the 0-combo-point
 // base) corroborates.
 //
-// spellconst's effects give three real numbers for this: two aura=108
-// (amount 30, differing only in misc_value 0 vs 22) and one aura=107
-// (amount 10). The tooltip names exactly one poison-damage bonus and one
-// poison-proc-chance bonus, so the two aura=108 entries are read as one
-// 30% poison-damage bonus (not stacked to 60%) rather than guessed apart
-// -- the client's own effect-type numbering isn't decoded anywhere in
-// this codebase (sim/core/spellconst never interprets the Effect/Aura
-// columns, only carries them), so there is nothing here to disambiguate
-// misc_value 0 from 22 against. The third effect (index 0, effect 3, a
-// Dummy with amount 0) is the finishing-move template flag Rupture and
-// Slice and Dice's own dot/aura effects also carry; nothing to implement
-// from it.
+// Client rows (SpellEffect.csv, spell 1310703): two aura=108 percent
+// modifiers of 30 on distinct poison spell-class masks (8192/8 and 65536,
+// misc 0 and 22 -- the same pair Vile Poisons 16513 carries), so one 30%
+// poison-damage bonus per poison, and one aura=107 flat modifier of 10 on
+// the poison proc chance. Same aura kind, misc value and mask stack
+// additively with Vile Poisons, so Venom is added to it, never multiplied.
+// Effect index 0 is a Dummy template flag with nothing to implement.
 const (
-	venomPoisonDamageMultiplier = 1.30
-	venomPoisonProcChanceBonus  = 0.10
+	venomPoisonDamageBonus     = 0.30
+	venomPoisonProcChanceBonus = 0.10
 )
+
+// venomDamageScale is the factor that takes the poisons' current
+// Vile-Poisons multiplier (1 + vile) to (1 + vile + venom). The client adds
+// Venom and Vile Poisons: both are aura 108 percent modifiers with the same
+// misc value and spell-class masks, which stack additively.
+func (rogue *Rogue) venomDamageScale() float64 {
+	vile := rogue.getPoisonDamageMultiplier()
+	return (vile + venomPoisonDamageBonus) / vile
+}
+
+// scalePoisonDamage multiplies the damage multiplier of every poison spell.
+func (rogue *Rogue) scalePoisonDamage(factor float64) {
+	for _, spell := range []*core.Spell{rogue.InstantPoison, rogue.deadlyPoisonTick, rogue.WoundPoison} {
+		if spell != nil {
+			spell.DamageMultiplier *= factor
+		}
+	}
+}
 
 func (rogue *Rogue) registerVenomSpell() {
 	if !rogue.Talents.Venom {
@@ -57,27 +70,11 @@ func (rogue *Rogue) registerVenomSpell() {
 		Duration: rogue.venomDurations[5],
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			rogue.additivePoisonBonusChance += venomPoisonProcChanceBonus
-			if rogue.InstantPoison != nil {
-				rogue.InstantPoison.DamageMultiplier *= venomPoisonDamageMultiplier
-			}
-			if rogue.deadlyPoisonTick != nil {
-				rogue.deadlyPoisonTick.DamageMultiplier *= venomPoisonDamageMultiplier
-			}
-			if rogue.WoundPoison != nil {
-				rogue.WoundPoison.DamageMultiplier *= venomPoisonDamageMultiplier
-			}
+			rogue.scalePoisonDamage(rogue.venomDamageScale())
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			rogue.additivePoisonBonusChance -= venomPoisonProcChanceBonus
-			if rogue.InstantPoison != nil {
-				rogue.InstantPoison.DamageMultiplier /= venomPoisonDamageMultiplier
-			}
-			if rogue.deadlyPoisonTick != nil {
-				rogue.deadlyPoisonTick.DamageMultiplier /= venomPoisonDamageMultiplier
-			}
-			if rogue.WoundPoison != nil {
-				rogue.WoundPoison.DamageMultiplier /= venomPoisonDamageMultiplier
-			}
+			rogue.scalePoisonDamage(1 / rogue.venomDamageScale())
 		},
 	})
 
