@@ -20,7 +20,7 @@ var exposeArmorArpenPerCombo = [6]float64{0, 80, 80, 210, 275, 340}
 
 func (rogue *Rogue) registerExposeArmorSpell() {
 	rogue.ExposeArmorAuras = rogue.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-		return core.ExposeArmorAura(target, rogue.Talents.ImprovedExposeArmor)
+		return core.ExposeArmorAura(target, 0)
 	})
 
 	rank := core.HighestRankAtLevel(exposeArmorLearnLevels, rogue.Level)
@@ -30,8 +30,6 @@ func (rogue *Rogue) registerExposeArmorSpell() {
 
 	spellID := exposeArmorSpellID[rank]
 	arpenPerCombo := exposeArmorArpenPerCombo[rank]
-
-	arpenPerCombo *= []float64{1, 1.25, 1.5}[rogue.Talents.ImprovedExposeArmor]
 
 	// share ExtraCastCondition() state with ApplyEffects()
 	var arpen float64
@@ -71,7 +69,7 @@ func (rogue *Rogue) registerExposeArmorSpell() {
 		RelatedSelfBuff: exposeArmorDurationAura,
 
 		EnergyCost: core.EnergyCostOptions{
-			Cost:   25,
+			Cost:   exposeArmorBaseEnergyCost - improvedExposeArmorEnergyPerRank*float64(rogue.Talents.ImprovedExposeArmor),
 			Refund: 0,
 		},
 		Cast: core.CastConfig{
@@ -106,7 +104,11 @@ func (rogue *Rogue) registerExposeArmorSpell() {
 			if result.Landed() {
 				eaAura.ExclusiveEffects[0].Priority = arpen
 				eaAura.Activate(sim)
+				spentComboPoints := rogue.ComboPoints()
 				rogue.SpendComboPoints(sim, spell)
+				if refund := improvedExposeArmorRefund(rogue.Talents.ImprovedExposeArmor, spentComboPoints); refund > 0 {
+					rogue.AddComboPointsIgnoreTarget(sim, refund, spell.ComboPointMetrics())
+				}
 			} else {
 				spell.IssueRefund(sim)
 			}

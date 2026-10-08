@@ -153,10 +153,6 @@ func (rogue *Rogue) Initialize() {
 	rogue.registerVanishSpell()
 }
 
-func (rogue *Rogue) ApplyEnergyTickMultiplier(multiplier float64) {
-	rogue.EnergyTickMultiplier += multiplier
-}
-
 func (rogue *Rogue) Reset(_ *core.Simulation) {
 	for _, mcd := range rogue.GetMajorCooldowns() {
 		mcd.Disable()

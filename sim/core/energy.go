@@ -12,9 +12,29 @@ import (
 type OnComboPointsSpent func(sim *Simulation, spell *Spell, comboPoints int32)
 type OnComboPointsGained func(sim *Simulation)
 
-// Time between energy ticks.
-const EnergyTickDuration = time.Millisecond * 2020
-const EnergyPerTick = 20.2
+// Forever regenerates Energy continuously instead of in Classic's 2.02 s ticks
+// (Blizzard class-highlights video, 30 Sep 2026). No per-second rate is
+// published, so the Classic mean rate is kept: 20.2 Energy per 2.02 s.
+//
+// The bar accrues on demand: every read and every change first brings the
+// stored value up to sim.CurrentTime at the current rate, so the value is
+// exact at any instant. A scheduled task only exists to wake the APL when a
+// decision threshold is crossed.
+const EnergyRegenPerSecond = 10.0
+
+// Wake interval for units whose APL has no precomputed decision thresholds
+// (everything but rogues), so energy-conditioned decisions are re-evaluated.
+const EnergyPollInterval = time.Millisecond * 100
+
+// EnergyForTime is the base Energy regenerated over a duration.
+func EnergyForTime(duration time.Duration) float64 {
+	return EnergyRegenPerSecond * duration.Seconds()
+}
+
+// TimeForEnergy is the base time needed to regenerate an amount of Energy.
+func TimeForEnergy(amount float64) time.Duration {
+	return DurationFromSeconds(amount / EnergyRegenPerSecond)
+}
 
 type energyBar struct {
 	unit *Unit
@@ -38,10 +58,15 @@ type energyBar struct {
 	// Increments by 1 at each value of energyDecisionThresholds.
 	cumulativeEnergyDecisionThresholds []int
 
-	nextEnergyTick time.Duration
+	sim            *Simulation
+	active         bool
+	lastAccrualAt  time.Duration
+	nextWakeAt     time.Duration
+	notifiedBucket int // decision-threshold bucket the APL was last told about
 
-	// Multiplies energy regen from ticks.
-	EnergyTickMultiplier float64
+	// Multiplies continuous energy regen (Adrenaline Rush). Change it only
+	// through AddEnergyRegenMultiplier so earlier time accrues at the old rate.
+	regenMultiplier float64
 
 	regenMetrics        *ResourceMetrics
 	EnergyRefundMetrics *ResourceMetrics
@@ -51,11 +76,11 @@ func (unit *Unit) EnableEnergyBar(maxEnergy float64) {
 	unit.SetCurrentPowerBar(EnergyBar)
 
 	unit.energyBar = energyBar{
-		unit:                 unit,
-		maxEnergy:            max(100, maxEnergy),
-		EnergyTickMultiplier: 1,
-		regenMetrics:         unit.NewEnergyMetrics(ActionID{OtherID: proto.OtherAction_OtherActionEnergyRegen}),
-		EnergyRefundMetrics:  unit.NewEnergyMetrics(ActionID{OtherID: proto.OtherAction_OtherActionRefund}),
+		unit:                unit,
+		maxEnergy:           max(100, maxEnergy),
+		regenMultiplier:     1,
+		regenMetrics:        unit.NewEnergyMetrics(ActionID{OtherID: proto.OtherAction_OtherActionEnergyRegen}),
+		EnergyRefundMetrics: unit.NewEnergyMetrics(ActionID{OtherID: proto.OtherAction_OtherActionRefund}),
 	}
 }
 
@@ -139,6 +164,7 @@ func (unit *Unit) HasEnergyBar() bool {
 }
 
 func (eb *energyBar) CurrentEnergy() float64 {
+	eb.accrue()
 	return eb.currentEnergy
 }
 
@@ -146,17 +172,83 @@ func (eb *energyBar) MaxEnergy() float64 {
 	return eb.maxEnergy
 }
 
-func (eb *energyBar) NextEnergyTickAt() time.Duration {
-	return eb.nextEnergyTick
+// Current regen in Energy per second, including multipliers.
+func (eb *energyBar) EnergyRegenRate() float64 {
+	return EnergyRegenPerSecond * eb.regenMultiplier
 }
 
-func (eb *energyBar) onEnergyGain(sim *Simulation, crossedThreshold bool) {
-	if sim.CurrentTime < 0 {
+// AddEnergyRegenMultiplier changes the regen multiplier. Time up to now is
+// accrued at the old rate first.
+func (eb *energyBar) AddEnergyRegenMultiplier(delta float64) {
+	eb.accrue()
+	eb.regenMultiplier += delta
+	eb.scheduleWake()
+}
+
+// accrue brings the stored energy up to the current sim time. It is silent:
+// it never calls into the APL, which is the wake task's job.
+func (eb *energyBar) accrue() {
+	if !eb.active {
 		return
 	}
+	now := eb.sim.CurrentTime
+	if now <= eb.lastAccrualAt {
+		return
+	}
+	elapsed := now - eb.lastAccrualAt
+	eb.lastAccrualAt = now
 
-	if !sim.Options.Interactive && crossedThreshold && eb.unit.Rotation != nil {
-		eb.unit.Rotation.DoNextAction(sim)
+	amount := eb.EnergyRegenRate() * elapsed.Seconds()
+	newEnergy := min(eb.currentEnergy+amount, eb.maxEnergy)
+	eb.regenMetrics.AddEvent(amount, newEnergy-eb.currentEnergy)
+	eb.currentEnergy = newEnergy
+}
+
+// thresholdBucket maps an energy value to its decision-threshold bucket.
+func (eb *energyBar) thresholdBucket(energy float64) int {
+	if eb.cumulativeEnergyDecisionThresholds == nil {
+		return 0
+	}
+	idx := min(max(int(energy), 0), len(eb.cumulativeEnergyDecisionThresholds)-1)
+	return eb.cumulativeEnergyDecisionThresholds[idx]
+}
+
+func (eb *energyBar) notifyAPL(sim *Simulation) {
+	if sim.CurrentTime < 0 || sim.Options.Interactive || eb.unit.Rotation == nil {
+		return
+	}
+	eb.unit.Rotation.DoNextAction(sim)
+}
+
+// computeWakeAt is when the APL next needs to hear about energy: the moment
+// the next decision threshold is reached, or a poll step when no thresholds
+// were precomputed.
+func (eb *energyBar) computeWakeAt() time.Duration {
+	if !eb.active || eb.unit.Rotation == nil || eb.currentEnergy >= eb.maxEnergy {
+		return NeverExpires
+	}
+	if eb.cumulativeEnergyDecisionThresholds == nil {
+		return eb.sim.CurrentTime + EnergyPollInterval
+	}
+	floor := int(eb.currentEnergy)
+	for _, threshold := range eb.energyDecisionThresholds {
+		if threshold <= floor {
+			continue
+		}
+		if float64(threshold) > eb.maxEnergy {
+			break
+		}
+		seconds := (float64(threshold) - eb.currentEnergy) / eb.EnergyRegenRate()
+		// Round up plus 1 ns so float error cannot land just short of it.
+		return eb.sim.CurrentTime + time.Duration(math.Ceil(seconds*float64(time.Second))) + 1
+	}
+	return NeverExpires
+}
+
+func (eb *energyBar) scheduleWake() {
+	eb.nextWakeAt = eb.computeWakeAt()
+	if eb.nextWakeAt != NeverExpires {
+		eb.sim.RescheduleTask(eb.nextWakeAt)
 	}
 }
 
@@ -164,6 +256,7 @@ func (eb *energyBar) addEnergyInternal(sim *Simulation, amount float64, metrics 
 	if amount < 0 {
 		panic("Trying to add negative energy!")
 	}
+	eb.accrue()
 
 	newEnergy := min(eb.currentEnergy+amount, eb.maxEnergy)
 	metrics.AddEvent(amount, newEnergy-eb.currentEnergy)
@@ -172,20 +265,25 @@ func (eb *energyBar) addEnergyInternal(sim *Simulation, amount float64, metrics 
 		eb.unit.Log(sim, "Gained %0.3f energy from %s (%0.3f --> %0.3f).", amount, metrics.ActionID, eb.currentEnergy, newEnergy)
 	}
 
-	crossedThreshold := eb.cumulativeEnergyDecisionThresholds == nil || eb.cumulativeEnergyDecisionThresholds[int(eb.currentEnergy)] != eb.cumulativeEnergyDecisionThresholds[int(newEnergy)]
+	crossedThreshold := eb.cumulativeEnergyDecisionThresholds == nil || eb.thresholdBucket(eb.currentEnergy) != eb.thresholdBucket(newEnergy)
 	eb.currentEnergy = newEnergy
+	eb.notifiedBucket = eb.thresholdBucket(newEnergy)
 
 	return crossedThreshold
 }
+
 func (eb *energyBar) AddEnergy(sim *Simulation, amount float64, metrics *ResourceMetrics) {
-	crossedThreshold := eb.addEnergyInternal(sim, amount, metrics)
-	eb.onEnergyGain(sim, crossedThreshold)
+	if eb.addEnergyInternal(sim, amount, metrics) {
+		eb.notifyAPL(sim)
+	}
+	eb.scheduleWake()
 }
 
 func (eb *energyBar) SpendEnergy(sim *Simulation, amount float64, metrics *ResourceMetrics) {
 	if amount < 0 {
 		panic("Trying to spend negative energy!")
 	}
+	eb.accrue()
 
 	newEnergy := eb.currentEnergy - amount
 	metrics.AddEvent(-amount, -amount)
@@ -195,22 +293,12 @@ func (eb *energyBar) SpendEnergy(sim *Simulation, amount float64, metrics *Resou
 	}
 
 	eb.currentEnergy = newEnergy
+	eb.notifiedBucket = eb.thresholdBucket(newEnergy)
+	eb.scheduleWake()
 }
 
 func (eb *energyBar) ComboPoints() int32 {
 	return eb.comboPoints
-}
-
-// Gives an immediate partial energy tick and restarts the tick timer.
-func (eb *energyBar) ResetEnergyTick(sim *Simulation) {
-	timeSinceLastTick := sim.CurrentTime - (eb.NextEnergyTickAt() - EnergyTickDuration)
-	partialTickAmount := (EnergyPerTick * eb.EnergyTickMultiplier) * (float64(timeSinceLastTick) / float64(EnergyTickDuration))
-
-	crossedThreshold := eb.addEnergyInternal(sim, partialTickAmount, eb.regenMetrics)
-	eb.onEnergyGain(sim, crossedThreshold)
-
-	eb.nextEnergyTick = sim.CurrentTime + EnergyTickDuration
-	sim.RescheduleTask(eb.nextEnergyTick)
 }
 
 func (eb *energyBar) AddComboPointsIgnoreTarget(sim *Simulation, pointsToAdd int32, metrics *ResourceMetrics) {
@@ -291,15 +379,19 @@ func (eb *energyBar) SpendComboPoints(sim *Simulation, spell *Spell) {
 }
 
 func (eb *energyBar) RunTask(sim *Simulation) time.Duration {
-	if sim.CurrentTime < eb.nextEnergyTick {
-		return eb.nextEnergyTick
+	if sim.CurrentTime < eb.nextWakeAt {
+		return eb.nextWakeAt
 	}
 
-	crossedThreshold := eb.addEnergyInternal(sim, EnergyPerTick*eb.EnergyTickMultiplier, eb.regenMetrics)
-	eb.onEnergyGain(sim, crossedThreshold)
+	eb.accrue()
+	bucket := eb.thresholdBucket(eb.currentEnergy)
+	if eb.cumulativeEnergyDecisionThresholds == nil || bucket != eb.notifiedBucket {
+		eb.notifiedBucket = bucket
+		eb.notifyAPL(sim)
+	}
 
-	eb.nextEnergyTick = sim.CurrentTime + EnergyTickDuration
-	return eb.nextEnergyTick
+	eb.nextWakeAt = eb.computeWakeAt()
+	return eb.nextWakeAt
 }
 
 func (eb *energyBar) reset(sim *Simulation) {
@@ -307,9 +399,11 @@ func (eb *energyBar) reset(sim *Simulation) {
 		return
 	}
 
+	eb.sim = sim
 	eb.currentEnergy = eb.maxEnergy
 	eb.comboPoints = 0
 	eb.comboPointTarget = sim.GetTargetUnit(0)
+	eb.notifiedBucket = eb.thresholdBucket(eb.currentEnergy)
 
 	if eb.unit.Type != PetUnit {
 		eb.enable(sim, sim.Environment.PrepullStartTime())
@@ -317,9 +411,10 @@ func (eb *energyBar) reset(sim *Simulation) {
 }
 
 func (eb *energyBar) enable(sim *Simulation, startAt time.Duration) {
+	eb.active = true
+	eb.lastAccrualAt = startAt
+	eb.nextWakeAt = NeverExpires
 	sim.AddTask(eb)
-	eb.nextEnergyTick = startAt + time.Duration(sim.RandomFloat("Energy Tick")*float64(EnergyTickDuration))
-	sim.RescheduleTask(eb.nextEnergyTick)
 
 	if eb.cumulativeEnergyDecisionThresholds != nil && sim.Log != nil {
 		eb.unit.Log(sim, "[DEBUG] APL Energy decision thresholds: %v", eb.energyDecisionThresholds)
@@ -327,7 +422,8 @@ func (eb *energyBar) enable(sim *Simulation, startAt time.Duration) {
 }
 
 func (eb *energyBar) disable(sim *Simulation) {
-	eb.nextEnergyTick = NeverExpires
+	eb.active = false
+	eb.nextWakeAt = NeverExpires
 	sim.RemoveTask(eb)
 }
 

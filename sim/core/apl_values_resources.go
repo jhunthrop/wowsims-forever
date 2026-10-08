@@ -2,7 +2,6 @@ package core
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/wowsims/classic/sim/core/proto"
 )
@@ -244,29 +243,12 @@ func (value *APLValueCurrentComboPoints) String() string {
 	return "Current Combo Points"
 }
 
-type APLValueTimeToEnergyTick struct {
-	DefaultAPLValueImpl
-	unit *Unit
-}
-
+// Energy regenerates continuously in Forever, so there is no tick to wait for.
+// The value stays in the proto for old saved rotations and is dropped with a
+// warning.
 func (rot *APLRotation) newValueTimeToEnergyTick(_ *proto.APLValueTimeToEnergyTick) APLValue {
-	unit := rot.unit
-	if !unit.HasEnergyBar() {
-		rot.ValidationWarning("%s does not use Energy", unit.Label)
-		return nil
-	}
-	return &APLValueTimeToEnergyTick{
-		unit: unit,
-	}
-}
-func (value *APLValueTimeToEnergyTick) Type() proto.APLValueType {
-	return proto.APLValueType_ValueTypeDuration
-}
-func (value *APLValueTimeToEnergyTick) GetDuration(sim *Simulation) time.Duration {
-	return value.unit.NextEnergyTickAt() - sim.CurrentTime
-}
-func (value *APLValueTimeToEnergyTick) String() string {
-	return "Time to Next Energy Tick"
+	rot.ValidationWarning("Time to Next Energy Tick is not available: Energy regenerates continuously")
+	return nil
 }
 
 type APLValueEnergyThreshold struct {

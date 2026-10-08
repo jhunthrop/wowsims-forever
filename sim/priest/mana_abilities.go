@@ -81,6 +81,13 @@ func (priest *Priest) registerDarkSacrifice() {
 	}
 }
 
+// darkSacrificeManaPerTick is one tick's mana: the rank's amount plus an even
+// share of the caster's Spirit, so the whole cast gives the client's
+// "${$o2+$SPI}" (the health taken plus 100% of Spirit, once).
+func darkSacrificeManaPerTick(tickAmount, spirit float64) float64 {
+	return tickAmount + spirit/float64(darkSacrificeTicks)
+}
+
 func (priest *Priest) darkSacrificeConfig(rank int) core.SpellConfig {
 	actionID := core.ActionID{SpellID: DarkSacrificeSpellId[rank]}
 	manaMetrics := priest.NewManaMetrics(actionID)
@@ -105,8 +112,7 @@ func (priest *Priest) darkSacrificeConfig(rank int) core.SpellConfig {
 			TickLength:    darkSacrificeTickLength,
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				target.RemoveHealth(sim, tick)
-				spiritShare := target.GetStat(stats.Spirit) / float64(darkSacrificeTicks)
-				target.AddMana(sim, tick+spiritShare, manaMetrics)
+				target.AddMana(sim, darkSacrificeManaPerTick(tick, target.GetStat(stats.Spirit)), manaMetrics)
 			},
 		},
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {

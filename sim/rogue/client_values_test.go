@@ -7,6 +7,7 @@ import (
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
+	"github.com/wowsims/classic/sim/rogue"
 	dpsrogue "github.com/wowsims/classic/sim/rogue/dps_rogue"
 )
 
@@ -177,4 +178,24 @@ func TestVenomAddsToVilePoisonsInsteadOfMultiplying(t *testing.T) {
 	assertClose(t, "WoundPoison with Venom", rogue.WoundPoison.DamageMultiplier, 1+0.30+0.20)
 	rogue.VenomAura.OnExpire(rogue.VenomAura, nil)
 	assertClose(t, "InstantPoison after Venom", rogue.InstantPoison.DamageMultiplier, 1.20)
+}
+
+// Improved Expose Armor: "Reduces the Energy cost of your Expose Armor
+// ability by 5/10, and refunds 1/2 Combo Points when cast with 5 Combo
+// Points." (the engine kept Classic's +25%/+50% armor reduction instead).
+func TestImprovedExposeArmorCutsEnergyCostByFiveAndTenPerRank(t *testing.T) {
+	for rank, want := range map[int]float64{0: 25, 1: 20, 2: 15} {
+		rogue := buildRogueForTalentTest(t, talentsWithRanks(t, map[string]int{"improved_expose_armor": rank}), "combat_backstab_prebis").GetRogue()
+		assertClose(t, "Expose Armor energy cost at rank "+string(rune('0'+rank)), rogue.ExposeArmor.DefaultCast.Cost, want)
+	}
+}
+
+func TestImprovedExposeArmorRefundsComboPointsOnlyAtFive(t *testing.T) {
+	for _, tc := range []struct{ rank, comboPoints, want int32 }{
+		{0, 5, 0}, {1, 5, 1}, {2, 5, 2}, {2, 4, 0}, {2, 1, 0},
+	} {
+		if got := rogue.ImprovedExposeArmorRefundForTest(tc.rank, tc.comboPoints); got != tc.want {
+			t.Errorf("rank %d with %d combo points refunds %d, want %d", tc.rank, tc.comboPoints, got, tc.want)
+		}
+	}
 }

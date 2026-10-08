@@ -23,6 +23,13 @@ const (
 	murderDamagePerRank = 0.02
 	// Serrated Blades: "ignore 3%/6%/9% of your target's Armor".
 	serratedBladesArmorPenPctPerRank = 3.0
+	// Improved Expose Armor: "Reduces the Energy cost of your Expose Armor
+	// ability by 5/10, and refunds 1/2 Combo Points when cast with 5 Combo
+	// Points." The client text carries no armor bonus (Classic's +25%/+50%).
+	improvedExposeArmorEnergyPerRank = 5.0
+	improvedExposeArmorRefundPerRank = 1
+	exposeArmorBaseEnergyCost        = 25.0
+	fullComboPoints                  = 5
 	// Aggression: "Increases the damage of your Sinister Strike, Backstab,
 	// and Eviscerate abilities by 2%/4%/6%."
 	aggressionDamagePerRank = 0.02
@@ -42,6 +49,15 @@ const (
 // improvedEviscerateMultiplier is Improved Eviscerate's rank -> damage
 // multiplier, index 0 unused: "by 7%/13%/20%".
 var improvedEviscerateMultiplier = [4]float64{1, 1.07, 1.13, 1.20}
+
+// improvedExposeArmorRefund is the Combo Points handed back by an Expose
+// Armor cast that spent comboPoints.
+func improvedExposeArmorRefund(rank, comboPoints int32) int32 {
+	if comboPoints < fullComboPoints {
+		return 0
+	}
+	return improvedExposeArmorRefundPerRank * rank
+}
 
 // opportunityMultiplier is Opportunity's rank -> damage multiplier for
 // Backstab, Garrote, Ambush and Mutilate: "by 5%/10%" (two ranks).
