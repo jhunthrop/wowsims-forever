@@ -116,7 +116,7 @@ func armorShredOnMeleeHit(bonusID int32) core.ApplyEffect {
 	bonus := core.MustClientSpellRow(bonusID)
 	trigger := triggerOf(bonusID)
 	shred := effectOf(trigger.id, trigger.row, func(effect core.ClientEffect) bool {
-		return effect.Aura == clientAuraModResistance && effect.Misc0 == clientSchoolPhysical
+		return (effect.Aura == clientAuraModResistance || effect.Aura == core.ClientAuraFlatArmor) && effect.Misc0 == clientSchoolPhysical
 	}).Points
 	rate := rateOf(bonusID, procRate{})
 	return func(agent core.Agent) {

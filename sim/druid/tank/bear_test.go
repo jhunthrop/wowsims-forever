@@ -77,11 +77,11 @@ func TestBearFormIsActiveAtTheStartWithItsPaw(t *testing.T) {
 	}
 }
 
-// Bear Form (Passive2) 21178: aura 10 amount 30.
-func TestBearFormThreatIsThirtyPercentOver(t *testing.T) {
+// Bear Form (Passive2) 21178: aura 10 amount 50 (30 before build 1.60.1.70291).
+func TestBearFormThreatIsFiftyPercentOver(t *testing.T) {
 	bear, _, _ := newBearSim(t, 60, nil)
-	if got := bear.PseudoStats.ThreatMultiplier; !near(got, 1.3) {
-		t.Errorf("threat multiplier = %v, want 1.3", got)
+	if got := bear.PseudoStats.ThreatMultiplier; !near(got, 1.5) {
+		t.Errorf("threat multiplier = %v, want 1.5", got)
 	}
 }
 

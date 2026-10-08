@@ -68,7 +68,7 @@ func TestBarkskinLowersDamageTaken(t *testing.T) {
 }
 
 // The bear makes more threat than the same gear running the cat's damage
-// rotation: the form's 1.3x against the cat's 0.71x, and a threat kit.
+// rotation: the form's 1.5x against the cat's 0.71x, and a threat kit.
 func TestBearOutThreatsACatInTheSameGear(t *testing.T) {
 	gear := loadGear(t)
 	bear := runHarness(t, bearPlayer(60, druid.ForeverBearTalents, gear, bearRotation()), harnessIterations)

@@ -126,6 +126,7 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "druid", Label: "Insect Swarm", Tree: 0, Pos: 9},
 	{ClassSlug: "druid", Label: "Moonkin Form", Tree: 0, Pos: 16},
 	{ClassSlug: "druid", Label: "Primal Bite", Tree: 1, Pos: 12, Preset: "FeralBearDruid"},
+	{ClassSlug: "druid", Label: "Shifting Power", Tree: 1, Pos: 11, Preset: "FeralDruid"},
 	{ClassSlug: "druid", Label: "Berserk", Tree: 1, Pos: 20},
 	{ClassSlug: "druid", Label: "Swiftmend", Tree: 2, Pos: 11, Preset: "RestorationDruid"},
 	{ClassSlug: "druid", Label: "Nature's Swiftness", Tree: 2, Pos: 12},

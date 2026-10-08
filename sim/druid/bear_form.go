@@ -25,8 +25,9 @@ import (
 // applied to the armor items carry as bonus armor (stats.BonusArmor), the
 // pool aura 142 does not reach.
 const (
-	// bearFormThreatMultiplier is spell 21178's aura 10 amount 30.
-	bearFormThreatMultiplier = 1.3
+	// bearFormThreatMultiplier is spell 21178's aura 10 amount 50 (30 until
+	// build 1.60.1.70291).
+	bearFormThreatMultiplier = 1.5
 
 	// bearFormAnnouncedMinLevel is Bear Form's own learn level.
 	bearFormAnnouncedMinLevel = 10

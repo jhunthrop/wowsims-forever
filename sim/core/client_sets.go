@@ -61,8 +61,13 @@ type ClientSet struct {
 const (
 	clientEffectApplyAura int32 = 6
 
-	clientAuraModDamageDone        int32 = 13
-	clientAuraModResistance        int32 = 22
+	clientAuraModDamageDone int32 = 13
+	clientAuraModResistance int32 = 22
+	// ClientAuraFlatArmor is build 70291's renumbering of the aura 22 that
+	// carried flat armor (Sunder Armor, Expose Armor, Faerie Fire, Curse of
+	// Recklessness, Devotion Aura, Mark and Gift of the Wild): same
+	// effect rows, same values, new aura id.
+	ClientAuraFlatArmor            int32 = 674
 	clientAuraModStat              int32 = 29
 	clientAuraModSkill             int32 = 30
 	clientAuraModParry             int32 = 47
@@ -374,7 +379,7 @@ func (d *flatDecoder) read(e ClientEffect) bool {
 			return false
 		}
 		d.flat.Stats[stat] += e.Points
-	case clientAuraModResistance:
+	case clientAuraModResistance, ClientAuraFlatArmor:
 		return d.readResistance(e)
 	case clientAuraModSkill:
 		if e.Misc0 != clientSkillDefense {

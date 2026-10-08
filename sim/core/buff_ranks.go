@@ -167,7 +167,7 @@ var (
 		{SpellID: 9885, Level: 60, Amount: 27},
 	}
 
-	// Devotion Aura: armor to the paladin and its party (aura 22, misc 1).
+	// Devotion Aura: armor to the paladin and its party (aura 22 until build 70291, 674 after; misc 1).
 	DevotionAuraRanks = BuffRanks{
 		{SpellID: 465, Level: 1, Amount: 55},
 		{SpellID: 10290, Level: 10, Amount: 160},
