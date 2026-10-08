@@ -1,0 +1,597 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      },
+      "notes": "Mana potions, runes and other consumables the preset brings. Divine Favor is left to this rotation, not to the autocast, because it is only worth spending on the heal that must not fail."
+    },
+    {
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {
+                "sourceUnit": {
+                  "type": "Player",
+                  "index": 5
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "0.4"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20216
+          }
+        }
+      },
+      "notes": "Divine Favor when the tank is in danger: the Holy Light that follows crits for certain, and the heal that spends it is the one the tank needs. A two minute cooldown, so it is not spent on anything smaller."
+    },
+    {
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {
+                "sourceUnit": {
+                  "type": "Player",
+                  "index": 5
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "0.4"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 25292
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        }
+      },
+      "notes": "Holy Light (rank 9) is the big heal and the only one that outheals the tank by itself. It is kept for a tank below 40 percent, where its 2.5 second cast is worth the mana."
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpAdd",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "-0.05"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 25292
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        }
+      },
+      "notes": "Surplus mana buys throughput: Holy Light on a tank below 70 percent, but only while mana is no more than five points behind the fight clock. A healer short of mana (the usual case) never reaches this line."
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpAdd",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "-0.05"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20930
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        }
+      },
+      "notes": "Holy Shock, instant, on whoever is below 70 percent, under the same mana pacing: it heals about what Flash of Light does for more than twice the mana, so it is a use for spare mana, not a staple."
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 1
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpAdd",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "-0.05"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20930
+          },
+          "target": {
+            "type": "Player",
+            "index": 1
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 2
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpAdd",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "-0.05"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20930
+          },
+          "target": {
+            "type": "Player",
+            "index": 2
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 3
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpAdd",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "-0.05"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20930
+          },
+          "target": {
+            "type": "Player",
+            "index": 3
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 4
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpAdd",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "-0.05"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20930
+          },
+          "target": {
+            "type": "Player",
+            "index": 4
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {
+                "sourceUnit": {
+                  "type": "Player",
+                  "index": 5
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "0.9"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 19943
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        }
+      },
+      "notes": "Flash of Light is the staple: 140 mana for about as much healing per cast as Holy Light gives per second of cast time at a quarter of the price, and a tank hit for 12 percent a swing is under 90 percent most of the time."
+    },
+    {
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {
+                "sourceUnit": {
+                  "type": "Player",
+                  "index": 1
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "0.8"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 19943
+          },
+          "target": {
+            "type": "Player",
+            "index": 1
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {
+                "sourceUnit": {
+                  "type": "Player",
+                  "index": 2
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "0.8"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 19943
+          },
+          "target": {
+            "type": "Player",
+            "index": 2
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {
+                "sourceUnit": {
+                  "type": "Player",
+                  "index": 3
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "0.8"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 19943
+          },
+          "target": {
+            "type": "Player",
+            "index": 3
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {
+                "sourceUnit": {
+                  "type": "Player",
+                  "index": 4
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "0.8"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 19943
+          },
+          "target": {
+            "type": "Player",
+            "index": 4
+          }
+        }
+      }
+    }
+  ],
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 25890
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1.6s"
+        }
+      }
+    }
+  ]
+}
