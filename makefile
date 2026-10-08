@@ -294,7 +294,7 @@ SITE_DIR ?= /Users/jh/code/forever
 # mined beta client; an Era regeneration is an explicit override, never
 # the default, because a default that points at Era would quietly ship
 # Era numbers the day the data lane's output appears.
-BUILD ?= 1.60.1.69893
+BUILD ?= 1.60.1.70291
 
 .PHONY: relicmods
 # relicmods regenerates sim/<class>/relic_mods_auto_gen.go, the equip-effect
