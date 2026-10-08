@@ -1,58 +1,52 @@
 package priest
 
-// func (priest *Priest) registerRenewSpell() {
-// 	actionID := core.ActionID{SpellID: 25315}
+import (
+	"fmt"
+	"time"
 
-// 	priest.Renew = priest.RegisterSpell(core.SpellConfig{
-// 		ActionID:    actionID,
-// 		SpellSchool: core.SpellSchoolHoly,
-// 		ProcMask:    core.ProcMaskSpellHealing,
-// 		Flags:       SpellFlagPriest | core.SpellFlagHelpful | core.SpellFlagAPL,
+	"github.com/wowsims/classic/sim/core"
+)
 
-// 		ManaCost: core.ManaCostOptions{
-// 			BaseCost:   0.17,
-// 			Multiplier: 1,
-// 		},
-// 		Cast: core.CastConfig{
-// 			DefaultCast: core.Cast{
-// 				GCD: core.GCDDefault,
-// 			},
-// 		},
+const (
+	// renewTicks is the client's 15 s duration at one tick per 3 s;
+	// TestRenewTicksFollowTheClientDuration pins both.
+	renewTicks      = 5
+	renewTickLength = 3 * time.Second
+)
 
-// 		DamageMultiplier: priest.renewHealingMultiplier(),
-// 		ThreatMultiplier: 1 - []float64{0, .07, .14, .20}[priest.Talents.SilentResolve],
+// registerRenew registers every rank of Renew. The client's amount is per
+// tick and the coefficient is each tick's share of spell power.
+func (priest *Priest) registerRenew() {
+	priest.Renew = priest.registerHealRanks(renewRanks, func(rank int, entry healRank) core.SpellConfig {
+		config := priest.healSpellConfig(entry, rank, SpellCode_PriestRenew, PriestSpellMaskRenew)
+		tick := entry.effect.Center(int(priest.Level))
+		config.Hot = core.DotConfig{
+			Aura: core.Aura{
+				Label: fmt.Sprintf("Renew (Rank %d)", rank),
+			},
+			NumberOfTicks:    renewTicks,
+			TickLength:       renewTickLength,
+			BonusCoefficient: entry.coefficient,
 
-// 		Hot: core.DotConfig{
-// 			Aura: core.Aura{
-// 				Label: "Renew",
-// 			},
-// 			NumberOfTicks: priest.renewTicks(),
-// 			TickLength:    time.Second * 3,
-// 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, _ bool) {
-// 				dot.SnapshotBaseDamage = 280
-// 				dot.SnapshotAttackerMultiplier = dot.Spell.CasterHealingMultiplier()
-// 			},
-// 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-// 				dot.CalcAndDealPeriodicSnapshotHealing(sim, target, dot.OutcomeTick)
-// 			},
-// 		},
+			OnSnapshot: func(_ *core.Simulation, target *core.Unit, dot *core.Dot, _ bool) {
+				snapshotHeal(dot, target, tick)
+			},
+			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
+				dot.CalcAndDealPeriodicSnapshotHealing(sim, target, dot.Spell.OutcomeHealing)
+			},
+		}
+		config.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			spell.Hot(target).Apply(sim)
+		}
+		return config
+	})
+}
 
-// 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-// 			spell.Hot(target).Apply(sim)
-
-// 			if priest.EmpoweredRenew != nil {
-// 				priest.EmpoweredRenew.Cast(sim, target)
-// 			}
-// 		},
-// 	})
-// }
-
-// func (priest *Priest) renewTicks() int32 {
-// 	return 5
-// }
-
-// func (priest *Priest) renewHealingMultiplier() float64 {
-// 	return 1 *
-// 		(1 + .02*float64(priest.Talents.SpiritualHealing)) *
-// 		(1 + .05*float64(priest.Talents.ImprovedRenew))
-// }
+// snapshotHeal takes a heal-over-time's per-tick amount: the base tick
+// plus the healing stat times the tick's coefficient, and the caster's
+// healing multipliers. core.Dot.SnapshotHeal reads the damage multipliers
+// instead, which would leave out Spiritual Healing and Power Infusion.
+func snapshotHeal(dot *core.Dot, target *core.Unit, baseTick float64) {
+	dot.SnapshotBaseDamage = baseTick + dot.BonusCoefficient*dot.Spell.HealingPower(target)
+	dot.SnapshotAttackerMultiplier = dot.Spell.CasterHealingMultiplier()
+}

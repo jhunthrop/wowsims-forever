@@ -18,13 +18,24 @@ const (
 const (
 	SpellCode_PriestNone int32 = iota
 
+	SpellCode_PriestBindingHeal
+	SpellCode_PriestDesperatePrayer
 	SpellCode_PriestDevouringPlague
 	SpellCode_PriestFlashHeal
 	SpellCode_PriestGreaterHeal
 	SpellCode_PriestHeal
 	SpellCode_PriestHolyFire
+	SpellCode_PriestHolyNova
+	SpellCode_PriestInnerFire
+	SpellCode_PriestLesserHeal
 	SpellCode_PriestMindBlast
 	SpellCode_PriestMindFlay
+	SpellCode_PriestPenance
+	SpellCode_PriestPowerInfusion
+	SpellCode_PriestPowerWordShield
+	SpellCode_PriestPrayerOfHealing
+	SpellCode_PriestPrayerOfMending
+	SpellCode_PriestRenew
 	SpellCode_PriestShadowWordDeath
 	SpellCode_PriestShadowWordPain
 	SpellCode_PriestSmite
@@ -32,7 +43,7 @@ const (
 	SpellCode_PriestVampiricTouch
 )
 
-// Spell masks for the declarative Shadow talent mods below. One bit per
+// Spell masks for the declarative talent mods below. One bit per
 // ability, so a talent that reads "your instant cast spells" or "your
 // Devouring Plague" is a line of SpellModConfig against a set of bits
 // rather than a closure that re-derives the set every time a spell
@@ -46,19 +57,43 @@ const (
 	PriestSpellMaskDevouringPlague
 	PriestSpellMaskShadowWordPain
 	PriestSpellMaskShadowWordDeath
+	PriestSpellMaskSmite
+	PriestSpellMaskHolyFire
+	PriestSpellMaskLesserHeal
+	PriestSpellMaskHeal
+	PriestSpellMaskFlashHeal
+	PriestSpellMaskGreaterHeal
+	PriestSpellMaskBindingHeal
+	PriestSpellMaskRenew
+	PriestSpellMaskPrayerOfHealing
+	PriestSpellMaskPowerWordShield
+	PriestSpellMaskPenance
+	PriestSpellMaskHolyNova
+	PriestSpellMaskPrayerOfMending
+	PriestSpellMaskDesperatePrayer
 )
 
 // PriestSpellMaskInstantShadowDamage is every Shadow damage spell this
 // package registers whose client cast_time_ms is 0 (talents/priest.json
 // build 1.60.1.70009's spellconst: Mind Flay, Devouring Plague, Shadow
 // Word: Pain and Shadow Word: Death all carry cast_time_ms 0, unlike
-// Mind Blast, Smite and Holy Fire). This is what Twin Disciplines'
-// "your instant cast spells" reads for the Shadow spec; the talent also
-// reaches healing spells this package does not register
-// (RegisterHealingSpells is a no-op), so there is nothing more to add
-// to the set.
+// Mind Blast, Smite and Holy Fire).
 const PriestSpellMaskInstantShadowDamage = PriestSpellMaskMindFlay | PriestSpellMaskDevouringPlague |
 	PriestSpellMaskShadowWordPain | PriestSpellMaskShadowWordDeath
+
+// PriestSpellMaskInstantHealing is every healing spell whose client
+// cast_time_ms is 0 and that heals directly or over time: Renew, Penance,
+// Holy Nova, Prayer of Mending and Desperate Prayer. Power Word: Shield is
+// instant too but absorbs rather than heals, so Twin Disciplines
+// ("damage and healing of your instant cast spells") leaves it out.
+const PriestSpellMaskInstantHealing = PriestSpellMaskRenew | PriestSpellMaskPenance |
+	PriestSpellMaskHolyNova | PriestSpellMaskPrayerOfMending | PriestSpellMaskDesperatePrayer
+
+// PriestSpellMaskInstantCast is every spell the package registers with a
+// client cast_time_ms of 0, which is what Mental Agility's "instant cast
+// spells" reads.
+const PriestSpellMaskInstantCast = PriestSpellMaskInstantShadowDamage | PriestSpellMaskInstantHealing |
+	PriestSpellMaskPowerWordShield
 
 type Priest struct {
 	core.Character
@@ -66,18 +101,24 @@ type Priest struct {
 
 	Latency float64
 
-	CircleOfHealing   *core.Spell
+	BindingHeal       []*core.Spell
+	DesperatePrayer   []*core.Spell
 	DevouringPlague   []*core.Spell
-	EmpoweredRenew    *core.Spell
 	FlashHeal         []*core.Spell
 	GreaterHeal       []*core.Spell
+	Heal              []*core.Spell
 	HolyFire          []*core.Spell
+	HolyNova          []*core.Spell
+	InnerFire         []*core.Spell
 	InnerFocus        *core.Spell
+	LesserHeal        []*core.Spell
 	MindBlast         []*core.Spell
 	MindFlay          [][]*core.Spell // 1 entry for each tick for each rank
+	Penance           []*core.Spell
+	PowerInfusion     *core.Spell
 	PowerWordShield   []*core.Spell
 	PrayerOfHealing   []*core.Spell
-	PrayerOfMending   *core.Spell
+	PrayerOfMending   []*core.Spell
 	Renew             []*core.Spell
 	Shadowform        *core.Spell
 	Shoot             *core.Spell
@@ -96,7 +137,9 @@ type Priest struct {
 	VampiricEmbraceAuras core.AuraArray
 	WeakenedSouls        core.AuraArray
 
-	ProcPrayerOfMending core.ApplySpellResults
+	// lastHealSpellCode is the spell code of the last heal this priest
+	// cast, which Litany of Light compares the next heal against.
+	lastHealSpellCode int32
 }
 
 func (priest *Priest) GetCharacter() *core.Character {
@@ -131,16 +174,6 @@ func (priest *Priest) Initialize() {
 	priest.registerSmiteSpell()
 	priest.registerHolyFire()
 	priest.registerShootSpell()
-
-	priest.registerPowerInfusionCD()
-}
-
-func (priest *Priest) RegisterHealingSpells() {
-	// priest.registerFlashHealSpell()
-	// priest.registerGreaterHealSpell()
-	// priest.registerPowerWordShieldSpell()
-	// priest.registerPrayerOfHealingSpell()
-	// priest.registerRenewSpell()
 }
 
 func New(character *core.Character, talents string) *Priest {

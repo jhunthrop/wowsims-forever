@@ -27,12 +27,13 @@ func (priest *Priest) getSmiteBaseConfig(rank int) core.SpellConfig {
 	level := SmiteLevel[rank]
 
 	return core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellId},
-		SpellCode:   SpellCode_PriestSmite,
-		SpellSchool: core.SpellSchoolHoly,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       SpellFlagPriest | core.SpellFlagAPL,
+		ActionID:       core.ActionID{SpellID: spellId},
+		SpellCode:      SpellCode_PriestSmite,
+		ClassSpellMask: PriestSpellMaskSmite,
+		SpellSchool:    core.SpellSchoolHoly,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          SpellFlagPriest | core.SpellFlagAPL,
 
 		RequiredLevel: level,
 		Rank:          rank,
@@ -43,7 +44,7 @@ func (priest *Priest) getSmiteBaseConfig(rank int) core.SpellConfig {
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD:      core.GCDDefault,
-				CastTime: time.Millisecond*time.Duration(castTime) - time.Millisecond*100*time.Duration(priest.Talents.DivineFury),
+				CastTime: time.Millisecond * time.Duration(castTime),
 			},
 		},
 

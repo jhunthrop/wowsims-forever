@@ -1,7 +1,6 @@
 package priest
 
 import (
-	"slices"
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
@@ -20,8 +19,7 @@ import (
 func (priest *Priest) ApplyTalents() {
 	// Discipline
 	priest.registerInnerFocus()
-	priest.applyMentalAgility()
-	priest.applyForceOfWill()
+	priest.applyDivineAegis()
 
 	if priest.Talents.SilentResolve > 0 {
 		priest.PseudoStats.ThreatMultiplier *= 1 - (.04 * float64(priest.Talents.SilentResolve))
@@ -36,90 +34,73 @@ func (priest *Priest) ApplyTalents() {
 	priest.PseudoStats.SpiritRegenRateCasting = []float64{0.0, 0.17, 0.33, 0.5}[priest.Talents.Meditation]
 
 	if priest.Talents.MentalStrength > 0 {
-		priest.MultiplyStat(stats.Intellect, 1.0+0.02*float64(priest.Talents.MentalStrength))
+		priest.MultiplyStat(stats.Intellect, 1.0+mentalStrengthIntellectPerRank*float64(priest.Talents.MentalStrength))
 	}
 
 	// Power in Light: "Your Smite and Penance spells deal X% increased
-	// damage to targets afflicted with your Holy Fire." Both named
-	// spells are Holy school, conditioned on a Holy school DoT; it
-	// touches neither a Shadow spell nor Intellect/Spirit. Shadowform
-	// also drops the moment a Holy spell completes (registerShadowform,
-	// below), so a Shadow rotation never casts either and this talent
-	// changes no number this package computes. Named, not modeled.
+	// damage to targets afflicted with your Holy Fire." Damage only, and
+	// the healing specs cast Penance on allies; a healer's numbers do not
+	// move. Named, not modeled.
 	_ = priest.Talents.PowerInLight
 
 	// Holy Precision: "Improves your chance to hit with Holy spells by
-	// X%." Shadow's spells are Shadow school; this is Holy spell hit
-	// only, so it never reaches the rotation. Named, not modeled.
+	// X%." Heals do not roll to hit; only Smite and Holy Fire do, and no
+	// healing rotation casts them. Named, not modeled.
 	_ = priest.Talents.HolyPrecision
-
-	// Improved Power Word Shield and Soul Warding both shorten PW:Shield's
-	// cooldown/cost; PW:Shield is not registered in this package
-	// (RegisterHealingSpells is a no-op). Named, not modeled.
-	_, _ = priest.Talents.ImprovedPowerWordShield, priest.Talents.SoulWarding
 
 	// Martyrdom: a chance, on being critically struck, to resist
 	// pushback and interrupt effects for 6 sec. The only lever core has
 	// for pushback resistance (Spell.PushbackReduction) is read from the
 	// ATTACKING spell in applySpellPushback (sim/core/cast.go), not from
 	// anything a target-side talent can set, so there is no mod kind
-	// this talent could use without a core change. See PORTING.md-style
-	// note in the engine-lane report for Twilight Focus below, which
-	// hits the identical gap. Named, not modeled.
+	// this talent could use without a core change. Named, not modeled.
 	_ = priest.Talents.Martyrdom
-
-	// Improved Inner Fire: more Armor and more charges on Inner Fire.
-	// This package registers no Inner Fire spell or buff at all, so
-	// there is nothing to improve. Named, not modeled.
-	_ = priest.Talents.ImprovedInnerFire
 
 	// Improved Mana Burn: shortens Mana Burn's cast time. Mana Burn is
 	// not registered in this package (a PvP ability with no mana-pool
 	// target on a Patchwerk-style dummy). Named, not modeled.
 	_ = priest.Talents.ImprovedManaBurn
 
-	// Penance: a Discipline/Holy burst-heal-or-damage channel, not
-	// registered in this package. Named, not modeled.
-	_ = priest.Talents.Penance
-
-	// Renewed Hope and Divine Aegis both modify critical heals; this
-	// package registers no healing spells. Named, not modeled.
-	_, _ = priest.Talents.RenewedHope, priest.Talents.DivineAegis
-
 	// Twilight Focus: "a X% chance to avoid interruption caused by
-	// damage while casting any spell." The only pushback-resistance
-	// lever core exposes, Spell.PushbackReduction, is read off the
-	// ATTACKING spell in applySpellPushback (sim/core/cast.go) - no
-	// class can set a value there for its own casts, since nothing in
-	// this repository registers a boss ability with a non-zero
-	// PushbackReduction. Modelling this talent correctly needs core to
-	// read a caster-side value (e.g. a PseudoStats field) in that roll
-	// instead; that is a sim/core change, out of scope for this lane.
-	// Named, not modeled; reported as a core gap.
+	// damage while casting any spell." Same pushback gap as Martyrdom:
+	// core reads the lever off the attacking spell, and the fake raid
+	// never interrupts the healer anyway. Named, not modeled; reported as
+	// a core gap.
 	_ = priest.Talents.TwilightFocus
 
 	// Holy
 	priest.applyInspiration()
 	priest.applyHolySpecialization()
 	priest.applySearingLight()
+	priest.applyLitanyOfLight()
 
 	priest.PseudoStats.SchoolDamageTakenMultiplier.MultiplyMagicSchools(1 - 0.02*float64(priest.Talents.SpellWarding))
 
 	if priest.Talents.SpiritualGuidance > 0 {
-		priest.AddStatDependency(stats.Spirit, stats.SpellPower, 0.05*float64(priest.Talents.SpiritualGuidance))
+		// "Increases your spell healing by up to 5% of your total Spirit
+		// and your spell damage by up to 1% of your total Spirit" per
+		// rank. Spirit grants the healing stat; the damage half is
+		// Forever's one-third rule (core.HealingToSpellDamageRatio), which
+		// already turns the healing stat into spell damage.
+		priest.AddStatDependency(stats.Spirit, stats.HealingPower, spiritualGuidanceHealingPerSpirit*float64(priest.Talents.SpiritualGuidance))
 	}
 
-	// Improved Renew, Holy Nova, Blessed Recovery, Holy Reach, Improved
-	// Healing, Binding Heal, Litany of Light, Spirit of Redemption,
-	// Spiritual Healing and Prayer of Mending are all healing, AoE-heal,
-	// range or on-death effects; this package registers no healing
-	// spells, no Holy Nova and models no character death (a Patchwerk
-	// dummy fight does not end from the priest's own death). Named, not
-	// modeled.
-	_, _, _ = priest.Talents.ImprovedRenew, priest.Talents.HolyNova, priest.Talents.BlessedRecovery
-	_, _, _ = priest.Talents.HolyReach, priest.Talents.ImprovedHealing, priest.Talents.BindingHeal
-	_, _, _ = priest.Talents.LitanyOfLight, priest.Talents.SpiritOfRedemption, priest.Talents.SpiritualHealing
-	_ = priest.Talents.PrayerOfMending
+	// Blessed Recovery: a heal over time on the priest after a critical
+	// hit or a hit of over 30% of its health. The fake raid never hits
+	// the healer, so there is no trigger. Named, not modeled.
+	_ = priest.Talents.BlessedRecovery
+
+	// Holy Reach: Smite and Holy Fire range and Prayer of Healing and
+	// Holy Nova radius. The fake raid stands in range of everything, so
+	// nothing changes. Named, not modeled.
+	_ = priest.Talents.HolyReach
+
+	// Spirit of Redemption: a 15 s healing form on the priest's death. A
+	// healing sim does not end the healer; the priest is not damaged by
+	// the raid damage model. Named, not modeled.
+	_ = priest.Talents.SpiritOfRedemption
+
+	priest.applyDeclarativeHealingTalents()
 
 	// Shadow
 	priest.registerVampiricEmbraceSpell()
@@ -164,10 +145,10 @@ func (priest *Priest) applyDeclarativeShadowTalents() {
 
 	if t.TwinDisciplines > 0 {
 		// "Increases the damage and healing of your instant cast spells
-		// by 1%/2%/3%/4%/5%." The healing half reaches spells this
-		// package does not register; the Shadow damage half is Mind
-		// Flay, Devouring Plague, Shadow Word: Pain and Shadow Word:
-		// Death - see PriestSpellMaskInstantShadowDamage's comment.
+		// by 1%/2%/3%/4%/5%." The Shadow damage half is Mind Flay,
+		// Devouring Plague, Shadow Word: Pain and Shadow Word: Death
+		// (PriestSpellMaskInstantShadowDamage); the healing half is the
+		// instant heals (PriestSpellMaskInstantHealing).
 		//
 		// SpellMod_DamageDone_Pct's FloatValue reaches
 		// Spell.ApplyMultiplicativeDamageBonus, which does
@@ -179,7 +160,7 @@ func (priest *Priest) applyDeclarativeShadowTalents() {
 		// here is a full multiplier, not an offset.
 		priest.AddStaticMod(core.SpellModConfig{
 			Kind:       core.SpellMod_DamageDone_Pct,
-			ClassMask:  PriestSpellMaskInstantShadowDamage,
+			ClassMask:  PriestSpellMaskInstantShadowDamage | PriestSpellMaskInstantHealing,
 			FloatValue: 1 + twinDisciplinesDamagePerRank*float64(rankOf("twin_disciplines", t.TwinDisciplines)),
 		})
 	}
@@ -252,33 +233,6 @@ const (
 	devouringContagionCostPctPerRank = -25
 )
 
-func (priest *Priest) applyMentalAgility() {
-	if priest.Talents.MentalAgility == 0 {
-		return
-	}
-
-	priest.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.Cost != nil && spell.Flags.Matches(SpellFlagPriest) && spell.DefaultCast.CastTime == 0 {
-			spell.Cost.Multiplier -= 2 * priest.Talents.MentalAgility
-		}
-	})
-}
-
-func (priest *Priest) applyForceOfWill() {
-	/*
-		if priest.Talents.ForceOfWill == 0 {
-			return
-		}
-
-		priest.OnSpellRegistered(func(spell *core.Spell) {
-			if spell.Flags.Matches(SpellFlagPriest) {
-				spell.DamageMultiplierAdditive += 0.01 * float64(priest.Talents.ForceOfWill)
-				spell.BonusCritRating += 1 * float64(priest.Talents.ForceOfWill) * core.CritRatingPerCritChance
-			}
-		})
-	*/
-}
-
 func (priest *Priest) applyHolySpecialization() {
 	if priest.Talents.HolySpecialization == 0 {
 		return
@@ -288,33 +242,6 @@ func (priest *Priest) applyHolySpecialization() {
 		if spell.Flags.Matches(SpellFlagPriest) && spell.SpellSchool.Matches(core.SpellSchoolHoly) {
 			spell.BonusCritRating += 1 * float64(priest.Talents.HolySpecialization) * core.CritRatingPerCritChance
 		}
-	})
-}
-
-func (priest *Priest) applyInspiration() {
-	if priest.Talents.Inspiration == 0 {
-		return
-	}
-
-	auras := make([]*core.Aura, len(priest.Env.AllUnits))
-	for _, unit := range priest.Env.AllUnits {
-		if !priest.IsOpponent(unit) {
-			aura := core.InspirationAura(unit, priest.Talents.Inspiration)
-			auras[unit.UnitIndex] = aura
-		}
-	}
-
-	priest.RegisterAura(core.Aura{
-		Label:    "Inspiration Talent",
-		Duration: core.NeverExpires,
-		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Activate(sim)
-		},
-		OnHealDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if slices.Contains([]int32{SpellCode_PriestFlashHeal, SpellCode_PriestHeal, SpellCode_PriestGreaterHeal}, spell.SpellCode) {
-				auras[result.Target.UnitIndex].Activate(sim)
-			}
-		},
 	})
 }
 
