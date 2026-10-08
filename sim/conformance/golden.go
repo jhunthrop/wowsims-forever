@@ -118,7 +118,7 @@ func renderGolden(classSlug, clientBuild string, rows []Row, talentGatedRows []R
 		renderRowsTable(&b, talentGatedRows)
 	}
 
-	renderTrainableGaps(&b, gaps)
+	renderTrainableGaps(&b, classSlug, gaps)
 
 	return b.String()
 }

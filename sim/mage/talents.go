@@ -222,7 +222,9 @@ func (mage *Mage) registerPresenceOfMindCD() {
 	pomAura := mage.RegisterAura(core.Aura{
 		Label:    "Presence of Mind",
 		ActionID: actionID,
-		Duration: time.Second * 15,
+		// The client's duration_ms is -1, "until removed": the next
+		// applicable cast ends it (OnCastComplete below).
+		Duration: core.NeverExpires,
 		OnInit: func(aura *core.Aura, sim *core.Simulation) {
 			for spellIdx := range mage.Spellbook {
 				if spell := mage.Spellbook[spellIdx]; spell.DefaultCast.CastTime > 0 {
@@ -254,13 +256,6 @@ func (mage *Mage) registerPresenceOfMindCD() {
 		ActionID:      actionID,
 		Flags:         core.SpellFlagNoOnCastComplete,
 		RequiredLevel: 1,
-		// No RelatedSelfBuff: the client's own duration_ms for this
-		// spell is -1 ("until removed"), matching how pomAura really
-		// behaves (it ends on the mage's next applicable cast via
-		// OnCastComplete, not a fixed timer) - wiring pomAura's 15s
-		// safety-net Duration here would turn this row's real match
-		// (-1 client vs. 0 engine, both read as "no fixed duration" by
-		// compare.go's verdictFor) into a false mismatch.
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    mage.NewTimer(),

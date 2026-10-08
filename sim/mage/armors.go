@@ -6,13 +6,10 @@ import (
 )
 
 // frostIceArmorLearnLevels is the real client learn level (build
-// 1.60.1.70009) for each id this aura already cycled through under the
-// old SoD-phase bracket map (25/40/50/60): Frost Armor rank 3 (7301,
-// learn level 20) is worn until Ice Armor ranks 2-4 (7320/10219/10220,
-// learn levels 40/50/60) replace it. Ice Armor rank 1 (7302, learn level
-// 30) was never one of the ids this aura showed and stays out of the
-// table, same as before.
-var frostIceArmorLearnLevels = []int{20, 40, 50, 60}
+// 1.60.1.70009) for each id this aura cycles through: Frost Armor rank 3
+// ranks 1-3 (168/7300/7301, learn levels 1/10/20) are worn until Ice Armor
+// ranks 1-4 (7302/7320/10219/10220, learn levels 30/40/50/60) replace them.
+var frostIceArmorLearnLevels = []int{1, 10, 20, 30, 40, 50, 60}
 
 type frostIceArmorRank struct {
 	spellID  int32
@@ -21,10 +18,13 @@ type frostIceArmorRank struct {
 }
 
 var frostIceArmorRanks = map[int]frostIceArmorRank{
-	1: {spellID: 7301, armor: 200, frostRes: 0},
-	2: {spellID: 7320, armor: 380, frostRes: 9},
-	3: {spellID: 10219, armor: 470, frostRes: 12},
-	4: {spellID: 10220, armor: 560, frostRes: 15},
+	1: {spellID: 168, armor: 30, frostRes: 0},
+	2: {spellID: 7300, armor: 110, frostRes: 0},
+	3: {spellID: 7301, armor: 200, frostRes: 0},
+	4: {spellID: 7302, armor: 290, frostRes: 6},
+	5: {spellID: 7320, armor: 380, frostRes: 9},
+	6: {spellID: 10219, armor: 470, frostRes: 12},
+	7: {spellID: 10220, armor: 560, frostRes: 15},
 }
 
 // frostIceArmorRankAtLevel reports the aura's data for the given
@@ -76,6 +76,11 @@ func (mage *Mage) applyFrostIceArmor() {
 // replacing the old SoD-phase bracket map (40/50/60).
 var mageArmorLearnLevels = []int{34, 46, 58}
 
+// mageArmorCastingRegen is the share of spirit mana regeneration kept while
+// casting: the client's aura 134 (mana regen interrupt) carries 50 on every
+// rank of Mage Armor (6117/22782/22783), where the vanilla literal was 30.
+const mageArmorCastingRegen = 0.5
+
 type mageArmorRank struct {
 	spellID  int32
 	spellRes float64
@@ -110,7 +115,7 @@ func (mage *Mage) applyMageArmor() {
 		ActionID:   core.ActionID{SpellID: spellID},
 		BuildPhase: core.CharacterBuildPhaseBuffs,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			mage.PseudoStats.SpiritRegenRateCasting += .3
+			mage.PseudoStats.SpiritRegenRateCasting += mageArmorCastingRegen
 
 			if aura.Unit.Env.MeasuringStats && aura.Unit.Env.State != core.Finalized {
 				mage.AddResistances(spellRes)
@@ -119,7 +124,7 @@ func (mage *Mage) applyMageArmor() {
 			}
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			mage.PseudoStats.SpiritRegenRateCasting -= .3
+			mage.PseudoStats.SpiritRegenRateCasting -= mageArmorCastingRegen
 
 			if aura.Unit.Env.MeasuringStats && aura.Unit.Env.State != core.Finalized {
 				mage.AddResistances(-1 * spellRes)

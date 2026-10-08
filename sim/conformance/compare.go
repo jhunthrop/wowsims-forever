@@ -61,6 +61,10 @@ type Row struct {
 	// HasDuration is false when neither side names a duration for this
 	// spell, so the duration columns and Verdict ignore each other.
 	HasDuration bool
+	// DurationReading is non-empty when the duration column is read through
+	// one of the report-side readings in duration_reading.go instead of
+	// being compared as numbers; it holds the reading's explanation.
+	DurationReading string
 
 	// Damage is the base-damage comparison (damage.go). It is reported in
 	// its own columns and does not move Verdict.
@@ -234,6 +238,8 @@ func rowFor(clientClass spellconst.Class, spec Preset, level int32, character *c
 		row.HasDuration = true
 	}
 
+	row.DurationReading = durationReading(row, clientSpell, spell, siblingSpellIDs(clientClass, clientSpell.Name))
+
 	row.Damage = compareDamage(clientSpell, int(level), spell)
 
 	row.Verdict, row.Diff = verdictFor(row)
@@ -393,7 +399,10 @@ func verdictFor(row Row) (verdict string, diff string) {
 
 	durationMatches := true
 	clientStatesNoDuration := false
-	if row.HasDuration {
+	if row.DurationReading != "" {
+		// Read through a report-side reading (duration_reading.go): the
+		// numbers are not comparable, so they are not scored.
+	} else if row.HasDuration {
 		if row.ClientDurationMS <= 0 {
 			// The client states no duration (0) or a permanent one (-1
 			// stances aside, which this program does not try to score).
@@ -417,6 +426,8 @@ func verdictFor(row Row) (verdict string, diff string) {
 	otherFieldsMatch := costMatches && costTypeMatches && cooldownMatches && castMatches && gcdMatches && levelMatches
 
 	switch {
+	case otherFieldsMatch && row.DurationReading != "":
+		return VerdictUnmodeledDuration, "duration_ms: " + row.DurationReading
 	case otherFieldsMatch && (durationMatches || (row.HasDuration && clientStatesNoDuration)):
 		if row.HasDuration && clientStatesNoDuration && row.EngineDurationMS != 0 {
 			return "client-scripted", "duration_ms: client states none (0), engine keeps " + fmt.Sprintf("%dms", row.EngineDurationMS)

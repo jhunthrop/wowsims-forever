@@ -199,19 +199,6 @@ config," not "change a number."
 | Hunter | Bestial Wrath | 40 |
 | Hunter | Rapid Fire | 26 |
 | Hunter | Raptor Strike | 56 (see the hunter section below - this spell has a second, bogus issue too) |
-| Mage | Arcane Missiles | 8, 16, 24, 32, 40, 48, 56 (rank 1 only - see the mage section) |
-| Mage | Arcane Power | 1 |
-| Mage | Cold Snap | 1 |
-| Mage | Combustion | 40 |
-| Mage | Counterspell | 24 |
-| Mage | Evocation | 20 |
-| Mage | Presence of Mind | 1 |
-| Warlock | Bane of Havoc | 1 |
-| Warlock | Curse of Recklessness | 56 (rank 4) |
-| Warlock | Summon Felhunter | 30 |
-| Warlock | Summon Imp | 1 |
-| Warlock | Summon Succubus | 20 |
-| Warlock | Summon Voidwalker | 10 |
 | Paladin | Judgement of Command | 20, 30, 40, 50, 60 |
 | Paladin | Judgement of Righteousness | 1, 10, 18, 26, 34, 42, 50, 58 |
 | Paladin | Judgement of the Crusader | 6, 12, 22, 32, 42, 52 |
@@ -289,39 +276,36 @@ full `match` rows; Bestial Wrath (cost) and Rapid Fire
 
 ### Mage
 
-Job 1 confirmed Blizzard, Flamestrike, Ice Barrier, Frost Nova and
-Arcane Power's durations outright - `duration_ms` no longer appears in
-any of their Diff text. Blizzard, Flamestrike, Ice Barrier and Frost
-Nova are now full `match` rows; Arcane Power still mismatches on
-`required_level`. Of the eight spells this bucket originally named,
-only three (Blast Wave, Counterspell, Frostbolt) still have no
-trackable aura at all.
+Status after the mage and warlock conformance lane: 0 `mismatch` rows
+(299 `match`, 17 `client-scripted`, 78 `unmodeled-duration`). Fixed in the
+engine, with the client's number: Presence of Mind's aura is now
+`NeverExpires` (the client's "until removed"; the old 15 second timer was a
+safety net the next cast always beat), Mage Armor keeps 50% of mana
+regeneration while casting (client aura 134, was the vanilla 30%), and Frost
+Armor ranks 1-2 and Ice Armor rank 1 (168, 7300, 7302) exist at their learn
+levels. Already correct before this lane and re-verified: Fireball's DoT
+durations, Arcane Missiles rank 1, Evocation, every required level.
 
-| Spell | Field | Client | Engine | Likely cause |
-|---|---|---|---|---|
-| Arcane Missiles rank 1 | cost, cost_type, gcd_ms, required_level, duration_ms (every level) | 85-655/mana/1500/8-56/3000-5000 | 0/none/0/0/0 | registration gap, and a bigger one than the others here: EVERY field reads as the engine's zero-value at once, not just one. Rank 1 looks unregistered/stubbed rather than mis-valued - worth checking whether `mage`'s Arcane Missiles rank loop actually builds a real SpellConfig for rank 1 or only ranks 2+. |
-| Arcane Power, Presence of Mind, Combustion, Cold Snap | required_level | 1 / 1 / 40 / 1 | 0 | registration gap (see the combined table above) |
-| Blast Wave (all ranks), Counterspell, Frostbolt (all ranks) | duration_ms | 6000 / 10000 / 5000-9000 | 0 (no aura registered) | missing aura duration - still true after Job 1's wider search: the chill/slow/burn effect isn't exposed as any trackable aura `engineDuration` can reach |
-| Evocation | duration_ms | 8000 | -1 | newly visible by Job 1: the engine registers a real aura for Evocation, but it carries `core.NeverExpires` (presumably managed by the channel's own end-of-cast logic rather than an aura timer) while the client names a finite 8s - a real, now-visible disagreement, not a registration gap |
-| Fireball ranks 1-3 | duration_ms | 4000 (r1), 6000 (r2-3) | 8000 | stale vanilla literal - the dot's duration is hardcoded to the rank-4+ value (8000, where it does match) instead of reading the client's own lower duration for ranks 1-3 |
+`unmodeled-duration` is a verdict of its own, adopted by the mage and warlock
+goldens only (`durationReadingClasses` in `duration_reading.go`; another class
+joins by adding its slug and regenerating): every field but duration matches,
+and the client's duration belongs to a control effect no sim number reads - a
+movement slow (Frostbolt, Cone of Cold, Blast Wave), an interrupt's school
+lockout (Counterspell) - so the engine registers no aura for it by design. The
+row is not scored as a mismatch, and no engine value was invented to make it
+match.
 
 ### Warlock
 
-Job 1 confirmed Amplify Curse, Bane of Havoc and Rain of Fire's
-durations outright - `duration_ms` no longer appears in any of their
-Diff text. Amplify Curse and Rain of Fire are now full `match` rows;
-Bane of Havoc still mismatches on `gcd_ms`/`required_level`. Death Coil
-and Shadowburn still have no trackable aura; Curse of Recklessness rank
-4 found a real aura, but it is a `core.FullBuffs`/`NeverExpires` case,
-not a timed one (see below).
+Status: 0 `mismatch` rows (594 `match`, 37 `unmodeled-duration`). Already
+correct in the engine and re-verified: the four summon costs (Imp at its own
+80%), their required levels, Bane of Havoc's GCD and level. The 37 reads:
 
-| Spell | Field | Client | Engine | Likely cause |
-|---|---|---|---|---|
-| Summon Imp, Summon Voidwalker, Summon Succubus, Summon Felhunter | cost | 0.00 | 1373.00 (Felhunter/Voidwalker/Succubus) / 1373.00 (Imp, see note) | percent-of-mana cost vs. flat client column - answered: client's raw `PowerCostPct` is 100 for Felhunter/Voidwalker/Succubus (matching their `ManaCostOptions.FlatCost: warlock.BaseMana`) and 80 for Imp - but `sim/warlock/summon_demon.go` has all four summons share the SAME `manaCost` variable, so **Imp is a real bug**: it should cost 80% of base mana and currently costs 100%, same as the other three. Not a visibility gap for any of the four; see the vocabulary entry above. |
-| Summon Felhunter, Summon Imp, Summon Succubus, Summon Voidwalker | required_level | 30 / 1 / 20 / 10 | 0 | registration gap |
-| Bane of Havoc | required_level, gcd_ms | 1 / 0 | 0 / 1500 | registration gap (required level) and a second gap in the opposite direction: Bane of Havoc is a cooldown-only effect the client flags GCD-less (0), but the engine applies the standard 1.5s GCD anyway - its `SpellConfig` is missing an explicit `GCD: 0` override |
-| Curse of Recklessness (rank 4) | duration_ms | 120000 | -1 | full-buffs duration artifact (see vocabulary) - `core.CurseOfRecklessnessAura` itself registers a real 120000ms duration matching the client exactly, but `core.FullBuffs.Debuffs` pre-applies the same debuff to this report's target permanently via `MakePermanent` (`sim/core/debuffs.go:143`), so the aura this report finds on the target is already mutated to `NeverExpires` by the time it is read |
-| Death Coil (all ranks), Shadowburn (all ranks) | duration_ms | 3000 / 8000 | 0 (no aura registered) | missing aura duration - still true after Job 1's wider search |
+| Spell | Rows | Reading |
+|---|---|---|
+| Death Coil (all ranks) | 10 | client 3000 is the 3 second fear (aura 7) the target takes if the hit does not kill it; a control effect, not modelled |
+| Shadowburn (all ranks) | 21 | client 8000 is the aura 86 shard marker (grants a Soul Shard if the target dies); this fork's Shadowburn costs mana and has no shard resource |
+| Curse of Recklessness (ranks 2-4) | 6 | full-buffs duration artifact: the target aura is the object `core.FullBuffs.Debuffs` made permanent with `MakePermanent`; the curse's own constructor sets 120000, matching the client |
 
 ### Paladin
 

@@ -195,23 +195,27 @@ func trainableGaps(trainables ClassTrainables, presets []Preset, gatedRows []Row
 
 // renderTrainableGaps writes the "Trainable abilities the engine does not
 // register" section and its "In the client, no learn row" subsection.
-func renderTrainableGaps(b *strings.Builder, gaps TrainableGaps) {
+func renderTrainableGaps(b *strings.Builder, classSlug string, gaps TrainableGaps) {
 	fmt.Fprintf(b, "## Trainable abilities the engine does not register\n\n")
 	fmt.Fprintf(b, "Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. %d of the class's %d active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).\n\n", len(gaps.Unregistered), gaps.Active)
-	renderTrainableTable(b, gaps.Unregistered)
+	renderTrainableTable(b, classSlug, gaps.Unregistered)
 
 	fmt.Fprintf(b, "### In the client, no learn row\n\n")
 	fmt.Fprintf(b, "Active, ranked, levelled class-family spells the client lists on no SkillLineAbility row (Unstable Affliction, Hydra Shot) that the engine does not register. They are not counted above or in SUMMARY.md; the list also carries spells that are probably not player spellbook entries (rogue poisons, NPC volleys).\n\n")
-	renderTrainableTable(b, gaps.NoLearnRow)
+	renderTrainableTable(b, classSlug, gaps.NoLearnRow)
 }
 
-func renderTrainableTable(b *strings.Builder, list []Trainable) {
+func renderTrainableTable(b *strings.Builder, classSlug string, list []Trainable) {
 	if len(list) == 0 {
 		fmt.Fprintf(b, "None.\n\n")
 		return
 	}
-	fmt.Fprintf(b, "| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |\n")
-	fmt.Fprintf(b, "|---|---|---|---|---|---|---|---|---|\n")
+	dispositions, classified := trainableDispositions[classSlug]
+	header, rule := "| Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |", "|---|---|---|---|---|---|---|---|---|"
+	if classified {
+		header, rule = strings.TrimSuffix(header, "|")+"| Disposition |", rule+"---|"
+	}
+	fmt.Fprintf(b, "%s\n%s\n", header, rule)
 	for _, t := range list {
 		last := t.Ranks[len(t.Ranks)-1]
 		cost := "0"
@@ -222,9 +226,24 @@ func renderTrainableTable(b *strings.Builder, list []Trainable) {
 		if skillLine == "" {
 			skillLine = "n/a"
 		}
-		fmt.Fprintf(b, "| %s (%d) | %d→%d | %d | %s | %s | %s | %d | %d | %s |\n",
+		disposition := ""
+		if classified {
+			disposition = " " + dispositionFor(dispositions, t.Name) + " |"
+		}
+		fmt.Fprintf(b, "| %s (%d) | %d→%d | %d | %s | %s | %s | %d | %d | %s |%s\n",
 			t.Name, t.Ranks[0].ID, t.firstLevel(), last.Level, len(t.Ranks), skillLine, t.Source,
-			cost, t.CastTimeMS, t.CooldownMS, t.whyItMatters())
+			cost, t.CastTimeMS, t.CooldownMS, t.whyItMatters(), disposition)
 	}
 	fmt.Fprintf(b, "\n")
+}
+
+// unclassifiedDisposition is what a classified class's table prints for an
+// ability with no entry; a test fails on it.
+const unclassifiedDisposition = "unclassified"
+
+func dispositionFor(dispositions map[string]string, name string) string {
+	if d, ok := dispositions[name]; ok {
+		return d
+	}
+	return unclassifiedDisposition
 }
