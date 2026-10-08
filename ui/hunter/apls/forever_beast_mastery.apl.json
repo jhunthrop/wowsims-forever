@@ -140,6 +140,32 @@
       }
     },
     {
+      "notes": "Multi-Shot as the filler between Aimed Shots.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "autoTimeToNext": {
+                "autoType": "Ranged"
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "0.5s"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 2643,
+            "rank": 0
+          }
+        }
+      }
+    },
+    {
       "notes": "Serpent Sting kept up whenever it is about to fall off and neither shot above is close to ready -- the cited guide's own rotation step, not skipped.",
       "action": {
         "condition": {
@@ -188,32 +214,6 @@
           "spellId": {
             "spellId": 13555,
             "rank": 8
-          }
-        }
-      }
-    },
-    {
-      "notes": "Multi-Shot as the filler between Aimed Shots.",
-      "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "autoTimeToNext": {
-                "autoType": "Ranged"
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "0.5s"
-              }
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 2643,
-            "rank": 0
           }
         }
       }

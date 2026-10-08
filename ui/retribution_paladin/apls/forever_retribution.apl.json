@@ -107,6 +107,30 @@
           }
         }
       }
+    },
+    {
+      "notes": "Consecration last, as the filler between Judgement, Exorcism and Holy Strike, and only while mana is above 65 percent: it is the most expensive button on the list, and below that line the mana is worth more to the rest of the rotation.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 5,
+            "spellId": 20924
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "65%"
+              }
+            }
+          }
+        }
+      }
     }
   ]
 }

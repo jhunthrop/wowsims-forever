@@ -141,6 +141,30 @@
           }
         }
       }
+    },
+    {
+      "notes": "Earth Shock on the shock cooldown while mana is above 50 percent.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 7,
+            "spellId": 10414
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "50%"
+              }
+            }
+          }
+        }
+      }
     }
   ]
 }
