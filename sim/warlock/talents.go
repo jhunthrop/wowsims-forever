@@ -230,17 +230,24 @@ func (warlock *Warlock) applyFirestone() {
 //                            Affliction
 ///////////////////////////////////////////////////////////////////////////
 
+const (
+	// Suppression (18174, live tree): "Improves your chance to hit by N%
+	// and reduces all threat you generate by 4N%". The client's rows at
+	// rank 5 are aura 55 (spell hit) 5 and aura 54 (hit) 5, both with
+	// spell class mask 0 (every spell), and aura 10 (threat) -20 on misc
+	// 127 (all schools).
+	suppressionHitPercentPerRank      = 1
+	suppressionThreatReductionPerRank = 0.04
+)
+
 func (warlock *Warlock) applySuppression() {
 	if warlock.Talents.Suppression == 0 {
 		return
 	}
 
 	points := float64(warlock.Talents.Suppression)
-	warlock.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.Flags.Matches(WarlockFlagAffliction) {
-			spell.BonusHitRating += 2 * points * core.CritRatingPerCritChance
-		}
-	})
+	warlock.AddStat(stats.Hit, suppressionHitPercentPerRank*points*core.HitRatingPerHitChance)
+	warlock.PseudoStats.ThreatMultiplier *= 1 - suppressionThreatReductionPerRank*points
 }
 
 func (warlock *Warlock) applyNightfall() {

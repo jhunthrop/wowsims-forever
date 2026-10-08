@@ -528,3 +528,38 @@ func TestDemonicPactKeepsSacrificeAcrossDifferentPetButNotSameOne(t *testing.T) 
 		t.Errorf("Fire damage multiplier after resummoning the sacrificed Imp = %v, want %v (the sacrifice should be cancelled)", got, want)
 	}
 }
+
+// TestSuppressionAddsOnePercentSpellHitPerRankToEveryWarlockSpell checks
+// rank 5 against the client's Suppression rows (spell 18174, live tree):
+// aura 55 (spell hit) 5 and aura 54 (hit) 5, both with spell class mask 0,
+// so every spell, Affliction or not, gets +5% hit.
+func TestSuppressionAddsOnePercentSpellHitPerRankToEveryWarlockSpell(t *testing.T) {
+	_, bare, bareTarget := newBareWarlockForDamageTest(t)
+	_, talented, target := newWarlockForDamageTest(t, "05") // Affliction field 1, rank 5.
+
+	spells := map[string][2]*core.Spell{
+		"Corruption":   {bare.Corruption[len(bare.Corruption)-1], talented.Corruption[len(talented.Corruption)-1]},
+		"Shadow Bolt":  {bare.ShadowBolt[len(bare.ShadowBolt)-1], talented.ShadowBolt[len(talented.ShadowBolt)-1]},
+		"Searing Pain": {bare.SearingPain[len(bare.SearingPain)-1], talented.SearingPain[len(talented.SearingPain)-1]},
+	}
+	for name, pair := range spells {
+		bareHit := pair[0].SpellHitChance(bareTarget) * 100
+		talentedHit := pair[1].SpellHitChance(target) * 100
+		if got, want := talentedHit-bareHit, 5.0; !floatsNearlyEqual(got, want) {
+			t.Errorf("%s hit delta = %v points, want %v (Suppression rank 5, every spell)", name, got, want)
+		}
+	}
+}
+
+// TestSuppressionReducesAllThreatFourPercentPerRank checks rank 5: aura 10
+// (threat) -20 on misc 127 (all schools).
+func TestSuppressionReducesAllThreatFourPercentPerRank(t *testing.T) {
+	_, talented, _ := newWarlockForDamageTest(t, "05")
+	if got, want := talented.PseudoStats.ThreatMultiplier, 0.80; !floatsNearlyEqual(got, want) {
+		t.Errorf("threat multiplier = %v, want %v (Suppression rank 5)", got, want)
+	}
+	_, bare, _ := newBareWarlockForDamageTest(t)
+	if got := bare.PseudoStats.ThreatMultiplier; !floatsNearlyEqual(got, 1) {
+		t.Errorf("untalented threat multiplier = %v, want 1", got)
+	}
+}
