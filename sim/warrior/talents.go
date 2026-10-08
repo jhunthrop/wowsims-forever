@@ -249,6 +249,16 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 		})
 	}
 
+	// Booming Voice: "reduces their Rage cost by 5%" a point (the live
+	// tree's text; the area of effect has no meaning in a raid sim).
+	if t.BoomingVoice > 0 {
+		warrior.AddStaticMod(core.SpellModConfig{
+			Kind:      core.SpellMod_PowerCost_Pct,
+			ClassMask: WarriorSpellMaskBattleShout | WarriorSpellMaskDemoralizingShout,
+			IntValue:  -boomingVoiceCostReductionPct * int64(t.BoomingVoice),
+		})
+	}
+
 	// Improved Sunder Armor: "by 3" at rank 3, so 1 a point.
 	if t.ImprovedSunderArmor > 0 {
 		warrior.AddStaticMod(core.SpellModConfig{
@@ -475,6 +485,10 @@ func (warrior *Warrior) registerWeaponmasterExtraAttack(procMask core.ProcMask, 
 // client text doubled it to 2 for two-handed weapons; the live text and
 // Blizzard's 1 October 2026 notes ("Unbridled Wrath 1 rage regardless of
 // weapon") give a flat 1.
+// boomingVoiceCostReductionPct is the percent a Booming Voice point takes
+// off the rage cost of Battle Shout and Demoralizing Shout.
+const boomingVoiceCostReductionPct = 5
+
 const unbridledWrathRage = 1.0
 
 // applyUnbridledWrath is Unbridled Wrath: "a 60% chance to generate 1
@@ -791,18 +805,9 @@ func (warrior *Warrior) registerDeathWishCD() {
 // (Iron Will, Improved Disarm, Vanguard, Improved Shield Bash and Concussion
 // Blow) are listed at the end of talents_protection.go.
 //
-// ForeverFuryTalents spends 1 point on Booming Voice - the cheapest
-// legal filler on the Fury tier-0 row - and that is the one point of the
-// Fury build's 51 that buys nothing at all.
-//
 // Improved Tactical Mastery used to belong on this list and no longer
 // does: its rank text is a plain retained-rage number and stances.go
 // models it.
 //
-//	Booming Voice     - "+50% Battle Shout and Demoralizing Shout
-//	                    radius" at rank 5. Vanilla's raised their
-//	                    duration, which core.BattleShoutAura still takes
-//	                    a points argument for; radius has no meaning in
-//	                    a raid sim, so shouts.go passes 0.
 //	Weaponmaster's
 //	 dismount clause - Protection and utility, for the warrior-protection spec.

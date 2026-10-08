@@ -392,13 +392,13 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 60 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 55.79-63.01→55.79-63.01 | 0.571→0.571 | declared, matches |
 | FeralDruid | 60 | Wrath | 7 | 8905 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 46→46 | n/a | match |  | 69.34-77.46→69.34-77.46 | 0.571→0.571 | declared, matches |
 | FeralDruid | 60 | Wrath | 8 | 9912 | 120.00→120.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | n/a | match |  | 91.57-102.43→91.57-102.43 | 0.571→0.571 | declared, matches |
-| RestorationDruid | 10 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationDruid | 10 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RestorationDruid | 10 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
 | RestorationDruid | 10 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 90.29-114.91→90.29-114.91 | 0.571→0.571 | declared, matches |
 | RestorationDruid | 10 | Innervate | 0 | 29166 | 7.45 (5% base mana)→7.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationDruid | 10 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 10 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 20 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationDruid | 20 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RestorationDruid | 20 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
 | RestorationDruid | 20 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571→0.571 | declared, matches |
 | RestorationDruid | 20 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714→0.714 | declared, matches |
@@ -409,7 +409,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationDruid | 20 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 20 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 20 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 30 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationDruid | 30 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RestorationDruid | 30 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
 | RestorationDruid | 30 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571→0.571 | declared, matches |
 | RestorationDruid | 30 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714→0.714 | declared, matches |
@@ -426,7 +426,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationDruid | 30 | Rejuvenation | 4 | 2090 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 32.00-32.00→32.00-32.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 30 | Rejuvenation | 5 | 2091 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 42.00-42.00→42.00-42.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 30 | Tranquility | 1 | 740 | 375.00→375.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | 87.00-87.00→87.00-87.00 | 0.067→0.067 | declared, matches |
-| RestorationDruid | 38 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationDruid | 38 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RestorationDruid | 38 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
 | RestorationDruid | 38 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571→0.571 | declared, matches |
 | RestorationDruid | 38 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714→0.714 | declared, matches |
@@ -447,7 +447,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationDruid | 38 | Rejuvenation | 5 | 2091 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 42.00-42.00→42.00-42.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 38 | Rejuvenation | 6 | 3627 | 160.00→160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 51.00-51.00→51.00-51.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 38 | Tranquility | 1 | 740 | 375.00→375.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | 90.60-90.60→90.60-90.60 | 0.067→0.067 | declared, matches |
-| RestorationDruid | 40 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationDruid | 40 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RestorationDruid | 40 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
 | RestorationDruid | 40 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571→0.571 | declared, matches |
 | RestorationDruid | 40 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714→0.714 | declared, matches |
@@ -470,7 +470,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationDruid | 40 | Rejuvenation | 7 | 8910 | 195.00→195.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 71.00-71.00→71.00-71.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 40 | Tranquility | 1 | 740 | 375.00→375.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | 90.60-90.60→90.60-90.60 | 0.067→0.067 | declared, matches |
 | RestorationDruid | 40 | Tranquility | 2 | 8918 | 505.00→505.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | 129.00-129.00→129.00-129.00 | 0.067→0.067 | declared, matches |
-| RestorationDruid | 50 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationDruid | 50 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RestorationDruid | 50 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
 | RestorationDruid | 50 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571→0.571 | declared, matches |
 | RestorationDruid | 50 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714→0.714 | declared, matches |
@@ -499,7 +499,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationDruid | 50 | Tranquility | 1 | 740 | 375.00→375.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | 90.60-90.60→90.60-90.60 | 0.067→0.067 | declared, matches |
 | RestorationDruid | 50 | Tranquility | 2 | 8918 | 505.00→505.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | 133.20-133.20→133.20-133.20 | 0.067→0.067 | declared, matches |
 | RestorationDruid | 50 | Tranquility | 3 | 9862 | 695.00→695.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | 196.00-196.00→196.00-196.00 | 0.067→0.067 | declared, matches |
-| RestorationDruid | 60 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationDruid | 60 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | RestorationDruid | 60 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
 | RestorationDruid | 60 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571→0.571 | declared, matches |
 | RestorationDruid | 60 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714→0.714 | declared, matches |

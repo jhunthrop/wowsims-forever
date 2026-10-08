@@ -6,6 +6,10 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// sweepingStrikesDuration is the client's duration for Sweeping Strikes
+// (spell 12292, 20000 ms); vanilla's 10 seconds is gone.
+const sweepingStrikesDuration = 20 * time.Second
+
 func (warrior *Warrior) registerSweepingStrikesCD() {
 	if !warrior.Talents.SweepingStrikes {
 		return
@@ -50,7 +54,7 @@ func (warrior *Warrior) registerSweepingStrikesCD() {
 	ssAura := warrior.RegisterAura(core.Aura{
 		Label:     "Sweeping Strikes",
 		ActionID:  actionID,
-		Duration:  time.Second * 10,
+		Duration:  sweepingStrikesDuration,
 		MaxStacks: 5,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			aura.SetStacks(sim, 5)

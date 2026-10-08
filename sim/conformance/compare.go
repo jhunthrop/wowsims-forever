@@ -308,7 +308,7 @@ func engineDuration(spell *core.Spell, character *core.Character, siblingIDs map
 	if aura := matchingAura(spell.Unit.GetAuras(), siblingIDs); aura != nil {
 		return auraDurationMS(aura), true
 	}
-	if target := spell.Unit.CurrentTarget; target != nil {
+	for _, target := range enemyTargets(spell.Unit) {
 		if aura := matchingAura(target.GetAuras(), siblingIDs); aura != nil {
 			return auraDurationMS(aura), true
 		}
@@ -321,6 +321,25 @@ func engineDuration(spell *core.Spell, character *core.Character, siblingIDs map
 		}
 	}
 	return 0, false
+}
+
+// enemyTargets is the caster's current target, when it has one, followed
+// by every target of the encounter: a healing spec has no current target
+// (its debuff spells, such as Holy's Judgement of the Crusader, still
+// register their auras on the encounter's targets).
+func enemyTargets(caster *core.Unit) []*core.Unit {
+	var targets []*core.Unit
+	if caster.CurrentTarget != nil {
+		targets = append(targets, caster.CurrentTarget)
+	}
+	if caster.Env != nil {
+		for _, target := range caster.Env.Encounter.TargetUnits {
+			if target != caster.CurrentTarget {
+				targets = append(targets, target)
+			}
+		}
+	}
+	return targets
 }
 
 // auraDurationMS converts an aura's Duration to the client's own

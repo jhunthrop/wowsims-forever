@@ -10,6 +10,11 @@ import (
 
 const ShoutExpirationThreshold = time.Second * 3
 
+// battleShoutDuration is the client's duration for every Battle Shout rank
+// (spell 6673 and its ranks: "Lasts $d" at 180000 ms); vanilla's 2 minutes
+// is gone, and Booming Voice no longer lengthens it in Forever's tree.
+const battleShoutDuration = 3 * time.Minute
+
 // battleShoutRageCost reads the client's cost column for a rank of
 // Battle Shout. Rank 6 is the one rank whose column is a dedup
 // artifact: 11551 (cost 100) and 27578 (cost 0) share spell_level 52
@@ -29,8 +34,9 @@ func (warrior *Warrior) newShoutSpellConfig(actionID core.ActionID, rank int32, 
 	extraHits := 5 - len(allyAuras)
 
 	return warrior.RegisterSpell(AnyStance, core.SpellConfig{
-		ActionID: actionID,
-		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL | core.SpellFlagHelpful,
+		ActionID:       actionID,
+		ClassSpellMask: WarriorSpellMaskBattleShout,
+		Flags:          core.SpellFlagNoOnCastComplete | core.SpellFlagAPL | core.SpellFlagHelpful,
 
 		RequiredLevel: core.BattleShoutLevel[rank],
 
@@ -77,11 +83,11 @@ func (warrior *Warrior) newShoutSpellConfig(actionID core.ActionID, rank int32, 
 // (impBattleShout) is dropped because the Forever client's talent
 // trees don't carry it (core.BattleShoutAura's own call site already
 // passes 0 for it, per the FOREVER comment below).
-func battleShoutAllyAura(unit *core.Unit, actionID core.ActionID, baseAP float64, boomingVoicePts int32, has3pcWrath bool) *core.Aura {
+func battleShoutAllyAura(unit *core.Unit, actionID core.ActionID, baseAP float64, has3pcWrath bool) *core.Aura {
 	return unit.GetOrRegisterAura(core.Aura{
 		Label:      "Battle Shout",
 		ActionID:   actionID,
-		Duration:   time.Duration(float64(time.Minute*2) * (1 + 0.1*float64(boomingVoicePts))),
+		Duration:   battleShoutDuration,
 		BuildPhase: core.CharacterBuildPhaseBuffs,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			aura.Unit.AddStatsDynamic(sim, stats.Stats{
@@ -113,7 +119,7 @@ func (warrior *Warrior) registerBattleShout() {
 
 	warrior.BattleShout = warrior.newShoutSpellConfig(core.ActionID{SpellID: actionId}, rank, warrior.NewPartyAuraArray(func(unit *core.Unit) *core.Aura {
 		// FOREVER: Improved Battle Shout is not in the client's trees.
-		return battleShoutAllyAura(unit, core.ActionID{SpellID: actionId}, baseAP, warrior.Talents.BoomingVoice, has3pcWrath)
+		return battleShoutAllyAura(unit, core.ActionID{SpellID: actionId}, baseAP, has3pcWrath)
 	}))
 }
 

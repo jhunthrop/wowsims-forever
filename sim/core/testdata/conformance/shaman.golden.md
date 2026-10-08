@@ -778,7 +778,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 60 | Windwall Totem | 3 | 15112 | 225.00→225.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 10 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 10 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 33.36-35.44→33.36-35.44 | 0.386→0.386 | declared, matches |
-| RestorationShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 20.00-20.00→20.00-20.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 10 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 20.00-20.00→20.00-20.00 | 0.214→0.214 | declared, matches |
 | RestorationShaman | 10 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 5.00-5.00→- | 0.022→0.022 | not declared |
 | RestorationShaman | 10 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 6.00-6.00→- | 0.022→0.022 | not declared |
 | RestorationShaman | 10 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 7.00-7.00→- | 0.022→0.022 | not declared |
@@ -793,7 +793,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 10 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 10 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→0 | mismatch | duration_ms 30000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 10 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 10 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
 | RestorationShaman | 10 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
@@ -802,8 +802,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | mismatch | duration_ms 2000->0 (no aura registered) | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
 | RestorationShaman | 20 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
-| RestorationShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 35.00-35.00→35.00-35.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→35.00-35.00 | 0.214→0.214 | declared, matches |
 | RestorationShaman | 20 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 63.85-68.15→63.85-68.15 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 20 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 5.00-5.00→- | 0.022→0.022 | not declared |
 | RestorationShaman | 20 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 6.00-6.00→- | 0.022→0.022 | not declared |
@@ -826,8 +826,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 20 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 20 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 20 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→0 | mismatch | duration_ms 30000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→0 | mismatch | duration_ms 35000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→30000 | mismatch | duration_ms 35000->30000 | n/a | n/a | n/a |
 | RestorationShaman | 20 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 20 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 20 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→-1 | mismatch | duration_ms 300000->-1 | n/a | n/a | n/a |
@@ -840,9 +840,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
 | RestorationShaman | 30 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
-| RestorationShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 45.40-45.40→45.40-45.40 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 30 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 30 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 45.40-45.40→45.40-45.40 | 0.214→0.214 | declared, matches |
 | RestorationShaman | 30 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 30 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 5.00-5.00→- | 0.022→0.022 | not declared |
 | RestorationShaman | 30 | Healing Stream | 0 | 6371 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 6.00-6.00→- | 0.022→0.022 | not declared |
@@ -866,15 +866,15 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 30 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 30 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 30 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→0 | mismatch | duration_ms 20000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationShaman | 30 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 30 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 30 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→0 | mismatch | duration_ms 30000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→0 | mismatch | duration_ms 35000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→30000 | mismatch | duration_ms 35000->30000 | n/a | n/a | n/a |
+| RestorationShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→30000 | mismatch | duration_ms 40000->30000 | n/a | n/a | n/a |
 | RestorationShaman | 30 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 30 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 30 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
@@ -893,9 +893,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 38 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
-| RestorationShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 38 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 38 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 38 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
 | RestorationShaman | 38 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 38 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 124.95-133.45→124.95-133.45 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 38 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 5.00-5.00→- | 0.022→0.022 | not declared |
@@ -925,17 +925,17 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 38 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 38 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 38 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 38 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 38 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→0 | mismatch | duration_ms 20000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→0 | mismatch | duration_ms 20000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationShaman | 38 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 38 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 38 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 38 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 38 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→0 | mismatch | duration_ms 30000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→0 | mismatch | duration_ms 35000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→30000 | mismatch | duration_ms 35000->30000 | n/a | n/a | n/a |
+| RestorationShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→30000 | mismatch | duration_ms 40000->30000 | n/a | n/a | n/a |
 | RestorationShaman | 38 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 38 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 38 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
@@ -960,10 +960,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 40 | Fire Nova | 1 | 408341 | 95.00→95.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
-| RestorationShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 40 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 82.00-82.00→82.00-82.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 40 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 40 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 40 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 40 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 82.00-82.00→82.00-82.00 | 0.214→0.214 | declared, matches |
 | RestorationShaman | 40 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 40 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→126.21-134.79 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 40 | Healing Stream | 0 | 5672 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 20→20 | n/a | match |  | 5.00-5.00→- | 0.022→0.022 | not declared |
@@ -996,18 +996,18 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 40 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 40 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 40 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 40 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 40 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→0 | mismatch | duration_ms 20000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→0 | mismatch | duration_ms 20000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationShaman | 40 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 40 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 40 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 40 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 40 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→0 | mismatch | duration_ms 30000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→0 | mismatch | duration_ms 35000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 40 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→0 | mismatch | duration_ms 45000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→30000 | mismatch | duration_ms 35000->30000 | n/a | n/a | n/a |
+| RestorationShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→30000 | mismatch | duration_ms 40000->30000 | n/a | n/a | n/a |
+| RestorationShaman | 40 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→30000 | mismatch | duration_ms 45000->30000 | n/a | n/a | n/a |
 | RestorationShaman | 40 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 40 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 40 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
@@ -1037,10 +1037,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 50 | Fire Nova | 2 | 408342 | 170.00→170.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Fire Nova | 4 | 408344 | 395.00→395.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 42→42 | n/a | match |  | n/a | n/a | n/a |
-| RestorationShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 50 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 89.00-89.00→89.00-89.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 50 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 50 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 50 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 50 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→89.00-89.00 | 0.214→0.214 | declared, matches |
 | RestorationShaman | 50 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 50 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→126.21-134.79 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 50 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 188.34-199.66→188.34-199.66 | 0.386→0.386 | declared, matches |
@@ -1081,21 +1081,21 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 50 | Lightning Shield | 4 | 945 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Lightning Shield | 6 | 10431 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 600000→600000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 50 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 50 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 50 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 50 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 50 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→0 | mismatch | duration_ms 20000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 50 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→0 | mismatch | duration_ms 20000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 50 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→0 | mismatch | duration_ms 20000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationShaman | 50 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 50 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 50 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 50 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 50 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 50 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 50 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→0 | mismatch | duration_ms 30000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→0 | mismatch | duration_ms 35000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 50 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→0 | mismatch | duration_ms 45000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 50 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→0 | mismatch | duration_ms 50000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→30000 | mismatch | duration_ms 35000->30000 | n/a | n/a | n/a |
+| RestorationShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→30000 | mismatch | duration_ms 40000->30000 | n/a | n/a | n/a |
+| RestorationShaman | 50 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→30000 | mismatch | duration_ms 45000->30000 | n/a | n/a | n/a |
+| RestorationShaman | 50 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→30000 | mismatch | duration_ms 50000->30000 | n/a | n/a | n/a |
 | RestorationShaman | 50 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 50 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 50 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
@@ -1133,12 +1133,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 60 | Fire Nova | 3 | 408343 | 280.00→280.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Fire Nova | 4 | 408344 | 395.00→395.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 42→42 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Fire Nova | 5 | 408345 | 520.00→520.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | n/a | n/a | n/a |
-| RestorationShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 60 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 89.00-89.00→89.00-89.00 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 60 | Flame Shock | 5 | 10448 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 52→52 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 136.50-136.50→136.50-136.50 | 0.214→0.214 | declared, matches |
-| RestorationShaman | 60 | Flame Shock | 6 | 29228 | 410.00→410.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 12000→0 | mismatch | duration_ms 12000->0 (no aura registered) | 166.00-166.00→166.00-166.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 60 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 60 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 38.00-38.00→38.00-38.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 60 | Flame Shock | 3 | 8053 | 160.00→160.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.00-49.00→49.00-49.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 60 | Flame Shock | 4 | 10447 | 250.00→250.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | 89.00-89.00→89.00-89.00 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 60 | Flame Shock | 5 | 10448 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 52→52 | 12000→12000 | match |  | 136.50-136.50→136.50-136.50 | 0.214→0.214 | declared, matches |
+| RestorationShaman | 60 | Flame Shock | 6 | 29228 | 410.00→410.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 12000→12000 | match |  | 166.00-166.00→166.00-166.00 | 0.214→0.214 | declared, matches |
 | RestorationShaman | 60 | Frost Shock | 1 | 8056 | 115.00→115.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 20→20 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 68.20-72.80→68.20-72.80 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 60 | Frost Shock | 2 | 8058 | 225.00→225.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 34→34 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 126.21-134.79→126.21-134.79 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 60 | Frost Shock | 3 | 10472 | 325.00→325.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 46→46 | 8000→0 | mismatch | duration_ms 8000->0 (no aura registered) | 189.80-201.20→189.80-201.20 | 0.386→0.386 | declared, matches |
@@ -1189,24 +1189,24 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 60 | Lightning Shield | 5 | 8134 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Lightning Shield | 6 | 10431 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Lightning Shield | 7 | 10432 | 370.00→370.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 600000→600000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 60 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 60 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 60 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 60 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 60 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→0 | mismatch | duration_ms 20000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 60 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→0 | mismatch | duration_ms 20000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 60 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→0 | mismatch | duration_ms 20000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 60 | Magma Totem | 4 | 10587 | 650.00→650.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 20000→0 | mismatch | duration_ms 20000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationShaman | 60 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 60 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 60 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 60 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
+| RestorationShaman | 60 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 60 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 60 | Magma Totem | 3 | 10586 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 20000→20000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 60 | Magma Totem | 4 | 10587 | 650.00→650.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→300000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→0 | mismatch | duration_ms 30000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→0 | mismatch | duration_ms 35000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→0 | mismatch | duration_ms 40000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 60 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→0 | mismatch | duration_ms 45000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 60 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→0 | mismatch | duration_ms 50000->0 (no aura registered) | n/a | n/a | n/a |
-| RestorationShaman | 60 | Searing Totem | 6 | 10438 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 55000→0 | mismatch | duration_ms 55000->0 (no aura registered) | n/a | n/a | n/a |
+| RestorationShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→30000 | mismatch | duration_ms 35000->30000 | n/a | n/a | n/a |
+| RestorationShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→30000 | mismatch | duration_ms 40000->30000 | n/a | n/a | n/a |
+| RestorationShaman | 60 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→30000 | mismatch | duration_ms 45000->30000 | n/a | n/a | n/a |
+| RestorationShaman | 60 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→30000 | mismatch | duration_ms 50000->30000 | n/a | n/a | n/a |
+| RestorationShaman | 60 | Searing Totem | 6 | 10438 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 55000→30000 | mismatch | duration_ms 55000->30000 | n/a | n/a | n/a |
 | RestorationShaman | 60 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 60 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |
 | RestorationShaman | 60 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→0 | mismatch | duration_ms 300000->0 (no aura registered) | n/a | n/a | n/a |

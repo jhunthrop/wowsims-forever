@@ -46,6 +46,11 @@ type Preset struct {
 	Talents            string
 	SpecOptions        interface{}
 	DistanceFromTarget float64
+	// WithoutFullBuffs builds this spec's report characters without
+	// core.FullBuffs (see build.go's buildCharacter), so a buff or
+	// debuff the class also casts reports its own duration rather than
+	// the -1 core.MakePermanent gives the pre-applied copy.
+	WithoutFullBuffs bool
 }
 
 // Presets mirrors, one entry per registered spec (sim/register_all.go),
@@ -104,26 +109,32 @@ var Presets = []Preset{
 		SpecOptions:     defaultDestroWarlockOptions,
 	},
 	{
-		Label:           "ProtectionPaladin",
-		ClientClassSlug: "paladin",
-		Class:           proto.Class_ClassPaladin,
-		Race:            proto.Race_RaceHuman,
-		Talents:         paladin.ForeverProtectionTalents,
+		Label:            "ProtectionPaladin",
+		WithoutFullBuffs: true,
+		ClientClassSlug:  "paladin",
+		Class:            proto.Class_ClassPaladin,
+		Race:             proto.Race_RaceHuman,
+		Talents:          paladin.ForeverProtectionTalents,
 		SpecOptions: &proto.Player_ProtectionPaladin{
 			ProtectionPaladin: &proto.ProtectionPaladin{
 				Options: &proto.PaladinOptions{
-					PrimarySeal:   proto.PaladinSeal_Righteousness,
-					RighteousFury: true,
+					PrimarySeal: proto.PaladinSeal_Righteousness,
+					// The option makes the aura permanent from the pull
+					// (core.MakePermanent), which the report would read
+					// as a -1 duration; the cast spell's own 30 minutes
+					// is what is compared.
+					RighteousFury: false,
 				},
 			},
 		},
 	},
 	{
-		Label:           "HolyPaladin",
-		ClientClassSlug: "paladin",
-		Class:           proto.Class_ClassPaladin,
-		Race:            proto.Race_RaceHuman,
-		Talents:         "05320003025101051--",
+		Label:            "HolyPaladin",
+		WithoutFullBuffs: true,
+		ClientClassSlug:  "paladin",
+		Class:            proto.Class_ClassPaladin,
+		Race:             proto.Race_RaceHuman,
+		Talents:          "05320003025101051--",
 		SpecOptions: &proto.Player_HolyPaladin{
 			HolyPaladin: &proto.HolyPaladin{
 				Options: &proto.PaladinOptions{
@@ -133,11 +144,12 @@ var Presets = []Preset{
 		},
 	},
 	{
-		Label:           "RetributionPaladin",
-		ClientClassSlug: "paladin",
-		Class:           proto.Class_ClassPaladin,
-		Race:            proto.Race_RaceHuman,
-		Talents:         "500501-503-52230351200315",
+		Label:            "RetributionPaladin",
+		WithoutFullBuffs: true,
+		ClientClassSlug:  "paladin",
+		Class:            proto.Class_ClassPaladin,
+		Race:             proto.Race_RaceHuman,
+		Talents:          "500501-503-52230351200315",
 		SpecOptions: &proto.Player_RetributionPaladin{
 			RetributionPaladin: &proto.RetributionPaladin{
 				Options: &proto.PaladinOptions{
@@ -147,11 +159,12 @@ var Presets = []Preset{
 		},
 	},
 	{
-		Label:           "FuryWarrior",
-		ClientClassSlug: "warrior",
-		Class:           proto.Class_ClassWarrior,
-		Race:            proto.Race_RaceOrc,
-		Talents:         warrior.ForeverFuryTalents,
+		Label:            "FuryWarrior",
+		WithoutFullBuffs: true,
+		ClientClassSlug:  "warrior",
+		Class:            proto.Class_ClassWarrior,
+		Race:             proto.Race_RaceOrc,
+		Talents:          warrior.ForeverFuryTalents,
 		SpecOptions: &proto.Player_Warrior{
 			Warrior: &proto.Warrior{
 				Options: &proto.Warrior_Options{
@@ -162,11 +175,12 @@ var Presets = []Preset{
 		},
 	},
 	{
-		Label:           "ProtectionWarrior",
-		ClientClassSlug: "warrior",
-		Class:           proto.Class_ClassWarrior,
-		Race:            proto.Race_RaceOrc,
-		Talents:         warrior.ForeverProtectionTalents,
+		Label:            "ProtectionWarrior",
+		WithoutFullBuffs: true,
+		ClientClassSlug:  "warrior",
+		Class:            proto.Class_ClassWarrior,
+		Race:             proto.Race_RaceOrc,
+		Talents:          warrior.ForeverProtectionTalents,
 		SpecOptions: &proto.Player_TankWarrior{
 			TankWarrior: &proto.TankWarrior{
 				Options: &proto.TankWarrior_Options{

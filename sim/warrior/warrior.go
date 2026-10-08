@@ -56,6 +56,8 @@ const (
 	WarriorSpellMaskSpearingStrike
 	WarriorSpellMaskRecklessness
 	WarriorSpellMaskShieldWall
+	WarriorSpellMaskBattleShout
+	WarriorSpellMaskDemoralizingShout
 
 	// Groups, for talents that target a category rather than one spell.
 	WarriorSpellMaskSpecials = WarriorSpellMaskBloodthirst | WarriorSpellMaskWhirlwind |
@@ -141,6 +143,8 @@ type Warrior struct {
 	Hamstring         *WarriorSpell
 	PiercingHowl      *WarriorSpell
 	SpearingStrike    *WarriorSpell
+	Charge            *WarriorSpell
+	Retaliation       *WarriorSpell
 
 	HeroicStrike       *WarriorSpell
 	HeroicStrikeQueue  *WarriorSpell
@@ -229,6 +233,8 @@ func (warrior *Warrior) Initialize() {
 	warrior.registerPummelSpell()
 	warrior.registerPiercingHowlSpell()
 	warrior.registerSpearingStrikeSpell()
+	warrior.registerChargeSpell()
+	warrior.registerRetaliationSpell()
 
 	// The sim often re-enables heroic strike in an unrealistic amount of time.
 	// This can cause an unrealistic immediate double-hit around wild strikes procs

@@ -12,10 +12,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| FuryWarrior | 10 | Battle Shout | 0 | 6673 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 1→1 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 10 | Battle Shout | 0 | 6673 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 1→1 | 180000→180000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 10 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 10 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 10 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| FuryWarrior | 10 | Charge | 1 | 100 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior | 10 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | FuryWarrior | 10 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 10 | Demoralizing Shout | 1 | 1160 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 14→14 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -26,13 +27,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FuryWarrior | 10 | Pummel | 0 | 19639 | 0.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 20→20 | 5000→0 | mismatch | duration_ms 5000->0 (no aura registered) | n/a | n/a | n/a |
 | FuryWarrior | 10 | Rend | 2 | 6546 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 7.00-7.00→7.00-7.00 | 0.800 (convention)→0.000 | declared, matches |
 | FuryWarrior | 10 | Revenge | 1 | 6572 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 14→14 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 20.31-23.69→20.31-23.69 | 1.000→1.000 | declared, matches |
-| FuryWarrior | 10 | Sunder Armor | 1 | 7386 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 10 | Sunder Armor | 1 | 7386 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 10 | Thunder Clap | 1 | 6343 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 6→6 | 10000→10000 | match |  | 10.00-10.00→10.00-10.00 | 0.667 (convention)→0.000 | declared, matches |
 | FuryWarrior | 10 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior | 20 | Battle Shout | 0 | 5242 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 12→12 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 20 | Battle Shout | 0 | 5242 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 12→12 | 180000→180000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 20 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 20 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 20 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| FuryWarrior | 20 | Charge | 1 | 100 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior | 20 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | FuryWarrior | 20 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 20 | Demoralizing Shout | 1 | 1160 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 14→14 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -42,16 +44,18 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FuryWarrior | 20 | Overpower | 1 | 7384 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 12→12 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | FuryWarrior | 20 | Pummel | 0 | 19639 | 0.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 20→20 | 5000→0 | mismatch | duration_ms 5000->0 (no aura registered) | n/a | n/a | n/a |
 | FuryWarrior | 20 | Rend | 3 | 6547 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | 9.00-9.00→9.00-9.00 | 1.000 (convention)→0.000 | declared, matches |
+| FuryWarrior | 20 | Retaliation | 0 | 20230 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 20 | Revenge | 1 | 6572 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 14→14 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 20.31-23.69→20.31-23.69 | 1.000→1.000 | declared, matches |
 | FuryWarrior | 20 | Slam | 1 | 1240193 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior | 20 | Sunder Armor | 1 | 7386 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 20 | Sunder Armor | 1 | 7386 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 20 | Thunder Clap | 2 | 8198 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 14000→14000 | match |  | 23.00-23.00→23.00-23.00 | 0.933 (convention)→0.000 | declared, matches |
 | FuryWarrior | 20 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior | 30 | Battle Shout | 0 | 6192 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→22 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 30 | Battle Shout | 0 | 6192 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→22 | 180000→180000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 30 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 30 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | FuryWarrior | 30 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 30 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| FuryWarrior | 30 | Charge | 2 | 6178 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 26→26 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior | 30 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | FuryWarrior | 30 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 30 | Demoralizing Shout | 2 | 6190 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 24→24 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -61,16 +65,18 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FuryWarrior | 30 | Overpower | 2 | 7887 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 28→28 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | FuryWarrior | 30 | Pummel | 0 | 19639 | 0.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 20→20 | 5000→0 | mismatch | duration_ms 5000->0 (no aura registered) | n/a | n/a | n/a |
 | FuryWarrior | 30 | Rend | 4 | 6548 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 30→30 | 18000→18000 | match |  | 11.00-11.00→11.00-11.00 | 1.200 (convention)→0.000 | declared, matches |
+| FuryWarrior | 30 | Retaliation | 0 | 20230 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 30 | Revenge | 2 | 6574 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 24→24 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 30.60-37.40→30.60-37.40 | 1.000→1.000 | declared, matches |
 | FuryWarrior | 30 | Slam | 2 | 1464 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior | 30 | Sunder Armor | 2 | 7405 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 30 | Sunder Armor | 2 | 7405 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 30 | Thunder Clap | 3 | 8204 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 18000→18000 | match |  | 37.00-37.00→37.00-37.00 | 1.200 (convention)→0.000 | declared, matches |
 | FuryWarrior | 30 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior | 38 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 38 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 180000→180000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 38 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 38 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | FuryWarrior | 38 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 38 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| FuryWarrior | 38 | Charge | 2 | 6178 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 26→26 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior | 38 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | FuryWarrior | 38 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 38 | Demoralizing Shout | 3 | 11554 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -80,16 +86,18 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FuryWarrior | 38 | Overpower | 2 | 7887 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 28→28 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | FuryWarrior | 38 | Pummel | 1 | 6552 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 38→38 | 4000→0 | mismatch | duration_ms 4000->0 (no aura registered) | 20.00-20.00→20.00-20.00 | 1.000→1.000 | declared, matches |
 | FuryWarrior | 38 | Rend | 4 | 6548 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 30→30 | 18000→18000 | match |  | 11.00-11.00→11.00-11.00 | 1.200 (convention)→0.000 | declared, matches |
+| FuryWarrior | 38 | Retaliation | 0 | 20230 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 38 | Revenge | 3 | 7379 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 34→34 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 42.86-53.14→42.86-53.14 | 1.000→1.000 | declared, matches |
 | FuryWarrior | 38 | Slam | 3 | 8820 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 38→38 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior | 38 | Sunder Armor | 3 | 8380 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 38 | Sunder Armor | 3 | 8380 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→30000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 38 | Thunder Clap | 4 | 8205 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 38→38 | 22000→22000 | match |  | 55.00-55.00→55.00-55.00 | 1.467 (convention)→0.000 | declared, matches |
 | FuryWarrior | 38 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior | 40 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 40 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 180000→180000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 40 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 40 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | FuryWarrior | 40 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 40 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| FuryWarrior | 40 | Charge | 2 | 6178 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 26→26 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior | 40 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | FuryWarrior | 40 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 40 | Demoralizing Shout | 3 | 11554 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -99,16 +107,18 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FuryWarrior | 40 | Overpower | 2 | 7887 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 28→28 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | FuryWarrior | 40 | Pummel | 1 | 6552 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 38→38 | 4000→0 | mismatch | duration_ms 4000->0 (no aura registered) | 20.00-20.00→20.00-20.00 | 1.000→1.000 | declared, matches |
 | FuryWarrior | 40 | Rend | 5 | 11572 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 40→40 | 21000→21000 | match |  | 14.00-14.00→14.00-14.00 | 1.400 (convention)→0.000 | declared, matches |
+| FuryWarrior | 40 | Retaliation | 0 | 20230 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 40 | Revenge | 3 | 7379 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 34→34 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 42.86-53.14→42.86-53.14 | 1.000→1.000 | declared, matches |
 | FuryWarrior | 40 | Slam | 3 | 8820 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 38→38 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior | 40 | Sunder Armor | 3 | 8380 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 40 | Sunder Armor | 3 | 8380 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→30000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 40 | Thunder Clap | 4 | 8205 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 38→38 | 22000→22000 | match |  | 55.00-55.00→55.00-55.00 | 1.467 (convention)→0.000 | declared, matches |
 | FuryWarrior | 40 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior | 50 | Battle Shout | 0 | 11550 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 42→42 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 50 | Battle Shout | 0 | 11550 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 42→42 | 180000→180000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 50 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 50 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | FuryWarrior | 50 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 50 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| FuryWarrior | 50 | Charge | 3 | 11578 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 46→46 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior | 50 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | FuryWarrior | 50 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 50 | Demoralizing Shout | 4 | 11555 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 44→44 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -119,16 +129,18 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FuryWarrior | 50 | Pummel | 1 | 6552 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 38→38 | 4000→0 | mismatch | duration_ms 4000->0 (no aura registered) | 20.00-20.00→20.00-20.00 | 1.000→1.000 | declared, matches |
 | FuryWarrior | 50 | Recklessness | 0 | 1719 | 0.00→0.00 | rage→none | 1800000→1800000 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 50 | Rend | 6 | 11573 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 50→50 | 21000→21000 | match |  | 18.00-18.00→18.00-18.00 | 1.400 (convention)→0.000 | declared, matches |
+| FuryWarrior | 50 | Retaliation | 0 | 20230 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 50 | Revenge | 4 | 11600 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 44→44 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 73.46-90.54→73.46-90.54 | 1.000→1.000 | declared, matches |
 | FuryWarrior | 50 | Slam | 4 | 11604 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 46→46 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior | 50 | Sunder Armor | 4 | 11596 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 46→46 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 50 | Sunder Armor | 4 | 11596 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 46→46 | 30000→30000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 50 | Thunder Clap | 5 | 11580 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 26000→26000 | match |  | 82.00-82.00→82.00-82.00 | 1.733 (convention)→0.000 | declared, matches |
 | FuryWarrior | 50 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior | 60 | Battle Shout | 0 | 11551 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 52→52 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 60 | Battle Shout | 0 | 11551 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 52→52 | 180000→180000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 60 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 60 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | FuryWarrior | 60 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 60 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| FuryWarrior | 60 | Charge | 3 | 11578 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 46→46 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior | 60 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | FuryWarrior | 60 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 60 | Demoralizing Shout | 5 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→54 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -139,15 +151,17 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FuryWarrior | 60 | Pummel | 2 | 6554 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 58→58 | 4000→0 | mismatch | duration_ms 4000->0 (no aura registered) | 50.00-50.00→50.00-50.00 | 1.000→1.000 | declared, matches |
 | FuryWarrior | 60 | Recklessness | 0 | 1719 | 0.00→0.00 | rage→none | 1800000→1800000 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 60 | Rend | 7 | 11574 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→60 | 21000→21000 | match |  | 21.00-21.00→21.00-21.00 | 1.400 (convention)→0.000 | declared, matches |
+| FuryWarrior | 60 | Retaliation | 0 | 20230 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 60 | Revenge | 5 | 11601 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 54→54 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 109.07-132.93→109.07-132.93 | 1.000→1.000 | declared, matches |
 | FuryWarrior | 60 | Slam | 5 | 11605 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 54→54 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior | 60 | Sunder Armor | 5 | 11597 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 58→58 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FuryWarrior | 60 | Sunder Armor | 5 | 11597 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 58→58 | 30000→30000 | match |  | n/a | n/a | n/a |
 | FuryWarrior | 60 | Thunder Clap | 6 | 11581 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 58→58 | 30000→30000 | match |  | 103.00-103.00→103.00-103.00 | 2.000 (convention)→0.000 | declared, matches |
 | FuryWarrior | 60 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 10 | Battle Shout | 0 | 6673 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 1→1 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 10 | Battle Shout | 0 | 6673 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 1→1 | 180000→180000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 10 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 10 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 10 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| ProtectionWarrior | 10 | Charge | 1 | 100 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 10 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | ProtectionWarrior | 10 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 10 | Demoralizing Shout | 1 | 1160 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 14→14 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -160,13 +174,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionWarrior | 10 | Revenge | 1 | 6572 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 14→14 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 20.31-23.69→20.31-23.69 | 1.000→1.000 | declared, matches |
 | ProtectionWarrior | 10 | Shield Block | 0 | 2565 | 10.00→10.00 | rage→rage | 5000→5000 | 0→0 | 0→0 | 16→16 | 7000→7000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 10 | Shield Wall | 0 | 871 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 10 | Sunder Armor | 1 | 7386 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 10 | Sunder Armor | 1 | 7386 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 10 | Thunder Clap | 1 | 6343 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 6→6 | 10000→10000 | match |  | 10.00-10.00→10.00-10.00 | 0.667 (convention)→0.000 | declared, matches |
 | ProtectionWarrior | 10 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 20 | Battle Shout | 0 | 5242 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 12→12 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 20 | Battle Shout | 0 | 5242 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 12→12 | 180000→180000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 20 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 20 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 20 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| ProtectionWarrior | 20 | Charge | 1 | 100 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 20 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | ProtectionWarrior | 20 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 20 | Demoralizing Shout | 1 | 1160 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 14→14 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -176,18 +191,20 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionWarrior | 20 | Overpower | 1 | 7384 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 12→12 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | ProtectionWarrior | 20 | Pummel | 0 | 19639 | 0.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 20→20 | 5000→0 | mismatch | duration_ms 5000->0 (no aura registered) | n/a | n/a | n/a |
 | ProtectionWarrior | 20 | Rend | 3 | 6547 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | 9.00-9.00→9.00-9.00 | 1.000 (convention)→0.000 | declared, matches |
+| ProtectionWarrior | 20 | Retaliation | 0 | 20230 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 20 | Revenge | 1 | 6572 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 14→14 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 20.31-23.69→20.31-23.69 | 1.000→1.000 | declared, matches |
 | ProtectionWarrior | 20 | Shield Block | 0 | 2565 | 10.00→10.00 | rage→rage | 5000→5000 | 0→0 | 0→0 | 16→16 | 7000→7000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 20 | Shield Wall | 0 | 871 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 20 | Slam | 1 | 1240193 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 20 | Sunder Armor | 1 | 7386 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 20 | Sunder Armor | 1 | 7386 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 20 | Thunder Clap | 2 | 8198 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 14000→14000 | match |  | 23.00-23.00→23.00-23.00 | 0.933 (convention)→0.000 | declared, matches |
 | ProtectionWarrior | 20 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 30 | Battle Shout | 0 | 6192 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→22 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 30 | Battle Shout | 0 | 6192 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→22 | 180000→180000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| ProtectionWarrior | 30 | Charge | 2 | 6178 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 26→26 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Demoralizing Shout | 2 | 6190 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 24→24 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -197,18 +214,20 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionWarrior | 30 | Overpower | 2 | 7887 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 28→28 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Pummel | 0 | 19639 | 0.00→0.00 | rage→none | 0→0 | 0→0 | 0→0 | 20→20 | 5000→0 | mismatch | duration_ms 5000->0 (no aura registered) | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Rend | 4 | 6548 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 30→30 | 18000→18000 | match |  | 11.00-11.00→11.00-11.00 | 1.200 (convention)→0.000 | declared, matches |
+| ProtectionWarrior | 30 | Retaliation | 0 | 20230 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Revenge | 2 | 6574 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 24→24 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 30.60-37.40→30.60-37.40 | 1.000→1.000 | declared, matches |
 | ProtectionWarrior | 30 | Shield Block | 0 | 2565 | 10.00→10.00 | rage→rage | 5000→5000 | 0→0 | 0→0 | 16→16 | 7000→7000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Shield Wall | 0 | 871 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Slam | 2 | 1464 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 30 | Sunder Armor | 2 | 7405 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 30 | Sunder Armor | 2 | 7405 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 30 | Thunder Clap | 3 | 8204 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 28→28 | 18000→18000 | match |  | 37.00-37.00→37.00-37.00 | 1.200 (convention)→0.000 | declared, matches |
 | ProtectionWarrior | 30 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 38 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 38 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 180000→180000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| ProtectionWarrior | 38 | Charge | 2 | 6178 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 26→26 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Demoralizing Shout | 3 | 11554 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -218,18 +237,20 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionWarrior | 38 | Overpower | 2 | 7887 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 28→28 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Pummel | 1 | 6552 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 38→38 | 4000→0 | mismatch | duration_ms 4000->0 (no aura registered) | 20.00-20.00→20.00-20.00 | 1.000→1.000 | declared, matches |
 | ProtectionWarrior | 38 | Rend | 4 | 6548 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 30→30 | 18000→18000 | match |  | 11.00-11.00→11.00-11.00 | 1.200 (convention)→0.000 | declared, matches |
+| ProtectionWarrior | 38 | Retaliation | 0 | 20230 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Revenge | 3 | 7379 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 34→34 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 42.86-53.14→42.86-53.14 | 1.000→1.000 | declared, matches |
 | ProtectionWarrior | 38 | Shield Block | 0 | 2565 | 10.00→10.00 | rage→rage | 5000→5000 | 0→0 | 0→0 | 16→16 | 7000→7000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Shield Wall | 0 | 871 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Slam | 3 | 8820 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 38→38 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 38 | Sunder Armor | 3 | 8380 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 38 | Sunder Armor | 3 | 8380 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 38 | Thunder Clap | 4 | 8205 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 38→38 | 22000→22000 | match |  | 55.00-55.00→55.00-55.00 | 1.467 (convention)→0.000 | declared, matches |
 | ProtectionWarrior | 38 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 40 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 40 | Battle Shout | 0 | 11549 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 180000→180000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| ProtectionWarrior | 40 | Charge | 2 | 6178 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 26→26 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Demoralizing Shout | 3 | 11554 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -239,18 +260,20 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionWarrior | 40 | Overpower | 2 | 7887 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 28→28 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Pummel | 1 | 6552 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 38→38 | 4000→0 | mismatch | duration_ms 4000->0 (no aura registered) | 20.00-20.00→20.00-20.00 | 1.000→1.000 | declared, matches |
 | ProtectionWarrior | 40 | Rend | 5 | 11572 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 40→40 | 21000→21000 | match |  | 14.00-14.00→14.00-14.00 | 1.400 (convention)→0.000 | declared, matches |
+| ProtectionWarrior | 40 | Retaliation | 0 | 20230 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Revenge | 3 | 7379 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 34→34 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 42.86-53.14→42.86-53.14 | 1.000→1.000 | declared, matches |
 | ProtectionWarrior | 40 | Shield Block | 0 | 2565 | 10.00→10.00 | rage→rage | 5000→5000 | 0→0 | 0→0 | 16→16 | 7000→7000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Shield Wall | 0 | 871 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Slam | 3 | 8820 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 38→38 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 40 | Sunder Armor | 3 | 8380 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 40 | Sunder Armor | 3 | 8380 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 40 | Thunder Clap | 4 | 8205 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 38→38 | 22000→22000 | match |  | 55.00-55.00→55.00-55.00 | 1.467 (convention)→0.000 | declared, matches |
 | ProtectionWarrior | 40 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 50 | Battle Shout | 0 | 11550 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 42→42 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 50 | Battle Shout | 0 | 11550 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 42→42 | 180000→180000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| ProtectionWarrior | 50 | Charge | 3 | 11578 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 46→46 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Demoralizing Shout | 4 | 11555 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 44→44 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -261,18 +284,20 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionWarrior | 50 | Pummel | 1 | 6552 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 38→38 | 4000→0 | mismatch | duration_ms 4000->0 (no aura registered) | 20.00-20.00→20.00-20.00 | 1.000→1.000 | declared, matches |
 | ProtectionWarrior | 50 | Recklessness | 0 | 1719 | 0.00→0.00 | rage→none | 1800000→1800000 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Rend | 6 | 11573 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 50→50 | 21000→21000 | match |  | 18.00-18.00→18.00-18.00 | 1.400 (convention)→0.000 | declared, matches |
+| ProtectionWarrior | 50 | Retaliation | 0 | 20230 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Revenge | 4 | 11600 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 44→44 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 73.46-90.54→73.46-90.54 | 1.000→1.000 | declared, matches |
 | ProtectionWarrior | 50 | Shield Block | 0 | 2565 | 10.00→10.00 | rage→rage | 5000→5000 | 0→0 | 0→0 | 16→16 | 7000→7000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Shield Wall | 0 | 871 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Slam | 4 | 11604 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 46→46 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 50 | Sunder Armor | 4 | 11596 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 46→46 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 50 | Sunder Armor | 4 | 11596 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 46→46 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 50 | Thunder Clap | 5 | 11580 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 26000→26000 | match |  | 82.00-82.00→82.00-82.00 | 1.733 (convention)→0.000 | declared, matches |
 | ProtectionWarrior | 50 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 60 | Battle Shout | 0 | 11551 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 52→52 | 180000→-1 | mismatch | duration_ms 180000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 60 | Battle Shout | 0 | 11551 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 52→52 | 180000→180000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Battle Stance | 0 | 2457 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Berserker Rage | 0 | 18499 | 0.00→0.00 | rage→none | 30000→30000 | 0→0 | 1500→1500 | 32→30 | 10000→10000 | mismatch | required_level 32->30 | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Berserker Stance | 0 | 2458 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Bloodrage | 0 | 2687 | 0.00→0.00 | client:-2→none | 60000→60000 | 0→0 | 0→0 | 10→10 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
+| ProtectionWarrior | 60 | Charge | 3 | 11578 | 0.00→0.00 | rage→none | 15000→15000 | 0→0 | 0→0 | 46→46 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Cleave | 5 | 20569 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 0→0 | 60→60 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Defensive Stance | 0 | 71 | 0.00→0.00 | rage→none | 1000→1000 | 0→0 | 0→0 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Demoralizing Shout | 5 | 11556 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→54 | 45000→45000 | match |  | n/a | n/a | n/a |
@@ -283,11 +308,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionWarrior | 60 | Pummel | 2 | 6554 | 10.00→10.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 58→58 | 4000→0 | mismatch | duration_ms 4000->0 (no aura registered) | 50.00-50.00→50.00-50.00 | 1.000→1.000 | declared, matches |
 | ProtectionWarrior | 60 | Recklessness | 0 | 1719 | 0.00→0.00 | rage→none | 1800000→1800000 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Rend | 7 | 11574 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 60→60 | 21000→21000 | match |  | 21.00-21.00→21.00-21.00 | 1.400 (convention)→0.000 | declared, matches |
+| ProtectionWarrior | 60 | Retaliation | 0 | 20230 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Revenge | 5 | 11601 | 5.00→5.00 | rage→rage | 5000→5000 | 0→0 | 1500→1500 | 54→54 | 0→5000 | client-scripted | duration_ms: client states none (0), engine keeps 5000ms | 109.07-132.93→109.07-132.93 | 1.000→1.000 | declared, matches |
 | ProtectionWarrior | 60 | Shield Block | 0 | 2565 | 10.00→10.00 | rage→rage | 5000→5000 | 0→0 | 0→0 | 16→16 | 7000→7000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Shield Wall | 0 | 871 | 0.00→0.00 | rage→none | 900000→900000 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Slam | 5 | 11605 | 15.00→15.00 | rage→rage | 18000→18000 | 1500→1500 | 1500→1500 | 54→54 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionWarrior | 60 | Sunder Armor | 5 | 11597 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 58→58 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| ProtectionWarrior | 60 | Sunder Armor | 5 | 11597 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 58→58 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionWarrior | 60 | Thunder Clap | 6 | 11581 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 58→58 | 30000→30000 | match |  | 103.00-103.00→103.00-103.00 | 2.000 (convention)→0.000 | declared, matches |
 | ProtectionWarrior | 60 | Whirlwind | 0 | 1680 | 25.00→25.00 | rage→rage | 10000→10000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 ## Talent-gated spells
@@ -333,25 +359,23 @@ Each spell below is built with exactly one point in the single talent that grant
 | FuryWarrior (Spearing Strike talent) | 40 | Spearing Strike | 0 | 1310222 | 15.00→15.00 | rage→rage | 20000→20000 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior (Spearing Strike talent) | 50 | Spearing Strike | 0 | 1310222 | 15.00→15.00 | rage→rage | 20000→20000 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | FuryWarrior (Spearing Strike talent) | 60 | Spearing Strike | 0 | 1310222 | 15.00→15.00 | rage→rage | 20000→20000 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
-| FuryWarrior (Sweeping Strikes talent) | 10 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→10000 | mismatch | duration_ms 20000->10000 | n/a | n/a | n/a |
-| FuryWarrior (Sweeping Strikes talent) | 20 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→10000 | mismatch | duration_ms 20000->10000 | n/a | n/a | n/a |
-| FuryWarrior (Sweeping Strikes talent) | 30 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→10000 | mismatch | duration_ms 20000->10000 | n/a | n/a | n/a |
-| FuryWarrior (Sweeping Strikes talent) | 38 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→10000 | mismatch | duration_ms 20000->10000 | n/a | n/a | n/a |
-| FuryWarrior (Sweeping Strikes talent) | 40 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→10000 | mismatch | duration_ms 20000->10000 | n/a | n/a | n/a |
-| FuryWarrior (Sweeping Strikes talent) | 50 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→10000 | mismatch | duration_ms 20000->10000 | n/a | n/a | n/a |
-| FuryWarrior (Sweeping Strikes talent) | 60 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→10000 | mismatch | duration_ms 20000->10000 | n/a | n/a | n/a |
+| FuryWarrior (Sweeping Strikes talent) | 10 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→20000 | match |  | n/a | n/a | n/a |
+| FuryWarrior (Sweeping Strikes talent) | 20 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→20000 | match |  | n/a | n/a | n/a |
+| FuryWarrior (Sweeping Strikes talent) | 30 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→20000 | match |  | n/a | n/a | n/a |
+| FuryWarrior (Sweeping Strikes talent) | 38 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→20000 | match |  | n/a | n/a | n/a |
+| FuryWarrior (Sweeping Strikes talent) | 40 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→20000 | match |  | n/a | n/a | n/a |
+| FuryWarrior (Sweeping Strikes talent) | 50 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→20000 | match |  | n/a | n/a | n/a |
+| FuryWarrior (Sweeping Strikes talent) | 60 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→20000 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 11 of the class's 40 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 9 of the class's 40 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Charge (100) | 4→46 | 3 | Arms | skill_line_ability | 0 | 0 | 15000 | cooldown |
 | Taunt (355) | 10→10 | 1 | Protection | skill_line_ability | 0 | 0 | 8000 | cooldown |
 | Shield Bash (72) | 12→52 | 3 | Protection | skill_line_ability | 100 rage | 0 | 12000 | power cost, cooldown |
 | Mocking Blow (694) | 16→56 | 5 | Arms | skill_line_ability | 100 rage | 0 | 120000 | power cost, cooldown |
 | Disarm (676) | 18→18 | 1 | Protection | skill_line_ability | 200 rage | 0 | 60000 | power cost, cooldown |
-| Retaliation (20230) | 20→20 | 1 | Arms | skill_line_ability | 0 | 0 | 900000 | cooldown |
 | Victory Rush (402927) | 20→20 | 1 | Arms | skill_line_ability | 0 | 0 | 30000 | cooldown |
 | Intimidating Shout (5246) | 22→22 | 1 | Fury | skill_line_ability | 250 rage | 0 | 180000 | power cost, cooldown |
 | Challenging Shout (1161) | 26→26 | 1 | Fury | skill_line_ability | 50 rage | 0 | 600000 | power cost, cooldown |
