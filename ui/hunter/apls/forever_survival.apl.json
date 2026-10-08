@@ -104,6 +104,24 @@
           }
         }
       }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 14268,
+            "rank": 3
+          }
+        },
+        "condition": {
+          "auraIsKnown": {
+            "auraId": {
+              "spellId": 10610
+            }
+          }
+        }
+      },
+      "notes": "Wing Clip on every free global, only while a Windfury Totem reaches the hunter (the gate asks whether the engine registered the totem's attack power buff, spell 10610, so a character with no totem skips the line): a cheap main-hand special that rolls the totem's extra attack and any weapon proc, which the other lines leave idle. It costs 80 mana and does 50 damage; the client states both. Without the totem it measured as a loss, mana and a global spent for 50 damage."
     }
   ]
 }

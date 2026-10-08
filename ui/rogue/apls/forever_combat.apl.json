@@ -132,22 +132,22 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 13750
-          }
-        }
-      },
-      "notes": "Adrenaline Rush on cooldown: it doubles energy regeneration for 15 seconds."
-    },
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
             "spellId": 11281,
             "rank": 8
           }
         }
       },
       "notes": "Backstab is the builder when a dagger is in the main hand (Backstab refuses to cast otherwise): it hits for 150% weapon damage against Sinister Strike's 100%, and Puncturing Wounds adds crit and an extra combo point chance to it."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 13750
+          }
+        }
+      },
+      "notes": "Adrenaline Rush on cooldown: it doubles energy regeneration for 15 seconds."
     },
     {
       "action": {

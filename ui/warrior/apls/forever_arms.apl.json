@@ -129,6 +129,24 @@
           }
         }
       }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 3,
+            "spellId": 7373
+          }
+        },
+        "condition": {
+          "auraIsKnown": {
+            "auraId": {
+              "spellId": 10610
+            }
+          }
+        }
+      },
+      "notes": "Hamstring on every free global once Rend, Mortal Strike, Overpower and Execute are spent, only while a Windfury Totem reaches the warrior (the gate asks whether the engine registered the totem's attack power buff, spell 10610, so a character with no totem skips the line): 10 rage for 45 damage, and a main-hand special that rolls the totem's extra attack and weapon procs. The client states the cost and damage. Without the totem it measured as a loss, rage that Mortal Strike and Overpower need."
     }
   ]
 }

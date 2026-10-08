@@ -136,29 +136,6 @@
       }
     },
     {
-      "notes": "Keep Rake ticking; it is a strong bleed that costs no combo point.",
-      "action": {
-        "condition": {
-          "not": {
-            "val": {
-              "dotIsActive": {
-                "spellId": {
-                  "spellId": 9904,
-                  "rank": 4
-                }
-              }
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 9904,
-            "rank": 4
-          }
-        }
-      }
-    },
-    {
       "notes": "At 5 combo points, Rip once it has under 6 seconds left -- this refreshes a little before the DoT actually falls off, so Ferocious Bite stays reachable whenever Rip still has real time on it.",
       "action": {
         "condition": {

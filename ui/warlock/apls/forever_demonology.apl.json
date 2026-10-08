@@ -54,6 +54,17 @@
       }
     },
     {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 2,
+            "spellId": 17924
+          }
+        }
+      },
+      "notes": "Soul Fire whenever it is ready: the Demonology tree's Decimation cuts its cooldown by 90 percent, and its 6 second cast carries a spell power coefficient of 1.0, so it out-damages the Shadow Bolts it displaces. The client states its cost, cast time, cooldown and damage."
+    },
+    {
       "notes": "Life Tap to keep casting once mana runs low.",
       "action": {
         "condition": {
@@ -78,27 +89,6 @@
       }
     },
     {
-      "notes": "Bane of Doom is the one curse kept up: it deals its whole damage when the minute is out, so recast it the moment it fires. Bane of Agony and Curse of the Elements both measured lower in the search.",
-      "action": {
-        "condition": {
-          "not": {
-            "val": {
-              "dotIsActive": {
-                "spellId": {
-                  "spellId": 603
-                }
-              }
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 603
-          }
-        }
-      }
-    },
-    {
       "notes": "Corruption is cheap sustained damage that does not compete with Shadow Bolt casts.",
       "action": {
         "condition": {
@@ -117,6 +107,27 @@
           "spellId": {
             "spellId": 11672,
             "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Bane of Doom is the one curse kept up: it deals its whole damage when the minute is out, so recast it the moment it fires. Bane of Agony and Curse of the Elements both measured lower in the search.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 603
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 603
           }
         }
       }

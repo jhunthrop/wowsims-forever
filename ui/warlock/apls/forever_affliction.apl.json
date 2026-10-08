@@ -201,27 +201,27 @@
       }
     },
     {
-      "notes": "Shoot with your wand once mana is under 40 percent: it costs nothing, so mana regenerates while it keeps damage going. Life Tap is only the backstop below 10 percent.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentManaPercent": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "40%"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 5019
           }
+        },
+        "condition": {
+          "cmp": {
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "op": "OpLt",
+            "rhs": {
+              "const": {
+                "val": "50%"
+              }
+            }
+          }
         }
-      }
+      },
+      "notes": "Shoot with your wand once mana is under 50 percent: it costs nothing, so mana regenerates while it keeps damage going. Life Tap is only the backstop below 10 percent."
     }
   ]
 }
