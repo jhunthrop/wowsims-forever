@@ -38,6 +38,7 @@ const (
 	SpellCode_DruidSwipe
 	SpellCode_DruidLacerate
 	SpellCode_DruidPrimalBite
+	SpellCode_DruidPounce
 
 	SpellCode_DruidHealingTouch
 	SpellCode_DruidRegrowth
@@ -75,6 +76,7 @@ const (
 	DruidSpellMaskTranquility
 	DruidSpellMaskWildGrowth
 	DruidSpellMaskBerserk
+	DruidSpellMaskPounce
 )
 
 const (
@@ -99,7 +101,7 @@ const (
 
 	// Every damage-over-time effect this package registers, for
 	// Genesis's "periodic damage".
-	DruidSpellMaskPeriodicDamage = DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm | DruidSpellMaskRake | DruidSpellMaskRip
+	DruidSpellMaskPeriodicDamage = DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm | DruidSpellMaskRake | DruidSpellMaskRip | DruidSpellMaskPounce
 
 	// Every Nature spell Nature's Swiftness can make instant: the one
 	// damage spell and the two cast-time heals the school has.
@@ -107,13 +109,13 @@ const (
 
 	// Every Cat Form melee special this package registers, for
 	// Predatory Instincts' "melee abilities".
-	DruidSpellMaskMeleeAbilities = DruidSpellMaskClaw | DruidSpellMaskRake | DruidSpellMaskRavage | DruidSpellMaskShred | DruidSpellMaskFerociousBite |
+	DruidSpellMaskMeleeAbilities = DruidSpellMaskClaw | DruidSpellMaskRake | DruidSpellMaskRavage | DruidSpellMaskShred | DruidSpellMaskFerociousBite | DruidSpellMaskPounce |
 		DruidSpellMaskMaul | DruidSpellMaskSwipe | DruidSpellMaskLacerate | DruidSpellMaskPrimalBite
 
 	// Claw, Rake, Ravage and Shred: the Cat Form specials that generate
 	// a Combo Point, for Berserk's crit bonus and Blood Frenzy's bonus
 	// Combo Point chance.
-	DruidSpellMaskComboPointBuilders = DruidSpellMaskClaw | DruidSpellMaskRake | DruidSpellMaskRavage | DruidSpellMaskShred
+	DruidSpellMaskComboPointBuilders = DruidSpellMaskClaw | DruidSpellMaskRake | DruidSpellMaskRavage | DruidSpellMaskShred | DruidSpellMaskPounce
 )
 
 type Druid struct {
@@ -162,6 +164,7 @@ type Druid struct {
 	Rejuvenation         []*DruidSpell
 	Rake                 *DruidSpell
 	Ravage               *DruidSpell
+	Pounce               *DruidSpell
 	Rip                  *DruidSpell
 	ShiftingPower        *DruidSpell
 	Shred                *DruidSpell
@@ -286,6 +289,7 @@ func (druid *Druid) RegisterFeralCatSpells() {
 	druid.registerProwlSpell()
 	druid.registerRakeSpell()
 	druid.registerRavageSpell()
+	druid.registerPounceSpell()
 	druid.registerRipSpell()
 	druid.registerShiftingPowerSpell()
 	druid.registerShredSpell()

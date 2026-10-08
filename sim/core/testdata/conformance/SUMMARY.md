@@ -91,7 +91,7 @@ could not see it before:
 | Warrior | 13 / 38 | 13 / 41 | 7 / 41 |
 | Druid | 28 / 61 | 36 / 50 | 36 / 50 |
 | Priest | 27 / 17 | 50 / 2 | 50 / 2 |
-| Shaman | 27 / 269 | 51 / 250 | 51 / 232; 2026-10-08 engine pass: 364 match + 44 not-simulated + 12 client-scripted / 0 |
+| Shaman | 27 / 269 | 51 / 250 | 51 / 232; 2026-10-08 engine pass: 364 match + 44 unmodeled-duration + 12 client-scripted / 0 |
 | Rogue | 0 / 11 | 3 / 28 | 5 / 26 |
 
 Every column is match/mismatch at level 60 combining the Spells and
@@ -256,23 +256,27 @@ and the engine's rank table was not updated).
 
 ### Hunter
 
-Job 1 confirmed Bestial Wrath, Counterattack, Rapid Fire and Volley's
-durations outright - `duration_ms` no longer appears in any of their
-Diff text, since the engine always had the right number and this
-report just could not see it before. Counterattack and Volley are now
-full `match` rows; Bestial Wrath (cost) and Rapid Fire
-(`required_level`) still mismatch on an unrelated field.
+No mismatch rows (158 match, 13 client-scripted over every level and both
+tables; was 104 / 46 / 13). What moved, all on 2026-10-08:
 
-| Spell | Field | Client | Engine | Likely cause |
-|---|---|---|---|---|
-| Raptor Strike | cost, cost_type, cooldown_ms, required_level | 100.00/mana/6000/56 (rank 8, scaling by rank) | 0.00/none/0/0 | registration gap - a SECOND row at Rank 0 for the same SpellID as the real (matching) ranked row. `hunter.RaptorStrikeHit`, the inner melee-hit sub-spell `getRaptorStrikeConfig` registers under the same client SpellID, is not flagged `SpellFlagPassiveSpell` (compare.go's own doc comment describes this exact Death-Coil-shaped pattern), so `rowFor` keeps it as a bogus zero-valued row alongside the real, matching one. |
-| Bestial Wrath | cost | 0.00 | 206.40 | percent-of-mana cost vs. flat client column - answered: client's raw `PowerCostPct` is 12, matching the engine's `ManaCost.BaseCost: 0.12` exactly (see the vocabulary entry above) |
-| Multi-Shot | cost | 0.00 | 239.08 | percent-of-mana cost vs. flat client column - answered: client's raw `PowerCostPct` is 13.9, matching `multiShotBaseManaCostPercent = 0.139` exactly |
-| Explosive Trap (all ranks) | duration_ms | 60000 | 20000 | semantic mismatch, newly visible by Job 1: the engine DOES register a 20s aura here (not found before), but the client's 60000 is the trap's total armed lifetime while 20000 is some shorter inner timer (worth a closer look by the hunter lane, but no longer "missing" - it was always there) |
-| Freezing Trap (all ranks) | duration_ms | 60000 | 0 (no aura registered) | missing aura duration - the trap's armed lifetime still is not modeled as any persisting aura before it triggers, the one hunter case Job 1's wider search genuinely found nothing for |
-| Immolation Trap (all ranks) | duration_ms | 60000 | 15000 | semantic mismatch - client's 60000 is the trap's armed lifetime; engine's 15000 is the burn DoT's tick length, a real but different number |
-| Strider Kick (talent-gated, rank 1) | duration_ms | 3000 | 0 (no aura registered) | missing aura duration |
-| Wing Clip (rank 3) | duration_ms | 10000 | 0 (no aura registered) | missing aura duration |
+- Traps: `rowFor` now compares a trap's duration with its same-rank
+  `<Trap> Effect` spell (`sim/conformance/duration_reading.go`,
+  `durationPayloadSpells`) instead of the cast's own `duration_ms`, which is
+  the trap's armed lifetime on the ground (60000 on every rank). The engine
+  keeps its semantics (it resolves the trap on cast and models the payload):
+  Immolation Trap 15000 and Explosive Trap 20000 now match the effect spells
+  exactly. This is a change in what the report reads, not in the engine.
+- Freezing Trap's payload, Wing Clip's snare and Strider Kick's speed buff
+  are stun / slow / speed-up auras (client aura 12 / 33 / 31); the engine has
+  no movement and its targets are never crowd controlled. A `duration_ms`
+  that belongs only to those auras and interrupt effects reads as the
+  `unmodeled-duration` verdict (duration_reading.go, every class). Not an
+  engine value faked: no aura was added.
+- Raptor Strike's registration gap is gone (it matches on the committed
+  `forever`).
+- New: Hunter's Mark (ranks 1130, 14323, 14324, 1213268) and Aspect of the
+  Falcon (469145) are registered; see the trainables note below.
+
 
 ### Mage
 
@@ -348,53 +352,38 @@ None of these are new engine defects; they were always there.
 
 ### Druid
 
-Job 1 confirmed Berserk, Hurricane, Innervate and Tiger's Fury's
-durations outright - `duration_ms` no longer appears in any of their
-Diff text, since none of these were ever missing, this report just
-could not see them. Each row still mismatches on an unrelated field
-(Berserk and Tiger's Fury on `required_level`, Hurricane on
-`cooldown_ms`, Innervate on `cost` and `required_level`), so none of
-the four is a full `match` row. Faerie Fire's duration
-is a `core.FullBuffs.Debuffs` artifact (`-1`, see vocabulary), same
-shape as Warlock's Curse of Recklessness and Paladin's Judgement of
-the Crusader above. Only Rip's duration is genuinely still not found
-(`0`, and its `required_level` also reads the engine's zero-value,
-pointing at the same "bogus zero-valued extra row" shape as Hunter's
-Raptor Strike rather than a true missing-aura case - worth the druid
-lane's own look).
+No mismatch rows (578 match, 8 client-scripted over every level and both
+tables; was 531 / 47). What moved, all on 2026-10-08:
 
-| Spell | Field | Client | Engine | Likely cause |
-|---|---|---|---|---|
-| Cat Form, Moonkin Form | cost | 0.00 | 684.20 / 435.40 | percent-of-mana cost vs. flat client column - answered: client's raw `PowerCostPct` is 55 / 35, matching the engine's percent model exactly (see the vocabulary entry above) |
-| Innervate | cost | 0.00 | 62.20 | percent-of-mana cost vs. flat client column - answered: client's raw `PowerCostPct` is 5, matching `BaseCost: 0.05` exactly |
-| Wrath (all ranks) | cost | 10.00-120.00 | 20.00-180.00 | stale vanilla literal - engine's cost table is consistently 40-75% above the client's, not a flat offset or a clean percent, which points at an old per-rank cost table rather than a formula bug |
-| Hurricane (all ranks) | cooldown_ms | 0 | 60000 | stale vanilla literal (Hurricane had a cooldown in old Classic data; Forever's client has none and the engine's `CD` was not removed) |
-| Prowl | cooldown_ms | 10000 | 0 | registration gap - no `CD` configured |
-| Faerie Fire | duration_ms | 40000 | -1 | full-buffs duration artifact (see vocabulary) |
-| Rip | duration_ms, required_level | 12000 / 60 | 0 / 0 | missing aura duration, likely alongside a bogus zero-valued extra row (same shape as Hunter's Raptor Strike) rather than a true gap - needs the druid lane's own look |
+- Faerie Fire (40000) and Demoralizing Roar (30000) read `-1` because
+  `core.FullBuffs.Debuffs` makes the target's Faerie Fire and Roar
+  permanent in place. `Preset.WithoutRaidDebuffs` builds the druid presets
+  against a target with no raid debuffs, so the spell's own aura reads; the
+  engine's 40000 and 30000 were right. The resto druid's current target is an
+  ally, so `Preset.ReadDebuffsOnEnemy` reads its Faerie Fire on the
+  encounter's enemy (that row used to say "no aura registered").
+- Rip was a real defect: the engine scaled the duration with combo points
+  (8 to 16 s, as Rupture does), but the client states 12 s on every rank and
+  the tooltip reads "damage over $d" at 1 through 5 points. Rip is now six
+  ticks of 2 s at every combo point count, and the per-combo-point tick step
+  is the client's EffectPointsPerResource (4.4, 7.2, 8.5, 12.7, 18.2, 25.5)
+  instead of the Era figures (4, 7, 9, 14, 20, 28). Naked level 60 feral on
+  the forever_feral rotation, 180 s, 400 iterations: 494.9 to 471.3 DPS
+  (-4.8%). The `.results` goldens of `TestP1Feral` and `TestP1Balance` are
+  skipped pending the talent rewrite, so none moved.
+- Pounce (9005, 9823, 9827) is registered. Its client `duration_ms` (2000) is
+  the stun; the 18 s bleed lives on spells (9007, 9824, 9826) that are not in
+  the vendored client file, so the row reads `client-scripted`.
+
 
 ### Priest
 
-Job 1 confirmed Inner Focus's duration outright (it is now a full
-`match` row) and resolved Shadowform's (both carry `core.NeverExpires`
-- a proc-style aura with no natural timeout, not a totem/full-buffs
-artifact - now correctly read as the client's own `-1` "until removed"
-sentinel instead of the int32-overflow garbage an earlier version of
-this widened search produced; see `auraDurationMS` in `compare.go`).
-Vampiric Embrace's duration is newly VISIBLE but not newly correct: Job
-1 found a real, nonzero 60000ms engine aura where none was visible
-before, and it still disagrees with the client's 30000ms (a stale
-vanilla literal shape, not a registration gap as this bucket
-previously assumed).
+No mismatch rows; unchanged by this lane (638 match, 17 client-scripted over
+every level and both tables). The trainables section now says which
+unregistered abilities are race-restricted in the client's SkillLineAbility
+rows (Starshards, a Night Elf racial, is registered by a Night Elf priest;
+the presets are Undead and Human).
 
-| Spell | Field | Client | Engine | Likely cause |
-|---|---|---|---|---|
-| Shadowform | cooldown_ms, gcd_ms | 1500 / 1500 | 0 / 0 | registration gap - Shadowform looks implemented as a toggle/aura without the normal cast wrapper the client models (no `CD`, no `GCD`) |
-| Vampiric Embrace | cooldown_ms, duration_ms, required_level | 60000 / 30000 / 30 | 0 / 60000 / 0 | registration gap (cooldown, required level); duration is a real engine number (newly visible by Job 1) that is 2x the client's, a stale-literal shape worth the priest lane's own look |
-
-This is still the cleanest class after Jobs 1-3 - only 2 mismatches at
-level 60, both on one talent-gated spell plus Shadowform's missing
-cast wrapper.
 
 ### Shaman
 
@@ -427,7 +416,7 @@ cause and three report artefacts:
   current target is a friend, so `Dot(CurrentTarget)` found nothing for
   Restoration's Flame Shock, Searing and Magma Totem (`engineDuration`
   now takes the dot from any target).
-- **Report artefact: `not-simulated` verdict** (new, `unsimulated.go`).
+- **Report artefact: unmodeled-duration rows with their own reasons** (`unsimulatedDurations` in `duration_reading.go`; this lane first called the verdict `not-simulated`).
   The client's 2000ms on Earth Shock is the interrupt lock-out and the
   8000ms on Frost Shock is the movement snare; the sim's targets neither
   cast nor move, so the engine has no aura for them and registering one
@@ -437,7 +426,7 @@ cause and three report artefacts:
   Air) no longer applies: the lifetime aura is not the permanent raid
   buff.
 
-Remaining non-match rows are 44 `not-simulated` (Earth Shock x7 ranks,
+Remaining non-match rows are 44 `unmodeled-duration` (Earth Shock x7 ranks,
 Frost Shock x4 ranks, per spec) and 12 `client-scripted` (Magma Totem:
 the client states no duration, the engine keeps 20s) at level 60.
 
@@ -460,37 +449,23 @@ Trainables the engine does not register (the golden's last section):
 
 ### Rogue
 
-Job 1 confirmed Adrenaline Rush and Ghostly Strike's durations outright
-(both now full `match` rows) and Blade Flurry's (now mismatching only
-on `required_level`). It also found real, previously-invisible engine
-auras for Riposte (5000ms vs. the client's 6000 - a real, small
-disagreement) and Expose Armor (a `core.FullBuffs.Debuffs` artifact,
-`-1`, same shape as Warlock's Curse of Recklessness above). Only
-Hemorrhage and Premeditation are still genuinely **missing aura
-duration**; Rupture still reads `0` too, but without
-`(no aura registered)` - something on its target is returning a real,
-zero-length Dot/aura rather than nothing at all, alongside the same
-"bogus zero-valued extra row" shape (`required_level` also reads 0)
-seen on Hunter's Raptor Strike and Druid's Rip - worth the rogue lane's
-own look rather than this report's.
+No mismatch rows (236 match, 14 client-scripted over every level and both
+tables; was 191 / 2 / 14). What moved, all on 2026-10-08:
 
-| Spell | Field | Client | Engine | Likely cause |
-|---|---|---|---|---|
-| Stealth | cooldown_ms | 10000 | 0 | registration gap - no `CD` configured |
-| Expose Armor | duration_ms | 30000 | -1 | full-buffs duration artifact (see vocabulary) |
-| Riposte | duration_ms | 6000 | 5000 | newly visible by Job 1 - a real, nonzero engine duration that simply disagrees with the client's |
-| Hemorrhage, Premeditation | duration_ms | 15000 / 20000 | 0 (no aura registered) | missing aura duration - still true after Job 1's wider search |
-| Rupture | duration_ms, required_level | 6000 / 60 | 0 / 0 | engine reads a real but zero-length duration (no `(no aura registered)` note), likely the same bogus-extra-row shape as Hunter's Raptor Strike and Druid's Rip - worth the rogue lane's own look |
-| Slice and Dice | duration_ms, required_level | 6000 / 42 | 21000 / 0 | semantic mismatch, newly visible by Job 1: the engine's aura is real (21000ms, not found before) but is the combo-point-scaled duration, not the client's base 6s - a real but different number, same shape as Immolation Trap above |
+- Eviscerate's ninth rank slot casts rank 8's spell 11300 without AQ
+  content but carried the AQ rank's learn level 60; it now carries 56, the
+  client's spell_level for 11300.
+- New: Cheap Shot (1833, two combo points from stealth), Gouge (five ranks,
+  damage and one combo point) and Kick (four ranks, damage). Their stun and
+  interrupt durations read as `unmodeled-duration`.
+- Initiative now also triggers on Cheap Shot, as the talent text says.
+- Venom was a registered talent spell the report never built (it was missing
+  from `TalentGatedSpells`, so the trainables list called it unregistered).
+  Now in the talent-gated table, it exposed two real gaps, both fixed:
+  `RequiredLevel` 40, and an aura whose registered duration was the 21 s
+  five-point figure where the client's base is 6 s (Slice and Dice's shape;
+  a cast still sets 9 to 21 s by combo points).
 
-Rogue has the fewest matches of any class (5 combining both tables at
-level 60) but also the fewest distinct defects - most of what remains
-is one of two systemic causes (missing aura duration and Stealth's
-missing cooldown), not 26 independent numeric bugs. CombatSwordsRogue's
-pre-existing WeaponExpertise talent-rewrite panic (sim/rogue/talents.go,
-tracked separately) does not affect this report: it only panicked under
-that preset's real 5-point talent spend, and the empty-talent
-comparison build never reaches that code path.
 
 ## Job 2: the percent-of-mana cost question, answered
 
@@ -530,6 +505,78 @@ Shaman's Stormstrike is explicitly NOT one of these: its raw
 stale vanilla-era literal in `sim/shaman/stormstrike.go`, not a
 visibility gap (see the shaman section above).
 
+## Trainables: druid, hunter, priest, rogue (2026-10-08)
+
+Every active trainable the four classes' goldens listed as unregistered was
+classified by what it does to a simmed result (damage, healing, threat, mana,
+a buff or debuff the presets assume). "Utility" means no simmed quantity: the
+sim has one boss that always attacks the tank, no movement, no crowd control
+on its targets, no target mana, no aggro table and no dispellable effects.
+
+Registered, with the client's rows and tests: Hunter's Mark (four ranks; the
+raid debuff the presets apply was a fixed 110 ranged attack power),
+Aspect of the Falcon (attack power equal to the best Hawk rank, melee and
+ranged), Pounce (3 ranks; 18 s bleed, one combo point), Cheap Shot (two combo
+points from stealth), Gouge (5 ranks) and Kick (4 ranks).
+
+Modelled as a raid buff through `core.BuffRanks` (the golden's "Modelled as a
+raid buff" subsection): Mark of the Wild and Gift of the Wild
+(`core.MarkOfTheWildStats`), Trueshot Aura (`core.TrueshotAuraRanks`).
+
+Preset buffs left as they are, for the sim/core owner: Power Word: Fortitude,
+Prayer of Fortitude, Divine Spirit, Prayer of Spirit, Shadow Protection and
+Prayer of Shadow Protection are fixed top-rank values in `core.BuffSpellValues`
+(54 stamina, 40 spirit, 60 shadow resistance, equal to the client's top rank
+at level 60, over-granted below it); Aspect of the Wild is the same shape
+(60 nature resistance); Power Infusion is `core.registerPowerInfusionCD`.
+None has a rank table, and none moves a level 60 number.
+
+Open question for the owner, not registered: **Heart of the Lion** (409580,
+Survival, learn level 1, no cost, aura 137 +10% all stats on the hunter and a
+14 s periodic trigger of spell 409583, +10% all stats and +40 melee and ranged
+attack power for nearby allies for 15 s). It is a simmed buff and would move
+every hunter number by 10 to 20% of total stats; the tables do not say whether
+the hunter also receives the party buff or whether it is a baseline passive,
+so it needs a decision, not a guess.
+
+Unregistered, utility or not modelled, one line each (counts are the golden's):
+
+- Druid (18): Growl, Challenging Roar (taunts; no aggro table), Cower (a flat
+  threat cut; same), Bash, Feral Charge, Hibernate, Soothe Animal, Entangling
+  Roots, Nature's Grasp (control and defence; Roots' nature damage cannot be
+  used against the target a rotation is damaging), Rebirth, Revive
+  (resurrection), Cure Poison, Abolish Poison, Remove Curse (dispels), Aquatic
+  Form, Travel Form, Dash, Teleport: Moonglade (movement).
+- Hunter (27, plus Heart of the Lion above): Aspect of the Monkey, Aspect of
+  the Cheetah, Aspect of the Pack, Aspect of the Beast (defence, movement),
+  Aspect of the Wild (preset buff above), Concussive Shot, Scatter Shot,
+  Frost Trap, Intimidation, Scare Beast, Tranquilizing Shot (control and
+  dispel), Distracting Shot (flat threat, no aggro table), Feign Death,
+  Disengage, Deterrence (threat drop, escape, defence), Mend Pet, Dismiss
+  Pet, Revive Pet, Tame Beast, Beast Lore, Eagle Eye, Eyes of the Beast,
+  Flare, Enchanted Flare (pet care and scouting), Scorpid Sting (target hit
+  chance), Viper Sting (drains target mana; encounter targets have none).
+  Hydra Shot, Wyvern Strike, Widow Bite and Sonic Blast have no learn row and
+  stay out.
+- Priest (31): the six buffs above; Power Infusion; Fade (threat drop);
+  Resurrection; Cure Disease, Abolish Disease, Dispel Magic; Shackle Undead,
+  Mind Control, Psychic Scream, Mind Soothe, Fear Ward, Levitate, Mind Vision
+  (control and utility); Mana Burn (needs target mana); Lightwell (a
+  summoned healing object with charges, not modelled; healing, so a follow-up
+  for the healing lane). Race-restricted in the client (the golden says which):
+  Starshards (Night Elf, registered for a Night Elf priest), Chastise (Dwarf,
+  an instant 289 holy damage hit on a 120 s cooldown), Divine Grace (Human, a
+  heal on a 10 minute cooldown, at most once a fight), Elune's Grace,
+  Feedback, Touch of Weakness, Hex of Weakness, Shadowguard (reactive or
+  defensive), Confounding Flash and Contingency Plan (Gnome).
+- Rogue (8): Gouge, Kick and Cheap Shot are registered and Venom was already
+  (the report now builds it); Redirect, Evasion, Sap, Sprint, Distract,
+  Disarm Trap, Kidney Shot and Blind remain (control, movement, defence;
+  Kidney Shot spends combo points for a stun; Redirect moves combo points
+  between targets and the sim has one). Occult, Crippling, Mind-numbing, Instant
+  and Deadly Poison application spells in "no learn row" are enchant
+  applications the engine models through its poison enchant spells.
+
 <!-- damage-summary:begin (generated by sim/conformance; do not edit) -->
 
 ## Damage conformance (level 60)
@@ -538,16 +585,16 @@ Per spec-and-rank row at level 60 whose client spell has a school-damage, period
 
 | Class | Declared | Matching | Differing | Not declared | n/a |
 |---|---|---|---|---|---|
-| Hunter | 12 | 12 | 0 | 0 | 27 |
+| Hunter | 12 | 12 | 0 | 0 | 29 |
 | Mage | 83 | 83 | 0 | 0 | 24 |
 | Warlock | 98 | 98 | 0 | 0 | 63 |
 | Paladin | 129 | 129 | 0 | 24 | 159 |
 | Warrior | 12 | 12 | 0 | 0 | 38 |
-| Druid | 98 | 98 | 0 | 0 | 35 |
+| Druid | 98 | 98 | 0 | 0 | 37 |
 | Priest | 143 | 143 | 0 | 0 | 34 |
 | Shaman | 185 | 185 | 0 | 20 | 215 |
-| Rogue | 6 | 6 | 0 | 0 | 25 |
-| **Total** | 766 | 766 | 0 | 44 | 620 |
+| Rogue | 10 | 10 | 0 | 0 | 28 |
+| **Total** | 770 | 770 | 0 | 44 | 627 |
 
 <!-- damage-summary:end -->
 
@@ -559,15 +606,15 @@ Per class, the active trainables (power cost, cast time or cooldown; pipeline.tr
 
 | Class | Active trainables | Not registered |
 |---|---|---|
-| Hunter | 49 | 30 |
+| Hunter | 49 | 27 |
 | Mage | 58 | 36 |
 | Warlock | 47 | 24 |
 | Paladin | 46 | 23 |
 | Warrior | 40 | 11 |
-| Druid | 54 | 21 |
+| Druid | 54 | 18 |
 | Priest | 53 | 31 |
 | Shaman | 54 | 28 |
-| Rogue | 27 | 12 |
-| **Total** | 428 | 216 |
+| Rogue | 27 | 8 |
+| **Total** | 428 | 206 |
 
 <!-- trainables-summary:end -->

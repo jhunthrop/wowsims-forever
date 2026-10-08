@@ -43,6 +43,14 @@ func TestGarroteDamageMatchesClient(t *testing.T) {
 	assertTable(t, clientdamagetest.Periodic, "Garrote", garroteSpellID[:], GarroteTickDamage)
 }
 
+func TestGougeDamageMatchesClient(t *testing.T) {
+	assertTable(t, clientdamagetest.Direct, "Gouge", GougeSpellId[:], GougeDamage)
+}
+
+func TestKickDamageMatchesClient(t *testing.T) {
+	assertTable(t, clientdamagetest.Direct, "Kick", KickSpellId[:], KickDamage)
+}
+
 func TestRuptureDamageMatchesClient(t *testing.T) {
 	assertTable(t, clientdamagetest.Periodic, "Rupture", ruptureSpellID[:], RuptureTickDamage)
 }

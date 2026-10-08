@@ -809,15 +809,20 @@ func CurseOfWeaknessAura(target *Unit, points int32) *Aura {
 
 const HuntersMarkAuraTag = "HuntersMark"
 
+// HuntersMarkAura is the raid debuff: the top rank's 110 ranged attack power.
 func HuntersMarkAura(target *Unit, points int32) *Aura {
-	bonus := 110.0
+	return HuntersMarkAuraOfRank(target, 14325, 110, points)
+}
 
-	bonus *= 1 + 0.03*float64(points)
+// HuntersMarkAuraOfRank is the debuff a hunter's own Hunter's Mark rank
+// applies: spellID is that rank's spell, baseBonus its ranged attack power.
+func HuntersMarkAuraOfRank(target *Unit, spellID int32, baseBonus float64, points int32) *Aura {
+	bonus := baseBonus * (1 + 0.03*float64(points))
 
 	aura := target.GetOrRegisterAura(Aura{
 		Label:    "HuntersMark-" + strconv.Itoa(int(bonus)),
 		Tag:      HuntersMarkAuraTag,
-		ActionID: ActionID{SpellID: 14325},
+		ActionID: ActionID{SpellID: spellID},
 		Duration: time.Minute * 2,
 	})
 

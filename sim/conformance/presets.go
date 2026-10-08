@@ -46,6 +46,18 @@ type Preset struct {
 	Talents            string
 	SpecOptions        interface{}
 	DistanceFromTarget float64
+
+	// WithoutRaidDebuffs builds the preset against a target carrying none
+	// of core.FullBuffs.Debuffs. That set applies a class's own debuffs
+	// (Faerie Fire, Demoralizing Roar) permanently through
+	// core.MakePermanent, which rewrites the shared aura's Duration to
+	// NeverExpires, so the spell that applies the debuff would read as
+	// "until removed" (-1) instead of the duration it registers.
+	WithoutRaidDebuffs bool
+	// ReadDebuffsOnEnemy reads a spell's target Dot and auras on the
+	// encounter's first enemy rather than on the caster's current target,
+	// which is an ally for a healing spec.
+	ReadDebuffsOnEnemy bool
 }
 
 // Presets mirrors, one entry per registered spec (sim/register_all.go),
@@ -53,11 +65,12 @@ type Preset struct {
 // already builds.
 var Presets = []Preset{
 	{
-		Label:           "Hunter",
-		ClientClassSlug: "hunter",
-		Class:           proto.Class_ClassHunter,
-		Race:            proto.Race_RaceOrc,
-		Talents:         "-05451002503051-33400023023",
+		Label:              "Hunter",
+		ClientClassSlug:    "hunter",
+		WithoutRaidDebuffs: true,
+		Class:              proto.Class_ClassHunter,
+		Race:               proto.Race_RaceOrc,
+		Talents:            "-05451002503051-33400023023",
 		SpecOptions: &proto.Player_Hunter{
 			Hunter: &proto.Hunter{
 				Options: &proto.Hunter_Options{
@@ -177,11 +190,13 @@ var Presets = []Preset{
 		},
 	},
 	{
-		Label:           "BalanceDruid",
-		ClientClassSlug: "druid",
-		Class:           proto.Class_ClassDruid,
-		Race:            proto.Race_RaceTauren,
-		Talents:         "5000550012551251--5005031",
+		Label:              "BalanceDruid",
+		ClientClassSlug:    "druid",
+		ReadDebuffsOnEnemy: true,
+		WithoutRaidDebuffs: true,
+		Class:              proto.Class_ClassDruid,
+		Race:               proto.Race_RaceTauren,
+		Talents:            "5000550012551251--5005031",
 		SpecOptions: &proto.Player_BalanceDruid{
 			BalanceDruid: &proto.BalanceDruid{
 				Options: &proto.BalanceDruid_Options{
@@ -191,11 +206,13 @@ var Presets = []Preset{
 		},
 	},
 	{
-		Label:           "FeralDruid",
-		ClientClassSlug: "druid",
-		Class:           proto.Class_ClassDruid,
-		Race:            proto.Race_RaceTauren,
-		Talents:         "500005301-5500020323202151-15",
+		Label:              "FeralDruid",
+		ClientClassSlug:    "druid",
+		ReadDebuffsOnEnemy: true,
+		WithoutRaidDebuffs: true,
+		Class:              proto.Class_ClassDruid,
+		Race:               proto.Race_RaceTauren,
+		Talents:            "500005301-5500020323202151-15",
 		SpecOptions: &proto.Player_FeralDruid{
 			FeralDruid: &proto.FeralDruid{
 				Options: &proto.FeralDruid_Options{
@@ -207,11 +224,13 @@ var Presets = []Preset{
 		},
 	},
 	{
-		Label:           "FeralBearDruid",
-		ClientClassSlug: "druid",
-		Class:           proto.Class_ClassDruid,
-		Race:            proto.Race_RaceTauren,
-		Talents:         druid.ForeverBearTalents,
+		Label:              "FeralBearDruid",
+		ClientClassSlug:    "druid",
+		ReadDebuffsOnEnemy: true,
+		WithoutRaidDebuffs: true,
+		Class:              proto.Class_ClassDruid,
+		Race:               proto.Race_RaceTauren,
+		Talents:            druid.ForeverBearTalents,
 		SpecOptions: &proto.Player_FeralTankDruid{
 			FeralTankDruid: &proto.FeralTankDruid{
 				Options: &proto.FeralTankDruid_Options{
@@ -221,11 +240,13 @@ var Presets = []Preset{
 		},
 	},
 	{
-		Label:           "RestorationDruid",
-		ClientClassSlug: "druid",
-		Class:           proto.Class_ClassDruid,
-		Race:            proto.Race_RaceTauren,
-		Talents:         "05302001--5050035153113251",
+		Label:              "RestorationDruid",
+		ClientClassSlug:    "druid",
+		ReadDebuffsOnEnemy: true,
+		WithoutRaidDebuffs: true,
+		Class:              proto.Class_ClassDruid,
+		Race:               proto.Race_RaceTauren,
+		Talents:            "05302001--5050035153113251",
 		SpecOptions: &proto.Player_RestorationDruid{
 			RestorationDruid: &proto.RestorationDruid{
 				Options: &proto.RestorationDruid_Options{

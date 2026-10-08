@@ -107,15 +107,36 @@ func (t Trainable) whyItMatters() string {
 	return strings.Join(reasons, ", ")
 }
 
+// whyAndRacial is whyItMatters followed by the trainable's racial note.
+func (t Trainable) whyAndRacial(classSlug string) string {
+	why := t.whyItMatters()
+	note := racialNote(classSlug, t.Name)
+	switch {
+	case note == "":
+		return why
+	case why == "":
+		return note
+	default:
+		return why + "; " + note
+	}
+}
+
 // TrainableGaps is one class's comparison of its trainables against the
 // engine's registered spells.
 type TrainableGaps struct {
+	// ClassSlug is the class the gaps belong to; the racial notes are keyed by it.
+	ClassSlug string
 	// Active is the number of active trainables the class has.
 	Active int
 	// Unregistered lists the active trainables with a client learn row
 	// (source skill_line_ability) the engine registers no rank of, ordered
 	// by first level, then name.
 	Unregistered []Trainable
+	// ModeledAsBuff lists the active trainables with a client learn row that
+	// the engine models as a raid buff through a core.BuffRanks table
+	// (trainable_notes.go) instead of registering a spell. They are counted
+	// in Active and left out of Unregistered.
+	ModeledAsBuff []Trainable
 	// NoLearnRow lists the active class-family spells the client lists on no
 	// learn row (source class_spell) that the engine does not register. They
 	// are not counted in Active or Unregistered.
@@ -153,7 +174,8 @@ func registeredSpellIDs(presets []Preset, gatedRows []Row) (ids map[int32]bool, 
 // compareTrainables splits a class's active trainables into those the engine
 // registers and those it does not.
 func compareTrainables(trainables ClassTrainables, registered map[int32]bool) TrainableGaps {
-	var gaps TrainableGaps
+	gaps := TrainableGaps{ClassSlug: trainables.ClassSlug}
+	modeled := modeledBuffIDs(trainables.ClassSlug)
 	for _, t := range trainables.Trainables {
 		if !t.Active {
 			continue
@@ -165,11 +187,16 @@ func compareTrainables(trainables ClassTrainables, registered map[int32]bool) Tr
 			continue
 		}
 		gaps.Active++
-		if !t.registeredIn(registered) {
+		switch {
+		case t.registeredIn(registered):
+		case t.registeredIn(modeled):
+			gaps.ModeledAsBuff = append(gaps.ModeledAsBuff, t)
+		default:
 			gaps.Unregistered = append(gaps.Unregistered, t)
 		}
 	}
 	sortTrainables(gaps.Unregistered)
+	sortTrainables(gaps.ModeledAsBuff)
 	sortTrainables(gaps.NoLearnRow)
 	return gaps
 }
@@ -199,6 +226,12 @@ func renderTrainableGaps(b *strings.Builder, classSlug string, gaps TrainableGap
 	fmt.Fprintf(b, "## Trainable abilities the engine does not register\n\n")
 	fmt.Fprintf(b, "Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. %d of the class's %d active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).\n\n", len(gaps.Unregistered), gaps.Active)
 	renderTrainableTable(b, classSlug, gaps.Unregistered)
+
+	if len(gaps.ModeledAsBuff) > 0 {
+		fmt.Fprintf(b, "### Modelled as a raid buff\n\n")
+		fmt.Fprintf(b, "Active trainables the engine does not register as a spell because the presets assume them as a raid buff, applied from the character's level through a core.BuffRanks table with the client's amount per rank (sim/conformance/trainable_notes.go names the tables). They are counted in the total above and not listed in the table above.\n\n")
+		renderTrainableTable(b, classSlug, gaps.ModeledAsBuff)
+	}
 
 	fmt.Fprintf(b, "### In the client, no learn row\n\n")
 	fmt.Fprintf(b, "Active, ranked, levelled class-family spells the client lists on no SkillLineAbility row (Unstable Affliction, Hydra Shot) that the engine does not register. They are not counted above or in SUMMARY.md; the list also carries spells that are probably not player spellbook entries (rogue poisons, NPC volleys).\n\n")
@@ -232,7 +265,7 @@ func renderTrainableTable(b *strings.Builder, classSlug string, list []Trainable
 		}
 		fmt.Fprintf(b, "| %s (%d) | %d→%d | %d | %s | %s | %s | %d | %d | %s |%s\n",
 			t.Name, t.Ranks[0].ID, t.firstLevel(), last.Level, len(t.Ranks), skillLine, t.Source,
-			cost, t.CastTimeMS, t.CooldownMS, t.whyItMatters(), disposition)
+			cost, t.CastTimeMS, t.CooldownMS, t.whyAndRacial(classSlug), disposition)
 	}
 	fmt.Fprintf(b, "\n")
 }

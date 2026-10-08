@@ -219,18 +219,15 @@ func containsAll(s string, substrs ...string) bool {
 	return true
 }
 
-func TestVerdictFor_UnsimulatedDurationIsNamedNotMismatched(t *testing.T) {
+func TestVerdictFor_UnmodeledDurationIsNamedNotMismatched(t *testing.T) {
 	row := Row{
-		ClientDurationMS:     2000,
-		HasDuration:          true,
-		DurationNotSimulated: unsimulatedDurationReason("shaman", "Earth Shock"),
-	}
-	if row.DurationNotSimulated == "" {
-		t.Fatal("Earth Shock's lock-out duration should be a named unsimulated effect")
+		ClientDurationMS: 2000,
+		HasDuration:      true,
+		DurationReading:  unsimulatedDurations["shaman/Earth Shock"],
 	}
 	verdict, diff := verdictFor(row)
-	if verdict != VerdictDurationNotSimulated || !containsAll(diff, "2000", "lock-out") {
-		t.Fatalf("verdictFor = (%q, %q), want the %q verdict naming the lock-out", verdict, diff, VerdictDurationNotSimulated)
+	if verdict != VerdictUnmodeledDuration || !containsAll(diff, "lock-out") {
+		t.Fatalf("verdictFor = (%q, %q), want the %q verdict naming the lock-out", verdict, diff, VerdictUnmodeledDuration)
 	}
 
 	row.ClientGCDMS = 1500

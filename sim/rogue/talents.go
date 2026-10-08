@@ -282,7 +282,7 @@ func (rogue *Rogue) applyInitiative() {
 			aura.Activate(sim)
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if spell == rogue.Garrote || spell == rogue.Ambush {
+			if spell == rogue.Garrote || spell == rogue.Ambush || spell == rogue.CheapShot {
 				if result.Landed() {
 					if sim.Proc(procChance, "Initiative") {
 						rogue.AddComboPoints(sim, 1, result.Target, cpMetrics)

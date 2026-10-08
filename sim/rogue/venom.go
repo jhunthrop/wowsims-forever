@@ -45,6 +45,9 @@ func (rogue *Rogue) scalePoisonDamage(factor float64) {
 	}
 }
 
+// venomLevel is Venom's learn level, the client's spell_level for 1310703.
+const venomLevel = 40
+
 func (rogue *Rogue) registerVenomSpell() {
 	if !rogue.Talents.Venom {
 		return
@@ -52,8 +55,12 @@ func (rogue *Rogue) registerVenomSpell() {
 
 	actionID := core.ActionID{SpellID: 1310703}
 
+	// Index 0 is the client's base duration (spell 1310703, 6000 ms), the
+	// registered default before a cast sets one by combo points, the same
+	// shape as Slice and Dice's table; a cast needs a combo point, so
+	// it is never the one a cast uses.
 	rogue.venomDurations = [6]time.Duration{
-		0,
+		time.Second * 6,
 		time.Second * 9,
 		time.Second * 12,
 		time.Second * 15,
@@ -67,7 +74,7 @@ func (rogue *Rogue) registerVenomSpell() {
 		// Overridden on cast to the combo-point duration; a non-zero
 		// default so it doesn't crash when read by an APL prepull, same
 		// as SliceAndDiceAura above.
-		Duration: rogue.venomDurations[5],
+		Duration: rogue.venomDurations[0],
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			rogue.additivePoisonBonusChance += venomPoisonProcChanceBonus
 			rogue.scalePoisonDamage(rogue.venomDamageScale())
@@ -79,10 +86,11 @@ func (rogue *Rogue) registerVenomSpell() {
 	})
 
 	rogue.Venom = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:    SpellCode_RogueVenom,
-		ActionID:     actionID,
-		Flags:        core.SpellFlagAPL,
-		MetricSplits: 6,
+		SpellCode:     SpellCode_RogueVenom,
+		ActionID:      actionID,
+		Flags:         core.SpellFlagAPL,
+		MetricSplits:  6,
+		RequiredLevel: venomLevel,
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost: 25,

@@ -22,43 +22,82 @@ const (
 	auraStun              int32 = 12
 	auraRoot              int32 = 26
 	auraSilence           int32 = 27
+	auraIncreaseSpeed     int32 = 31
 	auraDecreaseSpeed     int32 = 33
 	auraChannelDeathItem  int32 = 86
-	reasonUnmodeledEffect       = "the client's duration belongs to a control effect (slow, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design"
+	reasonUnmodeledEffect       = "the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design"
 	reasonFullBuffsAura         = "the engine aura on the target is the same object core.FullBuffs.Debuffs already made permanent with core.MakePermanent, so its registered duration cannot be read here (the spell's own constructor sets the client's duration)"
 )
 
-// durationReadingClasses are the client class slugs whose goldens have
-// adopted these readings. A class joins by adding its slug here and
-// regenerating its golden; the other classes' goldens keep the plain
-// numeric comparison until their lanes make that choice.
-var durationReadingClasses = map[string]bool{"mage": true, "warlock": true}
+// durationPayloadSpells maps a cast spell whose own duration_ms is not the
+// duration of anything it does to the client spell that carries the
+// payload. A trap's duration_ms (60000 on every rank) is its armed lifetime
+// on the ground; the burn, DoT or freeze it leaves lives on a separate
+// "<Trap> Effect" spell per rank. The engine resolves the trap on cast and
+// models only the payload, so the payload's duration is the comparable one.
+var durationPayloadSpells = map[string]string{
+	"Freezing Trap":   "Freezing Trap Effect",
+	"Immolation Trap": "Immolation Trap Effect",
+	"Explosive Trap":  "Explosive Trap Effect",
+}
+
+// unsimulatedDurations names, per class and spell, the client durations of
+// effects with no consequence in a sim result, with the reason each has no
+// engine aura. They read as unmodeled-duration like the generic control
+// effects but keep their own explanation. The key is "<class slug>/<client
+// spell name>".
+var unsimulatedDurations = map[string]string{
+	"shaman/Earth Shock": "interrupt lock-out of the target's school, never applied: the sim's targets never cast",
+	"shaman/Frost Shock": "movement snare on the target, never applied: the sim's targets neither move nor flee",
+}
+
+// durationSpellFor returns the client spell whose duration_ms the engine is
+// compared against: the cast spell itself, or its payload spell of the same
+// rank when durationPayloadSpells names one.
+func durationSpellFor(clientClass spellconst.Class, cast spellconst.Spell) spellconst.Spell {
+	payloadName, ok := durationPayloadSpells[cast.Name]
+	if !ok {
+		return cast
+	}
+	for _, candidate := range clientClass.Ranks(payloadName) {
+		if candidate.Rank == cast.Rank {
+			return candidate
+		}
+	}
+	return cast
+}
 
 var unmodeledControlAuras = map[int32]bool{
 	auraConfuse: true, auraFear: true, auraStun: true, auraRoot: true,
-	auraSilence: true, auraDecreaseSpeed: true, auraChannelDeathItem: true,
+	auraSilence: true, auraIncreaseSpeed: true, auraDecreaseSpeed: true, auraChannelDeathItem: true,
 }
 
 // durationReading returns the explanation when row's duration column is an
 // artefact of the report rather than a disagreement, and "" when the
 // numbers are to be compared:
 //
-//   - the engine found no aura and every duration-bearing client effect is a
-//     control effect the sim does not model (reasonUnmodeledEffect);
+//   - the engine found no aura and the spell is named in unsimulatedDurations
+//     (that row's own reason);
+//   - every duration-bearing client effect is a control or movement effect
+//     the sim does not model and the engine's number (if any) differs
+//     (reasonUnmodeledEffect);
 //   - the engine's only matching aura sits on the target and was made
 //     permanent by the full-buffs debuff set (reasonFullBuffsAura).
 //
 // An aura on the caster that carries NeverExpires is not read this way: that
 // is the engine's own registration and a real disagreement (Evocation).
 func durationReading(row Row, client spellconst.Spell, spell *core.Spell, siblingIDs map[int32]bool) string {
-	if !durationReadingClasses[row.ClassSlug] || client.DurationMS <= 0 {
+	if client.DurationMS <= 0 {
 		return ""
 	}
-	if !row.EngineDurationFound {
-		if onlyUnmodeledControlEffects(client) {
-			return reasonUnmodeledEffect
-		}
-		return ""
+	if reason := unsimulatedDurations[row.ClassSlug+"/"+client.Name]; reason != "" && !row.EngineDurationFound {
+		return reason
+	}
+	// A control effect's duration is never what an engine aura or Dot found
+	// on the spell measures (Pounce's 2 s stun beside its 18 s bleed), so
+	// the numbers are only compared when they happen to agree.
+	if onlyUnmodeledControlEffects(client) && row.EngineDurationMS != client.DurationMS {
+		return reasonUnmodeledEffect
 	}
 	if row.EngineDurationMS == -1 && permanentOnTarget(spell, siblingIDs) {
 		return reasonFullBuffsAura

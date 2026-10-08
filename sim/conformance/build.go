@@ -114,7 +114,11 @@ func buildCharacterWearing(preset Preset, level int32, talentsString string, equ
 		DistanceFromTarget: distance,
 	}, preset.SpecOptions)
 
-	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
+	debuffs := core.FullBuffs.Debuffs
+	if preset.WithoutRaidDebuffs {
+		debuffs = &proto.Debuffs{}
+	}
+	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, debuffs)
 
 	env, _, _ := core.NewEnvironment(raid, buildEncounter(), true)
 	built = env.Raid.Parties[0].Players[0].GetCharacter()
