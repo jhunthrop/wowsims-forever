@@ -566,7 +566,7 @@ Unregistered, utility or not modelled, one line each (counts are the golden's):
 - Priest (30): the six buffs above; Power Infusion; Fade (threat drop);
   Resurrection; Cure Disease, Abolish Disease, Dispel Magic; Shackle Undead,
   Mind Control, Psychic Scream, Mind Soothe, Fear Ward, Levitate, Mind Vision
-  (control and utility); Mana Burn (needs target mana); Race-restricted in the client (the golden says which):
+  (control and utility); Mana Burn (needs target mana). Race-restricted in the client (the golden says which):
   Starshards (Night Elf, registered for a Night Elf priest), Chastise (Dwarf,
   an instant 289 holy damage hit on a 120 s cooldown), Divine Grace (Human, a
   heal on a 10 minute cooldown, at most once a fight), Elune's Grace,
