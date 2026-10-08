@@ -13,7 +13,7 @@ import (
 // for 10 sec."
 //
 // The percentage is effect 3 of spell 23894 in
-// data/builds/1.60.1.69893/spellconst/warrior.json and reads 35 at every
+// data/builds/1.60.1.70291/spellconst/warrior.json and reads 45 at every
 // rank; the generator emits only the school-damage effect, so this one
 // number is typed here with the client's text beside it rather than read
 // from constants_auto_gen.go. The "plus 30" is rank 1's flat base -
@@ -24,9 +24,9 @@ import (
 // term. That is a different spell, not a renamed one, so the 0.45 that
 // stood here is gone.
 //
-// 0.45 is the live value: Blizzard's 1 October 2026 notes give
-// Bloodthirst an attack-power ratio of 45% (was 35%), a hotfix the
-// client's spell data and rank text do not carry yet. The note wins.
+// 0.45 is the client's own value since build 1.60.1.70291 (effect 3 of
+// spells 23881-23894 reads 45, and the rank text says 45%); Blizzard's
+// 1 October 2026 notes had it ahead of the tables as 35 -> 45.
 const bloodthirstAttackPowerCoefficient = 0.45
 
 func (warrior *Warrior) registerBloodthirstSpell(cdTimer *core.Timer) {

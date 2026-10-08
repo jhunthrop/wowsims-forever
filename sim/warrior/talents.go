@@ -287,12 +287,10 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 		warrior.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + 0.01*float64(t.TwoHandedWeaponSpecialization)
 	}
 
-	// Raging Blows: the client text reads "reduces the Rage cost of your
-	// Cleave ability by 2"; Blizzard's 1 October 2026 notes say it now
-	// "reduces the rage cost of Cleave and Whirlwind by 3", and the note
-	// is the live state (hotfix), so both abilities lose 3. The
-	// off-hand Whirlwind strike the client text also names is baseline
-	// since the same notes (whirlwind.go).
+	// Raging Blows: since build 1.60.1.70291 the client text and row
+	// (spell 1310315, aura 107 of -30 tenths of rage) read "Reduces the Rage
+	// cost of your Cleave and Whirlwind abilities by 3". The off-hand
+	// Whirlwind strike the earlier text also named is baseline (whirlwind.go).
 	if t.RagingBlows {
 		warrior.AddStaticMod(core.SpellModConfig{
 			Kind:      core.SpellMod_PowerCost_Flat,
