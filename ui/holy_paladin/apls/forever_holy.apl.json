@@ -5,7 +5,7 @@
       "action": {
         "autocastOtherCooldowns": {}
       },
-      "notes": "Mana potions, runes and other consumables the preset brings. Divine Favor is left to this rotation, not to the autocast, because it is only worth spending on the heal that must not fail."
+      "notes": "Mana potions, runes and other consumables the preset brings: the Major Mana Potion and the Demonic Rune, each used whenever it is ready and the bar has room for it. Divine Favor is left to this rotation, not to the autocast, because it is only worth spending on the heal that must not fail."
     },
     {
       "action": {
@@ -126,7 +126,7 @@
           }
         }
       },
-      "notes": "Surplus mana buys throughput: Holy Light on a tank below 70 percent, but only while mana is no more than five points behind the fight clock. A healer short of mana (the usual case) never reaches this line."
+      "notes": "Surplus mana buys throughput: Holy Light on a tank below 70 percent, but only while mana is no more than five points behind the fight clock. A healer short of mana rarely reaches this line."
     },
     {
       "action": {
@@ -177,8 +177,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20930,
-            "rank": 4
+            "spellId": 1311606,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -186,7 +186,7 @@
           }
         }
       },
-      "notes": "Holy Shock, instant, on whoever is below 70 percent, under the same mana pacing: it heals about what Flash of Light does for more than twice the mana, so it is a use for spare mana, not a staple."
+      "notes": "Holy Shock, instant, on whoever is below 70 percent, under the same mana pacing: it heals about what Flash of Light does for more than twice the mana at the top rank, so it is a use for spare mana, not a staple. Rank 1 is the rank this profile pays for: it costs about half of the top rank's mana and returned more guarded score."
     },
     {
       "action": {
@@ -237,8 +237,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20930,
-            "rank": 4
+            "spellId": 1311606,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -296,8 +296,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20930,
-            "rank": 4
+            "spellId": 1311606,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -355,8 +355,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20930,
-            "rank": 4
+            "spellId": 1311606,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -414,8 +414,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20930,
-            "rank": 4
+            "spellId": 1311606,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -455,7 +455,7 @@
           }
         }
       },
-      "notes": "Flash of Light is the staple: 140 mana for about as much healing per cast as Holy Light gives per second of cast time at a quarter of the price, and a tank hit for 12 percent a swing is under 90 percent most of the time."
+      "notes": "Flash of Light is the staple: about as much healing per cast as Holy Light gives per second of cast time at a quarter of the price, and a tank hit for 12 percent a swing is under 90 percent most of the time. The tank gets the top rank and the four party members below get rank 4, the rank that came out ahead under the rank rule once the ranker had picked its gear."
     },
     {
       "action": {
@@ -479,8 +479,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 19943,
-            "rank": 6
+            "spellId": 19941,
+            "rank": 4
           },
           "target": {
             "type": "Player",
@@ -511,8 +511,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 19943,
-            "rank": 6
+            "spellId": 19941,
+            "rank": 4
           },
           "target": {
             "type": "Player",
@@ -543,8 +543,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 19943,
-            "rank": 6
+            "spellId": 19941,
+            "rank": 4
           },
           "target": {
             "type": "Player",
@@ -575,8 +575,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 19943,
-            "rank": 6
+            "spellId": 19941,
+            "rank": 4
           },
           "target": {
             "type": "Player",

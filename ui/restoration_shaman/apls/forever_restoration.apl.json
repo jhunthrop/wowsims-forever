@@ -34,6 +34,12 @@
   "priorityList": [
     {
       "action": {
+        "autocastOtherCooldowns": {}
+      },
+      "notes": "Mana potions, runes and other consumables the preset brings: the Major Mana Potion and the Demonic Rune, each used whenever it is ready and the bar has room for it. Nature's Swiftness is not spent here: the engine holds it back for a healer, and the list below casts it by hand."
+    },
+    {
+      "action": {
         "castSpell": {
           "spellId": {
             "spellId": 17359,

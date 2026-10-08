@@ -30,6 +30,8 @@ type fight struct {
 	// realMana runs the healer on the mana its stats give it instead of the
 	// plentiful pool the numeric tests use.
 	realMana bool
+	// consumes is what the healer carries (nil for nothing).
+	consumes *proto.Consumes
 }
 
 const (
@@ -65,6 +67,7 @@ func (f fight) player(t *testing.T) *proto.Player {
 		TalentsString: paladinTalents(t, f.talents),
 		Rotation:      parseRotation(t, f.rotation),
 		BonusStats:    &proto.UnitStats{Stats: bonus.ToFloatArray()},
+		Consumes:      f.consumes,
 	}, &proto.Player_HolyPaladin{HolyPaladin: &proto.HolyPaladin{Options: &proto.PaladinOptions{
 		PrimarySeal: proto.PaladinSeal_Righteousness,
 	}}})

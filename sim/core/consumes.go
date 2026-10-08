@@ -84,6 +84,16 @@ func applyWeaponImbueConsumes(character *Character, consumes *proto.Consumes) {
 	}
 }
 
+// manaOilStats are the mana oils' mana per five seconds and healing, as the
+// client's item tooltips state them (items 20745, 20747 and 20748, whose
+// enchants carry spells 25114, 25115 and 25116): Forever raised vanilla's 4/8/12 mana and
+// 8/16/25 healing.
+var manaOilStats = map[proto.WeaponImbue]stats.Stats{
+	proto.WeaponImbue_MinorManaOil:     {stats.MP5: 5, stats.HealingPower: 10},
+	proto.WeaponImbue_LesserManaOil:    {stats.MP5: 10, stats.HealingPower: 20},
+	proto.WeaponImbue_BrilliantManaOil: {stats.MP5: 15, stats.HealingPower: 30},
+}
+
 func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, shadowOilIcd Cooldown) {
 	if imbue != proto.WeaponImbue_WeaponImbueUnknown {
 		switch imbue {
@@ -122,19 +132,8 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 			})
 
 		// Mana Oils
-		case proto.WeaponImbue_MinorManaOil:
-			character.AddStats(stats.Stats{
-				stats.MP5: 4,
-			})
-		case proto.WeaponImbue_LesserManaOil:
-			character.AddStats(stats.Stats{
-				stats.MP5: 8,
-			})
-		case proto.WeaponImbue_BrilliantManaOil:
-			character.AddStats(stats.Stats{
-				stats.MP5:          12,
-				stats.HealingPower: 25,
-			})
+		case proto.WeaponImbue_MinorManaOil, proto.WeaponImbue_LesserManaOil, proto.WeaponImbue_BrilliantManaOil:
+			character.AddStats(manaOilStats[imbue])
 
 		// Sharpening Stones
 		case proto.WeaponImbue_SolidSharpeningStone:
@@ -312,6 +311,12 @@ func registerFrostOil(character *Character, isMh bool) {
 //                             Food
 ///////////////////////////////////////////////////////////////////////////
 
+// nightfinSoupStats is what Nightfin Soup gives in this client: 22 spell
+// damage for the well-fed hour (item 13931, spell 1249513). Forever turned
+// the food into a stat meal and dropped vanilla's 8 mana per five seconds,
+// so it gives a healer nothing.
+var nightfinSoupStats = stats.Stats{stats.SpellDamage: 22}
+
 func applyFoodConsumes(character *Character, consumes *proto.Consumes) {
 	if consumes.Food != proto.Food_FoodUnknown {
 		switch consumes.Food {
@@ -342,9 +347,7 @@ func applyFoodConsumes(character *Character, consumes *proto.Consumes) {
 				stats.Strength: 20,
 			})
 		case proto.Food_FoodNightfinSoup:
-			character.AddStats(stats.Stats{
-				stats.MP5: 8,
-			})
+			character.AddStats(nightfinSoupStats)
 		case proto.Food_FoodRunnTumTuberSurprise:
 			character.AddStats(stats.Stats{
 				stats.Intellect: 10,
@@ -944,6 +947,12 @@ func makePotionActivation(potionType proto.Potions, character *Character, potion
 	return mcd
 }
 
+// SelfCastConsumableFlags are the flags of a consumable that only ever
+// acts on the one who uses it (a mana or health potion, a rune, a
+// healthstone). It is helpful, so the major-cooldown pass uses it whatever
+// the user's current target is: a healer's current target is a friend.
+const SelfCastConsumableFlags = SpellFlagNoOnCastComplete | SpellFlagHelpful
+
 func makeHealthConsumableMCD(itemId int32, character *Character, cdTimer *Timer) MajorCooldown {
 	// Using min values for healthstones as locks generally don't spec into improved
 	minRoll := map[int32]float64{
@@ -981,7 +990,7 @@ func makeHealthConsumableMCD(itemId int32, character *Character, cdTimer *Timer)
 		},
 		Spell: character.GetOrRegisterSpell(SpellConfig{
 			ActionID: actionID,
-			Flags:    SpellFlagNoOnCastComplete,
+			Flags:    SelfCastConsumableFlags,
 			Cast: CastConfig{
 				CD: Cooldown{
 					Timer:    cdTimer,
@@ -1032,7 +1041,7 @@ func makeManaConsumableMCD(itemId int32, character *Character, cdTimer *Timer) M
 		},
 		Spell: character.GetOrRegisterSpell(SpellConfig{
 			ActionID: actionID,
-			Flags:    SpellFlagNoOnCastComplete,
+			Flags:    SelfCastConsumableFlags,
 			Cast: CastConfig{
 				CD: Cooldown{
 					Timer:    cdTimer,

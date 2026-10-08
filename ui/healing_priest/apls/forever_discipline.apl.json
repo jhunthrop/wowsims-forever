@@ -171,8 +171,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 10901,
-            "rank": 10
+            "spellId": 3747,
+            "rank": 4
           },
           "target": {
             "type": "Player",
@@ -241,7 +241,7 @@
           }
         }
       },
-      "notes": "Power Word: Shield on a hurt tank whenever Weakened Soul is off him; Soul Warding makes it free of cooldown and 15% cheaper. Renewed Hope also turns the Weakened Soul into extra crit chance and Divine Aegis for the heals that follow."
+      "notes": "Power Word: Shield on a hurt tank whenever Weakened Soul is off him; Soul Warding makes it free of cooldown and 15% cheaper. Rank 4 is the rank this profile pays for: it costs about a third of the top rank's mana and returned more guarded score. Renewed Hope also turns the Weakened Soul into extra crit chance and Divine Aegis for the heals that follow."
     },
     {
       "action": {
@@ -408,8 +408,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 25316,
-            "rank": 5
+            "spellId": 596,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -690,7 +690,7 @@
           }
         }
       },
-      "notes": "Prayer of Healing heals the healer's whole party, so it is cast on a party member and only once three of the four are down."
+      "notes": "Prayer of Healing heals the healer's whole party, so it is cast on a party member and only once three of the four are down. Rank 1 is the rank this profile pays for: it costs well under half of the top rank's mana and returned more guarded score."
     },
     {
       "action": {
@@ -750,7 +750,7 @@
           }
         }
       },
-      "notes": "Heal rank 4 is the mana-efficient filler: the same 0.857 coefficient as Greater Heal for 305 mana, so with healing power it returns more health per mana than any Greater Heal rank (the classic downrank). It is also the top rank of Heal, so the site's rank rewrite leaves it alone. Mana pacing: while the mana bar is at least as full as the share of the fight left, the filler fires at the normal thresholds."
+      "notes": "Heal rank 4 is the mana-efficient filler: the same 0.857 spell power coefficient as Greater Heal for far less mana, so with healing power it returns more health per mana than any Greater Heal rank (the classic downrank). Lower ranks of Heal were tried and did not clear the rule. Mana pacing: while the mana bar is at least as full as the share of the fight left, the filler fires at the normal thresholds."
     },
     {
       "action": {

@@ -153,6 +153,29 @@ A stat-weights sweep can heal too: `StatWeightsRequest.raid_damage_model`
 (`core.AddHealingFakeRaid`), and the sweep's `hps` weights are then per
 point of effective healing per second (`landedHealing`), not raw.
 
+### Healing sims: where a healer's mana comes from
+
+The mana model is the engine's (spirit regeneration with the five-second
+rule, mp5, talents that let a share of regeneration continue while casting),
+and the client publishes no spirit regeneration table, so those formulas are
+unconfirmed. What the client does state is held to it:
+
+- A mana or health consumable (potion, rune, healthstone) is a self-cast
+  `SelfCastConsumableFlags` spell, helpful, so the major-cooldown pass uses it
+  whatever the current target is. A healer's current target is a friend, and
+  the pass refuses a non-helpful cooldown with a friendly target (see
+  `shouldActivateHelper`); before this a healer never drank its potion or
+  rune. Inner Focus is helpful for the same reason. Every other non-helpful
+  use effect (racial buffs, stat trinkets) is still refused for a healer.
+- Blessing of Wisdom is a rank table (`BlessingOfWisdomRanks`, 12, 18, 24, 30
+  and 36 mana per five seconds by trainer rank, 40 for the Ahn'Qiraj book
+  rank), not a flat 30. The site's `sim/leveling` pins the table to the
+  client.
+- The mana oils give 5, 10 and 15 mana per five seconds with 10, 20 and 30
+  healing, as the item tooltips state (`manaOilStats`). Nightfin Soup gives 22
+  spell damage and no mana (`nightfinSoupStats`); Forever turned the food
+  into a stat meal.
+
 ### How capped AoE follows the timeline
 
 Abilities that iterate `Encounter.TargetUnits` (the large majority)

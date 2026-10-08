@@ -58,9 +58,6 @@ var BuffSpellValues = map[BuffName]stats.Stats{
 	AspectOfTheWild: {
 		stats.NatureResistance: 60,
 	},
-	BlessingOfWisdom: {
-		stats.MP5: TernaryFloat64(IncludeAQ, 33, 30),
-	},
 	HornOfLordaeron: {
 		stats.Strength: TernaryFloat64(IncludeAQ, 89, 70.15),
 		stats.Agility:  TernaryFloat64(IncludeAQ, 89, 70.15),
@@ -348,7 +345,7 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 	}
 
 	if individualBuffs.BlessingOfWisdom > 0 {
-		updateStats := BuffSpellValues[BlessingOfWisdom]
+		updateStats := stats.Stats{stats.MP5: BlessingOfWisdomMP5(int(character.Level))}
 		if individualBuffs.BlessingOfWisdom == proto.TristateEffect_TristateEffectImproved {
 			updateStats = updateStats.Multiply(1.2)
 		}
