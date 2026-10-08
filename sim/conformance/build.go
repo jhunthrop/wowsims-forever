@@ -8,6 +8,7 @@ import (
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/druid/balance"
 	"github.com/wowsims/classic/sim/druid/feral"
+	"github.com/wowsims/classic/sim/druid/restoration"
 	"github.com/wowsims/classic/sim/hunter"
 	"github.com/wowsims/classic/sim/mage"
 	"github.com/wowsims/classic/sim/paladin/protection"
@@ -39,6 +40,7 @@ func registerAll() {
 	tankwarrior.RegisterTankWarrior()
 	balance.RegisterBalanceDruid()
 	feral.RegisterFeralDruid()
+	restoration.RegisterRestorationDruid()
 	shadow.RegisterShadowPriest()
 	elemental.RegisterElementalShaman()
 	enhancement.RegisterEnhancementShaman()

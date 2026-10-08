@@ -47,6 +47,10 @@ type TalentGatedSpell struct {
 	Label     string
 	Tree      int
 	Pos       int
+	// Preset is the label of the Preset to build with, for a spell only one
+	// spec of the class registers (Swiftmend belongs to the restoration
+	// druid's kit, not the balance druid's). Empty means repPresetForClass.
+	Preset string
 }
 
 func (g TalentGatedSpell) talentsString() string {
@@ -117,7 +121,9 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "druid", Label: "Insect Swarm", Tree: 0, Pos: 9},
 	{ClassSlug: "druid", Label: "Moonkin Form", Tree: 0, Pos: 16},
 	{ClassSlug: "druid", Label: "Berserk", Tree: 1, Pos: 20},
+	{ClassSlug: "druid", Label: "Swiftmend", Tree: 2, Pos: 11, Preset: "RestorationDruid"},
 	{ClassSlug: "druid", Label: "Nature's Swiftness", Tree: 2, Pos: 12},
+	{ClassSlug: "druid", Label: "Wild Growth", Tree: 2, Pos: 16, Preset: "RestorationDruid"},
 
 	// Priest (Discipline 18, Holy 17, Shadow 18).
 	{ClassSlug: "priest", Label: "Inner Focus", Tree: 0, Pos: 9},
@@ -175,6 +181,15 @@ func repPresetForClass(classSlug string) (Preset, bool) {
 	return Preset{}, false
 }
 
+func presetByLabel(label string) (Preset, bool) {
+	for _, p := range Presets {
+		if p.Label == label {
+			return p, true
+		}
+	}
+	return Preset{}, false
+}
+
 // collectTalentGatedRows builds one single-talent character per
 // TalentGatedSpell belonging to classSlug and reports every row that
 // talent's one point registers which an otherwise-identical EMPTY-talent
@@ -198,8 +213,16 @@ func collectTalentGatedRows(clientClass spellconst.Class, classSlug string) (row
 		return nil, []string{fmt.Sprintf("talent-gated spells for %s: no TalentTreeSizes registered", classSlug)}
 	}
 
-	baseline, baselineErrs := baselineSpellIDsByLevel(preset)
-	buildErrors = append(buildErrors, baselineErrs...)
+	baselines := map[string]map[int32]map[int32]bool{}
+	baselineOf := func(p Preset) map[int32]map[int32]bool {
+		if cached, ok := baselines[p.Label]; ok {
+			return cached
+		}
+		byLevel, errs := baselineSpellIDsByLevel(p)
+		buildErrors = append(buildErrors, errs...)
+		baselines[p.Label] = byLevel
+		return byLevel
+	}
 
 	seen := map[string]bool{}
 	for _, gated := range TalentGatedSpells {
@@ -212,7 +235,16 @@ func collectTalentGatedRows(clientClass spellconst.Class, classSlug string) (row
 		}
 
 		gatedPreset := preset
-		gatedPreset.Label = fmt.Sprintf("%s (%s talent)", preset.Label, gated.Label)
+		if gated.Preset != "" {
+			named, found := presetByLabel(gated.Preset)
+			if !found {
+				buildErrors = append(buildErrors, fmt.Sprintf("%s: %s names preset %q, which does not exist", classSlug, gated.Label, gated.Preset))
+				continue
+			}
+			gatedPreset = named
+		}
+		baseline := baselineOf(gatedPreset)
+		gatedPreset.Label = fmt.Sprintf("%s (%s talent)", gatedPreset.Label, gated.Label)
 		gatedTalents := gated.talentsString()
 
 		for _, level := range Levels {

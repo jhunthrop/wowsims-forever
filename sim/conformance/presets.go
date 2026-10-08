@@ -191,6 +191,20 @@ var Presets = []Preset{
 		},
 	},
 	{
+		Label:           "RestorationDruid",
+		ClientClassSlug: "druid",
+		Class:           proto.Class_ClassDruid,
+		Race:            proto.Race_RaceTauren,
+		Talents:         "05302001--5050035153113251",
+		SpecOptions: &proto.Player_RestorationDruid{
+			RestorationDruid: &proto.RestorationDruid{
+				Options: &proto.RestorationDruid_Options{
+					InnervateTarget: &proto.UnitReference{Type: proto.UnitReference_Self},
+				},
+			},
+		},
+	},
+	{
 		Label:           "ShadowPriest",
 		ClientClassSlug: "priest",
 		Class:           proto.Class_ClassPriest,

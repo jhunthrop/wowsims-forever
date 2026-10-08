@@ -48,8 +48,11 @@ const (
 	effectSchoolDamage = 2
 	effectApplyAura    = 6
 	effectHeal         = 10
-	auraPeriodicDamage = 3
-	auraPeriodicHeal   = 8
+	// effectApplyPartyAura is an aura applied to the caster's whole party,
+	// which is how the client states Tranquility's periodic heal.
+	effectApplyPartyAura = 35
+	auraPeriodicDamage   = 3
+	auraPeriodicHeal     = 8
 )
 
 // DamageComparison is the damage half of a Row.
@@ -97,7 +100,8 @@ func clientDamageEffect(spell spellconst.Spell) (spellconst.Effect, bool) {
 		}
 	}
 	for _, e := range spell.Effects {
-		if e.Effect == effectApplyAura && e.Aura == auraPeriodicHeal && e.Amount > 0 {
+		isAuraEffect := e.Effect == effectApplyAura || e.Effect == effectApplyPartyAura
+		if isAuraEffect && e.Aura == auraPeriodicHeal && e.Amount > 0 {
 			return e, true
 		}
 	}
