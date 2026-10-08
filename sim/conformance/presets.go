@@ -239,6 +239,21 @@ var Presets = []Preset{
 		},
 	},
 	{
+		Label:           "HealingPriest",
+		ClientClassSlug: "priest",
+		Class:           proto.Class_ClassPriest,
+		Race:            proto.Race_RaceHuman,
+		// The Holy build healing_priest.go calls HolyTalents.
+		Talents: "0052030312-33505003030121531",
+		SpecOptions: &proto.Player_HealingPriest{
+			HealingPriest: &proto.HealingPriest{
+				Options: &proto.HealingPriest_Options{
+					UseInnerFire: true,
+				},
+			},
+		},
+	},
+	{
 		Label:           "ElementalShaman",
 		ClientClassSlug: "shaman",
 		Class:           proto.Class_ClassShaman,

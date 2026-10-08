@@ -127,6 +127,11 @@ var TalentGatedSpells = []TalentGatedSpell{
 
 	// Priest (Discipline 18, Holy 17, Shadow 18).
 	{ClassSlug: "priest", Label: "Inner Focus", Tree: 0, Pos: 9},
+	{ClassSlug: "priest", Label: "Penance", Tree: 0, Pos: 15, Preset: "HealingPriest"},
+	{ClassSlug: "priest", Label: "Power Infusion", Tree: 0, Pos: 18, Preset: "HealingPriest"},
+	{ClassSlug: "priest", Label: "Holy Nova", Tree: 1, Pos: 6, Preset: "HealingPriest"},
+	{ClassSlug: "priest", Label: "Binding Heal", Tree: 1, Pos: 12, Preset: "HealingPriest"},
+	{ClassSlug: "priest", Label: "Prayer of Mending", Tree: 1, Pos: 17, Preset: "HealingPriest"},
 	{ClassSlug: "priest", Label: "Mind Flay", Tree: 2, Pos: 9},
 	{ClassSlug: "priest", Label: "Vampiric Embrace", Tree: 2, Pos: 12},
 	{ClassSlug: "priest", Label: "Shadowform", Tree: 2, Pos: 18},

@@ -13,6 +13,7 @@ import (
 	"github.com/wowsims/classic/sim/mage"
 	"github.com/wowsims/classic/sim/paladin/protection"
 	"github.com/wowsims/classic/sim/paladin/retribution"
+	"github.com/wowsims/classic/sim/priest/healing"
 	"github.com/wowsims/classic/sim/priest/shadow"
 	dpsrogue "github.com/wowsims/classic/sim/rogue/dps_rogue"
 	"github.com/wowsims/classic/sim/shaman/elemental"
@@ -42,6 +43,7 @@ func registerAll() {
 	balance.RegisterBalanceDruid()
 	feral.RegisterFeralDruid()
 	restoration.RegisterRestorationDruid()
+	healing.RegisterHealingPriest()
 	shadow.RegisterShadowPriest()
 	elemental.RegisterElementalShaman()
 	enhancement.RegisterEnhancementShaman()
