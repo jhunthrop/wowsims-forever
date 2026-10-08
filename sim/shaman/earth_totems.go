@@ -1,8 +1,6 @@
 package shaman
 
 import (
-	"time"
-
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -34,21 +32,20 @@ func (shaman *Shaman) newStrengthOfEarthTotemSpellConfig(rank int) core.SpellCon
 	manaCost := StrengthOfEarthTotemManaCost[rank]
 	level := StrengthOfEarthTotemLevel[rank]
 
-	duration := time.Second * 120
 	// FOREVER: Enhancing Totems is not in the client's trees.
 	// multiplier := []float64{1, 1.08, 1.15}[shaman.Talents.EnhancingTotems]
 	multiplier := 1.0
 
 	buffAura := core.StrengthOfEarthTotemAura(&shaman.Unit, multiplier)
 
+	lifetime := shaman.registerBuffTotemLifetime("Strength of Earth Totem", rank, buffAura)
+
 	spell := shaman.newTotemSpellConfig(manaCost, spellId)
 	spell.RequiredLevel = level
 	spell.Rank = rank
+	spell.RelatedSelfBuff = lifetime
 	spell.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-		shaman.TotemExpirations[EarthTotem] = sim.CurrentTime + duration
-		shaman.ActiveTotems[EarthTotem] = spell
-
-		buffAura.Activate(sim)
+		shaman.dropStandingTotem(sim, EarthTotem, spell, lifetime)
 	}
 	return spell
 }
@@ -81,16 +78,17 @@ func (shaman *Shaman) newStoneskinTotemSpellConfig(rank int) core.SpellConfig {
 	manaCost := StoneskinTotemManaCost[rank]
 	level := StoneskinTotemLevel[rank]
 
-	duration := time.Second * 120
+	lifetime := shaman.registerBuffTotemLifetime(
+		"Stoneskin Totem", rank,
+		core.StoneskinTotemAura(&shaman.Unit, shaman.Talents.GuardianTotems),
+	)
 
 	spell := shaman.newTotemSpellConfig(manaCost, spellId)
 	spell.RequiredLevel = level
 	spell.Rank = rank
+	spell.RelatedSelfBuff = lifetime
 	spell.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-		shaman.TotemExpirations[EarthTotem] = sim.CurrentTime + duration
-		shaman.ActiveTotems[EarthTotem] = spell
-
-		core.StoneskinTotemAura(&shaman.Unit, shaman.Talents.GuardianTotems).Activate(sim)
+		shaman.dropStandingTotem(sim, EarthTotem, spell, lifetime)
 	}
 	return spell
 }
@@ -98,14 +96,15 @@ func (shaman *Shaman) newStoneskinTotemSpellConfig(rank int) core.SpellConfig {
 func (shaman *Shaman) registerTremorTotemSpell() {
 	spellId := int32(8143)
 	manaCost := float64(60)
-	duration := time.Second * 120
 	level := 18
+
+	lifetime := shaman.RegisterAura(newTotemLifetimeConfig("Tremor Totem", 0))
 
 	spell := shaman.newTotemSpellConfig(manaCost, spellId)
 	spell.RequiredLevel = level
+	spell.RelatedSelfBuff = lifetime
 	spell.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-		shaman.TotemExpirations[EarthTotem] = sim.CurrentTime + duration
-		shaman.ActiveTotems[EarthTotem] = spell
+		shaman.dropStandingTotem(sim, EarthTotem, spell, lifetime)
 	}
 	shaman.TremorTotem = shaman.RegisterSpell(spell)
 	shaman.EarthTotems = append(shaman.EarthTotems, shaman.TremorTotem)

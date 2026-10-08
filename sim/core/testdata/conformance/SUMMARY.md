@@ -91,7 +91,7 @@ could not see it before:
 | Warrior | 13 / 38 | 13 / 41 | 7 / 41 |
 | Druid | 28 / 61 | 36 / 50 | 36 / 50 |
 | Priest | 27 / 17 | 50 / 2 | 50 / 2 |
-| Shaman | 27 / 269 | 51 / 250 | 51 / 232 |
+| Shaman | 27 / 269 | 51 / 250 | 51 / 232; 2026-10-08 engine pass: 364 match + 44 not-simulated + 12 client-scripted / 0 |
 | Rogue | 0 / 11 | 3 / 28 | 5 / 26 |
 
 Every column is match/mismatch at level 60 combining the Spells and
@@ -414,47 +414,65 @@ cast wrapper.
 
 ### Shaman
 
-Shaman's count is still dominated by one systemic defect repeated
-across every totem - the GCD (every totem's `gcd_ms` is 1000 on the
-client, 1500 in the engine) - not 232 independent defects. Job 3
-dropped the client's "Attack" entry (which, for shaman specifically,
-collided with Searing Totem's own instant attack sub-spell's SpellID)
-out of the comparison entirely; it no longer appears anywhere in this
-golden, including the required-level table above. Job 1's wider search
-resolved every totem's duration one of three ways, and no totem's
-*duration* is a "missing aura" anymore - each is now one of:
+2026-10-08 pass (lane conf-shaman): the golden went from 263 match /
+145 mismatch (level 60; 1063 / 518 across the ladder) to 0 mismatch at
+every level. The "every totem's GCD" cause this section used to lead with
+was already fixed (`totemGCD`, 1000ms); what was left was one systemic
+cause and three report artefacts:
 
-- **Found and now matches**: Magma Totem and Searing Totem's own
-  (already-correct) durations stop contributing to their mismatch -
-  only `gcd_ms` remains for them.
-- **Found, a real-but-different number**: Healing Stream Totem's buff
-  aura is a real, finite 60000ms, not the client's 300000 - a genuine
-  stale-literal-shaped disagreement to confirm, not a visibility gap.
-- **Found, but a full-buffs artifact**: Strength of Earth Totem and
-  Grace of Air Totem's buff auras are the exact same `*core.Aura`
-  object `core.FullBuffs.Player` already activates permanently in this
-  report's standard build (`core.MakePermanent` - see the vocabulary
-  entry above), so they read `-1` rather than a real cast-produced
-  timer. This is a fact about the build, not the totem spells'
-  registration.
-- **Still not found at all**: Stoneskin, Tremor, Windfury, Windwall and
-  Mana Spring Totem's buffs still have no trackable aura under any name
-  this report can find (Windfury's own buff aura, for one, carries no
-  `ActionID` at all, so it could never match regardless of search
-  breadth) - genuinely still **missing aura duration**, now flagged
-  `(no aura registered)` in their Diff text.
+- **Systemic: totem life.** Strength of Earth, Stoneskin, Tremor,
+  Windfury, Grace of Air and Windwall Totem each carried a vanilla 2
+  minute life in code (or none), while the client gives every earth and
+  air totem 300000ms. Fixed once in `sim/shaman/totems.go`: a
+  `standingTotemDuration` constant, a lifetime aura per totem rank
+  (`newTotemLifetimeConfig`, linked as the spell's `RelatedSelfBuff`),
+  and `dropStandingTotem`, which every earth and air totem now uses to
+  take its slot (it ends the totem it replaces, sets `TotemExpirations`
+  from the aura, and binds the buff's expiry to the totem's life). This
+  also fixed Windwall Totem, whose cast passed a nil aura into the old
+  `setActiveAirTotem` and would have panicked when dropped. Moved
+  `.results`: only `TestEnhancement.results`, by under 0.2% DPS, because
+  the prepull totems now last 5 minutes and are recast later.
+- **Engine: Water Shield** now carries the client's 15s category
+  cooldown on the cast (separate timer from the 3-charge proc ICD).
+- **Engine: Flametongue Weapon** picked its rank from a four-entry level
+  bracket map, so at 38 or 59 the imbue read rank 0 (spell id 0, no
+  damage); it now uses the client's per-rank learn levels like the
+  other three imbues.
+- **Report artefact: dots on a friendly current target.** A healer's
+  current target is a friend, so `Dot(CurrentTarget)` found nothing for
+  Restoration's Flame Shock, Searing and Magma Totem (`engineDuration`
+  now takes the dot from any target).
+- **Report artefact: `not-simulated` verdict** (new, `unsimulated.go`).
+  The client's 2000ms on Earth Shock is the interrupt lock-out and the
+  8000ms on Frost Shock is the movement snare; the sim's targets neither
+  cast nor move, so the engine has no aura for them and registering one
+  would only satisfy this report. They are named per class and spell in
+  `unsimulatedDurations` with the reason, and the Diff column carries it.
+- **Report artefact: full-buffs duration** (Strength of Earth, Grace of
+  Air) no longer applies: the lifetime aura is not the permanent raid
+  buff.
 
-| Spell | Field | Client | Engine | Likely cause |
-|---|---|---|---|---|
-| Every totem (all ranks) | gcd_ms | 1000 | 1500 | stale vanilla literal - the engine still gives every totem the standard 1.5s GCD; Forever's client gives totems a 1s GCD and the engine was never updated for this class of spell |
-| Strength of Earth Totem, Grace of Air Totem (all ranks) | duration_ms | 300000 | -1 | full-buffs duration artifact (see vocabulary) |
-| Healing Stream Totem (all ranks) | duration_ms | 300000 | 60000 | newly visible by Job 1 - a real, finite engine duration that simply disagrees with the client's, likely a stale literal |
-| Stoneskin Totem, Tremor Totem, Windfury Totem, Windwall Totem, Mana Spring Totem (all ranks) | duration_ms | 300000 | 0 (no aura registered) | missing aura duration - still true after Job 1's wider search |
-| Lightning Bolt ranks 4-10 | cost, cast_time_ms | 60.00-220.00 / 2500 | 75.00-265.00 / 3000 | stale vanilla literal - ranks 1-3 already match; ranks 4+ are still on the old Classic cast time (3000ms) and cost table instead of Forever's (2500ms) |
-| Chain Lightning (all ranks) | cost, cast_time_ms | 225.00-485.00 / 2000 | 280.00-605.00 / 2500 | stale vanilla literal, same shape as Lightning Bolt |
-| Stormstrike (talent-gated) | cost, cooldown_ms | 125.00 / 8000 | 319.20 / 20000 | cost is a stale vanilla literal, NOT percent-of-mana visibility: the client's raw `SpellPower.csv` row for Stormstrike has `PowerCostPct` 0 and a real flat `ManaCost` of 125 (matching spellconst's own cost column already) - `sim/shaman/stormstrike.go`'s `ManaCost.BaseCost: .21` treats it as 21%-of-base-mana anyway. Cooldown is also a stale vanilla literal (20s was live Classic's cooldown; Forever's client shortened it to 8s). Job 1 confirmed the DURATION side of this spell outright (12000=12000, no longer in its Diff). |
-| Water Shield (talent-gated) | cooldown_ms | 15000 | 0 | registration gap - no `CD` configured (Job 1 confirmed its duration outright, 600000=600000, no longer in its Diff) |
-| Rage of the Farseer (talent-gated) | gcd_ms | 0 | 1500 | registration gap - a cooldown-only talent ability the client flags GCD-less, same shape as Warlock's Bane of Havoc |
+Remaining non-match rows are 44 `not-simulated` (Earth Shock x7 ranks,
+Frost Shock x4 ranks, per spec) and 12 `client-scripted` (Magma Totem:
+the client states no duration, the engine keeps 20s) at level 60.
+
+Trainables the engine does not register (the golden's last section):
+
+- Effect already simulated, no cast needed: Rockbiter, Flametongue,
+  Frostbrand and Windfury Weapon are weapon imbues chosen through
+  `Consumes.MainHandImbue`, not spells a rotation presses.
+- Simulated effect NOT modelled, follow-up: Flametongue Totem (party
+  melee fire damage per main-hand hit; the client rows state the
+  per-rank damage as effect base points on spells 8253/16389 but not the
+  weapon-speed scaling, so it was not guessed).
+- Utility, no sim result: Earthbind, Stoneclaw (taunt), Purge, Cure
+  Poison, Cure Disease, Poison Cleansing and Disease Cleansing Totem,
+  Call of the Elements/Ancestors/Spirits, Ghost Wolf, Totemic
+  Projection, Water Breathing, Water Walking, Far Sight, Astral Recall,
+  Grounding, Sentry, Reincarnation, Ancestral Spirit.
+- Resistance totems (Frost, Fire, Nature) are party stat buffs the
+  preset never assumes; no resistance enters a result.
 
 ### Rogue
 

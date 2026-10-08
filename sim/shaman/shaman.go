@@ -173,7 +173,7 @@ type Shaman struct {
 
 	// Totems
 	ActiveTotems     [4]*core.Spell
-	ActiveTotemBuffs [4]*core.Aura
+	ActiveTotemBuffs [4]*core.Aura    // The lifetime aura of the totem standing in each slot.
 	TotemExpirations [4]time.Duration // The expiration time of each totem (earth, air, fire, water).
 
 	// dismissWaterTotem ends the water totem now standing; a new water

@@ -7,18 +7,6 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-func (shaman *Shaman) setActiveAirTotem(sim *core.Simulation, spell *core.Spell, aura *core.Aura) {
-	shaman.TotemExpirations[AirTotem] = sim.CurrentTime + aura.Duration
-	shaman.ActiveTotems[AirTotem] = spell
-
-	if shaman.ActiveTotemBuffs[AirTotem] != nil {
-		shaman.ActiveTotemBuffs[AirTotem].Deactivate(sim)
-	}
-
-	shaman.ActiveTotemBuffs[AirTotem] = aura
-	aura.Activate(sim)
-}
-
 const WindfuryTotemRanks = 3
 
 var WindfuryTotemSpellId = [WindfuryTotemRanks + 1]int32{0, 8512, 10613, 10614}
@@ -59,29 +47,28 @@ func (shaman *Shaman) newWindfuryTotemSpellConfig(rank int) core.SpellConfig {
 		Duration: time.Second * 10,
 	})
 
-	periodicTriggerAura := shaman.RegisterAura(core.Aura{
-		Label:    fmt.Sprintf("Windfury Trigger Dummy (Rank %d)", rank),
-		Duration: time.Minute * 2,
-		OnGain: func(_ *core.Aura, sim *core.Simulation) {
-			shaman.ActiveWindfuryTotemPeriodicAction = core.StartPeriodicAction(sim, core.PeriodicActionOptions{
-				Period:          time.Second * 5, // Totem refreshes every 5 seconds
-				TickImmediately: true,
-				OnAction: func(_ *core.Simulation) {
-					buffAura.Activate(sim)
-				},
-			})
-		},
-		OnExpire: func(_ *core.Aura, sim *core.Simulation) {
-			shaman.ActiveWindfuryTotemPeriodicAction.Cancel(sim)
-			shaman.ActiveWindfuryTotemPeriodicAction = nil
-		},
-	})
+	lifetimeConfig := newTotemLifetimeConfig("Windfury Totem", rank)
+	lifetimeConfig.OnGain = func(_ *core.Aura, sim *core.Simulation) {
+		shaman.ActiveWindfuryTotemPeriodicAction = core.StartPeriodicAction(sim, core.PeriodicActionOptions{
+			Period:          time.Second * 5, // Totem refreshes every 5 seconds
+			TickImmediately: true,
+			OnAction: func(_ *core.Simulation) {
+				buffAura.Activate(sim)
+			},
+		})
+	}
+	lifetimeConfig.OnExpire = func(_ *core.Aura, sim *core.Simulation) {
+		shaman.ActiveWindfuryTotemPeriodicAction.Cancel(sim)
+		shaman.ActiveWindfuryTotemPeriodicAction = nil
+	}
+	lifetime := shaman.RegisterAura(lifetimeConfig)
 
 	spell := shaman.newTotemSpellConfig(manaCost, spellId)
 	spell.RequiredLevel = level
 	spell.Rank = rank
+	spell.RelatedSelfBuff = lifetime
 	spell.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-		shaman.setActiveAirTotem(sim, spell, periodicTriggerAura)
+		shaman.dropStandingTotem(sim, AirTotem, spell, lifetime)
 	}
 	return spell
 }
@@ -120,11 +107,14 @@ func (shaman *Shaman) newGraceOfAirTotemSpellConfig(rank int) core.SpellConfig {
 
 	buffAura := core.GraceOfAirTotemAura(&shaman.Unit, multiplier)
 
+	lifetime := shaman.registerBuffTotemLifetime("Grace of Air Totem", rank, buffAura)
+
 	spell := shaman.newTotemSpellConfig(manaCost, spellId)
 	spell.RequiredLevel = level
 	spell.Rank = rank
+	spell.RelatedSelfBuff = lifetime
 	spell.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-		shaman.setActiveAirTotem(sim, spell, buffAura)
+		shaman.dropStandingTotem(sim, AirTotem, spell, lifetime)
 	}
 	return spell
 }
@@ -157,11 +147,14 @@ func (shaman *Shaman) newWindwallTotemSpellConfig(rank int) core.SpellConfig {
 	manaCost := WindwallTotemManaCost[rank]
 	level := WindwallTotemLevel[rank]
 
+	lifetime := shaman.RegisterAura(newTotemLifetimeConfig("Windwall Totem", rank))
+
 	spell := shaman.newTotemSpellConfig(manaCost, spellId)
 	spell.RequiredLevel = level
 	spell.Rank = rank
+	spell.RelatedSelfBuff = lifetime
 	spell.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-		shaman.setActiveAirTotem(sim, spell, nil)
+		shaman.dropStandingTotem(sim, AirTotem, spell, lifetime)
 	}
 	return spell
 }
