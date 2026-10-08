@@ -57,7 +57,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 25292
+            "spellId": 25292,
+            "rank": 9
           },
           "target": {
             "type": "Player",
@@ -116,7 +117,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 25292
+            "spellId": 25292,
+            "rank": 9
           },
           "target": {
             "type": "Player",
@@ -175,7 +177,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20930
+            "spellId": 20930,
+            "rank": 4
           },
           "target": {
             "type": "Player",
@@ -234,7 +237,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20930
+            "spellId": 20930,
+            "rank": 4
           },
           "target": {
             "type": "Player",
@@ -292,7 +296,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20930
+            "spellId": 20930,
+            "rank": 4
           },
           "target": {
             "type": "Player",
@@ -350,7 +355,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20930
+            "spellId": 20930,
+            "rank": 4
           },
           "target": {
             "type": "Player",
@@ -408,7 +414,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20930
+            "spellId": 20930,
+            "rank": 4
           },
           "target": {
             "type": "Player",
@@ -439,7 +446,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 19943
+            "spellId": 19943,
+            "rank": 6
           },
           "target": {
             "type": "Player",
@@ -471,7 +479,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 19943
+            "spellId": 19943,
+            "rank": 6
           },
           "target": {
             "type": "Player",
@@ -502,7 +511,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 19943
+            "spellId": 19943,
+            "rank": 6
           },
           "target": {
             "type": "Player",
@@ -533,7 +543,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 19943
+            "spellId": 19943,
+            "rank": 6
           },
           "target": {
             "type": "Player",
@@ -564,7 +575,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 19943
+            "spellId": 19943,
+            "rank": 6
           },
           "target": {
             "type": "Player",
