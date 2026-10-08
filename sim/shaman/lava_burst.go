@@ -89,14 +89,15 @@ func (shaman *Shaman) newLavaBurstSpellConfig(rank int) core.SpellConfig {
 	level := LavaBurstLevel[rank]
 
 	return core.SpellConfig{
-		SpellCode:     SpellCode_ShamanLavaBurst,
-		ActionID:      core.ActionID{SpellID: spellId},
-		SpellSchool:   core.SpellSchoolFire,
-		DefenseType:   core.DefenseTypeMagic,
-		ProcMask:      core.ProcMaskSpellDamage,
-		Flags:         SpellFlagShaman | core.SpellFlagAPL,
-		RequiredLevel: level,
-		Rank:          rank,
+		SpellCode:      SpellCode_ShamanLavaBurst,
+		ClassSpellMask: ShamanSpellMaskLavaBurst,
+		ActionID:       core.ActionID{SpellID: spellId},
+		SpellSchool:    core.SpellSchoolFire,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          SpellFlagShaman | core.SpellFlagAPL,
+		RequiredLevel:  level,
+		Rank:           rank,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost:   manaCost,

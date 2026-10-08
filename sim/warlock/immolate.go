@@ -52,12 +52,13 @@ func (warlock *Warlock) getImmolateConfig(rank int) core.SpellConfig {
 	level := [ImmolateRanks + 1]int{0, 1, 10, 20, 30, 40, 50, 60, 60}[rank]
 
 	return core.SpellConfig{
-		SpellCode:   SpellCode_WarlockImmolate,
-		ActionID:    core.ActionID{SpellID: spellId},
-		SpellSchool: core.SpellSchoolFire,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       core.SpellFlagAPL | core.SpellFlagResetAttackSwing | core.SpellFlagBinary | WarlockFlagDestruction,
+		SpellCode:      SpellCode_WarlockImmolate,
+		ClassSpellMask: WarlockSpellMaskImmolate,
+		ActionID:       core.ActionID{SpellID: spellId},
+		SpellSchool:    core.SpellSchoolFire,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          core.SpellFlagAPL | core.SpellFlagResetAttackSwing | core.SpellFlagBinary | WarlockFlagDestruction,
 
 		Rank:             rank,
 		ClientBaseDamage: damage.Range(casterLevel),

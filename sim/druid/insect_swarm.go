@@ -27,6 +27,9 @@ var InsectSwarmTickSpellCoeff = [InsectSwarmRanks + 1]float64{0, .158, .158, .15
 var InsectSwarmManaCost = [InsectSwarmRanks + 1]float64{0, 45, 85, 100, 140, 160}
 var InsectSwarmLevel = [InsectSwarmRanks + 1]int{0, 20, 30, 40, 50, 60}
 
+// InsectSwarmTickLength is the time between Insect Swarm's ticks.
+const InsectSwarmTickLength = 2 * time.Second
+
 func (druid *Druid) registerInsectSwarmSpell() {
 	// Insect Swarm is a real, single-point Balance talent in this build
 	// (data/builds/<build>/talents/druid.json, id 104930), not a
@@ -47,7 +50,6 @@ func (druid *Druid) registerInsectSwarmSpell() {
 		level := InsectSwarmLevel[rank]
 		if int32(level) <= druid.Level {
 			numTicks := int32(6)
-			tickLength := time.Second * 2
 
 			spellID := InsectSwarmSpellId[rank]
 			tickDamage := InsectSwarmTickDamage[rank]
@@ -95,7 +97,7 @@ func (druid *Druid) registerInsectSwarmSpell() {
 					},
 
 					NumberOfTicks:    numTicks,
-					TickLength:       tickLength,
+					TickLength:       InsectSwarmTickLength,
 					BonusCoefficient: spellCoef,
 
 					OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {

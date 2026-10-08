@@ -31,7 +31,8 @@ func (warrior *Warrior) RegisterRecklessnessCD() {
 	})
 
 	Recklessness := warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
-		ActionID: actionID,
+		ActionID:       actionID,
+		ClassSpellMask: WarriorSpellMaskRecklessness,
 
 		RequiredLevel: RecklessnessLevel[0],
 

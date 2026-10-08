@@ -16,12 +16,13 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 	})
 
 	shaman.Stormstrike = shaman.RegisterSpell(core.SpellConfig{
-		SpellCode:   SpellCode_ShamanStormstrike,
-		ActionID:    core.ActionID{SpellID: 17364},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       SpellFlagShaman | core.SpellFlagAPL | core.SpellFlagMeleeMetrics,
+		SpellCode:      SpellCode_ShamanStormstrike,
+		ClassSpellMask: ShamanSpellMaskStormstrike,
+		ActionID:       core.ActionID{SpellID: 17364},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          SpellFlagShaman | core.SpellFlagAPL | core.SpellFlagMeleeMetrics,
 
 		RequiredLevel: 40,
 

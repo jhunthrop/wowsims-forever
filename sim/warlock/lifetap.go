@@ -76,14 +76,17 @@ func (warlock *Warlock) getLifeTapBaseConfig(rank int) core.SpellConfig {
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			restore := warlock.lifeTapMana(rank)
+			converted := warlock.lifeTapMana(rank)
 
 			if warlock.IsTanking() {
-				spell.DealDamage(sim, spell.CalcDamage(sim, spell.Unit, restore, spell.OutcomeAlwaysHit))
+				health := converted * (1 - warlock.lifeTapHealthDiscount)
+				spell.DealDamage(sim, spell.CalcDamage(sim, spell.Unit, health, spell.OutcomeAlwaysHit))
 			}
 
-			warlock.AddMana(sim, restore, manaMetrics)
-			warlock.shareDemonicEnergiesMana(sim, restore)
+			// A bonus to the Mana gained leaves the Health paid alone.
+			gained := converted * (1 + warlock.lifeTapManaBonus)
+			warlock.AddMana(sim, gained, manaMetrics)
+			warlock.shareDemonicEnergiesMana(sim, gained)
 		},
 	}
 }

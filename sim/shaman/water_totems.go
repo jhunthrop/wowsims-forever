@@ -149,7 +149,13 @@ func (shaman *Shaman) newManaSpringTotemSpellConfig(rank int) core.SpellConfig {
 	spellId := ManaSpringTotemSpellId[rank]
 	manaCost := ManaSpringTotemManaCost[rank]
 	level := ManaSpringTotemLevel[rank]
-	bonus := stats.Stats{stats.MP5: float64(ManaSpringTotemManaRestore[rank]) * manaSpringMP5PerRestore * shaman.restorativeManaSpringMultiplier()}
+	// Read when the totem lands, not now: the set bonuses are applied after
+	// the spells are registered.
+	var applied stats.Stats
+	bonus := func() stats.Stats {
+		restore := float64(ManaSpringTotemManaRestore[rank]) * manaSpringMP5PerRestore
+		return stats.Stats{stats.MP5: restore * shaman.restorativeManaSpringMultiplier() * (1 + shaman.manaSpringSetBonus)}
+	}
 
 	// The totem's restore is the shaman's own mana regeneration while it
 	// stands; the group-wide raid buff in core/buffs.go stays a separate
@@ -159,10 +165,11 @@ func (shaman *Shaman) newManaSpringTotemSpellConfig(rank int) core.SpellConfig {
 		ActionID: core.ActionID{SpellID: spellId},
 		Duration: manaSpringTotemDuration,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			shaman.AddStatsDynamic(sim, bonus)
+			applied = bonus()
+			shaman.AddStatsDynamic(sim, applied)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			shaman.AddStatsDynamic(sim, bonus.Multiply(-1))
+			shaman.AddStatsDynamic(sim, applied.Multiply(-1))
 		},
 	})
 

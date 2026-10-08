@@ -367,6 +367,13 @@ stat_weights_results: {
  }
 }
 dps_results: {
+ key: "TestEnhancement-Phase1-AllItems-Augur'sRegalia"
+ value: {
+  dps: 957.45228
+  tps: 982.30973
+ }
+}
+dps_results: {
  key: "TestEnhancement-Phase1-AllItems-Champion'sEarthshaker"
  value: {
   dps: 901.0455
@@ -411,8 +418,8 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-Phase1-AllItems-TheFiveThunders"
  value: {
-  dps: 907.39521
-  tps: 935.31164
+  dps: 909.11566
+  tps: 937.45814
  }
 }
 dps_results: {
@@ -612,6 +619,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestEnhancement-Phase2-AllItems-Augur'sRegalia"
+ value: {
+  dps: 970.85192
+  tps: 995.90755
+ }
+}
+dps_results: {
  key: "TestEnhancement-Phase2-AllItems-Champion'sEarthshaker"
  value: {
   dps: 919.83905
@@ -656,8 +670,8 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-Phase2-AllItems-TheFiveThunders"
  value: {
-  dps: 911.13301
-  tps: 939.27994
+  dps: 912.84348
+  tps: 941.42744
  }
 }
 dps_results: {
@@ -857,6 +871,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestEnhancement-Phase3-AllItems-Augur'sRegalia"
+ value: {
+  dps: 1032.34278
+  tps: 1060.19594
+ }
+}
+dps_results: {
  key: "TestEnhancement-Phase3-AllItems-Champion'sEarthshaker"
  value: {
   dps: 959.76409
@@ -901,8 +922,8 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-Phase3-AllItems-TheFiveThunders"
  value: {
-  dps: 957.89329
-  tps: 986.37686
+  dps: 959.61061
+  tps: 988.52987
  }
 }
 dps_results: {
@@ -1102,6 +1123,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestEnhancement-Phase5-AllItems-Augur'sRegalia"
+ value: {
+  dps: 1007.71179
+  tps: 1032.73127
+ }
+}
+dps_results: {
  key: "TestEnhancement-Phase5-AllItems-Champion'sEarthshaker"
  value: {
   dps: 986.58113
@@ -1146,8 +1174,8 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-Phase5-AllItems-TheFiveThunders"
  value: {
-  dps: 969.07354
-  tps: 996.78267
+  dps: 970.78318
+  tps: 998.91062
  }
 }
 dps_results: {

@@ -100,8 +100,15 @@ dps_results: {
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Champion'sRefuge"
  value: {
-  dps: 469.22232
-  tps: 815.41693
+  dps: 463.05195
+  tps: 804.93597
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-Champion'sSanctuary"
+ value: {
+  dps: 467.87751
+  tps: 815.20585
  }
 }
 dps_results: {
@@ -119,10 +126,24 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-Haruspex'sGarb"
+ value: {
+  dps: 435.90988
+  tps: 759.93474
+ }
+}
+dps_results: {
  key: "TestFeralTank-Phase1-AllItems-LieutenantCommander'sRefuge"
  value: {
-  dps: 469.22232
-  tps: 815.41693
+  dps: 463.05195
+  tps: 804.93597
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-LieutenantCommander'sSanctuary"
+ value: {
+  dps: 467.87751
+  tps: 815.20585
  }
 }
 dps_results: {

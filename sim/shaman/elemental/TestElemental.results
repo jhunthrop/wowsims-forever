@@ -551,6 +551,13 @@ stat_weights_results: {
  }
 }
 dps_results: {
+ key: "TestElemental-Phase1-AllItems-Augur'sRegalia"
+ value: {
+  dps: 442.25835
+  tps: 483.08126
+ }
+}
+dps_results: {
  key: "TestElemental-Phase1-AllItems-Champion'sEarthshaker"
  value: {
   dps: 412.88115
@@ -595,8 +602,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-Phase1-AllItems-TheFiveThunders"
  value: {
-  dps: 417.18861
-  tps: 456.23123
+  dps: 426.58171
+  tps: 466.08371
  }
 }
 dps_results: {
@@ -712,6 +719,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestElemental-Phase2-AllItems-Augur'sRegalia"
+ value: {
+  dps: 474.54434
+  tps: 519.39049
+ }
+}
+dps_results: {
  key: "TestElemental-Phase2-AllItems-Champion'sEarthshaker"
  value: {
   dps: 442.38093
@@ -756,8 +770,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-Phase2-AllItems-TheFiveThunders"
  value: {
-  dps: 446.35729
-  tps: 488.34193
+  dps: 455.79149
+  tps: 498.26517
  }
 }
 dps_results: {
@@ -873,6 +887,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestElemental-Phase3-AllItems-Augur'sRegalia"
+ value: {
+  dps: 471.19428
+  tps: 514.3086
+ }
+}
+dps_results: {
  key: "TestElemental-Phase3-AllItems-Champion'sEarthshaker"
  value: {
   dps: 455.87245
@@ -917,8 +938,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-Phase3-AllItems-TheFiveThunders"
  value: {
-  dps: 451.70435
-  tps: 494.1166
+  dps: 461.7314
+  tps: 504.65583
  }
 }
 dps_results: {
@@ -1034,6 +1055,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestElemental-Phase4-AllItems-Augur'sRegalia"
+ value: {
+  dps: 504.35183
+  tps: 553.52568
+ }
+}
+dps_results: {
  key: "TestElemental-Phase4-AllItems-Champion'sEarthshaker"
  value: {
   dps: 457.84748
@@ -1078,8 +1106,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-Phase4-AllItems-TheFiveThunders"
  value: {
-  dps: 454.79145
-  tps: 495.43842
+  dps: 464.52761
+  tps: 505.73945
  }
 }
 dps_results: {
@@ -1195,6 +1223,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestElemental-Phase5-AllItems-Augur'sRegalia"
+ value: {
+  dps: 563.96117
+  tps: 614.83795
+ }
+}
+dps_results: {
  key: "TestElemental-Phase5-AllItems-Champion'sEarthshaker"
  value: {
   dps: 511.64955
@@ -1239,8 +1274,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-Phase5-AllItems-TheFiveThunders"
  value: {
-  dps: 498.73196
-  tps: 543.29926
+  dps: 508.84182
+  tps: 553.83816
  }
 }
 dps_results: {
@@ -1356,6 +1391,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestElemental-Phase6-AllItems-Augur'sRegalia"
+ value: {
+  dps: 592.75266
+  tps: 646.31409
+ }
+}
+dps_results: {
  key: "TestElemental-Phase6-AllItems-Champion'sEarthshaker"
  value: {
   dps: 543.61974
@@ -1400,8 +1442,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-Phase6-AllItems-TheFiveThunders"
  value: {
-  dps: 528.08506
-  tps: 574.30553
+  dps: 537.90433
+  tps: 584.70562
  }
 }
 dps_results: {

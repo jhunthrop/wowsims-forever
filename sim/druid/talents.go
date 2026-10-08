@@ -686,8 +686,9 @@ func (druid *Druid) registerBerserkCD() {
 	druid.BerserkAura = berserkAura
 
 	druid.Berserk = druid.RegisterSpell(Cat|Bear, core.SpellConfig{
-		ActionID: actionID,
-		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
+		ClassSpellMask: DruidSpellMaskBerserk,
+		ActionID:       actionID,
+		Flags:          core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
 		// Every client id for "Berserk" (417141, 424759, 442211) is
 		// spell_level 1; BerserkLevel[0] (constants_auto_gen.go) reads
 		// the same.

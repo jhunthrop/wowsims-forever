@@ -4,6 +4,7 @@ import (
 	"slices"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientsetbonus"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/stats"
 )
@@ -54,43 +55,32 @@ const manaflareFrostfireProcBonus = 0.10
 // The 5-piece's crit bonus while Combustion is active, in crit points.
 const manaflareFrostfireCombustionCritPoints = 10.0
 
-// Counterspell's cooldown reduction from the 3-piece.
-const manaflareCounterspellCooldownReduction = 5 * time.Second
-
 // Manaflare Regalia is Forever's Tier 1 mage set (client ItemSet 2098,
-// bonus spells 1300947, 1301013, 1301079 and 1301488, build
-// 1.60.1.70009).
-var ItemSetManaflareRegalia = core.NewItemSet(core.ItemSet{
-	ID:   2098,
-	Name: "Manaflare Regalia",
-	Bonuses: map[int32]core.ApplyEffect{
-		// Improves your chance to hit by 1%.
-		// (The spell's tooltip prints "${$s1}.1%"; its base points are 1,
-		// and the aura adds one point of hit.)
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Hit, 1*core.HitRatingPerHitChance)
-		},
+// build 1.60.1.70009). The 2-piece hit and the 4-piece spell damage
+// against Elementals are flat bonuses applied from the client's rows.
+const (
+	manaflareRegaliaSetID           int32 = 2098
+	manaflareCounterspellThreshold  int32 = 3
+	manaflareCounterspellBonusSpell int32 = 1301013
+	manaflareFrostfireBonusSpell    int32 = 1301488
+)
+
+// manaflareClassMasks says which engine spell the family of the Mage 3P row
+// is (Counterspell's client family bit 16384).
+var manaflareClassMasks = core.ClassMaskTable{
+	{Client: core.ClientClassMask{16384}, Engine: MageSpellMaskCounterspell},
+}
+
+var ItemSetManaflareRegalia = core.NewClientItemSet(core.ClientSetModel{
+	ID: manaflareRegaliaSetID,
+	Effects: map[int32]core.ApplyEffect{
 		// Reduces the cooldown on your Counterspell spell by 5 sec.
-		3: func(agent core.Agent) {
-			mage := agent.(MageAgent).GetMage()
-			mage.AddStaticMod(core.SpellModConfig{
-				Kind:      core.SpellMod_Cooldown_Flat,
-				ClassMask: MageSpellMaskCounterspell,
-				TimeValue: -manaflareCounterspellCooldownReduction,
-			})
-		},
-		// Increases damage done by your spells and effects by up to 21
-		// when fighting Elementals.
-		4: func(agent core.Agent) {
-			// No implementation in sim: no encounter in the sim is an
-			// Elemental, and the engine has no spell power by mob type.
-		},
+		manaflareCounterspellBonusSpell: clientsetbonus.StaticMod(manaflareRegaliaSetID, manaflareCounterspellThreshold, manaflareClassMasks),
 		// Your Frostfire Bolt spell has a 10% increased chance to trigger
 		// Missile Barrage, gains 10% increased critical strike chance
 		// while your Combustion spell is active, and has a 10% increased
 		// chance to trigger Fingers of Frost.
-		5: func(agent core.Agent) {
+		manaflareFrostfireBonusSpell: func(agent core.Agent) {
 			agent.(MageAgent).GetMage().manaflareFrostfire = true
 		},
 	},
@@ -223,31 +213,6 @@ var ItemSetIllusionistsAttire = core.NewItemSet(core.ItemSet{
 ///////////////////////////////////////////////////////////////////////////
 //                            Phase 5 Item Sets - AQ
 ///////////////////////////////////////////////////////////////////////////
-
-var ItemSetSorcerersRegalia = core.NewItemSet(core.ItemSet{
-	Name: "Sorcerer's Regalia",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +8 All Resistances.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddResistances(8)
-		},
-		// Your spellcasts have a 6% chance to energize you for 300 mana.
-		4: func(agent core.Agent) {
-			// No implementation in sim
-		},
-		// Increases damage and healing done by magical spells and effects by up to 23.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.SpellPower, 23)
-		},
-		// +200 Armor.
-		8: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Armor, 200)
-		},
-	},
-})
 
 var ItemSetEnigmaVestments = core.NewItemSet(core.ItemSet{
 	Name: "Enigma Vestments",

@@ -36,7 +36,10 @@ type ClientSpell struct {
 	// ProcChance is SpellAuraOptions.ProcChance when the client states one
 	// other than the "always" 101.
 	ProcChance int32
-	Effects    []ClientEffect
+	// InternalCooldownMS is SpellAuraOptions.ProcCategoryRecovery: how long
+	// the spell's proc stays down after it fires.
+	InternalCooldownMS int32
+	Effects            []ClientEffect
 }
 
 // ClientSetBonus is one ItemSetSpell row.
@@ -47,8 +50,11 @@ type ClientSetBonus struct {
 
 // ClientSet is one ItemSet row with its bonuses.
 type ClientSet struct {
-	Name    string
-	Bonuses []ClientSetBonus
+	Name string
+	// PhaseOnePieces is the most pieces of the set any one class can wear
+	// from Phase 1 sources; a bonus above it cannot be reached in Phase 1.
+	PhaseOnePieces int32
+	Bonuses        []ClientSetBonus
 }
 
 // The client's aura and effect kinds the flat-stat decoder reads.

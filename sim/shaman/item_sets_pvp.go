@@ -1,108 +1,34 @@
 package shaman
 
 import (
+	"github.com/wowsims/classic/sim/common/clientsetbonus"
 	"github.com/wowsims/classic/sim/core"
-	"github.com/wowsims/classic/sim/core/stats"
 )
 
-var ItemSetChampionsEarthshaker = core.NewItemSet(core.ItemSet{
-	Name: "Champion's Earthshaker",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +40 Attack Power.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStats(stats.Stats{
-				stats.AttackPower:       40,
-				stats.RangedAttackPower: 40,
-			})
-		},
-		// Improves your chance to get a critical strike with all Shock spells by 2%.
-		4: func(agent core.Agent) {
-			shaman := agent.(ShamanAgent).GetShaman()
-			shaman.GetOrRegisterAura(core.Aura{
-				Label:    "Shaman Shock Crit Bonus",
-				ActionID: core.ActionID{SpellID: 22804},
-				OnInit: func(aura *core.Aura, sim *core.Simulation) {
-					for _, spell := range core.Flatten([][]*core.Spell{shaman.EarthShock, shaman.FlameShock, shaman.FrostShock}) {
-						if spell != nil {
-							spell.BonusCritRating += 2 * core.CritRatingPerCritChance
-						}
-					}
-				},
-			})
-		},
-		// +15 Stamina.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Stamina, 15)
-		},
-	},
-})
+// shockCritBonus is the PvP rank sets' "Improves your chance to get a
+// critical strike with all Shock spells" bonus spell.
+const shockCritBonus = 22804
 
-var ItemSetChampionsStormcaller = core.NewItemSet(core.ItemSet{
-	Name: "Champion's Stormcaller",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +40 Attack Power.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStats(stats.Stats{
-				stats.AttackPower:       40,
-				stats.RangedAttackPower: 40,
-			})
-		},
-		// Improves your chance to get a critical strike with all Shock spells by 2%.
-		4: func(agent core.Agent) {
-			shaman := agent.(ShamanAgent).GetShaman()
-			shaman.GetOrRegisterAura(core.Aura{
-				Label:    "Shaman Shock Crit Bonus",
-				ActionID: core.ActionID{SpellID: 22804},
-				OnInit: func(aura *core.Aura, sim *core.Simulation) {
-					for _, spell := range core.Flatten([][]*core.Spell{shaman.EarthShock, shaman.FlameShock, shaman.FrostShock}) {
-						if spell != nil {
-							spell.BonusCritRating += 2 * core.CritRatingPerCritChance
-						}
-					}
-				},
-			})
-		},
-		// +20 Stamina.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Stamina, 20)
-		},
-	},
-})
+// The client families of the shocks: Earth Shock, Flame Shock (the same
+// bit relicClassMasks uses) and Frost Shock.
+var shockClassMasks = core.ClassMaskTable{
+	{Client: core.ClientClassMask{1 << 20}, Engine: ShamanSpellMaskEarthShock},
+	{Client: core.ClientClassMask{1 << 28}, Engine: ShamanSpellMaskFlameShock},
+	{Client: core.ClientClassMask{1 << 31}, Engine: ShamanSpellMaskFrostShock},
+}
 
-var ItemSetWarlordsEarthshaker = core.NewItemSet(core.ItemSet{
-	Name: "Warlord's Earthshaker",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +20 Stamina.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Stamina, 20)
-		},
-		// Improves your chance to get a critical strike with all Shock spells by 2%.
-		4: func(agent core.Agent) {
-			shaman := agent.(ShamanAgent).GetShaman()
-			shaman.GetOrRegisterAura(core.Aura{
-				Label:    "Shaman Shock Crit Bonus",
-				ActionID: core.ActionID{SpellID: 22804},
-				OnInit: func(aura *core.Aura, sim *core.Simulation) {
-					for _, spell := range core.Flatten([][]*core.Spell{shaman.EarthShock, shaman.FlameShock, shaman.FrostShock}) {
-						if spell != nil {
-							spell.BonusCritRating += 2 * core.CritRatingPerCritChance
-						}
-					}
-				},
-			})
-		},
-		// +40 Attack Power.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStats(stats.Stats{
-				stats.AttackPower:       40,
-				stats.RangedAttackPower: 40,
-			})
-		},
-	},
-})
+func applyShockCrit(agent core.Agent) {
+	clientsetbonus.AddStaticMods(&agent.GetCharacter().Unit, shockCritBonus, shockClassMasks)
+}
+
+// The shaman PvP rank sets (client ItemSets), every one with the shock crit
+// bonus: Champion's Stormcaller 538, Thunderfist 1757, Wartide 1758 and
+// Earthshaker 1759; Warlord's Earthshaker 1731, Thunderfist 1732 and Wartide
+// 1733.
+var pvpSetIDs = []int32{538, 1757, 1758, 1759, 1731, 1732, 1733}
+
+func init() {
+	for _, id := range pvpSetIDs {
+		clientsetbonus.RegisterPvPSet(id, map[int32]core.ApplyEffect{shockCritBonus: applyShockCrit})
+	}
+}

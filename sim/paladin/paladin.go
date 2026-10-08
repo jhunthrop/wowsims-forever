@@ -1,6 +1,8 @@
 package paladin
 
 import (
+	"time"
+
 	"github.com/wowsims/classic/sim/common/guardians"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
@@ -181,6 +183,10 @@ type Paladin struct {
 	sealOfRighteousness *core.Spell
 	sealOfCommand       *core.Spell
 	sealOfFury          *core.Spell
+
+	// forbearanceDurationMod is added to Forbearance's length; a set bonus
+	// sets it before the aura is registered (it is negative to shorten).
+	forbearanceDurationMod time.Duration
 
 	ironCreedAura                 *core.Aura
 	improvedSealOfFuryManaMetrics *core.ResourceMetrics

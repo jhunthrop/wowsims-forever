@@ -5,46 +5,31 @@ import (
 	"time"
 
 	_ "github.com/wowsims/classic/sim/common" // imported to get item effects included.
+	"github.com/wowsims/classic/sim/common/clientsetbonus/clientsetbonustest"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/simsignals"
-	"github.com/wowsims/classic/sim/core/stats"
 )
 
-// manaflarePieces is the Manaflare Regalia in slot order (client
-// ItemSet 2098): crown, mantle, robes, gloves, pants, boots.
-var manaflarePieces = []struct {
-	slot proto.ItemSlot
-	id   int32
-}{
-	{proto.ItemSlot_ItemSlotHead, 280455},
-	{proto.ItemSlot_ItemSlotShoulder, 280454},
-	{proto.ItemSlot_ItemSlotChest, 280450},
-	{proto.ItemSlot_ItemSlotHands, 280451},
-	{proto.ItemSlot_ItemSlotLegs, 280453},
-	{proto.ItemSlot_ItemSlotFeet, 280452},
+func newManaflareMage(t *testing.T, pieces int, talents string) (*core.Simulation, *Mage) {
+	return newManaflareMageAgainst(t, pieces, talents, bossTarget())
 }
 
-func newManaflareMage(t *testing.T, pieces int, talents string) (*core.Simulation, *Mage) {
+// newManaflareMageAgainst wears pieces of the set (synthetic, zero-stat
+// pieces carrying the client's set id) and fights target.
+func newManaflareMageAgainst(t *testing.T, pieces int, talents string, target *proto.Target) (*core.Simulation, *Mage) {
 	t.Helper()
 	if !core.WITH_DB {
 		t.Skip("needs the item database (--tags=with_db)")
 	}
-	items := make([]*proto.ItemSpec, 17)
-	for _, piece := range manaflarePieces[:pieces] {
-		items[piece.slot] = &proto.ItemSpec{Id: piece.id}
-	}
-	for i := range items {
-		if items[i] == nil {
-			items[i] = &proto.ItemSpec{}
-		}
-	}
+	equipment, database := core.ClientSetTestGear(manaflareRegaliaSetID, pieces)
 	player := core.WithSpec(
 		&proto.Player{
 			Class:              proto.Class_ClassMage,
 			Race:               proto.Race_RaceTroll,
 			Level:              60,
-			Equipment:          &proto.EquipmentSpec{Items: items},
+			Equipment:          equipment,
+			Database:           database,
 			Buffs:              core.FullBuffs.Player,
 			TalentsString:      talents,
 			DistanceFromTarget: 5,
@@ -54,7 +39,7 @@ func newManaflareMage(t *testing.T, pieces int, talents string) (*core.Simulatio
 	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
 	sim := core.NewSim(&proto.RaidSimRequest{
 		Raid:       raid,
-		Encounter:  &proto.Encounter{Duration: 60, Targets: []*proto.Target{bossTarget()}},
+		Encounter:  &proto.Encounter{Duration: 60, Targets: []*proto.Target{target}},
 		SimOptions: &proto.SimOptions{RandomSeed: 1, IsTest: true},
 	}, simsignals.CreateSignals())
 	sim.Reset()
@@ -67,16 +52,39 @@ func combustionTalents(t *testing.T) string {
 	return talentStringWithRank(t, ForeverFrostTalents, "combustion", 1)
 }
 
-// 2P (1300947): "Improves your chance to hit by 1%".
-func TestManaflareTwoPieceAddsOnePercentHit(t *testing.T) {
+// 2P (1300947) and 4P (1301079) are flat bonuses applied from the client's
+// rows: hit, and spell damage against Elementals.
+func TestManaflareFlatBonusesMatchTheRows(t *testing.T) {
 	_, bare := newManaflareMage(t, 0, ForeverFrostTalents)
-	_, two := newManaflareMage(t, 2, ForeverFrostTalents)
-	_, one := newManaflareMage(t, 1, ForeverFrostTalents)
-	if got := two.GetStat(stats.Hit) - bare.GetStat(stats.Hit); got != core.HitRatingPerHitChance {
-		t.Errorf("two pieces add %v hit rating, want %v", got, core.HitRatingPerHitChance)
+	for _, pieces := range []int{2, 4} {
+		_, worn := newManaflareMage(t, pieces, ForeverFrostTalents)
+		clientsetbonustest.AssertAutomaticTotals(t, manaflareRegaliaSetID, pieces, bare.GetCharacter(), worn.GetCharacter())
 	}
-	if one.GetStat(stats.Hit) != bare.GetStat(stats.Hit) {
-		t.Error("one piece changed hit")
+}
+
+// 4P (1301079): "Increases damage done by your spells and effects by up to
+// 21 when fighting Elementals". Live only against an Elemental target.
+func TestManaflareFourPieceAddsSpellDamageOnlyAgainstElementals(t *testing.T) {
+	row, _ := core.DecodeClientFlatBonus(core.MustClientSpellRow(1301079))
+	want := row.SpellDamageVs[0].Amount
+	elemental := &proto.Target{Level: 60, Stats: core.DefaultTargetProtoLvl60.Stats, MobType: proto.MobType_MobTypeElemental}
+
+	cases := []struct {
+		name   string
+		pieces int
+		target *proto.Target
+		want   float64
+	}{
+		{"four pieces against an Elemental", 4, elemental, want},
+		{"three pieces against an Elemental", 3, elemental, 0},
+		{"four pieces against the default target", 4, bossTarget(), 0},
+	}
+	for _, tc := range cases {
+		sim, mage := newManaflareMageAgainst(t, tc.pieces, ForeverFrostTalents, tc.target)
+		at := mage.AttackTables[sim.Encounter.AllTargetUnits[0].UnitIndex][proto.CastType_CastTypeMainHand]
+		if at.BonusSpellDamageTaken != tc.want {
+			t.Errorf("%s: spell damage bonus %v, want %v", tc.name, at.BonusSpellDamageTaken, tc.want)
+		}
 	}
 }
 
@@ -84,8 +92,9 @@ func TestManaflareTwoPieceAddsOnePercentHit(t *testing.T) {
 func TestManaflareThreePieceShortensCounterspell(t *testing.T) {
 	_, two := newManaflareMage(t, 2, ForeverFrostTalents)
 	_, three := newManaflareMage(t, 3, ForeverFrostTalents)
-	if got := two.Counterspell.CD.Duration - three.Counterspell.CD.Duration; got != 5*time.Second {
-		t.Errorf("three pieces shorten Counterspell by %v, want 5s", got)
+	want := -time.Duration(core.MustClientSpellRow(manaflareCounterspellBonusSpell).Effects[0].Points) * time.Millisecond
+	if got := two.Counterspell.CD.Duration - three.Counterspell.CD.Duration; got != want {
+		t.Errorf("three pieces shorten Counterspell by %v, the row says %v", got, want)
 	}
 }
 
