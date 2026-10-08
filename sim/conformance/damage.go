@@ -53,6 +53,7 @@ const (
 	effectApplyPartyAura = 35
 	auraPeriodicDamage   = 3
 	auraPeriodicHeal     = 8
+	auraAbsorb           = 69
 )
 
 // DamageComparison is the damage half of a Row.
@@ -108,10 +109,27 @@ func clientDamageEffect(spell spellconst.Spell) (spellconst.Effect, bool) {
 	return spellconst.Effect{}, false
 }
 
+// clientAbsorbEffect is the spell's absorb aura (a shield). It is read only
+// for an engine spell that declares a base amount: no ability file declared
+// one for a shield before, so reading it for every absorb would turn each
+// shield of every class from n/a to "not declared" without anyone having
+// chosen to be compared.
+func clientAbsorbEffect(spell spellconst.Spell) (spellconst.Effect, bool) {
+	for _, e := range spell.Effects {
+		if e.Effect == effectApplyAura && e.Aura == auraAbsorb && e.Amount > 0 {
+			return e, true
+		}
+	}
+	return spellconst.Effect{}, false
+}
+
 // compareDamage compares one engine spell's declared base damage against
 // the client's at casterLevel.
 func compareDamage(clientSpell spellconst.Spell, casterLevel int, engine *core.Spell) DamageComparison {
 	effect, ok := clientDamageEffect(clientSpell)
+	if !ok && engine.ClientBaseDamage != ([2]float64{}) {
+		effect, ok = clientAbsorbEffect(clientSpell)
+	}
 	if !ok {
 		return DamageComparison{Status: DamageNone}
 	}

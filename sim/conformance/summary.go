@@ -27,7 +27,7 @@ func renderDamageBlock(classSlugs []string, counts map[string]DamageCounts) stri
 	var b strings.Builder
 	fmt.Fprintf(&b, "%s\n\n", damageBlockBegin)
 	fmt.Fprintf(&b, "## Damage conformance (level %d)\n\n", summaryLevel)
-	fmt.Fprintf(&b, "Per spec-and-rank row at level %d whose client spell has a school-damage or periodic-damage effect, compared as damage.go describes. `declared` is an ability file setting `core.SpellConfig.ClientBaseDamage`; `not declared` is the gap the fix lanes close. Rows with no client damage effect (buffs, heals, utility) are `n/a`.\n\n", summaryLevel)
+	fmt.Fprintf(&b, "Per spec-and-rank row at level %d whose client spell has a school-damage, periodic-damage, heal or periodic-heal effect (or an absorb the ability file declares an amount for), compared as damage.go describes. `declared` is an ability file setting `core.SpellConfig.ClientBaseDamage`; `not declared` is the gap the fix lanes close. Rows with none of those (buffs, utility) are `n/a`.\n\n", summaryLevel)
 	fmt.Fprintf(&b, "| Class | Declared | Matching | Differing | Not declared | n/a |\n|---|---|---|---|---|---|\n")
 	var total DamageCounts
 	for _, slug := range classSlugs {
