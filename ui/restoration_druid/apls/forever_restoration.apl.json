@@ -87,13 +87,27 @@
           }
         },
         "condition": {
-          "auraIsActive": {
-            "auraId": {
-              "spellId": 17116
-            }
+          "and": {
+            "vals": [
+              {
+                "spellIsKnown": {
+                  "spellId": {
+                    "spellId": 17116
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 17116
+                  }
+                }
+              }
+            ]
           }
         }
-      }
+      },
+      "notes": "Gated on knowing the spell as well: a druid without the talent has no Nature's Swiftness aura, and an unresolved condition would let this cast run unconditionally."
     },
     {
       "action": {
@@ -107,25 +121,52 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentHealthPercent": {
-                "sourceUnit": {
-                  "type": "Player",
-                  "index": 5
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.3"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.8"
+                        }
+                      }
+                    }
+                  }
                 }
               }
-            },
-            "rhs": {
-              "const": {
-                "val": "0.3"
-              }
-            }
+            ]
           }
         }
       },
-      "notes": "Swiftmend eats the Rejuvenation or Regrowth on the tank for its whole heal at once, as the last-ditch button under 30%."
+      "notes": "Swiftmend eats the Rejuvenation or Regrowth on the tank with the least time left for its whole heal at once, as the last-ditch button under 30%, paced like Healing Touch."
     },
     {
       "action": {
@@ -861,7 +902,7 @@
                       },
                       "rhs": {
                         "const": {
-                          "val": "1.0"
+                          "val": "1.2"
                         }
                       }
                     }
@@ -937,7 +978,7 @@
                       },
                       "rhs": {
                         "const": {
-                          "val": "1.0"
+                          "val": "1.2"
                         }
                       }
                     }
@@ -1013,7 +1054,7 @@
                       },
                       "rhs": {
                         "const": {
-                          "val": "1.0"
+                          "val": "1.2"
                         }
                       }
                     }
@@ -1088,7 +1129,7 @@
                       },
                       "rhs": {
                         "const": {
-                          "val": "1.0"
+                          "val": "1.2"
                         }
                       }
                     }
@@ -1163,7 +1204,7 @@
                       },
                       "rhs": {
                         "const": {
-                          "val": "1.0"
+                          "val": "1.2"
                         }
                       }
                     }

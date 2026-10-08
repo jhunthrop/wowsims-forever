@@ -208,6 +208,26 @@ func TestDefaultRotationManaMatchesCastCosts(t *testing.T) {
 	}
 }
 
+var firstCast = regexp.MustCompile(`Casting \{SpellID: (\d+)\}`)
+
+// TestDefaultRotationWithoutTheTalentsOpensWithTheTanksHeals: a druid without
+// Nature's Swiftness, Swiftmend and Wild Growth has none of their spells or
+// auras, and a condition naming one of those must not turn a cast on
+// unconditionally (it once opened a level 30 druid with a Healing Touch on a
+// full-health tank, and then another every cast).
+func TestDefaultRotationWithoutTheTalentsOpensWithTheTanksHeals(t *testing.T) {
+	player := newPlayer(60, "", healerBonusStats, loadDefaultRotation(t))
+	logs := runOnce(t, player, 30).Logs
+
+	first := firstCast.FindStringSubmatch(logs)
+	if first == nil || first[1] != strconv.Itoa(int(castIDs.regrowth)) {
+		t.Errorf("the first cast was %v, want Regrowth (%d) on the tank", first, castIDs.regrowth)
+	}
+	if got := len(regexp.MustCompile(`Casting \{SpellID: `+strconv.Itoa(int(castIDs.healingTouch))+`\}`).FindAllString(logs, -1)); got > 3 {
+		t.Errorf("Healing Touch cast %d times in 30s of a tank who is mostly above 55%% health", got)
+	}
+}
+
 func TestDefaultRotationRunsWithoutWarnings(t *testing.T) {
 	player := newPlayer(60, StandardTalents, healerBonusStats, loadDefaultRotation(t))
 	sim := healsim.Request(player, healsim.TestProfile(), 60, 1)
