@@ -77,6 +77,7 @@ const (
 	DruidSpellMaskWildGrowth
 	DruidSpellMaskBerserk
 	DruidSpellMaskPounce
+	DruidSpellMaskShiftingPower
 )
 
 const (

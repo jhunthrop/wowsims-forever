@@ -22,6 +22,7 @@ func grovekeeperFerocityDruid(t *testing.T, race proto.Race, pieces int) *FeralD
 		Level:              60,
 		Buffs:              core.FullBuffs.Player,
 		DistanceFromTarget: 5,
+		TalentsString:      feralTalentsString(t, map[string]int{"shifting_power": 1}),
 	}, PlayerOptionsMonoCat)
 	sim := clientsetbonustest.PrePulledSim(t, player, grovekeeperFerocitySetID, pieces)
 	cat, ok := sim.Raid.Parties[0].Players[0].(*FeralDruid)
@@ -39,9 +40,9 @@ func TestGrovekeeperFerocityFlatBonusesMatchTheRows(t *testing.T) {
 	})
 }
 
-// 5P: "Reduces the cooldown on your Tiger's Fury ability by 3 sec".
-func TestGrovekeeperFerocityFivePieceShortensTigersFury(t *testing.T) {
+// 5P: "Reduces the cooldown on your Shifting Power ability by 1 sec".
+func TestGrovekeeperFerocityFivePieceShortensShiftingPower(t *testing.T) {
 	clientsetbonustest.AssertCooldownBonus(t, grovekeeperFerocitySetID, clientsetbonus.FivePieces, func(pieces int) *core.Spell {
-		return grovekeeperFerocityDruid(t, proto.Race_RaceTauren, pieces).TigersFury.Spell
+		return grovekeeperFerocityDruid(t, proto.Race_RaceTauren, pieces).ShiftingPower.Spell
 	})
 }

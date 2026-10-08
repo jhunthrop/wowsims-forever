@@ -10,7 +10,7 @@ import (
 
 func feralFingerprints(t *testing.T, relicID int32) map[string]core.SpellFingerprint {
 	t.Helper()
-	built, _, _ := newFeralDruidSimWearing(t, 60, P1Talents, core.RelicEquipment(relicID))
+	built, _, _ := newFeralDruidSimWearing(t, 60, feralTalentsString(t, map[string]int{"shifting_power": 1}), core.RelicEquipment(relicID))
 	return core.SpellFingerprints(&built.Unit)
 }
 
@@ -57,14 +57,14 @@ func TestIdolOfTheDreamAddsATickToEveryRipCast(t *testing.T) {
 	}
 }
 
-// Howling Idol (client spell 1291059): Tiger's Fury cooldown -3 seconds.
-func TestHowlingIdolShortensTigersFuryCooldownOnly(t *testing.T) {
+// Howling Idol (client spell 1291059): Shifting Power cooldown -1 second.
+func TestHowlingIdolShortensShiftingPowerCooldownOnly(t *testing.T) {
 	for _, change := range changedByRelic(t, druid.HowlingIdol) {
-		if change.After.ClassSpellMask&druid.DruidSpellMaskTigersFury == 0 {
-			t.Errorf("%s changed but is not Tiger's Fury: %+v", change.Key, change.After)
+		if change.After.ClassSpellMask&druid.DruidSpellMaskShiftingPower == 0 {
+			t.Errorf("%s changed but is not Shifting Power: %+v", change.Key, change.After)
 		}
-		if got := change.Before.CooldownDuration - change.After.CooldownDuration; got != 3*time.Second {
-			t.Errorf("%s cooldown shortened by %v, want 3s", change.Key, got)
+		if got := change.Before.CooldownDuration - change.After.CooldownDuration; got != 1*time.Second {
+			t.Errorf("%s cooldown shortened by %v, want 1s", change.Key, got)
 		}
 	}
 }

@@ -6,7 +6,7 @@ import (
 )
 
 // Forever's Tier 1 druid sets (client ItemSets 2112, 2113, 2114 and 2115,
-// build 1.60.1.70009). The 2- and 4-piece bonuses are flat and applied from
+// build 1.60.1.70291). The 2- and 4-piece bonuses are flat and applied from
 // the client's rows; the 5-piece bonuses are spell mods and the 3-piece
 // bonuses have no effect the sim measures.
 const (
@@ -23,11 +23,11 @@ const (
 
 // tier1ClassMasks says which engine spells the client spell families of
 // the Tier 1 5-piece bonuses are (the SpellClassOptions masks of
-// Swiftmend, Berserk, Tiger's Fury and Insect Swarm).
+// Swiftmend, Berserk, Shifting Power and Insect Swarm).
 var tier1ClassMasks = core.ClassMaskTable{
 	{Client: core.ClientClassMask{0, 1 << 1}, Engine: DruidSpellMaskSwiftmend},
 	{Client: core.ClientClassMask{0, 0, 1 << 6}, Engine: DruidSpellMaskBerserk},
-	{Client: core.ClientClassMask{0, 0, 1 << 11}, Engine: DruidSpellMaskTigersFury},
+	{Client: core.ClientClassMask{0, 1 << 31}, Engine: DruidSpellMaskShiftingPower},
 	{Client: core.ClientClassMask{1 << 21}, Engine: DruidSpellMaskInsectSwarm},
 }
 
@@ -57,7 +57,7 @@ var ItemSetGrovekeeperEclipse = core.NewClientItemSet(core.ClientSetModel{
 
 var ItemSetGrovekeeperFerocity = core.NewClientItemSet(core.ClientSetModel{
 	ID: grovekeeperFerocitySetID,
-	// Reduces the cooldown on your Tiger's Fury ability by 3 sec.
+	// Reduces the cooldown on your Shifting Power ability by 1 sec.
 	Effects: clientsetbonus.FivePieceMod(grovekeeperFerocitySetID, tier1ClassMasks),
 	NoSim:   clientsetbonus.NoSimThreePiece(grovekeeperFerocitySetID, hibernateNoSimNote),
 })

@@ -41,8 +41,9 @@ func (druid *Druid) registerShiftingPowerSpell() {
 	energyMetrics := druid.NewEnergyMetrics(core.ActionID{SpellID: shiftingPowerSpellID})
 
 	druid.ShiftingPower = druid.RegisterSpell(Cat, core.SpellConfig{
-		ActionID: core.ActionID{SpellID: shiftingPowerSpellID},
-		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
+		ActionID:       core.ActionID{SpellID: shiftingPowerSpellID},
+		ClassSpellMask: DruidSpellMaskShiftingPower,
+		Flags:          core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
 
 		ManaCost: core.ManaCostOptions{
 			BaseCost:   shiftingPowerManaFractionOfBase,
