@@ -23,8 +23,11 @@ instead, so a future mismatch is caught rather than silently ignored.
 This script also generates sim/core/base_stats_levels_auto_gen.go from a
 levels.json-shaped file: wowhead's Forever gear planner payload
 (wow.gearPlanner.classic.baseStats and .critSpell), giving every class's
-Health, Mana, Agility, Strength, Intellect, Spirit, Stamina and
-spell-crit-per-Intellect rate at every level 1..60, not just 60. The site
+Health, Mana, Agility, Strength, Intellect, Spirit and Stamina at every
+level 1..60, not just 60. The per-level crit rates (crit per Agility and
+spell crit per Intellect) come from the client's PlayerExpectedStat table
+(playerexpectedstat.csv in --inputs), a primary source; wowhead's critSpell
+is only cross-checked against it and generation fails if they disagree. The site
 repo's data lane emits this same content as builds/<build>/levels.json;
 this fork vendors a copy (assets/db_inputs/levels/<build>.json) so the
 generated file is reproducible from something checked into this repo.
@@ -83,6 +86,20 @@ LEVELS_STAT_ID_TO_FIELD = [
 COMBAT_RATINGS = "combatratings.txt"
 BASE_MP = "basemp.txt"
 HP_PER_STA = "hppersta.txt"
+PLAYER_EXPECTED_STAT = "playerexpectedstat.csv"
+
+# PlayerExpectedStat's ClassID -> proto.Class name; same ids as wowhead's
+# gear planner classId above.
+EXPECTED_STAT_CLASS_IDS = LEVELS_CLASS_ID_TO_PROTO_NAME
+
+# Crit fractions are emitted in percent per stat point, rounded to this
+# many decimals (the unit and precision the wowhead-derived table used).
+CRIT_PER_STAT_DECIMALS = 4
+
+# Largest relative disagreement tolerated between the client's and
+# wowhead's spell-crit-per-Intellect below MAX_LEVEL (observed maximum
+# 2.2%; see check_spell_crit_agrees).
+SPELL_CRIT_CROSS_CHECK_RELATIVE = 0.03
 
 # Every constant this generator emits is a straight 1:1 percentage -
 # research/08-stats.md 2 settles Forever as flat-percentage, full stop,
@@ -273,6 +290,61 @@ def read_levels_json(path):
     return base_stats, crit_spell
 
 
+def read_expected_stat(path):
+    """The client's PlayerExpectedStat table (DB2 export, CSV). Return
+    (crit_per_agi, spell_crit_per_int) where each is
+    {className: {level: percent per stat point}} for level 1..MAX_LEVEL,
+    rounded to CRIT_PER_STAT_DECIMALS. Rows outside ContentSetID 0 are
+    ignored."""
+    columns = ("ClassID", "Level", "ContentSetID", "CritPerAgility", "SpellCritPerIntellect")
+    crit_per_agi = {name: {} for name in EXPECTED_STAT_CLASS_IDS.values()}
+    spell_crit_per_int = {name: {} for name in EXPECTED_STAT_CLASS_IDS.values()}
+    with open(path, newline="") as fh:
+        reader = csv.DictReader(fh)
+        missing = [c for c in columns if c not in (reader.fieldnames or [])]
+        if missing:
+            raise SystemExit(f"{path} has no column(s) {missing}; columns are {reader.fieldnames}")
+        for row in reader:
+            class_name = EXPECTED_STAT_CLASS_IDS.get(row["ClassID"])
+            level = int(row["Level"])
+            if class_name is None or row["ContentSetID"] != "0" or not 1 <= level <= MAX_LEVEL:
+                continue
+            crit_per_agi[class_name][level] = round(
+                float(row["CritPerAgility"]) * 100, CRIT_PER_STAT_DECIMALS)
+            spell_crit_per_int[class_name][level] = round(
+                float(row["SpellCritPerIntellect"]) * 100, CRIT_PER_STAT_DECIMALS)
+    for table_name, table in (("CritPerAgility", crit_per_agi), ("SpellCritPerIntellect", spell_crit_per_int)):
+        for class_name, by_level in table.items():
+            if sorted(by_level) != list(range(1, MAX_LEVEL + 1)):
+                raise SystemExit(f"{path}: {table_name} for {class_name} does not cover levels 1..{MAX_LEVEL}")
+    return crit_per_agi, spell_crit_per_int
+
+
+def check_spell_crit_agrees(client, wowhead):
+    """Fail loudly unless wowhead's critSpell table agrees with the client's
+    SpellCritPerIntellect. At MAX_LEVEL they must match to
+    CRIT_PER_STAT_DECIMALS. At lower levels 26 of 540 rows differ in the
+    last digit or two (wowhead appears to derive its value from a rounded
+    points-per-1% figure, the client stores the float), by at most about
+    2% relative, so those rows are held to SPELL_CRIT_CROSS_CHECK_RELATIVE.
+    A class wowhead omits must be zero in the client."""
+    mismatches = []
+    for class_name, by_level in client.items():
+        wh_levels = wowhead.get(class_name)
+        for level, value in by_level.items():
+            expected = wh_levels[level] if wh_levels else 0.0
+            if level == MAX_LEVEL:
+                bad = value != round(expected, CRIT_PER_STAT_DECIMALS)
+            else:
+                bad = abs(value - expected) > SPELL_CRIT_CROSS_CHECK_RELATIVE * max(value, expected)
+            if bad:
+                mismatches.append(f"{class_name} level {level}: client {value} vs wowhead {expected}")
+    if mismatches:
+        raise SystemExit(
+            "PlayerExpectedStat SpellCritPerIntellect disagrees with wowhead critSpell:\n  "
+            + "\n  ".join(mismatches[:20]))
+
+
 def go_number(value):
     """A JSON number formatted as a Go literal: Python's float repr is
     already the shortest string that round-trips, so a source value like
@@ -282,12 +354,15 @@ def go_number(value):
     return repr(value)
 
 
-def generate_levels(source_path, base_stats, crit_spell):
+def generate_levels(source_path, expected_stat_path, base_stats, crit_per_agi, spell_crit_per_int):
     lines = [
         "// Code generated by tools/base_stats_parser.py. DO NOT EDIT.",
         "//",
-        f"// Source: {source_path} (wowhead's Forever gear planner payload:",
-        "// wow.gearPlanner.classic.baseStats and .critSpell)",
+        f"// Sources: {source_path} (wowhead's Forever gear planner payload:",
+        "// wow.gearPlanner.classic.baseStats, for baseStatsByClassLevel;",
+        "// .critSpell is cross-checked, not read)",
+        f"//          {expected_stat_path} (the client's PlayerExpectedStat",
+        "// table: CritPerAgility and SpellCritPerIntellect, ContentSetID 0)",
         "//",
         "// Regenerate with:",
         f"//     python3 tools/base_stats_parser.py --levels-json {source_path}",
@@ -299,9 +374,10 @@ def generate_levels(source_path, base_stats, crit_spell):
         '\t"github.com/wowsims/classic/sim/core/stats"',
         ")",
         "",
-        "// LevelStatsSource names the wowhead gear-planner payload",
-        "// baseStatsByClassLevel and spellCritPerIntByClassLevel were read from.",
-        f'const LevelStatsSource = "{source_path} (wow.gearPlanner.classic.baseStats, .critSpell)"',
+        "// LevelStatsSource names the two sources: wowhead's gear-planner payload",
+        "// (baseStatsByClassLevel) and the client's PlayerExpectedStat table",
+        "// (critPerAgiByClassLevel and spellCritPerIntByClassLevel).",
+        f'const LevelStatsSource = "{source_path} (wow.gearPlanner.classic.baseStats); {expected_stat_path} (CritPerAgility, SpellCritPerIntellect)"',
         "",
         "// baseStatsByClassLevel[class][level] is wowhead's gear planner Health,",
         "// Mana, Agility, Strength, Intellect, Spirit and Stamina for that class at",
@@ -328,19 +404,37 @@ def generate_levels(source_path, base_stats, crit_spell):
     lines.append("}")
     lines.append("")
 
-    lines.append("// spellCritPerIntByClassLevel[class][level] is the fraction of spell crit")
-    lines.append("// chance one point of Intellect grants at that level (same unit as the")
-    lines.append("// pre-generator flat CritPerIntAtLevel), level 1..CharacterMaxLevel. A")
-    lines.append("// class absent here (Warrior, Rogue) grants none at any level -")
-    lines.append("// SpellCritPerIntAtLevel returns 0 for it, matching CritPerIntAtLevel's")
-    lines.append("// old 0.0 rows for those two classes.")
-    lines.append("var spellCritPerIntByClassLevel = map[proto.Class][CharacterMaxLevel + 1]float64{")
-    for class_name, by_level in crit_spell.items():
+    lines.extend(crit_table_lines(
+        "critPerAgiByClassLevel",
+        ["// critPerAgiByClassLevel[class][level] is the percent of crit chance one",
+         "// point of Agility grants at that level (the client's CritPerAgility x 100,",
+         "// the unit CritPerAgiAtLevel returns), level 1..CharacterMaxLevel; index 0",
+         "// is unused. The client carries a row for every class and the rate rises",
+         "// toward low levels (a level-30 warrior needs about 10 Agility per 1%)."],
+        crit_per_agi))
+    lines.extend(crit_table_lines(
+        "spellCritPerIntByClassLevel",
+        ["// spellCritPerIntByClassLevel[class][level] is the percent of spell crit",
+         "// chance one point of Intellect grants at that level (the client's",
+         "// SpellCritPerIntellect x 100; wowhead's critSpell agrees at level 60 and",
+         "// within 3% below it, checked at generation), level 1..CharacterMaxLevel. A class whose rate",
+         "// is zero at every level (Warrior, Rogue) has no row -",
+         "// SpellCritPerIntAtLevel returns 0 for it."],
+        spell_crit_per_int, skip_all_zero=True))
+    return "\n".join(lines)
+
+
+def crit_table_lines(var_name, comment, table, skip_all_zero=False):
+    lines = list(comment)
+    lines.append(f"var {var_name} = map[proto.Class][CharacterMaxLevel + 1]float64{{")
+    for class_name, by_level in table.items():
+        if skip_all_zero and not any(by_level.values()):
+            continue
         values = ", ".join(f"{level}: {go_number(by_level[level])}" for level in range(1, MAX_LEVEL + 1))
         lines.append(f"\tproto.Class_{class_name}: {{{values}}},")
     lines.append("}")
     lines.append("")
-    return "\n".join(lines)
+    return lines
 
 
 def resolve_build(build, inputs_path):
@@ -385,7 +479,11 @@ def main():
 
     if args.levels_json:
         base_stats, crit_spell = read_levels_json(args.levels_json)
-        levels_out = generate_levels(args.levels_json, base_stats, crit_spell)
+        expected_stat_path = f"{args.inputs}/{PLAYER_EXPECTED_STAT}"
+        crit_per_agi, spell_crit_per_int = read_expected_stat(expected_stat_path)
+        check_spell_crit_agrees(spell_crit_per_int, crit_spell)
+        levels_out = generate_levels(
+            args.levels_json, expected_stat_path, base_stats, crit_per_agi, spell_crit_per_int)
         with open(args.levels_out, "w") as fh:
             fh.write(levels_out)
         print(f"wrote {args.levels_out} from {args.levels_json}", file=sys.stderr)

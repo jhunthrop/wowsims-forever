@@ -9,79 +9,118 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
-// Pins the H3 ruling from the Task 4 fix round: research/08-stats.md §7
-// leaves the baseline Agility/Intellect-to-Crit conversion "entirely
-// unpublished" for the unified model, so every class keeps its pre-merge
-// sources — a hybrid that converted both keeps both (stacking, marked
-// unconfirmed); a class that converted only one keeps only that one,
-// unchanged. All nine classes that wire a base-stat-to-Crit dependency are
-// asserted here against the one table (sim/core/base_stats.go), which is
-// the single place a later ruling edits instead of the nine
-// AddStatDependency call sites across sim/druid, sim/shaman,
-// sim/paladin, sim/warlock, sim/hunter, sim/rogue, sim/mage, sim/priest
-// and sim/warrior.
-func TestCritStatSourcesArePinned(t *testing.T) {
-	expected := map[proto.Class]CritStatSources{
-		// Hybrids: stack Agility- and Intellect-derived Crit, unconfirmed.
-		proto.Class_ClassDruid:   {Agility: true, Intellect: true},
-		proto.Class_ClassShaman:  {Agility: true, Intellect: true},
-		proto.Class_ClassPaladin: {Agility: true, Intellect: true},
-		proto.Class_ClassWarlock: {Agility: true, Intellect: true},
-		proto.Class_ClassHunter:  {Agility: true, Intellect: true},
-		// Single-source: unchanged from before the merge.
-		proto.Class_ClassRogue:   {Agility: true},
-		proto.Class_ClassWarrior: {Agility: true},
-		proto.Class_ClassMage:    {Intellect: true},
-		proto.Class_ClassPriest:  {Intellect: true},
-	}
+// The nine level-60 Agility-to-crit rates the fork hand-typed before the
+// client's PlayerExpectedStat table was generated into
+// critPerAgiByClassLevel. Level 60 of the generated table must reproduce
+// them exactly.
+var oldLevel60CritPerAgi = map[proto.Class]float64{
+	proto.Class_ClassWarrior: 0.0500,
+	proto.Class_ClassPaladin: 0.0506,
+	proto.Class_ClassHunter:  0.0189,
+	proto.Class_ClassRogue:   0.0345,
+	proto.Class_ClassPriest:  0.0500,
+	proto.Class_ClassShaman:  0.0508,
+	proto.Class_ClassMage:    0.0514,
+	proto.Class_ClassWarlock: 0.0500,
+	proto.Class_ClassDruid:   0.0500,
+}
 
-	if len(ClassCritStatSources) != len(expected) {
-		t.Fatalf("ClassCritStatSources has %d entries, want %d — a class was added or removed without updating this pin",
-			len(ClassCritStatSources), len(expected))
-	}
-	for class, want := range expected {
-		got, ok := ClassCritStatSources[class]
-		if !ok {
-			t.Errorf("ClassCritStatSources is missing %v", class)
-			continue
-		}
-		if got != want {
-			t.Errorf("ClassCritStatSources[%v] = %+v, want %+v", class, got, want)
+func TestCritPerAgiAtLevel60MatchesTheOldConstants(t *testing.T) {
+	for class, want := range oldLevel60CritPerAgi {
+		if got := CritPerAgiAtLevel(class, CharacterMaxLevel); got != want {
+			t.Errorf("CritPerAgiAtLevel(%v, %d) = %v, want %v", class, CharacterMaxLevel, got, want)
 		}
 	}
 }
 
-// Demonstrates (and pins) the actual arithmetic: a hybrid class's Agility
-// and Intellect both add into the one Crit stat, because
-// StatDependencyManager sums every enabled dependency into its
-// destination (see TestMultipleStatDep in sim/core/stats/deps_test.go for
-// the same behaviour at the mechanism level). If a later ruling on
-// research/08-stats.md §7 decides a hybrid should draw from only one
-// source, this is the test that must change, alongside
-// ClassCritStatSources.
-func TestCritStatSourcesStackForHybrids(t *testing.T) {
-	class := proto.Class_ClassDruid
-	agi, intel := 100.0, 200.0
+func TestCritPerAgiAtLevelRisesTowardLowLevels(t *testing.T) {
+	cases := []struct {
+		class proto.Class
+		level int32
+		want  float64
+	}{
+		{proto.Class_ClassWarrior, 30, 0.0962},
+		{proto.Class_ClassWarrior, 1, 0.25},
+		{proto.Class_ClassRogue, 1, 0.4348},
+	}
+	for _, tc := range cases {
+		if got := CritPerAgiAtLevel(tc.class, tc.level); got != tc.want {
+			t.Errorf("CritPerAgiAtLevel(%v, %d) = %v, want %v", tc.class, tc.level, got, tc.want)
+		}
+	}
+	if CritPerAgiAtLevel(proto.Class_ClassUnknown, 30) != 0 {
+		t.Errorf("CritPerAgiAtLevel(ClassUnknown, 30) must be 0")
+	}
+}
 
+func TestEveryClassHasAnAgilityCritRateAtEveryLevel(t *testing.T) {
+	for _, class := range allClasses {
+		for level := int32(1); level <= CharacterMaxLevel; level++ {
+			if CritPerAgiAtLevel(class, level) <= 0 {
+				t.Errorf("CritPerAgiAtLevel(%v, %d) = %v, want > 0", class, level, CritPerAgiAtLevel(class, level))
+			}
+		}
+	}
+}
+
+func TestWarriorAndRogueHaveNoIntellectCritAtAnyLevel(t *testing.T) {
+	for _, class := range []proto.Class{proto.Class_ClassWarrior, proto.Class_ClassRogue} {
+		for level := int32(1); level <= CharacterMaxLevel; level++ {
+			if got := SpellCritPerIntAtLevel(class, level); got != 0 {
+				t.Errorf("SpellCritPerIntAtLevel(%v, %d) = %v, want 0", class, level, got)
+			}
+		}
+	}
+}
+
+// AddCritStatDependencies wires both Agility and Intellect into the one
+// Crit stat for every class, at the per-level client rates, because
+// StatDependencyManager sums every enabled dependency into its destination
+// (see TestMultipleStatDep in sim/core/stats/deps_test.go). Whether the
+// game itself stacks a hybrid's two sources is unmeasured (see
+// AddCritStatDependencies' comment); if the beta character sheet test
+// rules otherwise, this is the test that must change.
+func TestAddCritStatDependenciesWiresBothStatsForEveryClass(t *testing.T) {
+	agi, intel := 100.0, 200.0
+	for _, class := range allClasses {
+		for _, level := range []int32{1, 30, CharacterMaxLevel} {
+			character := &Character{}
+			character.Level = level
+			AddCritStatDependencies(character, class)
+
+			result := character.SortAndApplyStatDependencies(stats.Stats{
+				stats.Agility:   agi,
+				stats.Intellect: intel,
+			})
+
+			wantCrit := agi*CritPerAgiAtLevel(class, level)*CritRatingPerCritChance +
+				intel*SpellCritPerIntAtLevel(class, level)*CritRatingPerCritChance
+			if result[stats.Crit] != wantCrit {
+				t.Errorf("%v level %d: Crit = %v, want %v (Agility and Intellect contributions summed)",
+					class, level, result[stats.Crit], wantCrit)
+			}
+		}
+	}
+}
+
+// Rogue has no Intellect rate, so the Intellect it carries contributes
+// nothing to Crit.
+func TestAddCritStatDependenciesRogueIgnoresIntellect(t *testing.T) {
 	character := &Character{}
-	AddCritStatDependencies(character, class)
+	AddCritStatDependencies(character, proto.Class_ClassRogue)
 
 	result := character.SortAndApplyStatDependencies(stats.Stats{
-		stats.Agility:   agi,
-		stats.Intellect: intel,
+		stats.Agility:   100,
+		stats.Intellect: 200,
 	})
 
-	wantCrit := agi*CritPerAgiAtLevel[class]*CritRatingPerCritChance + intel*SpellCritPerIntAtLevel(class, character.Level)*CritRatingPerCritChance
+	wantCrit := 100 * CritPerAgiAtLevel(proto.Class_ClassRogue, CharacterMaxLevel) * CritRatingPerCritChance
 	if result[stats.Crit] != wantCrit {
-		t.Fatalf("Crit = %v, want %v (Agility and Intellect contributions summed)", result[stats.Crit], wantCrit)
+		t.Fatalf("Crit = %v, want %v (Agility only; Intellect must not contribute)", result[stats.Crit], wantCrit)
 	}
 }
 
-// A class absent from ClassCritStatSources (every class that wires a
-// base-stat-to-Crit dependency is listed — see TestCritStatSourcesArePinned)
-// gets neither dependency, and the helper must not panic on an unlisted
-// class.
-func TestCritStatSourcesNoOpForUnlistedClass(t *testing.T) {
+func TestAddCritStatDependenciesNoOpForUnknownClass(t *testing.T) {
 	character := &Character{}
 	AddCritStatDependencies(character, proto.Class_ClassUnknown)
 
@@ -90,28 +129,7 @@ func TestCritStatSourcesNoOpForUnlistedClass(t *testing.T) {
 		stats.Intellect: 100,
 	})
 	if result[stats.Crit] != 0 {
-		t.Fatalf("Crit = %v, want 0 for a class with no CritStatSources entry", result[stats.Crit])
-	}
-}
-
-// A single-source class (e.g. Rogue: Agility only) draws Crit from only
-// that stat — the Intellect it also has does not leak in, unlike a
-// hybrid's deliberate stacking in TestCritStatSourcesStackForHybrids.
-func TestCritStatSourcesSingleSourceDoesNotStack(t *testing.T) {
-	class := proto.Class_ClassRogue
-	agi, intel := 100.0, 200.0
-
-	character := &Character{}
-	AddCritStatDependencies(character, class)
-
-	result := character.SortAndApplyStatDependencies(stats.Stats{
-		stats.Agility:   agi,
-		stats.Intellect: intel,
-	})
-
-	wantCrit := agi * CritPerAgiAtLevel[class] * CritRatingPerCritChance
-	if result[stats.Crit] != wantCrit {
-		t.Fatalf("Crit = %v, want %v (Agility only; Intellect must not contribute)", result[stats.Crit], wantCrit)
+		t.Fatalf("Crit = %v, want 0 for ClassUnknown", result[stats.Crit])
 	}
 }
 
@@ -538,10 +556,9 @@ func TestEffectiveCharacterLevelClampsOutOfRange(t *testing.T) {
 	}
 }
 
-// wowhead's gear planner reports a different spell-crit-per-Intellect
-// rate at every level - a level-1 Paladin needs far less Intellect for 1%
-// crit than a level-60 one - unlike CritPerAgiAtLevel, which has no
-// per-level source and stays flat. This pins both the variation and the
+// The client reports a different spell-crit-per-Intellect rate at every
+// level - a level-1 Paladin needs far less Intellect for 1% crit than a
+// level-60 one, as CritPerAgiAtLevel does too. This pins both the variation and the
 // level-60 anchor (which must still match the pre-generator flat
 // CritPerIntAtLevel value, 0.0167, so AddCritStatDependencies's behavior
 // at level 60 is unchanged).

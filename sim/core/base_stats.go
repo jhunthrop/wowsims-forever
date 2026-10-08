@@ -185,24 +185,18 @@ var APPerAgility = map[proto.Class]float64{
 	proto.Class_ClassDruid:   1,
 }
 
-// Melee/Ranged crit agi scaling. Unconfirmed below 60: wowhead's gear
-// planner payload (base_stats_levels_auto_gen.go's source) carries a
-// per-level table for Intellect's spell-crit rate (see
-// SpellCritPerIntAtLevel) but none for Agility's physical-crit rate, so
-// this fork keeps its one hand-typed level-60 value for every level
-// rather than inventing a curve with no source. If a per-level physical
-// crit table is ever mined, this is the map a generator replaces.
-var CritPerAgiAtLevel = map[proto.Class]float64{
-	proto.Class_ClassUnknown: 0.0,
-	proto.Class_ClassWarrior: 0.0500,
-	proto.Class_ClassPaladin: 0.0506,
-	proto.Class_ClassHunter:  0.0189,
-	proto.Class_ClassRogue:   0.0345,
-	proto.Class_ClassPriest:  0.0500,
-	proto.Class_ClassShaman:  0.0508,
-	proto.Class_ClassMage:    0.0514,
-	proto.Class_ClassWarlock: 0.0500,
-	proto.Class_ClassDruid:   0.0500,
+// CritPerAgiAtLevel is the percent of crit chance one point of Agility
+// grants class at level, from the client's PlayerExpectedStat table
+// (base_stats_levels_auto_gen.go's critPerAgiByClassLevel). The rate is
+// higher at low levels (a level-30 warrior needs about 10 Agility per 1%,
+// a level-60 one 20). A class absent from the generated table
+// (ClassUnknown) grants none at any level.
+func CritPerAgiAtLevel(class proto.Class, level int32) float64 {
+	level = EffectiveCharacterLevel(level)
+	if perLevel, ok := critPerAgiByClassLevel[class]; ok {
+		return perLevel[level]
+	}
+	return 0
 }
 
 // Dodge agility scaling
@@ -219,62 +213,23 @@ var DodgePerAgiAtLevel = map[proto.Class]float64{
 	proto.Class_ClassDruid:   0.0500,
 }
 
-// CritStatSources names which primary stat(s) feed a class's unified Crit
-// stat via AddStatDependency. Pre-merge, Agility fed MeleeCrit and
-// Intellect fed SpellCrit as two independent pools; Forever unifies both
-// into one Crit stat (Task 4). research/08-stats.md §7 states the
-// baseline conversions ("agility→crit … intellect→spell crit") are
-// "entirely unpublished" for the unified model, so this keeps every
-// class's pre-merge sources rather than picking one. A class listed with
-// both sources true (Druid, Shaman, Paladin, Warlock, Hunter) stacks them
-// on the one Crit stat — unconfirmed until a later ruling measures it. A
-// class listed with only one (Rogue, Mage, Priest, Warrior) is unchanged
-// from before the merge: it converted only that stat and still does. All
-// nine classes that wire a base-stat-to-Crit dependency are listed here;
-// this table, plus AddCritStatDependencies below, is the single place a
-// later ruling edits, replacing nine duplicated AddStatDependency call
-// sites across sim/druid, sim/shaman, sim/paladin, sim/warlock,
-// sim/hunter, sim/rogue, sim/mage, sim/priest and sim/warrior. It does
-// not cover pet units, which borrow a different (non-owner) class's rate
+// AddCritStatDependencies wires character's Crit stat to both Agility and
+// Intellect for every class, at the client's per-level rates
+// (CritPerAgiAtLevel and SpellCritPerIntAtLevel at character.Level). A
+// class whose rate is 0 at a level simply adds 0: Warrior and Rogue have
+// no Intellect rate at any level. Pet units borrow another class's rate
 // and are wired directly at their own call sites.
-type CritStatSources struct {
-	Agility   bool
-	Intellect bool
-}
-
-var ClassCritStatSources = map[proto.Class]CritStatSources{
-	// unconfirmed: stacks Agility- and Intellect-derived Crit on the one
-	// unified stat, per the ruling above.
-	proto.Class_ClassDruid:   {Agility: true, Intellect: true},
-	proto.Class_ClassShaman:  {Agility: true, Intellect: true},
-	proto.Class_ClassPaladin: {Agility: true, Intellect: true},
-	proto.Class_ClassWarlock: {Agility: true, Intellect: true},
-	proto.Class_ClassHunter:  {Agility: true, Intellect: true},
-	// single-source, unchanged from before the merge.
-	proto.Class_ClassRogue:   {Agility: true},
-	proto.Class_ClassWarrior: {Agility: true},
-	proto.Class_ClassMage:    {Intellect: true},
-	proto.Class_ClassPriest:  {Intellect: true},
-}
-
-// AddCritStatDependencies wires character's Crit stat to whichever base
-// stat(s) ClassCritStatSources names for its class, at that table's rate.
-// See ClassCritStatSources' comment for the unconfirmed-hybrid-stacking
-// caveat this keeps in place from before the Hit/Crit merge.
 //
-// The Intellect side reads SpellCritPerIntAtLevel at character.Level: wowhead's
-// gear planner reports a different rate per level (a level-1 character
-// needs far less Intellect for 1% crit than a level-60 one), unlike the
-// Agility side, which has no per-level source and stays level-60 for
-// every level (CritPerAgiAtLevel's comment).
+// unconfirmed: Forever's one Crit stat is confirmed by Blizzard, but
+// whether a hybrid's Agility crit and Intellect crit both land in it, or
+// whether the game keeps two pools and unifies only item, talent and
+// racial crit, is unmeasured. The beta character sheet test (a hybrid with
+// an Agility item on and off, watching whether the one Crit number moves)
+// decides it. The magnitude at stake: Grace of Air's 77 Agility moved a
+// balance druid's Starfire crit 3.4 points in this model.
 func AddCritStatDependencies(character *Character, class proto.Class) {
-	src := ClassCritStatSources[class]
-	if src.Agility {
-		character.AddStatDependency(stats.Agility, stats.Crit, CritPerAgiAtLevel[class]*CritRatingPerCritChance)
-	}
-	if src.Intellect {
-		character.AddStatDependency(stats.Intellect, stats.Crit, SpellCritPerIntAtLevel(class, character.Level)*CritRatingPerCritChance)
-	}
+	character.AddStatDependency(stats.Agility, stats.Crit, CritPerAgiAtLevel(class, character.Level)*CritRatingPerCritChance)
+	character.AddStatDependency(stats.Intellect, stats.Crit, SpellCritPerIntAtLevel(class, character.Level)*CritRatingPerCritChance)
 }
 
 // allClasses lists every class the per-level tables (and the classAttack
@@ -307,12 +262,11 @@ func BaseStatsAtLevel(class proto.Class, level int32) stats.Stats {
 	return stats.Stats{}
 }
 
-// SpellCritPerIntAtLevel is the fraction of spell crit chance one point of
-// Intellect grants class at level, from wowhead's gear planner
-// (base_stats_levels_auto_gen.go). Unlike CritPerAgiAtLevel, wowhead does
-// carry a per-level table for this, so it varies by level rather than
-// being pinned to the level-60 value. A class absent from the generated
-// table (Warrior, Rogue, ClassUnknown) grants none at any level.
+// SpellCritPerIntAtLevel is the percent of spell crit chance one point of
+// Intellect grants class at level, from the client's PlayerExpectedStat
+// table (base_stats_levels_auto_gen.go's spellCritPerIntByClassLevel). A
+// class absent from the generated table (Warrior, Rogue, ClassUnknown)
+// grants none at any level.
 func SpellCritPerIntAtLevel(class proto.Class, level int32) float64 {
 	level = EffectiveCharacterLevel(level)
 	if perLevel, ok := spellCritPerIntByClassLevel[class]; ok {

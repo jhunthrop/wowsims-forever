@@ -106,18 +106,12 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 
 		// Warrior crit scaling.
 		//
-		// The Intellect line is a no-op and is kept only so the pet's
-		// two dependencies read as the pair the merge left behind:
-		// SpellCritPerIntAtLevel(ClassWarrior, _) is 0.0 at every level,
-		// and ClassCritStatSources lists the warrior as Agility-only — it
-		// is not one of that table's hybrids, so the earlier note here
-		// claiming the pet "stacks Agility- and Intellect-derived Crit
-		// ... same as the hybrid classes" described something that does
-		// not happen. unconfirmed: whether a Forever warrior-scaled pet
-		// should convert Intellect to Crit at all is unpublished; if it
-		// should, the coefficient belongs in SpellCritPerIntAtLevel, not
-		// here.
-		wp.AddStatDependency(stats.Agility, stats.Crit, core.CritPerAgiAtLevel[proto.Class_ClassWarrior]*core.CritRatingPerCritChance)
+		// The Intellect line is a no-op (the warrior row has no Intellect
+		// rate at any level) and is kept so the pet wires both dependencies
+		// exactly as AddCritStatDependencies does for a player.
+		// unconfirmed: whether a Forever warrior-scaled pet should convert
+		// Intellect to Crit at all is unpublished.
+		wp.AddStatDependency(stats.Agility, stats.Crit, core.CritPerAgiAtLevel(proto.Class_ClassWarrior, wp.Level)*core.CritRatingPerCritChance)
 		wp.AddStatDependency(stats.Intellect, stats.Crit, core.SpellCritPerIntAtLevel(proto.Class_ClassWarrior, wp.Level)*core.CritRatingPerCritChance)
 
 		// Imps generally don't melee

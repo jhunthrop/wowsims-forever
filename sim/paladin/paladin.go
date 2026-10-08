@@ -292,7 +292,7 @@ func NewPaladin(character *core.Character, options *proto.Player, paladinOptions
 	paladin.EnableManaBar()
 	paladin.AddStatDependency(stats.Strength, stats.AttackPower, core.APPerStrength[character.Class])
 	core.AddCritStatDependencies(&paladin.Character, character.Class)
-	paladin.AddStatDependency(stats.Agility, stats.Dodge, core.CritPerAgiAtLevel[character.Class]*core.CritRatingPerCritChance)
+	paladin.AddStatDependency(stats.Agility, stats.Dodge, core.DodgePerAgiAtLevel[character.Class]*core.DodgeRatingPerDodgeChance)
 
 	// Paladins get 1 block value per 20 str
 	paladin.PseudoStats.BlockValuePerStrength = 0.05
