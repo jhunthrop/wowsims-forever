@@ -77,5 +77,10 @@ func (paladin *Paladin) registerDivineFavor() {
 	paladin.AddMajorCooldown(core.MajorCooldown{
 		Spell: divineFavor,
 		Type:  core.CooldownTypeDPS,
+		// A healer spends it on the heal that must not fail, which only its
+		// rotation knows; autocasting it at the pull would waste it.
+		ShouldActivate: func(*core.Simulation, *core.Character) bool {
+			return !paladin.isHealer()
+		},
 	})
 }

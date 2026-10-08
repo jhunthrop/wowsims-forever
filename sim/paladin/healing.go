@@ -91,7 +91,10 @@ func (paladin *Paladin) registerDirectHealRank(heal directHeal, rankNumber int, 
 		PushbackReduction: paladin.spiritualFocusPushbackReduction(heal.classMask),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseHealing := rank.heal.Roll(sim, casterLevel) + paladin.blessingOfLightBonus(target, heal.blessing)
+			// The blessing is bonus healing for this one spell, so it is
+			// scaled by the spell's coefficient like healing power is.
+			bonusHealing := paladin.blessingOfLightBonus(target, heal.blessing)
+			baseHealing := rank.heal.Roll(sim, casterLevel) + heal.coefficient*bonusHealing
 			spell.CalcAndDealHealing(sim, target, baseHealing, spell.OutcomeHealingCrit)
 		},
 	})

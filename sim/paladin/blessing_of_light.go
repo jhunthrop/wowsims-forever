@@ -15,7 +15,7 @@ const (
 	blessingOfLightHealKinds
 )
 
-// blessingOfLightBonus is the flat healing the blessing adds to each heal.
+// blessingOfLightBonus is the bonus healing the blessing gives each heal.
 type blessingOfLightBonus [blessingOfLightHealKinds]float64
 
 type blessingOfLightRank struct {
@@ -43,8 +43,11 @@ var greaterBlessingOfLight = blessingOfLightRank{
 
 // registerBlessingOfLight registers the blessing as a buff on the healed
 // unit. Assumption: the client states the bonus as a bare amount ("up to
-// 400") with no coefficient, so it is added to the heal's base healing in
-// full, outside the spell's coefficient, as Classic's blessing was.
+// 400") with no coefficient of its own, which is how it states every bonus
+// healing source, so it counts as bonus healing for that spell and is
+// scaled by the spell's coefficient (Holy Light 0.714, Flash of Light
+// 0.429) like healing power. The client states no level penalty for a
+// downranked heal either, so none is modelled.
 func (paladin *Paladin) registerBlessingOfLight() {
 	paladin.blessingOfLightAuras = paladin.NewRaidAuraArray(func(target *core.Unit) *core.Aura {
 		return target.RegisterAura(core.Aura{
