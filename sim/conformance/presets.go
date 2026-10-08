@@ -277,6 +277,19 @@ var Presets = []Preset{
 		},
 	},
 	{
+		Label:           "RestorationShaman",
+		ClientClassSlug: "shaman",
+		Class:           proto.Class_ClassShaman,
+		Race:            proto.Race_RaceTroll,
+		// The whole Restoration tree, 51 points.
+		Talents: "--5533523315513151",
+		SpecOptions: &proto.Player_RestorationShaman{
+			RestorationShaman: &proto.RestorationShaman{
+				Options: &proto.RestorationShaman_Options{},
+			},
+		},
+	},
+	{
 		Label:           "CombatSwordsRogue",
 		ClientClassSlug: "rogue",
 		Class:           proto.Class_ClassRogue,

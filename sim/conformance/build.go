@@ -17,6 +17,7 @@ import (
 	dpsrogue "github.com/wowsims/classic/sim/rogue/dps_rogue"
 	"github.com/wowsims/classic/sim/shaman/elemental"
 	"github.com/wowsims/classic/sim/shaman/enhancement"
+	shamanrestoration "github.com/wowsims/classic/sim/shaman/restoration"
 	"github.com/wowsims/classic/sim/shaman/warden"
 	dpswarlock "github.com/wowsims/classic/sim/warlock/dps"
 	dpswarrior "github.com/wowsims/classic/sim/warrior/dps_warrior"
@@ -45,6 +46,7 @@ func registerAll() {
 	elemental.RegisterElementalShaman()
 	enhancement.RegisterEnhancementShaman()
 	warden.RegisterWardenShaman()
+	shamanrestoration.RegisterRestorationShaman()
 	dpsrogue.RegisterDpsRogue()
 }
 

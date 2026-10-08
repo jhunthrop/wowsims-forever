@@ -136,7 +136,9 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "shaman", Label: "Stormstrike", Tree: 1, Pos: 13},
 	{ClassSlug: "shaman", Label: "Rage of the Farseer", Tree: 1, Pos: 18},
 	{ClassSlug: "shaman", Label: "Water Shield", Tree: 2, Pos: 9},
+	{ClassSlug: "shaman", Label: "Mana Tide Totem", Tree: 2, Pos: 12, Preset: "RestorationShaman"},
 	{ClassSlug: "shaman", Label: "Nature's Swiftness", Tree: 2, Pos: 14},
+	{ClassSlug: "shaman", Label: "Riptide", Tree: 2, Pos: 16, Preset: "RestorationShaman"},
 
 	// Rogue (Assassination 17, Combat 17, Subtlety 19).
 	{ClassSlug: "rogue", Label: "Cold Blood", Tree: 0, Pos: 11},

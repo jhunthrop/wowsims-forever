@@ -24,7 +24,7 @@ import (
 	// healingPriest "github.com/wowsims/classic/sim/priest/healing"
 	"github.com/wowsims/classic/sim/priest/shadow"
 
-	// restoShaman "github.com/wowsims/classic/sim/shaman/restoration"
+	restoShaman "github.com/wowsims/classic/sim/shaman/restoration"
 	dpsWarlock "github.com/wowsims/classic/sim/warlock/dps"
 	dpsWarrior "github.com/wowsims/classic/sim/warrior/dps_warrior"
 	tankWarrior "github.com/wowsims/classic/sim/warrior/tank_warrior"
@@ -52,7 +52,7 @@ func registerAll() {
 	elemental.RegisterElementalShaman()
 	enhancement.RegisterEnhancementShaman()
 	warden.RegisterWardenShaman()
-	// restoShaman.RegisterRestorationShaman()
+	restoShaman.RegisterRestorationShaman()
 	hunter.RegisterHunter()
 	mage.RegisterMage()
 	// healingPriest.RegisterHealingPriest()
