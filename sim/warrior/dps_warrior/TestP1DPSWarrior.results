@@ -47,8 +47,8 @@ character_stats_results: {
 stat_weights_results: {
  key: "TestP1DPSWarrior-Phase1-StatWeights-Default"
  value: {
-  weights: 1.12341
-  weights: 0.37622
+  weights: 1.12738
+  weights: 0.46863
   weights: 0
   weights: 0
   weights: 0
@@ -60,11 +60,11 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 15.27731
-  weights: 5.77447
+  weights: 15.86041
+  weights: 7.24126
   weights: 0
   weights: 0
-  weights: 0.44403
+  weights: 0.44561
   weights: 0
   weights: 0
   weights: 0
@@ -93,78 +93,78 @@ stat_weights_results: {
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-AllItems-BattlegearofHeroism"
  value: {
-  dps: 1298.92855
-  tps: 1115.68889
+  dps: 1305.70468
+  tps: 1121.66938
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-AllItems-BattlegearofMight"
  value: {
-  dps: 1240.57708
-  tps: 1065.62285
+  dps: 1257.00878
+  tps: 1079.23118
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-AllItems-BattlegearofWrath"
  value: {
-  dps: 1228.53656
-  tps: 1055.81874
+  dps: 1223.01304
+  tps: 1052.81751
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-AllItems-Champion'sBattlearmor"
  value: {
-  dps: 1327.24422
-  tps: 1139.18316
+  dps: 1336.27784
+  tps: 1146.64476
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-AllItems-Conqueror'sBattlegear"
  value: {
-  dps: 1527.54666
-  tps: 1304.73305
+  dps: 1531.49324
+  tps: 1307.60136
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-AllItems-Dreadnaught'sBattlegear"
  value: {
-  dps: 1274.17727
-  tps: 1094.06284
+  dps: 1280.5964
+  tps: 1099.74271
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-AllItems-FieldMarshal'sBattlegear"
  value: {
-  dps: 1415.55734
-  tps: 1212.65231
+  dps: 1422.07047
+  tps: 1218.29375
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-AllItems-LieutenantCommander'sBattlearmor"
  value: {
-  dps: 1327.24422
-  tps: 1139.18316
+  dps: 1336.27784
+  tps: 1146.64476
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-AllItems-Vindicator'sBattlegear"
  value: {
-  dps: 1472.9709
-  tps: 1261.21759
+  dps: 1483.30273
+  tps: 1270.89282
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-AllItems-Warlord'sBattlegear"
  value: {
-  dps: 1415.55734
-  tps: 1212.65231
+  dps: 1422.07047
+  tps: 1218.29375
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-Average-Default"
  value: {
-  dps: 1540.45486
-  tps: 1317.12999
+  dps: 1548.57116
+  tps: 1324.00946
  }
 }
 dps_results: {
@@ -338,7 +338,7 @@ dps_results: {
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 1185.99249
-  tps: 1018.58677
+  dps: 1180.58497
+  tps: 1014.29866
  }
 }

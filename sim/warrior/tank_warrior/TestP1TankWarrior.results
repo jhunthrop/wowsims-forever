@@ -47,8 +47,8 @@ character_stats_results: {
 stat_weights_results: {
  key: "TestP1TankWarrior-Phase1-StatWeights-Default"
  value: {
-  weights: 0.28308
-  weights: 0.20025
+  weights: 0.28384
+  weights: 0.17542
   weights: 0
   weights: 0
   weights: 0
@@ -60,24 +60,24 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 7.19805
-  weights: 3.36365
+  weights: 8.47036
+  weights: 3.41617
   weights: 0
   weights: 0
-  weights: 0.10517
+  weights: 0.10604
   weights: 0
   weights: 0
-  weights: 13.18966
+  weights: 13.65856
   weights: 0
   weights: 0
   weights: 0
-  weights: 0.00586
+  weights: -0.00193
   weights: 0
-  weights: 0.05923
-  weights: 0.07658
-  weights: 0.20686
-  weights: -0.23889
-  weights: 0.19984
+  weights: 0.15116
+  weights: -0.16733
+  weights: 0.2877
+  weights: -1.1402
+  weights: 0.37739
   weights: 0
   weights: 0
   weights: 0
@@ -93,79 +93,79 @@ stat_weights_results: {
 dps_results: {
  key: "TestP1TankWarrior-Phase1-AllItems-BattlegearofHeroism"
  value: {
-  dps: 436.5127
-  tps: 761.30553
+  dps: 435.68928
+  tps: 759.45369
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-AllItems-BattlegearofMight"
  value: {
-  dps: 421.45208
-  tps: 735.64985
+  dps: 422.26711
+  tps: 736.72831
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-AllItems-BattlegearofWrath"
  value: {
-  dps: 425.60689
-  tps: 747.19698
+  dps: 426.06862
+  tps: 748.28476
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-AllItems-Champion'sBattlearmor"
  value: {
-  dps: 421.64154
-  tps: 736.05652
+  dps: 422.8535
+  tps: 737.74824
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-AllItems-Conqueror'sBattlegear"
  value: {
-  dps: 446.23129
-  tps: 780.42146
+  dps: 445.52549
+  tps: 778.73074
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-AllItems-Dreadnaught'sBattlegear"
  value: {
-  dps: 465.31319
-  tps: 812.58133
+  dps: 469.57367
+  tps: 820.11049
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-AllItems-FieldMarshal'sBattlegear"
  value: {
-  dps: 446.40745
-  tps: 778.89076
+  dps: 449.22963
+  tps: 782.42174
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-AllItems-LieutenantCommander'sBattlearmor"
  value: {
-  dps: 421.64154
-  tps: 736.05652
+  dps: 422.8535
+  tps: 737.74824
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-AllItems-Vindicator'sBattlegear"
  value: {
-  dps: 414.30939
-  tps: 729.35632
+  dps: 412.13162
+  tps: 724.68354
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-AllItems-Warlord'sBattlegear"
  value: {
-  dps: 446.40745
-  tps: 778.89076
+  dps: 449.22963
+  tps: 782.42174
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-Average-Default"
  value: {
-  dps: 524.76077
-  tps: 1047.6172
-  dtps: 388.16007
+  dps: 524.62421
+  tps: 1046.08433
+  dtps: 388.56242
  }
 }
 dps_results: {
@@ -339,8 +339,8 @@ dps_results: {
 dps_results: {
  key: "TestP1TankWarrior-Phase1-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 622.49893
-  tps: 1234.36736
-  dtps: 362.63771
+  dps: 620.82314
+  tps: 1226.30751
+  dtps: 361.45901
  }
 }
