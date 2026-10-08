@@ -16,13 +16,16 @@ import (
 // by 4/8 sec." Neither spell is in the client tables, so every number
 // here comes from the live text and the brief.
 //
-// unconfirmed: whether Shifting Power is on the global cooldown; it is
-// treated as an instant on the GCD, like every other shapeshift.
+// Build 1.60.1.70291 added the spell to the tables: 16 s cooldown, 55% of
+// base mana, 40 energy, a 1 s global cooldown, learned at level 1.
 const (
-	shiftingPowerSpellID               = 1322605
-	shiftingPowerManaFractionOfBase    = 0.55
-	ShiftingPowerEnergy                = 40.0
-	shiftingPowerCooldown              = 16 * time.Second
+	shiftingPowerSpellID            = 1322605
+	shiftingPowerManaFractionOfBase = 0.55
+	ShiftingPowerEnergy             = 40.0
+	shiftingPowerCooldown           = 16 * time.Second
+	// shiftingPowerGCD is spell 1322605's StartRecoveryTime in build
+	// 1.60.1.70291, a second shorter than the shapeshifts' 1.5 s.
+	shiftingPowerGCD                   = time.Second
 	improvedShiftingPowerPerRankCDDrop = 4 * time.Second
 	improvedShiftingPowerMaxRank       = 2
 )
@@ -44,6 +47,7 @@ func (druid *Druid) registerShiftingPowerSpell() {
 		ActionID:       core.ActionID{SpellID: shiftingPowerSpellID},
 		ClassSpellMask: DruidSpellMaskShiftingPower,
 		Flags:          core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
+		RequiredLevel:  1,
 
 		ManaCost: core.ManaCostOptions{
 			BaseCost:   shiftingPowerManaFractionOfBase,
@@ -51,7 +55,7 @@ func (druid *Druid) registerShiftingPowerSpell() {
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
+				GCD: shiftingPowerGCD,
 			},
 			IgnoreHaste: true,
 			CD: core.Cooldown{

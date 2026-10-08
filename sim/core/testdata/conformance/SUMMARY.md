@@ -109,6 +109,35 @@ mismatch count is almost entirely one systemic cause (every totem's
 GCD, see below), not 232 independent defects - see the shaman section's
 lead note.
 
+## Build 1.60.1.70291 (2026-10-08)
+
+The client copies, set rows, gametables and spellconst constants moved from
+1.60.1.70009 to 1.60.1.70291 (the beta client four builds on). The goldens
+were regenerated first; what moved, at level 60:
+
+- Warrior: 2 mismatches to 0 (Berserker Rage is level 30 in the client, as the
+  engine already had it). Bloodthirst 45 percent, Raging Blows (Cleave and
+  Whirlwind cost -3), Dual Wield Specialization and Booming Voice follow the
+  October hotfix values the engine already carried; the client now states them.
+- Hunter: the 8 trap and Sniper Shot mismatches were report-side (the client
+  renamed the Freezing and Immolation trap payload spells to the trap's own
+  name; Sniper Shot gained a 10 s range modifier, declared unsimulated).
+- Druid: Shifting Power is now a client spell (16 s, 55 percent of base mana,
+  40 energy, 1 s GCD, level 1) and is a talent-gated conformance row; the
+  Tier 1 feral 5P and Howling Idol shorten it by 1 s (were 3 s on Tiger's Fury).
+  Bear Form threat 1.3 to 1.5; Wolfshead Helm 20 to 5 energy.
+- Shaman: Water Shield has no cast cooldown; its proc interval is the aura
+  row's 3.5 s. Mana Tide Totem rank 1 is learned at 25.
+- Priest: Lesser Heal, Heal and Penance heal ladders, Penance coefficient 0.19.
+- Damage differences created by the new low-rank rolls (Wrath, Lightning Bolt,
+  Shadow Bolt, Lesser Heal, Heal, Penance) are all fixed: Differing is 0.
+
+Not modelled and left as the goldens carry them: Lunar Fire and Umbral Fire
+(no engine spell), Thorns, Retribution Aura, Flametongue Weapon's emptied
+enchant effects (the tables do not say what replaces them), Natural Instinct's
+spell healing, Furor's Bear Form forfeit text, Gore Drinker, Lingering Rage and
+Rule of Rage (no sim effect or no engine talent).
+
 ## Likely-cause vocabulary
 
 Every mismatch below is tagged with one of:
