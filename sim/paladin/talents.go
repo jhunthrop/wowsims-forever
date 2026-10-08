@@ -57,8 +57,20 @@ func (paladin *Paladin) improvedSoR() float64 {
 	return 1
 }
 
+// benedictionMaxRanks and benedictionCostReductionPerRank: Benediction is
+// "Reduces the Mana cost of all instant cast spells and abilities by 2%" a
+// rank, 10% at 5. The client's one spell row (20101, a -10 cost modifier at
+// the last rank) states the total.
+const (
+	benedictionMaxRanks                   = 5
+	benedictionCostReductionPerRank       = 2
+	benedictionClientSpellID              = 20101
+	benedictionFullCostPercent      int32 = 100
+)
+
+// benediction is the percent of its base cost an instant spell costs.
 func (paladin *Paladin) benediction() int32 {
-	return []int32{100, 97, 94, 91, 88, 85}[paladin.Talents.Benediction]
+	return benedictionFullCostPercent - benedictionCostReductionPerRank*paladin.Talents.Benediction
 }
 
 // getWeaponSpecializationModifier is the damage multiplier of the weapon
