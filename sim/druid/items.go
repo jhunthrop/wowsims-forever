@@ -93,7 +93,12 @@ func init() {
 	// https://www.wowhead.com/classic/item=23198/idol-of-brutality
 	// Equip: Reduces the rage cost of Maul and Swipe by 3.
 	core.NewItemEffect(IdolOfBrutality, func(agent core.Agent) {
-		// Implemented in maul.go and swipe.go
+		druid := agent.(DruidAgent).GetDruid()
+		druid.OnSpellRegistered(func(spell *core.Spell) {
+			if spell.SpellCode == SpellCode_DruidMaul || spell.SpellCode == SpellCode_DruidSwipe {
+				spell.Cost.FlatModifier -= 3
+			}
+		})
 	})
 
 	// https://www.wowhead.com/classic/item=19340/rune-of-metamorphosis

@@ -34,6 +34,10 @@ const (
 	SpellCode_DruidShred
 	SpellCode_DruidStarfire
 	SpellCode_DruidWrath
+	SpellCode_DruidMaul
+	SpellCode_DruidSwipe
+	SpellCode_DruidLacerate
+	SpellCode_DruidPrimalBite
 )
 
 // DruidSpellMask* identify the subset of this package's spells that a
@@ -53,6 +57,10 @@ const (
 	DruidSpellMaskStarfire
 	DruidSpellMaskWrath
 	DruidSpellMaskTigersFury
+	DruidSpellMaskMaul
+	DruidSpellMaskSwipe
+	DruidSpellMaskLacerate
+	DruidSpellMaskPrimalBite
 )
 
 const (
@@ -71,7 +79,8 @@ const (
 
 	// Every Cat Form melee special this package registers, for
 	// Predatory Instincts' "melee abilities".
-	DruidSpellMaskMeleeAbilities = DruidSpellMaskClaw | DruidSpellMaskRake | DruidSpellMaskRavage | DruidSpellMaskShred | DruidSpellMaskFerociousBite
+	DruidSpellMaskMeleeAbilities = DruidSpellMaskClaw | DruidSpellMaskRake | DruidSpellMaskRavage | DruidSpellMaskShred | DruidSpellMaskFerociousBite |
+		DruidSpellMaskMaul | DruidSpellMaskSwipe | DruidSpellMaskLacerate | DruidSpellMaskPrimalBite
 
 	// Claw, Rake, Ravage and Shred: the Cat Form specials that generate
 	// a Combo Point, for Berserk's crit bonus and Blood Frenzy's bonus
@@ -108,10 +117,12 @@ type Druid struct {
 	Innervate            *DruidSpell
 	InsectSwarm          []*DruidSpell
 	Languish             *DruidSpell
+	Lacerate             *DruidSpell
 	Maul                 *DruidSpell
 	MaulQueueSpell       *DruidSpell
 	Moonfire             []*DruidSpell
 	NaturesSwiftness     *DruidSpell
+	PrimalBite           *DruidSpell
 	Prowl                *DruidSpell
 	Rebirth              *DruidSpell
 	Rake                 *DruidSpell
@@ -183,10 +194,6 @@ func (druid *Druid) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
 	}
 }
 
-// func (druid *Druid) TryMaul(sim *core.Simulation, mhSwingSpell *core.Spell) *core.Spell {
-// 	return druid.MaulReplaceMH(sim, mhSwingSpell)
-// }
-
 func (druid *Druid) RegisterSpell(formMask DruidForm, config core.SpellConfig) *DruidSpell {
 	prev := config.ExtraCastCondition
 	prevModify := config.Cast.ModifyCast
@@ -236,11 +243,7 @@ func (druid *Druid) RegisterBalanceSpells() {
 // TODO: Classic feral
 func (druid *Druid) RegisterFeralCatSpells() {
 	druid.registerCatFormSpell()
-	// druid.registerBearFormSpell()
-	// druid.registerEnrageSpell()
 	druid.registerFerociousBiteSpell()
-	// druid.registerMangleBearSpell()
-	// druid.registerMaulSpell()
 	druid.registerProwlAura()
 	druid.registerProwlSpell()
 	druid.registerRakeSpell()
@@ -249,12 +252,9 @@ func (druid *Druid) RegisterFeralCatSpells() {
 	druid.registerShiftingPowerSpell()
 	druid.registerShredSpell()
 	druid.registerClawSpell()
-	// druid.registerSwipeBearSpell()
 	druid.registerTigersFurySpell()
-	// Cat Form is not learned until level 20 (spellconst: spell 768) and
-	// Bear Form's own damage kit is not modeled in this package (Maul
-	// lives in the excluded sim/druid/_maul.go), so a leveling feral
-	// druid below 20 has nothing else to cast; register the same
+	// Cat Form is not learned until level 20 (spellconst: spell 768), so a
+	// leveling feral druid below 20 has nothing else to cast; register the same
 	// baseline caster kit RegisterBalanceSpells does. Both self-gate by
 	// their own per-rank learn level exactly like the Cat-form spells
 	// above, and RegisterSpell's existing Humanoid-form auto-unshift
@@ -264,19 +264,18 @@ func (druid *Druid) RegisterFeralCatSpells() {
 	druid.registerWrathSpell()
 }
 
-// TODO: Classic feral tank
+// RegisterFeralTankSpells registers the Bear Form kit. Spells self-gate by
+// their own learn levels, so a leveling bear has what its level has learned.
 func (druid *Druid) RegisterFeralTankSpells() {
-	// druid.registerBarkskinCD()
-	// druid.registerBerserkCD()
-	// druid.registerBearFormSpell()
-	// druid.registerDemoralizingRoarSpell()
-	// druid.registerEnrageSpell()
-	// druid.registerFrenziedRegenerationCD()
-	// druid.registerMangleBearSpell()
-	// druid.registerMaulSpell()
-	// druid.registerRakeSpell()
-	// druid.registerRipSpell()
-	// druid.registerSwipeBearSpell()
+	druid.registerBearFormSpell()
+	druid.registerEnrageSpell()
+	druid.registerMaulSpell()
+	druid.registerSwipeBearSpell()
+	druid.registerLacerateSpell()
+	druid.registerPrimalBiteSpell()
+	druid.registerDemoralizingRoarSpell()
+	druid.registerFrenziedRegenerationCD()
+	druid.registerBarkskinCD()
 }
 
 // BreakProwl deactivates Prowl if it is active. This must be called from

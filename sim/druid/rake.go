@@ -66,7 +66,7 @@ func (druid *Druid) newRakeSpellConfig(rank int) core.SpellConfig {
 
 		ClientBaseDamage: initialDamage.Range(casterLevel),
 
-		DamageMultiplierAdditive: 1 + 0.1*float64(druid.Talents.SavageFury),
+		DamageMultiplierAdditive: druid.savageFuryDamageMultiplier(),
 		DamageMultiplier:         1,
 		ThreatMultiplier:         1,
 

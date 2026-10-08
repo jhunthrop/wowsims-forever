@@ -25,10 +25,12 @@ func RegisterFeralTankDruid() {
 
 func NewFeralTankDruid(character *core.Character, options *proto.Player) *FeralTankDruid {
 	tankOptions := options.GetFeralTankDruid()
-	selfBuffs := druid.SelfBuffs{}
+	if tankOptions == nil || tankOptions.Options == nil {
+		panic("Feral Tank Druid needs its options")
+	}
 
 	bear := &FeralTankDruid{
-		Druid:   druid.New(character, druid.Bear, selfBuffs, options.TalentsString),
+		Druid:   druid.New(character, druid.Bear, druid.SelfBuffs{}, options.TalentsString),
 		Options: tankOptions.Options,
 	}
 
@@ -38,23 +40,27 @@ func NewFeralTankDruid(character *core.Character, options *proto.Player) *FeralT
 	}
 
 	bear.EnableRageBar(core.RageBarOptions{
-		StartingRage:   bear.Options.StartingRage,
-		RageMultiplier: 1,
+		StartingRage:          bear.Options.StartingRage,
+		DamageDealtMultiplier: 1,
+		DamageTakenMultiplier: 1,
 	})
 
 	bear.EnableAutoAttacks(bear, core.AutoAttackOptions{
 		// Base paw weapon.
 		MainHand:       bear.GetBearWeapon(),
 		AutoSwingMelee: true,
-		ReplaceMHSwing: bear.TryMaul,
+		ReplaceMHSwing: func(sim *core.Simulation, mhSwingSpell *core.Spell) *core.Spell {
+			return bear.ReplaceBearMHFunc(sim, mhSwingSpell)
+		},
 	})
-	bear.ReplaceBearMHFunc = bear.TryMaul
+	bear.ReplaceBearMHFunc = func(_ *core.Simulation, mhSwingSpell *core.Spell) *core.Spell {
+		return mhSwingSpell
+	}
 
-	healingModel := options.HealingModel
-	if healingModel != nil {
-		if healingModel.InspirationUptime > 0.0 {
-			core.ApplyInspiration(bear.GetCharacter(), healingModel.InspirationUptime)
-		}
+	bear.PseudoStats.FeralCombatEnabled = true
+
+	if healingModel := options.HealingModel; healingModel != nil && healingModel.InspirationUptime > 0 {
+		core.ApplyInspiration(bear.GetCharacter(), healingModel.InspirationUptime)
 	}
 
 	return bear
@@ -77,7 +83,7 @@ func (bear *FeralTankDruid) Initialize() {
 
 func (bear *FeralTankDruid) Reset(sim *core.Simulation) {
 	bear.Druid.Reset(sim)
-	bear.Druid.ClearForm(sim)
+	bear.CancelShapeshift(sim)
 	bear.BearFormAura.Activate(sim)
-	bear.Druid.PseudoStats.Stunned = false
+	bear.PseudoStats.Stunned = false
 }

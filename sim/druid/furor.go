@@ -8,7 +8,6 @@ import "time"
 // second you spent not in Bear Form, Cat Form, or Dire Bear Form, up to a
 // maximum of 20 Energy." Every figure scales with the rank. The cap is read
 // as applying to the whole refill, so rank 5 refills at most to the 100 bar.
-// (The Bear Form rage half is not modeled: Bear Form is not registered.)
 const (
 	furorPercentOfEnergyPerRank = 20.0
 	furorEnergyPerSecondPerRank = 2.0
@@ -25,4 +24,18 @@ func furorCatFormEnergy(rank int32, lastCatEnergy float64, outOfForm time.Durati
 	r := float64(rank)
 	regained := furorPercentOfEnergyPerRank*r*lastCatEnergy/100 + furorEnergyPerSecondPerRank*r*outOfForm.Seconds()
 	return min(regained, furorMaxEnergyPerRank*r)
+}
+
+// Furor's Bear Form half, same node: "Gives you a 100% chance to gain 10
+// Rage when you shapeshift into Bear Form or Dire Bear Form" at rank 5, 20%
+// a rank.
+const (
+	furorBearFormRageChancePerRank = 0.2
+	furorBearFormRage              = 10.0
+)
+
+// furorBearFormRageChance is the chance a shift into Bear Form pays
+// furorBearFormRage at the given Furor rank.
+func furorBearFormRageChance(rank int32) float64 {
+	return min(max(furorBearFormRageChancePerRank*float64(rank), 0), 1)
 }
