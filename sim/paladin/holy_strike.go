@@ -94,18 +94,19 @@ func (paladin *Paladin) registerHolyStrike() {
 		flatDamage := HolyStrikeFlatDamage[i+1]
 		casterLevel := int(paladin.Level)
 
-		damageMultiplier := rank.percentOfWeapon / 100
+		damageMultiplier := rank.percentOfWeapon / 100 * paladin.getWeaponSpecializationModifier()
 		if hasSacredArbiter {
 			damageMultiplier *= holyStrikeSacredArbiterDamageMultiplier
 		}
 
 		paladin.RegisterSpell(core.SpellConfig{
-			SpellCode:   SpellCode_PaladinHolyStrike,
-			ActionID:    core.ActionID{SpellID: rank.spellID},
-			SpellSchool: core.SpellSchoolHoly,
-			DefenseType: core.DefenseTypeMelee,
-			ProcMask:    core.ProcMaskMeleeMHSpecial,
-			Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+			SpellCode:      SpellCode_PaladinHolyStrike,
+			ClassSpellMask: PaladinSpellMaskHolyStrike,
+			ActionID:       core.ActionID{SpellID: rank.spellID},
+			SpellSchool:    core.SpellSchoolHoly,
+			DefenseType:    core.DefenseTypeMelee,
+			ProcMask:       core.ProcMaskMeleeMHSpecial,
+			Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
 
 			RequiredLevel: int(rank.level),
 			Rank:          i + 1,
@@ -128,6 +129,7 @@ func (paladin *Paladin) registerHolyStrike() {
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				baseDamage := flatDamage.Roll(sim, casterLevel) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 				result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+				paladin.activateIronCreed(sim)
 
 				if hasSacredArbiter && result.Landed() {
 					for _, judgementAura := range target.GetAurasWithTag(core.JudgementAuraTag) {

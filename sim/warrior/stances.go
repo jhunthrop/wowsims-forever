@@ -119,8 +119,15 @@ func (warrior *Warrior) registerBattleStanceAura() {
 	})
 }
 
+// Defensive Stance Passive (client spell 7376): "-10%" damage taken and
+// damage dealt, "+30%" threat, each an aura on every school.
+const (
+	defensiveStanceDamageMultiplier = 0.9
+	defensiveStanceThreatBonus      = 0.3
+)
+
 func (warrior *Warrior) registerDefensiveStanceAura() {
-	warrior.defensiveStanceThreatMultiplier = 1.3 * defianceThreatMultiplier[rankIndex(warrior.Talents.Defiance, defianceThreatMultiplier[:])]
+	warrior.defensiveStanceThreatMultiplier = 1 + defensiveStanceThreatBonus + warrior.defianceThreat()
 
 	warrior.DefensiveStanceAura = warrior.RegisterAura(core.Aura{
 		Label:    "Defensive Stance",
@@ -130,13 +137,13 @@ func (warrior *Warrior) registerDefensiveStanceAura() {
 	warrior.DefensiveStanceAura.NewExclusiveEffect(stanceEffectCategory, true, core.ExclusiveEffect{
 		OnGain: func(ee *core.ExclusiveEffect, sim *core.Simulation) {
 			ee.Aura.Unit.PseudoStats.ThreatMultiplier *= warrior.defensiveStanceThreatMultiplier
-			ee.Aura.Unit.PseudoStats.DamageDealtMultiplier *= 0.9
-			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier *= 0.9
+			ee.Aura.Unit.PseudoStats.DamageDealtMultiplier *= defensiveStanceDamageMultiplier
+			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier *= defensiveStanceDamageMultiplier
 		},
 		OnExpire: func(ee *core.ExclusiveEffect, sim *core.Simulation) {
 			ee.Aura.Unit.PseudoStats.ThreatMultiplier /= warrior.defensiveStanceThreatMultiplier
-			ee.Aura.Unit.PseudoStats.DamageDealtMultiplier /= 0.9
-			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier /= 0.9
+			ee.Aura.Unit.PseudoStats.DamageDealtMultiplier /= defensiveStanceDamageMultiplier
+			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier /= defensiveStanceDamageMultiplier
 		},
 	})
 }
@@ -158,8 +165,7 @@ func (warrior *Warrior) registerBerserkerStanceAura() {
 			// Divide, not multiply: this line read `*= 1.1` and so
 			// compounded +10% damage taken on every stance change
 			// instead of undoing the OnGain. Pre-existing at master;
-			// only the tank suite would show it, and that suite is
-			// skipped awaiting the Forever talent rewrite.
+			// only a stance-dancing tank shows it.
 			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier /= 1.1
 			ee.Aura.Unit.AddStatDynamic(sim, stats.Crit, -core.CritRatingPerCritChance*3)
 		},

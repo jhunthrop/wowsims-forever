@@ -71,48 +71,17 @@ func (druid *Druid) ApplyTalents() {
 	druid.applyPredatoryInstincts()
 	druid.registerBerserkCD()
 
-	druid.ApplyEquipScaling(stats.Armor, druid.ThickHideMultiplier())
+	druid.applyHeartOfTheWildIntellect()
 
-	if druid.Talents.HeartOfTheWild > 0 {
-		bonus := 0.04 * float64(druid.Talents.HeartOfTheWild)
-		druid.MultiplyStat(stats.Intellect, 1.0+bonus)
-	}
+	druid.applyFeralDodge()
+	druid.applyNaturalReaction()
 
-	// Feral Swiftness (node 104943): Cat Form movement speed and dodge
-	// chance. Movement speed changes no cast or cost number, and this
-	// DPS sim does not model incoming attacks dodging off the player
-	// character, so dodge chance changes nothing here either.
-	_ = druid.Talents.FeralSwiftness
-
-	// Feral Instinct (node 104940): +10/20/30% Swipe damage and reduced
-	// Prowl detection radius. Swipe is a Bear Form ability - Bear
-	// Form's own damage kit is not modeled in this package (see
-	// RegisterFeralCatSpells's comment above) - and detection radius
-	// has no sim-side mechanic.
-	_ = druid.Talents.FeralInstinct
-
-	// Brutal Impact (node 104941): longer Bash/Pounce stuns and a
-	// shorter Bash cooldown. Bash is a crowd-control ability this
-	// package does not register.
-	_ = druid.Talents.BrutalImpact
-
-	// Feral Charge (node 104944): a Bear/Dire Bear Form gap closer and
-	// interrupt. Bear Form's own damage kit is not modeled in this
-	// package.
-	_ = druid.Talents.FeralCharge
-
-	// Primal Bite (node 104949): a new Bear Form
-	// finishing move, Rage-costed (spellconst/druid.json's cost_type 1
-	// on spell 407995). Bear Form's own damage kit is not modeled in
-	// this package, so registering it would be a spell no rotation can
-	// ever reach - dead code this fork's conventions ask to delete
-	// rather than add.
-	_ = druid.Talents.PrimalBite
-
-	// Natural Reaction (node 104954): Bear Form dodge chance and a
-	// chance to gain Rage on dodge. Bear Form's own damage kit is not
-	// modeled in this package.
-	_ = druid.Talents.NaturalReaction
+	// Feral Instinct (swipe.go), Brutal Impact (Bash stun duration and
+	// cooldown: a crowd-control ability the tank sim has no fight use
+	// for), Feral Charge (a gap closer), Shredding Attacks, Ferocity and
+	// Savage Fury (read by the abilities they discount) are accounted for
+	// in the ability files.
+	_, _ = druid.Talents.BrutalImpact, druid.Talents.FeralCharge
 
 	// Restoration
 	druid.applyFuror()
@@ -141,21 +110,6 @@ func (druid *Druid) ApplyTalents() {
 	// anything to modify.
 	_, _, _, _ = druid.Talents.GiftOfNature, druid.Talents.GiftOfTheEarthmother, druid.Talents.TranquilSpirit, druid.Talents.ImprovedRejuvenation
 	_, _, _, _ = druid.Talents.Swiftmend, druid.Talents.ImprovedTranquility, druid.Talents.ImprovedRegrowth, druid.Talents.WildGrowth
-}
-
-func (druid *Druid) ThickHideMultiplier() float64 {
-	thickHideMulti := 1.0
-
-	if druid.Talents.ThickHide > 0 {
-		thickHideMulti += 0.04 + 0.03*float64(druid.Talents.ThickHide-1)
-	}
-
-	return thickHideMulti
-}
-
-func (druid *Druid) BearArmorMultiplier() float64 {
-	sotfMulti := 1.0 + 0.33/3.0
-	return 4.7 * sotfMulti
 }
 
 // naturesGraceCastSpeed is Nature's Grace's proc (spell 16886): "Casting
@@ -286,9 +240,9 @@ func (druid *Druid) registerNaturesSwiftnessCD() {
 // additional 5 Rage any time you get a critical strike while in Bear
 // Form or Dire Bear Form. In addition, your non-periodic critical
 // strikes from Cat Form abilities that generate Combo Points have a
-// 50/100% chance to add an additional Combo Point." Only the Cat Form
-// half is modeled: Bear Form's own damage kit (and so its Rage economy)
-// is not modeled in this package.
+// 50/100% chance to add an additional Combo Point." A bear's melee crit
+// (auto-attack or ability) pays the rage; a cat's builder crit pays the
+// combo point.
 func (druid *Druid) applyBloodFrenzy() {
 	if druid.Talents.BloodFrenzy == 0 {
 		return
@@ -296,21 +250,30 @@ func (druid *Druid) applyBloodFrenzy() {
 
 	rank := clampRank(druid.Talents.BloodFrenzy, 2)
 	procChance := 0.5 * float64(rank)
+	rageMetrics := druid.NewRageMetrics(core.ActionID{SpellID: 16958})
 
 	core.MakePermanent(druid.RegisterAura(core.Aura{
 		Label: "Blood Frenzy",
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !druid.InForm(Cat) ||
-				!spell.Flags.Matches(SpellFlagBuilder) ||
-				!result.Outcome.Matches(core.OutcomeCrit) {
+			if !result.Outcome.Matches(core.OutcomeCrit) {
 				return
 			}
-			if sim.Proc(procChance, "Blood Frenzy") {
-				druid.AddComboPoints(sim, 1, result.Target, spell.ComboPointMetrics())
+			switch {
+			case druid.InForm(Bear) && spell.ProcMask.Matches(core.ProcMaskMelee):
+				if sim.Proc(procChance, "Blood Frenzy") {
+					druid.AddRage(sim, bloodFrenzyRage, rageMetrics)
+				}
+			case druid.InForm(Cat) && spell.Flags.Matches(SpellFlagBuilder):
+				if sim.Proc(procChance, "Blood Frenzy") {
+					druid.AddComboPoints(sim, 1, result.Target, spell.ComboPointMetrics())
+				}
 			}
 		},
 	}))
 }
+
+// bloodFrenzyRage is the "additional 5 Rage" of a bear's critical strike.
+const bloodFrenzyRage = 5.0
 
 // We're using an aura so that the APL can know if the Druid has furor for powershifting logic
 func (druid *Druid) applyFuror() {
@@ -664,9 +627,8 @@ func (druid *Druid) applyPredatoryInstincts() {
 // removes its cooldown, and increases the critical strike chance of
 // your Combo Point-generating abilities by 100%. Clears and grants
 // immunity to Fear effects for the duration. Lasts 15 sec." Only the
-// Combo-Point-generator crit bonus is modeled: Primal Bite is a Bear
-// Form ability and Bear Form's own damage kit is not modeled in this
-// package (see ApplyTalents's Mangle note), and Fear immunity has no
+// Combo-Point-generator crit bonus and Primal Bite's cooldown removal and
+// three targets (primal_bite.go) are modeled; Fear immunity has no
 // mechanic on this sim's fights.
 func (druid *Druid) registerBerserkCD() {
 	if !druid.Talents.Berserk {
@@ -677,6 +639,7 @@ func (druid *Druid) registerBerserkCD() {
 	bonusCrit := 100.0 * core.CritRatingPerCritChance
 
 	var affectedSpells []*DruidSpell
+	var primalBiteCooldown time.Duration
 	berserkAura := druid.RegisterAura(core.Aura{
 		Label:    "Berserk",
 		ActionID: actionID,
@@ -691,15 +654,25 @@ func (druid *Druid) registerBerserkCD() {
 			for _, spell := range affectedSpells {
 				spell.BonusCritRating += bonusCrit
 			}
+			if druid.PrimalBite != nil {
+				// "removes its cooldown"
+				primalBiteCooldown = druid.PrimalBite.CD.Duration
+				druid.PrimalBite.CD.Duration = 0
+				druid.PrimalBite.CD.Reset()
+			}
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			for _, spell := range affectedSpells {
 				spell.BonusCritRating -= bonusCrit
 			}
+			if druid.PrimalBite != nil {
+				druid.PrimalBite.CD.Duration = primalBiteCooldown
+			}
 		},
 	})
+	druid.BerserkAura = berserkAura
 
-	druid.Berserk = druid.RegisterSpell(Cat, core.SpellConfig{
+	druid.Berserk = druid.RegisterSpell(Cat|Bear, core.SpellConfig{
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
 		// Every client id for "Berserk" (417141, 424759, 442211) is

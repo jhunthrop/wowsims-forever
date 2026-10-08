@@ -14,19 +14,6 @@ func init() {
 }
 
 func TestP1TankWarrior(t *testing.T) {
-	// FOREVER: task 11 of plan 2026-09-14-sim-engine rewrote the Fury
-	// spec's talent behaviour and un-skipped sim/warrior/dps_warrior. It
-	// did NOT rewrite Protection's: Improved Revenge went from a stun
-	// chance to +60% Revenge damage, Improved Bloodrage from flat rage
-	// to +50% of Bloodrage's own, Improved Shield Wall from duration to
-	// cooldown, Defiance from 3% threat a point to 5%, and Master of
-	// Defense, Vanguard, Improved Shield Bash, Focused Rage and Bastion
-	// are new. Un-skipping this suite now would bless vanilla's numbers
-	// as Forever's, so it waits for the warrior-protection spec's own
-	// task; the reference build below is already the client's shape, so
-	// that task is a behaviour rewrite and a golden run, not a hunt for
-	// why the talent string no longer parses.
-	t.Skip("sim/warrior/tank_warrior awaits the warrior-protection spec's talent rewrite; task 11 covered Fury only")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassWarrior,
@@ -34,9 +21,13 @@ func TestP1TankWarrior(t *testing.T) {
 			Race:       proto.Race_RaceOrc,
 			OtherRaces: []proto.Race{proto.Race_RaceHuman},
 
-			Talents:  P1Talents,
-			GearSet:  core.GetGearSet("../../../ui/tank_warrior/gear_sets", "p0.bis"),
-			Rotation: core.GetAplRotation("../../../ui/warrior/apls", "dps_reck"),
+			Talents: P1Talents,
+			GearSet: core.GetGearSet(gearSetsDir, harnessGearSet),
+			// forever_protection is data/curated/apl/warrior-protection.json
+			// in the site, synced by `make apl-sync`; dps_no_reck is the
+			// suite's in-file control, a vanilla Fury rotation that tanks
+			// as badly as it sounds and is not tuned against.
+			Rotation: core.GetAplRotation("../../../ui/tank_warrior/apls", "forever_protection"),
 			OtherRotations: []core.RotationCombo{
 				core.GetAplRotation("../../../ui/warrior/apls", "dps_no_reck"),
 			},
@@ -44,8 +35,11 @@ func TestP1TankWarrior(t *testing.T) {
 			Consumes:    P1Consumes,
 			SpecOptions: core.SpecOptionsCombo{Label: "Protection", SpecOptions: PlayerOptionsBasic},
 
+			IsTank:          true,
+			InFrontOfTarget: true,
+
 			ItemFilter:      ItemFilters,
-			EPReferenceStat: proto.Stat_StatAttackPower,
+			EPReferenceStat: proto.Stat_StatStamina,
 			StatsToWeigh:    Stats,
 		},
 	}))
@@ -95,12 +89,21 @@ var ItemFilters = core.ItemFilter{
 	},
 }
 
+// Stats is what the suite weighs: the survival stats the ranker weighs a
+// Protection warrior on (data/curated/specs.json's weight_stats), by the
+// engine's stat ids.
 var Stats = []proto.Stat{
-	proto.Stat_StatStrength,
-	proto.Stat_StatAttackPower,
+	proto.Stat_StatStamina,
 	proto.Stat_StatArmor,
+	proto.Stat_StatDefense,
 	proto.Stat_StatDodge,
 	proto.Stat_StatParry,
+	proto.Stat_StatBlock,
 	proto.Stat_StatBlockValue,
-	proto.Stat_StatDefense,
+	proto.Stat_StatStrength,
+	proto.Stat_StatAgility,
+	proto.Stat_StatAttackPower,
+	proto.Stat_StatHit,
+	proto.Stat_StatCrit,
+	proto.Stat_StatExpertise,
 }

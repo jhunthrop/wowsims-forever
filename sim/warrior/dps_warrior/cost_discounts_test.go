@@ -33,21 +33,23 @@ func TestTheRageDiscountTalentsLandOnTheirSpells(t *testing.T) {
 	}
 
 	// ForeverFuryTalents takes Improved Heroic Strike 3 and Improved
-	// Execute 1 (Improved Cleave left the tree in the live rebuild); ForeverProtectionTalents takes Improved
-	// Thunder Clap 3 and Improved Sunder Armor 3. Between them the two
+	// Execute 1 (Improved Cleave left the tree in the live rebuild);
+	// ForeverProtectionTalents takes Improved Heroic Strike 3, Improved
+	// Thunder Clap 3, Improved Sunder Armor 3 and Focused Rage 3, which takes
+	// 3 rage off every offensive ability on top. Between them the two
 	// reference builds exercise all five discounts.
 	cases := []spellCost{
 		// Both reference builds take Improved Heroic Strike 3.
 		{"Heroic Strike", func(w *warrior.Warrior) *warrior.WarriorSpell { return w.HeroicStrike },
-			15, 12, 12},
+			15, 12, 9},
 		{"Cleave", func(w *warrior.Warrior) *warrior.WarriorSpell { return w.Cleave },
-			20, 20, 20},
+			20, 20, 17},
 		{"Execute", func(w *warrior.Warrior) *warrior.WarriorSpell { return w.Execute },
-			15, 12, 15},
+			15, 12, 12},
 		{"Thunder Clap", func(w *warrior.Warrior) *warrior.WarriorSpell { return w.ThunderClap },
-			20, 20, 14},
+			20, 20, 11},
 		{"Sunder Armor", func(w *warrior.Warrior) *warrior.WarriorSpell { return w.SunderArmor },
-			15, 15, 12},
+			15, 15, 9},
 	}
 
 	for _, build := range []struct {

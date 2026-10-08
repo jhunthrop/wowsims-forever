@@ -58,28 +58,29 @@ import (
 // silently reading the neighbouring talent.
 const ForeverFuryTalents = "33305013002000000-15353100051010501-000000000000000000"
 
-// ForeverProtectionTalents is the same fixed input for the tank spec.
-// The spec's own talent behaviour is still mostly vanilla's - Defiance,
-// Master of Defense, Improved Bloodrage, Improved Shield Wall and
-// Anticipation all changed meaning in the client's tree and only
-// Anticipation and Improved Thunder Clap are rewritten here, though
-// Improved Revenge, Bastion and Focused Rage are now live declarative
-// mods (talents.go's applyDeclarativeTalents) rather than stale - so
-// sim/warrior/tank_warrior stays skipped until the warrior-protection
-// spec is brought up. The string is declared now, and checked by
-// TestTheReferenceBuildsRespectTheTiersAndPrerequisites, because the
-// one that stood in the tank test was vanilla-shaped (11/2/17) and
-// could not be parsed against the client's trees at all.
+// ForeverProtectionTalents is the same fixed input for the tank spec: a
+// 20-point Arms spend that a tank wants (the parry and the cheaper Heroic
+// Strike) and a 31-point Protection spend that reaches Shield Slam, the
+// 31-point talent. It is not advice, it is a fixed input, so a tank number
+// that moves is attributable to the engine and not to a build edit.
 //
 //	Arms 20:       Improved Heroic Strike 3, Deflection 5,
 //	               Improved Rend 3, Improved Tactical Mastery 5,
 //	               Anger Management 1, Deep Wounds 3
 //	Protection 31: Shield Specialization 5, Anticipation 5,
-//	               Improved Bloodrage 2, Iron Will 5,
-//	               Improved Thunder Clap 3, Last Stand 1, Defiance 3,
+//	               Improved Revenge 3, Improved Thunder Clap 3,
+//	               Last Stand 1, Master of Defense 2, Defiance 3,
 //	               Improved Sunder Armor 3, Concussion Blow 1,
-//	               Bastion 2, Shield Slam 1
-const ForeverProtectionTalents = "35305013000000000-00000000000000000-255503100330001021"
+//	               Focused Rage 3, Bastion 1, Shield Slam 1
+//
+// The Protection spend is shaped by the tier gates: Shield Slam (tier 6)
+// needs 30 points above it, Concussion Blow (tier 4) is its prerequisite,
+// and Master of Defense needs Shield Specialization at 5. Iron Will,
+// Vanguard and the two Improved Shield/Disarm talents are left out: a
+// stationary one-boss tank sim stuns, silences and disarms nothing.
+// TestTheReferenceBuildsRespectTheTiersAndPrerequisites checks the widths
+// and the gates.
+const ForeverProtectionTalents = "35305013000000000-00000000000000000-050533120330001311"
 
 // fillWarriorTalents parses a talent string into the proto, positionally
 // against TalentTreeSizes. It is the one place that pairing happens, so
@@ -112,13 +113,12 @@ func (warrior *Warrior) ApplyTalents() {
 	warrior.applyFuriousPrecision()
 	warrior.applyEnrage()
 	warrior.applyFlurry()
-	warrior.applyShieldSpecialization()
+	warrior.applyProtectionTalents()
 	warrior.applyImprovedCharge()
 	warrior.applyBloodthrill()
 	warrior.applyBloodCraze()
 	warrior.registerDeathWishCD()
 	warrior.registerSweepingStrikesCD()
-	warrior.registerLastStandCD()
 }
 
 // applyImprovedCharge is Improved Charge: "Increases the Rage generated
@@ -169,19 +169,12 @@ func (warrior *Warrior) applyImprovedCharge() {
 // the only way any of them is read; each is named at the site that
 // reads it, which may be another file in this package.
 var (
-	// Improved Bloodrage: "+5 Rage instantly" at rank 2, so the ranks
-	// are 2 and 5 on top of Bloodrage's own 10.
-	improvedBloodrageInstantRage = [3]float64{0, 2, 5}
 	// Improved Execute: "by 3" at rank 1 and "by 5" at rank 2 - not
 	// vanilla's 2 and 5, which is what the old inline table said.
 	improvedExecuteRageReduction = [3]int64{0, 3, 5}
 	// Improved Rend: "Increases the damage of your Rend ability by
 	// 35%" at rank 3.
 	improvedRendDamageMultiplier = [4]float64{1, 1.12, 1.23, 1.35}
-	// Improved Shield Wall: "+5 sec" at rank 2.
-	improvedShieldWallDuration = [3]float64{0, 3, 5}
-	// Defiance: "+15% threat caused in Defensive Stance" at rank 5.
-	defianceThreatMultiplier = [6]float64{1, 1.03, 1.06, 1.09, 1.12, 1.15}
 	// Flurry: "+25% melee attack speed for your next swings" at rank 5,
 	// so 5% a point. See makeFlurryAura.
 	flurryAttackSpeed = [6]float64{1, 1.05, 1.10, 1.15, 1.20, 1.25}
@@ -299,11 +292,9 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 	}
 
 	// Improved Revenge: "Increases damage dealt by your Revenge ability
-	// by 20%/40%/60%" at ranks 1-3 (Protection node 105969, tank-only,
-	// sim/warrior/tank_warrior is skipped). It is kept rather than
-	// named-with-reason because, unlike the other Protection talents in
-	// the not-modelled list, it is nothing but a flat percentage on one
-	// named spell - the same shape as every other declarative mod here.
+	// by 20%/40%/60%" at ranks 1-3 (Protection node 105969, tank-only): a
+	// flat percentage on one named spell, the same shape as every other
+	// declarative mod here.
 	if t.ImprovedRevenge > 0 {
 		warrior.AddStaticMod(core.SpellModConfig{
 			Kind:      core.SpellMod_DamageDone_Flat,
@@ -355,11 +346,6 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 	// cooldown on an ability the rotation never recasts changes nothing.
 	_ = t.ImprovedIntercept
 
-	// Iron Will: "Reduces the duration of Stun and Fear effects
-	// inflicted on you by 3%/6%/9%/12%/15%." No encounter in this
-	// package stuns or fears the player.
-	_ = t.IronWill
-
 	// Improved Hamstring: "Gives your Hamstring ability a 5/10/15%
 	// chance to immobilize the target for 5 sec." A root changes nothing
 	// on this package's stationary-target encounters; nothing here
@@ -380,36 +366,6 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 	// explicit no-DPS-effect talent.
 	_ = t.GoreDrinker
 
-	// Master of Defense: "a 50%/100% chance to generate 5 Rage when you
-	// Dodge or Parry while a shield is equipped" (Protection node 105971,
-	// tank-only). A conditional rage proc is not a SpellMod, so it stays
-	// unmodeled with sim/warrior/tank_warrior.
-	_ = t.MasterOfDefense
-
-	// Improved Disarm: "Reduces the cooldown of your Disarm ability by
-	// 7/13/20 secs." Tank-only, and this package registers no Disarm
-	// spell for a cooldown to shorten.
-	_ = t.ImprovedDisarm
-
-	// Vanguard: "Your Charge ability is now usable while in Defensive
-	// Stance" (Protection node 105966, tank-only). Moot here either way:
-	// applyImprovedCharge's rage grant is unconditional on stance, so
-	// there is no stance gate left for Vanguard to lift.
-	_ = t.Vanguard
-
-	// Concussion Blow: "Stuns the target for 5 sec." Tank-only, and a
-	// whole attack of its own rather than a modifier - the pre-existing
-	// Warrior.ConcussionBlow field (warrior.go) has never been
-	// registered - so there is no SpellMod shape for it, and a stun is
-	// threat/survival utility this package's DPS goldens have no use
-	// for.
-	_ = t.ConcussionBlow
-
-	// Improved Shield Bash: "Gives your Shield Bash ability a 50%/100%
-	// chance to Silence the target for 3 sec." Tank-only, and this
-	// package registers no Shield Bash spell for the silence to attach
-	// to.
-	_ = t.ImprovedShieldBash
 }
 
 // impale is Impale: "Increases the critical strike damage bonus of your
@@ -768,35 +724,6 @@ func (warrior *Warrior) makeFlurryConsumptionTrigger(flurryAura *core.Aura) *cor
 	}))
 }
 
-// applyShieldSpecialization is Shield Specialization: "+5% chance to
-// Block and a 100% chance to generate 5 Rage when you Block" at rank 5,
-// so 1% block and a 20%-a-point chance of 5 rage.
-func (warrior *Warrior) applyShieldSpecialization() {
-	if warrior.Talents.ShieldSpecialization == 0 {
-		return
-	}
-
-	warrior.AddStat(stats.Block, core.BlockRatingPerBlockChance*1*float64(warrior.Talents.ShieldSpecialization))
-
-	procChance := 0.2 * float64(warrior.Talents.ShieldSpecialization)
-	rageMetrics := warrior.NewRageMetrics(core.ActionID{SpellID: TalentSpellIDs["shield_specialization"][rankIndex(warrior.Talents.ShieldSpecialization-1, TalentSpellIDs["shield_specialization"])]})
-
-	warrior.RegisterAura(core.Aura{
-		Label:    "Shield Specialization",
-		Duration: core.NeverExpires,
-		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Activate(sim)
-		},
-		OnSpellHitTaken: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if result.DidBlock() {
-				if sim.Proc(procChance, "Shield Specialization") {
-					warrior.AddRage(sim, 5.0, rageMetrics)
-				}
-			}
-		},
-	})
-}
-
 // registerDeathWishCD is Death Wish: "increases your Physical damage
 // done by 20% and makes you immune to Fear effects, but increases all
 // damage you take by 5%. Lasts 30 sec." The old body modelled the
@@ -855,65 +782,14 @@ func (warrior *Warrior) registerDeathWishCD() {
 	})
 }
 
-func (warrior *Warrior) registerLastStandCD() {
-	if !warrior.Talents.LastStand {
-		return
-	}
-
-	actionID := core.ActionID{SpellID: TalentSpellIDs["last_stand"][0]}
-	healthMetrics := warrior.NewHealthMetrics(actionID)
-
-	var bonusHealth float64
-	lastStandAura := warrior.RegisterAura(core.Aura{
-		Label:    "Last Stand",
-		ActionID: actionID,
-		Duration: time.Second * 20,
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			bonusHealth = warrior.MaxHealth() * 0.3
-			warrior.AddStatsDynamic(sim, stats.Stats{stats.Health: bonusHealth})
-			warrior.GainHealth(sim, bonusHealth, healthMetrics)
-		},
-		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			warrior.AddStatsDynamic(sim, stats.Stats{stats.Health: -bonusHealth})
-		},
-	})
-
-	lastStandSpell := warrior.RegisterSpell(AnyStance, core.SpellConfig{
-		ActionID: actionID,
-
-		RequiredLevel: LastStandLevel[0],
-
-		Cast: core.CastConfig{
-			CD: core.Cooldown{
-				Timer: warrior.NewTimer(),
-				// 180000ms (3 min): LastStandCooldownMS[0]
-				// (constants_auto_gen.go). The old time.Minute*10 was
-				// vanilla's cooldown; Forever's client shortened it and
-				// this literal was never updated.
-				Duration: time.Duration(LastStandCooldownMS[0]) * time.Millisecond,
-			},
-		},
-
-		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-			lastStandAura.Activate(sim)
-		},
-	})
-
-	warrior.AddMajorCooldown(core.MajorCooldown{
-		Spell: lastStandSpell.Spell,
-		Type:  core.CooldownTypeSurvival,
-	})
-}
-
 // Not modelled, and deliberately so rather than by omission. Each is in
 // the client's tree and each would need machinery this spec does not
-// have. Every other talent this task was asked to account for - Improved
-// Intercept, Iron Will, Improved Hamstring, Boundless Rage, Master of
-// Defense, Improved Disarm, Vanguard, Concussion Blow and Improved Shield
-// Bash - is named at the `_ = t.X` lines at the end of
-// applyDeclarativeTalents instead, with its reason beside it, which is
-// where a reader already is when a mask or a mod is missing for one of
-// them.
+// have. Improved Intercept, Improved Hamstring and Lingering Rage are named
+// at the `_ = t.X` lines at the end of applyDeclarativeTalents instead,
+// with their reasons beside them, which is where a reader already is when a
+// mask or a mod is missing for one of them; the Protection tree's
+// (Iron Will, Improved Disarm, Vanguard, Improved Shield Bash and Concussion
+// Blow) are listed at the end of talents_protection.go.
 //
 // ForeverFuryTalents spends 1 point on Booming Voice - the cheapest
 // legal filler on the Fury tier-0 row - and that is the one point of the

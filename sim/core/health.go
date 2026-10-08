@@ -61,6 +61,14 @@ func (hb *healthBar) GainHealth(sim *Simulation, amount float64, metrics *Resour
 	hb.currentHealth = newHealth
 }
 
+// ClampToMaxHealth drops current health to the maximum when the maximum
+// has just fallen below it (a temporary health buff such as Last Stand
+// expiring): the excess is not damage, so it records nothing in the
+// damage-taken metrics or the TMI list.
+func (hb *healthBar) ClampToMaxHealth() {
+	hb.currentHealth = min(hb.currentHealth, hb.MaxHealth())
+}
+
 func (hb *healthBar) RemoveHealth(sim *Simulation, amount float64) {
 	if amount < 0 {
 		panic("Trying to remove negative health!")

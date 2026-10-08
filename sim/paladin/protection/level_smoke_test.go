@@ -5,6 +5,7 @@ import (
 
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/paladin"
 )
 
 // TestLevelSmoke is the level-aware sim design's engine smoke test; see
@@ -14,7 +15,7 @@ func TestLevelSmoke(t *testing.T) {
 		Label:       "ProtectionPaladin",
 		Class:       proto.Class_ClassPaladin,
 		Race:        proto.Race_RaceHuman,
-		Talents:     Phase4ProtTalents,
-		SpecOptions: PlayerOptionsSealofRighteousness,
+		Talents:     paladin.ForeverProtectionTalents,
+		SpecOptions: PlayerOptionsRighteousFury,
 	})
 }

@@ -28,13 +28,7 @@ func NewProtectionPaladin(character *core.Character, options *proto.Player) *Pro
 
 	pal := paladin.NewPaladin(character, options, protOptions)
 
-	prot := &ProtectionPaladin{
-		Paladin:                    pal,
-		primarySeal:                protOptions.PrimarySeal,
-		righteousFury:              protOptions.RighteousFury,
-		IsUsingJudgementStopAttack: protOptions.IsUsingJudgementStopAttack,
-		personalBlessing:           protOptions.PersonalBlessing,
-	}
+	prot := &ProtectionPaladin{Paladin: pal}
 
 	prot.EnableAutoAttacks(prot, core.AutoAttackOptions{
 		MainHand:       prot.WeaponFromMainHand(),
@@ -44,13 +38,10 @@ func NewProtectionPaladin(character *core.Character, options *proto.Player) *Pro
 	return prot
 }
 
+// ProtectionPaladin is the tank. Its options (PaladinOptions.RighteousFury
+// above all) are read by the shared paladin package.
 type ProtectionPaladin struct {
 	*paladin.Paladin
-
-	primarySeal                proto.PaladinSeal
-	righteousFury              bool
-	IsUsingJudgementStopAttack bool
-	personalBlessing           proto.Blessings
 }
 
 func (prot *ProtectionPaladin) GetPaladin() *paladin.Paladin {

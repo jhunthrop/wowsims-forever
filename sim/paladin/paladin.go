@@ -30,6 +30,9 @@ const (
 	SpellCode_PaladinHolyShieldProc
 	SpellCode_PaladinLayOnHands
 	SpellCode_PaladinHammerOfWrath
+	SpellCode_PaladinHammerOfTheRighteous
+	SpellCode_PaladinJudgementOfFury
+	SpellCode_PaladinSealOfFuryProc
 )
 
 // PaladinSpellMask* bits exist only for the spells a Forever talent
@@ -51,6 +54,11 @@ const (
 	PaladinSpellMaskExorcism
 	PaladinSpellMaskHammerOfWrath
 	PaladinSpellMaskHolyShock
+	PaladinSpellMaskJudgement
+	PaladinSpellMaskHolyStrike
+	PaladinSpellMaskJudgementOfFury
+	PaladinSpellMaskSealOfFuryProc
+	PaladinSpellMaskSealOfFuryCast
 )
 
 const (
@@ -59,7 +67,8 @@ const (
 	// damage, so it carries no mask here -- there is nothing for this
 	// mod to multiply.
 	PaladinSpellMaskSealsAndJudgementsDamage = PaladinSpellMaskJudgementOfRighteousness | PaladinSpellMaskJudgementOfCommand |
-		PaladinSpellMaskSealOfRighteousnessProc | PaladinSpellMaskSealOfCommandProc
+		PaladinSpellMaskJudgementOfFury | PaladinSpellMaskSealOfRighteousnessProc | PaladinSpellMaskSealOfCommandProc |
+		PaladinSpellMaskSealOfFuryProc
 
 	// Holy Conduit: "Reduces the mana cost of your Consecration, Holy
 	// Wrath, Exorcism, and Hammer of Wrath spells".
@@ -67,9 +76,9 @@ const (
 		PaladinSpellMaskExorcism | PaladinSpellMaskHammerOfWrath
 
 	// Twist of Light: "Reduces the Mana cost of your Seal spells by
-	// 20%". Only the two Seals this package registers a cast spell for.
+	// 20%". Every Seal this package registers a cast spell for.
 	PaladinSpellMaskSealCast = PaladinSpellMaskSealOfRighteousnessCast | PaladinSpellMaskSealOfCommandCast |
-		PaladinSpellMaskSealOfTheCrusaderCast
+		PaladinSpellMaskSealOfTheCrusaderCast | PaladinSpellMaskSealOfFuryCast
 )
 
 type SealJudgeCode uint8
@@ -97,13 +106,15 @@ type Paladin struct {
 	aurasSoR         []*core.Aura
 	aurasSoC         []*core.Aura
 	aurasSotC        []*core.Aura
+	aurasSoF         []*core.Aura
 
 	// Highest-rank weapon-proc spell for each Echo-eligible Seal (Twist
 	// of Light names Command, Righteousness, Fury and Justice; this
-	// package implements only the first two). Set by
-	// registerSealOfRighteousness/registerSealOfCommand.
+	// package implements the first three). Set by
+	// registerSealOfRighteousness/registerSealOfCommand/registerSealOfFury.
 	sealOfRighteousnessProc *core.Spell
 	sealOfCommandProc       *core.Spell
+	sealOfFuryProc          *core.Spell
 	echoOfSealAura          *core.Aura
 	pendingEchoOfSealProc   *core.Spell
 
@@ -114,6 +125,7 @@ type Paladin struct {
 	spellsJoR        []*core.Spell
 	spellsJoC        []*core.Spell
 	spellsJotC       []*core.Spell
+	spellsJoF        []*core.Spell
 
 	// Active abilities and shared cooldowns that are externally manipulated.
 	exorcism       []*core.Spell
@@ -126,6 +138,11 @@ type Paladin struct {
 	// highest rank seal spell if available
 	sealOfRighteousness *core.Spell
 	sealOfCommand       *core.Spell
+	sealOfFury          *core.Spell
+
+	ironCreedAura                 *core.Aura
+	improvedSealOfFuryManaMetrics *core.ResourceMetrics
+	swiftJudgementAura            *core.Aura
 }
 
 // Implemented by each Paladin spec.
@@ -161,14 +178,17 @@ func (paladin *Paladin) Initialize() {
 		paladin.registerSealOfCommand()
 	}
 	paladin.registerSealOfTheCrusader()
+	paladin.registerSealOfFury()
 
 	paladin.allJudgeSpells = append(paladin.allJudgeSpells, paladin.spellsJoR)
 	paladin.allJudgeSpells = append(paladin.allJudgeSpells, paladin.spellsJoC)
 	paladin.allJudgeSpells = append(paladin.allJudgeSpells, paladin.spellsJotC)
+	paladin.allJudgeSpells = append(paladin.allJudgeSpells, paladin.spellsJoF)
 
 	paladin.allSealAuras = append(paladin.allSealAuras, paladin.aurasSoR)
 	paladin.allSealAuras = append(paladin.allSealAuras, paladin.aurasSoC)
 	paladin.allSealAuras = append(paladin.allSealAuras, paladin.aurasSotC)
+	paladin.allSealAuras = append(paladin.allSealAuras, paladin.aurasSoF)
 
 	// Active abilities
 	paladin.registerForbearance()
@@ -180,7 +200,9 @@ func (paladin *Paladin) Initialize() {
 	paladin.registerHammerOfWrath()
 	paladin.registerHolyWrath()
 	paladin.registerHolyShield()
-	paladin.registerBlessingOfSanctuary()
+	paladin.registerHammerOfTheRighteous()
+	paladin.registerSwiftJudgement()
+	paladin.registerDefensiveCooldowns()
 	paladin.registerLayOnHands()
 
 	paladin.registerStopAttackMacros()

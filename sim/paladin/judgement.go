@@ -11,10 +11,14 @@ func (paladin *Paladin) registerJudgement() {
 	// It rolls on the spell hit table and can only miss or hit.
 	// Individual seals have their own effects that this spell triggers,
 	// that are handled in the implementations of the seal auras.
+	//
+	// Forever: "Judgement no longer consumes Seals" (Blizzard's Deep Dive
+	// recap), so the seal stays up and Judgement only triggers its effect.
 	paladin.judgement = paladin.RegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: 20271},
-		SpellSchool: core.SpellSchoolHoly,
-		ProcMask:    core.ProcMaskEmpty,
+		ActionID:       core.ActionID{SpellID: 20271},
+		ClassSpellMask: PaladinSpellMaskJudgement,
+		SpellSchool:    core.SpellSchoolHoly,
+		ProcMask:       core.ProcMaskEmpty,
 		// core.SpellFlagPassiveSpell used to sit here too. That flag
 		// tells core/metrics_aggregator.go's addSpellMetrics to drop
 		// the spell's OWN Casts count ("applied as a result of another
@@ -51,14 +55,9 @@ func (paladin *Paladin) registerJudgement() {
 			return paladin.currentSeal.IsActive()
 		},
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, _ *core.Spell) {
-			paladin.castSpecificJudgement(sim, target, paladin.currentJudgement, paladin.currentSeal)
+			paladin.currentJudgement.Cast(sim, target)
+			paladin.spendSwiftJudgement(sim)
 			paladin.trySanctifiedJudgementManaReturn(sim)
 		},
 	})
-}
-
-// Helper Function For casting Judgement
-func (paladin *Paladin) castSpecificJudgement(sim *core.Simulation, target *core.Unit, judgementSpell *core.Spell, matchingSeal *core.Aura) {
-	judgementSpell.Cast(sim, target)
-	matchingSeal.Deactivate(sim)
 }
