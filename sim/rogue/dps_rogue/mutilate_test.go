@@ -75,6 +75,12 @@ var (
 // string, through the shipping agent factory.
 func buildRogueForTest(t *testing.T, talentsStr string) (*core.Simulation, *rogue.Rogue) {
 	t.Helper()
+	return buildRogueWithRaidBuffs(t, talentsStr, core.FullBuffs.Raid)
+}
+
+// buildRogueWithRaidBuffs is buildRogueForTest under the given raid buffs.
+func buildRogueWithRaidBuffs(t *testing.T, talentsStr string, raidBuffs *proto.RaidBuffs) (*core.Simulation, *rogue.Rogue) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
@@ -95,7 +101,7 @@ func buildRogueForTest(t *testing.T, talentsStr string) (*core.Simulation, *rogu
 		},
 		DefaultRogue,
 	)
-	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
+	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, raidBuffs, core.FullBuffs.Debuffs)
 
 	sim := core.NewSim(&proto.RaidSimRequest{
 		Raid: raid,

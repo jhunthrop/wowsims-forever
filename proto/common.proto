@@ -588,6 +588,11 @@ message RaidBuffs {
 	// +Agi
 	TristateEffect grace_of_air_totem = 5; // none, normal, 15% improved
 
+	// Windfury Totem: in the Forever client an aura on every party member
+	// (spells 8516/10608/10610), not a main-hand enchant, so it stacks with
+	// a poison or a sharpening stone on the weapon.
+	bool windfury_totem = 40;
+
 	// +Intell and/or Spi
 	bool arcane_brilliance = 6;
 	bool divine_spirit = 7;

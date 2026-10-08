@@ -3386,6 +3386,10 @@ type RaidBuffs struct {
 	StrengthOfEarthTotem TristateEffect `protobuf:"varint,4,opt,name=strength_of_earth_totem,json=strengthOfEarthTotem,proto3,enum=proto.TristateEffect" json:"strength_of_earth_totem,omitempty"` // none, normal, 15% improved
 	// +Agi
 	GraceOfAirTotem TristateEffect `protobuf:"varint,5,opt,name=grace_of_air_totem,json=graceOfAirTotem,proto3,enum=proto.TristateEffect" json:"grace_of_air_totem,omitempty"` // none, normal, 15% improved
+	// Windfury Totem: in the Forever client an aura on every party member
+	// (spells 8516/10608/10610), not a main-hand enchant, so it stacks with
+	// a poison or a sharpening stone on the weapon.
+	WindfuryTotem bool `protobuf:"varint,40,opt,name=windfury_totem,json=windfuryTotem,proto3" json:"windfury_totem,omitempty"`
 	// +Intell and/or Spi
 	ArcaneBrilliance bool `protobuf:"varint,6,opt,name=arcane_brilliance,json=arcaneBrilliance,proto3" json:"arcane_brilliance,omitempty"`
 	DivineSpirit     bool `protobuf:"varint,7,opt,name=divine_spirit,json=divineSpirit,proto3" json:"divine_spirit,omitempty"`
@@ -3490,6 +3494,13 @@ func (x *RaidBuffs) GetGraceOfAirTotem() TristateEffect {
 		return x.GraceOfAirTotem
 	}
 	return TristateEffect_TristateEffectMissing
+}
+
+func (x *RaidBuffs) GetWindfuryTotem() bool {
+	if x != nil {
+		return x.WindfuryTotem
+	}
+	return false
 }
 
 func (x *RaidBuffs) GetArcaneBrilliance() bool {
@@ -6105,14 +6116,15 @@ const file_common_proto_rawDesc = "" +
 	"\fraptor_punch\x18\x06 \x01(\bR\vraptorPunch\"2\n" +
 	"\x0fPetMiscConsumes\x12\x1f\n" +
 	"\vjuju_flurry\x18\x01 \x01(\bR\n" +
-	"jujuFlurry\"\xbb\x0e\n" +
+	"jujuFlurry\"\xe2\x0e\n" +
 	"\tRaidBuffs\x12>\n" +
 	"\x10gift_of_the_wild\x18\x01 \x01(\x0e2\x15.proto.TristateEffectR\rgiftOfTheWild\x12G\n" +
 	"\x14power_word_fortitude\x18\x02 \x01(\x0e2\x15.proto.TristateEffectR\x12powerWordFortitude\x124\n" +
 	"\n" +
 	"blood_pact\x18\x03 \x01(\x0e2\x15.proto.TristateEffectR\tbloodPact\x12L\n" +
 	"\x17strength_of_earth_totem\x18\x04 \x01(\x0e2\x15.proto.TristateEffectR\x14strengthOfEarthTotem\x12B\n" +
-	"\x12grace_of_air_totem\x18\x05 \x01(\x0e2\x15.proto.TristateEffectR\x0fgraceOfAirTotem\x12+\n" +
+	"\x12grace_of_air_totem\x18\x05 \x01(\x0e2\x15.proto.TristateEffectR\x0fgraceOfAirTotem\x12%\n" +
+	"\x0ewindfury_totem\x18( \x01(\bR\rwindfuryTotem\x12+\n" +
 	"\x11arcane_brilliance\x18\x06 \x01(\bR\x10arcaneBrilliance\x12#\n" +
 	"\rdivine_spirit\x18\a \x01(\bR\fdivineSpirit\x128\n" +
 	"\fbattle_shout\x18\b \x01(\x0e2\x15.proto.TristateEffectR\vbattleShout\x12#\n" +

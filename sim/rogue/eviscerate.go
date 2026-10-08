@@ -62,7 +62,7 @@ func (rogue *Rogue) registerEviscerate() {
 
 		DamageMultiplier: 1 +
 			(improvedEviscerateMultiplier[rankIndex(rogue.Talents.ImprovedEviscerate, improvedEviscerateMultiplier[:])] - 1) +
-			[]float64{0, 0.02, 0.04, 0.06}[rogue.Talents.Aggression],
+			rogue.aggressionBonus(),
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
 		ClientBaseDamage: damage.Range(casterLevel),
