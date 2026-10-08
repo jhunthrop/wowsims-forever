@@ -132,3 +132,18 @@ func TestTrueshotAuraSkipsTheInferiorRank(t *testing.T) {
 		t.Errorf("Trueshot Aura learned at 60 = %d, want 20905 (rank 4)", rank.SpellID)
 	}
 }
+
+// Devotion Aura is a paladin's own armor aura. The client states seven
+// ranks (spells 465 to 10293), 55 armor at level 1 to 735 at level 60,
+// and the engine used to give every level the level-60 amount.
+func TestDevotionAuraFollowsClientRanks(t *testing.T) {
+	cases := []struct {
+		level int
+		want  float64
+	}{{1, 55}, {9, 55}, {10, 160}, {19, 160}, {20, 275}, {30, 390}, {40, 505}, {50, 620}, {59, 620}, {60, 735}}
+	for _, c := range cases {
+		if got := DevotionAuraArmor(c.level); got != c.want {
+			t.Errorf("Devotion Aura at level %d = %v armor, want %v", c.level, got, c.want)
+		}
+	}
+}

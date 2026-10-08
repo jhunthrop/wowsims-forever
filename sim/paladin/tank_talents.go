@@ -14,24 +14,29 @@ import (
 
 // ForeverProtectionTalents is the fixed tank input the regression suite
 // and the level smoke run, so a change in the golden is attributable to
-// the engine rather than to a build edit. It is written against the live
-// tree: Holy 17, Protection 16, Retribution 17 characters
+// the engine rather than to a build edit. It is the build the site's
+// Protection paladin guide gives and its tank ranker runs, written against
+// the live tree: Holy 17, Protection 16, Retribution 17 characters
 // (TalentTreeSizes). Spend:
 //
-//	Holy 20:        Divine Strength 5, Divine Intellect 5, Healing Light 3,
-//	                Spiritual Focus 1, Improved Seals 3, Reverence 3
-//	Protection 31:  Toughness 5, Redoubt 5, Precision 3, Anticipation 5,
+//	Holy 8:         Divine Strength 5, Improved Seals 3
+//	Protection 38:  Toughness 5, Redoubt 5, Precision 3, Anticipation 5,
 //	                Improved Seal of Fury 1, Improved Righteous Fury 3,
-//	                Shield Specialization 3, Swift Judgement 1,
-//	                One-Handed Weapon Specialization 3, Templar's Bulwark 1,
-//	                Holy Shield 1
-//	Retribution 0
+//	                Shield Specialization 3, Sacred Duty 2, Swift
+//	                Judgement 1, One-Handed Weapon Specialization 3,
+//	                Templar's Bulwark 1, Iron Creed 5, Holy Shield 1
+//	Retribution 5:  Deflection 5
 //
 // Holy Shield is the 31-point talent: it needs 30 points in the tree and
-// Templar's Bulwark, which is why Reckoning, Iron Creed and Sacred Duty
-// are not in the reference build (TestForeverProtectionTalentsAreLegal
-// checks the tiers and prerequisites against the client's tree).
-const ForeverProtectionTalents = "55313003000000000-5530513301301001-00000000000000000"
+// Templar's Bulwark. The 20 points past it went into the Holy tree's
+// healing talents in the first draft of this build, and the same boss
+// killed that tank one fight in seven; Deflection (+5% parry, the only
+// parry a paladin can take), Sacred Duty (+4% Stamina) and Iron Creed
+// (-10% damage taken for 6 s after Holy Strike) bring it to about one in a
+// hundred. Reckoning priced at threat only and is left out
+// (TestForeverProtectionTalentsAreLegal checks the tiers and
+// prerequisites against the client's tree).
+const ForeverProtectionTalents = "50003000000000000-5530513321301051-50000000000000000"
 
 const (
 	// Anticipation (node 105636): "Increases your Defense Skill by 4" at

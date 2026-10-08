@@ -130,3 +130,40 @@ func TestHolyShieldDamageMatchesClient(t *testing.T) {
 		}
 	}
 }
+
+// Consecration's ground damage is not on the cast spell (20924 and its
+// ranks carry only a periodic dummy): the description prints it from a
+// companion row per rank (1280345 to 1280349), whose first effect is the
+// damage per second to every enemy in the area and whose second is the
+// extra per second the first few enemies in the area take, with a
+// spell-power coefficient. The number of those enemies is the cast
+// spell's own third effect.
+func TestConsecrationDamageMatchesClient(t *testing.T) {
+	client := clientdamagetest.Load(t, clientPaladinSpellconst)
+	for _, rank := range consecrationRanks {
+		damage, ok := client.ByID(rank.damageSpellID)
+		if !ok {
+			t.Fatalf("Consecration damage row %d is not in the client's spellconst", rank.damageSpellID)
+		}
+		if got := len(damage.Effects); got != 2 {
+			t.Fatalf("Consecration damage row %d has %d effects, want 2", rank.damageSpellID, got)
+		}
+		if got, want := rank.tickDamage, damage.Effects[0].Amount; got != want {
+			t.Errorf("Consecration %d: %v damage a tick, client %v", rank.spellID, got, want)
+		}
+		if got, want := rank.firstTargetsTickDamage, damage.Effects[1].Amount; got != want {
+			t.Errorf("Consecration %d: %v extra damage a tick on the first targets, client %v", rank.spellID, got, want)
+		}
+		if got, want := consecrationFirstTargetsCoefficient, damage.Effects[1].ResolvedSPCoefficient; got-want > 0.002 || want-got > 0.002 {
+			t.Errorf("Consecration %d: extra damage coefficient %v, client %v", rank.spellID, got, want)
+		}
+
+		cast, ok := client.ByID(rank.spellID)
+		if !ok {
+			t.Fatalf("Consecration %d is not in the client's spellconst", rank.spellID)
+		}
+		if got, want := float64(consecrationFirstTargets), cast.Effects[2].Amount; got != want {
+			t.Errorf("Consecration %d: %v first targets, client %v", rank.spellID, got, want)
+		}
+	}
+}
