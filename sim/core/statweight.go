@@ -178,6 +178,12 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 		if stat.EqualsStat(stats.Intellect) {
 			statMod = defaultStatMod * 20
 		}
+		// A healing sweep measures mana stats through the fight's mana
+		// curve, where one point of mp5 or spirit moves the average by far
+		// less than the sampling noise, so they get the wider step too.
+		if swr.RaidDamageModel != nil && (stat.EqualsStat(stats.Spirit) || stat.EqualsStat(stats.MP5)) {
+			statMod = defaultStatMod * 20
+		}
 		// The melee and ranged primaries need it for a third reason:
 		// the sweep's accuracy for every other class comes from paired
 		// random streams (low and high directions share a seed, so a
