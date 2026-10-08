@@ -348,6 +348,10 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 		ApplyWindfury(character)
 	}
 
+	if raidBuffs.FlametongueTotem && flametongueTotemReaches(character) {
+		MakePermanent(FlametongueTotemAura(character))
+	}
+
 	if individualBuffs.BlessingOfWisdom > 0 {
 		updateStats := stats.Stats{stats.MP5: BlessingOfWisdomMP5(int(character.Level))}
 		if individualBuffs.BlessingOfWisdom == proto.TristateEffect_TristateEffectImproved {
@@ -1682,6 +1686,10 @@ func GetWildStrikesAP(aura *Aura, rank int32) float64 {
 
 const WindfuryRanks = 3
 
+// WindfuryAuraLabel names the permanent proc aura a Windfury Totem (or the
+// weapon's own Windfury) puts on the character.
+const WindfuryAuraLabel = "Windfury"
+
 // extraAttackProcICD is the internal cooldown between extra-attack procs:
 // the 100 ms ProcCategoryRecovery on the totem's proc aura (spells 8515 and
 // 10612, SpellAuraOptions) in the 1.60.1.70009 client. Vanilla Classic's
@@ -1695,10 +1703,18 @@ const extraAttackProcICD = 100 * time.Millisecond
 // benefit you personally receive from Windfury Totem"), and a druid in
 // feral form has no main-hand weapon to proc it.
 func windfuryTotemReaches(character *Character) bool {
+	return weaponTotemReaches(character, proto.WeaponImbue_WindfuryWeapon)
+}
+
+// weaponTotemReaches says whether a weapon-hit totem aura applies to the
+// character: not when the totem's own weapon imbue sits on the main hand
+// (the imbue's text: "disables any benefit you personally receive from"
+// the totem), and not to a druid in feral form, who has no main-hand weapon.
+func weaponTotemReaches(character *Character, disablingImbue proto.WeaponImbue) bool {
 	if character.PseudoStats.FeralCombatEnabled {
 		return false
 	}
-	return character.Consumes == nil || character.Consumes.MainHandImbue != proto.WeaponImbue_WindfuryWeapon
+	return character.Consumes == nil || character.Consumes.MainHandImbue != disablingImbue
 }
 
 // WindfuryBuffDuration is the Windfury Totem attack power buff's length:
@@ -1721,7 +1737,11 @@ func ApplyWindfury(character *Character) *Aura {
 	spellId := WindfuryBuffSpellId[rank]
 	buffActionID := ActionID{SpellID: spellId}
 
-	return CreateExtraAttackAuraCommon(character, buffActionID, "Windfury", rank, WindfuryBuffDuration, GetWindfuryAP)
+	buffAura := CreateExtraAttackAuraCommon(character, buffActionID, WindfuryAuraLabel, rank, WindfuryBuffDuration, GetWindfuryAP)
+	// The totem's proc aura holds the melee totem category, so the
+	// Flametongue Totem's does not stack with it.
+	character.GetAura(WindfuryAuraLabel).NewExclusiveEffect(meleeTotemCategory, false, ExclusiveEffect{Priority: meleeTotemWindfury})
+	return buffAura
 
 }
 

@@ -71,6 +71,8 @@ const (
 	PaladinSpellMaskHolyShockHeal
 	PaladinSpellMaskLightsVigilCast
 	PaladinSpellMaskLightsVigilHeal
+	PaladinSpellMaskSealOfLightCast
+	PaladinSpellMaskSealOfWisdomCast
 )
 
 const (
@@ -114,7 +116,8 @@ const (
 	// Twist of Light: "Reduces the Mana cost of your Seal spells by
 	// 20%". Every Seal this package registers a cast spell for.
 	PaladinSpellMaskSealCast = PaladinSpellMaskSealOfRighteousnessCast | PaladinSpellMaskSealOfCommandCast |
-		PaladinSpellMaskSealOfTheCrusaderCast | PaladinSpellMaskSealOfFuryCast
+		PaladinSpellMaskSealOfTheCrusaderCast | PaladinSpellMaskSealOfFuryCast |
+		PaladinSpellMaskSealOfLightCast | PaladinSpellMaskSealOfWisdomCast
 )
 
 type SealJudgeCode uint8
@@ -143,6 +146,9 @@ type Paladin struct {
 	aurasSoC         []*core.Aura
 	aurasSotC        []*core.Aura
 	aurasSoF         []*core.Aura
+	// aurasUtilitySeals are the Seal of Light and Seal of Wisdom auras
+	// (utility_seals.go).
+	aurasUtilitySeals []*core.Aura
 
 	// Highest-rank weapon-proc spell for each Echo-eligible Seal (Twist
 	// of Light names Command, Righteousness, Fury and Justice; this
@@ -162,6 +168,7 @@ type Paladin struct {
 	spellsJoC        []*core.Spell
 	spellsJotC       []*core.Spell
 	spellsJoF        []*core.Spell
+	spellsJoUtility  []*core.Spell
 
 	// Active abilities and shared cooldowns that are externally manipulated.
 	exorcism       []*core.Spell
@@ -228,16 +235,19 @@ func (paladin *Paladin) Initialize() {
 	}
 	paladin.registerSealOfTheCrusader()
 	paladin.registerSealOfFury()
+	paladin.registerUtilitySeals()
 
 	paladin.allJudgeSpells = append(paladin.allJudgeSpells, paladin.spellsJoR)
 	paladin.allJudgeSpells = append(paladin.allJudgeSpells, paladin.spellsJoC)
 	paladin.allJudgeSpells = append(paladin.allJudgeSpells, paladin.spellsJotC)
 	paladin.allJudgeSpells = append(paladin.allJudgeSpells, paladin.spellsJoF)
+	paladin.allJudgeSpells = append(paladin.allJudgeSpells, paladin.spellsJoUtility)
 
 	paladin.allSealAuras = append(paladin.allSealAuras, paladin.aurasSoR)
 	paladin.allSealAuras = append(paladin.allSealAuras, paladin.aurasSoC)
 	paladin.allSealAuras = append(paladin.allSealAuras, paladin.aurasSotC)
 	paladin.allSealAuras = append(paladin.allSealAuras, paladin.aurasSoF)
+	paladin.allSealAuras = append(paladin.allSealAuras, paladin.aurasUtilitySeals)
 
 	// Active abilities
 	paladin.registerForbearance()

@@ -3476,7 +3476,7 @@ func (x *PetMiscConsumes) GetJujuFlurry() bool {
 }
 
 // Buffs that affect the entire raid.
-// NextIndex: 42
+// NextIndex: 43
 type RaidBuffs struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// +Stats
@@ -3500,6 +3500,13 @@ type RaidBuffs struct {
 	// itself (HunterAgent.AddRaidBuffs), so a preset names it for the raid's
 	// hunter slot.
 	HeartOfTheLion bool `protobuf:"varint,41,opt,name=heart_of_the_lion,json=heartOfTheLion,proto3" json:"heart_of_the_lion,omitempty"`
+	// Flametongue Totem: in the Forever client an aura on every party member
+	// (spells 8230/8250/10521/15036, trigger spells 8253/8248/10523/16389),
+	// not a main-hand enchant: each main-hand auto attack adds fire damage
+	// of the rank's amount scaled by weapon speed. The client's beta notes
+	// say it does not stack with the Windfury Totem aura, so a request that
+	// names both receives Windfury.
+	FlametongueTotem bool `protobuf:"varint,42,opt,name=flametongue_totem,json=flametongueTotem,proto3" json:"flametongue_totem,omitempty"`
 	// +Intell and/or Spi
 	ArcaneBrilliance bool `protobuf:"varint,6,opt,name=arcane_brilliance,json=arcaneBrilliance,proto3" json:"arcane_brilliance,omitempty"`
 	DivineSpirit     bool `protobuf:"varint,7,opt,name=divine_spirit,json=divineSpirit,proto3" json:"divine_spirit,omitempty"`
@@ -3616,6 +3623,13 @@ func (x *RaidBuffs) GetWindfuryTotem() bool {
 func (x *RaidBuffs) GetHeartOfTheLion() bool {
 	if x != nil {
 		return x.HeartOfTheLion
+	}
+	return false
+}
+
+func (x *RaidBuffs) GetFlametongueTotem() bool {
+	if x != nil {
+		return x.FlametongueTotem
 	}
 	return false
 }
@@ -6369,7 +6383,7 @@ const file_common_proto_rawDesc = "" +
 	"\fraptor_punch\x18\x06 \x01(\bR\vraptorPunch\"2\n" +
 	"\x0fPetMiscConsumes\x12\x1f\n" +
 	"\vjuju_flurry\x18\x01 \x01(\bR\n" +
-	"jujuFlurry\"\x8d\x0f\n" +
+	"jujuFlurry\"\xba\x0f\n" +
 	"\tRaidBuffs\x12>\n" +
 	"\x10gift_of_the_wild\x18\x01 \x01(\x0e2\x15.proto.TristateEffectR\rgiftOfTheWild\x12G\n" +
 	"\x14power_word_fortitude\x18\x02 \x01(\x0e2\x15.proto.TristateEffectR\x12powerWordFortitude\x124\n" +
@@ -6379,6 +6393,7 @@ const file_common_proto_rawDesc = "" +
 	"\x12grace_of_air_totem\x18\x05 \x01(\x0e2\x15.proto.TristateEffectR\x0fgraceOfAirTotem\x12%\n" +
 	"\x0ewindfury_totem\x18( \x01(\bR\rwindfuryTotem\x12)\n" +
 	"\x11heart_of_the_lion\x18) \x01(\bR\x0eheartOfTheLion\x12+\n" +
+	"\x11flametongue_totem\x18* \x01(\bR\x10flametongueTotem\x12+\n" +
 	"\x11arcane_brilliance\x18\x06 \x01(\bR\x10arcaneBrilliance\x12#\n" +
 	"\rdivine_spirit\x18\a \x01(\bR\fdivineSpirit\x128\n" +
 	"\fbattle_shout\x18\b \x01(\x0e2\x15.proto.TristateEffectR\vbattleShout\x12#\n" +

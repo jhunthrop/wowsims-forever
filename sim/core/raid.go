@@ -123,6 +123,9 @@ type Raid struct {
 	AllUnits       []*Unit // Cached list of all Units (players and pets) in the raid.
 
 	nextPetIndex int32
+
+	// raidDamageListeners hear each hit the raid damage model lands.
+	raidDamageListeners []RaidDamageListener
 }
 
 func (raid *Raid) GetActiveUnits() []*Unit {

@@ -418,10 +418,19 @@ Trainables the engine does not register (the golden's last section):
 - Effect already simulated, no cast needed: Rockbiter, Flametongue,
   Frostbrand and Windfury Weapon are weapon imbues chosen through
   `Consumes.MainHandImbue`, not spells a rotation presses.
-- Simulated effect NOT modelled, follow-up: Flametongue Totem (party
-  melee fire damage per main-hand hit; the client rows state the
-  per-rank damage as effect base points on spells 8253/16389 but not the
-  weapon-speed scaling, so it was not guessed).
+- Modelled by the trainables lane: Flametongue Totem is now a castable fire
+  totem (`sim/shaman/flametongue_totem.go`, ranks 8227/8249/10526/16387, 90 to
+  275 mana, 5 minutes) and the raid buff `flametongue_totem`
+  (`core.FlametongueTotemAura`): each main-hand auto attack that lands adds
+  fire damage of the proc spell's base points (548/781/1061/1363, spells
+  8253/8248/10523/16389) times the weapon's speed over 100. The weapon-speed
+  factor is the spell text's own range (`m1/77` to `M1/25` is the amount per
+  second of speed over 1.3 to 4.0 seconds), which Flametongue Weapon's proc
+  states identically and the engine's weapon imbue already agrees with. The
+  proc's damage reads `declared, matches` through a dummy-effect reading the
+  report applies to these four ids only. The client's beta notes say the aura
+  does not stack with the Windfury Totem: the two share an exclusive category
+  and Windfury outranks it.
 - Utility, no sim result: Earthbind, Stoneclaw (taunt), Purge, Cure
   Poison, Cure Disease, Poison Cleansing and Disease Cleansing Totem,
   Call of the Elements/Ancestors/Spirits, Ghost Wolf, Totemic
@@ -522,6 +531,19 @@ every hunter number by 10 to 20% of total stats; the tables do not say whether
 the hunter also receives the party buff or whether it is a baseline passive,
 so it needs a decision, not a guess.
 
+Modelled by the trainables lane (2026-10-08), beside Flametongue Totem above:
+Seal of Light and Seal of Wisdom (`sim/paladin/utility_seals.go`: the client's
+costs, levels, 30 s and judgements, 39/53/76/94 health and 50/71/90 mana a
+trigger; the trigger rate, 15 a minute, is an assumption because the client
+states ProcChance 100 with no rate, as it does for Seal of Command), Judgement
+of Light and Wisdom as raid debuffs and as the seals' judgements (40 s, the
+ranks' 25 to 61 health and 33 to 59 mana, 50% a trigger by assumption), and
+the priest's Lightwell (`sim/priest/lightwell.go`: 5 charges, 180 s, a renew
+of 160/233/320 every 2 s for 10 s that being attacked cancels, clicked by
+fake raid members the damage model hurts below 90% health; its renew spells
+7001/27873/27874 sit outside the spellconst extract, so their amounts are
+pinned by the lane's tests and not by a golden row).
+
 Unregistered, utility or not modelled, one line each (counts are the golden's):
 
 - Druid (18): Growl, Challenging Roar (taunts; no aggro table), Cower (a flat
@@ -541,12 +563,10 @@ Unregistered, utility or not modelled, one line each (counts are the golden's):
   chance), Viper Sting (drains target mana; encounter targets have none).
   Hydra Shot, Wyvern Strike, Widow Bite and Sonic Blast have no learn row and
   stay out.
-- Priest (31): the six buffs above; Power Infusion; Fade (threat drop);
+- Priest (30): the six buffs above; Power Infusion; Fade (threat drop);
   Resurrection; Cure Disease, Abolish Disease, Dispel Magic; Shackle Undead,
   Mind Control, Psychic Scream, Mind Soothe, Fear Ward, Levitate, Mind Vision
-  (control and utility); Mana Burn (needs target mana); Lightwell (a
-  summoned healing object with charges, not modelled; healing, so a follow-up
-  for the healing lane). Race-restricted in the client (the golden says which):
+  (control and utility); Mana Burn (needs target mana); Race-restricted in the client (the golden says which):
   Starshards (Night Elf, registered for a Night Elf priest), Chastise (Dwarf,
   an instant 289 holy damage hit on a 120 s cooldown), Divine Grace (Human, a
   heal on a 10 minute cooldown, at most once a fight), Elune's Grace,
@@ -571,13 +591,13 @@ Per spec-and-rank row at level 60 whose client spell has a school-damage, period
 | Hunter | 12 | 12 | 0 | 0 | 30 |
 | Mage | 83 | 83 | 0 | 0 | 24 |
 | Warlock | 98 | 98 | 0 | 0 | 63 |
-| Paladin | 129 | 129 | 0 | 24 | 225 |
+| Paladin | 141 | 141 | 0 | 24 | 267 |
 | Warrior | 12 | 12 | 0 | 0 | 42 |
 | Druid | 98 | 98 | 0 | 0 | 37 |
-| Priest | 143 | 143 | 0 | 0 | 34 |
-| Shaman | 185 | 185 | 0 | 20 | 215 |
+| Priest | 143 | 143 | 0 | 0 | 37 |
+| Shaman | 189 | 189 | 0 | 20 | 231 |
 | Rogue | 10 | 10 | 0 | 0 | 28 |
-| **Total** | 770 | 770 | 0 | 44 | 698 |
+| **Total** | 786 | 786 | 0 | 44 | 759 |
 
 <!-- damage-summary:end -->
 
@@ -592,12 +612,12 @@ Per class, the active trainables (power cost, cast time or cooldown; pipeline.tr
 | Hunter | 49 | 26 |
 | Mage | 58 | 36 |
 | Warlock | 47 | 24 |
-| Paladin | 46 | 14 |
+| Paladin | 46 | 12 |
 | Warrior | 40 | 9 |
 | Druid | 54 | 18 |
-| Priest | 53 | 31 |
-| Shaman | 54 | 28 |
+| Priest | 53 | 30 |
+| Shaman | 54 | 27 |
 | Rogue | 27 | 8 |
-| **Total** | 428 | 194 |
+| **Total** | 428 | 190 |
 
 <!-- trainables-summary:end -->

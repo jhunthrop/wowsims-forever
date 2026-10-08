@@ -81,6 +81,13 @@ func buildRogueForTest(t *testing.T, talentsStr string) (*core.Simulation, *rogu
 // buildRogueWithRaidBuffs is buildRogueForTest under the given raid buffs.
 func buildRogueWithRaidBuffs(t *testing.T, talentsStr string, raidBuffs *proto.RaidBuffs) (*core.Simulation, *rogue.Rogue) {
 	t.Helper()
+	return buildRogueWithBuffs(t, talentsStr, raidBuffs, core.FullBuffs.Debuffs)
+}
+
+// buildRogueWithBuffs is buildRogueWithRaidBuffs under the given debuffs
+// as well.
+func buildRogueWithBuffs(t *testing.T, talentsStr string, raidBuffs *proto.RaidBuffs, debuffs *proto.Debuffs) (*core.Simulation, *rogue.Rogue) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
@@ -101,7 +108,7 @@ func buildRogueWithRaidBuffs(t *testing.T, talentsStr string, raidBuffs *proto.R
 		},
 		DefaultRogue,
 	)
-	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, raidBuffs, core.FullBuffs.Debuffs)
+	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, raidBuffs, debuffs)
 
 	sim := core.NewSim(&proto.RaidSimRequest{
 		Raid: raid,

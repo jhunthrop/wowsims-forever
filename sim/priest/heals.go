@@ -30,6 +30,7 @@ func (priest *Priest) RegisterHealingSpells() {
 	priest.registerPenance()
 	priest.registerHolyNova()
 	priest.registerPrayerOfMending()
+	priest.registerLightwell()
 	priest.registerInnerFire()
 }
 

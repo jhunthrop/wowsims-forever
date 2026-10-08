@@ -583,7 +583,7 @@ enum SaygesFortune {
 }
 
 // Buffs that affect the entire raid.
-// NextIndex: 42
+// NextIndex: 43
 message RaidBuffs {
 	reserved 36, 37, 38, 39;
 	reserved "atiesh_druid", "atiesh_mage", "atiesh_priest", "atiesh_warlock";
@@ -615,6 +615,14 @@ message RaidBuffs {
 	// itself (HunterAgent.AddRaidBuffs), so a preset names it for the raid's
 	// hunter slot.
 	bool heart_of_the_lion = 41;
+
+	// Flametongue Totem: in the Forever client an aura on every party member
+	// (spells 8230/8250/10521/15036, trigger spells 8253/8248/10523/16389),
+	// not a main-hand enchant: each main-hand auto attack adds fire damage
+	// of the rank's amount scaled by weapon speed. The client's beta notes
+	// say it does not stack with the Windfury Totem aura, so a request that
+	// names both receives Windfury.
+	bool flametongue_totem = 42;
 
 	// +Intell and/or Spi
 	bool arcane_brilliance = 6;

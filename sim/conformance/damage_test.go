@@ -94,3 +94,35 @@ func TestCountDamageOnlyCountsLevelSixty(t *testing.T) {
 		t.Errorf("countDamage = %+v, want %+v", got, want)
 	}
 }
+
+// Flametongue Totem's proc (spell 16389) is a dummy effect whose base
+// points the server script scales by weapon speed. Like an absorb it is
+// compared only when the ability file declares the base amount.
+func flametongueTotemProc() spellconst.Spell {
+	return spellconst.Spell{
+		ID: 16389, Name: "Flametongue Totem Proc", Rank: 4, SpellLevel: 58, MaxLevel: 66,
+		Effects: []spellconst.Effect{{Index: 0, Effect: 3, Amount: 1363}},
+	}
+}
+
+func TestCompareDamage_ADeclaredDummyAmountIsCompared(t *testing.T) {
+	if got := compareDamage(flametongueTotemProc(), 60, engineSpell(1363, 1363, 0)); got.Status != DamageMatches {
+		t.Errorf("status = %q (%s), want %q", got.Status, got.Diff, DamageMatches)
+	}
+	if got := compareDamage(flametongueTotemProc(), 60, engineSpell(1000, 1000, 0)); got.Status != DamageDiffers {
+		t.Errorf("a wrong declared dummy amount read %q, want %q", got.Status, DamageDiffers)
+	}
+}
+
+func TestCompareDamage_AnUndeclaredDummyStaysNotApplicable(t *testing.T) {
+	if got := compareDamage(flametongueTotemProc(), 60, engineSpell(0, 0, 0)); got.Status != DamageNone {
+		t.Errorf("status = %q, want %q: no dummy spell may become 'not declared' unasked", got.Status, DamageNone)
+	}
+}
+
+func TestCompareDamage_ADummyOutsideTheWeaponSpeedListIsNotRead(t *testing.T) {
+	other := spellconst.Spell{ID: 1310707, SpellLevel: 30, Effects: []spellconst.Effect{{Index: 0, Effect: 3, Amount: 20}}}
+	if got := compareDamage(other, 60, engineSpell(23, 23, 0)); got.Status != DamageNone {
+		t.Errorf("status = %q, want %q: only the weapon-speed dummies are read", got.Status, DamageNone)
+	}
+}

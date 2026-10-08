@@ -18,10 +18,11 @@ const (
 
 func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, raid *proto.Raid) {
 	if debuffs.JudgementOfWisdom && targetIdx == 0 {
-		jowAura := JudgementOfWisdomAura(target)
-		if jowAura != nil {
-			MakePermanent(jowAura)
-		}
+		MakePermanent(JudgementOfWisdomAura(target))
+	}
+
+	if debuffs.JudgementOfLight && targetIdx == 0 {
+		MakePermanent(JudgementOfLightAura(target))
 	}
 
 	if targetIdx == 0 {
@@ -404,17 +405,47 @@ func SchedulePeriodicDebuffApplication(aura *Aura, options PeriodicActionOptions
 
 const JudgementAuraTag = "Judgement"
 
-// TODO: Classic verify logic
+// JudgementDuration is the length of every judgement debuff in the
+// 1.60.1.70009 client (duration index 31, 40000 ms, on spells 20185 to
+// 20355 and the Crusader's); vanilla remembered 10 seconds.
+const JudgementDuration = 40 * time.Second
+
+// JudgementProcChance is the chance a qualifying attack triggers a
+// Judgement of Wisdom or Light. Assumption, not a client row: the auras
+// state ProcChance 100 and the roll lives in the server's script (the
+// intermediate spells 1826 and 5373 are Effect 3, dummy), so this is
+// vanilla's 50%. The Improved Judgement of Light talent (23564) adds to it.
+const JudgementProcChance = 0.5
+
+// Judgement of Wisdom and Light amounts by the judging paladin's level.
+// SpellID is the judgement aura; Amount is the mana (Wisdom, energize
+// spells 20268 / 20352 / 20353) or the health (Light, heal spells 20267 /
+// 20341 / 20342 / 20343) one trigger returns. The raid-debuff form has no
+// paladin, so the rank is the one the attacker's own level could judge.
+var (
+	JudgementOfWisdomRanks = BuffRanks{
+		{SpellID: 20186, Level: 38, Amount: 33},
+		{SpellID: 20354, Level: 48, Amount: 46},
+		{SpellID: 20355, Level: 58, Amount: 59},
+	}
+	JudgementOfLightRanks = BuffRanks{
+		{SpellID: 20185, Level: 30, Amount: 25},
+		{SpellID: 20344, Level: 40, Amount: 34},
+		{SpellID: 20345, Level: 50, Amount: 49},
+		{SpellID: 20346, Level: 60, Amount: 61},
+	}
+)
+
+// JudgementOfWisdomAura is the debuff on the target: an attack or spell
+// used against it has a chance to return mana to the attacker.
 func JudgementOfWisdomAura(target *Unit) *Aura {
 	actionID := ActionID{SpellID: 20355}
-
-	jowMana := 59.0
 
 	return target.GetOrRegisterAura(Aura{
 		Label:    "Judgement of Wisdom",
 		ActionID: actionID,
 		Tag:      JudgementAuraTag,
-		Duration: time.Second * 10,
+		Duration: JudgementDuration,
 		OnSpellHitTaken: func(aura *Aura, sim *Simulation, spell *Spell, result *SpellResult) {
 			unit := spell.Unit
 			if !unit.HasManaBar() {
@@ -434,28 +465,36 @@ func JudgementOfWisdomAura(target *Unit) *Aura {
 				return
 			}
 
-			if sim.RandomFloat("jow") < 0.5 {
+			if sim.RandomFloat("jow") < JudgementProcChance {
 				if unit.JowManaMetrics == nil {
 					unit.JowManaMetrics = unit.NewManaMetrics(actionID)
 				}
-				// JoW returns flat mana
-				unit.AddMana(sim, jowMana, unit.JowManaMetrics)
+				unit.AddMana(sim, JudgementOfWisdomRanks.At(int(unit.Level)), unit.JowManaMetrics)
 			}
 		},
 	})
 }
 
+// JudgementOfLightAura is the debuff on the target: a melee attack that
+// lands on it has a chance to heal the attacker.
 func JudgementOfLightAura(target *Unit) *Aura {
-	actionID := ActionID{SpellID: 20271}
+	actionID := ActionID{SpellID: 20346}
 
 	return target.GetOrRegisterAura(Aura{
 		Label:    "Judgement of Light",
 		ActionID: actionID,
 		Tag:      JudgementAuraTag,
-		Duration: time.Second * 10,
+		Duration: JudgementDuration,
 		OnSpellHitTaken: func(aura *Aura, sim *Simulation, spell *Spell, result *SpellResult) {
-			if !spell.ProcMask.Matches(ProcMaskMelee) || !result.Landed() {
+			unit := spell.Unit
+			if !unit.HasHealthBar() || !spell.ProcMask.Matches(ProcMaskMelee) || !result.Landed() {
 				return
+			}
+			if sim.RandomFloat("jol") < JudgementProcChance {
+				if unit.JolHealthMetrics == nil {
+					unit.JolHealthMetrics = unit.NewHealthMetrics(actionID)
+				}
+				unit.GainHealth(sim, JudgementOfLightRanks.At(int(unit.Level)), unit.JolHealthMetrics)
 			}
 		},
 	})

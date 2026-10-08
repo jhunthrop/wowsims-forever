@@ -161,6 +161,7 @@ type Shaman struct {
 	StrengthOfEarthTotem []*core.Spell
 	TremorTotem          *core.Spell
 	WaterShield          *core.Spell
+	FlametongueTotem     []*core.Spell
 	WindfuryTotem        []*core.Spell
 	WindfuryWeaponMH     *core.Spell
 	WindfuryWeaponOH     *core.Spell
@@ -238,6 +239,7 @@ func (shaman *Shaman) Initialize() {
 	shaman.registerTremorTotemSpell()
 	shaman.registerSearingTotemSpell()
 	shaman.registerMagmaTotemSpell()
+	shaman.registerFlametongueTotemSpell()
 	shaman.registerFireNovaSpell()
 	shaman.registerHealingStreamTotemSpell()
 	shaman.registerManaSpringTotemSpell()

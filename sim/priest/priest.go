@@ -41,6 +41,7 @@ const (
 	SpellCode_PriestSmite
 	SpellCode_PriestStarshards
 	SpellCode_PriestVampiricTouch
+	SpellCode_PriestLightwell
 )
 
 // Spell masks for the declarative talent mods below. One bit per
@@ -71,6 +72,7 @@ const (
 	PriestSpellMaskHolyNova
 	PriestSpellMaskPrayerOfMending
 	PriestSpellMaskDesperatePrayer
+	PriestSpellMaskLightwell
 )
 
 // PriestSpellMaskInstantShadowDamage is every Shadow damage spell this
@@ -113,6 +115,9 @@ type Priest struct {
 	InnerFire         []*core.Spell
 	InnerFocus        *core.Spell
 	LesserHeal        []*core.Spell
+	Lightwell         []*core.Spell
+	LightwellAura     *core.Aura
+	lightwell         lightwellState
 	MindBlast         []*core.Spell
 	MindFlay          [][]*core.Spell // 1 entry for each tick for each rank
 	Penance           []*core.Spell

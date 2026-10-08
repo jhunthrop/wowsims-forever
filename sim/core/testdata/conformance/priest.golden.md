@@ -175,6 +175,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 40 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 47.62-57.98→47.62-57.98 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 76.01-90.99→76.01-90.99 | 0.571→0.571 | declared, matches |
 | HealingPriest | 40 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 137.77-160.23→137.77-160.23 | 0.714→0.714 | declared, matches |
+| HealingPriest | 40 | Lightwell | 1 | 724 | 225.00→225.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 40→40 | 180000→180000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 40 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429→0.429 | declared, matches |
@@ -245,6 +246,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 50 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 47.62-57.98→47.62-57.98 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 76.01-90.99→76.01-90.99 | 0.571→0.571 | declared, matches |
 | HealingPriest | 50 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 137.77-160.23→137.77-160.23 | 0.714→0.714 | declared, matches |
+| HealingPriest | 50 | Lightwell | 1 | 724 | 225.00→225.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 40→40 | 180000→180000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 50 | Lightwell | 2 | 27870 | 295.00→295.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 50→50 | 180000→180000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 50 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429→0.429 | declared, matches |
@@ -334,6 +337,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 60 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 47.62-57.98→47.62-57.98 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 76.01-90.99→76.01-90.99 | 0.571→0.571 | declared, matches |
 | HealingPriest | 60 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 137.77-160.23→137.77-160.23 | 0.714→0.714 | declared, matches |
+| HealingPriest | 60 | Lightwell | 1 | 724 | 225.00→225.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 40→40 | 180000→180000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 60 | Lightwell | 2 | 27870 | 295.00→295.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 50→50 | 180000→180000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 60 | Lightwell | 3 | 27871 | 365.00→365.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 60→60 | 180000→180000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429→0.429 | declared, matches |
@@ -675,7 +681,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | ShadowPriest (Vampiric Embrace talent) | 60 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 31 of the class's 53 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 30 of the class's 53 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
@@ -705,7 +711,6 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Shadow Protection (976) | 30→56 | 3 | Shadow Magic | skill_line_ability | 650 mana | 0 | 0 | power cost |
 | Abolish Disease (552) | 32→32 | 1 | Holy | skill_line_ability | 0 | 0 | 0 |  |
 | Levitate (1706) | 34→34 | 1 | Discipline | skill_line_ability | 100 mana | 0 | 0 | power cost |
-| Lightwell (724) | 40→60 | 3 | Holy | skill_line_ability | 365 mana | 1500 | 600000 | power cost, cast time, cooldown |
 | Power Infusion (10060) | 40→40 | 1 | Discipline | skill_line_ability | 0 | 0 | 180000 | cooldown |
 | Prayer of Fortitude (21562) | 48→60 | 3 | Discipline | skill_line_ability | 3400 mana | 0 | 0 | power cost |
 | Prayer of Shadow Protection (27683) | 56→56 | 1 | Shadow Magic | skill_line_ability | 1300 mana | 0 | 0 | power cost |

@@ -117,9 +117,7 @@ func (shaman *Shaman) newSearingTotemSpellConfig(rank int) core.SpellConfig {
 		},
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-			if shaman.ActiveTotems[FireTotem] != nil {
-				shaman.ActiveTotems[FireTotem].Dot(sim.GetTargetUnit(0)).Cancel(sim)
-			}
+			shaman.endStandingFireTotem(sim)
 			spell.Dot(sim.GetTargetUnit(0)).Apply(sim)
 			// +1 needed because of rounding issues with totem tick time.
 			shaman.TotemExpirations[FireTotem] = sim.CurrentTime + duration + 1
@@ -228,9 +226,7 @@ func (shaman *Shaman) newMagmaTotemSpellConfig(rank int) core.SpellConfig {
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			if shaman.ActiveTotems[FireTotem] != nil {
-				shaman.ActiveTotems[FireTotem].Dot(sim.GetTargetUnit(0)).Cancel(sim)
-			}
+			shaman.endStandingFireTotem(sim)
 			spell.Dot(sim.GetTargetUnit(0)).Apply(sim)
 			// +1 needed because of rounding issues with totem tick time.
 			shaman.TotemExpirations[FireTotem] = sim.CurrentTime + duration + 1

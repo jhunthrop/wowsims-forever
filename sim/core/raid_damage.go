@@ -61,14 +61,14 @@ func (raid *Raid) applyRaidDamageModel(model *proto.RaidDamageModel) {
 	tank.RegisterResetEffect(func(sim *Simulation) {
 		if model.TankHitDamage > 0 && model.TankSwingSeconds > 0 {
 			scheduleRaidDamage(sim, model.TankSwingSeconds, func(sim *Simulation) {
-				dealRaidDamage(sim, &tank.Unit, model.TankHitDamage, model.DamageSpread)
+				dealRaidDamage(sim, &tank.Unit, model.TankHitDamage, model.DamageSpread, true)
 			})
 		}
 		if model.PulseDamage > 0 && model.PulseIntervalSeconds > 0 && len(units) > 0 {
 			picked := make([]*Unit, len(units))
 			scheduleRaidDamage(sim, model.PulseIntervalSeconds, func(sim *Simulation) {
 				for _, unit := range pickPulseTargets(sim, units, picked, int(model.PulseMembers)) {
-					dealRaidDamage(sim, unit, model.PulseDamage, model.DamageSpread)
+					dealRaidDamage(sim, unit, model.PulseDamage, model.DamageSpread, false)
 				}
 			})
 		}
@@ -110,13 +110,34 @@ func pickPulseTargets(sim *Simulation, units []*Unit, scratch []*Unit, count int
 	return scratch[:count]
 }
 
+// RaidDamageListener is told each time the damage model hurts a fake
+// member: the unit, the damage that got through its absorbs, and whether
+// the unit is the model's tank. It is how a healer's effect that "is
+// cancelled by being attacked" (a Lightwell renew) or that fires when a
+// member is hurt (a member clicking the Lightwell) hears of the damage,
+// which is plain health loss and no spell.
+type RaidDamageListener func(sim *Simulation, unit *Unit, damage float64, isTank bool)
+
+// OnRaidDamage registers a listener for the rest of the sim. Register
+// during initialization, once.
+func (raid *Raid) OnRaidDamage(listener RaidDamageListener) {
+	raid.raidDamageListeners = append(raid.raidDamageListeners, listener)
+}
+
 // dealRaidDamage takes amount (rolled within +/- spread) off a fake
-// member's health after its absorb shields.
-func dealRaidDamage(sim *Simulation, unit *Unit, amount, spread float64) {
+// member's health after its absorb shields, then tells the listeners.
+func dealRaidDamage(sim *Simulation, unit *Unit, amount, spread float64, isTank bool) {
 	amount *= 1 + spread*(2*sim.RandomFloat(raidDamageSpreadLabel)-1)
 	amount = unit.AbsorbDamage(sim, amount)
 	if amount > 0 {
 		unit.RemoveHealth(sim, amount)
+		sim.Raid.notifyRaidDamage(sim, unit, amount, isTank)
+	}
+}
+
+func (raid *Raid) notifyRaidDamage(sim *Simulation, unit *Unit, damage float64, isTank bool) {
+	for _, listener := range raid.raidDamageListeners {
+		listener(sim, unit, damage, isTank)
 	}
 }
 

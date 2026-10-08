@@ -88,3 +88,17 @@ func (shaman *Shaman) dropStandingTotem(sim *core.Simulation, slot int, spell *c
 	shaman.ActiveTotemBuffs[slot] = lifetime
 	lifetime.Activate(sim)
 }
+
+// endStandingFireTotem ends the fire totem now standing, whichever kind it
+// is: a buff totem (Flametongue) is a lifetime aura, a damage totem
+// (Searing, Magma) a dot on the first target.
+func (shaman *Shaman) endStandingFireTotem(sim *core.Simulation) {
+	if lifetime := shaman.ActiveTotemBuffs[FireTotem]; lifetime != nil {
+		lifetime.Deactivate(sim)
+		shaman.ActiveTotemBuffs[FireTotem] = nil
+		return
+	}
+	if standing := shaman.ActiveTotems[FireTotem]; standing != nil {
+		standing.Dot(sim.GetTargetUnit(0)).Cancel(sim)
+	}
+}

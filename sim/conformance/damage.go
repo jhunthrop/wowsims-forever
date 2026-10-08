@@ -46,6 +46,7 @@ const (
 
 	// Client effect and aura codes (SpellEffect.Effect / EffectAura).
 	effectSchoolDamage = 2
+	effectDummy        = 3
 	effectApplyAura    = 6
 	effectHeal         = 10
 	// effectApplyPartyAura is an aura applied to the caster's whole party,
@@ -109,6 +110,37 @@ func clientDamageEffect(spell spellconst.Spell) (spellconst.Effect, bool) {
 	return spellconst.Effect{}, false
 }
 
+// weaponSpeedDummySpells are the spells whose client row states their
+// damage as a dummy effect's base points that the server scales by weapon
+// speed (Flametongue Totem's procs). A dummy effect is a script hook in
+// general, so only these ids are read as an amount.
+var weaponSpeedDummySpells = func() map[int32]bool {
+	ids := map[int32]bool{}
+	for _, id := range core.FlametongueTotemProcSpellIDs {
+		ids[id] = true
+	}
+	return ids
+}()
+
+// clientDeclaredOnlyEffect is the effect read for a spell whose client row
+// states no damage, heal or periodic effect, and only when the engine
+// spell declares a base amount: an absorb shield, else the base points of
+// a weapon-speed dummy.
+func clientDeclaredOnlyEffect(spell spellconst.Spell) (spellconst.Effect, bool) {
+	if effect, ok := clientAbsorbEffect(spell); ok {
+		return effect, true
+	}
+	if !weaponSpeedDummySpells[spell.ID] {
+		return spellconst.Effect{}, false
+	}
+	for _, e := range spell.Effects {
+		if e.Effect == effectDummy && e.Amount > 0 {
+			return e, true
+		}
+	}
+	return spellconst.Effect{}, false
+}
+
 // clientAbsorbEffect is the spell's absorb aura (a shield). It is read only
 // for an engine spell that declares a base amount: no ability file declared
 // one for a shield before, so reading it for every absorb would turn each
@@ -128,7 +160,7 @@ func clientAbsorbEffect(spell spellconst.Spell) (spellconst.Effect, bool) {
 func compareDamage(clientSpell spellconst.Spell, casterLevel int, engine *core.Spell) DamageComparison {
 	effect, ok := clientDamageEffect(clientSpell)
 	if !ok && engine.ClientBaseDamage != ([2]float64{}) {
-		effect, ok = clientAbsorbEffect(clientSpell)
+		effect, ok = clientDeclaredOnlyEffect(clientSpell)
 	}
 	if !ok {
 		return DamageComparison{Status: DamageNone}
