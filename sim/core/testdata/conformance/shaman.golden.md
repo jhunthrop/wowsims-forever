@@ -20,8 +20,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 10 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 7.00-7.00→- | 0.022→0.022 | not declared |
 | ElementalShaman | 10 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 9.00-9.00→- | 0.022→0.022 | not declared |
 | ElementalShaman | 10 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
-| ElementalShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| ElementalShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.26-29.14→27.86-32.14 | 0.571→0.571 | declared, differs: damage 25-29->28-32 |
+| ElementalShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.26-29.14→25.26-29.14 | 0.571→0.571 | declared, matches |
 | ElementalShaman | 10 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 10 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
@@ -45,10 +45,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 20 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 9.00-9.00→- | 0.022→0.022 | not declared |
 | ElementalShaman | 20 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
 | ElementalShaman | 20 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| ElementalShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| ElementalShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| ElementalShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 56.89-65.11→52.22-59.78 | 0.714→0.714 | declared, differs: damage 57-65->52-60 |
+| ElementalShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 56.89-65.11→56.89-65.11 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 20 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
@@ -82,11 +82,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 30 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
 | ElementalShaman | 30 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| ElementalShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| ElementalShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| ElementalShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| ElementalShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.36-89.64→69.78-79.82 | 0.714→0.714 | declared, differs: damage 78-90->70-80 |
+| ElementalShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.36-89.64→78.36-89.64 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 30 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -132,11 +132,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 38 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
 | ElementalShaman | 38 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| ElementalShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| ElementalShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| ElementalShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| ElementalShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| ElementalShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 38 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 38 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 138.46-155.54→138.46-155.54 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 38 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -194,11 +194,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 40 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| ElementalShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| ElementalShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| ElementalShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| ElementalShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| ElementalShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 40 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 40 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 139.97-157.23→139.97-157.23 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 40 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -266,11 +266,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 50 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 300000→300000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| ElementalShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| ElementalShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| ElementalShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| ElementalShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| ElementalShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 50 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 50 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 50 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
@@ -358,11 +358,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 60 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Healing Stream Totem | 5 | 10463 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 300000→300000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| ElementalShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| ElementalShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| ElementalShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| ElementalShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| ElementalShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| ElementalShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 60 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 60 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
 | ElementalShaman | 60 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
@@ -419,8 +419,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 10 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 7.00-7.00→- | 0.022→0.022 | not declared |
 | EnhancementShaman | 10 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 9.00-9.00→- | 0.022→0.022 | not declared |
 | EnhancementShaman | 10 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
-| EnhancementShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| EnhancementShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.26-29.14→27.86-32.14 | 0.571→0.571 | declared, differs: damage 25-29->28-32 |
+| EnhancementShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.26-29.14→25.26-29.14 | 0.571→0.571 | declared, matches |
 | EnhancementShaman | 10 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
@@ -444,10 +444,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 20 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 9.00-9.00→- | 0.022→0.022 | not declared |
 | EnhancementShaman | 20 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
 | EnhancementShaman | 20 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| EnhancementShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| EnhancementShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| EnhancementShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 56.89-65.11→52.22-59.78 | 0.714→0.714 | declared, differs: damage 57-65->52-60 |
+| EnhancementShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 56.89-65.11→56.89-65.11 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 20 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
@@ -481,11 +481,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 30 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
 | EnhancementShaman | 30 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| EnhancementShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| EnhancementShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| EnhancementShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| EnhancementShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.36-89.64→69.78-79.82 | 0.714→0.714 | declared, differs: damage 78-90->70-80 |
+| EnhancementShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.36-89.64→78.36-89.64 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 30 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -531,11 +531,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 38 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
 | EnhancementShaman | 38 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| EnhancementShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| EnhancementShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| EnhancementShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| EnhancementShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| EnhancementShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 38 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 38 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 138.46-155.54→138.46-155.54 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 38 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -593,11 +593,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 40 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| EnhancementShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| EnhancementShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| EnhancementShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| EnhancementShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| EnhancementShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 40 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 40 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 139.97-157.23→139.97-157.23 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 40 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -665,11 +665,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 50 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 300000→300000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| EnhancementShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| EnhancementShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| EnhancementShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| EnhancementShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| EnhancementShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 50 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 50 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 50 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
@@ -757,11 +757,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 60 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Healing Stream Totem | 5 | 10463 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 300000→300000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| EnhancementShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| EnhancementShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| EnhancementShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| EnhancementShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| EnhancementShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| EnhancementShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 60 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 60 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
 | EnhancementShaman | 60 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
@@ -820,8 +820,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 10 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
 | RestorationShaman | 10 | Healing Wave | 1 | 331 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 36.44-47.16→36.44-47.16 | 0.429→0.429 | declared, matches |
 | RestorationShaman | 10 | Healing Wave | 2 | 332 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 67.61-82.39→67.61-82.39 | 0.571→0.571 | declared, matches |
-| RestorationShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.26-29.14→27.86-32.14 | 0.571→0.571 | declared, differs: damage 25-29->28-32 |
+| RestorationShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| RestorationShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.26-29.14→25.26-29.14 | 0.571→0.571 | declared, matches |
 | RestorationShaman | 10 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 10 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
@@ -850,10 +850,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 20 | Healing Wave | 3 | 547 | 80.00→80.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 12→12 | n/a | match |  | 125.82-151.18→125.82-151.18 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 20 | Healing Wave | 4 | 913 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 18→18 | n/a | match |  | 239.18-282.02→239.18-282.02 | 0.857→0.857 | declared, matches |
 | RestorationShaman | 20 | Lesser Healing Wave | 1 | 8004 | 105.00→105.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 142.45-163.55→142.45-163.55 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| RestorationShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| RestorationShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 56.89-65.11→52.22-59.78 | 0.714→0.714 | declared, differs: damage 57-65->52-60 |
+| RestorationShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| RestorationShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| RestorationShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| RestorationShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 56.89-65.11→56.89-65.11 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 20 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 20 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 20 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
@@ -894,11 +894,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 30 | Healing Wave | 5 | 939 | 200.00→200.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | n/a | match |  | 327.62-383.38→327.62-383.38 | 0.857→0.857 | declared, matches |
 | RestorationShaman | 30 | Lesser Healing Wave | 1 | 8004 | 105.00→105.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 150.36-172.64→150.36-172.64 | 0.429→0.429 | declared, matches |
 | RestorationShaman | 30 | Lesser Healing Wave | 2 | 8008 | 145.00→145.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 213.51-242.89→213.51-242.89 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| RestorationShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| RestorationShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| RestorationShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.36-89.64→69.78-79.82 | 0.714→0.714 | declared, differs: damage 78-90->70-80 |
+| RestorationShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| RestorationShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| RestorationShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| RestorationShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| RestorationShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.36-89.64→78.36-89.64 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 30 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -953,11 +953,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 38 | Lesser Healing Wave | 1 | 8004 | 105.00→105.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 150.36-172.64→150.36-172.64 | 0.429→0.429 | declared, matches |
 | RestorationShaman | 38 | Lesser Healing Wave | 2 | 8008 | 145.00→145.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 219.40-249.60→219.40-249.60 | 0.429→0.429 | declared, matches |
 | RestorationShaman | 38 | Lesser Healing Wave | 3 | 8010 | 185.00→185.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 36→36 | n/a | match |  | 290.06-327.94→290.06-327.94 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| RestorationShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| RestorationShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| RestorationShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| RestorationShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| RestorationShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| RestorationShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| RestorationShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| RestorationShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 38 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 38 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 138.46-155.54→138.46-155.54 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 38 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -1026,11 +1026,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 40 | Lesser Healing Wave | 1 | 8004 | 105.00→105.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 150.36-172.64→150.36-172.64 | 0.429→0.429 | declared, matches |
 | RestorationShaman | 40 | Lesser Healing Wave | 2 | 8008 | 145.00→145.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 219.40-249.60→219.40-249.60 | 0.429→0.429 | declared, matches |
 | RestorationShaman | 40 | Lesser Healing Wave | 3 | 8010 | 185.00→185.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 36→36 | n/a | match |  | 294.76-333.24→294.76-333.24 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| RestorationShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| RestorationShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| RestorationShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| RestorationShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| RestorationShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| RestorationShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| RestorationShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| RestorationShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 40 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 40 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 139.97-157.23→139.97-157.23 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 40 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -1112,11 +1112,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 50 | Lesser Healing Wave | 2 | 8008 | 145.00→145.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 219.40-249.60→219.40-249.60 | 0.429→0.429 | declared, matches |
 | RestorationShaman | 50 | Lesser Healing Wave | 3 | 8010 | 185.00→185.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 36→36 | n/a | match |  | 297.10-335.90→297.10-335.90 | 0.429→0.429 | declared, matches |
 | RestorationShaman | 50 | Lesser Healing Wave | 4 | 10466 | 235.00→235.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 44→44 | n/a | match |  | 415.59-466.41→415.59-466.41 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| RestorationShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| RestorationShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| RestorationShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| RestorationShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| RestorationShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| RestorationShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| RestorationShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| RestorationShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 50 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 50 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 50 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
@@ -1223,11 +1223,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 60 | Lesser Healing Wave | 4 | 10466 | 235.00→235.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 44→44 | n/a | match |  | 415.59-466.41→415.59-466.41 | 0.429→0.429 | declared, matches |
 | RestorationShaman | 60 | Lesser Healing Wave | 5 | 10467 | 305.00→305.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 52→52 | n/a | match |  | 591.33-660.67→591.33-660.67 | 0.429→0.429 | declared, matches |
 | RestorationShaman | 60 | Lesser Healing Wave | 6 | 10468 | 380.00→380.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 60→60 | n/a | match |  | 775.27-864.73→775.27-864.73 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| RestorationShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| RestorationShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| RestorationShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| RestorationShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| RestorationShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| RestorationShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| RestorationShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| RestorationShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| RestorationShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 60 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 60 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
 | RestorationShaman | 60 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
@@ -1284,8 +1284,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 10 | Healing Stream | 0 | 6372 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 7.00-7.00→- | 0.022→0.022 | not declared |
 | WardenShaman | 10 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 9.00-9.00→- | 0.022→0.022 | not declared |
 | WardenShaman | 10 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
-| WardenShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| WardenShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.26-29.14→27.86-32.14 | 0.571→0.571 | declared, differs: damage 25-29->28-32 |
+| WardenShaman | 10 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| WardenShaman | 10 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.26-29.14→25.26-29.14 | 0.571→0.571 | declared, matches |
 | WardenShaman | 10 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 10 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
@@ -1309,10 +1309,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 20 | Healing Stream | 0 | 10460 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 9.00-9.00→- | 0.022→0.022 | not declared |
 | WardenShaman | 20 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
 | WardenShaman | 20 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| WardenShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| WardenShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| WardenShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 56.89-65.11→52.22-59.78 | 0.714→0.714 | declared, differs: damage 57-65->52-60 |
+| WardenShaman | 20 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| WardenShaman | 20 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| WardenShaman | 20 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| WardenShaman | 20 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 56.89-65.11→56.89-65.11 | 0.714→0.714 | declared, matches |
 | WardenShaman | 20 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Magma Totem | 0 | 8187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.033→0.033 | declared, matches |
@@ -1346,11 +1346,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 30 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
 | WardenShaman | 30 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| WardenShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| WardenShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| WardenShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| WardenShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.36-89.64→69.78-79.82 | 0.714→0.714 | declared, differs: damage 78-90->70-80 |
+| WardenShaman | 30 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| WardenShaman | 30 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| WardenShaman | 30 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| WardenShaman | 30 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| WardenShaman | 30 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.36-89.64→78.36-89.64 | 0.714→0.714 | declared, matches |
 | WardenShaman | 30 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Lightning Shield | 2 | 325 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 600000→600000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Lightning Shield | 3 | 905 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -1396,11 +1396,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 38 | Healing Stream | 0 | 10461 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 60→60 | n/a | match |  | 11.00-11.00→- | 0.022→0.022 | not declared |
 | WardenShaman | 38 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| WardenShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| WardenShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| WardenShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| WardenShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| WardenShaman | 38 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| WardenShaman | 38 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| WardenShaman | 38 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| WardenShaman | 38 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| WardenShaman | 38 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | WardenShaman | 38 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | WardenShaman | 38 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 138.46-155.54→138.46-155.54 | 0.714→0.714 | declared, matches |
 | WardenShaman | 38 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -1458,11 +1458,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 40 | Healing Stream Totem | 1 | 5394 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| WardenShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| WardenShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| WardenShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| WardenShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| WardenShaman | 40 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| WardenShaman | 40 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| WardenShaman | 40 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| WardenShaman | 40 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| WardenShaman | 40 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | WardenShaman | 40 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | WardenShaman | 40 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 139.97-157.23→139.97-157.23 | 0.714→0.714 | declared, matches |
 | WardenShaman | 40 | Lightning Shield | 1 | 324 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 600000→600000 | match |  | n/a | n/a | n/a |
@@ -1530,11 +1530,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 50 | Healing Stream Totem | 2 | 6375 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 300000→300000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| WardenShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| WardenShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| WardenShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| WardenShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| WardenShaman | 50 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| WardenShaman | 50 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| WardenShaman | 50 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| WardenShaman | 50 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| WardenShaman | 50 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | WardenShaman | 50 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | WardenShaman | 50 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
 | WardenShaman | 50 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
@@ -1622,11 +1622,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 60 | Healing Stream Totem | 3 | 6377 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Healing Stream Totem | 4 | 10462 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Healing Stream Totem | 5 | 10463 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 300000→300000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.86-17.14 | 0.429→0.429 | declared, matches |
-| WardenShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→29.25-33.75 | 0.571→0.571 | declared, differs: damage 26-29->29-34 |
-| WardenShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→44.08-51.92 | 0.714→0.714 | declared, differs: damage 43-50->44-52 |
-| WardenShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→55.02-62.98 | 0.714→0.714 | declared, differs: damage 59-67->55-63 |
-| WardenShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→70.43-80.57 | 0.714→0.714 | declared, differs: damage 79-90->70-81 |
+| WardenShaman | 60 | Lightning Bolt | 1 | 403 | 15.00→15.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.39-16.61→14.39-16.61 | 0.429→0.429 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 2 | 529 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 25.54-29.46→25.54-29.46 | 0.571→0.571 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 3 | 548 | 45.00→45.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 42.70-50.30→42.70-50.30 | 0.714→0.714 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 4 | 915 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 20→20 | n/a | match |  | 58.75-67.25→58.75-67.25 | 0.714→0.714 | declared, matches |
+| WardenShaman | 60 | Lightning Bolt | 5 | 943 | 85.00→85.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 26→26 | n/a | match |  | 78.82-90.18→78.82-90.18 | 0.714→0.714 | declared, matches |
 | WardenShaman | 60 | Lightning Bolt | 6 | 6041 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 32→32 | n/a | match |  | 108.09-121.91→108.09-121.91 | 0.714→0.714 | declared, matches |
 | WardenShaman | 60 | Lightning Bolt | 7 | 10391 | 135.00→135.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 142.23-159.77→142.23-159.77 | 0.714→0.714 | declared, matches |
 | WardenShaman | 60 | Lightning Bolt | 8 | 10392 | 160.00→160.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 44→44 | n/a | match |  | 157.51-176.49→157.51-176.49 | 0.714→0.714 | declared, matches |
@@ -1708,13 +1708,13 @@ Each spell below is built with exactly one point in the single talent that grant
 | ElementalShaman (Stormstrike talent) | 40 | Stormstrike | 0 | 17364 | 125.00→125.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | n/a | n/a | n/a |
 | ElementalShaman (Stormstrike talent) | 50 | Stormstrike | 0 | 17364 | 125.00→125.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | n/a | n/a | n/a |
 | ElementalShaman (Stormstrike talent) | 60 | Stormstrike | 0 | 17364 | 125.00→125.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | n/a | n/a | n/a |
-| ElementalShaman (Water Shield talent) | 10 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→15000 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | mismatch | cooldown_ms 0->15000 | n/a | n/a | n/a |
-| ElementalShaman (Water Shield talent) | 20 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→15000 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | mismatch | cooldown_ms 0->15000 | n/a | n/a | n/a |
-| ElementalShaman (Water Shield talent) | 30 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→15000 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | mismatch | cooldown_ms 0->15000 | n/a | n/a | n/a |
-| ElementalShaman (Water Shield talent) | 38 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→15000 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | mismatch | cooldown_ms 0->15000 | n/a | n/a | n/a |
-| ElementalShaman (Water Shield talent) | 40 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→15000 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | mismatch | cooldown_ms 0->15000 | n/a | n/a | n/a |
-| ElementalShaman (Water Shield talent) | 50 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→15000 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | mismatch | cooldown_ms 0->15000 | n/a | n/a | n/a |
-| ElementalShaman (Water Shield talent) | 60 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→15000 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | mismatch | cooldown_ms 0->15000 | n/a | n/a | n/a |
+| ElementalShaman (Water Shield talent) | 10 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
+| ElementalShaman (Water Shield talent) | 20 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
+| ElementalShaman (Water Shield talent) | 30 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
+| ElementalShaman (Water Shield talent) | 38 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
+| ElementalShaman (Water Shield talent) | 40 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
+| ElementalShaman (Water Shield talent) | 50 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
+| ElementalShaman (Water Shield talent) | 60 | Water Shield | 0 | 408510 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
 | RestorationShaman (Mana Tide Totem talent) | 30 | Mana Tide Totem | 1 | 16190 | 10.00→10.00 | mana→mana | 300000→300000 | 0→0 | 1000→1000 | 25→25 | 13000→13000 | match |  | n/a | n/a | n/a |
 | RestorationShaman (Mana Tide Totem talent) | 38 | Mana Tide Totem | 1 | 16190 | 10.00→10.00 | mana→mana | 300000→300000 | 0→0 | 1000→1000 | 25→25 | 13000→13000 | match |  | n/a | n/a | n/a |
 | RestorationShaman (Mana Tide Totem talent) | 40 | Mana Tide Totem | 1 | 16190 | 10.00→10.00 | mana→mana | 300000→300000 | 0→0 | 1000→1000 | 25→25 | 13000→13000 | match |  | n/a | n/a | n/a |

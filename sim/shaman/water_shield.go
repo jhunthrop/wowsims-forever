@@ -21,8 +21,10 @@ import (
 //
 // The "few seconds" ICD and the 3-globe charge count are both
 // datamined, not stated by the tooltip: spellconst/shaman.json spell
-// 408510's SpellCooldowns.csv row gives CategoryRecoveryTime 15000ms,
-// and its SpellAuraOptions.csv row gives ProcCharges 3. The constants
+// 408510's SpellAuraOptions.csv row gives ProcCategoryRecovery 3500ms and
+// ProcCharges 3. (Until build 1.60.1.70291 the interval was read from the
+// spell's SpellCooldowns.csv CategoryRecoveryTime of 15000ms, which the
+// client has since cleared: the cast has no cooldown.) The constants
 // generator's own "Water Shield"-named slot (WaterShieldSpellId,
 // constants_auto_gen.go) resolved to 408511 - a second, differently
 // numbered spell also named "Water Shield" that is the 2%-of-mana
@@ -35,7 +37,7 @@ const (
 	waterShieldBuffSpellId = 408510
 	waterShieldMaxCharges  = int32(3)
 	waterShieldManaPercent = 0.02
-	waterShieldICD         = time.Second * 15
+	waterShieldICD         = time.Millisecond * 3500
 	waterShieldDuration    = time.Minute * 10
 )
 
@@ -96,9 +98,6 @@ func (shaman *Shaman) registerWaterShieldSpell() {
 		RelatedSelfBuff: waterShieldAura,
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{GCD: core.GCDDefault},
-			// The client's 15s category recovery also holds the cast
-			// itself; it runs on its own timer, apart from the proc ICD.
-			CD: core.Cooldown{Timer: shaman.NewTimer(), Duration: waterShieldICD},
 		},
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 			if shaman.ActiveShieldAura != nil {
