@@ -18,10 +18,10 @@ const ShadowBoltRanks = 10
 // wins.
 var ShadowBoltDamage = [ShadowBoltRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 13, Variance: 0.285714, PerLevel: 0.3, SpellLevel: 1, MaxLevel: 5},
-	{Amount: 25, Variance: 0.230769, PerLevel: 0.6, SpellLevel: 6, MaxLevel: 11},
-	{Amount: 41, Variance: 0.153846, PerLevel: 0.7, SpellLevel: 12, MaxLevel: 17},
-	{Amount: 56, Variance: 0.130435, PerLevel: 0.9, SpellLevel: 20, MaxLevel: 25},
+	{Amount: 13, Variance: 0.285714, PerLevel: 0.2, SpellLevel: 1, MaxLevel: 5},
+	{Amount: 23, Variance: 0.230769, PerLevel: 0.3, SpellLevel: 6, MaxLevel: 11},
+	{Amount: 40, Variance: 0.153846, PerLevel: 0.6, SpellLevel: 12, MaxLevel: 17},
+	{Amount: 58, Variance: 0.130435, PerLevel: 0.8, SpellLevel: 20, MaxLevel: 25},
 	{Amount: 78, Variance: 0.131579, PerLevel: 1.2, SpellLevel: 28, MaxLevel: 33},
 	{Amount: 101, Variance: 0.119816, PerLevel: 1.2, SpellLevel: 36, MaxLevel: 41},
 	{Amount: 141, Variance: 0.114094, PerLevel: 1.4, SpellLevel: 44, MaxLevel: 49},
