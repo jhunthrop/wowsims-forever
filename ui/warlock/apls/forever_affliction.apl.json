@@ -167,16 +167,22 @@
       }
     },
     {
-      "notes": "Immolate is kept up as a fourth DoT: its damage over time is worth more than the Shadow Bolt it replaces for a global.",
+      "notes": "Immolate is kept up as a fourth DoT, recast when under 3 seconds remain: its damage over time is worth more than the Shadow Bolt it replaces for a global. 2026-10-08: the recast moved from the moment it lapses to its last 3 seconds; the rotation search measured the later recast beyond error.",
       "action": {
         "condition": {
-          "not": {
-            "val": {
-              "dotIsActive": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "dotRemainingTime": {
                 "spellId": {
                   "spellId": 11668,
                   "rank": 7
                 }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "3s"
               }
             }
           }

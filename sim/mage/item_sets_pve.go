@@ -41,6 +41,62 @@ var ItemSetArcanistRegalia = core.NewItemSet(core.ItemSet{
 })
 
 ///////////////////////////////////////////////////////////////////////////
+//                            Forever Tier 1
+///////////////////////////////////////////////////////////////////////////
+
+// Increases the chance Frostfire Bolt triggers Missile Barrage and
+// Fingers of Frost by this much, in absolute chance. The client text
+// reads "a 10% increased chance"; it is taken as ten percentage points
+// added to the base chance (20% and 15%), the way every other proc bonus
+// in the engine reads. A multiplicative reading would give 22% and 16.5%.
+const manaflareFrostfireProcBonus = 0.10
+
+// The 5-piece's crit bonus while Combustion is active, in crit points.
+const manaflareFrostfireCombustionCritPoints = 10.0
+
+// Counterspell's cooldown reduction from the 3-piece.
+const manaflareCounterspellCooldownReduction = 5 * time.Second
+
+// Manaflare Regalia is Forever's Tier 1 mage set (client ItemSet 2098,
+// bonus spells 1300947, 1301013, 1301079 and 1301488, build
+// 1.60.1.70009).
+var ItemSetManaflareRegalia = core.NewItemSet(core.ItemSet{
+	ID:   2098,
+	Name: "Manaflare Regalia",
+	Bonuses: map[int32]core.ApplyEffect{
+		// Improves your chance to hit by 1%.
+		// (The spell's tooltip prints "${$s1}.1%"; its base points are 1,
+		// and the aura adds one point of hit.)
+		2: func(agent core.Agent) {
+			c := agent.GetCharacter()
+			c.AddStat(stats.Hit, 1*core.HitRatingPerHitChance)
+		},
+		// Reduces the cooldown on your Counterspell spell by 5 sec.
+		3: func(agent core.Agent) {
+			mage := agent.(MageAgent).GetMage()
+			mage.AddStaticMod(core.SpellModConfig{
+				Kind:      core.SpellMod_Cooldown_Flat,
+				ClassMask: MageSpellMaskCounterspell,
+				TimeValue: -manaflareCounterspellCooldownReduction,
+			})
+		},
+		// Increases damage done by your spells and effects by up to 21
+		// when fighting Elementals.
+		4: func(agent core.Agent) {
+			// No implementation in sim: no encounter in the sim is an
+			// Elemental, and the engine has no spell power by mob type.
+		},
+		// Your Frostfire Bolt spell has a 10% increased chance to trigger
+		// Missile Barrage, gains 10% increased critical strike chance
+		// while your Combustion spell is active, and has a 10% increased
+		// chance to trigger Fingers of Frost.
+		5: func(agent core.Agent) {
+			agent.(MageAgent).GetMage().manaflareFrostfire = true
+		},
+	},
+})
+
+///////////////////////////////////////////////////////////////////////////
 //                            Phase 2 Item Sets - Dire Maul
 ///////////////////////////////////////////////////////////////////////////
 

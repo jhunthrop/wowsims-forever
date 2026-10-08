@@ -760,21 +760,27 @@ func FaerieFireFeralAura(target *Unit) *Aura {
 }
 
 func faerieFireAuraInternal(target *Unit, label string, spellID int32) *Aura {
-	arPen := float64(505)
+	return MinorArmorReductionAura(target, label, spellID, 505, time.Second*40)
+}
 
+// MinorArmorReductionAura is an armor reduction in the minor category,
+// the one Faerie Fire takes: of the sources in it only the strongest
+// applies, and it stacks with the major category (Sunder Armor, Expose
+// Armor).
+func MinorArmorReductionAura(target *Unit, label string, spellID int32, armorReduction float64, duration time.Duration) *Aura {
 	aura := target.GetOrRegisterAura(Aura{
 		Label:    label,
 		ActionID: ActionID{SpellID: spellID},
-		Duration: time.Second * 40,
+		Duration: duration,
 	})
 
 	aura.NewExclusiveEffect(minorArmorReductionEffectCategory, true, ExclusiveEffect{
-		Priority: arPen,
+		Priority: armorReduction,
 		OnGain: func(ee *ExclusiveEffect, sim *Simulation) {
-			ee.Aura.Unit.AddStatDynamic(sim, stats.Armor, -arPen)
+			ee.Aura.Unit.AddStatDynamic(sim, stats.Armor, -armorReduction)
 		},
 		OnExpire: func(ee *ExclusiveEffect, sim *Simulation) {
-			ee.Aura.Unit.AddStatDynamic(sim, stats.Armor, arPen)
+			ee.Aura.Unit.AddStatDynamic(sim, stats.Armor, armorReduction)
 		},
 	})
 

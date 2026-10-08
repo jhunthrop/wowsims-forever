@@ -22,6 +22,9 @@ const (
 	SavageRend
 	TendonRip
 	Web
+	Dismember
+	Pinch
+	DustCloud
 )
 
 func (hp *HunterPet) NewPetAbility(abilityType PetAbilityType, isPrimary bool) *core.Spell {
@@ -44,6 +47,12 @@ func (hp *HunterPet) NewPetAbility(abilityType PetAbilityType, isPrimary bool) *
 		return hp.newPeriodicAbility(tendonRipAbility)
 	case Web:
 		return hp.newPeriodicAbility(webAbility)
+	case Dismember:
+		return hp.newDirectAbility(dismemberAbility)
+	case Pinch:
+		return hp.newDirectAbility(pinchAbility)
+	case DustCloud:
+		return hp.newDustCloud()
 	// case Swipe:
 	// 	return hp.newSwipe()
 	case Unknown:

@@ -62,6 +62,7 @@ func (shaman *Shaman) newSearingTotemSpellConfig(rank int) core.SpellConfig {
 	attackInterval := time.Millisecond * 2500
 
 	attackSpell := shaman.RegisterSpell(core.SpellConfig{
+		SpellCode:   SpellCode_ShamanSearingTotemAttack,
 		ActionID:    core.ActionID{SpellID: SearingTotemAttackSpellId[rank]},
 		SpellSchool: core.SpellSchoolFire,
 		DefenseType: core.DefenseTypeMagic,

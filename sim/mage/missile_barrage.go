@@ -84,13 +84,8 @@ func (mage *Mage) registerMissileBarrage() {
 			aura.Activate(sim)
 		},
 		OnCastComplete: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			var chance float64
-			switch spell.SpellCode {
-			case SpellCode_MageArcaneBlast:
-				chance = missileBarrageArcaneBlastChance
-			case SpellCode_MageFireball, SpellCode_MageFrostbolt, SpellCode_MageFrostfireBolt:
-				chance = missileBarrageOtherChance
-			default:
+			chance := mage.missileBarrageChance(spell)
+			if chance == 0 {
 				return
 			}
 
@@ -99,4 +94,23 @@ func (mage *Mage) registerMissileBarrage() {
 			}
 		},
 	})
+}
+
+// missileBarrageChance is the chance one cast of spell triggers Missile
+// Barrage: zero for a spell that cannot, and the Manaflare Regalia
+// 5-piece's 10% more on Frostfire Bolt.
+func (mage *Mage) missileBarrageChance(spell *core.Spell) float64 {
+	switch spell.SpellCode {
+	case SpellCode_MageArcaneBlast:
+		return missileBarrageArcaneBlastChance
+	case SpellCode_MageFrostfireBolt:
+		if mage.manaflareFrostfire {
+			return missileBarrageOtherChance + manaflareFrostfireProcBonus
+		}
+		return missileBarrageOtherChance
+	case SpellCode_MageFireball, SpellCode_MageFrostbolt:
+		return missileBarrageOtherChance
+	default:
+		return 0
+	}
 }

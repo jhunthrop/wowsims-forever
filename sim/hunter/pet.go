@@ -340,7 +340,8 @@ var PetConfigs = map[proto.Hunter_Options_PetType]PetConfig{
 		Name:    "Crab",
 		MobType: proto.MobType_MobTypeBeast,
 
-		FocusDump: Claw,
+		FamilyAbility: Pinch,
+		FocusDump:     Claw,
 
 		Health: 0.96,
 		Armor:  1.13,
@@ -350,7 +351,8 @@ var PetConfigs = map[proto.Hunter_Options_PetType]PetConfig{
 		Name:    "Crocolisk",
 		MobType: proto.MobType_MobTypeBeast,
 
-		FocusDump: Bite,
+		FamilyAbility: Dismember,
+		FocusDump:     Bite,
 
 		Health: 0.95,
 		Armor:  1.10,
@@ -430,7 +432,8 @@ var PetConfigs = map[proto.Hunter_Options_PetType]PetConfig{
 		Name:    "Tallstrider",
 		MobType: proto.MobType_MobTypeBeast,
 
-		FocusDump: Bite,
+		FamilyAbility: DustCloud,
+		FocusDump:     Bite,
 
 		Health: 1.05,
 		Armor:  1.00,

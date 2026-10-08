@@ -7,6 +7,7 @@ import (
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
+	"github.com/wowsims/classic/sim/shaman"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
@@ -146,5 +147,39 @@ func TestLightningOverloadHalvesTheWholeHit(t *testing.T) {
 	}
 	if !near(lightningBolt.DamageMultiplier, full) {
 		t.Errorf("damage multiplier %v after the overload, want the restored %v", lightningBolt.DamageMultiplier, full)
+	}
+}
+
+// spellByID is the shaman's registered spell with the given client id.
+func spellByID(t *testing.T, built *shaman.Shaman, id int32) *core.Spell {
+	t.Helper()
+	spell := built.GetSpell(core.ActionID{SpellID: id})
+	if spell == nil {
+		t.Fatalf("no spell %d registered", id)
+	}
+	return spell
+}
+
+// TestElementalFuryReachesTheTotemsDamage: the client's text and class mask
+// (spell 16089) name "your Searing and Magma Totems": the Searing Totem's
+// Attack spells (3606 .. 10436) and Magma Totem's pulse (8187 .. 10581)
+// carry the mask bit (0x40000000). The damage is dealt by those child
+// spells, not by the totem-drop spell, so the bonus has to reach them.
+func TestElementalFuryReachesTheTotemsDamage(t *testing.T) {
+	_, bare := newCallOfFlameShaman(t, elementalTalentsWith(nil))
+
+	for rank := 1; rank <= 5; rank++ {
+		_, talented := newCallOfFlameShaman(t, elementalTalentsWith(map[int]int{elementalFuryNode: rank}))
+		want := 0.2 * float64(rank)
+
+		for name, id := range map[string]int32{
+			"Searing Totem attack": shaman.SearingTotemAttackSpellId[shaman.SearingTotemRanks],
+			"Magma Totem pulse":    shaman.MagmaTotemAoeSpellId[shaman.MagmaTotemRanks],
+		} {
+			got := spellByID(t, talented, id).CritDamageBonus - spellByID(t, bare, id).CritDamageBonus
+			if !near(got, want) {
+				t.Errorf("Elemental Fury %d/5: %s crit damage bonus +%v, want +%v", rank, name, got, want)
+			}
+		}
 	}
 }

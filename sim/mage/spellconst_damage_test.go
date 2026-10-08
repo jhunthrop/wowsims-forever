@@ -42,6 +42,7 @@ func damageLadders() []damageLadder {
 		{"Arcane Explosion", 1, ArcaneExplosionRanks, ArcaneExplosionSpellId[:], ArcaneExplosionLevel[:], ArcaneExplosionManaCost[:], ArcaneExplosionSpellCoeff[:], ArcaneExplosionBaseDamage[:], ArcaneExplosionPointsPerLevel[:], ArcaneExplosionMaxLevel[:]},
 		{"Blast Wave", 1, BlastWaveRanks, BlastWaveSpellId[:], BlastWaveLevel[:], BlastWaveManaCost[:], BlastWaveSpellCoeff[:], BlastWaveBaseDamage[:], BlastWavePointsPerLevel[:], BlastWaveMaxLevel[:]},
 		{"Frost Nova", 1, FrostNovaRanks, FrostNovaSpellId[:], FrostNovaLevel[:], FrostNovaManaCost[:], FrostNovaSpellCoeff[:], FrostNovaBaseDamage[:], FrostNovaPointsPerLevel[:], FrostNovaMaxLevel[:]},
+		{"Cone of Cold", 1, ConeOfColdRanks, ConeOfColdSpellId[:], ConeOfColdLevel[:], ConeOfColdManaCost[:], ConeOfColdSpellCoeff[:], ConeOfColdBaseDamage[:], ConeOfColdPointsPerLevel[:], ConeOfColdMaxLevel[:]},
 		{"Ice Lance", 1, IceLanceRanks, IceLanceSpellId[:], IceLanceLevel[:], IceLanceManaCost[:], IceLanceSpellCoeff[:], IceLanceBaseDamage[:], IceLancePointsPerLevel[:], IceLanceMaxLevel[:]},
 		{"Fire Blast", 1, FireBlastRanks, FireBlastSpellId[:], FireBlastLevel[:], FireBlastManaCost[:], FireBlastSpellCoeff[:], FireBlastBaseDamage[:], FireBlastPointsPerLevel[:], FireBlastMaxLevel[:]},
 		{"Arcane Blast", 1, ArcaneBlastRanks, ArcaneBlastSpellId[:], ArcaneBlastLevel[:], nil, ArcaneBlastSpellCoeff[:], ArcaneBlastBaseDamage[:], ArcaneBlastPointsPerLevel[:], ArcaneBlastMaxLevel[:]},

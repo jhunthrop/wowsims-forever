@@ -150,6 +150,19 @@ var ItemOverrides = []*proto.UIItem{
 	foreverRelic(272433, "Burning Totem", "spell_fire_totemofwrath", proto.RangedWeaponType_RangedWeaponTypeTotem, 65, proto.ItemQuality_ItemQualityRare),
 	foreverRelic(272435, "Libram of Law", "inv_misc_book_04", proto.RangedWeaponType_RangedWeaponTypeLibram, 65, proto.ItemQuality_ItemQualityRare),
 	foreverRelic(279248, "Libram of Infusion", "inv_misc_book_13", proto.RangedWeaponType_RangedWeaponTypeLibram, 65, proto.ItemQuality_ItemQualityEpic),
+
+	// Forever's Tier 1 mage set, Manaflare Regalia (client ItemSet 2098;
+	// data/builds/1.60.1.70009/items/mage.json). No Wowhead or Wago page
+	// exists, and sim/mage/item_sets_pve.go registers its bonuses by name,
+	// which needs at least one item of the set in the database. The
+	// client's item rows carry no stats for these pieces in this build, so
+	// none are listed.
+	foreverMageTierPiece(280455, "Manaflare Crown", "inv_helm_cloth_raidmagehyjalc60_d_01", proto.ItemType_ItemTypeHead),
+	foreverMageTierPiece(280454, "Manaflare Mantle", "inv_shoulder_cloth_raidmagehyjalc60_d_01", proto.ItemType_ItemTypeShoulder),
+	foreverMageTierPiece(280450, "Manaflare Robes", "inv_chest_cloth_raidmagehyjalc60_d_01", proto.ItemType_ItemTypeChest),
+	foreverMageTierPiece(280451, "Manaflare Gloves", "inv_glove_cloth_raidmagehyjalc60_d_01", proto.ItemType_ItemTypeHands),
+	foreverMageTierPiece(280453, "Manaflare Pants", "inv_pant_cloth_raidmagehyjalc60_d_01", proto.ItemType_ItemTypeLegs),
+	foreverMageTierPiece(280452, "Manaflare Boots", "inv_boot_cloth_raidmagehyjalc60_d_01", proto.ItemType_ItemTypeFeet),
 }
 
 // Keep these sorted by item ID.
@@ -502,5 +515,29 @@ func foreverRelic(id int32, name, icon string, kind proto.RangedWeaponType, ilvl
 		Ilvl:             ilvl,
 		Quality:          quality,
 		Stats:            stats.Stats{}.ToFloatArray(),
+	}
+}
+
+// Forever's Tier 1 mage set: name and id are the client's ItemSet 2098,
+// the item level its rows' 65.
+const (
+	manaflareRegaliaName = "Manaflare Regalia"
+	manaflareRegaliaID   = 2098
+)
+
+func foreverMageTierPiece(id int32, name, icon string, slot proto.ItemType) *proto.UIItem {
+	return &proto.UIItem{
+		Id:             id,
+		Name:           name,
+		Icon:           icon,
+		Type:           slot,
+		ArmorType:      proto.ArmorType_ArmorTypeCloth,
+		Ilvl:           65,
+		Phase:          1,
+		Quality:        proto.ItemQuality_ItemQualityEpic,
+		ClassAllowlist: []proto.Class{proto.Class_ClassMage},
+		SetName:        manaflareRegaliaName,
+		SetId:          manaflareRegaliaID,
+		Stats:          stats.Stats{}.ToFloatArray(),
 	}
 }

@@ -68,26 +68,21 @@ func (mage *Mage) applyFingersOfFrost() {
 		Duration:  fingersOfFrostDuration,
 		MaxStacks: charges,
 	})
+}
 
-	mage.RegisterAura(core.Aura{
-		Label:    "Fingers of Frost Talent",
-		Duration: core.NeverExpires,
-		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Activate(sim)
-		},
-		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			// Blizzard's chill is a proc spell with no hit of its own;
-			// it rolls from its own effect (blizzard.go).
-			if spell.ProcMask.Matches(core.ProcMaskSpellDamage) && spell.Flags.Matches(SpellFlagChillSpell) && result.Landed() {
-				mage.rollFingersOfFrost(sim)
-			}
-		},
-	})
+// fingersOfFrostChance is the chance one Chill application by spell
+// grants the aura: the talent's 15%, plus the Manaflare Regalia 5-piece's
+// 10% on Frostfire Bolt.
+func (mage *Mage) fingersOfFrostChance(spell *core.Spell) float64 {
+	if mage.manaflareFrostfire && spell.SpellCode == SpellCode_MageFrostfireBolt {
+		return fingersOfFrostProcChance + manaflareFrostfireProcBonus
+	}
+	return fingersOfFrostProcChance
 }
 
 // rollFingersOfFrost is one Chill application's chance to grant the aura.
-func (mage *Mage) rollFingersOfFrost(sim *core.Simulation) {
-	if mage.FingersOfFrostAura == nil || !sim.Proc(fingersOfFrostProcChance, "Fingers of Frost") {
+func (mage *Mage) rollFingersOfFrost(sim *core.Simulation, chance float64) {
+	if mage.FingersOfFrostAura == nil || !sim.Proc(chance, "Fingers of Frost") {
 		return
 	}
 	mage.grantFingersOfFrost(sim)

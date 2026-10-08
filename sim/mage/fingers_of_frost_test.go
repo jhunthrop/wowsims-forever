@@ -204,7 +204,7 @@ func TestFingersOfFrostProcChanceIsFifteenPercent(t *testing.T) {
 	granted := 0
 	for i := 0; i < rolls; i++ {
 		built.FingersOfFrostAura.Deactivate(sim)
-		built.rollFingersOfFrost(sim)
+		built.rollFingersOfFrost(sim, fingersOfFrostProcChance)
 		if built.FingersOfFrostAura.IsActive() {
 			granted++
 		}

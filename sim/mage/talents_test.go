@@ -127,19 +127,9 @@ func TestFrostSpellsCarryTheirMasksWhenRegistered(t *testing.T) {
 		// Frostfire Bolt is a baseline trainable ability from level 40;
 		// the test mage is level 60.
 		"Frostfire Bolt": MageSpellMaskFrostfireBolt,
-	}
-	// Cone of Cold has a mask bit and a talent that names it (Improved
-	// Cone of Cold, one of ForeverFrostTalents' documented-inert points)
-	// but no ability file in this package, so nothing registers it. That
-	// is recorded here rather than left as a hole in the loop above:
-	// when it lands, this fails and the bit moves into `named`.
-	unimplemented := map[string]uint64{
+		// Cone of Cold is a baseline trainable ability (cone_of_cold.go);
+		// Improved Cone of Cold's damage mod binds to its mask.
 		"Cone of Cold": MageSpellMaskConeOfCold,
-	}
-	for name, mask := range unimplemented {
-		if len(carriers[mask]) != 0 {
-			t.Errorf("%s is now registered (as %v); move its mask into the asserted set", name, carriers[mask])
-		}
 	}
 	for name, mask := range named {
 		if len(carriers[mask]) == 0 {

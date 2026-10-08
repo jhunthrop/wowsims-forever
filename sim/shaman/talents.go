@@ -258,10 +258,27 @@ func (shaman *Shaman) applyElementalFury() {
 	critDamageBonus := elementalFuryCritDamageBonusPerRank * float64(clampRank(shaman.Talents.ElementalFury, elementalFuryMaxRank))
 
 	shaman.OnSpellRegistered(func(spell *core.Spell) {
-		if (spell.Flags.Matches(SpellFlagShaman) || spell.Flags.Matches(SpellFlagTotem)) && spell.DefenseType == core.DefenseTypeMagic {
+		if elementalFuryApplies(spell) {
 			spell.CritDamageBonus += critDamageBonus
 		}
 	})
+}
+
+// elementalFuryApplies reports whether Elemental Fury (16089) raises the
+// spell's crit damage bonus. The client's class mask names the shaman's
+// Fire, Frost and Nature damage spells and the Searing Totem's and Magma
+// Totem's damage, which is dealt by child spells (the Searing Totem's
+// Attack, the Magma Totem's pulse) that carry no shaman or totem flag;
+// it does not name the healing spells.
+func elementalFuryApplies(spell *core.Spell) bool {
+	if spell.DefenseType != core.DefenseTypeMagic || spell.ProcMask.Matches(core.ProcMaskSpellHealing) {
+		return false
+	}
+	switch spell.SpellCode {
+	case SpellCode_ShamanSearingTotemAttack, SpellCode_ShamanMagmaTotem:
+		return true
+	}
+	return spell.Flags.Matches(SpellFlagShaman)
 }
 
 func (shaman *Shaman) registerElementalMasteryCD() {
