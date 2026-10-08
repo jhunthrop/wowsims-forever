@@ -178,6 +178,54 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 60 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 55.79-63.01→55.79-63.01 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 60 | Wrath | 7 | 8905 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 46→46 | n/a | match |  | 69.34-77.46→69.34-77.46 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 60 | Wrath | 8 | 9912 | 120.00→120.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | n/a | match |  | 91.57-102.43→91.57-102.43 | 0.571→0.571 | declared, matches |
+| FeralBearDruid | 10 | Bear Form | 0 | 5487 | 81.95 (55% base mana)→81.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 10 | Demoralizing Roar | 1 | 99 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 10→10 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 10 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 10 | Maul | 1 | 6807 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 20 | Bear Form | 0 | 5487 | 194.70 (55% base mana)→194.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 20 | Demoralizing Roar | 2 | 1735 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 20 | Enrage | 0 | 5229 | 0.00→0.00 | rage→none | 60000→60000 | 0→0 | 0→0 | 12→12 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 20 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 20 | Maul | 2 | 6808 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 20 | Swipe | 1 | 779 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  | 18.00-18.00→18.00-18.00 | 1.000→1.000 | declared, matches |
+| FeralBearDruid | 30 | Bear Form | 0 | 5487 | 337.70 (55% base mana)→337.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 30 | Demoralizing Roar | 2 | 1735 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 20→20 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 30 | Enrage | 0 | 5229 | 0.00→0.00 | rage→none | 60000→60000 | 0→0 | 0→0 | 12→12 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 30 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 30 | Maul | 3 | 6809 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 26→26 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 30 | Swipe | 2 | 780 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 24→24 | n/a | match |  | 25.00-25.00→25.00-25.00 | 1.000→1.000 | declared, matches |
+| FeralBearDruid | 38 | Bear Form | 0 | 5487 | 444.95 (55% base mana)→444.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 38 | Demoralizing Roar | 3 | 9490 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 38 | Enrage | 0 | 5229 | 0.00→0.00 | rage→none | 60000→60000 | 0→0 | 0→0 | 12→12 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 38 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 38 | Frenzied Regeneration | 0 | 22842 | 0.00→0.00 | rage→none | 180000→180000 | 0→0 | 1500→1500 | 36→36 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 38 | Maul | 4 | 8972 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 38 | Swipe | 3 | 769 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | n/a | match |  | 36.00-36.00→36.00-36.00 | 1.000→1.000 | declared, matches |
+| FeralBearDruid | 40 | Demoralizing Roar | 3 | 9490 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 40 | Dire Bear Form | 0 | 9634 | 469.70 (55% base mana)→469.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | -1→-1 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 40 | Enrage | 0 | 5229 | 0.00→0.00 | rage→none | 60000→60000 | 0→0 | 0→0 | 12→12 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 40 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 40 | Frenzied Regeneration | 0 | 22842 | 0.00→0.00 | rage→none | 180000→180000 | 0→0 | 1500→1500 | 36→36 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 40 | Maul | 4 | 8972 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 40 | Swipe | 3 | 769 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 34→34 | n/a | match |  | 36.00-36.00→36.00-36.00 | 1.000→1.000 | declared, matches |
+| FeralBearDruid | 50 | Barkskin | 0 | 22812 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 1500→1500 | 44→44 | 15000→15000 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 50 | Demoralizing Roar | 4 | 9747 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 42→42 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 50 | Dire Bear Form | 0 | 9634 | 585.20 (55% base mana)→585.20 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | -1→-1 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 50 | Enrage | 0 | 5229 | 0.00→0.00 | rage→none | 60000→60000 | 0→0 | 0→0 | 12→12 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 50 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 50 | Frenzied Regeneration | 0 | 22842 | 0.00→0.00 | rage→none | 180000→180000 | 0→0 | 1500→1500 | 36→36 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 50 | Lacerate | 2 | 1235826 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | 12.00-12.00→12.00-12.00 | 0.500 (convention)→1.000 | declared, matches |
+| FeralBearDruid | 50 | Maul | 6 | 9880 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 50 | Swipe | 4 | 9754 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 60.00-60.00→60.00-60.00 | 1.000→1.000 | declared, matches |
+| FeralBearDruid | 60 | Barkskin | 0 | 22812 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 1500→1500 | 44→44 | 15000→15000 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 60 | Demoralizing Roar | 5 | 9898 | 10.00→10.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 52→52 | 30000→-1 | mismatch | duration_ms 30000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 60 | Dire Bear Form | 0 | 9634 | 684.20 (55% base mana)→684.20 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | -1→-1 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 60 | Enrage | 0 | 5229 | 0.00→0.00 | rage→none | 60000→60000 | 0→0 | 0→0 | 12→12 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 60 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
+| FeralBearDruid | 60 | Frenzied Regeneration | 0 | 22842 | 0.00→0.00 | rage→none | 180000→180000 | 0→0 | 1500→1500 | 36→36 | 10000→10000 | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 60 | Lacerate | 3 | 1235827 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 58→58 | 15000→15000 | match |  | 15.00-15.00→15.00-15.00 | 0.500 (convention)→1.000 | declared, matches |
+| FeralBearDruid | 60 | Maul | 7 | 9881 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid | 60 | Swipe | 5 | 9908 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→54 | n/a | match |  | 83.00-83.00→83.00-83.00 | 1.000→1.000 | declared, matches |
 | FeralDruid | 10 | Cat Form | 0 | 768 | 81.95 (55% base mana)→81.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 10 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→-1 | mismatch | duration_ms 40000->-1 | n/a | n/a | n/a |
 | FeralDruid | 10 | Innervate | 0 | 29166 | 7.45 (5% base mana)→7.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
@@ -388,9 +436,14 @@ Each spell below is built with exactly one point in the single talent that grant
 | BalanceDruid (Nature's Swiftness talent) | 40 | Nature's Swiftness | 0 | 17116 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid (Nature's Swiftness talent) | 50 | Nature's Swiftness | 0 | 17116 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid (Nature's Swiftness talent) | 60 | Nature's Swiftness | 0 | 17116 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
+| FeralBearDruid (Primal Bite talent) | 30 | Primal Bite | 1 | 407995 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 25→25 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid (Primal Bite talent) | 38 | Primal Bite | 2 | 1238069 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid (Primal Bite talent) | 40 | Primal Bite | 2 | 1238069 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid (Primal Bite talent) | 50 | Primal Bite | 3 | 1238070 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid (Primal Bite talent) | 60 | Primal Bite | 4 | 1238073 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 35 of the class's 54 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 27 of the class's 54 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
@@ -399,19 +452,14 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Rejuvenation (774) | 4→60 | 22 | Restoration | skill_line_ability | 360 mana | 0 | 0 | power cost |
 | Entangling Roots (339) | 8→58 | 12 | Balance | skill_line_ability | 0 | 1500 | 0 | cast time |
 | Healing Touch (5186) | 8→60 | 10 | Restoration | skill_line_ability | 840 mana | 3500 | 0 | power cost, cast time |
-| Demoralizing Roar (99) | 10→52 | 5 | Feral Combat | skill_line_ability | 100 rage | 0 | 0 | power cost |
-| Dire Bear Form (5487) | 10→40 | 2 | Feral Combat | skill_line_ability | 0 | 0 | 0 |  |
 | Growl (6795) | 10→10 | 1 | Feral Combat | skill_line_ability | 0 | 0 | 8000 | cooldown |
-| Maul (6807) | 10→58 | 7 | Feral Combat | skill_line_ability | 150 rage | 0 | 0 | power cost |
 | Nature's Grasp (16689) | 10→58 | 6 | Balance | skill_line_ability | 125 mana | 0 | 60000 | power cost, cooldown |
 | Teleport: Moonglade (18960) | 10→10 | 1 | Balance | skill_line_ability | 120 mana | 10000 | 0 | power cost, cast time |
-| Enrage (5229) | 12→12 | 1 | Feral Combat | skill_line_ability | 0 | 0 | 60000 | cooldown |
 | Regrowth (8936) | 12→60 | 18 | Restoration | skill_line_ability | 880 mana | 2000 | 0 | power cost, cast time |
 | Revive (437138) | 12→60 | 5 | Restoration | skill_line_ability | 0 | 10000 | 0 | cast time |
 | Bash (5211) | 14→46 | 3 | Feral Combat | skill_line_ability | 100 rage | 0 | 60000 | power cost, cooldown |
 | Cure Poison (8946) | 14→14 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
 | Aquatic Form (1066) | 16→16 | 1 | Feral Combat | skill_line_ability | 0 | 0 | 0 |  |
-| Swipe (779) | 16→54 | 5 | Feral Combat | skill_line_ability | 200 rage | 0 | 0 | power cost |
 | Hibernate (2637) | 18→58 | 3 | Balance | skill_line_ability | 150 mana | 1500 | 0 | power cost, cast time |
 | Feral Charge (1238122) | 20→20 | 1 | Feral Combat | skill_line_ability | 50 rage | 0 | 15000 | power cost, cooldown |
 | Rebirth (20484) | 20→60 | 5 | Restoration | skill_line_ability | 0 | 2000 | 1800000 | cast time, cooldown |
@@ -423,11 +471,8 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Cower (8998) | 28→52 | 3 | Feral Combat | skill_line_ability | 20 energy | 0 | 10000 | power cost, cooldown |
 | Tranquility (740) | 30→60 | 4 | Restoration | skill_line_ability | 925 mana | 0 | 300000 | power cost, cooldown |
 | Travel Form (783) | 30→30 | 1 | Feral Combat | skill_line_ability | 0 | 0 | 0 |  |
-| Frenzied Regeneration (22842) | 36→36 | 1 | Feral Combat | skill_line_ability | 0 | 0 | 180000 | cooldown |
 | Pounce (9005) | 36→56 | 3 | Feral Combat | skill_line_ability | 50 energy | 0 | 0 | power cost |
 | Wild Growth (408120) | 40→60 | 3 | Restoration | skill_line_ability | 1050 mana | 0 | 6000 | power cost, cooldown |
-| Lacerate (414644) | 42→58 | 3 | Feral Combat | skill_line_ability | 150 rage | 0 | 0 | power cost |
-| Barkskin (22812) | 44→44 | 1 | Balance | skill_line_ability | 0 | 0 | 60000 | cooldown |
 | Gift of the Wild (21849) | 50→60 | 2 | Restoration | skill_line_ability | 1200 mana | 0 | 0 | power cost |
 
 ### In the client, no learn row

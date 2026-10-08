@@ -16,6 +16,7 @@ package conformance
 
 import (
 	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/druid"
 	"github.com/wowsims/classic/sim/mage"
 	"github.com/wowsims/classic/sim/paladin"
 	"github.com/wowsims/classic/sim/warrior"
@@ -196,7 +197,7 @@ var Presets = []Preset{
 		ClientClassSlug: "druid",
 		Class:           proto.Class_ClassDruid,
 		Race:            proto.Race_RaceTauren,
-		Talents:         "-55232332121132212551",
+		Talents:         druid.ForeverBearTalents,
 		SpecOptions: &proto.Player_FeralTankDruid{
 			FeralTankDruid: &proto.FeralTankDruid{
 				Options: &proto.FeralTankDruid_Options{
