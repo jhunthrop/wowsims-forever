@@ -18,6 +18,14 @@ import (
 // left reading the value an untalented character would have read - which
 // is what a talent nobody can now take is worth.
 
+// Pet talent rates per rank, Forever's (1.60.1.70291 talent text):
+// Ferocity 2% pet and hawk crit a rank (10% at 5/5), Unleashed Fury 3% pet
+// and hawk damage a rank (15% at 5/5).
+const (
+	ferocityCritPerRank  = 2.0
+	unleashedFuryPerRank = 0.03
+)
+
 func (hunter *Hunter) ApplyTalents() {
 	hunter.registerHeartOfTheLion()
 
@@ -25,11 +33,14 @@ func (hunter *Hunter) ApplyTalents() {
 		hunter.applyFrenzy()
 		hunter.registerBestialWrathCD()
 
-		// Forever: merged from MeleeCrit 3/rank + SpellCrit 3/rank. One
-		// effect under a unified stat gets one write.
-		hunter.pet.AddStat(stats.Crit, core.CritRatingPerCritChance*3*float64(hunter.Talents.Ferocity))
+		// Forever's rates, from the 1.60.1.70291 talent text (talents/
+		// hunter.json): Ferocity "critical strike chance of your pets and
+		// hawks by 10%" at 5/5, Unleashed Fury "damage done by your pets and
+		// hawks by 15%" at 5/5. Vanilla's were 3% and 4% a rank; the engine
+		// carried those until 2026-10-09. One write under the unified Crit.
+		hunter.pet.AddStat(stats.Crit, core.CritRatingPerCritChance*ferocityCritPerRank*float64(hunter.Talents.Ferocity))
 
-		hunter.pet.PseudoStats.DamageDealtMultiplier *= 1 + 0.04*float64(hunter.Talents.UnleashedFury)
+		hunter.pet.PseudoStats.DamageDealtMultiplier *= 1 + unleashedFuryPerRank*float64(hunter.Talents.UnleashedFury)
 
 		if hunter.Talents.EnduranceTraining > 0 {
 			hunter.pet.MultiplyStat(stats.Health, 1+(0.03*float64(hunter.Talents.EnduranceTraining)))
