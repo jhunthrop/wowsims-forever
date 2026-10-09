@@ -45,7 +45,6 @@ func (warlock *Warlock) getCurseOfAgonyBaseConfig(rank int) core.SpellConfig {
 	manaCost := [CurseOfAgonyRanks + 1]float64{0, 25, 50, 90, 130, 170, 215}[rank]
 	level := [CurseOfAgonyRanks + 1]int{0, 8, 18, 28, 38, 48, 58}[rank]
 
-	baseDamage *= 1 + warlock.shadowMasteryBonus()
 	snapshotBaseDmgNoBonus := 0.0
 
 	return core.SpellConfig{

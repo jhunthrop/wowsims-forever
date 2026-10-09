@@ -314,18 +314,28 @@ func (warlock *Warlock) applyNightfall() {
 	}))
 }
 
+// shadowMasterySpellCodes are the Shadow spells covered by Shadow Mastery's
+// two aura effects in the client (spell 18271, class masks (524435,0,0) and
+// (17418,262147,0)): Shadow Bolt, Corruption, Curse of Agony, Death Coil,
+// Drain Life, Drain Soul and Siphon Life. Forever has no vanilla-style
+// exclusions; every covered spell takes the same damage multiplier.
+var shadowMasterySpellCodes = []int32{
+	SpellCode_WarlockShadowBolt,
+	SpellCode_WarlockCorruption,
+	SpellCode_WarlockCurseOfAgony,
+	SpellCode_WarlockDeathCoil,
+	SpellCode_WarlockDrainLife,
+	SpellCode_WarlockDrainSoul,
+	SpellCode_WarlockSiphonLife,
+}
+
 func (warlock *Warlock) applyShadowMastery() {
 	if warlock.Talents.ShadowMastery == 0 {
 		return
 	}
 
-	// These spells have their base damage modded instead
-	// Apply Aura: Modifies Spell Effectiveness (8)
-	excludedSpellCodes := []int32{SpellCode_WarlockCurseOfAgony, SpellCode_WarlockDeathCoil, SpellCode_WarlockDrainLife, SpellCode_WarlockDrainSoul}
-
 	warlock.OnSpellRegistered(func(spell *core.Spell) {
-		// Shadow Mastery applies a base damage modifier to all dots / channeled spells instead
-		if spell.SpellSchool.Matches(core.SpellSchoolShadow) && isWarlockSpell(spell) && !slices.Contains(excludedSpellCodes, spell.SpellCode) {
+		if slices.Contains(shadowMasterySpellCodes, spell.SpellCode) {
 			spell.DamageMultiplierAdditive += warlock.shadowMasteryBonus()
 		}
 	})
