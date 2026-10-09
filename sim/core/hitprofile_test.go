@@ -112,3 +112,17 @@ func TestComputeStatWeightsReadsAnAsymmetricWindowAsASlope(t *testing.T) {
 		t.Fatalf("hit weight over the window [-1, 0] = %v, want 2 DPS per point", got)
 	}
 }
+
+func TestExpertiseDistanceToCaps(t *testing.T) {
+	p := HitProfile{Melee: true, Expertise: 2, DodgeChance: 6.5, ParryChance: 14}
+	if got := p.ToDodgeCap(); got != 4.5 {
+		t.Errorf("ToDodgeCap = %v, want 4.5", got)
+	}
+	if got := p.ToParryCap(); got != 12 {
+		t.Errorf("ToParryCap = %v, want 12", got)
+	}
+	p.Expertise = 20
+	if p.ToDodgeCap() != 0 || p.ToParryCap() != 0 {
+		t.Errorf("past both chances the distances must floor at 0, got %v and %v", p.ToDodgeCap(), p.ToParryCap())
+	}
+}

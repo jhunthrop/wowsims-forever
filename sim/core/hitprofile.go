@@ -41,7 +41,25 @@ type HitProfile struct {
 	// DualWielding is true when white swings carry the dual wield miss
 	// penalty, so WhiteCap is above SpecialCap.
 	DualWielding bool
+	// Melee is true when the player auto-attacks in melee, the only swing a
+	// target can dodge or parry. The three fields below are set only then.
+	Melee bool
+	// Expertise is the player's total expertise, in percent points: the
+	// dodge and parry chance its melee attacks lose.
+	Expertise float64
+	// DodgeChance and ParryChance are the target's chances (percent
+	// points) to dodge and to parry this attacker, before Expertise. The
+	// dodge chance is net of the target's own dodge reduction. A target
+	// only parries an attacker it faces: a tank's figure applies, a damage
+	// dealer standing behind the target does not meet it.
+	DodgeChance, ParryChance float64
 }
+
+// ToDodgeCap is the expertise still worth anything against the target's dodge.
+func (p HitProfile) ToDodgeCap() float64 { return math.Max(p.DodgeChance-p.Expertise, 0) }
+
+// ToParryCap is the expertise still worth anything against the target's parry.
+func (p HitProfile) ToParryCap() float64 { return math.Max(p.ParryChance-p.Expertise, 0) }
 
 // ToSpecialCap is the hit still worth full value to special attacks.
 func (p HitProfile) ToSpecialCap() float64 { return math.Max(p.SpecialCap-p.Hit, 0) }
@@ -102,6 +120,12 @@ func ComputeHitProfile(swr *proto.StatWeightsRequest) (HitProfile, error) {
 	table := character.AttackTables[env.Encounter.TargetUnits[0].UnitIndex][slot]
 	if table == nil {
 		return profile, nil
+	}
+	profile.Melee = aa.AutoSwingMelee
+	if profile.Melee {
+		profile.Expertise = character.GetStat(stats.Expertise)
+		profile.DodgeChance = math.Max(table.BaseDodgeChance-env.Encounter.TargetUnits[0].PseudoStats.DodgeReduction, 0) * 100
+		profile.ParryChance = table.BaseParryChance * 100
 	}
 	profile.Suppression = table.HitSuppression * 100
 	profile.SpecialCap = (table.BaseMissChance + table.HitSuppression) * 100
