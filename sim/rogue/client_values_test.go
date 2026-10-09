@@ -199,3 +199,11 @@ func TestImprovedExposeArmorRefundsComboPointsOnlyAtFive(t *testing.T) {
 		}
 	}
 }
+
+// Deflection: "Increases your Parry chance by 2%/4%/6%." (the engine had 1%
+// a rank).
+func TestDeflectionIsTwoPercentPerRank(t *testing.T) {
+	base := buildRogueForTalentTest(t, talentsWithRanks(t, map[string]int{}), "combat_backstab_prebis").GetRogue()
+	deflected := buildRogueForTalentTest(t, talentsWithRanks(t, map[string]int{"deflection": 3}), "combat_backstab_prebis").GetRogue()
+	assertClose(t, "Parry gained at 3/3", deflected.GetStat(stats.Parry)-base.GetStat(stats.Parry), 6*core.ParryRatingPerParryChance)
+}

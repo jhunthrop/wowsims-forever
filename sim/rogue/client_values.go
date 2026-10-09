@@ -12,6 +12,13 @@ import (
 // vanilla figures this engine started with. A Forever patch that changes a
 // number changes a line here and nothing else.
 const (
+	// Deflection: "Increases your Parry chance by 2%/4%/6%." (Vanilla's 1%
+	// a rank is not Forever's.)
+	deflectionParryPerRank = 2.0
+	// Evasion's cooldown. Elusiveness cuts Vanish and Blind, not Evasion
+	// ("Reduces the cooldown of your Vanish and Blind abilities by 45/90
+	// sec"); Endurance, which cuts Evasion, is not modeled.
+	evasionCooldown = 5 * time.Minute
 	// Lethality: "...critical strike damage bonus ... by 4%/8%/12%/16%/20%."
 	lethalityCritBonusPerRank = 0.04
 	// Dual Wield Specialization: "off-hand weapon by 5%/10%/15%/20%/25%."

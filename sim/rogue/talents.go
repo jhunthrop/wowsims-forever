@@ -94,7 +94,7 @@ func (rogue *Rogue) ApplyTalents() {
 	_ = rogue.Talents.DirtyTricks
 
 	rogue.AddStat(stats.Dodge, 1*float64(rogue.Talents.LightningReflexes))
-	rogue.AddStat(stats.Parry, 1*float64(rogue.Talents.Deflection))
+	rogue.AddStat(stats.Parry, deflectionParryPerRank*float64(rogue.Talents.Deflection))
 	rogue.AddStat(stats.Crit, 1*float64(rogue.Talents.Malice))
 	rogue.AddStat(stats.Hit, 1*float64(rogue.Talents.Precision))
 	rogue.AddStat(stats.ArmorPenetration, serratedBladesArmorPenPctPerRank*float64(rogue.Talents.SerratedBlades)*core.ArmorPenPerPercentArmor)
