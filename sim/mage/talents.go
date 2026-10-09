@@ -486,12 +486,20 @@ func (mage *Mage) registerCombustionCD() {
 	})
 }
 
+// wintersChillMaxStacks is how many times Winter's Chill stacks at a talent
+// rank, Forever's 1.60.1.70291 talent text: "Stacks up to 1/2/3/4/5 times",
+// one stack a point.
+func wintersChillMaxStacks(rank int32) int32 {
+	return min(rank, core.WintersChillMaxStacks)
+}
+
 func (mage *Mage) applyWintersChill() {
 	if mage.Talents.WintersChill == 0 {
 		return
 	}
 
 	procChance := float64(mage.Talents.WintersChill) * 0.2
+	maxStacks := wintersChillMaxStacks(mage.Talents.WintersChill)
 
 	wcAuras := mage.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
 		return core.WintersChillAura(target)
@@ -516,7 +524,7 @@ func (mage *Mage) applyWintersChill() {
 			if sim.Proc(procChance, "Winters Chill") {
 				aura := wcAuras.Get(result.Target)
 				aura.Activate(sim)
-				if aura.IsActive() {
+				if aura.IsActive() && aura.GetStacks() < maxStacks {
 					aura.AddStack(sim)
 				}
 			}

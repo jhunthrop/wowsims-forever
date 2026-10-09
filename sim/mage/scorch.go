@@ -6,6 +6,11 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// improvedScorchProcChance is Improved Scorch's chance by rank, Forever's
+// 1.60.1.70291 talent text: "Your Scorch spell has a 33/67/100% chance to
+// cause your target to be vulnerable to Fire damage".
+var improvedScorchProcChance = [4]float64{0, 0.33, 0.67, 1}
+
 func (mage *Mage) registerScorchSpell() {
 	mage.Scorch = make([]*core.Spell, ScorchRanks+1)
 
@@ -26,7 +31,7 @@ func (mage *Mage) getScorchConfig(rank int) core.SpellConfig {
 	level := ScorchLevel[rank]
 
 	spellCoeff := ScorchSpellCoeff[rank]
-	debuffProcChance := []float64{0, .33, .66, 1}[mage.Talents.ImprovedScorch]
+	debuffProcChance := improvedScorchProcChance[rankIndex(mage.Talents.ImprovedScorch, improvedScorchProcChance[:])]
 
 	return core.SpellConfig{
 		ActionID:         core.ActionID{SpellID: spellId},

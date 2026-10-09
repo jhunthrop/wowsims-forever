@@ -695,12 +695,15 @@ func ImprovedScorchAura(target *Unit) *Aura {
 
 const SpellCritEffectCategory = "spellcritdebuff"
 
+// WintersChillMaxStacks is the most stacks a Winter's Chill debuff holds.
+const WintersChillMaxStacks = 5
+
 func WintersChillAura(target *Unit) *Aura {
 	aura := target.GetOrRegisterAura(Aura{
 		Label:     "Winter's Chill",
 		ActionID:  ActionID{SpellID: 28593},
 		Duration:  time.Second * 15,
-		MaxStacks: 5,
+		MaxStacks: WintersChillMaxStacks,
 		OnStacksChange: func(aura *Aura, sim *Simulation, oldStacks, newStacks int32) {
 			aura.Unit.PseudoStats.SchoolCritTakenChance[stats.SchoolIndexFrost] -= 0.02 * float64(oldStacks)
 			aura.Unit.PseudoStats.SchoolCritTakenChance[stats.SchoolIndexFrost] += 0.02 * float64(newStacks)
