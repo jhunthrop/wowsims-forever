@@ -18,16 +18,14 @@ import (
 // coefficient column was zero and the generator derived the value from
 // the vanilla convention.
 const (
-	// "Deals 300% increased damage to Frozen targets."
-	//
-	// unconfirmed: whether Forever reads its own wording literally
-	// (x4) or in Blizzard's usual sense of "triple damage" (x3). x3 is
-	// what every previous implementation of this spell did, so it is
-	// the value here, and the nightly cast-frequency and damage
-	// comparison is what settles it. It applies against a Frost
-	// Nova-frozen target and on a Fingers of Frost cast - see
-	// isTargetFrozen.
-	iceLanceFrozenMultiplier = 3.0
+	// "Deals 300% increased damage to Frozen targets." The client's
+	// SpellEffect row 1342606 (spell 1312002, effect 3) carries base
+	// points 300, so the bonus is +300%: damage x4 against a Frozen
+	// target. It applies against a Frost Nova-frozen target and on a
+	// Fingers of Frost cast - see isTargetFrozen.
+	iceLanceFrozenMultiplier = 1 + iceLanceFrozenBonusBasePoints/100
+	// iceLanceFrozenBonusBasePoints is SpellEffect 1342606's base points.
+	iceLanceFrozenBonusBasePoints = 300.0
 )
 
 func (mage *Mage) registerIceLanceSpell() {

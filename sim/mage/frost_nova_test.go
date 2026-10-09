@@ -14,7 +14,7 @@ import (
 // case ice_lance.go used to leave stubbed: isTargetFrozen/frozenAuras
 // always read false because no ability in this package ever registered
 // a Freeze. A level-60 Frost mage's Frost Nova must root a freezable
-// (sub-cap level) target, and Ice Lance's x3 Frozen bonus
+// (sub-cap level) target, and Ice Lance's x4 Frozen bonus
 // (iceLanceFrozenMultiplier) must actually show up once it does.
 func TestFrostNovaFreezesAFreezableTargetAndIceLanceBenefits(t *testing.T) {
 	built, sim, target := newFrostMageSim(t, &proto.Target{
@@ -40,7 +40,7 @@ func TestFrostNovaFreezesAFreezableTargetAndIceLanceBenefits(t *testing.T) {
 		t.Fatal("target is not Frozen after a landed Frost Nova")
 	}
 
-	// Ice Lance's x3 Frozen multiplier (ice_lance.go) is a plain scalar
+	// Ice Lance's x4 Frozen multiplier (ice_lance.go) is a plain scalar
 	// on base damage, so it holds in expectation regardless of the
 	// hit/crit roll on any one cast; averaging enough casts with a fixed
 	// seed makes the comparison deterministic without asserting an exact
@@ -71,7 +71,7 @@ func TestFrostNovaFreezesAFreezableTargetAndIceLanceBenefits(t *testing.T) {
 	waitForOutcomes(sim2)
 	unfrozenDamage := iceLance2.SpellMetrics[plainTarget.UnitIndex].TotalDamage
 
-	// True expected ratio is iceLanceFrozenMultiplier (3.0); a 1.5x
+	// True expected ratio is iceLanceFrozenMultiplier (4.0); a 1.5x
 	// floor over 200 samples is comfortably outside sampling noise while
 	// still failing hard if the Frozen bonus stops applying.
 	if frozenDamage < unfrozenDamage*1.5 {
