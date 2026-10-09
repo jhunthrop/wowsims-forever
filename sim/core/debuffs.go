@@ -277,9 +277,6 @@ func ExternalIsbCaster(_ *proto.Debuffs, target *Unit) {
 					for i := 0; i < int(isbConfig.isbWarlocks); i++ {
 						if sim.Proc(isbCrit, "External Isb Crit") {
 							isbAura.Activate(sim)
-							isbAura.SetStacks(sim, isbAura.MaxStacks)
-						} else if isbAura.IsActive() {
-							isbAura.RemoveStack(sim)
 						}
 					}
 				},
@@ -296,7 +293,6 @@ type IsbConfig struct {
 	shadowBoltFrequency float64
 	casterCrit          float64
 	isbWarlocks         int32
-	isbShadowPriests    int32
 }
 
 func (character *Character) createIsbConfig(player *proto.Player) {
@@ -304,7 +300,6 @@ func (character *Character) createIsbConfig(player *proto.Player) {
 		shadowBoltFrequency: player.IsbSbFrequency,
 		casterCrit:          player.IsbCrit,
 		isbWarlocks:         player.IsbWarlocks,
-		isbShadowPriests:    player.IsbSpriests,
 	}
 	//Defaults if not configured
 	if character.IsbConfig.shadowBoltFrequency == 0.0 {
@@ -318,9 +313,11 @@ func (character *Character) createIsbConfig(player *proto.Player) {
 	}
 }
 
-const (
-	ISBNumStacksBase = 4
-)
+// ImprovedShadowBoltDuration is the Shadow Vulnerability debuff's length:
+// SpellDuration index 29, 12000 ms, on spell 17794 (SpellMisc). The spell
+// has no SpellAuraOptions row, so it carries no proc charges: the bonus
+// lasts the full duration however many spells land.
+const ImprovedShadowBoltDuration = 12 * time.Second
 
 func ImprovedShadowBoltAura(unit *Unit, rank int32) *Aura {
 	isbLabel := "Improved Shadow Bolt"
@@ -328,56 +325,18 @@ func ImprovedShadowBoltAura(unit *Unit, rank int32) *Aura {
 		return unit.GetAura(isbLabel)
 	}
 
-	isbConfig := unit.Env.Raid.Parties[0].Players[0].GetCharacter().IsbConfig
-
-	priestGcds := []bool{false, true, true, true, true, true}
-	priestCurGcd := 0
-	externalShadowPriests := isbConfig.isbShadowPriests
-	var priestPa *PendingAction
-
 	damageMulti := 1. + 0.04*float64(rank)
-	aura := unit.GetOrRegisterAura(Aura{
-		Label:     isbLabel,
-		ActionID:  ActionID{SpellID: 17800},
-		Duration:  12 * time.Second,
-		MaxStacks: ISBNumStacksBase,
-		OnReset: func(aura *Aura, sim *Simulation) {
-			// External shadow priests simulation
-			if externalShadowPriests > 0 {
-				priestCurGcd = 0
-				priestPa = NewPeriodicAction(sim, PeriodicActionOptions{
-					Period: GCDDefault,
-					OnAction: func(s *Simulation) {
-						if priestGcds[priestCurGcd] {
-							for i := 0; i < int(externalShadowPriests); i++ {
-								if aura.IsActive() {
-									aura.RemoveStack(sim)
-								}
-							}
-						}
-						priestCurGcd++
-						if priestCurGcd >= len(priestGcds) {
-							priestCurGcd = 0
-						}
-					},
-				})
-				sim.AddPendingAction(priestPa)
-			}
-		},
+	return unit.GetOrRegisterAura(Aura{
+		Label:    isbLabel,
+		ActionID: ActionID{SpellID: 17800},
+		Duration: ImprovedShadowBoltDuration,
 		OnGain: func(aura *Aura, sim *Simulation) {
 			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow] *= damageMulti
 		},
 		OnExpire: func(aura *Aura, sim *Simulation) {
 			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow] /= damageMulti
 		},
-		OnSpellHitTaken: func(aura *Aura, sim *Simulation, spell *Spell, result *SpellResult) {
-			if spell.SpellSchool.Matches(SpellSchoolShadow) && result.Landed() && result.Damage > 0 {
-				aura.RemoveStack(sim)
-			}
-		},
 	})
-
-	return aura
 }
 
 var ShadowWeavingSpellIDs = [6]int32{0, 15257, 15331, 15332, 15333, 15334}

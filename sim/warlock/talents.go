@@ -739,9 +739,7 @@ func (warlock *Warlock) applyImprovedShadowBolt() {
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			if result.Landed() && result.DidCrit() && slices.Contains(affectedSpellCodes, spell.SpellCode) {
-				isbAura := warlock.ImprovedShadowBoltAuras.Get(result.Target)
-				isbAura.Activate(sim)
-				isbAura.SetStacks(sim, isbAura.MaxStacks)
+				warlock.ImprovedShadowBoltAuras.Get(result.Target).Activate(sim)
 			}
 		},
 	}))
