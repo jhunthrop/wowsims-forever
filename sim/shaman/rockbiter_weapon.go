@@ -61,6 +61,11 @@ func (shaman *Shaman) ApplyRockbiterImbue(procMask core.ProcMask) {
 	}
 }
 
+// elementalWeaponsRockbiterBonus is the Rockbiter Weapon attack power
+// multiplier by Elemental Weapons rank, Forever's text: "Increases the melee
+// attack power bonus of your Rockbiter Weapon by 7/13/20%".
+var elementalWeaponsRockbiterBonus = [4]float64{1, 1.07, 1.13, 1.20}
+
 func (shaman *Shaman) ApplyRockbiterImbueToItem(item *core.Item) {
 	if item == nil {
 		return
@@ -69,7 +74,7 @@ func (shaman *Shaman) ApplyRockbiterImbueToItem(item *core.Item) {
 	rank := weaponImbueRankAtLevel(RockbiterWeaponLevel[:], shaman.Level)
 	enchantId := RockbiterWeaponEnchantId[rank]
 
-	bonusAP := RockbiterWeaponBonusAP[rank] * []float64{1, 1.07, 1.14, 1.2}[shaman.Talents.ElementalWeapons]
+	bonusAP := RockbiterWeaponBonusAP[rank] * elementalWeaponsRockbiterBonus[rankIndex(shaman.Talents.ElementalWeapons, len(elementalWeaponsRockbiterBonus))]
 
 	newStats := stats.Stats{stats.AttackPower: bonusAP}
 

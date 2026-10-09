@@ -170,7 +170,7 @@ func TestFireNovaTalentMultipliers(t *testing.T) {
 	if got, want := ifn.FireNovaBlast[shaman.FireNovaLearnRanks].DamageMultiplier, baseline.DamageMultiplier+0.20; !near(got, want) {
 		t.Errorf("Improved Fire Nova 2/2 multiplier = %v, want %v", got, want)
 	}
-	if got, want := topFireNova(t, ifn).CD.Duration, 8*time.Second; got != want {
+	if got, want := topFireNova(t, ifn).CD.Duration, 6*time.Second; got != want {
 		t.Errorf("Improved Fire Nova 2/2 cooldown = %v, want %v", got, want)
 	}
 

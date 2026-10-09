@@ -35,13 +35,12 @@ var FireNovaLearnLevel = [FireNovaLearnRanks + 1]int{0, 12, 22, 32, 42, 52}
 // FireNovaCooldown is the client's category cooldown on every rank.
 const FireNovaCooldown = 10 * time.Second
 
-// Improved Fire Nova (spell 16086, 2 points): "Increases the damage done
-// by your Fire Nova spell by 20% and reduces its cooldown by 2 sec."
-// The client states one effect for the pair of ranks, so each point is
-// taken as half of it.
+// Improved Fire Nova (2 points): Forever's 1.60.1.70291 text reads "10% and
+// 2 sec" at rank 1 and "20% and 4 sec" at rank 2, so each point is 10% and
+// 2 sec.
 const (
 	improvedFireNovaDamagePerPoint   = 0.10
-	improvedFireNovaCooldownPerPoint = time.Second
+	improvedFireNovaCooldownPerPoint = 2 * time.Second
 )
 
 func (shaman *Shaman) registerFireNovaSpell() {

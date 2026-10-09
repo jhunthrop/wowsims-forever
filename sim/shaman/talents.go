@@ -18,6 +18,19 @@ import (
 // left reading the value an untalented character would have read - which
 // is what a talent nobody can now take is worth.
 
+// Forever's per-rank rates (1.60.1.70291 talents/shaman.json): Ancestral
+// Knowledge "Increases your Intellect by 2%" (vanilla: +1% maximum Mana),
+// Anticipation "Increases your chance to dodge by an additional 2%"
+// (vanilla 1%), Toughness "Increases your Stamina by 2%" (vanilla: armor
+// from items) and Flurry "Increases your attack speed by 5%" (vanilla
+// 10 + 5 a rank).
+const (
+	ancestralKnowledgeIntellectPerRank = 0.02
+	anticipationDodgePerRank           = 2.0
+	toughnessStaminaPerRank            = 0.02
+	flurryAttackSpeedPerRank           = 0.05
+)
+
 func (shaman *Shaman) ApplyTalents() {
 	// Elemental Talents
 	shaman.applyConcussion()
@@ -41,7 +54,7 @@ func (shaman *Shaman) ApplyTalents() {
 	shaman.registerRageOfTheFarseer()
 
 	if shaman.Talents.AncestralKnowledge > 0 {
-		shaman.MultiplyStat(stats.Mana, 1.0+0.01*float64(shaman.Talents.AncestralKnowledge))
+		shaman.MultiplyStat(stats.Intellect, 1.0+ancestralKnowledgeIntellectPerRank*float64(shaman.Talents.AncestralKnowledge))
 	}
 
 	/*
@@ -50,9 +63,9 @@ func (shaman *Shaman) ApplyTalents() {
 
 	shaman.AddStat(stats.Crit, core.CritRatingPerCritChance*1*float64(shaman.Talents.ThunderingStrikes))
 
-	shaman.AddStat(stats.Dodge, 1*float64(shaman.Talents.Anticipation))
+	shaman.AddStat(stats.Dodge, anticipationDodgePerRank*float64(shaman.Talents.Anticipation))
 
-	shaman.ApplyEquipScaling(stats.Armor, 1+.02*float64(shaman.Talents.Toughness))
+	shaman.MultiplyStat(stats.Stamina, 1+toughnessStaminaPerRank*float64(shaman.Talents.Toughness))
 
 	/*
 		if shaman.Talents.Parry {
@@ -462,13 +475,18 @@ func (shaman *Shaman) applyFlurry() {
 
 // These are separated out because of the T1 Shaman Tank 2P that can proc Flurry separately from the talent.
 // It triggers the max-rank Flurry aura but with dodge, parry, or block.
+// flurryAttackSpeed is the attack speed multiplier Flurry grants at a rank.
+func flurryAttackSpeed(points int32) float64 {
+	return 1 + flurryAttackSpeedPerRank*float64(points)
+}
+
 func (shaman *Shaman) makeFlurryAura(points int32) *core.Aura {
 	if points == 0 {
 		return nil
 	}
 
 	spellID := []int32{16257, 16277, 16278, 16279, 16280}[points-1]
-	attackSpeed := []float64{1.1, 1.15, 1.2, 1.25, 1.3}[points-1]
+	attackSpeed := flurryAttackSpeed(points)
 
 	aura := shaman.GetOrRegisterAura(core.Aura{
 		Label:     fmt.Sprintf("Flurry Proc (%d)", spellID),
