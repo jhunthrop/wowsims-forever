@@ -42,25 +42,22 @@ talent's maximum rank unless a note says otherwise.
 
 | Class | Checked | Match | Mismatch (fixed) | Unmodeled | Text-only | Unsettled | Not read |
 |---|---|---|---|---|---|---|---|
-| Druid | 52 | 44 | 0 | 6 | 0 | 2 | 0 |
+| Druid | 52 | 45 | 0 | 6 | 0 | 1 | 0 |
 | Hunter | 50 | 31 | 3 | 15 | 1 | 0 | 0 |
-| Mage | 54 | 39 | 2 | 12 | 0 | 1 | 0 |
+| Mage | 54 | 39 | 3 | 12 | 0 | 0 | 0 |
 | Paladin | 50 | 40 | 2 | 7 | 1 | 0 | 0 |
 | Priest | 53 | 32 | 5 | 14 | 2 | 0 | 0 |
 | Rogue | 53 | 40 | 2 | 11 | 0 | 0 | 0 |
 | Shaman | 50 | 33 | 6 | 8 | 3 | 0 | 0 |
-| Warlock | 52 | 32 | 9 | 10 | 0 | 1 | 0 |
+| Warlock | 52 | 32 | 10 | 10 | 0 | 0 | 0 |
 | Warrior | 47 | 41 | 1 | 4 | 0 | 1 | 5 |
 
 "Checked" counts talents whose engine field is read somewhere under `sim/<class>/`, `sim/core` or `sim/common`; a field only touched by a `_ =` line counts as checked and is an "unmodeled" row. "Not read" talents have no engine field or nothing reads it. Hunter also had Ferocity and Unleashed Fury fixed earlier, in `ef964a5aa`; they are listed as matches.
 
 ## Unsettled
 
-- **Druid: Thick Hide.** Engine: 1 armor per level per rank, 2/3 per defense point per rank. Reading A: "180 additional base Armor per level" is the same at every rank (the defense term alone grows 0.67/1.33/2.00), so rank 1 gives 180 a level. Reading B: the 180 is the max-rank total shown as a constant (3 a level at level 60), as the engine has it. The defense term matches either way.
-- **Druid: Reflection.** Engine: 50% (rank/3 of 50%: 16.7/33.3/50). Text says 17/33/50; the engine is exact thirds. Reading A: the client value is 17% at rank 1 and the engine is 0.3% low; Reading B: the text rounds a 1/6 value.
-- **Mage: Ice Lance.** Engine: x3 damage to Frozen targets. "Deals 300% increased damage to Frozen targets": Reading A is +300%, x4; Reading B is Blizzard's usual "triple", x3. The engine uses x3 and its source comment flags it unconfirmed.
-- **Warlock: Improved Shadow Bolt.** Engine: +20% Shadow damage taken for 12 sec, 4 charges. The text states no charge count (vanilla's 4 hits); Reading A: the debuff lasts 12 sec until it expires; Reading B: the text omits the vanilla charges. The engine consumes 4 charges.
-- **Warrior: Improved Slam.** Engine: cast and GCD -0.5 sec; cooldown -3 sec a rank = -6 sec at 2/2. Reading A (the 70291 text): "Slam's cooldown is reduced by 3.0 sec" at both ranks, 3 sec flat; Reading B (the engine, from Blizzard's 1 October 2026 notes "3 s off the cooldown per rank"): 6 sec at 2/2.
+- **Druid: Thick Hide.** Engine: 1 armor per level per rank, 2/3 per defense point per rank. Reading A: "180 additional base Armor per level" is the same at every rank (the defense term alone grows 0.67/1.33/2.00), so rank 1 gives 180 a level. Reading B: the 180 is the max-rank total shown as a constant (3 a level at level 60), as the engine has it. The defense term matches either way. The client rows do not settle it either: the aura is type 4 with base 100, and a second effect has base 3 with 3 per level, neither of which says whether the value is per rank or the max-rank total. Left as is.
+- **Warrior: Improved Slam.** Engine: cast and GCD -0.5 sec; cooldown -3 sec a rank = -6 sec at 2/2. Reading A (the 70291 text): "Slam's cooldown is reduced by 3.0 sec" at both ranks, 3 sec flat; Reading B (the engine, from Blizzard's 1 October 2026 notes "3 s off the cooldown per rank"): 6 sec at 2/2. The client rows do not tell the readings apart: spell 12862 is one spell for both ranks, with base -3000 ms on the cooldown and -500 ms on the cast time, so a per-rank reading cannot be told from a flat one. The engine is left as is.
 
 ## Mismatches fixed in this lane
 
@@ -69,7 +66,7 @@ talent's maximum rank unless a note says otherwise.
 - **Hunter: Savage Strikes.** Now 4% (was 20%). 2% a rank on Raptor Strike and Mongoose Bite; was 10% a rank. Other melee abilities (Wing Clip, Counterattack, Strider Kick) still carry no bonus.
 - **Mage: Improved Scorch.** Now 33/67/100% chance, 3% a stack to 5 stacks, 30 sec (was 33/66/100%). Rank 2 was 66%.
 - **Mage: Winter's Chill.** Now 20% a rank chance, 2% crit a stack, stacks to the rank (was always 5 stacks). Below 5/5 the debuff stacked past the rank; max rank unchanged.
-- **Paladin: Vindication.** Now AP +3% for 30 sec (was +15%). Was 5% a rank; the target Attack Power cut in the text is a garbled template ("(3 /- 3 *  - 204)") and is not modeled; the proc chance is not in the text, the engine procs on every landed melee hit.
+- **Paladin: Vindication.** Now AP +3% for 30 sec (was +15%). Was 5% a rank; the target Attack Power cut in the text is a garbled template ("(3 /- 3 *  - 204)") and is not modeled; the proc chance is not in the text; the aura row states ProcChance 100, so the engine proc on every landed melee hit matches.
 - **Paladin: Vengeance.** Now 3% a stack, 3 stacks, 30 sec = 9% (was 9% flat for 8 sec, no stacks, at 3/3 from a 3%-a-rank table). 1% a rank a stack at 1/2/3: 1/2/3% after one crit; the old table gave 3% a rank on one application.
 - **Priest: Silent Resolve.** Now 30% less Holy threat (was 12% less of all threat). Vanilla 4% a rank on all spells; stun/fear/silence duration half not modeled.
 - **Priest: Searing Light.** Now Holy damage +2/5% (was 5/10%). Smite and Holy Fire only; the Holy Nova free-cast chance is not modeled.
@@ -85,7 +82,7 @@ talent's maximum rank unless a note says otherwise.
 - **Shaman: Toughness.** Now +10% Stamina (was +10% armor from items). Target stat was wrong.
 - **Shaman: Flurry.** Now +25% attack speed (was +30%); +5% at 1/5 (was +10%). Vanilla 10/15/20/25/30.
 - **Warlock: Improved Corruption.** Now -2 sec cast, +10% damage (was cast time only). Damage half was unread.
-- **Warlock: Shadow Mastery.** Now +5% Shadow damage (was +10%). 2% a rank before. The engine still excludes Curse of Agony, Death Coil, Drain Life and Drain Soul (vanilla's exclusions); the Forever text names all Shadow spells and "life drained", which suggests those exclusions are gone; left as a scope question, not changed.
+- **Warlock: Shadow Mastery.** Now +5% Shadow damage (was +10%). 2% a rank before. Scope fixed from the client rows: the two effects of spell 18271 carry class masks (524435,0,0) and (17418,262147,0), which cover Shadow Bolt, Corruption, Curse of Agony, Death Coil, Drain Life, Drain Soul and Siphon Life. The engine withheld the multiplier from four of them (vanilla's exclusions), modded base damage on three, missed Drain Soul and double-applied Siphon Life; all seven now take +1% a rank as one multiplier, and spells outside the masks (Shadowburn, Curse of Doom, Wrack) no longer do.
 - **Warlock: Demonic Embrace.** Now +15% Stamina, no Spirit change (was -5% Spirit). Vanilla Spirit penalty removed.
 - **Warlock: Unholy Power.** Now +10% pet damage (was +20% on pet melee only). 4% a rank on the pet main-hand auto attack; still only that attack.
 - **Warlock: Demonic Sacrifice.** Now Imp +15% Shadow, Succubus +15% Fire, Voidwalker 2% Mana / 4 sec, Felhunter 3% Health / 4 sec. The four effects were swapped (Imp Fire, Succubus Shadow, Voidwalker Health, Felhunter Mana).
@@ -94,6 +91,8 @@ talent's maximum rank unless a note says otherwise.
 - **Warlock: Bane.** Now -0.5 sec Shadow Bolt, Immolate, Incinerate; -2 sec Soul Fire. Incinerate was not cut.
 - **Warlock: Ruin.** Now +100% Destruction crit damage bonus, 20% a rank (was +100% at any rank). Below 5/5 it overstated.
 - **Warrior: Enrage.** Now 30% chance, +10% Physical damage, 12 sec, on any damaging hit taken (was 100% on a melee crit taken, 12 attack charges). The chance was an unresolved template, the engine kept vanilla's trigger.
+- **Mage: Ice Lance.** Now x4 against Frozen targets (was x3). SpellEffect 1342606 (spell 1312002, effect 3) has base points 300, i.e. +300% damage.
+- **Warlock: Improved Shadow Bolt.** Now no charge limit, 12 sec (was 4 charges). Spell 17794 has SpellDuration 12000 ms and no SpellAuraOptions row.
 
 ## Druid
 
@@ -120,7 +119,7 @@ talent's maximum rank unless a note says otherwise.
 | Feral Swiftness | Feral Combat | 2 | Increases your movement speed while in Cat Form by 30%, and increases your chance to Dodge by 4%. | 4% dodge | match | cat movement speed not modeled |
 | Feral Instinct | Feral Combat | 3 | Increases damage done by your Swipe ability by 30% and reduces the chance enemies have to detect you while Prowling as if you were 3 levels higher. | 30% Swipe damage | match | prowl detection not modeled |
 | Brutal Impact | Feral Combat | 2 | Increases the stun duration of your Bash and Pounce abilities by 1 sec and reduces the cooldown of Bash by 30 sec. | - | unmodeled | Bash and Pounce stun duration |
-| Thick Hide | Feral Combat | 3 | While in Bear Form, Cat Form, Dire Bear Form, or Moonkin Form, you gain 180 additional base Armor per level and another 2.00 base Armor for each point of defense skill... | 1 armor per level per rank, 2/3 per defense point per rank | unsettled | Reading A: "180 additional base Armor per level" is the same at every rank (the defense term alone grows 0.67/1.33/2.00), so rank 1 gives 180 a level. Reading B: the 180 is the max-rank total shown as a constant (3 a level at level 60), as the engine has it. The defense term matches either way |
+| Thick Hide | Feral Combat | 3 | While in Bear Form, Cat Form, Dire Bear Form, or Moonkin Form, you gain 180 additional base Armor per level and another 2.00 base Armor for each point of defense skill... | 1 armor per level per rank, 2/3 per defense point per rank | unsettled | Reading A: "180 additional base Armor per level" is the same at every rank (the defense term alone grows 0.67/1.33/2.00), so rank 1 gives 180 a level. Reading B: the 180 is the max-rank total shown as a constant (3 a level at level 60), as the engine has it. The defense term matches either way. The client rows (aura 4 base 100; base 3 with 3 per level) do not resolve the per-rank question |
 | Shredding Attacks | Feral Combat | 3 | Reduces the Energy cost of your Shred ability by 18 and reduces the Rage cost of your Lacerate ability by 3. | same | match |  |
 | Savage Fury | Feral Combat | 2 | Increases the damage caused by your Claw, Rake, Shred, Maul, and Swipe abilities by 10%. | same | match |  |
 | Feral Charge | Feral Combat | 1 | Requires Bear Form, Dire Bear Form Charge an enemy, immobilizing them and interrupting any spell they are casting for 4 sec. | - | unmodeled | gap closer |
@@ -140,7 +139,7 @@ talent's maximum rank unless a note says otherwise.
 | Naturalist | Restoration | 5 | Reduces the cast time of your Healing Touch spell by 0.5 sec and increases all damage you deal by 5%. | same | match |  |
 | Subtlety | Restoration | 3 | Reduces the threat generated by your Nature and Arcane spells by 30%. | - | unmodeled | threat only |
 | Natural Shapeshifter | Restoration | 3 | Reduces the mana cost of all shapeshifting by 30%. | same | match |  |
-| Reflection | Restoration | 3 | Allows 50% of your Mana regeneration to continue while casting. | 50% (rank/3 of 50%: 16.7/33.3/50) | unsettled | text says 17/33/50; the engine is exact thirds. Reading A: the client value is 17% at rank 1 and the engine is 0.3% low; Reading B: the text rounds a 1/6 value |
+| Reflection | Restoration | 3 | Allows 50% of your Mana regeneration to continue while casting. | 50% (rank/3 of 50%: 16.7/33.3/50) | match | the client row is base 50 at 3/3, so the engine's exact thirds are right and the text's 17% is display rounding |
 | Gift of Nature | Restoration | 5 | Increases the effect of all your healing spells by 10%. | same | match |  |
 | Gift of the Earthmother | Restoration | 1 | Reduces the global cooldown by 0.5 seconds on your Rejuvenation, Swiftmend, and Wild Growth spells. | same | match |  |
 | Tranquil Spirit | Restoration | 5 | Reduces the mana cost of your Healing Touch and Tranquility spells by 10%. | same | match |  |
@@ -255,7 +254,7 @@ talent's maximum rank unless a note says otherwise.
 | Frostbite | Frost | 3 | Gives your Chill effects a 15% chance to Freeze the target for 5 sec. | same | match |  |
 | Piercing Ice | Frost | 3 | Increases the damage done by your Frost spells by 6%. | same | match |  |
 | Frost Channeling | Frost | 3 | Reduces the mana cost of your Frost spells by 15% and reduces the threat caused by your Frost spells by 30%. | 15% cost, 30% threat | match |  |
-| Ice Lance | Frost | 1 | Deals 28 to 32 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets. | x3 damage to Frozen targets | unsettled | "Deals 300% increased damage to Frozen targets": Reading A is +300%, x4; Reading B is Blizzard's usual "triple", x3. The engine uses x3 and its source comment flags it unconfirmed |
+| Ice Lance | Frost | 1 | Deals 28 to 32 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets. | x4 damage to Frozen targets (was x3) | mismatch, fixed | SpellEffect 1342606 (spell 1312002, effect 3) has base points 300, so +300% is x4 |
 | Improved Blizzard | Frost | 3 | Adds a Chill effect to your Blizzard spell. This effect lowers the target's movement speed by 40% for 1.5 sec. | chill 1.5 sec | match | the 15/25/40% slow value is not read by the engine; only the chill (Fingers of Frost, Frostbite) is |
 | Arctic Reach | Frost | 2 | Increases the range of your Frostbolt and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 20%. | - | unmodeled | range and radius |
 | Ice Block | Frost | 1 | You become encased in a block of ice, protecting you from all physical attacks and spells for 10 sec, but during that time you cannot attack, move, or cast spells. | - | unmodeled | defensive |
@@ -308,7 +307,7 @@ talent's maximum rank unless a note says otherwise.
 | Improved Judgement | Retribution | 2 | Decreases the cooldown of your Judgement ability by 2 sec. | same | match |  |
 | Holy Conduit | Retribution | 2 | Reduces the mana cost of your Consecration, Holy Wrath, Exorcism, and Hammer of Wrath spells by 40%. | same | match |  |
 | Conviction | Retribution | 5 | Improves your chance to get a critical strike with melee attacks by 5%. | same | match |  |
-| Vindication | Retribution | 3 | Gives your damaging melee attacks a chance to reduce the target's Attack Power by (3 /- 3 * - 204), and increase your Attack Power by 3% for 30 sec. | AP +3% for 30 sec (was +15%) | mismatch, fixed | was 5% a rank; the target Attack Power cut in the text is a garbled template ("(3 /- 3 * - 204)") and is not modeled; the proc chance is not in the text, the engine procs on every landed melee hit |
+| Vindication | Retribution | 3 | Gives your damaging melee attacks a chance to reduce the target's Attack Power by (3 /- 3 * - 204), and increase your Attack Power by 3% for 30 sec. | AP +3% for 30 sec (was +15%) | mismatch, fixed | was 5% a rank; the target Attack Power cut in the text is a garbled template ("(3 /- 3 * - 204)") and is not modeled; the proc chance is not in the text; the aura row states ProcChance 100, so the engine proc on every landed melee hit matches |
 | Sanctified Judgement | Retribution | 3 | Gives your Judgement ability a 100% chance to return 60% of the Mana cost of the judged seal. | same | match |  |
 | Seal of Command | Retribution | 1 | Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage. Only one Seal can be active on the Paladin at any one time. Lasts 30 se... | same | match |  |
 | Pursuit of Justice | Retribution | 2 | Increases movement speed and mounted movement speed by 15%. This does not stack with other movement speed increasing effects. | - | unmodeled | movement speed |
@@ -511,7 +510,7 @@ talent's maximum rank unless a note says otherwise.
 | Curse of Exhaustion | Affliction | 1 | Reduces the target's movement speed by 30% for 12 sec. Only one Curse per Warlock can be active on any one target. | - | unmodeled | movement speed |
 | Siphon Life | Affliction | 1 | Transfers 11 health from the target to the caster every 3 sec. Lasts 30 sec. | same | match |  |
 | Soul Siphon | Affliction | 3 | Increases the damage done or health drained by your Drain Life, Drain Soul, and Wrack spells by 12% per each of your other Affliction effects active on the target, up ... | 12% per effect, up to 36% | match |  |
-| Shadow Mastery | Affliction | 5 | Increases the damage dealt or life drained by your Shadow spells by 5%. | +5% Shadow damage (was +10%) | mismatch, fixed | 2% a rank before. The engine still excludes Curse of Agony, Death Coil, Drain Life and Drain Soul (vanilla's exclusions); the Forever text names all Shadow spells and "life drained", which suggests those exclusions are gone; left as a scope question, not changed |
+| Shadow Mastery | Affliction | 5 | Increases the damage dealt or life drained by your Shadow spells by 5%. | +5% Shadow damage (was +10%) | mismatch, fixed | 2% a rank before. Scope fixed from the client rows: the two effects of spell 18271 carry class masks (524435,0,0) and (17418,262147,0), which cover Shadow Bolt, Corruption, Curse of Agony, Death Coil, Drain Life, Drain Soul and Siphon Life. The engine withheld the multiplier from four of them (vanilla's exclusions), modded base damage on three, missed Drain Soul and double-applied Siphon Life; all seven now take +1% a rank as one multiplier, and spells outside the masks (Shadowburn, Curse of Doom, Wrack) no longer do |
 | Wrack | Affliction | 1 | Tears the target apart from within, inflicting 36 Shadow damage every 1 sec and increasing the damage they take from your other Shadow damage over time effects by 10% ... | same | match |  |
 | Improved Health Funnel | Demonology | 2 | Increases the amount of health transferred by your Health Funnel spell by 40%, reduces its health cost by 30%, and reduces all threat your Health Funnel generates by 1... | - | unmodeled | Health Funnel not registered |
 | Improved Imp | Demonology | 3 | Increases the damage of your Imp's Firebolt spell by 30% and the effect of its Fire Shield spell by 30%. | Firebolt +30% | match | the Fire Shield half is not modeled |
@@ -533,7 +532,7 @@ talent's maximum rank unless a note says otherwise.
 | Master Demonologist | Demonology | 5 | Grants both the Warlock and the summoned demon an effect as long as that demon is active. Imp - Increases Fire damage done by 10%. Voidwalker - Reduces Physical damage... | Imp +10% Fire, Voidwalker -10% Physical taken, Succubus +10% Shadow, Felhunter -10% Magic taken | mismatch, fixed | was Imp -20% threat, VW -10% all damage taken, Succubus +10% all damage, Felhunter +10 resistance |
 | Demonic Pact | Demonology | 1 | Your Demonic Sacrifice effect is no longer cancelled by summoning a different Demon pet. Resummoning the sacrificed pet will still cancel the effect. | same | match |  |
 | Destructive Reach | Destruction | 2 | Increases the range of your damaging spells by 20%. | - | unmodeled | range |
-| Improved Shadow Bolt | Destruction | 5 | Your Shadow Bolt critical strikes increase Shadow damage taken by the target from your attacks by 20% for 12 sec. | +20% Shadow damage taken for 12 sec, 4 charges | unsettled | the text states no charge count (vanilla's 4 hits); Reading A: the debuff lasts 12 sec until it expires; Reading B: the text omits the vanilla charges. The engine consumes 4 charges |
+| Improved Shadow Bolt | Destruction | 5 | Your Shadow Bolt critical strikes increase Shadow damage taken by the target from your attacks by 20% for 12 sec. | +20% Shadow damage taken for 12 sec, no charge limit (was 4 charges) | mismatch, fixed | the debuff (17794) has SpellDuration 12000 ms and no SpellAuraOptions row, so no proc charges; the bonus lasts 12 sec however many spells land |
 | Bane | Destruction | 5 | Reduces the casting time of your Shadow Bolt, Immolate, and Incinerate spells by 0.5 sec and your Soul Fire spell by 2 sec. | -0.5 sec Shadow Bolt, Immolate, Incinerate; -2 sec Soul Fire | mismatch, fixed | Incinerate was not cut |
 | Molten Skin | Destruction | 5 | Reduces all damage taken by 10%. | - | unmodeled | defensive |
 | Cataclysm | Destruction | 3 | Reduces the Mana cost of your Destruction spells by 10%. | same | match |  |
@@ -567,7 +566,7 @@ talent's maximum rank unless a note says otherwise.
 | Bloodthrill | Arms | 5 | Your Main Hand melee attacks against enemies afflicted by your Rend have a 20% chance to allow the use of your Overpower ability on the target. Lasts 6 sec. | 20% chance, 6 sec window | match |  |
 | Sweeping Strikes | Arms | 1 | Your next 5 melee attacks strike an additional nearby opponent. | same | match |  |
 | Weaponmaster | Arms | 5 | Gives your melee weapon attacks a benefit depending on the weapon. Axe/Polearm: Increases your critical strike chance by 5%. Mace/Staff: Your attacks ignore 15% of you... | 5% crit (Axe/Polearm), 15% armor ignored (Mace/Staff), 5% extra attack (Sword) | match |  |
-| Improved Slam | Arms | 2 | Reduces the global cooldown and cast time of your Slam ability by 0.50 sec. In addition, Slam no longer interrupts or delays your melee swing and Slam's cooldown is re... | cast and GCD -0.5 sec; cooldown -3 sec a rank = -6 sec at 2/2 | unsettled | Reading A (the 70291 text): "Slam's cooldown is reduced by 3.0 sec" at both ranks, 3 sec flat; Reading B (the engine, from Blizzard's 1 October 2026 notes "3 s off the cooldown per rank"): 6 sec at 2/2 |
+| Improved Slam | Arms | 2 | Reduces the global cooldown and cast time of your Slam ability by 0.50 sec. In addition, Slam no longer interrupts or delays your melee swing and Slam's cooldown is re... | cast and GCD -0.5 sec; cooldown -3 sec a rank = -6 sec at 2/2 | unsettled | Reading A (the 70291 text): "Slam's cooldown is reduced by 3.0 sec" at both ranks, 3 sec flat; Reading B (the engine, from Blizzard's 1 October 2026 notes "3 s off the cooldown per rank"): 6 sec at 2/2. The client rows (spell 12862, one spell for both ranks, cooldown base -3000 ms, cast time -500 ms) do not tell the readings apart; engine left as is |
 | Improved Hamstring | Arms | 3 | Gives your Hamstring ability a 15% chance to immobilize the target for 5 sec. | - | unmodeled | immobilize chance |
 | Mortal Strike | Arms | 1 | A vicious strike that deals weapon damage plus 85 and wounds the target, reducing the effectiveness of any healing by 50% for 10 sec. | same | match |  |
 | Booming Voice | Fury | 5 | Increases the area of effect of your Shouts by 50% and reduces their Rage cost by 25%. | same | match |  |
