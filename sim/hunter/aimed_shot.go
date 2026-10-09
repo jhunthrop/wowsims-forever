@@ -54,7 +54,7 @@ func (hunter *Hunter) getAimedShotConfig(rank int, timer *core.Timer) core.Spell
 
 		CritDamageBonus: hunter.mortalShots(),
 
-		DamageMultiplier: 1,
+		DamageMultiplier: hunter.barrageDamageMultiplier(),
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
 		ClientBaseDamage: flatDamage.Range(casterLevel),

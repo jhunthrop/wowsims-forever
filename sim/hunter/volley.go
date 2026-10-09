@@ -27,7 +27,7 @@ func (hunter *Hunter) getVolleyConfig(rank int) core.SpellConfig {
 	manaCost := [4]float64{0, 350, 420, 490}[rank]
 	level := [4]int{0, 40, 50, 58}[rank]
 
-	manaCostModifer := 100 - 2*hunter.Talents.Efficiency
+	manaCostModifer := 100 - efficiencyCostReductionPerRank*hunter.Talents.Efficiency
 
 	// auraLabel also names the Dot's own Aura below. Volley's channel
 	// Dot is AOE (core.DotConfig.IsAOE), which core.createDots
@@ -88,8 +88,8 @@ func (hunter *Hunter) getVolleyConfig(rank int) core.SpellConfig {
 			},
 		},
 
-		CritDamageBonus:  (1 + hunter.mortalShots()) * (1 + (0.05 * float64(hunter.Talents.Barrage))),
-		DamageMultiplier: 1,
+		CritDamageBonus:  hunter.mortalShots(),
+		DamageMultiplier: hunter.barrageDamageMultiplier(),
 		ThreatMultiplier: 1,
 		ClientBaseDamage: damage.Range(casterLevel),
 

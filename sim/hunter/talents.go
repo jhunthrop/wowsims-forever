@@ -26,6 +26,37 @@ const (
 	unleashedFuryPerRank = 0.03
 )
 
+// Forever's rates for three more talents (1.60.1.70291 talent text):
+// Efficiency "Reduces the Mana cost of your Shots, Stings, and melee
+// abilities by 15%" at 5/5 (3% a rank), Barrage "Increases the damage done
+// by your Multi-Shot, Aimed Shot, and Volley abilities by 10%" at 3/3 (3, 7,
+// 10%: not a clean multiple) and Savage Strikes "Increases the critical
+// strike chance of all your melee abilities by 4%" at 2/2 (2% a rank).
+// Vanilla's 2%, 5% a rank and 10% a rank are not Forever's.
+const (
+	efficiencyCostReductionPerRank int32   = 3
+	savageStrikesCritPerRank       float64 = 2.0
+)
+
+var barrageDamageByRank = [4]float64{0, 0.03, 0.07, 0.10}
+
+// barrageDamage is Barrage's damage bonus at a rank.
+func barrageDamage(rank int32) float64 {
+	return barrageDamageByRank[rankIndex(rank, barrageDamageByRank[:])]
+}
+
+// barrageDamageMultiplier is the damage multiplier Barrage gives Multi-Shot,
+// Aimed Shot and Volley.
+func (hunter *Hunter) barrageDamageMultiplier() float64 {
+	return 1 + barrageDamage(hunter.Talents.Barrage)
+}
+
+// savageStrikesCritRating is the bonus crit rating Savage Strikes gives a
+// melee ability.
+func (hunter *Hunter) savageStrikesCritRating() float64 {
+	return savageStrikesCritPerRank * float64(hunter.Talents.SavageStrikes) * core.CritRatingPerCritChance
+}
+
 func (hunter *Hunter) ApplyTalents() {
 	hunter.registerHeartOfTheLion()
 
@@ -338,7 +369,7 @@ func (hunter *Hunter) applyEfficiency() {
 		// Volley clause matched a spell registered without a cost, which a character built
 		// below 60 was the first to do.
 		if spell.Cost != nil && (spell.Flags.Matches(SpellFlagSting|SpellFlagShot) || spell.SpellCode == SpellCode_HunterVolley) {
-			spell.Cost.Multiplier -= 2 * hunter.Talents.Efficiency
+			spell.Cost.Multiplier -= efficiencyCostReductionPerRank * hunter.Talents.Efficiency
 		}
 	})
 }

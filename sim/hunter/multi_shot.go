@@ -79,7 +79,7 @@ func (hunter *Hunter) getMultiShotConfig(timer *core.Timer) core.SpellConfig {
 
 		CritDamageBonus: hunter.mortalShots(),
 
-		DamageMultiplier: 1 + .05*float64(hunter.Talents.Barrage),
+		DamageMultiplier: hunter.barrageDamageMultiplier(),
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
 
