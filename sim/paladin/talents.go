@@ -94,24 +94,49 @@ func (paladin *Paladin) applyWeaponSpecialization() {
 	paladin.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= paladin.getWeaponSpecializationModifier()
 }
 
+// Forever's Vengeance and Vindication (1.60.1.70291 talents/paladin.json).
+// Vengeance: "Increases your Physical and Holy damage dealt by 1/2/3% for 30
+// sec after landing a non-periodic critical strike. Stacks up to 3 times";
+// an aura's amount applies once a stack, so 3/3 with three stacks is +9%.
+// Vindication: "increase your Attack Power by 1/2/3% for 30 sec". Vanilla's
+// 3% a rank for 8 sec with no stacks, and 5% a rank, are not Forever's.
+const (
+	vengeanceDamagePerRank = 0.01
+	vengeanceDuration      = 30 * time.Second
+	vengeanceMaxStacks     = 3
+
+	vindicationAttackPowerPerRank = 0.01
+	vindicationMaxRank            = 3
+)
+
+// vengeanceMultiplier is the Physical and Holy damage multiplier Vengeance
+// grants at a talent rank and stack count.
+func vengeanceMultiplier(rank int32, stacks int32) float64 {
+	return 1 + vengeanceDamagePerRank*float64(rank)*float64(stacks)
+}
+
+// vindicationAttackPowerMultiplier is the Attack Power multiplier a landed
+// Vindication proc grants at a talent rank.
+func vindicationAttackPowerMultiplier(rank int32) float64 {
+	return 1 + vindicationAttackPowerPerRank*float64(rank)
+}
+
 func (paladin *Paladin) applyVengeance() {
 	if paladin.Talents.Vengeance == 0 {
 		return
 	}
 
-	vengeanceMultiplier := []float64{1, 1.03, 1.06, 1.09, 1.12, 1.15}[paladin.Talents.Vengeance]
+	rank := paladin.Talents.Vengeance
 
 	procAura := paladin.RegisterAura(core.Aura{
-		Label:    "Vengeance Proc",
-		ActionID: core.ActionID{SpellID: 20059},
-		Duration: time.Second * 8,
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexHoly] *= vengeanceMultiplier
-			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= vengeanceMultiplier
-		},
-		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexHoly] /= vengeanceMultiplier
-			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] /= vengeanceMultiplier
+		Label:     "Vengeance Proc",
+		ActionID:  core.ActionID{SpellID: 20059},
+		Duration:  vengeanceDuration,
+		MaxStacks: vengeanceMaxStacks,
+		OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks int32, newStacks int32) {
+			ratio := vengeanceMultiplier(rank, newStacks) / vengeanceMultiplier(rank, oldStacks)
+			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexHoly] *= ratio
+			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= ratio
 		},
 	})
 
@@ -124,6 +149,7 @@ func (paladin *Paladin) applyVengeance() {
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			if result.DidCrit() {
 				procAura.Activate(sim)
+				procAura.AddStack(sim)
 			}
 		},
 	})
@@ -134,11 +160,9 @@ func (paladin *Paladin) applyVindication() {
 		return
 	}
 	//vindicationMultiplier := []float64{1, 1.05, 1.10, 1.15}[paladin.Talents.Vengeance]
-	vindicationMultiplier := []*stats.StatDependency{
-		paladin.NewDynamicMultiplyStat(stats.AttackPower, 1.00),
-		paladin.NewDynamicMultiplyStat(stats.AttackPower, 1.05),
-		paladin.NewDynamicMultiplyStat(stats.AttackPower, 1.10),
-		paladin.NewDynamicMultiplyStat(stats.AttackPower, 1.15),
+	vindicationMultiplier := make([]*stats.StatDependency, vindicationMaxRank+1)
+	for rank := range vindicationMultiplier {
+		vindicationMultiplier[rank] = paladin.NewDynamicMultiplyStat(stats.AttackPower, vindicationAttackPowerMultiplier(int32(rank)))
 	}
 
 	vindicationAura := paladin.RegisterAura(core.Aura{
