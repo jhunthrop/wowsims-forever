@@ -582,29 +582,28 @@ func (warrior *Warrior) applyDualWieldSpecialization() {
 	})
 }
 
-// applyEnrage is Enrage: "a $h% chance to deal 10% increased Physical
-// damage for 12 sec after being the victim of any damaging attack" at
-// rank 5, so 2% a point - not vanilla's 5%.
-//
-// unconfirmed: the client leaves the trigger chance as an unresolved
-// `$h`, and widens the trigger from "critically hit" to "any damaging
-// attack". Until a number exists, the trigger stays the one vanilla
-// used - a melee critical strike taken, at 100% - because guessing a
-// chance for a much wider trigger would move the aura's uptime by more
-// than the talent is worth. The validation job's aura-uptime comparison
-// is what settles it.
+// Forever's Enrage (1.60.1.70291 talents/warrior.json): "Gives you a 30%
+// chance to deal 2/4/6/8/10% increased Physical damage for 12 sec after being
+// the victim of any damaging attack." A timed buff on any damaging hit
+// taken: vanilla's 100% chance after a critical hit and 12 attack charges
+// are not Forever's.
+const (
+	enrageProcChance    = 0.30
+	enrageDamagePerRank = 0.02
+	enrageDuration      = 12 * time.Second
+)
+
 func (warrior *Warrior) applyEnrage() {
 	if warrior.Talents.Enrage == 0 {
 		return
 	}
 
-	damageBonus := 1 + 0.02*float64(warrior.Talents.Enrage)
+	damageBonus := 1 + enrageDamagePerRank*float64(warrior.Talents.Enrage)
 
 	warrior.EnrageAura = warrior.GetOrRegisterAura(core.Aura{
-		Label:     "Enrage",
-		ActionID:  core.ActionID{SpellID: TalentSpellIDs["enrage"][rankIndex(warrior.Talents.Enrage-1, TalentSpellIDs["enrage"])]},
-		Duration:  time.Second * 12,
-		MaxStacks: 12,
+		Label:    "Enrage",
+		ActionID: core.ActionID{SpellID: TalentSpellIDs["enrage"][rankIndex(warrior.Talents.Enrage-1, TalentSpellIDs["enrage"])]},
+		Duration: enrageDuration,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			warrior.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= damageBonus
 		},
@@ -621,27 +620,13 @@ func (warrior *Warrior) applyEnrage() {
 		OnReset: func(aura *core.Aura, sim *core.Simulation) {
 			aura.Activate(sim)
 		},
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !warrior.EnrageAura.IsActive() {
-				return
-			}
-
-			if spell.ProcMask.Matches(core.ProcMaskMelee) {
-				warrior.EnrageAura.RemoveStack(sim)
-			}
-		},
 		OnSpellHitTaken: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !spell.ProcMask.Matches(core.ProcMaskMelee) {
+			if result.Damage <= 0 {
 				return
 			}
 
-			if !result.Outcome.Matches(core.OutcomeCrit) {
-				return
-			}
-
-			warrior.EnrageAura.Activate(sim)
-			if warrior.EnrageAura.IsActive() {
-				warrior.EnrageAura.SetStacks(sim, 12)
+			if sim.Proc(enrageProcChance, "Enrage") {
+				warrior.EnrageAura.Activate(sim)
 			}
 		},
 	})
