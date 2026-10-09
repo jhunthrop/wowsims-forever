@@ -18,6 +18,31 @@ import (
 // left reading the value an untalented character would have read - which
 // is what a talent nobody can now take is worth.
 
+// Forever's rates (1.60.1.70291 talents/warlock.json). Shadow Mastery
+// "Increases the damage dealt or life drained by your Shadow spells by 1%" a
+// rank, Demonic Embrace "Increases your total Stamina by 3%" a rank (no
+// Spirit penalty), Soul Link "30% of all damage taken by the caster is taken
+// by your ... Demon", Ruin "critical strike damage bonus of your Destruction
+// spells by 20%" a rank, Improved Corruption "increases the damage it deals
+// by 2%" a rank, Unholy Power "Increases all damage done by your ... pets by
+// 2%" a rank, and Demonic Sacrifice: Imp +15% Shadow damage, Voidwalker 2%
+// of total Mana and Felhunter 3% of total Health every 4 sec, Succubus +15%
+// Fire damage. Vanilla's 2%, -1% Spirit, 23%, flat 100%, none, 4% and the
+// swapped Demonic Sacrifice effects are not Forever's.
+const (
+	shadowMasteryDamagePerRank      = 0.01
+	demonicEmbraceStaminaPerRank    = 0.03
+	soulLinkDamageTakenMultiplier   = 1 - 0.30
+	ruinCritDamageBonusPerRank      = 0.20
+	improvedCorruptionDamagePerRank = 0.02
+	unholyPowerDamagePerRank        = 0.02
+	demonicSacrificeSchoolDamage    = 1.15
+	demonicSacrificeManaPercent     = 0.02
+	demonicSacrificeHealthPercent   = 0.03
+	demonicSacrificeRegenPeriod     = 4 * time.Second
+	masterDemonologistEffectPerRank = 0.02
+)
+
 func (warlock *Warlock) ApplyTalents() {
 	warlock.applyWeaponImbue()
 
@@ -307,7 +332,7 @@ func (warlock *Warlock) applyShadowMastery() {
 }
 
 func (warlock *Warlock) shadowMasteryBonus() float64 {
-	return .02 * float64(warlock.Talents.ShadowMastery)
+	return shadowMasteryDamagePerRank * float64(warlock.Talents.ShadowMastery)
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -320,8 +345,7 @@ func (warlock *Warlock) applyDemonicEmbrace() {
 	}
 
 	points := float64(warlock.Talents.DemonicEmbrace)
-	warlock.MultiplyStat(stats.Stamina, 1+.03*(points))
-	warlock.MultiplyStat(stats.Spirit, 1-.01*(points))
+	warlock.MultiplyStat(stats.Stamina, 1+demonicEmbraceStaminaPerRank*points)
 }
 
 func (warlock *Warlock) applyFelIntellect() {
@@ -386,20 +410,21 @@ func (warlock *Warlock) applyMasterDemonologist() {
 	}
 
 	points := float64(warlock.Talents.MasterDemonologist)
-	damageDealtMultiplier := 1 + 0.02*points
-	damageTakenMultiplier := 1 - 0.02*points
-	threatMultiplier := 1 + -0.04*points
-	bonusResistance := 2 * points
+	damageDealtMultiplier := 1 + masterDemonologistEffectPerRank*points
+	damageTakenMultiplier := 1 - masterDemonologistEffectPerRank*points
 
+	// Forever's text: Imp "Increases Fire damage done", Voidwalker "Reduces
+	// Physical damage taken", Succubus/Incubus "Increases Shadow damage
+	// done", Felhunter "Reduces Magic damage taken", each by 2% a rank.
 	impConfig := core.Aura{
 		Label:    "Master Demonologist (Imp)",
 		ActionID: core.ActionID{SpellID: 23825, Tag: 1},
 		Duration: core.NeverExpires,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.ThreatMultiplier *= threatMultiplier
+			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire] *= damageDealtMultiplier
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.ThreatMultiplier /= threatMultiplier
+			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire] /= damageDealtMultiplier
 		},
 	}
 
@@ -408,10 +433,10 @@ func (warlock *Warlock) applyMasterDemonologist() {
 		ActionID: core.ActionID{SpellID: 23825, Tag: 2},
 		Duration: core.NeverExpires,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.DamageTakenMultiplier *= damageTakenMultiplier
+			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexPhysical] *= damageTakenMultiplier
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.DamageTakenMultiplier /= damageTakenMultiplier
+			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexPhysical] /= damageTakenMultiplier
 		},
 	}
 
@@ -420,10 +445,10 @@ func (warlock *Warlock) applyMasterDemonologist() {
 		ActionID: core.ActionID{SpellID: 23825, Tag: 3},
 		Duration: core.NeverExpires,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.DamageDealtMultiplier *= damageDealtMultiplier
+			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow] *= damageDealtMultiplier
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.DamageDealtMultiplier /= damageDealtMultiplier
+			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow] /= damageDealtMultiplier
 		},
 	}
 
@@ -432,10 +457,10 @@ func (warlock *Warlock) applyMasterDemonologist() {
 		ActionID: core.ActionID{SpellID: 23825, Tag: 4},
 		Duration: core.NeverExpires,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.AddResistancesDynamic(sim, bonusResistance)
+			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier.MultiplyMagicSchools(damageTakenMultiplier)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.AddResistancesDynamic(sim, -bonusResistance)
+			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier.MultiplyMagicSchools(1 / damageTakenMultiplier)
 		},
 	}
 
@@ -512,12 +537,12 @@ func (warlock *Warlock) applySoulLink() {
 		ActionID: actionID,
 		Duration: core.NeverExpires,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.DamageTakenMultiplier /= 1.3
+			aura.Unit.PseudoStats.DamageTakenMultiplier *= soulLinkDamageTakenMultiplier
 			aura.Unit.PseudoStats.DamageDealtMultiplier *= 1.03
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			aura.Unit.PseudoStats.DamageDealtMultiplier /= 1.03
-			aura.Unit.PseudoStats.DamageTakenMultiplier *= 1.3
+			aura.Unit.PseudoStats.DamageTakenMultiplier /= soulLinkDamageTakenMultiplier
 		},
 	}
 
@@ -568,15 +593,15 @@ func (warlock *Warlock) applyDemonicSacrifice() {
 		Duration: 30 * time.Minute,
 
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			warlock.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire] *= 1.15
+			warlock.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow] *= demonicSacrificeSchoolDamage
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			warlock.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire] /= 1.15
+			warlock.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow] /= demonicSacrificeSchoolDamage
 		},
 	})
 
 	var vwPa *core.PendingAction
-	healthMetric := warlock.NewHealthMetrics(core.ActionID{SpellID: 18790})
+	manaMetric := warlock.NewManaMetrics(core.ActionID{SpellID: 18790})
 	voidwalkerAura := warlock.GetOrRegisterAura(core.Aura{
 		Label:    "Fel Stamina",
 		ActionID: core.ActionID{SpellID: 18790},
@@ -584,9 +609,9 @@ func (warlock *Warlock) applyDemonicSacrifice() {
 
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			vwPa = core.NewPeriodicAction(sim, core.PeriodicActionOptions{
-				Period: time.Second * 4,
+				Period: demonicSacrificeRegenPeriod,
 				OnAction: func(s *core.Simulation) {
-					warlock.GainHealth(sim, warlock.MaxHealth()*0.03, healthMetric)
+					warlock.AddMana(sim, warlock.MaxMana()*demonicSacrificeManaPercent, manaMetric)
 				},
 			})
 			sim.AddPendingAction(vwPa)
@@ -601,15 +626,15 @@ func (warlock *Warlock) applyDemonicSacrifice() {
 		ActionID: core.ActionID{SpellID: 18791},
 		Duration: 30 * time.Minute,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			warlock.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow] *= 1.15
+			warlock.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire] *= demonicSacrificeSchoolDamage
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			warlock.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow] /= 1.15
+			warlock.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire] /= demonicSacrificeSchoolDamage
 		},
 	})
 
 	var fhPa *core.PendingAction
-	manaMetric := warlock.NewManaMetrics(core.ActionID{SpellID: 18792})
+	healthMetric := warlock.NewHealthMetrics(core.ActionID{SpellID: 18792})
 	felhunterAura := warlock.GetOrRegisterAura(core.Aura{
 		Label:    "Fel Energy",
 		ActionID: core.ActionID{SpellID: 18792},
@@ -617,9 +642,9 @@ func (warlock *Warlock) applyDemonicSacrifice() {
 
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			fhPa = core.NewPeriodicAction(sim, core.PeriodicActionOptions{
-				Period: time.Second * 4,
+				Period: demonicSacrificeRegenPeriod,
 				OnAction: func(s *core.Simulation) {
-					warlock.AddMana(sim, warlock.MaxMana()*0.02, manaMetric)
+					warlock.GainHealth(sim, warlock.MaxHealth()*demonicSacrificeHealthPercent, healthMetric)
 				},
 			})
 			sim.AddPendingAction(fhPa)
@@ -736,7 +761,7 @@ func (warlock *Warlock) applyBane() {
 
 	points := time.Duration(warlock.Talents.Bane)
 	warlock.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.SpellCode == SpellCode_WarlockShadowBolt || spell.SpellCode == SpellCode_WarlockImmolate {
+		if spell.SpellCode == SpellCode_WarlockShadowBolt || spell.SpellCode == SpellCode_WarlockImmolate || spell.SpellCode == SpellCode_WarlockIncinerate {
 			spell.DefaultCast.CastTime -= time.Millisecond * 100 * points
 		} else if spell.SpellCode == SpellCode_WarlockSoulFire {
 			spell.DefaultCast.CastTime -= time.Millisecond * 400 * points
@@ -773,7 +798,7 @@ func (warlock *Warlock) applyRuin() {
 	}
 	warlock.OnSpellRegistered(func(spell *core.Spell) {
 		if spell.Flags.Matches(WarlockFlagDestruction) {
-			spell.CritDamageBonus += 1
+			spell.CritDamageBonus += ruinCritDamageBonusPerRank * float64(warlock.Talents.Ruin)
 		}
 	})
 }

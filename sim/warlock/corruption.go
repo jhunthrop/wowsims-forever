@@ -61,7 +61,7 @@ func (warlock *Warlock) getCorruptionConfig(rank int) core.SpellConfig {
 		CritDamageBonus:  0,
 		BonusCoefficient: dotTickCoeff, // the report compares the spell's, which a pure DoT never reads
 
-		DamageMultiplier: 1,
+		DamageMultiplier: 1 + improvedCorruptionDamagePerRank*float64(warlock.Talents.ImprovedCorruption),
 		ThreatMultiplier: 1,
 
 		Dot: core.DotConfig{

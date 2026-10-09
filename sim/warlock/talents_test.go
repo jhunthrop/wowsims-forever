@@ -509,23 +509,23 @@ func TestDemonicPactKeepsSacrificeAcrossDifferentPetButNotSameOne(t *testing.T) 
 	if built.sacrificedPet != built.Imp {
 		t.Fatal("Demonic Sacrifice did not record the Imp as the sacrificed pet")
 	}
-	base := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire] / 1.15
-	sacrificed := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire]
+	base := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow] / 1.15
+	sacrificed := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow]
 	if got, want := sacrificed, base*1.15; got != want {
-		t.Fatalf("Fire damage multiplier after sacrificing the Imp = %v, want %v (Burning Wish)", got, want)
+		t.Fatalf("Shadow damage multiplier after sacrificing the Imp = %v, want %v (Burning Wish: Forever's Imp sacrifice grants Shadow damage)", got, want)
 	}
 
 	// Summoning a DIFFERENT pet must not cancel it.
 	built.changeActivePet(sim, built.Succubus, false)
-	if got, want := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire], sacrificed; got != want {
-		t.Errorf("Fire damage multiplier after summoning a different pet = %v, want %v (Demonic Pact should preserve the sacrifice)", got, want)
+	if got, want := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow], sacrificed; got != want {
+		t.Errorf("Shadow damage multiplier after summoning a different pet = %v, want %v (Demonic Pact should preserve the sacrifice)", got, want)
 	}
 
 	// Resummoning the SACRIFICED pet must cancel it.
 	built.changeActivePet(sim, nil, false)
 	built.changeActivePet(sim, built.Imp, false)
-	if got, want := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire], base; got != want {
-		t.Errorf("Fire damage multiplier after resummoning the sacrificed Imp = %v, want %v (the sacrifice should be cancelled)", got, want)
+	if got, want := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow], base; got != want {
+		t.Errorf("Shadow damage multiplier after resummoning the sacrificed Imp = %v, want %v (the sacrifice should be cancelled)", got, want)
 	}
 }
 
