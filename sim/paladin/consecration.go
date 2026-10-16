@@ -55,7 +55,7 @@ const (
 	consecrationFirstTargets = 4
 	// consecrationFirstTargetsCoefficient is the spell-power coefficient of
 	// the extra damage a second (the companion row's second effect).
-	consecrationFirstTargetsCoefficient = 0.095
+	consecrationFirstTargetsCoefficient = 0.042 // client 1.60.1.70425 (0.095 before)
 )
 
 // consecrationTickDamage is what the nth enemy (from 0, in the order the

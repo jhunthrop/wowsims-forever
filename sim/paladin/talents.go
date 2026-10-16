@@ -288,10 +288,10 @@ var sanctifiedJudgementChancePerRank = [4]float64{0, 0.33, 0.66, 1.00}
 var sanctifiedJudgementRefundPctPerRank = [4]float64{0, 0.20, 0.40, 0.60}
 
 // championOfTheLightPctPerRank: node 110882, Retribution tier 5 col 1:
-// "Increases your spell damage and healing by up to 20%/40%/60% of your
-// Intellect." (the live text and Blizzard's 1 October 2026 notes; the
-// earlier client table read 33%/66%/100%).
-var championOfTheLightPctPerRank = [4]float64{0, 0.20, 0.40, 0.60}
+// "Increases your spell damage by up to 10%/20%/30% of your Intellect."
+// (1.60.1.70425; the 1 October 2026 notes' 20/40/60% and the earlier
+// client table's 33/66/100% are both gone).
+var championOfTheLightPctPerRank = [4]float64{0, 0.10, 0.20, 0.30}
 
 // applyChampionOfTheLight grants the share to spell power (damage) and, for
 // the healing spec, to the healing stat. Forever gives every point of

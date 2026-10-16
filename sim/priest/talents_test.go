@@ -64,10 +64,11 @@ func TestDeclarativeShadowTalentPerRankValuesMatchTheClient(t *testing.T) {
 	if got, want := twinDisciplinesDamagePerRank, 0.01; got != want {
 		t.Errorf("twinDisciplinesDamagePerRank = %v, want %v", got, want)
 	}
-	// "Your Mind Flay now deals 10%/20% more damage...": 10% a rank,
-	// two ranks.
-	if got, want := improvedMindFlayDamagePerRank, 0.10; got != want {
-		t.Errorf("improvedMindFlayDamagePerRank = %v, want %v", got, want)
+	// "Each instance of damage of Mind Flay deals 10%/20% more damage
+	// than its previous instance of damage": 10% a rank, two ranks,
+	// compounding tick over tick.
+	if got, want := improvedMindFlayRampPerRank, 0.10; got != want {
+		t.Errorf("improvedMindFlayRampPerRank = %v, want %v", got, want)
 	}
 	// "Reduces the mana cost of your Devouring Plague by 25%/50%": -25
 	// percentage points a rank, matching SpellMod_PowerCost_Pct's own

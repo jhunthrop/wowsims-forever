@@ -114,9 +114,11 @@ func TestTwinDisciplinesRaisesInstantShadowSpellDamage(t *testing.T) {
 	}
 }
 
-// Improved Mind Flay at rank 2 ("+20% Mind Flay damage") must raise
-// DamageMultiplier on every Mind Flay tick spell and leave Shadow Word:
-// Pain untouched.
+// Improved Mind Flay at rank 2 ("Each instance of damage of Mind Flay
+// deals 20% more damage than its previous instance of damage",
+// 1.60.1.70425) is a compounding per-tick ramp - 1, 1.2, 1.44 across the
+// channel - applied in OnTick, so no Mind Flay spell carries a flat
+// multiplier and Shadow Word: Pain stays untouched.
 func TestImprovedMindFlayRaisesMindFlayDamageOnly(t *testing.T) {
 	talents := talentStringWithRank(t, allZeroPriestTalents(), "improved_mind_flay", 2)
 	talents = talentStringWithRank(t, talents, "mind_flay", 1)
@@ -126,8 +128,13 @@ func TestImprovedMindFlayRaisesMindFlayDamageOnly(t *testing.T) {
 		if spell == nil {
 			continue
 		}
-		if got, want := spell.DamageMultiplier, 1.20; got != want {
-			t.Errorf("Mind Flay tick %d DamageMultiplier = %v, want %v", tick, got, want)
+		if got, want := spell.DamageMultiplier, 1.0; got != want {
+			t.Errorf("Mind Flay tick %d DamageMultiplier = %v, want %v (the ramp is per tick, not a flat multiplier)", tick, got, want)
+		}
+	}
+	for tick, want := range map[int32]float64{1: 1, 2: 1.2, 3: 1.44} {
+		if got := spriest.ImprovedMindFlayRamp(tick); got < want-1e-9 || got > want+1e-9 {
+			t.Errorf("Improved Mind Flay 2/2 ramp at tick %d = %v, want %v", tick, got, want)
 		}
 	}
 

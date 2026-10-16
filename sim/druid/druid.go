@@ -195,15 +195,14 @@ type Druid struct {
 
 	// What Furor reads when the druid shifts back into Cat Form: the energy it
 	// had on leaving, and when it left.
-	energyOnLeavingCat     float64
-	leftCatFormAt          time.Duration
-	InsectSwarmAuras       core.AuraArray
-	MaulQueueAura          *core.Aura
-	MoonkinFormAura        *core.Aura
-	NaturesGraceProcAura   *core.Aura
-	PredatoryInstinctsAura *core.Aura
-	ProwlAura              *core.Aura
-	TigersFuryAura         *core.Aura
+	energyOnLeavingCat   float64
+	leftCatFormAt        time.Duration
+	InsectSwarmAuras     core.AuraArray
+	MaulQueueAura        *core.Aura
+	MoonkinFormAura      *core.Aura
+	NaturesGraceProcAura *core.Aura
+	ProwlAura            *core.Aura
+	TigersFuryAura       *core.Aura
 
 	BleedCategories core.ExclusiveCategoryArray
 

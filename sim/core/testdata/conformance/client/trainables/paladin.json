@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70338",
+  "build": "1.60.1.70425",
   "class_slug": "paladin",
   "trainables": [
     {
@@ -173,23 +173,6 @@
           "id": 20729,
           "rank": 2,
           "level": 54
-        }
-      ]
-    },
-    {
-      "name": "Blessing of Salvation",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 1038,
-          "rank": 0,
-          "level": 26
         }
       ]
     },
@@ -639,23 +622,6 @@
       ]
     },
     {
-      "name": "Greater Blessing of Salvation",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 25895,
-          "rank": 0,
-          "level": 60
-        }
-      ]
-    },
-    {
       "name": "Greater Blessing of Wisdom",
       "skill_line": "Holy",
       "source": "skill_line_ability",
@@ -1025,6 +991,23 @@
       ]
     },
     {
+      "name": "Mass Salvation",
+      "skill_line": "Protection",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 25895,
+          "rank": 0,
+          "level": 60
+        }
+      ]
+    },
+    {
       "name": "Purify",
       "skill_line": "Holy",
       "source": "skill_line_ability",
@@ -1133,6 +1116,23 @@
       ]
     },
     {
+      "name": "Revoke",
+      "skill_line": "Protection",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1325499,
+          "rank": 0,
+          "level": 26
+        }
+      ]
+    },
+    {
       "name": "Righteous Fury",
       "skill_line": "Protection",
       "source": "skill_line_ability",
@@ -1163,6 +1163,23 @@
           "id": 53601,
           "rank": 1,
           "level": 80
+        }
+      ]
+    },
+    {
+      "name": "Salvation",
+      "skill_line": "Protection",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1038,
+          "rank": 0,
+          "level": 26
         }
       ]
     },
@@ -1226,7 +1243,7 @@
         {
           "id": 20163,
           "rank": 3,
-          "level": 25
+          "level": 26
         },
         {
           "id": 20419,
@@ -1417,23 +1434,6 @@
           "id": 20308,
           "rank": 6,
           "level": 52
-        }
-      ]
-    },
-    {
-      "name": "Sense Undead",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 5502,
-          "rank": 0,
-          "level": 20
         }
       ]
     },

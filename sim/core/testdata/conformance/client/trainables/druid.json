@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70338",
+  "build": "1.60.1.70425",
   "class_slug": "druid",
   "trainables": [
     {
@@ -1607,7 +1607,7 @@
         {
           "id": 5221,
           "rank": 1,
-          "level": 22
+          "level": 20
         },
         {
           "id": 6800,

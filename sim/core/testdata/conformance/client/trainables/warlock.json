@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70338",
+  "build": "1.60.1.70425",
   "class_slug": "warlock",
   "trainables": [
     {
@@ -1043,7 +1043,7 @@
       "cost": 0,
       "cost_type": 0,
       "cast_time_ms": 0,
-      "cooldown_ms": 120000,
+      "cooldown_ms": 3600000,
       "ranks": [
         {
           "id": 437169,

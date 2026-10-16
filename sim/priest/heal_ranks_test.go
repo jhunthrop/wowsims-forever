@@ -21,6 +21,7 @@ const (
 	auraAbsorb         = 69
 	auraPeriodicHeal   = 8
 	auraArmor          = 22
+	auraArmorFlat      = 674 // Forever's flat-armour aura, on Inner Fire since client 1.60.1.70425 (aura 22 before)
 )
 
 // healingLadder is one table of heal ranks and the client effect it
@@ -47,7 +48,7 @@ func healingLadders() []healingLadder {
 		{"Holy Nova heal", holyNovaHealRanks, effectHeal, 0},
 		{"Penance", penanceRanks, effectHeal, 0},
 		{"Prayer of Mending", prayerOfMendingRanks, effectDummy, 0},
-		{"Inner Fire", innerFireRanks, 6, auraArmor},
+		{"Inner Fire", innerFireRanks, 6, auraArmorFlat},
 	}
 }
 

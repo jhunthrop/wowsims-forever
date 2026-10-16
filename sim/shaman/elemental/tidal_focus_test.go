@@ -5,14 +5,15 @@ import (
 	"testing"
 )
 
-// The guide's 30/3/18 build with the Restoration points moved: the live
-// tree's Tidal Focus (16179) is +5 spell hit at five ranks, the client's
-// aura 55 on every spell. guideBuildWithTidalFocus keeps 18 Restoration
-// points (Improved Healing Wave 5, Mindfulness 3, Natural Grace 3, Tidal
-// Focus 5, Improved Reincarnation 2).
+// The guide's 30/3/18 build (1.60.1.70425 layout) with Tidal Focus added
+// to its Restoration points: the live tree's Tidal Focus (16179) is +5
+// spell hit at five ranks, the client's aura 55 on every spell.
+// guideBuildWithTidalFocus is the leveling build (Improved Healing Wave 5,
+// Mindfulness 3, Natural Grace 3, Totemic Focus 5, Improved Reincarnation
+// 2) plus Tidal Focus 5.
 const (
-	guideBuildWithTidalFocus    = "553031130010305-03-500352"
-	guideBuildWithoutTidalFocus = "553031130010305-03-500302"
+	guideBuildWithTidalFocus    = "5510331300001350-030000000000000000-5533520000000000"
+	guideBuildWithoutTidalFocus = "5510331300001350-030000000000000000-5033520000000000"
 	tidalFocusSpellHit          = 0.05
 	hitTolerance                = 1e-9
 )

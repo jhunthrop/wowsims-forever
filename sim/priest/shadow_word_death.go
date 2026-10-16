@@ -72,8 +72,9 @@ func (priest *Priest) getShadowWordDeathConfig(rank int, cdTimer *core.Timer) co
 				GCD: core.GCDDefault,
 			},
 			CD: core.Cooldown{
-				Timer:    cdTimer,
-				Duration: time.Second * 15,
+				Timer: cdTimer,
+				// 18 sec since client 1.60.1.70425 (15 before).
+				Duration: time.Second * 18,
 			},
 		},
 

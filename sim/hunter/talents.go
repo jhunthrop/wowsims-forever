@@ -638,19 +638,18 @@ func (hunter *Hunter) applyImprovedTracking() {
 }
 
 // resourcefulnessProcChance is the critical-strike chance of the regen clause,
-// 30% a rank.
+// 50% a rank (1.60.1.70425: "a 50%/100% chance"; the 1.60.1.70374 live text
+// read 30/60%).
 func resourcefulnessProcChance(rank int32) float64 {
-	return 0.3 * float64(rank)
+	return 0.5 * float64(rank)
 }
 
 // applyResourcefulness is Resourcefulness (talents/hunter.json node
-// 104983, Survival, max rank 2, spell 440529): "Reduces the mana cost
-// of your Trap abilities and melee abilities by 30/60%. In addition,
-// your critical strikes have a 50/100% chance to allow 50% of your Mana
-// regeneration to continue while casting for 30 sec."
-//
-// The crit chance is 30/60% in the live text (Wowhead's hotfix-aware
-// tooltip); the pre-hotfix client table said 50/100%.
+// 104983, Survival, max rank 2, spell 440529): "Reduces the Mana cost of
+// your Trap and melee abilities by 30/60%, and grants your melee and
+// ranged ability Critical Strikes a 50/100% chance to allow 50% of your
+// Mana Regeneration to continue while casting for 30 sec."
+// (1.60.1.70425; the 1.60.1.70374 live text read 30/60% for the chance.)
 //
 // "melee abilities" is read as every melee special (ProcMaskMeleeMHSpecial
 // | ProcMaskMeleeOHSpecial, the same mask hunter.go's Initialize uses to

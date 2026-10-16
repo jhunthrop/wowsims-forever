@@ -371,11 +371,10 @@ func TestResourcefulnessReducesTrapAndMeleeManaCost(t *testing.T) {
 	}
 }
 
-// The regen clause is a 30/60% chance on a critical strike (the live
-// text; the engine read 50/100% before the hotfix), so rank 2 is no
-// longer a guaranteed proc.
+// The regen clause is a 50/100% chance on a critical strike
+// (1.60.1.70425; the 1.60.1.70374 live text read 30/60%).
 func TestResourcefulnessProcChancePerRank(t *testing.T) {
-	for rank, want := range map[int32]float64{1: 0.3, 2: 0.6} {
+	for rank, want := range map[int32]float64{1: 0.5, 2: 1.0} {
 		if got := resourcefulnessProcChance(rank); !floatsClose(got, want) {
 			t.Errorf("rank %d proc chance = %v, want %v", rank, got, want)
 		}

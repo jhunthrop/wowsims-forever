@@ -115,10 +115,12 @@ func TestManaflareFivePieceRaisesFrostfireBoltProcChances(t *testing.T) {
 	}{
 		{"FoF from Frostfire Bolt", five.fingersOfFrostChance(ffb), 0.25},
 		{"FoF from Frostbolt", five.fingersOfFrostChance(bolt), 0.15},
-		{"Missile Barrage from Frostfire Bolt", five.missileBarrageChance(ffb), 0.30},
-		{"Missile Barrage from Frostbolt", five.missileBarrageChance(bolt), 0.20},
+		// ForeverFrostTalents carries Missile Barrage at 1/2: 10% on the
+		// bolts a rank (1.60.1.70425), plus the five-piece's 10 points.
+		{"Missile Barrage from Frostfire Bolt", five.missileBarrageCastChance(ffb), 0.20},
+		{"Missile Barrage from Frostbolt", five.missileBarrageCastChance(bolt), 0.10},
 		{"FoF from Frostfire Bolt at four pieces", four.fingersOfFrostChance(four.FrostfireBolt[FrostfireBoltRanks]), 0.15},
-		{"Missile Barrage from Frostfire Bolt at four pieces", four.missileBarrageChance(four.FrostfireBolt[FrostfireBoltRanks]), 0.20},
+		{"Missile Barrage from Frostfire Bolt at four pieces", four.missileBarrageCastChance(four.FrostfireBolt[FrostfireBoltRanks]), 0.10},
 	}
 	for _, tc := range cases {
 		if tc.got < tc.want-1e-9 || tc.got > tc.want+1e-9 {

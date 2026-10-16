@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70338",
+  "build": "1.60.1.70425",
   "class_slug": "shaman",
   "family": 11,
   "spells": {
@@ -264,7 +264,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 225,
+      "cost": 145,
       "cost_type": 0,
       "spell_level": 32,
       "family_mask": [
@@ -552,7 +552,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 305,
+      "cost": 200,
       "cost_type": 0,
       "spell_level": 40,
       "family_mask": [
@@ -938,7 +938,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 390,
+      "cost": 250,
       "cost_type": 0,
       "spell_level": 48,
       "family_mask": [
@@ -2994,7 +2994,7 @@
       "effects": [
         {
           "index": 0,
-          "effect": 35,
+          "effect": 65,
           "aura": 29,
           "amount": 7,
           "sp_coefficient": 0.0,
@@ -3442,7 +3442,7 @@
       "effects": [
         {
           "index": 0,
-          "effect": 35,
+          "effect": 65,
           "aura": 29,
           "amount": 14,
           "sp_coefficient": 0.0,
@@ -3478,7 +3478,7 @@
       "effects": [
         {
           "index": 0,
-          "effect": 35,
+          "effect": 65,
           "aura": 29,
           "amount": 25,
           "sp_coefficient": 0.0,
@@ -4018,7 +4018,7 @@
       "effects": [
         {
           "index": 0,
-          "effect": 35,
+          "effect": 65,
           "aura": 42,
           "amount": 8253,
           "sp_coefficient": 0.0,
@@ -4296,7 +4296,7 @@
       "effects": [
         {
           "index": 0,
-          "effect": 35,
+          "effect": 65,
           "aura": 42,
           "amount": 0,
           "sp_coefficient": 0.0,
@@ -4705,7 +4705,7 @@
       "effects": [
         {
           "index": 0,
-          "effect": 35,
+          "effect": 65,
           "aura": 29,
           "amount": 49,
           "sp_coefficient": 0.0,
@@ -5696,7 +5696,7 @@
       "effects": [
         {
           "index": 0,
-          "effect": 35,
+          "effect": 65,
           "aura": 29,
           "amount": 42,
           "sp_coefficient": 0.0,
@@ -6808,7 +6808,7 @@
       "effects": [
         {
           "index": 0,
-          "effect": 35,
+          "effect": 65,
           "aura": 42,
           "amount": 10523,
           "sp_coefficient": 0.0,
@@ -7480,7 +7480,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 485,
+      "cost": 315,
       "cost_type": 0,
       "spell_level": 56,
       "family_mask": [
@@ -7770,7 +7770,7 @@
       "effects": [
         {
           "index": 0,
-          "effect": 35,
+          "effect": 65,
           "aura": 29,
           "amount": 77,
           "sp_coefficient": 0.0,
@@ -7986,7 +7986,7 @@
       "effects": [
         {
           "index": 0,
-          "effect": 35,
+          "effect": 65,
           "aura": 42,
           "amount": 16389,
           "sp_coefficient": 0.0,
@@ -8555,6 +8555,19 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 107,
+          "amount": 9000,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 1,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -8682,7 +8695,7 @@
       "max_level": 0
     },
     "16086": {
-      "name": "Improved Fire Nova",
+      "name": "Trial by Fire",
       "rank": 0,
       "school_mask": 1,
       "cast_time_ms": 0,
@@ -8722,6 +8735,19 @@
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 11,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 107,
+          "amount": 20000,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 1,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -8831,6 +8857,55 @@
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 16246,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "16166": {
+      "name": "Elemental Mastery",
+      "rank": 0,
+      "school_mask": 8,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 180000,
+      "category_cooldown_ms": 0,
+      "duration_ms": 15000,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 1,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 107,
+          "amount": -500,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 10,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 108,
+          "amount": -100,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 11,
+          "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
         }
@@ -9244,7 +9319,7 @@
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 8,
+          "misc_value": 22,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -9336,7 +9411,7 @@
       "duration_ms": 13000,
       "cost": 10,
       "cost_type": 0,
-      "spell_level": 25,
+      "spell_level": 1,
       "family_mask": [
         536870912,
         0,
@@ -9372,7 +9447,7 @@
       "duration_ms": 0,
       "cost": 0,
       "cost_type": 0,
-      "spell_level": 25,
+      "spell_level": 1,
       "family_mask": [
         67108864,
         0,
@@ -10720,9 +10795,9 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 300000,
       "duration_ms": 13000,
-      "cost": 30,
+      "cost": 20,
       "cost_type": 0,
-      "spell_level": 48,
+      "spell_level": 38,
       "family_mask": [
         536870912,
         0,
@@ -10758,7 +10833,7 @@
       "duration_ms": 0,
       "cost": 0,
       "cost_type": 0,
-      "spell_level": 48,
+      "spell_level": 38,
       "family_mask": [
         67108864,
         0,
@@ -10770,7 +10845,7 @@
           "index": 0,
           "effect": 35,
           "aura": 24,
-          "amount": 197,
+          "amount": 133,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 3000,
@@ -10792,9 +10867,9 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 300000,
       "duration_ms": 13000,
-      "cost": 60,
+      "cost": 30,
       "cost_type": 0,
-      "spell_level": 58,
+      "spell_level": 48,
       "family_mask": [
         536870912,
         0,
@@ -10830,7 +10905,7 @@
       "duration_ms": 0,
       "cost": 0,
       "cost_type": 0,
-      "spell_level": 58,
+      "spell_level": 48,
       "family_mask": [
         67108864,
         0,
@@ -10842,7 +10917,7 @@
           "index": 0,
           "effect": 35,
           "aura": 24,
-          "amount": 290,
+          "amount": 197,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 3000,
@@ -10864,7 +10939,7 @@
       "cooldown_ms": 8000,
       "category_cooldown_ms": 0,
       "duration_ms": 12000,
-      "cost": 125,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 40,
       "family_mask": [
@@ -10901,7 +10976,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 8.0,
       "max_level": 0
     },
     "20608": {
@@ -12610,7 +12685,7 @@
       "effects": [
         {
           "index": 0,
-          "effect": 35,
+          "effect": 65,
           "aura": 29,
           "amount": 89,
           "sp_coefficient": 0.0,
@@ -12682,7 +12757,7 @@
       "effects": [
         {
           "index": 0,
-          "effect": 35,
+          "effect": 65,
           "aura": 29,
           "amount": 53,
           "sp_coefficient": 0.0,
@@ -13766,12 +13841,25 @@
         {
           "index": 1,
           "effect": 6,
-          "aura": 107,
+          "aura": 4,
           "amount": 15,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 5,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 107,
+          "amount": -20000,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 11,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -15169,7 +15257,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 10000,
       "duration_ms": 0,
-      "cost": 95,
+      "cost": 65,
       "cost_type": 0,
       "spell_level": 12,
       "family_mask": [
@@ -15205,7 +15293,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 10000,
       "duration_ms": 0,
-      "cost": 170,
+      "cost": 120,
       "cost_type": 0,
       "spell_level": 22,
       "family_mask": [
@@ -15241,7 +15329,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 10000,
       "duration_ms": 0,
-      "cost": 280,
+      "cost": 210,
       "cost_type": 0,
       "spell_level": 32,
       "family_mask": [
@@ -15277,7 +15365,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 10000,
       "duration_ms": 0,
-      "cost": 395,
+      "cost": 290,
       "cost_type": 0,
       "spell_level": 42,
       "family_mask": [
@@ -15313,7 +15401,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 10000,
       "duration_ms": 0,
-      "cost": 520,
+      "cost": 375,
       "cost_type": 0,
       "spell_level": 52,
       "family_mask": [
@@ -15363,14 +15451,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 50,
-          "sp_coefficient": 0.21400000155,
+          "amount": 33,
+          "sp_coefficient": 0.14300000668,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.15384615958,
-          "points_per_level": 1.10000002384
+          "points_per_level": 0.40000000596
         }
       ],
       "cost_pct": 0.0,
@@ -15399,14 +15487,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 102,
-          "sp_coefficient": 0.21400000155,
+          "amount": 55,
+          "sp_coefficient": 0.14300000668,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.1284403652,
-          "points_per_level": 1.60000002384
+          "points_per_level": 0.60000002384
         }
       ],
       "cost_pct": 0.0,
@@ -15435,14 +15523,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 183,
-          "sp_coefficient": 0.21400000155,
+          "amount": 130,
+          "sp_coefficient": 0.14300000668,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.12244898081,
-          "points_per_level": 2.20000004768
+          "points_per_level": 0.89999997616
         }
       ],
       "cost_pct": 0.0,
@@ -15471,14 +15559,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 284,
-          "sp_coefficient": 0.21400000155,
+          "amount": 179,
+          "sp_coefficient": 0.14300000668,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.12040133774,
-          "points_per_level": 2.79999995232
+          "points_per_level": 1.10000002384
         }
       ],
       "cost_pct": 0.0,
@@ -15507,14 +15595,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 403,
-          "sp_coefficient": 0.21400000155,
+          "amount": 239,
+          "sp_coefficient": 0.14300000668,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.10978519917,
-          "points_per_level": 3.40000009537
+          "points_per_level": 1.29999995232
         }
       ],
       "cost_pct": 0.0,
@@ -16069,9 +16157,9 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 10000,
       "duration_ms": 0,
-      "cost": 165,
+      "cost": 135,
       "cost_type": 0,
-      "spell_level": 40,
+      "spell_level": 30,
       "family_mask": [
         0,
         4096,
@@ -16083,14 +16171,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 164,
+          "amount": 123,
           "sp_coefficient": 0.71399998665,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.25325885415,
-          "points_per_level": 0.89999997616
+          "points_per_level": 0.80000001192
         },
         {
           "index": 1,
@@ -16107,7 +16195,7 @@
         }
       ],
       "cost_pct": 0.0,
-      "max_level": 48
+      "max_level": 38
     },
     "408491": {
       "name": "Lava Burst",
@@ -16732,7 +16820,7 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": 30,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -21482,7 +21570,7 @@
         {
           "index": 8,
           "effect": 6,
-          "aura": 22,
+          "aura": 674,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
@@ -27128,6 +27216,55 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 10000,
       "duration_ms": 0,
+      "cost": 165,
+      "cost_type": 0,
+      "spell_level": 40,
+      "family_mask": [
+        0,
+        4096,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 2,
+          "aura": 0,
+          "amount": 164,
+          "sp_coefficient": 0.71399998665,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.25325885415,
+          "points_per_level": 0.89999997616
+        },
+        {
+          "index": 1,
+          "effect": 3,
+          "aura": 0,
+          "amount": 20,
+          "sp_coefficient": 0.71399998665,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 48
+    },
+    "1238300": {
+      "name": "Lava Burst",
+      "rank": 3,
+      "school_mask": 4,
+      "cast_time_ms": 2500,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 10000,
+      "duration_ms": 0,
       "cost": 230,
       "cost_type": 0,
       "spell_level": 50,
@@ -27162,60 +27299,11 @@
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
-          "points_per_level": 0.0
-        }
-      ],
-      "cost_pct": 0.0,
-      "max_level": 58
-    },
-    "1238300": {
-      "name": "Lava Burst",
-      "rank": 3,
-      "school_mask": 4,
-      "cast_time_ms": 2500,
-      "gcd_ms": 1500,
-      "cooldown_ms": 0,
-      "category_cooldown_ms": 10000,
-      "duration_ms": 0,
-      "cost": 265,
-      "cost_type": 0,
-      "spell_level": 60,
-      "family_mask": [
-        0,
-        4096,
-        0,
-        0
-      ],
-      "effects": [
-        {
-          "index": 0,
-          "effect": 2,
-          "aura": 0,
-          "amount": 220,
-          "sp_coefficient": 0.71399998665,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.25325885415,
-          "points_per_level": 1.29999995232
-        },
-        {
-          "index": 1,
-          "effect": 3,
-          "aura": 0,
-          "amount": 20,
-          "sp_coefficient": 0.71399998665,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
           "points_per_level": 4.19999980927
         }
       ],
       "cost_pct": 0.0,
-      "max_level": 68
+      "max_level": 58
     },
     "1238373": {
       "name": "Lava Burst",
@@ -28619,6 +28707,127 @@
       ],
       "cost_pct": 0.0,
       "max_level": 0
+    },
+    "1325256": {
+      "name": "Mana Tide Totem",
+      "rank": 4,
+      "school_mask": 16,
+      "cast_time_ms": 0,
+      "gcd_ms": 1000,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 300000,
+      "duration_ms": 13000,
+      "cost": 60,
+      "cost_type": 0,
+      "spell_level": 58,
+      "family_mask": [
+        536870912,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 28,
+          "aura": 0,
+          "amount": 5,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 277993,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1325257": {
+      "name": "Mana Tide",
+      "rank": 4,
+      "school_mask": 8,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 58,
+      "family_mask": [
+        67108864,
+        0,
+        0,
+        268435456
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 35,
+          "aura": 24,
+          "amount": 290,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 3000,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1326047": {
+      "name": "Lava Burst",
+      "rank": 4,
+      "school_mask": 4,
+      "cast_time_ms": 2500,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 10000,
+      "duration_ms": 0,
+      "cost": 265,
+      "cost_type": 0,
+      "spell_level": 60,
+      "family_mask": [
+        0,
+        4096,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 2,
+          "aura": 0,
+          "amount": 220,
+          "sp_coefficient": 0.71399998665,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.25325885415,
+          "points_per_level": 1.29999995232
+        },
+        {
+          "index": 1,
+          "effect": 3,
+          "aura": 0,
+          "amount": 20,
+          "sp_coefficient": 0.71399998665,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 4.19999980927
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 68
     }
   }
 }

@@ -89,7 +89,18 @@ func (priest *Priest) newMindFlaySpellConfig(rank int, tickIdx int32) core.Spell
 				dot.Snapshot(target, baseDamage, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
+				// Improved Mind Flay: this instance is a compounding step
+				// over the one before it, on the snapshot the channel
+				// took (talents.go's ImprovedMindFlayRamp).
+				snapshot := dot.SnapshotBaseDamage
+				dot.SnapshotBaseDamage *= priest.ImprovedMindFlayRamp(dot.TickCount)
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
+				dot.SnapshotBaseDamage = snapshot
+				// Dark Inspiration: "fully channeled Mind Flay" is the
+				// full three-tick channel's last tick.
+				if dot.TickCount == MindFlayTicks {
+					priest.triggerDarkInspiration(sim)
+				}
 			},
 		},
 

@@ -64,6 +64,7 @@ func (priest *Priest) getMindBlastBaseConfig(rank int, cdTimer *core.Timer) core
 
 			if result.Landed() {
 				priest.AddShadowWeavingStack(sim, target)
+				priest.triggerDarkInspiration(sim)
 			}
 			spell.DealDamage(sim, result)
 		},

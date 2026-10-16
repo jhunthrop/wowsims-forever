@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70338",
+  "build": "1.60.1.70425",
   "class_slug": "priest",
   "trainables": [
     {
@@ -261,7 +261,7 @@
       "cost": 985,
       "cost_type": 0,
       "cast_time_ms": 0,
-      "cooldown_ms": 60000,
+      "cooldown_ms": 24000,
       "ranks": [
         {
           "id": 2944,
@@ -1381,6 +1381,33 @@
       ]
     },
     {
+      "name": "Prayer of Mending",
+      "skill_line": "Holy",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 390,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 10000,
+      "ranks": [
+        {
+          "id": 401859,
+          "rank": 1,
+          "level": 40
+        },
+        {
+          "id": 1240826,
+          "rank": 2,
+          "level": 50
+        },
+        {
+          "id": 1240827,
+          "rank": 3,
+          "level": 60
+        }
+      ]
+    },
+    {
       "name": "Prayer of Shadow Protection",
       "skill_line": "Shadow Magic",
       "source": "skill_line_ability",
@@ -1617,7 +1644,7 @@
       "cost": 340,
       "cost_type": 0,
       "cast_time_ms": 0,
-      "cooldown_ms": 15000,
+      "cooldown_ms": 18000,
       "ranks": [
         {
           "id": 1309595,
@@ -1961,7 +1988,7 @@
       "cost": 40,
       "cost_type": 0,
       "cast_time_ms": 0,
-      "cooldown_ms": 60000,
+      "cooldown_ms": 30000,
       "ranks": [
         {
           "id": 15286,

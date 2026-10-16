@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70338",
+  "build": "1.60.1.70425",
   "class_slug": "hunter",
   "trainables": [
     {
@@ -1002,7 +1002,7 @@
       "active": true,
       "cost": 0,
       "cost_type": 0,
-      "cast_time_ms": 500,
+      "cast_time_ms": 0,
       "cooldown_ms": 6000,
       "ranks": [
         {
@@ -1245,7 +1245,7 @@
       "ranks": [
         {
           "id": 1317257,
-          "rank": 1,
+          "rank": 0,
           "level": 30
         }
       ]

@@ -6,11 +6,12 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// Missile Barrage is the Arcane tree's tier-4 bool talent (node 105802,
-// max_rank 1): "Gives your Arcane Blast spell a 40% chance, and your
-// Fireball, Frostbolt, and Frostfire Bolt spells a 20% chance to reduce
-// the channeled duration of your next Arcane Missiles spell by 50%,
-// reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
+// Missile Barrage is the Arcane tree's first-tier talent (node 105802,
+// two ranks since client 1.60.1.70425): "Gives your Arcane Blast spell a
+// 20/40% chance, your Arcane Missile hits a 5/10% chance, and your Arcane
+// Wrath, Fireball, Frostbolt, and Frostfire Bolt spells a 10/20% chance
+// to reduce the channeled duration of your next Arcane Missiles spell by
+// 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
 //
 // The buff is spell 400589 ("Missile Barrage", duration_ms 15000);
 // arcane_missiles.go's ApplyEffects is what reads it to halve the tick
@@ -18,10 +19,12 @@ import (
 // next Arcane Missiles free - both only take effect on the very next
 // cast, per the tooltip's "your next Arcane Missiles".
 const (
-	missileBarrageBuffSpellId       int32 = 400589
-	missileBarrageDuration                = time.Second * 15
-	missileBarrageArcaneBlastChance       = 0.40
-	missileBarrageOtherChance             = 0.20
+	missileBarrageBuffSpellId int32 = 400589
+	missileBarrageDuration          = time.Second * 15
+
+	missileBarrageArcaneBlastChancePerRank = 0.20
+	missileBarrageMissileHitChancePerRank  = 0.05
+	missileBarrageOtherChancePerRank       = 0.10
 
 	// "missiles fire every 0.5 sec" instead of the normal 1 sec tick
 	// (arcane_missiles.go's tickLength), with the same tick count, which
@@ -30,7 +33,7 @@ const (
 )
 
 func (mage *Mage) registerMissileBarrage() {
-	if !mage.Talents.MissileBarrage {
+	if mage.Talents.MissileBarrage == 0 {
 		return
 	}
 
@@ -84,7 +87,7 @@ func (mage *Mage) registerMissileBarrage() {
 			aura.Activate(sim)
 		},
 		OnCastComplete: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			chance := mage.missileBarrageChance(spell)
+			chance := mage.missileBarrageCastChance(spell)
 			if chance == 0 {
 				return
 			}
@@ -93,23 +96,35 @@ func (mage *Mage) registerMissileBarrage() {
 				mage.MissileBarrageAura.Activate(sim)
 			}
 		},
+		// "your Arcane Missile hits": each missile that lands rolls on
+		// its own, mid-channel, so a channel can arm the buff for the
+		// Arcane Missiles after it.
+		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			if spell.SpellCode != SpellCode_MageArcaneMissilesTick || !result.Landed() {
+				return
+			}
+			if sim.Proc(missileBarrageMissileHitChancePerRank*float64(mage.Talents.MissileBarrage), "Missile Barrage") {
+				mage.MissileBarrageAura.Activate(sim)
+			}
+		},
 	})
 }
 
-// missileBarrageChance is the chance one cast of spell triggers Missile
-// Barrage: zero for a spell that cannot, and the Manaflare Regalia
-// 5-piece's 10% more on Frostfire Bolt.
-func (mage *Mage) missileBarrageChance(spell *core.Spell) float64 {
+// missileBarrageCastChance is the chance one completed cast of spell
+// triggers Missile Barrage: zero for a spell that cannot, and the
+// Manaflare Regalia 5-piece's 10% more on Frostfire Bolt.
+func (mage *Mage) missileBarrageCastChance(spell *core.Spell) float64 {
+	rank := float64(mage.Talents.MissileBarrage)
 	switch spell.SpellCode {
 	case SpellCode_MageArcaneBlast:
-		return missileBarrageArcaneBlastChance
+		return missileBarrageArcaneBlastChancePerRank * rank
 	case SpellCode_MageFrostfireBolt:
 		if mage.manaflareFrostfire {
-			return missileBarrageOtherChance + manaflareFrostfireProcBonus
+			return missileBarrageOtherChancePerRank*rank + manaflareFrostfireProcBonus
 		}
-		return missileBarrageOtherChance
-	case SpellCode_MageFireball, SpellCode_MageFrostbolt:
-		return missileBarrageOtherChance
+		return missileBarrageOtherChancePerRank * rank
+	case SpellCode_MageArcaneWrath, SpellCode_MageFireball, SpellCode_MageFrostbolt:
+		return missileBarrageOtherChancePerRank * rank
 	default:
 		return 0
 	}

@@ -22,10 +22,10 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "malediction",
+        "fieldName": "grimReach",
         "location": { "rowIdx": 1, "colIdx": 0 },
-        "spellIds": [1225177, 1225177, 1225177, 1225177, 1225177],
-        "maxPoints": 5
+        "spellIds": [18218, 18218],
+        "maxPoints": 2
       },
       {
         "fieldName": "soulHarvest",

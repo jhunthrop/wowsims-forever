@@ -6,6 +6,10 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// stormstrikeBaseManaCostPercent is SpellPower.PowerCostPct for spell 17364
+// in client 1.60.1.70425, as the fraction ManaCostOptions.BaseCost takes.
+const stormstrikeBaseManaCostPercent = 0.08
+
 func (shaman *Shaman) registerStormstrikeSpell() {
 	if !shaman.Talents.Stormstrike {
 		return
@@ -26,11 +30,11 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 
 		RequiredLevel: 40,
 
-		// FOREVER: spellconst/shaman.json spell 17364 carries a nonzero
-		// flat cost (125), not the percent-of-base-mana BaseCost: .21
-		// vanilla used - Forever's client flattened Stormstrike's cost.
+		// FOREVER: spellconst/shaman.json spell 17364 prices Stormstrike
+		// at 8% of base mana since client 1.60.1.70425 (SpellPower
+		// PowerCostPct 8; the 1.60.1.70374 client carried a flat 125).
 		ManaCost: core.ManaCostOptions{
-			FlatCost: 125,
+			BaseCost: stormstrikeBaseManaCostPercent,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

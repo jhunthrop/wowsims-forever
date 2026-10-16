@@ -72,25 +72,6 @@ func floatsNearlyEqual(a, b float64) bool {
 	return diff > -epsilon && diff < epsilon
 }
 
-// TestMaledictionIncreasesPeriodicDamage checks rank 5 (max): +5%
-// periodic damage on a Warlock spell with a dot (Corruption).
-// PeriodicDamageMultiplierAdditive defaults to 1 (core/spell.go), not
-// 0, so this diffs against an untalented build rather than asserting
-// an absolute 0.05.
-func TestMaledictionIncreasesPeriodicDamage(t *testing.T) {
-	_, bare, _ := newBareWarlockForDamageTest(t)
-	_, talented, _ := newWarlockForDamageTest(t, "0005") // Affliction field 4, rank 5.
-
-	if len(bare.Corruption) == 0 || len(talented.Corruption) == 0 {
-		t.Fatal("level-60 warlock has no Corruption registered")
-	}
-	bareVal := bare.Corruption[len(bare.Corruption)-1].PeriodicDamageMultiplierAdditive
-	talentedVal := talented.Corruption[len(talented.Corruption)-1].PeriodicDamageMultiplierAdditive
-	if got, want := talentedVal-bareVal, 0.05; !floatsNearlyEqual(got, want) {
-		t.Errorf("Corruption PeriodicDamageMultiplierAdditive delta = %v, want %v (Malediction rank 5)", got, want)
-	}
-}
-
 // TestImprovedDrainsIncreasesDrainDamage checks rank 3 (max, +20%) on
 // Drain Life and Drain Soul, by diffing against an untalented build so
 // the test does not need to know either spell's unrelated baseline

@@ -38,6 +38,7 @@ var trainableDispositions = map[string]map[string]string{
 		"Blink":                   dispUtility + ": movement",
 		"Fire Ward":               dispUtility + ": absorbs incoming fire damage",
 		"Frost Ward":              dispUtility + ": absorbs incoming frost damage",
+		"Frost Blast":             dispDefer + ": new baseline Frost nuke in client 1.60.1.70425 (1326053, 24-48, 1.5 sec cast); no curated rotation casts it yet",
 		"Mana Shield":             dispUtility + ": absorbs incoming damage, none in a sim",
 		"Teleport: Ironforge":     dispUtility + ": travel",
 		"Teleport: Orgrimmar":     dispUtility + ": travel",

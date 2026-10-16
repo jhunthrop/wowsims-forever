@@ -10,7 +10,8 @@ import (
 // renamed from Hot Streak in the live tree): "Non-periodic critical
 // strikes with Fireball, Frostfire Bolt, Fire Blast, and Scorch reduce
 // the cast time of your next Pyroblast cast within 20 sec by 25%,
-// stacking up to 3 times."
+// stacking up to 3 times. Fire Blast grants an additional stack every
+// time it deals damage." (1.60.1.70425 added the Fire Blast clause.)
 //
 // The buff is the client's spell 400625: duration_ms 20000, effect 0 a
 // cast-time modifier of -25 (aura 108, misc 10) and effect 1 a dummy of
@@ -73,11 +74,25 @@ func (mage *Mage) applyHeatingUp() {
 		// OnSpellHitDealt is the direct hit only; dot ticks arrive through
 		// the periodic callbacks, which is the "non-periodic" of the text.
 		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if spell.ClassSpellMask&heatingUpFeederMask == 0 || !result.DidCrit() {
+			if spell.ClassSpellMask&heatingUpFeederMask == 0 || !result.Landed() {
+				return
+			}
+			stacks := 0
+			if result.DidCrit() {
+				stacks++
+			}
+			// "Fire Blast grants an additional stack every time it deals
+			// damage": a landed Fire Blast is one stack, a critical one two.
+			if spell.ClassSpellMask == MageSpellMaskFireBlast {
+				stacks++
+			}
+			if stacks == 0 {
 				return
 			}
 			mage.HeatingUpAura.Activate(sim)
-			mage.HeatingUpAura.AddStack(sim)
+			for i := 0; i < stacks; i++ {
+				mage.HeatingUpAura.AddStack(sim)
+			}
 		},
 	})
 }

@@ -214,7 +214,7 @@
         "maxPoints": 1
       },
       {
-        "fieldName": "predatoryInstincts",
+        "fieldName": "naturalInstinct",
         "location": { "rowIdx": 4, "colIdx": 3 },
         "spellIds": [1223242, 1223242],
         "maxPoints": 2

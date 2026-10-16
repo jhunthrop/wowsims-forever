@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70425",
   "class_id": 1,
   "class_slug": "warrior",
   "trees": [
@@ -220,7 +220,7 @@
           "ranks": [
             {
               "spell_id": 1310222,
-              "description": "A brutal attack that deals 40% weapon damage, plus an additional 80% weapon damage against Giants, Dragonkin, and mounted targets."
+              "description": "A brutal attack that deals 40% weapon damage. Deals an additional 80% weapon damage against Giants, Dragonkin, and mounted targets. Mounted targets are dismounted."
             }
           ],
           "spell_id": 1310222
@@ -257,8 +257,8 @@
           "max_rank": 2,
           "tier": 3,
           "column": 2,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
+          "prereq_talent_id": 105950,
+          "prereq_rank": 3,
           "ranks": [
             {
               "spell_id": 16493,
@@ -283,23 +283,23 @@
           "ranks": [
             {
               "spell_id": 1289682,
-              "description": "Your Main Hand melee attacks against enemies afflicted by your Rend have a 4% chance to allow the use of your Overpower ability on the target. Lasts 6 sec."
+              "description": "Grants your Main Hand melee attacks against enemies afflicted by your Rend a 4% chance to allow an activation of Overpower."
             },
             {
               "spell_id": 1289682,
-              "description": "Your Main Hand melee attacks against enemies afflicted by your Rend have a 8% chance to allow the use of your Overpower ability on the target. Lasts 6 sec."
+              "description": "Grants your Main Hand melee attacks against enemies afflicted by your Rend a 8% chance to allow an activation of Overpower."
             },
             {
               "spell_id": 1289682,
-              "description": "Your Main Hand melee attacks against enemies afflicted by your Rend have a 12% chance to allow the use of your Overpower ability on the target. Lasts 6 sec."
+              "description": "Grants your Main Hand melee attacks against enemies afflicted by your Rend a 12% chance to allow an activation of Overpower."
             },
             {
               "spell_id": 1289682,
-              "description": "Your Main Hand melee attacks against enemies afflicted by your Rend have a 16% chance to allow the use of your Overpower ability on the target. Lasts 6 sec."
+              "description": "Grants your Main Hand melee attacks against enemies afflicted by your Rend a 16% chance to allow an activation of Overpower."
             },
             {
               "spell_id": 1289682,
-              "description": "Your Main Hand melee attacks against enemies afflicted by your Rend have a 20% chance to allow the use of your Overpower ability on the target. Lasts 6 sec."
+              "description": "Grants your Main Hand melee attacks against enemies afflicted by your Rend a 20% chance to allow an activation of Overpower."
             }
           ],
           "spell_id": 1289682
@@ -523,8 +523,7 @@
               "description": "Increases the time before your Rage begins to decay after leaving combat by 10 sec."
             }
           ],
-          "spell_id": 1323964,
-          "hotfix_only": true
+          "spell_id": 1323964
         },
         {
           "id": 105937,
@@ -582,8 +581,7 @@
               "description": "Increases your chance to hit with off-hand attacks by 10%."
             }
           ],
-          "spell_id": 1323963,
-          "hotfix_only": true
+          "spell_id": 1323963
         },
         {
           "id": 105935,
@@ -597,7 +595,7 @@
           "ranks": [
             {
               "spell_id": 12323,
-              "description": "Causes all nearby enemies to be Dazed, reducing movement speed by 50% for 6 sec."
+              "description": "Causes all enemies within 10 yds to be Dazed, reducing movement speed by 50% for 6 sec."
             }
           ],
           "spell_id": 12323
@@ -672,7 +670,7 @@
           "ranks": [
             {
               "spell_id": 1310315,
-              "description": "Causes your Whirlwind to also strike with your Off Hand weapon, and reduces the Rage cost of your Cleave ability by 2."
+              "description": "Reduces the Rage cost of your Cleave and Whirlwind abilities by 3."
             }
           ],
           "spell_id": 1310315
@@ -842,8 +840,7 @@
               "description": "Your Enrage, Berserker Rage, Bloodrage, Death Wish, and Bloodthirst abilities cause your next 3 melee attacks to restore 1.0% of your maximum Health."
             }
           ],
-          "spell_id": 1323967,
-          "hotfix_only": true
+          "spell_id": 1323967
         },
         {
           "id": 105930,
@@ -857,7 +854,7 @@
           "ranks": [
             {
               "spell_id": 23881,
-              "description": "Instantly attack the target causing damage equal to 35% of your Attack Power plus 30 and increasing your movement speed by 10% for 10 sec."
+              "description": "Instantly attack the target causing damage equal to 45% of your Attack Power plus 30 and increasing your movement speed by 10% for 10 sec."
             }
           ],
           "spell_id": 23881

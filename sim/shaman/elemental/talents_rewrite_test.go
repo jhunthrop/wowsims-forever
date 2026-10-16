@@ -27,7 +27,6 @@ func elementalTalentString(index, rank int) string {
 }
 
 var (
-	nodeCallOfThunder     = elementalNode("call_of_thunder")
 	nodeEyeOfTheStorm     = elementalNode("eye_of_the_storm")
 	nodeLightningOverload = elementalNode("lightning_overload")
 	nodeElementalAlacrity = elementalNode("elemental_alacrity")
@@ -90,39 +89,6 @@ func newIsolatedTalentShaman(t *testing.T, talentsString string) (*core.Simulati
 		t.Fatal("the raid's first player is not a shaman agent")
 	}
 	return sim, agent.GetShaman()
-}
-
-// TestCallOfThunderBonusCrit guards shaman.applyCallOfThunder: node 104762
-// (talents/shaman.json), one rank, +3% crit to Lightning Bolt and Chain
-// Lightning only - Lava Burst and Lightning Shield's own cast/proc
-// spells (which also carry SpellFlagLightning) must be untouched.
-func TestCallOfThunderBonusCrit(t *testing.T) {
-	_, without := newIsolatedTalentShaman(t, elementalTalentStringWithLavaBurst(nodeCallOfThunder, 0))
-	if without.Talents.CallOfThunder {
-		t.Fatal("elementalTalentString(nodeCallOfThunder, 0) set CallOfThunder true")
-	}
-	lbWithout := without.LightningBolt[len(without.LightningBolt)-1]
-	if lbWithout.BonusCritRating != 0 {
-		t.Errorf("without Call of Thunder: Lightning Bolt BonusCritRating = %v, want 0", lbWithout.BonusCritRating)
-	}
-
-	_, with := newIsolatedTalentShaman(t, elementalTalentStringWithLavaBurst(nodeCallOfThunder, 1))
-	if !with.Talents.CallOfThunder {
-		t.Fatal("elementalTalentString(nodeCallOfThunder, 1) did not set CallOfThunder true")
-	}
-	lbWith := with.LightningBolt[len(with.LightningBolt)-1]
-	clWith := with.ChainLightning[len(with.ChainLightning)-1]
-	lvbWith := with.LavaBurst[len(with.LavaBurst)-1]
-	wantCrit := 3 * float64(core.CritRatingPerCritChance)
-	if got := lbWith.BonusCritRating; got != wantCrit {
-		t.Errorf("Call of Thunder: Lightning Bolt BonusCritRating = %v, want %v", got, wantCrit)
-	}
-	if got := clWith.BonusCritRating; got != wantCrit {
-		t.Errorf("Call of Thunder: Chain Lightning BonusCritRating = %v, want %v", got, wantCrit)
-	}
-	if lvbWith.BonusCritRating != 0 {
-		t.Errorf("Call of Thunder: Lava Burst BonusCritRating = %v, want 0 (not in the tooltip's affected list)", lvbWith.BonusCritRating)
-	}
 }
 
 // TestElementalAlacrityCastTime guards shaman.applyElementalAlacrity:

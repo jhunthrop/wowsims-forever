@@ -88,6 +88,7 @@ func (mage *Mage) newFlamestrikeSpellConfig(rank int) core.SpellConfig {
 			IsAOE: true,
 			Aura: core.Aura{
 				Label: fmt.Sprintf("Flamestrike (Rank %d)", rank),
+				Tag:   mageFireEffectTag,
 			},
 			NumberOfTicks:    numTicks,
 			TickLength:       tickLength,

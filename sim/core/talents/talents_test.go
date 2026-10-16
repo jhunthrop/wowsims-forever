@@ -39,7 +39,7 @@ func TestTreeSizesMatchTheClient(t *testing.T) {
 	if got := c.TreeSizes(); got != want {
 		t.Errorf("TreeSizes() = %v, want %v", got, want)
 	}
-	if c.Build != "1.60.1.70009" {
+	if c.Build != "1.60.1.70425" {
 		t.Errorf("Build = %q; the reader must carry the client build through", c.Build)
 	}
 }

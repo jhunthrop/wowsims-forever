@@ -44,7 +44,7 @@ import (
 //
 // 51 points, every tier gate and prerequisite satisfied, and Ice Barrier
 // at the bottom of Frost is what the 31 points buy.
-const ForeverFrostTalents = "050005023010310000-00000000000000000-0505000311020321251"
+const ForeverFrostTalents = "0501005023010300000-00000000000000000-0505000311020321251"
 
 func (mage *Mage) ApplyTalents() {
 	mage.applyDeclarativeTalents()
@@ -105,12 +105,14 @@ func (mage *Mage) applyArcaneTalents() {
 	// the proc that re-costs and re-times the next Arcane Missiles
 	// channel; arcane_missiles.go's ApplyEffects is what reads it.
 	mage.registerMissileBarrage()
+	mage.registerArcaneWrathSpell()
 }
 
 func (mage *Mage) applyFireTalents() {
 	mage.applyIgnite()
 	mage.applyImprovedScorch()
 	mage.applyMasterOfElements()
+	mage.applyFirePower()
 
 	mage.registerCombustionCD()
 
@@ -486,24 +488,23 @@ func (mage *Mage) registerCombustionCD() {
 	})
 }
 
-// wintersChillMaxStacks is how many times Winter's Chill stacks at a talent
-// rank, Forever's 1.60.1.70291 talent text: "Stacks up to 1/2/3/4/5 times",
-// one stack a point.
-func wintersChillMaxStacks(rank int32) int32 {
-	return min(rank, core.WintersChillMaxStacks)
-}
-
 func (mage *Mage) applyWintersChill() {
 	if mage.Talents.WintersChill == 0 {
 		return
 	}
 
+	// 1.60.1.70425: "Gives your Frost damage spells a 20/40/60/80/100%
+	// chance to apply the Winter's Chill effect, which increases the
+	// damage done by your Cone of Cold spell to the target by 40%,
+	// stacking up to 5 times." Every rank stacks to the aura's five; the
+	// stacks are read by cone_of_cold.go, which is where the 40% lives.
 	procChance := float64(mage.Talents.WintersChill) * 0.2
-	maxStacks := wintersChillMaxStacks(mage.Talents.WintersChill)
+	maxStacks := int32(core.WintersChillMaxStacks)
 
 	wcAuras := mage.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
 		return core.WintersChillAura(target)
 	})
+	mage.WintersChillAuras = wcAuras
 	mage.Env.RegisterPreFinalizeEffect(func() {
 		for _, spell := range mage.GetSpellsMatchingSchool(core.SpellSchoolFrost) {
 			spell.RelatedAuras = append(spell.RelatedAuras, wcAuras)
@@ -579,10 +580,11 @@ const (
 	// "Reduces the casting time of your Fireball and Frostfire Bolt
 	// spells by 0.1 sec."
 	improvedFireballCastTimePerRank = -100 * time.Millisecond
-	// "Reduces the cooldown of your Fire Blast spell by 1 sec." The
-	// kill-triggered crit bonus on the same talent needs a killing blow,
-	// which a Patchwerk fight never produces.
-	wakeOfFireCooldownPerRank = -1 * time.Second
+	// Improved Fire Blast (Wake of Fire's slot in the 1.60.1.70425 tree):
+	// "Reduces the cooldown of your Fire Blast spell by 1 sec and
+	// increases its range by 8 yards." The range half changes nothing
+	// against a stationary, in-range target.
+	improvedFireBlastCooldownPerRank = -1 * time.Second
 
 	// "Reduces the casting time of your Frostbolt spell by 0.1 sec."
 	improvedFrostboltCastTimePerRank = -100 * time.Millisecond
@@ -726,15 +728,8 @@ func (mage *Mage) applyDeclarativeTalents() {
 		})
 	}
 
-	if t.FirePower > 0 {
-		// Ignite is deliberately outside MageSpellMaskFireDamage: it is
-		// a consequence of a Fire crit, not a Fire spell the mage casts.
-		mage.AddStaticMod(core.SpellModConfig{
-			Kind:      core.SpellMod_DamageDone_Flat,
-			ClassMask: MageSpellMaskFireDamage,
-			IntValue:  firePowerDamagePerRank * int64(t.FirePower),
-		})
-	}
+	// Fire Power is no longer a flat bonus: fire_power.go reads the
+	// mage's Fire effects on the target at damage time.
 
 	if t.Incineration > 0 {
 		mage.AddStaticMod(core.SpellModConfig{
@@ -760,11 +755,11 @@ func (mage *Mage) applyDeclarativeTalents() {
 		})
 	}
 
-	if t.WakeOfFire > 0 {
+	if t.ImprovedFireBlast > 0 {
 		mage.AddStaticMod(core.SpellModConfig{
 			Kind:      core.SpellMod_Cooldown_Flat,
 			ClassMask: MageSpellMaskFireBlast,
-			TimeValue: wakeOfFireCooldownPerRank * time.Duration(t.WakeOfFire),
+			TimeValue: improvedFireBlastCooldownPerRank * time.Duration(t.ImprovedFireBlast),
 		})
 	}
 

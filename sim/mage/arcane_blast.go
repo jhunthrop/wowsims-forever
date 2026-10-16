@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/stats"
 )
 
 // Arcane Blast is the Arcane tree's tier-3 bool talent (node 105806,
@@ -11,7 +12,7 @@ import (
 // Snap - it is registered from ApplyTalents rather than Initialize: an
 // Arcane mage that never spent the point must not have the spell.
 //
-// The client's rank table (spellconst/mage.json, build 1.60.1.70009)
+// The client's rank table (spellconst/mage.json, since build 1.60.1.70009)
 // collides on both ends of the rank list, which a straight
 // regeneration would resolve wrong (see constants_auto_gen.go's
 // "skipped" comment beside ArcaneBlastRanks), so this ability keeps its
@@ -29,26 +30,27 @@ import (
 //     536870912, with a second effect triggering spell 36032). 42896 is
 //     an NPC/enrage variant, not the player's rank 3.
 //
-// The tooltip (ranks 1-5, all "Blasts the target with energy, dealing N
-// Arcane damage. Each time you cast Arcane Blast, the damage of all
-// your other spells is increased by 10% and the mana cost of Arcane
-// Blast is increased by 175%. Effect stacks up to 4 times and lasts 8
-// sec or until any other damage spell is cast.") is one spell id per
-// rank (400574, 1239696, 1239697, 1239699, 1239700) plus a shared
-// stacking-buff spell, id 400573: duration_ms 8000 (the tooltip's 8
-// sec) and three generic modifier effects at misc_value 0 (+10, the
-// damage bonus), 14 (+175, the cost increase) and 22 (+10, unread here
-// - the tooltip names only two effects, and a third generic-modifier
-// slot with no corresponding tooltip line is left unmodelled rather
-// than guessed).
+// The tooltip (ranks 1-5, client 1.60.1.70425: "Blasts the target with
+// energy, dealing N Arcane damage. Each time you cast Arcane Blast, you
+// gain 15% of your Intellect as Spell Damage and the mana cost of Arcane
+// Blast is increased by 175%. Effect stacks up to 4 times and lasts 15
+// sec from time of initial application.") is one spell id per rank
+// (400574, 1239696, 1239697, 1239699, 1239700; SpellEffect base points
+// 32/78/101/168/236 with variance 0.151, points per level
+// 0.5/0.8/1.0/1.3/1.6, coefficient 0.429) plus a shared stacking-buff
+// spell, id 400573: aura 174 (spell damage from a percentage of a stat)
+// at +15 of Intellect and a cost modifier of +175 a stack. The
+// 1.60.1.70374 version was +10% damage to the mage's other spells for 8
+// sec, dropped by any other damage spell; both halves are gone from the
+// client's text and rows.
 const ArcaneBlastRanks = 5
 
 var ArcaneBlastSpellId = [ArcaneBlastRanks + 1]int32{0, 400574, 1239696, 1239697, 1239699, 1239700}
 var ArcaneBlastLevel = [ArcaneBlastRanks + 1]int{0, 20, 30, 40, 50, 60}
-var ArcaneBlastBaseDamage = [ArcaneBlastRanks + 1][]float64{{0, 0}, {49.9224, 58.0776}, {120.1837, 139.8163}, {156.2388, 181.7612}, {253.3102, 294.6898}, {364.249, 423.751}}
-var ArcaneBlastPointsPerLevel = [ArcaneBlastRanks + 1]float64{0, 0.9, 1.4, 1.6, 2.1, 2.6}
+var ArcaneBlastBaseDamage = [ArcaneBlastRanks + 1][]float64{{0, 0}, {29.584, 34.416}, {72.111, 83.889}, {93.3745, 108.6255}, {155.316, 180.684}, {218.182, 253.818}}
+var ArcaneBlastPointsPerLevel = [ArcaneBlastRanks + 1]float64{0, 0.5, 0.8, 1.0, 1.3, 1.6}
 var ArcaneBlastMaxLevel = [ArcaneBlastRanks + 1]int{0, 28, 38, 48, 58, 68}
-var ArcaneBlastSpellCoeff = [ArcaneBlastRanks + 1]float64{0, 0.714, 0.714, 0.714, 0.714, 0.714}
+var ArcaneBlastSpellCoeff = [ArcaneBlastRanks + 1]float64{0, 0.429, 0.429, 0.429, 0.429, 0.429}
 
 // arcaneBlastBuffSpellId is 400573, the stacking buff's own id - shared
 // by every rank, the way core.WintersChillAura and
@@ -57,11 +59,12 @@ var ArcaneBlastSpellCoeff = [ArcaneBlastRanks + 1]float64{0, 0.714, 0.714, 0.714
 const arcaneBlastBuffSpellId int32 = 400573
 
 const (
-	// "the damage of all your other spells is increased by 10%" per
-	// stack, up to 4.
-	arcaneBlastOtherSpellDamagePerStack = 0.10
-	arcaneBlastMaxStacks                = 4
-	arcaneBlastDuration                 = time.Second * 8
+	// "you gain 15% of your Intellect as Spell Damage" per stack, up to 4.
+	arcaneBlastIntellectShare = 0.15
+	arcaneBlastMaxStacks      = 4
+	// "lasts 15 sec from time of initial application": a further cast
+	// adds a stack without renewing the 15 sec.
+	arcaneBlastDuration = time.Second * 15
 )
 
 // Every rank's flat ManaCost in the client is 0, but that column is not
@@ -104,44 +107,24 @@ func (mage *Mage) registerArcaneBlastSpell() {
 
 	mage.ArcaneBlast = make([]*core.Spell, ArcaneBlastRanks+1)
 
-	// "your other spells" for the stacking damage buff - every mage
-	// spell this package registers except Arcane Blast itself, captured
-	// as each one registers (ApplyTalents runs before Initialize, so
-	// most of them do not exist yet when this function runs).
-	var otherSpells []*core.Spell
-	mage.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.Flags.Matches(SpellFlagMage) && spell.ClassSpellMask != MageSpellMaskArcaneBlast {
-			otherSpells = append(otherSpells, spell)
-		}
-	})
-
+	// The spell power each stack granted, so the whole grant comes back
+	// off when the buff ends even if Intellect moved meanwhile.
+	var grantedSpellPower float64
 	mage.ArcaneBlastAura = mage.RegisterAura(core.Aura{
 		Label:     "Arcane Blast",
 		ActionID:  core.ActionID{SpellID: arcaneBlastBuffSpellId},
 		Duration:  arcaneBlastDuration,
 		MaxStacks: arcaneBlastMaxStacks,
 		OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks int32, newStacks int32) {
-			bonus := arcaneBlastOtherSpellDamagePerStack * float64(newStacks-oldStacks)
-			for _, spell := range otherSpells {
-				spell.DamageMultiplierAdditive += bonus
+			if newStacks > oldStacks {
+				grant := arcaneBlastIntellectShare * mage.GetStat(stats.Intellect) * float64(newStacks-oldStacks)
+				mage.AddStatDynamic(sim, stats.SpellPower, grant)
+				grantedSpellPower += grant
+			} else if newStacks == 0 {
+				mage.AddStatDynamic(sim, stats.SpellPower, -grantedSpellPower)
+				grantedSpellPower = 0
 			}
 			mage.setArcaneBlastCostMultiplier(newStacks)
-		},
-		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			// The cast that refreshes/stacks the buff is Arcane Blast's
-			// own ApplyEffects below, not this listener.
-			if spell.ClassSpellMask == MageSpellMaskArcaneBlast {
-				return
-			}
-			// "until any other damage spell is cast" - a damage spell
-			// is one core.NewSpell would have required a ProcMask for
-			// (sim/core/spell.go's validation), so that is the signal
-			// used here rather than re-deriving "deals damage" another
-			// way.
-			if !spell.Flags.Matches(SpellFlagMage) || !spell.ProcMask.Matches(core.ProcMaskSpellDamage) {
-				return
-			}
-			aura.Deactivate(sim)
 		},
 	})
 
@@ -181,8 +164,10 @@ func (mage *Mage) getArcaneBlastConfig(rank int) core.SpellConfig {
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD:      core.GCDDefault,
-				CastTime: time.Millisecond * 2500,
+				GCD: core.GCDDefault,
+				// SpellMisc.CastingTimeIndex on every rank reads 1.5 sec in
+				// client 1.60.1.70425 (2.5 sec before).
+				CastTime: time.Millisecond * 1500,
 			},
 		},
 
@@ -200,7 +185,11 @@ func (mage *Mage) getArcaneBlastConfig(rank int) core.SpellConfig {
 				}
 			})
 
-			mage.ArcaneBlastAura.Activate(sim)
+			// "lasts 15 sec from time of initial application": only the
+			// first cast starts the clock.
+			if !mage.ArcaneBlastAura.IsActive() {
+				mage.ArcaneBlastAura.Activate(sim)
+			}
 			mage.ArcaneBlastAura.AddStack(sim)
 		},
 	}

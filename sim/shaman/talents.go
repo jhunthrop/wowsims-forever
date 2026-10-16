@@ -39,7 +39,6 @@ func (shaman *Shaman) ApplyTalents() {
 	shaman.applyImprovedFireTotems()
 	shaman.applyElementalFury()
 	shaman.registerElementalMasteryCD()
-	shaman.applyCallOfThunder()
 	shaman.applyElementalAlacrity()
 	shaman.applyEyeOfTheStorm()
 
@@ -532,25 +531,6 @@ func (shaman *Shaman) totemManaMultiplier() int32 {
 }
 
 // callOfThunderCritBonus is Call of Thunder's one rank (talents/shaman.json
-// node 104762, max_rank 1): "Increases the critical strike chance of
-// your Lightning Bolt and Chain Lightning spells by 3%." Lightning
-// Shield's own cast and proc spells also carry SpellFlagLightning, so
-// this matches on SpellCode rather than that flag, the same way
-// applyConcussion already has to for the shared affected-spell list.
-const callOfThunderCritBonus = 3 * core.CritRatingPerCritChance
-
-func (shaman *Shaman) applyCallOfThunder() {
-	if !shaman.Talents.CallOfThunder {
-		return
-	}
-
-	affectedSpellCodes := []int32{SpellCode_ShamanLightningBolt, SpellCode_ShamanChainLightning}
-	shaman.OnSpellRegistered(func(spell *core.Spell) {
-		if slices.Contains(affectedSpellCodes, spell.SpellCode) {
-			spell.BonusCritRating += callOfThunderCritBonus
-		}
-	})
-}
 
 // elementalAlacrityCastTimeReduction is Elemental Alacrity's three
 // ranks (talents/shaman.json node 104765): "Reduces the cast time of

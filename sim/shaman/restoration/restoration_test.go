@@ -24,10 +24,10 @@ const FullTalents = "--5533523315513151"
 // restoTalents.
 const (
 	posImprovedHealingWave = 1 + iota
-	posTotemicFocus
+	posTidalFocus          // 1.60.1.70425 swapped Tidal Focus and Totemic Focus's positions
 	posMindfulness
 	posNaturalGrace
-	posTidalFocus
+	posTotemicFocus
 	posImprovedReincarnation
 	posAncestralHealing
 	posHealingFocus

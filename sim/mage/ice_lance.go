@@ -18,14 +18,15 @@ import (
 // coefficient column was zero and the generator derived the value from
 // the vanilla convention.
 const (
-	// "Deals 300% increased damage to Frozen targets." The client's
-	// SpellEffect row 1342606 (spell 1312002, effect 3) carries base
-	// points 300, so the bonus is +300%: damage x4 against a Frozen
-	// target. It applies against a Frost Nova-frozen target and on a
-	// Fingers of Frost cast - see isTargetFrozen.
+	// "Deals 200% increased damage to Frozen targets." (1.60.1.70425; the
+	// 1.60.1.70374 client said 300%). The client's SpellEffect row
+	// 1342606 (spell 1312002, effect 3) carries base points 200, so the
+	// bonus is +200%: damage x3 against a Frozen target. It applies
+	// against a Frost Nova-frozen target and on a Fingers of Frost cast -
+	// see isTargetFrozen.
 	iceLanceFrozenMultiplier = 1 + iceLanceFrozenBonusBasePoints/100
 	// iceLanceFrozenBonusBasePoints is SpellEffect 1342606's base points.
-	iceLanceFrozenBonusBasePoints = 300.0
+	iceLanceFrozenBonusBasePoints = 200.0
 )
 
 func (mage *Mage) registerIceLanceSpell() {

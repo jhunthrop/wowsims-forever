@@ -45,10 +45,6 @@ func (shaman *Shaman) newElectricSpellConfig(actionID core.ActionID, baseCost fl
 			},
 		},
 
-		// FOREVER: Call of Thunder is a single-rank talent in the client's
-		// trees, so the field is a bool now rather than an int32.
-		// BonusCritRating: []float64{0, 1, 2, 3, 4, 6}[shaman.Talents.CallOfThunder] * core.CritRatingPerCritChance,
-
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 	}

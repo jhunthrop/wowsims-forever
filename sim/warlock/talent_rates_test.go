@@ -19,7 +19,7 @@ func TestWarlockTalentRatesAreForevers(t *testing.T) {
 			t.Errorf("%s = %v, want %v", name, got, want)
 		}
 	}
-	near("Shadow Mastery 5/5", shadowMasteryDamagePerRank*5, 0.05)
+	near("Shadow Mastery 5/5", shadowMasteryDamagePerRank*5, 0.10)
 	near("Demonic Embrace 5/5", demonicEmbraceStaminaPerRank*5, 0.15)
 	near("Soul Link damage taken", soulLinkDamageTakenMultiplier, 0.70)
 	near("Ruin 5/5", ruinCritDamageBonusPerRank*5, 1.0)

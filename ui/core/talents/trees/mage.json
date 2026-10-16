@@ -22,6 +22,12 @@
         "maxPoints": 5
       },
       {
+        "fieldName": "missileBarrage",
+        "location": { "rowIdx": 0, "colIdx": 3 },
+        "spellIds": [400588, 400588],
+        "maxPoints": 2
+      },
+      {
         "fieldName": "arcaneSubtlety",
         "location": { "rowIdx": 1, "colIdx": 0 },
         "spellIds": [11210, 11210],
@@ -84,10 +90,12 @@
         "prereqRank": 5
       },
       {
-        "fieldName": "missileBarrage",
+        "fieldName": "arcaneWrath",
         "location": { "rowIdx": 3, "colIdx": 3 },
-        "spellIds": [400588],
-        "maxPoints": 1
+        "spellIds": [1326079],
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 3 },
+        "prereqRank": 1
       },
       {
         "fieldName": "presenceOfMind",
@@ -122,7 +130,7 @@
     "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/41.jpg",
     "talents": [
       {
-        "fieldName": "wakeOfFire",
+        "fieldName": "improvedFireBlast",
         "location": { "rowIdx": 0, "colIdx": 0 },
         "spellIds": [11078, 11078],
         "maxPoints": 2
@@ -204,8 +212,8 @@
       {
         "fieldName": "criticalMass",
         "location": { "rowIdx": 4, "colIdx": 1 },
-        "spellIds": [11115, 11115, 11115],
-        "maxPoints": 3
+        "spellIds": [11115, 11115, 11115, 11115, 11115],
+        "maxPoints": 5
       },
       {
         "fieldName": "blastWave",
@@ -216,8 +224,8 @@
       {
         "fieldName": "firePower",
         "location": { "rowIdx": 5, "colIdx": 2 },
-        "spellIds": [11124, 11124, 11124, 11124, 11124],
-        "maxPoints": 5
+        "spellIds": [11124, 11124, 11124],
+        "maxPoints": 3
       },
       {
         "fieldName": "combustion",
@@ -225,7 +233,7 @@
         "spellIds": [11129],
         "maxPoints": 1,
         "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
-        "prereqRank": 3
+        "prereqRank": 5
       }
     ]
   },

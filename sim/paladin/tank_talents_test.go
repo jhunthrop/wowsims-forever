@@ -166,7 +166,7 @@ func TestProtectionRankTextsAsNumbers(t *testing.T) {
 		{"Shield Specialization rank 1 mana chance", shieldSpecializationManaChance[1], 0.33},
 		{"Shield Specialization rank 2 mana chance", shieldSpecializationManaChance[2], 0.66},
 		{"Shield Specialization rank 3 mana chance", shieldSpecializationManaChance[3], 1.00},
-		{"Shield Specialization mana", shieldSpecializationManaFraction, 0.06},
+		{"Shield Specialization mana", shieldSpecializationManaFraction, 0.04},
 		{"Shield Specialization absorb rank 3", shieldSpecializationAbsorbPerRank * 3, 0.30},
 		{"One-Handed Weapon Specialization rank 1", oneHandedWeaponSpecializationPct[1], 0.03},
 		{"One-Handed Weapon Specialization rank 2", oneHandedWeaponSpecializationPct[2], 0.07},

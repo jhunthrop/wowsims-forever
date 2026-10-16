@@ -61,7 +61,10 @@ func (g TalentGatedSpell) talentsString() string {
 
 // TalentGatedSpells is every talent-only ability this package found,
 // addressed by 1-based position in the trees generated from build
-// 1.60.1.70009 with the live Wowhead overlay (2026-10-07: the Fury,
+// 1.60.1.70425 (2026-10-16: Arcane gained Arcane Wrath, so Arcane Blast,
+// Presence of Mind and Arcane Power moved; Shadow lost its second Improved
+// Mind Blast node, so Mind Flay, Vampiric Embrace and Shadowform moved;
+// Lava Burst moved up the Elemental tree. 2026-10-07: the Fury,
 // Protection, Feral, Marksmanship and Holy layouts moved, so Sniper Shot,
 // Divine Favor, Holy Shock, Death Wish, Bloodthirst, Last Stand and
 // Berserk changed position; an out-of-range position is skipped silently,
@@ -78,10 +81,11 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "hunter", Label: "Counterattack", Tree: 2, Pos: 12},
 	{ClassSlug: "hunter", Label: "Strider Kick", Tree: 2, Pos: 16},
 
-	// Mage (Arcane 18, Fire 17, Frost 19).
-	{ClassSlug: "mage", Label: "Arcane Blast", Tree: 0, Pos: 10},
-	{ClassSlug: "mage", Label: "Presence of Mind", Tree: 0, Pos: 15},
-	{ClassSlug: "mage", Label: "Arcane Power", Tree: 0, Pos: 18},
+	// Mage (Arcane 19, Fire 17, Frost 19).
+	{ClassSlug: "mage", Label: "Arcane Blast", Tree: 0, Pos: 11},
+	{ClassSlug: "mage", Label: "Arcane Wrath", Tree: 0, Pos: 15},
+	{ClassSlug: "mage", Label: "Presence of Mind", Tree: 0, Pos: 16},
+	{ClassSlug: "mage", Label: "Arcane Power", Tree: 0, Pos: 19},
 	{ClassSlug: "mage", Label: "Pyroblast", Tree: 1, Pos: 9},
 	{ClassSlug: "mage", Label: "Blast Wave", Tree: 1, Pos: 15},
 	{ClassSlug: "mage", Label: "Combustion", Tree: 1, Pos: 17},
@@ -132,19 +136,19 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "druid", Label: "Nature's Swiftness", Tree: 2, Pos: 12},
 	{ClassSlug: "druid", Label: "Wild Growth", Tree: 2, Pos: 16, Preset: "RestorationDruid"},
 
-	// Priest (Discipline 18, Holy 17, Shadow 18).
+	// Priest (Discipline 18, Holy 17, Shadow 17).
 	{ClassSlug: "priest", Label: "Inner Focus", Tree: 0, Pos: 9},
 	{ClassSlug: "priest", Label: "Penance", Tree: 0, Pos: 15, Preset: "HealingPriest"},
 	{ClassSlug: "priest", Label: "Power Infusion", Tree: 0, Pos: 18, Preset: "HealingPriest"},
 	{ClassSlug: "priest", Label: "Holy Nova", Tree: 1, Pos: 6, Preset: "HealingPriest"},
 	{ClassSlug: "priest", Label: "Binding Heal", Tree: 1, Pos: 12, Preset: "HealingPriest"},
 	{ClassSlug: "priest", Label: "Prayer of Mending", Tree: 1, Pos: 17, Preset: "HealingPriest"},
-	{ClassSlug: "priest", Label: "Mind Flay", Tree: 2, Pos: 9},
-	{ClassSlug: "priest", Label: "Vampiric Embrace", Tree: 2, Pos: 12},
-	{ClassSlug: "priest", Label: "Shadowform", Tree: 2, Pos: 18},
+	{ClassSlug: "priest", Label: "Mind Flay", Tree: 2, Pos: 8},
+	{ClassSlug: "priest", Label: "Vampiric Embrace", Tree: 2, Pos: 11},
+	{ClassSlug: "priest", Label: "Shadowform", Tree: 2, Pos: 17},
 
 	// Shaman (Elemental 16, Enhancement 18, Restoration 16).
-	{ClassSlug: "shaman", Label: "Lava Burst", Tree: 0, Pos: 16},
+	{ClassSlug: "shaman", Label: "Lava Burst", Tree: 0, Pos: 13},
 	{ClassSlug: "shaman", Label: "Stormstrike", Tree: 1, Pos: 13},
 	{ClassSlug: "shaman", Label: "Rage of the Farseer", Tree: 1, Pos: 18},
 	{ClassSlug: "shaman", Label: "Water Shield", Tree: 2, Pos: 9},

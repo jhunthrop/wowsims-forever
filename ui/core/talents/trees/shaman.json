@@ -16,9 +16,9 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "elementalWarding",
+        "fieldName": "elementalDevastation",
         "location": { "rowIdx": 1, "colIdx": 0 },
-        "spellIds": [28996, 28996, 28996],
+        "spellIds": [30160, 30160, 30160],
         "maxPoints": 3
       },
       {
@@ -28,31 +28,31 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "callOfFlame",
-        "location": { "rowIdx": 1, "colIdx": 2 },
-        "spellIds": [16038, 16038, 16038],
-        "maxPoints": 3
-      },
-      {
-        "fieldName": "elementalDevastation",
-        "location": { "rowIdx": 1, "colIdx": 3 },
-        "spellIds": [30160, 30160, 30160],
-        "maxPoints": 3
-      },
-      {
-        "fieldName": "elementalFocus",
-        "location": { "rowIdx": 2, "colIdx": 1 },
-        "spellIds": [16164],
-        "maxPoints": 1
-      },
-      {
         "fieldName": "elementalAlacrity",
-        "location": { "rowIdx": 2, "colIdx": 2 },
+        "location": { "rowIdx": 1, "colIdx": 2 },
         "spellIds": [16578, 16578, 16578],
         "maxPoints": 3
       },
       {
-        "fieldName": "improvedFireNova",
+        "fieldName": "callOfFlame",
+        "location": { "rowIdx": 1, "colIdx": 3 },
+        "spellIds": [16038, 16038, 16038],
+        "maxPoints": 3
+      },
+      {
+        "fieldName": "elementalFocus",
+        "location": { "rowIdx": 2, "colIdx": 0 },
+        "spellIds": [16164],
+        "maxPoints": 1
+      },
+      {
+        "fieldName": "elementalWarding",
+        "location": { "rowIdx": 2, "colIdx": 1 },
+        "spellIds": [28996, 28996, 28996],
+        "maxPoints": 3
+      },
+      {
+        "fieldName": "trialByFire",
         "location": { "rowIdx": 3, "colIdx": 0 },
         "spellIds": [16086, 16086],
         "maxPoints": 2
@@ -64,12 +64,10 @@
         "maxPoints": 3
       },
       {
-        "fieldName": "callOfThunder",
-        "location": { "rowIdx": 3, "colIdx": 2 },
-        "spellIds": [16120],
-        "maxPoints": 1,
-        "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
-        "prereqRank": 3
+        "fieldName": "earthbound",
+        "location": { "rowIdx": 3, "colIdx": 3 },
+        "spellIds": [1222988],
+        "maxPoints": 1
       },
       {
         "fieldName": "elementalReach",
@@ -78,32 +76,34 @@
         "maxPoints": 2
       },
       {
-        "fieldName": "lightningOverload",
+        "fieldName": "lavaBurst",
         "location": { "rowIdx": 4, "colIdx": 1 },
-        "spellIds": [408438, 408438, 408438],
-        "maxPoints": 3
+        "spellIds": [408490],
+        "maxPoints": 1
       },
       {
-        "fieldName": "earthbound",
-        "location": { "rowIdx": 4, "colIdx": 3 },
-        "spellIds": [1222988],
-        "maxPoints": 1
+        "fieldName": "lightningOverload",
+        "location": { "rowIdx": 4, "colIdx": 2 },
+        "spellIds": [408438, 408438, 408438],
+        "maxPoints": 3,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 2 },
+        "prereqRank": 3
       },
       {
         "fieldName": "elementalFury",
         "location": { "rowIdx": 5, "colIdx": 2 },
         "spellIds": [16089, 16089, 16089, 16089, 16089],
         "maxPoints": 5,
-        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
-        "prereqRank": 1
+        "prereqLocation": { "rowIdx": 4, "colIdx": 2 },
+        "prereqRank": 3
       },
       {
-        "fieldName": "lavaBurst",
+        "fieldName": "elementalMastery",
         "location": { "rowIdx": 6, "colIdx": 1 },
-        "spellIds": [408490],
+        "spellIds": [16166],
         "maxPoints": 1,
         "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
-        "prereqRank": 3
+        "prereqRank": 1
       }
     ]
   },
@@ -238,9 +238,9 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "totemicFocus",
+        "fieldName": "tidalFocus",
         "location": { "rowIdx": 0, "colIdx": 2 },
-        "spellIds": [16173, 16173, 16173, 16173, 16173],
+        "spellIds": [16179, 16179, 16179, 16179, 16179],
         "maxPoints": 5
       },
       {
@@ -256,9 +256,9 @@
         "maxPoints": 3
       },
       {
-        "fieldName": "tidalFocus",
+        "fieldName": "totemicFocus",
         "location": { "rowIdx": 1, "colIdx": 2 },
-        "spellIds": [16179, 16179, 16179, 16179, 16179],
+        "spellIds": [16173, 16173, 16173, 16173, 16173],
         "maxPoints": 5
       },
       {

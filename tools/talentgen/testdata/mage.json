@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70425",
   "class_id": 8,
   "class_slug": "mage",
   "trees": [
@@ -74,26 +74,47 @@
           "ranks": [
             {
               "spell_id": 11237,
-              "description": "Gives you a 20% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 14% chance while casting Arcane Blast."
+              "description": "Gives you a 20% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 14% chance while casting Arcane Blast or Arcane Wrath."
             },
             {
               "spell_id": 11237,
-              "description": "Gives you a 40% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 28% chance while casting Arcane Blast."
+              "description": "Gives you a 40% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 28% chance while casting Arcane Blast or Arcane Wrath."
             },
             {
               "spell_id": 11237,
-              "description": "Gives you a 60% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 42% chance while casting Arcane Blast."
+              "description": "Gives you a 60% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 42% chance while casting Arcane Blast or Arcane Wrath."
             },
             {
               "spell_id": 11237,
-              "description": "Gives you a 80% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 56% chance while casting Arcane Blast."
+              "description": "Gives you a 80% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 56% chance while casting Arcane Blast or Arcane Wrath."
             },
             {
               "spell_id": 11237,
-              "description": "Gives you a 100% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 70% chance while casting Arcane Blast."
+              "description": "Gives you a 100% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 70% chance while casting Arcane Blast or Arcane Wrath."
             }
           ],
           "spell_id": 11237
+        },
+        {
+          "id": 105802,
+          "name": "Missile Barrage",
+          "icon": "ability_mage_missilebarrage",
+          "max_rank": 2,
+          "tier": 0,
+          "column": 3,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 400588,
+              "description": "Gives your Arcane Blast spell a 20% chance, your Arcane Missile hits a 5% chance, and your Arcane Wrath, Fireball, Frostbolt, and Frostfire Bolt spells a 10% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
+            },
+            {
+              "spell_id": 400588,
+              "description": "Gives your Arcane Blast spell a 40% chance, your Arcane Missile hits a 10% chance, and your Arcane Wrath, Fireball, Frostbolt, and Frostfire Bolt spells a 20% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
+            }
+          ],
+          "spell_id": 400588
         },
         {
           "id": 105812,
@@ -249,7 +270,7 @@
           "ranks": [
             {
               "spell_id": 400574,
-              "description": "Blasts the target with energy, dealing 57 to 65 Arcane damage. Each time you cast Arcane Blast, the damage of all your other spells is increased by 10% and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 8 sec or until any other damage spell is cast."
+              "description": "Blasts the target with energy, dealing 34 to 38 Arcane damage. Each time you cast Arcane Blast, you gain 15% of your Intellect as Spell Damage and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 15 sec from time of initial application."
             }
           ],
           "spell_id": 400574
@@ -322,21 +343,21 @@
           "spell_id": 18462
         },
         {
-          "id": 105802,
-          "name": "Missile Barrage",
-          "icon": "ability_mage_missilebarrage",
+          "id": 113627,
+          "name": "Arcane Wrath",
+          "icon": "ability_mage_netherwindpresence",
           "max_rank": 1,
           "tier": 3,
           "column": 3,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
+          "prereq_talent_id": 105806,
+          "prereq_rank": 1,
           "ranks": [
             {
-              "spell_id": 400588,
-              "description": "Gives your Arcane Blast spell a 40% chance, and your Fireball, Frostbolt, and Frostfire Bolt spells a 20% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
+              "spell_id": 1326079,
+              "description": "Launches a projectile of pure Arcane energy at the enemy target, causing 122 to 146 Arcane damage. This spell gains additional Spell Damage equal to 5% of your maximum Mana."
             }
           ],
-          "spell_id": 400588
+          "spell_id": 1326079
         },
         {
           "id": 105801,
@@ -441,7 +462,7 @@
       "talents": [
         {
           "id": 105797,
-          "name": "Wake of Fire",
+          "name": "Improved Fire Blast",
           "icon": "spell_fire_lavaspawn",
           "max_rank": 2,
           "tier": 0,
@@ -451,11 +472,11 @@
           "ranks": [
             {
               "spell_id": 11078,
-              "description": "Reduces the cooldown of your Fire Blast spell by 1 sec. Killing a non-trivial target increases the critical strike chance of your next Fire Blast cast within 30 sec by 25%."
+              "description": "Reduces the cooldown of your Fire Blast spell by 1 sec and increases its range by 8 yards."
             },
             {
               "spell_id": 11078,
-              "description": "Reduces the cooldown of your Fire Blast spell by 2 sec. Killing a non-trivial target increases the critical strike chance of your next Fire Blast cast within 30 sec by 50%."
+              "description": "Reduces the cooldown of your Fire Blast spell by 2 sec and increases its range by 15 yards."
             }
           ],
           "spell_id": 11078
@@ -722,7 +743,7 @@
           "ranks": [
             {
               "spell_id": 400624,
-              "description": "Non-periodic critical strikes with Fireball, Frostfire Bolt, Fire Blast, and Scorch reduce the cast time of your next Pyroblast cast within 20 sec by 25%, stacking up to 3 times."
+              "description": "Non-periodic critical strikes with Fireball, Frostfire Bolt, Fire Blast, and Scorch reduce the cast time of your next Pyroblast cast within 20 sec by 25%, stacking up to 3 times. Fire Blast grants an additional stack every time it deals damage."
             }
           ],
           "spell_id": 400624
@@ -756,7 +777,7 @@
           "id": 105784,
           "name": "Critical Mass",
           "icon": "spell_nature_wispheal",
-          "max_rank": 3,
+          "max_rank": 5,
           "tier": 4,
           "column": 1,
           "prereq_talent_id": null,
@@ -773,6 +794,14 @@
             {
               "spell_id": 11115,
               "description": "Increases the critical strike chance of your Fire spells by 6%."
+            },
+            {
+              "spell_id": 11115,
+              "description": "Increases the critical strike chance of your Fire spells by 8%."
+            },
+            {
+              "spell_id": 11115,
+              "description": "Increases the critical strike chance of your Fire spells by 10%."
             }
           ],
           "spell_id": 11115
@@ -798,7 +827,7 @@
           "id": 105782,
           "name": "Fire Power",
           "icon": "spell_fire_immolation",
-          "max_rank": 5,
+          "max_rank": 3,
           "tier": 5,
           "column": 2,
           "prereq_talent_id": null,
@@ -806,23 +835,15 @@
           "ranks": [
             {
               "spell_id": 11124,
-              "description": "Increases the damage done by your Fire spells by 2%."
+              "description": "Increases the damage done by your Fire spells by 1% per your Fire effects on the target, up to a maximum increase of 4%. Effects which mix multiple schools of magic do not qualify."
             },
             {
               "spell_id": 11124,
-              "description": "Increases the damage done by your Fire spells by 4%."
+              "description": "Increases the damage done by your Fire spells by 2% per your Fire effects on the target, up to a maximum increase of 8%. Effects which mix multiple schools of magic do not qualify."
             },
             {
               "spell_id": 11124,
-              "description": "Increases the damage done by your Fire spells by 6%."
-            },
-            {
-              "spell_id": 11124,
-              "description": "Increases the damage done by your Fire spells by 8%."
-            },
-            {
-              "spell_id": 11124,
-              "description": "Increases the damage done by your Fire spells by 10%."
+              "description": "Increases the damage done by your Fire spells by 3% per your Fire effects on the target, up to a maximum increase of 12%. Effects which mix multiple schools of magic do not qualify."
             }
           ],
           "spell_id": 11124
@@ -835,7 +856,7 @@
           "tier": 6,
           "column": 1,
           "prereq_talent_id": 105784,
-          "prereq_rank": 3,
+          "prereq_rank": 5,
           "ranks": [
             {
               "spell_id": 11129,
@@ -886,23 +907,23 @@
           "ranks": [
             {
               "spell_id": 11070,
-              "description": "Reduces the casting time of your Frostbolt spell by 0.1 sec."
+              "description": "Reduces the casting time of your Frostbolt and Frost Blast spells by 0.1 sec."
             },
             {
               "spell_id": 11070,
-              "description": "Reduces the casting time of your Frostbolt spell by 0.2 sec."
+              "description": "Reduces the casting time of your Frostbolt and Frost Blast spells by 0.2 sec."
             },
             {
               "spell_id": 11070,
-              "description": "Reduces the casting time of your Frostbolt spell by 0.3 sec."
+              "description": "Reduces the casting time of your Frostbolt and Frost Blast spells by 0.3 sec."
             },
             {
               "spell_id": 11070,
-              "description": "Reduces the casting time of your Frostbolt spell by 0.4 sec."
+              "description": "Reduces the casting time of your Frostbolt and Frost Blast spells by 0.4 sec."
             },
             {
               "spell_id": 11070,
-              "description": "Reduces the casting time of your Frostbolt spell by 0.5 sec."
+              "description": "Reduces the casting time of your Frostbolt and Frost Blast spells by 0.5 sec."
             }
           ],
           "spell_id": 11070
@@ -1106,7 +1127,7 @@
           "ranks": [
             {
               "spell_id": 1312002,
-              "description": "Deals 28 to 32 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets."
+              "description": "Deals 28 to 32 Frost damage to an enemy target. Deals 200% increased damage to Frozen targets."
             }
           ],
           "spell_id": 1312002
@@ -1148,11 +1169,11 @@
           "ranks": [
             {
               "spell_id": 16757,
-              "description": "Increases the range of your Frostbolt and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 10%."
+              "description": "Increases the range of your Frostbolt, Frost Blast, and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 10%."
             },
             {
               "spell_id": 16757,
-              "description": "Increases the range of your Frostbolt and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 20%."
+              "description": "Increases the range of your Frostbolt, Frost Blast, and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 20%."
             }
           ],
           "spell_id": 16757
@@ -1274,23 +1295,23 @@
           "ranks": [
             {
               "spell_id": 11180,
-              "description": "Gives your Frost damage spells a 20% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 1 times."
+              "description": "Gives your Frost damage spells a 20% chance to apply the Winter's Chill effect, which increases the damage done by your Cone of Cold spell to the target by 40%, stacking up to 5 times."
             },
             {
               "spell_id": 11180,
-              "description": "Gives your Frost damage spells a 40% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 2 times."
+              "description": "Gives your Frost damage spells a 40% chance to apply the Winter's Chill effect, which increases the damage done by your Cone of Cold spell to the target by 40%, stacking up to 5 times."
             },
             {
               "spell_id": 11180,
-              "description": "Gives your Frost damage spells a 60% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 3 times."
+              "description": "Gives your Frost damage spells a 60% chance to apply the Winter's Chill effect, which increases the damage done by your Cone of Cold spell to the target by 40%, stacking up to 5 times."
             },
             {
               "spell_id": 11180,
-              "description": "Gives your Frost damage spells a 80% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 4 times."
+              "description": "Gives your Frost damage spells a 80% chance to apply the Winter's Chill effect, which increases the damage done by your Cone of Cold spell to the target by 40%, stacking up to 5 times."
             },
             {
               "spell_id": 11180,
-              "description": "Gives your Frost damage spells a 100% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 5 times."
+              "description": "Gives your Frost damage spells a 100% chance to apply the Winter's Chill effect, which increases the damage done by your Cone of Cold spell to the target by 40%, stacking up to 5 times."
             }
           ],
           "spell_id": 11180

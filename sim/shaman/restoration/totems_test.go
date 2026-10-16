@@ -23,7 +23,7 @@ const (
 	manaSpringTopRankID      = 10497
 	manaSpringTopRankRestore = 10
 	manaSpringMP5PerRestore  = 2.5
-	manaTideTopRankID        = 17359
+	manaTideTopRankID        = 1325256 // rank 4 since 1.60.1.70425
 	manaTideTopRankPerTick   = 290
 	manaTideTicks            = 4
 	healingStreamFightLength = 20
@@ -141,7 +141,7 @@ func TestTotemicFocusCutsTotemCosts(t *testing.T) {
 	if got, want := healer.HealingStreamTotem[5].Cost.GetCurrentCost(), 80*0.75; math.Abs(got-want) > 1e-6 {
 		t.Errorf("Healing Stream Totem costs %v, want %v", got, want)
 	}
-	if got, want := healer.ManaTideTotem[3].Cost.GetCurrentCost(), 60*0.75; math.Abs(got-want) > 1e-6 {
+	if got, want := healer.ManaTideTotem[4].Cost.GetCurrentCost(), 60*0.75; math.Abs(got-want) > 1e-6 {
 		t.Errorf("Mana Tide Totem costs %v, want %v", got, want)
 	}
 }

@@ -68,7 +68,7 @@ func (druid *Druid) ApplyTalents() {
 
 	// Feral
 	druid.applyBloodFrenzy()
-	druid.applyPredatoryInstincts()
+	druid.applyNaturalInstinct()
 	druid.registerBerserkCD()
 
 	druid.applyHeartOfTheWildIntellect()
@@ -618,21 +618,30 @@ func (druid *Druid) applyEclipse() {
 	}))
 }
 
-// applyPredatoryInstincts implements Predatory Instincts (node 104950,
-// 2 ranks, proto field PredatoryInstincts): "Increases the critical
-// strike damage bonus of your melee abilities by 10/20%." Scoped to
-// every Cat Form melee special this package registers.
-func (druid *Druid) applyPredatoryInstincts() {
-	if druid.Talents.PredatoryInstincts == 0 {
+// naturalInstinctHealingFromIntellect is the healing clause by rank:
+// "increases your spell healing by 12%/25% of your Intellect" (not a
+// clean multiple, so a table).
+var naturalInstinctHealingFromIntellect = [3]float64{0, 0.12, 0.25}
+
+// applyNaturalInstinct implements Natural Instinct (node 104950, 2
+// ranks, Predatory Instincts' slot since 1.60.1.70425): "Increases the
+// critical strike damage bonus of your melee abilities by 10/20% and
+// increases your spell healing by 12/25% of your Intellect." The crit
+// half is scoped to every Cat Form melee special this package registers;
+// the healing half is a stat dependency, so a Restoration druid taking
+// the talent reads it on every heal.
+func (druid *Druid) applyNaturalInstinct() {
+	if druid.Talents.NaturalInstinct == 0 {
 		return
 	}
 
-	rank := clampRank(druid.Talents.PredatoryInstincts, 2)
+	rank := clampRank(druid.Talents.NaturalInstinct, 2)
 	druid.AddStaticMod(core.SpellModConfig{
 		Kind:       core.SpellMod_CritDamageBonus_Flat,
 		ClassMask:  DruidSpellMaskMeleeAbilities,
 		FloatValue: 0.10 * float64(rank),
 	})
+	druid.AddStatDependency(stats.Intellect, stats.HealingPower, naturalInstinctHealingFromIntellect[rank])
 }
 
 // registerBerserkCD implements Berserk (node 104956, bool, proto field

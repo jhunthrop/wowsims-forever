@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70338",
+  "build": "1.60.1.70425",
   "class_slug": "shaman",
   "trainables": [
     {
@@ -186,7 +186,7 @@
       "skill_line": "Elemental Combat",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 485,
+      "cost": 315,
       "cost_type": 0,
       "cast_time_ms": 2000,
       "cooldown_ms": 6000,
@@ -433,6 +433,23 @@
       ]
     },
     {
+      "name": "Elemental Mastery",
+      "skill_line": "Elemental Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 180000,
+      "ranks": [
+        {
+          "id": 16166,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
       "name": "Far Sight",
       "skill_line": "Enhancement",
       "source": "skill_line_ability",
@@ -454,7 +471,7 @@
       "skill_line": "Elemental Combat",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 520,
+      "cost": 375,
       "cost_type": 0,
       "cast_time_ms": 0,
       "cooldown_ms": 10000,
@@ -910,16 +927,21 @@
         {
           "id": 408490,
           "rank": 1,
-          "level": 40
+          "level": 30
         },
         {
           "id": 1238299,
           "rank": 2,
-          "level": 50
+          "level": 40
         },
         {
           "id": 1238300,
           "rank": 3,
+          "level": 50
+        },
+        {
+          "id": 1326047,
+          "rank": 4,
           "level": 60
         }
       ]
@@ -1187,16 +1209,21 @@
         {
           "id": 16190,
           "rank": 1,
-          "level": 25
+          "level": 1
         },
         {
           "id": 17354,
           "rank": 2,
-          "level": 48
+          "level": 38
         },
         {
           "id": 17359,
           "rank": 3,
+          "level": 48
+        },
+        {
+          "id": 1325256,
+          "rank": 4,
           "level": 58
         }
       ]
@@ -1567,7 +1594,7 @@
       "skill_line": "Enhancement",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 125,
+      "cost": 0,
       "cost_type": 0,
       "cast_time_ms": 0,
       "cooldown_ms": 8000,

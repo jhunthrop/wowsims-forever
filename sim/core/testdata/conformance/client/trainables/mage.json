@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70338",
+  "build": "1.60.1.70425",
   "class_slug": "mage",
   "trainables": [
     {
@@ -362,6 +362,38 @@
           "id": 11210,
           "rank": 0,
           "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Arcane Wrath",
+      "skill_line": "Arcane",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 395,
+      "cost_type": 0,
+      "cast_time_ms": 3500,
+      "cooldown_ms": 6000,
+      "ranks": [
+        {
+          "id": 1326079,
+          "rank": 1,
+          "level": 25
+        },
+        {
+          "id": 1326080,
+          "rank": 2,
+          "level": 36
+        },
+        {
+          "id": 1326081,
+          "rank": 3,
+          "level": 48
+        },
+        {
+          "id": 1326082,
+          "rank": 4,
+          "level": 60
         }
       ]
     },
@@ -1186,6 +1218,33 @@
       ]
     },
     {
+      "name": "Frost Blast",
+      "skill_line": "Frost",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 90,
+      "cost_type": 0,
+      "cast_time_ms": 1500,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1326053,
+          "rank": 1,
+          "level": 24
+        },
+        {
+          "id": 1326054,
+          "rank": 2,
+          "level": 36
+        },
+        {
+          "id": 1326055,
+          "rank": 3,
+          "level": 48
+        }
+      ]
+    },
+    {
       "name": "Frost Channeling",
       "skill_line": "Frost",
       "source": "skill_line_ability",
@@ -1693,6 +1752,23 @@
       "ranks": [
         {
           "id": 11255,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Improved Fire Blast",
+      "skill_line": "Fire",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 11078,
           "rank": 0,
           "level": 1
         }
@@ -2492,23 +2568,6 @@
           "id": 3563,
           "rank": 0,
           "level": 20
-        }
-      ]
-    },
-    {
-      "name": "Wake of Fire",
-      "skill_line": "Fire",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 11078,
-          "rank": 0,
-          "level": 1
         }
       ]
     },

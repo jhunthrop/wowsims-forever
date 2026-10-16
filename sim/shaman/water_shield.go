@@ -81,10 +81,16 @@ func (shaman *Shaman) registerWaterShieldSpell() {
 				restoreMana(sim, aura)
 			}
 		},
-		// A heal reaches its caster's OnHealDealt, not OnSpellHitDealt, which
-		// is for damage; this callback was never reached before the shaman
-		// had a heal to crit.
+		// "when one of the caster's spells gets a critical result"
+		// (1.60.1.70425; the earlier text said healing spells). A heal
+		// reaches its caster's OnHealDealt and a damage spell its
+		// OnSpellHitDealt, so both callbacks read the crit.
 		OnHealDealt: func(aura *core.Aura, sim *core.Simulation, _ *core.Spell, result *core.SpellResult) {
+			if result.Outcome.Matches(core.OutcomeCrit) {
+				restoreMana(sim, aura)
+			}
+		},
+		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, _ *core.Spell, result *core.SpellResult) {
 			if result.Outcome.Matches(core.OutcomeCrit) {
 				restoreMana(sim, aura)
 			}

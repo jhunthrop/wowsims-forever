@@ -71,7 +71,9 @@
         "fieldName": "impale",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [16493, 16493],
-        "maxPoints": 2
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
+        "prereqRank": 3
       },
       {
         "fieldName": "bloodthrill",

@@ -60,7 +60,7 @@ const (
 
 	// The client's sp_coefficient on the proc and on the judgement.
 	sealOfFuryProcCoefficient  = 0.10
-	judgementOfFuryCoefficient = 0.45
+	judgementOfFuryCoefficient = 0.429 // client 1.60.1.70425 (0.45 before)
 
 	sealOfFuryDuration = 30 * time.Second
 
@@ -99,7 +99,7 @@ type sealOfFuryRank struct {
 var sealOfFuryRanks = [sealOfFuryRankCount]sealOfFuryRank{
 	{level: 10, spellID: 1311649, manaCost: 40, procID: 1311647, judgeSpell: 1311650},
 	{level: 18, spellID: 1311656, manaCost: 60, procID: 1311654, judgeSpell: 1311655},
-	{level: 25, spellID: 20163, manaCost: 90, procID: 20231, judgeSpell: 20183},
+	{level: 26, spellID: 20163, manaCost: 90, procID: 20231, judgeSpell: 20183}, // 26 since client 1.60.1.70425
 	{level: 34, spellID: 20419, manaCost: 120, procID: 20415, judgeSpell: 20411},
 	{level: 42, spellID: 20421, manaCost: 140, procID: 20416, judgeSpell: 20412},
 	{level: 50, spellID: 20422, manaCost: 170, procID: 20417, judgeSpell: 20413},
@@ -191,7 +191,9 @@ func (paladin *Paladin) registerJudgementOfFury(rank int, config sealOfFuryRank)
 		ProcMask:       core.ProcMaskSpellDamage,
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagSuppressWeaponProcs | core.SpellFlagSuppressEquipProcs | core.SpellFlagBinary,
 
-		RequiredLevel: int(config.level),
+		// The judgement's own row: rank 3 is learned with a level-26 seal
+		// but the client files the judgement at 25 (1.60.1.70425).
+		RequiredLevel: damage.SpellLevel,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,

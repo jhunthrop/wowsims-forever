@@ -96,21 +96,22 @@ func TestShreddingAttacksReducesShredEnergyCost(t *testing.T) {
 	}
 }
 
-// TestPredatoryInstinctsAddsMeleeCritDamageBonus covers: "Increases the
+// TestNaturalInstinctAddsMeleeCritDamageBonus covers: "Increases the
 // critical strike damage bonus of your melee abilities by 10/20%." (node
-// 104950, proto field PredatoryInstincts).
-func TestPredatoryInstinctsAddsMeleeCritDamageBonus(t *testing.T) {
+// 104950, proto field NaturalInstinct; the healing-from-Intellect clause
+// is a stat dependency this feral test does not read).
+func TestNaturalInstinctAddsMeleeCritDamageBonus(t *testing.T) {
 	base, _, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, nil))
 	baseBonus := base.Shred.CritDamageBonus
 
-	talented, _, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, map[string]int{"predatory_instincts": 2}))
+	talented, _, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, map[string]int{"natural_instinct": 2}))
 	if got, want := talented.Shred.CritDamageBonus, baseBonus+0.20; got != want {
-		t.Errorf("2/2 Predatory Instincts Shred.CritDamageBonus = %v, want %v", got, want)
+		t.Errorf("2/2 Natural Instinct Shred.CritDamageBonus = %v, want %v", got, want)
 	}
 	// Ferocious Bite (a finisher, not a Combo-Point generator) is a
 	// "melee ability" too.
 	if got, want := talented.FerociousBite.CritDamageBonus, baseBonus+0.20; got != want {
-		t.Errorf("2/2 Predatory Instincts FerociousBite.CritDamageBonus = %v, want %v", got, want)
+		t.Errorf("2/2 Natural Instinct FerociousBite.CritDamageBonus = %v, want %v", got, want)
 	}
 }
 

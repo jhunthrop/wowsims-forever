@@ -77,6 +77,7 @@ func (mage *Mage) newFireballSpellConfig(rank int) core.SpellConfig {
 		Dot: core.DotConfig{
 			Aura: core.Aura{
 				Label:    fmt.Sprintf("Fireball (Rank %d)", rank),
+				Tag:      mageFireEffectTag,
 				ActionID: actionID.WithTag(1),
 			},
 			NumberOfTicks: numTicks,

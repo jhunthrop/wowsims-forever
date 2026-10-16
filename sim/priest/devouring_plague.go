@@ -56,12 +56,12 @@ func (priest *Priest) getDevouringPlagueConfig(rank int, cdTimer *core.Timer) co
 			},
 			CD: core.Cooldown{
 				Timer: cdTimer,
-				// The client's category_cooldown_ms is 60000 (1 min) for
-				// every rank (spellconst/priest.json, build 1.60.1.70009),
-				// not 3 min - conformance golden
-				// sim/core/testdata/conformance/priest.golden.md flagged
-				// this as cooldown_ms 60000->180000 (client->engine).
-				Duration: time.Minute,
+				// The client's category_cooldown_ms is 24000 for every rank
+				// since build 1.60.1.70425 (spellconst/priest.json; it was
+				// 60000 before, and 3 min in vanilla) - the conformance
+				// golden sim/core/testdata/conformance/priest.golden.md
+				// reads client->engine.
+				Duration: time.Second * 24,
 			},
 		},
 

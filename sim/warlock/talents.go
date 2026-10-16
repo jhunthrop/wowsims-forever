@@ -30,7 +30,7 @@ import (
 // Fire damage. Vanilla's 2%, -1% Spirit, 23%, flat 100%, none, 4% and the
 // swapped Demonic Sacrifice effects are not Forever's.
 const (
-	shadowMasteryDamagePerRank      = 0.01
+	shadowMasteryDamagePerRank      = 0.02 // "by 2/4/6/8/10%" (1.60.1.70425; 1% a rank before)
 	demonicEmbraceStaminaPerRank    = 0.03
 	soulLinkDamageTakenMultiplier   = 1 - 0.30
 	ruinCritDamageBonusPerRank      = 0.20
@@ -50,7 +50,6 @@ func (warlock *Warlock) ApplyTalents() {
 	warlock.applySuppression()
 	warlock.applyNightfall()
 	warlock.applyShadowMastery()
-	warlock.applyMalediction()
 	warlock.applyImprovedDrains()
 	warlock.applyImprovedBaneOfAgony()
 	warlock.applyFelConcentration()
@@ -142,6 +141,9 @@ func (warlock *Warlock) ApplyTalents() {
 	// Destructive Reach (2 ranks) is +10/20% spell range; this engine
 	// has no range/positioning model for any class, so nothing reads it.
 	_ = warlock.Talents.DestructiveReach
+	// Grim Reach (Malediction's slot since 1.60.1.70425) is Affliction
+	// range only; the sim has no positioning. Named, not modeled.
+	_ = warlock.Talents.GrimReach
 
 	// Molten Skin (5 ranks) is -2/4/6/8/10% damage TAKEN: purely
 	// defensive, never a DPS number.
@@ -833,10 +835,6 @@ func (warlock *Warlock) applyEmberstorm() {
 // Per-rank talent values, read off the client's own rank descriptions
 // for build 1.60.1.70009 (data/builds/1.60.1.70009/talents/warlock.json).
 const (
-	// Malediction: "Increases all periodic damage done by your Warlock
-	// spells by 1/2/3/4/5%."
-	maledictionPeriodicDamagePerRank = 0.01
-
 	// Fel Concentration / Intensity share the same four values: "Gives
 	// you a 23/47/70% chance to avoid interruption caused by damage
 	// while channeling or casting" their respective spell lists.
@@ -933,20 +931,6 @@ var pandemicAffectedSpellCodes = []int32{
 // Drain Life, Drain Soul and Wrack. ("Drain Mana" in the tooltip has no
 // spell file in this package.)
 var felConcentrationAffectedSpellCodes = []int32{SpellCode_WarlockDrainLife, SpellCode_WarlockDrainSoul, SpellCode_WarlockWrack}
-
-func (warlock *Warlock) applyMalediction() {
-	rank := warlock.Talents.Malediction
-	if rank == 0 {
-		return
-	}
-
-	bonus := maledictionPeriodicDamagePerRank * float64(rank)
-	warlock.OnSpellRegistered(func(spell *core.Spell) {
-		if isWarlockSpell(spell) {
-			spell.PeriodicDamageMultiplierAdditive += bonus
-		}
-	})
-}
 
 func (warlock *Warlock) applyImprovedDrains() {
 	rank := warlock.Talents.ImprovedDrains

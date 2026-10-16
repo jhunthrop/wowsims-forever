@@ -273,16 +273,16 @@ func TestHolyPowerAddsCritToHolyShockAndHolyStrikeMoreThanToTheRest(t *testing.T
 func TestChampionOfTheLightGivesHealingAndDamageTheSameShareOfIntellect(t *testing.T) {
 	base, _ := unitsOf(t, fight{})
 	talented, _ := unitsOf(t, fight{talents: map[string]int{"champion_of_the_light": 3}})
-	const share = 0.60
+	const share = 0.30 // 1.60.1.70425: "up to 30% of your Intellect" at 3/3
 	intellect := talented.GetStat(stats.Intellect)
 
 	if got := talented.GetStat(stats.HealingPower) - base.GetStat(stats.HealingPower); got < share*intellect-1e-6 || got > share*intellect+1e-6 {
-		t.Errorf("healing power rose by %.3f, want %.3f (60%% of %.1f Intellect)", got, share*intellect, intellect)
+		t.Errorf("healing power rose by %.3f, want %.3f (30%% of %.1f Intellect)", got, share*intellect, intellect)
 	}
 	damage := func(c *core.Character) float64 {
 		return c.GetStat(stats.SpellPower) + c.GetStat(stats.SpellDamage)
 	}
 	if got := damage(talented) - damage(base); got < share*intellect-1e-6 || got > share*intellect+1e-6 {
-		t.Errorf("spell damage rose by %.3f, want %.3f (the same 60%% of Intellect)", got, share*intellect)
+		t.Errorf("spell damage rose by %.3f, want %.3f (the same 30%% of Intellect)", got, share*intellect)
 	}
 }

@@ -168,7 +168,9 @@ func (shaman *Shaman) newMagmaTotemSpellConfig(rank int) core.SpellConfig {
 	manaCost := MagmaTotemManaCost[rank]
 	level := MagmaTotemLevel[rank]
 
-	duration := time.Second * 20
+	// Trial by Fire: "increases the duration of your Magma Totem by 10
+	// sec" a point (fire_nova.go's constant).
+	duration := time.Second*20 + trialByFireMagmaDurationPerPoint*time.Duration(shaman.Talents.TrialByFire)
 	attackInterval := time.Second * 2
 
 	aoeSpell := shaman.RegisterSpell(core.SpellConfig{

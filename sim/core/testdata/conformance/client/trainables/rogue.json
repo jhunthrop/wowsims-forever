@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70338",
+  "build": "1.60.1.70425",
   "class_slug": "rogue",
   "trainables": [
     {
@@ -347,6 +347,38 @@
         {
           "id": 25351,
           "rank": 5,
+          "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Death Mark",
+      "skill_line": "",
+      "source": "class_spell",
+      "active": true,
+      "cost": 25,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 10000,
+      "ranks": [
+        {
+          "id": 1316709,
+          "rank": 1,
+          "level": 40
+        },
+        {
+          "id": 1325756,
+          "rank": 2,
+          "level": 48
+        },
+        {
+          "id": 1325757,
+          "rank": 3,
+          "level": 56
+        },
+        {
+          "id": 1325758,
+          "rank": 4,
           "level": 60
         }
       ]

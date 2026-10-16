@@ -136,7 +136,7 @@ func TestPetFamilyDirectAbilitiesMatchClient(t *testing.T) {
 		wantCost float64
 		wantCD   time.Duration
 	}{
-		{"Dismember", proto.Hunter_Options_Crocolisk, 1264933, [2]float64{50.25, 57.75}, 35, 6 * time.Second},
+		{"Dismember", proto.Hunter_Options_Crocolisk, 1264933, [2]float64{50.25, 57.75}, 35, 15 * time.Second},
 		{"Pinch", proto.Hunter_Options_Crab, 1264742, [2]float64{88.4028, 101.5972}, 50, 30 * time.Second},
 	}
 	for _, c := range cases {
@@ -184,9 +184,10 @@ func TestPetCastsDismemberOnCooldown(t *testing.T) {
 			break
 		}
 	}
-	// One cast at the start and one every 6 seconds after it.
-	if got := dismember.SpellMetrics[target.UnitIndex].Casts; got < 3 {
-		t.Errorf("Dismember cast %d times in 20 seconds, want at least 3", got)
+	// One cast at the start and one every 15 seconds after it (client
+	// 1.60.1.70425; the cooldown was 6 seconds before).
+	if got := dismember.SpellMetrics[target.UnitIndex].Casts; got < 2 {
+		t.Errorf("Dismember cast %d times in 20 seconds, want at least 2", got)
 	}
 }
 

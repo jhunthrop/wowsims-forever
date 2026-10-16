@@ -53,7 +53,9 @@ func (shaman *Shaman) registerFlameShockSpell(shockTimer *core.Timer) {
 }
 
 func (shaman *Shaman) newFlameShockSpell(rank int, shockTimer *core.Timer) core.SpellConfig {
-	numTicks := 4
+	// Call of Flame (1.60.1.70425): "increases the duration of your Flame
+	// Shock spell by 3 sec" a point - one more 3-second tick each.
+	numTicks := 4 + int(shaman.Talents.CallOfFlame)
 	tickDuration := time.Second * 3
 
 	spellId := FlameShockSpellId[rank]

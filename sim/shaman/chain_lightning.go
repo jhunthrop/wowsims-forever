@@ -26,7 +26,7 @@ var ChainLightningDamage = [ChainLightningRanks + 1]clientdamage.Effect{
 	{Amount: 123, Variance: 0.111111, PerLevel: 0.8, SpellLevel: 56, MaxLevel: 61},
 }
 var ChainLightningSpellCoef = [ChainLightningRanks + 1]float64{0, .571, .571, .517, .571}
-var ChainLightningManaCost = [ChainLightningRanks + 1]float64{0, 225, 305, 390, 485}
+var ChainLightningManaCost = [ChainLightningRanks + 1]float64{0, 145, 200, 250, 315} // client 1.60.1.70425 (was 225/305/390/485)
 var ChainLightningLevel = [ChainLightningRanks + 1]int{0, 32, 40, 48, 56}
 
 func (shaman *Shaman) registerChainLightningSpell() {

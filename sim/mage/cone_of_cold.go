@@ -77,8 +77,33 @@ func (mage *Mage) getConeOfColdConfig(rank int, cdTimer *core.Timer) core.SpellC
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
 			for _, aoeTarget := range sim.Encounter.TargetUnits {
 				baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
+				// Winter's Chill (talents.go): "increases the damage done by
+				// your Cone of Cold spell to the target by 40%, stacking up
+				// to 5 times" - the stacks this mage has put on the target.
+				// A debuff of its own, so it multiplies with Improved Cone
+				// of Cold rather than adding to it.
+				multiplier := 1 + mage.wintersChillConeOfColdBonus(aoeTarget)
+				spell.DamageMultiplier *= multiplier
 				spell.CalcAndDealDamage(sim, aoeTarget, baseDamage, spell.OutcomeMagicHitAndCrit)
+				spell.DamageMultiplier /= multiplier
 			}
 		},
 	}
+}
+
+// wintersChillConeOfColdPerStack is Winter's Chill's 40% a stack on Cone
+// of Cold (client 1.60.1.70425).
+const wintersChillConeOfColdPerStack = 0.40
+
+// wintersChillConeOfColdBonus is the additive damage share Cone of Cold
+// gets against target from the Winter's Chill stacks on it.
+func (mage *Mage) wintersChillConeOfColdBonus(target *core.Unit) float64 {
+	if mage.WintersChillAuras == nil {
+		return 0
+	}
+	aura := mage.WintersChillAuras.Get(target)
+	if aura == nil || !aura.IsActive() {
+		return 0
+	}
+	return wintersChillConeOfColdPerStack * float64(aura.GetStacks())
 }

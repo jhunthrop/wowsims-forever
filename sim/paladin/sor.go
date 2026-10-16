@@ -27,7 +27,7 @@ var JudgementOfRighteousnessDamage = [judgementOfRighteousnessRanks + 1]clientda
 
 const (
 	judgementOfRighteousnessRanks       = 8
-	judgementOfRighteousnessCoefficient = 0.5
+	judgementOfRighteousnessCoefficient = 0.429 // client 1.60.1.70425 (0.5 before)
 )
 
 func (paladin *Paladin) registerSealOfRighteousness() {

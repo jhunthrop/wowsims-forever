@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70425",
   "class_id": 7,
   "class_slug": "shaman",
   "trees": [
@@ -75,9 +75,9 @@
           "spell_id": 16035
         },
         {
-          "id": 104771,
-          "name": "Elemental Warding",
-          "icon": "spell_nature_spiritarmor",
+          "id": 104769,
+          "name": "Elemental Devastation",
+          "icon": "spell_fire_elementaldevastation",
           "max_rank": 3,
           "tier": 1,
           "column": 0,
@@ -85,19 +85,19 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 28996,
-              "description": "Reduces damage taken from Fire, Frost, and Nature effects by 3%."
+              "spell_id": 30160,
+              "description": "Your Critical Strikes with direct damage spells increase your chance to get a Critical Strike with melee attacks by 3% for 10 sec."
             },
             {
-              "spell_id": 28996,
-              "description": "Reduces damage taken from Fire, Frost, and Nature effects by 7%."
+              "spell_id": 30160,
+              "description": "Your Critical Strikes with direct damage spells increase your chance to get a Critical Strike with melee attacks by 6% for 10 sec."
             },
             {
-              "spell_id": 28996,
-              "description": "Reduces damage taken from Fire, Frost, and Nature effects by 10%."
+              "spell_id": 30160,
+              "description": "Your Critical Strikes with direct damage spells increase your chance to get a Critical Strike with melee attacks by 9% for 10 sec."
             }
           ],
-          "spell_id": 28996
+          "spell_id": 30160
         },
         {
           "id": 104767,
@@ -133,78 +133,11 @@
           "spell_id": 16040
         },
         {
-          "id": 104770,
-          "name": "Call of Flame",
-          "icon": "spell_fire_immolation",
-          "max_rank": 3,
-          "tier": 1,
-          "column": 2,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 16038,
-              "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 5%."
-            },
-            {
-              "spell_id": 16038,
-              "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 10%."
-            },
-            {
-              "spell_id": 16038,
-              "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 15%."
-            }
-          ],
-          "spell_id": 16038
-        },
-        {
-          "id": 104769,
-          "name": "Elemental Devastation",
-          "icon": "spell_fire_elementaldevastation",
-          "max_rank": 3,
-          "tier": 1,
-          "column": 3,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 30160,
-              "description": "Your offensive spell critical strikes will increase your chance to get a critical strike with melee attacks by 3% for 10 sec."
-            },
-            {
-              "spell_id": 30160,
-              "description": "Your offensive spell critical strikes will increase your chance to get a critical strike with melee attacks by 6% for 10 sec."
-            },
-            {
-              "spell_id": 30160,
-              "description": "Your offensive spell critical strikes will increase your chance to get a critical strike with melee attacks by 9% for 10 sec."
-            }
-          ],
-          "spell_id": 30160
-        },
-        {
-          "id": 104768,
-          "name": "Elemental Focus",
-          "icon": "spell_shadow_manaburn",
-          "max_rank": 1,
-          "tier": 2,
-          "column": 1,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 16164,
-              "description": "Gives you a 10% chance to enter a Clearcasting state after casting any Fire, Frost, or Nature damage spell.  The Clearcasting state reduces the mana cost of your next damage spell by 100%."
-            }
-          ],
-          "spell_id": 16164
-        },
-        {
-          "id": 104765,
+          "id": 104771,
           "name": "Elemental Alacrity",
           "icon": "spell_lightning_lightningbolt01",
           "max_rank": 3,
-          "tier": 2,
+          "tier": 1,
           "column": 2,
           "prereq_talent_id": null,
           "prereq_rank": null,
@@ -225,8 +158,75 @@
           "spell_id": 16578
         },
         {
+          "id": 104770,
+          "name": "Call of Flame",
+          "icon": "spell_fire_immolation",
+          "max_rank": 3,
+          "tier": 1,
+          "column": 3,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16038,
+              "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 5%, as well as increases the duration of your Flame Shock spell by 3 sec."
+            },
+            {
+              "spell_id": 16038,
+              "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 10%, as well as increases the duration of your Flame Shock spell by 6 sec."
+            },
+            {
+              "spell_id": 16038,
+              "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 15%, as well as increases the duration of your Flame Shock spell by 9 sec."
+            }
+          ],
+          "spell_id": 16038
+        },
+        {
+          "id": 104768,
+          "name": "Elemental Focus",
+          "icon": "spell_shadow_manaburn",
+          "max_rank": 1,
+          "tier": 2,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16164,
+              "description": "Gives you a 10% chance to enter a Clearcasting state after casting any Fire, Frost, or Nature damage spell.  The Clearcasting state reduces the mana cost of your next damage spell by 100%."
+            }
+          ],
+          "spell_id": 16164
+        },
+        {
+          "id": 104765,
+          "name": "Elemental Warding",
+          "icon": "spell_nature_spiritarmor",
+          "max_rank": 3,
+          "tier": 2,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 28996,
+              "description": "Reduces damage taken from Fire, Frost, and Nature effects by 3%."
+            },
+            {
+              "spell_id": 28996,
+              "description": "Reduces damage taken from Fire, Frost, and Nature effects by 7%."
+            },
+            {
+              "spell_id": 28996,
+              "description": "Reduces damage taken from Fire, Frost, and Nature effects by 10%."
+            }
+          ],
+          "spell_id": 28996
+        },
+        {
           "id": 104764,
-          "name": "Improved Fire Nova",
+          "name": "Trial by Fire",
           "icon": "spell_fire_sealoffire",
           "max_rank": 2,
           "tier": 3,
@@ -236,11 +236,11 @@
           "ranks": [
             {
               "spell_id": 16086,
-              "description": "Increases the damage done by your Fire Nova spell by 10% and reduces its cooldown by 2 sec."
+              "description": "Increases the damage done by your Fire Nova spell by 10% and reduces its cooldown by 2 sec, and increases the duration of your Magma Totem by 10 sec."
             },
             {
               "spell_id": 16086,
-              "description": "Increases the damage done by your Fire Nova spell by 20% and reduces its cooldown by 4 sec."
+              "description": "Increases the damage done by your Fire Nova spell by 20% and reduces its cooldown by 4 sec, and increases the duration of your Magma Totem by 20 sec."
             }
           ],
           "spell_id": 16086
@@ -272,20 +272,20 @@
         },
         {
           "id": 104762,
-          "name": "Call of Thunder",
-          "icon": "spell_nature_callstorm",
+          "name": "Earthbound",
+          "icon": "spell_nature_stranglevines",
           "max_rank": 1,
           "tier": 3,
-          "column": 2,
-          "prereq_talent_id": 104765,
-          "prereq_rank": 3,
+          "column": 3,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 16120,
-              "description": "Increases the critical strike chance of your Lightning Bolt and Chain Lightning spells by 3%."
+              "spell_id": 1222988,
+              "description": "Your Earthbind Totem Immobilizes nearby targets for 5 sec when cast."
             }
           ],
-          "spell_id": 16120
+          "spell_id": 1222988
         },
         {
           "id": 104761,
@@ -299,14 +299,31 @@
           "ranks": [
             {
               "spell_id": 28999,
-              "description": "Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 3 yards, and increases the range of your Flame Shock spell by 8 yards."
+              "description": "Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 3 yards and reduces the cooldown of Totemic Projection by 10 sec."
             },
             {
               "spell_id": 28999,
-              "description": "Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 6 yards, and increases the range of your Flame Shock spell by 15 yards."
+              "description": "Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 6 yards and reduces the cooldown of Totemic Projection by 20 sec."
             }
           ],
           "spell_id": 28999
+        },
+        {
+          "id": 104760,
+          "name": "Lava Burst",
+          "icon": "spell_shaman_lavaburst",
+          "max_rank": 1,
+          "tier": 4,
+          "column": 1,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 408490,
+              "description": "You hurl molten lava at the target, dealing 114 to 145 Fire damage. If your Flame Shock is on the target, Lava Burst deals 20% increased damage."
+            }
+          ],
+          "spell_id": 408490
         },
         {
           "id": 104759,
@@ -314,9 +331,9 @@
           "icon": "spell_nature_lightningoverload",
           "max_rank": 3,
           "tier": 4,
-          "column": 1,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
+          "column": 2,
+          "prereq_talent_id": 104771,
+          "prereq_rank": 3,
           "ranks": [
             {
               "spell_id": 408438,
@@ -334,31 +351,14 @@
           "spell_id": 408438
         },
         {
-          "id": 104760,
-          "name": "Earthbound",
-          "icon": "spell_nature_stranglevines",
-          "max_rank": 1,
-          "tier": 4,
-          "column": 3,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 1222988,
-              "description": "Your Earthbind Totem Immobilizes nearby targets for 5 sec when cast."
-            }
-          ],
-          "spell_id": 1222988
-        },
-        {
           "id": 104766,
           "name": "Elemental Fury",
           "icon": "spell_fire_volcano",
           "max_rank": 5,
           "tier": 5,
           "column": 2,
-          "prereq_talent_id": 104762,
-          "prereq_rank": 1,
+          "prereq_talent_id": 104759,
+          "prereq_rank": 3,
           "ranks": [
             {
               "spell_id": 16089,
@@ -385,20 +385,20 @@
         },
         {
           "id": 104758,
-          "name": "Lava Burst",
-          "icon": "spell_shaman_lavaburst",
+          "name": "Elemental Mastery",
+          "icon": "spell_nature_wispheal",
           "max_rank": 1,
           "tier": 6,
           "column": 1,
-          "prereq_talent_id": 104759,
-          "prereq_rank": 3,
+          "prereq_talent_id": 104760,
+          "prereq_rank": 1,
           "ranks": [
             {
-              "spell_id": 408490,
-              "description": "You hurl molten lava at the target, dealing 150 to 192 Fire damage. If your Flame Shock is on the target, Lava Burst deals 20% increased damage."
+              "spell_id": 16166,
+              "description": "Gain mastery over Fire and Lightning, reducing the cast time of Lightning Bolt and Lava Burst by 0.5 sec, and removing the cooldown from Chain Lightning. Lasts 15 sec."
             }
           ],
-          "spell_id": 408490
+          "spell_id": 16166
         }
       ],
       "background": "shamanelementalcombat",
@@ -891,8 +891,8 @@
         },
         {
           "id": 104729,
-          "name": "Totemic Focus",
-          "icon": "spell_nature_moonglow",
+          "name": "Tidal Focus",
+          "icon": "spell_frost_manarecharge",
           "max_rank": 5,
           "tier": 0,
           "column": 2,
@@ -900,27 +900,27 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 16173,
-              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 5%."
+              "spell_id": 16179,
+              "description": "Reduces the Mana cost of your healing spells by 1% and improves your chance to hit by 1%."
             },
             {
-              "spell_id": 16173,
-              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 10%."
+              "spell_id": 16179,
+              "description": "Reduces the Mana cost of your healing spells by 2% and improves your chance to hit by 2%."
             },
             {
-              "spell_id": 16173,
-              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 15%."
+              "spell_id": 16179,
+              "description": "Reduces the Mana cost of your healing spells by 3% and improves your chance to hit by 3%."
             },
             {
-              "spell_id": 16173,
-              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 20%."
+              "spell_id": 16179,
+              "description": "Reduces the Mana cost of your healing spells by 4% and improves your chance to hit by 4%."
             },
             {
-              "spell_id": 16173,
-              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 25%."
+              "spell_id": 16179,
+              "description": "Reduces the Mana cost of your healing spells by 5% and improves your chance to hit by 5%."
             }
           ],
-          "spell_id": 16173
+          "spell_id": 16179
         },
         {
           "id": 104734,
@@ -974,8 +974,8 @@
         },
         {
           "id": 104735,
-          "name": "Tidal Focus",
-          "icon": "spell_frost_manarecharge",
+          "name": "Totemic Focus",
+          "icon": "spell_nature_moonglow",
           "max_rank": 5,
           "tier": 1,
           "column": 2,
@@ -983,27 +983,27 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 16179,
-              "description": "Reduces the Mana cost of your healing spells by 1% and improves your chance to hit by 1%."
+              "spell_id": 16173,
+              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 5%."
             },
             {
-              "spell_id": 16179,
-              "description": "Reduces the Mana cost of your healing spells by 2% and improves your chance to hit by 2%."
+              "spell_id": 16173,
+              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 10%."
             },
             {
-              "spell_id": 16179,
-              "description": "Reduces the Mana cost of your healing spells by 3% and improves your chance to hit by 3%."
+              "spell_id": 16173,
+              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 15%."
             },
             {
-              "spell_id": 16179,
-              "description": "Reduces the Mana cost of your healing spells by 4% and improves your chance to hit by 4%."
+              "spell_id": 16173,
+              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 20%."
             },
             {
-              "spell_id": 16179,
-              "description": "Reduces the Mana cost of your healing spells by 5% and improves your chance to hit by 5%."
+              "spell_id": 16173,
+              "description": "Reduces the Mana cost of your totems and any spells that summon or move them by 25%."
             }
           ],
-          "spell_id": 16179
+          "spell_id": 16173
         },
         {
           "id": 104737,
@@ -1088,7 +1088,7 @@
           "ranks": [
             {
               "spell_id": 408510,
-              "description": "The caster is surrounded by 3 globes of water. When a spell, melee, or ranged attack hits the caster or when one of the caster's healing spells gets a critical result, 2% of maximum mana is restored to the caster, expending one water globe. Only one globe will activate every few seconds.  Lasts 10 min.\n\nOnly one Elemental Shield can be active on the Shaman at any one time."
+              "description": "The caster is surrounded by 3 globes of water. When a spell, melee, or ranged attack hits the caster or when one of the caster's spells gets a critical result, 2% of maximum mana is restored to the caster, expending one water globe. Only one globe will activate every few seconds.  Lasts 10 min.\n\nOnly one Elemental Shield can be active on the Shaman at any one time."
             }
           ],
           "spell_id": 408510

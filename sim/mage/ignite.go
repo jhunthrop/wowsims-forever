@@ -69,6 +69,7 @@ func (mage *Mage) applyIgnite() {
 		Dot: core.DotConfig{
 			Aura: core.Aura{
 				Label:     "Ignite",
+				Tag:       mageFireEffectTag,
 				MaxStacks: 5,
 				Duration:  time.Second * 4,
 			},

@@ -76,6 +76,7 @@ func (mage *Mage) newPyroblastSpellConfig(rank int) core.SpellConfig {
 		Dot: core.DotConfig{
 			Aura: core.Aura{
 				Label:    fmt.Sprintf("Pyroblast (Rank %d)", rank),
+				Tag:      mageFireEffectTag,
 				ActionID: actionID.WithTag(1),
 			},
 			NumberOfTicks:    numTicks,

@@ -34,10 +34,10 @@
         "maxPoints": 3
       },
       {
-        "fieldName": "improvedPowerWordShield",
+        "fieldName": "mentalStrength",
         "location": { "rowIdx": 1, "colIdx": 2 },
-        "spellIds": [14748, 14748, 14748],
-        "maxPoints": 3
+        "spellIds": [18551, 18551, 18551, 18551, 18551],
+        "maxPoints": 5
       },
       {
         "fieldName": "martyrdom",
@@ -58,6 +58,12 @@
         "maxPoints": 1
       },
       {
+        "fieldName": "improvedPowerWordShield",
+        "location": { "rowIdx": 2, "colIdx": 2 },
+        "spellIds": [14748, 14748, 14748],
+        "maxPoints": 3
+      },
+      {
         "fieldName": "meditation",
         "location": { "rowIdx": 2, "colIdx": 3 },
         "spellIds": [14521, 14521, 14521],
@@ -70,24 +76,18 @@
         "maxPoints": 3
       },
       {
-        "fieldName": "mentalStrength",
+        "fieldName": "improvedManaBurn",
         "location": { "rowIdx": 3, "colIdx": 1 },
-        "spellIds": [18551, 18551, 18551, 18551, 18551],
-        "maxPoints": 5
+        "spellIds": [14750, 14750],
+        "maxPoints": 2
       },
       {
         "fieldName": "soulWarding",
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [402000],
         "maxPoints": 1,
-        "prereqLocation": { "rowIdx": 1, "colIdx": 2 },
+        "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
         "prereqRank": 3
-      },
-      {
-        "fieldName": "improvedManaBurn",
-        "location": { "rowIdx": 3, "colIdx": 3 },
-        "spellIds": [14750, 14750],
-        "maxPoints": 2
       },
       {
         "fieldName": "penance",
@@ -254,10 +254,10 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "shadowAffinity",
+        "fieldName": "improvedMindBlast",
         "location": { "rowIdx": 1, "colIdx": 0 },
-        "spellIds": [15318, 15318, 15318],
-        "maxPoints": 3
+        "spellIds": [15273, 15273, 15273, 15273, 15273],
+        "maxPoints": 5
       },
       {
         "fieldName": "improvedShadowWordPain",
@@ -270,12 +270,6 @@
         "location": { "rowIdx": 1, "colIdx": 3 },
         "spellIds": [17322, 17322],
         "maxPoints": 2
-      },
-      {
-        "fieldName": "improvedMindBlast",
-        "location": { "rowIdx": 2, "colIdx": 0 },
-        "spellIds": [15273, 15273, 15273, 15273, 15273],
-        "maxPoints": 5
       },
       {
         "fieldName": "improvedPsychicScream",
@@ -300,10 +294,10 @@
         "prereqRank": 1
       },
       {
-        "fieldName": "improvedFade",
+        "fieldName": "darkInspiration",
         "location": { "rowIdx": 3, "colIdx": 0 },
-        "spellIds": [15274, 15274],
-        "maxPoints": 2
+        "spellIds": [1326159, 1326159, 1326159, 1326159, 1326159],
+        "maxPoints": 5
       },
       {
         "fieldName": "vampiricEmbrace",

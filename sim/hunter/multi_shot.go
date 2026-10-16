@@ -57,8 +57,11 @@ func (hunter *Hunter) getMultiShotConfig(timer *core.Timer) core.SpellConfig {
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD:      core.GCDDefault,
-				CastTime: time.Millisecond * 500,
+				GCD: core.GCDDefault,
+				// Client 1.60.1.70425 reads Multi-Shot as an instant
+				// (SpellMisc.CastingTimeIndex 0; the 1.60.1.70374 client
+				// carried 500 ms).
+				CastTime: 0,
 			},
 			ModifyCast: func(sim *core.Simulation, spell *core.Spell, cast *core.Cast) {
 				cast.CastTime = spell.CastTime()

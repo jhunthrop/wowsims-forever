@@ -78,8 +78,8 @@ func TestDevouringPlagueCooldownMatchesClient(t *testing.T) {
 	if topRank == nil {
 		t.Fatalf("DevouringPlague[%d] not registered at level 60", priest.DevouringPlagueRanks)
 	}
-	if topRank.CD.Duration != time.Minute {
-		t.Errorf("Devouring Plague CD.Duration = %s, want %s (client's category_cooldown_ms)", topRank.CD.Duration, time.Minute)
+	if want := 24 * time.Second; topRank.CD.Duration != want {
+		t.Errorf("Devouring Plague CD.Duration = %s, want %s (client 1.60.1.70425's category_cooldown_ms)", topRank.CD.Duration, want)
 	}
 }
 

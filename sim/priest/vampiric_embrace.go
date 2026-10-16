@@ -23,7 +23,7 @@ func (priest *Priest) registerVampiricEmbraceSpell() {
 	// client's per-id spell data instead of the misleadingly-canonical
 	// generated constant.
 	duration := time.Second * 30
-	cooldown := time.Minute * 1
+	cooldown := time.Second * 30 // client 1.60.1.70425 (1 min before)
 
 	partyPlayers := priest.Env.Raid.GetPlayerParty(&priest.Unit).Players
 	healthMetrics := priest.NewHealthMetrics(actionID)

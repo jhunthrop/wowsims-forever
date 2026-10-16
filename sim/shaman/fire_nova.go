@@ -29,18 +29,20 @@ var FireNovaDamage = [FireNovaLearnRanks + 1]clientdamage.Effect{
 	{Amount: 419, Variance: 0.109785, PerLevel: 3.4, SpellLevel: 52, MaxLevel: 57},
 }
 var FireNovaDamageCoeff = [FireNovaLearnRanks + 1]float64{0, .1, .143, .143, .143, .143}
-var FireNovaLearnManaCost = [FireNovaLearnRanks + 1]float64{0, 95, 170, 280, 395, 520}
+var FireNovaLearnManaCost = [FireNovaLearnRanks + 1]float64{0, 65, 120, 210, 290, 375} // client 1.60.1.70425 (was 95/170/280/395/520)
 var FireNovaLearnLevel = [FireNovaLearnRanks + 1]int{0, 12, 22, 32, 42, 52}
 
 // FireNovaCooldown is the client's category cooldown on every rank.
 const FireNovaCooldown = 10 * time.Second
 
-// Improved Fire Nova (2 points): Forever's 1.60.1.70291 text reads "10% and
-// 2 sec" at rank 1 and "20% and 4 sec" at rank 2, so each point is 10% and
-// 2 sec.
+// Trial by Fire (2 points, Improved Fire Nova's slot since 1.60.1.70425):
+// "Increases the damage done by your Fire Nova spell by 10% and reduces
+// its cooldown by 2 sec, and increases the duration of your Magma Totem
+// by 10 sec." a point. The Magma Totem half lives in fire_totems.go.
 const (
-	improvedFireNovaDamagePerPoint   = 0.10
-	improvedFireNovaCooldownPerPoint = 2 * time.Second
+	trialByFireDamagePerPoint        = 0.10
+	trialByFireCooldownPerPoint      = 2 * time.Second
+	trialByFireMagmaDurationPerPoint = 10 * time.Second
 )
 
 func (shaman *Shaman) registerFireNovaSpell() {
@@ -57,10 +59,10 @@ func (shaman *Shaman) registerFireNovaSpell() {
 	}
 }
 
-// fireNovaDamageMultiplier adds Call of Flame (+5% a point) and Improved
-// Fire Nova (+10% a point) the way the client's percent modifiers stack.
+// fireNovaDamageMultiplier adds Call of Flame (+5% a point) and Trial by
+// Fire (+10% a point) the way the client's percent modifiers stack.
 func (shaman *Shaman) fireNovaDamageMultiplier() float64 {
-	return shaman.callOfFlameMultiplier() + improvedFireNovaDamagePerPoint*float64(shaman.Talents.ImprovedFireNova)
+	return shaman.callOfFlameMultiplier() + trialByFireDamagePerPoint*float64(shaman.Talents.TrialByFire)
 }
 
 func (shaman *Shaman) registerFireNovaBlast(rank int) *core.Spell {
@@ -107,7 +109,7 @@ func (shaman *Shaman) newFireNovaCastConfig(rank int, blast *core.Spell) core.Sp
 			DefaultCast: core.Cast{GCD: core.GCDDefault},
 			CD: core.Cooldown{
 				Timer:    shaman.NewTimer(),
-				Duration: FireNovaCooldown - improvedFireNovaCooldownPerPoint*time.Duration(shaman.Talents.ImprovedFireNova),
+				Duration: FireNovaCooldown - trialByFireCooldownPerPoint*time.Duration(shaman.Talents.TrialByFire),
 			},
 		},
 

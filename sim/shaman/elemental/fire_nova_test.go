@@ -14,9 +14,9 @@ import (
 const fireNovaTestTargets = 3
 
 var (
-	callOfFlameNode      = elementalNode("call_of_flame")
-	improvedFireNovaNode = elementalNode("improved_fire_nova")
-	elementalFocusNode   = elementalNode("elemental_focus")
+	callOfFlameNode    = elementalNode("call_of_flame")
+	trialByFireNode    = elementalNode("trial_by_fire")
+	elementalFocusNode = elementalNode("elemental_focus")
 )
 
 func newFireNovaShaman(t *testing.T, level int32, talents string) (*core.Simulation, *shaman.Shaman) {
@@ -166,17 +166,17 @@ func TestFireNovaTalentMultipliers(t *testing.T) {
 		t.Errorf("Call of Flame 3/3 multiplier = %v, want %v", got, want)
 	}
 
-	_, ifn := newFireNovaShaman(t, 60, elementalTalentsWith(map[int]int{improvedFireNovaNode: 2}))
+	_, ifn := newFireNovaShaman(t, 60, elementalTalentsWith(map[int]int{trialByFireNode: 2}))
 	if got, want := ifn.FireNovaBlast[shaman.FireNovaLearnRanks].DamageMultiplier, baseline.DamageMultiplier+0.20; !near(got, want) {
-		t.Errorf("Improved Fire Nova 2/2 multiplier = %v, want %v", got, want)
+		t.Errorf("Trial by Fire 2/2 multiplier = %v, want %v", got, want)
 	}
 	if got, want := topFireNova(t, ifn).CD.Duration, 6*time.Second; got != want {
-		t.Errorf("Improved Fire Nova 2/2 cooldown = %v, want %v", got, want)
+		t.Errorf("Trial by Fire 2/2 cooldown = %v, want %v", got, want)
 	}
 
-	_, both := newFireNovaShaman(t, 60, elementalTalentsWith(map[int]int{callOfFlameNode: 3, improvedFireNovaNode: 2}))
+	_, both := newFireNovaShaman(t, 60, elementalTalentsWith(map[int]int{callOfFlameNode: 3, trialByFireNode: 2}))
 	if got, want := both.FireNovaBlast[shaman.FireNovaLearnRanks].DamageMultiplier, baseline.DamageMultiplier+0.35; !near(got, want) {
-		t.Errorf("Call of Flame + Improved Fire Nova multiplier = %v, want the additive %v", got, want)
+		t.Errorf("Call of Flame + Trial by Fire multiplier = %v, want the additive %v", got, want)
 	}
 }
 

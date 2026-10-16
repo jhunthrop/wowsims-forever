@@ -73,7 +73,7 @@ func (table shadowWordPainTable) tickRoll(_ int) [2]float64 {
 // client row), a secondary effect the generated ladder does not carry:
 // the amount per tick at every caster level (no growth, no variance).
 // TestHolyFireDotTicksMatchTheClient pins it to the client.
-var holyFireDotTickDamage = [HolyFireRanks + 1]float64{0, 4, 5, 6, 7, 13, 10, 13, 15}
+var holyFireDotTickDamage = [HolyFireRanks + 1]float64{0, 4, 5, 6, 7, 9, 10, 13, 15} // rank 5 reads 9 since client 1.60.1.70425 (13 before)
 
 const (
 	holyFireDotCoefficient = 0.05

@@ -7,10 +7,11 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// Mana Tide Totem (talent 104728, learned in three ranks) restores mana to
-// the shaman's group for a few seconds. The totem lasts 13 s and the
-// restore ticks every 3 s, so four ticks land; the client's per-tick
-// amount is the generated ManaTide row (spells 16191, 17355, 17360).
+// Mana Tide Totem (talent 104728, learned in four ranks since client
+// 1.60.1.70425) restores mana to the shaman's group for a few seconds. The
+// totem lasts 13 s and the restore ticks every 3 s, so four ticks land; the
+// client's per-tick amount is the generated ManaTide row (spells 16191,
+// 17355, 17360, 1325257).
 const (
 	manaTideTotemDuration = 13 * time.Second
 	manaTideTotemTickGap  = 3 * time.Second

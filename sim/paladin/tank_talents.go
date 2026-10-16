@@ -62,7 +62,7 @@ const (
 	// to restore 6% of your maximum Mana. May only occur once every 3
 	// sec." 20% and 66% at rank 2, 30% and 100% at rank 3.
 	shieldSpecializationAbsorbPerRank = 0.10
-	shieldSpecializationManaFraction  = 0.06
+	shieldSpecializationManaFraction  = 0.04 // "restore 4% of your maximum Mana" (1.60.1.70425; 6% before)
 	shieldSpecializationManaICD       = 3 * time.Second
 	shieldSpecializationActionID      = 20150
 

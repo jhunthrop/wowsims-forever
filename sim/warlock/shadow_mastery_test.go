@@ -12,8 +12,8 @@ import (
 const shadowMasteryTalents = "0000000000000" + "1" + "0" + "5"
 
 // TestShadowMasteryCoversEveryMaskedSpell pins spell 18271's class masks:
-// each covered Shadow spell takes +1% a rank (5% at 5/5) as one multiplier,
-// and Curse of Doom, outside the masks, takes none.
+// each covered Shadow spell takes +2% a rank (10% at 5/5, 1.60.1.70425) as
+// one multiplier, and Curse of Doom, outside the masks, takes none.
 func TestShadowMasteryCoversEveryMaskedSpell(t *testing.T) {
 	_, talented, _ := newWarlockForDamageTest(t, shadowMasteryTalents)
 
@@ -28,8 +28,8 @@ func TestShadowMasteryCoversEveryMaskedSpell(t *testing.T) {
 		"Siphon Life":    last(talented.SiphonLife),
 	}
 	for name, spell := range covered {
-		if got := spell.DamageMultiplierAdditive; math.Abs(got-1.05) > 1e-9 {
-			t.Errorf("%s: additive multiplier %v with Shadow Mastery 5/5, want 1.05", name, got)
+		if got := spell.DamageMultiplierAdditive; math.Abs(got-1.10) > 1e-9 {
+			t.Errorf("%s: additive multiplier %v with Shadow Mastery 5/5, want 1.10", name, got)
 		}
 	}
 	if got := talented.CurseOfDoom.DamageMultiplierAdditive; got != 1 {

@@ -3,7 +3,7 @@
 Hand-written, like SUMMARY.md. The conformance report (`sim/conformance`) reads
 spell rows, not talent rank values, so a talent whose per-rank rate the engine
 carried over from vanilla was never checked. This file is that check, for every
-class, against the site's `data/builds/1.60.1.70291/talents/<class>.json`
+class, against the site's `data/builds/1.60.1.70425/talents/<class>.json`
 (trees, talents, `max_rank`, and a `description` per rank: the live,
 hotfix-aware Forever text).
 
@@ -59,23 +59,46 @@ talent's maximum rank unless a note says otherwise.
 - **Druid: Thick Hide.** Engine: 1 armor per level per rank, 2/3 per defense point per rank. Reading A: "180 additional base Armor per level" is the same at every rank (the defense term alone grows 0.67/1.33/2.00), so rank 1 gives 180 a level. Reading B: the 180 is the max-rank total shown as a constant (3 a level at level 60), as the engine has it. The defense term matches either way. The client rows do not settle it either: the aura is type 4 with base 100, and a second effect has base 3 with 3 per level, neither of which says whether the value is per rank or the max-rank total. Left as is.
 - **Warrior: Improved Slam.** Engine: cast and GCD -0.5 sec; cooldown -3 sec a rank = -6 sec at 2/2. Reading A (the 70291 text): "Slam's cooldown is reduced by 3.0 sec" at both ranks, 3 sec flat; Reading B (the engine, from Blizzard's 1 October 2026 notes "3 s off the cooldown per rank"): 6 sec at 2/2. The client rows do not tell the readings apart: spell 12862 is one spell for both ranks, with base -3000 ms on the cooldown and -500 ms on the cast time, so a per-rank reading cannot be told from a flat one. The engine is left as is.
 
+## Client 1.60.1.70425 (2026-10-16)
+
+The tree layouts moved (Arcane gained Arcane Wrath, Shadow lost its tier-2 Improved Mind Blast node, Elemental and Restoration reshuffled, three talents were renamed in place), and these rates and mechanics changed with them. Each row above carries the new text.
+
+- **Mage: Arcane Blast.** Stacks grant 15% of Intellect as spell power (was +10% other-spell damage); 15 sec from the first stack, not renewed and not dropped by another spell; rows 32/78/101/168/236, coefficient 0.429.
+- **Mage: Arcane Wrath.** New talent nuke: 3.5 sec cast, 6 sec cooldown, +5% of maximum mana as spell damage; feeds Missile Barrage.
+- **Mage: Missile Barrage.** Two ranks: 20/5/10% a rank on Arcane Blast / Arcane Missile hits / the bolts.
+- **Mage: Fire Power.** 1% a rank per Fire effect on the target, four at most (was a flat 2% a rank).
+- **Mage: Critical Mass.** Five ranks at 2% (was three).
+- **Mage: Heating Up.** A landed Fire Blast adds a stack, a critical one two.
+- **Mage: Ice Lance.** x3 on a Frozen target (was x4).
+- **Mage: Winter's Chill.** Five stacks at every rank; +40% Cone of Cold damage a stack; the 2% crit a stack is gone.
+- **Priest: Mental Strength.** 2% Intellect a rank (was 3%).
+- **Priest: Improved Mind Flay.** Each tick is 10% a rank more than the one before (was a flat +10% a rank).
+- **Priest: Dark Inspiration.** New: +3% Spirit a rank for 10 sec from Mind Blast or a full Mind Flay.
+- **Priest: Divine Aegis.** Capped at 20 a level.
+- **Priest: Shadow Affinity, Improved Fade.** Gone from the tree.
+- **Warlock: Shadow Mastery.** 2% a rank (was 1%). Malediction became Grim Reach (range).
+- **Shaman: Call of Flame.** Flame Shock +3 sec a rank. Trial by Fire replaces Improved Fire Nova and adds Magma Totem +10 sec a rank. Call of Thunder is gone. Water Shield spends a globe on any spell crit.
+- **Paladin: Champion of the Light.** 10/20/30% (was 20/40/60%). Shield Specialization restores 4% mana (was 6%).
+- **Hunter: Resourcefulness.** 50/100% regen chance (was 30/60%).
+- **Druid: Natural Instinct.** Predatory Instincts' slot, plus healing from 12/25% of Intellect.
+
 ## Mismatches fixed in this lane
 
 - **Hunter: Efficiency.** Now 15% (was 10%). 3% a rank; was 2% a rank on Shots, Stings and Volley.
 - **Hunter: Barrage.** Now 10% on Multi-Shot, Aimed Shot, Volley (3/7/10%; was 15% on Multi-Shot only, plus a Volley crit-bonus term). Table 3/7/10, not linear.
 - **Hunter: Savage Strikes.** Now 4% (was 20%). 2% a rank on Raptor Strike and Mongoose Bite; was 10% a rank. Other melee abilities (Wing Clip, Counterattack, Strider Kick) still carry no bonus.
 - **Mage: Improved Scorch.** Now 33/67/100% chance, 3% a stack to 5 stacks, 30 sec (was 33/66/100%). Rank 2 was 66%.
-- **Mage: Winter's Chill.** Now 20% a rank chance, 2% crit a stack, stacks to the rank (was always 5 stacks). Below 5/5 the debuff stacked past the rank; max rank unchanged.
+- **Mage: Winter's Chill.** (70291) 20% a rank chance, 2% crit a stack, stacks to the rank. Superseded by 1.60.1.70425 below: five stacks at every rank, +40% Cone of Cold a stack, no crit.
 - **Paladin: Vindication.** Now AP +3% for 30 sec (was +15%). Was 5% a rank; the target Attack Power cut in the text is a garbled template ("(3 /- 3 *  - 204)") and is not modeled; the proc chance is not in the text; the aura row states ProcChance 100, so the engine proc on every landed melee hit matches.
 - **Paladin: Vengeance.** Now 3% a stack, 3 stacks, 30 sec = 9% (was 9% flat for 8 sec, no stacks, at 3/3 from a 3%-a-rank table). 1% a rank a stack at 1/2/3: 1/2/3% after one crit; the old table gave 3% a rank on one application.
 - **Priest: Silent Resolve.** Now 30% less Holy threat (was 12% less of all threat). Vanilla 4% a rank on all spells; stun/fear/silence duration half not modeled.
 - **Priest: Searing Light.** Now Holy damage +2/5% (was 5/10%). Smite and Holy Fire only; the Holy Nova free-cast chance is not modeled.
 - **Priest: Shadow Focus.** Now 5% Shadow hit (was 10% on every priest spell). 2% a rank on every priest spell.
-- **Priest: Shadow Affinity.** Now 30% less Shadow threat (was 24% on every priest spell). 8% a rank on every priest spell.
+- **Priest: Shadow Affinity.** (70291) 30% less Shadow threat. The talent left the tree in 1.60.1.70425.
 - **Priest: Shadowform.** Now Shadow +10%, Shadow cost -50%, Shadow crit damage bonus +100%, Physical damage taken -15% (was +15% Shadow damage only).
 - **Rogue: Deflection.** Now 6% parry (was 3%). 1% a rank before.
 - **Rogue: Elusiveness.** Now Vanish cooldown -90 sec; Evasion no longer cut (rank-2 Evasion cooldown was 5 sec - 90 sec, negative). Blind not registered. Evasion is only reachable through RegisterEvasionSpell, which nothing calls.
-- **Shaman: Improved Fire Nova.** Now +20% damage, -4 sec cooldown (was -2 sec). The engine read the rank-2 text as the total and halved it.
+- **Shaman: Improved Fire Nova.** (70291) +20% damage, -4 sec cooldown. Trial by Fire took its slot in 1.60.1.70425 with the same two halves plus Magma Totem duration.
 - **Shaman: Ancestral Knowledge.** Now +10% Intellect (was +5% maximum Mana). 1% max Mana a rank before.
 - **Shaman: Elemental Weapons.** Now Rockbiter +20%, Windfury +40%, Flametongue/Frostbrand +15%. Rockbiter rank 2 was 14% (text 13%).
 - **Shaman: Anticipation.** Now 6% dodge (was 3%). 1% a rank before.
@@ -130,7 +153,7 @@ talent's maximum rank unless a note says otherwise.
 | Blood Frenzy | Feral Combat | 2 | Gives you a 100% chance to gain an additional 5 Rage any time you get a critical strike while in Bear Form or Dire Bear Form. In addition, your non-periodic critical s... | same | match |  |
 | Improved Shifting Power | Feral Combat | 2 | Reduces the cooldown of your Shifting Power spell by 8 sec. | same | match |  |
 | Leader of the Pack | Feral Combat | 1 | While in Cat Form, Bear Form, or Dire Bear Form, the Leader of the Pack increases the critical strike chance of all party members within 45 yards by 3%, exclusive with... | same | match |  |
-| Natural Instinct | Feral Combat | 2 | Increases the critical strike damage bonus of your melee abilities by 20% and increases your spell healing by 25% of your Intellect. | melee crit damage +20% | match | the spell-healing 12/25% of Intellect half is not modeled |
+| Natural Instinct | Feral Combat | 2 | Increases the critical strike damage bonus of your melee abilities by 20% and increases your spell healing by 25% of your Intellect. | 10% a rank melee crit damage; healing 12/25% of Intellect as a stat dependency | match | Predatory Instincts' slot since 1.60.1.70425 |
 | Natural Reaction | Feral Combat | 5 | Increases your dodge chance by 5%, and gives you a 100% chance to gain 5 Rage each time you dodge. | same | match |  |
 | Rend and Tear | Feral Combat | 5 | Increases damage done by your melee abilities on Bleeding targets by 10%. | same | match |  |
 | Berserk | Feral Combat | 1 | Requires Cat Form, Bear Form, Dire Bear Form Causes your Primal Bite ability to strike up to 3 targets, removes its cooldown, and increases the critical strike chance ... | same | match |  |
@@ -199,7 +222,7 @@ talent's maximum rank unless a note says otherwise.
 | Survival Tactics | Survival | 2 | Increases your chance to hit with your Trap and Feign Death abilities by 10%. | - | unmodeled | trap and Feign Death hit chance |
 | Predator's Edge | Survival | 5 | Increases your melee critical strike damage by 30% and your Off Hand weapon damage by 50%. | same | match |  |
 | Counterattack | Survival | 1 | A strike that becomes active after parrying an opponent's attack. This attack deals 50% weapon damage plus 26 and immobilizes the target for 5 sec. Counterattack canno... | 50% weapon + 26, 5 sec | match | spell row |
-| Resourcefulness | Survival | 2 | Reduces the mana cost of your Trap abilities and melee abilities by 60%. In addition, your critical strikes have a 60% chance to allow 50% of your Mana regeneration to... | same | match |  |
+| Resourcefulness | Survival | 2 | Reduces the Mana cost of your Trap and melee abilities by 60%, and grants your melee and ranged ability Critical Strikes a 100% chance to allow 50% of your Mana Regeneration to continue while casting for 30 sec. | 50% a rank chance (was 30%) | mismatch, fixed | 1.60.1.70425 reads 50/100% again |
 | Expose Prey | Survival | 2 | Your attacks against targets with Hunter's Mark have a 10% chance to activate your Mongoose Bite for 10 sec. | same | match |  |
 | Survivalist's Discipline | Survival | 2 | Reduces the cooldown of your Trap and Deterrence abilities by 40%. | same | match |  |
 | Strider Kick | Survival | 1 | A powerful kick that deals 100% melee weapon damage and increases movement speed by 30% for 3 sec. | 100% weapon, 30%, 3 sec | match | spell row |
@@ -219,16 +242,17 @@ talent's maximum rank unless a note says otherwise.
 | Arcane Resilience | Arcane | 2 | Increases your Armor by an amount equal to 50% of your Intellect. | - | unmodeled | armor from Intellect |
 | Arcane Geometry | Arcane | 2 | Increases the range of your Arcane spells by 6 yards. | - | unmodeled | range only |
 | Arcane Impact | Arcane | 3 | Increases the critical strike chance of your Arcane spells by 6%. | same | match |  |
-| Arcane Blast | Arcane | 1 | Blasts the target with energy, dealing 57 to 65 Arcane damage. Each time you cast Arcane Blast, the damage of all your other spells is increased by 10% and the mana co... | same | match |  |
+| Arcane Blast | Arcane | 1 | Blasts the target with energy, dealing 34 to 38 Arcane damage. Each time you cast Arcane Blast, you gain 15% of your Intellect as Spell Damage and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 15 sec from time of initial application. | +15% Intellect as spell power a stack, cost +175% a stack, 15 sec from the first stack, not renewed | mismatch, fixed | 1.60.1.70425 rework; the old +10% other-spell damage and the drop on another damage spell are gone |
 | Arcane Shielding | Arcane | 2 | Decreases the Mana lost per point of damage taken when your Mana Shield spell is active by 33% and increases the resistances granted by your Mage Armor spell by 50%. | - | unmodeled | Mana Shield and Mage Armor are not modeled |
 | Improved Counterspell | Arcane | 2 | Your Counterspell also Silences the target for 4 sec. | - | unmodeled | silence |
 | Arcane Meditation | Arcane | 3 | Allows 50% of your Mana regeneration to continue while casting. | same | match |  |
-| Missile Barrage | Arcane | 1 | Gives your Arcane Blast spell a 40% chance, and your Fireball, Frostbolt, and Frostfire Bolt spells a 20% chance to reduce the channeled duration of your next Arcane M... | same | match |  |
+| Missile Barrage | Arcane | 2 | Gives your Arcane Blast spell a 40% chance, your Arcane Missile hits a 10% chance, and your Arcane Wrath, Fireball, Frostbolt, and Frostfire Bolt spells a 20% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec. | 20/5/10% a rank | mismatch, fixed | two ranks since 1.60.1.70425; Arcane Missile hits and Arcane Wrath feed it |
+| Arcane Wrath | Arcane | 1 | Launches a projectile of pure Arcane energy at the enemy target, causing 122 to 146 Arcane damage. This spell gains additional Spell Damage equal to 5% of your maximum Mana. | registered under the talent: 3.5 sec cast, 6 sec cooldown, coefficient 1.0, +5% of maximum mana as spell damage | match | new in 1.60.1.70425 (arcane_wrath.go) |
 | Presence of Mind | Arcane | 1 | When activated, your next Mage spell with a casting time less than 10 sec becomes an instant cast spell. | same | match |  |
 | Arcane Mind | Arcane | 5 | Increases your Intellect by 10% and increases the critical strike damage bonus of your Arcane spells by 100%. | same | match |  |
 | Arcane Instability | Arcane | 3 | Increases the damage done by your spells by 3% and your critical strike chance by 3%. | same | match |  |
 | Arcane Power | Arcane | 1 | For the next 15 sec, your spells deal 30% more damage while costing 30% more mana to cast. | same | match |  |
-| Wake of Fire | Fire | 2 | Reduces the cooldown of your Fire Blast spell by 2 sec. Killing a non-trivial target increases the critical strike chance of your next Fire Blast cast within 30 sec by... | Fire Blast cooldown -2 sec | match | the kill-triggered crit buff needs a target-death event |
+| Improved Fire Blast | Fire | 2 | Reduces the cooldown of your Fire Blast spell by 2 sec and increases its range by 15 yards. | Fire Blast cooldown -1 sec a rank | match | Wake of Fire's slot since 1.60.1.70425; range only otherwise |
 | Incineration | Fire | 3 | Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 6%. | same | match |  |
 | Improved Fireball | Fire | 5 | Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.5 sec. | same | match |  |
 | Ignite | Fire | 5 | Your critical strikes from Fire damage spells cause the target to burn for an additional 40% of your spell's damage over 4 sec. | same | match |  |
@@ -239,11 +263,11 @@ talent's maximum rank unless a note says otherwise.
 | Pyroblast | Fire | 1 | Hurls an immense fiery boulder that causes 101 to 131 Fire damage and an additional 44 Fire damage over 12 sec. | same | match |  |
 | Improved Scorch | Fire | 3 | Your Scorch spell has a 100% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% an... | 33/67/100% chance, 3% a stack to 5 stacks, 30 sec (was 33/66/100%) | mismatch, fixed | rank 2 was 66% |
 | Improved Fire Ward | Fire | 2 | Causes your Fire Ward to have a 20% chance to reflect Fire spells while active. | - | unmodeled | Fire Ward reflect |
-| Heating Up | Fire | 1 | Non-periodic critical strikes with Fireball, Frostfire Bolt, Fire Blast, and Scorch reduce the cast time of your next Pyroblast cast within 20 sec by 25%, stacking up ... | same | match |  |
+| Heating Up | Fire | 1 | Non-periodic critical strikes with Fireball, Frostfire Bolt, Fire Blast, and Scorch reduce the cast time of your next Pyroblast cast within 20 sec by 25%, stacking up to 3 times. Fire Blast grants an additional stack every time it deals damage. | same; a landed Fire Blast is one stack, a critical one two | match | the Fire Blast clause is 1.60.1.70425's |
 | Master of Elements | Fire | 3 | Your Fire and Frost critical strikes will refund 30% of their base mana cost. | same | match |  |
-| Critical Mass | Fire | 3 | Increases the critical strike chance of your Fire spells by 6%. | same | match |  |
+| Critical Mass | Fire | 5 | Increases the critical strike chance of your Fire spells by 10%. | 2% a rank | match | five ranks since 1.60.1.70425 |
 | Blast Wave | Fire | 1 | A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 154 to 184 Fire damage, and Dazing them for 50% reduced movement spe... | same | match |  |
-| Fire Power | Fire | 5 | Increases the damage done by your Fire spells by 10%. | same | match |  |
+| Fire Power | Fire | 3 | Increases the damage done by your Fire spells by 3% per your Fire effects on the target, up to a maximum increase of 12%. Effects which mix multiple schools of magic do not qualify. | 1% a rank per Fire effect on the target (Fireball, Pyroblast and Flamestrike dots, Ignite, Improved Scorch), four effects at most | mismatch, fixed | 1.60.1.70425 rework (fire_power.go); was a flat 2% a rank |
 | Combustion | Fire | 1 | When activated, this spell causes each of your Fire damage spell hits to increase your critical strike chance with Fire damage spells by 10%. This effect lasts until y... | same | match |  |
 | Frost Warding | Frost | 2 | Increases the Armor and resistance given by your Frost Armor and Ice Armor spells by 30%. In addition, gives your Frost Ward a 20% chance to reflect Frost spells and e... | - | unmodeled | armors and Frost Ward reflect |
 | Improved Frostbolt | Frost | 5 | Reduces the casting time of your Frostbolt spell by 0.5 sec. | same | match |  |
@@ -254,7 +278,7 @@ talent's maximum rank unless a note says otherwise.
 | Frostbite | Frost | 3 | Gives your Chill effects a 15% chance to Freeze the target for 5 sec. | same | match |  |
 | Piercing Ice | Frost | 3 | Increases the damage done by your Frost spells by 6%. | same | match |  |
 | Frost Channeling | Frost | 3 | Reduces the mana cost of your Frost spells by 15% and reduces the threat caused by your Frost spells by 30%. | 15% cost, 30% threat | match |  |
-| Ice Lance | Frost | 1 | Deals 28 to 32 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets. | x4 damage to Frozen targets (was x3) | mismatch, fixed | SpellEffect 1342606 (spell 1312002, effect 3) has base points 300, so +300% is x4 |
+| Ice Lance | Frost | 1 | Deals 28 to 32 Frost damage to an enemy target. Deals 200% increased damage to Frozen targets. | x3 against a Frozen target | mismatch, fixed | 1.60.1.70425: 200% (was 300%, x4) |
 | Improved Blizzard | Frost | 3 | Adds a Chill effect to your Blizzard spell. This effect lowers the target's movement speed by 40% for 1.5 sec. | chill 1.5 sec | match | the 15/25/40% slow value is not read by the engine; only the chill (Fingers of Frost, Frostbite) is |
 | Arctic Reach | Frost | 2 | Increases the range of your Frostbolt and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 20%. | - | unmodeled | range and radius |
 | Ice Block | Frost | 1 | You become encased in a block of ice, protecting you from all physical attacks and spells for 10 sec, but during that time you cannot attack, move, or cast spells. | - | unmodeled | defensive |
@@ -262,7 +286,7 @@ talent's maximum rank unless a note says otherwise.
 | Improved Cone of Cold | Frost | 3 | Increases the damage dealt by your Cone of Cold spell by 35%. | same | match |  |
 | Cold Snap | Frost | 1 | Finishes the remaining cooldown on all your other Frost spells. | same | match |  |
 | Fingers of Frost | Frost | 2 | Gives your Chill effects a 15% chance to grant you the Fingers of Frost effect, which treats your next 2 spells cast as if the target were Frozen. Lasts 15 sec. | same | match |  |
-| Winter's Chill | Frost | 5 | Gives your Frost damage spells a 100% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the... | 20% a rank chance, 2% crit a stack, stacks to the rank (was always 5 stacks) | mismatch, fixed | below 5/5 the debuff stacked past the rank; max rank unchanged |
+| Winter's Chill | Frost | 5 | Gives your Frost damage spells a 100% chance to apply the Winter's Chill effect, which increases the damage done by your Cone of Cold spell to the target by 40%, stacking up to 5 times. | 20% a rank chance, 5 stacks at every rank, +40% Cone of Cold damage a stack; no crit | mismatch, fixed | 1.60.1.70425 rework: the 2% Frost crit a stack is gone, the stacks feed Cone of Cold (cone_of_cold.go) |
 | Ice Barrier | Frost | 1 | Instantly shields you, absorbing 448 damage. Lasts 1 min. While the shield holds, your spellcasts will not be interrupted or delayed from taking damage. | same | match |  |
 
 ## Paladin
@@ -293,13 +317,13 @@ talent's maximum rank unless a note says otherwise.
 | Anticipation | Protection | 5 | Increases your Defense Skill by 20. | same | match |  |
 | Improved Seal of Fury | Protection | 1 | When Seal of Fury's shield is fully absorbed, restore 0 Mana, increased by 15% per level the attacker is above you, up to 45%. | 1% of max mana, x1.15 a level above, up to x1.45 | text-only | the text says "restore 0 Mana" (a template that did not fill); the engine uses a 1% base |
 | Improved Righteous Fury | Protection | 3 | While Righteous Fury is active, all damage taken is reduced by 6%. | same | match |  |
-| Shield Specialization | Protection | 3 | Increases the amount of damage absorbed by your shield by 30%, and gives your blocks a 100% chance to restore 6% of your maximum Mana. May only occur once every 3 sec. | 30% absorb, 100% to restore 6% max mana, 3 sec ICD | match |  |
+| Shield Specialization | Protection | 3 | Increases the amount of damage absorbed by your shield by 30%, and gives your blocks a 100% chance to restore 4% of your maximum Mana.  May only occur once every 3 sec. | 4% of maximum mana (was 6%) | mismatch, fixed | 1.60.1.70425 |
 | Sacred Duty | Protection | 2 | Increases your total Stamina by 4% and reduces the cooldown of your Divine Shield, Divine Protection, and Templar's Bulwark spells by 60 sec. | 4% Stamina | match | the 60 sec Divine Shield / Divine Protection / Templar's Bulwark cooldown cut is not modeled |
 | Swift Judgement | Protection | 1 | Finishes the remaining cooldown on your Judgement ability and reduces the Mana cost of your next Judgement by 100%. | same | match |  |
 | One-Handed Weapon Specialization | Protection | 3 | Increases the damage you deal with one-handed melee weapons by 10%. | same | match |  |
 | Improved Hammer of Justice | Protection | 3 | Decreases the cooldown of your Hammer of Justice spell by 15 sec. | - | unmodeled | Hammer of Justice cooldown |
 | Templar's Bulwark | Protection | 1 | When activated, this ability grants you an absorb shield equal to 100% of your maximum health for 8 sec. Applies Forbearance for 1 min. Cannot be cast while Forbearanc... | same | match |  |
-| Reckoning | Protection | 5 | Gives you a 40% chance to gain an extra attack after Blocking a melee attack and a 100% chance to gain an extra attack after being the victim of a non-periodic critica... | same | match |  |
+| Reckoning | Protection | 5 | Gives you a 40% chance after Blocking and a 100% chance after receiving a non-periodic critical strike to gain an extra attack. Stores up to 4 extra attacks. Cannot occur from Blocks more than once every 1.5 sec. | same chances | match | the engine grants the extra attack at once, so the four-attack store is never reached; the 1.5 sec limit is applied to both triggers (text: blocks only) |
 | Iron Creed | Protection | 5 | Increases the threat generated by your Holy Strike ability by 25%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 10% for 6 sec. | 25% Holy Strike threat, 10% damage taken for 6 sec | match | needs the Righteous Fury option |
 | Holy Shield | Protection | 1 | Increases chance to block by 30% for 10 sec, and deals 110 Holy damage for each attack blocked while active. Damage caused by Holy Shield causes 20% additional threat.... | same | match |  |
 | Deflection | Retribution | 5 | Increases your Parry chance by 5%. | same | match |  |
@@ -316,7 +340,7 @@ talent's maximum rank unless a note says otherwise.
 | Two-Handed Weapon Specialization | Retribution | 3 | Increases the damage you deal with two-handed melee weapons by 6%. | same | match |  |
 | Vengeance | Retribution | 3 | Increases your Physical and Holy damage dealt by 3% for 30 sec after landing a non-periodic critical strike. Stacks up to 3 times. | 3% a stack, 3 stacks, 30 sec = 9% (was 9% flat for 8 sec, no stacks, at 3/3 from a 3%-a-rank table) | mismatch, fixed | 1% a rank a stack at 1/2/3: 1/2/3% after one crit; the old table gave 3% a rank on one application |
 | Repentance | Retribution | 1 | Puts the enemy target in a state of meditation, incapacitating them for up to 6 sec. Any damage caused will awaken the target. Only works against Humanoids. | - | unmodeled | crowd control |
-| Champion of the Light | Retribution | 3 | Increases your spell damage by up to 60% of your Intellect. | same | match |  |
+| Champion of the Light | Retribution | 3 | Increases your spell damage by up to 30% of your Intellect. | 10/20/30% | mismatch, fixed | 1.60.1.70425 (was 20/40/60%) |
 | Instrument of Law | Retribution | 2 | Reduces the cast time of your Hammer of Wrath by 1.0 sec, and reduces all threat you generate by 20% while Righteous Fury is not active. | Hammer of Wrath cast -1.0 sec | match | the 20% threat cut without Righteous Fury is not modeled |
 | Twist of Light | Retribution | 1 | Reduces the Mana cost of your Seal spells by 20%, and when you replace your Seal of Command, Seal of Righteousness, Seal of Fury, or Seal of Justice with a different S... | same | match |  |
 
@@ -324,7 +348,7 @@ talent's maximum rank unless a note says otherwise.
 
 | Talent | Tree | Max | Forever text at max rank | Engine at max rank | Verdict | Note |
 |---|---|---|---|---|---|---|
-| Power in Light | Discipline | 5 | Your Smite and Penance spells deal 10% increased damage to targets afflicted with your Holy Fire. | - | unmodeled | Smite/Penance bonus against Holy Fire targets |
+| Power in Light | Discipline | 5 | Your Smite and Penance spells deal 10% increased damage to targets afflicted with your Holy Fire or Shadow Word: Pain. | - | unmodeled | the Smite/Penance loop is not a damage spec the sim ranks |
 | Wand Specialization | Discipline | 2 | Increases your damage with Wands by 25%. | 25% wand damage | match |  |
 | Twin Disciplines | Discipline | 5 | Increases the damage and healing of your instant cast spells by 5%. | same | match |  |
 | Silent Resolve | Discipline | 3 | Reduces the threat generated by your Holy spells by 30% and reduces the duration of Stun, Fear, and Silence effects inflicted on you by 15%. | 30% less Holy threat (was 12% less of all threat) | mismatch, fixed | vanilla 4% a rank on all spells; stun/fear/silence duration half not modeled |
@@ -335,12 +359,12 @@ talent's maximum rank unless a note says otherwise.
 | Inner Focus | Discipline | 1 | When activated, reduces the Mana cost of your next spell by 100% and increases its critical effect chance by 25% if it is a non-periodic spell and capable of a critica... | same | match |  |
 | Meditation | Discipline | 3 | Allows 50% of your Mana regeneration to continue while casting. | same | match |  |
 | Improved Inner Fire | Discipline | 3 | Increases the Armor bonus of your Inner Fire spell by 45% and increases its total charges by 12. | armor +45% | match | the +4/+8/+12 charges are not modeled |
-| Mental Strength | Discipline | 5 | Increases your total Intellect by 15%. | same | match |  |
+| Mental Strength | Discipline | 5 | Increases your total Intellect by 10%. | 2% a rank | mismatch, fixed | 1.60.1.70425 (was 15%, 3% a rank) |
 | Soul Warding | Discipline | 1 | Reduces the cooldown on your Power Word: Shield spell by 4 sec and reduces its mana cost by 15%. | same | match |  |
 | Improved Mana Burn | Discipline | 2 | Reduces the casting time of your Mana Burn spell by 1.0 sec. | - | unmodeled | Mana Burn not registered |
 | Penance | Discipline | 1 | Launches a volley of holy light at the target, causing 45 Holy damage to an enemy, or 134 healing to an ally, instantly and every 1 sec for 2 sec. | spell row | text-only | checked by the spell-row conformance report |
 | Renewed Hope | Discipline | 5 | Your heals from Flash Heal, Binding Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 10% increased critical strike chance when cast on targets with Weakened Sou... | 10% crit on Weakened Soul targets, -5 sec Weakened Soul | match |  |
-| Divine Aegis | Discipline | 3 | Your critical heals create a protective shield on the target, absorbing 15% of the amount healed. Lasts 12 sec. | same | match |  |
+| Divine Aegis | Discipline | 3 | Your non-periodic critical heals create a protective shield on the target, absorbing 15% of the amount healed. Shields up to (20 * 60) damage and lasts 12 sec. | 5% a rank, capped at 20 a level | match | the cap is 1.60.1.70425's |
 | Power Infusion | Discipline | 1 | Infuses the target with power, increasing their spell damage and healing done by 20% for 15 sec. | same | match |  |
 | Twilight Focus | Holy | 3 | Gives you a 70% chance to avoid interruption caused by damage while casting any spell. | - | unmodeled | pushback avoidance |
 | Improved Renew | Holy | 3 | Increases the amount healed by your Renew spell by 15%. | same | match |  |
@@ -362,14 +386,13 @@ talent's maximum rank unless a note says otherwise.
 | Shadow Focus | Shadow | 5 | Improves your chance to hit with Shadow spells by 5%. | 5% Shadow hit (was 10% on every priest spell) | mismatch, fixed | 2% a rank on every priest spell |
 | Blackout | Shadow | 5 | Gives your Shadow damage spells a 10% chance to stun the target for 3 sec. | - | unmodeled | stun chance |
 | Spirit Tap | Shadow | 5 | Gives you a 100% chance to increase your Spirit by 100% for 15 sec after killing a non-trivial target or when an enemy afflicted by your Vampiric Embrace dies. For the... | - | unmodeled | the aura is registered but nothing triggers it: it needs a target-death event |
-| Shadow Affinity | Shadow | 3 | Reduces the threat generated by your Shadow spells by 30%. | 30% less Shadow threat (was 24% on every priest spell) | mismatch, fixed | 8% a rank on every priest spell |
 | Improved Shadow Word: Pain | Shadow | 2 | Increases the duration of your Shadow Word: Pain spell by 6 sec. | same | match |  |
 | Shadow Reach | Shadow | 2 | Increases the range of your offensive Shadow spells by 20%. | - | unmodeled | range |
-| Improved Mind Blast | Shadow | 5 | Reduces the cooldown of your Mind Blast spell by 2.5 sec. | same | match |  |
+| Improved Mind Blast | Shadow | 5 | Reduces the cooldown of your Mind Blast spell by 2.5 sec. | same | match | moved to tier 1 (Shadow Affinity's slot) in 1.60.1.70425; the tier-2 node is gone |
 | Improved Psychic Scream | Shadow | 2 | Reduces the cooldown of your Psychic Scream spell by 4 sec. | - | unmodeled | cooldown of a spell not registered |
 | Mind Flay | Shadow | 1 | Assault the target's mind with Shadow energy, causing 63 Shadow damage over 3 sec and slowing their movement speed by 50%. | same | match |  |
-| Improved Mind Flay | Shadow | 2 | Your Mind Flay now deals 20% more damage, gains 10 yards increased range, but slows the target's movement speed by 20%. | Mind Flay +20% damage | match | range and slow not modeled |
-| Improved Fade | Shadow | 2 | Decreases the cooldown of your Fade ability by 6 sec. | - | unmodeled | cooldown of a spell not registered |
+| Improved Mind Flay | Shadow | 2 | Each instance of damage of Mind Flay deals 20% more damage than its previous instance of damage. | tick n is (1 + 10% a rank)^(n-1) of the snapshot | mismatch, fixed | 1.60.1.70425 rework (mind_flay.go); was a flat +10% a rank |
+| Dark Inspiration | Shadow | 5 | Your Mind Blast and fully channeled Mind Flay causes Dark Inspiration, increasing yours and your party's Spirit by 15% for 10 sec. | 3% a rank Spirit on the priest for 10 sec, from a landed Mind Blast or the third Mind Flay tick | match | Improved Fade's slot since 1.60.1.70425; the party share is not modeled |
 | Vampiric Embrace | Shadow | 1 | Afflicts your target with Shadow energy that causes all party members to be healed for 20% of any Shadow spell damage you deal for 30 sec. | 20% of Shadow damage to the party | match |  |
 | Shadow Weaving | Shadow | 3 | Your Shadow damage spells have a 100% chance to increase the Shadow damage you deal by 2% for 15 sec, stacking up to 5 times. | same | match |  |
 | Silence | Shadow | 1 | Silences the target, preventing them from casting spells for 5 sec and interrupting their spellcasts for 3 sec. | - | unmodeled | interrupt |
@@ -444,18 +467,17 @@ talent's maximum rank unless a note says otherwise.
 | Concussion | Elemental | 5 | Increases the damage done by your Lightning Bolt, Chain Lightning, and Earth Shock spells by 5%. | same | match |  |
 | Elemental Warding | Elemental | 3 | Reduces damage taken from Fire, Frost, and Nature effects by 10%. | - | unmodeled | defensive |
 | Reverberation | Elemental | 5 | Reduces the cooldown of your Shock spells by 1.0 sec. | same | match |  |
-| Call of Flame | Elemental | 3 | Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 15%. | same | match |  |
+| Call of Flame | Elemental | 3 | Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 15%, as well as increases the duration of your Flame Shock spell by 9 sec. | 5% a rank; Flame Shock +1 tick (3 sec) a rank | match | the duration clause is 1.60.1.70425's |
 | Elemental Devastation | Elemental | 3 | Your offensive spell critical strikes will increase your chance to get a critical strike with melee attacks by 9% for 10 sec. | same | match |  |
 | Elemental Focus | Elemental | 1 | Gives you a 10% chance to enter a Clearcasting state after casting any Fire, Frost, or Nature damage spell. The Clearcasting state reduces the mana cost of your next d... | same | match |  |
 | Elemental Alacrity | Elemental | 3 | Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by 0.50 sec. | same | match |  |
-| Improved Fire Nova | Elemental | 2 | Increases the damage done by your Fire Nova spell by 20% and reduces its cooldown by 4 sec. | +20% damage, -4 sec cooldown (was -2 sec) | mismatch, fixed | the engine read the rank-2 text as the total and halved it |
+| Trial by Fire | Elemental | 2 | Increases the damage done by your Fire Nova spell by 20% and reduces its cooldown by 4 sec, and increases the duration of your Magma Totem by 20 sec. | 10% and 2 sec a rank; Magma Totem +10 sec a rank | match | Improved Fire Nova's slot since 1.60.1.70425 |
 | Eye of the Storm | Elemental | 3 | Reduces the pushback suffered from damaging attacks while casting Lightning Bolt, Chain Lightning, and Lava Burst by 70%. | same | match |  |
-| Call of Thunder | Elemental | 1 | Increases the critical strike chance of your Lightning Bolt and Chain Lightning spells by 3%. | same | match |  |
-| Elemental Reach | Elemental | 2 | Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 6 yards, and increases the range of your Flame Shock spell by 15 yards. | - | unmodeled | range only |
+| Elemental Reach | Elemental | 2 | Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 6 yards and reduces the cooldown of Totemic Projection by 20 sec. | - | unmodeled | range, and a totem-move cooldown the sim never casts |
 | Lightning Overload | Elemental | 3 | Gives your Lightning Bolt and Chain Lightning spells a 10% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and ... | same | match |  |
 | Earthbound | Elemental | 1 | Your Earthbind Totem Immobilizes nearby targets for 5 sec when cast. | - | unmodeled | crowd control |
 | Elemental Fury | Elemental | 5 | Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 100%. | +100% crit damage bonus | match |  |
-| Lava Burst | Elemental | 1 | You hurl molten lava at the target, dealing 150 to 192 Fire damage. If your Flame Shock is on the target, Lava Burst deals 20% increased damage. | Lava Burst +20% with Flame Shock | match | spell row |
+| Lava Burst | Elemental | 1 | You hurl molten lava at the target, dealing 114 to 145 Fire damage. If your Flame Shock is on the target, Lava Burst deals 20% increased damage. | spellconst rows (regenerated for 1.60.1.70425) | match | moved to tier 4 in 1.60.1.70425 |
 | Earth's Grasp | Enhancement | 2 | Increases the health of your Stoneclaw Totem by 50% and the radius of your Earthbind Totem by 20%. | - | unmodeled | totem health and radius |
 | Thundering Strikes | Enhancement | 5 | Improves your chance to get a critical strike with all spells and attacks by 5%. | same | match |  |
 | Ancestral Knowledge | Enhancement | 5 | Increases your Intellect by 10%. | +10% Intellect (was +5% maximum Mana) | mismatch, fixed | 1% max Mana a rank before |
@@ -482,7 +504,7 @@ talent's maximum rank unless a note says otherwise.
 | Improved Reincarnation | Restoration | 2 | Reduces the cooldown of your Reincarnation spell by 20 min, increases your maximum health by 4%, and increases the amount of health and Mana you reincarnate with by an... | - | unmodeled | no death in the sim |
 | Ancestral Healing | Restoration | 3 | Increases your target's armor value by 25% for 15 sec after getting a critical effect from one of your healing spells. | - | unmodeled | armor on healed target |
 | Healing Focus | Restoration | 3 | Gives you a 70% chance to avoid interruption caused by damage while casting any healing spell. | - | unmodeled | pushback avoidance |
-| Water Shield | Restoration | 1 | The caster is surrounded by 3 globes of water. When a spell, melee, or ranged attack hits the caster or when one of the caster's healing spells gets a critical result,... | spell row | text-only | the text is a template; checked by the spell-row conformance report |
+| Water Shield | Restoration | 1 | The caster is surrounded by 3 globes of water. When a spell, melee, or ranged attack hits the caster or when one of the caster's spells gets a critical result, 2% of maximum mana is restored to the caster, expending one water globe. Only one globe will activate every few seconds.  Lasts 10 min. | a critical heal or a critical damage spell spends a globe | match | 1.60.1.70425 widened the crit clause from healing spells to spells |
 | Tidal Mastery | Restoration | 5 | Increases the critical effect chance of your healing spells by 5%. | same | match |  |
 | Restorative Totems | Restoration | 5 | Increases the effect of your Mana Spring Totem by 25% and increases the effect of your Healing Stream Totem by 50%. | same | match |  |
 | Mana Tide Totem | Restoration | 1 | Summons a Mana Tide Totem with 5 health at the feet of the caster for 12 sec that restores 88 mana every 3 seconds to group members within 30 yards. | spell row | text-only | checked by the spell-row conformance report |
@@ -498,7 +520,7 @@ talent's maximum rank unless a note says otherwise.
 | Improved Life Tap | Affliction | 2 | Increases the amount of Mana awarded by your Life Tap spell by 20%. | same | match |  |
 | Suppression | Affliction | 5 | Improves your chance to hit by 5% and reduces all threat you generate by 20%. | same | match |  |
 | Improved Corruption | Affliction | 5 | Reduces the casting time of your Corruption spell by 2 sec and increases the damage it deals by 10%. | -2 sec cast, +10% damage (was cast time only) | mismatch, fixed | damage half was unread |
-| Malediction | Affliction | 5 | Increases all periodic damage done by your Warlock spells by 5%. | same | match |  |
+| Grim Reach | Affliction | 2 | Increases the range of your Affliction spells by 20%. | - | unmodeled | Malediction's slot since 1.60.1.70425; range only |
 | Soul Harvest | Affliction | 2 | Killing a non-trivial target afflicted by your Drain Soul increases your Mana regeneration by 100% for 10 sec and allows 100% of normal Mana regeneration to continue w... | - | unmodeled | kill-triggered regen needs a target-death event |
 | Improved Drains | Affliction | 3 | Increases health drained or damage done by your Drain Life, Drain Soul, and Wrack spells by 20%. | same | match |  |
 | Improved Bane of Agony | Affliction | 2 | Increases the damage done by your Bane of Agony by 10%. | same | match |  |
@@ -510,7 +532,7 @@ talent's maximum rank unless a note says otherwise.
 | Curse of Exhaustion | Affliction | 1 | Reduces the target's movement speed by 30% for 12 sec. Only one Curse per Warlock can be active on any one target. | - | unmodeled | movement speed |
 | Siphon Life | Affliction | 1 | Transfers 11 health from the target to the caster every 3 sec. Lasts 30 sec. | same | match |  |
 | Soul Siphon | Affliction | 3 | Increases the damage done or health drained by your Drain Life, Drain Soul, and Wrack spells by 12% per each of your other Affliction effects active on the target, up ... | 12% per effect, up to 36% | match |  |
-| Shadow Mastery | Affliction | 5 | Increases the damage dealt or life drained by your Shadow spells by 5%. | +5% Shadow damage (was +10%) | mismatch, fixed | 2% a rank before. Scope fixed from the client rows: the two effects of spell 18271 carry class masks (524435,0,0) and (17418,262147,0), which cover Shadow Bolt, Corruption, Curse of Agony, Death Coil, Drain Life, Drain Soul and Siphon Life. The engine withheld the multiplier from four of them (vanilla's exclusions), modded base damage on three, missed Drain Soul and double-applied Siphon Life; all seven now take +1% a rank as one multiplier, and spells outside the masks (Shadowburn, Curse of Doom, Wrack) no longer do |
+| Shadow Mastery | Affliction | 5 | Increases the damage dealt or life drained by your Shadow spells by 10%. | 2% a rank | mismatch, fixed | 1.60.1.70425 (was 5%, 1% a rank) |
 | Wrack | Affliction | 1 | Tears the target apart from within, inflicting 36 Shadow damage every 1 sec and increasing the damage they take from your other Shadow damage over time effects by 10% ... | same | match |  |
 | Improved Health Funnel | Demonology | 2 | Increases the amount of health transferred by your Health Funnel spell by 40%, reduces its health cost by 30%, and reduces all threat your Health Funnel generates by 1... | - | unmodeled | Health Funnel not registered |
 | Improved Imp | Demonology | 3 | Increases the damage of your Imp's Firebolt spell by 30% and the effect of its Fire Shield spell by 30%. | Firebolt +30% | match | the Fire Shield half is not modeled |

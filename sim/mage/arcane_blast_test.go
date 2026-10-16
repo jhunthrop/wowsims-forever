@@ -83,8 +83,7 @@ func TestArcaneBlastCostsFifteenPercentOfBaseManaAndRampsPerStack(t *testing.T) 
 		t.Errorf("Arcane Blast Cost.Multiplier at the stack cap = %d, want %d", got, want)
 	}
 
-	// Letting the buff drop (any other damage spell, or its 8 s) resets
-	// the ramp with the stacks.
+	// Letting the buff drop (its 15 s) resets the ramp with the stacks.
 	built.ArcaneBlastAura.Deactivate(sim)
 	if got, want := arcaneBlast.Cost.Multiplier, int32(100); got != want {
 		t.Errorf("Arcane Blast Cost.Multiplier after the buff dropped = %d, want %d", got, want)
@@ -103,7 +102,7 @@ func TestArcaneBlastCostsFifteenPercentOfBaseManaAndRampsPerStack(t *testing.T) 
 func TestArcaneBlastAndMissileBarrageCastAndDealDamage(t *testing.T) {
 	sim, built := newArcaneBlastTestMage(t)
 
-	if !built.Talents.MissileBarrage {
+	if built.Talents.MissileBarrage == 0 {
 		t.Fatal("ForeverFrostTalents is expected to spend its one Arcane point in Missile Barrage")
 	}
 	if built.MissileBarrageAura == nil {

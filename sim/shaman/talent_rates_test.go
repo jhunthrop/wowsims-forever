@@ -22,9 +22,12 @@ func TestShamanTalentRatesAreForevers(t *testing.T) {
 	near("Toughness 5/5", toughnessStaminaPerRank*5, 0.10)
 	near("Flurry 1/5", flurryAttackSpeed(1), 1.05)
 	near("Flurry 5/5", flurryAttackSpeed(5), 1.25)
-	near("Improved Fire Nova 2/2 damage", improvedFireNovaDamagePerPoint*2, 0.20)
-	if got := improvedFireNovaCooldownPerPoint * 2; got != 4*time.Second {
-		t.Errorf("Improved Fire Nova 2/2 cooldown cut = %v, want 4s", got)
+	near("Trial by Fire 2/2 damage", trialByFireDamagePerPoint*2, 0.20)
+	if got := trialByFireCooldownPerPoint * 2; got != 4*time.Second {
+		t.Errorf("Trial by Fire 2/2 cooldown cut = %v, want 4s", got)
+	}
+	if got := trialByFireMagmaDurationPerPoint * 2; got != 20*time.Second {
+		t.Errorf("Trial by Fire 2/2 Magma Totem duration gain = %v, want 20s", got)
 	}
 	for rank, want := range []float64{1, 1.07, 1.13, 1.20} {
 		near("Elemental Weapons Rockbiter", elementalWeaponsRockbiterBonus[rank], want)

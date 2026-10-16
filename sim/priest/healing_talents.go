@@ -14,7 +14,7 @@ import (
 // Inspiration 8/17/25), so those are tables indexed by rank. A Forever
 // patch that changes a number changes a line here and nothing else.
 const (
-	mentalStrengthIntellectPerRank    = 0.03
+	mentalStrengthIntellectPerRank    = 0.02 // "Increases your total Intellect by 2%" a rank (1.60.1.70425; 3% before)
 	spiritualGuidanceHealingPerSpirit = 0.05
 	improvedRenewHealingPerRank       = 0.05
 	improvedHealingCostPctPerRank     = -5
@@ -22,6 +22,7 @@ const (
 	soulWardingCostPct                = -15
 	soulWardingCooldown               = -4 * time.Second
 	divineAegisAbsorbPerRank          = 0.05
+	divineAegisMaxAbsorbPerLevel      = 20.0 // "Shields up to (20 * 60) damage" (1.60.1.70425)
 	divineAegisSpellID                = 431624
 	divineAegisDuration               = 12 * time.Second
 	renewedHopeCritPerRank            = 2.0 // percentage points of crit
@@ -127,10 +128,10 @@ func (priest *Priest) shortenWeakenedSoul(sim *core.Simulation, spell *core.Spel
 	weakened.UpdateExpires(sim, weakened.ExpiresAt()-cut)
 }
 
-// applyDivineAegis turns the priest's critical heals into an absorb on the
-// target. Assumption: the client states no stacking rule, so a second
-// critical heal within the 12 s adds to the shield and renews it, which is
-// how the talent plays in later versions of the game.
+// applyDivineAegis turns the priest's non-periodic critical heals into an
+// absorb on the target, capped at 20 a level (1.60.1.70425's "(20 * 60)").
+// A second critical heal within the 12 s adds to the shield up to that cap
+// and renews it.
 func (priest *Priest) applyDivineAegis() {
 	rank := rankOf("divine_aegis", priest.Talents.DivineAegis)
 	if rank == 0 {
@@ -159,8 +160,9 @@ func (priest *Priest) applyDivineAegis() {
 			if !result.DidCrit() {
 				return
 			}
+			// "Shields up to (20 * 60) damage": 20 a level.
 			shield := aegis.Shield(result.Target)
-			shield.Apply(sim, shield.Remaining()+result.Damage*absorbShare)
+			shield.Apply(sim, min(shield.Remaining()+result.Damage*absorbShare, divineAegisMaxAbsorbPerLevel*float64(priest.Level)))
 		},
 	})
 }

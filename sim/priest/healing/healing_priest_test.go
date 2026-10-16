@@ -18,7 +18,7 @@ func init() {
 
 // The two reference builds, each a valid level-60 spend of the live trees
 // (51 points; tier and prerequisite rules checked against
-// data/builds/1.60.1.70009/talents/priest.json). Holy puts 35 points in
+// data/builds/1.60.1.70425/talents/priest.json). Holy puts 35 points in
 // the Holy tree and 16 in Discipline (Twin Disciplines, Improved Power
 // Word: Shield, Silent Resolve, Mental Agility, Inner Focus, Meditation);
 // Discipline puts 33 in Discipline (down to Penance, Renewed Hope, Divine
@@ -26,8 +26,8 @@ func init() {
 // Specialization, Divine Fury, Inspiration, Improved Healing). The
 // conformance preset (sim/conformance/presets.go) carries HolyTalents.
 const (
-	HolyTalents = "0052030312-33505003030121531"
-	DiscTalents = "005203031305101531-0350500302"
+	HolyTalents = "005200031320000000-33505003030121531-00000000000000000"
+	DiscTalents = "005205031330011531-03505003020000000-00000000000000000"
 )
 
 // raidHealerStats stands in for gear, which the engine's item database does

@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70425",
   "class_id": 9,
   "class_slug": "warlock",
   "trees": [
@@ -97,36 +97,24 @@
         },
         {
           "id": 105923,
-          "name": "Malediction",
-          "icon": "spell_shadow_curseofachimonde",
-          "max_rank": 5,
+          "name": "Grim Reach",
+          "icon": "spell_shadow_callofbone",
+          "max_rank": 2,
           "tier": 1,
           "column": 0,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 1225177,
-              "description": "Increases all periodic damage done by your Warlock spells by 1%."
+              "spell_id": 18218,
+              "description": "Increases the range of your Affliction spells by 10%."
             },
             {
-              "spell_id": 1225177,
-              "description": "Increases all periodic damage done by your Warlock spells by 2%."
-            },
-            {
-              "spell_id": 1225177,
-              "description": "Increases all periodic damage done by your Warlock spells by 3%."
-            },
-            {
-              "spell_id": 1225177,
-              "description": "Increases all periodic damage done by your Warlock spells by 4%."
-            },
-            {
-              "spell_id": 1225177,
-              "description": "Increases all periodic damage done by your Warlock spells by 5%."
+              "spell_id": 18218,
+              "description": "Increases the range of your Affliction spells by 20%."
             }
           ],
-          "spell_id": 1225177
+          "spell_id": 18218
         },
         {
           "id": 105922,
@@ -232,7 +220,7 @@
           "ranks": [
             {
               "spell_id": 18288,
-              "description": "Increases the effect of your next Curse of Weakness or Bane of Agony by 50%, or your next Curse of Exhaustion by 20%.  Lasts 30 sec."
+              "description": "Increases the effect of your next Curse of Weakness or Bane of Agony by 50%, or your next Curse of Exhaustion by 50%.  Lasts 30 sec."
             }
           ],
           "spell_id": 18288
@@ -387,15 +375,7 @@
           "ranks": [
             {
               "spell_id": 18271,
-              "description": "Increases the damage dealt or life drained by your Shadow spells by 1%."
-            },
-            {
-              "spell_id": 18271,
               "description": "Increases the damage dealt or life drained by your Shadow spells by 2%."
-            },
-            {
-              "spell_id": 18271,
-              "description": "Increases the damage dealt or life drained by your Shadow spells by 3%."
             },
             {
               "spell_id": 18271,
@@ -403,7 +383,15 @@
             },
             {
               "spell_id": 18271,
-              "description": "Increases the damage dealt or life drained by your Shadow spells by 5%."
+              "description": "Increases the damage dealt or life drained by your Shadow spells by 6%."
+            },
+            {
+              "spell_id": 18271,
+              "description": "Increases the damage dealt or life drained by your Shadow spells by 8%."
+            },
+            {
+              "spell_id": 18271,
+              "description": "Increases the damage dealt or life drained by your Shadow spells by 10%."
             }
           ],
           "spell_id": 18271
@@ -751,15 +739,15 @@
           "ranks": [
             {
               "spell_id": 1293695,
-              "description": "Your Searing Pain generates 17% less threat and brands the target for 10 sec. Your pet's next 2 attacks against the target generate high threat and deal ((((60 - 26) * 1.5) + 14 + (0.078 * ((Shadow spell power)))) * (1 * 1 * 1)) to ((((60 - 26) * 1.5) + 17 + (0.078 * ((Shadow spell power)))) * (1 * 1 * 1)) Fire or Shadow damage based on the pet."
+              "description": "Your Searing Pain generates 17% less threat and brands the target for 10 sec. Your pet's next 2 attacks against the target deal ((((60 - 26) * 1.5) + 14 + (0.078 * ((Shadow spell power)))) * (1 * 1 * 1)) to ((((60 - 26) * 1.5) + 17 + (0.078 * ((Shadow spell power)))) * (1 * 1 * 1)) Fire or Shadow damage based on the pet. If Shadow damage is dealt, it has high threat."
             },
             {
               "spell_id": 1293695,
-              "description": "Your Searing Pain generates 33% less threat and brands the target for 10 sec. Your pet's next 4 attacks against the target generate high threat and deal ((((60 - 26) * 1.5) + 14 + (0.078 * ((Shadow spell power)))) * (1 * 1 * 1)) to ((((60 - 26) * 1.5) + 17 + (0.078 * ((Shadow spell power)))) * (1 * 1 * 1)) Fire or Shadow damage based on the pet."
+              "description": "Your Searing Pain generates 33% less threat and brands the target for 10 sec. Your pet's next 4 attacks against the target deal ((((60 - 26) * 1.5) + 14 + (0.078 * ((Shadow spell power)))) * (1 * 1 * 1)) to ((((60 - 26) * 1.5) + 17 + (0.078 * ((Shadow spell power)))) * (1 * 1 * 1)) Fire or Shadow damage based on the pet. If Shadow damage is dealt, it has high threat."
             },
             {
               "spell_id": 1293695,
-              "description": "Your Searing Pain generates 50% less threat and brands the target for 10 sec. Your pet's next 6 attacks against the target generate high threat and deal ((((60 - 26) * 1.5) + 14 + (0.078 * ((Shadow spell power)))) * (1 * 1 * 1)) to ((((60 - 26) * 1.5) + 17 + (0.078 * ((Shadow spell power)))) * (1 * 1 * 1)) Fire or Shadow damage based on the pet."
+              "description": "Your Searing Pain generates 50% less threat and brands the target for 10 sec. Your pet's next 6 attacks against the target deal ((((60 - 26) * 1.5) + 14 + (0.078 * ((Shadow spell power)))) * (1 * 1 * 1)) to ((((60 - 26) * 1.5) + 17 + (0.078 * ((Shadow spell power)))) * (1 * 1 * 1)) Fire or Shadow damage based on the pet. If Shadow damage is dealt, it has high threat."
             }
           ],
           "spell_id": 1293695
@@ -902,11 +890,11 @@
           "ranks": [
             {
               "spell_id": 17917,
-              "description": "Increases the range of your damaging spells by 10%."
+              "description": "Increases the range of your Destruction spells by 10%."
             },
             {
               "spell_id": 17917,
-              "description": "Increases the range of your damaging spells by 20%."
+              "description": "Increases the range of your Destruction spells by 20%."
             }
           ],
           "spell_id": 17917

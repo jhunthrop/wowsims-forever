@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70009",
+  "build": "1.60.1.70425",
   "class_id": 3,
   "class_slug": "hunter",
   "trees": [
@@ -278,7 +278,7 @@
           "ranks": [
             {
               "spell_id": 1293241,
-              "description": "Command a hawk to dive-bomb your targeted enemy, dealing [32 / Ferocity: 48 / Unleashed Fury: 38 + (Ranged Attack Power * (0.05))] Physical damage and continuing its assault for 18 sec. Only 2 hawks can be active at once. Summon Hawk shares its cooldown with Arcane Shot."
+              "description": "Command a hawk to dive-bomb your targeted enemy, dealing [32 / Ferocity: 48 / Unleashed Fury: 52 + (Ranged Attack Power * (0.05))] Physical damage and continuing its assault for 18 sec. Only 2 hawks can be active at once. Summon Hawk shares its cooldown with Arcane Shot."
             }
           ],
           "spell_id": 1293241
@@ -666,7 +666,7 @@
           "ranks": [
             {
               "spell_id": 1299346,
-              "description": "Increases the Ranged Attack Power of party members within 45 yds by 30."
+              "description": "Increases the Ranged Attack Power of party or raid members within 45 yds by 30."
             }
           ],
           "spell_id": 1299346
@@ -716,11 +716,11 @@
           "ranks": [
             {
               "spell_id": 1223987,
-              "description": "Hitting a target with your Serpent Sting ability grants you 25% and consuming Rapid Killing grants you 50% of your Mana regeneration while casting for the next 15 sec."
+              "description": "Afflicting a target with Serpent Sting allows 25% of your Mana Regeneration to continue while casting for 15 sec, increased to 50% when Rapid Killing is consumed."
             },
             {
               "spell_id": 1223987,
-              "description": "Hitting a target with your Serpent Sting ability grants you 50% and consuming Rapid Killing grants you 100% of your Mana regeneration while casting for the next 15 sec."
+              "description": "Afflicting a target with Serpent Sting allows 50% of your Mana Regeneration to continue while casting for 15 sec, increased to 100% when Rapid Killing is consumed."
             }
           ],
           "spell_id": 1223987
@@ -1100,23 +1100,23 @@
           "ranks": [
             {
               "spell_id": 1310627,
-              "description": "Increases your melee critical strike damage by 6% and your Off Hand weapon damage by 10%."
+              "description": "Increases your melee ability critical strike damage by 6% and your Off Hand weapon damage by 10%."
             },
             {
               "spell_id": 1310627,
-              "description": "Increases your melee critical strike damage by 12% and your Off Hand weapon damage by 20%."
+              "description": "Increases your melee ability critical strike damage by 12% and your Off Hand weapon damage by 20%."
             },
             {
               "spell_id": 1310627,
-              "description": "Increases your melee critical strike damage by 18% and your Off Hand weapon damage by 30%."
+              "description": "Increases your melee ability critical strike damage by 18% and your Off Hand weapon damage by 30%."
             },
             {
               "spell_id": 1310627,
-              "description": "Increases your melee critical strike damage by 24% and your Off Hand weapon damage by 40%."
+              "description": "Increases your melee ability critical strike damage by 24% and your Off Hand weapon damage by 40%."
             },
             {
               "spell_id": 1310627,
-              "description": "Increases your melee critical strike damage by 30% and your Off Hand weapon damage by 50%."
+              "description": "Increases your melee ability critical strike damage by 30% and your Off Hand weapon damage by 50%."
             }
           ],
           "spell_id": 1310627
@@ -1150,11 +1150,11 @@
           "ranks": [
             {
               "spell_id": 440529,
-              "description": "Reduces the mana cost of your Trap abilities and melee abilities by 30%. In addition, your critical strikes have a 30% chance to allow 50% of your Mana regeneration to continue while casting for 30 sec."
+              "description": "Reduces the Mana cost of your Trap and melee abilities by 30%, and grants your melee and ranged ability Critical Strikes a 50% chance to allow 50% of your Mana Regeneration to continue while casting for 30 sec."
             },
             {
               "spell_id": 440529,
-              "description": "Reduces the mana cost of your Trap abilities and melee abilities by 60%. In addition, your critical strikes have a 60% chance to allow 50% of your Mana regeneration to continue while casting for 30 sec."
+              "description": "Reduces the Mana cost of your Trap and melee abilities by 60%, and grants your melee and ranged ability Critical Strikes a 100% chance to allow 50% of your Mana Regeneration to continue while casting for 30 sec."
             }
           ],
           "spell_id": 440529
@@ -1171,11 +1171,11 @@
           "ranks": [
             {
               "spell_id": 1310532,
-              "description": "Your attacks against targets with Hunter's Mark have a 5% chance to activate your Mongoose Bite for 5 sec."
+              "description": "Grants your melee and ranged attacks against enemies afflicted by Hunter's Mark a 5% chance to allow an activation of Mongoose Bite. Lasts 10 sec."
             },
             {
               "spell_id": 1310532,
-              "description": "Your attacks against targets with Hunter's Mark have a 10% chance to activate your Mongoose Bite for 5 sec."
+              "description": "Grants your melee and ranged attacks against enemies afflicted by Hunter's Mark a 10% chance to allow an activation of Mongoose Bite. Lasts 10 sec."
             }
           ],
           "spell_id": 1310532
