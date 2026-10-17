@@ -9,13 +9,13 @@ import (
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-// The generated tree must be the client's: Arcane 18, Fire 17, Frost 19,
-// from build 1.60.1.69893. Frost is the largest tree in the game, three
-// wider than vanilla's, so a [3]int{16, 16, 17} here means the
-// hand-written vanilla sizes survived and Task 17 did not run.
+// The generated tree must be the client's: Arcane 19, Fire 17, Frost 19,
+// from build 1.60.1.70425 (Arcane Wrath joined Arcane). Frost is the
+// largest tree in the game, three wider than vanilla's, so a [3]int{16,
+// 16, 17} here means the hand-written vanilla sizes survived.
 func TestTheGeneratedTreeIsTheClients(t *testing.T) {
-	if got, want := TalentTreeSizes, [3]int{18, 17, 19}; got != want {
-		t.Fatalf("TalentTreeSizes = %v, want %v (Arcane 18, Fire 17, Frost 19)", got, want)
+	if got, want := TalentTreeSizes, [3]int{19, 17, 19}; got != want {
+		t.Fatalf("TalentTreeSizes = %v, want %v (Arcane 19, Fire 17, Frost 19)", got, want)
 	}
 	if TalentsBuild == "" {
 		t.Error("TalentsBuild is empty; the generated file must record the client build")
@@ -33,8 +33,8 @@ func TestTalentTreeSizesMatchTheProto(t *testing.T) {
 	if fields.Len() != total {
 		t.Errorf("MageTalents has %d fields, TalentTreeSizes sums to %d", fields.Len(), total)
 	}
-	if total != 54 {
-		t.Errorf("the mage has %d talents, want 54 from build %s", total, TalentsBuild)
+	if total != 55 {
+		t.Errorf("the mage has %d talents, want 55 from build %s", total, TalentsBuild)
 	}
 }
 
@@ -63,7 +63,7 @@ var foreverFrostTalentsApplied = []string{
 	"critical_mass",
 	"fire_power",
 	"combustion",
-	"wake_of_fire",
+	"improved_fire_blast",
 	// Frost.
 	"improved_frostbolt",
 	"elemental_precision",

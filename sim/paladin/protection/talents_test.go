@@ -123,7 +123,7 @@ func TestShieldSpecializationBlocksRestoreMana(t *testing.T) {
 	spend := f.tank.MaxMana() * 0.5
 	f.tank.SpendMana(f.sim, spend, f.tank.NewManaMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionPotion}))
 
-	restores := 6.0 / 100 * f.tank.MaxMana()
+	restores := 4.0 / 100 * f.tank.MaxMana() // 1.60.1.70425: "restore 4% of your maximum Mana" (6% before)
 	before := f.tank.CurrentMana()
 	f.hit(core.OutcomeBlock, 100)
 	if got := f.tank.CurrentMana() - before; !near(got, restores, 1) {

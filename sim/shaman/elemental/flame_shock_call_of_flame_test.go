@@ -18,7 +18,7 @@ func callOfFlameTalentsString(rank int) string {
 	for i := range nodes {
 		nodes[i] = '0'
 	}
-	nodes[4] = byte('0' + rank)
+	nodes[5] = byte('0' + rank) // Call of Flame is Elemental's sixth node since 1.60.1.70425
 	return string(nodes[:]) + "--"
 }
 

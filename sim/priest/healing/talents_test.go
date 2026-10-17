@@ -16,12 +16,14 @@ import (
 const (
 	discTree, holyTree = 0, 1
 
+	// 1.60.1.70425 moved Mental Strength to tier 1 and Improved Power
+	// Word: Shield to tier 2.
 	twinDisciplines       = 3
-	improvedPowerWordShld = 6
+	mentalStrength        = 6
 	mentalAgility         = 8
 	innerFocus            = 9
-	mentalStrength        = 12
-	soulWarding           = 13
+	improvedPowerWordShld = 10
+	soulWarding           = 14
 	renewedHope           = 16
 	divineAegis           = 17
 	powerInfusion         = 18
@@ -127,10 +129,10 @@ func TestSpiritualGuidanceGrantsFivePercentOfSpiritAsHealing(t *testing.T) {
 	}
 }
 
-func TestMentalStrengthAddsThreePercentIntellectARank(t *testing.T) {
+func TestMentalStrengthAddsTwoPercentIntellectARank(t *testing.T) {
 	_, bare := healerSim(t, 60, "")
 	_, strong := healerSim(t, 60, onePoint(discTree, mentalStrength, 5))
-	assertRatio(t, "Intellect", strong.GetStat(stats.Intellect), bare.GetStat(stats.Intellect), 1.15)
+	assertRatio(t, "Intellect", strong.GetStat(stats.Intellect), bare.GetStat(stats.Intellect), 1.10) // 1.60.1.70425: 2% a rank
 }
 
 func cost(spell *core.Spell) float64 { return spell.Cost.GetCurrentCost() }

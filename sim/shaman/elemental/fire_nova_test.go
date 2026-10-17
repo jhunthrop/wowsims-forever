@@ -112,7 +112,7 @@ func TestFireNovaRanksFollowTheLearnLevels(t *testing.T) {
 func TestFireNovaCostsAndRecoversPerTheClient(t *testing.T) {
 	_, s := newFireNovaShaman(t, 60, elementalTalentsWith(nil))
 	nova := topFireNova(t, s)
-	if got, want := nova.DefaultCast.Cost, 520.0; got != want {
+	if got, want := nova.DefaultCast.Cost, 375.0; got != want { // 1.60.1.70425 (520 before)
 		t.Errorf("Fire Nova rank 5 cost = %v, want %v", got, want)
 	}
 	if got, want := nova.CD.Duration, 10*time.Second; got != want {
@@ -202,8 +202,8 @@ func TestFireNovaConcussionAndFury(t *testing.T) {
 func TestFireNovaSharesClearcasting(t *testing.T) {
 	sim, s := newFireNovaShaman(t, 60, elementalTalentsWith(map[int]int{elementalFocusNode: 1}))
 	nova := topFireNova(t, s)
-	if got := nova.Cost.GetCurrentCost(); got != 520 {
-		t.Fatalf("Fire Nova cost before Clearcasting = %v, want 520", got)
+	if got := nova.Cost.GetCurrentCost(); got != 375 {
+		t.Fatalf("Fire Nova cost before Clearcasting = %v, want 375", got)
 	}
 	s.ClearcastingAura.Activate(sim)
 	s.ClearcastingAura.SetStacks(sim, s.ClearcastingAura.MaxStacks)

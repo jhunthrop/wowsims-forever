@@ -13,7 +13,7 @@ import (
 // (the last field of the Elemental tree's 16 tracked nodes), the same
 // "isolate the one talent this lane added" convention as warlock's
 // WrackOnlyTalentsString / IncinerateOnlyTalentsString.
-const LavaBurstOnlyTalentsString = "0000000000000001--"
+const LavaBurstOnlyTalentsString = "0000000000001000--" // Lava Burst is Elemental's 13th node since 1.60.1.70425
 
 func newLavaBurstShaman(t *testing.T, level int32) (*core.Simulation, *shaman.Shaman) {
 	t.Helper()
@@ -96,8 +96,10 @@ func TestLavaBurstRanksMatchClientLevelsAndSpellIDs(t *testing.T) {
 		wantRank  int
 		wantSpell int32
 	}{
-		{level: 40, wantRank: 1, wantSpell: 408490},
-		{level: 50, wantRank: 2, wantSpell: 1238299},
+		// 1.60.1.70425 moved every rank ten levels earlier (40/50/60 before).
+		{level: 30, wantRank: 1, wantSpell: 408490},
+		{level: 40, wantRank: 2, wantSpell: 1238299},
+		{level: 50, wantRank: 3, wantSpell: 1238300},
 		{level: 60, wantRank: 3, wantSpell: 1238300},
 	}
 
