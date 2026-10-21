@@ -28,6 +28,9 @@ import {
 	WarlockOptions_WeaponImbue as WarlockWeaponImbue,
 } from '../core/proto/warlock.js';
 // apls
+import ForeverAfflictionAPL from './apls/forever_affliction.apl.json';
+import ForeverDemonologyAPL from './apls/forever_demonology.apl.json';
+import ForeverDestructionAPL from './apls/forever_destruction.apl.json';
 import BasicRotation from './apls/rotation.apl.json';
 // gear
 import BlankGear from './gear_sets/blank.gear.json';
@@ -54,12 +57,23 @@ export const DefaultGear = GearPreBis;
 //                                 APL Presets
 ///////////////////////////////////////////////////////////////////////////
 
+// The Forever rotations below are the launch defaults. Each is a copy of
+// data/curated/apl/<class>-<spec>.json's `rotation` in the Forever Sixty site
+// repository, written here by that repository's `make apl-sync` and proved by
+// its `make apl-check`; edit the curated file, never this copy. The Era lists
+// are kept because a Forever character can still be compared against them.
+// One warlock package serves all three specs, so all three Forever rotations
+// live here. Destruction is the default: it is the spec this package's own
+// Era preset is named and written for.
 // P1
 export const RotationSB = PresetUtils.makePresetAPLRotation('Destruction', BasicRotation);
+export const AplForeverAffliction = PresetUtils.makePresetAPLRotation('Forever Affliction', ForeverAfflictionAPL);
+export const AplForeverDemonology = PresetUtils.makePresetAPLRotation('Forever Demonology', ForeverDemonologyAPL);
+export const AplForeverDestruction = PresetUtils.makePresetAPLRotation('Forever Destruction', ForeverDestructionAPL);
 
-export const APLPresets = [RotationSB];
+export const APLPresets = [RotationSB, AplForeverAffliction, AplForeverDemonology, AplForeverDestruction];
 
-export const DefaultAPL = RotationSB;
+export const DefaultAPL = AplForeverDestruction;
 
 ///////////////////////////////////////////////////////////////////////////
 //                                 Talent Presets

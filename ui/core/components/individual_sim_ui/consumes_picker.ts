@@ -123,7 +123,7 @@ export class ConsumesPicker extends Component {
 	private buildPhysicalBuffPickers() {
 		const includeAgi = this.simUI.individualConfig.epStats.includes(Stat.StatAgility);
 		const includeStr = this.simUI.individualConfig.epStats.includes(Stat.StatStrength);
-		const includeHit = this.simUI.individualConfig.epStats.includes(Stat.StatMeleeHit);
+		const includeHit = this.simUI.individualConfig.epStats.includes(Stat.StatHit);
 
 		if (!includeAgi && !includeStr && !includeHit) return;
 

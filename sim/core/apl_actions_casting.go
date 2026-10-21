@@ -122,7 +122,12 @@ func (rot *APLRotation) newActionMultidot(config *proto.APLActionMultidot) APLAc
 	}
 
 	maxDots := config.MaxDots
-	numTargets := unit.Env.GetNumTargets()
+	// The ceiling is the target POOL, not the encounter's current active
+	// count: a timeline can start at one target and grow, and a Multidot
+	// action configured while the fight is still small must not be
+	// permanently capped at that starting count. IsReady separately bounds
+	// its loop by however many targets are active at the moment it runs.
+	numTargets := int32(len(unit.Env.Encounter.AllTargetUnits))
 	if spell.Flags.Matches(SpellFlagHelpful) {
 		numTargets = int32(len(unit.Env.Raid.AllPlayerUnits))
 	}
@@ -156,7 +161,12 @@ func (action *APLActionMultidot) IsReady(sim *Simulation) bool {
 			}
 		}
 	} else {
-		for i := int32(0); i < action.maxDots; i++ {
+		// maxDots was fixed at APL-construction time against the target
+		// pool (see newActionMultidot), but the timeline can shrink the
+		// active prefix below that at any point in the fight, so this
+		// loop must also stay inside the CURRENT length of TargetUnits.
+		numActiveTargets := int32(len(sim.Encounter.TargetUnits))
+		for i := int32(0); i < action.maxDots && i < numActiveTargets; i++ {
 			target := sim.Encounter.TargetUnits[i]
 			dot := action.spell.Dot(target)
 			if (!dot.IsActive() || dot.RemainingDuration(sim) < maxOverlap) && action.spell.CanCast(sim, target) {

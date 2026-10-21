@@ -141,6 +141,24 @@ binary_dist: $(OUT_DIR)/.dirstamp
 .PHONY: proto
 proto: sim/core/proto/api.pb.go ui/core/proto/api.ts
 
+# Where the site repository is checked out, for the data lane's outputs.
+# This default is one developer's layout; override it per checkout with
+# `make talents SITE_DIR=/path/to/forever` or in the environment.
+SITE_DIR ?= /Users/jh/code/forever
+# Which client build's trees to generate from.
+TALENT_BUILD ?= 1.60.1.69893
+
+.PHONY: talents
+# talents regenerates the nine <Class>Talents proto messages, the nine
+# sim/<class>/talents_auto_gen.go files and the nine UI tree JSONs from
+# the client's mined trait tables. A Forever patch that moves a talent is
+# this target plus `make proto`, not a code edit. The generator writes
+# gofmt-canonical Go itself, and tools/talentgen's regeneration test
+# fails if the committed files are not byte-for-byte what it writes.
+talents:
+	go run ./tools/talentgen -builds "$(SITE_DIR)/data/builds" -build "$(TALENT_BUILD)"
+	$(MAKE) proto
+
 # Builds the web server with the compiled client.
 .PHONY: wowsimclassic
 wowsimclassic: binary_dist devserver
@@ -195,6 +213,11 @@ release: wowsimclassic wowsimclassic-windows.exe
 	zip wowsimcli-windows.exe.zip wowsimcli-windows.exe
 
 sim/core/proto/api.pb.go: proto/*.proto
+	@command -v protoc-gen-go >/dev/null || { \
+	  echo "protoc-gen-go not on PATH."; \
+	  echo "  go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.6"; \
+	  echo "  export PATH=\$$PATH:\$$(go env GOPATH)/bin"; \
+	  exit 1; }
 	protoc -I=./proto --go_out=./sim/core ./proto/*.proto
 
 # Only useful for building the lib on a host platform that matches the target platform
@@ -264,3 +287,42 @@ endif
 
 webworkers:
 	npx tsx vite.build-workers.ts --watch=$(if $(WATCH),true,false)
+
+# Where the site repository is checked out, for the data lane's outputs.
+SITE_DIR ?= /Users/jh/code/forever
+# Which build's constants to generate from. The active build is the
+# mined beta client; an Era regeneration is an explicit override, never
+# the default, because a default that points at Era would quietly ship
+# Era numbers the day the data lane's output appears.
+BUILD ?= 1.60.1.70338
+
+.PHONY: relicmods
+# relicmods regenerates sim/<class>/relic_mods_auto_gen.go, the equip-effect
+# spell modifiers of every libram, totem and idol, from the client's raw
+# tables in the site's build directory. Run `python3 -I` from outside the
+# fork so no stray module shadows the standard library.
+relicmods:
+	cd /tmp && python3 -I "$(CURDIR)/tools/relicmods/gen.py" "$(SITE_DIR)/data/builds/$(BUILD)"
+
+.PHONY: spellconst
+# spellconst regenerates the per-class constants files from the data
+# lane's spellconst output. A Forever patch that changes a number is a
+# pipeline run and this target, not a code edit.
+#
+# The class list is whatever the data lane emitted, not a hardcoded pair:
+# the generator is per class and there is no reason for this target to
+# know which specs the plan happens to cover.
+spellconst:
+	@dir="$(SITE_DIR)/data/builds/$(BUILD)/spellconst"; \
+	if [ ! -d "$$dir" ]; then \
+	  echo "no $$dir: the data lane has not run its simconst command for build $(BUILD) yet."; \
+	  echo "The per-class constants files keep their placeholder headers and the"; \
+	  echo "ability files keep their literals, each already marked unconfirmed."; \
+	  exit 1; \
+	fi; \
+	for src in "$$dir"/*.json; do \
+	  class=$$(basename "$$src" .json); \
+	  test -d "sim/$$class" || { echo "no sim/$$class for $$src"; exit 1; }; \
+	  go run ./sim/core/spellconst/gen -in "$$src" -out "sim/$$class/constants_auto_gen.go" -package "$$class" || exit 1; \
+	done
+	gofmt -w ./sim

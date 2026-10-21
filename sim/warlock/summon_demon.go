@@ -23,10 +23,11 @@ func (warlock *Warlock) registerSummonDemon() {
 
 	// Felhunter
 	warlock.SummonDemonSpells = append(warlock.SummonDemonSpells, warlock.RegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: 691},
-		SpellSchool: core.SpellSchoolShadow,
-		ProcMask:    core.ProcMaskEmpty,
-		Flags:       core.SpellFlagAPL,
+		ActionID:      core.ActionID{SpellID: 691},
+		SpellSchool:   core.SpellSchoolShadow,
+		ProcMask:      core.ProcMaskEmpty,
+		Flags:         core.SpellFlagAPL,
+		RequiredLevel: 30,
 
 		ManaCost: manaCost,
 		Cast:     cast,
@@ -38,12 +39,15 @@ func (warlock *Warlock) registerSummonDemon() {
 
 	// Imp
 	warlock.SummonDemonSpells = append(warlock.SummonDemonSpells, warlock.RegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: 688},
-		SpellSchool: core.SpellSchoolShadow,
-		ProcMask:    core.ProcMaskEmpty,
-		Flags:       core.SpellFlagAPL,
+		ActionID:      core.ActionID{SpellID: 688},
+		SpellSchool:   core.SpellSchoolShadow,
+		ProcMask:      core.ProcMaskEmpty,
+		Flags:         core.SpellFlagAPL,
+		RequiredLevel: 1,
 
-		ManaCost: manaCost,
+		// The client's SpellPower.csv gives Summon Imp PowerCostPct 80 where
+		// the other three summons are 100.
+		ManaCost: core.ManaCostOptions{FlatCost: 0.8 * warlock.BaseMana},
 		Cast:     cast,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
@@ -53,10 +57,11 @@ func (warlock *Warlock) registerSummonDemon() {
 
 	// Succubus
 	warlock.SummonDemonSpells = append(warlock.SummonDemonSpells, warlock.RegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: 712},
-		SpellSchool: core.SpellSchoolShadow,
-		ProcMask:    core.ProcMaskEmpty,
-		Flags:       core.SpellFlagAPL,
+		ActionID:      core.ActionID{SpellID: 712},
+		SpellSchool:   core.SpellSchoolShadow,
+		ProcMask:      core.ProcMaskEmpty,
+		Flags:         core.SpellFlagAPL,
+		RequiredLevel: 20,
 
 		ManaCost: manaCost,
 		Cast:     cast,
@@ -68,10 +73,11 @@ func (warlock *Warlock) registerSummonDemon() {
 
 	// Voidwalker
 	warlock.SummonDemonSpells = append(warlock.SummonDemonSpells, warlock.RegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: 697},
-		SpellSchool: core.SpellSchoolShadow,
-		ProcMask:    core.ProcMaskEmpty,
-		Flags:       core.SpellFlagAPL,
+		ActionID:      core.ActionID{SpellID: 697},
+		SpellSchool:   core.SpellSchoolShadow,
+		ProcMask:      core.ProcMaskEmpty,
+		Flags:         core.SpellFlagAPL,
+		RequiredLevel: 10,
 
 		ManaCost: manaCost,
 		Cast:     cast,

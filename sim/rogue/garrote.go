@@ -6,28 +6,33 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-func (rogue *Rogue) registerGarrote() {
-	baseDamage := map[int32]float64{
-		25: 34,
-		40: 59,
-		50: 74,
-		60: 92,
-	}[rogue.Level]
+// garroteLearnLevels are Garrote's six rank learn levels; source:
+// 1.60.1.70009 client spell data ("Garrote", ranks 1-6). Each rank's level
+// also carries a duplicate id in the 460000s (e.g. 462724 beside rank 1's
+// 703); those are a clone of the same rank, not an extra rank -- dropped.
+var garroteLearnLevels = []int{14, 22, 30, 38, 46, 54}
 
-	spellID := map[int32]int32{
-		25: 8631,
-		40: 8633,
-		50: 11289,
-		60: 11290,
-	}[rogue.Level]
+// garroteSpellID is Garrote's rank -> spell id, index 0 unused.
+var garroteSpellID = [7]int32{0, 703, 8631, 8632, 8633, 11289, 11290}
+
+func (rogue *Rogue) registerGarrote() {
+	rank := core.HighestRankAtLevel(garroteLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
+
+	tickDamage := GarroteTickDamage[rank]
+	casterLevel := int(rogue.Level)
+	spellID := garroteSpellID[rank]
 
 	rogue.Garrote = rogue.GetOrRegisterSpell(core.SpellConfig{
-		SpellCode:   SpellCode_RogueGarrote,
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       SpellFlagBuilder | core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+		SpellCode:     SpellCode_RogueGarrote,
+		ActionID:      core.ActionID{SpellID: spellID},
+		SpellSchool:   core.SpellSchoolPhysical,
+		DefenseType:   core.DefenseTypeMelee,
+		ProcMask:      core.ProcMaskMeleeMHSpecial,
+		Flags:         SpellFlagBuilder | core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+		RequiredLevel: garroteLearnLevels[rank-1],
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   50.0 - 10*float64(rogue.Talents.DirtyDeeds),
@@ -46,9 +51,9 @@ func (rogue *Rogue) registerGarrote() {
 			return !rogue.PseudoStats.InFrontOfTarget
 		},
 
-		DamageMultiplier: 1 +
-			0.04*float64(rogue.Talents.Opportunity),
+		DamageMultiplier: opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])],
 		ThreatMultiplier: 1,
+		ClientBaseDamage: tickDamage.Range(casterLevel),
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
@@ -57,7 +62,7 @@ func (rogue *Rogue) registerGarrote() {
 			NumberOfTicks: 6,
 			TickLength:    time.Second * 3,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				damage := baseDamage + dot.Spell.MeleeAttackPower(target)*0.03
+				damage := tickDamage.Roll(sim, casterLevel) + dot.Spell.MeleeAttackPower(target)*0.03
 				dot.Snapshot(target, damage, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {

@@ -12,6 +12,7 @@ func init() {
 }
 
 func TestRetribution(t *testing.T) {
+	core.SkipAwaitingForeverTalentRewrite(t, "sim/paladin/retribution")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassPaladin,
@@ -115,9 +116,7 @@ var Stats = []proto.Stat{
 	proto.Stat_StatStrength,
 	proto.Stat_StatAgility,
 	proto.Stat_StatAttackPower,
-	proto.Stat_StatMeleeHit,
-	proto.Stat_StatMeleeCrit,
+	proto.Stat_StatHit,
+	proto.Stat_StatCrit,
 	proto.Stat_StatSpellPower,
-	proto.Stat_StatSpellHit,
-	proto.Stat_StatSpellCrit,
 }

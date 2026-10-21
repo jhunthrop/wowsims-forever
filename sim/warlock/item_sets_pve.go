@@ -7,28 +7,6 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
-var ItemSetDeathmistRaiment = core.NewItemSet(core.ItemSet{
-	Name: "Deathmist Raiment",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +8 All Resistances.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddResistances(8)
-		},
-		// 4pc: When struck in combat has a chance of causing the attacker to flee in terror for 2 seconds.
-		// Increases damage and healing done by magical spells and effects by up to 23.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.SpellPower, 23)
-		},
-		// +200 Armor.
-		8: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Armor, 200)
-		},
-	},
-})
-
 var ItemSetFelheartRaiment = core.NewItemSet(core.ItemSet{
 	Name: "Felheart Raiment",
 	Bonuses: map[int32]core.ApplyEffect{
@@ -138,47 +116,5 @@ var ItemSetDoomcallersAttire = core.NewItemSet(core.ItemSet{
 				},
 			})
 		},
-	},
-})
-
-var ItemSetPlagueheartRaiment = core.NewItemSet(core.ItemSet{
-	Name: "Plagueheart Raiment",
-	Bonuses: map[int32]core.ApplyEffect{
-		// 2 pieces: Your Shadow Bolts now have a chance to heal you for 270 to 330.
-		// 4 pieces: Increases damage caused by your Corruption by 12%.
-		4: func(agent core.Agent) {
-			warlock := agent.(WarlockAgent).GetWarlock()
-			warlock.RegisterAura(core.Aura{
-				Label: "Corruption (Plagueheart Raiment)",
-				OnInit: func(aura *core.Aura, sim *core.Simulation) {
-					for _, spell := range warlock.Corruption {
-						spell.DamageMultiplierAdditive += 0.12
-					}
-				},
-			})
-		},
-		// 6 pieces: Your spell critical hits generate 25% less threat. In addition, Corruption, Immolate, Curse of Agony, and Siphon Life generate 25% less threat.
-		6: func(agent core.Agent) {
-			warlock := agent.(WarlockAgent).GetWarlock()
-			warlock.RegisterAura(core.Aura{
-				Label: "Plagueheart",
-				OnInit: func(aura *core.Aura, sim *core.Simulation) {
-					for _, spell := range warlock.Corruption {
-						spell.ThreatMultiplier *= 0.75
-					}
-
-					for _, spell := range warlock.Immolate {
-						spell.ThreatMultiplier *= 0.75
-					}
-
-					for _, spell := range warlock.CurseOfAgony {
-						spell.ThreatMultiplier *= 0.75
-					}
-
-					// TODO: Spell crit thread? Do we care?
-				},
-			})
-		},
-		// 8 pieces: Reduces health cost of your Life Tap by 12%.
 	},
 })

@@ -51,12 +51,13 @@ func (mage *Mage) applyIgnite() {
 	})
 
 	mage.igniteTick = mage.RegisterSpell(core.SpellConfig{
-		SpellCode:   SpellCode_MageIgnite,
-		ActionID:    core.ActionID{SpellID: 12654},
-		SpellSchool: core.SpellSchoolFire,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellProc,
-		Flags:       core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell | SpellFlagMage,
+		SpellCode:      SpellCode_MageIgnite,
+		ClassSpellMask: MageSpellMaskIgnite,
+		ActionID:       core.ActionID{SpellID: 12654},
+		SpellSchool:    core.SpellSchoolFire,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellProc,
+		Flags:          core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell | SpellFlagMage,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
@@ -68,6 +69,7 @@ func (mage *Mage) applyIgnite() {
 		Dot: core.DotConfig{
 			Aura: core.Aura{
 				Label:     "Ignite",
+				Tag:       mageFireEffectTag,
 				MaxStacks: 5,
 				Duration:  time.Second * 4,
 			},
@@ -79,10 +81,20 @@ func (mage *Mage) applyIgnite() {
 					return
 				}
 
-				// only the first stack snapshots the multiplier
+				// only the first stack snapshots the base
 				if dot.GetStacks() == 1 {
-					attackTable := dot.Spell.Unit.AttackTables[target.UnitIndex][dot.Spell.CastType]
-					dot.SnapshotAttackerMultiplier = dot.Spell.AttackerDamageMultiplier(attackTable, true)
+					// newIgniteDamage is 8%/point of the crit's final
+					// damage, which already carries every attacker
+					// multiplier (Fire Power, Arcane Power, the forms).
+					// Snapshotting AttackerDamageMultiplier here as well
+					// applied them a second time on every tick - the
+					// vanilla engine's behaviour, and the one Forever's
+					// 24 September 2026 beta notes removed ("Ignite: no
+					// longer counts damage bonuses twice"). The bleed
+					// Lacerating Strikes (sim/hunter) already uses this
+					// same "share of a finished hit" shape with a
+					// multiplier of 1.
+					dot.SnapshotAttackerMultiplier = 1
 					dot.SnapshotBaseDamage = newIgniteDamage
 				} else {
 					dot.SnapshotBaseDamage += newIgniteDamage

@@ -113,6 +113,7 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 
 	raidProto := SinglePlayerRaidProto(swr.Player, swr.PartyBuffs, swr.RaidBuffs, swr.Debuffs)
 	raidProto.Tanks = swr.Tanks
+	AddHealingFakeRaid(raidProto, swr.RaidDamageModel)
 
 	swr.SimOptions.SaveAllValues = true
 
@@ -156,8 +157,60 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 		if stat.EqualsStat(stats.Armor) || stat.EqualsStat(stats.BonusArmor) || stat.EqualsStat(stats.Mana) {
 			statMod = defaultStatMod * 20
 		}
+		// Intellect needs the same larger nudge, for a different reason
+		// than Hit's floor: Intellect's own per-point DPS effect for a
+		// caster is simply tiny relative to this sweep's own sampling
+		// noise at defaultStatMod=1, not hard-capped at all - a mage-
+		// fire band-40 leveling character (sim/cmd/leveling-bis lane
+		// bis-ranker-integrity-6's own measurement) reported intellect
+		// -0.083 ± 0.167 DPS per point: the stdev is roughly TWICE the
+		// mean, so the ±1 sweep cannot even recover the correct SIGN,
+		// let alone a usable weight - every one of the 32 (of 70)
+		// caster band tables that lane found "insignificant or
+		// negative" intellect on shares this identical shape. Widening
+		// the sweep to ±20 points (the same factor Armor/BonusArmor/
+		// Mana/Hit already use) does not change intellect's own true
+		// per-point value, but it does average the same DPS-per-point
+		// noise over a much larger, more clearly-resolved perturbation,
+		// exactly the way it already does for Mana - see that lane's
+		// own report for the before/after re-measurement across all 32
+		// tables.
+		if stat.EqualsStat(stats.Intellect) {
+			statMod = defaultStatMod * 20
+		}
+		// A healing sweep measures mana stats through the fight's mana
+		// curve, where one point of mp5 or spirit moves the average by far
+		// less than the sampling noise, so they get the wider step too.
+		if swr.RaidDamageModel != nil && (stat.EqualsStat(stats.Spirit) || stat.EqualsStat(stats.MP5)) {
+			statMod = defaultStatMod * 20
+		}
+		// The melee and ranged primaries need it for a third reason:
+		// the sweep's accuracy for every other class comes from paired
+		// random streams (low and high directions share a seed, so a
+		// deterministic +1 shows up as an almost noise-free delta -
+		// every non-warrior melee spec reports Strength at exactly its
+		// AP-per-Strength multiple with ±0.001), but a Warrior's rage is
+		// damage-driven, so one extra point of attack power changes the
+		// rage curve, the action sequence and therefore the random
+		// stream itself; the pairing collapses and the ±1 delta
+		// (0.05 DPS for a level-60 Arms warrior) drowns in the full
+		// per-iteration DPS variance. Published 2026-10-07 numbers for
+		// warrior-arms band 60: attack_power 1.00 ± 0.51, strength
+		// 1.47 ± 0.34 against an engine conversion of exactly 2 -
+		// the ranker then preferred raw-AP items over Strength items
+		// (owner-reported). A ±20 step keeps the response linear (no
+		// cap or floor in these stats) and shrinks the relative error
+		// twentyfold wherever the pairing is broken, while leaving the
+		// already-exact classes exact.
+		if stat.EqualsStat(stats.AttackPower) || stat.EqualsStat(stats.RangedAttackPower) ||
+			stat.EqualsStat(stats.FeralAttackPower) || stat.EqualsStat(stats.Strength) || stat.EqualsStat(stats.Agility) {
+			statMod = defaultStatMod * 20
+		}
 		statModsHigh[stat] = statMod
 		statModsLow[stat] = -statMod
+		if stat.EqualsStat(stats.Hit) {
+			statModsLow[stat], statModsHigh[stat] = hitStatMods(swr)
+		}
 	}
 	for _, s := range swr.PseudoStatsToWeigh {
 		stat := stats.UnitStatFromPseudoStat(s)
@@ -168,7 +221,7 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 
 	for i := range statModsLow {
 		stat := stats.UnitStatFromIdx(i)
-		if statModsLow[stat] == 0 {
+		if statModsLow[stat] == 0 && statModsHigh[stat] == 0 {
 			continue
 		}
 
@@ -192,6 +245,30 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 	return swBaseResponse
 }
 
+// hitStatMods is the sweep's low and high hit offsets: hit's marginal DPS
+// value at the character's actual hit, not an average over a wide step.
+//
+// Hit is the one stat whose response is not a line: PhysicalHitChance floors
+// at max(hit - suppression, 0), and a special attack stops missing at the
+// miss-table cap, so a wide symmetric step (the sweep used +-20) averages a
+// saturated response into a small weight - 0.46 per rating point for a
+// level-60 Fury warrior with 60 more points of miss to remove. See
+// hitStepWindow for the window rules. A window with both offsets zero means
+// the stat is capped and is left unmeasured (weight 0). When the request
+// cannot be profiled (no player) the step is the plain +-1 of the other
+// secondary stats.
+func hitStatMods(swr *proto.StatWeightsRequest) (low, high float64) {
+	profile, err := ComputeHitProfile(swr)
+	if err != nil {
+		return -hitStepPoints, hitStepPoints
+	}
+	low, high, ok := hitStepWindow(profile)
+	if !ok {
+		return 0, 0
+	}
+	return low, high
+}
+
 func computeStatWeights(swcr *proto.StatWeightsCalcRequest) *proto.StatWeightsResult {
 	haveRefStat := false
 	for _, statResult := range swcr.StatSimResults {
@@ -212,13 +289,32 @@ func computeStatWeights(swcr *proto.StatWeightsCalcRequest) *proto.StatWeightsRe
 		modPlayerLow := statResult.ResultLow.RaidMetrics.Parties[0].Players[0]
 		modPlayerHigh := statResult.ResultHigh.RaidMetrics.Parties[0].Players[0]
 
+		// A window that is not symmetric about the baseline (hit, next to a
+		// floor or a cap) is read as the slope between its two simulations.
+		window := statResult.StatData.ModLow != -statResult.StatData.ModHigh
+
 		// Check for hard caps. Hard caps will have results identical to the baseline because RNG is fixed.
 		// When we find a hard-capped stat, just skip it (will return 0).
-		if modPlayerHigh.Dps.Avg == baselinePlayer.Dps.Avg && modPlayerHigh.Hps.Avg == baselinePlayer.Hps.Avg && modPlayerHigh.Tmi.Avg == baselinePlayer.Tmi.Avg {
+		if window {
+			if modPlayerHigh.Dps.Avg == modPlayerLow.Dps.Avg && modPlayerHigh.Hps.Avg == modPlayerLow.Hps.Avg && modPlayerHigh.Tmi.Avg == modPlayerLow.Tmi.Avg {
+				continue
+			}
+		} else if modPlayerHigh.Dps.Avg == baselinePlayer.Dps.Avg && modPlayerHigh.Hps.Avg == baselinePlayer.Hps.Avg && modPlayerHigh.Tmi.Avg == baselinePlayer.Tmi.Avg {
 			continue
 		}
 
 		calcWeightResults := func(baselineMetrics *proto.DistributionMetrics, modLowMetrics *proto.DistributionMetrics, modHighMetrics *proto.DistributionMetrics, weightResults *StatWeightValues) {
+			if window {
+				var slope aggregator
+				for i := 0; i < len(baselineMetrics.AllValues); i++ {
+					slope.add(modHighMetrics.AllValues[i] - modLowMetrics.AllValues[i])
+				}
+				slope.scale(1 / (statResult.StatData.ModHigh - statResult.StatData.ModLow))
+				mean, stdev := slope.meanAndStdDev()
+				weightResults.Weights.AddStat(stat, mean)
+				weightResults.WeightsStdev.AddStat(stat, stdev)
+				return
+			}
 			var lo, hi aggregator
 			for i := 0; i < len(baselineMetrics.AllValues); i++ {
 				lo.add(modLowMetrics.AllValues[i] - baselineMetrics.AllValues[i])
@@ -235,13 +331,17 @@ func computeStatWeights(swcr *proto.StatWeightsCalcRequest) *proto.StatWeightsRe
 		}
 
 		calcWeightResults(baselinePlayer.Dps, modPlayerLow.Dps, modPlayerHigh.Dps, &result.Dps)
-		calcWeightResults(baselinePlayer.Hps, modPlayerLow.Hps, modPlayerHigh.Hps, &result.Hps)
+		calcWeightResults(landedHealing(baselinePlayer), landedHealing(modPlayerLow), landedHealing(modPlayerHigh), &result.Hps)
 		calcWeightResults(baselinePlayer.Threat, modPlayerLow.Threat, modPlayerHigh.Threat, &result.Tps)
 		calcWeightResults(baselinePlayer.Dtps, modPlayerLow.Dtps, modPlayerHigh.Dtps, &result.Dtps)
 		calcWeightResults(baselinePlayer.Tmi, modPlayerLow.Tmi, modPlayerHigh.Tmi, &result.Tmi)
-		meanLow := (modPlayerLow.ChanceOfDeath - baselinePlayer.ChanceOfDeath) / statResult.StatData.ModLow
-		meanHigh := (modPlayerHigh.ChanceOfDeath - baselinePlayer.ChanceOfDeath) / statResult.StatData.ModHigh
-		result.PDeath.Weights.AddStat(stat, (meanLow+meanHigh)/2)
+		if window {
+			result.PDeath.Weights.AddStat(stat, (modPlayerHigh.ChanceOfDeath-modPlayerLow.ChanceOfDeath)/(statResult.StatData.ModHigh-statResult.StatData.ModLow))
+		} else {
+			meanLow := (modPlayerLow.ChanceOfDeath - baselinePlayer.ChanceOfDeath) / statResult.StatData.ModLow
+			meanHigh := (modPlayerHigh.ChanceOfDeath - baselinePlayer.ChanceOfDeath) / statResult.StatData.ModHigh
+			result.PDeath.Weights.AddStat(stat, (meanLow+meanHigh)/2)
+		}
 		result.PDeath.WeightsStdev.AddStat(stat, 0)
 	}
 
@@ -270,6 +370,16 @@ func computeStatWeights(swcr *proto.StatWeightsCalcRequest) *proto.StatWeightsRe
 	}
 
 	return result.ToProto()
+}
+
+// landedHealing is the healing a unit's weights are measured on: what
+// landed on a health bar, so a stat that only buys overheal is worth
+// nothing. A result with no effective figure falls back to raw healing.
+func landedHealing(unit *proto.UnitMetrics) *proto.DistributionMetrics {
+	if unit.EffectiveHps != nil {
+		return unit.EffectiveHps
+	}
+	return unit.Hps
 }
 
 // Run stat weight sims and compute weights.

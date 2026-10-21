@@ -25,8 +25,23 @@ var StanceCodes = []int32{SpellCode_WarriorStanceBattle, SpellCode_WarriorStance
 
 const stanceEffectCategory = "Stance"
 
+// improvedTacticalMasteryRagePerPoint is the "additional 3 Rage" of
+// Improved Tactical Mastery's rank-1 description. The talent's rank
+// spell (12295) carries the figure only in its text, not in a
+// spellconst effect amount, so it is typed here with the quote above.
+const improvedTacticalMasteryRagePerPoint = 3.0
+
 func (warrior *Warrior) StanceMatches(other Stance) bool {
 	return warrior.Stance.Matches(other)
+}
+
+// stanceRequiredLevel is each stance's own generated required level
+// (constants_auto_gen.go): Battle Stance 1, Defensive Stance 10,
+// Berserker Stance 30.
+var stanceRequiredLevel = map[Stance]int{
+	BattleStance:    BattleStanceLevel[0],
+	DefensiveStance: DefensiveStanceLevel[0],
+	BerserkerStance: BerserkerStanceLevel[0],
 }
 
 func (warrior *Warrior) makeStanceSpell(stance Stance, aura *core.Aura, stanceCD *core.Timer) *WarriorSpell {
@@ -36,13 +51,21 @@ func (warrior *Warrior) makeStanceSpell(stance Stance, aura *core.Aura, stanceCD
 		BerserkerStance: SpellCode_WarriorStanceBerserker,
 	}[stance]
 	actionID := aura.ActionID
-	maxRetainedRage := 5 * float64(warrior.Talents.TacticalMastery)
+	// Improved Tactical Mastery: "Tactical Mastery lets you retain up to
+	// an additional 3 Rage when you change stances" at rank 1, rising by
+	// 3 a rank to 15 at rank 5 (Arms node 105954). The client's text is
+	// a plain retained-rage number, so it is modelled here rather than
+	// listed as not modelled. Vanilla's Tactical Mastery retained 5 a
+	// point; the talent is renamed AND renumbered.
+	maxRetainedRage := improvedTacticalMasteryRagePerPoint * float64(warrior.Talents.ImprovedTacticalMastery)
 	rageMetrics := warrior.NewRageMetrics(actionID)
 
 	stanceSpell := warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		SpellCode: spellCode,
 		ActionID:  actionID,
 		Flags:     core.SpellFlagAPL,
+
+		RequiredLevel: stanceRequiredLevel[stance],
 
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
@@ -96,8 +119,15 @@ func (warrior *Warrior) registerBattleStanceAura() {
 	})
 }
 
+// Defensive Stance Passive (client spell 7376): "-10%" damage taken and
+// damage dealt, "+30%" threat, each an aura on every school.
+const (
+	defensiveStanceDamageMultiplier = 0.9
+	defensiveStanceThreatBonus      = 0.3
+)
+
 func (warrior *Warrior) registerDefensiveStanceAura() {
-	warrior.defensiveStanceThreatMultiplier = 1.3 * []float64{1, 1.03, 1.06, 1.09, 1.12, 1.15}[warrior.Talents.Defiance]
+	warrior.defensiveStanceThreatMultiplier = 1 + defensiveStanceThreatBonus + warrior.defianceThreat()
 
 	warrior.DefensiveStanceAura = warrior.RegisterAura(core.Aura{
 		Label:    "Defensive Stance",
@@ -107,13 +137,13 @@ func (warrior *Warrior) registerDefensiveStanceAura() {
 	warrior.DefensiveStanceAura.NewExclusiveEffect(stanceEffectCategory, true, core.ExclusiveEffect{
 		OnGain: func(ee *core.ExclusiveEffect, sim *core.Simulation) {
 			ee.Aura.Unit.PseudoStats.ThreatMultiplier *= warrior.defensiveStanceThreatMultiplier
-			ee.Aura.Unit.PseudoStats.DamageDealtMultiplier *= 0.9
-			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier *= 0.9
+			ee.Aura.Unit.PseudoStats.DamageDealtMultiplier *= defensiveStanceDamageMultiplier
+			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier *= defensiveStanceDamageMultiplier
 		},
 		OnExpire: func(ee *core.ExclusiveEffect, sim *core.Simulation) {
 			ee.Aura.Unit.PseudoStats.ThreatMultiplier /= warrior.defensiveStanceThreatMultiplier
-			ee.Aura.Unit.PseudoStats.DamageDealtMultiplier /= 0.9
-			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier /= 0.9
+			ee.Aura.Unit.PseudoStats.DamageDealtMultiplier /= defensiveStanceDamageMultiplier
+			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier /= defensiveStanceDamageMultiplier
 		},
 	})
 }
@@ -128,12 +158,16 @@ func (warrior *Warrior) registerBerserkerStanceAura() {
 		OnGain: func(ee *core.ExclusiveEffect, sim *core.Simulation) {
 			ee.Aura.Unit.PseudoStats.ThreatMultiplier *= 0.8
 			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier *= 1.1
-			ee.Aura.Unit.AddStatDynamic(sim, stats.MeleeCrit, core.CritRatingPerCritChance*3)
+			ee.Aura.Unit.AddStatDynamic(sim, stats.Crit, core.CritRatingPerCritChance*3)
 		},
 		OnExpire: func(ee *core.ExclusiveEffect, sim *core.Simulation) {
 			ee.Aura.Unit.PseudoStats.ThreatMultiplier /= 0.8
-			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier *= 1.1
-			ee.Aura.Unit.AddStatDynamic(sim, stats.MeleeCrit, -core.CritRatingPerCritChance*3)
+			// Divide, not multiply: this line read `*= 1.1` and so
+			// compounded +10% damage taken on every stance change
+			// instead of undoing the OnGain. Pre-existing at master;
+			// only a stance-dancing tank shows it.
+			ee.Aura.Unit.PseudoStats.DamageTakenMultiplier /= 1.1
+			ee.Aura.Unit.AddStatDynamic(sim, stats.Crit, -core.CritRatingPerCritChance*3)
 		},
 	})
 }

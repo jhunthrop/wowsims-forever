@@ -8,24 +8,10 @@ import (
 	"github.com/wowsims/classic/sim/core/proto"
 )
 
-/**
-Instant Poison: 20% proc chance
-25: 22 +/- 3 damage, 8679 ID, 40 charges
-40: 50 +/- 6 damage, 8688 ID, 70 charges
-50: 76 +/- 9 damage, 11338 ID, 85 charges
-60: 130 =/- 18 damage, 11340 ID, 115 charges
-
-Deadly Poison: 30% proc chance, 5 stacks
-40: 52 damage, 2824 ID, 75 charges
-50: 80 damage, 11355 ID, 90 charges
-60: 108 damage, 11356 ID, 105 charges (Rank 4, Rank 5 is by book)
-
-Wound Poison: 30% proc chance, 5 stacks
-25: x damage, x ID (none, first rank is level 32)
-40: -75 healing, 11325 ID, 75 charges (Rank 2)
-50: -105 healing, 13226 ID, 90 charges (Rank 3)
-60: -135 healing, 13227 ID, 105 charges (Rank 4)
-*/
+// Poison damage is the client's own: InstantPoisonDamage and
+// DeadlyPoisonTickDamage (client_damage.go), checked rank by rank against
+// the vendored client file. Wound Poison deals no damage in the client (its
+// effect is the healing reduction).
 
 // TODO: Add charges to poisons
 
@@ -147,19 +133,27 @@ func (rogue *Rogue) registerInstantPoisonSpell() {
 	rogue.InstantPoison = rogue.makeInstantPoison()
 }
 
+// deadlyPoisonLearnLevels are Deadly Poison's five rank learn levels;
+// source: 1.60.1.70009 client spell data. Each rank is a separate name
+// ("Deadly Poison", "Deadly Poison II", ... "V"), each with several
+// weapon-slot-variant ids at the same level; deadlyPoisonSpellID picks one
+// representative id per rank. Rank 5 only exists with AQ content, same as
+// the old code's ternary (which reused rank 4's id, 11356, for the
+// pre-AQ 60 case since only 4 ranks existed then).
+var deadlyPoisonLearnLevels = []int{30, 38, 46, 54, 60}
+
+// deadlyPoisonSpellID is Deadly Poison's rank -> spell id, index 0 unused.
+var deadlyPoisonSpellID = [6]int32{0, 2823, 2824, 11355, 11356, core.TernaryInt32(core.IncludeAQ, 25347, 11356)}
+
 func (rogue *Rogue) registerDeadlyPoisonSpell() {
-	baseDamageTick := map[int32]float64{
-		25: 9,
-		40: 13,
-		50: 20,
-		60: core.TernaryFloat64(core.IncludeAQ, 34, 27),
-	}[rogue.Level]
-	spellID := map[int32]int32{
-		25: 2823,
-		40: 2824,
-		50: 11355,
-		60: core.TernaryInt32(core.IncludeAQ, 25347, 11356),
-	}[rogue.Level]
+	rank := core.HighestRankAtLevel(deadlyPoisonLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
+
+	tickDamage := DeadlyPoisonTickDamage[rank]
+	casterLevel := int(rogue.Level)
+	spellID := deadlyPoisonSpellID[rank]
 
 	rogue.deadlyPoisonTick = rogue.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: spellID, Tag: 100},
@@ -170,6 +164,7 @@ func (rogue *Rogue) registerDeadlyPoisonSpell() {
 
 		DamageMultiplier: rogue.getPoisonDamageMultiplier(),
 		ThreatMultiplier: 1,
+		ClientBaseDamage: tickDamage.Range(casterLevel),
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
@@ -192,7 +187,7 @@ func (rogue *Rogue) registerDeadlyPoisonSpell() {
 					dot.SnapshotBaseDamage = 0
 				}
 
-				dot.SnapshotBaseDamage += baseDamageTick
+				dot.SnapshotBaseDamage += tickDamage.Roll(sim, casterLevel)
 			},
 
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
@@ -228,28 +223,26 @@ func (rogue *Rogue) registerWoundPoisonSpell() {
 //                              Make Poisons
 ///////////////////////////////////////////////////////////////////////////
 
+// instantPoisonLearnLevels are Instant Poison's six rank learn levels;
+// source: 1.60.1.70009 client spell data. Each rank is a separate name
+// ("Instant Poison", "Instant Poison II", ... "VI"), each with three
+// weapon-slot-variant ids at the same level; instantPoisonSpellID picks one
+// representative id per rank.
+var instantPoisonLearnLevels = []int{20, 28, 36, 44, 52, 60}
+
+// instantPoisonSpellID is Instant Poison's rank -> spell id, index 0 unused.
+var instantPoisonSpellID = [7]int32{0, 8679, 8686, 8688, 11338, 11339, 11340}
+
 // Make a source based variant of Instant Poison
 func (rogue *Rogue) makeInstantPoison() *core.Spell {
-	baseDamageByLevel := map[int32]float64{
-		25: 19,
-		40: 44,
-		50: 67,
-		60: 112,
-	}[rogue.Level]
+	rank := core.HighestRankAtLevel(instantPoisonLearnLevels, rogue.Level)
+	if rank == 0 {
+		return nil
+	}
 
-	damageVariance := map[int32]float64{
-		25: 6,
-		40: 12,
-		50: 18,
-		60: 36,
-	}[rogue.Level]
-
-	spellID := map[int32]int32{
-		25: 8679,
-		40: 8688,
-		50: 11338,
-		60: 11340,
-	}[rogue.Level]
+	damage := InstantPoisonDamage[rank]
+	casterLevel := int(rogue.Level)
+	spellID := instantPoisonSpellID[rank]
 
 	return rogue.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: spellID},
@@ -260,10 +253,10 @@ func (rogue *Rogue) makeInstantPoison() *core.Spell {
 
 		DamageMultiplier: rogue.getPoisonDamageMultiplier(),
 		ThreatMultiplier: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := sim.Roll(baseDamageByLevel, baseDamageByLevel+damageVariance)
-			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 		},
 	})
 }

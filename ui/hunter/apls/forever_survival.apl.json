@@ -1,0 +1,127 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Raptor Strike queued on the swing timer (tag 3, the on-next-swing queue tag), gated at 20% mana so it does not starve Mongoose Bite below.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 8,
+            "spellId": 14266,
+            "tag": 3
+          }
+        },
+        "condition": {
+          "cmp": {
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "op": "OpGe",
+            "rhs": {
+              "const": {
+                "val": "0%"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "notes": "Counterattack: a bare cast that only lands while its parry-triggered proc aura is active.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 4,
+            "spellId": 20910
+          }
+        }
+      }
+    },
+    {
+      "notes": "Mongoose Bite inside its window: the client allows it only after a dodge, and Expose Prey opens the same 5 second window (Defensive State, spell 5302) on a melee or ranged attack against a Hunter's Mark target; the window is one charge, spent by the cast. A target that never attacks gives no dodge, so without Expose Prey the line stays idle.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 4,
+            "spellId": 14271
+          }
+        },
+        "condition": {
+          "auraIsActive": {
+            "auraId": {
+              "spellId": 5302
+            }
+          }
+        }
+      }
+    },
+    {
+      "notes": "Lacerate (the trainable bleed, rank 4) whenever its own bleed is down: with Mongoose Bite waiting on its window, the free globals go to keeping the bleed ticking.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 4,
+            "spellId": 1299332
+          }
+        },
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "rank": 4,
+                  "spellId": 1299332
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "notes": "Strider Kick as the lowest-priority filler on its own 8s cooldown.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 1,
+            "spellId": 1317257
+          }
+        }
+      }
+    },
+    {
+      "notes": "Immolation Trap on cooldown: within 5 yards it lands as a melee-range filler, gated only by its own 30-second cooldown and mana cost.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 5,
+            "spellId": 14305
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 14268,
+            "rank": 3
+          }
+        },
+        "condition": {
+          "auraIsKnown": {
+            "auraId": {
+              "spellId": 10610
+            }
+          }
+        }
+      },
+      "notes": "Wing Clip on every free global, only while a Windfury Totem reaches the hunter (the gate asks whether the engine registered the totem's attack power buff, spell 10610, so a character with no totem skips the line): a cheap main-hand special that rolls the totem's extra attack and any weapon proc, which the other lines leave idle. It costs 80 mana and does 50 damage; the client states both. Without the totem it measured as a loss, mana and a global spent for 50 damage."
+    }
+  ]
+}

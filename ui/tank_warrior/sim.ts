@@ -26,8 +26,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecTankWarrior, {
 		Stat.StatStamina,
 		// Physical
 		Stat.StatAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatExpertise,
 		// Defense
 		Stat.StatArmor,
@@ -48,8 +48,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecTankWarrior, {
 		Stat.StatAgility,
 		// Physical
 		Stat.StatAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatExpertise,
 		// Defense
 		Stat.StatArmor,
@@ -76,8 +76,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecTankWarrior, {
 				[Stat.StatStrength]: 1.555,
 				[Stat.StatAgility]: 2.771,
 				[Stat.StatAttackPower]: 0.32,
-				[Stat.StatMeleeHit]: 1.432,
-				[Stat.StatMeleeCrit]: 0.925,
+				[Stat.StatHit]: 1.432,
+				[Stat.StatCrit]: 0.925,
 				[Stat.StatBlock]: 1.32,
 				[Stat.StatBlockValue]: 1.373,
 				[Stat.StatDodge]: 2.606,

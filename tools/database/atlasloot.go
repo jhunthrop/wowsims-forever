@@ -403,10 +403,10 @@ var AtlasLootDifficulties = map[string]proto.DungeonDifficulty{
 
 var AtlasLootPVPFactions = map[int]map[string]int32{
 	3277: {
-		// Silverwing Sentinels
-		"ALLIANCE": 890,
-		// Warsong Outriders
-		"HORDE": 889,
+		// Silverwing Sentinels (Alliance)
+		"ALLIANCE": 889,
+		// Warsong Outriders (Horde)
+		"HORDE": 890,
 	},
 	3358: {
 		// The League of Arathor

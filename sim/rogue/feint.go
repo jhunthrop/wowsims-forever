@@ -13,6 +13,10 @@ func (rogue *Rogue) registerFeintSpell() {
 		DefenseType: core.DefenseTypeMelee,
 		ProcMask:    core.ProcMaskMeleeMH,
 		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+		// Always registers rank 1 (1966) regardless of character level -
+		// every rank shares the same cost/cooldown, only the required
+		// level differs, and this engine does not scale Feint by rank.
+		RequiredLevel: 16,
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost: 20,

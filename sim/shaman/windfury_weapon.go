@@ -13,15 +13,8 @@ var WindfuryWeaponEnchantId = [WindfuryWeaponRanks + 1]int32{0, 283, 284, 525, 1
 var WindfuryWeaponBonusAP = [WindfuryWeaponRanks + 1]float64{0, 104, 119, 249, 333}
 var WindfuryWeaponLevel = [WindfuryWeaponRanks + 1]int32{0, 30, 40, 50, 60}
 
-var WindfuryWeaponRankByLevel = map[int32]int32{
-	25: 0,
-	40: 2,
-	50: 3,
-	60: 4,
-}
-
 func (shaman *Shaman) newWindfuryImbueSpell(isMH bool) *core.Spell {
-	rank := WindfuryWeaponRankByLevel[shaman.Level]
+	rank := weaponImbueRankAtLevel(WindfuryWeaponLevel[:], shaman.Level)
 
 	ewMultiplier := []float64{1, 1.13, 1.27, 1.4}[shaman.Talents.ElementalWeapons]
 	bonusAP := WindfuryWeaponBonusAP[rank]
@@ -61,7 +54,7 @@ func (shaman *Shaman) RegisterWindfuryImbue(procMask core.ProcMask) {
 		return
 	}
 
-	rank := WindfuryWeaponRankByLevel[shaman.Level]
+	rank := weaponImbueRankAtLevel(WindfuryWeaponLevel[:], shaman.Level)
 	enchantId := WindfuryWeaponEnchantId[rank]
 
 	icdDuration := time.Millisecond * 1500
@@ -129,7 +122,7 @@ func (shaman *Shaman) ApplyWindfuryImbueToItem(item *core.Item) {
 		return
 	}
 
-	rank := WindfuryWeaponRankByLevel[shaman.Level]
+	rank := weaponImbueRankAtLevel(WindfuryWeaponLevel[:], shaman.Level)
 	enchantId := WindfuryWeaponEnchantId[rank]
 
 	item.TempEnchant = enchantId

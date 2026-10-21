@@ -6,30 +6,37 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// backstabLearnLevels are Backstab's eight rank learn levels; source:
+// 1.60.1.70009 client spell data ("Backstab", ranks 1-8). Each rank's level
+// also carries a duplicate id in the 460000s (e.g. 462709 beside rank 1's
+// 53); those are a clone of the same rank, not an extra rank -- dropped.
+var backstabLearnLevels = []int{4, 12, 20, 28, 36, 44, 52, 60}
+
+// backstabSpellID is Backstab's rank -> spell id, index 0 unused. Rank 8's
+// id depends on whether AQ content is included, same as the old code.
+var backstabSpellID = [9]int32{0, 53, 2589, 2590, 2591, 8721, 11279, 11280, core.TernaryInt32(core.IncludeAQ, 25300, 11281)}
+
 func (rogue *Rogue) registerBackstabSpell() {
-	flatDamageBonus := map[int32]float64{
-		25: 32,
-		40: 60,
-		50: 90,
-		60: core.TernaryFloat64(core.IncludeAQ, 150, 140),
-	}[rogue.Level]
+	rank := core.HighestRankAtLevel(backstabLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
 
-	spellID := map[int32]int32{
-		25: 2590,
-		40: 8721,
-		50: 11279,
-		60: core.TernaryInt32(core.IncludeAQ, 25300, 11281),
-	}[rogue.Level]
+	flatDamage := BackstabDamage[rank]
+	casterLevel := int(rogue.Level)
+	spellID := backstabSpellID[rank]
 
-	damageMultiplier := 1.5 * []float64{1, 1.04, 1.08, 1.12, 1.16, 1.2}[rogue.Talents.Opportunity]
+	// 150% weapon damage, with Opportunity and Aggression added together.
+	damageMultiplier := 1.5 * (opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])] + rogue.aggressionBonus())
 
 	rogue.Backstab = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:   SpellCode_RogueBackstab,
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       rogue.builderFlags(),
+		SpellCode:     SpellCode_RogueBackstab,
+		ActionID:      core.ActionID{SpellID: spellID},
+		SpellSchool:   core.SpellSchoolPhysical,
+		DefenseType:   core.DefenseTypeMelee,
+		ProcMask:      core.ProcMaskMeleeMHSpecial,
+		Flags:         rogue.builderFlags() | SpellFlagColdBlooded,
+		RequiredLevel: backstabLearnLevels[rank-1],
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   60,
@@ -48,17 +55,19 @@ func (rogue *Rogue) registerBackstabSpell() {
 			return !rogue.PseudoStats.InFrontOfTarget
 		},
 
-		BonusCritRating: 10 * core.CritRatingPerCritChance * float64(rogue.Talents.ImprovedBackstab),
+		// FOREVER: Improved Backstab is not in the client's trees.
+		// BonusCritRating: 10 * core.CritRatingPerCritChance * float64(rogue.Talents.ImprovedBackstab),
 
 		CritDamageBonus: rogue.lethality(),
 
 		DamageMultiplier: damageMultiplier,
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			rogue.BreakStealth(sim)
-			baseDamage := (flatDamageBonus + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target)))
+			baseDamage := flatDamage.Roll(sim, casterLevel) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
 			if result.Landed() {

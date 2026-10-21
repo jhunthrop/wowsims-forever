@@ -156,59 +156,126 @@ func NewSimpleStatDefensiveTrinketEffect(itemID int32, bonus stats.Stats, durati
 // Apply Aura: Mod Ranged Attack Power vs Creature (Mob Type)
 func NewMobTypeAttackPowerEffect(itemID int32, mobTypes []proto.MobType, bonus float64) {
 	NewItemEffect(itemID, func(agent Agent) {
-		character := agent.GetCharacter()
-
-		matchingTargets := FilterSlice(
-			character.Env.Encounter.TargetUnits,
-			func(unit *Unit) bool { return slices.Contains(mobTypes, unit.MobType) },
-		)
-
-		MakePermanent(character.GetOrRegisterAura(Aura{
-			Label: fmt.Sprintf("Mob type Attack Power Bonus - %s (%d)", mobTypes, itemID),
-			OnGain: func(aura *Aura, sim *Simulation) {
-				for _, target := range matchingTargets {
-					for _, at := range character.AttackTables[target.UnitIndex] {
-						at.BonusAttackPowerTaken += bonus
-					}
-				}
-			},
-			OnExpire: func(aura *Aura, sim *Simulation) {
-				for _, target := range matchingTargets {
-					for _, at := range character.AttackTables[target.UnitIndex] {
-						at.BonusAttackPowerTaken -= bonus
-					}
-				}
-			},
-		}))
+		ApplyMobTypeAttackPower(agent.GetCharacter(), itemID, mobTypes, bonus)
 	})
 }
 
 // Apply a +X Spell Damage when fighting Mob Type effect
 func NewMobTypeSpellPowerEffect(itemID int32, mobTypes []proto.MobType, bonus float64) {
 	NewItemEffect(itemID, func(agent Agent) {
+		ApplyMobTypeSpellPower(agent.GetCharacter(), itemID, mobTypes, bonus)
+	})
+}
+
+// ApplyMobTypeAttackPower gives the character bonus attack power against
+// every target of the given creature types. id names the source (an item
+// or a set-bonus spell) so two sources never share an aura.
+//
+// The pool, not the active prefix: this is set up once, before the pull,
+// and permanently mutates attack tables keyed by UnitIndex, so it means
+// every target in the fight - including the adds a target timeline has
+// not brought in yet.
+func ApplyMobTypeAttackPower(character *Character, id int32, mobTypes []proto.MobType, bonus float64) {
+	matchingTargets := FilterSlice(
+		character.Env.Encounter.AllTargetUnits,
+		func(unit *Unit) bool { return slices.Contains(mobTypes, unit.MobType) },
+	)
+
+	MakePermanent(character.GetOrRegisterAura(Aura{
+		Label: fmt.Sprintf("Mob type Attack Power Bonus - %s (%d)", mobTypes, id),
+		OnGain: func(aura *Aura, sim *Simulation) {
+			for _, target := range matchingTargets {
+				for _, at := range character.AttackTables[target.UnitIndex] {
+					at.BonusAttackPowerTaken += bonus
+				}
+			}
+		},
+		OnExpire: func(aura *Aura, sim *Simulation) {
+			for _, target := range matchingTargets {
+				for _, at := range character.AttackTables[target.UnitIndex] {
+					at.BonusAttackPowerTaken -= bonus
+				}
+			}
+		},
+	}))
+}
+
+// ApplyMobTypeSpellPower is ApplyMobTypeAttackPower for spell damage.
+func ApplyMobTypeSpellPower(character *Character, id int32, mobTypes []proto.MobType, bonus float64) {
+	matchingTargets := FilterSlice(
+		character.Env.Encounter.AllTargetUnits,
+		func(unit *Unit) bool { return slices.Contains(mobTypes, unit.MobType) },
+	)
+
+	MakePermanent(character.GetOrRegisterAura(Aura{
+		Label: fmt.Sprintf("Mob type Spell Damage Bonus - %s (%d)", mobTypes, id),
+		OnGain: func(aura *Aura, sim *Simulation) {
+			for _, target := range matchingTargets {
+				for _, at := range character.AttackTables[target.UnitIndex] {
+					at.BonusSpellDamageTaken += bonus
+				}
+			}
+		},
+		OnExpire: func(aura *Aura, sim *Simulation) {
+			for _, target := range matchingTargets {
+				for _, at := range character.AttackTables[target.UnitIndex] {
+					at.BonusSpellDamageTaken -= bonus
+				}
+			}
+		},
+	}))
+}
+
+// NewMobTypeDamageEffect registers an item that multiplies the wearer's
+// damage against a set of creature types. The flat-stat equivalents are
+// NewMobTypeAttackPowerEffect and NewMobTypeSpellPowerEffect above; this
+// is the multiplier form Forever's specialised trinkets use.
+//
+// character.AttackTables is only allocated later, by
+// Environment.setupAttackTables() during finalize() -- item effects run
+// earlier, during initialize() -- so the mutation is deferred to a
+// RegisterPostFinalizeEffect callback, which runs immediately after
+// setupAttackTables() has populated it. This is the same pattern
+// racials.go's Troll "Beast Slaying" uses for the identical
+// at.DamageDealtMultiplier *= X mutation.
+func NewMobTypeDamageEffect(itemID int32, mobTypes []proto.MobType, multiplier float64) {
+	NewItemEffect(itemID, func(agent Agent) {
 		character := agent.GetCharacter()
-
-		matchingTargets := FilterSlice(
-			character.Env.Encounter.TargetUnits,
-			func(unit *Unit) bool { return slices.Contains(mobTypes, unit.MobType) },
-		)
-
-		MakePermanent(character.GetOrRegisterAura(Aura{
-			Label: fmt.Sprintf("Mob type Spell Damage Bonus - %s (%d)", mobTypes, itemID),
-			OnGain: func(aura *Aura, sim *Simulation) {
-				for _, target := range matchingTargets {
-					for _, at := range character.AttackTables[target.UnitIndex] {
-						at.BonusSpellDamageTaken += bonus
-					}
+		character.Env.RegisterPostFinalizeEffect(func() {
+			// The pool, not the active prefix - the same slice
+			// racials.go's Beast Slaying walks.
+			for _, target := range character.Env.Encounter.AllTargetUnits {
+				if !slices.Contains(mobTypes, target.MobType) {
+					continue
 				}
-			},
-			OnExpire: func(aura *Aura, sim *Simulation) {
-				for _, target := range matchingTargets {
-					for _, at := range character.AttackTables[target.UnitIndex] {
-						at.BonusSpellDamageTaken -= bonus
-					}
+				for _, at := range character.AttackTables[target.UnitIndex] {
+					at.DamageDealtMultiplier *= multiplier
 				}
-			},
-		}))
+			}
+		})
+	})
+}
+
+// NewBiomeDamageEffect registers an item that multiplies the wearer's
+// damage in a set of biomes. Forever's biome trinkets are the reason the
+// encounter carries a biome at all; an encounter with no biome set reads
+// BiomeUnknown and matches nothing, so a vanilla fight is unaffected.
+//
+// Unlike NewMobTypeDamageEffect above, this reads its condition eagerly
+// rather than deferring to RegisterPostFinalizeEffect. That is safe, and
+// the difference is not an oversight: the sibling defers because
+// character.AttackTables does not exist until setupAttackTables(), while
+// Environment.construct() builds the Encounter and wires each unit's Env
+// before initialize() runs any item effect, so the biome is readable
+// here. TestBiomeDamageEffectAppliesOnlyInItsBiome pins that ordering, so
+// a change to it fails a test instead of silently turning every biome
+// trinket off.
+func NewBiomeDamageEffect(itemID int32, biomes []proto.Biome, multiplier float64) {
+	NewItemEffect(itemID, func(agent Agent) {
+		character := agent.GetCharacter()
+		if !slices.Contains(biomes, character.Biome()) {
+			return
+		}
+		character.PseudoStats.DamageDealtMultiplier *= multiplier
 	})
 }

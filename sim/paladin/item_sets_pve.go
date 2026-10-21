@@ -3,6 +3,7 @@ package paladin
 import (
 	"slices"
 
+	"github.com/wowsims/classic/sim/common/clientsetbonus"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/stats"
 )
@@ -22,8 +23,9 @@ var ItemSetLawbringerArmor = core.NewItemSet(core.ItemSet{
 		// Improves your chance to get a critical strike by 1%.
 		5: func(agent core.Agent) {
 			paladin := agent.(PaladinAgent).GetPaladin()
-			paladin.AddStat(stats.MeleeCrit, 1)
-			paladin.AddStat(stats.SpellCrit, 1)
+			// Forever: merged from MeleeCrit 1 + SpellCrit 1. One effect
+			// under a unified stat gets one write.
+			paladin.AddStat(stats.Crit, 1)
 		},
 		// Gives the Paladin a chance on every melee hit to heal your party for 189 to 211.
 		8: func(agent core.Agent) {
@@ -69,6 +71,17 @@ var ItemSetJudgementArmor = core.NewItemSet(core.ItemSet{
 //                            Classic Phase 4 Item Sets - ZG and AB
 ///////////////////////////////////////////////////////////////////////////
 
+// Freethinker's Armor 3-piece: Improved Holy Light, whose client family is
+// Holy Light's (SpellClassOptions bit 31).
+const (
+	freethinkersHolyLightBonus int32 = 24457
+	holyLightClientFamilyBit         = 1 << 31
+)
+
+var holyLightClassMasks = core.ClassMaskTable{
+	{Client: core.ClientClassMask{holyLightClientFamilyBit}, Engine: PaladinSpellMaskHolyLight},
+}
+
 var ItemSetFreethinkersArmor = core.NewItemSet(core.ItemSet{
 	Name: "Freethinker's Armor",
 	Bonuses: map[int32]core.ApplyEffect{
@@ -79,7 +92,7 @@ var ItemSetFreethinkersArmor = core.NewItemSet(core.ItemSet{
 		},
 		// Reduces the casting time of your Holy Light spell by 0.1 sec.
 		3: func(agent core.Agent) {
-			// Nothing to do
+			agent.GetCharacter().AddStaticMod(clientsetbonus.TableMod(freethinkersHolyLightBonus, holyLightClassMasks))
 		},
 		// Increases the duration of all Blessings by 10%.
 		5: func(agent core.Agent) {

@@ -1,0 +1,386 @@
+package spellconst
+
+import (
+	"encoding/json"
+	"math"
+	"os"
+	"path/filepath"
+	"testing"
+)
+
+func TestLoadReadsAClassFile(t *testing.T) {
+	c, err := Load("testdata/warrior.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if c.Slug != "warrior" {
+		t.Errorf("Slug = %q, want %q", c.Slug, "warrior")
+	}
+	if c.Build == "" {
+		t.Error("Build is empty; a constants file must record which client it came from")
+	}
+	if len(c.Spells) == 0 {
+		t.Fatal("no spells loaded")
+	}
+}
+
+func TestByID(t *testing.T) {
+	c, err := Load("testdata/warrior.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	got, ok := c.ByID(23894)
+	if !ok {
+		t.Fatal("spell 23894 (Bloodthirst) not found")
+	}
+	if got.Name != "Bloodthirst" {
+		t.Errorf("name = %q, want Bloodthirst", got.Name)
+	}
+	if _, ok := c.ByID(1); ok {
+		t.Error("spell 1 was found in a warrior file")
+	}
+}
+
+func TestRanksAreOrdered(t *testing.T) {
+	c, err := Load("testdata/warrior.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	ranks := c.Ranks("Bloodthirst")
+	if len(ranks) < 2 {
+		t.Fatalf("Bloodthirst has %d ranks in the fixture, want at least 2", len(ranks))
+	}
+	for i := 1; i < len(ranks); i++ {
+		if ranks[i].Rank <= ranks[i-1].Rank {
+			t.Errorf("ranks are not ascending: %d then %d", ranks[i-1].Rank, ranks[i].Rank)
+		}
+	}
+	if c.Ranks("Nonexistent") != nil {
+		t.Error("an unknown spell name returned ranks")
+	}
+}
+
+// The emitted shape carries cast time, GCD, the two cooldown columns,
+// cost and every effect verbatim for the top rank of the fixture's
+// Bloodthirst, matching the real build 1.60.1.69893 warrior.json. A
+// player's actual cooldown comes from category_cooldown_ms here, because
+// CooldownMS itself is 0 — the ranks share one cooldown.
+func TestBloodthirstEffectsResolve(t *testing.T) {
+	c, err := Load("testdata/warrior.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	s, ok := c.ByID(23894)
+	if !ok {
+		t.Fatal("spell 23894 (Bloodthirst) not found")
+	}
+	if s.CastTimeMS != 0 {
+		t.Errorf("CastTimeMS = %d, want 0", s.CastTimeMS)
+	}
+	if s.GCDMS != 1500 {
+		t.Errorf("GCDMS = %d, want 1500", s.GCDMS)
+	}
+	if s.CategoryCooldownMS != 6000 {
+		t.Errorf("CategoryCooldownMS = %d, want 6000", s.CategoryCooldownMS)
+	}
+	if s.EffectiveCooldownMS() != 6000 {
+		t.Errorf("EffectiveCooldownMS() = %d, want 6000 (falls back to the category cooldown when CooldownMS is 0)", s.EffectiveCooldownMS())
+	}
+	if s.Cost != 300 {
+		t.Errorf("Cost = %v, want 300", s.Cost)
+	}
+	if len(s.Effects) != 3 {
+		t.Fatalf("len(Effects) = %d, want 3", len(s.Effects))
+	}
+	wantAmounts := []float64{48, 35, 10}
+	for i, want := range wantAmounts {
+		if s.Effects[i].Amount != want {
+			t.Errorf("Effects[%d].Amount = %v, want %v", i, s.Effects[i].Amount, want)
+		}
+	}
+}
+
+// The data lane emits the DB2 coefficient columns verbatim, zeros
+// included, because EffectBonusCoefficient is routinely 0 or wrong for
+// Classic-lineage spells. A zero therefore means "absent", and the
+// vanilla convention fills it in — never a literal zero coefficient,
+// which would silently remove all spell-power scaling from an effect.
+func TestZeroCoefficientFallsBackToTheConvention(t *testing.T) {
+	c, err := Load("testdata/warrior.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	s, ok := c.ByID(772) // Rend rank 1 in the fixture, coefficient 0, a 3s-tick 9s dot
+	if !ok {
+		t.Fatal("spell 772 not found")
+	}
+	if len(s.Effects) != 1 {
+		t.Fatalf("len(Effects) = %d, want 1", len(s.Effects))
+	}
+	e := s.Effects[0]
+	if e.ResolvedSPCoefficient == 0 {
+		t.Error("a zero DB2 coefficient was kept as zero; it must fall back to the convention")
+	}
+	if e.CoefficientSource != "convention" {
+		t.Errorf("CoefficientSource = %q, want %q", e.CoefficientSource, "convention")
+	}
+	want, _ := CoefficientFor(s.CastTimeMS, s.DurationMS, false)
+	if math.Abs(e.ResolvedSPCoefficient-want) > 1e-9 {
+		t.Errorf("ResolvedSPCoefficient = %v, want the duration/15 convention's %v", e.ResolvedSPCoefficient, want)
+	}
+}
+
+func TestNonZeroCoefficientIsKept(t *testing.T) {
+	c, err := Load("testdata/warrior.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	s, ok := c.ByID(23881) // Bloodthirst rank 1 in the fixture, coefficient 1.0 on every effect
+	if !ok {
+		t.Fatal("spell 23881 not found")
+	}
+	for i, e := range s.Effects {
+		if math.Abs(e.ResolvedSPCoefficient-1.0) > 1e-9 {
+			t.Errorf("Effects[%d].ResolvedSPCoefficient = %v, want the table's 1.0", i, e.ResolvedSPCoefficient)
+		}
+		if e.CoefficientSource != "table" {
+			t.Errorf("Effects[%d].CoefficientSource = %q, want %q", i, e.CoefficientSource, "table")
+		}
+	}
+}
+
+// The vanilla conventions, in one function so no ability file re-derives
+// them: a direct spell gets cast_time/3.5, a periodic one duration/15,
+// and a hybrid class gets half.
+func TestCoefficientConvention(t *testing.T) {
+	cases := []struct {
+		name       string
+		castMS     int32
+		durationMS int32
+		hybrid     bool
+		want       float64
+		source     string
+	}{
+		{"three second cast", 3000, 0, false, 3.0 / 3.5, "convention"},
+		{"instant direct", 0, 0, false, 1.5 / 3.5, "convention"},
+		{"fifteen second dot", 0, 15000, false, 1.0, "convention"},
+		{"hybrid three second cast", 3000, 0, true, 3.0 / 3.5 / 2, "convention"},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			got, src := CoefficientFor(tc.castMS, tc.durationMS, tc.hybrid)
+			if math.Abs(got-tc.want) > 1e-9 {
+				t.Errorf("CoefficientFor(%d, %d, %v) = %v, want %v", tc.castMS, tc.durationMS, tc.hybrid, got, tc.want)
+			}
+			if src != tc.source {
+				t.Errorf("source = %q, want %q", src, tc.source)
+			}
+		})
+	}
+}
+
+// A cast time under the global cooldown is treated as a GCD cast, which
+// is the vanilla rule and the reason an instant nuke is not coefficient
+// zero.
+func TestInstantCastUsesTheGlobalCooldown(t *testing.T) {
+	got, _ := CoefficientFor(500, 0, false)
+	want := 1.5 / 3.5
+	if math.Abs(got-want) > 1e-9 {
+		t.Errorf("a 0.5s cast gave %v, want the GCD-floored %v", got, want)
+	}
+}
+
+func TestLoadRejectsAMissingFile(t *testing.T) {
+	if _, err := Load("testdata/nope.json"); err == nil {
+		t.Fatal("loading a missing file returned no error")
+	}
+}
+
+// loadFixtureSpells reads the real-fixture testdata as a generic tree, so
+// a test can mutate one spell's fields (inject an unknown one, delete a
+// required one) without hand-maintaining a second copy of the fixture
+// that would drift from testdata/warrior.json over time.
+func loadFixtureSpells(t *testing.T) (top map[string]json.RawMessage, spells map[string]json.RawMessage) {
+	t.Helper()
+	b, err := os.ReadFile("testdata/warrior.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := json.Unmarshal(b, &top); err != nil {
+		t.Fatal(err)
+	}
+	if err := json.Unmarshal(top["spells"], &spells); err != nil {
+		t.Fatal(err)
+	}
+	return top, spells
+}
+
+// writeFixture re-serializes a mutated copy of the fixture's top-level
+// tree, with spells substituted back in, to a temp file Load can read.
+func writeFixture(t *testing.T, top map[string]json.RawMessage, spells map[string]json.RawMessage) string {
+	t.Helper()
+	spellsJSON, err := json.Marshal(spells)
+	if err != nil {
+		t.Fatal(err)
+	}
+	top["spells"] = spellsJSON
+	out, err := json.Marshal(top)
+	if err != nil {
+		t.Fatal(err)
+	}
+	path := filepath.Join(t.TempDir(), "mutated.json")
+	if err := os.WriteFile(path, out, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	return path
+}
+
+// The pipeline's shape changed once already without this loader
+// noticing (an array became an object) — that is the entire reason this
+// package needed a contract follow-up. An unrecognized field in a future
+// shape change must fail loudly here rather than be silently dropped.
+func TestLoadRejectsAnUnknownField(t *testing.T) {
+	top, spells := loadFixtureSpells(t)
+	var bloodthirst4 map[string]json.RawMessage
+	if err := json.Unmarshal(spells["23894"], &bloodthirst4); err != nil {
+		t.Fatal(err)
+	}
+	bloodthirst4["totally_unknown_field"] = json.RawMessage(`123`)
+	b, err := json.Marshal(bloodthirst4)
+	if err != nil {
+		t.Fatal(err)
+	}
+	spells["23894"] = b
+
+	path := writeFixture(t, top, spells)
+	if _, err := Load(path); err == nil {
+		t.Fatal("Load() accepted a spell body with an unrecognized field")
+	}
+}
+
+// A required field silently missing is indistinguishable, once decoded,
+// from that field legitimately being zero (an instant cast, a free
+// spell) — Load must catch the absence before it is decoded away.
+func TestLoadRejectsAMissingRequiredField(t *testing.T) {
+	top, spells := loadFixtureSpells(t)
+	var bloodthirst4 map[string]json.RawMessage
+	if err := json.Unmarshal(spells["23894"], &bloodthirst4); err != nil {
+		t.Fatal(err)
+	}
+	delete(bloodthirst4, "cast_time_ms")
+	b, err := json.Marshal(bloodthirst4)
+	if err != nil {
+		t.Fatal(err)
+	}
+	spells["23894"] = b
+
+	path := writeFixture(t, top, spells)
+	if _, err := Load(path); err == nil {
+		t.Fatal("Load() accepted a spell body missing its required cast_time_ms field")
+	}
+}
+
+// fireballRank12 and lightningBoltRank10 carry the client's own numbers
+// (spell 25306 and 15208 on build 1.60.1.70009).
+var (
+	fireballRank12 = Spell{
+		Name: "Fireball", Rank: 12, SpellLevel: 60, MaxLevel: 64,
+		Effects: []Effect{{Index: 0, Effect: 2, Amount: 483, Variance: 0.24188791215, PointsPerLevel: 3}},
+	}
+	lightningBoltRank10 = Spell{
+		Name: "Lightning Bolt", Rank: 10, SpellLevel: 56, MaxLevel: 61,
+		Effects: []Effect{{Index: 0, Effect: 2, Amount: 196, Variance: 0.10835214704, PointsPerLevel: 1.2}},
+	}
+)
+
+func TestDamageRange(t *testing.T) {
+	cases := []struct {
+		name     string
+		spell    Spell
+		level    int
+		min, max float64
+	}{
+		{"fireball 12 below its level is the stated amount", fireballRank12, 50, 424.5841, 541.4159},
+		{"fireball 12 at its level", fireballRank12, 60, 424.5841, 541.4159},
+		{"fireball 12 two levels above", fireballRank12, 62, 429.8584, 548.1416},
+		{"fireball 12 stops growing at its max level", fireballRank12, 70, 435.1327, 554.8673},
+		{"lightning bolt 10 below its level", lightningBoltRank10, 40, 185.3815, 206.6185},
+		{"lightning bolt 10 four levels above", lightningBoltRank10, 60, 189.9214, 211.6786},
+		{"lightning bolt 10 stops growing at its max level", lightningBoltRank10, 70, 191.0564, 212.9436},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			min, max, ok := c.spell.DamageRange(0, c.level)
+			if !ok {
+				t.Fatal("effect 0 not found")
+			}
+			if math.Abs(min-c.min) > 0.001 || math.Abs(max-c.max) > 0.001 {
+				t.Errorf("DamageRange = %.4f-%.4f, want %.4f-%.4f", min, max, c.min, c.max)
+			}
+		})
+	}
+}
+
+func TestDamageRangeWithoutAMaxLevelIsUncapped(t *testing.T) {
+	spell := fireballRank12
+	spell.MaxLevel = 0
+	min, max, _ := spell.DamageRange(0, 70)
+	if math.Abs(min-450.9558) > 0.001 || math.Abs(max-575.0442) > 0.001 {
+		t.Errorf("an uncapped spell keeps growing past 64: got %.4f-%.4f, want 450.9558-575.0442", min, max)
+	}
+}
+
+func TestDamageRangeOfAFlatEffectIsDegenerate(t *testing.T) {
+	spell := Spell{SpellLevel: 10, Effects: []Effect{{Index: 1, Effect: 2, Amount: 15}}}
+	min, max, ok := spell.DamageRange(1, 60)
+	if !ok || min != 15 || max != 15 {
+		t.Errorf("DamageRange = %v-%v ok=%v, want 15-15", min, max, ok)
+	}
+	if _, _, ok := spell.DamageRange(0, 60); ok {
+		t.Error("an effect index the spell does not have reported ok")
+	}
+}
+
+func TestDamageRangeNeverGoesBelowZero(t *testing.T) {
+	spell := Spell{Effects: []Effect{{Index: 0, Effect: 2, Amount: -5, Variance: 0.2}}}
+	if min, max, _ := spell.DamageRange(0, 60); min != 0 || max != 0 {
+		t.Errorf("DamageRange = %v-%v, want 0-0", min, max)
+	}
+}
+
+func TestLoadCarriesVarianceAndPointsPerLevelWhenTheFileHasThem(t *testing.T) {
+	top, spells := loadFixtureSpells(t)
+	var body map[string]json.RawMessage
+	if err := json.Unmarshal(spells["23894"], &body); err != nil {
+		t.Fatal(err)
+	}
+	var effects []map[string]json.RawMessage
+	if err := json.Unmarshal(body["effects"], &effects); err != nil {
+		t.Fatal(err)
+	}
+	effects[0]["variance"] = json.RawMessage(`0.25`)
+	effects[0]["points_per_level"] = json.RawMessage(`1.5`)
+	body["effects"], _ = json.Marshal(effects)
+	body["max_level"] = json.RawMessage(`64`)
+	spells["23894"], _ = json.Marshal(body)
+
+	c, err := Load(writeFixture(t, top, spells))
+	if err != nil {
+		t.Fatal(err)
+	}
+	got, _ := c.ByID(23894)
+	if got.MaxLevel != 64 || got.Effects[0].Variance != 0.25 || got.Effects[0].PointsPerLevel != 1.5 {
+		t.Errorf("MaxLevel %d, Variance %v, PointsPerLevel %v; want 64, 0.25, 1.5", got.MaxLevel, got.Effects[0].Variance, got.Effects[0].PointsPerLevel)
+	}
+}
+
+func TestLoadReadsAFileWithoutTheDamageKeysAsFlat(t *testing.T) {
+	c, err := Load("testdata/warrior.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	got, _ := c.ByID(23894)
+	if got.MaxLevel != 0 || got.Effects[0].Variance != 0 || got.Effects[0].PointsPerLevel != 0 {
+		t.Errorf("a file without the keys must read zero, got %d %v %v", got.MaxLevel, got.Effects[0].Variance, got.Effects[0].PointsPerLevel)
+	}
+}

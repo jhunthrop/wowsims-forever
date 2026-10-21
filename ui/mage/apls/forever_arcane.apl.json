@@ -1,0 +1,110 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Arcane Power on cooldown: a flat 30 percent damage cooldown with no cast time of its own.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 12042
+          }
+        }
+      }
+    },
+    {
+      "notes": "Presence of Mind on cooldown: free (no GCD) and makes the next cast instant.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 12043
+          }
+        }
+      }
+    },
+    {
+      "notes": "Missile Barrage is the talent proc that empowers your next Arcane Missiles cast -- fire the empowered Missiles under it, where the Arcane guide places the payoff.",
+      "action": {
+        "condition": {
+          "auraIsActive": {
+            "auraId": {
+              "spellId": 400589
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 25345,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
+      "notes": "Arcane Blast twice, never a third time: the client charges it 15% of base mana and each stack of its own buff raises the next cast's cost by 175% (the buff also makes every other spell hit harder while it stands, up to four stacks), so the second Blast is affordable and the third is not. Cast your current highest learned rank.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "auraNumStacks": {
+                "auraId": {
+                  "spellId": 400573
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "2"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 1239700,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Frostbolt is the filler once two Blasts are up: a cheaper, faster cast than Arcane Missiles that still enjoys the Blast buff on your other spells and still has a 20% chance to proc Missile Barrage. Casting it ends the Blast buff, which is the point - the next Blast starts a fresh, cheap pair. Before Arcane Blast is learned, Arcane Missiles spam is the whole rotation.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10181,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while you regenerate, and Wand Specialization adds to it.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "20%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 5019
+          }
+        }
+      }
+    }
+  ]
+}

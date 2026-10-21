@@ -1,0 +1,258 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11668,
+            "rank": 7
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1.5s"
+        }
+      }
+    }
+  ],
+  "priorityList": [
+    {
+      "notes": "Corruption goes down first and is kept up throughout: it is cheap sustained damage that does not compete with your casts.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 11672,
+                  "rank": 6
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11672,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Potion at the top of the fight if mana is already below 75 percent.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "15s"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "75%"
+                    }
+                  }
+                }
+              },
+              {
+                "isExecutePhase": {
+                  "threshold": "E35"
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "otherId": "OtherActionPotion"
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Life Tap to keep casting once mana runs low.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "10%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11689,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Bane of Doom is the one curse kept up: it deals its whole damage when the minute is out, so recast it the moment it fires. Bane of Agony and Curse of the Elements both measured lower in the search.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 603
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 603
+          }
+        }
+      }
+    },
+    {
+      "notes": "Immolate is the DoT both Conflagrate and Incinerate need on the target, so it is recast when under 3 seconds remain.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "dotRemainingTime": {
+                "spellId": {
+                  "spellId": 11668,
+                  "rank": 7
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "3s"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11668,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "Conflagrate consumes part of Immolate's remaining damage as instant burst; only worth casting while Immolate is up. It requires the Conflagrate talent.",
+      "action": {
+        "condition": {
+          "dotIsActive": {
+            "spellId": {
+              "spellId": 11668,
+              "rank": 7
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 18932,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shadowburn is cast on cooldown whenever its reagent cost is acceptable, with no execute-phase gate: it is strong burst at any target health.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 18871,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Incinerate is Destruction's signature filler, dealing bonus damage while Immolate is active. It requires the Incinerate talent, learned at level 40 and ranking up at 50 and 60.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1293813,
+            "rank": 3
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shadow Bolt is the filler while you have not yet learned the Incinerate talent (or have not reached its level-40 requirement); once you have, Incinerate takes priority instead.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "spellIsKnown": {
+                "spellId": {
+                  "spellId": 412758,
+                  "rank": 1
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11661,
+            "rank": 9
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shoot with your wand once mana is under 40 percent: it costs nothing, so mana regenerates while it keeps damage going. Life Tap is only the backstop below 10 percent.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "40%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 5019
+          }
+        }
+      }
+    }
+  ]
+}

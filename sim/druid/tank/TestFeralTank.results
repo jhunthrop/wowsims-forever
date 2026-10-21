@@ -1,0 +1,209 @@
+character_stats_results: {
+ key: "TestFeralTank-Phase1-CharacterStats-Default"
+ value: {
+  final_stats: 293.48
+  final_stats: 378.235
+  final_stats: 665.1117
+  final_stats: 225.423
+  final_stats: 237.82
+  final_stats: 0
+  final_stats: 0
+  final_stats: 0
+  final_stats: 0
+  final_stats: 0
+  final_stats: 0
+  final_stats: 0
+  final_stats: 53.2
+  final_stats: 12
+  final_stats: 56.47631
+  final_stats: 0
+  final_stats: 0
+  final_stats: 1552.96
+  final_stats: 0
+  final_stats: 0
+  final_stats: 0
+  final_stats: 4345.345
+  final_stats: 0
+  final_stats: 0
+  final_stats: 6901.27
+  final_stats: 439
+  final_stats: 0
+  final_stats: 5
+  final_stats: 0
+  final_stats: 37.81175
+  final_stats: 5
+  final_stats: 11228.82285
+  final_stats: 36
+  final_stats: 60
+  final_stats: 70
+  final_stats: 60
+  final_stats: 60
+  final_stats: 519
+  final_stats: 56.35575
+  final_stats: 18.78525
+  final_stats: 0
+ }
+}
+stat_weights_results: {
+ key: "TestFeralTank-Phase1-StatWeights-Default"
+ value: {
+  weights: 0.49642
+  weights: 0.17999
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 4.83229
+  weights: 0
+  weights: 0
+  weights: 0.19621
+  weights: 0
+  weights: 0
+  weights: 14.7772
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: -0.07587
+  weights: 0
+  weights: 0.38478
+  weights: 0
+  weights: 0
+  weights: -1.77725
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-CenarionRaiment"
+ value: {
+  dps: 413.85412
+  tps: 836.85917
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-Champion'sRefuge"
+ value: {
+  dps: 463.05195
+  tps: 927.78958
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-Champion'sSanctuary"
+ value: {
+  dps: 467.87751
+  tps: 939.65354
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-FeralheartRaiment"
+ value: {
+  dps: 450.20611
+  tps: 908.67872
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-FieldMarshal'sSanctuary"
+ value: {
+  dps: 494.98299
+  tps: 985.94552
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-Haruspex'sGarb"
+ value: {
+  dps: 435.90988
+  tps: 875.8747
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-LieutenantCommander'sRefuge"
+ value: {
+  dps: 463.05195
+  tps: 927.78958
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-LieutenantCommander'sSanctuary"
+ value: {
+  dps: 467.87751
+  tps: 939.65354
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-StormrageRaiment"
+ value: {
+  dps: 414.96413
+  tps: 840.44974
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-SymbolsofUnendingLife"
+ value: {
+  dps: 478.73894
+  tps: 957.98908
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-Warlord'sSanctuary"
+ value: {
+  dps: 494.98299
+  tps: 985.94552
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-Average-Default"
+ value: {
+  dps: 664.84049
+  tps: 1362.27025
+  dtps: 704.75021
+ }
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-FullBuffs-Tank-Consumes-LongMultiTarget"
+ value: {}
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-FullBuffs-Tank-Consumes-LongSingleTarget"
+ value: {}
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-FullBuffs-Tank-Consumes-ShortSingleTarget"
+ value: {}
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-NoBuffs-Tank-Consumes-LongMultiTarget"
+ value: {}
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-NoBuffs-Tank-Consumes-LongSingleTarget"
+ value: {}
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-NoBuffs-Tank-Consumes-ShortSingleTarget"
+ value: {}
+}
+dps_results: {
+ key: "TestFeralTank-Phase1-SwitchInFrontOfTarget-Default"
+ value: {
+  dps: 774.03177
+  tps: 1573.64022
+  dtps: 636.17502
+ }
+}

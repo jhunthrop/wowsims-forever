@@ -1,5 +1,5 @@
 import * as OtherInputs from '../core/components/other_inputs.js';
-import { SPELL_HIT_RATING_PER_HIT_CHANCE } from '../core/constants/mechanics';
+import { SCHOOL_HIT_RATING_PER_HIT_CHANCE } from '../core/constants/mechanics';
 import { Phase } from '../core/constants/other.js';
 import { IndividualSimUI, registerSpecConfig } from '../core/individual_sim_ui.js';
 import { Player } from '../core/player.js';
@@ -26,8 +26,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecMage, {
 		Stat.StatArcanePower,
 		Stat.StatFirePower,
 		Stat.StatFrostPower,
-		Stat.StatSpellHit,
-		Stat.StatSpellCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatSpellHaste,
 		Stat.StatMP5,
 	],
@@ -45,8 +45,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecMage, {
 		Stat.StatArcanePower,
 		Stat.StatFirePower,
 		Stat.StatFrostPower,
-		Stat.StatSpellHit,
-		Stat.StatSpellCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatSpellHaste,
 		Stat.StatMP5,
 	],
@@ -64,8 +64,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecMage, {
 			[Stat.StatFirePower]: 1,
 			[Stat.StatFrostPower]: 1,
 			// Aggregated across 3 builds
-			[Stat.StatSpellHit]: 18.59,
-			[Stat.StatSpellCrit]: 13.91,
+			[Stat.StatHit]: 18.59,
+			[Stat.StatCrit]: 13.91,
 			[Stat.StatSpellHaste]: 6.85,
 			[Stat.StatMP5]: 0.11,
 			[Stat.StatFireResistance]: 0.5,
@@ -86,9 +86,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecMage, {
 
 	modifyDisplayStats: (player: Player<Spec.SpecMage>) => {
 		let stats = new Stats();
-		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitArcane, player.getTalents().arcaneFocus * 2 * SPELL_HIT_RATING_PER_HIT_CHANCE);
-		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitFire, player.getTalents().elementalPrecision * 2 * SPELL_HIT_RATING_PER_HIT_CHANCE);
-		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitFrost, player.getTalents().elementalPrecision * 2 * SPELL_HIT_RATING_PER_HIT_CHANCE);
+		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitArcane, player.getTalents().arcaneFocus * 2 * SCHOOL_HIT_RATING_PER_HIT_CHANCE);
+		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitFire, player.getTalents().elementalPrecision * 2 * SCHOOL_HIT_RATING_PER_HIT_CHANCE);
+		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitFrost, player.getTalents().elementalPrecision * 2 * SCHOOL_HIT_RATING_PER_HIT_CHANCE);
 
 		return {
 			talents: stats,

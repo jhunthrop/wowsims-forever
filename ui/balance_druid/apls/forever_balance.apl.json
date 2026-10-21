@@ -1,0 +1,92 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Moonfire only to clip the last seconds; maintaining it costs more mana than it returns in this sim. With under 1.5 seconds left only the instant cast lands in time.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "remainingTime": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "1.5"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9835,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
+      "notes": "Less than 3.5 seconds left: Wrath's 2 second cast still finishes, Starfire's 3.5 second cast would not.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "remainingTime": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "3.5"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9912,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
+      "notes": "Keep Insect Swarm ticking; it is a cheap DoT with no GCD contention beyond its application.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 24977,
+                  "rank": 5
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 24977,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Starfire is the whole rest of the rotation once Insect Swarm is ticking.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9876,
+            "rank": 6
+          }
+        }
+      }
+    }
+  ]
+}

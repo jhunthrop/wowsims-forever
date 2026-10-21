@@ -6,43 +6,52 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// TODO: Classic Update
-func (warrior *Warrior) RegisterShieldWallCD() {
-	duration := time.Duration(10+[]float64{0, 3, 5}[warrior.Talents.ImprovedShieldWall]) * time.Second
-	//This is the inverse of the tooltip since it is a damage TAKEN coefficient
-	damageTaken := 0.25
+// Shield Wall (client spell 871): "-60" damage taken on every school
+// (aura 87, misc 127) for 12000 ms, 900000 ms cooldown, one global
+// cooldown. The vanilla 75% for 10 sec and 30 minutes are gone; the
+// Deep Dive's "15 min / 60% for 12 s" is the client's own row.
+const (
+	shieldWallDuration       = 12 * time.Second
+	shieldWallDamageMultiple = 0.4
+)
 
-	actionID := core.ActionID{SpellID: 871}
+func (warrior *Warrior) RegisterShieldWallCD() {
+	actionID := core.ActionID{SpellID: ShieldWallSpellId[0]}
 	swAura := warrior.RegisterAura(core.Aura{
 		Label:    "Shield Wall",
 		ActionID: actionID,
-		Duration: duration,
+		Duration: shieldWallDuration,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			warrior.PseudoStats.DamageTakenMultiplier *= damageTaken
+			warrior.PseudoStats.DamageTakenMultiplier *= shieldWallDamageMultiple
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			warrior.PseudoStats.DamageTakenMultiplier /= damageTaken
+			warrior.PseudoStats.DamageTakenMultiplier /= shieldWallDamageMultiple
 		},
 	})
 
-	cooldownDur := time.Minute * 30
-
 	swSpell := warrior.RegisterSpell(DefensiveStance, core.SpellConfig{
-		ActionID: actionID,
+		ActionID:       actionID,
+		ClassSpellMask: WarriorSpellMaskShieldWall,
+
+		RequiredLevel: ShieldWallLevel[0],
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: 0,
+				// The client gives Shield Wall the standard GCD
+				// (gcd_ms 1500); it was not off the GCD.
+				GCD: core.GCDDefault,
 			},
 			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    warrior.NewTimer(),
-				Duration: cooldownDur,
+				Duration: warrior.shieldWallCooldown(),
 			},
 		},
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 			return warrior.PseudoStats.CanBlock
 		},
+
+		RelatedSelfBuff: swAura,
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
 			swAura.Activate(sim)

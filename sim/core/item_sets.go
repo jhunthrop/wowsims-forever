@@ -65,6 +65,16 @@ func NewItemSet(set ItemSet) *ItemSet {
 		}
 	}
 
+	return addItemSet(set)
+}
+
+// RegisteredItemSets is every item set the engine registered, in
+// registration order. The slice is a copy.
+func RegisteredItemSets() []*ItemSet {
+	return slices.Clone(sets)
+}
+
+func addItemSet(set ItemSet) *ItemSet {
 	sets = append(sets, &set)
 	return &set
 }

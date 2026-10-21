@@ -1,0 +1,152 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11300,
+            "rank": 8
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentComboPoints": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "5"
+              }
+            }
+          }
+        }
+      },
+      "notes": "Eviscerate at five combo points, checked ahead of Slice and Dice so a full finisher is never traded for a refresh."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6774,
+            "rank": 2
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "auraIsActive": {
+                      "auraId": {
+                        "spellId": 6774,
+                        "rank": 2
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "15s"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Slice and Dice opened in the first 15 seconds as soon as three combo points are banked. It is not refreshed at five points: Eviscerate (checked first) takes the five-point sets, and a refresh in the 25 to 35 energy window before Eviscerate is affordable took every set on an energy-starved character, so Eviscerate never cast at levels 10 and 20."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11281,
+            "rank": 8
+          }
+        }
+      },
+      "notes": "Backstab is the builder when a dagger is in the main hand (Backstab refuses to cast otherwise): it hits for 150% weapon damage against Sinister Strike's 100%, and Puncturing Wounds adds crit and an extra combo point chance to it."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 13750
+          }
+        }
+      },
+      "notes": "Adrenaline Rush on cooldown: it doubles energy regeneration for 15 seconds."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11294,
+            "rank": 8
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "spellCanCast": {
+                      "spellId": {
+                        "spellId": 11281,
+                        "rank": 8
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentEnergy": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "60"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Sinister Strike builds when Backstab cannot be cast (no dagger in the main hand). Held until 60 energy so a dagger build, which would have cast Backstab at that point, never spends the energy here."
+    }
+  ]
+}

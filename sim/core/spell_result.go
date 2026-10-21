@@ -113,15 +113,15 @@ func (spell *Spell) RangedAttackPower(target *Unit, ignoreTargetModifiers bool) 
 }
 
 func (spell *Spell) PhysicalHitChance(attackTable *AttackTable) float64 {
-	hitRating := spell.Unit.stats[stats.MeleeHit] +
+	hitRating := spell.Unit.stats[stats.Hit] +
 		spell.BonusHitRating +
 		attackTable.Defender.PseudoStats.BonusMeleeHitRatingTaken
-	hitChance := hitRating / (MeleeHitRatingPerHitChance * 100)
+	hitChance := hitRating / (HitRatingPerHitChance * 100)
 	return max(hitChance-attackTable.HitSuppression, 0)
 }
 
 func (spell *Spell) PhysicalCritChance(attackTable *AttackTable) float64 {
-	critRating := spell.Unit.stats[stats.MeleeCrit] +
+	critRating := spell.Unit.stats[stats.Crit] +
 		spell.BonusCritRating
 	return critRating/(CritRatingPerCritChance*100) - attackTable.MeleeCritSuppression
 }
@@ -192,16 +192,20 @@ func (spell *Spell) GetSchoolDamage(target *Unit) float64 {
 	}
 }
 
+// minSpellMissChance is the residual miss chance no amount of spell hit
+// removes: a spell always has a 1% chance to miss in classic.
+const minSpellMissChance = 0.01
+
 func (spell *Spell) SpellHitChance(target *Unit) float64 {
-	hitRating := spell.Unit.stats[stats.SpellHit] +
+	hitRating := spell.Unit.stats[stats.Hit] +
 		spell.BonusHitRating +
 		spell.Unit.GetSchoolBonusHitChance(spell) +
 		target.PseudoStats.BonusSpellHitRatingTaken
 
-	return hitRating / (SpellHitRatingPerHitChance * 100)
+	return hitRating / (HitRatingPerHitChance * 100)
 }
 func (spell *Spell) SpellChanceToMiss(attackTable *AttackTable) float64 {
-	missChance := 0.01
+	missChance := minSpellMissChance
 
 	if spell.Flags.Matches(SpellFlagBinary) {
 		baseHitChance := (1 - attackTable.BaseSpellMissChance) * attackTable.GetBinaryHitChance(spell)
@@ -211,21 +215,21 @@ func (spell *Spell) SpellChanceToMiss(attackTable *AttackTable) float64 {
 	}
 
 	// Always a 1% chance to miss in classic
-	return max(0.01, missChance)
+	return max(minSpellMissChance, missChance)
 }
 func (spell *Spell) MagicHitCheck(sim *Simulation, attackTable *AttackTable) bool {
 	return sim.Proc(1.0-spell.SpellChanceToMiss(attackTable), "Magical Hit Roll")
 }
 
 func (spell *Spell) spellCritRating(_ *Unit) float64 {
-	return spell.Unit.stats[stats.SpellCrit] +
+	return spell.Unit.stats[stats.Crit] +
 		spell.BonusCritRating
 }
 func (spell *Spell) SpellCritChance(target *Unit) float64 {
 	// TODO: Classic verify crit suppression
-	return spell.spellCritRating(target)/(SpellCritRatingPerCritChance*100) +
+	return spell.spellCritRating(target)/(CritRatingPerCritChance*100) +
 		target.GetSchoolCritTakenChance(spell) +
-		(spell.Unit.GetSchoolBonusCritChance(spell) / (SpellCritRatingPerCritChance * 100))
+		(spell.Unit.GetSchoolBonusCritChance(spell) / (CritRatingPerCritChance * 100))
 	// - spell.Unit.AttackTables[target.UnitIndex][spell.CastType].SpellCritSuppression
 }
 func (spell *Spell) MagicCritCheck(sim *Simulation, target *Unit) bool {
@@ -233,13 +237,21 @@ func (spell *Spell) MagicCritCheck(sim *Simulation, target *Unit) bool {
 	return sim.RandomFloat("Magical Crit Roll") < critChance
 }
 
+// HealingPower is the bonus healing a heal adds its coefficient times.
+//
+// It is the healing stat alone. The site's item data states a spell's
+// damage and healing bonuses as separate stats (an old "damage and
+// healing" item is spell power N and healing N; a Forever healing item is
+// healing N and spell power N/3, Forever's one-third rule), so spell
+// power here is damage only, and adding it would count the same bonus
+// twice or credit a healer with damage it cannot heal with. A source
+// that grants both (Atiesh's aura, Champion of the Light) grants both.
 func (spell *Spell) HealingPower(target *Unit) float64 {
-	return spell.Unit.GetStat(stats.SpellPower) +
-		spell.Unit.GetStat(stats.HealingPower) +
+	return spell.Unit.GetStat(stats.HealingPower) +
 		target.PseudoStats.BonusHealingTaken
 }
 func (spell *Spell) healingCritRating() float64 {
-	return spell.Unit.GetStat(stats.SpellCrit) + spell.BonusCritRating
+	return spell.Unit.GetStat(stats.Crit) + spell.BonusCritRating
 }
 func (spell *Spell) HealingCritChance() float64 {
 	return spell.healingCritRating() / (CritRatingPerCritChance * 100)
@@ -555,9 +567,11 @@ func (spell *Spell) dealHealingInternal(sim *Simulation, isPeriodic bool, result
 	}
 	spell.SpellMetrics[result.Target.UnitIndex].TotalHealing += result.Damage
 	spell.SpellMetrics[result.Target.UnitIndex].TotalThreat += result.Threat
+	effective := result.Damage
 	if result.Target.HasHealthBar() {
-		result.Target.GainHealth(sim, result.Damage, spell.HealthMetrics(result.Target))
+		effective = result.Target.GainHealth(sim, result.Damage, spell.HealthMetrics(result.Target))
 	}
+	spell.SpellMetrics[result.Target.UnitIndex].TotalEffectiveHealing += effective
 
 	if sim.Log != nil {
 		if isPeriodic {
@@ -699,4 +713,12 @@ func (spell *Spell) applyTargetHealingModifiers(damage float64, attackTable *Att
 	return damage *
 		attackTable.Defender.PseudoStats.HealingTakenMultiplier *
 		attackTable.HealingDealtMultiplier
+}
+
+// effectiveArmor applies the attacker's percentage armour ignore. The
+// fraction is clamped to [0, 1]: two talents stacking past 100% must
+// reduce armour to zero, never below it, or mitigation inverts and the
+// target takes a bonus.
+func effectiveArmor(armor, ignorePercent float64) float64 {
+	return armor * (1 - min(1, max(0, ignorePercent)))
 }

@@ -9,8 +9,35 @@ import (
 )
 
 func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.SpellConfig {
-	spellId := [6]int32{0, 409521, 409524, 409526, 409528, 409530}[rank]
-	dotDamage := [6]float64{0, 105, 215, 340, 510, 690}[rank]
+	// The client's duration_ms is 60000 for every rank -- the trap's
+	// armed lifetime on the ground, the same quantity
+	// explosive_trap.go's and freezing_trap.go's comments describe --
+	// but this spell's Dot IS exposed to compare.go's engineDuration
+	// (it is a real per-target Dot, not AOE), so the conformance report
+	// shows a genuine number here instead of a missing one: 15000ms,
+	// this engine's 5-tick, 3s-period burn length (NumberOfTicks *
+	// TickLength below). Both 60000 and 15000 are real, correctly
+	// implemented numbers; they are just not the same quantity (armed
+	// lifetime vs. burn length), so this is left as a documented
+	// semantic mismatch rather than forced to match.
+	//
+	// Ids, mana cost and level match spellconst/hunter.json's own
+	// spells table exactly (13795/14302/14303/14304/14305; the old
+	// 409521-409530 ids do not exist in the client at all). The cast
+	// spell's own effect 104 (trigger spell) points at a server-side
+	// script spell (164638/164872/164873/164874/164875) with no entry
+	// anywhere in spellconst, but the actual dot damage lives in a
+	// separate, real "Immolation Trap Effect" spell per rank
+	// (13797/14298/14299/14300/14301, spell_level matching): a 5-tick,
+	// 3s-period periodic-damage aura (effect 6, aura 3) of 21/43/68/
+	// 102/138 per tick - ImmolationTrapTickDamage
+	// (client_damage.go) and TickLength (fixed from 1.5s to the real 3s below) both now match
+	// exactly. Corroborated on Wowhead's Forever pages (spell=13797/
+	// 14301: "22 every 3 seconds" / "139 every 3 seconds", 15s/5-tick
+	// duration).
+	spellId := [6]int32{0, 13795, 14302, 14303, 14304, 14305}[rank]
+	tickDamage := ImmolationTrapTickDamage[rank]
+	casterLevel := int(hunter.Level)
 	manaCost := [6]float64{0, 50, 90, 135, 190, 245}[rank]
 	level := [6]int{0, 16, 26, 36, 46, 56}[rank]
 
@@ -20,7 +47,7 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 		SpellSchool:   core.SpellSchoolFire,
 		DefenseType:   core.DefenseTypeMagic,
 		ProcMask:      core.ProcMaskSpellDamage,
-		Flags:         core.SpellFlagAPL | core.SpellFlagPassiveSpell | SpellFlagTrap,
+		Flags:         core.SpellFlagAPL | SpellFlagTrap,
 		Rank:          rank,
 		RequiredLevel: level,
 		MissileSpeed:  24,
@@ -30,8 +57,12 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 		},
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
-				Timer:    timer,
-				Duration: time.Second * 15,
+				Timer: timer,
+				// spellconst's category_cooldown_ms is 30000 for every
+				// rank (confirmed on Wowhead's Forever pages: "Cooldown:
+				// 30 seconds"), not the old 15s - this is the shared
+				// "Traps" category cooldown, not a per-rank value.
+				Duration: time.Second * 30,
 			},
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,
@@ -41,6 +72,7 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: tickDamage.Range(casterLevel),
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
@@ -48,11 +80,10 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 				Tag:   "ImmolationTrap",
 			},
 			NumberOfTicks: 5,
-			TickLength:    time.Millisecond * 1500,
+			TickLength:    time.Second * 3,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				tickDamage := dotDamage / float64(dot.NumberOfTicks)
-				dot.Snapshot(target, tickDamage, isRollover)
+				dot.Snapshot(target, tickDamage.Roll(sim, casterLevel), isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
@@ -64,10 +95,10 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 				return
 			}
 			// Traps gain no benefit from hit bonuses except for the Trap Mastery talent, since this is a unique interaction this is my workaround
-			spellHit := spell.Unit.GetStat(stats.SpellHit) + target.PseudoStats.BonusSpellHitRatingTaken
-			spell.Unit.AddStatDynamic(sim, stats.SpellHit, spellHit*-1)
+			spellHit := spell.Unit.GetStat(stats.Hit) + target.PseudoStats.BonusSpellHitRatingTaken
+			spell.Unit.AddStatDynamic(sim, stats.Hit, spellHit*-1)
 			result := spell.CalcOutcome(sim, target, spell.OutcomeMagicHitNoHitCounter)
-			spell.Unit.AddStatDynamic(sim, stats.SpellHit, spellHit)
+			spell.Unit.AddStatDynamic(sim, stats.Hit, spellHit)
 			spell.WaitTravelTime(sim, func(s *core.Simulation) {
 				spell.DealOutcome(sim, result)
 				if result.Landed() {

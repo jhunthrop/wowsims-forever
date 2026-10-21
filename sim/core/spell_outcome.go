@@ -100,6 +100,55 @@ func (dot *Dot) OutcomeMagicHitAndSnapshotCrit(sim *Simulation, result *SpellRes
 	}
 }
 
+// OutcomeMagicCritPerTick rolls crit on every tick rather than
+// snapshotting it at application.
+//
+// OutcomeMagicHitAndSnapshotCrit (above) rolls crit once, at application,
+// and every tick of that application either crits or doesn't. Forever may
+// instead roll crit fresh per tick, which forever-measure distinguishes
+// from a snapshot by whether a dot's ticks show runs of identical
+// outcomes (snapshot) or an interleaved mix (per tick). Like its sibling
+// dot tick outcomes (OutcomeTickPhysicalCrit, OutcomeSnapshotCrit), hit
+// is decided once at the dot's application - by the spell's own
+// ApplyEffects outcome - so this only resolves crit vs. a plain tick.
+func (dot *Dot) OutcomeMagicCritPerTick(sim *Simulation, result *SpellResult, attackTable *AttackTable) {
+	// CanCrit is the opt-in, and this is where it is read. Forever
+	// enables periodic crits per spell rather than per school, so a dot
+	// that has not been measured as critting must tick flat however
+	// much crit the caster has - the same rule
+	// TestDotsDoNotCritByDefault holds for the plain OutcomeTick.
+	if !dot.CanCrit {
+		dot.OutcomeTick(sim, result, attackTable)
+		return
+	}
+
+	isPartialResist := result.DidResist()
+
+	if sim.RandomFloat("Magic Dot Crit") < dot.Spell.SpellCritChance(result.Target) {
+		result.Outcome = OutcomeCrit
+		// Only asks the spell for its multiplier when the dot didn't
+		// choose one: spell.CritMultiplier() requires a DefenseType and
+		// panics without one, and a dot that set its own multiplier has
+		// no reason to need it. Zero here means "not asked", which is
+		// also what dotCritMultiplier reads it as.
+		parentCritMultiplier := 0.0
+		if dot.CritMultiplier == 0 {
+			parentCritMultiplier = dot.Spell.CritMultiplier(attackTable)
+		}
+		result.Damage *= dotCritMultiplier(dot.CritMultiplier, parentCritMultiplier)
+		dot.Spell.SpellMetrics[result.Target.UnitIndex].CritTicks++
+		if isPartialResist {
+			dot.Spell.SpellMetrics[result.Target.UnitIndex].ResistedCritTicks++
+		}
+	} else {
+		result.Outcome = OutcomeHit
+		dot.Spell.SpellMetrics[result.Target.UnitIndex].Ticks++
+		if isPartialResist {
+			dot.Spell.SpellMetrics[result.Target.UnitIndex].ResistedTicks++
+		}
+	}
+}
+
 func (spell *Spell) OutcomeMagicHitAndCrit(sim *Simulation, result *SpellResult, attackTable *AttackTable) {
 	spell.outcomeMagicHitAndCrit(sim, result, attackTable, true)
 }
@@ -650,7 +699,7 @@ func (spell *Spell) outcomeEnemyMeleeWhite(sim *Simulation, result *SpellResult,
 func (result *SpellResult) applyAttackTableMiss(spell *Spell, attackTable *AttackTable, roll float64, chance *float64, countHits bool) bool {
 	missChance := attackTable.BaseMissChance - spell.PhysicalHitChance(attackTable)
 	if spell.Unit.AutoAttacks.IsDualWielding && !spell.Unit.PseudoStats.DisableDWMissPenalty {
-		missChance += 0.19
+		missChance += activeAttackTable.DualWieldMissPenalty
 	}
 	*chance = max(0, missChance)
 
@@ -821,7 +870,7 @@ func (result *SpellResult) applyEnemyAttackTableMiss(spell *Spell, attackTable *
 	missChance := attackTable.BaseMissChance + spell.Unit.PseudoStats.IncreasedMissChance +
 		result.Target.stats[stats.Defense]*DefenseRatingToChanceReduction
 	if spell.Unit.AutoAttacks.IsDualWielding && !spell.Unit.PseudoStats.DisableDWMissPenalty {
-		missChance += 0.19
+		missChance += activeAttackTable.DualWieldMissPenalty
 	}
 	*chance = max(0, missChance)
 

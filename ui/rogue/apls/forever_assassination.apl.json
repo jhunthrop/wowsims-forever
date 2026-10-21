@@ -1,0 +1,157 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 14177
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentComboPoints": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "4"
+              }
+            }
+          }
+        }
+      },
+      "notes": "Cold Blood right before the finisher, for a guaranteed crit on the next Eviscerate. It costs no combo points and no global cooldown, so it is checked first and simply waits for the finisher below."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6774,
+            "rank": 2
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "4"
+                    }
+                  }
+                }
+              },
+              {
+                "or": {
+                  "vals": [
+                    {
+                      "not": {
+                        "val": {
+                          "auraIsActive": {
+                            "auraId": {
+                              "spellId": 6774,
+                              "rank": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "auraRemainingTime": {
+                            "auraId": {
+                              "spellId": 6774,
+                              "rank": 2
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "3"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Slice and Dice ahead of Eviscerate, opened when it is down and refreshed under 3 seconds remaining, at four or more combo points. At 25 energy it is the cheaper finisher; keeping it up is worth more than the Eviscerate it delays by a beat."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11300,
+            "rank": 8
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentComboPoints": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "4"
+              }
+            }
+          }
+        }
+      },
+      "notes": "Eviscerate at four or more combo points, whenever its 35 energy is there. Mutilate gives two combo points a cast, so combo points arrive in steps of two; waiting for a fifth wastes one of them and a Mutilate on top."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1241584,
+            "rank": 4
+          }
+        }
+      },
+      "notes": "Mutilate is this tree's builder: both weapons strike for 2 combo points a cast. Without the talent this falls through to Sinister Strike."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11294,
+            "rank": 8
+          }
+        },
+        "condition": {
+          "not": {
+            "val": {
+              "spellIsKnown": {
+                "spellId": {
+                  "spellId": 1241584,
+                  "rank": 4
+                }
+              }
+            }
+          }
+        }
+      },
+      "notes": "Sinister Strike builds only for a rogue without Mutilate; once the talent is taken Mutilate builds every combo point and this line is idle by design."
+    }
+  ]
+}

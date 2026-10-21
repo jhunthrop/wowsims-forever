@@ -43,6 +43,15 @@ type Simulation struct {
 
 	Log func(string, ...interface{})
 
+	// sample, when set, collects one unit's casts for the sample-iteration
+	// log. It is only ever set on the throwaway Simulation the replay
+	// builds, never on the one whose metrics are reported.
+	sample *sampleRecorder
+
+	// iterationSamples is (dps, seed) per iteration, filled only when the
+	// request asked for a sample log.
+	iterationSamples []iterationSample
+
 	executePhase int32 // 20, 25, or 35 for the respective execute range, 100 otherwise
 
 	executePhaseCallbacks []func(*Simulation, int32) // 2nd parameter is 35 for 35%, 25 for 25% and 20 for 20%
@@ -179,6 +188,10 @@ func runSim(rsr *proto.RaidSimRequest, progress chan *proto.ProgressMetrics, ski
 	// using a variable here allows us to mutate it in the deferred recover, sending out error info
 	result = sim.run()
 
+	if rsr.SimOptions.SampleIteration && result.Error == nil {
+		result.SampleIteration = runSampleIteration(rsr, sim.iterationSamples, sim.BaseDuration, signals)
+	}
+
 	return result
 }
 
@@ -232,7 +245,13 @@ func (sim *Simulation) labelRand(label string) Rand {
 }
 
 func (sim *Simulation) reseedRands(i int64) {
-	rseed := sim.Options.RandomSeed + i
+	sim.reseedTo(sim.Options.RandomSeed + i)
+}
+
+// reseedTo puts the RNGs at an exact seed. reseedRands derives one from
+// an iteration index; the sample replay uses the seed directly, which is
+// what lets it reproduce a chosen iteration on a fresh Simulation.
+func (sim *Simulation) reseedTo(rseed int64) {
 	sim.rand.Seed(rseed)
 
 	if sim.isTest {
@@ -240,6 +259,17 @@ func (sim *Simulation) reseedRands(i int64) {
 			rng.Seed(makeTestRandSeed(rseed, label))
 		}
 	}
+}
+
+// iterationSeed is the seed iteration i ran at. Iteration 0 runs at the
+// seed the Simulation was constructed with - which is time-based when the
+// request left RandomSeed at zero - and every later iteration at
+// RandomSeed+i, because that is what the run loop does.
+func (sim *Simulation) iterationSeed(i int32) int64 {
+	if i == 0 {
+		return sim.rseed
+	}
+	return sim.Options.RandomSeed + int64(i)
 }
 
 func makeTestRandSeed(rseed int64, label string) int64 {
@@ -296,12 +326,25 @@ func (sim *Simulation) run() *proto.RaidSimResult {
 	// 	fmt.Printf(fmt.Sprintf("[%0.1f] "+message+"\n", append([]interface{}{sim.CurrentTime.Seconds()}, vals...)...))
 	// }
 
+	sampling := sim.Options.SampleIteration
+	if sampling {
+		sim.iterationSamples = make([]iterationSample, 0, sim.Options.Iterations)
+	}
+	sampleUnit := sim.sampleUnit()
+	if sampleUnit == nil {
+		sampling = false
+	}
+
 	sim.runOnce()
 	firstIterationDuration := sim.Duration
 	if sim.Encounter.EndFightAtHealth != 0 {
 		firstIterationDuration = sim.CurrentTime
 	}
 	totalDuration := firstIterationDuration
+
+	if sampling {
+		sim.recordIterationSample(sampleUnit, sim.iterationSeed(0))
+	}
 
 	if !sim.Options.Debug {
 		sim.Log = nil
@@ -338,6 +381,10 @@ func (sim *Simulation) run() *proto.RaidSimResult {
 			iterDuration = sim.CurrentTime
 		}
 		totalDuration += iterDuration
+
+		if sampling {
+			sim.recordIterationSample(sampleUnit, sim.iterationSeed(i))
+		}
 	}
 	result := &proto.RaidSimResult{
 		RaidMetrics:      sim.Raid.GetMetrics(),
@@ -420,6 +467,8 @@ func (sim *Simulation) reset() {
 	sim.Environment.reset(sim)
 
 	sim.initManaTickAction()
+	sim.initEncounterMovement()
+	sim.initEncounterTargets()
 }
 
 func (sim *Simulation) PrePull() {
@@ -467,7 +516,12 @@ func (sim *Simulation) Cleanup() {
 	for _, unit := range sim.Raid.AllUnits {
 		unit.Metrics.doneIteration(unit, sim)
 	}
-	for _, target := range sim.Encounter.TargetUnits {
+	// The whole pool, not the active prefix: Encounter.doneIteration
+	// just above and Encounter.GetMetricsProto afterwards both walk
+	// every pooled target, so finishing only the active ones leaves a
+	// target the timeline deactivated with no samples at all - its
+	// mean divides by zero and the report carries NaN out to the site.
+	for _, target := range sim.Encounter.AllTargetUnits {
 		target.Metrics.doneIteration(target, sim)
 	}
 }
@@ -577,6 +631,14 @@ func (sim *Simulation) nextExecutePhase() {
 
 	sim.nextExecuteDuration = NeverExpires
 	sim.nextExecuteDamage = math.MaxFloat64
+
+	// A target dummy has no execute window. Its proportions are all zero,
+	// and (1 - 0) * Duration would still open every phase on the fight's
+	// last tick, so a dummy stays at 100 for the whole fight instead.
+	if sim.Encounter.Dummy {
+		sim.executePhase = 100
+		return
+	}
 
 	switch sim.executePhase {
 	case 0: // reset, waiting for 35%

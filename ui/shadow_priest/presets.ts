@@ -20,6 +20,7 @@ import {
 } from '../core/proto/common.js';
 import { ShadowPriest_Options as Options } from '../core/proto/priest.js';
 import { SavedTalents } from '../core/proto/ui.js';
+import ForeverShadowAPL from './apls/forever_shadow.apl.json';
 import P1APL from './apls/p1.apl.json';
 import P0BISGear from './gear_sets/p0.bis.gear.json';
 import P1BISGear from './gear_sets/p1.bis.gear.json';
@@ -45,13 +46,19 @@ export const DefaultGear = GearP0BIS;
 //                                 APL Presets
 ///////////////////////////////////////////////////////////////////////////
 
+// The Forever rotations below are the launch defaults. Each is a copy of
+// data/curated/apl/<class>-<spec>.json's `rotation` in the Forever Sixty site
+// repository, written here by that repository's `make apl-sync` and proved by
+// its `make apl-check`; edit the curated file, never this copy. The Era lists
+// are kept because a Forever character can still be compared against them.
 export const APLP1Shadow = PresetUtils.makePresetAPLRotation('Shadow', P1APL);
+export const AplForeverShadow = PresetUtils.makePresetAPLRotation('Forever Shadow', ForeverShadowAPL);
 
 export const APLPresets = {
-	[Phase.Phase1]: [APLP1Shadow],
+	[Phase.Phase1]: [APLP1Shadow, AplForeverShadow],
 };
 
-export const DefaultAPL = APLPresets[Phase.Phase1][0];
+export const DefaultAPL = AplForeverShadow;
 
 ///////////////////////////////////////////////////////////////////////////
 //                                 Talent Presets

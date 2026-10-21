@@ -46,12 +46,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 		Stat.StatIntellect,
 		// Physical
 		Stat.StatAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatExpertise,
 		// Spell
-		Stat.StatSpellHit,
-		Stat.StatSpellCrit,
 		Stat.StatSpellPower,
 		Stat.StatHolyPower,
 		Stat.StatHealingPower,
@@ -79,12 +77,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 		Stat.StatIntellect,
 		// Physical
 		Stat.StatAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatExpertise,
 		// Spell
-		Stat.StatSpellHit,
-		Stat.StatSpellCrit,
 		Stat.StatSpellPower,
 		Stat.StatHolyPower,
 		Stat.StatHealingPower,
@@ -114,11 +110,11 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 				[Stat.StatIntellect]: 0.05,
 				[Stat.StatSpellPower]: 0.38,
 				[Stat.StatHolyPower]: 0.29,
-				[Stat.StatSpellHit]: 8.2,
-				[Stat.StatSpellCrit]: 3.35,
+				// Forever: merged from MeleeHit 0.0 + SpellHit 8.2. unconfirmed
+				[Stat.StatHit]: 8.2,
+				// Forever: merged from MeleeCrit 39.75 + SpellCrit 3.35. unconfirmed
+				[Stat.StatCrit]: 39.75,
 				[Stat.StatAttackPower]: 1.0,
-				[Stat.StatMeleeHit]: 0.0,
-				[Stat.StatMeleeCrit]: 39.75,
 				[Stat.StatMana]: 0.0,
 				[Stat.StatArmor]: 1.0,
 				[Stat.StatDefense]: 29.97,

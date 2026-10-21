@@ -3,76 +3,60 @@ package druid
 import (
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
-type FerociousBiteRankInfo struct {
-	id           int32
-	level        int32
-	dmgBase      float64
-	dmgRange     float64
-	dmgPerCombo  float64
-	dmgPerEnergy float64
-}
+// FerociousBiteDamage is constants_auto_gen.go's row as an Effect per rank.
+var FerociousBiteDamage = clientdamage.FromTable(FerociousBiteBaseDamage[:], FerociousBitePointsPerLevel[:], FerociousBiteLevel[:], FerociousBiteMaxLevel[:])
 
-var ferociousBiteRanks = []FerociousBiteRankInfo{
-	{
-		id:           22568,
-		level:        32,
-		dmgBase:      14.0,
-		dmgRange:     16.0,
-		dmgPerCombo:  36.0,
-		dmgPerEnergy: 1.0,
-	},
-	{
-		id:           22827,
-		level:        40,
-		dmgBase:      20.0,
-		dmgRange:     24.0,
-		dmgPerCombo:  59.0,
-		dmgPerEnergy: 1.5,
-	},
-	{
-		id:           22828,
-		level:        48,
-		dmgBase:      30.0,
-		dmgRange:     40.0,
-		dmgPerCombo:  92.0,
-		dmgPerEnergy: 2.0,
-	},
-	{
-		id:           22829,
-		level:        56,
-		dmgBase:      45.0,
-		dmgRange:     50.0,
-		dmgPerCombo:  128.0,
-		dmgPerEnergy: 2.5,
-	},
-	{
-		id:           31018,
-		level:        60,
-		dmgBase:      52.0,
-		dmgRange:     60.0,
-		dmgPerCombo:  147.0,
-		dmgPerEnergy: 2.7,
-	},
-}
+// The bite's ladder and its non-combo-point roll are constants_auto_gen.go's
+// (FerociousBiteBaseDamage rank 5 is the client's 52-112). The per-energy step
+// is the client's dummy effect 1 (amount 100/150/200/250/270 hundredths per
+// energy, pinned by spellconst_damage_test.go); the per-combo-point step is
+// stated nowhere in the client's rows and stays the Era figure.
+var ferociousBiteDamagePerComboPoint = [FerociousBiteRanks + 1]float64{0, 36, 59, 92, 128, 147}
+var ferociousBiteDamagePerEnergy = [FerociousBiteRanks + 1]float64{0, 1.0, 1.5, 2.0, 2.5, 2.7}
+
+// ferociousBiteLearnLevels is core.HighestRankAtLevel's input shape
+// (rank r, 1-based, learned at ferociousBiteLearnLevels[r-1]), read off
+// FerociousBiteLevel so the two never drift apart.
+var ferociousBiteLearnLevels = FerociousBiteLevel[1:]
 
 func (druid *Druid) registerFerociousBiteSpell() {
-	// Ferocious Bite Rank V is not available until AQ release
-	rank := core.TernaryInt(core.IncludeAQ, 4, 3)
-	config := druid.newFerociousBiteSpellConfig(ferociousBiteRanks[rank])
+	// rank was pinned to the top rank (5, or 4 without AQ - rank V is
+	// not available until AQ release) regardless of the character's
+	// level, so a levelling druid's Ferocious Bite always registered
+	// under the level-60 id (31018) and the rotation's own castSpell
+	// for its OWN learned rank (22568/22827/22828 at 32/40/48) could
+	// never find it. HighestRankAtLevel picks the rank actually
+	// learned, capped at the same AQ-flag ceiling as before.
+	maxRank := core.TernaryInt(core.IncludeAQ, 5, 4)
+	rank := min(core.HighestRankAtLevel(ferociousBiteLearnLevels, druid.Level), maxRank)
+	if rank == 0 {
+		return
+	}
+	config := druid.newFerociousBiteSpellConfig(rank)
 	druid.FerociousBite = druid.RegisterSpell(Cat, config)
 }
 
-func (druid *Druid) newFerociousBiteSpellConfig(rank FerociousBiteRankInfo) core.SpellConfig {
+func (druid *Druid) newFerociousBiteSpellConfig(rank int) core.SpellConfig {
+	damage := FerociousBiteDamage[rank]
+	casterLevel := int(druid.Level)
+	damagePerComboPoint := ferociousBiteDamagePerComboPoint[rank]
+	damagePerEnergy := ferociousBiteDamagePerEnergy[rank]
+
 	return core.SpellConfig{
-		SpellCode:   SpellCode_DruidFerociousBite,
-		ActionID:    core.ActionID{SpellID: rank.id},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       SpellFlagOmen | core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+		SpellCode:      SpellCode_DruidFerociousBite,
+		ClassSpellMask: DruidSpellMaskFerociousBite,
+		ActionID:       core.ActionID{SpellID: FerociousBiteSpellId[rank]},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          SpellFlagOmen | core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+
+		RequiredLevel: FerociousBiteLevel[rank],
+		Rank:          rank,
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   35,
@@ -88,20 +72,25 @@ func (druid *Druid) newFerociousBiteSpellConfig(rank FerociousBiteRankInfo) core
 			return druid.ComboPoints() > 0
 		},
 
-		DamageMultiplierAdditive: 1 + 0.03*float64(druid.Talents.FeralAggression),
+		// FOREVER: Feral Aggression is not in the client's trees.
+		// DamageMultiplierAdditive: 1 + 0.03*float64(druid.Talents.FeralAggression),
+		DamageMultiplierAdditive: 1,
 		DamageMultiplier:         1,
 		ThreatMultiplier:         1,
 		BonusCoefficient:         1,
+		ClientBaseDamage:         damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			druid.BreakProwl(sim)
+
 			comboPoints := float64(druid.ComboPoints())
 			attackPower := spell.MeleeAttackPower(target)
 			excessEnergy := druid.CurrentEnergy()
 
-			baseDamage := rank.dmgBase + rank.dmgRange*sim.RandomFloat("Ferocious Bite") +
-				rank.dmgPerCombo*comboPoints +
+			baseDamage := damage.Roll(sim, casterLevel) +
+				damagePerComboPoint*comboPoints +
 				attackPower*0.03*comboPoints +
-				rank.dmgPerEnergy*excessEnergy
+				damagePerEnergy*excessEnergy
 
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 

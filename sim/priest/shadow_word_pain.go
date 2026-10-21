@@ -7,14 +7,6 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-const ShadowWordPainRanks = 8
-
-var ShadowWordPainSpellId = [ShadowWordPainRanks + 1]int32{0, 589, 594, 970, 992, 2767, 10892, 10893, 10894}
-var ShadowWordPainBaseDamage = [ShadowWordPainRanks + 1]float64{0, 30, 66, 132, 234, 366, 510, 672, 852}
-var ShadowWordPainSpellCoef = [ShadowWordPainRanks + 1]float64{0, 0.067, 0.104, 0.154, 0.167, 0.167, 0.167, 0.167, 0.167} // per tick
-var ShadowWordPainManaCost = [ShadowWordPainRanks + 1]float64{0, 25, 50, 95, 155, 230, 305, 385, 470}
-var ShadowWordPainLevel = [ShadowWordPainRanks + 1]int{0, 4, 10, 18, 26, 34, 42, 50, 58}
-
 //To Do: Check rollover code from runes
 
 func (priest *Priest) registerShadowWordPainSpell() {
@@ -30,21 +22,24 @@ func (priest *Priest) registerShadowWordPainSpell() {
 }
 
 func (priest *Priest) getShadowWordPainConfig(rank int) core.SpellConfig {
-	ticks := int32(6)
+	ticks := int32(shadowWordPainBaseTickCount)
 
-	spellId := ShadowWordPainSpellId[rank]
-	baseDotDamage := ShadowWordPainBaseDamage[rank] / float64(ticks)
-	spellCoeff := ShadowWordPainSpellCoef[rank]
-	manaCost := ShadowWordPainManaCost[rank]
-	level := ShadowWordPainLevel[rank]
+	table := shadowWordPainRankTable(rank)
+	spellId := table.spellID
+	roll := table.tickRoll(int(priest.Level))
+	baseDotDamage := periodicTick(roll)
+	spellCoeff := table.coeff
+	manaCost := table.manaCost
+	level := table.level
 
 	return core.SpellConfig{
-		SpellCode:   SpellCode_PriestShadowWordPain,
-		ActionID:    core.ActionID{SpellID: spellId},
-		SpellSchool: core.SpellSchoolShadow,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       SpellFlagPriest | core.SpellFlagAPL | core.SpellFlagPureDot,
+		SpellCode:      SpellCode_PriestShadowWordPain,
+		ActionID:       core.ActionID{SpellID: spellId},
+		SpellSchool:    core.SpellSchoolShadow,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          SpellFlagPriest | core.SpellFlagAPL | core.SpellFlagPureDot,
+		ClassSpellMask: PriestSpellMaskShadowWordPain,
 
 		RequiredLevel: level,
 		Rank:          rank,
@@ -60,6 +55,10 @@ func (priest *Priest) getShadowWordPainConfig(rank int) core.SpellConfig {
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		// The dot below carries the coefficient the damage uses; the spell
+		// states it too so the conformance report reads it.
+		BonusCoefficient: spellCoeff,
+		ClientBaseDamage: roll,
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{

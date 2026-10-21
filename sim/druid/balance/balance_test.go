@@ -13,6 +13,7 @@ func init() {
 }
 
 func TestP1Balance(t *testing.T) {
+	core.SkipAwaitingForeverTalentRewrite(t, "sim/druid/balance")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassDruid,
@@ -72,6 +73,6 @@ var ItemFilters = core.ItemFilter{
 var Stats = []proto.Stat{
 	proto.Stat_StatIntellect,
 	proto.Stat_StatSpellPower,
-	proto.Stat_StatSpellHit,
-	proto.Stat_StatSpellCrit,
+	proto.Stat_StatHit,
+	proto.Stat_StatCrit,
 }

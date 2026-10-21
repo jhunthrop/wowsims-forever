@@ -10,7 +10,8 @@ import (
 
 func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 	spellId := [10]int32{0, 1978, 13549, 13550, 13551, 13552, 13553, 13554, 13555, 25295}[rank]
-	baseDamage := [10]float64{0, 20, 40, 80, 140, 210, 290, 385, 490, 555}[rank] / 5
+	damage := SerpentStingDamage[rank]
+	casterLevel := int(hunter.Level)
 	spellCoeff := [10]float64{0, .4, .625, .925, 1, 1, 1, 1, 1, 1}[rank] / 5
 	manaCost := [10]float64{0, 15, 30, 50, 80, 115, 150, 190, 230, 250}[rank]
 	level := [10]int{0, 4, 10, 18, 26, 34, 42, 50, 58, 60}[rank]
@@ -40,8 +41,9 @@ func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 			return hunter.DistanceFromTarget >= core.MinRangedAttackDistance
 		},
 
-		DamageMultiplier: 1 + 0.02*float64(hunter.Talents.ImprovedSerpentSting),
+		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
@@ -53,8 +55,7 @@ func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 			BonusCoefficient: spellCoeff,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				damage := baseDamage
-				dot.Snapshot(target, damage, isRollover)
+				dot.Snapshot(target, damage.Roll(sim, casterLevel), isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)

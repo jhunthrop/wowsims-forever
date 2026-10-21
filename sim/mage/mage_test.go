@@ -20,9 +20,12 @@ func TestP1Mage(t *testing.T) {
 			Race:       proto.Race_RaceTroll,
 			OtherRaces: []proto.Race{proto.Race_RaceGnome},
 
-			Talents:     P1Talents,
-			GearSet:     core.GetGearSet("../../ui/mage/gear_sets", "p0.bis"),
-			Rotation:    core.GetAplRotation("../../ui/mage/apls", "p1"),
+			Talents:  ForeverFrostTalents,
+			GearSet:  core.GetGearSet("../../ui/mage/gear_sets", "p0.bis"),
+			Rotation: core.GetAplRotation("../../ui/mage/apls", "forever_frost"),
+			OtherRotations: []core.RotationCombo{
+				core.GetAplRotation("../../ui/mage/apls", "p1"),
+			},
 			Buffs:       core.FullBuffs,
 			Consumes:    P1Consumes,
 			SpecOptions: core.SpecOptionsCombo{Label: "DPS", SpecOptions: PlayerOptions},
@@ -33,8 +36,6 @@ func TestP1Mage(t *testing.T) {
 		},
 	}))
 }
-
-var P1Talents = "-0550320003021-2035020310035105"
 
 var PlayerOptions = &proto.Player_Mage{
 	Mage: &proto.Mage{
@@ -76,6 +77,6 @@ var Stats = []proto.Stat{
 	proto.Stat_StatArcanePower,
 	proto.Stat_StatFirePower,
 	proto.Stat_StatFrostPower,
-	proto.Stat_StatSpellHit,
-	proto.Stat_StatSpellCrit,
+	proto.Stat_StatHit,
+	proto.Stat_StatCrit,
 }

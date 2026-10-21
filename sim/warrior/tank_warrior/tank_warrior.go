@@ -35,7 +35,7 @@ func NewTankWarrior(character *core.Character, options *proto.Player) *TankWarri
 	war := &TankWarrior{
 		Warrior: warrior.NewWarrior(character, options.TalentsString, warrior.WarriorInputs{
 			QueueDelay:     warOptions.Options.QueueDelay,
-			Stance:         warOptions.Options.Stance,
+			Stance:         tankStance(warOptions.Options.Stance),
 			StanceSnapshot: warOptions.Options.StanceSnapshot,
 		}),
 		Options: warOptions.Options,
@@ -55,6 +55,17 @@ func NewTankWarrior(character *core.Character, options *proto.Player) *TankWarri
 	})
 
 	return war
+}
+
+// tankStance is the stance the tank fights in: the requested one, and
+// Defensive Stance when none is asked for. The warrior package's own
+// default picks a stance from the talent tree with the most points, which
+// would put a tank with no talents in Battle Stance.
+func tankStance(requested proto.WarriorStance) proto.WarriorStance {
+	if requested == proto.WarriorStance_WarriorStanceNone {
+		return proto.WarriorStance_WarriorStanceDefensive
+	}
+	return requested
 }
 
 func (war *TankWarrior) GetWarrior() *warrior.Warrior {

@@ -1,0 +1,199 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    {
+      "notes": "Potion at the top of the fight if mana is already below 75 percent.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "15s"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "75%"
+                    }
+                  }
+                }
+              },
+              {
+                "isExecutePhase": {
+                  "threshold": "E35"
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "otherId": "OtherActionPotion"
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 2,
+            "spellId": 17924
+          }
+        }
+      },
+      "notes": "Soul Fire whenever it is ready: the Demonology tree's Decimation cuts its cooldown by 90 percent, and its 6 second cast carries a spell power coefficient of 1.0, so it out-damages the Shadow Bolts it displaces. The client states its cost, cast time, cooldown and damage."
+    },
+    {
+      "notes": "Life Tap to keep casting once mana runs low.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "10%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11689,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Corruption is cheap sustained damage that does not compete with Shadow Bolt casts.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 11672,
+                  "rank": 6
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11672,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Bane of Doom is the one curse kept up: it deals its whole damage when the minute is out, so recast it the moment it fires. Bane of Agony and Curse of the Elements both measured lower in the search.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 603
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 603
+          }
+        }
+      }
+    },
+    {
+      "notes": "Immolate follows the two curses and is recast when under 3 seconds remain: its damage over time is worth more than the Soul Fire and Shadow Bolt globals it displaces.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "dotRemainingTime": {
+                "spellId": {
+                  "spellId": 11668,
+                  "rank": 7
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "3s"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11668,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "Searing Pain is the filler between DoT refreshes: it measures ahead of Shadow Bolt here, and because it is cast whenever nothing else is due, no Shadow Bolt line sits behind it.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 17923,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shoot with your wand once mana is under 50 percent: it costs nothing, so mana regenerates while it keeps damage going. Life Tap is only the backstop below 10 percent.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "50%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 5019
+          }
+        }
+      }
+    }
+  ]
+}

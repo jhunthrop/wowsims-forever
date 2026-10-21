@@ -32,12 +32,12 @@ func init() {
 			},
 			OnGain: func(aura *core.Aura, sim *core.Simulation) {
 				for _, spell := range affectedSpells {
-					spell.BonusCritRating += 10 * core.SpellCritRatingPerCritChance
+					spell.BonusCritRating += 10 * core.CritRatingPerCritChance
 				}
 			},
 			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 				for _, spell := range affectedSpells {
-					spell.BonusCritRating -= 10 * core.SpellCritRatingPerCritChance
+					spell.BonusCritRating -= 10 * core.CritRatingPerCritChance
 				}
 			},
 		})

@@ -6,22 +6,38 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// ruptureLearnLevels are Rupture's six rank learn levels; source:
+// 1.60.1.70009 client spell data ("Rupture", ranks 1-6; the level-20
+// rank-0 ids are internal copies, not player ranks).
+var ruptureLearnLevels = []int{20, 28, 36, 44, 52, 60}
+
+// ruptureSpellID is Rupture's rank -> spell id, index 0 unused.
+var ruptureSpellID = [7]int32{0, 1943, 8639, 8640, 11273, 11274, 11275}
+
+// ruptureComboTickDamage is Rupture's rank -> per-combo-point tick term,
+// index 0 unused: the client's rank text is "(m1 + b1*cp) * ticks" with
+// m1 = EffectBasePointsF (RuptureTickDamage) and b1 = EffectPointsPerResource
+// (1.60.1.70009 SpellEffect.csv, spell ids 1943-11275), which the vendored
+// spellconst does not carry.
+var ruptureComboTickDamage = [7]float64{0, 1.18, 1.78, 2.37, 2.96, 4.14, 4.73}
+
 func (rogue *Rogue) registerRupture() {
-	spellID := map[int32]int32{
-		25: 1943,
-		40: 8640,
-		50: 11273,
-		60: 11275,
-	}[rogue.Level]
+	rank := core.HighestRankAtLevel(ruptureLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
+
+	spellID := ruptureSpellID[rank]
 
 	rogue.Rupture = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:    SpellCode_RogueRupture,
-		ActionID:     core.ActionID{SpellID: spellID},
-		SpellSchool:  core.SpellSchoolPhysical,
-		DefenseType:  core.DefenseTypeMelee,
-		ProcMask:     core.ProcMaskMeleeMHSpecial,
-		Flags:        rogue.finisherFlags(),
-		MetricSplits: 6,
+		SpellCode:     SpellCode_RogueRupture,
+		ActionID:      core.ActionID{SpellID: spellID},
+		SpellSchool:   core.SpellSchoolPhysical,
+		DefenseType:   core.DefenseTypeMelee,
+		ProcMask:      core.ProcMaskMeleeMHSpecial,
+		Flags:         rogue.finisherFlags(),
+		MetricSplits:  6,
+		RequiredLevel: ruptureLearnLevels[rank-1],
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   25,
@@ -42,19 +58,30 @@ func (rogue *Rogue) registerRupture() {
 
 		DamageMultiplier: []float64{1, 1.1, 1.2, 1.3}[rogue.Talents.SerratedBlades],
 		ThreatMultiplier: 1,
+		ClientBaseDamage: RuptureTickDamage[rank].Range(int(rogue.Level)),
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
 				Label: "Rupture",
 			},
-			NumberOfTicks: 0, // Set dynamically
+			// RuptureTicks(0) (3 ticks, 6s) is this rank's registered
+			// default so the conformance report's engineDuration - which
+			// reads this Dot's Aura.Duration directly, before any sim runs
+			// - sees the same 6000ms duration_ms the client carries for
+			// every Rupture rank; ApplyEffects below always overwrites
+			// this with the real per-cast combo-point value before Apply.
+			NumberOfTicks: 3,
 			TickLength:    time.Second * 2,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, rogue.RuptureDamage(target, rogue.ComboPoints()), isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
+				// Hemorrhage's debuff is read at each tick, not snapshotted.
+				bonus := rogue.RuptureDamageTakenMultiplier(target)
+				dot.Spell.DamageMultiplier *= bonus
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
+				dot.Spell.DamageMultiplier /= bonus
 			},
 		},
 
@@ -77,19 +104,9 @@ func (rogue *Rogue) registerRupture() {
 }
 
 func (rogue *Rogue) RuptureDamage(target *core.Unit, comboPoints int32) float64 {
-	baseTickDamage := map[int32]float64{
-		25: 8,
-		40: 18,
-		50: 27,
-		60: 60,
-	}[rogue.Level]
-
-	comboTickDamage := map[int32]float64{
-		25: 2,
-		40: 4,
-		50: 5,
-		60: 8,
-	}[rogue.Level]
+	rank := core.HighestRankAtLevel(ruptureLearnLevels, rogue.Level)
+	baseTickDamage := RuptureTickDamage[rank].Center(int(rogue.Level))
+	comboTickDamage := ruptureComboTickDamage[rank]
 
 	return baseTickDamage + comboTickDamage*float64(comboPoints) +
 		[]float64{0, 0.04 / 4, 0.10 / 5, 0.18 / 6, 0.21 / 7, 0.24 / 8}[comboPoints]*rogue.Rupture.MeleeAttackPower(target)

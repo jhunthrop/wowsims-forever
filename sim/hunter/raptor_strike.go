@@ -10,8 +10,14 @@ const RaptorStrikeRanks = 8
 
 var RaptorStrikeSpellId = [RaptorStrikeRanks + 1]int32{0, 2973, 14260, 14261, 14262, 14263, 14264, 14265, 14266}
 var RaptorStrikeSpellIdMeleeSpecialist = [RaptorStrikeRanks + 1]int32{0, 415335, 415336, 415337, 415338, 415340, 415341, 415342, 415343}
-var RaptorStrikeBaseDamage = [RaptorStrikeRanks + 1]float64{0, 5, 11, 21, 34, 50, 80, 110, 140}
-var RaptorStrikeManaCost = [RaptorStrikeRanks + 1]float64{0, 15, 25, 35, 45, 55, 70, 80, 100}
+
+// RaptorStrikeBaseDamage and RaptorStrikeManaCost are ranks 1-8's flat
+// bonus damage and mana cost; source: 1.60.1.70009 client spell data
+// ("Raptor Strike", spells 2973/14260-14266). Forever's own numbers are
+// lower than vanilla Classic's from rank 4 on (rank 8 is +70, not the
+// +140 vanilla gave), and rank 1's cost is 10, not 15; both corrected
+// here against the client rather than carrying vanilla's table forward.
+var RaptorStrikeManaCost = [RaptorStrikeRanks + 1]float64{0, 10, 25, 35, 45, 55, 70, 85, 100}
 var RaptorStrikeLevel = [RaptorStrikeRanks + 1]int{0, 1, 8, 16, 24, 32, 40, 48, 56}
 
 // Returns true if the regular melee swing should be used, false otherwise.
@@ -52,6 +58,7 @@ func (hunter *Hunter) getRaptorStrikeConfig(rank int) core.SpellConfig {
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 			return hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance
 		},
+		ClientBaseDamage: RaptorStrikeDamage[rank].Range(int(hunter.Level)),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			hunter.RaptorStrikeHit.Cast(sim, target)
@@ -67,7 +74,8 @@ func (hunter *Hunter) getRaptorStrikeConfig(rank int) core.SpellConfig {
 
 func (hunter *Hunter) newRaptorStrikeHitSpell(rank int) *core.Spell {
 	spellID := RaptorStrikeSpellId[rank]
-	baseDamage := RaptorStrikeBaseDamage[rank]
+	flatDamage := RaptorStrikeDamage[rank]
+	casterLevel := int(hunter.Level)
 
 	return hunter.RegisterSpell(core.SpellConfig{
 		SpellCode:   SpellCode_HunterRaptorStrikeHit,
@@ -75,15 +83,23 @@ func (hunter *Hunter) newRaptorStrikeHitSpell(rank int) *core.Spell {
 		SpellSchool: core.SpellSchoolPhysical,
 		DefenseType: core.DefenseTypeMelee,
 		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete,
+		// SpellFlagPassiveSpell: this inner hit shares its ActionID's
+		// SpellID with the real Raptor Strike cast above (only the Tag
+		// differs), the exact shape compare.go's rowFor doc comment
+		// warns about (Death Coil's self-heal sub-spell). Without this
+		// flag, rowFor kept a second, all-zero-valued row for this
+		// SpellID alongside the real one -- the client-facing numbers
+		// (cost, cooldown_ms, required_level) were never actually
+		// missing, they were just shadowed by this bogus row.
+		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell,
 
-		BonusCritRating:  float64(hunter.Talents.SavageStrikes) * 10 * core.CritRatingPerCritChance,
-		CritDamageBonus:  hunter.mortalShots(),
+		BonusCritRating:  hunter.savageStrikesCritRating(),
+		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
 		BonusCoefficient: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			damage := baseDamage + hunter.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
+			damage := flatDamage.Roll(sim, casterLevel) + hunter.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
 			spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 		},
 	})
@@ -112,7 +128,15 @@ func (hunter *Hunter) makeQueueSpellsAndAura() *core.Spell {
 	queueSpell := hunter.RegisterSpell(core.SpellConfig{
 		SpellCode: SpellCode_HunterRaptorStrike,
 		ActionID:  hunter.RaptorStrike.WithTag(3),
-		Flags:     core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+		// SpellFlagPassiveSpell: like RaptorStrikeHit above, this
+		// queue-trigger shares RaptorStrike's SpellID (WithTag only
+		// changes the Tag), the same shape compare.go's rowFor doc
+		// comment describes. It deals no damage and sets no Cost or
+		// RequiredLevel of its own -- the real cast it queues up is
+		// hunter.RaptorStrike (tag 0), tracked under its own ActionID
+		// -- so without this flag it left a second bogus all-zero row
+		// under this SpellID even after the Hit sub-spell's fix.
+		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagPassiveSpell,
 
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 			return hunter.curQueueAura != queueAura &&
@@ -132,12 +156,13 @@ func (hunter *Hunter) makeQueueSpellsAndAura() *core.Spell {
 }
 
 func (hunter *Hunter) registerRaptorStrikeSpell() {
-	rank := map[int32]int{
-		25: 4,
-		40: 6,
-		50: 7,
-		60: 8,
-	}[hunter.Level]
+	// RaptorStrikeLevel[1:] is already the rank -> learn-level table (source:
+	// 1.60.1.70009 client spell data, "Raptor Strike", ranks 1-8); reuse it
+	// instead of a second copy.
+	rank := core.HighestRankAtLevel(RaptorStrikeLevel[1:], hunter.Level)
+	if rank == 0 {
+		return
+	}
 
 	config := hunter.getRaptorStrikeConfig(rank)
 	hunter.RaptorStrike = hunter.GetOrRegisterSpell(config)

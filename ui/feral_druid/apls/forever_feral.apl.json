@@ -1,0 +1,269 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9913,
+            "rank": 3
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-2s"
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9867,
+            "rank": 4
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1s"
+        }
+      }
+    }
+  ],
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Below level 20, before Cat Form is learned, keep Moonfire ticking -- the same upkeep line Balance uses.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "spellIsKnown": {
+                      "spellId": {
+                        "spellId": 9850,
+                        "rank": 5
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 9835,
+                        "rank": 10
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9835,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
+      "notes": "Wrath as the pre-Cat-Form filler once Moonfire is already ticking; see the Moonfire line above for the full diagnosis. Gated the same way, `not spellIsKnown(Claw)`.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "spellIsKnown": {
+                "spellId": {
+                  "spellId": 9850,
+                  "rank": 5
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9912,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shifting Power (Feral talent, instant, converts 55% of base mana into 40 energy, 16 s cooldown) on cooldown whenever the energy bar has room for all 40, which is 60 or less. Inert for a build that has not taken the talent; no client spell row states its global cooldown, so the engine treats it as on the GCD.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "currentEnergy": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "60"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 1322605
+          }
+        }
+      }
+    },
+    {
+      "notes": "Tiger's Fury on cooldown for the free energy; it costs nothing and the engine gates it on its own 30 second cooldown.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 5217
+          }
+        }
+      }
+    },
+    {
+      "notes": "At 5 combo points, Rip once it has under 6 seconds left -- this refreshes a little before the DoT actually falls off, so Ferocious Bite stays reachable whenever Rip still has real time on it.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpEq",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "5"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "dotRemainingTime": {
+                      "spellId": {
+                        "spellId": 9896,
+                        "rank": 6
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "6s"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9896,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "At 5 combo points with Rip having more than 6 seconds left, Ferocious Bite dumps them instead of capping out.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpEq",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "5"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "dotRemainingTime": {
+                      "spellId": {
+                        "spellId": 9896,
+                        "rank": 6
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "6s"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 22829,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shred builds combo points the rest of the time.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9830,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Claw is the fallback builder below level 22, before Shred is learned.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "spellIsKnown": {
+                "spellId": {
+                  "spellId": 9830,
+                  "rank": 5
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9850,
+            "rank": 5
+          }
+        }
+      }
+    }
+  ]
+}

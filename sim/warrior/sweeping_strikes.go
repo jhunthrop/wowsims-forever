@@ -6,12 +6,14 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// sweepingStrikesDuration is the client's duration for Sweeping Strikes
+// (spell 12292, 20000 ms); vanilla's 10 seconds is gone.
+const sweepingStrikesDuration = 20 * time.Second
+
 func (warrior *Warrior) registerSweepingStrikesCD() {
 	if !warrior.Talents.SweepingStrikes {
 		return
 	}
-
-	numTargets := min(2, warrior.Env.GetNumTargets())
 
 	// Procs from auto attacks and most abilities https://www.wowhead.com/classic/spell=12723/sweeping-strikes
 	var curDmg float64
@@ -52,7 +54,7 @@ func (warrior *Warrior) registerSweepingStrikesCD() {
 	ssAura := warrior.RegisterAura(core.Aura{
 		Label:     "Sweeping Strikes",
 		ActionID:  actionID,
-		Duration:  time.Second * 10,
+		Duration:  sweepingStrikesDuration,
 		MaxStacks: 5,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			aura.SetStacks(sim, 5)
@@ -71,7 +73,10 @@ func (warrior *Warrior) registerSweepingStrikesCD() {
 				spellToUse = hitSchoolDamagWithValue
 			}
 
-			if numTargets > 1 {
+			// Read live rather than at registration time: the extra
+			// swing exists exactly while a second target is active,
+			// which a target timeline changes mid-fight.
+			if len(sim.Encounter.TargetUnits) > 1 {
 				target := warrior.Env.NextTargetUnit(result.Target)
 				spellToUse.Cast(sim, target)
 				spellToUse.SpellMetrics[target.UnitIndex].Casts--
@@ -86,13 +91,15 @@ func (warrior *Warrior) registerSweepingStrikesCD() {
 		SpellSchool: core.SpellSchoolPhysical,
 		Flags:       core.SpellFlagHelpful,
 
+		RequiredLevel: SweepingStrikesLevel[0],
+
 		RageCost: core.RageCostOptions{
-			Cost: 30,
+			Cost: rageCost(SweepingStrikesManaCost[0]),
 		},
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    warrior.NewTimer(),
-				Duration: time.Second * 30,
+				Duration: time.Duration(SweepingStrikesCooldownMS[0]) * time.Millisecond,
 			},
 		},
 

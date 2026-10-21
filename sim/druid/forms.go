@@ -38,21 +38,22 @@ func (druid *Druid) GetCatWeapon() core.Weapon {
 	}
 }
 
-// Func (druid *Druid) GetBearWeapon() core.Weapon {
-// 	return core.Weapon{
-// 		BaseDamageMin:        109,
-// 		BaseDamageMax:        165,
-// 		SwingSpeed:           2.5,
-// 		NormalizedSwingSpeed: 2.5,
-// 		AttackPowerPerDPS:    core.DefaultAttackPowerPerDPS,
-// 	}
-// }
+// sharpenedClawsCritPerRank is Sharpened Claws' "Increases your critical
+// strike chance while in Bear Form, Dire Bear Form, or Cat Form by 3%" a
+// rank (build 1.60.1.70009, node 104946; 6% at rank 2).
+const sharpenedClawsCritPerRank = 3
 
-// TODO: Class bonus stats for both cat and bear.
+// predatoryStrikesAttackPowerPerRankPerLevel is Predatory Strikes' "melee
+// Attack Power in Cat Form, Bear Form, and Dire Bear Form by 50% of your
+// level" a rank (node 104952).
+const predatoryStrikesAttackPowerPerRankPerLevel = 0.5
+
+// GetFormShiftStats is what the talents that pay in a feral form add on
+// shifting into Cat Form or Bear Form.
 func (druid *Druid) GetFormShiftStats() stats.Stats {
 	s := stats.Stats{
-		stats.AttackPower: float64(druid.Talents.PredatoryStrikes) * 0.5 * float64(druid.Level),
-		stats.MeleeCrit:   float64(druid.Talents.SharpenedClaws) * 2 * core.CritRatingPerCritChance,
+		stats.AttackPower: float64(druid.Talents.PredatoryStrikes) * predatoryStrikesAttackPowerPerRankPerLevel * float64(druid.Level),
+		stats.Crit:        float64(druid.Talents.SharpenedClaws) * sharpenedClawsCritPerRank * core.CritRatingPerCritChance,
 	}
 	/*
 		if weapon := druid.GetMHWeapon(); weapon != nil {
@@ -96,12 +97,14 @@ func (druid *Druid) registerCatFormSpell() {
 
 	var hotwDep *stats.StatDependency
 	if druid.Talents.HeartOfTheWild > 0 {
-		hotwDep = druid.NewDynamicMultiplyStat(stats.Strength, 1.0+0.04*float64(druid.Talents.HeartOfTheWild))
+		hotwDep = druid.NewDynamicMultiplyStat(stats.Strength,
+			1+heartOfTheWildPerRank*float64(clampRank(druid.Talents.HeartOfTheWild, heartOfTheWildMaxRank)))
 	}
 
 	clawWeapon := druid.GetCatWeapon()
 
 	predBonus := stats.Stats{}
+	thickHideArmor := stats.Stats{}
 
 	druid.CatFormAura = druid.RegisterAura(core.Aura{
 		Label:      "Cat Form",
@@ -118,12 +121,15 @@ func (druid *Druid) registerCatFormSpell() {
 			druid.AutoAttacks.SetMH(clawWeapon)
 
 			druid.PseudoStats.ThreatMultiplier *= 0.71
-			druid.AddStatDynamic(sim, stats.Dodge, 2*float64(druid.Talents.FelineSwiftness))
+			// FOREVER: Feline Swiftness is not in the client's trees.
+			// druid.AddStatDynamic(sim, stats.Dodge, 2*float64(druid.Talents.FelineSwiftness))
 			druid.SetShapeshift(aura)
 
 			predBonus = druid.GetDynamicPredStrikeStats()
 			druid.AddStatsDynamic(sim, predBonus)
 			druid.AddStatsDynamic(sim, statBonus)
+			thickHideArmor = druid.thickHideArmor(catFormArmorMultiplier)
+			druid.AddStatsDynamic(sim, thickHideArmor)
 			druid.EnableDynamicStatDep(sim, agiApDep)
 			druid.EnableDynamicStatDep(sim, feralApDep)
 			if hotwDep != nil {
@@ -140,17 +146,25 @@ func (druid *Druid) registerCatFormSpell() {
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			druid.form = Humanoid
 			druid.SetCurrentPowerBar(core.ManaBar)
+			druid.energyOnLeavingCat = druid.CurrentEnergy()
+			druid.leftCatFormAt = sim.CurrentTime
 
-			druid.TigersFuryAura.Deactivate(sim)
+			// Tiger's Fury is learned at level 24 (tigers_fury.go); below
+			// that, druid.TigersFuryAura is never registered.
+			if druid.TigersFuryAura != nil {
+				druid.TigersFuryAura.Deactivate(sim)
+			}
 
 			druid.AutoAttacks.SetMH(druid.WeaponFromMainHand())
 
 			druid.PseudoStats.ThreatMultiplier /= 0.71
-			druid.AddStatDynamic(sim, stats.Dodge, -2*float64(druid.Talents.FelineSwiftness))
+			// FOREVER: Feline Swiftness is not in the client's trees.
+			// druid.AddStatDynamic(sim, stats.Dodge, -2*float64(druid.Talents.FelineSwiftness))
 			druid.SetShapeshift(nil)
 
 			druid.AddStatsDynamic(sim, predBonus.Invert())
 			druid.AddStatsDynamic(sim, statBonus.Invert())
+			druid.AddStatsDynamic(sim, thickHideArmor.Invert())
 			druid.DisableDynamicStatDep(sim, agiApDep)
 			druid.DisableDynamicStatDep(sim, feralApDep)
 			if hotwDep != nil {
@@ -170,17 +184,26 @@ func (druid *Druid) registerCatFormSpell() {
 
 	energyMetrics := druid.NewEnergyMetrics(actionID)
 
-	furorProcChance := 0.2 * float64(druid.Talents.Furor)
-
 	hasWolfheadBonus := false
 	if head := druid.Equipment.Head(); head != nil && (head.ID == WolfsheadHelm) {
 		hasWolfheadBonus = true
 	}
 
+	druid.RegisterResetEffect(func(sim *core.Simulation) {
+		druid.energyOnLeavingCat = 0
+		druid.leftCatFormAt = 0
+	})
+
 	druid.CatForm = druid.RegisterSpell(Any, core.SpellConfig{
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
 
+		RequiredLevel: CatFormLevel[0],
+
+		// CatFormManaCost (constants_auto_gen.go) reads 0 for this
+		// spell in 1.60.1.70009 spellconst/druid.json; the
+		// percent-of-base-mana model below is kept because no nonzero
+		// flat cost exists to replace it with.
 		ManaCost: core.ManaCostOptions{
 			BaseCost:   0.55,
 			Multiplier: 100 - 10*druid.Talents.NaturalShapeshifter,
@@ -203,9 +226,9 @@ func (druid *Druid) registerCatFormSpell() {
 				druid.CancelShapeshift(sim)
 				spell.Cost.Multiplier += 100
 			} else {
-				maxShiftEnergy := core.TernaryFloat64(sim.RandomFloat("Furor") < furorProcChance, 40, 0)
-				maxShiftEnergy = core.TernaryFloat64(hasWolfheadBonus, maxShiftEnergy+20, maxShiftEnergy)
-				energyDelta := maxShiftEnergy - druid.CurrentEnergy()
+				shiftEnergy := furorCatFormEnergy(druid.Talents.Furor, druid.energyOnLeavingCat, sim.CurrentTime-druid.leftCatFormAt)
+				shiftEnergy = core.TernaryFloat64(hasWolfheadBonus, shiftEnergy+wolfsheadHelmCatFormEnergy, shiftEnergy)
+				energyDelta := shiftEnergy - druid.CurrentEnergy()
 
 				if energyDelta > 0 {
 					druid.AddEnergy(sim, energyDelta, energyMetrics)
@@ -219,144 +242,10 @@ func (druid *Druid) registerCatFormSpell() {
 	})
 }
 
-// func (druid *Druid) registerBearFormSpell() {
-// 	actionID := core.ActionID{SpellID: 9634}
-// 	healthMetrics := druid.NewHealthMetrics(actionID)
-
-// 	statBonus := druid.GetFormShiftStats().Add(stats.Stats{
-// 		stats.AttackPower: 3 * float64(druid.Level),
-// 	})
-
-// 	stamDep := druid.NewDynamicMultiplyStat(stats.Stamina, 1.25)
-
-// 	var potpDep *stats.StatDependency
-// 	if druid.Talents.ProtectorOfThePack > 0 {
-// 		potpDep = druid.NewDynamicMultiplyStat(stats.AttackPower, 1.0+0.02*float64(druid.Talents.ProtectorOfThePack))
-// 	}
-
-// 	var hotwDep *stats.StatDependency
-// 	if druid.Talents.HeartOfTheWild > 0 {
-// 		hotwDep = druid.NewDynamicMultiplyStat(stats.Stamina, 1.0+0.02*float64(druid.Talents.HeartOfTheWild))
-// 	}
-
-// 	potpdtm := 1 - 0.04*float64(druid.Talents.ProtectorOfThePack)
-
-// 	clawWeapon := druid.GetBearWeapon()
-// 	predBonus := stats.Stats{}
-
-// 	druid.BearFormAura = druid.RegisterAura(core.Aura{
-// 		Label:      "Bear Form",
-// 		ActionID:   actionID,
-// 		Duration:   core.NeverExpires,
-// 		BuildPhase: core.Ternary(druid.StartingForm.Matches(Bear), core.CharacterBuildPhaseBase, core.CharacterBuildPhaseNone),
-// 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-// 			if !druid.Env.MeasuringStats && druid.form != Humanoid {
-// 				druid.CancelShapeshift(sim)
-// 			}
-// 			druid.form = Bear
-// 			druid.SetCurrentPowerBar(core.RageBar)
-
-// 			druid.AutoAttacks.SetMH(clawWeapon)
-
-// 			druid.PseudoStats.ThreatMultiplier *= 2.1021
-// 			druid.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1.0 + 0.02*float64(druid.Talents.MasterShapeshifter)
-// 			druid.PseudoStats.DamageTakenMultiplier *= potpdtm
-//			Switch to using AddStat as PseudoStat is being removed
-// 			druid.PseudoStats.BaseDodge += 0.02 * float64(druid.Talents.FeralSwiftness+druid.Talents.NaturalReaction)
-
-// 			predBonus = druid.GetDynamicPredStrikeStats()
-// 			druid.AddStatsDynamic(sim, predBonus)
-// 			druid.AddStatsDynamic(sim, statBonus)
-// 			druid.ApplyDynamicEquipScaling(sim, stats.Armor, druid.BearArmorMultiplier())
-// 			if potpDep != nil {
-// 				druid.EnableDynamicStatDep(sim, potpDep)
-// 			}
-
-// 			// Preserve fraction of max health when shifting
-// 			healthFrac := druid.CurrentHealth() / druid.MaxHealth()
-// 			druid.EnableDynamicStatDep(sim, stamDep)
-// 			if hotwDep != nil {
-// 				druid.EnableDynamicStatDep(sim, hotwDep)
-// 			}
-// 			druid.GainHealth(sim, healthFrac*druid.MaxHealth()-druid.CurrentHealth(), healthMetrics)
-
-// 			if !druid.Env.MeasuringStats {
-// 				druid.AutoAttacks.SetReplaceMHSwing(druid.ReplaceBearMHFunc)
-// 				druid.AutoAttacks.EnableAutoSwing(sim)
-
-// 				druid.manageCooldownsEnabled()
-// 				druid.UpdateManaRegenRates()
-// 			}
-// 		},
-// 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-// 			druid.form = Humanoid
-// 			druid.AutoAttacks.SetMH(druid.WeaponFromMainHand())
-
-// 			druid.PseudoStats.ThreatMultiplier /= 2.1021
-// 			druid.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] /= 1.0 + 0.02*float64(druid.Talents.MasterShapeshifter)
-// 			druid.PseudoStats.DamageTakenMultiplier /= potpdtm
-//			Switch to using AddStat as PseudoStat is being removed
-// 			druid.PseudoStats.BaseDodge -= 0.02 * float64(druid.Talents.FeralSwiftness+druid.Talents.NaturalReaction)
-
-// 			druid.AddStatsDynamic(sim, predBonus.Invert())
-// 			druid.AddStatsDynamic(sim, statBonus.Invert())
-// 			druid.RemoveDynamicEquipScaling(sim, stats.Armor, druid.BearArmorMultiplier())
-// 			if potpDep != nil {
-// 				druid.DisableDynamicStatDep(sim, potpDep)
-// 			}
-
-// 			healthFrac := druid.CurrentHealth() / druid.MaxHealth()
-// 			druid.DisableDynamicStatDep(sim, stamDep)
-// 			if hotwDep != nil {
-// 				druid.DisableDynamicStatDep(sim, hotwDep)
-// 			}
-// 			druid.RemoveHealth(sim, druid.CurrentHealth()-healthFrac*druid.MaxHealth())
-
-// 			if !druid.Env.MeasuringStats {
-// 				druid.AutoAttacks.SetReplaceMHSwing(nil)
-// 				druid.AutoAttacks.EnableAutoSwing(sim)
-
-// 				druid.manageCooldownsEnabled()
-// 				druid.UpdateManaRegenRates()
-// 				druid.EnrageAura.Deactivate(sim)
-// 				druid.MaulQueueAura.Deactivate(sim)
-// 			}
-// 		},
-// 	})
-
-// 	rageMetrics := druid.NewRageMetrics(actionID)
-
-// 	furorProcChance := []float64{0, 0.2, 0.4, 0.6, 0.8, 1}[druid.Talents.Furor]
-
-// 	druid.BearForm = druid.RegisterSpell(Any, core.SpellConfig{
-// 		ActionID: actionID,
-// 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
-
-// 		ManaCost: core.ManaCostOptions{
-// 			BaseCost:   0.55,
-// 			Multiplier: (1 - 0.2*float64(druid.Talents.KingOfTheJungle)) * (1 - 0.1*float64(druid.Talents.NaturalShapeshifter)),
-// 		},
-// 		Cast: core.CastConfig{
-// 			DefaultCast: core.Cast{
-// 				GCD: core.GCDDefault,
-// 			},
-// 			IgnoreHaste: true,
-// 		},
-
-// 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-// 			rageDelta := 0 - druid.CurrentRage()
-// 			if sim.Proc(furorProcChance, "Furor") {
-// 				rageDelta += 10
-// 			}
-// 			if rageDelta > 0 {
-// 				druid.AddRage(sim, rageDelta, rageMetrics)
-// 			} else if rageDelta < 0 {
-// 				druid.SpendRage(sim, -rageDelta, rageMetrics)
-// 			}
-// 			druid.BearFormAura.Activate(sim)
-// 		},
-// 	})
-// }
+// wolfsheadHelmCatFormEnergy is the energy Wolfshead Helm grants on a shift
+// into Cat Form: spell 1310990's energize effect, 20 until build
+// 1.60.1.70291.
+const wolfsheadHelmCatFormEnergy = 5.0
 
 func (druid *Druid) manageCooldownsEnabled() {
 	// Disable cooldowns not usable in form and/or delay others
@@ -378,17 +267,23 @@ func (druid *Druid) manageCooldownsEnabled() {
 	}
 }
 
-// https://www.wowhead.com/classic/spell=24858/moonkin-form
-// - Moonfire costs 50% less mana and deals 50% more damage over time
-// - Sunfire costs 50% less mana and deals 50% more damage over time
-// - Your periodic damage spells can deal critical periodic damage (handled in individual dot snapshots)
-// - You gain (2 * Level) spell damage
+// moonkinFormCritChance is the form's party aura (spell 24907, apply
+// aura 290 "+3% critical strike chance", whose area includes the druid):
+// the client's text for the form is armor, Omen of Clarity and this aura,
+// and nothing else. The Classic port left a comment describing a Season of
+// Discovery form (cheaper Moonfire, periodic crits, spell damage) that
+// this client does not have and registered no effect, so the capstone
+// talent measured as worth nothing.
+const moonkinFormCritChance = 3
+
 func (druid *Druid) registerMoonkinFormSpell() {
 	if !druid.Talents.MoonkinForm {
 		return
 	}
 
 	actionID := core.ActionID{SpellID: 24858}
+
+	critBonus := stats.Stats{stats.Crit: moonkinFormCritChance * core.CritRatingPerCritChance}
 
 	druid.MoonkinFormAura = druid.RegisterAura(core.Aura{
 		Label:    "Moonkin Form",
@@ -399,9 +294,11 @@ func (druid *Druid) registerMoonkinFormSpell() {
 				druid.CancelShapeshift(sim)
 			}
 			druid.form = Moonkin
+			druid.AddStatsDynamic(sim, critBonus)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			druid.form = Humanoid
+			druid.AddStatsDynamic(sim, critBonus.Invert())
 		},
 	})
 
@@ -409,6 +306,12 @@ func (druid *Druid) registerMoonkinFormSpell() {
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
 
+		RequiredLevel: MoonkinFormLevel[0],
+
+		// MoonkinFormManaCost (constants_auto_gen.go) reads 0 for this
+		// spell in 1.60.1.70009 spellconst/druid.json; the
+		// percent-of-base-mana model below is kept because no nonzero
+		// flat cost exists to replace it with.
 		ManaCost: core.ManaCostOptions{
 			BaseCost:   0.35,
 			Multiplier: 100 - 10*druid.Talents.NaturalShapeshifter,

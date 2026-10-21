@@ -1,11 +1,17 @@
 package hunter
 
 import (
-	"strconv"
-	"time"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/stats"
+	"strconv"
+	"time"
 )
+
+// AspectOfTheHawkAuraTag is the Aura.Tag every rank of Aspect of the Hawk
+// shares, so a caller outside this file (talents.go's Deadly Aspects)
+// can test "is Aspect of the Hawk active" without knowing which rank's
+// spell id is current.
+const AspectOfTheHawkAuraTag = "AspectOfTheHawk"
 
 // Utility function to create an Improved Hawk Aura
 func (hunter *Hunter) createImprovedHawkAura(auraLabel string, actionID core.ActionID) *core.Aura {
@@ -25,7 +31,14 @@ func (hunter *Hunter) createImprovedHawkAura(auraLabel string, actionID core.Act
 
 // Function to get the maximum attack power for Aspect of the Hawk based on rank
 func (hunter *Hunter) getMaxAspectOfTheHawkAttackPower(rank int) float64 {
-	attackPower := [8]float64{0, 20, 35, 50, 70, 90, 110, 120}
+	// spellconst/hunter.json's per-rank effect amount for spells
+	// 13165/14318/14319/14320/14321/14322/25296. Rank 6 (14322, level 58)
+	// is 55, not Classic's 110 -- confirmed against Wowhead's Forever
+	// tooltip for 14322 ("Mod Ranged Attack Power Value: 56", cost 110
+	// mana unchanged), so this is a genuine Forever-side rebalance of
+	// that one rank, not a data error the client wins over Classic
+	// knowledge either way.
+	attackPower := [8]float64{0, 20, 35, 50, 70, 90, 55, 120}
 
 	if rank < 1 || rank > 7 {
 		return 0.0
@@ -34,21 +47,37 @@ func (hunter *Hunter) getMaxAspectOfTheHawkAttackPower(rank int) float64 {
 	return attackPower[rank]
 }
 
+// aspectOfTheHawkManaCost is spellconst/hunter.json's per-rank flat mana
+// cost for the same seven spells (20/35/50/70/90/110/120). The engine
+// never charged mana for this aura at all before this fix.
+var aspectOfTheHawkManaCost = [8]float64{0, 20, 35, 50, 70, 90, 110, 120}
+
+// getMaxHawkRank is the rank a hunter casts: the strongest rank learned by
+// their level, not the highest. Rank 6 gives 55 ranged attack power
+// against rank 5's 90 in the client, so a player keeps rank 5
+// (data/curated/inferior-ranks.json on the site names the same fact).
 func (hunter *Hunter) getMaxHawkRank() int {
 	maxRank := core.TernaryInt(core.IncludeAQ, 7, 6)
 
-	for i := maxRank; i > 0; i-- {
-		config := hunter.getAspectOfTheHawkSpellConfig(i)
-		if config.RequiredLevel <= int(hunter.Level) {
-			return i
+	best := 1
+	for rank := 1; rank <= maxRank; rank++ {
+		config := hunter.getAspectOfTheHawkSpellConfig(rank)
+		if config.RequiredLevel > int(hunter.Level) {
+			continue
+		}
+		if hunter.getMaxAspectOfTheHawkAttackPower(rank) > hunter.getMaxAspectOfTheHawkAttackPower(best) {
+			best = rank
 		}
 	}
-	return 1
+	return best
 }
 
 func (hunter *Hunter) getAspectOfTheHawkSpellConfig(rank int) core.SpellConfig {
 	var impHawkAura *core.Aura
-	improvedHawkProcChance := 0.01 * float64(hunter.Talents.ImprovedAspectOfTheHawk)
+	// FOREVER: Improved Aspect of the Hawk is not in the client's trees, so
+	// the proc never fires and impHawkAura stays nil.
+	// improvedHawkProcChance := 0.01 * float64(hunter.Talents.ImprovedAspectOfTheHawk)
+	improvedHawkProcChance := 0.0
 
 	spellIds := [8]int32{0, 13165, 14318, 14319, 14320, 14321, 14322, 25296}
 	levels := [8]int{0, 10, 18, 28, 38, 48, 58, 60}
@@ -56,25 +85,33 @@ func (hunter *Hunter) getAspectOfTheHawkSpellConfig(rank int) core.SpellConfig {
 	spellId := spellIds[rank]
 	level := levels[rank]
 
-	if hunter.Talents.ImprovedAspectOfTheHawk > 0 {
-		impHawkAura = hunter.createImprovedHawkAura(
-			"Quick Shots",
-			core.ActionID{SpellID: 6150},
-		)
-	}
+	/*
+		if hunter.Talents.ImprovedAspectOfTheHawk > 0 {
+			impHawkAura = hunter.createImprovedHawkAura(
+				"Quick Shots",
+				core.ActionID{SpellID: 6150},
+			)
+		}
+	*/
 	// Use utility function to get the attack power based on rank
 	rap := hunter.getMaxAspectOfTheHawkAttackPower(rank)
 
 	actionID := core.ActionID{SpellID: spellId}
 	aspectOfTheHawkAura := hunter.GetOrRegisterAura(core.Aura{
-		Label:    "Aspect of the Hawk"+strconv.Itoa(rank),
+		Label: "Aspect of the Hawk" + strconv.Itoa(rank),
+		// Tag, not the "Aspect" ExclusiveEffect category below (a
+		// different namespace - NewExclusiveEffect only groups mutually
+		// exclusive aspects, it does not set Aura.Tag): Deadly Aspects
+		// (talents.go) reads this tag with HasActiveAuraWithTag to gate
+		// its Auto Shot proc on "while Aspect of the Hawk is active."
+		Tag:      AspectOfTheHawkAuraTag,
 		ActionID: actionID,
 		Duration: core.NeverExpires,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.AddStatDynamic(sim, stats.RangedAttackPower, rap * hunter.AspectOfTheHawkAPMultiplier)
+			aura.Unit.AddStatDynamic(sim, stats.RangedAttackPower, rap*hunter.AspectOfTheHawkAPMultiplier)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.AddStatDynamic(sim, stats.RangedAttackPower, -rap * hunter.AspectOfTheHawkAPMultiplier)
+			aura.Unit.AddStatDynamic(sim, stats.RangedAttackPower, -rap*hunter.AspectOfTheHawkAPMultiplier)
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			if !spell.ProcMask.Matches(core.ProcMaskRangedAuto) {
@@ -86,7 +123,7 @@ func (hunter *Hunter) getAspectOfTheHawkSpellConfig(rank int) core.SpellConfig {
 			}
 		},
 	})
-	
+
 	aspectOfTheHawkAura.NewExclusiveEffect("Aspect", true, core.ExclusiveEffect{})
 
 	return core.SpellConfig{
@@ -95,6 +132,9 @@ func (hunter *Hunter) getAspectOfTheHawkSpellConfig(rank int) core.SpellConfig {
 		Rank:          rank,
 		RequiredLevel: level,
 
+		ManaCost: core.ManaCostOptions{
+			FlatCost: aspectOfTheHawkManaCost[rank],
+		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,

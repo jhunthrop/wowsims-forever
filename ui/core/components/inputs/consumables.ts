@@ -442,7 +442,7 @@ export const ScrollOfAgility: ConsumableInputConfig<AgilityElixir> = {
 };
 
 export const AGILITY_CONSUMES_CONFIG: ConsumableStatOption<AgilityElixir>[] = [
-	{ config: ElixirOfTheMongoose, stats: [Stat.StatAgility, Stat.StatMeleeCrit] },
+	{ config: ElixirOfTheMongoose, stats: [Stat.StatAgility, Stat.StatCrit] },
 	{ config: ElixirOfGreaterAgility, stats: [Stat.StatAgility] },
 	{ config: ElixirOfAgility, stats: [Stat.StatAgility] },
 	{ config: ElixirOfLesserAgility, stats: [Stat.StatAgility] },
@@ -535,8 +535,8 @@ export const DarkDesire: ConsumableInputConfig<HitConsumable> = {
 	value: HitConsumable.DarkDesire,
 };
 export const HIT_CONSUMABLE_CONFIG: ConsumableStatOption<HitConsumable>[] = [
-	{ config: FireToastedBun, stats: [Stat.StatMeleeHit] },
-	{ config: DarkDesire, stats: [Stat.StatMeleeHit] },
+	{ config: FireToastedBun, stats: [Stat.StatHit] },
+	{ config: DarkDesire, stats: [Stat.StatHit] },
 ];
 export const makeHitConsumableInput = makeConsumeInputFactory({ consumesFieldName: 'hitConsumable' });
 
@@ -1045,7 +1045,7 @@ export const WEAPON_IMBUES_OH_CONFIG: ConsumableStatOption<WeaponImbue>[] = [
 export const WEAPON_IMBUES_MH_CONFIG: ConsumableStatOption<WeaponImbue>[] = [
 	...ROGUE_IMBUES,
 	...SHAMAN_IMBUES(ItemSlot.ItemSlotMainHand),
-	{ config: Windfury, stats: [Stat.StatMeleeHit] },
+	{ config: Windfury, stats: [Stat.StatHit] },
 	...CONSUMABLES_IMBUES(ItemSlot.ItemSlotMainHand),
 ];
 

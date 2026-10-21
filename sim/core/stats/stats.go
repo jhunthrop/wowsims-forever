@@ -31,13 +31,13 @@ const (
 	NaturePower
 	ShadowPower
 	MP5
-	SpellHit
-	SpellCrit
+	// Forever merges spell, melee and ranged hit into one stat, and
+	// likewise crit.
+	Hit
+	Crit
 	SpellHaste
 	SpellPenetration
 	AttackPower
-	MeleeHit
-	MeleeCrit
 	MeleeHaste
 	ArmorPenetration
 	Expertise
@@ -51,7 +51,6 @@ const (
 	BlockValue
 	Dodge
 	Parry
-	Resilience
 	Health
 	ArcaneResistance
 	FireResistance
@@ -191,10 +190,10 @@ func (s Stat) StatName() string {
 		return "Intellect"
 	case Spirit:
 		return "Spirit"
-	case SpellCrit:
-		return "SpellCrit"
-	case SpellHit:
-		return "SpellHit"
+	case Hit:
+		return "Hit"
+	case Crit:
+		return "Crit"
 	case SpellPower:
 		return "SpellPower"
 	case ArcanePower:
@@ -221,12 +220,8 @@ func (s Stat) StatName() string {
 		return "SpellPenetration"
 	case AttackPower:
 		return "AttackPower"
-	case MeleeHit:
-		return "MeleeHit"
 	case MeleeHaste:
 		return "MeleeHaste"
-	case MeleeCrit:
-		return "MeleeCrit"
 	case Expertise:
 		return "Expertise"
 	case ArmorPenetration:
@@ -253,8 +248,6 @@ func (s Stat) StatName() string {
 		return "Dodge"
 	case Parry:
 		return "Parry"
-	case Resilience:
-		return "Resilience"
 	case Health:
 		return "Health"
 	case FireResistance:
@@ -426,6 +419,14 @@ type PseudoStats struct {
 	IncreasedMissChance  float64 // Insect Swarm and Scorpid Sting
 	DodgeReduction       float64 // Target dodge reduction effects e.g. "reduces its target's chance to Dodge by X%"
 
+	// ArmorIgnorePercent is the fraction of a target's armour this
+	// attacker ignores: 0 ignores nothing, 0.25 a quarter. Forever's
+	// three armour-ignore talents work this way, and a flat
+	// stats.ArmorPenetration cannot express it because the amount
+	// depends on the target. It is per-attacker and reachable from a
+	// weapon-subclass-conditional talent, which a stat is not.
+	ArmorIgnorePercent float64
+
 	ThreatMultiplier float64 // Modulates the threat generated. Affected by things like salv.
 
 	DamageDealtMultiplier       float64                   // All damage
@@ -497,6 +498,12 @@ type PseudoStats struct {
 	PoisonDamageTakenMultiplier float64 // Modifies damage taken from poison effects
 
 	ArmorMultiplier float64 // Major/minor/special multiplicative armor modifiers
+
+	// ArmorReductionDisabled pins a unit's armor to what it started the
+	// iteration with. Target-dummy encounters set it: a dummy takes no
+	// Sunder, no Expose and no Faerie Fire, so nothing lowers the number
+	// the damage formula reads.
+	ArmorReductionDisabled bool
 
 	HealingTakenMultiplier float64
 }

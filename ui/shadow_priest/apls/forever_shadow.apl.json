@@ -1,0 +1,156 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 15473
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1s"
+        }
+      }
+    }
+  ],
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Shadow Word: Pain is kept up unless the fight is about to end, when refreshing it would waste most of the DoT.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 10894,
+                        "rank": 8
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "10"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10894,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shadow Word: Death gets bonus crit chance below 20% target health from the Early Demise talent.",
+      "action": {
+        "condition": {
+          "isExecutePhase": {
+            "threshold": "E20"
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 1309636,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
+      "notes": "Era fallback for the execute window when Shadow Word: Death is on its own 15 s cooldown: Mind Blast on cooldown, else Mind Flay.",
+      "action": {
+        "condition": {
+          "isExecutePhase": {
+            "threshold": "E20"
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10947,
+            "rank": 9
+          }
+        }
+      }
+    },
+    {
+      "notes": "Inner Focus into Devouring Plague: a free, empowered cast of the priest's biggest single-target nuke, using your highest learned rank at level 60.",
+      "action": {
+        "strictSequence": {
+          "actions": [
+            {
+              "castSpell": {
+                "spellId": {
+                  "spellId": 14751
+                }
+              }
+            },
+            {
+              "castSpell": {
+                "spellId": {
+                  "spellId": 19280,
+                  "rank": 6
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "notes": "Mind Flay fills every remaining global, including the rest of the execute fallback above.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 18807,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Mind Blast only when Mind Flay cannot be cast: in our level-60 search run Mind Flay on every free global beat Mind Blast on cooldown, so outside the execute window this line rarely fires.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10947,
+            "rank": 9
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shoot with your wand whenever nothing else is ready: it costs no mana and always beats standing idle. Mind Flay and Mind Blast still come first whenever they are available, and Wand Specialization adds to it.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 5019
+          }
+        }
+      }
+    }
+  ]
+}

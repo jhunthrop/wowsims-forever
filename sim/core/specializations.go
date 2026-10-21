@@ -1,41 +1,65 @@
 package core
 
+import (
+	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/core/stats"
+)
+
 ///////////////////////////////////////////////////////////////////////////
 //                            Weapon Specialization Auras
 ///////////////////////////////////////////////////////////////////////////
 
+// Forever's racial weapon specializations are not vanilla's +5 weapon
+// skill. The client (1.60.1.70009) states them as critical strike chance
+// with all spells and attacks while a weapon of the type is equipped:
+// Sword Specialization 20597 "by 2% while you have a sword or two-handed
+// sword equipped", Axe Specialization 20574 "by 1% while you have an axe
+// or a two-handed axe equipped", Mace Specialization 1259719 "by 1% while
+// you have a mace or two-handed mace equipped". Either hand qualifies;
+// two-handers share the one-hand WeaponType.
+const (
+	swordSpecializationCritPercent = 2
+	axeSpecializationCritPercent   = 1
+	maceSpecializationCritPercent  = 1
+)
+
 func (character *Character) SwordSpecializationAura() *Aura {
-	return character.GetOrRegisterAura(Aura{
-		Label:      "Sword Skill Specialization",
-		BuildPhase: CharacterBuildPhaseGear,
-		Duration:   NeverExpires,
-		OnGain: func(aura *Aura, sim *Simulation) {
-			character.PseudoStats.SwordsSkill += 5
-			character.PseudoStats.TwoHandedSwordsSkill += 5
-		},
-	})
+	return character.weaponSpecializationCritAura("Sword Specialization", proto.WeaponType_WeaponTypeSword, swordSpecializationCritPercent)
 }
 
 func (character *Character) AxeSpecializationAura() *Aura {
-	return character.GetOrRegisterAura(Aura{
-		Label:      "Axe Skill Specialization",
-		BuildPhase: CharacterBuildPhaseGear,
-		Duration:   NeverExpires,
-		OnGain: func(aura *Aura, sim *Simulation) {
-			character.PseudoStats.AxesSkill += 5
-			character.PseudoStats.TwoHandedAxesSkill += 5
-		},
-	})
+	return character.weaponSpecializationCritAura("Axe Specialization", proto.WeaponType_WeaponTypeAxe, axeSpecializationCritPercent)
 }
 
 func (character *Character) MaceSpecializationAura() *Aura {
+	return character.weaponSpecializationCritAura("Mace Specialization", proto.WeaponType_WeaponTypeMace, maceSpecializationCritPercent)
+}
+
+// HasWeaponOfType reports whether either hand holds a weapon of the type.
+func (character *Character) HasWeaponOfType(weaponType proto.WeaponType) bool {
+	for _, weapon := range []*Item{character.GetMHWeapon(), character.GetOHWeapon()} {
+		if weapon != nil && weapon.WeaponType == weaponType {
+			return true
+		}
+	}
+	return false
+}
+
+func (character *Character) weaponSpecializationCritAura(label string, weaponType proto.WeaponType, critPercent float64) *Aura {
+	bonus := critPercent * CritRatingPerCritChance
 	return character.GetOrRegisterAura(Aura{
-		Label:      "Mace Skill Specialization",
+		Label:      label,
 		BuildPhase: CharacterBuildPhaseGear,
 		Duration:   NeverExpires,
 		OnGain: func(aura *Aura, sim *Simulation) {
-			character.PseudoStats.MacesSkill += 5
-			character.PseudoStats.TwoHandedMacesSkill += 5
+			if character.HasWeaponOfType(weaponType) {
+				character.AddBuildPhaseStatDynamic(sim, stats.Crit, bonus)
+			}
+		},
+		OnExpire: func(aura *Aura, sim *Simulation) {
+			if character.HasWeaponOfType(weaponType) {
+				character.AddBuildPhaseStatDynamic(sim, stats.Crit, -bonus)
+			}
 		},
 	})
 }

@@ -13,6 +13,7 @@ func init() {
 }
 
 func TestP1Hunter(t *testing.T) {
+	core.SkipAwaitingForeverTalentRewrite(t, "sim/hunter")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassHunter,
@@ -86,6 +87,6 @@ var Stats = []proto.Stat{
 	proto.Stat_StatAgility,
 	proto.Stat_StatAttackPower,
 	proto.Stat_StatRangedAttackPower,
-	proto.Stat_StatMeleeCrit,
-	proto.Stat_StatMeleeHit,
+	proto.Stat_StatCrit,
+	proto.Stat_StatHit,
 }

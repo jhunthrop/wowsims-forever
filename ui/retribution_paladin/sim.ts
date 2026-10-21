@@ -42,14 +42,12 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRetributionPaladin, {
 		Stat.StatIntellect,
 		// Physical
 		Stat.StatAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatExpertise,
 		// Spell
 		Stat.StatSpellPower,
 		Stat.StatHolyPower,
-		Stat.StatSpellCrit,
-		Stat.StatSpellHit,
 		Stat.StatMP5,
 	],
 	epPseudoStats: [PseudoStat.PseudoStatMainHandDps, PseudoStat.PseudoStatMeleeSpeedMultiplier],
@@ -65,14 +63,12 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRetributionPaladin, {
 		Stat.StatIntellect,
 		// Physical
 		Stat.StatAttackPower,
-		Stat.StatMeleeHit,
-		Stat.StatMeleeCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatExpertise,
 		// Spell
 		Stat.StatSpellPower,
 		Stat.StatHolyPower,
-		Stat.StatSpellCrit,
-		Stat.StatSpellHit,
 		Stat.StatMP5,
 	],
 	displayPseudoStats: [PseudoStat.PseudoStatMeleeSpeedMultiplier],
@@ -87,12 +83,12 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRetributionPaladin, {
 				[Stat.StatAgility]: 1.13,
 				[Stat.StatIntellect]: 0.15,
 				[Stat.StatSpellPower]: 0.32,
-				[Stat.StatSpellHit]: 0.41,
-				[Stat.StatSpellCrit]: 0.01,
 				[Stat.StatMP5]: 0.05,
 				[Stat.StatAttackPower]: 1,
-				[Stat.StatMeleeHit]: 1.96,
-				[Stat.StatMeleeCrit]: 1.16,
+				// Forever: merged from MeleeHit 1.96 + SpellHit 0.41. unconfirmed
+				[Stat.StatHit]: 1.96,
+				// Forever: merged from MeleeCrit 1.16 + SpellCrit 0.01. unconfirmed
+				[Stat.StatCrit]: 1.16,
 				[Stat.StatFireResistance]: 0.5,
 			},
 			{

@@ -1,0 +1,136 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castPaladinPrimarySeal": {}
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1.5s"
+        }
+      }
+    }
+  ],
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Judgement on cooldown: an off-the-global cast (it costs 6% of your base mana) that unloads the seal's judgement effect and starts its ten second cooldown again.",
+      "action": {
+        "condition": {
+          "spellCanCast": {
+            "spellId": {
+              "spellId": 20271
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20271
+          }
+        }
+      }
+    },
+    {
+      "notes": "Exorcism on cooldown against Undead and Demons: learnable at level 20, a 15 second cooldown Holy nuke that only lands on those two target types.",
+      "action": {
+        "condition": {
+          "spellCanCast": {
+            "spellId": {
+              "spellId": 10314,
+              "rank": 6
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10314,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Hammer of Wrath below 20 percent: the execute-window button Retribution has besides seals, Judgement and Holy Strike.",
+      "action": {
+        "condition": {
+          "isExecutePhase": {
+            "threshold": "E20"
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 24239,
+            "rank": 3
+          }
+        }
+      }
+    },
+    {
+      "notes": "Reapply Seal of Righteousness once it is about to expire -- this is now the only seal-maintenance line (see notes for why the seal twist that used to sit here was removed). It also catches the seal being deactivated by Judgement's own cast, which fires this same condition on the very next decision.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "currentSealRemainingTime": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "1"
+              }
+            }
+          }
+        },
+        "castPaladinPrimarySeal": {}
+      }
+    },
+    {
+      "notes": "Holy Strike on cooldown: an instant Holy weapon attack on its own 10 second cooldown, learnable from level 6. Judgement and seal maintenance alone leave GCDs idle every ten-second window; Holy Strike is the filler that spends them.",
+      "action": {
+        "condition": {
+          "spellCanCast": {
+            "spellId": {
+              "spellId": 10333,
+              "rank": 8
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10333,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
+      "notes": "Consecration last, as the filler between Judgement, Exorcism and Holy Strike, and only while mana is above 65 percent: it is the most expensive button on the list, and below that line the mana is worth more to the rest of the rotation.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 5,
+            "spellId": 20924
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "65%"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

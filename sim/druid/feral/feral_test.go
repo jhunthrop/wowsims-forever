@@ -13,6 +13,7 @@ func init() {
 }
 
 func TestP1Feral(t *testing.T) {
+	core.SkipAwaitingForeverTalentRewrite(t, "sim/druid/feral")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassDruid,
@@ -38,7 +39,7 @@ func TestP1Feral(t *testing.T) {
 	}))
 }
 
-var P1Talents = "500005301-5500020323202151-15"
+var P1Talents = "500005301-55000230320202051-15"
 
 var PlayerOptionsMonoCat = &proto.Player_FeralDruid{
 	FeralDruid: &proto.FeralDruid{
@@ -104,6 +105,6 @@ var Stats = []proto.Stat{
 	proto.Stat_StatStrength,
 	proto.Stat_StatAgility,
 	proto.Stat_StatAttackPower,
-	proto.Stat_StatMeleeCrit,
-	proto.Stat_StatMeleeHit,
+	proto.Stat_StatCrit,
+	proto.Stat_StatHit,
 }

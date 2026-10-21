@@ -32,6 +32,9 @@ import {
 	Hunter_Options_QuiverBonus,
 } from '../core/proto/hunter.js';
 import { SavedTalents } from '../core/proto/ui.js';
+import ForeverBeastMasteryAPL from './apls/forever_beast_mastery.apl.json';
+import ForeverMarksmanshipAPL from './apls/forever_marksmanship.apl.json';
+import ForeverSurvivalAPL from './apls/forever_survival.apl.json';
 import P1APL from './apls/p1.apl.json';
 import P0BISGear from './gear_sets/p0.bis.gear.json';
 import P1BISGear from './gear_sets/p1.bis.gear.json';
@@ -56,13 +59,24 @@ export const DefaultGear = GearP0BIS;
 //                                 APL Presets
 ///////////////////////////////////////////////////////////////////////////
 
+// The Forever rotations below are the launch defaults. Each is a copy of
+// data/curated/apl/<class>-<spec>.json's `rotation` in the Forever Sixty site
+// repository, written here by that repository's `make apl-sync` and proved by
+// its `make apl-check`; edit the curated file, never this copy. The Era lists
+// are kept because a Forever character can still be compared against them.
+// One hunter package serves all three specs, so all three Forever rotations
+// live here. Marksmanship is the default: it is the spec this package's own
+// Era preset and talent build are written for.
 export const APLP1 = PresetUtils.makePresetAPLRotation('Marksmanship', P1APL);
+export const AplForeverBeastMastery = PresetUtils.makePresetAPLRotation('Forever Beast Mastery', ForeverBeastMasteryAPL);
+export const AplForeverMarksmanship = PresetUtils.makePresetAPLRotation('Forever Marksmanship', ForeverMarksmanshipAPL);
+export const AplForeverSurvival = PresetUtils.makePresetAPLRotation('Forever Survival', ForeverSurvivalAPL);
 
 export const APLPresets = {
-	[Phase.Phase1]: [APLP1],
+	[Phase.Phase1]: [APLP1, AplForeverBeastMastery, AplForeverMarksmanship, AplForeverSurvival],
 };
 
-export const DefaultAPL = APLPresets[Phase.Phase1][0];
+export const DefaultAPL = AplForeverMarksmanship;
 
 ///////////////////////////////////////////////////////////////////////////
 //                                 Talent Presets

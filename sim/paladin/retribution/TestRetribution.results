@@ -1,3 +1,10 @@
+# UNVALIDATED. This recording was machine-regenerated against an
+# intermediate engine during the stat merge (plan
+# 2026-09-14-sim-engine), and the suite that reads it is skipped
+# awaiting its Forever talent rewrite - so nothing has run against it
+# and no one has checked the numbers. It is kept only so the spec's
+# bring-up task has a before-and-after; every row here will move when
+# that task regenerates it. Do not cite these numbers.
 character_stats_results: {
  key: "TestRetribution-Phase5-CharacterStats-Default"
  value: {
@@ -14,13 +21,11 @@ character_stats_results: {
   final_stats: 0
   final_stats: 0
   final_stats: 49.6
-  final_stats: 0
-  final_stats: 27.28857
+  final_stats: 3
+  final_stats: 45.03366
   final_stats: 0
   final_stats: 0
   final_stats: 1669.638
-  final_stats: 3
-  final_stats: 28.44509
   final_stats: 0
   final_stats: 0
   final_stats: 0
@@ -34,7 +39,6 @@ character_stats_results: {
   final_stats: 0
   final_stats: 8.44509
   final_stats: 5
-  final_stats: 0
   final_stats: 5210.6125
   final_stats: 27
   final_stats: 60
@@ -50,12 +54,12 @@ character_stats_results: {
 stat_weights_results: {
  key: "TestRetribution-Phase5-StatWeights-Default"
  value: {
-  weights: 0.33199
-  weights: 0.16862
+  weights: 0.38936
+  weights: 0.14456
   weights: 0
   weights: 0
   weights: 0
-  weights: 0.25981
+  weights: 0.29575
   weights: 0
   weights: 0
   weights: 0
@@ -63,14 +67,11 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 0.70516
-  weights: 0.23988
+  weights: 3.86348
+  weights: 2.6614
   weights: 0
   weights: 0
-  weights: 0.11929
-  weights: 2.96126
-  weights: 2.67511
-  weights: 0
+  weights: 0.13991
   weights: 0
   weights: 0
   weights: 0
@@ -99,161 +100,161 @@ stat_weights_results: {
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-Avenger'sBattlegear"
  value: {
-  dps: 416.8195
-  tps: 442.43533
+  dps: 482.6309
+  tps: 508.32048
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-BattlegearofEternalJustice"
  value: {
-  dps: 392.70351
-  tps: 404.77184
+  dps: 462.94034
+  tps: 475.05442
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-FieldMarshal'sAegis"
  value: {
-  dps: 410.34555
-  tps: 436.35963
+  dps: 482.29654
+  tps: 508.38929
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-Freethinker'sArmor"
  value: {
-  dps: 333.52015
-  tps: 358.6099
+  dps: 395.71683
+  tps: 420.85574
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-JudgementArmor"
  value: {
-  dps: 414.87838
-  tps: 441.1383
+  dps: 490.55447
+  tps: 516.93731
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-LawbringerArmor"
  value: {
-  dps: 347.88463
-  tps: 373.88396
+  dps: 427.97439
+  tps: 454.07205
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-LieutenantCommander'sRedoubt"
  value: {
-  dps: 378.85138
-  tps: 403.91163
+  dps: 443.71633
+  tps: 468.85033
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-RedemptionArmor"
  value: {
-  dps: 329.49158
-  tps: 356.13255
+  dps: 449.31045
+  tps: 476.0105
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-AllItems-SanctifiedOrb-20512"
  value: {
-  dps: 303.77576
-  tps: 328.43285
+  dps: 354.06614
+  tps: 378.83631
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Average-Default"
  value: {
-  dps: 303.6155
-  tps: 328.21358
+  dps: 352.80965
+  tps: 377.49106
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Dwarf-blank-P5 Seal of Righteousness Ret-basic_ret-FullBuffs-P5-Consumes-LongMultiTarget"
  value: {
-  dps: 34.53035
-  tps: 51.54201
+  dps: 39.2722
+  tps: 57.2672
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Dwarf-blank-P5 Seal of Righteousness Ret-basic_ret-FullBuffs-P5-Consumes-LongSingleTarget"
  value: {
-  dps: 22.6148
-  tps: 23.48996
+  dps: 25.81247
+  tps: 26.7368
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Dwarf-blank-P5 Seal of Righteousness Ret-basic_ret-FullBuffs-P5-Consumes-ShortSingleTarget"
  value: {
-  dps: 30.2895
-  tps: 31.322
+  dps: 34.46313
+  tps: 35.56938
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Dwarf-blank-P5 Seal of Righteousness Ret-basic_ret-NoBuffs-P5-Consumes-LongMultiTarget"
  value: {
-  dps: 11.15525
-  tps: 11.15525
+  dps: 12.1337
+  tps: 12.1337
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Dwarf-blank-P5 Seal of Righteousness Ret-basic_ret-NoBuffs-P5-Consumes-LongSingleTarget"
  value: {
-  dps: 6.28939
-  tps: 6.28939
+  dps: 6.92753
+  tps: 6.92753
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Dwarf-blank-P5 Seal of Righteousness Ret-basic_ret-NoBuffs-P5-Consumes-ShortSingleTarget"
  value: {
-  dps: 10.40251
-  tps: 10.40251
+  dps: 11.45255
+  tps: 11.45255
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Human-blank-P5 Seal of Righteousness Ret-basic_ret-FullBuffs-P5-Consumes-LongMultiTarget"
  value: {
-  dps: 33.11421
-  tps: 49.73254
+  dps: 38.29571
+  tps: 56.19238
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Human-blank-P5 Seal of Righteousness Ret-basic_ret-FullBuffs-P5-Consumes-LongSingleTarget"
  value: {
-  dps: 21.01391
-  tps: 21.87433
+  dps: 24.55195
+  tps: 25.46645
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Human-blank-P5 Seal of Righteousness Ret-basic_ret-FullBuffs-P5-Consumes-ShortSingleTarget"
  value: {
-  dps: 30.22899
-  tps: 31.26149
+  dps: 35.99645
+  tps: 37.12728
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Human-blank-P5 Seal of Righteousness Ret-basic_ret-NoBuffs-P5-Consumes-LongMultiTarget"
  value: {
-  dps: 10.96564
-  tps: 10.96564
+  dps: 12.04417
+  tps: 12.04417
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Human-blank-P5 Seal of Righteousness Ret-basic_ret-NoBuffs-P5-Consumes-LongSingleTarget"
  value: {
-  dps: 6.66052
-  tps: 6.66052
+  dps: 7.40937
+  tps: 7.40937
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-Settings-Human-blank-P5 Seal of Righteousness Ret-basic_ret-NoBuffs-P5-Consumes-ShortSingleTarget"
  value: {
-  dps: 12.90257
-  tps: 12.90257
+  dps: 14.93941
+  tps: 14.93941
  }
 }
 dps_results: {
  key: "TestRetribution-Phase5-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 262.86678
-  tps: 286.16195
+  dps: 285.09813
+  tps: 308.43755
  }
 }

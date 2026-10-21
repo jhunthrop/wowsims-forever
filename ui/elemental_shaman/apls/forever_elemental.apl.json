@@ -1,0 +1,207 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 15208,
+            "rank": 10
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-2.5s"
+        }
+      }
+    }
+  ],
+  "priorityList": [
+    {
+      "notes": "Lava Burst on cooldown: 10 s cooldown, 2.0 s cast with Elemental Alacrity, and about as much damage per mana as Lightning Bolt for more damage per second of cast. It carries no Flame Shock condition because the rotation does not keep Flame Shock up: under the raid preset the shock costs 410 mana for about 940 damage against Lightning Bolt's 220 for about 835, the character runs dry either way, and every Flame Shock variant swept (always kept up, kept up above 50/70/90% mana) lost to leaving it out. The +20% Flame Shock bonus is therefore never collected.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1238300,
+            "rank": 3
+          }
+        }
+      }
+    },
+    {
+      "notes": "Mana Spring Totem restores the shaman's own mana for its five-minute life; Elemental runs dry well before a 180 s fight ends, so one 100-mana drop at the start returns about 900 mana.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10497,
+            "rank": 4
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "totemRemainingTime": {
+                "totemType": "Water"
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "1.5"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Single target: Searing Totem is the higher damage fire totem.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpEq",
+                  "lhs": {
+                    "numberTargets": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "1"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 10438,
+                        "rank": 6
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10438,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "2 or more targets: Magma Totem hits everyone standing in it instead.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "numberTargets": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "2"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 10587,
+                        "rank": 4
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10587,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
+      "notes": "2 or more targets: Chain Lightning hits all of them for close to single-target Lightning Bolt damage.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "numberTargets": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "2"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10605,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
+      "notes": "Lightning Bolt is the rest of the single-target rotation.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 15208,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
+      "notes": "Earth Shock sits below Lightning Bolt, so it only fires when Lightning Bolt cannot be cast; the search found Lightning Bolt on every global beats shocking at low mana.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "30%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10414,
+            "rank": 7
+          }
+        }
+      }
+    }
+  ]
+}

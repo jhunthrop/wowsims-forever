@@ -31,12 +31,13 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 		{level: 52, spellID: 20308, manaCost: 160, scaleLevel: 60, ap: 306, scale: 2.4, judge: judge{spellID: 20303, bonus: 140}},
 	}
 
-	improvedSotC := []float64{1, 1.05, 1.1, 1.15}[paladin.Talents.ImprovedSealOfTheCrusader]
+	// FOREVER: Improved Seal of the Crusader is not in the client's trees.
+	// improvedSotC := []float64{1, 1.05, 1.1, 1.15}[paladin.Talents.ImprovedSealOfTheCrusader]
+	improvedSotC := 1.0
 
 	var libramAp, libramBonus float64
 	if paladin.Ranged().ID == LibramOfFervor {
-		libramAp = 48
-		libramBonus = 33
+		libramAp, libramBonus = libramOfFervorBonuses()
 	}
 
 	for i, rank := range ranks {
@@ -55,6 +56,23 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 			DefenseType: core.DefenseTypeMagic,
 			ProcMask:    core.ProcMaskEmpty,
 			Flags:       core.SpellFlagMeleeMetrics,
+
+			// source 1.60.1.70009 client spell data (spellconst/paladin.json):
+			// Judgement of the Crusader's spell_level equals the
+			// owning Seal of the Crusader rank's own level at every
+			// rank. Flagged by paladin.golden.md's "required_level
+			// N->0" rows - this SpellConfig never set the field at
+			// all.
+			//
+			// Its duration_ms (40000, every rank) is NOT wired here:
+			// the debuff it applies is core.JudgementOfTheCrusaderAura
+			// (sim/core/debuffs.go), which hardcodes Duration to 10s -
+			// a stale-vanilla-literal bug in sim/core, out of scope
+			// for this lane (never edit sim/core). Wiring RelatedSelfBuff
+			// to that aura would trade today's "missing aura duration"
+			// mismatch for a numeric one (40000->10000) this lane
+			// cannot fix. Reported as a core follow-up.
+			RequiredLevel: int(rank.level),
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				spell.CalcAndDealOutcome(sim, target, spell.OutcomeAlwaysHit)
@@ -76,19 +94,27 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 			OnExpire: func(_ *core.Aura, sim *core.Simulation) {
 				paladin.MultiplyMeleeSpeed(sim, 1/1.4)
 				paladin.AutoAttacks.MHAuto().DamageMultiplier *= 1.4
-				paladin.AddStatDynamic(sim, stats.AttackPower, -ap*improvedSotC+libramAp)
+				paladin.AddStatDynamic(sim, stats.AttackPower, -(ap*improvedSotC + libramAp))
 			},
 		})
 
 		paladin.aurasSotC = append(paladin.aurasSotC, aura)
 
 		paladin.RegisterSpell(core.SpellConfig{
-			ActionID:    aura.ActionID,
-			SpellSchool: core.SpellSchoolHoly,
-			Flags:       core.SpellFlagAPL,
+			ClassSpellMask: PaladinSpellMaskSealOfTheCrusaderCast,
+			ActionID:       aura.ActionID,
+			SpellSchool:    core.SpellSchoolHoly,
+			Flags:          core.SpellFlagAPL,
 
 			RequiredLevel: int(rank.level),
 			Rank:          i + 1,
+
+			// aura's own Duration (30s) matches the client's
+			// duration_ms (30000) for this cast's own SpellID at every
+			// rank (spellconst/paladin.json) - wiring it through lets
+			// compare.go's engineDuration see it instead of reporting
+			// 0 for a self-buff that does exist.
+			RelatedSelfBuff: aura,
 
 			ManaCost: core.ManaCostOptions{
 				FlatCost:   rank.manaCost - paladin.getLibramSealCostReduction(),
@@ -100,8 +126,8 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 				},
 			},
 
-			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-				paladin.applySeal(aura, judgeSpell, sim)
+			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
+				paladin.applySeal(aura, judgeSpell, spell, sim)
 			},
 		})
 

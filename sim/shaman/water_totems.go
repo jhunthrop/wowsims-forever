@@ -5,16 +5,35 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/stats"
 )
 
 const HealingStreamTotemRanks = 5
 
 var HealingStreamTotemSpellId = [HealingStreamTotemRanks + 1]int32{0, 5394, 6375, 6377, 10462, 10463}
-var HealingStreamTotemHealId = [HealingStreamTotemRanks + 1]int32{0, 5672, 6371, 6372, 10460, 10461}
-var HealingStreamTotemBaseHealing = [HealingStreamTotemRanks + 1]float64{0, 6, 8, 10, 12, 14}
-var HealingStreamTotemSpellCoeff = [HealingStreamTotemRanks + 1]float64{0, .022, .022, .022, .022, .022}
 var HealingStreamTotemManaCost = [HealingStreamTotemRanks + 1]float64{0, 40, 50, 60, 70, 80}
 var HealingStreamTotemLevel = [HealingStreamTotemRanks + 1]int{0, 20, 30, 40, 50, 60}
+
+// The totem's heal itself is the generated HealingStream row (spells 5672,
+// 6371, 6372, 10460, 10461: 5, 6, 7, 9 and 11 every 2 s at 0.022 of
+// healing power), and the client gives the totem a 5 minute life on every
+// rank.
+const (
+	healingStreamTotemDuration = 5 * time.Minute
+	healingStreamTotemTickGap  = 2 * time.Second
+)
+
+// Both water totems hold the water slot, and one water totem replaces
+// another, so a new one first ends the one standing. dismiss ends the new
+// totem's own effect when something later takes the slot.
+func (shaman *Shaman) dropWaterTotem(sim *core.Simulation, spell *core.Spell, duration time.Duration, dismiss func(*core.Simulation)) {
+	if shaman.dismissWaterTotem != nil {
+		shaman.dismissWaterTotem(sim)
+	}
+	shaman.TotemExpirations[WaterTotem] = sim.CurrentTime + duration
+	shaman.ActiveTotems[WaterTotem] = spell
+	shaman.dismissWaterTotem = dismiss
+}
 
 func (shaman *Shaman) registerHealingStreamTotemSpell() {
 	shaman.HealingStreamTotem = make([]*core.Spell, HealingStreamTotemRanks+1)
@@ -35,26 +54,26 @@ func (shaman *Shaman) registerHealingStreamTotemSpell() {
 
 func (shaman *Shaman) newHealingStreamTotemSpellConfig(rank int) core.SpellConfig {
 	spellId := HealingStreamTotemSpellId[rank]
-	healId := HealingStreamTotemHealId[rank]
-	baseHealing := HealingStreamTotemBaseHealing[rank]*shaman.purificationHealingModifier() + shaman.restorativeTotemsModifier()
-	spellCoeff := HealingStreamTotemSpellCoeff[rank]
+	healId := HealingStreamSpellId[rank]
+	baseHealing := HealingStreamBaseDamage[rank][0]
+	spellCoeff := HealingStreamSpellCoeff[rank]
 	manaCost := HealingStreamTotemManaCost[rank]
 	level := HealingStreamTotemLevel[rank]
-
-	duration := time.Second * 60
-	healInterval := time.Second * 2
 
 	config := shaman.newTotemSpellConfig(manaCost, spellId)
 	config.RequiredLevel = level
 	config.Rank = rank
 
 	healSpell := shaman.RegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: healId},
-		SpellSchool: core.SpellSchoolNature,
-		ProcMask:    core.ProcMaskSpellHealing,
-		Flags:       core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete | core.SpellFlagNoLogs | core.SpellFlagNoMetrics,
+		ActionID:      core.ActionID{SpellID: healId},
+		SpellSchool:   core.SpellSchoolNature,
+		ProcMask:      core.ProcMaskSpellHealing,
+		Flags:         core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete | core.SpellFlagNoLogs | core.SpellFlagNoMetrics,
+		RequiredLevel: level,
 
-		DamageMultiplier: 1,
+		// Purification raises "your healing spells", Restorative Totems this
+		// totem; both add to the heal like the other healing modifiers.
+		DamageMultiplier: 1 + shaman.purificationHealingModifier() + shaman.restorativeHealingStreamModifier(),
 		ThreatMultiplier: 1,
 		BonusCoefficient: spellCoeff,
 
@@ -67,23 +86,32 @@ func (shaman *Shaman) newHealingStreamTotemSpellConfig(rank int) core.SpellConfi
 		Aura: core.Aura{
 			Label: fmt.Sprintf("Healing Stream HoT (Rank %d)", rank),
 		},
-		NumberOfTicks: int32(duration / healInterval),
-		TickLength:    healInterval,
+		NumberOfTicks: int32(healingStreamTotemDuration / healingStreamTotemTickGap),
+		TickLength:    healingStreamTotemTickGap,
 		OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 			healSpell.Cast(sim, target)
 		},
 	}
 
 	config.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-		shaman.TotemExpirations[WaterTotem] = sim.CurrentTime + duration
-		shaman.ActiveTotems[WaterTotem] = spell
+		shaman.dropWaterTotem(sim, spell, healingStreamTotemDuration, func(sim *core.Simulation) {
+			shaman.cancelPartyHots(sim, spell)
+		})
 
 		for _, agent := range shaman.Party.Players {
-			spell.Hot(&agent.GetCharacter().Unit).Activate(sim)
+			spell.Hot(&agent.GetCharacter().Unit).Apply(sim)
 		}
 	}
 
 	return config
+}
+
+// cancelPartyHots ends spell's heal over time on every member of the
+// shaman's group.
+func (shaman *Shaman) cancelPartyHots(sim *core.Simulation, spell *core.Spell) {
+	for _, agent := range shaman.Party.Players {
+		spell.Hot(&agent.GetCharacter().Unit).Cancel(sim)
+	}
 }
 
 const ManaSpringTotemRanks = 4
@@ -110,21 +138,47 @@ func (shaman *Shaman) registerManaSpringTotemSpell() {
 	)
 }
 
+// manaSpringTotemDuration is the client's duration_ms (300000) on every rank.
+const manaSpringTotemDuration = 5 * time.Minute
+
+// manaSpringMP5PerRestore turns "restores N mana every 2 seconds" into the
+// engine's mana-per-5-seconds stat: 2.5 ticks every 5 seconds.
+const manaSpringMP5PerRestore = 2.5
+
 func (shaman *Shaman) newManaSpringTotemSpellConfig(rank int) core.SpellConfig {
 	spellId := ManaSpringTotemSpellId[rank]
-	// TODO: The sim won't respect the value of a totem dropped via the APL. It uses hard-coded values from buffs.go
-	// manaRestoreBase := ManaSpringTotemManaRestore[rank]
 	manaCost := ManaSpringTotemManaCost[rank]
 	level := ManaSpringTotemLevel[rank]
+	// Read when the totem lands, not now: the set bonuses are applied after
+	// the spells are registered.
+	var applied stats.Stats
+	bonus := func() stats.Stats {
+		restore := float64(ManaSpringTotemManaRestore[rank]) * manaSpringMP5PerRestore
+		return stats.Stats{stats.MP5: restore * shaman.restorativeManaSpringMultiplier() * (1 + shaman.manaSpringSetBonus)}
+	}
 
-	duration := time.Second * 60
+	// The totem's restore is the shaman's own mana regeneration while it
+	// stands; the group-wide raid buff in core/buffs.go stays a separate
+	// source for other players' totems.
+	buffAura := shaman.RegisterAura(core.Aura{
+		Label:    fmt.Sprintf("Mana Spring Totem (Rank %d)", rank),
+		ActionID: core.ActionID{SpellID: spellId},
+		Duration: manaSpringTotemDuration,
+		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+			applied = bonus()
+			shaman.AddStatsDynamic(sim, applied)
+		},
+		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+			shaman.AddStatsDynamic(sim, applied.Multiply(-1))
+		},
+	})
 
 	spell := shaman.newTotemSpellConfig(manaCost, spellId)
 	spell.RequiredLevel = level
 	spell.Rank = rank
 	spell.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-		shaman.TotemExpirations[WaterTotem] = sim.CurrentTime + duration
-		shaman.ActiveTotems[WaterTotem] = spell
+		shaman.dropWaterTotem(sim, spell, manaSpringTotemDuration, buffAura.Deactivate)
+		buffAura.Activate(sim)
 	}
 	return spell
 }

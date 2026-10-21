@@ -84,6 +84,16 @@ func applyWeaponImbueConsumes(character *Character, consumes *proto.Consumes) {
 	}
 }
 
+// manaOilStats are the mana oils' mana per five seconds and healing, as the
+// client's item tooltips state them (items 20745, 20747 and 20748, whose
+// enchants carry spells 25114, 25115 and 25116): Forever raised vanilla's 4/8/12 mana and
+// 8/16/25 healing.
+var manaOilStats = map[proto.WeaponImbue]stats.Stats{
+	proto.WeaponImbue_MinorManaOil:     {stats.MP5: 5, stats.HealingPower: 10},
+	proto.WeaponImbue_LesserManaOil:    {stats.MP5: 10, stats.HealingPower: 20},
+	proto.WeaponImbue_BrilliantManaOil: {stats.MP5: 15, stats.HealingPower: 30},
+}
+
 func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, shadowOilIcd Cooldown) {
 	if imbue != proto.WeaponImbue_WeaponImbueUnknown {
 		switch imbue {
@@ -103,11 +113,14 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 		case proto.WeaponImbue_BrilliantWizardOil:
 			character.AddStats(stats.Stats{
 				stats.SpellPower: 36,
-				stats.SpellCrit:  1 * SpellCritRatingPerCritChance,
+				stats.Crit:       1 * CritRatingPerCritChance,
 			})
 		case proto.WeaponImbue_BlessedWizardOil:
 			character.Env.RegisterPostFinalizeEffect(func() {
-				for _, target := range character.Env.Encounter.TargetUnits {
+				// The pool, not the active prefix: an imbue is set up
+				// once and means every undead in the fight, including
+				// the ones a target timeline brings in later.
+				for _, target := range character.Env.Encounter.AllTargetUnits {
 					if target.MobType != proto.MobType_MobTypeUndead {
 						continue
 					}
@@ -119,19 +132,8 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 			})
 
 		// Mana Oils
-		case proto.WeaponImbue_MinorManaOil:
-			character.AddStats(stats.Stats{
-				stats.MP5: 4,
-			})
-		case proto.WeaponImbue_LesserManaOil:
-			character.AddStats(stats.Stats{
-				stats.MP5: 8,
-			})
-		case proto.WeaponImbue_BrilliantManaOil:
-			character.AddStats(stats.Stats{
-				stats.MP5:          12,
-				stats.HealingPower: 25,
-			})
+		case proto.WeaponImbue_MinorManaOil, proto.WeaponImbue_LesserManaOil, proto.WeaponImbue_BrilliantManaOil:
+			character.AddStats(manaOilStats[imbue])
 
 		// Sharpening Stones
 		case proto.WeaponImbue_SolidSharpeningStone:
@@ -155,13 +157,15 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 		case proto.WeaponImbue_ElementalSharpeningStone:
 			if !character.PseudoStats.FeralCombatEnabled {
 				character.AddStats(stats.Stats{
-					stats.MeleeCrit: 2 * CritRatingPerCritChance,
+					stats.Crit: 2 * CritRatingPerCritChance,
 				})
 				character.AddBonusRangedCritRating(-2.0)
 			}
 		case proto.WeaponImbue_ConsecratedSharpeningStone:
 			character.Env.RegisterPostFinalizeEffect(func() {
-				for _, target := range character.Env.Encounter.TargetUnits {
+				// The pool, not the active prefix; see
+				// BlessedWizardOil above.
+				for _, target := range character.Env.Encounter.AllTargetUnits {
 					if target.MobType != proto.MobType_MobTypeUndead {
 						continue
 					}
@@ -307,6 +311,17 @@ func registerFrostOil(character *Character, isMh bool) {
 //                             Food
 ///////////////////////////////////////////////////////////////////////////
 
+// nightfinSoupStats is what Nightfin Soup gives in this client: 22 spell
+// damage for the well-fed hour (item 13931, spell 1249513). Forever turned
+// the food into a stat meal and dropped vanilla's 8 mana per five seconds,
+// so it gives a healer nothing.
+var nightfinSoupStats = stats.Stats{stats.SpellDamage: 22}
+
+// sagesTeaStats is what Sage's Tea gives in this client: 44 healing for the
+// well-fed quarter hour (item 249870, spell 1249925, aura 227 effect of 44
+// triggering Well Fed 1249927, aura 135).
+var sagesTeaStats = stats.Stats{stats.HealingPower: 44}
+
 func applyFoodConsumes(character *Character, consumes *proto.Consumes) {
 	if consumes.Food != proto.Food_FoodUnknown {
 		switch consumes.Food {
@@ -337,9 +352,9 @@ func applyFoodConsumes(character *Character, consumes *proto.Consumes) {
 				stats.Strength: 20,
 			})
 		case proto.Food_FoodNightfinSoup:
-			character.AddStats(stats.Stats{
-				stats.MP5: 8,
-			})
+			character.AddStats(nightfinSoupStats)
+		case proto.Food_FoodSagesTea:
+			character.AddStats(sagesTeaStats)
 		case proto.Food_FoodRunnTumTuberSurprise:
 			character.AddStats(stats.Stats{
 				stats.Intellect: 10,
@@ -498,8 +513,8 @@ func applyPhysicalBuffConsumes(character *Character, consumes *proto.Consumes) {
 		switch consumes.AgilityElixir {
 		case proto.AgilityElixir_ElixirOfTheMongoose:
 			character.AddStats(stats.Stats{
-				stats.Agility:   25,
-				stats.MeleeCrit: 2 * CritRatingPerCritChance,
+				stats.Agility: 25,
+				stats.Crit:    2 * CritRatingPerCritChance,
 			})
 		case proto.AgilityElixir_ElixirOfGreaterAgility:
 			character.AddStats(stats.Stats{
@@ -587,15 +602,30 @@ func applySpellBuffConsumes(character *Character, consumes *proto.Consumes) {
 		}
 	}
 
-	if consumes.ManaRegenElixir != proto.ManaRegenElixir_ManaRegenElixirUnknown {
-		switch consumes.ManaRegenElixir {
-		case proto.ManaRegenElixir_MagebloodPotion:
-			character.AddStats(stats.Stats{
-				stats.MP5: 12,
-			})
-		}
-	}
+	character.AddStats(manaRegenElixirStats[consumes.ManaRegenElixir])
+	character.AddStats(healingPowerBuffStats[consumes.HealingPowerBuff])
+	character.AddStats(spiritElixirStats[consumes.SpiritElixir])
 }
+
+// The healer elixirs, as the client states them. Mageblood Elixir is item
+// 20007 (spell 24363, aura 85 of 12); Greater Mageblood Elixir is item
+// 250341 (spell 1250948, aura 85 of 20). Cleric's Elixir (250332, spell
+// 1250925) and Greater Cleric's Elixir (250333, spell 1250926) are aura 135
+// healing of 30 and 40. Elixir of Sages (250338, spell 1250941) is aura 29
+// spirit of 25 and aura 290 critical strike of 2 percent.
+var (
+	manaRegenElixirStats = map[proto.ManaRegenElixir]stats.Stats{
+		proto.ManaRegenElixir_MagebloodPotion:        {stats.MP5: 12},
+		proto.ManaRegenElixir_GreaterMagebloodElixir: {stats.MP5: 20},
+	}
+	healingPowerBuffStats = map[proto.HealingPowerBuff]stats.Stats{
+		proto.HealingPowerBuff_ClericsElixir:        {stats.HealingPower: 30},
+		proto.HealingPowerBuff_GreaterClericsElixir: {stats.HealingPower: 40},
+	}
+	spiritElixirStats = map[proto.SpiritElixir]stats.Stats{
+		proto.SpiritElixir_ElixirOfSages: {stats.Spirit: 25, stats.Crit: 2 * CritRatingPerCritChance},
+	}
+)
 
 ///////////////////////////////////////////////////////////////////////////
 //                             Zanza-esque Consumes
@@ -651,11 +681,11 @@ func applyHitConsumableConsumes(character *Character, consumes *proto.Consumes) 
 	switch consumes.HitConsumable {
 	case proto.HitConsumable_FireToastedBun:
 		character.AddStats(stats.Stats{
-			stats.MeleeHit: 2 * MeleeHitRatingPerHitChance,
+			stats.Hit: 2 * HitRatingPerHitChance,
 		})
 	case proto.HitConsumable_DarkDesire:
 		character.AddStats(stats.Stats{
-			stats.MeleeHit: 2 * MeleeHitRatingPerHitChance,
+			stats.Hit: 2 * HitRatingPerHitChance,
 		})
 	}
 }
@@ -864,7 +894,7 @@ func (character *Character) newBasicExplosiveSpellConfig(sharedTimer *Timer, act
 		},
 
 		// Explosives always have 1% resist chance, so just give them hit cap.
-		BonusHitRating: 100 * SpellHitRatingPerHitChance,
+		BonusHitRating: 100 * HitRatingPerHitChance,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
@@ -939,6 +969,12 @@ func makePotionActivation(potionType proto.Potions, character *Character, potion
 	return mcd
 }
 
+// SelfCastConsumableFlags are the flags of a consumable that only ever
+// acts on the one who uses it (a mana or health potion, a rune, a
+// healthstone). It is helpful, so the major-cooldown pass uses it whatever
+// the user's current target is: a healer's current target is a friend.
+const SelfCastConsumableFlags = SpellFlagNoOnCastComplete | SpellFlagHelpful
+
 func makeHealthConsumableMCD(itemId int32, character *Character, cdTimer *Timer) MajorCooldown {
 	// Using min values for healthstones as locks generally don't spec into improved
 	minRoll := map[int32]float64{
@@ -976,7 +1012,7 @@ func makeHealthConsumableMCD(itemId int32, character *Character, cdTimer *Timer)
 		},
 		Spell: character.GetOrRegisterSpell(SpellConfig{
 			ActionID: actionID,
-			Flags:    SpellFlagNoOnCastComplete,
+			Flags:    SelfCastConsumableFlags,
 			Cast: CastConfig{
 				CD: Cooldown{
 					Timer:    cdTimer,
@@ -1027,7 +1063,7 @@ func makeManaConsumableMCD(itemId int32, character *Character, cdTimer *Timer) M
 		},
 		Spell: character.GetOrRegisterSpell(SpellConfig{
 			ActionID: actionID,
-			Flags:    SpellFlagNoOnCastComplete,
+			Flags:    SelfCastConsumableFlags,
 			Cast: CastConfig{
 				CD: Cooldown{
 					Timer:    cdTimer,

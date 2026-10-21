@@ -21,17 +21,21 @@ func (warrior *Warrior) RegisterRecklessnessCD() {
 		Duration: time.Second * 15,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			warrior.PseudoStats.DamageTakenMultiplier *= 1.2
-			warrior.AddStatDynamic(sim, stats.MeleeCrit, 100*core.CritRatingPerCritChance)
+			warrior.AddStatDynamic(sim, stats.Crit, 100*core.CritRatingPerCritChance)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			warrior.PseudoStats.DamageTakenMultiplier /= 1.2
-			warrior.AddStatDynamic(sim, stats.MeleeCrit, -100*core.CritRatingPerCritChance)
+			warrior.AddStatDynamic(sim, stats.Crit, -100*core.CritRatingPerCritChance)
 
 		},
 	})
 
 	Recklessness := warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
-		ActionID: actionID,
+		ActionID:       actionID,
+		ClassSpellMask: WarriorSpellMaskRecklessness,
+
+		RequiredLevel: RecklessnessLevel[0],
+
 		Cast: core.CastConfig{
 			IgnoreHaste: true,
 			DefaultCast: core.Cast{

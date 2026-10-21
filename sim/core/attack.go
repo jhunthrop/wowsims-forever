@@ -22,6 +22,10 @@ type Weapon struct {
 	SwingSpeed           float64
 	NormalizedSwingSpeed float64
 	SpellSchool          SpellSchool
+	// TwoHanded is true for a two-hand weapon; Forever's normalized rage
+	// (rage.go's normalizedSwingRage) pays two-handers a higher per-swing
+	// constant. False for the unarmed default and for every one-hander.
+	TwoHanded bool
 }
 
 func (weapon *Weapon) DPS() float64 {
@@ -58,6 +62,7 @@ func newWeaponFromItem(item *Item, bonusDps float64) Weapon {
 		SwingSpeed:           item.SwingSpeed,
 		NormalizedSwingSpeed: normalizedWeaponSpeed,
 		AttackPowerPerDPS:    DefaultAttackPowerPerDPS,
+		TwoHanded:            item.HandType == proto.HandType_HandTypeTwoHand,
 	}
 }
 
@@ -266,6 +271,14 @@ func (wa *WeaponAttack) setWeapon(weapon Weapon) {
 
 // inlineable stub for swing
 func (wa *WeaponAttack) trySwing(sim *Simulation) time.Duration {
+	if wa.SwingSpeed <= 0 {
+		// A weapon the database carries with no swing speed (an item it
+		// never itemised as a weapon, or a placeholder row) would
+		// otherwise swing again at the same instant forever: the swing
+		// duration is SwingSpeed / haste, so it would be zero. Such a
+		// weapon never swings.
+		return NeverExpires
+	}
 	if sim.CurrentTime < wa.swingAt {
 		return wa.swingAt
 	}
@@ -323,8 +336,15 @@ func (wa *WeaponAttack) swing(sim *Simulation) time.Duration {
 	attackSpell := wa.spell
 
 	if wa.replaceSwing != nil {
-		// Need to check APL here to allow last-moment HS queue casts.
-		wa.unit.Rotation.DoNextAction(sim)
+		// Need to check APL here to allow last-moment HS queue casts. A
+		// request that omits rotation entirely (proto3 leaves an unset
+		// message nil) still builds a character - Player.level's own
+		// smoke test builds one with no rotation at every level - so
+		// this guards the same way the other Rotation.DoNextAction call
+		// sites in this package already do (e.g. line 376 below).
+		if wa.unit.Rotation != nil {
+			wa.unit.Rotation.DoNextAction(sim)
+		}
 
 		// Allow MH swing to be overridden for abilities like Heroic Strike.
 		attackSpell = wa.replaceSwing(sim, attackSpell)

@@ -6,18 +6,27 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-const RevengeRanks = 6
-
-var RevengeSpellId = [RevengeRanks + 1]int32{0, 6572, 6574, 7379, 11600, 11601, 25288}
-var RevengeBaseDamage = [RevengeRanks + 1][]float64{{0, 0}, {12, 14}, {18, 22}, {25, 31}, {43, 53}, {64, 78}, {81, 99}}
-var RevengeLevel = [RevengeRanks + 1]int{0, 14, 24, 34, 44, 54, 60}
+// Revenge is learned at levels 14 through 54 from the trainer and its rank
+// 6 (25288, level 60) is an Ahn'Qiraj book rank, so a level-60 character
+// casts rank 5 while core.IncludeAQ is off (the spellranks table marks 25288
+// "book"). A character below the first rank still registers rank 1, which
+// the level ladder's rotation rewrite never casts.
+//
+// Its threat is UNCONFIRMED: the client row carries a single school-damage
+// effect and no threat effect, so the fork's long-standing figures stay
+// (the damage times 2.25 plus a flat 2.25 x 2 x the spell's level, the
+// Sunder Armor formula that predates the client's own Sunder numbers).
+const revengeThreatMultiplier = 2.25
 
 func (warrior *Warrior) registerRevengeSpell(cdTimer *core.Timer) {
-	actionID := core.ActionID{SpellID: core.TernaryInt32(core.IncludeAQ, 25288, 11601)}
+	topTrainerRank := core.TernaryInt(core.IncludeAQ, RevengeRanks, RevengeRanks-1)
+	rank := max(1, min(rankAtLevel(RevengeLevel[:], warrior.Level), topTrainerRank))
+	actionID := core.ActionID{SpellID: RevengeSpellId[rank]}
 	has2pcDreadnaught := warrior.HasSetBonus(ItemSetDreadnaughtsBattlegear, 2)
-	basedamageLow := core.TernaryFloat64(core.IncludeAQ, 81, 64) + core.TernaryFloat64(has2pcDreadnaught, 75, 0) 
-	basedamageHigh := core.TernaryFloat64(core.IncludeAQ, 99, 78) + core.TernaryFloat64(has2pcDreadnaught, 75, 0) 
-	revengeLevel := core.TernaryFloat64(core.IncludeAQ, 60.0, 54.0)
+	damage := RevengeDamage[rank]
+	casterLevel := int(warrior.Level)
+	dreadnaughtBonus := core.TernaryFloat64(has2pcDreadnaught, 75, 0)
+	revengeLevel := float64(RevengeLevel[rank])
 
 	warrior.revengeProcAura = warrior.RegisterAura(core.Aura{
 		Label:    "Revenge",
@@ -39,15 +48,19 @@ func (warrior *Warrior) registerRevengeSpell(cdTimer *core.Timer) {
 	})
 
 	warrior.Revenge = warrior.RegisterSpell(DefensiveStance, core.SpellConfig{
-		SpellCode:   SpellCode_WarriorRevenge,
-		ActionID:    actionID,
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
+		SpellCode:      SpellCode_WarriorRevenge,
+		ClassSpellMask: WarriorSpellMaskRevenge,
+		ActionID:       actionID,
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | SpellFlagOffensive,
+
+		RequiredLevel: RevengeLevel[rank],
+		Rank:          rank,
 
 		RageCost: core.RageCostOptions{
-			Cost:   5,
+			Cost:   rageCost(RevengeManaCost[rank]),
 			Refund: 0.8,
 		},
 		Cast: core.CastConfig{
@@ -57,7 +70,7 @@ func (warrior *Warrior) registerRevengeSpell(cdTimer *core.Timer) {
 			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    cdTimer,
-				Duration: time.Second * 5,
+				Duration: time.Duration(RevengeCooldownMS[rank]) * time.Millisecond,
 			},
 		},
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
@@ -67,12 +80,13 @@ func (warrior *Warrior) registerRevengeSpell(cdTimer *core.Timer) {
 		CritDamageBonus: warrior.impale(),
 
 		DamageMultiplier: 1,
-		ThreatMultiplier: 2.25,
-		FlatThreatBonus:  2.25 * 2 * revengeLevel,
+		ThreatMultiplier: revengeThreatMultiplier,
+		FlatThreatBonus:  revengeThreatMultiplier * 2 * revengeLevel,
 		BonusCoefficient: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := sim.Roll(basedamageLow, basedamageHigh)
+			baseDamage := damage.Roll(sim, casterLevel) + dreadnaughtBonus
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
 			if !result.Landed() {

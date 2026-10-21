@@ -9,14 +9,42 @@ import (
 )
 
 func (hunter *Hunter) getExplosiveTrapConfig(rank int, timer *core.Timer) core.SpellConfig {
-	spellId := [4]int32{0, 409532, 409534, 409535}[rank]
-	dotDamage := [4]float64{0, 15, 24, 33}[rank]
-	minDamage := [4]float64{0, 104, 145, 208}[rank]
-	maxDamage := [4]float64{0, 135, 193, 265}[rank]
+	// The client's duration_ms (60000 for every rank) is the trap's
+	// armed lifetime: how long it sits on the ground, invisible, before
+	// a target walks over it or it expires unused. This engine does not
+	// model that "armed and waiting" phase at all -- ApplyEffects below
+	// resolves the trap immediately (after travel time) against the
+	// current target, there is no delayed trigger to carry a lifetime
+	// on. The Dot this config registers is also IsAOE (the burn tick,
+	// 10 * 2s = 20000ms), which compare.go's engineDuration cannot read
+	// through RelatedSelfBuff/Dot(target) regardless (see Volley's
+	// comment in volley.go for the one case where that AOE-dot gap is
+	// worth working around; it is not worth it here, since 20000 would
+	// just be a different wrong number than the client's 60000). Left
+	// as a documented "missing aura duration", not forced to match.
+	//
+	// Ids, mana cost and level match spellconst/hunter.json's own
+	// spells table exactly (13813/14316/14317; the old
+	// 409532/409534/409535 ids do not exist in the client at all). The
+	// cast spell's own effect 104 (trigger spell) points at a
+	// server-side script spell (164839/164879/164880) with no entry
+	// anywhere in spellconst, but the actual damage lives in a
+	// separate, real "Explosive Trap Effect" spell per rank
+	// (13812/14314/14315, spell_level matching): effect index 0 is a
+	// instant hit (effect 2, sp/ap coefficient both 0) of
+	// 115/163/229 with a roll about a quarter of that wide that grows per
+	// level (ExplosiveTrapDamage, client_damage.go), and effect index 1 is the 10-tick, 2s-period
+	// AoE dot of 15/24/33 per tick - both corroborated on Wowhead's
+	// Forever pages (spell=13812/14315: "School Damage ... Value: 116"
+	// / "230", "16 every 2 seconds" / "34 every 2 seconds"). The
+	// "Value: 116" those pages show is the centre plus one, not a flat
+	// hit; the roll is the client's own width and growth.
+	spellId := [4]int32{0, 13813, 14316, 14317}[rank]
+	tickDamage := ExplosiveTrapTickDamage[rank]
+	instantDamage := ExplosiveTrapDamage[rank]
+	casterLevel := int(hunter.Level)
 	manaCost := [4]float64{0, 275, 395, 520}[rank]
 	level := [4]int{0, 34, 44, 54}[rank]
-
-	numHits := hunter.Env.GetNumTargets()
 
 	return core.SpellConfig{
 		SpellCode:     SpellCode_HunterExplosiveTrap,
@@ -34,8 +62,12 @@ func (hunter *Hunter) getExplosiveTrapConfig(rank int, timer *core.Timer) core.S
 		},
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
-				Timer:    timer,
-				Duration: time.Second * 15,
+				Timer: timer,
+				// spellconst's category_cooldown_ms is 30000 for every
+				// rank (confirmed on Wowhead's Forever pages: "Cooldown:
+				// 30 seconds"), not the old 15s - this is the shared
+				// "Traps" category cooldown, not a per-rank value.
+				Duration: time.Second * 30,
 			},
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,
@@ -45,6 +77,7 @@ func (hunter *Hunter) getExplosiveTrapConfig(rank int, timer *core.Timer) core.S
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: instantDamage.Range(casterLevel),
 
 		Dot: core.DotConfig{
 			IsAOE: true,
@@ -56,7 +89,7 @@ func (hunter *Hunter) getExplosiveTrapConfig(rank int, timer *core.Timer) core.S
 			TickLength:    time.Second * 2,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				dot.Snapshot(target, dotDamage, isRollover)
+				dot.Snapshot(target, tickDamage.Roll(sim, casterLevel), isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				for _, aoeTarget := range sim.Encounter.TargetUnits {
@@ -75,16 +108,20 @@ func (hunter *Hunter) getExplosiveTrapConfig(rank int, timer *core.Timer) core.S
 
 			spell.WaitTravelTime(sim, func(s *core.Simulation) {
 				curTarget := target
+				// Read at detonation, beside the AoE cap multiplier
+				// below: a target timeline changes the count mid-fight,
+				// and the old registration-time read both missed later
+				// adds and wrapped surplus hits onto the survivors.
+				numHits := len(sim.Encounter.TargetUnits)
 				// Traps gain no benefit from hit bonuses except for the Trap Mastery talent, since this is a unique interaction this is my workaround
-				spellHit := spell.Unit.GetStat(stats.SpellHit) + target.PseudoStats.BonusSpellHitRatingTaken
-				spell.Unit.AddStatDynamic(sim, stats.SpellHit, spellHit*-1)
-				for hitIndex := int32(0); hitIndex < numHits; hitIndex++ {
-					baseDamage := sim.Roll(minDamage, maxDamage)
-					baseDamage *= sim.Encounter.AOECapMultiplier()
+				spellHit := spell.Unit.GetStat(stats.Hit) + target.PseudoStats.BonusSpellHitRatingTaken
+				spell.Unit.AddStatDynamic(sim, stats.Hit, spellHit*-1)
+				for hitIndex := 0; hitIndex < numHits; hitIndex++ {
+					baseDamage := instantDamage.Roll(sim, casterLevel) * sim.Encounter.AOECapMultiplier()
 					spell.CalcAndDealDamage(sim, curTarget, baseDamage, spell.OutcomeMagicHitAndCrit)
 					curTarget = sim.Environment.NextTargetUnit(curTarget)
 				}
-				spell.Unit.AddStatDynamic(sim, stats.SpellHit, spellHit)
+				spell.Unit.AddStatDynamic(sim, stats.Hit, spellHit)
 				spell.AOEDot().ApplyOrReset(sim)
 			})
 		},

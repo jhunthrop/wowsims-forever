@@ -21,7 +21,6 @@ const (
 	HornOfLordaeron
 	BloodPact
 	CommandingShout
-	DevotionAura
 	DivineSpirit
 	GraceOfAir
 	ManaSpring
@@ -53,23 +52,11 @@ const (
 
 // Stats from buffs pre-tristate buffs
 var BuffSpellValues = map[BuffName]stats.Stats{
-	ArcaneIntellect: {
-		stats.Intellect: 31,
-	},
 	DivineSpirit: {
 		stats.Spirit: 40,
 	},
 	AspectOfTheWild: {
 		stats.NatureResistance: 60,
-	},
-	BattleShout: {
-		stats.AttackPower: TernaryFloat64(IncludeAQ, 232, 193),
-	},
-	BlessingOfMight: {
-		stats.AttackPower: TernaryFloat64(IncludeAQ, 185, 155),
-	},
-	BlessingOfWisdom: {
-		stats.MP5: TernaryFloat64(IncludeAQ, 33, 30),
 	},
 	HornOfLordaeron: {
 		stats.Strength: TernaryFloat64(IncludeAQ, 89, 70.15),
@@ -80,9 +67,6 @@ var BuffSpellValues = map[BuffName]stats.Stats{
 	},
 	CommandingShout: {
 		stats.Stamina: 42,
-	},
-	DevotionAura: {
-		stats.BonusArmor: 735,
 	},
 	GraceOfAir: {
 		stats.Agility: TernaryFloat64(IncludeAQ, 77, 67),
@@ -101,19 +85,6 @@ var BuffSpellValues = map[BuffName]stats.Stats{
 	},
 	ManaSpring: {
 		stats.MP5: 25,
-	},
-	MarkOfTheWild: {
-		stats.BonusArmor:       285,
-		stats.Stamina:          12,
-		stats.Agility:          12,
-		stats.Strength:         12,
-		stats.Intellect:        12,
-		stats.Spirit:           12,
-		stats.ArcaneResistance: 20,
-		stats.ShadowResistance: 20,
-		stats.NatureResistance: 20,
-		stats.FireResistance:   20,
-		stats.FrostResistance:  20,
 	},
 	NatureResistanceTotem: {
 		stats.NatureResistance: 60,
@@ -219,18 +190,22 @@ func makeExclusiveBuff(aura *Aura, config BuffConfig) {
 // Applies buffs that affect individual players.
 func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto.RaidBuffs, partyBuffs *proto.PartyBuffs, individualBuffs *proto.IndividualBuffs) {
 	character := agent.GetCharacter()
+	// Forever fields paladins and shamans on both factions (undead and
+	// dwarf among the new combinations), so blessings, paladin auras and
+	// shaman totems reach either faction. Only the world buffs below keep
+	// a faction.
 	isAlliance := playerFaction == proto.Faction_Alliance
 	isHorde := playerFaction == proto.Faction_Horde
 	bonusResist := float64(0)
 
 	if raidBuffs.ArcaneBrilliance {
-		character.AddStats(BuffSpellValues[ArcaneIntellect])
+		character.AddStats(ArcaneIntellectStats(int(character.Level)))
 	} else if raidBuffs.ScrollOfIntellect {
 		character.AddStats(BuffSpellValues[ScrollOfIntellect])
 	}
 
 	if raidBuffs.GiftOfTheWild > 0 {
-		updateStats := BuffSpellValues[MarkOfTheWild]
+		updateStats := MarkOfTheWildStats(int(character.Level))
 		if raidBuffs.GiftOfTheWild == proto.TristateEffect_TristateEffectImproved {
 			updateStats = updateStats.Multiply(1.35).Floor()
 		}
@@ -273,17 +248,21 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 	}
 
 	if raidBuffs.MoonkinAura {
-		character.AddStat(stats.SpellCrit, 3*SpellCritRatingPerCritChance)
+		character.AddStat(stats.Crit, 3*CritRatingPerCritChance)
 	}
 
 	if raidBuffs.LeaderOfThePack {
 		character.AddStats(stats.Stats{
-			stats.MeleeCrit: 3 * CritRatingPerCritChance,
+			stats.Crit: 3 * CritRatingPerCritChance,
 		})
 	}
 
 	if raidBuffs.TrueshotAura {
 		TrueshotAura(&character.Unit)
+	}
+
+	if raidBuffs.HeartOfTheLion {
+		HeartOfTheLionAreaAura(&character.Unit)
 	}
 
 	if raidBuffs.PowerWordFortitude > 0 {
@@ -320,11 +299,11 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 		character.AddStats(BuffSpellValues[ScrollOfSpirit])
 	}
 
-	if individualBuffs.BlessingOfKings && isAlliance {
+	if individualBuffs.BlessingOfKings {
 		MakePermanent(BlessingOfKingsAura(character))
 	}
 
-	if raidBuffs.SanctityAura && isAlliance {
+	if raidBuffs.SanctityAura {
 		MakePermanent(SanctityAuraAura(character))
 	}
 
@@ -335,15 +314,15 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 		}
 	*/
 
-	if raidBuffs.DevotionAura != proto.TristateEffect_TristateEffectMissing && isAlliance {
+	if raidBuffs.DevotionAura != proto.TristateEffect_TristateEffectMissing {
 		MakePermanent(DevotionAuraAura(&character.Unit, GetTristateValueInt32(raidBuffs.DevotionAura, 0, 2)))
 	}
 
-	if raidBuffs.StoneskinTotem != proto.TristateEffect_TristateEffectMissing && isHorde {
+	if raidBuffs.StoneskinTotem != proto.TristateEffect_TristateEffectMissing {
 		MakePermanent(StoneskinTotemAura(&character.Unit, GetTristateValueInt32(raidBuffs.StoneskinTotem, 0, 2)))
 	}
 
-	if raidBuffs.RetributionAura != proto.TristateEffect_TristateEffectMissing && isAlliance {
+	if raidBuffs.RetributionAura != proto.TristateEffect_TristateEffectMissing {
 		RetributionAura(character, GetTristateValueInt32(raidBuffs.RetributionAura, 0, 2))
 	}
 
@@ -351,27 +330,35 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 		MakePermanent(BattleShoutAura(&character.Unit, GetTristateValueInt32(raidBuffs.BattleShout, 0, 5), 0, false)) // Do we implement 3pc wrath for the other sims?
 	}
 
-	if individualBuffs.BlessingOfMight != proto.TristateEffect_TristateEffectMissing && isAlliance {
+	if individualBuffs.BlessingOfMight != proto.TristateEffect_TristateEffectMissing {
 		MakePermanent(BlessingOfMightAura(&character.Unit, GetTristateValueInt32(individualBuffs.BlessingOfMight, 0, 5)))
 	}
 
-	if raidBuffs.StrengthOfEarthTotem != proto.TristateEffect_TristateEffectMissing && isHorde {
+	if raidBuffs.StrengthOfEarthTotem != proto.TristateEffect_TristateEffectMissing {
 		multiplier := GetTristateValueFloat(raidBuffs.StrengthOfEarthTotem, 1, 1.15)
 		MakePermanent(StrengthOfEarthTotemAura(&character.Unit, multiplier))
 	}
 
-	if raidBuffs.GraceOfAirTotem > 0 && isHorde {
+	if raidBuffs.GraceOfAirTotem > 0 {
 		multiplier := GetTristateValueFloat(raidBuffs.GraceOfAirTotem, 1, 1.15)
 		MakePermanent(GraceOfAirTotemAura(&character.Unit, multiplier))
 	}
 
-	if individualBuffs.BlessingOfWisdom > 0 && isAlliance {
-		updateStats := BuffSpellValues[BlessingOfWisdom]
+	if raidBuffs.WindfuryTotem && windfuryTotemReaches(character) {
+		ApplyWindfury(character)
+	}
+
+	if raidBuffs.FlametongueTotem && flametongueTotemReaches(character) {
+		MakePermanent(FlametongueTotemAura(character))
+	}
+
+	if individualBuffs.BlessingOfWisdom > 0 {
+		updateStats := stats.Stats{stats.MP5: BlessingOfWisdomMP5(int(character.Level))}
 		if individualBuffs.BlessingOfWisdom == proto.TristateEffect_TristateEffectImproved {
 			updateStats = updateStats.Multiply(1.2)
 		}
 		character.AddStats(updateStats)
-	} else if raidBuffs.ManaSpringTotem > 0 && isHorde {
+	} else if raidBuffs.ManaSpringTotem > 0 {
 		updateStats := BuffSpellValues[ManaSpring]
 		if raidBuffs.ManaSpringTotem == proto.TristateEffect_TristateEffectImproved {
 			updateStats = updateStats.Multiply(1.25)
@@ -557,12 +544,17 @@ func ApplyInspiration(character *Character, uptime float64) {
 }
 
 func DevotionAuraAura(unit *Unit, points int32) *Aura {
-	updateStats := BuffSpellValues[DevotionAura]
+	// Below the first rank's level the aura cannot exist; level 1 learns it.
+	rank, ok := DevotionAuraRanks.Learned(int(unit.Level))
+	if !ok {
+		rank = DevotionAuraRanks[0]
+	}
+	updateStats := stats.Stats{stats.BonusArmor: DevotionAuraArmor(int(unit.Level))}
 	updateStats = updateStats.Multiply(1 + .125*float64(points))
 
 	return unit.RegisterAura(Aura{
 		Label:    "Devotion Aura",
-		ActionID: ActionID{SpellID: 10293},
+		ActionID: ActionID{SpellID: rank.SpellID},
 		Duration: NeverExpires,
 		OnGain: func(aura *Aura, sim *Simulation) {
 			aura.Unit.AddStatsDynamic(sim, updateStats)
@@ -1399,13 +1391,15 @@ func GraceOfAirTotemAura(unit *Unit, multiplier float64) *Aura {
 const BattleShoutRanks = 7
 
 var BattleShoutSpellId = [BattleShoutRanks + 1]int32{0, 6673, 5242, 6192, 11549, 11550, 11551, 25289}
-var BattleShoutBaseAP = [BattleShoutRanks + 1]float64{0, 20, 40, 57, 93, 138, 193, 232}
 var BattleShoutLevel = [BattleShoutRanks + 1]int{0, 1, 12, 22, 32, 42, 52, 60}
 
 func BattleShoutAura(unit *Unit, impBattleShout int32, boomingVoicePts int32, has3pcWrath bool) *Aura {
-	rank := TernaryInt32(IncludeAQ, 7, 6)
-	spellId := BattleShoutSpellId[rank]
-	baseAP := BattleShoutBaseAP[rank]
+	rank, ok := BattleShoutRankTable.Learned(int(unit.Level))
+	if !ok {
+		panic(fmt.Sprintf("Battle Shout is not learned at level %d", unit.Level))
+	}
+	spellId := rank.SpellID
+	baseAP := rank.At(int(unit.Level))
 
 	return unit.GetOrRegisterAura(Aura{
 		Label:      "Battle Shout",
@@ -1425,13 +1419,21 @@ func BattleShoutAura(unit *Unit, impBattleShout int32, boomingVoicePts int32, ha
 	})
 }
 
+// TrueshotAura grants the client's amount for the strongest rank the unit's
+// level can learn (TrueshotAuraRanks), to melee and ranged attack power
+// alike as the client's single effect does.
 func TrueshotAura(unit *Unit) *Aura {
-	rangedAP := 100.0
-	meleeAP := 100.0
+	rank, ok := TrueshotAuraRanks.Learned(int(unit.Level))
+	if !ok {
+		rank = TrueshotAuraRanks[0]
+	}
+	amount := TernaryFloat64(ok, rank.At(int(unit.Level)), 0)
+	rangedAP := amount
+	meleeAP := amount
 
 	aura := MakePermanent(unit.RegisterAura(Aura{
 		Label:    "Trueshot Aura",
-		ActionID: ActionID{SpellID: 20906},
+		ActionID: ActionID{SpellID: rank.SpellID},
 	}))
 
 	makeExclusiveBuff(aura, BuffConfig{
@@ -1445,10 +1447,97 @@ func TrueshotAura(unit *Unit) *Aura {
 	return aura
 }
 
-func BlessingOfMightAura(unit *Unit, impBomPts int32) *Aura {
-	spellID := TernaryInt32(IncludeAQ, 25291, 19838)
+const (
+	// HeartOfTheLionStatMultiplier is aura 137 at +10 on every stat, the
+	// effect both of the hunter's own spell (409580) and of the area buff
+	// it sends out (409583).
+	HeartOfTheLionStatMultiplier = 1.10
 
-	bonusAP := math.Floor(BuffSpellValues[BlessingOfMight][stats.AttackPower] * (1 + 0.04*float64(impBomPts)))
+	// HeartOfTheLionSpellID is the hunter's own spell: the extra +10% for
+	// the hunter, and the periodic dummy that re-sends the area buff.
+	HeartOfTheLionSpellID = 409580
+
+	heartOfTheLionSelfLabel    = "Heart of the Lion"
+	heartOfTheLionSelfCategory = "HeartOfTheLionSelf"
+	heartOfTheLionAreaLabel    = "Heart of the Lion (allies)"
+	heartOfTheLionAreaCategory = "HeartOfTheLion"
+)
+
+// HeartOfTheLionStatConfigs is a percentage stat modifier on all five base
+// stats (the aura's misc value -1).
+func HeartOfTheLionStatConfigs() []StatConfig {
+	return []StatConfig{
+		{stats.Stamina, HeartOfTheLionStatMultiplier, true},
+		{stats.Agility, HeartOfTheLionStatMultiplier, true},
+		{stats.Strength, HeartOfTheLionStatMultiplier, true},
+		{stats.Intellect, HeartOfTheLionStatMultiplier, true},
+		{stats.Spirit, HeartOfTheLionStatMultiplier, true},
+	}
+}
+
+// HeartOfTheLionSelfAura is the hunter's own Heart of the Lion (spell
+// 409580): a further +10% to every stat for the hunter alone, on top of the
+// area buff the hunter also receives. The two multiply, as every pair of
+// percentage stat auras here does (Blessing of Kings too), so a hunter who
+// both casts the spell and stands in its area reads 1.10 x 1.10 = 1.21
+// of the base stats, and a second hunter's area buff changes nothing
+// (HeartOfTheLionAreaAura keeps one copy per unit).
+func HeartOfTheLionSelfAura(unit *Unit) *Aura {
+	if existing := unit.GetAura(heartOfTheLionSelfLabel); existing != nil {
+		return existing
+	}
+	aura := MakePermanent(unit.RegisterAura(Aura{
+		Label:    heartOfTheLionSelfLabel,
+		ActionID: ActionID{SpellID: HeartOfTheLionSpellID},
+	}))
+
+	makeExclusiveBuff(aura, BuffConfig{
+		Category: heartOfTheLionSelfCategory,
+		Stats:    HeartOfTheLionStatConfigs(),
+	})
+
+	return aura
+}
+
+// HeartOfTheLionAreaAura is the area buff a hunter's Heart of the Lion
+// sends to every ally within 100 yards (spell 409583, target 31 reaches the
+// whole raid, not the party): +10% to every stat and the level-scaled
+// melee and ranged attack power (HeartOfTheLionRanks). The unit carries one
+// copy however many hunters send it: a second request finds the first, and
+// the exclusive category keeps two sources from adding.
+func HeartOfTheLionAreaAura(unit *Unit) *Aura {
+	if existing := unit.GetAura(heartOfTheLionAreaLabel); existing != nil {
+		return existing
+	}
+	rank := HeartOfTheLionRanks[0]
+	attackPower := rank.At(int(unit.Level))
+
+	aura := MakePermanent(unit.RegisterAura(Aura{
+		Label:    heartOfTheLionAreaLabel,
+		ActionID: ActionID{SpellID: rank.SpellID},
+	}))
+
+	makeExclusiveBuff(aura, BuffConfig{
+		Category: heartOfTheLionAreaCategory,
+		Stats: append(HeartOfTheLionStatConfigs(),
+			StatConfig{stats.AttackPower, attackPower, false},
+			StatConfig{stats.RangedAttackPower, attackPower, false},
+		),
+	})
+
+	return aura
+}
+
+func BlessingOfMightAura(unit *Unit, impBomPts int32) *Aura {
+	// Below the first rank (level 4) the aura registers under rank 1's id
+	// and grants nothing.
+	rank, ok := BlessingOfMightRanks.Learned(int(unit.Level))
+	if !ok {
+		rank = BlessingOfMightRanks[0]
+	}
+	spellID := rank.SpellID
+
+	bonusAP := math.Floor(BlessingOfMightAttackPower(int(unit.Level)) * (1 + 0.04*float64(impBomPts)))
 
 	aura := MakePermanent(unit.GetOrRegisterAura(Aura{
 		Label:      "Blessing of Might",
@@ -1525,13 +1614,13 @@ func BattleSquawkAura(character *Unit, stackcount int32) *Aura {
 // 	})
 // }
 
-func CreateExtraAttackAuraCommon(character *Character, buffActionID ActionID, auraLabel string, rank int32, getBonusAP func(aura *Aura, rank int32) float64) *Aura {
+func CreateExtraAttackAuraCommon(character *Character, buffActionID ActionID, auraLabel string, rank int32, buffDuration time.Duration, getBonusAP func(aura *Aura, rank int32) float64) *Aura {
 	var bonusAP float64
 
 	apBuffAura := character.GetOrRegisterAura(Aura{
 		Label:     auraLabel + " Buff",
 		ActionID:  buffActionID,
-		Duration:  time.Millisecond * 1500,
+		Duration:  buffDuration,
 		MaxStacks: 2,
 		OnGain: func(aura *Aura, sim *Simulation) {
 			bonusAP = getBonusAP(aura, rank)
@@ -1554,7 +1643,7 @@ func CreateExtraAttackAuraCommon(character *Character, buffActionID ActionID, au
 
 	icd := Cooldown{
 		Timer:    character.NewTimer(),
-		Duration: time.Millisecond * 1500,
+		Duration: extraAttackProcICD,
 	}
 
 	apBuffAura.Icd = &icd
@@ -1597,9 +1686,46 @@ func GetWildStrikesAP(aura *Aura, rank int32) float64 {
 
 const WindfuryRanks = 3
 
+// WindfuryAuraLabel names the permanent proc aura a Windfury Totem (or the
+// weapon's own Windfury) puts on the character.
+const WindfuryAuraLabel = "Windfury"
+
+// extraAttackProcICD is the internal cooldown between extra-attack procs:
+// the 100 ms ProcCategoryRecovery on the totem's proc aura (spells 8515 and
+// 10612, SpellAuraOptions) in the 1.60.1.70009 client. Vanilla Classic's
+// effective 1.5 s came from the buff's own length; here the buff lasts 1 s
+// and the client states 100 ms.
+const extraAttackProcICD = 100 * time.Millisecond
+
+// windfuryTotemReaches says whether the Windfury Totem aura applies to the
+// character. A shaman whose main hand carries Windfury Weapon does not
+// receive it (the weapon's text: "When applied to main hand, disables any
+// benefit you personally receive from Windfury Totem"), and a druid in
+// feral form has no main-hand weapon to proc it.
+func windfuryTotemReaches(character *Character) bool {
+	return weaponTotemReaches(character, proto.WeaponImbue_WindfuryWeapon)
+}
+
+// weaponTotemReaches says whether a weapon-hit totem aura applies to the
+// character: not when the totem's own weapon imbue sits on the main hand
+// (the imbue's text: "disables any benefit you personally receive from"
+// the totem), and not to a druid in feral form, who has no main-hand weapon.
+func weaponTotemReaches(character *Character, disablingImbue proto.WeaponImbue) bool {
+	if character.PseudoStats.FeralCombatEnabled {
+		return false
+	}
+	return character.Consumes == nil || character.Consumes.MainHandImbue != disablingImbue
+}
+
+// WindfuryBuffDuration is the Windfury Totem attack power buff's length:
+// 1 second on every rank in the 1.60.1.70009 client (spells 8516, 10608,
+// 10610), not vanilla's 1.5.
+const WindfuryBuffDuration = time.Second
+
 var (
 	WindfuryBuffSpellId = [WindfuryRanks + 1]int32{0, 8516, 10608, 10610}
-	WindfuryBuffBonusAP = [WindfuryRanks + 1]float64{0, 122, 229, 315}
+	// Attack power by rank, source: 1.60.1.70009 client spells 8516, 10608, 10610.
+	WindfuryBuffBonusAP = [WindfuryRanks + 1]float64{0, 95, 179, 246}
 )
 
 func GetWindfuryAP(aura *Aura, rank int32) float64 {
@@ -1611,7 +1737,11 @@ func ApplyWindfury(character *Character) *Aura {
 	spellId := WindfuryBuffSpellId[rank]
 	buffActionID := ActionID{SpellID: spellId}
 
-	return CreateExtraAttackAuraCommon(character, buffActionID, "Windfury", rank, GetWindfuryAP)
+	buffAura := CreateExtraAttackAuraCommon(character, buffActionID, WindfuryAuraLabel, rank, WindfuryBuffDuration, GetWindfuryAP)
+	// The totem's proc aura holds the melee totem category, so the
+	// Flametongue Totem's does not stack with it.
+	character.GetAura(WindfuryAuraLabel).NewExclusiveEffect(meleeTotemCategory, false, ExclusiveEffect{Priority: meleeTotemWindfury})
+	return buffAura
 
 }
 
@@ -1636,8 +1766,9 @@ func ApplyRallyingCryOfTheDragonslayer(unit *Unit, category string) {
 	makeExclusiveBuff(aura, BuffConfig{
 		Category: category,
 		Stats: []StatConfig{
-			{stats.SpellCrit, 10 * SpellCritRatingPerCritChance, false},
-			{stats.MeleeCrit, 5 * CritRatingPerCritChance, false},
+			// Forever: merged from SpellCrit 10 + MeleeCrit 5. One effect
+			// under a unified stat gets one write, at the larger value.
+			{stats.Crit, 10 * CritRatingPerCritChance, false},
 			// TODO: {stats.RangedCrit, 5*CritRatingPerCritChance, false},
 			{stats.AttackPower, 140, false},
 			{stats.RangedAttackPower, 140, false},
@@ -1682,9 +1813,10 @@ func ApplySongflowerSerenade(unit *Unit) {
 			{stats.Spirit, 15, false},
 			{stats.Stamina, 15, false},
 			{stats.Strength, 15, false},
-			{stats.MeleeCrit, 5, false},
+			// Forever: merged from MeleeCrit 5 + SpellCrit 5. One effect
+			// under a unified stat gets one write, at the larger value.
+			{stats.Crit, 5, false},
 			// TODO: {stats.RangedCrit, 5, false},
-			{stats.SpellCrit, 5, false},
 		},
 	})
 }
@@ -1758,7 +1890,7 @@ func ApplySlipkiksSavvy(unit *Unit) {
 	makeExclusiveBuff(aura, BuffConfig{
 		Category: "SlipkiksSavvy",
 		Stats: []StatConfig{
-			{stats.SpellCrit, 3 * SpellCritRatingPerCritChance, false},
+			{stats.Crit, 3 * CritRatingPerCritChance, false},
 		},
 	})
 }
@@ -1866,7 +1998,7 @@ func AtieshSpellCritEffect(unit *Unit, idx int32) *Aura {
 		return unit.GetAura(label)
 	}
 
-	stats := stats.Stats{stats.SpellCrit: 2 * SpellCritRatingPerCritChance}
+	stats := stats.Stats{stats.Crit: 2 * CritRatingPerCritChance}
 
 	return MakePermanent(unit.RegisterAura(Aura{
 		ActionID:   ActionID{SpellID: 28142}.WithTag(idx),
@@ -1883,7 +2015,7 @@ func AtieshSpellPowerEffect(unit *Unit, idx int32) *Aura {
 		return unit.GetAura(label)
 	}
 
-	stats := stats.Stats{stats.SpellPower: 33}
+	stats := stats.Stats{stats.SpellPower: 33, stats.HealingPower: 33}
 
 	return MakePermanent(unit.RegisterAura(Aura{
 		ActionID:   ActionID{SpellID: 28143}.WithTag(idx),

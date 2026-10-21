@@ -65,6 +65,17 @@ type Item struct {
 	SetID               int32  // 0 if not part of a set.
 	WeaponSkills        stats.WeaponSkills
 
+	// The fields sim/bulk's Expand reads to decide whether a candidate
+	// item may occupy a slot. RequiredLevel is deliberately unsourced
+	// here - this fork's item database has no column for it, so
+	// database_load.go leaves it zero - but ItemFromProto is how a
+	// downstream consumer turns a SimItem its own data lane filled back
+	// into an Item, and a field with no home here is dropped in silence.
+	Unique              bool
+	RequiredLevel       int32
+	FactionRestriction  proto.SimItem_FactionRestriction
+	RandomSuffixOptions []int32
+
 	// Modified for each instance of the item.
 	RandomSuffix RandomSuffix
 	Enchant      Enchant
@@ -91,6 +102,10 @@ func ItemFromProto(pData *proto.SimItem) Item {
 		SetName:             pData.SetName,
 		SetID:               pData.SetId,
 		WeaponSkills:        stats.WeaponSkillsFloatArray(pData.WeaponSkills),
+		Unique:              pData.Unique,
+		RequiredLevel:       pData.RequiredLevel,
+		FactionRestriction:  pData.FactionRestriction,
+		RandomSuffixOptions: pData.RandomSuffixOptions,
 	}
 }
 

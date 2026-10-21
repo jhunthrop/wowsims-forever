@@ -21,6 +21,7 @@ import {
 import { BalanceDruid_Options as BalanceDruidOptions } from '../core/proto/druid.js';
 import { SavedTalents } from '../core/proto/ui.js';
 import Balance from './apls/balance.apl.json';
+import ForeverBalanceAPL from './apls/forever_balance.apl.json';
 import P0BISGear from './gear_sets/p0.bis.gear.json';
 import P1BISGear from './gear_sets/p1.bis.gear.json';
 import P2BISGear from './gear_sets/p2.bis.gear.json';
@@ -54,12 +55,18 @@ export const DefaultGear = GearP5BIS;
 ///////////////////////////////////////////////////////////////////////////
 
 // export const APLP1Balance = PresetUtils.makePresetAPLRotation('Balance', P1APL);
+// The Forever rotations below are the launch defaults. Each is a copy of
+// data/curated/apl/<class>-<spec>.json's `rotation` in the Forever Sixty site
+// repository, written here by that repository's `make apl-sync` and proved by
+// its `make apl-check`; edit the curated file, never this copy. The Era lists
+// are kept because a Forever character can still be compared against them.
 export const DefaultBalance = PresetUtils.makePresetAPLRotation('Default Balance', Balance);
+export const AplForeverBalance = PresetUtils.makePresetAPLRotation('Forever Balance', ForeverBalanceAPL);
 export const APLPresets = {
-	[Phase.Phase1]: [DefaultBalance],
+	[Phase.Phase1]: [DefaultBalance, AplForeverBalance],
 };
 
-export const DefaultAPL = APLPresets[Phase.Phase1][0];
+export const DefaultAPL = AplForeverBalance;
 
 ///////////////////////////////////////////////////////////////////////////
 //                                 Talent Presets

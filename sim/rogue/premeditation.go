@@ -11,11 +11,25 @@ func (rogue *Rogue) registerPremeditation() {
 		return
 	}
 
-	comboMetrics := rogue.NewComboPointMetrics(core.ActionID{SpellID: 14183})
+	actionID := core.ActionID{SpellID: 14183}
+	comboMetrics := rogue.NewComboPointMetrics(actionID)
+
+	// Premeditation's own combo points are not tracked as expiring (the
+	// real ability forfeits any of these 2 combo points still unspent
+	// after 20s; this engine does not model that forfeiture), but the
+	// window itself is tracked as a plain aura so the conformance report
+	// can see its real 20s duration_ms - see
+	// priest/vampiric_embrace.go's RelatedSelfBuff comment.
+	premeditationAura := rogue.RegisterAura(core.Aura{
+		Label:    "Premeditation",
+		ActionID: actionID,
+		Duration: time.Second * 20,
+	})
 
 	rogue.Premeditation = rogue.RegisterSpell(core.SpellConfig{
-		ActionID: core.ActionID{SpellID: 14183},
-		Flags:    core.SpellFlagAPL,
+		ActionID:      actionID,
+		Flags:         core.SpellFlagAPL,
+		RequiredLevel: 20,
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -32,7 +46,10 @@ func (rogue *Rogue) registerPremeditation() {
 			return rogue.IsStealthed()
 		},
 
+		RelatedSelfBuff: premeditationAura,
+
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			premeditationAura.Activate(sim)
 			rogue.AddComboPoints(sim, 2, target, comboMetrics)
 		},
 	})

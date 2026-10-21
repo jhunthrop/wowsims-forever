@@ -126,7 +126,7 @@ func (wrs WowheadRandomSuffix) ToProto() *proto.ItemRandomSuffix {
 		proto.Stat_StatHolyPower:         float64(wrs.Stats.HolyPower),
 		proto.Stat_StatNaturePower:       float64(wrs.Stats.NaturePower),
 		proto.Stat_StatShadowPower:       float64(wrs.Stats.ShadowPower),
-		proto.Stat_StatMeleeCrit:         float64(wrs.Stats.MeleeCrit),
+		proto.Stat_StatCrit:              float64(wrs.Stats.MeleeCrit),
 		proto.Stat_StatMP5:               float64(wrs.Stats.MP5),
 		proto.Stat_StatAttackPower:       float64(wrs.Stats.AttackPower),
 		proto.Stat_StatRangedAttackPower: float64(wrs.Stats.RangedAttackPower),

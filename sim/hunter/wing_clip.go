@@ -4,9 +4,23 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// wingClipLearnLevels are Wing Clip's three rank learn levels; source:
+// 1.60.1.70009 client spell data ("Wing Clip", ranks 1-3; the level-12
+// rank-0 id is an internal copy, not a player rank).
+var wingClipLearnLevels = []int{12, 38, 60}
+
+// Wing Clip's client entry names a 10000ms duration (its movement-speed
+// snare), but this sim does not track a static-distance target moving,
+// so a snare on it has no mechanical effect here -- the same
+// simplification Strider Kick's speed buff already makes
+// (strider_kick.go). No Aura models it, so compare.go's engineDuration
+// correctly reports it as a "missing aura duration" rather than a real
+// defect to fix here.
+
 func (hunter *Hunter) getWingClipConfig(rank int) core.SpellConfig {
 	spellId := [4]int32{0, 2974, 14267, 14268}[rank]
-	baseDamage := [4]float64{0, 5, 25, 50}[rank]
+	damage := WingClipDamage[rank]
+	casterLevel := int(hunter.Level)
 	manaCost := [4]float64{0, 40, 60, 80}[rank]
 	level := [4]int{0, 12, 38, 60}[rank]
 
@@ -34,23 +48,23 @@ func (hunter *Hunter) getWingClipConfig(rank int) core.SpellConfig {
 			return hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance
 		},
 
-		CritDamageBonus:  hunter.mortalShots(),
+		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
+		BonusCoefficient: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+			spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 		},
 	}
 }
 
 func (hunter *Hunter) registerWingClipSpell() {
-	rank := map[int32]int{
-		25: 1,
-		40: 2,
-		50: 3,
-		60: 3,
-	}[hunter.Level]
+	rank := core.HighestRankAtLevel(wingClipLearnLevels, hunter.Level)
+	if rank == 0 {
+		return
+	}
 
 	config := hunter.getWingClipConfig(rank)
 	hunter.WingClip = hunter.GetOrRegisterSpell(config)

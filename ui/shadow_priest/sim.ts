@@ -26,8 +26,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecShadowPriest, {
 		Stat.StatSpellDamage,
 		Stat.StatShadowPower,
 		Stat.StatHolyPower,
-		Stat.StatSpellHit,
-		Stat.StatSpellCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatSpellHaste,
 		Stat.StatMP5,
 	],
@@ -44,15 +44,15 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecShadowPriest, {
 		Stat.StatSpellDamage,
 		Stat.StatShadowPower,
 		Stat.StatHolyPower,
-		Stat.StatSpellHit,
-		Stat.StatSpellCrit,
+		Stat.StatHit,
+		Stat.StatCrit,
 		Stat.StatMP5,
 	],
 	displayPseudoStats: [],
 
 	modifyDisplayStats: (player: Player<Spec.SpecShadowPriest>) => {
 		let stats = new Stats();
-		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitShadow, player.getTalents().shadowFocus * 2 * Mechanics.SPELL_HIT_RATING_PER_HIT_CHANCE);
+		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitShadow, player.getTalents().shadowFocus * 2 * Mechanics.SCHOOL_HIT_RATING_PER_HIT_CHANCE);
 
 		return {
 			talents: stats,
@@ -69,8 +69,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecShadowPriest, {
 			[Stat.StatSpellPower]: 1,
 			[Stat.StatSpellDamage]: 1,
 			[Stat.StatShadowPower]: 1,
-			[Stat.StatSpellHit]: 5.51,
-			[Stat.StatSpellCrit]: 5.99, // Averaged between using and not using Despair for dot crits
+			[Stat.StatHit]: 5.51,
+			[Stat.StatCrit]: 5.99, // Averaged between using and not using Despair for dot crits
 			[Stat.StatSpellHaste]: 1.65,
 			[Stat.StatMP5]: 0.0,
 			[Stat.StatFireResistance]: 0.5,

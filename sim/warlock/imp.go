@@ -24,8 +24,8 @@ func (warlock *Warlock) makeImp() *WarlockPet {
 			stats.Spirit:    95,
 			stats.Mana:      149,
 			stats.MP5:       0,
-			stats.MeleeCrit: 3.454 * core.CritRatingPerCritChance,
-			stats.SpellCrit: 0.9075 * core.CritRatingPerCritChance,
+			// Forever: merged from MeleeCrit 3.454 + SpellCrit 0.9075. unconfirmed
+			stats.Crit: 3.454 * core.CritRatingPerCritChance,
 		}
 	case 40:
 		cfg.Stats = stats.Stats{
@@ -36,8 +36,8 @@ func (warlock *Warlock) makeImp() *WarlockPet {
 			stats.Spirit:    163,
 			stats.Mana:      318,
 			stats.MP5:       0,
-			stats.MeleeCrit: 3.454 * core.CritRatingPerCritChance,
-			stats.SpellCrit: 0.9075 * core.CritRatingPerCritChance,
+			// Forever: merged from MeleeCrit 3.454 + SpellCrit 0.9075. unconfirmed
+			stats.Crit: 3.454 * core.CritRatingPerCritChance,
 		}
 	case 50:
 		cfg.Stats = stats.Stats{
@@ -48,8 +48,8 @@ func (warlock *Warlock) makeImp() *WarlockPet {
 			stats.Spirit:    211,
 			stats.Mana:      476,
 			stats.MP5:       0,
-			stats.MeleeCrit: 3.454 * core.CritRatingPerCritChance,
-			stats.SpellCrit: 0.9075 * core.CritRatingPerCritChance,
+			// Forever: merged from MeleeCrit 3.454 + SpellCrit 0.9075. unconfirmed
+			stats.Crit: 3.454 * core.CritRatingPerCritChance,
 		}
 	case 60:
 		cfg.Stats = stats.Stats{
@@ -60,8 +60,8 @@ func (warlock *Warlock) makeImp() *WarlockPet {
 			stats.Spirit:    260,
 			stats.Mana:      576,
 			stats.MP5:       0,
-			stats.MeleeCrit: 3.454 * core.CritRatingPerCritChance,
-			stats.SpellCrit: 0.9075 * core.CritRatingPerCritChance,
+			// Forever: merged from MeleeCrit 3.454 + SpellCrit 0.9075. unconfirmed
+			stats.Crit: 3.454 * core.CritRatingPerCritChance,
 		}
 	}
 
@@ -82,14 +82,20 @@ func (wp *WarlockPet) registerImpFireboltSpell() {
 	}
 
 	spellCoeff := [8]float64{0, .164, .314, .529, .571, .571, .571, .571}[rank]
-	baseDamage := [8][]float64{{0, 0}, {7, 10}, {14, 16}, {25, 29}, {36, 41}, {52, 59}, {72, 80}, {85, 96}}[rank]
+	// baseDamage was the classic tooltip roll (rank 7 {85, 96}) until
+	// the rotation-accuracy audit compared it against spellconst/
+	// warlock.json's own per-rank flat "amount" (rank 7, 11763, amount
+	// 44, sp_coefficient 0.571 unchanged) - the same halving
+	// shadowbolt.go's comment documents across the warlock's own kit;
+	// the imp is not a player spell in spellconst, but shares the
+	// pattern exactly (rank 1: client 4 vs the old roll's {7, 10}).
+	baseDamage := [8]float64{0, 4, 7, 12, 17, 25, 35, 44}[rank]
 	spellId := [8]int32{0, 3110, 7799, 7800, 7801, 7802, 11762, 11763}[rank]
 	manaCost := [8]float64{0, 10, 20, 35, 50, 70, 95, 115}[rank]
 	level := [8]int{0, 1, 8, 18, 28, 38, 48, 58}[rank]
 
 	improvedImp := []float64{1, 1.1, 1.2, 1.3}[wp.owner.Talents.ImprovedImp]
-	baseDamage[0] *= improvedImp
-	baseDamage[1] *= improvedImp
+	baseDamage *= improvedImp
 
 	wp.primaryAbility = wp.RegisterSpell(core.SpellConfig{
 		ActionID:      core.ActionID{SpellID: spellId},
@@ -104,8 +110,10 @@ func (wp *WarlockPet) registerImpFireboltSpell() {
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD:      time.Millisecond * 1000,
-				CastTime: time.Millisecond * (2000 - time.Duration(500*wp.owner.Talents.ImprovedFirebolt)),
+				GCD: time.Millisecond * 1000,
+				// FOREVER: Improved Firebolt is not in the client's trees.
+				// CastTime: time.Millisecond * (2000 - time.Duration(500*wp.owner.Talents.ImprovedFirebolt)),
+				CastTime: time.Millisecond * 2000,
 			},
 			// Adding an artificial CD to account for real delay in imp casts in-game
 			CD: core.Cooldown{
@@ -119,8 +127,6 @@ func (wp *WarlockPet) registerImpFireboltSpell() {
 		BonusCoefficient: spellCoeff,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := sim.Roll(baseDamage[0], baseDamage[1])
-
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 
 			spell.DealDamage(sim, result)

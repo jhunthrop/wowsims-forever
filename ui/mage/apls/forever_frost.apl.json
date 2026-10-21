@@ -1,0 +1,75 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Ice Lance on a Fingers of Frost charge: the charge makes the target count as Frozen, so Ice Lance deals triple damage and Shatter's crit bonus applies. Only fires with the Fingers of Frost talent; without it the buff never appears, the line asks whether the aura exists first, and the line stays idle.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1240047,
+            "rank": 6
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 400669
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 400669
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "notes": "Frostbolt is the filler between Fingers of Frost charges.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10181,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while you regenerate, and Wand Specialization adds to it.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "20%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 5019
+          }
+        }
+      }
+    }
+  ]
+}

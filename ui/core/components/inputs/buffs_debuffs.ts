@@ -149,7 +149,7 @@ export const BloodPactBuff = withLabel(
 
 export const BlessingOfMight = withLabel(
 	makeTristateIndividualBuffInput({
-		actionId: () => ActionId.fromSpellId(25291),
+		actionId: () => ActionId.fromSpellId(19838),
 		impId: ActionId.fromSpellId(20048),
 		fieldName: 'blessingOfMight',
 		showWhen: player => player.getFaction() === Faction.Alliance,
@@ -207,7 +207,7 @@ export const SpiritBuff = InputHelpers.makeMultiIconInput({
 
 export const BattleShoutBuff = withLabel(
 	makeTristateRaidBuffInput({
-		actionId: () => ActionId.fromSpellId(25289),
+		actionId: () => ActionId.fromSpellId(11551),
 		impId: ActionId.fromSpellId(12861),
 		fieldName: 'battleShout',
 	}),
@@ -647,7 +647,7 @@ export const RAID_BUFFS_CONFIG = [
 	{
 		config: MeleeCritBuff,
 		picker: IconPicker,
-		stats: [Stat.StatMeleeCrit],
+		stats: [Stat.StatCrit],
 	},
 	// Threat Buffs
 
@@ -655,7 +655,7 @@ export const RAID_BUFFS_CONFIG = [
 	{
 		config: SpellCritBuff,
 		picker: IconPicker,
-		stats: [Stat.StatSpellCrit],
+		stats: [Stat.StatCrit],
 	},
 	{
 		config: BlessingOfWisdom,
@@ -673,7 +673,7 @@ export const MISC_BUFFS_CONFIG = [
 	{
 		config: AtieshMageBuff,
 		picker: IconPicker,
-		stats: [Stat.StatSpellCrit],
+		stats: [Stat.StatCrit],
 	},
 	{
 		config: AtieshWarlockBuff,
@@ -718,7 +718,7 @@ export const MISC_BUFFS_CONFIG = [
 	{
 		config: BattleSquawkBuff,
 		picker: IconPicker,
-		stats: [Stat.StatMeleeHit],
+		stats: [Stat.StatHit],
 	},
 ] as PickerStatOptions[];
 
@@ -726,7 +726,7 @@ export const WORLD_BUFFS_CONFIG = [
 	{
 		config: RallyingCryOfTheDragonslayer,
 		picker: IconPicker,
-		stats: [Stat.StatMeleeCrit, Stat.StatSpellCrit, Stat.StatAttackPower],
+		stats: [Stat.StatCrit, Stat.StatCrit, Stat.StatAttackPower],
 	},
 	{
 		config: SongflowerSerenade,
@@ -756,7 +756,7 @@ export const WORLD_BUFFS_CONFIG = [
 	{
 		config: SlipKiksSavvy,
 		picker: IconPicker,
-		stats: [Stat.StatSpellCrit],
+		stats: [Stat.StatCrit],
 	},
 ] as PickerStatOptions[];
 

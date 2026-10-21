@@ -1,0 +1,224 @@
+{
+  "type": "TypeAPL",
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Pop Combustion once Improved Scorch's debuff is fully stacked on the current target, for a guaranteed run of Fire crits.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "auraNumStacks": {
+                "sourceUnit": {
+                  "type": "CurrentTarget"
+                },
+                "auraId": {
+                  "spellId": 12873
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "5"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11129
+          }
+        }
+      }
+    },
+    {
+      "notes": "Scorch to apply or refresh the five stacks of Improved Scorch's debuff before it falls off.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "sourceUnit": {
+                    "type": "CurrentTarget"
+                  },
+                  "auraId": {
+                    "spellId": 12873
+                  }
+                }
+              },
+              {
+                "or": {
+                  "vals": [
+                    {
+                      "not": {
+                        "val": {
+                          "auraIsActive": {
+                            "sourceUnit": {
+                              "type": "CurrentTarget"
+                            },
+                            "auraId": {
+                              "spellId": 12873
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "auraNumStacks": {
+                            "sourceUnit": {
+                              "type": "CurrentTarget"
+                            },
+                            "auraId": {
+                              "spellId": 12873
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "5"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLe",
+                        "lhs": {
+                          "auraRemainingTime": {
+                            "sourceUnit": {
+                              "type": "CurrentTarget"
+                            },
+                            "auraId": {
+                              "spellId": 12873
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "1.5s"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10207,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "Pyroblast only when Heating Up has stacked three times: three Fire crits cut the 6 second cast to 1.5 seconds, and the cast spends the buff. Never at the full 6 seconds or a partial discount, which measured as no gain or a loss. The aura-is-known guard keeps the line off for a build without the talent, where the stack check alone would read as always true and Pyroblast would be spammed.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 400625
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "auraNumStacks": {
+                      "auraId": {
+                        "spellId": 400625
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 18809,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
+      "notes": "Fire Blast on cooldown as a free extra nuke that does not compete for Scorch or Fireball casts.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10199,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "Scorch is the filler: at 150 mana for a 1.5 second cast it spends mana far more efficiently than Fireball (395 mana for 3 seconds), and a Fire mage is mana-bound well before a fight ends. Every filler Scorch also renews the Improved Scorch debuff, so the refresh line above rarely has anything to do.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10207,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "Fireball only before Scorch is trained (it comes at level 22), where Scorch cannot be cast and the list would otherwise have no filler.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10151,
+            "rank": 11
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while you regenerate, and Wand Specialization adds to it.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "20%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 5019
+          }
+        }
+      }
+    }
+  ]
+}

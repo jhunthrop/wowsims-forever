@@ -22,6 +22,9 @@ func (rogue *Rogue) registerVanishSpell() {
 		ActionID:    core.ActionID{SpellID: 1856},
 		SpellSchool: core.SpellSchoolPhysical,
 		Flags:       core.SpellFlagAPL,
+		// Always registers rank 1 (1856, spell_level 22); this engine does
+		// not scale Vanish by rank.
+		RequiredLevel: 22,
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

@@ -6,27 +6,38 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-func (rogue *Rogue) registerSliceAndDice() {
-	hasteBonusByRank := map[int32]float64{
-		25: 0.20,
-		40: 0.20,
-		50: 0.30,
-		60: 0.30,
-	}[rogue.Level]
+// sliceAndDiceLearnLevels are Slice and Dice's two rank learn levels;
+// source: 1.60.1.70009 client spell data ("Slice and Dice", ranks 1-2).
+var sliceAndDiceLearnLevels = []int{10, 42}
 
-	spellID := map[int32]int32{
-		25: 5171,
-		40: 5171,
-		50: 6774,
-		60: 6774,
-	}[rogue.Level]
+// sliceAndDiceSpellID and sliceAndDiceHasteBonus are Slice and Dice's rank
+// -> spell id / haste bonus, index 0 unused.
+var sliceAndDiceSpellID = [3]int32{0, 5171, 6774}
+var sliceAndDiceHasteBonus = [3]float64{0, 0.20, 0.30}
+
+func (rogue *Rogue) registerSliceAndDice() {
+	rank := core.HighestRankAtLevel(sliceAndDiceLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
+
+	hasteBonusByRank := sliceAndDiceHasteBonus[rank]
+	spellID := sliceAndDiceSpellID[rank]
 
 	actionID := core.ActionID{SpellID: spellID}
 
 	durationMultiplier := []float64{1, 1.15, 1.3, 1.45}[rogue.Talents.ImprovedSliceAndDice]
 
+	// Index 0 is 0 combo points, which ExtraCastCondition below never
+	// actually allows (Slice and Dice requires at least 1), but it is the
+	// formula's own base term (6s + 3s/combo), and it is also exactly the
+	// client's duration_ms for this spell (6000, every rank) - so it
+	// doubles as the aura's pre-cast registration default, read by the
+	// conformance report's engineDuration before any real cast overrides
+	// it (see priest/vampiric_embrace.go's RelatedSelfBuff comment for the
+	// same report-visibility reasoning).
 	rogue.sliceAndDiceDurations = [6]time.Duration{
-		0,
+		time.Duration(float64(time.Second*6) * durationMultiplier),
 		time.Duration(float64(time.Second*9) * durationMultiplier),
 		time.Duration(float64(time.Second*12) * durationMultiplier),
 		time.Duration(float64(time.Second*15) * durationMultiplier),
@@ -40,8 +51,9 @@ func (rogue *Rogue) registerSliceAndDice() {
 	rogue.SliceAndDiceAura = rogue.RegisterAura(core.Aura{
 		Label:    "Slice and Dice",
 		ActionID: actionID,
-		// This will be overridden on cast, but set a non-zero default so it doesn't crash when used in APL prepull
-		Duration: rogue.sliceAndDiceDurations[5],
+		// Overridden on every real cast (ApplyEffects below); the base
+		// (0-combo-point) term is a safe non-zero default for APL prepull.
+		Duration: rogue.sliceAndDiceDurations[0],
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			rogue.MultiplyMeleeSpeed(sim, hasteBonus)
 		},
@@ -51,10 +63,12 @@ func (rogue *Rogue) registerSliceAndDice() {
 	})
 
 	rogue.SliceAndDice = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:    SpellCode_RogueSliceandDice,
-		ActionID:     actionID,
-		Flags:        core.SpellFlagAPL,
-		MetricSplits: 6,
+		SpellCode:       SpellCode_RogueSliceandDice,
+		ActionID:        actionID,
+		Flags:           core.SpellFlagAPL,
+		MetricSplits:    6,
+		RequiredLevel:   sliceAndDiceLearnLevels[rank-1],
+		RelatedSelfBuff: rogue.SliceAndDiceAura,
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost: 25,

@@ -18,6 +18,11 @@ type rageBar struct {
 
 	damageDealtMultiplier float64 // Multiplier for rage generation from damage dealt
 	damageTakenMultiplier float64 // Multiplier for rage generation from damage taken
+	// offHandDamageDealtMultiplier scales rage from off-hand auto-attacks
+	// only, on top of damageDealtMultiplier: Forever's Dual Wield
+	// Specialization "increases ... off-hand Rage generation by 20%" a
+	// point (build 1.60.1.70009 rank text). 1 when nothing has raised it.
+	offHandDamageDealtMultiplier float64
 
 	flatDamageDealtBonusRage float64
 	flatDamageTakenBonusRage float64
@@ -41,17 +46,67 @@ func GetRageConversion(attacker_level int32) float64 {
 		return 140.5 // Tested
 	} else if attacker_level < 45 {
 		// Poor fit, but better then current formula below 45
-		return 0.0215*float64(attacker_level^2) + 2.66*float64(attacker_level) + 0.89
+		return 0.0215*float64(attacker_level*attacker_level) + 2.66*float64(attacker_level) + 0.89
 	} else {
 		// Rage conversion is adjusted according to target stats (https://web.archive.org/web/20201118213002/https://blue.mmo-champion.com/topic/18325-the-new-rage-formula-by-kalgan/)\
 		// So this is probably only the base value formula and will be slightly wrong for most target
-		return 0.0091107836*float64(attacker_level^2) + 3.225598133*float64(attacker_level) + 4.2652911
+		return 0.0091107836*float64(attacker_level*attacker_level) + 3.225598133*float64(attacker_level) + 4.2652911
 	}
+}
+
+// Forever's normalized rage. The beta replaced vanilla's damage-based
+// rage (GetRageConversion above, now used only for rage from damage
+// TAKEN) with a fixed amount per successful auto-attack that depends on
+// the weapon's speed and hand, not on the damage it dealt, so a level-60
+// epic and a grey of the same speed generate the same rage per swing.
+//
+// Sources, in order of confidence:
+//   - Blizzard's 1 October 2026 beta development notes: "Additional
+//     Rage generated from landing Critical Strikes increased to 100%
+//     increased Rage (was 75%)" - a crit pays double
+//     (normalizedRageCritMultiplier).
+//   - Community measurement on the 24 September beta build (Icy Veins,
+//     25 September 2026): one-handers generate weapon speed x 3.46 per
+//     landed swing, two-handers weapon speed x 4.50
+//     (normalizedRagePerSpeedOneHand / TwoHand). These are measured, not
+//     stated, numbers; the owner's own combat log is the check.
+//   - The off-hand constant is NOT measured anywhere public. It is taken
+//     as half the one-hand constant, the ratio Blizzard's own TBC-era
+//     normalization used for off-hand swings (hit factor 1.75 against a
+//     main hand's 3.5, which the measured 3.46 all but names); an
+//     assumption until a log settles it.
+//
+// Talents that add rage on top (Unbridled Wrath, Dual Wield
+// Specialization's off-hand clause) keep their own hooks.
+const (
+	normalizedRagePerSpeedOneHand = 3.46
+	normalizedRagePerSpeedTwoHand = 4.50
+	normalizedRageOffHandFactor   = 0.5
+	normalizedRageCritMultiplier  = 2.0
+)
+
+// normalizedSwingRage is the rage one landed auto-attack with weapon
+// generates before any multiplier or flat bonus the rage bar carries.
+func normalizedSwingRage(weapon *Weapon, offHand bool, crit bool) float64 {
+	if weapon == nil || weapon.SwingSpeed <= 0 {
+		return 0
+	}
+	perSpeed := normalizedRagePerSpeedOneHand
+	if weapon.TwoHanded {
+		perSpeed = normalizedRagePerSpeedTwoHand
+	}
+	rage := weapon.SwingSpeed * perSpeed
+	if offHand {
+		rage *= normalizedRageOffHandFactor
+	}
+	if crit {
+		rage *= normalizedRageCritMultiplier
+	}
+	return rage
 }
 
 func (unit *Unit) EnableRageBar(options RageBarOptions) {
 	rageFromDamageTakenMetrics := unit.NewRageMetrics(ActionID{OtherID: proto.OtherAction_OtherActionDamageTaken})
-	rageConversion := GetRageConversion(unit.Level)
 
 	unit.SetCurrentPowerBar(RageBar)
 	unit.RegisterAura(Aura{
@@ -83,14 +138,22 @@ func (unit *Unit) EnableRageBar(options RageBarOptions) {
 				return
 			}
 
-			damage := result.Damage
-			if result.Outcome.Matches(OutcomeDodge | OutcomeParry) {
-				// Rage is still generated for dodges/parries, based on the damage it WOULD have done.
-				damage = result.PreOutcomeDamage
+			// Forever normalizes rage from auto-attacks: a fixed amount
+			// per swing from the weapon's own speed and hand, doubled on
+			// a critical strike, with no damage term at all (see
+			// normalizedSwingRage). A dodged or parried swing still pays
+			// its base, as vanilla's damage-based formula did through
+			// PreOutcomeDamage; a miss pays nothing (returned above).
+			offHand := spell.ProcMask == ProcMaskMeleeOHAuto
+			weapon := unit.AutoAttacks.MH()
+			if offHand {
+				weapon = unit.AutoAttacks.OH()
 			}
-
-			generatedRage := damage * 7.5 / rageConversion
+			generatedRage := normalizedSwingRage(weapon, offHand, result.DidCrit())
 			generatedRage *= unit.rageBar.damageDealtMultiplier
+			if offHand {
+				generatedRage *= unit.rageBar.offHandDamageDealtMultiplier
+			}
 			generatedRage += unit.rageBar.flatDamageDealtBonusRage
 
 			var metrics *ResourceMetrics
@@ -123,11 +186,12 @@ func (unit *Unit) EnableRageBar(options RageBarOptions) {
 	})
 
 	unit.rageBar = rageBar{
-		unit:                  unit,
-		damageDealtMultiplier: options.DamageDealtMultiplier,
-		damageTakenMultiplier: options.DamageTakenMultiplier,
-		startingRage:          max(0, min(options.StartingRage, MaxRage)),
-		RageRefundMetrics:     unit.NewRageMetrics(ActionID{OtherID: proto.OtherAction_OtherActionRefund}),
+		unit:                         unit,
+		damageDealtMultiplier:        options.DamageDealtMultiplier,
+		damageTakenMultiplier:        options.DamageTakenMultiplier,
+		offHandDamageDealtMultiplier: 1,
+		startingRage:                 max(0, min(options.StartingRage, MaxRage)),
+		RageRefundMetrics:            unit.NewRageMetrics(ActionID{OtherID: proto.OtherAction_OtherActionRefund}),
 	}
 }
 
@@ -141,6 +205,12 @@ func (unit *Unit) AddDamageDealtRageMultiplier(multi float64) {
 
 func (unit *Unit) AddDamageTakenRageMultiplier(multi float64) {
 	unit.rageBar.damageTakenMultiplier *= multi
+}
+
+// AddOffHandDamageDealtRageMultiplier scales rage from off-hand
+// auto-attacks only (Dual Wield Specialization's own clause).
+func (unit *Unit) AddOffHandDamageDealtRageMultiplier(multi float64) {
+	unit.rageBar.offHandDamageDealtMultiplier *= multi
 }
 
 func (unit *Unit) AddDamageDealtRageBonus(bonus float64) {
@@ -168,7 +238,7 @@ func (rb *rageBar) AddRage(sim *Simulation, amount float64, metrics *ResourceMet
 	}
 
 	rb.currentRage = newRage
-	if !sim.Options.Interactive {
+	if !sim.Options.Interactive && rb.unit.Rotation != nil {
 		rb.unit.Rotation.DoNextAction(sim)
 	}
 	StartDelayedAction(sim, DelayedActionOptions{

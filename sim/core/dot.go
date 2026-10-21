@@ -27,6 +27,25 @@ type DotConfig struct {
 
 	DamageMultiplier float64 // periodic damage multiplier
 	BonusCoefficient float64 // EffectBonusCoefficient in SpellEffect client DB table, "SP mod" on Wowhead (not necessarily shown there even if > 0)
+
+	// CanCrit opts this dot into periodic critical strikes under
+	// Dot.OutcomeMagicCritPerTick, which reads it and ticks flat when it
+	// is false. Forever enables them per spell rather than per school;
+	// which spells is a beta measurement (sim/cmd/forever-measure in the
+	// site repository reports, per spell, whether any tick carried the
+	// critical flag), so the default is off and every existing spec is
+	// unchanged. It does not gate the upstream snapshot-crit outcomes,
+	// which pre-date Forever and whose specs are already tuned around
+	// them; for those, the outcome function a dot's OnTick passes is
+	// still the switch.
+	CanCrit bool
+
+	// CritMultiplier is the multiplier a critical tick uses. Zero means
+	// "the parent spell's", which is the safe default; Forever's
+	// periodic figure is unpublished and may differ from the direct
+	// one, so it gets its own field rather than borrowing.
+	// unconfirmed
+	CritMultiplier float64
 }
 
 type Dot struct {
@@ -38,6 +57,11 @@ type Dot struct {
 	OriginalNumberOfTicks int32         // base number of ticks of the original dot
 	NumberOfTicks         int32         // number of ticks over the whole duration
 	TickLength            time.Duration // time between each tick
+
+	// ModNumberOfTicks is the net ticks the spell's SpellMods have added.
+	// A spell that assigns NumberOfTicks on every cast adds it back so a
+	// duration modifier survives the assignment.
+	ModNumberOfTicks int32
 
 	// If true, tick length will be shortened based on casting speed.
 	AffectedByCastSpeed bool
@@ -60,6 +84,15 @@ type Dot struct {
 
 	DamageMultiplier float64 // periodic damage multiplier
 	BonusCoefficient float64 // EffectBonusCoefficient in SpellEffect client DB table, "SP mod" on Wowhead (not necessarily shown there even if > 0)
+
+	// CanCrit opts this dot into periodic critical strikes under
+	// OutcomeMagicCritPerTick. See DotConfig.CanCrit; copied through from
+	// there when the Dot is built.
+	CanCrit bool
+
+	// CritMultiplier is this dot's own critical multiplier. Zero means
+	// "the parent spell's" - see dotCritMultiplier.
+	CritMultiplier float64
 }
 
 // TickPeriod is how fast the snapshot dot ticks.
@@ -328,6 +361,9 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 
 		DamageMultiplier: config.DamageMultiplier,
 		BonusCoefficient: config.BonusCoefficient,
+
+		CanCrit:        config.CanCrit,
+		CritMultiplier: config.CritMultiplier,
 	}
 
 	auraConfig := config.Aura
@@ -355,4 +391,14 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 			}
 		}
 	}
+}
+
+// dotCritMultiplier resolves a dot's critical multiplier. Zero means the
+// dot did not choose one, and it inherits the parent spell's rather than
+// silently becoming a 1.0.
+func dotCritMultiplier(dotMult, spellMult float64) float64 {
+	if dotMult == 0 {
+		return spellMult
+	}
+	return dotMult
 }

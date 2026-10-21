@@ -22,8 +22,8 @@ func (warlock *Warlock) makeVoidwalker() *WarlockPet {
 			stats.Spirit:    61,
 			stats.Mana:      60,
 			stats.MP5:       0,
-			stats.MeleeCrit: 3.2685 * core.CritRatingPerCritChance,
-			stats.SpellCrit: 3.3355 * core.CritRatingPerCritChance,
+			// Forever: merged from MeleeCrit 3.2685 + SpellCrit 3.3355. unconfirmed
+			stats.Crit: 3.3355 * core.CritRatingPerCritChance,
 		}
 		cfg.AutoAttacks = core.AutoAttackOptions{
 			MainHand: core.Weapon{
@@ -42,8 +42,8 @@ func (warlock *Warlock) makeVoidwalker() *WarlockPet {
 			stats.Spirit:    97,
 			stats.Mana:      637,
 			stats.MP5:       0,
-			stats.MeleeCrit: 3.2685 * core.CritRatingPerCritChance,
-			stats.SpellCrit: 3.3355 * core.CritRatingPerCritChance,
+			// Forever: merged from MeleeCrit 3.2685 + SpellCrit 3.3355. unconfirmed
+			stats.Crit: 3.3355 * core.CritRatingPerCritChance,
 		}
 		cfg.AutoAttacks = core.AutoAttackOptions{
 			MainHand: core.Weapon{
@@ -62,8 +62,8 @@ func (warlock *Warlock) makeVoidwalker() *WarlockPet {
 			stats.Spirit:    123,
 			stats.Mana:      1028,
 			stats.MP5:       0,
-			stats.MeleeCrit: 3.2685 * core.CritRatingPerCritChance,
-			stats.SpellCrit: 3.3355 * core.CritRatingPerCritChance,
+			// Forever: merged from MeleeCrit 3.2685 + SpellCrit 3.3355. unconfirmed
+			stats.Crit: 3.3355 * core.CritRatingPerCritChance,
 		}
 		cfg.AutoAttacks = core.AutoAttackOptions{
 			MainHand: core.Weapon{
@@ -83,8 +83,8 @@ func (warlock *Warlock) makeVoidwalker() *WarlockPet {
 			stats.Spirit:    150,
 			stats.Mana:      1066,
 			stats.MP5:       0,
-			stats.MeleeCrit: 3.2685 * core.CritRatingPerCritChance,
-			stats.SpellCrit: 3.3355 * core.CritRatingPerCritChance,
+			// Forever: merged from MeleeCrit 3.2685 + SpellCrit 3.3355. unconfirmed
+			stats.Crit: 3.3355 * core.CritRatingPerCritChance,
 		}
 		cfg.AutoAttacks = core.AutoAttackOptions{
 			MainHand: core.Weapon{

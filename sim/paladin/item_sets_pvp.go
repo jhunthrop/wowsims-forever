@@ -1,46 +1,11 @@
 package paladin
 
-import (
-	"github.com/wowsims/classic/sim/core"
-	"github.com/wowsims/classic/sim/core/stats"
-)
+import "github.com/wowsims/classic/sim/common/clientsetbonus"
 
-var ItemSetLieutenantCommandersRedoubt = core.NewItemSet(core.ItemSet{
-	Name: "Lieutenant Commander's Redoubt",
-	Bonuses: map[int32]core.ApplyEffect{
-		// Increases damage and healing done by magical spells and effects by up to 23.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.SpellPower, 23)
-		},
-		// Reduces the cooldown of your Hammer of Justice by 10 sec.
-		4: func(agent core.Agent) {
-			// Nothing to do
-		},
-		// +20 Stamina.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Stamina, 20)
-		},
-	},
-})
+// The paladin PvP rank sets the client defines for Phase 1, every ItemSet id of
+// each name. Their bonuses are flat stats or utility the sim never casts.
+var pvpSetIDs = []int32{544, 1744, 1745, 1776, 1777}
 
-var ItemSetFieldMarshalsAegis = core.NewItemSet(core.ItemSet{
-	Name: "Field Marshal's Aegis",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +20 Stamina.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Stamina, 20)
-		},
-		// Reduces the cooldown of your Hammer of Justice by 10 sec.
-		4: func(agent core.Agent) {
-			// Nothing to do
-		},
-		// Increases damage and healing done by magical spells and effects by up to 23.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.SpellPower, 23)
-		},
-	},
-})
+func init() {
+	clientsetbonus.RegisterPvPSets(pvpSetIDs...)
+}

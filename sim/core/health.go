@@ -45,7 +45,9 @@ func (hb *healthBar) CurrentHealthPercent() float64 {
 	return hb.currentHealth / hb.unit.stats[stats.Health]
 }
 
-func (hb *healthBar) GainHealth(sim *Simulation, amount float64, metrics *ResourceMetrics) {
+// GainHealth raises the unit's health by up to amount and returns what
+// actually landed, which is less than amount when it overheals.
+func (hb *healthBar) GainHealth(sim *Simulation, amount float64, metrics *ResourceMetrics) float64 {
 	if amount < 0 {
 		panic("Trying to gain negative health!")
 	}
@@ -59,6 +61,15 @@ func (hb *healthBar) GainHealth(sim *Simulation, amount float64, metrics *Resour
 	}
 
 	hb.currentHealth = newHealth
+	return newHealth - oldHealth
+}
+
+// ClampToMaxHealth drops current health to the maximum when the maximum
+// has just fallen below it (a temporary health buff such as Last Stand
+// expiring): the excess is not damage, so it records nothing in the
+// damage-taken metrics or the TMI list.
+func (hb *healthBar) ClampToMaxHealth() {
+	hb.currentHealth = min(hb.currentHealth, hb.MaxHealth())
 }
 
 func (hb *healthBar) RemoveHealth(sim *Simulation, amount float64) {
@@ -91,7 +102,11 @@ var ChanceOfDeathAuraLabel = "Chance of Death"
 
 func (character *Character) trackChanceOfDeath(healingModel *proto.HealingModel) {
 	character.Unit.Metrics.isTanking = false
-	for _, target := range character.Env.Encounter.TargetUnits {
+	// The pool, not the active prefix: this runs once during raid
+	// construction and decides whether the character is tracked as a
+	// tank for the whole fight, so an add that a target timeline brings
+	// in later and points at this character still counts.
+	for _, target := range character.Env.Encounter.AllTargetUnits {
 		if target.CurrentTarget == &character.Unit {
 			character.Unit.Metrics.isTanking = true
 		}

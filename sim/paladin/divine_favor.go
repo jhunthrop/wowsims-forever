@@ -13,7 +13,7 @@ func (paladin *Paladin) registerDivineFavor() {
 
 	var affectedSpells []*core.Spell
 	paladin.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.SpellCode == SpellCode_PaladinHolyShock {
+		if spell.Matches(PaladinSpellMaskDivineFavor) {
 			affectedSpells = append(affectedSpells, spell)
 		}
 	})
@@ -23,34 +23,50 @@ func (paladin *Paladin) registerDivineFavor() {
 		Duration: time.Minute * 2,
 	}
 
+	// spend removes the buff and puts the ability on cooldown.
+	spend := func(aura *core.Aura, sim *core.Simulation) {
+		aura.Deactivate(sim)
+		cd.Set(sim.CurrentTime + cd.Duration)
+		paladin.UpdateMajorCooldowns()
+	}
+
 	aura := paladin.RegisterAura(core.Aura{
 		Label:    "Divine Favor",
 		ActionID: core.ActionID{SpellID: 20216},
 		Duration: core.NeverExpires,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			core.Each(affectedSpells, func(spell *core.Spell) {
-				spell.BonusCritRating += core.SpellCritRatingPerCritChance * 100
+				spell.BonusCritRating += core.CritRatingPerCritChance * 100
 			})
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			core.Each(affectedSpells, func(spell *core.Spell) {
-				spell.BonusCritRating -= core.SpellCritRatingPerCritChance * 100
+				spell.BonusCritRating -= core.CritRatingPerCritChance * 100
 			})
 		},
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if spell.SpellCode != SpellCode_PaladinHolyShock {
-				return
+		// Whichever of the named spells lands first spends the buff: a
+		// Holy Shock that hits an enemy, or a heal.
+		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
+			if spell.SpellCode == SpellCode_PaladinHolyShock {
+				spend(aura, sim)
 			}
-			// Remove the buff and put skill on CD
-			aura.Deactivate(sim)
-			cd.Set(sim.CurrentTime + cd.Duration)
-			paladin.UpdateMajorCooldowns()
+		},
+		OnHealDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
+			if spell.Matches(PaladinSpellMaskHealingLight) {
+				spend(aura, sim)
+			}
 		},
 	})
 
 	divineFavor := paladin.RegisterSpell(core.SpellConfig{
 		ActionID: aura.ActionID,
 		Flags:    core.SpellFlagNoOnCastComplete,
+		// 4% of base mana: the client prices this through
+		// SpellPower.PowerCostPct (spellconst cost_pct), not the flat
+		// cost column, which reads 0.
+		ManaCost: core.ManaCostOptions{
+			BaseCost: DivineFavorManaCostPct[0] / 100,
+		},
 		Cast: core.CastConfig{
 			CD: cd,
 		},
@@ -61,5 +77,10 @@ func (paladin *Paladin) registerDivineFavor() {
 	paladin.AddMajorCooldown(core.MajorCooldown{
 		Spell: divineFavor,
 		Type:  core.CooldownTypeDPS,
+		// A healer spends it on the heal that must not fail, which only its
+		// rotation knows; autocasting it at the pull would waste it.
+		ShouldActivate: func(*core.Simulation, *core.Character) bool {
+			return !paladin.isHealer()
+		},
 	})
 }

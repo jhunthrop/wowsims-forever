@@ -4,21 +4,94 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// heroicStrikeRank and cleaveRank are the TOP ranks of the two
+// on-next-swing abilities a level-60 warrior casts, as labels into the
+// generated rank arrays in constants_auto_gen.go. Heroic Strike's rank
+// 9 arrived with AQ, so the phase flag picks the rank and every column
+// - id, damage, cost - is then read at that one index rather than
+// being a second ternary of typed numbers. Used by
+// TestTheForeverFuryRotationQueuesHeroicStrike (a level-60 pinned
+// rotation) and as the ceiling heroicStrikeRankForLevel clamps to.
+func heroicStrikeRank() int {
+	return core.TernaryInt(core.IncludeAQ, HeroicStrikeRanks, HeroicStrikeRanks-1)
+}
+
+func cleaveRank() int {
+	return CleaveRanks
+}
+
+// heroicStrikeRankForLevel is the rank a warrior of level has actually
+// learned: rankAtLevel against HeroicStrikeLevel, capped at
+// heroicStrikeRank() so the AQ phase flag still wins at 60. Without
+// this, registerHeroicStrikeSpell always registered the level-60 rank
+// (heroicStrikeRank() ignores the character's level entirely), so a
+// levelling character's queued Heroic Strike never matched the rank
+// id the ladder's rotation casts at its own level.
+func heroicStrikeRankForLevel(level int32) int {
+	return min(rankAtLevel(HeroicStrikeLevel[:], level), heroicStrikeRank())
+}
+
+// heroicStrikeSpellID and cleaveSpellID are the ids the two
+// on-next-swing abilities register under at their TOP rank. They are
+// named so a rotation test can check the pinned (level-60) APL against
+// the spellbook rather than against a retyped id.
+func heroicStrikeSpellID() int32 {
+	return HeroicStrikeSpellId[heroicStrikeRank()]
+}
+
+func cleaveSpellID() int32 {
+	return CleaveSpellId[cleaveRank()]
+}
+
+// heroicStrikeRankSpellID reads a Heroic Strike rank's id, correcting
+// the one rank where the generator's dedup kept the wrong duplicate:
+// rank 3's client row (285, spell_level 16, cost 150) and 25712 (same
+// spell_level, cost 0 - a "free" duplicate the client also carries)
+// tie on spell_level, and the generator's tie-break kept 25712 in
+// HeroicStrikeSpellId[3]. 285 is the id spellranks.json names and the
+// one the site's ladder rewrites a levelling rotation's castSpell to,
+// so it is the one this package registers.
+func heroicStrikeRankSpellID(rank int) int32 {
+	if rank == 3 {
+		return 285
+	}
+	return HeroicStrikeSpellId[rank]
+}
+
+// heroicStrikeRankManaCost mirrors heroicStrikeRankSpellID for cost:
+// the generated HeroicStrikeManaCost[3] is 0, read off the same free
+// duplicate (25712) rather than 285's real 150.
+func heroicStrikeRankManaCost(rank int) float64 {
+	if rank == 3 {
+		return 150
+	}
+	return HeroicStrikeManaCost[rank]
+}
+
 func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
-	flatDamageBonus := core.TernaryFloat64(core.IncludeAQ, 157, 138)
-	spellID := core.TernaryInt32(core.IncludeAQ, 25286, 11567)
-	// No known equation
+	rank := heroicStrikeRankForLevel(warrior.Level)
+	flatDamageBonus := HeroicStrikeDamage[rank]
+	casterLevel := int(warrior.Level)
+	spellID := heroicStrikeRankSpellID(rank)
+	// No known equation, and the client's table has no threat column.
 	threat := core.TernaryFloat64(core.IncludeAQ, 173, 145)
 
 	warrior.HeroicStrike = warrior.RegisterSpell(AnyStance, core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete | SpellFlagOffensive,
+		ClassSpellMask: WarriorSpellMaskHeroicStrike,
+		ActionID:       core.ActionID{SpellID: spellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete | SpellFlagOffensive,
+
+		RequiredLevel: HeroicStrikeLevel[rank],
+		Rank:          rank,
 
 		RageCost: core.RageCostOptions{
-			Cost:   15 - float64(warrior.Talents.ImprovedHeroicStrike),
+			// Improved Heroic Strike's discount is a SpellMod in
+			// talents.go; applying it here as well would double it, so
+			// this is the client's undiscounted cost.
+			Cost:   rageCost(heroicStrikeRankManaCost(rank)),
 			Refund: 0.8,
 		},
 
@@ -28,9 +101,10 @@ func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
 		ThreatMultiplier: 1,
 		FlatThreatBonus:  threat,
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamageBonus.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := flatDamageBonus + spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
+			baseDamage := flatDamageBonus.Roll(sim, casterLevel) + spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
 			if !result.Landed() {
@@ -47,23 +121,34 @@ func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
 }
 
 func (warrior *Warrior) registerCleaveSpell(realismICD *core.Cooldown) {
-	flatDamageBonus := 50.0
-	spellID := int32(20569)
+	rank := cleaveRank()
+	flatDamageBonus := CleaveDamage[rank]
+	casterLevel := int(warrior.Level)
+	spellID := cleaveSpellID()
+	// No known equation, and the client's table has no threat column.
 	threat := 100.0
 
-	flatDamageBonus *= []float64{1, 1.4, 1.8, 2.2}[warrior.Talents.ImprovedCleave]
+	// FOREVER: the client's Improved Cleave is a rage discount, not a
+	// damage bonus (see applyDeclarativeTalents); the vanilla
+	// multiplier that stood here is gone rather than renamed.
 
-	results := make([]*core.SpellResult, min(int32(2), warrior.Env.GetNumTargets()))
+	// Pool-sized ceiling, live-bounded loop; see registerWhirlwindSpell.
+	results := make([]*core.SpellResult, min(2, len(warrior.Env.Encounter.AllTargetUnits)))
 
 	warrior.Cleave = warrior.RegisterSpell(AnyStance, core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto,
-		Flags:       core.SpellFlagMeleeMetrics | SpellFlagOffensive,
+		ClassSpellMask: WarriorSpellMaskCleave,
+		ActionID:       core.ActionID{SpellID: spellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto,
+		Flags:          core.SpellFlagMeleeMetrics | SpellFlagOffensive,
+
+		RequiredLevel: CleaveLevel[rank],
+		Rank:          rank,
 
 		RageCost: core.RageCostOptions{
-			Cost: 20,
+			// Improved Cleave's discount is a SpellMod in talents.go.
+			Cost: rageCost(CleaveManaCost[rank]),
 		},
 
 		CritDamageBonus: warrior.impale(),
@@ -72,15 +157,17 @@ func (warrior *Warrior) registerCleaveSpell(realismICD *core.Cooldown) {
 		ThreatMultiplier: 1,
 		FlatThreatBonus:  threat,
 		BonusCoefficient: 1,
+		ClientBaseDamage: flatDamageBonus.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			for idx := range results {
-				baseDamage := flatDamageBonus + spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
+			numHits := min(len(results), len(sim.Encounter.TargetUnits))
+			for idx := 0; idx < numHits; idx++ {
+				baseDamage := flatDamageBonus.Roll(sim, casterLevel) + spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
 				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 				target = sim.Environment.NextTargetUnit(target)
 			}
 
-			for _, result := range results {
+			for _, result := range results[:numHits] {
 				spell.DealDamage(sim, result)
 			}
 
@@ -119,12 +206,30 @@ func (warrior *Warrior) makeQueueSpellsAndAura(srcSpell *WarriorSpell, realismIC
 
 	queueSpell := warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		ActionID: srcSpell.ActionID.WithTag(1),
-		Flags:    core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagCastTimeNoGCD,
+		// Same Rank as srcSpell (not left at the zero value): this spell
+		// shares srcSpell's SpellID (just a different ActionID.Tag, which
+		// sim/conformance's rowFor does not look at), so without this the
+		// two registrations produced two report rows for the same
+		// (spec, level, SpellID) - srcSpell's real one and this queue
+		// helper's all-zero one (no Cost/RequiredLevel of its own) - and
+		// the queue helper's showed up as a bogus "no cost block"
+		// registration gap. Matching Rank collapses them onto one row via
+		// collectRows' own (spec, level, spellID, rank) dedup; it cannot
+		// be SpellFlagPassiveSpell instead (see sim/warrior/execute.go's
+		// identical note) because this spell IS cast directly by the APL
+		// and its own Casts count is real.
+		Rank:  srcSpell.Rank,
+		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagCastTimeNoGCD,
 
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
+			// GetCurrentCost, not DefaultCast.Cost: the rage discounts
+			// from Improved Heroic Strike and Improved Cleave are
+			// SpellMods now, and a mod writes Cost.FlatModifier rather
+			// than the default cast. Gating on the undiscounted number
+			// would queue the ability less often than the talent says.
 			return warrior.curQueueAura == nil &&
 				!isQueueQueued &&
-				warrior.CurrentRage() >= srcSpell.DefaultCast.Cost &&
+				warrior.CurrentRage() >= srcSpell.Cost.GetCurrentCost() &&
 				!warrior.IsCasting(sim) &&
 				realismICD.IsReady(sim)
 		},

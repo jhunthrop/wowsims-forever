@@ -13,7 +13,26 @@ const (
 	WushoolaysCharmOfSpirits = 19956
 	TotemOfRage              = 22395
 	TotemOfTheStorm          = 23199
+	TotemOfThunder           = 228176
+	TotemOfTheStormForever   = 272432
+	BurningTotem             = 272433
 )
+
+// totemOfTheStormMaelstromReduction is the 50 in client spell 1291078
+// ("Your Lightning Bolt ability can now also trigger the Maelstrom Weapon
+// talent, but with a $s1% reduced chance"), as a fraction.
+const totemOfTheStormMaelstromReduction = 0.5
+
+// relicClassMasks says which engine spells each client spell family is, for
+// the totems in relic_mods_auto_gen.go (SpellClassOptions masks of Lightning
+// Bolt 403, Chain Lightning 421 and Flame Shock 8050). A totem whose family
+// is missing here (healing spells, Grounding Totem) cannot be registered,
+// and core.NewEquipModItemEffect refuses it.
+var relicClassMasks = core.ClassMaskTable{
+	{Client: core.ClientClassMask{1 << 0}, Engine: ShamanSpellMaskLightningBolt},
+	{Client: core.ClientClassMask{1 << 1}, Engine: ShamanSpellMaskChainLightning},
+	{Client: core.ClientClassMask{1 << 28}, Engine: ShamanSpellMaskFlameShock},
+}
 
 func init() {
 	core.AddEffectsToTest = false
@@ -92,6 +111,20 @@ func init() {
 				spell.BonusDamage += 30
 			}
 		})
+	})
+
+	// Client spell 461295. Equip: Increases the critical strike chance of
+	// Lightning Bolt by 1%.
+	core.NewEquipModItemEffect(TotemOfThunder, relicEquipMods[TotemOfThunder], relicClassMasks)
+
+	// Client spell 1291077. Equip: Increases the duration of your Flame Shock
+	// ability by 3 sec.
+	core.NewEquipModItemEffect(BurningTotem, relicEquipMods[BurningTotem], relicClassMasks)
+
+	// Client spell 1291078. Equip: Your Lightning Bolt ability can now also
+	// trigger the Maelstrom Weapon talent, but with a 50% reduced chance.
+	core.NewItemEffect(TotemOfTheStormForever, func(agent core.Agent) {
+		agent.(ShamanAgent).GetShaman().LightningBoltMaelstromChance = maelstromWeaponProcChance * (1 - totemOfTheStormMaelstromReduction)
 	})
 
 	// https://www.wowhead.com/classic/item=19956/wushoolays-charm-of-spirits

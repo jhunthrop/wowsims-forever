@@ -1,0 +1,651 @@
+package core
+
+import (
+	"os"
+	"strings"
+	"testing"
+
+	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/core/stats"
+)
+
+// The nine level-60 Agility-to-crit rates the fork hand-typed before the
+// client's PlayerExpectedStat table was generated into
+// critPerAgiByClassLevel. Level 60 of the generated table must reproduce
+// them exactly.
+var oldLevel60CritPerAgi = map[proto.Class]float64{
+	proto.Class_ClassWarrior: 0.0500,
+	proto.Class_ClassPaladin: 0.0506,
+	proto.Class_ClassHunter:  0.0189,
+	proto.Class_ClassRogue:   0.0345,
+	proto.Class_ClassPriest:  0.0500,
+	proto.Class_ClassShaman:  0.0508,
+	proto.Class_ClassMage:    0.0514,
+	proto.Class_ClassWarlock: 0.0500,
+	proto.Class_ClassDruid:   0.0500,
+}
+
+func TestCritPerAgiAtLevel60MatchesTheOldConstants(t *testing.T) {
+	for class, want := range oldLevel60CritPerAgi {
+		if got := CritPerAgiAtLevel(class, CharacterMaxLevel); got != want {
+			t.Errorf("CritPerAgiAtLevel(%v, %d) = %v, want %v", class, CharacterMaxLevel, got, want)
+		}
+	}
+}
+
+func TestCritPerAgiAtLevelRisesTowardLowLevels(t *testing.T) {
+	cases := []struct {
+		class proto.Class
+		level int32
+		want  float64
+	}{
+		{proto.Class_ClassWarrior, 30, 0.0962},
+		{proto.Class_ClassWarrior, 1, 0.25},
+		{proto.Class_ClassRogue, 1, 0.4348},
+	}
+	for _, tc := range cases {
+		if got := CritPerAgiAtLevel(tc.class, tc.level); got != tc.want {
+			t.Errorf("CritPerAgiAtLevel(%v, %d) = %v, want %v", tc.class, tc.level, got, tc.want)
+		}
+	}
+	if CritPerAgiAtLevel(proto.Class_ClassUnknown, 30) != 0 {
+		t.Errorf("CritPerAgiAtLevel(ClassUnknown, 30) must be 0")
+	}
+}
+
+func TestEveryClassHasAnAgilityCritRateAtEveryLevel(t *testing.T) {
+	for _, class := range allClasses {
+		for level := int32(1); level <= CharacterMaxLevel; level++ {
+			if CritPerAgiAtLevel(class, level) <= 0 {
+				t.Errorf("CritPerAgiAtLevel(%v, %d) = %v, want > 0", class, level, CritPerAgiAtLevel(class, level))
+			}
+		}
+	}
+}
+
+func TestWarriorAndRogueHaveNoIntellectCritAtAnyLevel(t *testing.T) {
+	for _, class := range []proto.Class{proto.Class_ClassWarrior, proto.Class_ClassRogue} {
+		for level := int32(1); level <= CharacterMaxLevel; level++ {
+			if got := SpellCritPerIntAtLevel(class, level); got != 0 {
+				t.Errorf("SpellCritPerIntAtLevel(%v, %d) = %v, want 0", class, level, got)
+			}
+		}
+	}
+}
+
+// AddCritStatDependencies wires both Agility and Intellect into the one
+// Crit stat for every class, at the per-level client rates, because
+// StatDependencyManager sums every enabled dependency into its destination
+// (see TestMultipleStatDep in sim/core/stats/deps_test.go). Whether the
+// game itself stacks a hybrid's two sources is unmeasured (see
+// AddCritStatDependencies' comment); if the beta character sheet test
+// rules otherwise, this is the test that must change.
+func TestAddCritStatDependenciesWiresBothStatsForEveryClass(t *testing.T) {
+	agi, intel := 100.0, 200.0
+	for _, class := range allClasses {
+		for _, level := range []int32{1, 30, CharacterMaxLevel} {
+			character := &Character{}
+			character.Level = level
+			AddCritStatDependencies(character, class)
+
+			result := character.SortAndApplyStatDependencies(stats.Stats{
+				stats.Agility:   agi,
+				stats.Intellect: intel,
+			})
+
+			wantCrit := agi*CritPerAgiAtLevel(class, level)*CritRatingPerCritChance +
+				intel*SpellCritPerIntAtLevel(class, level)*CritRatingPerCritChance
+			if result[stats.Crit] != wantCrit {
+				t.Errorf("%v level %d: Crit = %v, want %v (Agility and Intellect contributions summed)",
+					class, level, result[stats.Crit], wantCrit)
+			}
+		}
+	}
+}
+
+// Rogue has no Intellect rate, so the Intellect it carries contributes
+// nothing to Crit.
+func TestAddCritStatDependenciesRogueIgnoresIntellect(t *testing.T) {
+	character := &Character{}
+	AddCritStatDependencies(character, proto.Class_ClassRogue)
+
+	result := character.SortAndApplyStatDependencies(stats.Stats{
+		stats.Agility:   100,
+		stats.Intellect: 200,
+	})
+
+	wantCrit := 100 * CritPerAgiAtLevel(proto.Class_ClassRogue, CharacterMaxLevel) * CritRatingPerCritChance
+	if result[stats.Crit] != wantCrit {
+		t.Fatalf("Crit = %v, want %v (Agility only; Intellect must not contribute)", result[stats.Crit], wantCrit)
+	}
+}
+
+func TestAddCritStatDependenciesNoOpForUnknownClass(t *testing.T) {
+	character := &Character{}
+	AddCritStatDependencies(character, proto.Class_ClassUnknown)
+
+	result := character.SortAndApplyStatDependencies(stats.Stats{
+		stats.Agility:   100,
+		stats.Intellect: 100,
+	})
+	if result[stats.Crit] != 0 {
+		t.Fatalf("Crit = %v, want 0 for ClassUnknown", result[stats.Crit])
+	}
+}
+
+// Every rating constant must come from the client tables, not from a
+// literal somebody typed. The generated file names the build it came
+// from, and the test refuses a file that has been hand-edited.
+func TestBaseStatsFileIsGenerated(t *testing.T) {
+	b, err := os.ReadFile("base_stats_auto_gen.go")
+	if err != nil {
+		t.Fatal(err)
+	}
+	src := string(b)
+	if !strings.Contains(src, "Code generated by tools/base_stats_parser.py. DO NOT EDIT.") {
+		t.Error("base_stats_auto_gen.go is missing the generated-code header")
+	}
+	if strings.Contains(src, "TODO") {
+		t.Error("base_stats_auto_gen.go contains a TODO; it is generated, so a TODO means it was hand-edited")
+	}
+	if BaseStatsBuild == "" {
+		t.Error("BaseStatsBuild is empty; the generator must record the client build")
+	}
+	// Every constant carries a note saying which build its value actually
+	// came from, so the file is readable line by line rather than being
+	// labelled wholly one thing or another.
+	if BaseStatsBuild != "" && !strings.Contains(src, "// source build:") {
+		t.Error("base_stats_auto_gen.go carries no per-constant source-build notes")
+	}
+}
+
+// Ratings are straight percentages in the Classic lineage and Forever
+// keeps that (research/08-stats.md 2: "FLAT PERCENTAGES...the major
+// engine decision and it is settled"), so each of these eight is exactly
+// 1: one point of rating is one percent. Defense/Dodge/Parry/Block are
+// here too, not exempted: combatratings.txt carries those four columns
+// for build 1.60.1.69893, but the table is level-invariant lineage
+// boilerplate (identical across all 123 rows) sitting next to Mastery/
+// Versatility/Corruption/PvP-Power columns Forever provably does not
+// have - it is not the rule, exactly like the Hit/Crit columns of the
+// same table this generator already declines to apply. A regeneration
+// that silently started reading any of these eight from a table would
+// scale every hit, crit, dodge, parry, block and defense chance in the
+// engine, so the exact value is asserted rather than its sign, and the
+// header's disclaimer is asserted too so a change of heart cannot happen
+// silently.
+func TestRatingConstantsAreOneToOnePercentages(t *testing.T) {
+	cases := []struct {
+		name string
+		got  float64
+	}{
+		{"CritRatingPerCritChance", CritRatingPerCritChance},
+		{"HitRatingPerHitChance", HitRatingPerHitChance},
+		{"HasteRatingPerHastePercent", HasteRatingPerHastePercent},
+		{"ExpertiseRatingPerExpertiseChance", ExpertiseRatingPerExpertiseChance},
+		{"DefenseRatingPerDefense", DefenseRatingPerDefense},
+		{"DodgeRatingPerDodgeChance", DodgeRatingPerDodgeChance},
+		{"ParryRatingPerParryChance", ParryRatingPerParryChance},
+		{"BlockRatingPerBlockChance", BlockRatingPerBlockChance},
+	}
+	for _, c := range cases {
+		if c.got != 1 {
+			t.Errorf("%s = %v, want exactly 1 (Forever uses flat percentages, research/08-stats.md 2)", c.name, c.got)
+		}
+	}
+
+	b, err := os.ReadFile("base_stats_auto_gen.go")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(b), "is not the rule") {
+		t.Error("base_stats_auto_gen.go no longer documents combatratings.txt as present-but-not-the-rule; if it now reads Defense/Dodge/Parry/Block from that table, research/08-stats.md 2 (flat percentages) has been silently reversed")
+	}
+}
+
+// basemp.txt and hppersta.txt are two of the three GameTables files the
+// data lane has confirmed exist for build 1.60.1.69893. They are not
+// wired in as new runtime constants - ClassBaseStats' Mana fields and
+// character.go's Stamina->Health dependency already carry these exact
+// values, and duplicating them would just be a second source of truth -
+// but this test pins that the vendored tables and the fork's hand-typed
+// values still agree, so a future drift is caught rather than silently
+// mislabelled unconfirmed.
+func TestBaseManaAndHealthPerStaminaConfirmedAgainstTheTable(t *testing.T) {
+	// basemp.txt, build 1.60.1.69893, level 60.
+	wantMana := map[proto.Class]float64{
+		proto.Class_ClassWarrior: 0,
+		proto.Class_ClassPaladin: 1512,
+		proto.Class_ClassHunter:  1720,
+		proto.Class_ClassRogue:   0,
+		proto.Class_ClassPriest:  1376,
+		proto.Class_ClassShaman:  1520,
+		proto.Class_ClassMage:    1213,
+		proto.Class_ClassWarlock: 1373,
+		proto.Class_ClassDruid:   1244,
+	}
+	for class, want := range wantMana {
+		got := ClassBaseStats[class][stats.Mana]
+		if got != want {
+			t.Errorf("ClassBaseStats[%v][stats.Mana] = %v, want %v (basemp.txt, build 1.60.1.69893, level 60)", class, got, want)
+		}
+	}
+
+	// hppersta.txt, build 1.60.1.69893, level 60, is a flat 10 (verified
+	// flat across every level in the vendored file). character.go itself
+	// is outside this task's file list, so this is asserted by reading
+	// its source rather than by adding a named constant there.
+	b, err := os.ReadFile("character.go")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(b), "AddStatDependency(stats.Stamina, stats.Health, 10)") {
+		t.Error("character.go's Stamina->Health dependency no longer reads 10; hppersta.txt (build 1.60.1.69893) confirms 10, so update this test's expectation together with the source")
+	}
+}
+
+// Expertise is already modelled in the attack table (spell_outcome.go
+// reduces dodge and parry by stats.Expertise/100) and is dormant in
+// vanilla but live for Forever.
+func TestExpertiseIsAFlatPercentage(t *testing.T) {
+	// The item unit is a percentage (Edgemaster's is 1.0%), not
+	// expertise points, so the conversion is 1:1 and the quarter-percent
+	// quantisation from later expansions must not come back.
+	if ExpertiseRatingPerExpertiseChance != 1 {
+		t.Errorf("ExpertiseRatingPerExpertiseChance = %v, want 1", ExpertiseRatingPerExpertiseChance)
+	}
+	b, err := os.ReadFile("base_stats_auto_gen.go")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if strings.Contains(string(b), "ExpertisePerQuarterPercentReduction") {
+		t.Error("the quarter-percent expertise quantisation is back; Forever's item unit is a percentage")
+	}
+	if strings.Contains(string(b), "Resilience") {
+		t.Error("a resilience constant is back; Forever adds no resilience")
+	}
+}
+
+// Until the per-race/class base-stat table is mined for Forever, every
+// name here still carries an unconfirmed value. The engine says so out
+// loud, and the spec support page repeats it, rather than letting a
+// player assume the numbers are Forever's.
+func TestProvisionalConstantsAreDeclared(t *testing.T) {
+	got := ProvisionalConstants()
+	if len(got) == 0 {
+		t.Skip("no provisional constants: the Forever tables have landed, and this test has done its job")
+	}
+	for _, name := range got {
+		if name == "" {
+			t.Error("ProvisionalConstants() contains an empty name")
+		}
+	}
+	b, err := os.ReadFile("base_stats_provisional.go")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(b), "unconfirmed") {
+		t.Error("base_stats_provisional.go must mark its values unconfirmed")
+	}
+}
+
+// Skyborne base stats are not in any mined table. They ship as clones of
+// a vanilla row, marked, and named by ProvisionalConstants, so nobody
+// mistakes a Skyborne sim's numbers for measured ones. When the real
+// table lands this test fails, which is the point.
+//
+// Asserted against RaceOffsets and getBaseStatsCombo - what
+// character.go:153 actually reads to compute a character's base stats -
+// rather than the BaseStatsKey-keyed BaseStats map: that map is
+// unpopulated and unread by any runtime path in this fork, so comparing
+// through it would pass vacuously (two absent entries are both the zero
+// value). Standing ruling (Task 9): no production behaviour, including a
+// package init(), exists purely to give a test something to compare.
+func TestSkyborneBaseStatsAreDeclaredClones(t *testing.T) {
+	al := getBaseStatsCombo(proto.Race_RaceHighOrderSkyborne, proto.Class_ClassWarrior, CharacterMaxLevel)
+	human := getBaseStatsCombo(proto.Race_RaceHuman, proto.Class_ClassWarrior, CharacterMaxLevel)
+	if al != human {
+		t.Log("Skyborne base stats are no longer a clone of Human: a real table has landed. Remove the clone, remove this test, and drop the two entries from ProvisionalConstants.")
+		t.Fail()
+	}
+	var named int
+	for _, n := range ProvisionalConstants() {
+		if strings.Contains(n, "Skyborne") {
+			named++
+		}
+	}
+	if named != 2 {
+		t.Errorf("ProvisionalConstants names %d Skyborne entries, want 2", named)
+	}
+}
+
+// The Crit column of ClassBaseCrit is max(SpellCrit, MeleeCrit) over Era's
+// pair, with one exception the table documents: upstream's MeleeCrit column
+// is its Dodge column duplicated for all nine classes, so where that value
+// would win the max it is discarded and the spell value taken. This test
+// pins the nine merged values, and separately pins the rule that no class
+// takes a Crit equal to its Dodge while a lower spell value exists — the
+// shape that would mean the duplicated column crept back in.
+func TestClassBaseCritDropsTheDuplicatedMeleeColumn(t *testing.T) {
+	// Era's pair per class, read from master:sim/core/base_stats.go:84-130.
+	type eraPair struct{ spell, melee float64 }
+	era := map[proto.Class]eraPair{
+		proto.Class_ClassWarrior: {0.0, 0.0},
+		proto.Class_ClassPaladin: {3.5, 0.7},
+		proto.Class_ClassHunter:  {3.6, 0.0},
+		proto.Class_ClassRogue:   {0.0, 0.0},
+		proto.Class_ClassPriest:  {0.8, 3.0},
+		proto.Class_ClassShaman:  {2.3, 1.7},
+		proto.Class_ClassMage:    {0.2, 3.2},
+		proto.Class_ClassWarlock: {1.7, 2.0},
+		proto.Class_ClassDruid:   {1.8, 0.9},
+	}
+	want := map[proto.Class]float64{
+		proto.Class_ClassWarrior: 0.0,
+		proto.Class_ClassPaladin: 3.5,
+		proto.Class_ClassHunter:  3.6,
+		proto.Class_ClassRogue:   0.0,
+		proto.Class_ClassPriest:  0.8, // melee 3.0 == Dodge 3.0, discarded
+		proto.Class_ClassShaman:  2.3,
+		proto.Class_ClassMage:    0.2, // melee 3.2 == Dodge 3.2, discarded
+		proto.Class_ClassWarlock: 1.7, // melee 2.0 == Dodge 2.0, discarded
+		proto.Class_ClassDruid:   1.8,
+	}
+	for class, wantCrit := range want {
+		row := ClassBaseCrit[class]
+		gotCrit := row[stats.Crit] / CritRatingPerCritChance
+		if gotCrit != wantCrit {
+			t.Errorf("%v base Crit is %.4f, want %.4f", class, gotCrit, wantCrit)
+		}
+		gotDodge := row[stats.Dodge] / DodgeRatingPerDodgeChance
+		if gotDodge != era[class].melee {
+			t.Errorf("%v base Dodge is %.4f, want Era's %.4f", class, gotDodge, era[class].melee)
+		}
+		if gotCrit == gotDodge && era[class].spell < gotDodge {
+			t.Errorf("%v takes base Crit %.4f, which is its Dodge value, over a lower spell value %.4f: the duplicated melee column is back", class, gotCrit, era[class].spell)
+		}
+	}
+	if len(ClassBaseCrit) != len(want)+1 { // +1 for ClassUnknown
+		t.Errorf("ClassBaseCrit has %d entries, want %d; a new class needs a row here", len(ClassBaseCrit), len(want)+1)
+	}
+}
+
+// ClassBaseStats is now computed from base_stats_levels_auto_gen.go's
+// generated per-level table plus classAttackPowerOffsetAtLevel, rather
+// than hand-typed. This pins its level-CharacterMaxLevel values against
+// the literal numbers the hand-typed map held before the generator
+// existed (copied here, not read back from the map under test), so a
+// generator or formula regression is caught rather than silently
+// changing every level-60 sim.
+func TestGeneratedLevel60MatchesTheOldClassBaseStats(t *testing.T) {
+	want := map[proto.Class]stats.Stats{
+		proto.Class_ClassUnknown: {},
+		proto.Class_ClassWarrior: {
+			stats.Health:      1689,
+			stats.Mana:        0,
+			stats.Agility:     80,
+			stats.Strength:    120,
+			stats.Intellect:   30,
+			stats.Spirit:      45,
+			stats.Stamina:     110,
+			stats.AttackPower: 60*3 - 20,
+		},
+		proto.Class_ClassPaladin: {
+			stats.Health:      1381,
+			stats.Mana:        1512,
+			stats.Agility:     65,
+			stats.Strength:    105,
+			stats.Intellect:   70,
+			stats.Spirit:      75,
+			stats.Stamina:     100,
+			stats.AttackPower: 60*3 - 20,
+		},
+		proto.Class_ClassHunter: {
+			stats.Health:            1467,
+			stats.Mana:              1720,
+			stats.Agility:           125,
+			stats.Strength:          55,
+			stats.Intellect:         65,
+			stats.Spirit:            70,
+			stats.Stamina:           90,
+			stats.AttackPower:       60*2 - 20,
+			stats.RangedAttackPower: 60*2 - 20,
+		},
+		proto.Class_ClassRogue: {
+			stats.Health:      1523,
+			stats.Mana:        0,
+			stats.Agility:     130,
+			stats.Strength:    80,
+			stats.Intellect:   35,
+			stats.Spirit:      50,
+			stats.Stamina:     75,
+			stats.AttackPower: 60*2 - 20,
+		},
+		proto.Class_ClassPriest: {
+			stats.Health:      1397,
+			stats.Mana:        1376,
+			stats.Agility:     40,
+			stats.Strength:    35,
+			stats.Intellect:   120,
+			stats.Spirit:      125,
+			stats.Stamina:     50,
+			stats.AttackPower: -10,
+		},
+		proto.Class_ClassShaman: {
+			stats.Health:      1280,
+			stats.Mana:        1520,
+			stats.Agility:     55,
+			stats.Strength:    85,
+			stats.Intellect:   90,
+			stats.Spirit:      100,
+			stats.Stamina:     95,
+			stats.AttackPower: 60*2 - 20,
+		},
+		proto.Class_ClassMage: {
+			stats.Health:      1370,
+			stats.Mana:        1213,
+			stats.Agility:     35,
+			stats.Strength:    30,
+			stats.Intellect:   125,
+			stats.Spirit:      120,
+			stats.Stamina:     45,
+			stats.AttackPower: -10,
+		},
+		proto.Class_ClassWarlock: {
+			stats.Health:      1414,
+			stats.Mana:        1373,
+			stats.Agility:     50,
+			stats.Strength:    45,
+			stats.Intellect:   110,
+			stats.Spirit:      115,
+			stats.Stamina:     65,
+			stats.AttackPower: -10,
+		},
+		proto.Class_ClassDruid: {
+			stats.Health:      1483,
+			stats.Mana:        1244,
+			stats.Agility:     60,
+			stats.Strength:    65,
+			stats.Intellect:   100,
+			stats.Spirit:      110,
+			stats.Stamina:     70,
+			stats.AttackPower: -20,
+		},
+	}
+	if len(ClassBaseStats) != len(want) {
+		t.Fatalf("ClassBaseStats has %d entries, want %d", len(ClassBaseStats), len(want))
+	}
+	for class, wantStats := range want {
+		if got := ClassBaseStats[class]; got != wantStats {
+			t.Errorf("ClassBaseStats[%v] = %+v, want %+v", class, got, wantStats)
+		}
+	}
+}
+
+// wowhead's gear planner gives a level-30 Warrior these exact stats
+// (assets/db_inputs/levels/1.60.1.69893.json, baseStats.stats["1"], index
+// 30). This is the test the level-aware sim design names directly: "a
+// level-30 warrior has the wowhead table's stats."
+func TestBaseStatsAtLevel30MatchesWowheadForWarrior(t *testing.T) {
+	want := stats.Stats{
+		stats.Health:    374,
+		stats.Agility:   44,
+		stats.Strength:  62,
+		stats.Intellect: 24,
+		stats.Spirit:    30,
+		stats.Stamina:   57,
+		// Mana is 0 for Warrior at every level; the source array carries
+		// it explicitly, but a zero-valued Stats field is indistinguishable
+		// from an absent one, so it is left out of want rather than
+		// asserted as stats.Mana: 0.
+	}
+	if got := BaseStatsAtLevel(proto.Class_ClassWarrior, 30); got != want {
+		t.Errorf("BaseStatsAtLevel(ClassWarrior, 30) = %+v, want %+v", got, want)
+	}
+
+	// The full combo adds the level-30 Attack Power offset (3*30-20=70,
+	// the same Warrior/Paladin formula the level-60 constant encoded) and
+	// the Human race offset (all zero) and ClassBaseCrit (also zero for
+	// Warrior).
+	wantCombo := want
+	wantCombo[stats.AttackPower] = 70
+	if got := getBaseStatsCombo(proto.Race_RaceHuman, proto.Class_ClassWarrior, 30); got != wantCombo {
+		t.Errorf("getBaseStatsCombo(Human, ClassWarrior, 30) = %+v, want %+v", got, wantCombo)
+	}
+}
+
+// A level-0 player (proto.Player's zero value, or an old request that
+// predates the level field) must build exactly as it did before this
+// field existed: at CharacterMaxLevel, with today's numbers unchanged.
+func TestBaseStatsAtLevelZeroMatchesCharacterMaxLevel(t *testing.T) {
+	for _, class := range allClasses {
+		zero := BaseStatsAtLevel(class, 0)
+		max := BaseStatsAtLevel(class, CharacterMaxLevel)
+		if zero != max {
+			t.Errorf("BaseStatsAtLevel(%v, 0) = %+v, want the CharacterMaxLevel row %+v", class, zero, max)
+		}
+	}
+	if got, want := classAttackPowerOffsetAtLevel(proto.Class_ClassWarrior, 0), classAttackPowerOffsetAtLevel(proto.Class_ClassWarrior, CharacterMaxLevel); got != want {
+		t.Errorf("classAttackPowerOffsetAtLevel(ClassWarrior, 0) = %v, want the CharacterMaxLevel value %v", got, want)
+	}
+}
+
+// An out-of-range level (negative, or above CharacterMaxLevel) resolves
+// the same way a zero level does: to CharacterMaxLevel. NewCharacter must
+// never build a character at a level the generated tables have no row
+// for.
+func TestEffectiveCharacterLevelClampsOutOfRange(t *testing.T) {
+	cases := []struct {
+		name  string
+		level int32
+	}{
+		{"zero", 0},
+		{"negative", -5},
+		{"above max", CharacterMaxLevel + 1},
+		{"far above max", 255},
+	}
+	for _, c := range cases {
+		if got := EffectiveCharacterLevel(c.level); got != CharacterMaxLevel {
+			t.Errorf("EffectiveCharacterLevel(%d) [%s] = %d, want CharacterMaxLevel (%d)", c.level, c.name, got, CharacterMaxLevel)
+		}
+	}
+	for level := int32(1); level <= CharacterMaxLevel; level++ {
+		if got := EffectiveCharacterLevel(level); got != level {
+			t.Errorf("EffectiveCharacterLevel(%d) = %d, want %d unchanged", level, got, level)
+		}
+	}
+}
+
+// The client reports a different spell-crit-per-Intellect rate at every
+// level - a level-1 Paladin needs far less Intellect for 1% crit than a
+// level-60 one, as CritPerAgiAtLevel does too. This pins both the variation and the
+// level-60 anchor (which must still match the pre-generator flat
+// CritPerIntAtLevel value, 0.0167, so AddCritStatDependencies's behavior
+// at level 60 is unchanged).
+func TestSpellCritPerIntAtLevelVariesByLevel(t *testing.T) {
+	if got, want := SpellCritPerIntAtLevel(proto.Class_ClassPaladin, 60), 0.0167; got != want {
+		t.Errorf("SpellCritPerIntAtLevel(ClassPaladin, 60) = %v, want %v (the pre-generator flat CritPerIntAtLevel value)", got, want)
+	}
+	if got, want := SpellCritPerIntAtLevel(proto.Class_ClassPaladin, 1), 0.075; got != want {
+		t.Errorf("SpellCritPerIntAtLevel(ClassPaladin, 1) = %v, want %v", got, want)
+	}
+	if low, high := SpellCritPerIntAtLevel(proto.Class_ClassPaladin, 1), SpellCritPerIntAtLevel(proto.Class_ClassPaladin, 60); low <= high {
+		t.Errorf("SpellCritPerIntAtLevel(ClassPaladin, 1) = %v, want it greater than level 60's %v (less Intellect needed per 1%% crit at low level)", low, high)
+	}
+	// Warrior and Rogue have no wowhead spell-crit table (0.0 in the old
+	// flat CritPerIntAtLevel too), at every level.
+	for _, class := range []proto.Class{proto.Class_ClassWarrior, proto.Class_ClassRogue} {
+		for _, level := range []int32{1, 30, 60} {
+			if got := SpellCritPerIntAtLevel(class, level); got != 0 {
+				t.Errorf("SpellCritPerIntAtLevel(%v, %d) = %v, want 0", class, level, got)
+			}
+		}
+	}
+}
+
+// Race offsets are unaffected by level (getBaseStatsCombo's comment):
+// wowhead's gear planner carries one raceOffsets table, not one per
+// level. This is the report's promised comparison against wowhead's own
+// raceOffsets (assets/db_inputs/levels/1.60.1.69893.json,
+// baseStats.raceOffsets), by hand rather than as generated code, because
+// RaceOffsets itself does not change - only Orc, Dwarf, NightElf, Undead,
+// Tauren, Gnome and Troll are asserted (every race this fork's
+// RaceOffsets carries); Human is all zero on both sides trivially.
+func TestRaceOffsetsMatchWowheadForEveryMinedRace(t *testing.T) {
+	// assets/db_inputs/levels/1.60.1.69893.json,
+	// baseStats.raceOffsets[raceId], statId 3 agi, 4 str, 5 int, 6 spi, 7
+	// sta - the same wowhead raceId a comment in the lane report names.
+	wantByRace := map[proto.Race]stats.Stats{
+		proto.Race_RaceOrc: {
+			stats.Agility:   -3,
+			stats.Strength:  3,
+			stats.Intellect: -3,
+			stats.Spirit:    3,
+			stats.Stamina:   2,
+		},
+		proto.Race_RaceDwarf: {
+			stats.Agility:   -4,
+			stats.Strength:  2,
+			stats.Intellect: -1,
+			stats.Spirit:    -1,
+			stats.Stamina:   3,
+		},
+		proto.Race_RaceNightElf: {
+			stats.Agility:  5,
+			stats.Strength: -3,
+			stats.Stamina:  -1,
+		},
+		proto.Race_RaceUndead: {
+			stats.Agility:   -2,
+			stats.Strength:  -1,
+			stats.Intellect: -2,
+			stats.Spirit:    5,
+			stats.Stamina:   1,
+		},
+		proto.Race_RaceTauren: {
+			stats.Agility:   -5,
+			stats.Strength:  5,
+			stats.Intellect: -5,
+			stats.Spirit:    2,
+			stats.Stamina:   2,
+		},
+		proto.Race_RaceGnome: {
+			stats.Agility:   3,
+			stats.Strength:  -5,
+			stats.Intellect: 3,
+			stats.Stamina:   -1,
+		},
+		proto.Race_RaceTroll: {
+			stats.Agility:   2,
+			stats.Strength:  1,
+			stats.Intellect: -4,
+			stats.Spirit:    1,
+			stats.Stamina:   1,
+		},
+	}
+	for race, want := range wantByRace {
+		if got := RaceOffsets[race]; got != want {
+			t.Errorf("RaceOffsets[%v] = %+v, want wowhead's %+v", race, got, want)
+		}
+	}
+}

@@ -42,7 +42,7 @@ func (cat *FeralDruid) doAoeRotation(sim *core.Simulation) (bool, time.Duration)
 
 	roarNow := curCp >= 1 && (!cat.SavageRoarAura.IsActive() || cat.clipRoar(sim))
 
-	nextFfEnergy := curEnergy + float64((cat.FaerieFire.TimeToReady(sim)+cat.latency)/core.EnergyTickDuration)
+	nextFfEnergy := curEnergy + core.EnergyForTime(cat.FaerieFire.TimeToReady(sim)+cat.latency)
 	waitForFf := (cat.FaerieFire.TimeToReady(sim) < time.Second-rotation.MaxFfDelay) && (nextFfEnergy < ffThresh) && !isClearcast
 
 	furorCap := min(20.0*float64(cat.Talents.Furor), 85)
@@ -110,19 +110,19 @@ func (cat *FeralDruid) doAoeRotation(sim *core.Simulation) (bool, time.Duration)
 				cat.SavageRoar.Cast(sim, nil)
 				return false, 0
 			}
-			timeToNextAction = time.Duration((cat.CurrentSavageRoarCost() - curEnergy) * float64(core.EnergyTickDuration))
+			timeToNextAction = core.TimeForEnergy(cat.CurrentSavageRoarCost() - curEnergy)
 		} else if mangleNow && !waitForFf {
 			if cat.MangleCat.CanCast(sim, cat.CurrentTarget) {
 				cat.MangleCat.Cast(sim, cat.CurrentTarget)
 				return false, 0
 			}
-			timeToNextAction = time.Duration((cat.CurrentMangleCatCost() - curEnergy) * float64(core.EnergyTickDuration))
+			timeToNextAction = core.TimeForEnergy(cat.CurrentMangleCatCost() - curEnergy)
 		} else if rakeNow && !waitForFf {
 			if cat.Rake.CanCast(sim, cat.CurrentTarget) {
 				cat.Rake.Cast(sim, cat.CurrentTarget)
 				return false, 0
 			}
-			timeToNextAction = time.Duration((cat.CurrentRakeCost() - curEnergy) * float64(core.EnergyTickDuration))
+			timeToNextAction = core.TimeForEnergy(cat.CurrentRakeCost() - curEnergy)
 		} else if flowershiftNow && curEnergy < 42 {
 			cat.readyToGift = true
 		} else {
@@ -130,7 +130,7 @@ func (cat *FeralDruid) doAoeRotation(sim *core.Simulation) (bool, time.Duration)
 				cat.SwipeCat.Cast(sim, cat.CurrentTarget)
 				return false, 0
 			}
-			timeToNextAction = time.Duration((cat.CurrentSwipeCatCost() - excessE) * float64(core.EnergyTickDuration))
+			timeToNextAction = core.TimeForEnergy(cat.CurrentSwipeCatCost() - excessE)
 		}
 	}
 

@@ -18,10 +18,11 @@ const (
 
 func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, raid *proto.Raid) {
 	if debuffs.JudgementOfWisdom && targetIdx == 0 {
-		jowAura := JudgementOfWisdomAura(target)
-		if jowAura != nil {
-			MakePermanent(jowAura)
-		}
+		MakePermanent(JudgementOfWisdomAura(target))
+	}
+
+	if debuffs.JudgementOfLight && targetIdx == 0 {
+		MakePermanent(JudgementOfLightAura(target))
 	}
 
 	if targetIdx == 0 {
@@ -276,9 +277,6 @@ func ExternalIsbCaster(_ *proto.Debuffs, target *Unit) {
 					for i := 0; i < int(isbConfig.isbWarlocks); i++ {
 						if sim.Proc(isbCrit, "External Isb Crit") {
 							isbAura.Activate(sim)
-							isbAura.SetStacks(sim, isbAura.MaxStacks)
-						} else if isbAura.IsActive() {
-							isbAura.RemoveStack(sim)
 						}
 					}
 				},
@@ -295,7 +293,6 @@ type IsbConfig struct {
 	shadowBoltFrequency float64
 	casterCrit          float64
 	isbWarlocks         int32
-	isbShadowPriests    int32
 }
 
 func (character *Character) createIsbConfig(player *proto.Player) {
@@ -303,7 +300,6 @@ func (character *Character) createIsbConfig(player *proto.Player) {
 		shadowBoltFrequency: player.IsbSbFrequency,
 		casterCrit:          player.IsbCrit,
 		isbWarlocks:         player.IsbWarlocks,
-		isbShadowPriests:    player.IsbSpriests,
 	}
 	//Defaults if not configured
 	if character.IsbConfig.shadowBoltFrequency == 0.0 {
@@ -317,9 +313,11 @@ func (character *Character) createIsbConfig(player *proto.Player) {
 	}
 }
 
-const (
-	ISBNumStacksBase = 4
-)
+// ImprovedShadowBoltDuration is the Shadow Vulnerability debuff's length:
+// SpellDuration index 29, 12000 ms, on spell 17794 (SpellMisc). The spell
+// has no SpellAuraOptions row, so it carries no proc charges: the bonus
+// lasts the full duration however many spells land.
+const ImprovedShadowBoltDuration = 12 * time.Second
 
 func ImprovedShadowBoltAura(unit *Unit, rank int32) *Aura {
 	isbLabel := "Improved Shadow Bolt"
@@ -327,56 +325,18 @@ func ImprovedShadowBoltAura(unit *Unit, rank int32) *Aura {
 		return unit.GetAura(isbLabel)
 	}
 
-	isbConfig := unit.Env.Raid.Parties[0].Players[0].GetCharacter().IsbConfig
-
-	priestGcds := []bool{false, true, true, true, true, true}
-	priestCurGcd := 0
-	externalShadowPriests := isbConfig.isbShadowPriests
-	var priestPa *PendingAction
-
 	damageMulti := 1. + 0.04*float64(rank)
-	aura := unit.GetOrRegisterAura(Aura{
-		Label:     isbLabel,
-		ActionID:  ActionID{SpellID: 17800},
-		Duration:  12 * time.Second,
-		MaxStacks: ISBNumStacksBase,
-		OnReset: func(aura *Aura, sim *Simulation) {
-			// External shadow priests simulation
-			if externalShadowPriests > 0 {
-				priestCurGcd = 0
-				priestPa = NewPeriodicAction(sim, PeriodicActionOptions{
-					Period: GCDDefault,
-					OnAction: func(s *Simulation) {
-						if priestGcds[priestCurGcd] {
-							for i := 0; i < int(externalShadowPriests); i++ {
-								if aura.IsActive() {
-									aura.RemoveStack(sim)
-								}
-							}
-						}
-						priestCurGcd++
-						if priestCurGcd >= len(priestGcds) {
-							priestCurGcd = 0
-						}
-					},
-				})
-				sim.AddPendingAction(priestPa)
-			}
-		},
+	return unit.GetOrRegisterAura(Aura{
+		Label:    isbLabel,
+		ActionID: ActionID{SpellID: 17800},
+		Duration: ImprovedShadowBoltDuration,
 		OnGain: func(aura *Aura, sim *Simulation) {
 			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow] *= damageMulti
 		},
 		OnExpire: func(aura *Aura, sim *Simulation) {
 			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow] /= damageMulti
 		},
-		OnSpellHitTaken: func(aura *Aura, sim *Simulation, spell *Spell, result *SpellResult) {
-			if spell.SpellSchool.Matches(SpellSchoolShadow) && result.Landed() && result.Damage > 0 {
-				aura.RemoveStack(sim)
-			}
-		},
 	})
-
-	return aura
 }
 
 var ShadowWeavingSpellIDs = [6]int32{0, 15257, 15331, 15332, 15333, 15334}
@@ -404,17 +364,47 @@ func SchedulePeriodicDebuffApplication(aura *Aura, options PeriodicActionOptions
 
 const JudgementAuraTag = "Judgement"
 
-// TODO: Classic verify logic
+// JudgementDuration is the length of every judgement debuff in the
+// 1.60.1.70009 client (duration index 31, 40000 ms, on spells 20185 to
+// 20355 and the Crusader's); vanilla remembered 10 seconds.
+const JudgementDuration = 40 * time.Second
+
+// JudgementProcChance is the chance a qualifying attack triggers a
+// Judgement of Wisdom or Light. Assumption, not a client row: the auras
+// state ProcChance 100 and the roll lives in the server's script (the
+// intermediate spells 1826 and 5373 are Effect 3, dummy), so this is
+// vanilla's 50%. The Improved Judgement of Light talent (23564) adds to it.
+const JudgementProcChance = 0.5
+
+// Judgement of Wisdom and Light amounts by the judging paladin's level.
+// SpellID is the judgement aura; Amount is the mana (Wisdom, energize
+// spells 20268 / 20352 / 20353) or the health (Light, heal spells 20267 /
+// 20341 / 20342 / 20343) one trigger returns. The raid-debuff form has no
+// paladin, so the rank is the one the attacker's own level could judge.
+var (
+	JudgementOfWisdomRanks = BuffRanks{
+		{SpellID: 20186, Level: 38, Amount: 33},
+		{SpellID: 20354, Level: 48, Amount: 46},
+		{SpellID: 20355, Level: 58, Amount: 59},
+	}
+	JudgementOfLightRanks = BuffRanks{
+		{SpellID: 20185, Level: 30, Amount: 25},
+		{SpellID: 20344, Level: 40, Amount: 34},
+		{SpellID: 20345, Level: 50, Amount: 49},
+		{SpellID: 20346, Level: 60, Amount: 61},
+	}
+)
+
+// JudgementOfWisdomAura is the debuff on the target: an attack or spell
+// used against it has a chance to return mana to the attacker.
 func JudgementOfWisdomAura(target *Unit) *Aura {
 	actionID := ActionID{SpellID: 20355}
-
-	jowMana := 59.0
 
 	return target.GetOrRegisterAura(Aura{
 		Label:    "Judgement of Wisdom",
 		ActionID: actionID,
 		Tag:      JudgementAuraTag,
-		Duration: time.Second * 10,
+		Duration: JudgementDuration,
 		OnSpellHitTaken: func(aura *Aura, sim *Simulation, spell *Spell, result *SpellResult) {
 			unit := spell.Unit
 			if !unit.HasManaBar() {
@@ -434,28 +424,42 @@ func JudgementOfWisdomAura(target *Unit) *Aura {
 				return
 			}
 
-			if sim.RandomFloat("jow") < 0.5 {
+			if sim.RandomFloat("jow") < JudgementProcChance {
 				if unit.JowManaMetrics == nil {
 					unit.JowManaMetrics = unit.NewManaMetrics(actionID)
 				}
-				// JoW returns flat mana
-				unit.AddMana(sim, jowMana, unit.JowManaMetrics)
+				unit.AddMana(sim, JudgementOfWisdomRanks.At(int(unit.Level)), unit.JowManaMetrics)
 			}
 		},
 	})
 }
 
+// JudgementOfLightAura is the debuff on the target: a melee attack that
+// lands on it has a chance to heal the attacker.
 func JudgementOfLightAura(target *Unit) *Aura {
-	actionID := ActionID{SpellID: 20271}
+	actionID := ActionID{SpellID: 20346}
 
 	return target.GetOrRegisterAura(Aura{
 		Label:    "Judgement of Light",
 		ActionID: actionID,
 		Tag:      JudgementAuraTag,
-		Duration: time.Second * 10,
+		Duration: JudgementDuration,
 		OnSpellHitTaken: func(aura *Aura, sim *Simulation, spell *Spell, result *SpellResult) {
-			if !spell.ProcMask.Matches(ProcMaskMelee) || !result.Landed() {
+			unit := spell.Unit
+			if !unit.HasHealthBar() || !spell.ProcMask.Matches(ProcMaskMelee) || !result.Landed() {
 				return
+			}
+			// A heal on a unit at full health changes nothing, so it is
+			// neither rolled nor recorded: a damage sim whose melee attackers
+			// are never hurt draws no random numbers for this debuff.
+			if unit.CurrentHealth() >= unit.MaxHealth() {
+				return
+			}
+			if sim.RandomFloat("jol") < JudgementProcChance {
+				if unit.JolHealthMetrics == nil {
+					unit.JolHealthMetrics = unit.NewHealthMetrics(actionID)
+				}
+				unit.GainHealth(sim, JudgementOfLightRanks.At(int(unit.Level)), unit.JolHealthMetrics)
 			}
 		},
 	})
@@ -472,7 +476,9 @@ func JudgementOfTheCrusaderAura(caster *Unit, target *Unit, mult float64, extraB
 		Label:    "Judgement of the Crusader",
 		ActionID: ActionID{SpellID: spellId},
 		Tag:      JudgementAuraTag,
-		Duration: 10 * time.Second,
+		// The client gives Judgement of the Crusader a 40 s debuff (spellconst
+		// duration_ms 40000 at every rank); vanilla remembered 10 s.
+		Duration: 40 * time.Second,
 
 		OnGain: func(aura *Aura, sim *Simulation) {
 			aura.Unit.PseudoStats.SchoolBonusDamageTaken[stats.SchoolIndexHoly] += bonus
@@ -491,20 +497,30 @@ func JudgementOfTheCrusaderAura(caster *Unit, target *Unit, mult float64, extraB
 	})
 }
 
+// CurseOfElementsAura is the raid-debuff form of the Forever curse at its top
+// rank (spellconst 1311680): every magic school takes 10% more damage and 75
+// resistance is removed (aura 87 and aura 22 over misc value 126).
 func CurseOfElementsAura(target *Unit) *Aura {
 	resistance := 75.0
 	dmgMod := 1.1
 
 	aura := target.GetOrRegisterAura(Aura{
-		Label:    "Curse of Elements",
+		Label: "Curse of Elements",
+		// Not the client's 1311680: the conformance report matches an aura on
+		// the target by the spell's sibling ids, and this permanent one would
+		// hide the castable curse's own five-minute duration.
 		ActionID: ActionID{SpellID: 11722},
 		Duration: time.Minute * 5,
 	})
-	spellSchoolDamageEffect(aura, stats.SchoolIndexFire, dmgMod, 0.0, false)
-	spellSchoolDamageEffect(aura, stats.SchoolIndexFrost, dmgMod, 0.0, false)
+	for _, school := range []stats.SchoolIndex{
+		stats.SchoolIndexArcane, stats.SchoolIndexFire, stats.SchoolIndexFrost,
+		stats.SchoolIndexHoly, stats.SchoolIndexNature, stats.SchoolIndexShadow,
+	} {
+		spellSchoolDamageEffect(aura, school, dmgMod, 0.0, false)
+	}
 
+	// One effect: it lowers every school's resistance at once.
 	spellSchoolResistanceEffect(aura, stats.SchoolIndexFire, resistance, 0.0, false)
-	spellSchoolResistanceEffect(aura, stats.SchoolIndexFrost, resistance, 0.0, false)
 
 	return aura
 }
@@ -638,16 +654,21 @@ func ImprovedScorchAura(target *Unit) *Aura {
 
 const SpellCritEffectCategory = "spellcritdebuff"
 
+// WintersChillMaxStacks is the most stacks a Winter's Chill debuff holds.
+const WintersChillMaxStacks = 5
+
+// WintersChillAura is Forever's Winter's Chill (1.60.1.70425): a stack
+// counter on the target that the applying mage's own Cone of Cold reads
+// ("increases the damage done by your Cone of Cold spell to the target
+// by 40%, stacking up to 5 times" - sim/mage/cone_of_cold.go). Vanilla's
+// 2% Frost crit taken a stack is gone from the text, so the aura itself
+// changes no number on the target.
 func WintersChillAura(target *Unit) *Aura {
 	aura := target.GetOrRegisterAura(Aura{
 		Label:     "Winter's Chill",
 		ActionID:  ActionID{SpellID: 28593},
 		Duration:  time.Second * 15,
-		MaxStacks: 5,
-		OnStacksChange: func(aura *Aura, sim *Simulation, oldStacks, newStacks int32) {
-			aura.Unit.PseudoStats.SchoolCritTakenChance[stats.SchoolIndexFrost] -= 0.02 * float64(oldStacks)
-			aura.Unit.PseudoStats.SchoolCritTakenChance[stats.SchoolIndexFrost] += 0.02 * float64(newStacks)
-		},
+		MaxStacks: WintersChillMaxStacks,
 	})
 
 	// effect = aura.NewExclusiveEffect(SpellCritEffectCategory, true, ExclusiveEffect{
@@ -748,21 +769,27 @@ func FaerieFireFeralAura(target *Unit) *Aura {
 }
 
 func faerieFireAuraInternal(target *Unit, label string, spellID int32) *Aura {
-	arPen := float64(505)
+	return MinorArmorReductionAura(target, label, spellID, 505, time.Second*40)
+}
 
+// MinorArmorReductionAura is an armor reduction in the minor category,
+// the one Faerie Fire takes: of the sources in it only the strongest
+// applies, and it stacks with the major category (Sunder Armor, Expose
+// Armor).
+func MinorArmorReductionAura(target *Unit, label string, spellID int32, armorReduction float64, duration time.Duration) *Aura {
 	aura := target.GetOrRegisterAura(Aura{
 		Label:    label,
 		ActionID: ActionID{SpellID: spellID},
-		Duration: time.Second * 40,
+		Duration: duration,
 	})
 
 	aura.NewExclusiveEffect(minorArmorReductionEffectCategory, true, ExclusiveEffect{
-		Priority: arPen,
+		Priority: armorReduction,
 		OnGain: func(ee *ExclusiveEffect, sim *Simulation) {
-			ee.Aura.Unit.AddStatDynamic(sim, stats.Armor, -arPen)
+			ee.Aura.Unit.AddStatDynamic(sim, stats.Armor, -armorReduction)
 		},
 		OnExpire: func(ee *ExclusiveEffect, sim *Simulation) {
-			ee.Aura.Unit.AddStatDynamic(sim, stats.Armor, arPen)
+			ee.Aura.Unit.AddStatDynamic(sim, stats.Armor, armorReduction)
 		},
 	})
 
@@ -791,15 +818,20 @@ func CurseOfWeaknessAura(target *Unit, points int32) *Aura {
 
 const HuntersMarkAuraTag = "HuntersMark"
 
+// HuntersMarkAura is the raid debuff: the top rank's 110 ranged attack power.
 func HuntersMarkAura(target *Unit, points int32) *Aura {
-	bonus := 110.0
+	return HuntersMarkAuraOfRank(target, 14325, 110, points)
+}
 
-	bonus *= 1 + 0.03*float64(points)
+// HuntersMarkAuraOfRank is the debuff a hunter's own Hunter's Mark rank
+// applies: spellID is that rank's spell, baseBonus its ranged attack power.
+func HuntersMarkAuraOfRank(target *Unit, spellID int32, baseBonus float64, points int32) *Aura {
+	bonus := baseBonus * (1 + 0.03*float64(points))
 
 	aura := target.GetOrRegisterAura(Aura{
 		Label:    "HuntersMark-" + strconv.Itoa(int(bonus)),
 		Tag:      HuntersMarkAuraTag,
-		ActionID: ActionID{SpellID: 14325},
+		ActionID: ActionID{SpellID: spellID},
 		Duration: time.Minute * 2,
 	})
 
@@ -870,15 +902,24 @@ var DemoralizingShoutLevel = [DemoralizingShoutRanks + 1]int{0, 14, 24, 34, 44, 
 
 func DemoralizingShoutAura(target *Unit, boomingVoicePts int32, impDemoShoutPts int32) *Aura {
 	rank := int32(5)
-	spellId := DemoralizingShoutSpellId[rank]
-	baseAPReduction := DemoralizingShoutBaseAP[rank]
+	return DemoralizingShoutAuraFor(target,
+		"DemoralizingShout-"+strconv.Itoa(int(impDemoShoutPts)),
+		DemoralizingShoutSpellId[rank],
+		math.Floor(DemoralizingShoutBaseAP[rank]*(1+0.08*float64(impDemoShoutPts))),
+		time.Duration(float64(time.Second*30)*(1+0.1*float64(boomingVoicePts))))
+}
 
+// DemoralizingShoutAuraFor is the attack power reduction a Demoralizing
+// Shout puts on a target, for an explicit label, spell id, reduction and
+// duration, so a caster that knows the client's own rank numbers (the
+// warrior spec) is not tied to rank 5's vanilla ones above.
+func DemoralizingShoutAuraFor(target *Unit, label string, spellID int32, apReduction float64, duration time.Duration) *Aura {
 	aura := target.GetOrRegisterAura(Aura{
-		Label:    "DemoralizingShout-" + strconv.Itoa(int(impDemoShoutPts)),
-		ActionID: ActionID{SpellID: spellId},
-		Duration: time.Duration(float64(time.Second*30) * (1 + 0.1*float64(boomingVoicePts))),
+		Label:    label,
+		ActionID: ActionID{SpellID: spellID},
+		Duration: duration,
 	})
-	apReductionEffect(aura, math.Floor(baseAPReduction*(1+0.08*float64(impDemoShoutPts))))
+	apReductionEffect(aura, apReduction)
 	return aura
 }
 

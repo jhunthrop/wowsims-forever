@@ -47,6 +47,7 @@ const (
 	Ironfoe                   = 11684
 	Bloodfist                 = 11744
 	FlameWrath                = 11809
+	SmokingHeartOfTheMountain = 11811
 	HandOfJustice             = 11815
 	LordGeneralsSword         = 11817
 	SecondWind                = 11819
@@ -167,6 +168,11 @@ const (
 	MarkOfTheChampionSpell     = 23207
 	MisplacedServoArm          = 23221
 	JomGabbar                  = 23570
+
+	// Forever's own enchanting-crafted "Heart of the Mountain" family
+	// (level-50 trinkets, not Vanilla items; data/builds/1.60.1.70009/items/*.json).
+	FrozenHeartOfTheMountain = 249469
+	MoltenHeartOfTheMountain = 249470
 )
 
 func init() {
@@ -233,8 +239,11 @@ func init() {
 	// Chance on hit: Increases Attack Power against Undead by 200 for 10 sec.
 	// 1 PPM from Armaments Discord
 	itemhelpers.CreateWeaponProcAura(ArgentAvenger, "Argent Avenger", 1.0, func(character *core.Character) *core.Aura {
+		// The pool, not the active prefix: the proc aura is built once,
+		// before the pull, and its OnGain mutates attack tables keyed
+		// by UnitIndex, so it means every undead in the fight.
 		matchingTargets := core.FilterSlice(
-			character.Env.Encounter.TargetUnits,
+			character.Env.Encounter.AllTargetUnits,
 			func(unit *core.Unit) bool { return unit.MobType == proto.MobType_MobTypeUndead },
 		)
 
@@ -301,9 +310,11 @@ func init() {
 	itemhelpers.CreateWeaponProcSpell(BarovianFamilySword, "Barovian Family Sword", 0.5, func(character *core.Character) *core.Spell {
 		actionID := core.ActionID{SpellID: 18652}
 
-		// Keep track of damage taken by each enemy
+		// Keep track of damage taken by each enemy. The pool, not the
+		// active prefix: the DoT can be on an add a target timeline
+		// brings in later, and its tally has to have a slot too.
 		enemyDamageTaken := map[int32]float64{}
-		for _, target := range character.Env.Encounter.TargetUnits {
+		for _, target := range character.Env.Encounter.AllTargetUnits {
 			enemyDamageTaken[target.UnitIndex] = 0
 		}
 
@@ -986,7 +997,7 @@ func init() {
 	core.NewItemEffect(Felstriker, func(agent core.Agent) {
 		character := agent.GetCharacter()
 
-		effectAura := character.NewTemporaryStatsAura("Felstriker", core.ActionID{SpellID: 16551}, stats.Stats{stats.MeleeCrit: 100 * core.CritRatingPerCritChance, stats.MeleeHit: 100 * core.MeleeHitRatingPerHitChance}, time.Second*3)
+		effectAura := character.NewTemporaryStatsAura("Felstriker", core.ActionID{SpellID: 16551}, stats.Stats{stats.Crit: 100 * core.CritRatingPerCritChance, stats.Hit: 100 * core.HitRatingPerHitChance}, time.Second*3)
 		procMask := character.GetProcMaskForItem(Felstriker)
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 			Name:              "Felstriker Trigger",
@@ -1690,7 +1701,8 @@ func init() {
 	// Chance on hit: Blasts up to 3 targets for 105 to 145 Nature damage.
 	// Estimated based on data from WoW Armaments Discord
 	itemhelpers.CreateWeaponProcSpell(MasterworkStormhammer, "Masterwork Stormhammer", 0.5, func(character *core.Character) *core.Spell {
-		maxHits := int(min(3, character.Env.GetNumTargets()))
+		// Pool-sized ceiling, live-bounded loop; see APLActionMultidot.
+		maxHits := min(3, len(character.Env.Encounter.AllTargetUnits))
 		return character.RegisterSpell(core.SpellConfig{
 			ActionID:         core.ActionID{SpellID: 463946},
 			SpellSchool:      core.SpellSchoolNature,
@@ -1699,7 +1711,8 @@ func init() {
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				for numHits := 0; numHits < maxHits; numHits++ {
+				hits := min(maxHits, len(sim.Encounter.TargetUnits))
+				for numHits := 0; numHits < hits; numHits++ {
 					spell.CalcAndDealDamage(sim, target, sim.Roll(105, 145), spell.OutcomeMagicHitAndCrit)
 					target = character.Env.NextTargetUnit(target)
 				}
@@ -1938,8 +1951,7 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=13505/runeblade-of-baron-rivendare
-	// Equip: Increases movement speed and life regeneration rate.
-	// TODO: Movement speed not implemented
+	// Equip: Increases movement speed by 8% and restores 60 health every 5 sec.
 	core.NewItemEffect(RunebladeOfBaronRivendare, func(agent core.Agent) {
 		character := agent.GetCharacter()
 		actionID := core.ActionID{SpellID: 17625}
@@ -1947,12 +1959,15 @@ func init() {
 		character.RegisterAura(core.Aura{
 			ActionID: actionID,
 			Label:    "Unholy Aura",
+			OnInit: func(aura *core.Aura, sim *core.Simulation) {
+				character.AddMoveSpeedModifier(&aura.ActionID, 1.08)
+			},
 			OnReset: func(aura *core.Aura, sim *core.Simulation) {
 				core.StartPeriodicAction(sim, core.PeriodicActionOptions{
 					Period:   time.Second * 5,
 					Priority: core.ActionPriorityAuto,
 					OnAction: func(sim *core.Simulation) {
-						character.GainHealth(sim, 20, healthMetrics)
+						character.GainHealth(sim, 60, healthMetrics)
 					},
 				})
 			},
@@ -2268,9 +2283,14 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=1728/teebus-blazing-longsword
-	// Chance on hit: Blasts a target for 150 Fire damage.
+	// Chance on hit: Blasts a target for 140 Fire damage.
+	// Forever's client links the item to spell 1300753 "Firebolt" through
+	// ItemXItemEffect/ItemEffect (TriggerType 2): one Effect 2 (school
+	// damage) of 140 base points, Fire school (SpellMisc SchoolMask 4), no
+	// coefficient. Vanilla's spell 18086 (150 on Wowhead, 182 in this
+	// client's own row for that id) is not the spell the item casts here.
 	// Chance on Hit Assumed: 1 PPM
-	itemhelpers.CreateWeaponCoHProcDamage(TeebusBlazingLongsword, "Teebu's Blazing Longsword", 1.0, 18086, core.SpellSchoolFire, 150, 0, 0, core.DefenseTypeMagic)
+	itemhelpers.CreateWeaponCoHProcDamage(TeebusBlazingLongsword, "Teebu's Blazing Longsword", 1.0, 1300753, core.SpellSchoolFire, 140, 0, 0, core.DefenseTypeMagic)
 
 	// https://www.wowhead.com/classic/item=13401/the-cruel-hand-of-timmy
 	// Chance on hit: Lowers all attributes of target by 15 for 1 min.
@@ -2330,7 +2350,8 @@ func init() {
 			return aura
 		})
 
-		results := make([]*core.SpellResult, min(4, character.Env.GetNumTargets()))
+		// Pool-sized ceiling, live-bounded loop; see APLActionMultidot.
+		results := make([]*core.SpellResult, min(4, len(character.Env.Encounter.AllTargetUnits)))
 
 		return character.GetOrRegisterSpell(core.SpellConfig{
 			ActionID:         core.ActionID{SpellID: 13532},
@@ -2340,11 +2361,12 @@ func init() {
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				for idx := range results {
+				numHits := min(len(results), len(sim.Encounter.TargetUnits))
+				for idx := 0; idx < numHits; idx++ {
 					results[idx] = spell.CalcDamage(sim, target, 7, spell.OutcomeMagicHitAndCrit)
 					target = character.Env.NextTargetUnit(target)
 				}
-				for _, result := range results {
+				for _, result := range results[:numHits] {
 					spell.DealDamage(sim, result)
 					if result.Landed() {
 						debuffAuras.Get(result.Target).Activate(sim)
@@ -2442,7 +2464,8 @@ func init() {
 			})
 		})
 
-		results := make([]*core.SpellResult, min(5, character.Env.GetNumTargets()))
+		// Pool-sized ceiling, live-bounded loop; see APLActionMultidot.
+		results := make([]*core.SpellResult, min(5, len(character.Env.Encounter.AllTargetUnits)))
 
 		bounceSpell := character.GetOrRegisterSpell(core.SpellConfig{
 			ActionID:    procActionID.WithTag(2),
@@ -2453,11 +2476,12 @@ func init() {
 			FlatThreatBonus:  126,
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				for idx := range results {
+				numHits := min(len(results), len(sim.Encounter.TargetUnits))
+				for idx := 0; idx < numHits; idx++ {
 					results[idx] = spell.CalcDamage(sim, target, 0, spell.OutcomeMagicHit)
 					target = sim.Environment.NextTargetUnit(target)
 				}
-				for _, result := range results {
+				for _, result := range results[:numHits] {
 					if result.Landed() {
 						debuffAuras[result.Target.Index].Activate(sim)
 					}
@@ -2620,7 +2644,7 @@ func init() {
 	///////////////////////////////////////////////////////////////////////////
 
 	// https://www.wowhead.com/classic/item=11832/burst-of-knowledge
-	// Use: Reduces mana cost of all spells by 100 for 10 sec. (5 Min Cooldown)
+	// Use: Reduces mana cost of all spells by 150 for 10 sec. (5 Min Cooldown)
 	core.NewItemEffect(BurstOfKnowledge, func(agent core.Agent) {
 		character := agent.GetCharacter()
 
@@ -2631,14 +2655,14 @@ func init() {
 			OnGain: func(aura *core.Aura, sim *core.Simulation) {
 				for _, spell := range aura.Unit.Spellbook {
 					if spell.Cost != nil && spell.Cost.CostType() == core.CostTypeMana {
-						spell.Cost.FlatModifier -= 100
+						spell.Cost.FlatModifier -= 150
 					}
 				}
 			},
 			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 				for _, spell := range aura.Unit.Spellbook {
 					if spell.Cost != nil && spell.Cost.CostType() == core.CostTypeMana {
-						spell.Cost.FlatModifier += 100
+						spell.Cost.FlatModifier += 150
 					}
 				}
 			},
@@ -2672,17 +2696,18 @@ func init() {
 	core.NewSimpleStatOffensiveTrinketEffect(DraconicInfusedEmblem, stats.Stats{stats.SpellDamage: 100, stats.HealingPower: 190}, time.Second*15, time.Second*90)
 
 	// https://www.wowhead.com/classic/item=19288/darkmoon-card-blue-dragon
-	// Equip: 2% chance on successful spellcast to allow 100% of your Mana regeneration to continue while casting for 15 sec.
+	// Equip: 2% chance on successful spellcast to increase your Spirit by 150 for 15 sec.
+	// Forever's Era client text (items/*.json, id 19288) is the Vanilla 1.12
+	// tooltip above. The engine previously implemented the Burning
+	// Crusade-era rework of this trinket ("100% of your Mana regeneration
+	// continues while casting"), which is a different item generation's
+	// effect, not Era's -- rewritten to the stat proc the client describes.
 	core.NewItemEffect(DarkmoonCardBlueDragon, func(agent core.Agent) {
 		character := agent.GetCharacter()
 
 		actionID := core.ActionID{SpellID: 23688}
 
-		procAura := character.GetOrRegisterAura(core.Aura{
-			Label:    "Aura of the Blue Dragon",
-			ActionID: actionID,
-			Duration: time.Second * 15,
-		}).AttachAdditivePseudoStatBuff(&character.PseudoStats.SpiritRegenRateCasting, 1)
+		procAura := character.NewTemporaryStatsAura("Aura of the Blue Dragon", actionID, stats.Stats{stats.Spirit: 150}, time.Second*15)
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 			Name:       "Aura of the Blue Dragon Trigger",
@@ -2830,7 +2855,7 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=22321/heart-of-wyrmthalak
-	// Equip: Chance to bathe your melee target in flames for 120 to 180 Fire damage.
+	// Equip: Melee and Ranged attacks have a chance to deal 120 to 180 Fire damage. Deals 3 times as much damage to Orcs (Orc multiplier not implemented -- see gap comment below).
 	// TODO: Proc rate assumed from a wowhead comment and needs testing
 	core.NewItemEffect(HeartOfWyrmthalak, func(agent core.Agent) {
 		character := agent.GetCharacter()
@@ -2842,6 +2867,12 @@ func init() {
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+				// Gap: client text also triples this damage vs Orcs, but the
+				// fork's proto.MobType enum (see NewMobTypeDamageEffect) has
+				// no MobTypeOrc value -- only broad creature categories
+				// (Orcs are MobTypeHumanoid along with every other humanoid
+				// race), so there is no way to key off "Orc" specifically
+				// without over-firing against all Humanoids. Not implemented.
 				spell.CalcAndDealDamage(sim, target, sim.Roll(120, 180), spell.OutcomeMagicHitAndCrit)
 			},
 		})
@@ -2849,7 +2880,7 @@ func init() {
 			Name:              "Heart of Wyrmthalak Trigger",
 			Callback:          core.CallbackOnSpellHitDealt,
 			Outcome:           core.OutcomeLanded,
-			ProcMask:          core.ProcMaskMelee,
+			ProcMask:          core.ProcMaskMeleeOrRanged,
 			SpellFlagsExclude: core.SpellFlagSuppressEquipProcs,
 			PPM:               0.4,
 			Handler: func(sim *core.Simulation, _ *core.Spell, result *core.SpellResult) {
@@ -2955,8 +2986,7 @@ func init() {
 
 	// https://www.wowhead.com/classic/item=19947/nat-pagles-broken-reel
 	core.NewSimpleStatOffensiveTrinketEffect(NatPaglesBrokenReel, stats.Stats{
-		stats.SpellHit: 10 * core.SpellHitRatingPerHitChance,
-		stats.MeleeHit: 10 * core.MeleeHitRatingPerHitChance,
+		stats.Hit: 10 * core.HitRatingPerHitChance,
 	}, time.Second*15, time.Second*90)
 
 	// https://www.wowhead.com/classic/item=19812/rune-of-the-dawn
@@ -3019,11 +3049,19 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=11819/second-wind
-	// Use: Restores 30 mana every 1 sec for 10 sec. (15 Min Cooldown)
+	// Use: Restores 63 mana every 1 sec for 10 sec. This effect is doubled in Mountainous areas. (15 Min Cooldown)
 	core.NewItemEffect(SecondWind, func(agent core.Agent) {
 		character := agent.GetCharacter()
 		actionID := core.ActionID{SpellID: 15604}
 		manaMetrics := character.NewManaMetrics(actionID)
+		manaPerTick := 63.0
+		// Biome read eagerly at registration, matching NewBiomeDamageEffect's
+		// approach in sim/core/item_effects.go: Environment.construct() wires
+		// each unit's Env and biome before initialize() runs item effects, so
+		// character.Biome() is safe to read here.
+		if character.Biome() == proto.Biome_BiomeMountain {
+			manaPerTick *= 2
+		}
 		spell := character.RegisterSpell(core.SpellConfig{
 			ActionID: actionID,
 			ProcMask: core.ProcMaskEmpty,
@@ -3039,7 +3077,7 @@ func init() {
 					NumTicks: 10,
 					Priority: core.ActionPriorityAuto,
 					OnAction: func(sim *core.Simulation) {
-						character.AddMana(sim, 30, manaMetrics)
+						character.AddMana(sim, manaPerTick, manaMetrics)
 					},
 				})
 			},
@@ -3468,8 +3506,8 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=1168/skullflame-shield
-	// Equip: When struck in combat has a 3% chance of stealing 35 life from target enemy. (Proc chance: 3%)
-	// Equip: When struck in combat has a 1% chance of dealing 75 to 125 Fire damage to all targets around you. (Proc chance: 1%)
+	// Equip: When struck in melee combat, has a 3% chance of stealing 270 life from target enemy. (Proc chance: 3%)
+	// Equip: When struck in combat has a 2% chance of dealing 115 Fire damage to all targets around you. (Proc chance: 2%)
 	core.NewItemEffect(SkullflameShield, func(agent core.Agent) {
 		character := agent.GetCharacter()
 
@@ -3487,7 +3525,7 @@ func init() {
 			BonusCoefficient: 1,
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				result := spell.CalcAndDealDamage(sim, target, 35, spell.OutcomeAlwaysHit)
+				result := spell.CalcAndDealDamage(sim, target, 270, spell.OutcomeAlwaysHit)
 				character.GainHealth(sim, result.Damage, healthMetrics)
 			},
 		})
@@ -3504,7 +3542,7 @@ func init() {
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				for _, aoeTarget := range sim.Encounter.TargetUnits {
-					spell.CalcAndDealDamage(sim, aoeTarget, sim.Roll(75, 125), spell.OutcomeMagicHit)
+					spell.CalcAndDealDamage(sim, aoeTarget, 115, spell.OutcomeMagicHit)
 				}
 			},
 		})
@@ -3525,7 +3563,7 @@ func init() {
 			Callback:   core.CallbackOnSpellHitTaken,
 			Outcome:    core.OutcomeLanded,
 			ProcMask:   core.ProcMaskMelee,
-			ProcChance: 0.01,
+			ProcChance: 0.02,
 			Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 				flamestrikeSpell.Cast(sim, spell.Unit)
 			},
@@ -3613,6 +3651,107 @@ func init() {
 			Type:  core.CooldownTypeDPS,
 		})
 	})
+
+	// Forever's own enchanting-crafted "Heart of the Mountain" family
+	// (level-50 trinkets; data/builds/1.60.1.70009/items/*.json ids
+	// 249469, 249470, 249473, and the reused Vanilla id 11811). Client spell
+	// data (raw/ItemXItemEffect.csv + raw/ItemEffect.csv) gives each Use its
+	// cooldown and backing spell; raw/SpellEffect.csv + raw/SpellDuration.csv
+	// confirm the base points and the 15/20 sec durations below.
+
+	// data/builds/1.60.1.70009/items/*.json, id 11811 ("Smoking Heart of the
+	// Mountain" -- reuses the Vanilla item=11811 id, but Forever's own
+	// client data (not Wowhead's Vanilla text, which was not consulted here)
+	// is authoritative: ItemEffect.csv row 235047 gives a 360000ms/6 min
+	// cooldown (no CategoryCoolDownMSec, so no biome-style shared category)
+	// and SpellID 1300752 ("Heart of the Mountain"); SpellEffect.csv gives
+	// 520 base points on Mod Resistance (misc value 1 = armor) and
+	// SpellDuration.csv index 18 is 20000ms.
+	// Use: "Increases armor by 520 for 20 sec." (6 Min Cooldown, no biome)
+	core.NewSimpleStatDefensiveTrinketEffect(SmokingHeartOfTheMountain, stats.Stats{stats.Armor: 520}, time.Second*20, time.Minute*6)
+
+	// data/builds/1.60.1.70009/items/*.json, id 249470 ("Molten Heart of the
+	// Mountain"). ItemEffect.csv row 213860: 300000ms/5 min cooldown,
+	// SpellID 1249113 ("Molten Fury"); SpellEffect.csv gives 55 base points
+	// on both Mod Attack Power and Mod Ranged Attack Power.
+	// Use: "Increase Attack Power by 55 for 15 sec. This effect is doubled
+	// in Volcanic areas."
+	core.NewItemEffect(MoltenHeartOfTheMountain, func(agent core.Agent) {
+		character := agent.GetCharacter()
+		apBonus := 55.0
+		// Biome read eagerly at registration, matching SecondWind's approach
+		// above: Environment.construct() wires each unit's Env and biome
+		// before initialize() runs item effects, so character.Biome() is
+		// safe to read here.
+		if character.Biome() == proto.Biome_BiomeVolcanic {
+			apBonus *= 2
+		}
+		registerCD := core.MakeTemporaryStatsOnUseCDRegistration(
+			"Molten Fury",
+			stats.Stats{stats.AttackPower: apBonus, stats.RangedAttackPower: apBonus},
+			time.Second*15,
+			core.SpellConfig{
+				ActionID: core.ActionID{SpellID: 1249113},
+				Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagOffensiveEquipment,
+			},
+			func(character *core.Character) core.Cooldown {
+				return core.Cooldown{Timer: character.NewTimer(), Duration: time.Minute * 5}
+			},
+			func(character *core.Character) core.Cooldown {
+				return core.Cooldown{Timer: character.GetOffensiveTrinketCD(), Duration: time.Second * 15}
+			},
+		)
+		registerCD(agent)
+	})
+
+	// data/builds/1.60.1.70009/items/*.json, id 249469 ("Frozen Heart of the
+	// Mountain"). The "+9 hit rating" half of the tooltip is a plain equip
+	// stat already carried by the item's own stats block, so no code is
+	// needed for it here. ItemEffect.csv row 213858: 300000ms/5 min
+	// cooldown, SpellID 1249110 ("Chthonic Power"); SpellEffect.csv gives 29
+	// base points on Frost (16) + Shadow (32) school mask 48.
+	// Use: "Increases Frost and Shadow spell damage done by up to 29 for 15
+	// sec. This effect is doubled in Snowy areas."
+	core.NewItemEffect(FrozenHeartOfTheMountain, func(agent core.Agent) {
+		character := agent.GetCharacter()
+		spellPowerBonus := 29.0
+		if character.Biome() == proto.Biome_BiomeSnow {
+			spellPowerBonus *= 2
+		}
+		registerCD := core.MakeTemporaryStatsOnUseCDRegistration(
+			"Chthonic Power",
+			stats.Stats{stats.FrostPower: spellPowerBonus, stats.ShadowPower: spellPowerBonus},
+			time.Second*15,
+			core.SpellConfig{
+				ActionID: core.ActionID{SpellID: 1249110},
+				Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagOffensiveEquipment,
+			},
+			func(character *core.Character) core.Cooldown {
+				return core.Cooldown{Timer: character.NewTimer(), Duration: time.Minute * 5}
+			},
+			func(character *core.Character) core.Cooldown {
+				return core.Cooldown{Timer: character.GetOffensiveTrinketCD(), Duration: time.Second * 15}
+			},
+		)
+		registerCD(agent)
+	})
+
+	// data/builds/1.60.1.70009/items/*.json, id 249473 ("Dormant Heart of
+	// the Mountain") is NOT implemented. Client text: "Your casts of
+	// $?s2060[Greater Heal]?s5185[Healing Touch]?s331[Healing Wave]?s635[Holy
+	// Light][Greater Heal, Healing Touch, Healing Wave, or Holy Light] in
+	// combat grant up to 40 increased healing and up to 13 increased damage
+	// for 15 sec." (an equip proc, SpellID 1249118 "Eternal Power", 100%
+	// proc chance on casting the class's named heal, triggering SpellID
+	// 1249119). Of the four named heals, this fork models none as a real,
+	// registered spell: priest's GreaterHeal is fully commented out
+	// (sim/priest/greater_heal.go), druid has no Healing Touch spell at all,
+	// shaman declares SpellCode_ShamanHealingWave and a HealingWave field
+	// but no registration function ever builds it, and paladin has no Holy
+	// Light spell at all (only comments referencing it on set bonuses). With
+	// no heal spell to hook CallbackOnSpellHitDealt/OnCastComplete against
+	// for any of the four classes, there is nothing to proc this trinket off
+	// of, so it is left unregistered rather than guessed at.
 
 	core.AddEffectsToTest = true
 }

@@ -23,21 +23,23 @@ func (druid *Druid) registerFaerieFireSpell() {
 		return core.FaerieFireAura(target)
 	})
 
-	if druid.InForm(Cat|Bear) && druid.Talents.FaerieFireFeral {
-		spellCode = SpellCode_DruidFaerieFireFeral
-		actionID = core.ActionID{SpellID: 17392}
-		manaCostOptions = core.ManaCostOptions{}
-		gcd = time.Second
-		ignoreHaste = true
-		formMask = Cat | Bear
-		cd = core.Cooldown{
-			Timer:    druid.NewTimer(),
-			Duration: time.Second * 6,
+	/*
+		if druid.InForm(Cat|Bear) && druid.Talents.FaerieFireFeral {
+			spellCode = SpellCode_DruidFaerieFireFeral
+			actionID = core.ActionID{SpellID: 17392}
+			manaCostOptions = core.ManaCostOptions{}
+			gcd = time.Second
+			ignoreHaste = true
+			formMask = Cat | Bear
+			cd = core.Cooldown{
+				Timer:    druid.NewTimer(),
+				Duration: time.Second * 6,
+			}
+			druid.FaerieFireAuras = druid.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
+				return core.FaerieFireFeralAura(target)
+			})
 		}
-		druid.FaerieFireAuras = druid.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-			return core.FaerieFireFeralAura(target)
-		})
-	}
+	*/
 	flags |= core.SpellFlagAPL | core.SpellFlagResetAttackSwing
 
 	druid.FaerieFire = druid.RegisterSpell(formMask, core.SpellConfig{
@@ -46,6 +48,11 @@ func (druid *Druid) registerFaerieFireSpell() {
 		SpellSchool: core.SpellSchoolNature,
 		ProcMask:    core.ProcMaskSpellDamage,
 		Flags:       flags,
+
+		// This file always registers the top (rank 4, id 9907) Faerie
+		// Fire; FaerieFireLevel[4] (constants_auto_gen.go) is that
+		// rank's required level, 54.
+		RequiredLevel: FaerieFireLevel[4],
 
 		ManaCost: manaCostOptions,
 		Cast: core.CastConfig{

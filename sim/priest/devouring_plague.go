@@ -7,19 +7,12 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-const DevouringPlagueRanks = 6
-
-var DevouringPlagueSpellId = [DevouringPlagueRanks + 1]int32{0, 2944, 19276, 19277, 19278, 19279, 19280}
-var DevouringPlagueBaseDamage = [DevouringPlagueRanks + 1]float64{0, 152, 272, 400, 544, 712, 904}
-var DevouringPlagueManaCost = [DevouringPlagueRanks + 1]float64{0, 215, 350, 495, 645, 810, 985}
-var DevouringPlagueLevel = [DevouringPlagueRanks + 1]int{0, 20, 28, 36, 44, 52, 60}
-
 func (priest *Priest) registerDevouringPlagueSpell() {
 	//TO DO: Implement race requirement
 	priest.DevouringPlague = make([]*core.Spell, DevouringPlagueRanks+1)
 	cdTimer := priest.NewTimer()
 
-	for rank := 1; rank < DevouringPlagueRanks; rank++ {
+	for rank := 1; rank <= DevouringPlagueRanks; rank++ {
 		config := priest.getDevouringPlagueConfig(rank, cdTimer)
 
 		if config.RequiredLevel <= int(priest.Level) {
@@ -30,22 +23,26 @@ func (priest *Priest) registerDevouringPlagueSpell() {
 
 func (priest *Priest) getDevouringPlagueConfig(rank int, cdTimer *core.Timer) core.SpellConfig {
 
-	var ticks int32 = 8
+	var ticks int32 = devouringPlagueTicks
 
 	spellId := DevouringPlagueSpellId[rank]
-	baseDotDamage := (DevouringPlagueBaseDamage[rank] / float64(ticks))
+	roll := priest.clientRoll(DevouringPlagueBaseDamage[rank], DevouringPlaguePointsPerLevel[rank], DevouringPlagueLevel[rank], DevouringPlagueMaxLevel[rank])
+	baseDotDamage := periodicTick(roll)
 	manaCost := DevouringPlagueManaCost[rank]
 	level := DevouringPlagueLevel[rank]
 
-	spellCoeff := 0.063
+	// The client's per-tick amount and its coefficient (a flat 0.1 on
+	// every rank, not Classic's 0.063) are the generated ladder's.
+	spellCoeff := DevouringPlagueSpellCoeff[rank]
 
 	return core.SpellConfig{
-		SpellCode:   SpellCode_PriestDevouringPlague,
-		ActionID:    core.ActionID{SpellID: spellId},
-		SpellSchool: core.SpellSchoolShadow,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       SpellFlagPriest | core.SpellFlagAPL | core.SpellFlagDisease | core.SpellFlagPureDot,
+		SpellCode:      SpellCode_PriestDevouringPlague,
+		ActionID:       core.ActionID{SpellID: spellId},
+		SpellSchool:    core.SpellSchoolShadow,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          SpellFlagPriest | core.SpellFlagAPL | core.SpellFlagDisease | core.SpellFlagPureDot,
+		ClassSpellMask: PriestSpellMaskDevouringPlague,
 
 		Rank:          rank,
 		RequiredLevel: level,
@@ -58,13 +55,19 @@ func (priest *Priest) getDevouringPlagueConfig(rank int, cdTimer *core.Timer) co
 				GCD: core.GCDDefault,
 			},
 			CD: core.Cooldown{
-				Timer:    cdTimer,
-				Duration: time.Minute * 3,
+				Timer: cdTimer,
+				// The client's category_cooldown_ms is 24000 for every rank
+				// since build 1.60.1.70425 (spellconst/priest.json; it was
+				// 60000 before, and 3 min in vanilla) - the conformance
+				// golden sim/core/testdata/conformance/priest.golden.md
+				// reads client->engine.
+				Duration: time.Second * 24,
 			},
 		},
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		ClientBaseDamage: roll,
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
@@ -74,12 +77,15 @@ func (priest *Priest) getDevouringPlagueConfig(rank int, cdTimer *core.Timer) co
 			NumberOfTicks:    ticks,
 			TickLength:       time.Second * 3,
 			BonusCoefficient: spellCoeff,
+			// Blizzard's 1 October 2026 notes: "Devouring Plague can
+			// crit". Each tick rolls the priest's spell crit.
+			CanCrit: true,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, baseDotDamage, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
+				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeMagicCritPerTick)
 			},
 		},
 

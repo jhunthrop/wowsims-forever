@@ -77,6 +77,14 @@ func (cat *FeralDruid) tryPowershift(sim *core.Simulation) {
 	}
 }
 
+// shiftingPowerFits is whether casting Shifting Power now would take its full
+// energy: the spell is learned, ready and affordable, and the bar has room.
+func (cat *FeralDruid) shiftingPowerFits(sim *core.Simulation) bool {
+	return cat.ShiftingPower != nil &&
+		cat.ShiftingPower.CanCast(sim, cat.CurrentTarget) &&
+		cat.CurrentEnergy()+druid.ShiftingPowerEnergy <= cat.MaxEnergy()
+}
+
 func (cat *FeralDruid) maxShifts() int32 {
 	return max(int32(cat.MaxMana()/cat.CatForm.DefaultCast.Cost), 0)
 }
@@ -201,9 +209,10 @@ func (cat *FeralDruid) doRotation(sim *core.Simulation) (bool, time.Duration) {
 	rotation := &cat.Rotation
 	curCp := cat.ComboPoints()
 	curEnergy := cat.CurrentEnergy()
-	nextEnergy := curEnergy + core.EnergyPerTick
-	nextTick := cat.NextEnergyTickAt()
-	timeToNextTick := nextTick - sim.CurrentTime
+	// Energy regenerates continuously; the rotation plans one poll step ahead.
+	timeToNextTick := core.EnergyPollInterval
+	nextEnergy := curEnergy + core.EnergyForTime(timeToNextTick)
+	nextTick := sim.CurrentTime + timeToNextTick
 	isClearcast := cat.ClearcastingAura.IsActive()
 	numShiftsToOom := cat.numShiftsRemaining()
 	fightDur := sim.GetRemainingDuration()
@@ -238,6 +247,13 @@ func (cat *FeralDruid) doRotation(sim *core.Simulation) (bool, time.Duration) {
 	}
 
 	shiftNow := ((nextEnergy < nextAbility.DefaultCast.Cost) || (timeToNextTick > rotation.MaxWaitTime)) && (fightDur > core.GCDDefault+cat.latency)
+
+	// Out of energy: Shifting Power is a better refill than a power-shift
+	// while it is ready and the whole 40 energy fits under the cap.
+	if shiftNow && cat.shiftingPowerFits(sim) {
+		cat.ShiftingPower.Cast(sim, cat.CurrentTarget)
+		return false, nextAction
+	}
 
 	if shiftNow && (poolMana || (numShiftsToOom == 0)) {
 		shiftNow = false
@@ -323,9 +339,9 @@ func (cat *FeralDruid) doRotation(sim *core.Simulation) (bool, time.Duration) {
 	// Additionally, don't Rake if there is insufficient time to max out
 	// our available glyph of shred extensions before rip falls off
 	if rakeNow && ripDot.IsActive() {
-		maxRipDur := time.Duration(cat.maxRipTicks) * ripDot.TickLength
-		remainingExt := cat.maxRipTicks - ripDot.NumberOfTicks
-		energyForShreds := curEnergy - cat.CurrentRakeCost() - 30 + float64((ripDot.StartedAt()+maxRipDur-sim.CurrentTime)/core.EnergyTickDuration) + core.Ternary(cat.tfExpectedBefore(sim, ripDot.StartedAt()+maxRipDur), 60.0, 0.0)
+		maxRipDur := time.Duration(druid.RipNumberOfTicks) * ripDot.TickLength
+		remainingExt := druid.RipNumberOfTicks - ripDot.NumberOfTicks
+		energyForShreds := curEnergy - cat.CurrentRakeCost() - 30 + core.EnergyForTime(ripDot.StartedAt()+maxRipDur-sim.CurrentTime) + core.Ternary(cat.tfExpectedBefore(sim, ripDot.StartedAt()+maxRipDur), 60.0, 0.0)
 		maxShredsPossible := min(energyForShreds/cat.Shred.DefaultCast.Cost, (ripDot.ExpiresAt() - (sim.CurrentTime + time.Second)).Seconds())
 		rakeNow = remainingExt == 0 || (maxShredsPossible > float64(remainingExt))
 	}
@@ -376,7 +392,7 @@ func (cat *FeralDruid) doRotation(sim *core.Simulation) (bool, time.Duration) {
 
 	// Additionally, block Shred and Rake casts if FF is coming off CD in
 	// less than a second (and we won't Energy cap by pooling).
-	nextFfEnergy := curEnergy + float64((cat.FaerieFire.TimeToReady(sim)+cat.latency)/core.EnergyTickDuration)
+	nextFfEnergy := curEnergy + core.EnergyForTime(cat.FaerieFire.TimeToReady(sim)+cat.latency)
 	waitForFf := (cat.FaerieFire.TimeToReady(sim) < time.Second-cat.Rotation.MaxFfDelay) && (nextFfEnergy < ffThresh) && !isClearcast && (!ripDot.IsActive() || ripDot.RemainingDuration(sim) > time.Second)
 
 	cat.ripRefreshPending = false
@@ -571,25 +587,25 @@ func (cat *FeralDruid) doRotation(sim *core.Simulation) (bool, time.Duration) {
 			cat.Rip.Cast(sim, cat.CurrentTarget)
 			return false, 0
 		}
-		timeToNextAction = time.Duration((cat.CurrentRipCost() - curEnergy) * float64(core.EnergyTickDuration))
+		timeToNextAction = core.TimeForEnergy(cat.CurrentRipCost() - curEnergy)
 	} else if biteNow {
 		if cat.FerociousBite.CanCast(sim, cat.CurrentTarget) {
 			cat.FerociousBite.Cast(sim, cat.CurrentTarget)
 			return false, 0
 		}
-		timeToNextAction = time.Duration((cat.CurrentFerociousBiteCost() - curEnergy) * float64(core.EnergyTickDuration))
+		timeToNextAction = core.TimeForEnergy(cat.CurrentFerociousBiteCost() - curEnergy)
 	} else if mangleNow && !waitForFf {
 		if cat.MangleCat.CanCast(sim, cat.CurrentTarget) {
 			cat.MangleCat.Cast(sim, cat.CurrentTarget)
 			return false, 0
 		}
-		timeToNextAction = time.Duration((cat.CurrentMangleCatCost() - curEnergy) * float64(core.EnergyTickDuration))
+		timeToNextAction = core.TimeForEnergy(cat.CurrentMangleCatCost() - curEnergy)
 	} else if rakeNow && !waitForFf {
 		if cat.Rake.CanCast(sim, cat.CurrentTarget) {
 			cat.Rake.Cast(sim, cat.CurrentTarget)
 			return false, 0
 		}
-		timeToNextAction = time.Duration((cat.CurrentRakeCost() - curEnergy) * float64(core.EnergyTickDuration))
+		timeToNextAction = core.TimeForEnergy(cat.CurrentRakeCost() - curEnergy)
 	} else if bearweaveNow {
 		cat.readyToShift = true
 	} else if flowershiftNow && curEnergy < 42 {
@@ -599,7 +615,7 @@ func (cat *FeralDruid) doRotation(sim *core.Simulation) (bool, time.Duration) {
 			cat.MangleCat.Cast(sim, cat.CurrentTarget)
 			return false, 0
 		}
-		timeToNextAction = time.Duration((cat.CurrentMangleCatCost() - excessE) * float64(core.EnergyTickDuration))
+		timeToNextAction = core.TimeForEnergy(cat.CurrentMangleCatCost() - excessE)
 	} else if !waitForFf {
 		if excessE >= cat.CurrentShredCost() || isClearcast {
 			cat.Shred.Cast(sim, cat.CurrentTarget)
@@ -612,7 +628,7 @@ func (cat *FeralDruid) doRotation(sim *core.Simulation) (bool, time.Duration) {
 			return false, 0
 		}
 
-		timeToNextAction = time.Duration((cat.CurrentShredCost() - excessE) * float64(core.EnergyTickDuration))
+		timeToNextAction = core.TimeForEnergy(cat.CurrentShredCost() - excessE)
 
 		// When Lacerateweaving, there are scenarios where Lacerate is
 		// synced with other pending actions. When this happens, pooling for
@@ -628,7 +644,7 @@ func (cat *FeralDruid) doRotation(sim *core.Simulation) (bool, time.Duration) {
 				cat.Shred.Cast(sim, cat.CurrentTarget)
 				return false, 0
 			}
-			timeToNextAction = time.Duration((cat.CurrentShredCost() - curEnergy) * float64(core.EnergyTickDuration))
+			timeToNextAction = core.TimeForEnergy(cat.CurrentShredCost() - curEnergy)
 		}
 	}
 

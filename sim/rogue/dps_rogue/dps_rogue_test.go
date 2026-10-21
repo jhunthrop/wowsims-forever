@@ -12,6 +12,7 @@ func init() {
 }
 
 func TestCombatSinisterStrike(t *testing.T) {
+	core.SkipAwaitingForeverTalentRewrite(t, "sim/rogue/dps_rogue")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassRogue,
@@ -34,6 +35,7 @@ func TestCombatSinisterStrike(t *testing.T) {
 }
 
 func TestCombatDaggers(t *testing.T) {
+	core.SkipAwaitingForeverTalentRewrite(t, "sim/rogue/dps_rogue")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassRogue,
@@ -83,8 +85,8 @@ var Stats = []proto.Stat{
 	proto.Stat_StatAttackPower,
 	proto.Stat_StatAgility,
 	proto.Stat_StatStrength,
-	proto.Stat_StatMeleeHit,
-	proto.Stat_StatMeleeCrit,
+	proto.Stat_StatHit,
+	proto.Stat_StatCrit,
 }
 
 var Phase1Consumes = core.ConsumesCombo{

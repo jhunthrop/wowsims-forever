@@ -43,8 +43,6 @@ func NewFeralDruid(character *core.Character, options *proto.Player) *FeralDruid
 		cat.SelfBuffs.InnervateTarget = feralOptions.Options.InnervateTarget
 	}
 
-	cat.maxRipTicks = druid.RipTicks
-
 	cat.EnableEnergyBar(100.0)
 	cat.EnableRageBar(core.RageBarOptions{DamageDealtMultiplier: 1, DamageTakenMultiplier: 1})
 
@@ -71,7 +69,6 @@ type FeralDruid struct {
 	missChance    float64
 	readyToShift  bool
 	latency       time.Duration
-	maxRipTicks   int32
 	bleedAura     *core.Aura
 	lastShift     time.Duration
 	poolingMana   bool

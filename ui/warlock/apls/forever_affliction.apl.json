@@ -1,0 +1,233 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 18288
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-5s"
+        }
+      }
+    }
+  ],
+  "priorityList": [
+    {
+      "notes": "Potion at the top of the fight if mana is already below 75 percent, or a mana gem below 60 percent, saved for the closing burn if the fight is nearly over.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "15s"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "75%"
+                    }
+                  }
+                }
+              },
+              {
+                "isExecutePhase": {
+                  "threshold": "E35"
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "otherId": "OtherActionPotion"
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "notes": "Life Tap to keep casting once mana runs low; health is not a concern with three DoTs and Drain Life available.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "10%"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11689,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Corruption is the cheapest DoT per damage and goes down first, then is kept up throughout.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 11672,
+                  "rank": 6
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11672,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Bane of Doom is the one curse kept up: it deals its whole damage when the minute is out, so recast it the moment it fires. Bane of Agony and Curse of the Elements both measured lower in the search.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 603
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 603
+          }
+        }
+      }
+    },
+    {
+      "notes": "Wrack (talent, learned at level 40) is an instant, no-cooldown 6 second DoT that also applies a 10% Shadow-damage-taken vulnerability to the target, so recast it in its last second to keep the vulnerability up without a gap.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "dotRemainingTime": {
+                "spellId": {
+                  "spellId": 1316697,
+                  "rank": 1
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "1s"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 1316697,
+            "rank": 1
+          }
+        }
+      }
+    },
+    {
+      "notes": "Immolate is kept up as a fourth DoT, recast when under 3 seconds remain: its damage over time is worth more than the Shadow Bolt it replaces for a global, and recasting in its last 3 seconds beats waiting for it to lapse.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "dotRemainingTime": {
+                "spellId": {
+                  "spellId": 11668,
+                  "rank": 7
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "3s"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11668,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shadow Bolt fills every remaining global while the DoTs run their course.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11661,
+            "rank": 9
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 5019
+          }
+        },
+        "condition": {
+          "cmp": {
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "op": "OpLt",
+            "rhs": {
+              "const": {
+                "val": "50%"
+              }
+            }
+          }
+        }
+      },
+      "notes": "Shoot with your wand once mana is under 50 percent: it costs nothing, so mana regenerates while it keeps damage going. Life Tap is only the backstop below 10 percent."
+    }
+  ]
+}

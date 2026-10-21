@@ -7,38 +7,52 @@ import (
 )
 
 func (warrior *Warrior) registerPummelSpell() {
-	damage := 50.0
+	rank := rankAtLevel(PummelLevel[:], warrior.Level)
+	damage := PummelDamage[rank]
+	casterLevel := int(warrior.Level)
+
+	castConfig := core.CastConfig{
+		DefaultCast: core.Cast{
+			// Rank 0 (level 20, the client's own lowest Pummel entry) is
+			// GCD-less (gcd_ms 0); ranks 1-2 take the standard GCD.
+			GCD: core.TernaryDuration(rank == 0, 0, core.GCDDefault),
+		},
+		IgnoreHaste: true,
+	}
+	// Rank 0 - a warrior below the lowest real PummelLevel entry (20) -
+	// carries a zero cooldown; guard as slam.go does.
+	if cooldownMS := PummelCooldownMS[rank]; cooldownMS > 0 {
+		castConfig.CD = core.Cooldown{
+			Timer:    warrior.NewTimer(),
+			Duration: time.Duration(cooldownMS) * time.Millisecond,
+		}
+	}
 
 	warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: 6554},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagBinary | SpellFlagOffensive,
+		ActionID:       core.ActionID{SpellID: PummelSpellId[rank]},
+		ClassSpellMask: WarriorSpellMaskPummel,
+		RequiredLevel:  PummelLevel[rank],
+		Rank:           rank,
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagBinary | SpellFlagOffensive,
 
 		RageCost: core.RageCostOptions{
-			Cost:   10,
+			Cost:   rageCost(PummelManaCost[rank]),
 			Refund: 0.8,
 		},
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-			IgnoreHaste: true,
-			CD: core.Cooldown{
-				Timer:    warrior.NewTimer(),
-				Duration: time.Second * 10,
-			},
-		},
+		Cast: castConfig,
 
 		CritDamageBonus: warrior.impale(),
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+			result := spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
 			if !result.Landed() {
 				spell.IssueRefund(sim)

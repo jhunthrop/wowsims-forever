@@ -7,6 +7,35 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
+// FOREVER: the client's trait trees replaced vanilla's, so some of the
+// talents this file reaches for no longer exist under these names, and
+// some changed their rank count and so their proto type. Their behaviour
+// is rewritten when this spec is brought up, in rankings-population order
+// (design section 2.3). Every site is commented rather than deleted, so
+// the diff shows a reviewer exactly what the old tree did, and each is
+// left reading the value an untalented character would have read - which
+// is what a talent nobody can now take is worth.
+
+// clampRank clamps a talent rank to that talent's own max rank (the
+// client's node data, data/builds/1.60.1.70009/talents/druid.json). This
+// mirrors sim/mage/talents.go's identical rankOf/rankIndex helpers and
+// the same root cause: core.FillTalentsProto does not validate a talent
+// string against the client's max rank per node (sim/core/character.go),
+// so a string with more points in a talent than the node allows (a
+// hand-edited or stale one - this package's own balance_test.go
+// P1Talents fixture over-ranks Nature's Majesty and Nature's Reach
+// today) would otherwise read a bonus several multiples too large, or,
+// for Eclipse's fixed-size lookup table below, panic.
+func clampRank(rank int32, maxRank int32) int32 {
+	if rank > maxRank {
+		return maxRank
+	}
+	if rank < 0 {
+		return 0
+	}
+	return rank
+}
+
 func (druid *Druid) ApplyTalents() {
 	// Balance
 	druid.registerMoonkinFormSpell()
@@ -15,85 +44,113 @@ func (druid *Druid) ApplyTalents() {
 	druid.applyVengeance()
 	druid.applyNaturesGrace()
 	druid.applyMoonglow()
+	druid.applyImprovedWrath()
 	druid.applyMoonfury()
+	druid.applyGenesis()
+	druid.applyNaturesMajesty()
+	druid.applyNaturesReach()
+	druid.applyNaturesSplendor()
+	druid.applyEclipse()
+	druid.registerNaturesSwiftnessCD()
+	druid.applyNaturalist()
+	druid.applyLivingSpirit()
 
-	druid.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + 0.02*float64(druid.Talents.NaturalWeapons)
+	/*
+		druid.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + 0.02*float64(druid.Talents.NaturalWeapons)
+	*/
+
+	// Improved Entangling Roots (node 104926, 3 ranks) buffs a damage
+	// and victim-damage-threshold effect on Entangling Roots, and
+	// Overgrowth (node 110844, 2 ranks) raises its target cap.
+	// Entangling Roots is a crowd-control spell this package does not
+	// register, so neither changes a number here.
+	_, _ = druid.Talents.ImprovedEntanglingRoots, druid.Talents.Overgrowth
 
 	// Feral
 	druid.applyBloodFrenzy()
+	druid.applyNaturalInstinct()
+	druid.registerBerserkCD()
 
-	druid.ApplyEquipScaling(stats.Armor, druid.ThickHideMultiplier())
+	druid.applyHeartOfTheWildIntellect()
 
-	if druid.Talents.HeartOfTheWild > 0 {
-		bonus := 0.04 * float64(druid.Talents.HeartOfTheWild)
-		druid.MultiplyStat(stats.Intellect, 1.0+bonus)
-	}
+	druid.applyFeralDodge()
+	druid.applyNaturalReaction()
+
+	// Feral Instinct (swipe.go), Brutal Impact (Bash stun duration and
+	// cooldown: a crowd-control ability the tank sim has no fight use
+	// for), Feral Charge (a gap closer), Shredding Attacks, Ferocity and
+	// Savage Fury (read by the abilities they discount) are accounted for
+	// in the ability files.
+	_, _ = druid.Talents.BrutalImpact, druid.Talents.FeralCharge
 
 	// Restoration
 	druid.applyFuror()
 
-	druid.PseudoStats.SpiritRegenRateCasting += .05 * float64(druid.Talents.Reflection)
+	druid.applyReflection()
+
+	// Nature's Focus (node 104957): a 14/28/42/56/70% chance to avoid
+	// pushback on Arcane/Nature casts from taking damage. core/cast.go
+	// models pushback, but (mirroring sim/mage/talents.go's identical
+	// note on Improved Channeling) nothing in this sim's Patchwerk-style
+	// fights interrupts a casting druid's own cast with incoming
+	// damage, so avoiding it changes no number here.
+	_ = druid.Talents.NaturesFocus
+
+	// Subtlety (node 104920): -10/20/30% threat from Nature and Arcane
+	// spells. Threat, not damage, mana or a cooldown.
+	_ = druid.Talents.Subtlety
+
+	druid.applyGiftOfNature()
+	druid.applyGiftOfTheEarthmother()
+	druid.applyTranquilSpirit()
+	druid.applyImprovedRejuvenation()
+	druid.applyImprovedTranquility()
+	druid.applyImprovedRegrowth()
+	// Swiftmend and Wild Growth are the spells their talents grant; they
+	// register in RegisterHealingSpells (swiftmend.go, wild_growth.go).
 }
 
-func (druid *Druid) ThickHideMultiplier() float64 {
-	thickHideMulti := 1.0
+// naturesSplendorRegrowthTicks is Nature's Splendor's 6 sec on Regrowth in
+// its 3 sec ticks.
+const naturesSplendorRegrowthTicks = 2
 
-	if druid.Talents.ThickHide > 0 {
-		thickHideMulti += 0.04 + 0.03*float64(druid.Talents.ThickHide-1)
-	}
+// naturesGraceCastSpeed is Nature's Grace's proc (spell 16886): "Casting
+// speed increased by 10% and global cooldown reduced by 10%" for 3 sec.
+const (
+	naturesGraceCastSpeed = 1.10
+	naturesGraceDuration  = 3 * time.Second
+)
 
-	return thickHideMulti
-}
+// naturesGraceGlobalCooldownCut is 10% of the 1.5 s global cooldown.
+const naturesGraceGlobalCooldownCut = 150 * time.Millisecond
 
-func (druid *Druid) BearArmorMultiplier() float64 {
-	sotfMulti := 1.0 + 0.33/3.0
-	return 4.7 * sotfMulti
-}
-
+// applyNaturesGrace implements Nature's Grace (node 104934, bool):
+// "All non-periodic spell criticals grace you with a blessing of nature,
+// increasing your spellcasting speed and reducing your global cooldown by
+// 10% for 3 sec." The Classic version this replaced took a flat 0.5 s off
+// the next cast's time for 15 s and ended on that cast.
 func (druid *Druid) applyNaturesGrace() {
 	if !druid.Talents.NaturesGrace {
 		return
 	}
 
-	affectedSpells := []*DruidSpell{}
-	druid.NaturesGraceProcAura = druid.RegisterAura(core.Aura{
-		Label:     "Natures Grace Proc",
-		ActionID:  core.ActionID{SpellID: 16886},
-		Duration:  time.Second * 15,
-		MaxStacks: 1,
-		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			affectedSpells = core.FilterSlice(druid.DruidSpells, func(ds *DruidSpell) bool {
-				return ds.DefaultCast.CastTime > 0
-			})
-		},
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			for _, spell := range affectedSpells {
-				spell.DefaultCast.CastTime -= time.Millisecond * 500
+	globalCooldownMod := druid.AddDynamicMod(core.SpellModConfig{
+		Kind:      core.SpellMod_GlobalCooldown_Flat,
+		ClassMask: DruidSpellMaskBalanceDamage,
+		TimeValue: -naturesGraceGlobalCooldownCut,
+	})
 
-				if spell.SpellCode == SpellCode_DruidWrath {
-					spell.DefaultCast.GCD -= time.Millisecond * 500
-				}
-			}
+	druid.NaturesGraceProcAura = druid.RegisterAura(core.Aura{
+		Label:    "Natures Grace Proc",
+		ActionID: core.ActionID{SpellID: 16886},
+		Duration: naturesGraceDuration,
+		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+			druid.MultiplyCastSpeed(naturesGraceCastSpeed)
+			globalCooldownMod.Activate()
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			for _, spell := range affectedSpells {
-				spell.DefaultCast.CastTime += time.Millisecond * 500
-
-				if spell.SpellCode == SpellCode_DruidWrath {
-					spell.DefaultCast.GCD += time.Millisecond * 500
-				}
-			}
-		},
-		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			// OnCastComplete is called after OnSpellHitDealt / etc, so don't deactivate if it was just activated.
-			if aura.RemainingDuration(sim) == aura.Duration {
-				return
-			}
-
-			// Make sure the aura actually applied to the spell being cast before deactivating
-			if spell.CurCast.CastTime > 0 && (sim.CurrentTime-spell.CurCast.CastTime >= aura.StartedAt()) {
-				aura.Deactivate(sim)
-			}
+			druid.MultiplyCastSpeed(1 / naturesGraceCastSpeed)
+			globalCooldownMod.Deactivate()
 		},
 	})
 
@@ -103,134 +160,128 @@ func (druid *Druid) applyNaturesGrace() {
 			// Spells with travel times have their own implementation because the proc occurs as the cast finishes
 			if spell.MissileSpeed == 0 && spell.ProcMask.Matches(core.ProcMaskSpellDamage) && result.DidCrit() {
 				druid.NaturesGraceProcAura.Activate(sim)
-				druid.NaturesGraceProcAura.SetStacks(sim, druid.NaturesGraceProcAura.MaxStacks)
 			}
 		},
 	}))
 }
 
-// func (druid *Druid) registerNaturesSwiftnessCD() {
-// 	if !druid.Talents.NaturesSwiftness {
-// 		return
-// 	}
-// 	actionID := core.ActionID{SpellID: 17116}
+// registerNaturesSwiftnessCD implements Nature's Swiftness (node 104921,
+// bool, proto field NaturesSwiftness): "When activated, your next
+// Nature spell becomes an instant cast spell." The Nature spells with a
+// cast time are Wrath (Starfire and Moonfire are Arcane) and the two cast-time
+// heals, Healing Touch and Regrowth - DruidSpellMaskNatureCasts.
+func (druid *Druid) registerNaturesSwiftnessCD() {
+	if !druid.Talents.NaturesSwiftness {
+		return
+	}
+	actionID := core.ActionID{SpellID: 17116}
 
-// 	var nsAura *core.Aura
-// 	nsSpell := druid.RegisterSpell(Humanoid|Moonkin|Tree, core.SpellConfig{
-// 		ActionID: actionID,
-// 		Flags:    core.SpellFlagNoOnCastComplete,
-// 		Cast: core.CastConfig{
-// 			CD: core.Cooldown{
-// 				Timer:    druid.NewTimer(),
-// 				Duration: time.Minute * 3,
-// 			},
-// 		},
-// 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-// 			nsAura.Activate(sim)
-// 		},
-// 	})
+	var affectedSpells []*core.Spell
+	var nsSpell *DruidSpell
+	nsAura := druid.RegisterAura(core.Aura{
+		Label:    "Natures Swiftness",
+		ActionID: actionID,
+		Duration: core.NeverExpires,
+		OnInit: func(aura *core.Aura, sim *core.Simulation) {
+			affectedSpells = core.FilterSlice(druid.Spellbook, func(spell *core.Spell) bool {
+				return spell.Matches(DruidSpellMaskNatureCasts)
+			})
+		},
+		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+			for _, spell := range affectedSpells {
+				spell.CastTimeMultiplier -= 1
+			}
+		},
+		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+			for _, spell := range affectedSpells {
+				spell.CastTimeMultiplier += 1
+			}
+		},
+		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
+			if !spell.Matches(DruidSpellMaskNatureCasts) {
+				return
+			}
 
-// 	nsAura = druid.RegisterAura(core.Aura{
-// 		Label:    "Natures Swiftness",
-// 		ActionID: actionID,
-// 		Duration: core.NeverExpires,
-// 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-// 			if druid.Starfire != nil {
-// 				druid.Starfire.CastTimeMultiplier -= 1
-// 			}
-// 			if druid.Wrath != nil {
-// 				druid.Wrath.CastTimeMultiplier -= 1
-// 			}
-// 		},
-// 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-// 			if druid.Starfire != nil {
-// 				druid.Starfire.CastTimeMultiplier += 1
-// 			}
-// 			if druid.Wrath != nil {
-// 				druid.Wrath.CastTimeMultiplier += 1
-// 			}
-// 		},
-// 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-// 			if !druid.Wrath.IsEqual(spell) && !druid.Starfire.IsEqual(spell) {
-// 				return
-// 			}
+			// Remove the buff and put the cooldown back up.
+			aura.Deactivate(sim)
+			nsSpell.CD.Use(sim)
+			druid.UpdateMajorCooldowns()
+		},
+	})
 
-// 			// Remove the buff and put skill on CD
-// 			aura.Deactivate(sim)
-// 			nsSpell.CD.Use(sim)
-// 			druid.UpdateMajorCooldowns()
-// 		},
-// 	})
+	nsSpell = druid.RegisterSpell(Humanoid|Moonkin, core.SpellConfig{
+		ActionID: actionID,
+		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
+		// Every client id for "Nature's Swiftness" (17116, 29274) is
+		// spell_level 1; NatureSSwiftnessLevel[0] (constants_auto_gen.go)
+		// reads the same.
+		RequiredLevel: NatureSSwiftnessLevel[0],
+		Cast: core.CastConfig{
+			CD: core.Cooldown{
+				Timer:    druid.NewTimer(),
+				Duration: time.Minute * 3,
+			},
+		},
+		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+			nsAura.Activate(sim)
+		},
+	})
+	druid.NaturesSwiftness = nsSpell
 
-// 	druid.AddMajorCooldown(core.MajorCooldown{
-// 		Spell: nsSpell.Spell,
-// 		Type:  core.CooldownTypeDPS,
-// 		ShouldActivate: func(sim *core.Simulation, character *core.Character) bool {
-// 			// Don't use NS unless we're casting a full-length starfire or wrath.
-// 			return !character.HasTemporarySpellCastSpeedIncrease()
-// 		},
-// 	})
-// }
+	druid.AddMajorCooldown(core.MajorCooldown{
+		Spell: nsSpell.Spell,
+		Type:  core.CooldownTypeDPS,
+		ShouldActivate: func(sim *core.Simulation, character *core.Character) bool {
+			// A healer's rotation casts it by hand, ahead of the emergency
+			// heal it makes instant.
+			if druid.CastsNaturesSwiftnessByHand {
+				return false
+			}
+			// Don't use NS unless we're casting a full-length Wrath.
+			return !character.HasTemporarySpellCastSpeedIncrease()
+		},
+	})
+}
 
-// TODO: Classic bear
-// func (druid *Druid) applyPrimalFury() {
-// 	if druid.Talents.PrimalFury == 0 {
-// 		return
-// 	}
-
-// 	procChance := []float64{0, 0.5, 1}[druid.Talents.PrimalFury]
-// 	actionID := core.ActionID{SpellID: 37117}
-// 	rageMetrics := druid.NewRageMetrics(actionID)
-// 	cpMetrics := druid.NewComboPointMetrics(actionID)
-
-// 	druid.RegisterAura(core.Aura{
-// 		Label:    "Primal Fury",
-// 		Duration: core.NeverExpires,
-// 		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-// 			aura.Activate(sim)
-// 		},
-// 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-// 			if druid.InForm(Bear) {
-// 				if result.Outcome.Matches(core.OutcomeCrit) {
-// 					if sim.Proc(procChance, "Primal Fury") {
-// 						druid.AddRage(sim, 5, rageMetrics)
-// 					}
-// 				}
-// 			} else if druid.InForm(Cat) {
-// 				if druid.IsMangle(spell) || druid.Shred.IsEqual(spell) || druid.Rake.IsEqual(spell) {
-// 					if result.Outcome.Matches(core.OutcomeCrit) {
-// 						if sim.Proc(procChance, "Primal Fury") {
-// 							druid.AddComboPoints(sim, 1, cpMetrics)
-// 						}
-// 					}
-// 				}
-// 			}
-// 		},
-// 	})
-// }
-
+// applyBloodFrenzy implements Blood Frenzy (node 104947, proto field
+// BloodFrenzy). Client text: "Gives you a 50/100% chance to gain an
+// additional 5 Rage any time you get a critical strike while in Bear
+// Form or Dire Bear Form. In addition, your non-periodic critical
+// strikes from Cat Form abilities that generate Combo Points have a
+// 50/100% chance to add an additional Combo Point." A bear's melee crit
+// (auto-attack or ability) pays the rage; a cat's builder crit pays the
+// combo point.
 func (druid *Druid) applyBloodFrenzy() {
 	if druid.Talents.BloodFrenzy == 0 {
 		return
 	}
 
-	procChance := []float64{0, 0.5, 1}[druid.Talents.BloodFrenzy]
-	actionID := core.ActionID{SpellID: 16953}
-	cpMetrics := druid.NewComboPointMetrics(actionID)
+	rank := clampRank(druid.Talents.BloodFrenzy, 2)
+	procChance := 0.5 * float64(rank)
+	rageMetrics := druid.NewRageMetrics(core.ActionID{SpellID: 16958})
 
 	core.MakePermanent(druid.RegisterAura(core.Aura{
 		Label: "Blood Frenzy",
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if druid.InForm(Cat) &&
-				result.Target == aura.Unit.CurrentTarget &&
-				spell.Flags.Matches(SpellFlagBuilder) &&
-				result.Outcome.Matches(core.OutcomeCrit) &&
-				sim.Proc(procChance, "Blood Frenzy") {
-				druid.AddComboPoints(sim, 1, result.Target, cpMetrics)
+			if !result.Outcome.Matches(core.OutcomeCrit) {
+				return
+			}
+			switch {
+			case druid.InForm(Bear) && spell.ProcMask.Matches(core.ProcMaskMelee):
+				if sim.Proc(procChance, "Blood Frenzy") {
+					druid.AddRage(sim, bloodFrenzyRage, rageMetrics)
+				}
+			case druid.InForm(Cat) && spell.Flags.Matches(SpellFlagBuilder):
+				if sim.Proc(procChance, "Blood Frenzy") {
+					druid.AddComboPoints(sim, 1, result.Target, spell.ComboPointMetrics())
+				}
 			}
 		},
 	}))
 }
+
+// bloodFrenzyRage is the "additional 5 Rage" of a bear's critical strike.
+const bloodFrenzyRage = 5.0
 
 // We're using an aura so that the APL can know if the Druid has furor for powershifting logic
 func (druid *Druid) applyFuror() {
@@ -251,91 +302,83 @@ func (druid *Druid) applyFuror() {
 }
 
 func (druid *Druid) applyOmenOfClarity() {
-	if !druid.Talents.OmenOfClarity {
-		return
-	}
+	/*
+		if !druid.Talents.OmenOfClarity {
+			return
+		}
 
-	var affectedSpells []*core.Spell
-	druid.ClearcastingAura = druid.RegisterAura(core.Aura{
-		Label:    "Clearcasting",
-		ActionID: core.ActionID{SpellID: 16870},
-		Duration: time.Second * 15,
-		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			affectedSpells = core.FilterSlice(druid.Spellbook, func(spell *core.Spell) bool { return spell.Flags.Matches(SpellFlagOmen) })
-		},
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			for _, spell := range affectedSpells {
-				spell.Cost.Multiplier -= 100
-			}
-		},
-		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			for _, spell := range affectedSpells {
-				spell.Cost.Multiplier += 100
-			}
-		},
-		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			// OnCastComplete is called after OnSpellHitDealt / etc, so don't deactivate if it was just activated.
-			if aura.RemainingDuration(sim) == aura.Duration {
-				return
-			}
+		var affectedSpells []*core.Spell
+		druid.ClearcastingAura = druid.RegisterAura(core.Aura{
+			Label:    "Clearcasting",
+			ActionID: core.ActionID{SpellID: 16870},
+			Duration: time.Second * 15,
+			OnInit: func(aura *core.Aura, sim *core.Simulation) {
+				affectedSpells = core.FilterSlice(druid.Spellbook, func(spell *core.Spell) bool { return spell.Flags.Matches(SpellFlagOmen) })
+			},
+			OnGain: func(aura *core.Aura, sim *core.Simulation) {
+				for _, spell := range affectedSpells {
+					spell.Cost.Multiplier -= 100
+				}
+			},
+			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+				for _, spell := range affectedSpells {
+					spell.Cost.Multiplier += 100
+				}
+			},
+			OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
+				// OnCastComplete is called after OnSpellHitDealt / etc, so don't deactivate if it was just activated.
+				if aura.RemainingDuration(sim) == aura.Duration {
+					return
+				}
 
-			if spell.Flags.Matches(SpellFlagOmen) && spell.DefaultCast.Cost > 0 {
-				aura.Deactivate(sim)
-			}
-		},
-	})
+				if spell.Flags.Matches(SpellFlagOmen) && spell.DefaultCast.Cost > 0 {
+					aura.Deactivate(sim)
+				}
+			},
+		})
 
-	ppmm := druid.AutoAttacks.NewPPMManager(2.0, core.ProcMaskMelee)
-	icd := core.Cooldown{
-		Timer:    druid.NewTimer(),
-		Duration: time.Second * 10,
-	}
+		ppmm := druid.AutoAttacks.NewPPMManager(2.0, core.ProcMaskMelee)
+		icd := core.Cooldown{
+			Timer:    druid.NewTimer(),
+			Duration: time.Second * 10,
+		}
 
-	druid.RegisterAura(core.Aura{
-		Label:    "Omen of Clarity",
-		Duration: core.NeverExpires,
-		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Activate(sim)
-		},
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !result.Landed() || !icd.IsReady(sim) {
-				return
-			}
-			// TODO: Phase 3 "and non-instant spell casts" but we need to find out how the procs work for those
-			if spell.ProcMask.Matches(core.ProcMaskMelee) && ppmm.ProcWithWeaponSpecials(sim, spell.ProcMask, "Omen of Clarity") {
-				icd.Use(sim)
-				druid.ClearcastingAura.Activate(sim)
-			}
-		},
-	})
+		druid.RegisterAura(core.Aura{
+			Label:    "Omen of Clarity",
+			Duration: core.NeverExpires,
+			OnReset: func(aura *core.Aura, sim *core.Simulation) {
+				aura.Activate(sim)
+			},
+			OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+				if !result.Landed() || !icd.IsReady(sim) {
+					return
+				}
+				// TODO: Phase 3 "and non-instant spell casts" but we need to find out how the procs work for those
+				if spell.ProcMask.Matches(core.ProcMaskMelee) && ppmm.ProcWithWeaponSpecials(sim, spell.ProcMask, "Omen of Clarity") {
+					icd.Use(sim)
+					druid.ClearcastingAura.Activate(sim)
+				}
+			},
+		})
+	*/
 }
 
+// moonfuryDamagePerRank is Moonfury's 2% a rank (node 104936, five ranks).
+const moonfuryDamagePerRank = 0.02
+
+// applyMoonfury implements Moonfury: "Increases the damage done by your
+// Arcane and Nature spells by 2%" per rank. The client's spell (16896) is
+// a school-damage aura, so it is a multiplier on both schools rather than
+// an additive bonus on a list of spells: that list left out Insect Swarm,
+// and made the bonus add with Improved Moonfire's instead of multiplying.
 func (druid *Druid) applyMoonfury() {
 	if druid.Talents.Moonfury == 0 {
 		return
 	}
 
-	multiplier := 0.02 * float64(druid.Talents.Moonfury)
-
-	druid.RegisterAura(core.Aura{
-		Label: "Moonfury",
-		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			affectedSpells := core.FilterSlice(
-				core.Flatten(
-					[][]*DruidSpell{
-						druid.Wrath,
-						druid.Starfire,
-						druid.Moonfire,
-					},
-				),
-				func(spell *DruidSpell) bool { return spell != nil },
-			)
-
-			for _, spell := range affectedSpells {
-				spell.BaseDamageMultiplierAdditive += multiplier
-			}
-		},
-	})
+	multiplier := 1 + moonfuryDamagePerRank*float64(clampRank(druid.Talents.Moonfury, 5))
+	druid.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexArcane] *= multiplier
+	druid.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexNature] *= multiplier
 }
 
 func (druid *Druid) applyImprovedMoonfire() {
@@ -343,8 +386,13 @@ func (druid *Druid) applyImprovedMoonfire() {
 		return
 	}
 
-	damageMultiplier := 0.02 * float64(druid.Talents.ImprovedMoonfire)
-	bonusCrit := 2 * float64(druid.Talents.ImprovedMoonfire) * core.SpellCritRatingPerCritChance
+	// "Increases the damage and critical strike chance of your Moonfire
+	// spell by 5%" per rank (the client's trait curve for spell 16821 reads
+	// 5 and 10 on its crit, damage and periodic effects), where the Classic
+	// tree this replaced gave 2% a rank.
+	rank := float64(clampRank(druid.Talents.ImprovedMoonfire, 2))
+	damageMultiplier := 0.05 * rank
+	bonusCrit := 5 * rank * core.CritRatingPerCritChance
 
 	druid.RegisterAura(core.Aura{
 		Label: "Improved moonfire",
@@ -398,30 +446,308 @@ func (druid *Druid) applyVengeance() {
 	})
 }
 
+// moonglowManaDiscount is Moonglow's 8/17/25% off "your damaging spells"
+// (node 104925, three ranks).
+var moonglowManaDiscount = [4]int64{0, 8, 17, 25}
+
+// improvedWrathManaDiscountPerRank is Improved Wrath's 10% a rank off
+// Wrath's mana cost; the 0.1 s a rank off its cast time is applied where
+// Wrath is registered. The Classic port took only the cast time.
+const improvedWrathManaDiscountPerRank = 10
+
+// applyMoonglow implements Moonglow. The Classic port took 3 points a rank
+// off Wrath, Starfire and Moonfire and took Starfire's off a second time
+// in starfire.go; the client's class mask also names Insect Swarm.
 func (druid *Druid) applyMoonglow() {
 	if druid.Talents.Moonglow == 0 {
 		return
 	}
 
-	multiplier := 3 * druid.Talents.Moonglow
+	druid.AddStaticMod(core.SpellModConfig{
+		Kind:      core.SpellMod_PowerCost_Pct,
+		ClassMask: DruidSpellMaskBalanceDamage,
+		IntValue:  -moonglowManaDiscount[clampRank(druid.Talents.Moonglow, 3)],
+	})
+}
 
-	druid.RegisterAura(core.Aura{
-		Label: "Moonglow",
+func (druid *Druid) applyImprovedWrath() {
+	if druid.Talents.ImprovedWrath == 0 {
+		return
+	}
+
+	druid.AddStaticMod(core.SpellModConfig{
+		Kind:      core.SpellMod_PowerCost_Pct,
+		ClassMask: DruidSpellMaskWrath,
+		IntValue:  -improvedWrathManaDiscountPerRank * int64(clampRank(druid.Talents.ImprovedWrath, 5)),
+	})
+}
+
+// applyNaturesMajesty implements Nature's Majesty (node 104927, 2
+// ranks, proto field NaturesMajesty): "Increases your critical strike
+// chance with spells and melee attacks by 2/4%." Forever's unified Crit
+// stat (sim/core/stats/stats.go) already covers spell, melee and ranged
+// crit together, so this is a flat stat addition rather than a
+// per-spell SpellMod.
+func (druid *Druid) applyNaturesMajesty() {
+	if druid.Talents.NaturesMajesty == 0 {
+		return
+	}
+
+	rank := clampRank(druid.Talents.NaturesMajesty, 2)
+	druid.AddStat(stats.Crit, 2*float64(rank)*core.CritRatingPerCritChance)
+}
+
+// applyNaturesReach implements Nature's Reach (node 104929, 2 ranks,
+// proto field NaturesReach): "Increases the range of your offensive
+// Balance spells by 10/20% and improves your chance to hit by 2/4%."
+// Range is not modeled (nothing in this sim ever goes out of range of
+// its own target); hit is, as a SpellMod scoped to the three spells the
+// client's text names - Wrath, Starfire and Moonfire.
+func (druid *Druid) applyNaturesReach() {
+	if druid.Talents.NaturesReach == 0 {
+		return
+	}
+
+	rank := clampRank(druid.Talents.NaturesReach, 2)
+	druid.AddStaticMod(core.SpellModConfig{
+		Kind:       core.SpellMod_BonusHit_Flat,
+		ClassMask:  DruidSpellMaskBalanceDirectDamage,
+		FloatValue: 2 * float64(rank) * core.HitRatingPerHitChance,
+	})
+}
+
+// applyGenesis implements Genesis (node 104924, 5 ranks, proto field
+// Genesis): "Increases the periodic damage and healing done by your
+// spells and abilities by 1/2/3/4/5%." Scoped to every damage-over-time
+// and heal-over-time effect this package has - Moonfire, Insect Swarm, Rake
+// and Rip, Rejuvenation, Regrowth's heal over time, Tranquility and Wild
+// Growth.
+func (druid *Druid) applyGenesis() {
+	if druid.Talents.Genesis == 0 {
+		return
+	}
+
+	rank := clampRank(druid.Talents.Genesis, 5)
+	druid.AddStaticMod(core.SpellModConfig{
+		Kind:      core.SpellMod_PeriodicDamageDone_Flat,
+		ClassMask: DruidSpellMaskPeriodicDamage | DruidSpellMaskPeriodicHealing,
+		IntValue:  int64(rank),
+	})
+}
+
+// applyNaturesSplendor implements Nature's Splendor (node 104928, bool,
+// proto field NaturesSplendor): "Increases the duration of your
+// Moonfire and Rejuvenation spells by 3 sec, your Regrowth spell by 6
+// sec, and your Insect Swarm spell by 2 sec." Moonfire and Rejuvenation
+// tick every 3 sec, Regrowth every 3 sec and Insect Swarm every 2 sec, so
+// the extra time is one tick on Moonfire, Rejuvenation and Insect Swarm
+// and two on Regrowth.
+func (druid *Druid) applyNaturesSplendor() {
+	if !druid.Talents.NaturesSplendor {
+		return
+	}
+
+	druid.AddStaticMod(core.SpellModConfig{
+		Kind:      core.SpellMod_DotNumberOfTicks_Flat,
+		ClassMask: DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm | DruidSpellMaskRejuvenation,
+		IntValue:  1,
+	})
+	druid.AddStaticMod(core.SpellModConfig{
+		Kind:      core.SpellMod_DotNumberOfTicks_Flat,
+		ClassMask: DruidSpellMaskRegrowth,
+		IntValue:  naturesSplendorRegrowthTicks,
+	})
+}
+
+// applyEclipse implements Eclipse (node 104935, 3 ranks, proto field
+// Eclipse): "Your Wrath spell reduces the cast time of your next 2
+// Starfire spells by 0.17/0.33/0.5 sec. Stores up to 4 charges. Lasts
+// 15 sec." Modeled as a 4-stack charge aura: each Wrath cast banks 2
+// charges (clamped to 4 by Aura.SetStacks), each Starfire cast spends
+// one, and the cast-time discount - which only ever has two values, "on"
+// and "off", never scaling with stack count - is mutated directly on
+// Starfire's DefaultCast.CastTime the moment the aura gains its first
+// charge or loses its last, mirroring applyNaturesGrace's identical
+// direct-mutation pattern above. A separate permanent watcher aura
+// drives it, the same two-aura split applyMasterOfElements-equivalents
+// elsewhere in this fork use, because OnCastComplete only fires for
+// auras that are already active and this one is not active between
+// charges.
+func (druid *Druid) applyEclipse() {
+	if druid.Talents.Eclipse == 0 {
+		return
+	}
+
+	reduction := [4]time.Duration{0, 170 * time.Millisecond, 330 * time.Millisecond, 500 * time.Millisecond}[clampRank(druid.Talents.Eclipse, 3)]
+
+	var affectedSpells []*DruidSpell
+	eclipseAura := druid.RegisterAura(core.Aura{
+		Label:     "Eclipse",
+		ActionID:  core.ActionID{SpellID: 408248},
+		Duration:  time.Second * 15,
+		MaxStacks: 4,
 		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			affectedSpells := core.FilterSlice(
-				core.Flatten(
-					[][]*DruidSpell{
-						druid.Wrath,
-						druid.Starfire,
-						druid.Moonfire,
-					},
-				),
-				func(spell *DruidSpell) bool { return spell != nil },
-			)
-
-			for _, spell := range affectedSpells {
-				spell.Cost.Multiplier -= multiplier
+			affectedSpells = core.FilterSlice(druid.Starfire, func(ds *DruidSpell) bool { return ds != nil })
+		},
+		OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks int32, newStacks int32) {
+			if oldStacks == 0 && newStacks > 0 {
+				for _, spell := range affectedSpells {
+					spell.DefaultCast.CastTime -= reduction
+				}
+			} else if oldStacks > 0 && newStacks == 0 {
+				for _, spell := range affectedSpells {
+					spell.DefaultCast.CastTime += reduction
+				}
 			}
 		},
 	})
+
+	core.MakePermanent(druid.RegisterAura(core.Aura{
+		Label: "Eclipse Trigger",
+		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
+			switch spell.SpellCode {
+			case SpellCode_DruidWrath:
+				eclipseAura.Activate(sim)
+				eclipseAura.AddStacks(sim, 2)
+			case SpellCode_DruidStarfire:
+				if eclipseAura.IsActive() {
+					eclipseAura.RemoveStack(sim)
+				}
+			}
+		},
+	}))
+}
+
+// naturalInstinctHealingFromIntellect is the healing clause by rank:
+// "increases your spell healing by 12%/25% of your Intellect" (not a
+// clean multiple, so a table).
+var naturalInstinctHealingFromIntellect = [3]float64{0, 0.12, 0.25}
+
+// applyNaturalInstinct implements Natural Instinct (node 104950, 2
+// ranks, Predatory Instincts' slot since 1.60.1.70425): "Increases the
+// critical strike damage bonus of your melee abilities by 10/20% and
+// increases your spell healing by 12/25% of your Intellect." The crit
+// half is scoped to every Cat Form melee special this package registers;
+// the healing half is a stat dependency, so a Restoration druid taking
+// the talent reads it on every heal.
+func (druid *Druid) applyNaturalInstinct() {
+	if druid.Talents.NaturalInstinct == 0 {
+		return
+	}
+
+	rank := clampRank(druid.Talents.NaturalInstinct, 2)
+	druid.AddStaticMod(core.SpellModConfig{
+		Kind:       core.SpellMod_CritDamageBonus_Flat,
+		ClassMask:  DruidSpellMaskMeleeAbilities,
+		FloatValue: 0.10 * float64(rank),
+	})
+	druid.AddStatDependency(stats.Intellect, stats.HealingPower, naturalInstinctHealingFromIntellect[rank])
+}
+
+// registerBerserkCD implements Berserk (node 104956, bool, proto field
+// Berserk): "Causes your Primal Bite ability to strike up to 3 targets,
+// removes its cooldown, and increases the critical strike chance of
+// your Combo Point-generating abilities by 100%. Clears and grants
+// immunity to Fear effects for the duration. Lasts 15 sec." Only the
+// Combo-Point-generator crit bonus and Primal Bite's cooldown removal and
+// three targets (primal_bite.go) are modeled; Fear immunity has no
+// mechanic on this sim's fights.
+func (druid *Druid) registerBerserkCD() {
+	if !druid.Talents.Berserk {
+		return
+	}
+
+	actionID := core.ActionID{SpellID: 417141}
+	bonusCrit := 100.0 * core.CritRatingPerCritChance
+
+	var affectedSpells []*DruidSpell
+	var primalBiteCooldown time.Duration
+	berserkAura := druid.RegisterAura(core.Aura{
+		Label:    "Berserk",
+		ActionID: actionID,
+		Duration: time.Second * 15,
+		OnInit: func(aura *core.Aura, sim *core.Simulation) {
+			affectedSpells = core.FilterSlice(
+				[]*DruidSpell{druid.Claw, druid.Rake, druid.Ravage, druid.Shred},
+				func(ds *DruidSpell) bool { return ds != nil },
+			)
+		},
+		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+			for _, spell := range affectedSpells {
+				spell.BonusCritRating += bonusCrit
+			}
+			if druid.PrimalBite != nil {
+				// "removes its cooldown"
+				primalBiteCooldown = druid.PrimalBite.CD.Duration
+				druid.PrimalBite.CD.Duration = 0
+				druid.PrimalBite.CD.Reset()
+			}
+		},
+		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+			for _, spell := range affectedSpells {
+				spell.BonusCritRating -= bonusCrit
+			}
+			if druid.PrimalBite != nil {
+				druid.PrimalBite.CD.Duration = primalBiteCooldown
+			}
+		},
+	})
+	druid.BerserkAura = berserkAura
+
+	druid.Berserk = druid.RegisterSpell(Cat|Bear, core.SpellConfig{
+		ClassSpellMask: DruidSpellMaskBerserk,
+		ActionID:       actionID,
+		Flags:          core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
+		// Every client id for "Berserk" (417141, 424759, 442211) is
+		// spell_level 1; BerserkLevel[0] (constants_auto_gen.go) reads
+		// the same.
+		RequiredLevel: BerserkLevel[0],
+		Cast: core.CastConfig{
+			CD: core.Cooldown{
+				Timer:    druid.NewTimer(),
+				Duration: time.Minute * 3,
+			},
+		},
+		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+			berserkAura.Activate(sim)
+		},
+	})
+
+	druid.AddMajorCooldown(core.MajorCooldown{
+		Spell: druid.Berserk.Spell,
+		Type:  core.CooldownTypeDPS,
+	})
+}
+
+// naturalistCastTimeCut is Naturalist's 0.1 sec a rank off Healing Touch.
+const naturalistCastTimeCut = 100 * time.Millisecond
+
+// applyNaturalist implements Naturalist (node 104922, 5 ranks, proto
+// field Naturalist): "Reduces the cast time of your Healing Touch spell
+// by 0.1/.../0.5 sec and increases all damage you deal by 1/2/3/4/5%."
+// The damage half applies to literally everything the character does,
+// so it is a flat PseudoStats multiplier rather than a per-spell mask.
+func (druid *Druid) applyNaturalist() {
+	if druid.Talents.Naturalist == 0 {
+		return
+	}
+
+	rank := clampRank(druid.Talents.Naturalist, 5)
+	druid.PseudoStats.DamageDealtMultiplier *= 1 + 0.01*float64(rank)
+	druid.AddStaticMod(core.SpellModConfig{
+		Kind:      core.SpellMod_CastTime_Flat,
+		ClassMask: DruidSpellMaskHealingTouch,
+		TimeValue: -naturalistCastTimeCut * time.Duration(rank),
+	})
+}
+
+// applyLivingSpirit implements Living Spirit (node 104911, 3 ranks,
+// proto field LivingSpirit): "Increases your Spirit by 5/10/15%."
+func (druid *Druid) applyLivingSpirit() {
+	if druid.Talents.LivingSpirit == 0 {
+		return
+	}
+
+	rank := clampRank(druid.Talents.LivingSpirit, 3)
+	druid.MultiplyStat(stats.Spirit, 1+0.05*float64(rank))
 }

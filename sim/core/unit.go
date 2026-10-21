@@ -132,6 +132,9 @@ type Unit struct {
 	AttackTables                []map[proto.CastType]*AttackTable
 	DynamicDamageTakenModifiers []DynamicDamageTakenModifier
 
+	// activeShields are the absorb shields currently on this unit.
+	activeShields []*Shield
+
 	GCD *Timer
 
 	// Used for applying the effect of a hardcast spell when casting finishes.
@@ -386,11 +389,15 @@ func (unit *Unit) ApplyCastSpeedForSpell(dur time.Duration, spell *Spell) time.D
 }
 
 func (unit *Unit) SwingSpeed() float64 {
-	return unit.PseudoStats.MeleeSpeedMultiplier
+	return unit.PseudoStats.MeleeSpeedMultiplier * (1 + (unit.stats[stats.MeleeHaste] / (HasteRatingPerHastePercent * 100)))
 }
 
 func (unit *Unit) Armor() float64 {
-	return max(unit.PseudoStats.ArmorMultiplier*unit.stats[stats.Armor], 0.0)
+	armor := unit.stats[stats.Armor]
+	if unit.PseudoStats.ArmorReductionDisabled {
+		armor = unit.initialStats[stats.Armor]
+	}
+	return max(unit.PseudoStats.ArmorMultiplier*armor, 0.0)
 }
 
 func (unit *Unit) BlockValue() float64 {
@@ -512,12 +519,14 @@ func (unit *Unit) reset(sim *Simulation, _ Agent) {
 	unit.stats = unit.initialStats
 	unit.PseudoStats = unit.initialPseudoStats
 	unit.auraTracker.reset(sim)
+	unit.activeShields = unit.activeShields[:0]
 	// Spellbook needs to be reset AFTER auras.
 	for _, spell := range unit.Spellbook {
 		spell.reset(sim)
 	}
 
 	unit.DistanceFromTarget = unit.StartDistanceFromTarget
+	unit.MovementHandler.reset()
 
 	unit.manaBar.reset()
 	unit.focusBar.reset(sim)
@@ -611,4 +620,16 @@ func (unit *Unit) GetMetadata() *proto.UnitMetadata {
 
 func (unit *Unit) ExecuteCustomRotation(_ *Simulation) {
 	panic("Unimplemented ExecuteCustomRotation")
+}
+
+// Biome reports where the current encounter is happening, for Forever's
+// biome-conditional item effects. A unit whose environment has not been
+// constructed yet — which is every unit during spell registration —
+// reports BiomeUnknown rather than panicking, so an effect may read it at
+// registration time and get a safe answer.
+func (unit *Unit) Biome() proto.Biome {
+	if unit.Env == nil {
+		return proto.Biome_BiomeUnknown
+	}
+	return unit.Env.Encounter.Biome
 }

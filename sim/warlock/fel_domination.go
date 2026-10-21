@@ -38,14 +38,21 @@ func (warlock *Warlock) registerFelDominationCD() {
 	})
 
 	spell := warlock.RegisterSpell(core.SpellConfig{
-		ActionID:    actionID,
-		SpellSchool: core.SpellSchoolShadow,
-		ProcMask:    core.ProcMaskEmpty,
+		ActionID:        actionID,
+		SpellSchool:     core.SpellSchoolShadow,
+		ProcMask:        core.ProcMaskEmpty,
+		RelatedSelfBuff: aura,
 
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
-				Timer:    warlock.NewTimer(),
-				Duration: time.Minute * 15,
+				Timer: warlock.NewTimer(),
+				// The client's cooldown_ms is 300000 (5 min,
+				// spellconst/warlock.json build 1.60.1.70009), not 15 -
+				// conformance golden
+				// sim/core/testdata/conformance/warlock.golden.md
+				// flagged this as cooldown_ms 300000->900000
+				// (client->engine).
+				Duration: time.Minute * 5,
 			},
 		},
 

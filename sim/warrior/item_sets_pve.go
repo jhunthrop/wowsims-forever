@@ -1,10 +1,10 @@
 package warrior
 
 import (
-	"slices"
-	"time"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/stats"
+	"slices"
+	"time"
 )
 
 ///////////////////////////////////////////////////////////////////////////
@@ -61,7 +61,7 @@ var ItemSetBattleGearOfMight = core.NewItemSet(core.ItemSet{
 var ItemSetBattleGearOfWrath = core.NewItemSet(core.ItemSet{
 	Name: "Battlegear of Wrath",
 	Bonuses: map[int32]core.ApplyEffect{
-		// Increases the attack power granted by Battle Shout by 30. 
+		// Increases the attack power granted by Battle Shout by 30.
 		3: func(agent core.Agent) {
 			// Managed in shouts.go
 		},
@@ -103,7 +103,7 @@ var ItemSetBattleGearOfWrath = core.NewItemSet(core.ItemSet{
 				Label: "Warrior's Wrath Trigger",
 				OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
 					if slices.Contains(affectedSpells, spell) {
-						if sim.Proc(0.2, "Warrior's Wrath Trigger"){
+						if sim.Proc(0.2, "Warrior's Wrath Trigger") {
 							warriorsWrathAura.Activate(sim)
 						}
 					}
@@ -119,7 +119,7 @@ var ItemSetBattleGearOfWrath = core.NewItemSet(core.ItemSet{
 				ActionID: actionID,
 				Label:    "Parry",
 				Duration: time.Second * 10,
-				OnGain: func(aura *core.Aura, sim *core.Simulation) {	
+				OnGain: func(aura *core.Aura, sim *core.Simulation) {
 					warrior.AddStatDynamic(sim, stats.Parry, 100*core.ParryRatingPerParryChance)
 				},
 				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
@@ -171,48 +171,6 @@ var ItemSetVindicatorsBattlegear = core.NewItemSet(core.ItemSet{
 ///////////////////////////////////////////////////////////////////////////
 //                            Phase 4 Item Sets - AQ
 ///////////////////////////////////////////////////////////////////////////
-
-var ItemSetBattlegearOfHeroism = core.NewItemSet(core.ItemSet{
-	Name: "Battlegear of Heroism",
-	Bonuses: map[int32]core.ApplyEffect{
-		// +8 All Resistances.
-		2: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddResistances(8)
-		},
-		// Chance on melee attack to heal you for 88 to 133
-		4: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			actionID := core.ActionID{SpellID: 27419}
-			healthMetrics := c.NewHealthMetrics(core.ActionID{SpellID: 27419})
-
-			core.MakeProcTriggerAura(&c.Unit, core.ProcTrigger{
-				ActionID: actionID,
-				Name:     "Warrior's Resolve",
-				Callback: core.CallbackOnSpellHitDealt,
-				Outcome:  core.OutcomeLanded,
-				ProcMask: core.ProcMaskMelee,
-				PPM:      1,
-				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
-					c.GainHealth(sim, sim.Roll(88, 133), healthMetrics)
-				},
-			})
-		},
-		// +40 Attack Power.
-		6: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStats(stats.Stats{
-				stats.AttackPower:       40,
-				stats.RangedAttackPower: 40,
-			})
-		},
-		// +200 Armor.
-		8: func(agent core.Agent) {
-			c := agent.GetCharacter()
-			c.AddStat(stats.Armor, 200)
-		},
-	},
-})
 
 var ItemSetConquerorsBattleGear = core.NewItemSet(core.ItemSet{
 	Name: "Conqueror's Battlegear",
@@ -273,7 +231,7 @@ var ItemSetDreadnaughtsBattlegear = core.NewItemSet(core.ItemSet{
 						warrior.ShieldSlam.BonusHitRating -= 5
 					}
 				},
-			}))	
+			}))
 		},
 		// When your health drops below 20%, for the next 5 seconds healing spells cast on you help you to Cheat Death, increasing healing done by up to 160.
 		8: func(agent core.Agent) {
@@ -418,10 +376,10 @@ var ItemSetUnstoppableMight = core.NewItemSet(core.ItemSet{
 				Label:    "Berserker Forecast",
 				Duration: duration,
 				OnGain: func(aura *core.Aura, sim *core.Simulation) {
-					warrior.AddStatDynamic(sim, stats.MeleeCrit, 10*core.CritRatingPerCritChance)
+					warrior.AddStatDynamic(sim, stats.Crit, 10*core.CritRatingPerCritChance)
 				},
 				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-					warrior.AddStatDynamic(sim, stats.MeleeCrit, -10*core.CritRatingPerCritChance)
+					warrior.AddStatDynamic(sim, stats.Crit, -10*core.CritRatingPerCritChance)
 				},
 			})
 

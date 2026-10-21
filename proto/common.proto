@@ -36,6 +36,12 @@ enum Race {
 	RaceTauren = 6;
 	RaceTroll = 7;
 	RaceUndead = 8;
+	// Forever's neutral race. Skyborne choose Horde or Alliance at
+	// character creation and their second active racial differs by
+	// faction, so the client's race table carries two rows and this
+	// enum follows. Additive: nothing before this is renumbered.
+	RaceHighOrderSkyborne = 9;   // Alliance
+	RaceWindshaperSkyborne = 10; // Horde
 }
 
 enum Faction {
@@ -71,7 +77,11 @@ enum Profession {
 }
 
 // Keep in sync with sim/core/stats/stats.go.
-// NextIndex: 44
+// NextIndex: 41
+// NOTE: the values of this enum are array indexes into stats.Stats, not
+// stable wire identities. They are renumbered when a stat is added or
+// merged, and both the Go engine and the web are rebuilt from this file at
+// the same ENGINE_VERSION, so nothing persists a raw value across builds.
 enum Stat {
 	StatStrength = 0;
 	StatAgility = 1;
@@ -86,37 +96,38 @@ enum Stat {
 	StatNaturePower = 10;
 	StatShadowPower = 11;
 	StatMP5 = 12;
-	StatSpellHit = 13;
-	StatSpellCrit = 14;
+	// Forever merges spell, melee and ranged hit into one stat, and
+	// likewise crit. This enum must stay index-synced with the Go Stat
+	// enum in sim/core/stats/stats.go; stats_test.go enforces it.
+	StatHit = 13;
+	StatCrit = 14;
 	StatSpellHaste = 15;
 	StatSpellPenetration = 16;
 	StatAttackPower = 17;
-	StatMeleeHit = 18;
-	StatMeleeCrit = 19;
-	StatMeleeHaste = 20;
-	StatArmorPenetration = 21;
-	StatExpertise = 22;
-	StatMana = 23;
-	StatEnergy = 24;
-	StatRage = 25;
-	StatArmor = 26;
-	StatRangedAttackPower = 27;
-	StatDefense = 28;
-	StatBlock = 29;
-	StatBlockValue = 30;
-	StatDodge = 31;
-	StatParry = 32;
-	StatResilience = 33;
-	StatHealth = 34;
-	StatArcaneResistance = 35;
-	StatFireResistance = 36;
-	StatFrostResistance = 37;
-	StatNatureResistance = 38;
-	StatShadowResistance = 39;
-	StatBonusArmor = 40;
-	StatHealingPower = 41;
-	StatSpellDamage = 42;
-	StatFeralAttackPower = 43;
+	StatMeleeHaste = 18;
+	StatArmorPenetration = 19;
+	StatExpertise = 20;
+	StatMana = 21;
+	StatEnergy = 22;
+	StatRage = 23;
+	StatArmor = 24;
+	StatRangedAttackPower = 25;
+	StatDefense = 26;
+	StatBlock = 27;
+	StatBlockValue = 28;
+	StatDodge = 29;
+	StatParry = 30;
+	// StatResilience is deleted: Forever adds no resilience.
+	StatHealth = 31;
+	StatArcaneResistance = 32;
+	StatFireResistance = 33;
+	StatFrostResistance = 34;
+	StatNatureResistance = 35;
+	StatShadowResistance = 36;
+	StatBonusArmor = 37;
+	StatHealingPower = 38;
+	StatSpellDamage = 39;
+	StatFeralAttackPower = 40;
 	// DO NOT add new stats here without discussing it first; new stats come with
 	// a performance penalty.
 }
@@ -415,6 +426,20 @@ enum HealthElixir {
 enum ManaRegenElixir {
 	ManaRegenElixirUnknown = 0;
 	MagebloodPotion = 1;
+	GreaterMagebloodElixir = 2;
+}
+
+// The healing elixirs: Cleric's Elixir and its greater version.
+enum HealingPowerBuff {
+	HealingPowerBuffUnknown = 0;
+	ClericsElixir = 1;
+	GreaterClericsElixir = 2;
+}
+
+// Elixirs that give spirit alongside another stat.
+enum SpiritElixir {
+	SpiritElixirUnknown = 0;
+	ElixirOfSages = 1;
 }
 
 enum StrengthBuff {
@@ -531,7 +556,7 @@ enum WeaponImbue {
 	WoundPoison = 7;
 }
 
-// NextIndex: 13
+// NextIndex: 14
 enum Food {
 	FoodUnknown = 0;
 	FoodGrilledSquid = 1;
@@ -545,6 +570,7 @@ enum Food {
 	FoodTenderWolfSteak = 9;
 	FoodSmokedSagefish = 10;
 	FoodSagefishDelight = 11;
+	FoodSagesTea = 13;
 }
 
 enum SaygesFortune {
@@ -557,7 +583,7 @@ enum SaygesFortune {
 }
 
 // Buffs that affect the entire raid.
-// NextIndex: 40
+// NextIndex: 43
 message RaidBuffs {
 	reserved 36, 37, 38, 39;
 	reserved "atiesh_druid", "atiesh_mage", "atiesh_priest", "atiesh_warlock";
@@ -576,6 +602,27 @@ message RaidBuffs {
 
 	// +Agi
 	TristateEffect grace_of_air_totem = 5; // none, normal, 15% improved
+
+	// Windfury Totem: in the Forever client an aura on every party member
+	// (spells 8516/10608/10610), not a main-hand enchant, so it stacks with
+	// a poison or a sharpening stone on the weapon.
+	bool windfury_totem = 40;
+
+	// Heart of the Lion: the hunter's area aura (client spell 409583),
+	// +10% to every stat and level-scaled melee and ranged attack power for
+	// every ally within 100 yards. The hunter's own cast (409580) adds a
+	// further +10% to the hunter alone; a hunter in the raid sets this flag
+	// itself (HunterAgent.AddRaidBuffs), so a preset names it for the raid's
+	// hunter slot.
+	bool heart_of_the_lion = 41;
+
+	// Flametongue Totem: in the Forever client an aura on every party member
+	// (spells 8230/8250/10521/15036, trigger spells 8253/8248/10523/16389),
+	// not a main-hand enchant: each main-hand auto attack adds fire damage
+	// of the rank's amount scaled by weapon speed. The client's beta notes
+	// say it does not stack with the Windfury Totem aura, so a request that
+	// names both receives Windfury.
+	bool flametongue_totem = 42;
 
 	// +Intell and/or Spi
 	bool arcane_brilliance = 6;
@@ -662,7 +709,7 @@ message IndividualBuffs {
 	bool slipkiks_savvy = 14;
 }
 
-// NextIndex: 34
+// NextIndex: 36
 message Consumes {
 	Flask flask = 1;
 	Food food = 2;
@@ -692,6 +739,8 @@ message Consumes {
 	PetMiscConsumes pet_misc_consumes = 27;
 	SapperExplosive sapper_explosive = 28;
 	HitConsumable hit_consumable = 29;
+	HealingPowerBuff healing_power_buff = 34;
+	SpiritElixir spirit_elixir = 35;
 }
 
 // NextIndex: 26
@@ -748,6 +797,27 @@ enum MobType {
 	MobTypeUndead = 8;
 }
 
+// Forever re-itemised the world and added trinkets whose effect depends on
+// where the fight is. A biome is a property of the encounter, not of one
+// target: a multi-target pull happens in one place, and putting this on
+// Target would let two targets in one fight disagree about where they are.
+// The creature-type half of the same mechanic is Target.mob_type, which
+// already exists and is already read by conditional effects.
+enum Biome {
+	BiomeUnknown = 0;
+	BiomeForest = 1;
+	BiomeDesert = 2;
+	BiomeSnow = 3;
+	BiomeSwamp = 4;
+	BiomeUnderground = 5;
+	BiomeCoastal = 6;
+	BiomeMountain = 7;
+	BiomeVolcanic = 8;
+	BiomePlains = 9;
+	BiomeIndoors = 10;
+	BiomeAbyssal = 11;
+}
+
 enum InputType {
 	Bool = 0;
 	Number = 1;
@@ -792,6 +862,19 @@ message Target {
 	repeated TargetInput target_inputs = 14;
 }
 
+// MovementPattern is a repeating out-of-range window on an encounter.
+message MovementPattern {
+	double interval_seconds = 1;
+	double duration_seconds = 2;
+	bool casting_only = 3;
+}
+
+// TargetCountAt is one step of an encounter's target-count timeline.
+message TargetCountAt {
+	double at_seconds = 1;
+	int32 count = 2;
+}
+
 message Encounter {
 	double duration = 1;
 
@@ -814,6 +897,28 @@ message Encounter {
 
 	// If type != Simple or Custom, then this may be empty.
 	repeated Target targets = 6;
+
+	// Where this fight happens, for Forever's biome-conditional item
+	// effects. Unset means BiomeUnknown, which matches nothing.
+	Biome biome = 20;
+
+	// A repeating window in which the player is away from the target.
+	// interval_seconds is the gap between window starts; duration_seconds
+	// is how long each window lasts. casting_only interrupts casting in
+	// place instead of moving out of range, so melee continues.
+	// Forever addition; see PORTING.md.
+	MovementPattern movement = 10;
+
+	// A timeline of how many of `targets` are active. Entries are
+	// (at_seconds, count); the pool is sized to the largest count. When
+	// set it overrides the plain target list's count.
+	// Forever addition; see PORTING.md.
+	repeated TargetCountAt targets_over_time = 11;
+
+	// Target-dummy mode: the raid debuff panel is not applied, there is
+	// no execute window, and nothing reduces the target's armor.
+	// Forever addition; see PORTING.md.
+	bool target_dummy = 12;
 }
 
 message PresetTarget {
@@ -848,7 +953,7 @@ message SimDatabase {
 }
 
 // Contains only the Item info needed by the sim.
-// NextIndex: 20
+// NextIndex: 24
 message SimItem {
 	int32 id = 1;
 	repeated Class class_allowlist = 17;
@@ -870,6 +975,24 @@ message SimItem {
 	string set_name = 14;
 	int32 set_id = 18;
 	repeated double weapon_skills = 15;
+
+	// The four fields sim/bulk's Expand needs to decide whether a
+	// candidate may occupy a slot. Forever additions; see PORTING.md.
+	bool unique = 20;
+	int32 required_level = 21;
+
+	// Redeclared rather than imported from UIItem: ui.proto imports
+	// common.proto, so common.proto cannot import ui.proto back. The
+	// values and numbers are UIItem.FactionRestriction's, and
+	// TestSimItemFactionRestrictionMatchesUIItem keeps them in step.
+	enum FactionRestriction {
+		FACTION_RESTRICTION_UNSPECIFIED = 0;
+		FACTION_RESTRICTION_ALLIANCE_ONLY = 1;
+		FACTION_RESTRICTION_HORDE_ONLY = 2;
+	}
+	FactionRestriction faction_restriction = 22;
+
+	repeated int32 random_suffix_options = 23;
 }
 
 // Extra enum for describing which items are eligible for an enchant, when
@@ -978,6 +1101,30 @@ message HealingModel {
 	double inspiration_uptime = 3;
 	// TMI burst window bin size
 	int32 burst_window = 4;
+}
+
+// RaidDamageModel is the damage the fake raid members (Raid.target_dummies)
+// take. The last fake member is the tank: it takes tank_hit_damage every
+// tank_swing_seconds. Every other fake member takes pulse_damage in a pulse
+// every pulse_interval_seconds, each pulse landing on pulse_members of them
+// chosen at random. All figures are after mitigation, in health points; the
+// profile that supplies them names itself in `profile`. Forever addition;
+// see PORTING.md.
+message RaidDamageModel {
+	// The profile's name, for logs and results.
+	string profile = 1;
+	double tank_health = 2;
+	double member_health = 3;
+	// Average damage of one tank hit, after mitigation.
+	double tank_hit_damage = 4;
+	double tank_swing_seconds = 5;
+	// Each hit and each pulse rolls its damage within +/- this fraction.
+	double damage_spread = 6;
+	// Damage one pulse deals to each member it lands on.
+	double pulse_damage = 7;
+	double pulse_interval_seconds = 8;
+	// Members one pulse lands on; 0 means every non-tank fake member.
+	int32 pulse_members = 9;
 }
 
 message CustomRotation {

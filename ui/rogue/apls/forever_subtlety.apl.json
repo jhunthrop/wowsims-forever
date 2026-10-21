@@ -1,0 +1,265 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1787,
+            "rank": 4
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-3s"
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 14183
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-2s"
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11269,
+            "rank": 6
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1s"
+        }
+      }
+    }
+  ],
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 14278
+          }
+        }
+      },
+      "notes": "Ghostly Strike on cooldown: cheaper than Backstab, hits for 180% weapon damage with a dagger, and builds a combo point."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11275,
+            "rank": 6
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "4"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 11275,
+                        "rank": 6
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Rupture at four or more combo points whenever it is not running. Hemorrhage makes the target take 15% more Rupture damage, so Rupture is this tree's main finisher."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11300,
+            "rank": 8
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3"
+                    }
+                  }
+                }
+              },
+              {
+                "dotIsActive": {
+                  "spellId": {
+                    "spellId": 11275,
+                    "rank": 6
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Eviscerate at three or more combo points while Rupture is running, so combo points built during a Rupture are spent instead of idling."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6774,
+            "rank": 2
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentComboPoints": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "3"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "or": {
+                        "vals": [
+                          {
+                            "not": {
+                              "val": {
+                                "auraIsActive": {
+                                  "auraId": {
+                                    "spellId": 6774,
+                                    "rank": 2
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "auraRemainingTime": {
+                                  "auraId": {
+                                    "spellId": 6774,
+                                    "rank": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "3"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "dotIsActive": {
+                  "spellId": {
+                    "spellId": 11275,
+                    "rank": 6
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Slice and Dice while Rupture is running: opened when it is down, refreshed under 3 seconds remaining, at three or more combo points."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 16511
+          }
+        },
+        "condition": {
+          "spellIsKnown": {
+            "spellId": {
+              "spellId": 16511
+            }
+          }
+        }
+      },
+      "notes": "Hemorrhage as the builder: 145% weapon damage with a dagger, one combo point, and the debuff that lifts Rupture damage by 15% for 15 seconds. Gated on spellIsKnown so a build without the talent falls through to Sinister Strike."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11294,
+            "rank": 8
+          }
+        },
+        "condition": {
+          "not": {
+            "val": {
+              "spellIsKnown": {
+                "spellId": {
+                  "spellId": 16511
+                }
+              }
+            }
+          }
+        }
+      },
+      "notes": "Sinister Strike is the fallback builder whenever you have not talented into Hemorrhage."
+    }
+  ]
+}

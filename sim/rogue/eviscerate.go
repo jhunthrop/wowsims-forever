@@ -6,43 +6,47 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// eviscerateLearnLevels are Eviscerate's nine rank learn levels; source:
+// 1.60.1.70009 client spell data ("Eviscerate", ranks 1-9; the level-1
+// rank-0 ids are internal copies, not player ranks).
+//
+// The ninth slot is rank 9 (spell 31016, level 60) only with AQ content;
+// without it the slot casts rank 8's spell 11300, so it carries rank 8's
+// learn level (56) rather than a level the client does not state for 11300.
+var eviscerateLearnLevels = []int{1, 8, 16, 24, 32, 40, 48, 56, core.TernaryInt(core.IncludeAQ, 60, 56)}
+
+// eviscerateSpellID is Eviscerate's rank -> spell id, index 0 unused.
+// Rank 9 only exists with AQ content, same as the old code's ternary.
+var eviscerateSpellID = [10]int32{0, 2098, 6760, 6761, 6762, 8623, 8624, 11299, 11300, core.TernaryInt32(core.IncludeAQ, 31016, 11300)}
+
+// eviscerateComboDamageBonus is Eviscerate's rank -> damage per combo point,
+// index 0 unused: the client's EffectPointsPerResource (1.60.1.70009
+// SpellEffect.csv, ids 2098-31016), which the vendored spellconst does not
+// carry. The roll it adds to is EviscerateDamage. The final slot is rank 9
+// with AQ content, otherwise rank 8's term (the id the slot casts).
+var eviscerateComboDamageBonus = [10]float64{0, 5, 11, 19, 31, 45, 71, 110, 151, core.TernaryFloat64(core.IncludeAQ, 170, 151)}
+
 func (rogue *Rogue) registerEviscerate() {
-	flatDamage := map[int32]float64{
-		25: 10,
-		40: 22,
-		50: 34,
-		60: core.TernaryFloat64(core.IncludeAQ, 54, 48),
-	}[rogue.Level]
+	rank := core.HighestRankAtLevel(eviscerateLearnLevels, rogue.Level)
+	if rank == 0 {
+		return
+	}
 
-	comboDamageBonus := map[int32]float64{
-		25: 31,
-		40: 77,
-		50: 110,
-		60: core.TernaryFloat64(core.IncludeAQ, 170, 151),
-	}[rogue.Level]
-
-	damageVariance := map[int32]float64{
-		25: 20,
-		40: 44,
-		50: 68,
-		60: core.TernaryFloat64(core.IncludeAQ, 108, 96),
-	}[rogue.Level]
-
-	spellID := map[int32]int32{
-		25: 6762,
-		40: 8624,
-		50: 11299,
-		60: core.TernaryInt32(core.IncludeAQ, 31016, 11300),
-	}[rogue.Level]
+	damage := EviscerateDamage[rank]
+	casterLevel := int(rogue.Level)
+	comboDamageBonus := eviscerateComboDamageBonus[rank]
+	spellID := eviscerateSpellID[rank]
 
 	rogue.Eviscerate = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:    SpellCode_RogueEviscerate,
-		ActionID:     core.ActionID{SpellID: spellID},
-		SpellSchool:  core.SpellSchoolPhysical,
-		DefenseType:  core.DefenseTypeMelee,
-		ProcMask:     core.ProcMaskMeleeMHSpecial,
-		Flags:        rogue.finisherFlags() | SpellFlagColdBlooded,
-		MetricSplits: 6,
+		SpellCode:      SpellCode_RogueEviscerate,
+		ClassSpellMask: RogueSpellMaskEviscerate,
+		ActionID:       core.ActionID{SpellID: spellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          rogue.finisherFlags() | SpellFlagColdBlooded,
+		MetricSplits:   6,
+		RequiredLevel:  eviscerateLearnLevels[rank-1],
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   35,
@@ -62,18 +66,17 @@ func (rogue *Rogue) registerEviscerate() {
 		},
 
 		DamageMultiplier: 1 +
-			[]float64{0, 0.05, 0.10, 0.15}[rogue.Talents.ImprovedEviscerate] +
-			[]float64{0, 0.02, 0.04, 0.06}[rogue.Talents.Aggression],
+			(improvedEviscerateMultiplier[rankIndex(rogue.Talents.ImprovedEviscerate, improvedEviscerateMultiplier[:])] - 1) +
+			rogue.aggressionBonus(),
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
+		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			rogue.BreakStealth(sim)
 
 			comboPoints := rogue.ComboPoints()
-			flatBaseDamage := flatDamage + comboDamageBonus*float64(comboPoints)
-
-			baseDamage := sim.Roll(flatBaseDamage, flatBaseDamage+damageVariance) +
+			baseDamage := damage.Roll(sim, casterLevel) + comboDamageBonus*float64(comboPoints) +
 				0.03*float64(comboPoints)*spell.MeleeAttackPower(target)
 
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)

@@ -16,7 +16,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRestorationShaman, {
 	warnings: [],
 
 	// All stats for which EP should be calculated.
-	epStats: [Stat.StatIntellect, Stat.StatSpirit, Stat.StatSpellPower, Stat.StatSpellCrit, Stat.StatSpellHaste, Stat.StatMP5],
+	epStats: [Stat.StatIntellect, Stat.StatSpirit, Stat.StatSpellPower, Stat.StatCrit, Stat.StatSpellHaste, Stat.StatMP5],
 	// Reference stat against which to calculate EP. I think all classes use either spell power or attack power.
 	epReferenceStat: Stat.StatSpellPower,
 	// Which stats to display in the Character Stats section, at the bottom of the left-hand sidebar.
@@ -26,7 +26,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRestorationShaman, {
 		Stat.StatIntellect,
 		Stat.StatSpirit,
 		Stat.StatSpellPower,
-		Stat.StatSpellCrit,
+		Stat.StatCrit,
 		Stat.StatSpellHaste,
 		Stat.StatMP5,
 	],
@@ -40,7 +40,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRestorationShaman, {
 			[Stat.StatIntellect]: 0.22,
 			[Stat.StatSpirit]: 0.05,
 			[Stat.StatSpellPower]: 1,
-			[Stat.StatSpellCrit]: 0.67,
+			[Stat.StatCrit]: 0.67,
 			[Stat.StatSpellHaste]: 1.29,
 			[Stat.StatMP5]: 0.08,
 		}),

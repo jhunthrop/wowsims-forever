@@ -25,8 +25,8 @@ func NewEmeraldDragonWhelp(character *core.Character) *EmeraldDragonWhelp {
 		stats.SpellDamage: 220,  // Puts the Acid Spit damage very close to the below log
 		// Based on this log but more data needed
 		// https://sod.warcraftlogs.com/reports/xTwQVgbjF9cPnd3R#type=damage-done&ability=-13049&view=events&boss=-2&difficulty=0&wipes=2
-		stats.MeleeCrit: 4.5 * core.CritRatingPerCritChance,
-		stats.SpellCrit: 13 * core.CritRatingPerCritChance,
+		// Forever: merged from MeleeCrit 4.5 + SpellCrit 13. unconfirmed
+		stats.Crit: 13 * core.CritRatingPerCritChance,
 	}
 
 	whelp := &EmeraldDragonWhelp{

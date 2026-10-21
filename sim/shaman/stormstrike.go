@@ -6,6 +6,10 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// stormstrikeBaseManaCostPercent is SpellPower.PowerCostPct for spell 17364
+// in client 1.60.1.70425, as the fraction ManaCostOptions.BaseCost takes.
+const stormstrikeBaseManaCostPercent = 0.08
+
 func (shaman *Shaman) registerStormstrikeSpell() {
 	if !shaman.Talents.Stormstrike {
 		return
@@ -15,16 +19,22 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 		return core.StormstrikeAura(target)
 	})
 
-	shaman.RegisterSpell(core.SpellConfig{
-		SpellCode:   SpellCode_ShamanStormstrike,
-		ActionID:    core.ActionID{SpellID: 17364},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       SpellFlagShaman | core.SpellFlagAPL | core.SpellFlagMeleeMetrics,
+	shaman.Stormstrike = shaman.RegisterSpell(core.SpellConfig{
+		SpellCode:      SpellCode_ShamanStormstrike,
+		ClassSpellMask: ShamanSpellMaskStormstrike,
+		ActionID:       core.ActionID{SpellID: 17364},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          SpellFlagShaman | core.SpellFlagAPL | core.SpellFlagMeleeMetrics,
 
+		RequiredLevel: 40,
+
+		// FOREVER: spellconst/shaman.json spell 17364 prices Stormstrike
+		// at 8% of base mana since client 1.60.1.70425 (SpellPower
+		// PowerCostPct 8; the 1.60.1.70374 client carried a flat 125).
 		ManaCost: core.ManaCostOptions{
-			BaseCost: .21,
+			BaseCost: stormstrikeBaseManaCostPercent,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -32,7 +42,7 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 			},
 			CD: core.Cooldown{
 				Timer:    shaman.NewTimer(),
-				Duration: time.Second * 20,
+				Duration: time.Second * 8,
 			},
 		},
 

@@ -64,7 +64,7 @@ func (move *MovementHandler) removeMoveSpeedModifier(moveHeap *MoveHeap, actionI
 }
 
 func (move *MovementHandler) updateMoveSpeed() {
-	move.MoveSpeed = move.baseSpeed * move.getActveModifier(move.moveSpeedBonuses) * (1-move.getActveModifier(move.moveSpeedPenalties))
+	move.MoveSpeed = move.baseSpeed * move.getActveModifier(move.moveSpeedBonuses) * (1 - move.getActveModifier(move.moveSpeedPenalties))
 }
 
 func (move *MovementHandler) getActveModifier(moveHeap *MoveHeap) float64 {
@@ -74,6 +74,12 @@ func (move *MovementHandler) getActveModifier(moveHeap *MoveHeap) float64 {
 type MovementHandler struct {
 	Moving    bool
 	MoveSpeed float64
+
+	// CastingBlocked is set while a casting-only movement window is open:
+	// spells with a cast time are refused and melee continues. It is
+	// separate from Moving because Moving also means "out of range", and
+	// a casting-only window never leaves melee.
+	CastingBlocked bool
 
 	baseSpeed          float64
 	moveAura           *Aura
@@ -135,6 +141,40 @@ func (unit *Unit) IsMoving() bool {
 	return unit.MovementHandler.Moving
 }
 
+// IsCastingBlocked reports whether a cast with a cast time may start. It
+// is what the cast gates ask; IsMoving stays the question "is this unit
+// out of position", which item and talent code asks for other reasons.
+func (unit *Unit) IsCastingBlocked() bool {
+	return unit.MovementHandler.Moving || unit.MovementHandler.CastingBlocked
+}
+
+// InterruptCast cancels an in-progress hardcast or channel. The cost is
+// already spent and is not refunded, which is what a real interrupt does
+// and what a movement window models.
+func (unit *Unit) InterruptCast(sim *Simulation) {
+	if unit.IsChanneling(sim) {
+		unit.ChanneledDot.Cancel(sim)
+	}
+	if !unit.IsCasting(sim) {
+		return
+	}
+	if sim.Log != nil {
+		unit.Log(sim, "Cast of %s interrupted", unit.Hardcast.ActionID)
+	}
+	unit.Hardcast = Hardcast{Expires: startingCDTime}
+	if unit.hardcastAction != nil {
+		unit.hardcastAction.Cancel(sim)
+		unit.hardcastAction = nil
+	}
+}
+
+// reset clears the per-iteration movement state. Unit.reset calls it, so
+// a window left open by an aborted iteration cannot leak into the next.
+func (move *MovementHandler) reset() {
+	move.Moving = false
+	move.CastingBlocked = false
+}
+
 func (unit *Unit) MoveTo(moveRange float64, sim *Simulation) {
 	if moveRange == unit.DistanceFromTarget {
 		return
@@ -168,12 +208,12 @@ func (unit *Unit) AddMoveSpeedModifier(actionId *ActionID, modifier float64) {
 		ActionId: actionId,
 		Modifier: modifier,
 	}
-	if(moveSpeedMod.Modifier < 1) {
+	if moveSpeedMod.Modifier < 1 {
 		unit.MovementHandler.addMoveSpeedModifier(unit.MovementHandler.moveSpeedPenalties, moveSpeedMod)
 	} else {
 		unit.MovementHandler.addMoveSpeedModifier(unit.MovementHandler.moveSpeedBonuses, moveSpeedMod)
 	}
-	
+
 }
 
 func (unit *Unit) RemoveMoveSpeedModifier(actionID *ActionID) {

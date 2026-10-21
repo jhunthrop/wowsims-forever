@@ -25,6 +25,7 @@ import {
 import { EnhancementShaman_Options as EnhancementShamanOptions, ShamanSyncType } from '../core/proto/shaman.js';
 import { SavedTalents } from '../core/proto/ui.js';
 import DefaultAPLJSON from './apls/default.apl.json';
+import ForeverEnhancementAPL from './apls/forever_enhancement.apl.json';
 import Phase1GearJSON from './gear_sets/phase_1.gear.json';
 import Phase2GearJSON from './gear_sets/phase_2.gear.json';
 import Phase3GearJSON from './gear_sets/phase_3.gear.json';
@@ -57,10 +58,16 @@ export const DefaultGear = GearPresets[Phase.Phase1][0];
 //                                 APL Presets
 ///////////////////////////////////////////////////////////////////////////
 
+// The Forever rotations below are the launch defaults. Each is a copy of
+// data/curated/apl/<class>-<spec>.json's `rotation` in the Forever Sixty site
+// repository, written here by that repository's `make apl-sync` and proved by
+// its `make apl-check`; edit the curated file, never this copy. The Era lists
+// are kept because a Forever character can still be compared against them.
 export const APLDefault = PresetUtils.makePresetAPLRotation('Default', DefaultAPLJSON);
+export const AplForeverEnhancement = PresetUtils.makePresetAPLRotation('Forever Enhancement', ForeverEnhancementAPL);
 
 export const APLPresets = {
-	[Phase.Phase1]: [APLDefault],
+	[Phase.Phase1]: [APLDefault, AplForeverEnhancement],
 	[Phase.Phase2]: [],
 	[Phase.Phase3]: [],
 	[Phase.Phase4]: [],
@@ -68,7 +75,7 @@ export const APLPresets = {
 	[Phase.Phase6]: [],
 };
 
-export const DefaultAPL = APLPresets[Phase.Phase1][0];
+export const DefaultAPL = AplForeverEnhancement;
 
 ///////////////////////////////////////////////////////////////////////////
 //                                 Talent Presets

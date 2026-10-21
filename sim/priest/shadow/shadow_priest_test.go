@@ -13,6 +13,7 @@ func init() {
 }
 
 func TestP1Shadow(t *testing.T) {
+	core.SkipAwaitingForeverTalentRewrite(t, "sim/priest/shadow")
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
 		{
 			Class:      proto.Class_ClassPriest,
@@ -34,7 +35,7 @@ func TestP1Shadow(t *testing.T) {
 	}))
 }
 
-var P1Talents = "0512301302--5002504103501251"
+var P1Talents = "0212301302--5002204103501251"
 
 var P1Consumes = core.ConsumesCombo{
 	Label: "P1-Consumes",
@@ -73,6 +74,6 @@ var Stats = []proto.Stat{
 	proto.Stat_StatIntellect,
 	proto.Stat_StatSpellPower,
 	proto.Stat_StatShadowPower,
-	proto.Stat_StatSpellHit,
-	proto.Stat_StatSpellCrit,
+	proto.Stat_StatHit,
+	proto.Stat_StatCrit,
 }

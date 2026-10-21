@@ -7,14 +7,7 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-const MindFlayRanks = 6
 const MindFlayTicks = 3
-
-var MindFlaySpellId = [MindFlayRanks + 1]int32{0, 15407, 17311, 17312, 17313, 17314, 18807}
-var MindFlayTickSpellId = [MindFlayRanks + 1]int32{0, 16568, 7378, 17316, 17317, 17318, 18808}
-var MindFlayBaseDamage = [MindFlayRanks + 1]float64{0, 75, 126, 186, 261, 330, 426}
-var MindFlayManaCost = [MindFlayRanks + 1]float64{0, 45, 70, 100, 135, 165, 205}
-var MindFlayLevel = [MindFlayRanks + 1]int{0, 20, 28, 36, 44, 52, 60}
 
 func (priest *Priest) registerMindFlay() {
 	if !priest.Talents.MindFlay {
@@ -46,21 +39,23 @@ func (priest *Priest) newMindFlaySpellConfig(rank int, tickIdx int32) core.Spell
 	}
 
 	spellId := MindFlaySpellId[rank]
-	baseDamage := MindFlayBaseDamage[rank] / float64(ticks)
+	roll := priest.clientRoll(MindFlayBaseDamage[rank], MindFlayPointsPerLevel[rank], MindFlayLevel[rank], MindFlayMaxLevel[rank])
+	baseDamage := periodicTick(roll) // per tick, whatever the channel's length
 	manaCost := MindFlayManaCost[rank]
 	level := MindFlayLevel[rank]
 
-	spellCoeff := 0.15 // classic penalty for mf having a slow effect
+	spellCoeff := MindFlaySpellCoeff[rank]
 
 	tickLength := time.Second
 
 	return core.SpellConfig{
-		SpellCode:   SpellCode_PriestMindFlay,
-		ActionID:    core.ActionID{SpellID: spellId}.WithTag(tickIdx),
-		SpellSchool: core.SpellSchoolShadow,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       flags,
+		SpellCode:      SpellCode_PriestMindFlay,
+		ActionID:       core.ActionID{SpellID: spellId}.WithTag(tickIdx),
+		SpellSchool:    core.SpellSchoolShadow,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          flags,
+		ClassSpellMask: PriestSpellMaskMindFlay,
 
 		RequiredLevel: level,
 		Rank:          rank,
@@ -77,6 +72,10 @@ func (priest *Priest) newMindFlaySpellConfig(rank int, tickIdx int32) core.Spell
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
+		// The dot below carries the coefficient the damage uses; the spell
+		// states it too so the conformance report reads it.
+		BonusCoefficient: spellCoeff,
+		ClientBaseDamage: roll,
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
@@ -90,7 +89,18 @@ func (priest *Priest) newMindFlaySpellConfig(rank int, tickIdx int32) core.Spell
 				dot.Snapshot(target, baseDamage, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
+				// Improved Mind Flay: this instance is a compounding step
+				// over the one before it, on the snapshot the channel
+				// took (talents.go's ImprovedMindFlayRamp).
+				snapshot := dot.SnapshotBaseDamage
+				dot.SnapshotBaseDamage *= priest.ImprovedMindFlayRamp(dot.TickCount)
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
+				dot.SnapshotBaseDamage = snapshot
+				// Dark Inspiration: "fully channeled Mind Flay" is the
+				// full three-tick channel's last tick.
+				if dot.TickCount == MindFlayTicks {
+					priest.triggerDarkInspiration(sim)
+				}
 			},
 		},
 
@@ -104,7 +114,6 @@ func (priest *Priest) newMindFlaySpellConfig(rank int, tickIdx int32) core.Spell
 		},
 
 		ExpectedTickDamage: func(sim *core.Simulation, target *core.Unit, spell *core.Spell, _ bool) *core.SpellResult {
-			baseDamage := baseDamage / MindFlayTicks
 			result := spell.CalcPeriodicDamage(sim, target, baseDamage, spell.OutcomeExpectedMagicAlwaysHit)
 			return result
 		},
