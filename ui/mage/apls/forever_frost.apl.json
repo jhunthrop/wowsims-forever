@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Ice Lance on a Fingers of Frost charge: the charge makes the target count as Frozen, so Ice Lance deals triple damage and Shatter's crit bonus applies. Only fires with the Fingers of Frost talent; without it the buff never appears and the line stays idle.",
+      "notes": "Ice Lance on a Fingers of Frost charge: the charge makes the target count as Frozen, so Ice Lance deals triple damage and Shatter's crit bonus applies. Only fires with the Fingers of Frost talent; without it the buff never appears, the line asks whether the aura exists first, and the line stays idle.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -16,10 +16,23 @@
           }
         },
         "condition": {
-          "auraIsActive": {
-            "auraId": {
-              "spellId": 400669
-            }
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 400669
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 400669
+                  }
+                }
+              }
+            ]
           }
         }
       }

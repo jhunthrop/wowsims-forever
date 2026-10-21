@@ -22,7 +22,7 @@ const (
 	healingStreamTotemID = 10463
 	lesserHealingWaveID  = 10468
 	chainHealID          = 10623
-	healingWaveID        = 25357
+	healingWaveID        = 10396
 	riptideID            = 1239243
 	naturesSwiftnessID   = 16188
 	manaTideTotemID      = 17359

@@ -39,94 +39,51 @@
           }
         },
         "condition": {
-          "or": {
+          "and": {
             "vals": [
               {
-                "and": {
-                  "vals": [
-                    {
-                      "not": {
-                        "val": {
-                          "auraIsActive": {
-                            "auraId": {
-                              "spellId": 6774,
-                              "rank": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpGe",
-                        "lhs": {
-                          "currentComboPoints": {}
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "3"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "currentTime": {}
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "15s"
-                          }
-                        }
+                "not": {
+                  "val": {
+                    "auraIsActive": {
+                      "auraId": {
+                        "spellId": 6774,
+                        "rank": 2
                       }
                     }
-                  ]
+                  }
                 }
               },
               {
-                "and": {
-                  "vals": [
-                    {
-                      "cmp": {
-                        "op": "OpGe",
-                        "lhs": {
-                          "currentComboPoints": {}
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "5"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "auraRemainingTime": {
-                            "auraId": {
-                              "spellId": 6774,
-                              "rank": 2
-                            }
-                          }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "3"
-                          }
-                        }
-                      }
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3"
                     }
-                  ]
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "15s"
+                    }
+                  }
                 }
               }
             ]
           }
         }
       },
-      "notes": "Slice and Dice kept up: opened in the first 15 seconds as soon as three combo points are banked, then refreshed at five combo points once under 3 seconds remain. Always five points, so each cast lasts as long as it can."
+      "notes": "Slice and Dice opened in the first 15 seconds as soon as three combo points are banked. It is not refreshed at five points: Eviscerate (checked first) takes the five-point sets, and a refresh in the 25 to 35 energy window before Eviscerate is affordable took every set on an energy-starved character, so Eviscerate never cast at levels 10 and 20."
     },
     {
       "action": {

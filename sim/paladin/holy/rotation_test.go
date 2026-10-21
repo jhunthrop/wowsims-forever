@@ -117,12 +117,17 @@ func heavyProfile() *proto.RaidDamageModel {
 	}
 }
 
+// holyLightTrainerRank is the Holy Light the written rotation casts at 60:
+// the highest rank the trainer teaches. The Ahn'Qiraj book rank
+// (holyLightTopRank) is not the rotation's, whatever the engine registers.
+const holyLightTrainerRank int32 = 10329
+
 func TestDefaultRotationUsesDivineFavorAndHolyLightWhenTheTankIsInDanger(t *testing.T) {
 	f := rotationFight(t, 0)
 	f.model = heavyProfile()
 	result := f.run(t, rotationIterations)
 
-	for name, id := range map[string]int32{"Holy Light": holyLightTopRank, "Divine Favor": divineFavorSpell} {
+	for name, id := range map[string]int32{"Holy Light": holyLightTrainerRank, "Divine Favor": divineFavorSpell} {
 		if totalsOf(result, id).casts == 0 {
 			t.Errorf("the default rotation never cast %s against a tank taking %v every swing", name, f.model.TankHitDamage)
 		}
@@ -132,7 +137,7 @@ func TestDefaultRotationUsesDivineFavorAndHolyLightWhenTheTankIsInDanger(t *test
 func TestDefaultRotationSpendsTheManaItsCastsCost(t *testing.T) {
 	result := rotationFight(t, 0).run(t, rotationIterations)
 	costs := map[int32]float64{
-		flashOfLightTopRank: 140, holyLightTopRank: 660, greaterBlessingOfLight: 260,
+		flashOfLightTopRank: 140, holyLightTrainerRank: 660, greaterBlessingOfLight: 260,
 	}
 	var want, got float64
 	for id, cost := range costs {

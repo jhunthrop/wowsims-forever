@@ -31,20 +31,39 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentManaPercent": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "0.5"
+          "or": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.5"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "remainingTimePercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.3"
+                    }
+                  }
+                }
               }
-            }
+            ]
           }
         }
       },
-      "notes": "Shadowfiend returns a share of the whole mana bar over its fifteen seconds, so it waits until the bar has room for all of it, and its long cooldown makes it a once-a-fight cast."
+      "notes": "Shadowfiend returns a share of the whole mana bar over its fifteen seconds, so it waits until the bar has room for all of it (below half, or in the last 30% of the fight if the bar never got there), and its long cooldown makes it a once-a-fight cast."
     },
     {
       "action": {
@@ -100,9 +119,30 @@
             "type": "Player",
             "index": 5
           }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "math": {
+                "op": "OpMul",
+                "lhs": {
+                  "remainingTimePercent": {}
+                },
+                "rhs": {
+                  "const": {
+                    "val": "0.9"
+                  }
+                }
+              }
+            }
+          }
         }
       },
-      "notes": "Prayer of Mending goes on the tank every time it is ready: a 10 second cooldown, five charges, and it is the cheapest healing per mana the Holy kit has. The engine triggers it on the next direct heal its holder receives (not on damage), so keep it on the tank, who is healed most."
+      "notes": "Prayer of Mending goes on the tank every time it is ready and the mana pace allows it: a 10 second cooldown, five charges, and at the top rank it is the cheapest healing per mana the Holy kit has. Rank 1 (level 40) is not: it heals little for its price, so it waits for the same mana pace as the filler. The engine triggers it on the next direct heal its holder receives (not on damage), so keep it on the tank, who is healed most."
     },
     {
       "action": {
@@ -300,8 +340,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 25316,
-            "rank": 5
+            "spellId": 10961,
+            "rank": 4
           },
           "target": {
             "type": "Player",
@@ -325,7 +365,7 @@
                       },
                       "rhs": {
                         "const": {
-                          "val": "0.9"
+                          "val": "0.6"
                         }
                       }
                     }
@@ -351,7 +391,7 @@
                               },
                               "rhs": {
                                 "const": {
-                                  "val": "0.7"
+                                  "val": "0.85"
                                 }
                               }
                             }
@@ -369,7 +409,7 @@
                               },
                               "rhs": {
                                 "const": {
-                                  "val": "0.7"
+                                  "val": "0.85"
                                 }
                               }
                             }
@@ -387,7 +427,7 @@
                               },
                               "rhs": {
                                 "const": {
-                                  "val": "0.7"
+                                  "val": "0.85"
                                 }
                               }
                             }
@@ -411,7 +451,7 @@
                               },
                               "rhs": {
                                 "const": {
-                                  "val": "0.7"
+                                  "val": "0.85"
                                 }
                               }
                             }
@@ -429,7 +469,7 @@
                               },
                               "rhs": {
                                 "const": {
-                                  "val": "0.7"
+                                  "val": "0.85"
                                 }
                               }
                             }
@@ -447,7 +487,7 @@
                               },
                               "rhs": {
                                 "const": {
-                                  "val": "0.7"
+                                  "val": "0.85"
                                 }
                               }
                             }
@@ -471,7 +511,7 @@
                               },
                               "rhs": {
                                 "const": {
-                                  "val": "0.7"
+                                  "val": "0.85"
                                 }
                               }
                             }
@@ -489,7 +529,7 @@
                               },
                               "rhs": {
                                 "const": {
-                                  "val": "0.7"
+                                  "val": "0.85"
                                 }
                               }
                             }
@@ -507,7 +547,7 @@
                               },
                               "rhs": {
                                 "const": {
-                                  "val": "0.7"
+                                  "val": "0.85"
                                 }
                               }
                             }
@@ -531,7 +571,7 @@
                               },
                               "rhs": {
                                 "const": {
-                                  "val": "0.7"
+                                  "val": "0.85"
                                 }
                               }
                             }
@@ -549,7 +589,7 @@
                               },
                               "rhs": {
                                 "const": {
-                                  "val": "0.7"
+                                  "val": "0.85"
                                 }
                               }
                             }
@@ -567,7 +607,7 @@
                               },
                               "rhs": {
                                 "const": {
-                                  "val": "0.7"
+                                  "val": "0.85"
                                 }
                               }
                             }
@@ -582,7 +622,7 @@
           }
         }
       },
-      "notes": "Prayer of Healing heals the healer's whole party, so it is cast on a party member and only once three of the four are down."
+      "notes": "Prayer of Healing heals the healer's whole party, so it is cast on a party member and only once three of the four are under 85% of their health."
     },
     {
       "action": {
