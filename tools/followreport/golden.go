@@ -25,11 +25,13 @@ const (
 	colRank              = "Rank"
 	colSpellID           = "SpellID"
 	colVerdict           = "Verdict"
+	colDiff              = "Diff"
 	colDamage            = "Damage"
 	colAbility           = "Ability"
 	colDisposition       = "Disposition"
 	dispositionNone      = ""
 	dispositionUnsorted  = "unclassified"
+	verdictMatch         = "match"
 	verdictMismatch      = "mismatch"
 	damageDeclaredDiffer = "declared, differs"
 )
@@ -43,7 +45,7 @@ type RowKey struct {
 }
 
 // Row is the part of a spell row the verdict reads.
-type Row struct{ Verdict, Damage string }
+type Row struct{ Verdict, Damage, Diff string }
 
 // Trainable is one row of the unregistered-trainables table.
 type Trainable struct {
@@ -94,27 +96,26 @@ func splitCells(line string) []string {
 	return cells
 }
 
-// parseTable reads the first markdown table in the section's lines.
-func parseTable(lines []string) (table, bool) {
-	var t table
-	started := false
+// parseTables reads every markdown table in the section's lines, in order.
+func parseTables(lines []string) []table {
+	var tables []table
+	inTable := false
 	for _, line := range lines {
 		if !strings.HasPrefix(line, tableRowPrefix) {
-			if started {
-				break
-			}
+			inTable = false
 			continue
 		}
 		cells := splitCells(line)
 		switch {
-		case !started:
-			t.header, started = cells, true
+		case !inTable:
+			tables, inTable = append(tables, table{header: cells}), true
 		case strings.HasPrefix(cells[0], "---"):
 		default:
-			t.rows = append(t.rows, cells)
+			last := &tables[len(tables)-1]
+			last.rows = append(last.rows, cells)
 		}
 	}
-	return t, started
+	return tables
 }
 
 // splitSections maps each "## " heading line to the lines beneath it.
@@ -124,6 +125,7 @@ func splitSections(lines []string) map[string][]string {
 	for _, line := range lines {
 		if strings.HasPrefix(line, headingPrefix) {
 			current = strings.TrimSpace(line)
+			sections[current] = nil
 			continue
 		}
 		if current != "" {
@@ -143,12 +145,20 @@ func className(lines []string) (string, error) {
 	return "", fmt.Errorf("no H1 class heading")
 }
 
-func parseSpellRows(section string, lines []string, into map[RowKey]Row) error {
-	t, ok := parseTable(lines)
-	if !ok {
-		return nil
+func parseSpellRows(section, heading string, lines []string, present bool, into map[RowKey]Row) error {
+	if !present {
+		return fmt.Errorf("no %q section", heading)
 	}
-	idx, err := t.requireColumns(colSpec, colLevel, colRank, colSpellID, colVerdict, colDamage)
+	for _, t := range parseTables(lines) {
+		if err := addSpellRows(section, t, into); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func addSpellRows(section string, t table, into map[RowKey]Row) error {
+	idx, err := t.requireColumns(colSpec, colLevel, colRank, colSpellID, colVerdict, colDamage, colDiff)
 	if err != nil {
 		return fmt.Errorf("%s: %w", section, err)
 	}
@@ -160,7 +170,10 @@ func parseSpellRows(section string, lines []string, into map[RowKey]Row) error {
 		if err != nil {
 			return err
 		}
-		into[key] = Row{Verdict: cells[idx[4]], Damage: cells[idx[5]]}
+		if _, dup := into[key]; dup {
+			return fmt.Errorf("%s: duplicate row %+v", section, key)
+		}
+		into[key] = Row{Verdict: cells[idx[4]], Damage: cells[idx[5]], Diff: cells[idx[6]]}
 	}
 	return nil
 }
@@ -179,26 +192,34 @@ func rowKey(section string, cells []string, idx []int) (RowKey, error) {
 
 func parseTrainables(lines []string) (map[string]Trainable, error) {
 	out := map[string]Trainable{}
-	t, ok := parseTable(lines)
-	if !ok {
-		return out, nil
+	for _, t := range parseTables(lines) {
+		if err := addTrainables(t, out); err != nil {
+			return nil, err
+		}
 	}
+	return out, nil
+}
+
+func addTrainables(t table, into map[string]Trainable) error {
 	abilityCol := t.column(colAbility)
 	if abilityCol < 0 {
-		return nil, fmt.Errorf("trainables: no %q column in header %v", colAbility, t.header)
+		return fmt.Errorf("trainables: no %q column in header %v", colAbility, t.header)
 	}
 	dispCol := t.column(colDisposition)
 	for _, cells := range t.rows {
 		if len(cells) != len(t.header) {
-			return nil, fmt.Errorf("trainables: row has %d cells, header has %d: %v", len(cells), len(t.header), cells)
+			return fmt.Errorf("trainables: row has %d cells, header has %d: %v", len(cells), len(t.header), cells)
 		}
 		tr := Trainable{Name: cells[abilityCol], HasDispositionColumn: dispCol >= 0}
 		if dispCol >= 0 {
 			tr.Disposition = cells[dispCol]
 		}
-		out[tr.Name] = tr
+		if _, dup := into[tr.Name]; dup {
+			return fmt.Errorf("trainables: duplicate ability %q", tr.Name)
+		}
+		into[tr.Name] = tr
 	}
-	return out, nil
+	return nil
 }
 
 // ParseGolden reads one class's conformance golden.
@@ -223,7 +244,8 @@ func parseGoldenText(text string) (Golden, error) {
 	g := Golden{Class: class, Rows: map[RowKey]Row{}}
 	sections := splitSections(lines)
 	for heading, section := range map[string]string{headingSpells: sectionSpells, headingTalentGated: sectionTalentGated} {
-		if err := parseSpellRows(section, sections[heading], g.Rows); err != nil {
+		lines, present := sections[heading]
+		if err := parseSpellRows(section, heading, lines, present, g.Rows); err != nil {
 			return Golden{}, err
 		}
 	}

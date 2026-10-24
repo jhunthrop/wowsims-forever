@@ -29,11 +29,16 @@ type ClassDelta struct {
 	NewUndisposed []string
 }
 
+// isWorse: a new row is worse unless it already matches; an existing row is
+// worse when it newly mismatches or newly declares a differing damage.
 func isWorse(before, after Row, existed bool) bool {
-	if after.Verdict == verdictMismatch && (!existed || before.Verdict != verdictMismatch) {
+	if !existed {
+		return after.Verdict != verdictMatch || after.Damage == damageDeclaredDiffer
+	}
+	if after.Verdict == verdictMismatch && before.Verdict != verdictMismatch {
 		return true
 	}
-	return after.Damage == damageDeclaredDiffer && (!existed || before.Damage != damageDeclaredDiffer)
+	return after.Damage == damageDeclaredDiffer && before.Damage != damageDeclaredDiffer
 }
 
 func worsenedRows(before, after Golden) []RowChange {
@@ -114,7 +119,17 @@ func CompareClass(before, after Golden) ClassDelta {
 }
 
 func (d ClassDelta) needsReview() bool {
-	return len(d.Worsened) > 0 || len(d.NewUndisposed) > 0
+	return len(d.Worsened) > 0 || len(d.NewUndisposed) > 0 || d.countGrew()
+}
+
+// countGrew reports whether any tracked count is higher after than before.
+func (d ClassDelta) countGrew() bool {
+	for _, c := range d.Counts {
+		if c[1] > c[0] {
+			return true
+		}
+	}
+	return false
 }
 
 // ClassSetChange lists the classes that appeared in or vanished from the goldens.

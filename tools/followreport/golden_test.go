@@ -59,6 +59,47 @@ func TestParseGoldenErrors(t *testing.T) {
 	}
 }
 
+func TestParseGoldenSubTablesMerge(t *testing.T) {
+	g := mustParse(t, "mage-subtable-classified", "mage")
+	if got := g.Trainables["Mark of the Wild (1126)"].Disposition; got != "modeled as core buff" {
+		t.Fatalf("sub-table disposition = %q", got)
+	}
+	if _, ok := g.Trainables["Sleep (700)"]; !ok {
+		t.Fatal("first table row lost")
+	}
+}
+
+func TestParseGoldenFailFast(t *testing.T) {
+	good, err := os.ReadFile(filepath.Join("testdata", "mage-a", "mage.golden.md"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	text := string(good)
+	fireball := "| Mage | 10 | Fireball | 1 | 133 |"
+	line := text[strings.Index(text, fireball):]
+	line = line[:strings.Index(line, "\n")+1]
+	cases := map[string]struct{ body, want string }{
+		"no spells":         {strings.Replace(text, headingSpells, "## Other", 1), headingSpells},
+		"no talent-gated":   {strings.Replace(text, headingTalentGated, "## Other", 1), headingTalentGated},
+		"duplicate row":     {strings.Replace(text, line, line+line, 1), "duplicate row"},
+		"duplicate ability": {text + "\n### Again\n\n| Ability |\n|---|\n| Sleep (700) |\n", "duplicate ability"},
+	}
+	for name, tc := range cases {
+		_, err := parseGoldenText(tc.body)
+		if err == nil || !strings.Contains(err.Error(), tc.want) {
+			t.Errorf("%s: err = %v, want mention of %q", name, err, tc.want)
+		}
+	}
+}
+
+func TestParseGoldenKeepsDiff(t *testing.T) {
+	g := mustParse(t, "mage-one-mismatch", "mage")
+	key := RowKey{Section: sectionSpells, Spec: "Mage", Level: 10, SpellID: 116, Rank: 1}
+	if got := g.Rows[key].Diff; got != "cost: 25 vs 30" {
+		t.Fatalf("diff = %q", got)
+	}
+}
+
 func TestParseRealGoldens(t *testing.T) {
 	paths, _ := filepath.Glob("../../sim/core/testdata/conformance/*.golden.md")
 	if len(paths) == 0 {

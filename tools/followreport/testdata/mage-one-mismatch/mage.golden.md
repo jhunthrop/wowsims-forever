@@ -7,7 +7,7 @@ Client build: x.
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Mage | 10 | Fireball | 1 | 133 | 1.00→1.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | declared, matches |
-| Mage | 10 | Frostbolt | 1 | 116 | 1.00→1.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | n/a | mismatch |  | n/a | n/a | n/a |
+| Mage | 10 | Frostbolt | 1 | 116 | 1.00→1.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | n/a | mismatch | cost: 25 vs 30 | n/a | n/a | n/a |
 
 ## Talent-gated spells
 

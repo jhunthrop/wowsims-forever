@@ -30,6 +30,10 @@ func TestCompareClassVerdicts(t *testing.T) {
 		{"a new row that is mismatch", "mage-a", "mage-plus-mismatch-row", verdictReview},
 		{"declared, matches becomes declared, differs", "mage-a", "mage-damage-differs", verdictReview},
 		{"a new trainable in a class with dispositions, unclassified", "mage-a", "mage-new-unclassified", verdictReview},
+		{"a new row that is client-scripted", "mage-a", "mage-plus-client-scripted-row", verdictReview},
+		{"an existing trainable becomes unclassified", "mage-a", "mage-trainable-unclassified", verdictReview},
+		{"a new unclassified row in a ### sub-table", "mage-a", "mage-subtable-unclassified", verdictReview},
+		{"a new classified row in a ### sub-table", "mage-a", "mage-subtable-classified", verdictClean},
 		{"a new trainable that arrives classified", "mage-a", "mage-new-classified", verdictClean},
 		{"a new trainable in a class with no Disposition column", "rogue-a", "rogue-new-trainable", verdictReview},
 	}

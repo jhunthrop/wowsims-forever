@@ -52,3 +52,11 @@ func TestRenderSections(t *testing.T) {
 		}
 	}
 }
+
+func TestRenderWorsenedRowShowsDiff(t *testing.T) {
+	w := RowChange{Key: RowKey{Section: sectionSpells, SpellID: 116}, After: Row{Verdict: verdictMismatch, Diff: "cost: 25 vs 30"}}
+	out := Render(Report{Verdict: verdictReview, Classes: map[string]ClassDelta{"mage": {Worsened: []RowChange{w}}}})
+	if !strings.Contains(out, "cost: 25 vs 30") {
+		t.Fatalf("diff missing:\n%s", out)
+	}
+}

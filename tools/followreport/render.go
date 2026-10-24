@@ -105,8 +105,12 @@ func describeRowChange(w RowChange) string {
 	if w.Added {
 		origin = "new row"
 	}
-	return fmt.Sprintf("%s %s level %d spell %d rank %d: %s, %s (%s)",
+	text := fmt.Sprintf("%s %s level %d spell %d rank %d: %s, %s (%s)",
 		k.Section, k.Spec, k.Level, k.SpellID, k.Rank, w.After.Verdict, w.After.Damage, origin)
+	if w.After.Diff != "" {
+		text += "; diff: " + w.After.Diff
+	}
+	return text
 }
 
 func renderTalents(m *markdown, d TalentDelta) {
