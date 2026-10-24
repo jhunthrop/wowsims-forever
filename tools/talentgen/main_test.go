@@ -357,8 +357,8 @@ func TestFixturesMatchTheSiteData(t *testing.T) {
 // gates spending on prereqLocation (talents_picker.tsx, canSetPoints) and
 // draws its arrows from it, so a dropped edge lets a player spend into a
 // talent the client would not let them take, silently and with no arrow
-// to show what is missing. 72 edges across the nine classes (build
-// 1.60.1.70425: Arcane Wrath behind Arcane Blast and one more warrior edge
+// to show what is missing. 72 edges across the nine classes (at the
+// current build: Arcane Wrath behind Arcane Blast and one more warrior edge
 // on top of 70009's Shifting Power and Gore Drinker; Bloodthirst and Last
 // Stand lost theirs in 70009).
 func TestUITreeJSONCarriesEveryPrerequisite(t *testing.T) {
