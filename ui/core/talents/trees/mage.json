@@ -256,8 +256,8 @@
       {
         "fieldName": "elementalPrecision",
         "location": { "rowIdx": 0, "colIdx": 2 },
-        "spellIds": [29438, 29438, 29438, 29438, 29438],
-        "maxPoints": 5
+        "spellIds": [29438, 29438, 29438],
+        "maxPoints": 3
       },
       {
         "fieldName": "iceShards",
@@ -266,9 +266,9 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "permafrost",
+        "fieldName": "frostbite",
         "location": { "rowIdx": 1, "colIdx": 1 },
-        "spellIds": [11175, 11175, 11175],
+        "spellIds": [11071, 11071, 11071],
         "maxPoints": 3
       },
       {
@@ -278,21 +278,21 @@
         "maxPoints": 2
       },
       {
-        "fieldName": "frostbite",
+        "fieldName": "permafrost",
         "location": { "rowIdx": 1, "colIdx": 3 },
-        "spellIds": [11071, 11071, 11071],
-        "maxPoints": 3
-      },
-      {
-        "fieldName": "piercingIce",
-        "location": { "rowIdx": 2, "colIdx": 0 },
-        "spellIds": [11151, 11151, 11151],
+        "spellIds": [11175, 11175, 11175],
         "maxPoints": 3
       },
       {
         "fieldName": "frostChanneling",
-        "location": { "rowIdx": 2, "colIdx": 1 },
+        "location": { "rowIdx": 2, "colIdx": 0 },
         "spellIds": [11160, 11160, 11160],
+        "maxPoints": 3
+      },
+      {
+        "fieldName": "improvedBlizzard",
+        "location": { "rowIdx": 2, "colIdx": 1 },
+        "spellIds": [11185, 11185, 11185],
         "maxPoints": 3
       },
       {
@@ -300,12 +300,6 @@
         "location": { "rowIdx": 2, "colIdx": 2 },
         "spellIds": [1312002],
         "maxPoints": 1
-      },
-      {
-        "fieldName": "improvedBlizzard",
-        "location": { "rowIdx": 2, "colIdx": 3 },
-        "spellIds": [11185, 11185, 11185],
-        "maxPoints": 3
       },
       {
         "fieldName": "arcticReach",

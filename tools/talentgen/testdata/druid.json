@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70425",
+  "build": "1.60.1.70532",
   "class_id": 11,
   "class_slug": "druid",
   "trees": [
@@ -894,23 +894,23 @@
           "ranks": [
             {
               "spell_id": 17063,
-              "description": "Gives you a 14% chance to avoid interruption caused by damage while casting Arcane and Nature spells."
+              "description": "Gives your Arcane and Nature spells a 14% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 17063,
-              "description": "Gives you a 28% chance to avoid interruption caused by damage while casting Arcane and Nature spells."
+              "description": "Gives your Arcane and Nature spells a 28% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 17063,
-              "description": "Gives you a 42% chance to avoid interruption caused by damage while casting Arcane and Nature spells."
+              "description": "Gives your Arcane and Nature spells a 42% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 17063,
-              "description": "Gives you a 56% chance to avoid interruption caused by damage while casting Arcane and Nature spells."
+              "description": "Gives your Arcane and Nature spells a 56% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 17063,
-              "description": "Gives you a 70% chance to avoid interruption caused by damage while casting Arcane and Nature spells."
+              "description": "Gives your Arcane and Nature spells a 70% chance to not lose casting time when you take damage."
             }
           ],
           "spell_id": 17063

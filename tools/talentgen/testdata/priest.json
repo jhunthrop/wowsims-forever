@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70425",
+  "build": "1.60.1.70532",
   "class_id": 5,
   "class_slug": "priest",
   "trees": [
@@ -467,15 +467,15 @@
           "ranks": [
             {
               "spell_id": 14913,
-              "description": "Gives you a 23% chance to avoid interruption caused by damage while casting any spell."
+              "description": "Gives your spells a 23% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 14913,
-              "description": "Gives you a 47% chance to avoid interruption caused by damage while casting any spell."
+              "description": "Gives your spells a 47% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 14913,
-              "description": "Gives you a 70% chance to avoid interruption caused by damage while casting any spell."
+              "description": "Gives your spells a 70% chance to not lose casting time when you take damage."
             }
           ],
           "spell_id": 14913

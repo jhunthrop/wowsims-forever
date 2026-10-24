@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70425",
+  "build": "1.60.1.70532",
   "class_id": 2,
   "class_slug": "paladin",
   "trees": [
@@ -1177,15 +1177,15 @@
           "ranks": [
             {
               "spell_id": 1311084,
-              "description": "Increases your spell damage by up to 10% of your Intellect."
-            },
-            {
-              "spell_id": 1311084,
               "description": "Increases your spell damage by up to 20% of your Intellect."
             },
             {
               "spell_id": 1311084,
-              "description": "Increases your spell damage by up to 30% of your Intellect."
+              "description": "Increases your spell damage by up to 40% of your Intellect."
+            },
+            {
+              "spell_id": 1311084,
+              "description": "Increases your spell damage by up to 60% of your Intellect."
             }
           ],
           "spell_id": 1311084

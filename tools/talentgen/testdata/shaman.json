@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70425",
+  "build": "1.60.1.70532",
   "class_id": 7,
   "class_slug": "shaman",
   "trees": [
@@ -257,15 +257,15 @@
           "ranks": [
             {
               "spell_id": 29062,
-              "description": "Reduces the pushback suffered from damaging attacks while casting Lightning Bolt, Chain Lightning, and Lava Burst by 23%."
+              "description": "Gives your Lightning Bolt, Chain Lightning, and Lava Burst spells a 23% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 29062,
-              "description": "Reduces the pushback suffered from damaging attacks while casting Lightning Bolt, Chain Lightning, and Lava Burst by 47%."
+              "description": "Gives your Lightning Bolt, Chain Lightning, and Lava Burst spells a 47% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 29062,
-              "description": "Reduces the pushback suffered from damaging attacks while casting Lightning Bolt, Chain Lightning, and Lava Burst by 70%."
+              "description": "Gives your Lightning Bolt, Chain Lightning, and Lava Burst spells a 70% chance to not lose casting time when you take damage."
             }
           ],
           "spell_id": 29062
@@ -1063,15 +1063,15 @@
           "ranks": [
             {
               "spell_id": 16181,
-              "description": "Gives you a 23% chance to avoid interruption caused by damage while casting any healing spell."
+              "description": "Gives your healing spells a 23% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 16181,
-              "description": "Gives you a 47% chance to avoid interruption caused by damage while casting any healing spell."
+              "description": "Gives your healing spells a 47% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 16181,
-              "description": "Gives you a 70% chance to avoid interruption caused by damage while casting any healing spell."
+              "description": "Gives your healing spells a 70% chance to not lose casting time when you take damage."
             }
           ],
           "spell_id": 16181

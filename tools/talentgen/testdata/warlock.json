@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70425",
+  "build": "1.60.1.70532",
   "class_id": 9,
   "class_slug": "warlock",
   "trees": [
@@ -195,15 +195,15 @@
           "ranks": [
             {
               "spell_id": 17783,
-              "description": "Gives you a 23% chance to avoid interruption caused by damage while channeling or casting your Drain Life, Drain Mana, Drain Soul, or Wrack spells."
+              "description": "Gives your Drain Life, Drain Mana, Drain Soul, and Wrack spells a 23% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 17783,
-              "description": "Gives you a 47% chance to avoid interruption caused by damage while channeling or casting your Drain Life, Drain Mana, Drain Soul, or Wrack spells."
+              "description": "Gives your Drain Life, Drain Mana, Drain Soul, and Wrack spells a 47% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 17783,
-              "description": "Gives you a 70% chance to avoid interruption caused by damage while channeling or casting your Drain Life, Drain Mana, Drain Soul, or Wrack spells."
+              "description": "Gives your Drain Life, Drain Mana, Drain Soul, and Wrack spells a 70% chance to not lose casting time when you take damage."
             }
           ],
           "spell_id": 17783
@@ -220,7 +220,7 @@
           "ranks": [
             {
               "spell_id": 18288,
-              "description": "Increases the effect of your next Curse of Weakness or Bane of Agony by 50%, or your next Curse of Exhaustion by 50%.  Lasts 30 sec."
+              "description": "Increases the effect of your next Curse of Weakness or Bane of Agony by 50%, or your next Curse of Exhaustion by 20%.  Lasts 30 sec."
             }
           ],
           "spell_id": 18288
@@ -1118,15 +1118,15 @@
           "ranks": [
             {
               "spell_id": 18135,
-              "description": "Gives you a 23% chance to resist interruption caused by damage while casting or channeling any Destruction spell."
+              "description": "Gives your Destruction spells a 23% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 18135,
-              "description": "Gives you a 47% chance to resist interruption caused by damage while casting or channeling any Destruction spell."
+              "description": "Gives your Destruction spells a 47% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 18135,
-              "description": "Gives you a 70% chance to resist interruption caused by damage while casting or channeling any Destruction spell."
+              "description": "Gives your Destruction spells a 70% chance to not lose casting time when you take damage."
             }
           ],
           "spell_id": 18135
