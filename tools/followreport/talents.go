@@ -39,12 +39,15 @@ type TalentsFile struct {
 	Trees     []TalentTree `json:"trees"`
 }
 
-// TalentChange is one added, removed or changed talent node.
+// TalentChange is one added, removed or changed talent node. Lines carries
+// the text a reviewer needs: every rank's description for an added or
+// removed node, and each changed field with its old and new value for a
+// changed node, because the engine's rate for a talent lives in hand-written Go.
 type TalentChange struct {
 	Class  string
 	NodeID int
 	Name   string
-	Detail string
+	Lines  []string
 }
 
 // TalentDelta lists every talent node that moved between two builds.
@@ -102,31 +105,38 @@ func nodesByID(f TalentsFile) map[int]Talent {
 	return nodes
 }
 
-// describeChange names what differs between two versions of a node, or "".
-func describeChange(prev, cur Talent) string {
-	var parts []string
+// describeChange lists what differs between two versions of a node, or nil.
+func describeChange(prev, cur Talent) []string {
+	var lines []string
 	if prev.MaxRank != cur.MaxRank {
-		parts = append(parts, fmt.Sprintf("max_rank %d -> %d", prev.MaxRank, cur.MaxRank))
+		lines = append(lines, fmt.Sprintf("max_rank %d → %d", prev.MaxRank, cur.MaxRank))
 	}
 	if prev.SpellID != cur.SpellID {
-		parts = append(parts, fmt.Sprintf("spell_id %d -> %d", prev.SpellID, cur.SpellID))
+		lines = append(lines, fmt.Sprintf("spell_id %d → %d", prev.SpellID, cur.SpellID))
 	}
-	if !sameRanks(prev.Ranks, cur.Ranks) {
-		parts = append(parts, "rank description changed")
-	}
-	return strings.Join(parts, "; ")
-}
-
-func sameRanks(a, b []TalentRank) bool {
-	if len(a) != len(b) {
-		return false
-	}
-	for i := range a {
-		if a[i].Description != b[i].Description {
-			return false
+	for i := range max(len(prev.Ranks), len(cur.Ranks)) {
+		old, now := rankDescription(prev.Ranks, i), rankDescription(cur.Ranks, i)
+		if old != now {
+			lines = append(lines, fmt.Sprintf("rank %d: %q → %q", i+1, old, now))
 		}
 	}
-	return true
+	return lines
+}
+
+// describeRanks lists every rank's description of a node.
+func describeRanks(t Talent) []string {
+	lines := make([]string, 0, len(t.Ranks))
+	for i, r := range t.Ranks {
+		lines = append(lines, fmt.Sprintf("rank %d: %q", i+1, r.Description))
+	}
+	return lines
+}
+
+func rankDescription(ranks []TalentRank, i int) string {
+	if i < len(ranks) {
+		return ranks[i].Description
+	}
+	return ""
 }
 
 func sortedKeys[V any](m map[string]V) []string {
@@ -160,16 +170,16 @@ func DiffTalents(prev, cur map[string]TalentsFile) TalentDelta {
 		p, c := nodesByID(prev[class]), nodesByID(cur[class])
 		for _, id := range sortedIDs(c) {
 			old, existed := p[id]
-			switch detail := describeChange(old, c[id]); {
+			switch lines := describeChange(old, c[id]); {
 			case !existed:
-				d.Added = append(d.Added, TalentChange{Class: class, NodeID: id, Name: c[id].Name})
-			case detail != "":
-				d.Changed = append(d.Changed, TalentChange{Class: class, NodeID: id, Name: c[id].Name, Detail: detail})
+				d.Added = append(d.Added, TalentChange{Class: class, NodeID: id, Name: c[id].Name, Lines: describeRanks(c[id])})
+			case len(lines) > 0:
+				d.Changed = append(d.Changed, TalentChange{Class: class, NodeID: id, Name: c[id].Name, Lines: lines})
 			}
 		}
 		for _, id := range sortedIDs(p) {
 			if _, kept := c[id]; !kept {
-				d.Removed = append(d.Removed, TalentChange{Class: class, NodeID: id, Name: p[id].Name})
+				d.Removed = append(d.Removed, TalentChange{Class: class, NodeID: id, Name: p[id].Name, Lines: describeRanks(p[id])})
 			}
 		}
 	}

@@ -123,7 +123,10 @@ func renderTalents(m *markdown, d TalentDelta) {
 		changes []TalentChange
 	}{{"added", d.Added}, {"removed", d.Removed}, {"changed", d.Changed}} {
 		for _, c := range group.changes {
-			m.line("- %s %s node %d %s %s", group.label, c.Class, c.NodeID, c.Name, c.Detail)
+			m.line("- %s %s node %d %s", group.label, c.Class, c.NodeID, c.Name)
+			for _, line := range c.Lines {
+				m.line("  - %s", line)
+			}
 		}
 	}
 }

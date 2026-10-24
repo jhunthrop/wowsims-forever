@@ -60,3 +60,35 @@ func TestRenderWorsenedRowShowsDiff(t *testing.T) {
 		t.Fatalf("diff missing:\n%s", out)
 	}
 }
+
+func TestRenderTalentsShowsText(t *testing.T) {
+	d := DiffTalents(loadTalentFixture(t, "talents-prev"), loadTalentFixture(t, "talents-cur"))
+	out := Render(Report{Verdict: verdictReview, Talents: d})
+	for _, want := range []string{
+		`changed mage node 10 Arcane Focus`,
+		`rank 1: "Hit +2%" → "Hit +3%"`,
+		`max_rank 2 → 3`,
+		`removed mage node 12 Old Talent`,
+		`rank 1: "Gone"`,
+		`added mage node 13 New Talent`,
+		`rank 1: "Fresh"`,
+	} {
+		if !strings.Contains(out, want) {
+			t.Errorf("missing %q in\n%s", want, out)
+		}
+	}
+}
+
+func TestDescribeChangeRankTextAndSpellID(t *testing.T) {
+	prev := Talent{SpellID: 1, MaxRank: 1, Ranks: []TalentRank{{Description: "old"}}}
+	cur := Talent{SpellID: 2, MaxRank: 2, Ranks: []TalentRank{{Description: "new"}, {Description: "second"}}}
+	got := strings.Join(describeChange(prev, cur), "\n")
+	for _, want := range []string{"max_rank 1 → 2", "spell_id 1 → 2", `rank 1: "old" → "new"`, `rank 2: "" → "second"`} {
+		if !strings.Contains(got, want) {
+			t.Errorf("missing %q in\n%s", want, got)
+		}
+	}
+	if lines := describeChange(prev, prev); lines != nil {
+		t.Errorf("unchanged node: lines = %v, want nil", lines)
+	}
+}
