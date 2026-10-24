@@ -218,6 +218,10 @@ sim/core/proto/api.pb.go: proto/*.proto
 	  echo "  go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.6"; \
 	  echo "  export PATH=\$$PATH:\$$(go env GOPATH)/bin"; \
 	  exit 1; }
+	@pinned=$$(cat .protoc-version); installed=$$(protoc --version | sed 's/^libprotoc //'); \
+	[ "$$installed" = "$$pinned" ] || { \
+	  echo "protoc $$installed installed; this repository pins $$pinned (.protoc-version)"; \
+	  exit 1; }
 	protoc -I=./proto --go_out=./sim/core ./proto/*.proto
 
 # Only useful for building the lib on a host platform that matches the target platform

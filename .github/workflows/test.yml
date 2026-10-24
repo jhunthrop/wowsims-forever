@@ -4,7 +4,7 @@
 name: test
 on:
   push:
-    branches: [forever]
+    branches: [master, forever]
   pull_request:
   workflow_dispatch:
 permissions: { contents: read }
@@ -21,7 +21,10 @@ jobs:
         with: { go-version-file: go.mod, cache-dependency-path: go.sum }
       - name: protoc
         run: |
-          sudo apt-get update && sudo apt-get install -y protobuf-compiler
+          VER=$(cat .protoc-version)
+          curl -sSL -o /tmp/protoc.zip "https://github.com/protocolbuffers/protobuf/releases/download/v$VER/protoc-$VER-linux-x86_64.zip"
+          unzip -q -o /tmp/protoc.zip -d "$HOME/.local"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
           go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.6
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
       # The generated protobufs are committed (see PORTING.md) because the

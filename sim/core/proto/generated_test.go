@@ -4,8 +4,66 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"testing"
 )
+
+const (
+	repoRoot            = "../../../"
+	protocVersionFile   = ".protoc-version"
+	protocVersionPrefix = "libprotoc "
+)
+
+// pinnedProtocVersion is the protoc release the committed .pb.go files were
+// generated with, read from the repository's .protoc-version.
+func pinnedProtocVersion() (string, error) {
+	raw, err := os.ReadFile(filepath.Join(repoRoot, protocVersionFile))
+	if err != nil {
+		return "", err
+	}
+	return strings.TrimSpace(string(raw)), nil
+}
+
+// protocVersionFromOutput extracts "36.2" from `protoc --version` output.
+func protocVersionFromOutput(out string) string {
+	return strings.TrimPrefix(strings.TrimSpace(out), protocVersionPrefix)
+}
+
+func TestProtocVersionIsPinned(t *testing.T) {
+	pinned, err := pinnedProtocVersion()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if pinned != "36.2" {
+		t.Errorf("pinned = %q, want the version the committed .pb.go headers name, 36.2", pinned)
+	}
+	if got := protocVersionFromOutput("libprotoc 36.2\n"); got != "36.2" {
+		t.Errorf("parse = %q", got)
+	}
+}
+
+// requirePinnedProtoc skips locally, and fails in CI, when the installed
+// protoc is not the release the committed files were generated with.
+func requirePinnedProtoc(t *testing.T) {
+	t.Helper()
+	pinned, err := pinnedProtocVersion()
+	if err != nil {
+		t.Fatal(err)
+	}
+	out, err := exec.Command("protoc", "--version").Output()
+	if err != nil {
+		t.Fatalf("protoc --version failed: %v", err)
+	}
+	installed := protocVersionFromOutput(string(out))
+	if installed == pinned {
+		return
+	}
+	msg := "protoc %s is installed; the committed .pb.go were generated with protoc %s (.protoc-version). Install that release; the files are not stale."
+	if os.Getenv("CI") != "" {
+		t.Fatalf(msg, installed, pinned)
+	}
+	t.Skipf(msg, installed, pinned)
+}
 
 // The generated protobuf code is committed (see PORTING.md): the site
 // consumes this repository as a Go module at a pinned pseudo-version, and
@@ -19,6 +77,8 @@ func TestGeneratedProtosMatchSources(t *testing.T) {
 	if _, err := exec.LookPath("protoc-gen-go"); err != nil {
 		t.Skip("protoc-gen-go not installed; run go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.6")
 	}
+
+	requirePinnedProtoc(t)
 
 	root := filepath.Join("..", "..", "..")
 	tmp := t.TempDir()
