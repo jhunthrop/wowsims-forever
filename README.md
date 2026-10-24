@@ -211,4 +211,4 @@ Don't touch the raid sim until the individual sim is ready for launch; anything 
  - Update `ui/raid/presets.ts` to include a constructor factory in the `specSimFactories` variable and add configurations for new Players in the `playerPresets` variable.
 
 # Deployment
-Thanks to the workflow defined in `.github/workflows/deploy.yml`, pushes to `master` automatically build and deploy a new site so there's nothing to do here. Sit back and appreciate your new sim!
+This fork deploys nothing of its own: the Forever Sixty site builds the engine into its sim pages from the sha it pins (see PORTING.md). The only workflow here is `.github/workflows/test.yml`, the Go and proto test suite on every push and pull request.
