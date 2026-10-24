@@ -329,3 +329,13 @@ spellconst:
 	  go run ./sim/core/spellconst/gen -in "$$src" -out "sim/$$class/constants_auto_gen.go" -package "$$class" || exit 1; \
 	done
 	gofmt -w ./sim
+
+.PHONY: follow
+# follow regenerates every client-derived artifact from one site build
+# (talents, protos, constants, base stats, relic mods, set rows, goldens),
+# records the build in assets/db_inputs/FOREVER_BUILD and writes
+# dist/FOLLOW-REPORT.md and dist/FOLLOW-PATHS. Exit 0 clean, 3 review,
+# 1 failure (make itself reports any of those but 0 as 2; run the script
+# directly to read 3). The sequence lives in tools/follow.sh, nowhere else.
+follow:
+	tools/follow.sh "$(SITE_DIR)" "$(BUILD)"

@@ -86,6 +86,23 @@ one is present, so the test needs no network to run and cannot quietly
 pin stale data. Task 1's `TestGeneratedProtosMatchSources` closes the
 remaining link, from `.proto` to the committed `.pb.go`.
 
+## Following a client build: `make follow`
+
+The whole regeneration sequence for a new client build lives in one script,
+`tools/follow.sh`; run it as `make follow SITE_DIR=/path/to/forever
+BUILD=<build>` on a clean checkout. It copies the site build's tables, runs
+every generator in dependency order (talents and protos, constants, base
+stats, relic mods, set rows), regenerates the conformance goldens when the
+engine still compiles, writes the build to `assets/db_inputs/FOREVER_BUILD`,
+and writes `dist/FOLLOW-REPORT.md` (opening `verdict: clean|review`) and
+`dist/FOLLOW-PATHS`, the allowlisted paths it changed. It exits 0 on clean,
+3 on review and 1 on a generator failure (through make, any non-zero status
+is 2; a caller that needs the 3 runs the script), and fails if any path outside its
+allowlist changed. Stage exactly `dist/FOLLOW-PATHS`, never `git add -A`.
+`sim/core/testdata/conformance/client/races.json` is the followed build's
+copy of the site's `races.json`, kept so the next follow's racial diff has a
+previous build to compare against.
+
 ## Encounter, result and item fields upstream does not have
 
 The Forever Sixty site's fight styles, sample-iteration report and Top

@@ -1,0 +1,642 @@
+[
+  {
+    "id": 1,
+    "name": "Human",
+    "slug": "human",
+    "faction": "alliance",
+    "placeholder": false,
+    "forever_changes": [
+      {
+        "text": "Racial traits are reworked for Forever.",
+        "sources": [
+          {
+            "label": "Blizzard, What's Next panel recap",
+            "url": "https://news.blizzard.com/en-gb/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Humans can be Hunters, one of six new race and class pairs.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Every race has two active and two passive racial abilities, tuned for similar offensive power.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Racials read from the BlizzCon demo: Will to Survive removes all Stuns on a 3 minute cooldown, Perception gives 20 seconds of stealth detection, Sword Specialization grants 2% spell and ability critical strike chance with a sword, and The Human Spirit grants 5% Spirit.",
+        "sources": [
+          {
+            "label": "Icy Veins, the racial rework",
+            "url": "https://www.icy-veins.com/wow-forever/news/the-racial-rework-gives-every-race-a-reason-to-matter-in-warcraft-forever/",
+            "kind": "community"
+          },
+          {
+            "label": "Talents Forever (demo transcription)",
+            "url": "https://talentsforever.com/data.json",
+            "kind": "community"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Orc",
+    "slug": "orc",
+    "faction": "horde",
+    "placeholder": false,
+    "forever_changes": [
+      {
+        "text": "Racial traits are reworked for Forever.",
+        "sources": [
+          {
+            "label": "Blizzard, What's Next panel recap",
+            "url": "https://news.blizzard.com/en-gb/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Orcs can be Mages, one of six new race and class pairs.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Every race has two active and two passive racial abilities, tuned for similar offensive power.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Racials read from the BlizzCon demo: Blood Fury grants 10% Attack Power and Spell Power for 15 seconds on a 2 minute cooldown, Shatter Curse removes and grants immunity to Curses and Banes and reduces magical damage taken 15% for 8 seconds, Axe Specialization grants 1% critical strike chance with an axe, and Hardiness reduces stun duration 20%.",
+        "sources": [
+          {
+            "label": "Icy Veins, the racial rework",
+            "url": "https://www.icy-veins.com/wow-forever/news/the-racial-rework-gives-every-race-a-reason-to-matter-in-warcraft-forever/",
+            "kind": "community"
+          },
+          {
+            "label": "Talents Forever (demo transcription)",
+            "url": "https://talentsforever.com/data.json",
+            "kind": "community"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Dwarf",
+    "slug": "dwarf",
+    "faction": "alliance",
+    "placeholder": false,
+    "forever_changes": [
+      {
+        "text": "Racial traits are reworked for Forever.",
+        "sources": [
+          {
+            "label": "Blizzard, What's Next panel recap",
+            "url": "https://news.blizzard.com/en-gb/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Shaman is a new Dwarf class in Forever, shown in a hands-on demo at BlizzCon 2026 per one outlet.",
+        "sources": [
+          {
+            "label": "Warcraft Tavern, other race/class combos",
+            "url": "https://www.warcrafttavern.com/forever/news/undead-paladins-other-race-class-combos-in-world-of-warcraft-forever/",
+            "kind": "community"
+          }
+        ]
+      },
+      {
+        "text": "One press roundup reports that the reworked Dwarf racial grants a bonus against beasts; Blizzard has not confirmed it directly.",
+        "sources": [
+          {
+            "label": "guided.news roundup",
+            "url": "https://guided.news/en/news/wow-classic-launches-in-november-everything-you-need-to-know-about-world-of-warcraft-forever/",
+            "kind": "community"
+          }
+        ]
+      },
+      {
+        "text": "Dwarves can be Shamans, one of six new race and class pairs.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Stoneform now reduces physical damage taken instead of raising armor; Find Treasure stacks with other tracking; Mace Specialization grants crit chance with a mace; Big Game Hunter adds damage against Beasts.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Every race has two active and two passive racial abilities, tuned for similar offensive power.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Night Elf",
+    "slug": "night-elf",
+    "faction": "alliance",
+    "placeholder": false,
+    "forever_changes": [
+      {
+        "text": "Racial traits are reworked for Forever.",
+        "sources": [
+          {
+            "label": "Blizzard, What's Next panel recap",
+            "url": "https://news.blizzard.com/en-gb/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Every race has two active and two passive racial abilities, tuned for similar offensive power.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Racials read from the BlizzCon demo: Elune's Light grants 10% critical strike chance for 15 seconds on a 3 minute cooldown, Shadowmeld stealths until you move and is usable in combat at a 2 minute cooldown, Quickness grants dodge and run speed, and Wisp Spirit grants 75% speed while dead. Icy Veins reads Quickness as 2% dodge and 2% speed; Talents Forever reads 1% dodge and 2% speed.",
+        "sources": [
+          {
+            "label": "Icy Veins, the racial rework",
+            "url": "https://www.icy-veins.com/wow-forever/news/the-racial-rework-gives-every-race-a-reason-to-matter-in-warcraft-forever/",
+            "kind": "community"
+          },
+          {
+            "label": "Talents Forever (demo transcription)",
+            "url": "https://talentsforever.com/data.json",
+            "kind": "community"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Undead",
+    "slug": "undead",
+    "faction": "horde",
+    "placeholder": false,
+    "forever_changes": [
+      {
+        "text": "Racial traits are reworked for Forever.",
+        "sources": [
+          {
+            "label": "Blizzard, What's Next panel recap",
+            "url": "https://news.blizzard.com/en-gb/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Paladin is a new Undead class in Forever, shown in an announcement cinematic.",
+        "sources": [
+          {
+            "label": "Wowhead, Undead Paladins coming to Forever",
+            "url": "https://www.wowhead.com/forever/news/undead-paladins-coming-to-world-of-warcraft-forever-382823",
+            "kind": "community"
+          }
+        ]
+      },
+      {
+        "text": "One press roundup reports that the reworked Undead racial drains spells; Blizzard has not confirmed it directly.",
+        "sources": [
+          {
+            "label": "guided.news roundup",
+            "url": "https://guided.news/en/news/wow-classic-launches-in-november-everything-you-need-to-know-about-world-of-warcraft-forever/",
+            "kind": "community"
+          }
+        ]
+      },
+      {
+        "text": "Undead can be Paladins, one of six new race and class pairs.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Will of the Forsaken removes Charm, Fear, and Sleep but no longer grants immunity; Cannibalize restores mana as well as health; Touch of the Grave gives attacks a chance to drain life.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Every race has two active and two passive racial abilities, tuned for similar offensive power.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Tauren",
+    "slug": "tauren",
+    "faction": "horde",
+    "placeholder": false,
+    "forever_changes": [
+      {
+        "text": "Racial traits are reworked for Forever.",
+        "sources": [
+          {
+            "label": "Blizzard, What's Next panel recap",
+            "url": "https://news.blizzard.com/en-gb/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Every race has two active and two passive racial abilities, tuned for similar offensive power.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Racials read from the BlizzCon demo: War Stomp stuns up to 5 enemies within 8 yards for 2 seconds on a 2 minute cooldown, Cultivation grows bonus herbs that need no Herbalism to gather, Plainsrunning raises movement speed the longer you keep moving, and Endurance grants 5% Health and 1% Hit chance.",
+        "sources": [
+          {
+            "label": "Icy Veins, the racial rework",
+            "url": "https://www.icy-veins.com/wow-forever/news/the-racial-rework-gives-every-race-a-reason-to-matter-in-warcraft-forever/",
+            "kind": "community"
+          },
+          {
+            "label": "Talents Forever (demo transcription)",
+            "url": "https://talentsforever.com/data.json",
+            "kind": "community"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Gnome",
+    "slug": "gnome",
+    "faction": "alliance",
+    "placeholder": false,
+    "forever_changes": [
+      {
+        "text": "Racial traits are reworked for Forever.",
+        "sources": [
+          {
+            "label": "Blizzard, What's Next panel recap",
+            "url": "https://news.blizzard.com/en-gb/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Gnomes can be Priests, one of six new race and class pairs.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Every race has two active and two passive racial abilities, tuned for similar offensive power.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Racials read from the BlizzCon demo: Escape Artist breaks and grants brief immunity to movement impairment on a 2 minute cooldown, Eureka! makes your next 3 abilities cost 50% less Mana and do 10% more on a 2 minute cooldown, Expansive Mind grants 5% Mana, Rage and Energy, and Engineering Specialization makes engineering devices more reliable. The immunity window is read as 3 seconds by one outlet and 5 by another.",
+        "sources": [
+          {
+            "label": "Icy Veins, the racial rework",
+            "url": "https://www.icy-veins.com/wow-forever/news/the-racial-rework-gives-every-race-a-reason-to-matter-in-warcraft-forever/",
+            "kind": "community"
+          },
+          {
+            "label": "Talents Forever (demo transcription)",
+            "url": "https://talentsforever.com/data.json",
+            "kind": "community"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Troll",
+    "slug": "troll",
+    "faction": "horde",
+    "placeholder": false,
+    "forever_changes": [
+      {
+        "text": "Racial traits are reworked for Forever.",
+        "sources": [
+          {
+            "label": "Blizzard, What's Next panel recap",
+            "url": "https://news.blizzard.com/en-gb/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Trolls can be Warlocks, one of six new race and class pairs.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Every race has two active and two passive racial abilities, tuned for similar offensive power.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Racials read from the BlizzCon demo: Berserking grants 10% casting and attack speed on a 3 minute cooldown, Rapid Regeneration channels back 50% of maximum Health, Beast Slaying grants 5% damage against Beasts, and Regeneration keeps 10% of Health regeneration running in combat. The Berserking duration is read as 10 seconds by one outlet and 12 by another.",
+        "sources": [
+          {
+            "label": "Icy Veins, the racial rework",
+            "url": "https://www.icy-veins.com/wow-forever/news/the-racial-rework-gives-every-race-a-reason-to-matter-in-warcraft-forever/",
+            "kind": "community"
+          },
+          {
+            "label": "Talents Forever (demo transcription)",
+            "url": "https://talentsforever.com/data.json",
+            "kind": "community"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "name": "High Order Skyborne",
+    "slug": "high-order-skyborne",
+    "faction": "alliance",
+    "placeholder": false,
+    "forever_changes": [
+      {
+        "text": "Skyborne is a neutral race: the player chooses Horde or Alliance at character creation.",
+        "sources": [
+          {
+            "label": "Wowhead, Skyborne First Look",
+            "url": "https://www.wowhead.com/forever/news/skyborne-first-look-new-neutral-race-in-world-of-warcraft-forever-382829",
+            "kind": "community"
+          },
+          {
+            "label": "Inven Global, World of Warcraft: Forever coverage",
+            "url": "https://www.invenglobal.com/articles/25876/",
+            "kind": "community"
+          }
+        ]
+      },
+      {
+        "text": "Skyborne is unlocked by the Skyborne Heroic Pack, reported at $29.99, rather than by a base subscription.",
+        "sources": [
+          {
+            "label": "Blizzard, Pre-Purchase World of Warcraft: Forever Upgrades",
+            "url": "https://news.blizzard.com/en-us/article/24301508/pre-purchase-world-of-warcraft-forever-upgrades-and-begin-your-next-journey-in-azeroth",
+            "kind": "blizzard"
+          },
+          {
+            "label": "gamefragger, pre-order pricing",
+            "url": "https://gamefragger.com/pc/warcraft/world-of-warcraft-forever-pre-orders-are-live-ranging-from-30-race-pack-to-a-150-collector-box-a29775",
+            "kind": "community"
+          },
+          {
+            "label": "Warcraft Tavern, editions and prices",
+            "url": "https://www.warcrafttavern.com/forever/news/world-of-warcraft-forever-editions-skyborne-race-unlock-beta-access/",
+            "kind": "community"
+          }
+        ]
+      },
+      {
+        "text": "Skyborne characters begin on Zephras Isle, a starting zone covering levels 1 to 12.",
+        "sources": [
+          {
+            "label": "Blizzard, World of Warcraft at BlizzCon 2026",
+            "url": "https://news.blizzard.com/en-us/article/24301145/world-of-warcraft-at-blizzcon-2026-discover-whats-next",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Shaman is available to Skyborne only on the Horde and Mage only on the Alliance.",
+        "sources": [
+          {
+            "label": "Wowhead, Skyborne First Look",
+            "url": "https://www.wowhead.com/forever/news/skyborne-first-look-new-neutral-race-in-world-of-warcraft-forever-382829",
+            "kind": "community"
+          }
+        ]
+      },
+      {
+        "text": "Racials shown in the BlizzCon demo: Walk on Air (glide downward for 10 seconds), Read Ley Line (100% health and mana regeneration for 15 seconds), Wind Blessed (1% haste), Elemental Insight (5% damage to Elementals). Skyborne choose Horde or Alliance at creation.",
+        "sources": [
+          {
+            "label": "Icy Veins, racial rework",
+            "url": "https://www.icy-veins.com/wow-forever/news/the-racial-rework-gives-every-race-a-reason-to-matter-in-warcraft-forever/",
+            "kind": "community"
+          },
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Every race has two active and two passive racial abilities, tuned for similar offensive power.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "One demo transcription reads a different second active for each faction: Alliance Skyborne get Read Ley Line, Horde Skyborne get Skysight, which grants 10% movement and mounted speed for 30 seconds or 15 minutes near a convergence of elements.",
+        "sources": [
+          {
+            "label": "Talents Forever (demo transcription)",
+            "url": "https://talentsforever.com/data.json",
+            "kind": "community"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "name": "Windshaper Skyborne",
+    "slug": "windshaper-skyborne",
+    "faction": "horde",
+    "placeholder": false,
+    "forever_changes": [
+      {
+        "text": "Skyborne is a neutral race: the player chooses Horde or Alliance at character creation.",
+        "sources": [
+          {
+            "label": "Wowhead, Skyborne First Look",
+            "url": "https://www.wowhead.com/forever/news/skyborne-first-look-new-neutral-race-in-world-of-warcraft-forever-382829",
+            "kind": "community"
+          },
+          {
+            "label": "Inven Global, World of Warcraft: Forever coverage",
+            "url": "https://www.invenglobal.com/articles/25876/",
+            "kind": "community"
+          }
+        ]
+      },
+      {
+        "text": "Skyborne is unlocked by the Skyborne Heroic Pack, reported at $29.99, rather than by a base subscription.",
+        "sources": [
+          {
+            "label": "Blizzard, Pre-Purchase World of Warcraft: Forever Upgrades",
+            "url": "https://news.blizzard.com/en-us/article/24301508/pre-purchase-world-of-warcraft-forever-upgrades-and-begin-your-next-journey-in-azeroth",
+            "kind": "blizzard"
+          },
+          {
+            "label": "gamefragger, pre-order pricing",
+            "url": "https://gamefragger.com/pc/warcraft/world-of-warcraft-forever-pre-orders-are-live-ranging-from-30-race-pack-to-a-150-collector-box-a29775",
+            "kind": "community"
+          },
+          {
+            "label": "Warcraft Tavern, editions and prices",
+            "url": "https://www.warcrafttavern.com/forever/news/world-of-warcraft-forever-editions-skyborne-race-unlock-beta-access/",
+            "kind": "community"
+          }
+        ]
+      },
+      {
+        "text": "Skyborne characters begin on Zephras Isle, a starting zone covering levels 1 to 12.",
+        "sources": [
+          {
+            "label": "Blizzard, World of Warcraft at BlizzCon 2026",
+            "url": "https://news.blizzard.com/en-us/article/24301145/world-of-warcraft-at-blizzcon-2026-discover-whats-next",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Shaman is available to Skyborne only on the Horde and Mage only on the Alliance.",
+        "sources": [
+          {
+            "label": "Wowhead, Skyborne First Look",
+            "url": "https://www.wowhead.com/forever/news/skyborne-first-look-new-neutral-race-in-world-of-warcraft-forever-382829",
+            "kind": "community"
+          }
+        ]
+      },
+      {
+        "text": "Racials shown in the BlizzCon demo: Walk on Air (glide downward for 10 seconds), Read Ley Line (100% health and mana regeneration for 15 seconds), Wind Blessed (1% haste), Elemental Insight (5% damage to Elementals). Skyborne choose Horde or Alliance at creation.",
+        "sources": [
+          {
+            "label": "Icy Veins, racial rework",
+            "url": "https://www.icy-veins.com/wow-forever/news/the-racial-rework-gives-every-race-a-reason-to-matter-in-warcraft-forever/",
+            "kind": "community"
+          },
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "Every race has two active and two passive racial abilities, tuned for similar offensive power.",
+        "sources": [
+          {
+            "label": "Blizzard, Deep Dive panel recap",
+            "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
+            "kind": "blizzard"
+          }
+        ]
+      },
+      {
+        "text": "One demo transcription reads a different second active for each faction: Alliance Skyborne get Read Ley Line, Horde Skyborne get Skysight, which grants 10% movement and mounted speed for 30 seconds or 15 minutes near a convergence of elements.",
+        "sources": [
+          {
+            "label": "Talents Forever (demo transcription)",
+            "url": "https://talentsforever.com/data.json",
+            "kind": "community"
+          }
+        ]
+      }
+    ]
+  }
+]
