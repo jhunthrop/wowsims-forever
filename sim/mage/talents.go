@@ -29,7 +29,7 @@ import (
 // It is not advice; it is a fixed input so a DPS change is attributable
 // to the engine rather than to a build edit.
 //
-// Written against the CLIENT's tree, so its segments are 18, 17 and 19
+// Written against the CLIENT's tree, so its segments are 19, 17 and 18
 // characters (TalentTreeSizes), in the client's tree order Arcane, Fire,
 // Frost. Spend:
 //
@@ -37,14 +37,16 @@ import (
 //	           Arcane Impact 3, Arcane Shielding 1, Arcane Meditation 3,
 //	           Missile Barrage 1
 //	Fire 0
-//	Frost 31: Improved Frostbolt 5, Ice Shards 5, Piercing Ice 3,
+//	Frost 31: Improved Frostbolt 5, Elemental Precision 3, Ice Shards 5,
 //	          Frost Channeling 1, Ice Lance 1, Arctic Reach 2, Shatter 3,
 //	          Improved Cone of Cold 2, Cold Snap 1, Fingers of Frost 2,
 //	          Winter's Chill 5, Ice Barrier 1
 //
 // 51 points, every tier gate and prerequisite satisfied, and Ice Barrier
-// at the bottom of Frost is what the 31 points buy.
-const ForeverFrostTalents = "0501005023010300000-00000000000000000-0505000311020321251"
+// at the bottom of Frost is what the 31 points buy. Client 1.60.1.70532
+// removed Piercing Ice; its three points carry by name into the
+// three-rank Elemental Precision that build introduced.
+const ForeverFrostTalents = "0501005023010300000-00000000000000000-053500010120321251"
 
 func (mage *Mage) ApplyTalents() {
 	mage.applyDeclarativeTalents()
@@ -493,44 +495,48 @@ func (mage *Mage) applyWintersChill() {
 		return
 	}
 
-	// 1.60.1.70425: "Gives your Frost damage spells a 20/40/60/80/100%
-	// chance to apply the Winter's Chill effect, which increases the
-	// damage done by your Cone of Cold spell to the target by 40%,
-	// stacking up to 5 times." Every rank stacks to the aura's five; the
-	// stacks are read by cone_of_cold.go, which is where the 40% lives.
-	procChance := float64(mage.Talents.WintersChill) * 0.2
-	maxStacks := int32(core.WintersChillMaxStacks)
+	// 1.60.1.70532: "Gives your Frostbolt, Frost Blast, and Fingers of
+	// Frost empowered Ice Lance spells a 20/40/60/80/100% chance to apply
+	// Winter's Chill, increasing the target's damage taken from your next
+	// Cone of Cold by 5% and it gains an additional 7% of your spell
+	// damage, stacking up to 5 times." The appliers roll through
+	// procWintersChill from their own landed hits (frostbolt.go,
+	// ice_lance.go; Frost Blast is not registered, see
+	// sim/conformance/dispositions.go), and the stacks are read and spent
+	// by cone_of_cold.go, which is where the 5% and the 7% live.
+	mage.wintersChillProcChance = wintersChillProcChancePerRank * float64(mage.Talents.WintersChill)
 
 	wcAuras := mage.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
 		return core.WintersChillAura(target)
 	})
 	mage.WintersChillAuras = wcAuras
 	mage.Env.RegisterPreFinalizeEffect(func() {
-		for _, spell := range mage.GetSpellsMatchingSchool(core.SpellSchoolFrost) {
-			spell.RelatedAuras = append(spell.RelatedAuras, wcAuras)
+		for _, spell := range mage.Spellbook {
+			if spell.Matches(wintersChillRelatedSpells) {
+				spell.RelatedAuras = append(spell.RelatedAuras, wcAuras)
+			}
 		}
 	})
+}
 
-	mage.RegisterAura(core.Aura{
-		Label:    "Winters Chill Talent",
-		Duration: core.NeverExpires,
-		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Activate(sim)
-		},
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !result.Landed() || !spell.SpellSchool.Matches(core.SpellSchoolFrost) {
-				return
-			}
+// wintersChillRelatedSpells are the spells whose APL and tooltip views
+// show the Winter's Chill stacks: the two registered appliers and the
+// Cone of Cold that spends them.
+const wintersChillRelatedSpells = MageSpellMaskFrostbolt | MageSpellMaskIceLance | MageSpellMaskConeOfCold
 
-			if sim.Proc(procChance, "Winters Chill") {
-				aura := wcAuras.Get(result.Target)
-				aura.Activate(sim)
-				if aura.IsActive() && aura.GetStacks() < maxStacks {
-					aura.AddStack(sim)
-				}
-			}
-		},
-	})
+// procWintersChill is one Winter's Chill applier's landed hit on target:
+// the talent's chance to add a stack. Frostbolt calls it from every hit
+// it lands and Ice Lance only from a hit that spent a Fingers of Frost
+// charge.
+func (mage *Mage) procWintersChill(sim *core.Simulation, target *core.Unit) {
+	if mage.WintersChillAuras == nil || !sim.Proc(mage.wintersChillProcChance, "Winters Chill") {
+		return
+	}
+	aura := mage.WintersChillAuras.Get(target)
+	aura.Activate(sim)
+	if aura.GetStacks() < aura.MaxStacks {
+		aura.AddStack(sim)
+	}
 }
 
 // Per-rank talent values, all read off the client's own rank
@@ -588,14 +594,17 @@ const (
 
 	// "Reduces the casting time of your Frostbolt spell by 0.1 sec."
 	improvedFrostboltCastTimePerRank = -100 * time.Millisecond
-	// "Improves your chance to hit with Frost and Fire spells by 1%."
+	// "Improves your chance to hit with Frost and Fire spells by 2%."
+	// Client 1.60.1.70532: three ranks of 2%, where 70425 had five of 1%.
 	// Vanilla's reduced resist chance by 2% a rank; see Arcane Focus.
-	elementalPrecisionHitPerRank = 1.0
+	elementalPrecisionHitPerRank = 2.0
+	// "Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered
+	// Ice Lance spells a 20% chance to apply Winter's Chill" - the stacks
+	// themselves are spent by Cone of Cold (cone_of_cold.go).
+	wintersChillProcChancePerRank = 0.20
 	// "Increases the critical strike damage bonus of your Frost spells
 	// by 20%."
 	iceShardsCritDamagePerRank = 0.20
-	// "Increases the damage done by your Frost spells by 2%."
-	piercingIceDamagePerRank = 2
 	// "Reduces the mana cost of your Frost spells by 5% and reduces the
 	// threat caused by your Frost spells by 10%."
 	frostChannelingCostPerRank            = -5
@@ -786,14 +795,6 @@ func (mage *Mage) applyDeclarativeTalents() {
 			Kind:       core.SpellMod_CritDamageBonus_Flat,
 			ClassMask:  MageSpellMaskFrostDamage,
 			FloatValue: iceShardsCritDamagePerRank * float64(t.IceShards),
-		})
-	}
-
-	if t.PiercingIce > 0 {
-		mage.AddStaticMod(core.SpellModConfig{
-			Kind:      core.SpellMod_DamageDone_Flat,
-			ClassMask: MageSpellMaskFrostDamage,
-			IntValue:  piercingIceDamagePerRank * int64(t.PiercingIce),
 		})
 	}
 

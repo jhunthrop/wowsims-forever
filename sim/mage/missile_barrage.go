@@ -8,10 +8,12 @@ import (
 
 // Missile Barrage is the Arcane tree's first-tier talent (node 105802,
 // two ranks since client 1.60.1.70425): "Gives your Arcane Blast spell a
-// 20/40% chance, your Arcane Missile hits a 5/10% chance, and your Arcane
-// Wrath, Fireball, Frostbolt, and Frostfire Bolt spells a 10/20% chance
-// to reduce the channeled duration of your next Arcane Missiles spell by
-// 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
+// 20/40% chance, and your Arcane Wrath, Fireball, Frostbolt, Frost Blast,
+// and Frostfire Bolt spells a 10/20% chance to reduce the channeled
+// duration of your next Arcane Missiles spell by 50%, reduce the Mana
+// cost by 100%, and missiles fire every 0.5 sec." (1.60.1.70532; 70425
+// also gave each Arcane Missile hit its own 5/10%. Frost Blast is not
+// registered, see sim/conformance/dispositions.go.)
 //
 // The buff is spell 400589 ("Missile Barrage", duration_ms 15000);
 // arcane_missiles.go's ApplyEffects is what reads it to halve the tick
@@ -23,7 +25,6 @@ const (
 	missileBarrageDuration          = time.Second * 15
 
 	missileBarrageArcaneBlastChancePerRank = 0.20
-	missileBarrageMissileHitChancePerRank  = 0.05
 	missileBarrageOtherChancePerRank       = 0.10
 
 	// "missiles fire every 0.5 sec" instead of the normal 1 sec tick
@@ -93,17 +94,6 @@ func (mage *Mage) registerMissileBarrage() {
 			}
 
 			if sim.Proc(chance, "Missile Barrage") {
-				mage.MissileBarrageAura.Activate(sim)
-			}
-		},
-		// "your Arcane Missile hits": each missile that lands rolls on
-		// its own, mid-channel, so a channel can arm the buff for the
-		// Arcane Missiles after it.
-		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if spell.SpellCode != SpellCode_MageArcaneMissilesTick || !result.Landed() {
-				return
-			}
-			if sim.Proc(missileBarrageMissileHitChancePerRank*float64(mage.Talents.MissileBarrage), "Missile Barrage") {
 				mage.MissileBarrageAura.Activate(sim)
 			}
 		},

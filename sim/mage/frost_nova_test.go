@@ -112,6 +112,14 @@ func newFrostMageSim(t *testing.T, target *proto.Target) (*Mage, *core.Simulatio
 // chosen by the test, for the rank-dependent talents.
 func newFrostMageSimWithTalents(t *testing.T, target *proto.Target, talents string) (*Mage, *core.Simulation, *core.Unit) {
 	t.Helper()
+	return newFrostMageSimWithTalentsAndDebuffs(t, target, talents, core.FullBuffs.Debuffs)
+}
+
+// newFrostMageSimWithTalentsAndDebuffs is newFrostMageSimWithTalents with
+// the raid's debuff set chosen: FullBuffs carries another mage's Winter's
+// Chill, which a Winter's Chill test cannot share the target with.
+func newFrostMageSimWithTalentsAndDebuffs(t *testing.T, target *proto.Target, talents string, debuffs *proto.Debuffs) (*Mage, *core.Simulation, *core.Unit) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
@@ -125,7 +133,7 @@ func newFrostMageSimWithTalents(t *testing.T, target *proto.Target, talents stri
 		},
 		PlayerOptions,
 	)
-	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
+	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, debuffs)
 
 	sim := core.NewSim(&proto.RaidSimRequest{
 		Raid: raid,

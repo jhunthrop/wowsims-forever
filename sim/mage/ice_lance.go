@@ -90,11 +90,18 @@ func (mage *Mage) getIceLanceConfig(rank int) core.SpellConfig {
 			if mage.isTargetFrozen(target) {
 				baseDamage *= iceLanceFrozenMultiplier
 			}
+			// Winter's Chill counts the "Fingers of Frost empowered" Ice
+			// Lances: the casts that spent a charge, not the ones a Frozen
+			// aura made count. Read here, before the travel time clears it.
+			empowered := mage.fingersFreezeCast
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 
 			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
 				if result.Landed() {
 					spell.DealDamage(sim, result)
+					if empowered {
+						mage.procWintersChill(sim, target)
+					}
 				}
 			})
 		},

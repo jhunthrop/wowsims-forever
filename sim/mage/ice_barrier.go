@@ -13,6 +13,19 @@ var IceBarrierSpellId = [IceBarrierRanks + 1]int32{0, 11426, 13031, 13032, 13033
 var IceBarrierManaCost = [IceBarrierRanks + 1]float64{0, 305, 360, 420, 480}
 var IceBarrierLevel = [IceBarrierRanks + 1]int{0, 40, 46, 52, 58}
 
+// Ice Barrier (client 1.60.1.70532): "Shield yourself, absorbing [448 +
+// (Frost spell power * 0.1)] damage and increasing your Frost damage by
+// 3% for 1 min. While shielded, your Frost damage is increased by an
+// additional 3% and you do not lose casting time when you take damage."
+// Nothing hits a simmed mage, so the absorb is not modeled and a shield
+// holds its full minute; the two 3%s stay separate mods so an absorb
+// model can end the shielded one early.
+const (
+	iceBarrierDuration               = time.Minute
+	iceBarrierFrostDamagePct         = 3
+	iceBarrierShieldedFrostDamagePct = 3
+)
+
 func (mage *Mage) registerIceBarrierSpell() {
 	if !mage.Talents.IceBarrier {
 		return
@@ -20,6 +33,7 @@ func (mage *Mage) registerIceBarrierSpell() {
 
 	mage.IceBarrier = make([]*core.Spell, IceBarrierRanks+1)
 	mage.IceBarrierAuras = make([]*core.Aura, IceBarrierRanks+1)
+	mage.registerIceBarrierFrostDamage()
 
 	cdTimer := mage.NewTimer()
 
@@ -39,15 +53,17 @@ func (mage *Mage) newIceBarrierSpellConfig(rank int, cdTimer *core.Timer) core.S
 
 	cooldown := time.Second * 30
 
+	// The absorb itself is not modeled (see iceBarrierDuration); the aura
+	// carries the shielded Frost damage half.
 	mage.IceBarrierAuras[rank] = mage.RegisterAura(core.Aura{
 		ActionID: core.ActionID{SpellID: spellID},
 		Label:    fmt.Sprintf("Ice Barrier (Rank %d)", rank),
-		Duration: time.Minute,
+		Duration: iceBarrierDuration,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			// Dummy, needs shield implementation
+			mage.iceBarrierShieldedMod.Activate()
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			// Dummy, needs shield implementation
+			mage.iceBarrierShieldedMod.Deactivate()
 		},
 	})
 
@@ -72,12 +88,40 @@ func (mage *Mage) newIceBarrierSpellConfig(rank int, cdTimer *core.Timer) core.S
 			},
 		},
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			// Disable an existing barrier
+			// One shield at a time: a recast of any rank replaces it.
 			if mage.activeBarrier != nil && mage.activeBarrier.IsActive() {
 				mage.activeBarrier.Deactivate(sim)
-				mage.activeBarrier = mage.IceBarrierAuras[rank]
 			}
-			mage.IceBarrierAuras[rank].Activate(sim)
+			mage.activeBarrier = mage.IceBarrierAuras[rank]
+			mage.activeBarrier.Activate(sim)
+			mage.IceBarrierEmpowermentAura.Activate(sim)
 		},
 	}
+}
+
+// registerIceBarrierFrostDamage sets up both Frost damage halves: the
+// one-minute empowerment every cast grants, and the shielded extra that
+// each rank's shield aura holds while it is up.
+func (mage *Mage) registerIceBarrierFrostDamage() {
+	empowerment := mage.AddDynamicMod(core.SpellModConfig{
+		Kind:      core.SpellMod_DamageDone_Flat,
+		ClassMask: MageSpellMaskFrostDamage,
+		IntValue:  iceBarrierFrostDamagePct,
+	})
+	mage.IceBarrierEmpowermentAura = mage.RegisterAura(core.Aura{
+		Label:    "Ice Barrier (Frost Damage)",
+		ActionID: core.ActionID{SpellID: IceBarrierSpellId[1], Tag: 1},
+		Duration: iceBarrierDuration,
+		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+			empowerment.Activate()
+		},
+		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+			empowerment.Deactivate()
+		},
+	})
+	mage.iceBarrierShieldedMod = mage.AddDynamicMod(core.SpellModConfig{
+		Kind:      core.SpellMod_DamageDone_Flat,
+		ClassMask: MageSpellMaskFrostDamage,
+		IntValue:  iceBarrierShieldedFrostDamagePct,
+	})
 }

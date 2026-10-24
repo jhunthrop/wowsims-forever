@@ -31,7 +31,7 @@ func shieldItemID(t *testing.T) int32 {
 
 // Improved Revenge is a flat 20% a point on Revenge's own
 // DamageMultiplierAdditive - the same SpellMod_DamageDone_Flat shape
-// Piercing Ice uses in sim/mage/talents.go - checked here rather than
+// Ice Barrier's Frost damage uses in sim/mage/ice_barrier.go - checked here rather than
 // named-with-reason despite being a Protection-only talent, because
 // unlike its tank-only neighbors it is nothing but a tooltip-line
 // percentage on one named spell.

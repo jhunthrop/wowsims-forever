@@ -197,10 +197,10 @@ func TestChampionOfTheLightAddsSpellPowerFromIntellect(t *testing.T) {
 		t.Fatalf("base Intellect = %v, want > 0 (test needs a nonzero base to observe the dependency)", baseIntellect)
 	}
 
-	wantSpellPower := baseUnit.GetStat(stats.SpellPower) + talentedUnit.GetStat(stats.Intellect)*0.30 // 1.60.1.70425: "up to 30%" at 3/3
+	wantSpellPower := baseUnit.GetStat(stats.SpellPower) + talentedUnit.GetStat(stats.Intellect)*0.60 // 1.60.1.70532: "up to 60%" at 3/3
 	gotSpellPower := talentedUnit.GetStat(stats.SpellPower)
 	if gotSpellPower < wantSpellPower-1e-6 || gotSpellPower > wantSpellPower+1e-6 {
-		t.Errorf("rank 3 Champion of the Light SpellPower = %v, want %v (30%% of %v Intellect)", gotSpellPower, wantSpellPower, talentedUnit.GetStat(stats.Intellect))
+		t.Errorf("rank 3 Champion of the Light SpellPower = %v, want %v (60%% of %v Intellect)", gotSpellPower, wantSpellPower, talentedUnit.GetStat(stats.Intellect))
 	}
 }
 

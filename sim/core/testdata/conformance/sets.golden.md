@@ -678,3 +678,4 @@ None.
 - Finery of Infinite Wisdom (508)
 - Trappings of the Unseen Path (510)
 - Dreamwalker Raiment (521)
+- Violet Sorcerer's Vestments (2134)

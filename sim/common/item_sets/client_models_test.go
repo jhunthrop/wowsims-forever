@@ -314,7 +314,9 @@ func TestSpidersKissShredsTheTargetsArmorForTheClientDuration(t *testing.T) {
 	row := core.MustClientSpellRow(spidersKissShred)
 	var want float64
 	for _, effect := range row.Effects {
-		if effect.Aura == modResistanceAura {
+		// Client 1.60.1.70532 moved the shred from a resistance aura to
+		// the flat-armor one; the model reads either (armorShredOnMeleeHit).
+		if effect.Aura == modResistanceAura || effect.Aura == core.ClientAuraFlatArmor {
 			want = effect.Points
 		}
 	}

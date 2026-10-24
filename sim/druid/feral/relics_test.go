@@ -57,14 +57,15 @@ func TestIdolOfTheDreamAddsATickToEveryRipCast(t *testing.T) {
 	}
 }
 
-// Howling Idol (client spell 1291059): Shifting Power cooldown -1 second.
+// Howling Idol (client spell 1291059): Shifting Power cooldown -0.5 sec
+// since client 1.60.1.70532 (70425 took a full second).
 func TestHowlingIdolShortensShiftingPowerCooldownOnly(t *testing.T) {
 	for _, change := range changedByRelic(t, druid.HowlingIdol) {
 		if change.After.ClassSpellMask&druid.DruidSpellMaskShiftingPower == 0 {
 			t.Errorf("%s changed but is not Shifting Power: %+v", change.Key, change.After)
 		}
-		if got := change.Before.CooldownDuration - change.After.CooldownDuration; got != 1*time.Second {
-			t.Errorf("%s cooldown shortened by %v, want 1s", change.Key, got)
+		if got := change.Before.CooldownDuration - change.After.CooldownDuration; got != 500*time.Millisecond {
+			t.Errorf("%s cooldown shortened by %v, want 500ms", change.Key, got)
 		}
 	}
 }

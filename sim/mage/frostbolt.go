@@ -75,6 +75,7 @@ func (mage *Mage) getFrostboltConfig(rank int) core.SpellConfig {
 			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
 				if result.Landed() {
 					spell.DealDamage(sim, result)
+					mage.procWintersChill(sim, target)
 				}
 			})
 		},

@@ -77,8 +77,8 @@ const (
 
 // Groups, named after the tooltip phrases they stand for.
 const (
-	// "your Frost spells" for damage purposes. Ice Barrier is Frost
-	// school but deals none, so it is not here; Piercing Ice would
+	// "your Frost damage" for talent and buff purposes. Ice Barrier is
+	// Frost school but deals none, so it is not here; its own 3% would
 	// otherwise be applying a damage bonus to an absorb.
 	MageSpellMaskFrostDamage = MageSpellMaskFrostbolt | MageSpellMaskIceLance |
 		MageSpellMaskFrostNova | MageSpellMaskBlizzard | MageSpellMaskConeOfCold |
@@ -170,13 +170,21 @@ type Mage struct {
 	HeatingUpAura        *core.Aura
 	IceArmorAura         *core.Aura
 	IceBarrierAuras      []*core.Aura
-	ImprovedScorchAuras  core.AuraArray
-	MageArmorAura        *core.Aura
-	MissileBarrageAura   *core.Aura
+	// IceBarrierEmpowermentAura is Ice Barrier's "increasing your Frost
+	// damage by 3% for 1 min", which outlives the shield.
+	IceBarrierEmpowermentAura *core.Aura
+	// iceBarrierShieldedMod is the "additional 3%" that holds only while
+	// a shield does.
+	iceBarrierShieldedMod *core.SpellMod
+	ImprovedScorchAuras   core.AuraArray
+	MageArmorAura         *core.Aura
+	MissileBarrageAura    *core.Aura
 
 	// WintersChillAuras is the Winter's Chill stack counter on each enemy,
-	// set by applyWintersChill and read by Cone of Cold.
+	// stacked by procWintersChill and read and spent by Cone of Cold.
 	WintersChillAuras core.AuraArray
+	// wintersChillProcChance is the talent's chance per applier hit.
+	wintersChillProcChance float64
 }
 
 // Agent is a generic way to access underlying mage on any of the agents.

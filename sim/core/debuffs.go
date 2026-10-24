@@ -657,11 +657,12 @@ const SpellCritEffectCategory = "spellcritdebuff"
 // WintersChillMaxStacks is the most stacks a Winter's Chill debuff holds.
 const WintersChillMaxStacks = 5
 
-// WintersChillAura is Forever's Winter's Chill (1.60.1.70425): a stack
-// counter on the target that the applying mage's own Cone of Cold reads
-// ("increases the damage done by your Cone of Cold spell to the target
-// by 40%, stacking up to 5 times" - sim/mage/cone_of_cold.go). Vanilla's
-// 2% Frost crit taken a stack is gone from the text, so the aura itself
+// WintersChillAura is Forever's Winter's Chill (1.60.1.70532): a stack
+// counter on the target that the applying mage's own next Cone of Cold
+// reads and spends ("increasing the target's damage taken from your next
+// Cone of Cold by 5% and it gains an additional 7% of your spell damage,
+// stacking up to 5 times" - sim/mage/cone_of_cold.go). Vanilla's 2%
+// Frost crit taken a stack is gone from the text, so the aura itself
 // changes no number on the target.
 func WintersChillAura(target *Unit) *Aura {
 	aura := target.GetOrRegisterAura(Aura{

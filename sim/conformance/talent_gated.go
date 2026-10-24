@@ -81,7 +81,7 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "hunter", Label: "Counterattack", Tree: 2, Pos: 12},
 	{ClassSlug: "hunter", Label: "Strider Kick", Tree: 2, Pos: 16},
 
-	// Mage (Arcane 19, Fire 17, Frost 19).
+	// Mage (Arcane 19, Fire 17, Frost 18).
 	{ClassSlug: "mage", Label: "Arcane Blast", Tree: 0, Pos: 11},
 	{ClassSlug: "mage", Label: "Arcane Wrath", Tree: 0, Pos: 15},
 	{ClassSlug: "mage", Label: "Presence of Mind", Tree: 0, Pos: 16},
@@ -90,8 +90,8 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "mage", Label: "Blast Wave", Tree: 1, Pos: 15},
 	{ClassSlug: "mage", Label: "Combustion", Tree: 1, Pos: 17},
 	{ClassSlug: "mage", Label: "Ice Lance", Tree: 2, Pos: 10},
-	{ClassSlug: "mage", Label: "Cold Snap", Tree: 2, Pos: 16},
-	{ClassSlug: "mage", Label: "Ice Barrier", Tree: 2, Pos: 19},
+	{ClassSlug: "mage", Label: "Cold Snap", Tree: 2, Pos: 15},
+	{ClassSlug: "mage", Label: "Ice Barrier", Tree: 2, Pos: 18},
 
 	// Warlock (Affliction 17, Demonology 19, Destruction 16).
 	{ClassSlug: "warlock", Label: "Amplify Curse", Tree: 0, Pos: 9},
