@@ -28,6 +28,29 @@ func fixtureBuild(t *testing.T, path string) string {
 	return head.Build
 }
 
+// fixtureTalentCount counts the talents the fixture file lists across its
+// trees, independent of the reader under test.
+func fixtureTalentCount(t *testing.T, path string) int {
+	t.Helper()
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var file struct {
+		Trees []struct {
+			Talents []json.RawMessage `json:"talents"`
+		} `json:"trees"`
+	}
+	if err := json.Unmarshal(raw, &file); err != nil {
+		t.Fatal(err)
+	}
+	count := 0
+	for _, tree := range file.Trees {
+		count += len(tree.Talents)
+	}
+	return count
+}
+
 func warrior(t *testing.T) Class {
 	t.Helper()
 	c, err := Load(warriorFixture)
@@ -62,15 +85,13 @@ func TestTreesAreInTheClientsOrder(t *testing.T) {
 func TestTreeSizesMatchTheClient(t *testing.T) {
 	c := warrior(t)
 	sizes := c.TreeSizes()
-	total := 0
 	for i, tr := range c.Trees {
 		if sizes[i] != len(tr.Talents) {
 			t.Errorf("TreeSizes()[%d] = %d, but %s has %d talents", i, sizes[i], tr.Name, len(tr.Talents))
 		}
-		total += sizes[i]
 	}
-	if want := sizes[0] + sizes[1] + sizes[2]; total != want {
-		t.Errorf("TreeSizes() sums to %d, the trees hold %d talents", want, total)
+	if got, want := sizes[0]+sizes[1]+sizes[2], fixtureTalentCount(t, warriorFixture); got != want {
+		t.Errorf("TreeSizes() sums to %d, the fixture lists %d talents", got, want)
 	}
 	if want := fixtureBuild(t, warriorFixture); c.Build != want {
 		t.Errorf("Build = %q, want %q; the reader must carry the client build through", c.Build, want)
