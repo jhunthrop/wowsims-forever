@@ -1,0 +1,4 @@
+{"build":"2.0","class_id":8,"class_slug":"mage","trees":[{"id":1,"name":"Arcane","position":0,"talents":[
+{"id":10,"name":"Arcane Focus","icon":"a","max_rank":5,"tier":0,"column":0,"ranks":[{"spell_id":100,"description":"Hit +3%"}],"spell_id":100},
+{"id":11,"name":"Wand Spec","icon":"b","max_rank":3,"tier":0,"column":1,"ranks":[{"spell_id":110,"description":"Wand +13%"}],"spell_id":110},
+{"id":13,"name":"New Talent","icon":"d","max_rank":1,"tier":1,"column":1,"ranks":[{"spell_id":130,"description":"Fresh"}],"spell_id":130}]}]}
