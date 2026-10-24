@@ -1,10 +1,36 @@
 package talents
 
-import "testing"
+import (
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+const warriorFixture = "../../../tools/talentgen/testdata/warrior.json"
+
+// fixtureBuild reads the build the fixture file itself declares, so no
+// test carries a build as a literal.
+func fixtureBuild(t *testing.T, path string) string {
+	t.Helper()
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var head struct {
+		Build string `json:"build"`
+	}
+	if err := json.Unmarshal(raw, &head); err != nil {
+		t.Fatal(err)
+	}
+	if head.Build == "" {
+		t.Fatalf("%s declares no build", path)
+	}
+	return head.Build
+}
 
 func warrior(t *testing.T) Class {
 	t.Helper()
-	c, err := Load("../../../tools/talentgen/testdata/warrior.json")
+	c, err := Load(warriorFixture)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35,12 +61,19 @@ func TestTreesAreInTheClientsOrder(t *testing.T) {
 // A wrong size does not error, it reads the wrong talent.
 func TestTreeSizesMatchTheClient(t *testing.T) {
 	c := warrior(t)
-	want := [3]int{17, 17, 18}
-	if got := c.TreeSizes(); got != want {
-		t.Errorf("TreeSizes() = %v, want %v", got, want)
+	sizes := c.TreeSizes()
+	total := 0
+	for i, tr := range c.Trees {
+		if sizes[i] != len(tr.Talents) {
+			t.Errorf("TreeSizes()[%d] = %d, but %s has %d talents", i, sizes[i], tr.Name, len(tr.Talents))
+		}
+		total += sizes[i]
 	}
-	if c.Build != "1.60.1.70425" {
-		t.Errorf("Build = %q; the reader must carry the client build through", c.Build)
+	if want := sizes[0] + sizes[1] + sizes[2]; total != want {
+		t.Errorf("TreeSizes() sums to %d, the trees hold %d talents", want, total)
+	}
+	if want := fixtureBuild(t, warriorFixture); c.Build != want {
+		t.Errorf("Build = %q, want %q; the reader must carry the client build through", c.Build, want)
 	}
 }
 

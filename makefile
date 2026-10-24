@@ -6,6 +6,8 @@ ASSETS := $(patsubst assets/%,$(OUT_DIR)/assets/%,$(ASSETS_INPUT))
 # Recursive wildcard function. Needs to be '=' instead of ':=' because of recursion.
 rwildcard = $(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
 GOROOT := $(shell go env GOROOT)
+# The client build every generated file is stamped for.
+FOREVER_BUILD := $(shell cat assets/db_inputs/FOREVER_BUILD)
 UI_SRC := $(shell find ui -name '*.ts' -o -name '*.tsx' -o -name '*.scss' -o -name '*.html')
 HTML_INDECIES := ui/balance_druid/index.html \
 				 ui/feral_druid/index.html \
@@ -145,8 +147,8 @@ proto: sim/core/proto/api.pb.go ui/core/proto/api.ts
 # This default is one developer's layout; override it per checkout with
 # `make talents SITE_DIR=/path/to/forever` or in the environment.
 SITE_DIR ?= /Users/jh/code/forever
-# Which client build's trees to generate from.
-TALENT_BUILD ?= 1.60.1.69893
+# Which client build's trees to generate from; defaults to the followed build.
+TALENT_BUILD ?= $(FOREVER_BUILD)
 
 .PHONY: talents
 # talents regenerates the nine <Class>Talents proto messages, the nine
@@ -294,11 +296,8 @@ webworkers:
 
 # Where the site repository is checked out, for the data lane's outputs.
 SITE_DIR ?= /Users/jh/code/forever
-# Which build's constants to generate from. The active build is the
-# mined beta client; an Era regeneration is an explicit override, never
-# the default, because a default that points at Era would quietly ship
-# Era numbers the day the data lane's output appears.
-BUILD ?= 1.60.1.70338
+# Which build's constants to generate from; defaults to the followed build.
+BUILD ?= $(FOREVER_BUILD)
 
 .PHONY: relicmods
 # relicmods regenerates sim/<class>/relic_mods_auto_gen.go, the equip-effect
