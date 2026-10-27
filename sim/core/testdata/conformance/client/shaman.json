@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70532",
+  "build": "1.60.1.70630",
   "class_slug": "shaman",
   "family": 11,
   "spells": {
@@ -8851,7 +8851,7 @@
           "index": 0,
           "effect": 6,
           "aura": 42,
-          "amount": 0,
+          "amount": 10,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -27299,7 +27299,7 @@
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
-          "points_per_level": 4.19999980927
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,

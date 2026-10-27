@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70532",
+  "build": "1.60.1.70630",
   "class_slug": "hunter",
   "family": 9,
   "spells": {
@@ -4248,7 +4248,7 @@
           "index": 1,
           "effect": 6,
           "aura": 127,
-          "amount": 71,
+          "amount": 143,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,

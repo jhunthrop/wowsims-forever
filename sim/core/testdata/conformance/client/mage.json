@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70532",
+  "build": "1.60.1.70630",
   "class_slug": "mage",
   "family": 3,
   "spells": {
@@ -2692,12 +2692,12 @@
         {
           "index": 1,
           "effect": 6,
-          "aura": 74,
+          "aura": 4,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 16,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -4352,12 +4352,12 @@
         {
           "index": 1,
           "effect": 6,
-          "aura": 74,
+          "aura": 4,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 16,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -4401,12 +4401,12 @@
         {
           "index": 1,
           "effect": 6,
-          "aura": 74,
+          "aura": 4,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 16,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -5581,12 +5581,12 @@
         {
           "index": 1,
           "effect": 6,
-          "aura": 74,
+          "aura": 4,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 16,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -7757,6 +7757,19 @@
           "trigger_spell": 12579,
           "variance": 0.0,
           "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 4,
+          "amount": 7,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -7834,11 +7847,24 @@
           "index": 1,
           "effect": 6,
           "aura": 107,
-          "amount": 10,
+          "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 12,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 108,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 3,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -8587,7 +8613,7 @@
       "spell_level": 40,
       "family_mask": [
         524288,
-        0,
+        1,
         0,
         0
       ],
@@ -8604,6 +8630,32 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 2.79999995232
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 108,
+          "amount": 3,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 108,
+          "amount": 3,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 22,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -9560,7 +9612,20 @@
           "index": 0,
           "effect": 6,
           "aura": 271,
-          "amount": 40,
+          "amount": 5,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 16,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 4,
+          "amount": 7,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -10090,7 +10155,7 @@
       "spell_level": 46,
       "family_mask": [
         524288,
-        0,
+        1,
         0,
         0
       ],
@@ -10107,6 +10172,32 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 3.20000004768
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 108,
+          "amount": 3,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 108,
+          "amount": 3,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 22,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -10126,7 +10217,7 @@
       "spell_level": 52,
       "family_mask": [
         524288,
-        0,
+        1,
         0,
         0
       ],
@@ -10143,6 +10234,32 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 3.59999990463
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 108,
+          "amount": 3,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 108,
+          "amount": 3,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 22,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -10162,7 +10279,7 @@
       "spell_level": 58,
       "family_mask": [
         524288,
-        0,
+        1,
         0,
         0
       ],
@@ -10179,6 +10296,32 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 4.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 108,
+          "amount": 3,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 108,
+          "amount": 3,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 22,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -17212,12 +17355,12 @@
         {
           "index": 1,
           "effect": 6,
-          "aura": 74,
+          "aura": 4,
           "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 16,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -31836,7 +31979,7 @@
           "effect": 2,
           "aura": 0,
           "amount": 26,
-          "sp_coefficient": 0.34299999475,
+          "sp_coefficient": 0.27099999785,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
@@ -31885,7 +32028,7 @@
           "effect": 2,
           "aura": 0,
           "amount": 45,
-          "sp_coefficient": 0.34299999475,
+          "sp_coefficient": 0.27099999785,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
@@ -31934,7 +32077,7 @@
           "effect": 2,
           "aura": 0,
           "amount": 77,
-          "sp_coefficient": 0.34299999475,
+          "sp_coefficient": 0.27099999785,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
@@ -31953,7 +32096,7 @@
       "cast_time_ms": 3500,
       "gcd_ms": 1500,
       "cooldown_ms": 6000,
-      "category_cooldown_ms": 0,
+      "category_cooldown_ms": 6000,
       "duration_ms": 0,
       "cost": 140,
       "cost_type": 0,
@@ -32002,7 +32145,7 @@
       "cast_time_ms": 3500,
       "gcd_ms": 1500,
       "cooldown_ms": 6000,
-      "category_cooldown_ms": 0,
+      "category_cooldown_ms": 6000,
       "duration_ms": 0,
       "cost": 220,
       "cost_type": 0,
@@ -32051,7 +32194,7 @@
       "cast_time_ms": 3500,
       "gcd_ms": 1500,
       "cooldown_ms": 6000,
-      "category_cooldown_ms": 0,
+      "category_cooldown_ms": 6000,
       "duration_ms": 0,
       "cost": 305,
       "cost_type": 0,
@@ -32100,7 +32243,7 @@
       "cast_time_ms": 3500,
       "gcd_ms": 1500,
       "cooldown_ms": 6000,
-      "category_cooldown_ms": 0,
+      "category_cooldown_ms": 6000,
       "duration_ms": 0,
       "cost": 395,
       "cost_type": 0,
@@ -32196,6 +32339,55 @@
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1326891": {
+      "name": "Frigid Power",
+      "rank": 0,
+      "school_mask": 16,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 60000,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 40,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 108,
+          "amount": 3,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 108,
+          "amount": 3,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 22,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0

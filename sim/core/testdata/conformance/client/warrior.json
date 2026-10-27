@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70532",
+  "build": "1.60.1.70630",
   "class_slug": "warrior",
   "family": 4,
   "spells": {
@@ -20423,7 +20423,7 @@
       "gcd_ms": 0,
       "cooldown_ms": 0,
       "category_cooldown_ms": 0,
-      "duration_ms": 6000,
+      "duration_ms": 5000,
       "cost": 0,
       "cost_type": 0,
       "spell_level": 1,

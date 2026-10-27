@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70532",
+  "build": "1.60.1.70630",
   "class_slug": "warlock",
   "family": 5,
   "spells": {
@@ -1152,6 +1152,19 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 271,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -1246,6 +1259,19 @@
           "sp_coefficient": 0.13300000131,
           "ap_coefficient": 0.0,
           "period_ms": 2000,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 271,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
@@ -2893,6 +2919,19 @@
           "sp_coefficient": 0.13300000131,
           "ap_coefficient": 0.0,
           "period_ms": 2000,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 271,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
@@ -5653,6 +5692,19 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 271,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -5689,6 +5741,19 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 271,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
@@ -5721,6 +5786,19 @@
           "sp_coefficient": 0.13300000131,
           "ap_coefficient": 0.0,
           "period_ms": 2000,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 271,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
@@ -9440,7 +9518,7 @@
       "family_mask": [
         4194304,
         0,
-        0,
+        262144,
         0
       ],
       "effects": [
@@ -9570,6 +9648,19 @@
           "effect": 6,
           "aura": 108,
           "amount": 50,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 8,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 107,
+          "amount": -20,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -25454,7 +25545,7 @@
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 36,
+          "misc_value": 32,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -25503,7 +25594,7 @@
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 36,
+          "misc_value": 32,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -25552,7 +25643,7 @@
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 36,
+          "misc_value": 32,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
