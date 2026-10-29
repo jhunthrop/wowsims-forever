@@ -1,5 +1,21 @@
 {
   "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 19028
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-2s"
+        }
+      }
+    }
+  ],
   "priorityList": [
     {
       "notes": "Potion at the top of the fight if mana is already below 75 percent.",
