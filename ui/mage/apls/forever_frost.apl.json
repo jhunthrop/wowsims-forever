@@ -30,7 +30,7 @@
       }
     },
     {
-      "notes": "Ice Lance on a Fingers of Frost charge: the charge makes the target count as Frozen, so Ice Lance deals triple damage and Shatter's crit bonus applies. Only fires with the Fingers of Frost talent; without it the buff never appears, the line asks whether the aura exists first, and the line stays idle.",
+      "notes": "Ice Lance on a Fingers of Frost charge: the charge makes the target count as Frozen, so Ice Lance deals four times its damage and Shatter's crit bonus applies. Only fires with the Fingers of Frost talent; without it the buff never appears, the line asks whether the aura exists first, and the line stays idle.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -61,7 +61,7 @@
       }
     },
     {
-      "notes": "Arcane Missiles whenever Missile Barrage is up: the proc makes it free, halves its channel and fires the missiles every half second. Frostbolt procs it 20% of the time with Missile Barrage 2/2. Guarded by auraIsKnown so a build without the talent never reads the line as live.",
+      "notes": "Arcane Missiles on a Missile Barrage proc, raid build only (needs the talent). The proc makes it free, halves its channel and fires the missiles every half second. Frostbolt procs it 20% of the time with Missile Barrage 2/2. Guarded by auraIsKnown so a build without the talent never reads the line as live.",
       "action": {
         "condition": {
           "and": {
@@ -92,7 +92,7 @@
       }
     },
     {
-      "notes": "Cone of Cold on five Winter's Chill stacks: Frostbolt and empowered Ice Lance build the stacks, and Cone of Cold spends them for 100% more damage and 35% more of your spell damage (20% a stack since client 1.60.1.70707). You need to stand within 10 yards of the target. The line asks whether the target can carry Winter's Chill before it counts stacks: without the talent the aura does not exist, a condition on a missing aura is dropped, and the line would cast Cone of Cold on cooldown. Above 50% mana only: below that the mana is worth more as Frostbolts. At the raid band 20% to 60% gates all measured at least as well as no gate; 50% is the lowest that keeps the bare ladder character's level-40 rung from spending its pool on Cone of Cold. A raid frost mage stands at range, where the cone cannot reach the boss, so the engine refuses the cast beyond 10 yards (12 with Arctic Reach) and the tier list, which stands every caster at 30 yards, never fires this line. It fires for a character set to stand within reach, such as on a boss with no cleave or tail.",
+      "notes": "Cone of Cold within 10 yards on five Winter's Chill stacks, which every rank reaches. Every rank stacks Winter's Chill to 5 (the rank sets the chance a cast applies one); Frostbolt and empowered Ice Lance build the stacks, and Cone of Cold spends them for 100% more damage and 35% more of your spell damage (20% a stack since client 1.60.1.70707). You need to stand within 10 yards of the target. The line asks whether the target can carry Winter's Chill before it counts stacks: without the talent the aura does not exist, a condition on a missing aura is dropped, and the line would cast Cone of Cold on cooldown. Above 50% mana only: below that the mana is worth more as Frostbolts. At the raid band 20% to 60% gates all measured at least as well as no gate; 50% is the lowest that keeps the bare ladder character's level-40 rung from spending its pool on Cone of Cold. A raid frost mage stands at range, where the cone cannot reach the boss, so the engine refuses the cast beyond 10 yards (12 with Arctic Reach) and the tier list, which stands every caster at 30 yards, never fires this line. It fires for a character set to stand within reach, such as on a boss with no cleave or tail.",
       "action": {
         "condition": {
           "and": {
