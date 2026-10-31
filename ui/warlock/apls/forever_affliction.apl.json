@@ -117,14 +117,15 @@
       }
     },
     {
-      "notes": "Bane of Doom is the one curse kept up: it deals its whole damage when the minute is out, so recast it the moment it fires. Bane of Agony and Curse of the Elements both measured lower in the search.",
+      "notes": "Bane of Agony is the curse kept up: it ticks, so it gains from Wrack's +10% to the warlock's other Shadow damage over time and from periodic crits, and it is an Affliction effect for Soul Siphon. With Siphon Life up and periodic crits in the engine it measured above Bane of Doom.",
       "action": {
         "condition": {
           "not": {
             "val": {
               "dotIsActive": {
                 "spellId": {
-                  "spellId": 603
+                  "spellId": 11713,
+                  "rank": 6
                 }
               }
             }
@@ -132,7 +133,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 603
+            "spellId": 11713,
+            "rank": 6
           }
         }
       }
@@ -162,6 +164,29 @@
           "spellId": {
             "spellId": 1316697,
             "rank": 1
+          }
+        }
+      }
+    },
+    {
+      "notes": "Siphon Life (talent) is kept up: the build takes it, it is an Affliction effect that raises Soul Siphon's bonus on Wrack and Drain, and its ticks crit. Recast when it drops.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 18881,
+                  "rank": 4
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 18881,
+            "rank": 4
           }
         }
       }
@@ -212,22 +237,9 @@
           "spellId": {
             "spellId": 5019
           }
-        },
-        "condition": {
-          "cmp": {
-            "lhs": {
-              "currentManaPercent": {}
-            },
-            "op": "OpLt",
-            "rhs": {
-              "const": {
-                "val": "50%"
-              }
-            }
-          }
         }
       },
-      "notes": "Shoot with your wand once mana is under 50 percent: it costs nothing, so mana regenerates while it keeps damage going. Life Tap is only the backstop below 10 percent."
+      "notes": "Shoot only when nothing else can be cast, which in practice means out of mana: a wand shot cannot start during the global cooldown and holds you for the wand's full speed, so it never fits between spells. Life Tap below 10 percent mana keeps the rotation going first."
     }
   ]
 }

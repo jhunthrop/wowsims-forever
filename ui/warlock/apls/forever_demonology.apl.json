@@ -5,6 +5,48 @@
       "action": {
         "castSpell": {
           "spellId": {
+            "spellId": 688
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-60s"
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 18788
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-45s"
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 712
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-44s"
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
             "spellId": 19028
           }
         }
@@ -149,7 +191,7 @@
       }
     },
     {
-      "notes": "Immolate follows the two curses and is recast when under 3 seconds remain: its damage over time is worth more than the Soul Fire and Shadow Bolt globals it displaces.",
+      "notes": "Immolate follows Corruption and Bane of Doom and is recast when under 3 seconds remain: its damage over time is worth more than the Soul Fire and Shadow Bolt globals it displaces.",
       "action": {
         "condition": {
           "cmp": {
@@ -178,32 +220,19 @@
       }
     },
     {
-      "notes": "Searing Pain is the filler between DoT refreshes: it measures ahead of Shadow Bolt here, and because it is cast whenever nothing else is due, no Shadow Bolt line sits behind it.",
+      "notes": "Shadow Bolt is the filler between DoT refreshes: with the Imp's sacrifice and the Succubus' Master Demonologist both raising Shadow damage, it beats Searing Pain.",
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 17923,
-            "rank": 6
+            "spellId": 11661,
+            "rank": 9
           }
         }
       }
     },
     {
-      "notes": "Shoot with your wand once mana is under 50 percent: it costs nothing, so mana regenerates while it keeps damage going. Life Tap is only the backstop below 10 percent.",
+      "notes": "Shoot only when nothing else can be cast, which in practice means out of mana: a wand shot cannot start during the global cooldown and holds you for the wand's full speed, so it never fits between spells. Life Tap below 10 percent mana keeps the rotation going first.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentManaPercent": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "50%"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 5019

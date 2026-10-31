@@ -232,21 +232,8 @@
       }
     },
     {
-      "notes": "Shoot with your wand once mana is under 40 percent: it costs nothing, so mana regenerates while it keeps damage going. Life Tap is only the backstop below 10 percent.",
+      "notes": "Shoot only when nothing else can be cast, which in practice means out of mana: a wand shot cannot start during the global cooldown and holds you for the wand's full speed, so it never fits between spells. Life Tap below 10 percent mana keeps the rotation going first.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentManaPercent": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "40%"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 5019
