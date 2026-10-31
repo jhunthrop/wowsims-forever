@@ -35,7 +35,11 @@ func TestRetribution(t *testing.T) {
 	}))
 }
 
-var Phase45RetTalents = "500501-503-52230351200315"
+// Phase45RetTalents is the site's Retribution raid build on the client
+// 1.60.1.70707 tree (web/src/content/guides/paladin/retribution.md,
+// raidBuild). The vanilla calculator string it replaced decoded onto the
+// wrong Forever talents.
+var Phase45RetTalents = "050150002-503-0523330100130135"
 
 var Phase1Consumes = core.ConsumesCombo{
 	Label: "P1-Consumes",

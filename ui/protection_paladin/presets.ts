@@ -65,20 +65,20 @@ export const DefaultAPL = APLPresets[Phase.Phase5][0];
 //                                 Talent presets
 ///////////////////////////////////////////////////////////////////////////
 
-// Default talents. Uses the wowhead calculator format, make the talents on
-// https://wowhead.com/classic/talent-calc and copy the numbers in the url.
+// Default talents: the Forever Sixty guide's Protection build on the client
+// 1.60.1.70707 trees (ForeverProtectionTalents in sim/paladin).
 
 export const P4ProtTalents = {
 	name: 'P4 Prot',
 	data: SavedTalents.create({
-		talentsString: '-053020335001551-0500535',
+		talentsString: '05005-15302102513501031-5003',
 	}),
 };
 
 export const P5ProtTalents = {
 	name: 'P5 Prot',
 	data: SavedTalents.create({
-		talentsString: '-053020335001551-0520335',
+		talentsString: '05005-15302102513501031-5003',
 	}),
 };
 

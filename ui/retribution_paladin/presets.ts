@@ -67,10 +67,10 @@ export const DefaultAPL = AplForeverRetribution;
 //                                 Talent presets
 ///////////////////////////////////////////////////////////////////////////
 
-// Default talents. Uses the wowhead calculator format, make the talents on
-// https://wowhead.com/classic/talent-calc and copy the numbers in the url.
+// Default talents: the Forever Sixty guide's Retribution raid build on the
+// client 1.60.1.70707 trees (Holy-Protection-Retribution, one digit a talent).
 
-export const P4RetTalents = PresetUtils.makePresetTalents('P4/P5 Ret', SavedTalents.create({ talentsString: '500501-503-52230351200315' }));
+export const P4RetTalents = PresetUtils.makePresetTalents('P4/P5 Ret', SavedTalents.create({ talentsString: '050150002-503-0523330100130135' }));
 
 
 export const TalentPresets = {
