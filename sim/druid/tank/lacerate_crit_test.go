@@ -18,7 +18,7 @@ import (
 // every bleed crit (core.periodicDamageCanCrit), Lacerate's included.
 // This pins both halves so a change to either is a decision.
 func TestLacerateHitAndBleedBothCrit(t *testing.T) {
-	bear, sim, target := newBearSim(t, 60, nil)
+	bear, sim, target := newBearSim(t, 60, map[string]int{"lacerate": 1})
 	bear.AddStatDynamic(sim, stats.Crit, 100*core.CritRatingPerCritChance)
 
 	bear.AddRage(sim, 100, bear.NewRageMetrics(core.ActionID{SpellID: 1}))

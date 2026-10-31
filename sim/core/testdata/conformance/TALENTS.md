@@ -4,7 +4,7 @@ Hand-written, like SUMMARY.md. The conformance report (`sim/conformance`) reads
 spell rows, not talent rank values, so a talent whose per-rank rate the engine
 carried over from vanilla was never checked. This file is that check, for every
 class, against the site's `data/builds/1.60.1.70532/talents/<class>.json`
-(mage and paladin: `1.60.1.70707`)
+(mage, druid and paladin: `1.60.1.70707`)
 (trees, talents, `max_rank`, and a `description` per rank: the live,
 hotfix-aware Forever text).
 
@@ -43,7 +43,7 @@ talent's maximum rank unless a note says otherwise.
 
 | Class | Checked | Match | Mismatch (fixed) | Unmodeled | Text-only | Unsettled | Not read |
 |---|---|---|---|---|---|---|---|
-| Druid | 52 | 45 | 0 | 6 | 0 | 1 | 0 |
+| Druid | 52 | 40 | 5 | 6 | 0 | 1 | 0 |
 | Hunter | 50 | 31 | 3 | 15 | 1 | 0 | 0 |
 | Mage | 52 | 37 | 3 | 12 | 0 | 0 | 0 |
 | Paladin | 51 | 26 | 15 | 10 | 0 | 0 | 0 |
@@ -109,6 +109,14 @@ Arcane lost a node (18) and Fire moved one; 70707's mage trees are 70685's. Each
 - **Mage: Improved Fire Blast, Missile Barrage, Arcane Resilience.** Moved (Improved Fire Blast to Fire's third row; Missile Barrage and Arcane Resilience swapped). No rate changed.
 - **Mage: Ice Lance.** Rank 1 (spell 1312002, levels 20 to 27) has an 8 sec cooldown in the client's spell rows; the trained ranks have none (ice_lance.go).
 - **Hunter: Trueshot Aura.** The talent's text reads 15 ranged attack power at rank 1 (was 30); the engine reads the trained ranks' amounts (`TrueshotAuraRanks`), not the talent text.
+- **Druid: the 70707 hotfix rework.** Berserk, Improved Shifting Power and Gift of the Earthmother are gone (the Grovekeeper Rage 5-piece, which shortened Berserk, is now NoSim). Heart of the Wild moved to Restoration and Furor to Feral Combat, rates unchanged. Several of the new numbers are in no client row (the tables are pre-hotfix); they come from Wowhead's live Forever tooltips, read 2026-10-31.
+- **Druid: Primal Bite.** The Feral capstone (tier 6, learned at 40); 42 at 40, 62 at 50, 77 at 60 (client rows 26/38/59/77 at 25/36/48/60).
+- **Druid: Shifting Power.** Tier 6 behind Predatory Discipline; 8 sec cooldown (client rows 16 sec).
+- **Druid: Lacerate.** A talent (tier 3, behind Savage Fury 2); two new low ranks (20 over 15 sec at 25, 30 at 34); the hit is 10% weapon damage per existing stack (was a flat 20%).
+- **Druid: Predatory Discipline.** New: Ferocious Bite keeps its excess-energy damage but no longer spends the energy.
+- **Druid: Bloom.** New: a Rejuvenation or Regrowth that runs its duration heals for 100% of Spirit.
+- **Druid: Genesis, Naturalist.** 2% a rank (were 1%); Naturalist's cast-time cut also reaches Wild Growth, which now has a 3 sec cast.
+- **Druid: Moonkin Form, Leader of the Pack.** Their 3% now reaches all crit; the engine's unified Crit stat already applied it so.
 
 ### Paladin (1.60.1.70707)
 
@@ -154,7 +162,7 @@ The paladin trees were reworked: Twist of Light, Instrument of Law, One-Handed W
 | Talent | Tree | Max | Forever text at max rank | Engine at max rank | Verdict | Note |
 |---|---|---|---|---|---|---|
 | Improved Wrath | Balance | 5 | Reduces the cast time of your Wrath spell by 0.5 sec and its Mana cost by 50%. | same | match |  |
-| Genesis | Balance | 5 | Increases the periodic damage and healing done by your spells and abilities by 5%. | same | match |  |
+| Genesis | Balance | 5 | Increases the periodic damage and healing done by your spells and abilities by 10%. | 2% a rank (10% at 5/5) | mismatch, fixed | client 1.60.1.70707 hotfix doubled it; the client row still says 1 a rank |
 | Moonglow | Balance | 3 | Reduces the Mana cost of your damaging spells by 25%. | same | match |  |
 | Improved Moonfire | Balance | 2 | Increases the damage and critical strike chance of your Moonfire spell by 10%. | same | match |  |
 | Nature's Majesty | Balance | 2 | Increases your critical strike chance with spells and melee attacks by 4%. | same | match |  |
@@ -168,9 +176,9 @@ The paladin trees were reworked: Twist of Light, Instrument of Law, One-Handed W
 | Nature's Grace | Balance | 1 | All non-periodic spell criticals grace you with a blessing of nature, increasing your spellcasting speed and reducing your global cooldown by 10% for 3 sec. | same | match |  |
 | Eclipse | Balance | 3 | Your Wrath spell reduces the cast time of your next 2 Starfire spells by 0.50 sec. Stores up to 4 charges. Lasts 15 sec. | same | match |  |
 | Moonfury | Balance | 5 | Increases the damage done by your Arcane and Nature spells by 10%. | same | match |  |
-| Moonkin Form | Balance | 1 | Shapeshift into Moonkin Form, increasing Omen of Clarity's chance to trigger by 100%, Armor contribution from items by 360%, and all party members within 45 yards have... | 3% party crit | match | armor/Omen halves not modeled |
+| Moonkin Form | Balance | 1 | Shapeshift into Moonkin Form, increasing Omen of Clarity's chance to trigger by 100%, Armor contribution from items by 360%, and all party or raid members within 45 ya... | 3% Crit to the raid | match | the aura now reaches all crit; the engine's unified Crit stat already did. Armor/Omen halves not modeled |
 | Ferocity | Feral Combat | 5 | Reduces the cost of your Maul, Primal Bite, Swipe, Claw, and Rake abilities by 5 Rage or Energy. | same | match |  |
-| Heart of the Wild | Feral Combat | 5 | Increases your Intellect by 10%. In addition, while in Bear Form or Dire Bear Form your Stamina is increased by 20% and while in Cat Form your Strength is increased by... | same | match |  |
+| Furor | Feral Combat | 5 | Gives you a 100% chance to gain 10 Rage when shapeshifting into Bear Form or Dire Bear Form. Shapeshifting into Cat Form restores 100% of the Energy you had when last ... | same | match | Feral Combat tier 0 since 1.60.1.70707 (Restoration before) |
 | Feral Swiftness | Feral Combat | 2 | Increases your movement speed while in Cat Form by 30%, and increases your chance to Dodge by 4%. | 4% dodge | match | cat movement speed not modeled |
 | Feral Instinct | Feral Combat | 3 | Increases damage done by your Swipe ability by 30% and reduces the chance enemies have to detect you while Prowling as if you were 3 levels higher. | 30% Swipe damage | match | prowl detection not modeled |
 | Brutal Impact | Feral Combat | 2 | Increases the stun duration of your Bash and Pounce abilities by 1 sec and reduces the cooldown of Bash by 30 sec. | - | unmodeled | Bash and Pounce stun duration |
@@ -179,32 +187,32 @@ The paladin trees were reworked: Twist of Light, Instrument of Law, One-Handed W
 | Savage Fury | Feral Combat | 2 | Increases the damage caused by your Claw, Rake, Shred, Maul, and Swipe abilities by 10%. | same | match |  |
 | Feral Charge | Feral Combat | 1 | Requires Bear Form, Dire Bear Form Charge an enemy, immobilizing them and interrupting any spell they are casting for 4 sec. | - | unmodeled | gap closer |
 | Sharpened Claws | Feral Combat | 2 | Increases your critical strike chance while in Bear Form, Dire Bear Form, or Cat Form by 6%. | same | match |  |
-| Shifting Power | Feral Combat | 1 | Instantly convert 0 Mana into 40 Energy. Shifting Power's cost is reduced by effects that reduce the cost of Shapeshifting. | same | match |  |
-| Primal Bite | Feral Combat | 1 | Bite the target, dealing 100% normal damage plus 26 and generating a high amount of threat. | same | match |  |
 | Predatory Strikes | Feral Combat | 3 | Increases your melee Attack Power in Cat Form, Bear Form, and Dire Bear Form by 150% of your level. | same | match |  |
+| Lacerate | Feral Combat | 1 | Lacerates the enemy target, making them bleed for 20 damage over 15 sec plus 10% weapon damage per existing application of Lacerate on the target. Causes a high amount... | 20 over 15 sec at 25 (1328617), 30 at 34, then the trained 50/60/75; hit 10% weapon damage per existing stack | mismatch, fixed | a talent since 1.60.1.70707 (trained at 42 before); the hit was a flat 20% weapon damage; the two low ranks are live tooltips, not client rows |
+| Predatory Discipline | Feral Combat | 1 | Your Ferocious Bite ability no longer converts extra Energy into damage, but still deals extra damage based on your excess Energy. | Ferocious Bite keeps its excess-energy damage and no longer spends the energy | match | new in 1.60.1.70707 |
 | Blood Frenzy | Feral Combat | 2 | Gives you a 100% chance to gain an additional 5 Rage any time you get a critical strike while in Bear Form or Dire Bear Form. In addition, your non-periodic critical s... | same | match |  |
-| Improved Shifting Power | Feral Combat | 2 | Reduces the cooldown of your Shifting Power spell by 8 sec. | same | match |  |
-| Leader of the Pack | Feral Combat | 1 | While in Cat Form, Bear Form, or Dire Bear Form, the Leader of the Pack increases the critical strike chance of all party members within 45 yards by 3%, exclusive with... | same | match |  |
+| Leader of the Pack | Feral Combat | 1 | While in Cat Form, Bear Form, or Dire Bear Form, the Leader of the Pack increases the Critical Strike chance of all party or raid members within 45 yards by 3%. | 3% Crit to the raid | match | the aura now reaches all crit; the engine's unified Crit stat already did |
 | Natural Instinct | Feral Combat | 2 | Increases the critical strike damage bonus of your melee abilities by 20% and increases your spell healing by 25% of your Intellect. | 10% a rank melee crit damage; healing 12/25% of Intellect as a stat dependency | match | Predatory Instincts' slot since 1.60.1.70425 |
-| Natural Reaction | Feral Combat | 5 | Increases your dodge chance by 5%, and gives you a 100% chance to gain 5 Rage each time you dodge. | same | match |  |
 | Rend and Tear | Feral Combat | 5 | Increases damage done by your melee abilities on Bleeding targets by 10%. | same | match |  |
-| Berserk | Feral Combat | 1 | Requires Cat Form, Bear Form, Dire Bear Form Causes your Primal Bite ability to strike up to 3 targets, removes its cooldown, and increases the critical strike chance ... | same | match |  |
+| Natural Reaction | Feral Combat | 5 | Increases your dodge chance by 5%, and gives you a 100% chance to gain 5 Rage each time you dodge. | same | match |  |
+| Primal Bite | Feral Combat | 1 | Bite the target, dealing 100% normal damage plus 42 and generating a high amount of threat. | 42 at 40, 62 at 50, 77 at 60 | mismatch, fixed | capstone since 1.60.1.70707; live tooltips raise the low ranks (client rows 26/38/59/77) |
+| Shifting Power | Feral Combat | 1 | Instantly convert 0 Mana into 40 Energy. Shifting Power's cost is reduced by effects that reduce the cost of Shapeshifting. | 40 energy, 8 sec cooldown | mismatch, fixed | tier 6 since 1.60.1.70707; Improved Shifting Power is gone and the live tooltip states 8 sec (client rows 16 sec) |
 | Nature's Focus | Restoration | 5 | Gives your Arcane and Nature spells a 70% chance to not lose casting time when you take damage. | - | unmodeled | pushback avoidance never triggers in the fights modeled |
-| Furor | Restoration | 5 | Gives you a 100% chance to gain 10 Rage when shapeshifting into Bear Form or Dire Bear Form. Shapeshifting into Cat Form restores 100% of the Energy you had when last ... | same | match |  |
-| Naturalist | Restoration | 5 | Reduces the cast time of your Healing Touch spell by 0.5 sec and increases all damage you deal by 5%. | same | match |  |
-| Subtlety | Restoration | 3 | Reduces the threat generated by your Nature and Arcane spells by 30%. | - | unmodeled | threat only |
-| Natural Shapeshifter | Restoration | 3 | Reduces the mana cost of all shapeshifting by 30%. | same | match |  |
+| Heart of the Wild | Restoration | 5 | Increases your Intellect by 10%. In addition, while in Bear Form or Dire Bear Form your Stamina is increased by 20% and while in Cat Form your Strength is increased by... | same | match | Restoration tier 0 since 1.60.1.70707 (Feral before) |
+| Naturalist | Restoration | 5 | Reduces the cast time of your Healing Touch and Wild Growth spells by 0.5 sec and increases all damage you deal by 10%. | 2% a rank all damage; 0.1 sec a rank off Healing Touch and Wild Growth | mismatch, fixed | 1.60.1.70707 doubled the damage and added Wild Growth, which now has a 3 sec cast (live tooltips) |
 | Reflection | Restoration | 3 | Allows 50% of your Mana regeneration to continue while casting. | 50% (rank/3 of 50%: 16.7/33.3/50) | match | the client row is base 50 at 3/3, so the engine's exact thirds are right and the text's 17% is display rounding |
+| Natural Shapeshifter | Restoration | 3 | Reduces the mana cost of all shapeshifting by 30%. | same | match |  |
+| Subtlety | Restoration | 3 | Reduces the threat generated by your Nature and Arcane spells by 30%. | - | unmodeled | threat only |
 | Gift of Nature | Restoration | 5 | Increases the effect of all your healing spells by 10%. | same | match |  |
-| Gift of the Earthmother | Restoration | 1 | Reduces the global cooldown by 0.5 seconds on your Rejuvenation, Swiftmend, and Wild Growth spells. | same | match |  |
+| Bloom | Restoration | 1 | When your Rejuvenation or Regrowth spell expires due to its duration, the target is instantly healed for an amount equal to 100% of your Spirit. If either spell expire... | heal for 100% of Spirit when Rejuvenation or Regrowth runs its duration | match | new in 1.60.1.70707; the dispelled half never triggers (nothing dispels); crit and healing modifiers unconfirmed |
 | Tranquil Spirit | Restoration | 5 | Reduces the mana cost of your Healing Touch and Tranquility spells by 10%. | same | match |  |
 | Improved Rejuvenation | Restoration | 3 | Increases the effect of your Rejuvenation spell by 15%. | same | match |  |
-| Swiftmend | Restoration | 1 | Instantly heals a target with an active Rejuvenation or Regrowth effect for an amount equal to the full duration of the periodic effect of one of those spells. | same | match |  |
+| Swiftmend | Restoration | 1 | Instantly heals a target with your active Rejuvenation or Regrowth effect for an amount equal to the full duration of the periodic effect of the consumed spell. | same | match | the engine already consumed the effect it reads |
 | Nature's Swiftness | Restoration | 1 | When activated, your next Nature spell becomes an instant cast spell. | same | match |  |
 | Living Spirit | Restoration | 3 | Increases your Spirit by 15%. | same | match |  |
 | Improved Tranquility | Restoration | 2 | Reduces threat caused by Tranquility by 100% and its cooldown by 60%. | 60% cooldown cut | match | the threat half is not modeled |
 | Improved Regrowth | Restoration | 5 | Increases the critical effect chance of your Regrowth spell by 50%. | same | match |  |
-| Wild Growth | Restoration | 1 | Heals the target and their party for 336 over 7 sec. Party members must be within 43.5 yards of target. The amount healed is applied quickly at first, and slows down a... | same | match |  |
+| Wild Growth | Restoration | 1 | Heals the target and their party for 336 over 7 sec. Party members must be within 43.5 yards of target. The amount healed is applied quickly at first, and slows down a... | same, 3 sec cast | match | the live tooltips give every rank a 3 sec cast; the client rows say instant |
 
 ## Hunter
 

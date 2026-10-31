@@ -50,10 +50,10 @@ func TestShiftingPowerIsCastableFromTheAPL(t *testing.T) {
 		castAction(shiftingPowerRotationSpellID, energyAtMost(shiftingPowerRotationCap-shiftingPowerRotationEnergy)),
 		castAction(rotationShredSpellID, nil),
 	})
-	// 16 s cooldown over 160 s: ten casts at most, and the mana pool (55% of
-	// base a cast) is allowed to cut that short but not to zero.
-	if got := casts[shiftingPowerRotationSpellID]; got < 2 || got > 11 {
-		t.Errorf("Shifting Power casts = %d, want 2-11 over 160 s on a 16 s cooldown", got)
+	// 8 s cooldown over 160 s: twenty casts at most, and the mana pool (55%
+	// of base a cast) is allowed to cut that short but not to zero.
+	if got := casts[shiftingPowerRotationSpellID]; got < 2 || got > 21 {
+		t.Errorf("Shifting Power casts = %d, want 2-21 over 160 s on an 8 s cooldown", got)
 	}
 	if casts[rotationShredSpellID] == 0 {
 		t.Error("Shred never cast alongside Shifting Power")

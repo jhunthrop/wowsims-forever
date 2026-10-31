@@ -18,6 +18,7 @@ func (druid *Druid) registerRejuvenationSpell() {
 	druid.Rejuvenation = druid.registerHealingRanks(table, func(rank int, spec healingRank) core.SpellConfig {
 		config := druid.healingSpellConfig(rank, spec, SpellCode_DruidRejuvenation, DruidSpellMaskRejuvenation)
 		config.Hot = druid.healOverTimeConfig("Rejuvenation", rank, spec, rejuvenationTicks, rejuvenationTickLength)
+		config.Hot.Aura.OnExpire = druid.bloomOnExpire
 		config.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			spell.Hot(target).Apply(sim)
 		}

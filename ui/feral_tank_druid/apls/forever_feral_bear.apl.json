@@ -54,16 +54,6 @@
       }
     },
     {
-      "notes": "Berserk on cooldown (talent): Primal Bite loses its cooldown for 15 s. Worth about 4% more threat for no survival cost.",
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 417141
-          }
-        }
-      }
-    },
-    {
       "notes": "Primal Bite (talent) on cooldown: the biggest threat hit per rage.",
       "action": {
         "castSpell": {
@@ -75,7 +65,7 @@
       }
     },
     {
-      "notes": "Lacerate to start the bleed and again when under 3 s remain; the bleed is what turns on Rend and Tear.",
+      "notes": "Lacerate (a Feral talent since client 1.60.1.70707) to start the bleed, to build it to five stacks, and again when under 3 s remain; the bleed is what turns on Rend and Tear, and since 70707 its hit is 10% weapon damage per stack already up, so building to five measured about 3% more threat and 2% more damage in the tank fight than refreshing at one stack.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -112,6 +102,27 @@
                   "rhs": {
                     "const": {
                       "val": "3s"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "auraNumStacks": {
+                      "sourceUnit": {
+                        "type": "CurrentTarget"
+                      },
+                      "auraId": {
+                        "spellId": 1235827,
+                        "rank": 3
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "5"
                     }
                   }
                 }

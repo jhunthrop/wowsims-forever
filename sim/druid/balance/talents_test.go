@@ -2,6 +2,7 @@ package balance
 
 import (
 	"github.com/wowsims/classic/sim/druid"
+	"math"
 	"testing"
 	"time"
 
@@ -114,7 +115,7 @@ func newBalanceDruidSimWearing(t *testing.T, talents string, equipment *proto.Eq
 
 // TestGenesisIncreasesPeriodicDamageMultiplier covers: "Increases the
 // periodic damage ... done by your spells and abilities by
-// 1/2/3/4/5%." (node 104924, proto field Genesis). Only the damage half
+// 2/4/6/8/10%." (node 104924, client 1.60.1.70707's hotfixed text, proto field Genesis). Only the damage half
 // is modeled (no healing spells registered); scoped to Moonfire and
 // Insect Swarm, this package's Balance DoTs.
 func TestGenesisIncreasesPeriodicDamageMultiplier(t *testing.T) {
@@ -128,10 +129,10 @@ func TestGenesisIncreasesPeriodicDamageMultiplier(t *testing.T) {
 	baseIsMult := base.InsectSwarm[isRank].PeriodicDamageMultiplierAdditive
 
 	talented, _, _ := newBalanceDruidSimWithTalents(t, druidTalentsString(t, map[int]int{genesisField: 5, insectSwarmField: 1}))
-	if got, want := talented.Moonfire[mfRank].PeriodicDamageMultiplierAdditive, baseMfMult+0.05; got != want {
+	if got, want := talented.Moonfire[mfRank].PeriodicDamageMultiplierAdditive, baseMfMult+0.10; math.Abs(got-want) > 1e-9 {
 		t.Errorf("5/5 Genesis Moonfire.PeriodicDamageMultiplierAdditive = %v, want %v", got, want)
 	}
-	if got, want := talented.InsectSwarm[isRank].PeriodicDamageMultiplierAdditive, baseIsMult+0.05; got != want {
+	if got, want := talented.InsectSwarm[isRank].PeriodicDamageMultiplierAdditive, baseIsMult+0.10; math.Abs(got-want) > 1e-9 {
 		t.Errorf("5/5 Genesis InsectSwarm.PeriodicDamageMultiplierAdditive = %v, want %v", got, want)
 	}
 }
@@ -236,9 +237,9 @@ func TestEclipseDiscountsStarfireCastTimeAfterWrath(t *testing.T) {
 }
 
 // TestNaturalistIncreasesAllDamageDealt covers: "... increases all
-// damage you deal by 1/2/3/4/5%." (node 104922, proto field Naturalist -
+// damage you deal by 2/4/6/8/10%." (client 1.60.1.70707; node 104922, proto field Naturalist -
 // in the Restoration tree, field 38, even though its damage half reads
-// on every spell). The Healing Touch cast-time half is not modeled.
+// on every spell). The cast-time half is the restoration package's test.
 func TestNaturalistIncreasesAllDamageDealt(t *testing.T) {
 	const naturalistField = 38
 
@@ -246,7 +247,7 @@ func TestNaturalistIncreasesAllDamageDealt(t *testing.T) {
 	baseMult := base.PseudoStats.DamageDealtMultiplier
 
 	talented, _, _ := newBalanceDruidSimWithTalents(t, druidTalentsString(t, map[int]int{naturalistField: 5}))
-	if got, want := talented.PseudoStats.DamageDealtMultiplier, baseMult*1.05; got != want {
+	if got, want := talented.PseudoStats.DamageDealtMultiplier, baseMult*1.10; math.Abs(got-want) > 1e-9 {
 		t.Errorf("5/5 Naturalist DamageDealtMultiplier = %v, want %v", got, want)
 	}
 }

@@ -18,6 +18,7 @@ func (druid *Druid) registerRegrowthSpell() {
 	druid.Regrowth = druid.registerHealingRanks(regrowthTable, func(rank int, spec healingRank) core.SpellConfig {
 		config := druid.healingSpellConfig(rank, spec, SpellCode_DruidRegrowth, DruidSpellMaskRegrowth)
 		config.Hot = druid.healOverTimeConfig("Regrowth", rank, spec, regrowthTicks, regrowthTickLength)
+		config.Hot.Aura.OnExpire = druid.bloomOnExpire
 
 		directHeal := druid.directHealEffects(spec)
 		config.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {

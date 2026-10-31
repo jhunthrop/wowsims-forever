@@ -123,8 +123,15 @@ func TestNaturalistQuickensHealingTouchAndRaisesDamage(t *testing.T) {
 	if got := talented.Regrowth[9].DefaultCast.CastTime; got != 2*time.Second {
 		t.Errorf("Regrowth casts in %v with Naturalist, want 2s", got)
 	}
-	if got := talented.PseudoStats.DamageDealtMultiplier; !near(got, 1.05) {
-		t.Errorf("damage multiplier = %v with 5/5 Naturalist, want 1.05", got)
+	// Client 1.60.1.70707: Wild Growth has a 3 s cast and Naturalist cuts it.
+	if got := plain.WildGrowth[3].DefaultCast.CastTime; got != 3*time.Second {
+		t.Errorf("Wild Growth casts in %v, want 3s", got)
+	}
+	if got := talented.WildGrowth[3].DefaultCast.CastTime; got != 2500*time.Millisecond {
+		t.Errorf("Wild Growth casts in %v with 5/5 Naturalist, want 2.5s", got)
+	}
+	if got := talented.PseudoStats.DamageDealtMultiplier; !near(got, 1.10) {
+		t.Errorf("damage multiplier = %v with 5/5 Naturalist, want 1.10", got)
 	}
 }
 
@@ -133,7 +140,7 @@ func TestGenesisAddsToEveryHealOverTime(t *testing.T) {
 	for name, spell := range healingSpells(resto) {
 		want := 1.0
 		if name != "Healing Touch" && name != "Swiftmend" {
-			want = 1.05
+			want = 1.10
 		}
 		if !near(spell.PeriodicDamageMultiplierAdditive, want) {
 			t.Errorf("%s periodic multiplier = %v with 5/5 Genesis, want %v", name, spell.PeriodicDamageMultiplierAdditive, want)
@@ -146,7 +153,7 @@ func TestGenesisShowsInTheTicks(t *testing.T) {
 	rejuvenation := resto.Rejuvenation[10]
 	rejuvenation.ApplyEffects(sim, &resto.Unit, rejuvenation.Spell)
 	dot := rejuvenation.Hot(&resto.Unit)
-	want := (161 + 0.2*healerBonusStats[stats.HealingPower]) * 1.05
+	want := (161 + 0.2*healerBonusStats[stats.HealingPower]) * 1.10
 	if got := dot.SnapshotBaseDamage * dot.SnapshotAttackerMultiplier; math.Abs(got-want) > tolerance {
 		t.Errorf("Rejuvenation ticks for %v with 5/5 Genesis, want %v", got, want)
 	}

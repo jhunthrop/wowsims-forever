@@ -213,7 +213,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralBearDruid | 50 | Enrage | 0 | 5229 | 0.00→0.00 | rage→none | 60000→60000 | 0→0 | 0→0 | 12→12 | 10000→10000 | match |  | n/a | n/a | n/a |
 | FeralBearDruid | 50 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
 | FeralBearDruid | 50 | Frenzied Regeneration | 0 | 22842 | 0.00→0.00 | rage→none | 180000→180000 | 0→0 | 1500→1500 | 36→36 | 10000→10000 | match |  | n/a | n/a | n/a |
-| FeralBearDruid | 50 | Lacerate | 2 | 1235826 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | 12.00-12.00→12.00-12.00 | 0.500 (convention)→1.000 | declared, matches |
 | FeralBearDruid | 50 | Maul | 6 | 9880 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | n/a | n/a | n/a |
 | FeralBearDruid | 50 | Swipe | 4 | 9754 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 60.00-60.00→60.00-60.00 | 1.000→1.000 | declared, matches |
 | FeralBearDruid | 60 | Barkskin | 0 | 22812 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 1500→1500 | 44→44 | 15000→15000 | match |  | n/a | n/a | n/a |
@@ -222,7 +221,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralBearDruid | 60 | Enrage | 0 | 5229 | 0.00→0.00 | rage→none | 60000→60000 | 0→0 | 0→0 | 12→12 | 10000→10000 | match |  | n/a | n/a | n/a |
 | FeralBearDruid | 60 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
 | FeralBearDruid | 60 | Frenzied Regeneration | 0 | 22842 | 0.00→0.00 | rage→none | 180000→180000 | 0→0 | 1500→1500 | 36→36 | 10000→10000 | match |  | n/a | n/a | n/a |
-| FeralBearDruid | 60 | Lacerate | 3 | 1235827 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 58→58 | 15000→15000 | match |  | 15.00-15.00→15.00-15.00 | 0.500 (convention)→1.000 | declared, matches |
 | FeralBearDruid | 60 | Maul | 7 | 9881 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  | n/a | n/a | n/a |
 | FeralBearDruid | 60 | Swipe | 5 | 9908 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→54 | n/a | match |  | 83.00-83.00→83.00-83.00 | 1.000→1.000 | declared, matches |
 | FeralDruid | 10 | Cat Form | 0 | 768 | 81.95 (55% base mana)→81.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
@@ -538,13 +536,6 @@ Each spell below is built with exactly one point in the single talent that grant
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| BalanceDruid (Berserk talent) | 10 | Berserk | 0 | 417141 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| BalanceDruid (Berserk talent) | 20 | Berserk | 0 | 417141 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| BalanceDruid (Berserk talent) | 30 | Berserk | 0 | 417141 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| BalanceDruid (Berserk talent) | 38 | Berserk | 0 | 417141 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| BalanceDruid (Berserk talent) | 40 | Berserk | 0 | 417141 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| BalanceDruid (Berserk talent) | 50 | Berserk | 0 | 417141 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| BalanceDruid (Berserk talent) | 60 | Berserk | 0 | 417141 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | BalanceDruid (Insect Swarm talent) | 20 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.158→0.158 | declared, matches |
 | BalanceDruid (Insect Swarm talent) | 30 | Insect Swarm | 0 | 5570 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.158→0.158 | declared, matches |
 | BalanceDruid (Insect Swarm talent) | 30 | Insect Swarm | 0 | 24974 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 12000→12000 | match |  | 15.00-15.00→15.00-15.00 | 0.158→0.158 | declared, matches |
@@ -576,18 +567,18 @@ Each spell below is built with exactly one point in the single talent that grant
 | BalanceDruid (Nature's Swiftness talent) | 40 | Nature's Swiftness | 0 | 17116 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid (Nature's Swiftness talent) | 50 | Nature's Swiftness | 0 | 17116 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid (Nature's Swiftness talent) | 60 | Nature's Swiftness | 0 | 17116 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| FeralBearDruid (Primal Bite talent) | 30 | Primal Bite | 1 | 407995 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 25→25 | n/a | match |  | n/a | n/a | n/a |
-| FeralBearDruid (Primal Bite talent) | 38 | Primal Bite | 2 | 1238069 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| FeralBearDruid (Primal Bite talent) | 40 | Primal Bite | 2 | 1238069 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| FeralBearDruid (Primal Bite talent) | 50 | Primal Bite | 3 | 1238070 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid (Lacerate talent) | 50 | Lacerate | 4 | 1235826 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | 12.00-12.00→12.00-12.00 | 0.500 (convention)→1.000 | declared, matches |
+| FeralBearDruid (Lacerate talent) | 60 | Lacerate | 5 | 1235827 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 58→58 | 15000→15000 | match |  | 15.00-15.00→15.00-15.00 | 0.500 (convention)→1.000 | declared, matches |
+| FeralBearDruid (Primal Bite talent) | 40 | Primal Bite | 1 | 407995 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 25→40 | n/a | mismatch | required_level 25->40 | n/a | n/a | n/a |
+| FeralBearDruid (Primal Bite talent) | 50 | Primal Bite | 2 | 1238069 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 36→50 | n/a | mismatch | required_level 36->50 | n/a | n/a | n/a |
 | FeralBearDruid (Primal Bite talent) | 60 | Primal Bite | 4 | 1238073 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | n/a | n/a | n/a |
-| FeralDruid (Shifting Power talent) | 10 | Shifting Power | 0 | 1322605 | 81.95 (55% base mana)→81.95 | mana→mana | 16000→16000 | 0→0 | 1000→1000 | 1→1 | n/a | match |  | n/a | n/a | n/a |
-| FeralDruid (Shifting Power talent) | 20 | Shifting Power | 0 | 1322605 | 194.70 (55% base mana)→194.70 | mana→mana | 16000→16000 | 0→0 | 1000→1000 | 1→1 | n/a | match |  | n/a | n/a | n/a |
-| FeralDruid (Shifting Power talent) | 30 | Shifting Power | 0 | 1322605 | 337.70 (55% base mana)→337.70 | mana→mana | 16000→16000 | 0→0 | 1000→1000 | 1→1 | n/a | match |  | n/a | n/a | n/a |
-| FeralDruid (Shifting Power talent) | 38 | Shifting Power | 0 | 1322605 | 444.95 (55% base mana)→444.95 | mana→mana | 16000→16000 | 0→0 | 1000→1000 | 1→1 | n/a | match |  | n/a | n/a | n/a |
-| FeralDruid (Shifting Power talent) | 40 | Shifting Power | 0 | 1322605 | 469.70 (55% base mana)→469.70 | mana→mana | 16000→16000 | 0→0 | 1000→1000 | 1→1 | n/a | match |  | n/a | n/a | n/a |
-| FeralDruid (Shifting Power talent) | 50 | Shifting Power | 0 | 1322605 | 585.20 (55% base mana)→585.20 | mana→mana | 16000→16000 | 0→0 | 1000→1000 | 1→1 | n/a | match |  | n/a | n/a | n/a |
-| FeralDruid (Shifting Power talent) | 60 | Shifting Power | 0 | 1322605 | 684.20 (55% base mana)→684.20 | mana→mana | 16000→16000 | 0→0 | 1000→1000 | 1→1 | n/a | match |  | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 10 | Shifting Power | 0 | 1322605 | 81.95 (55% base mana)→81.95 | mana→mana | 16000→8000 | 0→0 | 1000→1000 | 1→1 | n/a | mismatch | cooldown_ms 16000->8000 | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 20 | Shifting Power | 0 | 1322605 | 194.70 (55% base mana)→194.70 | mana→mana | 16000→8000 | 0→0 | 1000→1000 | 1→1 | n/a | mismatch | cooldown_ms 16000->8000 | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 30 | Shifting Power | 0 | 1322605 | 337.70 (55% base mana)→337.70 | mana→mana | 16000→8000 | 0→0 | 1000→1000 | 1→1 | n/a | mismatch | cooldown_ms 16000->8000 | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 38 | Shifting Power | 0 | 1322605 | 444.95 (55% base mana)→444.95 | mana→mana | 16000→8000 | 0→0 | 1000→1000 | 1→1 | n/a | mismatch | cooldown_ms 16000->8000 | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 40 | Shifting Power | 0 | 1322605 | 469.70 (55% base mana)→469.70 | mana→mana | 16000→8000 | 0→0 | 1000→1000 | 1→1 | n/a | mismatch | cooldown_ms 16000->8000 | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 50 | Shifting Power | 0 | 1322605 | 585.20 (55% base mana)→585.20 | mana→mana | 16000→8000 | 0→0 | 1000→1000 | 1→1 | n/a | mismatch | cooldown_ms 16000->8000 | n/a | n/a | n/a |
+| FeralDruid (Shifting Power talent) | 60 | Shifting Power | 0 | 1322605 | 684.20 (55% base mana)→684.20 | mana→mana | 16000→8000 | 0→0 | 1000→1000 | 1→1 | n/a | mismatch | cooldown_ms 16000->8000 | n/a | n/a | n/a |
 | RestorationDruid (Swiftmend talent) | 10 | Swiftmend | 0 | 18562 | 29.80 (20% base mana)→29.80 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | 1.00-1.00→1.00-1.00 | 0.214 (convention)→0.000 | declared, matches |
 | RestorationDruid (Swiftmend talent) | 20 | Swiftmend | 0 | 18562 | 70.80 (20% base mana)→70.80 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | 1.00-1.00→1.00-1.00 | 0.214 (convention)→0.000 | declared, matches |
 | RestorationDruid (Swiftmend talent) | 30 | Swiftmend | 0 | 18562 | 122.80 (20% base mana)→122.80 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | 1.00-1.00→1.00-1.00 | 0.214 (convention)→0.000 | declared, matches |
@@ -595,12 +586,12 @@ Each spell below is built with exactly one point in the single talent that grant
 | RestorationDruid (Swiftmend talent) | 40 | Swiftmend | 0 | 18562 | 170.80 (20% base mana)→170.80 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | 1.00-1.00→1.00-1.00 | 0.214 (convention)→0.000 | declared, matches |
 | RestorationDruid (Swiftmend talent) | 50 | Swiftmend | 0 | 18562 | 212.80 (20% base mana)→212.80 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | 1.00-1.00→1.00-1.00 | 0.214 (convention)→0.000 | declared, matches |
 | RestorationDruid (Swiftmend talent) | 60 | Swiftmend | 0 | 18562 | 248.80 (20% base mana)→248.80 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 1→1 | n/a | match |  | 1.00-1.00→1.00-1.00 | 0.214 (convention)→0.000 | declared, matches |
-| RestorationDruid (Wild Growth talent) | 40 | Wild Growth | 1 | 408120 | 550.00→550.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 7000→7000 | match |  | 40.00-40.00→40.00-40.00 | 0.033→0.033 | declared, matches |
-| RestorationDruid (Wild Growth talent) | 50 | Wild Growth | 1 | 408120 | 550.00→550.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 7000→7000 | match |  | 48.00-48.00→48.00-48.00 | 0.033→0.033 | declared, matches |
-| RestorationDruid (Wild Growth talent) | 50 | Wild Growth | 2 | 1238214 | 755.00→755.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 50→50 | 7000→7000 | match |  | 60.00-60.00→60.00-60.00 | 0.033→0.033 | declared, matches |
-| RestorationDruid (Wild Growth talent) | 60 | Wild Growth | 1 | 408120 | 550.00→550.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | 7000→7000 | match |  | 48.00-48.00→48.00-48.00 | 0.033→0.033 | declared, matches |
-| RestorationDruid (Wild Growth talent) | 60 | Wild Growth | 2 | 1238214 | 755.00→755.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 50→50 | 7000→7000 | match |  | 70.40-70.40→70.40-70.40 | 0.033→0.033 | declared, matches |
-| RestorationDruid (Wild Growth talent) | 60 | Wild Growth | 3 | 1238215 | 1050.00→1050.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 7000→7000 | match |  | 97.00-97.00→97.00-97.00 | 0.033→0.033 | declared, matches |
+| RestorationDruid (Wild Growth talent) | 40 | Wild Growth | 1 | 408120 | 550.00→550.00 | mana→mana | 6000→6000 | 0→3000 | 1500→1500 | 40→40 | 7000→7000 | mismatch | cast_time_ms 0->3000 | 40.00-40.00→40.00-40.00 | 0.033→0.033 | declared, matches |
+| RestorationDruid (Wild Growth talent) | 50 | Wild Growth | 1 | 408120 | 550.00→550.00 | mana→mana | 6000→6000 | 0→3000 | 1500→1500 | 40→40 | 7000→7000 | mismatch | cast_time_ms 0->3000 | 48.00-48.00→48.00-48.00 | 0.033→0.033 | declared, matches |
+| RestorationDruid (Wild Growth talent) | 50 | Wild Growth | 2 | 1238214 | 755.00→755.00 | mana→mana | 6000→6000 | 0→3000 | 1500→1500 | 50→50 | 7000→7000 | mismatch | cast_time_ms 0->3000 | 60.00-60.00→60.00-60.00 | 0.033→0.033 | declared, matches |
+| RestorationDruid (Wild Growth talent) | 60 | Wild Growth | 1 | 408120 | 550.00→550.00 | mana→mana | 6000→6000 | 0→3000 | 1500→1500 | 40→40 | 7000→7000 | mismatch | cast_time_ms 0->3000 | 48.00-48.00→48.00-48.00 | 0.033→0.033 | declared, matches |
+| RestorationDruid (Wild Growth talent) | 60 | Wild Growth | 2 | 1238214 | 755.00→755.00 | mana→mana | 6000→6000 | 0→3000 | 1500→1500 | 50→50 | 7000→7000 | mismatch | cast_time_ms 0->3000 | 70.40-70.40→70.40-70.40 | 0.033→0.033 | declared, matches |
+| RestorationDruid (Wild Growth talent) | 60 | Wild Growth | 3 | 1238215 | 1050.00→1050.00 | mana→mana | 6000→6000 | 0→3000 | 1500→1500 | 60→60 | 7000→7000 | mismatch | cast_time_ms 0->3000 | 97.00-97.00→97.00-97.00 | 0.033→0.033 | declared, matches |
 ## Trainable abilities the engine does not register
 
 Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 18 of the class's 54 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).

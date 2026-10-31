@@ -80,7 +80,7 @@ func TestBearOutThreatsACatInTheSameGear(t *testing.T) {
 		Equipment:          gear,
 		Consumes:           &proto.Consumes{},
 		Buffs:              core.FullBuffs.Player,
-		TalentsString:      "500005301-55000230320202051-15",
+		TalentsString:      "05002-50230032023011125001-505003", // the site Feral raid build, 1.60.1.70707
 		Rotation:           core.GetAplRotation(catRotationDir, catRotationName).Rotation,
 		InFrontOfTarget:    true,
 		DistanceFromTarget: 5,

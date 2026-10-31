@@ -2,16 +2,16 @@ package feral
 
 import (
 	"testing"
+	"time"
 
 	"github.com/wowsims/classic/sim/core"
 )
 
-// Shifting Power (Feral node 104951, hotfix_only, spell 1322605): "Instantly
-// convert [55% of base] Mana into 40 Energy", on a 16 s cooldown, with
-// Improved Shifting Power (node 113563, spell 1322670) taking 4/8 s off
-// that cooldown. The client's own text prints "0 Mana" because the hotfix
-// cost is not in its tables; the 55% and the 16 s are the lane brief's
-// figures for the 1 October 2026 hotfix.
+// Shifting Power (Feral node 113563, spell 1322605): "Instantly convert
+// [55% of base] Mana into 40 Energy". The client's own text prints "0 Mana"
+// because the hotfix cost is not in its tables; the 55% is the tables' cost
+// since build 1.60.1.70291. Client 1.60.1.70707 removed Improved Shifting
+// Power and the live tooltip states an 8 s cooldown.
 func TestShiftingPowerConvertsManaIntoEnergy(t *testing.T) {
 	built, sim, target := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, map[string]int{"shifting_power": 1}))
 	if built.ShiftingPower == nil {
@@ -35,5 +35,12 @@ func TestShiftingPowerNeedsTheTalent(t *testing.T) {
 	built, _, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, nil))
 	if built.ShiftingPower != nil {
 		t.Error("a druid without the talent has a Shifting Power spell")
+	}
+}
+
+func TestShiftingPowerCooldownIsEightSeconds(t *testing.T) {
+	built, _, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, map[string]int{"shifting_power": 1}))
+	if got, want := built.ShiftingPower.CD.Duration, 8*time.Second; got != want {
+		t.Errorf("Shifting Power cooldown = %v, want %v", got, want)
 	}
 }

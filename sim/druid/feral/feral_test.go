@@ -39,7 +39,9 @@ func TestP1Feral(t *testing.T) {
 	}))
 }
 
-var P1Talents = "500005301-55000230320202051-15"
+// P1Talents is the site's Feral raid build on the 1.60.1.70707 trees (the
+// old string predated the live trees and decoded onto the wrong talents).
+var P1Talents = "05002-50230032023011125001-505003"
 
 var PlayerOptionsMonoCat = &proto.Player_FeralDruid{
 	FeralDruid: &proto.FeralDruid{

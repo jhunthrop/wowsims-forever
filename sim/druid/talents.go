@@ -95,7 +95,7 @@ func (druid *Druid) ApplyTalents() {
 	// damage, so avoiding it changes no number here.
 	_ = druid.Talents.NaturesFocus
 
-	// Subtlety (node 104920): -10/20/30% threat from Nature and Arcane
+	// Subtlety (node 104917): -10/20/30% threat from Nature and Arcane
 	// spells. Threat, not damage, mana or a cooldown.
 	_ = druid.Talents.Subtlety
 
@@ -166,8 +166,9 @@ func (druid *Druid) applyNaturesGrace() {
 // registerNaturesSwiftnessCD implements Nature's Swiftness (node 104921,
 // bool, proto field NaturesSwiftness): "When activated, your next
 // Nature spell becomes an instant cast spell." The Nature spells with a
-// cast time are Wrath (Starfire and Moonfire are Arcane) and the two cast-time
-// heals, Healing Touch and Regrowth - DruidSpellMaskNatureCasts.
+// cast time are Wrath (Starfire and Moonfire are Arcane) and the three
+// cast-time heals, Healing Touch, Regrowth and Wild Growth -
+// DruidSpellMaskNatureCasts.
 func (druid *Druid) registerNaturesSwiftnessCD() {
 	if !druid.Talents.NaturesSwiftness {
 		return
@@ -565,9 +566,14 @@ func (druid *Druid) applyNaturesReach() {
 	})
 }
 
+// genesisPeriodicPerRank is Genesis's 2% a rank. The client row (spell
+// 1223081, aura 108 points 1) and its pre-hotfix text say 1%; client
+// 1.60.1.70707's hotfixed text says 2/4/6/8/10%.
+const genesisPeriodicPerRank = 2
+
 // applyGenesis implements Genesis (node 104924, 5 ranks, proto field
 // Genesis): "Increases the periodic damage and healing done by your
-// spells and abilities by 1/2/3/4/5%." Scoped to every damage-over-time
+// spells and abilities by 2/4/6/8/10%." Scoped to every damage-over-time
 // and heal-over-time effect this package has - Moonfire, Insect Swarm, Rake
 // and Rip, Rejuvenation, Regrowth's heal over time, Tranquility and Wild
 // Growth.
@@ -580,7 +586,7 @@ func (druid *Druid) applyGenesis() {
 	druid.AddStaticMod(core.SpellModConfig{
 		Kind:      core.SpellMod_PeriodicDamageDone_Flat,
 		ClassMask: DruidSpellMaskPeriodicDamage | DruidSpellMaskPeriodicHealing,
-		IntValue:  int64(rank),
+		IntValue:  genesisPeriodicPerRank * int64(rank),
 	})
 }
 
@@ -693,12 +699,18 @@ func (druid *Druid) applyNaturalInstinct() {
 	druid.AddStatDependency(stats.Intellect, stats.HealingPower, naturalInstinctHealingFromIntellect[rank])
 }
 
-// naturalistCastTimeCut is Naturalist's 0.1 sec a rank off Healing Touch.
-const naturalistCastTimeCut = 100 * time.Millisecond
+// naturalistCastTimeCut is Naturalist's 0.1 sec a rank off Healing Touch
+// and Wild Growth, and naturalistDamagePerRank its 2% a rank to all damage
+// (1% and Healing Touch alone before client 1.60.1.70707's hotfix).
+const (
+	naturalistCastTimeCut   = 100 * time.Millisecond
+	naturalistDamagePerRank = 0.02
+)
 
 // applyNaturalist implements Naturalist (node 104922, 5 ranks, proto
-// field Naturalist): "Reduces the cast time of your Healing Touch spell
-// by 0.1/.../0.5 sec and increases all damage you deal by 1/2/3/4/5%."
+// field Naturalist): "Reduces the cast time of your Healing Touch and Wild
+// Growth spells by 0.1/.../0.5 sec and increases all damage you deal by
+// 2/4/6/8/10%."
 // The damage half applies to literally everything the character does,
 // so it is a flat PseudoStats multiplier rather than a per-spell mask.
 func (druid *Druid) applyNaturalist() {
@@ -707,10 +719,10 @@ func (druid *Druid) applyNaturalist() {
 	}
 
 	rank := clampRank(druid.Talents.Naturalist, 5)
-	druid.PseudoStats.DamageDealtMultiplier *= 1 + 0.01*float64(rank)
+	druid.PseudoStats.DamageDealtMultiplier *= 1 + naturalistDamagePerRank*float64(rank)
 	druid.AddStaticMod(core.SpellModConfig{
 		Kind:      core.SpellMod_CastTime_Flat,
-		ClassMask: DruidSpellMaskHealingTouch,
+		ClassMask: DruidSpellMaskHealingTouch | DruidSpellMaskWildGrowth,
 		TimeValue: -naturalistCastTimeCut * time.Duration(rank),
 	})
 }
