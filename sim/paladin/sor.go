@@ -138,7 +138,7 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 
 			//BonusCritRating: paladin.holyCrit(), // TODO to be tested, but unlikely
 
-			DamageMultiplier: paladin.getWeaponSpecializationModifier(),
+			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 
 			BonusCoefficient: coeff,
@@ -150,23 +150,26 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 			},
 		})
 
+		effect := &sealEffect{
+			family: "Seal of Righteousness",
+			apply: func(sim *core.Simulation, target *core.Unit) {
+				procSpell.Cast(sim, target)
+			},
+		}
 		aura := paladin.RegisterAura(core.Aura{
 			Label:    "Seal of Righteousness" + paladin.Label + strconv.Itoa(i+1),
 			ActionID: core.ActionID{SpellID: rank.spellID},
 			Duration: time.Second * 30,
 
 			OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-				if !result.Landed() {
-					return
-				}
-				if spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) {
-					procSpell.Cast(sim, result.Target)
+				if isSealSwing(spell, result) {
+					effect.tryActivate(sim, result.Target, spell.ProcMask)
 				}
 			},
 		})
 
 		paladin.aurasSoR = append(paladin.aurasSoR, aura)
-		paladin.sealOfRighteousnessProc = procSpell
+		paladin.registerSealEffect(aura, effect)
 
 		paladin.sealOfRighteousness = paladin.RegisterSpell(core.SpellConfig{
 			ClassSpellMask: PaladinSpellMaskSealOfRighteousnessCast,

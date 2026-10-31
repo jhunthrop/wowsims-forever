@@ -77,10 +77,45 @@ const holyStrikeBonusCoefficient = 0.429
 // trees, and the regenerated proto no longer carries a field for it.
 const holyStrikeSacredArbiterDamageMultiplier = 1.2
 
+// Shieldsworn (node 110875, Protection tier 6 col 1, spell 1328544, client
+// 1.60.1.70707): "Reduces the cooldown of your Holy Strike ability by 4
+// sec. Additionally, Holy Strike now strikes with your shield, triggering
+// your active Holy Shield and Shield Specialization talents without
+// consuming their charges or triggering their cooldowns, and allowing you
+// to Block spells for 6 sec." The strike fires Holy Shield's block damage
+// while Holy Shield is up and rolls Shield Specialization's mana without
+// its 3 second internal cooldown, both only with a shield on (it strikes
+// with the shield). The spell block is not modelled: the tank boss's
+// damage is melee.
+const (
+	holyStrikeCooldown               = 10 * time.Second
+	shieldswornHolyStrikeCooldownCut = 4 * time.Second
+)
+
+func (paladin *Paladin) holyStrikeCooldown() time.Duration {
+	if paladin.Talents.Shieldsworn {
+		return holyStrikeCooldown - shieldswornHolyStrikeCooldownCut
+	}
+	return holyStrikeCooldown
+}
+
+// strikeWithShield is Shieldsworn's shield half of a landed Holy Strike.
+func (paladin *Paladin) strikeWithShield(sim *core.Simulation, target *core.Unit) {
+	if !paladin.Talents.Shieldsworn || !paladin.PseudoStats.CanBlock {
+		return
+	}
+	if i := paladin.activeHolyShield(); i >= 0 {
+		paladin.holyShieldProc[i].Cast(sim, target)
+	}
+	if paladin.shieldSpecializationOnStrike != nil {
+		paladin.shieldSpecializationOnStrike(sim)
+	}
+}
+
 func (paladin *Paladin) registerHolyStrike() {
 	cd := core.Cooldown{
 		Timer:    paladin.NewTimer(),
-		Duration: time.Second * 10,
+		Duration: paladin.holyStrikeCooldown(),
 	}
 
 	hasSacredArbiter := paladin.Talents.SacredArbiter
@@ -94,7 +129,7 @@ func (paladin *Paladin) registerHolyStrike() {
 		flatDamage := HolyStrikeFlatDamage[i+1]
 		casterLevel := int(paladin.Level)
 
-		damageMultiplier := rank.percentOfWeapon / 100 * paladin.getWeaponSpecializationModifier()
+		damageMultiplier := rank.percentOfWeapon / 100
 		if hasSacredArbiter {
 			damageMultiplier *= holyStrikeSacredArbiterDamageMultiplier
 		}
@@ -130,6 +165,9 @@ func (paladin *Paladin) registerHolyStrike() {
 				baseDamage := flatDamage.Roll(sim, casterLevel) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 				result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 				paladin.activateIronCreed(sim)
+				if result.Landed() {
+					paladin.strikeWithShield(sim, target)
+				}
 
 				if hasSacredArbiter && result.Landed() {
 					for _, judgementAura := range target.GetAurasWithTag(core.JudgementAuraTag) {

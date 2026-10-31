@@ -13,10 +13,11 @@ const (
 	// Light, Flash of Light, and Holy Shock spells by 4%" a rank.
 	healingLightPctPerRank = 0.04
 
-	// Spiritual Focus (node 20205): "a 35% chance to not lose casting time
-	// when you take damage" a rank. The engine's name for that chance is
-	// the spell's pushback reduction.
-	spiritualFocusPushbackReductionPerRank = 0.35
+	// Spiritual Focus (node 20205, 5 ranks): "a 14% chance to not lose
+	// casting time when you take damage" a rank, 70% at rank 5 (client
+	// 1.60.1.70707; 35% a rank over 2 ranks before). The engine's name for
+	// that chance is the spell's pushback reduction.
+	spiritualFocusPushbackReductionPerRank = 0.14
 
 	// Infusion of Light (node 426065): a Holy Shock or Flash of Light crit
 	// "reduce[s] the cast time of your next Holy Light cast within 15 sec
@@ -31,10 +32,20 @@ const (
 	illuminationChancePerRank       = 0.20
 	illuminationManaShareOfBaseCost = 0.50
 
-	// Holy Power (node 5923): Holy Shock and Holy Strike crit chance 3% a
-	// rank, every other spell 1%.
-	holyPowerSpecialCritPctPerRank = 3.0
-	holyPowerOtherCritPctPerRank   = 1.0
+	// Holy Power (node 5923, 5 ranks): "Increases the critical strike
+	// healing bonus of your Holy spells by 10%" a rank, 50% at rank 5
+	// (client 1.60.1.70707; it raised crit chance before). The client's
+	// crit-bonus modifier scales the bonus, as Ruin's does: a heal crit's
+	// 50% bonus becomes 75% at rank 5. The paladin's Holy heals are the
+	// spells Illumination names.
+	holyPowerCritBonusPerRank = 0.10
+
+	// Boundless Light (node 113631, 2 ranks): "Increases the critical
+	// strike chance of your Holy Shock spell by 15% when cast on allies
+	// not affected by your Oath of Light", 30% at rank 2. Oath of Light is
+	// unmodeled (talents.go), so no ally carries it and every Holy Shock
+	// heal gets the bonus.
+	boundlessLightCritPctPerRank = 15.0
 )
 
 // applyHealingTalents is the healing-relevant part of the Holy tree. Divine
@@ -44,6 +55,7 @@ func (paladin *Paladin) applyHealingTalents() {
 	paladin.applyInfusionOfLight()
 	paladin.applyIllumination()
 	paladin.applyHolyPower()
+	paladin.applyBoundlessLight()
 }
 
 func (paladin *Paladin) applyHealingLight() {
@@ -151,23 +163,28 @@ func (paladin *Paladin) applyIllumination() {
 	})
 }
 
-// applyHolyPower: "Increases the critical strike chance of your Holy Shock
-// and Holy Strike spells by 3%, and all other spells by 1%" a rank. Every
-// Holy spell (the heals included) gets the 1%, and the named two get the
-// remaining 2% on top.
+// applyHolyPower raises the crit bonus of the Holy heals.
 func (paladin *Paladin) applyHolyPower() {
 	rank := float64(paladin.Talents.HolyPower)
 	if rank == 0 {
 		return
 	}
 	paladin.AddStaticMod(core.SpellModConfig{
-		Kind:       core.SpellMod_BonusCrit_Flat,
-		School:     core.SpellSchoolHoly,
-		FloatValue: holyPowerOtherCritPctPerRank * rank * core.CritRatingPerCritChance,
+		Kind:       core.SpellMod_CritDamageBonus_Flat,
+		ClassMask:  PaladinSpellMaskIlluminating,
+		FloatValue: holyPowerCritBonusPerRank * rank,
 	})
+}
+
+// applyBoundlessLight raises Holy Shock's heal crit chance.
+func (paladin *Paladin) applyBoundlessLight() {
+	rank := float64(paladin.Talents.BoundlessLight)
+	if rank == 0 {
+		return
+	}
 	paladin.AddStaticMod(core.SpellModConfig{
 		Kind:       core.SpellMod_BonusCrit_Flat,
-		ClassMask:  PaladinSpellMaskHolyPowerSpecials,
-		FloatValue: (holyPowerSpecialCritPctPerRank - holyPowerOtherCritPctPerRank) * rank * core.CritRatingPerCritChance,
+		ClassMask:  PaladinSpellMaskHolyShockHeal,
+		FloatValue: boundlessLightCritPctPerRank * rank * core.CritRatingPerCritChance,
 	})
 }

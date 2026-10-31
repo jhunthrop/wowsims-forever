@@ -1,6 +1,7 @@
 package holy
 
 import (
+	"math"
 	"testing"
 
 	"github.com/wowsims/classic/sim/core"
@@ -244,36 +245,59 @@ func unitsOf(t *testing.T, f fight) (*core.Character, *core.Environment) {
 }
 
 func TestSpiritualFocusKeepsTheCastTimeOnTheNamedHeals(t *testing.T) {
-	healer, _ := unitsOf(t, fight{talents: map[string]int{"spiritual_focus": 2, "lights_vigil": 1}})
+	// Client 1.60.1.70707: 14% a rank, 70% at rank 5 (35% a rank over 2
+	// ranks before).
+	healer, _ := unitsOf(t, fight{talents: map[string]int{"spiritual_focus": 5, "lights_vigil": 1}})
 	const want = 0.70
 	for name, id := range map[string]int32{"Holy Light": holyLightTopRank, "Flash of Light": flashOfLightTopRank, "Light's Vigil": lightsVigilTopCast} {
-		if got := healer.GetSpell(core.ActionID{SpellID: id}).PushbackReduction; got != want {
+		if got := healer.GetSpell(core.ActionID{SpellID: id}).PushbackReduction; math.Abs(got-want) > 1e-9 {
 			t.Errorf("%s keeps its cast time %.2f of the time, want %.2f", name, got, want)
 		}
 	}
 }
 
-func TestHolyPowerAddsCritToHolyShockAndHolyStrikeMoreThanToTheRest(t *testing.T) {
-	healer, _ := unitsOf(t, fight{talents: map[string]int{"holy_power": 5, "holy_shock": 1}})
-	critPerPercent := float64(core.CritRatingPerCritChance)
+// Holy Power (client 1.60.1.70707): "Increases the critical strike healing
+// bonus of your Holy spells by 50%" at rank 5: the heals' crit bonus, not
+// their crit chance, and no damage spell.
+func TestHolyPowerRaisesTheHealsCritBonus(t *testing.T) {
+	base, _ := unitsOf(t, fight{talents: map[string]int{"holy_shock": 1, "lights_vigil": 1}})
+	healer, _ := unitsOf(t, fight{talents: map[string]int{"holy_power": 5, "holy_shock": 1, "lights_vigil": 1}})
 	cases := map[int32]float64{
-		holyLightTopRank:    5,
-		flashOfLightTopRank: 5,
-		holyShockTopCast:    15,
-		holyShockTopHeal:    15,
-		10333:               15, // Holy Strike
+		holyLightTopRank:    0.5,
+		flashOfLightTopRank: 0.5,
+		holyShockTopHeal:    0.5,
+		holyShockTopCast:    0, // the damage half
+		10333:               0, // Holy Strike
 	}
-	for id, wantPercent := range cases {
-		if got := healer.GetSpell(core.ActionID{SpellID: id}).BonusCritRating / critPerPercent; got < wantPercent-1e-9 || got > wantPercent+1e-9 {
-			t.Errorf("spell %d: %.2f%% bonus crit, want %.0f%%", id, got, wantPercent)
+	for id, wantBonus := range cases {
+		before, after := base.GetSpell(core.ActionID{SpellID: id}), healer.GetSpell(core.ActionID{SpellID: id})
+		if got := after.CritDamageBonus - before.CritDamageBonus; math.Abs(got-wantBonus) > 1e-9 {
+			t.Errorf("spell %d: crit bonus rose by %.2f, want %.2f", id, got, wantBonus)
+		}
+		if after.BonusCritRating != before.BonusCritRating {
+			t.Errorf("spell %d: Holy Power changed the crit chance", id)
+		}
+	}
+}
+
+// Boundless Light (client 1.60.1.70707): Holy Shock crits 15% more a rank
+// on allies without Oath of Light, which the engine never swears.
+func TestBoundlessLightRaisesHolyShockHealCrit(t *testing.T) {
+	base, _ := unitsOf(t, fight{talents: map[string]int{"holy_shock": 1}})
+	healer, _ := unitsOf(t, fight{talents: map[string]int{"holy_shock": 1, "boundless_light": 2}})
+	critPerPercent := float64(core.CritRatingPerCritChance)
+	for id, wantPercent := range map[int32]float64{holyShockTopHeal: 30, holyShockTopCast: 0, flashOfLightTopRank: 0} {
+		got := (healer.GetSpell(core.ActionID{SpellID: id}).BonusCritRating - base.GetSpell(core.ActionID{SpellID: id}).BonusCritRating) / critPerPercent
+		if math.Abs(got-wantPercent) > 1e-9 {
+			t.Errorf("spell %d: %.2f%% more crit, want %.0f%%", id, got, wantPercent)
 		}
 	}
 }
 
 func TestChampionOfTheLightGivesHealingAndDamageTheSameShareOfIntellect(t *testing.T) {
 	base, _ := unitsOf(t, fight{})
-	talented, _ := unitsOf(t, fight{talents: map[string]int{"champion_of_the_light": 3}})
-	const share = 0.60 // 1.60.1.70532: "up to 60% of your Intellect" at 3/3
+	talented, _ := unitsOf(t, fight{talents: map[string]int{"champion_of_the_light": 5}})
+	const share = 0.60 // 1.60.1.70707: "up to 60% of your Intellect" at 5/5
 	intellect := talented.GetStat(stats.Intellect)
 
 	if got := talented.GetStat(stats.HealingPower) - base.GetStat(stats.HealingPower); got < share*intellect-1e-6 || got > share*intellect+1e-6 {

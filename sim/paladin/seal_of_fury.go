@@ -131,20 +131,26 @@ func (paladin *Paladin) registerSealOfFuryRank(rank int, config sealOfFuryRank, 
 	judgeSpell := paladin.registerJudgementOfFury(rank, config)
 	procSpell := paladin.registerSealOfFuryProc(rank, config, shield)
 
+	effect := &sealEffect{
+		family: "Seal of Fury",
+		apply: func(sim *core.Simulation, target *core.Unit) {
+			procSpell.Cast(sim, target)
+		},
+	}
 	aura := paladin.RegisterAura(core.Aura{
 		Label:    "Seal of Fury" + paladin.Label + strconv.Itoa(rank),
 		ActionID: core.ActionID{SpellID: config.spellID},
 		Duration: sealOfFuryDuration,
 
 		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if result.Landed() && spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) {
-				procSpell.Cast(sim, result.Target)
+			if isSealSwing(spell, result) {
+				effect.tryActivate(sim, result.Target, spell.ProcMask)
 			}
 		},
 	})
 
 	paladin.aurasSoF = append(paladin.aurasSoF, aura)
-	paladin.sealOfFuryProc = procSpell
+	paladin.registerSealEffect(aura, effect)
 	paladin.spellsJoF = append(paladin.spellsJoF, judgeSpell)
 
 	paladin.sealOfFury = paladin.RegisterSpell(core.SpellConfig{
@@ -223,7 +229,7 @@ func (paladin *Paladin) registerSealOfFuryProc(rank int, config sealOfFuryRank, 
 
 		RequiredLevel: sealOfFuryProcSpellLevel,
 
-		DamageMultiplier: paladin.getWeaponSpecializationModifier(),
+		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 
 		BonusCoefficient: sealOfFuryProcCoefficient,

@@ -99,6 +99,9 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 		})
 
 		paladin.aurasSotC = append(paladin.aurasSotC, aura)
+		// Seal of the Crusader has no swing effect: a stored copy activates
+		// nothing, but it is still a different Seal to Unsealed Wrath.
+		paladin.registerSealEffect(aura, &sealEffect{family: "Seal of the Crusader"})
 
 		paladin.RegisterSpell(core.SpellConfig{
 			ClassSpellMask: PaladinSpellMaskSealOfTheCrusaderCast,

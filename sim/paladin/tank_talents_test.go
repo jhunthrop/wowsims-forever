@@ -103,11 +103,12 @@ func TestForeverProtectionTalentsAreLegal(t *testing.T) {
 	}
 }
 
-// The 20 points past Holy Shield go where a tank gets something for them:
-// Deflection (the only parry talent a paladin has, in the Retribution
-// tree), Sacred Duty and Iron Creed. The reference build once spent them
-// on the Holy tree's healing talents, and the same boss killed it many
-// times more often than it kills this build.
+// The points past the Protection core go where a tank gets something for
+// them: Deflection (the only parry talent a paladin has, in the
+// Retribution tree), Sacred Duty, Iron Creed and the Shieldsworn capstone.
+// The reference build once spent them on the Holy tree's healing talents,
+// and the same boss killed it many times more often than it kills this
+// build.
 func TestForeverProtectionTalentsSpendThePointsPastHolyShieldOnMitigation(t *testing.T) {
 	trees := loadPaladinTrees(t)
 	segments := strings.Split(ForeverProtectionTalents, "-")
@@ -124,7 +125,7 @@ func TestForeverProtectionTalentsSpendThePointsPastHolyShieldOnMitigation(t *tes
 		tree  int
 		field string
 		rank  int
-	}{{2, "deflection", 5}, {1, "sacredDuty", 2}, {1, "ironCreed", 5}} {
+	}{{2, "deflection", 5}, {1, "sacredDuty", 2}, {1, "ironCreed", 3}, {1, "shieldsworn", 1}} {
 		if got := rank(want.tree, want.field); got != want.rank {
 			t.Errorf("%s is at rank %d, want %d", want.field, got, want.rank)
 		}
@@ -134,21 +135,20 @@ func TestForeverProtectionTalentsSpendThePointsPastHolyShieldOnMitigation(t *tes
 // Every Protection talent the reference build names exists in the tree
 // the engine parses: a renamed field would silently drop out of the build.
 func TestForeverProtectionTalentsTakeTheTalentsThisSpecModels(t *testing.T) {
-	for _, field := range []string{"holy_shield", "templars_bulwark", "swift_judgement", "improved_seal_of_fury", "shield_specialization", "redoubt", "deflection", "sacred_duty", "iron_creed"} {
+	for _, field := range []string{"holy_shield", "templars_bulwark", "swift_judgement", "shieldsworn", "shield_specialization", "redoubt", "deflection", "sacred_duty", "iron_creed"} {
 		if _, ok := TalentNodeIDs[field]; !ok {
 			t.Errorf("%s is not in the generated talent table", field)
 		}
 	}
 }
 
-// Redoubt is 4% block a rank, 20% at rank 5 (the live text and Blizzard's
-// 1 October 2026 notes, "Redoubt 4-20%").
+// Redoubt is 6% block a rank, 30% at rank 5 (client 1.60.1.70707).
 func TestRedoubtBlockPerRank(t *testing.T) {
-	if redoubtBlockChancePerRank != 4.0 {
-		t.Errorf("redoubtBlockChancePerRank = %v, want 4", redoubtBlockChancePerRank)
+	if redoubtBlockChancePerRank != 6.0 {
+		t.Errorf("redoubtBlockChancePerRank = %v, want 6", redoubtBlockChancePerRank)
 	}
-	if got := redoubtBlockChancePerRank * 5; got != 20 {
-		t.Errorf("rank 5 Redoubt = %v%% block, want 20%%", got)
+	if got := redoubtBlockChancePerRank * 5; got != 30 {
+		t.Errorf("rank 5 Redoubt = %v%% block, want 30%%", got)
 	}
 }
 
@@ -163,17 +163,16 @@ func TestProtectionRankTextsAsNumbers(t *testing.T) {
 		{"Redoubt proc chance", redoubtProcChance, 0.10},
 		{"Reckoning, block, per rank", reckoningBlockChancePerRank * 5, 0.40},
 		{"Reckoning, crit, per rank", reckoningCritChancePerRank * 5, 1.00},
-		{"Shield Specialization rank 1 mana chance", shieldSpecializationManaChance[1], 0.33},
-		{"Shield Specialization rank 2 mana chance", shieldSpecializationManaChance[2], 0.66},
-		{"Shield Specialization rank 3 mana chance", shieldSpecializationManaChance[3], 1.00},
+		{"Shield Specialization rank 1 mana chance", shieldSpecializationManaChance[1], 0.50},
+		{"Shield Specialization rank 2 mana chance", shieldSpecializationManaChance[2], 1.00},
 		{"Shield Specialization mana", shieldSpecializationManaFraction, 0.04},
-		{"Shield Specialization absorb rank 3", shieldSpecializationAbsorbPerRank * 3, 0.30},
+		{"Shield Specialization absorb rank 2", shieldSpecializationAbsorbPerRank * 2, 0.30},
 		{"Anticipation rank 5 defense", anticipationDefensePerRank * 5, 20},
 		{"Toughness rank 5", toughnessArmorPctPerRank * 5, 0.10},
-		{"Sacred Duty rank 2 stamina", sacredDutyStaminaPerRank * 2, 0.04},
-		{"Iron Creed rank 5 threat", ironCreedThreatPerRank * 5, 0.25},
-		{"Iron Creed rank 5 damage taken", ironCreedDamageTakenPerRank * 5, 0.10},
-		{"Improved Righteous Fury rank 3", improvedRighteousFuryDamageTakenPerRank * 3, 0.06},
+		{"Sacred Duty rank 2 Forbearance", (sacredDutyForbearanceReductionPerRank * 2).Seconds(), 10},
+		{"Iron Creed rank 3 threat", ironCreedThreatPerRank * 3, 0.30},
+		{"Iron Creed rank 3 damage taken", ironCreedDamageTakenPerRank * 3, 0.06},
+		{"Improved Righteous Fury rank 3", improvedRighteousFuryDamageTakenPerRank * 3, 0.09},
 		{"Righteous Fury Holy threat", righteousFuryHolyThreatBonus, 0.60},
 	} {
 		if d := tc.got - tc.want; d > 1e-9 || d < -1e-9 {

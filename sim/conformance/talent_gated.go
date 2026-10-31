@@ -105,15 +105,15 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "warlock", Label: "Bane of Havoc", Tree: 2, Pos: 13},
 	{ClassSlug: "warlock", Label: "Incinerate", Tree: 2, Pos: 16},
 
-	// Paladin (Holy 18, Protection 16, Retribution 18).
-	{ClassSlug: "paladin", Label: "Divine Favor", Tree: 0, Pos: 12},
+	// Paladin (Holy 17, Protection 17, Retribution 17; client 1.60.1.70707).
+	{ClassSlug: "paladin", Label: "Divine Favor", Tree: 0, Pos: 7},
 	{ClassSlug: "paladin", Label: "Holy Shock", Tree: 0, Pos: 14},
 	{ClassSlug: "paladin", Label: "Swift Judgement", Tree: 1, Pos: 10},
-	{ClassSlug: "paladin", Label: "Templar's Bulwark", Tree: 1, Pos: 13},
-	{ClassSlug: "paladin", Label: "Divine Favor", Tree: 0, Pos: 12, Preset: "HolyPaladin"},
+	{ClassSlug: "paladin", Label: "Templar's Bulwark", Tree: 1, Pos: 6},
+	{ClassSlug: "paladin", Label: "Divine Favor", Tree: 0, Pos: 7, Preset: "HolyPaladin"},
 	{ClassSlug: "paladin", Label: "Holy Shock", Tree: 0, Pos: 14, Preset: "HolyPaladin"},
 	{ClassSlug: "paladin", Label: "Light's Vigil", Tree: 0, Pos: 17, Preset: "HolyPaladin"},
-	{ClassSlug: "paladin", Label: "Holy Shield", Tree: 1, Pos: 16},
+	{ClassSlug: "paladin", Label: "Holy Shield", Tree: 1, Pos: 14},
 	{ClassSlug: "paladin", Label: "Seal of Command", Tree: 2, Pos: 8},
 
 	// Warrior (Arms 17, Fury 18, Protection 18).

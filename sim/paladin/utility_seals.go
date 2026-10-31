@@ -101,20 +101,27 @@ func (paladin *Paladin) registerUtilitySeal(seal utilitySeal) {
 		judgementDebuffs := paladin.NewEnemyAuraArray(seal.judgementAura)
 		judgeSpell := paladin.registerUtilityJudgement(rank, judgementDebuffs)
 		trigger := seal.newProc(paladin, rank)
+		effect := &sealEffect{
+			family: seal.name,
+			chance: func(sim *core.Simulation, procMask core.ProcMask) bool {
+				return ppmm.Proc(sim, procMask, seal.name)
+			},
+			apply: func(sim *core.Simulation, _ *core.Unit) {
+				trigger(sim)
+			},
+		}
 
 		aura := paladin.RegisterAura(core.Aura{
 			Label:    seal.name + paladin.Label + strconv.Itoa(i+1),
 			ActionID: core.ActionID{SpellID: rank.castID},
 			Duration: sealDuration,
 			OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-				if !result.Landed() || !spell.ProcMask.Matches(core.ProcMaskMelee) {
-					return
-				}
-				if ppmm.Proc(sim, spell.ProcMask, seal.name) {
-					trigger(sim)
+				if result.Landed() && spell.ProcMask.Matches(core.ProcMaskMelee) {
+					effect.tryActivate(sim, result.Target, spell.ProcMask)
 				}
 			},
 		})
+		paladin.registerSealEffect(aura, effect)
 
 		paladin.registerSealCastSpell(seal.mask, aura, rank.level, i+1, rank.manaCost, judgeSpell)
 		paladin.spellsJoUtility = append(paladin.spellsJoUtility, judgeSpell)

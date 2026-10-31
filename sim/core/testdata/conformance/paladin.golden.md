@@ -1487,12 +1487,16 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Divine Favor talent) | 40 | Divine Favor | 0 | 20216 | 39.48 (4% base mana)→39.48 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Divine Favor talent) | 50 | Divine Favor | 0 | 20216 | 50.28 (4% base mana)→50.28 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Divine Favor talent) | 60 | Divine Favor | 0 | 20216 | 60.48 (4% base mana)→60.48 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 40 | Holy Shield | 1 | 20925 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 1 | 20925 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 2 | 20927 | 195.00→195.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 1 | 20925 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 2 | 20927 | 195.00→195.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 3 | 20928 | 240.00→240.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 60→60 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 30 | Holy Shield | 1 | 20925 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→30 | 10000→10000 | mismatch | required_level 40->30 | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 38 | Holy Shield | 1 | 20925 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→30 | 10000→10000 | mismatch | required_level 40->30 | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 40 | Holy Shield | 1 | 20925 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→30 | 10000→10000 | mismatch | required_level 40->30 | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 40 | Holy Shield | 2 | 20927 | 195.00→195.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→40 | 10000→10000 | mismatch | required_level 50->40 | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 1 | 20925 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→30 | 10000→10000 | mismatch | required_level 40->30 | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 2 | 20927 | 195.00→195.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→40 | 10000→10000 | mismatch | required_level 50->40 | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 3 | 20928 | 240.00→240.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 60→50 | 10000→10000 | mismatch | required_level 60->50 | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 1 | 20925 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→30 | 10000→10000 | mismatch | required_level 40->30 | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 2 | 20927 | 195.00→195.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→40 | 10000→10000 | mismatch | required_level 50->40 | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 3 | 20928 | 240.00→240.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 60→50 | 10000→10000 | mismatch | required_level 60->50 | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shock talent) | 40 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shock talent) | 50 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shock talent) | 50 | Holy Shock | 2 | 20929 | 275.00→275.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | n/a | n/a | n/a |
@@ -1539,13 +1543,13 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 3 | 20918 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 4 | 20919 | 180.00→180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Seal of Command talent) | 60 | Seal of Command | 5 | 20920 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Swift Judgement talent) | 10 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Swift Judgement talent) | 20 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Swift Judgement talent) | 30 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Swift Judgement talent) | 38 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Swift Judgement talent) | 40 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Swift Judgement talent) | 50 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Swift Judgement talent) | 60 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Swift Judgement talent) | 10 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Swift Judgement talent) | 20 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Swift Judgement talent) | 30 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Swift Judgement talent) | 38 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Swift Judgement talent) | 40 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Swift Judgement talent) | 50 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Swift Judgement talent) | 60 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Templar's Bulwark talent) | 30 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Templar's Bulwark talent) | 38 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Templar's Bulwark talent) | 40 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |

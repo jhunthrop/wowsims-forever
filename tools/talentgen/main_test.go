@@ -363,7 +363,7 @@ func TestFixturesMatchTheSiteData(t *testing.T) {
 // Stand lost theirs in 70009).
 func TestUITreeJSONCarriesEveryPrerequisite(t *testing.T) {
 	perClass := map[string]int{
-		"druid": 11, "hunter": 8, "mage": 7, "paladin": 7, "priest": 8,
+		"druid": 11, "hunter": 8, "mage": 7, "paladin": 8, "priest": 8,
 		"rogue": 8, "shaman": 7, "warlock": 8, "warrior": 8,
 	}
 	total, wantTotal := 0, 0

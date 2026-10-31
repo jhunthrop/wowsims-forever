@@ -235,26 +235,9 @@
           "spellId": {
             "spellId": 1310994
           }
-        },
-        "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "spellTimeToReady": {
-                "spellId": {
-                  "spellId": 20271
-                }
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "5s"
-              }
-            }
-          }
         }
       },
-      "notes": "Swift Judgement while Judgement is on cooldown: it finishes the cooldown and makes the next Judgement free, one more Judgement a minute."
+      "notes": "Swift Judgement whenever it is ready: since client 1.60.1.70707 it judges the active Seal on its own one minute cooldown, free and off the global cooldown, without touching Judgement's."
     },
     {
       "action": {

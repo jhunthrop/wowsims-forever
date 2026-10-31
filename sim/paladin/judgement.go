@@ -56,7 +56,6 @@ func (paladin *Paladin) registerJudgement() {
 		},
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, _ *core.Spell) {
 			paladin.currentJudgement.Cast(sim, target)
-			paladin.spendSwiftJudgement(sim)
 			paladin.trySanctifiedJudgementManaReturn(sim)
 		},
 	})

@@ -90,7 +90,7 @@ func (paladin *Paladin) registerSealOfCommand() {
 			// SpellConfig never set the field at all.
 			RequiredLevel: int(rank.level),
 
-			DamageMultiplier: paladin.getWeaponSpecializationModifier(),
+			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 			BonusCoefficient: 0.429,
 			ClientBaseDamage: judgeDamage.Range(casterLevel),
@@ -118,7 +118,7 @@ func (paladin *Paladin) registerSealOfCommand() {
 			ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeProc | core.ProcMaskMeleeDamageProc,
 			Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagNotAProc,
 
-			DamageMultiplier: 0.7 * paladin.getWeaponSpecializationModifier(),
+			DamageMultiplier: 0.7,
 			ThreatMultiplier: 1,
 
 			BonusCoefficient: 0.29,
@@ -136,26 +136,29 @@ func (paladin *Paladin) registerSealOfCommand() {
 			},
 		})
 
+		effect := &sealEffect{
+			family: "Seal of Command",
+			chance: func(sim *core.Simulation, procMask core.ProcMask) bool {
+				return ppmm.Proc(sim, procMask, "seal of command")
+			},
+			apply: func(sim *core.Simulation, target *core.Unit) {
+				procSpell.Cast(sim, target)
+			},
+		}
 		aura := paladin.RegisterAura(core.Aura{
 			Label:    "Seal of Command" + paladin.Label + strconv.Itoa(i+1),
 			ActionID: core.ActionID{SpellID: rank.spellID},
 			Duration: time.Second * 30,
 			OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-				if !result.Landed() {
-					return
-				}
-
-				if spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) {
-					if icd.IsReady(sim) && ppmm.Proc(sim, spell.ProcMask, "seal of command") {
-						icd.Use(sim)
-						procSpell.Cast(sim, result.Target)
-					}
+				if isSealSwing(spell, result) && icd.IsReady(sim) && effect.chance(sim, spell.ProcMask) {
+					icd.Use(sim)
+					effect.apply(sim, result.Target)
 				}
 			},
 		})
 
 		paladin.aurasSoC = append(paladin.aurasSoC, aura)
-		paladin.sealOfCommandProc = procSpell
+		paladin.registerSealEffect(aura, effect)
 
 		paladin.sealOfCommand = paladin.RegisterSpell(core.SpellConfig{
 			ClassSpellMask: PaladinSpellMaskSealOfCommandCast,

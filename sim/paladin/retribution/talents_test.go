@@ -1,7 +1,10 @@
 package retribution
 
 import (
+	"math"
+	"slices"
 	"testing"
+	"time"
 
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
@@ -17,13 +20,19 @@ import (
 // TestTwistOfLightEcho... below).
 func newTalentTestUnit(t *testing.T, talents string) (*RetributionPaladin, *core.Unit) {
 	t.Helper()
+	return newTalentTestUnitWith(t, talents, &proto.EquipmentSpec{})
+}
+
+// newTalentTestUnitWith is newTalentTestUnit wearing the given equipment.
+func newTalentTestUnitWith(t *testing.T, talents string, equipment *proto.EquipmentSpec) (*RetributionPaladin, *core.Unit) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
 			Class:         proto.Class_ClassPaladin,
 			Race:          proto.Race_RaceHuman,
 			Level:         60,
-			Equipment:     &proto.EquipmentSpec{},
+			Equipment:     equipment,
 			Buffs:         core.FullBuffs.Player,
 			TalentsString: talents,
 		},
@@ -62,7 +71,7 @@ const (
 
 func TestImprovedSealsIncreasesSealAndJudgementDamage(t *testing.T) {
 	_, baseUnit := newTalentTestUnit(t, "")
-	_, talentedUnit := newTalentTestUnit(t, talentString(t, map[string]int{"improved_seals": 3}))
+	_, talentedUnit := newTalentTestUnit(t, talentString(t, map[string]int{"improved_seals": 5}))
 
 	baseJudge := baseUnit.GetSpell(core.ActionID{SpellID: judgementOfRighteousnessRank8SpellID})
 	talentedJudge := talentedUnit.GetSpell(core.ActionID{SpellID: judgementOfRighteousnessRank8SpellID})
@@ -87,7 +96,7 @@ func TestImprovedSealsIncreasesSealAndJudgementDamage(t *testing.T) {
 
 func TestReverenceIncreasesSpiritRegenWhileCasting(t *testing.T) {
 	_, baseUnit := newTalentTestUnit(t, "")
-	_, talentedUnit := newTalentTestUnit(t, talentString(t, map[string]int{"reverence": 3}))
+	_, talentedUnit := newTalentTestUnit(t, talentString(t, map[string]int{"reverence": 2}))
 
 	if baseUnit.PseudoStats.SpiritRegenRateCasting != 0 {
 		t.Errorf("base SpiritRegenRateCasting = %v, want 0", baseUnit.PseudoStats.SpiritRegenRateCasting)
@@ -95,7 +104,7 @@ func TestReverenceIncreasesSpiritRegenWhileCasting(t *testing.T) {
 	const want = 0.30
 	got := talentedUnit.PseudoStats.SpiritRegenRateCasting
 	if got < want-1e-9 || got > want+1e-9 {
-		t.Errorf("rank 3 Reverence SpiritRegenRateCasting = %v, want %v", got, want)
+		t.Errorf("rank 2 Reverence SpiritRegenRateCasting = %v, want %v", got, want)
 	}
 }
 
@@ -118,17 +127,17 @@ func TestPurifyingPowerReducesExorcismAndHolyWrathCooldown(t *testing.T) {
 
 func TestDivinePrecisionAddsHolySpellHit(t *testing.T) {
 	_, baseUnit := newTalentTestUnit(t, "")
-	_, talentedUnit := newTalentTestUnit(t, talentString(t, map[string]int{"divine_precision": 3}))
+	_, talentedUnit := newTalentTestUnit(t, talentString(t, map[string]int{"divine_precision": 2}))
 
 	base := baseUnit.GetSpell(core.ActionID{SpellID: exorcismRank6SpellID})
 	talented := talentedUnit.GetSpell(core.ActionID{SpellID: exorcismRank6SpellID})
 	if base == nil || talented == nil {
 		t.Fatalf("Exorcism rank 6 not registered: base=%v talented=%v", base, talented)
 	}
-	wantBonus := 18.0 * core.HitRatingPerHitChance
+	wantBonus := 8.0 * core.HitRatingPerHitChance // 1.60.1.70707: 4% a rank, 2 ranks
 	gotBonus := talented.BonusHitRating - base.BonusHitRating
 	if gotBonus < wantBonus-1e-6 || gotBonus > wantBonus+1e-6 {
-		t.Errorf("rank 3 Divine Precision BonusHitRating delta on Exorcism = %v, want %v (18%% hit)", gotBonus, wantBonus)
+		t.Errorf("rank 2 Divine Precision BonusHitRating delta on Exorcism = %v, want %v (8%% hit)", gotBonus, wantBonus)
 	}
 }
 
@@ -166,21 +175,112 @@ func TestHolyConduitReducesRotationManaCosts(t *testing.T) {
 	}
 }
 
-// Champion of the Light is 20/40/60% of Intellect: the live text and
-// Blizzard's 1 October 2026 notes; the earlier table said 33/66/100%.
+// Champion of the Light is 12% of Intellect a rank, 60% at 5/5 (client
+// 1.60.1.70707; 20/40/60% over 3 ranks before).
 func TestChampionOfTheLightAddsSpellPowerFromIntellect(t *testing.T) {
 	_, baseUnit := newTalentTestUnit(t, "")
-	_, talentedUnit := newTalentTestUnit(t, talentString(t, map[string]int{"champion_of_the_light": 3}))
+	_, talentedUnit := newTalentTestUnit(t, talentString(t, map[string]int{"champion_of_the_light": 5}))
 
 	baseIntellect := baseUnit.GetStat(stats.Intellect)
 	if baseIntellect <= 0 {
 		t.Fatalf("base Intellect = %v, want > 0 (test needs a nonzero base to observe the dependency)", baseIntellect)
 	}
 
-	wantSpellPower := baseUnit.GetStat(stats.SpellPower) + talentedUnit.GetStat(stats.Intellect)*0.60 // 1.60.1.70532: "up to 60%" at 3/3
+	wantSpellPower := baseUnit.GetStat(stats.SpellPower) + talentedUnit.GetStat(stats.Intellect)*0.60 // "up to 60%" at 5/5
 	gotSpellPower := talentedUnit.GetStat(stats.SpellPower)
 	if gotSpellPower < wantSpellPower-1e-6 || gotSpellPower > wantSpellPower+1e-6 {
-		t.Errorf("rank 3 Champion of the Light SpellPower = %v, want %v (60%% of %v Intellect)", gotSpellPower, wantSpellPower, talentedUnit.GetStat(stats.Intellect))
+		t.Errorf("rank 5 Champion of the Light SpellPower = %v, want %v (60%% of %v Intellect)", gotSpellPower, wantSpellPower, talentedUnit.GetStat(stats.Intellect))
+	}
+}
+
+// Champion of the Light also takes 0.2 sec a rank off Hammer of Wrath's
+// cast (client 1.60.1.70707, the removed Instrument of Law's half): 0.6 sec
+// at rank 3, an instant at rank 5.
+func TestChampionOfTheLightShortensHammerOfWrath(t *testing.T) {
+	castTime := func(rank int) time.Duration {
+		_, unit := newTalentTestUnit(t, talentString(t, map[string]int{"champion_of_the_light": rank}))
+		spell := unit.GetSpell(core.ActionID{SpellID: hammerOfWrathRank3SpellID})
+		if spell == nil {
+			t.Fatalf("Hammer of Wrath rank 3 not registered")
+		}
+		return spell.DefaultCast.CastTime
+	}
+	for rank, want := range map[int]time.Duration{0: time.Second, 3: 400 * time.Millisecond, 5: 0} {
+		if got := castTime(rank); got != want {
+			t.Errorf("Hammer of Wrath cast time with Champion of the Light %d = %v, want %v", rank, got, want)
+		}
+	}
+}
+
+// Conviction (client 1.60.1.70707): 2% crit with all spells and attacks a
+// rank, 6% at 3/3 (1% melee a rank over 5 ranks before).
+func TestConvictionAddsTwoPercentCritARank(t *testing.T) {
+	_, baseUnit := newTalentTestUnit(t, "")
+	_, talentedUnit := newTalentTestUnit(t, talentString(t, map[string]int{"conviction": 3}))
+	if got, want := talentedUnit.GetStat(stats.Crit)-baseUnit.GetStat(stats.Crit), 6.0*core.CritRatingPerCritChance; got < want-1e-6 || got > want+1e-6 {
+		t.Errorf("Conviction 3 adds %v crit rating, want %v", got, want)
+	}
+}
+
+// Vindication (client 1.60.1.70707) no longer raises the paladin's attack
+// power: the proc aura that did is gone.
+func TestVindicationNoLongerRaisesAttackPower(t *testing.T) {
+	_, unit := newTalentTestUnit(t, talentString(t, map[string]int{"vindication": 3}))
+	if aura := unit.GetAuraByID(core.ActionID{SpellID: 26021}); aura != nil {
+		t.Errorf("Vindication registers %q, its attack power buff", aura.Label)
+	}
+}
+
+// mainHandOnly is an equipment spec with only the main hand filled.
+func mainHandOnly(t *testing.T, handType proto.HandType) *proto.EquipmentSpec {
+	t.Helper()
+	var ids []int32
+	for id, item := range core.ItemsByID {
+		if item.Type == proto.ItemType_ItemTypeWeapon && item.HandType == handType && item.WeaponDamageMax > 0 {
+			ids = append(ids, id)
+		}
+	}
+	if len(ids) == 0 {
+		t.Fatalf("no weapon with hand type %v in the item database; this test needs --tags=with_db", handType)
+	}
+	slices.Sort(ids)
+	items := make([]*proto.ItemSpec, proto.ItemSlot_ItemSlotRanged+1)
+	for i := range items {
+		items[i] = &proto.ItemSpec{}
+	}
+	items[proto.ItemSlot_ItemSlotMainHand] = &proto.ItemSpec{Id: ids[0]}
+	return &proto.EquipmentSpec{Items: items}
+}
+
+// Two-Handed Weapon Specialization (client 1.60.1.70707): "Increases the
+// physical damage you deal by 6%, and reduces all threat you generate by
+// 20% while a two-handed melee weapon is equipped" at 3/3. It reaches
+// physical damage only, so Holy Strike (a Holy weapon attack) no longer
+// gains it, and a one-hander gets neither half.
+func TestTwoHandedWeaponSpecializationIsPhysicalDamageAndLessThreat(t *testing.T) {
+	talents := talentString(t, map[string]int{"two_handed_weapon_specialization": 3})
+	for _, tc := range []struct {
+		hand           proto.HandType
+		damage, threat float64
+	}{
+		{proto.HandType_HandTypeTwoHand, 1.06, 0.80},
+		{proto.HandType_HandTypeMainHand, 1, 1},
+	} {
+		_, base := newTalentTestUnitWith(t, "", mainHandOnly(t, tc.hand))
+		_, talented := newTalentTestUnitWith(t, talents, mainHandOnly(t, tc.hand))
+		physical := talented.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] / base.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical]
+		if math.Abs(physical-tc.damage) > 1e-9 {
+			t.Errorf("%v: physical damage x%v, want x%v", tc.hand, physical, tc.damage)
+		}
+		if threat := talented.PseudoStats.ThreatMultiplier / base.PseudoStats.ThreatMultiplier; math.Abs(threat-tc.threat) > 1e-9 {
+			t.Errorf("%v: threat x%v, want x%v", tc.hand, threat, tc.threat)
+		}
+		holyStrike := func(unit *core.Unit) float64 {
+			return unit.GetSpell(core.ActionID{SpellID: 10333}).DamageMultiplier
+		}
+		if got, want := holyStrike(talented), holyStrike(base); math.Abs(got-want) > 1e-9 {
+			t.Errorf("%v: Holy Strike's multiplier is %v with the talent, %v without", tc.hand, got, want)
+		}
 	}
 }
 

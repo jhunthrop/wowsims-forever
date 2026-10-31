@@ -4,7 +4,7 @@ Hand-written, like SUMMARY.md. The conformance report (`sim/conformance`) reads
 spell rows, not talent rank values, so a talent whose per-rank rate the engine
 carried over from vanilla was never checked. This file is that check, for every
 class, against the site's `data/builds/1.60.1.70532/talents/<class>.json`
-(mage: `1.60.1.70707`)
+(mage and paladin: `1.60.1.70707`)
 (trees, talents, `max_rank`, and a `description` per rank: the live,
 hotfix-aware Forever text).
 
@@ -46,7 +46,7 @@ talent's maximum rank unless a note says otherwise.
 | Druid | 52 | 45 | 0 | 6 | 0 | 1 | 0 |
 | Hunter | 50 | 31 | 3 | 15 | 1 | 0 | 0 |
 | Mage | 52 | 37 | 3 | 12 | 0 | 0 | 0 |
-| Paladin | 50 | 40 | 2 | 7 | 1 | 0 | 0 |
+| Paladin | 51 | 26 | 15 | 10 | 0 | 0 | 0 |
 | Priest | 53 | 32 | 5 | 14 | 2 | 0 | 0 |
 | Rogue | 53 | 40 | 2 | 11 | 0 | 0 | 0 |
 | Shaman | 50 | 33 | 6 | 8 | 3 | 0 | 0 |
@@ -109,6 +109,10 @@ Arcane lost a node (18) and Fire moved one; 70707's mage trees are 70685's. Each
 - **Mage: Improved Fire Blast, Missile Barrage, Arcane Resilience.** Moved (Improved Fire Blast to Fire's third row; Missile Barrage and Arcane Resilience swapped). No rate changed.
 - **Mage: Ice Lance.** Rank 1 (spell 1312002, levels 20 to 27) has an 8 sec cooldown in the client's spell rows; the trained ranks have none (ice_lance.go).
 - **Hunter: Trueshot Aura.** The talent's text reads 15 ranged attack power at rank 1 (was 30); the engine reads the trained ranks' amounts (`TrueshotAuraRanks`), not the talent text.
+
+### Paladin (1.60.1.70707)
+
+The paladin trees were reworked: Twist of Light, Instrument of Law, One-Handed Weapon Specialization, Voice of Truth and Improved Seal of Fury are gone (their engine code with them); Divine Intellect moved to Protection, Holy Conduit to Holy and Unyielding Faith to Retribution; Oath of Light, Boundless Light, Shieldsworn, Stoicism, Turn Evil and Unsealed Wrath are new. Each row above carries the new text; the rate changes are the "mismatch, fixed" rows, each pinned by a unit test in `sim/paladin`. The reference Protection build (`ForeverProtectionTalents`) was re-carried by name onto the new tree.
 
 ## Mismatches fixed in this lane
 
@@ -319,56 +323,57 @@ Arcane lost a node (18) and Fire moved one; 70707's mage trees are 70685's. Each
 
 | Talent | Tree | Max | Forever text at max rank | Engine at max rank | Verdict | Note |
 |---|---|---|---|---|---|---|
+| Spiritual Focus | Holy | 5 | Gives your Flash of Light, Holy Light, and Light's Vigil spells a 70% chance to not lose casting time when you take damage. | 70% pushback avoidance (14% a rank) | mismatch, fixed | 1.60.1.70707: five ranks at 14% (was two at 35%); pushback is not rolled in the fights modeled |
 | Divine Strength | Holy | 5 | Increases your Strength by 10%. | same | match |  |
-| Divine Intellect | Holy | 5 | Increases your total Intellect by 10%. | same | match |  |
 | Healing Light | Holy | 3 | Increases the amount healed by your Holy Light, Flash of Light, and Holy Shock spells by 12%. | same | match |  |
-| Spiritual Focus | Holy | 2 | Gives your Flash of Light, Holy Light, and Light's Vigil spells a 70% chance to not lose casting time when you take damage. | 70% pushback avoidance | match | pushback is not rolled in the fights modeled |
-| Improved Seals | Holy | 3 | Increases the damage done by your Seals and Judgements by 15%. | same | match |  |
-| Unyielding Faith | Holy | 2 | Reduces the duration of Fear and Disorient effects on you by 30%. | - | unmodeled | Fear and Disorient duration |
-| Voice of Truth | Holy | 1 | Grants you immunity to Silence and Interrupt effects for 6 sec. | - | unmodeled | silence/interrupt immunity |
-| Reverence | Holy | 3 | Allows 30% of your Mana regeneration to continue while casting. | same | match |  |
+| Reverence | Holy | 2 | Allows 30% of your Mana regeneration to continue while casting. | 30% (15% a rank) | mismatch, fixed | 1.60.1.70707: two ranks at 15% (was three at 10%) |
+| Improved Seals | Holy | 5 | Increases the damage done by your Seals and Judgements by 15%. | 15% (3% a rank) | mismatch, fixed | 1.60.1.70707: five ranks at 3% (was three at 5%) |
 | Purifying Power | Holy | 2 | Reduces the mana cost of your Cleanse and Purify spells by 20% and reduces the cooldown of your Exorcism and Holy Wrath spells by 33%. | same | match |  |
-| Infusion of Light | Holy | 2 | Your Holy Shock and Flash of Light critical hits reduce the cast time of your next Holy Light cast within 15 sec by 1.0 sec. | same | match |  |
-| Illumination | Holy | 5 | After getting a critical effect from your Flash of Light, Holy Light, Light's Vigil, or Holy Shock heal spell you have a 100% chance to gain Mana equal to 50% of the b... | same | match |  |
 | Divine Favor | Holy | 1 | When activated, gives your next Flash of Light, Holy Light, or Holy Shock spell a 100% critical effect chance. | same | match |  |
-| Divine Precision | Holy | 3 | Improves your chance to hit with Holy spells by 18%. | same | match |  |
-| Holy Shock | Holy | 1 | Blasts the target with Holy energy, causing 129 to 139 Holy damage to an enemy, or 110 to 118 healing to an ally. | same | match |  |
+| Illumination | Holy | 5 | After getting a critical effect from your Flash of Light, Holy Light, Light's Vigil, or Holy Shock heal spell you have a 100% chance to gain Mana equal to 50% of the b... | same | match |  |
+| Holy Conduit | Holy | 2 | Reduces the mana cost of your Consecration, Holy Wrath, Exorcism, and Hammer of Wrath spells by 40%. | same | match | moved from Retribution in 1.60.1.70707 |
+| Divine Precision | Holy | 2 | Improves your chance to hit with Holy spells by 8%, and reduces the duration of Silence effects on you by 20%. | 8% Holy spell hit (4% a rank) | mismatch, fixed | 1.60.1.70707: two ranks at 4% (was three at 6%); the Silence duration half is not modeled |
+| Infusion of Light | Holy | 2 | Your Holy Shock and Flash of Light critical hits reduce the cast time of your next Holy Light cast within 15 sec by 1.0 sec. | same | match |  |
+| Oath of Light | Holy | 1 | Swear an Oath to protect target ally for 5 min, increasing the healing of your Holy Light on them by up to 0, your Flash of Light by up to 0, and your Holy Shock by up... | - | unmodeled | new in 1.60.1.70707; the text reads "by up to 0" for every heal and its spell (1328548) is not in the client tables |
 | Consecrated Ground | Holy | 2 | Gives your Holy spells 10% increased damage against the first 4 enemies that enter your Consecration. | same | match |  |
-| Holy Power | Holy | 5 | Increases the critical strike chance of your Holy Shock and Holy Strike spells by 15%, and all other spells by 5%. | 15% Holy Shock / Holy Strike crit, 5% other Holy spells | match |  |
-| Light's Vigil | Holy | 1 | Applies Light's Vigil to the target for 30 sec. Your next Holy Shock cast on them triggers no cooldown and causes enemy targets to suffer 175 to 189 Holy damage and re... | same | match |  |
-| Toughness | Protection | 5 | Increases your armor value from items by 10%. | same | match |  |
-| Redoubt | Protection | 5 | Damaging melee attacks against you have a 10% chance to increase your chance to block by 20%. Lasts 10 sec or 5 blocks. | same | match |  |
+| Holy Shock | Holy | 1 | Blasts the target with Holy energy, causing 129 to 139 Holy damage to an enemy, or 110 to 118 healing to an ally. | same | match |  |
+| Boundless Light | Holy | 2 | Increases the critical strike chance of your Holy Shock spell by 30% when cast on allies not affected by your Oath of Light. | 30% Holy Shock heal crit | match | new in 1.60.1.70707; Oath of Light is never sworn, so every ally qualifies |
+| Holy Power | Holy | 5 | Increases the critical strike healing bonus of your Holy spells by 50%. | heal crit bonus x1.5 (150% heals crit for 175%) | mismatch, fixed | 1.60.1.70707: crit healing bonus, scaling the bonus as Ruin does (was crit chance) |
+| Light's Vigil | Holy | 1 | Applies Light's Vigil to a friendly target for 30 sec. The caster's next Holy Shock on the target incurs no cooldown and heals the target and their party for 326 to 34... | same | match | 1.60.1.70707 dropped the enemy half; the engine only ever modeled the heal |
+| Divine Intellect | Protection | 5 | Increases your total Intellect by 10%. | same | match | moved from Holy in 1.60.1.70707 |
+| Redoubt | Protection | 5 | Damaging melee attacks against you have a 10% chance to increase your chance to block by 30%. Lasts 10 sec or 5 blocks. | 30% block (6% a rank) | mismatch, fixed | 1.60.1.70707 (was 4% a rank) |
 | Precision | Protection | 3 | Improves your chance to hit by 3%. | same | match |  |
 | Guardian's Favor | Protection | 2 | Reduces the cooldown of your Blessing of Protection by 2 min and increases the duration of your Blessing of Freedom by 6 sec. | - | unmodeled | Blessing of Protection cooldown and Freedom duration |
-| Anticipation | Protection | 5 | Increases your Defense Skill by 20. | same | match |  |
-| Improved Seal of Fury | Protection | 1 | When Seal of Fury's shield is fully absorbed, restore 0 Mana, increased by 15% per level the attacker is above you, up to 45%. | 1% of max mana, x1.15 a level above, up to x1.45 | text-only | the text says "restore 0 Mana" (a template that did not fill); the engine uses a 1% base |
-| Improved Righteous Fury | Protection | 3 | While Righteous Fury is active, all damage taken is reduced by 6%. | same | match |  |
-| Shield Specialization | Protection | 3 | Increases the amount of damage absorbed by your shield by 30%, and gives your blocks a 100% chance to restore 4% of your maximum Mana.  May only occur once every 3 sec. | 4% of maximum mana (was 6%) | mismatch, fixed | 1.60.1.70425 |
-| Sacred Duty | Protection | 2 | Increases your total Stamina by 4% and reduces the cooldown of your Divine Shield, Divine Protection, and Templar's Bulwark spells by 60 sec. | 4% Stamina | match | the 60 sec Divine Shield / Divine Protection / Templar's Bulwark cooldown cut is not modeled |
-| Swift Judgement | Protection | 1 | Finishes the remaining cooldown on your Judgement ability and reduces the Mana cost of your next Judgement by 100%. | same | match |  |
-| One-Handed Weapon Specialization | Protection | 3 | Increases the damage you deal with one-handed melee weapons by 10%. | same | match |  |
-| Improved Hammer of Justice | Protection | 3 | Decreases the cooldown of your Hammer of Justice spell by 15 sec. | - | unmodeled | Hammer of Justice cooldown |
+| Sacred Duty | Protection | 2 | Reduces the cooldown of your Divine Shield, Divine Protection, and Templar's Bulwark spells by 60 sec, and reduces the duration of Forbearance by 10 sec. | -60 sec cooldowns, Forbearance -10 sec | mismatch, fixed | 1.60.1.70707: the 4% Stamina is gone, Forbearance is 10 sec shorter |
 | Templar's Bulwark | Protection | 1 | When activated, this ability grants you an absorb shield equal to 100% of your maximum health for 8 sec. Applies Forbearance for 1 min. Cannot be cast while Forbearanc... | same | match |  |
-| Reckoning | Protection | 5 | Gives you a 40% chance after Blocking and a 100% chance after receiving a non-periodic critical strike to gain an extra attack. Stores up to 4 extra attacks. Cannot occur from Blocks more than once every 1.5 sec. | same chances | match | the engine grants the extra attack at once, so the four-attack store is never reached; the 1.5 sec limit is applied to both triggers (text: blocks only) |
-| Iron Creed | Protection | 5 | Increases the threat generated by your Holy Strike ability by 25%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 10% for 6 sec. | 25% Holy Strike threat, 10% damage taken for 6 sec | match | needs the Righteous Fury option |
-| Holy Shield | Protection | 1 | Increases chance to block by 30% for 10 sec, and deals 110 Holy damage for each attack blocked while active. Damage caused by Holy Shield causes 20% additional threat.... | same | match |  |
+| Improved Hammer of Justice | Protection | 3 | Decreases the cooldown of your Hammer of Justice spell by 15 sec. | - | unmodeled | Hammer of Justice cooldown |
+| Shield Specialization | Protection | 2 | Increases the amount of damage absorbed by your shield by 30%, and gives your blocks a 100% chance to restore 4% of your maximum Mana. May only occur once every 3 sec. | 30% block value, 100% chance at 4% maximum mana | mismatch, fixed | 1.60.1.70707: two ranks at 15% and 50% (was three at 10% and 33%) |
+| Toughness | Protection | 5 | Increases your armor value from items by 10%. | same | match |  |
+| Swift Judgement | Protection | 1 | Unleash the energy of a Seal spell upon an enemy. Does not consume the Seal. Refer to individual Seals for Judgement effect. Does not share a cooldown with your Judgem... | a second Judgement of the active Seal, 1 min cooldown, no cost | mismatch, fixed | 1.60.1.70707 (was a Judgement cooldown reset and a free next Judgement); cooldown and cost from the client row and the live tooltip |
+| Improved Righteous Fury | Protection | 3 | While Righteous Fury is active, all damage taken is reduced by 9%. | 9% (3% a rank) | mismatch, fixed | 1.60.1.70707 (was 2% a rank) |
+| Anticipation | Protection | 5 | Increases your Defense Skill by 20. | same | match |  |
+| Stoicism | Protection | 2 | Reduces the duration of Stun and Charm effects on you by 20%. | - | unmodeled | new in 1.60.1.70707: Stun and Charm duration |
+| Holy Shield | Protection | 1 | Increases chance to block by 30% for 10 sec, and deals 75 Holy damage for each attack blocked while active. Damage caused by Holy Shield causes 20% additional threat. ... | 75/110/153 by rank at levels 30/40/50 | mismatch, fixed | 1.60.1.70707 hotfix moved every rank one bracket down (Wowhead live tooltips); the client rows still read 110/153/221 at 40/50/60 |
+| Reckoning | Protection | 5 | Gives you a 40% chance after Blocking and a 100% chance after receiving a non-periodic critical strike to gain an extra attack. Stores up to 4 extra attacks. Cannot oc... | same chances | match | the engine grants the extra attack at once, so the four-attack store is never reached; the 1.5 sec limit is applied to both triggers (text: blocks only) |
+| Iron Creed | Protection | 3 | Increases the threat generated by your Holy Strike ability by 30%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 6% for 6 sec. | 30% Holy Strike threat, 6% damage taken for 6 sec | mismatch, fixed | 1.60.1.70707: three ranks at 10% and 2% (was five at 5% and 2%); needs the Righteous Fury option |
+| Shieldsworn | Protection | 1 | Reduces the cooldown of your Holy Strike ability by 4 sec. Additionally, Holy Strike now strikes with your shield, triggering your active Holy Shield and Shield Specia... | Holy Strike cooldown -4 sec; the strike fires Holy Shield damage and Shield Specialization mana without charges or cooldown | match | new in 1.60.1.70707; needs a shield; the 6 sec spell block is not modeled |
 | Deflection | Retribution | 5 | Increases your Parry chance by 5%. | same | match |  |
 | Benediction | Retribution | 5 | Reduces the Mana cost of all instant cast spells and abilities by 10%. | same | match |  |
 | Improved Judgement | Retribution | 2 | Decreases the cooldown of your Judgement ability by 2 sec. | same | match |  |
-| Holy Conduit | Retribution | 2 | Reduces the mana cost of your Consecration, Holy Wrath, Exorcism, and Hammer of Wrath spells by 40%. | same | match |  |
-| Conviction | Retribution | 5 | Improves your chance to get a critical strike with melee attacks by 5%. | same | match |  |
-| Vindication | Retribution | 3 | Gives your damaging melee attacks a chance to reduce the target's Attack Power by (3 /- 3 * - 204), and increase your Attack Power by 3% for 30 sec. | AP +3% for 30 sec (was +15%) | mismatch, fixed | was 5% a rank; the target Attack Power cut in the text is a garbled template ("(3 /- 3 * - 204)") and is not modeled; the proc chance is not in the text; the aura row states ProcChance 100, so the engine proc on every landed melee hit matches |
+| Conviction | Retribution | 3 | Improves your chance to get a critical strike with all spells and attacks by 6%. | 6% crit (2% a rank) | mismatch, fixed | 1.60.1.70707: three ranks at 2%, all spells and attacks (was five at 1%, melee); Forever has one crit stat |
 | Sanctified Judgement | Retribution | 3 | Gives your Judgement ability a 100% chance to return 60% of the Mana cost of the judged seal. | same | match |  |
+| Vindication | Retribution | 3 | Gives your damaging melee attacks a chance to reduce the target's Attack Power by (3 /- 3 * 6) for 30 sec. | - | unmodeled | 1.60.1.70707 removed the self attack power buff the engine modeled; the target Attack Power cut is a garbled template ("(3 /- 3 * 6)") |
+| Unyielding Faith | Retribution | 2 | Reduces the duration of Fear and Disorient effects on you by 30%. | - | unmodeled | moved from Holy in 1.60.1.70707; Fear and Disorient duration |
 | Seal of Command | Retribution | 1 | Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage. Only one Seal can be active on the Paladin at any one time. Lasts 30 se... | same | match |  |
 | Pursuit of Justice | Retribution | 2 | Increases movement speed and mounted movement speed by 15%. This does not stack with other movement speed increasing effects. | - | unmodeled | movement speed |
 | Eye for an Eye | Retribution | 2 | All critical strikes against you cause 10% of the damage taken to the attacker as well. The damage caused by Eye for an Eye will not exceed 50% of the Paladin's total ... | - | unmodeled | reflected damage |
 | Sacred Arbiter | Retribution | 1 | Increases the damage of your Holy Strike ability by 20% and causes it to refresh all Judgement effects on the target. | same | match |  |
-| Two-Handed Weapon Specialization | Retribution | 3 | Increases the damage you deal with two-handed melee weapons by 6%. | same | match |  |
-| Vengeance | Retribution | 3 | Increases your Physical and Holy damage dealt by 3% for 30 sec after landing a non-periodic critical strike. Stacks up to 3 times. | 3% a stack, 3 stacks, 30 sec = 9% (was 9% flat for 8 sec, no stacks, at 3/3 from a 3%-a-rank table) | mismatch, fixed | 1% a rank a stack at 1/2/3: 1/2/3% after one crit; the old table gave 3% a rank on one application |
+| Two-Handed Weapon Specialization | Retribution | 3 | Increases the physical damage you deal by 6%, and reduces all threat you generate by 20% while a two-handed melee weapon is equipped. | 6% physical damage, 20% less threat, with a two-hander | mismatch, fixed | 1.60.1.70707: physical damage only, so seal procs, Judgement of Command, Holy Strike and Hammer of the Righteous lose it; the two-hander condition is read as covering the damage too |
+| Turn Evil | Retribution | 2 | Reduces the cast time of your Turn Undead spell by 1.0 sec, its cooldown by 10 sec, and allows it to affect Demons. | - | unmodeled | new in 1.60.1.70707: Turn Undead |
 | Repentance | Retribution | 1 | Puts the enemy target in a state of meditation, incapacitating them for up to 6 sec. Any damage caused will awaken the target. Only works against Humanoids. | - | unmodeled | crowd control |
-| Champion of the Light | Retribution | 3 | Increases your spell damage by up to 60% of your Intellect. | 20/40/60% | mismatch, fixed | 1.60.1.70532 (70425 had 10/20/30%) |
-| Instrument of Law | Retribution | 2 | Reduces the cast time of your Hammer of Wrath by 1.0 sec, and reduces all threat you generate by 20% while Righteous Fury is not active. | Hammer of Wrath cast -1.0 sec | match | the 20% threat cut without Righteous Fury is not modeled |
-| Twist of Light | Retribution | 1 | Reduces the Mana cost of your Seal spells by 20%, and when you replace your Seal of Command, Seal of Righteousness, Seal of Fury, or Seal of Justice with a different S... | same | match |  |
+| Vengeance | Retribution | 3 | Increases your Physical and Holy damage dealt by 3% for 30 sec after landing a non-periodic critical strike. Stacks up to 3 times. | 3% a stack, 3 stacks, 30 sec = 9% | match |  |
+| Champion of the Light | Retribution | 5 | Increases your spell damage by up to 60% of your Intellect, and reduces the cast time of your Hammer of Wrath by 1.0 sec. | 60% of Intellect, Hammer of Wrath cast -1.0 sec | mismatch, fixed | 1.60.1.70707: five ranks at 12% and 0.2 sec (was three at 20%, no cast time) |
+| Unsealed Wrath | Retribution | 1 | Your melee attacks store a copy of your active Seal for 15 sec, stacking up to 3 times. Landing an attack with a different Seal consumes all stacks, giving the stored ... | stores the Seal on each white swing (3 stacks, 15 sec); a swing under another Seal rolls the stored Seal once a stack | match | new in 1.60.1.70707; reading in unsealed_wrath.go (white swings only; Seal of Command's 1 sec cooldown not applied to stored copies) |
 
 ## Priest
 

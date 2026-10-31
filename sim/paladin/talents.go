@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
-	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
@@ -20,8 +19,7 @@ import (
 func (paladin *Paladin) ApplyTalents() {
 	// TODO: paladin.AddStat(stats.RangedHit, float64(paladin.Talents.Precision)*core.HitRatingPerHitChance)
 
-	paladin.AddStat(stats.Crit, float64(paladin.Talents.Conviction)*core.CritRatingPerCritChance)
-	// TODO: paladin.AddStat(stats.RangedCrit, float64(paladin.Talents.Conviction)*core.CritRatingPerCritChance)
+	paladin.applyConviction()
 
 	// These are no-op if untalented.
 	paladin.MultiplyStat(stats.Strength, 1.0+0.02*float64(paladin.Talents.DivineStrength))
@@ -32,9 +30,6 @@ func (paladin *Paladin) ApplyTalents() {
 	paladin.applyWeaponSpecialization()
 	if paladin.Talents.Vengeance > 0 {
 		paladin.applyVengeance()
-	}
-	if paladin.Talents.Vindication > 0 {
-		paladin.applyVindication()
 	}
 
 	paladin.applyProtectionTalents()
@@ -71,46 +66,56 @@ func (paladin *Paladin) benediction() int32 {
 	return benedictionFullCostPercent - benedictionCostReductionPerRank*paladin.Talents.Benediction
 }
 
-// getWeaponSpecializationModifier is the damage multiplier of the weapon
-// in the main hand: Two-Handed Weapon Specialization's 2% a rank.
-func (paladin *Paladin) getWeaponSpecializationModifier() float64 {
-	if paladin.MainHand().HandType == proto.HandType_HandTypeTwoHand {
-		return 1. + 0.02*float64(paladin.Talents.TwoHandedWeaponSpecialization)
-	} else {
-		return 1.
-	}
+// Conviction (node 105703, 3 ranks): "Improves your chance to get a
+// critical strike with all spells and attacks by 2%" a rank, 6% at rank 3
+// (client 1.60.1.70707; it was 1% melee crit a rank over 5 ranks). Forever
+// merges melee, ranged and spell crit into stats.Crit, so the one stat
+// carries "all spells and attacks", heals included.
+const convictionCritPctPerRank = 2.0
+
+func (paladin *Paladin) applyConviction() {
+	paladin.AddStat(stats.Crit, convictionCritPctPerRank*float64(paladin.Talents.Conviction)*core.CritRatingPerCritChance)
 }
 
-// Affects all physical damage or spells that can be rolled as physical.
+// Two-Handed Weapon Specialization (node 105697, 3 ranks): "Increases the
+// physical damage you deal by 2%, and reduces all threat you generate by
+// 7% while a two-handed melee weapon is equipped", 4%/14% and 6%/20% at
+// ranks 2 and 3 (client 1.60.1.70707). The text names physical damage, so
+// it no longer reaches the Holy weapon attacks (seal procs, Judgement of
+// Command, Holy Strike, Hammer of the Righteous) that "damage you deal with
+// two-handed melee weapons" did before 70707. The two-hander condition is
+// read as covering both halves, as the talent's name and its 70658 text
+// say (unconfirmed for the damage half).
+const twoHandedWeaponSpecializationDamagePerRank = 0.02
+
+var twoHandedWeaponSpecializationThreatReduction = [4]float64{0, 0.07, 0.14, 0.20}
+
+// applyWeaponSpecialization scales physical damage and threat while a
+// two-hander is in the main hand.
 func (paladin *Paladin) applyWeaponSpecialization() {
-	paladin.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= paladin.getWeaponSpecializationModifier()
+	rank := paladin.Talents.TwoHandedWeaponSpecialization
+	if rank == 0 || !paladin.has2hEquipped() {
+		return
+	}
+	paladin.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + twoHandedWeaponSpecializationDamagePerRank*float64(rank)
+	paladin.PseudoStats.ThreatMultiplier *= 1 - twoHandedWeaponSpecializationThreatReduction[rank]
 }
 
-// Forever's Vengeance and Vindication (1.60.1.70291 talents/paladin.json).
-// Vengeance: "Increases your Physical and Holy damage dealt by 1/2/3% for 30
-// sec after landing a non-periodic critical strike. Stacks up to 3 times";
-// an aura's amount applies once a stack, so 3/3 with three stacks is +9%.
-// Vindication: "increase your Attack Power by 1/2/3% for 30 sec". Vanilla's
-// 3% a rank for 8 sec with no stacks, and 5% a rank, are not Forever's.
+// Forever's Vengeance (1.60.1.70291 talents/paladin.json): "Increases your
+// Physical and Holy damage dealt by 1/2/3% for 30 sec after landing a
+// non-periodic critical strike. Stacks up to 3 times"; an aura's amount
+// applies once a stack, so 3/3 with three stacks is +9%. Vanilla's 3% a
+// rank for 8 sec with no stacks is not Forever's.
 const (
 	vengeanceDamagePerRank = 0.01
 	vengeanceDuration      = 30 * time.Second
 	vengeanceMaxStacks     = 3
-
-	vindicationAttackPowerPerRank = 0.01
-	vindicationMaxRank            = 3
 )
 
 // vengeanceMultiplier is the Physical and Holy damage multiplier Vengeance
 // grants at a talent rank and stack count.
 func vengeanceMultiplier(rank int32, stacks int32) float64 {
 	return 1 + vengeanceDamagePerRank*float64(rank)*float64(stacks)
-}
-
-// vindicationAttackPowerMultiplier is the Attack Power multiplier a landed
-// Vindication proc grants at a talent rank.
-func vindicationAttackPowerMultiplier(rank int32) float64 {
-	return 1 + vindicationAttackPowerPerRank*float64(rank)
 }
 
 func (paladin *Paladin) applyVengeance() {
@@ -142,48 +147,6 @@ func (paladin *Paladin) applyVengeance() {
 			if result.DidCrit() {
 				procAura.Activate(sim)
 				procAura.AddStack(sim)
-			}
-		},
-	})
-}
-
-func (paladin *Paladin) applyVindication() {
-	if paladin.Talents.Vindication == 0 {
-		return
-	}
-	//vindicationMultiplier := []float64{1, 1.05, 1.10, 1.15}[paladin.Talents.Vengeance]
-	vindicationMultiplier := make([]*stats.StatDependency, vindicationMaxRank+1)
-	for rank := range vindicationMultiplier {
-		vindicationMultiplier[rank] = paladin.NewDynamicMultiplyStat(stats.AttackPower, vindicationAttackPowerMultiplier(int32(rank)))
-	}
-
-	vindicationAura := paladin.RegisterAura(core.Aura{
-		Label:    "Vindication Proc",
-		ActionID: core.ActionID{SpellID: 26021},
-		Duration: time.Second * 30,
-		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			paladin.EnableDynamicStatDep(sim, vindicationMultiplier[0])
-		},
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			paladin.EnableDynamicStatDep(sim, vindicationMultiplier[paladin.Talents.Vindication])
-		},
-		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			paladin.DisableDynamicStatDep(sim, vindicationMultiplier[paladin.Talents.Vindication])
-		},
-	})
-	// 	vindicationAuras := paladin.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-	// 		return core.VindicationAura(target, paladin.Talents.Vindication)
-	// 	})
-	paladin.RegisterAura(core.Aura{
-		Label:    "Vindication Talent",
-		Duration: core.NeverExpires,
-		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Activate(sim)
-		},
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			// TODO: Replace with actual proc mask / proc chance
-			if result.Landed() && spell.ProcMask.Matches(core.ProcMaskMelee) {
-				vindicationAura.Activate(sim)
 			}
 		},
 	})
@@ -228,21 +191,25 @@ func (paladin *Paladin) applyImprovedLayOnHands() {
 // ---------------------------------------------------------------------
 
 const (
-	// Improved Seals (node 105334, Holy tier 1 col 2): "Increases the
-	// damage done by your Seals and Judgements by 5%/10%/15%."
-	improvedSealsDamagePctPerRank = 0.05
+	// Improved Seals (node 105334, Holy tier 1 col 2, 5 ranks): "Increases
+	// the damage done by your Seals and Judgements by 3%", 15% at rank 5
+	// (client 1.60.1.70707; 5% a rank over 3 ranks before).
+	improvedSealsDamagePctPerRank = 0.03
 
-	// Reverence (node 110871, Holy tier 2 col 1): "Allows 10%/20%/30% of
-	// your Mana regeneration to continue while casting." Forever's
+	// Reverence (node 110871, Holy tier 1 col 1, 2 ranks): "Allows 15%/30%
+	// of your Mana regeneration to continue while casting" (client
+	// 1.60.1.70707; 10% a rank over 3 ranks before). Forever's
 	// equivalent of vanilla's Arcane Meditation, for a Paladin instead
 	// of a Mage; see sim/mage/talents.go's arcaneMeditationRegenWhileCasting.
-	reverenceRegenWhileCastingPctPerRank = 0.10
+	reverenceRegenWhileCastingPctPerRank = 0.15
 
-	// Divine Precision (node 105324, Holy tier 4 col 0): "Improves your
-	// chance to hit with Holy spells by 6%/12%/18%."
-	divinePrecisionHitPctPerRank = 6.0
+	// Divine Precision (node 105324, Holy tier 3 col 0, 2 ranks): "Improves
+	// your chance to hit with Holy spells by 4%/8%, and reduces the
+	// duration of Silence effects on you by 10%/20%" (client 1.60.1.70707;
+	// 6% a rank over 3 ranks before). The silence half meets nothing here.
+	divinePrecisionHitPctPerRank = 4.0
 
-	// Consecrated Ground (node 110872, Holy tier 4 col 2): "Gives your
+	// Consecrated Ground (node 110872, Holy tier 4 col 0): "Gives your
 	// Holy spells 5%/10% increased damage against the first 4 enemies
 	// that enter your Consecration." Approximated as a flat damage bonus
 	// on Consecration's OWN damage, rather than a per-enemy-entry debuff
@@ -253,14 +220,15 @@ const (
 	// change nothing a Patchwerk-style fight can observe.
 	consecratedGroundDamagePctPerRank = 0.05
 
-	// Holy Conduit (node 105704, Retribution tier 1 col 1): "Reduces the
+	// Holy Conduit (node 105704, Holy tier 2 col 2 since 1.60.1.70707; it
+	// was a Retribution talent before): "Reduces the
 	// mana cost of your Consecration, Holy Wrath, Exorcism, and Hammer
 	// of Wrath spells by 20%/40%." (Also reduces Cleanse and Purify's
 	// mana cost; this package registers neither spell, so there is
 	// nothing for that half to apply to.)
 	holyConduitCostPctPerRank int64 = -20
 
-	// Sanctified Judgement (node 105701, Retribution tier 2 col 1):
+	// Sanctified Judgement (node 105701, Retribution tier 1 col 2):
 	// "Gives your Judgement ability a 33%/66%/100% chance to return
 	// 20%/40%/60% of the Mana cost of the judged seal." "The judged
 	// seal" is paladin.currentSealSpell, the seal-cast spell that
@@ -272,11 +240,15 @@ const (
 var sanctifiedJudgementChancePerRank = [4]float64{0, 0.33, 0.66, 1.00}
 var sanctifiedJudgementRefundPctPerRank = [4]float64{0, 0.20, 0.40, 0.60}
 
-// championOfTheLightPctPerRank: node 110882, Retribution tier 5 col 1:
-// "Increases your spell damage by up to 20%/40%/60% of your Intellect."
-// (1.60.1.70532, back at the 1 October 2026 notes' figure; 70425 had
-// 10/20/30% and the earlier client table 33/66/100%).
-var championOfTheLightPctPerRank = [4]float64{0, 0.20, 0.40, 0.60}
+// championOfTheLightPctPerRank and championOfTheLightCastTimePerRank: node
+// 110882, Retribution tier 5 col 2, 5 ranks since 1.60.1.70707: "Increases
+// your spell damage by up to 12% of your Intellect, and reduces the cast
+// time of your Hammer of Wrath by 0.2 sec" a rank, 60% and 1.0 sec at rank
+// 5 (the removed Instrument of Law's cast-time half moved here; 70532 had
+// 20/40/60% over 3 ranks).
+var championOfTheLightPctPerRank = [6]float64{0, 0.12, 0.24, 0.36, 0.48, 0.60}
+
+const championOfTheLightCastTimePerRank = 200 * time.Millisecond
 
 // applyChampionOfTheLight grants the share to spell power (damage) and, for
 // the healing spec, to the healing stat. Forever gives every point of
@@ -296,7 +268,7 @@ func (paladin *Paladin) applyChampionOfTheLight() {
 	paladin.AddStatDependency(stats.Intellect, stats.SpellPower, share*(1-core.HealingToSpellDamageRatio))
 }
 
-// purifyingPowerCooldownPctPerRank: node 105327, Holy tier 2 col 2:
+// purifyingPowerCooldownPctPerRank: node 105327, Holy tier 1 col 3:
 // "Reduces the mana cost of your Cleanse and Purify spells by 10%/20%
 // and reduces the cooldown of your Exorcism and Holy Wrath spells by
 // 17%/33%." Only the cooldown half is modelled, for the same reason as
@@ -308,8 +280,8 @@ var purifyingPowerCooldownPctPerRank = [3]int64{0, -17, -33}
 // pure modifier on a set of spells: as core.SpellModConfig these read
 // against the client's own rank text line by line, so a weekly number
 // change is a one-line edit. Talents with state, a timer or a proc keep
-// their own function (applySanctifiedJudgement, registerTwistOfLight,
-// below).
+// their own function (applySanctifiedJudgement below, Unsealed Wrath in
+// unsealed_wrath.go).
 func (paladin *Paladin) applyDeclarativeTalents() {
 	t := paladin.Talents
 
@@ -359,6 +331,11 @@ func (paladin *Paladin) applyDeclarativeTalents() {
 
 	if t.ChampionOfTheLight > 0 {
 		paladin.applyChampionOfTheLight()
+		paladin.AddStaticMod(core.SpellModConfig{
+			Kind:      core.SpellMod_CastTime_Flat,
+			ClassMask: PaladinSpellMaskHammerOfWrath,
+			TimeValue: -championOfTheLightCastTimePerRank * time.Duration(t.ChampionOfTheLight),
+		})
 	}
 }
 
@@ -396,24 +373,35 @@ func (paladin *Paladin) trySanctifiedJudgementManaReturn(sim *core.Simulation) {
 func (paladin *Paladin) markUnmodeledForeverTalents() {
 	t := paladin.Talents
 
-	// Crowd control and escape effects a single-boss tank sim never
-	// meets: Guardian's Favor shortens Blessing of Protection's cooldown
-	// and lengthens Blessing of Freedom (neither is registered), and
-	// Unyielding Faith shortens Fear and Disorient. The rest of the
-	// Protection tree is modelled in tank_talents.go and its abilities.
-	_, _ = t.GuardiansFavor, t.UnyieldingFaith
+	// Crowd control and escape effects a single-boss sim never meets:
+	// Guardian's Favor shortens Blessing of Protection's cooldown and
+	// lengthens Blessing of Freedom (neither is registered); Unyielding
+	// Faith (Fear and Disorient) and Stoicism (Stun and Charm) shorten
+	// effects on the paladin; Turn Evil speeds up Turn Undead.
+	_, _, _, _ = t.GuardiansFavor, t.UnyieldingFaith, t.Stoicism, t.TurnEvil
 
 	// Crowd control and its own cooldown: Repentance incapacitates
 	// (never cast on a Patchwerk-style boss), and Improved Hammer of
 	// Justice only shortens a stun's cooldown, not a damage ability's.
 	_, _ = t.Repentance, t.ImprovedHammerOfJustice
 
-	// Utility with no healing or DPS reading: a silence/interrupt
-	// immunity window and a movement speed bonus.
+	// Utility with no healing or DPS reading: a movement speed bonus.
 	_ = t.PursuitOfJustice
 
 	// Eye for an Eye reflects a fraction of a melee crit taken back at
 	// the attacker - a tank/defensive proc gated on being hit, not on
 	// anything the Paladin casts.
 	_ = t.EyeForAnEye
+
+	// Vindication (1.60.1.70707) only lowers the target's attack power;
+	// its client text prints an unresolved formula, "(3 /- 3 * 6)", and
+	// the self attack power half it had before is gone.
+	_ = t.Vindication
+
+	// Oath of Light raises Holy Light, Flash of Light and Holy Shock on
+	// one sworn ally "by up to 0": the client text has no resolved
+	// amounts and its spell (1328548) is not in the client tables yet.
+	// With no Oath sworn, Boundless Light's bonus reaches every ally,
+	// which is how healing_talents.go models it.
+	_ = t.OathOfLight
 }

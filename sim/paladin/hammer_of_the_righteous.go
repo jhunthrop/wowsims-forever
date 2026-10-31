@@ -68,7 +68,7 @@ func (paladin *Paladin) registerHammerOfTheRighteous() {
 			},
 		},
 
-		DamageMultiplier: paladin.getWeaponSpecializationModifier(),
+		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		ClientBaseDamage: [2]float64{hammerOfTheRighteousFlat, hammerOfTheRighteousFlat},
 

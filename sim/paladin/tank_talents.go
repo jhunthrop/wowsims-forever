@@ -8,35 +8,34 @@ import (
 )
 
 // The Protection tree, as the live client states it (talents/paladin.json,
-// build 1.60.1.70009 with Wowhead's 2026-10-07 hotfix overlay). Every
-// constant quotes the rank text it came from; where the text leaves a
-// number out, the constant says "unconfirmed" and what was assumed.
+// build 1.60.1.70707). Every constant quotes the rank text it came from;
+// where the text leaves a number out, the constant says "unconfirmed" and
+// what was assumed.
 
 // ForeverProtectionTalents is the fixed tank input the regression suite
 // and the level smoke run, so a change in the golden is attributable to
 // the engine rather than to a build edit. It is the build the site's
-// Protection paladin guide gives and its tank ranker runs, written against
-// the live tree: Holy 17, Protection 16, Retribution 17 characters
-// (TalentTreeSizes). Spend:
+// Protection paladin guide gives, written against the 1.60.1.70707 tree:
+// Holy, Protection and Retribution 17 characters each (TalentTreeSizes).
+// Spend:
 //
-//	Holy 8:         Divine Strength 5, Improved Seals 3
-//	Protection 38:  Toughness 5, Redoubt 5, Precision 3, Anticipation 5,
-//	                Improved Seal of Fury 1, Improved Righteous Fury 3,
-//	                Shield Specialization 3, Sacred Duty 2, Swift
-//	                Judgement 1, One-Handed Weapon Specialization 3,
-//	                Templar's Bulwark 1, Iron Creed 5, Holy Shield 1
-//	Retribution 5:  Deflection 5
+//	Holy 10:        Divine Strength 5, Improved Seals 5
+//	Protection 33:  Divine Intellect 1, Redoubt 5, Precision 3, Sacred
+//	                Duty 2, Templar's Bulwark 1, Shield Specialization 2,
+//	                Toughness 5, Swift Judgement 1, Improved Righteous
+//	                Fury 3, Anticipation 5, Holy Shield 1, Iron Creed 3,
+//	                Shieldsworn 1
+//	Retribution 8:  Deflection 5, Conviction 3
 //
-// Holy Shield is the 31-point talent: it needs 30 points in the tree and
-// Templar's Bulwark. The 20 points past it went into the Holy tree's
-// healing talents in the first draft of this build, and the same boss
-// killed that tank in a real share of fights; Deflection (+5% parry, the
-// only parry a paladin can take), Sacred Duty (+4% Stamina) and Iron Creed
-// (-10% damage taken for 6 s after Holy Strike) cut that many times over.
-// Reckoning priced at threat only and is left out
-// (TestForeverProtectionTalentsAreLegal checks the tiers and
-// prerequisites against the client's tree).
-const ForeverProtectionTalents = "50003000000000000-5530513321301051-50000000000000000"
+// Shieldsworn is the 31-point capstone and needs Holy Shield. Deflection
+// (+5% parry, the only parry a paladin can take), Sacred Duty and Iron
+// Creed are the survival picks past the core; the 70707 tree cut Iron
+// Creed and Shield Specialization's ranks and removed Improved Seal of
+// Fury and One-Handed Weapon Specialization, and those points moved to
+// Shieldsworn, Conviction (crit on every attack and spell), Improved Seals
+// and Divine Intellect (TestForeverProtectionTalentsAreLegal checks the
+// tiers and prerequisites against the client's tree).
+const ForeverProtectionTalents = "05005000000000000-15302102513501031-50030000000000000"
 
 const (
 	// Anticipation (node 105636): "Increases your Defense Skill by 4" at
@@ -51,27 +50,29 @@ const (
 	// Precision (node 105638): "Improves your chance to hit by 1%" a rank.
 	precisionHitPctPerRank = 1.0
 
-	// Sacred Duty (node 105632): "Increases your total Stamina by 2% and
-	// reduces the cooldown of your Divine Shield, Divine Protection, and
-	// Templar's Bulwark spells by 30 sec", 4% and 60 sec at rank 2.
-	sacredDutyStaminaPerRank           = 0.02
-	sacredDutyCooldownReductionPerRank = 30 * time.Second
+	// Sacred Duty (node 105632): "Reduces the cooldown of your Divine
+	// Shield, Divine Protection, and Templar's Bulwark spells by 30 sec,
+	// and reduces the duration of Forbearance by 5 sec", 60 and 10 sec at
+	// rank 2 (client 1.60.1.70707; it gave 2% Stamina a rank before).
+	sacredDutyCooldownReductionPerRank    = 30 * time.Second
+	sacredDutyForbearanceReductionPerRank = 5 * time.Second
 
-	// Shield Specialization (node 110874): "Increases the amount of damage
-	// absorbed by your shield by 10%, and gives your blocks a 33% chance
-	// to restore 6% of your maximum Mana. May only occur once every 3
-	// sec." 20% and 66% at rank 2, 30% and 100% at rank 3.
-	shieldSpecializationAbsorbPerRank = 0.10
+	// Shield Specialization (node 110874, 2 ranks): "Increases the amount
+	// of damage absorbed by your shield by 15%, and gives your blocks a 50%
+	// chance to restore 4% of your maximum Mana. May only occur once every
+	// 3 sec." 30% and 100% at rank 2 (client 1.60.1.70707; 10% and 33% a
+	// rank over 3 ranks before).
+	shieldSpecializationAbsorbPerRank = 0.15
 	shieldSpecializationManaFraction  = 0.04 // "restore 4% of your maximum Mana" (1.60.1.70425; 6% before)
 	shieldSpecializationManaICD       = 3 * time.Second
 	shieldSpecializationActionID      = 20150
 
 	// Redoubt (node 105626): "Damaging melee attacks against you have a
-	// 10% chance to increase your chance to block by 4%. Lasts 10 sec or
-	// 5 blocks.", 20% at rank 5 (Blizzard's 1 October 2026 notes, "Redoubt
-	// 4-20%"; it triggers on any damaging melee hit, no longer a crit).
+	// 10% chance to increase your chance to block by 6%. Lasts 10 sec or
+	// 5 blocks.", 30% at rank 5 (client 1.60.1.70707; 4% a rank before).
+	// It triggers on any damaging melee hit, not only a crit.
 	redoubtProcChance         = 0.10
-	redoubtBlockChancePerRank = 4.0
+	redoubtBlockChancePerRank = 6.0
 	redoubtDuration           = 10 * time.Second
 	redoubtBlocks             = 5
 	redoubtActionID           = 20134
@@ -85,11 +86,12 @@ const (
 	reckoningActionID           = 20178
 	reckoningInternalCooldown   = 1500 * time.Millisecond
 
-	// Iron Creed (node 110879): "Increases the threat generated by your
-	// Holy Strike ability by 5%. While Righteous Fury is active, Holy
-	// Strike also reduces your damage taken by 2% for 6 sec.", 25% and 10%
-	// at rank 5. 1311033 is the id of the trigger the client names.
-	ironCreedThreatPerRank      = 0.05
+	// Iron Creed (node 110879, 3 ranks): "Increases the threat generated
+	// by your Holy Strike ability by 10%. While Righteous Fury is active,
+	// Holy Strike also reduces your damage taken by 2% for 6 sec.", 30%
+	// and 6% at rank 3 (client 1.60.1.70707; 5% and 2% a rank over 5 ranks
+	// before). 1311033 is the id of the trigger the client names.
+	ironCreedThreatPerRank      = 0.10
 	ironCreedDamageTakenPerRank = 0.02
 	ironCreedDuration           = 6 * time.Second
 	ironCreedActionID           = 1311033
@@ -97,7 +99,7 @@ const (
 
 var (
 	// shieldSpecializationManaChance is the block-to-mana chance by rank.
-	shieldSpecializationManaChance = [4]float64{0, 0.33, 0.66, 1.00}
+	shieldSpecializationManaChance = [3]float64{0, 0.50, 1.00}
 )
 
 // applyProtectionTalents applies the Protection tree's passive effects.
@@ -112,7 +114,7 @@ func (paladin *Paladin) applyProtectionTalents() {
 		paladin.ApplyEquipScaling(stats.Armor, 1.0+toughnessArmorPctPerRank*float64(t.Toughness))
 	}
 	paladin.AddStat(stats.Defense, anticipationDefensePerRank*float64(t.Anticipation))
-	paladin.MultiplyStat(stats.Stamina, 1.0+sacredDutyStaminaPerRank*float64(t.SacredDuty))
+	paladin.forbearanceDurationMod -= sacredDutyForbearanceReductionPerRank * time.Duration(t.SacredDuty)
 
 	// Shield Specialization's absorb is the shield's block value, which
 	// BlockValue() scales for item block value only (Strength's share is
@@ -132,17 +134,28 @@ func (paladin *Paladin) applyShieldSpecializationMana() {
 	}
 
 	manaMetrics := paladin.NewManaMetrics(core.ActionID{SpellID: shieldSpecializationActionID})
+	chance := shieldSpecializationManaChance[rank]
+	restore := func(sim *core.Simulation) {
+		paladin.AddMana(sim, shieldSpecializationManaFraction*paladin.MaxMana(), manaMetrics)
+	}
 	core.MakeProcTriggerAura(&paladin.Unit, core.ProcTrigger{
 		Name:       "Shield Specialization",
 		ActionID:   core.ActionID{SpellID: shieldSpecializationActionID},
 		Callback:   core.CallbackOnSpellHitTaken,
 		Outcome:    core.OutcomeBlock,
-		ProcChance: shieldSpecializationManaChance[rank],
+		ProcChance: chance,
 		ICD:        shieldSpecializationManaICD,
 		Handler: func(sim *core.Simulation, _ *core.Spell, _ *core.SpellResult) {
-			paladin.AddMana(sim, shieldSpecializationManaFraction*paladin.MaxMana(), manaMetrics)
+			restore(sim)
 		},
 	})
+	// Shieldsworn's shield strike rolls the same chance outside the
+	// internal cooldown.
+	paladin.shieldSpecializationOnStrike = func(sim *core.Simulation) {
+		if sim.Proc(chance, "Shield Specialization (Shieldsworn)") {
+			restore(sim)
+		}
+	}
 }
 
 // applyRedoubt: any damaging melee hit has a chance to give the block

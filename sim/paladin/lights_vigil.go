@@ -44,15 +44,12 @@ type lightsVigilState struct {
 	heal   *core.Spell
 }
 
-// registerLightsVigil registers Light's Vigil (talent node 1310911): "Applies
-// Light's Vigil to the target for 30 sec. Your next Holy Shock cast on them
-// triggers no cooldown and causes enemy targets to suffer 175 to 189 Holy
-// damage and refund 75% of Light's Vigil's Mana cost, or allied targets to
-// heal their party for 326 to 344."
-//
-// Only the allied half is modelled, because it is the healer's. The enemy
-// half (damage and the mana refund) belongs to a spec that casts Holy
-// Shock on enemies and does not use this spell.
+// registerLightsVigil registers Light's Vigil (talent node 1310911), client
+// 1.60.1.70707: "Applies Light's Vigil to a friendly target for 30 sec. The
+// caster's next Holy Shock on the target incurs no cooldown and heals the
+// target and their party for 326 to 344. Only one Vigil per Paladin may be
+// active in each party." The enemy half it had before (damage and a mana
+// refund) is gone; the engine only ever modelled the heal.
 func (paladin *Paladin) registerLightsVigil() {
 	if !paladin.Talents.LightsVigil || !paladin.isHealer() {
 		return

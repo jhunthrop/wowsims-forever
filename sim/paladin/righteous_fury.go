@@ -25,10 +25,11 @@ const (
 
 	// improvedRighteousFuryDamageTakenPerRank is Improved Righteous Fury
 	// (node 105634): "While Righteous Fury is active, all damage taken is
-	// reduced by 2%", 4% and 6% at ranks 2 and 3. It is a damage-taken
+	// reduced by 3%", 6% and 9% at ranks 2 and 3 (client 1.60.1.70707; 2%
+	// a rank before). It is a damage-taken
 	// reduction, not the vanilla 16/33/50% threat multiplier: Forever's
 	// Righteous Fury has no threat talent.
-	improvedRighteousFuryDamageTakenPerRank = 0.02
+	improvedRighteousFuryDamageTakenPerRank = 0.03
 )
 
 // registerRighteousFury registers Righteous Fury as an aura, as a castable

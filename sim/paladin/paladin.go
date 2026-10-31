@@ -108,16 +108,6 @@ const (
 
 	// Spiritual Focus: "Flash of Light, Holy Light, and Light's Vigil".
 	PaladinSpellMaskSpiritualFocus = PaladinSpellMaskHolyLight | PaladinSpellMaskFlashOfLight | PaladinSpellMaskLightsVigilCast
-
-	// Holy Power: "critical strike chance of your Holy Shock and Holy
-	// Strike spells by 3% a rank, and all other spells by 1%".
-	PaladinSpellMaskHolyPowerSpecials = PaladinSpellMaskHolyShock | PaladinSpellMaskHolyShockHeal | PaladinSpellMaskHolyStrike
-
-	// Twist of Light: "Reduces the Mana cost of your Seal spells by
-	// 20%". Every Seal this package registers a cast spell for.
-	PaladinSpellMaskSealCast = PaladinSpellMaskSealOfRighteousnessCast | PaladinSpellMaskSealOfCommandCast |
-		PaladinSpellMaskSealOfTheCrusaderCast | PaladinSpellMaskSealOfFuryCast |
-		PaladinSpellMaskSealOfLightCast | PaladinSpellMaskSealOfWisdomCast
 )
 
 type SealJudgeCode uint8
@@ -140,7 +130,7 @@ type Paladin struct {
 	currentPaladinAura *core.Aura
 
 	currentSeal      *core.Aura
-	currentSealSpell *core.Spell // the seal-cast spell that activated currentSeal; read by Sanctified Judgement and Twist of Light's Echo
+	currentSealSpell *core.Spell // the seal-cast spell that activated currentSeal; read by Sanctified Judgement
 	allSealAuras     [][]*core.Aura
 	aurasSoR         []*core.Aura
 	aurasSoC         []*core.Aura
@@ -150,14 +140,9 @@ type Paladin struct {
 	// (utility_seals.go).
 	aurasUtilitySeals []*core.Aura
 
-	// Highest-rank weapon-proc spell for each Echo-eligible Seal (Twist
-	// of Light names Command, Righteousness, Fury and Justice; this
-	// package implements the first three). Set by
-	// registerSealOfRighteousness/registerSealOfCommand/registerSealOfFury.
-	sealOfRighteousnessProc *core.Spell
-	sealOfCommandProc       *core.Spell
-	sealOfFuryProc          *core.Spell
-	echoOfSealAura          *core.Aura
+	// sealEffects is what each Seal aura does to a landed swing
+	// (unsealed_wrath.go).
+	sealEffects map[*core.Aura]*sealEffect
 
 	sanctifiedJudgementManaMetrics *core.ResourceMetrics
 
@@ -194,8 +179,11 @@ type Paladin struct {
 	// sets it before the aura is registered (it is negative to shorten).
 	forbearanceDurationMod time.Duration
 
-	ironCreedAura      *core.Aura
-	swiftJudgementAura *core.Aura
+	ironCreedAura *core.Aura
+
+	// shieldSpecializationOnStrike is Shield Specialization's mana roll
+	// for Shieldsworn's shield strike; nil without the talent.
+	shieldSpecializationOnStrike func(sim *core.Simulation)
 }
 
 // Implemented by each Paladin spec.
@@ -234,6 +222,7 @@ func (paladin *Paladin) Initialize() {
 	paladin.registerSealOfTheCrusader()
 	paladin.registerSealOfFury()
 	paladin.registerUtilitySeals()
+	paladin.registerUnsealedWrath()
 
 	paladin.allJudgeSpells = append(paladin.allJudgeSpells, paladin.spellsJoR)
 	paladin.allJudgeSpells = append(paladin.allJudgeSpells, paladin.spellsJoC)
@@ -343,9 +332,7 @@ func (paladin *Paladin) getPrimarySealSpell(primarySeal proto.PaladinSeal) *core
 
 // sealSpell is the cast spell (sealOfRighteousness/sealOfCommand/the SotC
 // cast spell) that activated newSeal, not the judgement -- Sanctified
-// Judgement reads its Cost for "the mana cost of the judged seal", and
-// Twist of Light's Echo reads which Seal is being REPLACED before this
-// overwrites currentSeal.
+// Judgement reads its Cost for "the mana cost of the judged seal".
 func (paladin *Paladin) applySeal(newSeal *core.Aura, judgement *core.Spell, sealSpell *core.Spell, sim *core.Simulation) {
 	oldSeal := paladin.currentSeal
 	if oldSeal != nil {

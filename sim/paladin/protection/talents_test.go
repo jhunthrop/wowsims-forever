@@ -78,16 +78,22 @@ func TestPrecisionAddsOnePercentHitPerRank(t *testing.T) {
 	}
 }
 
-// Sacred Duty: "Increases your total Stamina by 2% and reduces the
-// cooldown of your Divine Shield, Divine Protection, and Templar's
-// Bulwark spells by 30 sec", 4% and 60 sec at rank 2.
-func TestSacredDutyAddsStaminaAndShortensTheDefensiveCooldowns(t *testing.T) {
+// Sacred Duty (client 1.60.1.70707): "Reduces the cooldown of your Divine
+// Shield, Divine Protection, and Templar's Bulwark spells by 30 sec, and
+// reduces the duration of Forbearance by 5 sec", 60 and 10 sec at rank 2.
+// Its Stamina is gone.
+func TestSacredDutyShortensTheDefensiveCooldownsAndForbearance(t *testing.T) {
 	base := shortRun{Talents: map[string]int{"templars_bulwark": 1}}.start(t)
 	talented := shortRun{Talents: map[string]int{"templars_bulwark": 1, "sacred_duty": 2}}.start(t)
 
-	ratio := talented.tank.GetStat(stats.Stamina) / base.tank.GetStat(stats.Stamina)
-	if !near(ratio, 1.04, 1e-3) {
-		t.Errorf("Sacred Duty 2 scales Stamina by %v, want 1.04", ratio)
+	if got, want := talented.tank.GetStat(stats.Stamina), base.tank.GetStat(stats.Stamina); !near(got, want, tolerance) {
+		t.Errorf("Sacred Duty 2 changes Stamina from %v to %v, want no change", want, got)
+	}
+	forbearance := func(f *fight) time.Duration {
+		return f.tank.GetAuraByID(core.ActionID{SpellID: auraForbearance}).Duration
+	}
+	if got, want := forbearance(talented), forbearance(base)-10*time.Second; got != want {
+		t.Errorf("Forbearance with Sacred Duty 2 lasts %v, want %v", got, want)
 	}
 
 	for _, spellID := range []int32{spellTemplarsBulwark, spellDivineProtection, spellDivineShield} {
@@ -101,25 +107,25 @@ func TestSacredDutyAddsStaminaAndShortensTheDefensiveCooldowns(t *testing.T) {
 }
 
 // Shield Specialization: "Increases the amount of damage absorbed by your
-// shield by 10%", 30% at rank 3. The absorb is the shield's block value,
+// shield by 15%", 30% at rank 2 (client 1.60.1.70707). The absorb is the shield's block value,
 // which the multiplier scales (Strength's share of block value is not
 // "damage absorbed by your shield").
 func TestShieldSpecializationRaisesTheShieldsAbsorb(t *testing.T) {
 	base := shortRun{}.start(t).tank
-	talented := shortRun{Talents: map[string]int{"shield_specialization": 3}}.start(t).tank
+	talented := shortRun{Talents: map[string]int{"shield_specialization": 2}}.start(t).tank
 
 	if got, want := talented.PseudoStats.BlockValueMultiplier-base.PseudoStats.BlockValueMultiplier, 0.3; !near(got, want, tolerance) {
-		t.Errorf("Shield Specialization 3 raises the block value multiplier by %v, want %v", got, want)
+		t.Errorf("Shield Specialization 2 raises the block value multiplier by %v, want %v", got, want)
 	}
 	if talented.BlockValue() <= base.BlockValue() {
 		t.Errorf("block value %v with the talent, %v without", talented.BlockValue(), base.BlockValue())
 	}
 }
 
-// Shield Specialization: "gives your blocks a 100% chance to restore 6% of
-// your maximum Mana. May only occur once every 3 sec." (rank 3).
+// Shield Specialization: "gives your blocks a 100% chance to restore 4% of
+// your maximum Mana. May only occur once every 3 sec." (rank 2).
 func TestShieldSpecializationBlocksRestoreMana(t *testing.T) {
-	f := shortRun{Talents: map[string]int{"shield_specialization": 3}}.start(t)
+	f := shortRun{Talents: map[string]int{"shield_specialization": 2}}.start(t)
 	spend := f.tank.MaxMana() * 0.5
 	f.tank.SpendMana(f.sim, spend, f.tank.NewManaMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionPotion}))
 
@@ -146,7 +152,7 @@ func TestShieldSpecializationBlocksRestoreMana(t *testing.T) {
 
 // Shield Specialization restores nothing on a hit that is not blocked.
 func TestShieldSpecializationIgnoresUnblockedHits(t *testing.T) {
-	f := shortRun{Talents: map[string]int{"shield_specialization": 3}}.start(t)
+	f := shortRun{Talents: map[string]int{"shield_specialization": 2}}.start(t)
 	f.tank.SpendMana(f.sim, f.tank.MaxMana()*0.5, f.tank.NewManaMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionPotion}))
 	before := f.tank.CurrentMana()
 	f.hit(core.OutcomeHit, 100)
@@ -156,8 +162,9 @@ func TestShieldSpecializationIgnoresUnblockedHits(t *testing.T) {
 }
 
 // Redoubt: "Damaging melee attacks against you have a 10% chance to
-// increase your chance to block by 4%. Lasts 10 sec or 5 blocks.", 20% at
-// rank 5: any melee hit may give it, and five blocks end it.
+// increase your chance to block by 6%. Lasts 10 sec or 5 blocks.", 30% at
+// rank 5 (client 1.60.1.70707): any melee hit may give it, and five blocks
+// end it.
 func TestRedoubtBlockBonusEndsAfterFiveBlocks(t *testing.T) {
 	f := shortRun{Talents: map[string]int{"redoubt": 5}}.start(t)
 	aura := f.tank.GetAuraByID(core.ActionID{SpellID: auraRedoubt})
@@ -165,8 +172,8 @@ func TestRedoubtBlockBonusEndsAfterFiveBlocks(t *testing.T) {
 
 	aura.Activate(f.sim)
 	aura.SetStacks(f.sim, 5)
-	if got := f.tank.GetStat(stats.Block) - base; !near(got, 20, tolerance) {
-		t.Fatalf("Redoubt 5 gives +%v block, want +20", got)
+	if got := f.tank.GetStat(stats.Block) - base; !near(got, 30, tolerance) {
+		t.Fatalf("Redoubt 5 gives +%v block, want +30", got)
 	}
 
 	// A spell hit cannot give Redoubt again, so only the blocks spend it.
@@ -219,13 +226,13 @@ func TestReckoningGrantsAnExtraAttackWhenCritted(t *testing.T) {
 }
 
 // Improved Righteous Fury: "While Righteous Fury is active, all damage
-// taken is reduced by 2%", 6% at rank 3.
+// taken is reduced by 3%", 9% at rank 3 (client 1.60.1.70707).
 func TestImprovedRighteousFuryReducesAllDamageTaken(t *testing.T) {
 	talents := map[string]int{"improved_righteous_fury": 3}
 
 	on := shortRun{Talents: talents}.start(t).tank
-	if got := on.PseudoStats.DamageTakenMultiplier; !near(got, 0.94, tolerance) {
-		t.Errorf("Righteous Fury with Improved Righteous Fury 3 takes %v of the damage, want 0.94", got)
+	if got := on.PseudoStats.DamageTakenMultiplier; !near(got, 0.91, tolerance) {
+		t.Errorf("Righteous Fury with Improved Righteous Fury 3 takes %v of the damage, want 0.91", got)
 	}
 
 	off := shortRun{Talents: talents, Options: &proto.PaladinOptions{}}.start(t).tank
@@ -236,9 +243,9 @@ func TestImprovedRighteousFuryReducesAllDamageTaken(t *testing.T) {
 
 // Righteous Fury: +60% threat on Holy damage, and not on anything else.
 // Holy Shield's own "20% additional threat" multiplies on top, and Iron
-// Creed's 5% a rank on Holy Strike.
+// Creed's 10% a rank on Holy Strike.
 func TestRighteousFuryRaisesHolyThreatOnly(t *testing.T) {
-	talents := map[string]int{"holy_shield": 1, "iron_creed": 5, "swift_judgement": 1}
+	talents := map[string]int{"holy_shield": 1, "iron_creed": 3, "swift_judgement": 1}
 	f := shortRun{Talents: talents}.start(t)
 
 	for _, tc := range []struct {
@@ -249,7 +256,7 @@ func TestRighteousFuryRaisesHolyThreatOnly(t *testing.T) {
 		{"Seal of Fury proc", spellSealOfFuryProc, 1.6},
 		{"Judgement of Fury", spellJudgementOfFury, 1.6},
 		{"Hammer of the Righteous", spellHammerRighteous, 1.6},
-		{"Holy Strike with Iron Creed 5", spellHolyStrike, 1.6 * 1.25},
+		{"Holy Strike with Iron Creed 3", spellHolyStrike, 1.6 * 1.3},
 		{"Holy Shield damage", spellHolyShieldProc, 1.6 * 1.2},
 	} {
 		if got := f.spellOf(t, tc.spellID).ThreatMultiplier; !near(got, tc.want, tolerance) {
@@ -267,9 +274,9 @@ func TestRighteousFuryRaisesHolyThreatOnly(t *testing.T) {
 }
 
 // Iron Creed: "While Righteous Fury is active, Holy Strike also reduces
-// your damage taken by 2% for 6 sec." (10% at rank 5).
+// your damage taken by 2% for 6 sec." (6% at rank 3, client 1.60.1.70707).
 func TestIronCreedReducesDamageTakenAfterHolyStrike(t *testing.T) {
-	f := shortRun{Talents: map[string]int{"iron_creed": 5}}.start(t)
+	f := shortRun{Talents: map[string]int{"iron_creed": 3}}.start(t)
 	holyStrike := f.spellOf(t, spellHolyStrike)
 	creed := f.tank.GetAuraByID(core.ActionID{SpellID: auraIronCreed})
 	if creed == nil {
@@ -281,8 +288,8 @@ func TestIronCreedReducesDamageTakenAfterHolyStrike(t *testing.T) {
 	if !creed.IsActive() {
 		t.Fatal("Holy Strike did not open Iron Creed")
 	}
-	if got := f.tank.PseudoStats.DamageTakenMultiplier / before; !near(got, 0.9, tolerance) {
-		t.Errorf("Iron Creed 5 takes %v of the damage, want 0.9", got)
+	if got := f.tank.PseudoStats.DamageTakenMultiplier / before; !near(got, 0.94, tolerance) {
+		t.Errorf("Iron Creed 3 takes %v of the damage, want 0.94", got)
 	}
 	if got, want := creed.Duration, 6*time.Second; got != want {
 		t.Errorf("Iron Creed lasts %v, want %v", got, want)
@@ -296,13 +303,13 @@ func TestIronCreedReducesDamageTakenAfterHolyStrike(t *testing.T) {
 		t.Errorf("damage taken stays at %v after Iron Creed, want %v", got, before)
 	}
 
-	withoutFury := shortRun{Talents: map[string]int{"iron_creed": 5}, Options: &proto.PaladinOptions{}}.start(t)
+	withoutFury := shortRun{Talents: map[string]int{"iron_creed": 3}, Options: &proto.PaladinOptions{}}.start(t)
 	if withoutFury.tank.GetAuraByID(core.ActionID{SpellID: auraIronCreed}) != nil {
 		t.Error("Iron Creed's damage reduction exists without Righteous Fury")
 	}
 }
 
-// Holy Shield: "Increases chance to block by 30% for 10 sec, and deals 110
+// Holy Shield: "Increases chance to block by 30% for 10 sec, and deals 75
 // Holy damage for each attack blocked while active. ... Each block expends
 // a charge. 4 charges."
 func TestHolyShieldCostsACharge(t *testing.T) {
@@ -457,8 +464,7 @@ func TestDivineShieldHalvesDamageDealt(t *testing.T) {
 }
 
 // Seal of Fury: "a small absorb worth half the damage with a shield
-// equipped", and Improved Seal of Fury restores mana when it is fully
-// absorbed, 15% more for each level the attacker stands above the paladin.
+// equipped".
 func TestSealOfFuryShieldIsHalfTheProcDamage(t *testing.T) {
 	f := shortRun{}.start(t)
 	proc := f.spellOf(t, spellSealOfFuryProc)
@@ -507,9 +513,11 @@ func TestJudgementKeepsTheSealUp(t *testing.T) {
 	}
 }
 
-// Swift Judgement: "Finishes the remaining cooldown on your Judgement
-// ability and reduces the Mana cost of your next Judgement by 100%."
-func TestSwiftJudgementResetsJudgementAndMakesTheNextOneFree(t *testing.T) {
+// Swift Judgement (client 1.60.1.70707): "Unleash the energy of a Seal
+// spell upon an enemy. Does not consume the Seal. ... Does not share a
+// cooldown with your Judgement ability." It is a second Judgement of the
+// Seal that is up: it leaves Judgement's cooldown alone and costs nothing.
+func TestSwiftJudgementJudgesTheSealOnItsOwnCooldown(t *testing.T) {
 	rotation := rotationOf(
 		[]string{prepullCast(spellSealOfFury, "2")},
 		[]string{cast(spellJudgement), cast(spellSwiftJudgement)})
@@ -518,13 +526,70 @@ func TestSwiftJudgementResetsJudgementAndMakesTheNextOneFree(t *testing.T) {
 	if got := actionCasts(metrics, spellSwiftJudgement); got != 1 {
 		t.Fatalf("Swift Judgement was cast %v times, want once", got)
 	}
-	if got := actionCasts(metrics, spellJudgement); got != 2 {
-		// The first Judgement, then the one Swift Judgement made ready; the
-		// ten second cooldown holds a third past the five second fight.
-		t.Errorf("Judgement was cast %v times, want 2", got)
+	if got := actionCasts(metrics, spellJudgement); got != 1 {
+		t.Errorf("Judgement was cast %v times in 5 seconds, want 1: Swift Judgement does not reset it", got)
 	}
-	if got, want := resourceEvents(metrics, spellJudgement), 1.0; got != want {
-		t.Errorf("Judgement spent mana %v times, want %v: the cast Swift Judgement made ready is free", got, want)
+	if got := actionCasts(metrics, spellJudgementOfFury); got != 2 {
+		t.Errorf("Judgement of Fury landed %v times, want 2 (Judgement and Swift Judgement)", got)
+	}
+	if got := resourceEvents(metrics, spellSwiftJudgement); got != 0 {
+		t.Errorf("Swift Judgement spent mana %v times, want none", got)
+	}
+}
+
+// Shieldsworn (client 1.60.1.70707): Holy Strike's cooldown drops by 4
+// seconds, and with a shield on it fires Holy Shield's block damage while
+// Holy Shield is up, without spending a charge.
+func TestShieldswornShortensHolyStrikeAndStrikesWithTheShield(t *testing.T) {
+	talents := map[string]int{"holy_shield": 1, "shieldsworn": 1}
+	base := shortRun{Talents: map[string]int{"holy_shield": 1}}.start(t)
+	if got, want := base.spellOf(t, spellHolyStrike).CD.Duration, 10*time.Second; got != want {
+		t.Fatalf("Holy Strike's cooldown without Shieldsworn is %v, want %v", got, want)
+	}
+
+	f := shortRun{Talents: talents}.start(t)
+	holyStrike := f.spellOf(t, spellHolyStrike)
+	if got, want := holyStrike.CD.Duration, 6*time.Second; got != want {
+		t.Errorf("Holy Strike's cooldown with Shieldsworn is %v, want %v", got, want)
+	}
+	shield := f.spellOf(t, spellHolyShield)
+	damage := f.spellOf(t, spellHolyShieldProc)
+	aura := f.tank.GetAuraByID(core.ActionID{SpellID: auraHolyShield})
+
+	holyStrike.ApplyEffects(f.sim, f.boss, holyStrike)
+	if got := damage.SpellMetrics[f.boss.UnitIndex].Casts; got != 0 {
+		t.Errorf("Holy Strike fired Holy Shield %d times with Holy Shield down", got)
+	}
+	shield.ApplyEffects(f.sim, f.boss, shield)
+	holyStrike.ApplyEffects(f.sim, f.boss, holyStrike)
+	if got := damage.SpellMetrics[f.boss.UnitIndex].Casts; got != 1 {
+		t.Errorf("Holy Strike fired Holy Shield %d times with Holy Shield up, want 1", got)
+	}
+	if got := aura.GetStacks(); got != 4 {
+		t.Errorf("Holy Shield has %d charges after the shield strike, want 4", got)
+	}
+
+	bare := shortRun{Talents: talents, Equipment: withoutShield(t)}.start(t)
+	bareStrike := bare.spellOf(t, spellHolyStrike)
+	bareStrike.ApplyEffects(bare.sim, bare.boss, bareStrike)
+	if bare.tank.PseudoStats.CanBlock {
+		t.Fatal("the shieldless tank can block")
+	}
+}
+
+// Shieldsworn's shield strike rolls Shield Specialization's mana (100% at
+// rank 2) without its 3 second internal cooldown.
+func TestShieldswornStrikeRestoresShieldSpecializationMana(t *testing.T) {
+	f := shortRun{Talents: map[string]int{"redoubt": 5, "shield_specialization": 2, "shieldsworn": 1}}.start(t)
+	f.tank.SpendMana(f.sim, f.tank.MaxMana()*0.5, f.tank.NewManaMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionPotion}))
+	holyStrike := f.spellOf(t, spellHolyStrike)
+	restores := 0.04 * f.tank.MaxMana()
+	for strike := 1; strike <= 2; strike++ {
+		before := f.tank.CurrentMana()
+		holyStrike.ApplyEffects(f.sim, f.boss, holyStrike)
+		if got := f.tank.CurrentMana() - before; !near(got, restores, 1) {
+			t.Errorf("shield strike %d restored %v mana, want %v", strike, got, restores)
+		}
 	}
 }
 

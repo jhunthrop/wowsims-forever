@@ -8,12 +8,16 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
-// HolyShieldValues: source 1.60.1.70291 client spell data
-// (spellconst/paladin.json, ids 20925/20927/20928): effect 1 (aura 43, a
-// proc-trigger damage) states the Holy damage a block deals, 110, 153 and
-// 221 by rank, with an 0.08 spell-power coefficient. Rank 1's level is
-// 40, not 30: the client moved it from Classic's 30. The vanilla 65/95/130
-// the engine carried before is gone.
+// HolyShieldValues: client 1.60.1.70707 moved Holy Shield from the
+// Protection tree's 31-point row to its 21-point row, and its talent text
+// (rank 1) now deals 75 Holy damage a block where it dealt 110. Wowhead's
+// live Forever tooltips (2026-10-31) show every rank one bracket down to
+// match: 20925 level 30 for 75, 20927 level 40 for 110, 20928 level 50 for
+// 153, at the same mana costs, so a level 60 paladin's top rank deals 153.
+// The client's own spell rows (spellconst/paladin.json) still carry the
+// 70658 values (levels 40/50/60, 110/153/221) because the change is a
+// hotfix those tables do not hold; the 0.08 spell-power coefficient is
+// theirs.
 //
 // procID is the engine's own id for the damage spell: the client states
 // the damage on the aura rather than on a spell of its own.
@@ -24,15 +28,15 @@ var HolyShieldValues = []struct {
 	manaCost float64
 	damage   float64
 }{
-	{level: 40, spellID: 20925, procID: 20955, manaCost: 150, damage: 110},
-	{level: 50, spellID: 20927, procID: 20956, manaCost: 195, damage: 153},
-	{level: 60, spellID: 20928, procID: 20957, manaCost: 240, damage: 221},
+	{level: 30, spellID: 20925, procID: 20955, manaCost: 150, damage: 75},
+	{level: 40, spellID: 20927, procID: 20956, manaCost: 195, damage: 110},
+	{level: 50, spellID: 20928, procID: 20957, manaCost: 240, damage: 153},
 }
 
 const (
 	// holyShieldCharges and holyShieldBlockChance are the Holy Shield
 	// talent's text (node 105628): "Increases chance to block by 30% for
-	// 10 sec, and deals 110 Holy damage for each attack blocked while
+	// 10 sec, and deals 75 Holy damage for each attack blocked while
 	// active. Damage caused by Holy Shield causes 20% additional threat.
 	// Each block expends a charge. 4 charges." The rank spells' own
 	// block effect reads 30 since build 1.60.1.70291 (it read 20 before).
@@ -137,4 +141,14 @@ func (paladin *Paladin) registerHolyShield() {
 			},
 		})
 	}
+}
+
+// activeHolyShield is the index of the Holy Shield rank that is up, or -1.
+func (paladin *Paladin) activeHolyShield() int {
+	for i, aura := range paladin.holyShieldAura {
+		if aura != nil && aura.IsActive() {
+			return i
+		}
+	}
+	return -1
 }
