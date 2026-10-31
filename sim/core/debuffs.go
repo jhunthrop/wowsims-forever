@@ -663,11 +663,12 @@ const WintersChillMaxStacks = 5
 // Cone of Cold by 5% and it gains an additional 7% of your spell damage,
 // stacking up to 5 times" - sim/mage/cone_of_cold.go). Vanilla's 2%
 // Frost crit taken a stack is gone from the text, so the aura itself
-// changes no number on the target.
+// changes no number on the target. The id is the client's own debuff
+// (12579, the spell the talent applies); rotations gate Cone of Cold on it.
 func WintersChillAura(target *Unit) *Aura {
 	aura := target.GetOrRegisterAura(Aura{
 		Label:     "Winter's Chill",
-		ActionID:  ActionID{SpellID: 28593},
+		ActionID:  ActionID{SpellID: 12579},
 		Duration:  time.Second * 15,
 		MaxStacks: WintersChillMaxStacks,
 	})

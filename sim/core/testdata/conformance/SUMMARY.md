@@ -624,9 +624,9 @@ Per spec-and-rank row at level 60 whose client spell has a school-damage, period
 | Warrior | 12 | 12 | 0 | 0 | 42 |
 | Druid | 98 | 98 | 0 | 0 | 38 |
 | Priest | 143 | 143 | 0 | 0 | 37 |
-| Shaman | 189 | 189 | 0 | 20 | 232 |
+| Shaman | 190 | 190 | 0 | 20 | 232 |
 | Rogue | 10 | 10 | 0 | 0 | 28 |
-| **Total** | 790 | 790 | 0 | 44 | 761 |
+| **Total** | 791 | 791 | 0 | 44 | 761 |
 
 <!-- damage-summary:end -->
 

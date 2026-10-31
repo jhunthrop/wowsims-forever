@@ -7,6 +7,29 @@
       }
     },
     {
+      "notes": "Keep Ice Barrier up: the talent adds 3% Frost damage for a minute after a cast and another 3% while the shield holds. It goes up before the pull and again when the shield's minute runs out. The condition names the shield with its rank, so while levelling it is rewritten to the same lower rank the cast uses. Nothing hits the simulated mage, so the shield never breaks and its extra 3% holds all minute; in a fight where it breaks, only the first 3% stays.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsActive": {
+                "auraId": {
+                  "spellId": 13033,
+                  "rank": 4
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 13033,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
       "notes": "Ice Lance on a Fingers of Frost charge: the charge makes the target count as Frozen, so Ice Lance deals triple damage and Shatter's crit bonus applies. Only fires with the Fingers of Frost talent; without it the buff never appears, the line asks whether the aura exists first, and the line stays idle.",
       "action": {
         "castSpell": {
@@ -33,6 +56,66 @@
                 }
               }
             ]
+          }
+        }
+      }
+    },
+    {
+      "notes": "Cone of Cold on five Winter's Chill stacks: Frostbolt and empowered Ice Lance build the stacks, and Cone of Cold spends them for 25% more damage and 35% more of your spell damage. You need to stand within 10 yards of the target. The line asks whether the target can carry Winter's Chill before it counts stacks: without the talent the aura does not exist, a condition on a missing aura is dropped, and the line would cast Cone of Cold on cooldown. Above 50% mana only: below that the mana is worth more as Frostbolts. At the raid band 20% to 60% gates all measured at least as well as no gate; 50% is the lowest that keeps the bare ladder character's level-40 rung from spending its pool on Cone of Cold. The simulated mage never has to move, so this gain is an upper bound: skip the line on bosses whose cleave or tail makes standing that close unsafe.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "sourceUnit": {
+                    "type": "CurrentTarget"
+                  },
+                  "auraId": {
+                    "spellId": 12579
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "auraNumStacks": {
+                      "sourceUnit": {
+                        "type": "CurrentTarget"
+                      },
+                      "auraId": {
+                        "spellId": 12579
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "5"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "50%"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10161,
+            "rank": 5
           }
         }
       }
@@ -68,6 +151,23 @@
           "spellId": {
             "spellId": 5019
           }
+        }
+      }
+    }
+  ],
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 13033,
+            "rank": 4
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1.5s"
         }
       }
     }

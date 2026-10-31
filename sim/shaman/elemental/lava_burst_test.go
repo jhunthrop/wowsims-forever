@@ -55,8 +55,8 @@ func newLavaBurstShaman(t *testing.T, level int32) (*core.Simulation, *shaman.Sh
 
 // TestLavaBurstLevel60HasMaxRankAndDealsDamage: registerLavaBurstSpell is
 // gated on shaman.Talents.LavaBurst, and per spellranks.json a level-60
-// shaman's castable rank is 1238300 (rank 3, spellconst amount 220,
-// sp_coefficient 0.714).
+// shaman's castable rank is 1326047 (rank 4, level 60, spellconst amount
+// 220, sp_coefficient 0.714).
 func TestLavaBurstLevel60HasMaxRankAndDealsDamage(t *testing.T) {
 	sim, built := newLavaBurstShaman(t, 60)
 
@@ -64,10 +64,10 @@ func TestLavaBurstLevel60HasMaxRankAndDealsDamage(t *testing.T) {
 		t.Fatal("level-60 shaman with the Lava Burst talent has no Lava Burst spell registered")
 	}
 	maxRank := built.LavaBurst[len(built.LavaBurst)-1]
-	if got, want := maxRank.ActionID.SpellID, int32(1238300); got != want {
+	if got, want := maxRank.ActionID.SpellID, int32(1326047); got != want {
 		t.Errorf("Lava Burst max rank spell ID = %d, want %d", got, want)
 	}
-	if got, want := maxRank.Rank, 3; got != want {
+	if got, want := maxRank.Rank, 4; got != want {
 		t.Errorf("Lava Burst max rank = %d, want %d", got, want)
 	}
 	if got, want := maxRank.CD.Duration, shaman.LavaBurstCooldown; got != want {
@@ -87,7 +87,7 @@ func TestLavaBurstLevel60HasMaxRankAndDealsDamage(t *testing.T) {
 	}
 }
 
-// TestLavaBurstRanksMatchClientLevelsAndSpellIDs pins the three castable
+// TestLavaBurstRanksMatchClientLevelsAndSpellIDs pins the four castable
 // ranks (spellconst/shaman.json + spellranks.json) so a future data
 // refresh notices if Forever's own ranks move.
 func TestLavaBurstRanksMatchClientLevelsAndSpellIDs(t *testing.T) {
@@ -100,7 +100,8 @@ func TestLavaBurstRanksMatchClientLevelsAndSpellIDs(t *testing.T) {
 		{level: 30, wantRank: 1, wantSpell: 408490},
 		{level: 40, wantRank: 2, wantSpell: 1238299},
 		{level: 50, wantRank: 3, wantSpell: 1238300},
-		{level: 60, wantRank: 3, wantSpell: 1238300},
+		{level: 59, wantRank: 3, wantSpell: 1238300},
+		{level: 60, wantRank: 4, wantSpell: 1326047},
 	}
 
 	for _, tc := range cases {

@@ -114,3 +114,15 @@ func TestWintersChillStacksRaiseConeOfColdDamage(t *testing.T) {
 		t.Errorf("Cone of Cold's coefficient is %.3f after casting, want the client's %.3f restored", cone.BonusCoefficient, ConeOfColdSpellCoeff[ConeOfColdRanks])
 	}
 }
+
+// TestWintersChillDebuffCarriesTheClientSpellID: rotations gate Cone of Cold
+// on the debuff's stacks by id, and the site's data checks hold that id to
+// the client's spell tables, so the aura must carry the client's own
+// Winter's Chill debuff (12579, the spell the talent applies), not a
+// later-expansion id the Forever client does not have.
+func TestWintersChillDebuffCarriesTheClientSpellID(t *testing.T) {
+	_, _, boss := newWintersChillSim(t, ForeverFrostTalents)
+	if got, want := core.WintersChillAura(boss).ActionID.SpellID, int32(12579); got != want {
+		t.Errorf("Winter's Chill debuff spell id = %d, want the client's %d", got, want)
+	}
+}

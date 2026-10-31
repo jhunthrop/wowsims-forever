@@ -1691,6 +1691,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | ElementalShaman (Lava Burst talent) | 60 | Lava Burst | 1 | 408490 | 135.00→135.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 113.01-145.79→113.01-145.79 | 0.714→0.714 | declared, matches |
 | ElementalShaman (Lava Burst talent) | 60 | Lava Burst | 2 | 1238299 | 165.00→165.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 40→40 | n/a | match |  | 149.52-192.88→149.52-192.88 | 0.714→0.714 | declared, matches |
 | ElementalShaman (Lava Burst talent) | 60 | Lava Burst | 3 | 1238300 | 230.00→230.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 50→50 | n/a | match |  | 178.87-230.73→178.87-230.73 | 0.714→0.714 | declared, matches |
+| ElementalShaman (Lava Burst talent) | 60 | Lava Burst | 4 | 1326047 | 265.00→265.00 | mana→mana | 10000→10000 | 2500→2500 | 1500→1500 | 60→60 | n/a | match |  | 192.14-247.86→192.14-247.86 | 0.714→0.714 | declared, matches |
 | ElementalShaman (Nature's Swiftness talent) | 10 | Nature's Swiftness | 0 | 16188 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | ElementalShaman (Nature's Swiftness talent) | 20 | Nature's Swiftness | 0 | 16188 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | ElementalShaman (Nature's Swiftness talent) | 30 | Nature's Swiftness | 0 | 16188 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |

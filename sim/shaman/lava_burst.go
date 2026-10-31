@@ -16,14 +16,17 @@ import (
 // talent wasn't even in the generated proto, so a shaman who spent the
 // point had a dead rotation line.
 //
-// Client numbers (spellconst/shaman.json, build 1.60.1.70425), all three
-// ranks share cast_time_ms 2500, gcd_ms 1500, cooldown_ms 0,
+// Client numbers (spellconst/shaman.json, build 1.60.1.70425; rank 4 from
+// 1.60.1.70532 on), all four ranks share cast_time_ms 2500, gcd_ms 1500,
+// cooldown_ms 0,
 // category_cooldown_ms 10000 (a 10s cooldown, not the 8s Classic
 // remembers -- the client wins). 1.60.1.70425 moved every rank ten
 // levels earlier and re-priced it (rank 1 was level 40, 165 mana, 164):
 //   - rank 1 (408490, level 30): cost 135, amount 123, sp_coefficient 0.714
 //   - rank 2 (1238299, level 40): cost 165, amount 164, sp_coefficient 0.714
 //   - rank 3 (1238300, level 50): cost 230, amount 196, sp_coefficient 0.714
+//   - rank 4 (1326047, level 60): cost 265, amount 220, sp_coefficient 0.714
+//     (a trainer rank in spellranks.json, not an Ahn'Qiraj book rank)
 //   - every rank's effect 1 is effect=3 (Dummy), amount 20 -- the client's
 //     own talent text spells this out exactly: "If your Flame Shock is on
 //     the target, Lava Burst deals 20% increased damage." Classic/SoD's
@@ -38,17 +41,18 @@ import (
 // way electric_spell.go and fire_totems.go already apply them. Elemental
 // Fury's crit-damage bonus applies automatically via the SpellFlagShaman
 // + DefenseTypeMagic hook in talents.go and needs no special case here.
-const LavaBurstRanks = 3
+const LavaBurstRanks = 4
 
-var LavaBurstSpellId = [LavaBurstRanks + 1]int32{0, 408490, 1238299, 1238300}
+var LavaBurstSpellId = [LavaBurstRanks + 1]int32{0, 408490, 1238299, 1238300, 1326047}
 var LavaBurstDamage = [LavaBurstRanks + 1]clientdamage.Effect{
 	{},
 	{Amount: 123, Variance: 0.253259, PerLevel: 0.8, SpellLevel: 30, MaxLevel: 38},
 	{Amount: 164, Variance: 0.253259, PerLevel: 0.9, SpellLevel: 40, MaxLevel: 48},
 	{Amount: 196, Variance: 0.253259, PerLevel: 1.1, SpellLevel: 50, MaxLevel: 58},
+	{Amount: 220, Variance: 0.253259, PerLevel: 1.3, SpellLevel: 60, MaxLevel: 68},
 }
-var LavaBurstManaCost = [LavaBurstRanks + 1]float64{0, 135, 165, 230}
-var LavaBurstLevel = [LavaBurstRanks + 1]int{0, 30, 40, 50}
+var LavaBurstManaCost = [LavaBurstRanks + 1]float64{0, 135, 165, 230, 265}
+var LavaBurstLevel = [LavaBurstRanks + 1]int{0, 30, 40, 50, 60}
 
 const LavaBurstSpellCoefficient = 0.71399998665
 

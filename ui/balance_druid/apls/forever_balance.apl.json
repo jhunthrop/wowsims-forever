@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Moonfire only to clip the last seconds; maintaining it costs more mana than it returns in this sim. With under 1.5 seconds left only the instant cast lands in time.",
+      "notes": "Under 1.5 seconds left only an instant lands in time; Moonfire's direct damage is the best instant.",
       "action": {
         "condition": {
           "cmp": {
@@ -55,7 +55,30 @@
       }
     },
     {
-      "notes": "Keep Insect Swarm ticking; it is a cheap DoT with no GCD contention beyond its application.",
+      "notes": "Keep Moonfire ticking: with Improved Moonfire and Nature's Splendor one cast does more damage per second of casting than Starfire, and the raid character has the mana for it.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 9835,
+                  "rank": 10
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9835,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
+      "notes": "Keep Insect Swarm ticking; each refresh costs one global.",
       "action": {
         "condition": {
           "not": {
@@ -78,7 +101,7 @@
       }
     },
     {
-      "notes": "Starfire is the whole rest of the rotation once Insect Swarm is ticking.",
+      "notes": "Starfire is the rest of the rotation once Moonfire and Insect Swarm are ticking.",
       "action": {
         "castSpell": {
           "spellId": {
