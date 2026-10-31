@@ -54,8 +54,8 @@ func newArcaneBlastTestMage(t *testing.T) (*core.Simulation, *Mage) {
 // TestArcaneBlastCostsFifteenPercentOfBaseManaAndRampsPerStack pins the
 // client's price for Arcane Blast (SpellPower.PowerCostPct 15 on every
 // player rank in build 1.60.1.70009; the flat cost column is 0) and the
-// buff's own "mana cost of Arcane Blast is increased by 175%" per stack
-// (spell 400573, effect 1). Before 2026-10-07 the spell registered with
+// buff's own "mana cost of Arcane Blast is increased by 100%" per stack
+// (spell 400573, effect 1; 175% through client 1.60.1.70685). Before 2026-10-07 the spell registered with
 // no cost at all, so an Arcane mage spammed it for free.
 func TestArcaneBlastCostsFifteenPercentOfBaseManaAndRampsPerStack(t *testing.T) {
 	sim, built := newArcaneBlastTestMage(t)
@@ -83,7 +83,7 @@ func TestArcaneBlastCostsFifteenPercentOfBaseManaAndRampsPerStack(t *testing.T) 
 		t.Errorf("Arcane Blast Cost.Multiplier at the stack cap = %d, want %d", got, want)
 	}
 
-	// Letting the buff drop (its 15 s) resets the ramp with the stacks.
+	// Letting the buff drop (its 18 s) resets the ramp with the stacks.
 	built.ArcaneBlastAura.Deactivate(sim)
 	if got, want := arcaneBlast.Cost.Multiplier, int32(100); got != want {
 		t.Errorf("Arcane Blast Cost.Multiplier after the buff dropped = %d, want %d", got, want)

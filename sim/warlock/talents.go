@@ -910,9 +910,14 @@ var (
 // Drain Life, Drain Soul and Wrack.
 var soulSiphonAffectedSpellCodes = []int32{SpellCode_WarlockDrainLife, SpellCode_WarlockDrainSoul, SpellCode_WarlockWrack}
 
-// improvedDrainsAffectedSpellCodes is Improved Drains' own list, the
-// same three spells Soul Siphon buffs.
-var improvedDrainsAffectedSpellCodes = []int32{SpellCode_WarlockDrainLife, SpellCode_WarlockDrainSoul, SpellCode_WarlockWrack}
+// improvedDrainsAffectedSpellCodes is Improved Drains' own list. Client
+// 1.60.1.70707's text names "Drain Life, Drain Soul, and Drain Mana"
+// (Wrack through 70685); Drain Mana has no spell file in this package and
+// its mana half is not a damage term, so Drain Life and Drain Soul remain.
+// The shipped SpellEffect row 1050496 (403511) still carries Wrack's mask
+// bit (word 1, 0x40000) and not Drain Mana's (word 0, 0x10): the hotfixed
+// text is the source, as for the mage's 70707 numbers.
+var improvedDrainsAffectedSpellCodes = []int32{SpellCode_WarlockDrainLife, SpellCode_WarlockDrainSoul}
 
 // pandemicAffectedSpellCodes is Pandemic's own list: Corruption, Bane
 // of Agony (= Curse of Agony here), Bane of Doom (= Curse of Doom),

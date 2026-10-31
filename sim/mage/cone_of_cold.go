@@ -88,9 +88,9 @@ func (mage *Mage) getConeOfColdConfig(rank int, cdTimer *core.Timer) core.SpellC
 				baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
 				// Winter's Chill (talents.go): the stacks this mage put on
 				// the target raise its damage taken from this Cone of Cold
-				// 5% a stack and add 7% of spell damage a stack, and the
+				// 20% a stack and add 7% of spell damage a stack, and the
 				// cast spends them ("your next Cone of Cold"). A debuff of
-				// its own, so the 5% multiplies with Improved Cone of Cold
+				// its own, so the 20% multiplies with Improved Cone of Cold
 				// rather than adding to it. unconfirmed: a resisted Cone of
 				// Cold is taken to spend the stacks too.
 				stacks := float64(mage.wintersChillStacks(aoeTarget))
@@ -120,11 +120,14 @@ func (mage *Mage) coneOfColdReach() float64 {
 	return coneOfColdRadius * (1 + arcticReachRadiusPerRank*float64(mage.Talents.ArcticReach))
 }
 
-// Winter's Chill on Cone of Cold (client 1.60.1.70532): a stack is 5%
-// more damage taken from the mage's next Cone of Cold and 7% of spell
-// damage added to it.
+// Winter's Chill on Cone of Cold (client 1.60.1.70707 talent text,
+// "increasing the target's damage taken from your next Cone of Cold by
+// 20% and it gains an additional 7% of your spell damage, stacking up to
+// 5 times"): a stack is 20% more damage taken from the mage's next Cone
+// of Cold (5% through 70685) and 7% of spell damage added to it. The
+// shipped SpellEffect rows on 11180 carry no 20; the text is the hotfix.
 const (
-	wintersChillConeOfColdDamagePerStack      = 0.05
+	wintersChillConeOfColdDamagePerStack      = 0.20
 	wintersChillConeOfColdCoefficientPerStack = 0.07
 )
 

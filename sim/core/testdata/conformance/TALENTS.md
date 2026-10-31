@@ -44,13 +44,13 @@ talent's maximum rank unless a note says otherwise.
 | Class | Checked | Match | Mismatch (fixed) | Unmodeled | Text-only | Unsettled | Not read |
 |---|---|---|---|---|---|---|---|
 | Druid | 52 | 40 | 5 | 6 | 0 | 1 | 0 |
-| Hunter | 50 | 31 | 3 | 15 | 1 | 0 | 0 |
-| Mage | 52 | 37 | 3 | 12 | 0 | 0 | 0 |
+| Hunter | 50 | 30 | 4 | 15 | 1 | 0 | 0 |
+| Mage | 52 | 36 | 4 | 12 | 0 | 0 | 0 |
 | Paladin | 51 | 26 | 15 | 10 | 0 | 0 | 0 |
-| Priest | 53 | 32 | 5 | 14 | 2 | 0 | 0 |
+| Priest | 53 | 31 | 5 | 15 | 2 | 0 | 0 |
 | Rogue | 53 | 40 | 2 | 11 | 0 | 0 | 0 |
 | Shaman | 50 | 33 | 6 | 8 | 3 | 0 | 0 |
-| Warlock | 52 | 32 | 10 | 10 | 0 | 0 | 0 |
+| Warlock | 52 | 31 | 11 | 10 | 0 | 0 | 0 |
 | Warrior | 47 | 41 | 1 | 4 | 0 | 1 | 5 |
 
 "Checked" counts talents whose engine field is read somewhere under `sim/<class>/`, `sim/core` or `sim/common`; a field only touched by a `_ =` line counts as checked and is an "unmodeled" row. "Not read" talents have no engine field or nothing reads it. Hunter also had Ferocity and Unleashed Fury fixed earlier, in `ef964a5aa`; they are listed as matches.
@@ -121,6 +121,23 @@ Arcane lost a node (18) and Fire moved one; 70707's mage trees are 70685's. Each
 ### Paladin (1.60.1.70707)
 
 The paladin trees were reworked: Twist of Light, Instrument of Law, One-Handed Weapon Specialization, Voice of Truth and Improved Seal of Fury are gone (their engine code with them); Divine Intellect moved to Protection, Holy Conduit to Holy and Unyielding Faith to Retribution; Oath of Light, Boundless Light, Shieldsworn, Stoicism, Turn Evil and Unsealed Wrath are new. Each row above carries the new text; the rate changes are the "mismatch, fixed" rows, each pinned by a unit test in `sim/paladin`. The reference Protection build (`ForeverProtectionTalents`) was re-carried by name onto the new tree.
+
+## Client 1.60.1.70707 hotfixes (2026-10-31)
+
+70707's talent text (the Wowhead overlay) carries number changes the shipped SpellEffect rows do not; the text is the source.
+
+- **Mage: Ice Barrier.** +15% Frost damage for 1 min and +5% more while shielded (was 3% + 3%).
+- **Mage: Winter's Chill.** Each stack is +20% damage taken from the next Cone of Cold (was +5%), still +7% of spell damage a stack, 5 stacks.
+- **Mage: Ice Lance.** +300% against a Frozen target, x4 (was +200%, x3).
+- **Mage: Arcane Blast.** 12% of Intellect as spell damage a stack (was 15%), cost +100% a stack (was +175%), 18 sec from the first cast (was 15).
+- **Mage: Arcane Resilience.** Three ranks, 75% of Intellect as armor. Still unmodeled.
+- **Priest: Binding Heal.** Gone with its talent; Holy Binding (Holy tier 3, a self-heal on Flash Heal) takes the slot, unmodeled. Renewed Hope's list drops Binding Heal. The shipped SkillLineAbility rows still list Binding Heal's ranks, so the conformance report shows it as a trainable the engine does not register.
+- **Hunter: Aspect of the Hawk.** Ranks 1-5 are 15/22/30/38/47 ranged attack power (was 20/35/50/70/90); rank 6 (55) is now the strongest a level-58 hunter has, so the engine casts it.
+- **Hunter: Trueshot Aura.** Trained ranks 15/22/30/40/50 (was 30/40/50/75/50); rank 5 is no longer inferior.
+- **Hunter: Efficiency.** The class mask gains Strider Kick.
+- **Hunter: Pathfinding, Improved Revive Pet.** Moved in the Beast Mastery tree. No rate changed.
+- **Warlock: Improved Drains.** Drain Mana replaces Wrack in the list; Wrack no longer gains the 20%.
+- **Orc: Blood Fury.** 2 min cooldown in the client's SpellCooldowns (20572); the engine already had 2 min.
 
 ## Mismatches fixed in this lane
 
@@ -238,12 +255,12 @@ The paladin trees were reworked: Twist of Light, Instrument of Law, One-Handed W
 | Improved Concussive Shot | Marksmanship | 5 | Gives your Concussive Shot a 20% chance to stun the target for 3 sec. | - | unmodeled | Concussive Shot not registered |
 | Lethal Attacks | Marksmanship | 5 | Increases your critical strike chance with all attacks by 5%. | same | match |  |
 | Improved Stings | Marksmanship | 3 | Increases the damage of your Serpent Sting ability by 20%, reduces the cooldown of your Viper Sting ability by 6 sec, and increases the duration of your Scorpid Sting ... | Serpent Sting +20% (6/13/20) | match | Viper Sting cooldown and Scorpid Sting duration: stings not registered |
-| Efficiency | Marksmanship | 5 | Reduces the Mana cost of your Shots, Stings, and melee abilities by 15%. | 15% (was 10%) | mismatch, fixed | 3% a rank; was 2% a rank on Shots, Stings and Volley |
+| Efficiency | Marksmanship | 5 | Reduces the Mana cost of your Shots, Stings, and melee abilities by 15%. | 15% (was 10%) | mismatch, fixed | 3% a rank; was 2% a rank on Shots, Stings and Volley; Strider Kick joins the melee abilities in 1.60.1.70707 (mask word 2 0x2000 -> 0x202000) |
 | Careful Aim | Marksmanship | 5 | Increases your Attack Power by 100% of your Intellect. | same | match |  |
 | Rapid Killing | Marksmanship | 2 | Reduces the cooldown on your Rapid Fire ability by 2 min. In addition, when you kill a non-trivial enemy or it dies while afflicted by your Serpent Sting, you gain Rap... | 2 min cooldown cut | match | the kill-triggered 20% Shot buff needs a target-death event the engine does not have |
 | Improved Arcane Shot | Marksmanship | 5 | Reduces the cooldown of your Arcane Shot by 1.5 sec. Does not affect the cooldown of abilities which share a cooldown with Arcane Shot. | same | match |  |
 | Lone Wolf | Marksmanship | 1 | You deal 20% increased damage with all attacks while you do not have an active pet. | same | match |  |
-| Trueshot Aura | Marksmanship | 1 | Increases the Ranged Attack Power of party members within 45 yds by 30. | 30 ranged AP | match | via the shared raid buff |
+| Trueshot Aura | Marksmanship | 1 | Increases the Ranged Attack Power of party or raid members within 45 yds by 15. | 15/22/30/40/50 ranged AP by trained rank | mismatch, fixed | 1.60.1.70707 (was 30/40/50/75/50); via the shared raid buff (core.TrueshotAuraRanks) |
 | Mortal Shots | Marksmanship | 5 | Increases the critical strike damage bonus on all ranged abilities by 30%. | same | match |  |
 | Rapid Recuperation | Marksmanship | 2 | Hitting a target with your Serpent Sting ability grants you 50% and consuming Rapid Killing grants you 100% of your Mana regeneration while casting for the next 15 sec. | 50% (Serpent Sting hit), 15 sec | match | the Rapid Killing half cannot fire |
 | Barrage | Marksmanship | 3 | Increases the damage done by your Multi-Shot, Aimed Shot, and Volley abilities by 10%. | 10% on Multi-Shot, Aimed Shot, Volley (3/7/10%; was 15% on Multi-Shot only, plus a Volley crit-bonus term) | mismatch, fixed | table 3/7/10, not linear |
@@ -278,10 +295,10 @@ The paladin trees were reworked: Twist of Light, Instrument of Law, One-Handed W
 | Arcane Subtlety | Arcane | 2 | Reduces your target's resistance to all your spells by 15 and reduces the threat caused by your Arcane spells by 30%. | 30% less threat | match | the 15 spell-resistance cut is not modeled |
 | Magic Absorption | Arcane | 2 | Increases all your resistances by 10 and causes all spells you fully resist to restore 2% of your total mana. Cannot trigger more often than 1 time per sec. | 10 resistance | match | the 2% mana restore on a full resist is not modeled |
 | Arcane Concentration | Arcane | 5 | Gives you a 10% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by... | same | match |  |
-| Arcane Resilience | Arcane | 2 | Increases your Armor by an amount equal to 50% of your Intellect. | - | unmodeled | armor from Intellect |
+| Arcane Resilience | Arcane | 3 | Increases your Armor by an amount equal to 75% of your Intellect. | - | unmodeled | armor from Intellect; three ranks since 1.60.1.70707 |
 | Arcane Geometry | Arcane | 2 | Increases the range of your Arcane spells by 6 yards. | - | unmodeled | range only |
 | Arcane Impact | Arcane | 3 | Increases the critical strike chance of your Arcane spells by 6%. | same | match |  |
-| Arcane Blast | Arcane | 1 | Blasts the target with energy, dealing 34 to 38 Arcane damage. Each time you cast Arcane Blast, you gain 15% of your Intellect as Spell Damage and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 15 sec from time of initial application. | +15% Intellect as spell power a stack, cost +175% a stack, 15 sec from the first stack, not renewed | mismatch, fixed | 1.60.1.70425 rework; the old +10% other-spell damage and the drop on another damage spell are gone |
+| Arcane Blast | Arcane | 1 | Blasts the target with energy, dealing 34 to 38 Arcane damage. Each time you cast Arcane Blast, you gain 12% of your Intellect as Spell Damage and the mana cost of Arcane Blast is increased by 100%. Effect stacks up to 4 times and lasts 18 sec from time of initial application. | +12% Intellect as spell power a stack, cost +100% a stack, 18 sec from the first stack, not renewed | mismatch, fixed | 1.60.1.70707 hotfix (was 15%, +175%, 15 sec; the shipped 400573 rows still read the old values); 1.60.1.70425 rework |
 | Arcane Shielding | Arcane | 2 | Decreases the Mana lost per point of damage taken when your Mana Shield spell is active by 33% and increases the resistances granted by your Mage Armor spell by 50%. | - | unmodeled | Mana Shield and Mage Armor are not modeled |
 | Improved Counterspell | Arcane | 2 | Your Counterspell also Silences the target for 4 sec. | - | unmodeled | silence |
 | Arcane Meditation | Arcane | 3 | Allows 50% of your Mana regeneration to continue while casting. | same | match |  |
@@ -316,7 +333,7 @@ The paladin trees were reworked: Twist of Light, Instrument of Law, One-Handed W
 | Improved Frost Nova | Frost | 2 | Reduces the cooldown of your Frost Nova spell by 4 sec. | same | match |  |
 | Frostbite | Frost | 3 | Gives your Chill effects a 15% chance to Freeze the target for 5 sec. | same | match |  |
 | Frost Channeling | Frost | 3 | Reduces the mana cost of your Frost spells by 15% and reduces the threat caused by your Frost spells by 30%. | 15% cost, 30% threat | match |  |
-| Ice Lance | Frost | 1 | Deals 28 to 32 Frost damage to an enemy target. Deals 200% increased damage to Frozen targets. | x3 against a Frozen target | mismatch, fixed | 1.60.1.70425: 200% (was 300%, x4) |
+| Ice Lance | Frost | 1 | Deals 28 to 32 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets. | x4 against a Frozen target | mismatch, fixed | 1.60.1.70707 hotfix: 300% (70425-70685 200%, x3; the shipped row 1342606 still reads 200) |
 | Improved Blizzard | Frost | 3 | Adds a Chill effect to your Blizzard spell. This effect lowers the target's movement speed by 40% for 1.5 sec. | chill 1.5 sec | match | the 15/25/40% slow value is not read by the engine; only the chill (Fingers of Frost, Frostbite) is |
 | Arctic Reach | Frost | 2 | Increases the range of your Frostbolt and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 20%. | - | unmodeled | range and radius |
 | Ice Block | Frost | 1 | You become encased in a block of ice, protecting you from all physical attacks and spells for 10 sec, but during that time you cannot attack, move, or cast spells. | - | unmodeled | defensive |
@@ -324,8 +341,8 @@ The paladin trees were reworked: Twist of Light, Instrument of Law, One-Handed W
 | Improved Cone of Cold | Frost | 3 | Increases the damage dealt by your Cone of Cold spell by 35%. | same | match |  |
 | Cold Snap | Frost | 1 | Finishes the remaining cooldown on all your other Frost spells. | same | match |  |
 | Fingers of Frost | Frost | 2 | Gives your Chill effects a 15% chance to grant you the Fingers of Frost effect, which treats your next 2 spells cast as if the target were Frozen. Lasts 15 sec. | same | match |  |
-| Winter's Chill | Frost | 5 | Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered Ice Lance spells a 100% chance to apply Winter's Chill, increasing the target's damage taken from your next Cone of Cold by 5% and it gains an additional 7% of your spell damage, stacking up to 5 times. | 20% a rank chance on a landed Frostbolt or Fingers of Frost Ice Lance; 5 stacks; the next Cone of Cold takes +5% damage and +7% of spell damage a stack and spends them | mismatch, fixed | 1.60.1.70532 rework (cone_of_cold.go); Frost Blast is not registered |
-| Ice Barrier | Frost | 1 | Shield yourself, absorbing [448 + (Frost spell power * 0.1) * (1)] damage and increasing your Frost damage by 3% for 1 min. While shielded, your Frost damage is increased by an additional 3% and you do not lose casting time when you take damage. | +3% Frost damage for 1 min and +3% while shielded | match | 1.60.1.70532; the absorb is not modeled, nothing hits a simmed mage, so the shield holds its minute (ice_barrier.go) |
+| Winter's Chill | Frost | 5 | Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered Ice Lance spells a 100% chance to apply Winter's Chill, increasing the target's damage taken from your next Cone of Cold by 20% and it gains an additional 7% of your spell damage, stacking up to 5 times. | 20% a rank chance on a landed Frostbolt or Fingers of Frost Ice Lance; 5 stacks; the next Cone of Cold takes +20% damage and +7% of spell damage a stack and spends them | mismatch, fixed | 1.60.1.70707 hotfix (+20% a stack, was +5%); 1.60.1.70532 rework (cone_of_cold.go); Frost Blast is not registered |
+| Ice Barrier | Frost | 1 | Shield yourself, absorbing [448 + (Frost spell power * 0.1) * (1)] damage and increasing your Frost damage by 15% for 1 min. While shielded, your Frost damage is increased by an additional 5% and you do not lose casting time when you take damage. | +15% Frost damage for 1 min and +5% while shielded | mismatch, fixed | 1.60.1.70707 hotfix (was 3% + 3%; the shipped rows still read 3 and 3); the absorb is not modeled, nothing hits a simmed mage, so the shield holds its minute (ice_barrier.go) |
 
 ## Paladin
 
@@ -402,7 +419,7 @@ The paladin trees were reworked: Twist of Light, Instrument of Law, One-Handed W
 | Soul Warding | Discipline | 1 | Reduces the cooldown on your Power Word: Shield spell by 4 sec and reduces its mana cost by 15%. | same | match |  |
 | Improved Mana Burn | Discipline | 2 | Reduces the casting time of your Mana Burn spell by 1.0 sec. | - | unmodeled | Mana Burn not registered |
 | Penance | Discipline | 1 | Launches a volley of holy light at the target, causing 45 Holy damage to an enemy, or 134 healing to an ally, instantly and every 1 sec for 2 sec. | spell row | text-only | checked by the spell-row conformance report |
-| Renewed Hope | Discipline | 5 | Your heals from Flash Heal, Binding Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 10% increased critical strike chance when cast on targets with Weakened Sou... | 10% crit on Weakened Soul targets, -5 sec Weakened Soul | match |  |
+| Renewed Hope | Discipline | 5 | Your heals from Flash Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 10% increased critical strike chance when cast on targets with Weakened Soul, and reduce the remaining duration of Weakened Soul on their target by 5 sec. | 10% crit on Weakened Soul targets, -5 sec Weakened Soul | match | Binding Heal left the list with its talent in 1.60.1.70707 |
 | Divine Aegis | Discipline | 3 | Your non-periodic critical heals create a protective shield on the target, absorbing 15% of the amount healed. Shields up to (20 * 60) damage and lasts 12 sec. | 5% a rank, capped at 20 a level | match | the cap is 1.60.1.70425's |
 | Power Infusion | Discipline | 1 | Infuses the target with power, increasing their spell damage and healing done by 20% for 15 sec. | same | match |  |
 | Twilight Focus | Holy | 3 | Gives your spells a 70% chance to not lose casting time when you take damage. | - | unmodeled | pushback avoidance |
@@ -416,7 +433,7 @@ The paladin trees were reworked: Twist of Light, Instrument of Law, One-Handed W
 | Holy Reach | Holy | 2 | Increases the range of your Smite and Holy Fire spells and the radius of your Prayer of Healing and Holy Nova spells by 20%. | - | unmodeled | range and radius |
 | Improved Healing | Holy | 3 | Reduces the Mana cost of your Lesser Heal, Heal, Greater Heal, Penance, and Prayer of Mending spells by 15%. | 15% cost | match | Penance and Prayer of Mending included |
 | Searing Light | Holy | 2 | Increases your Holy damage done by 5%, and gives a 10% chance each time your Holy Fire spell deals periodic damage for your next Holy Nova to cost no Mana. | Holy damage +2/5% (was 5/10%) | mismatch, fixed | Smite and Holy Fire only; the Holy Nova free-cast chance is not modeled |
-| Binding Heal | Holy | 1 | Heals a friendly target and the caster for 236 to 284. Low threat. | same | match |  |
+| Holy Binding | Holy | 1 | Each time you heal a target other than yourself with Flash Heal, you are healed for 50% as much. This healing generates no threat. | - | unmodeled | 1.60.1.70707, Binding Heal's replacement; the raid damage model never damages the priest, so the self-heal is all overhealing |
 | Litany of Light | Holy | 2 | When you cast a healing spell, gain Mana equal to 10% of the base cost of the spell if your previous heal was a different spell. | same | match |  |
 | Spirit of Redemption | Holy | 1 | Upon death, the priest becomes the Spirit of Redemption for 15 sec. The Spirit of Redemption cannot move, attack, be attacked or targeted by any spells or effects. Whi... | - | unmodeled | on death |
 | Spiritual Guidance | Holy | 5 | Increases your spell healing by up to 25% of your total Spirit and your spell damage by up to 8% of your total Spirit. | healing 25% of Spirit | match | the spell-damage half (1/3/5/6/8% of Spirit) is not modeled; the engine adds only the healing dependency |
@@ -561,7 +578,7 @@ The paladin trees were reworked: Twist of Light, Instrument of Law, One-Handed W
 | Improved Corruption | Affliction | 5 | Reduces the casting time of your Corruption spell by 2 sec and increases the damage it deals by 10%. | -2 sec cast, +10% damage (was cast time only) | mismatch, fixed | damage half was unread |
 | Grim Reach | Affliction | 2 | Increases the range of your Affliction spells by 20%. | - | unmodeled | Malediction's slot since 1.60.1.70425; range only |
 | Soul Harvest | Affliction | 2 | Killing a non-trivial target afflicted by your Drain Soul increases your Mana regeneration by 100% for 10 sec and allows 100% of normal Mana regeneration to continue w... | - | unmodeled | kill-triggered regen needs a target-death event |
-| Improved Drains | Affliction | 3 | Increases health drained or damage done by your Drain Life, Drain Soul, and Wrack spells by 20%. | same | match |  |
+| Improved Drains | Affliction | 3 | Increases Health drained, damage done, or Mana drained by your Drain Life, Drain Soul, and Drain Mana spells by 20%. | 20% Drain Life and Drain Soul damage | mismatch, fixed | 1.60.1.70707 names Drain Mana where it named Wrack; Wrack no longer gains it (the shipped mask 403511 still carries Wrack); Drain Mana is not registered |
 | Improved Bane of Agony | Affliction | 2 | Increases the damage done by your Bane of Agony by 10%. | same | match |  |
 | Fel Concentration | Affliction | 3 | Gives your Drain Life, Drain Mana, Drain Soul, and Wrack spells a 70% chance to not lose casting time when you take damage. | 70% pushback reduction | match | 1.60.1.70532 words it as a chance; pushback is not rolled in the fights modeled |
 | Amplify Curse | Affliction | 1 | Increases the effect of your next Curse of Weakness or Bane of Agony by 50%, or your next Curse of Exhaustion by 20%. Lasts 30 sec. | +50% Curse of Weakness / Bane of Agony, +20% Exhaustion | match | spell |

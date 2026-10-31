@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Keep Ice Barrier up: the talent adds 3% Frost damage for a minute after a cast and another 3% while the shield holds. It goes up before the pull and again when the shield's minute runs out. The condition names the shield with its rank, so while levelling it is rewritten to the same lower rank the cast uses. Nothing hits the simulated mage, so the shield never breaks and its extra 3% holds all minute; in a fight where it breaks, only the first 3% stays.",
+      "notes": "Keep Ice Barrier up: the talent adds 15% Frost damage for a minute after a cast and another 5% while the shield holds (client 1.60.1.70707). It goes up before the pull and again when the shield's minute runs out. The condition names the shield with its rank, so while levelling it is rewritten to the same lower rank the cast uses. Nothing hits the simulated mage, so the shield never breaks and its extra 3% holds all minute; in a fight where it breaks, only the first 3% stays.",
       "action": {
         "condition": {
           "not": {
@@ -92,7 +92,7 @@
       }
     },
     {
-      "notes": "Cone of Cold on five Winter's Chill stacks: Frostbolt and empowered Ice Lance build the stacks, and Cone of Cold spends them for 25% more damage and 35% more of your spell damage. You need to stand within 10 yards of the target. The line asks whether the target can carry Winter's Chill before it counts stacks: without the talent the aura does not exist, a condition on a missing aura is dropped, and the line would cast Cone of Cold on cooldown. Above 50% mana only: below that the mana is worth more as Frostbolts. At the raid band 20% to 60% gates all measured at least as well as no gate; 50% is the lowest that keeps the bare ladder character's level-40 rung from spending its pool on Cone of Cold. A raid frost mage stands at range, where the cone cannot reach the boss, so the engine refuses the cast beyond 10 yards (12 with Arctic Reach) and the tier list, which stands every caster at 30 yards, never fires this line. It fires for a character set to stand within reach, such as on a boss with no cleave or tail.",
+      "notes": "Cone of Cold on five Winter's Chill stacks: Frostbolt and empowered Ice Lance build the stacks, and Cone of Cold spends them for 100% more damage and 35% more of your spell damage (20% a stack since client 1.60.1.70707). You need to stand within 10 yards of the target. The line asks whether the target can carry Winter's Chill before it counts stacks: without the talent the aura does not exist, a condition on a missing aura is dropped, and the line would cast Cone of Cold on cooldown. Above 50% mana only: below that the mana is worth more as Frostbolts. At the raid band 20% to 60% gates all measured at least as well as no gate; 50% is the lowest that keeps the bare ladder character's level-40 rung from spending its pool on Cone of Cold. A raid frost mage stands at range, where the cone cannot reach the boss, so the engine refuses the cast beyond 10 yards (12 with Arctic Reach) and the tier list, which stands every caster at 30 yards, never fires this line. It fires for a character set to stand within reach, such as on a boss with no cleave or tail.",
       "action": {
         "condition": {
           "and": {

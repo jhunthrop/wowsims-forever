@@ -218,8 +218,8 @@ func TestAspectOfTheHawkChargesManaMatchingSpellconst(t *testing.T) {
 	}{
 		{10, 13165, 20},
 		{48, 14321, 90},
-		{58, 14321, 90},
-		{60, core.TernaryInt32(core.IncludeAQ, 25296, 14321), core.TernaryFloat64(core.IncludeAQ, 120, 90)},
+		{58, 14322, 110},
+		{60, core.TernaryInt32(core.IncludeAQ, 25296, 14322), core.TernaryFloat64(core.IncludeAQ, 120, 110)},
 	}
 	for _, c := range cases {
 		_, built, _ := newBareHunterAtLevel(t, c.level)
@@ -233,31 +233,31 @@ func TestAspectOfTheHawkChargesManaMatchingSpellconst(t *testing.T) {
 	}
 }
 
-// TestAspectOfTheHawkRank6AttackPowerMatchesSpellconst guards rank 6
-// (14322, learned at 58) against reverting to Classic's 110 ranged
-// attack power: spellconst's own effect amount for 14322 is 55,
-// corroborated by Wowhead's Forever tooltip for that spell ("Mod Ranged
-// Attack Power Value: 56"). getMaxAspectOfTheHawkAttackPower is a pure
-// lookup (no aura registration), so it's safe to call directly.
-func TestAspectOfTheHawkRank6AttackPowerMatchesSpellconst(t *testing.T) {
+// TestAspectOfTheHawkAttackPowerFollowsThe70707Ranks pins the client's
+// aura-124 base points on every rank since 1.60.1.70707: ranks 1-5 cut to
+// 15/22/30/38/47 (from 20/35/50/70/90), rank 6 (14322) 55 and rank 7
+// (25296) 120 unchanged.
+func TestAspectOfTheHawkAttackPowerFollowsThe70707Ranks(t *testing.T) {
 	_, built, _ := newBareHunterAtLevel(t, 60)
-	if got, want := built.getMaxAspectOfTheHawkAttackPower(6), 55.0; got != want {
-		t.Errorf("Aspect of the Hawk rank 6 attack power = %.0f, want %.0f", got, want)
+	want := []float64{0, 15, 22, 30, 38, 47, 55, 120}
+	for rank := 1; rank < len(want); rank++ {
+		if got := built.getMaxAspectOfTheHawkAttackPower(rank); got != want[rank] {
+			t.Errorf("Aspect of the Hawk rank %d attack power = %.0f, want %.0f", rank, got, want[rank])
+		}
 	}
 }
 
-// TestAspectOfTheHawkSkipsTheInferiorRank6 guards the registration rule:
-// rank 6 (14322) gives 55 ranged attack power against rank 5's 90, so a
-// hunter who has learned both casts rank 5, the way a player does. Rank 6
-// is never the registered spell, and rank 5 is.
-func TestAspectOfTheHawkSkipsTheInferiorRank6(t *testing.T) {
+// TestAspectOfTheHawkCastsRank6From58: rank 6 (14322, 55) is now stronger
+// than rank 5 (14321, 47), so a hunter who has learned it casts rank 6.
+// Through 70685 rank 5 (90) won and rank 6 was skipped.
+func TestAspectOfTheHawkCastsRank6From58(t *testing.T) {
 	for _, level := range []int32{58, 59, 60} {
 		_, built, _ := newBareHunterAtLevel(t, level)
-		if built.GetSpell(core.ActionID{SpellID: 14322}) != nil {
-			t.Errorf("level-%d hunter registered Aspect of the Hawk rank 6 (14322), weaker than rank 5", level)
+		if got := built.getMaxHawkRank(); got != 6 {
+			t.Errorf("level-%d hunter casts Aspect of the Hawk rank %d, want 6", level, got)
 		}
-		if built.GetSpell(core.ActionID{SpellID: 14321}) == nil {
-			t.Errorf("level-%d hunter has no Aspect of the Hawk rank 5 (14321)", level)
+		if built.GetSpell(core.ActionID{SpellID: 14322}) == nil {
+			t.Errorf("level-%d hunter has no Aspect of the Hawk rank 6 (14322)", level)
 		}
 	}
 }

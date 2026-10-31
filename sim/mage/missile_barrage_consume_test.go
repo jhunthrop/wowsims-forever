@@ -13,9 +13,8 @@ import (
 // the proc's timestamp completes its cast in that same instant, so the first
 // free channel kept the buff and the next one was free too (audit X2).
 func TestMissileBarrageIsSpentByTheFirstArcaneMissiles(t *testing.T) {
-	// Frost talents with Missile Barrage 2/2 (fourth Arcane talent).
-	talents := "0502005023010300000-00000000000000000-053500010120321251"
-	built, sim, target := newFrostMageSimWithTalents(t, core.DefaultTargetProtoLvl60, talents)
+	// The reference Frost build carries Missile Barrage 1/1.
+	built, sim, target := newFrostMageSimWithTalents(t, core.DefaultTargetProtoLvl60, ForeverFrostTalents)
 	if built.MissileBarrageAura == nil {
 		t.Fatal("Missile Barrage is not registered with the talent taken")
 	}

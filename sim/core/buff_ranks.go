@@ -121,14 +121,15 @@ var (
 	}
 
 	// Trueshot Aura: the Marksmanship talent's aura, ranked by trainer.
-	// Rank 5 (20906, level 60) is 50 ranged attack power against rank 4's
-	// 75 in the client, so a level-60 hunter keeps rank 4.
+	// Client 1.60.1.70707 cut ranks 1-4 to 15/22/30/40 (from 30/40/50/75),
+	// so rank 5 (20906, level 60, 50) is the strongest again and no longer
+	// inferior.
 	TrueshotAuraRanks = BuffRanks{
-		{SpellID: 1299346, Level: 25, Amount: 30},
-		{SpellID: 1299348, Level: 32, Amount: 40},
-		{SpellID: 19506, Level: 40, Amount: 50},
-		{SpellID: 20905, Level: 50, Amount: 75},
-		{SpellID: 20906, Level: 60, Amount: 50, Inferior: true},
+		{SpellID: 1299346, Level: 25, Amount: 15},
+		{SpellID: 1299348, Level: 32, Amount: 22},
+		{SpellID: 19506, Level: 40, Amount: 30},
+		{SpellID: 20905, Level: 50, Amount: 40},
+		{SpellID: 20906, Level: 60, Amount: 50},
 	}
 
 	// Heart of the Lion's area buff (409583): melee and ranged attack power

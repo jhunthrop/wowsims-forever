@@ -13,17 +13,19 @@ var IceBarrierSpellId = [IceBarrierRanks + 1]int32{0, 11426, 13031, 13032, 13033
 var IceBarrierManaCost = [IceBarrierRanks + 1]float64{0, 305, 360, 420, 480}
 var IceBarrierLevel = [IceBarrierRanks + 1]int{0, 40, 46, 52, 58}
 
-// Ice Barrier (client 1.60.1.70532): "Shield yourself, absorbing [448 +
+// Ice Barrier (client 1.60.1.70707): "Shield yourself, absorbing [448 +
 // (Frost spell power * 0.1)] damage and increasing your Frost damage by
-// 3% for 1 min. While shielded, your Frost damage is increased by an
-// additional 3% and you do not lose casting time when you take damage."
-// Nothing hits a simmed mage, so the absorb is not modeled and a shield
-// holds its full minute; the two 3%s stay separate mods so an absorb
-// model can end the shielded one early.
+// 15% for 1 min. While shielded, your Frost damage is increased by an
+// additional 5% and you do not lose casting time when you take damage."
+// The numbers are the hotfixed talent text (the Wowhead overlay); the
+// shipped SpellEffect rows (1364979/1364980 on 11426) still read 3 and 3,
+// the 70532 values. Nothing hits a simmed mage, so the absorb is not
+// modeled and a shield holds its full minute; the two halves stay
+// separate mods so an absorb model can end the shielded one early.
 const (
 	iceBarrierDuration               = time.Minute
-	iceBarrierFrostDamagePct         = 3
-	iceBarrierShieldedFrostDamagePct = 3
+	iceBarrierFrostDamagePct         = 15
+	iceBarrierShieldedFrostDamagePct = 5
 )
 
 func (mage *Mage) registerIceBarrierSpell() {

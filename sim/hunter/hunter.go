@@ -159,7 +159,9 @@ func (hunter *Hunter) GetHunter() *Hunter {
 func (hunter *Hunter) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
 	// Trueshot Aura (talents/hunter.json node 105004, Marksmanship,
 	// bool, spell 1299346): "Increases the Ranged Attack Power of party
-	// members within 45 yards by 30." proto.RaidBuffs.TrueshotAura and
+	// or raid members within 45 yds by 15." (client 1.60.1.70707; the
+	// trained ranks go to 50 at level 60, core.TrueshotAuraRanks).
+	// proto.RaidBuffs.TrueshotAura and
 	// core.TrueshotAura (buffs.go) already carry the aura itself - this
 	// is already a raid buff flag, just not one this talent set
 	// before now. raid.go's GetRaidBuffs calls every player's

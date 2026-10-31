@@ -64,6 +64,10 @@ func TestDecodeFlatBonus(t *testing.T) {
 		{"healing alone", 9318, stats.Stats{stats.HealingPower: 33}},
 		{"hybrid healing and damage", 467550, stats.Stats{stats.HealingPower: 44, stats.SpellDamage: 15}},
 		{"hit is one stat, not melee plus spell", 1300947, stats.Stats{stats.Hit: 1 * HitRatingPerHitChance}},
+		// "Increased Hit Chance 01" carries aura 54 and, since client
+		// 1.60.1.70707, aura 55 beside it: still one 1% Hit, not 2%.
+		{"melee and spell hit rows are one hit", 15464, stats.Stats{stats.Hit: 1 * HitRatingPerHitChance}},
+		{"melee and spell hit rows on the set copy", 432639, stats.Stats{stats.Hit: 1 * HitRatingPerHitChance}},
 		{"haste is melee and spell", 1300968, stats.Stats{stats.MeleeHaste: HasteRatingPerHastePercent, stats.SpellHaste: HasteRatingPerHastePercent}},
 		{"spirit", 1300943, stats.Stats{stats.Spirit: 10}},
 		{"defense skill", 1300949, stats.Stats{stats.Defense: 7 * DefenseRatingPerDefense}},

@@ -30,19 +30,21 @@ import (
 //     536870912, with a second effect triggering spell 36032). 42896 is
 //     an NPC/enrage variant, not the player's rank 3.
 //
-// The tooltip (ranks 1-5, client 1.60.1.70425: "Blasts the target with
+// The tooltip (ranks 1-5, client 1.60.1.70707: "Blasts the target with
 // energy, dealing N Arcane damage. Each time you cast Arcane Blast, you
-// gain 15% of your Intellect as Spell Damage and the mana cost of Arcane
-// Blast is increased by 175%. Effect stacks up to 4 times and lasts 15
+// gain 12% of your Intellect as Spell Damage and the mana cost of Arcane
+// Blast is increased by 100%. Effect stacks up to 4 times and lasts 18
 // sec from time of initial application.") is one spell id per rank
 // (400574, 1239696, 1239697, 1239699, 1239700; SpellEffect base points
 // 32/78/101/168/236 with variance 0.151, points per level
 // 0.5/0.8/1.0/1.3/1.6, coefficient 0.429) plus a shared stacking-buff
 // spell, id 400573: aura 174 (spell damage from a percentage of a stat)
-// at +15 of Intellect and a cost modifier of +175 a stack. The
-// 1.60.1.70374 version was +10% damage to the mage's other spells for 8
-// sec, dropped by any other damage spell; both halves are gone from the
-// client's text and rows.
+// and a cost modifier a stack. 70707's text is a hotfix: the shipped
+// 400573 rows still read +15 of Intellect, +175 cost and a 15 sec
+// duration (the 70425 through 70685 values), so the text is the source.
+// The 1.60.1.70374 version was +10% damage to the mage's other spells
+// for 8 sec, dropped by any other damage spell; both halves are gone
+// from the client's text and rows.
 const ArcaneBlastRanks = 5
 
 var ArcaneBlastSpellId = [ArcaneBlastRanks + 1]int32{0, 400574, 1239696, 1239697, 1239699, 1239700}
@@ -59,12 +61,12 @@ var ArcaneBlastSpellCoeff = [ArcaneBlastRanks + 1]float64{0, 0.429, 0.429, 0.429
 const arcaneBlastBuffSpellId int32 = 400573
 
 const (
-	// "you gain 15% of your Intellect as Spell Damage" per stack, up to 4.
-	arcaneBlastIntellectShare = 0.15
+	// "you gain 12% of your Intellect as Spell Damage" per stack, up to 4.
+	arcaneBlastIntellectShare = 0.12
 	arcaneBlastMaxStacks      = 4
-	// "lasts 15 sec from time of initial application": a further cast
-	// adds a stack without renewing the 15 sec.
-	arcaneBlastDuration = time.Second * 15
+	// "lasts 18 sec from time of initial application": a further cast
+	// adds a stack without renewing the 18 sec.
+	arcaneBlastDuration = time.Second * 18
 )
 
 // Every rank's flat ManaCost in the client is 0, but that column is not
@@ -79,18 +81,18 @@ const (
 // from the same client rows.
 //
 // The buff (400573) effect 1 is "mana cost of Arcane Blast is increased
-// by 175%" per stack, up to 4 stacks: the fifth consecutive cast costs
-// 15% x (1 + 4 x 1.75) = 120% of base mana. Modeled by setting every
-// registered rank's Cost.Multiplier from the stack count, the same
-// runtime cost-multiplier knob Missile Barrage uses to make Arcane
-// Missiles free (sim/mage/talents.go).
+// by 100%" per stack (175% through 70685), up to 4 stacks: the fifth
+// consecutive cast costs 15% x (1 + 4 x 1.00) = 75% of base mana.
+// Modeled by setting every registered rank's Cost.Multiplier from the
+// stack count, the same runtime cost-multiplier knob Missile Barrage uses
+// to make Arcane Missiles free (sim/mage/talents.go).
 const (
 	arcaneBlastManaCostPct             = 15.0
-	arcaneBlastCostIncreasePctPerStack = 175
+	arcaneBlastCostIncreasePctPerStack = 100
 )
 
 // setArcaneBlastCostMultiplier applies the buff's cost ramp to every
-// rank registered so far: 100 at zero stacks, +175 per stack.
+// rank registered so far: 100 at zero stacks, +100 per stack.
 func (mage *Mage) setArcaneBlastCostMultiplier(stacks int32) {
 	multiplier := 100 + arcaneBlastCostIncreasePctPerStack*stacks
 	for _, spell := range mage.ArcaneBlast {
@@ -185,7 +187,7 @@ func (mage *Mage) getArcaneBlastConfig(rank int) core.SpellConfig {
 				}
 			})
 
-			// "lasts 15 sec from time of initial application": only the
+			// "lasts 18 sec from time of initial application": only the
 			// first cast starts the clock.
 			if !mage.ArcaneBlastAura.IsActive() {
 				mage.ArcaneBlastAura.Activate(sim)
