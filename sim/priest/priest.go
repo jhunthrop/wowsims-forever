@@ -73,6 +73,8 @@ const (
 	PriestSpellMaskPrayerOfMending
 	PriestSpellMaskDesperatePrayer
 	PriestSpellMaskLightwell
+	PriestSpellMaskMindBlast
+	PriestSpellMaskVampiricEmbrace
 )
 
 // PriestSpellMaskInstantShadowDamage is every Shadow damage spell this
@@ -95,7 +97,7 @@ const PriestSpellMaskInstantHealing = PriestSpellMaskRenew | PriestSpellMaskPena
 // client cast_time_ms of 0, which is what Mental Agility's "instant cast
 // spells" reads.
 const PriestSpellMaskInstantCast = PriestSpellMaskInstantShadowDamage | PriestSpellMaskInstantHealing |
-	PriestSpellMaskPowerWordShield
+	PriestSpellMaskPowerWordShield | PriestSpellMaskVampiricEmbrace
 
 type Priest struct {
 	core.Character

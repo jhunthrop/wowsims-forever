@@ -28,12 +28,15 @@ func (priest *Priest) getMindBlastBaseConfig(rank int, cdTimer *core.Timer) core
 	level := MindBlastLevel[rank]
 
 	return core.SpellConfig{
-		SpellCode:   SpellCode_PriestMindBlast,
-		ActionID:    core.ActionID{SpellID: spellId},
-		SpellSchool: core.SpellSchoolShadow,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       SpellFlagPriest | core.SpellFlagAPL,
+		SpellCode: SpellCode_PriestMindBlast,
+		ActionID:  core.ActionID{SpellID: spellId},
+		// The mask lets Shadowform's ClassSpellsOnly mods ("all Shadow
+		// spells": half mana cost, +100% crit damage bonus) reach it.
+		ClassSpellMask: PriestSpellMaskMindBlast,
+		SpellSchool:    core.SpellSchoolShadow,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          SpellFlagPriest | core.SpellFlagAPL,
 
 		RequiredLevel: level,
 		Rank:          rank,
