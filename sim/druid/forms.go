@@ -149,12 +149,6 @@ func (druid *Druid) registerCatFormSpell() {
 			druid.energyOnLeavingCat = druid.CurrentEnergy()
 			druid.leftCatFormAt = sim.CurrentTime
 
-			// Tiger's Fury is learned at level 24 (tigers_fury.go); below
-			// that, druid.TigersFuryAura is never registered.
-			if druid.TigersFuryAura != nil {
-				druid.TigersFuryAura.Deactivate(sim)
-			}
-
 			druid.AutoAttacks.SetMH(druid.WeaponFromMainHand())
 
 			druid.PseudoStats.ThreatMultiplier /= 0.71
@@ -177,7 +171,6 @@ func (druid *Druid) registerCatFormSpell() {
 				druid.manageCooldownsEnabled()
 				druid.UpdateManaRegenRates()
 
-				//druid.TigersFuryAura.Deactivate(sim)
 			}
 		},
 	})

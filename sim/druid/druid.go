@@ -64,7 +64,6 @@ const (
 	DruidSpellMaskShred
 	DruidSpellMaskStarfire
 	DruidSpellMaskWrath
-	DruidSpellMaskTigersFury
 	DruidSpellMaskMaul
 	DruidSpellMaskSwipe
 	DruidSpellMaskLacerate
@@ -173,7 +172,6 @@ type Druid struct {
 	Starfire             []*DruidSpell
 	Swiftmend            *DruidSpell
 	SwipeBear            *DruidSpell
-	TigersFury           *DruidSpell
 	Tranquility          []*DruidSpell
 	WildGrowth           []*DruidSpell
 	Wrath                []*DruidSpell
@@ -202,7 +200,6 @@ type Druid struct {
 	MoonkinFormAura      *core.Aura
 	NaturesGraceProcAura *core.Aura
 	ProwlAura            *core.Aura
-	TigersFuryAura       *core.Aura
 
 	BleedCategories core.ExclusiveCategoryArray
 
@@ -294,7 +291,6 @@ func (druid *Druid) RegisterFeralCatSpells() {
 	druid.registerShiftingPowerSpell()
 	druid.registerShredSpell()
 	druid.registerClawSpell()
-	druid.registerTigersFurySpell()
 	// Cat Form is not learned until level 20 (spellconst: spell 768), so a
 	// leveling feral druid below 20 has nothing else to cast; register the same
 	// baseline caster kit RegisterBalanceSpells does. Both self-gate by

@@ -18,8 +18,7 @@ func (cat *FeralDruid) doAoeRotation(sim *core.Simulation) (bool, time.Duration)
 	latencySecs := cat.latency.Seconds()
 	shiftCost := cat.CatForm.DefaultCast.Cost
 
-	waitForTf := cat.Talents.Berserk && (cat.TigersFury.ReadyAt() <= cat.BerserkAura.Duration) && (cat.TigersFury.ReadyAt()+time.Second < simTimeRemain-cat.BerserkAura.Duration)
-	berserkNow := cat.Berserk.IsReady(sim) && !waitForTf && !isClearcast
+	berserkNow := cat.Berserk.IsReady(sim) && !isClearcast
 
 	useBuilder := curCp == 0 && (!cat.SavageRoarAura.IsActive() || cat.SavageRoarAura.RemainingDuration(sim) <= time.Second)
 

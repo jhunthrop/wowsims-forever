@@ -87,7 +87,8 @@ func (druid *Druid) newRakeSpellConfig(rank int) core.SpellConfig {
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			druid.BreakProwl(sim)
 
-			result := spell.CalcAndDealDamage(sim, target, initialDamage.Roll(sim, casterLevel), spell.OutcomeMeleeSpecialHitAndCrit)
+			baseDamage := initialDamage.Roll(sim, casterLevel) * druid.RendAndTearMultiplier(target)
+			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
 			if result.Landed() {
 				druid.AddComboPoints(sim, 1, target, spell.ComboPointMetrics())

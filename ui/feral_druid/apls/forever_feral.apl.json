@@ -126,16 +126,6 @@
       }
     },
     {
-      "notes": "Tiger's Fury on cooldown for the free energy; it costs nothing and the engine gates it on its own 30 second cooldown.",
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 5217
-          }
-        }
-      }
-    },
-    {
       "notes": "At 5 combo points, Rip once it has under 6 seconds left -- this refreshes a little before the DoT actually falls off, so Ferocious Bite stays reachable whenever Rip still has real time on it.",
       "action": {
         "condition": {

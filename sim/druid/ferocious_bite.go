@@ -91,6 +91,7 @@ func (druid *Druid) newFerociousBiteSpellConfig(rank int) core.SpellConfig {
 				damagePerComboPoint*comboPoints +
 				attackPower*0.03*comboPoints +
 				damagePerEnergy*excessEnergy
+			baseDamage *= druid.RendAndTearMultiplier(target)
 
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 

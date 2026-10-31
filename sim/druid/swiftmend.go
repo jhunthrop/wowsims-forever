@@ -38,7 +38,7 @@ func (druid *Druid) registerSwiftmendSpell() {
 		SpellSchool:    core.SpellSchoolNature,
 		DefenseType:    core.DefenseTypeMagic,
 		ProcMask:       core.ProcMaskSpellHealing,
-		Flags:          core.SpellFlagHelpful | core.SpellFlagAPL | core.SpellFlagIgnoreAttackerModifiers,
+		Flags:          core.SpellFlagHelpful | core.SpellFlagAPL | core.SpellFlagIgnoreAttackerModifiers | SpellFlagOmen,
 
 		RequiredLevel: 1,
 

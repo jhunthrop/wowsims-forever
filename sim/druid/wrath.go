@@ -73,7 +73,9 @@ func (druid *Druid) newWrathSpellConfig(rank int) core.SpellConfig {
 		SpellSchool:    core.SpellSchoolNature,
 		DefenseType:    core.DefenseTypeMagic,
 		ProcMask:       core.ProcMaskSpellDamage,
-		Flags:          SpellFlagOmen | core.SpellFlagAPL | core.SpellFlagResetAttackSwing,
+		// No SpellFlagOmen: Clearcasting "is not consumed by Wrath" (spell
+		// 16864), and Wrath is outside its class mask (spell 16870).
+		Flags: core.SpellFlagAPL | core.SpellFlagResetAttackSwing,
 
 		RequiredLevel: level,
 		Rank:          rank,

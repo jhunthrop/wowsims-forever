@@ -101,6 +101,47 @@
       }
     },
     {
+      "notes": "Lightning Bolt at five Maelstrom Weapon stacks, right after Stormstrike so its +20% on the next Lightning Bolt is up: each stack takes 4% a talent rank off the bolt's cast time and mana, so 5/5 makes it instant and free. Gated on auraIsKnown so a build without the talent skips the line instead of reading a missing aura as always-ready.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 408498
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "auraNumStacks": {
+                      "auraId": {
+                        "spellId": 408498
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "5"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 15208,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
       "notes": "Keep Searing Totem down for the extra fire damage, but not with less than 20 seconds left -- no point paying for a totem that will barely tick.",
       "action": {
         "condition": {

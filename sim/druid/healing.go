@@ -70,7 +70,8 @@ func (druid *Druid) healingSpellConfig(rank int, spec healingRank, code int32, m
 		SpellSchool:    core.SpellSchoolNature,
 		DefenseType:    core.DefenseTypeMagic,
 		ProcMask:       core.ProcMaskSpellHealing,
-		Flags:          core.SpellFlagHelpful | core.SpellFlagAPL,
+		// Every druid heal is in Clearcasting's class mask (spell 16870).
+		Flags: core.SpellFlagHelpful | core.SpellFlagAPL | SpellFlagOmen,
 
 		RequiredLevel: spec.level(),
 		Rank:          rank,

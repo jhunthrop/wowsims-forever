@@ -301,66 +301,117 @@ func (druid *Druid) applyFuror() {
 	})
 }
 
+// Omen of Clarity (spell 16864) is a baseline trainer spell in Forever
+// (SkillLineAbility: skill line 574, AcquireMethod 0, level 20), not the
+// vanilla Restoration talent. Client text: "Your spells and attacks have a
+// chance to grant you Clearcasting, reducing the Mana, Rage, or Energy cost
+// of your next damage or healing spell or offensive ability by 100%.
+// Clearcasting is not consumed by Wrath or by spells or abilities that cost
+// no resources." Its proc row (SpellAuraOptions) is ProcChance 100 with a
+// 10 s ProcCategoryRecovery on melee hits, harmful spells and heals, but no
+// periodic damage; the client's 100% is not the server's rate, which the
+// row does not carry.
+//
+// unconfirmed: the rate. Melee keeps the engine's 2 procs a minute, yellow
+// hits at the equipped weapon's speed (the Classic and Season of Discovery
+// model this fork inherited). A spell has the same 2 a minute taken over
+// its cast time, an instant counting as the global cooldown.
+const (
+	omenOfClarityPPM      = 2.0
+	omenOfClarityCooldown = 10 * time.Second // SpellAuraOptions.ProcCategoryRecovery
+	clearcastingDuration  = 15 * time.Second // spell 16870, DurationIndex 8
+
+	// Moonkin Form (spell 24858) effect 4 adds 100% to Omen of Clarity's
+	// chance (SpellModOp 18, proc chance) and effect 5 takes 50% off its
+	// proc cooldown (SpellModOp 38).
+	moonkinOmenChanceMultiplier   = 2.0
+	moonkinOmenCooldownMultiplier = 0.5
+)
+
+// omenSpellProcChance is a spell's chance to grant Clearcasting.
+func omenSpellProcChance(castTime time.Duration, inMoonkin bool) float64 {
+	chance := omenOfClarityPPM * max(castTime, core.GCDDefault).Minutes()
+	if inMoonkin {
+		chance *= moonkinOmenChanceMultiplier
+	}
+	return chance
+}
+
+// omenProcCooldown is Omen of Clarity's proc cooldown.
+func omenProcCooldown(inMoonkin bool) time.Duration {
+	if inMoonkin {
+		return time.Duration(float64(omenOfClarityCooldown) * moonkinOmenCooldownMultiplier)
+	}
+	return omenOfClarityCooldown
+}
+
 func (druid *Druid) applyOmenOfClarity() {
-	/*
-		if !druid.Talents.OmenOfClarity {
+	if int(druid.Level) < OmenOfClarityLevel[0] {
+		return
+	}
+
+	// Clearcasting's own class mask (spell 16870) holds every druid damage,
+	// heal and feral ability that carries SpellFlagOmen; Wrath is not in it.
+	freeCost := druid.AddDynamicMod(core.SpellModConfig{
+		Kind:       core.SpellMod_PowerCost_Pct,
+		SpellFlags: SpellFlagOmen,
+		IntValue:   -100,
+	})
+	druid.ClearcastingAura = druid.RegisterAura(core.Aura{
+		Label:    "Clearcasting",
+		ActionID: core.ActionID{SpellID: ClearcastingSpellId[0]},
+		Duration: clearcastingDuration,
+		OnGain: func(_ *core.Aura, _ *core.Simulation) {
+			freeCost.Activate()
+		},
+		OnExpire: func(_ *core.Aura, _ *core.Simulation) {
+			freeCost.Deactivate()
+		},
+		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
+			// OnCastComplete runs after the proc callbacks, so a proc from
+			// this same cast must not be spent by it.
+			if aura.RemainingDuration(sim) == aura.Duration {
+				return
+			}
+			if spell.Flags.Matches(SpellFlagOmen) && spell.DefaultCast.Cost > 0 {
+				aura.Deactivate(sim)
+			}
+		},
+	})
+
+	ppmm := druid.AutoAttacks.NewPPMManager(omenOfClarityPPM, core.ProcMaskMelee)
+	var readyAt time.Duration
+
+	tryProc := func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+		if !result.Landed() || sim.CurrentTime < readyAt {
 			return
 		}
-
-		var affectedSpells []*core.Spell
-		druid.ClearcastingAura = druid.RegisterAura(core.Aura{
-			Label:    "Clearcasting",
-			ActionID: core.ActionID{SpellID: 16870},
-			Duration: time.Second * 15,
-			OnInit: func(aura *core.Aura, sim *core.Simulation) {
-				affectedSpells = core.FilterSlice(druid.Spellbook, func(spell *core.Spell) bool { return spell.Flags.Matches(SpellFlagOmen) })
-			},
-			OnGain: func(aura *core.Aura, sim *core.Simulation) {
-				for _, spell := range affectedSpells {
-					spell.Cost.Multiplier -= 100
-				}
-			},
-			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-				for _, spell := range affectedSpells {
-					spell.Cost.Multiplier += 100
-				}
-			},
-			OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-				// OnCastComplete is called after OnSpellHitDealt / etc, so don't deactivate if it was just activated.
-				if aura.RemainingDuration(sim) == aura.Duration {
-					return
-				}
-
-				if spell.Flags.Matches(SpellFlagOmen) && spell.DefaultCast.Cost > 0 {
-					aura.Deactivate(sim)
-				}
-			},
-		})
-
-		ppmm := druid.AutoAttacks.NewPPMManager(2.0, core.ProcMaskMelee)
-		icd := core.Cooldown{
-			Timer:    druid.NewTimer(),
-			Duration: time.Second * 10,
+		inMoonkin := druid.InForm(Moonkin)
+		var procced bool
+		if spell.ProcMask.Matches(core.ProcMaskMelee) {
+			procced = ppmm.ProcWithWeaponSpecials(sim, spell.ProcMask, "Omen of Clarity")
+		} else if spell.ProcMask.Matches(core.ProcMaskSpellDamage | core.ProcMaskSpellHealing) {
+			procced = sim.Proc(omenSpellProcChance(spell.DefaultCast.CastTime, inMoonkin), "Omen of Clarity")
 		}
+		if procced {
+			readyAt = sim.CurrentTime + omenProcCooldown(inMoonkin)
+			druid.ClearcastingAura.Activate(sim)
+		}
+	}
 
-		druid.RegisterAura(core.Aura{
-			Label:    "Omen of Clarity",
-			Duration: core.NeverExpires,
-			OnReset: func(aura *core.Aura, sim *core.Simulation) {
-				aura.Activate(sim)
-			},
-			OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-				if !result.Landed() || !icd.IsReady(sim) {
-					return
-				}
-				// TODO: Phase 3 "and non-instant spell casts" but we need to find out how the procs work for those
-				if spell.ProcMask.Matches(core.ProcMaskMelee) && ppmm.ProcWithWeaponSpecials(sim, spell.ProcMask, "Omen of Clarity") {
-					icd.Use(sim)
-					druid.ClearcastingAura.Activate(sim)
-				}
-			},
-		})
-	*/
+	core.MakePermanent(druid.RegisterAura(core.Aura{
+		Label:    "Omen of Clarity",
+		ActionID: core.ActionID{SpellID: OmenOfClaritySpellId[0]},
+		OnReset: func(_ *core.Aura, _ *core.Simulation) {
+			readyAt = 0
+		},
+		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			tryProc(sim, spell, result)
+		},
+		OnHealDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			tryProc(sim, spell, result)
+		},
+	}))
 }
 
 // moonfuryDamagePerRank is Moonfury's 2% a rank (node 104936, five ranks).

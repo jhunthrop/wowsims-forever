@@ -68,6 +68,7 @@ func (druid *Druid) registerRavageSpell() {
 			druid.BreakProwl(sim)
 
 			baseDamage := flatDamageBonus + spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
+			baseDamage *= druid.RendAndTearMultiplier(target)
 
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 

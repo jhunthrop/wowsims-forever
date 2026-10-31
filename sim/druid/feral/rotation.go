@@ -142,9 +142,6 @@ func (cat *FeralDruid) berserkExpectedAt(sim *core.Simulation, futureTime time.D
 	if cat.Berserk.IsReady(sim) {
 		return futureTime > sim.CurrentTime+cat.Berserk.CD.Duration
 	}
-	if cat.TigersFuryAura.IsActive() && cat.Talents.Berserk {
-		return futureTime > cat.TigersFuryAura.ExpiresAt()
-	}
 	return false
 }
 
@@ -350,12 +347,9 @@ func (cat *FeralDruid) doRotation(sim *core.Simulation) (bool, time.Duration) {
 	// rotations prioritize weave cpm over Rake uptime.
 	poolForRake := !(rotation.FlowerWeave || (rotation.BearweaveType != proto.FeralDruid_Rotation_None))
 
-	// Berserk algorithm: time Berserk for just after a Tiger's Fury
-	// *unless* we'll lose Berserk uptime by waiting for Tiger's Fury to
-	// come off cooldown. The latter exception is necessary for
-	// Lacerateweave rotation since TF timings can drift over time.
-	waitForTf := cat.Talents.Berserk && (cat.TigersFury.ReadyAt() <= cat.BerserkAura.Duration) && (cat.TigersFury.ReadyAt()+time.Second < simTimeRemain-cat.BerserkAura.Duration)
-	berserkNow := cat.Berserk.IsReady(sim) && !waitForTf && ripDot.IsActive() && !isClearcast
+	// Forever druids cannot learn Tiger's Fury (SkillLineAbility 5217 is a
+	// Season of Discovery rune row), so Berserk waits on nothing.
+	berserkNow := cat.Berserk.IsReady(sim) && ripDot.IsActive() && !isClearcast
 
 	// Additionally, for Lacerateweave rotation, postpone the final Berserk
 	// of the fight to as late as possible so as to minimize the impact of

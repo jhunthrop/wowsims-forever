@@ -78,20 +78,23 @@ func (druid *Druid) applyNaturalReaction() {
 // Rend and Tear (node 104953, five ranks): "Increases damage done by your
 // melee abilities on Bleeding targets by 2%" a rank.
 //
+// The client row (spell 1223246) is a dummy aura, so the server decides what
+// it touches; the text names every melee ability. It is applied to the direct
+// damage of the bear abilities and of the cat's Shred, Claw, Rake, Ravage,
+// Ferocious Bite and Primal Bite, never to a bleed's own ticks.
+//
 // unconfirmed: whether the client applies it with the other damage
 // modifiers (additively) or after them; it is applied here as its own
-// multiplier. Scoped to the Bear Form abilities this package registers: the
-// Cat Form abilities (claw.go, rake.go, rip.go, shred.go, ravage.go and
-// ferocious_bite.go) do not read it yet.
+// multiplier.
 const (
 	rendAndTearMaxRank       = 5
 	rendAndTearDamagePerRank = 0.02
 )
 
-// RendAndTearMultiplier is Rend and Tear's multiplier on a bear
+// RendAndTearMultiplier is Rend and Tear's multiplier on a melee
 // ability's damage against target: the target counts as bleeding while the
-// druid's own Lacerate is on it, or when the request says the raid keeps a
-// bleed up (Druid.AssumeBleedActive).
+// druid's own Lacerate, Rip, Rake or Pounce is on it, or when the request
+// says the raid keeps a bleed up (Druid.AssumeBleedActive).
 func (druid *Druid) RendAndTearMultiplier(target *core.Unit) float64 {
 	rank := clampRank(druid.Talents.RendAndTear, rendAndTearMaxRank)
 	if rank == 0 || !druid.targetIsBleeding(target) {
@@ -101,5 +104,13 @@ func (druid *Druid) RendAndTearMultiplier(target *core.Unit) float64 {
 }
 
 func (druid *Druid) targetIsBleeding(target *core.Unit) bool {
-	return druid.AssumeBleedActive || (druid.Lacerate != nil && druid.Lacerate.Dot(target).IsActive())
+	if druid.AssumeBleedActive {
+		return true
+	}
+	for _, bleed := range []*DruidSpell{druid.Lacerate, druid.Rip, druid.Rake, druid.Pounce} {
+		if bleed != nil && bleed.Dot(target).IsActive() {
+			return true
+		}
+	}
+	return false
 }
