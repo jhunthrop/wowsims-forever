@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70658",
+  "build": "1.60.1.70707",
   "class_id": 11,
   "class_slug": "druid",
   "trees": [
@@ -53,15 +53,7 @@
           "ranks": [
             {
               "spell_id": 1223081,
-              "description": "Increases the periodic damage and healing done by your spells and abilities by 1%."
-            },
-            {
-              "spell_id": 1223081,
               "description": "Increases the periodic damage and healing done by your spells and abilities by 2%."
-            },
-            {
-              "spell_id": 1223081,
-              "description": "Increases the periodic damage and healing done by your spells and abilities by 3%."
             },
             {
               "spell_id": 1223081,
@@ -69,7 +61,15 @@
             },
             {
               "spell_id": 1223081,
-              "description": "Increases the periodic damage and healing done by your spells and abilities by 5%."
+              "description": "Increases the periodic damage and healing done by your spells and abilities by 6%."
+            },
+            {
+              "spell_id": 1223081,
+              "description": "Increases the periodic damage and healing done by your spells and abilities by 8%."
+            },
+            {
+              "spell_id": 1223081,
+              "description": "Increases the periodic damage and healing done by your spells and abilities by 10%."
             }
           ],
           "spell_id": 1223081
@@ -395,7 +395,7 @@
           "ranks": [
             {
               "spell_id": 24858,
-              "description": "Shapeshift into Moonkin Form, increasing Omen of Clarity's chance to trigger by 100%, Armor contribution from items by 360%, and all party or raid members within 45 yards have their spell Critical Strike chance increased by 3%.  Also protects the caster from Polymorph effects and prevents the use of healing spells.\n\nThe act of shapeshifting frees the caster of Polymorph and Movement Impairing effects."
+              "description": "Shapeshift into Moonkin Form, increasing Omen of Clarity's chance to trigger by 100%, Armor contribution from items by 360%, and all party or raid members within 45 yards have their Critical Strike chance increased by 3%. Also protects the caster from Polymorph effects and prevents the use of healing spells.\n\nThe act of shapeshifting frees the caster of Polymorph and Movement Impairing effects."
             }
           ],
           "spell_id": 24858
@@ -444,8 +444,8 @@
         },
         {
           "id": 104939,
-          "name": "Heart of the Wild",
-          "icon": "spell_holy_blessingofagility",
+          "name": "Furor",
+          "icon": "spell_holy_blessingofstamina",
           "max_rank": 5,
           "tier": 0,
           "column": 2,
@@ -453,27 +453,27 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 17003,
-              "description": "Increases your Intellect by 2%.  In addition, while in Bear Form or Dire Bear Form your Stamina is increased by 4% and while in Cat Form your Strength is increased by 2%."
+              "spell_id": 17056,
+              "description": "Gives you a 20% chance to gain 10 Rage when shapeshifting into Bear Form or Dire Bear Form. Shapeshifting into Cat Form restores 20% of the Energy you had when last in Cat Form, plus 2 Energy per second spent outside Bear Form or Dire Bear Form, up to 20 Energy."
             },
             {
-              "spell_id": 17003,
-              "description": "Increases your Intellect by 4%.  In addition, while in Bear Form or Dire Bear Form your Stamina is increased by 8% and while in Cat Form your Strength is increased by 4%."
+              "spell_id": 17056,
+              "description": "Gives you a 40% chance to gain 10 Rage when shapeshifting into Bear Form or Dire Bear Form. Shapeshifting into Cat Form restores 40% of the Energy you had when last in Cat Form, plus 4 Energy per second spent outside Bear Form or Dire Bear Form, up to 40 Energy."
             },
             {
-              "spell_id": 17003,
-              "description": "Increases your Intellect by 6%.  In addition, while in Bear Form or Dire Bear Form your Stamina is increased by 12% and while in Cat Form your Strength is increased by 6%."
+              "spell_id": 17056,
+              "description": "Gives you a 60% chance to gain 10 Rage when shapeshifting into Bear Form or Dire Bear Form. Shapeshifting into Cat Form restores 60% of the Energy you had when last in Cat Form, plus 6 Energy per second spent outside Bear Form or Dire Bear Form, up to 60 Energy."
             },
             {
-              "spell_id": 17003,
-              "description": "Increases your Intellect by 8%.  In addition, while in Bear Form or Dire Bear Form your Stamina is increased by 16% and while in Cat Form your Strength is increased by 8%."
+              "spell_id": 17056,
+              "description": "Gives you a 80% chance to gain 10 Rage when shapeshifting into Bear Form or Dire Bear Form. Shapeshifting into Cat Form restores 80% of the Energy you had when last in Cat Form, plus 8 Energy per second spent outside Bear Form or Dire Bear Form, up to 80 Energy."
             },
             {
-              "spell_id": 17003,
-              "description": "Increases your Intellect by 10%.  In addition, while in Bear Form or Dire Bear Form your Stamina is increased by 20% and while in Cat Form your Strength is increased by 10%."
+              "spell_id": 17056,
+              "description": "Gives you a 100% chance to gain 10 Rage when shapeshifting into Bear Form or Dire Bear Form. Shapeshifting into Cat Form restores 100% of the Energy you had when last in Cat Form, plus 10 Energy per second spent outside Bear Form or Dire Bear Form, up to 100 Energy."
             }
           ],
-          "spell_id": 17003
+          "spell_id": 17056
         },
         {
           "id": 104943,
@@ -652,46 +652,12 @@
           "spell_id": 16942
         },
         {
-          "id": 104951,
-          "name": "Shifting Power",
-          "icon": "spell_druid_displacement",
-          "max_rank": 1,
-          "tier": 3,
-          "column": 0,
-          "prereq_talent_id": 104945,
-          "prereq_rank": 3,
-          "ranks": [
-            {
-              "spell_id": 1322605,
-              "description": "Instantly convert 0 Mana into 40 Energy. Shifting Power's cost is reduced by effects that reduce the cost of Shapeshifting."
-            }
-          ],
-          "spell_id": 1322605
-        },
-        {
-          "id": 104949,
-          "name": "Primal Bite",
-          "icon": "ability_racial_cannibalize",
-          "max_rank": 1,
-          "tier": 3,
-          "column": 1,
-          "prereq_talent_id": 104948,
-          "prereq_rank": 2,
-          "ranks": [
-            {
-              "spell_id": 407995,
-              "description": "Bite the target, dealing 100% normal damage plus 26 and generating a high amount of threat."
-            }
-          ],
-          "spell_id": 407995
-        },
-        {
           "id": 104952,
           "name": "Predatory Strikes",
           "icon": "ability_hunter_pet_cat",
           "max_rank": 3,
           "tier": 3,
-          "column": 2,
+          "column": 0,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
@@ -709,6 +675,42 @@
             }
           ],
           "spell_id": 16972
+        },
+        {
+          "id": 104949,
+          "name": "Lacerate",
+          "icon": "ability_druid_lacerate",
+          "max_rank": 1,
+          "tier": 3,
+          "column": 1,
+          "prereq_talent_id": 104948,
+          "prereq_rank": 2,
+          "ranks": [
+            {
+              "spell_id": 1328617,
+              "description": "Lacerates the enemy target, making them bleed for 20 damage over 15 sec plus 10% weapon damage per existing application of Lacerate on the target. Causes a high amount of threat. This effect stacks up to 5 times on the same target."
+            }
+          ],
+          "spell_id": 1328617,
+          "hotfix_only": true
+        },
+        {
+          "id": 104951,
+          "name": "Predatory Discipline",
+          "icon": "spell_druid_savagery",
+          "max_rank": 1,
+          "tier": 3,
+          "column": 2,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 1328613,
+              "description": "Your Ferocious Bite ability no longer converts extra Energy into damage, but still deals extra damage based on your excess Energy."
+            }
+          ],
+          "spell_id": 1328613,
+          "hotfix_only": true
         },
         {
           "id": 104947,
@@ -732,27 +734,6 @@
           "spell_id": 16958
         },
         {
-          "id": 113563,
-          "name": "Improved Shifting Power",
-          "icon": "ability_hunter_aspectmastery",
-          "max_rank": 2,
-          "tier": 4,
-          "column": 0,
-          "prereq_talent_id": 104951,
-          "prereq_rank": 1,
-          "ranks": [
-            {
-              "spell_id": 1322670,
-              "description": "Reduces the cooldown of your Shifting Power spell by 4 sec."
-            },
-            {
-              "spell_id": 1322670,
-              "description": "Reduces the cooldown of your Shifting Power spell by 8 sec."
-            }
-          ],
-          "spell_id": 1322670
-        },
-        {
           "id": 104955,
           "name": "Leader of the Pack",
           "icon": "spell_nature_unyeildingstamina",
@@ -764,7 +745,7 @@
           "ranks": [
             {
               "spell_id": 17007,
-              "description": "While in Cat Form, Bear Form, or Dire Bear Form, the Leader of the Pack increases the melee and ranged Critical Strike chance of all party or raid members within 45 yards by 3%."
+              "description": "While in Cat Form, Bear Form, or Dire Bear Form, the Leader of the Pack increases the Critical Strike chance of all party or raid members within 45 yards by 3%."
             }
           ],
           "spell_id": 17007
@@ -791,45 +772,12 @@
           "spell_id": 1223242
         },
         {
-          "id": 104954,
-          "name": "Natural Reaction",
-          "icon": "ability_bullrush",
-          "max_rank": 5,
-          "tier": 5,
-          "column": 0,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 417051,
-              "description": "Increases your dodge chance by 1%, and gives you a 20% chance to gain 5 Rage each time you dodge."
-            },
-            {
-              "spell_id": 417051,
-              "description": "Increases your dodge chance by 2%, and gives you a 40% chance to gain 5 Rage each time you dodge."
-            },
-            {
-              "spell_id": 417051,
-              "description": "Increases your dodge chance by 3%, and gives you a 60% chance to gain 5 Rage each time you dodge."
-            },
-            {
-              "spell_id": 417051,
-              "description": "Increases your dodge chance by 4%, and gives you a 80% chance to gain 5 Rage each time you dodge."
-            },
-            {
-              "spell_id": 417051,
-              "description": "Increases your dodge chance by 5%, and gives you a 100% chance to gain 5 Rage each time you dodge."
-            }
-          ],
-          "spell_id": 417051
-        },
-        {
           "id": 104953,
           "name": "Rend and Tear",
           "icon": "ability_druid_primalagression",
           "max_rank": 5,
           "tier": 5,
-          "column": 2,
+          "column": 0,
           "prereq_talent_id": 104952,
           "prereq_rank": 3,
           "ranks": [
@@ -857,9 +805,42 @@
           "spell_id": 1223246
         },
         {
+          "id": 104954,
+          "name": "Natural Reaction",
+          "icon": "ability_bullrush",
+          "max_rank": 5,
+          "tier": 5,
+          "column": 3,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 417051,
+              "description": "Increases your dodge chance by 1%, and gives you a 20% chance to gain 5 Rage each time you dodge."
+            },
+            {
+              "spell_id": 417051,
+              "description": "Increases your dodge chance by 2%, and gives you a 40% chance to gain 5 Rage each time you dodge."
+            },
+            {
+              "spell_id": 417051,
+              "description": "Increases your dodge chance by 3%, and gives you a 60% chance to gain 5 Rage each time you dodge."
+            },
+            {
+              "spell_id": 417051,
+              "description": "Increases your dodge chance by 4%, and gives you a 80% chance to gain 5 Rage each time you dodge."
+            },
+            {
+              "spell_id": 417051,
+              "description": "Increases your dodge chance by 5%, and gives you a 100% chance to gain 5 Rage each time you dodge."
+            }
+          ],
+          "spell_id": 417051
+        },
+        {
           "id": 104956,
-          "name": "Berserk",
-          "icon": "ability_druid_berserk",
+          "name": "Primal Bite",
+          "icon": "ability_racial_cannibalize",
           "max_rank": 1,
           "tier": 6,
           "column": 1,
@@ -867,11 +848,28 @@
           "prereq_rank": 1,
           "ranks": [
             {
-              "spell_id": 417141,
-              "description": "Requires Cat Form, Bear Form, Dire Bear Form\nCauses your Primal Bite ability to strike up to 3 targets, removes its cooldown, and increases the critical strike chance of your Combo Point-generating abilities by 100%. Clears and grants immunity to Fear effects for the duration. Lasts 15 sec."
+              "spell_id": 407995,
+              "description": "Bite the target, dealing 100% normal damage plus 42 and generating a high amount of threat."
             }
           ],
-          "spell_id": 417141
+          "spell_id": 407995
+        },
+        {
+          "id": 113563,
+          "name": "Shifting Power",
+          "icon": "spell_druid_displacement",
+          "max_rank": 1,
+          "tier": 6,
+          "column": 2,
+          "prereq_talent_id": 104951,
+          "prereq_rank": 1,
+          "ranks": [
+            {
+              "spell_id": 1322605,
+              "description": "Instantly convert 0 Mana into 40 Energy. Shifting Power's cost is reduced by effects that reduce the cost of Shapeshifting."
+            }
+          ],
+          "spell_id": 1322605
         }
       ],
       "background": "druidferalcombat",
@@ -917,8 +915,8 @@
         },
         {
           "id": 104958,
-          "name": "Furor",
-          "icon": "spell_holy_blessingofstamina",
+          "name": "Heart of the Wild",
+          "icon": "spell_holy_blessingofagility",
           "max_rank": 5,
           "tier": 0,
           "column": 2,
@@ -926,27 +924,27 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 17056,
-              "description": "Gives you a 20% chance to gain 10 Rage when shapeshifting into Bear Form or Dire Bear Form. Shapeshifting into Cat Form restores 20% of the Energy you had when last in Cat Form, plus 2 Energy per second spent outside Bear Form or Dire Bear Form, up to 20 Energy."
+              "spell_id": 17003,
+              "description": "Increases your Intellect by 2%.  In addition, while in Bear Form or Dire Bear Form your Stamina is increased by 4% and while in Cat Form your Strength is increased by 2%."
             },
             {
-              "spell_id": 17056,
-              "description": "Gives you a 40% chance to gain 10 Rage when shapeshifting into Bear Form or Dire Bear Form. Shapeshifting into Cat Form restores 40% of the Energy you had when last in Cat Form, plus 4 Energy per second spent outside Bear Form or Dire Bear Form, up to 40 Energy."
+              "spell_id": 17003,
+              "description": "Increases your Intellect by 4%.  In addition, while in Bear Form or Dire Bear Form your Stamina is increased by 8% and while in Cat Form your Strength is increased by 4%."
             },
             {
-              "spell_id": 17056,
-              "description": "Gives you a 60% chance to gain 10 Rage when shapeshifting into Bear Form or Dire Bear Form. Shapeshifting into Cat Form restores 60% of the Energy you had when last in Cat Form, plus 6 Energy per second spent outside Bear Form or Dire Bear Form, up to 60 Energy."
+              "spell_id": 17003,
+              "description": "Increases your Intellect by 6%.  In addition, while in Bear Form or Dire Bear Form your Stamina is increased by 12% and while in Cat Form your Strength is increased by 6%."
             },
             {
-              "spell_id": 17056,
-              "description": "Gives you a 80% chance to gain 10 Rage when shapeshifting into Bear Form or Dire Bear Form. Shapeshifting into Cat Form restores 80% of the Energy you had when last in Cat Form, plus 8 Energy per second spent outside Bear Form or Dire Bear Form, up to 80 Energy."
+              "spell_id": 17003,
+              "description": "Increases your Intellect by 8%.  In addition, while in Bear Form or Dire Bear Form your Stamina is increased by 16% and while in Cat Form your Strength is increased by 8%."
             },
             {
-              "spell_id": 17056,
-              "description": "Gives you a 100% chance to gain 10 Rage when shapeshifting into Bear Form or Dire Bear Form. Shapeshifting into Cat Form restores 100% of the Energy you had when last in Cat Form, plus 10 Energy per second spent outside Bear Form or Dire Bear Form, up to 100 Energy."
+              "spell_id": 17003,
+              "description": "Increases your Intellect by 10%.  In addition, while in Bear Form or Dire Bear Form your Stamina is increased by 20% and while in Cat Form your Strength is increased by 10%."
             }
           ],
-          "spell_id": 17056
+          "spell_id": 17003
         },
         {
           "id": 104922,
@@ -960,31 +958,31 @@
           "ranks": [
             {
               "spell_id": 17069,
-              "description": "Reduces the cast time of your Healing Touch spell by 0.1 sec and increases all damage you deal by 1%."
+              "description": "Reduces the cast time of your Healing Touch and Wild Growth spells by 0.1 sec and increases all damage you deal by 2%."
             },
             {
               "spell_id": 17069,
-              "description": "Reduces the cast time of your Healing Touch spell by 0.2 sec and increases all damage you deal by 2%."
+              "description": "Reduces the cast time of your Healing Touch and Wild Growth spells by 0.2 sec and increases all damage you deal by 4%."
             },
             {
               "spell_id": 17069,
-              "description": "Reduces the cast time of your Healing Touch spell by 0.3 sec and increases all damage you deal by 3%."
+              "description": "Reduces the cast time of your Healing Touch and Wild Growth spells by 0.3 sec and increases all damage you deal by 6%."
             },
             {
               "spell_id": 17069,
-              "description": "Reduces the cast time of your Healing Touch spell by 0.4 sec and increases all damage you deal by 4%."
+              "description": "Reduces the cast time of your Healing Touch and Wild Growth spells by 0.4 sec and increases all damage you deal by 8%."
             },
             {
               "spell_id": 17069,
-              "description": "Reduces the cast time of your Healing Touch spell by 0.5 sec and increases all damage you deal by 5%."
+              "description": "Reduces the cast time of your Healing Touch and Wild Growth spells by 0.5 sec and increases all damage you deal by 10%."
             }
           ],
           "spell_id": 17069
         },
         {
           "id": 104920,
-          "name": "Subtlety",
-          "icon": "ability_eyeoftheowl",
+          "name": "Reflection",
+          "icon": "spell_frost_windwalkon",
           "max_rank": 3,
           "tier": 1,
           "column": 1,
@@ -992,19 +990,19 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 17118,
-              "description": "Reduces the threat generated by your Nature and Arcane spells by 10%."
+              "spell_id": 17106,
+              "description": "Allows 17% of your Mana regeneration to continue while casting."
             },
             {
-              "spell_id": 17118,
-              "description": "Reduces the threat generated by your Nature and Arcane spells by 20%."
+              "spell_id": 17106,
+              "description": "Allows 33% of your Mana regeneration to continue while casting."
             },
             {
-              "spell_id": 17118,
-              "description": "Reduces the threat generated by your Nature and Arcane spells by 30%."
+              "spell_id": 17106,
+              "description": "Allows 50% of your Mana regeneration to continue while casting."
             }
           ],
-          "spell_id": 17118
+          "spell_id": 17106
         },
         {
           "id": 104919,
@@ -1033,8 +1031,8 @@
         },
         {
           "id": 104917,
-          "name": "Reflection",
-          "icon": "spell_frost_windwalkon",
+          "name": "Subtlety",
+          "icon": "ability_eyeoftheowl",
           "max_rank": 3,
           "tier": 2,
           "column": 1,
@@ -1042,19 +1040,19 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 17106,
-              "description": "Allows 17% of your Mana regeneration to continue while casting."
+              "spell_id": 17118,
+              "description": "Reduces the threat generated by your Nature and Arcane spells by 10%."
             },
             {
-              "spell_id": 17106,
-              "description": "Allows 33% of your Mana regeneration to continue while casting."
+              "spell_id": 17118,
+              "description": "Reduces the threat generated by your Nature and Arcane spells by 20%."
             },
             {
-              "spell_id": 17106,
-              "description": "Allows 50% of your Mana regeneration to continue while casting."
+              "spell_id": 17118,
+              "description": "Reduces the threat generated by your Nature and Arcane spells by 30%."
             }
           ],
-          "spell_id": 17106
+          "spell_id": 17118
         },
         {
           "id": 104916,
@@ -1091,8 +1089,8 @@
         },
         {
           "id": 104918,
-          "name": "Gift of the Earthmother",
-          "icon": "spell_nature_spiritarmor",
+          "name": "Bloom",
+          "icon": "inv_misc_herb_felblossom",
           "max_rank": 1,
           "tier": 2,
           "column": 3,
@@ -1100,11 +1098,12 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 414673,
-              "description": "Reduces the global cooldown by 0.5 seconds on your Rejuvenation, Swiftmend, and Wild Growth spells."
+              "spell_id": 1328621,
+              "description": "When your Rejuvenation or Regrowth spell expires due to its duration, the target is instantly healed for an amount equal to 100% of your Spirit. If either spell expires due to being dispelled, the target is healed for 50% of your Spirit instead."
             }
           ],
-          "spell_id": 414673
+          "spell_id": 1328621,
+          "hotfix_only": true
         },
         {
           "id": 104915,
@@ -1176,7 +1175,7 @@
           "ranks": [
             {
               "spell_id": 18562,
-              "description": "Instantly heals a target with an active Rejuvenation or Regrowth effect for an amount equal to the full duration of the periodic effect of one of those spells."
+              "description": "Instantly heals a target with your active Rejuvenation or Regrowth effect for an amount equal to the full duration of the periodic effect of the consumed spell."
             }
           ],
           "spell_id": 18562

@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70658",
+  "build": "1.60.1.70707",
   "class_slug": "paladin",
   "trainables": [
     {
@@ -1145,7 +1145,7 @@
         {
           "id": 25780,
           "rank": 0,
-          "level": 16
+          "level": 10
         }
       ]
     },

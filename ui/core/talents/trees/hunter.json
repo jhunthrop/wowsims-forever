@@ -28,15 +28,15 @@
         "maxPoints": 3
       },
       {
-        "fieldName": "pathfinding",
+        "fieldName": "improvedRevivePet",
         "location": { "rowIdx": 1, "colIdx": 2 },
-        "spellIds": [19559, 19559],
+        "spellIds": [24443, 24443],
         "maxPoints": 2
       },
       {
-        "fieldName": "improvedRevivePet",
-        "location": { "rowIdx": 1, "colIdx": 3 },
-        "spellIds": [24443, 24443],
+        "fieldName": "pathfinding",
+        "location": { "rowIdx": 2, "colIdx": 0 },
+        "spellIds": [19559, 19559],
         "maxPoints": 2
       },
       {

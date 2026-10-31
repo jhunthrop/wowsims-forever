@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70658",
+  "build": "1.60.1.70707",
   "class_slug": "hunter",
   "trainables": [
     {
@@ -557,34 +557,12 @@
       "cooldown_ms": 30000,
       "ranks": [
         {
-          "id": 13813,
+          "id": 13812,
           "rank": 1,
           "level": 34
         },
         {
-          "id": 14316,
-          "rank": 2,
-          "level": 44
-        },
-        {
-          "id": 14317,
-          "rank": 3,
-          "level": 54
-        }
-      ]
-    },
-    {
-      "name": "Explosive Trap Effect",
-      "skill_line": "Survival",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 13812,
+          "id": 13813,
           "rank": 1,
           "level": 34
         },
@@ -594,7 +572,17 @@
           "level": 44
         },
         {
+          "id": 14316,
+          "rank": 2,
+          "level": 44
+        },
+        {
           "id": 14315,
+          "rank": 3,
+          "level": 54
+        },
+        {
+          "id": 14317,
           "rank": 3,
           "level": 54
         }

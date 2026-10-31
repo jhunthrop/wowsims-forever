@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70658",
+  "build": "1.60.1.70707",
   "class_id": 8,
   "class_slug": "mage",
   "trees": [
@@ -30,45 +30,12 @@
           "spell_id": 6057
         },
         {
-          "id": 105814,
-          "name": "Arcane Focus",
-          "icon": "spell_holy_devotion",
-          "max_rank": 5,
-          "tier": 0,
-          "column": 1,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 11222,
-              "description": "Improves your chance to hit with Arcane spells by 1%."
-            },
-            {
-              "spell_id": 11222,
-              "description": "Improves your chance to hit with Arcane spells by 2%."
-            },
-            {
-              "spell_id": 11222,
-              "description": "Improves your chance to hit with Arcane spells by 3%."
-            },
-            {
-              "spell_id": 11222,
-              "description": "Improves your chance to hit with Arcane spells by 4%."
-            },
-            {
-              "spell_id": 11222,
-              "description": "Improves your chance to hit with Arcane spells by 5%."
-            }
-          ],
-          "spell_id": 11222
-        },
-        {
           "id": 105813,
           "name": "Improved Channeling",
           "icon": "spell_nature_starfall",
           "max_rank": 5,
           "tier": 0,
-          "column": 2,
+          "column": 1,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
@@ -97,24 +64,28 @@
         },
         {
           "id": 105802,
-          "name": "Missile Barrage",
-          "icon": "ability_mage_missilebarrage",
-          "max_rank": 2,
+          "name": "Arcane Resilience",
+          "icon": "spell_arcane_arcaneresilience",
+          "max_rank": 3,
           "tier": 0,
-          "column": 3,
+          "column": 2,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 400588,
-              "description": "Gives your Arcane Blast spell a 20% chance, and your Arcane Wrath, Fireball, Frostbolt, Frost Blast, and Frostfire Bolt spells a 10% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
+              "spell_id": 28574,
+              "description": "Increases your Armor by an amount equal to 25% of your Intellect."
             },
             {
-              "spell_id": 400588,
-              "description": "Gives your Arcane Blast spell a 40% chance, and your Arcane Wrath, Fireball, Frostbolt, Frost Blast, and Frostfire Bolt spells a 20% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
+              "spell_id": 28574,
+              "description": "Increases your Armor by an amount equal to 50% of your Intellect."
+            },
+            {
+              "spell_id": 28574,
+              "description": "Increases your Armor by an amount equal to 75% of your Intellect."
             }
           ],
-          "spell_id": 400588
+          "spell_id": 28574
         },
         {
           "id": 105812,
@@ -193,8 +164,8 @@
         },
         {
           "id": 105809,
-          "name": "Arcane Resilience",
-          "icon": "spell_arcane_arcaneresilience",
+          "name": "Missile Barrage",
+          "icon": "ability_mage_missilebarrage",
           "max_rank": 2,
           "tier": 1,
           "column": 3,
@@ -202,15 +173,15 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 28574,
-              "description": "Increases your Armor by an amount equal to 25% of your Intellect."
+              "spell_id": 400588,
+              "description": "Gives your Arcane Blast spell a 20% chance, and your Arcane Wrath, Fireball, Frostbolt, Frost Blast, and Frostfire Bolt spells a 10% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
             },
             {
-              "spell_id": 28574,
-              "description": "Increases your Armor by an amount equal to 50% of your Intellect."
+              "spell_id": 400588,
+              "description": "Gives your Arcane Blast spell a 40% chance, and your Arcane Wrath, Fireball, Frostbolt, Frost Blast, and Frostfire Bolt spells a 20% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
             }
           ],
-          "spell_id": 28574
+          "spell_id": 400588
         },
         {
           "id": 105808,
@@ -270,7 +241,7 @@
           "ranks": [
             {
               "spell_id": 400574,
-              "description": "Blasts the target with energy, dealing 34 to 38 Arcane damage. Each time you cast Arcane Blast, you gain 15% of your Intellect as Spell Damage and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 15 sec from time of initial application."
+              "description": "Blasts the target with energy, dealing 34 to 38 Arcane damage. Each time you cast Arcane Blast, you gain 12% of your Intellect as Spell Damage and the mana cost of Arcane Blast is increased by 100%. Effect stacks up to 4 times and lasts 18 sec from time of initial application."
             }
           ],
           "spell_id": 400574
@@ -461,31 +432,10 @@
       "position": 1,
       "talents": [
         {
-          "id": 105797,
-          "name": "Improved Fire Blast",
-          "icon": "spell_fire_lavaspawn",
-          "max_rank": 2,
-          "tier": 0,
-          "column": 0,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 11078,
-              "description": "Reduces the cooldown of your Fire Blast spell by 1 sec and increases its range by 8 yards."
-            },
-            {
-              "spell_id": 11078,
-              "description": "Reduces the cooldown of your Fire Blast spell by 2 sec and increases its range by 15 yards."
-            }
-          ],
-          "spell_id": 11078
-        },
-        {
           "id": 105796,
           "name": "Incineration",
           "icon": "spell_fire_flameshock",
-          "max_rank": 3,
+          "max_rank": 5,
           "tier": 0,
           "column": 1,
           "prereq_talent_id": null,
@@ -502,13 +452,21 @@
             {
               "spell_id": 18459,
               "description": "Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 6%."
+            },
+            {
+              "spell_id": 18459,
+              "description": "Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 8%."
+            },
+            {
+              "spell_id": 18459,
+              "description": "Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 10%."
             }
           ],
           "spell_id": 18459
         },
         {
           "id": 105795,
-          "name": "Improved Fireball",
+          "name": "Accelerant",
           "icon": "spell_fire_flamebolt",
           "max_rank": 5,
           "tier": 0,
@@ -518,23 +476,23 @@
           "ranks": [
             {
               "spell_id": 11069,
-              "description": "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.1 sec."
+              "description": "Reduces the casting time of your Fireball, Frostfire Bolt, and Arcane Wrath spells by 0.1 sec."
             },
             {
               "spell_id": 11069,
-              "description": "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.2 sec."
+              "description": "Reduces the casting time of your Fireball, Frostfire Bolt, and Arcane Wrath spells by 0.2 sec."
             },
             {
               "spell_id": 11069,
-              "description": "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.3 sec."
+              "description": "Reduces the casting time of your Fireball, Frostfire Bolt, and Arcane Wrath spells by 0.3 sec."
             },
             {
               "spell_id": 11069,
-              "description": "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.4 sec."
+              "description": "Reduces the casting time of your Fireball, Frostfire Bolt, and Arcane Wrath spells by 0.4 sec."
             },
             {
               "spell_id": 11069,
-              "description": "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.5 sec."
+              "description": "Reduces the casting time of your Fireball, Frostfire Bolt, and Arcane Wrath spells by 0.5 sec."
             }
           ],
           "spell_id": 11069
@@ -686,6 +644,27 @@
           "spell_id": 11366
         },
         {
+          "id": 105797,
+          "name": "Improved Fire Blast",
+          "icon": "spell_fire_lavaspawn",
+          "max_rank": 2,
+          "tier": 2,
+          "column": 3,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 11078,
+              "description": "Reduces the cooldown of your Fire Blast spell by 1 sec and increases its range by 8 yards."
+            },
+            {
+              "spell_id": 11078,
+              "description": "Reduces the cooldown of your Fire Blast spell by 2 sec and increases its range by 15 yards."
+            }
+          ],
+          "spell_id": 11078
+        },
+        {
           "id": 105788,
           "name": "Improved Scorch",
           "icon": "spell_fire_soulburn",
@@ -777,7 +756,7 @@
           "id": 105784,
           "name": "Critical Mass",
           "icon": "spell_nature_wispheal",
-          "max_rank": 5,
+          "max_rank": 3,
           "tier": 4,
           "column": 1,
           "prereq_talent_id": null,
@@ -794,14 +773,6 @@
             {
               "spell_id": 11115,
               "description": "Increases the critical strike chance of your Fire spells by 6%."
-            },
-            {
-              "spell_id": 11115,
-              "description": "Increases the critical strike chance of your Fire spells by 8%."
-            },
-            {
-              "spell_id": 11115,
-              "description": "Increases the critical strike chance of your Fire spells by 10%."
             }
           ],
           "spell_id": 11115
@@ -856,7 +827,7 @@
           "tier": 6,
           "column": 1,
           "prereq_talent_id": 105784,
-          "prereq_rank": 5,
+          "prereq_rank": 3,
           "ranks": [
             {
               "spell_id": 11129,
@@ -930,7 +901,7 @@
         },
         {
           "id": 105778,
-          "name": "Elemental Precision",
+          "name": "Precision",
           "icon": "spell_ice_magicdamage",
           "max_rank": 3,
           "tier": 0,
@@ -940,15 +911,15 @@
           "ranks": [
             {
               "spell_id": 29438,
-              "description": "Improves your chance to hit with Frost and Fire spells by 2%."
+              "description": "Improves your chance to hit with all spells by 2%."
             },
             {
               "spell_id": 29438,
-              "description": "Improves your chance to hit with Frost and Fire spells by 4%."
+              "description": "Improves your chance to hit with all spells by 4%."
             },
             {
               "spell_id": 29438,
-              "description": "Improves your chance to hit with Frost and Fire spells by 6%."
+              "description": "Improves your chance to hit with all spells by 6%."
             }
           ],
           "spell_id": 29438
@@ -1119,7 +1090,7 @@
           "ranks": [
             {
               "spell_id": 1312002,
-              "description": "Deals 28 to 32 Frost damage to an enemy target. Deals 200% increased damage to Frozen targets."
+              "description": "Deals 28 to 32 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets."
             }
           ],
           "spell_id": 1312002
@@ -1136,11 +1107,11 @@
           "ranks": [
             {
               "spell_id": 16757,
-              "description": "Increases the range of your Frostbolt, Frost Blast, and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 10%."
+              "description": "Increases the range of your Frostbolt, Frost Blast, Ice Lance, and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 10%."
             },
             {
               "spell_id": 16757,
-              "description": "Increases the range of your Frostbolt, Frost Blast, and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 20%."
+              "description": "Increases the range of your Frostbolt, Frost Blast, Ice Lance, and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 20%."
             }
           ],
           "spell_id": 16757
@@ -1262,23 +1233,23 @@
           "ranks": [
             {
               "spell_id": 11180,
-              "description": "Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered Ice Lance spells a 20% chance to apply Winter's Chill, increasing the target's damage taken from your next Cone of Cold by 5% and it gains an additional 7% of your spell damage, stacking up to 5 times."
+              "description": "Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered Ice Lance spells a 20% chance to apply Winter's Chill, increasing the target's damage taken from your next Cone of Cold by 20% and it gains an additional 7% of your spell damage, stacking up to 5 times."
             },
             {
               "spell_id": 11180,
-              "description": "Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered Ice Lance spells a 40% chance to apply Winter's Chill, increasing the target's damage taken from your next Cone of Cold by 5% and it gains an additional 7% of your spell damage, stacking up to 5 times."
+              "description": "Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered Ice Lance spells a 40% chance to apply Winter's Chill, increasing the target's damage taken from your next Cone of Cold by 20% and it gains an additional 7% of your spell damage, stacking up to 5 times."
             },
             {
               "spell_id": 11180,
-              "description": "Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered Ice Lance spells a 60% chance to apply Winter's Chill, increasing the target's damage taken from your next Cone of Cold by 5% and it gains an additional 7% of your spell damage, stacking up to 5 times."
+              "description": "Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered Ice Lance spells a 60% chance to apply Winter's Chill, increasing the target's damage taken from your next Cone of Cold by 20% and it gains an additional 7% of your spell damage, stacking up to 5 times."
             },
             {
               "spell_id": 11180,
-              "description": "Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered Ice Lance spells a 80% chance to apply Winter's Chill, increasing the target's damage taken from your next Cone of Cold by 5% and it gains an additional 7% of your spell damage, stacking up to 5 times."
+              "description": "Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered Ice Lance spells a 80% chance to apply Winter's Chill, increasing the target's damage taken from your next Cone of Cold by 20% and it gains an additional 7% of your spell damage, stacking up to 5 times."
             },
             {
               "spell_id": 11180,
-              "description": "Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered Ice Lance spells a 100% chance to apply Winter's Chill, increasing the target's damage taken from your next Cone of Cold by 5% and it gains an additional 7% of your spell damage, stacking up to 5 times."
+              "description": "Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered Ice Lance spells a 100% chance to apply Winter's Chill, increasing the target's damage taken from your next Cone of Cold by 20% and it gains an additional 7% of your spell damage, stacking up to 5 times."
             }
           ],
           "spell_id": 11180
@@ -1295,7 +1266,7 @@
           "ranks": [
             {
               "spell_id": 11426,
-              "description": "Shield yourself, absorbing [448 + (Frost spell power * 0.1) * (1)] damage and increasing your Frost damage by 3% for 1 min. While shielded, your Frost damage is increased by an additional 3% and you do not lose casting time when you take damage."
+              "description": "Shield yourself, absorbing [448 + (Frost spell power * 0.1) * (1)] damage and increasing your Frost damage by 15% for 1 min. While shielded, your Frost damage is increased by an additional 5% and you do not lose casting time when you take damage."
             }
           ],
           "spell_id": 11426

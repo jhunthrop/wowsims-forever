@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70658",
+  "build": "1.60.1.70707",
   "class_id": 3,
   "class_slug": "hunter",
   "trees": [
@@ -121,33 +121,12 @@
           "spell_id": 19549
         },
         {
-          "id": 104973,
-          "name": "Pathfinding",
-          "icon": "ability_mount_jungletiger",
-          "max_rank": 2,
-          "tier": 1,
-          "column": 2,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 19559,
-              "description": "Increases the speed bonus of your Aspect of the Cheetah and Aspect of the Pack by 3%."
-            },
-            {
-              "spell_id": 19559,
-              "description": "Increases the speed bonus of your Aspect of the Cheetah and Aspect of the Pack by 6%."
-            }
-          ],
-          "spell_id": 19559
-        },
-        {
           "id": 104972,
           "name": "Improved Revive Pet",
           "icon": "ability_hunter_beastsoothe",
           "max_rank": 2,
           "tier": 1,
-          "column": 3,
+          "column": 2,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
@@ -161,6 +140,27 @@
             }
           ],
           "spell_id": 24443
+        },
+        {
+          "id": 104973,
+          "name": "Pathfinding",
+          "icon": "ability_mount_jungletiger",
+          "max_rank": 2,
+          "tier": 2,
+          "column": 0,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 19559,
+              "description": "Increases the speed bonus of your Aspect of the Cheetah and Aspect of the Pack by 3%."
+            },
+            {
+              "spell_id": 19559,
+              "description": "Increases the speed bonus of your Aspect of the Cheetah and Aspect of the Pack by 6%."
+            }
+          ],
+          "spell_id": 19559
         },
         {
           "id": 104970,
@@ -666,7 +666,7 @@
           "ranks": [
             {
               "spell_id": 1299346,
-              "description": "Increases the Ranged Attack Power of party or raid members within 45 yds by 30."
+              "description": "Increases the Ranged Attack Power of party or raid members within 45 yds by 15."
             }
           ],
           "spell_id": 1299346

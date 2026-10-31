@@ -10,22 +10,16 @@
         "maxPoints": 2
       },
       {
-        "fieldName": "arcaneFocus",
-        "location": { "rowIdx": 0, "colIdx": 1 },
-        "spellIds": [11222, 11222, 11222, 11222, 11222],
-        "maxPoints": 5
-      },
-      {
         "fieldName": "improvedChanneling",
-        "location": { "rowIdx": 0, "colIdx": 2 },
+        "location": { "rowIdx": 0, "colIdx": 1 },
         "spellIds": [11237, 11237, 11237, 11237, 11237],
         "maxPoints": 5
       },
       {
-        "fieldName": "missileBarrage",
-        "location": { "rowIdx": 0, "colIdx": 3 },
-        "spellIds": [400588, 400588],
-        "maxPoints": 2
+        "fieldName": "arcaneResilience",
+        "location": { "rowIdx": 0, "colIdx": 2 },
+        "spellIds": [28574, 28574, 28574],
+        "maxPoints": 3
       },
       {
         "fieldName": "arcaneSubtlety",
@@ -46,9 +40,9 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "arcaneResilience",
+        "fieldName": "missileBarrage",
         "location": { "rowIdx": 1, "colIdx": 3 },
-        "spellIds": [28574, 28574],
+        "spellIds": [400588, 400588],
         "maxPoints": 2
       },
       {
@@ -130,19 +124,13 @@
     "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/41.jpg",
     "talents": [
       {
-        "fieldName": "improvedFireBlast",
-        "location": { "rowIdx": 0, "colIdx": 0 },
-        "spellIds": [11078, 11078],
-        "maxPoints": 2
-      },
-      {
         "fieldName": "incineration",
         "location": { "rowIdx": 0, "colIdx": 1 },
-        "spellIds": [18459, 18459, 18459],
-        "maxPoints": 3
+        "spellIds": [18459, 18459, 18459, 18459, 18459],
+        "maxPoints": 5
       },
       {
-        "fieldName": "improvedFireball",
+        "fieldName": "accelerant",
         "location": { "rowIdx": 0, "colIdx": 2 },
         "spellIds": [11069, 11069, 11069, 11069, 11069],
         "maxPoints": 5
@@ -184,6 +172,12 @@
         "maxPoints": 1
       },
       {
+        "fieldName": "improvedFireBlast",
+        "location": { "rowIdx": 2, "colIdx": 3 },
+        "spellIds": [11078, 11078],
+        "maxPoints": 2
+      },
+      {
         "fieldName": "improvedScorch",
         "location": { "rowIdx": 3, "colIdx": 0 },
         "spellIds": [11095, 11095, 11095],
@@ -212,8 +206,8 @@
       {
         "fieldName": "criticalMass",
         "location": { "rowIdx": 4, "colIdx": 1 },
-        "spellIds": [11115, 11115, 11115, 11115, 11115],
-        "maxPoints": 5
+        "spellIds": [11115, 11115, 11115],
+        "maxPoints": 3
       },
       {
         "fieldName": "blastWave",
@@ -233,7 +227,7 @@
         "spellIds": [11129],
         "maxPoints": 1,
         "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
-        "prereqRank": 5
+        "prereqRank": 3
       }
     ]
   },
@@ -254,7 +248,7 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "elementalPrecision",
+        "fieldName": "precision",
         "location": { "rowIdx": 0, "colIdx": 2 },
         "spellIds": [29438, 29438, 29438],
         "maxPoints": 3

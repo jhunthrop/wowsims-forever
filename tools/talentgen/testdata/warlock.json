@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70658",
+  "build": "1.60.1.70707",
   "class_id": 9,
   "class_slug": "warlock",
   "trees": [
@@ -149,15 +149,15 @@
           "ranks": [
             {
               "spell_id": 403511,
-              "description": "Increases health drained or damage done by your Drain Life, Drain Soul, and Wrack spells by 7%."
+              "description": "Increases Health drained, damage done, or Mana drained by your Drain Life, Drain Soul, and Drain Mana spells by 7%."
             },
             {
               "spell_id": 403511,
-              "description": "Increases health drained or damage done by your Drain Life, Drain Soul, and Wrack spells by 13%."
+              "description": "Increases Health drained, damage done, or Mana drained by your Drain Life, Drain Soul, and Drain Mana spells by 13%."
             },
             {
               "spell_id": 403511,
-              "description": "Increases health drained or damage done by your Drain Life, Drain Soul, and Wrack spells by 20%."
+              "description": "Increases Health drained, damage done, or Mana drained by your Drain Life, Drain Soul, and Drain Mana spells by 20%."
             }
           ],
           "spell_id": 403511

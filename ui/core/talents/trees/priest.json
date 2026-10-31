@@ -192,9 +192,9 @@
         "prereqRank": 5
       },
       {
-        "fieldName": "bindingHeal",
+        "fieldName": "holyBinding",
         "location": { "rowIdx": 3, "colIdx": 3 },
-        "spellIds": [401937],
+        "spellIds": [1328569],
         "maxPoints": 1
       },
       {

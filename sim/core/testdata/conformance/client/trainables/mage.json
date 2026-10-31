@@ -1,7 +1,24 @@
 {
-  "build": "1.60.1.70658",
+  "build": "1.60.1.70707",
   "class_slug": "mage",
   "trainables": [
+    {
+      "name": "Accelerant",
+      "skill_line": "Fire",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 11069,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
     {
       "name": "Amplify Magic",
       "skill_line": "Arcane",
@@ -876,23 +893,6 @@
       ]
     },
     {
-      "name": "Elemental Precision",
-      "skill_line": "Frost",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 29438,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Evocation",
       "skill_line": "Arcane",
       "source": "skill_line_ability",
@@ -1219,8 +1219,8 @@
     },
     {
       "name": "Frost Blast",
-      "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "skill_line": "",
+      "source": "class_spell",
       "active": true,
       "cost": 90,
       "cost_type": 0,
@@ -1792,23 +1792,6 @@
       ]
     },
     {
-      "name": "Improved Fireball",
-      "skill_line": "Fire",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 11069,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Improved Flamestrike",
       "skill_line": "Fire",
       "source": "skill_line_ability",
@@ -2255,6 +2238,23 @@
           "id": 11418,
           "rank": 0,
           "level": 40
+        }
+      ]
+    },
+    {
+      "name": "Precision",
+      "skill_line": "Frost",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 29438,
+          "rank": 0,
+          "level": 1
         }
       ]
     },

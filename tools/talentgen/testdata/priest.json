@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70658",
+  "build": "1.60.1.70707",
   "class_id": 5,
   "class_slug": "priest",
   "trees": [
@@ -383,23 +383,23 @@
           "ranks": [
             {
               "spell_id": 425280,
-              "description": "Your heals from Flash Heal, Binding Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 2% increased critical strike chance when cast on targets with Weakened Soul, and reduce the remaining duration of Weakened Soul on their target by 1 sec."
+              "description": "Your heals from Flash Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 2% increased critical strike chance when cast on targets with Weakened Soul, and reduce the remaining duration of Weakened Soul on their target by 1 sec."
             },
             {
               "spell_id": 425280,
-              "description": "Your heals from Flash Heal, Binding Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 4% increased critical strike chance when cast on targets with Weakened Soul, and reduce the remaining duration of Weakened Soul on their target by 2 sec."
+              "description": "Your heals from Flash Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 4% increased critical strike chance when cast on targets with Weakened Soul, and reduce the remaining duration of Weakened Soul on their target by 2 sec."
             },
             {
               "spell_id": 425280,
-              "description": "Your heals from Flash Heal, Binding Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 6% increased critical strike chance when cast on targets with Weakened Soul, and reduce the remaining duration of Weakened Soul on their target by 3 sec."
+              "description": "Your heals from Flash Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 6% increased critical strike chance when cast on targets with Weakened Soul, and reduce the remaining duration of Weakened Soul on their target by 3 sec."
             },
             {
               "spell_id": 425280,
-              "description": "Your heals from Flash Heal, Binding Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 8% increased critical strike chance when cast on targets with Weakened Soul, and reduce the remaining duration of Weakened Soul on their target by 4 sec."
+              "description": "Your heals from Flash Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 8% increased critical strike chance when cast on targets with Weakened Soul, and reduce the remaining duration of Weakened Soul on their target by 4 sec."
             },
             {
               "spell_id": 425280,
-              "description": "Your heals from Flash Heal, Binding Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 10% increased critical strike chance when cast on targets with Weakened Soul, and reduce the remaining duration of Weakened Soul on their target by 5 sec."
+              "description": "Your heals from Flash Heal, Lesser Heal, Heal, Greater Heal, and Penance gain 10% increased critical strike chance when cast on targets with Weakened Soul, and reduce the remaining duration of Weakened Soul on their target by 5 sec."
             }
           ],
           "spell_id": 425280
@@ -740,7 +740,7 @@
         },
         {
           "id": 105856,
-          "name": "Binding Heal",
+          "name": "Holy Binding",
           "icon": "spell_holy_blindingheal",
           "max_rank": 1,
           "tier": 3,
@@ -749,11 +749,12 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 401937,
-              "description": "Heals a friendly target and the caster for 236 to 284. Low threat."
+              "spell_id": 1328569,
+              "description": "Each time you heal a target other than yourself with Flash Heal, you are healed for 50% as much. This healing generates no threat."
             }
           ],
-          "spell_id": 401937
+          "spell_id": 1328569,
+          "hotfix_only": true
         },
         {
           "id": 105855,

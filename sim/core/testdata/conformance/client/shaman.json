@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70658",
+  "build": "1.60.1.70707",
   "class_slug": "shaman",
   "family": 11,
   "spells": {
@@ -28828,6 +28828,42 @@
       ],
       "cost_pct": 0.0,
       "max_level": 68
+    },
+    "1326619": {
+      "name": "Ancestral Spirit",
+      "rank": 5,
+      "school_mask": 8,
+      "cast_time_ms": 10000,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 60,
+      "family_mask": [
+        0,
+        0,
+        268435456,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 329,
+          "aura": 0,
+          "amount": 600,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 800,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 90.0,
+      "max_level": 0
     }
   }
 }

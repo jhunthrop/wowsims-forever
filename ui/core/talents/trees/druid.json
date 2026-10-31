@@ -116,9 +116,9 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "heartOfTheWild",
+        "fieldName": "furor",
         "location": { "rowIdx": 0, "colIdx": 2 },
-        "spellIds": [17003, 17003, 17003, 17003, 17003],
+        "spellIds": [17056, 17056, 17056, 17056, 17056],
         "maxPoints": 5
       },
       {
@@ -170,26 +170,24 @@
         "maxPoints": 2
       },
       {
-        "fieldName": "shiftingPower",
+        "fieldName": "predatoryStrikes",
         "location": { "rowIdx": 3, "colIdx": 0 },
-        "spellIds": [1322605],
-        "maxPoints": 1,
-        "prereqLocation": { "rowIdx": 2, "colIdx": 0 },
-        "prereqRank": 3
+        "spellIds": [16972, 16972, 16972],
+        "maxPoints": 3
       },
       {
-        "fieldName": "primalBite",
+        "fieldName": "lacerate",
         "location": { "rowIdx": 3, "colIdx": 1 },
-        "spellIds": [407995],
+        "spellIds": [1328617],
         "maxPoints": 1,
         "prereqLocation": { "rowIdx": 2, "colIdx": 1 },
         "prereqRank": 2
       },
       {
-        "fieldName": "predatoryStrikes",
+        "fieldName": "predatoryDiscipline",
         "location": { "rowIdx": 3, "colIdx": 2 },
-        "spellIds": [16972, 16972, 16972],
-        "maxPoints": 3
+        "spellIds": [1328613],
+        "maxPoints": 1
       },
       {
         "fieldName": "bloodFrenzy",
@@ -198,14 +196,6 @@
         "maxPoints": 2,
         "prereqLocation": { "rowIdx": 2, "colIdx": 3 },
         "prereqRank": 2
-      },
-      {
-        "fieldName": "improvedShiftingPower",
-        "location": { "rowIdx": 4, "colIdx": 0 },
-        "spellIds": [1322670, 1322670],
-        "maxPoints": 2,
-        "prereqLocation": { "rowIdx": 3, "colIdx": 0 },
-        "prereqRank": 1
       },
       {
         "fieldName": "leaderOfThePack",
@@ -220,25 +210,33 @@
         "maxPoints": 2
       },
       {
-        "fieldName": "naturalReaction",
+        "fieldName": "rendAndTear",
         "location": { "rowIdx": 5, "colIdx": 0 },
+        "spellIds": [1223246, 1223246, 1223246, 1223246, 1223246],
+        "maxPoints": 5,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 0 },
+        "prereqRank": 3
+      },
+      {
+        "fieldName": "naturalReaction",
+        "location": { "rowIdx": 5, "colIdx": 3 },
         "spellIds": [417051, 417051, 417051, 417051, 417051],
         "maxPoints": 5
       },
       {
-        "fieldName": "rendAndTear",
-        "location": { "rowIdx": 5, "colIdx": 2 },
-        "spellIds": [1223246, 1223246, 1223246, 1223246, 1223246],
-        "maxPoints": 5,
-        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
-        "prereqRank": 3
-      },
-      {
-        "fieldName": "berserk",
+        "fieldName": "primalBite",
         "location": { "rowIdx": 6, "colIdx": 1 },
-        "spellIds": [417141],
+        "spellIds": [407995],
         "maxPoints": 1,
         "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
+      },
+      {
+        "fieldName": "shiftingPower",
+        "location": { "rowIdx": 6, "colIdx": 2 },
+        "spellIds": [1322605],
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
         "prereqRank": 1
       }
     ]
@@ -254,9 +252,9 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "furor",
+        "fieldName": "heartOfTheWild",
         "location": { "rowIdx": 0, "colIdx": 2 },
-        "spellIds": [17056, 17056, 17056, 17056, 17056],
+        "spellIds": [17003, 17003, 17003, 17003, 17003],
         "maxPoints": 5
       },
       {
@@ -266,9 +264,9 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "subtlety",
+        "fieldName": "reflection",
         "location": { "rowIdx": 1, "colIdx": 1 },
-        "spellIds": [17118, 17118, 17118],
+        "spellIds": [17106, 17106, 17106],
         "maxPoints": 3
       },
       {
@@ -278,9 +276,9 @@
         "maxPoints": 3
       },
       {
-        "fieldName": "reflection",
+        "fieldName": "subtlety",
         "location": { "rowIdx": 2, "colIdx": 1 },
-        "spellIds": [17106, 17106, 17106],
+        "spellIds": [17118, 17118, 17118],
         "maxPoints": 3
       },
       {
@@ -290,9 +288,9 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "giftOfTheEarthmother",
+        "fieldName": "bloom",
         "location": { "rowIdx": 2, "colIdx": 3 },
-        "spellIds": [414673],
+        "spellIds": [1328621],
         "maxPoints": 1
       },
       {
