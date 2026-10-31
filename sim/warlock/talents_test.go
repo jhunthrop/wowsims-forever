@@ -99,6 +99,20 @@ func TestImprovedDrainsIncreasesDrainDamage(t *testing.T) {
 	}
 }
 
+// TestImprovedDrainsLeavesWrackAlone: since client 1.60.1.70707 Improved
+// Drains names Drain Mana where it named Wrack, so Wrack's damage does not
+// move with it.
+func TestImprovedDrainsLeavesWrackAlone(t *testing.T) {
+	_, bare, _ := newWarlockForDamageTest(t, WrackOnlyTalentsString)
+	_, talented, _ := newWarlockForDamageTest(t, "00000300000000001") // Improved Drains 3 + Wrack.
+	if bare.Wrack == nil || talented.Wrack == nil {
+		t.Fatal("level-60 warlock with the Wrack point has no Wrack registered")
+	}
+	if got, want := talented.Wrack.DamageMultiplierAdditive, bare.Wrack.DamageMultiplierAdditive; !floatsNearlyEqual(got, want) {
+		t.Errorf("Wrack DamageMultiplierAdditive with Improved Drains 3 = %v, want %v as without it", got, want)
+	}
+}
+
 // TestImprovedBaneOfAgonyIncreasesCurseOfAgonyDamage checks rank 2
 // (max, +10%) on Curse of Agony ("Bane of Agony" in this build's text).
 func TestImprovedBaneOfAgonyIncreasesCurseOfAgonyDamage(t *testing.T) {
