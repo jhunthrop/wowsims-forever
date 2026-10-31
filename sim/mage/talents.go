@@ -146,9 +146,9 @@ func (mage *Mage) applyFrostTalents() {
 	// stationary target.
 	_, _ = mage.Talents.FrostWarding, mage.Talents.Permafrost
 
-	// Arctic Reach is range and radius. The mod system has no range kind
-	// and adding one would model nothing.
-	_ = mage.Talents.ArcticReach
+	// Arctic Reach widens Cone of Cold's cone (cone_of_cold.go's
+	// coneOfColdReach); its range half models nothing, since a caster
+	// stands inside every spell's range.
 
 	// Ice Block is a defensive immunity the rotation never casts.
 	_ = mage.Talents.IceBlock

@@ -123,3 +123,33 @@ func TestImprovedConeOfColdRaisesConeDamage(t *testing.T) {
 		t.Errorf("Improved Cone of Cold 3/3 changed Cone damage by x%.3f, want about 1.35", ratio)
 	}
 }
+
+// Cone of Cold's cone is the client's radius index 13, 10 yards, and
+// Arctic Reach widens it 10% a rank. A mage standing farther from the
+// target than that cannot hit it, so the cast is refused rather than
+// dealing damage it could not.
+func TestConeOfColdReachesOnlyTargetsInsideItsCone(t *testing.T) {
+	cases := []struct {
+		arcticReach int
+		distance    float64
+		want        bool
+	}{
+		{0, 5, true},
+		{0, 10, true},
+		{0, 10.5, false},
+		{0, 30, false},
+		{1, 11, true},
+		{1, 11.5, false},
+		{2, 12, true},
+		{2, 12.5, false},
+	}
+	for _, tc := range cases {
+		talents := talentStringWithRank(t, ForeverFrostTalents, "arctic_reach", tc.arcticReach)
+		built, sim, boss := newFrostMageSimWithTalents(t, bossTarget(), talents)
+		built.DistanceFromTarget = tc.distance
+		cone := built.ConeOfCold[ConeOfColdRanks]
+		if got := cone.CanCast(sim, boss); got != tc.want {
+			t.Errorf("Arctic Reach %d/2 at %v yd: CanCast = %v, want %v", tc.arcticReach, tc.distance, got, tc.want)
+		}
+	}
+}

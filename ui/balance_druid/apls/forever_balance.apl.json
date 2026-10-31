@@ -7,17 +7,20 @@
       }
     },
     {
-      "notes": "Under 1.5 seconds left only an instant lands in time; Moonfire's direct damage is the best instant.",
+      "notes": "When less time is left than a Wrath takes to cast, only an instant lands in time; Moonfire's direct damage is the best instant.",
       "action": {
         "condition": {
           "cmp": {
-            "op": "OpLe",
+            "op": "OpLt",
             "lhs": {
               "remainingTime": {}
             },
             "rhs": {
-              "const": {
-                "val": "1.5"
+              "spellCastTime": {
+                "spellId": {
+                  "spellId": 9912,
+                  "rank": 8
+                }
               }
             }
           }
@@ -31,19 +34,73 @@
       }
     },
     {
-      "notes": "Less than 3.5 seconds left: Wrath's 2 second cast still finishes, Starfire's 3.5 second cast would not.",
+      "notes": "When less time is left than the next Starfire takes to cast (3.0 sec with Improved Starfire, 2.5 on an Eclipse charge), Wrath still finishes and Starfire would not. Before Starfire is learned (level 20) the window is the last 3.5 seconds, as before.",
       "action": {
         "condition": {
-          "cmp": {
-            "op": "OpLe",
-            "lhs": {
-              "remainingTime": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "3.5"
+          "or": {
+            "vals": [
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "spellIsKnown": {
+                        "spellId": {
+                          "spellId": 9876,
+                          "rank": 6
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "remainingTime": {}
+                        },
+                        "rhs": {
+                          "spellCastTime": {
+                            "spellId": {
+                              "spellId": 9876,
+                              "rank": 6
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "not": {
+                        "val": {
+                          "spellIsKnown": {
+                            "spellId": {
+                              "spellId": 9876,
+                              "rank": 6
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLe",
+                        "lhs": {
+                          "remainingTime": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "3.5"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
               }
-            }
+            ]
           }
         },
         "castSpell": {
@@ -101,7 +158,42 @@
       }
     },
     {
-      "notes": "Starfire is the rest of the rotation once Moonfire and Insect Swarm are ticking.",
+      "notes": "Eclipse (the talent): with no Eclipse charge banked, Wrath. Each Wrath banks two charges that take 0.5 sec off the next two Starfires (3.0 to 2.5 sec with Improved Starfire), and Improved Wrath makes the Wrath itself a 1.5 sec cast, so one Wrath plus two quick Starfires beats three plain Starfires in the same time. Without the talent there is no charge to bank and the line never fires.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 408248
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "auraIsActive": {
+                      "auraId": {
+                        "spellId": 408248
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9912,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
+      "notes": "Starfire is the rest of the rotation once Moonfire and Insect Swarm are ticking, spending the Eclipse charges Wrath banked.",
       "action": {
         "castSpell": {
           "spellId": {

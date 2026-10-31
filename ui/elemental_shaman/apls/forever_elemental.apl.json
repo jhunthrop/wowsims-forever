@@ -66,7 +66,8 @@
     {
       "action": {
         "autocastOtherCooldowns": {}
-      }
+      },
+      "notes": "Elemental Mastery and the trinkets go on cooldown here. Forever's Elemental Mastery takes 0.5 sec off Lightning Bolt and Lava Burst for 15 seconds (a 1.5 sec Lightning Bolt with Elemental Alacrity) and removes Chain Lightning's cooldown; the next-spell crit it gave in 1.12 is gone."
     },
     {
       "notes": "Keep Flame Shock on the target: its damage plus Lava Burst's +20% beats the Lightning Bolt it replaces, and Call of Flame stretches it to 21 seconds, so it costs about one global in fourteen.",

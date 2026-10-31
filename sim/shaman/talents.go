@@ -293,83 +293,89 @@ func elementalFuryApplies(spell *core.Spell) bool {
 	return spell.Flags.Matches(SpellFlagShaman)
 }
 
+// ElementalMasteryCastTimeReduction is Elemental Mastery's flat cut to
+// Lightning Bolt's and Lava Burst's cast time (spell 16166, effect 0:
+// aura 107 on misc value 10, the cast time modifier, -500 ms).
+const ElementalMasteryCastTimeReduction = 500 * time.Millisecond
+
+// elementalMasteryDuration and elementalMasteryCooldown are the client's
+// duration_ms 15000 and cooldown_ms 180000.
+const (
+	elementalMasteryDuration = 15 * time.Second
+	elementalMasteryCooldown = 3 * time.Minute
+)
+
+// registerElementalMasteryCD is Forever's Elemental Mastery (1.60.1.70658,
+// spell 16166): "Gain mastery over Fire and Lightning, reducing the cast
+// time of Lightning Bolt and Lava Burst by 0.5 sec, and removing the
+// cooldown from Chain Lightning. Lasts 15 sec." Vanilla's next-spell 100%
+// crit is gone from the client. The cut is flat, on the pre-haste base
+// cast time like Elemental Alacrity's, so it is applied to DefaultCast and
+// handed back exactly when the aura fades; Chain Lightning's cooldown is
+// zeroed (and any running one finished) for the same window.
 func (shaman *Shaman) registerElementalMasteryCD() {
-	/*
-		if !shaman.Talents.ElementalMastery {
-			return
-		}
+	if !shaman.Talents.ElementalMastery {
+		return
+	}
 
-		actionID := core.ActionID{SpellID: 16166}
+	actionID := core.ActionID{SpellID: ElementalMasterySpellId[0]}
+	var shortened []*core.Spell
+	var chainLightning []*core.Spell
+	var cutBy = map[*core.Spell]time.Duration{}
+	var chainCD time.Duration
 
-		cdTimer := shaman.NewTimer()
-		cd := time.Minute * 3
+	emAura := shaman.RegisterAura(core.Aura{
+		Label:    "Elemental Mastery",
+		ActionID: actionID,
+		Duration: elementalMasteryDuration,
+		OnInit: func(aura *core.Aura, sim *core.Simulation) {
+			shortened = core.FilterSlice(shaman.Spellbook, func(spell *core.Spell) bool {
+				return spell.SpellCode == SpellCode_ShamanLightningBolt || spell.SpellCode == SpellCode_ShamanLavaBurst
+			})
+			chainLightning = core.FilterSlice(shaman.Spellbook, func(spell *core.Spell) bool {
+				return spell.SpellCode == SpellCode_ShamanChainLightning
+			})
+		},
+		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+			for _, spell := range shortened {
+				cut := min(ElementalMasteryCastTimeReduction, spell.DefaultCast.CastTime)
+				cutBy[spell] = cut
+				spell.DefaultCast.CastTime -= cut
+			}
+			for _, spell := range chainLightning {
+				chainCD = spell.CD.Duration
+				spell.CD.Duration = 0
+				spell.CD.Reset()
+			}
+		},
+		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+			for _, spell := range shortened {
+				spell.DefaultCast.CastTime += cutBy[spell]
+			}
+			for _, spell := range chainLightning {
+				spell.CD.Duration = chainCD
+			}
+		},
+	})
 
-		var affectedSpells []*core.Spell
+	shaman.ElementalMastery = shaman.RegisterSpell(core.SpellConfig{
+		ActionID: actionID,
+		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
+		Cast: core.CastConfig{
+			CD: core.Cooldown{
+				Timer:    shaman.NewTimer(),
+				Duration: elementalMasteryCooldown,
+			},
+		},
+		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+			emAura.Activate(sim)
+		},
+	})
 
-		emAura := shaman.RegisterAura(core.Aura{
-			Label:    "Elemental Mastery",
-			ActionID: actionID,
-			Duration: core.NeverExpires,
-			OnInit: func(aura *core.Aura, sim *core.Simulation) {
-				affectedSpells = core.FilterSlice(
-					shaman.Spellbook,
-					func(spell *core.Spell) bool { return spell != nil && shaman.isShamanDamagingSpell(spell) },
-				)
-			},
-			OnGain: func(aura *core.Aura, sim *core.Simulation) {
-				core.Each(affectedSpells, func(spell *core.Spell) {
-					spell.BonusCritRating += core.CritRatingPerCritChance * 100
-					if spell.Cost != nil {
-						spell.Cost.Multiplier -= 100
-					}
-				})
-			},
-			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-				core.Each(affectedSpells, func(spell *core.Spell) {
-					spell.BonusCritRating -= core.CritRatingPerCritChance * 100
-					if spell.Cost != nil {
-						spell.Cost.Multiplier += 100
-					}
-				})
-				shaman.ElementalMastery.CD.Use(sim)
-			},
-			OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-				if shaman.isShamanDamagingSpell(spell) {
-					// Elemental mastery can be batched
-					core.StartDelayedAction(sim, core.DelayedActionOptions{
-						DoAt: sim.CurrentTime + core.SpellBatchWindow,
-						OnAction: func(sim *core.Simulation) {
-							if aura.IsActive() {
-								// Remove the buff and put skill on CD
-								aura.Deactivate(sim)
-								cdTimer.Set(sim.CurrentTime + cd)
-								shaman.UpdateMajorCooldowns()
-							}
-						},
-					})
-				}
-			},
-		})
-
-		shaman.ElementalMastery = shaman.RegisterSpell(core.SpellConfig{
-			ActionID: actionID,
-			Flags:    core.SpellFlagNoOnCastComplete,
-			Cast: core.CastConfig{
-				CD: core.Cooldown{
-					Timer:    cdTimer,
-					Duration: cd,
-				},
-			},
-			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-				emAura.Activate(sim)
-			},
-		})
-
-		shaman.AddMajorCooldown(core.MajorCooldown{
-			Spell: shaman.ElementalMastery,
-			Type:  core.CooldownTypeDPS,
-		})
-	*/
+	shaman.AddMajorCooldown(core.MajorCooldown{
+		Spell: shaman.ElementalMastery,
+		Type:  core.CooldownTypeDPS,
+	})
 }
 
 func (shaman *Shaman) registerNaturesSwiftnessCD() {

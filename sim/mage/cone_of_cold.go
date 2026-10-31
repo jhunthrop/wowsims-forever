@@ -25,14 +25,23 @@ import (
 // Model decisions the rows do not carry:
 //   - Binary: the spell is a damage effect plus a snare aura, the same
 //     structure as Frostbolt, which the engine treats as binary.
-//   - Every target of the encounter stands in the cone; the snare itself
-//     changes nothing on a stationary target.
+//   - Every target of the encounter stands in the cone when the mage does;
+//     the snare itself changes nothing on a stationary target.
+//   - Reach: the cone is radius index 13, 10 yards, widened 10% a rank by
+//     Arctic Reach ("the radius of your Frost Nova and Cone of Cold spells
+//     by 10/20%"). A mage standing farther from the target than that
+//     (unit.DistanceFromTarget, the site's casters stand at 30) cannot
+//     cast it at the target, so a rotation line for it is skipped.
 func (mage *Mage) registerConeOfColdSpell() {
 	mage.ConeOfCold = make([]*core.Spell, ConeOfColdRanks+1)
 
 	cdTimer := mage.NewTimer()
+	reach := mage.coneOfColdReach()
 	for rank := 1; rank <= ConeOfColdRanks; rank++ {
 		config := mage.getConeOfColdConfig(rank, cdTimer)
+		config.ExtraCastCondition = func(_ *core.Simulation, _ *core.Unit) bool {
+			return mage.DistanceFromTarget <= reach
+		}
 
 		if config.RequiredLevel <= int(mage.Level) {
 			mage.ConeOfCold[rank] = mage.GetOrRegisterSpell(config)
@@ -96,6 +105,19 @@ func (mage *Mage) getConeOfColdConfig(rank int, cdTimer *core.Timer) core.SpellC
 			}
 		},
 	}
+}
+
+// coneOfColdRadius is the client's radius index 13; arcticReachRadiusPerRank
+// is Arctic Reach's 10% a rank.
+const (
+	coneOfColdRadius         = 10.0
+	arcticReachRadiusPerRank = 0.10
+)
+
+// coneOfColdReach is how far from the target the mage can stand and still
+// catch it in the cone.
+func (mage *Mage) coneOfColdReach() float64 {
+	return coneOfColdRadius * (1 + arcticReachRadiusPerRank*float64(mage.Talents.ArcticReach))
 }
 
 // Winter's Chill on Cone of Cold (client 1.60.1.70532): a stack is 5%
