@@ -157,18 +157,18 @@ func TestFrostfireBoltDealsDirectDamageAndA9SecondDot(t *testing.T) {
 	}
 }
 
-func TestImprovedFireballShortensFrostfireBolt(t *testing.T) {
-	talents := talentStringWithRank(t, ForeverFrostTalents, "improved_fireball", 5)
+func TestAccelerantShortensFrostfireBolt(t *testing.T) {
+	talents := talentStringWithRank(t, ForeverFrostTalents, "accelerant", 5)
 	_, mage := newMageAtLevel(t, 60, talents)
 	want := time.Duration(FrostfireBoltCastTime[FrostfireBoltRanks])*time.Millisecond - 500*time.Millisecond
 	if got := mage.FrostfireBolt[FrostfireBoltRanks].CastTime(); got != want {
-		t.Errorf("cast time with 5/5 Improved Fireball = %v, want %v", got, want)
+		t.Errorf("cast time with 5/5 Accelerant = %v, want %v", got, want)
 	}
 	// The Fireball half of the same talent, in the same place: one
 	// talent, one reduction.
 	wantFireball := time.Duration(FireballCastTime[FireballRanks])*time.Millisecond - 500*time.Millisecond
 	if got := mage.Fireball[core.MaxTrainerRank(FireballRanks)].CastTime(); got != wantFireball {
-		t.Errorf("Fireball cast time with 5/5 Improved Fireball = %v, want %v", got, wantFireball)
+		t.Errorf("Fireball cast time with 5/5 Accelerant = %v, want %v", got, wantFireball)
 	}
 }
 

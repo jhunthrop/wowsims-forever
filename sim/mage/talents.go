@@ -29,15 +29,15 @@ import (
 // It is not advice; it is a fixed input so a DPS change is attributable
 // to the engine rather than to a build edit.
 //
-// Written against the CLIENT's tree, so its segments are 19, 17 and 18
+// Written against the CLIENT's tree, so its segments are 18, 17 and 18
 // characters (TalentTreeSizes), in the client's tree order Arcane, Fire,
 // Frost. Spend:
 //
-//	Arcane 20: Arcane Focus 5, Arcane Concentration 5, Arcane Geometry 2,
-//	           Arcane Impact 3, Arcane Shielding 1, Arcane Meditation 3,
-//	           Missile Barrage 1
+//	Arcane 20: Improved Channeling 5, Arcane Concentration 5,
+//	           Missile Barrage 1, Arcane Geometry 2, Arcane Impact 3,
+//	           Arcane Shielding 1, Arcane Meditation 3
 //	Fire 0
-//	Frost 31: Improved Frostbolt 5, Elemental Precision 3, Ice Shards 5,
+//	Frost 31: Improved Frostbolt 5, Precision 3, Ice Shards 5,
 //	          Frost Channeling 1, Ice Lance 1, Arctic Reach 2, Shatter 3,
 //	          Improved Cone of Cold 2, Cold Snap 1, Fingers of Frost 2,
 //	          Winter's Chill 5, Ice Barrier 1
@@ -45,8 +45,13 @@ import (
 // 51 points, every tier gate and prerequisite satisfied, and Ice Barrier
 // at the bottom of Frost is what the 31 points buy. Client 1.60.1.70532
 // removed Piercing Ice; its three points carry by name into the
-// three-rank Elemental Precision that build introduced.
-const ForeverFrostTalents = "0501005023010300000-00000000000000000-053500010120321251"
+// three-rank Elemental Precision that build introduced. Client
+// 1.60.1.70685 removed Arcane Focus from the top Arcane row; its five
+// points go to Improved Channeling, the row's other five-rank talent, so
+// the tier gates hold and the build changes only by Arcane Focus's hit,
+// which Precision (Elemental Precision renamed and widened to every
+// school) now carries.
+const ForeverFrostTalents = "050005123010300000-00000000000000000-053500010120321251"
 
 func (mage *Mage) ApplyTalents() {
 	mage.applyDeclarativeTalents()
@@ -547,12 +552,6 @@ const (
 	// "Reduces your target's resistance ... and reduces the threat
 	// caused by your Arcane spells by 15%." Vanilla's was 20%.
 	arcaneSubtletyThreatReductionPerRank = 0.15
-	// "Improves your chance to hit with Arcane spells by 1%." In
-	// vanilla this talent reduced the target's chance to resist
-	// instead; Forever folded that lever into unified hit
-	// (research/08-stats.md section 1.2), so it is 1% a rank of hit,
-	// not 2% a rank of resist reduction.
-	arcaneFocusHitPerRank = 1.0
 	// "Increases the critical strike chance of your Arcane spells by
 	// 2%." New: vanilla's tree had no Arcane crit talent here.
 	arcaneImpactCritPerRank = 2.0
@@ -572,20 +571,25 @@ const (
 	// spells by 10%." Vanilla's was 15% a rank.
 	burningSoulThreatReductionPerRank = 0.10
 	// "Increases the critical strike chance of your Fire spells by 2%."
+	// Client 1.60.1.70685: three ranks (Combustion's prerequisite with
+	// them), where 70658 had five.
 	criticalMassCritPerRank = 2.0
 	// "Increases the damage done by your Fire spells by 2%."
 	firePowerDamagePerRank = 2
 	// "Increases the critical strike chance of your Fire Blast, Ice
 	// Lance, Arcane Blast, and Scorch spells by 2%." The spell list is
 	// Forever's and crosses all three schools, which is exactly what a
-	// mask expresses and a school check cannot.
+	// mask expresses and a school check cannot. Client 1.60.1.70685: five
+	// ranks, where 70658 had three.
 	incinerationCritPerRank = 2.0
 	// "Increases the critical strike chance of your Flamestrike spell
 	// by 5%."
 	improvedFlamestrikeCritPerRank = 5.0
-	// "Reduces the casting time of your Fireball and Frostfire Bolt
-	// spells by 0.1 sec."
-	improvedFireballCastTimePerRank = -100 * time.Millisecond
+	// Accelerant: "Reduces the casting time of your Fireball, Frostfire
+	// Bolt, and Arcane Wrath spells by 0.1 sec." Client 1.60.1.70685
+	// renamed Improved Fireball (same node 105795, spell 11069) and added
+	// Arcane Wrath to it.
+	accelerantCastTimePerRank = -100 * time.Millisecond
 	// Improved Fire Blast (Wake of Fire's slot in the 1.60.1.70425 tree):
 	// "Reduces the cooldown of your Fire Blast spell by 1 sec and
 	// increases its range by 8 yards." The range half changes nothing
@@ -594,10 +598,15 @@ const (
 
 	// "Reduces the casting time of your Frostbolt spell by 0.1 sec."
 	improvedFrostboltCastTimePerRank = -100 * time.Millisecond
-	// "Improves your chance to hit with Frost and Fire spells by 2%."
+	// Precision: "Improves your chance to hit with all spells by 2%."
+	// Client 1.60.1.70685 renamed Elemental Precision (same node 105778,
+	// spell 29438) and widened it from Frost and Fire to every school, in
+	// the build that removed Arcane Focus, the Arcane hit talent.
 	// Client 1.60.1.70532: three ranks of 2%, where 70425 had five of 1%.
-	// Vanilla's reduced resist chance by 2% a rank; see Arcane Focus.
-	elementalPrecisionHitPerRank = 2.0
+	// Vanilla's reduced the target's chance to resist instead; Forever
+	// folded that lever into unified hit (research/08-stats.md section
+	// 1.2).
+	precisionHitPerRank = 2.0
 	// "Gives your Frostbolt, Frost Blast, and Fingers of Frost empowered
 	// Ice Lance spells a 20% chance to apply Winter's Chill" - the stacks
 	// themselves are spent by Cone of Cold (cone_of_cold.go).
@@ -670,14 +679,6 @@ func (mage *Mage) applyDeclarativeTalents() {
 		})
 	}
 
-	if t.ArcaneFocus > 0 {
-		mage.AddStaticMod(core.SpellModConfig{
-			Kind:       core.SpellMod_BonusHit_Flat,
-			ClassMask:  MageSpellMaskArcaneDamage,
-			FloatValue: arcaneFocusHitPerRank * float64(t.ArcaneFocus) * core.HitRatingPerHitChance,
-		})
-	}
-
 	if t.ArcaneImpact > 0 {
 		mage.AddStaticMod(core.SpellModConfig{
 			Kind:       core.SpellMod_BonusCrit_Flat,
@@ -733,7 +734,7 @@ func (mage *Mage) applyDeclarativeTalents() {
 		mage.AddStaticMod(core.SpellModConfig{
 			Kind:       core.SpellMod_BonusCrit_Flat,
 			ClassMask:  MageSpellMaskFireDamage,
-			FloatValue: criticalMassCritPerRank * float64(t.CriticalMass) * core.CritRatingPerCritChance,
+			FloatValue: criticalMassCritPerRank * float64(rankOf("critical_mass", t.CriticalMass)) * core.CritRatingPerCritChance,
 		})
 	}
 
@@ -744,7 +745,7 @@ func (mage *Mage) applyDeclarativeTalents() {
 		mage.AddStaticMod(core.SpellModConfig{
 			Kind:       core.SpellMod_BonusCrit_Flat,
 			ClassMask:  MageSpellMaskFireBlast | MageSpellMaskIceLance | MageSpellMaskArcaneBlast | MageSpellMaskScorch,
-			FloatValue: incinerationCritPerRank * float64(t.Incineration) * core.CritRatingPerCritChance,
+			FloatValue: incinerationCritPerRank * float64(rankOf("incineration", t.Incineration)) * core.CritRatingPerCritChance,
 		})
 	}
 
@@ -756,11 +757,11 @@ func (mage *Mage) applyDeclarativeTalents() {
 		})
 	}
 
-	if t.ImprovedFireball > 0 {
+	if t.Accelerant > 0 {
 		mage.AddStaticMod(core.SpellModConfig{
 			Kind:      core.SpellMod_CastTime_Flat,
-			ClassMask: MageSpellMaskFireball | MageSpellMaskFrostfireBolt,
-			TimeValue: improvedFireballCastTimePerRank * time.Duration(t.ImprovedFireball),
+			ClassMask: MageSpellMaskFireball | MageSpellMaskFrostfireBolt | MageSpellMaskArcaneWrath,
+			TimeValue: accelerantCastTimePerRank * time.Duration(t.Accelerant),
 		})
 	}
 
@@ -782,11 +783,14 @@ func (mage *Mage) applyDeclarativeTalents() {
 		})
 	}
 
-	if t.ElementalPrecision > 0 {
+	if t.Precision > 0 {
+		// "all spells": every spell this class registers, as with Arcane
+		// Instability. Spells cast by items (trinket and weapon procs)
+		// carry no mage class mask and do not get it.
 		mage.AddStaticMod(core.SpellModConfig{
-			Kind:       core.SpellMod_BonusHit_Flat,
-			ClassMask:  MageSpellMaskFrostDamage | MageSpellMaskFireDamage,
-			FloatValue: elementalPrecisionHitPerRank * float64(t.ElementalPrecision) * core.HitRatingPerHitChance,
+			Kind:            core.SpellMod_BonusHit_Flat,
+			ClassSpellsOnly: true,
+			FloatValue:      precisionHitPerRank * float64(rankOf("precision", t.Precision)) * core.HitRatingPerHitChance,
 		})
 	}
 
