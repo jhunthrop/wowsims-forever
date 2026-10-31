@@ -160,9 +160,12 @@ func loadDefaultRotation(t *testing.T) *proto.APLRotation {
 }
 
 // castIDs is the rotation's healing kit: what it has to be seen casting.
-var castIDs = struct{ healingTouch, regrowth, rejuvenation, tranquility, wildGrowth, swiftmend, naturesSwiftness, innervate int32 }{
+// Wild Growth is not in it: the site's guide build does not take the
+// talent, so the shipped rotation has no Wild Growth line since client
+// 1.60.1.70707.
+var castIDs = struct{ healingTouch, regrowth, rejuvenation, tranquility, swiftmend, naturesSwiftness, innervate int32 }{
 	healingTouch: 9889, regrowth: 9858, rejuvenation: 9841, tranquility: 9863,
-	wildGrowth: 1238215, swiftmend: 18562, naturesSwiftness: 17116, innervate: 29166,
+	swiftmend: 18562, naturesSwiftness: 17116, innervate: 29166,
 }
 
 func TestDefaultRotationHealsTheTestRaid(t *testing.T) {
@@ -180,7 +183,7 @@ func TestDefaultRotationHealsTheTestRaid(t *testing.T) {
 	}
 	for name, id := range map[string]int32{
 		"Healing Touch": castIDs.healingTouch, "Regrowth": castIDs.regrowth, "Rejuvenation": castIDs.rejuvenation,
-		"Tranquility": castIDs.tranquility, "Wild Growth": castIDs.wildGrowth, "Swiftmend": castIDs.swiftmend,
+		"Tranquility": castIDs.tranquility, "Swiftmend": castIDs.swiftmend,
 		"Nature's Swiftness": castIDs.naturesSwiftness, "Innervate": castIDs.innervate,
 	} {
 		if summary.Casts[id] == 0 {
