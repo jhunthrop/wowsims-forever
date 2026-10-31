@@ -69,7 +69,7 @@ func (hunter *Hunter) getCounterattackConfig(rank int) core.SpellConfig {
 		// duration to read instead of reporting the aura as missing.
 		RelatedSelfBuff: hunter.CounterattackProcAura,
 
-		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
+		CritDamageBonus:  hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		ClientBaseDamage: flatDamage.Range(casterLevel),

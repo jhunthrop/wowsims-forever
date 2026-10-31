@@ -94,7 +94,7 @@ func (hunter *Hunter) newRaptorStrikeHitSpell(rank int) *core.Spell {
 		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell,
 
 		BonusCritRating:  hunter.savageStrikesCritRating(),
-		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
+		CritDamageBonus:  hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
 		BonusCoefficient: 1,
 

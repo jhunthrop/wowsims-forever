@@ -55,7 +55,7 @@ func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 		RelatedSelfBuff: hunter.MongooseBiteWindowAura,
 
 		BonusCritRating:  hunter.savageStrikesCritRating(),
-		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
+		CritDamageBonus:  hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		ClientBaseDamage: damage.Range(casterLevel),

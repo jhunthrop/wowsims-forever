@@ -18,11 +18,13 @@ func (hunter *Hunter) registerRapidFire() {
 		ActionID: actionID,
 		Duration: time.Second * 15,
 
+		// Client 3045: aura 140 (ranged haste 40) and aura 319 (melee
+		// haste 40), "ranged and melee attack speed by 40%".
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.MultiplyRangedSpeed(sim, 1.4)
+			aura.Unit.MultiplyAttackSpeed(sim, 1.4)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.MultiplyRangedSpeed(sim, 1/1.4)
+			aura.Unit.MultiplyAttackSpeed(sim, 1/1.4)
 		},
 	})
 

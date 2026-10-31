@@ -64,7 +64,7 @@ func (hunter *Hunter) registerStriderKickSpell() {
 			return hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance
 		},
 
-		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
+		CritDamageBonus:  hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 

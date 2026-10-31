@@ -303,17 +303,19 @@ func (hunter *Hunter) registerBestialWrathCD() {
 	})
 }
 
+// mortalShots is Mortal Shots' ranged crit damage bonus (19485, "all
+// ranged abilities"). Its class mask holds the shots and Auto Shot and no
+// melee strike, so only ranged spells read it.
 func (hunter *Hunter) mortalShots() float64 {
 	return 0.06 * float64(hunter.Talents.MortalShots)
 }
 
 // predatorsEdgeCritDamage is Predator's Edge's melee-critical-strike-damage
 // half (client text: "Increases your melee critical strike damage by
-// 6/12/18/24/30%", spell 1310627). It is added directly into each melee
-// special's CritDamageBonus, the same way mortalShots() is, rather than
-// through applyPredatorsEdge's OnSpellRegistered hook, because it must
-// exclude ranged shots (mortalShots applies to those too) and every
-// melee special file already reads mortalShots() by hand.
+// 6/12/18/24/30%", spell 1310627), the melee counterpart of Mortal Shots.
+// Each melee special adds it to its CritDamageBonus directly, rather than
+// through applyPredatorsEdge's OnSpellRegistered hook, so ranged shots
+// stay out of it.
 func (hunter *Hunter) predatorsEdgeCritDamage() float64 {
 	return 0.06 * float64(hunter.Talents.PredatorsEdge)
 }
@@ -362,13 +364,23 @@ func (hunter *Hunter) applyCleverTraps() {
 	})
 }
 
+// efficiencyMeleeSpellCodes are the melee strikes in Efficiency's client
+// class mask (19416): Raptor Strike, Mongoose Bite, Wing Clip and
+// Counterattack. Strider Kick is outside it.
+var efficiencyMeleeSpellCodes = []int32{
+	SpellCode_HunterRaptorStrike,
+	SpellCode_HunterMongooseBite,
+	SpellCode_HunterWingClip,
+	SpellCode_HunterCounterattack,
+}
+
 func (hunter *Hunter) applyEfficiency() {
 	hunter.OnSpellRegistered(func(spell *core.Spell) {
-		// applies to Stings, Shots, and Volley
+		// Stings, Shots, Volley and the melee strikes in its class mask.
 		// Parenthesised on purpose: `a && b || c` read Cost through a nil pointer whenever the
 		// Volley clause matched a spell registered without a cost, which a character built
 		// below 60 was the first to do.
-		if spell.Cost != nil && (spell.Flags.Matches(SpellFlagSting|SpellFlagShot) || spell.SpellCode == SpellCode_HunterVolley) {
+		if spell.Cost != nil && (spell.Flags.Matches(SpellFlagSting|SpellFlagShot) || spell.SpellCode == SpellCode_HunterVolley || slices.Contains(efficiencyMeleeSpellCodes, spell.SpellCode)) {
 			spell.Cost.Multiplier -= efficiencyCostReductionPerRank * hunter.Talents.Efficiency
 		}
 	})
@@ -491,17 +503,18 @@ func (hunter *Hunter) applyImprovedStings() {
 }
 
 // applyCarefulAim is Careful Aim (talents/hunter.json node 105008,
-// Marksmanship, max rank 5, spell 1223984): "Increases your Attack
-// Power by 20/40/60/80/100% of your Intellect." A dynamic stat
-// dependency, the exact shape this file's stats package doc comment
-// gives as its own example ("Increases your AP by 30% of your Int"),
-// so it stays correct if Intellect ever changes from gear or a buff.
+// Marksmanship, max rank 5, spell 1223984): "Increases your melee and
+// ranged Attack Power by 20/40/60/80/100% of your Intellect." The client
+// spell has both halves, aura 598 (melee) and aura 580 (ranged). Dynamic
+// stat dependencies, so they stay correct when Intellect changes.
 func (hunter *Hunter) applyCarefulAim() {
 	if hunter.Talents.CarefulAim == 0 {
 		return
 	}
 
-	hunter.AddStatDependency(stats.Intellect, stats.AttackPower, 0.20*float64(hunter.Talents.CarefulAim))
+	share := 0.20 * float64(hunter.Talents.CarefulAim)
+	hunter.AddStatDependency(stats.Intellect, stats.AttackPower, share)
+	hunter.AddStatDependency(stats.Intellect, stats.RangedAttackPower, share)
 }
 
 // applyRapidKilling is Rapid Killing (talents/hunter.json node 105005,

@@ -265,6 +265,11 @@ func TestCarefulAimAddsAttackPowerFromIntellect(t *testing.T) {
 	if got := withTalent.GetStat(stats.AttackPower) - withoutTalent.GetStat(stats.AttackPower); !floatsClose(got, want) {
 		t.Errorf("AttackPower delta = %f, want %f (100%% of %f Intellect)", got, want, intellect)
 	}
+	// Client 1223984 carries both halves: aura 598 (melee attack power
+	// from a stat) and aura 580 (ranged attack power from a stat).
+	if got := withTalent.GetStat(stats.RangedAttackPower) - withoutTalent.GetStat(stats.RangedAttackPower); !floatsClose(got, want) {
+		t.Errorf("RangedAttackPower delta = %f, want %f (100%% of %f Intellect)", got, want, intellect)
+	}
 }
 
 func TestRapidKillingReducesRapidFireCooldown(t *testing.T) {

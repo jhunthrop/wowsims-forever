@@ -48,7 +48,7 @@ func (hunter *Hunter) getWingClipConfig(rank int) core.SpellConfig {
 			return hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance
 		},
 
-		CritDamageBonus:  hunter.mortalShots() + hunter.predatorsEdgeCritDamage(),
+		CritDamageBonus:  hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
 		BonusCoefficient: 1,
 		ClientBaseDamage: damage.Range(casterLevel),

@@ -199,37 +199,21 @@ func (hunter *Hunter) Initialize() {
 	hunter.registerAspectOfTheFalconSpell()
 	hunter.registerHuntersMarkSpell()
 
-	multiShotTimer := hunter.NewTimer()
+	// Multi-Shot and Aimed Shot share spell category 2 (6 s) in Forever;
+	// both tooltips say so. Arcane Shot is category 1173 and keeps its own
+	// clock, which Summon Hawk shares (below). One shared timer for all
+	// three once left Arcane Shot uncastable as the rotation's gap filler.
+	sharedShotTimer := hunter.NewTimer()
 	arcaneShotTimer := hunter.NewTimer()
-	aimedShotTimer := hunter.NewTimer()
 
 	hunter.registerSerpentStingSpell()
 
-	// Arcane Shot, Aimed Shot and Multi-Shot each carry their own timer:
-	// they used to share arcaneShotTimer between Arcane Shot and Aimed
-	// Shot (Multi-Shot already had its own), which - despite the
-	// client's spellconst carrying the same category_cooldown_ms (6000)
-	// on all three, a real Classic "shot" category - could never let
-	// Arcane Shot itself fire. Marksmanship's rotation casts Arcane
-	// Shot specifically as the filler for the gap BETWEEN Aimed Shot
-	// and Multi-Shot's own cooldowns (spellTimeToReady on both > 1.5s);
-	// with a shared timer, Arcane Shot's own IsReady() read the exact
-	// same clock the rotation was checking was NOT ready, so the two
-	// conditions could never both be true - Arcane Shot was
-	// structurally uncastable at every level, confirmed with a
-	// temporary debug counter (ExtraCastCondition true, CanCast's own
-	// CD.IsReady false, every single attempt).
 	hunter.registerArcaneShotSpell(arcaneShotTimer)
-	hunter.registerAimedShotSpell(aimedShotTimer)
-	hunter.registerMultiShotSpell(multiShotTimer)
+	hunter.registerAimedShotSpell(sharedShotTimer)
+	hunter.registerMultiShotSpell(sharedShotTimer)
 
-	// Summon Hawk (talent) genuinely shares Arcane Shot's own category
-	// cooldown per the client's tooltip ("Summon Hawk shares its
-	// cooldown with Arcane Shot") and spellconst/hunter.json agrees
-	// (both carry category_cooldown_ms 6000) - unlike the Aimed
-	// Shot/Multi-Shot timer-sharing bug documented above, where two
-	// unrelated shots coincidentally carried the same category and
-	// sharing broke Arcane Shot's own readiness check.
+	// Summon Hawk (talent) shares Arcane Shot's category cooldown per the
+	// client's tooltip ("Summon Hawk shares its cooldown with Arcane Shot").
 	hunter.registerSummonHawkSpell(arcaneShotTimer)
 	hunter.registerSniperShotSpell()
 

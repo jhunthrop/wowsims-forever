@@ -55,7 +55,7 @@
       }
     },
     {
-      "notes": "Rapid Fire timed to land with an incoming auto shot just as Aimed Shot is about to come off cooldown, so both benefit.",
+      "notes": "Rapid Fire timed to land with an incoming auto shot just as Multi-Shot is about to come off cooldown, so both benefit.",
       "action": {
         "condition": {
           "and": {
@@ -81,8 +81,8 @@
                   "lhs": {
                     "spellTimeToReady": {
                       "spellId": {
-                        "spellId": 20904,
-                        "rank": 6
+                        "spellId": 2643,
+                        "rank": 0
                       }
                     }
                   },
@@ -104,49 +104,8 @@
       }
     },
     {
-      "notes": "Aimed Shot on cooldown, timed so its cast does not clip the next auto shot.",
+      "notes": "Multi-Shot on cooldown. It shares its 6 second cooldown with Aimed Shot, and the instant shot does more over a fight than Aimed Shot's cast, which pauses the auto shot.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "autoTimeToNext": {
-                "autoType": "Ranged"
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "1s"
-              }
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 20904,
-            "rank": 6
-          }
-        }
-      }
-    },
-    {
-      "notes": "Multi-Shot as the filler between Aimed Shots.",
-      "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "autoTimeToNext": {
-                "autoType": "Ranged"
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "0.5s"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 2643,
@@ -156,7 +115,7 @@
       }
     },
     {
-      "notes": "Arcane Shot as the last filler, only when Aimed Shot will not be ready within a global and mana is above a 25% reserve (Multi-Shot and Serpent Sting are the shots worth saving for): it is instant, so it never clips an auto shot and can hold Multi-Shot back by at most one global, but it is the least mana-efficient shot, and a Classic-length fight runs dry without the floor.",
+      "notes": "Arcane Shot as the last filler, only when Multi-Shot will not be ready within a global and mana is above a 25% reserve (Multi-Shot and Serpent Sting are the shots worth saving for): it is instant, so it never clips an auto shot and can hold Multi-Shot back by at most one global, but it is the least mana-efficient shot, and a Classic-length fight runs dry without the floor.",
       "action": {
         "condition": {
           "and": {
@@ -180,8 +139,8 @@
                   "lhs": {
                     "spellTimeToReady": {
                       "spellId": {
-                        "spellId": 20904,
-                        "rank": 6
+                        "spellId": 2643,
+                        "rank": 0
                       }
                     }
                   },
