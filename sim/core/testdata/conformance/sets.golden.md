@@ -146,21 +146,6 @@ Every Phase 1 client set (sim/core/client_sets_gen.go: any piece with a loot sou
 | Champion's Pursuit | 361 | 2 | 14384 | Increased Agility 20 | stats | declared, matches |  |
 | Champion's Pursuit | 361 | 4 | 23158 | Concussive Shot Cooldown Reduction | none | no sim effect | modifies Concussive Shot's cooldown, a snare the sim never casts |
 | Champion's Pursuit | 361 | 6 | 14467 | Increased Stamina 20 | stats | declared, matches |  |
-| The Darksoul | 444 | 3 | 21416 | Increased Defense | stats | declared, matches |  |
-| The Highlander's Resolution | 467 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Highlander's Resolution | 467 | 3 | 7597 | Increased Critical 1 | stats | declared, matches |  |
-| The Highlander's Resolve | 468 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Highlander's Resolve | 468 | 3 | 7597 | Increased Critical 1 | stats | declared, matches |  |
-| The Highlander's Determination | 469 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Highlander's Determination | 469 | 3 | 7597 | Increased Critical 1 | stats | declared, matches |  |
-| The Highlander's Fortitude | 470 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Highlander's Fortitude | 470 | 3 | 18384 | Increased Critical Spell | stats | declared, matches |  |
-| The Highlander's Purpose | 471 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Highlander's Purpose | 471 | 3 | 7597 | Increased Critical 1 | stats | declared, matches |  |
-| The Highlander's Will | 472 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Highlander's Will | 472 | 3 | 18384 | Increased Critical Spell | stats | declared, matches |  |
-| The Highlander's Intent | 473 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Highlander's Intent | 473 | 3 | 18384 | Increased Critical Spell | stats | declared, matches |  |
 | Vindicator's Battlegear | 474 | 2 | 13675 | Increased Block 2 | stats | declared, matches |  |
 | Vindicator's Battlegear | 474 | 3 | 24456 | Improved Intimidating Shout | hand-written (legacy) | registered, not verified |  |
 | Vindicator's Battlegear | 474 | 5 | 24431 | Improved Whirlwind | hand-written (legacy) | registered, not verified |  |
@@ -188,18 +173,6 @@ Every Phase 1 client set (sim/core/client_sets_gen.go: any piece with a loot sou
 | Illusionist's Attire | 482 | 2 | 9417 | Increase Spell Dam 12 | stats | declared, matches |  |
 | Illusionist's Attire | 482 | 3 | 24489 | Improved Arcane Intellect | hand-written (legacy) | registered, not verified |  |
 | Illusionist's Attire | 482 | 5 | 24491 | Improved Flamestrike | hand-written (legacy) | registered, not verified |  |
-| The Defiler's Determination | 483 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Defiler's Determination | 483 | 3 | 7597 | Increased Critical 1 | stats | declared, matches |  |
-| The Defiler's Fortitude | 484 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Defiler's Fortitude | 484 | 3 | 7597 | Increased Critical 1 | stats | declared, matches |  |
-| The Defiler's Intent | 485 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Defiler's Intent | 485 | 3 | 18384 | Increased Critical Spell | stats | declared, matches |  |
-| The Defiler's Purpose | 486 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Defiler's Purpose | 486 | 3 | 7597 | Increased Critical 1 | stats | declared, matches |  |
-| The Defiler's Resolution | 487 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Defiler's Resolution | 487 | 3 | 7597 | Increased Critical 1 | stats | declared, matches |  |
-| The Defiler's Will | 488 | 2 | 7503 | Increased Stamina 05 | stats | declared, matches |  |
-| The Defiler's Will | 488 | 3 | 18384 | Increased Critical Spell | stats | declared, matches |  |
 | Black Dragon Mail | 489 | 2 | 15464 | Increased Hit Chance 01 | stats | declared, matches |  |
 | Black Dragon Mail | 489 | 3 | 7598 | Increased Critical 2 | stats | declared, matches |  |
 | Green Dragon Mail | 490 | 2 | 21625 | Increased Mana Regen | stats | declared, matches |  |
