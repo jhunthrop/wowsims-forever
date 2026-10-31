@@ -72,22 +72,6 @@ func TestImprovedRejuvenationAddsToGiftOfNatureOnRejuvenationOnly(t *testing.T) 
 	}
 }
 
-func TestGiftOfTheEarthmotherCutsThreeSpellsGlobalCooldown(t *testing.T) {
-	plain, _ := healer(t, nil)
-	talented, _ := healer(t, map[string]int{"gift_of_the_earthmother": 1})
-	cut := map[string]bool{"Rejuvenation": true, "Swiftmend": true, "Wild Growth": true}
-	baseSpells, talentedSpells := healingSpells(plain), healingSpells(talented)
-	for name, spell := range talentedSpells {
-		want := baseSpells[name].DefaultCast.GCD
-		if cut[name] {
-			want -= 500 * time.Millisecond
-		}
-		if spell.DefaultCast.GCD != want {
-			t.Errorf("%s global cooldown = %v, want %v", name, spell.DefaultCast.GCD, want)
-		}
-	}
-}
-
 func TestTranquilSpiritCutsHealingTouchAndTranquilityMana(t *testing.T) {
 	plain, _ := healer(t, nil)
 	talented, _ := healer(t, map[string]int{"tranquil_spirit": 5})

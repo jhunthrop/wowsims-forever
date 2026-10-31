@@ -114,31 +114,3 @@ func TestNaturalInstinctAddsMeleeCritDamageBonus(t *testing.T) {
 		t.Errorf("2/2 Natural Instinct FerociousBite.CritDamageBonus = %v, want %v", got, want)
 	}
 }
-
-// TestBerserkGrantsComboPointBuilderCritWhileActive covers: "... increases
-// the critical strike chance of your Combo Point-generating abilities by
-// 100% ... Lasts 15 sec." (node 104956, proto field Berserk). The Primal
-// Bite retarget/cooldown-reset half is not modeled (talents.go's Mangle
-// note: Bear Form's own damage kit is not modeled in this package).
-func TestBerserkGrantsComboPointBuilderCritWhileActive(t *testing.T) {
-	built, sim, target := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, map[string]int{"berserk": 1}))
-	if built.Berserk == nil {
-		t.Fatal("1/1 Berserk druid has no Berserk spell registered")
-	}
-
-	baseCrit := built.Shred.BonusCritRating
-	wantBonus := 100.0 * core.CritRatingPerCritChance
-
-	built.Berserk.Cast(sim, target)
-	if got, want := built.Shred.BonusCritRating, baseCrit+wantBonus; got != want {
-		t.Errorf("Shred.BonusCritRating during Berserk = %v, want %v", got, want)
-	}
-	if got, want := built.Rake.BonusCritRating, baseCrit+wantBonus; got != want {
-		t.Errorf("Rake.BonusCritRating during Berserk = %v, want %v", got, want)
-	}
-	// Ferocious Bite is a finisher, not a Combo-Point generator: Berserk
-	// must not touch it.
-	if got, want := built.FerociousBite.BonusCritRating, baseCrit; got != want {
-		t.Errorf("FerociousBite.BonusCritRating during Berserk = %v, want %v (Berserk must not affect it)", got, want)
-	}
-}

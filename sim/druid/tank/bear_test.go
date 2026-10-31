@@ -282,21 +282,6 @@ func TestLacerateStacksToFive(t *testing.T) {
 	}
 }
 
-func TestBerserkTakesPrimalBitesCooldownAway(t *testing.T) {
-	bear, sim, target := newBearSim(t, 60, map[string]int{"primal_bite": 1, "berserk": 1})
-	if bear.PrimalBite.CD.Duration != 6*time.Second {
-		t.Fatalf("cooldown before Berserk = %v", bear.PrimalBite.CD.Duration)
-	}
-	bear.Berserk.Cast(sim, target)
-	if got := bear.PrimalBite.CD.Duration; got != 0 {
-		t.Errorf("cooldown during Berserk = %v, want none", got)
-	}
-	bear.BerserkAura.Deactivate(sim)
-	if got := bear.PrimalBite.CD.Duration; got != 6*time.Second {
-		t.Errorf("cooldown after Berserk = %v, want 6s", got)
-	}
-}
-
 func TestEnrageGivesThirtyRageOverItsDuration(t *testing.T) {
 	bear, sim, target := newBearSimWearing(t, 60, nil, loadGear(t))
 	armorBefore := bear.GetStat(stats.Armor)

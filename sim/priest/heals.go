@@ -9,8 +9,8 @@ import (
 const priestHealFlags = SpellFlagPriest | core.SpellFlagHelpful | core.SpellFlagAPL
 
 // PriestSpellMaskRenewedHope is every heal Renewed Hope names: Flash Heal,
-// Binding Heal, Lesser Heal, Heal, Greater Heal and Penance.
-const PriestSpellMaskRenewedHope = PriestSpellMaskFlashHeal | PriestSpellMaskBindingHeal |
+// Lesser Heal, Heal, Greater Heal and Penance.
+const PriestSpellMaskRenewedHope = PriestSpellMaskFlashHeal |
 	PriestSpellMaskLesserHeal | PriestSpellMaskHeal | PriestSpellMaskGreaterHeal | PriestSpellMaskPenance
 
 // RegisterHealingSpells registers every healing ability a priest of this
@@ -26,7 +26,6 @@ func (priest *Priest) RegisterHealingSpells() {
 	priest.registerPrayerOfHealing()
 	priest.registerPowerWordShield()
 	priest.registerDesperatePrayer()
-	priest.registerBindingHeal()
 	priest.registerPenance()
 	priest.registerHolyNova()
 	priest.registerPrayerOfMending()

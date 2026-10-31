@@ -1,7 +1,6 @@
 package paladin
 
 import (
-	"slices"
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
@@ -47,7 +46,6 @@ func (paladin *Paladin) ApplyTalents() {
 	paladin.applyDeclarativeTalents()
 	paladin.applyHealingTalents()
 	paladin.applySanctifiedJudgement()
-	paladin.registerTwistOfLight()
 	paladin.markUnmodeledForeverTalents()
 }
 
@@ -74,15 +72,9 @@ func (paladin *Paladin) benediction() int32 {
 }
 
 // getWeaponSpecializationModifier is the damage multiplier of the weapon
-// in the main hand. One-Handed Weapon Specialization is "Increases the
-// damage you deal with one-handed melee weapons by 3%/7%/10%"
-// (oneHandedWeaponSpecializationPct); Two-Handed Weapon Specialization is
-// 2% a rank.
+// in the main hand: Two-Handed Weapon Specialization's 2% a rank.
 func (paladin *Paladin) getWeaponSpecializationModifier() float64 {
-	handType := paladin.MainHand().HandType
-	if handType == proto.HandType_HandTypeMainHand || handType == proto.HandType_HandTypeOneHand {
-		return 1. + oneHandedWeaponSpecializationPct[paladin.Talents.OneHandedWeaponSpecialization]
-	} else if handType == proto.HandType_HandTypeTwoHand {
+	if paladin.MainHand().HandType == proto.HandType_HandTypeTwoHand {
 		return 1. + 0.02*float64(paladin.Talents.TwoHandedWeaponSpecialization)
 	} else {
 		return 1.
@@ -268,13 +260,6 @@ const (
 	// nothing for that half to apply to.)
 	holyConduitCostPctPerRank int64 = -20
 
-	// Instrument of Law (node 110880, Retribution tier 5 col 2):
-	// "Reduces the cast time of your Hammer of Wrath by 0.5/1 sec, and
-	// reduces all threat you generate by 10%/20% while Righteous Fury is
-	// not active." Only the cast-time half changes a DPS number; this
-	// sim has no threat model for the second half to affect.
-	instrumentOfLawCastTimePerRank = -500 * time.Millisecond
-
 	// Sanctified Judgement (node 105701, Retribution tier 2 col 1):
 	// "Gives your Judgement ability a 33%/66%/100% chance to return
 	// 20%/40%/60% of the Mana cost of the judged seal." "The judged
@@ -372,14 +357,6 @@ func (paladin *Paladin) applyDeclarativeTalents() {
 		})
 	}
 
-	if t.InstrumentOfLaw > 0 {
-		paladin.AddStaticMod(core.SpellModConfig{
-			Kind:      core.SpellMod_CastTime_Flat,
-			ClassMask: PaladinSpellMaskHammerOfWrath,
-			TimeValue: instrumentOfLawCastTimePerRank * time.Duration(t.InstrumentOfLaw),
-		})
-	}
-
 	if t.ChampionOfTheLight > 0 {
 		paladin.applyChampionOfTheLight()
 	}
@@ -412,70 +389,6 @@ func (paladin *Paladin) trySanctifiedJudgementManaReturn(sim *core.Simulation) {
 	paladin.AddMana(sim, refund, paladin.sanctifiedJudgementManaMetrics)
 }
 
-// registerTwistOfLight implements Twist of Light (node 105692,
-// Retribution tier 6 col 1): "Reduces the Mana cost of your Seal spells
-// by 20%, and when you replace your Seal of Command, Seal of
-// Righteousness, Seal of Fury, or Seal of Justice with a different Seal,
-// gain an Echo of that Seal. Your next melee attack applies the replaced
-// Seal's effects, consuming the Echo."
-//
-// Seal of Justice is not registered anywhere in this package, so the
-// Echo this grants is of Seal of Command, Seal of Righteousness or Seal
-// of Fury - whichever this build's seal swap actually crosses. Seal of the
-// Crusader is not in the talent's own list (it has no weapon-swing proc
-// for an Echo to replay), so swapping into or out of it never grants or
-// consumes one; grantEchoOfSeal (paladin.go) returns early for it.
-func (paladin *Paladin) registerTwistOfLight() {
-	if !paladin.Talents.TwistOfLight {
-		return
-	}
-
-	paladin.AddStaticMod(core.SpellModConfig{
-		Kind:      core.SpellMod_PowerCost_Pct,
-		ClassMask: PaladinSpellMaskSealCast,
-		IntValue:  -20,
-	})
-
-	paladin.echoOfSealAura = paladin.RegisterAura(core.Aura{
-		Label:    "Echo of Seal",
-		ActionID: core.ActionID{SpellID: 1310735},
-		Duration: core.NeverExpires,
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if paladin.pendingEchoOfSealProc == nil || !result.Landed() || !spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) {
-				return
-			}
-			proc := paladin.pendingEchoOfSealProc
-			paladin.pendingEchoOfSealProc = nil
-			aura.Deactivate(sim)
-			proc.Cast(sim, result.Target)
-		},
-	})
-}
-
-// grantEchoOfSeal is called from applySeal (paladin.go), before
-// currentSeal is overwritten, with the Aura being replaced.
-func (paladin *Paladin) grantEchoOfSeal(sim *core.Simulation, oldSeal *core.Aura) {
-	var proc *core.Spell
-	switch {
-	case slices.Contains(paladin.aurasSoR, oldSeal):
-		proc = paladin.sealOfRighteousnessProc
-	case slices.Contains(paladin.aurasSoC, oldSeal):
-		proc = paladin.sealOfCommandProc
-	case slices.Contains(paladin.aurasSoF, oldSeal):
-		proc = paladin.sealOfFuryProc
-	default:
-		// Seal of the Crusader, or any seal rank not in either slice:
-		// no Echo. See registerTwistOfLight's doc comment.
-		return
-	}
-	if proc == nil {
-		return
-	}
-
-	paladin.pendingEchoOfSealProc = proc
-	paladin.echoOfSealAura.Activate(sim)
-}
-
 // markUnmodeledForeverTalents names every Forever trait-tree talent this
 // package does not model, with the one-line reason, so a future reader
 // can tell "not implemented" from "not noticed". Grouped by why, not by
@@ -497,7 +410,7 @@ func (paladin *Paladin) markUnmodeledForeverTalents() {
 
 	// Utility with no healing or DPS reading: a silence/interrupt
 	// immunity window and a movement speed bonus.
-	_, _ = t.VoiceOfTruth, t.PursuitOfJustice
+	_ = t.PursuitOfJustice
 
 	// Eye for an Eye reflects a fraction of a melee crit taken back at
 	// the attacker - a tank/defensive proc gated on being hit, not on

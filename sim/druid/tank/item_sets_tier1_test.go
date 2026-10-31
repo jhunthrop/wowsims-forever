@@ -3,7 +3,6 @@ package tank
 import (
 	"testing"
 
-	"github.com/wowsims/classic/sim/common/clientsetbonus"
 	"github.com/wowsims/classic/sim/common/clientsetbonus/clientsetbonustest"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
@@ -41,13 +40,5 @@ func grovekeeperRageBear(t *testing.T, race proto.Race, talents string, pieces i
 func TestGrovekeeperRageFlatBonusesMatchTheRows(t *testing.T) {
 	clientsetbonustest.AssertAutomaticTotalsAtTwoAndFour(t, grovekeeperRageSetID, func(pieces int) *core.Character {
 		return grovekeeperRageBear(t, proto.Race_RaceNightElf, "", pieces).GetCharacter()
-	})
-}
-
-// 5P: "Reduces the cooldown on your Berserk ability by 15 sec".
-func TestGrovekeeperRageFivePieceShortensBerserk(t *testing.T) {
-	talents := talentString(t, map[string]int{"berserk": 1})
-	clientsetbonustest.AssertCooldownBonus(t, grovekeeperRageSetID, clientsetbonus.FivePieces, func(pieces int) *core.Spell {
-		return grovekeeperRageBear(t, proto.Race_RaceTauren, talents, pieces).Berserk.Spell
 	})
 }

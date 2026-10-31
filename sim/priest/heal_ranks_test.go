@@ -39,7 +39,6 @@ func healingLadders() []healingLadder {
 		{"Heal", healRanks, effectHeal, 0},
 		{"Flash Heal", flashHealRanks, effectHeal, 0},
 		{"Greater Heal", greaterHealRanks, effectHeal, 0},
-		{"Binding Heal", bindingHealRanks, effectHeal, 0},
 		{"Desperate Prayer", desperatePrayerRanks, effectHeal, 0},
 		{"Prayer of Healing", prayerOfHealingRanks, effectHeal, 0},
 		{"Renew", renewRanks, 6, auraPeriodicHeal},

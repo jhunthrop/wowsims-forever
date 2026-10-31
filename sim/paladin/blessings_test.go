@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/wowsims/classic/sim/common/clientdamage/clientdamagetest"
-	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/spellconst"
 )
 
@@ -108,22 +107,5 @@ func TestRighteousFuryMatchesClient(t *testing.T) {
 	}
 	if row.DurationMS != int32(righteousFuryDuration.Milliseconds()) {
 		t.Errorf("engine duration %v, client %dms", righteousFuryDuration, row.DurationMS)
-	}
-}
-
-func TestInstrumentOfLawPenaltyIsLiftedWhileRighteousFuryIsActive(t *testing.T) {
-	unit := &core.Unit{}
-	unit.PseudoStats.ThreatMultiplier = 1
-	penalty := &instrumentOfLawPenalty{unit: unit, multiplier: 0.8}
-
-	penalty.set(true)
-	penalty.set(true)
-	if got := unit.PseudoStats.ThreatMultiplier; math.Abs(got-0.8) > 1e-12 {
-		t.Errorf("penalty applied twice or not at all: threat multiplier %v, want 0.8", got)
-	}
-	penalty.set(false)
-	penalty.set(false)
-	if got := unit.PseudoStats.ThreatMultiplier; math.Abs(got-1) > 1e-12 {
-		t.Errorf("penalty not lifted: threat multiplier %v, want 1", got)
 	}
 }

@@ -166,26 +166,6 @@ func TestHolyConduitReducesRotationManaCosts(t *testing.T) {
 	}
 }
 
-func TestInstrumentOfLawReducesHammerOfWrathCastTime(t *testing.T) {
-	_, baseUnit := newTalentTestUnit(t, "")
-	_, rank1Unit := newTalentTestUnit(t, talentString(t, map[string]int{"instrument_of_law": 1}))
-	_, rank2Unit := newTalentTestUnit(t, talentString(t, map[string]int{"instrument_of_law": 2}))
-
-	base := baseUnit.GetSpell(core.ActionID{SpellID: hammerOfWrathRank3SpellID})
-	rank1 := rank1Unit.GetSpell(core.ActionID{SpellID: hammerOfWrathRank3SpellID})
-	rank2 := rank2Unit.GetSpell(core.ActionID{SpellID: hammerOfWrathRank3SpellID})
-	if base == nil || rank1 == nil || rank2 == nil {
-		t.Fatalf("Hammer of Wrath rank 3 not registered: base=%v rank1=%v rank2=%v", base, rank1, rank2)
-	}
-
-	if want := base.DefaultCast.CastTime - 500_000_000; rank1.DefaultCast.CastTime != want {
-		t.Errorf("rank 1 Instrument of Law Hammer of Wrath cast time = %v, want %v", rank1.DefaultCast.CastTime, want)
-	}
-	if rank2.DefaultCast.CastTime != 0 {
-		t.Errorf("rank 2 Instrument of Law Hammer of Wrath cast time = %v, want 0 (base 1s - 1s)", rank2.DefaultCast.CastTime)
-	}
-}
-
 // Champion of the Light is 20/40/60% of Intellect: the live text and
 // Blizzard's 1 October 2026 notes; the earlier table said 33/66/100%.
 func TestChampionOfTheLightAddsSpellPowerFromIntellect(t *testing.T) {
@@ -212,25 +192,6 @@ func TestSealOfCommandRequiresTalent(t *testing.T) {
 	}
 	if spell := unit.GetSpell(core.ActionID{SpellID: 20966}); spell != nil {
 		t.Errorf("Judgement of Command rank 5 (20966) registered without the seal_of_command talent")
-	}
-}
-
-func TestTwistOfLightReducesSealManaCost(t *testing.T) {
-	_, baseUnit := newTalentTestUnit(t, talentString(t, map[string]int{"seal_of_command": 1}))
-	_, talentedUnit := newTalentTestUnit(t, talentString(t, map[string]int{"seal_of_command": 1, "twist_of_light": 1}))
-
-	for _, spellID := range []int32{20293 /* Seal of Righteousness rank 8 */, 20920 /* Seal of Command rank 5 */} {
-		base := baseUnit.GetSpell(core.ActionID{SpellID: spellID})
-		talented := talentedUnit.GetSpell(core.ActionID{SpellID: spellID})
-		if base == nil || talented == nil {
-			t.Fatalf("spell %d not registered: base=%v talented=%v", spellID, base, talented)
-		}
-		baseCost := base.Cost.GetCurrentCost()
-		talentedCost := talented.Cost.GetCurrentCost()
-		wantCost := baseCost * 0.8
-		if talentedCost < wantCost-1e-6 || talentedCost > wantCost+1e-6 {
-			t.Errorf("spell %d mana cost = %v, want %v (base %v - 20%%)", spellID, talentedCost, wantCost, baseCost)
-		}
 	}
 }
 
@@ -305,71 +266,5 @@ func TestSanctifiedJudgementRefundsMana(t *testing.T) {
 	}
 	if gain <= 0 {
 		t.Errorf("Sanctified Judgement mana gain = %v, want > 0", gain)
-	}
-}
-
-// TestTwistOfLightEchoAppliesReplacedSealOnNextMeleeHit: a paladin with
-// Seal of Command and Twist of Light casts Seal of Righteousness, then
-// immediately replaces it with Seal of Command before pull and never
-// recasts either Seal again. Seal of Righteousness's own weapon proc
-// (sealOfRighteousnessProcRank8SpellID) can therefore only land through
-// Twist of Light's Echo -- the SoR aura that would otherwise drive it is
-// long inactive -- so exactly one such cast (the Echo, consumed on the
-// first landed white hit) is this test's signature that
-// paladin.go's grantEchoOfSeal and talents.go's registerTwistOfLight
-// fired.
-func TestTwistOfLightEchoAppliesReplacedSealOnNextMeleeHit(t *testing.T) {
-	rotation := core.APLRotationFromJsonString(`{
-		"type": "TypeAPL",
-		"prepullActions": [
-			{"action": {"castSpell": {"spellId": {"spellId": 20293}}}, "doAtValue": {"const": {"val": "-3s"}}},
-			{"action": {"castSpell": {"spellId": {"spellId": 20920}}}, "doAtValue": {"const": {"val": "-1.5s"}}}
-		],
-		"priorityList": []
-	}`)
-
-	player := core.WithSpec(&proto.Player{
-		Class:              proto.Class_ClassPaladin,
-		Race:               proto.Race_RaceHuman,
-		Level:              60,
-		Equipment:          &proto.EquipmentSpec{},
-		Buffs:              core.FullBuffs.Player,
-		TalentsString:      talentString(t, map[string]int{"seal_of_command": 1, "twist_of_light": 1}),
-		Rotation:           rotation,
-		DistanceFromTarget: 5,
-	}, &proto.Player_RetributionPaladin{
-		RetributionPaladin: &proto.RetributionPaladin{
-			Options: &proto.PaladinOptions{PrimarySeal: proto.PaladinSeal_Command},
-		},
-	})
-
-	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
-
-	result := core.RunRaidSim(&proto.RaidSimRequest{
-		Raid: raid,
-		Encounter: &proto.Encounter{
-			Duration: 12,
-			Targets:  []*proto.Target{core.NewDefaultTarget()},
-		},
-		SimOptions: &proto.SimOptions{
-			Iterations: 1,
-			RandomSeed: 1,
-			IsTest:     true,
-		},
-	})
-	if result.Error != nil {
-		t.Fatalf("sim error: %s", result.Error.Message)
-	}
-
-	echoMetrics := findActionMetrics(result, sealOfRighteousnessProcRank8SpellID)
-	if echoMetrics == nil {
-		t.Fatalf("Seal of Righteousness proc (spell %d) never appears in the action metrics -- the Echo did not fire", sealOfRighteousnessProcRank8SpellID)
-	}
-	var casts int32
-	for _, target := range echoMetrics.Targets {
-		casts += target.Casts
-	}
-	if casts != 1 {
-		t.Errorf("Seal of Righteousness proc casts = %d, want exactly 1 (the single Echo of Light, since Seal of Command has been active since -1.5s and was never swapped again)", casts)
 	}
 }

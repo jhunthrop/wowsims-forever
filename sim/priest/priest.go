@@ -18,7 +18,6 @@ const (
 const (
 	SpellCode_PriestNone int32 = iota
 
-	SpellCode_PriestBindingHeal
 	SpellCode_PriestDesperatePrayer
 	SpellCode_PriestDevouringPlague
 	SpellCode_PriestFlashHeal
@@ -64,7 +63,6 @@ const (
 	PriestSpellMaskHeal
 	PriestSpellMaskFlashHeal
 	PriestSpellMaskGreaterHeal
-	PriestSpellMaskBindingHeal
 	PriestSpellMaskRenew
 	PriestSpellMaskPrayerOfHealing
 	PriestSpellMaskPowerWordShield
@@ -105,7 +103,6 @@ type Priest struct {
 
 	Latency float64
 
-	BindingHeal       []*core.Spell
 	DarkSacrifice     []*core.Spell
 	DesperatePrayer   []*core.Spell
 	DevouringPlague   []*core.Spell

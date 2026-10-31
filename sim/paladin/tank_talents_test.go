@@ -168,16 +168,12 @@ func TestProtectionRankTextsAsNumbers(t *testing.T) {
 		{"Shield Specialization rank 3 mana chance", shieldSpecializationManaChance[3], 1.00},
 		{"Shield Specialization mana", shieldSpecializationManaFraction, 0.04},
 		{"Shield Specialization absorb rank 3", shieldSpecializationAbsorbPerRank * 3, 0.30},
-		{"One-Handed Weapon Specialization rank 1", oneHandedWeaponSpecializationPct[1], 0.03},
-		{"One-Handed Weapon Specialization rank 2", oneHandedWeaponSpecializationPct[2], 0.07},
-		{"One-Handed Weapon Specialization rank 3", oneHandedWeaponSpecializationPct[3], 0.10},
 		{"Anticipation rank 5 defense", anticipationDefensePerRank * 5, 20},
 		{"Toughness rank 5", toughnessArmorPctPerRank * 5, 0.10},
 		{"Sacred Duty rank 2 stamina", sacredDutyStaminaPerRank * 2, 0.04},
 		{"Iron Creed rank 5 threat", ironCreedThreatPerRank * 5, 0.25},
 		{"Iron Creed rank 5 damage taken", ironCreedDamageTakenPerRank * 5, 0.10},
 		{"Improved Righteous Fury rank 3", improvedRighteousFuryDamageTakenPerRank * 3, 0.06},
-		{"Instrument of Law rank 2", instrumentOfLawThreatReductionPerRank * 2, 0.20},
 		{"Righteous Fury Holy threat", righteousFuryHolyThreatBonus, 0.60},
 	} {
 		if d := tc.got - tc.want; d > 1e-9 || d < -1e-9 {

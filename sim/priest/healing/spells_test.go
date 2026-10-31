@@ -176,7 +176,6 @@ func TestAtLevelSixtyTheTopRanksAreTheClientsLevelSixtyRanks(t *testing.T) {
 		"Renew":              {agent.Renew, 25315, 10},
 		"Prayer of Healing":  {agent.PrayerOfHealing, 25316, 5},
 		"Power Word: Shield": {agent.PowerWordShield, 10901, 10},
-		"Binding Heal":       {agent.BindingHeal, 1240774, 6},
 		"Prayer of Mending":  {agent.PrayerOfMending, 1240827, 3},
 		"Inner Fire":         {agent.InnerFire, 10952, 6},
 	}
@@ -192,12 +191,12 @@ func TestAtLevelSixtyTheTopRanksAreTheClientsLevelSixtyRanks(t *testing.T) {
 	}
 }
 
-// TestSpellsGatedByATalentExistOnlyWithIt covers Binding Heal, Penance,
-// Holy Nova and Prayer of Mending.
+// TestSpellsGatedByATalentExistOnlyWithIt covers Penance, Holy Nova and
+// Prayer of Mending.
 func TestSpellsGatedByATalentExistOnlyWithIt(t *testing.T) {
 	_, bare := healerSim(t, 60, "")
 	for name, ladder := range map[string][]*core.Spell{
-		"Binding Heal": bare.BindingHeal, "Penance": bare.Penance,
+		"Penance":   bare.Penance,
 		"Holy Nova": bare.HolyNova, "Prayer of Mending": bare.PrayerOfMending,
 	} {
 		if len(registered(ladder)) != 0 {
@@ -205,8 +204,8 @@ func TestSpellsGatedByATalentExistOnlyWithIt(t *testing.T) {
 		}
 	}
 	_, holy := healerSim(t, 60, HolyTalents)
-	if len(registered(holy.BindingHeal)) == 0 || len(registered(holy.PrayerOfMending)) == 0 {
-		t.Error("the Holy build is missing Binding Heal or Prayer of Mending")
+	if len(registered(holy.PrayerOfMending)) == 0 {
+		t.Error("the Holy build is missing Prayer of Mending")
 	}
 	_, disc := healerSim(t, 60, DiscTalents)
 	if len(registered(disc.Penance)) != 4 {
@@ -296,19 +295,6 @@ func TestPrayerOfHealingHealsTheTargetsWholeParty(t *testing.T) {
 	}
 	if hits := spell.SpellMetrics[agent.GetMainTarget().UnitIndex].Hits; hits != 0 {
 		t.Errorf("Prayer of Healing reached the tank, who stands in another party")
-	}
-}
-
-// TestBindingHealHealsTargetAndCaster checks both halves land.
-func TestBindingHealHealsTargetAndCaster(t *testing.T) {
-	sim, agent := healerSim(t, 60, HolyTalents)
-	target := agent.GetMainTarget()
-	spell := agent.BindingHeal[6]
-	spell.BonusCritRating += noCrit
-	spell.ApplyEffects(sim, target, spell)
-	if spell.SpellMetrics[target.UnitIndex].Hits != 1 || spell.SpellMetrics[agent.Unit.UnitIndex].Hits != 1 {
-		t.Errorf("Binding Heal hit the target %d times and the caster %d times, want once each",
-			spell.SpellMetrics[target.UnitIndex].Hits, spell.SpellMetrics[agent.Unit.UnitIndex].Hits)
 	}
 }
 

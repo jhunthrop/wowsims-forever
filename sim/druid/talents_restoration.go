@@ -1,8 +1,6 @@
 package druid
 
 import (
-	"time"
-
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -15,10 +13,6 @@ import (
 // Clarity, which is a trainable passive (spell 16864) rather than a talent
 // whose proc rate the client does not publish. Nature's Swiftness, Living
 // Spirit, Naturalist's damage half and Reflection are in talents.go.
-
-// giftOfTheEarthmotherGlobalCooldownCut is the half second off the global
-// cooldown (spell 414673, "-500" ms on its mask).
-const giftOfTheEarthmotherGlobalCooldownCut = 500 * time.Millisecond
 
 const (
 	giftOfNatureHealingPerRank      = 2  // percent
@@ -41,20 +35,6 @@ func (druid *Druid) applyGiftOfNature() {
 		Kind:      core.SpellMod_DamageDone_Flat,
 		ClassMask: DruidSpellMaskHealing,
 		IntValue:  giftOfNatureHealingPerRank * int64(rank),
-	})
-}
-
-// applyGiftOfTheEarthmother implements Gift of the Earthmother (node 104918,
-// bool): "Reduces the global cooldown by 0.5 seconds on your Rejuvenation,
-// Swiftmend, and Wild Growth spells."
-func (druid *Druid) applyGiftOfTheEarthmother() {
-	if !druid.Talents.GiftOfTheEarthmother {
-		return
-	}
-	druid.AddStaticMod(core.SpellModConfig{
-		Kind:      core.SpellMod_GlobalCooldown_Flat,
-		ClassMask: DruidSpellMaskRejuvenation | DruidSpellMaskSwiftmend | DruidSpellMaskWildGrowth,
-		TimeValue: -giftOfTheEarthmotherGlobalCooldownCut,
 	})
 }
 

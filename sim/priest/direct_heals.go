@@ -66,22 +66,6 @@ func (priest *Priest) registerPrayerOfHealing() {
 	})
 }
 
-// registerBindingHeal heals the target and the caster, each with its own
-// roll. It exists only with the Binding Heal talent.
-func (priest *Priest) registerBindingHeal() {
-	if !priest.Talents.BindingHeal {
-		return
-	}
-	priest.BindingHeal = priest.registerHealRanks(bindingHealRanks, func(rank int, entry healRank) core.SpellConfig {
-		config := priest.healSpellConfig(entry, rank, SpellCode_PriestBindingHeal, PriestSpellMaskBindingHeal)
-		config.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			priest.healTarget(sim, spell, target, priest.roll(sim, entry))
-			priest.healTarget(sim, spell, &priest.Unit, priest.roll(sim, entry))
-		}
-		return config
-	})
-}
-
 // registerDesperatePrayer is the priest's own emergency heal. It is cast
 // on the priest whatever target the caller names, and every rank shares
 // one cooldown.

@@ -93,27 +93,11 @@ const (
 	ironCreedDamageTakenPerRank = 0.02
 	ironCreedDuration           = 6 * time.Second
 	ironCreedActionID           = 1311033
-
-	// Improved Seal of Fury (node 110875): "When Seal of Fury's shield is
-	// fully absorbed, restore 0 Mana, increased by 15% per level the
-	// attacker is above you, up to 45%." The base the client prints is 0
-	// (an unresolved value in the tooltip), so the amount is UNCONFIRMED:
-	// it is assumed to be 1% of maximum mana, scaled by the stated 15% a
-	// level up to three levels (the published boss is three above).
-	improvedSealOfFuryManaFraction   = 0.01
-	improvedSealOfFuryBonusPerLevel  = 0.15
-	improvedSealOfFuryMaxLevelsAbove = 3
-	improvedSealOfFuryActionID       = 1314103
 )
 
 var (
 	// shieldSpecializationManaChance is the block-to-mana chance by rank.
 	shieldSpecializationManaChance = [4]float64{0, 0.33, 0.66, 1.00}
-
-	// oneHandedWeaponSpecializationPct is "Increases the damage you deal
-	// with one-handed melee weapons by 3%/7%/10%" (node 105629): not a
-	// clean multiple of rank 1.
-	oneHandedWeaponSpecializationPct = [4]float64{0, 0.03, 0.07, 0.10}
 )
 
 // applyProtectionTalents applies the Protection tree's passive effects.
@@ -139,7 +123,6 @@ func (paladin *Paladin) applyProtectionTalents() {
 	paladin.applyRedoubt()
 	paladin.applyReckoning()
 	paladin.applyIronCreed()
-	paladin.applyImprovedSealOfFury()
 }
 
 func (paladin *Paladin) applyShieldSpecializationMana() {
@@ -280,24 +263,6 @@ func (paladin *Paladin) newDamageTakenReductionAura(label string, actionID core.
 			aura.Unit.PseudoStats.DamageTakenMultiplier /= multiplier
 		},
 	})
-}
-
-func (paladin *Paladin) applyImprovedSealOfFury() {
-	if paladin.Talents.ImprovedSealOfFury {
-		paladin.improvedSealOfFuryManaMetrics = paladin.NewManaMetrics(core.ActionID{SpellID: improvedSealOfFuryActionID})
-	}
-}
-
-// restoreManaForImprovedSealOfFury is Seal of Fury's shield running out:
-// mana scaled by how many levels the attacker (three, for the published
-// boss) stands above the paladin.
-func (paladin *Paladin) restoreManaForImprovedSealOfFury(sim *core.Simulation, attacker *core.Unit) {
-	if paladin.improvedSealOfFuryManaMetrics == nil {
-		return
-	}
-	levelsAbove := min(max(attacker.Level-paladin.Level, 0), improvedSealOfFuryMaxLevelsAbove)
-	scale := 1 + improvedSealOfFuryBonusPerLevel*float64(levelsAbove)
-	paladin.AddMana(sim, improvedSealOfFuryManaFraction*paladin.MaxMana()*scale, paladin.improvedSealOfFuryManaMetrics)
 }
 
 // activateIronCreed opens Iron Creed's damage-taken window; it is a no-op

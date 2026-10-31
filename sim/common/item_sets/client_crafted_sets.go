@@ -15,8 +15,6 @@ func init() {
 		}},
 		// Imperial Plate.
 		clientSet{id: 321, noSim: map[int32]string{1302372: noSimMovement}},
-		// The Darksoul.
-		clientSet{id: 444},
 		// Augur's Regalia.
 		clientSet{id: 476, noSim: map[int32]string{24461: noSimUnreachable, 24462: noSimUnreachable}},
 		// Haruspex's Garb.

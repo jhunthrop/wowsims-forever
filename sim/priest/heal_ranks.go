@@ -84,21 +84,6 @@ var greaterHealRanks = []healRank{
 		effect: clientdamage.Effect{Amount: 1960, Variance: 0.109615, PerLevel: 8.1, SpellLevel: 60, MaxLevel: 65}},
 }
 
-var bindingHealRanks = []healRank{
-	{spellID: 401937, level: 25, manaCost: 155, castMS: 1500, coefficient: 0.429,
-		effect: clientdamage.Effect{Amount: 247, Variance: 0.195804, PerLevel: 2.2, SpellLevel: 25, MaxLevel: 31}},
-	{spellID: 1240770, level: 32, manaCost: 185, castMS: 1500, coefficient: 0.429,
-		effect: clientdamage.Effect{Amount: 312, Variance: 0.183333, PerLevel: 2.5, SpellLevel: 32, MaxLevel: 37}},
-	{spellID: 1240771, level: 38, manaCost: 215, castMS: 1500, coefficient: 0.429,
-		effect: clientdamage.Effect{Amount: 383, Variance: 0.177677, PerLevel: 2.8, SpellLevel: 38, MaxLevel: 43}},
-	{spellID: 1240772, level: 44, manaCost: 265, castMS: 1500, coefficient: 0.429,
-		effect: clientdamage.Effect{Amount: 507, Variance: 0.17284, PerLevel: 3.3, SpellLevel: 44, MaxLevel: 49}},
-	{spellID: 1240773, level: 50, manaCost: 315, castMS: 1500, coefficient: 0.429,
-		effect: clientdamage.Effect{Amount: 644, Variance: 0.170455, PerLevel: 3.7, SpellLevel: 50, MaxLevel: 55}},
-	{spellID: 1240774, level: 56, manaCost: 380, castMS: 1500, coefficient: 0.429,
-		effect: clientdamage.Effect{Amount: 825, Variance: 0.164972, PerLevel: 4.2, SpellLevel: 56, MaxLevel: 61}},
-}
-
 var desperatePrayerRanks = []healRank{
 	{spellID: 13908, level: 10, manaCost: 0, castMS: 0, coefficient: 0.429,
 		effect: clientdamage.Effect{Amount: 149, Variance: 0.236842, PerLevel: 2.4, SpellLevel: 10, MaxLevel: 16}},

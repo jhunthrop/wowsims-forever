@@ -124,9 +124,7 @@ func (paladin *Paladin) newSealOfFuryShield() *damageAbsorb {
 		ActionID: core.ActionID{SpellID: sealOfFuryShieldID},
 		Duration: sealOfFuryAbsorbDuration,
 	})
-	return newDamageAbsorb(&paladin.Unit, aura, func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
-		paladin.restoreManaForImprovedSealOfFury(sim, spell.Unit)
-	})
+	return newDamageAbsorb(&paladin.Unit, aura, nil)
 }
 
 func (paladin *Paladin) registerSealOfFuryRank(rank int, config sealOfFuryRank, shield *damageAbsorb) {

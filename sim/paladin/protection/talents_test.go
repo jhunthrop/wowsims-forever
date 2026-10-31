@@ -266,21 +266,6 @@ func TestRighteousFuryRaisesHolyThreatOnly(t *testing.T) {
 	}
 }
 
-// Instrument of Law: "reduces all threat you generate by 10% while
-// Righteous Fury is not active", 20% at rank 2.
-func TestInstrumentOfLawLowersThreatWithoutRighteousFury(t *testing.T) {
-	talents := map[string]int{"instrument_of_law": 2}
-
-	off := shortRun{Talents: talents, Options: &proto.PaladinOptions{}}.start(t).tank
-	if got := off.PseudoStats.ThreatMultiplier; !near(got, 0.8, tolerance) {
-		t.Errorf("threat multiplier without Righteous Fury = %v, want 0.8", got)
-	}
-	on := shortRun{Talents: talents}.start(t).tank
-	if got := on.PseudoStats.ThreatMultiplier; !near(got, 1, tolerance) {
-		t.Errorf("threat multiplier with Righteous Fury = %v, want 1", got)
-	}
-}
-
 // Iron Creed: "While Righteous Fury is active, Holy Strike also reduces
 // your damage taken by 2% for 6 sec." (10% at rank 5).
 func TestIronCreedReducesDamageTakenAfterHolyStrike(t *testing.T) {
@@ -314,18 +299,6 @@ func TestIronCreedReducesDamageTakenAfterHolyStrike(t *testing.T) {
 	withoutFury := shortRun{Talents: map[string]int{"iron_creed": 5}, Options: &proto.PaladinOptions{}}.start(t)
 	if withoutFury.tank.GetAuraByID(core.ActionID{SpellID: auraIronCreed}) != nil {
 		t.Error("Iron Creed's damage reduction exists without Righteous Fury")
-	}
-}
-
-// One-Handed Weapon Specialization: "Increases the damage you deal with
-// one-handed melee weapons by 3%", 7% and 10% at ranks 2 and 3.
-func TestOneHandedWeaponSpecializationRaisesWeaponAttacks(t *testing.T) {
-	base := shortRun{}.start(t).spellOf(t, spellHammerRighteous).DamageMultiplier
-	for rank, bonus := range map[int]float64{1: 0.03, 2: 0.07, 3: 0.10} {
-		got := shortRun{Talents: map[string]int{"one_handed_weapon_specialization": rank}}.start(t).spellOf(t, spellHammerRighteous).DamageMultiplier
-		if !near(got/base, 1+bonus, tolerance) {
-			t.Errorf("rank %d scales Hammer of the Righteous by %v, want %v", rank, got/base, 1+bonus)
-		}
 	}
 }
 
@@ -516,42 +489,6 @@ func TestSealOfFuryRaisesNoShieldWithoutAShield(t *testing.T) {
 	proc.ApplyEffects(f.sim, f.boss, proc)
 	if f.tank.GetAuraByID(core.ActionID{SpellID: auraSealOfFuryShield}).IsActive() {
 		t.Error("Seal of Fury shielded a tank with no shield equipped")
-	}
-}
-
-func TestImprovedSealOfFuryRestoresManaWhenTheShieldIsSpent(t *testing.T) {
-	const bossLevelsAbove = 3.0 // the harness boss is level 63
-	f := shortRun{Talents: map[string]int{"improved_seal_of_fury": 1}}.start(t)
-	proc := f.spellOf(t, spellSealOfFuryProc)
-	f.tank.SpendMana(f.sim, f.tank.MaxMana()*0.5, f.tank.NewManaMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionPotion}))
-
-	proc.ApplyEffects(f.sim, f.boss, proc)
-	before := f.tank.CurrentMana()
-	f.hit(core.OutcomeHit, 3000)
-
-	want := 0.01 * f.tank.MaxMana() * (1 + 0.15*bossLevelsAbove)
-	if got := f.tank.CurrentMana() - before; !near(got, want, 1) {
-		t.Errorf("the spent shield restored %v mana, want %v", got, want)
-	}
-
-	// Nothing to spend, nothing restored.
-	before = f.tank.CurrentMana()
-	f.hit(core.OutcomeHit, 3000)
-	if got := f.tank.CurrentMana() - before; got > 1 {
-		t.Errorf("a hit with no shield up restored %v mana", got)
-	}
-}
-
-func TestWithoutImprovedSealOfFuryTheShieldRestoresNothing(t *testing.T) {
-	f := shortRun{}.start(t)
-	proc := f.spellOf(t, spellSealOfFuryProc)
-	f.tank.SpendMana(f.sim, f.tank.MaxMana()*0.5, f.tank.NewManaMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionPotion}))
-
-	proc.ApplyEffects(f.sim, f.boss, proc)
-	before := f.tank.CurrentMana()
-	f.hit(core.OutcomeHit, 3000)
-	if got := f.tank.CurrentMana() - before; got > 1 {
-		t.Errorf("the spent shield restored %v mana without the talent", got)
 	}
 }
 

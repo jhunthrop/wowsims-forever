@@ -69,7 +69,6 @@ func (druid *Druid) ApplyTalents() {
 	// Feral
 	druid.applyBloodFrenzy()
 	druid.applyNaturalInstinct()
-	druid.registerBerserkCD()
 
 	druid.applyHeartOfTheWildIntellect()
 
@@ -101,7 +100,6 @@ func (druid *Druid) ApplyTalents() {
 	_ = druid.Talents.Subtlety
 
 	druid.applyGiftOfNature()
-	druid.applyGiftOfTheEarthmother()
 	druid.applyTranquilSpirit()
 	druid.applyImprovedRejuvenation()
 	druid.applyImprovedTranquility()
@@ -693,81 +691,6 @@ func (druid *Druid) applyNaturalInstinct() {
 		FloatValue: 0.10 * float64(rank),
 	})
 	druid.AddStatDependency(stats.Intellect, stats.HealingPower, naturalInstinctHealingFromIntellect[rank])
-}
-
-// registerBerserkCD implements Berserk (node 104956, bool, proto field
-// Berserk): "Causes your Primal Bite ability to strike up to 3 targets,
-// removes its cooldown, and increases the critical strike chance of
-// your Combo Point-generating abilities by 100%. Clears and grants
-// immunity to Fear effects for the duration. Lasts 15 sec." Only the
-// Combo-Point-generator crit bonus and Primal Bite's cooldown removal and
-// three targets (primal_bite.go) are modeled; Fear immunity has no
-// mechanic on this sim's fights.
-func (druid *Druid) registerBerserkCD() {
-	if !druid.Talents.Berserk {
-		return
-	}
-
-	actionID := core.ActionID{SpellID: 417141}
-	bonusCrit := 100.0 * core.CritRatingPerCritChance
-
-	var affectedSpells []*DruidSpell
-	var primalBiteCooldown time.Duration
-	berserkAura := druid.RegisterAura(core.Aura{
-		Label:    "Berserk",
-		ActionID: actionID,
-		Duration: time.Second * 15,
-		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			affectedSpells = core.FilterSlice(
-				[]*DruidSpell{druid.Claw, druid.Rake, druid.Ravage, druid.Shred},
-				func(ds *DruidSpell) bool { return ds != nil },
-			)
-		},
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			for _, spell := range affectedSpells {
-				spell.BonusCritRating += bonusCrit
-			}
-			if druid.PrimalBite != nil {
-				// "removes its cooldown"
-				primalBiteCooldown = druid.PrimalBite.CD.Duration
-				druid.PrimalBite.CD.Duration = 0
-				druid.PrimalBite.CD.Reset()
-			}
-		},
-		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			for _, spell := range affectedSpells {
-				spell.BonusCritRating -= bonusCrit
-			}
-			if druid.PrimalBite != nil {
-				druid.PrimalBite.CD.Duration = primalBiteCooldown
-			}
-		},
-	})
-	druid.BerserkAura = berserkAura
-
-	druid.Berserk = druid.RegisterSpell(Cat|Bear, core.SpellConfig{
-		ClassSpellMask: DruidSpellMaskBerserk,
-		ActionID:       actionID,
-		Flags:          core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
-		// Every client id for "Berserk" (417141, 424759, 442211) is
-		// spell_level 1; BerserkLevel[0] (constants_auto_gen.go) reads
-		// the same.
-		RequiredLevel: BerserkLevel[0],
-		Cast: core.CastConfig{
-			CD: core.Cooldown{
-				Timer:    druid.NewTimer(),
-				Duration: time.Minute * 3,
-			},
-		},
-		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-			berserkAura.Activate(sim)
-		},
-	})
-
-	druid.AddMajorCooldown(core.MajorCooldown{
-		Spell: druid.Berserk.Spell,
-		Type:  core.CooldownTypeDPS,
-	})
 }
 
 // naturalistCastTimeCut is Naturalist's 0.1 sec a rank off Healing Touch.

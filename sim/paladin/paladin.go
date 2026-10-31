@@ -158,7 +158,6 @@ type Paladin struct {
 	sealOfCommandProc       *core.Spell
 	sealOfFuryProc          *core.Spell
 	echoOfSealAura          *core.Aura
-	pendingEchoOfSealProc   *core.Spell
 
 	sanctifiedJudgementManaMetrics *core.ResourceMetrics
 
@@ -195,9 +194,8 @@ type Paladin struct {
 	// sets it before the aura is registered (it is negative to shorten).
 	forbearanceDurationMod time.Duration
 
-	ironCreedAura                 *core.Aura
-	improvedSealOfFuryManaMetrics *core.ResourceMetrics
-	swiftJudgementAura            *core.Aura
+	ironCreedAura      *core.Aura
+	swiftJudgementAura *core.Aura
 }
 
 // Implemented by each Paladin spec.
@@ -352,10 +350,6 @@ func (paladin *Paladin) applySeal(newSeal *core.Aura, judgement *core.Spell, sea
 	oldSeal := paladin.currentSeal
 	if oldSeal != nil {
 		oldSeal.Deactivate(sim)
-	}
-
-	if paladin.Talents.TwistOfLight && oldSeal != nil && oldSeal != newSeal {
-		paladin.grantEchoOfSeal(sim, oldSeal)
 	}
 
 	paladin.currentSeal = newSeal

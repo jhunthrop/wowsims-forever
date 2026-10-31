@@ -29,12 +29,6 @@ const (
 	// reduction, not the vanilla 16/33/50% threat multiplier: Forever's
 	// Righteous Fury has no threat talent.
 	improvedRighteousFuryDamageTakenPerRank = 0.02
-
-	// instrumentOfLawThreatReductionPerRank is Instrument of Law (node
-	// 110880): "reduces all threat you generate by 10% while Righteous Fury
-	// is not active", 20% at rank 2 (its cast-time half is in
-	// applyDeclarativeTalents).
-	instrumentOfLawThreatReductionPerRank = 0.10
 )
 
 // registerRighteousFury registers Righteous Fury as an aura, as a castable
@@ -42,11 +36,6 @@ const (
 // it on for the whole fight without casting (it lasts 30 minutes and costs
 // 30% of base mana to cast, paid before the pull).
 func (paladin *Paladin) registerRighteousFury() {
-	instrumentOfLaw := newInstrumentOfLawPenalty(paladin)
-	if !paladin.Options.RighteousFury {
-		instrumentOfLaw.set(true)
-	}
-
 	holyThreat := paladin.AddDynamicMod(core.SpellModConfig{
 		Kind:       core.SpellMod_Threat_Pct,
 		School:     core.SpellSchoolHoly,
@@ -59,12 +48,10 @@ func (paladin *Paladin) registerRighteousFury() {
 		Duration: righteousFuryDuration,
 		OnGain: func(aura *core.Aura, _ *core.Simulation) {
 			holyThreat.Activate()
-			instrumentOfLaw.set(false)
 			aura.Unit.PseudoStats.DamageTakenMultiplier *= damageTakenMultiplier
 		},
 		OnExpire: func(aura *core.Aura, _ *core.Simulation) {
 			holyThreat.Deactivate()
-			instrumentOfLaw.set(true)
 			aura.Unit.PseudoStats.DamageTakenMultiplier /= damageTakenMultiplier
 		},
 	})
@@ -96,33 +83,4 @@ func (paladin *Paladin) registerRighteousFuryCast(aura *core.Aura) {
 		},
 	})
 	spell.RelatedSelfBuff = aura
-}
-
-// instrumentOfLawPenalty is Instrument of Law's threat reduction, which
-// holds only while Righteous Fury is not active.
-type instrumentOfLawPenalty struct {
-	unit       *core.Unit
-	multiplier float64
-	applied    bool
-}
-
-func newInstrumentOfLawPenalty(paladin *Paladin) *instrumentOfLawPenalty {
-	rank := paladin.Talents.InstrumentOfLaw
-	return &instrumentOfLawPenalty{
-		unit:       &paladin.Unit,
-		multiplier: 1 - instrumentOfLawThreatReductionPerRank*float64(rank),
-	}
-}
-
-// set applies or lifts the penalty; setting the state it is in is a no-op.
-func (penalty *instrumentOfLawPenalty) set(active bool) {
-	if penalty.applied == active {
-		return
-	}
-	penalty.applied = active
-	if active {
-		penalty.unit.PseudoStats.ThreatMultiplier *= penalty.multiplier
-	} else {
-		penalty.unit.PseudoStats.ThreatMultiplier /= penalty.multiplier
-	}
 }

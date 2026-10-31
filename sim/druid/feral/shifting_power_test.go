@@ -2,7 +2,6 @@ package feral
 
 import (
 	"testing"
-	"time"
 
 	"github.com/wowsims/classic/sim/core"
 )
@@ -29,18 +28,6 @@ func TestShiftingPowerConvertsManaIntoEnergy(t *testing.T) {
 	}
 	if got, want := manaBefore-built.CurrentMana(), 0.55*built.BaseMana; got < want-0.01 || got > want+0.01 {
 		t.Errorf("Shifting Power spent %v mana, want 55%% of base mana (%v)", got, want)
-	}
-}
-
-func TestShiftingPowerCooldownShrinksWithImprovedShiftingPower(t *testing.T) {
-	for points, want := range map[int]time.Duration{0: 16 * time.Second, 1: 12 * time.Second, 2: 8 * time.Second} {
-		built, _, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, map[string]int{
-			"shifting_power":          1,
-			"improved_shifting_power": points,
-		}))
-		if got := built.ShiftingPower.CD.Duration; got != want {
-			t.Errorf("%d point(s) in Improved Shifting Power: cooldown %s, want %s", points, got, want)
-		}
 	}
 }
 

@@ -25,16 +25,8 @@ const (
 	shiftingPowerCooldown           = 16 * time.Second
 	// shiftingPowerGCD is spell 1322605's StartRecoveryTime in build
 	// 1.60.1.70291, a second shorter than the shapeshifts' 1.5 s.
-	shiftingPowerGCD                   = time.Second
-	improvedShiftingPowerPerRankCDDrop = 4 * time.Second
-	improvedShiftingPowerMaxRank       = 2
+	shiftingPowerGCD = time.Second
 )
-
-// shiftingPowerCooldownAt is the spell's cooldown for a rank of Improved
-// Shifting Power.
-func shiftingPowerCooldownAt(improvedRank int32) time.Duration {
-	return shiftingPowerCooldown - improvedShiftingPowerPerRankCDDrop*time.Duration(clampRank(improvedRank, improvedShiftingPowerMaxRank))
-}
 
 func (druid *Druid) registerShiftingPowerSpell() {
 	if !druid.Talents.ShiftingPower {
@@ -60,7 +52,7 @@ func (druid *Druid) registerShiftingPowerSpell() {
 			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    druid.NewTimer(),
-				Duration: shiftingPowerCooldownAt(druid.Talents.ImprovedShiftingPower),
+				Duration: shiftingPowerCooldown,
 			},
 		},
 
