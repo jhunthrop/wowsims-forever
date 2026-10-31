@@ -33,6 +33,10 @@ type Pet struct {
 	isGuardian     bool
 	enabledOnStart bool
 
+	// refusesPlayerBuffs keeps raid, party and individual buffs off the pet.
+	// Forever hunter pets take their stats from the hunter instead.
+	refusesPlayerBuffs bool
+
 	OnPetEnable  OnPetEnable
 	OnPetDisable OnPetDisable
 
@@ -122,6 +126,11 @@ func (pet *Pet) doneIteration(sim *Simulation) {
 
 func (pet *Pet) IsGuardian() bool {
 	return pet.isGuardian
+}
+
+// RefusePlayerBuffs stops the raid's player buffs from reaching this pet.
+func (pet *Pet) RefusePlayerBuffs() {
+	pet.refusesPlayerBuffs = true
 }
 
 // petAgent should be the PetAgent which embeds this Pet.

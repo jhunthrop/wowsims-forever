@@ -94,6 +94,8 @@ type Hunter struct {
 	Options *proto.Hunter_Options
 
 	pet *HunterPet
+	// petAttackPowerSource is the attack power stat the pet inherits from.
+	petAttackPowerSource stats.Stat
 
 	AmmoDPS                   float64
 	AmmoDamageBonus           float64

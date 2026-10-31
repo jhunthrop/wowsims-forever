@@ -104,15 +104,10 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 
 	hp.AddStatDependency(stats.Strength, stats.AttackPower, 2)
 
-	// Warrior crit scaling.
-	//
-	// The Intellect line is a no-op (the warrior row has no Intellect rate
-	// at any level) and is kept so the pet wires both dependencies exactly
-	// as AddCritStatDependencies does for a player.
-	// unconfirmed: whether a Forever warrior-scaled pet should convert
-	// Intellect to Crit at all is unpublished.
-	hp.AddStatDependency(stats.Agility, stats.Crit, core.CritPerAgiAtLevel(proto.Class_ClassWarrior, hp.Level)*core.CritRatingPerCritChance)
-	hp.AddStatDependency(stats.Intellect, stats.Crit, core.SpellCritPerIntAtLevel(proto.Class_ClassWarrior, hp.Level)*core.CritRatingPerCritChance)
+	// No Agility or Intellect crit of its own: a Forever pet's crit chance
+	// is the hunter's (see makeStatInheritance), and it takes no player
+	// buffs.
+	hp.RefusePlayerBuffs()
 
 	core.ApplyPetConsumeEffects(&hp.Character, hunter.Consumes)
 
@@ -139,6 +134,7 @@ func (hp *HunterPet) Initialize() {
 
 func (hp *HunterPet) Reset(_ *core.Simulation) {
 	hp.uptimePercent = min(1, max(0, hp.hunterOwner.Options.PetUptime))
+	hp.hunterOwner.petAttackPowerSource = higherAttackPower(hp.hunterOwner.GetStats())
 }
 
 func (hp *HunterPet) ExecuteCustomRotation(sim *core.Simulation) {
@@ -203,11 +199,34 @@ func (hp *HunterPet) ExecuteCustomRotation(sim *core.Simulation) {
 	}
 }
 
+// petAttackPowerShare is the part of the hunter's attack power a Forever
+// pet inherits.
+const petAttackPowerShare = 0.10
+
+// makeStatInheritance is Forever's pet rework: the pet inherits 10% of the
+// hunter's attack power, melee or ranged, whichever is higher, and all of
+// the hunter's crit chance. The client's Hunter Pet Scaling (415429)
+// carries both channels (aura 99 and aura 52) with server-computed
+// amounts; the 10% and 100% are from the Warcraft Tavern Forever hunter
+// and pet guides and MMOGAH. The inheritance is linear in the chosen
+// stat, so the same function maps the owner's dynamic stat changes.
 func (hunter *Hunter) makeStatInheritance() core.PetStatInheritance {
 	return func(ownerStats stats.Stats) stats.Stats {
-		// No stat inheritance in classic
-		return stats.Stats{}
+		return stats.Stats{
+			stats.AttackPower: ownerStats[hunter.petAttackPowerSource] * petAttackPowerShare,
+			stats.Crit:        ownerStats[stats.Crit],
+		}
 	}
+}
+
+// higherAttackPower names the hunter's larger attack power stat, the one
+// the pet inherits from. It is chosen once per iteration from the
+// hunter's stats at the pet's reset.
+func higherAttackPower(ownerStats stats.Stats) stats.Stat {
+	if ownerStats[stats.AttackPower] > ownerStats[stats.RangedAttackPower] {
+		return stats.AttackPower
+	}
+	return stats.RangedAttackPower
 }
 
 type PetConfig struct {
