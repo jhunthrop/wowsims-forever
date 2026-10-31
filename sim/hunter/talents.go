@@ -365,13 +365,16 @@ func (hunter *Hunter) applyCleverTraps() {
 }
 
 // efficiencyMeleeSpellCodes are the melee strikes in Efficiency's client
-// class mask (19416): Raptor Strike, Mongoose Bite, Wing Clip and
-// Counterattack. Strider Kick is outside it.
+// class mask (19416): Raptor Strike, Mongoose Bite, Wing Clip,
+// Counterattack and, since client 1.60.1.70707, Strider Kick (mask word 2
+// went 0x2000 -> 0x202000; bit 21 is Strider Kick's 1317257 and the SoD
+// Flanking Strike rune's ids, which no Forever hunter learns).
 var efficiencyMeleeSpellCodes = []int32{
 	SpellCode_HunterRaptorStrike,
 	SpellCode_HunterMongooseBite,
 	SpellCode_HunterWingClip,
 	SpellCode_HunterCounterattack,
+	SpellCode_HunterStriderKick,
 }
 
 func (hunter *Hunter) applyEfficiency() {

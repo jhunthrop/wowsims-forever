@@ -42,16 +42,16 @@ func TestMortalShotsLeavesMeleeStrikesAlone(t *testing.T) {
 }
 
 // Efficiency (19416) reduces the cost of shots, stings and the melee
-// strikes in its class mask: Raptor Strike, Mongoose Bite, Wing Clip and
-// Counterattack (not Strider Kick). The talent text names "melee
-// abilities".
+// strikes in its class mask: Raptor Strike, Mongoose Bite, Wing Clip,
+// Counterattack and, since client 1.60.1.70707, Strider Kick. The talent
+// text names "melee abilities".
 func TestEfficiencyCoversMeleeStrikes(t *testing.T) {
-	with := buildHunterForTalentTest(t, 60, "efficiency", 5, proto.Hunter_Options_PetNone)
-	without := buildHunterForTalentTest(t, 60, "efficiency", 0, proto.Hunter_Options_PetNone)
-	for _, name := range []string{"Raptor Strike", "Mongoose Bite", "Wing Clip", "Counterattack"} {
+	with := buildHunterWithTalents(t, 60, buildTalentsStringFromRanks(t, map[string]int{"efficiency": 5, "strider_kick": 1, "counterattack": 1}), proto.Hunter_Options_PetNone)
+	without := buildHunterWithTalents(t, 60, buildTalentsStringFromRanks(t, map[string]int{"strider_kick": 1, "counterattack": 1}), proto.Hunter_Options_PetNone)
+	for _, name := range []string{"Raptor Strike", "Mongoose Bite", "Wing Clip", "Counterattack", "Strider Kick"} {
 		spell, base := survivalMeleeStrikes(with)[name], survivalMeleeStrikes(without)[name]
 		if spell == nil || spell.Cost == nil {
-			continue
+			t.Fatalf("%s is not registered with a mana cost", name)
 		}
 		if spell.Cost.Multiplier >= base.Cost.Multiplier {
 			t.Errorf("%s cost multiplier %d with Efficiency 5, want below %d", name, spell.Cost.Multiplier, base.Cost.Multiplier)

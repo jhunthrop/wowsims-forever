@@ -56,7 +56,13 @@ func TestEveryTalentThisPackageAppliesExists(t *testing.T) {
 // legal and a tree layout change cannot retarget it.
 func buildTalentsString(t *testing.T, field string, rank int32) string {
 	t.Helper()
-	str, err := core.TalentsStringFromRanks((&proto.HunterTalents{}).ProtoReflect(), TalentTreeSizes, map[string]int{field: int(rank)})
+	return buildTalentsStringFromRanks(t, map[string]int{field: int(rank)})
+}
+
+// buildTalentsStringFromRanks is buildTalentsString for several talents.
+func buildTalentsStringFromRanks(t *testing.T, ranks map[string]int) string {
+	t.Helper()
+	str, err := core.TalentsStringFromRanks((&proto.HunterTalents{}).ProtoReflect(), TalentTreeSizes, ranks)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -72,6 +78,13 @@ func buildTalentsString(t *testing.T, field string, rank int32) string {
 // test environment, so Equipment must stay empty.
 func buildHunterForTalentTest(t *testing.T, level int32, field string, rank int32, petType proto.Hunter_Options_PetType) *Hunter {
 	t.Helper()
+	return buildHunterWithTalents(t, level, buildTalentsString(t, field, rank), petType)
+}
+
+// buildHunterWithTalents is buildHunterForTalentTest for a whole talent
+// string.
+func buildHunterWithTalents(t *testing.T, level int32, talents string, petType proto.Hunter_Options_PetType) *Hunter {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
@@ -80,7 +93,7 @@ func buildHunterForTalentTest(t *testing.T, level int32, field string, rank int3
 			Level:              level,
 			Equipment:          &proto.EquipmentSpec{},
 			Buffs:              &proto.IndividualBuffs{},
-			TalentsString:      buildTalentsString(t, field, rank),
+			TalentsString:      talents,
 			DistanceFromTarget: 5,
 		},
 		&proto.Player_Hunter{

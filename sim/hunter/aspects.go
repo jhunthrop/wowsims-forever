@@ -29,33 +29,23 @@ func (hunter *Hunter) createImprovedHawkAura(auraLabel string, actionID core.Act
 	})
 }
 
-// Function to get the maximum attack power for Aspect of the Hawk based on rank
+// getMaxAspectOfTheHawkAttackPower is the rank's ranged attack power: the
+// client's aura-124 base points on spells 13165/14318/14319/14320/14321/
+// 14322/25296, read from the generated AspectOfTheHawkBaseDamage. Client
+// 1.60.1.70707 cut ranks 1-5 to 15/22/30/38/47 (from 20/35/50/70/90);
+// rank 6 (14322, level 58) stays 55 and rank 7 (25296, AQ) 120.
 func (hunter *Hunter) getMaxAspectOfTheHawkAttackPower(rank int) float64 {
-	// spellconst/hunter.json's per-rank effect amount for spells
-	// 13165/14318/14319/14320/14321/14322/25296. Rank 6 (14322, level 58)
-	// is 55, not Classic's 110 -- confirmed against Wowhead's Forever
-	// tooltip for 14322 ("Mod Ranged Attack Power Value: 56", cost 110
-	// mana unchanged), so this is a genuine Forever-side rebalance of
-	// that one rank, not a data error the client wins over Classic
-	// knowledge either way.
-	attackPower := [8]float64{0, 20, 35, 50, 70, 90, 55, 120}
-
-	if rank < 1 || rank > 7 {
+	if rank < 1 || rank > AspectOfTheHawkRanks {
 		return 0.0
 	}
-
-	return attackPower[rank]
+	return AspectOfTheHawkBaseDamage[rank][0]
 }
 
-// aspectOfTheHawkManaCost is spellconst/hunter.json's per-rank flat mana
-// cost for the same seven spells (20/35/50/70/90/110/120). The engine
-// never charged mana for this aura at all before this fix.
-var aspectOfTheHawkManaCost = [8]float64{0, 20, 35, 50, 70, 90, 110, 120}
-
 // getMaxHawkRank is the rank a hunter casts: the strongest rank learned by
-// their level, not the highest. Rank 6 gives 55 ranged attack power
-// against rank 5's 90 in the client, so a player keeps rank 5
-// (data/curated/inferior-ranks.json on the site names the same fact).
+// their level, not the highest. Through client 1.60.1.70685 rank 6 (55)
+// was weaker than rank 5 (90); since 70707 rank 5 is 47, so the strongest
+// is again the highest learned. The comparison stays so a future inferior
+// rank is skipped from the data alone.
 func (hunter *Hunter) getMaxHawkRank() int {
 	maxRank := core.TernaryInt(core.IncludeAQ, 7, 6)
 
@@ -133,7 +123,7 @@ func (hunter *Hunter) getAspectOfTheHawkSpellConfig(rank int) core.SpellConfig {
 		RequiredLevel: level,
 
 		ManaCost: core.ManaCostOptions{
-			FlatCost: aspectOfTheHawkManaCost[rank],
+			FlatCost: AspectOfTheHawkManaCost[rank],
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
