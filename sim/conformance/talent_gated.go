@@ -126,12 +126,14 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "warrior", Label: "Last Stand", Tree: 2, Pos: 7},
 	{ClassSlug: "warrior", Label: "Shield Slam", Tree: 2, Pos: 18},
 
-	// Druid (Balance 16, Feral Combat 19, Restoration 16).
+	// Druid (Balance 16, Feral Combat 20, Restoration 16; build 1.60.1.70707:
+	// Berserk is gone, Lacerate is a talent, Primal Bite and Shifting Power
+	// are the tier 6 talents).
 	{ClassSlug: "druid", Label: "Insect Swarm", Tree: 0, Pos: 9},
 	{ClassSlug: "druid", Label: "Moonkin Form", Tree: 0, Pos: 16},
-	{ClassSlug: "druid", Label: "Primal Bite", Tree: 1, Pos: 12, Preset: "FeralBearDruid"},
-	{ClassSlug: "druid", Label: "Shifting Power", Tree: 1, Pos: 11, Preset: "FeralDruid"},
-	{ClassSlug: "druid", Label: "Berserk", Tree: 1, Pos: 20},
+	{ClassSlug: "druid", Label: "Lacerate", Tree: 1, Pos: 12, Preset: "FeralBearDruid"},
+	{ClassSlug: "druid", Label: "Primal Bite", Tree: 1, Pos: 19, Preset: "FeralBearDruid"},
+	{ClassSlug: "druid", Label: "Shifting Power", Tree: 1, Pos: 20, Preset: "FeralDruid"},
 	{ClassSlug: "druid", Label: "Swiftmend", Tree: 2, Pos: 11, Preset: "RestorationDruid"},
 	{ClassSlug: "druid", Label: "Nature's Swiftness", Tree: 2, Pos: 12},
 	{ClassSlug: "druid", Label: "Wild Growth", Tree: 2, Pos: 16, Preset: "RestorationDruid"},

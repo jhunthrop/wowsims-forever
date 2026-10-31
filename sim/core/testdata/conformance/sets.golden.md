@@ -653,7 +653,7 @@ Every Phase 1 client set (sim/core/client_sets_gen.go: any piece with a loot sou
 | Grovekeeper Rage | 2113 | 2 | 1300942 | 1.60.0 - Item - Tier 1 - Druid - Guardian 2P Bonus - Defense | stats | declared, matches |  |
 | Grovekeeper Rage | 2113 | 3 | 1301005 | 1.60.0 - Item - Tier 1 - Druid - Guardian 3P Bonus - Rebirth | none | no sim effect | lets Rebirth be cast in Bear Form and shortens its cast time; the sim never resurrects |
 | Grovekeeper Rage | 2113 | 4 | 1301076 | 1.60.0 - Item - Tier 1 - Druid - Guardian 4P Bonus - Expertise | stats | declared, matches |  |
-| Grovekeeper Rage | 2113 | 5 | 1301249 | 1.60.0 - Item - Tier 1 - Druid - Guardian 5P Bonus - Berserk | hand-written | modelled |  |
+| Grovekeeper Rage | 2113 | 5 | 1301249 | 1.60.0 - Item - Tier 1 - Druid - Guardian 5P Bonus - Berserk | none | no sim effect | reduces the cooldown of Berserk, which client 1.60.1.70707 removed from the Feral tree |
 | Grovekeeper Eclipse | 2114 | 2 | 1300940 | 1.60.0 - Item - Tier 1 - Druid - Balance 2P Bonus - Hit | stats | declared, matches |  |
 | Grovekeeper Eclipse | 2114 | 3 | 1300975 | 1.60.0 - Item - Tier 1 - Druid - Balance 3P Bonus - Nature's Grasp | none | no sim effect | reduces the cooldown of Nature's Grasp, a root the sim never casts |
 | Grovekeeper Eclipse | 2114 | 4 | 1301073 | 1.60.0 - Item - Tier 1 - Druid - Balance 4P Bonus - SP vs. Demons | stats | declared, matches |  |
