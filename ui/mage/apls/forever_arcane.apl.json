@@ -45,23 +45,59 @@
       }
     },
     {
-      "notes": "Arcane Blast until it carries 3 stacks, then Frostbolt: each stack adds damage and 175% to the next Arcane Blast's cost, and with one Missile Barrage proc giving one free Arcane Missiles, three stacks measured ahead of two and of four.",
+      "notes": "Arcane Blast to 3 stacks always, and on past them while the mana bar is ahead of the fight (more mana left than fight left) and above 20%. Client 1.60.1.70707 cut each stack's cost increase to 100% (was 175%) and the buff lasts 18 sec, so a mana-rich mage keeps blasting at 4 stacks instead of breaking to Frostbolt; a mage behind pace stops at 3 and Frostbolts, as before. In the 70707 run: about +10% at the raid band, within about half a percent at the bare band.",
       "action": {
         "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "auraNumStacks": {
-                "auraId": {
-                  "spellId": 400573
+          "or": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "auraNumStacks": {
+                      "auraId": {
+                        "spellId": 400573
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3"
+                    }
+                  }
+                }
+              },
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGt",
+                        "lhs": {
+                          "currentManaPercent": {}
+                        },
+                        "rhs": {
+                          "remainingTimePercent": {}
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGt",
+                        "lhs": {
+                          "currentManaPercent": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "0.2"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
-            },
-            "rhs": {
-              "const": {
-                "val": "3"
-              }
-            }
+            ]
           }
         },
         "castSpell": {
