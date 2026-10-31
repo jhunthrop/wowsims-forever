@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70658",
+  "build": "1.60.1.70707",
   "class_slug": "mage",
   "family": 3,
   "spells": {
@@ -6890,7 +6890,7 @@
       "max_level": 60
     },
     "11069": {
-      "name": "Improved Fireball",
+      "name": "Accelerant",
       "rank": 0,
       "school_mask": 4,
       "cast_time_ms": 0,
@@ -18066,7 +18066,7 @@
       "max_level": 0
     },
     "29438": {
-      "name": "Elemental Precision",
+      "name": "Precision",
       "rank": 0,
       "school_mask": 64,
       "cast_time_ms": 0,
@@ -18087,12 +18087,12 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 107,
+          "aura": 55,
           "amount": 6,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 16,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -18816,12 +18816,12 @@
         {
           "index": 1,
           "effect": 6,
-          "aura": 107,
+          "aura": 4,
           "amount": -500,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 19,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -31694,7 +31694,7 @@
       "cast_time_ms": 0,
       "gcd_ms": 1500,
       "cooldown_ms": 0,
-      "category_cooldown_ms": 0,
+      "category_cooldown_ms": 8000,
       "duration_ms": 0,
       "cost": 45,
       "cost_type": 0,
