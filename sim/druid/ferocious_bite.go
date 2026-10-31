@@ -15,6 +15,12 @@ var FerociousBiteDamage = clientdamage.FromTable(FerociousBiteBaseDamage[:], Fer
 // is the client's dummy effect 1 (amount 100/150/200/250/270 hundredths per
 // energy, pinned by spellconst_damage_test.go); the per-combo-point step is
 // stated nowhere in the client's rows and stays the Era figure.
+//
+// Predatory Discipline (Feral node 104951, spell 1328613, client 1.60.1.70707
+// hotfix): "Your Ferocious Bite ability no longer converts extra Energy into
+// damage, but still deals extra damage based on your excess Energy." The
+// bite keeps the per-energy damage on the energy left after its cost but no
+// longer spends that energy.
 var ferociousBiteDamagePerComboPoint = [FerociousBiteRanks + 1]float64{0, 36, 59, 92, 128, 147}
 var ferociousBiteDamagePerEnergy = [FerociousBiteRanks + 1]float64{0, 1.0, 1.5, 2.0, 2.5, 2.7}
 
@@ -96,7 +102,9 @@ func (druid *Druid) newFerociousBiteSpellConfig(rank int) core.SpellConfig {
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
 			if result.Landed() {
-				druid.SpendEnergy(sim, excessEnergy, spell.EnergyMetrics())
+				if !druid.Talents.PredatoryDiscipline {
+					druid.SpendEnergy(sim, excessEnergy, spell.EnergyMetrics())
+				}
 				druid.SpendComboPoints(sim, spell)
 			} else {
 				spell.IssueRefund(sim)

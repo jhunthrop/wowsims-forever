@@ -74,7 +74,6 @@ const (
 	DruidSpellMaskSwiftmend
 	DruidSpellMaskTranquility
 	DruidSpellMaskWildGrowth
-	DruidSpellMaskBerserk
 	DruidSpellMaskPounce
 	DruidSpellMaskShiftingPower
 )
@@ -104,8 +103,9 @@ const (
 	DruidSpellMaskPeriodicDamage = DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm | DruidSpellMaskRake | DruidSpellMaskRip | DruidSpellMaskPounce
 
 	// Every Nature spell Nature's Swiftness can make instant: the one
-	// damage spell and the two cast-time heals the school has.
-	DruidSpellMaskNatureCasts = DruidSpellMaskWrath | DruidSpellMaskHealingTouch | DruidSpellMaskRegrowth
+	// damage spell and the three cast-time heals the school has (Wild
+	// Growth's 3 s cast is client 1.60.1.70707's hotfix, wild_growth.go).
+	DruidSpellMaskNatureCasts = DruidSpellMaskWrath | DruidSpellMaskHealingTouch | DruidSpellMaskRegrowth | DruidSpellMaskWildGrowth
 
 	// Every Cat Form melee special this package registers, for
 	// Predatory Instincts' "melee abilities".
@@ -113,8 +113,7 @@ const (
 		DruidSpellMaskMaul | DruidSpellMaskSwipe | DruidSpellMaskLacerate | DruidSpellMaskPrimalBite
 
 	// Claw, Rake, Ravage and Shred: the Cat Form specials that generate
-	// a Combo Point, for Berserk's crit bonus and Blood Frenzy's bonus
-	// Combo Point chance.
+	// a Combo Point, for Blood Frenzy's bonus Combo Point chance.
 	DruidSpellMaskComboPointBuilders = DruidSpellMaskClaw | DruidSpellMaskRake | DruidSpellMaskRavage | DruidSpellMaskShred | DruidSpellMaskPounce
 )
 
@@ -139,7 +138,7 @@ type Druid struct {
 	ReplaceBearMHFunc core.ReplaceMHSwing
 
 	Barkskin             *DruidSpell
-	Berserk              *DruidSpell
+	Bloom                *DruidSpell
 	DemoralizingRoar     *DruidSpell
 	Enrage               *DruidSpell
 	FaerieFire           *DruidSpell
@@ -182,7 +181,6 @@ type Druid struct {
 
 	BarkskinAura             *core.Aura
 	BearFormAura             *core.Aura
-	BerserkAura              *core.Aura
 	CatFormAura              *core.Aura
 	ClearcastingAura         *core.Aura
 	DemoralizingRoarAuras    core.AuraArray

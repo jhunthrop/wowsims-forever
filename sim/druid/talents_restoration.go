@@ -12,7 +12,9 @@ import (
 // (a healer never shapeshifts; the feral code reads both), and Omen of
 // Clarity, which is a trainable passive (spell 16864) rather than a talent
 // whose proc rate the client does not publish. Nature's Swiftness, Living
-// Spirit, Naturalist's damage half and Reflection are in talents.go.
+// Spirit, Naturalist's damage half and Reflection are in talents.go, Bloom
+// in bloom.go. Heart of the Wild (Restoration tier 0 since client
+// 1.60.1.70707) is in feral_talents.go: its Intellect reads for a healer.
 
 const (
 	giftOfNatureHealingPerRank      = 2  // percent
@@ -98,7 +100,7 @@ func (druid *Druid) applyImprovedRegrowth() {
 	})
 }
 
-// reflectionRanks is Reflection's three ranks (node 104917), each 1/6 of the
+// reflectionRanks is Reflection's three ranks (node 104920), each 1/6 of the
 // mana regeneration that continues while casting: the client's 17/33/50%.
 const reflectionRanks = 3
 

@@ -5,7 +5,8 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
-// Heart of the Wild (node 104939, five ranks), rank text: "Increases your
+// Heart of the Wild (node 104958, five ranks; a Restoration tier 0 talent
+// since client 1.60.1.70707, Feral before), rank text: "Increases your
 // Intellect by 2%. In addition, while in Bear Form or Dire Bear Form your
 // Stamina is increased by 4% and while in Cat Form your Strength is
 // increased by 2%." Intellect and Strength gain 2% a rank, Stamina 4%

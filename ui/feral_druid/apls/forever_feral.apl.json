@@ -103,7 +103,7 @@
       }
     },
     {
-      "notes": "Shifting Power (Feral talent, instant, converts 55% of base mana into 40 energy, 16 s cooldown) on cooldown whenever the energy bar has room for all 40, which is 60 or less. Inert for a build that has not taken the talent; no client spell row states its global cooldown, so the engine treats it as on the GCD.",
+      "notes": "Shifting Power (Feral capstone talent since client 1.60.1.70707, instant, converts 55% of base mana into 40 energy, 8 s cooldown on the live tooltip) on cooldown whenever the energy bar has room for all 40, which is 60 or less. Inert for a build that has not taken the talent; no client spell row states its global cooldown, so the engine treats it as on the GCD.",
       "action": {
         "condition": {
           "cmp": {

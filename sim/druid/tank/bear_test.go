@@ -191,8 +191,8 @@ func TestFerocityDiscountsEveryBearAbilityItNames(t *testing.T) {
 }
 
 func TestShreddingAttacksDiscountsLacerate(t *testing.T) {
-	plain, _, _ := newBearSim(t, 60, nil)
-	shredder, _, _ := newBearSim(t, 60, map[string]int{"shredding_attacks": 3})
+	plain, _, _ := newBearSim(t, 60, map[string]int{"lacerate": 1})
+	shredder, _, _ := newBearSim(t, 60, map[string]int{"lacerate": 1, "shredding_attacks": 3})
 	if got := plain.Lacerate.Cost.GetCurrentCost(); got != 15 {
 		t.Errorf("Lacerate costs %v rage, want 15", got)
 	}
@@ -202,7 +202,7 @@ func TestShreddingAttacksDiscountsLacerate(t *testing.T) {
 }
 
 func TestRankedAbilitiesAtLevelSixty(t *testing.T) {
-	bear, _, _ := newBearSim(t, 60, map[string]int{"primal_bite": 1})
+	bear, _, _ := newBearSim(t, 60, map[string]int{"primal_bite": 1, "lacerate": 1})
 	for name, c := range map[string]struct {
 		spell *druid.DruidSpell
 		id    int32
@@ -228,6 +228,64 @@ func TestRankedAbilitiesAtLevelSixty(t *testing.T) {
 	}
 }
 
+// Lacerate is a Feral talent since client 1.60.1.70707 (node 104949): a bear
+// without it has no Lacerate, and one with it learns the live ladder,
+// including the hotfix's two low ranks the client tables lack.
+func TestLacerateNeedsItsTalent(t *testing.T) {
+	bear, _, _ := newBearSim(t, 60, nil)
+	if bear.Lacerate != nil {
+		t.Error("Lacerate is registered without its talent")
+	}
+}
+
+func TestLacerateLiveRanks(t *testing.T) {
+	for _, c := range []struct {
+		level int32
+		id    int32
+	}{
+		{25, 1328617},
+		{34, 1328616},
+		{42, 414644},
+		{58, 1235827},
+	} {
+		bear, _, _ := newBearSim(t, c.level, map[string]int{"lacerate": 1})
+		if bear.Lacerate == nil {
+			t.Fatalf("level %d: Lacerate is not registered", c.level)
+		}
+		if got := bear.Lacerate.ActionID.SpellID; got != c.id {
+			t.Errorf("level %d: Lacerate registered as %d, want %d", c.level, got, c.id)
+		}
+	}
+}
+
+// Primal Bite's live ladder (client 1.60.1.70707 hotfix): the capstone is
+// learned at 40 with 42, then 62 at 50 and 77 at 60.
+func TestPrimalBiteLiveRanks(t *testing.T) {
+	for _, c := range []struct {
+		level int32
+		id    int32
+	}{
+		{39, 0},
+		{40, 407995},
+		{50, 1238069},
+		{60, 1238073},
+	} {
+		bear, _, _ := newBearSim(t, c.level, map[string]int{"primal_bite": 1})
+		if c.id == 0 {
+			if bear.PrimalBite != nil {
+				t.Errorf("level %d: Primal Bite is registered below its tier", c.level)
+			}
+			continue
+		}
+		if bear.PrimalBite == nil {
+			t.Fatalf("level %d: Primal Bite is not registered", c.level)
+		}
+		if got := bear.PrimalBite.ActionID.SpellID; got != c.id {
+			t.Errorf("level %d: Primal Bite registered as %d, want %d", c.level, got, c.id)
+		}
+	}
+}
+
 func TestPrimalBiteNeedsItsTalent(t *testing.T) {
 	bear, _, _ := newBearSim(t, 60, nil)
 	if bear.PrimalBite != nil {
@@ -248,7 +306,7 @@ func TestSwipeAddsSavageFuryAndFeralInstinct(t *testing.T) {
 // Rend and Tear 5/5: +10% melee ability damage on a bleeding target, which
 // a Lacerate on it makes.
 func TestRendAndTearNeedsABleed(t *testing.T) {
-	bear, sim, target := newBearSim(t, 60, map[string]int{"rend_and_tear": 5})
+	bear, sim, target := newBearSim(t, 60, map[string]int{"rend_and_tear": 5, "lacerate": 1})
 	if got := bear.RendAndTearMultiplier(target); got != 1 {
 		t.Errorf("multiplier without a bleed = %v, want 1", got)
 	}
@@ -263,7 +321,7 @@ func TestRendAndTearNeedsABleed(t *testing.T) {
 }
 
 func TestLacerateStacksToFive(t *testing.T) {
-	bear, sim, target := newBearSim(t, 60, nil)
+	bear, sim, target := newBearSim(t, 60, map[string]int{"lacerate": 1})
 	for i := 0; i < 40 && bear.Lacerate.Dot(target).GetStacks() < 5; i++ {
 		bear.AddRage(sim, 100, bear.NewRageMetrics(core.ActionID{SpellID: 1}))
 		sim.CurrentTime += 2 * time.Second

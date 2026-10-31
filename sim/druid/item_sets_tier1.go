@@ -19,14 +19,18 @@ const (
 	rebirthNoSimNote      = "lets Rebirth be cast in Bear Form and shortens its cast time; the sim never resurrects"
 	naturesGraspNoSimNote = "reduces the cooldown of Nature's Grasp, a root the sim never casts"
 	hibernateNoSimNote    = "lets Hibernate be cast in Cat Form; the sim never casts it"
+	// berserkNoSimNote is the Grovekeeper Rage 5-piece (spell 1301249),
+	// "Reduces the cooldown of your Berserk ability by 15.0 sec": client
+	// 1.60.1.70707 took Berserk out of the Feral tree, so nothing is left
+	// for it to shorten.
+	berserkNoSimNote = "reduces the cooldown of Berserk, which client 1.60.1.70707 removed from the Feral tree"
 )
 
 // tier1ClassMasks says which engine spells the client spell families of
 // the Tier 1 5-piece bonuses are (the SpellClassOptions masks of
-// Swiftmend, Berserk, Shifting Power and Insect Swarm).
+// Swiftmend, Shifting Power and Insect Swarm).
 var tier1ClassMasks = core.ClassMaskTable{
 	{Client: core.ClientClassMask{0, 1 << 1}, Engine: DruidSpellMaskSwiftmend},
-	{Client: core.ClientClassMask{0, 0, 1 << 6}, Engine: DruidSpellMaskBerserk},
 	{Client: core.ClientClassMask{0, 1 << 31}, Engine: DruidSpellMaskShiftingPower},
 	{Client: core.ClientClassMask{1 << 21}, Engine: DruidSpellMaskInsectSwarm},
 }
@@ -40,9 +44,10 @@ var ItemSetGrovekeeperRaiment = core.NewClientItemSet(core.ClientSetModel{
 
 var ItemSetGrovekeeperRage = core.NewClientItemSet(core.ClientSetModel{
 	ID: grovekeeperRageSetID,
-	// Reduces the cooldown on your Berserk ability by 15 sec.
-	Effects: clientsetbonus.FivePieceMod(grovekeeperRageSetID, tier1ClassMasks),
-	NoSim:   clientsetbonus.NoSimThreePiece(grovekeeperRageSetID, rebirthNoSimNote),
+	NoSim: map[int32]string{
+		clientsetbonus.SpellAt(grovekeeperRageSetID, clientsetbonus.ThreePieces): rebirthNoSimNote,
+		clientsetbonus.SpellAt(grovekeeperRageSetID, clientsetbonus.FivePieces):  berserkNoSimNote,
+	},
 })
 
 var ItemSetGrovekeeperEclipse = core.NewClientItemSet(core.ClientSetModel{

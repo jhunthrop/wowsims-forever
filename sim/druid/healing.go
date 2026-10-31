@@ -152,8 +152,9 @@ func (druid *Druid) eachPartyMember(target *core.Unit, visit func(member *core.U
 }
 
 // RegisterHealingSpells registers the restoration druid's healing kit.
-// Swiftmend and Wild Growth come with their talents.
+// Bloom, Swiftmend and Wild Growth come with their talents.
 func (druid *Druid) RegisterHealingSpells() {
+	druid.registerBloomSpell()
 	druid.registerHealingTouchSpell()
 	druid.registerRegrowthSpell()
 	druid.registerRejuvenationSpell()

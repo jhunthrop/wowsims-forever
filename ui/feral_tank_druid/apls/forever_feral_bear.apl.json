@@ -54,16 +54,6 @@
       }
     },
     {
-      "notes": "Berserk on cooldown (talent): Primal Bite loses its cooldown for 15 s. Worth about 4% more threat for no survival cost.",
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 417141
-          }
-        }
-      }
-    },
-    {
       "notes": "Primal Bite (talent) on cooldown: the biggest threat hit per rage.",
       "action": {
         "castSpell": {

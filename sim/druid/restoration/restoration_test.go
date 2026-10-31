@@ -18,11 +18,13 @@ func init() {
 
 // StandardTalents is the build the conformance preset and these tests use: the
 // healing half of the Restoration tree (40 points: Nature's Focus 5, Naturalist
-// 5, Reflection 3, Gift of Nature 5, Gift of the Earthmother, Tranquil Spirit 5,
-// Improved Rejuvenation 3, Swiftmend, Nature's Swiftness, Living Spirit 3,
-// Improved Tranquility 2, Improved Regrowth 5, Wild Growth) and 11 Balance
-// points for Genesis 5, Nature's Majesty 2, Moonglow 3 and Nature's Splendor.
-const StandardTalents = "05302001--5050035153113251"
+// 5, Reflection 3, Gift of Nature 5, Bloom, Tranquil Spirit 5, Improved
+// Rejuvenation 3, Swiftmend, Nature's Swiftness, Living Spirit 3, Improved
+// Tranquility 2, Improved Regrowth 5, Wild Growth) and 11 Balance points for
+// Genesis 5, Nature's Majesty 2, Moonglow 3 and Nature's Splendor. Carried by
+// name onto the 1.60.1.70707 tree; Bloom takes the removed Gift of the
+// Earthmother's point.
+const StandardTalents = "05302001--5053005153113251"
 
 // healerBonusStats is what a geared level 60 healer adds to the bare class:
 // the sims here wear no items, so the stats come in as bonus stats.
