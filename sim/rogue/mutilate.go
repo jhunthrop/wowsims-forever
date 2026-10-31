@@ -88,7 +88,9 @@ func (rogue *Rogue) registerMutilateSpell() {
 		ProcMask:    core.ProcMaskMeleeMHSpecial,
 		// Cold Blood's crit bonus rides on the hand spells that roll the
 		// hits; the main hand leaves it for the off hand to spend.
-		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell | SpellFlagColdBlooded,
+		// They carry the builder flag so a crit procs Seal Fate; its
+		// 500 ms cooldown keeps that to one point per Mutilate.
+		Flags: core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell | SpellFlagColdBlooded | SpellFlagBuilder,
 
 		CritDamageBonus:  rogue.lethality(),
 		DamageMultiplier: opportunityDamage,
@@ -100,7 +102,7 @@ func (rogue *Rogue) registerMutilateSpell() {
 		SpellSchool: core.SpellSchoolPhysical,
 		DefenseType: core.DefenseTypeMelee,
 		ProcMask:    core.ProcMaskMeleeOHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell | SpellFlagColdBlooded,
+		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell | SpellFlagColdBlooded | SpellFlagBuilder,
 
 		CritDamageBonus:  rogue.lethality(),
 		DamageMultiplier: opportunityDamage,
@@ -130,10 +132,10 @@ func (rogue *Rogue) registerMutilateSpell() {
 			IgnoreHaste: true,
 		},
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			// "Instantly attacks with both weapons": needs a weapon in
-			// each hand, not daggers specifically -- the tooltip names no
-			// weapon-type restriction the way Ambush/Backstab do.
-			return rogue.AutoAttacks.IsDualWielding
+			// A dagger in each hand: every Mutilate rank's
+			// SpellEquippedItems row is item class 2, subclass mask 32768
+			// (the dagger bit), the same row Backstab carries.
+			return rogue.AutoAttacks.IsDualWielding && rogue.HasDagger(core.MainHand) && rogue.HasDagger(core.OffHand)
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
@@ -151,8 +153,8 @@ func (rogue *Rogue) registerMutilateSpell() {
 			// penalty (core/attack.go), which does not apply to a
 			// special ability that explicitly swings the off-hand.
 			ap := spell.MeleeAttackPower(target)
-			mhDamage := poisonedMultiplier * (flatDamage.Roll(sim, casterLevel) + mutilateWeaponDamagePct*rogue.AutoAttacks.MH().CalculateNormalizedWeaponDamage(sim, ap))
-			ohDamage := poisonedMultiplier * (flatDamage.Roll(sim, casterLevel) + mutilateWeaponDamagePct*rogue.AutoAttacks.OH().CalculateNormalizedWeaponDamage(sim, ap))
+			mhDamage := poisonedMultiplier * mutilateHandDamage(flatDamage.Roll(sim, casterLevel), rogue.AutoAttacks.MH().CalculateNormalizedWeaponDamage(sim, ap))
+			ohDamage := poisonedMultiplier * mutilateHandDamage(flatDamage.Roll(sim, casterLevel), rogue.AutoAttacks.OH().CalculateNormalizedWeaponDamage(sim, ap))
 
 			mhResult := rogue.MutilateMH.CalcAndDealDamage(sim, target, mhDamage, rogue.MutilateMH.OutcomeMeleeWeaponSpecialHitAndCrit)
 			ohResult := rogue.MutilateOH.CalcAndDealDamage(sim, target, ohDamage, rogue.MutilateOH.OutcomeMeleeWeaponSpecialHitAndCrit)
@@ -165,6 +167,14 @@ func (rogue *Rogue) registerMutilateSpell() {
 			}
 		},
 	})
+}
+
+// mutilateHandDamage is one hand's Mutilate damage before multipliers: the
+// flat bonus sits inside the 75% weapon damage (client effect 121, weapon
+// plus 67, under effect 31 at 75%; the tooltip's "plus 50" is 67 x 0.75),
+// the way Backstab's flat sits inside its 150%.
+func mutilateHandDamage(flat, normalizedWeaponDamage float64) float64 {
+	return mutilateWeaponDamagePct * (flat + normalizedWeaponDamage)
 }
 
 // TargetHasRoguePoison reports whether the caster's own poisons are

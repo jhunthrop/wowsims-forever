@@ -454,16 +454,20 @@ func (rogue *Rogue) registerBladeFlurryCD() {
 		Type:     core.CooldownTypeDPS,
 		Priority: core.CooldownPriorityDefault,
 		ShouldActivate: func(sim *core.Simulation, character *core.Character) bool {
-			if sim.GetRemainingDuration() > cooldownDur+time.Second*15 {
-				// We'll have enough time to cast another BF, so use it immediately to make sure we get the 2nd one.
-				return true
-			}
-
-			// Since this is our last BF, wait until we have SND / procs up.
-			sndTimeRemaining := rogue.SliceAndDiceAura.RemainingDuration(sim)
-			return sndTimeRemaining >= time.Second
+			return bladeFlurryShouldActivate(sim.GetRemainingDuration(), cooldownDur, rogue.BladeFlurryAura.Duration, rogue.SliceAndDiceAura.RemainingDuration(sim))
 		},
 	})
+}
+
+// bladeFlurryShouldActivate fires Blade Flurry at once while another cast
+// still fits in the fight; the last one waits for Slice and Dice, but no
+// later than the point where the fight has only Blade Flurry's own
+// duration left, so a rotation that lets Slice and Dice drop still gets it.
+func bladeFlurryShouldActivate(remaining, cooldown, duration, sliceAndDiceRemaining time.Duration) bool {
+	if remaining > cooldown+duration {
+		return true
+	}
+	return sliceAndDiceRemaining >= time.Second || remaining <= duration
 }
 
 var AdrenalineRushActionID = core.ActionID{SpellID: 13750}

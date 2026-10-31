@@ -76,17 +76,19 @@ var InstantPoisonDamage = [instantPoisonRanks + 1]clientdamage.Effect{
 	{Amount: 88, Variance: 0.276923, SpellLevel: 60},
 }
 
-// DeadlyPoisonTickDamage is the per-tick amount of the "Deadly Poison"
-// damage spells 434312 through 434316 (the family the generated
-// DeadlyPoisonBaseDamage names for rank 1), indexed by the engine's rank;
+// DeadlyPoisonTickDamage is the per-tick amount of the spells Forever's
+// Deadly Poison enchants apply (SpellItemEnchantment 7, 8, 626, 627, 2630
+// trigger 2818, 2819, 11353, 11354, 25349), indexed by the engine's rank;
 // its fifth slot is the AQ rank or, without AQ content, rank 4's amount.
+// The 434312-434316 family the generated constants name is Season of
+// Discovery's (9 to 34 a tick) and no Forever enchant applies it.
 var DeadlyPoisonTickDamage = [deadlyPoisonRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 9, SpellLevel: 30},
-	{Amount: 13, SpellLevel: 38},
-	{Amount: 20, SpellLevel: 46},
-	{Amount: 27, SpellLevel: 54},
-	core.Ternary(core.IncludeAQ, clientdamage.Effect{Amount: 34, SpellLevel: 60}, clientdamage.Effect{Amount: 27, SpellLevel: 54}),
+	{Amount: 6, SpellLevel: 30},
+	{Amount: 9, SpellLevel: 38},
+	{Amount: 14, SpellLevel: 46},
+	{Amount: 18, SpellLevel: 54},
+	core.Ternary(core.IncludeAQ, clientdamage.Effect{Amount: 23, SpellLevel: 60}, clientdamage.Effect{Amount: 18, SpellLevel: 54}),
 }
 
 const (

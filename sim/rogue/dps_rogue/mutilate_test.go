@@ -88,13 +88,24 @@ func buildRogueWithRaidBuffs(t *testing.T, talentsStr string, raidBuffs *proto.R
 // as well.
 func buildRogueWithBuffs(t *testing.T, talentsStr string, raidBuffs *proto.RaidBuffs, debuffs *proto.Debuffs) (*core.Simulation, *rogue.Rogue) {
 	t.Helper()
+	return buildRogueWithGear(t, talentsStr, raidBuffs, debuffs, testDaggers)
+}
+
+// testDaggers equips a dagger in each hand (Heartseeker and Scarlet
+// Kris), so Mutilate's dagger requirement holds; the synthetic weapons
+// below then replace their damage numbers.
+var testDaggers = &proto.EquipmentSpec{Items: []*proto.ItemSpec{{Id: 12783}, {Id: 5267}}}
+
+// buildRogueWithGear is buildRogueWithBuffs wearing the given weapons.
+func buildRogueWithGear(t *testing.T, talentsStr string, raidBuffs *proto.RaidBuffs, debuffs *proto.Debuffs, gear *proto.EquipmentSpec) (*core.Simulation, *rogue.Rogue) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
 			Class:         proto.Class_ClassRogue,
 			Race:          proto.Race_RaceOrc,
 			Level:         60,
-			Equipment:     &proto.EquipmentSpec{},
+			Equipment:     gear,
 			Buffs:         core.FullBuffs.Player,
 			TalentsString: talentsStr,
 			// A rogue's energy bar walks player.Rotation unconditionally

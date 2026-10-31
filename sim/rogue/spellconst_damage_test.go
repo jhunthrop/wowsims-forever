@@ -60,8 +60,17 @@ func TestInstantPoisonDamageMatchesClient(t *testing.T) {
 		[]int32{0, 8680, 8685, 8689, 11335, 11336, 11337}, InstantPoisonDamage[:])
 }
 
+// Forever's Deadly Poison enchants (SpellItemEnchantment 7, 8, 626, 627,
+// 2630) trigger 2818, 2819, 11353, 11354 and 25349, which tick for 6, 9,
+// 14, 18 and 23 every 3 s (SpellEffect aura 3, client 1.60.1.70658). The
+// 434312-434316 family (9 to 34) is Season of Discovery's and no Forever
+// enchant applies it; the conformance client file keeps only that family,
+// so the Forever amounts are pinned here.
 func TestDeadlyPoisonDamageMatchesClient(t *testing.T) {
-	ids := []int32{0, 434312, 434313, 434314, 434315, 434316}
-	top := core.MaxTrainerRank(len(ids) - 1)
-	assertTable(t, clientdamagetest.Periodic, "Deadly Poison", ids[:top+1], DeadlyPoisonTickDamage[:top+1])
+	want := []float64{0, 6, 9, 14, 18, core.TernaryFloat64(core.IncludeAQ, 23, 18)}
+	for rank := 1; rank < len(want); rank++ {
+		if got := DeadlyPoisonTickDamage[rank].Amount; got != want[rank] {
+			t.Errorf("Deadly Poison rank %d ticks for %v, want the enchant spell's %v", rank, got, want[rank])
+		}
+	}
 }
