@@ -63,7 +63,7 @@
           }
         }
       },
-      "notes": "Shadowfiend returns a share of the whole mana bar over its fifteen seconds, so it waits until the bar has room for all of it (below half, or in the last 30% of the fight if the bar never got there), and its long cooldown makes it a once-a-fight cast."
+      "notes": "Shadowfiend below half mana, or in the last 30% of the fight. It returns a share of the whole mana bar over its fifteen seconds, so it waits until the bar has room for all of it, and its long cooldown makes it a once-a-fight cast."
     },
     {
       "action": {
@@ -106,7 +106,7 @@
           }
         }
       },
-      "notes": "Dark Sacrifice trades the healer's own health for mana over fifteen seconds and adds the caster's Spirit to the mana. It waits for room on the mana bar and for a healer who is not hurt, and its ten minute cooldown makes it a once-a-fight cast."
+      "notes": "Dark Sacrifice when the mana bar has room and you are not hurt. It trades your own health for mana over fifteen seconds and adds your Spirit to the mana, and its ten minute cooldown makes it a once-a-fight cast."
     },
     {
       "action": {
@@ -343,7 +343,38 @@
           }
         }
       },
-      "notes": "Power Word: Shield on a hurt tank whenever Weakened Soul is off him; Soul Warding makes it free of cooldown and 15% cheaper. Rank 4 is the rank this profile pays for: it costs about a third of the top rank's mana and returned more guarded score. Renewed Hope also turns the Weakened Soul into extra crit chance and Divine Aegis for the heals that follow."
+      "notes": "On a hurt tank whenever Weakened Soul is off him. Soul Warding makes it free of cooldown and 15% cheaper. Rank 4 is the rank this profile pays for: it costs about a third of the top rank's mana and returned more guarded score. Renewed Hope also turns the Weakened Soul into extra crit chance and Divine Aegis for the heals that follow."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6075,
+            "rank": 3
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "targetUnit": {
+                  "type": "Player",
+                  "index": 5
+                },
+                "spellId": {
+                  "spellId": 6075,
+                  "rank": 3
+                }
+              }
+            }
+          }
+        }
+      },
+      "notes": "Renew stays on the tank for the whole fight at a cheap rank: a cheaper rank returns more health per mana for the spell power it is cast with, and the dearer ranks cost the mana the fight runs out of."
     },
     {
       "action": {
@@ -792,7 +823,7 @@
           }
         }
       },
-      "notes": "Prayer of Healing heals the healer's whole party, so it is cast on a party member and only once three of the four are down. Rank 1 is the rank this profile pays for: it costs well under half of the top rank's mana and returned more guarded score."
+      "notes": "Prayer of Healing on a party member once three of the four are under 85%. It heals the healer's whole party. Rank 1 is the rank this profile pays for: it costs well under half of the top rank's mana and returned more guarded score."
     },
     {
       "action": {
@@ -852,7 +883,7 @@
           }
         }
       },
-      "notes": "Heal rank 4 is the mana-efficient filler: the same 0.857 spell power coefficient as Greater Heal for far less mana, so with healing power it returns more health per mana than any Greater Heal rank (the classic downrank). Lower ranks of Heal were tried and did not clear the rule. Mana pacing: while the mana bar is at least as full as the share of the fight left, the filler fires at the normal thresholds."
+      "notes": "Heal is the mana-efficient filler at rank 4: the same 0.857 spell power coefficient as Greater Heal for far less mana, so with healing power it returns more health per mana than any Greater Heal rank (the classic downrank). Lower ranks of Heal were tried and did not clear the rule. Mana pacing: while the mana bar is at least as full as the share of the fight left, the filler fires at the normal thresholds."
     },
     {
       "action": {
