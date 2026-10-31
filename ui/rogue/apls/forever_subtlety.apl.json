@@ -41,7 +41,7 @@
       },
       "doAtValue": {
         "const": {
-          "val": "-1s"
+          "val": "0s"
         }
       }
     }
