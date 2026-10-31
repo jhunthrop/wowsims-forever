@@ -307,6 +307,13 @@ BUILD ?= $(FOREVER_BUILD)
 relicmods:
 	cd /tmp && python3 -I "$(CURDIR)/tools/relicmods/gen.py" "$(SITE_DIR)/data/builds/$(BUILD)"
 
+.PHONY: periodiccrit
+# periodiccrit regenerates sim/core/periodic_crit_auto_gen.go, the spells
+# whose periodic damage the client lets crit, from the raw tables in the
+# site's build directory.
+periodiccrit:
+	cd /tmp && python3 -I "$(CURDIR)/tools/periodiccrit/gen.py" "$(SITE_DIR)/data/builds/$(BUILD)"
+
 .PHONY: spellconst
 # spellconst regenerates the per-class constants files from the data
 # lane's spellconst output. A Forever patch that changes a number is a

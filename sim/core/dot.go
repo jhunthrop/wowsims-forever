@@ -28,16 +28,12 @@ type DotConfig struct {
 	DamageMultiplier float64 // periodic damage multiplier
 	BonusCoefficient float64 // EffectBonusCoefficient in SpellEffect client DB table, "SP mod" on Wowhead (not necessarily shown there even if > 0)
 
-	// CanCrit opts this dot into periodic critical strikes under
-	// Dot.OutcomeMagicCritPerTick, which reads it and ticks flat when it
-	// is false. Forever enables them per spell rather than per school;
-	// which spells is a beta measurement (sim/cmd/forever-measure in the
-	// site repository reports, per spell, whether any tick carried the
-	// critical flag), so the default is off and every existing spec is
-	// unchanged. It does not gate the upstream snapshot-crit outcomes,
-	// which pre-date Forever and whose specs are already tuned around
-	// them; for those, the outcome function a dot's OnTick passes is
-	// still the switch.
+	// CanCrit forces this dot's ticks to roll crit under Dot.OutcomeTick.
+	// A dot whose spell the client marks PERIODIC_CAN_CRIT (SpellMisc
+	// Attributes_8 0x200, periodic_crit_auto_gen.go) crits without it;
+	// set it only for a dot the client table cannot name (a server-side
+	// tick spell a patch note says crits). It does not gate the upstream
+	// snapshot-crit outcomes, whose OnTick still chooses them.
 	CanCrit bool
 
 	// CritMultiplier is the multiplier a critical tick uses. Zero means
@@ -362,7 +358,7 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 		DamageMultiplier: config.DamageMultiplier,
 		BonusCoefficient: config.BonusCoefficient,
 
-		CanCrit:        config.CanCrit,
+		CanCrit:        config.CanCrit || (!isHot && clientPeriodicCanCritSpell(config.Spell.SpellID)),
 		CritMultiplier: config.CritMultiplier,
 	}
 
@@ -391,6 +387,13 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 			}
 		}
 	}
+}
+
+// clientPeriodicCanCritSpell reports whether the client marks spellID's
+// periodic damage PERIODIC_CAN_CRIT (periodic_crit_auto_gen.go).
+func clientPeriodicCanCritSpell(spellID int32) bool {
+	_, ok := clientPeriodicCanCrit[spellID]
+	return ok
 }
 
 // dotCritMultiplier resolves a dot's critical multiplier. Zero means the

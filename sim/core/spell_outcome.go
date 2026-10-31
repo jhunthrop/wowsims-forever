@@ -28,7 +28,62 @@ func (spell *Spell) OutcomeAlwaysMiss(_ *Simulation, result *SpellResult, _ *Att
 	spell.SpellMetrics[result.Target.UnitIndex].Misses++
 }
 
-func (dot *Dot) OutcomeTick(_ *Simulation, result *SpellResult, _ *AttackTable) {
+// OutcomeTick resolves a periodic tick. A dot whose spell the client marks
+// PERIODIC_CAN_CRIT (Dot.CanCrit, set from clientPeriodicCanCrit) rolls crit
+// on every tick: a weapon dot (Rend, Rip, Garrote, Serpent Sting: melee or
+// ranged defense) at the caster's physical crit chance, a spell dot at its
+// spell crit chance, each with the spell's own crit multiplier. Every other
+// dot ticks flat.
+func (dot *Dot) OutcomeTick(sim *Simulation, result *SpellResult, attackTable *AttackTable) {
+	if dot.CanCrit {
+		dot.outcomeCritTick(sim, result, attackTable)
+		return
+	}
+	dot.outcomePlainTick(result)
+}
+
+func (dot *Dot) outcomeCritTick(sim *Simulation, result *SpellResult, attackTable *AttackTable) {
+	defense := dot.periodicCritDefense()
+	var crit bool
+	if defense == DefenseTypeMagic {
+		crit = sim.RandomFloat("Magic Dot Crit") < dot.Spell.SpellCritChance(result.Target)
+	} else {
+		crit = dot.Spell.PhysicalCritCheck(sim, attackTable)
+	}
+	if !crit {
+		dot.outcomePlainTick(result)
+		return
+	}
+	isPartialResist := result.DidResist()
+	result.Outcome = OutcomeCrit
+	parentCritMultiplier := 0.0
+	if dot.CritMultiplier == 0 {
+		parentCritMultiplier = dot.Spell.critMultiplierAs(defense, attackTable)
+	}
+	result.Damage *= dotCritMultiplier(dot.CritMultiplier, parentCritMultiplier)
+	dot.Spell.SpellMetrics[result.Target.UnitIndex].CritTicks++
+	if isPartialResist {
+		dot.Spell.SpellMetrics[result.Target.UnitIndex].ResistedCritTicks++
+	}
+}
+
+// periodicCritDefense is the table a dot's tick crits on: its spell's own
+// defense type, or for a spell that declares none, melee for a physical
+// dot and magic for every other school.
+func (dot *Dot) periodicCritDefense() DefenseType {
+	switch {
+	case dot.Spell.DefenseType == DefenseTypeMelee || dot.Spell.DefenseType == DefenseTypeRanged:
+		return dot.Spell.DefenseType
+	case dot.Spell.DefenseType == DefenseTypeMagic:
+		return DefenseTypeMagic
+	case dot.Spell.SpellSchool == SpellSchoolPhysical:
+		return DefenseTypeMelee
+	default:
+		return DefenseTypeMagic
+	}
+}
+
+func (dot *Dot) outcomePlainTick(result *SpellResult) {
 	isPartialResist := result.DidResist()
 	result.Outcome = OutcomeHit
 	dot.Spell.SpellMetrics[result.Target.UnitIndex].Ticks++
@@ -112,41 +167,10 @@ func (dot *Dot) OutcomeMagicHitAndSnapshotCrit(sim *Simulation, result *SpellRes
 // is decided once at the dot's application - by the spell's own
 // ApplyEffects outcome - so this only resolves crit vs. a plain tick.
 func (dot *Dot) OutcomeMagicCritPerTick(sim *Simulation, result *SpellResult, attackTable *AttackTable) {
-	// CanCrit is the opt-in, and this is where it is read. Forever
-	// enables periodic crits per spell rather than per school, so a dot
-	// that has not been measured as critting must tick flat however
-	// much crit the caster has - the same rule
+	// CanCrit is the opt-in, and this is where it is read: a dot that may
+	// not crit ticks flat however much crit the caster has - the same rule
 	// TestDotsDoNotCritByDefault holds for the plain OutcomeTick.
-	if !dot.CanCrit {
-		dot.OutcomeTick(sim, result, attackTable)
-		return
-	}
-
-	isPartialResist := result.DidResist()
-
-	if sim.RandomFloat("Magic Dot Crit") < dot.Spell.SpellCritChance(result.Target) {
-		result.Outcome = OutcomeCrit
-		// Only asks the spell for its multiplier when the dot didn't
-		// choose one: spell.CritMultiplier() requires a DefenseType and
-		// panics without one, and a dot that set its own multiplier has
-		// no reason to need it. Zero here means "not asked", which is
-		// also what dotCritMultiplier reads it as.
-		parentCritMultiplier := 0.0
-		if dot.CritMultiplier == 0 {
-			parentCritMultiplier = dot.Spell.CritMultiplier(attackTable)
-		}
-		result.Damage *= dotCritMultiplier(dot.CritMultiplier, parentCritMultiplier)
-		dot.Spell.SpellMetrics[result.Target.UnitIndex].CritTicks++
-		if isPartialResist {
-			dot.Spell.SpellMetrics[result.Target.UnitIndex].ResistedCritTicks++
-		}
-	} else {
-		result.Outcome = OutcomeHit
-		dot.Spell.SpellMetrics[result.Target.UnitIndex].Ticks++
-		if isPartialResist {
-			dot.Spell.SpellMetrics[result.Target.UnitIndex].ResistedTicks++
-		}
-	}
+	dot.OutcomeTick(sim, result, attackTable)
 }
 
 func (spell *Spell) OutcomeMagicHitAndCrit(sim *Simulation, result *SpellResult, attackTable *AttackTable) {
@@ -1027,9 +1051,16 @@ func (dot *Dot) OutcomeExpectedMagicSnapshotCrit(_ *Simulation, result *SpellRes
 // https://web.archive.org/web/20081014064638/http://elitistjerks.com/f31/t12595-relentless_earthstorm_diamond_-_melee_only/p4/
 // https://github.com/TheGroxEmpire/TBC_DPS_Warrior_Sim/issues/30
 func (spell *Spell) CritMultiplier(at *AttackTable) float64 {
-	switch spell.DefenseType {
-	case DefenseTypeNone:
+	if spell.DefenseType == DefenseTypeNone {
 		panic(fmt.Sprintf("using CritMultiplier() for spellID %d which has no DefenseType", spell.SpellID))
+	}
+	return spell.critMultiplierAs(spell.DefenseType, at)
+}
+
+// critMultiplierAs is CritMultiplier for a stated defense type, for a
+// periodic tick whose spell declares none (Rend's bleed).
+func (spell *Spell) critMultiplierAs(defense DefenseType, at *AttackTable) float64 {
+	switch defense {
 	case DefenseTypeMagic:
 		return 1 + (1.5*at.CritMultiplier-1)*spell.CritDamageBonus
 	default:

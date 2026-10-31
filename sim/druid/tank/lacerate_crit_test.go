@@ -13,11 +13,11 @@ import (
 // hit is a weapon-percent-damage effect on a spell with no cannot-crit
 // attribute, so it crits like any special attack. The bleed is a periodic
 // damage aura carrying exactly the attribute set of Rake, Rip and Rend,
-// none of which the engine lets crit, and no beta measurement or patch
-// note makes any druid bleed an exception (the engine's rule: a dot
-// ticks flat until it has been measured critting, core.Dot.CanCrit). This
-// pins both halves so a change to either is a decision.
-func TestLacerateHitCritsAndTheBleedDoesNot(t *testing.T) {
+// including SPELL_ATTR8_PERIODIC_CAN_CRIT (SpellMisc Attributes_8 0x200).
+// The owner confirmed Forever's periodic damage crits, so the engine lets
+// every client-flagged dot crit (core.clientPeriodicCanCrit), and the bleed
+// crits too. This pins both halves so a change to either is a decision.
+func TestLacerateHitAndBleedBothCrit(t *testing.T) {
 	bear, sim, target := newBearSim(t, 60, nil)
 	bear.AddStatDynamic(sim, stats.Crit, 100*core.CritRatingPerCritChance)
 
@@ -41,10 +41,7 @@ func TestLacerateHitCritsAndTheBleedDoesNot(t *testing.T) {
 	if metrics.Crits == 0 {
 		t.Errorf("the direct hit never crit at 100%% crit chance: %+v", metrics)
 	}
-	if metrics.CritTicks != 0 {
-		t.Errorf("the bleed crit %d times; a druid bleed ticks flat until it is measured critting", metrics.CritTicks)
-	}
-	if metrics.Ticks == 0 {
-		t.Error("the bleed never ticked in 20 seconds")
+	if metrics.CritTicks == 0 {
+		t.Errorf("the bleed never crit at 100%% crit chance; the client marks it PERIODIC_CAN_CRIT: %+v", metrics)
 	}
 }

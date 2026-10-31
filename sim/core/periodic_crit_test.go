@@ -1,6 +1,7 @@
 package core
 
 import (
+	"math"
 	"testing"
 	"time"
 
@@ -19,7 +20,8 @@ import (
 func TestDotsDoNotCritByDefault(t *testing.T) {
 	sim, caster, target := newPeriodicCritFixture(t, 100 /* percent crit */)
 	spell := caster.RegisterSpell(SpellConfig{
-		ActionID:         ActionID{SpellID: 11574},
+		// Deep Wounds: the client does not mark it PERIODIC_CAN_CRIT.
+		ActionID:         ActionID{SpellID: 12162},
 		SpellSchool:      SpellSchoolPhysical,
 		ProcMask:         ProcMaskSpellDamage,
 		DamageMultiplier: 1,
@@ -263,7 +265,8 @@ func advanceOneTick(sim *Simulation, dot *Dot) {
 func TestOutcomeMagicCritPerTickHonoursCanCrit(t *testing.T) {
 	sim, caster, target := newPeriodicCritFixture(t, 100 /* percent crit */)
 	spell := caster.RegisterSpell(SpellConfig{
-		ActionID:         ActionID{SpellID: 25311},
+		// Blizzard: the client does not mark it PERIODIC_CAN_CRIT.
+		ActionID:         ActionID{SpellID: 10187},
 		SpellSchool:      SpellSchoolShadow,
 		DefenseType:      DefenseTypeMagic,
 		ProcMask:         ProcMaskSpellDamage,
@@ -296,5 +299,78 @@ func TestOutcomeMagicCritPerTickHonoursCanCrit(t *testing.T) {
 	}
 	if m.TotalTickDamage != 500 {
 		t.Errorf("TotalTickDamage = %v, want 500 (five flat ticks of 100)", m.TotalTickDamage)
+	}
+}
+
+// Forever's client marks most damage-over-time spells PERIODIC_CAN_CRIT
+// (SpellMisc Attributes_8 0x200), and the owner confirmed their ticks crit.
+// A dot whose spell carries the flag crits under the plain OutcomeTick, at
+// the caster's crit chance for its school and the spell's own multiplier,
+// so talents that raise a spell's crit damage (Pandemic) reach its ticks.
+// A dot whose spell does not carry it (Blizzard, Ignite, Deep Wounds)
+// still ticks flat.
+func TestClientFlaggedDotsCritUnderOutcomeTick(t *testing.T) {
+	for _, tc := range []struct {
+		name     string
+		spellID  int32
+		school   SpellSchool
+		defense  DefenseType
+		wantCrit bool
+	}{
+		{"Corruption", 25311, SpellSchoolShadow, DefenseTypeMagic, true},
+		{"Rend", 11574, SpellSchoolPhysical, DefenseTypeMelee, true},
+		// The warrior's Rend declares no defense type; its ticks crit on
+		// the melee table.
+		{"Rend without a defense type", 11574, SpellSchoolPhysical, DefenseTypeNone, true},
+		{"Blizzard", 10187, SpellSchoolFrost, DefenseTypeMagic, false},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			sim, caster, target := newPeriodicCritFixture(t, 100)
+			spell := caster.RegisterSpell(SpellConfig{
+				ActionID:         ActionID{SpellID: tc.spellID},
+				SpellSchool:      tc.school,
+				DefenseType:      tc.defense,
+				ProcMask:         ProcMaskSpellDamage,
+				DamageMultiplier: 1,
+				ThreatMultiplier: 1,
+				CritDamageBonus:  1,
+				Dot: DotConfig{
+					Aura:          Aura{Label: "Client Dot " + tc.name},
+					NumberOfTicks: 4,
+					TickLength:    time.Second * 3,
+					OnTick: func(sim *Simulation, target *Unit, dot *Dot) {
+						dot.Spell.CalcAndDealPeriodicDamage(sim, target, 100, dot.OutcomeTick)
+					},
+				},
+			})
+			if got := spell.Dot(target).CanCrit; got != tc.wantCrit {
+				t.Fatalf("CanCrit = %v, want %v (the client's PERIODIC_CAN_CRIT flag)", got, tc.wantCrit)
+			}
+			spell.Dot(target).Apply(sim)
+			for i := 0; i < 4; i++ {
+				advanceOneTick(sim, spell.Dot(target))
+			}
+			m := spell.SpellMetrics[target.UnitIndex]
+			wantCritTicks := int32(0)
+			if tc.wantCrit {
+				wantCritTicks = 4
+			}
+			if m.CritTicks != wantCritTicks {
+				t.Errorf("CritTicks = %d, want %d at 100%% crit", m.CritTicks, wantCritTicks)
+			}
+			// The spell's own multiplier for its defense type: 1.5x base
+			// for spells, 2x for melee, before talents and meta gems.
+			wantMult := 1.0
+			if tc.wantCrit {
+				defense := tc.defense
+				if defense == DefenseTypeNone {
+					defense = DefenseTypeMelee
+				}
+				wantMult = spell.critMultiplierAs(defense, caster.AttackTables[target.UnitIndex][spell.CastType])
+			}
+			if want := 400 * wantMult; math.Abs(m.TotalTickDamage-want) > 1e-6 {
+				t.Errorf("tick damage = %v, want %v (4 ticks of 100 x %v)", m.TotalTickDamage, want, wantMult)
+			}
+		})
 	}
 }
