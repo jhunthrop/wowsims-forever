@@ -72,7 +72,8 @@ export const DefaultAPL = AplForeverBalance;
 //                                 Talent Presets
 ///////////////////////////////////////////////////////////////////////////
 
-export const TalentsP1Balance = PresetUtils.makePresetTalents('Balance', SavedTalents.create({ talentsString: '5000550012551251--5005031' }));
+// The site raid build on the 1.60.1.70707 trees.
+export const TalentsP1Balance = PresetUtils.makePresetTalents('Balance', SavedTalents.create({ talentsString: '5232220115501351--505003' }));
 
 export const TalentPresets = {
 	[Phase.Phase1]: [TalentsP1Balance],

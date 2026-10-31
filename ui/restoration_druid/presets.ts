@@ -15,13 +15,13 @@ export const DefaultGear = PresetUtils.makePresetGear('Blank', BlankGear);
 export const CelestialFocusTalents = {
 	name: 'Celestial Focus',
 	data: SavedTalents.create({
-		talentsString: '05320031103--230023312131502331050313051',
+		talentsString: '45322001--50530051531132', // the site guide build, 1.60.1.70707 trees
 	}),
 };
 export const ThiccRestoTalents = {
 	name: 'Thicc Resto',
 	data: SavedTalents.create({
-		talentsString: '05320001--230023312331502531053313051',
+		talentsString: '05302001--5053005153113251', // sim/druid/restoration StandardTalents, 1.60.1.70707 trees
 	}),
 };
 

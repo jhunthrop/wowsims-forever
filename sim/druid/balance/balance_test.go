@@ -35,7 +35,9 @@ func TestP1Balance(t *testing.T) {
 	}))
 }
 
-var P1Talents = "5000550012551251--5005031"
+// P1Talents is the site's Balance raid build on the 1.60.1.70707 trees (the
+// old string predated the live trees and over-ranked several talents).
+var P1Talents = "5232220115501351--505003"
 
 var P1Consumes = core.ConsumesCombo{
 	Label: "P1-Consumes",

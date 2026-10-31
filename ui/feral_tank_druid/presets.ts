@@ -65,7 +65,7 @@ export const APLPresets = {
 export const StandardTalents = {
 	name: 'Standard',
 	data: SavedTalents.create({
-		talentsString: '-503232132322010353120300313511-20350001',
+		talentsString: '-5523033202310212551-051', // the site guide build, 1.60.1.70707 trees
 	}),
 };
 
