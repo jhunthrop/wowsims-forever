@@ -4,6 +4,7 @@ Hand-written, like SUMMARY.md. The conformance report (`sim/conformance`) reads
 spell rows, not talent rank values, so a talent whose per-rank rate the engine
 carried over from vanilla was never checked. This file is that check, for every
 class, against the site's `data/builds/1.60.1.70532/talents/<class>.json`
+(mage: `1.60.1.70707`)
 (trees, talents, `max_rank`, and a `description` per rank: the live,
 hotfix-aware Forever text).
 
@@ -44,7 +45,7 @@ talent's maximum rank unless a note says otherwise.
 |---|---|---|---|---|---|---|---|
 | Druid | 52 | 45 | 0 | 6 | 0 | 1 | 0 |
 | Hunter | 50 | 31 | 3 | 15 | 1 | 0 | 0 |
-| Mage | 53 | 38 | 3 | 12 | 0 | 0 | 0 |
+| Mage | 52 | 37 | 3 | 12 | 0 | 0 | 0 |
 | Paladin | 50 | 40 | 2 | 7 | 1 | 0 | 0 |
 | Priest | 53 | 32 | 5 | 14 | 2 | 0 | 0 |
 | Rogue | 53 | 40 | 2 | 11 | 0 | 0 | 0 |
@@ -95,6 +96,19 @@ Frost was reworked (Piercing Ice is gone and its node order moved; the tree is 1
 - **Paladin: Champion of the Light.** 20/40/60% (was 10/20/30%).
 - **Warlock: Amplify Curse.** Curse of Exhaustion +20% (was +50%); the row already read 20%.
 - **Pushback talents.** Nature's Focus, Improved Channeling, Twilight Focus, Healing Focus, Eye of the Storm, Intensity and Fel Concentration are "a N% chance to not lose casting time" rather than a chance to avoid interruption or a pushback reduction. Pushback is not rolled in the fights modeled, so no engine number moves.
+
+## Client 1.60.1.70685 and 1.60.1.70707 (2026-10-30)
+
+Arcane lost a node (18) and Fire moved one; 70707's mage trees are 70685's. Each row above carries the new text.
+
+- **Mage: Arcane Focus.** Gone from the tree; the engine's 1% a rank Arcane hit went with it. The reference build (`ForeverFrostTalents`) moves its five points to Improved Channeling, so the top row still opens the tree.
+- **Mage: Precision.** Elemental Precision renamed; 2% a rank hit with every mage spell (was Frost and Fire).
+- **Mage: Accelerant.** Improved Fireball renamed; Arcane Wrath joins Fireball and Frostfire Bolt.
+- **Mage: Critical Mass.** Three ranks at 2% (was five); Combustion's prerequisite is 3/3.
+- **Mage: Incineration.** Five ranks at 2% (was three).
+- **Mage: Improved Fire Blast, Missile Barrage, Arcane Resilience.** Moved (Improved Fire Blast to Fire's third row; Missile Barrage and Arcane Resilience swapped). No rate changed.
+- **Mage: Ice Lance.** Rank 1 (spell 1312002, levels 20 to 27) has an 8 sec cooldown in the client's spell rows; the trained ranks have none (ice_lance.go).
+- **Hunter: Trueshot Aura.** The talent's text reads 15 ranged attack power at rank 1 (was 30); the engine reads the trained ranks' amounts (`TrueshotAuraRanks`), not the talent text.
 
 ## Mismatches fixed in this lane
 
@@ -248,7 +262,6 @@ Frost was reworked (Piercing Ice is gone and its node order moved; the tree is 1
 | Talent | Tree | Max | Forever text at max rank | Engine at max rank | Verdict | Note |
 |---|---|---|---|---|---|---|
 | Wand Specialization | Arcane | 2 | Increases your damage with Wands by 25%. | same | match |  |
-| Arcane Focus | Arcane | 5 | Improves your chance to hit with Arcane spells by 5%. | same | match |  |
 | Improved Channeling | Arcane | 5 | Gives your Arcane Missiles spell a 100% chance and your Arcane Blast and Arcane Wrath spells a 70% chance to not lose casting time when you take damage. | - | unmodeled | pushback avoidance never triggers in the fights modeled |
 | Arcane Subtlety | Arcane | 2 | Reduces your target's resistance to all your spells by 15 and reduces the threat caused by your Arcane spells by 30%. | 30% less threat | match | the 15 spell-resistance cut is not modeled |
 | Magic Absorption | Arcane | 2 | Increases all your resistances by 10 and causes all spells you fully resist to restore 2% of your total mana. Cannot trigger more often than 1 time per sec. | 10 resistance | match | the 2% mana restore on a full resist is not modeled |
@@ -267,8 +280,8 @@ Frost was reworked (Piercing Ice is gone and its node order moved; the tree is 1
 | Arcane Instability | Arcane | 3 | Increases the damage done by your spells by 3% and your critical strike chance by 3%. | same | match |  |
 | Arcane Power | Arcane | 1 | For the next 15 sec, your spells deal 30% more damage while costing 30% more mana to cast. | same | match |  |
 | Improved Fire Blast | Fire | 2 | Reduces the cooldown of your Fire Blast spell by 2 sec and increases its range by 15 yards. | Fire Blast cooldown -1 sec a rank | match | Wake of Fire's slot since 1.60.1.70425; range only otherwise |
-| Incineration | Fire | 3 | Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 6%. | same | match |  |
-| Improved Fireball | Fire | 5 | Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.5 sec. | same | match |  |
+| Incineration | Fire | 5 | Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 10%. | 2% a rank | match | five ranks since 1.60.1.70685 (was three) |
+| Accelerant | Fire | 5 | Reduces the casting time of your Fireball, Frostfire Bolt, and Arcane Wrath spells by 0.5 sec. | same | match | Improved Fireball renamed in 1.60.1.70685, Arcane Wrath added |
 | Ignite | Fire | 5 | Your critical strikes from Fire damage spells cause the target to burn for an additional 40% of your spell's damage over 4 sec. | same | match |  |
 | Flame Throwing | Fire | 2 | Increases the range of your Fire spells by 6 yards. | - | unmodeled | range only |
 | Impact | Fire | 3 | Gives your Fire spells a 10% chance to stun the target for 2 sec. | - | unmodeled | stun chance |
@@ -279,13 +292,13 @@ Frost was reworked (Piercing Ice is gone and its node order moved; the tree is 1
 | Improved Fire Ward | Fire | 2 | Causes your Fire Ward to have a 20% chance to reflect Fire spells while active. | - | unmodeled | Fire Ward reflect |
 | Heating Up | Fire | 1 | Non-periodic critical strikes with Fireball, Frostfire Bolt, Fire Blast, and Scorch reduce the cast time of your next Pyroblast cast within 20 sec by 25%, stacking up to 3 times. Fire Blast grants an additional stack every time it deals damage. | same; a landed Fire Blast is one stack, a critical one two | match | the Fire Blast clause is 1.60.1.70425's |
 | Master of Elements | Fire | 3 | Your Fire and Frost critical strikes will refund 30% of their base mana cost. | same | match |  |
-| Critical Mass | Fire | 5 | Increases the critical strike chance of your Fire spells by 10%. | 2% a rank | match | five ranks since 1.60.1.70425 |
+| Critical Mass | Fire | 3 | Increases the critical strike chance of your Fire spells by 6%. | 2% a rank | match | three ranks since 1.60.1.70685 (70425: five); Combustion needs all three |
 | Blast Wave | Fire | 1 | A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 154 to 184 Fire damage, and Dazing them for 50% reduced movement spe... | same | match |  |
 | Fire Power | Fire | 3 | Increases the damage done by your Fire spells by 3% per your Fire effects on the target, up to a maximum increase of 12%. Effects which mix multiple schools of magic do not qualify. | 1% a rank per Fire effect on the target (Fireball, Pyroblast and Flamestrike dots, Ignite, Improved Scorch), four effects at most | mismatch, fixed | 1.60.1.70425 rework (fire_power.go); was a flat 2% a rank |
 | Combustion | Fire | 1 | When activated, this spell causes each of your Fire damage spell hits to increase your critical strike chance with Fire damage spells by 10%. This effect lasts until y... | same | match |  |
 | Frost Warding | Frost | 2 | Increases the Armor and resistances granted by your Frost Armor and Ice Armor spells by 30%, gives your Frost Ward a 20% chance to negate the warded damage spell, and increases the amount absorbed by your Ice Barrier and Frost Ward by 20%. | - | unmodeled | armors, Frost Ward and the absorbs |
 | Improved Frostbolt | Frost | 5 | Reduces the casting time of your Frostbolt spell by 0.5 sec. | same | match |  |
-| Elemental Precision | Frost | 3 | Improves your chance to hit with Frost and Fire spells by 6%. | same | match | three ranks of 2% since 1.60.1.70532 (70425: five of 1%) |
+| Precision | Frost | 3 | Improves your chance to hit with all spells by 6%. | every mage spell | match | Elemental Precision renamed and widened to every school in 1.60.1.70685; three ranks of 2% since 1.60.1.70532. Spells cast by items carry no mage mask and do not take it |
 | Ice Shards | Frost | 5 | Increases the critical strike damage bonus of your Frost spells by 100%. | same | match |  |
 | Permafrost | Frost | 3 | Increases the duration of your Chill effects by 33% and reduces the target's speed by an additional 10%. | - | unmodeled | chill duration and slow |
 | Improved Frost Nova | Frost | 2 | Reduces the cooldown of your Frost Nova spell by 4 sec. | same | match |  |

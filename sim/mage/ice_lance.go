@@ -35,13 +35,14 @@ func (mage *Mage) registerIceLanceSpell() {
 	}
 
 	mage.IceLance = make([]*core.Spell, IceLanceRanks+1)
+	cdTimer := mage.NewTimer()
 
 	// Rank 0 of the client's Ice Lance rows is not a player rank: its
 	// base-damage column carries the spell id 400640 rather than a
 	// damage figure, which is the signature of a trigger or NPC variant.
 	// Player ranks start at 1.
 	for rank := 1; rank <= IceLanceRanks; rank++ {
-		config := mage.getIceLanceConfig(rank)
+		config := mage.getIceLanceConfig(rank, cdTimer)
 
 		if config.RequiredLevel <= int(mage.Level) {
 			mage.IceLance[rank] = mage.GetOrRegisterSpell(config)
@@ -49,7 +50,19 @@ func (mage *Mage) registerIceLanceSpell() {
 	}
 }
 
-func (mage *Mage) getIceLanceConfig(rank int) core.SpellConfig {
+// iceLanceCooldown is the rank's client cooldown. Client 1.60.1.70685
+// gives rank 1 (spell 1312002, the talent's own rank, levels 20 to 27) an
+// 8 sec cooldown and every trained rank none, so only a mage below level
+// 28 waits on it.
+func iceLanceCooldown(rank int, cdTimer *core.Timer) core.Cooldown {
+	duration := time.Duration(IceLanceCooldownMS[rank]) * time.Millisecond
+	if duration <= 0 {
+		return core.Cooldown{}
+	}
+	return core.Cooldown{Timer: cdTimer, Duration: duration}
+}
+
+func (mage *Mage) getIceLanceConfig(rank int, cdTimer *core.Timer) core.SpellConfig {
 	roll := mage.clientRoll(IceLanceBaseDamage[rank], IceLancePointsPerLevel[rank], IceLanceLevel[rank], IceLanceMaxLevel[rank])
 	baseDamageLow, baseDamageHigh := roll[0], roll[1]
 
@@ -76,6 +89,7 @@ func (mage *Mage) getIceLanceConfig(rank int) core.SpellConfig {
 				GCD:      core.GCDDefault,
 				CastTime: time.Millisecond * time.Duration(IceLanceCastTime[rank]),
 			},
+			CD: iceLanceCooldown(rank, cdTimer),
 		},
 
 		DamageMultiplier: 1,

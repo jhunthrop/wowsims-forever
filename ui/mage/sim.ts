@@ -9,6 +9,8 @@ import { getSpecIcon } from '../core/proto_utils/utils.js';
 import * as MageInputs from './inputs.js';
 import * as Presets from './presets.js';
 
+const PRECISION_HIT_PER_RANK = 2;
+
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecMage, {
 	cssClass: 'mage-sim-ui',
 	cssScheme: 'mage',
@@ -85,10 +87,13 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecMage, {
 	},
 
 	modifyDisplayStats: (player: Player<Spec.SpecMage>) => {
+		// Precision: "Improves your chance to hit with all spells by 2%" a
+		// rank (client 1.60.1.70685, which also removed Arcane Focus).
+		const precisionHit = player.getTalents().precision * PRECISION_HIT_PER_RANK * SCHOOL_HIT_RATING_PER_HIT_CHANCE;
 		let stats = new Stats();
-		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitArcane, player.getTalents().arcaneFocus * 2 * SCHOOL_HIT_RATING_PER_HIT_CHANCE);
-		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitFire, player.getTalents().elementalPrecision * 2 * SCHOOL_HIT_RATING_PER_HIT_CHANCE);
-		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitFrost, player.getTalents().elementalPrecision * 2 * SCHOOL_HIT_RATING_PER_HIT_CHANCE);
+		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitArcane, precisionHit);
+		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitFire, precisionHit);
+		stats = stats.addPseudoStat(PseudoStat.PseudoStatSchoolHitFrost, precisionHit);
 
 		return {
 			talents: stats,

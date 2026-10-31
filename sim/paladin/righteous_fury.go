@@ -11,8 +11,9 @@ const (
 
 	// righteousFuryLevel, righteousFuryBaseManaCost (30% of base mana) and
 	// righteousFuryDuration (1800000 ms) are spell 25780's required level,
-	// cost_pct and duration in the client.
-	righteousFuryLevel        = 16
+	// cost_pct and duration in the client. Client 1.60.1.70707 moved it
+	// to level 10 (was 16).
+	righteousFuryLevel        = 10
 	righteousFuryBaseManaCost = 0.30
 	righteousFuryDuration     = 30 * time.Minute
 
