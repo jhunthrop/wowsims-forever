@@ -357,13 +357,14 @@ func TestFixturesMatchTheSiteData(t *testing.T) {
 // gates spending on prereqLocation (talents_picker.tsx, canSetPoints) and
 // draws its arrows from it, so a dropped edge lets a player spend into a
 // talent the client would not let them take, silently and with no arrow
-// to show what is missing. 72 edges across the nine classes (at the
+// to show what is missing. 71 edges across the nine classes (at the
 // current build: Arcane Wrath behind Arcane Blast and one more warrior edge
 // on top of 70009's Shifting Power and Gore Drinker; Bloodthirst and Last
-// Stand lost theirs in 70009).
+// Stand lost theirs in 70009; 70707's druid rework dropped Berserk's and
+// Improved Shifting Power's edges and added Lacerate's).
 func TestUITreeJSONCarriesEveryPrerequisite(t *testing.T) {
 	perClass := map[string]int{
-		"druid": 11, "hunter": 8, "mage": 7, "paladin": 7, "priest": 8,
+		"druid": 10, "hunter": 8, "mage": 7, "paladin": 7, "priest": 8,
 		"rogue": 8, "shaman": 7, "warlock": 8, "warrior": 8,
 	}
 	total, wantTotal := 0, 0
