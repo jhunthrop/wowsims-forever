@@ -12,6 +12,7 @@ package rogue_test
 // test importing dps_rogue would cycle.
 
 import (
+	"math"
 	"strings"
 	"testing"
 
@@ -224,7 +225,7 @@ func TestHackAndSlashDaggerGrantsCrit(t *testing.T) {
 
 	wantDelta := 5.0 * core.CritRatingPerCritChance // rank 5: 1%/rank
 	got := withTalent.GetStat(stats.Crit) - withoutTalent.GetStat(stats.Crit)
-	if got != wantDelta {
+	if math.Abs(got-wantDelta) > 1e-9 {
 		t.Errorf("Crit stat delta from Hack and Slash rank 5 = %v, want %v", got, wantDelta)
 	}
 }

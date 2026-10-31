@@ -9,30 +9,15 @@ import (
 //                            Weapon Specialization Auras
 ///////////////////////////////////////////////////////////////////////////
 
-// Forever's racial weapon specializations are not vanilla's +5 weapon
-// skill. The client (1.60.1.70009) states them as critical strike chance
-// with all spells and attacks while a weapon of the type is equipped:
-// Sword Specialization 20597 "by 2% while you have a sword or two-handed
-// sword equipped", Axe Specialization 20574 "by 1% while you have an axe
-// or a two-handed axe equipped", Mace Specialization 1259719 "by 1% while
-// you have a mace or two-handed mace equipped". Either hand qualifies;
-// two-handers share the one-hand WeaponType.
-const (
-	swordSpecializationCritPercent = 2
-	axeSpecializationCritPercent   = 1
-	maceSpecializationCritPercent  = 1
-)
-
-func (character *Character) SwordSpecializationAura() *Aura {
-	return character.weaponSpecializationCritAura("Sword Specialization", proto.WeaponType_WeaponTypeSword, swordSpecializationCritPercent)
-}
+// Forever's Orc Axe Specialization (20574) is not vanilla's +5 weapon
+// skill: the client states it as 1% critical strike chance with all spells
+// and attacks while an axe or two-handed axe is equipped. Either hand
+// qualifies; two-handers share the one-hand WeaponType. Human and Dwarf
+// lost their weapon racials in the October rework (racials.go).
+const axeSpecializationCritPercent = 1
 
 func (character *Character) AxeSpecializationAura() *Aura {
 	return character.weaponSpecializationCritAura("Axe Specialization", proto.WeaponType_WeaponTypeAxe, axeSpecializationCritPercent)
-}
-
-func (character *Character) MaceSpecializationAura() *Aura {
-	return character.weaponSpecializationCritAura("Mace Specialization", proto.WeaponType_WeaponTypeMace, maceSpecializationCritPercent)
 }
 
 // HasWeaponOfType reports whether either hand holds a weapon of the type.

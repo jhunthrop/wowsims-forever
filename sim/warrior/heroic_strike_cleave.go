@@ -193,12 +193,10 @@ func (warrior *Warrior) makeQueueSpellsAndAura(srcSpell *WarriorSpell, realismIC
 			if warrior.curQueueAura != nil {
 				warrior.curQueueAura.Deactivate(sim)
 			}
-			warrior.PseudoStats.DisableDWMissPenalty = true
 			warrior.curQueueAura = aura
 			warrior.curQueuedAutoSpell = srcSpell
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			warrior.PseudoStats.DisableDWMissPenalty = false
 			warrior.curQueueAura = nil
 			warrior.curQueuedAutoSpell = nil
 		},

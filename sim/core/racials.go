@@ -193,9 +193,16 @@ const (
 	eurekaDamageMultiplier           = 1.1
 )
 
+// ruthlessCritPercent and artisansPrecisionHitPercent are the Human and
+// Dwarf weapon racials after the October rework, from the current client
+// text of spells 20597 and 1259719.
+const (
+	ruthlessCritPercent         = 1
+	artisansPrecisionHitPercent = 1
+)
+
 var racialsByRace = map[proto.Race][]Racial{
-	// Human: Will to Survive, Perception, Sword Specialization, The
-	// Human Spirit. Icy Veins and Talents Forever agree on all four.
+	// Human: Will to Survive, Perception, Ruthless, The Human Spirit.
 	proto.Race_RaceHuman: {
 		{
 			Name: "Will to Survive", Kind: RacialActive, Confirmed: true,
@@ -208,12 +215,13 @@ var racialsByRace = map[proto.Race][]Racial{
 			Apply: func(*Character) {}, // 20 s of stealth detection: no combat effect
 		},
 		{
-			Name: "Sword Specialization", Kind: RacialPassive, Confirmed: true,
-			Note: "",
+			Name: "Ruthless", Kind: RacialPassive, Confirmed: true,
+			Note: "client 20597: 1% crit with all spells and attacks, any weapon",
 			Apply: func(character *Character) {
-				// Client 20597: 2% crit with all spells and attacks while
-				// a sword or two-handed sword is equipped (specializations.go).
-				character.SwordSpecializationAura()
+				// The 15 October rework replaced Sword Specialization; no
+				// SpellEquippedItems row gates it. The 70658 tables carry
+				// 2%, the current client text 1% (cut on 26 October).
+				character.AddStat(stats.Crit, ruthlessCritPercent*CritRatingPerCritChance)
 			},
 		},
 		{
@@ -297,10 +305,12 @@ var racialsByRace = map[proto.Race][]Racial{
 			Apply: func(*Character) {}, // finds treasure, stacks with other tracking: no combat effect
 		},
 		{
-			Name: "Mace Specialization", Kind: RacialPassive, Confirmed: true,
-			Note: "client 1259719: 1% crit with all spells and attacks while a mace or two-handed mace is equipped",
+			Name: "Artisan's Precision", Kind: RacialPassive, Confirmed: true,
+			Note: "client 1259719: 1% hit with all spells and attacks",
 			Apply: func(character *Character) {
-				character.MaceSpecializationAura()
+				// Replaced Earth Fury (the 70658 tables' crit damage with
+				// maces) on 26 October; the current client text reads 1% hit.
+				character.AddStat(stats.Hit, artisansPrecisionHitPercent*HitRatingPerHitChance)
 			},
 		},
 		{

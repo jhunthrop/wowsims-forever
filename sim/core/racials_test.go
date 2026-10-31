@@ -120,9 +120,9 @@ func TestSkyborneRowsDifferOnlyInTheirSecondActive(t *testing.T) {
 // the table. This is the regression that catches a rewrite dropping one.
 func TestTheNamedRacialsAreAllPresent(t *testing.T) {
 	want := map[proto.Race][]string{
-		proto.Race_RaceHuman:              {"Will to Survive", "Perception", "Sword Specialization", "The Human Spirit"},
+		proto.Race_RaceHuman:              {"Will to Survive", "Perception", "Ruthless", "The Human Spirit"},
 		proto.Race_RaceOrc:                {"Blood Fury", "Shatter Curse", "Axe Specialization", "Hardiness"},
-		proto.Race_RaceDwarf:              {"Stoneform", "Find Treasure", "Mace Specialization", "Big Game Hunter"},
+		proto.Race_RaceDwarf:              {"Stoneform", "Find Treasure", "Artisan's Precision", "Big Game Hunter"},
 		proto.Race_RaceNightElf:           {"Elune's Light", "Shadowmeld", "Quickness", "Wisp Spirit"},
 		proto.Race_RaceUndead:             {"Will of the Forsaken", "Cannibalize", "Touch of the Grave"},
 		proto.Race_RaceTauren:             {"War Stomp", "Endurance"},

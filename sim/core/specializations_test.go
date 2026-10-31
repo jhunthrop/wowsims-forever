@@ -6,9 +6,9 @@ import (
 	"github.com/wowsims/classic/sim/core/proto"
 )
 
-// Forever's racial weapon specializations are crit while a weapon of the
-// type is equipped in either hand (client 20597, 20574, 1259719), so the
-// gate is the equipped weapon type, not weapon skill.
+// Forever's Axe Specialization is crit while an axe is equipped in either
+// hand (client 20574), so the gate is the equipped weapon type, not weapon
+// skill.
 func TestHasWeaponOfTypeLooksAtBothHands(t *testing.T) {
 	character := &Character{}
 	if character.HasWeaponOfType(proto.WeaponType_WeaponTypeSword) {
@@ -24,8 +24,8 @@ func TestHasWeaponOfTypeLooksAtBothHands(t *testing.T) {
 	}
 }
 
-func TestWeaponSpecializationCritPercentsMatchTheClient(t *testing.T) {
-	if swordSpecializationCritPercent != 2 || axeSpecializationCritPercent != 1 || maceSpecializationCritPercent != 1 {
-		t.Fatalf("sword/axe/mace = %v/%v/%v, want the client's 2/1/1", swordSpecializationCritPercent, axeSpecializationCritPercent, maceSpecializationCritPercent)
+func TestAxeSpecializationCritPercentMatchesTheClient(t *testing.T) {
+	if axeSpecializationCritPercent != 1 {
+		t.Fatalf("axe = %v, want the client's 1", axeSpecializationCritPercent)
 	}
 }

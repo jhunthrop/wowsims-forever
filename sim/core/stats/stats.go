@@ -415,7 +415,7 @@ type PseudoStats struct {
 	BonusOHDps     float64
 	BonusRangedDps float64
 
-	DisableDWMissPenalty bool    // Used by Heroic Strike and Cleave
+	DisableDWMissPenalty bool    // Used by the hunter's Raptor Strike queue
 	IncreasedMissChance  float64 // Insect Swarm and Scorpid Sting
 	DodgeReduction       float64 // Target dodge reduction effects e.g. "reduces its target's chance to Dodge by X%"
 

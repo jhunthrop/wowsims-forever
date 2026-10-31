@@ -24,6 +24,45 @@
       }
     },
     {
+      "notes": "Execute phase only: swap to Berserker Stance while Recklessness is ready, so the cooldown autocast above fires it (Recklessness is a Berserker Stance spell; baseline Tactical Mastery keeps 10 rage through the swap). Execute and Mortal Strike work in Berserker Stance; Overpower and Rend do not, and the rest of the fight is Execute.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "isExecutePhase": {
+                  "threshold": "E20"
+                }
+              },
+              {
+                "spellIsReady": {
+                  "spellId": {
+                    "spellId": 1719
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "auraIsActive": {
+                      "auraId": {
+                        "spellId": 2458
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 2458
+          }
+        }
+      }
+    },
+    {
       "notes": "Bloodrage on cooldown: rage is the limiting resource, same as Fury.",
       "action": {
         "condition": {
@@ -125,6 +164,35 @@
         "castSpell": {
           "spellId": {
             "spellId": 20662,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Slam on its cooldown between Mortal Strikes, only with Improved Slam talented (the gate reads Slam's cast time, which only the talent shortens): it then no longer stops the swing and its cooldown is 15 seconds instead of 18. Untalented, Slam's cast holds the swing and measured as a loss.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "spellCastTime": {
+                "spellId": {
+                  "spellId": 11605,
+                  "rank": 5
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "1.5s"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11605,
             "rank": 5
           }
         }
