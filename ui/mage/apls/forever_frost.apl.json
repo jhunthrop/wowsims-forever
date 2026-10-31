@@ -61,6 +61,37 @@
       }
     },
     {
+      "notes": "Arcane Missiles whenever Missile Barrage is up: the proc makes it free, halves its channel and fires the missiles every half second. Frostbolt procs it 20% of the time with Missile Barrage 2/2. Guarded by auraIsKnown so a build without the talent never reads the line as live.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 400589
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 400589
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 25345,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
       "notes": "Cone of Cold on five Winter's Chill stacks: Frostbolt and empowered Ice Lance build the stacks, and Cone of Cold spends them for 25% more damage and 35% more of your spell damage. You need to stand within 10 yards of the target. The line asks whether the target can carry Winter's Chill before it counts stacks: without the talent the aura does not exist, a condition on a missing aura is dropped, and the line would cast Cone of Cold on cooldown. Above 50% mana only: below that the mana is worth more as Frostbolts. At the raid band 20% to 60% gates all measured at least as well as no gate; 50% is the lowest that keeps the bare ladder character's level-40 rung from spending its pool on Cone of Cold. A raid frost mage stands at range, where the cone cannot reach the boss, so the engine refuses the cast beyond 10 yards (12 with Arctic Reach) and the tier list, which stands every caster at 30 yards, never fires this line. It fires for a character set to stand within reach, such as on a boss with no cleave or tail.",
       "action": {
         "condition": {
@@ -132,21 +163,8 @@
       }
     },
     {
-      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while you regenerate, and Wand Specialization adds to it.",
+      "notes": "Shoot only when nothing else can be cast, which in practice means out of mana: a wand shot cannot start during the global cooldown and holds you for the wand's full speed, so it never fits between spells.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentManaPercent": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "20%"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 5019

@@ -67,13 +67,10 @@ func (mage *Mage) registerMissileBarrage() {
 			}
 		},
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			// Mirrors ClearcastingAura's own guard (applyArcaneConcentration,
-			// talents.go): OnCastComplete runs for every active aura after
-			// the triggering cast too, so don't consume the buff on the
-			// same event that granted it.
-			if aura.RemainingDuration(sim) == aura.Duration {
-				return
-			}
+			// Arcane Missiles never grants Missile Barrage, so no guard for
+			// the granting cast: a channel started in the instant the proc
+			// landed is the free one and spends it (one proc, one free
+			// Arcane Missiles).
 			if spell.SpellCode != SpellCode_MageArcaneMissiles {
 				return
 			}

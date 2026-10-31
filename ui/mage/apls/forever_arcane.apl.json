@@ -45,7 +45,7 @@
       }
     },
     {
-      "notes": "Arcane Blast twice, never a third time: the client charges it 15% of base mana and each stack of its own buff raises the next cast's cost by 175% (the buff also makes every other spell hit harder while it stands, up to four stacks), so the second Blast is affordable and the third is not. Cast your current highest learned rank.",
+      "notes": "Arcane Blast until it carries 3 stacks, then Frostbolt: each stack adds damage and 175% to the next Arcane Blast's cost, and with one Missile Barrage proc giving one free Arcane Missiles, three stacks measured ahead of two and of four.",
       "action": {
         "condition": {
           "cmp": {
@@ -59,7 +59,7 @@
             },
             "rhs": {
               "const": {
-                "val": "2"
+                "val": "3"
               }
             }
           }
@@ -84,21 +84,8 @@
       }
     },
     {
-      "notes": "Shoot with your wand once mana falls under 20%: it costs nothing and keeps damage going while you regenerate, and Wand Specialization adds to it.",
+      "notes": "Shoot only when nothing else can be cast, which in practice means out of mana: a wand shot cannot start during the global cooldown and holds you for the wand's full speed, so it never fits between spells.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentManaPercent": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "20%"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 5019
