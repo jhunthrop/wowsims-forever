@@ -176,9 +176,9 @@ func (priest *Priest) Initialize() {
 	priest.registerMindFlay()
 	priest.registerShadowWordDeathSpell()
 	priest.registerShadowWordPainSpell()
-	if priest.GetCharacter().Race == proto.Race_RaceUndead {
-		priest.registerDevouringPlagueSpell()
-	}
+	// Forever: Devouring Plague is a normal Shadow spell for every race, not
+	// an Undead racial (SkillLineAbility carries every race for 2944-19280).
+	priest.registerDevouringPlagueSpell()
 	if priest.GetCharacter().Race == proto.Race_RaceNightElf {
 		priest.registerStarshardsSpell()
 	}

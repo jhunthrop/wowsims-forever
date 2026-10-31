@@ -27,6 +27,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 20 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 20 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 20 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 252.98-312.62→252.98-312.62 | 0.429→0.429 | declared, matches |
+| HealingPriest | 20 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 20 | Flash Heal | 1 | 2061 | 125.00→125.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 174.15-213.85→174.15-213.85 | 0.429→0.429 | declared, matches |
 | HealingPriest | 20 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 257.89-298.11→257.89-298.11 | 0.857→0.857 | declared, matches |
 | HealingPriest | 20 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 47.86-60.14→47.86-60.14 | 0.750→0.750 | declared, matches |
@@ -55,6 +56,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 30 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 429.84-522.16→429.84-522.16 | 0.429→0.429 | declared, matches |
+| HealingPriest | 30 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 30 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 30 | Flash Heal | 1 | 2061 | 125.00→125.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 182.68-224.32→182.68-224.32 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Flash Heal | 2 | 9472 | 155.00→155.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 232.56-283.04→232.56-283.04 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→259.75-300.25 | 0.857→0.857 | declared, matches |
@@ -99,6 +102,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 38 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 437.97-532.03→437.97-532.03 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Desperate Prayer | 4 | 19240 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 34→34 | n/a | match |  | 559.14-673.26→559.14-673.26 | 0.429→0.429 | declared, matches |
+| HealingPriest | 38 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 38 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 38 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 38 | Flash Heal | 1 | 2061 | 125.00→125.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 182.68-224.32→182.68-224.32 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Flash Heal | 2 | 9472 | 155.00→155.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 234.55-285.45→234.55-285.45 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Flash Heal | 3 | 9473 | 185.00→185.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 32→32 | n/a | match |  | 294.75-354.25→294.75-354.25 | 0.429→0.429 | declared, matches |
@@ -155,6 +161,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 40 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 437.97-532.03→437.97-532.03 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Desperate Prayer | 4 | 19240 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 34→34 | n/a | match |  | 568.76-684.84→568.76-684.84 | 0.429→0.429 | declared, matches |
+| HealingPriest | 40 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 40 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 40 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 40 | Flash Heal | 1 | 2061 | 125.00→125.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 182.68-224.32→182.68-224.32 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Flash Heal | 2 | 9472 | 155.00→155.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 234.55-285.45→234.55-285.45 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Flash Heal | 3 | 9473 | 185.00→185.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 32→32 | n/a | match |  | 294.75-354.25→294.75-354.25 | 0.429→0.429 | declared, matches |
@@ -220,6 +229,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 50 | Desperate Prayer | 4 | 19240 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 34→34 | n/a | match |  | 568.76-684.84→568.76-684.84 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Desperate Prayer | 5 | 19241 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 42→42 | n/a | match |  | 816.12-972.68→816.12-972.68 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Desperate Prayer | 6 | 19242 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  | 1046.09-1239.91→1046.09-1239.91 | 0.429→0.429 | declared, matches |
+| HealingPriest | 50 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 50 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 50 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 50 | Devouring Plague | 4 | 19278 | 645.00→645.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 44→44 | 24000→24000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 50 | Flash Heal | 1 | 2061 | 125.00→125.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 182.68-224.32→182.68-224.32 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Flash Heal | 2 | 9472 | 155.00→155.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 234.55-285.45→234.55-285.45 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Flash Heal | 3 | 9473 | 185.00→185.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 32→32 | n/a | match |  | 294.75-354.25→294.75-354.25 | 0.429→0.429 | declared, matches |
@@ -304,6 +317,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 60 | Desperate Prayer | 5 | 19241 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 42→42 | n/a | match |  | 816.12-972.68→816.12-972.68 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Desperate Prayer | 6 | 19242 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  | 1086.72-1288.08→1086.72-1288.08 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Desperate Prayer | 7 | 19243 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 58→58 | n/a | match |  | 1284.00-1514.80→1284.00-1514.80 | 0.429→0.429 | declared, matches |
+| HealingPriest | 60 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 60 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 60 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 60 | Devouring Plague | 4 | 19278 | 645.00→645.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 44→44 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 60 | Devouring Plague | 5 | 19279 | 810.00→810.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 52→52 | 24000→24000 | match |  | n/a | n/a | n/a |
+| HealingPriest | 60 | Devouring Plague | 6 | 19280 | 985.00→985.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 60→60 | 24000→24000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Flash Heal | 1 | 2061 | 125.00→125.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 182.68-224.32→182.68-224.32 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Flash Heal | 2 | 9472 | 155.00→155.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 234.55-285.45→234.55-285.45 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Flash Heal | 3 | 9473 | 185.00→185.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 32→32 | n/a | match |  | 294.75-354.25→294.75-354.25 | 0.429→0.429 | declared, matches |

@@ -4,6 +4,7 @@ import (
 	"math"
 	"testing"
 
+	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/priest"
 )
 
@@ -30,5 +31,19 @@ func TestShadowformReachesMindBlast(t *testing.T) {
 	}
 	if got, want := mb.CritDamageBonus-baseBonus, 1.0; math.Abs(got-want) > 1e-9 {
 		t.Errorf("Shadowform raised Mind Blast's crit damage bonus by %v, want %v", got, want)
+	}
+}
+
+// Forever made Devouring Plague a normal Shadow spell rather than an Undead
+// racial: the client's SkillLineAbility rows for it (2944 through 19280)
+// carry every race, and the trainer teaches it to every priest. The engine
+// only registered it for Undead, so a gnome or dwarf shadow priest never
+// cast it.
+func TestDevouringPlagueIsBaselineForEveryRace(t *testing.T) {
+	for _, race := range []proto.Race{proto.Race_RaceGnome, proto.Race_RaceDwarf, proto.Race_RaceHuman, proto.Race_RaceTroll} {
+		built := newShadowPriestOfRace(t, race)
+		if built.DevouringPlague == nil || built.DevouringPlague[priest.DevouringPlagueRanks] == nil {
+			t.Errorf("%v: Devouring Plague is not registered at level 60", race)
+		}
 	}
 }

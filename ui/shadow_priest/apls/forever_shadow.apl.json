@@ -65,7 +65,65 @@
       }
     },
     {
-      "notes": "Shadow Word: Death gets bonus crit chance below 20% target health from the Early Demise talent.",
+      "notes": "Devouring Plague is kept up: its 24-second cooldown lets it be reapplied when it expires, and its ticks crit.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 19280,
+                  "rank": 6
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 19280,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Inner Focus into Mind Blast: a free Mind Blast with extra crit chance whenever Inner Focus is ready.",
+      "action": {
+        "strictSequence": {
+          "actions": [
+            {
+              "castSpell": {
+                "spellId": {
+                  "spellId": 14751
+                }
+              }
+            },
+            {
+              "castSpell": {
+                "spellId": {
+                  "spellId": 10947,
+                  "rank": 9
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "notes": "Mind Blast on cooldown ahead of Mind Flay: it is the bigger hit per cast time, and Shadowform halves its cost and doubles its crit bonus.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10947,
+            "rank": 9
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shadow Word: Death below 20% target health, where Early Demise adds crit chance.",
       "action": {
         "condition": {
           "isExecutePhase": {
@@ -81,47 +139,7 @@
       }
     },
     {
-      "notes": "Era fallback for the execute window when Shadow Word: Death is on its own 15 s cooldown: Mind Blast on cooldown, else Mind Flay.",
-      "action": {
-        "condition": {
-          "isExecutePhase": {
-            "threshold": "E20"
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 10947,
-            "rank": 9
-          }
-        }
-      }
-    },
-    {
-      "notes": "Inner Focus into Devouring Plague: a free, empowered cast of the priest's biggest single-target nuke, using your highest learned rank at level 60.",
-      "action": {
-        "strictSequence": {
-          "actions": [
-            {
-              "castSpell": {
-                "spellId": {
-                  "spellId": 14751
-                }
-              }
-            },
-            {
-              "castSpell": {
-                "spellId": {
-                  "spellId": 19280,
-                  "rank": 6
-                }
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "notes": "Mind Flay fills every remaining global, including the rest of the execute fallback above.",
+      "notes": "Mind Flay fills every remaining global.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -132,18 +150,7 @@
       }
     },
     {
-      "notes": "Mind Blast only when Mind Flay cannot be cast: in our level-60 search run Mind Flay on every free global beat Mind Blast on cooldown, so outside the execute window this line rarely fires.",
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 10947,
-            "rank": 9
-          }
-        }
-      }
-    },
-    {
-      "notes": "Shoot with your wand whenever nothing else is ready: it costs no mana and always beats standing idle. Mind Flay and Mind Blast still come first whenever they are available, and Wand Specialization adds to it.",
+      "notes": "Shoot only when nothing else can be cast: a wand shot cannot start during the global cooldown and holds you for the wand's full speed, so it never fits between spells.",
       "action": {
         "castSpell": {
           "spellId": {

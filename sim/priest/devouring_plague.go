@@ -8,7 +8,6 @@ import (
 )
 
 func (priest *Priest) registerDevouringPlagueSpell() {
-	//TO DO: Implement race requirement
 	priest.DevouringPlague = make([]*core.Spell, DevouringPlagueRanks+1)
 	cdTimer := priest.NewTimer()
 

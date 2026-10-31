@@ -17,6 +17,18 @@ import (
 // exactly the named talents spent, by generated proto field name.
 func newShadowPriestSimWithTalents(t *testing.T, ranks map[string]int) (*core.Simulation, *ShadowPriest, *core.Unit) {
 	t.Helper()
+	return newShadowPriestSim(t, proto.Race_RaceUndead, ranks)
+}
+
+// newShadowPriestOfRace is a level-60 shadow priest of race with no talents.
+func newShadowPriestOfRace(t *testing.T, race proto.Race) *ShadowPriest {
+	t.Helper()
+	_, built, _ := newShadowPriestSim(t, race, nil)
+	return built
+}
+
+func newShadowPriestSim(t *testing.T, race proto.Race, ranks map[string]int) (*core.Simulation, *ShadowPriest, *core.Unit) {
+	t.Helper()
 
 	talents, err := core.TalentsStringFromRanks((&proto.PriestTalents{}).ProtoReflect(), priest.TalentTreeSizes, ranks)
 	if err != nil {
@@ -24,7 +36,7 @@ func newShadowPriestSimWithTalents(t *testing.T, ranks map[string]int) (*core.Si
 	}
 	player := core.WithSpec(&proto.Player{
 		Class:         proto.Class_ClassPriest,
-		Race:          proto.Race_RaceUndead,
+		Race:          race,
 		Level:         60,
 		Equipment:     &proto.EquipmentSpec{},
 		Buffs:         core.FullBuffs.Player,
