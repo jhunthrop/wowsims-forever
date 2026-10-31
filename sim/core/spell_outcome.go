@@ -28,12 +28,13 @@ func (spell *Spell) OutcomeAlwaysMiss(_ *Simulation, result *SpellResult, _ *Att
 	spell.SpellMetrics[result.Target.UnitIndex].Misses++
 }
 
-// OutcomeTick resolves a periodic tick. A dot whose spell the client marks
-// PERIODIC_CAN_CRIT (Dot.CanCrit, set from clientPeriodicCanCrit) rolls crit
-// on every tick: a weapon dot (Rend, Rip, Garrote, Serpent Sting: melee or
-// ranged defense) at the caster's physical crit chance, a spell dot at its
-// spell crit chance, each with the spell's own crit multiplier. Every other
-// dot ticks flat.
+// OutcomeTick resolves a periodic tick. A dot that may crit (Dot.CanCrit,
+// set by periodicDamageCanCrit: every bleed, every dot that is not
+// channelled, every client-flagged channel) rolls crit on every tick: a
+// weapon dot (Rend, Deep Wounds, Rip, Serpent Sting: melee or ranged
+// defense, or physical with none) at the caster's physical crit chance, a
+// spell dot (Ignite) at its spell crit chance, each with the spell's own
+// crit multiplier. Every other dot ticks flat.
 func (dot *Dot) OutcomeTick(sim *Simulation, result *SpellResult, attackTable *AttackTable) {
 	if dot.CanCrit {
 		dot.outcomeCritTick(sim, result, attackTable)

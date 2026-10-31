@@ -29,11 +29,11 @@ type DotConfig struct {
 	BonusCoefficient float64 // EffectBonusCoefficient in SpellEffect client DB table, "SP mod" on Wowhead (not necessarily shown there even if > 0)
 
 	// CanCrit forces this dot's ticks to roll crit under Dot.OutcomeTick.
-	// A dot whose spell the client marks PERIODIC_CAN_CRIT (SpellMisc
-	// Attributes_8 0x200, periodic_crit_auto_gen.go) crits without it;
-	// set it only for a dot the client table cannot name (a server-side
-	// tick spell a patch note says crits). It does not gate the upstream
-	// snapshot-crit outcomes, whose OnTick still chooses them.
+	// Forever's rule (periodicDamageCanCrit) already lets every bleed,
+	// every dot that is not channelled and every client-flagged channel
+	// crit; set it only for an unflagged channel a patch note says crits.
+	// It does not gate the upstream snapshot-crit outcomes, whose OnTick
+	// still chooses them.
 	CanCrit bool
 
 	// CritMultiplier is the multiplier a critical tick uses. Zero means
@@ -358,7 +358,7 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 		DamageMultiplier: config.DamageMultiplier,
 		BonusCoefficient: config.BonusCoefficient,
 
-		CanCrit:        config.CanCrit || (!isHot && clientPeriodicCanCritSpell(config.Spell.SpellID)),
+		CanCrit:        config.CanCrit || (!isHot && periodicDamageCanCrit(config.Spell)),
 		CritMultiplier: config.CritMultiplier,
 	}
 
@@ -387,6 +387,25 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 			}
 		}
 	}
+}
+
+// periodicDamageCanCrit is Forever's periodic crit rule (owner,
+// 2026-10-31): a periodic damage effect crits if it is a bleed (Deep
+// Wounds included), OR a dot that is not channelled (Ignite included), OR
+// the client marks its spell PERIODIC_CAN_CRIT. Only a channel depends on
+// the client flag, so Mind Flay crits while Blizzard, Rain of Fire,
+// Hurricane and Volley tick flat.
+func periodicDamageCanCrit(spell *Spell) bool {
+	return spell.periodicIsBleed() ||
+		!spell.Flags.Matches(SpellFlagChanneled) ||
+		clientPeriodicCanCritSpell(spell.SpellID)
+}
+
+// periodicIsBleed is the engine's bleed tag: periodic physical damage
+// (Rend, Deep Wounds, Rip, Rupture, Garrote), which ignores armor and
+// takes the target's bleed damage multiplier.
+func (spell *Spell) periodicIsBleed() bool {
+	return spell.SpellSchool.Matches(SpellSchoolPhysical)
 }
 
 // clientPeriodicCanCritSpell reports whether the client marks spellID's

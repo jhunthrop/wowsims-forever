@@ -7,8 +7,9 @@ spells with SpellMisc Attributes_8 bit 0x200 (SPELL_ATTR8_PERIODIC_CAN_CRIT):
 Corruption, Shadow Word: Pain, Immolate, Moonfire, Serpent Sting, Rend and
 the other trained damage-over-time spells carry it; the ground-targeted
 channels (Blizzard, Rain of Fire, Hurricane) and server-only tick spells
-(Ignite, Deep Wounds) do not. The engine reads the set in core.newDot, so a
-dot crits exactly when the client says it can.
+(Ignite, Deep Wounds) do not. The engine's rule (core.periodicDamageCanCrit)
+lets every bleed and every dot that is not channelled crit regardless, so
+this set decides only the channels: Mind Flay crits, Blizzard does not.
 
     SpellMisc.csv    Attributes_8, SpellID
     SpellEffect.csv  EffectAura (3 periodic damage, 53 periodic leech,

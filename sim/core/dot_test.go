@@ -73,8 +73,12 @@ func NewFakeElementalShaman(char *Character, _ *proto.Player) Agent {
 				OnSnapshot: func(sim *Simulation, target *Unit, dot *Dot, isRollover bool) {
 					dot.Snapshot(target, 100, isRollover)
 				},
+				// Flat ticks: these tests pin snapshot arithmetic, and a
+				// dot that is not channelled crits under OutcomeTick.
 				OnTick: func(sim *Simulation, target *Unit, dot *Dot) {
-					dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
+					dot.CalcAndDealPeriodicSnapshotDamage(sim, target, func(_ *Simulation, result *SpellResult, _ *AttackTable) {
+						dot.outcomePlainTick(result)
+					})
 				},
 			},
 

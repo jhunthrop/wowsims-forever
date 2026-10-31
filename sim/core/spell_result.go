@@ -685,7 +685,7 @@ func (spell *Spell) TargetDamageMultiplier(attackTable *AttackTable, isPeriodic 
 		multiplier *= attackTable.Defender.PseudoStats.PoisonDamageTakenMultiplier
 	}
 
-	if isPeriodic && spell.SpellSchool.Matches(SpellSchoolPhysical) {
+	if isPeriodic && spell.periodicIsBleed() {
 		multiplier *= attackTable.Defender.PseudoStats.BleedDamageTakenMultiplier
 	}
 

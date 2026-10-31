@@ -15,8 +15,8 @@ import (
 // damage aura carrying exactly the attribute set of Rake, Rip and Rend,
 // including SPELL_ATTR8_PERIODIC_CAN_CRIT (SpellMisc Attributes_8 0x200).
 // The owner confirmed Forever's periodic damage crits, so the engine lets
-// every client-flagged dot crit (core.clientPeriodicCanCrit), and the bleed
-// crits too. This pins both halves so a change to either is a decision.
+// every bleed crit (core.periodicDamageCanCrit), Lacerate's included.
+// This pins both halves so a change to either is a decision.
 func TestLacerateHitAndBleedBothCrit(t *testing.T) {
 	bear, sim, target := newBearSim(t, 60, nil)
 	bear.AddStatDynamic(sim, stats.Crit, 100*core.CritRatingPerCritChance)

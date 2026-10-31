@@ -2,6 +2,7 @@ package mage
 
 import (
 	"testing"
+	"time"
 
 	_ "github.com/wowsims/classic/sim/common" // imported to get item effects included.
 	"github.com/wowsims/classic/sim/core"
@@ -15,7 +16,10 @@ import (
 // every attacker multiplier, so the dot must snapshot a multiplier of 1
 // rather than apply the mage's damage multipliers a second time on each
 // tick, as the vanilla engine did.
-func TestIgniteDoesNotCountDamageBonusesTwice(t *testing.T) {
+// newIgniteMageSim builds a level-60 Troll mage with Ignite 5/5 and Fire
+// Power 5/5 and no rotation, so the test drives every cast itself.
+func newIgniteMageSim(t *testing.T) (*core.Simulation, *Mage) {
+	t.Helper()
 	talentsStr := talentStringWithRank(t, ForeverFrostTalents, "ignite", 5)
 	talentsStr = talentStringWithRank(t, talentsStr, "fire_power", 5)
 
@@ -52,6 +56,11 @@ func TestIgniteDoesNotCountDamageBonusesTwice(t *testing.T) {
 		t.Fatalf("Ignite 5/5 expected with its dot registered; got rank %d", built.Talents.Ignite)
 	}
 
+	return sim, built
+}
+
+func TestIgniteDoesNotCountDamageBonusesTwice(t *testing.T) {
+	sim, built := newIgniteMageSim(t)
 	target := sim.Encounter.TargetUnits[0]
 	fireball := built.Fireball[core.MaxTrainerRank(FireballRanks)]
 	if fireball == nil {
@@ -71,5 +80,40 @@ func TestIgniteDoesNotCountDamageBonusesTwice(t *testing.T) {
 	}
 	if dot.SnapshotBaseDamage <= 0 {
 		t.Errorf("Ignite SnapshotBaseDamage = %v, want > 0", dot.SnapshotBaseDamage)
+	}
+}
+
+// Forever's Ignite ticks crit (the owner's periodic crit rule: every true
+// dot crits), on the spell table with the spell multiplier. A tick crit
+// must not feed Ignite: the talent's proc mask (spell 11119,
+// SpellAuraOptions ProcTypeMask 0x10000, harmful spell damage) has no
+// periodic bit, so only the triggering Fireball creates the burn and the
+// burn runs its two ticks and ends.
+func TestIgniteTicksCritWithoutFeedingIgnite(t *testing.T) {
+	sim, built := newIgniteMageSim(t)
+	target := sim.Encounter.TargetUnits[0]
+	fireball := built.Fireball[core.MaxTrainerRank(FireballRanks)]
+	fireball.BonusCritRating += 100 * core.CritRatingPerCritChance
+	built.igniteTick.BonusCritRating += 100 * core.CritRatingPerCritChance
+
+	fireball.ApplyEffects(sim, target, fireball)
+	waitForOutcomes(sim)
+	dot := built.igniteTick.Dot(target)
+	if !dot.IsActive() || dot.GetStacks() != 1 {
+		t.Fatalf("a Fireball crit should apply one Ignite stack; active %v, stacks %d", dot.IsActive(), dot.GetStacks())
+	}
+
+	maxStacks := dot.GetStacks()
+	deadline := sim.CurrentTime + 3*IgniteTicks*time.Second
+	for sim.CurrentTime < deadline && !sim.Step() {
+		maxStacks = max(maxStacks, dot.GetStacks())
+	}
+
+	m := built.igniteTick.SpellMetrics[target.UnitIndex]
+	if m.CritTicks != IgniteTicks {
+		t.Errorf("Ignite CritTicks = %d (plain %d), want %d at 100%% crit", m.CritTicks, m.Ticks, IgniteTicks)
+	}
+	if maxStacks != 1 || m.CritTicks+m.Ticks != IgniteTicks {
+		t.Errorf("Ignite's own crits fed Ignite: peak stacks %d, ticks %d, want 1 stack and %d ticks", maxStacks, m.CritTicks+m.Ticks, IgniteTicks)
 	}
 }

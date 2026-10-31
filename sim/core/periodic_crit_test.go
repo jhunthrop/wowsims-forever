@@ -10,19 +10,21 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
-// Forever: whether a dot crits is a per-spell fact, not a school rule.
-// A dot that does not opt in must never crit, however much crit the
-// caster has, or every existing spec silently gains damage.
+// Forever: a channel's ticks crit only where the client marks the spell
+// PERIODIC_CAN_CRIT. Blizzard is a channel without the flag, so it must
+// never crit, however much crit the caster has.
 //
 // The assertion is on the REGISTERED spell's behaviour, not on the zero
 // value of a struct the test just declared: reading back a field nobody
 // set proves only that Go zeroes memory.
-func TestDotsDoNotCritByDefault(t *testing.T) {
+func TestUnflaggedChannelDoesNotCrit(t *testing.T) {
 	sim, caster, target := newPeriodicCritFixture(t, 100 /* percent crit */)
 	spell := caster.RegisterSpell(SpellConfig{
-		// Deep Wounds: the client does not mark it PERIODIC_CAN_CRIT.
-		ActionID:         ActionID{SpellID: 12162},
-		SpellSchool:      SpellSchoolPhysical,
+		// Blizzard: a channel the client does not mark PERIODIC_CAN_CRIT.
+		ActionID:         ActionID{SpellID: 10187},
+		SpellSchool:      SpellSchoolFrost,
+		DefenseType:      DefenseTypeMagic,
+		Flags:            SpellFlagChanneled,
 		ProcMask:         ProcMaskSpellDamage,
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
@@ -36,17 +38,17 @@ func TestDotsDoNotCritByDefault(t *testing.T) {
 		},
 	})
 	if spell.Dot(target).CanCrit {
-		t.Fatal("Dot.CanCrit is true on a spell that did not opt in; it must default to false")
+		t.Fatal("Dot.CanCrit is true on an unflagged channel; channels follow the client flag")
 	}
 
 	spell.Dot(target).Apply(sim)
 	for i := 0; i < 5; i++ {
 		advanceOneTick(sim, spell.Dot(target))
 	}
-	// 100% crit and every tick still flat: the dot did not opt in.
+	// 100% crit and every tick still flat: the channel is unflagged.
 	m := spell.SpellMetrics[target.UnitIndex]
 	if m.CritTicks != 0 {
-		t.Errorf("a dot that did not opt in produced %d critical ticks at 100%% crit", m.CritTicks)
+		t.Errorf("an unflagged channel produced %d critical ticks at 100%% crit", m.CritTicks)
 	}
 	if m.Ticks != 5 {
 		t.Errorf("Ticks = %d, want 5", m.Ticks)
@@ -249,6 +251,11 @@ func advanceOneTick(sim *Simulation, dot *Dot) {
 	if finish, ok := pendingFixtureFinalize[sim]; ok {
 		delete(pendingFixtureFinalize, sim)
 		finish()
+		// A channelled dot asks its caster's rotation whether to
+		// interrupt after each tick; finalize leaves the fixture's
+		// caster one that dereferences a nil unit.
+		caster := dot.Spell.Unit
+		caster.Rotation = &APLRotation{unit: caster}
 	}
 
 	sim.CurrentTime = dot.NextTickAt()
@@ -265,10 +272,11 @@ func advanceOneTick(sim *Simulation, dot *Dot) {
 func TestOutcomeMagicCritPerTickHonoursCanCrit(t *testing.T) {
 	sim, caster, target := newPeriodicCritFixture(t, 100 /* percent crit */)
 	spell := caster.RegisterSpell(SpellConfig{
-		// Blizzard: the client does not mark it PERIODIC_CAN_CRIT.
+		// Blizzard: a channel the client does not mark PERIODIC_CAN_CRIT.
 		ActionID:         ActionID{SpellID: 10187},
 		SpellSchool:      SpellSchoolShadow,
 		DefenseType:      DefenseTypeMagic,
+		Flags:            SpellFlagChanneled,
 		ProcMask:         ProcMaskSpellDamage,
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
@@ -302,27 +310,33 @@ func TestOutcomeMagicCritPerTickHonoursCanCrit(t *testing.T) {
 	}
 }
 
-// Forever's client marks most damage-over-time spells PERIODIC_CAN_CRIT
-// (SpellMisc Attributes_8 0x200), and the owner confirmed their ticks crit.
-// A dot whose spell carries the flag crits under the plain OutcomeTick, at
-// the caster's crit chance for its school and the spell's own multiplier,
-// so talents that raise a spell's crit damage (Pandemic) reach its ticks.
-// A dot whose spell does not carry it (Blizzard, Ignite, Deep Wounds)
-// still ticks flat.
-func TestClientFlaggedDotsCritUnderOutcomeTick(t *testing.T) {
+// Forever's periodic crit rule (owner, 2026-10-31): a periodic damage
+// effect crits if it is a bleed, OR a dot that is not channelled, OR the
+// client marks its spell PERIODIC_CAN_CRIT (SpellMisc Attributes_8 0x200).
+// Deep Wounds and Ignite carry no flag and crit anyway: Deep Wounds on the
+// melee table with the physical multiplier, Ignite on the spell table with
+// the spell multiplier. Channels follow the flag: Mind Flay crits,
+// Blizzard does not. A crit uses the spell's own multiplier, so talents
+// that raise a spell's crit damage (Pandemic) reach its ticks.
+func TestPeriodicCritRule(t *testing.T) {
 	for _, tc := range []struct {
 		name     string
 		spellID  int32
 		school   SpellSchool
 		defense  DefenseType
+		flags    SpellFlag
 		wantCrit bool
 	}{
-		{"Corruption", 25311, SpellSchoolShadow, DefenseTypeMagic, true},
-		{"Rend", 11574, SpellSchoolPhysical, DefenseTypeMelee, true},
+		{"Corruption", 25311, SpellSchoolShadow, DefenseTypeMagic, 0, true},
+		{"Rend", 11574, SpellSchoolPhysical, DefenseTypeMelee, 0, true},
 		// The warrior's Rend declares no defense type; its ticks crit on
 		// the melee table.
-		{"Rend without a defense type", 11574, SpellSchoolPhysical, DefenseTypeNone, true},
-		{"Blizzard", 10187, SpellSchoolFrost, DefenseTypeMagic, false},
+		{"Rend without a defense type", 11574, SpellSchoolPhysical, DefenseTypeNone, 0, true},
+		{"Deep Wounds, an unflagged bleed", 12162, SpellSchoolPhysical, DefenseTypeNone, 0, true},
+		{"a channelled bleed crits as a bleed", 12162, SpellSchoolPhysical, DefenseTypeNone, SpellFlagChanneled, true},
+		{"Ignite, an unflagged true dot", 12654, SpellSchoolFire, DefenseTypeMagic, 0, true},
+		{"Mind Flay, a flagged channel", 15407, SpellSchoolShadow, DefenseTypeMagic, SpellFlagChanneled, true},
+		{"Blizzard, an unflagged channel", 10187, SpellSchoolFrost, DefenseTypeMagic, SpellFlagChanneled, false},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			sim, caster, target := newPeriodicCritFixture(t, 100)
@@ -330,12 +344,13 @@ func TestClientFlaggedDotsCritUnderOutcomeTick(t *testing.T) {
 				ActionID:         ActionID{SpellID: tc.spellID},
 				SpellSchool:      tc.school,
 				DefenseType:      tc.defense,
+				Flags:            tc.flags,
 				ProcMask:         ProcMaskSpellDamage,
 				DamageMultiplier: 1,
 				ThreatMultiplier: 1,
 				CritDamageBonus:  1,
 				Dot: DotConfig{
-					Aura:          Aura{Label: "Client Dot " + tc.name},
+					Aura:          Aura{Label: "Rule Dot " + tc.name},
 					NumberOfTicks: 4,
 					TickLength:    time.Second * 3,
 					OnTick: func(sim *Simulation, target *Unit, dot *Dot) {
@@ -344,7 +359,7 @@ func TestClientFlaggedDotsCritUnderOutcomeTick(t *testing.T) {
 				},
 			})
 			if got := spell.Dot(target).CanCrit; got != tc.wantCrit {
-				t.Fatalf("CanCrit = %v, want %v (the client's PERIODIC_CAN_CRIT flag)", got, tc.wantCrit)
+				t.Fatalf("CanCrit = %v, want %v", got, tc.wantCrit)
 			}
 			spell.Dot(target).Apply(sim)
 			for i := 0; i < 4; i++ {
