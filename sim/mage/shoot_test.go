@@ -2,6 +2,7 @@ package mage
 
 import (
 	"testing"
+	"time"
 
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
@@ -66,5 +67,46 @@ func TestShootDealsWandDamageAgainstARealTarget(t *testing.T) {
 	}
 	if metrics.Hits+metrics.Crits == 0 {
 		t.Fatal("Shoot never landed a hit or a crit")
+	}
+}
+
+// A wand shot is a cast of its own: it never starts inside another spell's
+// global cooldown, and once started it holds the caster for the wand's whole
+// speed. Before this held, the rotation fired Shoot in the same instant as
+// every instant spell (Fire Blast, Corruption, Shadow Word: Pain), dealt a
+// free wand hit and let the next spell start before that GCD had run out:
+// a 1.2 s wand ended a 1.5 s GCD 0.3 s early.
+func TestShootNeverShortensTheGlobalCooldown(t *testing.T) {
+	built, sim, target := newFrostMageSim(t, core.DefaultTargetProtoLvl60)
+	built.Equipment[proto.ItemSlot_ItemSlotRanged] = core.Item{
+		ID:               99999,
+		RangedWeaponType: proto.RangedWeaponType_RangedWeaponTypeWand,
+		WeaponDamageMin:  20,
+		WeaponDamageMax:  40,
+		SwingSpeed:       1.2,
+	}
+	built.registerShootSpell()
+
+	if !built.FireBlast[len(built.FireBlast)-1].Cast(sim, target) {
+		t.Fatal("Fire Blast did not cast")
+	}
+	gcdEnd := built.GCD.ReadyAt()
+	if gcdEnd <= sim.CurrentTime {
+		t.Fatalf("Fire Blast left no GCD running (ready at %v, now %v)", gcdEnd, sim.CurrentTime)
+	}
+	if built.Shoot.CanCast(sim, target) {
+		t.Fatalf("Shoot is castable %v into Fire Blast's GCD; a wand shot must wait for the GCD", sim.CurrentTime)
+	}
+
+	sim.CurrentTime = gcdEnd
+	if !built.Shoot.Cast(sim, target) {
+		t.Fatal("Shoot did not cast once the GCD was ready")
+	}
+	want := gcdEnd + time.Duration(1.2*float64(time.Second))
+	if got := built.Hardcast.Expires; got != want {
+		t.Errorf("Shoot's cast ends at %v, want %v (the wand's full speed)", got, want)
+	}
+	if got := built.GCD.ReadyAt(); got < want {
+		t.Errorf("the next spell may start at %v, before the wand shot ends at %v", got, want)
 	}
 }

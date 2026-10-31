@@ -23,10 +23,14 @@ const ShootSpellID = 5019
 // or gun sitting in the same slot (DefenseTypeMagic / OutcomeMagicHitAndCrit, not
 // DefenseTypeRanged / OutcomeRangedHitAndCrit).
 //
-// Shoot costs no mana and never triggers the GCD (Cast.GCD: 0); its own cast time equals the
-// wand's speed and (per makeCastFunc's SetGCDTimer call) still locks the character out of any
-// other action for that long, matching Classic: casting a spell cancels a Shoot in progress,
-// but finishing a Shoot leaves the normal 1.5s spell GCD untouched.
+// Shoot costs no mana and triggers no GCD of its own (Cast.GCD: 0), but it is a real cast:
+// it never starts while another spell's GCD is running, and its cast time (the wand's
+// speed) holds the caster for that whole time. The client's Shoot (5019) is an auto-repeat
+// spell with no start-recovery category, but casting any spell cancels a shot in progress
+// (wand category 351), and the engine cannot cancel one. Before this rule the rotation
+// fired Shoot in the same instant as every instant spell, took a free wand hit and let the
+// next spell start before the GCD had run out (a 1.2 s wand ended a 1.5 s GCD 0.3 s early),
+// which inflated Destruction and Affliction by about 9%.
 //
 // wandDamageMultiplier folds in class talents that scale wand damage specifically (e.g.
 // mage/priest Wand Specialization, 13%/25%); pass 1 for classes without such a talent.
@@ -43,7 +47,7 @@ func (character *Character) RegisterShootSpell(wandDamageMultiplier float64) *Sp
 		SpellSchool: SpellSchoolPhysical,
 		DefenseType: DefenseTypeMagic,
 		ProcMask:    ProcMaskRangedAuto,
-		Flags:       SpellFlagAPL | SpellFlagMeleeMetrics,
+		Flags:       SpellFlagAPL | SpellFlagMeleeMetrics | SpellFlagCastTimeNoGCD,
 		// setupAttackTables only ever builds a CastTypeMainHand AttackTable entry for
 		// mage/priest/warlock (environment.go): before Shoot, none of the three ever attacked
 		// out of the ranged slot, so a CastTypeRanged table for them would have been dead
@@ -60,6 +64,9 @@ func (character *Character) RegisterShootSpell(wandDamageMultiplier float64) *Sp
 				CastTime: DurationFromSeconds(weapon.SwingSpeed),
 			},
 			IgnoreHaste: true,
+		},
+		ExtraCastCondition: func(sim *Simulation, _ *Unit) bool {
+			return character.GCD.IsReady(sim)
 		},
 
 		DamageMultiplier: wandDamageMultiplier,
