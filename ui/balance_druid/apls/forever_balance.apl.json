@@ -34,7 +34,7 @@
       }
     },
     {
-      "notes": "When less time is left than the next Starfire takes to cast (3.0 sec with Improved Starfire, 2.5 on an Eclipse charge), Wrath still finishes and Starfire would not. Before Starfire is learned (level 20) the window is the last 3.5 seconds, as before.",
+      "notes": "When the next Starfire would not finish before the fight ends: Wrath still does. The window is Starfire's cast time (3.0 sec with Improved Starfire at 5/5, 2.5 on an Eclipse charge; 3.5 seconds before Starfire is learned at level 20).",
       "action": {
         "condition": {
           "or": {
