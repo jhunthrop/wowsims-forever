@@ -647,23 +647,6 @@
       ]
     },
     {
-      "name": "Improved Cleave",
-      "skill_line": "Fury",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 12329,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Improved Demoralizing Shout",
       "skill_line": "Fury",
       "source": "skill_line_ability",

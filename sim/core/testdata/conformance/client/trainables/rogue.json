@@ -228,23 +228,6 @@
       ]
     },
     {
-      "name": "Coup de Grace",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 1310709,
-          "rank": 0,
-          "level": 30
-        }
-      ]
-    },
-    {
       "name": "Crippling Poison",
       "skill_line": "",
       "source": "class_spell",

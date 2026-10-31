@@ -170,23 +170,6 @@
       ]
     },
     {
-      "name": "Arcane Focus",
-      "skill_line": "Arcane",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 11222,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
       "name": "Arcane Geometry",
       "skill_line": "Arcane",
       "source": "skill_line_ability",
@@ -2058,23 +2041,6 @@
       "ranks": [
         {
           "id": 11175,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Piercing Ice",
-      "skill_line": "Frost",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 11151,
           "rank": 0,
           "level": 1
         }

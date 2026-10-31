@@ -1524,23 +1524,6 @@
           "level": 52
         }
       ]
-    },
-    {
-      "name": "Voice of Truth",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 180000,
-      "ranks": [
-        {
-          "id": 1310897,
-          "rank": 0,
-          "level": 20
-        }
-      ]
     }
   ]
 }
