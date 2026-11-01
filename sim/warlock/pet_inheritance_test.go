@@ -13,8 +13,9 @@ import (
 // petInheritanceDemoTalents sets Unholy Power 5/5 (Demonology field 3),
 // Improved Sayaad 3/3 (field 8) and Demonic Knowledge 3/3 (field 16).
 // Demonic Knowledge gives the warlock 60 spell power at level 60, which the
-// summoned demon then inherits from.
-const petInheritanceDemoTalents = "-00050000300000003"
+// summoned demon then inherits from. Improved Shadow Bolt 5/5 (Destruction
+// field 2) is there for the Shadow Vulnerability test.
+const petInheritanceDemoTalents = "-00050000300000003-05"
 
 func newPetInheritanceTestWarlock(t *testing.T, summon proto.WarlockOptions_Summon) (*core.Simulation, *Warlock) {
 	t.Helper()

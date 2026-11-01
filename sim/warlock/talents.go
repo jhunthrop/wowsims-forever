@@ -743,8 +743,13 @@ func (warlock *Warlock) applyImprovedShadowBolt() {
 	}
 
 	warlock.ImprovedShadowBoltAuras = warlock.NewEnemyAuraArray(func(unit *core.Unit) *core.Aura {
-		return core.ImprovedShadowBoltAura(unit, warlock.Talents.ImprovedShadowBolt)
+		return unit.GetOrRegisterAura(core.Aura{
+			Label:    "Improved Shadow Bolt-" + warlock.Label,
+			ActionID: core.ActionID{SpellID: improvedShadowBoltDebuffSpellID},
+			Duration: core.ImprovedShadowBoltDuration,
+		})
 	})
+	warlock.applyImprovedShadowBoltVulnerability(1 + improvedShadowBoltDamagePerRank*float64(warlock.Talents.ImprovedShadowBolt))
 
 	affectedSpellCodes := []int32{SpellCode_WarlockShadowBolt}
 	core.MakePermanent(warlock.RegisterAura(core.Aura{
@@ -761,6 +766,36 @@ func (warlock *Warlock) applyImprovedShadowBolt() {
 			}
 		},
 	}))
+}
+
+// Shadow Vulnerability (17794) is aura 270, school-mask damage taken from
+// the caster, misc 32 (Shadow), 4% a rank: only the warlock's own Shadow
+// damage takes it ("Shadow damage taken by the target from your attacks"),
+// not its demon's and not another unit's. It is read when each hit lands,
+// the same per-caster hook Wrack's vulnerability uses.
+const (
+	improvedShadowBoltDebuffSpellID = 17794
+	improvedShadowBoltDamagePerRank = 0.04
+)
+
+func (warlock *Warlock) applyImprovedShadowBoltVulnerability(multiplier float64) {
+	warlock.Env.RegisterPostFinalizeEffect(func() {
+		for _, target := range warlock.Env.Encounter.AllTargetUnits {
+			for _, at := range warlock.AttackTables[target.UnitIndex] {
+				previous := at.DamageDoneByCasterMultiplier
+				at.DamageDoneByCasterMultiplier = func(spell *core.Spell, at *core.AttackTable) float64 {
+					result := 1.0
+					if previous != nil {
+						result = previous(spell, at)
+					}
+					if spell.SpellSchool.Matches(core.SpellSchoolShadow) && warlock.ImprovedShadowBoltAuras.Get(at.Defender).IsActive() {
+						result *= multiplier
+					}
+					return result
+				}
+			}
+		}
+	})
 }
 
 // cataclysmCostReductionPercent is the live tree's text by rank: "Reduces
