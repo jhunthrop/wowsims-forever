@@ -57,6 +57,10 @@ func (druid *Druid) registerMaulSpell() {
 		BonusCoefficient:         1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			// Maul skips OnCastComplete, where Clearcasting is spent.
+			if druid.ClearcastingAura != nil {
+				druid.spendClearcasting(sim, spell)
+			}
 			baseDamage := flatDamage.Roll(sim, casterLevel) +
 				spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
 			baseDamage *= druid.RendAndTearMultiplier(target)

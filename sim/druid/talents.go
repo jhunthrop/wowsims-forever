@@ -379,9 +379,7 @@ func (druid *Druid) applyOmenOfClarity() {
 			if aura.RemainingDuration(sim) == aura.Duration {
 				return
 			}
-			if spell.Flags.Matches(SpellFlagOmen) && spell.DefaultCast.Cost > 0 {
-				aura.Deactivate(sim)
-			}
+			druid.spendClearcasting(sim, spell)
 		},
 	})
 
@@ -418,6 +416,16 @@ func (druid *Druid) applyOmenOfClarity() {
 			tryProc(sim, spell, result)
 		},
 	}))
+}
+
+// spendClearcasting spends Clearcasting's one charge (16870, ProcCharges 1)
+// on an ability in its class mask that has a cost. OnCastComplete calls it;
+// so must an ability cast with SpellFlagNoOnCastComplete (Maul, off the
+// swing), before it lands, or its own proc would be the one spent.
+func (druid *Druid) spendClearcasting(sim *core.Simulation, spell *core.Spell) {
+	if druid.ClearcastingAura.IsActive() && spell.Flags.Matches(SpellFlagOmen) && spell.DefaultCast.Cost > 0 {
+		druid.ClearcastingAura.Deactivate(sim)
+	}
 }
 
 // moonfuryDamagePerRank is Moonfury's 2% a rank (node 104936, five ranks).
