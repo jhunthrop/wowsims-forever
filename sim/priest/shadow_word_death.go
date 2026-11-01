@@ -31,6 +31,10 @@ func (priest *Priest) EarlyDemiseCritBonus(sim *core.Simulation) float64 {
 	return earlyDemiseCritBonusPct[priest.Talents.EarlyDemise] * core.CritRatingPerCritChance
 }
 
+// shadowWordDeathBacklashPct is the share of the caster's maximum health
+// a landed Shadow Word: Death costs (Forever tooltip, 1309636).
+const shadowWordDeathBacklashPct = 0.30
+
 func (priest *Priest) registerShadowWordDeathSpell() {
 	priest.ShadowWordDeath = make([]*core.Spell, ShadowWordDeathRanks+1)
 	cdTimer := priest.NewTimer()
@@ -104,23 +108,14 @@ func (priest *Priest) getShadowWordDeathConfig(rank int, cdTimer *core.Timer) co
 				spell.BonusCritRating -= critBonus
 			}
 
-			// Backlash: the client's second effect (index 1, effect 77,
-			// amount 150, identical across all four ranks regardless of
-			// the direct hit's own scaling from 295 to 448) does not
-			// decode to a known mechanic through this pipeline --
-			// sim/core/spellconst carries the Effect/Aura type columns
-			// verbatim and never interprets them, and nothing else in
-			// the client dump gives this spell a description to check
-			// the number against. Per this lane's rule for an effect
-			// this package cannot read, Classic's own well-documented
-			// Shadow Word: Death behaviour is kept instead: the caster
-			// takes damage equal to the damage just dealt. These dummy
-			// targets have no simulated health that this cast could
-			// bring to zero, so the "if it doesn't kill the target"
-			// condition is always true here and backlash applies
-			// whenever the cast landed.
 			if result.Landed() {
-				priest.RemoveHealth(sim, result.Damage)
+				priest.AddShadowWeavingStack(sim, target)
+				// Backlash: Forever's tooltip (Wowhead Forever, spell
+				// 1309636) reads "If your target is not killed by Shadow
+				// Word: Death, you take backlash damage equal to 30% of
+				// your maximum health." These dummy targets never die to
+				// one cast, so a landed cast always costs it.
+				priest.RemoveHealth(sim, priest.MaxHealth()*shadowWordDeathBacklashPct)
 			}
 		},
 	}

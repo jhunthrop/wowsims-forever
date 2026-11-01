@@ -158,30 +158,20 @@ func TestShadowWordDeathLevel60HasMaxRankAndDealsDamage(t *testing.T) {
 	}
 }
 
-// TestShadowWordDeathBacklashDamagesTheCaster pins this lane's read of
-// the client's undecodable second effect (see shadow_word_death.go):
-// Classic's own well-documented behaviour, that a landed cast costs the
-// caster health equal to the damage it dealt.
+// TestShadowWordDeathBacklashDamagesTheCaster pins Forever's backlash
+// (Wowhead Forever tooltip, spell 1309636): "If your target is not killed
+// by Shadow Word: Death, you take backlash damage equal to 30% of your
+// maximum health", not Era's damage-dealt backlash.
 func TestShadowWordDeathBacklashDamagesTheCaster(t *testing.T) {
 	sim, built := buildShadowPriestForTest(t, priestTalentStringWith(t))
 	spell := built.ShadowWordDeath[priest.ShadowWordDeathRanks]
 	target := sim.Encounter.TargetUnits[0]
 
-	damageBefore := spell.SpellMetrics[target.UnitIndex].TotalDamage
 	healthBefore := built.CurrentHealth()
 	spell.ApplyEffects(sim, target, spell)
-	healthAfter := built.CurrentHealth()
-
-	dealt := spell.SpellMetrics[target.UnitIndex].TotalDamage - damageBefore
-	if dealt <= 0 {
-		t.Fatal("Shadow Word: Death dealt no damage; cannot check backlash against it")
-	}
-	lost := healthBefore - healthAfter
-	// RemoveHealth and the SpellMetrics accumulator reach the same value
-	// through different floating-point paths, so this compares within a
-	// tight epsilon rather than requiring bit-identical floats.
-	if math.Abs(lost-dealt) > 1e-6 {
-		t.Errorf("caster lost %v health, want exactly the %v damage dealt", lost, dealt)
+	lost := healthBefore - built.CurrentHealth()
+	if want := 0.30 * built.MaxHealth(); math.Abs(lost-want) > 1e-6 {
+		t.Errorf("caster lost %v health, want %v (30%% of maximum health)", lost, want)
 	}
 }
 

@@ -394,47 +394,17 @@ func (priest *Priest) applyDarkness() {
 		return
 	}
 
-	multiplier := 0.02 * float64(priest.Talents.Darkness)
-
-	priest.RegisterAura(core.Aura{
-		Label: "Darkness",
-		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			baseDamageAffectedSpells := core.FilterSlice(
-				core.Flatten(
-					[][]*core.Spell{
-						priest.MindBlast,
-						priest.DevouringPlague,
-					},
-				),
-				func(spell *core.Spell) bool { return spell != nil },
-			)
-
-			fullDamageAffectedSpells := core.FilterSlice(
-				core.Flatten(
-					[][]*core.Spell{
-						priest.ShadowWordPain,
-					},
-				),
-				func(spell *core.Spell) bool { return spell != nil },
-			)
-
-			for _, spells := range priest.MindFlay {
-				fullDamageAffectedSpells = append(
-					fullDamageAffectedSpells,
-					core.FilterSlice(spells, func(spell *core.Spell) bool { return spell != nil })...,
-				)
-			}
-
-			for _, spell := range baseDamageAffectedSpells {
-				spell.BaseDamageMultiplierAdditive += multiplier
-			}
-
-			for _, spell := range fullDamageAffectedSpells {
-				spell.DamageMultiplierAdditive += multiplier
-			}
-		},
-	})
+	// Forever's Darkness (15259, client 1.60.1.70707) is a single
+	// SPELL_AURA_MOD_DAMAGE_PERCENT_DONE effect (aura 79) on the Shadow
+	// school (misc 32), "Increases your Shadow damage done by 2%" a rank:
+	// every Shadow damage the priest deals, Shadow Word: Death and Mind
+	// Blast's spell-power part included. Era's version was three
+	// class-masked spell mods (direct base damage, periodic damage), which
+	// this function used to copy.
+	priest.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow] *= 1 + darknessDamagePerRank*float64(priest.Talents.Darkness)
 }
+
+const darknessDamagePerRank = 0.02
 
 // innerFocusCritRating is Inner Focus's critical bonus: 25%, "if it is a
 // non-periodic spell and capable of a critical effect".
