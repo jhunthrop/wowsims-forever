@@ -135,16 +135,14 @@ func skyborneShared() []Racial {
 		},
 		{
 			Name: "Wind Blessed", Kind: RacialPassive, Confirmed: true,
-			Note: "client 1259710: 1% spellcasting, melee and ranged haste",
+			Note: "client 1259710: 2% spellcasting, melee and ranged haste (26 October notes; the shipped rows read 3)",
 			Apply: func(character *Character) {
-				// 1% haste, demo transcription. Haste is NOT merged
-				// (research/08-stats.md 12.1 item 5), so this sets both,
-				// as a racial that just says "haste" must.
-				// Client 1259710: "spellcasting, melee, and ranged
-				// Haste" by 1%.
-				character.PseudoStats.MeleeSpeedMultiplier *= 1.01
-				character.PseudoStats.RangedSpeedMultiplier *= 1.01
-				character.PseudoStats.CastSpeedMultiplier *= 1.01
+				// Haste is NOT merged (research/08-stats.md 12.1 item 5),
+				// so this sets all three, as a racial that just says
+				// "haste" must.
+				character.PseudoStats.MeleeSpeedMultiplier *= windBlessedHasteMultiplier
+				character.PseudoStats.RangedSpeedMultiplier *= windBlessedHasteMultiplier
+				character.PseudoStats.CastSpeedMultiplier *= windBlessedHasteMultiplier
 			},
 		},
 		{
@@ -187,9 +185,18 @@ const mobTypeDamageMultiplier = 1.05
 const (
 	ruthlessCritPercent         = 1
 	artisansPrecisionHitPercent = 1
-	// savageCritPercent is Orc's Savage (20574), 1 in the client table and
-	// in the live text.
-	savageCritPercent = 1
+	// humanSpiritMultiplier is The Human Spirit (20598) after Blizzard's
+	// 26 October notes ("increases Spirit by 10% (was 5%)") and the
+	// 30 October hotfix cache; the shipped 1.60.1.70707 row still reads 5.
+	humanSpiritMultiplier = 1.10
+	// commandPetDamageMultiplier is Orc's Command, re-added in Blizzard's
+	// 26 October notes ("increasing Warlock and Hunter pet damage by 5%")
+	// in place of Savage's 1% crit, which the same notes remove.
+	commandPetDamageMultiplier = 1.05
+	// windBlessedHasteMultiplier is Skyborne's Wind Blessed (1259710):
+	// 26 October notes, "Haste bonus reduced to 2% (was 3%)"; the shipped
+	// 1.60.1.70707 rows still read 3.
+	windBlessedHasteMultiplier = 1.02
 )
 
 var racialsByRace = map[proto.Race][]Racial{
@@ -217,12 +224,12 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "The Human Spirit", Kind: RacialPassive, Confirmed: true,
-			Note:  "",
-			Apply: func(character *Character) { character.MultiplyStat(stats.Spirit, 1.05) },
+			Note:  "client 20598: 10% Spirit (26 October notes; the shipped row reads 5)",
+			Apply: func(character *Character) { character.MultiplyStat(stats.Spirit, humanSpiritMultiplier) },
 		},
 	},
 
-	// Orc: Blood Fury, Shatter Curse, Savage, Hardiness.
+	// Orc: Blood Fury, Shatter Curse, Command, Hardiness.
 	proto.Race_RaceOrc: {
 		{
 			Name: "Blood Fury", Kind: RacialActive, Confirmed: true,
@@ -235,13 +242,14 @@ var racialsByRace = map[proto.Race][]Racial{
 			Apply: func(*Character) {}, // removes/immunes Curses and Banes, -15% magic damage taken 8 s: utility, no offensive effect
 		},
 		{
-			Name: "Savage", Kind: RacialPassive, Confirmed: true,
-			Note: "client 20574: 1% crit with all spells and abilities, any weapon",
+			Name: "Command", Kind: RacialPassive, Confirmed: true,
+			Note: "hunter and warlock pets deal 5% more damage (26 October notes; Savage's 1% crit is removed)",
 			Apply: func(character *Character) {
-				// Replaced Axe Specialization in the 15 October rework:
-				// aura 290 with no SpellEquippedItems row (1.60.1.70707),
-				// and Wowhead Forever's live text agrees.
-				character.AddStat(stats.Crit, savageCritPercent*CritRatingPerCritChance)
+				// Pets are added while the class agent is built, before
+				// applyAllEffects runs the racials, so every pet is here.
+				for _, pet := range character.Pets {
+					pet.PseudoStats.DamageDealtMultiplier *= commandPetDamageMultiplier
+				}
 			},
 		},
 		{
@@ -387,7 +395,7 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "Touch of the Grave", Kind: RacialPassive, Confirmed: true,
-			Note:  "client 1260189 (warrior, paladin, rogue: 20%) or 1260201 (priest, mage, warlock: 30%), 25 s internal cooldown (build 1.60.1.70707); drain 1260198 takes 5% of maximum Health as flat Shadow damage; see racial_touch_of_the_grave.go",
+			Note:  "client 1260189 (warrior, paladin, rogue: 20%) or 1260201 (priest, mage, warlock: 30%), 15 s internal cooldown (27 October notes; the shipped rows read 25 s); drain 1260198 takes 5% of maximum Health as flat Shadow damage; see racial_touch_of_the_grave.go",
 			Apply: applyTouchOfTheGrave,
 		},
 		{
@@ -541,14 +549,15 @@ var racialsByRace = map[proto.Race][]Racial{
 // into one shared constant is a cleanup outside this file's scope.
 const expansiveMindEnergyCap = 100
 
-// Berserking (client 20554): effects aura 319, 140 and 65 at 10 each, a
-// 10 s duration (SpellDuration 1) and a 3 min cooldown, with no resource
-// cost. A customPercentage of 0 is the client row; any other value makes a
+// Berserking (client 20554): effects aura 319, 140 and 65 at 10 each and a
+// 3 min cooldown, with no resource cost. The duration is 15 s: Blizzard's
+// 27 October notes ("increased to 15 seconds (was 10 seconds)") and the
+// 30 October hotfix cache, over the shipped 10 s (SpellDuration 1). A customPercentage of 0 is the client row; any other value makes a
 // cooldown hard-coded to that percentage, which existing APLs address by
 // tag.
 const (
 	berserkingBasePercent = 0.10
-	berserkingDuration    = 10 * time.Second
+	berserkingDuration    = 15 * time.Second
 	berserkingCooldown    = 3 * time.Minute
 )
 

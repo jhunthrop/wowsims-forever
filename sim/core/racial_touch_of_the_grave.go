@@ -13,8 +13,10 @@ import (
 //   - The passive comes in two class versions (SkillLineAbility 55923 and
 //     55924): 1260189 for warriors, paladins and rogues (ClassMask 11),
 //     ProcChance 20, and 1260201 for priests, mages and warlocks (ClassMask
-//     400), ProcChance 30. Both have a 25000 ms ProcCategoryRecovery and
-//     ProcTypeMask 69972. Build 1.60.1.70009 had one passive at 10% with a
+//     400), ProcChance 30. Both have ProcTypeMask 69972 and a shipped
+//     25000 ms ProcCategoryRecovery; the internal cooldown is 15 s since
+//     Blizzard's 27 October notes ("reduced to 15 seconds (was 25
+//     seconds)"), which the 30 October hotfix cache carries. Build 1.60.1.70009 had one passive at 10% with a
 //     1000 ms internal cooldown; the beta notes of 15 October 2026 give the
 //     new figures ("a 30% chance for casters and 20% for Paladins, Rogues
 //     and Warriors, a 25-second internal cooldown").
@@ -39,7 +41,7 @@ const (
 	touchOfTheGraveDrainSpellID      int32 = 1260198
 	touchOfTheGraveMeleeProcChance         = 0.20
 	touchOfTheGraveCasterProcChance        = 0.30
-	touchOfTheGraveICD                     = 25 * time.Second
+	touchOfTheGraveICD                     = 15 * time.Second
 	touchOfTheGraveMaxHealthFraction       = 0.05
 
 	touchOfTheGraveProcMask = ProcMaskMeleeOrRanged | ProcMaskSpellDamage
