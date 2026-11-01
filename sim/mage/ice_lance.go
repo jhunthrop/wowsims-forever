@@ -96,17 +96,21 @@ func (mage *Mage) getIceLanceConfig(rank int, cdTimer *core.Timer) core.SpellCon
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
-			// The Frozen bonus is a base-damage multiplier and Shatter's
-			// is crit chance, so they compose without an interaction
-			// rule.
+			// "300% increased damage to Frozen targets" is the whole hit,
+			// spell power share included, so it multiplies the spell's
+			// damage for this cast. Shatter's part is crit chance, so the
+			// two compose without an interaction rule.
+			frozenMultiplier := 1.0
 			if mage.isTargetFrozen(target) {
-				baseDamage *= iceLanceFrozenMultiplier
+				frozenMultiplier = iceLanceFrozenMultiplier
 			}
 			// Winter's Chill counts the "Fingers of Frost empowered" Ice
 			// Lances: the casts that spent a charge, not the ones a Frozen
 			// aura made count. Read here, before the travel time clears it.
 			empowered := mage.fingersFreezeCast
+			spell.ApplyMultiplicativeDamageBonus(frozenMultiplier)
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			spell.ApplyMultiplicativeDamageBonus(1 / frozenMultiplier)
 
 			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
 				if result.Landed() {
