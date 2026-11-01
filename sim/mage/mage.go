@@ -133,6 +133,10 @@ type Mage struct {
 	// Frost charge resolves; isTargetFrozen reads it.
 	fingersFreezeCast bool
 
+	// fireBlastCategoryTimer is the client's cooldown category 19, which
+	// Fire Blast and Ice Lance share (fireBlastCategory).
+	fireBlastCategoryTimer *core.Timer
+
 	ArcaneBlast             []*core.Spell
 	ArcaneExplosion         []*core.Spell
 	ArcaneMissiles          []*core.Spell
