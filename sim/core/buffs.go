@@ -1978,6 +1978,7 @@ func AtieshHealingEffect(unit *Unit, idx int32) *Aura {
 
 	stats := stats.Stats{
 		stats.HealingPower: 62,
+		stats.SpellDamage:  19,
 	}
 
 	return MakePermanent(unit.RegisterAura(Aura{

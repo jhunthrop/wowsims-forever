@@ -36,8 +36,6 @@ func expectedStats(worn []core.ClientFlatBonus) stats.Stats {
 	for _, flat := range worn {
 		total = total.Add(flat.Stats)
 	}
-	// Every character turns healing power into a third as much spell damage.
-	total[stats.SpellDamage] += total[stats.HealingPower] * core.HealingToSpellDamageRatio
 	return total
 }
 

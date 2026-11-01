@@ -137,13 +137,10 @@ func TestMentalQuicknessSpellDamage(t *testing.T) {
 			t.Fatalf("Mental Quickness rank %d: got %d, want %d", c.rank, got, want)
 		}
 		// Both stats.SpellDamage and stats.HealingPower get the
-		// dependency (see applyMentalQuickness's own comment), and
-		// HealingPower already cascades a further third of itself into
-		// SpellDamage (sim/core/character.go's HealingToSpellDamageRatio,
-		// applied to every character), so the net SpellDamage gain is
-		// 4/3 of the raw percentage, not 1x.
+		// dependency (see applyMentalQuickness's own comment); the
+		// healing stat adds no damage of its own.
 		gotSpellDamage := built.GetStat(stats.SpellDamage)
-		wantSpellDamage := baseSpellDamage + intellect*c.pct*(1+core.HealingToSpellDamageRatio)
+		wantSpellDamage := baseSpellDamage + intellect*c.pct
 		if diff := gotSpellDamage - wantSpellDamage; diff > 0.01 || diff < -0.01 {
 			t.Errorf("Mental Quickness %d/2: SpellDamage = %v, want %v", c.rank, gotSpellDamage, wantSpellDamage)
 		}
