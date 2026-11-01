@@ -75,9 +75,10 @@ func (druid *Druid) newPounceSpellConfig(rank int) core.SpellConfig {
 			return druid.IsProwling() && !druid.PseudoStats.InFrontOfTarget
 		},
 
-		DamageMultiplierAdditive: druid.savageFuryDamageMultiplier(),
-		DamageMultiplier:         1,
-		ThreatMultiplier:         1,
+		// Savage Fury does not reach Pounce: its client mask (0x9800) has
+		// no Pounce bit (0x20000).
+		DamageMultiplier: 1,
+		ThreatMultiplier: 1,
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{

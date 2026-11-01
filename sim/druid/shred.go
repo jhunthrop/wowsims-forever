@@ -14,10 +14,16 @@ var shredLearnLevels = []int{22, 30, 38, 46, 54}
 // shredSpellID is Shred's rank -> spell id, index 0 unused.
 var shredSpellID = [6]int32{0, 5221, 6800, 8992, 9829, 9830}
 
-// shredFlatDamageBonus is Shred's rank -> flat damage bonus, index 0 unused.
-// Rank 2 (id 6800) has no tuned value in this file; it carries rank 1's
-// bonus forward until a real number is sourced.
-var shredFlatDamageBonus = [6]float64{0, 24, 24, 44, 64, 80}
+// shredFlatDamageBonus is Shred's rank -> flat damage bonus (effect 0, the
+// weapon damage bonus), index 0 unused. Source: 1.60.1.70707 client
+// SpellEffect.
+var shredFlatDamageBonus = [6]float64{0, 22, 32, 44, 64, 80}
+
+// shredWeaponDamageMultiplier is Shred's weapon damage percentage on every
+// rank: client effect 1 is 155 in Forever (Era's 225; Wowhead Forever 9830
+// "causing 155% damage plus 80"). Beta logs agree: a rank 1 Shred over a
+// 31-damage paw hit averaged 82, which is 1.55 x (31 + 22).
+const shredWeaponDamageMultiplier = 1.55
 
 func (druid *Druid) registerShredSpell() {
 	rank := core.HighestRankAtLevel(shredLearnLevels, druid.Level)
@@ -25,7 +31,6 @@ func (druid *Druid) registerShredSpell() {
 		return
 	}
 
-	damageMultiplier := 2.25
 	flatDamageBonus := shredFlatDamageBonus[rank]
 
 	druid.Shred = druid.RegisterSpell(Cat, core.SpellConfig{
@@ -59,9 +64,11 @@ func (druid *Druid) registerShredSpell() {
 			return !druid.PseudoStats.InFrontOfTarget
 		},
 
-		DamageMultiplier: damageMultiplier,
-		ThreatMultiplier: 1,
-		BonusCoefficient: 1,
+		// Savage Fury's client mask holds Shred (0x8000).
+		DamageMultiplierAdditive: druid.savageFuryDamageMultiplier(),
+		DamageMultiplier:         shredWeaponDamageMultiplier,
+		ThreatMultiplier:         1,
+		BonusCoefficient:         1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			druid.BreakProwl(sim)

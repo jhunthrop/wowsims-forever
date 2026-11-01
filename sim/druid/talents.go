@@ -311,14 +311,20 @@ func (druid *Druid) applyFuror() {
 // periodic damage; the client's 100% is not the server's rate, which the
 // row does not carry.
 //
-// unconfirmed: the rate. Melee keeps the engine's 2 procs a minute, yellow
-// hits at the equipped weapon's speed (the Classic and Season of Discovery
-// model this fork inherited). A spell has the same 2 a minute taken over
-// its cast time, an instant counting as the global cooldown.
+// The rate: melee keeps the engine's 2 procs a minute, yellow hits at the
+// equipped weapon's speed (the Classic and Season of Discovery model this
+// fork inherited); beta cat logs agree (10 cats on foreverlogs.gg, 346
+// Clearcasting gains against about 330 at 2 a minute on the 1.0 s paw). A
+// spell has a flat 4% a cast, whatever its cast time: 34 caster druids'
+// beta logs (12,402 casts, 547 gains) show no rise for cast-time spells
+// over instants and about 4% a spell once melee procs are taken out, where
+// 2 a minute over the cast time predicted about 840; the one stated number
+// (Reddit, 2026-09-30) is "4% chance on spells and 10 sec internal cd".
 const (
-	omenOfClarityPPM      = 2.0
-	omenOfClarityCooldown = 10 * time.Second // SpellAuraOptions.ProcCategoryRecovery
-	clearcastingDuration  = 15 * time.Second // spell 16870, DurationIndex 8
+	omenOfClarityPPM             = 2.0
+	omenOfClaritySpellProcChance = 0.04
+	omenOfClarityCooldown        = 10 * time.Second // SpellAuraOptions.ProcCategoryRecovery
+	clearcastingDuration         = 15 * time.Second // spell 16870, DurationIndex 8
 
 	// Moonkin Form (spell 24858) effect 4 adds 100% to Omen of Clarity's
 	// chance (SpellModOp 18, proc chance) and effect 5 takes 50% off its
@@ -327,9 +333,10 @@ const (
 	moonkinOmenCooldownMultiplier = 0.5
 )
 
-// omenSpellProcChance is a spell's chance to grant Clearcasting.
-func omenSpellProcChance(castTime time.Duration, inMoonkin bool) float64 {
-	chance := omenOfClarityPPM * max(castTime, core.GCDDefault).Minutes()
+// omenSpellProcChance is a spell's chance to grant Clearcasting, the same
+// for every cast time.
+func omenSpellProcChance(inMoonkin bool) float64 {
+	chance := omenOfClaritySpellProcChance
 	if inMoonkin {
 		chance *= moonkinOmenChanceMultiplier
 	}
@@ -390,7 +397,7 @@ func (druid *Druid) applyOmenOfClarity() {
 		if spell.ProcMask.Matches(core.ProcMaskMelee) {
 			procced = ppmm.ProcWithWeaponSpecials(sim, spell.ProcMask, "Omen of Clarity")
 		} else if spell.ProcMask.Matches(core.ProcMaskSpellDamage | core.ProcMaskSpellHealing) {
-			procced = sim.Proc(omenSpellProcChance(spell.DefaultCast.CastTime, inMoonkin), "Omen of Clarity")
+			procced = sim.Proc(omenSpellProcChance(inMoonkin), "Omen of Clarity")
 		}
 		if procced {
 			readyAt = sim.CurrentTime + omenProcCooldown(inMoonkin)
