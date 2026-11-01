@@ -6063,7 +6063,8 @@ func (x *HealingModel) GetBurstWindow() int32 {
 // take. The last fake member is the tank: it takes tank_hit_damage every
 // tank_swing_seconds. Every other fake member takes pulse_damage in a pulse
 // every pulse_interval_seconds, each pulse landing on pulse_members of them
-// chosen at random. All figures are after mitigation, in health points; the
+// chosen at random (with pulses_reach_healer, the real players are among
+// them). All figures are after mitigation, in health points; the
 // profile that supplies them names itself in `profile`. Forever addition;
 // see PORTING.md.
 type RaidDamageModel struct {
@@ -6081,9 +6082,13 @@ type RaidDamageModel struct {
 	PulseDamage          float64 `protobuf:"fixed64,7,opt,name=pulse_damage,json=pulseDamage,proto3" json:"pulse_damage,omitempty"`
 	PulseIntervalSeconds float64 `protobuf:"fixed64,8,opt,name=pulse_interval_seconds,json=pulseIntervalSeconds,proto3" json:"pulse_interval_seconds,omitempty"`
 	// Members one pulse lands on; 0 means every non-tank fake member.
-	PulseMembers  int32 `protobuf:"varint,9,opt,name=pulse_members,json=pulseMembers,proto3" json:"pulse_members,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	PulseMembers int32 `protobuf:"varint,9,opt,name=pulse_members,json=pulseMembers,proto3" json:"pulse_members,omitempty"`
+	// Pulses may also land on the raid's real players (the healer), chosen
+	// among the fake members with the same odds: raid-wide damage reaches
+	// the player casting the heals too. Off keeps the healer untouched.
+	PulsesReachHealer bool `protobuf:"varint,10,opt,name=pulses_reach_healer,json=pulsesReachHealer,proto3" json:"pulses_reach_healer,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *RaidDamageModel) Reset() {
@@ -6177,6 +6182,13 @@ func (x *RaidDamageModel) GetPulseMembers() int32 {
 		return x.PulseMembers
 	}
 	return 0
+}
+
+func (x *RaidDamageModel) GetPulsesReachHealer() bool {
+	if x != nil {
+		return x.PulsesReachHealer
+	}
+	return false
 }
 
 type CustomRotation struct {
@@ -6670,7 +6682,7 @@ const file_common_proto_rawDesc = "" +
 	"\x0fcadence_seconds\x18\x02 \x01(\x01R\x0ecadenceSeconds\x12+\n" +
 	"\x11cadence_variation\x18\x05 \x01(\x01R\x10cadenceVariation\x12-\n" +
 	"\x12inspiration_uptime\x18\x03 \x01(\x01R\x11inspirationUptime\x12!\n" +
-	"\fburst_window\x18\x04 \x01(\x05R\vburstWindow\"\xea\x02\n" +
+	"\fburst_window\x18\x04 \x01(\x05R\vburstWindow\"\x9a\x03\n" +
 	"\x0fRaidDamageModel\x12\x18\n" +
 	"\aprofile\x18\x01 \x01(\tR\aprofile\x12\x1f\n" +
 	"\vtank_health\x18\x02 \x01(\x01R\n" +
@@ -6681,7 +6693,9 @@ const file_common_proto_rawDesc = "" +
 	"\rdamage_spread\x18\x06 \x01(\x01R\fdamageSpread\x12!\n" +
 	"\fpulse_damage\x18\a \x01(\x01R\vpulseDamage\x124\n" +
 	"\x16pulse_interval_seconds\x18\b \x01(\x01R\x14pulseIntervalSeconds\x12#\n" +
-	"\rpulse_members\x18\t \x01(\x05R\fpulseMembers\"<\n" +
+	"\rpulse_members\x18\t \x01(\x05R\fpulseMembers\x12.\n" +
+	"\x13pulses_reach_healer\x18\n" +
+	" \x01(\bR\x11pulsesReachHealer\"<\n" +
 	"\x0eCustomRotation\x12*\n" +
 	"\x06spells\x18\x01 \x03(\v2\x12.proto.CustomSpellR\x06spells\"M\n" +
 	"\vCustomSpell\x12\x14\n" +

@@ -54,3 +54,27 @@ func TestNoRaidDamageModelLeavesTheFakeRaidAlone(t *testing.T) {
 		t.Errorf("fake members took damage with no damage model")
 	}
 }
+
+// pulsePriestHits counts the pulses the debug log shows landing on the
+// real player (the priest, raid player 0) rather than a fake member.
+func pulsePriestHits(logs string) int {
+	return strings.Count(logs, "[ (#1)] Spent")
+}
+
+// A raid-wide pulse lands on the healer standing in the party as well as on
+// the fake members, when the model says pulses reach the healer: a breath
+// or a volley does not skip the player casting the heals.
+func TestRaidDamagePulsesReachTheHealer(t *testing.T) {
+	model := &proto.RaidDamageModel{
+		Profile: "test", TankHealth: 9000, MemberHealth: 4500,
+		PulseDamage: 600, PulseIntervalSeconds: 1, PulseMembers: 0,
+		PulsesReachHealer: true,
+	}
+	if hits := pulsePriestHits(raidDamageLog(t, model)); hits < 10 {
+		t.Errorf("the priest took %d pulses in 12 seconds of 1 second pulses that reach every member, want at least 10", hits)
+	}
+	model.PulsesReachHealer = false
+	if hits := pulsePriestHits(raidDamageLog(t, model)); hits != 0 {
+		t.Errorf("the priest took %d pulses with pulses_reach_healer off, want 0", hits)
+	}
+}
