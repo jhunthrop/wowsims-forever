@@ -380,24 +380,52 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentHealthPercent": {
-                "sourceUnit": {
-                  "type": "Player",
-                  "index": 1
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 1
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.3"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.7"
+                        }
+                      }
+                    }
+                  }
                 }
               }
-            },
-            "rhs": {
-              "const": {
-                "val": "0.3"
-              }
-            }
+            ]
           }
         }
-      }
+      },
+      "notes": "An emergency Flash Heal on a party member, only while the mana bar keeps up with 70 percent of the share of the fight left."
     },
     {
       "action": {
@@ -412,24 +440,52 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentHealthPercent": {
-                "sourceUnit": {
-                  "type": "Player",
-                  "index": 2
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 2
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.3"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.7"
+                        }
+                      }
+                    }
+                  }
                 }
               }
-            },
-            "rhs": {
-              "const": {
-                "val": "0.3"
-              }
-            }
+            ]
           }
         }
-      }
+      },
+      "notes": "An emergency Flash Heal on a party member, only while the mana bar keeps up with 70 percent of the share of the fight left."
     },
     {
       "action": {
@@ -444,24 +500,52 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentHealthPercent": {
-                "sourceUnit": {
-                  "type": "Player",
-                  "index": 3
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 3
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.3"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.7"
+                        }
+                      }
+                    }
+                  }
                 }
               }
-            },
-            "rhs": {
-              "const": {
-                "val": "0.3"
-              }
-            }
+            ]
           }
         }
-      }
+      },
+      "notes": "An emergency Flash Heal on a party member, only while the mana bar keeps up with 70 percent of the share of the fight left."
     },
     {
       "action": {
@@ -476,24 +560,52 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentHealthPercent": {
-                "sourceUnit": {
-                  "type": "Player",
-                  "index": 4
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 4
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.3"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.7"
+                        }
+                      }
+                    }
+                  }
                 }
               }
-            },
-            "rhs": {
-              "const": {
-                "val": "0.3"
-              }
-            }
+            ]
           }
         }
-      }
+      },
+      "notes": "An emergency Flash Heal on a party member, only while the mana bar keeps up with 70 percent of the share of the fight left."
     },
     {
       "action": {
@@ -787,7 +899,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 6064,
+            "spellId": 10965,
             "rank": 4
           },
           "target": {
@@ -841,7 +953,7 @@
           }
         }
       },
-      "notes": "Heal is the mana-efficient filler at rank 4: the same 0.857 spell power coefficient as Greater Heal for far less mana, so with healing power it returns more health per mana than any Greater Heal rank (the classic downrank). Lower ranks of Heal were tried and did not clear the rule. Mana pacing: while the mana bar is at least as full as the share of the fight left, the filler fires at the normal thresholds."
+      "notes": "Greater Heal is the tank's filler: the tank takes the big hits, and the bigger heal lands where they are."
     },
     {
       "action": {
@@ -1083,7 +1195,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 6064,
+            "spellId": 10965,
             "rank": 4
           },
           "target": {
@@ -1110,7 +1222,7 @@
           }
         }
       },
-      "notes": "Behind the mana pace, the filler waits for a lower tank and member health, so the bar is spent on the holes that matter."
+      "notes": "Greater Heal is the tank's filler: the tank takes the big hits, and the bigger heal lands where they are."
     },
     {
       "action": {

@@ -200,6 +200,66 @@
                     "currentHealthPercent": {
                       "sourceUnit": {
                         "type": "Player",
+                        "index": 0
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpAdd",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "-0.05"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 1311606,
+            "rank": 1
+          },
+          "target": {
+            "type": "Player",
+            "index": 0
+          }
+        }
+      },
+      "notes": "You are one of the five party members the raid pulses reach; you are healed like the other four."
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
                         "index": 1
                       }
                     }
@@ -456,6 +516,39 @@
         }
       },
       "notes": "Flash of Light is the staple: about as much healing per cast as Holy Light gives per second of cast time at a quarter of the price, and a tank hit for 12 percent a swing is under 90 percent most of the time. The tank gets the top rank and the four party members below get rank 4, the rank that came out ahead under the rank rule once the ranker had picked its gear."
+    },
+    {
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {
+                "sourceUnit": {
+                  "type": "Player",
+                  "index": 0
+                }
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "0.8"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 19941,
+            "rank": 4
+          },
+          "target": {
+            "type": "Player",
+            "index": 0
+          }
+        }
+      },
+      "notes": "You are one of the five party members the raid pulses reach; you are healed like the other four."
     },
     {
       "action": {
