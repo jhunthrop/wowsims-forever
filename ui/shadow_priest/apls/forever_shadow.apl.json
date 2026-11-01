@@ -123,13 +123,8 @@
       }
     },
     {
-      "notes": "Shadow Word: Death below 20% target health, where Early Demise adds crit chance.",
+      "notes": "Shadow Word: Death on cooldown ahead of Mind Flay, as both Forever guides order it; below 20% target health Early Demise adds crit chance.",
       "action": {
-        "condition": {
-          "isExecutePhase": {
-            "threshold": "E20"
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 1309636,
