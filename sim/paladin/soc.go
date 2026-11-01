@@ -98,12 +98,13 @@ func (paladin *Paladin) registerSealOfCommand() {
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				baseDamage := judgeDamage.Roll(sim, casterLevel) * 0.5 // unless stunned
 
-				// Seal of Command requires this spell to act as its intermediary dummy,
-				// rolling on the spell hit table. If it succeeds, the actual Judgement of Command rolls on the
-				// melee special attack crit/hit table, necessitating two discrete spells.
-				// All other judgements are cast directly.
-				// Used to decide between spell.OutcomeMeleeSpecialCritOnly and spell.OutcomeAlwaysMiss
-				dummyJudgeLanded := paladin.judgement.CalcOutcome(sim, target, paladin.judgement.OutcomeMagicHit).Landed()
+				// Seal of Command requires this spell to act as its intermediary dummy:
+				// it rolls the hit, and if it lands the actual Judgement of Command rolls
+				// the melee special attack crit/hit table, so two discrete spells.
+				// 1.60.1.70707 puts the hit on the melee table with no active defense
+				// (20968: DefenseType 2, Attributes_0 0x200000; Era rolled the spell
+				// table). All other judgements are cast directly.
+				dummyJudgeLanded := paladin.judgement.CalcOutcome(sim, target, paladin.judgement.OutcomeMeleeSpecialNoBlockDodgeParryNoCrit).Landed()
 
 				outcomeApplier := core.Ternary(dummyJudgeLanded, spell.OutcomeMeleeSpecialCritOnly, spell.OutcomeAlwaysMiss)
 				spell.CalcAndDealDamage(sim, target, baseDamage, outcomeApplier)

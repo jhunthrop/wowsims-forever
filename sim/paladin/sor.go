@@ -90,9 +90,12 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 			ClassSpellMask: PaladinSpellMaskJudgementOfRighteousness,
 			ActionID:       core.ActionID{SpellID: rank.judgeSpellID},
 			SpellSchool:    core.SpellSchoolHoly,
-			DefenseType:    core.DefenseTypeMagic,
-			ProcMask:       core.ProcMaskSpellDamage,
-			Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagSuppressWeaponProcs | core.SpellFlagSuppressEquipProcs | core.SpellFlagBinary,
+			// 1.60.1.70707 moved the Judgement to the melee table:
+			// SpellCategories DefenseType 2 (Era: 1, magic) and SpellMisc
+			// Attributes_0 0x200000, no dodge, parry or block.
+			DefenseType: core.DefenseTypeMelee,
+			ProcMask:    core.ProcMaskSpellDamage,
+			Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagSuppressWeaponProcs | core.SpellFlagSuppressEquipProcs | core.SpellFlagBinary,
 
 			// source 1.60.1.70009 client spell data (spellconst/paladin.json):
 			// Judgement of Righteousness's spell_level equals the
@@ -109,7 +112,7 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				baseDamage := judgeDamage.Roll(sim, casterLevel) * improvedSoR
-				spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+				spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
 			},
 		})
 
