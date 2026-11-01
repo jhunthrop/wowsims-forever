@@ -3,6 +3,7 @@ package warlock
 import (
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
@@ -68,6 +69,21 @@ func (warlock *Warlock) makeImp() *WarlockPet {
 	return warlock.makePet(cfg, warlock.Options.Summon == proto.WarlockOptions_Imp)
 }
 
+// FireboltDamage is the client's roll for Firebolt 3110 through 11763
+// (spellconst/warlock.json, 1.60.1.70707): rank 7 is a centre of 44 at its
+// own level 58, 0.1136 wide, growing 0.6 a level to 63, so 42.63-47.77 at 60.
+// The engine dealt a flat 44 before.
+var FireboltDamage = [FireboltRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 4, Variance: 0.285714, PerLevel: 0.1, SpellLevel: 1, MaxLevel: 5},
+	{Amount: 7, Variance: 0.153846, PerLevel: 0.2, SpellLevel: 8, MaxLevel: 13},
+	{Amount: 12, Variance: 0.166667, PerLevel: 0.3, SpellLevel: 18, MaxLevel: 23},
+	{Amount: 17, Variance: 0.114286, PerLevel: 0.3, SpellLevel: 28, MaxLevel: 33},
+	{Amount: 25, Variance: 0.117647, PerLevel: 0.4, SpellLevel: 38, MaxLevel: 43},
+	{Amount: 35, Variance: 0.112676, PerLevel: 0.5, SpellLevel: 48, MaxLevel: 53},
+	{Amount: 44, Variance: 0.113636, PerLevel: 0.6, SpellLevel: 58, MaxLevel: 63},
+}
+
 func (wp *WarlockPet) registerImpFireboltSpell() {
 	warlockLevel := wp.owner.Level
 	// assuming max rank available
@@ -82,28 +98,26 @@ func (wp *WarlockPet) registerImpFireboltSpell() {
 	}
 
 	spellCoeff := [8]float64{0, .164, .314, .529, .571, .571, .571, .571}[rank]
-	// baseDamage was the classic tooltip roll (rank 7 {85, 96}) until
-	// the rotation-accuracy audit compared it against spellconst/
-	// warlock.json's own per-rank flat "amount" (rank 7, 11763, amount
-	// 44, sp_coefficient 0.571 unchanged) - the same halving
-	// shadowbolt.go's comment documents across the warlock's own kit;
-	// the imp is not a player spell in spellconst, but shares the
-	// pattern exactly (rank 1: client 4 vs the old roll's {7, 10}).
-	baseDamage := [8]float64{0, 4, 7, 12, 17, 25, 35, 44}[rank]
+	// The classic tooltip roll (rank 7 {85, 96}) became the client's own
+	// amount in the rotation-accuracy audit (the same halving shadowbolt.go
+	// documents across the warlock's kit); FireboltDamage now carries the
+	// client's variance and per-level growth as well.
+	damage := FireboltDamage[rank]
+	petLevel := int(wp.Level)
 	spellId := [8]int32{0, 3110, 7799, 7800, 7801, 7802, 11762, 11763}[rank]
 	manaCost := [8]float64{0, 10, 20, 35, 50, 70, 95, 115}[rank]
 	level := [8]int{0, 1, 8, 18, 28, 38, 48, 58}[rank]
 
 	improvedImp := []float64{1, 1.1, 1.2, 1.3}[wp.owner.Talents.ImprovedImp]
-	baseDamage *= improvedImp
 
 	wp.primaryAbility = wp.RegisterSpell(core.SpellConfig{
-		ActionID:      core.ActionID{SpellID: spellId},
-		SpellSchool:   core.SpellSchoolFire,
-		DefenseType:   core.DefenseTypeMagic,
-		ProcMask:      core.ProcMaskSpellDamage,
-		Rank:          rank,
-		RequiredLevel: level,
+		ActionID:         core.ActionID{SpellID: spellId},
+		SpellSchool:      core.SpellSchoolFire,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		Rank:             rank,
+		RequiredLevel:    level,
+		ClientBaseDamage: damage.Range(petLevel),
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,
@@ -127,7 +141,7 @@ func (wp *WarlockPet) registerImpFireboltSpell() {
 		BonusCoefficient: spellCoeff,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			result := spell.CalcDamage(sim, target, damage.Roll(sim, petLevel)*improvedImp, spell.OutcomeMagicHitAndCrit)
 
 			spell.DealDamage(sim, result)
 		},

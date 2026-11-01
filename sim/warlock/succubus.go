@@ -111,18 +111,23 @@ func (wp *WarlockPet) registerSuccubusLashOfPainSpell() {
 	}
 
 	spellCoeff := [7]float64{0, .429, .429, .429, .429, .429, .429}[rank]
-	baseDamage := [7]float64{0, 33, 44, 60, 73, 87, 99}[rank] * (1 + .10*float64(wp.owner.Talents.ImprovedSayaad))
+	// Forever's flat amounts, half of Era's 33-99: client SpellEffect
+	// 7814-11780 base 16/22/30/36/43/50, no variance or per-level growth;
+	// Wowhead Forever's rank 6 tooltip "causing 50 Shadow damage".
+	clientBaseDamage := [7]float64{0, 16, 22, 30, 36, 43, 50}[rank]
+	baseDamage := clientBaseDamage * (1 + .10*float64(wp.owner.Talents.ImprovedSayaad))
 	spellId := [7]int32{0, 7814, 7815, 7816, 11778, 11779, 11780}[rank]
 	manaCost := [7]float64{0, 65, 80, 105, 125, 145, 160}[rank]
 	level := [7]int{0, 20, 28, 36, 44, 52, 60}[rank]
 
 	wp.primaryAbility = wp.RegisterSpell(core.SpellConfig{
-		ActionID:      core.ActionID{SpellID: spellId},
-		SpellSchool:   core.SpellSchoolShadow,
-		DefenseType:   core.DefenseTypeMagic,
-		ProcMask:      core.ProcMaskSpellDamage,
-		RequiredLevel: level,
-		Rank:          rank,
+		ActionID:         core.ActionID{SpellID: spellId},
+		SpellSchool:      core.SpellSchoolShadow,
+		DefenseType:      core.DefenseTypeMagic,
+		ProcMask:         core.ProcMaskSpellDamage,
+		RequiredLevel:    level,
+		Rank:             rank,
+		ClientBaseDamage: [2]float64{clientBaseDamage, clientBaseDamage},
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,
@@ -140,7 +145,7 @@ func (wp *WarlockPet) registerSuccubusLashOfPainSpell() {
 			},
 		},
 
-		DamageMultiplier: wp.AutoAttacks.MHConfig().DamageMultiplier,
+		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		BonusCoefficient: spellCoeff,
 
