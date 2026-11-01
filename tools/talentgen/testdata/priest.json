@@ -753,8 +753,7 @@
               "description": "Each time you heal a target other than yourself with Flash Heal, you are healed for 50% as much. This healing generates no threat."
             }
           ],
-          "spell_id": 1328569,
-          "hotfix_only": true
+          "spell_id": 1328569
         },
         {
           "id": 105855,

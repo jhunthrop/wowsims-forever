@@ -54,33 +54,6 @@
       ]
     },
     {
-      "name": "Blessing of Light",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 135,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 19977,
-          "rank": 1,
-          "level": 40
-        },
-        {
-          "id": 19978,
-          "rank": 2,
-          "level": 50
-        },
-        {
-          "id": 19979,
-          "rank": 3,
-          "level": 60
-        }
-      ]
-    },
-    {
       "name": "Blessing of Might",
       "skill_line": "Retribution",
       "source": "skill_line_ability",
@@ -583,23 +556,6 @@
       ]
     },
     {
-      "name": "Greater Blessing of Light",
-      "skill_line": "Holy",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 260,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 25890,
-          "rank": 0,
-          "level": 60
-        }
-      ]
-    },
-    {
       "name": "Greater Blessing of Might",
       "skill_line": "Retribution",
       "source": "skill_line_ability",
@@ -781,7 +737,7 @@
       "skill_line": "Protection",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 240,
+      "cost": 195,
       "cost_type": 0,
       "cast_time_ms": 0,
       "cooldown_ms": 10000,
@@ -789,17 +745,17 @@
         {
           "id": 20925,
           "rank": 1,
-          "level": 40
+          "level": 30
         },
         {
           "id": 20927,
           "rank": 2,
-          "level": 50
+          "level": 40
         },
         {
           "id": 20928,
           "rank": 3,
-          "level": 60
+          "level": 50
         }
       ]
     },
@@ -991,23 +947,6 @@
       ]
     },
     {
-      "name": "Mass Salvation",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 25895,
-          "rank": 0,
-          "level": 60
-        }
-      ]
-    },
-    {
       "name": "Purify",
       "skill_line": "Holy",
       "source": "skill_line_ability",
@@ -1116,23 +1055,6 @@
       ]
     },
     {
-      "name": "Revoke",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 1325499,
-          "rank": 0,
-          "level": 26
-        }
-      ]
-    },
-    {
       "name": "Righteous Fury",
       "skill_line": "Protection",
       "source": "skill_line_ability",
@@ -1163,23 +1085,6 @@
           "id": 53601,
           "rank": 1,
           "level": 80
-        }
-      ]
-    },
-    {
-      "name": "Salvation",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 1038,
-          "rank": 0,
-          "level": 26
         }
       ]
     },
@@ -1482,19 +1387,29 @@
       ]
     },
     {
-      "name": "Templar's Bulwark",
-      "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "name": "Turn Evil",
+      "skill_line": "",
+      "source": "class_spell",
       "active": true,
-      "cost": 110,
+      "cost": 75,
       "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 300000,
+      "cast_time_ms": 1500,
+      "cooldown_ms": 30000,
       "ranks": [
         {
-          "id": 1311015,
-          "rank": 0,
-          "level": 30
+          "id": 1328374,
+          "rank": 1,
+          "level": 38
+        },
+        {
+          "id": 1328373,
+          "rank": 2,
+          "level": 38
+        },
+        {
+          "id": 1328372,
+          "rank": 3,
+          "level": 52
         }
       ]
     },
@@ -1522,6 +1437,23 @@
           "id": 10326,
           "rank": 3,
           "level": 52
+        }
+      ]
+    },
+    {
+      "name": "Voice of Truth",
+      "skill_line": "Holy",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 180000,
+      "ranks": [
+        {
+          "id": 1310897,
+          "rank": 0,
+          "level": 20
         }
       ]
     }

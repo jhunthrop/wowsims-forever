@@ -37,7 +37,7 @@
         ]
       },
       {
-        "text": "Racials read from the BlizzCon demo: Will to Survive removes all Stuns on a 3 minute cooldown, Perception gives 20 seconds of stealth detection, Sword Specialization grants 2% spell and ability critical strike chance with a sword, and The Human Spirit grants 5% Spirit.",
+        "text": "Racials after Blizzard's 26 October notes: Will to Survive removes all Stuns on a 3 minute cooldown, Perception gives 20 seconds of stealth detection, Ruthless increases critical strike chance with all spells and attacks by 1%, and The Human Spirit increases Spirit by 10%.",
         "sources": [
           {
             "label": "Icy Veins, the racial rework",
@@ -48,6 +48,16 @@
             "label": "Talents Forever (demo transcription)",
             "url": "https://talentsforever.com/data.json",
             "kind": "community"
+          },
+          {
+            "label": "Blizzard development notes, racial tuning (26 and 27 October 2026), reposted by MMO-Champion",
+            "url": "https://www.mmo-champion.com/content/14645-WoW-Forever-Beta-Development-Notes-Racial-Abilities-and-Traits-Tuning",
+            "kind": "community"
+          },
+          {
+            "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
+            "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
           }
         ]
       }
@@ -91,7 +101,7 @@
         ]
       },
       {
-        "text": "Racials read from the BlizzCon demo: Blood Fury grants 10% Attack Power and Spell Power for 15 seconds on a 2 minute cooldown, Shatter Curse removes and grants immunity to Curses and Banes and reduces magical damage taken 15% for 8 seconds, Axe Specialization grants 1% critical strike chance with an axe, and Hardiness reduces stun duration 20%.",
+        "text": "Racials after Blizzard's 26 and 27 October notes: Blood Fury increases Attack Power, Ranged Attack Power and Spell Power by 10% for 15 seconds on a 2 minute cooldown, Shatter Curse removes and grants immunity to Curses and Banes and reduces magical damage taken by 15% for 8 seconds, Command increases the damage dealt by Hunter and Warlock pets by 5%, and Hardiness reduces stun duration by 20%. Savage, the 1% critical strike passive that had replaced the axe bonus, is removed.",
         "sources": [
           {
             "label": "Icy Veins, the racial rework",
@@ -102,6 +112,16 @@
             "label": "Talents Forever (demo transcription)",
             "url": "https://talentsforever.com/data.json",
             "kind": "community"
+          },
+          {
+            "label": "Blizzard development notes, racial tuning (26 and 27 October 2026), reposted by MMO-Champion",
+            "url": "https://www.mmo-champion.com/content/14645-WoW-Forever-Beta-Development-Notes-Racial-Abilities-and-Traits-Tuning",
+            "kind": "community"
+          },
+          {
+            "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
+            "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
           }
         ]
       }
@@ -155,12 +175,22 @@
         ]
       },
       {
-        "text": "Stoneform now reduces physical damage taken instead of raising armor; Find Treasure stacks with other tracking; Mace Specialization grants crit chance with a mace; Big Game Hunter adds damage against Beasts.",
+        "text": "Stoneform now reduces physical damage taken instead of raising armor; Find Treasure stacks with other tracking; Artisan's Precision increases hit chance with spells and attacks by 1%, in place of Earth Fury's critical strike bonus since Blizzard's 26 October notes; Big Game Hunter adds damage against Beasts.",
         "sources": [
           {
             "label": "Blizzard, Deep Dive panel recap",
             "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
             "kind": "blizzard"
+          },
+          {
+            "label": "Blizzard development notes, racial tuning (26 and 27 October 2026), reposted by MMO-Champion",
+            "url": "https://www.mmo-champion.com/content/14645-WoW-Forever-Beta-Development-Notes-Racial-Abilities-and-Traits-Tuning",
+            "kind": "community"
+          },
+          {
+            "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
+            "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
           }
         ]
       },
@@ -268,12 +298,22 @@
         ]
       },
       {
-        "text": "Will of the Forsaken removes Charm, Fear, and Sleep but no longer grants immunity; Cannibalize restores mana as well as health; Touch of the Grave gives attacks a chance to drain life.",
+        "text": "Will of the Forsaken removes Charm, Fear, and Sleep but no longer grants immunity; Cannibalize restores mana as well as health; Touch of the Grave gives spells and attacks a chance to drain Health from the target, up to 5% of your maximum Health, at most once every 15 seconds.",
         "sources": [
           {
             "label": "Blizzard, Deep Dive panel recap",
             "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
             "kind": "blizzard"
+          },
+          {
+            "label": "Blizzard development notes, racial tuning (26 and 27 October 2026), reposted by MMO-Champion",
+            "url": "https://www.mmo-champion.com/content/14645-WoW-Forever-Beta-Development-Notes-Racial-Abilities-and-Traits-Tuning",
+            "kind": "community"
+          },
+          {
+            "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
+            "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
           }
         ]
       },
@@ -317,7 +357,7 @@
         ]
       },
       {
-        "text": "Racials read from the BlizzCon demo: War Stomp stuns up to 5 enemies within 8 yards for 2 seconds on a 2 minute cooldown, Cultivation grows bonus herbs that need no Herbalism to gather, Plainsrunning raises movement speed the longer you keep moving, and Endurance grants 5% Health and 1% Hit chance.",
+        "text": "Racials after Blizzard's 26 October notes: War Stomp stuns up to 5 enemies within 8 yards for 2 seconds on a 2 minute cooldown, Cultivation grows bonus herbs that need no Herbalism to gather on a 15 minute cooldown, Plainsrunning raises movement speed by 2% a stack the longer you keep moving, up to 60%, and no longer raises mounted speed, and Endurance increases Health by 5%.",
         "sources": [
           {
             "label": "Icy Veins, the racial rework",
@@ -328,6 +368,16 @@
             "label": "Talents Forever (demo transcription)",
             "url": "https://talentsforever.com/data.json",
             "kind": "community"
+          },
+          {
+            "label": "Blizzard development notes, racial tuning (26 and 27 October 2026), reposted by MMO-Champion",
+            "url": "https://www.mmo-champion.com/content/14645-WoW-Forever-Beta-Development-Notes-Racial-Abilities-and-Traits-Tuning",
+            "kind": "community"
+          },
+          {
+            "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
+            "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
           }
         ]
       }
@@ -425,7 +475,7 @@
         ]
       },
       {
-        "text": "Racials read from the BlizzCon demo: Berserking grants 10% casting and attack speed on a 3 minute cooldown, Rapid Regeneration channels back 50% of maximum Health, Beast Slaying grants 5% damage against Beasts, and Regeneration keeps 10% of Health regeneration running in combat. The Berserking duration is read as 10 seconds by one outlet and 12 by another.",
+        "text": "Racials after Blizzard's 27 October notes: Berserking increases casting and attack speed by 10% for 15 seconds on a 3 minute cooldown, Rapid Regeneration channels back 50% of maximum Health, Beast Slaying grants 5% damage against Beasts, and Regeneration keeps 10% of Health regeneration running in combat.",
         "sources": [
           {
             "label": "Icy Veins, the racial rework",
@@ -436,6 +486,16 @@
             "label": "Talents Forever (demo transcription)",
             "url": "https://talentsforever.com/data.json",
             "kind": "community"
+          },
+          {
+            "label": "Blizzard development notes, racial tuning (26 and 27 October 2026), reposted by MMO-Champion",
+            "url": "https://www.mmo-champion.com/content/14645-WoW-Forever-Beta-Development-Notes-Racial-Abilities-and-Traits-Tuning",
+            "kind": "community"
+          },
+          {
+            "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
+            "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
           }
         ]
       }
@@ -504,7 +564,7 @@
         ]
       },
       {
-        "text": "Racials shown in the BlizzCon demo: Walk on Air (glide downward for 10 seconds), Read Ley Line (100% health and mana regeneration for 15 seconds), Wind Blessed (1% haste), Elemental Insight (5% damage to Elementals). Skyborne choose Horde or Alliance at creation.",
+        "text": "Racials after Blizzard's 26 October notes: Walk on Air (glide downward for 10 seconds), Read Ley Line (50% health and mana regeneration for 15 seconds), Wind Blessed (2% haste), Elemental Insight (5% damage to Elementals). Skyborne choose Horde or Alliance at creation.",
         "sources": [
           {
             "label": "Icy Veins, racial rework",
@@ -515,6 +575,16 @@
             "label": "Blizzard, Deep Dive panel recap",
             "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
             "kind": "blizzard"
+          },
+          {
+            "label": "Blizzard development notes, racial tuning (26 and 27 October 2026), reposted by MMO-Champion",
+            "url": "https://www.mmo-champion.com/content/14645-WoW-Forever-Beta-Development-Notes-Racial-Abilities-and-Traits-Tuning",
+            "kind": "community"
+          },
+          {
+            "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
+            "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
           }
         ]
       },
@@ -529,12 +599,22 @@
         ]
       },
       {
-        "text": "One demo transcription reads a different second active for each faction: Alliance Skyborne get Read Ley Line, Horde Skyborne get Skysight, which grants 10% movement and mounted speed for 30 seconds or 15 minutes near a convergence of elements.",
+        "text": "Each faction has its own second active: Alliance Skyborne get Read Ley Line, Horde Skyborne get Skysight, which raises movement and mounted speed by 15% for 30 seconds; at an elemental convergence it also grants Charged for 1 hour, which doubles it.",
         "sources": [
           {
             "label": "Talents Forever (demo transcription)",
             "url": "https://talentsforever.com/data.json",
             "kind": "community"
+          },
+          {
+            "label": "Blizzard development notes, racial tuning (26 and 27 October 2026), reposted by MMO-Champion",
+            "url": "https://www.mmo-champion.com/content/14645-WoW-Forever-Beta-Development-Notes-Racial-Abilities-and-Traits-Tuning",
+            "kind": "community"
+          },
+          {
+            "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
+            "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
           }
         ]
       }
@@ -603,7 +683,7 @@
         ]
       },
       {
-        "text": "Racials shown in the BlizzCon demo: Walk on Air (glide downward for 10 seconds), Read Ley Line (100% health and mana regeneration for 15 seconds), Wind Blessed (1% haste), Elemental Insight (5% damage to Elementals). Skyborne choose Horde or Alliance at creation.",
+        "text": "Racials after Blizzard's 26 October notes: Walk on Air (glide downward for 10 seconds), Skysight (15% movement and mounted speed for 30 seconds), Wind Blessed (2% haste), Elemental Insight (5% damage to Elementals). Skyborne choose Horde or Alliance at creation.",
         "sources": [
           {
             "label": "Icy Veins, racial rework",
@@ -614,6 +694,26 @@
             "label": "Blizzard, Deep Dive panel recap",
             "url": "https://news.blizzard.com/en-us/article/24303313/world-of-warcraft-forever-deep-dive-panel-recap",
             "kind": "blizzard"
+          },
+          {
+            "label": "Blizzard development notes, racial tuning (26 and 27 October 2026), reposted by MMO-Champion",
+            "url": "https://www.mmo-champion.com/content/14645-WoW-Forever-Beta-Development-Notes-Racial-Abilities-and-Traits-Tuning",
+            "kind": "community"
+          },
+          {
+            "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
+            "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
+          },
+          {
+            "label": "Blizzard development notes, racial tuning (26 and 27 October 2026), reposted by MMO-Champion",
+            "url": "https://www.mmo-champion.com/content/14645-WoW-Forever-Beta-Development-Notes-Racial-Abilities-and-Traits-Tuning",
+            "kind": "community"
+          },
+          {
+            "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
+            "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
           }
         ]
       },
@@ -628,12 +728,22 @@
         ]
       },
       {
-        "text": "One demo transcription reads a different second active for each faction: Alliance Skyborne get Read Ley Line, Horde Skyborne get Skysight, which grants 10% movement and mounted speed for 30 seconds or 15 minutes near a convergence of elements.",
+        "text": "Each faction has its own second active: Alliance Skyborne get Read Ley Line, Horde Skyborne get Skysight, which raises movement and mounted speed by 15% for 30 seconds; at an elemental convergence it also grants Charged for 1 hour, which doubles it.",
         "sources": [
           {
             "label": "Talents Forever (demo transcription)",
             "url": "https://talentsforever.com/data.json",
             "kind": "community"
+          },
+          {
+            "label": "Blizzard development notes, racial tuning (26 and 27 October 2026), reposted by MMO-Champion",
+            "url": "https://www.mmo-champion.com/content/14645-WoW-Forever-Beta-Development-Notes-Racial-Abilities-and-Traits-Tuning",
+            "kind": "community"
+          },
+          {
+            "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
+            "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
           }
         ]
       }

@@ -837,7 +837,7 @@
       "max_level": 49
     },
     "1038": {
-      "name": "Salvation",
+      "name": "",
       "rank": 0,
       "school_mask": 2,
       "cast_time_ms": 0,
@@ -1750,25 +1750,12 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 108,
-          "amount": 5,
+          "aura": 50,
+          "amount": 0,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 7,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        },
-        {
-          "index": 1,
-          "effect": 6,
-          "aura": 108,
-          "amount": 15,
-          "sp_coefficient": 1.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 7,
+          "misc_value": 2,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -4112,8 +4099,8 @@
       "max_level": 27
     },
     "19977": {
-      "name": "Blessing of Light",
-      "rank": 1,
+      "name": "",
+      "rank": 0,
       "school_mask": 2,
       "cast_time_ms": 0,
       "gcd_ms": 1500,
@@ -4161,8 +4148,8 @@
       "max_level": 0
     },
     "19978": {
-      "name": "Blessing of Light",
-      "rank": 2,
+      "name": "",
+      "rank": 0,
       "school_mask": 2,
       "cast_time_ms": 0,
       "gcd_ms": 1500,
@@ -4210,8 +4197,8 @@
       "max_level": 0
     },
     "19979": {
-      "name": "Blessing of Light",
-      "rank": 3,
+      "name": "",
+      "rank": 0,
       "school_mask": 2,
       "cast_time_ms": 0,
       "gcd_ms": 1500,
@@ -5252,6 +5239,42 @@
       "cost_pct": 0.0,
       "max_level": 0
     },
+    "20170": {
+      "name": "Stun",
+      "rank": 1,
+      "school_mask": 2,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 2000,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 22,
+      "family_mask": [
+        0,
+        0,
+        8,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 12,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
     "20174": {
       "name": "Guardian's Favor",
       "rank": 0,
@@ -5940,7 +5963,7 @@
       "gcd_ms": 0,
       "cooldown_ms": 0,
       "category_cooldown_ms": 0,
-      "duration_ms": 4000,
+      "duration_ms": 3000,
       "cost": 0,
       "cost_type": 0,
       "spell_level": 1,
@@ -9781,6 +9804,68 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 10000,
       "duration_ms": 10000,
+      "cost": 100,
+      "cost_type": 0,
+      "spell_level": 30,
+      "family_mask": [
+        0,
+        64,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 51,
+          "amount": 30,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 43,
+          "amount": 75,
+          "sp_coefficient": 0.07999999821,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 4,
+          "amount": 1,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "20927": {
+      "name": "Holy Shield",
+      "rank": 2,
+      "school_mask": 2,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 10000,
+      "duration_ms": 10000,
       "cost": 150,
       "cost_type": 0,
       "spell_level": 40,
@@ -9834,9 +9919,9 @@
       "cost_pct": 0.0,
       "max_level": 0
     },
-    "20927": {
+    "20928": {
       "name": "Holy Shield",
-      "rank": 2,
+      "rank": 3,
       "school_mask": 2,
       "cast_time_ms": 0,
       "gcd_ms": 1500,
@@ -9871,68 +9956,6 @@
           "effect": 6,
           "aura": 43,
           "amount": 153,
-          "sp_coefficient": 0.07999999821,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        },
-        {
-          "index": 2,
-          "effect": 6,
-          "aura": 4,
-          "amount": 1,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        }
-      ],
-      "cost_pct": 0.0,
-      "max_level": 0
-    },
-    "20928": {
-      "name": "Holy Shield",
-      "rank": 3,
-      "school_mask": 2,
-      "cast_time_ms": 0,
-      "gcd_ms": 1500,
-      "cooldown_ms": 0,
-      "category_cooldown_ms": 10000,
-      "duration_ms": 10000,
-      "cost": 240,
-      "cost_type": 0,
-      "spell_level": 60,
-      "family_mask": [
-        0,
-        64,
-        0,
-        0
-      ],
-      "effects": [
-        {
-          "index": 0,
-          "effect": 6,
-          "aura": 51,
-          "amount": 30,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        },
-        {
-          "index": 1,
-          "effect": 6,
-          "aura": 43,
-          "amount": 221,
           "sp_coefficient": 0.07999999821,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -11681,7 +11704,7 @@
       "family_mask": [
         0,
         0,
-        0,
+        128,
         0
       ],
       "effects": [
@@ -11755,7 +11778,7 @@
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 12,
+          "misc_value": 23,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -11769,6 +11792,19 @@
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 4,
+          "effect": 6,
+          "aura": 10,
+          "amount": 33,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 127,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -11814,7 +11850,7 @@
       "max_level": 0
     },
     "25890": {
-      "name": "Greater Blessing of Light",
+      "name": "",
       "rank": 0,
       "school_mask": 2,
       "cast_time_ms": 0,
@@ -11899,7 +11935,7 @@
       "max_level": 0
     },
     "25895": {
-      "name": "Mass Salvation",
+      "name": "",
       "rank": 0,
       "school_mask": 2,
       "cast_time_ms": 0,
@@ -17912,8 +17948,8 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 1,
-          "sp_coefficient": 0.05000000075,
+          "amount": 0,
+          "sp_coefficient": 0.079999998211861,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
@@ -20674,12 +20710,12 @@
         {
           "index": 0,
           "effect": 6,
-          "aura": 137,
-          "amount": 4,
+          "aura": 107,
+          "amount": -10000,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 0,
+          "misc_value": 1,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -22815,7 +22851,7 @@
       "max_level": 0
     },
     "1310735": {
-      "name": "Twist of Light",
+      "name": "Unsealed Wrath",
       "rank": 0,
       "school_mask": 1,
       "cast_time_ms": 0,
@@ -22837,7 +22873,7 @@
           "index": 0,
           "effect": 6,
           "aura": 108,
-          "amount": -20,
+          "amount": 0,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -22971,11 +23007,24 @@
           "index": 0,
           "effect": 6,
           "aura": 107,
-          "amount": 18,
+          "amount": 8,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 16,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 232,
+          "amount": -20,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 9,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -23252,12 +23301,12 @@
     "1310994": {
       "name": "Swift Judgement",
       "rank": 0,
-      "school_mask": 1,
+      "school_mask": 2,
       "cast_time_ms": 0,
       "gcd_ms": 0,
       "cooldown_ms": 60000,
       "category_cooldown_ms": 0,
-      "duration_ms": -1,
+      "duration_ms": 0,
       "cost": 0,
       "cost_type": 0,
       "spell_level": 1,
@@ -23270,13 +23319,13 @@
       "effects": [
         {
           "index": 0,
-          "effect": 6,
-          "aura": 108,
-          "amount": -100,
+          "effect": 77,
+          "aura": 0,
+          "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
-          "misc_value": 14,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -23296,7 +23345,7 @@
       "duration_ms": 8000,
       "cost": 110,
       "cost_type": 0,
-      "spell_level": 30,
+      "spell_level": 0,
       "family_mask": [
         0,
         0,
@@ -23535,13 +23584,26 @@
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 107,
+          "amount": -1000,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 10,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
         }
       ],
       "cost_pct": 0.0,
       "max_level": 0
     },
     "1311085": {
-      "name": "Instrument of Law",
+      "name": "",
       "rank": 0,
       "school_mask": 1,
       "cast_time_ms": 0,
@@ -24980,7 +25042,7 @@
       "max_level": 0
     },
     "1325499": {
-      "name": "Revoke",
+      "name": "",
       "rank": 0,
       "school_mask": 2,
       "cast_time_ms": 0,
@@ -25021,6 +25083,460 @@
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 25895,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328370": {
+      "name": "Turn Evil",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 0,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 107,
+          "amount": -1500,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 10,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 107,
+          "amount": -1500,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 11,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 332,
+          "amount": 1328374,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 2878,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 3,
+          "effect": 6,
+          "aura": 332,
+          "amount": 1328373,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 5627,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 4,
+          "effect": 6,
+          "aura": 332,
+          "amount": 1328372,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 10326,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328372": {
+      "name": "Turn Evil",
+      "rank": 3,
+      "school_mask": 8,
+      "cast_time_ms": 1500,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 30000,
+      "duration_ms": 20000,
+      "cost": 75,
+      "cost_type": 0,
+      "spell_level": 52,
+      "family_mask": [
+        0,
+        0,
+        1048576,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 7,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 31,
+          "amount": 25,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328373": {
+      "name": "Turn Evil",
+      "rank": 2,
+      "school_mask": 8,
+      "cast_time_ms": 1500,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 30000,
+      "duration_ms": 15000,
+      "cost": 50,
+      "cost_type": 0,
+      "spell_level": 38,
+      "family_mask": [
+        0,
+        0,
+        1048576,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 7,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 31,
+          "amount": 25,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328374": {
+      "name": "Turn Evil",
+      "rank": 1,
+      "school_mask": 8,
+      "cast_time_ms": 1500,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 30000,
+      "duration_ms": 10000,
+      "cost": 35,
+      "cost_type": 0,
+      "spell_level": 38,
+      "family_mask": [
+        0,
+        0,
+        1048576,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 7,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 31,
+          "amount": 25,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328544": {
+      "name": "Shieldsworn",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 1,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 107,
+          "amount": -4000,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 11,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328546": {
+      "name": "Stoicism",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 1,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 232,
+          "amount": -20,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 12,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 232,
+          "amount": -20,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 1,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328548": {
+      "name": "Oath of Light",
+      "rank": 0,
+      "school_mask": 2,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 300000,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 0,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 226,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 1500,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 6.6666698455811
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 4,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 1.9166699647903
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 4,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 3.8333299160004
+        }
+      ],
+      "cost_pct": 8.0,
+      "max_level": 0
+    },
+    "1328550": {
+      "name": "Boundless Light",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 1,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 4,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328551": {
+      "name": "Shieldsworn",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 6000,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 1,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 528,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
         }

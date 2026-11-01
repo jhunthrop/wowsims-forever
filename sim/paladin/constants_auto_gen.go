@@ -413,21 +413,19 @@ var BlessingOfKingsMaxLevel = [BlessingOfKingsRanks + 1]int{0}
 // unconfirmed: Blessing of Kings coefficient derived from the vanilla convention (rank 0)
 // Blessing of Kings rank 0: kept id 20217 (spell_level 20); dropped 1213408 (spell_level 1)
 
-// Blessing of Light: ranks 0-3 present, from build 1.60.1.70707.
-const BlessingOfLightRanks = 3
+// Blessing of Light: ranks 0 present, from build 1.60.1.70707.
+const BlessingOfLightRanks = 0
 
-var BlessingOfLightSpellId = [BlessingOfLightRanks + 1]int32{26650, 19977, 19978, 19979}
-var BlessingOfLightLevel = [BlessingOfLightRanks + 1]int{60, 40, 50, 60}
-var BlessingOfLightCastTime = [BlessingOfLightRanks + 1]int32{0, 0, 0, 0}
-var BlessingOfLightCooldownMS = [BlessingOfLightRanks + 1]int32{0, 0, 0, 0}
-var BlessingOfLightManaCost = [BlessingOfLightRanks + 1]float64{0, 85, 110, 135}
-var BlessingOfLightManaCostPct = [BlessingOfLightRanks + 1]float64{0, 0, 0, 0}
-var BlessingOfLightSpellCoeff = [BlessingOfLightRanks + 1]float64{1, 120, 120, 120}
-var BlessingOfLightBaseDamage = [BlessingOfLightRanks + 1][]float64{{0, 0}, {210, 210}, {300, 300}, {400, 400}}
-var BlessingOfLightPointsPerLevel = [BlessingOfLightRanks + 1]float64{0, 0, 0, 0}
-var BlessingOfLightMaxLevel = [BlessingOfLightRanks + 1]int{0, 0, 0, 0}
-
-// unconfirmed: Blessing of Light coefficient derived from the vanilla convention (rank 1, rank 2, rank 3)
+var BlessingOfLightSpellId = [BlessingOfLightRanks + 1]int32{26650}
+var BlessingOfLightLevel = [BlessingOfLightRanks + 1]int{60}
+var BlessingOfLightCastTime = [BlessingOfLightRanks + 1]int32{0}
+var BlessingOfLightCooldownMS = [BlessingOfLightRanks + 1]int32{0}
+var BlessingOfLightManaCost = [BlessingOfLightRanks + 1]float64{0}
+var BlessingOfLightManaCostPct = [BlessingOfLightRanks + 1]float64{0}
+var BlessingOfLightSpellCoeff = [BlessingOfLightRanks + 1]float64{1}
+var BlessingOfLightBaseDamage = [BlessingOfLightRanks + 1][]float64{{0, 0}}
+var BlessingOfLightPointsPerLevel = [BlessingOfLightRanks + 1]float64{0}
+var BlessingOfLightMaxLevel = [BlessingOfLightRanks + 1]int{0}
 
 // Blessing of Might: ranks 1-7 present, from build 1.60.1.70707.
 const BlessingOfMightRanks = 7
@@ -492,6 +490,22 @@ var BlessingOfWisdomPointsPerLevel = [BlessingOfWisdomRanks + 1]float64{0, 0, 0,
 var BlessingOfWisdomMaxLevel = [BlessingOfWisdomRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
 
 // unconfirmed: Blessing of Wisdom coefficient derived from the vanilla convention (rank 1, rank 2, rank 3, rank 4, rank 5, rank 6)
+
+// Boundless Light: ranks 0 present, from build 1.60.1.70707.
+const BoundlessLightRanks = 0
+
+var BoundlessLightSpellId = [BoundlessLightRanks + 1]int32{1328550}
+var BoundlessLightLevel = [BoundlessLightRanks + 1]int{1}
+var BoundlessLightCastTime = [BoundlessLightRanks + 1]int32{0}
+var BoundlessLightCooldownMS = [BoundlessLightRanks + 1]int32{0}
+var BoundlessLightManaCost = [BoundlessLightRanks + 1]float64{0}
+var BoundlessLightManaCostPct = [BoundlessLightRanks + 1]float64{0}
+var BoundlessLightSpellCoeff = [BoundlessLightRanks + 1]float64{0.2143}
+var BoundlessLightBaseDamage = [BoundlessLightRanks + 1][]float64{{0, 0}}
+var BoundlessLightPointsPerLevel = [BoundlessLightRanks + 1]float64{0}
+var BoundlessLightMaxLevel = [BoundlessLightRanks + 1]int{0}
+
+// unconfirmed: Boundless Light coefficient derived from the vanilla convention (rank 0)
 
 // Champion of the Light: ranks 0 present, from build 1.60.1.70707.
 const ChampionOfTheLightRanks = 0
@@ -786,7 +800,7 @@ var DivinePrecisionCooldownMS = [DivinePrecisionRanks + 1]int32{0}
 var DivinePrecisionManaCost = [DivinePrecisionRanks + 1]float64{0}
 var DivinePrecisionManaCostPct = [DivinePrecisionRanks + 1]float64{0}
 var DivinePrecisionSpellCoeff = [DivinePrecisionRanks + 1]float64{0.2143}
-var DivinePrecisionBaseDamage = [DivinePrecisionRanks + 1][]float64{{18, 18}}
+var DivinePrecisionBaseDamage = [DivinePrecisionRanks + 1][]float64{{8, 8}}
 var DivinePrecisionPointsPerLevel = [DivinePrecisionRanks + 1]float64{0}
 var DivinePrecisionMaxLevel = [DivinePrecisionRanks + 1]int{0}
 
@@ -1131,22 +1145,6 @@ var GreaterBlessingOfKingsMaxLevel = [GreaterBlessingOfKingsRanks + 1]int{0}
 
 // unconfirmed: Greater Blessing of Kings coefficient derived from the vanilla convention (rank 0)
 
-// Greater Blessing of Light: ranks 0 present, from build 1.60.1.70707.
-const GreaterBlessingOfLightRanks = 0
-
-var GreaterBlessingOfLightSpellId = [GreaterBlessingOfLightRanks + 1]int32{25890}
-var GreaterBlessingOfLightLevel = [GreaterBlessingOfLightRanks + 1]int{60}
-var GreaterBlessingOfLightCastTime = [GreaterBlessingOfLightRanks + 1]int32{0}
-var GreaterBlessingOfLightCooldownMS = [GreaterBlessingOfLightRanks + 1]int32{0}
-var GreaterBlessingOfLightManaCost = [GreaterBlessingOfLightRanks + 1]float64{260}
-var GreaterBlessingOfLightManaCostPct = [GreaterBlessingOfLightRanks + 1]float64{0}
-var GreaterBlessingOfLightSpellCoeff = [GreaterBlessingOfLightRanks + 1]float64{120}
-var GreaterBlessingOfLightBaseDamage = [GreaterBlessingOfLightRanks + 1][]float64{{400, 400}}
-var GreaterBlessingOfLightPointsPerLevel = [GreaterBlessingOfLightRanks + 1]float64{0}
-var GreaterBlessingOfLightMaxLevel = [GreaterBlessingOfLightRanks + 1]int{0}
-
-// unconfirmed: Greater Blessing of Light coefficient derived from the vanilla convention (rank 0)
-
 // Greater Blessing of Might: ranks 1-2 present, from build 1.60.1.70707.
 const GreaterBlessingOfMightRanks = 2
 
@@ -1432,13 +1430,13 @@ var HolyPowerMaxLevel = [HolyPowerRanks + 1]int{0}
 const HolyShieldRanks = 3
 
 var HolyShieldSpellId = [HolyShieldRanks + 1]int32{456544, 20925, 20927, 20928}
-var HolyShieldLevel = [HolyShieldRanks + 1]int{30, 40, 50, 60}
+var HolyShieldLevel = [HolyShieldRanks + 1]int{30, 30, 40, 50}
 var HolyShieldCastTime = [HolyShieldRanks + 1]int32{0, 0, 0, 0}
 var HolyShieldCooldownMS = [HolyShieldRanks + 1]int32{0, 10000, 10000, 10000}
-var HolyShieldManaCost = [HolyShieldRanks + 1]float64{0, 150, 195, 240}
+var HolyShieldManaCost = [HolyShieldRanks + 1]float64{0, 100, 150, 195}
 var HolyShieldManaCostPct = [HolyShieldRanks + 1]float64{0, 0, 0, 0}
-var HolyShieldSpellCoeff = [HolyShieldRanks + 1]float64{0.05, 0.3333, 0.3333, 0.3333}
-var HolyShieldBaseDamage = [HolyShieldRanks + 1][]float64{{1, 1}, {30, 30}, {30, 30}, {30, 30}}
+var HolyShieldSpellCoeff = [HolyShieldRanks + 1]float64{0.08, 0.3333, 0.3333, 0.3333}
+var HolyShieldBaseDamage = [HolyShieldRanks + 1][]float64{{0, 0}, {30, 30}, {30, 30}, {30, 30}}
 var HolyShieldPointsPerLevel = [HolyShieldRanks + 1]float64{0, 0, 0, 0}
 var HolyShieldMaxLevel = [HolyShieldRanks + 1]int{0, 0, 0, 0}
 
@@ -2021,20 +2019,6 @@ var InspirationExemplarMaxLevel = [InspirationExemplarRanks + 1]int{0}
 // unconfirmed: Inspiration Exemplar coefficient derived from the vanilla convention (rank 0)
 // Inspiration Exemplar rank 0: kept id 409936 (spell_level 1); dropped 407880 (spell_level 1), 407881 (spell_level 1)
 
-// Instrument of Law: ranks 0 present, from build 1.60.1.70707.
-const InstrumentOfLawRanks = 0
-
-var InstrumentOfLawSpellId = [InstrumentOfLawRanks + 1]int32{1311085}
-var InstrumentOfLawLevel = [InstrumentOfLawRanks + 1]int{0}
-var InstrumentOfLawCastTime = [InstrumentOfLawRanks + 1]int32{0}
-var InstrumentOfLawCooldownMS = [InstrumentOfLawRanks + 1]int32{0}
-var InstrumentOfLawManaCost = [InstrumentOfLawRanks + 1]float64{0}
-var InstrumentOfLawManaCostPct = [InstrumentOfLawRanks + 1]float64{0}
-var InstrumentOfLawSpellCoeff = [InstrumentOfLawRanks + 1]float64{1}
-var InstrumentOfLawBaseDamage = [InstrumentOfLawRanks + 1][]float64{{0, 0}}
-var InstrumentOfLawPointsPerLevel = [InstrumentOfLawRanks + 1]float64{0}
-var InstrumentOfLawMaxLevel = [InstrumentOfLawRanks + 1]int{0}
-
 // Iron Creed: ranks 0 present, from build 1.60.1.70707.
 const IronCreedRanks = 0
 
@@ -2162,7 +2146,7 @@ var JudgementOfFuryCastTime = [JudgementOfFuryRanks + 1]int32{0, 0, 0, 0, 0, 0, 
 var JudgementOfFuryCooldownMS = [JudgementOfFuryRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var JudgementOfFuryManaCost = [JudgementOfFuryRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var JudgementOfFuryManaCostPct = [JudgementOfFuryRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
-var JudgementOfFurySpellCoeff = [JudgementOfFuryRanks + 1]float64{0.1333, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429}
+var JudgementOfFurySpellCoeff = [JudgementOfFuryRanks + 1]float64{0.1, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429}
 var JudgementOfFuryBaseDamage = [JudgementOfFuryRanks + 1][]float64{{0, 0}, {21.85, 24.15}, {35.15, 38.85}, {51.3, 56.7}, {70.3902, 77.6098}, {91.3171, 100.6829}, {117.6132, 128.3868}, {146.2993, 159.7007}}
 var JudgementOfFuryPointsPerLevel = [JudgementOfFuryRanks + 1]float64{0, 1.71, 2.16, 2.52, 2.79, 3.42, 3.69, 3.69}
 var JudgementOfFuryMaxLevel = [JudgementOfFuryRanks + 1]int{0, 16, 24, 31, 40, 48, 56, 64}
@@ -2652,22 +2636,6 @@ var MalleableProtectionMaxLevel = [MalleableProtectionRanks + 1]int{0}
 // unconfirmed: Malleable Protection coefficient derived from the vanilla convention (rank 0)
 // Malleable Protection rank 0: kept id 426174 (spell_level 1); dropped 458318 (spell_level 0)
 
-// Mass Salvation: ranks 0 present, from build 1.60.1.70707.
-const MassSalvationRanks = 0
-
-var MassSalvationSpellId = [MassSalvationRanks + 1]int32{25895}
-var MassSalvationLevel = [MassSalvationRanks + 1]int{60}
-var MassSalvationCastTime = [MassSalvationRanks + 1]int32{0}
-var MassSalvationCooldownMS = [MassSalvationRanks + 1]int32{0}
-var MassSalvationManaCost = [MassSalvationRanks + 1]float64{0}
-var MassSalvationManaCostPct = [MassSalvationRanks + 1]float64{16}
-var MassSalvationSpellCoeff = [MassSalvationRanks + 1]float64{120}
-var MassSalvationBaseDamage = [MassSalvationRanks + 1][]float64{{0, 0}}
-var MassSalvationPointsPerLevel = [MassSalvationRanks + 1]float64{0}
-var MassSalvationMaxLevel = [MassSalvationRanks + 1]int{0}
-
-// unconfirmed: Mass Salvation coefficient derived from the vanilla convention (rank 0)
-
 // Noxious Breath: ranks 0 present, from build 1.60.1.70707.
 const NoxiousBreathRanks = 0
 
@@ -2681,6 +2649,22 @@ var NoxiousBreathSpellCoeff = [NoxiousBreathRanks + 1]float64{1}
 var NoxiousBreathBaseDamage = [NoxiousBreathRanks + 1][]float64{{10000, 10000}}
 var NoxiousBreathPointsPerLevel = [NoxiousBreathRanks + 1]float64{0}
 var NoxiousBreathMaxLevel = [NoxiousBreathRanks + 1]int{0}
+
+// Oath of Light: ranks 0 present, from build 1.60.1.70707.
+const OathOfLightRanks = 0
+
+var OathOfLightSpellId = [OathOfLightRanks + 1]int32{1328548}
+var OathOfLightLevel = [OathOfLightRanks + 1]int{0}
+var OathOfLightCastTime = [OathOfLightRanks + 1]int32{0}
+var OathOfLightCooldownMS = [OathOfLightRanks + 1]int32{0}
+var OathOfLightManaCost = [OathOfLightRanks + 1]float64{0}
+var OathOfLightManaCostPct = [OathOfLightRanks + 1]float64{8}
+var OathOfLightSpellCoeff = [OathOfLightRanks + 1]float64{10}
+var OathOfLightBaseDamage = [OathOfLightRanks + 1][]float64{{0, 0}}
+var OathOfLightPointsPerLevel = [OathOfLightRanks + 1]float64{6.6667}
+var OathOfLightMaxLevel = [OathOfLightRanks + 1]int{0}
+
+// unconfirmed: Oath of Light coefficient derived from the vanilla convention (rank 0)
 
 // Purify: ranks 0 present, from build 1.60.1.70707.
 const PurifyRanks = 0
@@ -2834,22 +2818,6 @@ var RevelationSpellCoeff = [RevelationRanks + 1]float64{1}
 var RevelationBaseDamage = [RevelationRanks + 1][]float64{{100, 100}}
 var RevelationPointsPerLevel = [RevelationRanks + 1]float64{0}
 var RevelationMaxLevel = [RevelationRanks + 1]int{0}
-
-// Revoke: ranks 0 present, from build 1.60.1.70707.
-const RevokeRanks = 0
-
-var RevokeSpellId = [RevokeRanks + 1]int32{1325499}
-var RevokeLevel = [RevokeRanks + 1]int{26}
-var RevokeCastTime = [RevokeRanks + 1]int32{0}
-var RevokeCooldownMS = [RevokeRanks + 1]int32{0}
-var RevokeManaCost = [RevokeRanks + 1]float64{0}
-var RevokeManaCostPct = [RevokeRanks + 1]float64{0}
-var RevokeSpellCoeff = [RevokeRanks + 1]float64{0.2143}
-var RevokeBaseDamage = [RevokeRanks + 1][]float64{{0, 0}}
-var RevokePointsPerLevel = [RevokeRanks + 1]float64{0}
-var RevokeMaxLevel = [RevokeRanks + 1]int{0}
-
-// unconfirmed: Revoke coefficient derived from the vanilla convention (rank 0)
 
 // Righteous Fury: ranks 0 present, from build 1.60.1.70707.
 const RighteousFuryRanks = 0
@@ -3692,7 +3660,7 @@ var SacredDutyCooldownMS = [SacredDutyRanks + 1]int32{0}
 var SacredDutyManaCost = [SacredDutyRanks + 1]float64{0}
 var SacredDutyManaCostPct = [SacredDutyRanks + 1]float64{0}
 var SacredDutySpellCoeff = [SacredDutyRanks + 1]float64{0.2143}
-var SacredDutyBaseDamage = [SacredDutyRanks + 1][]float64{{4, 4}}
+var SacredDutyBaseDamage = [SacredDutyRanks + 1][]float64{{0, 0}}
 var SacredDutyPointsPerLevel = [SacredDutyRanks + 1]float64{0}
 var SacredDutyMaxLevel = [SacredDutyRanks + 1]int{0}
 
@@ -3731,22 +3699,6 @@ var SacrificeRedeemedPointsPerLevel = [SacrificeRedeemedRanks + 1]float64{0}
 var SacrificeRedeemedMaxLevel = [SacrificeRedeemedRanks + 1]int{0}
 
 // unconfirmed: Sacrifice Redeemed coefficient derived from the vanilla convention (rank 0)
-
-// Salvation: ranks 0 present, from build 1.60.1.70707.
-const SalvationRanks = 0
-
-var SalvationSpellId = [SalvationRanks + 1]int32{1038}
-var SalvationLevel = [SalvationRanks + 1]int{26}
-var SalvationCastTime = [SalvationRanks + 1]int32{0}
-var SalvationCooldownMS = [SalvationRanks + 1]int32{0}
-var SalvationManaCost = [SalvationRanks + 1]float64{0}
-var SalvationManaCostPct = [SalvationRanks + 1]float64{8}
-var SalvationSpellCoeff = [SalvationRanks + 1]float64{120}
-var SalvationBaseDamage = [SalvationRanks + 1][]float64{{0, 0}}
-var SalvationPointsPerLevel = [SalvationRanks + 1]float64{0}
-var SalvationMaxLevel = [SalvationRanks + 1]int{0}
-
-// unconfirmed: Salvation coefficient derived from the vanilla convention (rank 0)
 
 // Sanctified Judgement: ranks 0 present, from build 1.60.1.70707.
 const SanctifiedJudgementRanks = 0
@@ -4070,6 +4022,23 @@ var ShieldedInRighteousnessMaxLevel = [ShieldedInRighteousnessRanks + 1]int{0}
 
 // unconfirmed: Shielded in Righteousness coefficient derived from the vanilla convention (rank 0)
 
+// Shieldsworn: ranks 0 present, from build 1.60.1.70707.
+const ShieldswornRanks = 0
+
+var ShieldswornSpellId = [ShieldswornRanks + 1]int32{1328551}
+var ShieldswornLevel = [ShieldswornRanks + 1]int{1}
+var ShieldswornCastTime = [ShieldswornRanks + 1]int32{0}
+var ShieldswornCooldownMS = [ShieldswornRanks + 1]int32{0}
+var ShieldswornManaCost = [ShieldswornRanks + 1]float64{0}
+var ShieldswornManaCostPct = [ShieldswornRanks + 1]float64{0}
+var ShieldswornSpellCoeff = [ShieldswornRanks + 1]float64{0.2}
+var ShieldswornBaseDamage = [ShieldswornRanks + 1][]float64{{0, 0}}
+var ShieldswornPointsPerLevel = [ShieldswornRanks + 1]float64{0}
+var ShieldswornMaxLevel = [ShieldswornRanks + 1]int{0}
+
+// unconfirmed: Shieldsworn coefficient derived from the vanilla convention (rank 0)
+// Shieldsworn rank 0: kept id 1328551 (spell_level 1); dropped 1328544 (spell_level 1)
+
 // Shock and Awe: ranks 0 present, from build 1.60.1.70707.
 const ShockAndAweRanks = 0
 
@@ -4128,6 +4097,36 @@ var SteadfastSpellCoeff = [SteadfastRanks + 1]float64{1}
 var SteadfastBaseDamage = [SteadfastRanks + 1][]float64{{30, 30}}
 var SteadfastPointsPerLevel = [SteadfastRanks + 1]float64{0}
 var SteadfastMaxLevel = [SteadfastRanks + 1]int{0}
+
+// Stoicism: ranks 0 present, from build 1.60.1.70707.
+const StoicismRanks = 0
+
+var StoicismSpellId = [StoicismRanks + 1]int32{1328546}
+var StoicismLevel = [StoicismRanks + 1]int{1}
+var StoicismCastTime = [StoicismRanks + 1]int32{0}
+var StoicismCooldownMS = [StoicismRanks + 1]int32{0}
+var StoicismManaCost = [StoicismRanks + 1]float64{0}
+var StoicismManaCostPct = [StoicismRanks + 1]float64{0}
+var StoicismSpellCoeff = [StoicismRanks + 1]float64{1}
+var StoicismBaseDamage = [StoicismRanks + 1][]float64{{0, 0}}
+var StoicismPointsPerLevel = [StoicismRanks + 1]float64{0}
+var StoicismMaxLevel = [StoicismRanks + 1]int{0}
+
+// Stun: ranks 1 present, from build 1.60.1.70707.
+const StunRanks = 1
+
+var StunSpellId = [StunRanks + 1]int32{0, 20170}
+var StunLevel = [StunRanks + 1]int{0, 22}
+var StunCastTime = [StunRanks + 1]int32{0, 0}
+var StunCooldownMS = [StunRanks + 1]int32{0, 0}
+var StunManaCost = [StunRanks + 1]float64{0, 0}
+var StunManaCostPct = [StunRanks + 1]float64{0, 0}
+var StunSpellCoeff = [StunRanks + 1]float64{0, 0.0667}
+var StunBaseDamage = [StunRanks + 1][]float64{{0, 0}, {0, 0}}
+var StunPointsPerLevel = [StunRanks + 1]float64{0, 0}
+var StunMaxLevel = [StunRanks + 1]int{0, 0}
+
+// unconfirmed: Stun coefficient derived from the vanilla convention (rank 1)
 
 // Sunlight: ranks 0 present, from build 1.60.1.70707.
 const SunlightRanks = 0
@@ -4197,7 +4196,7 @@ var TemplarMaxLevel = [TemplarRanks + 1]int{0}
 const TemplarSBulwarkRanks = 0
 
 var TemplarSBulwarkSpellId = [TemplarSBulwarkRanks + 1]int32{1311015}
-var TemplarSBulwarkLevel = [TemplarSBulwarkRanks + 1]int{30}
+var TemplarSBulwarkLevel = [TemplarSBulwarkRanks + 1]int{0}
 var TemplarSBulwarkCastTime = [TemplarSBulwarkRanks + 1]int32{0}
 var TemplarSBulwarkCooldownMS = [TemplarSBulwarkRanks + 1]int32{300000}
 var TemplarSBulwarkManaCost = [TemplarSBulwarkRanks + 1]float64{110}
@@ -4259,6 +4258,22 @@ var TheQuickAndTheDeadMaxLevel = [TheQuickAndTheDeadRanks + 1]int{0}
 
 // unconfirmed: The Quick and the Dead coefficient derived from the vanilla convention (rank 0)
 
+// Turn Evil: ranks 0-3 present, from build 1.60.1.70707.
+const TurnEvilRanks = 3
+
+var TurnEvilSpellId = [TurnEvilRanks + 1]int32{1328370, 1328374, 1328373, 1328372}
+var TurnEvilLevel = [TurnEvilRanks + 1]int{0, 38, 38, 52}
+var TurnEvilCastTime = [TurnEvilRanks + 1]int32{0, 1500, 1500, 1500}
+var TurnEvilCooldownMS = [TurnEvilRanks + 1]int32{0, 30000, 30000, 30000}
+var TurnEvilManaCost = [TurnEvilRanks + 1]float64{0, 35, 50, 75}
+var TurnEvilManaCostPct = [TurnEvilRanks + 1]float64{0, 0, 0, 0}
+var TurnEvilSpellCoeff = [TurnEvilRanks + 1]float64{1, 0.3333, 0.5, 0.6667}
+var TurnEvilBaseDamage = [TurnEvilRanks + 1][]float64{{0, 0}, {0, 0}, {0, 0}, {0, 0}}
+var TurnEvilPointsPerLevel = [TurnEvilRanks + 1]float64{0, 0, 0, 0}
+var TurnEvilMaxLevel = [TurnEvilRanks + 1]int{0, 0, 0, 0}
+
+// unconfirmed: Turn Evil coefficient derived from the vanilla convention (rank 1, rank 2, rank 3)
+
 // Turn Undead: ranks 1-3 present, from build 1.60.1.70707.
 const TurnUndeadRanks = 3
 
@@ -4275,19 +4290,19 @@ var TurnUndeadMaxLevel = [TurnUndeadRanks + 1]int{0, 0, 0, 0}
 
 // unconfirmed: Turn Undead coefficient derived from the vanilla convention (rank 1, rank 2, rank 3)
 
-// Twist of Light: ranks 0 present, from build 1.60.1.70707.
-const TwistOfLightRanks = 0
+// Unsealed Wrath: ranks 0 present, from build 1.60.1.70707.
+const UnsealedWrathRanks = 0
 
-var TwistOfLightSpellId = [TwistOfLightRanks + 1]int32{1310735}
-var TwistOfLightLevel = [TwistOfLightRanks + 1]int{0}
-var TwistOfLightCastTime = [TwistOfLightRanks + 1]int32{0}
-var TwistOfLightCooldownMS = [TwistOfLightRanks + 1]int32{0}
-var TwistOfLightManaCost = [TwistOfLightRanks + 1]float64{0}
-var TwistOfLightManaCostPct = [TwistOfLightRanks + 1]float64{0}
-var TwistOfLightSpellCoeff = [TwistOfLightRanks + 1]float64{1}
-var TwistOfLightBaseDamage = [TwistOfLightRanks + 1][]float64{{0, 0}}
-var TwistOfLightPointsPerLevel = [TwistOfLightRanks + 1]float64{0}
-var TwistOfLightMaxLevel = [TwistOfLightRanks + 1]int{0}
+var UnsealedWrathSpellId = [UnsealedWrathRanks + 1]int32{1310735}
+var UnsealedWrathLevel = [UnsealedWrathRanks + 1]int{0}
+var UnsealedWrathCastTime = [UnsealedWrathRanks + 1]int32{0}
+var UnsealedWrathCooldownMS = [UnsealedWrathRanks + 1]int32{0}
+var UnsealedWrathManaCost = [UnsealedWrathRanks + 1]float64{0}
+var UnsealedWrathManaCostPct = [UnsealedWrathRanks + 1]float64{0}
+var UnsealedWrathSpellCoeff = [UnsealedWrathRanks + 1]float64{1}
+var UnsealedWrathBaseDamage = [UnsealedWrathRanks + 1][]float64{{0, 0}}
+var UnsealedWrathPointsPerLevel = [UnsealedWrathRanks + 1]float64{0}
+var UnsealedWrathMaxLevel = [UnsealedWrathRanks + 1]int{0}
 
 // Vengeance: ranks 0 present, from build 1.60.1.70707.
 const VengeanceRanks = 0

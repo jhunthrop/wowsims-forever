@@ -302,8 +302,7 @@
               "description": "Swear an Oath to protect target ally for 5 min, increasing the healing of your Holy Light on them by up to 0, your Flash of Light by up to 0, and your Holy Shock by up to 0. Only one Oath of Light may be sworn by the Paladin at any one time."
             }
           ],
-          "spell_id": 1328548,
-          "hotfix_only": true
+          "spell_id": 1328548
         },
         {
           "id": 110872,
@@ -362,8 +361,7 @@
               "description": "Increases the critical strike chance of your Holy Shock spell by 30% when cast on allies not affected by your Oath of Light."
             }
           ],
-          "spell_id": 1328550,
-          "hotfix_only": true
+          "spell_id": 1328550
         },
         {
           "id": 105321,
@@ -747,8 +745,7 @@
               "description": "Reduces the duration of Stun and Charm effects on you by 20%."
             }
           ],
-          "spell_id": 1328546,
-          "hotfix_only": true
+          "spell_id": 1328546
         },
         {
           "id": 105628,
@@ -840,8 +837,7 @@
               "description": "Reduces the cooldown of your Holy Strike ability by 4 sec. Additionally, Holy Strike now strikes with your shield, triggering your active Holy Shield and Shield Specialization talents without consuming their charges or triggering their cooldowns, and allowing you to Block spells for 6 sec."
             }
           ],
-          "spell_id": 1328544,
-          "hotfix_only": true
+          "spell_id": 1328544
         }
       ],
       "background": "paladinprotection",
@@ -1155,8 +1151,7 @@
               "description": "Reduces the cast time of your Turn Undead spell by 1.0 sec, its cooldown by 10 sec, and allows it to affect Demons."
             }
           ],
-          "spell_id": 1328370,
-          "hotfix_only": true
+          "spell_id": 1328370
         },
         {
           "id": 105694,

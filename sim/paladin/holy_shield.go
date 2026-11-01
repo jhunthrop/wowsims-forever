@@ -17,10 +17,10 @@ import (
 // down with them: the 70707 hotfix push of 31 October (wago.tools/hotfixes)
 // sets SpellPower 185892, 186383 and 184913 to 100, 150 and 195, the levels
 // and amounts to the ones below, and Wowhead's live tooltips read the same.
-// The client's shipped spell rows (spellconst/paladin.json) still carry the
-// old values (levels 40/50/60, 110/153/221, 150/195/240 mana) because the
-// change is a hotfix those tables do not hold; the 0.08 spell-power
-// coefficient is theirs.
+// The client tables (spellconst/paladin.json) carry the same since the
+// site's pipeline layers the server's push (round 6; the shipped rows read
+// levels 40/50/60, 110/153/221 and 150/195/240 mana), and the 0.08
+// spell-power coefficient is theirs.
 //
 // procID is the engine's own id for the damage spell: the client states
 // the damage on the aura rather than on a spell of its own.

@@ -1582,7 +1582,7 @@
       "cost": 160,
       "cost_type": 0,
       "cast_time_ms": 0,
-      "cooldown_ms": 0,
+      "cooldown_ms": 8000,
       "ranks": [
         {
           "id": 1312002,

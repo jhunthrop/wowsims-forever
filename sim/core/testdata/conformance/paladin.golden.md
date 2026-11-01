@@ -67,6 +67,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 20 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 20 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 20 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 30 |  | 0 | 1038 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Blessing of Kings | 0 | 20217 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -103,7 +104,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 30 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Righteous Fury | 0 | 25780 | 210.60 (30% base mana)→210.60 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 30 | Salvation | 0 | 1038 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | HolyPaladin | 30 | Seal of Fury | 0 | 1311647 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→6.00-6.00 | 0.100→0.100 | declared, matches |
 | HolyPaladin | 30 | Seal of Fury | 0 | 1311654 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 9.00-9.00→9.00-9.00 | 0.100→0.100 | declared, matches |
@@ -123,6 +123,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 30 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 38 |  | 0 | 1038 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Blessing of Kings | 0 | 20217 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -170,7 +171,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 38 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Righteous Fury | 0 | 25780 | 279.90 (30% base mana)→279.90 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 38 | Salvation | 0 | 1038 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | HolyPaladin | 38 | Seal of Fury | 0 | 20415 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→19.00-19.00 | 0.100→0.100 | declared, matches |
 | HolyPaladin | 38 | Seal of Fury | 0 | 1311647 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→6.00-6.00 | 0.100→0.100 | declared, matches |
@@ -196,8 +196,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 38 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 |  | 0 | 1038 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 40 |  | 1 | 19977 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Blessing of Kings | 0 | 20217 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 40 | Blessing of Light | 1 | 19977 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Blessing of Might | 3 | 19835 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -247,7 +248,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 40 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Righteous Fury | 0 | 25780 | 296.10 (30% base mana)→296.10 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 40 | Salvation | 0 | 1038 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | HolyPaladin | 40 | Seal of Fury | 0 | 20415 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→19.00-19.00 | 0.100→0.100 | declared, matches |
 | HolyPaladin | 40 | Seal of Fury | 0 | 1311647 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→6.00-6.00 | 0.100→0.100 | declared, matches |
@@ -275,9 +275,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 40 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 |  | 0 | 1038 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 |  | 1 | 19977 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 50 |  | 2 | 19978 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Blessing of Kings | 0 | 20217 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 50 | Blessing of Light | 1 | 19977 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 50 | Blessing of Light | 2 | 19978 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Blessing of Might | 3 | 19835 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -344,7 +345,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 50 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Righteous Fury | 0 | 25780 | 377.10 (30% base mana)→377.10 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 50 | Salvation | 0 | 1038 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | HolyPaladin | 50 | Seal of Fury | 0 | 20415 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→19.00-19.00 | 0.100→0.100 | declared, matches |
 | HolyPaladin | 50 | Seal of Fury | 0 | 20416 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 25.00-25.00→25.00-25.00 | 0.100→0.100 | declared, matches |
@@ -384,10 +384,13 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 50 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Seal of the Crusader | 5 | 20307 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 30000→30000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 |  | 0 | 1038 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 |  | 0 | 25890 | 260.00→260.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 |  | 0 | 25895 | 241.92 (16% base mana)→241.92 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 |  | 1 | 19977 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 |  | 2 | 19978 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| HolyPaladin | 60 |  | 3 | 19979 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Blessing of Kings | 0 | 20217 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 60 | Blessing of Light | 1 | 19977 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 60 | Blessing of Light | 2 | 19978 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 60 | Blessing of Light | 3 | 19979 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Blessing of Might | 3 | 19835 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -421,7 +424,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 60 | Flash of Light | 5 | 19942 | 115.00→115.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | n/a | match |  | 220.77-247.23→220.77-247.23 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 60 | Flash of Light | 6 | 19943 | 140.00→140.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 58→58 | n/a | match |  | 291.22-325.18→291.22-325.18 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 60 | Greater Blessing of Kings | 0 | 25898 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 60 | Greater Blessing of Light | 0 | 25890 | 260.00→260.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Greater Blessing of Might | 1 | 25782 | 220.00→220.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Greater Blessing of Might | 2 | 25916 | 260.00→260.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Greater Blessing of Wisdom | 1 | 25894 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -479,9 +481,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 60 | Judgement of the Crusader | 0 | 20303 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  | n/a | n/a | n/a |
-| HolyPaladin | 60 | Mass Salvation | 0 | 25895 | 241.92 (16% base mana)→241.92 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Righteous Fury | 0 | 25780 | 453.60 (30% base mana)→453.60 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 60 | Salvation | 0 | 1038 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | HolyPaladin | 60 | Seal of Fury | 0 | 20415 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→19.00-19.00 | 0.100→0.100 | declared, matches |
 | HolyPaladin | 60 | Seal of Fury | 0 | 20416 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 25.00-25.00→25.00-25.00 | 0.100→0.100 | declared, matches |
@@ -578,6 +578,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 20 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 20 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 20 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin | 30 |  | 0 | 1038 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Blessing of Kings | 0 | 20217 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -607,7 +608,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 30 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Righteous Fury | 0 | 25780 | 210.60 (30% base mana)→210.60 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 30 | Salvation | 0 | 1038 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | ProtectionPaladin | 30 | Seal of Fury | 0 | 1311647 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→6.00-6.00 | 0.100→0.100 | declared, matches |
 | ProtectionPaladin | 30 | Seal of Fury | 0 | 1311654 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 9.00-9.00→9.00-9.00 | 0.100→0.100 | declared, matches |
@@ -627,6 +627,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 30 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin | 38 |  | 0 | 1038 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Blessing of Kings | 0 | 20217 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -665,7 +666,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 38 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Righteous Fury | 0 | 25780 | 279.90 (30% base mana)→279.90 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 38 | Salvation | 0 | 1038 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | ProtectionPaladin | 38 | Seal of Fury | 0 | 20415 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→19.00-19.00 | 0.100→0.100 | declared, matches |
 | ProtectionPaladin | 38 | Seal of Fury | 0 | 1311647 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→6.00-6.00 | 0.100→0.100 | declared, matches |
@@ -691,6 +691,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 38 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin | 40 |  | 0 | 1038 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Blessing of Kings | 0 | 20217 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -732,7 +733,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 40 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Righteous Fury | 0 | 25780 | 296.10 (30% base mana)→296.10 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 40 | Salvation | 0 | 1038 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | ProtectionPaladin | 40 | Seal of Fury | 0 | 20415 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→19.00-19.00 | 0.100→0.100 | declared, matches |
 | ProtectionPaladin | 40 | Seal of Fury | 0 | 1311647 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→6.00-6.00 | 0.100→0.100 | declared, matches |
@@ -760,6 +760,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 40 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin | 50 |  | 0 | 1038 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Blessing of Kings | 0 | 20217 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -815,7 +816,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 50 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Righteous Fury | 0 | 25780 | 377.10 (30% base mana)→377.10 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 50 | Salvation | 0 | 1038 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | ProtectionPaladin | 50 | Seal of Fury | 0 | 20415 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→19.00-19.00 | 0.100→0.100 | declared, matches |
 | ProtectionPaladin | 50 | Seal of Fury | 0 | 20416 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 25.00-25.00→25.00-25.00 | 0.100→0.100 | declared, matches |
@@ -855,6 +855,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 50 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Seal of the Crusader | 5 | 20307 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 30000→30000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin | 60 |  | 0 | 1038 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin | 60 |  | 0 | 25895 | 241.92 (16% base mana)→241.92 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Blessing of Kings | 0 | 20217 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -931,9 +933,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 20303 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 60 | Mass Salvation | 0 | 25895 | 241.92 (16% base mana)→241.92 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Righteous Fury | 0 | 25780 | 453.60 (30% base mana)→453.60 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 60 | Salvation | 0 | 1038 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | ProtectionPaladin | 60 | Seal of Fury | 0 | 20415 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→19.00-19.00 | 0.100→0.100 | declared, matches |
 | ProtectionPaladin | 60 | Seal of Fury | 0 | 20416 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 25.00-25.00→25.00-25.00 | 0.100→0.100 | declared, matches |
@@ -1030,6 +1030,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 20 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 20 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 20 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
+| RetributionPaladin | 30 |  | 0 | 1038 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Blessing of Kings | 0 | 20217 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -1059,7 +1060,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 30 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Righteous Fury | 0 | 25780 | 210.60 (30% base mana)→210.60 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 30 | Salvation | 0 | 1038 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | RetributionPaladin | 30 | Seal of Fury | 0 | 1311647 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→6.00-6.00 | 0.100→0.100 | declared, matches |
 | RetributionPaladin | 30 | Seal of Fury | 0 | 1311654 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 9.00-9.00→9.00-9.00 | 0.100→0.100 | declared, matches |
@@ -1079,6 +1079,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 30 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
+| RetributionPaladin | 38 |  | 0 | 1038 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Blessing of Kings | 0 | 20217 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -1117,7 +1118,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 38 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Righteous Fury | 0 | 25780 | 279.90 (30% base mana)→279.90 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 38 | Salvation | 0 | 1038 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | RetributionPaladin | 38 | Seal of Fury | 0 | 20415 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→19.00-19.00 | 0.100→0.100 | declared, matches |
 | RetributionPaladin | 38 | Seal of Fury | 0 | 1311647 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→6.00-6.00 | 0.100→0.100 | declared, matches |
@@ -1143,6 +1143,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 38 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
+| RetributionPaladin | 40 |  | 0 | 1038 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Blessing of Kings | 0 | 20217 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -1184,7 +1185,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 40 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Lay on Hands | 0 | 2800 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Righteous Fury | 0 | 25780 | 296.10 (30% base mana)→296.10 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 40 | Salvation | 0 | 1038 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | RetributionPaladin | 40 | Seal of Fury | 0 | 20415 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→19.00-19.00 | 0.100→0.100 | declared, matches |
 | RetributionPaladin | 40 | Seal of Fury | 0 | 1311647 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 6.00-6.00→6.00-6.00 | 0.100→0.100 | declared, matches |
@@ -1212,6 +1212,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 40 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
+| RetributionPaladin | 50 |  | 0 | 1038 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Blessing of Kings | 0 | 20217 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -1267,7 +1268,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 50 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Righteous Fury | 0 | 25780 | 377.10 (30% base mana)→377.10 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 50 | Salvation | 0 | 1038 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | RetributionPaladin | 50 | Seal of Fury | 0 | 20415 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→19.00-19.00 | 0.100→0.100 | declared, matches |
 | RetributionPaladin | 50 | Seal of Fury | 0 | 20416 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 25.00-25.00→25.00-25.00 | 0.100→0.100 | declared, matches |
@@ -1307,6 +1307,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 50 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Seal of the Crusader | 5 | 20307 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 30000→30000 | match |  | n/a | n/a | n/a |
+| RetributionPaladin | 60 |  | 0 | 1038 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
+| RetributionPaladin | 60 |  | 0 | 25895 | 241.92 (16% base mana)→241.92 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Blessing of Kings | 0 | 20217 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -1383,9 +1385,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 60 | Judgement of the Crusader | 0 | 20303 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Judgement of the Crusader | 0 | 21183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 6→6 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Lay on Hands | 0 | 10310 | 0.00→0.00 | mana→none | 1200000→1200000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 60 | Mass Salvation | 0 | 25895 | 241.92 (16% base mana)→241.92 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Righteous Fury | 0 | 25780 | 453.60 (30% base mana)→453.60 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 1800000→1800000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 60 | Salvation | 0 | 1038 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Seal of Fury | 0 | 20231 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 14.00-14.00→14.00-14.00 | 0.100→0.100 | declared, matches |
 | RetributionPaladin | 60 | Seal of Fury | 0 | 20415 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 19.00-19.00→19.00-19.00 | 0.100→0.100 | declared, matches |
 | RetributionPaladin | 60 | Seal of Fury | 0 | 20416 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | 0→30000 | client-scripted | duration_ms: client states none (0), engine keeps 30000ms | 25.00-25.00→25.00-25.00 | 0.100→0.100 | declared, matches |
@@ -1487,16 +1487,16 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Divine Favor talent) | 40 | Divine Favor | 0 | 20216 | 39.48 (4% base mana)→39.48 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Divine Favor talent) | 50 | Divine Favor | 0 | 20216 | 50.28 (4% base mana)→50.28 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Divine Favor talent) | 60 | Divine Favor | 0 | 20216 | 60.48 (4% base mana)→60.48 | mana→mana | 120000→120000 | 0→0 | 0→0 | 0→0 | -1→-1 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 30 | Holy Shield | 1 | 20925 | 150.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→30 | 10000→10000 | mismatch | cost 150.00->100.00; required_level 40->30 | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 38 | Holy Shield | 1 | 20925 | 150.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→30 | 10000→10000 | mismatch | cost 150.00->100.00; required_level 40->30 | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 40 | Holy Shield | 1 | 20925 | 150.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→30 | 10000→10000 | mismatch | cost 150.00->100.00; required_level 40->30 | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 40 | Holy Shield | 2 | 20927 | 195.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→40 | 10000→10000 | mismatch | cost 195.00->150.00; required_level 50->40 | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 1 | 20925 | 150.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→30 | 10000→10000 | mismatch | cost 150.00->100.00; required_level 40->30 | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 2 | 20927 | 195.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→40 | 10000→10000 | mismatch | cost 195.00->150.00; required_level 50->40 | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 3 | 20928 | 240.00→195.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 60→50 | 10000→10000 | mismatch | cost 240.00->195.00; required_level 60->50 | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 1 | 20925 | 150.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→30 | 10000→10000 | mismatch | cost 150.00->100.00; required_level 40->30 | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 2 | 20927 | 195.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→40 | 10000→10000 | mismatch | cost 195.00->150.00; required_level 50->40 | n/a | n/a | n/a |
-| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 3 | 20928 | 240.00→195.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 60→50 | 10000→10000 | mismatch | cost 240.00->195.00; required_level 60->50 | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 30 | Holy Shield | 1 | 20925 | 100.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 38 | Holy Shield | 1 | 20925 | 100.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 40 | Holy Shield | 1 | 20925 | 100.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 40 | Holy Shield | 2 | 20927 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 1 | 20925 | 100.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 2 | 20927 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 50 | Holy Shield | 3 | 20928 | 195.00→195.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 1 | 20925 | 100.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 2 | 20927 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 3 | 20928 | 195.00→195.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shock talent) | 40 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shock talent) | 50 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shock talent) | 50 | Holy Shock | 2 | 20929 | 275.00→275.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | n/a | n/a | n/a |
@@ -1550,14 +1550,14 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Swift Judgement talent) | 40 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Swift Judgement talent) | 50 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Swift Judgement talent) | 60 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Templar's Bulwark talent) | 30 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Templar's Bulwark talent) | 38 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Templar's Bulwark talent) | 40 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Templar's Bulwark talent) | 50 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Templar's Bulwark talent) | 60 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 30→30 | 8000→8000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Templar's Bulwark talent) | 30 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→30 | 8000→8000 | mismatch | required_level 0->30 | n/a | n/a | n/a |
+| ProtectionPaladin (Templar's Bulwark talent) | 38 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→30 | 8000→8000 | mismatch | required_level 0->30 | n/a | n/a | n/a |
+| ProtectionPaladin (Templar's Bulwark talent) | 40 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→30 | 8000→8000 | mismatch | required_level 0->30 | n/a | n/a | n/a |
+| ProtectionPaladin (Templar's Bulwark talent) | 50 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→30 | 8000→8000 | mismatch | required_level 0->30 | n/a | n/a | n/a |
+| ProtectionPaladin (Templar's Bulwark talent) | 60 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→30 | 8000→8000 | mismatch | required_level 0->30 | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 11 of the class's 45 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 12 of the class's 41 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
@@ -1567,6 +1567,7 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Redemption (7328) | 12→60 | 5 | Holy | skill_line_ability | 0 | 10000 | 0 | cast time |
 | Blessing of Freedom (1044) | 18→18 | 1 | Protection | skill_line_ability | 0 | 0 | 20000 | cooldown |
 | Repentance (20066) | 20→20 | 1 | Retribution | skill_line_ability | 60 mana | 0 | 60000 | power cost, cooldown |
+| Voice of Truth (1310897) | 20→20 | 1 | Holy | skill_line_ability | 0 | 0 | 180000 | cooldown |
 | Seal of Justice (20164) | 22→22 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
 | Turn Undead (2878) | 24→52 | 3 | Holy | skill_line_ability | 75 mana | 1500 | 30000 | power cost, cast time, cooldown |
 | Divine Intervention (19752) | 30→30 | 1 | Protection | skill_line_ability | 0 | 0 | 3600000 | cooldown |
@@ -1579,5 +1580,6 @@ Active, ranked, levelled class-family spells the client lists on no SkillLineAbi
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
+| Turn Evil (1328374) | 38→52 | 3 | n/a | class_spell | 75 mana | 1500 | 30000 | power cost, cast time, cooldown |
 | Sacred Shield (53601) | 80→80 | 1 | n/a | class_spell | 0 | 0 | 0 |  |
 
