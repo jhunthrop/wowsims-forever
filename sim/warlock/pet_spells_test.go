@@ -31,12 +31,14 @@ func TestFireboltUsesTheClientRoll(t *testing.T) {
 // Unholy Power raises "all damage done by your Imp, Voidwalker, Succubus,
 // Incubus, and Felhunter pets" by 2% a rank, and the Firebolt tooltip applies
 // it, so it is a pet-wide multiplier: the Imp's Firebolt gains it, and the
-// Succubus' melee and Lash of Pain gain it once, not twice.
+// Succubus' melee and Lash of Pain gain it once, not twice. The test warlock
+// is an orc, so Command's 5% pet damage multiplies in as well.
 func TestUnholyPowerRaisesAllDemonDamageOnce(t *testing.T) {
 	_, warlock := newPetInheritanceTestWarlock(t, proto.WarlockOptions_Imp)
+	const want = 1.10 * 1.05
 	for _, pet := range []*WarlockPet{warlock.Imp, warlock.Succubus} {
-		if got := pet.PseudoStats.DamageDealtMultiplier; math.Abs(got-1.10) > 1e-9 {
-			t.Errorf("%s damage dealt multiplier = %.3f, want Unholy Power's 1.10", pet.Name, got)
+		if got := pet.PseudoStats.DamageDealtMultiplier; math.Abs(got-want) > 1e-9 {
+			t.Errorf("%s damage dealt multiplier = %.4f, want Unholy Power's 1.10 times Command's 1.05", pet.Name, got)
 		}
 	}
 	if got := warlock.Succubus.AutoAttacks.MHConfig().DamageMultiplier; got != 1 {
