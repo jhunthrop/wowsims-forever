@@ -30,8 +30,6 @@ type directHeal struct {
 	coefficient float64
 	spellCode   int32
 	classMask   uint64
-	// blessing is which of Blessing of Light's two bonuses this heal reads.
-	blessing blessingOfLightHeal
 }
 
 func (paladin *Paladin) isHealer() bool {
@@ -48,7 +46,6 @@ func (paladin *Paladin) registerHealing() {
 	paladin.registerHolyLight()
 	paladin.registerFlashOfLight()
 	paladin.registerLightsVigil()
-	paladin.registerBlessingOfLight()
 }
 
 func (paladin *Paladin) registerDirectHeal(heal directHeal) {
@@ -91,10 +88,7 @@ func (paladin *Paladin) registerDirectHealRank(heal directHeal, rankNumber int, 
 		PushbackReduction: paladin.spiritualFocusPushbackReduction(heal.classMask),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			// The blessing is bonus healing for this one spell, so it is
-			// scaled by the spell's coefficient like healing power is.
-			bonusHealing := paladin.blessingOfLightBonus(target, heal.blessing)
-			baseHealing := rank.heal.Roll(sim, casterLevel) + heal.coefficient*bonusHealing
+			baseHealing := rank.heal.Roll(sim, casterLevel)
 			spell.CalcAndDealHealing(sim, target, baseHealing, spell.OutcomeHealingCrit)
 		},
 	})

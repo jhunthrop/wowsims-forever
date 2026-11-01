@@ -163,9 +163,7 @@ type Paladin struct {
 	holyWrath      []*core.Spell
 
 	// Healing, registered for the healing spec only (healing.go).
-	blessingOfLightAuras   core.AuraArray
-	blessingOfLightBonuses []blessingOfLightBonus
-	lightsVigil            lightsVigilState
+	lightsVigil lightsVigilState
 	// illuminationBaseCost is the mana cost Illumination returns half of
 	// for each heal that can trigger it.
 	illuminationBaseCost map[*core.Spell]float64

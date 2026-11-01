@@ -105,24 +105,3 @@ func TestLightsVigilHealMatchesClient(t *testing.T) {
 		}
 	}
 }
-
-func TestBlessingOfLightMatchesClient(t *testing.T) {
-	client := clientdamagetest.Load(t, clientPaladinSpellconst)
-	for _, rank := range append(append([]blessingOfLightRank{}, blessingOfLightRanks...), greaterBlessingOfLight) {
-		spell, ok := client.ByID(rank.spellID)
-		if !ok {
-			t.Fatalf("Blessing of Light %d is not in the client table", rank.spellID)
-		}
-		if spell.SpellLevel != rank.level || spell.Cost != rank.manaCost {
-			t.Errorf("Blessing of Light %d: engine level %d cost %v, client %d / %v", rank.spellID, rank.level, rank.manaCost, spell.SpellLevel, spell.Cost)
-		}
-		for heal, effect := range spell.Effects[:blessingOfLightHealKinds] {
-			if float64(effect.Amount) != rank.bonus[heal] {
-				t.Errorf("Blessing of Light %d effect %d: engine %v, client %v", rank.spellID, heal, rank.bonus[heal], effect.Amount)
-			}
-		}
-		if spell.DurationMS != int32(blessingOfLightDuration.Milliseconds()) {
-			t.Errorf("Blessing of Light %d: engine duration %v, client %dms", rank.spellID, blessingOfLightDuration, spell.DurationMS)
-		}
-	}
-}

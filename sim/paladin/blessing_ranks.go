@@ -21,8 +21,7 @@ type blessingSpell struct {
 	// cost_pct); zero for a flat-cost blessing.
 	baseManaPct float64
 	// amount is the effect's base points: attack power for Might, mana per
-	// five seconds for Wisdom, the stat percentage for Kings and the threat
-	// percentage for Salvation.
+	// five seconds for Wisdom and the stat percentage for Kings.
 	amount float64
 }
 
@@ -54,10 +53,6 @@ const (
 	// blessingOfKingsStatBonus is Blessing of Kings' effect 0 (spell 20217,
 	// aura 137 "modify total stat percentage", amount 10).
 	blessingOfKingsStatBonus = 10
-	// blessingOfSalvationThreatReduction is Blessing of Salvation's effect 0
-	// (spell 1038, aura 10 "modify threat", amount -30), as a positive
-	// percentage.
-	blessingOfSalvationThreatReduction = 30
 )
 
 // Trainables "Blessing of Might" (19740...25291), mana costs 20 to 130.
@@ -93,13 +88,7 @@ var (
 	}
 )
 
-// Blessing of Salvation: 1038 (level 26, 8% of base mana) and Greater 25895
-// (level 60, 16% of base mana).
-var (
-	blessingOfSalvationSpells = []blessingSpell{
-		{spellID: 1038, level: 26, baseManaPct: 8, amount: blessingOfSalvationThreatReduction},
-	}
-	greaterBlessingOfSalvationSpells = []blessingSpell{
-		{spellID: 25895, level: 60, baseManaPct: 16, amount: blessingOfSalvationThreatReduction},
-	}
-)
+// Blessing of Salvation (1038) and Greater Blessing of Salvation (25895)
+// are not here: Forever removed them from the spellbook (the 70707 hotfix
+// push removes their SpellName rows; Wowhead Forever 404s; wowforevertalents'
+// 31 October notes list them as gone).

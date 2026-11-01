@@ -31,6 +31,5 @@ func (paladin *Paladin) registerFlashOfLight() {
 		coefficient: flashOfLightCoefficient,
 		spellCode:   SpellCode_PaladinFlashOfLight,
 		classMask:   PaladinSpellMaskFlashOfLight,
-		blessing:    blessingOfLightFlashOfLight,
 	})
 }

@@ -151,38 +151,15 @@ func TestInfusionOfLightEndsWithTheHolyLightItShortened(t *testing.T) {
 	}
 }
 
-func TestBlessingOfLightAddsBonusHealingToHolyLightAndFlashOfLight(t *testing.T) {
-	cases := []struct {
-		name  string
-		heal  int32
-		bonus float64
-	}{
-		{"Holy Light", holyLightTopRank, 400},
-		{"Flash of Light", flashOfLightTopRank, 115},
-	}
-	// The blessing counts as bonus healing for the spell, so the
-	// spell's coefficient scales it.
-	for _, c := range cases {
-		f := numericFight(rotationOf(
-			whileBefore("1s", castItem(blessingOfLightTop, tankIndex)),
-			castItem(c.heal, tankIndex),
-		))
-		totals := totalsOf(f.run(t, numericRuns), c.heal)
-		want := healFor(t, c.heal) + clientSpell(t, c.heal).Effects[0].ResolvedSPCoefficient*c.bonus
-		if got := totals.normalHeal(); !within(got, want, averageTolerance) {
-			t.Errorf("%s under Blessing of Light: heals %.1f, want %.1f", c.name, got, want)
+// Forever removed Blessing of Light and Greater Blessing of Light (the
+// 70707 hotfix push removes 19977-19979 and 25890; Wowhead Forever 404s;
+// wowforevertalents' 31 October notes): a Holy paladin cannot cast them.
+func TestBlessingOfLightIsGone(t *testing.T) {
+	for _, id := range []int32{blessingOfLightTop, greaterBlessingOfLight} {
+		f := numericFight(rotationOf(whileBefore("1s", castItem(id, tankIndex)), castItem(holyLightTopRank, tankIndex)))
+		if casts := totalsOf(f.run(t, numericRuns), id).casts; casts != 0 {
+			t.Errorf("spell %d was cast %d times; Forever removed it", id, casts)
 		}
-	}
-}
-
-func TestBlessingOfLightOnAnotherMemberDoesNotHelpTheTank(t *testing.T) {
-	f := numericFight(rotationOf(
-		whileBefore("1s", castItem(blessingOfLightTop, 1)),
-		castItem(holyLightTopRank, tankIndex),
-	))
-	totals := totalsOf(f.run(t, numericRuns), holyLightTopRank)
-	if got, want := totals.normalHeal(), healFor(t, holyLightTopRank); !within(got, want, averageTolerance) {
-		t.Errorf("Holy Light on the tank heals %.1f, want %.1f with no blessing on it", got, want)
 	}
 }
 

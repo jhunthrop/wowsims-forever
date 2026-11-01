@@ -47,11 +47,6 @@ var blessingKinds = []blessingKind{
 		spells: blessingOfKingsSpells, greater: greaterBlessingOfKingsSpells,
 		newEffect: kingsEffect,
 	},
-	{
-		label:  "Blessing of Salvation",
-		spells: blessingOfSalvationSpells, greater: greaterBlessingOfSalvationSpells,
-		newEffect: salvationEffect,
-	},
 }
 
 // statsEffect adds the amount of one stat, as the raid-buff option does.
@@ -89,15 +84,6 @@ func kingsEffect(target *core.Unit) blessingEffect {
 				target.DisableBuildPhaseStatDep(sim, dep)
 			}
 		},
-	}
-}
-
-// salvationEffect lowers the threat the unit generates by the amount percent.
-func salvationEffect(target *core.Unit) blessingEffect {
-	multiplier := 1 - blessingOfSalvationThreatReduction/100.0
-	return blessingEffect{
-		gain: func(*core.Simulation, float64) { target.PseudoStats.ThreatMultiplier *= multiplier },
-		lose: func(*core.Simulation, float64) { target.PseudoStats.ThreatMultiplier /= multiplier },
 	}
 }
 
