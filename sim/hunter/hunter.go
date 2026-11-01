@@ -68,6 +68,7 @@ const (
 	// Buffs and debuffs the hunter casts
 	SpellCode_HunterHuntersMark
 	SpellCode_HunterAspectOfTheFalcon
+	SpellCode_HunterAspectOfTheBeast
 )
 
 func RegisterHunter() {
@@ -109,6 +110,7 @@ type Hunter struct {
 
 	AimedShot         *core.Spell
 	AspectOfTheFalcon *core.Spell
+	AspectOfTheBeast  *core.Spell
 	HuntersMark       *core.Spell
 	ArcaneShot        *core.Spell
 	ExplosiveTrap     *core.Spell
@@ -199,6 +201,7 @@ func (hunter *Hunter) Initialize() {
 
 	hunter.registerAspectOfTheHawkSpell()
 	hunter.registerAspectOfTheFalconSpell()
+	hunter.registerAspectOfTheBeastSpell()
 	hunter.registerHuntersMarkSpell()
 
 	// Multi-Shot and Aimed Shot share spell category 2 (6 s) in Forever;
