@@ -7,10 +7,21 @@ import (
 // huntersMarkRangedAttackPower is each rank's ranged attack power, indexed
 // like the generated HunterSMark tables: the client's effect 1 (aura 127,
 // ranged attack power against the target) base points of spells 1130,
-// 14323, 14324 and 1213268 (1.60.1.70009 SpellEffect.csv). The generated
+// 14323, 14324 and 14325 (1.60.1.70707 SpellEffect.csv). The generated
 // BaseDamage row of this spell is a dummy, so the amounts live here, pinned
 // by TestHuntersMarkRanksMatchClient.
-var huntersMarkRangedAttackPower = [HunterSMarkRanks + 1]float64{0, 26, 59, 98, 110}
+var huntersMarkRangedAttackPower = [HunterSMarkRanks + 1]float64{0, 26, 59, 98, core.HuntersMarkTopRankRangedAttackPower}
+
+// huntersMarkSpellID reads a rank's id, correcting rank 4: the generator
+// kept 1213268, a Season of Discovery copy at 110 that no trainer teaches,
+// where SkillLineAbility (row 7913) teaches 14325, 143 since the 23 October
+// hotfix and in the 1.60.1.70707 tables.
+func huntersMarkSpellID(rank int) int32 {
+	if rank == HunterSMarkRanks {
+		return core.HuntersMarkTopRankSpellID
+	}
+	return HunterSMarkSpellId[rank]
+}
 
 func (hunter *Hunter) registerHuntersMarkSpell() {
 	rank := core.HighestRankAtLevel(HunterSMarkLevel[1:], hunter.Level)
@@ -18,7 +29,7 @@ func (hunter *Hunter) registerHuntersMarkSpell() {
 		return
 	}
 
-	spellID := HunterSMarkSpellId[rank]
+	spellID := huntersMarkSpellID(rank)
 	bonus := huntersMarkRangedAttackPower[rank]
 	auras := hunter.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
 		return core.HuntersMarkAuraOfRank(target, spellID, bonus, 0)

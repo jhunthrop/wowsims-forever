@@ -10,11 +10,12 @@ import (
 // highest rank of Aspect of the Hawk": effect 0 is aura 99 (melee attack
 // power) and effect 1 aura 124 (ranged attack power), both stating no
 // amount of their own. The text's Improved Aspect of the Hawk interaction
-// has nothing to act on, that talent is not in the client's trees.
+// is Deadly Aspects's melee half (talents.go applyDeadlyAspects).
 const (
-	aspectOfTheFalconSpellID int32 = 469145
-	aspectOfTheFalconLevel   int   = 60
-	aspectOfTheFalconMana          = 120.0
+	aspectOfTheFalconSpellID   int32 = 469145
+	aspectOfTheFalconLevel     int   = 60
+	aspectOfTheFalconMana            = 120.0
+	aspectOfTheFalconAuraLabel       = "Aspect of the Falcon"
 )
 
 func (hunter *Hunter) registerAspectOfTheFalconSpell() {
@@ -26,7 +27,7 @@ func (hunter *Hunter) registerAspectOfTheFalconSpell() {
 	actionID := core.ActionID{SpellID: aspectOfTheFalconSpellID}
 
 	aura := hunter.GetOrRegisterAura(core.Aura{
-		Label:    "Aspect of the Falcon",
+		Label:    aspectOfTheFalconAuraLabel,
 		ActionID: actionID,
 		Duration: core.NeverExpires,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {

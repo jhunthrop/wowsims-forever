@@ -29,6 +29,25 @@ func (hunter *Hunter) createImprovedHawkAura(auraLabel string, actionID core.Act
 	})
 }
 
+// quickStrikesSpellID is Quick Strikes (469144), Aspect of the Falcon's
+// proc: aura 319 at 30 (melee attack speed), duration index 29 (12 sec).
+const quickStrikesSpellID int32 = 469144
+
+func (hunter *Hunter) createQuickStrikesAura() *core.Aura {
+	bonusMultiplier := 1.3
+	return hunter.GetOrRegisterAura(core.Aura{
+		Label:    "Quick Strikes",
+		ActionID: core.ActionID{SpellID: quickStrikesSpellID},
+		Duration: time.Second * 12,
+		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+			aura.Unit.MultiplyMeleeSpeed(sim, bonusMultiplier)
+		},
+		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+			aura.Unit.MultiplyMeleeSpeed(sim, 1/bonusMultiplier)
+		},
+	})
+}
+
 // getMaxAspectOfTheHawkAttackPower is the rank's ranged attack power: the
 // client's aura-124 base points on spells 13165/14318/14319/14320/14321/
 // 14322/25296, read from the generated AspectOfTheHawkBaseDamage. Client
