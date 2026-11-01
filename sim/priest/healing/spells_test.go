@@ -393,3 +393,24 @@ func TestInnerFireAddsArmorByRank(t *testing.T) {
 }
 
 var _ = priest.SpellCode_PriestNone
+
+// TestPrayerOfMendingSpendsAChargeWhenTheHolderTakesDamage holds Prayer of
+// Mending to its tooltip's other trigger: "heals them ... the next time
+// they take damage or receive non-periodic healing" (1240827, Forever).
+// The tank's next melee hit from the damage model spends a charge with no
+// heal cast in between.
+func TestPrayerOfMendingSpendsAChargeWhenTheHolderTakesDamage(t *testing.T) {
+	sim, agent := healerSim(t, 60, HolyTalents)
+	tank := agent.GetMainTarget()
+	mending := agent.PrayerOfMending[3]
+	mending.ApplyEffects(sim, tank, mending)
+
+	runFor(sim, 3*time.Second) // the test profile's tank swings every 2 s
+	var spent int32
+	for _, unit := range sim.Raid.AllPlayerUnits {
+		spent += mending.SpellMetrics[unit.UnitIndex].Hits + mending.SpellMetrics[unit.UnitIndex].Crits
+	}
+	if spent == 0 {
+		t.Error("three seconds of tank hits spent no Prayer of Mending charge")
+	}
+}

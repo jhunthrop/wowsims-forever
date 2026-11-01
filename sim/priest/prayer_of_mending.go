@@ -29,13 +29,10 @@ type prayerOfMending struct {
 
 // registerPrayerOfMending registers Prayer of Mending, which exists only
 // with its talent. The cast places the charges on one ally; the next
-// non-periodic heal that ally receives spends one, healing for the rank's
-// amount, and the charges move to the most hurt other member of the raid.
-//
-// Assumption: the client also triggers it "the next time they take
-// damage", but the fake raid's damage is plain health loss with no hook a
-// healer can listen to (core.dealRaidDamage), so only the heal trigger is
-// modelled. A holder nobody heals keeps its charges until they expire.
+// non-periodic heal that ally receives, or the next damage the raid
+// damage model deals it ("the next time they take damage or receive
+// non-periodic healing"), spends one, healing for the rank's amount, and
+// the charges move to the most hurt other member of the raid.
 func (priest *Priest) registerPrayerOfMending() {
 	if !priest.Talents.PrayerOfMending {
 		return
@@ -53,6 +50,11 @@ func (priest *Priest) registerPrayerOfMending() {
 				}
 			},
 		})
+	})
+	priest.Env.Raid.OnRaidDamage(func(sim *core.Simulation, unit *core.Unit, _ float64, _ bool) {
+		if pom.holder != nil && pom.holder.Unit == unit && pom.holder.IsActive() {
+			pom.spendCharge(sim, pom.holder)
+		}
 	})
 	cooldown := core.Cooldown{Timer: priest.NewTimer(), Duration: prayerOfMendingCooldown}
 	priest.PrayerOfMending = priest.registerHealRanks(prayerOfMendingRanks, func(rank int, entry healRank) core.SpellConfig {
