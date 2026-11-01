@@ -622,3 +622,13 @@ func TestHammerOfTheRighteousStrikesThreeTargets(t *testing.T) {
 		t.Errorf("Hammer of the Righteous damaged %d targets of 5, want 3", struck)
 	}
 }
+
+// Holy Shield's mana costs moved down a bracket with its damage: the 70707
+// hotfix push of 31 October sets the top rank's SpellPower 184913 to 195
+// (shipped 240), and Wowhead Forever's live 20928 reads 195 Mana.
+func TestHolyShieldCostsTheHotfixedMana(t *testing.T) {
+	f := shortRun{Talents: map[string]int{"holy_shield": 1}}.start(t)
+	if got := f.spellOf(t, spellHolyShield).Cost.BaseCost; got != 195 {
+		t.Errorf("the top Holy Shield's base cost is %v, want 195", got)
+	}
+}

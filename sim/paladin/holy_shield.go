@@ -13,11 +13,14 @@ import (
 // (rank 1) now deals 75 Holy damage a block where it dealt 110. Wowhead's
 // live Forever tooltips (2026-10-31) show every rank one bracket down to
 // match: 20925 level 30 for 75, 20927 level 40 for 110, 20928 level 50 for
-// 153, at the same mana costs, so a level 60 paladin's top rank deals 153.
-// The client's own spell rows (spellconst/paladin.json) still carry the
-// 70658 values (levels 40/50/60, 110/153/221) because the change is a
-// hotfix those tables do not hold; the 0.08 spell-power coefficient is
-// theirs.
+// 153, so a level 60 paladin's top rank deals 153. The mana costs moved
+// down with them: the 70707 hotfix push of 31 October (wago.tools/hotfixes)
+// sets SpellPower 185892, 186383 and 184913 to 100, 150 and 195, the levels
+// and amounts to the ones below, and Wowhead's live tooltips read the same.
+// The client's shipped spell rows (spellconst/paladin.json) still carry the
+// old values (levels 40/50/60, 110/153/221, 150/195/240 mana) because the
+// change is a hotfix those tables do not hold; the 0.08 spell-power
+// coefficient is theirs.
 //
 // procID is the engine's own id for the damage spell: the client states
 // the damage on the aura rather than on a spell of its own.
@@ -28,9 +31,9 @@ var HolyShieldValues = []struct {
 	manaCost float64
 	damage   float64
 }{
-	{level: 30, spellID: 20925, procID: 20955, manaCost: 150, damage: 75},
-	{level: 40, spellID: 20927, procID: 20956, manaCost: 195, damage: 110},
-	{level: 50, spellID: 20928, procID: 20957, manaCost: 240, damage: 153},
+	{level: 30, spellID: 20925, procID: 20955, manaCost: 100, damage: 75},
+	{level: 40, spellID: 20927, procID: 20956, manaCost: 150, damage: 110},
+	{level: 50, spellID: 20928, procID: 20957, manaCost: 195, damage: 153},
 }
 
 const (
