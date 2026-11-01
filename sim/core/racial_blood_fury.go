@@ -7,7 +7,8 @@ import (
 )
 
 // Blood Fury (client 20572): "Increases Attack Power and Spell Power by 10%
-// for 15 s", 2 min cooldown. Its three effects are aura 166 (attack power
+// for 15 s", 2 min cooldown, and no global cooldown (SpellCooldowns
+// StartRecoveryTime 0). Its three effects are aura 166 (attack power
 // percent), 167 (ranged attack power percent) and 317 (spell power
 // percent), each with base points 10. They are percentages of the unit's
 // current totals, so the aura multiplies the stats through the dynamic stat
@@ -69,7 +70,6 @@ func applyBloodFury(character *Character) {
 		ActionID: actionID,
 		Flags:    SpellFlagNoOnCastComplete,
 		Cast: CastConfig{
-			DefaultCast: Cast{GCD: GCDDefault},
 			CD: Cooldown{
 				Timer:    character.NewTimer(),
 				Duration: bloodFuryCooldown,
