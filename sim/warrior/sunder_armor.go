@@ -12,6 +12,19 @@ import (
 // run time like every other threat.
 var sunderArmorThreat = [SunderArmorRanks + 1]float64{0, 34, 75, 117, 158, 206}
 
+// sunderArmorAttackPowerThreat is the threat a point of attack power adds
+// to a Sunder. Blizzard's 24 Sep notes fixed Sunder threat on every rank
+// "including a small increase to threat generated from Attack Power"
+// (wowfdb logs the same change); sixtysim's beta measurement gives 5% of
+// attack power, the only figure published. The client tables carry none
+// (11597 effect 63 is 206 with no AP coefficient): it is a server change.
+const sunderArmorAttackPowerThreat = 0.05
+
+// sunderArmorFlatThreat is a Sunder's threat before stance and Defiance.
+func sunderArmorFlatThreat(rank int, attackPower float64) float64 {
+	return sunderArmorThreat[rank] + sunderArmorAttackPowerThreat*attackPower
+}
+
 func (warrior *Warrior) registerSunderArmorSpell() {
 	warrior.SunderArmorAuras = warrior.NewEnemyAuraArray(core.SunderArmorAura)
 
@@ -62,6 +75,7 @@ func (warrior *Warrior) registerSunderArmorSpell() {
 		RelatedAuras: []core.AuraArray{warrior.SunderArmorAuras},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			spell.FlatThreatBonus = sunderArmorFlatThreat(rank, spell.MeleeAttackPower(target))
 			result := spell.CalcAndDealOutcome(sim, target, spell.OutcomeMeleeWeaponSpecialNoCrit) // Cannot be blocked
 			if !result.Landed() {
 				spell.IssueRefund(sim)
