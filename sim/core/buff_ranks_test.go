@@ -168,11 +168,13 @@ func TestBlessingOfWisdomFollowsTheClientRanks(t *testing.T) {
 	}
 }
 
+// The client scales from SpellLevels.BaseLevel (0 for 409583), not its
+// SpellLevel (1): Wowhead Forever's buff reads 280 at 60 (ppl0:60:40:400).
 func TestHeartOfTheLionAttackPowerFollowsClientRule(t *testing.T) {
 	cases := []struct {
 		level int
 		want  float64
-	}{{1, 40}, {2, 44}, {30, 156}, {59, 272}, {60, 276}, {61, 276}}
+	}{{1, 44}, {2, 48}, {30, 160}, {59, 276}, {60, 280}, {61, 280}}
 	for _, c := range cases {
 		if got := HeartOfTheLionRanks.At(c.level); got != c.want {
 			t.Errorf("Heart of the Lion attack power at level %d = %v, want %v", c.level, got, c.want)

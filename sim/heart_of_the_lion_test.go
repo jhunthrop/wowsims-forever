@@ -58,12 +58,12 @@ func assertStatRatio(t *testing.T, label string, base, final stats.Stats, want f
 
 // The raid buff stands for another hunter's aura: +10% on a non-hunter and
 // the client's level-scaled attack power on the ranged side (a priest has
-// no dependency on it), 276 at 60 and 156 at 30.
+// no dependency on it), 280 at 60 and 160 at 30 (base level 0).
 func TestHeartOfTheLionRaidBuffReachesAnotherClass(t *testing.T) {
 	cases := []struct {
 		level           int32
 		wantAttackPower float64
-	}{{60, 276}, {30, 156}, {1, 40}}
+	}{{60, 280}, {30, 160}, {1, 44}}
 	for _, c := range cases {
 		_, bare := firstPlayerStats(t, &proto.RaidBuffs{}, priestPlayer(c.level))
 		_, buffed := firstPlayerStats(t, &proto.RaidBuffs{HeartOfTheLion: true}, priestPlayer(c.level))
@@ -81,8 +81,8 @@ func TestHeartOfTheLionRaidBuffReachesAnotherClass(t *testing.T) {
 
 // Above the spell's level 60 the amount stops growing.
 func TestHeartOfTheLionAttackPowerStopsAtSixty(t *testing.T) {
-	if got := core.HeartOfTheLionRanks.At(61); got != 276 {
-		t.Errorf("attack power at 61 = %v, want 276", got)
+	if got := core.HeartOfTheLionRanks.At(61); got != 280 {
+		t.Errorf("attack power at 61 = %v, want 280", got)
 	}
 }
 
