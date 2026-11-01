@@ -13,11 +13,19 @@ var WindfuryWeaponEnchantId = [WindfuryWeaponRanks + 1]int32{0, 283, 284, 525, 1
 var WindfuryWeaponBonusAP = [WindfuryWeaponRanks + 1]float64{0, 104, 119, 249, 333}
 var WindfuryWeaponLevel = [WindfuryWeaponRanks + 1]int32{0, 30, 40, 50, 60}
 
+// windfuryWeaponBonusAttackPower is the extra attack power a Windfury
+// swing carries: the rank's amount, raised once by Elemental Weapons
+// (16266 effect 2, +13/27/40% on Windfury Weapon's attack power).
+func windfuryWeaponBonusAttackPower(rank int32, elementalWeapons int32) float64 {
+	return WindfuryWeaponBonusAP[rank] * windfuryElementalWeaponsMultiplier[elementalWeapons]
+}
+
+var windfuryElementalWeaponsMultiplier = [4]float64{1, 1.13, 1.27, 1.4}
+
 func (shaman *Shaman) newWindfuryImbueSpell(isMH bool) *core.Spell {
 	rank := weaponImbueRankAtLevel(WindfuryWeaponLevel[:], shaman.Level)
 
-	ewMultiplier := []float64{1, 1.13, 1.27, 1.4}[shaman.Talents.ElementalWeapons]
-	bonusAP := WindfuryWeaponBonusAP[rank]
+	bonusAP := windfuryWeaponBonusAttackPower(rank, shaman.Talents.ElementalWeapons)
 
 	actionID := core.ActionID{SpellID: WindfuryWeaponSpellId[rank]}.WithTag(core.TernaryInt32(isMH, 1, 2))
 	procMask := core.ProcMaskMeleeMHSpecial
@@ -40,7 +48,7 @@ func (shaman *Shaman) newWindfuryImbueSpell(isMH bool) *core.Spell {
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			mAP := spell.MeleeAttackPower(target) + bonusAP*ewMultiplier*ewMultiplier
+			mAP := spell.MeleeAttackPower(target) + bonusAP
 			baseDamage := weaponDamageFunc(sim, mAP)
 			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 		},
