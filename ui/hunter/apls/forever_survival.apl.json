@@ -129,7 +129,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 469145
+            "spellId": 1299447,
+            "rank": 4
           }
         }
       },
