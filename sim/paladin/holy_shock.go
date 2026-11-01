@@ -106,7 +106,7 @@ func (paladin *Paladin) registerHolyShockRank(rank holyShockRank, damage clientd
 		SpellCode:      SpellCode_PaladinHolyShock,
 		ClassSpellMask: PaladinSpellMaskHolyShock,
 
-		ManaCost: core.ManaCostOptions{FlatCost: rank.manaCost},
+		ManaCost: core.ManaCostOptions{FlatCost: rank.manaCost, Multiplier: paladin.benediction()},
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{GCD: core.GCDDefault},

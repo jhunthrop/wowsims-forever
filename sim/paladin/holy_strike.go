@@ -147,7 +147,8 @@ func (paladin *Paladin) registerHolyStrike() {
 			Rank:          i + 1,
 
 			ManaCost: core.ManaCostOptions{
-				FlatCost: rank.manaCost,
+				FlatCost:   rank.manaCost,
+				Multiplier: paladin.benediction(),
 			},
 			Cast: core.CastConfig{
 				DefaultCast: core.Cast{

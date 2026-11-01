@@ -95,7 +95,8 @@ func (paladin *Paladin) registerConsecration() {
 			SpellCode:      SpellCode_PaladinConsecration,
 			ClassSpellMask: PaladinSpellMaskConsecration,
 			ManaCost: core.ManaCostOptions{
-				FlatCost: rank.manaCost,
+				FlatCost:   rank.manaCost,
+				Multiplier: paladin.benediction(),
 			},
 			Cast: core.CastConfig{
 				DefaultCast: core.Cast{
