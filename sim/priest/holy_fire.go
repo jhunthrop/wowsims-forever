@@ -70,6 +70,7 @@ func (priest *Priest) getHolyFireConfig(rank int) core.SpellConfig {
 			TickLength:       time.Millisecond * holyFireDotTickMS,
 			BonusCoefficient: dotCoeff,
 
+			Dynamic: true, // Forever reads spell power at every tick (core.DotConfig.Dynamic)
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, dotDamage, isRollover)
 			},

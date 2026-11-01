@@ -69,6 +69,7 @@ func (priest *Priest) getShadowWordPainConfig(rank int) core.SpellConfig {
 			TickLength:       time.Second * 3,
 			BonusCoefficient: spellCoeff,
 
+			Dynamic: true, // Forever reads spell power at every tick (core.DotConfig.Dynamic)
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, baseDotDamage, isRollover)
 			},

@@ -80,6 +80,7 @@ func (priest *Priest) getDevouringPlagueConfig(rank int, cdTimer *core.Timer) co
 			// crit". Each tick rolls the priest's spell crit.
 			CanCrit: true,
 
+			Dynamic: true, // Forever reads spell power at every tick (core.DotConfig.Dynamic)
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, baseDotDamage, isRollover)
 			},
