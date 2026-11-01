@@ -72,6 +72,8 @@ func (warlock *Warlock) getDrainSoulBaseConfig(rank int) core.SpellConfig {
 			TickLength:       tickLength,
 			BonusCoefficient: spellCoeff,
 
+			Dynamic: true,
+
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, baseDamage, isRollover)
 				if !isRollover {
@@ -81,6 +83,9 @@ func (warlock *Warlock) getDrainSoulBaseConfig(rank int) core.SpellConfig {
 				}
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
+				// The per-tick read (Dynamic) re-took the plain snapshot;
+				// Soul Siphon's count is read at the tick too.
+				dot.SnapshotAttackerMultiplier *= warlock.soulSiphonMultiplier(target, dot.Spell)
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
 			},
 		},

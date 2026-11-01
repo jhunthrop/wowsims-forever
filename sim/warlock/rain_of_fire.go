@@ -63,6 +63,7 @@ func (warlock *Warlock) getRainOfFireBaseConfig(rank int) core.SpellConfig {
 			NumberOfTicks:    4,
 			TickLength:       time.Second * 2,
 			BonusCoefficient: spellCoeff,
+			Dynamic:          true,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, baseDamage, isRollover)

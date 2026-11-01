@@ -39,6 +39,8 @@ func newWarlockForDamageTest(t *testing.T, talents string) (*core.Simulation, *W
 			Equipment:     &proto.EquipmentSpec{},
 			Buffs:         core.FullBuffs.Player,
 			TalentsString: talents,
+			// An empty rotation: a channel's tick asks it whether to stop.
+			Rotation: &proto.APLRotation{},
 		},
 		&proto.Player_Warlock{
 			Warlock: &proto.Warlock{

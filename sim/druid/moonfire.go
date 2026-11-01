@@ -49,6 +49,12 @@ var MoonfireManaCost = [MoonfireRanks + 1]float64{0, 25, 50, 75, 105, 150, 190, 
 var MoonfireLevel = [MoonfireRanks + 1]int{0, 4, 10, 16, 22, 28, 34, 40, 46, 52, 58}
 
 func (druid *Druid) registerMoonfireSpell() {
+	// Both the Balance and the Cat kits carry Moonfire, and Balance and
+	// Feral register both; a second set's dots would share the first's
+	// aura and tick beside them unsnapshotted.
+	if druid.Moonfire != nil {
+		return
+	}
 	druid.Moonfire = make([]*DruidSpell, 0)
 
 	for rank := 1; rank <= MoonfireRanks; rank++ {
@@ -102,6 +108,7 @@ func (druid *Druid) getMoonfireBaseConfig(rank int) core.SpellConfig {
 			NumberOfTicks:    ticks,
 			TickLength:       tickLength,
 			BonusCoefficient: spellDotCoeff,
+			Dynamic:          true,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, tickDamage.Center(casterLevel), isRollover)
 			},

@@ -25,6 +25,13 @@ var CurseOfAgonyTickDamage = [CurseOfAgonyRanks + 1]clientdamage.Effect{
 	{Amount: 46, SpellLevel: 58},
 }
 
+// agonyRampStage is the share of its base Agony tick n (1-based) deals:
+// half for ticks 1-4, all of it for 5-8 and half again for 9-12 ("dealt
+// slowly at first, and builds up", Wowhead Forever 11713).
+func agonyRampStage(tick int32) float64 {
+	return 0.5 * float64(1+(min(max(tick, 1), 12)-1)/4)
+}
+
 func (warlock *Warlock) getCurseOfAgonyBaseConfig(rank int) core.SpellConfig {
 	numTicks := int32(12)
 	tickLength := time.Second * 2
@@ -45,7 +52,10 @@ func (warlock *Warlock) getCurseOfAgonyBaseConfig(rank int) core.SpellConfig {
 	manaCost := [CurseOfAgonyRanks + 1]float64{0, 25, 50, 90, 130, 170, 215}[rank]
 	level := [CurseOfAgonyRanks + 1]int{0, 8, 18, 28, 38, 48, 58}[rank]
 
-	snapshotBaseDmgNoBonus := 0.0
+	// amplifiedBase is the per-tick base Amplify Curse may have raised at
+	// the cast: forever-bugs #398 (Blizzard, 2026-10-26) keeps Amplify
+	// Curse snapshotted while every tick reads the caster's spell power.
+	amplifiedBase := baseDamage
 
 	return core.SpellConfig{
 		SpellCode:        SpellCode_WarlockCurseOfAgony,
@@ -90,17 +100,17 @@ func (warlock *Warlock) getCurseOfAgonyBaseConfig(rank int) core.SpellConfig {
 					warlock.AmplifyCurseAura.Deactivate(sim)
 				}
 
-				// CoA starts with 50% base damage, but bonus from spell power is not changed.
-				// Every 4 ticks this base damage is added again, resulting in 150% base damage for the last 4 ticks
-				snapshotBaseDmgNoBonus = baseDmg * 0.5
-
-				dot.Snapshot(target, snapshotBaseDmgNoBonus, isRollover)
+				if !isRollover {
+					amplifiedBase = baseDmg
+				}
+				dot.Snapshot(target, agonyRampStage(1)*amplifiedBase, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
+				// Forever's DoTs read spell power and the caster's
+				// multipliers at every tick (#137, #398). Agony ramps its
+				// base, not its spell power.
+				dot.Snapshot(target, agonyRampStage(dot.TickCount)*amplifiedBase, false)
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
-				if dot.TickCount%4 == 0 { // CoA ramp up
-					dot.SnapshotBaseDamage += snapshotBaseDmgNoBonus
-				}
 			},
 		},
 
@@ -448,6 +458,7 @@ func (warlock *Warlock) registerCurseOfDoomSpell() {
 			NumberOfTicks:    1,
 			TickLength:       time.Minute,
 			BonusCoefficient: baneOfDoomCoefficient,
+			Dynamic:          true,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, damage.Center(casterLevel), isRollover)
 			},

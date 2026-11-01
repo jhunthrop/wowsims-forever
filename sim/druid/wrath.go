@@ -46,6 +46,10 @@ var WrathCastTime = [WrathRanks + 1]int{0, 1500, 1700, 2000, 2000, 2000, 2000, 2
 var WrathLevel = [WrathRanks + 1]int{0, 1, 6, 14, 22, 30, 38, 46, 54}
 
 func (druid *Druid) registerWrathSpell() {
+	// Both the Balance and the Cat kits carry Wrath (see registerMoonfireSpell).
+	if druid.Wrath != nil {
+		return
+	}
 	druid.Wrath = make([]*DruidSpell, WrathRanks+1)
 
 	for rank := 1; rank <= WrathRanks; rank++ {

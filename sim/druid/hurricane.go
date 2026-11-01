@@ -61,6 +61,7 @@ func (druid *Druid) registerHurricaneSpell() {
 				TickLength:    time.Second * 1,
 
 				BonusCoefficient: 0.03,
+				Dynamic:          true,
 
 				OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 					dot.Snapshot(target, damage, isRollover)

@@ -93,6 +93,7 @@ func (warlock *Warlock) getImmolateConfig(rank int) core.SpellConfig {
 			NumberOfTicks:    5,
 			TickLength:       time.Second * 3,
 			BonusCoefficient: dotCoeff,
+			Dynamic:          true,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, dotDamage, isRollover)
