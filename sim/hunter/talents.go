@@ -682,6 +682,11 @@ func (hunter *Hunter) applyImprovedTracking() {
 // resourcefulnessProcChance is the critical-strike chance of the regen clause,
 // 50% a rank (1.60.1.70425: "a 50%/100% chance"; the 1.60.1.70374 live text
 // read 30/60%).
+// resourcefulnessProcMask is the client's proc type mask for 440529
+// (SpellAuraOptions 242512: 272, melee and ranged ability damage): a white
+// swing's crit or a periodic tick's does not count.
+const resourcefulnessProcMask = core.ProcMaskMeleeSpecial | core.ProcMaskRangedSpecial
+
 func resourcefulnessProcChance(rank int32) float64 {
 	return 0.5 * float64(rank)
 }
@@ -726,7 +731,7 @@ func (hunter *Hunter) applyResourcefulness() {
 			aura.Activate(sim)
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !result.DidCrit() {
+			if !result.DidCrit() || !spell.ProcMask.Matches(resourcefulnessProcMask) {
 				return
 			}
 			if sim.Proc(procChance, "Resourcefulness") {

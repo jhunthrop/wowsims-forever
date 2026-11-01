@@ -74,3 +74,26 @@ func TestResourcefulnessRegenContinuesWhileCasting(t *testing.T) {
 		t.Errorf("Resourcefulness adds %.2f mana a casting tick, want %.2f (50%% of %.2f spirit regen a second)", got, want, spirit)
 	}
 }
+
+// TestResourcefulnessProcsOnlyFromAbilityCrits: SpellAuraOptions 242512 gives
+// 440529 ProcTypeMask 272 (melee and ranged ability damage, 16 | 256), as its
+// text says ("your melee and ranged ability Critical Strikes"). A white swing's
+// crit or a bleed tick's is not an ability crit.
+func TestResourcefulnessProcsOnlyFromAbilityCrits(t *testing.T) {
+	sim, hunter := buildPublishedSurvivalHunter(t)
+	trigger := hunter.GetAura("Resourcefulness Trigger")
+	regen := hunter.GetAura("Resourcefulness")
+	if trigger == nil || regen == nil || hunter.RaptorStrikeHit == nil {
+		t.Fatal("the published Survival build is missing Resourcefulness or Raptor Strike")
+	}
+	crit := &core.SpellResult{Outcome: core.OutcomeCrit, Target: sim.Encounter.TargetUnits[0]}
+
+	trigger.OnSpellHitDealt(trigger, sim, hunter.AutoAttacks.MHAuto(), crit)
+	if regen.IsActive() {
+		t.Error("a white melee crit started Resourcefulness's regen")
+	}
+	trigger.OnSpellHitDealt(trigger, sim, hunter.RaptorStrikeHit, crit)
+	if !regen.IsActive() {
+		t.Error("a Raptor Strike crit did not start Resourcefulness's regen")
+	}
+}

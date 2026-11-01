@@ -403,10 +403,10 @@ func TestResourcefulnessGrantsRegenOnCritsAtMaxRank(t *testing.T) {
 	sim, hunter, target := newRunningHunterForTalentTest(t, 60, "resourcefulness", 2, proto.Hunter_Options_PetNone, 25, nil)
 
 	crit := &core.SpellResult{Outcome: core.OutcomeLanded | core.OutcomeCrit, Target: target}
-	anySpell := &core.Spell{}
+	ability := &core.Spell{ProcMask: core.ProcMaskMeleeMHSpecial} // the client's mask is ability crits only
 	procced := false
 	for i := 0; i < 100 && !procced; i++ {
-		hunter.OnSpellHitDealt(sim, anySpell, crit)
+		hunter.OnSpellHitDealt(sim, ability, crit)
 		procced = hunter.PseudoStats.SpiritRegenRateCasting != 0
 	}
 	if !procced {
