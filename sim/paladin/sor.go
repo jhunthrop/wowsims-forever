@@ -144,9 +144,13 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 			BonusCoefficient: coeff,
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				// effectively scales with coeff x 2, and damage dealt multipliers affect half the damage taken bonus
-				baseDamage := damage*improvedSoR + spell.BonusCoefficient*(spell.GetBonusDamage(target)+target.GetSchoolBonusDamageTaken(spell))
-				spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialCritOnly)
+				// Spell damage adds BonusCoefficient of itself once, in
+				// CalcAndDealDamage. Classic added it a second time here,
+				// which Blizzard's beta notes of 16 October 2026 fixed:
+				// "Fixed an issue causing Seal of Righteousness to gain
+				// almost twice as much benefit from Spell Damage than
+				// intended."
+				spell.CalcAndDealDamage(sim, target, damage*improvedSoR, spell.OutcomeMeleeSpecialCritOnly)
 			},
 		})
 
