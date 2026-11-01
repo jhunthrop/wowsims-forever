@@ -15,8 +15,16 @@
           "val": "-2s"
         }
       }
+    }
+  ],
+  "priorityList": [
+    {
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
     },
     {
+      "notes": "Open with Ravage from Prowl at the pull. It only works while prowling, so it fires once.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -24,18 +32,6 @@
             "rank": 4
           }
         }
-      },
-      "doAtValue": {
-        "const": {
-          "val": "-1s"
-        }
-      }
-    }
-  ],
-  "priorityList": [
-    {
-      "action": {
-        "autocastOtherCooldowns": {}
       }
     },
     {
