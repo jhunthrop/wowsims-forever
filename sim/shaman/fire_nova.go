@@ -13,22 +13,25 @@ import (
 // inflicts fire damage to enemies within 10 yd of your active Fire
 // totem". The vanilla totem ids (1535, 8498, 8499, 11314, 11315) have no
 // learn row, so that registration is gone. The cast spells carry the
-// mana, cooldown and totem condition; the damage rides on the linked
-// spells 8349/8502/8503/11306/11307, whose effect is the client's roll
-// and spell-power coefficient.
+// mana, cooldown and totem condition; the damage rides on the spells
+// their text names ($408423s1 ... $408428s1 for ranks 1-5), whose effect
+// is the client's roll and spell-power coefficient. The vanilla totem's
+// damage spells (8349, 8502, 8503, 11306, 11307) are not Fire Nova's any
+// more: rank 5's 408428 is 239 + 1.3 a level (232-259 at 60, as Wowhead
+// Forever reads), where 11307 was 419 + 3.4.
 const FireNovaLearnRanks = 5
 
 var FireNovaLearnSpellId = [FireNovaLearnRanks + 1]int32{0, 408341, 408342, 408343, 408344, 408345}
-var FireNovaDamageSpellId = [FireNovaLearnRanks + 1]int32{0, 8349, 8502, 8503, 11306, 11307}
+var FireNovaDamageSpellId = [FireNovaLearnRanks + 1]int32{0, 408423, 408424, 408426, 408427, 408428}
 var FireNovaDamage = [FireNovaLearnRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 52, Variance: 0.153846, PerLevel: 1.1, SpellLevel: 12, MaxLevel: 17},
-	{Amount: 109, Variance: 0.12844, PerLevel: 1.6, SpellLevel: 22, MaxLevel: 27},
-	{Amount: 196, Variance: 0.122449, PerLevel: 2.2, SpellLevel: 32, MaxLevel: 37},
-	{Amount: 299, Variance: 0.120401, PerLevel: 2.8, SpellLevel: 42, MaxLevel: 47},
-	{Amount: 419, Variance: 0.109785, PerLevel: 3.4, SpellLevel: 52, MaxLevel: 57},
+	{Amount: 33, Variance: 0.153846, PerLevel: 0.4, SpellLevel: 12, MaxLevel: 17},
+	{Amount: 55, Variance: 0.12844, PerLevel: 0.6, SpellLevel: 22, MaxLevel: 27},
+	{Amount: 130, Variance: 0.122449, PerLevel: 0.9, SpellLevel: 32, MaxLevel: 37},
+	{Amount: 179, Variance: 0.120401, PerLevel: 1.1, SpellLevel: 42, MaxLevel: 47},
+	{Amount: 239, Variance: 0.109785, PerLevel: 1.3, SpellLevel: 52, MaxLevel: 57},
 }
-var FireNovaDamageCoeff = [FireNovaLearnRanks + 1]float64{0, .1, .143, .143, .143, .143}
+var FireNovaDamageCoeff = [FireNovaLearnRanks + 1]float64{0, .143, .143, .143, .143, .143}
 var FireNovaLearnManaCost = [FireNovaLearnRanks + 1]float64{0, 65, 120, 210, 290, 375} // client 1.60.1.70425 (was 95/170/280/395/520)
 var FireNovaLearnLevel = [FireNovaLearnRanks + 1]int{0, 12, 22, 32, 42, 52}
 
