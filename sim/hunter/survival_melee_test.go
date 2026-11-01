@@ -273,3 +273,16 @@ func TestMongooseBiteIsAMainHandSpecial(t *testing.T) {
 		t.Errorf("Mongoose Bite damage multiplier = %v, want 1: Predator's Edge is an off-hand bonus", got)
 	}
 }
+
+// Lacerating Strikes bleeds for 40% of the damage Mongoose Bite did, and
+// that hit already took the target's damage-taken modifiers, so the ticks
+// must not take them a second time (the same rule as Ignite's, which
+// Blizzard stated no longer double dips).
+func TestLaceratingStrikesTicksSkipTheTargetsDamageTakenModifiers(t *testing.T) {
+	_, built, target := buildSurvivalMeleeHunter(t)
+	target.PseudoStats.DamageTakenMultiplier *= 1.1
+	attackTable := built.AttackTables[target.UnitIndex][built.LaceratingStrikes.CastType]
+	if got := built.LaceratingStrikes.TargetDamageMultiplier(attackTable, true); got != 1 {
+		t.Errorf("Lacerating Strikes' tick takes a target damage multiplier of %v, want 1: the Mongoose Bite it copies already took them", got)
+	}
+}

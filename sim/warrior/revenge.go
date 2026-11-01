@@ -18,6 +18,18 @@ import (
 // Sunder Armor formula that predates the client's own Sunder numbers).
 const revengeThreatMultiplier = 2.25
 
+// revengeAttackPowerCoefficient is the 0.25 x AP client 1.60.1.70707 added
+// to every Revenge rank: the description's APRatio variable and the
+// Forever tooltips (25288: 137.7-168.3 + 0.25 x AP). SpellEffect still
+// carries no AP coefficient, so the engine adds it here.
+const revengeAttackPowerCoefficient = 0.25
+
+// revengeBaseDamage is a Revenge hit before mitigation: the client roll,
+// Dreadnaught's 2-piece bonus and a quarter of attack power.
+func revengeBaseDamage(roll, dreadnaughtBonus, attackPower float64) float64 {
+	return roll + dreadnaughtBonus + revengeAttackPowerCoefficient*attackPower
+}
+
 func (warrior *Warrior) registerRevengeSpell(cdTimer *core.Timer) {
 	topTrainerRank := core.TernaryInt(core.IncludeAQ, RevengeRanks, RevengeRanks-1)
 	rank := max(1, min(rankAtLevel(RevengeLevel[:], warrior.Level), topTrainerRank))
@@ -86,7 +98,7 @@ func (warrior *Warrior) registerRevengeSpell(cdTimer *core.Timer) {
 		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := damage.Roll(sim, casterLevel) + dreadnaughtBonus
+			baseDamage := revengeBaseDamage(damage.Roll(sim, casterLevel), dreadnaughtBonus, spell.MeleeAttackPower(target))
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
 			if !result.Landed() {

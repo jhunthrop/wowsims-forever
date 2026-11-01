@@ -1,6 +1,7 @@
 package core
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/wowsims/classic/sim/core/proto"
@@ -78,10 +79,51 @@ func applyWeaponImbueConsumes(character *Character, consumes *proto.Consumes) {
 
 	if character.HasMHWeapon() {
 		addImbueStats(character, consumes.MainHandImbue, true, shadowOilIcd)
+		addImbueStats(character, stoneBesidePoison(consumes.MainHandImbue, consumes.MainHandStone), true, shadowOilIcd)
 	}
 	if character.OffHand() != nil {
 		addImbueStats(character, consumes.OffHandImbue, false, shadowOilIcd)
+		addImbueStats(character, stoneBesidePoison(consumes.OffHandImbue, consumes.OffHandStone), false, shadowOilIcd)
 	}
+}
+
+// roguePoisons are the imbues Forever lets share a weapon with a stone.
+var roguePoisons = map[proto.WeaponImbue]bool{
+	proto.WeaponImbue_InstantPoison: true,
+	proto.WeaponImbue_DeadlyPoison:  true,
+	proto.WeaponImbue_WoundPoison:   true,
+}
+
+// itemTemporaryEnchants are the stones, weightstones and oils: the
+// temporary enchants a consumable item puts on a weapon.
+var itemTemporaryEnchants = map[proto.WeaponImbue]bool{
+	proto.WeaponImbue_MinorWizardOil: true, proto.WeaponImbue_LesserWizardOil: true,
+	proto.WeaponImbue_WizardOil: true, proto.WeaponImbue_BrilliantWizardOil: true,
+	proto.WeaponImbue_BlessedWizardOil: true, proto.WeaponImbue_MinorManaOil: true,
+	proto.WeaponImbue_LesserManaOil: true, proto.WeaponImbue_BrilliantManaOil: true,
+	proto.WeaponImbue_SolidSharpeningStone: true, proto.WeaponImbue_DenseSharpeningStone: true,
+	proto.WeaponImbue_ElementalSharpeningStone: true, proto.WeaponImbue_ConsecratedSharpeningStone: true,
+	proto.WeaponImbue_SolidWeightstone: true, proto.WeaponImbue_DenseWeightstone: true,
+	proto.WeaponImbue_ShadowOil: true, proto.WeaponImbue_FrostOil: true,
+}
+
+// stoneBesidePoison is the second temporary enchant on a hand: Forever
+// lets a stone, weightstone or oil sit beside a rogue poison (the rogue
+// and warlock Deep Dive, 2026-10-07). The stone field must hold such an
+// item enchant, and the hand's imbue must be a poison (or empty, when it
+// is the hand's only enchant); anything else would put two enchants of
+// one kind on a weapon and is refused.
+func stoneBesidePoison(imbue, stone proto.WeaponImbue) proto.WeaponImbue {
+	if stone == proto.WeaponImbue_WeaponImbueUnknown {
+		return stone
+	}
+	if !itemTemporaryEnchants[stone] {
+		panic(fmt.Sprintf("weapon stone field holds %s: it takes a stone, weightstone or oil", stone))
+	}
+	if imbue != proto.WeaponImbue_WeaponImbueUnknown && !roguePoisons[imbue] {
+		panic(fmt.Sprintf("weapon stone %s sits beside %s: only a rogue poison shares a weapon with a stone", stone, imbue))
+	}
+	return stone
 }
 
 // manaOilStats are the mana oils' mana per five seconds and healing, as the

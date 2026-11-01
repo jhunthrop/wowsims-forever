@@ -36,7 +36,9 @@ func (hunter *Hunter) registerLaceratingStrikesDot() {
 		// needs a DefenseType to pick the melee crit bonus.
 		DefenseType: core.DefenseTypeMelee,
 		ProcMask:    core.ProcMaskEmpty,
-		Flags:       core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell,
+		// A share of a hit that already took the target's damage-taken
+		// modifiers, so its ticks skip them (as Ignite's do).
+		Flags: core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell | core.SpellFlagIgnoreTargetModifiers,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,

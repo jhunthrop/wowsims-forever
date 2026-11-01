@@ -4068,7 +4068,7 @@ func (x *IndividualBuffs) GetSlipkiksSavvy() bool {
 	return false
 }
 
-// NextIndex: 36
+// NextIndex: 38
 type Consumes struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Flask           Flask                  `protobuf:"varint,1,opt,name=flask,proto3,enum=proto.Flask" json:"flask,omitempty"`
@@ -4102,8 +4102,14 @@ type Consumes struct {
 	HitConsumable            HitConsumable    `protobuf:"varint,29,opt,name=hit_consumable,json=hitConsumable,proto3,enum=proto.HitConsumable" json:"hit_consumable,omitempty"`
 	HealingPowerBuff         HealingPowerBuff `protobuf:"varint,34,opt,name=healing_power_buff,json=healingPowerBuff,proto3,enum=proto.HealingPowerBuff" json:"healing_power_buff,omitempty"`
 	SpiritElixir             SpiritElixir     `protobuf:"varint,35,opt,name=spirit_elixir,json=spiritElixir,proto3,enum=proto.SpiritElixir" json:"spirit_elixir,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// Forever lets a sharpening stone, weightstone or oil share a weapon
+	// with a rogue poison (the rogue and warlock Deep Dive, 2026-10-07).
+	// The imbue field holds the poison and these hold the second
+	// temporary enchant on the same hand.
+	MainHandStone WeaponImbue `protobuf:"varint,36,opt,name=main_hand_stone,json=mainHandStone,proto3,enum=proto.WeaponImbue" json:"main_hand_stone,omitempty"`
+	OffHandStone  WeaponImbue `protobuf:"varint,37,opt,name=off_hand_stone,json=offHandStone,proto3,enum=proto.WeaponImbue" json:"off_hand_stone,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Consumes) Reset() {
@@ -4345,6 +4351,20 @@ func (x *Consumes) GetSpiritElixir() SpiritElixir {
 		return x.SpiritElixir
 	}
 	return SpiritElixir_SpiritElixirUnknown
+}
+
+func (x *Consumes) GetMainHandStone() WeaponImbue {
+	if x != nil {
+		return x.MainHandStone
+	}
+	return WeaponImbue_WeaponImbueUnknown
+}
+
+func (x *Consumes) GetOffHandStone() WeaponImbue {
+	if x != nil {
+		return x.OffHandStone
+	}
+	return WeaponImbue_WeaponImbueUnknown
 }
 
 // NextIndex: 26
@@ -6448,7 +6468,7 @@ const file_common_proto_rawDesc = "" +
 	"\x12warchiefs_blessing\x18\v \x01(\bR\x11warchiefsBlessing\x12'\n" +
 	"\x0ffengus_ferocity\x18\f \x01(\bR\x0efengusFerocity\x12#\n" +
 	"\rmoldars_moxie\x18\r \x01(\bR\fmoldarsMoxie\x12%\n" +
-	"\x0eslipkiks_savvy\x18\x0e \x01(\bR\rslipkiksSavvyJ\x04\b\x0f\x10\x10R\x11dragonslayer_buff\"\xc7\r\n" +
+	"\x0eslipkiks_savvy\x18\x0e \x01(\bR\rslipkiksSavvyJ\x04\b\x0f\x10\x10R\x11dragonslayer_buff\"\xbd\x0e\n" +
 	"\bConsumes\x12\"\n" +
 	"\x05flask\x18\x01 \x01(\x0e2\f.proto.FlaskR\x05flask\x12\x1f\n" +
 	"\x04food\x18\x02 \x01(\x0e2\v.proto.FoodR\x04food\x12;\n" +
@@ -6481,7 +6501,9 @@ const file_common_proto_rawDesc = "" +
 	"\x10sapper_explosive\x18\x1c \x01(\x0e2\x16.proto.SapperExplosiveR\x0fsapperExplosive\x12;\n" +
 	"\x0ehit_consumable\x18\x1d \x01(\x0e2\x14.proto.HitConsumableR\rhitConsumable\x12E\n" +
 	"\x12healing_power_buff\x18\" \x01(\x0e2\x17.proto.HealingPowerBuffR\x10healingPowerBuff\x128\n" +
-	"\rspirit_elixir\x18# \x01(\x0e2\x13.proto.SpiritElixirR\fspiritElixir\"\xfe\b\n" +
+	"\rspirit_elixir\x18# \x01(\x0e2\x13.proto.SpiritElixirR\fspiritElixir\x12:\n" +
+	"\x0fmain_hand_stone\x18$ \x01(\x0e2\x12.proto.WeaponImbueR\rmainHandStone\x128\n" +
+	"\x0eoff_hand_stone\x18% \x01(\x0e2\x12.proto.WeaponImbueR\foffHandStone\"\xfe\b\n" +
 	"\aDebuffs\x12.\n" +
 	"\x13judgement_of_wisdom\x18\x01 \x01(\bR\x11judgementOfWisdom\x12,\n" +
 	"\x12judgement_of_light\x18\x02 \x01(\bR\x10judgementOfLight\x12P\n" +
@@ -7307,48 +7329,50 @@ var file_common_proto_depIdxs = []int32{
 	37, // 37: proto.Consumes.hit_consumable:type_name -> proto.HitConsumable
 	28, // 38: proto.Consumes.healing_power_buff:type_name -> proto.HealingPowerBuff
 	29, // 39: proto.Consumes.spirit_elixir:type_name -> proto.SpiritElixir
-	17, // 40: proto.Debuffs.judgement_of_the_crusader:type_name -> proto.TristateEffect
-	17, // 41: proto.Debuffs.expose_armor:type_name -> proto.TristateEffect
-	17, // 42: proto.Debuffs.curse_of_weakness:type_name -> proto.TristateEffect
-	17, // 43: proto.Debuffs.demoralizing_roar:type_name -> proto.TristateEffect
-	17, // 44: proto.Debuffs.demoralizing_shout:type_name -> proto.TristateEffect
-	17, // 45: proto.Debuffs.thunder_clap:type_name -> proto.TristateEffect
-	17, // 46: proto.Debuffs.hunters_mark:type_name -> proto.TristateEffect
-	43, // 47: proto.TargetInput.input_type:type_name -> proto.InputType
-	41, // 48: proto.Target.mob_type:type_name -> proto.MobType
-	16, // 49: proto.Target.spell_school:type_name -> proto.SpellSchool
-	56, // 50: proto.Target.target_inputs:type_name -> proto.TargetInput
-	57, // 51: proto.Encounter.targets:type_name -> proto.Target
-	42, // 52: proto.Encounter.biome:type_name -> proto.Biome
-	58, // 53: proto.Encounter.movement:type_name -> proto.MovementPattern
-	59, // 54: proto.Encounter.targets_over_time:type_name -> proto.TargetCountAt
-	57, // 55: proto.PresetTarget.target:type_name -> proto.Target
-	61, // 56: proto.PresetEncounter.targets:type_name -> proto.PresetTarget
-	64, // 57: proto.EquipmentSpec.items:type_name -> proto.ItemSpec
-	67, // 58: proto.SimDatabase.items:type_name -> proto.SimItem
-	63, // 59: proto.SimDatabase.random_suffixes:type_name -> proto.ItemRandomSuffix
-	68, // 60: proto.SimDatabase.enchants:type_name -> proto.SimEnchant
-	3,  // 61: proto.SimItem.class_allowlist:type_name -> proto.Class
-	7,  // 62: proto.SimItem.type:type_name -> proto.ItemType
-	8,  // 63: proto.SimItem.armor_type:type_name -> proto.ArmorType
-	9,  // 64: proto.SimItem.weapon_type:type_name -> proto.WeaponType
-	11, // 65: proto.SimItem.hand_type:type_name -> proto.HandType
-	12, // 66: proto.SimItem.ranged_weapon_type:type_name -> proto.RangedWeaponType
-	46, // 67: proto.SimItem.faction_restriction:type_name -> proto.SimItem.FactionRestriction
-	47, // 68: proto.UnitReference.type:type_name -> proto.UnitReference.Type
-	69, // 69: proto.UnitReference.owner:type_name -> proto.UnitReference
-	45, // 70: proto.ActionID.other_id:type_name -> proto.OtherAction
-	70, // 71: proto.Cooldown.id:type_name -> proto.ActionID
-	71, // 72: proto.Cooldowns.cooldowns:type_name -> proto.Cooldown
-	76, // 73: proto.CustomRotation.spells:type_name -> proto.CustomSpell
-	64, // 74: proto.ItemSwap.mh_item:type_name -> proto.ItemSpec
-	64, // 75: proto.ItemSwap.oh_item:type_name -> proto.ItemSpec
-	64, // 76: proto.ItemSwap.ranged_item:type_name -> proto.ItemSpec
-	77, // [77:77] is the sub-list for method output_type
-	77, // [77:77] is the sub-list for method input_type
-	77, // [77:77] is the sub-list for extension type_name
-	77, // [77:77] is the sub-list for extension extendee
-	0,  // [0:77] is the sub-list for field type_name
+	38, // 40: proto.Consumes.main_hand_stone:type_name -> proto.WeaponImbue
+	38, // 41: proto.Consumes.off_hand_stone:type_name -> proto.WeaponImbue
+	17, // 42: proto.Debuffs.judgement_of_the_crusader:type_name -> proto.TristateEffect
+	17, // 43: proto.Debuffs.expose_armor:type_name -> proto.TristateEffect
+	17, // 44: proto.Debuffs.curse_of_weakness:type_name -> proto.TristateEffect
+	17, // 45: proto.Debuffs.demoralizing_roar:type_name -> proto.TristateEffect
+	17, // 46: proto.Debuffs.demoralizing_shout:type_name -> proto.TristateEffect
+	17, // 47: proto.Debuffs.thunder_clap:type_name -> proto.TristateEffect
+	17, // 48: proto.Debuffs.hunters_mark:type_name -> proto.TristateEffect
+	43, // 49: proto.TargetInput.input_type:type_name -> proto.InputType
+	41, // 50: proto.Target.mob_type:type_name -> proto.MobType
+	16, // 51: proto.Target.spell_school:type_name -> proto.SpellSchool
+	56, // 52: proto.Target.target_inputs:type_name -> proto.TargetInput
+	57, // 53: proto.Encounter.targets:type_name -> proto.Target
+	42, // 54: proto.Encounter.biome:type_name -> proto.Biome
+	58, // 55: proto.Encounter.movement:type_name -> proto.MovementPattern
+	59, // 56: proto.Encounter.targets_over_time:type_name -> proto.TargetCountAt
+	57, // 57: proto.PresetTarget.target:type_name -> proto.Target
+	61, // 58: proto.PresetEncounter.targets:type_name -> proto.PresetTarget
+	64, // 59: proto.EquipmentSpec.items:type_name -> proto.ItemSpec
+	67, // 60: proto.SimDatabase.items:type_name -> proto.SimItem
+	63, // 61: proto.SimDatabase.random_suffixes:type_name -> proto.ItemRandomSuffix
+	68, // 62: proto.SimDatabase.enchants:type_name -> proto.SimEnchant
+	3,  // 63: proto.SimItem.class_allowlist:type_name -> proto.Class
+	7,  // 64: proto.SimItem.type:type_name -> proto.ItemType
+	8,  // 65: proto.SimItem.armor_type:type_name -> proto.ArmorType
+	9,  // 66: proto.SimItem.weapon_type:type_name -> proto.WeaponType
+	11, // 67: proto.SimItem.hand_type:type_name -> proto.HandType
+	12, // 68: proto.SimItem.ranged_weapon_type:type_name -> proto.RangedWeaponType
+	46, // 69: proto.SimItem.faction_restriction:type_name -> proto.SimItem.FactionRestriction
+	47, // 70: proto.UnitReference.type:type_name -> proto.UnitReference.Type
+	69, // 71: proto.UnitReference.owner:type_name -> proto.UnitReference
+	45, // 72: proto.ActionID.other_id:type_name -> proto.OtherAction
+	70, // 73: proto.Cooldown.id:type_name -> proto.ActionID
+	71, // 74: proto.Cooldowns.cooldowns:type_name -> proto.Cooldown
+	76, // 75: proto.CustomRotation.spells:type_name -> proto.CustomSpell
+	64, // 76: proto.ItemSwap.mh_item:type_name -> proto.ItemSpec
+	64, // 77: proto.ItemSwap.oh_item:type_name -> proto.ItemSpec
+	64, // 78: proto.ItemSwap.ranged_item:type_name -> proto.ItemSpec
+	79, // [79:79] is the sub-list for method output_type
+	79, // [79:79] is the sub-list for method input_type
+	79, // [79:79] is the sub-list for extension type_name
+	79, // [79:79] is the sub-list for extension extendee
+	0,  // [0:79] is the sub-list for field type_name
 }
 
 func init() { file_common_proto_init() }

@@ -709,7 +709,7 @@ message IndividualBuffs {
 	bool slipkiks_savvy = 14;
 }
 
-// NextIndex: 36
+// NextIndex: 38
 message Consumes {
 	Flask flask = 1;
 	Food food = 2;
@@ -741,6 +741,12 @@ message Consumes {
 	HitConsumable hit_consumable = 29;
 	HealingPowerBuff healing_power_buff = 34;
 	SpiritElixir spirit_elixir = 35;
+	// Forever lets a sharpening stone, weightstone or oil share a weapon
+	// with a rogue poison (the rogue and warlock Deep Dive, 2026-10-07).
+	// The imbue field holds the poison and these hold the second
+	// temporary enchant on the same hand.
+	WeaponImbue main_hand_stone = 36;
+	WeaponImbue off_hand_stone = 37;
 }
 
 // NextIndex: 26
