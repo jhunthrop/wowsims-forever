@@ -23,29 +23,6 @@
       }
     },
     {
-      "notes": "Shadowfiend below 30% mana: the fiend returns 5% of your maximum mana with each attack for 15 seconds, on a five-minute cooldown. Forever lists it in the Shadow Magic skill line from level 1 (SkillLineAbility row 49886, spell 401977).",
-      "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentManaPercent": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "0.3"
-              }
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 401977
-          }
-        }
-      }
-    },
-    {
       "notes": "Shadow Word: Pain is kept up unless the fight is about to end, when refreshing it would waste most of the DoT.",
       "action": {
         "condition": {

@@ -57,16 +57,3 @@ func TestCriticalMassClampsToThreeRanks(t *testing.T) {
 		t.Errorf("Fireball crit rating with Critical Mass written as 5 = %v, want the 3/3 value %v", got, want)
 	}
 }
-
-// Ice Lance's rank 1 carries the client's 8 sec cooldown since 1.60.1.70685;
-// the trained ranks a level-60 mage casts carry none.
-func TestIceLanceCooldownFollowsTheClientRank(t *testing.T) {
-	_, low := newMageAtLevel(t, 20, ForeverFrostTalents)
-	if got := low.IceLance[1].CD.Duration; got != 8*time.Second {
-		t.Errorf("rank 1 Ice Lance cooldown = %v, want 8s", got)
-	}
-	_, high := newMageAtLevel(t, 60, ForeverFrostTalents)
-	if cd := high.IceLance[IceLanceRanks].CD; cd.Timer != nil {
-		t.Errorf("max-rank Ice Lance has a cooldown of %v, want none", cd.Duration)
-	}
-}

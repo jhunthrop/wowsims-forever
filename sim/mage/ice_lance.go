@@ -36,7 +36,7 @@ func (mage *Mage) registerIceLanceSpell() {
 	}
 
 	mage.IceLance = make([]*core.Spell, IceLanceRanks+1)
-	cdTimer := mage.NewTimer()
+	cdTimer := mage.fireBlastCategory()
 
 	// Rank 0 of the client's Ice Lance rows is not a player rank: its
 	// base-damage column carries the spell id 400640 rather than a
@@ -51,17 +51,14 @@ func (mage *Mage) registerIceLanceSpell() {
 	}
 }
 
-// iceLanceCooldown is the rank's client cooldown. Client 1.60.1.70685
-// gives rank 1 (spell 1312002, the talent's own rank, levels 20 to 27) an
-// 8 sec cooldown and every trained rank none, so only a mage below level
-// 28 waits on it.
-func iceLanceCooldown(rank int, cdTimer *core.Timer) core.Cooldown {
-	duration := time.Duration(IceLanceCooldownMS[rank]) * time.Millisecond
-	if duration <= 0 {
-		return core.Cooldown{}
-	}
-	return core.Cooldown{Timer: cdTimer, Duration: duration}
-}
+// iceLanceCooldown is every rank's cooldown: Fire Blast's 8 s category
+// recovery on the timer they share. Client 1.60.1.70685 put rank 1
+// (1312002) in Fire Blast's category 19 with an 8000 ms category recovery;
+// the trained ranks (400640, 1240044-1240047) have no such row in the
+// shipped tables, but Wowhead Forever's hotfix-applied tooltips show
+// "8 sec cooldown" on every rank (the same data that raised the Frozen
+// bonus to 300% over the shipped 200).
+const iceLanceCooldown = 8 * time.Second
 
 func (mage *Mage) getIceLanceConfig(rank int, cdTimer *core.Timer) core.SpellConfig {
 	roll := mage.clientRoll(IceLanceBaseDamage[rank], IceLancePointsPerLevel[rank], IceLanceLevel[rank], IceLanceMaxLevel[rank])
@@ -90,7 +87,7 @@ func (mage *Mage) getIceLanceConfig(rank int, cdTimer *core.Timer) core.SpellCon
 				GCD:      core.GCDDefault,
 				CastTime: time.Millisecond * time.Duration(IceLanceCastTime[rank]),
 			},
-			CD: iceLanceCooldown(rank, cdTimer),
+			CD: core.Cooldown{Timer: cdTimer, Duration: iceLanceCooldown},
 		},
 
 		DamageMultiplier: 1,

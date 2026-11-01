@@ -16,9 +16,19 @@ var FireBlastSpellCoeff = [FireBlastRanks + 1]float64{0, 0.429, 0.429, 0.429, 0.
 var FireBlastManaCost = [FireBlastRanks + 1]float64{0, 40, 75, 115, 165, 220, 280, 340}
 var FireBlastLevel = [FireBlastRanks + 1]int{0, 6, 14, 22, 30, 38, 46, 54}
 
+// fireBlastCategory is the cooldown timer of the client's category 19:
+// every Fire Blast rank and, since 1.60.1.70685, Ice Lance carry it with an
+// 8 s category recovery, so casting either puts both on cooldown.
+func (mage *Mage) fireBlastCategory() *core.Timer {
+	if mage.fireBlastCategoryTimer == nil {
+		mage.fireBlastCategoryTimer = mage.NewTimer()
+	}
+	return mage.fireBlastCategoryTimer
+}
+
 func (mage *Mage) registerFireBlastSpell() {
 	mage.FireBlast = make([]*core.Spell, FireBlastRanks+1)
-	cdTimer := mage.NewTimer()
+	cdTimer := mage.fireBlastCategory()
 
 	for rank := 1; rank <= FireBlastRanks; rank++ {
 		config := mage.newFireBlastSpellConfig(rank, cdTimer)

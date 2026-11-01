@@ -120,8 +120,10 @@ func TestDarkSacrificeRanksFollowTheClientLevels(t *testing.T) {
 }
 
 // TestRotationsCastTheManaAbilitiesBehindTheirGates holds both written
-// priest lists to casting Shadowfiend and Dark Sacrifice in a long fight,
-// where the bar falls through the lists' gates.
+// priest lists to casting Dark Sacrifice in a long fight, where the bar
+// falls through the lists' gates, and to never casting Shadowfiend: a
+// Forever priest cannot learn it (its skill-line row has no learn level,
+// and no beta priest ever cast it), so the lists leave it out.
 func TestRotationsCastTheManaAbilitiesBehindTheirGates(t *testing.T) {
 	for _, c := range rotationCases {
 		t.Run(c.name, func(t *testing.T) {
@@ -131,10 +133,11 @@ func TestRotationsCastTheManaAbilitiesBehindTheirGates(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			for name, id := range map[string]int32{"Shadowfiend": 401977, "Dark Sacrifice": 1277328} {
-				if summary.Casts[id] == 0 {
-					t.Errorf("the %s list never cast %s", c.name, name)
-				}
+			if summary.Casts[1277328] == 0 {
+				t.Errorf("the %s list never cast Dark Sacrifice", c.name)
+			}
+			if n := summary.Casts[401977]; n != 0 {
+				t.Errorf("the %s list cast Shadowfiend %d times; a Forever priest cannot learn it", c.name, n)
 			}
 		})
 	}
