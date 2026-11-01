@@ -34,7 +34,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 20 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
-| ElementalShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| ElementalShaman | 20 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 20 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | ElementalShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→35.00-35.00 | 0.214→0.214 | declared, matches |
@@ -65,8 +65,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 30 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 30 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
-| ElementalShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| ElementalShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 30 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 30 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 30 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
@@ -111,9 +111,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 38 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 38 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 130.54-138.66→130.54-138.66 | 0.386→0.386 | declared, matches |
-| ElementalShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| ElementalShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 38 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 38 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 38 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 38 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -171,9 +171,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 40 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 40 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 133.06-141.34→133.06-141.34 | 0.386→0.386 | declared, matches |
-| ElementalShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| ElementalShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 40 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 40 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 40 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 40 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -237,10 +237,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 50 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 50 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 50 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 202.01-214.39→202.01-214.39 | 0.386→0.386 | declared, matches |
-| ElementalShaman | 50 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| ElementalShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 50 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 50 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 50 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 50 | Fire Nova | 0 | 408427 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 173.39-195.61→173.39-195.61 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 50 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -320,11 +320,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 60 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 60 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 206.67-219.33→206.67-219.33 | 0.386→0.386 | declared, matches |
 | ElementalShaman | 60 | Earth Shock | 7 | 10414 | 450.00→450.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 293.06-308.94→293.06-308.94 | 0.386→0.386 | declared, matches |
-| ElementalShaman | 60 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| ElementalShaman | 60 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
-| ElementalShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→412.07-459.93 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 60 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 60 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 60 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 60 | Fire Nova | 0 | 408427 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 173.39-195.61→173.39-195.61 | 0.143→0.143 | declared, matches |
+| ElementalShaman | 60 | Fire Nova | 0 | 408428 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 232.02-258.98→232.02-258.98 | 0.143→0.143 | declared, matches |
 | ElementalShaman | 60 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -433,7 +433,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 20 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
-| EnhancementShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| EnhancementShaman | 20 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 20 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | EnhancementShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→35.00-35.00 | 0.214→0.214 | declared, matches |
@@ -464,8 +464,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 30 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 30 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
-| EnhancementShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| EnhancementShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 30 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 30 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 30 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
@@ -510,9 +510,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 38 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 38 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 130.54-138.66→130.54-138.66 | 0.386→0.386 | declared, matches |
-| EnhancementShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| EnhancementShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 38 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 38 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 38 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 38 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -570,9 +570,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 40 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 40 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 133.06-141.34→133.06-141.34 | 0.386→0.386 | declared, matches |
-| EnhancementShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| EnhancementShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 40 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 40 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 40 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 40 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -636,10 +636,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 50 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 50 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 50 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 202.01-214.39→202.01-214.39 | 0.386→0.386 | declared, matches |
-| EnhancementShaman | 50 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| EnhancementShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 50 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 50 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 50 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 50 | Fire Nova | 0 | 408427 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 173.39-195.61→173.39-195.61 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 50 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -719,11 +719,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 60 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 60 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 206.67-219.33→206.67-219.33 | 0.386→0.386 | declared, matches |
 | EnhancementShaman | 60 | Earth Shock | 7 | 10414 | 450.00→450.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 293.06-308.94→293.06-308.94 | 0.386→0.386 | declared, matches |
-| EnhancementShaman | 60 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| EnhancementShaman | 60 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
-| EnhancementShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→412.07-459.93 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 60 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 60 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 60 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 60 | Fire Nova | 0 | 408427 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 173.39-195.61→173.39-195.61 | 0.143→0.143 | declared, matches |
+| EnhancementShaman | 60 | Fire Nova | 0 | 408428 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 232.02-258.98→232.02-258.98 | 0.143→0.143 | declared, matches |
 | EnhancementShaman | 60 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -834,7 +834,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 20 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
-| RestorationShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| RestorationShaman | 20 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
 | RestorationShaman | 20 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | RestorationShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→35.00-35.00 | 0.214→0.214 | declared, matches |
@@ -870,8 +870,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 30 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 30 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
-| RestorationShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| RestorationShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 30 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 30 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
 | RestorationShaman | 30 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
@@ -923,9 +923,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 38 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 38 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 130.54-138.66→130.54-138.66 | 0.386→0.386 | declared, matches |
-| RestorationShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| RestorationShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| RestorationShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 38 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 38 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 38 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
 | RestorationShaman | 38 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -993,9 +993,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 40 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 40 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 133.06-141.34→133.06-141.34 | 0.386→0.386 | declared, matches |
-| RestorationShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| RestorationShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| RestorationShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 40 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 40 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 40 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
 | RestorationShaman | 40 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -1071,10 +1071,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 50 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 50 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 50 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 202.01-214.39→202.01-214.39 | 0.386→0.386 | declared, matches |
-| RestorationShaman | 50 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| RestorationShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| RestorationShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| RestorationShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 50 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 50 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 50 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 50 | Fire Nova | 0 | 408427 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 173.39-195.61→173.39-195.61 | 0.143→0.143 | declared, matches |
 | RestorationShaman | 50 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -1169,11 +1169,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 60 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 60 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 206.67-219.33→206.67-219.33 | 0.386→0.386 | declared, matches |
 | RestorationShaman | 60 | Earth Shock | 7 | 10414 | 450.00→450.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 293.06-308.94→293.06-308.94 | 0.386→0.386 | declared, matches |
-| RestorationShaman | 60 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| RestorationShaman | 60 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| RestorationShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| RestorationShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
-| RestorationShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→412.07-459.93 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 60 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 60 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 60 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 60 | Fire Nova | 0 | 408427 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 173.39-195.61→173.39-195.61 | 0.143→0.143 | declared, matches |
+| RestorationShaman | 60 | Fire Nova | 0 | 408428 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 232.02-258.98→232.02-258.98 | 0.143→0.143 | declared, matches |
 | RestorationShaman | 60 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -1298,7 +1298,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 20 | Earth Shock | 1 | 8042 | 30.00→30.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 4→4 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 19.36-21.64→19.36-21.64 | 0.386→0.386 | declared, matches |
 | WardenShaman | 20 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
 | WardenShaman | 20 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
-| WardenShaman | 20 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
+| WardenShaman | 20 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
 | WardenShaman | 20 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
 | WardenShaman | 20 | Flame Shock | 2 | 8052 | 95.00→95.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 18→18 | 12000→12000 | match |  | 35.00-35.00→35.00-35.00 | 0.214→0.214 | declared, matches |
@@ -1329,8 +1329,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 30 | Earth Shock | 2 | 8044 | 50.00→50.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 8→8 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 35.39-37.61→35.39-37.61 | 0.386→0.386 | declared, matches |
 | WardenShaman | 30 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | WardenShaman | 30 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
-| WardenShaman | 30 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| WardenShaman | 30 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
+| WardenShaman | 30 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| WardenShaman | 30 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
 | WardenShaman | 30 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Flame Shock | 1 | 8050 | 55.00→55.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 24.00-24.00→24.00-24.00 | 0.214→0.214 | declared, matches |
@@ -1375,9 +1375,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 38 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | WardenShaman | 38 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | WardenShaman | 38 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 130.54-138.66→130.54-138.66 | 0.386→0.386 | declared, matches |
-| WardenShaman | 38 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| WardenShaman | 38 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| WardenShaman | 38 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| WardenShaman | 38 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| WardenShaman | 38 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| WardenShaman | 38 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
 | WardenShaman | 38 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -1435,9 +1435,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 40 | Earth Shock | 3 | 8045 | 85.00→85.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 14→14 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 51.77-55.23→51.77-55.23 | 0.386→0.386 | declared, matches |
 | WardenShaman | 40 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | WardenShaman | 40 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 133.06-141.34→133.06-141.34 | 0.386→0.386 | declared, matches |
-| WardenShaman | 40 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| WardenShaman | 40 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| WardenShaman | 40 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
+| WardenShaman | 40 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| WardenShaman | 40 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| WardenShaman | 40 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
 | WardenShaman | 40 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -1501,10 +1501,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 50 | Earth Shock | 4 | 8046 | 145.00→145.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 24→24 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 83.69-89.31→83.69-89.31 | 0.386→0.386 | declared, matches |
 | WardenShaman | 50 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
 | WardenShaman | 50 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 202.01-214.39→202.01-214.39 | 0.386→0.386 | declared, matches |
-| WardenShaman | 50 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| WardenShaman | 50 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| WardenShaman | 50 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| WardenShaman | 50 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
+| WardenShaman | 50 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| WardenShaman | 50 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| WardenShaman | 50 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
+| WardenShaman | 50 | Fire Nova | 0 | 408427 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 173.39-195.61→173.39-195.61 | 0.143→0.143 | declared, matches |
 | WardenShaman | 50 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
@@ -1584,11 +1584,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 60 | Earth Shock | 5 | 10412 | 240.00→240.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 36→36 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 134.32-142.68→134.32-142.68 | 0.386→0.386 | declared, matches |
 | WardenShaman | 60 | Earth Shock | 6 | 10413 | 345.00→345.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 48→48 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 206.67-219.33→206.67-219.33 | 0.386→0.386 | declared, matches |
 | WardenShaman | 60 | Earth Shock | 7 | 10414 | 450.00→450.00 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 60→60 | 2000→0 | unmodeled-duration | duration_ms: interrupt lock-out of the target's school, never applied: the sim's targets never cast | 293.06-308.94→293.06-308.94 | 0.386→0.386 | declared, matches |
-| WardenShaman | 60 | Fire Nova | 0 | 8349 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 53.08-61.92→53.08-61.92 | 0.100→0.100 | declared, matches |
-| WardenShaman | 60 | Fire Nova | 0 | 8502 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 109.49-124.51→109.49-124.51 | 0.143→0.143 | declared, matches |
-| WardenShaman | 60 | Fire Nova | 0 | 8503 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 194.33-219.67→194.33-219.67 | 0.143→0.143 | declared, matches |
-| WardenShaman | 60 | Fire Nova | 0 | 11306 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 294.16-331.84→294.16-331.84 | 0.143→0.143 | declared, matches |
-| WardenShaman | 60 | Fire Nova | 0 | 11307 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 412.07-459.93→412.07-459.93 | 0.143→0.143 | declared, matches |
+| WardenShaman | 60 | Fire Nova | 0 | 408423 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 12→12 | n/a | match |  | 32.31-37.69→32.31-37.69 | 0.143→0.143 | declared, matches |
+| WardenShaman | 60 | Fire Nova | 0 | 408424 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 22→22 | n/a | match |  | 54.28-61.72→54.28-61.72 | 0.143→0.143 | declared, matches |
+| WardenShaman | 60 | Fire Nova | 0 | 408426 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 32→32 | n/a | match |  | 126.27-142.73→126.27-142.73 | 0.143→0.143 | declared, matches |
+| WardenShaman | 60 | Fire Nova | 0 | 408427 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 173.39-195.61→173.39-195.61 | 0.143→0.143 | declared, matches |
+| WardenShaman | 60 | Fire Nova | 0 | 408428 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 52→52 | n/a | match |  | 232.02-258.98→232.02-258.98 | 0.143→0.143 | declared, matches |
 | WardenShaman | 60 | Fire Nova | 1 | 408341 | 65.00→65.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Fire Nova | 2 | 408342 | 120.00→120.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 22→22 | n/a | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Fire Nova | 3 | 408343 | 210.00→210.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | n/a | n/a | n/a |
