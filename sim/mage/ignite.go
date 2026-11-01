@@ -6,8 +6,7 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// If two spells proc Ignite at almost exactly the same time, the latter
-// overwrites the former.
+// IgniteTicks is the burn's two 2 s ticks over 4 s (client 412538).
 const IgniteTicks = 2
 
 func (mage *Mage) applyIgnite() {
@@ -15,6 +14,7 @@ func (mage *Mage) applyIgnite() {
 		return
 	}
 	newIgniteDamage := 0.0
+	igniteBurn := 0.0
 
 	mage.RegisterAura(core.Aura{
 		Label:    "Ignite Talent",
@@ -38,15 +38,16 @@ func (mage *Mage) applyIgnite() {
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell | SpellFlagMage,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			//			result := spell.CalcAndDealOutcome(sim, target, spell.OutcomeMagicHit)
-
+			// Forever's Ignite rolls (client 412538: one aura,
+			// CumulativeAura 1): a new crit adds its share to what the
+			// burn has left and spreads the sum over a fresh 4 s.
 			dot := mage.igniteTick.Dot(target)
-			dot.ApplyOrRefresh(sim)
-			if dot.GetStacks() < dot.MaxStacks {
-				dot.AddStack(sim)
-				dot.TakeSnapshot(sim, true)
+			remaining := 0.0
+			if dot.IsActive() {
+				remaining = dot.SnapshotBaseDamage * float64(dot.MaxTicksRemaining())
 			}
-
+			igniteBurn = (remaining + newIgniteDamage*IgniteTicks) / IgniteTicks
+			dot.Apply(sim)
 		},
 	})
 
@@ -72,37 +73,24 @@ func (mage *Mage) applyIgnite() {
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
-				Label:     "Ignite",
-				Tag:       mageFireEffectTag,
-				MaxStacks: 5,
-				Duration:  time.Second * 4,
+				Label:    "Ignite",
+				Tag:      mageFireEffectTag,
+				Duration: time.Second * 4,
 			},
 			NumberOfTicks: IgniteTicks,
 			TickLength:    time.Second * 2,
 
-			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, applyStack bool) {
-				if !applyStack {
+			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
+				if isRollover {
 					return
 				}
-
-				// only the first stack snapshots the base
-				if dot.GetStacks() == 1 {
-					// newIgniteDamage is 8%/point of the crit's final
-					// damage, which already carries every attacker
-					// multiplier (Fire Power, Arcane Power, the forms).
-					// Snapshotting AttackerDamageMultiplier here as well
-					// applied them a second time on every tick - the
-					// vanilla engine's behaviour, and the one Forever's
-					// 24 September 2026 beta notes removed ("Ignite: no
-					// longer counts damage bonuses twice"). The bleed
-					// Lacerating Strikes (sim/hunter) already uses this
-					// same "share of a finished hit" shape with a
-					// multiplier of 1.
-					dot.SnapshotAttackerMultiplier = 1
-					dot.SnapshotBaseDamage = newIgniteDamage
-				} else {
-					dot.SnapshotBaseDamage += newIgniteDamage
-				}
+				// igniteBurn is a per-tick share of crits' finished
+				// damage, which already carries every attacker multiplier
+				// (Fire Power, Arcane Power): Forever's 24 September 2026
+				// beta note "Ignite: no longer counts damage bonuses
+				// twice" keeps the ticks' own multiplier at 1.
+				dot.SnapshotAttackerMultiplier = 1
+				dot.SnapshotBaseDamage = igniteBurn
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)

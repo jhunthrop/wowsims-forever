@@ -99,22 +99,20 @@ func TestIgniteTicksCritWithoutFeedingIgnite(t *testing.T) {
 	fireball.ApplyEffects(sim, target, fireball)
 	waitForOutcomes(sim)
 	dot := built.igniteTick.Dot(target)
-	if !dot.IsActive() || dot.GetStacks() != 1 {
-		t.Fatalf("a Fireball crit should apply one Ignite stack; active %v, stacks %d", dot.IsActive(), dot.GetStacks())
+	if !dot.IsActive() {
+		t.Fatal("a Fireball crit should apply Ignite")
 	}
 
-	maxStacks := dot.GetStacks()
 	deadline := sim.CurrentTime + 3*IgniteTicks*time.Second
 	for sim.CurrentTime < deadline && !sim.Step() {
-		maxStacks = max(maxStacks, dot.GetStacks())
 	}
 
 	m := built.igniteTick.SpellMetrics[target.UnitIndex]
 	if m.CritTicks != IgniteTicks {
 		t.Errorf("Ignite CritTicks = %d (plain %d), want %d at 100%% crit", m.CritTicks, m.Ticks, IgniteTicks)
 	}
-	if maxStacks != 1 || m.CritTicks+m.Ticks != IgniteTicks {
-		t.Errorf("Ignite's own crits fed Ignite: peak stacks %d, ticks %d, want 1 stack and %d ticks", maxStacks, m.CritTicks+m.Ticks, IgniteTicks)
+	if m.CritTicks+m.Ticks != IgniteTicks {
+		t.Errorf("Ignite's own crits fed Ignite: %d ticks, want %d", m.CritTicks+m.Ticks, IgniteTicks)
 	}
 }
 
@@ -131,5 +129,46 @@ func TestIgniteTicksSkipTheTargetsDamageTakenModifiers(t *testing.T) {
 	attackTable := built.AttackTables[target.UnitIndex][built.igniteTick.CastType]
 	if got := built.igniteTick.TargetDamageMultiplier(attackTable, true); got != 1 {
 		t.Errorf("Ignite's tick takes a target damage multiplier of %v, want 1: the crit it shares already took them", got)
+	}
+}
+
+// TestIgniteRollsCritsIntoOneBurn: Forever's Ignite is one aura that a
+// new crit refreshes (client 412538: CumulativeAura 1, a 4 s, 2 s-tick
+// burn of $w1/2; the beta logs show only debuff_applied and
+// debuff_refreshed, never a second stack, with up to six crits in one
+// burn). Each crit adds its 40% to what is left, so the whole burn pays
+// 40% of every crit once, however the crits fall between ticks. The old
+// stacking model restarted both ticks for every earlier stack on each
+// refresh and paid an earlier crit again.
+func TestIgniteRollsCritsIntoOneBurn(t *testing.T) {
+	sim, built := newIgniteMageSim(t)
+	target := sim.Encounter.TargetUnits[0]
+	fireball := built.Fireball[core.MaxTrainerRank(FireballRanks)]
+	fireball.BonusCritRating += 100 * core.CritRatingPerCritChance
+	built.igniteTick.BonusCritRating -= 1000 * core.CritRatingPerCritChance
+
+	crits := 0.0
+	cast := func() {
+		before := fireball.SpellMetrics[target.UnitIndex]
+		fireball.ApplyEffects(sim, target, fireball)
+		waitForOutcomes(sim)
+		after := fireball.SpellMetrics[target.UnitIndex]
+		crits += (after.TotalDamage - after.TotalTickDamage) - (before.TotalDamage - before.TotalTickDamage)
+	}
+
+	cast()
+	dot := built.igniteTick.Dot(target)
+	for dot.TickCount < 1 && !sim.Step() {
+	} // one tick of the first burn lands, one is left
+	if !dot.IsActive() || dot.TickCount != 1 {
+		t.Fatalf("the first burn should have one tick left; active %v, ticks %d", dot.IsActive(), dot.TickCount)
+	}
+	cast()
+	for deadline := sim.CurrentTime + 10*time.Second; sim.CurrentTime < deadline && !sim.Step(); {
+	}
+
+	ignite := built.igniteTick.SpellMetrics[target.UnitIndex].TotalTickDamage
+	if want := 0.4 * crits; ignite < want*0.97 || ignite > want*1.03 {
+		t.Errorf("two crits a tick apart burned %.1f, want 40%% of %.1f = %.1f", ignite, crits, want)
 	}
 }
