@@ -86,7 +86,7 @@ func (shaman *Shaman) newRiptideConfig(rank healingRank, cooldown core.Cooldown)
 			}
 		},
 		OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-			dot.CalcAndDealPeriodicSnapshotHealing(sim, target, dot.Spell.OutcomeHealing)
+			dot.CalcAndDealPeriodicSnapshotHealing(sim, target, dot.OutcomeTick)
 		},
 	}
 

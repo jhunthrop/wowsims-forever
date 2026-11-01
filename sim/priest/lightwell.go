@@ -119,7 +119,7 @@ func (priest *Priest) registerLightwellRenew(rankNumber int, rank lightwellRank)
 				snapshotHeal(dot, target, rank.tick)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-				dot.CalcAndDealPeriodicSnapshotHealing(sim, target, dot.Spell.OutcomeHealing)
+				dot.CalcAndDealPeriodicSnapshotHealing(sim, target, dot.OutcomeTick)
 			},
 		},
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {

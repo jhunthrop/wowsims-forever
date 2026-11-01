@@ -32,7 +32,7 @@ func (priest *Priest) registerRenew() {
 				snapshotHeal(dot, target, tick)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-				dot.CalcAndDealPeriodicSnapshotHealing(sim, target, dot.Spell.OutcomeHealing)
+				dot.CalcAndDealPeriodicSnapshotHealing(sim, target, dot.OutcomeTick)
 			},
 		}
 		config.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {

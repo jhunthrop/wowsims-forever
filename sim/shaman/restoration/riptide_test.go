@@ -136,12 +136,34 @@ func TestRiptideTicksFiveTimesOverFifteenSeconds(t *testing.T) {
 			if target.Casts == 0 {
 				continue
 			}
-			// One direct heal and one hit per tick.
-			if target.Casts != 1 || target.Hits != 1+riptideTicks {
-				t.Errorf("Riptide cast %d time(s) and landed %d heals, want 1 and %d", target.Casts, target.Hits, 1+riptideTicks)
+			// One direct heal (a hit or a crit) and five ticks (plain or
+			// critical: the heal over time crits since 1.60.1.70707).
+			direct, ticks := target.Hits+target.Crits, target.Ticks+target.CritTicks
+			if target.Casts != 1 || direct != 1 || ticks != riptideTicks {
+				t.Errorf("Riptide cast %d time(s), landed %d direct heals and %d ticks, want 1, 1 and %d", target.Casts, direct, ticks, riptideTicks)
 			}
 			return
 		}
 	}
 	t.Fatal("the run never cast Riptide")
+}
+
+// Riptide's heal over time crits: every rank carries the client's
+// PERIODIC_CAN_CRIT flag (1.60.1.70707), so its ticks roll the healing crit
+// chance through the dot's own outcome.
+func TestRiptideTicksCanCrit(t *testing.T) {
+	sim, healer := newHealer(t, 60, riptideOnly)
+	tank := raidMember(sim, healsim.TankIndex)
+	spell := healer.Riptide[3]
+	hot := spell.Hot(tank)
+	if !hot.CanCrit {
+		t.Fatal("Riptide's heal over time is not crit-capable")
+	}
+	hot.Apply(sim)
+	for i := 0; i < 400; i++ {
+		hot.TickOnce(sim)
+	}
+	if spell.SpellMetrics[tank.UnitIndex].CritTicks == 0 {
+		t.Errorf("400 Riptide ticks at %.1f%% healing crit never crit", 100*spell.HealingCritChance())
+	}
 }

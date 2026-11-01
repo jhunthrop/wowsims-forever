@@ -215,7 +215,8 @@ func TestSpellsGatedByATalentExistOnlyWithIt(t *testing.T) {
 
 // TestRenewTicksFiveTimesEveryThreeSeconds runs a Renew out and checks the
 // tick count, the period and the total against the client's per-tick
-// amount plus the coefficient per tick.
+// amount plus the coefficient per tick (a critical tick 1.5 times that:
+// every Renew rank carries PERIODIC_CAN_CRIT in 1.60.1.70707).
 func TestRenewTicksFiveTimesEveryThreeSeconds(t *testing.T) {
 	sim, agent := healerSim(t, 60, "")
 	target := agent.GetMainTarget()
@@ -227,12 +228,13 @@ func TestRenewTicksFiveTimesEveryThreeSeconds(t *testing.T) {
 	start := sim.CurrentTime
 	renew.ApplyEffects(sim, target, renew)
 	ticksAt := []time.Duration{}
-	lastHits := metrics().Hits
+	ticks := func() int32 { return metrics().Ticks + metrics().CritTicks }
+	lastHits := ticks()
 	for sim.CurrentTime < start+16*time.Second {
 		if sim.Step() {
 			break
 		}
-		if hits := metrics().Hits; hits != lastHits {
+		if hits := ticks(); hits != lastHits {
 			ticksAt = append(ticksAt, sim.CurrentTime-start)
 			lastHits = hits
 		}
@@ -245,7 +247,28 @@ func TestRenewTicksFiveTimesEveryThreeSeconds(t *testing.T) {
 			t.Errorf("tick %d at %v, want %v", i+1, at, want)
 		}
 	}
-	assertWithin(t, "Renew total", metrics().TotalHealing, 5*perTick, 5*perTick)
+	crits := float64(metrics().CritTicks)
+	want := perTick * (5 - crits + 1.5*crits)
+	assertWithin(t, "Renew total", metrics().TotalHealing, want, want)
+}
+
+// Renew's ticks crit: the client flags every rank PERIODIC_CAN_CRIT, so they
+// roll the healing crit chance through the dot's own outcome.
+func TestRenewTicksCanCrit(t *testing.T) {
+	sim, agent := healerSim(t, 60, "")
+	target := agent.GetMainTarget()
+	renew := agent.Renew[10]
+	hot := renew.Hot(target)
+	if !hot.CanCrit {
+		t.Fatal("Renew's heal over time is not crit-capable")
+	}
+	hot.Apply(sim)
+	for i := 0; i < 400; i++ {
+		hot.TickOnce(sim)
+	}
+	if renew.SpellMetrics[target.UnitIndex].CritTicks == 0 {
+		t.Errorf("400 Renew ticks at %.1f%% healing crit never crit", 100*renew.HealingCritChance())
+	}
 }
 
 // TestPowerWordShieldAbsorbsAndBlocksAnotherForWeakenedSoul covers the
