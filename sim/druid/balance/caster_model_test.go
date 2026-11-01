@@ -7,7 +7,9 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
+	googleProto "google.golang.org/protobuf/proto"
 )
 
 // Balance proto field numbers (proto/druid.proto).
@@ -149,7 +151,9 @@ func TestNaturesGraceIsTenPercentHasteAndGcdForThreeSeconds(t *testing.T) {
 // and gave it no effect at all, so a build spending its capstone point on
 // it was credited zero.
 func TestMoonkinFormRaisesTheDruidsOwnSpellCrit(t *testing.T) {
-	built, sim, target := newBalanceDruidSimWithTalents(t, druidTalentsString(t, map[int]int{moonkinFormField: 1}))
+	alone := googleProto.Clone(core.FullBuffs.Raid).(*proto.RaidBuffs)
+	alone.MoonkinAura = false // the only Moonkin is this druid (TestMoonkinCritIsGrantedOnce)
+	built, sim, target := newBalanceDruidSimInRaid(t, druidTalentsString(t, map[int]int{moonkinFormField: 1}), &proto.EquipmentSpec{}, alone)
 	wrath := built.Wrath[8]
 
 	if !built.MoonkinFormAura.IsActive() {
@@ -162,5 +166,33 @@ func TestMoonkinFormRaisesTheDruidsOwnSpellCrit(t *testing.T) {
 
 	if !near(inForm-outOfForm, 0.03) {
 		t.Errorf("Moonkin Form adds %v spell crit, want 0.03", inForm-outOfForm)
+	}
+}
+
+// moonkinCritFromTalent is the spell crit the Moonkin Form talent adds to
+// the druid's Wrath under the given raid buffs.
+func moonkinCritFromTalent(t *testing.T, raidBuffs *proto.RaidBuffs) float64 {
+	t.Helper()
+	talented, _, target := newBalanceDruidSimInRaid(t, druidTalentsString(t, map[int]int{moonkinFormField: 1}), &proto.EquipmentSpec{}, raidBuffs)
+	plain, _, plainTarget := newBalanceDruidSimInRaid(t, druidTalentsString(t, nil), &proto.EquipmentSpec{}, raidBuffs)
+	return talented.Wrath[8].SpellCritChance(target) - plain.Wrath[8].SpellCritChance(plainTarget)
+}
+
+// Moonkin Form's crit is one aura, 24907 (aura 290, 3), and the client's
+// form spell 24858 has no crit effect of its own. The druid in the form is
+// inside its own aura, which the raid buffs carry as MoonkinAura; an aura
+// does not stack with itself, so another Moonkin in the raid adds nothing
+// either. The druid gets the 3% once.
+func TestMoonkinCritIsGrantedOnce(t *testing.T) {
+	withAura := googleProto.Clone(core.FullBuffs.Raid).(*proto.RaidBuffs)
+	withAura.MoonkinAura = true
+	withoutAura := googleProto.Clone(core.FullBuffs.Raid).(*proto.RaidBuffs)
+	withoutAura.MoonkinAura = false
+
+	if got := moonkinCritFromTalent(t, withoutAura); !near(got, 0.03) {
+		t.Errorf("with no other Moonkin in the raid, the form adds %v spell crit, want 0.03", got)
+	}
+	if got := moonkinCritFromTalent(t, withAura); !near(got, 0) {
+		t.Errorf("with the raid's Moonkin Aura already up, the form adds %v spell crit, want 0 (one aura)", got)
 	}
 }

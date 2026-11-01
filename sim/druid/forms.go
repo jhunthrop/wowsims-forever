@@ -315,11 +315,15 @@ func (druid *Druid) registerMoonkinFormSpell() {
 				druid.CancelShapeshift(sim)
 			}
 			druid.form = Moonkin
-			druid.AddStatsDynamic(sim, critBonus)
+			if !druid.raidHasMoonkinAura {
+				druid.AddStatsDynamic(sim, critBonus)
+			}
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			druid.form = Humanoid
-			druid.AddStatsDynamic(sim, critBonus.Invert())
+			if !druid.raidHasMoonkinAura {
+				druid.AddStatsDynamic(sim, critBonus.Invert())
+			}
 		},
 	})
 

@@ -11,6 +11,7 @@ import (
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/simsignals"
 	"github.com/wowsims/classic/sim/core/stats"
+	googleProto "google.golang.org/protobuf/proto"
 )
 
 // treeFields are each Druid talent tree's absolute proto field range
@@ -72,6 +73,13 @@ func newBalanceDruidSimWithTalents(t *testing.T, talents string) (*BalanceDruid,
 // given equipment.
 func newBalanceDruidSimWearing(t *testing.T, talents string, equipment *proto.EquipmentSpec) (*BalanceDruid, *core.Simulation, *core.Unit) {
 	t.Helper()
+	return newBalanceDruidSimInRaid(t, talents, equipment, core.FullBuffs.Raid)
+}
+
+// newBalanceDruidSimInRaid is newBalanceDruidSimWearing under the given
+// raid buffs.
+func newBalanceDruidSimInRaid(t *testing.T, talents string, equipment *proto.EquipmentSpec, raidBuffs *proto.RaidBuffs) (*BalanceDruid, *core.Simulation, *core.Unit) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
@@ -85,7 +93,7 @@ func newBalanceDruidSimWearing(t *testing.T, talents string, equipment *proto.Eq
 		},
 		PlayerOptionsAdaptive,
 	)
-	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
+	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, googleProto.Clone(raidBuffs).(*proto.RaidBuffs), core.FullBuffs.Debuffs)
 
 	target := &proto.Target{
 		Level: 60,
