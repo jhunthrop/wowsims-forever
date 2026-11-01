@@ -24,7 +24,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 10 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 10 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429→0.429 | declared, matches |
 | HealingPriest | 10 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.18-31.22→25.18-31.22 | 0.571→0.571 | declared, matches |
-| HealingPriest | 20 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 20 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 20 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 252.98-312.62→252.98-312.62 | 0.429→0.429 | declared, matches |
 | HealingPriest | 20 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
@@ -51,8 +50,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 20 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429→0.429 | declared, matches |
 | HealingPriest | 20 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571→0.571 | declared, matches |
 | HealingPriest | 20 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.22-50.78→44.22-50.78 | 0.714→0.714 | declared, matches |
-| HealingPriest | 30 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 30 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 30 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 30 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 429.84-522.16→429.84-522.16 | 0.429→0.429 | declared, matches |
@@ -96,8 +93,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 30 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.22-50.78→44.22-50.78 | 0.714→0.714 | declared, matches |
 | HealingPriest | 30 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714→0.714 | declared, matches |
 | HealingPriest | 30 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 75.94-86.06→75.94-86.06 | 0.714→0.714 | declared, matches |
-| HealingPriest | 38 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 38 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 38 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 38 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 437.97-532.03→437.97-532.03 | 0.429→0.429 | declared, matches |
@@ -154,9 +149,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 38 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714→0.714 | declared, matches |
 | HealingPriest | 38 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714→0.714 | declared, matches |
 | HealingPriest | 38 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 88.18-99.82→88.18-99.82 | 0.714→0.714 | declared, matches |
-| HealingPriest | 40 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 40 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 40 | Dark Sacrifice | 3 | 1277326 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 40→40 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 40 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 437.97-532.03→437.97-532.03 | 0.429→0.429 | declared, matches |
@@ -219,10 +211,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 40 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714→0.714 | declared, matches |
 | HealingPriest | 40 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714→0.714 | declared, matches |
 | HealingPriest | 40 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 90.24-102.16→90.24-102.16 | 0.714→0.714 | declared, matches |
-| HealingPriest | 50 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 50 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 50 | Dark Sacrifice | 3 | 1277326 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 40→40 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 50 | Dark Sacrifice | 4 | 1277327 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 50 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 437.97-532.03→437.97-532.03 | 0.429→0.429 | declared, matches |
@@ -305,11 +293,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 50 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714→0.714 | declared, matches |
 | HealingPriest | 50 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 93.34-105.66→93.34-105.66 | 0.714→0.714 | declared, matches |
 | HealingPriest | 50 | Smite | 7 | 10933 | 230.00→230.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 46→46 | n/a | match |  | 122.70-138.10→122.70-138.10 | 0.714→0.714 | declared, matches |
-| HealingPriest | 60 | Dark Sacrifice | 1 | 1277324 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 60 | Dark Sacrifice | 2 | 1277325 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 30→30 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 60 | Dark Sacrifice | 3 | 1277326 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 40→40 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 60 | Dark Sacrifice | 4 | 1277327 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 50→50 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 60 | Dark Sacrifice | 5 | 1277328 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 60→60 | 15000→15000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Desperate Prayer | 1 | 13908 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 10→10 | n/a | match |  | 144.05-182.75→144.05-182.75 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Desperate Prayer | 2 | 19236 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 18→18 | n/a | match |  | 265.15-327.65→265.15-327.65 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Desperate Prayer | 3 | 19238 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | 437.97-532.03→437.97-532.03 | 0.429→0.429 | declared, matches |
