@@ -91,12 +91,23 @@ func (unit *Unit) newAPLRotation(config *proto.APLRotation) *APLRotation {
 						action := rotation.newAPLAction(prepullItem.Action)
 						if action != nil {
 							rotation.prepullActions = append(rotation.prepullActions, action)
-							unit.RegisterPrepullAction(doAt, func(sim *Simulation) {
+							execute := func(sim *Simulation) {
 								// Warnings for prepull cast failure are detected by running a fake prepull,
 								// so this action.Execute needs to record warnings.
 								rotation.doAndRecordWarnings(&rotation.prepullWarnings[prepullIdx], true, func() {
 									action.Execute(sim)
 								})
+							}
+							unit.RegisterPrepullAction(doAt, func(sim *Simulation) {
+								if hold := prepullLandingHold(sim, action); hold > 0 {
+									StartDelayedAction(sim, DelayedActionOptions{
+										DoAt:     sim.CurrentTime + hold,
+										Priority: ActionPriorityPrePull + 1,
+										OnAction: execute,
+									})
+									return
+								}
+								execute(sim)
 							})
 						}
 					}
@@ -277,4 +288,29 @@ func APLRotationFromJsonString(jsonString string) *proto.APLRotation {
 		panic(err)
 	}
 	return apl
+}
+
+// prepullLandingHold is how long a pre-pull action waits so a damaging
+// cast lands at the pull instead of before it. The engine records no
+// damage before 0 (Spell.dealDamageInternal), and a damaging hit on the
+// boss is what starts the fight, so a pre-pull cast that would land
+// early is the same cast timed to land at 0: Aimed Shot at -3.5 s, a
+// Lightning Bolt or Frostbolt started a little too soon. Only a cast at
+// an enemy that deals direct or spell damage is held; buffs, marks,
+// summons and heals keep their time. The landing time is the cast time
+// at the moment of the action plus the missile's travel.
+func prepullLandingHold(sim *Simulation, action *APLAction) time.Duration {
+	cast, ok := action.impl.(*APLActionCastSpell)
+	if !ok {
+		return 0
+	}
+	target := cast.target.Get()
+	if target == nil || target.Type != EnemyUnit || !cast.spell.ProcMask.Matches(ProcMaskDirect) {
+		return 0
+	}
+	landsAt := sim.CurrentTime + cast.spell.CastTime() + cast.spell.TravelTime()
+	if landsAt >= 0 {
+		return 0
+	}
+	return -landsAt
 }
