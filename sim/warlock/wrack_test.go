@@ -79,16 +79,10 @@ func TestWrackLevel60DealsPeriodicDamageAndAppliesVulnerability(t *testing.T) {
 		t.Error("Wrack landed but its vulnerability aura is not active on the target")
 	}
 
-	// Step the sim so the DoT's periodic ticks (1 s apart, 6 of them)
-	// actually fire and deal damage.
-	for i := 0; i < 1000; i++ {
-		if built.Wrack.SpellMetrics[target.UnitIndex].TotalDamage > 0 {
-			break
-		}
-		if done := sim.Step(); done {
-			break
-		}
-	}
+	// Run one tick through the DoT's own handler: Wrack is a channel, and
+	// stepping the sim to its ticks would need a rotation to end it.
+	dot := built.Wrack.Dot(target)
+	dot.OnTick(sim, target, dot)
 
 	if got := built.Wrack.SpellMetrics[target.UnitIndex].TotalDamage; got <= 0 {
 		t.Errorf("Wrack dealt %v total damage, want > 0", got)
