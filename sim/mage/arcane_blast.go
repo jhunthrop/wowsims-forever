@@ -91,13 +91,15 @@ const (
 	arcaneBlastCostIncreasePctPerStack = 100
 )
 
-// setArcaneBlastCostMultiplier applies the buff's cost ramp to every
-// rank registered so far: 100 at zero stacks, +100 per stack.
-func (mage *Mage) setArcaneBlastCostMultiplier(stacks int32) {
-	multiplier := 100 + arcaneBlastCostIncreasePctPerStack*stacks
+// addArcaneBlastCostStacks moves the buff's cost ramp on every rank
+// registered so far by +100 a stack. It adds to Cost.Multiplier rather
+// than setting it, so the other cost mods on Arcane Blast (Arcane Power's
+// +30%, Clearcasting's -100%) survive a stack change, the way the client's
+// percentage cost mods add.
+func (mage *Mage) addArcaneBlastCostStacks(deltaStacks int32) {
 	for _, spell := range mage.ArcaneBlast {
 		if spell != nil && spell.Cost != nil {
-			spell.Cost.Multiplier = multiplier
+			spell.Cost.Multiplier += arcaneBlastCostIncreasePctPerStack * deltaStacks
 		}
 	}
 }
@@ -126,7 +128,7 @@ func (mage *Mage) registerArcaneBlastSpell() {
 				mage.AddStatDynamic(sim, stats.SpellPower, -grantedSpellPower)
 				grantedSpellPower = 0
 			}
-			mage.setArcaneBlastCostMultiplier(newStacks)
+			mage.addArcaneBlastCostStacks(newStacks - oldStacks)
 		},
 	})
 

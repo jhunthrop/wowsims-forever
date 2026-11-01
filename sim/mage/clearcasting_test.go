@@ -1,0 +1,99 @@
+package mage
+
+import (
+	"testing"
+	"time"
+
+	"github.com/wowsims/classic/sim/core"
+)
+
+// The published level-60 Frost build (data/builds/1.60.1.70707/bis/
+// mage-frost.json), which carries Arcane Concentration 5/5.
+const clearcastingTestFrostTalents = "230005200000000000-51020000000000000-253510130101301221"
+
+// Clearcasting (client 12536) is "your next damage spell": ProcCharges 1,
+// a -1000% cost mod (misc 14) on the damage-spell class mask. The engine
+// used to keep it for its whole 15 s, because the consume asked for the
+// spell's current cost, which Clearcasting itself had already made zero.
+func TestClearcastingIsSpentByTheNextDamageSpell(t *testing.T) {
+	built, sim, target := newFrostMageSimWithTalents(t, core.DefaultTargetProtoLvl60, clearcastingTestFrostTalents)
+	if built.ClearcastingAura == nil {
+		t.Fatal("Clearcasting is not registered with Arcane Concentration taken")
+	}
+	built.ClearcastingAura.Activate(sim)
+	sim.CurrentTime += time.Second
+
+	lance := topRank(t, built.IceLance)
+	before := built.CurrentMana()
+	if !lance.Cast(sim, target) {
+		t.Fatal("Ice Lance did not cast")
+	}
+	if spent := before - built.CurrentMana(); spent != 0 {
+		t.Errorf("Ice Lance under Clearcasting cost %.1f mana, want 0", spent)
+	}
+	if built.ClearcastingAura.IsActive() {
+		t.Fatal("Clearcasting is still active after the damage spell it paid for")
+	}
+
+	sim.CurrentTime += 2 * time.Second // past the global cooldown
+	blast := topRank(t, built.ArcaneExplosion)
+	before = built.CurrentMana()
+	if !blast.Cast(sim, target) {
+		t.Fatal("Arcane Explosion did not cast")
+	}
+	if spent := before - built.CurrentMana(); spent <= 0 {
+		t.Errorf("the cast after the Clearcasting one cost %.1f mana, want its full cost", spent)
+	}
+}
+
+// Ice Barrier is not in Clearcasting's class mask: it is not a damage
+// spell, so it pays its cost and leaves the charge for the next nuke.
+func TestClearcastingDoesNotPayForIceBarrier(t *testing.T) {
+	built, sim, target := newFrostMageSimWithTalents(t, core.DefaultTargetProtoLvl60, clearcastingTestFrostTalents)
+	built.ClearcastingAura.Activate(sim)
+	sim.CurrentTime += time.Second
+
+	barrier := topRank(t, built.IceBarrier)
+	before := built.CurrentMana()
+	if !barrier.Cast(sim, target) {
+		t.Fatal("Ice Barrier did not cast")
+	}
+	if spent := before - built.CurrentMana(); spent <= 0 {
+		t.Errorf("Ice Barrier under Clearcasting cost %.1f mana, want its full cost", spent)
+	}
+	if !built.ClearcastingAura.IsActive() {
+		t.Error("Ice Barrier spent Clearcasting; only a damage spell spends it")
+	}
+}
+
+// Arcane Concentration (client 11213) has ProcCategoryRecovery 1000: after
+// a proc, no hit can proc it again for 1 s.
+func TestArcaneConcentrationHasAOneSecondProcCooldown(t *testing.T) {
+	built, sim, target := newFrostMageSimWithTalents(t, core.DefaultTargetProtoLvl60, clearcastingTestFrostTalents)
+	bolt := topRank(t, built.Frostbolt)
+	result := &core.SpellResult{Outcome: core.OutcomeHit, Target: target}
+
+	procs := 0
+	for i := 0; i < 400; i++ {
+		built.ClearcastingAura.Deactivate(sim)
+		built.OnSpellHitDealt(sim, bolt, result)
+		if built.ClearcastingAura.IsActive() {
+			procs++
+		}
+	}
+	if procs != 1 {
+		t.Errorf("400 hits inside one second gave %d Clearcasting procs, want 1 (1 s proc cooldown)", procs)
+	}
+}
+
+// topRank is the highest registered rank of a spell.
+func topRank(t *testing.T, ranks []*core.Spell) *core.Spell {
+	t.Helper()
+	for i := len(ranks) - 1; i >= 0; i-- {
+		if ranks[i] != nil {
+			return ranks[i]
+		}
+	}
+	t.Fatal("no rank of the spell is registered")
+	return nil
+}

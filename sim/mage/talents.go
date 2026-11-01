@@ -163,6 +163,17 @@ func (mage *Mage) applyFrostTalents() {
 	// Frostbite's Freeze (chill.go) is a root a raid boss is immune to.
 }
 
+// Clearcasting (client 12536) is "your next damage spell": one charge
+// (ProcCharges 1) of a -100% cost mod on the damage-spell class mask, so
+// Ice Barrier neither benefits nor spends it. Arcane Concentration (11213)
+// procs it at 2% a rank with a 1 s proc cooldown (ProcCategoryRecovery
+// 1000).
+const (
+	clearcastingMask = MageSpellMaskFrostDamage | MageSpellMaskFireDamage | MageSpellMaskArcaneDamage
+	// arcaneConcentrationProcCooldown is 11213's ProcCategoryRecovery.
+	arcaneConcentrationProcCooldown = time.Second
+)
+
 func (mage *Mage) applyArcaneConcentration() {
 	if mage.Talents.ArcaneConcentration == 0 {
 		return
@@ -170,31 +181,42 @@ func (mage *Mage) applyArcaneConcentration() {
 
 	procChance := 0.02 * float64(mage.Talents.ArcaneConcentration)
 
+	freeCast := mage.AddDynamicMod(core.SpellModConfig{
+		Kind:      core.SpellMod_PowerCost_Pct,
+		ClassMask: clearcastingMask,
+		IntValue:  -100,
+	})
+
 	mage.ClearcastingAura = mage.RegisterAura(core.Aura{
 		Label:    "Clearcasting",
 		ActionID: core.ActionID{SpellID: 12577},
 		Duration: time.Second * 15,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.SchoolCostMultiplier.AddToMagicSchools(-100)
+			freeCast.Activate()
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.SchoolCostMultiplier.AddToMagicSchools(100)
+			freeCast.Deactivate()
 		},
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
 			// OnCastComplete is called after OnSpellHitDealt / etc, so don't deactivate if it was just activated.
 			if aura.RemainingDuration(sim) == aura.Duration {
 				return
 			}
-			if !spell.Flags.Matches(SpellFlagMage) {
+			if !spell.Matches(clearcastingMask) || spell.Cost == nil {
 				return
 			}
-			if spell.Cost != nil && spell.Cost.GetCurrentCost() == 0 {
+			// A cast that was free without Clearcasting (Missile
+			// Barrage's Arcane Missiles) leaves the charge. The cost is
+			// read without Clearcasting's own -100, which is what made
+			// every cast look free and kept the charge for 15 s.
+			if spell.Cost.Multiplier+100 <= 0 {
 				return
 			}
 			aura.Deactivate(sim)
 		},
 	})
 
+	procCooldown := core.Cooldown{Timer: mage.NewTimer(), Duration: arcaneConcentrationProcCooldown}
 	mage.RegisterAura(core.Aura{
 		Label:    "Arcane Concentration",
 		Duration: core.NeverExpires,
@@ -205,14 +227,11 @@ func (mage *Mage) applyArcaneConcentration() {
 			if !result.Landed() || !spell.Flags.Matches(SpellFlagMage) || spell.SpellCode == SpellCode_MageArcaneMissiles {
 				return
 			}
-
-			// TODO: Classic verify arcane missile proc chance
-			// Arcane Missile ticks can proc CC, just at a low rate of about 1.5% with 5/5 Arcane Concentration
-			// if spell == mage.ArcaneMissilesTickSpell {
-			// 	procChance *= 0.15
-			// }
-
+			if !procCooldown.IsReady(sim) {
+				return
+			}
 			if sim.Proc(procChance, "Arcane Concentration") {
+				procCooldown.Use(sim)
 				mage.ClearcastingAura.Activate(sim)
 			}
 		},
