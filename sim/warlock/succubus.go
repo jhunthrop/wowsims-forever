@@ -156,6 +156,7 @@ func (wp *WarlockPet) registerSuccubusLashOfPainSpell() {
 		BonusCoefficient: spellCoeff,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			wp.applyOwnerSpellHit(spell)
 			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 		},
 	})

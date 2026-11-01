@@ -85,7 +85,7 @@ func TestDemonInheritsForeversShares(t *testing.T) {
 		stats.ShadowResistance: 50,
 		stats.AttackPower:      0.17 * 400,
 		stats.SpellDamage:      0.10 * 400,
-		stats.Hit:              6 * core.HitRatingPerHitChance,
+		stats.Hit:              6 * 8.0 / 17 * core.HitRatingPerHitChance,
 	}
 	for s := stats.Stat(0); s < stats.Len; s++ {
 		if math.Abs(got[s]-want[s]) > 1e-9 {
@@ -129,5 +129,25 @@ func TestSummonedSuccubusFollowsTheWarlocksSheet(t *testing.T) {
 	}
 	if want := 0.10 * 60; math.Abs(got[stats.SpellDamage]-want) > 1e-6 {
 		t.Errorf("Succubus spell damage = %.2f, want %.2f", got[stats.SpellDamage], want)
+	}
+}
+
+// Hit (forever-bugs #394, AidanZMoon for Blizzard, 2026-10-20): "Warlocks
+// will give spell hit equal to their spell hit, and melee hit equal to
+// 8/17ths of their spell hit." The demon's melee carries 8/17 of the
+// warlock's hit; its spells top that up to the whole of it.
+func TestDemonSpellsTakeTheWarlocksWholeHitAndMeleeEightSeventeenths(t *testing.T) {
+	sim, warlock := newPetInheritanceTestWarlock(t, proto.WarlockOptions_Succubus)
+	succubus := warlock.Succubus
+	ownerHit := 5 * float64(core.HitRatingPerHitChance)
+	warlock.AddStatDynamic(sim, stats.Hit, ownerHit-warlock.GetStat(stats.Hit))
+
+	if got, want := succubus.GetStat(stats.Hit), ownerHit*8/17; math.Abs(got-want) > 1e-6 {
+		t.Errorf("Succubus melee hit rating = %.3f, want 8/17 of the warlock's %.3f = %.3f", got, ownerHit, want)
+	}
+	lash := succubus.primaryAbility
+	succubus.applyOwnerSpellHit(lash)
+	if got, want := lash.SpellHitChance(sim.Encounter.TargetUnits[0]), 0.05; math.Abs(got-want) > 1e-9 {
+		t.Errorf("Lash of Pain hit chance = %.4f, want the warlock's whole %.4f", got, want)
 	}
 }
