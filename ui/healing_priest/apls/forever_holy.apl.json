@@ -27,48 +27,6 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 401977
-          }
-        },
-        "condition": {
-          "or": {
-            "vals": [
-              {
-                "cmp": {
-                  "op": "OpLt",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "0.5"
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpLt",
-                  "lhs": {
-                    "remainingTimePercent": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "0.3"
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        }
-      },
-      "notes": "Shadowfiend below half mana, or in the last 30% of the fight. It returns a share of the whole mana bar over its fifteen seconds, so it waits until the bar has room for all of it, and its long cooldown makes it a once-a-fight cast."
-    },
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
             "spellId": 1277328,
             "rank": 5
           }
