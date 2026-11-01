@@ -173,7 +173,8 @@ func TestProtectionRankTextsAsNumbers(t *testing.T) {
 		{"Iron Creed rank 3 threat", ironCreedThreatPerRank * 3, 0.30},
 		{"Iron Creed rank 3 damage taken", ironCreedDamageTakenPerRank * 3, 0.06},
 		{"Improved Righteous Fury rank 3", improvedRighteousFuryDamageTakenPerRank * 3, 0.09},
-		{"Righteous Fury Holy threat", righteousFuryHolyThreatBonus, 0.60},
+		{"Righteous Fury Holy threat", righteousFuryHolyThreatBonus, 0.90},
+		{"Righteous Fury all threat", righteousFuryAllThreatBonus, 0.33},
 	} {
 		if d := tc.got - tc.want; d > 1e-9 || d < -1e-9 {
 			t.Errorf("%s = %v, want %v", tc.name, tc.got, tc.want)
