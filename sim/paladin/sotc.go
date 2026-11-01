@@ -14,6 +14,8 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 		bonus   float64
 	}
 
+	// judge.bonus is each rank's Judgement of the Crusader Holy damage
+	// taken (aura 14 base points, client 1.60.1.70707): 23/35/58/92/127/161.
 	var ranks = []struct {
 		level      int32
 		spellID    int32
@@ -23,12 +25,12 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 		scale      float64
 		judge      judge
 	}{
-		{level: 6, spellID: 21082, manaCost: 25, scaleLevel: 12, ap: 31, scale: 0.7, judge: judge{spellID: 21183, bonus: 20}},
-		{level: 12, spellID: 20162, manaCost: 40, scaleLevel: 20, ap: 51, scale: 1.1, judge: judge{spellID: 20188, bonus: 30}},
-		{level: 22, spellID: 20305, manaCost: 65, scaleLevel: 30, ap: 94, scale: 1.7, judge: judge{spellID: 20300, bonus: 50}},
-		{level: 32, spellID: 20306, manaCost: 90, scaleLevel: 40, ap: 145, scale: 2, judge: judge{spellID: 20301, bonus: 80}},
-		{level: 42, spellID: 20307, manaCost: 125, scaleLevel: 50, ap: 221, scale: 2.2, judge: judge{spellID: 20302, bonus: 110}},
-		{level: 52, spellID: 20308, manaCost: 160, scaleLevel: 60, ap: 306, scale: 2.4, judge: judge{spellID: 20303, bonus: 140}},
+		{level: 6, spellID: 21082, manaCost: 25, scaleLevel: 12, ap: 31, scale: 0.7, judge: judge{spellID: 21183, bonus: 23}},
+		{level: 12, spellID: 20162, manaCost: 40, scaleLevel: 20, ap: 51, scale: 1.1, judge: judge{spellID: 20188, bonus: 35}},
+		{level: 22, spellID: 20305, manaCost: 65, scaleLevel: 30, ap: 94, scale: 1.7, judge: judge{spellID: 20300, bonus: 58}},
+		{level: 32, spellID: 20306, manaCost: 90, scaleLevel: 40, ap: 145, scale: 2, judge: judge{spellID: 20301, bonus: 92}},
+		{level: 42, spellID: 20307, manaCost: 125, scaleLevel: 50, ap: 221, scale: 2.2, judge: judge{spellID: 20302, bonus: 127}},
+		{level: 52, spellID: 20308, manaCost: 160, scaleLevel: 60, ap: 306, scale: 2.4, judge: judge{spellID: 20303, bonus: 161}},
 	}
 
 	// FOREVER: Improved Seal of the Crusader is not in the client's trees.
@@ -47,7 +49,7 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 		}
 
 		debuffs := paladin.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-			return core.JudgementOfTheCrusaderAura(&paladin.Unit, target, improvedSotC, libramBonus)
+			return core.JudgementOfTheCrusaderAura(&paladin.Unit, target, rank.judge.bonus, improvedSotC, libramBonus)
 		})
 
 		judgeSpell := paladin.RegisterSpell(core.SpellConfig{
