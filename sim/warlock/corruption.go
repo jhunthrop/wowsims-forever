@@ -72,6 +72,7 @@ func (warlock *Warlock) getCorruptionConfig(rank int) core.SpellConfig {
 			NumberOfTicks:    ticks,
 			TickLength:       time.Second * 3,
 			BonusCoefficient: dotTickCoeff,
+			Dynamic:          true,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, baseDamage, isRollover)

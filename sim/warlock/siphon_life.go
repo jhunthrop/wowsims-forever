@@ -73,6 +73,7 @@ func (warlock *Warlock) getSiphonLifeBaseConfig(rank int) core.SpellConfig {
 			TickLength:          3 * time.Second,
 			AffectedByCastSpeed: false,
 			BonusCoefficient:    spellCoeff,
+			Dynamic:             true,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, baseDamage, isRollover)
@@ -83,6 +84,9 @@ func (warlock *Warlock) getSiphonLifeBaseConfig(rank int) core.SpellConfig {
 				}
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
+				// The per-tick read (Dynamic) re-took the plain snapshot;
+				// fold the target's modifiers back in, as OnSnapshot does.
+				dot.SnapshotAttackerMultiplier *= dot.Spell.TargetDamageMultiplier(dot.Spell.Unit.AttackTables[target.UnitIndex][dot.Spell.CastType], true)
 				// TODO: interaction with bonus damage taken?
 				// Remove target modifiers for the tick only
 				dot.Spell.Flags |= core.SpellFlagIgnoreTargetModifiers
