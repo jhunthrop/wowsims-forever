@@ -102,6 +102,10 @@ func (hunter *Hunter) ApplyTalents() {
 	*/
 
 	if hunter.Talents.BestialDiscipline > 0 {
+		// 19590's second effect is aura 134 (mana regeneration continues
+		// while casting) at 25 a rank: "allows 50% of your Mana Regeneration
+		// to continue while casting" at 2/2.
+		hunter.PseudoStats.SpiritRegenRateCasting += bestialDisciplineRegenPerRank * float64(hunter.Talents.BestialDiscipline)
 		core.MakePermanent(hunter.RegisterAura(core.Aura{
 			Label: "Bestial Discipline",
 			OnInit: func(aura *core.Aura, sim *core.Simulation) {
@@ -682,6 +686,11 @@ func (hunter *Hunter) applyImprovedTracking() {
 // resourcefulnessProcChance is the critical-strike chance of the regen clause,
 // 50% a rank (1.60.1.70425: "a 50%/100% chance"; the 1.60.1.70374 live text
 // read 30/60%).
+// bestialDisciplineRegenPerRank is Bestial Discipline's share of mana
+// regeneration that continues while casting, a rank (19590: aura 134 at 50 for
+// rank 2).
+const bestialDisciplineRegenPerRank = 0.25
+
 // resourcefulnessProcMask is the client's proc type mask for 440529
 // (SpellAuraOptions 242512: 272, melee and ranged ability damage): a white
 // swing's crit or a periodic tick's does not count.

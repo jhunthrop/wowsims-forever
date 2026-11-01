@@ -16,12 +16,19 @@ const publishedSurvivalTalents = "0000000000000000-3250050010000000-500230231051
 
 func buildPublishedSurvivalHunter(t *testing.T) (*core.Simulation, *Hunter) {
 	t.Helper()
+	return buildLevel60Hunter(t, publishedSurvivalTalents)
+}
+
+// buildLevel60Hunter is a level-60, no-gear, unbuffed orc hunter in melee range
+// with the given talents.
+func buildLevel60Hunter(t *testing.T, talents string) (*core.Simulation, *Hunter) {
+	t.Helper()
 	player := core.WithSpec(&proto.Player{
 		Class:              proto.Class_ClassHunter,
 		Race:               proto.Race_RaceOrc,
 		Level:              60,
 		Equipment:          &proto.EquipmentSpec{},
-		TalentsString:      publishedSurvivalTalents,
+		TalentsString:      talents,
 		DistanceFromTarget: 5,
 	}, P1PlayerOptions)
 	sim := core.NewSim(&proto.RaidSimRequest{
@@ -95,5 +102,19 @@ func TestResourcefulnessProcsOnlyFromAbilityCrits(t *testing.T) {
 	trigger.OnSpellHitDealt(trigger, sim, hunter.RaptorStrikeHit, crit)
 	if !regen.IsActive() {
 		t.Error("a Raptor Strike crit did not start Resourcefulness's regen")
+	}
+}
+
+// TestBestialDisciplineLetsHalfTheManaRegenContinueWhileCasting: 19590 (rank 2)
+// carries aura 134 (SPELL_AURA_MOD_MANA_REGEN_INTERRUPT) at 50 beside the pet's
+// focus regen; its text: "allows 50% of your Mana Regeneration to continue
+// while casting". Only the focus half was modelled.
+func TestBestialDisciplineLetsHalfTheManaRegenContinueWhileCasting(t *testing.T) {
+	_, hunter := buildLevel60Hunter(t, "5420001505001251-0052451001200000-000000000000000000")
+	if hunter.Talents.BestialDiscipline != 2 {
+		t.Fatalf("the published Beast Mastery build has Bestial Discipline %d, want 2", hunter.Talents.BestialDiscipline)
+	}
+	if got := hunter.PseudoStats.SpiritRegenRateCasting; math.Abs(got-0.5) > 1e-9 {
+		t.Errorf("Bestial Discipline 2/2 lets %.2f of spirit regen continue while casting, want 0.50", got)
 	}
 }
