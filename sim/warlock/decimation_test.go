@@ -17,7 +17,19 @@ import (
 // lands.
 const DecimationRank2TalentsString = "-000000000002"
 
+// decimationWithBaneTalentsString adds Bane 5/5 (Destruction field 3), whose
+// flat -2 s Soul Fire cast time Decimation's -40% then scales.
+const decimationWithBaneTalentsString = DecimationRank2TalentsString + "-005"
+
 func newDecimationTestWarlock(t *testing.T) (*core.Simulation, *Warlock, *core.Unit) {
+	t.Helper()
+	return newDecimationTestWarlockWith(t, DecimationRank2TalentsString, 1)
+}
+
+// newDecimationTestWarlockWith builds the warlock against a dummy with no
+// health bar whose last execute35 of the fight is below 35% health, stepped
+// once so the encounter's execute phase is current.
+func newDecimationTestWarlockWith(t *testing.T, talents string, execute35 float64) (*core.Simulation, *Warlock, *core.Unit) {
 	t.Helper()
 
 	player := core.WithSpec(
@@ -27,7 +39,7 @@ func newDecimationTestWarlock(t *testing.T) (*core.Simulation, *Warlock, *core.U
 			Level:         60,
 			Equipment:     &proto.EquipmentSpec{},
 			Buffs:         core.FullBuffs.Player,
-			TalentsString: DecimationRank2TalentsString,
+			TalentsString: talents,
 		},
 		&proto.Player_Warlock{
 			Warlock: &proto.Warlock{
@@ -44,13 +56,17 @@ func newDecimationTestWarlock(t *testing.T) (*core.Simulation, *Warlock, *core.U
 	sim := core.NewSim(&proto.RaidSimRequest{
 		Raid: raid,
 		Encounter: &proto.Encounter{
-			Duration: 60,
-			Targets:  []*proto.Target{core.DefaultTargetProtoLvl60},
+			Duration:             60,
+			ExecuteProportion_35: execute35,
+			Targets:              []*proto.Target{core.DefaultTargetProtoLvl60},
 		},
 		SimOptions: &proto.SimOptions{RandomSeed: 1, IsTest: true},
 	}, simsignals.CreateSignals())
 	sim.Reset()
 	sim.PrePull()
+	for i := 0; i < 10 && sim.CurrentTime <= 0; i++ {
+		sim.Step()
+	}
 
 	agent, ok := sim.Raid.Parties[0].Players[0].(WarlockAgent)
 	if !ok {
@@ -84,12 +100,12 @@ func TestDecimationPassiveReducesSoulFireCooldown(t *testing.T) {
 	}
 }
 
-// TestDecimationProcReducesSoulFireCastTimeAndCost casts Shadow Bolt (the
-// target has no health bar in this test encounter, so the "below 35%
-// health" gate treats it as eligible, matching how the ladder's bare
-// dummy targets behave) and checks the 10 s Decimation buff comes up and
-// discounts Soul Fire's cast time and mana cost, then reverts once it
-// expires.
+// TestDecimationProcReducesSoulFireCastTimeAndCost casts Shadow Bolt in the
+// encounter's below-35% window (the dummy has no health bar, so the window
+// is the encounter's execute phase) and checks the 10 s Decimation buff
+// comes up and takes 40% off Soul Fire's cast time, then reverts once it
+// expires. The buff's second effect is aura 256 (no reagent use): it frees
+// the Soul Shard and leaves the mana cost alone.
 func TestDecimationProcReducesSoulFireCastTimeAndCost(t *testing.T) {
 	sim, built, target := newDecimationTestWarlock(t)
 
@@ -118,13 +134,12 @@ func TestDecimationProcReducesSoulFireCastTimeAndCost(t *testing.T) {
 		t.Fatal("Shadow Bolt landed on an eligible target but the Decimation buff did not activate")
 	}
 
-	wantCastTime := baseCastTime - time.Duration(float64(SoulFireCastTime)*0.40)
-	if got := soulFire.DefaultCast.CastTime; got != wantCastTime {
+	wantCastTime := time.Duration(float64(baseCastTime) * 0.60)
+	if got := soulFire.CastTime(); got != wantCastTime {
 		t.Errorf("Soul Fire cast time during Decimation = %v, want %v", got, wantCastTime)
 	}
-	wantCostMultiplier := baseCostMultiplier - 40
-	if got := soulFire.Cost.Multiplier; got != wantCostMultiplier {
-		t.Errorf("Soul Fire cost multiplier during Decimation = %d, want %d", got, wantCostMultiplier)
+	if got := soulFire.Cost.Multiplier; got != baseCostMultiplier {
+		t.Errorf("Soul Fire cost multiplier during Decimation = %d, want %d (the buff frees the shard, not mana)", got, baseCostMultiplier)
 	}
 
 	// Advance past the 10 s window and confirm both revert.
@@ -139,7 +154,7 @@ func TestDecimationProcReducesSoulFireCastTimeAndCost(t *testing.T) {
 	if aura.IsActive() {
 		t.Fatal("Decimation aura is still active after its 10 s duration should have elapsed")
 	}
-	if got := soulFire.DefaultCast.CastTime; got != baseCastTime {
+	if got := soulFire.CastTime(); got != baseCastTime {
 		t.Errorf("Soul Fire cast time after Decimation expired = %v, want %v", got, baseCastTime)
 	}
 	if got := soulFire.Cost.Multiplier; got != baseCostMultiplier {
@@ -153,8 +168,8 @@ func TestDecimationProcReducesSoulFireCastTimeAndCost(t *testing.T) {
 // all above it.
 func TestDecimationDamageBonusBelowHealthThreshold(t *testing.T) {
 	sim, built, target := newDecimationTestWarlock(t)
-	if got, want := built.decimationDamageMultiplier(target), 1.06; got != want {
-		t.Errorf("decimationDamageMultiplier(no health bar, treated eligible) = %v, want %v", got, want)
+	if got, want := built.decimationDamageMultiplier(sim, target), 1.06; got != want {
+		t.Errorf("decimationDamageMultiplier(no health bar, execute phase) = %v, want %v", got, want)
 	}
 
 	// The default level-60 target proto tracks no Health stat (a pure
@@ -168,13 +183,51 @@ func TestDecimationDamageBonusBelowHealthThreshold(t *testing.T) {
 	target.GainHealth(sim, maxHealth, metrics)
 
 	target.RemoveHealth(sim, maxHealth*0.50)
-	if got, want := built.decimationDamageMultiplier(target), 1.0; got != want {
+	if got, want := built.decimationDamageMultiplier(sim, target), 1.0; got != want {
 		t.Errorf("decimationDamageMultiplier(50%% health) = %v, want %v (no bonus above 35%%)", got, want)
 	}
 
 	target.GainHealth(sim, maxHealth, metrics)
 	target.RemoveHealth(sim, maxHealth*0.80)
-	if got, want := built.decimationDamageMultiplier(target), 1.06; got != want {
+	if got, want := built.decimationDamageMultiplier(sim, target), 1.06; got != want {
 		t.Errorf("decimationDamageMultiplier(20%% health) = %v, want %v", got, want)
+	}
+}
+
+// TestDecimationNeedsTheTargetBelow35Percent pins the talent text's gate:
+// "When you cast Shadow Bolt or Searing Pain on an enemy below 35% health".
+// A dummy with no health bar is below 35% only in the encounter's execute
+// window, so outside it neither the buff nor the damage bonus applies.
+func TestDecimationNeedsTheTargetBelow35Percent(t *testing.T) {
+	sim, built, target := newDecimationTestWarlockWith(t, DecimationRank2TalentsString, 0.2)
+	if sim.IsExecutePhase35() {
+		t.Fatal("the fight opens in the execute phase")
+	}
+	if got := built.decimationDamageMultiplier(sim, target); got != 1 {
+		t.Errorf("decimationDamageMultiplier above 35%% = %v, want 1", got)
+	}
+	shadowBolt := built.ShadowBolt[len(built.ShadowBolt)-1]
+	shadowBolt.ApplyEffects(sim, target, shadowBolt)
+	for i := 0; i < 200 && shadowBolt.SpellMetrics[target.UnitIndex].TotalDamage == 0; i++ {
+		sim.Step()
+	}
+	if built.GetAura("Decimation").IsActive() {
+		t.Error("Shadow Bolt on a target above 35% health granted Decimation")
+	}
+}
+
+// TestDecimationScalesTheBaneShortenedCastTime pins the order of the two
+// modifiers: Bane takes a flat 2 s off Soul Fire's 6 s, and Decimation's
+// aura 108 (misc 10, a percent modifier) takes 40% of what is left, 2.4 s.
+func TestDecimationScalesTheBaneShortenedCastTime(t *testing.T) {
+	sim, built, target := newDecimationTestWarlockWith(t, decimationWithBaneTalentsString, 1)
+	soulFire := built.SoulFire[len(built.SoulFire)-1]
+	if got, want := soulFire.DefaultCast.CastTime, 4*time.Second; got != want {
+		t.Fatalf("Soul Fire with Bane 5/5 casts in %v, want %v", got, want)
+	}
+	built.GetAura("Decimation").Activate(sim)
+	_ = target
+	if got, want := soulFire.CastTime(), 2400*time.Millisecond; got != want {
+		t.Errorf("Soul Fire with Bane 5/5 during Decimation casts in %v, want %v", got, want)
 	}
 }

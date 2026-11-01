@@ -491,7 +491,8 @@ func TestBerserkingIsAFlatTenPercentHaste(t *testing.T) {
 }
 
 // Blood Fury 20572: attack power, ranged attack power and spell power each
-// +10% of the unit's current total, for 15 s, 2 min cooldown.
+// +10% of the unit's current total, for 15 s, 2 min cooldown, off the global
+// cooldown (SpellCooldowns StartRecoveryTime 0, as Berserking's).
 func TestBloodFuryIsTenPercentOfTotalPowers(t *testing.T) {
 	character := &Character{
 		Unit: Unit{
@@ -512,6 +513,9 @@ func TestBloodFuryIsTenPercentOfTotalPowers(t *testing.T) {
 	}
 	if spell.CD.Duration != 2*time.Minute {
 		t.Errorf("Blood Fury cooldown is %v, want 2m", spell.CD.Duration)
+	}
+	if spell.DefaultCast.GCD != 0 {
+		t.Errorf("Blood Fury triggers a %v global cooldown, want none", spell.DefaultCast.GCD)
 	}
 	aura := character.GetAura("Blood Fury")
 	if aura.Duration != 15*time.Second {

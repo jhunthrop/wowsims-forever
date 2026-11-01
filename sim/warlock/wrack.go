@@ -1,16 +1,16 @@
 package warlock
 
 import (
+	"slices"
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
-	"github.com/wowsims/classic/sim/core/stats"
 )
 
 // Wrack is Affliction's level-60 capstone (talents/warlock.json node
-// 105909, prereq Siphon Life): an instant, no-cooldown DoT that also
-// makes the target take more damage from the warlock's other Shadow
-// damage-over-time effects for its duration. Talent text: "Tears the
+// 105909, prereq Siphon Life): a 6 second, no-cooldown channel that also
+// makes the target take more damage from the warlock's Corruption and Bane
+// of Agony while it lasts. Talent text: "Tears the
 // target apart from within, dealing 36 Shadow damage every 1 sec and
 // increasing the damage they take from your other Shadow damage over
 // time effects by 10%. Lasts 6 sec."
@@ -24,15 +24,15 @@ import (
 //   - effect 1: aura 271, amount 10, period_ms 0 -- a flat, non-periodic
 //     10, matching the "+10%" in the talent text.
 //
-// Engine limitation: the fork's existing damage-taken-multiplier
-// convention (core's Improved Shadow Bolt / Shadow Weaving debuffs) is a
-// school-wide SchoolDamageTakenMultiplier on the target, with no
-// narrower "only this caster's periodic Shadow effects, not this one"
-// scope. Wrack's vulnerability aura is implemented the same way: it
-// increases ALL Shadow damage the target takes (direct and periodic,
-// from any source) by 10% while it is up, which is broader than the
-// talent text's "your other Shadow DoTs" wording. This mirrors the
-// fork's only precedent for this kind of effect; see report-warlock.md.
+// Wrack is a channel: SpellMisc Attributes_1 0x4004, the bits Drain Life
+// and Mind Flay carry, and Wowhead's Forever tooltip reads "Channeled (6 sec
+// cast)". The caster casts nothing else for its six ticks, and its
+// vulnerability is the channel's own aura, so it ends with the channel.
+//
+// The vulnerability is aura 271 (damage taken from the caster) on class mask
+// 0x402: Corruption (0x2) and Bane of Agony (0x400). The text's "your other
+// Shadow damage over time effects" resolves to those two; Siphon Life, Bane
+// of Doom, Shadow Bolt and other casters' Shadow damage take nothing from it.
 const WrackTickBaseDamage = 36.0
 const WrackTickCoefficient = 0.14300000668
 const WrackNumTicks = 6
@@ -41,17 +41,36 @@ const WrackDuration = WrackTickLength * WrackNumTicks
 const WrackVulnerabilityBonus = 0.10
 const WrackSpellID = 1316697
 
+// wrackVulnerableSpellCodes are the spells in the vulnerability's class mask.
+var wrackVulnerableSpellCodes = []int32{SpellCode_WarlockCorruption, SpellCode_WarlockCurseOfAgony}
+
 func (warlock *Warlock) newWrackVulnerabilityAura(target *core.Unit) *core.Aura {
 	return target.GetOrRegisterAura(core.Aura{
 		Label:    "Wrack Vulnerability-" + warlock.Label,
 		ActionID: core.ActionID{SpellID: WrackSpellID, Tag: 1},
 		Duration: WrackDuration,
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow] *= 1 + WrackVulnerabilityBonus
-		},
-		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow] /= 1 + WrackVulnerabilityBonus
-		},
+	})
+}
+
+// applyWrackVulnerability makes the warlock's own Corruption and Bane of
+// Agony take the vulnerability on every target, read when each tick lands.
+func (warlock *Warlock) applyWrackVulnerability() {
+	warlock.Env.RegisterPostFinalizeEffect(func() {
+		for _, target := range warlock.Env.Encounter.AllTargetUnits {
+			for _, at := range warlock.AttackTables[target.UnitIndex] {
+				previous := at.DamageDoneByCasterMultiplier
+				at.DamageDoneByCasterMultiplier = func(spell *core.Spell, at *core.AttackTable) float64 {
+					multiplier := 1.0
+					if previous != nil {
+						multiplier = previous(spell, at)
+					}
+					if slices.Contains(wrackVulnerableSpellCodes, spell.SpellCode) && warlock.WrackVulnerabilityAuras.Get(at.Defender).IsActive() {
+						multiplier *= 1 + WrackVulnerabilityBonus
+					}
+					return multiplier
+				}
+			}
+		}
 	})
 }
 
@@ -61,6 +80,7 @@ func (warlock *Warlock) registerWrackSpell() {
 	}
 
 	warlock.WrackVulnerabilityAuras = warlock.NewEnemyAuraArray(warlock.newWrackVulnerabilityAura)
+	warlock.applyWrackVulnerability()
 
 	config := core.SpellConfig{
 		ActionID:      core.ActionID{SpellID: WrackSpellID},
@@ -68,7 +88,7 @@ func (warlock *Warlock) registerWrackSpell() {
 		SpellCode:     SpellCode_WarlockWrack,
 		ProcMask:      core.ProcMaskSpellDamage,
 		DefenseType:   core.DefenseTypeMagic,
-		Flags:         core.SpellFlagAPL | core.SpellFlagResetAttackSwing | core.SpellFlagPureDot | WarlockFlagAffliction,
+		Flags:         core.SpellFlagAPL | core.SpellFlagResetAttackSwing | core.SpellFlagChanneled | core.SpellFlagPureDot | WarlockFlagAffliction,
 		RequiredLevel: 40,
 
 		ManaCost: core.ManaCostOptions{
@@ -90,6 +110,9 @@ func (warlock *Warlock) registerWrackSpell() {
 		Dot: core.DotConfig{
 			Aura: core.Aura{
 				Label: "Wrack-" + warlock.Label,
+				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+					warlock.WrackVulnerabilityAuras.Get(aura.Unit).Deactivate(sim)
+				},
 			},
 
 			NumberOfTicks:    WrackNumTicks,

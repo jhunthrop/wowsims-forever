@@ -277,6 +277,16 @@ func (warlock *Warlock) applySuppression() {
 	warlock.PseudoStats.ThreatMultiplier *= 1 - suppressionThreatReductionPerRank*points
 }
 
+// nightfallProcChancePerRank is Nightfall's 2% a rank (18094: 2% and 4%).
+const nightfallProcChancePerRank = 0.02
+
+// nightfallTriggerSpellCodes are the spells the talent text names (18094,
+// 1.60.1.70707): "Gives your Corruption, Drain Soul, Drain Life, and Wrack
+// spells a 4% chance to cause you to enter a Shadow Trance after damaging the
+// opponent." Drain Soul and Wrack are Forever's additions (deep dive,
+// 2026-10-07); every tick rolls.
+var nightfallTriggerSpellCodes = []int32{SpellCode_WarlockCorruption, SpellCode_WarlockDrainSoul, SpellCode_WarlockDrainLife, SpellCode_WarlockWrack}
+
 func (warlock *Warlock) applyNightfall() {
 	if warlock.Talents.Nightfall <= 0 {
 		return
@@ -304,12 +314,12 @@ func (warlock *Warlock) applyNightfall() {
 		},
 	})
 
-	procChance := 0.02 * float64(warlock.Talents.Nightfall)
+	procChance := nightfallProcChancePerRank * float64(warlock.Talents.Nightfall)
 
 	core.MakePermanent(warlock.RegisterAura(core.Aura{
 		Label: "Nightfall Hidden Aura",
 		OnPeriodicDamageDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if (spell.SpellCode == SpellCode_WarlockCorruption || spell.SpellCode == SpellCode_WarlockDrainLife) && sim.Proc(procChance, "Nightfall") {
+			if slices.Contains(nightfallTriggerSpellCodes, spell.SpellCode) && sim.Proc(procChance, "Nightfall") {
 				shadowTranceAura.Activate(sim)
 			}
 		},
@@ -319,16 +329,22 @@ func (warlock *Warlock) applyNightfall() {
 // shadowMasterySpellCodes are the Shadow spells covered by Shadow Mastery's
 // two aura effects in the client (spell 18271, class masks (524435,0,0) and
 // (17418,262147,0)): Shadow Bolt, Corruption, Curse of Agony, Death Coil,
-// Drain Life, Drain Soul and Siphon Life. Forever has no vanilla-style
-// exclusions; every covered spell takes the same damage multiplier.
+// Drain Life, Drain Soul, Siphon Life, Bane of Doom (603, mask word 1 0x2)
+// and Wrack (1316697, word 1 0x40000). Shadowburn (word 0 0x80) is in the
+// direct-damage mask too, and Destruction's Shadowburn takes it. Forever has
+// no vanilla-style exclusions; every covered spell takes the same damage
+// multiplier.
 var shadowMasterySpellCodes = []int32{
 	SpellCode_WarlockShadowBolt,
 	SpellCode_WarlockCorruption,
 	SpellCode_WarlockCurseOfAgony,
+	SpellCode_WarlockCurseOfDoom,
 	SpellCode_WarlockDeathCoil,
 	SpellCode_WarlockDrainLife,
 	SpellCode_WarlockDrainSoul,
+	SpellCode_WarlockShadowburn,
 	SpellCode_WarlockSiphonLife,
+	SpellCode_WarlockWrack,
 }
 
 func (warlock *Warlock) applyShadowMastery() {
