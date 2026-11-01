@@ -251,21 +251,17 @@ var championOfTheLightPctPerRank = [6]float64{0, 0.12, 0.24, 0.36, 0.48, 0.60}
 const championOfTheLightCastTimePerRank = 200 * time.Millisecond
 
 // applyChampionOfTheLight grants the share to spell power (damage) and, for
-// the healing spec, to the healing stat. Forever gives every point of
-// healing a third of a point of spell damage
-// (Character.addUniversalStatDependencies), so a healer takes two thirds of
-// the share as spell power and the rest arrives through the healing: damage
-// and healing both read exactly the stated share. A damage spec has no use
-// for the healing stat, and granting it would add that third on top, so it
-// takes the whole share as spell power, as it always did.
+// the healing spec, to the healing stat as well, so damage and healing both
+// read exactly the stated share. A damage spec has no use for the healing
+// stat. (The 1.60.1.70707 client row, 1311084, carries only the damage aura
+// 174; the healing half is the earlier tooltip's and is the hybrids lane's
+// to settle.)
 func (paladin *Paladin) applyChampionOfTheLight() {
 	share := championOfTheLightPctPerRank[paladin.Talents.ChampionOfTheLight]
-	if !paladin.isHealer() {
-		paladin.AddStatDependency(stats.Intellect, stats.SpellPower, share)
-		return
+	paladin.AddStatDependency(stats.Intellect, stats.SpellPower, share)
+	if paladin.isHealer() {
+		paladin.AddStatDependency(stats.Intellect, stats.HealingPower, share)
 	}
-	paladin.AddStatDependency(stats.Intellect, stats.HealingPower, share)
-	paladin.AddStatDependency(stats.Intellect, stats.SpellPower, share*(1-core.HealingToSpellDamageRatio))
 }
 
 // purifyingPowerCooldownPctPerRank: node 105327, Holy tier 1 col 3:

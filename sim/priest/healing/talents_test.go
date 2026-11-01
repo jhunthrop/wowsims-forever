@@ -121,11 +121,11 @@ func TestSpiritualGuidanceGrantsFivePercentOfSpiritAsHealing(t *testing.T) {
 	if got, want := guided.GetStat(stats.HealingPower)-bare.GetStat(stats.HealingPower), 0.25*spirit; math.Abs(got-want) > 0.01 {
 		t.Errorf("healing power rose %.2f, want 25%% of %.0f spirit = %.2f", got, spirit, want)
 	}
-	// The damage half is the one-third rule on the healing stat: 8.33% of
-	// spirit, the client's "8%" rounded.
+	// The damage half is its own client effect (14901 aura 174, 8 at rank
+	// 5): 8% of spirit, not a conversion of the healing.
 	damage := guided.GetStat(stats.SpellDamage) - bare.GetStat(stats.SpellDamage)
-	if want := 0.25 * spirit / 3; math.Abs(damage-want) > 0.01 {
-		t.Errorf("spell damage rose %.2f, want a third of the healing, %.2f", damage, want)
+	if want := 0.08 * spirit; math.Abs(damage-want) > 0.01 {
+		t.Errorf("spell damage rose %.2f, want 8%% of %.0f spirit = %.2f", damage, spirit, want)
 	}
 }
 
