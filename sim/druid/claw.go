@@ -17,6 +17,10 @@ var clawSpellID = [6]int32{0, 1082, 3029, 5201, 9849, 9850}
 // points), index 0 unused. Source: 1.60.1.70009 client spellconst/druid.json.
 var clawFlatDamageBonus = [6]float64{0, 27, 39, 57, 88, 115}
 
+// clawWeaponDamageMultiplier is Claw's weapon damage percentage on every
+// rank: client effect 1 is 110 ("110% normal damage").
+const clawWeaponDamageMultiplier = 1.10
+
 func (druid *Druid) registerClawSpell() {
 	rank := core.HighestRankAtLevel(clawLearnLevels, druid.Level)
 	if rank == 0 {
@@ -51,7 +55,7 @@ func (druid *Druid) registerClawSpell() {
 		},
 
 		DamageMultiplierAdditive: druid.savageFuryDamageMultiplier(),
-		DamageMultiplier:         1,
+		DamageMultiplier:         clawWeaponDamageMultiplier,
 		ThreatMultiplier:         1,
 		BonusCoefficient:         1,
 
