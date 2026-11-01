@@ -85,52 +85,41 @@ func (warlock *Warlock) registerSoulFireSpell() {
 }
 
 // applyDecimation wires the Demonology talent Decimation (talents/warlock.json
-// node 105897, spell_id 440870/440873) into Soul Fire, the way Fel
-// Domination (fel_domination.go) already wires a cast-time/cost window
-// into its own affected spells. Talent text, rank 2 (max):
-// "Reduces the cooldown of your Soul Fire spell by 90%. When you cast
-// Shadow Bolt or Searing Pain on an enemy below 35% health, they deal
-// 6% increased damage, and for the next 10 sec your Soul Fire spell has
-// its cast time reduced by 40% and costs no Soul Shards." Rank 1 halves
-// every number (45%, 3%, 20%).
+// node 105897, spell_id 440870/440873) into Soul Fire. Talent text, rank 2:
+// "Reduces the cooldown of your Soul Fire spell by 90%. When you cast Shadow
+// Bolt or Searing Pain on an enemy below 35% health, they deal 6% increased
+// damage, and for the next 10 sec your Soul Fire spell has its cast time
+// reduced by 40% and costs no Soul Shards." Rank 1 halves every number.
 //
-// Client data (spellconst/warlock.json), corroborated by wowhead:
-//   - 440870 (the passive, one entry shared by both ranks in
-//     talents.json): effects 0 and 2 are aura 4 ("Modifies Damage/Healing
-//     Done", the SB/SP +3%/+6% -- not implemented here, see below) and
-//     effect 1 is aura 108 amount -90 misc_value 11, matching the
-//     COOLDOWN reduction; only the max-rank number is present in the
-//     table, so rank 1's 45% here is taken from the talent text instead
-//     of interpolated from raw effect amounts.
-//   - 440873 (the 10 s proc window, duration_ms 10000): effect 0 is
-//     aura 108 amount -40 misc_value 10 (a different misc_value than
-//     440870's cooldown effect, read here as the CAST TIME reduction);
-//     effect 1 is aura 256 amount -40, read as a mana-cost reduction --
-//     Soul Fire in this fork costs mana, not Soul Shards, so the
-//     tooltip's "costs no Soul Shards" is legacy flavor text and the
-//     coded -40% is used instead of treating the cast free.
+// Client data (1.60.1.70707):
+//   - 440870 effect 1 is aura 108 -90 misc 11 (cooldown), on Soul Fire's mask.
+//   - 440873 (the 10 s buff) effect 0 is aura 108 -40 misc 10, a percent
+//     cast-time modifier: it scales the cast time after flat modifiers, so
+//     Bane's -2 s comes first and Soul Fire casts in 2.4 s. Effect 1 is aura
+//     256, no reagent use: the free Soul Shard. The engine keeps no shard
+//     count, so this half changes nothing here, and the mana cost stands.
 //
-// decimationDamageMultiplier is Decimation's other half: "Shadow Bolt or
-// Searing Pain on an enemy below 35% health, they deal 3%/6% increased
-// damage" (rank 1/2) - a flat multiplier on the qualifying cast's OWN
-// damage, evaluated at cast time against the target's current health,
-// not the 10 s proc window applyDecimation wires above (that window is
-// Soul Fire's cast-time/cost discount only). shadowbolt.go and
-// searing_pain.go each call this from their own ApplyEffects, the same
-// way soul_fire.go's own ApplyEffects would if this talent modified
-// Soul Fire's own damage instead.
-func (warlock *Warlock) decimationDamageMultiplier(target *core.Unit) float64 {
+// decimationDamageMultiplier is the 3%/6% on the qualifying cast's own
+// damage, read at cast time; shadowbolt.go and searing_pain.go call it.
+func (warlock *Warlock) decimationDamageMultiplier(sim *core.Simulation, target *core.Unit) float64 {
 	rank := int(warlock.Talents.Decimation)
-	if rank == 0 {
-		return 1
-	}
-	// Enemy dummies in the ladder/conformance encounters generally
-	// don't track health (HasHealthBar() false); treated as eligible
-	// the same way applyDecimation's own proc trigger does.
-	if target.HasHealthBar() && target.CurrentHealthPercent() > 0.35 {
+	if rank == 0 || !decimationTargetEligible(sim, target) {
 		return 1
 	}
 	return 1 + [3]float64{0, 0.03, 0.06}[rank]
+}
+
+// decimationHealthThreshold is 440870 effect 2's 35.
+const decimationHealthThreshold = 0.35
+
+// decimationTargetEligible reports whether target is below 35% health. A
+// target with no health bar (every encounter dummy) is below it in the
+// encounter's execute window.
+func decimationTargetEligible(sim *core.Simulation, target *core.Unit) bool {
+	if target.HasHealthBar() {
+		return target.CurrentHealthPercent() < decimationHealthThreshold
+	}
+	return sim.IsExecutePhase35()
 }
 
 func (warlock *Warlock) applyDecimation() {
@@ -141,7 +130,6 @@ func (warlock *Warlock) applyDecimation() {
 
 	cooldownReduction := [3]float64{0, 0.45, 0.90}[rank]
 	castTimeReduction := [3]float64{0, 0.20, 0.40}[rank]
-	costReductionPct := [3]int32{0, 20, 40}[rank]
 
 	// Passive: Soul Fire's cooldown is permanently shorter.
 	warlock.OnSpellRegistered(func(spell *core.Spell) {
@@ -150,26 +138,18 @@ func (warlock *Warlock) applyDecimation() {
 		}
 	})
 
-	// Proc window: landing Shadow Bolt or Searing Pain on a target below
-	// 35% health reduces Soul Fire's cast time and mana cost for 10 s.
-	// Enemy dummies in the ladder/conformance encounters generally don't
-	// track health (HasHealthBar() false), so an untracked target is
-	// treated as eligible rather than never triggering the proc.
-	castTimeDelta := time.Duration(float64(SoulFireCastTime) * castTimeReduction)
 	decimationAura := warlock.RegisterAura(core.Aura{
 		ActionID: core.ActionID{SpellID: 440873},
 		Label:    "Decimation",
 		Duration: time.Second * 10,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			for _, spell := range warlock.SoulFire {
-				spell.DefaultCast.CastTime -= castTimeDelta
-				spell.Cost.Multiplier -= costReductionPct
+				spell.CastTimeMultiplier -= castTimeReduction
 			}
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			for _, spell := range warlock.SoulFire {
-				spell.DefaultCast.CastTime += castTimeDelta
-				spell.Cost.Multiplier += costReductionPct
+				spell.CastTimeMultiplier += castTimeReduction
 			}
 		},
 	})
@@ -181,7 +161,7 @@ func (warlock *Warlock) applyDecimation() {
 			if !result.Landed() || !slices.Contains(decimationTriggerSpellCodes, spell.SpellCode) {
 				return
 			}
-			if result.Target.HasHealthBar() && result.Target.CurrentHealthPercent() > 0.35 {
+			if !decimationTargetEligible(sim, result.Target) {
 				return
 			}
 			decimationAura.Activate(sim)
