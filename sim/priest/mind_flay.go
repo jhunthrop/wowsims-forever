@@ -85,6 +85,7 @@ func (priest *Priest) newMindFlaySpellConfig(rank int, tickIdx int32) core.Spell
 			TickLength:          tickLength,
 			AffectedByCastSpeed: false,
 			BonusCoefficient:    spellCoeff,
+			Dynamic:             true, // Forever reads spell power at every tick (core.DotConfig.Dynamic)
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, baseDamage, isRollover)
 			},

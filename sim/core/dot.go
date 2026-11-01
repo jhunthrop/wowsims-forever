@@ -42,6 +42,16 @@ type DotConfig struct {
 	// one, so it gets its own field rather than borrowing.
 	// unconfirmed
 	CritMultiplier float64
+
+	// Dynamic re-takes the dot's snapshot before every tick, so spell
+	// power and the caster's damage multipliers are read when each tick
+	// lands rather than when the dot was applied. Forever changed to
+	// dynamic DoTs (forever-bugs #137, Blizzard 2026-10-01; #398,
+	// 2026-10-26). Set it on a dot whose OnSnapshot is a plain
+	// Dot.Snapshot of a fixed base; a dot that rewrites its snapshot
+	// fields after that call (ramps, extra multipliers) needs its own
+	// per-tick read instead.
+	Dynamic bool
 }
 
 type Dot struct {
@@ -89,6 +99,11 @@ type Dot struct {
 	// CritMultiplier is this dot's own critical multiplier. Zero means
 	// "the parent spell's" - see dotCritMultiplier.
 	CritMultiplier float64
+
+	// dynamic and dynamicBase carry DotConfig.Dynamic: the base the last
+	// Snapshot took, re-read with the caster's current stats each tick.
+	dynamic     bool
+	dynamicBase float64
 }
 
 // TickPeriod is how fast the snapshot dot ticks.
@@ -237,6 +252,9 @@ func (dot *Dot) TakeSnapshot(sim *Simulation, doRollover bool) {
 // the tick is simply an extra tick.
 func (dot *Dot) TickOnce(sim *Simulation) {
 	dot.lastTickTime = sim.CurrentTime
+	if dot.dynamic {
+		dot.Snapshot(dot.Unit, dot.dynamicBase, false)
+	}
 	dot.OnTick(sim, dot.Unit, dot)
 
 	if dot.isChanneled {
@@ -360,6 +378,8 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 
 		CanCrit:        config.CanCrit || periodicCanCrit(config.Spell, isHot),
 		CritMultiplier: config.CritMultiplier,
+
+		dynamic: config.Dynamic,
 	}
 
 	auraConfig := config.Aura

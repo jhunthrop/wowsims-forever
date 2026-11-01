@@ -97,6 +97,7 @@ func (mage *Mage) newBlizzardSpellConfig(rank int) core.SpellConfig {
 			NumberOfTicks:    numTicks,
 			TickLength:       tickLength,
 			BonusCoefficient: spellCoeff,
+			Dynamic:          true, // Forever reads spell power at every tick (core.DotConfig.Dynamic)
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, baseDamage, isRollover)
 			},
