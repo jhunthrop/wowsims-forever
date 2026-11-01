@@ -15,7 +15,15 @@ func (warlock *Warlock) makeImp() *WarlockPet {
 		PowerModifier: 0.33,
 	}
 
-	switch warlock.Level {
+	cfg.Stats, cfg.AutoAttacks = petSheetAtLevel(warlock.Level, impSheet)
+
+	return warlock.makePet(cfg, warlock.Options.Summon == proto.WarlockOptions_Imp)
+}
+
+// impSheet is the demon's base sheet at the levels the engine carries one
+// for (petSheetLevels); petSheetAtLevel interpolates between them.
+func impSheet(level int32) (cfg PetConfig) {
+	switch level {
 	case 25:
 		cfg.Stats = stats.Stats{
 			stats.Strength:  47,
@@ -65,8 +73,7 @@ func (warlock *Warlock) makeImp() *WarlockPet {
 			stats.Crit: 3.454 * core.CritRatingPerCritChance,
 		}
 	}
-
-	return warlock.makePet(cfg, warlock.Options.Summon == proto.WarlockOptions_Imp)
+	return cfg
 }
 
 // FireboltDamage is the client's roll for Firebolt 3110 through 11763
@@ -85,13 +92,8 @@ var FireboltDamage = [FireboltRanks + 1]clientdamage.Effect{
 }
 
 func (wp *WarlockPet) registerImpFireboltSpell() {
-	warlockLevel := wp.owner.Level
-	// assuming max rank available
-	rank := map[int32]int{25: 3, 40: 5, 50: 6, 60: 7}[warlockLevel]
-
-	if rank == 0 {
-		rank = 1
-	}
+	// The highest rank the demon's level has learned.
+	rank := topLearnedRank(FireboltLevel[1:], int(wp.owner.Level))
 
 	if wp.owner.Options.MaxFireboltRank != proto.WarlockOptions_NoMaximum {
 		rank = min(rank, int(wp.owner.Options.MaxFireboltRank))

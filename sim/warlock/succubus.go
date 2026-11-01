@@ -14,7 +14,15 @@ func (warlock *Warlock) makeSuccubus() *WarlockPet {
 		PowerModifier: 0.77,
 	}
 
-	switch warlock.Level {
+	cfg.Stats, cfg.AutoAttacks = petSheetAtLevel(warlock.Level, succubusSheet)
+
+	return warlock.makePet(cfg, warlock.Options.Summon == proto.WarlockOptions_Succubus)
+}
+
+// succubusSheet is the demon's base sheet at the levels the engine carries one
+// for (petSheetLevels); petSheetAtLevel interpolates between them.
+func succubusSheet(level int32) (cfg PetConfig) {
+	switch level {
 	case 25:
 		cfg.Stats = stats.Stats{
 			stats.Strength:  50,
@@ -97,18 +105,16 @@ func (warlock *Warlock) makeSuccubus() *WarlockPet {
 			AutoSwingMelee: true,
 		}
 	}
-
-	return warlock.makePet(cfg, warlock.Options.Summon == proto.WarlockOptions_Succubus)
+	return cfg
 }
 
-func (wp *WarlockPet) registerSuccubusLashOfPainSpell() {
-	warlockLevel := wp.owner.Level
-	// assuming max rank available
-	rank := map[int32]int{25: 1, 40: 3, 50: 4, 60: 6}[warlockLevel]
+// lashOfPainLevel is the level each Lash of Pain rank (7814-11780) is
+// learned at, indexed by rank.
+var lashOfPainLevel = [7]int{0, 20, 28, 36, 44, 52, 60}
 
-	if rank == 0 {
-		rank = 1
-	}
+func (wp *WarlockPet) registerSuccubusLashOfPainSpell() {
+	// The highest rank the demon's level has learned.
+	rank := topLearnedRank(lashOfPainLevel[1:], int(wp.owner.Level))
 
 	spellCoeff := [7]float64{0, .429, .429, .429, .429, .429, .429}[rank]
 	// Forever's flat amounts, half of Era's 33-99: client SpellEffect
@@ -118,7 +124,7 @@ func (wp *WarlockPet) registerSuccubusLashOfPainSpell() {
 	baseDamage := clientBaseDamage * (1 + .10*float64(wp.owner.Talents.ImprovedSayaad))
 	spellId := [7]int32{0, 7814, 7815, 7816, 11778, 11779, 11780}[rank]
 	manaCost := [7]float64{0, 65, 80, 105, 125, 145, 160}[rank]
-	level := [7]int{0, 20, 28, 36, 44, 52, 60}[rank]
+	level := lashOfPainLevel[rank]
 
 	wp.primaryAbility = wp.RegisterSpell(core.SpellConfig{
 		ActionID:         core.ActionID{SpellID: spellId},

@@ -267,3 +267,50 @@ func higherSchoolPower(owner stats.Stats) stats.Stat {
 	}
 	return stats.ShadowPower
 }
+
+// petSheetLevels are the levels each demon's base sheet is carried at.
+var petSheetLevels = []int32{25, 40, 50, 60}
+
+// petSheetAtLevel is a demon's base stats and weapon at level. The sheets
+// exist only at petSheetLevels (wowsims' Classic figures); the site also sims
+// levels 20 and 30, where a missing sheet left the demon with no stats or
+// weapon. Elsewhere the sheet is interpolated linearly by level between the
+// two nearest carried levels, or extrapolated from the lowest two below 25
+// (unconfirmed: Forever's creature tables are server-side).
+func petSheetAtLevel(level int32, sheet func(level int32) PetConfig) (stats.Stats, core.AutoAttackOptions) {
+	lo, hi := petSheetLevels[0], petSheetLevels[1]
+	for i, anchor := range petSheetLevels {
+		if anchor == level {
+			cfg := sheet(level)
+			return cfg.Stats, cfg.AutoAttacks
+		}
+		if anchor < level && i+1 < len(petSheetLevels) {
+			lo, hi = anchor, petSheetLevels[i+1]
+		}
+	}
+	low, high := sheet(lo), sheet(hi)
+	t := float64(level-lo) / float64(hi-lo)
+	lerp := func(a, b float64) float64 { return max(0, a+(b-a)*t) }
+
+	var sheetStats stats.Stats
+	for s := range sheetStats {
+		sheetStats[s] = lerp(low.Stats[s], high.Stats[s])
+	}
+	attacks := low.AutoAttacks
+	attacks.MainHand.BaseDamageMin = lerp(low.AutoAttacks.MainHand.BaseDamageMin, high.AutoAttacks.MainHand.BaseDamageMin)
+	attacks.MainHand.BaseDamageMax = lerp(low.AutoAttacks.MainHand.BaseDamageMax, high.AutoAttacks.MainHand.BaseDamageMax)
+	return sheetStats, attacks
+}
+
+// topLearnedRank is the highest rank, counted from 1, whose learn level in
+// rankLevels is at most level; a demon below every rank's level still casts
+// rank 1.
+func topLearnedRank(rankLevels []int, level int) int {
+	rank := 1
+	for i, learnedAt := range rankLevels {
+		if learnedAt <= level {
+			rank = i + 1
+		}
+	}
+	return rank
+}

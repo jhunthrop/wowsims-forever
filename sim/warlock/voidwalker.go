@@ -12,7 +12,15 @@ func (warlock *Warlock) makeVoidwalker() *WarlockPet {
 		PowerModifier: 0.77,
 	}
 
-	switch warlock.Level {
+	cfg.Stats, cfg.AutoAttacks = petSheetAtLevel(warlock.Level, voidwalkerSheet)
+
+	return warlock.makePet(cfg, warlock.Options.Summon == proto.WarlockOptions_Voidwalker)
+}
+
+// voidwalkerSheet is the demon's base sheet at the levels the engine carries one
+// for (petSheetLevels); petSheetAtLevel interpolates between them.
+func voidwalkerSheet(level int32) (cfg PetConfig) {
+	switch level {
 	case 25:
 		cfg.Stats = stats.Stats{
 			stats.Strength:  50,
@@ -95,6 +103,5 @@ func (warlock *Warlock) makeVoidwalker() *WarlockPet {
 			AutoSwingMelee: true,
 		}
 	}
-
-	return warlock.makePet(cfg, warlock.Options.Summon == proto.WarlockOptions_Voidwalker)
+	return cfg
 }
