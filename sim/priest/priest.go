@@ -183,7 +183,11 @@ func (priest *Priest) Initialize() {
 	priest.registerHolyFire()
 	priest.registerShootSpell()
 	priest.registerShadowfiend()
-	priest.registerDarkSacrifice()
+	// Dark Sacrifice is the Undead racial: SkillLineAbility RaceMasks_0 16
+	// on every rank (1277324-1277328).
+	if priest.GetCharacter().Race == proto.Race_RaceUndead {
+		priest.registerDarkSacrifice()
+	}
 }
 
 func New(character *core.Character, talents string) *Priest {

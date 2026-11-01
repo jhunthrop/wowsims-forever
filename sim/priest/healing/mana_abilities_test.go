@@ -32,7 +32,15 @@ func runFor(sim *core.Simulation, duration time.Duration) {
 // leaves the sim's own regeneration out of the difference.
 func manaAfter(t *testing.T, act func(*core.Simulation, *HealingPriest)) (mana, health float64) {
 	t.Helper()
-	sim, agent := healerSim(t, 60, "")
+	return manaAfterAs(t, proto.Race_RaceHuman, act)
+}
+
+// manaAfterAs is manaAfter for a healer of race.
+func manaAfterAs(t *testing.T, race proto.Race, act func(*core.Simulation, *HealingPriest)) (mana, health float64) {
+	t.Helper()
+	player := healer(60, "", &proto.HealingPriest_Options{}, &proto.APLRotation{})
+	player.Race = race
+	sim, agent := agentSim(t, player)
 	drainMana(sim, agent)
 	if act != nil {
 		act(sim, agent)
@@ -78,11 +86,12 @@ func TestShadowfiendHasAFiveMinuteCooldown(t *testing.T) {
 
 // TestDarkSacrificeTradesHealthForManaPlusSpirit holds the top rank to the
 // client's five 3 s ticks of 320 health for 320 mana, with the caster's
-// Spirit added to the mana over the five ticks.
+// Spirit added to the mana over the five ticks. Dark Sacrifice is the
+// Undead racial, so the healer here is Undead.
 func TestDarkSacrificeTradesHealthForManaPlusSpirit(t *testing.T) {
-	idleMana, idleHealth := manaAfter(t, nil)
+	idleMana, idleHealth := manaAfterAs(t, proto.Race_RaceUndead, nil)
 	var spirit float64
-	mana, health := manaAfter(t, func(sim *core.Simulation, agent *HealingPriest) {
+	mana, health := manaAfterAs(t, proto.Race_RaceUndead, func(sim *core.Simulation, agent *HealingPriest) {
 		spell := agent.DarkSacrifice[5]
 		if spell == nil || spell.SpellID != 1277328 {
 			t.Fatalf("the level 60 priest has no Dark Sacrifice rank 5 (1277328): %v", spell)
@@ -100,7 +109,9 @@ func TestDarkSacrificeTradesHealthForManaPlusSpirit(t *testing.T) {
 }
 
 func TestDarkSacrificeRanksFollowTheClientLevels(t *testing.T) {
-	_, agent := healerSim(t, 40, "")
+	player := healer(40, "", &proto.HealingPriest_Options{}, &proto.APLRotation{})
+	player.Race = proto.Race_RaceUndead
+	_, agent := agentSim(t, player)
 	for rank, want := range map[int]bool{1: true, 2: true, 3: true, 4: false, 5: false} {
 		if got := agent.DarkSacrifice[rank] != nil; got != want {
 			t.Errorf("level 40 priest has rank %d = %v, want %v", rank, got, want)
@@ -115,6 +126,7 @@ func TestRotationsCastTheManaAbilitiesBehindTheirGates(t *testing.T) {
 	for _, c := range rotationCases {
 		t.Run(c.name, func(t *testing.T) {
 			player := healer(60, c.talents, &proto.HealingPriest_Options{UseInnerFire: true}, loadRotation(t, c.file))
+			player.Race = proto.Race_RaceUndead // Dark Sacrifice is the Undead racial
 			summary, err := healsim.Run(healsim.Request(player, healsim.TestProfile(), 600, 5))
 			if err != nil {
 				t.Fatal(err)

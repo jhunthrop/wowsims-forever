@@ -4,6 +4,7 @@ import (
 	"math"
 	"testing"
 
+	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
 	"github.com/wowsims/classic/sim/priest"
 )
@@ -46,5 +47,23 @@ func TestShadowWordDeathAddsShadowWeaving(t *testing.T) {
 	}
 	if built.ShadowWeavingAura.GetStacks() == 0 {
 		t.Error("twenty Shadow Word: Death casts added no Shadow Weaving stack")
+	}
+}
+
+// Dark Sacrifice is the Undead priest's racial: every rank's
+// SkillLineAbility row (1277324 to 1277328, 1.60.1.70707) carries
+// RaceMasks_0 16, the Undead bit, so no other race learns it.
+func TestDarkSacrificeIsUndeadOnly(t *testing.T) {
+	for _, race := range []proto.Race{proto.Race_RaceTroll, proto.Race_RaceHuman, proto.Race_RaceGnome} {
+		built := newShadowPriestOfRace(t, race)
+		for rank, spell := range built.DarkSacrifice {
+			if spell != nil {
+				t.Errorf("%v priest has Dark Sacrifice rank %d registered", race, rank)
+			}
+		}
+	}
+	undead := newShadowPriestOfRace(t, proto.Race_RaceUndead)
+	if undead.DarkSacrifice[priest.DarkSacrificeRanks] == nil {
+		t.Error("an Undead priest has no Dark Sacrifice at level 60")
 	}
 }
