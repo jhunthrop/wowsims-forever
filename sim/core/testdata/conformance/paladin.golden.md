@@ -67,7 +67,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 20 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 20 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 20 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 30 |  | 0 | 1038 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Blessing of Kings | 0 | 20217 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -123,7 +122,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 30 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 38 |  | 0 | 1038 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Blessing of Kings | 0 | 20217 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -196,8 +194,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 38 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 40 |  | 0 | 1038 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 40 |  | 1 | 19977 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Blessing of Kings | 0 | 20217 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -275,9 +271,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 40 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 50 |  | 0 | 1038 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 50 |  | 1 | 19977 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 50 |  | 2 | 19978 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Blessing of Kings | 0 | 20217 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -384,12 +377,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 50 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Seal of the Crusader | 5 | 20307 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 30000→30000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 60 |  | 0 | 1038 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 60 |  | 0 | 25890 | 260.00→260.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 60 |  | 0 | 25895 | 241.92 (16% base mana)→241.92 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 60 |  | 1 | 19977 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 60 |  | 2 | 19978 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 60 |  | 3 | 19979 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Blessing of Kings | 0 | 20217 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -578,7 +565,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 20 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 20 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 20 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 30 |  | 0 | 1038 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Blessing of Kings | 0 | 20217 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -627,7 +613,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 30 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 38 |  | 0 | 1038 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Blessing of Kings | 0 | 20217 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -691,7 +676,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 38 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 40 |  | 0 | 1038 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Blessing of Kings | 0 | 20217 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -760,7 +744,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 40 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 50 |  | 0 | 1038 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Blessing of Kings | 0 | 20217 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -855,8 +838,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 50 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Seal of the Crusader | 5 | 20307 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 60 |  | 0 | 1038 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| ProtectionPaladin | 60 |  | 0 | 25895 | 241.92 (16% base mana)→241.92 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Blessing of Kings | 0 | 20217 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -1030,7 +1011,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 20 | Seal of Righteousness | 3 | 20288 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 20 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 20 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 30 |  | 0 | 1038 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Blessing of Kings | 0 | 20217 | 56.16 (8% base mana)→56.16 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -1079,7 +1059,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 30 | Seal of the Crusader | 1 | 21082 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 38 |  | 0 | 1038 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Blessing of Kings | 0 | 20217 | 74.64 (8% base mana)→74.64 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -1143,7 +1122,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 38 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 40 |  | 0 | 1038 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Blessing of Kings | 0 | 20217 | 78.96 (8% base mana)→78.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -1212,7 +1190,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 40 | Seal of the Crusader | 2 | 20162 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 50 |  | 0 | 1038 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Blessing of Kings | 0 | 20217 | 100.56 (8% base mana)→100.56 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
@@ -1307,8 +1284,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 50 | Seal of the Crusader | 3 | 20305 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Seal of the Crusader | 4 | 20306 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 30000→30000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Seal of the Crusader | 5 | 20307 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 30000→30000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 60 |  | 0 | 1038 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 3600000→3600000 | match |  | n/a | n/a | n/a |
-| RetributionPaladin | 60 |  | 0 | 25895 | 241.92 (16% base mana)→241.92 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Blessing of Kings | 0 | 20217 | 120.96 (8% base mana)→120.96 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Blessing of Might | 2 | 19834 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 3600000→3600000 | match |  | n/a | n/a | n/a |
