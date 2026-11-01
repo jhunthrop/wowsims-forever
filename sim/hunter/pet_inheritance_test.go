@@ -74,3 +74,18 @@ func TestHunterPetInheritsTenPercentAttackPowerAndAllCrit(t *testing.T) {
 		t.Errorf("melee hunter: pet inherits %.1f attack power, want 10%% of 1800 melee = 180", got[stats.AttackPower])
 	}
 }
+
+// Hunter Pet Scaling (415429) carries the melee and ranged hit channels
+// (aura 54 and 55, server-computed amounts), the same channels as Warlock
+// Pet Scaling (416189), whose demons inherit the warlock's hit. wowsims/sod,
+// on the same client spell, gives the pet all of the hunter's hit
+// (sim/hunter/pet.go makeStatInheritance). Sim-audit round 4, physical B3.
+func TestHunterPetInheritsTheHuntersHit(t *testing.T) {
+	hunter := newLevel60HunterWithFullBuffs(t)
+	inherit := hunter.makeStatInheritance()
+	owner := stats.Stats{stats.RangedAttackPower: 2000, stats.Hit: 6 * core.HitRatingPerHitChance}
+	hunter.petAttackPowerSource = higherAttackPower(owner)
+	if got := inherit(owner)[stats.Hit]; got != 6*core.HitRatingPerHitChance {
+		t.Errorf("pet inherits %.2f hit, want all of the hunter's %.2f", got, float64(6*core.HitRatingPerHitChance))
+	}
+}

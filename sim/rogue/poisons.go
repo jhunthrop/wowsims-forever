@@ -294,7 +294,9 @@ func (rogue *Rogue) makeWoundPoison() *core.Spell {
 		ProcMask:    core.ProcMaskSpellDamageProc,
 		Flags:       core.SpellFlagPoison | core.SpellFlagPassiveSpell | SpellFlagRoguePoison,
 
-		DamageMultiplier: rogue.getPoisonDamageMultiplier(),
+		// Vile Poisons' masks (8192, 65536) do not cover Wound Poison
+		// (268435456).
+		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {

@@ -175,7 +175,8 @@ func TestVenomAddsToVilePoisonsInsteadOfMultiplying(t *testing.T) {
 	rogue.VenomAura.OnGain(rogue.VenomAura, nil)
 	assertClose(t, "InstantPoison with Venom", rogue.InstantPoison.DamageMultiplier, 1+0.30+0.20)
 	assertClose(t, "DeadlyPoison tick with Venom", rogue.DeadlyPoisonTickMultiplierForTest(), 1+0.30+0.20)
-	assertClose(t, "WoundPoison with Venom", rogue.WoundPoison.DamageMultiplier, 1+0.30+0.20)
+	// Wound Poison's mask (268435456) is outside both talents' masks.
+	assertClose(t, "WoundPoison with Venom", rogue.WoundPoison.DamageMultiplier, 1)
 	rogue.VenomAura.OnExpire(rogue.VenomAura, nil)
 	assertClose(t, "InstantPoison after Venom", rogue.InstantPoison.DamageMultiplier, 1.20)
 }

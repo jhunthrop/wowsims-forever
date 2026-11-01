@@ -36,9 +36,11 @@ func (rogue *Rogue) venomDamageScale() float64 {
 	return (vile + venomPoisonDamageBonus) / vile
 }
 
-// scalePoisonDamage multiplies the damage multiplier of every poison spell.
+// scalePoisonDamage multiplies the damage multiplier of the poisons on
+// Venom's two masks, Instant (8192) and Deadly (65536). Wound Poison's mask
+// (268435456) is outside them.
 func (rogue *Rogue) scalePoisonDamage(factor float64) {
-	for _, spell := range []*core.Spell{rogue.InstantPoison, rogue.deadlyPoisonTick, rogue.WoundPoison} {
+	for _, spell := range []*core.Spell{rogue.InstantPoison, rogue.deadlyPoisonTick} {
 		if spell != nil {
 			spell.DamageMultiplier *= factor
 		}

@@ -205,16 +205,19 @@ const petAttackPowerShare = 0.10
 
 // makeStatInheritance is Forever's pet rework: the pet inherits 10% of the
 // hunter's attack power, melee or ranged, whichever is higher, and all of
-// the hunter's crit chance. The client's Hunter Pet Scaling (415429)
-// carries both channels (aura 99 and aura 52) with server-computed
-// amounts; the 10% and 100% are from the Warcraft Tavern Forever hunter
-// and pet guides and MMOGAH. The inheritance is linear in the chosen
-// stat, so the same function maps the owner's dynamic stat changes.
+// the hunter's crit and hit chance. The client's Hunter Pet Scaling
+// (415429) carries those channels (aura 99, aura 52, aura 54/55) with
+// server-computed amounts; the 10% and 100% crit are from the Warcraft
+// Tavern Forever hunter and pet guides and MMOGAH. Hit follows wowsims/sod
+// on the same client spell and this fork's demons (Warlock Pet Scaling
+// 416189 has the same hit channels). The inheritance is linear in the
+// chosen stat, so the same function maps the owner's dynamic stat changes.
 func (hunter *Hunter) makeStatInheritance() core.PetStatInheritance {
 	return func(ownerStats stats.Stats) stats.Stats {
 		return stats.Stats{
 			stats.AttackPower: ownerStats[hunter.petAttackPowerSource] * petAttackPowerShare,
 			stats.Crit:        ownerStats[stats.Crit],
+			stats.Hit:         ownerStats[stats.Hit],
 		}
 	}
 }
