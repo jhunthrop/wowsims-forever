@@ -213,21 +213,24 @@ func (wp *WarlockPet) ExecuteCustomRotation(sim *core.Simulation) {
 // Warlock Pet Scaling (client 416189, "Owner Power Scaling") gives a demon
 // channels for Stamina, Intellect, armor and the five resistances, melee
 // attack power, all-school spell damage, hit, haste, crit and mana regen;
-// the server computes every amount and Blizzard publishes none. The shares
-// below are Classic's, which two sources give for this same client spell:
-// wowsims' Season of Discovery engine (wowsims/sod sim/warlock/pet.go,
-// commits 378fec876, 70f6b1327 and 61102b576, 2024) and warcraft.wiki.gg's
-// Warlock minion page (75% Stamina, 30% Intellect, 57% of spell damage as
-// attack power, 15% as spell damage). The 35% armor is wowsims' and TBC's;
-// the 40% resistances are TBC's alone (single source; the client has the
-// channels). wowsims' tested 56.5% is taken over the wiki's rounded 57%.
+// the server computes every amount. Forever's character sheet states four of
+// them: WARLOCK_PET_BONUS in the 1.60.1.70532 client's Camelot
+// PaperDollFrame.lua gives 17% of the warlock's better Shadow or Fire spell
+// damage as attack power, 10% as spell damage, 35% of its armor and 100% of
+// its resistances (PET_BONUS_SPELLDMG_TO_AP, _SPELLDMG_TO_SPELLDMG, _ARMOR,
+// _RES). wowsims/forever read the same tenth off beta pet sheets and a logged
+// Sayaad (sim/warlock/pets.go, c3d9ea951, 2026-10-14). Classic's 57% and 15%
+// (wowsims/sod, warcraft.wiki.gg) are not Forever's. The client sheet says
+// pets have no primary attributes (PET_BONUS_STAM and _INT 0); the 75%
+// Stamina (7.5 health a point, which wowsims/forever also reads) and 30%
+// Intellect stand in for the health and mana the server grants instead.
 const (
 	petStaminaShare             = 0.75
 	petIntellectShare           = 0.30
 	petArmorShare               = 0.35
-	petResistanceShare          = 0.40
-	petAttackPowerPerSpellPower = 0.565
-	petSpellDamagePerSpellPower = 0.15
+	petResistanceShare          = 1.00
+	petAttackPowerPerSpellPower = 0.17
+	petSpellDamagePerSpellPower = 0.10
 )
 
 // makeStatInheritance maps the warlock's stats to the demon's. Hit is the

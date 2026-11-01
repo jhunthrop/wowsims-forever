@@ -55,13 +55,13 @@ func newPetInheritanceTestWarlock(t *testing.T, summon proto.WarlockOptions_Summ
 
 // Warlock Pet Scaling (client 416189) gives a demon channels for Stamina,
 // Intellect, armor and the five resistances, attack power, spell damage and
-// hit, with server-computed amounts. The amounts are Classic's, as wowsims'
-// Season of Discovery engine carries them for the same client spell and
-// warcraft.wiki.gg's Warlock minion page states them: 75% Stamina, 30%
-// Intellect, 35% armor, 40% resistances (TBC's figure; the client has the
-// channel), 56.5% of the warlock's best spell power as attack power and 15%
-// of it as spell damage, and the warlock's hit.
-func TestDemonInheritsTheClassicShares(t *testing.T) {
+// hit, with server-computed amounts. Forever's own character sheet states
+// the spell-damage, armor and resistance shares: WARLOCK_PET_BONUS in the
+// 1.60.1 client's Camelot PaperDollFrame.lua (PET_BONUS_SPELLDMG_TO_AP 0.17,
+// PET_BONUS_SPELLDMG_TO_SPELLDMG 0.1, PET_BONUS_ARMOR 0.35, PET_BONUS_RES
+// 1.00), and wowsims/forever read the same tenth off beta pet sheets and a
+// logged Sayaad (c3d9ea951). Stamina and Intellect keep Classic's shares.
+func TestDemonInheritsForeversShares(t *testing.T) {
 	_, warlock := newPetInheritanceTestWarlock(t, proto.WarlockOptions_Succubus)
 	warlock.petSpellPowerSchool = stats.ShadowPower
 	owner := stats.Stats{
@@ -81,10 +81,10 @@ func TestDemonInheritsTheClassicShares(t *testing.T) {
 		stats.Stamina:          300,
 		stats.Intellect:        90,
 		stats.Armor:            700,
-		stats.FireResistance:   40,
-		stats.ShadowResistance: 20,
-		stats.AttackPower:      0.565 * 400,
-		stats.SpellDamage:      0.15 * 400,
+		stats.FireResistance:   100,
+		stats.ShadowResistance: 50,
+		stats.AttackPower:      0.17 * 400,
+		stats.SpellDamage:      0.10 * 400,
 		stats.Hit:              6 * core.HitRatingPerHitChance,
 	}
 	for s := stats.Stat(0); s < stats.Len; s++ {
@@ -102,13 +102,13 @@ func TestDemonInheritanceIsLinearForOwnerStatChanges(t *testing.T) {
 	inherit := warlock.makeStatInheritance()
 	gain := inherit(stats.Stats{stats.ShadowPower: 80})
 	loss := inherit(stats.Stats{stats.ShadowPower: -80})
-	if gain[stats.SpellDamage] != 12 || loss[stats.SpellDamage] != -12 {
-		t.Errorf("shadow power +80/-80 moves the demon's spell damage by %.2f/%.2f, want +12/-12", gain[stats.SpellDamage], loss[stats.SpellDamage])
+	if math.Abs(gain[stats.SpellDamage]-8) > 1e-9 || math.Abs(loss[stats.SpellDamage]+8) > 1e-9 {
+		t.Errorf("shadow power +80/-80 moves the demon's spell damage by %.2f/%.2f, want +8/-8", gain[stats.SpellDamage], loss[stats.SpellDamage])
 	}
 }
 
 // A summoned Succubus follows the warlock's sheet: Demonic Knowledge's 60
-// spell power gives it 0.565 x 60 = 33.9 attack power on its own 129 x 2 -
+// spell power gives it 0.17 x 60 = 10.2 attack power on its own 129 x 2 -
 // 20 = 238, and three quarters of the warlock's Stamina.
 func TestSummonedSuccubusFollowsTheWarlocksSheet(t *testing.T) {
 	_, warlock := newPetInheritanceTestWarlock(t, proto.WarlockOptions_Succubus)
@@ -121,13 +121,13 @@ func TestSummonedSuccubusFollowsTheWarlocksSheet(t *testing.T) {
 		t.Fatalf("warlock spell power = %.1f, want Demonic Knowledge's 60", owner[stats.SpellPower])
 	}
 	got := succubus.GetStats()
-	if want := 238 + 0.565*60; math.Abs(got[stats.AttackPower]-want) > 1e-6 {
+	if want := 238 + 0.17*60; math.Abs(got[stats.AttackPower]-want) > 1e-6 {
 		t.Errorf("Succubus attack power = %.2f, want %.2f", got[stats.AttackPower], want)
 	}
 	if want := 234 + 0.75*owner[stats.Stamina]; math.Abs(got[stats.Stamina]-want) > 1e-6 {
 		t.Errorf("Succubus Stamina = %.2f, want 234 + 75%% of %.1f = %.2f", got[stats.Stamina], owner[stats.Stamina], want)
 	}
-	if want := 0.15 * 60; math.Abs(got[stats.SpellDamage]-want) > 1e-6 {
+	if want := 0.10 * 60; math.Abs(got[stats.SpellDamage]-want) > 1e-6 {
 		t.Errorf("Succubus spell damage = %.2f, want %.2f", got[stats.SpellDamage], want)
 	}
 }
