@@ -76,28 +76,11 @@ func (tier bearFormTier) ArmorMultiplier() float64 {
 	return 1 + tier.ArmorFromItemsPercent/100
 }
 
-// Both bear forms share the paw: 54.8 damage per second at 2.5 s a swing,
-// rolled 20% either side (the cat's claw is the same 54.8 dps at 1.0 s;
-// 54.8 is also the baseline the weapon's Feral Attack Power is counted
-// from). The client states no form weapon, so this is Era's.
-//
-// unconfirmed: the paw's damage and speed; Forever's rage normalization
-// (sim/core/rage.go) reads the speed as a one-handed weapon's.
-const (
-	formPawDamagePerSecond = 54.8
-	bearPawSwingSpeed      = 2.5
-	pawDamageSpread        = 0.2
-)
-
+// GetBearWeapon is both bear forms' paw at the equipped weapon's DPS
+// (formPawWeapon). Forever's rage normalization (sim/core/rage.go) reads
+// the 2.5 s speed as a one-handed weapon's.
 func (druid *Druid) GetBearWeapon() core.Weapon {
-	average := formPawDamagePerSecond * bearPawSwingSpeed
-	return core.Weapon{
-		BaseDamageMin:        average * (1 - pawDamageSpread),
-		BaseDamageMax:        average * (1 + pawDamageSpread),
-		SwingSpeed:           bearPawSwingSpeed,
-		NormalizedSwingSpeed: bearPawSwingSpeed,
-		AttackPowerPerDPS:    core.DefaultAttackPowerPerDPS,
-	}
+	return formPawWeapon(druid.WeaponFromMainHand(), bearPawSwingSpeed)
 }
 
 // bearFormStatBonus is what shifting adds to the character's stats at its
@@ -136,7 +119,6 @@ func (druid *Druid) registerBearFormSpell() {
 		1+heartOfTheWildBearStaminaPerRank*float64(clampRank(druid.Talents.HeartOfTheWild, heartOfTheWildMaxRank)))
 	feralApDep := druid.NewDynamicStatDependency(stats.FeralAttackPower, stats.AttackPower, 1)
 
-	pawWeapon := druid.GetBearWeapon()
 	thickHideArmor := stats.Stats{}
 
 	druid.BearFormAura = druid.RegisterAura(core.Aura{
@@ -150,7 +132,7 @@ func (druid *Druid) registerBearFormSpell() {
 			}
 			druid.form = Bear
 			druid.SetCurrentPowerBar(core.RageBar)
-			druid.AutoAttacks.SetMH(pawWeapon)
+			druid.AutoAttacks.SetMH(druid.GetBearWeapon())
 
 			druid.PseudoStats.ThreatMultiplier *= bearFormThreatMultiplier
 			druid.SetShapeshift(aura)

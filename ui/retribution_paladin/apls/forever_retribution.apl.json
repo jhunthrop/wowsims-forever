@@ -71,6 +71,112 @@
       }
     },
     {
+      "notes": "With Unsealed Wrath, once three swings have stored Seal of Righteousness, switch to Seal of Command: the next swing releases all three stored Seals of Righteousness. Skipped below 30% mana, because every Seal costs a global and over 200 mana.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 1310735
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "auraNumStacks": {
+                      "auraId": {
+                        "spellId": 1310735
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3"
+                    }
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 20293,
+                    "rank": 8
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "30%"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20920,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "After one swing under Seal of Command, go straight back to Seal of Righteousness.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 1310735
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "auraNumStacks": {
+                      "auraId": {
+                        "spellId": 1310735
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "1"
+                    }
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 20920,
+                    "rank": 5
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castPaladinPrimarySeal": {}
+      }
+    },
+    {
       "notes": "Reapply Seal of Righteousness once it is about to expire -- this is now the only seal-maintenance line (see notes for why the seal twist that used to sit here was removed). It also catches the seal being deactivated by Judgement's own cast, which fires this same condition on the very next decision.",
       "action": {
         "condition": {

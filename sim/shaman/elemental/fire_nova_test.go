@@ -232,3 +232,19 @@ func TestManaSpringTotemRestoresManaForFiveMinutes(t *testing.T) {
 		t.Errorf("Mana Spring Totem expires at %v, want %v (client duration 300 s)", got, want)
 	}
 }
+
+// Forever's Fire Nova (408341-408345) deals the damage of its own spells
+// 408423/408424/408426/408427/408428 ($408428s1 in 408345's text), not the
+// vanilla totem's 8349-11307: rank 5 at 60 is 239 + 1.3 a level to 57,
+// rolled 0.1098 wide, Wowhead Forever's "232 to 259".
+func TestFireNovaDealsTheForeverSpellsDamage(t *testing.T) {
+	_, s := newFireNovaShaman(t, 60, elementalTalentsWith(nil))
+	blast := s.FireNovaBlast[shaman.FireNovaLearnRanks]
+	if got, want := blast.ActionID.SpellID, int32(408428); got != want {
+		t.Errorf("Fire Nova rank 5 damage spell = %d, want %d", got, want)
+	}
+	lo, hi := blast.ClientBaseDamage[0], blast.ClientBaseDamage[1]
+	if lo < 231 || lo > 233 || hi < 258 || hi > 260 {
+		t.Errorf("Fire Nova rank 5 at 60 rolls %.1f-%.1f, want 232-259", lo, hi)
+	}
+}

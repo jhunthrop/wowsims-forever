@@ -201,6 +201,37 @@
       }
     },
     {
+      "notes": "Fire Nova on a Clearcasting proc: free, instant, and it needs your fire totem down, which Searing Totem already is.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 16246
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 16246
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 408345,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
       "notes": "Lightning Bolt is the rest of the single-target rotation.",
       "action": {
         "castSpell": {

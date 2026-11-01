@@ -28,14 +28,44 @@ func (druid *Druid) InForm(form DruidForm) bool {
 	return druid.form.Matches(form)
 }
 
-func (druid *Druid) GetCatWeapon() core.Weapon {
+// Forever's druid deep dive (Blizzard, 2026-09-30): "the Druid's melee
+// auto attack DPS in Bear, Cat or Dire Bear Form is now the same as the
+// DPS of the Druid's equipped weapon ... the speed of attack is changed to
+// 1.0 or 2.5 seconds, depending on the form. Abilities that deal weapon
+// damage likewise use these damage values."
+// https://us.forums.blizzard.com/en/wow/t/2367361
+const (
+	catPawSwingSpeed  = 1.0
+	bearPawSwingSpeed = 2.5
+
+	// formPawDamagePerSecond and pawDamageSpread are Era's paw (54.8 dps,
+	// rolled 20% either side): an unarmed druid's, which the deep dive does
+	// not cover.
+	formPawDamagePerSecond = 54.8
+	pawDamageSpread        = 0.2
+)
+
+// formPawWeapon is a feral form's auto attack: the equipped weapon's
+// damage per second and spread, swung at the form's speed.
+func formPawWeapon(weapon core.Weapon, speed float64) core.Weapon {
+	minPerSecond := formPawDamagePerSecond * (1 - pawDamageSpread)
+	maxPerSecond := formPawDamagePerSecond * (1 + pawDamageSpread)
+	if weapon.SwingSpeed > 0 && weapon.DPS() > 0 {
+		minPerSecond = weapon.BaseDamageMin / weapon.SwingSpeed
+		maxPerSecond = weapon.BaseDamageMax / weapon.SwingSpeed
+	}
 	return core.Weapon{
-		BaseDamageMin:        43.84,
-		BaseDamageMax:        65.76,
-		SwingSpeed:           1.0,
-		NormalizedSwingSpeed: 1.0,
+		BaseDamageMin:        minPerSecond * speed,
+		BaseDamageMax:        maxPerSecond * speed,
+		SwingSpeed:           speed,
+		NormalizedSwingSpeed: speed,
 		AttackPowerPerDPS:    core.DefaultAttackPowerPerDPS,
 	}
+}
+
+// GetCatWeapon is Cat Form's claw at the equipped weapon's DPS.
+func (druid *Druid) GetCatWeapon() core.Weapon {
+	return formPawWeapon(druid.WeaponFromMainHand(), catPawSwingSpeed)
 }
 
 // sharpenedClawsCritPerRank is Sharpened Claws' "Increases your critical
@@ -101,8 +131,6 @@ func (druid *Druid) registerCatFormSpell() {
 			1+heartOfTheWildPerRank*float64(clampRank(druid.Talents.HeartOfTheWild, heartOfTheWildMaxRank)))
 	}
 
-	clawWeapon := druid.GetCatWeapon()
-
 	predBonus := stats.Stats{}
 	thickHideArmor := stats.Stats{}
 
@@ -118,7 +146,7 @@ func (druid *Druid) registerCatFormSpell() {
 			druid.form = Cat
 			druid.SetCurrentPowerBar(core.EnergyBar)
 
-			druid.AutoAttacks.SetMH(clawWeapon)
+			druid.AutoAttacks.SetMH(druid.GetCatWeapon())
 
 			druid.PseudoStats.ThreatMultiplier *= 0.71
 			// FOREVER: Feline Swiftness is not in the client's trees.

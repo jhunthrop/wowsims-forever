@@ -27,9 +27,9 @@ func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, rai
 
 	if targetIdx == 0 {
 		if debuffs.JudgementOfTheCrusader == proto.TristateEffect_TristateEffectRegular {
-			MakePermanent(JudgementOfTheCrusaderAura(nil, target, 1, 0))
+			MakePermanent(JudgementOfTheCrusaderAura(nil, target, JudgementOfTheCrusaderRaidBonus, 1, 0))
 		} else if debuffs.JudgementOfTheCrusader == proto.TristateEffect_TristateEffectImproved {
-			MakePermanent(JudgementOfTheCrusaderAura(nil, target, 1.15, 0))
+			MakePermanent(JudgementOfTheCrusaderAura(nil, target, JudgementOfTheCrusaderRaidBonus, 1.15, 0))
 		}
 	}
 
@@ -465,9 +465,14 @@ func JudgementOfLightAura(target *Unit) *Aura {
 	})
 }
 
-func JudgementOfTheCrusaderAura(caster *Unit, target *Unit, mult float64, extraBonus float64) *Aura {
+// JudgementOfTheCrusaderRaidBonus is the raid debuff's Holy damage taken:
+// rank 6 (20303), aura 14 at 161 in the Forever client (Era's was 140).
+const JudgementOfTheCrusaderRaidBonus = 161
+
+// JudgementOfTheCrusaderAura adds bonus Holy damage taken (the judging
+// Seal rank's amount), scaled by mult and raised by extraBonus.
+func JudgementOfTheCrusaderAura(caster *Unit, target *Unit, bonus float64, mult float64, extraBonus float64) *Aura {
 	var spellId int32 = 20303
-	var bonus float64 = 140
 
 	bonus *= mult
 	bonus += extraBonus
