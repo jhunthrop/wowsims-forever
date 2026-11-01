@@ -104,6 +104,7 @@ func (shaman *Shaman) newFlameShockSpell(rank int, shockTimer *core.Timer) core.
 		NumberOfTicks:    int32(numTicks),
 		TickLength:       tickDuration,
 		BonusCoefficient: dotSpellCoeff,
+		Dynamic:          true,
 
 		OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 			dot.Snapshot(target, tickDamage.Center(casterLevel), isRollover)

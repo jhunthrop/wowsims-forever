@@ -82,6 +82,8 @@ func newBalanceDruidSimWearing(t *testing.T, talents string, equipment *proto.Eq
 			Buffs:              core.FullBuffs.Player,
 			TalentsString:      talents,
 			DistanceFromTarget: 30,
+			// An empty rotation: a channel's tick asks it whether to stop.
+			Rotation: &proto.APLRotation{},
 		},
 		PlayerOptionsAdaptive,
 	)

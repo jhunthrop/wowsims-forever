@@ -102,6 +102,7 @@ func (druid *Druid) getMoonfireBaseConfig(rank int) core.SpellConfig {
 			NumberOfTicks:    ticks,
 			TickLength:       tickLength,
 			BonusCoefficient: spellDotCoeff,
+			Dynamic:          true,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, tickDamage.Center(casterLevel), isRollover)
 			},
