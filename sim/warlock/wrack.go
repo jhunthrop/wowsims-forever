@@ -8,9 +8,9 @@ import (
 )
 
 // Wrack is Affliction's level-60 capstone (talents/warlock.json node
-// 105909, prereq Siphon Life): an instant, no-cooldown DoT that also
-// makes the target take more damage from the warlock's other Shadow
-// damage-over-time effects for its duration. Talent text: "Tears the
+// 105909, prereq Siphon Life): a 6 second, no-cooldown channel that also
+// makes the target take more damage from the warlock's Corruption and Bane
+// of Agony while it lasts. Talent text: "Tears the
 // target apart from within, dealing 36 Shadow damage every 1 sec and
 // increasing the damage they take from your other Shadow damage over
 // time effects by 10%. Lasts 6 sec."
