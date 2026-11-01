@@ -156,7 +156,6 @@ type Mage struct {
 	ColdSnap                *core.Spell
 	IceBarrier              []*core.Spell
 	IceLance                []*core.Spell
-	Ignite                  *core.Spell
 	igniteTick              *core.Spell
 	ManaGem                 []*core.Spell
 	PresenceOfMind          *core.Spell
