@@ -298,6 +298,11 @@ type ResourceMetrics struct {
 	ActionID ActionID
 	Type     proto.ResourceType
 
+	// NoThreat marks a gain from a spell flagged SPELL_ATTR1_NO_THREAT
+	// (0x400 in Attributes_1): the server gives such an energize no
+	// threat, so the mana and rage gain threat leave it out.
+	NoThreat bool
+
 	Events     int32
 	Gain       float64
 	ActualGain float64

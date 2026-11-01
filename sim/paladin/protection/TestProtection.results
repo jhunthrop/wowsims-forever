@@ -94,70 +94,70 @@ dps_results: {
  key: "TestProtection-Phase1-AllItems-Avenger'sBattlegear"
  value: {
   dps: 596.33955
-  tps: 1413.91589
+  tps: 1395.98028
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-BattlegearofEternalJustice"
  value: {
   dps: 534.29331
-  tps: 1250.54779
+  tps: 1236.46182
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-Freethinker'sArmor"
  value: {
   dps: 521.17752
-  tps: 1221.71199
+  tps: 1206.99621
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-JudgementArmor"
  value: {
   dps: 594.52943
-  tps: 1408.58111
+  tps: 1387.98701
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-LawbringerArmor"
  value: {
   dps: 531.98112
-  tps: 1247.60506
+  tps: 1227.63266
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-LieutenantCommander'sRedoubt"
  value: {
   dps: 565.34587
-  tps: 1332.44612
+  tps: 1316.85522
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-RedemptionArmor"
  value: {
   dps: 522.12283
-  tps: 1249.46378
+  tps: 1225.0343
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-SanctifiedOrb-20512"
  value: {
   dps: 495.07993
-  tps: 1163.61676
+  tps: 1151.37537
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-SoulforgeArmor"
  value: {
   dps: 574.2148
-  tps: 1346.57186
+  tps: 1328.35168
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Average-Default"
  value: {
   dps: 587.29231
-  tps: 1412.38905
+  tps: 1386.49843
   dtps: 456.9301
   hps: 10.66285
  }
@@ -166,91 +166,91 @@ dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-LongMultiTarget"
  value: {
   dps: 573.57649
-  tps: 2271.12505
+  tps: 1980.92015
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-LongSingleTarget"
  value: {
   dps: 299.21556
-  tps: 868.95626
+  tps: 854.49741
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-ShortSingleTarget"
  value: {
   dps: 369.6181
-  tps: 1058.15372
+  tps: 1043.59208
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-LongMultiTarget"
  value: {
   dps: 95.09878
-  tps: 604.13196
+  tps: 434.14975
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-LongSingleTarget"
  value: {
   dps: 60.1102
-  tps: 192.14709
+  tps: 183.58713
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-ShortSingleTarget"
  value: {
   dps: 122.6054
-  tps: 366.04958
+  tps: 357.17521
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-LongMultiTarget"
  value: {
   dps: 569.86363
-  tps: 2254.49386
+  tps: 1967.31189
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-LongSingleTarget"
  value: {
   dps: 295.27016
-  tps: 857.11065
+  tps: 842.9065
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-ShortSingleTarget"
  value: {
   dps: 368.55348
-  tps: 1055.48453
+  tps: 1040.84996
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-LongMultiTarget"
  value: {
   dps: 97.45208
-  tps: 628.48071
+  tps: 460.42465
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-LongSingleTarget"
  value: {
   dps: 60.66642
-  tps: 194.19042
+  tps: 185.78762
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-ShortSingleTarget"
  value: {
   dps: 123.16921
-  tps: 367.25462
+  tps: 358.5251
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-SwitchInFrontOfTarget-Default"
  value: {
   dps: 684.5504
-  tps: 1601.77676
+  tps: 1574.86008
   dtps: 427.30957
   hps: 11.2833
  }
