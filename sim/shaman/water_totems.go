@@ -82,9 +82,12 @@ func (shaman *Shaman) newHealingStreamTotemSpellConfig(rank int) core.SpellConfi
 		// SPELL_ATTR8_PERIODIC_CAN_CRIT in the 1.60.1.70707 tables, the
 		// flag every other heal over time follows (core.periodicCanCrit).
 		// The tick is its own heal spell here, so it rolls the shaman's
-		// healing crit directly.
+		// healing crit directly, and it is dealt as a periodic heal (the
+		// client's 10461 is a periodic heal aura): procs that ignore
+		// periodic heals, such as Water Shield's, ignore it.
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealHealing(sim, target, baseHealing, spell.OutcomeHealingCrit)
+			result := spell.CalcHealing(sim, target, baseHealing, spell.OutcomeHealingCrit)
+			spell.DealPeriodicHealing(sim, result)
 		},
 	})
 

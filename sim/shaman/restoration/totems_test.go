@@ -132,6 +132,30 @@ func TestHealingStreamTicksCanCrit(t *testing.T) {
 	}
 }
 
+// A Healing Stream crit is a periodic heal's crit, and Water Shield's proc
+// mask (SpellAuraOptions 223904, ProcTypeMask 0x362A8) has no periodic bit,
+// so the totem's crits restore no mana.
+func TestHealingStreamCritsDoNotTriggerWaterShield(t *testing.T) {
+	rotation := core.APLRotationFromJsonString(fmt.Sprintf(`{
+		"type": "TypeAPL",
+		"priorityList": [
+			{"action": {"condition": {"not": {"val": {"auraIsActive": {"auraId": {"spellId": 408510}}}}},
+				"castSpell": {"spellId": {"spellId": 408510}}}},
+			{"action": {"condition": {"cmp": {"op": "OpLt",
+				"lhs": {"currentTime": {}}, "rhs": {"const": {"val": "3s"}}}},
+				"castSpell": {"spellId": {"spellId": %d, "rank": 5}}}}
+		]
+	}`, healingStreamTopRankID))
+	player := newHealerPlayer(60, FullTalents, rotation)
+	bonus := stats.FromFloatArray(player.BonusStats.Stats)
+	bonus[stats.Crit] += 100 * core.CritRatingPerCritChance
+	player.BonusStats = &proto.UnitStats{Stats: bonus.ToFloatArray()}
+	metrics := runHealer(t, player, healingStreamFightLength)
+	if got := manaGained(metrics, 408511); got != 0 {
+		t.Errorf("Water Shield restored %v mana from Healing Stream crits, want none", got)
+	}
+}
+
 func TestRestorativeTotemsAndPurificationRaiseHealingStream(t *testing.T) {
 	talents := restoTalents(map[int]int{posRestorativeTotems: 5, posPurification: 5})
 	result := runHealingStreamWithCrit(t, talents, noCrit)
