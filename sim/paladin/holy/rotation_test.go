@@ -98,7 +98,6 @@ func TestDefaultRotationHealsTheFakeRaid(t *testing.T) {
 	}
 	for name, id := range map[string]int32{
 		"Flash of Light on the tank": flashOfLightTopRank, "Flash of Light on the party": flashOfLightPartyRank,
-		"Greater Blessing of Light": greaterBlessingOfLight,
 	} {
 		if totalsOf(result, id).casts == 0 {
 			t.Errorf("the default rotation never cast %s", name)
@@ -137,7 +136,7 @@ func TestDefaultRotationUsesDivineFavorAndHolyLightWhenTheTankIsInDanger(t *test
 func TestDefaultRotationSpendsTheManaItsCastsCost(t *testing.T) {
 	result := rotationFight(t, 0).run(t, rotationIterations)
 	costs := map[int32]float64{
-		flashOfLightTopRank: 140, holyLightTrainerRank: 660, greaterBlessingOfLight: 260,
+		flashOfLightTopRank: 140, holyLightTrainerRank: 660,
 	}
 	var want, got float64
 	for id, cost := range costs {

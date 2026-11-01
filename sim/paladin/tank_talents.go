@@ -134,6 +134,10 @@ func (paladin *Paladin) applyShieldSpecializationMana() {
 	}
 
 	manaMetrics := paladin.NewManaMetrics(core.ActionID{SpellID: shieldSpecializationActionID})
+	// The restore is 1310925 (effect 137, energize 4%), whose SpellMisc
+	// 857517 carries SPELL_ATTR1_NO_THREAT (Attributes_1 0x400, client
+	// 1.60.1.70707): the mana it gives adds no threat.
+	manaMetrics.NoThreat = true
 	chance := shieldSpecializationManaChance[rank]
 	restore := func(sim *core.Simulation) {
 		paladin.AddMana(sim, shieldSpecializationManaFraction*paladin.MaxMana(), manaMetrics)

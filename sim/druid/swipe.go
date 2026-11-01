@@ -33,14 +33,11 @@ const (
 	// bear.
 	swipeMaxTargets = 3
 
-	// SwipeThreatMultiplier carries the "Modifies Threat +101%" that
-	// Season of Discovery's druid tuning passive (spell 436895, the one
-	// aura 108 threat modifier it holds) puts on Swipe.
-	//
-	// unconfirmed: the client table has no spell-family mask for that
-	// modifier, so whether it reaches this Swipe in Forever is a guess; it
-	// is kept because the Swipe that stood here assumed it.
-	SwipeThreatMultiplier = 2.0
+	// SwipeThreatMultiplier is Classic's 1.75 (ClassicBearThreatMultiplier).
+	// It is not Season of Discovery's 2.0: that season's tuning passive
+	// (436895, "Modifies Threat +101%" on Swipe) is not taught to a Forever
+	// druid.
+	SwipeThreatMultiplier = ClassicBearThreatMultiplier
 
 	// feralInstinctSwipePerRank is Feral Instinct's "Increases damage done
 	// by your Swipe ability by 10%" a rank (node 104940, three ranks).

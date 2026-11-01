@@ -26,8 +26,6 @@ func blessingClientCases() []blessingClientCase {
 		{"Greater Blessing of Wisdom", greaterBlessingOfWisdomSpells, true, 1},
 		{"Blessing of Kings", blessingOfKingsSpells, false, 1},
 		{"Greater Blessing of Kings", greaterBlessingOfKingsSpells, false, 1},
-		{"Blessing of Salvation", blessingOfSalvationSpells, false, -1},
-		{"Greater Blessing of Salvation", greaterBlessingOfSalvationSpells, false, -1},
 	}
 }
 
@@ -73,7 +71,6 @@ func TestBlessingRankCounts(t *testing.T) {
 		"Blessing of Might": 7, "Greater Blessing of Might": 2,
 		"Blessing of Wisdom": 6, "Greater Blessing of Wisdom": 2,
 		"Blessing of Kings": 1, "Greater Blessing of Kings": 1,
-		"Blessing of Salvation": 1, "Greater Blessing of Salvation": 1,
 	}
 	for _, c := range blessingClientCases() {
 		if len(c.spells) != counts[c.name] {

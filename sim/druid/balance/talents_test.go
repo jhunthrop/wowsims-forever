@@ -11,6 +11,7 @@ import (
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/simsignals"
 	"github.com/wowsims/classic/sim/core/stats"
+	googleProto "google.golang.org/protobuf/proto"
 )
 
 // treeFields are each Druid talent tree's absolute proto field range
@@ -72,6 +73,13 @@ func newBalanceDruidSimWithTalents(t *testing.T, talents string) (*BalanceDruid,
 // given equipment.
 func newBalanceDruidSimWearing(t *testing.T, talents string, equipment *proto.EquipmentSpec) (*BalanceDruid, *core.Simulation, *core.Unit) {
 	t.Helper()
+	return newBalanceDruidSimInRaid(t, talents, equipment, core.FullBuffs.Raid)
+}
+
+// newBalanceDruidSimInRaid is newBalanceDruidSimWearing under the given
+// raid buffs.
+func newBalanceDruidSimInRaid(t *testing.T, talents string, equipment *proto.EquipmentSpec, raidBuffs *proto.RaidBuffs) (*BalanceDruid, *core.Simulation, *core.Unit) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
@@ -87,7 +95,7 @@ func newBalanceDruidSimWearing(t *testing.T, talents string, equipment *proto.Eq
 		},
 		PlayerOptionsAdaptive,
 	)
-	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
+	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, googleProto.Clone(raidBuffs).(*proto.RaidBuffs), core.FullBuffs.Debuffs)
 
 	target := &proto.Target{
 		Level: 60,
@@ -156,30 +164,28 @@ func TestNaturesMajestyAddsUnifiedCrit(t *testing.T) {
 	}
 }
 
-// TestNaturesReachAddsHitToBalanceSpells covers: "... improves your
-// chance to hit by 2/4%." on Wrath, Starfire and Moonfire (node 104929,
-// proto field NaturesReach). The range half is not modeled.
-func TestNaturesReachAddsHitToBalanceSpells(t *testing.T) {
+// Nature's Reach (16819): the hit is effects 1 and 2, aura 54 (melee hit)
+// and aura 55 (spell hit) at 4, neither with a class mask (1.60.1.70707);
+// only effect 0, the range, names spells. Wowhead's "improves your chance
+// to hit by 4%" is not scoped either. So it is hit on everything,
+// Insect Swarm included.
+func TestNaturesReachAddsHitToEverySpell(t *testing.T) {
 	const naturesReachField = 6
 
-	base, _, _ := newBalanceDruidSimWithTalents(t, druidTalentsString(t, nil))
-	wrathRank := len(base.Wrath) - 1
-	starfireRank := core.MaxTrainerRank(druid.StarfireRanks)
-	moonfireRank := len(base.Moonfire) - 1
-	baseWrathHit := base.Wrath[wrathRank].BonusHitRating
-	baseStarfireHit := base.Starfire[starfireRank].BonusHitRating
-	baseMoonfireHit := base.Moonfire[moonfireRank].BonusHitRating
-
-	talented, _, _ := newBalanceDruidSimWithTalents(t, druidTalentsString(t, map[int]int{naturesReachField: 2}))
+	base, _, _ := newBalanceDruidSimWithTalents(t, druidTalentsString(t, map[int]int{insectSwarmField: 1}))
+	talented, _, _ := newBalanceDruidSimWithTalents(t, druidTalentsString(t, map[int]int{insectSwarmField: 1, naturesReachField: 2}))
 	bonus := 4.0 * core.HitRatingPerHitChance
-	if got, want := talented.Wrath[wrathRank].BonusHitRating, baseWrathHit+bonus; got != want {
-		t.Errorf("2/2 Nature's Reach Wrath.BonusHitRating = %v, want %v", got, want)
+	rank := len(talented.InsectSwarm) - 1
+	got := talented.GetStat(stats.Hit) + talented.InsectSwarm[rank].BonusHitRating
+	want := base.GetStat(stats.Hit) + base.InsectSwarm[rank].BonusHitRating + bonus
+	if !near(got, want) {
+		t.Errorf("2/2 Nature's Reach gives Insect Swarm %v hit rating, want %v", got, want)
 	}
-	if got, want := talented.Starfire[starfireRank].BonusHitRating, baseStarfireHit+bonus; got != want {
-		t.Errorf("2/2 Nature's Reach Starfire.BonusHitRating = %v, want %v", got, want)
-	}
-	if got, want := talented.Moonfire[moonfireRank].BonusHitRating, baseMoonfireHit+bonus; got != want {
-		t.Errorf("2/2 Nature's Reach Moonfire.BonusHitRating = %v, want %v", got, want)
+	wrathRank := len(talented.Wrath) - 1
+	got = talented.GetStat(stats.Hit) + talented.Wrath[wrathRank].BonusHitRating
+	want = base.GetStat(stats.Hit) + base.Wrath[wrathRank].BonusHitRating + bonus
+	if !near(got, want) {
+		t.Errorf("2/2 Nature's Reach gives Wrath %v hit rating, want %v", got, want)
 	}
 }
 

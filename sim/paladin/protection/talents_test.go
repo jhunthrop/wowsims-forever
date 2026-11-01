@@ -632,3 +632,82 @@ func TestHolyShieldCostsTheHotfixedMana(t *testing.T) {
 		t.Errorf("the top Holy Shield's base cost is %v, want 195", got)
 	}
 }
+
+// otherActionThreat sums the threat an "other" action (mana gain, rage
+// gain) put on every target.
+func otherActionThreat(metrics *proto.UnitMetrics, other proto.OtherAction) float64 {
+	var threat float64
+	for _, action := range metrics.Actions {
+		if action.Id.GetOtherId() != other {
+			continue
+		}
+		for _, target := range action.Targets {
+			threat += target.Threat
+		}
+	}
+	return threat
+}
+
+// Shield Specialization's mana comes from 1310925 (SpellEffect 1340826,
+// effect 137 energize 4%), whose SpellMisc 857517 carries Attributes_1
+// 0x400, SPELL_ATTR1_NO_THREAT (1.60.1.70707; the hotfix push leaves the
+// row alone). Both server reimplementations drop an energize's threat for
+// that attribute before any amount is computed: TrinityCore's
+// ThreatManager::ForwardThreatForAssistingMe and cmangos classic's
+// HostileRefManager::threatAssist. So the blocks restore mana and add no
+// threat.
+func TestShieldSpecializationManaAddsNoThreat(t *testing.T) {
+	metrics := shortRun{
+		Talents:    map[string]int{"shield_specialization": 2},
+		Rotation:   rotationOf(nil, []string{cast(spellConsecration)}), // spends the mana the blocks restore
+		Boss:       rapidBoss(1.0),
+		Seconds:    60,
+		Iterations: 5,
+	}.metrics(t)
+
+	if got := resourceActualGain(metrics, 20150); got <= 0 {
+		t.Fatalf("Shield Specialization restored %v mana over the run, want some", got)
+	}
+	if got := otherActionThreat(metrics, proto.OtherAction_OtherActionManaGain); got != 0 {
+		t.Errorf("Shield Specialization's mana made %v threat, want 0 (SPELL_ATTR1_NO_THREAT)", got)
+	}
+}
+
+func resourceActualGain(metrics *proto.UnitMetrics, spellID int32) float64 {
+	for _, resource := range metrics.Resources {
+		if resource.Type == proto.ResourceType_ResourceTypeMana && resource.Id.GetSpellId() == spellID {
+			return resource.ActualGain
+		}
+	}
+	return 0
+}
+
+// A mana gain's threat is half a point a mana, with no threat multiplier:
+// TrinityCore's Unit::EnergizeBySpell forwards it with ignoreModifiers,
+// and the Classic threat research says so in as many words (Magey's
+// classic-warrior wiki, Threat Mechanics: "Power gains are not affected
+// ... by threat multipliers"; Warcraft Tavern's Classic threat table:
+// "These values are not ever multiplied by modifiers"). The engine's rage
+// gain already works that way. So Righteous Fury's +33% does not raise
+// it.
+func TestManaGainThreatIgnoresRighteousFury(t *testing.T) {
+	metrics := shortRun{
+		Rotation:   rotationOf([]string{prepullCast(20357, "1")}, []string{cast(spellConsecration)}),
+		Seconds:    60,
+		Iterations: 5,
+	}.metrics(t)
+
+	var gained float64
+	for _, resource := range metrics.Resources {
+		if resource.Type != proto.ResourceType_ResourceTypeMana || resource.Id.GetOtherId() == proto.OtherAction_OtherActionManaRegen || resource.ActualGain <= 0 {
+			continue // spirit and mp5 regen add no threat; spends are negative
+		}
+		gained += resource.ActualGain
+	}
+	if gained <= 0 {
+		t.Fatal("Seal of Wisdom restored no mana over the run")
+	}
+	if got, want := otherActionThreat(metrics, proto.OtherAction_OtherActionManaGain), 0.5*gained; !near(got, want, 0.01*want) {
+		t.Errorf("mana gains of %.0f made %.1f threat under Righteous Fury, want %.1f (0.5 a mana, unmodified)", gained, got, want)
+	}
+}

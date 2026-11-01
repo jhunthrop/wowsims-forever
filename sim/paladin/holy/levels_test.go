@@ -19,8 +19,6 @@ var healingSpells = []struct {
 }{
 	{"Holy Light", holyLightRankIDs, ""},
 	{"Flash of Light", flashOfLightRankIDs, ""},
-	{"Blessing of Light", []int32{19977, 19978, 19979}, ""},
-	{"Greater Blessing of Light", []int32{25890}, ""},
 	{"Holy Shock", holyShockCastIDs, "holy_shock"},
 	{"Holy Shock (heal)", holyShockHealIDs, "holy_shock"},
 	{"Light's Vigil", lightsVigilCastIDs, "lights_vigil"},

@@ -1,6 +1,7 @@
 package feral
 
 import (
+	"math"
 	"testing"
 
 	_ "github.com/wowsims/classic/sim/common"
@@ -112,5 +113,17 @@ func TestNaturalInstinctAddsMeleeCritDamageBonus(t *testing.T) {
 	// "melee ability" too.
 	if got, want := talented.FerociousBite.CritDamageBonus, baseBonus+0.20; got != want {
 		t.Errorf("2/2 Natural Instinct FerociousBite.CritDamageBonus = %v, want %v", got, want)
+	}
+}
+
+// Natural Instinct (1223242) effect 0 is aura 108, misc 15 (crit damage),
+// with SpellClassMask_0 0x839800 in 1.60.1.70707; its 0x800000 is Rip's
+// (SpellClassOptions 9896). Rip's ticks crit (owner ruling: bleeds always
+// crit), so they take the bonus.
+func TestNaturalInstinctRaisesRipCrits(t *testing.T) {
+	base, _, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, nil))
+	talented, _, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, map[string]int{"natural_instinct": 2}))
+	if got, want := talented.Rip.CritDamageBonus-base.Rip.CritDamageBonus, 0.20; math.Abs(got-want) > 1e-9 {
+		t.Errorf("2/2 Natural Instinct raises Rip's crit damage bonus by %v, want %v", got, want)
 	}
 }

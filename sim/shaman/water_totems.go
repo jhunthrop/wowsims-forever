@@ -72,9 +72,10 @@ func (shaman *Shaman) newHealingStreamTotemSpellConfig(rank int) core.SpellConfi
 		Flags:         core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete | core.SpellFlagNoLogs | core.SpellFlagNoMetrics,
 		RequiredLevel: level,
 
-		// Purification raises "your healing spells", Restorative Totems this
-		// totem; both add to the heal like the other healing modifiers.
-		DamageMultiplier: 1 + shaman.purificationHealingModifier() + shaman.restorativeHealingStreamModifier(),
+		// Restorative Totems raises this totem. Purification does not: its
+		// client masks (16178: 448 and mask_2 16) hold Healing Wave, Lesser
+		// Healing Wave, Chain Heal and Riptide, not Healing Stream (0x2000).
+		DamageMultiplier: 1 + shaman.restorativeHealingStreamModifier(),
 		ThreatMultiplier: 1,
 		BonusCoefficient: spellCoeff,
 

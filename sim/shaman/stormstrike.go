@@ -15,9 +15,7 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 		return
 	}
 
-	stormStrikeAuras := shaman.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-		return core.StormstrikeAura(target)
-	})
+	stormStrikeAuras := shaman.newStormstrikeChargeAuras()
 
 	shaman.Stormstrike = shaman.RegisterSpell(core.SpellConfig{
 		SpellCode:      SpellCode_ShamanStormstrike,
@@ -58,4 +56,55 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 			}
 		},
 	})
+}
+
+// Stormstrike's debuff (17364 effect 1): aura 271, damage taken from the
+// caster +20% for the spells in SpellClassMask_0 0x100003 (Lightning Bolt,
+// Chain Lightning and Earth Shock), with ProcCharges 1 (SpellAuraOptions
+// 129538) and a 12 s duration, in client 1.60.1.70707. Wowhead Forever:
+// "increase the damage you deal to the target with your next Lightning
+// Bolt, Chain Lightning, or Earth Shock spell by 20% for 12 sec". So the
+// first of those spells to hit takes the 20% and spends the charge; the
+// rest of the Nature school is untouched (Era's debuff raised all Nature
+// damage taken for two charges).
+const (
+	stormstrikeChargeBonus    = 1.20
+	stormstrikeChargeDuration = 12 * time.Second
+	stormstrikeChargeMask     = ShamanSpellMaskLightningBolt | ShamanSpellMaskChainLightning | ShamanSpellMaskEarthShock
+)
+
+// newStormstrikeChargeAuras is the debuff on each target. The bonus is a
+// spell mod on the shaman while the debuff is up on the target being
+// struck; the published fight has one target.
+func (shaman *Shaman) newStormstrikeChargeAuras() core.AuraArray {
+	bonus := shaman.AddDynamicMod(core.SpellModConfig{
+		Kind:       core.SpellMod_DamageDone_Pct,
+		ClassMask:  stormstrikeChargeMask,
+		FloatValue: stormstrikeChargeBonus,
+	})
+	auras := shaman.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
+		return target.GetOrRegisterAura(core.Aura{
+			Label:    "Stormstrike-" + shaman.Label,
+			ActionID: core.ActionID{SpellID: 17364},
+			Duration: stormstrikeChargeDuration,
+			OnGain: func(_ *core.Aura, _ *core.Simulation) {
+				bonus.Activate()
+			},
+			OnExpire: func(_ *core.Aura, _ *core.Simulation) {
+				bonus.Deactivate()
+			},
+		})
+	})
+	core.MakePermanent(shaman.RegisterAura(core.Aura{
+		Label: "Stormstrike Charge Spender",
+		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			if !spell.Matches(stormstrikeChargeMask) || !result.Landed() {
+				return
+			}
+			if debuff := auras.Get(result.Target); debuff.IsActive() {
+				debuff.Deactivate(sim)
+			}
+		},
+	}))
+	return auras
 }

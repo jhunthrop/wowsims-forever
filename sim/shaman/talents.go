@@ -485,6 +485,10 @@ func flurryAttackSpeed(points int32) float64 {
 	return 1 + flurryAttackSpeedPerRank*float64(points)
 }
 
+// flurryBuffDuration is the Flurry buff's SpellMisc DurationIndex 8 (15 s)
+// in client 1.60.1.70707.
+const flurryBuffDuration = 15 * time.Second
+
 func (shaman *Shaman) makeFlurryAura(points int32) *core.Aura {
 	if points == 0 {
 		return nil
@@ -496,7 +500,7 @@ func (shaman *Shaman) makeFlurryAura(points int32) *core.Aura {
 	aura := shaman.GetOrRegisterAura(core.Aura{
 		Label:     fmt.Sprintf("Flurry Proc (%d)", spellID),
 		ActionID:  core.ActionID{SpellID: spellID},
-		Duration:  core.NeverExpires,
+		Duration:  flurryBuffDuration,
 		MaxStacks: 3,
 	})
 

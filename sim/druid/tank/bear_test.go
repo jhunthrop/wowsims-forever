@@ -362,3 +362,20 @@ func TestFuriorBearFormRageChance(t *testing.T) {
 		t.Errorf("rage after shifting with Furor 5/5 = %v, want 10", got)
 	}
 }
+
+// Maul and Swipe carry Classic's server threat of 1.75 times their damage,
+// which no client row states: Warcraft Tavern's Classic threat table
+// ("Maul x1.75", "Swipe x1.75") and wowsims' Era-based Season of Discovery
+// engine (Maul 1.75; Swipe 3.5, its 1.75 doubled by Season of Discovery's
+// tuning passive 436895, which has no SkillLineAbility row in 1.60.1.70707,
+// so a Forever druid never has it). cmangos classic adds Maul's extra as
+// a flat amount instead (spell_threat 9881: 207).
+func TestMaulAndSwipeCarryClassicThreat(t *testing.T) {
+	bear, _, _ := newBearSim(t, 60, nil)
+	if got := bear.Maul.ThreatMultiplier; !near(got, 1.75) {
+		t.Errorf("Maul threat multiplier = %v, want 1.75", got)
+	}
+	if got := bear.SwipeBear.ThreatMultiplier; !near(got, 1.75) {
+		t.Errorf("Swipe threat multiplier = %v, want 1.75", got)
+	}
+}

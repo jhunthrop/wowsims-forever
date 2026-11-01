@@ -126,6 +126,9 @@ type Druid struct {
 	DruidSpells []*DruidSpell
 
 	StartingForm DruidForm
+	// raidHasMoonkinAura: the raid buffs already give the druid Moonkin
+	// Aura's crit (see AddRaidBuffs).
+	raidHasMoonkinAura bool
 
 	// CastsNaturesSwiftnessByHand keeps Nature's Swiftness out of the generic
 	// major-cooldown pass: the spec's rotation times it itself.
@@ -221,6 +224,12 @@ func (druid *Druid) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
 	*/
 
 	// TODO: These should really be aura attached to the actual forms
+	// The raid's Moonkin Aura is the same aura (24907) the form puts on
+	// the druid, and an aura does not stack with itself: when the raid
+	// buffs already carry it (another Moonkin, or the preset), the form
+	// adds no crit of its own. Read before this druid's own form sets the
+	// flag for the rest of the raid.
+	druid.raidHasMoonkinAura = raidBuffs.MoonkinAura
 	if druid.InForm(Moonkin) {
 		raidBuffs.MoonkinAura = true
 	}

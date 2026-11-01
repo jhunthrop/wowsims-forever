@@ -35,6 +35,5 @@ func (paladin *Paladin) registerHolyLight() {
 		coefficient: holyLightCoefficient,
 		spellCode:   SpellCode_PaladinHolyLight,
 		classMask:   PaladinSpellMaskHolyLight,
-		blessing:    blessingOfLightHolyLight,
 	})
 }

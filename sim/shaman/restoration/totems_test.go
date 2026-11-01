@@ -156,14 +156,16 @@ func TestHealingStreamCritsDoNotTriggerWaterShield(t *testing.T) {
 	}
 }
 
-func TestRestorativeTotemsAndPurificationRaiseHealingStream(t *testing.T) {
+// Restorative Totems raises Healing Stream 10% a rank. Purification
+// (16178) does not: its SpellClassMask_0 448 holds Healing Wave, Lesser
+// Healing Wave and Chain Heal, and mask_2 16 Riptide (1.60.1.70707);
+// Healing Stream's heal is 0x2000.
+func TestRestorativeTotemsRaiseHealingStreamAndPurificationDoesNot(t *testing.T) {
 	talents := restoTalents(map[int]int{posRestorativeTotems: 5, posPurification: 5})
 	result := runHealingStreamWithCrit(t, talents, noCrit)
 
 	events, gain := healthGained(result, healingStreamTopHealID)
-	// Restorative Totems adds 10 percent a rank to the totem, Purification
-	// 2 percent a rank to every heal, and the two add: +60 percent.
-	wantTick := (healingStreamTopRankHeal + healingStreamCoefficient*testHealingPower) * 1.6
+	wantTick := (healingStreamTopRankHeal + healingStreamCoefficient*testHealingPower) * 1.5
 	if got := gain / float64(events); math.Abs(got-wantTick) > 1e-6 {
 		t.Errorf("a tick heals %.4f, want %.4f", got, wantTick)
 	}

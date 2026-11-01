@@ -41,7 +41,8 @@ func (paladin *Paladin) registerJudgement() {
 		// the paladin golden flagged the free Judgement the next day.
 		RequiredLevel: 4,
 		ManaCost: core.ManaCostOptions{
-			BaseCost: JudgementManaCostPct[0] / 100,
+			BaseCost:   JudgementManaCostPct[0] / 100,
+			Multiplier: paladin.benediction(),
 		},
 
 		Cast: core.CastConfig{

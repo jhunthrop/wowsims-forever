@@ -499,6 +499,9 @@ func (druid *Druid) applyVengeance() {
 						druid.Wrath,
 						druid.Starfire,
 						druid.Moonfire,
+						// Client 16909's mask 0x600207 holds Insect
+						// Swarm (0x200000) as well.
+						druid.InsectSwarm,
 					},
 				),
 				func(spell *DruidSpell) bool { return spell != nil },
@@ -565,20 +568,18 @@ func (druid *Druid) applyNaturesMajesty() {
 // applyNaturesReach implements Nature's Reach (node 104929, 2 ranks,
 // proto field NaturesReach): "Increases the range of your offensive
 // Balance spells by 10/20% and improves your chance to hit by 2/4%."
-// Range is not modeled (nothing in this sim ever goes out of range of
-// its own target); hit is, as a SpellMod scoped to the three spells the
-// client's text names - Wrath, Starfire and Moonfire.
+// Range is not modeled (nothing in this sim ever goes out of range of its
+// own target). The hit is client 16819's effects 1 and 2, aura 54 (melee
+// hit) and aura 55 (spell hit), neither with a class mask: hit on every
+// spell and attack, Insect Swarm included. Only the range effect names
+// spells.
 func (druid *Druid) applyNaturesReach() {
 	if druid.Talents.NaturesReach == 0 {
 		return
 	}
 
 	rank := clampRank(druid.Talents.NaturesReach, 2)
-	druid.AddStaticMod(core.SpellModConfig{
-		Kind:       core.SpellMod_BonusHit_Flat,
-		ClassMask:  DruidSpellMaskBalanceDirectDamage,
-		FloatValue: 2 * float64(rank) * core.HitRatingPerHitChance,
-	})
+	druid.AddStat(stats.Hit, 2*float64(rank)*core.HitRatingPerHitChance)
 }
 
 // genesisPeriodicPerRank is Genesis's 2% a rank. The client row (spell
@@ -590,8 +591,8 @@ const genesisPeriodicPerRank = 2
 // Genesis): "Increases the periodic damage and healing done by your
 // spells and abilities by 2/4/6/8/10%." Scoped to every damage-over-time
 // and heal-over-time effect this package has - Moonfire, Insect Swarm, Rake
-// and Rip, Rejuvenation, Regrowth's heal over time, Tranquility and Wild
-// Growth.
+// and Rip, Rejuvenation, Regrowth's heal over time and Wild Growth; the
+// client's mask leaves Tranquility out.
 func (druid *Druid) applyGenesis() {
 	if druid.Talents.Genesis == 0 {
 		return
@@ -599,8 +600,10 @@ func (druid *Druid) applyGenesis() {
 
 	rank := clampRank(druid.Talents.Genesis, 5)
 	druid.AddStaticMod(core.SpellModConfig{
-		Kind:      core.SpellMod_PeriodicDamageDone_Flat,
-		ClassMask: DruidSpellMaskPeriodicDamage | DruidSpellMaskPeriodicHealing,
+		Kind: core.SpellMod_PeriodicDamageDone_Flat,
+		// Client 1223081's mask names Rejuvenation, Regrowth and Wild
+		// Growth among the heals, not Tranquility (0x80).
+		ClassMask: DruidSpellMaskPeriodicDamage | (DruidSpellMaskPeriodicHealing &^ DruidSpellMaskTranquility),
 		IntValue:  genesisPeriodicPerRank * int64(rank),
 	})
 }
@@ -707,8 +710,10 @@ func (druid *Druid) applyNaturalInstinct() {
 
 	rank := clampRank(druid.Talents.NaturalInstinct, 2)
 	druid.AddStaticMod(core.SpellModConfig{
-		Kind:       core.SpellMod_CritDamageBonus_Flat,
-		ClassMask:  DruidSpellMaskMeleeAbilities,
+		Kind: core.SpellMod_CritDamageBonus_Flat,
+		// Client 1223242's mask 0x839800 holds Rip (0x800000) besides the
+		// melee specials.
+		ClassMask:  DruidSpellMaskMeleeAbilities | DruidSpellMaskRip,
 		FloatValue: 0.10 * float64(rank),
 	})
 	druid.AddStatDependency(stats.Intellect, stats.HealingPower, naturalInstinctHealingFromIntellect[rank])
