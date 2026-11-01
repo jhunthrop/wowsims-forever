@@ -113,6 +113,13 @@
     },
     {
       "action": {
+        "condition": {
+          "auraIsActive": {
+            "auraId": {
+              "spellId": 440873
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "rank": 2,
@@ -120,7 +127,7 @@
           }
         }
       },
-      "notes": "Soul Fire whenever it is ready: the Demonology tree's Decimation cuts its cooldown by 90 percent, and its 6 second cast carries a spell power coefficient of 1.0, so it out-damages the Shadow Bolts it displaces. The client states its cost, cast time, cooldown and damage."
+      "notes": "Soul Fire only while Decimation's buff is up. Decimation (440870) cuts Soul Fire's cooldown by 90 percent, and a Shadow Bolt on a target below 35 percent health grants the 10 second buff (440873): 40 percent off the cast time after Bane's 2 seconds, so 2.4 seconds, and no Soul Shard (aura 256, no reagent use). Outside it Soul Fire is a 4 second cast that costs a shard and deals less per second of casting than Shadow Bolt."
     },
     {
       "notes": "Life Tap to keep casting once mana runs low.",

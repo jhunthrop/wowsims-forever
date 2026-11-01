@@ -140,35 +140,6 @@
       }
     },
     {
-      "notes": "Wrack (talent, learned at level 40) is an instant, no-cooldown 6 second DoT that also applies a 10% Shadow-damage-taken vulnerability to the target, so recast it in its last second to keep the vulnerability up without a gap.",
-      "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpLe",
-            "lhs": {
-              "dotRemainingTime": {
-                "spellId": {
-                  "spellId": 1316697,
-                  "rank": 1
-                }
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "1s"
-              }
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 1316697,
-            "rank": 1
-          }
-        }
-      }
-    },
-    {
       "notes": "Siphon Life (talent) is kept up: the build takes it, it is an Affliction effect that raises Soul Siphon's bonus on Wrack and Drain, and its ticks crit. Recast when it drops.",
       "action": {
         "condition": {
