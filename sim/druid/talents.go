@@ -708,8 +708,10 @@ func (druid *Druid) applyNaturalInstinct() {
 
 	rank := clampRank(druid.Talents.NaturalInstinct, 2)
 	druid.AddStaticMod(core.SpellModConfig{
-		Kind:       core.SpellMod_CritDamageBonus_Flat,
-		ClassMask:  DruidSpellMaskMeleeAbilities,
+		Kind: core.SpellMod_CritDamageBonus_Flat,
+		// Client 1223242's mask 0x839800 holds Rip (0x800000) besides the
+		// melee specials.
+		ClassMask:  DruidSpellMaskMeleeAbilities | DruidSpellMaskRip,
 		FloatValue: 0.10 * float64(rank),
 	})
 	druid.AddStatDependency(stats.Intellect, stats.HealingPower, naturalInstinctHealingFromIntellect[rank])
