@@ -11,12 +11,14 @@ const (
 	wildGrowthTickLength = time.Second
 	wildGrowthCooldown   = 6 * time.Second
 
-	// wildGrowthCastTime is every rank's live cast time. The client tables
-	// (SpellMisc CastingTimeIndex 1) make Wild Growth instant, but client
-	// 1.60.1.70707's hotfix has Naturalist cut "the cast time of your
-	// Healing Touch and Wild Growth spells", and the live tooltips of all
-	// three ranks (Wowhead's Forever tooltips for 408120, 1238214 and
-	// 1238215, read 2026-10-31) state a 3 sec cast.
+	// wildGrowthCastTime is every rank's live cast time. The shipped
+	// client tables (SpellMisc CastingTimeIndex 1) make Wild Growth
+	// instant; client 1.60.1.70707's hotfix push gives every rank a 3 sec
+	// cast (the tables carry it since the site's pipeline layers the push,
+	// round 6), Naturalist cuts "the cast time of your Healing Touch and
+	// Wild Growth spells", and the live tooltips of all three ranks
+	// (Wowhead's Forever tooltips for 408120, 1238214 and 1238215, read
+	// 2026-10-31) state a 3 sec cast.
 	wildGrowthCastTime = 3 * time.Second
 
 	// wildGrowthTickDecay is the share of a tick Wild Growth moves from each

@@ -37,8 +37,8 @@ func TestLacerateLowRanksTotalOverFifteenSeconds(t *testing.T) {
 	}
 }
 
-// Primal Bite's flat amount per live rank: 42, 62, 77 (26, 38, 77 in the
-// client tables at those levels).
+// Primal Bite's flat amount per live rank: 42, 62, 77, as the client tables
+// state them with the server's hotfix push layered in.
 func TestPrimalBiteLiveFlatDamage(t *testing.T) {
 	for _, c := range []struct {
 		level int32

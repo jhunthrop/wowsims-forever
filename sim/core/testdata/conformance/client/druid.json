@@ -12368,7 +12368,7 @@
     },
     "22568": {
       "name": "Ferocious Bite",
-      "rank": 1,
+      "rank": 2,
       "school_mask": 1,
       "cast_time_ms": 0,
       "gcd_ms": 1000,
@@ -12551,7 +12551,7 @@
     },
     "22827": {
       "name": "Ferocious Bite",
-      "rank": 2,
+      "rank": 3,
       "school_mask": 1,
       "cast_time_ms": 0,
       "gcd_ms": 1000,
@@ -12600,7 +12600,7 @@
     },
     "22828": {
       "name": "Ferocious Bite",
-      "rank": 3,
+      "rank": 4,
       "school_mask": 1,
       "cast_time_ms": 0,
       "gcd_ms": 1000,
@@ -12649,7 +12649,7 @@
     },
     "22829": {
       "name": "Ferocious Bite",
-      "rank": 4,
+      "rank": 5,
       "school_mask": 1,
       "cast_time_ms": 0,
       "gcd_ms": 1000,
@@ -13633,7 +13633,7 @@
         {
           "index": 0,
           "effect": 65,
-          "aura": 57,
+          "aura": 290,
           "amount": 3,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
@@ -13669,7 +13669,7 @@
         {
           "index": 0,
           "effect": 65,
-          "aura": 52,
+          "aura": 290,
           "amount": 3,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
@@ -15785,7 +15785,7 @@
     },
     "31018": {
       "name": "Ferocious Bite",
-      "rank": 5,
+      "rank": 6,
       "school_mask": 1,
       "cast_time_ms": 0,
       "gcd_ms": 1000,
@@ -16212,7 +16212,7 @@
       "duration_ms": 0,
       "cost": 200,
       "cost_type": 1,
-      "spell_level": 25,
+      "spell_level": 40,
       "family_mask": [
         0,
         64,
@@ -16224,7 +16224,7 @@
           "index": 0,
           "effect": 58,
           "aura": 0,
-          "amount": 26,
+          "amount": 42,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -16326,7 +16326,7 @@
       "name": "Wild Growth",
       "rank": 1,
       "school_mask": 8,
-      "cast_time_ms": 0,
+      "cast_time_ms": 3000,
       "gcd_ms": 1500,
       "cooldown_ms": 6000,
       "category_cooldown_ms": 0,
@@ -17053,7 +17053,7 @@
     },
     "414644": {
       "name": "Lacerate",
-      "rank": 1,
+      "rank": 3,
       "school_mask": 1,
       "cast_time_ms": 0,
       "gcd_ms": 1500,
@@ -27978,7 +27978,7 @@
     },
     "1235826": {
       "name": "Lacerate",
-      "rank": 2,
+      "rank": 4,
       "school_mask": 1,
       "cast_time_ms": 0,
       "gcd_ms": 1500,
@@ -28027,7 +28027,7 @@
     },
     "1235827": {
       "name": "Lacerate",
-      "rank": 3,
+      "rank": 5,
       "school_mask": 1,
       "cast_time_ms": 0,
       "gcd_ms": 1500,
@@ -28265,7 +28265,7 @@
       "duration_ms": 0,
       "cost": 200,
       "cost_type": 1,
-      "spell_level": 36,
+      "spell_level": 50,
       "family_mask": [
         0,
         64,
@@ -28277,7 +28277,7 @@
           "index": 0,
           "effect": 58,
           "aura": 0,
-          "amount": 38,
+          "amount": 62,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -28314,7 +28314,7 @@
       "duration_ms": 0,
       "cost": 200,
       "cost_type": 1,
-      "spell_level": 48,
+      "spell_level": 60,
       "family_mask": [
         0,
         64,
@@ -28326,7 +28326,7 @@
           "index": 0,
           "effect": 58,
           "aura": 0,
-          "amount": 59,
+          "amount": 77,
           "sp_coefficient": 1.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -28490,7 +28490,7 @@
       "name": "Wild Growth",
       "rank": 2,
       "school_mask": 8,
-      "cast_time_ms": 0,
+      "cast_time_ms": 3000,
       "gcd_ms": 1500,
       "cooldown_ms": 6000,
       "category_cooldown_ms": 0,
@@ -28539,7 +28539,7 @@
       "name": "Wild Growth",
       "rank": 3,
       "school_mask": 8,
-      "cast_time_ms": 0,
+      "cast_time_ms": 3000,
       "gcd_ms": 1500,
       "cooldown_ms": 6000,
       "category_cooldown_ms": 0,
@@ -30561,7 +30561,7 @@
       "school_mask": 1,
       "cast_time_ms": 0,
       "gcd_ms": 1000,
-      "cooldown_ms": 16000,
+      "cooldown_ms": 8000,
       "category_cooldown_ms": 0,
       "duration_ms": 0,
       "cost": 0,
@@ -30655,6 +30655,238 @@
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 7,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328616": {
+      "name": "Lacerate",
+      "rank": 2,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 15000,
+      "cost": 150,
+      "cost_type": 1,
+      "spell_level": 34,
+      "family_mask": [
+        0,
+        256,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 3,
+          "amount": 6,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 3000,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 3,
+          "aura": 0,
+          "amount": 10,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328617": {
+      "name": "Lacerate",
+      "rank": 1,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 15000,
+      "cost": 150,
+      "cost_type": 1,
+      "spell_level": 25,
+      "family_mask": [
+        0,
+        256,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 3,
+          "amount": 4,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 3000,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 3,
+          "aura": 0,
+          "amount": 10,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328618": {
+      "name": "Ferocious Bite",
+      "rank": 1,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 1000,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 35,
+      "cost_type": 3,
+      "spell_level": 24,
+      "family_mask": [
+        8388608,
+        0,
+        0,
+        4096
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 2,
+          "aura": 0,
+          "amount": 14,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.71428573131561,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 3,
+          "aura": 0,
+          "amount": 60,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328621": {
+      "name": "Bloom",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 1,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 4,
+          "amount": 100,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 4,
+          "amount": 50,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328622": {
+      "name": "Bloom",
+      "rank": 0,
+      "school_mask": 8,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 1,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 10,
+          "aura": 0,
+          "amount": 1,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0

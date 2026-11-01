@@ -391,4 +391,6 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	1320824: {}, // Rend
 	1320925: {}, // Ablaze
 	1321586: {}, // Rotmending
+	1328616: {}, // Lacerate
+	1328617: {}, // Lacerate
 }

@@ -691,8 +691,7 @@
               "description": "Lacerates the enemy target, making them bleed for 20 damage over 15 sec plus 10% weapon damage per existing application of Lacerate on the target. Causes a high amount of threat. This effect stacks up to 5 times on the same target."
             }
           ],
-          "spell_id": 1328617,
-          "hotfix_only": true
+          "spell_id": 1328617
         },
         {
           "id": 104951,
@@ -709,8 +708,7 @@
               "description": "Your Ferocious Bite ability no longer converts extra Energy into damage, but still deals extra damage based on your excess Energy."
             }
           ],
-          "spell_id": 1328613,
-          "hotfix_only": true
+          "spell_id": 1328613
         },
         {
           "id": 104947,
@@ -1102,8 +1100,7 @@
               "description": "When your Rejuvenation or Regrowth spell expires due to its duration, the target is instantly healed for an amount equal to 100% of your Spirit. If either spell expires due to being dispelled, the target is healed for 50% of your Spirit instead."
             }
           ],
-          "spell_id": 1328621,
-          "hotfix_only": true
+          "spell_id": 1328621
         },
         {
           "id": 104915,

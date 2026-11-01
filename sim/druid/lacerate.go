@@ -15,15 +15,16 @@ import (
 // every druid trained it at 42. A Bear Form bleed for 15 rage (cost 150) on
 // the global cooldown; Shredding Attacks takes 1 rage a rank off it.
 //
-// The client tables still carry the trained ranks (414644, 1235826 and
-// 1235827 at 42, 50 and 58, ticking 10, 12 and 15 every 3 seconds for 15
-// seconds: LacerateTickDamage). The hotfix added two low ranks the tables do
-// not have; the live tooltips (Wowhead's Forever spell tooltips, read
-// 2026-10-31) state 20 over 15 sec at 25 (1328617, the talent's own spell)
-// and 30 at 34 (1328616), and the same 50, 60 and 75 for the trained ranks.
-// The hidden companion spell 414647 used to be a flat 20% weapon damage hit;
-// the live text makes the hit 10% weapon damage for each stack already on
-// the target, so the first application lands no weapon damage.
+// The client tables carry every rank since the site's data pipeline layers
+// the server's hotfix push into them (round 6): the hotfix's two low ranks
+// 1328617 at 25 and 1328616 at 34 (4 and 6 a tick), then the trained ranks
+// 414644, 1235826 and 1235827 at 42, 50 and 58 (10, 12 and 15 a tick),
+// every 3 seconds for 15 seconds (LacerateTickDamage). The live tooltips
+// (Wowhead's Forever spell tooltips, read 2026-10-31) state the same 20,
+// 30, 50, 60 and 75 over 15 sec. The hidden companion spell 414647 used to
+// be a flat 20% weapon damage hit; the live text makes the hit 10% weapon
+// damage for each stack already on the target, so the first application
+// lands no weapon damage.
 //
 // unconfirmed: the stack count the client tables do not hold (five, as the
 // text says) with each stack adding the tick again; and the threat
@@ -44,8 +45,8 @@ const (
 	shreddingAttacksMaxRank             = 3
 )
 
-// LacerateTickDamage is the bleed's per-tick effect for ranks 1 to 3 (rank
-// 0 of the generated table is the hidden companion spell).
+// LacerateTickDamage is the bleed's per-tick effect for every rank (rank 0
+// of the generated table is the hidden companion spell).
 var LacerateTickDamage = lacerateTickEffects()
 
 func lacerateTickEffects() [len(LacerateSpellId)]clientdamage.Effect {
@@ -62,14 +63,15 @@ type lacerateRank struct {
 	tick    clientdamage.Effect
 }
 
-// lacerateRanks is the live ladder, lowest first: the hotfix's two low
-// ranks (a total over five ticks), then the client's trained ranks.
-var lacerateRanks = []lacerateRank{
-	{spellID: 1328617, tick: clientdamage.Effect{Amount: 20.0 / lacerateTicks, SpellLevel: 25}},
-	{spellID: 1328616, tick: clientdamage.Effect{Amount: 30.0 / lacerateTicks, SpellLevel: 34}},
-	{spellID: LacerateSpellId[1], tick: LacerateTickDamage[1]},
-	{spellID: LacerateSpellId[2], tick: LacerateTickDamage[2]},
-	{spellID: LacerateSpellId[3], tick: LacerateTickDamage[3]},
+// lacerateRanks is the client's ladder, lowest first.
+var lacerateRanks = lacerateClientRanks()
+
+func lacerateClientRanks() []lacerateRank {
+	ranks := make([]lacerateRank, 0, LacerateRanks)
+	for rank := 1; rank <= LacerateRanks; rank++ {
+		ranks = append(ranks, lacerateRank{spellID: LacerateSpellId[rank], tick: LacerateTickDamage[rank]})
+	}
+	return ranks
 }
 
 // lacerateRankAt is the highest live rank a druid of the level knows, its

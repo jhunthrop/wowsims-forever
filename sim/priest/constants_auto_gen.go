@@ -1439,6 +1439,23 @@ var HexOfWeaknessMaxLevel = [HexOfWeaknessRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
 // unconfirmed: Hex of Weakness coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3, rank 4, rank 5, rank 6)
 // Hex of Weakness rank 6: kept id 25816 (spell_level 60); dropped 19285 (spell_level 60)
 
+// Holy Binding: ranks 0 present, from build 1.60.1.70707.
+const HolyBindingRanks = 0
+
+var HolyBindingSpellId = [HolyBindingRanks + 1]int32{1328570}
+var HolyBindingLevel = [HolyBindingRanks + 1]int{1}
+var HolyBindingCastTime = [HolyBindingRanks + 1]int32{0}
+var HolyBindingCooldownMS = [HolyBindingRanks + 1]int32{0}
+var HolyBindingManaCost = [HolyBindingRanks + 1]float64{0}
+var HolyBindingManaCostPct = [HolyBindingRanks + 1]float64{0}
+var HolyBindingSpellCoeff = [HolyBindingRanks + 1]float64{0.4286}
+var HolyBindingBaseDamage = [HolyBindingRanks + 1][]float64{{1, 1}}
+var HolyBindingPointsPerLevel = [HolyBindingRanks + 1]float64{0}
+var HolyBindingMaxLevel = [HolyBindingRanks + 1]int{0}
+
+// unconfirmed: Holy Binding coefficient derived from the vanilla convention (rank 0)
+// Holy Binding rank 0: kept id 1328570 (spell_level 1); dropped 1328569 (spell_level 0)
+
 // Holy Fire: ranks 0-8 present, from build 1.60.1.70707.
 const HolyFireRanks = 8
 
@@ -2808,7 +2825,7 @@ var ResurrectionSicknessCastTime = [ResurrectionSicknessRanks + 1]int32{0}
 var ResurrectionSicknessCooldownMS = [ResurrectionSicknessRanks + 1]int32{0}
 var ResurrectionSicknessManaCost = [ResurrectionSicknessRanks + 1]float64{0}
 var ResurrectionSicknessManaCostPct = [ResurrectionSicknessRanks + 1]float64{0}
-var ResurrectionSicknessSpellCoeff = [ResurrectionSicknessRanks + 1]float64{40}
+var ResurrectionSicknessSpellCoeff = [ResurrectionSicknessRanks + 1]float64{4}
 var ResurrectionSicknessBaseDamage = [ResurrectionSicknessRanks + 1][]float64{{0, 0}}
 var ResurrectionSicknessPointsPerLevel = [ResurrectionSicknessRanks + 1]float64{0}
 var ResurrectionSicknessMaxLevel = [ResurrectionSicknessRanks + 1]int{0}

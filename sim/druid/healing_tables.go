@@ -249,16 +249,19 @@ var wildGrowthTable = []healingRank{
 	{
 		spellID:  408120,
 		manaCost: 550,
+		castTime: wildGrowthCastTime,
 		tick:     healingEffect{fx{Amount: 40, PerLevel: 1, SpellLevel: 40, MaxLevel: 48}, 0.033},
 	},
 	{
 		spellID:  1238214,
 		manaCost: 755,
+		castTime: wildGrowthCastTime,
 		tick:     healingEffect{fx{Amount: 60, PerLevel: 1.3, SpellLevel: 50, MaxLevel: 58}, 0.033},
 	},
 	{
 		spellID:  1238215,
 		manaCost: 1050,
+		castTime: wildGrowthCastTime,
 		tick:     healingEffect{fx{Amount: 97, PerLevel: 1.6, SpellLevel: 60, MaxLevel: 68}, 0.033},
 	},
 }

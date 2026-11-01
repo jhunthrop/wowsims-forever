@@ -3431,7 +3431,7 @@ const ThrowRanks = 0
 
 var ThrowSpellId = [ThrowRanks + 1]int32{2764}
 var ThrowLevel = [ThrowRanks + 1]int{1}
-var ThrowCastTime = [ThrowRanks + 1]int32{500}
+var ThrowCastTime = [ThrowRanks + 1]int32{0}
 var ThrowCooldownMS = [ThrowRanks + 1]int32{0}
 var ThrowManaCost = [ThrowRanks + 1]float64{0}
 var ThrowManaCostPct = [ThrowRanks + 1]float64{0}
