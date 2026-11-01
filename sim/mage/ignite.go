@@ -57,7 +57,11 @@ func (mage *Mage) applyIgnite() {
 		SpellSchool:    core.SpellSchoolFire,
 		DefenseType:    core.DefenseTypeMagic,
 		ProcMask:       core.ProcMaskSpellProc,
-		Flags:          core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell | SpellFlagMage,
+		// The burn is a share of a crit that already took the target's
+		// percentage modifiers (Improved Scorch, Curse of the Elements);
+		// Blizzard's beta note "Ignite no longer double dips on % damage
+		// increase modifiers" keeps the ticks from taking them again.
+		Flags: core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell | SpellFlagMage | core.SpellFlagIgnoreTargetModifiers,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,

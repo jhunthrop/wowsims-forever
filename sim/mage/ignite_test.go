@@ -117,3 +117,19 @@ func TestIgniteTicksCritWithoutFeedingIgnite(t *testing.T) {
 		t.Errorf("Ignite's own crits fed Ignite: peak stacks %d, ticks %d, want 1 stack and %d ticks", maxStacks, m.CritTicks+m.Ticks, IgniteTicks)
 	}
 }
+
+// Blizzard's beta note reads "Ignite no longer double dips on % damage
+// increase modifiers". The crit Ignite shares already carries the
+// target's percentage modifiers (Improved Scorch's Fire vulnerability,
+// Curse of the Elements), so the burn's ticks must not take them again.
+func TestIgniteTicksSkipTheTargetsDamageTakenModifiers(t *testing.T) {
+	sim, built := newIgniteMageSim(t)
+	target := sim.Encounter.TargetUnits[0]
+	core.ImprovedScorchAura(target).Activate(sim)
+	core.ImprovedScorchAura(target).SetStacks(sim, 5)
+
+	attackTable := built.AttackTables[target.UnitIndex][built.igniteTick.CastType]
+	if got := built.igniteTick.TargetDamageMultiplier(attackTable, true); got != 1 {
+		t.Errorf("Ignite's tick takes a target damage multiplier of %v, want 1: the crit it shares already took them", got)
+	}
+}
