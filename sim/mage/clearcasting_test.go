@@ -97,3 +97,21 @@ func topRank(t *testing.T, ranks []*core.Spell) *core.Spell {
 	t.Fatal("no rank of the spell is registered")
 	return nil
 }
+
+// Missile Barrage's -100% (400589 effect 2, misc 14) adds to the other
+// cost mods on Arcane Missiles rather than replacing them. It used to set
+// Cost.Multiplier to 0 and back to 100, so a Barrage that came and went
+// under Clearcasting left Arcane Missiles at double cost once
+// Clearcasting's own -100 came off.
+func TestMissileBarrageAddsToTheOtherCostMods(t *testing.T) {
+	built, sim, _ := newFrostMageSimWithTalents(t, core.DefaultTargetProtoLvl60, clearcastingTestFrostTalents)
+	am := topRank(t, built.ArcaneMissiles)
+
+	built.ClearcastingAura.Activate(sim)
+	built.MissileBarrageAura.Activate(sim)
+	built.MissileBarrageAura.Deactivate(sim)
+	built.ClearcastingAura.Deactivate(sim)
+	if got := am.Cost.Multiplier; got != 100 {
+		t.Errorf("Arcane Missiles Cost.Multiplier after Clearcasting and Missile Barrage both ended = %d, want 100", got)
+	}
+}
