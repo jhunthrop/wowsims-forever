@@ -154,10 +154,8 @@ func (mage *Mage) getArcaneBlastConfig(rank int) core.SpellConfig {
 		ProcMask:         core.ProcMaskSpellDamage,
 		ClientBaseDamage: roll,
 		Flags:            SpellFlagMage | core.SpellFlagAPL,
-		// unconfirmed: the client's data carries no projectile speed for
-		// this spell; 20 is what Arcane Missiles' tick spell (the same
-		// school) uses in this package.
-		MissileSpeed: 20,
+		// The client gives Arcane Blast no projectile speed (SpellMisc
+		// Speed 0), so it lands when the cast completes.
 
 		RequiredLevel: ArcaneBlastLevel[rank],
 		Rank:          rank,

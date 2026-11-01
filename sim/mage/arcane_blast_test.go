@@ -174,3 +174,16 @@ func TestArcaneBlastAndMissileBarrageCastAndDealDamage(t *testing.T) {
 		t.Errorf("Arcane Missiles Cost.Multiplier after Missile Barrage is consumed = %d, want %d", got, want)
 	}
 }
+
+// TestArcaneBlastLandsOnCast: the client gives Arcane Blast no projectile
+// speed (SpellMisc Speed 0 on 400574 and 1239696 to 1239700, as on Fire
+// Blast and Scorch), so its damage lands when the cast completes. A
+// travel time made the last cast of a fight land too late.
+func TestArcaneBlastLandsOnCast(t *testing.T) {
+	_, mage := newArcaneBlastTestMage(t)
+	for _, spell := range mage.ArcaneBlast {
+		if spell != nil && spell.MissileSpeed != 0 {
+			t.Errorf("Arcane Blast %v travels at %v, want 0 (the client has no speed)", spell.ActionID, spell.MissileSpeed)
+		}
+	}
+}
