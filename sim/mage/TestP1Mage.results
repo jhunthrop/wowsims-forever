@@ -94,7 +94,7 @@ dps_results: {
  key: "TestP1Mage-Phase1-AllItems-ArcanistRegalia"
  value: {
   dps: 836.51467
-  tps: 677.42906
+  tps: 679.95333
  }
 }
 dps_results: {
@@ -129,7 +129,7 @@ dps_results: {
  key: "TestP1Mage-Phase1-AllItems-FrostfireRegalia"
  value: {
   dps: 1030.10357
-  tps: 833.88093
+  tps: 836.937
  }
 }
 dps_results: {
