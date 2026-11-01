@@ -411,9 +411,14 @@ func rankIndex[T any](rank int32, table []T) int {
 //
 // Aspect of the Beast is not registered anywhere in this package (no
 // aspect_of_the_beast.go, no aura to key off), so its melee half's
-// condition is simply never true; only the ranged half - gated on
-// AspectOfTheHawkAuraTag, aspects.go's own Aspect of the Hawk aura -
-// can ever fire.
+// condition is simply never true. Aspect of the Falcon (469145) is: its
+// client text says "While Aspect of the Falcon is active, the Improved
+// Aspect of the Hawk talent can now proc from and benefit melee attacks"
+// (Deadly Aspects is that talent, spell 19552), and its own proc trigger
+// is Quick Strikes (469144, aura 319, +30% melee attack speed for 12 sec),
+// as wowsims/sod models the same spell. So a melee auto under Falcon rolls
+// the same chance for Quick Strikes, and a ranged Auto Shot under Hawk for
+// the ranged haste.
 func (hunter *Hunter) applyDeadlyAspects() {
 	if hunter.Talents.DeadlyAspects == 0 {
 		return
@@ -421,22 +426,29 @@ func (hunter *Hunter) applyDeadlyAspects() {
 
 	procChance := 0.02 * float64(hunter.Talents.DeadlyAspects)
 	speedAura := hunter.createImprovedHawkAura("Deadly Aspects Haste", core.ActionID{SpellID: 19552})
+	quickStrikes := hunter.createQuickStrikesAura()
+	var falcon *core.Aura
 
 	hunter.RegisterAura(core.Aura{
 		Label:    "Deadly Aspects",
 		Duration: core.NeverExpires,
 		OnReset: func(aura *core.Aura, sim *core.Simulation) {
+			falcon = hunter.GetAura(aspectOfTheFalconAuraLabel)
 			aura.Activate(sim)
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !result.Landed() || !spell.ProcMask.Matches(core.ProcMaskRangedAuto) {
+			if !result.Landed() {
 				return
 			}
-			if !hunter.HasActiveAuraWithTag(AspectOfTheHawkAuraTag) {
-				return
-			}
-			if sim.Proc(procChance, "Deadly Aspects") {
-				speedAura.Activate(sim)
+			switch {
+			case spell.ProcMask.Matches(core.ProcMaskRangedAuto) && hunter.HasActiveAuraWithTag(AspectOfTheHawkAuraTag):
+				if sim.Proc(procChance, "Deadly Aspects") {
+					speedAura.Activate(sim)
+				}
+			case spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) && falcon != nil && falcon.IsActive():
+				if sim.Proc(procChance, "Deadly Aspects (Falcon)") {
+					quickStrikes.Activate(sim)
+				}
 			}
 		},
 	})
