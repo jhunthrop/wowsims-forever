@@ -80,8 +80,19 @@ func healthGained(result *proto.RaidSimResult, spellID int32) (events int32, gai
 
 func runHealingStream(t *testing.T, talents string) *proto.RaidSimResult {
 	t.Helper()
+	return runHealingStreamWithCrit(t, talents, 0)
+}
+
+// runHealingStreamWithCrit runs the totem with extra crit rating on the
+// shaman; a large negative amount takes the heal's crit chance to zero, so
+// a tick's size can be read exactly.
+func runHealingStreamWithCrit(t *testing.T, talents string, critRating float64) *proto.RaidSimResult {
+	t.Helper()
 
 	player := newHealerPlayer(60, talents, castOnce(healingStreamTopRankID, 5))
+	bonus := stats.FromFloatArray(player.BonusStats.Stats)
+	bonus[stats.Crit] += critRating
+	player.BonusStats = &proto.UnitStats{Stats: bonus.ToFloatArray()}
 	result := core.RunRaidSim(healsim.Request(player, quietRaid(), healingStreamFightLength, 1))
 	if result.Error != nil {
 		t.Fatal(result.Error.Message)
@@ -89,8 +100,11 @@ func runHealingStream(t *testing.T, talents string) *proto.RaidSimResult {
 	return result
 }
 
+// noCrit is enough negative crit rating to take any crit chance to zero.
+const noCrit = -100 * core.CritRatingPerCritChance
+
 func TestHealingStreamHealsEveryPartyMemberEveryTwoSeconds(t *testing.T) {
-	result := runHealingStream(t, "")
+	result := runHealingStreamWithCrit(t, "", noCrit)
 
 	events, gain := healthGained(result, healingStreamTopHealID)
 	// Four fake party members; the tank stands in the other party.
@@ -104,9 +118,47 @@ func TestHealingStreamHealsEveryPartyMemberEveryTwoSeconds(t *testing.T) {
 	}
 }
 
+// Healing Stream's ticks can crit: every rank's heal (5672 to 10461)
+// carries SPELL_ATTR8_PERIODIC_CAN_CRIT (SpellMisc Attributes_8 0x200) in
+// the 1.60.1.70707 tables, the rule every other heal over time follows.
+// No second source states it either way, so the client's table decides.
+func TestHealingStreamTicksCanCrit(t *testing.T) {
+	result := runHealingStreamWithCrit(t, "", 100*core.CritRatingPerCritChance)
+
+	events, gain := healthGained(result, healingStreamTopHealID)
+	plain := healingStreamTopRankHeal + healingStreamCoefficient*testHealingPower
+	if got := gain / float64(events); got < plain*1.4 {
+		t.Errorf("at 100%% crit a tick heals %.4f on average, want a crit's %.4f or more", got, plain*1.5)
+	}
+}
+
+// A Healing Stream crit is a periodic heal's crit, and Water Shield's proc
+// mask (SpellAuraOptions 223904, ProcTypeMask 0x362A8) has no periodic bit,
+// so the totem's crits restore no mana.
+func TestHealingStreamCritsDoNotTriggerWaterShield(t *testing.T) {
+	rotation := core.APLRotationFromJsonString(fmt.Sprintf(`{
+		"type": "TypeAPL",
+		"priorityList": [
+			{"action": {"condition": {"not": {"val": {"auraIsActive": {"auraId": {"spellId": 408510}}}}},
+				"castSpell": {"spellId": {"spellId": 408510}}}},
+			{"action": {"condition": {"cmp": {"op": "OpLt",
+				"lhs": {"currentTime": {}}, "rhs": {"const": {"val": "3s"}}}},
+				"castSpell": {"spellId": {"spellId": %d, "rank": 5}}}}
+		]
+	}`, healingStreamTopRankID))
+	player := newHealerPlayer(60, FullTalents, rotation)
+	bonus := stats.FromFloatArray(player.BonusStats.Stats)
+	bonus[stats.Crit] += 100 * core.CritRatingPerCritChance
+	player.BonusStats = &proto.UnitStats{Stats: bonus.ToFloatArray()}
+	metrics := runHealer(t, player, healingStreamFightLength)
+	if got := manaGained(metrics, 408511); got != 0 {
+		t.Errorf("Water Shield restored %v mana from Healing Stream crits, want none", got)
+	}
+}
+
 func TestRestorativeTotemsAndPurificationRaiseHealingStream(t *testing.T) {
 	talents := restoTalents(map[int]int{posRestorativeTotems: 5, posPurification: 5})
-	result := runHealingStream(t, talents)
+	result := runHealingStreamWithCrit(t, talents, noCrit)
 
 	events, gain := healthGained(result, healingStreamTopHealID)
 	// Restorative Totems adds 10 percent a rank to the totem, Purification

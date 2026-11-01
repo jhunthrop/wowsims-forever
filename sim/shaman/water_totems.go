@@ -67,6 +67,7 @@ func (shaman *Shaman) newHealingStreamTotemSpellConfig(rank int) core.SpellConfi
 	healSpell := shaman.RegisterSpell(core.SpellConfig{
 		ActionID:      core.ActionID{SpellID: healId},
 		SpellSchool:   core.SpellSchoolNature,
+		DefenseType:   core.DefenseTypeMagic,
 		ProcMask:      core.ProcMaskSpellHealing,
 		Flags:         core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete | core.SpellFlagNoLogs | core.SpellFlagNoMetrics,
 		RequiredLevel: level,
@@ -77,8 +78,16 @@ func (shaman *Shaman) newHealingStreamTotemSpellConfig(rank int) core.SpellConfi
 		ThreatMultiplier: 1,
 		BonusCoefficient: spellCoeff,
 
+		// Each tick can crit: every rank's heal (5672 to 10461) carries
+		// SPELL_ATTR8_PERIODIC_CAN_CRIT in the 1.60.1.70707 tables, the
+		// flag every other heal over time follows (core.periodicCanCrit).
+		// The tick is its own heal spell here, so it rolls the shaman's
+		// healing crit directly, and it is dealt as a periodic heal (the
+		// client's 10461 is a periodic heal aura): procs that ignore
+		// periodic heals, such as Water Shield's, ignore it.
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealHealing(sim, target, baseHealing, spell.OutcomeHealing)
+			result := spell.CalcHealing(sim, target, baseHealing, spell.OutcomeHealingCrit)
+			spell.DealPeriodicHealing(sim, result)
 		},
 	})
 

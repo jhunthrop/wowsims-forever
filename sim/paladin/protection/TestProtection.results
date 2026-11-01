@@ -47,37 +47,37 @@ character_stats_results: {
 stat_weights_results: {
  key: "TestProtection-Phase1-StatWeights-Default"
  value: {
-  weights: 0.40576
-  weights: 0.12878
+  weights: 0.40512
+  weights: 0.14163
   weights: 0
-  weights: 0.22804
+  weights: 0.23688
   weights: 0
-  weights: 0.3061
-  weights: 0
-  weights: 0
-  weights: 0
-  weights: 0.3061
+  weights: 0.30927
   weights: 0
   weights: 0
   weights: 0
-  weights: 8.71168
-  weights: 2.05203
-  weights: 0
-  weights: 0
-  weights: 0.1458
-  weights: 2.66063
-  weights: 0
-  weights: 0
-  weights: 0.01607
+  weights: 0.30927
   weights: 0
   weights: 0
   weights: 0
+  weights: 8.31341
+  weights: 2.02465
   weights: 0
-  weights: 0.40532
-  weights: 0.94665
   weights: 0
-  weights: -0.38464
-  weights: -0.11861
+  weights: 0.14557
+  weights: 2.74829
+  weights: 0
+  weights: 0
+  weights: -0.01033
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 0.31368
+  weights: 0.66418
+  weights: 0
+  weights: -0.95449
+  weights: 0.04545
   weights: 0
   weights: 0
   weights: 0
@@ -93,165 +93,165 @@ stat_weights_results: {
 dps_results: {
  key: "TestProtection-Phase1-AllItems-Avenger'sBattlegear"
  value: {
-  dps: 593.73439
-  tps: 927.37745
+  dps: 596.33955
+  tps: 1413.91589
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-BattlegearofEternalJustice"
  value: {
-  dps: 534.981
-  tps: 828.48888
+  dps: 534.29331
+  tps: 1250.54779
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-Freethinker'sArmor"
  value: {
-  dps: 521.28135
-  tps: 808.41734
+  dps: 521.17752
+  tps: 1221.71199
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-JudgementArmor"
  value: {
-  dps: 593.65655
-  tps: 928.00581
+  dps: 594.52943
+  tps: 1408.58111
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-LawbringerArmor"
  value: {
-  dps: 529.85012
-  tps: 821.13985
+  dps: 531.98112
+  tps: 1247.60506
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-LieutenantCommander'sRedoubt"
  value: {
-  dps: 562.20243
-  tps: 875.22626
+  dps: 565.34587
+  tps: 1332.44612
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-RedemptionArmor"
  value: {
-  dps: 517.8239
-  tps: 816.59176
+  dps: 522.12283
+  tps: 1249.46378
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-SanctifiedOrb-20512"
  value: {
-  dps: 489.20147
-  tps: 758.24635
+  dps: 495.07993
+  tps: 1163.61676
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-SoulforgeArmor"
  value: {
-  dps: 573.5267
-  tps: 891.60589
+  dps: 574.2148
+  tps: 1346.57186
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Average-Default"
  value: {
-  dps: 584.46565
-  tps: 926.88636
-  dtps: 456.9145
-  hps: 10.65922
+  dps: 587.29231
+  tps: 1412.38905
+  dtps: 456.9301
+  hps: 10.66285
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-LongMultiTarget"
  value: {
-  dps: 538.00566
-  tps: 1461.87395
+  dps: 573.57649
+  tps: 2271.12505
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-LongSingleTarget"
  value: {
-  dps: 281.70823
-  tps: 525.69006
+  dps: 299.21556
+  tps: 868.95626
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-ShortSingleTarget"
  value: {
-  dps: 365.40627
-  tps: 669.47545
+  dps: 369.6181
+  tps: 1058.15372
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-LongMultiTarget"
  value: {
-  dps: 90.6726
-  tps: 422.72616
+  dps: 95.09878
+  tps: 604.13196
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-LongSingleTarget"
  value: {
-  dps: 54.50626
-  tps: 113.31712
+  dps: 60.1102
+  tps: 192.14709
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-ShortSingleTarget"
  value: {
-  dps: 116.98245
-  tps: 226.16841
+  dps: 122.6054
+  tps: 366.04958
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-LongMultiTarget"
  value: {
-  dps: 541.01015
-  tps: 1466.87996
+  dps: 569.86363
+  tps: 2254.49386
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-LongSingleTarget"
  value: {
-  dps: 281.5338
-  tps: 524.64586
+  dps: 295.27016
+  tps: 857.11065
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-ShortSingleTarget"
  value: {
-  dps: 364.11046
-  tps: 667.60872
+  dps: 368.55348
+  tps: 1055.48453
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-LongMultiTarget"
  value: {
-  dps: 93.79038
-  tps: 448.01871
+  dps: 97.45208
+  tps: 628.48071
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-LongSingleTarget"
  value: {
-  dps: 59.96307
-  tps: 124.46643
+  dps: 60.66642
+  tps: 194.19042
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-ShortSingleTarget"
  value: {
-  dps: 117.25847
-  tps: 227.25346
+  dps: 123.16921
+  tps: 367.25462
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 679.0591
-  tps: 1050.62786
-  dtps: 426.40216
-  hps: 11.30192
+  dps: 684.5504
+  tps: 1601.77676
+  dtps: 427.30957
+  hps: 11.2833
  }
 }

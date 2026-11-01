@@ -173,10 +173,23 @@ func TestProtectionRankTextsAsNumbers(t *testing.T) {
 		{"Iron Creed rank 3 threat", ironCreedThreatPerRank * 3, 0.30},
 		{"Iron Creed rank 3 damage taken", ironCreedDamageTakenPerRank * 3, 0.06},
 		{"Improved Righteous Fury rank 3", improvedRighteousFuryDamageTakenPerRank * 3, 0.09},
-		{"Righteous Fury Holy threat", righteousFuryHolyThreatBonus, 0.60},
+		{"Righteous Fury Holy threat", righteousFuryHolyThreatBonus, 0.90},
+		{"Righteous Fury all threat", righteousFuryAllThreatBonus, 0.33},
 	} {
 		if d := tc.got - tc.want; d > 1e-9 || d < -1e-9 {
 			t.Errorf("%s = %v, want %v", tc.name, tc.got, tc.want)
+		}
+	}
+}
+
+// Holy Shield's ranks cost 100, 150 and 195 mana: the 70707 hotfix push of
+// 31 October (SpellPower 185892, 186383, 184913; shipped 150, 195, 240) and
+// Wowhead Forever's live tooltips agree.
+func TestHolyShieldRanksCostTheHotfixedMana(t *testing.T) {
+	want := map[int32]float64{20925: 100, 20927: 150, 20928: 195}
+	for _, rank := range HolyShieldValues {
+		if rank.manaCost != want[rank.spellID] {
+			t.Errorf("Holy Shield %d costs %v mana, want %v", rank.spellID, rank.manaCost, want[rank.spellID])
 		}
 	}
 }

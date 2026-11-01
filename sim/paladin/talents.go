@@ -250,18 +250,15 @@ var championOfTheLightPctPerRank = [6]float64{0, 0.12, 0.24, 0.36, 0.48, 0.60}
 
 const championOfTheLightCastTimePerRank = 200 * time.Millisecond
 
-// applyChampionOfTheLight grants the share to spell power (damage) and, for
-// the healing spec, to the healing stat as well, so damage and healing both
-// read exactly the stated share. A damage spec has no use for the healing
-// stat. (The 1.60.1.70707 client row, 1311084, carries only the damage aura
-// 174; the healing half is the earlier tooltip's and is the hybrids lane's
-// to settle.)
+// applyChampionOfTheLight grants the share to spell power (damage) only, for
+// every spec: the 1.60.1.70707 row 1311084 has one stat aura, 174 (spell
+// damage of an Intellect percent), and no 175 (healing); the 31 October
+// hotfix push adds only the Hammer of Wrath cast-time effect (1367233,
+// modelled in applyDeclarativeTalents); and Wowhead Forever's live text
+// names spell damage alone.
 func (paladin *Paladin) applyChampionOfTheLight() {
 	share := championOfTheLightPctPerRank[paladin.Talents.ChampionOfTheLight]
 	paladin.AddStatDependency(stats.Intellect, stats.SpellPower, share)
-	if paladin.isHealer() {
-		paladin.AddStatDependency(stats.Intellect, stats.HealingPower, share)
-	}
 }
 
 // purifyingPowerCooldownPctPerRank: node 105327, Holy tier 1 col 3:
