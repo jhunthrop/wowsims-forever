@@ -143,6 +143,7 @@ func (wp *WarlockPet) registerImpFireboltSpell() {
 		BonusCoefficient: spellCoeff,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			wp.applyOwnerSpellHit(spell)
 			result := spell.CalcDamage(sim, target, damage.Roll(sim, petLevel)*improvedImp, spell.OutcomeMagicHitAndCrit)
 
 			spell.DealDamage(sim, result)

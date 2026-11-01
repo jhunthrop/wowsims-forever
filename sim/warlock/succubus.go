@@ -154,8 +154,12 @@ func (wp *WarlockPet) registerSuccubusLashOfPainSpell() {
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		BonusCoefficient: spellCoeff,
+		// Malevolence's class mask (1310949) carries Lash of Pain's bit
+		// (0x2000), as Improved Sayaad's does.
+		BonusCritRating: float64(wp.owner.Talents.Malevolence) * core.CritRatingPerCritChance,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			wp.applyOwnerSpellHit(spell)
 			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 		},
 	})

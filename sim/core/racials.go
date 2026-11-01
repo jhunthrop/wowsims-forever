@@ -181,18 +181,6 @@ func applyMobTypeDamageMultiplier(character *Character, mobType proto.MobType, d
 // multiplier is applied.
 const mobTypeDamageMultiplier = 1.05
 
-// Eureka! (client 1259821, the Mana row): SpellAuraOptions ProcCharges 3,
-// duration index 8 (15 s), recovery 120000 ms, effect base points -10
-// (cost) and +10 (damage).
-const (
-	eurekaSpellID              int32 = 1259821
-	eurekaCharges              int32 = 3
-	eurekaDuration                   = 15 * time.Second
-	eurekaCooldown                   = 2 * time.Minute
-	eurekaCostReductionPercent int32 = 10
-	eurekaDamageMultiplier           = 1.1
-)
-
 // ruthlessCritPercent and artisansPrecisionHitPercent are the Human and
 // Dwarf weapon racials after the October rework, from the current client
 // text of spells 20597 and 1259719.
@@ -458,62 +446,8 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "Eureka!", Kind: RacialActive, Confirmed: true,
-			Note: "client 1259821 (Mana): next 3 damaging abilities cost 10% less and deal 10% more, 15 s, 2 min cooldown; the Rage and Energy variants (1259813, 1259812) and the healer variant (1259823) are not modeled, so physical abilities are untouched",
-			Apply: func(character *Character) {
-				// Client 1259821: the next eurekaCharges damaging abilities
-				// cost 10% less Mana and deal 10% more, for up to 15 s,
-				// 2 min cooldown, a major cooldown - the only racial that
-				// needs a charge-counting aura, so it uses MaxStacks and
-				// consumes one stack per completed cast.
-				actionID := ActionID{SpellID: eurekaSpellID}
-				eurekaAura := character.RegisterAura(Aura{
-					Label:     "Eureka!",
-					ActionID:  actionID,
-					Duration:  eurekaDuration,
-					MaxStacks: eurekaCharges,
-					OnGain: func(aura *Aura, sim *Simulation) {
-						character.PseudoStats.SchoolCostMultiplier.AddToMagicSchools(-eurekaCostReductionPercent)
-						character.PseudoStats.SchoolDamageDealtMultiplier.MultiplyMagicSchools(eurekaDamageMultiplier)
-					},
-					OnExpire: func(aura *Aura, sim *Simulation) {
-						character.PseudoStats.SchoolCostMultiplier.AddToMagicSchools(eurekaCostReductionPercent)
-						character.PseudoStats.SchoolDamageDealtMultiplier.MultiplyMagicSchools(1 / eurekaDamageMultiplier)
-					},
-					OnCastComplete: func(aura *Aura, sim *Simulation, spell *Spell) {
-						// The spell that activates this aura carries
-						// SpellFlagNoOnCastComplete, so its own completion
-						// never reaches this callback: no "just activated
-						// by this same cast" guard is needed. Stacks reach
-						// zero when the last charge is spent and the aura
-						// ends there, or at its duration, whichever is first.
-						if spell.Cost == nil {
-							return
-						}
-						aura.RemoveStack(sim) // SetStacks deactivates the aura once stacks hit 0.
-					},
-				})
-
-				spell := character.RegisterSpell(SpellConfig{
-					ActionID: actionID,
-					Flags:    SpellFlagNoOnCastComplete,
-					Cast: CastConfig{
-						CD: Cooldown{
-							Timer:    character.NewTimer(),
-							Duration: eurekaCooldown,
-						},
-					},
-					ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
-						eurekaAura.Activate(sim)
-						eurekaAura.SetStacks(sim, eurekaCharges)
-					},
-				})
-
-				character.AddMajorCooldown(MajorCooldown{
-					Spell:    spell,
-					Type:     CooldownTypeDPS,
-					SelfBuff: true,
-				})
-			},
+			Note:  "one client row per class (1259813 Warrior, 1259812 Rogue, 1259817 Mage, 1259823 Priest, 1259821 Warlock): 8 s, no charges, 2 min cooldown; +10% damage or healing, +10% periodic damage and -10% cost on the spells each effect's class mask names; see eureka.go",
+			Apply: applyEureka,
 		},
 		{
 			Name: "Expansive Mind", Kind: RacialPassive, Confirmed: true,

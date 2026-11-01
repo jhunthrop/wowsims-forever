@@ -242,7 +242,7 @@ func racialNamed(t *testing.T, race proto.Race, name string) Racial {
 // same "bare Unit plus Env{MeasuringStats:true}" pattern buffs_test.go's
 // newBareTestUnit and spell_school_test.go's casters use, rather than
 // standing up a full running Simulation.
-func newGnomeEurekaTestCaster() *Character {
+func newGnomeEurekaTestCaster(class proto.Class) *Character {
 	character := &Character{
 		Unit: Unit{
 			Type:        PlayerUnit,
@@ -251,7 +251,8 @@ func newGnomeEurekaTestCaster() *Character {
 			PseudoStats: stats.NewPseudoStats(),
 			Env:         &Environment{MeasuringStats: true},
 		},
-		Race: proto.Race_RaceGnome,
+		Race:  proto.Race_RaceGnome,
+		Class: class,
 	}
 	character.BaseMana = 1000
 	// AddMajorCooldown reads character.Env directly off this manager
@@ -259,101 +260,6 @@ func newGnomeEurekaTestCaster() *Character {
 	// this bare test caster stands in for.
 	character.majorCooldownManager = majorCooldownManager{character: character}
 	return character
-}
-
-// Regression for the goldens-reconciliation defect: Eureka! is a permanent
-// (Duration: NeverExpires) aura at the time, turned off by its stack count reaching
-// zero rather than by a timer. The "just activated by this same cast"
-// guard other one-shot procs in this codebase use on OnCastComplete
-// (RemainingDuration(sim) == Duration, see mage.ClearcastingAura) is
-// always true for a NeverExpires aura - RemainingDuration returns
-// NeverExpires whenever Duration is NeverExpires - so it silently
-// swallowed every stack forever: Eureka!'s -magic-school cost and
-// +10% magic damage stayed up for the whole fight instead of three
-// casts, moving the Gnome mage goldens +72.6% NoBuffs / +25.2% FullBuffs
-// against 0900ba8b8. This casts four qualifying spells on a bare Gnome
-// caster and checks the aura's stacks go 3 -> 2 -> 1 -> gone, and that
-// the fourth cast (after the aura is gone) pays full cost.
-func TestEurekaConsumesOneStackPerQualifyingCast(t *testing.T) {
-	character := newGnomeEurekaTestCaster()
-
-	var eureka *Racial
-	for _, r := range RacialsFor(proto.Race_RaceGnome) {
-		if r.Name == "Eureka!" {
-			r := r
-			eureka = &r
-		}
-	}
-	if eureka == nil {
-		t.Fatal("Gnome has no Eureka!")
-	}
-	eureka.Apply(character)
-
-	eurekaSpell := character.GetSpell(ActionID{SpellID: 1259821})
-	if eurekaSpell == nil {
-		t.Fatal("Eureka! did not register its own spell (unexpected SpellID; check racials.go)")
-	}
-
-	// A qualifying "ability": any spell with a resource cost, in a magic
-	// school - what Eureka!'s -10% cost / +10% damage actually touches.
-	testSpell := character.RegisterSpell(SpellConfig{
-		ActionID:         ActionID{SpellID: 1_000_102},
-		SpellSchool:      SpellSchoolArcane,
-		ProcMask:         ProcMaskSpellDamage,
-		DamageMultiplier: 1,
-		ThreatMultiplier: 1,
-		Flags:            SpellFlagAPL,
-		ManaCost:         ManaCostOptions{BaseCost: 0.1},
-		Cast: CastConfig{
-			DefaultCast: Cast{GCD: GCDDefault},
-		},
-		ApplyEffects: func(*Simulation, *Unit, *Spell) {},
-	})
-	if testSpell.Cost == nil {
-		t.Fatal("test spell has no Cost; Eureka!'s stack consumption is gated on spell.Cost != nil")
-	}
-	fullCost := testSpell.Cost.GetCurrentCost()
-	if fullCost <= 0 {
-		t.Fatalf("test spell's base cost is %v, want > 0", fullCost)
-	}
-
-	sim := &Simulation{}
-	eurekaSpell.ApplyEffects(sim, nil, eurekaSpell) // the same activation path the Eureka! major cooldown runs when cast
-
-	aura := character.GetAura("Eureka!")
-	if aura == nil {
-		t.Fatal("Eureka! aura was not registered")
-	}
-	if !aura.IsActive() || aura.GetStacks() != 3 {
-		t.Fatalf("after activating, Eureka! has %d stacks (active=%v), want 3 stacks active", aura.GetStacks(), aura.IsActive())
-	}
-	if got, want := testSpell.Cost.GetCurrentCost(), fullCost*0.9; math.Abs(got-want) > 1e-9 {
-		t.Errorf("Eureka! active: test spell costs %v, want %v (90%% of %v)", got, want, fullCost)
-	}
-
-	for i, wantStacks := range []int32{2, 1, 0} {
-		character.OnCastComplete(sim, testSpell)
-		if got := aura.GetStacks(); got != wantStacks {
-			t.Errorf("after qualifying cast %d, Eureka! has %d stacks, want %d", i+1, got, wantStacks)
-		}
-	}
-	if aura.IsActive() {
-		t.Error("Eureka! is still active after its third stack was consumed, want it gone")
-	}
-	if got := testSpell.Cost.GetCurrentCost(); got != fullCost {
-		t.Errorf("Eureka! gone: test spell costs %v, want the full %v", got, fullCost)
-	}
-
-	// A fourth qualifying cast: the aura is already gone (removed from
-	// character.onCastCompleteAuras when it deactivated), so this must be
-	// a no-op rather than a fourth stack removal.
-	character.OnCastComplete(sim, testSpell)
-	if aura.IsActive() {
-		t.Error("a cast after Eureka! is gone must not reactivate it")
-	}
-	if got := testSpell.Cost.GetCurrentCost(); got != fullCost {
-		t.Errorf("fourth cast: test spell costs %v, want the full %v (Eureka! already consumed)", got, fullCost)
-	}
 }
 
 // racialByName returns one racial of a race, failing the test if absent.
@@ -556,25 +462,114 @@ func TestBloodFuryIsTenPercentOfTotalPowers(t *testing.T) {
 	}
 }
 
-// Eureka! 1259821: next 3 damaging abilities, 10% cheaper and 10% stronger,
-// 15 s, 2 min cooldown.
+// Eureka! is one client row per class (SpellClassSet): Warrior 1259813,
+// Rogue 1259812, Mage 1259817, Priest 1259823, Warlock 1259821, the five
+// classes combos.json lets be Gnome. Each lasts 8 s (DurationIndex 31) with
+// no SpellAuraOptions row, so no charges, on a 2 min cooldown. Wowhead
+// Forever: "deal 10% more damage for 8 sec".
 func TestEurekaMatchesTheClientRow(t *testing.T) {
-	character := newGnomeEurekaTestCaster()
+	for class, want := range map[proto.Class]int32{
+		proto.Class_ClassWarrior: 1259813,
+		proto.Class_ClassRogue:   1259812,
+		proto.Class_ClassMage:    1259817,
+		proto.Class_ClassPriest:  1259823,
+		proto.Class_ClassWarlock: 1259821,
+	} {
+		character := newGnomeEurekaTestCaster(class)
+		racialByName(t, proto.Race_RaceGnome, "Eureka!").Apply(character)
+		spell := character.GetSpell(ActionID{SpellID: want})
+		if spell == nil {
+			t.Errorf("%v: Eureka! is not registered under the client id %d", class, want)
+			continue
+		}
+		if spell.CD.Duration != 2*time.Minute {
+			t.Errorf("%v: Eureka! cooldown is %v, want 2m", class, spell.CD.Duration)
+		}
+		aura := character.GetAura("Eureka!")
+		if aura.Duration != 8*time.Second {
+			t.Errorf("%v: Eureka! lasts %v, want 8s", class, aura.Duration)
+		}
+		if aura.MaxStacks != 0 {
+			t.Errorf("%v: Eureka! has %d charges, want none", class, aura.MaxStacks)
+		}
+	}
+}
+
+func newEurekaTestSpell(character *Character, spellID int32, school SpellSchool, flags SpellFlag) *Spell {
+	return character.RegisterSpell(SpellConfig{
+		ActionID:         ActionID{SpellID: spellID},
+		SpellSchool:      school,
+		ProcMask:         ProcMaskSpellDamage,
+		DamageMultiplier: 1,
+		ThreatMultiplier: 1,
+		Flags:            SpellFlagAPL | flags,
+		ManaCost:         ManaCostOptions{BaseCost: 0.1},
+		Cast:             CastConfig{DefaultCast: Cast{GCD: GCDDefault}},
+		ApplyEffects:     func(*Simulation, *Unit, *Spell) {},
+	})
+}
+
+// The warlock row's modifiers reach only their class masks: damage (misc 0)
+// Shadow Bolt but not Corruption or Incinerate, periodic (misc 22) Drain
+// Life, cost (misc 14) both Shadow Bolt and Drain Life. Casts spend nothing.
+func TestEurekaReachesOnlyItsClassMasks(t *testing.T) {
+	character := newGnomeEurekaTestCaster(proto.Class_ClassWarlock)
+	shadowBolt := newEurekaTestSpell(character, 11661, SpellSchoolShadow, 0)
+	corruption := newEurekaTestSpell(character, 11672, SpellSchoolShadow, 0)
+	incinerate := newEurekaTestSpell(character, 1293813, SpellSchoolFire, 0)
+	drainLife := newEurekaTestSpell(character, 11700, SpellSchoolShadow, SpellFlagChanneled)
 	racialByName(t, proto.Race_RaceGnome, "Eureka!").Apply(character)
 
-	spell := character.GetSpell(ActionID{SpellID: 1259821})
-	if spell == nil {
-		t.Fatal("Eureka! is not registered under the client id 1259821")
+	type snapshot struct{ impact, periodic, cost float64 }
+	read := func(spell *Spell) snapshot {
+		return snapshot{spell.ImpactDamageMultiplierAdditive, spell.PeriodicDamageMultiplierAdditive, spell.Cost.GetCurrentCost()}
 	}
-	if spell.CD.Duration != 2*time.Minute {
-		t.Errorf("Eureka! cooldown is %v, want 2m", spell.CD.Duration)
-	}
+	before := map[*Spell]snapshot{shadowBolt: read(shadowBolt), corruption: read(corruption), incinerate: read(incinerate), drainLife: read(drainLife)}
+
+	sim := &Simulation{}
+	eureka := character.GetSpell(ActionID{SpellID: 1259821})
+	eureka.ApplyEffects(sim, nil, eureka)
 	aura := character.GetAura("Eureka!")
-	if aura.Duration != 15*time.Second {
-		t.Errorf("Eureka! lasts %v, want 15s", aura.Duration)
+
+	check := func(name string, spell *Spell, impact, periodic, costFactor float64) {
+		t.Helper()
+		got, was := read(spell), before[spell]
+		if math.Abs(got.impact-was.impact-impact) > 1e-9 || math.Abs(got.periodic-was.periodic-periodic) > 1e-9 {
+			t.Errorf("%s: impact +%.2f periodic +%.2f, want +%.2f / +%.2f", name, got.impact-was.impact, got.periodic-was.periodic, impact, periodic)
+		}
+		if math.Abs(got.cost-was.cost*costFactor) > 1e-9 {
+			t.Errorf("%s: costs %v, want %v", name, got.cost, was.cost*costFactor)
+		}
 	}
-	if aura.MaxStacks != 3 {
-		t.Errorf("Eureka! has %d charges, want 3 (ProcCharges)", aura.MaxStacks)
+	check("Shadow Bolt", shadowBolt, 0.10, 0, 0.9)
+	check("Corruption", corruption, 0, 0, 1)
+	check("Incinerate", incinerate, 0, 0, 1)
+	check("Drain Life", drainLife, 0, 0.10, 0.9)
+
+	for i := 0; i < 4; i++ {
+		character.OnCastComplete(sim, shadowBolt)
+	}
+	if !aura.IsActive() {
+		t.Error("Eureka! ended after four casts; it has no charges and lasts 8 s")
+	}
+	aura.Deactivate(sim)
+	for spell, was := range before {
+		if read(spell) != was {
+			t.Errorf("%v not restored after Eureka! ends", spell.ActionID)
+		}
+	}
+}
+
+// The Rage row (1259813) reaches warrior abilities: Bloodthirst's damage.
+func TestEurekaReachesWarriorAbilities(t *testing.T) {
+	character := newGnomeEurekaTestCaster(proto.Class_ClassWarrior)
+	bloodthirst := newEurekaTestSpell(character, 23894, SpellSchoolPhysical, 0)
+	racialByName(t, proto.Race_RaceGnome, "Eureka!").Apply(character)
+	before := bloodthirst.ImpactDamageMultiplierAdditive
+	eureka := character.GetSpell(ActionID{SpellID: 1259813})
+	eureka.ApplyEffects(&Simulation{}, nil, eureka)
+	if got := bloodthirst.ImpactDamageMultiplierAdditive - before; math.Abs(got-0.10) > 1e-9 {
+		t.Errorf("Bloodthirst impact multiplier rose by %.2f under Eureka!, want 0.10", got)
 	}
 }
 

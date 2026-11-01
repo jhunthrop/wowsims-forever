@@ -59,7 +59,7 @@ func TestHealerConsumablesMatchTheClient(t *testing.T) {
 
 // The consumables reach a character through its Consumes message.
 func TestHealerConsumablesApply(t *testing.T) {
-	character := newGnomeEurekaTestCaster()
+	character := newGnomeEurekaTestCaster(proto.Class_ClassPriest)
 	applyFoodConsumes(character, &proto.Consumes{Food: proto.Food_FoodSagesTea})
 	applySpellBuffConsumes(character, &proto.Consumes{
 		ManaRegenElixir:  proto.ManaRegenElixir_GreaterMagebloodElixir,
