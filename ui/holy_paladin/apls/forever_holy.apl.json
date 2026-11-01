@@ -678,25 +678,5 @@
         }
       }
     }
-  ],
-  "prepullActions": [
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 25890
-          },
-          "target": {
-            "type": "Player",
-            "index": 5
-          }
-        }
-      },
-      "doAtValue": {
-        "const": {
-          "val": "-1.6s"
-        }
-      }
-    }
   ]
 }

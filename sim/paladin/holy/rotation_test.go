@@ -97,8 +97,9 @@ func TestDefaultRotationHealsTheFakeRaid(t *testing.T) {
 		t.Errorf("overheal share %.2f, want 0 to %.1f", overheal, maxOverheal)
 	}
 	for name, id := range map[string]int32{
+		// No Greater Blessing of Light: Forever removed both Blessings of
+		// Light (the 70707 hotfix push), and the rotation no longer casts it.
 		"Flash of Light on the tank": flashOfLightTopRank, "Flash of Light on the party": flashOfLightPartyRank,
-		"Greater Blessing of Light": greaterBlessingOfLight,
 	} {
 		if totalsOf(result, id).casts == 0 {
 			t.Errorf("the default rotation never cast %s", name)
