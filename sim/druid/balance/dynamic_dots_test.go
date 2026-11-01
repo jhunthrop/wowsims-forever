@@ -60,3 +60,20 @@ func TestBalanceDotsReadSpellPowerEachTick(t *testing.T) {
 		})
 	}
 }
+
+// Balance (and Feral) register both the Balance and the Cat kits, and both
+// kits carry Moonfire and Wrath. Registered twice, the first Moonfire's dot
+// shared the second's aura and ticked beside it with no snapshot: 0 damage
+// while dots snapshotted, its spell power share once they read each tick.
+func TestBalanceRegistersMoonfireAndWrathOnce(t *testing.T) {
+	built, _, _ := newBalanceDruidSimWithTalents(t, "5232220115501351-00000000000000000000-5050030000000000")
+	count := map[int32]int{}
+	for _, spell := range built.Spellbook {
+		count[spell.ActionID.SpellID]++
+	}
+	for _, id := range []int32{9835, 9912} {
+		if count[id] != 1 {
+			t.Errorf("spell %d registered %d times, want 1", id, count[id])
+		}
+	}
+}
