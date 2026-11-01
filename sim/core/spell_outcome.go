@@ -44,6 +44,10 @@ func (dot *Dot) OutcomeTick(sim *Simulation, result *SpellResult, attackTable *A
 }
 
 func (dot *Dot) outcomeCritTick(sim *Simulation, result *SpellResult, attackTable *AttackTable) {
+	if dot.Spell.ProcMask.Matches(ProcMaskSpellHealing) {
+		dot.outcomeHealingCritTick(sim, result, attackTable)
+		return
+	}
 	defense := dot.periodicCritDefense()
 	var crit bool
 	if defense == DefenseTypeMagic {
@@ -66,6 +70,19 @@ func (dot *Dot) outcomeCritTick(sim *Simulation, result *SpellResult, attackTabl
 	if isPartialResist {
 		dot.Spell.SpellMetrics[result.Target.UnitIndex].ResistedCritTicks++
 	}
+}
+
+// outcomeHealingCritTick resolves a heal over time's tick that may crit:
+// the spell's healing crit chance (Improved Regrowth and the like reach
+// it) and its own crit multiplier, as a direct heal (outcomeHealingCrit).
+func (dot *Dot) outcomeHealingCritTick(sim *Simulation, result *SpellResult, attackTable *AttackTable) {
+	if !dot.Spell.HealingCritCheck(sim) {
+		dot.outcomePlainTick(result)
+		return
+	}
+	result.Outcome = OutcomeCrit
+	result.Damage *= dot.Spell.CritMultiplier(attackTable)
+	dot.Spell.SpellMetrics[result.Target.UnitIndex].CritTicks++
 }
 
 // periodicCritDefense is the table a dot's tick crits on: its spell's own

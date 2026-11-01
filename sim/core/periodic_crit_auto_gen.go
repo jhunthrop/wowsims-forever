@@ -2,14 +2,17 @@
 //
 // Client build: 1.60.1.70707
 //
-// Every spell with a periodic damage effect whose SpellMisc Attributes_8
-// carries 0x200 (SPELL_ATTR8_PERIODIC_CAN_CRIT): its ticks can crit.
+// Every spell with a periodic damage or healing effect whose SpellMisc
+// Attributes_8 carries 0x200 (SPELL_ATTR8_PERIODIC_CAN_CRIT): its ticks
+// can crit.
 // Regenerate with `make periodiccrit`.
 
 package core
 
 var clientPeriodicCanCrit = map[int32]struct{}{
 	133: {}, // Fireball
+	136: {}, // Mend Pet
+	139: {}, // Renew
 	143: {}, // Fireball
 	145: {}, // Fireball
 	172: {}, // Corruption
@@ -23,36 +26,56 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	703: {}, // Garrote
 	707: {}, // Immolate
 	709: {}, // Drain Life
+	740: {}, // Tranquility
 	772: {}, // Rend
+	774: {}, // Rejuvenation
 	970: {}, // Shadow Word: Pain
 	980: {}, // Bane of Agony
 	992: {}, // Shadow Word: Pain
 	1014: {}, // Bane of Agony
+	1058: {}, // Rejuvenation
 	1062: {}, // Entangling Roots
 	1079: {}, // Rip
 	1094: {}, // Immolate
 	1120: {}, // Drain Soul
+	1430: {}, // Rejuvenation
 	1822: {}, // Rake
 	1823: {}, // Rake
 	1824: {}, // Rake
 	1943: {}, // Rupture
 	1949: {}, // Hellfire
 	1978: {}, // Serpent Sting
+	2090: {}, // Rejuvenation
+	2091: {}, // Rejuvenation
 	2767: {}, // Shadow Word: Pain
 	2818: {}, // Deadly Poison
 	2819: {}, // Deadly Poison II
 	2941: {}, // Immolate
 	2944: {}, // Devouring Plague
+	3111: {}, // Mend Pet
 	3140: {}, // Fireball
+	3627: {}, // Rejuvenation
+	3661: {}, // Mend Pet
+	3662: {}, // Mend Pet
 	5195: {}, // Entangling Roots
 	5196: {}, // Entangling Roots
 	5570: {}, // Insect Swarm
+	5672: {}, // Healing Stream
+	5707: {}, // Lifestone Regeneration
+	6074: {}, // Renew
+	6075: {}, // Renew
+	6076: {}, // Renew
+	6077: {}, // Renew
+	6078: {}, // Renew
 	6217: {}, // Bane of Agony
 	6222: {}, // Corruption
 	6223: {}, // Corruption
+	6371: {}, // Healing Stream
+	6372: {}, // Healing Stream
 	6546: {}, // Rend
 	6547: {}, // Rend
 	6548: {}, // Rend
+	7001: {}, // Lightwell Renew
 	7648: {}, // Corruption
 	7651: {}, // Drain Life
 	8050: {}, // Flame Shock
@@ -61,6 +84,7 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	8288: {}, // Drain Soul
 	8289: {}, // Drain Soul
 	8313: {}, // Poison
+	8348: {}, // Julie's Blessing
 	8400: {}, // Fireball
 	8401: {}, // Fireball
 	8402: {}, // Fireball
@@ -69,6 +93,8 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	8633: {}, // Garrote
 	8639: {}, // Rupture
 	8640: {}, // Rupture
+	8910: {}, // Rejuvenation
+	8918: {}, // Tranquility
 	8921: {}, // Moonfire
 	8924: {}, // Moonfire
 	8925: {}, // Moonfire
@@ -76,9 +102,15 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	8927: {}, // Moonfire
 	8928: {}, // Moonfire
 	8929: {}, // Moonfire
+	8936: {}, // Regrowth
+	8938: {}, // Regrowth
+	8939: {}, // Regrowth
+	8940: {}, // Regrowth
+	8941: {}, // Regrowth
 	9007: {}, // Pounce Bleed
 	9492: {}, // Rip
 	9493: {}, // Rip
+	9750: {}, // Regrowth
 	9752: {}, // Rip
 	9796: {}, // Blight
 	9824: {}, // Pounce Bleed
@@ -86,8 +118,16 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	9833: {}, // Moonfire
 	9834: {}, // Moonfire
 	9835: {}, // Moonfire
+	9839: {}, // Rejuvenation
+	9840: {}, // Rejuvenation
+	9841: {}, // Rejuvenation
 	9852: {}, // Entangling Roots
 	9853: {}, // Entangling Roots
+	9856: {}, // Regrowth
+	9857: {}, // Regrowth
+	9858: {}, // Regrowth
+	9862: {}, // Tranquility
+	9863: {}, // Tranquility
 	9894: {}, // Rip
 	9896: {}, // Rip
 	9904: {}, // Rake
@@ -97,11 +137,16 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	10151: {}, // Fireball
 	10447: {}, // Flame Shock
 	10448: {}, // Flame Shock
+	10460: {}, // Healing Stream
+	10461: {}, // Healing Stream
 	10578: {}, // Fireball
 	10797: {}, // Starshards
 	10892: {}, // Shadow Word: Pain
 	10893: {}, // Shadow Word: Pain
 	10894: {}, // Shadow Word: Pain
+	10927: {}, // Renew
+	10928: {}, // Renew
+	10929: {}, // Renew
 	11273: {}, // Rupture
 	11274: {}, // Rupture
 	11275: {}, // Rupture
@@ -139,6 +184,9 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	13518: {}, // Poison
 	13526: {}, // Corrosive Poison
 	13530: {}, // Corruption
+	13542: {}, // Mend Pet
+	13543: {}, // Mend Pet
+	13544: {}, // Mend Pet
 	13549: {}, // Serpent Sting
 	13550: {}, // Serpent Sting
 	13551: {}, // Serpent Sting
@@ -191,6 +239,12 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	17506: {}, // Soul Breaker
 	17510: {}, // Corruption
 	17511: {}, // Poison
+	17767: {}, // Consume Shadows
+	17850: {}, // Consume Shadows
+	17851: {}, // Consume Shadows
+	17852: {}, // Consume Shadows
+	17853: {}, // Consume Shadows
+	17854: {}, // Consume Shadows
 	18075: {}, // Rend
 	18077: {}, // Poison
 	18078: {}, // Rend
@@ -210,12 +264,14 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	18633: {}, // Weakening Disease
 	18652: {}, // Siphon Health
 	18656: {}, // Corruption
+	18764: {}, // Fungal Regrowth
 	18796: {}, // Fireball
 	18807: {}, // Mind Flay
 	18809: {}, // Pyroblast
 	18879: {}, // Siphon Life
 	18880: {}, // Siphon Life
 	18881: {}, // Siphon Life
+	18956: {}, // Restore Life
 	19276: {}, // Devouring Plague
 	19277: {}, // Devouring Plague
 	19278: {}, // Devouring Plague
@@ -239,6 +295,7 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	21162: {}, // Fireball
 	21949: {}, // Rend
 	21952: {}, // Poison
+	22009: {}, // Greater Heal
 	22639: {}, // Eskhandar's Rake
 	24118: {}, // Lacerate
 	24119: {}, // Lacerate
@@ -252,13 +309,19 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	24976: {}, // Insect Swarm
 	24977: {}, // Insect Swarm
 	25295: {}, // Serpent Sting
+	25299: {}, // Rejuvenation
 	25306: {}, // Fireball
 	25309: {}, // Immolate
 	25311: {}, // Corruption
+	25315: {}, // Renew
 	25349: {}, // Deadly Poison V
 	26226: {}, // Widow Bite
+	27873: {}, // Lightwell Renew
+	27874: {}, // Lightwell Renew
 	29228: {}, // Flame Shock
 	401502: {}, // Frostfire Bolt
+	408120: {}, // Wild Growth
+	408521: {}, // Riptide
 	414644: {}, // Lacerate
 	417441: {}, // Thrash (Bear)
 	417448: {}, // Thrash (Cat)
@@ -276,6 +339,10 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	1235827: {}, // Lacerate
 	1237312: {}, // Frostfire Bolt
 	1237313: {}, // Frostfire Bolt
+	1238214: {}, // Wild Growth
+	1238215: {}, // Wild Growth
+	1239242: {}, // Riptide
+	1239243: {}, // Riptide
 	1242971: {}, // Unstable Affliction
 	1242972: {}, // Unstable Affliction
 	1265038: {}, // Tendon Rip
@@ -293,6 +360,11 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	1265880: {}, // Web
 	1265881: {}, // Web
 	1265883: {}, // Web
+	1277456: {}, // Contingency Plan
+	1277457: {}, // Contingency Plan
+	1277458: {}, // Contingency Plan
+	1277459: {}, // Contingency Plan
+	1277460: {}, // Contingency Plan
 	1291663: {}, // Poison
 	1292029: {}, // Devious Strike
 	1292657: {}, // Corrosive Poison
@@ -301,6 +373,7 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	1294537: {}, // Incinerator
 	1295039: {}, // Serpentbane
 	1295744: {}, // Rot
+	1297357: {}, // Reforged Spear
 	1299332: {}, // Lacerate
 	1299739: {}, // Bloodmail
 	1299850: {}, // Fireball
@@ -317,4 +390,5 @@ var clientPeriodicCanCrit = map[int32]struct{}{
 	1317583: {}, // Poison
 	1320824: {}, // Rend
 	1320925: {}, // Ablaze
+	1321586: {}, // Rotmending
 }

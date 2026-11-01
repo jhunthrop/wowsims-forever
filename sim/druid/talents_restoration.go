@@ -87,7 +87,8 @@ func (druid *Druid) applyImprovedTranquility() {
 
 // applyImprovedRegrowth implements Improved Regrowth (node 104913, 5 ranks):
 // "Increases the critical effect chance of your Regrowth spell by 10%" a
-// rank. Only the direct heal critically strikes, so only it gains.
+// rank. The spell's crit chance reaches its heal over time's ticks too,
+// which crit since client 1.60.1.70707.
 func (druid *Druid) applyImprovedRegrowth() {
 	if druid.Talents.ImprovedRegrowth == 0 {
 		return
