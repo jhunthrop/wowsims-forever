@@ -568,20 +568,18 @@ func (druid *Druid) applyNaturesMajesty() {
 // applyNaturesReach implements Nature's Reach (node 104929, 2 ranks,
 // proto field NaturesReach): "Increases the range of your offensive
 // Balance spells by 10/20% and improves your chance to hit by 2/4%."
-// Range is not modeled (nothing in this sim ever goes out of range of
-// its own target); hit is, as a SpellMod scoped to the three spells the
-// client's text names - Wrath, Starfire and Moonfire.
+// Range is not modeled (nothing in this sim ever goes out of range of its
+// own target). The hit is client 16819's effects 1 and 2, aura 54 (melee
+// hit) and aura 55 (spell hit), neither with a class mask: hit on every
+// spell and attack, Insect Swarm included. Only the range effect names
+// spells.
 func (druid *Druid) applyNaturesReach() {
 	if druid.Talents.NaturesReach == 0 {
 		return
 	}
 
 	rank := clampRank(druid.Talents.NaturesReach, 2)
-	druid.AddStaticMod(core.SpellModConfig{
-		Kind:       core.SpellMod_BonusHit_Flat,
-		ClassMask:  DruidSpellMaskBalanceDirectDamage,
-		FloatValue: 2 * float64(rank) * core.HitRatingPerHitChance,
-	})
+	druid.AddStat(stats.Hit, 2*float64(rank)*core.HitRatingPerHitChance)
 }
 
 // genesisPeriodicPerRank is Genesis's 2% a rank. The client row (spell
