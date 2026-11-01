@@ -86,6 +86,7 @@ const (
 	GravestoneWarAxe           = 13983
 	Darrowspike                = 13984
 	Frightalon                 = 14024
+	RobeOfTheArchmage          = 14152
 	BonechillHammer            = 14487
 	EbonHiltOfMarduk           = 14576
 	FrightskullShaft           = 14531
@@ -3413,6 +3414,41 @@ func init() {
 	///////////////////////////////////////////////////////////////////////////
 	//                                 Other
 	///////////////////////////////////////////////////////////////////////////
+
+	// https://www.wowhead.com/forever/item=14152/robe-of-the-archmage
+	// Use: Restores 375 to 625 mana. (5 Min Cooldown)
+	// ItemEffect 99905 is spell 18385, 500 with variance 0.5, on a 5 min
+	// item cooldown. 18385 is in category 30 with a 60 s category
+	// recovery: the mana gems, Demonic Rune and healthstones share it, so
+	// the robe holds the conjured cooldown for a minute.
+	core.NewItemEffect(RobeOfTheArchmage, func(agent core.Agent) {
+		character := agent.GetCharacter()
+		actionID := core.ActionID{ItemID: RobeOfTheArchmage}
+		manaMetrics := character.NewManaMetrics(actionID)
+		const maxMana = 625.0
+		conjured := character.GetConjuredCD()
+
+		spell := character.RegisterSpell(core.SpellConfig{
+			ActionID: actionID,
+			Flags:    core.SpellFlagNoOnCastComplete,
+			Cast: core.CastConfig{
+				CD: core.Cooldown{Timer: character.NewTimer(), Duration: 5 * time.Minute},
+			},
+			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+				character.AddMana(sim, sim.RollWithLabel(375, maxMana, "Robe of the Archmage"), manaMetrics)
+				conjured.Set(max(conjured.ReadyAt(), sim.CurrentTime+time.Minute))
+			},
+		})
+
+		character.AddMajorCooldown(core.MajorCooldown{
+			Spell: spell,
+			Type:  core.CooldownTypeMana,
+			ShouldActivate: func(sim *core.Simulation, character *core.Character) bool {
+				totalRegen := character.ManaRegenPerSecondWhileCasting() * 2
+				return character.MaxMana()-(character.CurrentMana()+totalRegen) >= maxMana
+			},
+		})
+	})
 
 	// https://www.wowhead.com/classic/item=17111/blazefury-medallion
 	// Equip: Adds 2 fire damage to your melee attacks.
