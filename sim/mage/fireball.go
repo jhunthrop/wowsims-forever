@@ -82,6 +82,7 @@ func (mage *Mage) newFireballSpellConfig(rank int) core.SpellConfig {
 			},
 			NumberOfTicks: numTicks,
 			TickLength:    tickLength,
+			Dynamic:       true, // Forever reads spell power at every tick (core.DotConfig.Dynamic)
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, baseDotDamage, isRollover)
 			},

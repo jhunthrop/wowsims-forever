@@ -386,6 +386,7 @@ func (dot *Dot) CalcSnapshotDamage(sim *Simulation, target *Unit, outcomeApplier
 func (dot *Dot) Snapshot(target *Unit, baseDamage float64, isRollover bool) {
 	// Rollovers in SoD don't seem to update anything
 	if !isRollover {
+		dot.dynamicBase = baseDamage
 		dot.SnapshotBaseDamage = baseDamage * dot.Spell.BaseDamageMultiplierAdditive
 		if dot.BonusCoefficient > 0 {
 			dot.SnapshotBaseDamage += dot.BonusCoefficient * dot.Spell.GetBonusDamage(target)
