@@ -768,13 +768,31 @@
                           "currentHealthPercent": {
                             "sourceUnit": {
                               "type": "Player",
+                              "index": 0
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "0.9"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "currentHealthPercent": {
+                            "sourceUnit": {
+                              "type": "Player",
                               "index": 1
                             }
                           }
                         },
                         "rhs": {
                           "const": {
-                            "val": "0.7"
+                            "val": "0.9"
                           }
                         }
                       }
@@ -792,7 +810,7 @@
                         },
                         "rhs": {
                           "const": {
-                            "val": "0.7"
+                            "val": "0.9"
                           }
                         }
                       }
@@ -810,7 +828,7 @@
                         },
                         "rhs": {
                           "const": {
-                            "val": "0.7"
+                            "val": "0.9"
                           }
                         }
                       }
@@ -828,7 +846,7 @@
                         },
                         "rhs": {
                           "const": {
-                            "val": "0.7"
+                            "val": "0.9"
                           }
                         }
                       }
@@ -843,8 +861,16 @@
                     "currentManaPercent": {}
                   },
                   "rhs": {
-                    "const": {
-                      "val": "0.5"
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.9"
+                        }
+                      }
                     }
                   }
                 }
@@ -853,7 +879,7 @@
           }
         }
       },
-      "notes": "Chain Heal off the tank jumps to the two most hurt members when the group has taken damage."
+      "notes": "Chain Heal on the tank once any of the five party members (you among them) is under 90 percent, while the mana bar keeps up with 90 percent of the share of the fight left."
     },
     {
       "action": {

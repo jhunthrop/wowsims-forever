@@ -41,6 +41,7 @@ const (
 	SpellCode_PriestStarshards
 	SpellCode_PriestVampiricTouch
 	SpellCode_PriestLightwell
+	SpellCode_PriestBindingHeal
 )
 
 // Spell masks for the declarative talent mods below. One bit per
@@ -73,6 +74,7 @@ const (
 	PriestSpellMaskLightwell
 	PriestSpellMaskMindBlast
 	PriestSpellMaskVampiricEmbrace
+	PriestSpellMaskBindingHeal
 )
 
 // PriestSpellMaskInstantShadowDamage is every Shadow damage spell this
@@ -117,6 +119,7 @@ type Priest struct {
 
 	Latency float64
 
+	BindingHeal       []*core.Spell
 	DarkSacrifice     []*core.Spell
 	DesperatePrayer   []*core.Spell
 	DevouringPlague   []*core.Spell

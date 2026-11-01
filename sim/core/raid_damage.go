@@ -9,8 +9,8 @@ import (
 
 // The raid damage model gives a healer something to heal. The fake raid
 // members (Raid.target_dummies) are players with a health bar; the
-// model's tank takes melee hits and its other members take raid-wide
-// pulses, all as plain health loss after mitigation, with active
+// model's tank takes melee hits and its other members (with
+// pulses_reach_healer, the healer as well) take raid-wide pulses, all as plain health loss after mitigation, with active
 // absorb shields soaking up their share first. Without a model the fake
 // members stay at full health and every heal overheals completely.
 
@@ -58,6 +58,9 @@ func (raid *Raid) applyRaidDamageModel(model *proto.RaidDamageModel) {
 	for i, member := range members {
 		units[i] = &member.Unit
 	}
+	if model.PulsesReachHealer {
+		units = append(units, raid.realPlayerUnits()...)
+	}
 	tank.RegisterResetEffect(func(sim *Simulation) {
 		if model.TankHitDamage > 0 && model.TankSwingSeconds > 0 {
 			scheduleRaidDamage(sim, model.TankSwingSeconds, func(sim *Simulation) {
@@ -73,6 +76,20 @@ func (raid *Raid) applyRaidDamageModel(model *proto.RaidDamageModel) {
 			})
 		}
 	})
+}
+
+// realPlayerUnits is every player in the raid that is not a fake member:
+// in a healing sim, the healer.
+func (raid *Raid) realPlayerUnits() []*Unit {
+	var units []*Unit
+	for _, party := range raid.Parties {
+		for _, player := range party.Players {
+			if _, ok := player.(*TargetDummy); !ok {
+				units = append(units, &player.GetCharacter().Unit)
+			}
+		}
+	}
+	return units
 }
 
 func enableRaidDamageHealth(dummy *TargetDummy, health float64) {

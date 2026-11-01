@@ -157,11 +157,9 @@ func (paladin *Paladin) applyIllumination() {
 		Duration: illuminationRegenDuration,
 		OnGain: func(_ *core.Aura, sim *core.Simulation) {
 			paladin.PseudoStats.SpiritRegenRateCasting += illuminationRegenWhileCasting
-			paladin.UpdateManaRegenRates()
 		},
 		OnExpire: func(_ *core.Aura, sim *core.Simulation) {
 			paladin.PseudoStats.SpiritRegenRateCasting -= illuminationRegenWhileCasting
-			paladin.UpdateManaRegenRates()
 		},
 	})
 	paladin.RegisterAura(core.Aura{

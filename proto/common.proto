@@ -1118,7 +1118,8 @@ message HealingModel {
 // take. The last fake member is the tank: it takes tank_hit_damage every
 // tank_swing_seconds. Every other fake member takes pulse_damage in a pulse
 // every pulse_interval_seconds, each pulse landing on pulse_members of them
-// chosen at random. All figures are after mitigation, in health points; the
+// chosen at random (with pulses_reach_healer, the real players are among
+// them). All figures are after mitigation, in health points; the
 // profile that supplies them names itself in `profile`. Forever addition;
 // see PORTING.md.
 message RaidDamageModel {
@@ -1136,6 +1137,10 @@ message RaidDamageModel {
 	double pulse_interval_seconds = 8;
 	// Members one pulse lands on; 0 means every non-tank fake member.
 	int32 pulse_members = 9;
+	// Pulses may also land on the raid's real players (the healer), chosen
+	// among the fake members with the same odds: raid-wide damage reaches
+	// the player casting the heals too. Off keeps the healer untouched.
+	bool pulses_reach_healer = 10;
 }
 
 message CustomRotation {

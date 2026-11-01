@@ -21,6 +21,7 @@ func (priest *Priest) RegisterHealingSpells() {
 	priest.registerLesserHeal()
 	priest.registerHeal()
 	priest.registerFlashHeal()
+	priest.registerBindingHeal()
 	priest.registerGreaterHeal()
 	priest.registerRenew()
 	priest.registerPrayerOfHealing()

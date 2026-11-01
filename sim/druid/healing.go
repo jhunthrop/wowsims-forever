@@ -114,6 +114,7 @@ func (druid *Druid) healOverTimeConfig(name string, rank int, spec healingRank, 
 		NumberOfTicks:    numTicks,
 		TickLength:       tickLength,
 		BonusCoefficient: spec.tick.coefficient,
+		DynamicSnapshot:  true,
 		OnSnapshot: func(_ *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 			snapshotHealing(dot, target, tickCenter, isRollover)
 		},

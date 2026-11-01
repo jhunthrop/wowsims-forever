@@ -192,6 +192,174 @@
                                 "currentHealthPercent": {
                                   "sourceUnit": {
                                     "type": "Player",
+                                    "index": 0
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 1
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 0
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 0
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 3
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 0
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
+                                    "index": 4
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "0.7"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentHealthPercent": {
+                                  "sourceUnit": {
+                                    "type": "Player",
                                     "index": 1
                                   }
                                 }
@@ -454,7 +622,7 @@
           }
         }
       },
-      "notes": "Tranquility once two of the four party members are hurt; it heals the party every 2 seconds for 10 and sits on a 5 minute cooldown."
+      "notes": "Tranquility once two of the five party members (you among them) are hurt; it heals the party every 2 seconds for 10 and sits on a 5 minute cooldown."
     },
     {
       "action": {
@@ -614,6 +782,82 @@
         }
       },
       "notes": "Healing Touch is the big direct heal; it is paced so the mana lasts: only while the mana bar is above the share of the fight still to come."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 9841,
+            "rank": 10
+          },
+          "target": {
+            "type": "Player",
+            "index": 0
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 0
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.7"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 9841,
+                        "rank": 10
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 0
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "1.2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "You are one of the five: a hurt healer gets Rejuvenation at the party pace."
     },
     {
       "action": {

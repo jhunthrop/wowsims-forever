@@ -27,6 +27,7 @@ func (priest *Priest) registerRenew() {
 			NumberOfTicks:    renewTicks,
 			TickLength:       renewTickLength,
 			BonusCoefficient: entry.coefficient,
+			DynamicSnapshot:  true,
 
 			OnSnapshot: func(_ *core.Simulation, target *core.Unit, dot *core.Dot, _ bool) {
 				snapshotHeal(dot, target, tick)
