@@ -78,10 +78,12 @@ func (priest *Priest) ApplyTalents() {
 	if priest.Talents.SpiritualGuidance > 0 {
 		// "Increases your spell healing by up to 5% of your total Spirit
 		// and your spell damage by up to 1% of your total Spirit" per
-		// rank. Spirit grants the healing stat; the damage half is
-		// Forever's one-third rule (core.HealingToSpellDamageRatio), which
-		// already turns the healing stat into spell damage.
+		// rank. The client states both halves (14901: aura 175 healing
+		// 25 and aura 174 damage 8 at rank 5), so each is its own
+		// dependency.
+		rank := min(int(priest.Talents.SpiritualGuidance), len(spiritualGuidanceDamagePerSpirit)-1)
 		priest.AddStatDependency(stats.Spirit, stats.HealingPower, spiritualGuidanceHealingPerSpirit*float64(priest.Talents.SpiritualGuidance))
+		priest.AddStatDependency(stats.Spirit, stats.SpellDamage, spiritualGuidanceDamagePerSpirit[rank])
 	}
 
 	// Blessed Recovery: a heal over time on the priest after a critical

@@ -641,10 +641,7 @@ func (shaman *Shaman) applyMentalDexterity() {
 // (talents/shaman.json node 104744): "Increases your spell damage and
 // healing by up to 15/30% of your Intellect." Both stats.SpellDamage
 // and stats.HealingPower get the dependency because the tooltip names
-// both; HealingPower already carries a further third of itself into
-// SpellDamage (sim/core/character.go's HealingToSpellDamageRatio
-// dependency, applied to every character), the same as gear's own
-// healing power already does.
+// both (client 30812: aura 174 damage 30 and aura 175 healing 30).
 var mentalQuicknessSpellDamagePercent = [3]float64{0, 0.15, 0.30}
 
 func (shaman *Shaman) applyMentalQuickness() {

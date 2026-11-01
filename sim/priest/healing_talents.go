@@ -13,6 +13,11 @@ import (
 // Shield is 7/14/20, Mental Agility 3/7/10, Spiritual Healing 3/7/10,
 // Inspiration 8/17/25), so those are tables indexed by rank. A Forever
 // patch that changes a number changes a line here and nothing else.
+// spiritualGuidanceDamagePerSpirit is Spiritual Guidance's damage half by
+// rank, the client's rank descriptions (1, 3, 5, 6 and 8% of Spirit;
+// 1.60.1.70707 talents/priest.json, spell 14901 aura 174 is 8 at rank 5).
+var spiritualGuidanceDamagePerSpirit = [6]float64{0, 0.01, 0.03, 0.05, 0.06, 0.08}
+
 const (
 	mentalStrengthIntellectPerRank    = 0.02 // "Increases your total Intellect by 2%" a rank (1.60.1.70425; 3% before)
 	spiritualGuidanceHealingPerSpirit = 0.05
