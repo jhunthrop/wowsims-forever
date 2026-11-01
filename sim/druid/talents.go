@@ -591,8 +591,8 @@ const genesisPeriodicPerRank = 2
 // Genesis): "Increases the periodic damage and healing done by your
 // spells and abilities by 2/4/6/8/10%." Scoped to every damage-over-time
 // and heal-over-time effect this package has - Moonfire, Insect Swarm, Rake
-// and Rip, Rejuvenation, Regrowth's heal over time, Tranquility and Wild
-// Growth.
+// and Rip, Rejuvenation, Regrowth's heal over time and Wild Growth; the
+// client's mask leaves Tranquility out.
 func (druid *Druid) applyGenesis() {
 	if druid.Talents.Genesis == 0 {
 		return
@@ -600,8 +600,10 @@ func (druid *Druid) applyGenesis() {
 
 	rank := clampRank(druid.Talents.Genesis, 5)
 	druid.AddStaticMod(core.SpellModConfig{
-		Kind:      core.SpellMod_PeriodicDamageDone_Flat,
-		ClassMask: DruidSpellMaskPeriodicDamage | DruidSpellMaskPeriodicHealing,
+		Kind: core.SpellMod_PeriodicDamageDone_Flat,
+		// Client 1223081's mask names Rejuvenation, Regrowth and Wild
+		// Growth among the heals, not Tranquility (0x80).
+		ClassMask: DruidSpellMaskPeriodicDamage | (DruidSpellMaskPeriodicHealing &^ DruidSpellMaskTranquility),
 		IntValue:  genesisPeriodicPerRank * int64(rank),
 	})
 }

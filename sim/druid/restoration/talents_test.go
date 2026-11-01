@@ -135,11 +135,16 @@ func TestNaturalistQuickensHealingTouchAndRaisesDamage(t *testing.T) {
 	}
 }
 
-func TestGenesisAddsToEveryHealOverTime(t *testing.T) {
+// Genesis (1223081) effect 0 is aura 108, misc 22 (periodic healing and
+// damage), SpellClassMask_0 0x220252 in 1.60.1.70707: Moonfire,
+// Rejuvenation, Regrowth, Pounce and Insect Swarm, with Wild Growth and
+// Lacerate in mask_1 and Rip in mask_2. Tranquility (0x80, SpellClassOptions
+// 9863) is not in it.
+func TestGenesisAddsToTheHealsOverTimeItsMaskNames(t *testing.T) {
 	resto, _ := healer(t, map[string]int{"genesis": 5})
 	for name, spell := range healingSpells(resto) {
 		want := 1.0
-		if name != "Healing Touch" && name != "Swiftmend" {
+		if name != "Healing Touch" && name != "Swiftmend" && name != "Tranquility" {
 			want = 1.10
 		}
 		if !near(spell.PeriodicDamageMultiplierAdditive, want) {
