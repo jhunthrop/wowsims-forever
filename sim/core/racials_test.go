@@ -121,7 +121,7 @@ func TestSkyborneRowsDifferOnlyInTheirSecondActive(t *testing.T) {
 func TestTheNamedRacialsAreAllPresent(t *testing.T) {
 	want := map[proto.Race][]string{
 		proto.Race_RaceHuman:              {"Will to Survive", "Perception", "Ruthless", "The Human Spirit"},
-		proto.Race_RaceOrc:                {"Blood Fury", "Shatter Curse", "Savage", "Hardiness"},
+		proto.Race_RaceOrc:                {"Blood Fury", "Shatter Curse", "Command", "Hardiness"},
 		proto.Race_RaceDwarf:              {"Stoneform", "Find Treasure", "Artisan's Precision", "Big Game Hunter"},
 		proto.Race_RaceNightElf:           {"Elune's Light", "Shadowmeld", "Quickness", "Wisp Spirit"},
 		proto.Race_RaceUndead:             {"Will of the Forsaken", "Cannibalize", "Touch of the Grave"},
@@ -213,15 +213,43 @@ func TestEnduranceIsHealthWithoutHit(t *testing.T) {
 	}
 }
 
-// Orc's Savage (20574) replaced Axe Specialization: "Increases your critical
-// strike chance with all spells and abilities by 1%", aura 290 with no
-// SpellEquippedItems row, so it holds with any weapon and for spells.
-func TestSavageIsCritWithAnyWeapon(t *testing.T) {
-	savage := racialNamed(t, proto.Race_RaceOrc, "Savage")
+// Orc after Blizzard's 26 October 2026 racial notes ("Savage removed (1%
+// increased critical strike chance)"; "Command re-added, increasing Warlock
+// and Hunter pet damage by 5%") and the 30 October hotfix cache over build
+// 1.60.1.70685: the orc has no crit of its own, and every pet deals 5% more.
+func TestOrcHasCommandAndNoSavage(t *testing.T) {
+	for _, r := range RacialsFor(proto.Race_RaceOrc) {
+		if r.Name == "Savage" {
+			t.Fatal("Orc still has Savage; Blizzard removed it on 26 October")
+		}
+	}
+	command := racialNamed(t, proto.Race_RaceOrc, "Command")
+	if command.Kind != RacialPassive {
+		t.Errorf("Command is %v, want a passive", command.Kind)
+	}
+	pet := &Pet{Character: Character{Unit: Unit{PseudoStats: stats.NewPseudoStats()}}}
+	character := &Character{Pets: []*Pet{pet}}
+	command.Apply(character)
+	if got := character.GetStat(stats.Crit); got != 0 {
+		t.Errorf("Command granted the orc %v Crit, want none", got)
+	}
+	if got := pet.PseudoStats.DamageDealtMultiplier; math.Abs(got-1.05) > 1e-12 {
+		t.Errorf("Command left the pet's damage multiplier at %v, want 1.05", got)
+	}
+}
+
+// The Human Spirit (20598): Blizzard's 26 October notes, "Human Spirit now
+// increases Spirit by 10% (was 5%)", and the 30 October hotfix cache. The
+// shipped 1.60.1.70707 row still reads 5.
+func TestTheHumanSpiritIsTenPercentSpirit(t *testing.T) {
+	spirit := racialNamed(t, proto.Race_RaceHuman, "The Human Spirit")
 	character := &Character{}
-	savage.Apply(character)
-	if got, want := character.GetStat(stats.Crit), 1.0*CritRatingPerCritChance; got != want {
-		t.Errorf("Savage granted %v Crit unarmed, want %v (1%%)", got, want)
+	const baseSpirit = 100.0
+	character.AddStat(stats.Spirit, baseSpirit)
+	spirit.Apply(character)
+	finalStats := character.StatDependencyManager.SortAndApplyStatDependencies(character.GetStats())
+	if got, want := finalStats[stats.Spirit], baseSpirit*1.10; math.Abs(got-want) > 1e-9 {
+		t.Errorf("The Human Spirit's finalized Spirit is %v, want %v", got, want)
 	}
 }
 
@@ -335,7 +363,9 @@ func TestQuicknessIsOnePercentDodge(t *testing.T) {
 	}
 }
 
-// Wind Blessed 1259710: 1% spellcasting, melee and ranged haste.
+// Wind Blessed 1259710: 2% spellcasting, melee and ranged haste. Blizzard's
+// 26 October notes: "Wind-Blessed Haste bonus reduced to 2% (was 3%)"; the
+// shipped 1.60.1.70707 rows still read 3.
 func TestWindBlessedHastesCastingMeleeAndRanged(t *testing.T) {
 	skyborne, _ := racialPlayer(t, proto.Race_RaceHighOrderSkyborne, proto.MobType_MobTypeUnknown)
 	human, _ := racialPlayer(t, proto.Race_RaceHuman, proto.MobType_MobTypeUnknown)
@@ -344,14 +374,16 @@ func TestWindBlessedHastesCastingMeleeAndRanged(t *testing.T) {
 		"ranged": skyborne.PseudoStats.RangedSpeedMultiplier / human.PseudoStats.RangedSpeedMultiplier,
 		"cast":   skyborne.PseudoStats.CastSpeedMultiplier / human.PseudoStats.CastSpeedMultiplier,
 	} {
-		if math.Abs(ratio-1.01) > 1e-9 {
-			t.Errorf("%s speed ratio is %v, want 1.01", name, ratio)
+		if math.Abs(ratio-1.02) > 1e-9 {
+			t.Errorf("%s speed ratio is %v, want 1.02", name, ratio)
 		}
 	}
 }
 
 // Elune's Light 1259799: crit +10% for 15 s, 3 min cooldown. Berserking
-// 20554: 10 s, 3 min, no cost. Both read back from the registered spell and
+// 20554: 15 s, 3 min, no cost (Blizzard's 27 October notes, "Berserking
+// duration increased to 15 seconds (was 10 seconds)", and the 30 October
+// hotfix cache; the shipped row's SpellDuration still gives 10 s). Both read back from the registered spell and
 // aura, which is where the engine holds the numbers.
 func TestElunesLightAndBerserkingMatchTheClientRows(t *testing.T) {
 	night, _ := racialPlayer(t, proto.Race_RaceNightElf, proto.MobType_MobTypeUnknown)
@@ -377,8 +409,8 @@ func TestElunesLightAndBerserkingMatchTheClientRows(t *testing.T) {
 	if berserking.Cost != nil {
 		t.Errorf("Berserking has a resource cost; the client row has none")
 	}
-	if aura := troll.GetAura("Berserking"); aura == nil || aura.Duration != 10*time.Second {
-		t.Errorf("Berserking aura = %v, want a 10 s aura", aura)
+	if aura := troll.GetAura("Berserking"); aura == nil || aura.Duration != 15*time.Second {
+		t.Errorf("Berserking aura = %v, want a 15 s aura", aura)
 	}
 }
 
@@ -576,8 +608,10 @@ func TestEurekaReachesWarriorAbilities(t *testing.T) {
 // Touch of the Grave, client 1.60.1.70707: two passives by class
 // (SkillLineAbility 55923 and 55924). 1260189 (ClassMask 11: warrior,
 // paladin, rogue) has ProcChance 20, 1260201 (ClassMask 400: priest, mage,
-// warlock) ProcChance 30, and both a 25000 ms ProcCategoryRecovery and
-// ProcTypeMask 69972 (no periodic bit). The drain 1260198 takes 5% of the
+// warlock) ProcChance 30, and ProcTypeMask 69972 (no periodic bit). The
+// internal cooldown is 15 s: Blizzard's 27 October notes ("Touch of the
+// Grave internal cooldown reduced to 15 seconds (was 25 seconds)") and the
+// 30 October hotfix cache, over the shipped 25000 ms ProcCategoryRecovery. The drain 1260198 takes 5% of the
 // caster's maximum Health.
 func TestTouchOfTheGraveMatchesTheClientRows(t *testing.T) {
 	for _, c := range []struct {
@@ -596,8 +630,8 @@ func TestTouchOfTheGraveMatchesTheClientRows(t *testing.T) {
 		if trigger.ActionID.SpellID != c.id || trigger.ProcChance != c.chance {
 			t.Errorf("%v: passive %d at %v, want %d at %v", c.class, trigger.ActionID.SpellID, trigger.ProcChance, c.id, c.chance)
 		}
-		if trigger.ICD != 25*time.Second {
-			t.Errorf("%v: internal cooldown is %v, want 25s", c.class, trigger.ICD)
+		if trigger.ICD != 15*time.Second {
+			t.Errorf("%v: internal cooldown is %v, want 15s", c.class, trigger.ICD)
 		}
 	}
 	trigger := touchOfTheGraveTrigger(nil, proto.Class_ClassPaladin)
