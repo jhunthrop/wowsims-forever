@@ -294,14 +294,20 @@ func TestBoundlessLightRaisesHolyShockHealCrit(t *testing.T) {
 	}
 }
 
-func TestChampionOfTheLightGivesHealingAndDamageTheSameShareOfIntellect(t *testing.T) {
+// Champion of the Light raises spell damage only, for a healer too: the
+// 1.60.1.70707 row 1311084 has one stat aura, 174 (spell damage of a stat
+// percent, Intellect), and no 175 (healing); the 31 October hotfix push adds
+// only the Hammer of Wrath cast-time effect (1367233); and Wowhead Forever's
+// live text reads "Increases your spell damage by up to 60% of your
+// Intellect".
+func TestChampionOfTheLightGivesSpellDamageOnly(t *testing.T) {
 	base, _ := unitsOf(t, fight{})
 	talented, _ := unitsOf(t, fight{talents: map[string]int{"champion_of_the_light": 5}})
 	const share = 0.60 // 1.60.1.70707: "up to 60% of your Intellect" at 5/5
 	intellect := talented.GetStat(stats.Intellect)
 
-	if got := talented.GetStat(stats.HealingPower) - base.GetStat(stats.HealingPower); got < share*intellect-1e-6 || got > share*intellect+1e-6 {
-		t.Errorf("healing power rose by %.3f, want %.3f (60%% of %.1f Intellect)", got, share*intellect, intellect)
+	if got := talented.GetStat(stats.HealingPower) - base.GetStat(stats.HealingPower); math.Abs(got) > 1e-6 {
+		t.Errorf("healing power rose by %.3f, want none (the client row has no healing aura)", got)
 	}
 	damage := func(c *core.Character) float64 {
 		return c.GetStat(stats.SpellPower) + c.GetStat(stats.SpellDamage)
