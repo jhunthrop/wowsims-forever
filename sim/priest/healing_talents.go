@@ -31,6 +31,8 @@ const (
 	litanyOfLightManaSpellID          = 1317006
 	inspirationAuraDuration           = 15 * time.Second
 	inspirationTalentSpellID          = 14892
+	holyBindingSpellID                = 1328569
+	holyBindingSelfHealShare          = 0.5
 )
 
 var (
@@ -227,6 +229,41 @@ func (priest *Priest) applyLitanyOfLight() {
 			if previous != SpellCode_PriestNone && previous != spell.SpellCode && spell.Cost != nil {
 				priest.AddMana(sim, spell.Cost.BaseCost*litanyOfLightManaPerRank*float64(rank), metrics)
 			}
+		},
+	})
+}
+
+// applyHolyBinding is the Holy tier-3 talent (1328569; its text since the
+// 30 October 2026 hotfix, which turned the Binding Heal talent into this):
+// "Each time you heal a target other than yourself with Flash Heal, you are
+// healed for 50% as much. This healing generates no threat." The raid damage
+// model never hits the priest, but Dark Sacrifice and Demonic Runes take its
+// health, so the self-heal is effective healing whenever it is missing
+// health. It is a flat share of the Flash Heal: no crit roll, no healing
+// modifiers of its own, no procs.
+func (priest *Priest) applyHolyBinding() {
+	if !priest.Talents.HolyBinding {
+		return
+	}
+	selfHeal := priest.RegisterSpell(core.SpellConfig{
+		ActionID:         core.ActionID{SpellID: holyBindingSpellID},
+		SpellSchool:      core.SpellSchoolHoly,
+		ProcMask:         core.ProcMaskEmpty,
+		Flags:            core.SpellFlagHelpful | core.SpellFlagPassiveSpell | core.SpellFlagNoOnCastComplete | core.SpellFlagIgnoreModifiers,
+		DamageMultiplier: 1,
+		ThreatMultiplier: 0,
+	})
+	priest.RegisterAura(core.Aura{
+		Label:    "Holy Binding",
+		Duration: core.NeverExpires,
+		OnReset: func(aura *core.Aura, sim *core.Simulation) {
+			aura.Activate(sim)
+		},
+		OnHealDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			if spell.ClassSpellMask&PriestSpellMaskFlashHeal == 0 || result.Target == &priest.Unit {
+				return
+			}
+			selfHeal.CalcAndDealHealing(sim, &priest.Unit, result.Damage*holyBindingSelfHealShare, selfHeal.OutcomeHealing)
 		},
 	})
 }

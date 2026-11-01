@@ -99,12 +99,7 @@ func (priest *Priest) ApplyTalents() {
 	// the raid damage model. Named, not modeled.
 	_ = priest.Talents.SpiritOfRedemption
 
-	// Holy Binding (client 1.60.1.70707, Holy tier 3, replacing Binding
-	// Heal): "Each time you heal a target other than yourself with Flash
-	// Heal, you are healed for 50% as much." The raid damage model never
-	// damages the priest, so the self-heal is all overhealing and adds
-	// nothing to effective healing. Named, not modeled.
-	_ = priest.Talents.HolyBinding
+	priest.applyHolyBinding()
 
 	priest.applyDeclarativeHealingTalents()
 
