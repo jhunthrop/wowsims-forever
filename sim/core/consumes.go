@@ -1229,8 +1229,12 @@ func makeRageConsumableMCD(itemId int32, character *Character, cdTimer *Timer) M
 				},
 			},
 			ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
-				rageGain := sim.RollWithLabel(minRoll, maxRoll, "Rage Consumable")
-				character.AddRage(sim, rageGain, rageMetrics)
+				// A class with no rage bar can drink it (a request may carry
+				// any consumable), and its rage has nowhere to go.
+				if character.HasRageBar() {
+					rageGain := sim.RollWithLabel(minRoll, maxRoll, "Rage Consumable")
+					character.AddRage(sim, rageGain, rageMetrics)
+				}
 				if itemId == 13442 {
 					aura.Activate(sim)
 				}
