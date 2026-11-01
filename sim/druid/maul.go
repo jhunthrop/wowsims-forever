@@ -53,7 +53,7 @@ func (druid *Druid) registerMaulSpell() {
 
 		DamageMultiplierAdditive: druid.savageFuryDamageMultiplier(),
 		DamageMultiplier:         1,
-		ThreatMultiplier:         1,
+		ThreatMultiplier:         ClassicBearThreatMultiplier,
 		BonusCoefficient:         1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
