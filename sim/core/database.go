@@ -56,6 +56,9 @@ type Item struct {
 	WeaponDamageMin  float64
 	WeaponDamageMax  float64
 	SwingSpeed       float64
+	// DamageSchool is the school the weapon's own hits deal; physical
+	// unless the item states otherwise (every playable wand is magical).
+	DamageSchool proto.SpellSchool
 
 	Name                string
 	Stats               stats.Stats // Stats applied to wearer
@@ -97,6 +100,7 @@ func ItemFromProto(pData *proto.SimItem) Item {
 		WeaponDamageMin:     pData.WeaponDamageMin,
 		WeaponDamageMax:     pData.WeaponDamageMax,
 		SwingSpeed:          pData.WeaponSpeed,
+		DamageSchool:        pData.DamageSchool,
 		Stats:               stats.FromFloatArray(pData.Stats),
 		BonusPhysicalDamage: pData.BonusPhysicalDamage,
 		SetName:             pData.SetName,

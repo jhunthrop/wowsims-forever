@@ -63,6 +63,7 @@ func newWeaponFromItem(item *Item, bonusDps float64) Weapon {
 		NormalizedSwingSpeed: normalizedWeaponSpeed,
 		AttackPowerPerDPS:    DefaultAttackPowerPerDPS,
 		TwoHanded:            item.HandType == proto.HandType_HandTypeTwoHand,
+		SpellSchool:          SpellSchoolFromProto(item.DamageSchool),
 	}
 }
 
