@@ -19,13 +19,18 @@ const petInheritanceDemoTalents = "-00050000300000003-05"
 
 func newPetInheritanceTestWarlock(t *testing.T, summon proto.WarlockOptions_Summon) (*core.Simulation, *Warlock) {
 	t.Helper()
+	return newPetTestWarlockWithTalents(t, summon, petInheritanceDemoTalents)
+}
+
+func newPetTestWarlockWithTalents(t *testing.T, summon proto.WarlockOptions_Summon, talents string) (*core.Simulation, *Warlock) {
+	t.Helper()
 	player := core.WithSpec(
 		&proto.Player{
 			Class:         proto.Class_ClassWarlock,
 			Race:          proto.Race_RaceOrc,
 			Level:         60,
 			Equipment:     &proto.EquipmentSpec{},
-			TalentsString: petInheritanceDemoTalents,
+			TalentsString: talents,
 		},
 		&proto.Player_Warlock{Warlock: &proto.Warlock{Options: &proto.WarlockOptions{
 			Armor:       proto.WarlockOptions_NoArmor,
@@ -150,5 +155,20 @@ func TestDemonSpellsTakeTheWarlocksWholeHitAndMeleeEightSeventeenths(t *testing.
 	succubus.applyOwnerSpellHit(lash)
 	if got, want := lash.SpellHitChance(sim.Encounter.TargetUnits[0]), 0.05; math.Abs(got-want) > 1e-9 {
 		t.Errorf("Lash of Pain hit chance = %.4f, want the warlock's whole %.4f", got, want)
+	}
+}
+
+// Malevolence (1310949) is aura 107 crit chance, 5% at 5/5, on a class mask
+// that carries Lash of Pain's bit (0x2000) beside the warlock's own Shadow
+// spells, as Improved Sayaad's mask carries it: the Succubus's Lash takes it.
+func TestLashOfPainTakesMalevolence(t *testing.T) {
+	_, without := newPetTestWarlockWithTalents(t, proto.WarlockOptions_Succubus, "")
+	_, with := newPetTestWarlockWithTalents(t, proto.WarlockOptions_Succubus, "00000000005")
+	if with.Talents.Malevolence != 5 {
+		t.Fatalf("Malevolence = %d, want 5", with.Talents.Malevolence)
+	}
+	got := with.Succubus.primaryAbility.BonusCritRating - without.Succubus.primaryAbility.BonusCritRating
+	if want := 5 * float64(core.CritRatingPerCritChance); math.Abs(got-want) > 1e-9 {
+		t.Errorf("Lash of Pain bonus crit rating rose by %.3f under Malevolence 5/5, want %.3f", got, want)
 	}
 }
