@@ -73,3 +73,18 @@ func TestBloomSkipsAConsumedRejuvenation(t *testing.T) {
 		t.Errorf("Bloom healed %v for a Rejuvenation Swiftmend consumed, want 0", got)
 	}
 }
+
+// Bloom's heal (1328622) is a triggered spell, not a cast: the round 3
+// Omen of Clarity rate (4% a spell) was fitted per logged cast, and set
+// bonuses such as Vestments of the Devout's "your spellcasts have a 5%
+// chance" read a cast. A Bloom must therefore fire neither the cast
+// callbacks nor the healing proc mask those procs listen on.
+func TestBloomTriggersNoCastProcs(t *testing.T) {
+	resto, _ := healer(t, map[string]int{"bloom": 1})
+	if !resto.Bloom.Flags.Matches(core.SpellFlagNoOnCastComplete) {
+		t.Error("Bloom fires OnCastComplete, so cast procs (Devout's mana) roll on it")
+	}
+	if resto.Bloom.ProcMask.Matches(core.ProcMaskSpellHealing | core.ProcMaskSpellDamage) {
+		t.Errorf("Bloom's proc mask %v rolls spell procs (Omen of Clarity)", resto.Bloom.ProcMask)
+	}
+}

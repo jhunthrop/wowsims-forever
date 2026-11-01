@@ -389,3 +389,59 @@ func TestPeriodicCritRule(t *testing.T) {
 		})
 	}
 }
+
+// Forever's heals over time crit where the client marks the spell
+// PERIODIC_CAN_CRIT. Every trained rank of Rejuvenation, Regrowth,
+// Tranquility, Wild Growth, Renew, Riptide and Healing Stream carries the
+// flag in 1.60.1.70707, and Blizzard's beta development notes of 24
+// September 2026 say: "Corrected an issue and now Rejuvenation can land
+// critical hits." A crit uses the healing crit chance and the spell's own
+// multiplier; an unflagged heal over time (8070, an NPC Rejuvenation)
+// ticks flat.
+func TestHotsFollowTheClientFlag(t *testing.T) {
+	for _, tc := range []struct {
+		name     string
+		spellID  int32
+		wantCrit bool
+	}{
+		{"Rejuvenation rank 10, flagged", 9841, true},
+		{"an NPC Rejuvenation, unflagged", 8070, false},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			sim, caster, _ := newPeriodicCritFixture(t, 100)
+			spell := caster.RegisterSpell(SpellConfig{
+				ActionID:         ActionID{SpellID: tc.spellID},
+				SpellSchool:      SpellSchoolNature,
+				DefenseType:      DefenseTypeMagic,
+				ProcMask:         ProcMaskSpellHealing,
+				Flags:            SpellFlagHelpful,
+				DamageMultiplier: 1,
+				ThreatMultiplier: 1,
+				Hot: DotConfig{
+					Aura:          Aura{Label: "Rule Hot " + tc.name},
+					NumberOfTicks: 4,
+					TickLength:    time.Second * 3,
+					OnTick: func(sim *Simulation, target *Unit, dot *Dot) {
+						dot.Spell.DealPeriodicHealing(sim, dot.Spell.CalcHealing(sim, target, 100, dot.OutcomeTick))
+					},
+				},
+			})
+			hot := spell.Hot(caster)
+			if got := hot.CanCrit; got != tc.wantCrit {
+				t.Fatalf("CanCrit = %v, want %v", got, tc.wantCrit)
+			}
+			hot.Apply(sim)
+			for i := 0; i < 4; i++ {
+				advanceOneTick(sim, hot)
+			}
+			m := spell.SpellMetrics[caster.UnitIndex]
+			wantCritTicks := int32(0)
+			if tc.wantCrit {
+				wantCritTicks = 4
+			}
+			if m.CritTicks != wantCritTicks {
+				t.Errorf("CritTicks = %d, want %d at 100%% crit", m.CritTicks, wantCritTicks)
+			}
+		})
+	}
+}

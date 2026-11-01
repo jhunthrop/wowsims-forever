@@ -71,7 +71,7 @@
       }
     },
     {
-      "notes": "With Unsealed Wrath, once three swings have stored Seal of Righteousness, switch to Seal of Command: the next swing releases all three stored Seals of Righteousness. Skipped below 30% mana, because every Seal costs a global and over 200 mana.",
+      "notes": "With Unsealed Wrath, once three swings have stored Seal of Command, switch to Seal of Righteousness: the next swing releases all three stored Seals of Command. Skipped below 30% mana, because every Seal costs a global and over 200 mana.",
       "action": {
         "condition": {
           "and": {
@@ -103,8 +103,8 @@
               {
                 "auraIsActive": {
                   "auraId": {
-                    "spellId": 20293,
-                    "rank": 8
+                    "spellId": 20920,
+                    "rank": 5
                   }
                 }
               },
@@ -126,14 +126,14 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20920,
-            "rank": 5
+            "spellId": 20293,
+            "rank": 8
           }
         }
       }
     },
     {
-      "notes": "After one swing under Seal of Command, go straight back to Seal of Righteousness.",
+      "notes": "After one swing under Seal of Righteousness, go straight back to Seal of Command.",
       "action": {
         "condition": {
           "and": {
@@ -165,19 +165,69 @@
               {
                 "auraIsActive": {
                   "auraId": {
-                    "spellId": 20920,
-                    "rank": 5
+                    "spellId": 20293,
+                    "rank": 8
                   }
                 }
               }
             ]
           }
         },
-        "castPaladinPrimarySeal": {}
+        "castSpell": {
+          "spellId": {
+            "spellId": 20920,
+            "rank": 5
+          }
+        }
       }
     },
     {
-      "notes": "Reapply Seal of Righteousness once it is about to expire -- this is now the only seal-maintenance line (see notes for why the seal twist that used to sit here was removed). It also catches the seal being deactivated by Judgement's own cast, which fires this same condition on the very next decision.",
+      "notes": "With Seal of Command and Unsealed Wrath, Seal of Command is the seal to keep up: reapply it once it is about to expire (this also catches Judgement's own cast). Since Blizzard's October beta fix, Seal of Righteousness takes spell damage once, and Seal of Command with the Unsealed Wrath twist measured about 10% ahead on a two-hander.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "spellIsKnown": {
+                  "spellId": {
+                    "spellId": 20920,
+                    "rank": 5
+                  }
+                }
+              },
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 1310735
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "currentSealRemainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "1"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20920,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Without Seal of Command or Unsealed Wrath, Seal of Righteousness is the seal to keep up (Seal of Command alone measured 6% lower at band 40).",
       "action": {
         "condition": {
           "cmp": {

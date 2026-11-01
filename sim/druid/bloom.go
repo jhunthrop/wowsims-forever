@@ -15,6 +15,11 @@ import (
 // Swiftmend consumes, or that a recast refreshes, did not expire by its
 // duration and blooms nothing.
 //
+// The heal is triggered, not cast, so it rolls no cast or spell procs: no
+// OnCastComplete (Vestments of the Devout's "your spellcasts" mana) and an
+// empty proc mask (Omen of Clarity's 4% a spell was fitted per logged cast),
+// as the engine's other triggered spells do.
+//
 // unconfirmed: whether the heal can critically strike (it is taken not to,
 // as no source says so) and whether it takes the caster's healing modifiers
 // (it does, as every other druid heal here).
@@ -32,8 +37,8 @@ func (druid *Druid) registerBloomSpell() {
 		ActionID:    core.ActionID{SpellID: bloomSpellID},
 		SpellSchool: core.SpellSchoolNature,
 		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellHealing,
-		Flags:       core.SpellFlagHelpful | core.SpellFlagPassiveSpell,
+		ProcMask:    core.ProcMaskEmpty,
+		Flags:       core.SpellFlagHelpful | core.SpellFlagPassiveSpell | core.SpellFlagNoOnCastComplete,
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,

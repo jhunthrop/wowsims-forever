@@ -199,6 +199,9 @@ const (
 const (
 	ruthlessCritPercent         = 1
 	artisansPrecisionHitPercent = 1
+	// savageCritPercent is Orc's Savage (20574), 1 in the client table and
+	// in the live text.
+	savageCritPercent = 1
 )
 
 var racialsByRace = map[proto.Race][]Racial{
@@ -231,7 +234,7 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 	},
 
-	// Orc: Blood Fury, Shatter Curse, Axe Specialization, Hardiness.
+	// Orc: Blood Fury, Shatter Curse, Savage, Hardiness.
 	proto.Race_RaceOrc: {
 		{
 			Name: "Blood Fury", Kind: RacialActive, Confirmed: true,
@@ -244,9 +247,14 @@ var racialsByRace = map[proto.Race][]Racial{
 			Apply: func(*Character) {}, // removes/immunes Curses and Banes, -15% magic damage taken 8 s: utility, no offensive effect
 		},
 		{
-			Name: "Axe Specialization", Kind: RacialPassive, Confirmed: true,
-			Note:  "",
-			Apply: func(character *Character) { character.AxeSpecializationAura() }, // 1% crit with an axe
+			Name: "Savage", Kind: RacialPassive, Confirmed: true,
+			Note: "client 20574: 1% crit with all spells and abilities, any weapon",
+			Apply: func(character *Character) {
+				// Replaced Axe Specialization in the 15 October rework:
+				// aura 290 with no SpellEquippedItems row (1.60.1.70707),
+				// and Wowhead Forever's live text agrees.
+				character.AddStat(stats.Crit, savageCritPercent*CritRatingPerCritChance)
+			},
 		},
 		{
 			Name: "Hardiness", Kind: RacialPassive, Confirmed: true,
@@ -391,7 +399,7 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "Touch of the Grave", Kind: RacialPassive, Confirmed: true,
-			Note:  "client 1260201 (drain 1260198): 10% proc chance, 1 s internal cooldown, drains 5% of maximum Health as flat Shadow damage; see racial_touch_of_the_grave.go",
+			Note:  "client 1260189 (warrior, paladin, rogue: 20%) or 1260201 (priest, mage, warlock: 30%), 25 s internal cooldown (build 1.60.1.70707); drain 1260198 takes 5% of maximum Health as flat Shadow damage; see racial_touch_of_the_grave.go",
 			Apply: applyTouchOfTheGrave,
 		},
 		{
@@ -422,21 +430,15 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "Endurance", Kind: RacialPassive, Confirmed: true,
-			Note: "",
+			Note: "client 20550: 5% Health",
 			Apply: func(character *Character) {
-				// 5% Health and 1% Hit, demo transcription. Health is the
-				// usual multiplicative stat dependency every other "+X%"
-				// racial in this file uses, resolved once the character's
-				// stats finalize - see TestEnduranceGrantsTheOneHitStat,
-				// which finalizes a character's stat dependencies and
-				// reads the result back, rather than reading GetStat on a
-				// never-finalized character (no production behaviour
-				// exists here purely to make an unfinalized read succeed).
+				// 5% Health, the usual multiplicative stat dependency
+				// every other "+X%" racial in this file uses. The 1% Hit an
+				// early demo transcription gave it is in neither the
+				// 1.60.1.70707 table nor Wowhead Forever's live text; the
+				// table's 2% critical strike bonus (aura 163), which the live
+				// text no longer shows, is open in the round 4 report.
 				character.MultiplyStat(stats.Health, 1.05)
-				// After the Task 4 Hit/Crit merge there is one Hit stat
-				// covering melee, ranged and spell, so this is one line
-				// where vanilla would have needed two.
-				character.AddStat(stats.Hit, 1*HitRatingPerHitChance)
 			},
 		},
 		{

@@ -121,7 +121,7 @@ func TestSkyborneRowsDifferOnlyInTheirSecondActive(t *testing.T) {
 func TestTheNamedRacialsAreAllPresent(t *testing.T) {
 	want := map[proto.Race][]string{
 		proto.Race_RaceHuman:              {"Will to Survive", "Perception", "Ruthless", "The Human Spirit"},
-		proto.Race_RaceOrc:                {"Blood Fury", "Shatter Curse", "Axe Specialization", "Hardiness"},
+		proto.Race_RaceOrc:                {"Blood Fury", "Shatter Curse", "Savage", "Hardiness"},
 		proto.Race_RaceDwarf:              {"Stoneform", "Find Treasure", "Artisan's Precision", "Big Game Hunter"},
 		proto.Race_RaceNightElf:           {"Elune's Light", "Shadowmeld", "Quickness", "Wisp Spirit"},
 		proto.Race_RaceUndead:             {"Will of the Forsaken", "Cannibalize", "Touch of the Grave"},
@@ -189,31 +189,12 @@ func TestUnconfirmedRacialsNamesTheThree(t *testing.T) {
 	}
 }
 
-// Tauren's Endurance grants 1% Hit, which after the Task 4 merge is one
-// stat covering melee, ranged and spell. It is the only racial that
-// touches the attack table, so a regression here is a silent DPS change
-// for every Tauren - and the test therefore applies it to a character
-// and reads stats.Hit back, rather than only checking that an entry of
-// that name exists, which was all an earlier draft did.
-//
-// Endurance's Health bonus is a genuine multiplicative stat dependency
-// (MultiplyStat), not a flat AddStat - production code carries no extra
-// behaviour whose only purpose is to make an unfinalized GetStat read
-// succeed. So this test gives the character a known base Health, finalizes
-// the character's stat dependencies the same way the real engine does
-// before a sim runs, and reads the finalized Health back, instead of
-// reading GetStat on a character that was never finalized.
-func TestEnduranceGrantsTheOneHitStat(t *testing.T) {
-	var endurance *Racial
-	for _, r := range RacialsFor(proto.Race_RaceTauren) {
-		if r.Name == "Endurance" {
-			r := r
-			endurance = &r
-		}
-	}
-	if endurance == nil {
-		t.Fatal("Tauren has no Endurance")
-	}
+// Tauren's Endurance (20550) is 5% Health. Neither the client table nor
+// Wowhead Forever's live tooltip (read 2026-11-01) gives it Hit: the table
+// adds 2% critical strike bonus (an aura 163 effect the live text no
+// longer shows), and the earlier 1% Hit came from a demo transcription.
+func TestEnduranceIsHealthWithoutHit(t *testing.T) {
+	endurance := racialNamed(t, proto.Race_RaceTauren, "Endurance")
 	if endurance.Kind != RacialPassive {
 		t.Errorf("Endurance is %v, want a passive", endurance.Kind)
 	}
@@ -221,17 +202,39 @@ func TestEnduranceGrantsTheOneHitStat(t *testing.T) {
 	character := &Character{}
 	const baseHealth = 4000.0
 	character.AddStat(stats.Health, baseHealth)
-	beforeHit := character.GetStat(stats.Hit)
 	endurance.Apply(character)
 
-	if got, want := character.GetStat(stats.Hit)-beforeHit, 1.0*HitRatingPerHitChance; got != want {
-		t.Errorf("Endurance granted %v Hit, want %v (1%% at %v rating per percent)", got, want, HitRatingPerHitChance)
+	if got := character.GetStat(stats.Hit); got != 0 {
+		t.Errorf("Endurance granted %v Hit, want none", got)
 	}
-
 	finalStats := character.StatDependencyManager.SortAndApplyStatDependencies(character.GetStats())
 	if got, want := finalStats[stats.Health], baseHealth*1.05; got != want {
-		t.Errorf("Endurance's finalized Health is %v, want %v (5%% of %v base Health); the demo reads it as 5%% Health and 1%% Hit", got, want, baseHealth)
+		t.Errorf("Endurance's finalized Health is %v, want %v (5%% of %v base Health)", got, want, baseHealth)
 	}
+}
+
+// Orc's Savage (20574) replaced Axe Specialization: "Increases your critical
+// strike chance with all spells and abilities by 1%", aura 290 with no
+// SpellEquippedItems row, so it holds with any weapon and for spells.
+func TestSavageIsCritWithAnyWeapon(t *testing.T) {
+	savage := racialNamed(t, proto.Race_RaceOrc, "Savage")
+	character := &Character{}
+	savage.Apply(character)
+	if got, want := character.GetStat(stats.Crit), 1.0*CritRatingPerCritChance; got != want {
+		t.Errorf("Savage granted %v Crit unarmed, want %v (1%%)", got, want)
+	}
+}
+
+// racialNamed is the race's racial of that name.
+func racialNamed(t *testing.T, race proto.Race, name string) Racial {
+	t.Helper()
+	for _, r := range RacialsFor(race) {
+		if r.Name == name {
+			return r
+		}
+	}
+	t.Fatalf("%v has no %s", race, name)
+	return Racial{}
 }
 
 // newGnomeEurekaTestCaster builds a bare Gnome spellcaster with just enough
@@ -575,17 +578,34 @@ func TestEurekaMatchesTheClientRow(t *testing.T) {
 	}
 }
 
-// Touch of the Grave 1260201 / drain 1260198: 10% chance, 1000 ms internal
-// cooldown, procs on melee, ranged and spell damage (ProcTypeMask 69972,
-// no periodic bit), drains 5% of the caster's maximum Health.
+// Touch of the Grave, client 1.60.1.70707: two passives by class
+// (SkillLineAbility 55923 and 55924). 1260189 (ClassMask 11: warrior,
+// paladin, rogue) has ProcChance 20, 1260201 (ClassMask 400: priest, mage,
+// warlock) ProcChance 30, and both a 25000 ms ProcCategoryRecovery and
+// ProcTypeMask 69972 (no periodic bit). The drain 1260198 takes 5% of the
+// caster's maximum Health.
 func TestTouchOfTheGraveMatchesTheClientRows(t *testing.T) {
-	trigger := touchOfTheGraveTrigger(nil)
-	if trigger.ProcChance != 0.10 {
-		t.Errorf("proc chance is %v, want 0.10", trigger.ProcChance)
+	for _, c := range []struct {
+		class  proto.Class
+		id     int32
+		chance float64
+	}{
+		{proto.Class_ClassPaladin, 1260189, 0.20},
+		{proto.Class_ClassWarrior, 1260189, 0.20},
+		{proto.Class_ClassRogue, 1260189, 0.20},
+		{proto.Class_ClassPriest, 1260201, 0.30},
+		{proto.Class_ClassMage, 1260201, 0.30},
+		{proto.Class_ClassWarlock, 1260201, 0.30},
+	} {
+		trigger := touchOfTheGraveTrigger(nil, c.class)
+		if trigger.ActionID.SpellID != c.id || trigger.ProcChance != c.chance {
+			t.Errorf("%v: passive %d at %v, want %d at %v", c.class, trigger.ActionID.SpellID, trigger.ProcChance, c.id, c.chance)
+		}
+		if trigger.ICD != 25*time.Second {
+			t.Errorf("%v: internal cooldown is %v, want 25s", c.class, trigger.ICD)
+		}
 	}
-	if trigger.ICD != time.Second {
-		t.Errorf("internal cooldown is %v, want 1s", trigger.ICD)
-	}
+	trigger := touchOfTheGraveTrigger(nil, proto.Class_ClassPaladin)
 	if trigger.Callback != CallbackOnSpellHitDealt {
 		t.Errorf("callback is %v, want direct hits only (the mask has no periodic bit)", trigger.Callback)
 	}

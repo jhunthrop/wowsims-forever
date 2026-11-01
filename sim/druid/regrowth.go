@@ -12,8 +12,8 @@ const (
 )
 
 // registerRegrowthSpell registers Regrowth, ranks 1 to 9: a 2 s cast that
-// heals at once and leaves a heal over time on the target. Only the direct
-// heal can critically strike (Improved Regrowth).
+// heals at once and leaves a heal over time on the target. Both halves can
+// critically strike, and Improved Regrowth's crit chance reaches both.
 func (druid *Druid) registerRegrowthSpell() {
 	druid.Regrowth = druid.registerHealingRanks(regrowthTable, func(rank int, spec healingRank) core.SpellConfig {
 		config := druid.healingSpellConfig(rank, spec, SpellCode_DruidRegrowth, DruidSpellMaskRegrowth)

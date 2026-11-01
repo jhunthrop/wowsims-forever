@@ -121,8 +121,11 @@ func TestEachLightwellChargeHealsFiveTicksOf320(t *testing.T) {
 	if got := agent.LightwellCharges(); got != 0 {
 		t.Errorf("a used Lightwell has %d charges left, want 0", got)
 	}
-	if healing := lightwellHealing(t, agent); healing != 5*5*320 {
-		t.Errorf("Lightwell renew healed %.0f, want 25 ticks of 320 = 8000", healing)
+	// A tick crits for 1.5 times as much: Lightwell Renew 27874 carries
+	// PERIODIC_CAN_CRIT in 1.60.1.70707.
+	crits := lightwellCritTicks(t, agent)
+	if healing, want := lightwellHealing(t, agent), 320*(25-crits+1.5*crits); healing != want {
+		t.Errorf("Lightwell renew healed %.0f, want 25 ticks of 320 (%v of them critical) = %.0f", healing, crits, want)
 	}
 }
 
@@ -140,6 +143,16 @@ func TestBeingAttackedCancelsALightwellRenew(t *testing.T) {
 }
 
 // lightwellHealing is the raw health the top rank's renew has dealt.
+// lightwellCritTicks is how many of the Lightwell renew's ticks crit.
+func lightwellCritTicks(t *testing.T, agent *HealingPriest) float64 {
+	t.Helper()
+	var crits int32
+	for _, metrics := range agent.GetSpell(core.ActionID{SpellID: 27874}).SpellMetrics {
+		crits += metrics.CritTicks
+	}
+	return float64(crits)
+}
+
 func lightwellHealing(t *testing.T, agent *HealingPriest) float64 {
 	t.Helper()
 	renew := agent.GetSpell(core.ActionID{SpellID: 27874})

@@ -103,9 +103,10 @@ func (druid *Druid) directHealEffects(spec healingRank) core.ApplySpellResults {
 // healOverTimeConfig is the periodic half of a heal: numTicks ticks of the
 // rank's tick effect, tickLength apart, each landing as one heal.
 //
-// Periodic heals do not critically strike: no source states that Forever's
-// do (research/08-stats.md section 1.1), and core.DotConfig.CanCrit is the
-// switch for when the beta says they do.
+// The ticks can critically strike: every trained rank carries the client's
+// PERIODIC_CAN_CRIT flag (1.60.1.70707), which core.Dot reads for a heal
+// over time, and Blizzard's beta notes of 24 September 2026 say "now
+// Rejuvenation can land critical hits".
 func (druid *Druid) healOverTimeConfig(name string, rank int, spec healingRank, numTicks int32, tickLength time.Duration) core.DotConfig {
 	tickCenter := spec.tick.roll.Center(int(druid.Level))
 	return core.DotConfig{

@@ -17,6 +17,9 @@ const (
 	defaultRotationPath = "../../../ui/restoration_druid/apls/forever_restoration.apl.json"
 	// wildGrowthTickDecay is the 5% Wild Growth moves from tick to tick.
 	wildGrowthTickDecay = 0.05
+	// healCritMultiplier is an untalented heal's critical multiplier: heals
+	// over time crit since client 1.60.1.70707 marks them PERIODIC_CAN_CRIT.
+	healCritMultiplier = 1.5
 )
 
 // castOnce is a rotation that casts the spell once, at the start, at the
@@ -67,25 +70,30 @@ func totalCasts(result *proto.RaidSimResult, spellID int32) int32 {
 	return casts
 }
 
-var tickLog = regexp.MustCompile(`\[Target Dummy 1 \(#2\)\] \{SpellID: (\d+)\} tick Hit for ([0-9.]+) healing`)
+var tickLog = regexp.MustCompile(`\[Target Dummy 1 \(#2\)\] \{SpellID: (\d+)\} tick (Hit|Crit) for ([0-9.]+) healing`)
 
-// tickHeals is the amounts the spell's ticks landed on the first fake member.
+// tickHeals is the amounts the spell's ticks landed on the first fake member,
+// a critical tick taken back to what it would have healed without the crit.
 func tickHeals(result *proto.RaidSimResult, spellID int32) []float64 {
 	var heals []float64
 	for _, match := range tickLog.FindAllStringSubmatch(result.Logs, -1) {
 		if id, _ := strconv.Atoi(match[1]); int32(id) != spellID {
 			continue
 		}
-		amount, _ := strconv.ParseFloat(match[2], 64)
+		amount, _ := strconv.ParseFloat(match[3], 64)
+		if match[2] == "Crit" {
+			amount /= healCritMultiplier
+		}
 		heals = append(heals, amount)
 	}
 	return heals
 }
 
-// assertPartyHealing checks the spell ticked ticks times for want on every
-// unit in the healer's party (the healer and fake members 1 to 4) and
-// never on the tank, who stands in the other party.
-func assertPartyHealing(t *testing.T, result *proto.RaidSimResult, spellID int32, ticks int32, want float64) {
+// assertPartyHealing checks the spell ticked ticks times on every unit in
+// the healer's party (the healer and fake members 1 to 4), for perTick on a
+// plain tick and healCritMultiplier times that on a critical one, and never
+// on the tank, who stands in the other party.
+func assertPartyHealing(t *testing.T, result *proto.RaidSimResult, spellID int32, ticks int32, perTick float64) {
 	t.Helper()
 	byUnit := metricsByUnit(result, spellID)
 	for player := int32(healsim.HealerIndex); player < healsim.TankIndex; player++ {
@@ -95,11 +103,12 @@ func assertPartyHealing(t *testing.T, result *proto.RaidSimResult, spellID int32
 			t.Errorf("spell %d never reached unit %d of the healer's party", spellID, unit)
 			continue
 		}
-		if got.Ticks != ticks || math.Abs(got.Healing-want) > 0.01*want {
-			t.Errorf("spell %d on unit %d: %d ticks for %.1f, want %d for %.1f", spellID, unit, got.Ticks, got.Healing, ticks, want)
+		want := perTick * (float64(got.Ticks) + healCritMultiplier*float64(got.CritTicks))
+		if got.Ticks+got.CritTicks != ticks || math.Abs(got.Healing-want) > 0.01*want {
+			t.Errorf("spell %d on unit %d: %d ticks (%d crits) for %.1f, want %d for %.1f", spellID, unit, got.Ticks+got.CritTicks, got.CritTicks, got.Healing, ticks, want)
 		}
 	}
-	if tank, ok := byUnit[unitIndex(healsim.TankIndex)]; ok && tank.Ticks != 0 {
+	if tank, ok := byUnit[unitIndex(healsim.TankIndex)]; ok && tank.Ticks+tank.CritTicks != 0 {
 		t.Errorf("spell %d healed the tank in the other party: %+v", spellID, tank)
 	}
 }
@@ -110,7 +119,7 @@ func TestTranquilityHealsTheWholePartyEveryTwoSeconds(t *testing.T) {
 	result := runOnce(t, player, 20)
 
 	const rank4TickAtLevel60, coefficient = 285, 0.067
-	assertPartyHealing(t, result, 9863, 5, 5*(rank4TickAtLevel60+coefficient*power))
+	assertPartyHealing(t, result, 9863, 5, rank4TickAtLevel60+coefficient*power)
 	if casts := totalCasts(result, 9863); casts != 1 {
 		t.Errorf("Tranquility cast %d times, want once", casts)
 	}
@@ -124,7 +133,7 @@ func TestWildGrowthHealsTheTargetsPartyOverSevenTicksThatFadeAway(t *testing.T) 
 
 	const rank3TickAtLevel60, coefficient = 97, 0.033
 	average := rank3TickAtLevel60 + coefficient*power
-	assertPartyHealing(t, result, 1238215, 7, 7*average)
+	assertPartyHealing(t, result, 1238215, 7, average)
 
 	ticks := tickHeals(result, 1238215)
 	if len(ticks) != 7 {

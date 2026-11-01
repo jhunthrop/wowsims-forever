@@ -358,7 +358,7 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 		DamageMultiplier: config.DamageMultiplier,
 		BonusCoefficient: config.BonusCoefficient,
 
-		CanCrit:        config.CanCrit || (!isHot && periodicDamageCanCrit(config.Spell)),
+		CanCrit:        config.CanCrit || periodicCanCrit(config.Spell, isHot),
 		CritMultiplier: config.CritMultiplier,
 	}
 
@@ -389,6 +389,18 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 	}
 }
 
+// periodicCanCrit is whether a dot's or heal over time's ticks may crit. A
+// heal over time follows the client flag alone: every trained Rejuvenation,
+// Regrowth, Tranquility, Wild Growth, Renew, Riptide and Healing Stream rank
+// carries PERIODIC_CAN_CRIT in 1.60.1.70707, and Blizzard's beta notes of 24
+// September 2026 say "now Rejuvenation can land critical hits".
+func periodicCanCrit(spell *Spell, isHot bool) bool {
+	if isHot {
+		return clientPeriodicCanCritSpell(spell.SpellID)
+	}
+	return periodicDamageCanCrit(spell)
+}
+
 // periodicDamageCanCrit is Forever's periodic crit rule (owner,
 // 2026-10-31): a periodic damage effect crits if it is a bleed (Deep
 // Wounds included), OR a dot that is not channelled (Ignite included), OR
@@ -409,7 +421,7 @@ func (spell *Spell) periodicIsBleed() bool {
 }
 
 // clientPeriodicCanCritSpell reports whether the client marks spellID's
-// periodic damage PERIODIC_CAN_CRIT (periodic_crit_auto_gen.go).
+// periodic damage or healing PERIODIC_CAN_CRIT (periodic_crit_auto_gen.go).
 func clientPeriodicCanCritSpell(spellID int32) bool {
 	_, ok := clientPeriodicCanCrit[spellID]
 	return ok

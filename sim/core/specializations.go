@@ -1,53 +1,8 @@
 package core
 
-import (
-	"github.com/wowsims/classic/sim/core/proto"
-	"github.com/wowsims/classic/sim/core/stats"
-)
-
 ///////////////////////////////////////////////////////////////////////////
 //                            Weapon Specialization Auras
 ///////////////////////////////////////////////////////////////////////////
-
-// Forever's Orc Axe Specialization (20574) is not vanilla's +5 weapon
-// skill: the client states it as 1% critical strike chance with all spells
-// and attacks while an axe or two-handed axe is equipped. Either hand
-// qualifies; two-handers share the one-hand WeaponType. Human and Dwarf
-// lost their weapon racials in the October rework (racials.go).
-const axeSpecializationCritPercent = 1
-
-func (character *Character) AxeSpecializationAura() *Aura {
-	return character.weaponSpecializationCritAura("Axe Specialization", proto.WeaponType_WeaponTypeAxe, axeSpecializationCritPercent)
-}
-
-// HasWeaponOfType reports whether either hand holds a weapon of the type.
-func (character *Character) HasWeaponOfType(weaponType proto.WeaponType) bool {
-	for _, weapon := range []*Item{character.GetMHWeapon(), character.GetOHWeapon()} {
-		if weapon != nil && weapon.WeaponType == weaponType {
-			return true
-		}
-	}
-	return false
-}
-
-func (character *Character) weaponSpecializationCritAura(label string, weaponType proto.WeaponType, critPercent float64) *Aura {
-	bonus := critPercent * CritRatingPerCritChance
-	return character.GetOrRegisterAura(Aura{
-		Label:      label,
-		BuildPhase: CharacterBuildPhaseGear,
-		Duration:   NeverExpires,
-		OnGain: func(aura *Aura, sim *Simulation) {
-			if character.HasWeaponOfType(weaponType) {
-				character.AddBuildPhaseStatDynamic(sim, stats.Crit, bonus)
-			}
-		},
-		OnExpire: func(aura *Aura, sim *Simulation) {
-			if character.HasWeaponOfType(weaponType) {
-				character.AddBuildPhaseStatDynamic(sim, stats.Crit, -bonus)
-			}
-		},
-	})
-}
 
 func (character *Character) DaggerSpecializationAura() *Aura {
 	return character.GetOrRegisterAura(Aura{

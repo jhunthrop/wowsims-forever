@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Generate sim/core/periodic_crit_auto_gen.go: every spell whose periodic
-damage the Forever client lets crit.
+damage or healing the Forever client lets crit.
 
 Forever's periodic damage can crit, spell by spell. The client says which
 spells with SpellMisc Attributes_8 bit 0x200 (SPELL_ATTR8_PERIODIC_CAN_CRIT):
@@ -10,10 +10,13 @@ channels (Blizzard, Rain of Fire, Hurricane) and server-only tick spells
 (Ignite, Deep Wounds) do not. The engine's rule (core.periodicDamageCanCrit)
 lets every bleed and every dot that is not channelled crit regardless, so
 this set decides only the channels: Mind Flay crits, Blizzard does not.
+Heals over time follow the flag alone (core.Dot, isHot): every trained
+Rejuvenation, Regrowth, Tranquility, Wild Growth, Renew, Riptide and Healing
+Stream rank carries it, NPC copies do not.
 
     SpellMisc.csv    Attributes_8, SpellID
     SpellEffect.csv  EffectAura (3 periodic damage, 53 periodic leech,
-                     89 periodic damage percent)
+                     89 periodic damage percent, 8 periodic heal)
     SpellName.csv    Name_lang (the comment beside each id)
 
 Usage (from the fork root):
@@ -30,6 +33,7 @@ from pathlib import Path
 
 PERIODIC_CAN_CRIT = 0x200
 PERIODIC_DAMAGE_AURAS = {"3", "53", "89"}
+PERIODIC_HEAL_AURAS = {"8"}
 FORK_ROOT = Path(__file__).resolve().parent.parent.parent
 OUT = FORK_ROOT / "sim" / "core" / "periodic_crit_auto_gen.go"
 
@@ -54,7 +58,7 @@ def periodic_crit_spells(raw: Path) -> list[tuple[int, str]]:
         spell_id = int(row["SpellID"])
         if not base_difficulty(row) or not int(row["Attributes_8"]) & PERIODIC_CAN_CRIT:
             continue
-        if auras.get(spell_id, set()) & PERIODIC_DAMAGE_AURAS:
+        if auras.get(spell_id, set()) & (PERIODIC_DAMAGE_AURAS | PERIODIC_HEAL_AURAS):
             found.add(spell_id)
     return [(spell_id, names.get(spell_id, "")) for spell_id in sorted(found)]
 
@@ -66,8 +70,9 @@ def render(build: str, spells: list[tuple[int, str]]) -> str:
         "//\n"
         f"// Client build: {build}\n"
         "//\n"
-        "// Every spell with a periodic damage effect whose SpellMisc Attributes_8\n"
-        "// carries 0x200 (SPELL_ATTR8_PERIODIC_CAN_CRIT): its ticks can crit.\n"
+        "// Every spell with a periodic damage or healing effect whose SpellMisc\n"
+        "// Attributes_8 carries 0x200 (SPELL_ATTR8_PERIODIC_CAN_CRIT): its ticks\n"
+        "// can crit.\n"
         "// Regenerate with `make periodiccrit`.\n\n"
         "package core\n\n"
         "var clientPeriodicCanCrit = map[int32]struct{}{\n"
