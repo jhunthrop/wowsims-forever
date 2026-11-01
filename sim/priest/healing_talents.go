@@ -76,7 +76,7 @@ func (priest *Priest) applyDeclarativeHealingTalents() {
 	if rank := rankOf("mental_agility", t.MentalAgility); rank > 0 {
 		mods = append(mods, core.SpellModConfig{
 			Kind:      core.SpellMod_PowerCost_Pct,
-			ClassMask: PriestSpellMaskSmite | PriestSpellMaskHolyFire | PriestSpellMaskInstantCast,
+			ClassMask: PriestSpellMaskMentalAgility,
 			IntValue:  mentalAgilityCostPct[rank],
 		})
 	}

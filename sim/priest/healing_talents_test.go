@@ -50,20 +50,51 @@ func TestPerRankTablesCoverEveryRankOfTheirTalent(t *testing.T) {
 	}
 }
 
-// TestHealingMasksAreDistinctFromTheShadowOnes: Twin Disciplines and Mental
-// Agility union the Shadow and healing masks, so a shared bit would make a
+// TestHealingMasksAreDistinctFromTheShadowOnes: Twin Disciplines unions
+// the Shadow and healing masks, so a shared bit would make a
 // Shadow talent touch a heal.
 func TestHealingMasksAreDistinctFromTheShadowOnes(t *testing.T) {
 	if PriestSpellMaskInstantHealing&PriestSpellMaskInstantShadowDamage != 0 {
 		t.Error("the instant healing and instant Shadow damage masks share a bit")
 	}
-	instants := PriestSpellMaskInstantCast
+	instants := PriestSpellMaskInstantShadowDamage | PriestSpellMaskInstantHealing
 	for name, mask := range map[string]uint64{
 		"Smite": PriestSpellMaskSmite, "Holy Fire": PriestSpellMaskHolyFire,
 		"Flash Heal": PriestSpellMaskFlashHeal, "Greater Heal": PriestSpellMaskGreaterHeal,
 	} {
 		if instants&mask != 0 {
 			t.Errorf("%s has a cast time but sits in the instant-cast mask", name)
+		}
+	}
+}
+
+// TestMentalAgilityFollowsTheClientMask: Mental Agility's text says
+// "Smite, Holy Fire, and instant cast spells", but its cost modifier
+// (14520, SpellEffect 687728, aura 108 misc 14) names spells by class
+// mask: Smite, Holy Fire, Shadow Word: Pain, Devouring Plague, Renew,
+// Power Word: Shield, Holy Nova, Prayer of Mending and Vampiric Embrace
+// among the spells the package registers. Mind Flay (mask 0 bit 23),
+// Shadow Word: Death (mask 1 bit 1), Penance (mask 1 bit 23) and
+// Desperate Prayer (mask 0 bit 24) are outside it.
+func TestMentalAgilityFollowsTheClientMask(t *testing.T) {
+	for name, mask := range map[string]uint64{
+		"Smite": PriestSpellMaskSmite, "Holy Fire": PriestSpellMaskHolyFire,
+		"Shadow Word: Pain": PriestSpellMaskShadowWordPain, "Devouring Plague": PriestSpellMaskDevouringPlague,
+		"Renew": PriestSpellMaskRenew, "Power Word: Shield": PriestSpellMaskPowerWordShield,
+		"Holy Nova": PriestSpellMaskHolyNova, "Prayer of Mending": PriestSpellMaskPrayerOfMending,
+		"Vampiric Embrace": PriestSpellMaskVampiricEmbrace,
+	} {
+		if PriestSpellMaskMentalAgility&mask == 0 {
+			t.Errorf("Mental Agility leaves out %s, which its client mask names", name)
+		}
+	}
+	for name, mask := range map[string]uint64{
+		"Mind Flay": PriestSpellMaskMindFlay, "Shadow Word: Death": PriestSpellMaskShadowWordDeath,
+		"Penance": PriestSpellMaskPenance, "Desperate Prayer": PriestSpellMaskDesperatePrayer,
+		"Flash Heal": PriestSpellMaskFlashHeal, "Mind Blast": PriestSpellMaskMindBlast,
+	} {
+		if PriestSpellMaskMentalAgility&mask != 0 {
+			t.Errorf("Mental Agility cuts %s, which its client mask does not name", name)
 		}
 	}
 }

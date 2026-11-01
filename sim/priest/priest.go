@@ -91,11 +91,14 @@ const PriestSpellMaskInstantShadowDamage = PriestSpellMaskMindFlay | PriestSpell
 const PriestSpellMaskInstantHealing = PriestSpellMaskRenew | PriestSpellMaskPenance |
 	PriestSpellMaskHolyNova | PriestSpellMaskPrayerOfMending | PriestSpellMaskDesperatePrayer
 
-// PriestSpellMaskInstantCast is every spell the package registers with a
-// client cast_time_ms of 0, which is what Mental Agility's "instant cast
-// spells" reads.
-const PriestSpellMaskInstantCast = PriestSpellMaskInstantShadowDamage | PriestSpellMaskInstantHealing |
-	PriestSpellMaskPowerWordShield | PriestSpellMaskVampiricEmbrace
+// PriestSpellMaskMentalAgility is what Mental Agility's cost modifier
+// names: the client mask of 14520 (SpellEffect 687728, aura 108 misc 14),
+// not its "instant cast spells" text. It leaves out Mind Flay, Shadow
+// Word: Death, Penance and Desperate Prayer.
+const PriestSpellMaskMentalAgility = PriestSpellMaskSmite | PriestSpellMaskHolyFire |
+	PriestSpellMaskShadowWordPain | PriestSpellMaskDevouringPlague | PriestSpellMaskRenew |
+	PriestSpellMaskPowerWordShield | PriestSpellMaskHolyNova | PriestSpellMaskPrayerOfMending |
+	PriestSpellMaskVampiricEmbrace
 
 type Priest struct {
 	core.Character
