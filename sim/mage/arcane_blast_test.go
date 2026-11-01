@@ -139,7 +139,7 @@ func TestArcaneBlastAndMissileBarrageCastAndDealDamage(t *testing.T) {
 	// chance on Arcane Blast) by activating the buff directly, then
 	// confirm arcane_missiles.go's ApplyEffects reads it - cost zeroed
 	// and ticking twice as fast.
-	arcaneMissiles := built.ArcaneMissiles[ArcaneMissilesRanks]
+	arcaneMissiles := topRank(t, built.ArcaneMissiles)
 	if arcaneMissiles == nil {
 		t.Fatal("level-60 mage has no top-rank Arcane Missiles registered")
 	}

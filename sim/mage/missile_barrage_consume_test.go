@@ -18,7 +18,7 @@ func TestMissileBarrageIsSpentByTheFirstArcaneMissiles(t *testing.T) {
 	if built.MissileBarrageAura == nil {
 		t.Fatal("Missile Barrage is not registered with the talent taken")
 	}
-	am := built.ArcaneMissiles[ArcaneMissilesRanks]
+	am := topRank(t, built.ArcaneMissiles)
 
 	built.MissileBarrageAura.Activate(sim)
 	if !am.Cast(sim, target) {
