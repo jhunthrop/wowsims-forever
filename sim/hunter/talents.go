@@ -624,6 +624,20 @@ var improvedTrackingMobTypes = []proto.MobType{
 	proto.MobType_MobTypeUndead,
 }
 
+// improvedTrackingApplies says whether a hunter tracks this target. A
+// target of no stated type (MobTypeUnknown) is the type-neutral boss the
+// site ranks against, and every Phase 1 raid boss is a trackable type
+// (Humanoid: Lucifron, Gehennas, Shazzrah, Sulfuron, Majordomo; Elemental:
+// Garr, Geddon, Ragnaros; Giant: Golemagg; Beast: Magmadar; Dragonkin:
+// Onyxia), so the hunter tracks it. A training dummy is no creature a
+// Track spell finds.
+func improvedTrackingApplies(mobType proto.MobType, dummy bool) bool {
+	if mobType == proto.MobType_MobTypeUnknown {
+		return !dummy
+	}
+	return slices.Contains(improvedTrackingMobTypes, mobType)
+}
+
 // applyImprovedTracking grants the damage bonus against every listed
 // type unconditionally, rather than against only the one type a
 // Track-spell selection would name: proto.Hunter_Options carries no
@@ -643,7 +657,7 @@ func (hunter *Hunter) applyImprovedTracking() {
 	multiplier := 1 + 0.01*float64(hunter.Talents.ImprovedTracking)
 	hunter.Env.RegisterPostFinalizeEffect(func() {
 		for _, target := range hunter.Env.Encounter.AllTargetUnits {
-			if !slices.Contains(improvedTrackingMobTypes, target.MobType) {
+			if !improvedTrackingApplies(target.MobType, hunter.Env.Encounter.Dummy) {
 				continue
 			}
 			for _, at := range hunter.AttackTables[target.UnitIndex] {

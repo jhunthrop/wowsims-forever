@@ -468,3 +468,52 @@ func floatsClose(got, want float64) bool {
 	diff := got - want
 	return diff > -epsilon && diff < epsilon
 }
+
+// improvedTrackingRatioAgainst builds a rank-5 and a rank-0 hunter against
+// one target of mobType and returns their damage-dealt multiplier ratio.
+func improvedTrackingRatioAgainst(t *testing.T, mobType proto.MobType, dummy bool) float64 {
+	t.Helper()
+	mult := func(rank int32) float64 {
+		player := core.WithSpec(
+			&proto.Player{
+				Class: proto.Class_ClassHunter, Race: proto.Race_RaceOrc, Level: 60,
+				Equipment: &proto.EquipmentSpec{}, Buffs: &proto.IndividualBuffs{},
+				TalentsString:      buildTalentsString(t, "improved_tracking", rank),
+				DistanceFromTarget: 5,
+			},
+			&proto.Player_Hunter{Hunter: &proto.Hunter{Options: &proto.Hunter_Options{
+				Ammo: proto.Hunter_Options_RazorArrow, PetType: proto.Hunter_Options_PetNone,
+			}}},
+		)
+		raid := core.SinglePlayerRaidProto(player, &proto.PartyBuffs{}, &proto.RaidBuffs{}, &proto.Debuffs{})
+		target := *core.DefaultTargetProtoLvl60
+		target.MobType = mobType
+		env, _, _ := core.NewEnvironment(raid, &proto.Encounter{
+			Targets: []*proto.Target{&target}, TargetDummy: dummy,
+		}, true)
+		h := env.Raid.Parties[0].Players[0].(*Hunter)
+		for _, at := range h.AttackTables[env.Encounter.AllTargetUnits[0].UnitIndex] {
+			return at.DamageDealtMultiplier
+		}
+		return 1
+	}
+	return mult(5) / mult(0)
+}
+
+// A boss of no stated type is still a trackable boss: every Phase 1 raid
+// boss is a Humanoid, Elemental, Giant, Beast or Dragonkin (Wowhead
+// classic NPC tooltips 12118 ... 10184, read 2026-10-31), and the hunter
+// tracks whichever it is. The site's ranker fights exactly that
+// type-neutral target, so Improved Tracking counts there. A training
+// dummy has no type a Track spell finds, so it gets nothing.
+func TestImprovedTrackingCountsOnATypeNeutralBossButNotOnADummy(t *testing.T) {
+	if got := improvedTrackingRatioAgainst(t, proto.MobType_MobTypeUnknown, false); !floatsClose(got, 1.05) {
+		t.Errorf("type-neutral boss: ratio %f, want 1.05", got)
+	}
+	if got := improvedTrackingRatioAgainst(t, proto.MobType_MobTypeUnknown, true); !floatsClose(got, 1) {
+		t.Errorf("training dummy: ratio %f, want 1", got)
+	}
+	if got := improvedTrackingRatioAgainst(t, proto.MobType_MobTypeMechanical, false); !floatsClose(got, 1) {
+		t.Errorf("mechanical target: ratio %f, want 1 (no Track Mechanical)", got)
+	}
+}
