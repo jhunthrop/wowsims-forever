@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/core/stats"
 )
 
 // A "Bent Wand"-shaped item: nonzero ID (0 means "nothing equipped" to
@@ -88,6 +89,46 @@ func TestRegisterShootSpellUsesTheEquippedWand(t *testing.T) {
 	wantAverage := (testWand().WeaponDamageMin + testWand().WeaponDamageMax) / 2
 	if wand.AverageDamage() != wantAverage {
 		t.Errorf("equipped wand's AverageDamage() = %v, want %v (the wand's own min/max midpoint)", wand.AverageDamage(), wantAverage)
+	}
+}
+
+// Torch of Light (279246) states "91 - 170 Arcane Damage" (client ItemSparse
+// DamageType 6; Wowhead Forever tooltip). A wand hit is magic of that school,
+// so armor never reduces it and spell damage never adds to it.
+func TestShootDealsTheWandsOwnSchool(t *testing.T) {
+	item := ItemFromProto(&proto.SimItem{
+		Id:               279246,
+		RangedWeaponType: proto.RangedWeaponType_RangedWeaponTypeWand,
+		WeaponDamageMin:  91,
+		WeaponDamageMax:  170,
+		WeaponSpeed:      1.7,
+		DamageSchool:     proto.SpellSchool_SpellSchoolArcane,
+	})
+	character := &Character{}
+	character.Equipment[proto.ItemSlot_ItemSlotRanged] = item
+
+	spell := character.RegisterShootSpell(1)
+	if spell == nil {
+		t.Fatal("RegisterShootSpell returned nil for a wand")
+	}
+	if spell.SpellSchool != SpellSchoolArcane {
+		t.Errorf("Shoot SpellSchool = %v, want SpellSchoolArcane (the wand's own damage school)", spell.SpellSchool)
+	}
+	if spell.SchoolIndex == stats.SchoolIndexPhysical {
+		t.Errorf("Shoot reads the physical school index, so armor would reduce it")
+	}
+	if spell.BonusCoefficient != 0 {
+		t.Errorf("Shoot BonusCoefficient = %v, want 0 (spell damage does not add to a wand)", spell.BonusCoefficient)
+	}
+}
+
+func TestShootWithNoStatedSchoolStaysPhysical(t *testing.T) {
+	character := &Character{}
+	character.Equipment[proto.ItemSlot_ItemSlotRanged] = testWand()
+
+	spell := character.RegisterShootSpell(1)
+	if spell.SpellSchool != SpellSchoolPhysical {
+		t.Errorf("Shoot SpellSchool = %v, want SpellSchoolPhysical when the item states no school", spell.SpellSchool)
 	}
 }
 

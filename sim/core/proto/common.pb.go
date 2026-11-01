@@ -5458,8 +5458,12 @@ type SimItem struct {
 	RequiredLevel       int32                      `protobuf:"varint,21,opt,name=required_level,json=requiredLevel,proto3" json:"required_level,omitempty"`
 	FactionRestriction  SimItem_FactionRestriction `protobuf:"varint,22,opt,name=faction_restriction,json=factionRestriction,proto3,enum=proto.SimItem_FactionRestriction" json:"faction_restriction,omitempty"`
 	RandomSuffixOptions []int32                    `protobuf:"varint,23,rep,packed,name=random_suffix_options,json=randomSuffixOptions,proto3" json:"random_suffix_options,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// The school a weapon's own hits deal (the client's ItemSparse
+	// DamageType). Every playable wand is magical: Shoot deals this school
+	// and armor does not reduce it. Unset reads as physical. Forever addition.
+	DamageSchool  SpellSchool `protobuf:"varint,24,opt,name=damage_school,json=damageSchool,proto3,enum=proto.SpellSchool" json:"damage_school,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SimItem) Reset() {
@@ -5630,6 +5634,13 @@ func (x *SimItem) GetRandomSuffixOptions() []int32 {
 		return x.RandomSuffixOptions
 	}
 	return nil
+}
+
+func (x *SimItem) GetDamageSchool() SpellSchool {
+	if x != nil {
+		return x.DamageSchool
+	}
+	return SpellSchool_SpellSchoolPhysical
 }
 
 // Contains only the Enchant info needed by the sim.
@@ -6603,7 +6614,7 @@ const file_common_proto_rawDesc = "" +
 	"\vSimDatabase\x12$\n" +
 	"\x05items\x18\x01 \x03(\v2\x0e.proto.SimItemR\x05items\x12@\n" +
 	"\x0frandom_suffixes\x18\x05 \x03(\v2\x17.proto.ItemRandomSuffixR\x0erandomSuffixes\x12-\n" +
-	"\benchants\x18\x02 \x03(\v2\x11.proto.SimEnchantR\benchants\"\xcd\a\n" +
+	"\benchants\x18\x02 \x03(\v2\x11.proto.SimEnchantR\benchants\"\x86\b\n" +
 	"\aSimItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x125\n" +
 	"\x0fclass_allowlist\x18\x11 \x03(\x0e2\f.proto.ClassR\x0eclassAllowlist\x12\x12\n" +
@@ -6626,7 +6637,8 @@ const file_common_proto_rawDesc = "" +
 	"\x06unique\x18\x14 \x01(\bR\x06unique\x12%\n" +
 	"\x0erequired_level\x18\x15 \x01(\x05R\rrequiredLevel\x12R\n" +
 	"\x13faction_restriction\x18\x16 \x01(\x0e2!.proto.SimItem.FactionRestrictionR\x12factionRestriction\x122\n" +
-	"\x15random_suffix_options\x18\x17 \x03(\x05R\x13randomSuffixOptions\"\x84\x01\n" +
+	"\x15random_suffix_options\x18\x17 \x03(\x05R\x13randomSuffixOptions\x127\n" +
+	"\rdamage_school\x18\x18 \x01(\x0e2\x12.proto.SpellSchoolR\fdamageSchool\"\x84\x01\n" +
 	"\x12FactionRestriction\x12#\n" +
 	"\x1fFACTION_RESTRICTION_UNSPECIFIED\x10\x00\x12%\n" +
 	"!FACTION_RESTRICTION_ALLIANCE_ONLY\x10\x01\x12\"\n" +
@@ -7359,20 +7371,21 @@ var file_common_proto_depIdxs = []int32{
 	11, // 67: proto.SimItem.hand_type:type_name -> proto.HandType
 	12, // 68: proto.SimItem.ranged_weapon_type:type_name -> proto.RangedWeaponType
 	46, // 69: proto.SimItem.faction_restriction:type_name -> proto.SimItem.FactionRestriction
-	47, // 70: proto.UnitReference.type:type_name -> proto.UnitReference.Type
-	69, // 71: proto.UnitReference.owner:type_name -> proto.UnitReference
-	45, // 72: proto.ActionID.other_id:type_name -> proto.OtherAction
-	70, // 73: proto.Cooldown.id:type_name -> proto.ActionID
-	71, // 74: proto.Cooldowns.cooldowns:type_name -> proto.Cooldown
-	76, // 75: proto.CustomRotation.spells:type_name -> proto.CustomSpell
-	64, // 76: proto.ItemSwap.mh_item:type_name -> proto.ItemSpec
-	64, // 77: proto.ItemSwap.oh_item:type_name -> proto.ItemSpec
-	64, // 78: proto.ItemSwap.ranged_item:type_name -> proto.ItemSpec
-	79, // [79:79] is the sub-list for method output_type
-	79, // [79:79] is the sub-list for method input_type
-	79, // [79:79] is the sub-list for extension type_name
-	79, // [79:79] is the sub-list for extension extendee
-	0,  // [0:79] is the sub-list for field type_name
+	16, // 70: proto.SimItem.damage_school:type_name -> proto.SpellSchool
+	47, // 71: proto.UnitReference.type:type_name -> proto.UnitReference.Type
+	69, // 72: proto.UnitReference.owner:type_name -> proto.UnitReference
+	45, // 73: proto.ActionID.other_id:type_name -> proto.OtherAction
+	70, // 74: proto.Cooldown.id:type_name -> proto.ActionID
+	71, // 75: proto.Cooldowns.cooldowns:type_name -> proto.Cooldown
+	76, // 76: proto.CustomRotation.spells:type_name -> proto.CustomSpell
+	64, // 77: proto.ItemSwap.mh_item:type_name -> proto.ItemSpec
+	64, // 78: proto.ItemSwap.oh_item:type_name -> proto.ItemSpec
+	64, // 79: proto.ItemSwap.ranged_item:type_name -> proto.ItemSpec
+	80, // [80:80] is the sub-list for method output_type
+	80, // [80:80] is the sub-list for method input_type
+	80, // [80:80] is the sub-list for extension type_name
+	80, // [80:80] is the sub-list for extension extendee
+	0,  // [0:80] is the sub-list for field type_name
 }
 
 func init() { file_common_proto_init() }

@@ -43,8 +43,10 @@ func (character *Character) RegisterShootSpell(wandDamageMultiplier float64) *Sp
 	weapon := character.WeaponFromRanged()
 
 	return character.GetOrRegisterSpell(SpellConfig{
-		ActionID:    ActionID{SpellID: ShootSpellID},
-		SpellSchool: SpellSchoolPhysical,
+		ActionID: ActionID{SpellID: ShootSpellID},
+		// The wand's own school (Torch of Light: Arcane). A magic school is
+		// never reduced by armor; an item that states none stays physical.
+		SpellSchool: weapon.GetSpellSchool(),
 		DefenseType: DefenseTypeMagic,
 		ProcMask:    ProcMaskRangedAuto,
 		Flags:       SpellFlagAPL | SpellFlagMeleeMetrics | SpellFlagCastTimeNoGCD,
@@ -71,10 +73,10 @@ func (character *Character) RegisterShootSpell(wandDamageMultiplier float64) *Sp
 
 		DamageMultiplier: wandDamageMultiplier,
 		ThreatMultiplier: 1,
-		// Physical school: picks up flat "bonus physical damage" effects the same way a
-		// melee or ranged auto attack does (see EnableAutoAttacks), not attack power - wand
-		// damage in Classic never scales off AP.
-		BonusCoefficient: 1,
+		// A physical wand picks up flat "bonus physical damage" the way an auto attack
+		// does (see EnableAutoAttacks); a magic one takes no spell damage. Wand damage
+		// never scales off attack power or spell power.
+		BonusCoefficient: TernaryFloat64(weapon.GetSpellSchool() == SpellSchoolPhysical, 1, 0),
 
 		ApplyEffects: func(sim *Simulation, target *Unit, spell *Spell) {
 			baseDamage := weapon.CalculateWeaponDamage(sim, 0)

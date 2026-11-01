@@ -999,6 +999,11 @@ message SimItem {
 	FactionRestriction faction_restriction = 22;
 
 	repeated int32 random_suffix_options = 23;
+
+	// The school a weapon's own hits deal (the client's ItemSparse
+	// DamageType). Every playable wand is magical: Shoot deals this school
+	// and armor does not reduce it. Unset reads as physical. Forever addition.
+	SpellSchool damage_school = 24;
 }
 
 // Extra enum for describing which items are eligible for an enchant, when
