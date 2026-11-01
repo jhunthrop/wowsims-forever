@@ -351,6 +351,12 @@ message UnitMetrics {
 	// Chance (0-1) representing probability of death. Used for tank sims.
 	double chance_of_death = 12;
 
+	// Average seconds per iteration a pet spent summoned inside the fight
+	// (from the pull to the iteration's end). Zero for a pet that was never
+	// summoned, or summoned and dismissed before the pull. Always zero for a
+	// player. Forever addition; see PORTING.md.
+	double pet_active_seconds_avg = 19;
+
 	repeated ActionMetrics actions = 5;
 	repeated AuraMetrics auras = 6;
 	repeated ResourceMetrics resources = 10;

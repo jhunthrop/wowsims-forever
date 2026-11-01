@@ -108,8 +108,10 @@ type UnitMetrics struct {
 	// Aggregate values. These are updated after each iteration.
 	numItersDead int32
 	oomTimeSum   float64
-	actions      map[ActionID]*ActionMetrics
-	resources    []*ResourceMetrics
+	// petActiveTimeSum is PetActiveTime summed over iterations; see AddPetActiveTime.
+	petActiveTimeSum float64
+	actions          map[ActionID]*ActionMetrics
+	resources        []*ResourceMetrics
 }
 
 // Metrics for the current iteration, for 1 agent. Keep this as a separate
@@ -124,6 +126,8 @@ type CharacterIterationMetrics struct {
 	OOMTime time.Duration // time spent not casting and waiting for regen.
 
 	FirstOOMTimestamp time.Duration // Timestamp at which unit first went OOM.
+
+	PetActiveTime time.Duration // Time a pet spent summoned after the pull.
 }
 
 type ActionMetrics struct {
@@ -464,6 +468,16 @@ func (unitMetrics *UnitMetrics) AddOOMTime(sim *Simulation, dur time.Duration) {
 		unitMetrics.MarkOOM(sim)
 	}
 }
+
+// AddPetActiveTime credits a pet with the part of [from, to) that lies
+// inside the fight. A summon before the pull counts from the pull; a pet
+// dismissed before the pull (a Demonic Sacrifice) gets nothing.
+func (unitMetrics *UnitMetrics) AddPetActiveTime(from time.Duration, to time.Duration) {
+	if dur := to - max(from, 0); dur > 0 {
+		unitMetrics.CharacterIterationMetrics.PetActiveTime += dur
+	}
+}
+
 func (unitMetrics *UnitMetrics) MarkOOM(sim *Simulation) {
 	if !unitMetrics.WentOOM {
 		unitMetrics.WentOOM = true
@@ -533,6 +547,7 @@ func (unitMetrics *UnitMetrics) doneIteration(unit *Unit, sim *Simulation) {
 	unitMetrics.tto.doneIteration(sim)
 
 	unitMetrics.oomTimeSum += unitMetrics.OOMTime.Seconds()
+	unitMetrics.petActiveTimeSum += unitMetrics.PetActiveTime.Seconds()
 	if unitMetrics.Died {
 		unitMetrics.numItersDead++
 	}
@@ -623,6 +638,8 @@ func (unitMetrics *UnitMetrics) ToProto() *proto.UnitMetrics {
 		Tto:           unitMetrics.tto.ToProto(),
 		SecondsOomAvg: unitMetrics.oomTimeSum / n,
 		ChanceOfDeath: float64(unitMetrics.numItersDead) / n,
+
+		PetActiveSecondsAvg: unitMetrics.petActiveTimeSum / n,
 	}
 
 	protoMetrics.Actions = make([]*proto.ActionMetrics, 0, len(unitMetrics.actions))

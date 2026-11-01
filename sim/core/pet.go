@@ -50,6 +50,9 @@ type Pet struct {
 
 	isReset bool
 
+	// enabledAt is when the current summon began, for PetActiveTime.
+	enabledAt time.Duration
+
 	// Some pets expire after a certain duration. This is the pending action that disables
 	// the pet on expiration.
 	timeoutAction *PendingAction
@@ -162,6 +165,7 @@ func (pet *Pet) Enable(sim *Simulation, petAgent PetAgent) {
 	// Call onEnable callbacks before enabling auto swing
 	// to not have to reorder PAs multiple times
 	pet.enabled = true
+	pet.enabledAt = sim.CurrentTime
 
 	pet.OnPetEnable(sim)
 
@@ -258,6 +262,7 @@ func (pet *Pet) Disable(sim *Simulation) {
 	pet.AutoAttacks.CancelAutoSwing(sim)
 	pet.focusBar.disable(sim)
 	pet.enabled = false
+	pet.Metrics.AddPetActiveTime(pet.enabledAt, sim.CurrentTime)
 
 	// If a pet is immediately re-summoned it might try to use GCD, so we need to clear it.
 	pet.Hardcast = Hardcast{}

@@ -170,6 +170,15 @@ A stat-weights sweep can heal too: `StatWeightsRequest.raid_damage_model`
 (`core.AddHealingFakeRaid`), and the sweep's `hps` weights are then per
 point of effective healing per second (`landedHealing`), not raw.
 
+### Pet uptime
+
+`UnitMetrics.pet_active_seconds_avg` (19) is the average time per iteration
+a pet spent summoned inside the fight: from the later of its summon and the
+pull to its dismissal or the iteration's end (`Pet.Enable` and `Pet.Disable`
+in `sim/core/pet.go`). A warlock registers every demon as a pet, so the
+demons it never summons read zero, and so does one summoned and sacrificed
+before the pull. A player's figure is always zero.
+
 ### Healing sims: where a healer's mana comes from
 
 The mana model is the engine's (spirit regeneration with the five-second

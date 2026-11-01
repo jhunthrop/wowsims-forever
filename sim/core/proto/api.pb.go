@@ -1753,13 +1753,18 @@ type UnitMetrics struct {
 	// average seconds spent oom per iteration
 	SecondsOomAvg float64 `protobuf:"fixed64,3,opt,name=seconds_oom_avg,json=secondsOomAvg,proto3" json:"seconds_oom_avg,omitempty"`
 	// Chance (0-1) representing probability of death. Used for tank sims.
-	ChanceOfDeath float64            `protobuf:"fixed64,12,opt,name=chance_of_death,json=chanceOfDeath,proto3" json:"chance_of_death,omitempty"`
-	Actions       []*ActionMetrics   `protobuf:"bytes,5,rep,name=actions,proto3" json:"actions,omitempty"`
-	Auras         []*AuraMetrics     `protobuf:"bytes,6,rep,name=auras,proto3" json:"auras,omitempty"`
-	Resources     []*ResourceMetrics `protobuf:"bytes,10,rep,name=resources,proto3" json:"resources,omitempty"`
-	Pets          []*UnitMetrics     `protobuf:"bytes,7,rep,name=pets,proto3" json:"pets,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	ChanceOfDeath float64 `protobuf:"fixed64,12,opt,name=chance_of_death,json=chanceOfDeath,proto3" json:"chance_of_death,omitempty"`
+	// Average seconds per iteration a pet spent summoned inside the fight
+	// (from the pull to the iteration's end). Zero for a pet that was never
+	// summoned, or summoned and dismissed before the pull. Always zero for a
+	// player. Forever addition; see PORTING.md.
+	PetActiveSecondsAvg float64            `protobuf:"fixed64,19,opt,name=pet_active_seconds_avg,json=petActiveSecondsAvg,proto3" json:"pet_active_seconds_avg,omitempty"`
+	Actions             []*ActionMetrics   `protobuf:"bytes,5,rep,name=actions,proto3" json:"actions,omitempty"`
+	Auras               []*AuraMetrics     `protobuf:"bytes,6,rep,name=auras,proto3" json:"auras,omitempty"`
+	Resources           []*ResourceMetrics `protobuf:"bytes,10,rep,name=resources,proto3" json:"resources,omitempty"`
+	Pets                []*UnitMetrics     `protobuf:"bytes,7,rep,name=pets,proto3" json:"pets,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *UnitMetrics) Reset() {
@@ -1872,6 +1877,13 @@ func (x *UnitMetrics) GetSecondsOomAvg() float64 {
 func (x *UnitMetrics) GetChanceOfDeath() float64 {
 	if x != nil {
 		return x.ChanceOfDeath
+	}
+	return 0
+}
+
+func (x *UnitMetrics) GetPetActiveSecondsAvg() float64 {
+	if x != nil {
+		return x.PetActiveSecondsAvg
 	}
 	return 0
 }
@@ -4748,7 +4760,7 @@ const file_api_proto_rawDesc = "" +
 	"\x0faggregator_data\x18\t \x01(\v2\x15.proto.AggregatorDataR\x0eaggregatorData\x1a7\n" +
 	"\tHistEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x05R\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"\xd7\x05\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"\x8c\x06\n" +
 	"\vUnitMetrics\x12\x12\n" +
 	"\x04name\x18\t \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
@@ -4762,7 +4774,8 @@ const file_api_proto_rawDesc = "" +
 	"\x03tto\x18\x0f \x01(\v2\x1a.proto.DistributionMetricsR\x03tto\x12?\n" +
 	"\reffective_hps\x18\x12 \x01(\v2\x1a.proto.DistributionMetricsR\feffectiveHps\x12&\n" +
 	"\x0fseconds_oom_avg\x18\x03 \x01(\x01R\rsecondsOomAvg\x12&\n" +
-	"\x0fchance_of_death\x18\f \x01(\x01R\rchanceOfDeath\x12.\n" +
+	"\x0fchance_of_death\x18\f \x01(\x01R\rchanceOfDeath\x123\n" +
+	"\x16pet_active_seconds_avg\x18\x13 \x01(\x01R\x13petActiveSecondsAvg\x12.\n" +
 	"\aactions\x18\x05 \x03(\v2\x14.proto.ActionMetricsR\aactions\x12(\n" +
 	"\x05auras\x18\x06 \x03(\v2\x12.proto.AuraMetricsR\x05auras\x124\n" +
 	"\tresources\x18\n" +
