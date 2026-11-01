@@ -314,6 +314,13 @@ relicmods:
 periodiccrit:
 	cd /tmp && python3 -I "$(CURDIR)/tools/periodiccrit/gen.py" "$(SITE_DIR)/data/builds/$(BUILD)"
 
+.PHONY: eureka
+# eureka regenerates sim/core/eureka_auto_gen.go, each class's Eureka! row
+# and the spells its class masks reach, from the raw tables in the site's
+# build directory.
+eureka:
+	cd /tmp && python3 -I "$(CURDIR)/tools/eureka/gen.py" "$(SITE_DIR)/data/builds/$(BUILD)"
+
 .PHONY: spellconst
 # spellconst regenerates the per-class constants files from the data
 # lane's spellconst output. A Forever patch that changes a number is a
