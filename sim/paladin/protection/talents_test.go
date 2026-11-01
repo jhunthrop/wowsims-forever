@@ -681,3 +681,33 @@ func resourceActualGain(metrics *proto.UnitMetrics, spellID int32) float64 {
 	}
 	return 0
 }
+
+// A mana gain's threat is half a point a mana, with no threat multiplier:
+// TrinityCore's Unit::EnergizeBySpell forwards it with ignoreModifiers,
+// and the Classic threat research says so in as many words (Magey's
+// classic-warrior wiki, Threat Mechanics: "Power gains are not affected
+// ... by threat multipliers"; Warcraft Tavern's Classic threat table:
+// "These values are not ever multiplied by modifiers"). The engine's rage
+// gain already works that way. So Righteous Fury's +33% does not raise
+// it.
+func TestManaGainThreatIgnoresRighteousFury(t *testing.T) {
+	metrics := shortRun{
+		Rotation:   rotationOf([]string{prepullCast(20357, "1")}, []string{cast(spellConsecration)}),
+		Seconds:    60,
+		Iterations: 5,
+	}.metrics(t)
+
+	var gained float64
+	for _, resource := range metrics.Resources {
+		if resource.Type != proto.ResourceType_ResourceTypeMana || resource.Id.GetOtherId() == proto.OtherAction_OtherActionManaRegen || resource.ActualGain <= 0 {
+			continue // spirit and mp5 regen add no threat; spends are negative
+		}
+		gained += resource.ActualGain
+	}
+	if gained <= 0 {
+		t.Fatal("Seal of Wisdom restored no mana over the run")
+	}
+	if got, want := otherActionThreat(metrics, proto.OtherAction_OtherActionManaGain), 0.5*gained; !near(got, want, 0.01*want) {
+		t.Errorf("mana gains of %.0f made %.1f threat under Righteous Fury, want %.1f (0.5 a mana, unmodified)", gained, got, want)
+	}
+}

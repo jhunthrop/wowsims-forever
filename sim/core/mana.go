@@ -139,7 +139,11 @@ func (mb *manaBar) doneIteration(sim *Simulation) {
 		}
 
 		manaGainSpell.SpellMetrics[0].Casts += resourceMetrics.EventsForCurrentIteration()
-		manaGainSpell.ApplyAOEThreatIgnoreMultipliers(resourceMetrics.ActualGainForCurrentIteration() * ThreatPerManaGained * mb.unit.PseudoStats.ThreatMultiplier)
+		// Unmodified, as rage gain's threat is: TrinityCore forwards an
+		// energize's threat with ignoreModifiers, and Classic's threat
+		// research (Magey's classic-warrior wiki, Warcraft Tavern's threat
+		// table) finds power gains untouched by threat multipliers.
+		manaGainSpell.ApplyAOEThreatIgnoreMultipliers(resourceMetrics.ActualGainForCurrentIteration() * ThreatPerManaGained)
 	}
 }
 
