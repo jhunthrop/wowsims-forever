@@ -7,6 +7,29 @@
       }
     },
     {
+      "notes": "Evocation below 5% mana: once Clearcasting pays for one spell rather than fifteen seconds of them, a Fire mage runs dry well before a long fight ends, and Evocation is the only mana cooldown the class has.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "0.05"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 12051
+          }
+        }
+      }
+    },
+    {
       "notes": "Pop Combustion once Improved Scorch's debuff is fully stacked on the current target, for a guaranteed run of Fire crits.",
       "action": {
         "condition": {
