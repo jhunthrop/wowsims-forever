@@ -62,6 +62,12 @@ type Warlock struct {
 	Succubus   *WarlockPet
 	Voidwalker *WarlockPet
 
+	// petSpellPowerSchool is the school power stat, Fire or Shadow, whose
+	// share a demon inherits beside the warlock's all-school spell power.
+	// It is chosen once per iteration from the warlock's stats at the
+	// demon's reset.
+	petSpellPowerSchool stats.Stat
+
 	// Doomguard *DoomguardPet
 	// Infernal  *InfernalPet
 

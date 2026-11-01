@@ -71,6 +71,7 @@ func (warlock *Warlock) changeActivePet(sim *core.Simulation, newPet *WarlockPet
 }
 
 func (warlock *Warlock) registerPets() {
+	warlock.petSpellPowerSchool = stats.ShadowPower
 	warlock.Felhunter = warlock.makeFelhunter()
 	warlock.Imp = warlock.makeImp()
 	warlock.Succubus = warlock.makeSuccubus()
@@ -120,9 +121,8 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 	}
 
 	// Forever demons scale from the warlock (Warlock Pet Scaling 416189, the
-	// same server-computed channels as Hunter Pet Scaling 415429) and, like
-	// hunter pets, take no player buffs. The inheritance amounts are
-	// unpublished, so makeStatInheritance still grants nothing.
+	// same server-computed channels as Hunter Pet Scaling 415429; see
+	// makeStatInheritance) and, like hunter pets, take no player buffs.
 	wp.RefusePlayerBuffs()
 
 	core.ApplyPetConsumeEffects(&wp.Character, warlock.Consumes)
@@ -146,6 +146,7 @@ func (wp *WarlockPet) Initialize() {
 
 func (wp *WarlockPet) Reset(_ *core.Simulation) {
 	wp.manaPooling = false
+	wp.owner.petSpellPowerSchool = higherSchoolPower(wp.owner.GetStats())
 }
 
 func (wp *WarlockPet) Disable(sim *core.Simulation, isSacrifice bool) {
@@ -205,8 +206,60 @@ func (wp *WarlockPet) ExecuteCustomRotation(sim *core.Simulation) {
 	}
 }
 
+// Warlock Pet Scaling (client 416189, "Owner Power Scaling") gives a demon
+// channels for Stamina, Intellect, armor and the five resistances, melee
+// attack power, all-school spell damage, hit, haste, crit and mana regen;
+// the server computes every amount and Blizzard publishes none. The shares
+// below are Classic's, which two sources give for this same client spell:
+// wowsims' Season of Discovery engine (wowsims/sod sim/warlock/pet.go,
+// commits 378fec876, 70f6b1327 and 61102b576, 2024) and warcraft.wiki.gg's
+// Warlock minion page (75% Stamina, 30% Intellect, 57% of spell damage as
+// attack power, 15% as spell damage). The 35% armor is wowsims' and TBC's;
+// the 40% resistances are TBC's alone (single source; the client has the
+// channels). wowsims' tested 56.5% is taken over the wiki's rounded 57%.
+const (
+	petStaminaShare             = 0.75
+	petIntellectShare           = 0.30
+	petArmorShare               = 0.35
+	petResistanceShare          = 0.40
+	petAttackPowerPerSpellPower = 0.565
+	petSpellDamagePerSpellPower = 0.15
+)
+
+// makeStatInheritance maps the warlock's stats to the demon's. Hit is the
+// warlock's own, as in wowsims' SoD engine (single source; client channels
+// aura 54 and 55). Crit is not inherited: the client has the channels, but
+// 29 Forever beta logs (foreverlogs.gg, levels 13 to 30) show Imp Firebolt
+// critting 2.2% of 2,383 hits and demon melee 1.4% of 2,432 against the
+// warlock's own Shadow Bolt 5.6%, which a 100% share cannot produce. Haste
+// is not inherited: this engine carries haste as speed multipliers, not
+// stats. The mapping is linear in the owner's stats, so the same function
+// maps the owner's mid-fight stat changes; the school power it reads is
+// fixed per iteration (petSpellPowerSchool).
 func (warlock *Warlock) makeStatInheritance() core.PetStatInheritance {
-	return func(ownerStats stats.Stats) stats.Stats {
-		return stats.Stats{}
+	return func(owner stats.Stats) stats.Stats {
+		spellPower := owner[stats.SpellPower] + owner[stats.SpellDamage] + owner[warlock.petSpellPowerSchool]
+		return stats.Stats{
+			stats.Stamina:          owner[stats.Stamina] * petStaminaShare,
+			stats.Intellect:        owner[stats.Intellect] * petIntellectShare,
+			stats.Armor:            owner[stats.Armor] * petArmorShare,
+			stats.ArcaneResistance: owner[stats.ArcaneResistance] * petResistanceShare,
+			stats.FireResistance:   owner[stats.FireResistance] * petResistanceShare,
+			stats.FrostResistance:  owner[stats.FrostResistance] * petResistanceShare,
+			stats.NatureResistance: owner[stats.NatureResistance] * petResistanceShare,
+			stats.ShadowResistance: owner[stats.ShadowResistance] * petResistanceShare,
+			stats.AttackPower:      spellPower * petAttackPowerPerSpellPower,
+			stats.SpellDamage:      spellPower * petSpellDamagePerSpellPower,
+			stats.Hit:              owner[stats.Hit],
+		}
 	}
+}
+
+// higherSchoolPower names the warlock's larger school power, Fire or Shadow,
+// the one a demon inherits beside the all-school spell power.
+func higherSchoolPower(owner stats.Stats) stats.Stat {
+	if owner[stats.FirePower] > owner[stats.ShadowPower] {
+		return stats.FirePower
+	}
+	return stats.ShadowPower
 }
