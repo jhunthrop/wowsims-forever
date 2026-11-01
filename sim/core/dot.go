@@ -52,6 +52,15 @@ type DotConfig struct {
 	// fields after that call (ramps, extra multipliers) needs its own
 	// per-tick read instead.
 	Dynamic bool
+
+	// DynamicSnapshot re-runs the dot's own OnSnapshot before every tick,
+	// for a dot whose OnSnapshot is a pure function of the caster's current
+	// stats (every heal over time here: base tick plus its share of
+	// healing power, times the caster's healing multipliers). Forever's
+	// heals over time are dynamic like its DoTs (forever-bugs #137,
+	// Blizzard 2026-10-01: "DoT/HoT boosting effects that apply
+	// dynamically").
+	DynamicSnapshot bool
 }
 
 type Dot struct {
@@ -104,6 +113,9 @@ type Dot struct {
 	// Snapshot took, re-read with the caster's current stats each tick.
 	dynamic     bool
 	dynamicBase float64
+
+	// dynamicSnapshot carries DotConfig.DynamicSnapshot.
+	dynamicSnapshot bool
 }
 
 // TickPeriod is how fast the snapshot dot ticks.
@@ -255,6 +267,9 @@ func (dot *Dot) TickOnce(sim *Simulation) {
 	if dot.dynamic {
 		dot.Snapshot(dot.Unit, dot.dynamicBase, false)
 	}
+	if dot.dynamicSnapshot {
+		dot.TakeSnapshot(sim, false)
+	}
 	dot.OnTick(sim, dot.Unit, dot)
 
 	if dot.isChanneled {
@@ -379,7 +394,8 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 		CanCrit:        config.CanCrit || periodicCanCrit(config.Spell, isHot),
 		CritMultiplier: config.CritMultiplier,
 
-		dynamic: config.Dynamic,
+		dynamic:         config.Dynamic,
+		dynamicSnapshot: config.DynamicSnapshot,
 	}
 
 	auraConfig := config.Aura

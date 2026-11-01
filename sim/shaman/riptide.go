@@ -77,6 +77,7 @@ func (shaman *Shaman) newRiptideConfig(rank healingRank, cooldown core.Cooldown)
 		NumberOfTicks:    riptideTicks,
 		TickLength:       riptideTickGap,
 		BonusCoefficient: riptideTickCoefficient,
+		DynamicSnapshot:  true,
 		OnSnapshot: func(_ *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 			dot.SnapshotHeal(target, tick.Center(casterLevel), isRollover)
 			if !isRollover {

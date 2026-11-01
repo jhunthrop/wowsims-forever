@@ -114,6 +114,8 @@ func (priest *Priest) registerLightwellRenew(rankNumber int, rank lightwellRank)
 			},
 			NumberOfTicks: lightwellRenewTicks,
 			TickLength:    lightwellRenewTickLength,
+			// Forever heals over time read the caster each tick (core.DotConfig).
+			DynamicSnapshot: true,
 
 			OnSnapshot: func(_ *core.Simulation, target *core.Unit, dot *core.Dot, _ bool) {
 				snapshotHeal(dot, target, rank.tick)
