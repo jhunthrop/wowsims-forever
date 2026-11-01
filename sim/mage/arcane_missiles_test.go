@@ -8,11 +8,11 @@ import (
 	"github.com/wowsims/classic/sim/core/proto"
 )
 
-// TestArcaneMissilesTopRankRegisteredAtMaxLevel guards against the
-// registerArcaneMissilesSpell loop stopping one short of
-// ArcaneMissilesRanks again: a level-60 mage must have rank 8 (25345,
-// the real client's level-56 learn) registered, not just rank 7
-// (10212).
+// TestArcaneMissilesTopRankRegisteredAtMaxLevel: a level-60 mage has the
+// top trainer rank, rank 7 (10212). Rank 8 (25345) is taught by Tome of
+// Arcane Missiles VIII, an Ahn'Qiraj book (warcraft.wiki.gg "Arcane
+// Missiles"; wowclassicdb's Ruins of Ahn'Qiraj loot), so like Frostbolt 11
+// and Fireball 12 it registers only with core.IncludeAQ.
 func TestArcaneMissilesTopRankRegisteredAtMaxLevel(t *testing.T) {
 	player := core.WithSpec(&proto.Player{
 		Class:         proto.Class_ClassMage,
@@ -36,11 +36,15 @@ func TestArcaneMissilesTopRankRegisteredAtMaxLevel(t *testing.T) {
 		t.Fatalf("player agent is %T, want *Mage", agent)
 	}
 
-	topRank := mage.ArcaneMissiles[ArcaneMissilesRanks]
+	want := core.TernaryInt(core.IncludeAQ, ArcaneMissilesRanks, ArcaneMissilesRanks-1)
+	topRank := mage.ArcaneMissiles[want]
 	if topRank == nil {
-		t.Fatalf("ArcaneMissiles[%d] not registered at level 60", ArcaneMissilesRanks)
+		t.Fatalf("ArcaneMissiles[%d] not registered at level 60", want)
 	}
-	if topRank.SpellID != ArcaneMissilesChannelSpellId[ArcaneMissilesRanks] {
-		t.Errorf("top rank SpellID = %d, want %d", topRank.SpellID, ArcaneMissilesChannelSpellId[ArcaneMissilesRanks])
+	if topRank.SpellID != ArcaneMissilesChannelSpellId[want] {
+		t.Errorf("top rank SpellID = %d, want %d", topRank.SpellID, ArcaneMissilesChannelSpellId[want])
+	}
+	if !core.IncludeAQ && mage.ArcaneMissiles[ArcaneMissilesRanks] != nil {
+		t.Errorf("the Ahn'Qiraj book rank %d (25345) is registered without core.IncludeAQ", ArcaneMissilesRanks)
 	}
 }

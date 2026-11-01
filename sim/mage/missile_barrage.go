@@ -17,7 +17,7 @@ import (
 //
 // The buff is spell 400589 ("Missile Barrage", duration_ms 15000);
 // arcane_missiles.go's ApplyEffects is what reads it to halve the tick
-// length, and this file's own Cost.Multiplier swap is what makes the
+// length, and this file's own -100 on Cost.Multiplier is what makes the
 // next Arcane Missiles free - both only take effect on the very next
 // cast, per the tooltip's "your next Arcane Missiles".
 const (
@@ -31,6 +31,11 @@ const (
 	// (arcane_missiles.go's tickLength), with the same tick count, which
 	// is what "reduce the channeled duration ... by 50%" comes out to.
 	missileBarrageTickLength = time.Millisecond * 500
+
+	// "reduce the Mana cost by 100%" (400589 effect 2, misc 14), added to
+	// Arcane Missiles' other cost mods (Arcane Power, Clearcasting) rather
+	// than replacing them.
+	missileBarrageCostReductionPct = 100
 )
 
 func (mage *Mage) registerMissileBarrage() {
@@ -55,14 +60,14 @@ func (mage *Mage) registerMissileBarrage() {
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			for _, spell := range arcaneMissilesSpells {
 				if spell.Cost != nil {
-					spell.Cost.Multiplier = 0
+					spell.Cost.Multiplier -= missileBarrageCostReductionPct
 				}
 			}
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			for _, spell := range arcaneMissilesSpells {
 				if spell.Cost != nil {
-					spell.Cost.Multiplier = 100
+					spell.Cost.Multiplier += missileBarrageCostReductionPct
 				}
 			}
 		},

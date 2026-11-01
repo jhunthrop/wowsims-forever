@@ -233,7 +233,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 60 | Arcane Missiles | 5 | 8417 | 410.00→410.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 5000→5000 | match |  | n/a | n/a | n/a |
 | Mage | 60 | Arcane Missiles | 6 | 10211 | 500.00→500.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 5000→5000 | match |  | n/a | n/a | n/a |
 | Mage | 60 | Arcane Missiles | 7 | 10212 | 595.00→595.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 5000→5000 | match |  | n/a | n/a | n/a |
-| Mage | 60 | Arcane Missiles | 8 | 25345 | 655.00→655.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 56→56 | 5000→5000 | match |  | n/a | n/a | n/a |
 | Mage | 60 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 60 | Blizzard | 2 | 6141 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 60 | Blizzard | 3 | 8427 | 720.00→720.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 8000→8000 | match |  | n/a | n/a | n/a |

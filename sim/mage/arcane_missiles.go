@@ -22,8 +22,9 @@ func (mage *Mage) registerArcaneMissilesSpell() {
 	mage.ArcaneMissiles = make([]*core.Spell, ArcaneMissilesRanks+1)
 	mage.ArcaneMissilesTickSpell = make([]*core.Spell, ArcaneMissilesRanks+1)
 
-	// TODO AQ <=
-	for rank := 1; rank <= ArcaneMissilesRanks; rank++ {
+	// Rank 8 (25345) is Tome of Arcane Missiles VIII, an Ahn'Qiraj book.
+	maxRank := core.TernaryInt(core.IncludeAQ, ArcaneMissilesRanks, ArcaneMissilesRanks-1)
+	for rank := 1; rank <= maxRank; rank++ {
 		config := mage.getArcaneMissilesSpellConfig(rank)
 
 		if config.RequiredLevel <= int(mage.Level) {
