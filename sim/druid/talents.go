@@ -499,6 +499,9 @@ func (druid *Druid) applyVengeance() {
 						druid.Wrath,
 						druid.Starfire,
 						druid.Moonfire,
+						// Client 16909's mask 0x600207 holds Insect
+						// Swarm (0x200000) as well.
+						druid.InsectSwarm,
 					},
 				),
 				func(spell *DruidSpell) bool { return spell != nil },
