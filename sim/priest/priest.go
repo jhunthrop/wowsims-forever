@@ -100,6 +100,17 @@ const PriestSpellMaskMentalAgility = PriestSpellMaskSmite | PriestSpellMaskHolyF
 	PriestSpellMaskPowerWordShield | PriestSpellMaskHolyNova | PriestSpellMaskPrayerOfMending |
 	PriestSpellMaskVampiricEmbrace
 
+// PriestSpellMaskSpiritualHealing is what Spiritual Healing (14898) names:
+// the direct heals of SpellEffect 692104 (Lesser Heal, Heal, Greater Heal,
+// Flash Heal, Prayer of Healing, Holy Nova, Desperate Prayer, Penance,
+// Prayer of Mending and Binding Heal) and Renew, the one heal over time of
+// 1239404. Lightwell's renew and Holy Binding carry no class options, and
+// a shield absorbs rather than heals.
+const PriestSpellMaskSpiritualHealing = PriestSpellMaskLesserHeal | PriestSpellMaskHeal |
+	PriestSpellMaskGreaterHeal | PriestSpellMaskFlashHeal | PriestSpellMaskPrayerOfHealing |
+	PriestSpellMaskHolyNova | PriestSpellMaskDesperatePrayer | PriestSpellMaskPenance |
+	PriestSpellMaskPrayerOfMending | PriestSpellMaskRenew
+
 type Priest struct {
 	core.Character
 	Talents *proto.PriestTalents

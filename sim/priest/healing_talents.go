@@ -87,6 +87,12 @@ func (priest *Priest) applyDeclarativeHealingTalents() {
 			TimeValue: divineFuryCastTimePerRank * time.Duration(rank),
 		})
 	}
+	if rank := rankOf("spiritual_healing", t.SpiritualHealing); rank > 0 {
+		mods = append(mods, core.SpellModConfig{
+			Kind: core.SpellMod_DamageDone_Pct, ClassMask: PriestSpellMaskSpiritualHealing,
+			ProcMask: core.ProcMaskSpellHealing, FloatValue: 1 + spiritualHealingHealing[rank],
+		})
+	}
 	if t.SoulWarding {
 		mods = append(mods,
 			core.SpellModConfig{Kind: core.SpellMod_PowerCost_Pct, ClassMask: PriestSpellMaskPowerWordShield, IntValue: soulWardingCostPct},
@@ -97,11 +103,6 @@ func (priest *Priest) applyDeclarativeHealingTalents() {
 		priest.AddStaticMod(mod)
 	}
 
-	// "Increases the amount healed by your spells": a shield is not healed,
-	// so this is the healing multiplier and not the spell's damage one.
-	if rank := rankOf("spiritual_healing", t.SpiritualHealing); rank > 0 {
-		priest.PseudoStats.HealingDealtMultiplier *= 1 + spiritualHealingHealing[rank]
-	}
 }
 
 // renewedHopeCrit is the extra crit rating Renewed Hope adds to a heal it

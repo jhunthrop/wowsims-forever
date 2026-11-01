@@ -363,3 +363,22 @@ func TestTheInnerFireOptionBuffsBeforeThePull(t *testing.T) {
 		t.Error("Inner Fire is not up after the prepull with the option on")
 	}
 }
+
+// TestSpiritualHealingFollowsItsClientMasks: Spiritual Healing (14898)
+// raises healing through two class-masked modifiers, the direct heals
+// (SpellEffect 692104) and Renew among the heals over time (1239404).
+// Lightwell's renew (27874) carries no class options at all, so neither
+// reaches it.
+func TestSpiritualHealingFollowsItsClientMasks(t *testing.T) {
+	multiplier := func(talents string) float64 {
+		_, a := healerSim(t, 60, talents)
+		renew := a.GetSpell(core.ActionID{SpellID: 27874})
+		if renew == nil {
+			t.Fatal("Lightwell's renew 27874 is not registered at 60")
+		}
+		return renew.CasterHealingMultiplier()
+	}
+	if got, bare := multiplier(onePoint(holyTree, spiritualHealing, 3)), multiplier(""); got != bare {
+		t.Errorf("Spiritual Healing moved Lightwell's renew from %v to %v; its client masks do not name it", bare, got)
+	}
+}
