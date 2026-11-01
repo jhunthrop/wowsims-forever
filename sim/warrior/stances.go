@@ -138,8 +138,15 @@ const (
 	defensiveStanceThreatBonus      = 0.3
 )
 
+// defensiveStanceThreat is the stance's threat multiplier. The stance's +30%
+// and Defiance's bonus are separate SPELL_AURA_MOD_THREAT effects, which the
+// server multiplies (cmangos Aura::HandleModThreat, TrinityCore).
+func (warrior *Warrior) defensiveStanceThreat() float64 {
+	return (1 + defensiveStanceThreatBonus) * (1 + warrior.defianceThreat())
+}
+
 func (warrior *Warrior) registerDefensiveStanceAura() {
-	warrior.defensiveStanceThreatMultiplier = 1 + defensiveStanceThreatBonus + warrior.defianceThreat()
+	warrior.defensiveStanceThreatMultiplier = warrior.defensiveStanceThreat()
 
 	warrior.DefensiveStanceAura = warrior.RegisterAura(core.Aura{
 		Label:    "Defensive Stance",

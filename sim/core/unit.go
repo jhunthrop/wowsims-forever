@@ -146,10 +146,6 @@ type Unit struct {
 	gcdAction      *PendingAction
 	hardcastAction *PendingAction
 
-	// Cached mana return values per tick.
-	manaTickWhileCasting    float64
-	manaTickWhileNotCasting float64
-
 	CastSpeed float64
 
 	CurrentTarget *Unit
@@ -283,9 +279,6 @@ func (unit *Unit) AddResistancesDynamic(sim *Simulation, amount float64) {
 }
 
 func (unit *Unit) processDynamicBonus(sim *Simulation, bonus stats.Stats) {
-	if bonus[stats.MP5] != 0 || bonus[stats.Intellect] != 0 || bonus[stats.Spirit] != 0 {
-		unit.UpdateManaRegenRates()
-	}
 	if bonus[stats.MeleeHaste] != 0 {
 		unit.AutoAttacks.UpdateSwingTimers(sim)
 	}
@@ -531,7 +524,6 @@ func (unit *Unit) reset(sim *Simulation, _ Agent) {
 	unit.manaBar.reset()
 	unit.focusBar.reset(sim)
 	unit.healthBar.reset(sim)
-	unit.UpdateManaRegenRates()
 
 	unit.energyBar.reset(sim)
 	unit.rageBar.reset(sim)

@@ -36,12 +36,12 @@ func attackTaken(sim *core.Simulation, war *warrior.Warrior, outcome core.HitOut
 // Defiance: "Increases all threat generated in Defensive stance by an
 // additional 5%/10%/15% while a shield is equipped", added to the stance's
 // own 30%.
-func TestDefianceAddsToTheStanceThreatWithAShield(t *testing.T) {
+func TestDefianceMultipliesTheStanceThreatWithAShield(t *testing.T) {
 	for rank := 0; rank <= 3; rank++ {
 		talents := talentsWith(t, emptyTalents, "defiance", rank)
 
 		withShield, _ := buildTank(t, talents, true)
-		assertNear(t, "threat with a shield", withShield.PseudoStats.ThreatMultiplier, defensiveStanceThreat+defiancePerRank*float64(rank))
+		assertNear(t, "threat with a shield", withShield.PseudoStats.ThreatMultiplier, defensiveStanceThreat*(1+defiancePerRank*float64(rank)))
 
 		withoutShield, _ := buildTank(t, talents, false)
 		assertNear(t, "threat without a shield", withoutShield.PseudoStats.ThreatMultiplier, defensiveStanceThreat)

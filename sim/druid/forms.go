@@ -168,7 +168,6 @@ func (druid *Druid) registerCatFormSpell() {
 				druid.AutoAttacks.SetReplaceMHSwing(nil)
 				druid.AutoAttacks.EnableAutoSwing(sim)
 				druid.manageCooldownsEnabled()
-				druid.UpdateManaRegenRates()
 			}
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
@@ -197,7 +196,6 @@ func (druid *Druid) registerCatFormSpell() {
 				druid.AutoAttacks.SetReplaceMHSwing(nil)
 				druid.AutoAttacks.EnableAutoSwing(sim)
 				druid.manageCooldownsEnabled()
-				druid.UpdateManaRegenRates()
 
 			}
 		},

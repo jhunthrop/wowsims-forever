@@ -102,6 +102,10 @@ func (hunter *Hunter) ApplyTalents() {
 	*/
 
 	if hunter.Talents.BestialDiscipline > 0 {
+		// 19590's second effect is aura 134 (mana regeneration continues
+		// while casting) at 25 a rank: "allows 50% of your Mana Regeneration
+		// to continue while casting" at 2/2.
+		hunter.PseudoStats.SpiritRegenRateCasting += bestialDisciplineRegenPerRank * float64(hunter.Talents.BestialDiscipline)
 		core.MakePermanent(hunter.RegisterAura(core.Aura{
 			Label: "Bestial Discipline",
 			OnInit: func(aura *core.Aura, sim *core.Simulation) {
@@ -409,9 +413,8 @@ func rankIndex[T any](rank int32, table []T) int {
 // melee auto attacks have a [same]% chance of increasing melee attack
 // speed by 30% for 12 sec."
 //
-// Aspect of the Beast is not registered anywhere in this package (no
-// aspect_of_the_beast.go, no aura to key off), so its melee half's
-// condition is simply never true. Aspect of the Falcon (469145) is: its
+// Its melee half keys off Aspect of the Beast (aspect_of_the_beast.go).
+// Aspect of the Falcon (469145) also gives it melee: its
 // client text says "While Aspect of the Falcon is active, the Improved
 // Aspect of the Hawk talent can now proc from and benefit melee attacks"
 // (Deadly Aspects is that talent, spell 19552), and its own proc trigger
@@ -427,13 +430,14 @@ func (hunter *Hunter) applyDeadlyAspects() {
 	procChance := 0.02 * float64(hunter.Talents.DeadlyAspects)
 	speedAura := hunter.createImprovedHawkAura("Deadly Aspects Haste", core.ActionID{SpellID: 19552})
 	quickStrikes := hunter.createQuickStrikesAura()
-	var falcon *core.Aura
+	var falcon, beast *core.Aura
 
 	hunter.RegisterAura(core.Aura{
 		Label:    "Deadly Aspects",
 		Duration: core.NeverExpires,
 		OnReset: func(aura *core.Aura, sim *core.Simulation) {
 			falcon = hunter.GetAura(aspectOfTheFalconAuraLabel)
+			beast = hunter.GetAura(aspectOfTheBeastAuraLabel)
 			aura.Activate(sim)
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
@@ -447,6 +451,12 @@ func (hunter *Hunter) applyDeadlyAspects() {
 				}
 			case spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) && falcon != nil && falcon.IsActive():
 				if sim.Proc(procChance, "Deadly Aspects (Falcon)") {
+					quickStrikes.Activate(sim)
+				}
+			case spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) && beast != nil && beast.IsActive():
+				// Beast's own Quick Strikes (1299448) is Falcon's 469144 again:
+				// aura 319 at 30, 12 sec.
+				if sim.Proc(procChance, "Deadly Aspects (Beast)") {
 					quickStrikes.Activate(sim)
 				}
 			}
@@ -682,6 +692,16 @@ func (hunter *Hunter) applyImprovedTracking() {
 // resourcefulnessProcChance is the critical-strike chance of the regen clause,
 // 50% a rank (1.60.1.70425: "a 50%/100% chance"; the 1.60.1.70374 live text
 // read 30/60%).
+// bestialDisciplineRegenPerRank is Bestial Discipline's share of mana
+// regeneration that continues while casting, a rank (19590: aura 134 at 50 for
+// rank 2).
+const bestialDisciplineRegenPerRank = 0.25
+
+// resourcefulnessProcMask is the client's proc type mask for 440529
+// (SpellAuraOptions 242512: 272, melee and ranged ability damage): a white
+// swing's crit or a periodic tick's does not count.
+const resourcefulnessProcMask = core.ProcMaskMeleeSpecial | core.ProcMaskRangedSpecial
+
 func resourcefulnessProcChance(rank int32) float64 {
 	return 0.5 * float64(rank)
 }
@@ -726,7 +746,7 @@ func (hunter *Hunter) applyResourcefulness() {
 			aura.Activate(sim)
 		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !result.DidCrit() {
+			if !result.DidCrit() || !spell.ProcMask.Matches(resourcefulnessProcMask) {
 				return
 			}
 			if sim.Proc(procChance, "Resourcefulness") {

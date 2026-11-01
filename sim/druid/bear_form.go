@@ -159,7 +159,6 @@ func (druid *Druid) registerBearFormSpell() {
 				druid.AutoAttacks.SetReplaceMHSwing(druid.ReplaceBearMHFunc)
 				druid.AutoAttacks.EnableAutoSwing(sim)
 				druid.manageCooldownsEnabled()
-				druid.UpdateManaRegenRates()
 			}
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
@@ -187,7 +186,6 @@ func (druid *Druid) registerBearFormSpell() {
 				druid.AutoAttacks.SetReplaceMHSwing(nil)
 				druid.AutoAttacks.EnableAutoSwing(sim)
 				druid.manageCooldownsEnabled()
-				druid.UpdateManaRegenRates()
 				druid.deactivateBearAuras(sim)
 			}
 		},

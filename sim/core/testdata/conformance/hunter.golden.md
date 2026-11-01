@@ -38,6 +38,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 30 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.300 | declared, matches |
 | Hunter | 30 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 30 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
+| Hunter | 30 | Aspect of the Beast | 1 | 13161 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Aspect of the Hawk | 3 | 14319 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
 | Hunter | 30 | Heart of the Lion | 0 | 409580 | 62.00 (8% base mana)→62.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
@@ -59,6 +60,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 38 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 38 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 38 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.429 | declared, matches |
+| Hunter | 38 | Aspect of the Beast | 1 | 13161 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Aspect of the Hawk | 4 | 14320 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
 | Hunter | 38 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
@@ -82,6 +84,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 40 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 40 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 40 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.429 | declared, matches |
+| Hunter | 40 | Aspect of the Beast | 2 | 1299445 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Aspect of the Hawk | 4 | 14320 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
 | Hunter | 40 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
@@ -109,6 +112,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 50 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 50 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 50 | Arcane Shot | 6 | 14285 | 135.00→135.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 44→44 | n/a | match |  | 134.00-134.00→134.00-134.00 | 0.429 (convention)→0.429 | declared, matches |
+| Hunter | 50 | Aspect of the Beast | 3 | 1299446 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Aspect of the Hawk | 5 | 14321 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
 | Hunter | 50 | Explosive Trap | 2 | 14316 | 395.00→395.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 44→44 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
@@ -142,6 +146,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 60 | Arcane Shot | 6 | 14285 | 135.00→135.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 44→44 | n/a | match |  | 134.00-134.00→134.00-134.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 60 | Arcane Shot | 7 | 14286 | 160.00→160.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 52→52 | n/a | match |  | 170.00-170.00→170.00-170.00 | 0.429 (convention)→0.429 | declared, matches |
 | Hunter | 60 | Arcane Shot | 8 | 14287 | 190.00→190.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 60→60 | n/a | match |  | 217.00-217.00→217.00-217.00 | 0.429 (convention)→0.429 | declared, matches |
+| Hunter | 60 | Aspect of the Beast | 4 | 1299447 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Aspect of the Falcon | 0 | 469145 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Aspect of the Hawk | 6 | 14322 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
@@ -198,7 +203,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | Hunter (Summon Hawk talent) | 60 | Summon Hawk | 4 | 1293527 | 190.00→190.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 60→60 | n/a | match |  | 108.00-108.00→108.00-108.00 | 0.429 (convention)→0.000 | declared, matches |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 26 of the class's 49 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 25 of the class's 49 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
@@ -218,7 +223,6 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Scorpid Sting (3043) | 22→22 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 0 |  |
 | Beast Lore (1462) | 24→24 | 1 | Beast Mastery | skill_line_ability | 40 mana | 0 | 0 | power cost |
 | Frost Trap (13809) | 28→28 | 1 | Survival | skill_line_ability | 60 mana | 0 | 30000 | power cost, cooldown |
-| Aspect of the Beast (13161) | 30→60 | 4 | Beast Mastery | skill_line_ability | 110 mana | 0 | 0 | power cost |
 | Feign Death (5384) | 30→30 | 1 | Survival | skill_line_ability | 80 mana | 0 | 30000 | power cost, cooldown |
 | Intimidation (19577) | 30→30 | 1 | Beast Mastery | skill_line_ability | 0 | 0 | 60000 | cooldown |
 | Scatter Shot (19503) | 30→30 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 30000 | cooldown |

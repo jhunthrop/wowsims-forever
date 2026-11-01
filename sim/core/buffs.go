@@ -1204,12 +1204,10 @@ func InnervateAura(character *Character, actionTag int32) *Aura {
 		OnGain: func(aura *Aura, sim *Simulation) {
 			character.PseudoStats.SpiritRegenMultiplier += 4
 			character.PseudoStats.ForceFullSpiritRegen = true
-			character.UpdateManaRegenRates()
 		},
 		OnExpire: func(aura *Aura, sim *Simulation) {
 			character.PseudoStats.SpiritRegenMultiplier -= 4
 			character.PseudoStats.ForceFullSpiritRegen = false
-			character.UpdateManaRegenRates()
 		},
 	})
 }

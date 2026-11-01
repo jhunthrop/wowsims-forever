@@ -70,11 +70,10 @@ var petClawLearnLevels = []int{1, 8, 16, 24, 32, 40, 48, 56}
 var petClawSpellID = [9]int32{0, 16827, 16828, 16829, 16830, 16831, 16832, 3010, 3009}
 
 // petClawBaseDamageMin/Max are Claw's rank -> damage roll bounds, index 0
-// unused. Only ranks 4, 6, 7 and 8 have a tuned value in this file; ranks
-// 1-3 and 5 carry the nearest known rank's numbers forward until real ones
-// are sourced.
-var petClawBaseDamageMin = [9]float64{0, 16, 16, 16, 16, 16, 26, 35, 43}
-var petClawBaseDamageMax = [9]float64{0, 22, 22, 22, 22, 22, 36, 49, 59}
+// unused: each rank's client base points and variance (1.60.1.70707
+// SpellEffect, 16827-16832, 3010, 3009).
+var petClawBaseDamageMin = [9]float64{0, 4, 8, 12, 16, 21, 26, 35, 43}
+var petClawBaseDamageMax = [9]float64{0, 6, 12, 16, 22, 29, 36, 49, 59}
 
 func (hp *HunterPet) newClaw() *core.Spell {
 	rank := core.HighestRankAtLevel(petClawLearnLevels, hp.Owner.Level)

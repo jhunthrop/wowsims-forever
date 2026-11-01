@@ -194,23 +194,22 @@ func (unit *Unit) ManaRegenPerSecondWhileNotCasting() float64 {
 	return regenRate
 }
 
-func (unit *Unit) UpdateManaRegenRates() {
-	unit.manaTickWhileCasting = unit.ManaRegenPerSecondWhileCasting() * 2
-	unit.manaTickWhileNotCasting = unit.ManaRegenPerSecondWhileNotCasting() * 2
-}
-
 func (unit *Unit) GetManaNotCastingMetrics() *ResourceMetrics {
 	return unit.manaNotCastingMetrics
 }
 
-// Applies 1 'tick' of mana regen, which worth 2s of regeneration based on mp5/int/spirit/etc.
+// manaTickInterval is one regen tick: every rate above is per second.
+const manaTickInterval = 2.0
+
+// ManaTick applies one 2 s tick of regen from mp5, spirit and whatever share
+// of spirit regen continues while casting. The rates are read at the tick, not
+// cached: an aura that changes PseudoStats.SpiritRegenRateCasting (Mage Armor,
+// Resourcefulness, Spirit Tap) has nothing to refresh.
 func (unit *Unit) ManaTick(sim *Simulation) {
 	if sim.CurrentTime < unit.PseudoStats.FiveSecondRuleRefreshTime {
-		regen := unit.manaTickWhileCasting
-		unit.AddMana(sim, max(0, regen), unit.manaCastingMetrics)
+		unit.AddMana(sim, max(0, unit.ManaRegenPerSecondWhileCasting()*manaTickInterval), unit.manaCastingMetrics)
 	} else {
-		regen := unit.manaTickWhileNotCasting
-		unit.AddMana(sim, max(0, regen), unit.manaNotCastingMetrics)
+		unit.AddMana(sim, max(0, unit.ManaRegenPerSecondWhileNotCasting()*manaTickInterval), unit.manaNotCastingMetrics)
 	}
 }
 
