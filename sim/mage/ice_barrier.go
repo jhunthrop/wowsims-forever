@@ -17,9 +17,13 @@ var IceBarrierLevel = [IceBarrierRanks + 1]int{0, 40, 46, 52, 58}
 // (Frost spell power * 0.1)] damage and increasing your Frost damage by
 // 15% for 1 min. While shielded, your Frost damage is increased by an
 // additional 5% and you do not lose casting time when you take damage."
-// The numbers are the hotfixed talent text (the Wowhead overlay); the
-// shipped SpellEffect rows (1364979/1364980 on 11426) still read 3 and 3,
-// the 70532 values. Nothing hits a simmed mage, so the absorb is not
+// The numbers are the 30 October 2026 server hotfix. The shipped
+// SpellEffect rows (1364979/1364980 on 11426, 1365007/1365008 on Frigid
+// Power 1326891) read 3 and 3 from 70630 through 70707, the values of the
+// 16 October hotfix. Two sources give 15 and 5: Wowhead Forever's data
+// (tooltip and spell details, read 2026-11-01) and the client's hotfix
+// cache of 30 October read by wowforevertalents.com's patch notes
+// ("3% 15%", "additional 3% 5%"). Nothing hits a simmed mage, so the absorb is not
 // modeled and a shield holds its full minute; the two halves stay
 // separate mods so an absorb model can end the shielded one early.
 const (
