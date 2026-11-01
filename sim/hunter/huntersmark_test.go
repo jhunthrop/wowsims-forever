@@ -23,9 +23,9 @@ func TestHuntersMarkRanksMatchClient(t *testing.T) {
 		t.Fatalf("loading the client file: %v", err)
 	}
 	for rank := 1; rank <= HunterSMarkRanks; rank++ {
-		spell, ok := client.ByID(HunterSMarkSpellId[rank])
+		spell, ok := client.ByID(huntersMarkSpellID(rank))
 		if !ok {
-			t.Fatalf("rank %d: spell %d is not in the client file", rank, HunterSMarkSpellId[rank])
+			t.Fatalf("rank %d: spell %d is not in the client file", rank, huntersMarkSpellID(rank))
 		}
 		effect := spell.Effects[huntersMarkEffectIndex]
 		if effect.Aura != huntersMarkRangedAPAura {
@@ -46,7 +46,7 @@ func TestHuntersMarkRankAtLevel(t *testing.T) {
 	for _, tc := range []struct {
 		level  int32
 		wantID int32
-	}{{5, 0}, {6, 1130}, {21, 1130}, {22, 14323}, {40, 14324}, {57, 14324}, {58, 1213268}, {60, 1213268}} {
+	}{{5, 0}, {6, 1130}, {21, 1130}, {22, 14323}, {40, 14324}, {57, 14324}, {58, 14325}, {60, 14325}} {
 		_, hunter, _ := newBareHunterAtLevel(t, tc.level)
 		switch {
 		case tc.wantID == 0 && hunter.HuntersMark != nil:
@@ -101,5 +101,25 @@ func TestAspectOfTheFalconGrantsHawkAttackPowerToBothAttackKinds(t *testing.T) {
 	}
 	if got := hunter.GetStat(stats.RangedAttackPower) - rangedAttackPower; got != want {
 		t.Errorf("ranged attack power moved by %v, want %v", got, want)
+	}
+}
+
+// TestTheRaidHuntersMarkIsTheTrainedRank: rank 4 is 14325, the id
+// SkillLineAbility teaches (row 7913, skill line 163), at 143 ranged
+// attack power on 1.60.1.70707 (SpellEffect, and the Wowhead Forever
+// tooltip). 1213268 (110) is a Season of Discovery copy no trainer
+// teaches; the raid preset's debuff and a level-60 hunter's own cast
+// both used it.
+func TestTheRaidHuntersMarkIsTheTrainedRank(t *testing.T) {
+	sim, hunter, target := newBareHunterAtLevel(t, 60)
+	table := hunter.AttackTables[target.UnitIndex][proto.CastType_CastTypeRanged]
+	before := table.BonusAttackPowerTaken
+	aura := core.HuntersMarkAura(target, 0)
+	aura.Activate(sim)
+	if aura.ActionID.SpellID != 14325 {
+		t.Errorf("raid Hunter's Mark is spell %d, want 14325", aura.ActionID.SpellID)
+	}
+	if got := table.BonusAttackPowerTaken - before; got != 143 {
+		t.Errorf("raid Hunter's Mark adds %v ranged attack power, want 143", got)
 	}
 }

@@ -825,9 +825,19 @@ func CurseOfWeaknessAura(target *Unit, points int32) *Aura {
 
 const HuntersMarkAuraTag = "HuntersMark"
 
-// HuntersMarkAura is the raid debuff: the top rank's 110 ranged attack power.
+// HuntersMarkTopRankSpellID and HuntersMarkTopRankRangedAttackPower are
+// Hunter's Mark rank 4 as a trainer teaches it (SkillLineAbility row 7913)
+// and the 1.60.1.70707 SpellEffect states it, matching Wowhead Forever's
+// tooltip: 143 ranged attack power. The 110 used before is 1213268, a
+// Season of Discovery copy of the rank that no trainer teaches.
+const (
+	HuntersMarkTopRankSpellID           int32   = 14325
+	HuntersMarkTopRankRangedAttackPower float64 = 143
+)
+
+// HuntersMarkAura is the raid debuff: the top rank.
 func HuntersMarkAura(target *Unit, points int32) *Aura {
-	return HuntersMarkAuraOfRank(target, 14325, 110, points)
+	return HuntersMarkAuraOfRank(target, HuntersMarkTopRankSpellID, HuntersMarkTopRankRangedAttackPower, points)
 }
 
 // HuntersMarkAuraOfRank is the debuff a hunter's own Hunter's Mark rank
