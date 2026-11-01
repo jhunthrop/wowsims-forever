@@ -1072,6 +1072,13 @@ func makeHealthConsumableMCD(itemId int32, character *Character, cdTimer *Timer)
 	}
 }
 
+// demonicRuneHealthCost is the Demonic Rune's (12662, spell 16666) cost in
+// health: SpellEffect 694075 deals 800 to the user with variance 0.5, so 600
+// to 1000. The mean is taken, not rolled, so a rune draws no extra random
+// number and every other stream stays where it was; the health only matters
+// to health gates and to heals that land on the user.
+const demonicRuneHealthCost = 800.0
+
 func makeManaConsumableMCD(itemId int32, character *Character, cdTimer *Timer) MajorCooldown {
 	minRoll := map[int32]float64{
 		3827:  455.0,
@@ -1118,6 +1125,9 @@ func makeManaConsumableMCD(itemId int32, character *Character, cdTimer *Timer) M
 			ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
 				manaGain := sim.RollWithLabel(minRoll, maxRoll, "Mana Consumable")
 				character.AddMana(sim, manaGain, manaMetrics)
+				if itemId == 12662 {
+					character.RemoveHealth(sim, demonicRuneHealthCost)
+				}
 			},
 		}),
 	}
