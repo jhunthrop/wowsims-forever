@@ -575,17 +575,34 @@ func TestEurekaMatchesTheClientRow(t *testing.T) {
 	}
 }
 
-// Touch of the Grave 1260201 / drain 1260198: 10% chance, 1000 ms internal
-// cooldown, procs on melee, ranged and spell damage (ProcTypeMask 69972,
-// no periodic bit), drains 5% of the caster's maximum Health.
+// Touch of the Grave, client 1.60.1.70707: two passives by class
+// (SkillLineAbility 55923 and 55924). 1260189 (ClassMask 11: warrior,
+// paladin, rogue) has ProcChance 20, 1260201 (ClassMask 400: priest, mage,
+// warlock) ProcChance 30, and both a 25000 ms ProcCategoryRecovery and
+// ProcTypeMask 69972 (no periodic bit). The drain 1260198 takes 5% of the
+// caster's maximum Health.
 func TestTouchOfTheGraveMatchesTheClientRows(t *testing.T) {
-	trigger := touchOfTheGraveTrigger(nil)
-	if trigger.ProcChance != 0.10 {
-		t.Errorf("proc chance is %v, want 0.10", trigger.ProcChance)
+	for _, c := range []struct {
+		class  proto.Class
+		id     int32
+		chance float64
+	}{
+		{proto.Class_ClassPaladin, 1260189, 0.20},
+		{proto.Class_ClassWarrior, 1260189, 0.20},
+		{proto.Class_ClassRogue, 1260189, 0.20},
+		{proto.Class_ClassPriest, 1260201, 0.30},
+		{proto.Class_ClassMage, 1260201, 0.30},
+		{proto.Class_ClassWarlock, 1260201, 0.30},
+	} {
+		trigger := touchOfTheGraveTrigger(nil, c.class)
+		if trigger.ActionID.SpellID != c.id || trigger.ProcChance != c.chance {
+			t.Errorf("%v: passive %d at %v, want %d at %v", c.class, trigger.ActionID.SpellID, trigger.ProcChance, c.id, c.chance)
+		}
+		if trigger.ICD != 25*time.Second {
+			t.Errorf("%v: internal cooldown is %v, want 25s", c.class, trigger.ICD)
+		}
 	}
-	if trigger.ICD != time.Second {
-		t.Errorf("internal cooldown is %v, want 1s", trigger.ICD)
-	}
+	trigger := touchOfTheGraveTrigger(nil, proto.Class_ClassPaladin)
 	if trigger.Callback != CallbackOnSpellHitDealt {
 		t.Errorf("callback is %v, want direct hits only (the mask has no periodic bit)", trigger.Callback)
 	}

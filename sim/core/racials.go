@@ -391,7 +391,7 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "Touch of the Grave", Kind: RacialPassive, Confirmed: true,
-			Note:  "client 1260201 (drain 1260198): 10% proc chance, 1 s internal cooldown, drains 5% of maximum Health as flat Shadow damage; see racial_touch_of_the_grave.go",
+			Note:  "client 1260189 (warrior, paladin, rogue: 20%) or 1260201 (priest, mage, warlock: 30%), 25 s internal cooldown (build 1.60.1.70707); drain 1260198 takes 5% of maximum Health as flat Shadow damage; see racial_touch_of_the_grave.go",
 			Apply: applyTouchOfTheGrave,
 		},
 		{
