@@ -71,7 +71,7 @@
       }
     },
     {
-      "notes": "With Unsealed Wrath, once three swings have stored Seal of Command, switch to Seal of Righteousness: the next swing releases all three stored Seals of Command. Skipped below 30% mana, because every Seal costs a global and over 200 mana.",
+      "notes": "With Unsealed Wrath, once three swings have stored Seal of Command, switch to Seal of Righteousness: the next swing releases all three stored Seals of Command. Only above 30% mana, because every Seal costs a global and over 200 mana, and only with raid-buffed attack power (1200 or more): Seal of Command deals a share of the weapon swing, so with little attack power Seal of Righteousness alone does more.",
       "action": {
         "condition": {
           "and": {
@@ -120,6 +120,19 @@
                     }
                   }
                 }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentAttackPower": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "1200"
+                    }
+                  }
+                }
               }
             ]
           }
@@ -133,7 +146,7 @@
       }
     },
     {
-      "notes": "After one swing under Seal of Righteousness, go straight back to Seal of Command.",
+      "notes": "After one swing under Seal of Righteousness, go straight back to Seal of Command, under the same mana and attack power gates.",
       "action": {
         "condition": {
           "and": {
@@ -169,6 +182,32 @@
                     "rank": 8
                   }
                 }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "30%"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentAttackPower": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "1200"
+                    }
+                  }
+                }
               }
             ]
           }
@@ -182,7 +221,7 @@
       }
     },
     {
-      "notes": "With Seal of Command and Unsealed Wrath, Seal of Command is the seal to keep up: reapply it once it is about to expire (this also catches Judgement's own cast). Since Blizzard's October beta fix, Seal of Righteousness takes spell damage once, and Seal of Command with the Unsealed Wrath twist measured about 10% ahead on a two-hander.",
+      "notes": "With Seal of Command and Unsealed Wrath, above 30% mana and with raid-buffed attack power, Seal of Command is the seal to keep up: reapply it once it is about to expire (this also catches Judgement's own cast). Since Blizzard's October beta fix, Seal of Righteousness takes spell damage once, and this measured about 11% ahead on a three-second two-hander.",
       "action": {
         "condition": {
           "and": {
@@ -204,6 +243,19 @@
               },
               {
                 "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "30%"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
                   "op": "OpLe",
                   "lhs": {
                     "currentSealRemainingTime": {}
@@ -211,6 +263,19 @@
                   "rhs": {
                     "const": {
                       "val": "1"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentAttackPower": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "1200"
                     }
                   }
                 }
@@ -227,7 +292,7 @@
       }
     },
     {
-      "notes": "Without Seal of Command or Unsealed Wrath, Seal of Righteousness is the seal to keep up (Seal of Command alone measured 6% lower at band 40).",
+      "notes": "Otherwise Seal of Righteousness is the seal to keep up: without Seal of Command or Unsealed Wrath, low on mana, or with little attack power (unbuffed, Seal of Command alone measured 6% lower and the twist 17% lower).",
       "action": {
         "condition": {
           "cmp": {
