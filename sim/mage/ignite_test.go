@@ -172,3 +172,23 @@ func TestIgniteRollsCritsIntoOneBurn(t *testing.T) {
 		t.Errorf("two crits a tick apart burned %.1f, want 40%% of %.1f = %.1f", ignite, crits, want)
 	}
 }
+
+// TestIgniteRegistersOnce: the burn is one spell under 12654. A second
+// registration under the same id (the old trigger spell) made GetSpell,
+// and so any APL line naming Ignite, resolve to a spell with no dot.
+func TestIgniteRegistersOnce(t *testing.T) {
+	sim, built := newIgniteMageSim(t)
+	target := sim.Encounter.TargetUnits[0]
+	count := 0
+	for _, spell := range built.Spellbook {
+		if spell.ActionID.SameAction(core.ActionID{SpellID: 12654}) {
+			count++
+		}
+	}
+	if count != 1 {
+		t.Errorf("%d spells registered under Ignite's 12654, want 1", count)
+	}
+	if s := built.GetSpell(core.ActionID{SpellID: 12654}); s == nil || s.Dot(target) == nil {
+		t.Error("GetSpell(12654) does not resolve to Ignite's burn")
+	}
+}

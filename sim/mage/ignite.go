@@ -16,6 +16,20 @@ func (mage *Mage) applyIgnite() {
 	newIgniteDamage := 0.0
 	igniteBurn := 0.0
 
+	// burn adds a crit's share to Ignite on target.
+	burn := func(sim *core.Simulation, target *core.Unit) {
+		// Forever's Ignite rolls (client 412538: one aura,
+		// CumulativeAura 1): a new crit adds its share to what the
+		// burn has left and spreads the sum over a fresh 4 s.
+		dot := mage.igniteTick.Dot(target)
+		remaining := 0.0
+		if dot.IsActive() {
+			remaining = dot.SnapshotBaseDamage * float64(dot.MaxTicksRemaining())
+		}
+		igniteBurn = (remaining + newIgniteDamage*IgniteTicks) / IgniteTicks
+		dot.Apply(sim)
+	}
+
 	mage.RegisterAura(core.Aura{
 		Label:    "Ignite Talent",
 		Duration: core.NeverExpires,
@@ -28,26 +42,8 @@ func (mage *Mage) applyIgnite() {
 			}
 			if spell.SpellSchool.Matches(core.SpellSchoolFire) && result.DidCrit() {
 				newIgniteDamage = result.Damage * 0.08 * float64(mage.Talents.Ignite) / IgniteTicks
-				mage.Ignite.Cast(sim, result.Target)
+				burn(sim, result.Target)
 			}
-		},
-	})
-
-	mage.Ignite = mage.RegisterSpell(core.SpellConfig{
-		ActionID: core.ActionID{SpellID: 12654},
-		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell | SpellFlagMage,
-
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			// Forever's Ignite rolls (client 412538: one aura,
-			// CumulativeAura 1): a new crit adds its share to what the
-			// burn has left and spreads the sum over a fresh 4 s.
-			dot := mage.igniteTick.Dot(target)
-			remaining := 0.0
-			if dot.IsActive() {
-				remaining = dot.SnapshotBaseDamage * float64(dot.MaxTicksRemaining())
-			}
-			igniteBurn = (remaining + newIgniteDamage*IgniteTicks) / IgniteTicks
-			dot.Apply(sim)
 		},
 	})
 
