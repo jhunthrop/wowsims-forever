@@ -25,7 +25,7 @@ const (
 	healingWaveID        = 10396
 	riptideID            = 1239243
 	naturesSwiftnessID   = 16188
-	manaTideTotemID      = 17359
+	manaTideTotemID      = 1325256
 	waterShieldID        = 408510
 )
 
