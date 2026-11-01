@@ -119,6 +119,12 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 		wp.AutoAttacks.MHConfig().DamageMultiplier *= 1.0 + unholyPowerDamagePerRank*float64(warlock.Talents.UnholyPower)
 	}
 
+	// Forever demons scale from the warlock (Warlock Pet Scaling 416189, the
+	// same server-computed channels as Hunter Pet Scaling 415429) and, like
+	// hunter pets, take no player buffs. The inheritance amounts are
+	// unpublished, so makeStatInheritance still grants nothing.
+	wp.RefusePlayerBuffs()
+
 	core.ApplyPetConsumeEffects(&wp.Character, warlock.Consumes)
 
 	warlock.AddPet(wp)
