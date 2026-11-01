@@ -544,28 +544,33 @@
       "cooldown_ms": 0,
       "ranks": [
         {
-          "id": 22568,
+          "id": 1328618,
           "rank": 1,
+          "level": 24
+        },
+        {
+          "id": 22568,
+          "rank": 2,
           "level": 32
         },
         {
           "id": 22827,
-          "rank": 2,
+          "rank": 3,
           "level": 40
         },
         {
           "id": 22828,
-          "rank": 3,
+          "rank": 4,
           "level": 48
         },
         {
           "id": 22829,
-          "rank": 4,
+          "rank": 5,
           "level": 56
         },
         {
           "id": 31018,
-          "rank": 5,
+          "rank": 6,
           "level": 60
         }
       ]
@@ -807,18 +812,28 @@
       "cooldown_ms": 0,
       "ranks": [
         {
-          "id": 414644,
+          "id": 1328617,
           "rank": 1,
+          "level": 25
+        },
+        {
+          "id": 1328616,
+          "rank": 2,
+          "level": 34
+        },
+        {
+          "id": 414644,
+          "rank": 3,
           "level": 42
         },
         {
           "id": 1235826,
-          "rank": 2,
+          "rank": 4,
           "level": 50
         },
         {
           "id": 1235827,
-          "rank": 3,
+          "rank": 5,
           "level": 58
         }
       ]
@@ -1127,17 +1142,17 @@
         {
           "id": 407995,
           "rank": 1,
-          "level": 25
+          "level": 40
         },
         {
           "id": 1238069,
           "rank": 2,
-          "level": 36
+          "level": 50
         },
         {
           "id": 1238070,
           "rank": 3,
-          "level": 48
+          "level": 60
         },
         {
           "id": 1238073,
@@ -1908,7 +1923,7 @@
       "active": true,
       "cost": 1050,
       "cost_type": 0,
-      "cast_time_ms": 0,
+      "cast_time_ms": 3000,
       "cooldown_ms": 6000,
       "ranks": [
         {

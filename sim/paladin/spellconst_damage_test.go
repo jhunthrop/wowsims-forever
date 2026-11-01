@@ -104,9 +104,10 @@ func TestHammerOfTheRighteousFlatDamageMatchesClient(t *testing.T) {
 
 // Holy Shield states the damage of a block on its trigger-damage aura
 // (0.08 spell power), not on a spell of its own. Client 1.60.1.70707's
-// hotfix moved every rank one bracket down (holy_shield.go): rank 1 deals
-// the talent text's 75, and ranks 2 and 3 deal what the client rows still
-// give ranks 1 and 2, so engine rank n+1 matches client rank n.
+// hotfix moved every rank one bracket down (holy_shield.go), and the client
+// tables carry it since the site's pipeline layers the server's push
+// (round 6): every engine rank matches its client rank, rank 1 the talent
+// text's 75.
 func TestHolyShieldDamageMatchesClient(t *testing.T) {
 	const procDamageAura = 43
 	const talentTextRank1Damage = 75 // "deals 75 Holy damage for each attack blocked"
@@ -114,8 +115,7 @@ func TestHolyShieldDamageMatchesClient(t *testing.T) {
 		t.Errorf("Holy Shield rank 1: engine damage %v, talent text %v", HolyShieldValues[0].damage, talentTextRank1Damage)
 	}
 	client := clientdamagetest.Load(t, clientPaladinSpellconst)
-	for i, rank := range HolyShieldValues[1:] {
-		rank.spellID = HolyShieldValues[i].spellID
+	for _, rank := range HolyShieldValues {
 		spell, ok := client.ByID(rank.spellID)
 		if !ok {
 			t.Fatalf("Holy Shield %d is not in the client table", rank.spellID)
@@ -127,7 +127,7 @@ func TestHolyShieldDamageMatchesClient(t *testing.T) {
 			}
 			found = true
 			if effect.Amount != rank.damage {
-				t.Errorf("Holy Shield one rank above client %d: engine damage %v, client %v", rank.spellID, rank.damage, effect.Amount)
+				t.Errorf("Holy Shield %d: engine damage %v, client %v", rank.spellID, rank.damage, effect.Amount)
 			}
 			if effect.SPCoefficient != 0 && (effect.SPCoefficient-holyShieldCoefficient > 0.005 || holyShieldCoefficient-effect.SPCoefficient > 0.005) {
 				t.Errorf("Holy Shield %d: engine coefficient %v, client %v", rank.spellID, holyShieldCoefficient, effect.SPCoefficient)

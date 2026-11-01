@@ -665,7 +665,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | ShadowPriest (Vampiric Embrace talent) | 60 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 30 of the class's 53 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 31 of the class's 54 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
@@ -690,6 +690,7 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Shadowguard (18137) | 20→60 | 12 | Shadow Magic | skill_line_ability | 0 | 0 | 0 | Troll racial |
 | Mind Vision (2096) | 22→44 | 2 | Shadow Magic | skill_line_ability | 150 mana | 0 | 0 | power cost |
 | Mana Burn (8129) | 24→56 | 5 | Discipline | skill_line_ability | 270 mana | 3000 | 0 | power cost, cast time |
+| Binding Heal (401937) | 25→56 | 6 | Holy | skill_line_ability | 380 mana | 1500 | 0 | power cost, cast time |
 | Divine Spirit (14752) | 30→60 | 4 | Discipline | skill_line_ability | 970 mana | 0 | 0 | power cost |
 | Mind Control (605) | 30→58 | 3 | Shadow Magic | skill_line_ability | 750 mana | 3000 | 0 | power cost, cast time |
 | Shadow Protection (976) | 30→56 | 3 | Shadow Magic | skill_line_ability | 650 mana | 0 | 0 | power cost |

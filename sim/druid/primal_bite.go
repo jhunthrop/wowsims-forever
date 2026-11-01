@@ -17,13 +17,11 @@ import (
 // read as.
 //
 // Client 1.60.1.70707's hotfix made Primal Bite the Feral capstone (tier 6,
-// so learned at 40) and raised its low ranks. The client tables still carry
-// the pre-hotfix ranks (PrimalBiteBaseDamage: 26, 38, 59 and 77 at 25, 36,
-// 48 and 60); the live tooltips (Wowhead's Forever spell tooltips, read
-// 2026-10-31) state 42 at 40 (407995), 62 at 50 (1238069) and 77 at 60
-// (1238070 and 1238073 alike), so primalBiteRanks is the live ladder and
-// the client table (PrimalBiteFlatDamage) is kept only for the
-// conformance comparison.
+// so learned at 40) and raised its low ranks: 42 at 40 (407995), 62 at 50
+// (1238069) and 77 at 60 (1238070 and 1238073 alike). The client tables
+// carry it since the site's pipeline layers the server's push (round 6;
+// before, they read 26, 38, 59 and 77 at 25, 36, 48 and 60), and the live
+// tooltips (Wowhead's Forever spell tooltips, read 2026-10-31) agree.
 //
 // unconfirmed: the threat multiplier (HighThreatMultiplier).
 const (

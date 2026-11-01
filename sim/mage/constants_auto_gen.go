@@ -1999,7 +1999,7 @@ var FrigidPowerCooldownMS = [FrigidPowerRanks + 1]int32{0}
 var FrigidPowerManaCost = [FrigidPowerRanks + 1]float64{0}
 var FrigidPowerManaCostPct = [FrigidPowerRanks + 1]float64{0}
 var FrigidPowerSpellCoeff = [FrigidPowerRanks + 1]float64{4}
-var FrigidPowerBaseDamage = [FrigidPowerRanks + 1][]float64{{3, 3}}
+var FrigidPowerBaseDamage = [FrigidPowerRanks + 1][]float64{{15, 15}}
 var FrigidPowerPointsPerLevel = [FrigidPowerRanks + 1]float64{0}
 var FrigidPowerMaxLevel = [FrigidPowerRanks + 1]int{0}
 
@@ -2746,7 +2746,7 @@ const IceLanceRanks = 6
 var IceLanceSpellId = [IceLanceRanks + 1]int32{401732, 1312002, 400640, 1240044, 1240045, 1240046, 1240047}
 var IceLanceLevel = [IceLanceRanks + 1]int{1, 20, 28, 34, 42, 48, 56}
 var IceLanceCastTime = [IceLanceRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
-var IceLanceCooldownMS = [IceLanceRanks + 1]int32{0, 8000, 0, 0, 0, 0, 0}
+var IceLanceCooldownMS = [IceLanceRanks + 1]int32{0, 8000, 8000, 8000, 8000, 8000, 8000}
 var IceLanceManaCost = [IceLanceRanks + 1]float64{0, 45, 55, 70, 105, 120, 160}
 var IceLanceManaCostPct = [IceLanceRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var IceLanceSpellCoeff = [IceLanceRanks + 1]float64{0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286}
@@ -3998,6 +3998,22 @@ var PrecisionPointsPerLevel = [PrecisionRanks + 1]float64{0}
 var PrecisionMaxLevel = [PrecisionRanks + 1]int{0}
 
 // unconfirmed: Precision coefficient derived from the vanilla convention (rank 0)
+
+// Predatory Discipline: ranks 0 present, from build 1.60.1.70707.
+const PredatoryDisciplineRanks = 0
+
+var PredatoryDisciplineSpellId = [PredatoryDisciplineRanks + 1]int32{1328613}
+var PredatoryDisciplineLevel = [PredatoryDisciplineRanks + 1]int{1}
+var PredatoryDisciplineCastTime = [PredatoryDisciplineRanks + 1]int32{0}
+var PredatoryDisciplineCooldownMS = [PredatoryDisciplineRanks + 1]int32{0}
+var PredatoryDisciplineManaCost = [PredatoryDisciplineRanks + 1]float64{0}
+var PredatoryDisciplineManaCostPct = [PredatoryDisciplineRanks + 1]float64{0}
+var PredatoryDisciplineSpellCoeff = [PredatoryDisciplineRanks + 1]float64{0.4286}
+var PredatoryDisciplineBaseDamage = [PredatoryDisciplineRanks + 1][]float64{{20, 20}}
+var PredatoryDisciplinePointsPerLevel = [PredatoryDisciplineRanks + 1]float64{0}
+var PredatoryDisciplineMaxLevel = [PredatoryDisciplineRanks + 1]int{0}
+
+// unconfirmed: Predatory Discipline coefficient derived from the vanilla convention (rank 0)
 
 // Presence of Mind: ranks 0 present, from build 1.60.1.70707.
 const PresenceOfMindRanks = 0
@@ -5506,7 +5522,7 @@ var WinterSChillCooldownMS = [WinterSChillRanks + 1]int32{0}
 var WinterSChillManaCost = [WinterSChillRanks + 1]float64{0}
 var WinterSChillManaCostPct = [WinterSChillRanks + 1]float64{0}
 var WinterSChillSpellCoeff = [WinterSChillRanks + 1]float64{1}
-var WinterSChillBaseDamage = [WinterSChillRanks + 1][]float64{{5, 5}}
+var WinterSChillBaseDamage = [WinterSChillRanks + 1][]float64{{20, 20}}
 var WinterSChillPointsPerLevel = [WinterSChillRanks + 1]float64{0}
 var WinterSChillMaxLevel = [WinterSChillRanks + 1]int{0}
 

@@ -595,6 +595,5 @@ var clientSpellRows = map[int32]ClientSpell{
 	1324315: {Name: "Violet Meditation", DurationMS: 15000, Effects: []ClientEffect{{Effect: 6, Aura: 134, Misc0: 0, Misc1: 0, Points: 15.0}, {Effect: 3, Aura: 0, Misc0: 0, Misc1: 0, Points: 30.0}}},
 	1324318: {Name: "Violet Meditation", ProcChance: 100, Effects: []ClientEffect{{Effect: 6, Aura: 42, Misc0: 0, Misc1: 0, Points: 1.0, Trigger: 1324315}}},
 	1324322: {Name: "Summon Arcane Elemental", DurationMS: 20000, Effects: []ClientEffect{{Effect: 28, Aura: 0, Misc0: 277729, Misc1: 6698, Points: 0.0}}},
-	1324323: {Name: "Summon Arcane Elemental", ProcChance: 100, Effects: []ClientEffect{{Effect: 6, Aura: 42, Misc0: 0, Misc1: 0, Points: 1.0, Trigger: 1326099}}},
-	1326099: {Name: "Summon Arcane Elemental", ProcChance: 100, Effects: []ClientEffect{{Effect: 6, Aura: 428, Misc0: 0, Misc1: 0, Points: 1.0, Trigger: 1324322}}},
+	1324323: {Name: "Summon Arcane Elemental", ProcChance: 100, Effects: []ClientEffect{{Effect: 6, Aura: 42, Misc0: 0, Misc1: 0, Points: 1.0, Trigger: 1324322}}},
 }

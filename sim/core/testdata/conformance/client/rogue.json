@@ -1767,7 +1767,7 @@
       "name": "Throw",
       "rank": 0,
       "school_mask": 1,
-      "cast_time_ms": 500,
+      "cast_time_ms": 0,
       "gcd_ms": 0,
       "cooldown_ms": 0,
       "category_cooldown_ms": 0,

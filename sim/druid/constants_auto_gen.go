@@ -593,6 +593,23 @@ var BloodDriveBaseDamage = [BloodDriveRanks + 1][]float64{{308, 342}}
 var BloodDrivePointsPerLevel = [BloodDriveRanks + 1]float64{0}
 var BloodDriveMaxLevel = [BloodDriveRanks + 1]int{0}
 
+// Bloom: ranks 0 present, from build 1.60.1.70707.
+const BloomRanks = 0
+
+var BloomSpellId = [BloomRanks + 1]int32{1328622}
+var BloomLevel = [BloomRanks + 1]int{1}
+var BloomCastTime = [BloomRanks + 1]int32{0}
+var BloomCooldownMS = [BloomRanks + 1]int32{0}
+var BloomManaCost = [BloomRanks + 1]float64{0}
+var BloomManaCostPct = [BloomRanks + 1]float64{0}
+var BloomSpellCoeff = [BloomRanks + 1]float64{0.2143}
+var BloomBaseDamage = [BloomRanks + 1][]float64{{1, 1}}
+var BloomPointsPerLevel = [BloomRanks + 1]float64{0}
+var BloomMaxLevel = [BloomRanks + 1]int{0}
+
+// unconfirmed: Bloom coefficient derived from the vanilla convention (rank 0)
+// Bloom rank 0: kept id 1328622 (spell_level 1); dropped 1328621 (spell_level 1)
+
 // Boar Charge: ranks 0 present, from build 1.60.1.70707.
 const BoarChargeRanks = 0
 
@@ -1426,19 +1443,19 @@ var FerociousIdolMaxLevel = [FerociousIdolRanks + 1]int{0}
 
 // unconfirmed: Ferocious  Idol coefficient derived from the vanilla convention (rank 0)
 
-// Ferocious Bite: ranks 0-5 present, from build 1.60.1.70707.
-const FerociousBiteRanks = 5
+// Ferocious Bite: ranks 0-6 present, from build 1.60.1.70707.
+const FerociousBiteRanks = 6
 
-var FerociousBiteSpellId = [FerociousBiteRanks + 1]int32{27557, 22568, 22827, 22828, 22829, 31018}
-var FerociousBiteLevel = [FerociousBiteRanks + 1]int{0, 32, 40, 48, 56, 60}
-var FerociousBiteCastTime = [FerociousBiteRanks + 1]int32{0, 0, 0, 0, 0, 0}
-var FerociousBiteCooldownMS = [FerociousBiteRanks + 1]int32{0, 0, 0, 0, 0, 0}
-var FerociousBiteManaCost = [FerociousBiteRanks + 1]float64{0, 35, 35, 35, 35, 35}
-var FerociousBiteManaCostPct = [FerociousBiteRanks + 1]float64{0, 0, 0, 0, 0, 0}
-var FerociousBiteSpellCoeff = [FerociousBiteRanks + 1]float64{1, 1, 1, 1, 1, 1}
-var FerociousBiteBaseDamage = [FerociousBiteRanks + 1][]float64{{1750, 2250}, {14, 30}, {20, 44}, {30, 70}, {45, 95}, {52, 112}}
-var FerociousBitePointsPerLevel = [FerociousBiteRanks + 1]float64{0, 0, 0, 0, 0, 0}
-var FerociousBiteMaxLevel = [FerociousBiteRanks + 1]int{0, 0, 0, 0, 0, 0}
+var FerociousBiteSpellId = [FerociousBiteRanks + 1]int32{27557, 1328618, 22568, 22827, 22828, 22829, 31018}
+var FerociousBiteLevel = [FerociousBiteRanks + 1]int{0, 24, 32, 40, 48, 56, 60}
+var FerociousBiteCastTime = [FerociousBiteRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
+var FerociousBiteCooldownMS = [FerociousBiteRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
+var FerociousBiteManaCost = [FerociousBiteRanks + 1]float64{0, 35, 35, 35, 35, 35, 35}
+var FerociousBiteManaCostPct = [FerociousBiteRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var FerociousBiteSpellCoeff = [FerociousBiteRanks + 1]float64{1, 1, 1, 1, 1, 1, 1}
+var FerociousBiteBaseDamage = [FerociousBiteRanks + 1][]float64{{1750, 2250}, {9, 19}, {14, 30}, {20, 44}, {30, 70}, {45, 95}, {52, 112}}
+var FerociousBitePointsPerLevel = [FerociousBiteRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
+var FerociousBiteMaxLevel = [FerociousBiteRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
 
 // Ferocity: ranks 0 present, from build 1.60.1.70707.
 const FerocityRanks = 0
@@ -2570,21 +2587,21 @@ var KingOfTheJungleMaxLevel = [KingOfTheJungleRanks + 1]int{0}
 // unconfirmed: King of the Jungle coefficient derived from the vanilla convention (rank 0)
 // King of the Jungle rank 0: kept id 424762 (spell_level 1); dropped 417046 (spell_level 1)
 
-// Lacerate: ranks 0-3 present, from build 1.60.1.70707.
-const LacerateRanks = 3
+// Lacerate: ranks 0-5 present, from build 1.60.1.70707.
+const LacerateRanks = 5
 
-var LacerateSpellId = [LacerateRanks + 1]int32{414647, 414644, 1235826, 1235827}
-var LacerateLevel = [LacerateRanks + 1]int{1, 42, 50, 58}
-var LacerateCastTime = [LacerateRanks + 1]int32{0, 0, 0, 0}
-var LacerateCooldownMS = [LacerateRanks + 1]int32{0, 0, 0, 0}
-var LacerateManaCost = [LacerateRanks + 1]float64{0, 150, 150, 150}
-var LacerateManaCostPct = [LacerateRanks + 1]float64{0, 0, 0, 0}
-var LacerateSpellCoeff = [LacerateRanks + 1]float64{0.2143, 0.5, 0.5, 0.5}
-var LacerateBaseDamage = [LacerateRanks + 1][]float64{{20, 20}, {10, 10}, {12, 12}, {15, 15}}
-var LaceratePointsPerLevel = [LacerateRanks + 1]float64{0, 0, 0, 0}
-var LacerateMaxLevel = [LacerateRanks + 1]int{0, 0, 0, 0}
+var LacerateSpellId = [LacerateRanks + 1]int32{414647, 1328617, 1328616, 414644, 1235826, 1235827}
+var LacerateLevel = [LacerateRanks + 1]int{1, 25, 34, 42, 50, 58}
+var LacerateCastTime = [LacerateRanks + 1]int32{0, 0, 0, 0, 0, 0}
+var LacerateCooldownMS = [LacerateRanks + 1]int32{0, 0, 0, 0, 0, 0}
+var LacerateManaCost = [LacerateRanks + 1]float64{0, 150, 150, 150, 150, 150}
+var LacerateManaCostPct = [LacerateRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var LacerateSpellCoeff = [LacerateRanks + 1]float64{0.2143, 0.5, 0.5, 0.5, 0.5, 0.5}
+var LacerateBaseDamage = [LacerateRanks + 1][]float64{{20, 20}, {4, 4}, {6, 6}, {10, 10}, {12, 12}, {15, 15}}
+var LaceratePointsPerLevel = [LacerateRanks + 1]float64{0, 0, 0, 0, 0, 0}
+var LacerateMaxLevel = [LacerateRanks + 1]int{0, 0, 0, 0, 0, 0}
 
-// unconfirmed: Lacerate coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3)
+// unconfirmed: Lacerate coefficient derived from the vanilla convention (rank 0, rank 1, rank 2, rank 3, rank 4, rank 5)
 
 // Lacerate Mangle Reset Chance: ranks 0 present, from build 1.60.1.70707.
 const LacerateMangleResetChanceRanks = 0
@@ -3171,13 +3188,13 @@ var PredatoryStrikesMaxLevel = [PredatoryStrikesRanks + 1]int{0}
 const PrimalBiteRanks = 4
 
 var PrimalBiteSpellId = [PrimalBiteRanks + 1]int32{0, 407995, 1238069, 1238070, 1238073}
-var PrimalBiteLevel = [PrimalBiteRanks + 1]int{0, 25, 36, 48, 60}
+var PrimalBiteLevel = [PrimalBiteRanks + 1]int{0, 40, 50, 60, 60}
 var PrimalBiteCastTime = [PrimalBiteRanks + 1]int32{0, 0, 0, 0, 0}
 var PrimalBiteCooldownMS = [PrimalBiteRanks + 1]int32{0, 6000, 6000, 6000, 6000}
 var PrimalBiteManaCost = [PrimalBiteRanks + 1]float64{0, 200, 200, 200, 200}
 var PrimalBiteManaCostPct = [PrimalBiteRanks + 1]float64{0, 0, 0, 0, 0}
 var PrimalBiteSpellCoeff = [PrimalBiteRanks + 1]float64{0, 1, 1, 1, 1}
-var PrimalBiteBaseDamage = [PrimalBiteRanks + 1][]float64{{0, 0}, {26, 26}, {38, 38}, {59, 59}, {77, 77}}
+var PrimalBiteBaseDamage = [PrimalBiteRanks + 1][]float64{{0, 0}, {42, 42}, {62, 62}, {77, 77}, {77, 77}}
 var PrimalBitePointsPerLevel = [PrimalBiteRanks + 1]float64{0, 0, 0, 0, 0}
 var PrimalBiteMaxLevel = [PrimalBiteRanks + 1]int{0, 0, 0, 0, 0}
 
@@ -4609,7 +4626,7 @@ const ShiftingPowerRanks = 0
 var ShiftingPowerSpellId = [ShiftingPowerRanks + 1]int32{1322605}
 var ShiftingPowerLevel = [ShiftingPowerRanks + 1]int{1}
 var ShiftingPowerCastTime = [ShiftingPowerRanks + 1]int32{0}
-var ShiftingPowerCooldownMS = [ShiftingPowerRanks + 1]int32{16000}
+var ShiftingPowerCooldownMS = [ShiftingPowerRanks + 1]int32{8000}
 var ShiftingPowerManaCost = [ShiftingPowerRanks + 1]float64{0}
 var ShiftingPowerManaCostPct = [ShiftingPowerRanks + 1]float64{55}
 var ShiftingPowerSpellCoeff = [ShiftingPowerRanks + 1]float64{1}
@@ -5391,7 +5408,7 @@ const WildGrowthRanks = 3
 
 var WildGrowthSpellId = [WildGrowthRanks + 1]int32{409810, 408120, 1238214, 1238215}
 var WildGrowthLevel = [WildGrowthRanks + 1]int{1, 40, 50, 60}
-var WildGrowthCastTime = [WildGrowthRanks + 1]int32{0, 0, 0, 0}
+var WildGrowthCastTime = [WildGrowthRanks + 1]int32{0, 3000, 3000, 3000}
 var WildGrowthCooldownMS = [WildGrowthRanks + 1]int32{0, 6000, 6000, 6000}
 var WildGrowthManaCost = [WildGrowthRanks + 1]float64{0, 550, 755, 1050}
 var WildGrowthManaCostPct = [WildGrowthRanks + 1]float64{0, 0, 0, 0}
