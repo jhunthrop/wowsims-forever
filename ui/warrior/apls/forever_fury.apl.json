@@ -47,11 +47,38 @@
       }
     },
     {
-      "notes": "Death Wish on cooldown.",
+      "notes": "Death Wish (30 s, 3 min cooldown) now if a second use still fits after it, otherwise held for the execute phase, or for the last 30 s when the execute phase is shorter than the buff. Holding for execute alone lost 5-23% in fights under 90 s and at 300 s, where it gave up a whole use.",
       "action": {
+        "condition": {
+          "or": {
+            "vals": [
+              {"cmp": {"op": "OpGe", "lhs": {"remainingTime": {}}, "rhs": {"const": {"val": "210s"}}}},
+              {"isExecutePhase": {"threshold": "E20"}},
+              {"cmp": {"op": "OpLe", "lhs": {"remainingTime": {}}, "rhs": {"const": {"val": "30s"}}}}
+            ]
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 12328
+          }
+        }
+      }
+    },
+    {
+      "notes": "Recklessness (15 s, 30 min cooldown: one use a fight) in the execute phase, or in the last 15 s when the execute phase is shorter than the buff.",
+      "action": {
+        "condition": {
+          "or": {
+            "vals": [
+              {"isExecutePhase": {"threshold": "E20"}},
+              {"cmp": {"op": "OpLe", "lhs": {"remainingTime": {}}, "rhs": {"const": {"val": "15s"}}}}
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 1719
           }
         }
       }
