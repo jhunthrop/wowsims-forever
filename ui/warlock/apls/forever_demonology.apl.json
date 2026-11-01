@@ -177,22 +177,81 @@
       }
     },
     {
-      "notes": "Bane of Doom is the one curse kept up: it deals its whole damage when the minute is out, so recast it the moment it fires. Bane of Agony and Curse of the Elements both measured lower in the search.",
+      "notes": "Bane of Doom is the one curse kept up: it deals its whole damage when the minute is out, so recast it the moment it fires, while a minute or more of the fight remains. Bane of Agony and Curse of the Elements both measured lower in the search.",
       "action": {
         "condition": {
-          "not": {
-            "val": {
-              "dotIsActive": {
-                "spellId": {
-                  "spellId": 603
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 603
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "60s"
+                    }
+                  }
                 }
               }
-            }
+            ]
           }
         },
         "castSpell": {
           "spellId": {
             "spellId": 603
+          }
+        }
+      }
+    },
+    {
+      "notes": "Bane of Agony in the last minute, when a Doom would not fire before the fight ends.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 603
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 11713,
+                        "rank": 6
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11713,
+            "rank": 6
           }
         }
       }
