@@ -351,6 +351,19 @@ func init() {
 		agent.GetCharacter().AddBonusRangedCritRating(2 * core.CritRatingPerCritChance)
 	})
 
+	// Blackfathom Sharpening Stone (1.60.1.70707): temporary enchant 7098
+	// "Hit +2%" is 430391 "Hit Weapon +2" (aura 54, 2), restricted to melee
+	// weapons (SpellEquippedItems subclass mask 42483). Aura 54 is the melee
+	// and ranged hit chance, so weapon attacks gain it and spells do not;
+	// the site's simdb row carries none of it.
+	core.AddClientWeaponEffect(7098, func(agent core.Agent, _ proto.ItemSlot) {
+		agent.GetCharacter().OnSpellRegistered(func(spell *core.Spell) {
+			if spell.CastType != proto.CastType_CastTypeUnknown {
+				spell.BonusHitRating += 2 * core.HitRatingPerHitChance
+			}
+		})
+	})
+
 	// Gloves - Threat
 	core.NewEnchantEffect(2613, func(agent core.Agent) {
 		character := agent.GetCharacter()
