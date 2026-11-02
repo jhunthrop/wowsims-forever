@@ -115,7 +115,6 @@ const (
 	EskhandarsLeftClaw         = 18202
 	EskhandarsRightClaw        = 18203
 	FiendishMachete            = 18310
-	RazorGauntlets             = 18326
 	QuelSerrar                 = 18348
 	BaronCharrsSceptre         = 18671
 	TalismanOfEphemeralPower   = 18820
@@ -276,35 +275,10 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=12791/barman-shanker
-	// Chance on hit: Wounds the target causing them to bleed for 100 damage over 30 sec.
-	// Assumed 1 PPM
-	itemhelpers.CreateWeaponProcSpell(BarmanShanker, "Barman Shanker", 1.0, func(character *core.Character) *core.Spell {
-		return character.GetOrRegisterSpell(core.SpellConfig{
-			ActionID:         core.ActionID{SpellID: 13318},
-			SpellSchool:      core.SpellSchoolPhysical,
-			DefenseType:      core.DefenseTypeMelee,
-			ProcMask:         core.ProcMaskEmpty,
-			Flags:            core.SpellFlagPureDot,
-			DamageMultiplier: 1,
-			ThreatMultiplier: 1,
-			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				result := spell.CalcAndDealOutcome(sim, target, spell.OutcomeMeleeSpecialHit)
-				if result.Landed() {
-					spell.Dot(target).Apply(sim)
-				}
-			},
-			Dot: core.DotConfig{
-				NumberOfTicks: 10,
-				TickLength:    time.Second * 3,
-				Aura: core.Aura{
-					Label: "Rend (Barman Shanker)",
-				},
-				OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-					dot.Spell.CalcAndDealPeriodicDamage(sim, target, 10, dot.OutcomeTick)
-				},
-			},
-		})
-	})
+	// Forever's proc is 1300787 Rend: aura 3, 14 every 1 sec for 7 sec, and
+	// effect 1's 2: "bleed for 98 damage over 7 sec. Deals 2 times as much
+	// damage if applied while behind the target." Assumed 1 PPM.
+	registerForeverRend(BarmanShanker, "Barman Shanker", 1300787, 14, 2)
 
 	// https://www.wowhead.com/classic/item=18671/baron-charrs-sceptre
 	// Chance on hit: Blasts a target for 35 Fire damage.
@@ -1372,36 +1346,9 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=5616/gutwrencher
-	itemhelpers.CreateWeaponProcSpell(Gutwrencher, "Gutwrencher", 1.0, func(character *core.Character) *core.Spell {
-		return character.GetOrRegisterSpell(core.SpellConfig{
-			ActionID:         core.ActionID{SpellID: 16406},
-			SpellSchool:      core.SpellSchoolPhysical,
-			DefenseType:      core.DefenseTypeMelee,
-			ProcMask:         core.ProcMaskEmpty,
-			Flags:            core.SpellFlagPureDot,
-			DamageMultiplier: 1,
-			ThreatMultiplier: 1,
-			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				result := spell.CalcAndDealOutcome(sim, target, spell.OutcomeMeleeSpecialHit)
-				if result.Landed() {
-					spell.Dot(target).Apply(sim)
-				}
-			},
-			Dot: core.DotConfig{
-				NumberOfTicks: 10,
-				TickLength:    time.Second * 3,
-				Aura: core.Aura{
-					Label: "Rend (Gutwrencher)",
-				},
-				OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-					dot.Snapshot(target, 8, isRollover)
-				},
-				OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-					dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
-				},
-			},
-		})
-	})
+	// Forever's proc is 1294426 Rend: aura 3, 11 every 1 sec for 7 sec,
+	// "bleed for 77 damage over 7 sec".
+	registerForeverRend(Gutwrencher, "Gutwrencher", 1294426, 11, 1)
 
 	// Gut Ripper, Pendulum of Doom and Blackhand Doomsaw: fatal wounds
 	// that hit harder below 25% health (fatalWoundExecuteBonus).
@@ -1610,40 +1557,20 @@ func init() {
 	registerClientWeaponProc(LinkensSwordOfMastery)
 
 	//https://www.wowhead.com/classic/item=19324/the-lobotomizer
-	// Chance on hit: Wounds the target for 200 to 300 damage and lowers Intellect of target by 25 for 30 sec.
-	// 0.4 PPM from Armaments Disc
+	// Forever's proc is 1290950 Brain Damage: Shadow (school 32, defense type
+	// magic), 250 with variance 0.4, "Wounds the target for 200 to 300 damage
+	// and increases the casting time of all spells by 25% for 30 sec". The
+	// slow means nothing against a boss. 0.4 PPM from Armaments Disc.
 	itemhelpers.CreateWeaponProcSpell(TheLobotomizer, "The Lobotomizer", .4, func(character *core.Character) *core.Spell {
-		procAuras := character.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-			return target.GetOrRegisterAura(core.Aura{
-				ActionID: core.ActionID{SpellID: 24388},
-				Label:    "Brain Damage",
-				Duration: time.Second * 30,
-				OnGain: func(aura *core.Aura, sim *core.Simulation) {
-					aura.Unit.AddStatsDynamic(sim, stats.Stats{
-						stats.Intellect: -25,
-					})
-				},
-				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-					aura.Unit.AddStatsDynamic(sim, stats.Stats{
-						stats.Intellect: 25,
-					})
-				},
-			})
-		})
-
 		return character.GetOrRegisterSpell(core.SpellConfig{
-			ActionID:         core.ActionID{SpellID: 24388},
-			SpellSchool:      core.SpellSchoolPhysical,
-			DefenseType:      core.DefenseTypeMelee,
+			ActionID:         core.ActionID{SpellID: 1290950},
+			SpellSchool:      core.SpellSchoolShadow,
+			DefenseType:      core.DefenseTypeMagic,
 			ProcMask:         core.ProcMaskEmpty,
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				damageRoll := sim.Roll(200, 300)
-				result := spell.CalcAndDealDamage(sim, target, damageRoll, spell.OutcomeMagicHitAndCrit)
-				if result.Landed() {
-					procAuras.Get(target).Activate(sim)
-				}
+				spell.CalcAndDealDamage(sim, target, sim.Roll(200, 300), spell.OutcomeMagicHitAndCrit)
 			},
 		})
 	})
@@ -2707,9 +2634,23 @@ func init() {
 		})
 	})
 
-	// https://www.wowhead.com/classic/item=22268/draconic-infused-emblem
-	// Use: Increases your spell damage by up to 100 and your healing by up to 190 for 15 sec. (1 Min, 30 Sec Cooldown)
-	core.NewSimpleStatOffensiveTrinketEffect(DraconicInfusedEmblem, stats.Stats{stats.SpellDamage: 100, stats.HealingPower: 190}, time.Second*15, time.Second*90)
+	// Draconic Infused Emblem: Forever has no use. Its equip, 1318931, is aura
+	// 42 on a harmful spellcast (ProcTypeMask 0x10000, ProcChance 100, no
+	// rate row: "Chance on harmful spellcast"), triggering 1318930 for 10
+	// sec: +35 spell damage (aura 13) and healing (aura 135). Its doubling
+	// against Dragonkin meets no published target. It procs at the unstated
+	// rate, as Ignition does.
+	core.NewItemEffect(DraconicInfusedEmblem, func(agent core.Agent) {
+		character := agent.GetCharacter()
+		buff := character.NewTemporaryStatsAura("Draconic Infused Emblem", core.ActionID{SpellID: 1318930},
+			stats.Stats{stats.SpellDamage: 35, stats.HealingPower: 35}, 10*time.Second)
+		core.MakeHarmfulSpellProcAura(&character.Unit, core.HarmfulSpellProc{
+			Name:     "Draconic Infused Emblem Proc",
+			ActionID: core.ActionID{SpellID: 1318931},
+			PPM:      core.UnstatedProcsPerMinute,
+			Handler:  func(sim *core.Simulation, _ *core.Unit) { buff.Activate(sim) },
+		})
+	})
 
 	// https://www.wowhead.com/classic/item=19288/darkmoon-card-blue-dragon
 	// Equip: 2% chance on successful spellcast to increase your Spirit by 150 for 15 sec.
@@ -3563,12 +3504,6 @@ func init() {
 		thornsArcaneDamageEffect(agent, Naglering, "Naglering", 3)
 	})
 
-	// https://www.wowhead.com/classic/item=18326/razor-gauntlets
-	// Equip: When struck in combat inflicts 3 Arcane damage to the attacker.
-	core.NewItemEffect(RazorGauntlets, func(agent core.Agent) {
-		thornsArcaneDamageEffect(agent, RazorGauntlets, "Razor Gauntlets", 3)
-	})
-
 	// https://www.wowhead.com/classic/item=1168/skullflame-shield
 	// Equip: When struck in melee combat, has a 3% chance of stealing 270 life from target enemy. (Proc chance: 3%)
 	// Equip: When struck in combat has a 2% chance of dealing 115 Fire damage to all targets around you. (Proc chance: 2%)
@@ -3901,4 +3836,42 @@ func ArmorShatterAuras(target *core.Unit) *core.Aura {
 	})
 
 	return aura
+}
+
+// registerForeverRend registers a Forever chance-on-hit Rend: tick every 1 sec
+// for 7 sec, multiplied by behindMultiplier when the wearer stands behind the
+// target. Assumed 1 PPM; the client states no rate.
+func registerForeverRend(item int32, name string, spellID int32, tick, behindMultiplier float64) {
+	itemhelpers.CreateWeaponProcSpell(item, name, 1.0, func(character *core.Character) *core.Spell {
+		return character.GetOrRegisterSpell(core.SpellConfig{
+			ActionID:         core.ActionID{SpellID: spellID},
+			SpellSchool:      core.SpellSchoolPhysical,
+			DefenseType:      core.DefenseTypeMelee,
+			ProcMask:         core.ProcMaskEmpty,
+			Flags:            core.SpellFlagPureDot,
+			DamageMultiplier: 1,
+			ThreatMultiplier: 1,
+			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+				result := spell.CalcAndDealOutcome(sim, target, spell.OutcomeMeleeSpecialHit)
+				if result.Landed() {
+					spell.Dot(target).Apply(sim)
+				}
+			},
+			Dot: core.DotConfig{
+				NumberOfTicks: 7,
+				TickLength:    time.Second,
+				Aura:          core.Aura{Label: "Rend (" + name + ")"},
+				OnSnapshot: func(_ *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
+					damage := tick
+					if !character.PseudoStats.InFrontOfTarget {
+						damage *= behindMultiplier
+					}
+					dot.Snapshot(target, damage, isRollover)
+				},
+				OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
+					dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
+				},
+			},
+		})
+	})
 }

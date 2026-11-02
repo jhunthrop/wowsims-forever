@@ -35,6 +35,7 @@ const (
 	SpireOfHakkar              = 10844
 	DormantHeartOfTheMountain  = 249473
 	MindtapTalisman            = 18371
+	RazorGauntlets             = 18326
 )
 
 // eternalPowerHeals are every rank of the four heals Dormant Heart of the
@@ -273,6 +274,9 @@ func init() {
 	// the attacker".
 	registerStruckDamage(CloakOfFlames, 21142, core.SpellSchoolFire, 7, 0, core.OutcomeLanded, 0)
 	registerStruckDamage(SporidCape, 1291698, core.SpellSchoolNature, 1, 0, core.OutcomeLanded, 0)
+	// Forever's Razor Gauntlets: 1302193, aura 15, "When struck in combat,
+	// inflicts 7 Nature damage to the attacker" (Era's was 3 Arcane).
+	registerStruckDamage(RazorGauntlets, 1302193, core.SpellSchoolNature, 7, 0, core.OutcomeLanded, 0)
 
 	registerMindtap()
 

@@ -438,3 +438,71 @@ func TestNatPaglesBrokenReelIsOnTheClientsCooldown(t *testing.T) {
 		t.Errorf("cooldown %v, want 1m15s", spell.CD.Duration)
 	}
 }
+
+// Forever retuned these chance-on-hit and equip effects under new spells
+// (ItemXItemEffect, 70707), and the engine still rolled Era's:
+//   - Gutwrencher (5616): 1294426 Rend, 11 every 1 sec for 7 sec ("bleed for
+//     77 damage over 7 sec"), not Era's 8 every 3 sec for 30 sec.
+//   - Barman Shanker (12791): 1300787 Rend, 14 every 1 sec for 7 sec, doubled
+//     when applied from behind ("98 damage over 7 sec. Deals 2 times as much
+//     damage if applied while behind the target"), not Era's 10 x 10.
+//   - The Lobotomizer (19324): 1290950 Brain Damage is Shadow (school 32,
+//     defense type magic), 250 with variance 0.4, not physical.
+//   - Razor Gauntlets (18326): 1302193, "When struck in combat, inflicts 7
+//     Nature damage to the attacker", not Era's 3 Arcane.
+//   - Draconic Infused Emblem (22268): no use; equip 1318931 is a chance on a
+//     harmful spellcast of 1318930, +35 spell damage and healing for 10 sec.
+func TestForeverBleedProcsTickTheClientsRows(t *testing.T) {
+	for _, c := range []struct {
+		name          string
+		item, spellID int32
+		tick          float64
+	}{
+		{"Gutwrencher", 5616, 1294426, 11},
+		{"Barman Shanker from behind", 12791, 1300787, 28},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			sim, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, c.item)
+			spell := character.GetSpell(core.ActionID{SpellID: c.spellID})
+			if spell == nil {
+				t.Fatalf("no proc spell %d", c.spellID)
+			}
+			target := sim.Encounter.TargetUnits[0]
+			for i := 0; i < 50 && !spell.Dot(target).IsActive(); i++ {
+				spell.Cast(sim, target)
+			}
+			dot := spell.Dot(target)
+			if !dot.IsActive() {
+				t.Fatal("the bleed never applied")
+			}
+			if dot.SnapshotBaseDamage != c.tick || dot.NumberOfTicks != 7 || dot.TickLength != time.Second {
+				t.Errorf("bleed is %v x %d every %v, want %v x 7 every 1s", dot.SnapshotBaseDamage, dot.NumberOfTicks, dot.TickLength, c.tick)
+			}
+		})
+	}
+}
+
+func TestTheLobotomizerHitsForShadow(t *testing.T) {
+	_, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, 19324)
+	spell := character.GetSpell(core.ActionID{SpellID: 1290950})
+	if spell == nil {
+		t.Fatal("no Brain Damage proc")
+	}
+	if spell.SpellSchool != core.SpellSchoolShadow || spell.DefenseType != core.DefenseTypeMagic {
+		t.Errorf("Brain Damage is school %v defense %v, want Shadow magic", spell.SpellSchool, spell.DefenseType)
+	}
+}
+
+func TestRazorGauntletsAndDraconicInfusedEmblemUseForeversSpells(t *testing.T) {
+	_, warrior := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotHands, 18326)
+	if warrior.GetSpell(core.ActionID{SpellID: 1302193}) == nil {
+		t.Error("Razor Gauntlets do not deal Forever's 7 Nature when struck")
+	}
+	_, mage := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 22268)
+	if mage.GetSpell(core.ActionID{ItemID: 22268}) != nil {
+		t.Error("Draconic Infused Emblem keeps Era's use")
+	}
+	if mage.GetAuraByID(core.ActionID{SpellID: 1318930}) == nil {
+		t.Error("Draconic Infused Emblem has no Forever equip proc")
+	}
+}
