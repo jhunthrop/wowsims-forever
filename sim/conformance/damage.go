@@ -271,10 +271,10 @@ func (c DamageComparison) expectedCoefficient() float64 {
 
 // levelPenaltyOf is the level penalty the engine applies to a rank the
 // player casts (core.RegisterSpell): a spell with a cost or a cast, not
-// physical, learned below level 20.
+// physical and not a heal, learned below level 20.
 func levelPenaltyOf(clientSpell spellconst.Spell, engine *core.Spell) float64 {
 	cast := engine.DefaultCast.GCD != 0 || engine.DefaultCast.CastTime != 0 || engine.Cost != nil
-	if !cast || engine.SpellSchool == core.SpellSchoolPhysical {
+	if !cast || engine.SpellSchool == core.SpellSchoolPhysical || engine.ProcMask.Matches(core.ProcMaskSpellHealing) {
 		return 1
 	}
 	return core.LevelPenalty(clientSpell.SpellLevel)

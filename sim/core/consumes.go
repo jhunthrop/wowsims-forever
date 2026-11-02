@@ -1215,13 +1215,17 @@ const burstPotionDuration = 30 * time.Second
 // (the alchemy recipes the Azeroth Commerce Authority and Durotar Supply and
 // Logistics sell): Frenzy Potion 250940 (aura 99 and aura 124 of 28), Major
 // Frenzy Potion 250943 (80), Spellblasting Potion 250934 (aura 13 of 16 on
-// every school) and Major Spellblasting Potion 250937 (47). The 1.60.1.70707
+// every school), Major Spellblasting Potion 250937 (47), and the healer's
+// Mender's Potion 250946 (aura 135, Spell Healing, of 31) and Major Mender's
+// Potion 250949 (88), whose recipes the same vendors sell. The 1.60.1.70707
 // client puts each in the potion category (4, 120000 ms).
 var burstPotions = map[proto.Potions]burstPotion{
 	proto.Potions_FrenzyPotion:             {itemID: 250940, label: "Frenzy Potion", bonus: stats.Stats{stats.AttackPower: 28, stats.RangedAttackPower: 28}},
 	proto.Potions_MajorFrenzyPotion:        {itemID: 250943, label: "Major Frenzy Potion", bonus: stats.Stats{stats.AttackPower: 80, stats.RangedAttackPower: 80}},
 	proto.Potions_SpellblastingPotion:      {itemID: 250934, label: "Spellblasting Potion", bonus: stats.Stats{stats.SpellDamage: 16}},
 	proto.Potions_MajorSpellblastingPotion: {itemID: 250937, label: "Major Spellblasting Potion", bonus: stats.Stats{stats.SpellDamage: 47}},
+	proto.Potions_MendersPotion:            {itemID: 250946, label: "Mender's Potion", bonus: stats.Stats{stats.HealingPower: 31}},
+	proto.Potions_MajorMendersPotion:       {itemID: 250949, label: "Major Mender's Potion", bonus: stats.Stats{stats.HealingPower: 88}},
 }
 
 // makeBurstPotionMCD drinks a 30-second potion as a DPS cooldown.
@@ -1230,6 +1234,9 @@ func makeBurstPotionMCD(potion burstPotion, character *Character, cdTimer *Timer
 	aura := character.NewTemporaryStatsAura(potion.label, actionID, potion.bonus, burstPotionDuration)
 	return MajorCooldown{
 		Type: CooldownTypeDPS,
+		// The potion buffs the drinker, so a healer whose target is a
+		// friend drinks it too.
+		SelfBuff: true,
 		Spell: character.GetOrRegisterSpell(SpellConfig{
 			ActionID: actionID,
 			Flags:    SpellFlagNoOnCastComplete,
@@ -1290,7 +1297,8 @@ func makePotionActivationInternal(potionType proto.Potions, character *Character
 		return makeMagicResistancePotionMCD(character, potionCD)
 
 	case proto.Potions_FrenzyPotion, proto.Potions_MajorFrenzyPotion,
-		proto.Potions_SpellblastingPotion, proto.Potions_MajorSpellblastingPotion:
+		proto.Potions_SpellblastingPotion, proto.Potions_MajorSpellblastingPotion,
+		proto.Potions_MendersPotion, proto.Potions_MajorMendersPotion:
 		return makeBurstPotionMCD(burstPotions[potionType], character, potionCD)
 	// case proto.Potions_GreaterArcaneProtectionPotion:
 	// 	return makeSchoolProtectionConsumableMCD(13461, character, potionCD)

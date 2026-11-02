@@ -381,6 +381,9 @@ enum Potions {
 	MajorFrenzyPotion = 24;
 	SpellblastingPotion = 25;
 	MajorSpellblastingPotion = 26;
+	// The healer's: Spell Healing for 30 sec, same vendors and category.
+	MendersPotion = 27;
+	MajorMendersPotion = 28;
 
 	LesserManaPotion = 1 [deprecated = true];
 }

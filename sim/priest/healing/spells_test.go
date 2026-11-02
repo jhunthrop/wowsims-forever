@@ -92,8 +92,8 @@ func TestEveryRankHealsTheClientRollPlusCoefficientTimesHealingPower(t *testing.
 				t.Fatalf("%s rank %d: spell %d is not in the client table", name, rank, spell.SpellID)
 			}
 			low, high, _ := row.DamageRange(0, 60)
-			// A rank learned below level 20 keeps only part of it.
-			bonus := row.Effects[0].ResolvedSPCoefficient * core.LevelPenalty(row.SpellLevel) * spell.HealingPower(target)
+			// A heal keeps its whole coefficient at any learn level.
+			bonus := row.Effects[0].ResolvedSPCoefficient * spell.HealingPower(target)
 			for draw := 0; draw < 5; draw++ {
 				assertWithin(t, name, healedBy(sim, spell, target), low+bonus, high+bonus)
 			}
