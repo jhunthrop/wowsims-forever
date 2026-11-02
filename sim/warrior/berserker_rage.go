@@ -37,7 +37,7 @@ func (warrior *Warrior) registerBerserkerRageSpell() {
 				warrior.AddRage(sim, 2.0, rageMetrics)
 			} else if spell.ProcMask.Matches(core.ProcMaskSpellDamage) {
 				// Spell attacks generally give 1 - 2 times unmodified damage as additional rage.
-				rageConversionDamageTaken := core.GetRageConversion(spell.Unit.Level)
+				rageConversionDamageTaken := core.GetRageConversion(warrior.Level) // the receiver's level (core.damageTakenRageConversion)
 				generatedRage := result.RawDamage() * 2.5 / rageConversionDamageTaken
 				generatedRage *= 1.0 // Using 1.0 because we don't know why it gives more sometimes
 				warrior.AddRage(sim, generatedRage, rageMetrics)

@@ -39,19 +39,29 @@ type RageBarOptions struct {
 	DamageTakenMultiplier float64
 }
 
-func GetRageConversion(attacker_level int32) float64 {
-	if attacker_level == 25 {
+func GetRageConversion(level int32) float64 {
+	if level == 25 {
 		return 82.25 // Tested
-	} else if attacker_level == 40 {
+	} else if level == 40 {
 		return 140.5 // Tested
-	} else if attacker_level < 45 {
+	} else if level < 45 {
 		// Poor fit, but better then current formula below 45
-		return 0.0215*float64(attacker_level*attacker_level) + 2.66*float64(attacker_level) + 0.89
+		return 0.0215*float64(level*level) + 2.66*float64(level) + 0.89
 	} else {
 		// Rage conversion is adjusted according to target stats (https://web.archive.org/web/20201118213002/https://blue.mmo-champion.com/topic/18325-the-new-rage-formula-by-kalgan/)\
 		// So this is probably only the base value formula and will be slightly wrong for most target
-		return 0.0091107836*float64(attacker_level*attacker_level) + 3.225598133*float64(attacker_level) + 4.2652911
+		return 0.0091107836*float64(level*level) + 3.225598133*float64(level) + 4.2652911
 	}
+}
+
+// damageTakenRageConversion is the rage conversion value rage from damage
+// taken divides by (rage = 2.5 x damage / c), at the RECEIVER's level:
+// Kalgan's 1.x rage formula ("rage conversion at your level", 230.6 at 60)
+// and cmangos-classic's Player::RewardRage (GetLevel() of the player who
+// gains the rage). It used to read the attacker's level, so a level-60
+// tank hit by a level-63 boss gained rage at 63's larger value.
+func damageTakenRageConversion(receiver, _ *Unit) float64 {
+	return GetRageConversion(receiver.Level)
 }
 
 // Forever's normalized rage. The beta replaced vanilla's damage-based
@@ -172,7 +182,7 @@ func (unit *Unit) EnableRageBar(options RageBarOptions) {
 			if unit.GetCurrentPowerBar() != RageBar {
 				return
 			}
-			rageConversionDamageTaken := GetRageConversion(spell.Unit.Level)
+			rageConversionDamageTaken := damageTakenRageConversion(unit, spell.Unit)
 			generatedRage := result.Damage * 2.5 / rageConversionDamageTaken
 			generatedRage *= unit.rageBar.damageTakenMultiplier
 			generatedRage += unit.rageBar.flatDamageTakenBonusRage

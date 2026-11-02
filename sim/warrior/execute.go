@@ -4,17 +4,23 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// executeRageConversion is the damage each point of rage beyond the
-// ability's own cost adds. The client's table carries the flat base
-// (effect 3 of spell 20662, 600 at rank 5, which is ExecuteBaseDamage)
-// but gives the conversion only as effect 64 with an amount of 0, so it
-// stays typed at vanilla's 15 and unconfirmed until the validation job
-// has something to compare against.
-const executeRageConversion = 15.0
+// executeRageConversionByRank is the damage each point of rage beyond the
+// ability's own cost adds, by rank: 3, 6, 9, 12 and 15 (5308, 20658, 20660,
+// 20661, 20662). The client's SpellEffect carries only the flat base
+// (effect 3, ExecuteBaseDamage) and an effect 64 of 0; the per-rank figure
+// is the client description's, as Wowhead Forever renders each rank's
+// tooltip, and matches Era. Rank 0 is the level-1 stub.
+var executeRageConversionByRank = [ExecuteRanks + 1]float64{0, 3, 6, 9, 12, 15}
+
+// executeRageConversion is the damage per extra rage of an Execute rank.
+func executeRageConversion(rank int) float64 {
+	return executeRageConversionByRank[rank]
+}
 
 func (warrior *Warrior) registerExecuteSpell() {
 	rank := rankAtLevel(ExecuteLevel[:], warrior.Level)
 	flatDamage := ExecuteDamage[rank]
+	ragePointDamage := executeRageConversion(rank)
 	casterLevel := int(warrior.Level)
 	// The engine keeps spell 20662 rather than the generated
 	// ExecuteSpellId[5]; they are the same id, and the rank-0 row the
@@ -80,7 +86,7 @@ func (warrior *Warrior) registerExecuteSpell() {
 				rageMetrics.Events--
 			}
 
-			baseDamage := flatDamage.Roll(sim, casterLevel) + executeRageConversion*(extraRage)
+			baseDamage := flatDamage.Roll(sim, casterLevel) + ragePointDamage*extraRage
 
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
