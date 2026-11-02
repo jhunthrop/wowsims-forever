@@ -310,3 +310,27 @@ func TestSpireOfHakkarAndWallOfTheDead(t *testing.T) {
 		t.Fatal("no 20 sec Bone Armor aura")
 	}
 }
+
+// Gloves of Holy Might's Smite, 1325229, is SpellCategories.DefenseType 3
+// (ranged) in the 70707 client, so it rolls the melee crit table and crits
+// for double, as a seal does: a melee wearer's spell crit is not what
+// decides it.
+func TestGlovesOfHolyMightRollsTheRangedTable(t *testing.T) {
+	sim, character := unbuffedCharacter(t, proto.Class_ClassHunter, proto.ItemSlot_ItemSlotHands, 867)
+	spell := character.GetSpell(core.ActionID{SpellID: 1325229})
+	if spell == nil {
+		t.Fatal("no Gloves of Holy Might proc spell")
+	}
+	if spell.DefenseType != core.DefenseTypeRanged {
+		t.Fatalf("defense type %v, want the client's ranged", spell.DefenseType)
+	}
+	character.AddStatDynamic(sim, stats.MeleeCrit, 40*core.CritRatingPerCritChance)
+	target := sim.Encounter.TargetUnits[0]
+	for i := 0; i < 2000; i++ {
+		spell.Cast(sim, target)
+	}
+	metrics := spell.SpellMetrics[target.UnitIndex]
+	if rate := float64(metrics.Crits) / float64(metrics.Hits+metrics.Crits); rate < 0.3 {
+		t.Errorf("crit %.1f%% of landed casts with 40%% melee crit, want the melee table", 100*rate)
+	}
+}
