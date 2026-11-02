@@ -15,7 +15,7 @@ character_stats_results: {
   final_stats: 0
   final_stats: 84.45
   final_stats: 11
-  final_stats: 56.89828
+  final_stats: 32
   final_stats: 0
   final_stats: 0
   final_stats: 1422.3
@@ -42,13 +42,15 @@ character_stats_results: {
   final_stats: 52.25715
   final_stats: 0
   final_stats: 0
+  final_stats: 20.5075
+  final_stats: 5.29078
  }
 }
 stat_weights_results: {
  key: "TestFeralTank-Phase1-StatWeights-Default"
  value: {
-  weights: 0.49948
-  weights: 0.2262
+  weights: 0.48199
+  weights: 0.24516
   weights: 0
   weights: 0
   weights: 0
@@ -61,22 +63,24 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 5.63598
+  weights: 3.96222
   weights: 0
   weights: 0
-  weights: 0.19742
+  weights: 0.19051
   weights: 0
   weights: 0
-  weights: 15.20864
+  weights: 14.78547
   weights: 0
   weights: 0
   weights: 0
-  weights: -0.0376
+  weights: -0.03171
   weights: 0
-  weights: -0.00356
+  weights: -0.70969
   weights: 0
   weights: 0
-  weights: 0.14353
+  weights: -0.89863
+  weights: 0
+  weights: 0
   weights: 0
   weights: 0
   weights: 0
@@ -93,86 +97,86 @@ stat_weights_results: {
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-CenarionRaiment"
  value: {
-  dps: 418.78416
-  tps: 1060.81258
+  dps: 401.16875
+  tps: 1006.6398
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Champion'sRefuge"
  value: {
-  dps: 476.57848
-  tps: 1210.70774
+  dps: 450.33882
+  tps: 1134.24313
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Champion'sSanctuary"
  value: {
-  dps: 469.64413
-  tps: 1186.12643
+  dps: 455.02311
+  tps: 1142.53901
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-FeralheartRaiment"
  value: {
-  dps: 455.41499
-  tps: 1149.82332
+  dps: 438.762
+  tps: 1099.22204
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-FieldMarshal'sSanctuary"
  value: {
-  dps: 500.01084
-  tps: 1268.81211
+  dps: 484.08403
+  tps: 1221.5375
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Haruspex'sGarb"
  value: {
-  dps: 448.30636
-  tps: 1136.91444
+  dps: 431.9978
+  tps: 1085.3858
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-LieutenantCommander'sRefuge"
  value: {
-  dps: 476.57848
-  tps: 1210.70774
+  dps: 450.33882
+  tps: 1134.24313
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-LieutenantCommander'sSanctuary"
  value: {
-  dps: 469.64413
-  tps: 1186.12643
+  dps: 455.02311
+  tps: 1142.53901
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-StormrageRaiment"
  value: {
-  dps: 418.67158
-  tps: 1060.7477
+  dps: 399.93782
+  tps: 1004.13313
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-SymbolsofUnendingLife"
  value: {
-  dps: 461.99737
-  tps: 1169.85619
+  dps: 446.30547
+  tps: 1126.18584
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Warlord'sSanctuary"
  value: {
-  dps: 500.01084
-  tps: 1268.81211
+  dps: 484.08403
+  tps: 1221.5375
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Average-Default"
  value: {
-  dps: 653.56861
-  tps: 1783.1881
-  dtps: 675.96746
+  dps: 632.39171
+  tps: 1724.16498
+  dtps: 675.85793
  }
 }
 dps_results: {
@@ -208,8 +212,8 @@ dps_results: {
 dps_results: {
  key: "TestFeralTank-Phase1-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 770.30667
-  tps: 2097.36847
-  dtps: 608.16897
+  dps: 739.52817
+  tps: 2013.20801
+  dtps: 607.58454
  }
 }
