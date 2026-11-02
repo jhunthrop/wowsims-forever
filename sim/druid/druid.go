@@ -227,12 +227,10 @@ func (druid *Druid) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
 	// The raid's Moonkin Aura is the same aura (24907) the form puts on
 	// the druid, and an aura does not stack with itself: when the raid
 	// buffs already carry it (another Moonkin, or the preset), the form
-	// adds no crit of its own. Read before this druid's own form sets the
-	// flag for the rest of the raid.
+	// adds no crit of its own. The form's aura gives the druid its 3%
+	// (registerMoonkinFormSpell), so the druid does not also raise the
+	// raid's flag: the raid buff would give it the same aura a second time.
 	druid.raidHasMoonkinAura = raidBuffs.MoonkinAura
-	if druid.InForm(Moonkin) {
-		raidBuffs.MoonkinAura = true
-	}
 
 	if druid.InForm(Cat|Bear) && druid.Talents.LeaderOfThePack {
 		raidBuffs.LeaderOfThePack = true
@@ -353,6 +351,13 @@ func New(character *core.Character, form DruidForm, selfBuffs SelfBuffs, talents
 		form:         form,
 	}
 	core.FillTalentsProto(druid.Talents.ProtoReflect(), talents, TalentTreeSizes)
+	// Moonkin Form is a talent: a druid that has not learned it (a Balance
+	// druid below 40) starts in caster form, not as a Moonkin without the
+	// form's aura.
+	if form == Moonkin && !druid.Talents.MoonkinForm {
+		druid.StartingForm = Humanoid
+		druid.form = Humanoid
+	}
 	druid.EnableManaBar()
 
 	druid.AddStatDependency(stats.Strength, stats.AttackPower, core.APPerStrength[character.Class])

@@ -11,7 +11,8 @@ import (
 // school-damage effect of 1, a dummy of 120 the spell script reads, and a
 // dummy of 3 that its text names: "causing Holy damage to each equal to
 // $s3 times the damage per second of your main hand weapon" to the
-// current target and up to two more. So the hit is 3 times the weapon's
+// current target and up to 3 additional nearby targets (Wowhead Forever,
+// read 2026-11-01; effects 0 and 2 carry EffectChainTargets 4). So the hit is 3 times the weapon's
 // damage per second, with the flat 1 added to each: a 2.5 second weapon
 // hits for 120% of a swing and a 1.5 second one for 200%, the figure the
 // ability's Season of Discovery namesake rounds to. The 120 dummy is not
@@ -28,7 +29,7 @@ const (
 	hammerOfTheRighteousCostShare   = 0.06 // cost_pct 6.0: of base mana
 	hammerOfTheRighteousFlat        = 1.0
 	hammerOfTheRighteousDPSMultiple = 3
-	hammerOfTheRighteousTargets     = 3
+	hammerOfTheRighteousTargets     = 4
 )
 
 // hammerOfTheRighteousSwingShare is the share of one main hand swing's

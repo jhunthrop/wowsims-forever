@@ -165,8 +165,10 @@ func (paladin *Paladin) registerHolyStrike() {
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				baseDamage := flatDamage.Roll(sim, casterLevel) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 				result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
-				paladin.activateIronCreed(sim)
+				// Iron Creed's proc (1311034, aura 231 on a done melee-class
+				// spell, no hit mask) needs a landed hit or crit.
 				if result.Landed() {
+					paladin.activateIronCreed(sim)
 					paladin.strikeWithShield(sim, target)
 				}
 

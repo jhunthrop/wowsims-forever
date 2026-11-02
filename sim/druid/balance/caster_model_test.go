@@ -196,3 +196,44 @@ func TestMoonkinCritIsGrantedOnce(t *testing.T) {
 		t.Errorf("with the raid's Moonkin Aura already up, the form adds %v spell crit, want 0 (one aura)", got)
 	}
 }
+
+// TestBalanceDruidsMoonkinAuraIsCountedOnce: the Balance spec started every
+// druid in Moonkin Form whether or not it had the talent (a leveling Balance
+// druid below 40 has not learned it), and a druid in the form raised the
+// raid's Moonkin Aura on top of the form's own aura. 24907 (aura 290, 3%)
+// is one aura and does not stack with itself, so:
+//   - without the talent, the druid is in caster form and has no Moonkin
+//     Aura (it had the raid's 3%);
+//   - with it, the form's aura is the druid's only 3% (it had 6% whenever
+//     the raid buffs did not already carry the aura: every bare band).
+func TestBalanceDruidsMoonkinAuraIsCountedOnce(t *testing.T) {
+	for _, tc := range []struct {
+		name     string
+		points   map[int]int
+		inForm   bool
+		formCrit float64
+	}{
+		{"without the talent", map[int]int{insectSwarmField: 1}, false, 0},
+		{"with the talent", map[int]int{insectSwarmField: 1, moonkinFormField: 1}, true, 0.03},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			built, sim, target := newBalanceDruidSimInRaid(t, druidTalentsString(t, tc.points), &proto.EquipmentSpec{}, &proto.RaidBuffs{})
+			if got := built.InForm(druid.Moonkin); got != tc.inForm {
+				t.Errorf("in Moonkin Form %v, want %v", got, tc.inForm)
+			}
+			raidBuffs := &proto.RaidBuffs{}
+			built.AddRaidBuffs(raidBuffs)
+			if raidBuffs.MoonkinAura {
+				t.Error("the druid raises the raid's Moonkin Aura on top of its own form's aura")
+			}
+			wrath := built.Wrath[8]
+			withForm := wrath.SpellCritChance(target)
+			if built.MoonkinFormAura != nil {
+				built.MoonkinFormAura.Deactivate(sim)
+			}
+			if got := withForm - wrath.SpellCritChance(target); !near(got, tc.formCrit) {
+				t.Errorf("Moonkin Form gives %v spell crit, want %v", got, tc.formCrit)
+			}
+		})
+	}
+}

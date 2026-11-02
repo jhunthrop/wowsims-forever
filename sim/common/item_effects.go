@@ -2946,10 +2946,16 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=17774/mark-of-the-chosen
+	// Forever's 21969 procs 21970 (aura 29, all stats, base 21, 1 min) on 2%
+	// of the melee hits taken, at most once every 2 minutes
+	// (SpellAuraOptions 132914: ProcChance 2, ProcCategoryRecovery 120000;
+	// Wowhead Forever "increasing all stats by 21 for 1 min ... 2m
+	// cooldown"). Era's was 25.
 	core.NewItemEffect(MarkOfTheChosen, func(agent core.Agent) {
 		character := agent.GetCharacter()
-		statIncrease := float64(25)
+		statIncrease := float64(21)
 		markProcChance := 0.02
+		icd := core.Cooldown{Timer: character.NewTimer(), Duration: 2 * time.Minute}
 
 		procAura := character.GetOrRegisterAura(core.Aura{
 			Label:    "Mark of the Chosen Effect",
@@ -2978,7 +2984,8 @@ func init() {
 		core.MakePermanent(character.GetOrRegisterAura(core.Aura{
 			Label: "Mark of the Chosen",
 			OnSpellHitTaken: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-				if result.Landed() && spell.ProcMask.Matches(core.ProcMaskMelee) && sim.RandomFloat("Mark of the Chosen") < markProcChance {
+				if result.Landed() && spell.ProcMask.Matches(core.ProcMaskMelee) && icd.IsReady(sim) && sim.RandomFloat("Mark of the Chosen") < markProcChance {
+					icd.Use(sim)
 					procAura.Activate(sim)
 				}
 			},

@@ -68,9 +68,6 @@ var BuffSpellValues = map[BuffName]stats.Stats{
 	CommandingShout: {
 		stats.Stamina: 42,
 	},
-	GraceOfAir: {
-		stats.Agility: TernaryFloat64(IncludeAQ, 77, 67),
-	},
 	FireResistanceAura: {
 		stats.FireResistance: 60,
 	},
@@ -97,9 +94,6 @@ var BuffSpellValues = map[BuffName]stats.Stats{
 	},
 	ShadowResistanceAura: {
 		stats.ShadowResistance: 60,
-	},
-	StrengthOfEarth: {
-		stats.Strength: TernaryFloat64(IncludeAQ, 77, 61),
 	},
 	ScrollOfAgility: {
 		stats.Agility: 17,
@@ -1328,11 +1322,22 @@ const ReplenishmentAuraDuration = time.Second * 15
 	})
 } */
 
+// totemRank is the totem rank unit's level has learned. Below the first
+// rank the aura registers under rank 1's id and grants nothing.
+func totemRank(ranks BuffRanks, unit *Unit) BuffRank {
+	if rank, ok := ranks.Learned(int(unit.Level)); ok {
+		return rank
+	}
+	return BuffRank{SpellID: ranks[0].SpellID}
+}
+
+// StrengthOfEarthTotemAura is the totem's Strength for unit's level
+// (StrengthOfEarthRanks), times multiplier (Enhancing Totems).
 func StrengthOfEarthTotemAura(unit *Unit, multiplier float64) *Aura {
-	rank := TernaryInt32(IncludeAQ, 5, 4)
-	spellID := []int32{0, 8075, 8160, 8161, 10442, 25361}[rank]
+	rank := totemRank(StrengthOfEarthRanks, unit)
+	spellID := rank.SpellID
 	duration := time.Minute * 2
-	updateStats := BuffSpellValues[StrengthOfEarth].Multiply(multiplier).Floor()
+	updateStats := stats.Stats{stats.Strength: rank.At(int(unit.Level))}.Multiply(multiplier).Floor()
 
 	aura := unit.GetOrRegisterAura(Aura{
 		Label:      "Strength of Earth Totem",
@@ -1357,11 +1362,13 @@ func StrengthOfEarthTotemAura(unit *Unit, multiplier float64) *Aura {
 	return aura
 }
 
+// GraceOfAirTotemAura is the totem's Agility for unit's level
+// (GraceOfAirRanks), times multiplier (Enhancing Totems).
 func GraceOfAirTotemAura(unit *Unit, multiplier float64) *Aura {
-	rank := TernaryInt32(IncludeAQ, 3, 2)
-	spellID := []int32{0, 8835, 10627, 25359}[rank]
+	rank := totemRank(GraceOfAirRanks, unit)
+	spellID := rank.SpellID
 	duration := time.Minute * 2
-	updateStats := BuffSpellValues[GraceOfAir].Multiply(multiplier).Floor()
+	updateStats := stats.Stats{stats.Agility: rank.At(int(unit.Level))}.Multiply(multiplier).Floor()
 
 	aura := unit.GetOrRegisterAura(Aura{
 		Label:      "Grace of Air Totem",

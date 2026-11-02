@@ -603,7 +603,10 @@ func TestShieldswornStrikeRestoresShieldSpecializationMana(t *testing.T) {
 }
 
 // Hammer of the Righteous strikes up to three targets.
-func TestHammerOfTheRighteousStrikesThreeTargets(t *testing.T) {
+// Hammer of the Righteous strikes four targets: 407632's damage effect 0
+// has EffectChainTargets 4 (effect 2 too), and Wowhead Forever's text is
+// "the current target and up to 3 additional nearby targets".
+func TestHammerOfTheRighteousStrikesFourTargets(t *testing.T) {
 	rotation := rotationOf(nil, []string{cast(spellHammerRighteous)})
 	metrics := shortRun{Rotation: rotation, Targets: 5, Seconds: 3, Iterations: 10}.metrics(t)
 
@@ -618,8 +621,8 @@ func TestHammerOfTheRighteousStrikesThreeTargets(t *testing.T) {
 			}
 		}
 	}
-	if struck != 3 {
-		t.Errorf("Hammer of the Righteous damaged %d targets of 5, want 3", struck)
+	if struck != 4 {
+		t.Errorf("Hammer of the Righteous damaged %d targets of 5, want 4", struck)
 	}
 }
 
@@ -709,5 +712,86 @@ func TestManaGainThreatIgnoresRighteousFury(t *testing.T) {
 	}
 	if got, want := otherActionThreat(metrics, proto.OtherAction_OtherActionManaGain), 0.5*gained; !near(got, want, 0.01*want) {
 		t.Errorf("mana gains of %.0f made %.1f threat under Righteous Fury, want %.1f (0.5 a mana, unmodified)", gained, got, want)
+	}
+}
+
+// Judgement of Fury (20414 and its ranks) carries the same rows round 6
+// moved Judgement of Righteousness and Command to the melee table with:
+// SpellCategories DefenseType 2 (row 76345) and SpellMisc Attributes_0
+// 0x250000, which holds 0x200000, no active defense. It rolled the spell
+// table instead: about 13% misses and 1.5x crits.
+func TestJudgementOfFuryRollsTheMeleeTableWithoutActiveDefenses(t *testing.T) {
+	f := shortRun{}.start(t)
+	judgement := f.spellOf(t, spellJudgementOfFury)
+	if judgement.DefenseType != core.DefenseTypeMelee {
+		t.Errorf("Judgement of Fury defense type = %v, want melee", judgement.DefenseType)
+	}
+	misses := 0
+	const casts = 4000
+	for i := 0; i < casts; i++ {
+		judgement.ApplyEffects(f.sim, f.boss, judgement)
+	}
+	for _, target := range judgement.SpellMetrics {
+		misses += int(target.Misses)
+		if target.Dodges+target.Parries+target.Blocks > 0 {
+			t.Errorf("Judgement of Fury was dodged, parried or blocked: %+v", target)
+		}
+	}
+	// The boss is three levels up: 9% melee misses less Precision, against
+	// 17% on the spell table.
+	if rate := float64(misses) / casts; rate > 0.11 {
+		t.Errorf("Judgement of Fury misses %.1f%%, want the melee table's (at most 9%%)", 100*rate)
+	}
+}
+
+// Iron Creed (1311034) opens its damage reduction from aura 231 on a done
+// melee-class spell (ProcTypeMask 16) with no hit mask, which both server
+// cores read as a landed hit or crit (TrinityCore's default done hit mask;
+// cmangos procs on hit or crit only). The engine opened it before checking
+// whether Holy Strike landed, so a missed, dodged or parried strike still
+// cut the damage taken.
+func TestIronCreedOpensOnlyOnALandedHolyStrike(t *testing.T) {
+	f := shortRun{Talents: map[string]int{"iron_creed": 3}}.start(t)
+	holyStrike := f.spellOf(t, spellHolyStrike)
+	creed := f.tank.GetAuraByID(core.ActionID{SpellID: auraIronCreed})
+	opened, landed := 0, 0
+	for i := 0; i < 2000; i++ {
+		creed.Deactivate(f.sim)
+		avoided := func() int32 {
+			m := holyStrike.SpellMetrics[0]
+			return m.Misses + m.Dodges + m.Parries
+		}
+		before := avoided()
+		holyStrike.ApplyEffects(f.sim, f.boss, holyStrike)
+		if avoided() == before {
+			landed++
+		}
+		if creed.IsActive() {
+			opened++
+		}
+	}
+	if landed == 2000 {
+		t.Fatal("every Holy Strike landed; the test needs misses, dodges or parries")
+	}
+	if opened != landed {
+		t.Errorf("Iron Creed opened on %d strikes of which %d landed, want only the landed ones", opened, landed)
+	}
+}
+
+// Divine Protection and Divine Shield (498, 5573, 642, 1020) are one
+// SpellCategories Category, 37, with a 300 s CategoryRecoveryTime: casting
+// one puts both on cooldown. Templar's Bulwark (1311015) has Category 0 and
+// its own cooldown. The engine gave each its own timer, so only Forbearance
+// kept them apart.
+func TestDivineProtectionAndDivineShieldShareOneCooldown(t *testing.T) {
+	f := shortRun{Talents: map[string]int{"templars_bulwark": 1}}.start(t)
+	shield := f.spellOf(t, spellDivineShield)
+	protection := f.spellOf(t, spellDivineProtection)
+	bulwark := f.spellOf(t, spellTemplarsBulwark)
+	if shield.CD.Timer != protection.CD.Timer {
+		t.Error("Divine Shield and Divine Protection have separate cooldowns, want one (category 37)")
+	}
+	if bulwark.CD.Timer == shield.CD.Timer {
+		t.Error("Templar's Bulwark shares the immunities' cooldown, want its own")
 	}
 }

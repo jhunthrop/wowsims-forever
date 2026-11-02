@@ -103,16 +103,8 @@ func (druid *Druid) registerInsectSwarmSpell() {
 
 					OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 						dot.Snapshot(target, tickDamage.Center(casterLevel), isRollover)
-						if !druid.form.Matches(Moonkin) {
-							dot.SnapshotCritChance = 0
-						}
 					},
 					OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-						// The per-tick read (Dynamic) re-took the crit chance;
-						// outside Moonkin Form the swarm still cannot crit.
-						if !druid.form.Matches(Moonkin) {
-							dot.SnapshotCritChance = 0
-						}
 						dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
 					},
 				},

@@ -180,6 +180,26 @@ var (
 		{SpellID: 10293, Level: 60, Amount: 735},
 	}
 
+	// Strength of Earth Totem (8075 to 25361; aura spells 8076, 8162,
+	// 8163, 10441, 25362, aura 29 Strength). Forever cut the Era 61/77 to
+	// 42/53; rank 5 is the Ahn'Qiraj book.
+	StrengthOfEarthRanks = BuffRanks{
+		{SpellID: 8075, Level: 10, Amount: 7},
+		{SpellID: 8160, Level: 24, Amount: 14},
+		{SpellID: 8161, Level: 38, Amount: 25},
+		{SpellID: 10442, Level: 52, Amount: 42},
+		{SpellID: 25361, Level: 60, Amount: 53, AhnQiraj: true},
+	}
+
+	// Grace of Air Totem (8835, 10627, 25359; aura spells 8836, 10626,
+	// 25360, aura 29 Agility). Forever raised Era's 43/67/77 to 49/77/89;
+	// rank 3 is the Ahn'Qiraj book.
+	GraceOfAirRanks = BuffRanks{
+		{SpellID: 8835, Level: 42, Amount: 49},
+		{SpellID: 10627, Level: 56, Amount: 77},
+		{SpellID: 25359, Level: 60, Amount: 89, AhnQiraj: true},
+	}
+
 	BattleShoutRankTable = BuffRanks{
 		{SpellID: 6673, Level: 1, Amount: 9, PerLevel: 0.3, MaxLevel: 11},
 		{SpellID: 5242, Level: 12, Amount: 21, PerLevel: 0.3, MaxLevel: 21},

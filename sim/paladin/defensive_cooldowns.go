@@ -63,8 +63,12 @@ const divineShieldDamageDealtMultiplier = 0.5
 
 func (paladin *Paladin) registerDefensiveCooldowns() {
 	paladin.registerTemplarsBulwark()
-	paladin.registerDivineProtection()
-	paladin.registerDivineShield()
+	// Divine Protection and Divine Shield are one SpellCategories Category
+	// (37, CategoryRecoveryTime 300 s): casting either puts both on
+	// cooldown. Templar's Bulwark (Category 0) keeps its own.
+	immunities := paladin.NewTimer()
+	paladin.registerDivineProtection(immunities)
+	paladin.registerDivineShield(immunities)
 }
 
 // defensiveCooldownDuration is the five minute cooldown less Sacred Duty.
@@ -73,11 +77,11 @@ func (paladin *Paladin) defensiveCooldownDuration() time.Duration {
 }
 
 // newDefensiveCooldown registers one Forbearance-bound defensive cooldown
-// and returns its spell. The effect runs on cast.
-func (paladin *Paladin) newDefensiveCooldown(config core.SpellConfig, effect core.ApplySpellResults) *core.Spell {
+// on timer and returns its spell. The effect runs on cast.
+func (paladin *Paladin) newDefensiveCooldown(timer *core.Timer, config core.SpellConfig, effect core.ApplySpellResults) *core.Spell {
 	config.Flags |= core.SpellFlagAPL | SpellFlag_Forbearance
 	config.Cast.CD = core.Cooldown{
-		Timer:    paladin.NewTimer(),
+		Timer:    timer,
 		Duration: paladin.defensiveCooldownDuration(),
 	}
 	config.ApplyEffects = effect
@@ -96,7 +100,7 @@ func (paladin *Paladin) registerTemplarsBulwark() {
 	})
 	shield := newDamageAbsorb(&paladin.Unit, aura, nil)
 
-	paladin.newDefensiveCooldown(core.SpellConfig{
+	paladin.newDefensiveCooldown(paladin.NewTimer(), core.SpellConfig{
 		ActionID:        core.ActionID{SpellID: templarsBulwarkActionID},
 		SpellSchool:     core.SpellSchoolHoly,
 		RequiredLevel:   templarsBulwarkLevel,
@@ -107,7 +111,7 @@ func (paladin *Paladin) registerTemplarsBulwark() {
 	})
 }
 
-func (paladin *Paladin) registerDivineProtection() {
+func (paladin *Paladin) registerDivineProtection(timer *core.Timer) {
 	rank, ok := highestImmunityRank(divineProtectionRanks, paladin.Level)
 	if !ok {
 		return
@@ -121,10 +125,10 @@ func (paladin *Paladin) registerDivineProtection() {
 			paladin.AutoAttacks.EnableAutoSwing(sim)
 		},
 	})
-	paladin.registerImmunityCooldown(rank, aura)
+	paladin.registerImmunityCooldown(timer, rank, aura)
 }
 
-func (paladin *Paladin) registerDivineShield() {
+func (paladin *Paladin) registerDivineShield(timer *core.Timer) {
 	rank, ok := highestImmunityRank(divineShieldRanks, paladin.Level)
 	if !ok {
 		return
@@ -138,7 +142,7 @@ func (paladin *Paladin) registerDivineShield() {
 			aura.Unit.PseudoStats.DamageDealtMultiplier /= divineShieldDamageDealtMultiplier
 		},
 	})
-	paladin.registerImmunityCooldown(rank, aura)
+	paladin.registerImmunityCooldown(timer, rank, aura)
 }
 
 func highestImmunityRank(ranks []immunityRank, level int32) (immunityRank, bool) {
@@ -161,10 +165,10 @@ func (paladin *Paladin) newImmunityAura(label string, rank immunityRank, hooks c
 
 // registerImmunityCooldown registers the cast of an immunity: an absorb
 // that never runs out for the aura's duration.
-func (paladin *Paladin) registerImmunityCooldown(rank immunityRank, aura *core.Aura) {
+func (paladin *Paladin) registerImmunityCooldown(timer *core.Timer, rank immunityRank, aura *core.Aura) {
 	immunity := newDamageAbsorb(&paladin.Unit, aura, nil)
 
-	paladin.newDefensiveCooldown(core.SpellConfig{
+	paladin.newDefensiveCooldown(timer, core.SpellConfig{
 		ActionID:        aura.ActionID,
 		SpellSchool:     core.SpellSchoolHoly,
 		RequiredLevel:   int(rank.level),
