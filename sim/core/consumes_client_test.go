@@ -74,3 +74,51 @@ func TestHealerConsumablesApply(t *testing.T) {
 		}
 	}
 }
+
+// Forever's foods are "Nutritious Food": an aura 227 effect whose value is
+// passed to the Well Fed it triggers, and the Well Fed's aura names the
+// stat (1.60.1.70707 SpellEffect; Wowhead Forever's item tooltips read the
+// same). Grilled Squid 13928 is 1% critical strike (Well Fed 1249523, aura
+// 290), not Era's 10 Agility; Tender Wolf Steak 18045 and Hot Wolf Ribs
+// 13851 are 15 and 10 Agility (1248420, aura 29 misc 1), not Stamina and
+// Spirit; Runn Tum Tuber Surprise 18254 is 15 Intellect (1248421), not 10;
+// Smoked Sagefish 21072 and Sagefish Delight 21217 are 4 and 7 spell damage
+// (1249520, aura 13), not mana per five seconds.
+func TestFoodsMatchTheClient(t *testing.T) {
+	want := map[proto.Food]stats.Stats{
+		proto.Food_FoodHotWolfRibs:              {stats.Agility: 10},
+		proto.Food_FoodSmokedSagefish:           {stats.SpellDamage: 4},
+		proto.Food_FoodSagefishDelight:          {stats.SpellDamage: 7},
+		proto.Food_FoodTenderWolfSteak:          {stats.Agility: 15},
+		proto.Food_FoodGrilledSquid:             {stats.Crit: 1 * CritRatingPerCritChance},
+		proto.Food_FoodSmokedDesertDumpling:     {stats.Strength: 20},
+		proto.Food_FoodNightfinSoup:             {stats.SpellDamage: 22},
+		proto.Food_FoodSagesTea:                 {stats.HealingPower: 44},
+		proto.Food_FoodRunnTumTuberSurprise:     {stats.Intellect: 15},
+		proto.Food_FoodDirgesKickChimaerokChops: {stats.Stamina: 25},
+		proto.Food_FoodBlessedSunfruitJuice:     {stats.Spirit: 10},
+		proto.Food_FoodBlessSunfruit:            {stats.Strength: 10},
+	}
+	for food, expected := range want {
+		if got := foodStats[food]; got != expected {
+			t.Errorf("%v gives %v, want %v", food, got, expected)
+		}
+	}
+}
+
+// Elixir of Greater Defense 13445 is 450 armor in Forever (spell 11348,
+// aura 674; Wowhead Forever: "Increases armor by 450"), Era's 250 raised,
+// and Elixir of Defense 8951 is 250 (Era's 150);
+// Elixir of Fortitude is item 250334, 200 maximum health (spell 1250928,
+// aura 34), where Era's 3825 gave 120.
+func TestDefensiveElixirsMatchTheClient(t *testing.T) {
+	if got := armorElixirStats[proto.ArmorElixir_ElixirOfGreaterDefense]; got != (stats.Stats{stats.BonusArmor: 450}) {
+		t.Errorf("Elixir of Greater Defense gives %v, want 450 armor", got)
+	}
+	if got := armorElixirStats[proto.ArmorElixir_ElixirOfDefense]; got != (stats.Stats{stats.BonusArmor: 250}) {
+		t.Errorf("Elixir of Defense gives %v, want 250 armor", got)
+	}
+	if got := healthElixirStats[proto.HealthElixir_ElixirOfFortitude]; got != (stats.Stats{stats.Health: 200}) {
+		t.Errorf("Elixir of Fortitude gives %v, want 200 health", got)
+	}
+}

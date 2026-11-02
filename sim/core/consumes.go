@@ -364,57 +364,32 @@ var nightfinSoupStats = stats.Stats{stats.SpellDamage: 22}
 // triggering Well Fed 1249927, aura 135).
 var sagesTeaStats = stats.Stats{stats.HealingPower: 44}
 
+// foodStats is each food's well-fed buff in this client. Forever's foods
+// are "Nutritious Food": an aura 227 effect passes its value to the Well
+// Fed it triggers, whose aura names the stat (1248420 Agility, 1248421
+// Intellect, 1248422 Strength, 1249520 spell damage, 1249523 critical
+// strike), so several differ from Era: Grilled Squid (13928) is 1% crit,
+// Tender Wolf Steak (18045) and Hot Wolf Ribs (13851) Agility, Runn Tum
+// Tuber Surprise (18254) 15 Intellect, the two sagefish spell damage.
+// Dirge's Chops and the Blessed Sunfruits keep their own Well Fed spells
+// (25661, 18141, 18125).
+var foodStats = map[proto.Food]stats.Stats{
+	proto.Food_FoodHotWolfRibs:              {stats.Agility: 10},
+	proto.Food_FoodSmokedSagefish:           {stats.SpellDamage: 4},
+	proto.Food_FoodSagefishDelight:          {stats.SpellDamage: 7},
+	proto.Food_FoodTenderWolfSteak:          {stats.Agility: 15},
+	proto.Food_FoodGrilledSquid:             {stats.Crit: 1 * CritRatingPerCritChance},
+	proto.Food_FoodSmokedDesertDumpling:     {stats.Strength: 20},
+	proto.Food_FoodNightfinSoup:             nightfinSoupStats,
+	proto.Food_FoodSagesTea:                 sagesTeaStats,
+	proto.Food_FoodRunnTumTuberSurprise:     {stats.Intellect: 15},
+	proto.Food_FoodDirgesKickChimaerokChops: {stats.Stamina: 25},
+	proto.Food_FoodBlessedSunfruitJuice:     {stats.Spirit: 10},
+	proto.Food_FoodBlessSunfruit:            {stats.Strength: 10},
+}
+
 func applyFoodConsumes(character *Character, consumes *proto.Consumes) {
-	if consumes.Food != proto.Food_FoodUnknown {
-		switch consumes.Food {
-		case proto.Food_FoodHotWolfRibs:
-			character.AddStats(stats.Stats{
-				stats.Stamina: 8,
-				stats.Spirit:  8,
-			})
-		case proto.Food_FoodSmokedSagefish:
-			character.AddStats(stats.Stats{
-				stats.MP5: 3,
-			})
-		case proto.Food_FoodSagefishDelight:
-			character.AddStats(stats.Stats{
-				stats.MP5: 6,
-			})
-		case proto.Food_FoodTenderWolfSteak:
-			character.AddStats(stats.Stats{
-				stats.Stamina: 12,
-				stats.Spirit:  12,
-			})
-		case proto.Food_FoodGrilledSquid:
-			character.AddStats(stats.Stats{
-				stats.Agility: 10,
-			})
-		case proto.Food_FoodSmokedDesertDumpling:
-			character.AddStats(stats.Stats{
-				stats.Strength: 20,
-			})
-		case proto.Food_FoodNightfinSoup:
-			character.AddStats(nightfinSoupStats)
-		case proto.Food_FoodSagesTea:
-			character.AddStats(sagesTeaStats)
-		case proto.Food_FoodRunnTumTuberSurprise:
-			character.AddStats(stats.Stats{
-				stats.Intellect: 10,
-			})
-		case proto.Food_FoodDirgesKickChimaerokChops:
-			character.AddStats(stats.Stats{
-				stats.Stamina: 25,
-			})
-		case proto.Food_FoodBlessedSunfruitJuice:
-			character.AddStats(stats.Stats{
-				stats.Spirit: 10,
-			})
-		case proto.Food_FoodBlessSunfruit:
-			character.AddStats(stats.Stats{
-				stats.Strength: 10,
-			})
-		}
-	}
+	character.AddStats(foodStats[consumes.Food])
 
 	if consumes.Alcohol != proto.Alcohol_AlcoholUnknown {
 		switch consumes.Alcohol {
@@ -494,42 +469,29 @@ func DragonBreathChiliAura(character *Character) *Aura {
 //                             Defensive Buff Consumes
 ///////////////////////////////////////////////////////////////////////////
 
-func applyDefensiveBuffConsumes(character *Character, consumes *proto.Consumes) {
-	if consumes.ArmorElixir != proto.ArmorElixir_ArmorElixirUnknown {
-		switch consumes.ArmorElixir {
-		case proto.ArmorElixir_ElixirOfSuperiorDefense:
-			character.AddStats(stats.Stats{
-				stats.BonusArmor: 450,
-			})
-		case proto.ArmorElixir_ElixirOfGreaterDefense:
-			character.AddStats(stats.Stats{
-				stats.BonusArmor: 250,
-			})
-		case proto.ArmorElixir_ElixirOfDefense:
-			character.AddStats(stats.Stats{
-				stats.BonusArmor: 150,
-			})
-		case proto.ArmorElixir_ElixirOfMinorDefense:
-			character.AddStats(stats.Stats{
-				stats.BonusArmor: 50,
-			})
-		case proto.ArmorElixir_ScrollOfProtection:
-			character.AddStats(BuffSpellValues[ScrollOfProtection])
-		}
+// armorElixirStats and healthElixirStats are the client's amounts: Elixir
+// of Minor Defense 5997 (50), Elixir of Defense 8951 (250, Era's 150),
+// Elixir of Greater Defense 13445 (450, Era's 250; aura 674 armor), Elixir
+// of Minor Fortitude 2458 (27) and Forever's Elixir of Fortitude 250334
+// (200, Era's 3825 gave 120; aura 34 health). Elixir of Superior Defense is
+// not in this client's item table.
+var (
+	armorElixirStats = map[proto.ArmorElixir]stats.Stats{
+		proto.ArmorElixir_ElixirOfSuperiorDefense: {stats.BonusArmor: 450},
+		proto.ArmorElixir_ElixirOfGreaterDefense:  {stats.BonusArmor: 450},
+		proto.ArmorElixir_ElixirOfDefense:         {stats.BonusArmor: 250},
+		proto.ArmorElixir_ElixirOfMinorDefense:    {stats.BonusArmor: 50},
+		proto.ArmorElixir_ScrollOfProtection:      BuffSpellValues[ScrollOfProtection],
 	}
+	healthElixirStats = map[proto.HealthElixir]stats.Stats{
+		proto.HealthElixir_ElixirOfFortitude:      {stats.Health: 200},
+		proto.HealthElixir_ElixirOfMinorFortitude: {stats.Health: 27},
+	}
+)
 
-	if consumes.HealthElixir != proto.HealthElixir_HealthElixirUnknown {
-		switch consumes.HealthElixir {
-		case proto.HealthElixir_ElixirOfFortitude:
-			character.AddStats(stats.Stats{
-				stats.Health: 120,
-			})
-		case proto.HealthElixir_ElixirOfMinorFortitude:
-			character.AddStats(stats.Stats{
-				stats.Health: 27,
-			})
-		}
-	}
+func applyDefensiveBuffConsumes(character *Character, consumes *proto.Consumes) {
+	character.AddStats(armorElixirStats[consumes.ArmorElixir])
+	character.AddStats(healthElixirStats[consumes.HealthElixir])
 }
 
 ///////////////////////////////////////////////////////////////////////////
