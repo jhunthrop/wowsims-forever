@@ -209,8 +209,6 @@ func TestClientPeriodicItemEffects(t *testing.T) {
 	}{
 		// 11790: 14 Nature every 3 sec for 12 sec.
 		{"Toxic Revenger", proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, 9453, 11790, 14, 4, 3 * time.Second, 0},
-		// 12257: 75 Fire every 1 sec for 5 sec, on a 5 minute use.
-		{"Thunderbrew's Boot Flask", proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 744, 12257, 75, 5, time.Second, 5 * time.Minute},
 	}
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
@@ -673,5 +671,37 @@ func TestArmorProcsReduceTheClientsArmor(t *testing.T) {
 				t.Errorf("three stacks take %v armor, want %v", got, 3*c.perStack)
 			}
 		})
+	}
+}
+
+// 12257 is aura 23, a periodic trigger: each second it casts 12278, a
+// direct 75 Fire spell (DefenseType 1, magic) that rolls spell hit and
+// crit like any other. It is not a damage-over-time tick.
+func TestThunderbrewsBootFlaskTicksAreFireSpellsThatCrit(t *testing.T) {
+	sim, character := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 744)
+	flask := character.GetSpell(core.ActionID{SpellID: 12257})
+	if flask == nil {
+		t.Fatal("Thunderbrew's Boot Flask registers no 12257")
+	}
+	target := sim.Encounter.TargetUnits[0]
+	flask.Cast(sim, target)
+	breath := character.GetSpell(core.ActionID{SpellID: 12278})
+	if breath == nil {
+		t.Fatal("the flask's ticks are not the client's 12278")
+	}
+	if breath.SpellSchool != core.SpellSchoolFire || breath.DefenseType != core.DefenseTypeMagic {
+		t.Errorf("12278 is school %v, defense %v; want Fire, magic", breath.SpellSchool, breath.DefenseType)
+	}
+	character.AddStatDynamic(sim, stats.SpellCrit, 50)
+	dot := flask.Dot(target)
+	for i := 0; i < 400; i++ {
+		dot.TickOnce(sim)
+	}
+	metrics := breath.SpellMetrics[target.UnitIndex]
+	if dot.NumberOfTicks != 5 || dot.TickLength != time.Second || flask.CD.Duration != 5*time.Minute {
+		t.Errorf("%d ticks every %v on a %v cooldown, want 5 every 1s on 5m", dot.NumberOfTicks, dot.TickLength, flask.CD.Duration)
+	}
+	if metrics.Crits == 0 || metrics.Hits+metrics.Crits == 0 {
+		t.Errorf("400 ticks: %d hits, %d crits; each tick is a spell that can crit", metrics.Hits, metrics.Crits)
 	}
 }
