@@ -164,14 +164,18 @@ func (mage *Mage) applyFrostTalents() {
 }
 
 // Clearcasting (client 12536) is "your next damage spell": one charge
-// (ProcCharges 1) of a -100% cost mod on the damage-spell class mask, so
-// Ice Barrier neither benefits nor spends it. Arcane Concentration (11213)
+// (ProcCharges 1) of a -1000% cost mod (SpellEffect 689319, base points
+// -1000; the druid's and shaman's are -100) on the damage-spell class
+// mask, so a stacked Arcane Blast or a cast under Arcane Power is free
+// too, and Ice Barrier neither benefits nor spends it. Arcane Concentration (11213)
 // procs it at 2% a rank with a 1 s proc cooldown (ProcCategoryRecovery
 // 1000).
 const (
 	clearcastingMask = MageSpellMaskFrostDamage | MageSpellMaskFireDamage | MageSpellMaskArcaneDamage
 	// arcaneConcentrationProcCooldown is 11213's ProcCategoryRecovery.
 	arcaneConcentrationProcCooldown = time.Second
+	// clearcastingCostPct is 12536 effect 0's base points.
+	clearcastingCostPct = -1000
 )
 
 // ProcClearcasting is Arcane Concentration's proc from spell's hit.
@@ -190,7 +194,7 @@ func (mage *Mage) applyArcaneConcentration() {
 	freeCast := mage.AddDynamicMod(core.SpellModConfig{
 		Kind:      core.SpellMod_PowerCost_Pct,
 		ClassMask: clearcastingMask,
-		IntValue:  -100,
+		IntValue:  clearcastingCostPct,
 	})
 
 	mage.ClearcastingAura = mage.RegisterAura(core.Aura{
@@ -214,9 +218,9 @@ func (mage *Mage) applyArcaneConcentration() {
 			}
 			// A cast that was free without Clearcasting (Missile
 			// Barrage's Arcane Missiles) leaves the charge. The cost is
-			// read without Clearcasting's own -100, which is what made
+			// read without Clearcasting's own mod, which is what made
 			// every cast look free and kept the charge for 15 s.
-			if spell.Cost.Multiplier+100 <= 0 {
+			if spell.Cost.Multiplier-clearcastingCostPct <= 0 {
 				return
 			}
 			aura.Deactivate(sim)

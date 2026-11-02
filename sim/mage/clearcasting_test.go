@@ -132,3 +132,25 @@ func TestAnInstantAtTheProcsMomentSpendsClearcasting(t *testing.T) {
 		t.Error("an Ice Lance at the proc's moment did not spend Clearcasting")
 	}
 }
+
+// Round 11 (casters M1): the mage's Clearcasting is -1000% cost (12536
+// effect 0, SpellEffect 689319: aura 108 misc 14, base points -1000, in the
+// shipped table and the hotfix push), where the druid's and shaman's are
+// -100. Percent cost mods add, so at -100 an Arcane Blast at four stacks
+// (+400%) still cost 400% of its price under Clearcasting; at -1000 it is
+// free, as the next damage spell should be.
+func TestClearcastingMakesAStackedArcaneBlastFree(t *testing.T) {
+	sim, built := newArcaneBlastTestMage(t)
+	if built.ClearcastingAura == nil {
+		t.Fatal("Clearcasting is not registered with Arcane Concentration taken")
+	}
+	arcaneBlast := built.ArcaneBlast[ArcaneBlastRanks]
+	target := sim.Encounter.TargetUnits[0]
+	for cast := int32(1); cast <= arcaneBlastMaxStacks; cast++ {
+		arcaneBlast.ApplyEffects(sim, target, arcaneBlast)
+	}
+	built.ClearcastingAura.Activate(sim)
+	if got := arcaneBlast.Cost.GetCurrentCost(); got != 0 {
+		t.Errorf("Arcane Blast at %d stacks under Clearcasting costs %.1f mana, want 0", arcaneBlastMaxStacks, got)
+	}
+}
