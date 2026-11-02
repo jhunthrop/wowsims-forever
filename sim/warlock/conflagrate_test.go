@@ -83,3 +83,36 @@ func TestConflagrateRegistersForeverLowRanks(t *testing.T) {
 		}
 	})
 }
+
+// TestAMissedConflagrateLeavesImmolate: Conflagrate's only client effect is
+// its Fire damage (18932 effect 0); consuming Immolate is part of the hit, so
+// a Conflagrate that misses deals nothing and takes nothing. Without Shadow
+// and Flame (which can keep Immolate on a hit) Immolate stays only on a miss.
+func TestAMissedConflagrateLeavesImmolate(t *testing.T) {
+	sawMiss, sawHit := false, false
+	sim, built, target := newWarlockForDamageTest(t, ConflagrateOnlyTalentsString)
+	for attempt := 0; attempt < 400 && !(sawMiss && sawHit); attempt++ {
+		immolate := built.Immolate[len(built.Immolate)-1]
+		immolate.Dot(target).Apply(sim)
+		conflagrate := built.Conflagrate[len(built.Conflagrate)-1]
+		dealtBefore := conflagrate.SpellMetrics[target.UnitIndex].TotalDamage
+		conflagrate.ApplyEffects(sim, target, conflagrate)
+		missed := conflagrate.SpellMetrics[target.UnitIndex].TotalDamage == dealtBefore
+		kept := immolate.Dot(target).IsActive()
+		switch {
+		case missed:
+			sawMiss = true
+			if !kept {
+				t.Fatal("a missed Conflagrate consumed Immolate")
+			}
+		default:
+			sawHit = true
+			if kept {
+				t.Fatal("a landed Conflagrate left Immolate without Shadow and Flame")
+			}
+		}
+	}
+	if !sawMiss || !sawHit {
+		t.Fatalf("saw miss %v, hit %v in 400 casts", sawMiss, sawHit)
+	}
+}

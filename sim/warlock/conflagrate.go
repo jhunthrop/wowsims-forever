@@ -74,11 +74,14 @@ func (warlock *Warlock) getConflagrateConfig(rank int) core.SpellConfig {
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			result := spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 
-			if result.Landed() {
-				// Shadow and Flame (talents.go): hitting with
-				// Conflagrate buffs the warlock's own Shadow damage.
-				warlock.triggerShadowAndFlame(sim, SpellCode_WarlockConflagrate)
+			// Consuming Immolate is part of the hit (18932's only client
+			// effect is its damage): a missed Conflagrate leaves it.
+			if !result.Landed() {
+				return
 			}
+			// Shadow and Flame (talents.go): hitting with Conflagrate
+			// buffs the warlock's own Shadow damage.
+			warlock.triggerShadowAndFlame(sim, SpellCode_WarlockConflagrate)
 
 			immoSpell := warlock.getActiveImmolateSpell(target)
 			if immoSpell != nil && !warlock.shadowAndFlamePreservesImmolate(sim) {
