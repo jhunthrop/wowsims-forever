@@ -162,6 +162,17 @@
       }
     },
     {
+      "notes": "Overpower whenever its dodge window is open. It is a Battle Stance spell, so it only fires before Berserker Stance is learned at 30; from then on the line falls through.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11585,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
       "notes": "Heroic Strike as the rage dump, never below 40 rage.",
       "action": {
         "condition": {

@@ -47,7 +47,7 @@ character_stats_results: {
 stat_weights_results: {
  key: "TestProtection-Phase1-StatWeights-Default"
  value: {
-  weights: 0.40714
+  weights: 0.40711
   weights: 0.13375
   weights: 0
   weights: 0.22316
@@ -60,11 +60,11 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 8.18137
+  weights: 8.18067
   weights: 2.4084
   weights: 0
   weights: 0
-  weights: 0.1463
+  weights: 0.14629
   weights: 1.56789
   weights: 0
   weights: 0
@@ -93,72 +93,72 @@ stat_weights_results: {
 dps_results: {
  key: "TestProtection-Phase1-AllItems-Avenger'sBattlegear"
  value: {
-  dps: 607.28335
-  tps: 1414.6345
+  dps: 607.26598
+  tps: 1414.61139
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-BattlegearofEternalJustice"
  value: {
-  dps: 544.57175
-  tps: 1249.62857
+  dps: 544.55603
+  tps: 1249.60766
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-Freethinker'sArmor"
  value: {
-  dps: 530.55181
-  tps: 1221.24832
+  dps: 530.53529
+  tps: 1221.22634
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-JudgementArmor"
  value: {
-  dps: 615.90835
-  tps: 1438.81404
+  dps: 615.89134
+  tps: 1438.79142
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-LawbringerArmor"
  value: {
-  dps: 542.21168
-  tps: 1248.74627
+  dps: 542.19505
+  tps: 1248.72416
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-LieutenantCommander'sRedoubt"
  value: {
-  dps: 576.24438
-  tps: 1337.31129
+  dps: 576.22739
+  tps: 1337.2887
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-RedemptionArmor"
  value: {
-  dps: 531.58627
-  tps: 1244.46245
+  dps: 531.57136
+  tps: 1244.44261
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-SanctifiedOrb-20512"
  value: {
-  dps: 500.27523
-  tps: 1154.5263
+  dps: 500.25972
+  tps: 1154.50568
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-AllItems-SoulforgeArmor"
  value: {
-  dps: 586.34718
-  tps: 1356.31152
+  dps: 586.32974
+  tps: 1356.28833
  }
 }
 dps_results: {
  key: "TestProtection-Phase1-Average-Default"
  value: {
-  dps: 594.19336
-  tps: 1399.60219
-  dtps: 456.77535
+  dps: 594.17371
+  tps: 1399.57605
+  dtps: 442.70642
   hps: 10.58227
  }
 }
@@ -249,9 +249,9 @@ dps_results: {
 dps_results: {
  key: "TestProtection-Phase1-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 695.39109
-  tps: 1596.65857
-  dtps: 422.01826
+  dps: 695.36709
+  tps: 1596.62666
+  dtps: 409.05203
   hps: 11.04349
  }
 }

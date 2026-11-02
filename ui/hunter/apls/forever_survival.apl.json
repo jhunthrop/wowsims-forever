@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Raptor Strike queued on the swing timer (tag 3, the on-next-swing queue tag), gated at 20% mana so it does not starve Mongoose Bite below.",
+      "notes": "Raptor Strike queued on the swing timer (tag 3, the on-next-swing queue tag), with no mana gate (the condition is always true): a 20% mana gate that once protected Mongoose Bite measured as a small loss.",
       "action": {
         "castSpell": {
           "spellId": {

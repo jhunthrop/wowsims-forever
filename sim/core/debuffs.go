@@ -745,9 +745,13 @@ func ExposeArmorAura(target *Unit, improvedEA int32) *Aura {
 	return aura
 }
 
+// curseOfRecklessnessArmorReduction is Forever's rank 4 (11717): SpellEffect
+// aura 674 at -505 armor ("reducing the target's armor by 505"). Era's
+// +90 attack power on the target is gone from the client row.
+const curseOfRecklessnessArmorReduction = 505.0
+
 func CurseOfRecklessnessAura(target *Unit) *Aura {
-	arpen := float64(640)
-	ap := float64(90)
+	arpen := curseOfRecklessnessArmorReduction
 
 	aura := target.GetOrRegisterAura(Aura{
 		Label:    "Curse of Recklessness",
@@ -755,11 +759,9 @@ func CurseOfRecklessnessAura(target *Unit) *Aura {
 		Duration: time.Minute * 2,
 		OnGain: func(aura *Aura, sim *Simulation) {
 			aura.Unit.AddStatDynamic(sim, stats.Armor, -arpen)
-			aura.Unit.AddStatDynamic(sim, stats.AttackPower, ap)
 		},
 		OnExpire: func(aura *Aura, sim *Simulation) {
 			aura.Unit.AddStatDynamic(sim, stats.Armor, arpen)
-			aura.Unit.AddStatDynamic(sim, stats.AttackPower, -ap)
 		},
 	})
 	return aura
