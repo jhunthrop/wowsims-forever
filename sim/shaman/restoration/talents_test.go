@@ -157,3 +157,25 @@ func TestMindfulnessAndPurificationDoNotLeakIntoOtherTrees(t *testing.T) {
 		t.Errorf("an untalented Healing Wave has additive multiplier %v", got)
 	}
 }
+
+// Healing Focus (node 104792, three ranks): "Gives your healing spells a
+// 23/47/70% chance to not lose casting time when you take damage." The
+// chance sits on each healing spell, where core's pushback reads it; a
+// Lightning Bolt keeps none.
+func TestHealingFocusKeepsHealingCastTimeUnderDamage(t *testing.T) {
+	for rank, want := range []float64{0, 0.23, 0.47, 0.70} {
+		_, healer := newHealer(t, 60, restoTalents(map[int]int{posHealingFocus: rank}))
+		for name, spell := range map[string]*core.Spell{
+			"Healing Wave":        healer.HealingWave[10],
+			"Lesser Healing Wave": healer.LesserHealingWave[6],
+			"Chain Heal":          healer.ChainHeal[3],
+		} {
+			if got := spell.PushbackReduction; got != want {
+				t.Errorf("Healing Focus %d/3: %s keeps its cast time %.2f of the time, want %.2f", rank, name, got, want)
+			}
+		}
+		if got := healer.LightningBolt[10].PushbackReduction; got != 0 {
+			t.Errorf("Healing Focus %d/3: Lightning Bolt keeps its cast time %.2f of the time, want 0", rank, got)
+		}
+	}
+}

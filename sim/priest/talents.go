@@ -47,12 +47,10 @@ func (priest *Priest) ApplyTalents() {
 	// healing rotation casts them. Named, not modeled.
 	_ = priest.Talents.HolyPrecision
 
-	// Martyrdom: a chance, on being critically struck, to resist
-	// pushback and interrupt effects for 6 sec. The only lever core has
-	// for pushback resistance (Spell.PushbackReduction) is read from the
-	// ATTACKING spell in applySpellPushback (sim/core/cast.go), not from
-	// anything a target-side talent can set, so there is no mod kind
-	// this talent could use without a core change. Named, not modeled.
+	// Martyrdom: on being the victim of a melee or ranged critical
+	// strike, 6 sec of no lost casting time. The fake raid's damage is
+	// plain health loss that never crits the healer, so it never
+	// triggers. Named, not modeled.
 	_ = priest.Talents.Martyrdom
 
 	// Improved Mana Burn: shortens Mana Burn's cast time. Mana Burn is
@@ -60,12 +58,7 @@ func (priest *Priest) ApplyTalents() {
 	// target on a Patchwerk-style dummy). Named, not modeled.
 	_ = priest.Talents.ImprovedManaBurn
 
-	// Twilight Focus: "a X% chance to avoid interruption caused by
-	// damage while casting any spell." Same pushback gap as Martyrdom:
-	// core reads the lever off the attacking spell, and the fake raid
-	// never interrupts the healer anyway. Named, not modeled; reported as
-	// a core gap.
-	_ = priest.Talents.TwilightFocus
+	priest.applyTwilightFocus()
 
 	// Holy
 	priest.applyInspiration()
@@ -87,8 +80,10 @@ func (priest *Priest) ApplyTalents() {
 	}
 
 	// Blessed Recovery: a heal over time on the priest after a critical
-	// hit or a hit of over 30% of its health. The fake raid never hits
-	// the healer, so there is no trigger. Named, not modeled.
+	// hit or a hit of over 30% of its health. The fake raid's pulses
+	// reach the healer but never crit, and at most 125% of a pulse is far
+	// under 30% of a priest's health, so there is no trigger. Named, not
+	// modeled.
 	_ = priest.Talents.BlessedRecovery
 
 	// Holy Reach: Smite and Holy Fire range and Prayer of Healing and
@@ -97,8 +92,8 @@ func (priest *Priest) ApplyTalents() {
 	_ = priest.Talents.HolyReach
 
 	// Spirit of Redemption: a 15 s healing form on the priest's death. A
-	// healing sim does not end the healer; the priest is not damaged by
-	// the raid damage model. Named, not modeled.
+	// healing sim does not end the healer at zero health, so there is no
+	// death to trigger it. Named, not modeled.
 	_ = priest.Talents.SpiritOfRedemption
 
 	priest.applyHolyBinding()
@@ -602,4 +597,33 @@ func (priest *Priest) triggerDarkInspiration(sim *core.Simulation) {
 	if priest.DarkInspirationAura != nil {
 		priest.DarkInspirationAura.Activate(sim)
 	}
+}
+
+// twilightFocusPushbackReduction is Twilight Focus's three ranks (node
+// 105867): "Gives your spells a 23/47/70% chance to not lose casting time
+// when you take damage." The healer takes raid-wide pulses mid-cast, and
+// core's pushback reads this chance off the spell being cast.
+var twilightFocusPushbackReduction = [4]float64{0, 0.23, 0.47, 0.70}
+
+// PriestSpellMaskTwilightFocus is what Twilight Focus's pushback modifier
+// names (14913 effect 0, aura 108 misc 9): the cast and channelled spells
+// Lesser Heal, Heal, Flash Heal, Greater Heal, Prayer of Healing, Binding
+// Heal, Penance, Smite, Holy Fire, Mind Blast and Mind Flay. Lightwell and
+// the instants are not in it.
+const PriestSpellMaskTwilightFocus = PriestSpellMaskLesserHeal | PriestSpellMaskHeal |
+	PriestSpellMaskFlashHeal | PriestSpellMaskGreaterHeal | PriestSpellMaskPrayerOfHealing |
+	PriestSpellMaskBindingHeal | PriestSpellMaskPenance | PriestSpellMaskSmite |
+	PriestSpellMaskHolyFire | PriestSpellMaskMindBlast | PriestSpellMaskMindFlay
+
+func (priest *Priest) applyTwilightFocus() {
+	rank := int(priest.Talents.TwilightFocus)
+	if rank <= 0 {
+		return
+	}
+	reduction := twilightFocusPushbackReduction[min(rank, len(twilightFocusPushbackReduction)-1)]
+	priest.OnSpellRegistered(func(spell *core.Spell) {
+		if spell.ClassSpellMask&PriestSpellMaskTwilightFocus != 0 {
+			spell.PushbackReduction += reduction
+		}
+	})
 }

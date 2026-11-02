@@ -41,6 +41,7 @@ func (shaman *Shaman) ApplyTalents() {
 	shaman.registerElementalMasteryCD()
 	shaman.applyElementalAlacrity()
 	shaman.applyEyeOfTheStorm()
+	shaman.applyHealingFocus()
 
 	// Enhancement Talents
 	shaman.applyFlurry()
@@ -587,6 +588,26 @@ func (shaman *Shaman) applyEyeOfTheStorm() {
 	})
 }
 
+// healingFocusPushbackReduction is Healing Focus's three ranks (node
+// 104792): "Gives your healing spells a 23/47/70% chance to not lose
+// casting time when you take damage." The healer takes raid-wide pulses
+// mid-cast, and core's pushback reads this chance off the spell being
+// cast. The modifier's client mask (16181 effect 0) names Healing Wave,
+// Lesser Healing Wave and Chain Heal.
+var healingFocusPushbackReduction = [4]float64{0, 0.23, 0.47, 0.70}
+
+func (shaman *Shaman) applyHealingFocus() {
+	if shaman.Talents.HealingFocus == 0 {
+		return
+	}
+	reduction := healingFocusPushbackReduction[rankIndex(shaman.Talents.HealingFocus, len(healingFocusPushbackReduction))]
+	shaman.OnSpellRegistered(func(spell *core.Spell) {
+		if spell.ClassSpellMask&(ShamanSpellMaskHealingWave|ShamanSpellMaskLesserHealingWave|ShamanSpellMaskChainHeal) != 0 {
+			spell.PushbackReduction += reduction
+		}
+	})
+}
+
 // lightningOverloadChance is Lightning Overload's three ranks
 // (talents/shaman.json node 104759): "Gives your Lightning Bolt and
 // Chain Lightning spells a 3/7/10% chance to cast a second, similar
@@ -912,7 +933,6 @@ func (shaman *Shaman) applyUnmodeledTalents() {
 	_ = t.ImprovedGhostWolf     // Ghost Wolf cast time and indoor use; a travel buff, not combat.
 	_ = t.ImprovedReincarnation // Reincarnation cooldown and return amount; the sim has no death, so no ankh.
 	_ = t.AncestralHealing      // +armor on a healed target for 15 s after a healing crit; the raid damage model's hits are plain health loss that ignores armor, so it changes no healing outcome.
-	_ = t.HealingFocus          // avoids damage pushback while casting healing spells; the engine's pushback rolls the attacker's spell, and no fake raid damage ever hits the healer.
 }
 
 // rankIndex clamps a talent rank to a per-rank table's last entry, the
