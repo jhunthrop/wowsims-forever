@@ -1220,6 +1220,57 @@ func makeRageConsumableMCD(itemId int32, character *Character, cdTimer *Timer) M
 	}
 }
 
+// burstPotion is one of Forever's 30-second potions: a flat stat bonus
+// for burstPotionDuration on the shared potion timer.
+type burstPotion struct {
+	itemID int32
+	label  string
+	bonus  stats.Stats
+}
+
+// burstPotionDuration is every 30-second potion's aura length (SpellMisc
+// duration 30000 ms on 1251923, 1251932, 1251936 and 1251940).
+const burstPotionDuration = 30 * time.Second
+
+// burstPotions are Forever's 30-second potions with a launch vendor source
+// (the alchemy recipes the Azeroth Commerce Authority and Durotar Supply and
+// Logistics sell): Frenzy Potion 250940 (aura 99 and aura 124 of 28), Major
+// Frenzy Potion 250943 (80), Spellblasting Potion 250934 (aura 13 of 16 on
+// every school) and Major Spellblasting Potion 250937 (47). The 1.60.1.70707
+// client puts each in the potion category (4, 120000 ms).
+var burstPotions = map[proto.Potions]burstPotion{
+	proto.Potions_FrenzyPotion:             {itemID: 250940, label: "Frenzy Potion", bonus: stats.Stats{stats.AttackPower: 28, stats.RangedAttackPower: 28}},
+	proto.Potions_MajorFrenzyPotion:        {itemID: 250943, label: "Major Frenzy Potion", bonus: stats.Stats{stats.AttackPower: 80, stats.RangedAttackPower: 80}},
+	proto.Potions_SpellblastingPotion:      {itemID: 250934, label: "Spellblasting Potion", bonus: stats.Stats{stats.SpellDamage: 16}},
+	proto.Potions_MajorSpellblastingPotion: {itemID: 250937, label: "Major Spellblasting Potion", bonus: stats.Stats{stats.SpellDamage: 47}},
+}
+
+// makeBurstPotionMCD drinks a 30-second potion as a DPS cooldown. Like every
+// potion here it cannot be drunk in a shapeshift form.
+func makeBurstPotionMCD(potion burstPotion, character *Character, cdTimer *Timer) MajorCooldown {
+	actionID := ActionID{ItemID: potion.itemID}
+	aura := character.NewTemporaryStatsAura(potion.label, actionID, potion.bonus, burstPotionDuration)
+	return MajorCooldown{
+		Type: CooldownTypeDPS,
+		ShouldActivate: func(sim *Simulation, character *Character) bool {
+			return !character.IsShapeshifted()
+		},
+		Spell: character.GetOrRegisterSpell(SpellConfig{
+			ActionID: actionID,
+			Flags:    SpellFlagNoOnCastComplete,
+			Cast: CastConfig{
+				CD: Cooldown{
+					Timer:    cdTimer,
+					Duration: time.Minute * 2,
+				},
+			},
+			ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
+				aura.Activate(sim)
+			},
+		}),
+	}
+}
+
 func makePotionActivationInternal(potionType proto.Potions, character *Character, potionCD *Timer) MajorCooldown {
 	if potionType == proto.Potions_UnknownPotion {
 		return MajorCooldown{}
@@ -1262,6 +1313,10 @@ func makePotionActivationInternal(potionType proto.Potions, character *Character
 
 	case proto.Potions_MagicResistancePotion:
 		return makeMagicResistancePotionMCD(character, potionCD)
+
+	case proto.Potions_FrenzyPotion, proto.Potions_MajorFrenzyPotion,
+		proto.Potions_SpellblastingPotion, proto.Potions_MajorSpellblastingPotion:
+		return makeBurstPotionMCD(burstPotions[potionType], character, potionCD)
 	// case proto.Potions_GreaterArcaneProtectionPotion:
 	// 	return makeSchoolProtectionConsumableMCD(13461, character, potionCD)
 	// case proto.Potions_GreaterFireProtectionPotion:
