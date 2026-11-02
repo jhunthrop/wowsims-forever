@@ -445,7 +445,9 @@ func (mage *Mage) registerCombustionCD() {
 
 	var fireSpells, frostfireBolts []*core.Spell
 	mage.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.SpellSchool.Matches(core.SpellSchoolFire) && spell.Flags.Matches(SpellFlagMage) {
+		// Combustion's buff (28682) is the Fire damage mask Critical Mass
+		// also uses; Ignite's burn (412538) is outside it.
+		if spell.Matches(MageSpellMaskFireDamage) {
 			fireSpells = append(fireSpells, spell)
 		}
 		if spell.SpellCode == SpellCode_MageFrostfireBolt {
