@@ -225,21 +225,21 @@ dps_results: {
  key: "TestP1TankWarrior-Phase1-Settings-Human-forever_l60-Protection-dps_no_reck-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
   dps: 39.03537
-  tps: 176.19399
+  tps: 175.08466
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-Settings-Human-forever_l60-Protection-dps_no_reck-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
   dps: 15.81715
-  tps: 30.01485
+  tps: 28.90552
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-Settings-Human-forever_l60-Protection-dps_no_reck-NoBuffs-P1-Consumes-ShortSingleTarget"
  value: {
   dps: 25.76203
-  tps: 48.33676
+  tps: 45.56343
  }
 }
 dps_results: {
@@ -267,21 +267,21 @@ dps_results: {
  key: "TestP1TankWarrior-Phase1-Settings-Human-forever_l60-Protection-forever_protection-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
   dps: 16.2088
-  tps: 196.73617
+  tps: 194.6631
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-Settings-Human-forever_l60-Protection-forever_protection-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
   dps: 11.23511
-  tps: 61.38004
+  tps: 59.30697
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-Settings-Human-forever_l60-Protection-forever_protection-NoBuffs-P1-Consumes-ShortSingleTarget"
  value: {
   dps: 15.21164
-  tps: 81.7627
+  tps: 76.58003
  }
 }
 dps_results: {
@@ -309,21 +309,21 @@ dps_results: {
  key: "TestP1TankWarrior-Phase1-Settings-Orc-forever_l60-Protection-dps_no_reck-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
   dps: 39.52311
-  tps: 176.71429
+  tps: 175.60496
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-Settings-Orc-forever_l60-Protection-dps_no_reck-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
   dps: 15.61741
-  tps: 29.84944
+  tps: 28.7401
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-Settings-Orc-forever_l60-Protection-dps_no_reck-NoBuffs-P1-Consumes-ShortSingleTarget"
  value: {
   dps: 26.03063
-  tps: 48.61586
+  tps: 45.84253
  }
 }
 dps_results: {
@@ -351,21 +351,21 @@ dps_results: {
  key: "TestP1TankWarrior-Phase1-Settings-Orc-forever_l60-Protection-forever_protection-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
   dps: 16.11722
-  tps: 196.77152
+  tps: 194.69845
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-Settings-Orc-forever_l60-Protection-forever_protection-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
   dps: 11.20886
-  tps: 61.53839
+  tps: 59.46533
  }
 }
 dps_results: {
  key: "TestP1TankWarrior-Phase1-Settings-Orc-forever_l60-Protection-forever_protection-NoBuffs-P1-Consumes-ShortSingleTarget"
  value: {
   dps: 15.2144
-  tps: 82.05069
+  tps: 76.86802
  }
 }
 dps_results: {

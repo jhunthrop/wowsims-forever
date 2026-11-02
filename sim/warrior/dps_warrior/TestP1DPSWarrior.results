@@ -224,21 +224,21 @@ dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Human-phase_1-DPS-dps_reck-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
   dps: 75.70529
-  tps: 204.11171
+  tps: 203.00237
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Human-phase_1-DPS-dps_reck-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
   dps: 30.77505
-  tps: 40.96803
+  tps: 39.8587
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Human-phase_1-DPS-dps_reck-NoBuffs-P1-Consumes-ShortSingleTarget"
  value: {
   dps: 79.84231
-  tps: 91.48594
+  tps: 88.7126
  }
 }
 dps_results: {
@@ -266,14 +266,14 @@ dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Human-phase_1-DPS-forever_fury-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
   dps: 69.45145
-  tps: 189.27765
+  tps: 188.72298
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Human-phase_1-DPS-forever_fury-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
   dps: 47.80616
-  tps: 49.68819
+  tps: 49.13352
  }
 }
 dps_results: {
@@ -308,21 +308,21 @@ dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Orc-phase_1-DPS-dps_reck-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
   dps: 77.79059
-  tps: 206.07395
+  tps: 204.96462
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Orc-phase_1-DPS-dps_reck-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
   dps: 31.83504
-  tps: 41.85136
+  tps: 40.74203
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Orc-phase_1-DPS-dps_reck-NoBuffs-P1-Consumes-ShortSingleTarget"
  value: {
   dps: 82.95868
-  tps: 94.13594
+  tps: 91.3626
  }
 }
 dps_results: {
@@ -350,14 +350,14 @@ dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Orc-phase_1-DPS-forever_fury-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
   dps: 71.73785
-  tps: 191.29166
+  tps: 190.73699
  }
 }
 dps_results: {
  key: "TestP1DPSWarrior-Phase1-Settings-Orc-phase_1-DPS-forever_fury-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
   dps: 49.17494
-  tps: 50.82028
+  tps: 50.26561
  }
 }
 dps_results: {
