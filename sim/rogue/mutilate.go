@@ -154,7 +154,7 @@ func (rogue *Rogue) registerMutilateSpell() {
 			// special ability that explicitly swings the off-hand.
 			ap := spell.MeleeAttackPower(target)
 			mhDamage := poisonedMultiplier * mutilateHandDamage(flatDamage.Roll(sim, casterLevel), rogue.AutoAttacks.MH().CalculateNormalizedWeaponDamage(sim, ap))
-			ohDamage := poisonedMultiplier * mutilateHandDamage(flatDamage.Roll(sim, casterLevel), rogue.AutoAttacks.OH().CalculateNormalizedWeaponDamage(sim, ap))
+			ohDamage := poisonedMultiplier * mutilateHandDamage(flatDamage.Roll(sim, casterLevel), rogue.mutilateOHWeaponDamage(sim, ap))
 
 			mhResult := rogue.MutilateMH.CalcAndDealDamage(sim, target, mhDamage, rogue.MutilateMH.OutcomeMeleeWeaponSpecialHitAndCrit)
 			ohResult := rogue.MutilateOH.CalcAndDealDamage(sim, target, ohDamage, rogue.MutilateOH.OutcomeMeleeWeaponSpecialHitAndCrit)
@@ -188,4 +188,12 @@ func (rogue *Rogue) TargetHasRoguePoison(target *core.Unit) bool {
 		return true
 	}
 	return rogue.woundPoisonDebuffAuras.Get(target).IsActive()
+}
+
+// mutilateOHWeaponDamage is the off-hand strike's normalized weapon damage,
+// raised by Dual Wield Specialization: 13715 is aura 122, the off-hand damage
+// percent, which scales the off-hand weapon's damage for every off-hand
+// strike, not only the white swing.
+func (rogue *Rogue) mutilateOHWeaponDamage(sim *core.Simulation, attackPower float64) float64 {
+	return rogue.AutoAttacks.OH().CalculateNormalizedWeaponDamage(sim, attackPower) * rogue.dwsMultiplier()
 }
