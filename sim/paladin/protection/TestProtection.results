@@ -48,36 +48,36 @@ stat_weights_results: {
  key: "TestProtection-Phase1-StatWeights-Default"
  value: {
   weights: 0.40711
-  weights: 0.1343
+  weights: 0.14216
   weights: 0
-  weights: 0.22312
-  weights: 0
-  weights: 0.3351
-  weights: 0
-  weights: 0
+  weights: 0.22307
   weights: 0
   weights: 0.3351
   weights: 0
   weights: 0
   weights: 0
-  weights: 8.17711
+  weights: 0.3351
+  weights: 0
+  weights: 0
+  weights: 0
+  weights: 8.09655
   weights: 2.4084
   weights: 0
   weights: 0
   weights: 0.14629
-  weights: 1.5678
+  weights: 1.55398
   weights: 0
   weights: 0
-  weights: 0.01443
+  weights: 0.01445
   weights: 0
   weights: 0
   weights: 0
   weights: 0
-  weights: -0.06115
-  weights: 1.17093
+  weights: -0.05069
+  weights: 1.17029
   weights: 0
-  weights: 0.09499
-  weights: 0.22156
+  weights: 0.22027
+  weights: 0.34427
   weights: 0
   weights: 0
   weights: 0
@@ -163,8 +163,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-Phase1-Average-Default"
  value: {
-  dps: 593.48446
-  tps: 1398.65935
+  dps: 586.98578
+  tps: 1386.52531
   dtps: 442.70642
   hps: 10.58227
  }
@@ -256,8 +256,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-Phase1-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 694.70262
-  tps: 1595.74291
+  dps: 688.69467
+  tps: 1584.49423
   dtps: 409.05203
   hps: 11.04349
  }
