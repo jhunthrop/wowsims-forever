@@ -165,8 +165,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-LongMultiTarget"
  value: {
-  dps: 590.26632
-  tps: 1913.93298
+  dps: 692.28223
+  tps: 2167.15189
  }
 }
 dps_results: {
@@ -186,8 +186,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-LongMultiTarget"
  value: {
-  dps: 96.00042
-  tps: 388.91087
+  dps: 107.53587
+  tps: 430.35165
  }
 }
 dps_results: {
@@ -207,8 +207,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-LongMultiTarget"
  value: {
-  dps: 588.83439
-  tps: 1910.94534
+  dps: 681.24718
+  tps: 2138.29344
  }
 }
 dps_results: {
@@ -228,8 +228,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-Phase1-Settings-Human-forever_l60-Righteous Fury-forever_protection-NoBuffs-Forever-Consumes-LongMultiTarget"
  value: {
-  dps: 98.8643
-  tps: 414.2862
+  dps: 110.60747
+  tps: 449.63316
  }
 }
 dps_results: {

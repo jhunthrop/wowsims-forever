@@ -603,7 +603,10 @@ func TestShieldswornStrikeRestoresShieldSpecializationMana(t *testing.T) {
 }
 
 // Hammer of the Righteous strikes up to three targets.
-func TestHammerOfTheRighteousStrikesThreeTargets(t *testing.T) {
+// Hammer of the Righteous strikes four targets: 407632's damage effect 0
+// has EffectChainTargets 4 (effect 2 too), and Wowhead Forever's text is
+// "the current target and up to 3 additional nearby targets".
+func TestHammerOfTheRighteousStrikesFourTargets(t *testing.T) {
 	rotation := rotationOf(nil, []string{cast(spellHammerRighteous)})
 	metrics := shortRun{Rotation: rotation, Targets: 5, Seconds: 3, Iterations: 10}.metrics(t)
 
@@ -618,8 +621,8 @@ func TestHammerOfTheRighteousStrikesThreeTargets(t *testing.T) {
 			}
 		}
 	}
-	if struck != 3 {
-		t.Errorf("Hammer of the Righteous damaged %d targets of 5, want 3", struck)
+	if struck != 4 {
+		t.Errorf("Hammer of the Righteous damaged %d targets of 5, want 4", struck)
 	}
 }
 
