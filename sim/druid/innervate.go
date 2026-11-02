@@ -7,6 +7,11 @@ import (
 // Returns the time to wait before the next action, or 0 if innervate is on CD
 // or disabled.
 func (druid *Druid) registerInnervateCD() {
+	// SkillLineAbility teaches Innervate at its SpellLevels 40; below it the
+	// druid has no Innervate to autocast.
+	if int(druid.Level) < InnervateLevel[0] {
+		return
+	}
 	innervateTarget := druid.GetUnit(druid.SelfBuffs.InnervateTarget)
 	if innervateTarget == nil {
 		return
