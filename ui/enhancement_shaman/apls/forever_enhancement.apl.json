@@ -20,8 +20,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 10614,
-            "rank": 3
+            "spellId": 10627,
+            "rank": 2
           }
         }
       },
@@ -65,7 +65,7 @@
       }
     },
     {
-      "notes": "Keep Windfury Totem down; it is the melee group's biggest damage totem and occupies the same Air slot Grace of Air would.",
+      "notes": "Keep Grace of Air Totem down for its Agility. Windfury Weapon on the main hand takes no benefit from any Windfury Totem (16362's text: \"disables any benefit you personally receive from Windfury Totem\"), and the raid preset already carries a Windfury Totem for the group, so the shaman's own Windfury Totem gave nobody anything and Grace of Air shares its Air slot. Learned at 42 (rank 2 at 56); below that there is no air totem worth a global.",
       "action": {
         "condition": {
           "cmp": {
@@ -84,8 +84,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 10614,
-            "rank": 3
+            "spellId": 10627,
+            "rank": 2
           }
         }
       }
