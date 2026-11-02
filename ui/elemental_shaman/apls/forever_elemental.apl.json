@@ -232,7 +232,7 @@
       }
     },
     {
-      "notes": "Lightning Bolt is the rest of the single-target rotation. It is cast at rank 9 (15207), not the top rank: over the raid fight rank 9 deals more in total, because the top rank runs the shaman out of mana. Below 60 each band casts the rank that does the most over its fight.",
+      "notes": "Lightning Bolt is the rest of the single-target rotation. It is cast at rank 9 (15207), not the top rank: over the raid fight rank 9 deals more in total, because the top rank runs the shaman out of mana. Below 60, and on an unbuffed level-60 fight, mana runs out long before the fight ends, so a lower rank of Lightning Bolt does more in total; that is a choice for a mana-bound fight, and a shaman who is not short of mana casts the top rank.",
       "action": {
         "castSpell": {
           "spellId": {
