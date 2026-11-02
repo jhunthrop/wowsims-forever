@@ -187,6 +187,7 @@ type Druid struct {
 	BearFormAura             *core.Aura
 	CatFormAura              *core.Aura
 	ClearcastingAura         *core.Aura
+	clearcastingProc         core.ProcSource
 	DemoralizingRoarAuras    core.AuraArray
 	EnrageAura               *core.Aura
 	FaerieFireAuras          core.AuraArray

@@ -821,6 +821,7 @@ func (shaman *Shaman) applyMaelstromWeapon() {
 	perStackPercent := int32(4 * shaman.Talents.MaelstromWeapon)
 	perStackCastFraction := float64(perStackPercent) / 100.0
 
+	var maelstromProc core.ProcSource
 	var lightningBoltSpells []*core.Spell
 	shaman.OnSpellRegistered(func(spell *core.Spell) {
 		if spell.SpellCode == SpellCode_ShamanLightningBolt {
@@ -843,11 +844,12 @@ func (shaman *Shaman) applyMaelstromWeapon() {
 			}
 		},
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			// Mirrors ClearcastingAura's own guard (applyElementalFocus
-			// above): OnCastComplete runs for every active aura after
-			// the triggering cast too, so don't consume the buff on the
-			// same event that granted it.
-			if aura.RemainingDuration(sim) == aura.Duration {
+			// A new stack resets the aura's duration, so comparing the
+			// remaining time to the full duration let a bolt cast at a
+			// stack's own moment (the rotation acts right after the
+			// swing that gave the fifth) keep every stack. Only a bolt
+			// whose own hit gave the stack (Totem of the Storm) keeps it.
+			if maelstromProc.IsFrom(sim, spell) {
 				return
 			}
 			if spell.SpellCode != SpellCode_ShamanLightningBolt {
@@ -868,6 +870,7 @@ func (shaman *Shaman) applyMaelstromWeapon() {
 			if !sim.Proc(chance, "Maelstrom Weapon") {
 				return
 			}
+			maelstromProc = core.ProcSource{Spell: spell, At: sim.CurrentTime}
 			maelstromAura.Activate(sim)
 			maelstromAura.AddStack(sim)
 		},

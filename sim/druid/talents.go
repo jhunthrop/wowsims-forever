@@ -348,6 +348,13 @@ func omenProcCooldown(inMoonkin bool) time.Duration {
 	return omenOfClarityCooldown
 }
 
+// ProcClearcasting is Omen of Clarity's proc from spell: one charge of
+// Clearcasting (16870).
+func (druid *Druid) ProcClearcasting(sim *core.Simulation, spell *core.Spell) {
+	druid.clearcastingProc = core.ProcSource{Spell: spell, At: sim.CurrentTime}
+	druid.ClearcastingAura.Activate(sim)
+}
+
 func (druid *Druid) applyOmenOfClarity() {
 	if int(druid.Level) < OmenOfClarityLevel[0] {
 		return
@@ -371,9 +378,10 @@ func (druid *Druid) applyOmenOfClarity() {
 			freeCost.Deactivate()
 		},
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			// OnCastComplete runs after the proc callbacks, so a proc from
-			// this same cast must not be spent by it.
-			if aura.RemainingDuration(sim) == aura.Duration {
+			// The cast that procced the charge does not spend it. Any
+			// other cast does, one completing at the proc's own moment
+			// included (a Shred right after the swing that procced).
+			if druid.clearcastingProc.IsFrom(sim, spell) {
 				return
 			}
 			druid.spendClearcasting(sim, spell)
@@ -396,7 +404,7 @@ func (druid *Druid) applyOmenOfClarity() {
 		}
 		if procced {
 			readyAt = sim.CurrentTime + omenProcCooldown(inMoonkin)
-			druid.ClearcastingAura.Activate(sim)
+			druid.ProcClearcasting(sim, spell)
 		}
 	}
 	tryProc := func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
