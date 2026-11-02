@@ -26,12 +26,19 @@ type clientWeaponProc struct {
 const (
 	ClawOfTheShadowmancer = 2912
 	Thornspike            = 6681
+	BlackMenace           = 6831
+	VerigansFist          = 6953
 )
 
 // clientWeaponProcs is keyed by item id.
 var clientWeaponProcs = map[int32]clientWeaponProc{
-	ClawOfTheShadowmancer:    {"Claw of the Shadowmancer", 1.0, 16409, core.SpellSchoolShadow, clientdamage.Effect{Amount: 35}, 0, core.DefenseTypeMagic},
-	Thornspike:               {"Thornspike", 1.0, 1293183, core.SpellSchoolPhysical, clientdamage.Effect{Amount: 45}, 0, core.DefenseTypeMelee},
+	ClawOfTheShadowmancer: {"Claw of the Shadowmancer", 1.0, 16409, core.SpellSchoolShadow, clientdamage.Effect{Amount: 35}, 0, core.DefenseTypeMagic},
+	Thornspike:            {"Thornspike", 1.0, 1293183, core.SpellSchoolPhysical, clientdamage.Effect{Amount: 45}, 0, core.DefenseTypeMelee},
+	// Forever's 1293407, "causing 77 Shadow damage" (Era's 13440 was 30).
+	BlackMenace: {"Black Menace", 1.0, 1293407, core.SpellSchoolShadow, clientdamage.Effect{Amount: 77}, 0, core.DefenseTypeMagic},
+	// 1322218, school mask 6: "dealing 39 to 59 Holyfire damage". Its 3x
+	// against Fire and Earth Elementals meets no published target.
+	VerigansFist:             {"Verigan's Fist", 1.0, 1322218, core.SpellSchoolHoly | core.SpellSchoolFire, clientdamage.Effect{Amount: 49, Variance: 0.42}, 0, core.DefenseTypeMagic},
 	AlcorsSunrazor:           {"Alcor's Sunrazor", 1.0, 18833, core.SpellSchoolFire, clientdamage.Effect{Amount: 105, Variance: 0.2}, 0, core.DefenseTypeMagic},
 	BaronCharrsSceptre:       {"Baron Charr's Sceptre", 1.0, 13442, core.SpellSchoolFire, clientdamage.Effect{Amount: 90, Variance: 0}, 0, core.DefenseTypeMagic},
 	BlackhandDoomsaw:         {"Blackhand Doomsaw", 0.4, 16549, core.SpellSchoolPhysical, clientdamage.Effect{Amount: 448, Variance: 0.33333}, 0, core.DefenseTypeMelee},
@@ -74,4 +81,44 @@ func registerClientWeaponProc(item int32) {
 	}
 	bounds := p.roll.Range(0)
 	itemhelpers.CreateWeaponCoHProcDamage(item, p.name, p.ppm, p.spellID, p.school, bounds[0], bounds[1]-bounds[0], p.coef, p.defense)
+}
+
+// registerClientWeaponProcSpell registers item's proc from clientWeaponProcs
+// with a hook on the rolled damage, for a proc whose spell scales its roll
+// (Gut Ripper's double damage below 25% health).
+func registerClientWeaponProcSpell(item int32, scale func(sim *core.Simulation, damage float64) float64) {
+	p, ok := clientWeaponProcs[item]
+	if !ok {
+		panic("no client weapon proc for an item")
+	}
+	if _, inTable := core.ItemsByID[item]; core.WITH_DB && !inTable {
+		return
+	}
+	bounds := p.roll.Range(0)
+	itemhelpers.CreateWeaponProcSpell(item, p.name, p.ppm, func(character *core.Character) *core.Spell {
+		config := core.SpellConfig{
+			ActionID:         core.ActionID{SpellID: p.spellID},
+			SpellSchool:      p.school,
+			DefenseType:      p.defense,
+			ProcMask:         core.ProcMaskEmpty,
+			Flags:            core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell,
+			DamageMultiplier: 1,
+			ThreatMultiplier: 1,
+			BonusCoefficient: p.coef,
+		}
+		melee := p.defense == core.DefenseTypeMelee
+		if melee {
+			config.ProcMask = core.ProcMaskMeleeSpecial
+			config.Flags = core.SpellFlagSuppressEquipProcs
+		}
+		config.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			damage := scale(sim, sim.Roll(bounds[0], bounds[1]))
+			outcome := spell.OutcomeMagicHitAndCrit
+			if melee {
+				outcome = spell.OutcomeMeleeSpecialHitAndCrit
+			}
+			spell.CalcAndDealDamage(sim, target, damage, outcome)
+		}
+		return character.GetOrRegisterSpell(config)
+	})
 }

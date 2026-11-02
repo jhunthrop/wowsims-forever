@@ -112,6 +112,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestP1DPSWarrior-Phase1-AllItems-BrutalHauberk-7133"
+ value: {
+  dps: 1465.84132
+  tps: 1264.61434
+ }
+}
+dps_results: {
  key: "TestP1DPSWarrior-Phase1-AllItems-Champion'sBattlearmor"
  value: {
   dps: 1270.46745
@@ -144,6 +151,13 @@ dps_results: {
  value: {
   dps: 1364.2371
   tps: 1177.94845
+ }
+}
+dps_results: {
+ key: "TestP1DPSWarrior-Phase1-AllItems-FireHardenedHauberk-6972"
+ value: {
+  dps: 1465.84132
+  tps: 1264.61434
  }
 }
 dps_results: {
