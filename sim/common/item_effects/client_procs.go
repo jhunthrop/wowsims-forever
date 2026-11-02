@@ -177,6 +177,18 @@ func init() {
 		character.AddMajorCooldown(core.MajorCooldown{Spell: spell, Type: core.CooldownTypeDPS})
 	})
 
+	// Forever's ranged hit on four classic-db items: Trueaim Gauntlets links
+	// to 1301127 "Increased Hit Chance - Ranged - 03" (aura 54, 3), and
+	// Infernal Trickster Leggings, Marksman Bands and Stoneshatter to 1294769
+	// "- 01" (aura 54, 1), each restricted to ranged weapons
+	// (SpellEquippedItems subclass mask 262156), so the hit is the ranged
+	// weapon's. The site's simdb rows carry none of it.
+	for item, hit := range map[int32]float64{13255: 3, 17754: 1, 18296: 1, 18388: 1} {
+		core.NewClientItemEffect(item, func(agent core.Agent) {
+			agent.GetCharacter().AddBonusRangedHitRating(hit * core.HitRatingPerHitChance)
+		})
+	}
+
 	// ItemEffect 98263 and 98669: 9174, energize 300 rage tenths, on a 1 hour
 	// cooldown and the 15 sec category the Hearts of the Mountain share
 	// (SpellCategory 1141): "Use: Increase Rage by 30."
