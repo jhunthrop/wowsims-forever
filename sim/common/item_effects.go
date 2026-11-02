@@ -2946,10 +2946,12 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=17774/mark-of-the-chosen
+	// (Forever: 21 stats, 120 s proc cooldown; markOfTheChosenStats)
 	core.NewItemEffect(MarkOfTheChosen, func(agent core.Agent) {
 		character := agent.GetCharacter()
-		statIncrease := float64(25)
+		statIncrease := markOfTheChosenStats
 		markProcChance := 0.02
+		icd := core.Cooldown{Timer: character.NewTimer(), Duration: markOfTheChosenProcCooldown}
 
 		procAura := character.GetOrRegisterAura(core.Aura{
 			Label:    "Mark of the Chosen Effect",
@@ -2978,7 +2980,8 @@ func init() {
 		core.MakePermanent(character.GetOrRegisterAura(core.Aura{
 			Label: "Mark of the Chosen",
 			OnSpellHitTaken: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-				if result.Landed() && spell.ProcMask.Matches(core.ProcMaskMelee) && sim.RandomFloat("Mark of the Chosen") < markProcChance {
+				if result.Landed() && spell.ProcMask.Matches(core.ProcMaskMelee) && icd.IsReady(sim) && sim.RandomFloat("Mark of the Chosen") < markProcChance {
+					icd.Use(sim)
 					procAura.Activate(sim)
 				}
 			},
@@ -3874,3 +3877,10 @@ func ArmorShatterAuras(target *core.Unit) *core.Aura {
 
 	return aura
 }
+
+// Mark of the Chosen 17774's proc: 21970 is aura 29 at 21 on every stat, and
+// 21969's SpellAuraOptions 132914 gives the proc a 120 s ProcCategoryRecovery.
+var (
+	markOfTheChosenStats        = 21.0
+	markOfTheChosenProcCooldown = 120 * time.Second
+)
