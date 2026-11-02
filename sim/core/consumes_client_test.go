@@ -116,6 +116,13 @@ func TestFoodsMatchTheClient(t *testing.T) {
 		proto.Food_FoodDirgesKickChimaerokChops: {stats.Stamina: 25},
 		proto.Food_FoodBlessedSunfruitJuice:     {stats.Spirit: 10},
 		proto.Food_FoodBlessSunfruit:            {stats.Strength: 10},
+		// Round 9: Forever's 45 foods the presets lacked. Baked Salmon
+		// 13935 (Nutritious Food aura 227 of 28 -> Well Fed 1249520,
+		// aura 13 misc 126) and Poached Sunscale Salmon 13932 (40 ->
+		// Well Fed 1249519, aura 99 and aura 124). Wowhead Forever: "gain
+		// 28 Spell Damage", "gain 40 Attack Power".
+		proto.Food_FoodBakedSalmon:           {stats.SpellDamage: 28},
+		proto.Food_FoodPoachedSunscaleSalmon: {stats.AttackPower: 40, stats.RangedAttackPower: 40},
 	}
 	for food, expected := range want {
 		if got := foodStats[food]; got != expected {

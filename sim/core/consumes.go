@@ -382,6 +382,13 @@ var foodStats = map[proto.Food]stats.Stats{
 	proto.Food_FoodDirgesKickChimaerokChops: {stats.Stamina: 25},
 	proto.Food_FoodBlessedSunfruitJuice:     {stats.Spirit: 10},
 	proto.Food_FoodBlessSunfruit:            {stats.Strength: 10},
+	// Forever's level-45 spell damage food (Baked Salmon 13935; Lobster
+	// Stew 13933 is the same Well Fed) and its 40 attack power food from
+	// level 35 (Poached Sunscale Salmon 13932; Mightfish Steak 13934 is
+	// the same at 45): Well Feds 1249520 (aura 13) and 1249519 (aura 99
+	// and aura 124).
+	proto.Food_FoodBakedSalmon:           {stats.SpellDamage: 28},
+	proto.Food_FoodPoachedSunscaleSalmon: {stats.AttackPower: 40, stats.RangedAttackPower: 40},
 }
 
 func applyFoodConsumes(character *Character, consumes *proto.Consumes) {
