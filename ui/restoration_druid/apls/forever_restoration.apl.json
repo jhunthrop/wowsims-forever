@@ -857,7 +857,7 @@
           }
         }
       },
-      "notes": "You are one of the five: a hurt healer gets Rejuvenation at the party pace. Rejuvenation is cast at rank 4 (2090) on every target: over the raid fight it returns more effective healing for its mana than the top rank. Below 60, the rank each band casts is chosen for its mana over a fight sized for level 60, so it leans cheaper than a short fight at that level needs."
+      "notes": "You are one of the five: a hurt healer gets Rejuvenation at the party pace. Rejuvenation is cast at rank 4 (2090) on every target: over the raid fight it returns more effective healing for its mana than the top rank. Below 60, the rank each band casts is chosen on that band's own fight, sized to the dungeons a group of its level runs."
     },
     {
       "action": {

@@ -912,7 +912,7 @@
           }
         }
       },
-      "notes": "Healing Wave is the efficient tank heal. Below 60, the rank each band casts is chosen for its mana over a fight sized for level 60, so it leans cheaper than a short fight at that level needs."
+      "notes": "Healing Wave is the efficient tank heal. Below 60, the rank each band casts is chosen on that band's own fight, sized to the dungeons a group of its level runs."
     }
   ]
 }
