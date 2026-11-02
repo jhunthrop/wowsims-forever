@@ -2,7 +2,7 @@
   "type": "TypeAPL",
   "priorityList": [
     {
-      "notes": "Potions, trinkets and racials as they come up, as every other tank's list opens: the raid preset's Greater Stoneshield Potion, which Forever lets a druid drink in Bear Form without leaving it (the druid deep dive).",
+      "notes": "Potions, trinkets and racials as they come up, as every other tank's list opens: the raid preset's Mighty Rage Potion, which Forever lets a druid drink in Bear Form without leaving it (the druid deep dive).",
       "action": {
         "autocastOtherCooldowns": {}
       }
