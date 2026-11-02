@@ -3,6 +3,7 @@ package core
 import (
 	"testing"
 
+	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
@@ -75,6 +76,27 @@ func TestCurseOfRecklessnessTakesTheRanksArmorOnly(t *testing.T) {
 		}
 		if got := target.GetStat(stats.AttackPower); got != 0 {
 			t.Errorf("level %d: Curse of Recklessness gave the target %v attack power, want 0", c.level, got)
+		}
+	}
+}
+
+// Forever made four vanilla raid debuffs the caster's own: Shadow Weaving
+// (15258), Improved Scorch's Fire Vulnerability (22959) and Improved Shadow
+// Bolt's Shadow Vulnerability (17794) are aura 270, damage taken from the
+// caster, and Stormstrike (17364) aura 271 on the shaman's own Lightning
+// Bolt, Chain Lightning and Earth Shock (Wowhead Forever: "the Shadow damage
+// the target takes from you", "all Fire damage you deal to your target",
+// "the damage you deal to the target with your next Lightning Bolt"). A
+// raid member's copy gives this player nothing, so the raid-debuff flags
+// put no aura on the target.
+func TestCasterOnlyDebuffsGiveTheRaidNothing(t *testing.T) {
+	target := newDebuffTarget(60)
+	applyDebuffEffects(target, 0, &proto.Debuffs{
+		ShadowWeaving: true, ImprovedScorch: true, ImprovedShadowBolt: true, Stormstrike: true,
+	}, &proto.Raid{})
+	for _, label := range []string{"Shadow Weaving", "Improved Scorch", "Improved Shadow Bolt", "Stormstrike", "Isb External Proc Aura", "Stormstrike External Proc Aura"} {
+		if target.GetAura(label) != nil {
+			t.Errorf("the raid's %s put an aura on the target", label)
 		}
 	}
 }

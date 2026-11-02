@@ -16,6 +16,12 @@ const (
 	DemoralizingShout DebuffName = iota
 )
 
+// applyDebuffEffects puts the raid's debuffs on target. Forever made Shadow
+// Weaving (15258), Improved Scorch (22959), Improved Shadow Bolt (17794,
+// all aura 270: damage taken from the caster) and Stormstrike (17364, aura
+// 271 on the shaman's own spells) the caster's own, so another raid
+// member's copy gives this player nothing: those flags apply no aura, and
+// a priest, mage, warlock or shaman gets its own from its talents.
 func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, raid *proto.Raid) {
 	if debuffs.JudgementOfWisdom && targetIdx == 0 {
 		MakePermanent(JudgementOfWisdomAura(target))
@@ -34,48 +40,12 @@ func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, rai
 		}
 	}
 
-	if debuffs.ImprovedShadowBolt && targetIdx == 0 {
-		ExternalIsbCaster(debuffs, target)
-	}
-
-	if debuffs.ShadowWeaving {
-		aura := ShadowWeavingAura(target, 5)
-		SchedulePeriodicDebuffApplication(aura, PeriodicActionOptions{
-			Period:          time.Millisecond * 1500,
-			NumTicks:        5,
-			TickImmediately: true,
-			Priority:        ActionPriorityDOT, // High prio
-			OnAction: func(sim *Simulation) {
-				aura.Activate(sim)
-				if aura.IsActive() {
-					aura.AddStack(sim)
-				}
-			},
-		}, raid)
-	}
-
 	if debuffs.CurseOfElements {
 		MakePermanent(CurseOfElementsAura(target))
 	}
 
 	if debuffs.CurseOfShadow {
 		MakePermanent(CurseOfShadowAura(target))
-	}
-
-	if debuffs.ImprovedScorch && targetIdx == 0 {
-		aura := ImprovedScorchAura(target)
-		SchedulePeriodicDebuffApplication(aura, PeriodicActionOptions{
-			Period:          time.Millisecond * 1500,
-			NumTicks:        5,
-			TickImmediately: true,
-			Priority:        ActionPriorityDOT, // High prio
-			OnAction: func(sim *Simulation) {
-				aura.Activate(sim)
-				if aura.IsActive() {
-					aura.AddStack(sim)
-				}
-			},
-		}, raid)
 	}
 
 	if debuffs.WintersChill && targetIdx == 0 {
@@ -92,10 +62,6 @@ func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, rai
 				}
 			},
 		}, raid)
-	}
-
-	if debuffs.Stormstrike && targetIdx == 0 {
-		ExternalStormstrikeCaster(debuffs, target)
 	}
 
 	if debuffs.GiftOfArthas {
@@ -197,99 +163,6 @@ func (character *Character) createStormstrikeConfig(player *proto.Player) {
 	}
 }
 
-const (
-	StormstrikeCooldown = time.Second * 20
-)
-
-func ExternalStormstrikeCaster(_ *proto.Debuffs, target *Unit) {
-	stormstrikeConfig := target.Env.Raid.Parties[0].Players[0].GetCharacter().StormstrikeConfig
-	stormstrikeAura := StormstrikeAura(target)
-	var pa *PendingAction
-	MakePermanent(target.GetOrRegisterAura(Aura{
-		Label: "Stormstrike External Proc Aura",
-		OnGain: func(aura *Aura, sim *Simulation) {
-			pa = NewPeriodicAction(sim, PeriodicActionOptions{
-				Period:          DurationFromSeconds(stormstrikeConfig.stormstrikeFrequency),
-				TickImmediately: true,
-				OnAction: func(s *Simulation) {
-					stormstrikeAura.Activate(sim)
-					stormstrikeAura.SetStacks(sim, stormstrikeAura.MaxStacks)
-				},
-			})
-			sim.AddPendingAction(pa)
-		},
-		OnExpire: func(aura *Aura, sim *Simulation) {
-			pa.Cancel(sim)
-		},
-	}))
-}
-
-func StormstrikeAura(unit *Unit) *Aura {
-	stormstrikeConfig := unit.Env.Raid.Parties[0].Players[0].GetCharacter().StormstrikeConfig
-
-	aura := unit.GetOrRegisterAura(Aura{
-		Label:     "Stormstrike",
-		ActionID:  ActionID{SpellID: 17364},
-		Duration:  time.Second * 12,
-		MaxStacks: 2,
-		OnGain: func(aura *Aura, sim *Simulation) {
-			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexNature] *= 1.20
-		},
-		OnExpire: func(aura *Aura, sim *Simulation) {
-			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexNature] /= 1.20
-		},
-		OnSpellHitTaken: func(aura *Aura, sim *Simulation, spell *Spell, result *SpellResult) {
-			if aura.GetStacks() > 0 && spell.SpellSchool.Matches(SpellSchoolNature) && result.Landed() && result.Damage > 0 {
-				aura.RemoveStack(sim)
-			}
-		},
-	})
-
-	// External attacks using nature strike
-	if stormstrikeConfig.natureAttackersFrequency > 0 {
-		aura.OnReset = func(aura *Aura, sim *Simulation) {
-			sim.AddPendingAction(
-				NewPeriodicAction(sim, PeriodicActionOptions{
-					Period: DurationFromSeconds(stormstrikeConfig.natureAttackersFrequency),
-					OnAction: func(s *Simulation) {
-						if aura.GetStacks() > 0 {
-							aura.RemoveStack(sim)
-						}
-					},
-				}),
-			)
-		}
-	}
-
-	return aura
-}
-
-func ExternalIsbCaster(_ *proto.Debuffs, target *Unit) {
-	isbConfig := target.Env.Raid.Parties[0].Players[0].GetCharacter().IsbConfig
-	isbAura := ImprovedShadowBoltAura(target, 5)
-	isbCrit := isbConfig.casterCrit / 100.0
-	var pa *PendingAction
-	MakePermanent(target.GetOrRegisterAura(Aura{
-		Label: "Isb External Proc Aura",
-		OnGain: func(aura *Aura, sim *Simulation) {
-			pa = NewPeriodicAction(sim, PeriodicActionOptions{
-				Period: DurationFromSeconds(isbConfig.shadowBoltFrequency),
-				OnAction: func(s *Simulation) {
-					for i := 0; i < int(isbConfig.isbWarlocks); i++ {
-						if sim.Proc(isbCrit, "External Isb Crit") {
-							isbAura.Activate(sim)
-						}
-					}
-				},
-			})
-			sim.AddPendingAction(pa)
-		},
-		OnExpire: func(aura *Aura, sim *Simulation) {
-			pa.Cancel(sim)
-		},
-	}))
-}
-
 type IsbConfig struct {
 	shadowBoltFrequency float64
 	casterCrit          float64
@@ -320,41 +193,7 @@ func (character *Character) createIsbConfig(player *proto.Player) {
 // lasts the full duration however many spells land.
 const ImprovedShadowBoltDuration = 12 * time.Second
 
-func ImprovedShadowBoltAura(unit *Unit, rank int32) *Aura {
-	isbLabel := "Improved Shadow Bolt"
-	if unit.GetAura(isbLabel) != nil {
-		return unit.GetAura(isbLabel)
-	}
-
-	damageMulti := 1. + 0.04*float64(rank)
-	return unit.GetOrRegisterAura(Aura{
-		Label:    isbLabel,
-		ActionID: ActionID{SpellID: 17800},
-		Duration: ImprovedShadowBoltDuration,
-		OnGain: func(aura *Aura, sim *Simulation) {
-			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow] *= damageMulti
-		},
-		OnExpire: func(aura *Aura, sim *Simulation) {
-			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow] /= damageMulti
-		},
-	})
-}
-
 var ShadowWeavingSpellIDs = [6]int32{0, 15257, 15331, 15332, 15333, 15334}
-
-func ShadowWeavingAura(unit *Unit, rank int) *Aura {
-	spellId := ShadowWeavingSpellIDs[rank]
-	return unit.GetOrRegisterAura(Aura{
-		Label:     "Shadow Weaving",
-		ActionID:  ActionID{SpellID: spellId},
-		Duration:  time.Second * 15,
-		MaxStacks: 5,
-		OnStacksChange: func(aura *Aura, sim *Simulation, oldStacks int32, newStacks int32) {
-			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow] /= 1.0 + 0.03*float64(oldStacks)
-			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow] *= 1.0 + 0.03*float64(newStacks)
-		},
-	})
-}
 
 func SchedulePeriodicDebuffApplication(aura *Aura, options PeriodicActionOptions, _ *proto.Raid) {
 	aura.OnReset = func(aura *Aura, sim *Simulation) {
