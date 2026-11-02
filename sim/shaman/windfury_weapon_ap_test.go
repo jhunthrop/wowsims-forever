@@ -10,10 +10,10 @@ import (
 // Weapon's attack power effect (16361: 333 at 60). The text: "your
 // Windfury Weapon effect by 40%". So 3/3 makes 333 into 466.2, once.
 func TestWindfuryWeaponAttackPowerTakesElementalWeaponsOnce(t *testing.T) {
-	if got, want := windfuryWeaponBonusAttackPower(4, 3), 333*1.4; math.Abs(got-want) > 1e-9 {
+	if got, want := windfuryWeaponBonusAttackPower(4, 3, 60), 333*1.4; math.Abs(got-want) > 1e-9 {
 		t.Errorf("Windfury Weapon rank 4 with Elemental Weapons 3/3 adds %v attack power, want %v", got, want)
 	}
-	if got, want := windfuryWeaponBonusAttackPower(4, 0), 333.0; math.Abs(got-want) > 1e-9 {
+	if got, want := windfuryWeaponBonusAttackPower(4, 0, 60), 333.0; math.Abs(got-want) > 1e-9 {
 		t.Errorf("Windfury Weapon rank 4 without Elemental Weapons adds %v attack power, want %v", got, want)
 	}
 }
