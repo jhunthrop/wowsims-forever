@@ -87,6 +87,7 @@ const (
 	Darrowspike                = 13984
 	Frightalon                 = 14024
 	RobeOfTheArchmage          = 14152
+	AnkhOfLife                 = 1713
 	BonechillHammer            = 14487
 	EbonHiltOfMarduk           = 14576
 	FrightskullShaft           = 14531
@@ -3446,6 +3447,47 @@ func init() {
 			ShouldActivate: func(sim *core.Simulation, character *core.Character) bool {
 				totalRegen := character.ManaRegenPerSecondWhileCasting() * 2
 				return character.MaxMana()-(character.CurrentMana()+totalRegen) >= maxMana
+			},
+		})
+	})
+
+	// Ankh of Life (1713), a Forever trinket: Use: heal your target. ItemEffect
+	// 97284 is spell 1317424 "Heal", 720 with variance 0.2 (648 to 792, as the Robe of the Archmage reads its variance), no
+	// coefficient, on a 5 min item cooldown (its 120 s category 1153 is not
+	// shared with anything this sim casts). Used on the healer's current
+	// target (the tank in the healing sim) once it is under 60% health.
+	core.NewItemEffect(AnkhOfLife, func(agent core.Agent) {
+		character := agent.GetCharacter()
+		const ankhOfLifeHealUnderHealth = 0.6
+
+		target := func() *core.Unit {
+			if t := character.CurrentTarget; t != nil && !t.IsOpponent(&character.Unit) && t.HasHealthBar() {
+				return t
+			}
+			return &character.Unit
+		}
+		spell := character.RegisterSpell(core.SpellConfig{
+			ActionID:         core.ActionID{ItemID: AnkhOfLife},
+			SpellSchool:      core.SpellSchoolHoly,
+			DefenseType:      core.DefenseTypeMagic,
+			ProcMask:         core.ProcMaskEmpty,
+			Flags:            core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete,
+			DamageMultiplier: 1,
+			ThreatMultiplier: 1,
+			Cast: core.CastConfig{
+				CD: core.Cooldown{Timer: character.NewTimer(), Duration: 5 * time.Minute},
+			},
+			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
+				spell.CalcAndDealHealing(sim, target(), sim.Roll(648, 792), spell.OutcomeHealingCrit)
+			},
+		})
+
+		character.AddMajorCooldown(core.MajorCooldown{
+			Spell: spell,
+			Type:  core.CooldownTypeUnknown,
+			ShouldActivate: func(_ *core.Simulation, _ *core.Character) bool {
+				healed := target()
+				return healed.HasHealthBar() && healed.CurrentHealthPercent() < ankhOfLifeHealUnderHealth
 			},
 		})
 	})
