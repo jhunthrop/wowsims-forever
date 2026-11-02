@@ -66,7 +66,7 @@ func (rogue *Rogue) registerHemorrhageSpell() {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			rogue.BreakStealth(sim)
-			baseDamage := spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
+			baseDamage := rogue.hemorrhageWeaponDamage(sim, spell.MeleeAttackPower(target))
 
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
@@ -87,4 +87,11 @@ func (rogue *Rogue) RuptureDamageTakenMultiplier(target *core.Unit) float64 {
 		return 1 + hemorrhageRuptureDamageBonus
 	}
 	return 1
+}
+
+// hemorrhageWeaponDamage is Hemorrhage's weapon damage before its 100% (145%
+// with a dagger) multiplier: normalized, as client 16511's effect 121
+// (SpellEffect 693307) states, the same as Backstab and Sinister Strike.
+func (rogue *Rogue) hemorrhageWeaponDamage(sim *core.Simulation, attackPower float64) float64 {
+	return rogue.MHNormalizedWeaponDamage(sim, attackPower)
 }

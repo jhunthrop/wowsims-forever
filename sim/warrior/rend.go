@@ -46,6 +46,7 @@ func (warrior *Warrior) registerRendSpell() {
 			},
 		},
 
+		CritDamageBonus:  warrior.rendCritDamageBonus(),
 		DamageMultiplier: damageMultiplier,
 		ThreatMultiplier: 1,
 		ClientBaseDamage: damage.Range(casterLevel),

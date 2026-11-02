@@ -15,11 +15,11 @@ func bloodthrillProcChance(rank int32) float64 {
 	return 0.04 * float64(rank)
 }
 
-// bloodthrillWindow is "Lasts 6 sec" - distinct from the vanilla
-// dodge-proc Overpower window (OverpowerAura's 5s in overpower.go), so
-// Bloodthrill gets its own Aura rather than reusing that one with a
-// mutated Duration.
-const bloodthrillWindow = time.Second * 6
+// bloodthrillWindow is the Overpower window 1282733 opens: DurationIndex 28,
+// 5000 ms in SpellDuration (the talent text's "6 sec" is not the client's
+// duration). It is its own Aura rather than the dodge-proc Overpower window
+// (OverpowerAura in overpower.go) with a mutated Duration.
+const bloodthrillWindow = time.Second * 5
 
 // applyBloodthrill is Bloodthrill: "Your Main Hand melee attacks
 // against enemies afflicted by your Rend have a 4%/8%/12%/16%/20%
