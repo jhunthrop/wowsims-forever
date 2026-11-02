@@ -118,13 +118,30 @@ func (mage *Mage) getArcaneMissilesSpellConfig(rank int) core.SpellConfig {
 // this mage's level; the missile's own spell level, not the channel's,
 // sets where its growth per level starts.
 func (mage *Mage) arcaneMissileRoll(rank int) [2]float64 {
+	if rank == arcaneMissileRankOne {
+		return mage.clientRoll(ArcaneMissileBaseDamage[rank], ArcaneMissilePointsPerLevel[rank], ArcaneMissileLevel[rank], ArcaneMissileMaxLevel[rank])
+	}
 	return mage.clientRoll(ArcaneMissilesBaseDamage[rank], ArcaneMissilesPointsPerLevel[rank], ArcaneMissilesLevel[rank], ArcaneMissilesMaxLevel[rank])
+}
+
+// arcaneMissileRankOne is the rank whose missile (7268) the client names
+// "Arcane Missile", singular, so the generator files it under the
+// ArcaneMissile* arrays and leaves ArcaneMissiles*[1] holding the channel
+// 5143's zero damage and 0.2 coefficient.
+const arcaneMissileRankOne = 1
+
+// arcaneMissileCoefficient is one missile's spell power coefficient.
+func arcaneMissileCoefficient(rank int) float64 {
+	if rank == arcaneMissileRankOne {
+		return ArcaneMissileSpellCoeff[rank]
+	}
+	return ArcaneMissilesSpellCoeff[rank]
 }
 
 func (mage *Mage) getArcaneMissilesTickSpell(rank int) *core.Spell {
 	spellId := ArcaneMissilesChannelSpellId[rank]
 	missile := mage.arcaneMissileRoll(rank)
-	spellCoeff := ArcaneMissilesSpellCoeff[rank]
+	spellCoeff := arcaneMissileCoefficient(rank)
 
 	return mage.RegisterSpell(core.SpellConfig{
 		SpellCode:      SpellCode_MageArcaneMissilesTick,
