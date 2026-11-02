@@ -146,8 +146,9 @@ func (shaman *Shaman) applyElementalFocus() {
 			}
 		},
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			// OnCastComplete is called after OnSpellHitDealt / etc, so don't deactivate if it was just activated.
-			if aura.RemainingDuration(sim) == aura.Duration {
+			// The cast that procced the charge does not spend it. Any other
+			// cast does, an instant at the proc's own moment included.
+			if shaman.clearcastingProc.IsFrom(sim, spell) {
 				return
 			}
 
@@ -161,11 +162,18 @@ func (shaman *Shaman) applyElementalFocus() {
 		Label: "Elemental Focus Trigger",
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
 			if shaman.isShamanDamagingSpell(spell) && sim.Proc(0.10, "Elemental Focus") {
-				shaman.ClearcastingAura.Activate(sim)
-				shaman.ClearcastingAura.SetStacks(sim, shaman.ClearcastingAura.MaxStacks)
+				shaman.ProcClearcasting(sim, spell)
 			}
 		},
 	}))
+}
+
+// ProcClearcasting is Elemental Focus's proc from spell: one charge of
+// Clearcasting (16246).
+func (shaman *Shaman) ProcClearcasting(sim *core.Simulation, spell *core.Spell) {
+	shaman.clearcastingProc = core.ProcSource{Spell: spell, At: sim.CurrentTime}
+	shaman.ClearcastingAura.Activate(sim)
+	shaman.ClearcastingAura.SetStacks(sim, shaman.ClearcastingAura.MaxStacks)
 }
 
 func (shaman *Shaman) isShamanDamagingSpell(spell *core.Spell) bool {

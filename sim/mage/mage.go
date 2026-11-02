@@ -166,6 +166,7 @@ type Mage struct {
 	ArcaneBlastAura      *core.Aura
 	ArcanePowerAura      *core.Aura
 	ClearcastingAura     *core.Aura
+	clearcastingProc     core.ProcSource
 	CombustionAura       *core.Aura
 	FingersOfFrostAura   *core.Aura
 	FrostbiteFrozenAuras core.AuraArray
