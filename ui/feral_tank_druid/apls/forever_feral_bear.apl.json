@@ -70,7 +70,7 @@
         "castSpell": {
           "spellId": {
             "spellId": 1235827,
-            "rank": 3
+            "rank": 5
           }
         },
         "condition": {
@@ -82,7 +82,7 @@
                     "dotIsActive": {
                       "spellId": {
                         "spellId": 1235827,
-                        "rank": 3
+                        "rank": 5
                       }
                     }
                   }
@@ -95,7 +95,7 @@
                     "dotRemainingTime": {
                       "spellId": {
                         "spellId": 1235827,
-                        "rank": 3
+                        "rank": 5
                       }
                     }
                   },
@@ -116,7 +116,7 @@
                       },
                       "auraId": {
                         "spellId": 1235827,
-                        "rank": 3
+                        "rank": 5
                       }
                     }
                   },
