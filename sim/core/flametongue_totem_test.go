@@ -93,7 +93,7 @@ func TestFlametongueTotemReaches(t *testing.T) {
 		{"flametongue weapon on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_FlametongueWeapon}}, false},
 		{"flametongue weapon on the off hand only", Character{Consumes: &proto.Consumes{OffHandImbue: proto.WeaponImbue_FlametongueWeapon}}, true},
 		{"windfury weapon on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_WindfuryWeapon}}, true},
-		{"feral", Character{Unit: Unit{PseudoStats: stats.PseudoStats{FeralCombatEnabled: true}}}, false},
+		{"feral (Forever: weapon procs work in a form)", Character{Unit: Unit{PseudoStats: stats.PseudoStats{FeralCombatEnabled: true}}}, true},
 	}
 	for _, c := range cases {
 		if got := flametongueTotemReaches(&c.character); got != c.want {
