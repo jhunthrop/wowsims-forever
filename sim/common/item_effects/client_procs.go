@@ -33,7 +33,18 @@ const (
 	ToxicRevenger              = 9453
 	WallOfTheDead              = 1979
 	SpireOfHakkar              = 10844
+	DormantHeartOfTheMountain  = 249473
 )
+
+// eternalPowerHeals are every rank of the four heals Dormant Heart of the
+// Mountain names, from the 70707 trainables (spellranks.json): Greater Heal,
+// Healing Touch, Healing Wave and Holy Light.
+var eternalPowerHeals = map[int32]bool{
+	2060: true, 10963: true, 10964: true, 10965: true, 25314: true,
+	5185: true, 5186: true, 5187: true, 5188: true, 5189: true, 6778: true, 8903: true, 9758: true, 9888: true, 9889: true, 25297: true,
+	331: true, 332: true, 547: true, 913: true, 939: true, 959: true, 8005: true, 10395: true, 10396: true, 25357: true,
+	635: true, 639: true, 647: true, 1026: true, 1042: true, 3472: true, 10328: true, 10329: true, 25292: true,
+}
 
 // clientRoll is a SpellEffect row's roll: centre x (1 -/+ variance/2).
 func clientRoll(sim *core.Simulation, centre, variance float64) float64 {
@@ -251,27 +262,56 @@ func init() {
 	})
 
 	// 1293539 is aura 43 (damage on a proc), 14 Holy with variance 0.2, on
-	// a block: "Deals 13 to 15 Holy damage every time you block."
-	registerStruckDamage(AegisOfTheScarletCommander, 1293539, core.SpellSchoolHoly, 14, 0.20000000298, core.OutcomeBlock)
+	// a block, with a 5 sec cooldown (SpellCooldowns RecoveryTime 5000):
+	// "5 sec cooldown. Deals 13 to 15 Holy damage every time you block."
+	registerStruckDamage(AegisOfTheScarletCommander, 1293539, core.SpellSchoolHoly, 14, 0.20000000298, core.OutcomeBlock, 5*time.Second)
 
 	// Damage shields, aura 15: 21142 "Deals 7 Fire damage to anyone who
 	// strikes you with a melee attack", 1291698 "inflicts 1 Nature damage to
 	// the attacker".
-	registerStruckDamage(CloakOfFlames, 21142, core.SpellSchoolFire, 7, 0, core.OutcomeLanded)
-	registerStruckDamage(SporidCape, 1291698, core.SpellSchoolNature, 1, 0, core.OutcomeLanded)
+	registerStruckDamage(CloakOfFlames, 21142, core.SpellSchoolFire, 7, 0, core.OutcomeLanded, 0)
+	registerStruckDamage(SporidCape, 1291698, core.SpellSchoolNature, 1, 0, core.OutcomeLanded, 0)
+
+	// Dormant Heart of the Mountain: equip 1249118 is aura 42 on a helpful
+	// spell (ProcTypeMask 0x4000), ProcChance 100, no recovery, triggering
+	// 1249119 for 15 sec (duration 1): aura 135 +40 healing and aura 13 +13
+	// damage, school mask 126. The server limits it to the four heals its
+	// text names; the rows carry no class mask. "Your casts of Greater
+	// Heal, Healing Touch, Healing Wave, or Holy Light in combat grant up
+	// to 40 increased healing and up to 13 increased damage for 15 sec."
+	core.NewClientItemEffect(DormantHeartOfTheMountain, func(agent core.Agent) {
+		character := agent.GetCharacter()
+		eternalPower := character.NewTemporaryStatsAura("Eternal Power", core.ActionID{SpellID: 1249119},
+			stats.Stats{stats.HealingPower: 40, stats.SpellDamage: 13}, 15*time.Second)
+		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
+			Name:     "Dormant Heart of the Mountain",
+			Callback: core.CallbackOnCastComplete,
+			Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
+				if eternalPowerHeals[spell.SpellID] {
+					eternalPower.Activate(sim)
+				}
+			},
+		})
+	})
 }
 
 // registerStruckDamage deals damage to a melee attacker whose swing at the
-// wearer lands with one of outcomes.
-func registerStruckDamage(itemID int32, spellID int32, school core.SpellSchool, centre, variance float64, outcomes core.HitOutcome) {
+// wearer lands with one of outcomes, at most once per cooldown (the proc
+// spell's SpellCooldowns RecoveryTime; 0 for none).
+func registerStruckDamage(itemID int32, spellID int32, school core.SpellSchool, centre, variance float64, outcomes core.HitOutcome, cooldown time.Duration) {
 	core.NewItemEffect(itemID, func(agent core.Agent) {
 		character := agent.GetCharacter()
+		var cd core.Cooldown
+		if cooldown > 0 {
+			cd = core.Cooldown{Timer: character.NewTimer(), Duration: cooldown}
+		}
 		spell := character.RegisterSpell(core.SpellConfig{
 			ActionID:    core.ActionID{SpellID: spellID},
 			SpellSchool: school,
 			DefenseType: core.DefenseTypeMagic,
 			ProcMask:    core.ProcMaskEmpty,
 			Flags:       core.SpellFlagBinary | core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell,
+			Cast:        core.CastConfig{CD: cd},
 
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
@@ -286,7 +326,9 @@ func registerStruckDamage(itemID int32, spellID int32, school core.SpellSchool, 
 			ProcMask: core.ProcMaskMelee,
 			Outcome:  outcomes,
 			Handler: func(sim *core.Simulation, attack *core.Spell, _ *core.SpellResult) {
-				spell.Cast(sim, attack.Unit)
+				if spell.CD.Timer == nil || spell.CD.IsReady(sim) {
+					spell.Cast(sim, attack.Unit)
+				}
 			},
 		})
 	})
