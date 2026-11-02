@@ -100,3 +100,16 @@ func TestCasterOnlyDebuffsGiveTheRaidNothing(t *testing.T) {
 		}
 	}
 }
+
+// Round 9 (casters lane): Forever removed Curse of Shadow. Its ranks 17862
+// and 17937 have no SpellName or SpellEffect row in 1.60.1.70707 (with the
+// hotfix push), and Wowhead Forever finds no such spell; Curse of the
+// Elements (1311680) is the all-magic curse. The raid flag gave Era's +10%
+// Shadow and Arcane damage taken and took 75 resistance off twice.
+func TestTheRaidsCurseOfShadowIsGone(t *testing.T) {
+	target := newDebuffTarget(60)
+	applyDebuffEffects(target, 0, &proto.Debuffs{CurseOfShadow: true}, &proto.Raid{})
+	if target.GetAura("Curse of Shadow") != nil {
+		t.Error("the raid's Curse of Shadow put an aura on the target")
+	}
+}
