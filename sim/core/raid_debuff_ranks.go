@@ -18,6 +18,17 @@ var (
 		{SpellID: 11597, Level: 58, Amount: 450},
 	}
 
+	// Expose Armor: armor removed per combo point. Forever's rows carry
+	// aura 674 at 0 (server-computed); the amounts are the Wowhead Forever
+	// tooltips, Sunder Armor's per rank (Era's rank 5 was 340 a point).
+	ExposeArmorRanks = BuffRanks{
+		{SpellID: 8647, Level: 14, Amount: 90},
+		{SpellID: 8649, Level: 26, Amount: 180},
+		{SpellID: 8650, Level: 36, Amount: 270},
+		{SpellID: 11197, Level: 46, Amount: 360},
+		{SpellID: 11198, Level: 56, Amount: 450},
+	}
+
 	// Faerie Fire: armor removed (aura 674, misc 1).
 	FaerieFireRanks = BuffRanks{
 		{SpellID: 770, Level: 18, Amount: 175},
@@ -91,3 +102,6 @@ func raidDebuffRank(ranks BuffRanks, target *Unit) (BuffRank, bool) {
 	}
 	return BuffRank{SpellID: ranks[0].SpellID}, false
 }
+
+// exposeArmorRaidComboPoints is the raid's Expose Armor: a five-point cast.
+const exposeArmorRaidComboPoints = 5
