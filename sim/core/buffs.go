@@ -1315,60 +1315,57 @@ func totemRank(ranks BuffRanks, unit *Unit) BuffRank {
 // StrengthOfEarthTotemAura is the totem's Strength for unit's level
 // (StrengthOfEarthRanks), times multiplier (Enhancing Totems).
 func StrengthOfEarthTotemAura(unit *Unit, multiplier float64) *Aura {
-	rank := totemRank(StrengthOfEarthRanks, unit)
-	spellID := rank.SpellID
-	duration := time.Minute * 2
-	updateStats := stats.Stats{stats.Strength: rank.At(int(unit.Level))}.Multiply(multiplier).Floor()
+	return StrengthOfEarthTotemAuraAt(unit, totemRank(StrengthOfEarthRanks, unit), multiplier)
+}
 
-	aura := unit.GetOrRegisterAura(Aura{
-		Label:      "Strength of Earth Totem",
-		ActionID:   ActionID{SpellID: spellID},
-		Duration:   duration,
-		BuildPhase: CharacterBuildPhaseBuffs,
-		OnGain: func(aura *Aura, sim *Simulation) {
-			if aura.Unit.Env.MeasuringStats && aura.Unit.Env.State != Finalized {
-				unit.AddStats(updateStats)
-			} else {
-				unit.AddStatsDynamic(sim, updateStats)
-			}
-		},
-		OnExpire: func(aura *Aura, sim *Simulation) {
-			if aura.Unit.Env.MeasuringStats && aura.Unit.Env.State != Finalized {
-				unit.AddStats(updateStats.Multiply(-1))
-			} else {
-				unit.AddStatsDynamic(sim, updateStats.Multiply(-1))
-			}
-		},
-	})
-	return aura
+// StrengthOfEarthTotemAuraAt is the Strength of one totem rank: what a
+// shaman's own cast of that rank gives, whatever rank its level knows.
+func StrengthOfEarthTotemAuraAt(unit *Unit, rank BuffRank, multiplier float64) *Aura {
+	return statTotemAura(unit, "Strength of Earth Totem", StrengthOfEarthRanks, stats.Strength, rank, multiplier)
 }
 
 // GraceOfAirTotemAura is the totem's Agility for unit's level
 // (GraceOfAirRanks), times multiplier (Enhancing Totems).
 func GraceOfAirTotemAura(unit *Unit, multiplier float64) *Aura {
-	rank := totemRank(GraceOfAirRanks, unit)
-	spellID := rank.SpellID
-	duration := time.Minute * 2
-	updateStats := stats.Stats{stats.Agility: rank.At(int(unit.Level))}.Multiply(multiplier).Floor()
+	return GraceOfAirTotemAuraAt(unit, totemRank(GraceOfAirRanks, unit), multiplier)
+}
 
-	aura := unit.GetOrRegisterAura(Aura{
-		Label:      "Grace of Air Totem",
-		ActionID:   ActionID{SpellID: spellID},
-		Duration:   duration,
+// GraceOfAirTotemAuraAt is the Agility of one totem rank.
+func GraceOfAirTotemAuraAt(unit *Unit, rank BuffRank, multiplier float64) *Aura {
+	return statTotemAura(unit, "Grace of Air Totem", GraceOfAirRanks, stats.Agility, rank, multiplier)
+}
+
+// statTotemAura is one rank of a stat totem's buff. The rank the unit's
+// level knows keeps the plain name, so the raid's totem and a shaman's own
+// cast of that rank share one aura; any other rank is its own aura. All of
+// them sit in one exclusive category, so only the strongest standing totem
+// counts: two Strength of Earth Totems never stack, and a shaman's lower
+// rank gives its own amount, not its level's top rank.
+func statTotemAura(unit *Unit, name string, ranks BuffRanks, stat stats.Stat, rank BuffRank, multiplier float64) *Aura {
+	label := name
+	if rank.SpellID != totemRank(ranks, unit).SpellID {
+		label = fmt.Sprintf("%s (%d)", name, rank.SpellID)
+	}
+	if aura := unit.GetAura(label); aura != nil {
+		return aura
+	}
+
+	var bonus stats.Stats
+	bonus[stat] = rank.At(int(unit.Level))
+	bonus = bonus.Multiply(multiplier).Floor()
+	aura := unit.RegisterAura(Aura{
+		Label:      label,
+		ActionID:   ActionID{SpellID: rank.SpellID},
+		Duration:   time.Minute * 2,
 		BuildPhase: CharacterBuildPhaseBuffs,
-		OnGain: func(aura *Aura, sim *Simulation) {
-			if aura.Unit.Env.MeasuringStats && aura.Unit.Env.State != Finalized {
-				unit.AddStats(updateStats)
-			} else {
-				unit.AddStatsDynamic(sim, updateStats)
-			}
+	})
+	aura.NewExclusiveEffect(name, false, ExclusiveEffect{
+		Priority: bonus[stat],
+		OnGain: func(ee *ExclusiveEffect, sim *Simulation) {
+			ee.Aura.Unit.AddBuildPhaseStatsDynamic(sim, bonus)
 		},
-		OnExpire: func(aura *Aura, sim *Simulation) {
-			if aura.Unit.Env.MeasuringStats && aura.Unit.Env.State != Finalized {
-				unit.AddStats(updateStats.Multiply(-1))
-			} else {
-				unit.AddStatsDynamic(sim, updateStats.Multiply(-1))
-			}
+		OnExpire: func(ee *ExclusiveEffect, sim *Simulation) {
+			ee.Aura.Unit.AddBuildPhaseStatsDynamic(sim, bonus.Multiply(-1))
 		},
 	})
 	return aura

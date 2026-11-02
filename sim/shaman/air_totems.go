@@ -105,7 +105,7 @@ func (shaman *Shaman) newGraceOfAirTotemSpellConfig(rank int) core.SpellConfig {
 	// multiplier := []float64{1, 1.08, 1.15}[shaman.Talents.EnhancingTotems]
 	multiplier := 1.0
 
-	buffAura := core.GraceOfAirTotemAura(&shaman.Unit, multiplier)
+	buffAura := core.GraceOfAirTotemAuraAt(&shaman.Unit, core.GraceOfAirRanks[rank-1], multiplier)
 
 	lifetime := shaman.registerBuffTotemLifetime("Grace of Air Totem", rank, buffAura)
 

@@ -36,7 +36,7 @@ func (shaman *Shaman) newStrengthOfEarthTotemSpellConfig(rank int) core.SpellCon
 	// multiplier := []float64{1, 1.08, 1.15}[shaman.Talents.EnhancingTotems]
 	multiplier := 1.0
 
-	buffAura := core.StrengthOfEarthTotemAura(&shaman.Unit, multiplier)
+	buffAura := core.StrengthOfEarthTotemAuraAt(&shaman.Unit, core.StrengthOfEarthRanks[rank-1], multiplier)
 
 	lifetime := shaman.registerBuffTotemLifetime("Strength of Earth Totem", rank, buffAura)
 
