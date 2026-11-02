@@ -334,3 +334,56 @@ func TestGlovesOfHolyMightRollsTheRangedTable(t *testing.T) {
 		t.Errorf("crit %.1f%% of landed casts with 40%% melee crit, want the melee table", 100*rate)
 	}
 }
+
+// Mindtap Talisman (18371): Forever's use, ItemEffect 235401, is 1302205
+// Mindtap on a 7 min cooldown: aura 24, 125 mana every 1 sec for 10 sec,
+// and 1302206 Tapped Mind, -60 Intellect for 2 min. Wowhead Forever:
+// "Tap your mind, restoring 1250 mana over 10 sec, but reducing Intellect
+// by 60 for 2 min."
+func TestMindtapTalismanRestoresTheClientsManaAndTapsIntellect(t *testing.T) {
+	// Two identical mages from empty mana for 10 sec; only one taps.
+	run := func(tap bool) (manaGained, intellectLost float64) {
+		sim, character := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 18371)
+		spell := character.GetSpell(core.ActionID{SpellID: 1302205})
+		if spell == nil {
+			t.Fatal("no Mindtap use")
+		}
+		if spell.CD.Duration != 7*time.Minute {
+			t.Errorf("cooldown %v, want 7m", spell.CD.Duration)
+		}
+		character.SpendMana(sim, character.CurrentMana(), character.NewManaMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionAttack}))
+		intellect := character.GetStat(stats.Intellect)
+		if tap {
+			spell.Cast(sim, nil)
+		}
+		intellectLost = intellect - character.GetStat(stats.Intellect)
+		start := character.CurrentMana()
+		for sim.CurrentTime < 10*time.Second+time.Millisecond {
+			if sim.Step() {
+				t.Fatal("the fight ended early")
+			}
+		}
+		return character.CurrentMana() - start, intellectLost
+	}
+	tapped, lost := run(true)
+	untapped, _ := run(false)
+	if math.Abs(lost-60) > 1e-6 {
+		t.Errorf("Intellect fell by %v, want 60", lost)
+	}
+	if got := tapped - untapped; math.Abs(got-1250) > 1 {
+		t.Errorf("Mindtap restored %v mana over 10 sec, want 1250", got)
+	}
+}
+
+// Burst of Knowledge (11832): Forever's ItemEffect 99371 puts 15646 (aura
+// 73, -150 mana cost for 10 sec) on a 6 min cooldown, not Era's 15 min.
+func TestBurstOfKnowledgeIsOnTheClientsSixMinuteCooldown(t *testing.T) {
+	_, character := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 11832)
+	spell := character.GetSpell(core.ActionID{ItemID: 11832})
+	if spell == nil {
+		t.Fatal("no Burst of Knowledge use")
+	}
+	if spell.CD.Duration != 6*time.Minute {
+		t.Errorf("cooldown %v, want 6m", spell.CD.Duration)
+	}
+}

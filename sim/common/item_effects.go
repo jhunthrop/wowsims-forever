@@ -2659,7 +2659,8 @@ func init() {
 	///////////////////////////////////////////////////////////////////////////
 
 	// https://www.wowhead.com/classic/item=11832/burst-of-knowledge
-	// Use: Reduces mana cost of all spells by 150 for 10 sec. (5 Min Cooldown)
+	// Use: Reduces mana cost of all spells by 150 for 10 sec. Forever's
+	// ItemEffect 99371 puts 15646 (aura 73, -150) on a 6 min cooldown.
 	core.NewItemEffect(BurstOfKnowledge, func(agent core.Agent) {
 		character := agent.GetCharacter()
 
@@ -2691,7 +2692,7 @@ func init() {
 			Cast: core.CastConfig{
 				CD: core.Cooldown{
 					Timer:    character.NewTimer(),
-					Duration: time.Minute * 15,
+					Duration: time.Minute * 6,
 				},
 			},
 
