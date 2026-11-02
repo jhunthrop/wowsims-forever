@@ -75,7 +75,7 @@ const (
 	redoubtBlockChancePerRank = 6.0
 	redoubtDuration           = 10 * time.Second
 	redoubtBlocks             = 5
-	redoubtActionID           = 20134
+	redoubtActionID           = 20128 // Redoubt 20127's buff in 1.60.1.70707
 
 	// Reckoning (node 105627): "Gives you a 8% chance to gain an extra
 	// attack after Blocking a melee attack and a 20% chance to gain an

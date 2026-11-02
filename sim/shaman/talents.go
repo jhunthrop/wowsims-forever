@@ -490,12 +490,16 @@ func flurryAttackSpeed(points int32) float64 {
 // in client 1.60.1.70707.
 const flurryBuffDuration = 15 * time.Second
 
+// flurryBuffSpellID is Flurry's buff: 1.60.1.70707 has one talent spell
+// (16256) with a trait curve and one buff, 16257, at every rank.
+func flurryBuffSpellID(_ int32) int32 { return 16257 }
+
 func (shaman *Shaman) makeFlurryAura(points int32) *core.Aura {
 	if points == 0 {
 		return nil
 	}
 
-	spellID := []int32{16257, 16277, 16278, 16279, 16280}[points-1]
+	spellID := flurryBuffSpellID(points)
 	attackSpeed := flurryAttackSpeed(points)
 
 	aura := shaman.GetOrRegisterAura(core.Aura{

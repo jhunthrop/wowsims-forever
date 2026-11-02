@@ -277,12 +277,15 @@ func (druid *Druid) applyBloodFrenzy() {
 const bloodFrenzyRage = 5.0
 
 // We're using an aura so that the APL can know if the Druid has furor for powershifting logic
+// furorSpellID is Furor's one talent spell at every rank in 1.60.1.70707.
+const furorSpellID int32 = 17056
+
 func (druid *Druid) applyFuror() {
 	if druid.Talents.Furor == 0 {
 		return
 	}
 
-	spellID := []int32{0, 17056, 17058, 17059, 17060, 17061}[druid.Talents.Furor]
+	spellID := furorSpellID
 
 	druid.FurorAura = druid.RegisterAura(core.Aura{
 		Label:    "Furor",
