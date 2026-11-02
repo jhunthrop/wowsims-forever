@@ -75,6 +75,8 @@ const (
 	PriestSpellMaskMindBlast
 	PriestSpellMaskVampiricEmbrace
 	PriestSpellMaskBindingHeal
+	PriestSpellMaskDivineGrace
+	PriestSpellMaskContingencyPlanHeal
 )
 
 // PriestSpellMaskInstantShadowDamage is every Shadow damage spell this
@@ -99,7 +101,11 @@ const PriestSpellMaskInstantHealing = PriestSpellMaskRenew | PriestSpellMaskPena
 // Mending is named through its heal spells (401863, 1313379, 1313381,
 // class mask 0/0/0/0x200000), not its cast or its jump; the engine heals
 // through the cast, so the cast carries it.
-const PriestSpellMaskTwinDisciplines = PriestSpellMaskInstantShadowDamage | PriestSpellMaskInstantHealing
+// The racial heals are named too: Divine Grace (1277370-1277378, mask
+// 0x1000000) by eff0, Contingency Plan's heal over time (1277456-1277460,
+// mask 0x20) by both effects.
+const PriestSpellMaskTwinDisciplines = PriestSpellMaskInstantShadowDamage | PriestSpellMaskInstantHealing |
+	PriestSpellMaskDivineGrace | PriestSpellMaskContingencyPlanHeal
 
 // PriestSpellMaskMentalAgility is what Mental Agility's cost modifier
 // names: the client mask of 14520 (SpellEffect 687728, aura 108 misc 14),
@@ -115,11 +121,14 @@ const PriestSpellMaskMentalAgility = PriestSpellMaskSmite | PriestSpellMaskHolyF
 // Flash Heal, Prayer of Healing, Holy Nova, Desperate Prayer, Penance,
 // Prayer of Mending and Binding Heal) and Renew, the one heal over time of
 // 1239404. Lightwell's renew and Holy Binding carry no class options, and
-// a shield absorbs rather than heals.
+// a shield absorbs rather than heals. Its eff0 also names the racial
+// heals: Divine Grace (mask 0x1000000) and Contingency Plan's heal over
+// time (mask 0x20).
 const PriestSpellMaskSpiritualHealing = PriestSpellMaskLesserHeal | PriestSpellMaskHeal |
 	PriestSpellMaskGreaterHeal | PriestSpellMaskFlashHeal | PriestSpellMaskPrayerOfHealing |
 	PriestSpellMaskHolyNova | PriestSpellMaskDesperatePrayer | PriestSpellMaskPenance |
-	PriestSpellMaskPrayerOfMending | PriestSpellMaskBindingHeal | PriestSpellMaskRenew
+	PriestSpellMaskPrayerOfMending | PriestSpellMaskBindingHeal | PriestSpellMaskRenew |
+	PriestSpellMaskDivineGrace | PriestSpellMaskContingencyPlanHeal
 
 type Priest struct {
 	core.Character
