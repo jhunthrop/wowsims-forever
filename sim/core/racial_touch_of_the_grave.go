@@ -29,8 +29,10 @@ import (
 // damage. The periodic-damage bit (0x40000) is absent, so ticks never
 // trigger it; that is why the trigger listens to OnSpellHitDealt only.
 //
-// DAMAGE MODEL. The effect is a health leech with no coefficient, so the
-// drain is flat: it neither crits (OutcomeAlwaysHit), nor scales with spell
+// DAMAGE MODEL. The effect is a health leech with no coefficient. It rolls
+// the spell hit table (SpellCategories DefenseType 1, magic) and never crits
+// (SpellMisc Attributes_2 0x20000000), so it lands as OutcomeMagicHit: it
+// can miss a higher-level target, and it neither crits nor scales with spell
 // power (nothing adds bonus damage to a zero-coefficient effect), nor takes
 // attacker or target damage modifiers or resistances. It deals exactly 5%
 // of the undead's maximum Health. The matching heal on the caster is not
@@ -75,7 +77,7 @@ func touchOfTheGraveTrigger(drain *Spell, class proto.Class) ProcTrigger {
 		ProcChance: chance,
 		ICD:        touchOfTheGraveICD,
 		Handler: func(sim *Simulation, _ *Spell, result *SpellResult) {
-			drain.CalcAndDealDamage(sim, result.Target, touchOfTheGraveDamage(drain.Unit.MaxHealth()), drain.OutcomeAlwaysHit)
+			drain.CalcAndDealDamage(sim, result.Target, touchOfTheGraveDamage(drain.Unit.MaxHealth()), drain.OutcomeMagicHit)
 		},
 	}
 }
@@ -84,6 +86,7 @@ func applyTouchOfTheGrave(character *Character) {
 	drain := character.RegisterSpell(SpellConfig{
 		ActionID:    ActionID{SpellID: touchOfTheGraveDrainSpellID},
 		SpellSchool: SpellSchoolShadow,
+		DefenseType: DefenseTypeMagic,
 		ProcMask:    ProcMaskSpellDamageProc,
 		Flags: SpellFlagNoOnCastComplete | SpellFlagIgnoreModifiers | SpellFlagIgnoreResists |
 			SpellFlagNoOnDamageDealt | SpellFlagSuppressWeaponProcs | SpellFlagSuppressEquipProcs,
