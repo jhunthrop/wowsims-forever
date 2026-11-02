@@ -103,6 +103,52 @@ func (unit *Unit) applySpellPushback() {
 	})
 }
 
+// pushBackChannel shortens the channel the unit is in: the ticks that
+// would land after the new end are lost, and a channel left with no tick
+// ends now and hands the unit back to its rotation.
+func (unit *Unit) pushBackChannel(sim *Simulation, dot *Dot) {
+	if sim.Roll(0, 1.0) <= dot.Spell.PushbackReduction {
+		return
+	}
+	pushback := DurationFromSeconds(max(0.2, unit.channelPushback))
+	unit.channelPushback -= 0.2
+
+	newExpires := max(sim.CurrentTime, dot.ExpiresAt()-pushback)
+	ticksLeft := int32(0)
+	if dot.tickPeriod > 0 {
+		ticksLeft = int32((newExpires - dot.lastTickTime) / dot.tickPeriod)
+	}
+	ticksLeft = min(ticksLeft, dot.MaxTicksRemaining())
+	if sim.Log != nil {
+		unit.Log(sim, "Channel shortened by %s due to damage taken, %d tick(s) left", pushback, ticksLeft)
+	}
+	if ticksLeft <= 0 {
+		dot.Cancel(sim)
+		unit.resumeAfterChannel(sim)
+		return
+	}
+	newEnd := dot.lastTickTime + dot.tickPeriod*time.Duration(ticksLeft)
+	dot.UpdateExpires(sim, newEnd)
+	// The channel's own last tick only hands back to the rotation when it
+	// is the channel's planned last, so the cut channel does it here.
+	StartDelayedAction(sim, DelayedActionOptions{
+		DoAt: newEnd,
+		OnAction: func(sim *Simulation) {
+			if unit.ChanneledDot != dot || !dot.IsActive() {
+				unit.resumeAfterChannel(sim)
+			}
+		},
+	})
+}
+
+// resumeAfterChannel asks the rotation for its next action once a
+// channel has ended early.
+func (unit *Unit) resumeAfterChannel(sim *Simulation) {
+	if unit.GCD.IsReady(sim) {
+		unit.WaitUntil(sim, sim.CurrentTime+unit.ChannelClipDelay)
+	}
+}
+
 // PushBackCast costs the unit's current cast its casting time for taking
 // damage: a cast is delayed and a channel shortened, by 1 s for the first
 // hit and 0.2 s less for each hit after, never under 0.2 s. The chance to
@@ -110,6 +156,10 @@ func (unit *Unit) applySpellPushback() {
 // Twilight Focus, Fel Concentration) belongs to the spell being cast, so
 // it is read from that spell and not from whatever dealt the damage.
 func (unit *Unit) PushBackCast(sim *Simulation) {
+	if dot := unit.ChanneledDot; dot != nil && dot.IsActive() && !unit.IsCasting(sim) {
+		unit.pushBackChannel(sim, dot)
+		return
+	}
 	if !unit.IsCasting(sim) {
 		return
 	}

@@ -18,9 +18,15 @@ func raidDamageLog(t *testing.T, model *proto.RaidDamageModel) string {
 // raidDamageLogWith is raidDamageLog with the priest running rotation.
 func raidDamageLogWith(t *testing.T, model *proto.RaidDamageModel, rotation *proto.APLRotation) string {
 	t.Helper()
+	return raidDamageLogWithTalents(t, model, rotation, "")
+}
+
+// raidDamageLogWithTalents is raidDamageLogWith with a talent string.
+func raidDamageLogWithTalents(t *testing.T, model *proto.RaidDamageModel, rotation *proto.APLRotation, talents string) string {
+	t.Helper()
 	player := core.WithSpec(&proto.Player{
 		Class: proto.Class_ClassPriest, Race: proto.Race_RaceUndead, Level: 60,
-		Equipment: &proto.EquipmentSpec{}, Rotation: rotation,
+		Equipment: &proto.EquipmentSpec{}, Rotation: rotation, TalentsString: talents,
 	}, &proto.Player_ShadowPriest{ShadowPriest: &proto.ShadowPriest{Options: &proto.ShadowPriest_Options{}}})
 	raid := core.SinglePlayerRaidProto(player, &proto.PartyBuffs{}, &proto.RaidBuffs{}, &proto.Debuffs{})
 	raid.Parties = append(raid.Parties, &proto.Party{})
@@ -106,5 +112,28 @@ func TestRaidDamagePulsePushesBackTheHealersCast(t *testing.T) {
 	model.PulsesReachHealer = false
 	if n := strings.Count(raidDamageLogWith(t, model, smite), "Hardcast extended by"); n != 0 {
 		t.Errorf("casts were pushed back %d times with no pulse reaching the healer, want 0", n)
+	}
+}
+
+// A channel hit by a pulse loses duration instead of being delayed: Mind
+// Flay (3 s, a tick a second) under a pulse every half second must be cut
+// short, and the priest must go on casting after it.
+func TestRaidDamagePulseShortensTheHealersChannel(t *testing.T) {
+	model := &proto.RaidDamageModel{
+		Profile: "test", TankHealth: 9000, MemberHealth: 4500,
+		PulseDamage: 10, PulseIntervalSeconds: 0.5, PulseMembers: 0,
+		PulsesReachHealer: true,
+	}
+	flay := core.APLRotationFromJsonString(`{"type": "TypeAPL", "priorityList": [{"action": {"castSpell": {"spellId": {"spellId": 18807}}}}]}`)
+	logs := raidDamageLogWithTalents(t, model, flay, "--00000001")
+	casts := strings.Count(logs, "Casting {SpellID: 18807}")
+	if casts == 0 {
+		casts = strings.Count(logs, "Completed cast {SpellID: 18807}")
+	}
+	if n := strings.Count(logs, "Channel shortened by"); n < 3 {
+		t.Errorf("Mind Flay was shortened %d times under a pulse every half second, want at least 3", n)
+	}
+	if casts < 5 {
+		t.Errorf("the priest cast Mind Flay %d times in 12 seconds of shortened channels, want at least 5 (the rotation stalled)", casts)
 	}
 }
