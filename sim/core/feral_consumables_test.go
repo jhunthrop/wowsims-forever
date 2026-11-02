@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/wowsims/classic/sim/core/proto"
-	"github.com/wowsims/classic/sim/core/stats"
 )
 
 // Forever: "Weapon enchantments and procs now all work while shapeshifted,
@@ -16,8 +15,16 @@ func TestWeaponConsumablesReachAShapeshiftedDruid(t *testing.T) {
 	character := newGnomeEurekaTestCaster(proto.Class_ClassDruid)
 	character.PseudoStats.FeralCombatEnabled = true
 	addImbueStats(character, proto.WeaponImbue_ElementalSharpeningStone, true, Cooldown{})
-	if got := character.GetStat(stats.MeleeCrit); got != 2*CritRatingPerCritChance {
-		t.Errorf("a feral druid's stone gives %v melee crit, want 2", got)
+	// The stone is a bonus on the druid's own melee attacks (a form's
+	// claw and swing roll the melee table), not a stat a pet could inherit.
+	claw := character.RegisterSpell(SpellConfig{
+		ActionID:    ActionID{SpellID: 1},
+		SpellSchool: SpellSchoolPhysical,
+		DefenseType: DefenseTypeMelee,
+		ProcMask:    ProcMaskMeleeMHSpecial,
+	})
+	if got := claw.BonusCritRating; got != 2*CritRatingPerCritChance {
+		t.Errorf("a feral druid's stone gives its claw %v crit rating, want 2%%", got)
 	}
 	if !windfuryTotemReaches(character) {
 		t.Error("Windfury Totem must reach a feral druid")
