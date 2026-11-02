@@ -3,7 +3,9 @@ package dpswarrior
 import (
 	"testing"
 
+	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/warrior"
 )
 
 // Raging Blows reduces the rage cost of Cleave and Whirlwind by a flat 3,
@@ -37,15 +39,15 @@ func TestWhirlwindStrikesOffHandBaseline(t *testing.T) {
 	target := sim.Encounter.TargetUnits[0]
 	withTalent.Whirlwind.ApplyEffects(sim, target, withTalent.Whirlwind.Spell)
 
-	if got := withTalent.Whirlwind.SpellMetrics[target.UnitIndex].Hits; got != 2 {
-		t.Errorf("dual-wielding with Raging Blows: Whirlwind landed %d hits on one target, want 2 (MH + OH)", got)
+	if got := outcomes(withTalent.Whirlwind.Spell) + outcomes(withTalent.GetSpell(core.ActionID{SpellID: warrior.WhirlwindOffHandSpellID})); got != 2 {
+		t.Errorf("dual-wielding with Raging Blows: Whirlwind rolled %d outcomes on one target across 1680 and its off-hand strike, want 2 (MH + OH)", got)
 	}
 
 	withoutTalent, sim2 := buildWarriorWithWeaponsAndSim(t, emptyWarriorTalents, oneHander, oneHander)
 	target2 := sim2.Encounter.TargetUnits[0]
 	withoutTalent.Whirlwind.ApplyEffects(sim2, target2, withoutTalent.Whirlwind.Spell)
-	if got := withoutTalent.Whirlwind.SpellMetrics[target2.UnitIndex].Hits; got != 2 {
-		t.Errorf("dual-wielding without Raging Blows: Whirlwind landed %d hits on one target, want 2 (MH + OH, baseline)", got)
+	if got := outcomes(withoutTalent.Whirlwind.Spell) + outcomes(withoutTalent.GetSpell(core.ActionID{SpellID: warrior.WhirlwindOffHandSpellID})); got != 2 {
+		t.Errorf("dual-wielding without Raging Blows: Whirlwind rolled %d outcomes on one target across 1680 and its off-hand strike, want 2 (MH + OH, baseline)", got)
 	}
 }
 

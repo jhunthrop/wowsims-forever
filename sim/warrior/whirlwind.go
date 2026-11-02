@@ -27,6 +27,12 @@ const (
 	whirlwindCooldown = time.Second * 10
 )
 
+// WhirlwindOffHandSpellID is Whirlwind's off-hand strike, the client's
+// spell 462891: SpellMisc Attributes_3 0x01000000 (the off-hand attack
+// flag), effect 121 normalized weapon damage on one target, no cost and no
+// stance, under Whirlwind's family mask.
+const WhirlwindOffHandSpellID = 462891
+
 // knowsWhirlwind reports whether the warrior has learned Whirlwind
 // (SpellLevels BaseLevel 36 for 1680).
 func (warrior *Warrior) knowsWhirlwind() bool {
@@ -41,9 +47,10 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 	// that moment, so a shrinking timeline does not wrap surplus swings
 	// back onto the survivors. Same shape as APLActionMultidot.
 	results := make([]*core.SpellResult, min(4, len(warrior.Env.Encounter.AllTargetUnits)))
-	// ohResults backs the baseline off-hand strike (below); sized the
-	// same as results so the two loops share one numHits bound.
+	// ohResults backs the off-hand strike (below); sized the same as
+	// results so the two loops share one numHits bound.
 	ohResults := make([]*core.SpellResult, len(results))
+	offHandStrike := warrior.registerWhirlwindOffHandStrike()
 
 	warrior.Whirlwind = warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
 		SpellCode:      SpellCode_WarriorWhirlwind,
@@ -91,8 +98,8 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 				baseDamage := spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 				if offHand {
-					ohDamage := spell.Unit.OHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target)) * warrior.offHandStrikeMultiplier()
-					ohResults[idx] = spell.CalcDamage(sim, target, ohDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+					ohDamage := offHandStrike.Unit.OHNormalizedWeaponDamage(sim, offHandStrike.MeleeAttackPower(target))
+					ohResults[idx] = offHandStrike.CalcDamage(sim, target, ohDamage, offHandStrike.OutcomeMeleeWeaponSpecialHitAndCrit)
 				}
 				target = sim.Environment.NextTargetUnit(target)
 			}
@@ -102,9 +109,34 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 			}
 			if offHand {
 				for _, result := range ohResults[:numHits] {
-					spell.DealDamage(sim, result)
+					offHandStrike.DealDamage(sim, result)
 				}
 			}
 		},
+	})
+}
+
+// registerWhirlwindOffHandStrike registers Whirlwind's off-hand strike
+// (WhirlwindOffHandSpellID) as the off-hand special the client makes it, so
+// it rolls the off hand's procs and the off hand's talents (Dual Wield
+// Specialization's damage, Furious Precision's hit) through their own
+// off-hand masks, and never the main hand's (Windfury Totem, a main-hand
+// enchant). Whirlwind casts it; it has no cost, cooldown or stance of its
+// own.
+func (warrior *Warrior) registerWhirlwindOffHandStrike() *core.Spell {
+	return warrior.Unit.RegisterSpell(core.SpellConfig{
+		SpellCode:      SpellCode_WarriorWhirlwind,
+		ClassSpellMask: WarriorSpellMaskWhirlwind,
+		ActionID:       core.ActionID{SpellID: WhirlwindOffHandSpellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeOHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagPassiveSpell | core.SpellFlagNoOnCastComplete,
+
+		CritDamageBonus: warrior.impale(),
+
+		DamageMultiplier: 1,
+		ThreatMultiplier: 1.25,
+		BonusCoefficient: 1,
 	})
 }
