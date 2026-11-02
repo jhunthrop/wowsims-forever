@@ -387,3 +387,54 @@ func TestBurstOfKnowledgeIsOnTheClientsSixMinuteCooldown(t *testing.T) {
 		t.Errorf("cooldown %v, want 6m", spell.CD.Duration)
 	}
 }
+
+// Forever replaced three Era uses the engine still modelled (ItemEffect
+// rows of the 70707 client, Wowhead Forever server text read 2026-11-02):
+//   - Sanctified Orb (20512): 24865 "Restores 319 to 361 Mana", a 5 min
+//     item cooldown and the 1 min conjured category 30, not Era's 3% crit.
+//   - Diamond Flask (20130): 363881, a 5 sec channel restoring 1120 health
+//     and then 20 Strength for 1 min, not Era's 75 Strength.
+//   - Smolderweb's Eye (13213): 1308917 Mother's Watch, "Remove 1 Disarm
+//     effect from target ally", not Era's poison.
+func TestSanctifiedOrbRestoresTheClientsMana(t *testing.T) {
+	sim, character := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 20512)
+	spell := character.GetSpell(core.ActionID{ItemID: 20512})
+	if spell == nil {
+		t.Fatal("no Sanctified Orb use")
+	}
+	if spell.CD.Duration != 5*time.Minute {
+		t.Errorf("cooldown %v, want 5m", spell.CD.Duration)
+	}
+	crit := character.GetStat(stats.Crit)
+	character.SpendMana(sim, character.CurrentMana(), character.NewManaMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionAttack}))
+	spell.Cast(sim, nil)
+	if got := character.CurrentMana(); got < 318.75-1e-6 || got > 361.25+1e-6 {
+		t.Errorf("restored %v mana, want 319 to 361", got)
+	}
+	if character.GetStat(stats.Crit) != crit {
+		t.Error("Sanctified Orb still grants Era's crit")
+	}
+}
+
+func TestDiamondFlaskAndSmolderwebsEyeKeepNoEraUse(t *testing.T) {
+	_, warrior := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotTrinket1, 20130)
+	if warrior.GetSpell(core.ActionID{SpellID: 24427}) != nil {
+		t.Error("Diamond Flask still casts Era's 75 Strength")
+	}
+	_, mage := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 13213)
+	if mage.GetSpell(core.ActionID{SpellID: 17330}) != nil {
+		t.Error("Smolderweb's Eye still casts Era's poison")
+	}
+}
+
+// Nat Pagle's Broken Reel (19947): ItemEffect cooldown 75000 ms.
+func TestNatPaglesBrokenReelIsOnTheClientsCooldown(t *testing.T) {
+	_, character := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 19947)
+	spell := character.GetSpell(core.ActionID{ItemID: 19947})
+	if spell == nil {
+		t.Fatal("no Nat Pagle's Broken Reel use")
+	}
+	if spell.CD.Duration != 75*time.Second {
+		t.Errorf("cooldown %v, want 1m15s", spell.CD.Duration)
+	}
+}

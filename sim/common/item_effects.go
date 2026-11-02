@@ -3008,9 +3008,10 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=19947/nat-pagles-broken-reel
+	// Forever's ItemEffect puts 24610 (10% hit for 15 sec) on 75 sec.
 	core.NewSimpleStatOffensiveTrinketEffect(NatPaglesBrokenReel, stats.Stats{
 		stats.Hit: 10 * core.HitRatingPerHitChance,
-	}, time.Second*15, time.Second*90)
+	}, time.Second*15, time.Second*75)
 
 	// https://www.wowhead.com/classic/item=19812/rune-of-the-dawn
 	// Equip: Increases damage done to Undead by magical spells and effects by up to 48.
@@ -3111,46 +3112,10 @@ func init() {
 		})
 	})
 
-	// https://www.wowhead.com/classic/item=13213/smolderwebs-eye
-	// Use: Poisons target for 20 Nature damage every 2 sec for 20 sec. (2 Min Cooldown)
-	core.NewItemEffect(SmolderwebsEye, func(agent core.Agent) {
-		character := agent.GetCharacter()
-		spell := character.RegisterSpell(core.SpellConfig{
-			ActionID:    core.ActionID{SpellID: 17330},
-			SpellSchool: core.SpellSchoolNature,
-			ProcMask:    core.ProcMaskEmpty,
-			Flags:       core.SpellFlagPoison | core.SpellFlagPureDot | core.SpellFlagNoOnCastComplete,
-			Cast: core.CastConfig{
-				CD: core.Cooldown{
-					Timer:    character.NewTimer(),
-					Duration: time.Minute * 2,
-				},
-			},
-			Dot: core.DotConfig{
-				NumberOfTicks: 10,
-				TickLength:    time.Second * 2,
-				Aura: core.Aura{
-					Label: "Poison (Smolderweb's Eye)",
-				},
-				OnSnapshot: func(_ *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-					dot.Snapshot(target, 20, isRollover)
-				},
-				OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-					dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
-				},
-			},
-			DamageMultiplier: 1,
-			ThreatMultiplier: 1,
-			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				spell.Dot(target).Apply(sim)
-			},
-		})
-
-		character.AddMajorCooldown(core.MajorCooldown{
-			Type:  core.CooldownTypeDPS,
-			Spell: spell,
-		})
-	})
+	// Smolderweb's Eye: Forever's use, ItemEffect 99680, is 1308917 Mother's
+	// Watch, "Remove 1 Disarm effect from target ally" (5 min cooldown), not
+	// Era's poison. Nothing in a sim disarms, so it has no effect here.
+	core.NewItemEffect(SmolderwebsEye, func(core.Agent) {})
 
 	// https://www.wowhead.com/classic/item=13209/seal-of-the-dawn
 	// Equip: +81 Attack Power when fighting Undead.

@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
-	"github.com/wowsims/classic/sim/core/stats"
 )
 
 // Libram IDs
@@ -60,7 +59,36 @@ func libramOfFervorBonuses() (sealAttackPower, judgementHolyDamage float64) {
 }
 
 func init() {
-	core.NewSimpleStatOffensiveTrinketEffect(SanctifiedOrb, stats.Stats{stats.Crit: 3 * core.CritRatingPerCritChance}, time.Second*25, time.Minute*3)
+	// Sanctified Orb: Forever's use is 24865, "Restores 319 to 361 Mana"
+	// (Effect 30, 340 with variance 0.125) on a 5 min item cooldown and the 1
+	// min category 30 the mana gems and Robe of the Archmage share, not Era's
+	// 3% crit. Its doubling in Wasteland and Haunted areas meets no published
+	// fight.
+	core.NewItemEffect(SanctifiedOrb, func(agent core.Agent) {
+		character := agent.GetCharacter()
+		actionID := core.ActionID{ItemID: SanctifiedOrb}
+		manaMetrics := character.NewManaMetrics(actionID)
+		const minMana, maxMana = 318.75, 361.25
+		conjured := character.GetConjuredCD()
+		spell := character.RegisterSpell(core.SpellConfig{
+			ActionID: actionID,
+			Flags:    core.SpellFlagNoOnCastComplete,
+			Cast: core.CastConfig{
+				CD: core.Cooldown{Timer: character.NewTimer(), Duration: 5 * time.Minute},
+			},
+			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+				character.AddMana(sim, sim.RollWithLabel(minMana, maxMana, "Sanctified Orb"), manaMetrics)
+				conjured.Set(max(conjured.ReadyAt(), sim.CurrentTime+time.Minute))
+			},
+		})
+		character.AddMajorCooldown(core.MajorCooldown{
+			Spell: spell,
+			Type:  core.CooldownTypeMana,
+			ShouldActivate: func(_ *core.Simulation, character *core.Character) bool {
+				return character.MaxMana()-character.CurrentMana() >= maxMana
+			},
+		})
+	})
 
 	// https://www.wowhead.com/classic/item=23203/libram-of-fervor
 	// Equip: Increases the melee attack power bonus of your Seal of the
