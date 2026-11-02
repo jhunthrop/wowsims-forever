@@ -132,6 +132,29 @@ func TestHealingStreamTicksCanCrit(t *testing.T) {
 	}
 }
 
+// The totem's ticks crit only on the shaman's every-table crit (item crit
+// and aura-290 buffs such as Thundering Strikes), not its Intellect spell
+// crit: in the beta logs (foreverlogs.gg, levels 20 to 35, read 2026-11-02)
+// five Restoration and Elemental shamans with no Enhancement points show 0
+// crits in 21,134 Healing Stream ticks while their own heals crit 4 to 6%,
+// and the Enhancement shamans, with Thundering Strikes, crit about 5%.
+func TestHealingStreamIgnoresTheShamansSpellTableCrit(t *testing.T) {
+	player := newHealerPlayer(60, "", castOnce(healingStreamTopRankID, 5))
+	bonus := stats.FromFloatArray(player.BonusStats.Stats)
+	bonus[stats.Crit] = 0
+	bonus[stats.SpellCrit] += 100 * core.CritRatingPerCritChance
+	player.BonusStats = &proto.UnitStats{Stats: bonus.ToFloatArray()}
+	result := core.RunRaidSim(healsim.Request(player, quietRaid(), healingStreamFightLength, 1))
+	if result.Error != nil {
+		t.Fatal(result.Error.Message)
+	}
+	events, gain := healthGained(result, healingStreamTopHealID)
+	plain := healingStreamTopRankHeal + healingStreamCoefficient*testHealingPower
+	if got := gain / float64(events); got > plain*1.01 {
+		t.Errorf("with 100%% spell-table crit and no every-table crit a tick heals %.4f on average, want %.4f (no crits)", got, plain)
+	}
+}
+
 // A Healing Stream crit is a periodic heal's crit, and Water Shield's proc
 // mask (SpellAuraOptions 223904, ProcTypeMask 0x362A8) has no periodic bit,
 // so the totem's crits restore no mana.

@@ -89,8 +89,18 @@ func (shaman *Shaman) newHealingStreamTotemSpellConfig(rank int) core.SpellConfi
 		// healing crit directly, and it is dealt as a periodic heal (the
 		// client's 10461 is a periodic heal aura): procs that ignore
 		// periodic heals, such as Water Shield's, ignore it.
+		//
+		// The totem crits on the shaman's every-table crit only (item crit,
+		// aura-290 buffs such as Thundering Strikes), not its Intellect
+		// spell crit: in the beta logs (foreverlogs.gg, levels 20 to 35,
+		// read 2026-11-02) shamans with no Enhancement points show 0 crits
+		// in 21,134 ticks while their own heals crit 4 to 6%, and those
+		// with Thundering Strikes crit about 5% whatever their Intellect.
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			spellTableOnly := shaman.GetStat(stats.SpellCrit)
+			spell.BonusCritRating -= spellTableOnly
 			result := spell.CalcHealing(sim, target, baseHealing, spell.OutcomeHealingCrit)
+			spell.BonusCritRating += spellTableOnly
 			spell.DealPeriodicHealing(sim, result)
 		},
 	})
