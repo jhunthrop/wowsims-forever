@@ -77,3 +77,32 @@ func TestBalanceRegistersMoonfireAndWrathOnce(t *testing.T) {
 		}
 	}
 }
+
+// Insect Swarm is a non-channelled DoT, so its ticks crit in any form
+// (owner ruling 2026-10-31, core.periodicDamageCanCrit). The engine zeroed
+// the crit chance outside Moonkin Form, a Season of Discovery leftover:
+// Forever's Moonkin Form (24858, 24907) grants armor, Omen of Clarity and
+// a 3% crit aura, and no periodic crit. A Balance druid below 40 has no
+// Moonkin Form yet.
+func TestInsectSwarmTicksCritOutsideMoonkinForm(t *testing.T) {
+	built, sim, target := newBalanceDruidSimWithTalents(t, druidTalentsString(t, map[int]int{insectSwarmField: 1}))
+	if built.InForm(druid.Moonkin) {
+		t.Fatal("the druid is in Moonkin Form without the talent")
+	}
+	spell := built.InsectSwarm[len(built.InsectSwarm)-1]
+	var dot *core.Dot
+	for attempt := 0; attempt < 20 && dot == nil; attempt++ {
+		spell.ApplyEffects(sim, target, spell.Spell)
+		if d := spell.Dot(target); d.IsActive() {
+			dot = d
+		}
+	}
+	if dot == nil {
+		t.Fatal("Insect Swarm never landed")
+	}
+	dot.TickCount = 1
+	dot.TickOnce(sim)
+	if dot.SnapshotCritChance <= 0 {
+		t.Errorf("Insect Swarm ticked with crit chance %v outside Moonkin Form, want the caster's spell crit", dot.SnapshotCritChance)
+	}
+}
