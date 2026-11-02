@@ -445,7 +445,9 @@ func (mage *Mage) registerCombustionCD() {
 
 	var fireSpells, frostfireBolts []*core.Spell
 	mage.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.SpellSchool.Matches(core.SpellSchoolFire) && spell.Flags.Matches(SpellFlagMage) {
+		// Combustion's buff (28682) is the Fire damage mask Critical Mass
+		// also uses; Ignite's burn (412538) is outside it.
+		if spell.Matches(MageSpellMaskFireDamage) {
 			fireSpells = append(fireSpells, spell)
 		}
 		if spell.SpellCode == SpellCode_MageFrostfireBolt {
@@ -810,14 +812,15 @@ func (mage *Mage) applyDeclarativeTalents() {
 	}
 
 	if t.Precision > 0 {
-		// "all spells": every spell this class registers, as with Arcane
-		// Instability. Spells cast by items (trinket and weapon procs)
-		// carry no mage class mask and do not get it.
-		mage.AddStaticMod(core.SpellModConfig{
-			Kind:            core.SpellMod_BonusHit_Flat,
-			ClassSpellsOnly: true,
-			FloatValue:      precisionHitPerRank * float64(rankOf("precision", t.Precision)) * core.HitRatingPerHitChance,
-		})
+		// "all spells": client 29438 is aura 55 (spell hit chance) with no
+		// class mask, so it reaches every spell the mage casts, the ones
+		// items cast for it (Kindling Stave's Ignition, trinket bolts)
+		// included, and no melee or ranged attack.
+		hitRating := precisionHitPerRank * float64(rankOf("precision", t.Precision)) * core.HitRatingPerHitChance
+		for _, school := range []stats.SchoolIndex{stats.SchoolIndexArcane, stats.SchoolIndexFire, stats.SchoolIndexFrost,
+			stats.SchoolIndexHoly, stats.SchoolIndexNature, stats.SchoolIndexShadow} {
+			mage.PseudoStats.SchoolBonusHitChance[school] += hitRating
+		}
 	}
 
 	if t.IceShards > 0 {

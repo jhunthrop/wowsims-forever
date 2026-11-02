@@ -49,7 +49,7 @@
       }
     },
     {
-      "notes": "Keep Ice Barrier up: the talent adds 15% Frost damage for a minute after a cast and another 5% while the shield holds (client 1.60.1.70707). It goes up before the pull and again when the shield's minute runs out. The condition names the shield with its rank, so while levelling it is rewritten to the same lower rank the cast uses. Nothing hits the simulated mage, so the shield never breaks and its extra 3% holds all minute; in a fight where it breaks, only the first 3% stays.",
+      "notes": "Keep Ice Barrier up: the talent adds 15% Frost damage for a minute after a cast and another 5% while the shield holds (client 1.60.1.70707). It goes up before the pull and again when the shield's minute runs out. The condition names the shield with its rank, so while levelling it is rewritten to the same lower rank the cast uses. Nothing hits the simulated mage, so the shield never breaks and its extra 5% holds all minute; in a fight where it breaks, only the 15% stays.",
       "action": {
         "condition": {
           "not": {

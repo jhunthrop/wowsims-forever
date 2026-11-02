@@ -96,7 +96,7 @@ func (mage *Mage) grantFingersOfFrost(sim *core.Simulation) {
 // consumesFingersOfFrost reports whether spell is a "spell cast" for
 // Fingers of Frost and Shatter: a direct-damage cast of the mage's own.
 func (mage *Mage) consumesFingersOfFrost(spell *core.Spell) bool {
-	return spell.Flags.Matches(SpellFlagMage|core.SpellFlagAPL) &&
+	return spell.Flags.Matches(SpellFlagMage) && spell.Flags.Matches(core.SpellFlagAPL) &&
 		spell.ProcMask.Matches(core.ProcMaskSpellDamage) &&
 		!spell.Flags.Matches(core.SpellFlagChanneled)
 }
