@@ -164,6 +164,7 @@ type Paladin struct {
 
 	// Healing, registered for the healing spec only (healing.go).
 	lightsVigil lightsVigilState
+	oathOfLight oathOfLightState
 	// illuminationBaseCost is the mana cost Illumination returns half of
 	// for each heal that can trigger it.
 	illuminationBaseCost map[*core.Spell]float64

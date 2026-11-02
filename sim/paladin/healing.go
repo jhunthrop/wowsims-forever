@@ -46,6 +46,7 @@ func (paladin *Paladin) registerHealing() {
 	paladin.registerHolyLight()
 	paladin.registerFlashOfLight()
 	paladin.registerLightsVigil()
+	paladin.registerOathOfLight()
 }
 
 func (paladin *Paladin) registerDirectHeal(heal directHeal) {
@@ -88,7 +89,7 @@ func (paladin *Paladin) registerDirectHealRank(heal directHeal, rankNumber int, 
 		PushbackReduction: paladin.spiritualFocusPushbackReduction(heal.classMask),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseHealing := rank.heal.Roll(sim, casterLevel)
+			baseHealing := rank.heal.Roll(sim, casterLevel) + heal.coefficient*paladin.oathOfLightBonus(target, heal.classMask)
 			spell.CalcAndDealHealing(sim, target, baseHealing, spell.OutcomeHealingCrit)
 		},
 	})

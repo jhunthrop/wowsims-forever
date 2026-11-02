@@ -195,6 +195,16 @@ func (paladin *Paladin) applyHolyPower() {
 	})
 }
 
+// boundlessLightCritOn is the Boundless Light crit a Holy Shock heal on
+// target does not get: all of it on the ally sworn by Oath of Light ("when
+// cast on allies not affected by your Oath of Light"), none elsewhere.
+func (paladin *Paladin) boundlessLightCritOn(target *core.Unit) float64 {
+	if !paladin.isSworn(target) {
+		return 0
+	}
+	return boundlessLightCritPctPerRank * float64(paladin.Talents.BoundlessLight) * core.CritRatingPerCritChance
+}
+
 // applyBoundlessLight raises Holy Shock's heal crit chance.
 func (paladin *Paladin) applyBoundlessLight() {
 	rank := float64(paladin.Talents.BoundlessLight)
