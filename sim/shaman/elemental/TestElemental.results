@@ -596,6 +596,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestElemental-Phase1-AllItems-EyeoftheBeast-13968"
+ value: {
+  dps: 469.43601
+  tps: 526.72861
+ }
+}
+dps_results: {
  key: "TestElemental-Phase1-AllItems-GiftoftheGatheringStorm"
  value: {
   dps: 452.16923
@@ -761,6 +768,13 @@ dps_results: {
  value: {
   dps: 439.50572
   tps: 494.9168
+ }
+}
+dps_results: {
+ key: "TestElemental-Phase2-AllItems-EyeoftheBeast-13968"
+ value: {
+  dps: 508.36194
+  tps: 569.87393
  }
 }
 dps_results: {
@@ -932,6 +946,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestElemental-Phase3-AllItems-EyeoftheBeast-13968"
+ value: {
+  dps: 517.6736
+  tps: 585.75684
+ }
+}
+dps_results: {
  key: "TestElemental-Phase3-AllItems-GiftoftheGatheringStorm"
  value: {
   dps: 490.7646
@@ -1097,6 +1118,13 @@ dps_results: {
  value: {
   dps: 461.9955
   tps: 525.12555
+ }
+}
+dps_results: {
+ key: "TestElemental-Phase4-AllItems-EyeoftheBeast-13968"
+ value: {
+  dps: 555.15552
+  tps: 627.17605
  }
 }
 dps_results: {
@@ -1268,6 +1296,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestElemental-Phase5-AllItems-EyeoftheBeast-13968"
+ value: {
+  dps: 628.83437
+  tps: 702.93549
+ }
+}
+dps_results: {
  key: "TestElemental-Phase5-AllItems-GiftoftheGatheringStorm"
  value: {
   dps: 588.90577
@@ -1433,6 +1468,13 @@ dps_results: {
  value: {
   dps: 551.81696
   tps: 618.18033
+ }
+}
+dps_results: {
+ key: "TestElemental-Phase6-AllItems-EyeoftheBeast-13968"
+ value: {
+  dps: 663.6423
+  tps: 741.15422
  }
 }
 dps_results: {

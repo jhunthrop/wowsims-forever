@@ -116,6 +116,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFeralTank-Phase1-AllItems-EyeoftheBeast-13968"
+ value: {
+  dps: 460.1521
+  tps: 1163.34999
+ }
+}
+dps_results: {
  key: "TestFeralTank-Phase1-AllItems-FeralheartRaiment"
  value: {
   dps: 438.762
