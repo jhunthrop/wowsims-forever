@@ -167,12 +167,14 @@ func (shaman *Shaman) newManaSpringTotemSpellConfig(rank int) core.SpellConfig {
 	var applied stats.Stats
 	bonus := func() stats.Stats {
 		restore := float64(ManaSpringTotemManaRestore[rank]) * manaSpringMP5PerRestore
-		return stats.Stats{stats.MP5: restore * shaman.restorativeManaSpringMultiplier() * (1 + shaman.manaSpringSetBonus)}
+		own := restore * shaman.restorativeManaSpringMultiplier() * (1 + shaman.manaSpringSetBonus)
+		return stats.Stats{stats.MP5: max(own-shaman.raidManaSpringMP5, 0)}
 	}
 
 	// The totem's restore is the shaman's own mana regeneration while it
-	// stands; the group-wide raid buff in core/buffs.go stays a separate
-	// source for other players' totems.
+	// stands. Mana Spring auras do not stack, so under the raid buffs'
+	// Mana Spring Totem (core/buffs.go) the shaman's own adds only its
+	// excess over the raid's.
 	buffAura := shaman.RegisterAura(core.Aura{
 		Label:    fmt.Sprintf("Mana Spring Totem (Rank %d)", rank),
 		ActionID: core.ActionID{SpellID: spellId},

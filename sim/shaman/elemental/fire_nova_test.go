@@ -215,7 +215,10 @@ func TestFireNovaSharesClearcasting(t *testing.T) {
 // Mana Spring Totem restores "10 mana every 2 seconds" at rank 4 for
 // five minutes (spell 10497's tooltip and 300 s duration). The APL cast
 // used to only mark the water slot occupied; the restore is now a real
-// MP5 aura, so a solo shaman benefits from dropping it.
+// MP5 aura. This fixture's raid buffs already carry the improved Mana
+// Spring (31.25 mp5), which the shaman's own 25 does not stack with, so
+// the drop adds nothing here; the restoration package's totems test
+// measures a shaman with no raid totem.
 func TestManaSpringTotemRestoresManaForFiveMinutes(t *testing.T) {
 	sim, s := newFireNovaShaman(t, 60, elementalTalentsWith(nil))
 	spring := s.ManaSpringTotem[shaman.ManaSpringTotemRanks]
@@ -225,8 +228,8 @@ func TestManaSpringTotemRestoresManaForFiveMinutes(t *testing.T) {
 
 	before := s.GetStat(stats.MP5)
 	spring.ApplyEffects(sim, sim.GetTargetUnit(0), spring)
-	if got, want := s.GetStat(stats.MP5)-before, 25.0; !near(got, want) {
-		t.Errorf("Mana Spring Totem rank 4 MP5 = +%v, want +%v (10 mana per 2 s)", got, want)
+	if got, want := s.GetStat(stats.MP5)-before, 0.0; !near(got, want) {
+		t.Errorf("Mana Spring Totem rank 4 under the raid's improved Mana Spring = +%v MP5, want +%v", got, want)
 	}
 	if got, want := s.TotemExpirations[shaman.WaterTotem], sim.CurrentTime+5*time.Minute; got != want {
 		t.Errorf("Mana Spring Totem expires at %v, want %v (client duration 300 s)", got, want)
