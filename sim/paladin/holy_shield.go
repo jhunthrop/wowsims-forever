@@ -125,8 +125,11 @@ func (paladin *Paladin) registerHolyShield() {
 			ExtraCastCondition: func(_ *core.Simulation, _ *core.Unit) bool {
 				return paladin.PseudoStats.CanBlock
 			},
+			// Benediction's class mask (20101, mask_1 0x40) names
+			// Holy Shield like the other instants.
 			ManaCost: core.ManaCostOptions{
-				FlatCost: manaCost,
+				FlatCost:   manaCost,
+				Multiplier: paladin.benediction(),
 			},
 			Cast: core.CastConfig{
 				DefaultCast: core.Cast{
