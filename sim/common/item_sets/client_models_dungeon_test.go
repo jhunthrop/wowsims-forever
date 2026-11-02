@@ -15,21 +15,30 @@ const (
 	necropilePieces       = 3
 	necropileBonus  int32 = 1299737
 	necropileLeech  int32 = 1299735
-	necropileProc         = "Necropile Drain (harmful spellcast)"
-	leechTrials           = 400
+	necropileProc         = "Necropile Drain"
+	leechTrials           = 40_000
 
-	// A landed leech averages within this fraction of its expected damage.
+	// The leech rate (one a minute) and a landed leech's average are each
+	// within this fraction of the expected value.
 	leechTolerance = 0.1
+
+	// A Shadow Bolt-length cast: one a minute is 5% of these casts.
+	necropileTestCastTime = 3 * time.Second
 )
 
-// castPastCooldown delivers a harmful cast after the bonus's internal
-// cooldown has passed, so every cast may proc.
-func castPastCooldown(w wornSet, proc *core.Aura, cooldown time.Duration) {
-	w.sim.CurrentTime += cooldown
-	w.cast(proc)
+// harmfulCast delivers a landed damage spell of the given cast time to an
+// aura's OnSpellHitDealt, as the engine does when the cast reaches its
+// target.
+func harmfulCast(w wornSet, aura *core.Aura, spell *core.Spell) {
+	aura.OnSpellHitDealt(aura, w.sim, spell, &core.SpellResult{Outcome: core.OutcomeHit, Target: w.target(), Damage: 1})
 }
 
-func TestNecropileDrainLeechesTheClientAmountOnEveryHarmfulCast(t *testing.T) {
+// Necropile Drain's row is ProcChance 100 with no SpellProcsPerMinute row
+// and a 10 ms recovery, and its text says "a chance": the same shape as
+// Kindling Stave's Ignition. The beta logs show such rows proccing at about
+// one a minute (round-8 warlock report), the rate the engine already reads
+// for every unstated "chance on" bonus, so it leeches at one a minute.
+func TestNecropileDrainLeechesTheClientAmountAtOneAMinute(t *testing.T) {
 	if wear(t, mageHost, necropileSet, necropilePieces-1).character.GetAura(necropileProc) != nil {
 		t.Fatal("two pieces already carry Necropile Drain")
 	}
@@ -42,20 +51,21 @@ func TestNecropileDrainLeechesTheClientAmountOnEveryHarmfulCast(t *testing.T) {
 	cooldown := time.Duration(core.MustClientSpellRow(necropileBonus).InternalCooldownMS) * time.Millisecond
 	amount := core.MustClientSpellRow(necropileLeech).Effects[0].Points
 
-	w.cast(proc)
-	w.cast(proc)
-	metrics := func() *core.SpellMetrics { return &leech.SpellMetrics[w.target().UnitIndex] }
-	if metrics().Casts != 1 {
-		t.Errorf("two casts inside the %v internal cooldown leeched %d times, want 1", cooldown, metrics().Casts)
+	bolt := &core.Spell{ProcMask: core.ProcMaskSpellDamage, CurCast: core.Cast{CastTime: necropileTestCastTime}}
+	// Each cast lands past the recovery; the clock cycles within the first
+	// seconds so the raid's debuffs stay up.
+	start := w.sim.CurrentTime
+	for i := 0; i < leechTrials; i++ {
+		w.sim.CurrentTime = start + time.Duration(1+i%100)*cooldown
+		harmfulCast(w, proc, bolt)
 	}
-	for i := 1; i < leechTrials; i++ {
-		castPastCooldown(w, proc, cooldown)
+	metrics := &leech.SpellMetrics[w.target().UnitIndex]
+	want := leechTrials * necropileTestCastTime.Minutes()
+	if got := float64(metrics.Casts); math.Abs(got-want) > want*leechTolerance {
+		t.Fatalf("%d spaced %v casts leeched %v times, want about %v (one a minute)", leechTrials, necropileTestCastTime, got, want)
 	}
-	if metrics().Casts != leechTrials {
-		t.Fatalf("%d spaced casts leeched %d times, want every one", leechTrials, metrics().Casts)
-	}
-	landed := float64(metrics().Hits + metrics().ResistedHits)
-	average := metrics().TotalDamage / landed
+	landed := float64(metrics.Hits) // ResistedHits are counted inside Hits
+	average := metrics.TotalDamage / landed
 	expected := leech.CalcDamage(w.sim, w.target(), amount, leech.OutcomeExpectedMagicAlwaysHit).Damage
 	if math.Abs(average-expected) > expected*leechTolerance {
 		t.Errorf("a landed leech averages %.1f, want about %.1f (the client's %v after the raid's multipliers)", average, expected, amount)
