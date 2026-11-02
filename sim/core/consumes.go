@@ -146,6 +146,29 @@ var wizardOilStats = map[proto.WeaponImbue]stats.Stats{
 	proto.WeaponImbue_BrilliantWizardOil: {stats.SpellPower: 36, stats.HealingPower: 36, stats.SpellCrit: 1 * CritRatingPerCritChance},
 }
 
+// addFlatWeaponDamage is a stone's or weightstone's flat damage on the
+// weapon it sits on. Forever: "Weapon enchantments and procs now all work
+// while shapeshifted, including effects like weightstones" (the druid deep
+// dive, news.blizzard.com article 24301515), and a form's auto attack has
+// "the same DPS as the Druid's equipped weapon". So on a feral druid the
+// stone is the weapon's own damage per swing, at the weapon's speed: it
+// raises the weapon's damage per second, which the form's paw is built
+// from when it shifts.
+func addFlatWeaponDamage(character *Character, isMh bool, damage float64) {
+	if character.PseudoStats.FeralCombatEnabled {
+		if weapon := character.GetMHWeapon(); isMh && weapon != nil && weapon.SwingSpeed > 0 {
+			character.PseudoStats.BonusMHDps += damage / weapon.SwingSpeed
+		}
+		return
+	}
+	weapon := character.AutoAttacks.MH()
+	if !isMh {
+		weapon = character.AutoAttacks.OH()
+	}
+	weapon.BaseDamageMin += damage
+	weapon.BaseDamageMax += damage
+}
+
 func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, shadowOilIcd Cooldown) {
 	if imbue != proto.WeaponImbue_WeaponImbueUnknown {
 		switch imbue {
@@ -175,23 +198,9 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 
 		// Sharpening Stones
 		case proto.WeaponImbue_SolidSharpeningStone:
-			if !character.PseudoStats.FeralCombatEnabled {
-				weapon := character.AutoAttacks.MH()
-				if !isMh {
-					weapon = character.AutoAttacks.OH()
-				}
-				weapon.BaseDamageMin += 6
-				weapon.BaseDamageMax += 6
-			}
+			addFlatWeaponDamage(character, isMh, 6)
 		case proto.WeaponImbue_DenseSharpeningStone:
-			if !character.PseudoStats.FeralCombatEnabled {
-				weapon := character.AutoAttacks.MH()
-				if !isMh {
-					weapon = character.AutoAttacks.OH()
-				}
-				weapon.BaseDamageMin += 8
-				weapon.BaseDamageMax += 8
-			}
+			addFlatWeaponDamage(character, isMh, 8)
 		case proto.WeaponImbue_ElementalSharpeningStone:
 			// Enchant 2506, spell 22755: aura 52, weapon crit. Melee
 			// only: never a spell, and taken back off ranged below. It
@@ -218,23 +227,9 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 
 		// Weightstones
 		case proto.WeaponImbue_SolidWeightstone:
-			if !character.PseudoStats.FeralCombatEnabled {
-				weapon := character.AutoAttacks.MH()
-				if !isMh {
-					weapon = character.AutoAttacks.OH()
-				}
-				weapon.BaseDamageMin += 6
-				weapon.BaseDamageMax += 6
-			}
+			addFlatWeaponDamage(character, isMh, 6)
 		case proto.WeaponImbue_DenseWeightstone:
-			if !character.PseudoStats.FeralCombatEnabled {
-				weapon := character.AutoAttacks.MH()
-				if !isMh {
-					weapon = character.AutoAttacks.OH()
-				}
-				weapon.BaseDamageMin += 8
-				weapon.BaseDamageMax += 8
-			}
+			addFlatWeaponDamage(character, isMh, 8)
 		// Windfury
 		case proto.WeaponImbue_Windfury:
 			if !character.PseudoStats.FeralCombatEnabled {

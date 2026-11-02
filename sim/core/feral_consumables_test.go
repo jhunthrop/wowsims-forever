@@ -58,3 +58,30 @@ func activateAnswer(mcd MajorCooldown, character *Character) (answer bool) {
 	}()
 	return mcd.ShouldActivate(nil, character)
 }
+
+// The flat damage stones and weightstones are weapon enchantments too
+// ("including effects like weightstones"), so a feral druid's form attacks
+// carry them. The form's auto attack is "the same as the DPS of the
+// Druid's equipped weapon", so the stone counts as the weapon's own damage
+// per swing at the weapon's speed: a Dense Weightstone's 8 on a 3.2 s staff
+// is 8/3.2 damage a second more on the paw.
+func TestAFeralDruidsWeightstoneReachesItsWeapon(t *testing.T) {
+	for _, c := range []struct {
+		imbue proto.WeaponImbue
+		bonus float64
+	}{
+		{proto.WeaponImbue_DenseWeightstone, 8}, {proto.WeaponImbue_SolidWeightstone, 6},
+		{proto.WeaponImbue_DenseSharpeningStone, 8}, {proto.WeaponImbue_SolidSharpeningStone, 6},
+	} {
+		character := newGnomeEurekaTestCaster(proto.Class_ClassDruid)
+		character.Equipment[proto.ItemSlot_ItemSlotMainHand] = Item{ID: 1, WeaponDamageMin: 100, WeaponDamageMax: 160, SwingSpeed: 3.2, HandType: proto.HandType_HandTypeTwoHand}
+		character.PseudoStats.FeralCombatEnabled = true
+		weapon := character.WeaponFromMainHand()
+		before := weapon.DPS()
+		addImbueStats(character, c.imbue, true, Cooldown{})
+		after := character.WeaponFromMainHand()
+		if got, want := after.DPS()-before, c.bonus/3.2; got < want-1e-9 || got > want+1e-9 {
+			t.Errorf("%v: a feral druid's weapon gains %.4f damage a second, want %.4f", c.imbue, got, want)
+		}
+	}
+}
