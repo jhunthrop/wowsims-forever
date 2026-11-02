@@ -254,27 +254,31 @@ func (warrior *Warrior) Reset(sim *core.Simulation) {
 	warrior.curQueuedAutoSpell = nil
 
 	// Reset Stance
+	stance := warrior.defaultStance()
 	switch warrior.WarriorInputs.Stance {
 	case proto.WarriorStance_WarriorStanceBattle:
-		warrior.Stance = BattleStance
-		warrior.BattleStanceAura.Activate(sim)
+		stance = BattleStance
 	case proto.WarriorStance_WarriorStanceDefensive:
-		warrior.Stance = DefensiveStance
-		warrior.DefensiveStanceAura.Activate(sim)
+		stance = DefensiveStance
 	case proto.WarriorStance_WarriorStanceBerserker:
-		warrior.Stance = BerserkerStance
-		warrior.BerserkerStanceAura.Activate(sim)
+		stance = BerserkerStance
+	}
+	if !warrior.knowsStance(stance) {
+		stance = BattleStance
+	}
+	warrior.Stance = stance
+	warrior.stanceAura(stance).Activate(sim)
+}
+
+// stanceAura is the aura that holds stance.
+func (warrior *Warrior) stanceAura(stance Stance) *core.Aura {
+	switch stance {
+	case DefensiveStance:
+		return warrior.DefensiveStanceAura
+	case BerserkerStance:
+		return warrior.BerserkerStanceAura
 	default:
-		if warrior.PrimaryTalentTree == ArmsTree {
-			warrior.Stance = BattleStance
-			warrior.BattleStanceAura.Activate(sim)
-		} else if warrior.PrimaryTalentTree == FuryTree {
-			warrior.Stance = BerserkerStance
-			warrior.BerserkerStanceAura.Activate(sim)
-		} else {
-			warrior.Stance = DefensiveStance
-			warrior.DefensiveStanceAura.Activate(sim)
-		}
+		return warrior.BattleStanceAura
 	}
 }
 

@@ -27,6 +27,12 @@ const (
 	whirlwindCooldown = time.Second * 10
 )
 
+// knowsWhirlwind reports whether the warrior has learned Whirlwind
+// (SpellLevels BaseLevel 36 for 1680).
+func (warrior *Warrior) knowsWhirlwind() bool {
+	return int(warrior.Level) >= WhirlwindLevel[0]
+}
+
 func (warrior *Warrior) registerWhirlwindSpell() {
 	// Sized from the target POOL, not the active prefix: a timeline can
 	// start small and grow, and a slice fixed at the starting count
@@ -49,6 +55,9 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 		Flags:          core.SpellFlagAPL | SpellFlagOffensive,
 
 		RequiredLevel: WhirlwindLevel[0],
+		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
+			return warrior.knowsWhirlwind()
+		},
 
 		RageCost: core.RageCostOptions{
 			Cost: whirlwindRageCost,

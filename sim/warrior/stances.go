@@ -60,6 +60,28 @@ var stanceRequiredLevel = map[Stance]int{
 	BerserkerStance: BerserkerStanceLevel[0],
 }
 
+// knowsStance reports whether the warrior has learned stance by its level.
+func (warrior *Warrior) knowsStance(stance Stance) bool {
+	return int(warrior.Level) >= stanceRequiredLevel[stance]
+}
+
+// defaultStance is the stance a fight opens in when the inputs name none:
+// Battle Stance for Arms, Berserker Stance for Fury (Battle Stance until
+// Berserker Stance is learned at 30), Defensive Stance otherwise.
+func (warrior *Warrior) defaultStance() Stance {
+	switch warrior.PrimaryTalentTree {
+	case ArmsTree:
+		return BattleStance
+	case FuryTree:
+		if warrior.knowsStance(BerserkerStance) {
+			return BerserkerStance
+		}
+		return BattleStance
+	default:
+		return DefensiveStance
+	}
+}
+
 func (warrior *Warrior) makeStanceSpell(stance Stance, aura *core.Aura, stanceCD *core.Timer) *WarriorSpell {
 	spellCode := map[Stance]int32{
 		BattleStance:    SpellCode_WarriorStanceBattle,
@@ -86,7 +108,7 @@ func (warrior *Warrior) makeStanceSpell(stance Stance, aura *core.Aura, stanceCD
 			},
 		},
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return !warrior.StanceMatches(stance)
+			return warrior.knowsStance(stance) && !warrior.StanceMatches(stance)
 		},
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
