@@ -29,6 +29,12 @@ func NewShaman(character *core.Character, talents string) *Shaman {
 	core.FillTalentsProto(shaman.Talents.ProtoReflect(), talents, TalentTreeSizes)
 	shaman.EnableManaBar()
 
+	// 17 + Spirit/5 mana each 2 s tick, two more than the druid's and the
+	// paladin's (cmangos-classic and vmangos Unit::OCTRegenMPPerSpirit).
+	shaman.SpiritManaRegenPerSecond = func() float64 {
+		return 8.5 + shaman.GetStat(stats.Spirit)/10
+	}
+
 	// Add Shaman stat dependencies
 	shaman.AddStatDependency(stats.Strength, stats.AttackPower, core.APPerStrength[character.Class])
 	core.AddCritStatDependencies(&shaman.Character, character.Class)
