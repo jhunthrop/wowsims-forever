@@ -33,8 +33,6 @@ func impSheet(level int32) (cfg PetConfig) {
 			stats.Spirit:    95,
 			stats.Mana:      149,
 			stats.MP5:       0,
-			// Forever: merged from MeleeCrit 3.454 + SpellCrit 0.9075. unconfirmed
-			stats.Crit: 3.454 * core.CritRatingPerCritChance,
 		}
 	case 40:
 		cfg.Stats = stats.Stats{
@@ -45,8 +43,6 @@ func impSheet(level int32) (cfg PetConfig) {
 			stats.Spirit:    163,
 			stats.Mana:      318,
 			stats.MP5:       0,
-			// Forever: merged from MeleeCrit 3.454 + SpellCrit 0.9075. unconfirmed
-			stats.Crit: 3.454 * core.CritRatingPerCritChance,
 		}
 	case 50:
 		cfg.Stats = stats.Stats{
@@ -57,8 +53,6 @@ func impSheet(level int32) (cfg PetConfig) {
 			stats.Spirit:    211,
 			stats.Mana:      476,
 			stats.MP5:       0,
-			// Forever: merged from MeleeCrit 3.454 + SpellCrit 0.9075. unconfirmed
-			stats.Crit: 3.454 * core.CritRatingPerCritChance,
 		}
 	case 60:
 		cfg.Stats = stats.Stats{
@@ -69,8 +63,6 @@ func impSheet(level int32) (cfg PetConfig) {
 			stats.Spirit:    260,
 			stats.Mana:      576,
 			stats.MP5:       0,
-			// Forever: merged from MeleeCrit 3.454 + SpellCrit 0.9075. unconfirmed
-			stats.Crit: 3.454 * core.CritRatingPerCritChance,
 		}
 	}
 	return cfg

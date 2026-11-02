@@ -658,13 +658,23 @@ func TestTouchOfTheGraveMatchesTheClientRows(t *testing.T) {
 		t.Errorf("drain for 4000 maximum Health is %v, want 200 (5%%)", got)
 	}
 
-	undead, _ := racialPlayer(t, proto.Race_RaceUndead, proto.MobType_MobTypeUnknown)
+	undead, env := racialPlayer(t, proto.Race_RaceUndead, proto.MobType_MobTypeUnknown)
 	drain := undead.GetSpell(ActionID{SpellID: 1260198})
 	if drain == nil {
 		t.Fatal("the drain spell 1260198 is not registered for Undead")
 	}
 	if drain.SpellSchool != SpellSchoolShadow {
 		t.Errorf("drain school is %v, want Shadow", drain.SpellSchool)
+	}
+	// SpellCategories gives 1260198 DefenseType 1 (magic) and SpellMisc
+	// Attributes_2 0x20000000 (cannot crit): the drain rolls the spell hit
+	// table and never crits.
+	if drain.DefenseType != DefenseTypeMagic {
+		t.Errorf("drain defense type is %v, want magic", drain.DefenseType)
+	}
+	at := undead.AttackTables[env.Encounter.TargetUnits[0].UnitIndex][proto.CastType_CastTypeMainHand]
+	if got := drain.SpellChanceToMiss(at); math.Abs(got-0.17) > 1e-9 {
+		t.Errorf("drain misses a level-63 target %.3f of the time with no hit, want the spell table's 0.17", got)
 	}
 	if aura := undead.GetAura("Touch of the Grave"); aura == nil {
 		t.Error("Undead has no Touch of the Grave aura")

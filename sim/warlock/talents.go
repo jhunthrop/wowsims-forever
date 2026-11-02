@@ -164,13 +164,30 @@ func (warlock *Warlock) applyWeaponImbue() {
 		return
 	}
 
-	level := warlock.Level
 	if warlock.Options.WeaponImbue == proto.WarlockOptions_Firestone {
 		warlock.applyFirestone()
 	}
 	if warlock.Options.WeaponImbue == proto.WarlockOptions_Spellstone {
-		if level >= 55 {
-			warlock.AddStat(stats.Crit, 1*core.CritRatingPerCritChance)
+		warlock.applySpellstone()
+	}
+}
+
+// Forever's Spellstones are weapon enchants 8059, 8060 and 8061 (items 5522,
+// 13602 and 13603, made at levels 36, 48 and 60) whose spells 1237162,
+// 1237164 and 1237165 are aura 13 Shadow damage and aura 65 cast speed; Era's
+// was a crit stone.
+var spellstoneRanks = []struct {
+	level            int32
+	shadowPower      float64
+	castSpeedPercent float64
+}{{60, 21, 2}, {48, 17, 2}, {36, 14, 1}}
+
+func (warlock *Warlock) applySpellstone() {
+	for _, rank := range spellstoneRanks {
+		if warlock.Level >= rank.level {
+			warlock.AddStat(stats.ShadowPower, rank.shadowPower)
+			warlock.MultiplyCastSpeed(1 + rank.castSpeedPercent/100)
+			return
 		}
 	}
 }
