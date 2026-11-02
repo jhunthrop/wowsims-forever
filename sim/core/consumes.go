@@ -1340,6 +1340,18 @@ func registerConjuredCD(agent Agent, consumes *proto.Consumes) {
 		return
 	}
 
+	// Demonic Rune's 16666 is a category-30 spell with a 60 s category
+	// recovery (RestoreCategoryRecovery), which holds Robe of the Archmage.
+	// The healthstones are in category 30 with no recovery row, and the
+	// Minor Recombobulator's 18805 is in no category.
+	if conjuredType == proto.Conjured_ConjuredDemonicRune {
+		apply := mcd.Spell.ApplyEffects
+		mcd.Spell.ApplyEffects = func(sim *Simulation, target *Unit, spell *Spell) {
+			apply(sim, target, spell)
+			character.HoldRestoreCategory(sim)
+		}
+	}
+
 	character.AddMajorCooldown(mcd)
 }
 

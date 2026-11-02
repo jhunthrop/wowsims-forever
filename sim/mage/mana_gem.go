@@ -66,6 +66,7 @@ func (mage *Mage) newManaGemCooldown(rank int) core.SpellConfig {
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 			mage.AddMana(sim, sim.Roll(manaRestoredLow, manaRestoredHigh), manaMetrics)
+			mage.HoldRestoreCategory(sim)
 
 			remainingManaGems--
 			if remainingManaGems == 0 {

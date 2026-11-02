@@ -3375,9 +3375,14 @@ func init() {
 			Cast: core.CastConfig{
 				CD: core.Cooldown{Timer: character.NewTimer(), Duration: 5 * time.Minute},
 			},
+			// A mana gem or Demonic Rune in the last minute
+			// holds the robe (category 30, both ways).
+			ExtraCastCondition: func(sim *core.Simulation, _ *core.Unit) bool {
+				return character.GetRestoreCategoryCD().IsReady(sim)
+			},
 			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 				character.AddMana(sim, sim.RollWithLabel(375, maxMana, "Robe of the Archmage"), manaMetrics)
-				conjured.Set(max(conjured.ReadyAt(), sim.CurrentTime+time.Minute))
+				conjured.Set(max(conjured.ReadyAt(), sim.CurrentTime+core.RestoreCategoryRecovery))
 			},
 		})
 
