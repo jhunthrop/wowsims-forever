@@ -193,13 +193,13 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 				weapon.BaseDamageMax += 8
 			}
 		case proto.WeaponImbue_ElementalSharpeningStone:
-			// Enchant 2506, spell 22755: aura 52, weapon crit. Melee
-			// only: never a spell, and taken back off ranged below.
+			// Enchant 2506, spell 22755: aura 52 with SpellEquippedItems
+			// mask 42483 (melee weapons), so a weapon-dependent crit: the
+			// character's own melee attacks only. Never a spell, never a
+			// ranged attack, and never a pet (a hunter pet inherits its
+			// owner's crit stats, not the owner's weapon).
 			if !character.PseudoStats.FeralCombatEnabled {
-				character.AddStats(stats.Stats{
-					stats.MeleeCrit: 2 * CritRatingPerCritChance,
-				})
-				character.AddBonusRangedCritRating(-2.0)
+				addMeleeWeaponCrit(&character.Unit, 2*CritRatingPerCritChance)
 			}
 		case proto.WeaponImbue_ConsecratedSharpeningStone:
 			character.Env.RegisterPostFinalizeEffect(func() {
@@ -1308,4 +1308,21 @@ func registerConjuredCD(agent Agent, consumes *proto.Consumes) {
 	}
 
 	character.AddMajorCooldown(mcd)
+}
+
+// addMeleeWeaponCrit gives crit to the unit's own melee attacks: the
+// spells that roll the melee table (melee defense, or physical with none)
+// and are not ranged. It is a per-spell bonus, not a stat, because a
+// weapon enchant's crit belongs to the weapon: a stat would also reach
+// whatever inherits the owner's stats.
+func addMeleeWeaponCrit(unit *Unit, rating float64) {
+	unit.OnSpellRegistered(func(spell *Spell) {
+		if spell.CastType == proto.CastType_CastTypeRanged {
+			return
+		}
+		if spell.DefenseType == DefenseTypeMelee ||
+			(spell.DefenseType == DefenseTypeNone && spell.SpellSchool == SpellSchoolPhysical) {
+			spell.BonusCritRating += rating
+		}
+	})
 }
