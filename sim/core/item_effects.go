@@ -66,6 +66,18 @@ func NewItemEffect(id int32, itemEffect ApplyEffect) {
 	}
 }
 
+// NewClientItemEffect registers an effect for a Forever item that the site's
+// simdb carries and this fork's own database lacks (Dormant Heart of the
+// Mountain). NewItemEffect refuses such an id under with_db; a request
+// supplies the item itself through Player.Database. The id stays out of
+// itemEffectsForTest, whose tests equip items from the fork's database.
+func NewClientItemEffect(id int32, itemEffect ApplyEffect) {
+	if HasItemEffect(id) {
+		panic(fmt.Sprintf("Cannot add multiple effects for one item: %d, %#v", id, itemEffect))
+	}
+	itemEffects[id] = itemEffect
+}
+
 func NewEnchantEffect(id int32, enchantEffect ApplyEffect) {
 	if WITH_DB {
 		if _, ok := EnchantsByEffectID[id]; !ok {
