@@ -129,11 +129,25 @@ func init() {
 		})
 	})
 
-	// ItemEffect 97235: 12257 on a 5 min cooldown. 12257 is aura 23 every
-	// 1 sec for 5 sec (duration 28) triggering 12278, 75 Fire: "Deals 75
-	// Fire damage every 1 sec for 5 sec to all enemies in front of you."
+	// ItemEffect 97235: 12257 on a 5 min cooldown. 12257 is aura 23, a
+	// periodic trigger every 1 sec for 5 sec (duration 28), casting 12278
+	// each second: a direct 75 Fire spell (DefenseType 1) that rolls spell
+	// hit and crit on its own. "Deals 75 Fire damage every 1 sec for 5 sec
+	// to all enemies in front of you."
 	core.NewItemEffect(ThunderbrewsBootFlask, func(agent core.Agent) {
 		character := agent.GetCharacter()
+		breath := character.RegisterSpell(core.SpellConfig{
+			ActionID:         core.ActionID{SpellID: 12278},
+			SpellSchool:      core.SpellSchoolFire,
+			DefenseType:      core.DefenseTypeMagic,
+			ProcMask:         core.ProcMaskEmpty,
+			Flags:            core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell,
+			DamageMultiplier: 1,
+			ThreatMultiplier: 1,
+			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+				spell.CalcAndDealDamage(sim, target, 75, spell.OutcomeMagicHitAndCrit)
+			},
+		})
 		spell := character.RegisterSpell(core.SpellConfig{
 			ActionID:    core.ActionID{SpellID: 12257},
 			SpellSchool: core.SpellSchoolFire,
@@ -145,18 +159,12 @@ func init() {
 				CD: core.Cooldown{Timer: character.NewTimer(), Duration: 5 * time.Minute},
 			},
 
-			DamageMultiplier: 1,
-			ThreatMultiplier: 1,
-
 			Dot: core.DotConfig{
 				Aura:          core.Aura{Label: "Breath of Fire"},
 				TickLength:    time.Second,
 				NumberOfTicks: 5,
-				OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-					dot.Snapshot(target, 75, isRollover)
-				},
-				OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-					dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
+				OnTick: func(sim *core.Simulation, target *core.Unit, _ *core.Dot) {
+					breath.Cast(sim, target)
 				},
 			},
 
@@ -168,6 +176,18 @@ func init() {
 		})
 		character.AddMajorCooldown(core.MajorCooldown{Spell: spell, Type: core.CooldownTypeDPS})
 	})
+
+	// Forever's ranged hit on four classic-db items: Trueaim Gauntlets links
+	// to 1301127 "Increased Hit Chance - Ranged - 03" (aura 54, 3), and
+	// Infernal Trickster Leggings, Marksman Bands and Stoneshatter to 1294769
+	// "- 01" (aura 54, 1), each restricted to ranged weapons
+	// (SpellEquippedItems subclass mask 262156), so the hit is the ranged
+	// weapon's. The site's simdb rows carry none of it.
+	for item, hit := range map[int32]float64{13255: 3, 17754: 1, 18296: 1, 18388: 1} {
+		core.NewClientItemEffect(item, func(agent core.Agent) {
+			agent.GetCharacter().AddBonusRangedHitRating(hit * core.HitRatingPerHitChance)
+		})
+	}
 
 	// ItemEffect 98263 and 98669: 9174, energize 300 rage tenths, on a 1 hour
 	// cooldown and the 15 sec category the Hearts of the Mountain share

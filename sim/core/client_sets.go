@@ -39,7 +39,10 @@ type ClientSpell struct {
 	// InternalCooldownMS is SpellAuraOptions.ProcCategoryRecovery: how long
 	// the spell's proc stays down after it fires.
 	InternalCooldownMS int32
-	Effects            []ClientEffect
+	// ProcTypeMask is SpellAuraOptions.ProcTypeMask_0: the events the spell
+	// procs on (0x4 the wearer's melee autoattack, 0x10 a melee special).
+	ProcTypeMask int32
+	Effects      []ClientEffect
 }
 
 // ClientSetBonus is one ItemSetSpell row.

@@ -27,8 +27,14 @@ const furiousStormVanillaSpell int32 = 27774
 // energize restores a resource when a bonus procs: "your spellcasts have a
 // 5% chance to energize you for 200 mana".
 func energize(kind procKind, unstated procRate) bonusModel {
+	return energizeOn(func(int32) procKind { return kind }, unstated)
+}
+
+// energizeOn is energize on the event kindOf reads from the bonus's row.
+func energizeOn(kindOf func(bonusID int32) procKind, unstated procRate) bonusModel {
 	return func(bonusID int32) core.ApplyEffect {
 		bonus := core.MustClientSpellRow(bonusID)
+		kind := kindOf(bonusID)
 		trigger := triggerOf(bonusID)
 		rate := rateOf(bonusID, unstated)
 		grant := grantOf(trigger)
@@ -45,7 +51,7 @@ var (
 	manaOnSpellcast    = energize(onSpellcast, procRate{})
 	manaOnAutoattack   = energize(onAutoattack, procRate{})
 	manaOnRangedAttack = energize(onRangedAttack, procRate{})
-	resourceOnMeleeHit = energize(onMeleeHit, unstatedProcRate)
+	resourceOnMeleeHit = energizeOn(meleeKindOf, unstatedProcRate)
 )
 
 // burstStats are the stats a burst's trigger spell grants, read from its row.
@@ -131,7 +137,7 @@ func armorShredOnMeleeHit(bonusID int32) core.ApplyEffect {
 				OnExpire: func(_ *core.Aura, sim *core.Simulation) { target.AddStatDynamic(sim, stats.Armor, -shred) },
 			})
 		}
-		core.MakeProcTriggerAura(&character.Unit, onMeleeHit.trigger(bonus.Name, core.ActionID{SpellID: bonusID}, rate,
+		core.MakeProcTriggerAura(&character.Unit, meleeKindOf(bonusID).trigger(bonus.Name, core.ActionID{SpellID: bonusID}, rate,
 			func(sim *core.Simulation, _ *core.Spell, result *core.SpellResult) {
 				shredded[result.Target.Index].Activate(sim)
 			}))
@@ -165,7 +171,8 @@ func roarOfTheCrowd(bonusID int32) core.ApplyEffect {
 	}
 }
 
-// bleedOnMeleeHit is a chance on a melee hit to bleed the target for the
+// bleedOnMeleeHit is a chance on a melee hit (the client's flags say which:
+// Devious Strike and Bloodmail are autoattacks only) to bleed the target for the
 // trigger spell's periodic damage, as Defias Leather's Devious Strike and
 // Bloodmail Regalia's Bloodmail do. A bonus that states no chance procs at
 // the unstated rate. Devious Strike asks for a strike from behind; a sim
@@ -212,7 +219,7 @@ func bleedOnMeleeHitEffect(bonusID int32, unstated procRate) core.ApplyEffect {
 				spell.Dot(target).Apply(sim)
 			},
 		})
-		core.MakeProcTriggerAura(&character.Unit, onMeleeHit.trigger(bonus.Name, core.ActionID{SpellID: bonusID}, rate,
+		core.MakeProcTriggerAura(&character.Unit, meleeKindOf(bonusID).trigger(bonus.Name, core.ActionID{SpellID: bonusID}, rate,
 			func(sim *core.Simulation, _ *core.Spell, result *core.SpellResult) { bleed.Cast(sim, result.Target) }))
 	}
 }

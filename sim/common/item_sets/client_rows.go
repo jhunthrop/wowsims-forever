@@ -169,6 +169,29 @@ var (
 	}
 )
 
+// The client's proc flags (SpellAuraOptions.ProcTypeMask) for the wearer's
+// own melee attacks.
+const (
+	clientProcMeleeAutoattack int32 = 0x4
+	clientProcMeleeSpecial    int32 = 0x10
+)
+
+// meleeKindOf is the melee event a bonus procs on, read from its client
+// proc flags: the wearer's melee autoattacks alone (Devious Strike, Rogue
+// Armor Energize), or autoattacks and melee specials (Lightning,
+// Revitalize). It stops the engine at init when the flags name no melee
+// autoattack.
+func meleeKindOf(bonusID int32) procKind {
+	row := core.MustClientSpellRow(bonusID)
+	if row.ProcTypeMask&clientProcMeleeAutoattack == 0 {
+		panic(fmt.Sprintf("item_sets: client spell %d (%s) proc flags %#x name no melee autoattack", bonusID, row.Name, row.ProcTypeMask))
+	}
+	if row.ProcTypeMask&clientProcMeleeSpecial != 0 {
+		return onMeleeHit
+	}
+	return onMeleeAutoattack
+}
+
 // procLabel is the label of the aura that carries a bonus's proc: the
 // trigger spells share their names with the bonus and the buff they grant.
 func procLabel(bonusName string, kind procKind) string {

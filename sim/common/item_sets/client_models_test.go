@@ -117,11 +117,11 @@ func energizeCases() []energizeCase {
 		{"Virtuous 4P", mageHost, 1675, 4, "S03 - Mana Proc on Cast - Vestments of the Devout (spellcast)", "spellcast", proto.ResourceType_ResourceTypeMana, mana, manaProcChance, spellcast},
 		{"Beaststalker 5P", mageHost, 186, 5, "S03 - Mana Proc on Cast - Beaststalker Armor (autoattack)", "autoattack", proto.ResourceType_ResourceTypeMana, mana, manaProcChance, autoattack},
 		{"Beastmaster 4P", mageHost, 1669, 4, "S03 - Mana Proc on Cast - Beaststalker Armor (autoattack)", "autoattack", proto.ResourceType_ResourceTypeMana, mana, manaProcChance, autoattack},
-		{"Shadowcraft 5P", rogueHost, 184, 5, "Rogue Armor Energize (melee hit)", "melee hit", proto.ResourceType_ResourceTypeEnergy, energy, perSwing, meleeHit},
-		{"Darkmantle 4P", rogueHost, 1676, 4, "Rogue Armor Energize (melee hit)", "melee hit", proto.ResourceType_ResourceTypeEnergy, energy, perSwing, meleeHit},
+		{"Shadowcraft 5P", rogueHost, 184, 5, "Rogue Armor Energize (melee autoattack)", "melee hit", proto.ResourceType_ResourceTypeEnergy, energy, perSwing, meleeHit},
+		{"Darkmantle 4P", rogueHost, 1676, 4, "Rogue Armor Energize (melee autoattack)", "melee hit", proto.ResourceType_ResourceTypeEnergy, energy, perSwing, meleeHit},
 		{"Stormshroud 3P", rogueHost, 142, 3, "Revitalize (melee hit)", "melee hit", proto.ResourceType_ResourceTypeEnergy, triggerPoints(revitalizeAmountSpell), float64(core.MustClientSpellRow(revitalizeBonus).ProcChance) / percentDivisor, meleeHit},
-		{"Battlegear of Valor 5P", warriorHost, 189, 5, "S03 - Warrior Armor Heal Trigger - Battlegear of Valor (melee hit)", "melee hit", proto.ResourceType_ResourceTypeRage, rage, perSwing, meleeHit},
-		{"Heroism 4P", warriorHost, 1778, 4, "S03 - Warrior Armor Heal Trigger - Battlegear of Valor (melee hit)", "melee hit", proto.ResourceType_ResourceTypeRage, rage, perSwing, meleeHit},
+		{"Battlegear of Valor 5P", warriorHost, 189, 5, "S03 - Warrior Armor Heal Trigger - Battlegear of Valor (melee autoattack)", "melee hit", proto.ResourceType_ResourceTypeRage, rage, perSwing, meleeHit},
+		{"Heroism 4P", warriorHost, 1778, 4, "S03 - Warrior Armor Heal Trigger - Battlegear of Valor (melee autoattack)", "melee hit", proto.ResourceType_ResourceTypeRage, rage, perSwing, meleeHit},
 	}
 }
 
@@ -243,7 +243,7 @@ func TestRoarOfTheCrowdGrantsFivePercentAttackSpeed(t *testing.T) {
 const (
 	deviousStrikeSet    int32 = 161
 	deviousStrikeBleed  int32 = 1292029
-	deviousStrikeProc         = "Devious Strike (melee hit)"
+	deviousStrikeProc         = "Devious Strike (melee autoattack)"
 	deviousStrikeChance       = 0.05
 	daggerSkillPieces         = 5
 	daggerSkillBonus          = 1.0
