@@ -73,11 +73,24 @@ func (paladin *Paladin) benediction() int32 {
 // 173555), as Cruelty's does, and the beta logs show it on the weapon only:
 // Retribution paladins crit Consecration 6.5% of 84,212 ticks against 8.1%
 // for the rest, while their melee crits 10.1% against 6.2% (foreverlogs.gg,
-// 105 paladins, levels 19 to 35). So it is melee and ranged crit.
+// 105 paladins, levels 19 to 35). So it is melee and ranged crit and does
+// not reach the Holy damage spells. Heals keep it: the logs hold too few
+// Retribution heals to say otherwise (one paladin, 154 Flash of Light), and
+// Thundering Strikes, the same aura 290 with the same weapon row, does reach
+// a shaman's heals there; so it stays on every heal as the spell's own bonus.
 const convictionCritPctPerRank = 2.0
 
 func (paladin *Paladin) applyConviction() {
-	paladin.AddStat(stats.MeleeCrit, convictionCritPctPerRank*float64(paladin.Talents.Conviction)*core.CritRatingPerCritChance)
+	crit := convictionCritPctPerRank * float64(paladin.Talents.Conviction) * core.CritRatingPerCritChance
+	if crit == 0 {
+		return
+	}
+	paladin.AddStat(stats.MeleeCrit, crit)
+	paladin.OnSpellRegistered(func(spell *core.Spell) {
+		if spell.ProcMask.Matches(core.ProcMaskSpellHealing) {
+			spell.BonusCritRating += crit
+		}
+	})
 }
 
 // Two-Handed Weapon Specialization (node 105697, 3 ranks): "Increases the
