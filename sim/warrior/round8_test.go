@@ -15,8 +15,9 @@ func warriorAtLevel(level int32) *Warrior {
 }
 
 // Berserker Stance 2458 is SpellLevels BaseLevel 30 (the level-30 quest):
-// a warrior below 30 has only Battle and Defensive Stance, so a Fury
-// warrior's default stance and any Berserker Stance cast wait for 30.
+// a warrior below 30 has only Battle and Defensive Stance, so any
+// Berserker Stance cast waits for 30. (Fury's default stance waits for
+// Whirlwind at 36: round9_test.go.)
 func TestBerserkerStanceIsLearnedAtThirty(t *testing.T) {
 	for _, tc := range []struct {
 		level int32
@@ -25,14 +26,6 @@ func TestBerserkerStanceIsLearnedAtThirty(t *testing.T) {
 		w := warriorAtLevel(tc.level)
 		if got := w.knowsStance(BerserkerStance); got != tc.knows {
 			t.Errorf("level %d knows Berserker Stance = %v, want %v", tc.level, got, tc.knows)
-		}
-		w.PrimaryTalentTree = FuryTree
-		want := BerserkerStance
-		if !tc.knows {
-			want = BattleStance
-		}
-		if got := w.defaultStance(); got != want {
-			t.Errorf("level %d Fury default stance = %v, want %v", tc.level, got, want)
 		}
 	}
 	if !warriorAtLevel(10).knowsStance(DefensiveStance) || warriorAtLevel(9).knowsStance(DefensiveStance) {
