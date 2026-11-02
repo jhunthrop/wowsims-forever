@@ -1,6 +1,22 @@
 {
   "type": "TypeAPL",
-  "prepullActions": [],
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11551,
+            "rank": 6
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1s"
+        }
+      }
+    }
+  ],
   "priorityList": [
     {
       "action": {
@@ -188,6 +204,29 @@
         "castSpell": {
           "spellId": {
             "spellId": 11581,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Keep Battle Shout up: attack power for the tank's white swings and weapon strikes. Below 60 no raid warrior shouts for it; at 60 the raid's shout is the same aura, so this line idles.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsActive": {
+                "auraId": {
+                  "spellId": 11551,
+                  "rank": 6
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11551,
             "rank": 6
           }
         }

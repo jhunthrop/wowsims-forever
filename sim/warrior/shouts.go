@@ -29,10 +29,12 @@ func battleShoutRageCost(rank int32) float64 {
 	return rageCost(tenths)
 }
 
+// newShoutSpellConfig is a Battle Shout rank. The shout generates no threat
+// in Forever: forever-bugs #64, a threat parser reading 0 for it and the
+// Blizzard reply of 2026-09-22 ("Many Buffs and Debuffs now cause 0 threat.
+// These ones are all intended to cause 0 threat."). Era's flat threat on the
+// warrior and on five simulated party hits is gone.
 func (warrior *Warrior) newShoutSpellConfig(actionID core.ActionID, rank int32, allyAuras core.AuraArray) *WarriorSpell {
-	// Use extra hits to simulate buffing your party for threat
-	extraHits := 5 - len(allyAuras)
-
 	return warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		ActionID:       actionID,
 		ClassSpellMask: WarriorSpellMaskBattleShout,
@@ -50,16 +52,9 @@ func (warrior *Warrior) newShoutSpellConfig(actionID core.ActionID, rank int32, 
 			IgnoreHaste: true,
 		},
 
-		FlatThreatBonus: float64(core.BattleShoutLevel[rank]),
-
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 			for _, aura := range allyAuras {
-				spell.CalcAndDealOutcome(sim, aura.Unit, spell.OutcomeAlwaysHit)
 				aura.Activate(sim)
-			}
-
-			for i := 0; i < extraHits; i++ {
-				spell.CalcAndDealOutcome(sim, target, spell.OutcomeAlwaysHit)
 			}
 		},
 
