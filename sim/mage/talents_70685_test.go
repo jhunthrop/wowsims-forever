@@ -1,6 +1,7 @@
 package mage
 
 import (
+	"math"
 	"testing"
 	"time"
 
@@ -29,18 +30,19 @@ func TestAccelerantShortensArcaneWrath(t *testing.T) {
 func TestPrecisionAddsHitToEverySchool(t *testing.T) {
 	withPrecision := talentStringWithRank(t, ForeverFrostTalents, "arcane_wrath", 1)
 	without := talentStringWithRank(t, withPrecision, "precision", 0)
-	_, on := newMageAtLevel(t, 60, withPrecision)
-	_, off := newMageAtLevel(t, 60, without)
+	onSim, on := newMageAtLevel(t, 60, withPrecision)
+	offSim, off := newMageAtLevel(t, 60, without)
+	onTarget, offTarget := onSim.Encounter.TargetUnits[0], offSim.Encounter.TargetUnits[0]
 
-	want := 3 * precisionHitPerRank * core.HitRatingPerHitChance
+	want := 3 * precisionHitPerRank / 100
 	spells := map[string]func(m *Mage) *core.Spell{
 		"Frostbolt":    func(m *Mage) *core.Spell { return m.Frostbolt[core.MaxTrainerRank(FrostboltRanks)] },
 		"Fireball":     func(m *Mage) *core.Spell { return m.Fireball[core.MaxTrainerRank(FireballRanks)] },
 		"Arcane Wrath": func(m *Mage) *core.Spell { return m.ArcaneWrath[ArcaneWrathRanks] },
 	}
 	for name, spell := range spells {
-		if got := spell(on).BonusHitRating - spell(off).BonusHitRating; got != want {
-			t.Errorf("%s: 3/3 Precision adds %v hit rating, want %v", name, got, want)
+		if got := spell(on).SpellHitChance(onTarget) - spell(off).SpellHitChance(offTarget); math.Abs(got-want) > 1e-9 {
+			t.Errorf("%s: 3/3 Precision adds %v hit chance, want %v", name, got, want)
 		}
 	}
 }
