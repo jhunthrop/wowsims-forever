@@ -41,6 +41,9 @@ func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 			return hunter.DistanceFromTarget >= core.MinRangedAttackDistance
 		},
 
+		// Mortal Shots' mask holds Serpent Sting (mask 0 bit 16384), and
+		// Forever's DoTs crit, so its tick crits take the bonus.
+		CritDamageBonus:  hunter.mortalShots(),
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		ClientBaseDamage: damage.Range(casterLevel),
