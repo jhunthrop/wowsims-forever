@@ -21,7 +21,10 @@ const (
 // all aura 270: damage taken from the caster) and Stormstrike (17364, aura
 // 271 on the shaman's own spells) the caster's own, so another raid
 // member's copy gives this player nothing: those flags apply no aura, and
-// a priest, mage, warlock or shaman gets its own from its talents.
+// a priest, mage, warlock or shaman gets its own from its talents. Forever
+// removed Curse of Shadow (17862 and 17937 have no SpellName or SpellEffect
+// row; Curse of the Elements covers every magic school), so its flag applies
+// nothing either.
 func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, raid *proto.Raid) {
 	if debuffs.JudgementOfWisdom && targetIdx == 0 {
 		MakePermanent(JudgementOfWisdomAura(target))
@@ -42,10 +45,6 @@ func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, rai
 
 	if debuffs.CurseOfElements {
 		MakePermanent(CurseOfElementsAura(target))
-	}
-
-	if debuffs.CurseOfShadow {
-		MakePermanent(CurseOfShadowAura(target))
 	}
 
 	if debuffs.WintersChill && targetIdx == 0 {

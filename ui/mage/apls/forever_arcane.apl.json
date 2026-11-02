@@ -7,6 +7,48 @@
       }
     },
     {
+      "notes": "Evocation when mana is nearly gone and at least 30 seconds of the fight are left: it is every mage's mana cooldown from level 20 (an 8 second channel at +1500% mana regeneration, 8 minute cooldown), so a mage that runs dry casts it instead of wanding. With less of the fight left, the channel costs more casting than the mana it returns can be spent on.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.05"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "30s"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 12051
+          }
+        }
+      }
+    },
+    {
       "notes": "Arcane Power on cooldown: a flat 30 percent damage cooldown with no cast time of its own.",
       "action": {
         "castSpell": {

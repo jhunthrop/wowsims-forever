@@ -2,7 +2,9 @@
 //
 // Sources: assets/db_inputs/levels/1.60.1.70707.json (wowhead's Forever gear planner payload:
 // wow.gearPlanner.classic.baseStats, for baseStatsByClassLevel;
-// .critSpell is cross-checked, not read)
+// .critSpell is cross-checked, not read; Mana is overlaid from basemp.txt)
+//          assets/db_inputs/gametables/1.60.1.70707/basemp.txt (the client's BaseMP:
+// every level's base mana)
 //          assets/db_inputs/gametables/1.60.1.70707/playerexpectedstat.csv (the client's PlayerExpectedStat
 // table: CritPerAgility and SpellCritPerIntellect, ContentSetID 0)
 //
@@ -22,7 +24,8 @@ import (
 const LevelStatsSource = "assets/db_inputs/levels/1.60.1.70707.json (wow.gearPlanner.classic.baseStats); assets/db_inputs/gametables/1.60.1.70707/playerexpectedstat.csv (CritPerAgility, SpellCritPerIntellect)"
 
 // baseStatsByClassLevel[class][level] is wowhead's gear planner Health,
-// Mana, Agility, Strength, Intellect, Spirit and Stamina for that class at
+// Agility, Strength, Intellect, Spirit and Stamina, and the client's BaseMP
+// Mana, for that class at
 // that level, level 1..CharacterMaxLevel (index 0 is unused, the zero
 // Stats{}, matching the source array's own unused index 0). Level
 // CharacterMaxLevel reproduces base_stats.go's ClassBaseStats exactly for
@@ -281,7 +284,7 @@ var baseStatsByClassLevel = map[proto.Class][CharacterMaxLevel + 1]stats.Stats{
 	},
 	proto.Class_ClassPriest: {
 		1: {stats.Health: 41, stats.Mana: 110, stats.Agility: 20, stats.Strength: 20, stats.Intellect: 22, stats.Spirit: 23, stats.Stamina: 20},
-		2: {stats.Health: 47, stats.Mana: 105, stats.Agility: 20, stats.Strength: 20, stats.Intellect: 23, stats.Spirit: 24, stats.Stamina: 20},
+		2: {stats.Health: 47, stats.Mana: 119, stats.Agility: 20, stats.Strength: 20, stats.Intellect: 23, stats.Spirit: 24, stats.Stamina: 20},
 		3: {stats.Health: 52, stats.Mana: 129, stats.Agility: 20, stats.Strength: 20, stats.Intellect: 24, stats.Spirit: 25, stats.Stamina: 21},
 		4: {stats.Health: 67, stats.Mana: 140, stats.Agility: 21, stats.Strength: 21, stats.Intellect: 25, stats.Spirit: 27, stats.Stamina: 21},
 		5: {stats.Health: 82, stats.Mana: 137, stats.Agility: 21, stats.Strength: 21, stats.Intellect: 27, stats.Spirit: 28, stats.Stamina: 21},
@@ -291,7 +294,7 @@ var baseStatsByClassLevel = map[proto.Class][CharacterMaxLevel + 1]stats.Stats{
 		9: {stats.Health: 122, stats.Mana: 195, stats.Agility: 22, stats.Strength: 21, stats.Intellect: 31, stats.Spirit: 33, stats.Stamina: 23},
 		10: {stats.Health: 137, stats.Mana: 212, stats.Agility: 22, stats.Strength: 22, stats.Intellect: 33, stats.Spirit: 34, stats.Stamina: 23},
 		11: {stats.Health: 142, stats.Mana: 215, stats.Agility: 22, stats.Strength: 22, stats.Intellect: 34, stats.Spirit: 35, stats.Stamina: 24},
-		12: {stats.Health: 162, stats.Mana: 239, stats.Agility: 23, stats.Strength: 22, stats.Intellect: 35, stats.Spirit: 37, stats.Stamina: 24},
+		12: {stats.Health: 162, stats.Mana: 234, stats.Agility: 23, stats.Strength: 22, stats.Intellect: 35, stats.Spirit: 37, stats.Stamina: 24},
 		13: {stats.Health: 172, stats.Mana: 254, stats.Agility: 23, stats.Strength: 22, stats.Intellect: 36, stats.Spirit: 38, stats.Stamina: 24},
 		14: {stats.Health: 177, stats.Mana: 260, stats.Agility: 23, stats.Strength: 22, stats.Intellect: 38, stats.Spirit: 39, stats.Stamina: 25},
 		15: {stats.Health: 192, stats.Mana: 282, stats.Agility: 23, stats.Strength: 23, stats.Intellect: 39, stats.Spirit: 41, stats.Stamina: 25},
@@ -342,7 +345,7 @@ var baseStatsByClassLevel = map[proto.Class][CharacterMaxLevel + 1]stats.Stats{
 		60: {stats.Health: 1397, stats.Mana: 1376, stats.Agility: 40, stats.Strength: 35, stats.Intellect: 120, stats.Spirit: 125, stats.Stamina: 50},
 	},
 	proto.Class_ClassShaman: {
-		1: {stats.Health: 27, stats.Mana: 53, stats.Agility: 20, stats.Strength: 21, stats.Intellect: 21, stats.Spirit: 22, stats.Stamina: 21},
+		1: {stats.Health: 27, stats.Mana: 55, stats.Agility: 20, stats.Strength: 21, stats.Intellect: 21, stats.Spirit: 22, stats.Stamina: 21},
 		2: {stats.Health: 34, stats.Mana: 61, stats.Agility: 20, stats.Strength: 22, stats.Intellect: 22, stats.Spirit: 23, stats.Stamina: 22},
 		3: {stats.Health: 41, stats.Mana: 68, stats.Agility: 21, stats.Strength: 22, stats.Intellect: 23, stats.Spirit: 24, stats.Stamina: 23},
 		4: {stats.Health: 48, stats.Mana: 91, stats.Agility: 21, stats.Strength: 23, stats.Intellect: 23, stats.Spirit: 25, stats.Stamina: 24},
@@ -363,15 +366,15 @@ var baseStatsByClassLevel = map[proto.Class][CharacterMaxLevel + 1]stats.Stats{
 		19: {stats.Health: 169, stats.Mana: 346, stats.Agility: 28, stats.Strength: 36, stats.Intellect: 37, stats.Spirit: 40, stats.Stamina: 38},
 		20: {stats.Health: 180, stats.Mana: 370, stats.Agility: 29, stats.Strength: 37, stats.Intellect: 38, stats.Spirit: 41, stats.Stamina: 39},
 		21: {stats.Health: 192, stats.Mana: 395, stats.Agility: 29, stats.Strength: 38, stats.Intellect: 39, stats.Spirit: 42, stats.Stamina: 40},
-		22: {stats.Health: 205, stats.Mana: 456, stats.Agility: 30, stats.Strength: 38, stats.Intellect: 40, stats.Spirit: 43, stats.Stamina: 41},
+		22: {stats.Health: 205, stats.Mana: 421, stats.Agility: 30, stats.Strength: 38, stats.Intellect: 40, stats.Spirit: 43, stats.Stamina: 41},
 		23: {stats.Health: 219, stats.Mana: 448, stats.Agility: 30, stats.Strength: 39, stats.Intellect: 41, stats.Spirit: 44, stats.Stamina: 42},
 		24: {stats.Health: 234, stats.Mana: 476, stats.Agility: 31, stats.Strength: 40, stats.Intellect: 42, stats.Spirit: 46, stats.Stamina: 43},
 		25: {stats.Health: 240, stats.Mana: 505, stats.Agility: 31, stats.Strength: 41, stats.Intellect: 43, stats.Spirit: 47, stats.Stamina: 45},
-		26: {stats.Health: 257, stats.Mana: 579, stats.Agility: 32, stats.Strength: 42, stats.Intellect: 44, stats.Spirit: 48, stats.Stamina: 46},
+		26: {stats.Health: 257, stats.Mana: 535, stats.Agility: 32, stats.Strength: 42, stats.Intellect: 44, stats.Spirit: 48, stats.Stamina: 46},
 		27: {stats.Health: 275, stats.Mana: 566, stats.Agility: 32, stats.Strength: 43, stats.Intellect: 45, stats.Spirit: 49, stats.Stamina: 47},
 		28: {stats.Health: 294, stats.Mana: 598, stats.Agility: 33, stats.Strength: 44, stats.Intellect: 46, stats.Spirit: 50, stats.Stamina: 48},
 		29: {stats.Health: 314, stats.Mana: 631, stats.Agility: 33, stats.Strength: 45, stats.Intellect: 47, stats.Spirit: 52, stats.Stamina: 49},
-		30: {stats.Health: 335, stats.Mana: 718, stats.Agility: 34, stats.Strength: 46, stats.Intellect: 48, stats.Spirit: 53, stats.Stamina: 50},
+		30: {stats.Health: 335, stats.Mana: 665, stats.Agility: 34, stats.Strength: 46, stats.Intellect: 48, stats.Spirit: 53, stats.Stamina: 50},
 		31: {stats.Health: 347, stats.Mana: 699, stats.Agility: 34, stats.Strength: 48, stats.Intellect: 50, stats.Spirit: 54, stats.Stamina: 52},
 		32: {stats.Health: 370, stats.Mana: 733, stats.Agility: 35, stats.Strength: 49, stats.Intellect: 51, stats.Spirit: 56, stats.Stamina: 53},
 		33: {stats.Health: 394, stats.Mana: 767, stats.Agility: 36, stats.Strength: 50, stats.Intellect: 52, stats.Spirit: 57, stats.Stamina: 54},
@@ -393,7 +396,7 @@ var baseStatsByClassLevel = map[proto.Class][CharacterMaxLevel + 1]stats.Stats{
 		49: {stats.Health: 844, stats.Mana: 1236, stats.Agility: 46, stats.Strength: 69, stats.Intellect: 73, stats.Spirit: 81, stats.Stamina: 77},
 		50: {stats.Health: 885, stats.Mana: 1255, stats.Agility: 47, stats.Strength: 70, stats.Intellect: 74, stats.Spirit: 82, stats.Stamina: 78},
 		51: {stats.Health: 917, stats.Mana: 1289, stats.Agility: 48, stats.Strength: 72, stats.Intellect: 76, stats.Spirit: 84, stats.Stamina: 80},
-		52: {stats.Health: 960, stats.Mana: 1313, stats.Agility: 49, stats.Strength: 73, stats.Intellect: 77, stats.Spirit: 86, stats.Stamina: 81},
+		52: {stats.Health: 960, stats.Mana: 1323, stats.Agility: 49, stats.Strength: 73, stats.Intellect: 77, stats.Spirit: 86, stats.Stamina: 81},
 		53: {stats.Health: 994, stats.Mana: 1342, stats.Agility: 49, stats.Strength: 75, stats.Intellect: 79, stats.Spirit: 87, stats.Stamina: 83},
 		54: {stats.Health: 1029, stats.Mana: 1376, stats.Agility: 50, stats.Strength: 76, stats.Intellect: 80, stats.Spirit: 89, stats.Stamina: 85},
 		55: {stats.Health: 1075, stats.Mana: 1395, stats.Agility: 51, stats.Strength: 77, stats.Intellect: 82, stats.Spirit: 91, stats.Stamina: 86},
@@ -466,7 +469,7 @@ var baseStatsByClassLevel = map[proto.Class][CharacterMaxLevel + 1]stats.Stats{
 		60: {stats.Health: 1370, stats.Mana: 1213, stats.Agility: 35, stats.Strength: 30, stats.Intellect: 125, stats.Spirit: 120, stats.Stamina: 45},
 	},
 	proto.Class_ClassWarlock: {
-		1: {stats.Health: 23, stats.Mana: 59, stats.Agility: 20, stats.Strength: 20, stats.Intellect: 22, stats.Spirit: 22, stats.Stamina: 21},
+		1: {stats.Health: 23, stats.Mana: 90, stats.Agility: 20, stats.Strength: 20, stats.Intellect: 22, stats.Spirit: 22, stats.Stamina: 21},
 		2: {stats.Health: 28, stats.Mana: 98, stats.Agility: 20, stats.Strength: 20, stats.Intellect: 23, stats.Spirit: 23, stats.Stamina: 22},
 		3: {stats.Health: 43, stats.Mana: 107, stats.Agility: 21, stats.Strength: 21, stats.Intellect: 24, stats.Spirit: 24, stats.Stamina: 22},
 		4: {stats.Health: 48, stats.Mana: 117, stats.Agility: 21, stats.Strength: 21, stats.Intellect: 25, stats.Spirit: 25, stats.Stamina: 23},

@@ -175,6 +175,7 @@ type Shaman struct {
 
 	// Auras
 	ClearcastingAura     *core.Aura
+	clearcastingProc     core.ProcSource
 	MaelstromWeaponAura  *core.Aura
 	LightningShieldAuras []*core.Aura
 
