@@ -118,11 +118,6 @@ func rateOf(bonusID int32, unstated procRate) procRate {
 	return unstated
 }
 
-// alwaysProcs is a bonus that procs on every eligible event: the client
-// gives it a 100% chance and an internal cooldown that only spaces the
-// procs.
-var alwaysProcs = procRate{chance: 1}
-
 // procKind is the event a bonus procs on.
 type procKind struct {
 	name     string
@@ -136,11 +131,6 @@ var (
 		name:     "spellcast",
 		callback: core.CallbackOnCastComplete,
 		procMask: core.ProcMaskSpellDamage | core.ProcMaskSpellHealing,
-	}
-	onHarmfulSpellcast = procKind{
-		name:     "harmful spellcast",
-		callback: core.CallbackOnCastComplete,
-		procMask: core.ProcMaskSpellDamage,
 	}
 	onAutoattack = procKind{
 		name:     "autoattack",

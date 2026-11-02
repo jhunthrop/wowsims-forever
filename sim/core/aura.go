@@ -671,7 +671,7 @@ func (aura *Aura) Deactivate(sim *Simulation) {
 		// fix logging timestamps for lazy aura expiration
 		oldTime := sim.CurrentTime
 		sim.CurrentTime = min(sim.CurrentTime, aura.expires)
-		aura.metrics.Uptime += sim.CurrentTime - max(aura.startTime, 0)
+		aura.metrics.Uptime += max(sim.CurrentTime, 0) - max(aura.startTime, 0)
 		if sim.Log != nil {
 			aura.Unit.Log(sim, "Aura faded: %s", aura.ActionID)
 		}
