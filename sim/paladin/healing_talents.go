@@ -45,9 +45,8 @@ const (
 
 	// Boundless Light (node 113631, 2 ranks): "Increases the critical
 	// strike chance of your Holy Shock spell by 15% when cast on allies
-	// not affected by your Oath of Light", 30% at rank 2. Oath of Light is
-	// unmodeled (talents.go), so no ally carries it and every Holy Shock
-	// heal gets the bonus.
+	// not affected by your Oath of Light", 30% at rank 2. The ally the
+	// paladin's Oath of Light is sworn on gets no bonus (holy_shock.go).
 	boundlessLightCritPctPerRank = 15.0
 )
 

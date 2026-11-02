@@ -141,8 +141,8 @@ func (priest *Priest) applyDeclarativeShadowTalents() {
 		// by 1%/2%/3%/4%/5%." The Shadow damage half is Mind Flay,
 		// Devouring Plague, Shadow Word: Pain and Shadow Word: Death
 		// (PriestSpellMaskInstantShadowDamage); the healing half is the
-		// instant heals the client masks name, which leave out Prayer of
-		// Mending (PriestSpellMaskTwinDisciplines).
+		// instant heals the client masks name, Prayer of Mending's heal
+		// among them (PriestSpellMaskTwinDisciplines).
 		//
 		// SpellMod_DamageDone_Pct's FloatValue reaches
 		// Spell.ApplyMultiplicativeDamageBonus, which does
@@ -265,7 +265,10 @@ func (priest *Priest) applyHolySpecialization() {
 	}
 
 	priest.OnSpellRegistered(func(spell *core.Spell) {
-		if spell.Flags.Matches(SpellFlagPriest) && spell.SpellSchool.Matches(core.SpellSchoolHoly) {
+		// Divine Grace is the human racial, not a priest spell, but Holy
+		// Specialization's eff0 names its mask (0x1000000).
+		if (spell.Flags.Matches(SpellFlagPriest) && spell.SpellSchool.Matches(core.SpellSchoolHoly)) ||
+			spell.ClassSpellMask&PriestSpellMaskDivineGrace != 0 {
 			spell.BonusCritRating += 1 * float64(priest.Talents.HolySpecialization) * core.CritRatingPerCritChance
 		}
 	})

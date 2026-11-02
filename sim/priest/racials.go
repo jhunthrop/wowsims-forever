@@ -117,6 +117,7 @@ func (priest *Priest) registerDivineGrace() {
 		return
 	}
 	config := priest.racialHealSpell(rank.spellID, rank.heal.SpellLevel)
+	config.ClassSpellMask = PriestSpellMaskDivineGrace
 	config.BonusCoefficient = divineGraceCoefficient
 	config.ClientBaseDamage = rank.heal.Range(int(priest.Level))
 	config.ExtraCastCondition = func(_ *core.Simulation, target *core.Unit) bool {
@@ -168,6 +169,7 @@ func (priest *Priest) registerContingencyPlan() {
 	})
 	priest.ContingencyHot = priest.RegisterSpell(core.SpellConfig{
 		ActionID:         core.ActionID{SpellID: rank.hotID},
+		ClassSpellMask:   PriestSpellMaskContingencyPlanHeal,
 		SpellSchool:      core.SpellSchoolHoly,
 		DefenseType:      core.DefenseTypeMagic,
 		ProcMask:         core.ProcMaskSpellHealing,
