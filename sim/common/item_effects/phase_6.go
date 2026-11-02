@@ -100,7 +100,7 @@ func init() {
 
 	// https://www.wowhead.com/classic/item=23046/the-restrained-essence-of-sapphiron
 	// Use: Increases damage and healing done by magical spells and effects by up to 130 for 20 sec. (2 Min Cooldown)
-	core.NewSimpleStatOffensiveTrinketEffect(TheRestrainedEssenceOfSapphiron, stats.Stats{stats.SpellPower: 130}, time.Second*20, time.Minute*2)
+	core.NewSimpleStatOffensiveTrinketEffect(TheRestrainedEssenceOfSapphiron, stats.Stats{stats.SpellPower: 130, stats.HealingPower: 130}, time.Second*20, time.Minute*2)
 
 	// https://www.wowhead.com/classic/item=23027/warmth-of-forgiveness
 	// Use: Restores 500 mana. (3 Min Cooldown)

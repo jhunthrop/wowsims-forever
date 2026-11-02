@@ -3253,7 +3253,7 @@ func init() {
 
 	// https://www.wowhead.com/classic/item=18820/talisman-of-ephemeral-power
 	// Use: Increases damage and healing done by magical spells and effects by up to 175 for 15 sec. (1 Min, 30 Sec Cooldown)
-	core.NewSimpleStatOffensiveTrinketEffect(TalismanOfEphemeralPower, stats.Stats{stats.SpellPower: 175}, time.Second*15, time.Second*90)
+	core.NewSimpleStatOffensiveTrinketEffect(TalismanOfEphemeralPower, stats.Stats{stats.SpellPower: 175, stats.HealingPower: 175}, time.Second*15, time.Second*90)
 
 	// https://www.wowhead.com/classic/item=19948/zandalarian-hero-badge
 	// Increases your armor by 2000 and defense skill by 30 for 20 sec.

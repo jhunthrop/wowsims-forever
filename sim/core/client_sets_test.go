@@ -60,7 +60,10 @@ func TestDecodeFlatBonus(t *testing.T) {
 		want    stats.Stats
 	}{
 		{"Attack Power 30 is melee and ranged", 9336, stats.Stats{stats.AttackPower: 30, stats.RangedAttackPower: 30}},
-		{"equal damage and healing is spell power", 9346, stats.Stats{stats.SpellPower: 18}},
+		// SpellPower is the engine's damage to every magic school; healing
+		// reads HealingPower alone (Spell.HealingPower), so "damage and
+		// healing by up to 18" (Vestments of the Devout 3P) is both.
+		{"equal damage and healing is spell power and healing", 9346, stats.Stats{stats.SpellPower: 18, stats.HealingPower: 18}},
 		{"healing alone", 9318, stats.Stats{stats.HealingPower: 33}},
 		{"hybrid healing and damage", 467550, stats.Stats{stats.HealingPower: 44, stats.SpellDamage: 15}},
 		{"hit is one stat, not melee plus spell", 1300947, stats.Stats{stats.Hit: 1 * HitRatingPerHitChance}},

@@ -460,11 +460,14 @@ func (d *flatDecoder) readResistance(e ClientEffect) bool {
 }
 
 // finish folds the accumulated damage, healing, hit and crit into stats:
-// equal damage and healing is the engine's SpellPower.
+// equal damage and healing is the engine's SpellPower (damage to every
+// magic school) and as much HealingPower, which is all a heal reads
+// (Spell.HealingPower), the pair an item's "damage and healing" carries.
 func (d *flatDecoder) finish() {
 	switch {
 	case d.damageAll > 0 && d.damageAll == d.healing:
 		d.flat.Stats[stats.SpellPower] += d.damageAll
+		d.flat.Stats[stats.HealingPower] += d.healing
 	default:
 		d.flat.Stats[stats.SpellDamage] += d.damageAll
 		d.flat.Stats[stats.HealingPower] += d.healing

@@ -19,7 +19,7 @@ var ItemSetArcanistRegalia = core.NewItemSet(core.ItemSet{
 		// Increases damage and healing done by magical spells and effects by up to 18.
 		3: func(agent core.Agent) {
 			c := agent.GetCharacter()
-			c.AddStat(stats.SpellPower, 18)
+			c.AddStats(stats.Stats{stats.SpellPower: 18, stats.HealingPower: 18})
 		},
 		// Decreases the magical resistances of your spell targets by 10.
 		5: func(agent core.Agent) {
@@ -184,7 +184,7 @@ var ItemSetIllusionistsAttire = core.NewItemSet(core.ItemSet{
 		// Increases damage and healing done by magical spells and effects by up to 12.
 		2: func(agent core.Agent) {
 			c := agent.GetCharacter()
-			c.AddStat(stats.SpellPower, 12)
+			c.AddStats(stats.Stats{stats.SpellPower: 12, stats.HealingPower: 12})
 		},
 		// Decreases the mana cost of Arcane Intellect and Arcane Brilliance by 5%.
 		3: func(agent core.Agent) {

@@ -21,7 +21,7 @@ var ItemSetBlueDragonMail = core.NewItemSet(core.ItemSet{
 		// Increases damage and healing done by magical spells and effects by up to 28.
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.SpellPower, 28)
+			character.AddStats(stats.Stats{stats.SpellPower: 28, stats.HealingPower: 28})
 		},
 	},
 })
@@ -105,7 +105,7 @@ var ItemSetIronfeatherArmor = core.NewItemSet(core.ItemSet{
 		// Increases damage and healing done by magical spells and effects by up to 20.
 		2: func(agent core.Agent) {
 			character := agent.GetCharacter()
-			character.AddStat(stats.SpellPower, 20)
+			character.AddStats(stats.Stats{stats.SpellPower: 20, stats.HealingPower: 20})
 		},
 	},
 })

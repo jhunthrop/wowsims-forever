@@ -48,7 +48,7 @@ var ItemSetJudgementArmor = core.NewItemSet(core.ItemSet{
 		// Increases damage and healing done by magical spells and effects by up to 47.
 		5: func(agent core.Agent) {
 			c := agent.GetCharacter()
-			c.AddStat(stats.SpellPower, 47)
+			c.AddStats(stats.Stats{stats.SpellPower: 47, stats.HealingPower: 47})
 		},
 		// Inflicts 60 to 66 additional Holy damage on the target of a Paladin's Judgement.
 		8: func(agent core.Agent) {
@@ -115,7 +115,7 @@ var ItemSetAvengersBattlegear = core.NewItemSet(core.ItemSet{
 		// Increases damage and healing done by magical spells and effects by up to 71.
 		5: func(agent core.Agent) {
 			c := agent.GetCharacter()
-			c.AddStat(stats.SpellPower, 71)
+			c.AddStats(stats.Stats{stats.SpellPower: 71, stats.HealingPower: 71})
 		},
 	},
 })
