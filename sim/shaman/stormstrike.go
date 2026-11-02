@@ -48,7 +48,7 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := shaman.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
+			baseDamage := shaman.stormstrikeWeaponDamage(sim, spell.MeleeAttackPower(target))
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
 			if result.Landed() {
@@ -67,6 +67,13 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 // first of those spells to hit takes the 20% and spends the charge; the
 // rest of the Nature school is untouched (Era's debuff raised all Nature
 // damage taken for two charges).
+// stormstrikeWeaponDamage is Stormstrike's strike: client 17364 effect 0 is
+// effect 121, normalized weapon damage (1.60.1.70707 SpellEffect), so attack
+// power counts at the weapon type's normalized speed, not its swing speed.
+func (shaman *Shaman) stormstrikeWeaponDamage(sim *core.Simulation, attackPower float64) float64 {
+	return shaman.MHNormalizedWeaponDamage(sim, attackPower)
+}
+
 const (
 	stormstrikeChargeBonus    = 1.20
 	stormstrikeChargeDuration = 12 * time.Second
