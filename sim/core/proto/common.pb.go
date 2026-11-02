@@ -1593,6 +1593,9 @@ const (
 	Potions_MajorFrenzyPotion        Potions = 24
 	Potions_SpellblastingPotion      Potions = 25
 	Potions_MajorSpellblastingPotion Potions = 26
+	// The healer's: Spell Healing for 30 sec, same vendors and category.
+	Potions_MendersPotion      Potions = 27
+	Potions_MajorMendersPotion Potions = 28
 	// Deprecated: Marked as deprecated in common.proto.
 	Potions_LesserManaPotion Potions = 1
 )
@@ -1626,6 +1629,8 @@ var (
 		24: "MajorFrenzyPotion",
 		25: "SpellblastingPotion",
 		26: "MajorSpellblastingPotion",
+		27: "MendersPotion",
+		28: "MajorMendersPotion",
 		1:  "LesserManaPotion",
 	}
 	Potions_value = map[string]int32{
@@ -1655,6 +1660,8 @@ var (
 		"MajorFrenzyPotion":             24,
 		"SpellblastingPotion":           25,
 		"MajorSpellblastingPotion":      26,
+		"MendersPotion":                 27,
+		"MajorMendersPotion":            28,
 		"LesserManaPotion":              1,
 	}
 )
@@ -7025,7 +7032,7 @@ const file_common_proto_rawDesc = "" +
 	"\x16ExplosiveSolidDynamite\x10\x01\x12\x1a\n" +
 	"\x16ExplosiveDenseDynamite\x10\x02\x12\x1b\n" +
 	"\x17ExplosiveThoriumGrenade\x10\x03\x12\x1b\n" +
-	"\x17ExplosiveGoblinLandMine\x10\x04*\xc1\x05\n" +
+	"\x17ExplosiveGoblinLandMine\x10\x04*\xec\x05\n" +
 	"\aPotions\x12\x11\n" +
 	"\rUnknownPotion\x10\x00\x12\x0e\n" +
 	"\n" +
@@ -7055,7 +7062,9 @@ const file_common_proto_rawDesc = "" +
 	"\fFrenzyPotion\x10\x17\x12\x15\n" +
 	"\x11MajorFrenzyPotion\x10\x18\x12\x17\n" +
 	"\x13SpellblastingPotion\x10\x19\x12\x1c\n" +
-	"\x18MajorSpellblastingPotion\x10\x1a\x12\x18\n" +
+	"\x18MajorSpellblastingPotion\x10\x1a\x12\x11\n" +
+	"\rMendersPotion\x10\x1b\x12\x16\n" +
+	"\x12MajorMendersPotion\x10\x1c\x12\x18\n" +
 	"\x10LesserManaPotion\x10\x01\x1a\x02\b\x01*\xcd\x01\n" +
 	"\bConjured\x12\x13\n" +
 	"\x0fConjuredUnknown\x10\x00\x12\x1f\n" +

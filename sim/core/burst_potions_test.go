@@ -16,12 +16,17 @@ import (
 // SpellCooldowns 120000 ms), so it shares the two-minute timer with a mana
 // or rage potion. Wowhead Forever's tooltips read the same: "Increases
 // Attack Power by 80 for 30 sec.", "Increases Spell Damage by 47 for 30 sec."
+// The healer's are Mender's Potion 250946 (1251945, aura 135 of 31) and
+// Major Mender's Potion 250949 (1251948, 88): "Increases Spell Healing by
+// 88 for 30 sec.", in the same category with the same recovery.
 func TestBurstPotionsMatchTheClient(t *testing.T) {
 	want := map[proto.Potions]burstPotion{
 		proto.Potions_FrenzyPotion:             {itemID: 250940, label: "Frenzy Potion", bonus: stats.Stats{stats.AttackPower: 28, stats.RangedAttackPower: 28}},
 		proto.Potions_MajorFrenzyPotion:        {itemID: 250943, label: "Major Frenzy Potion", bonus: stats.Stats{stats.AttackPower: 80, stats.RangedAttackPower: 80}},
 		proto.Potions_SpellblastingPotion:      {itemID: 250934, label: "Spellblasting Potion", bonus: stats.Stats{stats.SpellDamage: 16}},
 		proto.Potions_MajorSpellblastingPotion: {itemID: 250937, label: "Major Spellblasting Potion", bonus: stats.Stats{stats.SpellDamage: 47}},
+		proto.Potions_MendersPotion:            {itemID: 250946, label: "Mender's Potion", bonus: stats.Stats{stats.HealingPower: 31}},
+		proto.Potions_MajorMendersPotion:       {itemID: 250949, label: "Major Mender's Potion", bonus: stats.Stats{stats.HealingPower: 88}},
 	}
 	if len(burstPotions) != len(want) {
 		t.Errorf("%d burst potions, want %d", len(burstPotions), len(want))
@@ -50,6 +55,9 @@ func TestBurstPotionIsADPSCooldownOnThePotionTimer(t *testing.T) {
 	}
 	if got := mcd.Spell.CD.Duration; got != 2*time.Minute {
 		t.Errorf("cooldown %v, want 2m", got)
+	}
+	if !mcd.SelfBuff {
+		t.Error("a burst potion buffs the drinker; a healer with a friendly target must drink it too")
 	}
 	if mcd.Spell.CD.Timer != potionCD {
 		t.Error("Major Frenzy Potion must use the shared potion timer")
