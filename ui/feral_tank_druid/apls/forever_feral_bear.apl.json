@@ -2,6 +2,12 @@
   "type": "TypeAPL",
   "priorityList": [
     {
+      "notes": "Potions, trinkets and racials as they come up, as every other tank's list opens: the raid preset's Greater Stoneshield Potion, which Forever lets a druid drink in Bear Form without leaving it (the druid deep dive).",
+      "action": {
+        "autocastOtherCooldowns": {}
+      }
+    },
+    {
       "notes": "Barkskin on cooldown: 20% less physical damage for 15 s of every 60 (about 5% less damage taken measured against the tank fight).",
       "action": {
         "castSpell": {
