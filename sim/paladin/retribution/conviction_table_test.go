@@ -10,16 +10,16 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
-// Conviction (20117) is aura 290 with a SpellEquippedItems row (180908:
-// item class 2, subclass mask 173555, the melee weapons), the same
-// weapon restriction as Cruelty. The beta logs settle what it reaches:
-// across 105 foreverlogs.gg paladins at levels 19 to 35, Retribution
-// paladins (5 or more points, Conviction is tier 1) crit Consecration
-// 6.48% of 84,212 ticks and the rest 8.05% of 53,536, while their melee
-// crits 10.1% against 6.2%. Conviction shows on the weapon and not on
-// Consecration, so it is melee and ranged crit; heals keep it as their own
-// bonus (too few logged Retribution heals to say otherwise).
-func TestConvictionIsWeaponCritAndHealCritOnly(t *testing.T) {
+// Conviction (20117) follows the client. Its one effect (SpellEffect
+// 698173) shipped in 1.60.1.70707 as aura 52, melee and ranged crit; the
+// server's hotfix push 113139 (first seen by wago.tools 2026-10-31) makes
+// it aura 290, crit with every attack, spell and heal, with no class mask
+// (EffectSpellClassMask 0,0,0,0) and no school (EffectMiscValue 0). Its
+// SpellEquippedItems row 180908 (class 2, subclass mask 173555, the melee
+// weapons) only says a melee weapon must be worn. Every beta log round 10
+// read (foreverlogs.gg, 2026-09-18 to 2026-10-23) predates the push, so the
+// Consecration ticks it measured were aura 52's.
+func TestConvictionIsCritOnEveryTable(t *testing.T) {
 	crit := func(rank int) (melee, spell, healCrit float64) {
 		player := utilitySealPaladin(60, `{"type": "TypeAPL"}`)
 		player.TalentsString = talentString(t, map[string]int{"conviction": rank})
@@ -49,8 +49,8 @@ func TestConvictionIsWeaponCritAndHealCritOnly(t *testing.T) {
 	if got := m3 - m0; math.Abs(got-6*core.CritRatingPerCritChance) > 1e-9 {
 		t.Errorf("Conviction 3/3 adds %.2f melee crit, want 6", got)
 	}
-	if got := s3 - s0; math.Abs(got) > 1e-9 {
-		t.Errorf("Conviction 3/3 adds %.2f spell crit, want 0 (not Consecration)", got)
+	if got := s3 - s0; math.Abs(got-6*core.CritRatingPerCritChance) > 1e-9 {
+		t.Errorf("Conviction 3/3 adds %.2f spell crit, want 6 (aura 290)", got)
 	}
 	if got := h3 - h0; math.Abs(got-6) > 1e-9 {
 		t.Errorf("Conviction 3/3 adds %.2f%% to a heal's crit, want 6", got)

@@ -337,6 +337,20 @@ func init() {
 		character.AddBonusRangedHitRating(3)
 	})
 
+	// Forever's scopes (1.60.1.70707): Poultry Precision Scope's 8057 is
+	// 22780 "Ranged Hit Bonus +3" (aura 54, 3) and SAF-T Ultra Precision
+	// Scope's 8720 is 1310308 "Ranged Crit Bonus +02" (aura 290, 2), each
+	// restricted to bows, guns and crossbows (SpellEquippedItems subclass
+	// mask 262156), so the bonus is the scoped weapon's. The site's simdb
+	// rows carry none of it (pipeline/simdb/enchants.py); the fork's own
+	// database has neither enchant.
+	core.AddClientWeaponEffect(8057, func(agent core.Agent, _ proto.ItemSlot) {
+		agent.GetCharacter().AddBonusRangedHitRating(3 * core.HitRatingPerHitChance)
+	})
+	core.AddClientWeaponEffect(8720, func(agent core.Agent, _ proto.ItemSlot) {
+		agent.GetCharacter().AddBonusRangedCritRating(2 * core.CritRatingPerCritChance)
+	})
+
 	// Gloves - Threat
 	core.NewEnchantEffect(2613, func(agent core.Agent) {
 		character := agent.GetCharacter()
