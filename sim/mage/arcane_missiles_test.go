@@ -48,3 +48,21 @@ func TestArcaneMissilesTopRankRegisteredAtMaxLevel(t *testing.T) {
 		t.Errorf("the Ahn'Qiraj book rank %d (25345) is registered without core.IncludeAQ", ArcaneMissilesRanks)
 	}
 }
+
+// Round 11 (casters M3): rank 1's missile is 7268, which the client names
+// "Arcane Missile" (singular): 24 a missile at its level 8, +0.2 a level to
+// 12, coefficient 0.286. The generator files it apart from the other
+// ranks, and rank 1 read the channel 5143's zero damage and 0.2.
+func TestArcaneMissilesRankOneFiresTheClientMissile(t *testing.T) {
+	_, mage := newMageAtLevel(t, 10, "")
+	tick := mage.ArcaneMissilesTickSpell[1]
+	if tick == nil {
+		t.Fatal("a level-10 mage has no rank-1 Arcane Missiles")
+	}
+	if got, want := tick.ClientBaseDamage, [2]float64{24 + 0.2*2, 24 + 0.2*2}; got != want {
+		t.Errorf("rank-1 missile roll at level 10 = %v, want %v", got, want)
+	}
+	if got := tick.BonusCoefficient; got != 0.286 {
+		t.Errorf("rank-1 missile coefficient = %v, want 0.286", got)
+	}
+}

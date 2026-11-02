@@ -203,6 +203,12 @@ func (shaman *Shaman) newManaSpringTotemSpellConfig(rank int) core.SpellConfig {
 	spell := shaman.newTotemSpellConfig(manaCost, spellId)
 	spell.RequiredLevel = level
 	spell.Rank = rank
+	// A totem that adds nothing over the raid's Mana Spring (the auras do
+	// not stack) is not cast: the rotation's Mana Spring line would spend
+	// a global and the totem's mana for no regeneration.
+	spell.ExtraCastCondition = func(_ *core.Simulation, _ *core.Unit) bool {
+		return bonus()[stats.MP5] > 0
+	}
 	spell.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
 		shaman.dropWaterTotem(sim, spell, manaSpringTotemDuration, buffAura.Deactivate)
 		buffAura.Activate(sim)

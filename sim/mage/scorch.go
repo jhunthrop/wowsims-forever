@@ -65,9 +65,11 @@ func (mage *Mage) getScorchConfig(rank int) core.SpellConfig {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
-			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 
-			if sim.RandomFloat("Improved Scorch") < debuffProcChance {
+			// Improved Scorch (11095, aura 109) is a trigger on the target
+			// the spell hits: a miss adds no stack.
+			if result.Landed() && sim.RandomFloat("Improved Scorch") < debuffProcChance {
 				aura := mage.ImprovedScorchAuras.Get(target)
 				aura.Activate(sim)
 				aura.AddStack(sim)
