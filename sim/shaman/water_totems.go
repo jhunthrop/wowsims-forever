@@ -96,8 +96,10 @@ func (shaman *Shaman) newHealingStreamTotemSpellConfig(rank int) core.SpellConfi
 		// read 2026-11-02) shamans with no Enhancement points show 0 crits
 		// in 21,134 ticks while their own heals crit 4 to 6%, and those
 		// with Thundering Strikes crit about 5% whatever their Intellect.
+		// A school's spell crit (aura 57, The Ten Storms' "Nature spells")
+		// is spell-table crit too, so it stays off the ticks as well.
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spellTableOnly := shaman.GetStat(stats.SpellCrit)
+			spellTableOnly := shaman.GetStat(stats.SpellCrit) + shaman.GetSchoolBonusCritChance(spell)
 			spell.BonusCritRating -= spellTableOnly
 			result := spell.CalcHealing(sim, target, baseHealing, spell.OutcomeHealingCrit)
 			spell.BonusCritRating += spellTableOnly
