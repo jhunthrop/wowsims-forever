@@ -197,10 +197,10 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 			// mask 42483 (melee weapons), so a weapon-dependent crit: the
 			// character's own melee attacks only. Never a spell, never a
 			// ranged attack, and never a pet (a hunter pet inherits its
-			// owner's crit stats, not the owner's weapon).
-			if !character.PseudoStats.FeralCombatEnabled {
-				addMeleeWeaponCrit(&character.Unit, 2*CritRatingPerCritChance)
-			}
+			// owner's crit stats, not the owner's weapon). It works in a
+			// feral form too: "Weapon enchantments and procs now all work
+			// while shapeshifted" (the druid deep dive).
+			addMeleeWeaponCrit(&character.Unit, 2*CritRatingPerCritChance)
 		case proto.WeaponImbue_ConsecratedSharpeningStone:
 			character.Env.RegisterPostFinalizeEffect(func() {
 				// The pool, not the active prefix; see
@@ -241,13 +241,9 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 				ApplyWindfury(character)
 			}
 		case proto.WeaponImbue_ShadowOil:
-			if !character.PseudoStats.FeralCombatEnabled {
-				registerShadowOil(character, isMh, shadowOilIcd)
-			}
+			registerShadowOil(character, isMh, shadowOilIcd)
 		case proto.WeaponImbue_FrostOil:
-			if !character.PseudoStats.FeralCombatEnabled {
-				registerFrostOil(character, isMh)
-			}
+			registerFrostOil(character, isMh)
 		}
 	}
 }
@@ -942,6 +938,12 @@ func (character *Character) newGoblinLandMineSpell(sharedTimer *Timer) *Spell {
 //                             Potions
 ///////////////////////////////////////////////////////////////////////////
 
+// Forever's druid deep dive (news.blizzard.com article 24301515): "All
+// potions and almost all similar consumables are now useable while
+// shapeshifted and do not cancel the Druid's shapeshift. Rage potions and
+// Thistletea are also now usable by Druids. One notable exception is
+// Engineering bombs." So no potion, rune or healthstone here cancels a form
+// or waits for one to end; the explosives still do.
 func registerPotionCD(agent Agent, consumes *proto.Consumes) {
 	character := agent.GetCharacter()
 	defaultPotion := consumes.DefaultPotion
@@ -1017,7 +1019,7 @@ func makeHealthConsumableMCD(itemId int32, character *Character, cdTimer *Timer)
 		Type: CooldownTypeSurvival,
 		ShouldActivate: func(sim *Simulation, character *Character) bool {
 			// Only pop if we have less than the max mana provided by the potion minus 1mp5 tick.
-			return (character.MaxHealth()-(character.CurrentHealth()) >= maxRoll) && !character.IsShapeshifted()
+			return (character.MaxHealth()-(character.CurrentHealth()) >= maxRoll)
 		},
 		Spell: character.GetOrRegisterSpell(SpellConfig{
 			ActionID: actionID,
@@ -1026,9 +1028,6 @@ func makeHealthConsumableMCD(itemId int32, character *Character, cdTimer *Timer)
 				CD: Cooldown{
 					Timer:    cdTimer,
 					Duration: cdDuration,
-				},
-				ModifyCast: func(sim *Simulation, _ *Spell, _ *Cast) {
-					character.CancelShapeshift(sim)
 				},
 			},
 			ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
@@ -1075,7 +1074,7 @@ func makeManaConsumableMCD(itemId int32, character *Character, cdTimer *Timer) M
 		ShouldActivate: func(sim *Simulation, character *Character) bool {
 			// Only pop if we have less than the max mana provided by the potion minus 1mp5 tick.
 			totalRegen := character.ManaRegenPerSecondWhileCasting() * 2
-			return (character.MaxMana()-(character.CurrentMana()+totalRegen) >= maxRoll) && !character.IsShapeshifted()
+			return (character.MaxMana()-(character.CurrentMana()+totalRegen) >= maxRoll)
 		},
 		Spell: character.GetOrRegisterSpell(SpellConfig{
 			ActionID: actionID,
@@ -1084,9 +1083,6 @@ func makeManaConsumableMCD(itemId int32, character *Character, cdTimer *Timer) M
 				CD: Cooldown{
 					Timer:    cdTimer,
 					Duration: cdDuration,
-				},
-				ModifyCast: func(sim *Simulation, _ *Spell, _ *Cast) {
-					character.CancelShapeshift(sim)
 				},
 			},
 			ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
@@ -1115,9 +1111,6 @@ func makeArmorConsumableMCD(itemId int32, character *Character, cdTimer *Timer) 
 				CD: Cooldown{
 					Timer:    cdTimer,
 					Duration: cdDuration,
-				},
-				ModifyCast: func(sim *Simulation, _ *Spell, _ *Cast) {
-					character.CancelShapeshift(sim)
 				},
 			},
 			ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
@@ -1159,9 +1152,6 @@ func makeMagicResistancePotionMCD(character *Character, cdTimer *Timer) MajorCoo
 					Timer:    cdTimer,
 					Duration: cdDuration,
 				},
-				ModifyCast: func(sim *Simulation, _ *Spell, _ *Cast) {
-					character.CancelShapeshift(sim)
-				},
 			},
 			ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
 				aura.Activate(sim)
@@ -1190,9 +1180,6 @@ func makeRageConsumableMCD(itemId int32, character *Character, cdTimer *Timer) M
 	aura := character.NewTemporaryStatsAura("Mighty Rage Potion", actionID, stats.Stats{stats.Strength: 60}, time.Second*20)
 	return MajorCooldown{
 		Type: CooldownTypeDPS,
-		ShouldActivate: func(sim *Simulation, character *Character) bool {
-			return !character.IsShapeshifted()
-		},
 		Spell: character.GetOrRegisterSpell(SpellConfig{
 			ActionID: actionID,
 			Flags:    SpellFlagNoOnCastComplete,
@@ -1200,9 +1187,6 @@ func makeRageConsumableMCD(itemId int32, character *Character, cdTimer *Timer) M
 				CD: Cooldown{
 					Timer:    cdTimer,
 					Duration: cdDuration,
-				},
-				ModifyCast: func(sim *Simulation, _ *Spell, _ *Cast) {
-					character.CancelShapeshift(sim)
 				},
 			},
 			ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
@@ -1215,6 +1199,53 @@ func makeRageConsumableMCD(itemId int32, character *Character, cdTimer *Timer) M
 				if itemId == 13442 {
 					aura.Activate(sim)
 				}
+			},
+		}),
+	}
+}
+
+// burstPotion is one of Forever's 30-second potions: a flat stat bonus
+// for burstPotionDuration on the shared potion timer.
+type burstPotion struct {
+	itemID int32
+	label  string
+	bonus  stats.Stats
+}
+
+// burstPotionDuration is every 30-second potion's aura length (SpellMisc
+// duration 30000 ms on 1251923, 1251932, 1251936 and 1251940).
+const burstPotionDuration = 30 * time.Second
+
+// burstPotions are Forever's 30-second potions with a launch vendor source
+// (the alchemy recipes the Azeroth Commerce Authority and Durotar Supply and
+// Logistics sell): Frenzy Potion 250940 (aura 99 and aura 124 of 28), Major
+// Frenzy Potion 250943 (80), Spellblasting Potion 250934 (aura 13 of 16 on
+// every school) and Major Spellblasting Potion 250937 (47). The 1.60.1.70707
+// client puts each in the potion category (4, 120000 ms).
+var burstPotions = map[proto.Potions]burstPotion{
+	proto.Potions_FrenzyPotion:             {itemID: 250940, label: "Frenzy Potion", bonus: stats.Stats{stats.AttackPower: 28, stats.RangedAttackPower: 28}},
+	proto.Potions_MajorFrenzyPotion:        {itemID: 250943, label: "Major Frenzy Potion", bonus: stats.Stats{stats.AttackPower: 80, stats.RangedAttackPower: 80}},
+	proto.Potions_SpellblastingPotion:      {itemID: 250934, label: "Spellblasting Potion", bonus: stats.Stats{stats.SpellDamage: 16}},
+	proto.Potions_MajorSpellblastingPotion: {itemID: 250937, label: "Major Spellblasting Potion", bonus: stats.Stats{stats.SpellDamage: 47}},
+}
+
+// makeBurstPotionMCD drinks a 30-second potion as a DPS cooldown.
+func makeBurstPotionMCD(potion burstPotion, character *Character, cdTimer *Timer) MajorCooldown {
+	actionID := ActionID{ItemID: potion.itemID}
+	aura := character.NewTemporaryStatsAura(potion.label, actionID, potion.bonus, burstPotionDuration)
+	return MajorCooldown{
+		Type: CooldownTypeDPS,
+		Spell: character.GetOrRegisterSpell(SpellConfig{
+			ActionID: actionID,
+			Flags:    SpellFlagNoOnCastComplete,
+			Cast: CastConfig{
+				CD: Cooldown{
+					Timer:    cdTimer,
+					Duration: time.Minute * 2,
+				},
+			},
+			ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
+				aura.Activate(sim)
 			},
 		}),
 	}
@@ -1262,6 +1293,10 @@ func makePotionActivationInternal(potionType proto.Potions, character *Character
 
 	case proto.Potions_MagicResistancePotion:
 		return makeMagicResistancePotionMCD(character, potionCD)
+
+	case proto.Potions_FrenzyPotion, proto.Potions_MajorFrenzyPotion,
+		proto.Potions_SpellblastingPotion, proto.Potions_MajorSpellblastingPotion:
+		return makeBurstPotionMCD(burstPotions[potionType], character, potionCD)
 	// case proto.Potions_GreaterArcaneProtectionPotion:
 	// 	return makeSchoolProtectionConsumableMCD(13461, character, potionCD)
 	// case proto.Potions_GreaterFireProtectionPotion:
@@ -1301,8 +1336,11 @@ func registerConjuredCD(agent Agent, consumes *proto.Consumes) {
 		mcd = makeManaConsumableMCD(12662, character, timer)
 	case proto.Conjured_ConjuredMinorRecombobulator:
 		mcd = makeManaConsumableMCD(4381, character, timer)
-	// Handled in the rogue package
-	// case proto.Conjured_ConjuredRogueThistleTea:
+	case proto.Conjured_ConjuredRogueThistleTea:
+		mcd = makeThistleTeaMCD(character, timer)
+		if mcd.Spell == nil {
+			return
+		}
 	default:
 		return
 	}
@@ -1325,4 +1363,45 @@ func addMeleeWeaponCrit(unit *Unit, rating float64) {
 			spell.BonusCritRating += rating
 		}
 	})
+}
+
+// thistleTeaEnergy is Thistle Tea's 100 Energy (item 7676, spell 9512,
+// energize of 100 at every level).
+const thistleTeaEnergy = 100.0
+
+// makeThistleTeaMCD is Thistle Tea for any character with an energy bar: a
+// rogue, and a druid since Forever ("Rage potions and Thistletea are also
+// now usable by Druids", the druid deep dive, news.blizzard.com article
+// 24301515). It has its own five-minute cooldown and the two-minute conjured
+// category timer, and is drunk when the bar is nearly empty so the energy is
+// not capped away. A character with no energy bar gets nothing.
+func makeThistleTeaMCD(character *Character, conjuredTimer *Timer) MajorCooldown {
+	if !character.HasEnergyBar() {
+		return MajorCooldown{}
+	}
+	actionID := ActionID{ItemID: 7676}
+	energyMetrics := character.NewEnergyMetrics(actionID)
+
+	return MajorCooldown{
+		Type: CooldownTypeDPS,
+		ShouldActivate: func(sim *Simulation, character *Character) bool {
+			return character.CurrentEnergy() <= 10
+		},
+		Spell: character.RegisterSpell(SpellConfig{
+			ActionID: actionID,
+			Cast: CastConfig{
+				CD: Cooldown{
+					Timer:    character.NewTimer(),
+					Duration: time.Minute * 5,
+				},
+				SharedCD: Cooldown{
+					Timer:    conjuredTimer,
+					Duration: time.Minute * 2,
+				},
+			},
+			ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
+				character.AddEnergy(sim, thistleTeaEnergy, energyMetrics)
+			},
+		}),
+	}
 }

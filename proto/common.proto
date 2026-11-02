@@ -375,6 +375,13 @@ enum Potions {
 	GreaterNatureProtectionPotion = 21;
 	GreaterShadowProtectionPotion = 22;
 
+	// Forever's 30-second potions, sold by the Azeroth Commerce Authority
+	// and Durotar Supply and Logistics alchemy vendors.
+	FrenzyPotion = 23;
+	MajorFrenzyPotion = 24;
+	SpellblastingPotion = 25;
+	MajorSpellblastingPotion = 26;
+
 	LesserManaPotion = 1 [deprecated = true];
 }
 

@@ -1680,8 +1680,10 @@ const extraAttackProcICD = 100 * time.Millisecond
 // windfuryTotemReaches says whether the Windfury Totem aura applies to the
 // character. A shaman whose main hand carries Windfury Weapon does not
 // receive it (the weapon's text: "When applied to main hand, disables any
-// benefit you personally receive from Windfury Totem"), and a druid in
-// feral form has no main-hand weapon to proc it.
+// benefit you personally receive from Windfury Totem"). A feral druid does:
+// "Weapon enchantments and procs now all work while shapeshifted, including
+// effects like weightstones, Crusader enchant, and Windfury Totem" (Forever's
+// druid deep dive, news.blizzard.com article 24301515).
 func windfuryTotemReaches(character *Character) bool {
 	return weaponTotemReaches(character, proto.WeaponImbue_WindfuryWeapon)
 }
@@ -1689,11 +1691,8 @@ func windfuryTotemReaches(character *Character) bool {
 // weaponTotemReaches says whether a weapon-hit totem aura applies to the
 // character: not when the totem's own weapon imbue sits on the main hand
 // (the imbue's text: "disables any benefit you personally receive from"
-// the totem), and not to a druid in feral form, who has no main-hand weapon.
+// the totem). A druid in a feral form receives it.
 func weaponTotemReaches(character *Character, disablingImbue proto.WeaponImbue) bool {
-	if character.PseudoStats.FeralCombatEnabled {
-		return false
-	}
 	return character.Consumes == nil || character.Consumes.MainHandImbue != disablingImbue
 }
 

@@ -140,7 +140,6 @@ func (rogue *Rogue) Initialize() {
 	rogue.registerRupture()
 	rogue.registerSinisterStrikeSpell()
 	rogue.registerSliceAndDice()
-	rogue.registerThistleTeaCD()
 	rogue.registerAmbushSpell()
 	rogue.registerCheapShot()
 	rogue.registerGouge()
