@@ -32,8 +32,6 @@ func succubusSheet(level int32) (cfg PetConfig) {
 			stats.Spirit:    61,
 			stats.Mana:      119,
 			stats.MP5:       0,
-			// Forever: merged from MeleeCrit 3.2685 + SpellCrit 3.3355. unconfirmed
-			stats.Crit: 3.3355 * core.CritRatingPerCritChance,
 		}
 		cfg.AutoAttacks = core.AutoAttackOptions{
 			MainHand: core.Weapon{
@@ -52,8 +50,6 @@ func succubusSheet(level int32) (cfg PetConfig) {
 			stats.Spirit:    97,
 			stats.Mana:      521,
 			stats.MP5:       0,
-			// Forever: merged from MeleeCrit 3.2685 + SpellCrit 3.3355. unconfirmed
-			stats.Crit: 3.3355 * core.CritRatingPerCritChance,
 		}
 		cfg.AutoAttacks = core.AutoAttackOptions{
 			MainHand: core.Weapon{
@@ -72,8 +68,6 @@ func succubusSheet(level int32) (cfg PetConfig) {
 			stats.Spirit:    123,
 			stats.Mana:      912,
 			stats.MP5:       0,
-			// Forever: merged from MeleeCrit 3.2685 + SpellCrit 3.3355. unconfirmed
-			stats.Crit: 3.3355 * core.CritRatingPerCritChance,
 		}
 		cfg.AutoAttacks = core.AutoAttackOptions{
 			MainHand: core.Weapon{
@@ -93,8 +87,6 @@ func succubusSheet(level int32) (cfg PetConfig) {
 			stats.Spirit:    150,
 			stats.Mana:      1066,
 			stats.MP5:       0,
-			// Forever: merged from MeleeCrit 3.2685 + SpellCrit 3.3355. unconfirmed
-			stats.Crit: 3.3355 * core.CritRatingPerCritChance,
 		}
 		cfg.AutoAttacks = core.AutoAttackOptions{
 			MainHand: core.Weapon{

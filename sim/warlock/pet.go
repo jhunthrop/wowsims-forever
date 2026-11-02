@@ -98,22 +98,16 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 			return wp.GetStat(stats.Spirit) / 5
 		}
 
-		// Mage spell crit scaling for imp
-		wp.AddStatDependency(stats.Intellect, stats.SpellCrit, core.SpellCritPerIntAtLevel(proto.Class_ClassMage, wp.Level)*core.CritRatingPerCritChance)
+		wp.AddStat(stats.SpellCrit, impSpellCritPercent*core.CritRatingPerCritChance)
 	} else {
 		// Warrior scaling for all other pets
 		wp.AddStat(stats.AttackPower, -20)
 		wp.AddStatDependency(stats.Strength, stats.AttackPower, 2)
 
-		// Warrior crit scaling.
-		//
-		// The Intellect line is a no-op (the warrior row has no Intellect
-		// rate at any level) and is kept so the pet wires both dependencies
-		// exactly as AddCritStatDependencies does for a player.
-		// unconfirmed: whether a Forever warrior-scaled pet should convert
-		// Intellect to Crit at all is unpublished.
-		wp.AddStatDependency(stats.Agility, stats.MeleeCrit, core.CritPerAgiAtLevel(proto.Class_ClassWarrior, wp.Level)*core.CritRatingPerCritChance)
-		wp.AddStatDependency(stats.Intellect, stats.SpellCrit, core.SpellCritPerIntAtLevel(proto.Class_ClassWarrior, wp.Level)*core.CritRatingPerCritChance)
+		wp.AddStats(stats.Stats{
+			stats.MeleeCrit: demonMeleeCritPercent * core.CritRatingPerCritChance,
+			stats.SpellCrit: demonSpellCritPercent * core.CritRatingPerCritChance,
+		})
 
 		// Imps generally don't melee
 		wp.EnableAutoAttacks(wp, cfg.AutoAttacks)
@@ -233,6 +227,30 @@ const (
 	petSpellDamagePerSpellPower = 0.10
 )
 
+// A Forever demon's crit is its own, measured rate; Agility and Intellect do
+// not raise it (the sheets' attributes change by level, the measured rates
+// do not). Blizzard on forever-bugs #331 (2026-10-14): "Their melee crit is
+// extremely low and their base spell crit is around normal levels".
+//   - demonMeleeCritPercent: 12 crits in 1,718 Succubus swings (0.70%) by a
+//     level-30 warlock on level-30 Cave Yetis (#331, three logs); the 29
+//     foreverlogs.gg warlock logs give demon melee 33 in 2,400 (1.4%) on mobs
+//     of mixed level. Against a boss the melee crit suppression (4.8%)
+//     leaves the demon none.
+//   - demonSpellCritPercent: Lash of Pain 13 in 205 in the same test and 7
+//     in 105 in the public logs of warlocks without Malevolence (6.4%). The
+//     Felhunter and Voidwalker cast nothing the engine models and take the
+//     same value.
+//   - impSpellCritPercent: Firebolt 53 in 2,383 (2.2%) in 17 public logs,
+//     levels 12 to 30.
+//
+// unconfirmed: the rates are measured at levels 12 to 35; no level-60 demon
+// log exists yet.
+const (
+	demonMeleeCritPercent = 0.7
+	demonSpellCritPercent = 6.4
+	impSpellCritPercent   = 2.2
+)
+
 // petMeleeHitShare is the part of the warlock's hit a demon's melee takes.
 // forever-bugs #394 (AidanZMoon for Blizzard, 2026-10-20): "Warlocks will
 // give spell hit equal to their spell hit, and melee hit equal to 8/17ths
@@ -243,9 +261,10 @@ const petMeleeHitShare = 8.0 / 17
 // makeStatInheritance maps the warlock's stats to the demon's. Crit is not
 // inherited. Blizzard's intent is that a demon mirrors the warlock's spell
 // crit with no crit of its own (forever-bugs #331, 2026-10-14), but the beta
-// does not do it yet: demons keep their own crit and take only "+X% critical
-// strike" gear, and 29 foreverlogs.gg logs (levels 13 to 30) show Firebolt
-// critting 2.2% and demon melee 1.4% against the warlock's 5.6%. Haste is not
+// does not do it yet: demons keep their own crit (demonMeleeCritPercent and
+// its neighbours) and, by the same reply, take only the warlock's pure
+// "critical strike" stat (unconfirmed, single source, not wired: whether the
+// server counts the warlock's crit buffs in it is unpublished). Haste is not
 // inherited: this engine carries haste as speed multipliers, not stats. The
 // mapping is linear in the owner's stats, so the same function maps the
 // owner's mid-fight stat changes; the school power it reads is fixed per
