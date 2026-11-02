@@ -37,7 +37,7 @@ func damageOnMeleeHit(school core.SpellSchool) bonusModel {
 				func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 					spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMagicHitAndCrit)
 				})
-			core.MakeProcTriggerAura(&character.Unit, onMeleeHit.trigger(bonus.Name, core.ActionID{SpellID: bonusID}, rate,
+			core.MakeProcTriggerAura(&character.Unit, meleeKindOf(bonusID).trigger(bonus.Name, core.ActionID{SpellID: bonusID}, rate,
 				func(sim *core.Simulation, _ *core.Spell, result *core.SpellResult) { bolt.Cast(sim, result.Target) }))
 		}
 	}

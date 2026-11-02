@@ -76,7 +76,7 @@ const (
 	bloodmailSet    int32 = 123
 	bloodmailPieces       = 3
 	bloodmailBleed  int32 = 1299739
-	bloodmailProc         = "Bloodmail (melee hit)"
+	bloodmailProc         = "Bloodmail (melee autoattack)"
 )
 
 func TestBloodmailBleedsForTheClientTicks(t *testing.T) {
