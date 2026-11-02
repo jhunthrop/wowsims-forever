@@ -217,7 +217,7 @@ func TestChampionOfTheLightShortensHammerOfWrath(t *testing.T) {
 func TestConvictionAddsTwoPercentCritARank(t *testing.T) {
 	_, baseUnit := newTalentTestUnit(t, "")
 	_, talentedUnit := newTalentTestUnit(t, talentString(t, map[string]int{"conviction": 3}))
-	if got, want := talentedUnit.GetStat(stats.Crit)-baseUnit.GetStat(stats.Crit), 6.0*core.CritRatingPerCritChance; got < want-1e-6 || got > want+1e-6 {
+	if got, want := talentedUnit.GetStat(stats.MeleeCrit)-baseUnit.GetStat(stats.MeleeCrit), 6.0*core.CritRatingPerCritChance; got < want-1e-6 || got > want+1e-6 {
 		t.Errorf("Conviction 3 adds %v crit rating, want %v", got, want)
 	}
 }
