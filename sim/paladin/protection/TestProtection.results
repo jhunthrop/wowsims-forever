@@ -154,6 +154,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestProtection-Phase1-AllItems-Verigan'sFist-6953"
+ value: {
+  dps: 499.08583
+  tps: 1151.32469
+ }
+}
+dps_results: {
  key: "TestProtection-Phase1-Average-Default"
  value: {
   dps: 594.17371

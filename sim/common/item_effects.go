@@ -179,6 +179,8 @@ const (
 
 func init() {
 	registerClientWeaponProc(ClawOfTheShadowmancer)
+	registerClientWeaponProc(BlackMenace)
+	registerClientWeaponProc(VerigansFist)
 	registerClientWeaponProc(Thornspike)
 
 	core.AddEffectsToTest = false
@@ -786,7 +788,9 @@ func init() {
 			ThreatMultiplier: 1,
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				dmg := sim.Roll(18, 26)
+				// 70707 SpellEffect 29638: 28 with variance 0.3636, Wowhead
+				// Forever's "23 to 33 Fire damage" (Era's 18 to 26).
+				dmg := sim.Roll(28*(1-0.36363637447/2), 28*(1+0.36363637447/2))
 				spell.CalcAndDealDamage(sim, target, dmg, spell.OutcomeRangedCritOnly)
 			},
 		})
@@ -1040,7 +1044,8 @@ func init() {
 				NumberOfTicks: 3,
 
 				OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-					dot.Snapshot(target, 8, isRollover)
+					// 18796 effect 1: aura 3, 20 every 2 sec for 6 sec (Era's 8).
+					dot.Snapshot(target, 20, isRollover)
 				},
 
 				OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
@@ -1049,7 +1054,9 @@ func init() {
 			},
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				dmg := sim.Roll(155, 197)
+				// 70707 SpellEffect 18796 effect 0: 262 with variance 0.2386,
+				// Wowhead Forever's "231 to 293 Fire damage" (Era's 155 to 197).
+				dmg := sim.Roll(262*(1-0.23863635957/2), 262*(1+0.23863635957/2))
 				result := spell.CalcAndDealDamage(sim, target, dmg, spell.OutcomeMagicHitAndCrit)
 				if result.Landed() {
 					spell.Dot(target).Apply(sim)
@@ -1398,7 +1405,15 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=2164/gut-ripper
-	registerClientWeaponProc(GutRipper)
+	// 70707 SpellEffect 18107: effect 0 is the roll in clientWeaponProcs;
+	// effects 1 and 2 are its "100% increased damage to targets below 25%
+	// health" (dummy 100 and 25), which the plain table proc lacked.
+	registerClientWeaponProcSpell(GutRipper, func(sim *core.Simulation, damage float64) float64 {
+		if sim.IsExecutePhase25() {
+			return damage * 2
+		}
+		return damage
+	})
 
 	// https://www.wowhead.com/classic/item=19874/halberd-of-smiting
 	// Equip: Chance to decapitate the target on a melee swing, causing 452 to 676 damage.
@@ -1666,6 +1681,9 @@ func init() {
 
 	// https://www.wowhead.com/classic/item=9449/manual-crowd-pummeler
 
+	// 70707 ItemEffect 98990: 13494 on a 180000 ms cooldown with 3 charges,
+	// Wowhead Forever's "(3 Min Cooldown) 3 Charges". The engine had Era's
+	// 30 sec, which kept the 30 sec haste up the whole fight.
 	core.NewItemEffect(ManualCrowdPummeler, func(agent core.Agent) {
 		character := agent.GetCharacter()
 		actionID := core.ActionID{SpellID: 13494}
@@ -1689,7 +1707,7 @@ func init() {
 			Cast: core.CastConfig{
 				CD: core.Cooldown{
 					Timer:    character.NewTimer(),
-					Duration: time.Second * 30,
+					Duration: time.Minute * 3,
 				},
 			},
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
@@ -3256,7 +3274,7 @@ func init() {
 
 	// https://www.wowhead.com/classic/item=18820/talisman-of-ephemeral-power
 	// Use: Increases damage and healing done by magical spells and effects by up to 175 for 15 sec. (1 Min, 30 Sec Cooldown)
-	core.NewSimpleStatOffensiveTrinketEffect(TalismanOfEphemeralPower, stats.Stats{stats.SpellPower: 175, stats.HealingPower: 175}, time.Second*15, time.Second*90)
+	core.NewSimpleStatOffensiveTrinketEffect(TalismanOfEphemeralPower, stats.Stats{stats.SpellPower: 175}, time.Second*15, time.Second*90)
 
 	// https://www.wowhead.com/classic/item=19948/zandalarian-hero-badge
 	// Increases your armor by 2000 and defense skill by 30 for 20 sec.

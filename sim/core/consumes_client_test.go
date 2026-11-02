@@ -24,6 +24,24 @@ func TestManaOilsMatchTheClient(t *testing.T) {
 	}
 }
 
+// The wizard oils' enchant spells state damage AND healing (25109, 25110,
+// 25111, 25113: aura 13 and aura 135 at 8/16/24/36, school mask 126), and
+// Brilliant Wizard Oil adds aura 57, 1% spell crit. The engine gave the
+// spell damage only (sim audit round 8, items lane).
+func TestWizardOilsMatchTheClient(t *testing.T) {
+	want := map[proto.WeaponImbue]stats.Stats{
+		proto.WeaponImbue_MinorWizardOil:     {stats.SpellPower: 8, stats.HealingPower: 8},
+		proto.WeaponImbue_LesserWizardOil:    {stats.SpellPower: 16, stats.HealingPower: 16},
+		proto.WeaponImbue_WizardOil:          {stats.SpellPower: 24, stats.HealingPower: 24},
+		proto.WeaponImbue_BrilliantWizardOil: {stats.SpellPower: 36, stats.HealingPower: 36, stats.Crit: 1 * CritRatingPerCritChance},
+	}
+	for imbue, expected := range want {
+		if got := wizardOilStats[imbue]; got != expected {
+			t.Errorf("%v gives %v, want %v", imbue, got, expected)
+		}
+	}
+}
+
 // Nightfin Soup's well-fed buff is 22 spell damage (spell 1249513 states
 // it through an aura 227 effect of 22); the client gives it no mana.
 func TestNightfinSoupMatchesTheClient(t *testing.T) {
