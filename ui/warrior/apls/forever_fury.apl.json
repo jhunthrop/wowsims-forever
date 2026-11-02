@@ -162,7 +162,7 @@
       }
     },
     {
-      "notes": "Overpower whenever its dodge window is open. It is a Battle Stance spell, so it only fires before Berserker Stance is learned at 30; from then on the line falls through.",
+      "notes": "Overpower whenever its dodge window is open. It is a Battle Stance spell: Fury stays in Battle Stance until Whirlwind is learned at 36, then opens in Berserker Stance and the line falls through.",
       "action": {
         "castSpell": {
           "spellId": {

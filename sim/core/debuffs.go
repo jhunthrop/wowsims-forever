@@ -66,7 +66,9 @@ func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, rai
 	// Major Armor Debuffs
 	if targetIdx == 0 {
 		if debuffs.ExposeArmor != proto.TristateEffect_TristateEffectMissing {
-			aura := ExposeArmorAura(target, TernaryInt32(debuffs.ExposeArmor == proto.TristateEffect_TristateEffectRegular, 0, 2))
+			// Regular and improved remove the same armor: Forever's Improved
+			// Expose Armor is energy and combo points, not armor.
+			aura := ExposeArmorAura(target)
 			SchedulePeriodicDebuffApplication(aura, PeriodicActionOptions{
 				Period:   time.Second * 3,
 				NumTicks: 1,
@@ -553,15 +555,17 @@ func SunderArmorAura(target *Unit) *Aura {
 	return aura
 }
 
-func ExposeArmorAura(target *Unit, improvedEA int32) *Aura {
-	spellID := int32(11198)
-	arpen := 1700.0
-
-	arpen *= []float64{1, 1.25, 1.5}[improvedEA]
+// ExposeArmorAura is the shared Expose Armor debuff. The raid's copy is a
+// five-point Expose Armor of the rank the raid's level has learned
+// (ExposeArmorRanks); a rogue's own cast sets the priority from its combo
+// points.
+func ExposeArmorAura(target *Unit) *Aura {
+	rank, _ := raidDebuffRank(ExposeArmorRanks, target)
+	arpen := rank.Amount * exposeArmorRaidComboPoints
 
 	aura := target.GetOrRegisterAura(Aura{
 		Label:    "ExposeArmor",
-		ActionID: ActionID{SpellID: spellID},
+		ActionID: ActionID{SpellID: rank.SpellID},
 		Duration: time.Second * 30,
 	})
 

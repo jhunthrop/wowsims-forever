@@ -122,11 +122,11 @@ var petBiteLearnLevels = []int{1, 8, 16, 24, 32, 40, 48, 56}
 var petBiteSpellID = [9]int32{0, 17253, 17255, 17256, 17257, 17258, 17259, 17260, 17261}
 
 // petBiteBaseDamageMin/Max are Bite's rank -> damage roll bounds, index 0
-// unused. Only ranks 4, 6, 7 and 8 have a tuned value in this file; ranks
-// 1-3 and 5 carry the nearest known rank's numbers forward until real ones
-// are sourced.
-var petBiteBaseDamageMin = [9]float64{0, 31, 31, 31, 31, 31, 49, 66, 81}
-var petBiteBaseDamageMax = [9]float64{0, 37, 37, 37, 37, 37, 59, 80, 91}
+// unused: the 70707 SpellEffect rows' base points plus or minus half their
+// variance (17253 8, 17255 17, 17256 26, 17257 34, 17258 44, 17259 54,
+// 17260 73, 17261 90), the convention that reproduces Claw's ranks.
+var petBiteBaseDamageMin = [9]float64{0, 7, 16, 24, 31, 40, 49, 66, 81}
+var petBiteBaseDamageMax = [9]float64{0, 9, 18, 28, 37, 48, 59, 80, 99}
 
 func (hp *HunterPet) newBite() *core.Spell {
 	rank := core.HighestRankAtLevel(petBiteLearnLevels, hp.Owner.Level)

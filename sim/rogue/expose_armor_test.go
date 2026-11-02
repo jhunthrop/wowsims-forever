@@ -20,3 +20,20 @@ func TestExposeArmorRankAtLevel(t *testing.T) {
 		t.Errorf("rank at 13 = %d, want 0", got)
 	}
 }
+
+// Forever's Expose Armor removes Sunder Armor's amount per combo point:
+// 90, 180, 270, 360, 450 at ranks 1 to 5 (Wowhead Forever 8647, 8649,
+// 8650, 11197, 11198, read 2026-11-02). Era's were 80 to 340.
+func TestExposeArmorPerComboPointIsForevers(t *testing.T) {
+	for rank, want := range []float64{0, 90, 180, 270, 360, 450} {
+		if rank == 0 {
+			continue
+		}
+		if got := exposeArmorArpenPerCombo[rank]; got != want {
+			t.Errorf("rank %d: %v armor a combo point, want %v", rank, got, want)
+		}
+		if got := core.ExposeArmorRanks[rank-1].Amount; got != want {
+			t.Errorf("rank %d: raid rank table %v, want %v", rank, got, want)
+		}
+	}
+}

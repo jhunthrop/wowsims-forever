@@ -602,9 +602,8 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=12583/blackhand-doomsaw
-	// Chance on hit: Wounds the target for 324 to 540 damage.
 	// TODO: Proc rate based on the original item
-	registerClientWeaponProc(BlackhandDoomsaw)
+	registerFatalWoundProc(BlackhandDoomsaw)
 
 	// https://www.wowhead.com/classic/item=17780/blade-of-eternal-darkness
 	// Equip: Chance on landing a damaging spell to deal 100 Shadow damage and restore 100 mana to you. (Proc chance: 10%)
@@ -1404,16 +1403,9 @@ func init() {
 		})
 	})
 
-	// https://www.wowhead.com/classic/item=2164/gut-ripper
-	// 70707 SpellEffect 18107: effect 0 is the roll in clientWeaponProcs;
-	// effects 1 and 2 are its "100% increased damage to targets below 25%
-	// health" (dummy 100 and 25), which the plain table proc lacked.
-	registerClientWeaponProcSpell(GutRipper, func(sim *core.Simulation, damage float64) float64 {
-		if sim.IsExecutePhase25() {
-			return damage * 2
-		}
-		return damage
-	})
+	// Gut Ripper, Pendulum of Doom and Blackhand Doomsaw: fatal wounds
+	// that hit harder below 25% health (fatalWoundExecuteBonus).
+	registerFatalWoundProc(GutRipper)
 
 	// https://www.wowhead.com/classic/item=19874/halberd-of-smiting
 	// Equip: Chance to decapitate the target on a melee swing, causing 452 to 676 damage.
@@ -1835,7 +1827,7 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=9425/pendulum-of-doom
-	registerClientWeaponProc(PendulumOfDoom)
+	registerFatalWoundProc(PendulumOfDoom)
 
 	// https://www.wowhead.com/classic/item=12709/pips-skinner
 	core.NewMobTypeAttackPowerEffect(PipsSkinner, []proto.MobType{proto.MobType_MobTypeBeast}, 45)
@@ -2596,7 +2588,7 @@ func init() {
 	registerClientWeaponProc(VilerendSlicer)
 
 	// https://www.wowhead.com/classic/item=17075/viskag-the-bloodletter
-	registerClientWeaponProc(ViskagTheBloodletter)
+	registerFatalWoundProc(ViskagTheBloodletter)
 
 	// https://www.wowhead.com/classic/item=12792/volcanic-hammer
 	// Chance on hit: Hurls a fiery ball that causes 100 to 128 Fire damage and an additional 18 damage over 6 sec.

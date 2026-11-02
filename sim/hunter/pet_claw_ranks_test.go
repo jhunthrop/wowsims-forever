@@ -17,3 +17,15 @@ func TestPetClawRanksRollTheClientRange(t *testing.T) {
 		clientdamagetest.AssertRoll(t, client, "Claw", petClawSpellID[rank], 0, petClawLearnLevels[rank-1], got)
 	}
 }
+
+// TestPetBiteRanksRollTheClientRange: Bite ranks 1-8 (17253, 17255-17261)
+// roll 7-9, 16-18, 24-28, 31-37, 40-48, 49-59, 66-80 and 81-99 (base points
+// plus or minus half the variance). Ranks 1-3 and 5 used rank 4's 31-37,
+// and rank 8 topped out at 91.
+func TestPetBiteRanksRollTheClientRange(t *testing.T) {
+	client := clientdamagetest.LoadClient(t, "..", "hunter")
+	for rank := 1; rank < len(petBiteSpellID); rank++ {
+		got := [2]float64{petBiteBaseDamageMin[rank], petBiteBaseDamageMax[rank]}
+		clientdamagetest.AssertRoll(t, client, "Bite", petBiteSpellID[rank], 0, petBiteLearnLevels[rank-1], got)
+	}
+}

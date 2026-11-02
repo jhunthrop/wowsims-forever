@@ -52,7 +52,9 @@ func (hunter *Hunter) barrageDamageMultiplier() float64 {
 }
 
 // savageStrikesCritRating is the bonus crit rating Savage Strikes gives a
-// melee ability.
+// melee ability: every spell its class mask names (66 / 528384 / 2097152),
+// Raptor Strike, Mongoose Bite, Wing Clip, Counterattack, Lacerate and
+// Strider Kick.
 func (hunter *Hunter) savageStrikesCritRating() float64 {
 	return savageStrikesCritPerRank * float64(hunter.Talents.SavageStrikes) * core.CritRatingPerCritChance
 }

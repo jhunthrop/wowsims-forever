@@ -85,7 +85,7 @@ func registerClientWeaponProc(item int32) {
 
 // registerClientWeaponProcSpell registers item's proc from clientWeaponProcs
 // with a hook on the rolled damage, for a proc whose spell scales its roll
-// (Gut Ripper's double damage below 25% health).
+// (the fatal wounds' bonus below 25% health).
 func registerClientWeaponProcSpell(item int32, scale func(sim *core.Simulation, damage float64) float64) {
 	p, ok := clientWeaponProcs[item]
 	if !ok {
@@ -120,5 +120,40 @@ func registerClientWeaponProcSpell(item int32, scale func(sim *core.Simulation, 
 			spell.CalcAndDealDamage(sim, target, damage, outcome)
 		}
 		return character.GetOrRegisterSpell(config)
+	})
+}
+
+// fatalWoundExecuteBonus is each fatal-wound proc's extra damage below 25%
+// health, as a fraction. The client's text for 18107, 10373, 16549 and
+// 1305394 reads
+// "Deals $s2% increased damage to targets below $s3% health"; Wowhead
+// Forever renders 100% (Gut Ripper), 50% (Pendulum of Doom, Blackhand
+// Doomsaw) and 75% (Vis'kag the Bloodletter) below 25%.
+var fatalWoundExecuteBonus = map[int32]float64{
+	GutRipper:        1.0,
+	PendulumOfDoom:   0.5,
+	BlackhandDoomsaw: 0.5,
+	// 1305394, Forever's own Fatal Wound: "75% increased damage".
+	ViskagTheBloodletter: 0.75,
+}
+
+// fatalWoundDamage is a fatal wound's rolled damage with its bonus below
+// 25% health.
+func fatalWoundDamage(damage, bonus float64, belowQuarter bool) float64 {
+	if belowQuarter {
+		return damage * (1 + bonus)
+	}
+	return damage
+}
+
+// registerFatalWoundProc registers a fatal-wound weapon's client proc with
+// its below-25% bonus.
+func registerFatalWoundProc(item int32) {
+	bonus, ok := fatalWoundExecuteBonus[item]
+	if !ok {
+		panic("no fatal wound bonus for an item")
+	}
+	registerClientWeaponProcSpell(item, func(sim *core.Simulation, damage float64) float64 {
+		return fatalWoundDamage(damage, bonus, sim.IsExecutePhase25())
 	})
 }

@@ -66,14 +66,16 @@ func (warrior *Warrior) knowsStance(stance Stance) bool {
 }
 
 // defaultStance is the stance a fight opens in when the inputs name none:
-// Battle Stance for Arms, Berserker Stance for Fury (Battle Stance until
-// Berserker Stance is learned at 30), Defensive Stance otherwise.
+// Battle Stance for Arms, Berserker Stance for Fury once Whirlwind is
+// learned at 36 (before that Berserker Stance, learned at 30, has no
+// ability of its own and costs Fury its Overpower), Defensive Stance
+// otherwise.
 func (warrior *Warrior) defaultStance() Stance {
 	switch warrior.PrimaryTalentTree {
 	case ArmsTree:
 		return BattleStance
 	case FuryTree:
-		if warrior.knowsStance(BerserkerStance) {
+		if warrior.knowsStance(BerserkerStance) && warrior.knowsWhirlwind() {
 			return BerserkerStance
 		}
 		return BattleStance

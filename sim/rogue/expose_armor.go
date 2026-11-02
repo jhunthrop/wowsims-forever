@@ -13,14 +13,21 @@ var exposeArmorLearnLevels = []int{14, 26, 36, 46, 56}
 // exposeArmorSpellID is Expose Armor's rank -> spell id, index 0 unused.
 var exposeArmorSpellID = [6]int32{0, 8647, 8649, 8650, 11197, 11198}
 
-// exposeArmorArpenPerCombo is Expose Armor's rank -> armor pen per combo
-// point, index 0 unused. Rank 2 has no tuned value in this file; it
-// carries rank 1's number forward until a real one is sourced.
-var exposeArmorArpenPerCombo = [6]float64{0, 80, 80, 210, 275, 340}
+// exposeArmorArpenPerCombo is Expose Armor's rank -> armor removed per
+// combo point, index 0 unused: Forever's, the raid rank table's amounts
+// (core.ExposeArmorRanks, Sunder Armor's per rank).
+var exposeArmorArpenPerCombo = [6]float64{
+	0,
+	core.ExposeArmorRanks[0].Amount,
+	core.ExposeArmorRanks[1].Amount,
+	core.ExposeArmorRanks[2].Amount,
+	core.ExposeArmorRanks[3].Amount,
+	core.ExposeArmorRanks[4].Amount,
+}
 
 func (rogue *Rogue) registerExposeArmorSpell() {
 	rogue.ExposeArmorAuras = rogue.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-		return core.ExposeArmorAura(target, 0)
+		return core.ExposeArmorAura(target)
 	})
 
 	rank := core.HighestRankAtLevel(exposeArmorLearnLevels, rogue.Level)

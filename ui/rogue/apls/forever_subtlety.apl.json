@@ -230,14 +230,67 @@
           }
         },
         "condition": {
-          "spellIsKnown": {
-            "spellId": {
-              "spellId": 16511
-            }
+          "and": {
+            "vals": [
+              {
+                "spellIsKnown": {
+                  "spellId": {
+                    "spellId": 16511
+                  }
+                }
+              },
+              {
+                "or": {
+                  "vals": [
+                    {
+                      "not": {
+                        "val": {
+                          "spellIsKnown": {
+                            "spellId": {
+                              "spellId": 14278
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGt",
+                        "lhs": {
+                          "spellTimeToReady": {
+                            "spellId": {
+                              "spellId": 14278
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "1s"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentEnergy": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "75"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         }
       },
-      "notes": "Hemorrhage as the builder: 145% weapon damage with a dagger, one combo point, and the debuff that lifts Rupture damage by 15% for 15 seconds. Gated on spellIsKnown so a build without the talent falls through to Sinister Strike."
+      "notes": "Hemorrhage as the builder: 145% weapon damage with a dagger, one combo point, and the debuff that lifts Rupture damage by 15% for 15 seconds. Gated on spellIsKnown so a build without the talent falls through to Sinister Strike. It holds back while Ghostly Strike is less than a second from ready (unless energy is at 75 or more), so energy pools to Ghostly Strike's 40 and it goes on cooldown."
     },
     {
       "action": {
