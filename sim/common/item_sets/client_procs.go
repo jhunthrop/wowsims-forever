@@ -17,7 +17,7 @@ type bonusModel func(bonusID int32) core.ApplyEffect
 // used for the melee energize and rage bonuses (Rogue Armor Energize,
 // Warrior's Resolve) before the client's rows were read. It is an
 // assumption, listed as such in the lane report.
-var unstatedProcRate = procRate{ppm: 1}
+var unstatedProcRate = procRate{ppm: core.UnstatedProcsPerMinute}
 
 // furiousStormVanillaSpell is the vanilla bonus whose proc The Furious
 // Storm and Crusader's Wrath rework: the same trigger spell, 27775 and
