@@ -262,8 +262,14 @@ func TestRageHauberksGrantThirtyRage(t *testing.T) {
 // Aegis of the Scarlet Commander: 1293539, 14 Holy (variance 0.2) on a block.
 func TestAegisOfTheScarletCommanderHitsBack(t *testing.T) {
 	_, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotOffHand, 7726)
-	if character.GetSpell(core.ActionID{SpellID: 1293539}) == nil {
+	spell := character.GetSpell(core.ActionID{SpellID: 1293539})
+	if spell == nil {
 		t.Fatal("no Scarlet Retribution spell")
+	}
+	// SpellCooldowns RecoveryTime 5000 on 1293539; Wowhead Forever's
+	// tooltip prints "5 sec cooldown".
+	if spell.CD.Timer == nil || spell.CD.Duration != 5*time.Second {
+		t.Errorf("Scarlet Retribution's cooldown is %v, want the client's 5 sec", spell.CD.Duration)
 	}
 }
 
