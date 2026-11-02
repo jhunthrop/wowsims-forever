@@ -119,12 +119,8 @@ func (warlock *Warlock) getCurseOfAgonyBaseConfig(rank int) core.SpellConfig {
 			if result.Landed() {
 				dot := spell.Dot(target)
 
-				if activeCurse := warlock.ActiveCurseAura.Get(target); activeCurse != nil && activeCurse != dot.Aura {
-					activeCurse.Deactivate(sim)
-				}
-
+				warlock.placeBane(sim, target, dot.Aura)
 				dot.Apply(sim)
-				warlock.ActiveCurseAura[target.UnitIndex] = dot.Aura
 			}
 			spell.DealOutcome(sim, result)
 		},
@@ -249,23 +245,13 @@ func (warlock *Warlock) newCurseOfTheElementsAura(rank int) func(*core.Unit) *co
 	multiplier := 1 + effect.damageTakenPct/100
 
 	return func(target *core.Unit) *core.Aura {
-		return target.GetOrRegisterAura(core.Aura{
+		aura := target.GetOrRegisterAura(core.Aura{
 			Label:    "Curse of the Elements-" + warlock.Label + strconv.Itoa(rank),
 			ActionID: core.ActionID{SpellID: CurseOfTheElementsSpellId[rank]},
 			Duration: curseOfTheElementsDuration,
-			OnGain: func(aura *core.Aura, sim *core.Simulation) {
-				for _, school := range curseOfTheElementsSchools {
-					aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[school] *= multiplier
-				}
-				aura.Unit.AddResistancesDynamic(sim, -effect.resistance)
-			},
-			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-				for _, school := range curseOfTheElementsSchools {
-					aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[school] /= multiplier
-				}
-				aura.Unit.AddResistancesDynamic(sim, effect.resistance)
-			},
 		})
+		core.CurseOfElementsEffects(aura, multiplier, effect.resistance)
+		return aura
 	}
 }
 
@@ -280,6 +266,12 @@ func (warlock *Warlock) registerCurseOfElementsSpell() {
 			Rank:          rank,
 			RequiredLevel: CurseOfTheElementsLevel[rank],
 			ManaCost:      core.ManaCostOptions{FlatCost: CurseOfTheElementsManaCost[rank]},
+			// The raid's curse and this warlock's are one debuff (they share
+			// core.CurseOfElementsEffects' categories); a curse already in
+			// force is not cast again.
+			ExtraCastCondition: func(_ *core.Simulation, target *core.Unit) bool {
+				return core.CurseOfElementsOn(target) == nil
+			},
 		}, warlock.newCurseOfTheElementsAura(rank)))
 	}
 }
@@ -471,13 +463,21 @@ func (warlock *Warlock) registerCurseOfDoomSpell() {
 			result := spell.CalcOutcome(sim, target, spell.OutcomeMagicHitNoHitCounter)
 			if result.Landed() {
 				dot := spell.Dot(target)
-				if activeCurse := warlock.ActiveCurseAura.Get(target); activeCurse != nil && activeCurse != dot.Aura {
-					activeCurse.Deactivate(sim)
-				}
-
+				warlock.placeBane(sim, target, dot.Aura)
 				dot.Apply(sim)
-				warlock.ActiveCurseAura[target.UnitIndex] = dot.Aura
 			}
 		},
 	})
+}
+
+// placeBane puts a bane in the target's bane slot, removing the warlock's
+// other bane there. Forever split the old curses: "Only one Bane per Warlock
+// can be active on any one target" (Agony, Doom, Havoc) beside "Only one Curse
+// per Warlock" (Elements, Recklessness, Weakness, Tongues, Exhaustion), so a
+// bane never removes a curse.
+func (warlock *Warlock) placeBane(sim *core.Simulation, target *core.Unit, bane *core.Aura) {
+	if active := warlock.ActiveBaneAura.Get(target); active != nil && active != bane {
+		active.Deactivate(sim)
+	}
+	warlock.ActiveBaneAura[target.UnitIndex] = bane
 }

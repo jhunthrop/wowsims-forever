@@ -30,6 +30,14 @@ func newBareWarlockForDamageTest(t *testing.T) (*core.Simulation, *Warlock, *cor
 // own (aura-free) talent spells, does not work here.
 func newWarlockForDamageTest(t *testing.T, talents string) (*core.Simulation, *Warlock, *core.Unit) {
 	t.Helper()
+	return newWarlockWithDebuffsForTest(t, talents, core.FullBuffs.Debuffs)
+}
+
+// newWarlockWithDebuffsForTest is newWarlockForDamageTest with the raid's
+// debuffs on the target given, for a test that must see the target without
+// one of them (the raid's own Curse of the Elements, say).
+func newWarlockWithDebuffsForTest(t *testing.T, talents string, debuffs *proto.Debuffs) (*core.Simulation, *Warlock, *core.Unit) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
@@ -52,7 +60,7 @@ func newWarlockForDamageTest(t *testing.T, talents string) (*core.Simulation, *W
 			},
 		},
 	)
-	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
+	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, debuffs)
 
 	sim := core.NewSim(&proto.RaidSimRequest{
 		Raid: raid,
