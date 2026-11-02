@@ -200,6 +200,16 @@ var (
 		{SpellID: 25359, Level: 60, Amount: 89, AhnQiraj: true},
 	}
 
+	// Mana Spring Totem (5675, 10495, 10496, 10497; aura spells 5677,
+	// 10491, 10493, 10494, aura 24 every 2 s): the mana each pulse
+	// restores. No Ahn'Qiraj rank exists.
+	ManaSpringRanks = BuffRanks{
+		{SpellID: 5675, Level: 26, Amount: 4},
+		{SpellID: 10495, Level: 36, Amount: 6},
+		{SpellID: 10496, Level: 46, Amount: 8},
+		{SpellID: 10497, Level: 56, Amount: 10},
+	}
+
 	BattleShoutRankTable = BuffRanks{
 		{SpellID: 6673, Level: 1, Amount: 9, PerLevel: 0.3, MaxLevel: 11},
 		{SpellID: 5242, Level: 12, Amount: 21, PerLevel: 0.3, MaxLevel: 21},
@@ -261,4 +271,13 @@ func MarkOfTheWildStats(level int) stats.Stats {
 		result[stat] = MarkOfTheWildResistRanks.At(level)
 	}
 	return result
+}
+
+// manaSpringPulsesPerFive is Mana Spring's 2 s pulse read as mp5.
+const manaSpringPulsesPerFive = 2.5
+
+// ManaSpringMP5 is the raid's Mana Spring at a character level: the rank a
+// shaman of that level has, its 2 s pulse as mana per 5 s.
+func ManaSpringMP5(level int) float64 {
+	return ManaSpringRanks.At(level) * manaSpringPulsesPerFive
 }

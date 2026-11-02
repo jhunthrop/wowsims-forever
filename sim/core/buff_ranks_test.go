@@ -208,3 +208,18 @@ func TestEarthAndAirTotemsFollowTheClientRanks(t *testing.T) {
 		}
 	}
 }
+
+// Mana Spring Totem (5675, 10495, 10496, 10497 at levels 26, 36, 46, 56;
+// their auras 5677, 10491, 10493, 10494 restore 4, 6, 8 and 10 mana every
+// 2 s): 10, 15, 20 and 25 mana per 5 s. There is no Ahn'Qiraj rank. The
+// engine gave every level rank 4's 25.
+func TestManaSpringFollowsTheClientRanks(t *testing.T) {
+	for _, c := range []struct {
+		level int
+		want  float64
+	}{{25, 0}, {26, 10}, {35, 10}, {36, 15}, {46, 20}, {55, 20}, {56, 25}, {60, 25}} {
+		if got := ManaSpringMP5(c.level); got != c.want {
+			t.Errorf("Mana Spring at level %d = %v mp5, want %v", c.level, got, c.want)
+		}
+	}
+}

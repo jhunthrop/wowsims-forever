@@ -32,3 +32,19 @@ func TestBlessingOfWisdomAndManaSpringBothApply(t *testing.T) {
 		t.Error("Mana Spring alone added no MP5")
 	}
 }
+
+// The raid's Mana Spring is the rank a shaman of the player's level has:
+// 15 mp5 at 40 (rank 2, 10491), not the level-56 rank 4's 25.
+func TestManaSpringGivesTheRankOfTheLevel(t *testing.T) {
+	mp5 := func(spring bool) float64 {
+		raidBuffs := &proto.RaidBuffs{}
+		if spring {
+			raidBuffs.ManaSpringTotem = proto.TristateEffect_TristateEffectRegular
+		}
+		_, final := firstPlayerStats(t, raidBuffs, priestPlayer(40))
+		return final[stats.MP5]
+	}
+	if got := mp5(true) - mp5(false); got != 15 {
+		t.Errorf("Mana Spring at level 40 adds %.1f mp5, want 15", got)
+	}
+}

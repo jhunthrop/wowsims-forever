@@ -23,7 +23,6 @@ const (
 	CommandingShout
 	DivineSpirit
 	GraceOfAir
-	ManaSpring
 	MarkOfTheWild
 	PowerWordFortitude
 	StrengthOfEarth
@@ -79,9 +78,6 @@ var BuffSpellValues = map[BuffName]stats.Stats{
 	},
 	FrostResistanceTotem: {
 		stats.FrostResistance: 60,
-	},
-	ManaSpring: {
-		stats.MP5: 25,
 	},
 	NatureResistanceTotem: {
 		stats.NatureResistance: 60,
@@ -356,7 +352,7 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 	// Mana Spring is a shaman's totem, not a blessing: it stacks with
 	// Blessing of Wisdom (both classes are on both factions in Forever).
 	if raidBuffs.ManaSpringTotem > 0 {
-		updateStats := BuffSpellValues[ManaSpring]
+		updateStats := stats.Stats{stats.MP5: ManaSpringMP5(int(character.Level))}
 		if raidBuffs.ManaSpringTotem == proto.TristateEffect_TristateEffectImproved {
 			updateStats = updateStats.Multiply(1.25)
 		}
