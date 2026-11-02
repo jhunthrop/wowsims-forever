@@ -51,18 +51,12 @@ const (
 
 // Stats from buffs pre-tristate buffs
 var BuffSpellValues = map[BuffName]stats.Stats{
-	DivineSpirit: {
-		stats.Spirit: 40,
-	},
 	AspectOfTheWild: {
 		stats.NatureResistance: 60,
 	},
 	HornOfLordaeron: {
 		stats.Strength: TernaryFloat64(IncludeAQ, 89, 70.15),
 		stats.Agility:  TernaryFloat64(IncludeAQ, 89, 70.15),
-	},
-	BloodPact: {
-		stats.Stamina: 42,
 	},
 	CommandingShout: {
 		stats.Stamina: 42,
@@ -81,9 +75,6 @@ var BuffSpellValues = map[BuffName]stats.Stats{
 	},
 	NatureResistanceTotem: {
 		stats.NatureResistance: 60,
-	},
-	PowerWordFortitude: {
-		stats.Stamina: 54,
 	},
 	ShadowProtection: {
 		stats.ShadowResistance: 60,
@@ -237,11 +228,11 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 		ThornsAura(character, GetTristateValueInt32(raidBuffs.Thorns, 0, 3))
 	}
 
-	if raidBuffs.MoonkinAura {
+	if raidBuffs.MoonkinAura && MoonkinAuraReaches(character.Level) {
 		character.AddStat(stats.Crit, 3*CritRatingPerCritChance)
 	}
 
-	if raidBuffs.LeaderOfThePack {
+	if raidBuffs.LeaderOfThePack && LeaderOfThePackReaches(character.Level) {
 		character.AddStats(stats.Stats{
 			stats.Crit: 3 * CritRatingPerCritChance,
 		})
@@ -256,7 +247,7 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 	}
 
 	if raidBuffs.PowerWordFortitude > 0 {
-		updateStats := BuffSpellValues[PowerWordFortitude]
+		updateStats := stats.Stats{stats.Stamina: PowerWordFortitudeRanks.At(int(character.Level))}
 		if raidBuffs.PowerWordFortitude == proto.TristateEffect_TristateEffectImproved {
 			updateStats = updateStats.Multiply(1.3).Floor()
 		}
@@ -266,7 +257,7 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 	}
 
 	if raidBuffs.BloodPact > 0 {
-		updateStats := BuffSpellValues[BloodPact]
+		updateStats := stats.Stats{stats.Stamina: BloodPactRanks.At(int(character.Level))}
 		if raidBuffs.BloodPact == proto.TristateEffect_TristateEffectImproved {
 			updateStats = updateStats.Multiply(1.3).Floor()
 		}
@@ -284,7 +275,7 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 	}
 
 	if raidBuffs.DivineSpirit {
-		character.AddStats(BuffSpellValues[DivineSpirit])
+		character.AddStats(stats.Stats{stats.Spirit: DivineSpiritRanks.At(int(character.Level))})
 	} else if raidBuffs.ScrollOfSpirit {
 		character.AddStats(BuffSpellValues[ScrollOfSpirit])
 	}
@@ -1724,6 +1715,9 @@ func weaponTotemReaches(character *Character, disablingImbue proto.WeaponImbue) 
 const WindfuryBuffDuration = time.Second
 
 var (
+	// WindfuryTotemLevel is the level each totem rank (8512, 10613, 10614)
+	// is learned at: below 32 a raid has no Windfury Totem.
+	WindfuryTotemLevel  = [WindfuryRanks + 1]int{0, 32, 42, 52}
 	WindfuryBuffSpellId = [WindfuryRanks + 1]int32{0, 8516, 10608, 10610}
 	// Attack power by rank, source: 1.60.1.70009 client spells 8516, 10608, 10610.
 	WindfuryBuffBonusAP = [WindfuryRanks + 1]float64{0, 95, 179, 246}
@@ -1733,8 +1727,19 @@ func GetWindfuryAP(aura *Aura, rank int32) float64 {
 	return WindfuryBuffBonusAP[rank]
 }
 
+// WindfuryTotemRankAtLevel is the totem rank a raid of this level has; 0
+// before the first.
+func WindfuryTotemRankAtLevel(level int32) int32 {
+	return int32(HighestRankAtLevel(WindfuryTotemLevel[1:], level))
+}
+
+// ApplyWindfury puts the Windfury Totem's proc on the character at the rank
+// its level has learned, and nothing below the first rank.
 func ApplyWindfury(character *Character) *Aura {
-	rank := int32(3)
+	rank := WindfuryTotemRankAtLevel(character.Level)
+	if rank == 0 {
+		return nil
+	}
 	spellId := WindfuryBuffSpellId[rank]
 	buffActionID := ActionID{SpellID: spellId}
 

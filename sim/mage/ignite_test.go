@@ -22,6 +22,7 @@ func newIgniteMageSim(t *testing.T) (*core.Simulation, *Mage) {
 	t.Helper()
 	talentsStr := talentStringWithRank(t, ForeverFrostTalents, "ignite", 5)
 	talentsStr = talentStringWithRank(t, talentsStr, "fire_power", 5)
+	talentsStr = talentStringWithRank(t, talentsStr, "improved_scorch", 3)
 
 	player := core.WithSpec(
 		&proto.Player{
@@ -123,8 +124,11 @@ func TestIgniteTicksCritWithoutFeedingIgnite(t *testing.T) {
 func TestIgniteTicksSkipTheTargetsDamageTakenModifiers(t *testing.T) {
 	sim, built := newIgniteMageSim(t)
 	target := sim.Encounter.TargetUnits[0]
-	core.ImprovedScorchAura(target).Activate(sim)
-	core.ImprovedScorchAura(target).SetStacks(sim, 5)
+	// The mage's own Fire Vulnerability: Forever's is the caster's own, so
+	// the raid's Improved Scorch flag puts none on the target.
+	vulnerability := built.ImprovedScorchAuras.Get(target)
+	vulnerability.Activate(sim)
+	vulnerability.SetStacks(sim, 5)
 
 	attackTable := built.AttackTables[target.UnitIndex][built.igniteTick.CastType]
 	if got := built.igniteTick.TargetDamageMultiplier(attackTable, true); got != 1 {

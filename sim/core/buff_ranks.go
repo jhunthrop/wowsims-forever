@@ -210,6 +210,40 @@ var (
 		{SpellID: 10497, Level: 56, Amount: 10},
 	}
 
+	// Power Word: Fortitude (1243, 1244, 1245, 2791, 10937, 10938; aura
+	// 29 Stamina): Forever folded Improved Power Word: Fortitude's 30%
+	// into the ranks (Era's 54 is 70). Prayer of Fortitude (21562, 21564)
+	// carries ranks 5 and 6's amounts. No Ahn'Qiraj rank.
+	PowerWordFortitudeRanks = BuffRanks{
+		{SpellID: 1243, Level: 1, Amount: 4},
+		{SpellID: 1244, Level: 12, Amount: 10},
+		{SpellID: 1245, Level: 24, Amount: 26},
+		{SpellID: 2791, Level: 36, Amount: 42},
+		{SpellID: 10937, Level: 48, Amount: 56},
+		{SpellID: 10938, Level: 60, Amount: 70},
+	}
+
+	// Divine Spirit (14752, 14818, 14819, 27841; aura 29 Spirit): a
+	// trainer spell from level 30 in Forever. Prayer of Spirit (27681)
+	// carries rank 4's amount.
+	DivineSpiritRanks = BuffRanks{
+		{SpellID: 14752, Level: 30, Amount: 17},
+		{SpellID: 14818, Level: 40, Amount: 23},
+		{SpellID: 14819, Level: 50, Amount: 33},
+		{SpellID: 27841, Level: 60, Amount: 40},
+	}
+
+	// Blood Pact, the Imp's party Stamina (6307, 7804, 7805, 11766,
+	// 11767; aura 29 Stamina with points per level to SpellLevels
+	// MaxLevel): rank 5 is 54 at 60.
+	BloodPactRanks = BuffRanks{
+		{SpellID: 6307, Level: 4, Amount: 3, PerLevel: 0.1, MaxLevel: 14},
+		{SpellID: 7804, Level: 14, Amount: 9, PerLevel: 0.3, MaxLevel: 24},
+		{SpellID: 7805, Level: 26, Amount: 21, PerLevel: 0.4, MaxLevel: 36},
+		{SpellID: 11766, Level: 38, Amount: 35, PerLevel: 0.4, MaxLevel: 48},
+		{SpellID: 11767, Level: 50, Amount: 49, PerLevel: 0.5, MaxLevel: 60},
+	}
+
 	BattleShoutRankTable = BuffRanks{
 		{SpellID: 6673, Level: 1, Amount: 9, PerLevel: 0.3, MaxLevel: 11},
 		{SpellID: 5242, Level: 12, Amount: 21, PerLevel: 0.3, MaxLevel: 21},
@@ -272,6 +306,23 @@ func MarkOfTheWildStats(level int) stats.Stats {
 	}
 	return result
 }
+
+// Talent auras a raid member can only bring from the level its talent tier
+// opens (10 + 5 x tier in Forever's trees): Leader of the Pack (17007) is
+// Feral tier 4, Moonkin Form (24858, whose Moonkin Aura is 24907) Balance
+// tier 6.
+const (
+	LeaderOfThePackLevel = 30
+	MoonkinAuraLevel     = 40
+)
+
+// LeaderOfThePackReaches says whether a raid of this level can carry Leader
+// of the Pack.
+func LeaderOfThePackReaches(level int32) bool { return level >= LeaderOfThePackLevel }
+
+// MoonkinAuraReaches says whether a raid of this level can carry Moonkin
+// Aura.
+func MoonkinAuraReaches(level int32) bool { return level >= MoonkinAuraLevel }
 
 // manaSpringPulsesPerFive is Mana Spring's 2 s pulse read as mp5.
 const manaSpringPulsesPerFive = 2.5

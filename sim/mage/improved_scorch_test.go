@@ -56,25 +56,11 @@ func TestOwnAndRaidImprovedScorchAreOneAura(t *testing.T) {
 	}
 }
 
-// The raid debuff is a full-uptime stand-in for a raid mage: five stacks
-// within the ramp-up, then held to the end of the fight.
-func TestRaidImprovedScorchReachesFiveStacksAndStays(t *testing.T) {
-	sim, _ := newMageWithDebuffs(t, 60, improvedScorchTalents(t), core.FullBuffs.Debuffs)
-	aura := core.ImprovedScorchAura(sim.Encounter.TargetUnits[0])
-
-	for _, at := range []time.Duration{raidScorchRampUp, 2 * improvedScorchDuration, 100 * time.Second} {
-		stepUntil(sim, at)
-		if !aura.IsActive() || aura.GetStacks() != improvedScorchMaxStacks {
-			t.Fatalf("at %v the raid debuff has active=%v stacks=%d, want active with %d",
-				at, aura.IsActive(), aura.GetStacks(), improvedScorchMaxStacks)
-		}
-	}
-}
-
-// Five stacks make Fire damage taken 15 percent higher; with the raid
-// debuff the engine's number must be exactly that, on top of whatever
-// else the target carries.
-func TestRaidImprovedScorchRaisesFireDamageTakenByFifteenPercent(t *testing.T) {
+// Forever's Fire Vulnerability (22959, aura 270) is Fire damage taken from
+// the mage who applied it, so another raid mage's stacks give this one
+// nothing: the raid's Improved Scorch flag leaves the target's Fire damage
+// taken where it was, and the mage keeps its own up with Scorch.
+func TestRaidImprovedScorchGivesThisMageNothing(t *testing.T) {
 	without, _ := newMageWithDebuffs(t, 60, improvedScorchTalents(t), debuffsWithoutImprovedScorch())
 	with, _ := newMageWithDebuffs(t, 60, improvedScorchTalents(t), core.FullBuffs.Debuffs)
 	stepUntil(without, raidScorchRampUp)
@@ -82,9 +68,8 @@ func TestRaidImprovedScorchRaisesFireDamageTakenByFifteenPercent(t *testing.T) {
 
 	got := fireDamageTakenMultiplier(with.Encounter.TargetUnits[0]) /
 		fireDamageTakenMultiplier(without.Encounter.TargetUnits[0])
-	want := 1 + improvedScorchMaxStacks*improvedScorchPerStack
-	if math.Abs(got-want) > 1e-9 {
-		t.Errorf("Fire damage taken ratio with five stacks = %v, want %v", got, want)
+	if math.Abs(got-1) > 1e-9 {
+		t.Errorf("Fire damage taken ratio with the raid's Improved Scorch = %v, want 1", got)
 	}
 }
 

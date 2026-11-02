@@ -205,6 +205,11 @@ type Shaman struct {
 	// manaSpringSetBonus is the fraction of extra mana a Mana Spring
 	// totem restores (the Earthshatterer 4-piece).
 	manaSpringSetBonus float64
+
+	// raidManaSpringMP5 is the raid buffs' Mana Spring Totem, which the
+	// shaman stands in already: its own totem adds only what it gives
+	// beyond that (two Mana Spring auras do not stack).
+	raidManaSpringMP5 float64
 }
 
 // Implemented by each Shaman spec.
@@ -219,8 +224,14 @@ func (shaman *Shaman) GetCharacter() *core.Character {
 	return &shaman.Character
 }
 
-func (shaman *Shaman) AddRaidBuffs(_ *proto.RaidBuffs) {
-	// Buffs are handled explicitly through APLs now
+func (shaman *Shaman) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
+	// Buffs are handled explicitly through APLs now. The raid's Mana Spring
+	// is noted: the shaman's own totem does not stack with it.
+	shaman.raidManaSpringMP5 = 0
+	if raidBuffs.ManaSpringTotem != proto.TristateEffect_TristateEffectMissing {
+		shaman.raidManaSpringMP5 = core.ManaSpringMP5(int(shaman.Level)) *
+			core.TernaryFloat64(raidBuffs.ManaSpringTotem == proto.TristateEffect_TristateEffectImproved, 1.25, 1)
+	}
 }
 
 func (shaman *Shaman) Initialize() {
