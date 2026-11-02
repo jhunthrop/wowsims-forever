@@ -181,3 +181,30 @@ func TestHeartOfTheLionAttackPowerFollowsClientRule(t *testing.T) {
 		}
 	}
 }
+
+// Strength of Earth and Grace of Air Totem: Forever retuned both. The
+// totems' auras state Strength 7/14/25/42 at levels 10/24/38/52 and 53 at
+// 60 (8076, 8162, 8163, 10441, 25362), and Agility 49/77 at 42/56 and 89 at
+// 60 (8836, 10626, 25360); the level-60 ranks are the Ahn'Qiraj books
+// (25361, 25359). Wowhead Forever's 10442 reads "by 42" and 10627 "by 77".
+// The engine gave every level Era's 61 Strength and 67 Agility.
+func TestEarthAndAirTotemsFollowTheClientRanks(t *testing.T) {
+	strength := []struct {
+		level int
+		want  float64
+	}{{9, 0}, {10, 7}, {24, 14}, {38, 25}, {51, 25}, {52, 42}, {60, TernaryFloat64(IncludeAQ, 53, 42)}}
+	for _, c := range strength {
+		if got := StrengthOfEarthRanks.At(c.level); got != c.want {
+			t.Errorf("Strength of Earth at level %d = %v, want %v", c.level, got, c.want)
+		}
+	}
+	agility := []struct {
+		level int
+		want  float64
+	}{{41, 0}, {42, 49}, {55, 49}, {56, 77}, {60, TernaryFloat64(IncludeAQ, 89, 77)}}
+	for _, c := range agility {
+		if got := GraceOfAirRanks.At(c.level); got != c.want {
+			t.Errorf("Grace of Air at level %d = %v, want %v", c.level, got, c.want)
+		}
+	}
+}
