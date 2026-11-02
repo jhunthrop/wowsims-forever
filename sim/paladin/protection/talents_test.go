@@ -711,3 +711,32 @@ func TestManaGainThreatIgnoresRighteousFury(t *testing.T) {
 		t.Errorf("mana gains of %.0f made %.1f threat under Righteous Fury, want %.1f (0.5 a mana, unmodified)", gained, got, want)
 	}
 }
+
+// Judgement of Fury (20414 and its ranks) carries the same rows round 6
+// moved Judgement of Righteousness and Command to the melee table with:
+// SpellCategories DefenseType 2 (row 76345) and SpellMisc Attributes_0
+// 0x250000, which holds 0x200000, no active defense. It rolled the spell
+// table instead: about 13% misses and 1.5x crits.
+func TestJudgementOfFuryRollsTheMeleeTableWithoutActiveDefenses(t *testing.T) {
+	f := shortRun{}.start(t)
+	judgement := f.spellOf(t, spellJudgementOfFury)
+	if judgement.DefenseType != core.DefenseTypeMelee {
+		t.Errorf("Judgement of Fury defense type = %v, want melee", judgement.DefenseType)
+	}
+	misses := 0
+	const casts = 4000
+	for i := 0; i < casts; i++ {
+		judgement.ApplyEffects(f.sim, f.boss, judgement)
+	}
+	for _, target := range judgement.SpellMetrics {
+		misses += int(target.Misses)
+		if target.Dodges+target.Parries+target.Blocks > 0 {
+			t.Errorf("Judgement of Fury was dodged, parried or blocked: %+v", target)
+		}
+	}
+	// The boss is three levels up: 9% melee misses less Precision, against
+	// 17% on the spell table.
+	if rate := float64(misses) / casts; rate > 0.11 {
+		t.Errorf("Judgement of Fury misses %.1f%%, want the melee table's (at most 9%%)", 100*rate)
+	}
+}

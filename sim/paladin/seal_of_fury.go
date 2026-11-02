@@ -181,7 +181,9 @@ func (paladin *Paladin) registerSealOfFuryRank(rank int, config sealOfFuryRank, 
 }
 
 // registerJudgementOfFury registers the judgement Seal of Fury resolves
-// to. Like Judgement of Righteousness it rolls on the spell hit table.
+// to. Like Judgement of Righteousness it rolls the melee table with no
+// active defense: SpellCategories DefenseType 2 and SpellMisc Attributes_0
+// 0x200000 on every rank (1.60.1.70707).
 func (paladin *Paladin) registerJudgementOfFury(rank int, config sealOfFuryRank) *core.Spell {
 	damage := JudgementOfFuryDamage[rank]
 	casterLevel := int(paladin.Level)
@@ -191,7 +193,7 @@ func (paladin *Paladin) registerJudgementOfFury(rank int, config sealOfFuryRank)
 		ClassSpellMask: PaladinSpellMaskJudgementOfFury,
 		ActionID:       core.ActionID{SpellID: config.judgeSpell},
 		SpellSchool:    core.SpellSchoolHoly,
-		DefenseType:    core.DefenseTypeMagic,
+		DefenseType:    core.DefenseTypeMelee,
 		ProcMask:       core.ProcMaskSpellDamage,
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagSuppressWeaponProcs | core.SpellFlagSuppressEquipProcs | core.SpellFlagBinary,
 
@@ -206,7 +208,7 @@ func (paladin *Paladin) registerJudgementOfFury(rank int, config sealOfFuryRank)
 		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
+			spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMeleeSpecialNoBlockDodgeParry)
 		},
 	})
 }
