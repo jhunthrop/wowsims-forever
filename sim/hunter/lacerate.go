@@ -48,7 +48,10 @@ func (hunter *Hunter) getLacerateConfig(rank int) core.SpellConfig {
 			return hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance
 		},
 
+		// Lacerate's class flag (mask 1 bit 4096) is in both Savage
+		// Strikes' and Predator's Edge's masks.
 		BonusCritRating:  hunter.savageStrikesCritRating(),
+		CritDamageBonus:  hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		ClientBaseDamage: damage.Range(casterLevel),

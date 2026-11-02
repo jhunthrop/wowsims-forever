@@ -217,16 +217,22 @@ func TestSetupOverRankDoesNotPanic(t *testing.T) {
 
 // TestHackAndSlashDaggerGrantsCrit checks the dagger/fist branch (a
 // direct AddStat, no deferred spell-pointer read needed) on the
-// dagger-equipped combat_backstab_prebis set.
+// dagger-equipped combat_backstab_prebis set. The client row (13960) is
+// a server dummy; its text gives the crit to "your melee weapon
+// attacks", so it is melee-table crit and must not reach the poisons
+// or weapon procs, which roll spell crit.
 func TestHackAndSlashDaggerGrantsCrit(t *testing.T) {
 	talentsStr := talentStringWithRank(t, zeroRogueTalents, "hack_and_slash", 5)
 	withTalent := buildRogueForTalentTest(t, talentsStr, "combat_backstab_prebis").GetRogue()
 	withoutTalent := buildRogueForTalentTest(t, zeroRogueTalents, "combat_backstab_prebis").GetRogue()
 
 	wantDelta := 5.0 * core.CritRatingPerCritChance // rank 5: 1%/rank
-	got := withTalent.GetStat(stats.Crit) - withoutTalent.GetStat(stats.Crit)
+	got := withTalent.GetStat(stats.MeleeCrit) - withoutTalent.GetStat(stats.MeleeCrit)
 	if math.Abs(got-wantDelta) > 1e-9 {
-		t.Errorf("Crit stat delta from Hack and Slash rank 5 = %v, want %v", got, wantDelta)
+		t.Errorf("MeleeCrit delta from Hack and Slash rank 5 = %v, want %v", got, wantDelta)
+	}
+	if every := withTalent.GetStat(stats.Crit) - withoutTalent.GetStat(stats.Crit); every != 0 {
+		t.Errorf("Hack and Slash raised every-table crit by %v; poisons must not take it", every)
 	}
 }
 

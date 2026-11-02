@@ -662,8 +662,11 @@ func (rogue *Rogue) applyHackAndSlash() {
 		rogue.AddStat(stats.ArmorPenetration, armorPenRating)
 	}
 
+	// The client row (13960) is a server dummy; its text gives the crit
+	// to "your melee weapon attacks", so it is melee-table crit and stays
+	// off the poisons and weapon procs, which roll spell crit.
 	if isDaggerOrFist(mh) {
-		rogue.AddStat(stats.Crit, critBonus)
+		rogue.AddStat(stats.MeleeCrit, critBonus)
 		if !isDaggerOrFist(oh) {
 			// MH grant above also raised the (shared) OH crit chance; the
 			// default character pane shows MH's crit only, same

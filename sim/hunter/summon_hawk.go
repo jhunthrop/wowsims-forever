@@ -77,9 +77,11 @@ func (hunter *Hunter) getSummonHawkConfig(rank int, timer *core.Timer) core.Spel
 			return hunter.DistanceFromTarget >= core.MinRangedAttackDistance
 		},
 
-		CritDamageBonus: hunter.mortalShots(),
-
-		DamageMultiplier: 1,
+		// The hawk's class flag (mask 2 bit 8192) is in Ferocity's mask,
+		// not Mortal Shots'; Ferocity and Unleashed Fury both read "your
+		// pets and hawks".
+		BonusCritRating:  core.CritRatingPerCritChance * ferocityCritPerRank * float64(hunter.Talents.Ferocity),
+		DamageMultiplier: 1 + unleashedFuryPerRank*float64(hunter.Talents.UnleashedFury),
 		ThreatMultiplier: 1,
 		ClientBaseDamage: flatDamage.Range(casterLevel),
 

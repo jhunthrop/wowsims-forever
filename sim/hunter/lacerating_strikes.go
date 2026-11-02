@@ -40,6 +40,10 @@ func (hunter *Hunter) registerLaceratingStrikesDot() {
 		// modifiers, so its ticks skip them (as Ignite's do).
 		Flags: core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell | core.SpellFlagIgnoreTargetModifiers,
 
+		// The bleed (1310536) carries Lacerate's class flag, mask 1 bit
+		// 4096, which Savage Strikes and Predator's Edge both name.
+		BonusCritRating:  hunter.savageStrikesCritRating(),
+		CritDamageBonus:  hunter.predatorsEdgeCritDamage(),
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 

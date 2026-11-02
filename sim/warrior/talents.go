@@ -439,12 +439,14 @@ func (warrior *Warrior) applyWeaponmaster() {
 
 	// Axe/Polearm: the character panel shows main-hand critical strike
 	// chance only, so a main-hand-only match adds the stat and takes it
-	// back off off-hand swings.
+	// back off off-hand swings. The client row (1290261) is a server
+	// dummy whose text gives the crit to "your melee weapon attacks", so
+	// it is melee-table crit and stays off the spell-table weapon procs.
 	switch warrior.GetProcMaskForTypes(proto.WeaponType_WeaponTypeAxe, proto.WeaponType_WeaponTypePolearm) {
 	case core.ProcMaskMelee:
-		warrior.AddStat(stats.Crit, core.CritRatingPerCritChance*float64(points))
+		warrior.AddStat(stats.MeleeCrit, core.CritRatingPerCritChance*float64(points))
 	case core.ProcMaskMeleeMH:
-		warrior.AddStat(stats.Crit, core.CritRatingPerCritChance*float64(points))
+		warrior.AddStat(stats.MeleeCrit, core.CritRatingPerCritChance*float64(points))
 		warrior.OnSpellRegistered(func(spell *core.Spell) {
 			if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
 				spell.BonusCritRating -= core.CritRatingPerCritChance * float64(points)

@@ -35,7 +35,10 @@ type petFamilyTable struct {
 // petPeriodicAbility is a family ability that deals periodic damage.
 type petPeriodicAbility struct {
 	petFamilyTable
-	school     core.SpellSchool
+	school core.SpellSchool
+	// defense is the client's SpellCategories.DefenseType when it differs
+	// from the school's default (melee for physical, magic for Nature).
+	defense    core.DefenseType
 	damage     [][]float64
 	ticks      int32
 	tickLength time.Duration
@@ -87,6 +90,7 @@ var (
 			cooldownMS: WebCooldownMS[:],
 		},
 		school:     core.SpellSchoolNature,
+		defense:    core.DefenseTypeRanged, // SpellCategories DefenseType 3
 		damage:     WebBaseDamage[:],
 		ticks:      4, // 4 s over 1 s
 		tickLength: time.Second,
@@ -206,7 +210,11 @@ func (hp *HunterPet) newPeriodicAbility(ability petPeriodicAbility) *core.Spell 
 	tickDamage := ability.damage[rank][0]
 	outcome := func(spell *core.Spell) core.OutcomeApplier { return spell.OutcomeMeleeSpecialHitNoHitCounter }
 	defense := core.DefenseTypeMelee
-	if ability.school == core.SpellSchoolNature {
+	switch {
+	case ability.defense == core.DefenseTypeRanged:
+		outcome = func(spell *core.Spell) core.OutcomeApplier { return spell.OutcomeRangedHitNoHitCounter }
+		defense = core.DefenseTypeRanged
+	case ability.school == core.SpellSchoolNature:
 		outcome = func(spell *core.Spell) core.OutcomeApplier { return spell.OutcomeMagicHit }
 		defense = core.DefenseTypeMagic
 	}
