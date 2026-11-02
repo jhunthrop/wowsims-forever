@@ -103,13 +103,6 @@ func (shaman *Shaman) applyRestorationTalents() {
 	}
 }
 
-// purificationHealingModifier is Purification as a fraction, for the
-// Healing Stream Totem's heal, which is not a cast spell the class mask
-// reaches.
-func (shaman *Shaman) purificationHealingModifier() float64 {
-	return float64(purificationPercentPerRank*shaman.Talents.Purification) / 100
-}
-
 // restorativeHealingStreamModifier is Restorative Totems' share of the
 // Healing Stream Totem's effect, as a fraction.
 func (shaman *Shaman) restorativeHealingStreamModifier() float64 {

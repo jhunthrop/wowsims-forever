@@ -136,7 +136,7 @@
                   },
                   "rhs": {
                     "const": {
-                      "val": "0.3"
+                      "val": "0.75"
                     }
                   }
                 }
@@ -166,7 +166,7 @@
           }
         }
       },
-      "notes": "Swiftmend as the last-ditch button under 30%: it eats the tank's Rejuvenation or Regrowth with the least time left for its whole heal at once, paced like Healing Touch."
+      "notes": "Swiftmend whenever the tank is under 75%, paced like Healing Touch. It heals for the whole of the tank's Regrowth (or his Rejuvenation when no Regrowth is up) and leaves the effect ticking: Forever's Swiftmend does not use the heal over time up, so it is a heal of its own on a 15 second cooldown, not a last-ditch trade."
     },
     {
       "action": {

@@ -17,15 +17,22 @@ const (
 )
 
 // registerSwiftmendSpell registers Swiftmend (spell 18562), when the druid
-// has the talent: "Instantly heals a target with an active Rejuvenation or
-// Regrowth effect for an amount equal to the full duration of the periodic
-// effect of one of those spells", which is consumed.
+// has the talent: "Instantly heals a target with your active Rejuvenation
+// or Regrowth effect for an amount equal to the full duration of the
+// periodic effect of the consumed spell."
 //
 // The heal is what the effect's snapshot says it would have landed in all:
 // its tick times its tick count, already carrying the caster's healing
-// multipliers, so the spell skips them a second time. Which effect it eats
-// when both are up is not stated; the one with the least time left goes, so
-// the longer, more valuable one stays.
+// multipliers, so the spell skips them a second time. In the beta logs
+// (foreverlogs.gg reports 2747, 2752 and 2760, levels 25 and 35, read
+// 2026-11-02) every non-critical Swiftmend is exactly 4 Rejuvenation or 7
+// Regrowth ticks of the effect on the target.
+//
+// Forever does not consume the effect, whatever the text says: 55 of the 57
+// effects up at a logged Swiftmend ticked on to their natural end, and the
+// client row has one effect, the heal, with nothing that removes an aura.
+// With both up, all 16 logged Swiftmends healed for the Regrowth, whichever
+// had less time left.
 func (druid *Druid) registerSwiftmendSpell() {
 	if !druid.Talents.Swiftmend {
 		return
@@ -60,25 +67,23 @@ func (druid *Druid) registerSwiftmendSpell() {
 			source := druid.swiftmendSource(sim, target)
 			total := source.SnapshotBaseDamage * source.SnapshotAttackerMultiplier * float64(source.NumberOfTicks)
 			spell.CalcAndDealHealing(sim, target, total, spell.OutcomeHealingCrit)
-			source.Cancel(sim)
 		},
 	})
 }
 
-// swiftmendSource is the active Rejuvenation or Regrowth on the target that
-// Swiftmend would consume, or nil when there is none.
-func (druid *Druid) swiftmendSource(sim *core.Simulation, target *core.Unit) *core.Dot {
-	var source *core.Dot
-	for _, ranks := range [][]*DruidSpell{druid.Rejuvenation, druid.Regrowth} {
+// swiftmendSource is the effect on the target Swiftmend heals for: the
+// druid's Regrowth when one is up, else its Rejuvenation, or nil when
+// there is neither.
+func (druid *Druid) swiftmendSource(_ *core.Simulation, target *core.Unit) *core.Dot {
+	for _, ranks := range [][]*DruidSpell{druid.Regrowth, druid.Rejuvenation} {
 		for _, ds := range ranks {
 			if ds == nil {
 				continue
 			}
-			dot := ds.Hot(target)
-			if dot != nil && dot.IsActive() && (source == nil || dot.RemainingDuration(sim) < source.RemainingDuration(sim)) {
-				source = dot
+			if dot := ds.Hot(target); dot != nil && dot.IsActive() {
+				return dot
 			}
 		}
 	}
-	return source
+	return nil
 }

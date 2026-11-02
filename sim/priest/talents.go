@@ -412,8 +412,12 @@ var innerFocusCritRating = 25 * float64(core.CritRatingPerCritChance)
 // longer applies to periodic effects") and the live text keep it off pure
 // damage-over-time spells and channels, whose critical strikes are
 // periodic - which matters now that Devouring Plague's ticks can crit.
+// Renew is a heal over time and its crit modifier (14751 effect 1,
+// SpellEffect 692357) names no Renew rank, so a Renew ticking while Inner
+// Focus is up gets none of it either.
 func innerFocusAddsCrit(spell *core.Spell) bool {
-	return !spell.Flags.Matches(core.SpellFlagPureDot | core.SpellFlagChanneled)
+	return !spell.Flags.Matches(core.SpellFlagPureDot|core.SpellFlagChanneled) &&
+		!spell.Matches(PriestSpellMaskRenew)
 }
 
 func (priest *Priest) registerInnerFocus() {

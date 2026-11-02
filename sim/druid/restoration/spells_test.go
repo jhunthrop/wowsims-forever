@@ -259,10 +259,15 @@ func TestOnlyTheTrainedIdsRegister(t *testing.T) {
 	}
 }
 
-func TestSwiftmendNeedsAnEffectAndEatsIt(t *testing.T) {
+// Forever's Swiftmend leaves the effect it reads in place: in the beta logs
+// (foreverlogs.gg reports 2747, 2752 and 2760, levels 25 and 35, read
+// 2026-11-02) every Rejuvenation and Regrowth on the target ticked on to its
+// natural end after a Swiftmend (55 of 57), and the client's 18562 has one
+// effect, a heal, and nothing that removes an aura.
+func TestSwiftmendNeedsAnEffectAndLeavesItUp(t *testing.T) {
 	resto, sim := resto60(t)
 	self := &resto.Unit
-	rejuvenation, regrowth := resto.Rejuvenation[10], resto.Regrowth[9]
+	rejuvenation := resto.Rejuvenation[10]
 
 	if resto.Swiftmend.CanCast(sim, self) {
 		t.Fatal("Swiftmend can be cast on a target with no Rejuvenation or Regrowth")
@@ -282,28 +287,31 @@ func TestSwiftmendNeedsAnEffectAndEatsIt(t *testing.T) {
 	if math.Abs(heal.amount-wantHeal) > tolerance {
 		t.Errorf("Swiftmend healed %v, want the whole of the Rejuvenation, %v", heal.amount, wantHeal)
 	}
-	if dot.IsActive() {
-		t.Error("Swiftmend left the Rejuvenation up")
-	}
-
-	regrowth.ApplyEffects(sim, self, regrowth.Spell)
-	regrowthDot := regrowth.Hot(self)
-	castHeal(sim, resto.Swiftmend, self)
-	if regrowthDot.IsActive() {
-		t.Error("Swiftmend left the Regrowth up")
+	if !dot.IsActive() {
+		t.Error("Swiftmend took the Rejuvenation off; Forever's leaves it ticking")
 	}
 }
 
-func TestSwiftmendEatsTheEffectWithTheLeastTimeLeft(t *testing.T) {
+// With both effects up, every logged Swiftmend healed for Regrowth's whole
+// duration (16 of 16, whichever had less time left), never Rejuvenation's.
+func TestSwiftmendReadsRegrowthWhenBothAreUp(t *testing.T) {
 	resto, sim := resto60(t)
 	self := &resto.Unit
 	rejuvenation, regrowth := resto.Rejuvenation[10], resto.Regrowth[9]
 	regrowth.ApplyEffects(sim, self, regrowth.Spell)
 	rejuvenation.ApplyEffects(sim, self, rejuvenation.Spell)
+	dot := regrowth.Hot(self)
+	wantHeal := dot.SnapshotBaseDamage * dot.SnapshotAttackerMultiplier * float64(dot.NumberOfTicks)
 
-	castHeal(sim, resto.Swiftmend, self)
-	if rejuvenation.Hot(self).IsActive() || !regrowth.Hot(self).IsActive() {
-		t.Error("Swiftmend ate the longer Regrowth instead of the Rejuvenation about to end")
+	heal := castHeal(sim, resto.Swiftmend, self)
+	if heal.crit {
+		wantHeal *= critMultiplier(resto.Swiftmend, self)
+	}
+	if math.Abs(heal.amount-wantHeal) > tolerance {
+		t.Errorf("Swiftmend healed %v, want the whole of the Regrowth, %v", heal.amount, wantHeal)
+	}
+	if !rejuvenation.Hot(self).IsActive() || !regrowth.Hot(self).IsActive() {
+		t.Error("Swiftmend took an effect off the target")
 	}
 }
 

@@ -16,6 +16,7 @@ const (
 	TotemOfThunder           = 228176
 	TotemOfTheStormForever   = 272432
 	BurningTotem             = 272433
+	TotemOfUrgency           = 279249
 )
 
 // totemOfTheStormMaelstromReduction is the 50 in client spell 1291078
@@ -25,12 +26,14 @@ const totemOfTheStormMaelstromReduction = 0.5
 
 // relicClassMasks says which engine spells each client spell family is, for
 // the totems in relic_mods_auto_gen.go (SpellClassOptions masks of Lightning
-// Bolt 403, Chain Lightning 421 and Flame Shock 8050). A totem whose family
-// is missing here (healing spells, Grounding Totem) cannot be registered,
-// and core.NewEquipModItemEffect refuses it.
+// Bolt 403, Chain Lightning 421, Healing Wave 331, Lesser Healing Wave 8004
+// and Flame Shock 8050). A totem whose family is missing here (Grounding
+// Totem) cannot be registered, and core.NewEquipModItemEffect refuses it.
 var relicClassMasks = core.ClassMaskTable{
 	{Client: core.ClientClassMask{1 << 0}, Engine: ShamanSpellMaskLightningBolt},
 	{Client: core.ClientClassMask{1 << 1}, Engine: ShamanSpellMaskChainLightning},
+	{Client: core.ClientClassMask{1 << 6}, Engine: ShamanSpellMaskHealingWave},
+	{Client: core.ClientClassMask{1 << 7}, Engine: ShamanSpellMaskLesserHealingWave},
 	{Client: core.ClientClassMask{1 << 28}, Engine: ShamanSpellMaskFlameShock},
 }
 
@@ -120,6 +123,10 @@ func init() {
 	// Client spell 1291077. Equip: Increases the duration of your Flame Shock
 	// ability by 3 sec.
 	core.NewEquipModItemEffect(BurningTotem, relicEquipMods[BurningTotem], relicClassMasks)
+
+	// Client spell 1306448. Equip: Increases the critical strike chance of
+	// your Lesser Healing Wave spell by 4%.
+	core.NewEquipModItemEffect(TotemOfUrgency, relicEquipMods[TotemOfUrgency], relicClassMasks)
 
 	// Client spell 1291078. Equip: Your Lightning Bolt ability can now also
 	// trigger the Maelstrom Weapon talent, but with a 50% reduced chance.
