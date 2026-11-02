@@ -618,8 +618,9 @@ func init() {
 	})
 
 	// https://www.wowhead.com/classic/item=12777/blazing-rapier
-	// Chance on hit: Burns the enemy for 100 damage over 30 sec.
-	// 1 PPM Assumed
+	// Forever's 16898 Blaze is aura 3, 20 every 3 sec for 30 sec: "Burns the
+	// enemy for 200 damage over 30 sec" (Era's 100). Its defense type is
+	// magic, so it lands on the spell hit roll. 1 PPM assumed.
 	itemhelpers.CreateWeaponProcSpell(BlazingRapier, "Blazing Rapier", 1.0, func(character *core.Character) *core.Spell {
 		return character.GetOrRegisterSpell(core.SpellConfig{
 			ActionID:         core.ActionID{SpellID: 16898},
@@ -630,7 +631,7 @@ func init() {
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				result := spell.CalcAndDealOutcome(sim, target, spell.OutcomeMeleeSpecialHit)
+				result := spell.CalcAndDealOutcome(sim, target, spell.OutcomeMagicHit)
 				if result.Landed() {
 					spell.Dot(target).Apply(sim)
 				}
@@ -641,8 +642,11 @@ func init() {
 				Aura: core.Aura{
 					Label: "Blaze",
 				},
+				OnSnapshot: func(_ *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
+					dot.Snapshot(target, 20, isRollover)
+				},
 				OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-					dot.Spell.CalcAndDealPeriodicDamage(sim, target, 10, dot.OutcomeTick)
+					dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
 				},
 			},
 		})

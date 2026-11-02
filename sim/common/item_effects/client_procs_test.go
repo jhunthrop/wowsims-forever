@@ -506,3 +506,25 @@ func TestRazorGauntletsAndDraconicInfusedEmblemUseForeversSpells(t *testing.T) {
 		t.Error("Draconic Infused Emblem has no Forever equip proc")
 	}
 }
+
+// Blazing Rapier (12777): 16898 Blaze is aura 3, 20 every 3 sec for 30 sec
+// ("Burns the enemy for 200 damage over 30 sec"; Era's was 100), and its
+// defense type is magic, so it lands on the spell hit roll.
+func TestBlazingRapierBurnsForTheClientsTwentyATick(t *testing.T) {
+	sim, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, 12777)
+	spell := character.GetSpell(core.ActionID{SpellID: 16898})
+	if spell == nil {
+		t.Fatal("no Blaze proc")
+	}
+	target := sim.Encounter.TargetUnits[0]
+	for i := 0; i < 50 && !spell.Dot(target).IsActive(); i++ {
+		spell.Cast(sim, target)
+	}
+	dot := spell.Dot(target)
+	if !dot.IsActive() {
+		t.Fatal("Blaze never applied")
+	}
+	if dot.SnapshotBaseDamage != 20 || dot.NumberOfTicks != 10 || dot.TickLength != 3*time.Second {
+		t.Errorf("Blaze is %v x %d every %v, want 20 x 10 every 3s", dot.SnapshotBaseDamage, dot.NumberOfTicks, dot.TickLength)
+	}
+}
