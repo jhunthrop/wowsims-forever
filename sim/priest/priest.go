@@ -96,10 +96,10 @@ const PriestSpellMaskInstantHealing = PriestSpellMaskRenew | PriestSpellMaskPena
 // PriestSpellMaskTwinDisciplines is what Twin Disciplines raises: the
 // instant Shadow damage and instant heals its client masks name (1225132
 // eff0 0x19480020/0x18012/0/0x200000, eff1 0xa08060/0/0/0x10). Prayer of
-// Mending is instant but carries none of those bits (1240827
-// 0/0x20/0x400/0, jump 401880 0/0x20/0/0).
-const PriestSpellMaskTwinDisciplines = PriestSpellMaskInstantShadowDamage |
-	(PriestSpellMaskInstantHealing &^ PriestSpellMaskPrayerOfMending)
+// Mending is named through its heal spells (401863, 1313379, 1313381,
+// class mask 0/0/0/0x200000), not its cast or its jump; the engine heals
+// through the cast, so the cast carries it.
+const PriestSpellMaskTwinDisciplines = PriestSpellMaskInstantShadowDamage | PriestSpellMaskInstantHealing
 
 // PriestSpellMaskMentalAgility is what Mental Agility's cost modifier
 // names: the client mask of 14520 (SpellEffect 687728, aura 108 misc 14),

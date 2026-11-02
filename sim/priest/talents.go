@@ -141,8 +141,8 @@ func (priest *Priest) applyDeclarativeShadowTalents() {
 		// by 1%/2%/3%/4%/5%." The Shadow damage half is Mind Flay,
 		// Devouring Plague, Shadow Word: Pain and Shadow Word: Death
 		// (PriestSpellMaskInstantShadowDamage); the healing half is the
-		// instant heals the client masks name, which leave out Prayer of
-		// Mending (PriestSpellMaskTwinDisciplines).
+		// instant heals the client masks name, Prayer of Mending's heal
+		// among them (PriestSpellMaskTwinDisciplines).
 		//
 		// SpellMod_DamageDone_Pct's FloatValue reaches
 		// Spell.ApplyMultiplicativeDamageBonus, which does
