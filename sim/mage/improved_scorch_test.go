@@ -83,7 +83,7 @@ func TestOwnScorchRefreshesAFullyStackedDebuff(t *testing.T) {
 	aura := mage.ImprovedScorchAuras.Get(target)
 
 	for i := 0; i < improvedScorchMaxStacks; i++ {
-		castAndLand(sim, target, scorch)
+		castUntilLanded(t, sim, target, scorch)
 	}
 	if aura.GetStacks() != improvedScorchMaxStacks {
 		t.Fatalf("after five Scorch casts the debuff has %d stacks, want %d", aura.GetStacks(), improvedScorchMaxStacks)
@@ -94,11 +94,52 @@ func TestOwnScorchRefreshesAFullyStackedDebuff(t *testing.T) {
 		t.Fatalf("20 s after the last cast %v remain, want about 10 s", got)
 	}
 
-	castAndLand(sim, target, scorch)
+	castUntilLanded(t, sim, target, scorch)
 	if got := aura.GetStacks(); got != improvedScorchMaxStacks {
 		t.Errorf("a sixth Scorch left %d stacks, want %d", got, improvedScorchMaxStacks)
 	}
 	if got := aura.RemainingDuration(sim); got < improvedScorchDuration-time.Second {
 		t.Errorf("a sixth Scorch left %v on the debuff, want a renewed %v", got, improvedScorchDuration)
 	}
+}
+
+// Round 11 (casters M2): Improved Scorch (11095) is aura 109, a trigger
+// the spell adds to the target it hits, so a Scorch that misses applies
+// no Fire Vulnerability stack. At 3/3 every landed Scorch adds one.
+func TestImprovedScorchStacksOnlyOnAHit(t *testing.T) {
+	sim, mage := newMageWithDebuffs(t, 60, improvedScorchTalents(t), debuffsWithoutImprovedScorch())
+	target := sim.Encounter.TargetUnits[0]
+	scorch := topRank(t, mage.Scorch)
+	aura := mage.ImprovedScorchAuras.Get(target)
+
+	misses := 0
+	for i := 0; i < 400; i++ {
+		aura.Deactivate(sim)
+		before := scorch.SpellMetrics[target.UnitIndex].Misses
+		scorch.ApplyEffects(sim, target, scorch)
+		missed := scorch.SpellMetrics[target.UnitIndex].Misses > before
+		if missed {
+			misses++
+		}
+		if missed == aura.IsActive() {
+			t.Fatalf("cast %d: missed=%v but Improved Scorch active=%v", i, missed, aura.IsActive())
+		}
+	}
+	if misses == 0 {
+		t.Fatal("400 Scorches never missed; the test saw no miss to check")
+	}
+}
+
+// castUntilLanded casts spell until one cast lands: only a landed Scorch
+// adds or renews Improved Scorch.
+func castUntilLanded(t *testing.T, sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+	t.Helper()
+	for i := 0; i < 50; i++ {
+		before := spell.SpellMetrics[target.UnitIndex].Misses
+		castAndLand(sim, target, spell)
+		if spell.SpellMetrics[target.UnitIndex].Misses == before {
+			return
+		}
+	}
+	t.Fatal("50 casts in a row missed")
 }
