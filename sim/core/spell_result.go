@@ -274,8 +274,11 @@ func (spell *Spell) HealingPower(target *Unit) float64 {
 	return spell.Unit.GetStat(stats.HealingPower) +
 		target.PseudoStats.BonusHealingTaken
 }
+// healingCritRating is a heal's crit: the spell table, the spell's own
+// bonus and its school's spell crit (a "Holy spells" or "Nature spells"
+// bonus reaches that school's heals as it does its damage spells).
 func (spell *Spell) healingCritRating() float64 {
-	return spell.Unit.spellTableCritRating() + spell.BonusCritRating
+	return spell.Unit.spellTableCritRating() + spell.BonusCritRating + spell.Unit.GetSchoolBonusCritChance(spell)
 }
 func (spell *Spell) HealingCritChance() float64 {
 	return spell.healingCritRating() / (CritRatingPerCritChance * 100)

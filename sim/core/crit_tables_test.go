@@ -31,6 +31,13 @@ type critTables struct {
 // Sting, 13552, DefenseType 3) and a heal.
 func critTablesFor(t *testing.T, class proto.Class, consumes *proto.Consumes, raidBuffs *proto.RaidBuffs) critTables {
 	t.Helper()
+	return critTablesWith(t, class, consumes, raidBuffs, nil)
+}
+
+// critTablesWith is critTablesFor with setup run on the character before
+// its stats are finalized (a set bonus's or a talent's effect).
+func critTablesWith(t *testing.T, class proto.Class, consumes *proto.Consumes, raidBuffs *proto.RaidBuffs, setup func(*Character)) critTables {
+	t.Helper()
 	// The fake agent this package registers (dot_test.go); the class
 	// decides the base stats and the per-level crit rates.
 	player := &proto.Player{
@@ -79,6 +86,9 @@ func critTablesFor(t *testing.T, class proto.Class, consumes *proto.Consumes, ra
 	fire := register(3, SpellSchoolFire, DefenseTypeMagic, proto.CastType_CastTypeMainHand, ProcMaskSpellDamage)
 	sting := register(4, SpellSchoolNature, DefenseTypeRanged, proto.CastType_CastTypeRanged, ProcMaskRangedSpecial)
 	heal := register(5, SpellSchoolHoly, DefenseTypeMagic, proto.CastType_CastTypeMainHand, ProcMaskSpellHealing)
+	if setup != nil {
+		setup(character)
+	}
 	env.finalize(raidProto, encounterProto, raidStats, false)
 
 	target := env.Encounter.TargetUnits[0]
@@ -196,4 +206,16 @@ func TestClientFlatBonusKeepsCritTablesApart(t *testing.T) {
 			t.Errorf("%s decodes to %v, want %v", c.name, got.Stats, c.want)
 		}
 	}
+}
+
+// A school's spell crit (PseudoStats.SchoolBonusCritChance: Vestments of
+// Prophecy 5-piece "Holy spells", The Ten Storms 5-piece "Nature spells",
+// both aura 57 in the 70707 client) reaches that school's heals, which roll
+// the spell table, as well as its damage spells.
+func TestSchoolSpellCritReachesThatSchoolsHeals(t *testing.T) {
+	base := critTablesFor(t, proto.Class_ClassShaman, noConsumes(), &proto.RaidBuffs{})
+	holy := critTablesWith(t, proto.Class_ClassShaman, noConsumes(), &proto.RaidBuffs{}, func(c *Character) {
+		c.PseudoStats.SchoolBonusCritChance[stats.SchoolIndexHoly] += 2 * CritRatingPerCritChance
+	})
+	assertCritDelta(t, "2% Holy spell crit", holy.minus(base), critTables{healing: 2})
 }
