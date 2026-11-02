@@ -111,7 +111,7 @@ const PriestSpellMaskMentalAgility = PriestSpellMaskSmite | PriestSpellMaskHolyF
 const PriestSpellMaskSpiritualHealing = PriestSpellMaskLesserHeal | PriestSpellMaskHeal |
 	PriestSpellMaskGreaterHeal | PriestSpellMaskFlashHeal | PriestSpellMaskPrayerOfHealing |
 	PriestSpellMaskHolyNova | PriestSpellMaskDesperatePrayer | PriestSpellMaskPenance |
-	PriestSpellMaskPrayerOfMending | PriestSpellMaskRenew
+	PriestSpellMaskPrayerOfMending | PriestSpellMaskBindingHeal | PriestSpellMaskRenew
 
 type Priest struct {
 	core.Character
