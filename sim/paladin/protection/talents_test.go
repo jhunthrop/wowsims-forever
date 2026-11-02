@@ -25,7 +25,7 @@ const (
 	spellJudgementOfFury  = 20414
 	spellConsecration     = 20924
 
-	auraRedoubt          = 20134
+	auraRedoubt          = 20128
 	auraIronCreed        = 1311033
 	auraSealOfFuryShield = 1311648
 	auraHolyShield       = 20928

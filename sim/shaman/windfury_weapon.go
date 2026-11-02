@@ -3,6 +3,7 @@ package shaman
 import (
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -10,14 +11,28 @@ const WindfuryWeaponRanks = 4
 
 var WindfuryWeaponSpellId = [WindfuryWeaponRanks + 1]int32{0, 8232, 8235, 10486, 16362}
 var WindfuryWeaponEnchantId = [WindfuryWeaponRanks + 1]int32{0, 283, 284, 525, 1669}
-var WindfuryWeaponBonusAP = [WindfuryWeaponRanks + 1]float64{0, 104, 119, 249, 333}
 var WindfuryWeaponLevel = [WindfuryWeaponRanks + 1]int32{0, 30, 40, 50, 60}
 
+// WindfuryWeaponBonusAP is each rank's extra attack power, the aura 99 of
+// the buff its enchant grants (1.60.1.70707 SpellEffect and SpellLevels:
+// 8233, 8236, 10484, 16361). It grows by EffectRealPointsPerLevel from the
+// rank's level to its MaxLevel, so rank 1 adds 46 at 30 and 104 from 38
+// (the 104 Wowhead Forever's tooltip renders at that MaxLevel), where a
+// single number per rank gave a level-30 shaman 104.
+var WindfuryWeaponBonusAP = [WindfuryWeaponRanks + 1]clientdamage.Effect{
+	{},
+	{Amount: 46, PerLevel: 7.2, SpellLevel: 30, MaxLevel: 38},
+	{Amount: 119, PerLevel: 12.8, SpellLevel: 40, MaxLevel: 48},
+	{Amount: 249, PerLevel: 8.3, SpellLevel: 50, MaxLevel: 58},
+	{Amount: 333, PerLevel: 12.5, SpellLevel: 60, MaxLevel: 68},
+}
+
 // windfuryWeaponBonusAttackPower is the extra attack power a Windfury
-// swing carries: the rank's amount, raised once by Elemental Weapons
-// (16266 effect 2, +13/27/40% on Windfury Weapon's attack power).
-func windfuryWeaponBonusAttackPower(rank int32, elementalWeapons int32) float64 {
-	return WindfuryWeaponBonusAP[rank] * windfuryElementalWeaponsMultiplier[elementalWeapons]
+// swing carries: the rank's amount at the shaman's level, raised once by
+// Elemental Weapons (16266 effect 2, +13/27/40% on Windfury Weapon's
+// attack power).
+func windfuryWeaponBonusAttackPower(rank int32, elementalWeapons int32, level int32) float64 {
+	return WindfuryWeaponBonusAP[rank].Center(int(level)) * windfuryElementalWeaponsMultiplier[elementalWeapons]
 }
 
 var windfuryElementalWeaponsMultiplier = [4]float64{1, 1.13, 1.27, 1.4}
@@ -25,7 +40,7 @@ var windfuryElementalWeaponsMultiplier = [4]float64{1, 1.13, 1.27, 1.4}
 func (shaman *Shaman) newWindfuryImbueSpell(isMH bool) *core.Spell {
 	rank := weaponImbueRankAtLevel(WindfuryWeaponLevel[:], shaman.Level)
 
-	bonusAP := windfuryWeaponBonusAttackPower(rank, shaman.Talents.ElementalWeapons)
+	bonusAP := windfuryWeaponBonusAttackPower(rank, shaman.Talents.ElementalWeapons, shaman.Level)
 
 	actionID := core.ActionID{SpellID: WindfuryWeaponSpellId[rank]}.WithTag(core.TernaryInt32(isMH, 1, 2))
 	procMask := core.ProcMaskMeleeMHSpecial

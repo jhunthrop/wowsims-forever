@@ -340,3 +340,20 @@ func TestWaterShieldRestoresManaOnHitTaken(t *testing.T) {
 		t.Errorf("Water Shield: charges remaining = %d, want %d (3 - 1 consumed)", got, want)
 	}
 }
+
+// Round 9: a swing that brings Maelstrom Weapon to five stacks and the
+// instant Lightning Bolt the rotation casts at that same moment must spend
+// the stacks. The old guard compared the aura's remaining time to its full
+// duration, which every new stack resets, so that bolt was free and left
+// all five stacks for a second free bolt.
+func TestALightningBoltAtTheStacksMomentSpendsMaelstromWeapon(t *testing.T) {
+	sim, built := newIsolatedTalentShaman(t, shamanTalentString(nil, map[int]int{enhNodeMaelstromWeapon: 5}, nil))
+	aura := built.MaelstromWeaponAura
+	aura.Activate(sim)
+	aura.SetStacks(sim, 5)
+	bolt := built.LightningBolt[len(built.LightningBolt)-1]
+	aura.OnCastComplete(aura, sim, bolt)
+	if aura.IsActive() {
+		t.Error("a Lightning Bolt cast at the fifth stack's moment did not spend Maelstrom Weapon")
+	}
+}

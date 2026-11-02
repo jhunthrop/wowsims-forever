@@ -118,6 +118,10 @@ func vengeanceMultiplier(rank int32, stacks int32) float64 {
 	return 1 + vengeanceDamagePerRank*float64(rank)*float64(stacks)
 }
 
+// vengeanceBuffSpellID is Vengeance's buff, 20050 (triggered by 20049) at
+// every rank in 1.60.1.70707.
+const vengeanceBuffSpellID = 20050
+
 func (paladin *Paladin) applyVengeance() {
 	if paladin.Talents.Vengeance == 0 {
 		return
@@ -127,7 +131,7 @@ func (paladin *Paladin) applyVengeance() {
 
 	procAura := paladin.RegisterAura(core.Aura{
 		Label:     "Vengeance Proc",
-		ActionID:  core.ActionID{SpellID: 20059},
+		ActionID:  core.ActionID{SpellID: vengeanceBuffSpellID},
 		Duration:  vengeanceDuration,
 		MaxStacks: vengeanceMaxStacks,
 		OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks int32, newStacks int32) {

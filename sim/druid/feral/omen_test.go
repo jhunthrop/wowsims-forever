@@ -119,3 +119,32 @@ func shredDamage(t *testing.T, ranks map[string]int) float64 {
 	}
 	return damage
 }
+
+// Round 9: Clearcasting is one charge ("your next damage, healing or
+// offensive feral ability", ProcCharges 1). A white swing that procs it and
+// a Shred cast at the same moment (the rotation acts right after the swing)
+// must spend it. The old guard compared the aura's remaining time to its
+// full duration, so that Shred was free and the charge paid for another.
+func TestAShredAtTheProcsMomentSpendsClearcasting(t *testing.T) {
+	cat, sim, target := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, nil))
+	sim.CurrentTime += core.GCDDefault
+	cat.ProcClearcasting(sim, cat.AutoAttacks.MHAuto())
+	aura := cat.ClearcastingAura
+	aura.OnCastComplete(aura, sim, cat.Shred.Spell)
+	if aura.IsActive() {
+		t.Error("a Shred cast at the proc's moment did not spend Clearcasting")
+	}
+	_ = target
+}
+
+// The cast whose hit procced Clearcasting does not spend it.
+func TestTheShredThatProccedClearcastingKeepsIt(t *testing.T) {
+	cat, sim, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, nil))
+	sim.CurrentTime += core.GCDDefault
+	cat.ProcClearcasting(sim, cat.Shred.Spell)
+	aura := cat.ClearcastingAura
+	aura.OnCastComplete(aura, sim, cat.Shred.Spell)
+	if !aura.IsActive() {
+		t.Error("the Shred that procced Clearcasting spent it")
+	}
+}
