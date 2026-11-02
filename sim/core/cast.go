@@ -18,6 +18,9 @@ type Hardcast struct {
 	OnComplete func(*Simulation, *Unit)
 	Target     *Unit
 	Pushback   float64
+	// CastTime is the cast's full length; a pushback never leaves more
+	// than this much of the cast to go.
+	CastTime time.Duration
 }
 
 // Input for constructing the CastSpell function for a spell.
@@ -191,6 +194,11 @@ func (unit *Unit) PushBackCast(sim *Simulation) {
 		metrics.TotalCastTime -= hc.Expires - newExpires
 		hc.Expires = newExpires
 	} else {
+		// The vanilla server never leaves more than the full cast to go
+		// (cmangos-classic Spell::Delayed).
+		if hc.CastTime > 0 {
+			pushback = max(0, min(pushback, sim.CurrentTime+hc.CastTime-hc.Expires))
+		}
 		if sim.Log != nil {
 			unit.Log(sim, "Unit Hardcast extended by %s due to damage taken, will now occur at %s", pushback, hc.Expires+pushback)
 		}
@@ -302,6 +310,7 @@ func (spell *Spell) makeCastFunc(config CastConfig) CastSuccessFunc {
 				Expires:  sim.CurrentTime + spell.CurCast.CastTime,
 				ActionID: spell.ActionID,
 				Pushback: 1.0,
+				CastTime: spell.CurCast.CastTime,
 				OnComplete: func(sim *Simulation, target *Unit) {
 					spell.LastCastAt = sim.CurrentTime
 
