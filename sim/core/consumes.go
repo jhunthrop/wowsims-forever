@@ -136,27 +136,23 @@ var manaOilStats = map[proto.WeaponImbue]stats.Stats{
 	proto.WeaponImbue_BrilliantManaOil: {stats.MP5: 15, stats.HealingPower: 30},
 }
 
+// wizardOilStats are the wizard oils' enchant spells (25109, 25110, 25111,
+// 25113): aura 13 and aura 135, damage and healing alike, and Brilliant
+// Wizard Oil's aura 57, 1% spell crit.
+var wizardOilStats = map[proto.WeaponImbue]stats.Stats{
+	proto.WeaponImbue_MinorWizardOil:     {stats.SpellPower: 8, stats.HealingPower: 8},
+	proto.WeaponImbue_LesserWizardOil:    {stats.SpellPower: 16, stats.HealingPower: 16},
+	proto.WeaponImbue_WizardOil:          {stats.SpellPower: 24, stats.HealingPower: 24},
+	proto.WeaponImbue_BrilliantWizardOil: {stats.SpellPower: 36, stats.HealingPower: 36, stats.Crit: 1 * CritRatingPerCritChance},
+}
+
 func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, shadowOilIcd Cooldown) {
 	if imbue != proto.WeaponImbue_WeaponImbueUnknown {
 		switch imbue {
 		// Wizard Oils
-		case proto.WeaponImbue_MinorWizardOil:
-			character.AddStats(stats.Stats{
-				stats.SpellPower: 8,
-			})
-		case proto.WeaponImbue_LesserWizardOil:
-			character.AddStats(stats.Stats{
-				stats.SpellPower: 16,
-			})
-		case proto.WeaponImbue_WizardOil:
-			character.AddStats(stats.Stats{
-				stats.SpellPower: 24,
-			})
-		case proto.WeaponImbue_BrilliantWizardOil:
-			character.AddStats(stats.Stats{
-				stats.SpellPower: 36,
-				stats.Crit:       1 * CritRatingPerCritChance,
-			})
+		case proto.WeaponImbue_MinorWizardOil, proto.WeaponImbue_LesserWizardOil,
+			proto.WeaponImbue_WizardOil, proto.WeaponImbue_BrilliantWizardOil:
+			character.AddStats(wizardOilStats[imbue])
 		case proto.WeaponImbue_BlessedWizardOil:
 			character.Env.RegisterPostFinalizeEffect(func() {
 				// The pool, not the active prefix: an imbue is set up
