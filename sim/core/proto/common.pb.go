@@ -1587,6 +1587,12 @@ const (
 	Potions_GreaterHolyProtectionPotion   Potions = 20
 	Potions_GreaterNatureProtectionPotion Potions = 21
 	Potions_GreaterShadowProtectionPotion Potions = 22
+	// Forever's 30-second potions, sold by the Azeroth Commerce Authority
+	// and Durotar Supply and Logistics alchemy vendors.
+	Potions_FrenzyPotion             Potions = 23
+	Potions_MajorFrenzyPotion        Potions = 24
+	Potions_SpellblastingPotion      Potions = 25
+	Potions_MajorSpellblastingPotion Potions = 26
 	// Deprecated: Marked as deprecated in common.proto.
 	Potions_LesserManaPotion Potions = 1
 )
@@ -1616,6 +1622,10 @@ var (
 		20: "GreaterHolyProtectionPotion",
 		21: "GreaterNatureProtectionPotion",
 		22: "GreaterShadowProtectionPotion",
+		23: "FrenzyPotion",
+		24: "MajorFrenzyPotion",
+		25: "SpellblastingPotion",
+		26: "MajorSpellblastingPotion",
 		1:  "LesserManaPotion",
 	}
 	Potions_value = map[string]int32{
@@ -1641,6 +1651,10 @@ var (
 		"GreaterHolyProtectionPotion":   20,
 		"GreaterNatureProtectionPotion": 21,
 		"GreaterShadowProtectionPotion": 22,
+		"FrenzyPotion":                  23,
+		"MajorFrenzyPotion":             24,
+		"SpellblastingPotion":           25,
+		"MajorSpellblastingPotion":      26,
 		"LesserManaPotion":              1,
 	}
 )
@@ -7011,7 +7025,7 @@ const file_common_proto_rawDesc = "" +
 	"\x16ExplosiveSolidDynamite\x10\x01\x12\x1a\n" +
 	"\x16ExplosiveDenseDynamite\x10\x02\x12\x1b\n" +
 	"\x17ExplosiveThoriumGrenade\x10\x03\x12\x1b\n" +
-	"\x17ExplosiveGoblinLandMine\x10\x04*\xe1\x04\n" +
+	"\x17ExplosiveGoblinLandMine\x10\x04*\xc1\x05\n" +
 	"\aPotions\x12\x11\n" +
 	"\rUnknownPotion\x10\x00\x12\x0e\n" +
 	"\n" +
@@ -7037,7 +7051,11 @@ const file_common_proto_rawDesc = "" +
 	"\x1cGreaterFrostProtectionPotion\x10\x13\x12\x1f\n" +
 	"\x1bGreaterHolyProtectionPotion\x10\x14\x12!\n" +
 	"\x1dGreaterNatureProtectionPotion\x10\x15\x12!\n" +
-	"\x1dGreaterShadowProtectionPotion\x10\x16\x12\x18\n" +
+	"\x1dGreaterShadowProtectionPotion\x10\x16\x12\x10\n" +
+	"\fFrenzyPotion\x10\x17\x12\x15\n" +
+	"\x11MajorFrenzyPotion\x10\x18\x12\x17\n" +
+	"\x13SpellblastingPotion\x10\x19\x12\x1c\n" +
+	"\x18MajorSpellblastingPotion\x10\x1a\x12\x18\n" +
 	"\x10LesserManaPotion\x10\x01\x1a\x02\b\x01*\xcd\x01\n" +
 	"\bConjured\x12\x13\n" +
 	"\x0fConjuredUnknown\x10\x00\x12\x1f\n" +

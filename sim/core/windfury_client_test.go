@@ -42,7 +42,7 @@ func TestWindfuryTotemReaches(t *testing.T) {
 		{"poison on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_InstantPoison}}, true},
 		{"windfury weapon on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_WindfuryWeapon}}, false},
 		{"windfury weapon on the off hand only", Character{Consumes: &proto.Consumes{OffHandImbue: proto.WeaponImbue_WindfuryWeapon}}, true},
-		{"feral", Character{Unit: Unit{PseudoStats: stats.PseudoStats{FeralCombatEnabled: true}}}, false},
+		{"feral (Forever: weapon procs work in a form)", Character{Unit: Unit{PseudoStats: stats.PseudoStats{FeralCombatEnabled: true}}}, true},
 	}
 	for _, c := range cases {
 		if got := windfuryTotemReaches(&c.character); got != c.want {
