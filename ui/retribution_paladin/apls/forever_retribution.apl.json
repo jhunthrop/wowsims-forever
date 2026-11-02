@@ -146,7 +146,7 @@
       }
     },
     {
-      "notes": "After one swing under Seal of Righteousness, go straight back to Seal of Command, under the same mana and attack power gates.",
+      "notes": "After one swing under Seal of Righteousness, go straight back to Seal of Command, under the same mana and attack power gates. The swing is what releases the three stored Seals of Command, so wait for it: Unsealed Wrath restarts its 15 seconds when that swing lands, and the Seal lasts 30, so the swing has landed once Unsealed Wrath's time left plus 15 seconds is more than the Seal's time left. Switching back before it trades the two Seals every global cooldown and releases nothing.",
       "action": {
         "condition": {
           "and": {
@@ -160,18 +160,26 @@
               },
               {
                 "cmp": {
-                  "op": "OpGe",
+                  "op": "OpGt",
                   "lhs": {
-                    "auraNumStacks": {
-                      "auraId": {
-                        "spellId": 1310735
+                    "math": {
+                      "op": "OpAdd",
+                      "lhs": {
+                        "auraRemainingTime": {
+                          "auraId": {
+                            "spellId": 1310735
+                          }
+                        }
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "15s"
+                        }
                       }
                     }
                   },
                   "rhs": {
-                    "const": {
-                      "val": "1"
-                    }
+                    "currentSealRemainingTime": {}
                   }
                 }
               },

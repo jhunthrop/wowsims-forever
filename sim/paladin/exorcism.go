@@ -83,8 +83,13 @@ func (paladin *Paladin) registerExorcism() {
 				return target.MobType == proto.MobType_MobTypeDemon || target.MobType == proto.MobType_MobTypeUndead
 			},
 
+			// Exorcism never crits in Forever: the public beta logs
+			// (foreverlogs.gg, 39 paladins at levels 20 to 30, fetched
+			// 2026-11-02) show 0 crits in 641 hits, where the same
+			// paladins' spell crit would give about 35. The client row
+			// states no "cannot crit" attribute; this is the server's.
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
+				spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHit)
 			},
 		})
 

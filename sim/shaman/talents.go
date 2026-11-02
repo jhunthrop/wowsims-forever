@@ -189,12 +189,17 @@ func (shaman *Shaman) getClearcastingSpells() []*core.Spell {
 	)
 }
 
+// elementalDevastationBuffSpellID is Elemental Devastation's buff: client
+// 1.60.1.70707 has one talent spell (30160) with a trait curve and one
+// buff, 30165, at every rank.
+func elementalDevastationBuffSpellID(_ int32) int32 { return 30165 }
+
 func (shaman *Shaman) applyElementalDevastation() {
 	if shaman.Talents.ElementalDevastation == 0 {
 		return
 	}
 
-	spellID := []int32{0, 30165, 29177, 29178}[rankIndex(shaman.Talents.ElementalDevastation, 4)]
+	spellID := elementalDevastationBuffSpellID(shaman.Talents.ElementalDevastation)
 	critBonus := 3.0 * float64(shaman.Talents.ElementalDevastation) * core.CritRatingPerCritChance
 	// The client's text and effect (spell 30165, apply aura 52) grant melee
 	// crit chance only.
