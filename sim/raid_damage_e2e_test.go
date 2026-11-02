@@ -12,9 +12,15 @@ import (
 // twelve seconds, with the given damage model, and returns the debug log.
 func raidDamageLog(t *testing.T, model *proto.RaidDamageModel) string {
 	t.Helper()
+	return raidDamageLogWith(t, model, &proto.APLRotation{})
+}
+
+// raidDamageLogWith is raidDamageLog with the priest running rotation.
+func raidDamageLogWith(t *testing.T, model *proto.RaidDamageModel, rotation *proto.APLRotation) string {
+	t.Helper()
 	player := core.WithSpec(&proto.Player{
 		Class: proto.Class_ClassPriest, Race: proto.Race_RaceUndead, Level: 60,
-		Equipment: &proto.EquipmentSpec{}, Rotation: &proto.APLRotation{},
+		Equipment: &proto.EquipmentSpec{}, Rotation: rotation,
 	}, &proto.Player_ShadowPriest{ShadowPriest: &proto.ShadowPriest{Options: &proto.ShadowPriest_Options{}}})
 	raid := core.SinglePlayerRaidProto(player, &proto.PartyBuffs{}, &proto.RaidBuffs{}, &proto.Debuffs{})
 	raid.Parties = append(raid.Parties, &proto.Party{})
@@ -76,5 +82,29 @@ func TestRaidDamagePulsesReachTheHealer(t *testing.T) {
 	model.PulsesReachHealer = false
 	if hits := pulsePriestHits(raidDamageLog(t, model)); hits != 0 {
 		t.Errorf("the priest took %d pulses with pulses_reach_healer off, want 0", hits)
+	}
+}
+
+// A raid-wide pulse that lands on the healer mid-cast costs casting time,
+// as any damage does: the breath or volley the pulse stands for pushes a
+// cast back like a hit from a spell. Smite (2.5 s) under a pulse every
+// second must be pushed back.
+func TestRaidDamagePulsePushesBackTheHealersCast(t *testing.T) {
+	model := &proto.RaidDamageModel{
+		Profile: "test", TankHealth: 9000, MemberHealth: 4500,
+		PulseDamage: 10, PulseIntervalSeconds: 1, PulseMembers: 0,
+		PulsesReachHealer: true,
+	}
+	smite := core.APLRotationFromJsonString(`{"type": "TypeAPL", "priorityList": [{"action": {"castSpell": {"spellId": {"spellId": 10934}}}}]}`)
+	logs := raidDamageLogWith(t, model, smite)
+	if !strings.Contains(logs, "Smite") && !strings.Contains(logs, "10934") {
+		t.Fatalf("the priest never cast Smite; the test rotation is wrong")
+	}
+	if n := strings.Count(logs, "Hardcast extended by"); n < 3 {
+		t.Errorf("the priest's casts were pushed back %d times under a pulse a second, want at least 3", n)
+	}
+	model.PulsesReachHealer = false
+	if n := strings.Count(raidDamageLogWith(t, model, smite), "Hardcast extended by"); n != 0 {
+		t.Errorf("casts were pushed back %d times with no pulse reaching the healer, want 0", n)
 	}
 }

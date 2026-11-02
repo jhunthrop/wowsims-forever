@@ -148,6 +148,10 @@ func dealRaidDamage(sim *Simulation, unit *Unit, amount, spread float64, isTank 
 	amount = unit.AbsorbDamage(sim, amount)
 	if amount > 0 {
 		unit.RemoveHealth(sim, amount)
+		if unit.Type == PlayerUnit {
+			// The healer takes the pulse mid-cast like any other hit.
+			unit.PushBackCast(sim)
+		}
 		sim.Raid.notifyRaidDamage(sim, unit, amount, isTank)
 	}
 }

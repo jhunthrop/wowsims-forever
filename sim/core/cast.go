@@ -98,44 +98,62 @@ func (unit *Unit) applySpellPushback() {
 				return
 			}
 
-			if hc := aura.Unit.Hardcast; aura.Unit.IsCasting(sim) && sim.Roll(0, 1.0) > spell.PushbackReduction {
-				// Do spell pushback
-				pushback := DurationFromSeconds(max(0.2, hc.Pushback))
-				aura.Unit.Hardcast.Pushback -= 0.2
-
-				hcSpell := aura.Unit.GetSpell(hc.ActionID)
-
-				if hcSpell.Flags.Matches(SpellFlagChanneled) {
-					newExpires := max(sim.CurrentTime, hc.Expires-pushback)
-					if sim.Log != nil {
-						aura.Unit.Log(sim, "Unit Hardcast shortened by %s due to spell hit taken, will now occur at %s", pushback, newExpires)
-					}
-
-					// Update Dot if present
-					if hcDot := hcSpell.CurDot(); hcDot != nil {
-						hcDot.UpdateExpires(sim, newExpires)
-					}
-
-					aura.Unit.Hardcast.Expires = newExpires
-					hcSpell.SpellMetrics[aura.Unit.CurrentTarget.UnitIndex].TotalCastTime -= pushback
-
-				} else {
-					if sim.Log != nil {
-						aura.Unit.Log(sim, "Unit Hardcast extended by %s due to spell hit taken, will now occur at %s", pushback, hc.Expires+pushback)
-					}
-
-					aura.Unit.Hardcast.Expires += pushback
-					hcSpell.SpellMetrics[aura.Unit.CurrentTarget.UnitIndex].TotalCastTime += pushback
-				}
-
-				// Update GCDTimer
-				aura.Unit.SetGCDTimer(sim, aura.Unit.Hardcast.Expires)
-
-				// Update Swing timer
-				aura.Unit.AutoAttacks.StopMeleeUntil(sim, aura.Unit.Hardcast.Expires, false)
-			}
+			aura.Unit.PushBackCast(sim)
 		},
 	})
+}
+
+// PushBackCast costs the unit's current cast its casting time for taking
+// damage: a cast is delayed and a channel shortened, by 1 s for the first
+// hit and 0.2 s less for each hit after, never under 0.2 s. The chance to
+// keep the casting time (Nature's Focus, Healing Focus, Spiritual Focus,
+// Twilight Focus, Fel Concentration) belongs to the spell being cast, so
+// it is read from that spell and not from whatever dealt the damage.
+func (unit *Unit) PushBackCast(sim *Simulation) {
+	if !unit.IsCasting(sim) {
+		return
+	}
+	hc := &unit.Hardcast
+	hcSpell := unit.GetSpell(hc.ActionID)
+	if hcSpell == nil || sim.Roll(0, 1.0) <= hcSpell.PushbackReduction {
+		return
+	}
+	pushback := DurationFromSeconds(max(0.2, hc.Pushback))
+	hc.Pushback -= 0.2
+
+	metricsTarget := unit.CurrentTarget
+	if hc.Target != nil {
+		metricsTarget = hc.Target
+	}
+	metrics := &hcSpell.SpellMetrics[metricsTarget.UnitIndex]
+
+	if hcSpell.Flags.Matches(SpellFlagChanneled) {
+		newExpires := max(sim.CurrentTime, hc.Expires-pushback)
+		if sim.Log != nil {
+			unit.Log(sim, "Unit Hardcast shortened by %s due to damage taken, will now occur at %s", pushback, newExpires)
+		}
+
+		// Update Dot if present
+		if hcDot := hcSpell.CurDot(); hcDot != nil {
+			hcDot.UpdateExpires(sim, newExpires)
+		}
+
+		metrics.TotalCastTime -= hc.Expires - newExpires
+		hc.Expires = newExpires
+	} else {
+		if sim.Log != nil {
+			unit.Log(sim, "Unit Hardcast extended by %s due to damage taken, will now occur at %s", pushback, hc.Expires+pushback)
+		}
+
+		hc.Expires += pushback
+		metrics.TotalCastTime += pushback
+	}
+
+	// Update GCDTimer
+	unit.SetGCDTimer(sim, hc.Expires)
+
+	// Update Swing timer
+	unit.AutoAttacks.StopMeleeUntil(sim, hc.Expires, false)
 }
 
 func (spell *Spell) makeCastFunc(config CastConfig) CastSuccessFunc {
