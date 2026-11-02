@@ -138,12 +138,12 @@ var manaOilStats = map[proto.WeaponImbue]stats.Stats{
 
 // wizardOilStats are the wizard oils' enchant spells (25109, 25110, 25111,
 // 25113): aura 13 and aura 135, damage and healing alike, and Brilliant
-// Wizard Oil's aura 57, 1% spell crit.
+// Wizard Oil's aura 57, 1% spell crit (spell table only).
 var wizardOilStats = map[proto.WeaponImbue]stats.Stats{
 	proto.WeaponImbue_MinorWizardOil:     {stats.SpellPower: 8, stats.HealingPower: 8},
 	proto.WeaponImbue_LesserWizardOil:    {stats.SpellPower: 16, stats.HealingPower: 16},
 	proto.WeaponImbue_WizardOil:          {stats.SpellPower: 24, stats.HealingPower: 24},
-	proto.WeaponImbue_BrilliantWizardOil: {stats.SpellPower: 36, stats.HealingPower: 36, stats.Crit: 1 * CritRatingPerCritChance},
+	proto.WeaponImbue_BrilliantWizardOil: {stats.SpellPower: 36, stats.HealingPower: 36, stats.SpellCrit: 1 * CritRatingPerCritChance},
 }
 
 func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, shadowOilIcd Cooldown) {
@@ -193,9 +193,11 @@ func addImbueStats(character *Character, imbue proto.WeaponImbue, isMh bool, sha
 				weapon.BaseDamageMax += 8
 			}
 		case proto.WeaponImbue_ElementalSharpeningStone:
+			// Enchant 2506, spell 22755: aura 52, weapon crit. Melee
+			// only: never a spell, and taken back off ranged below.
 			if !character.PseudoStats.FeralCombatEnabled {
 				character.AddStats(stats.Stats{
-					stats.Crit: 2 * CritRatingPerCritChance,
+					stats.MeleeCrit: 2 * CritRatingPerCritChance,
 				})
 				character.AddBonusRangedCritRating(-2.0)
 			}

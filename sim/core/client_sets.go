@@ -334,7 +334,11 @@ func creatureTypes(mask int32) ([]proto.MobType, bool) {
 type flatDecoder struct {
 	flat ClientFlatBonus
 
-	damageAll, healing, hit, crit float64
+	damageAll, healing, hit float64
+	// The three crit auras, one table each: 52 melee and ranged, 57
+	// spells, 290 every table. A spell that states 52 and 57 alike
+	// ("Increased Critical 1%", 1220596) raises both tables.
+	meleeCrit, spellCrit, allCrit float64
 	haste                         bool
 }
 
@@ -388,8 +392,12 @@ func (d *flatDecoder) read(e ClientEffect) bool {
 		d.flat.Stats[stats.Defense] += e.Points * DefenseRatingPerDefense
 	case clientAuraModHit, clientAuraModSpellHit:
 		d.hit = max(d.hit, e.Points)
-	case clientAuraModCrit, clientAuraModSpellCrit, clientAuraModCritAll:
-		d.crit = max(d.crit, e.Points)
+	case clientAuraModCrit:
+		d.meleeCrit = max(d.meleeCrit, e.Points)
+	case clientAuraModSpellCrit:
+		d.spellCrit = max(d.spellCrit, e.Points)
+	case clientAuraModCritAll:
+		d.allCrit = max(d.allCrit, e.Points)
 	case clientAuraModMeleeHaste:
 		d.flat.Stats[stats.MeleeHaste] += e.Points * HasteRatingPerHastePercent
 	case clientAuraModCastHaste:
@@ -463,6 +471,7 @@ func (d *flatDecoder) readResistance(e ClientEffect) bool {
 // equal damage and healing is the engine's SpellPower (damage to every
 // magic school) and as much HealingPower, which is all a heal reads
 // (Spell.HealingPower), the pair an item's "damage and healing" carries.
+// Crit both tables share is stats.Crit; the rest stays on its own table.
 func (d *flatDecoder) finish() {
 	switch {
 	case d.damageAll > 0 && d.damageAll == d.healing:
@@ -473,5 +482,8 @@ func (d *flatDecoder) finish() {
 		d.flat.Stats[stats.HealingPower] += d.healing
 	}
 	d.flat.Stats[stats.Hit] += d.hit * HitRatingPerHitChance
-	d.flat.Stats[stats.Crit] += d.crit * CritRatingPerCritChance
+	both := min(d.meleeCrit, d.spellCrit)
+	d.flat.Stats[stats.Crit] += (d.allCrit + both) * CritRatingPerCritChance
+	d.flat.Stats[stats.MeleeCrit] += (d.meleeCrit - both) * CritRatingPerCritChance
+	d.flat.Stats[stats.SpellCrit] += (d.spellCrit - both) * CritRatingPerCritChance
 }

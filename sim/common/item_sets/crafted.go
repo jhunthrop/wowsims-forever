@@ -46,7 +46,8 @@ var ItemSetBloodvineGarb = core.NewItemSet(core.ItemSet{
 		3: func(agent core.Agent) {
 			character := agent.GetCharacter()
 			if character.HasProfession(proto.Profession_Tailoring) {
-				character.AddStat(stats.Crit, 2*core.CritRatingPerCritChance)
+				// 18382 Increased Critical Spell: aura 57, spells only.
+				character.AddStat(stats.SpellCrit, 2*core.CritRatingPerCritChance)
 			}
 		},
 	},

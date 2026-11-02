@@ -99,7 +99,7 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 		}
 
 		// Mage spell crit scaling for imp
-		wp.AddStatDependency(stats.Intellect, stats.Crit, core.SpellCritPerIntAtLevel(proto.Class_ClassMage, wp.Level)*core.CritRatingPerCritChance)
+		wp.AddStatDependency(stats.Intellect, stats.SpellCrit, core.SpellCritPerIntAtLevel(proto.Class_ClassMage, wp.Level)*core.CritRatingPerCritChance)
 	} else {
 		// Warrior scaling for all other pets
 		wp.AddStat(stats.AttackPower, -20)
@@ -112,8 +112,8 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 		// exactly as AddCritStatDependencies does for a player.
 		// unconfirmed: whether a Forever warrior-scaled pet should convert
 		// Intellect to Crit at all is unpublished.
-		wp.AddStatDependency(stats.Agility, stats.Crit, core.CritPerAgiAtLevel(proto.Class_ClassWarrior, wp.Level)*core.CritRatingPerCritChance)
-		wp.AddStatDependency(stats.Intellect, stats.Crit, core.SpellCritPerIntAtLevel(proto.Class_ClassWarrior, wp.Level)*core.CritRatingPerCritChance)
+		wp.AddStatDependency(stats.Agility, stats.MeleeCrit, core.CritPerAgiAtLevel(proto.Class_ClassWarrior, wp.Level)*core.CritRatingPerCritChance)
+		wp.AddStatDependency(stats.Intellect, stats.SpellCrit, core.SpellCritPerIntAtLevel(proto.Class_ClassWarrior, wp.Level)*core.CritRatingPerCritChance)
 
 		// Imps generally don't melee
 		wp.EnableAutoAttacks(wp, cfg.AutoAttacks)

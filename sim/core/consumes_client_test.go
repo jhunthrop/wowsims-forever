@@ -33,7 +33,7 @@ func TestWizardOilsMatchTheClient(t *testing.T) {
 		proto.WeaponImbue_MinorWizardOil:     {stats.SpellPower: 8, stats.HealingPower: 8},
 		proto.WeaponImbue_LesserWizardOil:    {stats.SpellPower: 16, stats.HealingPower: 16},
 		proto.WeaponImbue_WizardOil:          {stats.SpellPower: 24, stats.HealingPower: 24},
-		proto.WeaponImbue_BrilliantWizardOil: {stats.SpellPower: 36, stats.HealingPower: 36, stats.Crit: 1 * CritRatingPerCritChance},
+		proto.WeaponImbue_BrilliantWizardOil: {stats.SpellPower: 36, stats.HealingPower: 36, stats.SpellCrit: 1 * CritRatingPerCritChance},
 	}
 	for imbue, expected := range want {
 		if got := wizardOilStats[imbue]; got != expected {

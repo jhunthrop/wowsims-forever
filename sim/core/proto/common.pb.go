@@ -407,8 +407,9 @@ const (
 	Stat_StatNaturePower Stat = 10
 	Stat_StatShadowPower Stat = 11
 	Stat_StatMP5         Stat = 12
-	// Forever merges spell, melee and ranged hit into one stat, and
-	// likewise crit. This enum must stay index-synced with the Go Stat
+	// Forever merges spell, melee and ranged hit into one stat. Crit on
+	// every table is StatCrit; the table-specific parts follow
+	// StatFeralAttackPower. This enum must stay index-synced with the Go Stat
 	// enum in sim/core/stats/stats.go; stats_test.go enforces it.
 	Stat_StatHit               Stat = 13
 	Stat_StatCrit              Stat = 14
@@ -439,6 +440,12 @@ const (
 	Stat_StatHealingPower     Stat = 38
 	Stat_StatSpellDamage      Stat = 39
 	Stat_StatFeralAttackPower Stat = 40
+	// Forever unifies item crit, not the crit tables. StatCrit is crit on
+	// every table (an item's crit rating, aura 290). StatMeleeCrit is melee
+	// and ranged crit only (Agility, aura 52: a sharpening stone, Cruelty)
+	// and StatSpellCrit spell crit only (Intellect, aura 57: a wizard oil).
+	Stat_StatMeleeCrit Stat = 41
+	Stat_StatSpellCrit Stat = 42
 )
 
 // Enum value maps for Stat.
@@ -485,6 +492,8 @@ var (
 		38: "StatHealingPower",
 		39: "StatSpellDamage",
 		40: "StatFeralAttackPower",
+		41: "StatMeleeCrit",
+		42: "StatSpellCrit",
 	}
 	Stat_value = map[string]int32{
 		"StatStrength":          0,
@@ -528,6 +537,8 @@ var (
 		"StatHealingPower":      38,
 		"StatSpellDamage":       39,
 		"StatFeralAttackPower":  40,
+		"StatMeleeCrit":         41,
+		"StatSpellCrit":         42,
 	}
 )
 
@@ -6787,7 +6798,7 @@ const file_common_proto_rawDesc = "" +
 	"\x06Mining\x10\t\x12\f\n" +
 	"\bSkinning\x10\n" +
 	"\x12\r\n" +
-	"\tTailoring\x10\v*\xa6\x06\n" +
+	"\tTailoring\x10\v*\xcc\x06\n" +
 	"\x04Stat\x12\x10\n" +
 	"\fStatStrength\x10\x00\x12\x0f\n" +
 	"\vStatAgility\x10\x01\x12\x0f\n" +
@@ -6833,7 +6844,9 @@ const file_common_proto_rawDesc = "" +
 	"\x0eStatBonusArmor\x10%\x12\x14\n" +
 	"\x10StatHealingPower\x10&\x12\x13\n" +
 	"\x0fStatSpellDamage\x10'\x12\x18\n" +
-	"\x14StatFeralAttackPower\x10(*\xb9\a\n" +
+	"\x14StatFeralAttackPower\x10(\x12\x11\n" +
+	"\rStatMeleeCrit\x10)\x12\x11\n" +
+	"\rStatSpellCrit\x10**\xb9\a\n" +
 	"\n" +
 	"PseudoStat\x12\x19\n" +
 	"\x15PseudoStatMainHandDps\x10\x00\x12\x18\n" +

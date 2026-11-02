@@ -31,8 +31,9 @@ const (
 	NaturePower
 	ShadowPower
 	MP5
-	// Forever merges spell, melee and ranged hit into one stat, and
-	// likewise crit.
+	// Forever merges spell, melee and ranged hit into one stat. Crit is
+	// crit on every table; MeleeCrit and SpellCrit below are the parts one
+	// table alone reads.
 	Hit
 	Crit
 	SpellHaste
@@ -61,6 +62,11 @@ const (
 	HealingPower
 	SpellDamage
 	FeralAttackPower
+	// MeleeCrit and SpellCrit are the parts of crit one table alone reads:
+	// melee and ranged (Agility, aura 52) and spells (Intellect, aura 57).
+	// Crit above is every table (item crit rating, aura 290).
+	MeleeCrit
+	SpellCrit
 
 	// DO NOT add new stats here without discussing it first; new stats come with
 	// a performance penalty.
@@ -194,6 +200,10 @@ func (s Stat) StatName() string {
 		return "Hit"
 	case Crit:
 		return "Crit"
+	case MeleeCrit:
+		return "MeleeCrit"
+	case SpellCrit:
+		return "SpellCrit"
 	case SpellPower:
 		return "SpellPower"
 	case ArcanePower:

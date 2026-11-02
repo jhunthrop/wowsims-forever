@@ -187,27 +187,30 @@ func (warlock *Warlock) applyFirestone() {
 	// TODO: Test PPM
 	ppm := warlock.AutoAttacks.NewPPMManager(8, core.ProcMaskMelee)
 
+	// Firestone 1 to 4 (enchants 1803, 1823, 1824, 1825; spells 23480 to
+	// 23483) are aura 13 fire damage 10/14/17/21 and aura 57 spell crit
+	// 1/1/2/2.
 	// FOREVER: Improved Firestone is not in the client's trees.
 	// firestoneMulti := 1.0 + float64(warlock.Talents.ImprovedFirestone)*0.15
 	firestoneMulti := 1.0
 
 	if level >= 56 {
-		warlock.AddStat(stats.FirePower, 21*firestoneMulti)
+		warlock.AddStats(stats.Stats{stats.FirePower: 21 * firestoneMulti, stats.SpellCrit: 2 * core.CritRatingPerCritChance})
 		damageMin = 80.0
 		damageMax = 120.0
 		spellId = 17949
 	} else if level >= 46 {
-		warlock.AddStat(stats.FirePower, 17*firestoneMulti)
+		warlock.AddStats(stats.Stats{stats.FirePower: 17 * firestoneMulti, stats.SpellCrit: 2 * core.CritRatingPerCritChance})
 		damageMin = 60.0
 		damageMax = 90.0
 		spellId = 17947
 	} else if level >= 36 {
-		warlock.AddStat(stats.FirePower, 14*firestoneMulti)
+		warlock.AddStats(stats.Stats{stats.FirePower: 14 * firestoneMulti, stats.SpellCrit: 1 * core.CritRatingPerCritChance})
 		damageMin = 40.0
 		damageMax = 60.0
 		spellId = 17945
 	} else if level >= 28 {
-		warlock.AddStat(stats.FirePower, 10*firestoneMulti)
+		warlock.AddStats(stats.Stats{stats.FirePower: 10 * firestoneMulti, stats.SpellCrit: 1 * core.CritRatingPerCritChance})
 		damageMin = 25.0
 		damageMax = 35.0
 		spellId = 758

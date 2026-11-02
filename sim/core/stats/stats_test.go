@@ -99,20 +99,20 @@ func TestStatsProtoInSync(t *testing.T) {
 	}
 }
 
-// Forever has one hit stat and one crit stat.
-func TestForeverHasOneHitAndOneCritStat(t *testing.T) {
-	if Hit >= Len || Crit >= Len {
-		t.Fatal("Hit and Crit must be real stats")
-	}
-	if Hit.StatName() != "Hit" {
-		t.Errorf("Hit.StatName() = %q, want %q", Hit.StatName(), "Hit")
-	}
-	if Crit.StatName() != "Crit" {
-		t.Errorf("Crit.StatName() = %q, want %q", Crit.StatName(), "Crit")
+// Forever has one hit stat. Crit is every table's, and MeleeCrit and
+// SpellCrit are the parts one table alone reads; there is no split hit.
+func TestForeverHasOneHitStatAndThreeCritParts(t *testing.T) {
+	for stat, name := range map[Stat]string{Hit: "Hit", Crit: "Crit", MeleeCrit: "MeleeCrit", SpellCrit: "SpellCrit"} {
+		if stat >= Len {
+			t.Errorf("%s must be a real stat", name)
+		}
+		if stat.StatName() != name {
+			t.Errorf("%v.StatName() = %q, want %q", stat, stat.StatName(), name)
+		}
 	}
 	for i := Stat(0); i < Len; i++ {
 		switch i.StatName() {
-		case "MeleeHit", "SpellHit", "MeleeCrit", "SpellCrit":
+		case "MeleeHit", "SpellHit":
 			t.Errorf("index %d still has the split stat %q", int(i), i.StatName())
 		}
 	}

@@ -94,9 +94,8 @@ func TestElementalFuryScalesWithItsRank(t *testing.T) {
 
 // TestElementalDevastationIsMeleeOnly: "your offensive spell critical
 // strikes will increase your chance to get a critical strike with MELEE
-// attacks". Forever's Crit stat is unified, so the proc must raise the
-// stat (melee crit) while taking the same amount back off the shaman's
-// own spell crit.
+// attacks". Spell 30165 is aura 52, the melee and ranged table: the proc
+// raises melee crit and leaves the shaman's spell crit alone.
 func TestElementalDevastationIsMeleeOnly(t *testing.T) {
 	sim, built := newCallOfFlameShaman(t, elementalTalentsWith(map[int]int{elementalDevastationNode: 3}))
 	target := sim.Encounter.TargetUnits[0]
@@ -108,7 +107,7 @@ func TestElementalDevastationIsMeleeOnly(t *testing.T) {
 	}
 
 	spellCritBefore := lightningBolt.SpellCritChance(target)
-	meleeCritBefore := built.GetStat(stats.Crit)
+	meleeCritBefore := built.GetStat(stats.MeleeCrit)
 
 	procAura.Activate(sim)
 
@@ -116,7 +115,7 @@ func TestElementalDevastationIsMeleeOnly(t *testing.T) {
 		t.Errorf("spell crit chance %v while Elemental Devastation is up, want the unchanged %v", got, spellCritBefore)
 	}
 	wantMeleeBonus := 9.0 * core.CritRatingPerCritChance
-	if got := built.GetStat(stats.Crit) - meleeCritBefore; !near(got, wantMeleeBonus) {
+	if got := built.GetStat(stats.MeleeCrit) - meleeCritBefore; !near(got, wantMeleeBonus) {
 		t.Errorf("melee crit rating gained %v, want %v (9%% at 3/3)", got, wantMeleeBonus)
 	}
 

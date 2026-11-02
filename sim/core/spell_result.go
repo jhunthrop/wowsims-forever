@@ -120,8 +120,27 @@ func (spell *Spell) PhysicalHitChance(attackTable *AttackTable) float64 {
 	return max(hitChance-attackTable.HitSuppression, 0)
 }
 
+// Forever unifies item crit, not the crit tables. stats.Crit reaches every
+// table; stats.MeleeCrit only melee and ranged rolls (Agility, aura 52) and
+// stats.SpellCrit only spell rolls (Intellect, aura 57). Which table a spell
+// rolls is the client's SpellCategories.DefenseType: magic rolls spell crit,
+// melee and ranged roll melee crit (a hunter's Serpent Sting, a paladin's
+// seals). A spell that declares no defense type rolls by the outcome that
+// asks: a physical one on the melee table, a magic one by its school.
+func (unit *Unit) meleeTableCritRating() float64 {
+	return unit.stats[stats.Crit] + unit.stats[stats.MeleeCrit]
+}
+
+func (unit *Unit) spellTableCritRating() float64 {
+	return unit.stats[stats.Crit] + unit.stats[stats.SpellCrit]
+}
+
 func (spell *Spell) PhysicalCritChance(attackTable *AttackTable) float64 {
-	critRating := spell.Unit.stats[stats.Crit] +
+	tableRating := spell.Unit.meleeTableCritRating()
+	if spell.DefenseType == DefenseTypeMagic {
+		tableRating = spell.Unit.spellTableCritRating()
+	}
+	critRating := tableRating +
 		spell.BonusCritRating
 	return critRating/(CritRatingPerCritChance*100) - attackTable.MeleeCritSuppression
 }
@@ -222,8 +241,13 @@ func (spell *Spell) MagicHitCheck(sim *Simulation, attackTable *AttackTable) boo
 }
 
 func (spell *Spell) spellCritRating(_ *Unit) float64 {
-	return spell.Unit.stats[stats.Crit] +
-		spell.BonusCritRating
+	tableRating := spell.Unit.spellTableCritRating()
+	switch {
+	case spell.DefenseType == DefenseTypeMelee || spell.DefenseType == DefenseTypeRanged,
+		spell.DefenseType == DefenseTypeNone && spell.SpellSchool == SpellSchoolPhysical:
+		tableRating = spell.Unit.meleeTableCritRating()
+	}
+	return tableRating + spell.BonusCritRating
 }
 func (spell *Spell) SpellCritChance(target *Unit) float64 {
 	// TODO: Classic verify crit suppression
@@ -251,7 +275,7 @@ func (spell *Spell) HealingPower(target *Unit) float64 {
 		target.PseudoStats.BonusHealingTaken
 }
 func (spell *Spell) healingCritRating() float64 {
-	return spell.Unit.GetStat(stats.Crit) + spell.BonusCritRating
+	return spell.Unit.spellTableCritRating() + spell.BonusCritRating
 }
 func (spell *Spell) HealingCritChance() float64 {
 	return spell.healingCritRating() / (CritRatingPerCritChance * 100)

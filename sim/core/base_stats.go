@@ -81,83 +81,64 @@ var RaceOffsets = map[proto.Race]stats.Stats{
 	},
 }
 
-// Forever has one Crit stat where Era had two, so each class's single
-// value here is max(SpellCrit, MeleeCrit) over Era's pair - except where
-// the melee column cannot be believed, which is explained next.
-//
-// untrustworthy: upstream's MeleeCrit column is its Dodge column
-// duplicated. In master's ClassBaseCrit (sim/core/base_stats.go at
-// master:84-130) MeleeCrit equals Dodge for all nine classes - paladin
-// 0.7/0.7, priest 3.0/3.0, shaman 1.7/1.7, mage 3.2/3.2, warlock 2.0/2.0,
-// druid 0.9/0.9 and 0/0 for warrior, hunter and rogue. Nine exact matches
-// is a copy-paste, not nine coincidences, and a plain max() over it hands
-// the mage +3.0 base crit where its spell value is 0.2 and the priest
-// +2.2. So for the three rows where the melee value both equals Dodge and
-// exceeds the spell value - priest, mage, warlock - the spell value is
-// taken and the melee value is discarded; each is marked below. For the
-// other six the max() is unaffected: either the spell value already wins
-// (paladin, hunter, shaman, druid) or both are zero (warrior, rogue).
-// Dodge itself is kept as Era's, since the melee-crit duplication says
-// nothing about which of the two columns is the real Dodge.
+// Each class's base crit, one value per table: MeleeCrit (melee and
+// ranged) and SpellCrit, Era's two columns. Forever keeps the two tables
+// (see AddCritStatDependencies), so the pair is taken as Era states it.
 //
 // unconfirmed: chancetomeleecrit.txt and chancetospellcrit.txt do not
-// exist for build 1.60.1.69893 - they 404 on wago and are not among the
-// three GameTables files the data lane has mined (combatratings.txt,
-// basemp.txt, hppersta.txt; see base_stats_provisional.go). Every value
-// in this table is therefore still Era's. Named once here, on the table,
-// rather than repeated on each of the nine class entries below.
+// exist for the 1.60 builds - they 404 on wago and are not among the
+// GameTables files the data lane has mined (combatratings.txt, basemp.txt,
+// hppersta.txt; see base_stats_provisional.go). Every value in this table
+// is therefore still Era's. The melee column equals Era's Dodge column for
+// all nine classes (paladin 0.7, priest 3.0, shaman 1.7, mage 3.2, warlock
+// 2.0, druid 0.9, warrior, hunter and rogue 0); vanilla servers read one
+// base table for both, so it is kept, not discarded.
 var ClassBaseCrit = map[proto.Class]stats.Stats{
 	proto.Class_ClassUnknown: {},
 	proto.Class_ClassWarrior: {
-		// Forever: merged from SpellCrit 0.0000 + MeleeCrit 0.0000, max().
-		stats.Crit:  0.0000 * CritRatingPerCritChance,
-		stats.Dodge: 0.0000 * DodgeRatingPerDodgeChance,
+		stats.MeleeCrit: 0.0000 * CritRatingPerCritChance,
+		stats.SpellCrit: 0.0000 * CritRatingPerCritChance,
+		stats.Dodge:     0.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassPaladin: {
-		// Forever: merged from SpellCrit 3.5000 + MeleeCrit 0.7000, max().
-		stats.Crit:  3.5000 * CritRatingPerCritChance,
-		stats.Dodge: 0.7000 * DodgeRatingPerDodgeChance,
+		stats.MeleeCrit: 0.7000 * CritRatingPerCritChance,
+		stats.SpellCrit: 3.5000 * CritRatingPerCritChance,
+		stats.Dodge:     0.7000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassHunter: {
-		// Forever: merged from SpellCrit 3.6000 + MeleeCrit 0.0000, max().
-		stats.Crit:  3.6000 * CritRatingPerCritChance,
-		stats.Dodge: 0.0000 * DodgeRatingPerDodgeChance,
+		stats.MeleeCrit: 0.0000 * CritRatingPerCritChance,
+		stats.SpellCrit: 3.6000 * CritRatingPerCritChance,
+		stats.Dodge:     0.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassRogue: {
-		// Forever: merged from SpellCrit 0.0000 + MeleeCrit 0.0000, max().
-		stats.Crit:  0.0000 * CritRatingPerCritChance,
-		stats.Dodge: 0.0000 * DodgeRatingPerDodgeChance,
+		stats.MeleeCrit: 0.0000 * CritRatingPerCritChance,
+		stats.SpellCrit: 0.0000 * CritRatingPerCritChance,
+		stats.Dodge:     0.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassPriest: {
-		// Forever: merged from SpellCrit 0.8000 + MeleeCrit 3.0000. The melee
-		// value is the Dodge column duplicated (see the note on the table),
-		// so it is discarded and the spell value taken rather than max()'d.
-		stats.Crit:  0.8000 * CritRatingPerCritChance,
-		stats.Dodge: 3.0000 * DodgeRatingPerDodgeChance,
+		stats.MeleeCrit: 3.0000 * CritRatingPerCritChance,
+		stats.SpellCrit: 0.8000 * CritRatingPerCritChance,
+		stats.Dodge:     3.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassShaman: {
-		// Forever: merged from SpellCrit 2.3000 + MeleeCrit 1.7000, max().
-		stats.Crit:  2.3000 * CritRatingPerCritChance,
-		stats.Dodge: 1.7000 * DodgeRatingPerDodgeChance,
+		stats.MeleeCrit: 1.7000 * CritRatingPerCritChance,
+		stats.SpellCrit: 2.3000 * CritRatingPerCritChance,
+		stats.Dodge:     1.7000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassMage: {
-		// Forever: merged from SpellCrit 0.2000 + MeleeCrit 3.2000. The melee
-		// value is the Dodge column duplicated (see the note on the table),
-		// so it is discarded and the spell value taken rather than max()'d.
-		stats.Crit:  0.2000 * CritRatingPerCritChance,
-		stats.Dodge: 3.2000 * DodgeRatingPerDodgeChance,
+		stats.MeleeCrit: 3.2000 * CritRatingPerCritChance,
+		stats.SpellCrit: 0.2000 * CritRatingPerCritChance,
+		stats.Dodge:     3.2000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassWarlock: {
-		// Forever: merged from SpellCrit 1.7000 + MeleeCrit 2.0000. The melee
-		// value is the Dodge column duplicated (see the note on the table),
-		// so it is discarded and the spell value taken rather than max()'d.
-		stats.Crit:  1.7000 * CritRatingPerCritChance,
-		stats.Dodge: 2.0000 * DodgeRatingPerDodgeChance,
+		stats.MeleeCrit: 2.0000 * CritRatingPerCritChance,
+		stats.SpellCrit: 1.7000 * CritRatingPerCritChance,
+		stats.Dodge:     2.0000 * DodgeRatingPerDodgeChance,
 	},
 	proto.Class_ClassDruid: {
-		// Forever: merged from SpellCrit 1.8000 + MeleeCrit 0.9000, max().
-		stats.Crit:  1.8000 * CritRatingPerCritChance,
-		stats.Dodge: 0.9000 * DodgeRatingPerDodgeChance,
+		stats.MeleeCrit: 0.9000 * CritRatingPerCritChance,
+		stats.SpellCrit: 1.8000 * CritRatingPerCritChance,
+		stats.Dodge:     0.9000 * DodgeRatingPerDodgeChance,
 	},
 }
 
@@ -213,23 +194,23 @@ var DodgePerAgiAtLevel = map[proto.Class]float64{
 	proto.Class_ClassDruid:   0.0500,
 }
 
-// AddCritStatDependencies wires character's Crit stat to both Agility and
-// Intellect for every class, at the client's per-level rates
-// (CritPerAgiAtLevel and SpellCritPerIntAtLevel at character.Level). A
-// class whose rate is 0 at a level simply adds 0: Warrior and Rogue have
-// no Intellect rate at any level. Pet units borrow another class's rate
-// and are wired directly at their own call sites.
+// AddCritStatDependencies wires a class's Agility to its melee and ranged
+// crit (stats.MeleeCrit) and its Intellect to its spell crit
+// (stats.SpellCrit), at the client's per-level rates (CritPerAgiAtLevel and
+// SpellCritPerIntAtLevel at character.Level). A class whose rate is 0 at a
+// level simply adds 0: Warrior and Rogue have no Intellect rate at any
+// level. Pet units borrow another class's rate and are wired directly at
+// their own call sites.
 //
-// unconfirmed: Forever's one Crit stat is confirmed by Blizzard, but
-// whether a hybrid's Agility crit and Intellect crit both land in it, or
-// whether the game keeps two pools and unifies only item, talent and
-// racial crit, is unmeasured. The beta character sheet test (a hybrid with
-// an Agility item on and off, watching whether the one Crit number moves)
-// decides it. The magnitude at stake: Grace of Air's 77 Agility moved a
-// balance druid's Starfire crit 3.4 points in this model.
+// Forever keeps the two pools and unifies item, talent and buff crit
+// (stats.Crit). The beta logs on foreverlogs.gg settle it (levels 13 to
+// 30, fetched 2026-11-02): rogue Instant Poison, a spell (DefenseType 1),
+// crit 9 of 409 hits (2.2%) while the same rogues' melee crit 19%, and a
+// paladin's Consecration ticks crit 6.1% of 1762 against its 12.4% melee
+// crit. One pool would roll both at the melee rate.
 func AddCritStatDependencies(character *Character, class proto.Class) {
-	character.AddStatDependency(stats.Agility, stats.Crit, CritPerAgiAtLevel(class, character.Level)*CritRatingPerCritChance)
-	character.AddStatDependency(stats.Intellect, stats.Crit, SpellCritPerIntAtLevel(class, character.Level)*CritRatingPerCritChance)
+	character.AddStatDependency(stats.Agility, stats.MeleeCrit, CritPerAgiAtLevel(class, character.Level)*CritRatingPerCritChance)
+	character.AddStatDependency(stats.Intellect, stats.SpellCrit, SpellCritPerIntAtLevel(class, character.Level)*CritRatingPerCritChance)
 }
 
 // allClasses lists every class the per-level tables (and the classAttack

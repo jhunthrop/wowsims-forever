@@ -2005,7 +2005,8 @@ func AtieshSpellCritEffect(unit *Unit, idx int32) *Aura {
 		return unit.GetAura(label)
 	}
 
-	stats := stats.Stats{stats.Crit: 2 * CritRatingPerCritChance}
+	// Power of the Guardian 28142: aura 57, spell crit only.
+	stats := stats.Stats{stats.SpellCrit: 2 * CritRatingPerCritChance}
 
 	return MakePermanent(unit.RegisterAura(Aura{
 		ActionID:   ActionID{SpellID: 28142}.WithTag(idx),

@@ -73,14 +73,10 @@ func TestWarriorAndRogueHaveNoIntellectCritAtAnyLevel(t *testing.T) {
 	}
 }
 
-// AddCritStatDependencies wires both Agility and Intellect into the one
-// Crit stat for every class, at the per-level client rates, because
-// StatDependencyManager sums every enabled dependency into its destination
-// (see TestMultipleStatDep in sim/core/stats/deps_test.go). Whether the
-// game itself stacks a hybrid's two sources is unmeasured (see
-// AddCritStatDependencies' comment); if the beta character sheet test
-// rules otherwise, this is the test that must change.
-func TestAddCritStatDependenciesWiresBothStatsForEveryClass(t *testing.T) {
+// AddCritStatDependencies wires Agility into melee and ranged crit and
+// Intellect into spell crit, at the per-level client rates, and neither
+// into the other table or the every-table Crit.
+func TestAddCritStatDependenciesKeepsTheTablesApart(t *testing.T) {
 	agi, intel := 100.0, 200.0
 	for _, class := range allClasses {
 		for _, level := range []int32{1, 30, CharacterMaxLevel} {
@@ -93,18 +89,18 @@ func TestAddCritStatDependenciesWiresBothStatsForEveryClass(t *testing.T) {
 				stats.Intellect: intel,
 			})
 
-			wantCrit := agi*CritPerAgiAtLevel(class, level)*CritRatingPerCritChance +
-				intel*SpellCritPerIntAtLevel(class, level)*CritRatingPerCritChance
-			if result[stats.Crit] != wantCrit {
-				t.Errorf("%v level %d: Crit = %v, want %v (Agility and Intellect contributions summed)",
-					class, level, result[stats.Crit], wantCrit)
+			wantMelee := agi * CritPerAgiAtLevel(class, level) * CritRatingPerCritChance
+			wantSpell := intel * SpellCritPerIntAtLevel(class, level) * CritRatingPerCritChance
+			if result[stats.MeleeCrit] != wantMelee || result[stats.SpellCrit] != wantSpell || result[stats.Crit] != 0 {
+				t.Errorf("%v level %d: melee %v, spell %v, every-table %v; want %v from Agility, %v from Intellect, 0",
+					class, level, result[stats.MeleeCrit], result[stats.SpellCrit], result[stats.Crit], wantMelee, wantSpell)
 			}
 		}
 	}
 }
 
-// Rogue has no Intellect rate, so the Intellect it carries contributes
-// nothing to Crit.
+// Rogue has no Intellect rate, so the Intellect it carries gives it no
+// spell crit.
 func TestAddCritStatDependenciesRogueIgnoresIntellect(t *testing.T) {
 	character := &Character{}
 	AddCritStatDependencies(character, proto.Class_ClassRogue)
@@ -115,8 +111,8 @@ func TestAddCritStatDependenciesRogueIgnoresIntellect(t *testing.T) {
 	})
 
 	wantCrit := 100 * CritPerAgiAtLevel(proto.Class_ClassRogue, CharacterMaxLevel) * CritRatingPerCritChance
-	if result[stats.Crit] != wantCrit {
-		t.Fatalf("Crit = %v, want %v (Agility only; Intellect must not contribute)", result[stats.Crit], wantCrit)
+	if result[stats.MeleeCrit] != wantCrit || result[stats.SpellCrit] != 0 {
+		t.Fatalf("melee crit %v, spell crit %v; want %v (Agility only) and 0", result[stats.MeleeCrit], result[stats.SpellCrit], wantCrit)
 	}
 }
 
@@ -319,14 +315,10 @@ func TestSkyborneBaseStatsAreDeclaredClones(t *testing.T) {
 	}
 }
 
-// The Crit column of ClassBaseCrit is max(SpellCrit, MeleeCrit) over Era's
-// pair, with one exception the table documents: upstream's MeleeCrit column
-// is its Dodge column duplicated for all nine classes, so where that value
-// would win the max it is discarded and the spell value taken. This test
-// pins the nine merged values, and separately pins the rule that no class
-// takes a Crit equal to its Dodge while a lower spell value exists — the
-// shape that would mean the duplicated column crept back in.
-func TestClassBaseCritDropsTheDuplicatedMeleeColumn(t *testing.T) {
+// ClassBaseCrit keeps Era's two columns, one per table: melee and ranged
+// (equal to Era's Dodge column, which vanilla servers read for both) and
+// spell.
+func TestClassBaseCritKeepsEraTwoColumns(t *testing.T) {
 	// Era's pair per class, read from master:sim/core/base_stats.go:84-130.
 	type eraPair struct{ spell, melee float64 }
 	era := map[proto.Class]eraPair{
@@ -340,33 +332,23 @@ func TestClassBaseCritDropsTheDuplicatedMeleeColumn(t *testing.T) {
 		proto.Class_ClassWarlock: {1.7, 2.0},
 		proto.Class_ClassDruid:   {1.8, 0.9},
 	}
-	want := map[proto.Class]float64{
-		proto.Class_ClassWarrior: 0.0,
-		proto.Class_ClassPaladin: 3.5,
-		proto.Class_ClassHunter:  3.6,
-		proto.Class_ClassRogue:   0.0,
-		proto.Class_ClassPriest:  0.8, // melee 3.0 == Dodge 3.0, discarded
-		proto.Class_ClassShaman:  2.3,
-		proto.Class_ClassMage:    0.2, // melee 3.2 == Dodge 3.2, discarded
-		proto.Class_ClassWarlock: 1.7, // melee 2.0 == Dodge 2.0, discarded
-		proto.Class_ClassDruid:   1.8,
-	}
-	for class, wantCrit := range want {
+	for class, want := range era {
 		row := ClassBaseCrit[class]
-		gotCrit := row[stats.Crit] / CritRatingPerCritChance
-		if gotCrit != wantCrit {
-			t.Errorf("%v base Crit is %.4f, want %.4f", class, gotCrit, wantCrit)
+		if got := row[stats.MeleeCrit] / CritRatingPerCritChance; got != want.melee {
+			t.Errorf("%v base melee crit is %.4f, want Era's %.4f", class, got, want.melee)
 		}
-		gotDodge := row[stats.Dodge] / DodgeRatingPerDodgeChance
-		if gotDodge != era[class].melee {
-			t.Errorf("%v base Dodge is %.4f, want Era's %.4f", class, gotDodge, era[class].melee)
+		if got := row[stats.SpellCrit] / CritRatingPerCritChance; got != want.spell {
+			t.Errorf("%v base spell crit is %.4f, want Era's %.4f", class, got, want.spell)
 		}
-		if gotCrit == gotDodge && era[class].spell < gotDodge {
-			t.Errorf("%v takes base Crit %.4f, which is its Dodge value, over a lower spell value %.4f: the duplicated melee column is back", class, gotCrit, era[class].spell)
+		if row[stats.Crit] != 0 {
+			t.Errorf("%v base crit reaches every table (%v); Era states one value per table", class, row[stats.Crit])
+		}
+		if got := row[stats.Dodge] / DodgeRatingPerDodgeChance; got != want.melee {
+			t.Errorf("%v base Dodge is %.4f, want Era's %.4f", class, got, want.melee)
 		}
 	}
-	if len(ClassBaseCrit) != len(want)+1 { // +1 for ClassUnknown
-		t.Errorf("ClassBaseCrit has %d entries, want %d; a new class needs a row here", len(ClassBaseCrit), len(want)+1)
+	if len(ClassBaseCrit) != len(era)+1 { // +1 for ClassUnknown
+		t.Errorf("ClassBaseCrit has %d entries, want %d; a new class needs a row here", len(ClassBaseCrit), len(era)+1)
 	}
 }
 

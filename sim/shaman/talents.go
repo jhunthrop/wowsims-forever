@@ -188,23 +188,9 @@ func (shaman *Shaman) applyElementalDevastation() {
 
 	spellID := []int32{0, 30165, 29177, 29178}[rankIndex(shaman.Talents.ElementalDevastation, 4)]
 	critBonus := 3.0 * float64(shaman.Talents.ElementalDevastation) * core.CritRatingPerCritChance
-	// The client's text and effect (spell 30165, apply aura 52, melee crit)
-	// grant MELEE crit chance only. Forever's Crit stat is unified across
-	// spell, melee and ranged, so the stat bonus alone would also raise
-	// the shaman's own spell crit - the bonus an Elemental build was being
-	// credited for - and the proc takes the same amount back off every
-	// spell school while it is up.
-	procAura := shaman.NewTemporaryStatsAuraWrapped("Elemental Devastation Proc", core.ActionID{SpellID: spellID}, stats.Stats{stats.Crit: critBonus}, time.Second*10, func(aura *core.Aura) {
-		gainStat, loseStat := aura.OnGain, aura.OnExpire
-		aura.OnGain = func(aura *core.Aura, sim *core.Simulation) {
-			gainStat(aura, sim)
-			shaman.addSpellSchoolCrit(-critBonus)
-		}
-		aura.OnExpire = func(aura *core.Aura, sim *core.Simulation) {
-			loseStat(aura, sim)
-			shaman.addSpellSchoolCrit(critBonus)
-		}
-	})
+	// The client's text and effect (spell 30165, apply aura 52) grant melee
+	// crit chance only.
+	procAura := shaman.NewTemporaryStatsAura("Elemental Devastation Proc", core.ActionID{SpellID: spellID}, stats.Stats{stats.MeleeCrit: critBonus}, time.Second*10)
 
 	shaman.RegisterAura(core.Aura{
 		Label:    "Elemental Devastation",
@@ -218,13 +204,6 @@ func (shaman *Shaman) applyElementalDevastation() {
 			}
 		},
 	})
-}
-
-// addSpellSchoolCrit adds critRating to every magic school's crit bonus
-// (the per-school term SpellCritChance reads on top of the unified Crit
-// stat), leaving melee and ranged crit alone.
-func (shaman *Shaman) addSpellSchoolCrit(critRating float64) {
-	shaman.PseudoStats.SchoolBonusCritChance.AddToMagicSchools(critRating)
 }
 
 func (shaman *Shaman) applyImprovedFireTotems() {

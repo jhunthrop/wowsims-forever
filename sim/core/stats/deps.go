@@ -30,10 +30,11 @@ var safeDepsOrder = []Stat{
 	Health,
 	Mana,
 	MP5,
-	// Forever: MeleeCrit and SpellCrit are one stat. One entry, because
-	// safeDepsOrder is an evaluation order and a stat evaluated twice
-	// would apply its dependents twice.
+	// Crit on every table, then each table's own part (Agility and
+	// Intellect feed those).
 	Crit,
+	MeleeCrit,
+	SpellCrit,
 	Defense,
 	Block,
 	BlockValue,

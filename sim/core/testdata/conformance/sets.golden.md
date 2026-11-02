@@ -118,7 +118,7 @@ Every Phase 1 client set (sim/core/client_sets_gen.go: any piece with a loot sou
 | Dragonstalker Armor | 215 | 5 | 21928 | Nature's Ally | hand-written (legacy) | registered, not verified |  |
 | Dragonstalker Armor | 215 | 8 | 23578 | Expose Weakness | hand-written (legacy) | registered, not verified |  |
 | The Ten Storms | 216 | 3 | 21899 | Improved Chain Heal | hand-written (legacy) | registered, not verified |  |
-| The Ten Storms | 216 | 5 | 23570 | Increased Critical Spell Nature | stats | unreachable in Phase 1 | mismatch (1 of 5 pieces obtainable) engine adds nothing, client Crit 3 |
+| The Ten Storms | 216 | 5 | 23570 | Increased Critical Spell Nature | stats | unreachable in Phase 1 | mismatch (1 of 5 pieces obtainable) engine adds nothing, client SpellCrit 3 |
 | The Ten Storms | 216 | 8 | 23551 | Lightning Shield | hand-written (legacy) | registered, not verified |  |
 | Judgement Armor | 217 | 3 | 23565 | Increased Aura Radii | hand-written (legacy) | registered, not verified |  |
 | Judgement Armor | 217 | 5 | 24196 | Increase Spell Dam 47 | stats | declared, matches |  |

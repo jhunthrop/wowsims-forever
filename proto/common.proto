@@ -96,8 +96,9 @@ enum Stat {
 	StatNaturePower = 10;
 	StatShadowPower = 11;
 	StatMP5 = 12;
-	// Forever merges spell, melee and ranged hit into one stat, and
-	// likewise crit. This enum must stay index-synced with the Go Stat
+	// Forever merges spell, melee and ranged hit into one stat. Crit on
+	// every table is StatCrit; the table-specific parts follow
+	// StatFeralAttackPower. This enum must stay index-synced with the Go Stat
 	// enum in sim/core/stats/stats.go; stats_test.go enforces it.
 	StatHit = 13;
 	StatCrit = 14;
@@ -128,6 +129,12 @@ enum Stat {
 	StatHealingPower = 38;
 	StatSpellDamage = 39;
 	StatFeralAttackPower = 40;
+	// Forever unifies item crit, not the crit tables. StatCrit is crit on
+	// every table (an item's crit rating, aura 290). StatMeleeCrit is melee
+	// and ranged crit only (Agility, aura 52: a sharpening stone, Cruelty)
+	// and StatSpellCrit spell crit only (Intellect, aura 57: a wizard oil).
+	StatMeleeCrit = 41;
+	StatSpellCrit = 42;
 	// DO NOT add new stats here without discussing it first; new stats come with
 	// a performance penalty.
 }

@@ -212,11 +212,15 @@ const petAttackPowerShare = 0.10
 // on the same client spell and this fork's demons (Warlock Pet Scaling
 // 416189 has the same hit channels). The inheritance is linear in the
 // chosen stat, so the same function maps the owner's dynamic stat changes.
+// The crit channel is aura 52, the melee and ranged table: the pet takes
+// the hunter's every-table crit and its melee and ranged crit, never its
+// spell-only crit.
 func (hunter *Hunter) makeStatInheritance() core.PetStatInheritance {
 	return func(ownerStats stats.Stats) stats.Stats {
 		return stats.Stats{
 			stats.AttackPower: ownerStats[hunter.petAttackPowerSource] * petAttackPowerShare,
 			stats.Crit:        ownerStats[stats.Crit],
+			stats.MeleeCrit:   ownerStats[stats.MeleeCrit],
 			stats.Hit:         ownerStats[stats.Hit],
 		}
 	}

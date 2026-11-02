@@ -98,7 +98,9 @@ func (warrior *Warrior) ApplyTalents() {
 	//	Anticipation: "+20 Defense Skill" at rank 5, so 4 a point - twice
 	//	              vanilla's 2, which is what the old body applied.
 	//	Deflection:   "+5% Parry" at rank 5.
-	warrior.AddStat(stats.Crit, core.CritRatingPerCritChance*1*float64(warrior.Talents.Cruelty))
+	// Cruelty 12320 is aura 52 (weapon crit): melee, never a weapon proc's
+	// spell.
+	warrior.AddStat(stats.MeleeCrit, core.CritRatingPerCritChance*1*float64(warrior.Talents.Cruelty))
 	warrior.AddStat(stats.Defense, 4*float64(warrior.Talents.Anticipation))
 	warrior.AddStat(stats.Parry, 1*float64(warrior.Talents.Deflection))
 
