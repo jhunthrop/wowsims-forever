@@ -857,7 +857,7 @@
           }
         }
       },
-      "notes": "You are one of the five: a hurt healer gets Rejuvenation at the party pace. Rejuvenation is cast at rank 4 (2090) on every target: over the raid fight it returns more effective healing for its mana than the top rank (owner ruling 3, sim-accuracy round 9, design/reviews/2026-11-02-sim-audit-round9/ranks.md)."
+      "notes": "You are one of the five: a hurt healer gets Rejuvenation at the party pace. Rejuvenation is cast at rank 4 (2090) on every target: over the raid fight it returns more effective healing for its mana than the top rank."
     },
     {
       "action": {

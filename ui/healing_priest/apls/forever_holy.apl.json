@@ -164,7 +164,7 @@
           }
         }
       },
-      "notes": "Flash Heal is the fast heal and the dear one: it is only for a tank that is genuinely low. The tank's Flash Heal is cast at rank 2 (9472): over the raid fight it returns more effective healing for far less mana (owner ruling 3, sim-accuracy round 9, design/reviews/2026-11-02-sim-audit-round9/ranks.md)."
+      "notes": "Flash Heal is the fast heal and the dear one: it is only for a tank that is genuinely low. The tank's Flash Heal is cast at rank 2 (9472): over the raid fight it returns more effective healing for far less mana."
     },
     {
       "action": {
