@@ -72,8 +72,8 @@ func TestHealingMasksAreDistinctFromTheShadowOnes(t *testing.T) {
 // "Smite, Holy Fire, and instant cast spells", but its cost modifier
 // (14520, SpellEffect 687728, aura 108 misc 14) names spells by class
 // mask: Smite, Holy Fire, Shadow Word: Pain, Devouring Plague, Renew,
-// Power Word: Shield, Holy Nova, Prayer of Mending and Vampiric Embrace
-// among the spells the package registers. Mind Flay (mask 0 bit 23),
+// Power Word: Shield, Holy Nova, Prayer of Mending, Vampiric Embrace and
+// Inner Fire (588-10952, mask 0x2) among the spells the package registers. Mind Flay (mask 0 bit 23),
 // Shadow Word: Death (mask 1 bit 1), Penance (mask 1 bit 23) and
 // Desperate Prayer (mask 0 bit 24) are outside it.
 func TestMentalAgilityFollowsTheClientMask(t *testing.T) {
@@ -82,7 +82,7 @@ func TestMentalAgilityFollowsTheClientMask(t *testing.T) {
 		"Shadow Word: Pain": PriestSpellMaskShadowWordPain, "Devouring Plague": PriestSpellMaskDevouringPlague,
 		"Renew": PriestSpellMaskRenew, "Power Word: Shield": PriestSpellMaskPowerWordShield,
 		"Holy Nova": PriestSpellMaskHolyNova, "Prayer of Mending": PriestSpellMaskPrayerOfMending,
-		"Vampiric Embrace": PriestSpellMaskVampiricEmbrace,
+		"Vampiric Embrace": PriestSpellMaskVampiricEmbrace, "Inner Fire": PriestSpellMaskInnerFire,
 	} {
 		if PriestSpellMaskMentalAgility&mask == 0 {
 			t.Errorf("Mental Agility leaves out %s, which its client mask names", name)

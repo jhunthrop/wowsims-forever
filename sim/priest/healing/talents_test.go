@@ -417,3 +417,16 @@ func TestSpiritualHealingRaisesBindingHeal(t *testing.T) {
 	binding := func(a *HealingPriest) *core.Spell { return a.BindingHeal[len(a.BindingHeal)-1] }
 	assertRatio(t, "Binding Heal", tankHealed(t, talents, binding), tankHealed(t, "", binding), 1.10)
 }
+
+// Inner Focus's crit is "if it is a non-periodic spell": its crit modifier
+// (14751 effect 1, SpellEffect 692357) names no Renew rank, so a Renew
+// ticking while Inner Focus is up crits no more often.
+func TestInnerFocusLeavesRenewsTicksAlone(t *testing.T) {
+	sim, agent := healerSim(t, 60, onePoint(discTree, innerFocus, 1))
+	renew := agent.Renew[len(agent.Renew)-1]
+	crit := renew.BonusCritRating
+	agent.InnerFocusAura.Activate(sim)
+	if got := renew.BonusCritRating - crit; got != 0 {
+		t.Errorf("Inner Focus added %v crit rating to Renew, a periodic heal", got)
+	}
+}

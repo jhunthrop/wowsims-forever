@@ -77,6 +77,7 @@ const (
 	PriestSpellMaskBindingHeal
 	PriestSpellMaskDivineGrace
 	PriestSpellMaskContingencyPlanHeal
+	PriestSpellMaskInnerFire
 )
 
 // PriestSpellMaskInstantShadowDamage is every Shadow damage spell this
@@ -110,11 +111,12 @@ const PriestSpellMaskTwinDisciplines = PriestSpellMaskInstantShadowDamage | Prie
 // PriestSpellMaskMentalAgility is what Mental Agility's cost modifier
 // names: the client mask of 14520 (SpellEffect 687728, aura 108 misc 14),
 // not its "instant cast spells" text. It leaves out Mind Flay, Shadow
-// Word: Death, Penance and Desperate Prayer.
+// Word: Death, Penance and Desperate Prayer, and names Inner Fire (mask
+// 0x2 on every rank).
 const PriestSpellMaskMentalAgility = PriestSpellMaskSmite | PriestSpellMaskHolyFire |
 	PriestSpellMaskShadowWordPain | PriestSpellMaskDevouringPlague | PriestSpellMaskRenew |
 	PriestSpellMaskPowerWordShield | PriestSpellMaskHolyNova | PriestSpellMaskPrayerOfMending |
-	PriestSpellMaskVampiricEmbrace
+	PriestSpellMaskVampiricEmbrace | PriestSpellMaskInnerFire
 
 // PriestSpellMaskSpiritualHealing is what Spiritual Healing (14898) names:
 // the direct heals of SpellEffect 692104 (Lesser Heal, Heal, Greater Heal,
