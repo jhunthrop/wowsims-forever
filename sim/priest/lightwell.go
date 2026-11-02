@@ -1,6 +1,7 @@
 package priest
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/wowsims/classic/sim/common/clientdamage"
@@ -109,8 +110,10 @@ func (priest *Priest) registerLightwellRenew(rankNumber int, rank lightwellRank)
 		ClientBaseDamage: tick.Range(int(priest.Level)),
 
 		Hot: core.DotConfig{
+			// One label a rank: ranks sharing an aura would share its
+			// tick handlers, and a click would tick every rank's renew.
 			Aura: core.Aura{
-				Label: "Lightwell Renew",
+				Label: fmt.Sprintf("Lightwell Renew (Rank %d)", rankNumber),
 			},
 			NumberOfTicks: lightwellRenewTicks,
 			TickLength:    lightwellRenewTickLength,

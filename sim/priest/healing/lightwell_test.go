@@ -165,3 +165,27 @@ func lightwellHealing(t *testing.T, agent *HealingPriest) float64 {
 	}
 	return healing
 }
+
+// A click gives the renew of the rank the priest cast, and only that one.
+// Every rank's renew once shared the aura label "Lightwell Renew", so the
+// one aura on a member carried all three ranks' tick handlers: a click on
+// a rank-3 well ticked 160 + 233 + 320 a tick instead of 320.
+func TestALightwellClickTicksOnlyTheCastRanksRenew(t *testing.T) {
+	sim, agent := lightwellSim(t, lightwellProfile(12))
+	top := agent.Lightwell[3]
+	top.ApplyEffects(sim, &agent.Unit, top)
+	for !sim.Step() {
+	}
+	for _, lower := range []int32{7001, 27873} {
+		var healing float64
+		for _, metrics := range agent.GetSpell(core.ActionID{SpellID: lower}).SpellMetrics {
+			healing += metrics.TotalHealing
+		}
+		if healing != 0 {
+			t.Errorf("a rank-3 Lightwell's clicks healed %.0f through the rank renew %d, want 0", healing, lower)
+		}
+	}
+	if healing := lightwellHealing(t, agent); healing == 0 {
+		t.Error("the rank-3 renew healed nothing")
+	}
+}
