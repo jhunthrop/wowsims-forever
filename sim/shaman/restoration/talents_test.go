@@ -6,8 +6,15 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
 	"github.com/wowsims/classic/sim/healsim"
+)
+
+// Water Shield's buff (408510) and its mana proc (408511).
+const (
+	waterShieldBuffID = 408510
+	waterShieldManaID = 408511
 )
 
 func TestImprovedHealingWaveShortensOnlyHealingWave(t *testing.T) {
@@ -177,5 +184,30 @@ func TestHealingFocusKeepsHealingCastTimeUnderDamage(t *testing.T) {
 		if got := healer.LightningBolt[10].PushbackReduction; got != 0 {
 			t.Errorf("Healing Focus %d/3: Lightning Bolt keeps its cast time %.2f of the time, want 0", rank, got)
 		}
+	}
+}
+
+// Water Shield (408510; proc row 223904's ProcTypeMask 0x362A8 holds the
+// taken-melee, taken-ranged and taken-magic bits; "When a spell, melee, or
+// ranged attack hits the caster") spends a globe for mana when the heal
+// profile's raid-wide pulse lands on the shaman.
+func TestWaterShieldReturnsManaWhenARaidPulseHitsTheShaman(t *testing.T) {
+	player := newHealerPlayer(60, restoTalents(map[int]int{posWaterShield: 1}), castOnce(waterShieldBuffID, 0))
+	model := &proto.RaidDamageModel{
+		Profile: "test", TankHealth: 9000, MemberHealth: 5000,
+		PulseDamage: 50, PulseIntervalSeconds: 1, PulseMembers: 0, PulsesReachHealer: true,
+	}
+	result := core.RunRaidSim(healsim.Request(player, model, 20, 1))
+	if result.Error != nil {
+		t.Fatal(result.Error.Message)
+	}
+	var gained float64
+	for _, resource := range result.RaidMetrics.Parties[0].Players[healsim.HealerIndex].Resources {
+		if resource.Type == proto.ResourceType_ResourceTypeMana && resource.Id.GetSpellId() == waterShieldManaID {
+			gained += resource.Gain
+		}
+	}
+	if gained <= 0 {
+		t.Error("pulses hit the shaman for 20 s and Water Shield returned no mana")
 	}
 }
