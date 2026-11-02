@@ -189,15 +189,21 @@ dps_results: {
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-NoBuffs-Tank-Consumes-LongMultiTarget"
- value: {}
+ value: {
+  tps: 4.32
+ }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-NoBuffs-Tank-Consumes-LongSingleTarget"
- value: {}
+ value: {
+  tps: 4.32
+ }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-NoBuffs-Tank-Consumes-ShortSingleTarget"
- value: {}
+ value: {
+  tps: 5.4
+ }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-SwitchInFrontOfTarget-Default"

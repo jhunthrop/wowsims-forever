@@ -145,6 +145,7 @@ type Druid struct {
 	DemoralizingRoar     *DruidSpell
 	Enrage               *DruidSpell
 	FaerieFire           *DruidSpell
+	FaerieFireFeral      *DruidSpell
 	FerociousBite        *DruidSpell
 	ForceOfNature        *DruidSpell
 	FrenziedRegeneration *DruidSpell
@@ -189,6 +190,7 @@ type Druid struct {
 	DemoralizingRoarAuras    core.AuraArray
 	EnrageAura               *core.Aura
 	FaerieFireAuras          core.AuraArray
+	FaerieFireFeralAuras     core.AuraArray
 	FrenziedRegenerationAura *core.Aura
 	FurorAura                *core.Aura
 
@@ -272,6 +274,7 @@ func (druid *Druid) Initialize() {
 	druid.BleedCategories = druid.GetEnemyExclusiveCategories(core.BleedEffectCategory)
 
 	druid.registerFaerieFireSpell()
+	druid.registerFaerieFireFeralSpell()
 	druid.registerInnervateCD()
 }
 
