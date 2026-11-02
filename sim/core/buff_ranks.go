@@ -365,3 +365,25 @@ var (
 		{SpellID: 10405, Level: 54, Amount: 30},
 	}
 )
+
+// A party's Mana Tide Totem (round 9). The talent (16190) is Restoration
+// tier 3, so a raid has it from level 25; each totem rank (16190, 17354,
+// 17359, 1325256 at 1, 38, 48 and 58) places a tick spell that restores its
+// amount every 3 s (aura 24). SpellID is the tick's.
+const ManaTideTotemTalentLevel = 25
+
+var ManaTideTickRanks = BuffRanks{
+	{SpellID: 16191, Level: 1, Amount: 88},
+	{SpellID: 17355, Level: 38, Amount: 133},
+	{SpellID: 17360, Level: 48, Amount: 197},
+	{SpellID: 1325257, Level: 58, Amount: 290},
+}
+
+// PartyManaTidePerTick is the mana a party member of this level gets from
+// each tick of a party shaman's Mana Tide Totem; 0 before the talent opens.
+func PartyManaTidePerTick(level int32) float64 {
+	if level < ManaTideTotemTalentLevel {
+		return 0
+	}
+	return ManaTideTickRanks.At(int(level))
+}

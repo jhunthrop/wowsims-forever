@@ -1194,11 +1194,11 @@ const ManaTideTotemDuration = time.Second * 12
 const ManaTideTotemCD = time.Minute * 5
 
 func registerManaTideTotemCD(agent Agent, numManaTideTotems int32) {
-	if numManaTideTotems == 0 {
+	character := agent.GetCharacter()
+	if numManaTideTotems == 0 || PartyManaTidePerTick(character.Level) == 0 {
 		return
 	}
 
-	character := agent.GetCharacter()
 	initialDelay := time.Duration(0)
 	mttAura := ManaTideTotemAura(character, -1)
 
@@ -1238,7 +1238,7 @@ func ManaTideTotemAura(character *Character, actionTag int32) *Aura {
 		}
 	}
 
-	manaPerTick := 290.0
+	manaPerTick := PartyManaTidePerTick(character.Level)
 
 	return character.GetOrRegisterAura(Aura{
 		Label:    "ManaTideTotem-" + actionID.String(),

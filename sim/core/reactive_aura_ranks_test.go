@@ -60,3 +60,16 @@ func TestStoneskinExpiresCleanly(t *testing.T) {
 		}
 	}
 }
+
+// A party's Mana Tide Totem (the custom panel's mana_tide_totems) restored
+// 290 mana a tick at every level. Mana Tide Totem is Restoration tier 3 in
+// Forever (level 25); its ticks 16191, 17355, 17360 and 1325257 restore 88,
+// 133, 197 and 290 mana every 3 s (aura 24) from the totem ranks learned at
+// 1 (with the talent), 38, 48 and 58.
+func TestPartyManaTideFollowsTheClientRanks(t *testing.T) {
+	for _, c := range []levelWant{{20, 0}, {24, 0}, {25, 88}, {37, 88}, {38, 133}, {47, 133}, {48, 197}, {57, 197}, {58, 290}, {60, 290}} {
+		if got := PartyManaTidePerTick(int32(c.level)); got != c.want {
+			t.Errorf("party Mana Tide at level %d = %v a tick, want %v", c.level, got, c.want)
+		}
+	}
+}
