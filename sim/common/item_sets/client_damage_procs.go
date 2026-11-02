@@ -43,12 +43,14 @@ func damageOnMeleeHit(school core.SpellSchool) bonusModel {
 	}
 }
 
-// necropileDrain is Necropile Raiment's life leech on every harmful
-// spellcast, on the bonus's internal cooldown (which stops one cast's
-// several damage events from leeching twice). The client states no school
-// for the leech; it is Shadow, as the engine's earlier model had it, and a
-// leech cannot crit. The life it returns to the wearer is not modelled: the
-// sim measures no healing taken.
+// necropileDrain is Necropile Raiment's life leech on a harmful spellcast.
+// Its row is ProcChance 100 with no SpellProcsPerMinute row and a 10 ms
+// recovery, and its text says "a chance": the server holds the rate, and
+// the beta logs show rows of this shape proccing at about one a minute, so
+// it procs at the unstated rate (core.MakeHarmfulSpellProcAura). The client
+// states no school for the leech; it is Shadow, as the engine's earlier
+// model had it, and a leech cannot crit. The life it returns to the wearer
+// is not modelled: the sim measures no healing taken.
 func necropileDrain(bonusID int32) core.ApplyEffect {
 	bonus := core.MustClientSpellRow(bonusID)
 	drain := triggerOf(bonusID)
@@ -59,11 +61,12 @@ func necropileDrain(bonusID int32) core.ApplyEffect {
 			func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMagicHit)
 			})
-		trigger := onHarmfulSpellcast.trigger(bonus.Name, core.ActionID{SpellID: bonusID}, alwaysProcs,
-			func(sim *core.Simulation, _ *core.Spell, _ *core.SpellResult) {
-				leech.Cast(sim, character.CurrentTarget)
-			})
-		trigger.ICD = icdOf(bonus)
-		core.MakeProcTriggerAura(&character.Unit, trigger)
+		core.MakeHarmfulSpellProcAura(&character.Unit, core.HarmfulSpellProc{
+			Name:     bonus.Name,
+			ActionID: core.ActionID{SpellID: bonusID},
+			PPM:      unstatedProcRate.ppm,
+			ICD:      icdOf(bonus),
+			Handler:  func(sim *core.Simulation, target *core.Unit) { leech.Cast(sim, target) },
+		})
 	}
 }
