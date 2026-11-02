@@ -19,37 +19,12 @@ const (
 func init() {
 	core.AddEffectsToTest = false
 
-	core.NewItemEffect(DiamondFlask, func(agent core.Agent) {
-		character := agent.GetCharacter()
-
-		buffAura := character.NewTemporaryStatsAura("Diamond Flask", core.ActionID{SpellID: 24427}, stats.Stats{stats.Strength: 75}, time.Second*60)
-
-		triggerSpell := character.GetOrRegisterSpell(core.SpellConfig{
-			ActionID: core.ActionID{SpellID: 24427},
-			Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagOffensiveEquipment,
-
-			Cast: core.CastConfig{
-				CD: core.Cooldown{
-					Timer:    character.NewTimer(),
-					Duration: time.Minute * 6,
-				},
-				SharedCD: core.Cooldown{
-					Timer:    character.GetOffensiveTrinketCD(),
-					Duration: time.Second * 60,
-				},
-			},
-
-			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				buffAura.Activate(sim)
-			},
-		})
-
-		character.AddMajorCooldown(core.MajorCooldown{
-			Spell:    triggerSpell,
-			Priority: core.CooldownPriorityDefault,
-			Type:     core.CooldownTypeDPS,
-		})
-	})
+	// Diamond Flask: Forever's use, ItemEffect 101630, is 363881 "CHUG! CHUG!
+	// CHUG! CHUG!", a 5 sec channel restoring 1120 health, then 20 Strength
+	// for 1 min if it finishes (6 min cooldown), not Era's 75 Strength for 60
+	// sec. A 5 sec channel in the fight costs more than 20 Strength returns,
+	// and the sim runs no pre-pull channel, so it has no effect here.
+	core.NewItemEffect(DiamondFlask, func(core.Agent) {})
 
 	core.NewItemEffect(GeneralsPlateGauntlets, func(agent core.Agent) {
 		warrior := agent.(WarriorAgent).GetWarrior()

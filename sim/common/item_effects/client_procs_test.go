@@ -311,10 +311,10 @@ func TestSpireOfHakkarAndWallOfTheDead(t *testing.T) {
 	}
 }
 
-// Gloves of Holy Might's smite (1325229) is SpellCategories DefenseType 3,
-// ranged, in the 70707 client, as Hammer of Wrath (24239) is: it rolls the
-// ranged table, melee and ranged crit and the physical crit multiplier, not
-// the spell table.
+// Gloves of Holy Might's Smite, 1325229, is SpellCategories.DefenseType 3
+// (ranged) in the 70707 client, so it rolls the melee crit table and crits
+// for double, as a seal does: a melee wearer's spell crit is not what
+// decides it.
 func TestGlovesOfHolyMightRollsTheRangedTable(t *testing.T) {
 	sim, character := unbuffedCharacter(t, proto.Class_ClassHunter, proto.ItemSlot_ItemSlotHands, 867)
 	spell := character.GetSpell(core.ActionID{SpellID: 1325229})
@@ -322,21 +322,356 @@ func TestGlovesOfHolyMightRollsTheRangedTable(t *testing.T) {
 		t.Fatal("no Gloves of Holy Might proc spell")
 	}
 	if spell.DefenseType != core.DefenseTypeRanged {
-		t.Errorf("defense type %v, want ranged (client DefenseType 3)", spell.DefenseType)
+		t.Fatalf("defense type %v, want the client's ranged", spell.DefenseType)
+	}
+	character.AddStatDynamic(sim, stats.MeleeCrit, 40*core.CritRatingPerCritChance)
+	target := sim.Encounter.TargetUnits[0]
+	for i := 0; i < 2000; i++ {
+		spell.Cast(sim, target)
+	}
+	metrics := spell.SpellMetrics[target.UnitIndex]
+	if rate := float64(metrics.Crits) / float64(metrics.Hits+metrics.Crits); rate < 0.3 {
+		t.Errorf("crit %.1f%% of landed casts with 40%% melee crit, want the melee table", 100*rate)
+	}
+}
+
+// Mindtap Talisman (18371): Forever's use, ItemEffect 235401, is 1302205
+// Mindtap on a 7 min cooldown: aura 24, 125 mana every 1 sec for 10 sec,
+// and 1302206 Tapped Mind, -60 Intellect for 2 min. Wowhead Forever:
+// "Tap your mind, restoring 1250 mana over 10 sec, but reducing Intellect
+// by 60 for 2 min."
+func TestMindtapTalismanRestoresTheClientsManaAndTapsIntellect(t *testing.T) {
+	// Two identical mages from empty mana for 10 sec; only one taps.
+	run := func(tap bool) (manaGained, intellectLost float64) {
+		sim, character := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 18371)
+		spell := character.GetSpell(core.ActionID{SpellID: 1302205})
+		if spell == nil {
+			t.Fatal("no Mindtap use")
+		}
+		if spell.CD.Duration != 7*time.Minute {
+			t.Errorf("cooldown %v, want 7m", spell.CD.Duration)
+		}
+		character.SpendMana(sim, character.CurrentMana(), character.NewManaMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionAttack}))
+		intellect := character.GetStat(stats.Intellect)
+		if tap {
+			spell.Cast(sim, nil)
+		}
+		intellectLost = intellect - character.GetStat(stats.Intellect)
+		start := character.CurrentMana()
+		for sim.CurrentTime < 10*time.Second+time.Millisecond {
+			if sim.Step() {
+				t.Fatal("the fight ended early")
+			}
+		}
+		return character.CurrentMana() - start, intellectLost
+	}
+	tapped, lost := run(true)
+	untapped, _ := run(false)
+	if math.Abs(lost-60) > 1e-6 {
+		t.Errorf("Intellect fell by %v, want 60", lost)
+	}
+	if got := tapped - untapped; math.Abs(got-1250) > 1 {
+		t.Errorf("Mindtap restored %v mana over 10 sec, want 1250", got)
+	}
+}
+
+// Burst of Knowledge (11832): Forever's ItemEffect 99371 puts 15646 (aura
+// 73, -150 mana cost for 10 sec) on a 6 min cooldown, not Era's 15 min.
+func TestBurstOfKnowledgeIsOnTheClientsSixMinuteCooldown(t *testing.T) {
+	_, character := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 11832)
+	spell := character.GetSpell(core.ActionID{ItemID: 11832})
+	if spell == nil {
+		t.Fatal("no Burst of Knowledge use")
+	}
+	if spell.CD.Duration != 6*time.Minute {
+		t.Errorf("cooldown %v, want 6m", spell.CD.Duration)
+	}
+}
+
+// Forever replaced three Era uses the engine still modelled (ItemEffect
+// rows of the 70707 client, Wowhead Forever server text read 2026-11-02):
+//   - Sanctified Orb (20512): 24865 "Restores 319 to 361 Mana", a 5 min
+//     item cooldown and the 1 min conjured category 30, not Era's 3% crit.
+//   - Diamond Flask (20130): 363881, a 5 sec channel restoring 1120 health
+//     and then 20 Strength for 1 min, not Era's 75 Strength.
+//   - Smolderweb's Eye (13213): 1308917 Mother's Watch, "Remove 1 Disarm
+//     effect from target ally", not Era's poison.
+func TestSanctifiedOrbRestoresTheClientsMana(t *testing.T) {
+	sim, character := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 20512)
+	spell := character.GetSpell(core.ActionID{ItemID: 20512})
+	if spell == nil {
+		t.Fatal("no Sanctified Orb use")
+	}
+	if spell.CD.Duration != 5*time.Minute {
+		t.Errorf("cooldown %v, want 5m", spell.CD.Duration)
+	}
+	crit := character.GetStat(stats.Crit)
+	character.SpendMana(sim, character.CurrentMana(), character.NewManaMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionAttack}))
+	spell.Cast(sim, nil)
+	if got := character.CurrentMana(); got < 318.75-1e-6 || got > 361.25+1e-6 {
+		t.Errorf("restored %v mana, want 319 to 361", got)
+	}
+	if character.GetStat(stats.Crit) != crit {
+		t.Error("Sanctified Orb still grants Era's crit")
+	}
+}
+
+func TestDiamondFlaskAndSmolderwebsEyeKeepNoEraUse(t *testing.T) {
+	_, warrior := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotTrinket1, 20130)
+	if warrior.GetSpell(core.ActionID{SpellID: 24427}) != nil {
+		t.Error("Diamond Flask still casts Era's 75 Strength")
+	}
+	_, mage := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 13213)
+	if mage.GetSpell(core.ActionID{SpellID: 17330}) != nil {
+		t.Error("Smolderweb's Eye still casts Era's poison")
+	}
+}
+
+// Nat Pagle's Broken Reel (19947): ItemEffect cooldown 75000 ms.
+func TestNatPaglesBrokenReelIsOnTheClientsCooldown(t *testing.T) {
+	_, character := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 19947)
+	spell := character.GetSpell(core.ActionID{ItemID: 19947})
+	if spell == nil {
+		t.Fatal("no Nat Pagle's Broken Reel use")
+	}
+	if spell.CD.Duration != 75*time.Second {
+		t.Errorf("cooldown %v, want 1m15s", spell.CD.Duration)
+	}
+}
+
+// Forever retuned these chance-on-hit and equip effects under new spells
+// (ItemXItemEffect, 70707), and the engine still rolled Era's:
+//   - Gutwrencher (5616): 1294426 Rend, 11 every 1 sec for 7 sec ("bleed for
+//     77 damage over 7 sec"), not Era's 8 every 3 sec for 30 sec.
+//   - Barman Shanker (12791): 1300787 Rend, 14 every 1 sec for 7 sec, doubled
+//     when applied from behind ("98 damage over 7 sec. Deals 2 times as much
+//     damage if applied while behind the target"), not Era's 10 x 10.
+//   - The Lobotomizer (19324): 1290950 Brain Damage is Shadow (school 32,
+//     defense type magic), 250 with variance 0.4, not physical.
+//   - Razor Gauntlets (18326): 1302193, "When struck in combat, inflicts 7
+//     Nature damage to the attacker", not Era's 3 Arcane.
+//   - Draconic Infused Emblem (22268): no use; equip 1318931 is a chance on a
+//     harmful spellcast of 1318930, +35 spell damage and healing for 10 sec.
+func TestForeverBleedProcsTickTheClientsRows(t *testing.T) {
+	for _, c := range []struct {
+		name          string
+		item, spellID int32
+		tick          float64
+	}{
+		{"Gutwrencher", 5616, 1294426, 11},
+		{"Barman Shanker from behind", 12791, 1300787, 28},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			sim, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, c.item)
+			spell := character.GetSpell(core.ActionID{SpellID: c.spellID})
+			if spell == nil {
+				t.Fatalf("no proc spell %d", c.spellID)
+			}
+			target := sim.Encounter.TargetUnits[0]
+			for i := 0; i < 50 && !spell.Dot(target).IsActive(); i++ {
+				spell.Cast(sim, target)
+			}
+			dot := spell.Dot(target)
+			if !dot.IsActive() {
+				t.Fatal("the bleed never applied")
+			}
+			if dot.SnapshotBaseDamage != c.tick || dot.NumberOfTicks != 7 || dot.TickLength != time.Second {
+				t.Errorf("bleed is %v x %d every %v, want %v x 7 every 1s", dot.SnapshotBaseDamage, dot.NumberOfTicks, dot.TickLength, c.tick)
+			}
+		})
+	}
+}
+
+func TestTheLobotomizerHitsForShadow(t *testing.T) {
+	_, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, 19324)
+	spell := character.GetSpell(core.ActionID{SpellID: 1290950})
+	if spell == nil {
+		t.Fatal("no Brain Damage proc")
+	}
+	if spell.SpellSchool != core.SpellSchoolShadow || spell.DefenseType != core.DefenseTypeMagic {
+		t.Errorf("Brain Damage is school %v defense %v, want Shadow magic", spell.SpellSchool, spell.DefenseType)
+	}
+}
+
+func TestRazorGauntletsAndDraconicInfusedEmblemUseForeversSpells(t *testing.T) {
+	_, warrior := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotHands, 18326)
+	if warrior.GetSpell(core.ActionID{SpellID: 1302193}) == nil {
+		t.Error("Razor Gauntlets do not deal Forever's 7 Nature when struck")
+	}
+	_, mage := unbuffedCharacter(t, proto.Class_ClassMage, proto.ItemSlot_ItemSlotTrinket1, 22268)
+	if mage.GetSpell(core.ActionID{ItemID: 22268}) != nil {
+		t.Error("Draconic Infused Emblem keeps Era's use")
+	}
+	if mage.GetAuraByID(core.ActionID{SpellID: 1318930}) == nil {
+		t.Error("Draconic Infused Emblem has no Forever equip proc")
+	}
+}
+
+// Blazing Rapier (12777): 16898 Blaze is aura 3, 20 every 3 sec for 30 sec
+// ("Burns the enemy for 200 damage over 30 sec"; Era's was 100), and its
+// defense type is magic, so it lands on the spell hit roll.
+func TestBlazingRapierBurnsForTheClientsTwentyATick(t *testing.T) {
+	sim, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, 12777)
+	spell := character.GetSpell(core.ActionID{SpellID: 16898})
+	if spell == nil {
+		t.Fatal("no Blaze proc")
 	}
 	target := sim.Encounter.TargetUnits[0]
-	maxCrit := 0.0
-	for i := 0; i < 4000; i++ {
-		before := spell.SpellMetrics[target.UnitIndex]
+	for i := 0; i < 50 && !spell.Dot(target).IsActive(); i++ {
 		spell.Cast(sim, target)
-		after := spell.SpellMetrics[target.UnitIndex]
-		if after.Crits == before.Crits+1 {
-			maxCrit = max(maxCrit, after.TotalDamage-before.TotalDamage)
-		}
 	}
-	// The roll tops out at 123.2; a ranged crit doubles it, a spell crit
-	// adds half.
-	if maxCrit < 112*1.1*1.8 {
-		t.Errorf("largest crit %.1f, want a physical double of the 101-123 roll", maxCrit)
+	dot := spell.Dot(target)
+	if !dot.IsActive() {
+		t.Fatal("Blaze never applied")
+	}
+	if dot.SnapshotBaseDamage != 20 || dot.NumberOfTicks != 10 || dot.TickLength != 3*time.Second {
+		t.Errorf("Blaze is %v x %d every %v, want 20 x 10 every 3s", dot.SnapshotBaseDamage, dot.NumberOfTicks, dot.TickLength)
+	}
+}
+
+// Era weapon procs whose spell ids Forever kept but retuned (70707
+// SpellEffect and SpellMisc rows; Wowhead Forever server text, read
+// 2026-11-02). Each bleed, poison or drain ticks the client's amount at the
+// client's period for the client's duration.
+func TestRetunedEraProcDotsTickTheClientsRows(t *testing.T) {
+	for _, c := range []struct {
+		name          string
+		item, spellID int32
+		tick          float64
+		ticks         int32
+		period        time.Duration
+	}{
+		// "bleed for 155 damage over 15 sec"
+		{"Bloodrazor", 809, 17504, 31, 5, 3 * time.Second},
+		// "bleed for 105 damage over 5 sec"
+		{"Eskhandar's Left Claw", 18202, 22639, 21, 5, time.Second},
+		// "13 Nature damage every 2 sec ... for 14 sec"
+		{"Hookfang Shanker", 11635, 13526, 13, 7, 2 * time.Second},
+		// "10 Nature damage every 1 sec ... for 10 sec"
+		{"Keris of Zul'Serak", 12582, 16528, 10, 10, time.Second},
+		// "21 Shadow damage every 1 sec ... Lasts for 10 sec"
+		{"Skullforge Reaver", 13361, 17484, 21, 10, time.Second},
+		// "an additional 36 damage over 6 sec"
+		{"Volcanic Hammer", 12792, 18082, 12, 3, 2 * time.Second},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			sim, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, c.item)
+			spell := character.GetSpell(core.ActionID{SpellID: c.spellID})
+			if spell == nil {
+				t.Fatalf("no proc spell %d", c.spellID)
+			}
+			target := sim.Encounter.TargetUnits[0]
+			for i := 0; i < 50 && !spell.Dot(target).IsActive(); i++ {
+				spell.Cast(sim, target)
+			}
+			dot := spell.Dot(target)
+			if !dot.IsActive() {
+				t.Fatal("the periodic effect never applied")
+			}
+			if dot.SnapshotBaseDamage != c.tick || dot.NumberOfTicks != c.ticks || dot.TickLength != c.period {
+				t.Errorf("ticks %v x %d every %v, want %v x %d every %v", dot.SnapshotBaseDamage, dot.NumberOfTicks, dot.TickLength, c.tick, c.ticks, c.period)
+			}
+		})
+	}
+}
+
+// The retuned buff procs: amount and duration.
+func TestRetunedEraProcBuffsMatchTheClient(t *testing.T) {
+	for _, c := range []struct {
+		name          string
+		item, spellID int32
+		duration      time.Duration
+		ap            float64
+	}{
+		// "Increases attack power by 84 for 10 sec."
+		{"Lord General's Sword", 11817, 15602, 10 * time.Second, 84},
+		// "Increases Attack Power by 100, and Attack Power against Undead by an additional 100 for 10 sec."
+		{"Argent Avenger", 13246, 17352, 10 * time.Second, 100},
+		// "Increases Attack Power by 102 and melee attack speed by 6% for 15 sec."
+		{"Ragehammer", 10626, 12686, 15 * time.Second, 102},
+		// "Increases your Attack Speed by 10% for 6 sec."
+		{"Eskhandar's Right Claw", 18203, 22640, 6 * time.Second, 0},
+		// "Increases your attack speed by 15% for 10 sec."
+		{"The Jackhammer", 9423, 13533, 10 * time.Second, 0},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			sim, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, c.item)
+			aura := character.GetAuraByID(core.ActionID{SpellID: c.spellID})
+			if aura == nil {
+				t.Fatalf("no aura %d", c.spellID)
+			}
+			if aura.Duration != c.duration {
+				t.Errorf("lasts %v, want %v", aura.Duration, c.duration)
+			}
+			ap := character.GetStat(stats.AttackPower)
+			aura.Activate(sim)
+			if got := character.GetStat(stats.AttackPower) - ap; math.Abs(got-c.ap) > 1e-6 {
+				t.Errorf("attack power +%v, want +%v", got, c.ap)
+			}
+		})
+	}
+}
+
+// Melee haste of the retuned attack-speed procs, read off the warrior's
+// main-hand swing speed.
+func TestRetunedEraProcHasteMatchesTheClient(t *testing.T) {
+	for _, c := range []struct {
+		name          string
+		item, spellID int32
+		haste         float64
+	}{
+		{"Ragehammer", 10626, 12686, 1.06},
+		{"Eskhandar's Right Claw", 18203, 22640, 1.10},
+		{"The Jackhammer", 9423, 13533, 1.15},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			sim, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, c.item)
+			aura := character.GetAuraByID(core.ActionID{SpellID: c.spellID})
+			before := character.PseudoStats.MeleeSpeedMultiplier
+			aura.Activate(sim)
+			if got := character.PseudoStats.MeleeSpeedMultiplier / before; math.Abs(got-c.haste) > 1e-9 {
+				t.Errorf("melee speed x%v, want x%v", got, c.haste)
+			}
+		})
+	}
+}
+
+// The Cruel Hand of Timmy: Forever's 17505 is "Steals 85 life from target
+// enemy" (Effect 9, Shadow), not Era's -15 to every attribute.
+func TestTheCruelHandOfTimmyStealsLife(t *testing.T) {
+	_, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, 13401)
+	spell := character.GetSpell(core.ActionID{SpellID: 17505})
+	if spell == nil || spell.SpellSchool != core.SpellSchoolShadow {
+		t.Fatal("no Shadow life steal 17505")
+	}
+}
+
+// Armor Shatter (Annihilator) is 165 a stack and Puncture Armor (Bashguuder,
+// Rivenspike) 100 a stack in Forever, three stacks each; Era's were 200.
+func TestArmorProcsReduceTheClientsArmor(t *testing.T) {
+	for _, c := range []struct {
+		name          string
+		item, spellID int32
+		perStack      float64
+	}{
+		{"Annihilator", 12798, 16928, 165},
+		{"Bashguuder", 13204, 17315, 100},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			sim, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, c.item)
+			spell := character.GetSpell(core.ActionID{SpellID: c.spellID})
+			if spell == nil {
+				t.Fatalf("no proc spell %d", c.spellID)
+			}
+			target := sim.Encounter.TargetUnits[0]
+			target.AddStatDynamic(sim, stats.Armor, 3000)
+			armor := target.GetStat(stats.Armor)
+			for i := 0; i < 3; i++ {
+				spell.Cast(sim, target)
+			}
+			if got := armor - target.GetStat(stats.Armor); math.Abs(got-3*c.perStack) > 1e-6 {
+				t.Errorf("three stacks take %v armor, want %v", got, 3*c.perStack)
+			}
+		})
 	}
 }

@@ -61,3 +61,51 @@ func TestWeaponProcsMatchTheClient(t *testing.T) {
 		}
 	}
 }
+
+// Each proc spell's SpellCategories.DefenseType in the 1.60.1.70707 client
+// (DifficultyID 0), which decides the table the proc rolls: a magic one
+// rolls spell hit and spell crit, a melee or ranged one melee crit for
+// double damage. Thornspike's 1293183 is ranged, so it cannot be dodged or
+// parried; every other proc here is magic or melee as its school suggests.
+func TestWeaponProcsRollTheClientsDefenseType(t *testing.T) {
+	client := map[int32]core.DefenseType{
+		10373:   core.DefenseTypeMelee,
+		13439:   core.DefenseTypeMagic,
+		13442:   core.DefenseTypeMagic,
+		13486:   core.DefenseTypeMelee,
+		16405:   core.DefenseTypeMelee,
+		16409:   core.DefenseTypeMagic,
+		16433:   core.DefenseTypeMelee,
+		16454:   core.DefenseTypeMagic,
+		16549:   core.DefenseTypeMelee,
+		18081:   core.DefenseTypeMagic,
+		18089:   core.DefenseTypeMagic,
+		18107:   core.DefenseTypeMelee,
+		18211:   core.DefenseTypeMagic,
+		18276:   core.DefenseTypeMagic,
+		18833:   core.DefenseTypeMagic,
+		20883:   core.DefenseTypeMagic,
+		21140:   core.DefenseTypeMelee,
+		23267:   core.DefenseTypeMagic,
+		24251:   core.DefenseTypeMelee,
+		24257:   core.DefenseTypeMelee,
+		1292155: core.DefenseTypeMagic,
+		1293183: core.DefenseTypeRanged,
+		1293407: core.DefenseTypeMagic,
+		1293790: core.DefenseTypeMagic,
+		1305394: core.DefenseTypeMelee,
+		1305398: core.DefenseTypeMagic,
+		1320808: core.DefenseTypeMelee,
+		1322218: core.DefenseTypeMagic,
+	}
+	for _, p := range clientWeaponProcs {
+		want, ok := client[p.spellID]
+		if !ok {
+			t.Errorf("%s: proc spell %d has no client defense type in this test", p.name, p.spellID)
+			continue
+		}
+		if p.defense != want {
+			t.Errorf("%s: proc spell %d rolls defense type %v, the client's is %v", p.name, p.spellID, p.defense, want)
+		}
+	}
+}

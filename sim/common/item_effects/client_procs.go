@@ -34,6 +34,8 @@ const (
 	WallOfTheDead              = 1979
 	SpireOfHakkar              = 10844
 	DormantHeartOfTheMountain  = 249473
+	MindtapTalisman            = 18371
+	RazorGauntlets             = 18326
 )
 
 // eternalPowerHeals are every rank of the four heals Dormant Heart of the
@@ -89,8 +91,8 @@ func init() {
 
 	// Hands, so the proc rides any melee hit: 1325229, "Smite your target for
 	// 101 to 123 Holy damage. Damage is tripled against Undead." 112 with
-	// variance 0.2. Its SpellCategories DefenseType is 3, ranged, as Hammer
-	// of Wrath's is: it rolls the ranged table and melee and ranged crit.
+	// variance 0.2. Its SpellCategories.DefenseType is 3 (ranged), so it rolls
+	// the ranged table: melee hit and crit, double damage on a crit.
 	core.NewItemEffect(GlovesOfHolyMight, func(agent core.Agent) {
 		character := agent.GetCharacter()
 		label := "Gloves of Holy Might Proc"
@@ -272,6 +274,11 @@ func init() {
 	// the attacker".
 	registerStruckDamage(CloakOfFlames, 21142, core.SpellSchoolFire, 7, 0, core.OutcomeLanded, 0)
 	registerStruckDamage(SporidCape, 1291698, core.SpellSchoolNature, 1, 0, core.OutcomeLanded, 0)
+	// Forever's Razor Gauntlets: 1302193, aura 15, "When struck in combat,
+	// inflicts 7 Nature damage to the attacker" (Era's was 3 Arcane).
+	registerStruckDamage(RazorGauntlets, 1302193, core.SpellSchoolNature, 7, 0, core.OutcomeLanded, 0)
+
+	registerMindtap()
 
 	// Dormant Heart of the Mountain: equip 1249118 is aura 42 on a helpful
 	// spell (ProcTypeMask 0x4000), ProcChance 100, no recovery, triggering
@@ -330,6 +337,58 @@ func registerStruckDamage(itemID int32, spellID int32, school core.SpellSchool, 
 				if spell.CD.Timer == nil || spell.CD.IsReady(sim) {
 					spell.Cast(sim, attack.Unit)
 				}
+			},
+		})
+	})
+}
+
+// Mindtap Talisman's Forever use, ItemEffect 235401: 1302205 Mindtap on a 7
+// min cooldown, aura 24 restoring 125 mana every 1 sec for 10 sec, and
+// 1302206 Tapped Mind, aura 29 -60 Intellect for 2 min. "Tap your mind,
+// restoring 1250 mana over 10 sec, but reducing Intellect by 60 for 2 min."
+// Its 10 sec category 2554 is shared with other trinkets' uses, none of
+// which a published set pairs with it, so it is not modelled. It is used
+// once the mana it restores and the mana the lost Intellect takes from the
+// pool both fit.
+func registerMindtap() {
+	const (
+		manaPerTick     = 125.0
+		ticks           = 10
+		intellectLost   = 60.0
+		tappedMindLasts = 2 * time.Minute
+		// A player's mana per point of Intellect (core.EnableManaBar).
+		manaPerIntellect = 15.0
+	)
+	core.NewItemEffect(MindtapTalisman, func(agent core.Agent) {
+		character := agent.GetCharacter()
+		actionID := core.ActionID{SpellID: 1302205}
+		manaMetrics := character.NewManaMetrics(actionID)
+		tappedMind := character.NewTemporaryStatsAura("Tapped Mind", core.ActionID{SpellID: 1302206},
+			stats.Stats{stats.Intellect: -intellectLost}, tappedMindLasts)
+		spell := character.RegisterSpell(core.SpellConfig{
+			ActionID: actionID,
+			ProcMask: core.ProcMaskEmpty,
+			Flags:    core.SpellFlagNoOnCastComplete,
+			Cast: core.CastConfig{
+				CD: core.Cooldown{Timer: character.NewTimer(), Duration: 7 * time.Minute},
+			},
+			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+				tappedMind.Activate(sim)
+				core.StartPeriodicAction(sim, core.PeriodicActionOptions{
+					Period:   time.Second,
+					NumTicks: ticks,
+					Priority: core.ActionPriorityAuto,
+					OnAction: func(sim *core.Simulation) {
+						character.AddMana(sim, manaPerTick, manaMetrics)
+					},
+				})
+			},
+		})
+		character.AddMajorCooldown(core.MajorCooldown{
+			Spell: spell,
+			Type:  core.CooldownTypeMana,
+			ShouldActivate: func(_ *core.Simulation, character *core.Character) bool {
+				return character.MaxMana()-character.CurrentMana() >= manaPerTick*ticks+intellectLost*manaPerIntellect
 			},
 		})
 	})

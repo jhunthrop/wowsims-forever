@@ -33,7 +33,9 @@ const (
 // clientWeaponProcs is keyed by item id.
 var clientWeaponProcs = map[int32]clientWeaponProc{
 	ClawOfTheShadowmancer: {"Claw of the Shadowmancer", 1.0, 16409, core.SpellSchoolShadow, clientdamage.Effect{Amount: 35}, 0, core.DefenseTypeMagic},
-	Thornspike:            {"Thornspike", 1.0, 1293183, core.SpellSchoolPhysical, clientdamage.Effect{Amount: 45}, 0, core.DefenseTypeMelee},
+	// 1293183's SpellCategories.DefenseType is 3: a ranged strike, which
+	// cannot be dodged or parried.
+	Thornspike: {"Thornspike", 1.0, 1293183, core.SpellSchoolPhysical, clientdamage.Effect{Amount: 45}, 0, core.DefenseTypeRanged},
 	// Forever's 1293407, "causing 77 Shadow damage" (Era's 13440 was 30).
 	BlackMenace: {"Black Menace", 1.0, 1293407, core.SpellSchoolShadow, clientdamage.Effect{Amount: 77}, 0, core.DefenseTypeMagic},
 	// 1322218, school mask 6: "dealing 39 to 59 Holyfire damage". Its 3x
