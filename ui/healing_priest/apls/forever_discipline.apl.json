@@ -332,7 +332,7 @@
           }
         }
       },
-      "notes": "Renew stays on the tank for the whole fight at a cheap rank: a cheaper rank returns more health per mana for the spell power it is cast with, and the dearer ranks cost the mana the fight runs out of. Below 60, the rank each band casts is chosen for its mana over a fight sized for level 60, so it leans cheaper than a short fight at that level needs."
+      "notes": "Renew stays on the tank for the whole fight at a cheap rank: a cheaper rank returns more health per mana for the spell power it is cast with, and the dearer ranks cost the mana the fight runs out of. Below 60, the rank each band casts is chosen on that band's own fight, sized to the dungeons a group of its level runs."
     },
     {
       "action": {
