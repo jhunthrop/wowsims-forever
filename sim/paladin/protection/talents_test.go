@@ -774,3 +774,21 @@ func TestIronCreedOpensOnlyOnALandedHolyStrike(t *testing.T) {
 		t.Errorf("Iron Creed opened on %d strikes of which %d landed, want only the landed ones", opened, landed)
 	}
 }
+
+// Divine Protection and Divine Shield (498, 5573, 642, 1020) are one
+// SpellCategories Category, 37, with a 300 s CategoryRecoveryTime: casting
+// one puts both on cooldown. Templar's Bulwark (1311015) has Category 0 and
+// its own cooldown. The engine gave each its own timer, so only Forbearance
+// kept them apart.
+func TestDivineProtectionAndDivineShieldShareOneCooldown(t *testing.T) {
+	f := shortRun{Talents: map[string]int{"templars_bulwark": 1}}.start(t)
+	shield := f.spellOf(t, spellDivineShield)
+	protection := f.spellOf(t, spellDivineProtection)
+	bulwark := f.spellOf(t, spellTemplarsBulwark)
+	if shield.CD.Timer != protection.CD.Timer {
+		t.Error("Divine Shield and Divine Protection have separate cooldowns, want one (category 37)")
+	}
+	if bulwark.CD.Timer == shield.CD.Timer {
+		t.Error("Templar's Bulwark shares the immunities' cooldown, want its own")
+	}
+}
