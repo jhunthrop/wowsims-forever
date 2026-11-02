@@ -23,6 +23,47 @@
       }
     },
     {
+      "notes": "Dark Sacrifice (Undead) when mana is below a fifth and running behind the fight: it trades your own health for mana over fifteen seconds and adds your Spirit to it, and its ten minute cooldown makes it a once-a-fight cast. Other races do not have it and skip the line.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1277328,
+            "rank": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.2"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "remainingTimePercent": {}
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
       "notes": "Shadow Word: Pain is kept up unless the fight is about to end, when refreshing it would waste most of the DoT.",
       "action": {
         "condition": {
