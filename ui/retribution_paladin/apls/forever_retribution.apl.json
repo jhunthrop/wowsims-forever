@@ -330,7 +330,7 @@
       }
     },
     {
-      "notes": "Consecration last, as the filler between Judgement, Exorcism and Holy Strike, and only while mana is above 65 percent: it is the most expensive button on the list, and below that line the mana is worth more to the rest of the rotation.",
+      "notes": "Consecration last, while the mana left after it still pays for the seal, Judgement and Holy Strike and the pool is no more than a fifth behind the fight's pace. It is the most expensive button on the list; the pace line is mana percent at least 0.8 times the fight's remaining percent. Owner ruling 2, round 10: a flat 'mana above 65 percent' line used to stand here; it left a fifth to a half of the pool unspent at the end of every fight. With no guard at all Consecration drains the pool and the seal lapses, which costs more than it gains on the bare bands. The pace line spends the pool by the end of the fight instead.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -339,16 +339,84 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "currentManaPercent": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "65%"
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "math": {
+                      "op": "OpSub",
+                      "lhs": {
+                        "currentMana": {}
+                      },
+                      "rhs": {
+                        "spellCurrentCost": {
+                          "spellId": {
+                            "spellId": 20924,
+                            "rank": 5
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpAdd",
+                      "lhs": {
+                        "math": {
+                          "op": "OpAdd",
+                          "lhs": {
+                            "spellCurrentCost": {
+                              "spellId": {
+                                "spellId": 20293,
+                                "rank": 8
+                              }
+                            }
+                          },
+                          "rhs": {
+                            "spellCurrentCost": {
+                              "spellId": {
+                                "spellId": 20271
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "rhs": {
+                        "spellCurrentCost": {
+                          "spellId": {
+                            "spellId": 10333,
+                            "rank": 8
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.8"
+                        }
+                      }
+                    }
+                  }
+                }
               }
-            }
+            ]
           }
         }
       }
