@@ -337,6 +337,7 @@ func newDot(config Dot) *Dot {
 		sim.AddPendingAction(dot.tickAction)
 		if dot.isChanneled {
 			dot.Spell.Unit.ChanneledDot = dot
+			dot.Spell.Unit.channelPushback = 1.0
 		}
 	})
 	dot.Aura.ApplyOnExpire(func(aura *Aura, sim *Simulation) {

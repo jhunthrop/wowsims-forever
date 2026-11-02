@@ -97,6 +97,16 @@ func (shaman *Shaman) registerWaterShieldSpell() {
 		},
 	})
 
+	// The heal profile's raid-wide pulses are plain health loss, not a
+	// spell hit, so they reach Water Shield here: the proc row (223904,
+	// ProcTypeMask 0x362A8) takes melee, ranged and magic hits on the
+	// caster.
+	shaman.Env.Raid.OnRaidDamage(func(sim *core.Simulation, unit *core.Unit, _ float64, _ bool) {
+		if unit == &shaman.Unit && waterShieldAura.IsActive() {
+			restoreMana(sim, waterShieldAura)
+		}
+	})
+
 	shaman.WaterShield = shaman.RegisterSpell(core.SpellConfig{
 		ActionID:        actionID,
 		Flags:           SpellFlagShaman | core.SpellFlagAPL,

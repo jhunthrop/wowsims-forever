@@ -18,6 +18,9 @@ type Hardcast struct {
 	OnComplete func(*Simulation, *Unit)
 	Target     *Unit
 	Pushback   float64
+	// CastTime is the cast's full length; a pushback never leaves more
+	// than this much of the cast to go.
+	CastTime time.Duration
 }
 
 // Input for constructing the CastSpell function for a spell.
@@ -98,44 +101,117 @@ func (unit *Unit) applySpellPushback() {
 				return
 			}
 
-			if hc := aura.Unit.Hardcast; aura.Unit.IsCasting(sim) && sim.Roll(0, 1.0) > spell.PushbackReduction {
-				// Do spell pushback
-				pushback := DurationFromSeconds(max(0.2, hc.Pushback))
-				aura.Unit.Hardcast.Pushback -= 0.2
+			aura.Unit.PushBackCast(sim)
+		},
+	})
+}
 
-				hcSpell := aura.Unit.GetSpell(hc.ActionID)
+// pushBackChannel shortens the channel the unit is in: the ticks that
+// would land after the new end are lost, and a channel left with no tick
+// ends now and hands the unit back to its rotation.
+func (unit *Unit) pushBackChannel(sim *Simulation, dot *Dot) {
+	if sim.Roll(0, 1.0) <= dot.Spell.PushbackReduction {
+		return
+	}
+	pushback := DurationFromSeconds(max(0.2, unit.channelPushback))
+	unit.channelPushback -= 0.2
 
-				if hcSpell.Flags.Matches(SpellFlagChanneled) {
-					newExpires := max(sim.CurrentTime, hc.Expires-pushback)
-					if sim.Log != nil {
-						aura.Unit.Log(sim, "Unit Hardcast shortened by %s due to spell hit taken, will now occur at %s", pushback, newExpires)
-					}
-
-					// Update Dot if present
-					if hcDot := hcSpell.CurDot(); hcDot != nil {
-						hcDot.UpdateExpires(sim, newExpires)
-					}
-
-					aura.Unit.Hardcast.Expires = newExpires
-					hcSpell.SpellMetrics[aura.Unit.CurrentTarget.UnitIndex].TotalCastTime -= pushback
-
-				} else {
-					if sim.Log != nil {
-						aura.Unit.Log(sim, "Unit Hardcast extended by %s due to spell hit taken, will now occur at %s", pushback, hc.Expires+pushback)
-					}
-
-					aura.Unit.Hardcast.Expires += pushback
-					hcSpell.SpellMetrics[aura.Unit.CurrentTarget.UnitIndex].TotalCastTime += pushback
-				}
-
-				// Update GCDTimer
-				aura.Unit.SetGCDTimer(sim, aura.Unit.Hardcast.Expires)
-
-				// Update Swing timer
-				aura.Unit.AutoAttacks.StopMeleeUntil(sim, aura.Unit.Hardcast.Expires, false)
+	newExpires := max(sim.CurrentTime, dot.ExpiresAt()-pushback)
+	ticksLeft := int32(0)
+	if dot.tickPeriod > 0 {
+		ticksLeft = int32((newExpires - dot.lastTickTime) / dot.tickPeriod)
+	}
+	ticksLeft = min(ticksLeft, dot.MaxTicksRemaining())
+	if sim.Log != nil {
+		unit.Log(sim, "Channel shortened by %s due to damage taken, %d tick(s) left", pushback, ticksLeft)
+	}
+	if ticksLeft <= 0 {
+		dot.Cancel(sim)
+		unit.resumeAfterChannel(sim)
+		return
+	}
+	newEnd := dot.lastTickTime + dot.tickPeriod*time.Duration(ticksLeft)
+	dot.UpdateExpires(sim, newEnd)
+	// The channel's own last tick only hands back to the rotation when it
+	// is the channel's planned last, so the cut channel does it here.
+	StartDelayedAction(sim, DelayedActionOptions{
+		DoAt: newEnd,
+		OnAction: func(sim *Simulation) {
+			if unit.ChanneledDot != dot || !dot.IsActive() {
+				unit.resumeAfterChannel(sim)
 			}
 		},
 	})
+}
+
+// resumeAfterChannel asks the rotation for its next action once a
+// channel has ended early.
+func (unit *Unit) resumeAfterChannel(sim *Simulation) {
+	if unit.GCD.IsReady(sim) {
+		unit.WaitUntil(sim, sim.CurrentTime+unit.ChannelClipDelay)
+	}
+}
+
+// PushBackCast costs the unit's current cast its casting time for taking
+// damage: a cast is delayed and a channel shortened, by 1 s for the first
+// hit and 0.2 s less for each hit after, never under 0.2 s. The chance to
+// keep the casting time (Nature's Focus, Healing Focus, Spiritual Focus,
+// Twilight Focus, Fel Concentration) belongs to the spell being cast, so
+// it is read from that spell and not from whatever dealt the damage.
+func (unit *Unit) PushBackCast(sim *Simulation) {
+	if dot := unit.ChanneledDot; dot != nil && dot.IsActive() && !unit.IsCasting(sim) {
+		unit.pushBackChannel(sim, dot)
+		return
+	}
+	if !unit.IsCasting(sim) {
+		return
+	}
+	hc := &unit.Hardcast
+	hcSpell := unit.GetSpell(hc.ActionID)
+	if hcSpell == nil || sim.Roll(0, 1.0) <= hcSpell.PushbackReduction {
+		return
+	}
+	pushback := DurationFromSeconds(max(0.2, hc.Pushback))
+	hc.Pushback -= 0.2
+
+	metricsTarget := unit.CurrentTarget
+	if hc.Target != nil {
+		metricsTarget = hc.Target
+	}
+	metrics := &hcSpell.SpellMetrics[metricsTarget.UnitIndex]
+
+	if hcSpell.Flags.Matches(SpellFlagChanneled) {
+		newExpires := max(sim.CurrentTime, hc.Expires-pushback)
+		if sim.Log != nil {
+			unit.Log(sim, "Unit Hardcast shortened by %s due to damage taken, will now occur at %s", pushback, newExpires)
+		}
+
+		// Update Dot if present
+		if hcDot := hcSpell.CurDot(); hcDot != nil {
+			hcDot.UpdateExpires(sim, newExpires)
+		}
+
+		metrics.TotalCastTime -= hc.Expires - newExpires
+		hc.Expires = newExpires
+	} else {
+		// The vanilla server never leaves more than the full cast to go
+		// (cmangos-classic Spell::Delayed).
+		if hc.CastTime > 0 {
+			pushback = max(0, min(pushback, sim.CurrentTime+hc.CastTime-hc.Expires))
+		}
+		if sim.Log != nil {
+			unit.Log(sim, "Unit Hardcast extended by %s due to damage taken, will now occur at %s", pushback, hc.Expires+pushback)
+		}
+
+		hc.Expires += pushback
+		metrics.TotalCastTime += pushback
+	}
+
+	// Update GCDTimer
+	unit.SetGCDTimer(sim, hc.Expires)
+
+	// Update Swing timer
+	unit.AutoAttacks.StopMeleeUntil(sim, hc.Expires, false)
 }
 
 func (spell *Spell) makeCastFunc(config CastConfig) CastSuccessFunc {
@@ -234,6 +310,7 @@ func (spell *Spell) makeCastFunc(config CastConfig) CastSuccessFunc {
 				Expires:  sim.CurrentTime + spell.CurCast.CastTime,
 				ActionID: spell.ActionID,
 				Pushback: 1.0,
+				CastTime: spell.CurCast.CastTime,
 				OnComplete: func(sim *Simulation, target *Unit) {
 					spell.LastCastAt = sim.CurrentTime
 

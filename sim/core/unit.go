@@ -153,6 +153,10 @@ type Unit struct {
 
 	// The currently-channeled DOT spell, otherwise nil.
 	ChanneledDot *Dot
+
+	// channelPushback is the next pushback the current channel takes:
+	// 1 s for the first hit, 0.2 s less for each hit after.
+	channelPushback float64
 }
 
 // Units can be disabled for several reasons:

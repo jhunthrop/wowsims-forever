@@ -250,3 +250,23 @@ func TestNaturesSwiftnessWaitsForTheRotation(t *testing.T) {
 		t.Error("the generic cooldown pass would fire Nature's Swiftness for a healer")
 	}
 }
+
+// Nature's Focus (node 104957, five ranks): "Gives your Arcane and Nature
+// spells a 14/28/42/56/70% chance to not lose casting time when you take
+// damage." The modifier's client mask names Healing Touch, Regrowth and
+// Tranquility among the heals, not Wild Growth, Rejuvenation or Swiftmend.
+func TestNaturesFocusKeepsNatureCastTimeUnderDamage(t *testing.T) {
+	inMask := map[string]bool{"Healing Touch": true, "Regrowth": true, "Tranquility": true}
+	for rank := 0; rank <= 5; rank++ {
+		resto, _ := healer(t, map[string]int{"natures_focus": rank})
+		for name, spell := range healingSpells(resto) {
+			want := 0.0
+			if inMask[name] {
+				want = 0.14 * float64(rank)
+			}
+			if got := spell.PushbackReduction; !near(got, want) {
+				t.Errorf("Nature's Focus %d/5: %s keeps its cast time %.2f of the time, want %.2f", rank, name, got, want)
+			}
+		}
+	}
+}

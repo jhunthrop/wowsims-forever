@@ -28,6 +28,7 @@ const (
 	divineAegis           = 17
 	powerInfusion         = 18
 
+	twilightFocus     = 1
 	improvedRenew     = 2
 	divineFury        = 5
 	inspiration       = 8
@@ -381,4 +382,38 @@ func TestSpiritualHealingFollowsItsClientMasks(t *testing.T) {
 	if got, bare := multiplier(onePoint(holyTree, spiritualHealing, 3)), multiplier(""); got != bare {
 		t.Errorf("Spiritual Healing moved Lightwell's renew from %v to %v; its client masks do not name it", bare, got)
 	}
+}
+
+// Twilight Focus (node 105867, three ranks): "Gives your spells a
+// 23/47/70% chance to not lose casting time when you take damage." The
+// client mask names the cast and channelled spells; Lightwell is not in it.
+func TestTwilightFocusKeepsCastTimeUnderDamage(t *testing.T) {
+	for rank, want := range []float64{0, 0.23, 0.47, 0.70} {
+		_, agent := healerSim(t, 60, onePoint(holyTree, twilightFocus, rank))
+		for name, spell := range map[string]*core.Spell{
+			"Heal":         agent.Heal[len(agent.Heal)-1],
+			"Greater Heal": agent.GreaterHeal[len(agent.GreaterHeal)-1],
+			"Flash Heal":   agent.FlashHeal[len(agent.FlashHeal)-1],
+			"Smite":        agent.Smite[len(agent.Smite)-1],
+		} {
+			if spell == nil {
+				continue
+			}
+			if got := spell.PushbackReduction; got != want {
+				t.Errorf("Twilight Focus %d/3: %s keeps its cast time %.2f of the time, want %.2f", rank, name, got, want)
+			}
+		}
+		if lw := agent.Lightwell; len(lw) > 0 && lw[len(lw)-1] != nil && lw[len(lw)-1].PushbackReduction != 0 {
+			t.Errorf("Twilight Focus %d/3: Lightwell keeps its cast time %.2f of the time, want 0", rank, lw[len(lw)-1].PushbackReduction)
+		}
+	}
+}
+
+// Binding Heal (1240774) is in Spiritual Healing's direct-heal mask
+// (14898 effect 0, class mask word 1 bit 4, the bit Binding Heal's own
+// class options carry), so 3/3 raises it by 10% like Flash Heal.
+func TestSpiritualHealingRaisesBindingHeal(t *testing.T) {
+	talents := onePoint(holyTree, spiritualHealing, 3)
+	binding := func(a *HealingPriest) *core.Spell { return a.BindingHeal[len(a.BindingHeal)-1] }
+	assertRatio(t, "Binding Heal", tankHealed(t, talents, binding), tankHealed(t, "", binding), 1.10)
 }

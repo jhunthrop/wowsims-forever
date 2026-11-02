@@ -20,9 +20,12 @@ import (
 // empty proc mask (Omen of Clarity's 4% a spell was fitted per logged cast),
 // as the engine's other triggered spells do.
 //
-// unconfirmed: whether the heal can critically strike (it is taken not to,
-// as no source says so) and whether it takes the caster's healing modifiers
-// (it does, as every other druid heal here).
+// The heal can critically strike: its SpellMisc row (1328622) lacks
+// SPELL_ATTR2_CANT_CRIT, which the client's triggered heals that cannot
+// crit carry (Judgement of Light 20267, Living Seed 414683).
+//
+// unconfirmed: whether it takes the caster's healing modifiers (it does, as
+// every other druid heal here).
 const (
 	bloomSpellID        = 1328622
 	bloomSpiritFraction = 1.0
@@ -44,7 +47,7 @@ func (druid *Druid) registerBloomSpell() {
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealHealing(sim, target, bloomHealing(druid.GetStat(stats.Spirit)), spell.OutcomeHealing)
+			spell.CalcAndDealHealing(sim, target, bloomHealing(druid.GetStat(stats.Spirit)), spell.OutcomeHealingCrit)
 		},
 	})
 }

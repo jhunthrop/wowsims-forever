@@ -247,3 +247,15 @@ func TestManaTideTotemRestoresTheClientAmountFourTimes(t *testing.T) {
 		t.Errorf("Mana Tide Totem restored %v mana, want %v (4 ticks of 290)", got, want)
 	}
 }
+
+// Healing Stream's ticks (10461, cast by the shaman's totem 10463) are the
+// shaman's own healing, so they count in its healing per second: a fight
+// that only drops the totem heals for what its ticks heal.
+func TestHealingStreamCountsInTheShamansHealing(t *testing.T) {
+	result := runHealingStreamWithCrit(t, "", noCrit)
+	_, gain := healthGained(result, healingStreamTopHealID)
+	shaman := result.RaidMetrics.Parties[0].Players[0]
+	if got, floor := shaman.Hps.Avg*healingStreamFightLength, gain; got < floor*0.999 {
+		t.Errorf("the shaman's healing is %.0f over the fight, want at least the %.0f its totem healed the party", got, floor)
+	}
+}

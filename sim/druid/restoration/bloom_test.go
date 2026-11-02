@@ -88,3 +88,16 @@ func TestBloomTriggersNoCastProcs(t *testing.T) {
 		t.Errorf("Bloom's proc mask %v rolls spell procs (Omen of Clarity)", resto.Bloom.ProcMask)
 	}
 }
+
+// Bloom's heal (1328622) can critically strike: its SpellMisc row lacks
+// SPELL_ATTR2_CANT_CRIT (Attributes_2 0x20000000), which the client's
+// triggered heals that cannot crit carry (Judgement of Light 20267,
+// Living Seed 414683).
+func TestBloomCanCrit(t *testing.T) {
+	resto, sim := healer(t, map[string]int{"bloom": 1})
+	resto.Bloom.BonusCritRating += 200 * core.CritRatingPerCritChance
+	resto.Bloom.ApplyEffects(sim, &resto.Unit, resto.Bloom.Spell)
+	if got := resto.Bloom.SpellMetrics[resto.UnitIndex].TotalCritHealing; got <= 0 {
+		t.Error("Bloom at 200% crit chance did not crit")
+	}
+}

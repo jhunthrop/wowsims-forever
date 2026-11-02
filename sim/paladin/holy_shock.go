@@ -154,7 +154,12 @@ func (paladin *Paladin) registerHolyShockHeal(rank holyShockRank) *core.Spell {
 		BonusCoefficient: holyShockHealCoefficient,
 		ClientBaseDamage: rank.heal.Range(casterLevel),
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealHealing(sim, target, rank.heal.Roll(sim, casterLevel), spell.OutcomeHealingCrit)
+			baseHealing := rank.heal.Roll(sim, casterLevel) + holyShockHealCoefficient*paladin.oathOfLightBonus(target, PaladinSpellMaskHolyShockHeal)
+			// Boundless Light reaches only allies without the Oath.
+			lostCrit := paladin.boundlessLightCritOn(target)
+			spell.BonusCritRating -= lostCrit
+			spell.CalcAndDealHealing(sim, target, baseHealing, spell.OutcomeHealingCrit)
+			spell.BonusCritRating += lostCrit
 		},
 	})
 	paladin.markIlluminating(spell, rank.manaCost)

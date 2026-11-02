@@ -391,10 +391,4 @@ func (paladin *Paladin) markUnmodeledForeverTalents() {
 	// the self attack power half it had before is gone.
 	_ = t.Vindication
 
-	// Oath of Light raises Holy Light, Flash of Light and Holy Shock on
-	// one sworn ally "by up to 0": the client text has no resolved
-	// amounts and its spell (1328548) is not in the client tables yet.
-	// With no Oath sworn, Boundless Light's bonus reaches every ally,
-	// which is how healing_talents.go models it.
-	_ = t.OathOfLight
 }

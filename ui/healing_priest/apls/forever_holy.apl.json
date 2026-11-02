@@ -100,7 +100,7 @@
           }
         }
       },
-      "notes": "Prayer of Mending goes on the tank every time it is ready and the mana pace allows it: a 10 second cooldown, five charges, and at the top rank it is the cheapest healing per mana the Holy kit has. Rank 1 (level 40) is not: it heals little for its price, so it waits for the same mana pace as the filler. The engine triggers it on the next direct heal its holder receives (not on damage), so keep it on the tank, who is healed most."
+      "notes": "Prayer of Mending goes on the tank every time it is ready and the mana pace allows it: a 10 second cooldown, five charges, and at the top rank it is the cheapest healing per mana the Holy kit has. Rank 1 (level 40) is not: it heals little for its price, so it waits for the same mana pace as the filler. It heals its holder the next time they take damage or receive a direct heal, so keep it on the tank, who is hit and healed most."
     },
     {
       "action": {

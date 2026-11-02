@@ -87,13 +87,7 @@ func (druid *Druid) ApplyTalents() {
 
 	druid.applyReflection()
 
-	// Nature's Focus (node 104957): a 14/28/42/56/70% chance to avoid
-	// pushback on Arcane/Nature casts from taking damage. core/cast.go
-	// models pushback, but (mirroring sim/mage/talents.go's identical
-	// note on Improved Channeling) nothing in this sim's Patchwerk-style
-	// fights interrupts a casting druid's own cast with incoming
-	// damage, so avoiding it changes no number here.
-	_ = druid.Talents.NaturesFocus
+	druid.applyNaturesFocus()
 
 	// Subtlety (node 104917): -10/20/30% threat from Nature and Arcane
 	// spells. Threat, not damage, mana or a cooldown.
@@ -386,8 +380,8 @@ func (druid *Druid) applyOmenOfClarity() {
 	ppmm := druid.AutoAttacks.NewPPMManager(omenOfClarityPPM, core.ProcMaskMelee)
 	var readyAt time.Duration
 
-	tryProc := func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-		if !result.Landed() || sim.CurrentTime < readyAt {
+	roll := func(sim *core.Simulation, spell *core.Spell) {
+		if sim.CurrentTime < readyAt {
 			return
 		}
 		inMoonkin := druid.InForm(Moonkin)
@@ -400,6 +394,11 @@ func (druid *Druid) applyOmenOfClarity() {
 		if procced {
 			readyAt = sim.CurrentTime + omenProcCooldown(inMoonkin)
 			druid.ClearcastingAura.Activate(sim)
+		}
+	}
+	tryProc := func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+		if result.Landed() {
+			roll(sim, spell)
 		}
 	}
 
@@ -415,8 +414,21 @@ func (druid *Druid) applyOmenOfClarity() {
 		OnHealDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			tryProc(sim, spell, result)
 		},
+		// A heal over time with no direct heal (Rejuvenation, Tranquility,
+		// Wild Growth) never reaches OnHealDealt, but casting it is a
+		// helpful spell landing, which the proc row's 0x4000 bit names:
+		// it rolls once a cast.
+		OnCastComplete: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell) {
+			if spell.ClassSpellMask&DruidSpellMaskHotOnlyHeals != 0 {
+				roll(sim, spell)
+			}
+		},
 	}))
 }
+
+// DruidSpellMaskHotOnlyHeals is the heals that land only as a heal over
+// time, with no direct heal of their own.
+const DruidSpellMaskHotOnlyHeals = DruidSpellMaskRejuvenation | DruidSpellMaskTranquility | DruidSpellMaskWildGrowth
 
 // spendClearcasting spends Clearcasting's one charge (16870, ProcCharges 1)
 // on an ability in its class mask that has a cost. OnCastComplete calls it;
@@ -756,4 +768,32 @@ func (druid *Druid) applyLivingSpirit() {
 
 	rank := clampRank(druid.Talents.LivingSpirit, 3)
 	druid.MultiplyStat(stats.Spirit, 1+0.05*float64(rank))
+}
+
+// naturesFocusPushbackReductionPerRank is Nature's Focus (node 104957):
+// "Gives your Arcane and Nature spells a 14/28/42/56/70% chance to not
+// lose casting time when you take damage." The healer takes raid-wide
+// pulses mid-cast, and core's pushback reads this chance off the spell
+// being cast.
+const naturesFocusPushbackReductionPerRank = 0.14
+
+// DruidSpellMaskNaturesFocus is what the talent's pushback modifier names
+// (17063 effect 0, aura 108 misc 9), not its "Arcane and Nature spells"
+// text: Healing Touch, Regrowth, Tranquility, Wrath and Starfire among the
+// spells registered here (Hurricane, Entangling Roots and Rebirth are not
+// registered). Wild Growth, whose 3 s cast the server's push added, is
+// not in the mask.
+const DruidSpellMaskNaturesFocus = DruidSpellMaskHealingTouch | DruidSpellMaskRegrowth |
+	DruidSpellMaskTranquility | DruidSpellMaskWrath | DruidSpellMaskStarfire
+
+func (druid *Druid) applyNaturesFocus() {
+	if druid.Talents.NaturesFocus == 0 {
+		return
+	}
+	reduction := naturesFocusPushbackReductionPerRank * float64(druid.Talents.NaturesFocus)
+	druid.OnSpellRegistered(func(spell *core.Spell) {
+		if spell.ClassSpellMask&DruidSpellMaskNaturesFocus != 0 {
+			spell.PushbackReduction += reduction
+		}
+	})
 }

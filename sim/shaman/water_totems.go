@@ -65,11 +65,14 @@ func (shaman *Shaman) newHealingStreamTotemSpellConfig(rank int) core.SpellConfi
 	config.Rank = rank
 
 	healSpell := shaman.RegisterSpell(core.SpellConfig{
-		ActionID:      core.ActionID{SpellID: healId},
-		SpellSchool:   core.SpellSchoolNature,
-		DefenseType:   core.DefenseTypeMagic,
-		ProcMask:      core.ProcMaskSpellHealing,
-		Flags:         core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete | core.SpellFlagNoLogs | core.SpellFlagNoMetrics,
+		ActionID:    core.ActionID{SpellID: healId},
+		SpellSchool: core.SpellSchoolNature,
+		DefenseType: core.DefenseTypeMagic,
+		ProcMask:    core.ProcMaskSpellHealing,
+		// Its ticks are the shaman's healing, so they keep their metrics
+		// (upstream hid them from the DPS view with SpellFlagNoMetrics,
+		// which left them out of a healer's healing per second).
+		Flags:         core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete | core.SpellFlagNoLogs,
 		RequiredLevel: level,
 
 		// Restorative Totems raises this totem. Purification does not: its

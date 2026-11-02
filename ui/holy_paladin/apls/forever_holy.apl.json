@@ -9,6 +9,50 @@
     },
     {
       "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1328548
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "auraIsActive": {
+                      "auraId": {
+                        "spellId": 1328548
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "10s"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Oath of Light stays sworn on the tank: it adds to every Holy Light, Flash of Light and Holy Shock the tank receives, which is most of this list's healing. It is sworn before the pull and lasts five minutes, so it is renewed only in a longer fight."
+    },
+    {
+      "action": {
         "condition": {
           "cmp": {
             "op": "OpLt",
@@ -675,6 +719,26 @@
             "type": "Player",
             "index": 4
           }
+        }
+      }
+    }
+  ],
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1328548
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1.5s"
         }
       }
     }
