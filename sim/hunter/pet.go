@@ -263,8 +263,12 @@ var PetConfigs = map[proto.Hunter_Options_PetType]PetConfig{
 		Armor:  1.00,
 		Damage: 1.10,
 
+		// Bite whenever it is ready (pooling for its 35 focus), Claw
+		// otherwise: Bite deals more damage a focus. The old gate, focus
+		// regen above Claw's cost / 1.6 (15.6 a second), never opened at
+		// a pet's 5 to 6 a second.
 		CustomRotation: func(sim *core.Simulation, hp *HunterPet, tryCast func(*core.Spell) bool) {
-			if hp.specialAbility.CD.IsReady(sim) && hp.CurrentFocusPerSecond() > hp.focusDump.Cost.BaseCost/1.6 {
+			if hp.specialAbility.CD.IsReady(sim) {
 				if !tryCast(hp.specialAbility) && hp.GCD.IsReady(sim) {
 					hp.WaitUntil(sim, sim.CurrentTime+time.Millisecond*500)
 				}
