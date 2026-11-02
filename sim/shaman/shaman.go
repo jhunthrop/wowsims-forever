@@ -29,6 +29,13 @@ func NewShaman(character *core.Character, talents string) *Shaman {
 	core.FillTalentsProto(shaman.Talents.ProtoReflect(), talents, TalentTreeSizes)
 	shaman.EnableManaBar()
 
+	// 17 + Spirit/5 each 2 s tick: the Classic server's shaman rate
+	// (cmangos Unit::OCTRegenMPPerSpirit), 2 a tick above the 15 + Spirit/5
+	// default the other Spirit/5 classes read.
+	shaman.SpiritManaRegenPerSecond = func() float64 {
+		return 8.5 + shaman.GetStat(stats.Spirit)/10
+	}
+
 	// Add Shaman stat dependencies
 	shaman.AddStatDependency(stats.Strength, stats.AttackPower, core.APPerStrength[character.Class])
 	core.AddCritStatDependencies(&shaman.Character, character.Class)
