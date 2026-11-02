@@ -384,6 +384,22 @@ func (warrior *Warrior) impale() float64 {
 	return 0.1 * float64(warrior.Talents.Impale)
 }
 
+// rendCritDamageBonus is the crit damage bonus Rend's ticks take: Impale's
+// family mask (16493, 0xee604cee) carries Rend's bit 32, and Rend crits under
+// the owner's bleed ruling.
+func (warrior *Warrior) rendCritDamageBonus() float64 {
+	return warrior.impale()
+}
+
+// offHandStrikeMultiplier is what an off-hand weapon strike other than the
+// white swing multiplies its damage by: Dual Wield Specialization 23584 is
+// aura 122, the off-hand damage percent, which scales the off-hand weapon's
+// damage for every off-hand strike (applyDualWieldSpecialization covers the
+// white swing through its ProcMask).
+func (warrior *Warrior) offHandStrikeMultiplier() float64 {
+	return 1 + 0.05*float64(warrior.Talents.DualWieldSpecialization)
+}
+
 func (warrior *Warrior) applyAngerManagement() {
 	if !warrior.Talents.AngerManagement {
 		return
@@ -562,7 +578,7 @@ func (warrior *Warrior) applyDualWieldSpecialization() {
 		return
 	}
 
-	multiplier := 1 + 0.05*float64(points)
+	multiplier := warrior.offHandStrikeMultiplier()
 	warrior.AddOffHandDamageDealtRageMultiplier(dualWieldSpecializationOffHandRageMultiplier(points))
 	warrior.OnSpellRegistered(func(spell *core.Spell) {
 		if !spell.ProcMask.Matches(core.ProcMaskMeleeOH) {

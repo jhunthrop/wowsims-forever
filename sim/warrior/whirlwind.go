@@ -82,7 +82,8 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 				baseDamage := spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 				if offHand {
-					ohResults[idx] = spell.CalcDamage(sim, target, spell.Unit.OHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target)), spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+					ohDamage := spell.Unit.OHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target)) * warrior.offHandStrikeMultiplier()
+					ohResults[idx] = spell.CalcDamage(sim, target, ohDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 				}
 				target = sim.Environment.NextTargetUnit(target)
 			}
