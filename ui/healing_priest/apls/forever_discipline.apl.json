@@ -1261,7 +1261,7 @@
           }
         }
       },
-      "notes": "Prayer of Healing on a party member once three of the four are under 85%. It heals the healer's whole party. Rank 1 is the rank this profile pays for: it costs well under half of the top rank's mana and returned more guarded score."
+      "notes": "Prayer of Healing on a party member once three of the four are under 85%. It heals the healer's whole party. It is cast at rank 4, the top rank a trainer teaches (rank 5 is an Ahn'Qiraj book)."
     },
     {
       "action": {
