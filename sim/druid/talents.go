@@ -121,6 +121,12 @@ const naturesGraceGlobalCooldownCut = 150 * time.Millisecond
 // increasing your spellcasting speed and reducing your global cooldown by
 // 10% for 3 sec." The Classic version this replaced took a flat 0.5 s off
 // the next cast's time for 15 s and ended on that cast.
+//
+// "Spell criticals" includes heals: 16880's ProcTypeMask 0x14000 takes
+// helpful magic spells as well as harmful ones, and the proc's global
+// cooldown cut (16886 effect 1, mask 0x7407f7 / 0x4000000) names Healing
+// Touch, Regrowth, Rejuvenation, Tranquility and Wild Growth beside the
+// Balance spells. A tick is periodic, so it never procs.
 func (druid *Druid) applyNaturesGrace() {
 	if !druid.Talents.NaturesGrace {
 		return
@@ -128,7 +134,7 @@ func (druid *Druid) applyNaturesGrace() {
 
 	globalCooldownMod := druid.AddDynamicMod(core.SpellModConfig{
 		Kind:      core.SpellMod_GlobalCooldown_Flat,
-		ClassMask: DruidSpellMaskBalanceDamage,
+		ClassMask: DruidSpellMaskBalanceDamage | DruidSpellMaskNaturesGraceHeals,
 		TimeValue: -naturesGraceGlobalCooldownCut,
 	})
 
@@ -151,6 +157,11 @@ func (druid *Druid) applyNaturesGrace() {
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			// Spells with travel times have their own implementation because the proc occurs as the cast finishes
 			if spell.MissileSpeed == 0 && spell.ProcMask.Matches(core.ProcMaskSpellDamage) && result.DidCrit() {
+				druid.NaturesGraceProcAura.Activate(sim)
+			}
+		},
+		OnHealDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			if spell.ProcMask.Matches(core.ProcMaskSpellHealing) && result.DidCrit() {
 				druid.NaturesGraceProcAura.Activate(sim)
 			}
 		},

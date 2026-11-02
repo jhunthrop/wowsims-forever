@@ -88,6 +88,10 @@ const (
 	// cooldown cut reaches ("your damaging spells").
 	DruidSpellMaskBalanceDamage = DruidSpellMaskWrath | DruidSpellMaskStarfire | DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm
 
+	// The heals Nature's Grace's global cooldown cut names (16886 effect 1).
+	DruidSpellMaskNaturesGraceHeals = DruidSpellMaskHealingTouch | DruidSpellMaskRegrowth | DruidSpellMaskRejuvenation |
+		DruidSpellMaskTranquility | DruidSpellMaskWildGrowth
+
 	// Every healing spell this package registers, for Gift of Nature's
 	// "all your healing spells".
 	DruidSpellMaskHealing = DruidSpellMaskHealingTouch | DruidSpellMaskRegrowth | DruidSpellMaskRejuvenation |

@@ -270,3 +270,30 @@ func TestNaturesFocusKeepsNatureCastTimeUnderDamage(t *testing.T) {
 		}
 	}
 }
+
+// Nature's Grace (16880) procs on "All non-periodic spell criticals": its
+// ProcTypeMask 0x14000 takes helpful magic spells as well as harmful ones,
+// so a critical Healing Touch graces the druid and a critical
+// Rejuvenation tick does not. Its global cooldown cut (16886 effect 1,
+// mask 0x7407f7/0x4000000) names the heals too.
+func TestNaturesGraceProcsOnACriticalHealNotATick(t *testing.T) {
+	resto, sim := healer(t, map[string]int{"natures_grace": 1})
+	self := &resto.Unit
+	touch, rejuvenation := resto.HealingTouch[10], resto.Rejuvenation[10]
+
+	rejuvenation.BonusCritRating += 100 * core.CritRatingPerCritChance
+	rejuvenation.ApplyEffects(sim, self, rejuvenation.Spell)
+	runUntil(sim, 4*time.Second)
+	if resto.NaturesGraceProcAura.IsActive() {
+		t.Fatal("a critical Rejuvenation tick graced the druid")
+	}
+
+	touch.BonusCritRating += 100 * core.CritRatingPerCritChance
+	touch.ApplyEffects(sim, self, touch.Spell)
+	if !resto.NaturesGraceProcAura.IsActive() {
+		t.Error("a critical Healing Touch did not grace the druid")
+	}
+	if got, want := touch.DefaultCast.GCD, core.GCDDefault-150*time.Millisecond; got != want {
+		t.Errorf("Healing Touch's global cooldown under Nature's Grace = %v, want %v", got, want)
+	}
+}
