@@ -17,17 +17,25 @@ type EmeraldDragonWhelp struct {
 	disabledAt time.Duration
 }
 
-func NewEmeraldDragonWhelp(character *core.Character) *EmeraldDragonWhelp {
-	whelpBaseStats := stats.Stats{
+// emeraldWhelpBaseStats is the whelp's sheet.
+func emeraldWhelpBaseStats() stats.Stats {
+	return stats.Stats{
 		stats.Health:      1500, // https://wowwiki-archive.fandom.com/wiki/Dragon%27s_Call
 		stats.Intellect:   20,   // Adding the base 20 intellect to not mess with the base mana function
 		stats.Mana:        500,  // TODO: Assumed value. The whelp seems to cast 3 Acid Spits (90 mana) per spawn (Rain: In the log you can see a whelp casting 4 acid spits so i'm increasing this to 500)
 		stats.SpellDamage: 220,  // Puts the Acid Spit damage very close to the below log
 		// Based on this log but more data needed
 		// https://sod.warcraftlogs.com/reports/xTwQVgbjF9cPnd3R#type=damage-done&ability=-13049&view=events&boss=-2&difficulty=0&wipes=2
-		// Forever: merged from MeleeCrit 4.5 + SpellCrit 13. unconfirmed
-		stats.Crit: 13 * core.CritRatingPerCritChance,
+		// Each table its own (the engine's melee and spell crit are
+		// separate since round 9; a single 13% had reached the melee).
+		// unconfirmed: wowsims' figures, no Forever source.
+		stats.MeleeCrit: 4.5 * core.CritRatingPerCritChance,
+		stats.SpellCrit: 13 * core.CritRatingPerCritChance,
 	}
+}
+
+func NewEmeraldDragonWhelp(character *core.Character) *EmeraldDragonWhelp {
+	whelpBaseStats := emeraldWhelpBaseStats()
 
 	whelp := &EmeraldDragonWhelp{
 		Pet: core.NewPet("Emerald Dragon Whelp", character, whelpBaseStats, emeraldWhelpingStatInheritance(), false, true),
