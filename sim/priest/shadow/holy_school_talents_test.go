@@ -2,10 +2,14 @@ package shadow
 
 import (
 	"math"
+	"strings"
 	"testing"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
+	"github.com/wowsims/classic/sim/priest"
+	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
 // Searing Light 14909 (client 1.60.1.70707) effect 0 is aura 79
@@ -43,4 +47,48 @@ func TestSilentResolveCoversShadowThreat(t *testing.T) {
 			t.Errorf("Mind Blast threat multiplier = %v with Silent Resolve 3/3, want 0.70", spell.ThreatMultiplier)
 		}
 	}
+}
+
+// Shadowform 15473 effect 3 is aura 72 (MOD_POWER_COST_SCHOOL_PCT) on the
+// Shadow school at -50, a school cost multiplier; Mental Agility 14520 is
+// aura 108 misc 14, a spell modifier on its mask. The client applies a
+// spell's modifiers first and the school multiplier after them, so the two
+// multiply: a top-rank Shadow Word: Pain (470 mana) costs 470 x 0.9 x 0.5,
+// not 470 x (1 - 0.1 - 0.5).
+func TestShadowformCostMultipliesWithMentalAgility(t *testing.T) {
+	talents := priestTalentStringWithRank(t, "mental_agility", 3)
+	talents = setPriestTalentRank(t, talents, "shadowform", 1)
+	sim, built := buildShadowPriestForTest(t, talents)
+	built.ShadowformAura.Activate(sim)
+
+	var pain *core.Spell
+	for _, spell := range built.ShadowWordPain {
+		if spell != nil {
+			pain = spell
+		}
+	}
+	want := pain.Cost.BaseCost * 0.9 * 0.5
+	if got := pain.Cost.GetCurrentCost(); math.Abs(got-want) > 1e-6 {
+		t.Errorf("Shadow Word: Pain costs %v in Shadowform with Mental Agility 3/3, want %v", got, want)
+	}
+}
+
+// setPriestTalentRank sets one talent's digit in an existing talent string.
+func setPriestTalentRank(t *testing.T, talents string, fieldName string, rank int) string {
+	t.Helper()
+	fd := (&proto.PriestTalents{}).ProtoReflect().Descriptor().Fields().ByName(protoreflect.Name(fieldName))
+	if fd == nil {
+		t.Fatalf("PriestTalents has no field named %q", fieldName)
+	}
+	pos := int(fd.Number()) - 1
+	treeIdx := 0
+	for treeIdx < len(priest.TalentTreeSizes) && pos >= priest.TalentTreeSizes[treeIdx] {
+		pos -= priest.TalentTreeSizes[treeIdx]
+		treeIdx++
+	}
+	segments := strings.Split(talents, "-")
+	chars := []rune(segments[treeIdx])
+	chars[pos] = rune('0' + rank)
+	segments[treeIdx] = string(chars)
+	return strings.Join(segments, "-")
 }

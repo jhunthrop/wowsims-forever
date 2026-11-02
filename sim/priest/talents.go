@@ -494,12 +494,6 @@ func (priest *Priest) registerShadowform() {
 			ClassSpellsOnly: true,
 			FloatValue:      shadowformCritDamageBonus,
 		}),
-		priest.AddDynamicMod(core.SpellModConfig{
-			Kind:            core.SpellMod_PowerCost_Pct,
-			School:          core.SpellSchoolShadow,
-			ClassSpellsOnly: true,
-			IntValue:        shadowformManaCostPct,
-		}),
 	}
 
 	priest.ShadowformAura = priest.RegisterAura(core.Aura{
@@ -509,11 +503,17 @@ func (priest *Priest) registerShadowform() {
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow] *= 1 + shadowformDamageBonus
 			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexPhysical] *= shadowformPhysicalDamageTaken
+			// Client 15473 effect 3 is aura 72, a Shadow school cost
+			// multiplier applied after the spells' own cost modifiers
+			// (Mental Agility, Devouring Contagion), so it multiplies
+			// with them rather than adding to them.
+			aura.Unit.PseudoStats.SchoolCostMultiplier[stats.SchoolIndexShadow] += shadowformManaCostPct
 			core.Each(shadowformMods, (*core.SpellMod).Activate)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow] /= 1 + shadowformDamageBonus
 			aura.Unit.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexPhysical] /= shadowformPhysicalDamageTaken
+			aura.Unit.PseudoStats.SchoolCostMultiplier[stats.SchoolIndexShadow] -= shadowformManaCostPct
 			core.Each(shadowformMods, (*core.SpellMod).Deactivate)
 		},
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
