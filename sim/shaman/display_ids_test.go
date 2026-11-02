@@ -11,3 +11,14 @@ func TestFlurryBuffCarriesTheClientsId(t *testing.T) {
 		}
 	}
 }
+
+// Elemental Devastation 30160 is one talent spell with a trait curve
+// (3/6/9%) in 1.60.1.70707; its buff is 30165 at every rank (29177 and
+// 29178 have no SpellName row).
+func TestElementalDevastationBuffCarriesTheClientsId(t *testing.T) {
+	for points := int32(1); points <= 3; points++ {
+		if got := elementalDevastationBuffSpellID(points); got != 30165 {
+			t.Errorf("Elemental Devastation %d/3 buff id %d, want 30165", points, got)
+		}
+	}
+}
