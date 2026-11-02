@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70707",
+  "build": "1.60.1.70753",
   "class_slug": "druid",
   "trainables": [
     {
@@ -1099,6 +1099,23 @@
           "id": 16864,
           "rank": 0,
           "level": 20
+        }
+      ]
+    },
+    {
+      "name": "Poised",
+      "skill_line": "Feral Combat",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1328829,
+          "rank": 0,
+          "level": 32
         }
       ]
     },

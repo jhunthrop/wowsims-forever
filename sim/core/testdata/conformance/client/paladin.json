@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70707",
+  "build": "1.60.1.70753",
   "class_slug": "paladin",
   "family": 10,
   "spells": {
@@ -835,42 +835,6 @@
       ],
       "cost_pct": 0.0,
       "max_level": 49
-    },
-    "1038": {
-      "name": "",
-      "rank": 0,
-      "school_mask": 2,
-      "cast_time_ms": 0,
-      "gcd_ms": 1500,
-      "cooldown_ms": 0,
-      "category_cooldown_ms": 0,
-      "duration_ms": 3600000,
-      "cost": 0,
-      "cost_type": 0,
-      "spell_level": 26,
-      "family_mask": [
-        268435712,
-        0,
-        65536,
-        0
-      ],
-      "effects": [
-        {
-          "index": 0,
-          "effect": 6,
-          "aura": 10,
-          "amount": -30,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 127,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        }
-      ],
-      "cost_pct": 8.0,
-      "max_level": 0
     },
     "1042": {
       "name": "Holy Light",
@@ -4097,153 +4061,6 @@
       ],
       "cost_pct": 0.0,
       "max_level": 27
-    },
-    "19977": {
-      "name": "",
-      "rank": 0,
-      "school_mask": 2,
-      "cast_time_ms": 0,
-      "gcd_ms": 1500,
-      "cooldown_ms": 0,
-      "category_cooldown_ms": 0,
-      "duration_ms": 3600000,
-      "cost": 85,
-      "cost_type": 0,
-      "spell_level": 40,
-      "family_mask": [
-        268435456,
-        0,
-        65536,
-        0
-      ],
-      "effects": [
-        {
-          "index": 0,
-          "effect": 6,
-          "aura": 4,
-          "amount": 210,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        },
-        {
-          "index": 1,
-          "effect": 6,
-          "aura": 4,
-          "amount": 60,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        }
-      ],
-      "cost_pct": 0.0,
-      "max_level": 0
-    },
-    "19978": {
-      "name": "",
-      "rank": 0,
-      "school_mask": 2,
-      "cast_time_ms": 0,
-      "gcd_ms": 1500,
-      "cooldown_ms": 0,
-      "category_cooldown_ms": 0,
-      "duration_ms": 3600000,
-      "cost": 110,
-      "cost_type": 0,
-      "spell_level": 50,
-      "family_mask": [
-        268435456,
-        0,
-        65536,
-        0
-      ],
-      "effects": [
-        {
-          "index": 0,
-          "effect": 6,
-          "aura": 4,
-          "amount": 300,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        },
-        {
-          "index": 1,
-          "effect": 6,
-          "aura": 4,
-          "amount": 85,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        }
-      ],
-      "cost_pct": 0.0,
-      "max_level": 0
-    },
-    "19979": {
-      "name": "",
-      "rank": 0,
-      "school_mask": 2,
-      "cast_time_ms": 0,
-      "gcd_ms": 1500,
-      "cooldown_ms": 0,
-      "category_cooldown_ms": 0,
-      "duration_ms": 3600000,
-      "cost": 135,
-      "cost_type": 0,
-      "spell_level": 60,
-      "family_mask": [
-        268435456,
-        0,
-        65536,
-        0
-      ],
-      "effects": [
-        {
-          "index": 0,
-          "effect": 6,
-          "aura": 4,
-          "amount": 400,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        },
-        {
-          "index": 1,
-          "effect": 6,
-          "aura": 4,
-          "amount": 115,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        }
-      ],
-      "cost_pct": 0.0,
-      "max_level": 0
     },
     "19980": {
       "name": "Holy Light",
@@ -11849,55 +11666,6 @@
       "cost_pct": 0.0,
       "max_level": 0
     },
-    "25890": {
-      "name": "",
-      "rank": 0,
-      "school_mask": 2,
-      "cast_time_ms": 0,
-      "gcd_ms": 1500,
-      "cooldown_ms": 0,
-      "category_cooldown_ms": 0,
-      "duration_ms": 3600000,
-      "cost": 260,
-      "cost_type": 0,
-      "spell_level": 60,
-      "family_mask": [
-        268435456,
-        0,
-        0,
-        0
-      ],
-      "effects": [
-        {
-          "index": 0,
-          "effect": 6,
-          "aura": 4,
-          "amount": 400,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        },
-        {
-          "index": 1,
-          "effect": 6,
-          "aura": 4,
-          "amount": 115,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        }
-      ],
-      "cost_pct": 0.0,
-      "max_level": 0
-    },
     "25894": {
       "name": "Greater Blessing of Wisdom",
       "rank": 1,
@@ -11932,42 +11700,6 @@
         }
       ],
       "cost_pct": 0.0,
-      "max_level": 0
-    },
-    "25895": {
-      "name": "",
-      "rank": 0,
-      "school_mask": 2,
-      "cast_time_ms": 0,
-      "gcd_ms": 1500,
-      "cooldown_ms": 0,
-      "category_cooldown_ms": 0,
-      "duration_ms": 3600000,
-      "cost": 0,
-      "cost_type": 0,
-      "spell_level": 60,
-      "family_mask": [
-        268435712,
-        0,
-        0,
-        0
-      ],
-      "effects": [
-        {
-          "index": 0,
-          "effect": 6,
-          "aura": 10,
-          "amount": -30,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 127,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        }
-      ],
-      "cost_pct": 16.0,
       "max_level": 0
     },
     "25898": {
@@ -17949,7 +17681,7 @@
           "effect": 2,
           "aura": 0,
           "amount": 0,
-          "sp_coefficient": 0.079999998211861,
+          "sp_coefficient": 0.07999999821,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
@@ -21460,6 +21192,68 @@
       "cost_pct": 0.0,
       "max_level": 0
     },
+    "1239570": {
+      "name": "Holy Shield",
+      "rank": 4,
+      "school_mask": 2,
+      "cast_time_ms": 0,
+      "gcd_ms": 1500,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 10000,
+      "duration_ms": 10000,
+      "cost": 240,
+      "cost_type": 0,
+      "spell_level": 60,
+      "family_mask": [
+        0,
+        64,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 51,
+          "amount": 30,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 43,
+          "amount": 221,
+          "sp_coefficient": 0.07999999821,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 6,
+          "aura": 4,
+          "amount": 1,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
     "1240571": {
       "name": "S03 - Item - Scarlet Enclave - Paladin - Shockadin 2P Bonus",
       "rank": 0,
@@ -23602,55 +23396,6 @@
       "cost_pct": 0.0,
       "max_level": 0
     },
-    "1311085": {
-      "name": "",
-      "rank": 0,
-      "school_mask": 1,
-      "cast_time_ms": 0,
-      "gcd_ms": 0,
-      "cooldown_ms": 0,
-      "category_cooldown_ms": 0,
-      "duration_ms": 0,
-      "cost": 0,
-      "cost_type": 0,
-      "spell_level": 0,
-      "family_mask": [
-        0,
-        0,
-        0,
-        262144
-      ],
-      "effects": [
-        {
-          "index": 0,
-          "effect": 6,
-          "aura": 107,
-          "amount": -1000,
-          "sp_coefficient": 1.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 10,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        },
-        {
-          "index": 1,
-          "effect": 6,
-          "aura": 10,
-          "amount": -20,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 127,
-          "trigger_spell": 0,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        }
-      ],
-      "cost_pct": 0.0,
-      "max_level": 0
-    },
     "1311087": {
       "name": "Sacred Arbiter",
       "rank": 0,
@@ -25041,55 +24786,6 @@
       "cost_pct": 0.0,
       "max_level": 0
     },
-    "1325499": {
-      "name": "",
-      "rank": 0,
-      "school_mask": 2,
-      "cast_time_ms": 0,
-      "gcd_ms": 1500,
-      "cooldown_ms": 0,
-      "category_cooldown_ms": 0,
-      "duration_ms": 0,
-      "cost": 0,
-      "cost_type": 0,
-      "spell_level": 26,
-      "family_mask": [
-        0,
-        0,
-        0,
-        0
-      ],
-      "effects": [
-        {
-          "index": 0,
-          "effect": 203,
-          "aura": 0,
-          "amount": 0,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 1038,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        },
-        {
-          "index": 1,
-          "effect": 203,
-          "aura": 0,
-          "amount": 0,
-          "sp_coefficient": 0.0,
-          "ap_coefficient": 0.0,
-          "period_ms": 0,
-          "misc_value": 0,
-          "trigger_spell": 25895,
-          "variance": 0.0,
-          "points_per_level": 0.0
-        }
-      ],
-      "cost_pct": 0.0,
-      "max_level": 0
-    },
     "1328370": {
       "name": "Turn Evil",
       "rank": 0,
@@ -25440,7 +25136,7 @@
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
-          "points_per_level": 6.6666698455811
+          "points_per_level": 6.66666984558
         },
         {
           "index": 1,
@@ -25453,7 +25149,7 @@
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
-          "points_per_level": 1.9166699647903
+          "points_per_level": 1.91666996479
         },
         {
           "index": 2,
@@ -25466,7 +25162,7 @@
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
-          "points_per_level": 3.8333299160004
+          "points_per_level": 3.833329916
         }
       ],
       "cost_pct": 8.0,
