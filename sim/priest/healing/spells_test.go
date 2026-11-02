@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/spellconst"
 	"github.com/wowsims/classic/sim/core/stats"
 	"github.com/wowsims/classic/sim/priest"
@@ -325,7 +326,7 @@ func TestPrayerOfHealingHealsTheTargetsWholeParty(t *testing.T) {
 // TestDesperatePrayerHealsOnlyThePriest names a friend and checks the
 // priest is healed instead.
 func TestDesperatePrayerHealsOnlyThePriest(t *testing.T) {
-	sim, agent := healerSim(t, 60, "")
+	sim, agent := racialPriest(t, proto.Race_RaceDwarf, 60)
 	friend := agent.GetMainTarget()
 	spell := agent.DesperatePrayer[7]
 	spell.ApplyEffects(sim, friend, spell)

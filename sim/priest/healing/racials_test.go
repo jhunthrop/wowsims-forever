@@ -136,3 +136,14 @@ func TestContingencyPlanShieldsAndHealsWhenItsHolderFallsBelowThirtyFivePercent(
 		t.Error("the ward is still up after it fired")
 	}
 }
+
+// Desperate Prayer is the dwarf priest's: its learn rows (13908, 19243,
+// skill line 56) carry RaceMasks 4.
+func TestDesperatePrayerIsTheDwarfPriests(t *testing.T) {
+	for race, want := range map[proto.Race]bool{proto.Race_RaceDwarf: true, proto.Race_RaceHuman: false, proto.Race_RaceUndead: false} {
+		_, agent := racialPriest(t, race, 60)
+		if got := len(registered(agent.DesperatePrayer)) > 0; got != want {
+			t.Errorf("a %v priest has Desperate Prayer = %v, want %v", race, got, want)
+		}
+	}
+}

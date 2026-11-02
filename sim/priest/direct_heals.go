@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
 )
 
 // desperatePrayerCooldown is the client's category cooldown for every rank
@@ -68,8 +69,12 @@ func (priest *Priest) registerPrayerOfHealing() {
 
 // registerDesperatePrayer is the priest's own emergency heal. It is cast
 // on the priest whatever target the caller names, and every rank shares
-// one cooldown.
+// one cooldown. Only a dwarf learns it: its learn rows (13908, 19243,
+// skill line 56) carry RaceMasks 4.
 func (priest *Priest) registerDesperatePrayer() {
+	if priest.Race != proto.Race_RaceDwarf {
+		return
+	}
 	cooldown := core.Cooldown{Timer: priest.NewTimer(), Duration: desperatePrayerCooldown}
 	priest.DesperatePrayer = priest.registerHealRanks(desperatePrayerRanks, func(rank int, entry healRank) core.SpellConfig {
 		config := priest.healSpellConfig(entry, rank, SpellCode_PriestDesperatePrayer, PriestSpellMaskDesperatePrayer)
