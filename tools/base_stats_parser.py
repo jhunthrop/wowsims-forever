@@ -290,6 +290,22 @@ def read_levels_json(path):
     return base_stats, crit_spell
 
 
+def overlay_client_base_mana(base_stats, base_mp, path):
+    """Every level's base mana is the client's BaseMP row, not wowhead's
+    gear planner, which disagreed at eight class levels in 1.60.1.70707
+    (shaman 30: 718 against 665). A class with no mana keeps its zero."""
+    proto_to_column = {f"Class{name}": name for name in BASE_MP_CLASSES}
+    for class_name, by_level in base_stats.items():
+        column = proto_to_column[class_name]
+        if column not in base_mp:
+            raise SystemExit(f"{path} has no column {column!r}")
+        values = base_mp[column]
+        if len(values) < MAX_LEVEL:
+            raise SystemExit(f"{path} column {column!r} has {len(values)} rows, need {MAX_LEVEL}")
+        for level in range(1, MAX_LEVEL + 1):
+            by_level[level]["Mana"] = values[level - 1]
+
+
 def read_expected_stat(path):
     """The client's PlayerExpectedStat table (DB2 export, CSV). Return
     (crit_per_agi, spell_crit_per_int) where each is
@@ -360,7 +376,9 @@ def generate_levels(source_path, expected_stat_path, base_stats, crit_per_agi, s
         "//",
         f"// Sources: {source_path} (wowhead's Forever gear planner payload:",
         "// wow.gearPlanner.classic.baseStats, for baseStatsByClassLevel;",
-        "// .critSpell is cross-checked, not read)",
+        "// .critSpell is cross-checked, not read; Mana is overlaid from basemp.txt)",
+        f"//          {os.path.dirname(expected_stat_path)}/{BASE_MP} (the client's BaseMP:",
+        "// every level's base mana)",
         f"//          {expected_stat_path} (the client's PlayerExpectedStat",
         "// table: CritPerAgility and SpellCritPerIntellect, ContentSetID 0)",
         "//",
@@ -380,7 +398,8 @@ def generate_levels(source_path, expected_stat_path, base_stats, crit_per_agi, s
         f'const LevelStatsSource = "{source_path} (wow.gearPlanner.classic.baseStats); {expected_stat_path} (CritPerAgility, SpellCritPerIntellect)"',
         "",
         "// baseStatsByClassLevel[class][level] is wowhead's gear planner Health,",
-        "// Mana, Agility, Strength, Intellect, Spirit and Stamina for that class at",
+        "// Agility, Strength, Intellect, Spirit and Stamina, and the client's BaseMP",
+        "// Mana, for that class at",
         "// that level, level 1..CharacterMaxLevel (index 0 is unused, the zero",
         "// Stats{}, matching the source array's own unused index 0). Level",
         "// CharacterMaxLevel reproduces base_stats.go's ClassBaseStats exactly for",
@@ -479,6 +498,7 @@ def main():
 
     if args.levels_json:
         base_stats, crit_spell = read_levels_json(args.levels_json)
+        overlay_client_base_mana(base_stats, base_mp, f"{args.inputs}/{BASE_MP}")
         expected_stat_path = f"{args.inputs}/{PLAYER_EXPECTED_STAT}"
         crit_per_agi, spell_crit_per_int = read_expected_stat(expected_stat_path)
         check_spell_crit_agrees(spell_crit_per_int, crit_spell)

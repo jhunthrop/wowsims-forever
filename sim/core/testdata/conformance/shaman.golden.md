@@ -1708,7 +1708,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | ElementalShaman (Rage of the Farseer talent) | 60 | Rage of the Farseer | 0 | 425336 | 0.00→0.00 | mana→none | 180000→180000 | 0→0 | 0→0 | 1→1 | 25000→25000 | match |  | n/a | n/a | n/a |
 | ElementalShaman (Stormstrike talent) | 10 | Stormstrike | 0 | 17364 | 14.00 (8% base mana)→14.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | n/a | n/a | n/a |
 | ElementalShaman (Stormstrike talent) | 20 | Stormstrike | 0 | 17364 | 29.60 (8% base mana)→29.60 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | n/a | n/a | n/a |
-| ElementalShaman (Stormstrike talent) | 30 | Stormstrike | 0 | 17364 | 57.44 (8% base mana)→57.44 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | n/a | n/a | n/a |
+| ElementalShaman (Stormstrike talent) | 30 | Stormstrike | 0 | 17364 | 53.20 (8% base mana)→53.20 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | n/a | n/a | n/a |
 | ElementalShaman (Stormstrike talent) | 38 | Stormstrike | 0 | 17364 | 73.76 (8% base mana)→73.76 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | n/a | n/a | n/a |
 | ElementalShaman (Stormstrike talent) | 40 | Stormstrike | 0 | 17364 | 78.00 (8% base mana)→78.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | n/a | n/a | n/a |
 | ElementalShaman (Stormstrike talent) | 50 | Stormstrike | 0 | 17364 | 100.40 (8% base mana)→100.40 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 40→40 | 12000→12000 | match |  | n/a | n/a | n/a |
