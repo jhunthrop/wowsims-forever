@@ -628,11 +628,14 @@ func (warlock *Warlock) applyDemonicSacrifice() {
 		},
 	})
 
+	// The Voidwalker's sacrifice is 18792 Fel Energy (aura 21, 2% of
+	// Mana every 4 s) and the Felhunter's 18790 Fel Stamina (aura 20, 3%
+	// of Health every 4 s), as Forever's text pairs them.
 	var vwPa *core.PendingAction
-	manaMetric := warlock.NewManaMetrics(core.ActionID{SpellID: 18790})
+	manaMetric := warlock.NewManaMetrics(core.ActionID{SpellID: 18792})
 	voidwalkerAura := warlock.GetOrRegisterAura(core.Aura{
-		Label:    "Fel Stamina",
-		ActionID: core.ActionID{SpellID: 18790},
+		Label:    "Fel Energy",
+		ActionID: core.ActionID{SpellID: 18792},
 		Duration: 30 * time.Minute,
 
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
@@ -662,10 +665,10 @@ func (warlock *Warlock) applyDemonicSacrifice() {
 	})
 
 	var fhPa *core.PendingAction
-	healthMetric := warlock.NewHealthMetrics(core.ActionID{SpellID: 18792})
+	healthMetric := warlock.NewHealthMetrics(core.ActionID{SpellID: 18790})
 	felhunterAura := warlock.GetOrRegisterAura(core.Aura{
-		Label:    "Fel Energy",
-		ActionID: core.ActionID{SpellID: 18792},
+		Label:    "Fel Stamina",
+		ActionID: core.ActionID{SpellID: 18790},
 		Duration: 30 * time.Minute,
 
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
