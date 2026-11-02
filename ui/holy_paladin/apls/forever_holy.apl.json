@@ -550,8 +550,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 19943,
-            "rank": 6
+            "spellId": 19750,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -559,7 +559,7 @@
           }
         }
       },
-      "notes": "Flash of Light is the staple: about as much healing per cast as Holy Light gives per second of cast time at a quarter of the price, and a tank hit for 12 percent a swing is under 90 percent most of the time. The tank gets the top rank and the four party members below get rank 4, the rank that came out ahead under the rank rule once the ranker had picked its gear."
+      "notes": "Flash of Light is the staple: about as much healing per cast as Holy Light gives per second of cast time at a quarter of the price, and a tank hit for 12 percent a swing is under 90 percent most of the time. The tank gets rank 1 (owner ruling 3, sim-accuracy round 9: more effective healing over the raid fight for its mana) and the four party members below get rank 4, the rank that came out ahead under the rank rule once the ranker had picked its gear."
     },
     {
       "action": {

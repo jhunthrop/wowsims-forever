@@ -36,13 +36,14 @@ const (
 	prayerOfMendingRank3 = 1240827
 	renewRank3           = 6075
 	healRank4            = 6064
+	healRank1            = 2054 // Discipline's Heal since site round 9 (owner ruling 3)
 	penanceRank4         = 1316995
 	powerWordShieldRank4 = 3747
 )
 
 var rotationCases = []rotationCase{
 	{"holy", "forever_holy", HolyTalents, []int32{prayerOfMendingRank3, renewRank3, healRank4}},
-	{"discipline", "forever_discipline", DiscTalents, []int32{penanceRank4, powerWordShieldRank4, healRank4}},
+	{"discipline", "forever_discipline", DiscTalents, []int32{penanceRank4, powerWordShieldRank4, healRank1}},
 }
 
 func loadRotation(t *testing.T, file string) *proto.APLRotation {

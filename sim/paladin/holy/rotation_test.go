@@ -31,6 +31,10 @@ const (
 	// the party members.
 	holyShockRotationCast int32 = 1311606
 	flashOfLightPartyRank int32 = 19941
+	// flashOfLightTankRank is the rotation's Flash of Light on the tank:
+	// rank 1 (35 mana) since site round 9 (owner ruling 3, the rank that heals
+	// most over the raid fight).
+	flashOfLightTankRank int32 = 19750
 )
 
 // A healer with some gear: enough that the rotation's heals are the ones a
@@ -99,7 +103,7 @@ func TestDefaultRotationHealsTheFakeRaid(t *testing.T) {
 	for name, id := range map[string]int32{
 		// No Greater Blessing of Light: Forever removed both Blessings of
 		// Light (the 70707 hotfix push), and the rotation no longer casts it.
-		"Flash of Light on the tank": flashOfLightTopRank, "Flash of Light on the party": flashOfLightPartyRank,
+		"Flash of Light on the tank": flashOfLightTankRank, "Flash of Light on the party": flashOfLightPartyRank,
 	} {
 		if totalsOf(result, id).casts == 0 {
 			t.Errorf("the default rotation never cast %s", name)
@@ -138,7 +142,7 @@ func TestDefaultRotationUsesDivineFavorAndHolyLightWhenTheTankIsInDanger(t *test
 func TestDefaultRotationSpendsTheManaItsCastsCost(t *testing.T) {
 	result := rotationFight(t, 0).run(t, rotationIterations)
 	costs := map[int32]float64{
-		flashOfLightTopRank: 140, holyLightTrainerRank: 660,
+		flashOfLightTankRank: 35, holyLightTrainerRank: 580, // client spellconst: rank 8 costs 580 (660 is the book rank 9)
 	}
 	var want, got float64
 	for id, cost := range costs {
