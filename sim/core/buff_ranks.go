@@ -332,3 +332,58 @@ const manaSpringPulsesPerFive = 2.5
 func ManaSpringMP5(level int) float64 {
 	return ManaSpringRanks.At(level) * manaSpringPulsesPerFive
 }
+
+// The reactive raid buffs (round 9). Thorns and Retribution Aura deal their
+// amount to each melee attacker (aura 15); the Stoneskin aura a Stoneskin
+// Totem rank places reduces Physical damage taken by its amount (aura 14,
+// misc 1). Level is the rank's SpellLevels SpellLevel, which is the totem's
+// for Stoneskin; SpellID is the aura's.
+var (
+	ThornsRanks = BuffRanks{
+		{SpellID: 467, Level: 6, Amount: 3},
+		{SpellID: 782, Level: 14, Amount: 6},
+		{SpellID: 1075, Level: 24, Amount: 9},
+		{SpellID: 8914, Level: 34, Amount: 12},
+		{SpellID: 9756, Level: 44, Amount: 15},
+		{SpellID: 9910, Level: 54, Amount: 18},
+	}
+
+	RetributionAuraRanks = BuffRanks{
+		{SpellID: 7294, Level: 16, Amount: 5},
+		{SpellID: 10298, Level: 26, Amount: 8},
+		{SpellID: 10299, Level: 36, Amount: 12},
+		{SpellID: 10300, Level: 46, Amount: 16},
+		{SpellID: 10301, Level: 56, Amount: 20},
+	}
+
+	StoneskinRanks = BuffRanks{
+		{SpellID: 8072, Level: 4, Amount: 4},
+		{SpellID: 8156, Level: 14, Amount: 7},
+		{SpellID: 8157, Level: 24, Amount: 11},
+		{SpellID: 10403, Level: 34, Amount: 16},
+		{SpellID: 10404, Level: 44, Amount: 22},
+		{SpellID: 10405, Level: 54, Amount: 30},
+	}
+)
+
+// A party's Mana Tide Totem (round 9). The talent (16190) is Restoration
+// tier 3, so a raid has it from level 25; each totem rank (16190, 17354,
+// 17359, 1325256 at 1, 38, 48 and 58) places a tick spell that restores its
+// amount every 3 s (aura 24). SpellID is the tick's.
+const ManaTideTotemTalentLevel = 25
+
+var ManaTideTickRanks = BuffRanks{
+	{SpellID: 16191, Level: 1, Amount: 88},
+	{SpellID: 17355, Level: 38, Amount: 133},
+	{SpellID: 17360, Level: 48, Amount: 197},
+	{SpellID: 1325257, Level: 58, Amount: 290},
+}
+
+// PartyManaTidePerTick is the mana a party member of this level gets from
+// each tick of a party shaman's Mana Tide Totem; 0 before the talent opens.
+func PartyManaTidePerTick(level int32) float64 {
+	if level < ManaTideTotemTalentLevel {
+		return 0
+	}
+	return ManaTideTickRanks.At(int(level))
+}

@@ -2715,6 +2715,8 @@ const (
 	Food_FoodSmokedSagefish           Food = 10
 	Food_FoodSagefishDelight          Food = 11
 	Food_FoodSagesTea                 Food = 13
+	Food_FoodBakedSalmon              Food = 14
+	Food_FoodPoachedSunscaleSalmon    Food = 15
 )
 
 // Enum value maps for Food.
@@ -2733,6 +2735,8 @@ var (
 		10: "FoodSmokedSagefish",
 		11: "FoodSagefishDelight",
 		13: "FoodSagesTea",
+		14: "FoodBakedSalmon",
+		15: "FoodPoachedSunscaleSalmon",
 	}
 	Food_value = map[string]int32{
 		"FoodUnknown":                  0,
@@ -2748,6 +2752,8 @@ var (
 		"FoodSmokedSagefish":           10,
 		"FoodSagefishDelight":          11,
 		"FoodSagesTea":                 13,
+		"FoodBakedSalmon":              14,
+		"FoodPoachedSunscaleSalmon":    15,
 	}
 )
 
@@ -7151,7 +7157,7 @@ const file_common_proto_rawDesc = "" +
 	"\x0eWindfuryWeapon\x10\f\x12\x11\n" +
 	"\rInstantPoison\x10\x05\x12\x10\n" +
 	"\fDeadlyPoison\x10\x06\x12\x0f\n" +
-	"\vWoundPoison\x10\a*\xc7\x02\n" +
+	"\vWoundPoison\x10\a*\xfb\x02\n" +
 	"\x04Food\x12\x0f\n" +
 	"\vFoodUnknown\x10\x00\x12\x14\n" +
 	"\x10FoodGrilledSquid\x10\x01\x12\x1c\n" +
@@ -7166,7 +7172,9 @@ const file_common_proto_rawDesc = "" +
 	"\x12FoodSmokedSagefish\x10\n" +
 	"\x12\x17\n" +
 	"\x13FoodSagefishDelight\x10\v\x12\x10\n" +
-	"\fFoodSagesTea\x10\r*\x81\x01\n" +
+	"\fFoodSagesTea\x10\r\x12\x13\n" +
+	"\x0fFoodBakedSalmon\x10\x0e\x12\x1d\n" +
+	"\x19FoodPoachedSunscaleSalmon\x10\x0f*\x81\x01\n" +
 	"\rSaygesFortune\x12\x11\n" +
 	"\rSaygesUnknown\x10\x00\x12\x10\n" +
 	"\fSaygesDamage\x10\x01\x12\x11\n" +

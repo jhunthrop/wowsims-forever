@@ -190,9 +190,10 @@ func TestUnconfirmedRacialsNamesTheThree(t *testing.T) {
 }
 
 // Tauren's Endurance (20550) is 5% Health. Neither the client table nor
-// Wowhead Forever's live tooltip (read 2026-11-01) gives it Hit: the table
-// adds 2% critical strike bonus (an aura 163 effect the live text no
-// longer shows), and the earlier 1% Hit came from a demo transcription.
+// Wowhead Forever's live tooltip (read 2026-11-01) gives it Hit: the earlier
+// 1% Hit came from a demo transcription. The shipped table's 2% critical
+// strike bonus (aura 163) is gone from the hotfix push's row, which states
+// aura 133 alone.
 func TestEnduranceIsHealthWithoutHit(t *testing.T) {
 	endurance := racialNamed(t, proto.Race_RaceTauren, "Endurance")
 	if endurance.Kind != RacialPassive {
@@ -227,14 +228,23 @@ func TestOrcHasCommandAndNoSavage(t *testing.T) {
 	if command.Kind != RacialPassive {
 		t.Errorf("Command is %v, want a passive", command.Kind)
 	}
-	pet := &Pet{Character: Character{Unit: Unit{PseudoStats: stats.NewPseudoStats()}}}
-	character := &Character{Pets: []*Pet{pet}}
-	command.Apply(character)
-	if got := character.GetStat(stats.Crit); got != 0 {
-		t.Errorf("Command granted the orc %v Crit, want none", got)
-	}
-	if got := pet.PseudoStats.DamageDealtMultiplier; math.Abs(got-1.05) > 1e-12 {
-		t.Errorf("Command left the pet's damage multiplier at %v, want 1.05", got)
+	// The client gives the damage to hunter and warlock pets only (20576
+	// ClassMask 4, 20575 ClassMask 256); every other class's Command is the
+	// dummy 21563 (ClassMask 1243), so an orc warrior's item guardian (the
+	// Emerald Dragon Whelp) gains nothing.
+	for _, c := range []struct {
+		class proto.Class
+		want  float64
+	}{{proto.Class_ClassHunter, 1.05}, {proto.Class_ClassWarlock, 1.05}, {proto.Class_ClassWarrior, 1}, {proto.Class_ClassShaman, 1}} {
+		pet := &Pet{Character: Character{Unit: Unit{PseudoStats: stats.NewPseudoStats()}}}
+		character := &Character{Class: c.class, Pets: []*Pet{pet}}
+		command.Apply(character)
+		if got := character.GetStat(stats.Crit); got != 0 {
+			t.Errorf("Command granted the orc %v Crit, want none", got)
+		}
+		if got := pet.PseudoStats.DamageDealtMultiplier; math.Abs(got-c.want) > 1e-12 {
+			t.Errorf("Command left a %v's pet damage multiplier at %v, want %v", c.class, got, c.want)
+		}
 	}
 }
 

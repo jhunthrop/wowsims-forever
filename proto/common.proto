@@ -578,6 +578,8 @@ enum Food {
 	FoodSmokedSagefish = 10;
 	FoodSagefishDelight = 11;
 	FoodSagesTea = 13;
+	FoodBakedSalmon = 14;
+	FoodPoachedSunscaleSalmon = 15;
 }
 
 enum SaygesFortune {

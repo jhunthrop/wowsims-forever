@@ -225,7 +225,7 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 	}
 
 	if raidBuffs.Thorns != proto.TristateEffect_TristateEffectMissing {
-		ThornsAura(character, GetTristateValueInt32(raidBuffs.Thorns, 0, 3))
+		ThornsAura(character)
 	}
 
 	if raidBuffs.MoonkinAura && MoonkinAuraReaches(character.Level) {
@@ -304,7 +304,7 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 	}
 
 	if raidBuffs.RetributionAura != proto.TristateEffect_TristateEffectMissing {
-		RetributionAura(character, GetTristateValueInt32(raidBuffs.RetributionAura, 0, 2))
+		RetributionAura(character)
 	}
 
 	if raidBuffs.BattleShout != proto.TristateEffect_TristateEffectMissing {
@@ -549,72 +549,63 @@ func DevotionAuraAura(unit *Unit, points int32) *Aura {
 	})
 }
 
+// StoneskinTotemAura is the Stoneskin aura of the highest Stoneskin Totem
+// rank the unit's level has learned (StoneskinRanks): Physical damage taken
+// reduced by a flat amount (aura 14, misc 1), so melee and ranged attacks
+// alike. Guardian Totems (the live Elemental tier-1 talent) adds 10% a point.
 func StoneskinTotemAura(unit *Unit, points int32) *Aura {
-	meleeDamageReduction := -30.0
-	meleeDamageReduction *= 1 + .1*float64(points)
-	meleeDamageReduction = math.Floor(meleeDamageReduction)
+	rank, _ := StoneskinRanks.Learned(int(unit.Level))
+	reduction := -math.Floor(StoneskinRanks.At(int(unit.Level)) * (1 + .1*float64(points)))
+	physical := []DefenseType{DefenseTypeMelee, DefenseTypeRanged}
 
 	return unit.GetOrRegisterAura(Aura{
 		Label:    "Stoneskin",
-		ActionID: ActionID{SpellID: 10408},
+		ActionID: ActionID{SpellID: rank.SpellID},
 		Duration: NeverExpires,
 		OnReset: func(aura *Aura, sim *Simulation) {
 			aura.Activate(sim)
 		},
 		OnGain: func(aura *Aura, sim *Simulation) {
-			aura.Unit.PseudoStats.BonusDamageTakenAfterModifiers[DefenseTypeMelee] += meleeDamageReduction
+			for _, defense := range physical {
+				aura.Unit.PseudoStats.BonusDamageTakenAfterModifiers[defense] += reduction
+			}
 		},
 		OnExpire: func(aura *Aura, sim *Simulation) {
-			aura.Unit.PseudoStats.BonusDamageTakenAfterModifiers[DefenseTypeMelee] += meleeDamageReduction
-		},
-	})
-}
-
-func RetributionAura(character *Character, points int32) *Aura {
-	baseDamage := 20.0
-
-	actionID := ActionID{SpellID: 10301}
-
-	damage := float64(baseDamage) * (1 + 0.25*float64(points))
-
-	procSpell := character.RegisterSpell(SpellConfig{
-		ActionID:    actionID,
-		SpellSchool: SpellSchoolHoly,
-		ProcMask:    ProcMaskEmpty,
-		Flags:       SpellFlagBinary | SpellFlagNoOnCastComplete | SpellFlagPassiveSpell,
-
-		DamageMultiplier: 1,
-		ThreatMultiplier: 1,
-
-		ApplyEffects: func(sim *Simulation, target *Unit, spell *Spell) {
-			spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMagicHit)
-		},
-	})
-
-	return character.RegisterAura(Aura{
-		Label:    "Retribution Aura",
-		ActionID: actionID,
-		Duration: NeverExpires,
-		OnReset: func(aura *Aura, sim *Simulation) {
-			aura.Activate(sim)
-		},
-		OnSpellHitTaken: func(aura *Aura, sim *Simulation, spell *Spell, result *SpellResult) {
-			if result.Landed() && spell.ProcMask.Matches(ProcMaskMelee) {
-				procSpell.Cast(sim, spell.Unit)
+			for _, defense := range physical {
+				aura.Unit.PseudoStats.BonusDamageTakenAfterModifiers[defense] -= reduction
 			}
 		},
 	})
 }
 
-func ThornsAura(character *Character, points int32) *Aura {
-	baseDamage := 18.0
+// RetributionAura is the highest Retribution Aura rank the character's level
+// has learned (RetributionAuraRanks): Holy damage to each melee attacker.
+// Forever's trees have no Improved Retribution Aura, so the tristate's
+// improved form adds nothing.
+func RetributionAura(character *Character) *Aura {
+	return reactiveDamageAura(character, "Retribution Aura", RetributionAuraRanks, SpellSchoolHoly)
+}
 
-	actionID := ActionID{SpellID: 9910}
-	damage := float64(baseDamage) * (1 + 0.25*float64(points))
+// ThornsAura is the highest Thorns rank the character's level has learned
+// (ThornsRanks): Nature damage to each melee attacker. Forever's trees have
+// no Improved Thorns, so the tristate's improved form adds nothing.
+func ThornsAura(character *Character) *Aura {
+	return reactiveDamageAura(character, "Thorns", ThornsRanks, SpellSchoolNature)
+}
+
+// reactiveDamageAura deals the learned rank's damage (aura 15) to every
+// attacker whose melee attack lands. Before the first rank it does nothing.
+func reactiveDamageAura(character *Character, label string, ranks BuffRanks, school SpellSchool) *Aura {
+	rank, learned := ranks.Learned(int(character.Level))
+	if !learned {
+		rank = BuffRank{SpellID: ranks[0].SpellID}
+	}
+	actionID := ActionID{SpellID: rank.SpellID}
+	damage := ranks.At(int(character.Level))
 
 	procSpell := character.RegisterSpell(SpellConfig{
 		ActionID:    actionID,
-		SpellSchool: SpellSchoolNature,
+		SpellSchool: school,
 		ProcMask:    ProcMaskEmpty,
 		Flags:       SpellFlagBinary | SpellFlagNoOnCastComplete | SpellFlagPassiveSpell,
 
@@ -627,10 +618,10 @@ func ThornsAura(character *Character, points int32) *Aura {
 	})
 
 	return MakePermanent(character.RegisterAura(Aura{
-		Label:    "Thorns",
+		Label:    label,
 		ActionID: actionID,
 		OnSpellHitTaken: func(aura *Aura, sim *Simulation, spell *Spell, result *SpellResult) {
-			if result.Landed() && spell.ProcMask.Matches(ProcMaskMelee) {
+			if learned && result.Landed() && spell.ProcMask.Matches(ProcMaskMelee) {
 				procSpell.Cast(sim, spell.Unit)
 			}
 		},
@@ -1203,11 +1194,11 @@ const ManaTideTotemDuration = time.Second * 12
 const ManaTideTotemCD = time.Minute * 5
 
 func registerManaTideTotemCD(agent Agent, numManaTideTotems int32) {
-	if numManaTideTotems == 0 {
+	character := agent.GetCharacter()
+	if numManaTideTotems == 0 || PartyManaTidePerTick(character.Level) == 0 {
 		return
 	}
 
-	character := agent.GetCharacter()
 	initialDelay := time.Duration(0)
 	mttAura := ManaTideTotemAura(character, -1)
 
@@ -1247,7 +1238,7 @@ func ManaTideTotemAura(character *Character, actionTag int32) *Aura {
 		}
 	}
 
-	manaPerTick := 290.0
+	manaPerTick := PartyManaTidePerTick(character.Level)
 
 	return character.GetOrRegisterAura(Aura{
 		Label:    "ManaTideTotem-" + actionID.String(),
