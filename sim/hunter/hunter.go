@@ -258,33 +258,7 @@ func NewHunter(character *core.Character, options *proto.Player) *Hunter {
 	rangedWeapon := hunter.WeaponFromRanged()
 
 	if hunter.HasRangedWeapon() {
-		// Ammo
-		switch hunter.Options.Ammo {
-		case proto.Hunter_Options_RazorArrow:
-			hunter.AmmoDPS = 7.5
-		case proto.Hunter_Options_SolidShot:
-			hunter.AmmoDPS = 7.5
-		case proto.Hunter_Options_JaggedArrow:
-			hunter.AmmoDPS = 13
-		case proto.Hunter_Options_AccurateSlugs:
-			hunter.AmmoDPS = 13
-		case proto.Hunter_Options_MithrilGyroShot:
-			hunter.AmmoDPS = 15
-		case proto.Hunter_Options_IceThreadedArrow:
-			hunter.AmmoDPS = 16.5
-		case proto.Hunter_Options_IceThreadedBullet:
-			hunter.AmmoDPS = 16.5
-		case proto.Hunter_Options_ThoriumHeadedArrow:
-			hunter.AmmoDPS = 17.5
-		case proto.Hunter_Options_ThoriumShells:
-			hunter.AmmoDPS = 17.5
-		case proto.Hunter_Options_RockshardPellets:
-			hunter.AmmoDPS = 18
-		case proto.Hunter_Options_Doomshot:
-			hunter.AmmoDPS = 20
-		case proto.Hunter_Options_MiniatureCannonBalls:
-			hunter.AmmoDPS = 20.5
-		}
+		hunter.AmmoDPS = ammoDPS(hunter.Options.Ammo)
 		hunter.AmmoDamageBonus = hunter.AmmoDPS * rangedWeapon.SwingSpeed
 		hunter.NormalizedAmmoDamageBonus = hunter.AmmoDPS * 2.8
 
@@ -360,4 +334,31 @@ func (hunter *Hunter) OnGCDReady(_ *core.Simulation) {
 // Agent is a generic way to access underlying hunter on any of the agents.
 type HunterAgent interface {
 	GetHunter() *Hunter
+}
+
+// ammoDPSByType is each ammo's damage a second, from its item tooltip
+// ("Adds N damage per second"): Sharp Arrow and Heavy Shot 3.5 (level 10),
+// Razor Arrow and Solid Shot 7.5 (25), Jagged Arrow and Accurate Slugs 13
+// (40), Mithril Gyro-Shot 15 (44), Ice Threaded 16.5 (51), Thorium 17.5
+// (52).
+var ammoDPSByType = map[proto.Hunter_Options_Ammo]float64{
+	proto.Hunter_Options_SharpArrow:           3.5,
+	proto.Hunter_Options_HeavyShot:            3.5,
+	proto.Hunter_Options_RazorArrow:           7.5,
+	proto.Hunter_Options_SolidShot:            7.5,
+	proto.Hunter_Options_JaggedArrow:          13,
+	proto.Hunter_Options_AccurateSlugs:        13,
+	proto.Hunter_Options_MithrilGyroShot:      15,
+	proto.Hunter_Options_IceThreadedArrow:     16.5,
+	proto.Hunter_Options_IceThreadedBullet:    16.5,
+	proto.Hunter_Options_ThoriumHeadedArrow:   17.5,
+	proto.Hunter_Options_ThoriumShells:        17.5,
+	proto.Hunter_Options_RockshardPellets:     18,
+	proto.Hunter_Options_Doomshot:             20,
+	proto.Hunter_Options_MiniatureCannonBalls: 20.5,
+}
+
+// ammoDPS is ammo's damage a second; no ammo adds none.
+func ammoDPS(ammo proto.Hunter_Options_Ammo) float64 {
+	return ammoDPSByType[ammo]
 }

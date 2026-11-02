@@ -137,6 +137,9 @@ message Hunter {
 	message Options {
 		enum Ammo {
 			AmmoNone = 0;
+			// 10
+			SharpArrow = 13;
+			HeavyShot = 14;
 			// 25
 			RazorArrow = 1;
 			SolidShot = 2;

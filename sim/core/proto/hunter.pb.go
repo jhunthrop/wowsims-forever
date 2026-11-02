@@ -126,6 +126,9 @@ type Hunter_Options_Ammo int32
 
 const (
 	Hunter_Options_AmmoNone Hunter_Options_Ammo = 0
+	// 10
+	Hunter_Options_SharpArrow Hunter_Options_Ammo = 13
+	Hunter_Options_HeavyShot  Hunter_Options_Ammo = 14
 	// 25
 	Hunter_Options_RazorArrow Hunter_Options_Ammo = 1
 	Hunter_Options_SolidShot  Hunter_Options_Ammo = 2
@@ -148,6 +151,8 @@ const (
 var (
 	Hunter_Options_Ammo_name = map[int32]string{
 		0:  "AmmoNone",
+		13: "SharpArrow",
+		14: "HeavyShot",
 		1:  "RazorArrow",
 		2:  "SolidShot",
 		3:  "JaggedArrow",
@@ -163,6 +168,8 @@ var (
 	}
 	Hunter_Options_Ammo_value = map[string]int32{
 		"AmmoNone":             0,
+		"SharpArrow":           13,
+		"HeavyShot":            14,
 		"RazorArrow":           1,
 		"SolidShot":            2,
 		"JaggedArrow":          3,
@@ -1190,7 +1197,7 @@ const file_hunter_proto_rawDesc = "" +
 	"\x17survivalists_discipline\x18/ \x01(\x05R\x16survivalistsDiscipline\x12!\n" +
 	"\fstrider_kick\x180 \x01(\bR\vstriderKick\x12-\n" +
 	"\x12lightning_reflexes\x181 \x01(\x05R\x11lightningReflexes\x12-\n" +
-	"\x12lacerating_strikes\x182 \x01(\bR\x11laceratingStrikes\"\xe2\v\n" +
+	"\x12lacerating_strikes\x182 \x01(\bR\x11laceratingStrikes\"\x81\f\n" +
 	"\x06Hunter\x12/\n" +
 	"\aoptions\x18\x02 \x01(\v2\x15.proto.Hunter.OptionsR\aoptions\x1a\xb8\x02\n" +
 	"\bRotation\x127\n" +
@@ -1206,7 +1213,7 @@ const file_hunter_proto_rawDesc = "" +
 	"\tStingType\x12\v\n" +
 	"\aNoSting\x10\x00\x12\x10\n" +
 	"\fScorpidSting\x10\x01\x12\x10\n" +
-	"\fSerpentSting\x10\x02\x1a\xeb\b\n" +
+	"\fSerpentSting\x10\x02\x1a\x8a\t\n" +
 	"\aOptions\x12.\n" +
 	"\x04ammo\x18\x01 \x01(\x0e2\x1a.proto.Hunter.Options.AmmoR\x04ammo\x12D\n" +
 	"\fquiver_bonus\x18\x02 \x01(\x0e2!.proto.Hunter.Options.QuiverBonusR\vquiverBonus\x128\n" +
@@ -1215,9 +1222,12 @@ const file_hunter_proto_rawDesc = "" +
 	"pet_uptime\x18\x04 \x01(\x01R\tpetUptime\x12/\n" +
 	"\x14pet_attack_speed_old\x18\x05 \x01(\x01R\x11petAttackSpeedOld\x12*\n" +
 	"\x11new_raptor_strike\x18\x06 \x01(\bR\x0fnewRaptorStrike\x12N\n" +
-	"\x10pet_attack_speed\x18\a \x01(\x0e2$.proto.Hunter.Options.PetAttackSpeedR\x0epetAttackSpeed\"\x82\x02\n" +
+	"\x10pet_attack_speed\x18\a \x01(\x0e2$.proto.Hunter.Options.PetAttackSpeedR\x0epetAttackSpeed\"\xa1\x02\n" +
 	"\x04Ammo\x12\f\n" +
 	"\bAmmoNone\x10\x00\x12\x0e\n" +
+	"\n" +
+	"SharpArrow\x10\r\x12\r\n" +
+	"\tHeavyShot\x10\x0e\x12\x0e\n" +
 	"\n" +
 	"RazorArrow\x10\x01\x12\r\n" +
 	"\tSolidShot\x10\x02\x12\x0f\n" +
