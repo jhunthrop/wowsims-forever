@@ -89,7 +89,8 @@ func init() {
 
 	// Hands, so the proc rides any melee hit: 1325229, "Smite your target for
 	// 101 to 123 Holy damage. Damage is tripled against Undead." 112 with
-	// variance 0.2.
+	// variance 0.2. Its SpellCategories DefenseType is 3, ranged, as Hammer
+	// of Wrath's is: it rolls the ranged table and melee and ranged crit.
 	core.NewItemEffect(GlovesOfHolyMight, func(agent core.Agent) {
 		character := agent.GetCharacter()
 		label := "Gloves of Holy Might Proc"
@@ -97,7 +98,7 @@ func init() {
 		smite := character.GetOrRegisterSpell(core.SpellConfig{
 			ActionID:    core.ActionID{SpellID: 1325229},
 			SpellSchool: core.SpellSchoolHoly,
-			DefenseType: core.DefenseTypeMagic,
+			DefenseType: core.DefenseTypeRanged,
 			ProcMask:    core.ProcMaskEmpty,
 			Flags:       core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell,
 
@@ -109,7 +110,7 @@ func init() {
 				if target.MobType == proto.MobType_MobTypeUndead {
 					damage *= 3
 				}
-				spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMagicHitAndCrit)
+				spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeRangedHitAndCrit)
 			},
 		})
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{

@@ -310,3 +310,33 @@ func TestSpireOfHakkarAndWallOfTheDead(t *testing.T) {
 		t.Fatal("no 20 sec Bone Armor aura")
 	}
 }
+
+// Gloves of Holy Might's smite (1325229) is SpellCategories DefenseType 3,
+// ranged, in the 70707 client, as Hammer of Wrath (24239) is: it rolls the
+// ranged table, melee and ranged crit and the physical crit multiplier, not
+// the spell table.
+func TestGlovesOfHolyMightRollsTheRangedTable(t *testing.T) {
+	sim, character := unbuffedCharacter(t, proto.Class_ClassHunter, proto.ItemSlot_ItemSlotHands, 867)
+	spell := character.GetSpell(core.ActionID{SpellID: 1325229})
+	if spell == nil {
+		t.Fatal("no Gloves of Holy Might proc spell")
+	}
+	if spell.DefenseType != core.DefenseTypeRanged {
+		t.Errorf("defense type %v, want ranged (client DefenseType 3)", spell.DefenseType)
+	}
+	target := sim.Encounter.TargetUnits[0]
+	maxCrit := 0.0
+	for i := 0; i < 4000; i++ {
+		before := spell.SpellMetrics[target.UnitIndex]
+		spell.Cast(sim, target)
+		after := spell.SpellMetrics[target.UnitIndex]
+		if after.Crits == before.Crits+1 {
+			maxCrit = max(maxCrit, after.TotalDamage-before.TotalDamage)
+		}
+	}
+	// The roll tops out at 123.2; a ranged crit doubles it, a spell crit
+	// adds half.
+	if maxCrit < 112*1.1*1.8 {
+		t.Errorf("largest crit %.1f, want a physical double of the 101-123 roll", maxCrit)
+	}
+}
