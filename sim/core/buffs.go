@@ -358,7 +358,10 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 			updateStats = updateStats.Multiply(1.2)
 		}
 		character.AddStats(updateStats)
-	} else if raidBuffs.ManaSpringTotem > 0 {
+	}
+	// Mana Spring is a shaman's totem, not a blessing: it stacks with
+	// Blessing of Wisdom (both classes are on both factions in Forever).
+	if raidBuffs.ManaSpringTotem > 0 {
 		updateStats := BuffSpellValues[ManaSpring]
 		if raidBuffs.ManaSpringTotem == proto.TristateEffect_TristateEffectImproved {
 			updateStats = updateStats.Multiply(1.25)
