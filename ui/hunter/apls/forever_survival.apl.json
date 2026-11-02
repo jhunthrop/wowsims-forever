@@ -43,7 +43,7 @@
       }
     },
     {
-      "notes": "Mongoose Bite inside its window: the client allows it only after a dodge, and Expose Prey opens the same 5 second window (Defensive State, spell 5302) on a melee or ranged attack against a Hunter's Mark target; the window is one charge, spent by the cast. A target that never attacks gives no dodge, so without Expose Prey the line stays idle.",
+      "notes": "Mongoose Bite inside its window: the client allows it for 5 seconds after a dodge, and Expose Prey opens the same window (Defensive State, spell 5302) for 10 seconds on a melee or ranged attack against a Hunter's Mark target; the window is one charge, spent by the cast. A target that never attacks gives no dodge, so without Expose Prey the line stays idle.",
       "action": {
         "castSpell": {
           "spellId": {
