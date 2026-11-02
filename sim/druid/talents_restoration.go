@@ -28,6 +28,12 @@ const (
 // the effect of all your healing spells by 2%" a rank. It is a percent modifier
 // on the spells (the client's aura 108 on every spell family), so it adds
 // to Improved Rejuvenation's, as the two do in the client.
+//
+// Tranquility is left out. Effect 0 (the DAMAGE op) names it, but Forever
+// gives a periodic heal only effect 1 (the DOT op), which names
+// Rejuvenation, Regrowth and Wild Growth. In the beta logs (foreverlogs.gg
+// reports 2748 and 2770, read 2026-11-02) two level-35 druids' Tranquility
+// ticks fit their Healing Touch's healing power only without Gift of Nature.
 func (druid *Druid) applyGiftOfNature() {
 	if druid.Talents.GiftOfNature == 0 {
 		return
@@ -35,7 +41,7 @@ func (druid *Druid) applyGiftOfNature() {
 	rank := clampRank(druid.Talents.GiftOfNature, 5)
 	druid.AddStaticMod(core.SpellModConfig{
 		Kind:      core.SpellMod_DamageDone_Flat,
-		ClassMask: DruidSpellMaskHealing,
+		ClassMask: DruidSpellMaskHealing &^ DruidSpellMaskTranquility,
 		IntValue:  giftOfNatureHealingPerRank * int64(rank),
 	})
 }

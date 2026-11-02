@@ -25,13 +25,14 @@ const (
 // Families are the client's SpellClassOptions masks for the spells' own
 // ids (Seal of the Crusader 20308, Seal of Command 20915, Seal of
 // Righteousness 20154, Judgement of Righteousness 20286, Holy Shock
-// 20473).
+// 20473). Holy Shock's bit is on its heal too (1311605: 0x200000 /
+// 0x10000), so a Holy Shock libram reaches the heal as well as the cast.
 var relicClassMasks = core.ClassMaskTable{
 	{Client: core.ClientClassMask{1 << 9}, Engine: PaladinSpellMaskSealOfTheCrusaderCast},
 	{Client: core.ClientClassMask{1 << 25}, Engine: PaladinSpellMaskSealOfCommandCast},
 	{Client: core.ClientClassMask{1 << 27}, Engine: PaladinSpellMaskSealOfRighteousnessCast},
 	{Client: core.ClientClassMask{1 << 10}, Engine: PaladinSpellMaskJudgementOfRighteousness},
-	{Client: core.ClientClassMask{1 << 21}, Engine: PaladinSpellMaskHolyShock},
+	{Client: core.ClientClassMask{1 << 21}, Engine: PaladinSpellMaskHolyShock | PaladinSpellMaskHolyShockHeal},
 }
 
 // Libram of Fervor's two numbers, read from the client table: the effect on

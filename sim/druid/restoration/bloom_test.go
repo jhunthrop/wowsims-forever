@@ -58,19 +58,18 @@ func TestBloomHealsForSpiritWhenRejuvenationRunsOut(t *testing.T) {
 	}
 }
 
-// A Rejuvenation that Swiftmend consumes did not expire by its duration.
-func TestBloomSkipsAConsumedRejuvenation(t *testing.T) {
+// Swiftmend leaves the Rejuvenation it reads in place, so the effect still
+// runs its full duration and still Blooms.
+func TestBloomStillFollowsASwiftmendedRejuvenation(t *testing.T) {
 	resto, sim := healer(t, map[string]int{"bloom": 1})
 	rejuvenation := resto.Rejuvenation[10]
 	rejuvenation.ApplyEffects(sim, &resto.Unit, rejuvenation.Spell)
+	spirit := resto.GetStat(stats.Spirit)
 	runUntil(sim, 3*time.Second)
 	resto.Swiftmend.ApplyEffects(sim, &resto.Unit, resto.Swiftmend.Spell)
-	if rejuvenation.Hot(&resto.Unit).IsActive() {
-		t.Fatal("Swiftmend left the Rejuvenation up")
-	}
 	runUntil(sim, 13*time.Second)
-	if got := bloomHealing(resto); got != 0 {
-		t.Errorf("Bloom healed %v for a Rejuvenation Swiftmend consumed, want 0", got)
+	if got := bloomHealing(resto); !near(got, spirit) {
+		t.Errorf("Bloom healed %v after a Swiftmend, want the druid's Spirit %v", got, spirit)
 	}
 }
 

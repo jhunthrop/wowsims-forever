@@ -33,10 +33,11 @@ func (priest *Priest) registerInnerFire() {
 			},
 		})
 		return core.SpellConfig{
-			ActionID:    core.ActionID{SpellID: entry.spellID},
-			SpellCode:   SpellCode_PriestInnerFire,
-			SpellSchool: core.SpellSchoolHoly,
-			Flags:       SpellFlagPriest | core.SpellFlagAPL,
+			ActionID:       core.ActionID{SpellID: entry.spellID},
+			SpellCode:      SpellCode_PriestInnerFire,
+			ClassSpellMask: PriestSpellMaskInnerFire,
+			SpellSchool:    core.SpellSchoolHoly,
+			Flags:          SpellFlagPriest | core.SpellFlagAPL,
 
 			RequiredLevel: entry.level,
 			Rank:          rank,
