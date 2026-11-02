@@ -18,53 +18,6 @@
   ],
   "priorityList": [
     {
-      "notes": "Potion at the top of the fight if mana is already below 75 percent, or a mana gem below 60 percent, saved for the closing burn if the fight is nearly over.",
-      "action": {
-        "condition": {
-          "and": {
-            "vals": [
-              {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "remainingTime": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "15s"
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpLe",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "75%"
-                    }
-                  }
-                }
-              },
-              {
-                "isExecutePhase": {
-                  "threshold": "E35"
-                }
-              }
-            ]
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "otherId": "OtherActionPotion"
-          }
-        }
-      }
-    },
-    {
       "action": {
         "autocastOtherCooldowns": {}
       }
