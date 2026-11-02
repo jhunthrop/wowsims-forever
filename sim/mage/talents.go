@@ -724,7 +724,7 @@ func (mage *Mage) applyDeclarativeTalents() {
 		// activators below) and the three trinket activators in
 		// items.go. That is correct rather than a gap - all six are
 		// SpellFlagNoOnCastComplete activators that deal no damage, so
-		// a damage and crit bonus on them would change nothing, and
+		// a damage bonus on them would change nothing, and
 		// giving a trinket a mage class mask would make it a mage
 		// spell for every other mod too.
 		mage.AddStaticMod(core.SpellModConfig{
@@ -732,11 +732,11 @@ func (mage *Mage) applyDeclarativeTalents() {
 			ClassSpellsOnly: true,
 			IntValue:        arcaneInstabilityDamagePerRank * int64(t.ArcaneInstability),
 		})
-		mage.AddStaticMod(core.SpellModConfig{
-			Kind:            core.SpellMod_BonusCrit_Flat,
-			ClassSpellsOnly: true,
-			FloatValue:      arcaneInstabilityCritPerRank * float64(t.ArcaneInstability) * core.CritRatingPerCritChance,
-		})
+		// The crit half is not a spell modifier: client 15058 effect 2
+		// is aura 290 (all crit chance) with no class mask, so it
+		// reaches wand shots and item procs as well as mage spells.
+		critRating := arcaneInstabilityCritPerRank * float64(t.ArcaneInstability) * core.CritRatingPerCritChance
+		mage.AddStats(stats.Stats{stats.Crit: critRating})
 	}
 
 	// ---- Fire ----
