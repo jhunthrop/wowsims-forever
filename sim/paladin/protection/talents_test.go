@@ -740,3 +740,37 @@ func TestJudgementOfFuryRollsTheMeleeTableWithoutActiveDefenses(t *testing.T) {
 		t.Errorf("Judgement of Fury misses %.1f%%, want the melee table's (at most 9%%)", 100*rate)
 	}
 }
+
+// Iron Creed (1311034) opens its damage reduction from aura 231 on a done
+// melee-class spell (ProcTypeMask 16) with no hit mask, which both server
+// cores read as a landed hit or crit (TrinityCore's default done hit mask;
+// cmangos procs on hit or crit only). The engine opened it before checking
+// whether Holy Strike landed, so a missed, dodged or parried strike still
+// cut the damage taken.
+func TestIronCreedOpensOnlyOnALandedHolyStrike(t *testing.T) {
+	f := shortRun{Talents: map[string]int{"iron_creed": 3}}.start(t)
+	holyStrike := f.spellOf(t, spellHolyStrike)
+	creed := f.tank.GetAuraByID(core.ActionID{SpellID: auraIronCreed})
+	opened, landed := 0, 0
+	for i := 0; i < 2000; i++ {
+		creed.Deactivate(f.sim)
+		avoided := func() int32 {
+			m := holyStrike.SpellMetrics[0]
+			return m.Misses + m.Dodges + m.Parries
+		}
+		before := avoided()
+		holyStrike.ApplyEffects(f.sim, f.boss, holyStrike)
+		if avoided() == before {
+			landed++
+		}
+		if creed.IsActive() {
+			opened++
+		}
+	}
+	if landed == 2000 {
+		t.Fatal("every Holy Strike landed; the test needs misses, dodges or parries")
+	}
+	if opened != landed {
+		t.Errorf("Iron Creed opened on %d strikes of which %d landed, want only the landed ones", opened, landed)
+	}
+}
