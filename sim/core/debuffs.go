@@ -349,17 +349,34 @@ func CurseOfElementsAura(target *Unit) *Aura {
 		ActionID: ActionID{SpellID: 11722},
 		Duration: time.Minute * 5,
 	})
-	for _, school := range []stats.SchoolIndex{
-		stats.SchoolIndexArcane, stats.SchoolIndexFire, stats.SchoolIndexFrost,
-		stats.SchoolIndexHoly, stats.SchoolIndexNature, stats.SchoolIndexShadow,
-	} {
-		spellSchoolDamageEffect(aura, school, dmgMod, 0.0, false)
-	}
+	CurseOfElementsEffects(aura, dmgMod, resistance)
+	return aura
+}
 
+// curseOfElementsSchools are the magic schools Curse of the Elements' aura 87
+// names (misc value 126).
+var curseOfElementsSchools = []stats.SchoolIndex{
+	stats.SchoolIndexArcane, stats.SchoolIndexFire, stats.SchoolIndexFrost,
+	stats.SchoolIndexHoly, stats.SchoolIndexNature, stats.SchoolIndexShadow,
+}
+
+// CurseOfElementsEffects puts one Curse of the Elements rank on aura: every
+// magic school takes damageTakenMultiplier and every school loses resistance.
+// Every copy of the curse (the raid's debuff and a warlock's own rank) shares
+// these exclusive categories, so the target carries only the strongest.
+func CurseOfElementsEffects(aura *Aura, damageTakenMultiplier, resistance float64) {
+	for _, school := range curseOfElementsSchools {
+		spellSchoolDamageEffect(aura, school, damageTakenMultiplier, 0.0, false)
+	}
 	// One effect: it lowers every school's resistance at once.
 	spellSchoolResistanceEffect(aura, stats.SchoolIndexFire, resistance, 0.0, false)
+}
 
-	return aura
+// CurseOfElementsOn is the aura whose Curse of the Elements is in force on
+// target, or nil.
+func CurseOfElementsOn(target *Unit) *Aura {
+	category := target.ExclusiveEffectManager.GetExclusiveEffectCategory("spellDamage" + strconv.Itoa(int(stats.SchoolIndexShadow)))
+	return category.GetActiveAura()
 }
 
 func CurseOfShadowAura(target *Unit) *Aura {

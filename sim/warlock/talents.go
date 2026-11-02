@@ -1481,6 +1481,7 @@ func (warlock *Warlock) applyBaneOfHavoc() {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			warlock.baneOfHavocTarget = target
+			warlock.placeBane(sim, target, warlock.BaneOfHavocAuras.Get(target))
 			warlock.BaneOfHavocAuras.Get(target).Activate(sim)
 		},
 	})

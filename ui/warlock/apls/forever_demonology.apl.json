@@ -144,6 +144,17 @@
       }
     },
     {
+      "notes": "Curse of the Elements goes up once, before the bane: in Forever a curse and a bane hold separate slots (every bane reads \"Only one Bane per Warlock\", every curse \"Only one Curse per Warlock\"), so it sits beside Bane of Agony or Bane of Doom and lasts five minutes. It raises the target's magic damage taken, the warlock's and the Succubus' Lash of Pain alike. It is not cast when the raid's Curse of the Elements is already on the target: the two are the same debuff and do not stack.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1311680,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
       "notes": "Bane of Doom is the one curse kept up: it deals its whole damage when the minute is out, so recast it the moment it fires, while a minute or more of the fight remains. Bane of Agony and Curse of the Elements both measured lower in the search.",
       "action": {
         "condition": {

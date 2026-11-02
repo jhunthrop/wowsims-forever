@@ -58,8 +58,8 @@ func (value *APLValueWarlockShouldRecastDrainSoul) GetBool(sim *core.Simulation)
 	}
 
 	curseRefresh := time.Duration(0)
-	if warlock.ActiveCurseAura.Get(value.warlock.CurrentTarget) != nil {
-		curseRefresh = warlock.ActiveCurseAura.Get(value.warlock.CurrentTarget).RemainingDuration(sim)
+	if bane := warlock.ActiveBaneAura.Get(value.warlock.CurrentTarget); bane != nil {
+		curseRefresh = bane.RemainingDuration(sim)
 	}
 
 	hauntRefresh := 1000 * time.Second

@@ -5,7 +5,9 @@ import (
 	"testing"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
+	googleProto "google.golang.org/protobuf/proto"
 )
 
 var curseOfTheElementsRanks = []struct {
@@ -58,7 +60,7 @@ func readCurseTargetState(target *core.Unit) curseTargetState {
 func castUntilCurseLands(t *testing.T, spellID int32) (*core.Simulation, *Warlock, *core.Unit, curseTargetState) {
 	t.Helper()
 	for attempt := 0; attempt < landAttempts; attempt++ {
-		sim, built, target := newBareWarlockForDamageTest(t)
+		sim, built, target := newUncursedWarlockForTest(t)
 		before := readCurseTargetState(target)
 		spell := spellByID(t, built.CurseOfElements, spellID)
 		spell.ApplyEffects(sim, target, spell)
@@ -96,27 +98,89 @@ func TestCurseOfTheElementsLowersMagicResistanceByTheRankAmount(t *testing.T) {
 	}
 }
 
-// TestCurseOfTheElementsGivesWayToAnotherCurse is the live text: "Only one
-// Curse per Warlock can be active on any one target." Casting Curse of Agony
-// over it removes the damage-taken bonus and the resistance loss together.
-func TestCurseOfTheElementsGivesWayToAnotherCurse(t *testing.T) {
-	for attempt := 0; attempt < landAttempts; attempt++ {
-		sim, built, target := newBareWarlockForDamageTest(t)
-		before := readCurseTargetState(target)
+// newUncursedWarlockForTest is the damage-test warlock with every raid debuff
+// but the raid's own Curse of the Elements, so the warlock's curse is the only
+// one on the target.
+func newUncursedWarlockForTest(t *testing.T) (*core.Simulation, *Warlock, *core.Unit) {
+	t.Helper()
+	debuffs := googleProto.Clone(core.FullBuffs.Debuffs).(*proto.Debuffs)
+	debuffs.CurseOfElements = false
+	return newWarlockWithDebuffsForTest(t, "", debuffs)
+}
 
-		elements := built.CurseOfElements[len(built.CurseOfElements)-1]
-		elements.ApplyEffects(sim, target, elements)
-		agony := built.CurseOfAgony[len(built.CurseOfAgony)-1]
-		agony.ApplyEffects(sim, target, agony)
-		if !agony.Dot(target).IsActive() || built.ActiveCurseAura.Get(target) != agony.Dot(target).Aura {
-			continue
+// landOn applies spell to target until it lands (a curse can miss), failing
+// the test if it never does.
+func landOn(t *testing.T, sim *core.Simulation, target *core.Unit, spell *core.Spell, landed func() bool) {
+	t.Helper()
+	for attempt := 0; attempt < landAttempts; attempt++ {
+		spell.ApplyEffects(sim, target, spell)
+		if landed() {
+			return
 		}
-		if after := readCurseTargetState(target); after.resistance != before.resistance || after.damageTaken[stats.SchoolIndexShadow] != before.damageTaken[stats.SchoolIndexShadow] {
-			t.Fatalf("Curse of Agony landed but the target still carries Curse of the Elements: %+v vs %+v", after, before)
-		}
-		return
 	}
-	t.Fatal("Curse of Agony never landed over Curse of the Elements")
+	t.Fatalf("%v never landed", spell.ActionID)
+}
+
+// TestABaneAndACurseHoldSeparateSlots is Forever's split of the old curses:
+// every bane's text reads "Only one Bane per Warlock can be active on any one
+// target" (Bane of Agony 980 to 11713, Bane of Doom 603, Bane of Havoc
+// 1225228) and every curse's "Only one Curse per Warlock can be active on any
+// one target" (Curse of the Elements 440892 to 1311680, Recklessness,
+// Weakness, Tongues, Exhaustion). So Bane of Agony leaves Curse of the
+// Elements on the target, Bane of Doom replaces Agony, and Curse of
+// Recklessness replaces the Elements.
+func TestABaneAndACurseHoldSeparateSlots(t *testing.T) {
+	sim, built, target := newUncursedWarlockForTest(t)
+	elements := built.CurseOfElements[len(built.CurseOfElements)-1]
+	elementsAura := elements.RelatedAuras[0].Get(target)
+	agony := built.CurseOfAgony[len(built.CurseOfAgony)-1]
+
+	landOn(t, sim, target, elements, elementsAura.IsActive)
+	landOn(t, sim, target, agony, agony.Dot(target).IsActive)
+	if !elementsAura.IsActive() {
+		t.Fatal("Bane of Agony removed Curse of the Elements; a bane and a curse share no slot")
+	}
+
+	landOn(t, sim, target, built.CurseOfDoom, built.CurseOfDoom.Dot(target).IsActive)
+	if agony.Dot(target).IsActive() {
+		t.Error("Bane of Doom left Bane of Agony on the target; only one bane per warlock")
+	}
+	if !elementsAura.IsActive() {
+		t.Error("Bane of Doom removed Curse of the Elements")
+	}
+
+	recklessness := built.CurseOfRecklessness
+	landOn(t, sim, target, recklessness, recklessness.RelatedAuras[0].Get(target).IsActive)
+	if elementsAura.IsActive() {
+		t.Error("Curse of Recklessness left Curse of the Elements on the target; only one curse per warlock")
+	}
+	if !built.CurseOfDoom.Dot(target).IsActive() {
+		t.Error("Curse of Recklessness removed Bane of Doom")
+	}
+}
+
+// TestOwnCurseOfTheElementsDoesNotStackWithTheRaidCurse: the raid's Curse of
+// the Elements (another warlock's rank 4) and this warlock's are the same
+// debuff, so the target never takes both. The warlock does not recast it over
+// the raid's, and a forced application leaves the target at one curse's 10%.
+func TestOwnCurseOfTheElementsDoesNotStackWithTheRaidCurse(t *testing.T) {
+	sim, built, target := newBareWarlockForDamageTest(t)
+	before := readCurseTargetState(target)
+	elements := built.CurseOfElements[len(built.CurseOfElements)-1]
+
+	if elements.CanCast(sim, target) {
+		t.Error("the warlock would cast Curse of the Elements over the raid's")
+	}
+	elements.RelatedAuras[0].Get(target).Activate(sim)
+	after := readCurseTargetState(target)
+	for _, school := range curseOfTheElementsSchools {
+		if got := after.damageTaken[school] / before.damageTaken[school]; math.Abs(got-1) > 1e-9 {
+			t.Errorf("school %d: a second Curse of the Elements multiplies damage taken by %.4f, want 1", school, got)
+		}
+	}
+	if after.resistance != before.resistance {
+		t.Errorf("a second Curse of the Elements removes %.0f more resistance, want none", before.resistance-after.resistance)
+	}
 }
 
 const landAttempts = 20

@@ -88,7 +88,8 @@ type Warlock struct {
 	Wrack       *core.Spell
 	Shoot       *core.Spell
 
-	ActiveCurseAura          core.AuraArray
+	ActiveCurseAura          core.AuraArray // the curse slot: Elements, Recklessness
+	ActiveBaneAura           core.AuraArray // the bane slot: Agony, Doom, Havoc
 	CurseOfElements          []*core.Spell
 	CurseOfShadow            *core.Spell
 	CurseOfShadowAuras       core.AuraArray
@@ -198,6 +199,7 @@ func (warlock *Warlock) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
 func (warlock *Warlock) Reset(sim *core.Simulation) {
 	warlock.setDefaultActivePet()
 	warlock.ActiveCurseAura = make([]*core.Aura, len(sim.Environment.AllUnits))
+	warlock.ActiveBaneAura = make([]*core.Aura, len(sim.Environment.AllUnits))
 
 	// warlock.ItemSwap.SwapItems(sim, []proto.ItemSlot{proto.ItemSlot_ItemSlotMainHand,
 	// 	proto.ItemSlot_ItemSlotOffHand, proto.ItemSlot_ItemSlotRanged}, false)

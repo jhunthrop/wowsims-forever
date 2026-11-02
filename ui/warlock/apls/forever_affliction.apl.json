@@ -70,6 +70,17 @@
       }
     },
     {
+      "notes": "Curse of the Elements goes up once, before the bane: in Forever a curse and a bane hold separate slots (every bane reads \"Only one Bane per Warlock\", every curse \"Only one Curse per Warlock\"), so it sits beside Bane of Agony or Bane of Doom and lasts five minutes. It raises the target's magic damage taken, the warlock's and the Succubus' Lash of Pain alike. It is not cast when the raid's Curse of the Elements is already on the target: the two are the same debuff and do not stack.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1311680,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
       "notes": "Bane of Agony is the curse kept up: it ticks, so it gains from Wrack's +10% to the warlock's other Shadow damage over time and from periodic crits, and it is an Affliction effect for Soul Siphon. With Siphon Life up and periodic crits in the engine it measured above Bane of Doom.",
       "action": {
         "condition": {
