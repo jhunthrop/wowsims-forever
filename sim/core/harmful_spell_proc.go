@@ -21,6 +21,13 @@ type HarmfulSpellProc struct {
 	Handler func(sim *Simulation, target *Unit)
 }
 
+// UnstatedProcsPerMinute is the rate of a "chance on" bonus whose client
+// row states none (ProcChance 100, no SpellProcsPerMinute row): one a
+// minute. The beta logs put Forever's Dream Venom (1291807) at 10 in 358
+// auto attacks and Rotmending (1321587) at 10 in about 258 heals, both near
+// one a minute; it is still an estimate from two small samples.
+const UnstatedProcsPerMinute = 1.0
+
 // SpellPPMChance is the chance a spell cast procs an effect that fires ppm
 // times a minute: ppm times the cast time, an instant counting as the GCD.
 func SpellPPMChance(ppm float64, spell *Spell) float64 {
