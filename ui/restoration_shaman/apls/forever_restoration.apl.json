@@ -81,7 +81,7 @@
           }
         }
       },
-      "notes": "Water Shield (the Restoration talent) is kept up for its mana return on critical heals."
+      "notes": "Water Shield (the Restoration talent) is kept up for its mana: a globe returns mana when you are hit and when your spells crit."
     },
     {
       "action": {
