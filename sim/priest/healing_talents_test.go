@@ -98,3 +98,22 @@ func TestMentalAgilityFollowsTheClientMask(t *testing.T) {
 		}
 	}
 }
+
+// TestTwinDisciplinesLeavesPrayerOfMendingOut: Twin Disciplines' healing
+// modifiers (1225132 eff0 op 0 mask 0x19480020/0x18012/0/0x200000, eff1
+// op 22 mask 0xa08060/0/0/0x10) share no bit with Prayer of Mending's cast
+// (1240827, 0/0x20/0x400/0) or its jump (401880, 0/0x20/0/0), though the
+// spell is instant.
+func TestTwinDisciplinesLeavesPrayerOfMendingOut(t *testing.T) {
+	if PriestSpellMaskTwinDisciplines&PriestSpellMaskPrayerOfMending != 0 {
+		t.Error("Twin Disciplines raises Prayer of Mending, which its client masks do not name")
+	}
+	for name, mask := range map[string]uint64{
+		"Renew": PriestSpellMaskRenew, "Penance": PriestSpellMaskPenance, "Holy Nova": PriestSpellMaskHolyNova,
+		"Desperate Prayer": PriestSpellMaskDesperatePrayer, "Shadow Word: Pain": PriestSpellMaskShadowWordPain,
+	} {
+		if PriestSpellMaskTwinDisciplines&mask == 0 {
+			t.Errorf("Twin Disciplines leaves out %s, which its client masks name", name)
+		}
+	}
+}

@@ -141,7 +141,8 @@ func (priest *Priest) applyDeclarativeShadowTalents() {
 		// by 1%/2%/3%/4%/5%." The Shadow damage half is Mind Flay,
 		// Devouring Plague, Shadow Word: Pain and Shadow Word: Death
 		// (PriestSpellMaskInstantShadowDamage); the healing half is the
-		// instant heals (PriestSpellMaskInstantHealing).
+		// instant heals the client masks name, which leave out Prayer of
+		// Mending (PriestSpellMaskTwinDisciplines).
 		//
 		// SpellMod_DamageDone_Pct's FloatValue reaches
 		// Spell.ApplyMultiplicativeDamageBonus, which does
@@ -153,7 +154,7 @@ func (priest *Priest) applyDeclarativeShadowTalents() {
 		// here is a full multiplier, not an offset.
 		priest.AddStaticMod(core.SpellModConfig{
 			Kind:       core.SpellMod_DamageDone_Pct,
-			ClassMask:  PriestSpellMaskInstantShadowDamage | PriestSpellMaskInstantHealing,
+			ClassMask:  PriestSpellMaskTwinDisciplines,
 			FloatValue: 1 + twinDisciplinesDamagePerRank*float64(rankOf("twin_disciplines", t.TwinDisciplines)),
 		})
 	}
