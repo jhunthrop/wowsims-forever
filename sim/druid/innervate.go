@@ -7,6 +7,10 @@ import (
 // Returns the time to wait before the next action, or 0 if innervate is on CD
 // or disabled.
 func (druid *Druid) registerInnervateCD() {
+	// Learned at level 40 (SpellLevels 29166, SkillLineAbility 573).
+	if druid.Level < int32(InnervateLevel[0]) {
+		return
+	}
 	innervateTarget := druid.GetUnit(druid.SelfBuffs.InnervateTarget)
 	if innervateTarget == nil {
 		return
