@@ -39,11 +39,22 @@ func healingSpells(resto *RestorationDruid) map[string]*druid.DruidSpell {
 
 func near(a, b float64) bool { return math.Abs(a-b) < 1e-9 }
 
-func TestGiftOfNatureRaisesEveryHealingSpell(t *testing.T) {
+// Gift of Nature raises every heal but Tranquility. Its DAMAGE-op effect
+// (SpellEffect 695243) names Tranquility, but Forever gives a periodic heal
+// only its DOT-op effect (1291839: Rejuvenation, Regrowth, Wild Growth).
+// In the beta logs (foreverlogs.gg reports 2748 and 2770, read 2026-11-02)
+// two level-35 Restoration druids' Tranquility ticks (103 and 97 raw) fit
+// the healing power their Healing Touch shows only without Gift of Nature;
+// with it they would read 109 or more.
+func TestGiftOfNatureRaisesEveryHealingSpellButTranquility(t *testing.T) {
 	resto, _ := healer(t, map[string]int{"gift_of_nature": 5})
 	for name, spell := range healingSpells(resto) {
-		if !near(spell.DamageMultiplierAdditive, 1.10) {
-			t.Errorf("%s multiplier = %v with 5/5 Gift of Nature, want 1.10", name, spell.DamageMultiplierAdditive)
+		want := 1.10
+		if name == "Tranquility" {
+			want = 1
+		}
+		if !near(spell.DamageMultiplierAdditive, want) {
+			t.Errorf("%s multiplier = %v with 5/5 Gift of Nature, want %v", name, spell.DamageMultiplierAdditive, want)
 		}
 	}
 }
