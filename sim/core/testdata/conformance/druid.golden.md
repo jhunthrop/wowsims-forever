@@ -15,31 +15,31 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 10 | Cat Form | 0 | 768 | 81.95 (55% base mana)→81.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 10 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 10 | Innervate | 0 | 29166 | 7.45 (5% base mana)→7.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| BalanceDruid | 10 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 10 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 11.27-14.73→11.27-14.73 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 10 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 10 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 20.56-23.84→20.56-23.84 | 0.486→0.486 | declared, matches |
+| BalanceDruid | 10 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| BalanceDruid | 10 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 11.27-14.73→11.27-14.73 | 0.150 x0.6250→0.094 | declared, matches |
+| BalanceDruid | 10 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| BalanceDruid | 10 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 20.56-23.84→20.56-23.84 | 0.486 x0.4750→0.231 | declared, matches |
 | BalanceDruid | 20 | Cat Form | 0 | 768 | 194.70 (55% base mana)→194.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 20 | Claw | 1 | 1082 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | BalanceDruid | 20 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 20 | Innervate | 0 | 29166 | 17.70 (5% base mana)→17.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| BalanceDruid | 20 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 20 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 20 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.21-28.79→23.21-28.79 | 0.150→0.150 | declared, matches |
+| BalanceDruid | 20 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| BalanceDruid | 20 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150 x0.6250→0.094 | declared, matches |
+| BalanceDruid | 20 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.21-28.79→23.21-28.79 | 0.150 x0.8500→0.128 | declared, matches |
 | BalanceDruid | 20 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 20 | Rip | 1 | 1079 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | 12000→12000 | match |  | 3.00-3.00→3.00-3.00 | 0.400 (convention)→0.000 | declared, matches |
 | BalanceDruid | 20 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  | 72.82-89.18→72.82-89.18 | 1.000→1.000 | declared, matches |
-| BalanceDruid | 20 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 20 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
-| BalanceDruid | 20 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 20 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| BalanceDruid | 20 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486 x0.4750→0.231 | declared, matches |
+| BalanceDruid | 20 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571 x0.7750→0.443 | declared, matches |
 | BalanceDruid | 30 | Cat Form | 0 | 768 | 337.70 (55% base mana)→337.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 30 | Claw | 2 | 3029 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | BalanceDruid | 30 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 30 | Ferocious Bite | 1 | 1328618 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 24→24 | n/a | match |  | 9.00-19.00→9.00-19.00 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 30 | Innervate | 0 | 29166 | 30.70 (5% base mana)→30.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| BalanceDruid | 30 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 30 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 30 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150→0.150 | declared, matches |
+| BalanceDruid | 30 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| BalanceDruid | 30 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150 x0.6250→0.094 | declared, matches |
+| BalanceDruid | 30 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150 x0.8500→0.128 | declared, matches |
 | BalanceDruid | 30 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 35.91-43.09→35.91-43.09 | 0.150→0.150 | declared, matches |
 | BalanceDruid | 30 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 45.52-54.48→45.52-54.48 | 0.150→0.150 | declared, matches |
 | BalanceDruid | 30 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
@@ -48,9 +48,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 30 | Shred | 0 | 6800 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | BalanceDruid | 30 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  | 78.66-96.34→78.66-96.34 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 30 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 104.55-127.45→104.55-127.45 | 1.000→1.000 | declared, matches |
-| BalanceDruid | 30 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 30 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
-| BalanceDruid | 30 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 30 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| BalanceDruid | 30 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486 x0.4750→0.231 | declared, matches |
+| BalanceDruid | 30 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571 x0.7750→0.443 | declared, matches |
 | BalanceDruid | 30 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 30 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 42.08-47.92→42.08-47.92 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 38 | Cat Form | 0 | 768 | 444.95 (55% base mana)→444.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
@@ -58,9 +58,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 38 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 38 | Ferocious Bite | 2 | 22568 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→32 | n/a | match |  | 14.00-30.00→14.00-30.00 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 38 | Innervate | 0 | 29166 | 40.45 (5% base mana)→40.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| BalanceDruid | 38 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 38 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 38 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150→0.150 | declared, matches |
+| BalanceDruid | 38 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| BalanceDruid | 38 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150 x0.6250→0.094 | declared, matches |
+| BalanceDruid | 38 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150 x0.8500→0.128 | declared, matches |
 | BalanceDruid | 38 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 35.91-43.09→35.91-43.09 | 0.150→0.150 | declared, matches |
 | BalanceDruid | 38 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.62-59.38→49.62-59.38 | 0.150→0.150 | declared, matches |
 | BalanceDruid | 38 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 59.52-71.28→59.52-71.28 | 0.150→0.150 | declared, matches |
@@ -73,9 +73,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 38 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  | 78.66-96.34→78.66-96.34 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 38 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 107.26-130.74→107.26-130.74 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 38 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  | 136.79-164.01→136.79-164.01 | 1.000→1.000 | declared, matches |
-| BalanceDruid | 38 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 38 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
-| BalanceDruid | 38 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 38 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| BalanceDruid | 38 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486 x0.4750→0.231 | declared, matches |
+| BalanceDruid | 38 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571 x0.7750→0.443 | declared, matches |
 | BalanceDruid | 38 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 38 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 38 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 50.72-57.28→50.72-57.28 | 0.571→0.571 | declared, matches |
@@ -85,9 +85,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 40 | Ferocious Bite | 3 | 22827 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 40→40 | n/a | match |  | 20.00-44.00→20.00-44.00 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 40 | Hurricane | 1 | 16914 | 880.00→880.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 40 | Innervate | 0 | 29166 | 42.70 (5% base mana)→42.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| BalanceDruid | 40 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 40 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 40 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150→0.150 | declared, matches |
+| BalanceDruid | 40 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| BalanceDruid | 40 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150 x0.6250→0.094 | declared, matches |
+| BalanceDruid | 40 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150 x0.8500→0.128 | declared, matches |
 | BalanceDruid | 40 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 35.91-43.09→35.91-43.09 | 0.150→0.150 | declared, matches |
 | BalanceDruid | 40 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.62-59.38→49.62-59.38 | 0.150→0.150 | declared, matches |
 | BalanceDruid | 40 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 60.98-73.02→60.98-73.02 | 0.150→0.150 | declared, matches |
@@ -101,9 +101,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 40 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  | 78.66-96.34→78.66-96.34 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 40 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 107.26-130.74→107.26-130.74 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 40 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  | 139.70-167.50→139.70-167.50 | 1.000→1.000 | declared, matches |
-| BalanceDruid | 40 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 40 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
-| BalanceDruid | 40 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 40 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| BalanceDruid | 40 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486 x0.4750→0.231 | declared, matches |
+| BalanceDruid | 40 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571 x0.7750→0.443 | declared, matches |
 | BalanceDruid | 40 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 40 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 40 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 52.41-59.19→52.41-59.19 | 0.571→0.571 | declared, matches |
@@ -114,9 +114,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 50 | Hurricane | 1 | 16914 | 880.00→880.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 50 | Hurricane | 2 | 17401 | 1180.00→1180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 50 | Innervate | 0 | 29166 | 53.20 (5% base mana)→53.20 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| BalanceDruid | 50 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 50 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 50 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150→0.150 | declared, matches |
+| BalanceDruid | 50 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| BalanceDruid | 50 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150 x0.6250→0.094 | declared, matches |
+| BalanceDruid | 50 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150 x0.8500→0.128 | declared, matches |
 | BalanceDruid | 50 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 35.91-43.09→35.91-43.09 | 0.150→0.150 | declared, matches |
 | BalanceDruid | 50 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.62-59.38→49.62-59.38 | 0.150→0.150 | declared, matches |
 | BalanceDruid | 50 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 60.98-73.02→60.98-73.02 | 0.150→0.150 | declared, matches |
@@ -133,9 +133,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 50 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  | 139.70-167.50→139.70-167.50 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 50 | Starfire | 4 | 8951 | 230.00→230.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | n/a | match |  | 190.44-227.16→190.44-227.16 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 50 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  | 243.78-288.22→243.78-288.22 | 1.000→1.000 | declared, matches |
-| BalanceDruid | 50 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 50 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
-| BalanceDruid | 50 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 50 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| BalanceDruid | 50 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486 x0.4750→0.231 | declared, matches |
+| BalanceDruid | 50 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571 x0.7750→0.443 | declared, matches |
 | BalanceDruid | 50 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 50 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 50 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 55.79-63.01→55.79-63.01 | 0.571→0.571 | declared, matches |
@@ -148,9 +148,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 60 | Hurricane | 2 | 17401 | 1180.00→1180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 60 | Hurricane | 3 | 17402 | 1495.00→1495.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 10000→10000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 60 | Innervate | 0 | 29166 | 62.20 (5% base mana)→62.20 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| BalanceDruid | 60 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 60 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150→0.150 | declared, matches |
-| BalanceDruid | 60 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150→0.150 | declared, matches |
+| BalanceDruid | 60 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| BalanceDruid | 60 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150 x0.6250→0.094 | declared, matches |
+| BalanceDruid | 60 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150 x0.8500→0.128 | declared, matches |
 | BalanceDruid | 60 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 35.91-43.09→35.91-43.09 | 0.150→0.150 | declared, matches |
 | BalanceDruid | 60 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.62-59.38→49.62-59.38 | 0.150→0.150 | declared, matches |
 | BalanceDruid | 60 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 60.98-73.02→60.98-73.02 | 0.150→0.150 | declared, matches |
@@ -170,9 +170,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | BalanceDruid | 60 | Starfire | 4 | 8951 | 230.00→230.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | n/a | match |  | 190.44-227.16→190.44-227.16 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 60 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  | 255.87-302.53→255.87-302.53 | 1.000→1.000 | declared, matches |
 | BalanceDruid | 60 | Starfire | 6 | 9876 | 315.00→315.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 58→58 | n/a | match |  | 313.43-369.77→313.43-369.77 | 1.000→1.000 | declared, matches |
-| BalanceDruid | 60 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| BalanceDruid | 60 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
-| BalanceDruid | 60 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| BalanceDruid | 60 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| BalanceDruid | 60 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486 x0.4750→0.231 | declared, matches |
+| BalanceDruid | 60 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571 x0.7750→0.443 | declared, matches |
 | BalanceDruid | 60 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 60 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | BalanceDruid | 60 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 55.79-63.01→55.79-63.01 | 0.571→0.571 | declared, matches |
@@ -227,31 +227,31 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 10 | Cat Form | 0 | 768 | 81.95 (55% base mana)→81.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 10 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 10 | Innervate | 0 | 29166 | 7.45 (5% base mana)→7.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| FeralDruid | 10 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| FeralDruid | 10 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 11.27-14.73→11.27-14.73 | 0.150→0.150 | declared, matches |
-| FeralDruid | 10 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| FeralDruid | 10 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 20.56-23.84→20.56-23.84 | 0.486→0.486 | declared, matches |
+| FeralDruid | 10 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| FeralDruid | 10 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 11.27-14.73→11.27-14.73 | 0.150 x0.6250→0.094 | declared, matches |
+| FeralDruid | 10 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| FeralDruid | 10 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 20.56-23.84→20.56-23.84 | 0.486 x0.4750→0.231 | declared, matches |
 | FeralDruid | 20 | Cat Form | 0 | 768 | 194.70 (55% base mana)→194.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 20 | Claw | 1 | 1082 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | FeralDruid | 20 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 20 | Innervate | 0 | 29166 | 17.70 (5% base mana)→17.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| FeralDruid | 20 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| FeralDruid | 20 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150→0.150 | declared, matches |
-| FeralDruid | 20 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.21-28.79→23.21-28.79 | 0.150→0.150 | declared, matches |
+| FeralDruid | 20 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| FeralDruid | 20 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150 x0.6250→0.094 | declared, matches |
+| FeralDruid | 20 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.21-28.79→23.21-28.79 | 0.150 x0.8500→0.128 | declared, matches |
 | FeralDruid | 20 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 20 | Rip | 1 | 1079 | 30.00→30.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | 12000→12000 | match |  | 3.00-3.00→3.00-3.00 | 0.400 (convention)→0.000 | declared, matches |
 | FeralDruid | 20 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  | 72.82-89.18→72.82-89.18 | 1.000→1.000 | declared, matches |
-| FeralDruid | 20 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| FeralDruid | 20 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
-| FeralDruid | 20 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| FeralDruid | 20 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| FeralDruid | 20 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486 x0.4750→0.231 | declared, matches |
+| FeralDruid | 20 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571 x0.7750→0.443 | declared, matches |
 | FeralDruid | 30 | Cat Form | 0 | 768 | 337.70 (55% base mana)→337.70 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 30 | Claw | 2 | 3029 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | FeralDruid | 30 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 30 | Ferocious Bite | 1 | 1328618 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 24→24 | n/a | match |  | 9.00-19.00→9.00-19.00 | 1.000→1.000 | declared, matches |
 | FeralDruid | 30 | Innervate | 0 | 29166 | 30.70 (5% base mana)→30.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| FeralDruid | 30 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| FeralDruid | 30 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150→0.150 | declared, matches |
-| FeralDruid | 30 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150→0.150 | declared, matches |
+| FeralDruid | 30 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| FeralDruid | 30 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150 x0.6250→0.094 | declared, matches |
+| FeralDruid | 30 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150 x0.8500→0.128 | declared, matches |
 | FeralDruid | 30 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 35.91-43.09→35.91-43.09 | 0.150→0.150 | declared, matches |
 | FeralDruid | 30 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 45.52-54.48→45.52-54.48 | 0.150→0.150 | declared, matches |
 | FeralDruid | 30 | Prowl | 0 | 5215 | 0.00→0.00 | energy→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
@@ -260,9 +260,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 30 | Shred | 0 | 6800 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | FeralDruid | 30 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  | 78.66-96.34→78.66-96.34 | 1.000→1.000 | declared, matches |
 | FeralDruid | 30 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 104.55-127.45→104.55-127.45 | 1.000→1.000 | declared, matches |
-| FeralDruid | 30 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| FeralDruid | 30 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
-| FeralDruid | 30 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| FeralDruid | 30 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| FeralDruid | 30 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486 x0.4750→0.231 | declared, matches |
+| FeralDruid | 30 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571 x0.7750→0.443 | declared, matches |
 | FeralDruid | 30 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
 | FeralDruid | 30 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 42.08-47.92→42.08-47.92 | 0.571→0.571 | declared, matches |
 | FeralDruid | 38 | Cat Form | 0 | 768 | 444.95 (55% base mana)→444.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
@@ -270,9 +270,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 38 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 38 | Ferocious Bite | 2 | 22568 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 32→32 | n/a | match |  | 14.00-30.00→14.00-30.00 | 1.000→1.000 | declared, matches |
 | FeralDruid | 38 | Innervate | 0 | 29166 | 40.45 (5% base mana)→40.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| FeralDruid | 38 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| FeralDruid | 38 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150→0.150 | declared, matches |
-| FeralDruid | 38 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150→0.150 | declared, matches |
+| FeralDruid | 38 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| FeralDruid | 38 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150 x0.6250→0.094 | declared, matches |
+| FeralDruid | 38 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150 x0.8500→0.128 | declared, matches |
 | FeralDruid | 38 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 35.91-43.09→35.91-43.09 | 0.150→0.150 | declared, matches |
 | FeralDruid | 38 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.62-59.38→49.62-59.38 | 0.150→0.150 | declared, matches |
 | FeralDruid | 38 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 59.52-71.28→59.52-71.28 | 0.150→0.150 | declared, matches |
@@ -285,9 +285,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 38 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  | 78.66-96.34→78.66-96.34 | 1.000→1.000 | declared, matches |
 | FeralDruid | 38 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 107.26-130.74→107.26-130.74 | 1.000→1.000 | declared, matches |
 | FeralDruid | 38 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  | 136.79-164.01→136.79-164.01 | 1.000→1.000 | declared, matches |
-| FeralDruid | 38 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| FeralDruid | 38 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
-| FeralDruid | 38 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| FeralDruid | 38 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| FeralDruid | 38 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486 x0.4750→0.231 | declared, matches |
+| FeralDruid | 38 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571 x0.7750→0.443 | declared, matches |
 | FeralDruid | 38 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
 | FeralDruid | 38 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | FeralDruid | 38 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 50.72-57.28→50.72-57.28 | 0.571→0.571 | declared, matches |
@@ -297,9 +297,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 40 | Ferocious Bite | 3 | 22827 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 40→40 | n/a | match |  | 20.00-44.00→20.00-44.00 | 1.000→1.000 | declared, matches |
 | FeralDruid | 40 | Hurricane | 1 | 16914 | 880.00→880.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 40 | Innervate | 0 | 29166 | 42.70 (5% base mana)→42.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| FeralDruid | 40 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| FeralDruid | 40 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150→0.150 | declared, matches |
-| FeralDruid | 40 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150→0.150 | declared, matches |
+| FeralDruid | 40 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| FeralDruid | 40 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150 x0.6250→0.094 | declared, matches |
+| FeralDruid | 40 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150 x0.8500→0.128 | declared, matches |
 | FeralDruid | 40 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 35.91-43.09→35.91-43.09 | 0.150→0.150 | declared, matches |
 | FeralDruid | 40 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.62-59.38→49.62-59.38 | 0.150→0.150 | declared, matches |
 | FeralDruid | 40 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 60.98-73.02→60.98-73.02 | 0.150→0.150 | declared, matches |
@@ -313,9 +313,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 40 | Starfire | 1 | 2912 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | n/a | match |  | 78.66-96.34→78.66-96.34 | 1.000→1.000 | declared, matches |
 | FeralDruid | 40 | Starfire | 2 | 8949 | 135.00→135.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 107.26-130.74→107.26-130.74 | 1.000→1.000 | declared, matches |
 | FeralDruid | 40 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  | 139.70-167.50→139.70-167.50 | 1.000→1.000 | declared, matches |
-| FeralDruid | 40 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| FeralDruid | 40 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
-| FeralDruid | 40 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| FeralDruid | 40 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| FeralDruid | 40 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486 x0.4750→0.231 | declared, matches |
+| FeralDruid | 40 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571 x0.7750→0.443 | declared, matches |
 | FeralDruid | 40 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
 | FeralDruid | 40 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | FeralDruid | 40 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 52.41-59.19→52.41-59.19 | 0.571→0.571 | declared, matches |
@@ -326,9 +326,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 50 | Hurricane | 1 | 16914 | 880.00→880.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 50 | Hurricane | 2 | 17401 | 1180.00→1180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 50 | Innervate | 0 | 29166 | 53.20 (5% base mana)→53.20 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| FeralDruid | 50 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| FeralDruid | 50 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150→0.150 | declared, matches |
-| FeralDruid | 50 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150→0.150 | declared, matches |
+| FeralDruid | 50 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| FeralDruid | 50 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150 x0.6250→0.094 | declared, matches |
+| FeralDruid | 50 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150 x0.8500→0.128 | declared, matches |
 | FeralDruid | 50 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 35.91-43.09→35.91-43.09 | 0.150→0.150 | declared, matches |
 | FeralDruid | 50 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.62-59.38→49.62-59.38 | 0.150→0.150 | declared, matches |
 | FeralDruid | 50 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 60.98-73.02→60.98-73.02 | 0.150→0.150 | declared, matches |
@@ -345,9 +345,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 50 | Starfire | 3 | 8950 | 180.00→180.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 34→34 | n/a | match |  | 139.70-167.50→139.70-167.50 | 1.000→1.000 | declared, matches |
 | FeralDruid | 50 | Starfire | 4 | 8951 | 230.00→230.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | n/a | match |  | 190.44-227.16→190.44-227.16 | 1.000→1.000 | declared, matches |
 | FeralDruid | 50 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  | 243.78-288.22→243.78-288.22 | 1.000→1.000 | declared, matches |
-| FeralDruid | 50 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| FeralDruid | 50 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
-| FeralDruid | 50 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| FeralDruid | 50 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| FeralDruid | 50 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486 x0.4750→0.231 | declared, matches |
+| FeralDruid | 50 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571 x0.7750→0.443 | declared, matches |
 | FeralDruid | 50 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
 | FeralDruid | 50 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | FeralDruid | 50 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 55.79-63.01→55.79-63.01 | 0.571→0.571 | declared, matches |
@@ -360,9 +360,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 60 | Hurricane | 2 | 17401 | 1180.00→1180.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 60 | Hurricane | 3 | 17402 | 1495.00→1495.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 10000→10000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 60 | Innervate | 0 | 29166 | 62.20 (5% base mana)→62.20 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| FeralDruid | 60 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
-| FeralDruid | 60 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150→0.150 | declared, matches |
-| FeralDruid | 60 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150→0.150 | declared, matches |
+| FeralDruid | 60 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150 x0.4000→0.060 | declared, matches |
+| FeralDruid | 60 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 14.73-19.27→14.73-19.27 | 0.150 x0.6250→0.094 | declared, matches |
+| FeralDruid | 60 | Moonfire | 3 | 8925 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 24.11-29.89→24.11-29.89 | 0.150 x0.8500→0.128 | declared, matches |
 | FeralDruid | 60 | Moonfire | 4 | 8926 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 35.91-43.09→35.91-43.09 | 0.150→0.150 | declared, matches |
 | FeralDruid | 60 | Moonfire | 5 | 8927 | 150.00→150.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 49.62-59.38→49.62-59.38 | 0.150→0.150 | declared, matches |
 | FeralDruid | 60 | Moonfire | 6 | 8928 | 190.00→190.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 60.98-73.02→60.98-73.02 | 0.150→0.150 | declared, matches |
@@ -382,86 +382,86 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralDruid | 60 | Starfire | 4 | 8951 | 230.00→230.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | n/a | match |  | 190.44-227.16→190.44-227.16 | 1.000→1.000 | declared, matches |
 | FeralDruid | 60 | Starfire | 5 | 9875 | 275.00→275.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  | 255.87-302.53→255.87-302.53 | 1.000→1.000 | declared, matches |
 | FeralDruid | 60 | Starfire | 6 | 9876 | 315.00→315.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 58→58 | n/a | match |  | 313.43-369.77→313.43-369.77 | 1.000→1.000 | declared, matches |
-| FeralDruid | 60 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429→0.429 | declared, matches |
-| FeralDruid | 60 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486→0.486 | declared, matches |
-| FeralDruid | 60 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571→0.571 | declared, matches |
+| FeralDruid | 60 | Wrath | 1 | 5176 | 10.00→10.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 14.58-17.02→14.58-17.02 | 0.429 x0.2875→0.123 | declared, matches |
+| FeralDruid | 60 | Wrath | 2 | 5177 | 20.00→20.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 6→6 | n/a | match |  | 21.11-24.49→21.11-24.49 | 0.486 x0.4750→0.231 | declared, matches |
+| FeralDruid | 60 | Wrath | 3 | 5178 | 40.00→40.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | n/a | match |  | 30.25-35.75→30.25-35.75 | 0.571 x0.7750→0.443 | declared, matches |
 | FeralDruid | 60 | Wrath | 4 | 5179 | 50.00→50.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 22→22 | n/a | match |  | 37.61-43.59→37.61-43.59 | 0.571→0.571 | declared, matches |
 | FeralDruid | 60 | Wrath | 5 | 5180 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | n/a | match |  | 46.01-52.39→46.01-52.39 | 0.571→0.571 | declared, matches |
 | FeralDruid | 60 | Wrath | 6 | 6780 | 80.00→80.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 38→38 | n/a | match |  | 55.79-63.01→55.79-63.01 | 0.571→0.571 | declared, matches |
 | FeralDruid | 60 | Wrath | 7 | 8905 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 46→46 | n/a | match |  | 69.34-77.46→69.34-77.46 | 0.571→0.571 | declared, matches |
 | FeralDruid | 60 | Wrath | 8 | 9912 | 120.00→120.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | n/a | match |  | 91.57-102.43→91.57-102.43 | 0.571→0.571 | declared, matches |
 | RestorationDruid | 10 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 10 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
-| RestorationDruid | 10 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 90.29-114.91→90.29-114.91 | 0.571→0.571 | declared, matches |
+| RestorationDruid | 10 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429 x0.2875→0.123 | declared, matches |
+| RestorationDruid | 10 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 90.29-114.91→90.29-114.91 | 0.571 x0.5500→0.314 | declared, matches |
 | RestorationDruid | 10 | Innervate | 0 | 29166 | 7.45 (5% base mana)→7.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 10 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 10 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200→0.200 | declared, matches |
+| RestorationDruid | 10 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200 x0.4000→0.080 | declared, matches |
+| RestorationDruid | 10 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200 x0.6250→0.125 | declared, matches |
 | RestorationDruid | 20 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 20 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
-| RestorationDruid | 20 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571→0.571 | declared, matches |
-| RestorationDruid | 20 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714→0.714 | declared, matches |
+| RestorationDruid | 20 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429 x0.2875→0.123 | declared, matches |
+| RestorationDruid | 20 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571 x0.5500→0.314 | declared, matches |
+| RestorationDruid | 20 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714 x0.7750→0.553 | declared, matches |
 | RestorationDruid | 20 | Healing Touch | 4 | 5188 | 190.00→190.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 325.26-398.74→325.26-398.74 | 0.857→0.857 | declared, matches |
 | RestorationDruid | 20 | Innervate | 0 | 29166 | 17.70 (5% base mana)→17.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 20 | Regrowth | 1 | 8936 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 12→12 | 21000→21000 | match |  | 88.62-103.38→88.62-103.38 | 0.286→0.286 | declared, matches |
-| RestorationDruid | 20 | Regrowth | 2 | 8938 | 125.00→125.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 18→18 | 21000→21000 | match |  | 157.48-180.52→157.48-180.52 | 0.286→0.286 | declared, matches |
-| RestorationDruid | 20 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 20 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 20 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200→0.200 | declared, matches |
+| RestorationDruid | 20 | Regrowth | 1 | 8936 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 12→12 | 21000→21000 | match |  | 88.62-103.38→88.62-103.38 | 0.286 x0.7000→0.200 | declared, matches |
+| RestorationDruid | 20 | Regrowth | 2 | 8938 | 125.00→125.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 18→18 | 21000→21000 | match |  | 157.48-180.52→157.48-180.52 | 0.286 x0.9250→0.265 | declared, matches |
+| RestorationDruid | 20 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200 x0.4000→0.080 | declared, matches |
+| RestorationDruid | 20 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200 x0.6250→0.125 | declared, matches |
+| RestorationDruid | 20 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200 x0.8500→0.170 | declared, matches |
 | RestorationDruid | 30 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 30 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
-| RestorationDruid | 30 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571→0.571 | declared, matches |
-| RestorationDruid | 30 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714→0.714 | declared, matches |
+| RestorationDruid | 30 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429 x0.2875→0.123 | declared, matches |
+| RestorationDruid | 30 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571 x0.5500→0.314 | declared, matches |
+| RestorationDruid | 30 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714 x0.7750→0.553 | declared, matches |
 | RestorationDruid | 30 | Healing Touch | 4 | 5188 | 190.00→190.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 337.39-413.61→337.39-413.61 | 0.857→0.857 | declared, matches |
 | RestorationDruid | 30 | Healing Touch | 5 | 5189 | 280.00→280.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 506.03-613.97→506.03-613.97 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 30 | Innervate | 0 | 29166 | 30.70 (5% base mana)→30.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 30 | Regrowth | 1 | 8936 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 12→12 | 21000→21000 | match |  | 88.62-103.38→88.62-103.38 | 0.286→0.286 | declared, matches |
-| RestorationDruid | 30 | Regrowth | 2 | 8938 | 125.00→125.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 18→18 | 21000→21000 | match |  | 164.47-188.53→164.47-188.53 | 0.286→0.286 | declared, matches |
+| RestorationDruid | 30 | Regrowth | 1 | 8936 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 12→12 | 21000→21000 | match |  | 88.62-103.38→88.62-103.38 | 0.286 x0.7000→0.200 | declared, matches |
+| RestorationDruid | 30 | Regrowth | 2 | 8938 | 125.00→125.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 18→18 | 21000→21000 | match |  | 164.47-188.53→164.47-188.53 | 0.286 x0.9250→0.265 | declared, matches |
 | RestorationDruid | 30 | Regrowth | 3 | 8939 | 170.00→170.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 21000→21000 | match |  | 233.93-267.07→233.93-267.07 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 30 | Regrowth | 4 | 8940 | 210.00→210.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 21000→21000 | match |  | 291.73-330.27→291.73-330.27 | 0.286→0.286 | declared, matches |
-| RestorationDruid | 30 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 30 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 30 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200→0.200 | declared, matches |
+| RestorationDruid | 30 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200 x0.4000→0.080 | declared, matches |
+| RestorationDruid | 30 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200 x0.6250→0.125 | declared, matches |
+| RestorationDruid | 30 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200 x0.8500→0.170 | declared, matches |
 | RestorationDruid | 30 | Rejuvenation | 4 | 2090 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 32.00-32.00→32.00-32.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 30 | Rejuvenation | 5 | 2091 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 42.00-42.00→42.00-42.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 30 | Tranquility | 1 | 740 | 375.00→375.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | 87.00-87.00→87.00-87.00 | 0.067→0.067 | declared, matches |
 | RestorationDruid | 38 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 38 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
-| RestorationDruid | 38 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571→0.571 | declared, matches |
-| RestorationDruid | 38 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714→0.714 | declared, matches |
+| RestorationDruid | 38 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429 x0.2875→0.123 | declared, matches |
+| RestorationDruid | 38 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571 x0.5500→0.314 | declared, matches |
+| RestorationDruid | 38 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714 x0.7750→0.553 | declared, matches |
 | RestorationDruid | 38 | Healing Touch | 4 | 5188 | 190.00→190.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 337.39-413.61→337.39-413.61 | 0.857→0.857 | declared, matches |
 | RestorationDruid | 38 | Healing Touch | 5 | 5189 | 280.00→280.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 509.20-617.80→509.20-617.80 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 38 | Healing Touch | 6 | 6778 | 350.00→350.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 32→32 | n/a | match |  | 659.45-794.55→659.45-794.55 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 38 | Healing Touch | 7 | 8903 | 425.00→425.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 38→38 | n/a | match |  | 817.63-978.37→817.63-978.37 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 38 | Innervate | 0 | 29166 | 40.45 (5% base mana)→40.45 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 38 | Regrowth | 1 | 8936 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 12→12 | 21000→21000 | match |  | 88.62-103.38→88.62-103.38 | 0.286→0.286 | declared, matches |
-| RestorationDruid | 38 | Regrowth | 2 | 8938 | 125.00→125.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 18→18 | 21000→21000 | match |  | 164.47-188.53→164.47-188.53 | 0.286→0.286 | declared, matches |
+| RestorationDruid | 38 | Regrowth | 1 | 8936 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 12→12 | 21000→21000 | match |  | 88.62-103.38→88.62-103.38 | 0.286 x0.7000→0.200 | declared, matches |
+| RestorationDruid | 38 | Regrowth | 2 | 8938 | 125.00→125.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 18→18 | 21000→21000 | match |  | 164.47-188.53→164.47-188.53 | 0.286 x0.9250→0.265 | declared, matches |
 | RestorationDruid | 38 | Regrowth | 3 | 8939 | 170.00→170.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 21000→21000 | match |  | 233.93-267.07→233.93-267.07 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 38 | Regrowth | 4 | 8940 | 210.00→210.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 21000→21000 | match |  | 308.62-349.38→308.62-349.38 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 38 | Regrowth | 5 | 8941 | 250.00→250.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 36→36 | 21000→21000 | match |  | 377.94-426.46→377.94-426.46 | 0.286→0.286 | declared, matches |
-| RestorationDruid | 38 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 38 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 38 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200→0.200 | declared, matches |
+| RestorationDruid | 38 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200 x0.4000→0.080 | declared, matches |
+| RestorationDruid | 38 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200 x0.6250→0.125 | declared, matches |
+| RestorationDruid | 38 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200 x0.8500→0.170 | declared, matches |
 | RestorationDruid | 38 | Rejuvenation | 4 | 2090 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 32.00-32.00→32.00-32.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 38 | Rejuvenation | 5 | 2091 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 42.00-42.00→42.00-42.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 38 | Rejuvenation | 6 | 3627 | 160.00→160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 51.00-51.00→51.00-51.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 38 | Tranquility | 1 | 740 | 375.00→375.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | 90.60-90.60→90.60-90.60 | 0.067→0.067 | declared, matches |
 | RestorationDruid | 40 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 40 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
-| RestorationDruid | 40 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571→0.571 | declared, matches |
-| RestorationDruid | 40 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714→0.714 | declared, matches |
+| RestorationDruid | 40 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429 x0.2875→0.123 | declared, matches |
+| RestorationDruid | 40 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571 x0.5500→0.314 | declared, matches |
+| RestorationDruid | 40 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714 x0.7750→0.553 | declared, matches |
 | RestorationDruid | 40 | Healing Touch | 4 | 5188 | 190.00→190.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 337.39-413.61→337.39-413.61 | 0.857→0.857 | declared, matches |
 | RestorationDruid | 40 | Healing Touch | 5 | 5189 | 280.00→280.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 509.20-617.80→509.20-617.80 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 40 | Healing Touch | 6 | 6778 | 350.00→350.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 32→32 | n/a | match |  | 659.45-794.55→659.45-794.55 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 40 | Healing Touch | 7 | 8903 | 425.00→425.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 38→38 | n/a | match |  | 825.83-988.17→825.83-988.17 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 40 | Innervate | 0 | 29166 | 42.70 (5% base mana)→42.70 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 40 | Regrowth | 1 | 8936 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 12→12 | 21000→21000 | match |  | 88.62-103.38→88.62-103.38 | 0.286→0.286 | declared, matches |
-| RestorationDruid | 40 | Regrowth | 2 | 8938 | 125.00→125.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 18→18 | 21000→21000 | match |  | 164.47-188.53→164.47-188.53 | 0.286→0.286 | declared, matches |
+| RestorationDruid | 40 | Regrowth | 1 | 8936 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 12→12 | 21000→21000 | match |  | 88.62-103.38→88.62-103.38 | 0.286 x0.7000→0.200 | declared, matches |
+| RestorationDruid | 40 | Regrowth | 2 | 8938 | 125.00→125.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 18→18 | 21000→21000 | match |  | 164.47-188.53→164.47-188.53 | 0.286 x0.9250→0.265 | declared, matches |
 | RestorationDruid | 40 | Regrowth | 3 | 8939 | 170.00→170.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 21000→21000 | match |  | 233.93-267.07→233.93-267.07 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 40 | Regrowth | 4 | 8940 | 210.00→210.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 21000→21000 | match |  | 308.62-349.38→308.62-349.38 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 40 | Regrowth | 5 | 8941 | 250.00→250.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 36→36 | 21000→21000 | match |  | 385.64-435.16→385.64-435.16 | 0.286→0.286 | declared, matches |
-| RestorationDruid | 40 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 40 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 40 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200→0.200 | declared, matches |
+| RestorationDruid | 40 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200 x0.4000→0.080 | declared, matches |
+| RestorationDruid | 40 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200 x0.6250→0.125 | declared, matches |
+| RestorationDruid | 40 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200 x0.8500→0.170 | declared, matches |
 | RestorationDruid | 40 | Rejuvenation | 4 | 2090 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 32.00-32.00→32.00-32.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 40 | Rejuvenation | 5 | 2091 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 42.00-42.00→42.00-42.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 40 | Rejuvenation | 6 | 3627 | 160.00→160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 51.00-51.00→51.00-51.00 | 0.200→0.200 | declared, matches |
@@ -469,9 +469,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationDruid | 40 | Tranquility | 1 | 740 | 375.00→375.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | 90.60-90.60→90.60-90.60 | 0.067→0.067 | declared, matches |
 | RestorationDruid | 40 | Tranquility | 2 | 8918 | 505.00→505.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | 129.00-129.00→129.00-129.00 | 0.067→0.067 | declared, matches |
 | RestorationDruid | 50 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 50 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
-| RestorationDruid | 50 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571→0.571 | declared, matches |
-| RestorationDruid | 50 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714→0.714 | declared, matches |
+| RestorationDruid | 50 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429 x0.2875→0.123 | declared, matches |
+| RestorationDruid | 50 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571 x0.5500→0.314 | declared, matches |
+| RestorationDruid | 50 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714 x0.7750→0.553 | declared, matches |
 | RestorationDruid | 50 | Healing Touch | 4 | 5188 | 190.00→190.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 337.39-413.61→337.39-413.61 | 0.857→0.857 | declared, matches |
 | RestorationDruid | 50 | Healing Touch | 5 | 5189 | 280.00→280.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 509.20-617.80→509.20-617.80 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 50 | Healing Touch | 6 | 6778 | 350.00→350.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 32→32 | n/a | match |  | 659.45-794.55→659.45-794.55 | 1.000→1.000 | declared, matches |
@@ -479,16 +479,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationDruid | 50 | Healing Touch | 8 | 9758 | 520.00→520.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 44→44 | n/a | match |  | 1094.90-1303.10→1094.90-1303.10 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 50 | Healing Touch | 9 | 9888 | 630.00→630.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  | 1387.84-1644.16→1387.84-1644.16 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 50 | Innervate | 0 | 29166 | 53.20 (5% base mana)→53.20 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 50 | Regrowth | 1 | 8936 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 12→12 | 21000→21000 | match |  | 88.62-103.38→88.62-103.38 | 0.286→0.286 | declared, matches |
-| RestorationDruid | 50 | Regrowth | 2 | 8938 | 125.00→125.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 18→18 | 21000→21000 | match |  | 164.47-188.53→164.47-188.53 | 0.286→0.286 | declared, matches |
+| RestorationDruid | 50 | Regrowth | 1 | 8936 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 12→12 | 21000→21000 | match |  | 88.62-103.38→88.62-103.38 | 0.286 x0.7000→0.200 | declared, matches |
+| RestorationDruid | 50 | Regrowth | 2 | 8938 | 125.00→125.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 18→18 | 21000→21000 | match |  | 164.47-188.53→164.47-188.53 | 0.286 x0.9250→0.265 | declared, matches |
 | RestorationDruid | 50 | Regrowth | 3 | 8939 | 170.00→170.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 21000→21000 | match |  | 233.93-267.07→233.93-267.07 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 50 | Regrowth | 4 | 8940 | 210.00→210.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 21000→21000 | match |  | 308.62-349.38→308.62-349.38 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 50 | Regrowth | 5 | 8941 | 250.00→250.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 36→36 | 21000→21000 | match |  | 389.50-439.50→389.50-439.50 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 50 | Regrowth | 6 | 9750 | 305.00→305.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 42→42 | 21000→21000 | match |  | 496.41-558.59→496.41-558.59 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 50 | Regrowth | 7 | 9856 | 370.00→370.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 48→48 | 21000→21000 | match |  | 618.27-692.93→618.27-692.93 | 0.286→0.286 | declared, matches |
-| RestorationDruid | 50 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 50 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 50 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200→0.200 | declared, matches |
+| RestorationDruid | 50 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200 x0.4000→0.080 | declared, matches |
+| RestorationDruid | 50 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200 x0.6250→0.125 | declared, matches |
+| RestorationDruid | 50 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200 x0.8500→0.170 | declared, matches |
 | RestorationDruid | 50 | Rejuvenation | 4 | 2090 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 32.00-32.00→32.00-32.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 50 | Rejuvenation | 5 | 2091 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 42.00-42.00→42.00-42.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 50 | Rejuvenation | 6 | 3627 | 160.00→160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 51.00-51.00→51.00-51.00 | 0.200→0.200 | declared, matches |
@@ -498,9 +498,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationDruid | 50 | Tranquility | 2 | 8918 | 505.00→505.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | 133.20-133.20→133.20-133.20 | 0.067→0.067 | declared, matches |
 | RestorationDruid | 50 | Tranquility | 3 | 9862 | 695.00→695.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | 196.00-196.00→196.00-196.00 | 0.067→0.067 | declared, matches |
 | RestorationDruid | 60 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 60 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429→0.429 | declared, matches |
-| RestorationDruid | 60 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571→0.571 | declared, matches |
-| RestorationDruid | 60 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714→0.714 | declared, matches |
+| RestorationDruid | 60 | Healing Touch | 1 | 5185 | 25.00→25.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 39.69-54.71→39.69-54.71 | 0.429 x0.2875→0.123 | declared, matches |
+| RestorationDruid | 60 | Healing Touch | 2 | 5186 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 8→8 | n/a | match |  | 93.72-119.28→93.72-119.28 | 0.571 x0.5500→0.314 | declared, matches |
+| RestorationDruid | 60 | Healing Touch | 3 | 5187 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 187.43-233.57→187.43-233.57 | 0.714 x0.7750→0.553 | declared, matches |
 | RestorationDruid | 60 | Healing Touch | 4 | 5188 | 190.00→190.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 337.39-413.61→337.39-413.61 | 0.857→0.857 | declared, matches |
 | RestorationDruid | 60 | Healing Touch | 5 | 5189 | 280.00→280.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 26→26 | n/a | match |  | 509.20-617.80→509.20-617.80 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 60 | Healing Touch | 6 | 6778 | 350.00→350.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 32→32 | n/a | match |  | 659.45-794.55→659.45-794.55 | 1.000→1.000 | declared, matches |
@@ -509,8 +509,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationDruid | 60 | Healing Touch | 9 | 9888 | 630.00→630.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 50→50 | n/a | match |  | 1414.84-1676.16→1414.84-1676.16 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 60 | Healing Touch | 10 | 9889 | 755.00→755.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 56→56 | n/a | match |  | 1785.77-2107.03→1785.77-2107.03 | 1.000→1.000 | declared, matches |
 | RestorationDruid | 60 | Innervate | 0 | 29166 | 62.20 (5% base mana)→62.20 | mana→mana | 360000→360000 | 0→0 | 1500→1500 | 40→40 | 20000→20000 | match |  | n/a | n/a | n/a |
-| RestorationDruid | 60 | Regrowth | 1 | 8936 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 12→12 | 21000→21000 | match |  | 88.62-103.38→88.62-103.38 | 0.286→0.286 | declared, matches |
-| RestorationDruid | 60 | Regrowth | 2 | 8938 | 125.00→125.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 18→18 | 21000→21000 | match |  | 164.47-188.53→164.47-188.53 | 0.286→0.286 | declared, matches |
+| RestorationDruid | 60 | Regrowth | 1 | 8936 | 70.00→70.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 12→12 | 21000→21000 | match |  | 88.62-103.38→88.62-103.38 | 0.286 x0.7000→0.200 | declared, matches |
+| RestorationDruid | 60 | Regrowth | 2 | 8938 | 125.00→125.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 18→18 | 21000→21000 | match |  | 164.47-188.53→164.47-188.53 | 0.286 x0.9250→0.265 | declared, matches |
 | RestorationDruid | 60 | Regrowth | 3 | 8939 | 170.00→170.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 21000→21000 | match |  | 233.93-267.07→233.93-267.07 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 60 | Regrowth | 4 | 8940 | 210.00→210.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 21000→21000 | match |  | 308.62-349.38→308.62-349.38 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 60 | Regrowth | 5 | 8941 | 250.00→250.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 36→36 | 21000→21000 | match |  | 389.50-439.50→389.50-439.50 | 0.286→0.286 | declared, matches |
@@ -518,9 +518,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationDruid | 60 | Regrowth | 7 | 9856 | 370.00→370.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 48→48 | 21000→21000 | match |  | 633.27-709.73→633.27-709.73 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 60 | Regrowth | 8 | 9857 | 445.00→445.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 54→54 | 21000→21000 | match |  | 799.56-894.44→799.56-894.44 | 0.286→0.286 | declared, matches |
 | RestorationDruid | 60 | Regrowth | 9 | 9858 | 525.00→525.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 60→60 | 21000→21000 | match |  | 965.19-1076.81→965.19-1076.81 | 0.286→0.286 | declared, matches |
-| RestorationDruid | 60 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 60 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200→0.200 | declared, matches |
-| RestorationDruid | 60 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200→0.200 | declared, matches |
+| RestorationDruid | 60 | Rejuvenation | 1 | 774 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 12000→12000 | match |  | 8.00-8.00→8.00-8.00 | 0.200 x0.4000→0.080 | declared, matches |
+| RestorationDruid | 60 | Rejuvenation | 2 | 1058 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 12.00-12.00→12.00-12.00 | 0.200 x0.6250→0.125 | declared, matches |
+| RestorationDruid | 60 | Rejuvenation | 3 | 1430 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 12000→12000 | match |  | 23.00-23.00→23.00-23.00 | 0.200 x0.8500→0.170 | declared, matches |
 | RestorationDruid | 60 | Rejuvenation | 4 | 2090 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 12000→12000 | match |  | 32.00-32.00→32.00-32.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 60 | Rejuvenation | 5 | 2091 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 12000→12000 | match |  | 42.00-42.00→42.00-42.00 | 0.200→0.200 | declared, matches |
 | RestorationDruid | 60 | Rejuvenation | 6 | 3627 | 160.00→160.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 12000→12000 | match |  | 51.00-51.00→51.00-51.00 | 0.200→0.200 | declared, matches |

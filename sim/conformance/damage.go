@@ -67,6 +67,9 @@ type DamageComparison struct {
 	// vanilla convention, which is not compared.
 	ClientCoefficient          float64
 	ClientCoefficientFromTable bool
+	// LevelPenalty is the share of the client's coefficient a rank learned
+	// below level 20 keeps (core.LevelPenalty); 1 for every other spell.
+	LevelPenalty float64
 
 	EngineMin, EngineMax float64
 	EngineCoefficient    float64
@@ -174,6 +177,7 @@ func compareDamage(clientSpell spellconst.Spell, casterLevel int, engine *core.S
 		EngineMin:                  engine.ClientBaseDamage[0],
 		EngineMax:                  engine.ClientBaseDamage[1],
 		EngineCoefficient:          engine.BonusCoefficient,
+		LevelPenalty:               levelPenaltyOf(clientSpell, engine),
 	}
 	if engine.ClientBaseDamage == [2]float64{} {
 		result.Status = DamageUndeclared
@@ -192,8 +196,8 @@ func damageDiff(c DamageComparison) string {
 	if math.Abs(c.ClientMin-c.EngineMin) > damageTolerance || math.Abs(c.ClientMax-c.EngineMax) > damageTolerance {
 		diffs = append(diffs, fmt.Sprintf("damage %.0f-%.0f->%.0f-%.0f", c.ClientMin, c.ClientMax, c.EngineMin, c.EngineMax))
 	}
-	if c.ClientCoefficientFromTable && math.Abs(c.ClientCoefficient-c.EngineCoefficient) > coefficientTolerance {
-		diffs = append(diffs, fmt.Sprintf("coefficient %.3f->%.3f", c.ClientCoefficient, c.EngineCoefficient))
+	if want := c.expectedCoefficient(); c.ClientCoefficientFromTable && math.Abs(want-c.EngineCoefficient) > coefficientTolerance {
+		diffs = append(diffs, fmt.Sprintf("coefficient %.3f->%.3f", want, c.EngineCoefficient))
 	}
 	return joinDiffs(diffs)
 }
@@ -209,6 +213,9 @@ func damageCells(c DamageComparison) (rangeCell, coefficientCell, statusCell str
 		engineRange = fmt.Sprintf("%.2f-%.2f", c.EngineMin, c.EngineMax)
 	}
 	coefficientCell = fmt.Sprintf("%.3f→%.3f", c.ClientCoefficient, c.EngineCoefficient)
+	if c.LevelPenalty != 0 && c.LevelPenalty != 1 {
+		coefficientCell = fmt.Sprintf("%.3f x%.4f→%.3f", c.ClientCoefficient, c.LevelPenalty, c.EngineCoefficient)
+	}
 	if !c.ClientCoefficientFromTable {
 		coefficientCell = fmt.Sprintf("%.3f (convention)→%.3f", c.ClientCoefficient, c.EngineCoefficient)
 	}
@@ -251,4 +258,24 @@ func countDamage(rows []Row) DamageCounts {
 		}
 	}
 	return counts
+}
+
+// expectedCoefficient is the client's coefficient after the level penalty;
+// a comparison built without one keeps the whole coefficient.
+func (c DamageComparison) expectedCoefficient() float64 {
+	if c.LevelPenalty == 0 {
+		return c.ClientCoefficient
+	}
+	return c.ClientCoefficient * c.LevelPenalty
+}
+
+// levelPenaltyOf is the level penalty the engine applies to a rank the
+// player casts (core.RegisterSpell): a spell with a cost or a cast, not
+// physical, learned below level 20.
+func levelPenaltyOf(clientSpell spellconst.Spell, engine *core.Spell) float64 {
+	cast := engine.DefaultCast.GCD != 0 || engine.DefaultCast.CastTime != 0 || engine.Cost != nil
+	if !cast || engine.SpellSchool == core.SpellSchoolPhysical {
+		return 1
+	}
+	return core.LevelPenalty(clientSpell.SpellLevel)
 }

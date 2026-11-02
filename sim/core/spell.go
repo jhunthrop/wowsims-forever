@@ -337,6 +337,13 @@ func (unit *Unit) RegisterSpell(config SpellConfig) *Spell {
 		spell.DefaultCast.Cost = spell.Cost.BaseCost
 	}
 
+	// A rank learned below level 20 gains less from spell power.
+	if penalty := levelPenalty(config); penalty != 1 {
+		spell.BonusCoefficient *= penalty
+		config.Dot.BonusCoefficient *= penalty
+		config.Hot.BonusCoefficient *= penalty
+	}
+
 	spell.createDots(config.Dot, false)
 	spell.createDots(config.Hot, true)
 	spell.createShields(config.Shield)
@@ -765,4 +772,47 @@ func (spell *Spell) ApplyAdditiveImpactDamageBonus(percent int64) {
 // ApplyAdditivePeriodicDamageBonus applies to periodic damage only.
 func (spell *Spell) ApplyAdditivePeriodicDamageBonus(percent int64) {
 	spell.PeriodicDamageMultiplierAdditive += float64(percent) / 100
+}
+
+// levelPenaltyLevel is the spell level from which a spell keeps its whole
+// spell power coefficient, and levelPenaltyPerLevel what it loses for each
+// level below it.
+const (
+	levelPenaltyLevel    = 20
+	levelPenaltyPerLevel = 0.0375
+)
+
+// levelPenalty is the share of its spell power coefficient a rank the
+// player casts keeps: 1 - (20 - level) * 0.0375 when it is learned below
+// level 20, else all of it (cmangos-classic Unit::CalculateLevelPenalty and
+// vmangos SpellCaster::CalculateLevelPenalty, on direct and periodic damage
+// and healing alike). The client's coefficients carry no penalty of their
+// own. Only a spell the player casts (it has a cost or a cast) is a learned
+// rank: a proc's RequiredLevel is its client spell level (every Seal of
+// Righteousness and Seal of Fury proc is level 1), and how the penalty
+// treats a triggered spell is unsettled, so procs keep their coefficient.
+// Physical abilities take no spell power.
+func levelPenalty(config SpellConfig) float64 {
+	if config.SpellSchool == SpellSchoolPhysical || !isCastRank(config) {
+		return 1
+	}
+	return LevelPenalty(config.RequiredLevel)
+}
+
+// LevelPenalty is the share of its coefficient a rank learned at level
+// keeps; level 0 is a spell with no learn level and keeps it all.
+func LevelPenalty(level int) float64 {
+	if level <= 0 || level >= levelPenaltyLevel {
+		return 1
+	}
+	return 1 - float64(levelPenaltyLevel-level)*levelPenaltyPerLevel
+}
+
+// isCastRank is whether config is a spell the player casts: it costs a
+// resource or takes a global cooldown or a cast time.
+func isCastRank(config SpellConfig) bool {
+	cast := config.Cast.DefaultCast
+	return config.ManaCost.BaseCost != 0 || config.ManaCost.FlatCost != 0 ||
+		config.EnergyCost.Cost != 0 || config.RageCost.Cost != 0 || config.FocusCost.Cost != 0 ||
+		cast.GCD != 0 || cast.CastTime != 0
 }

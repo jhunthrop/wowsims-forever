@@ -1,6 +1,7 @@
 package shadow
 
 import (
+	"math"
 	"testing"
 
 	_ "github.com/wowsims/classic/sim/common"
@@ -50,8 +51,9 @@ func TestShadowWordPainSpellCoefficientMatchesClient(t *testing.T) {
 		if dot == nil {
 			t.Fatalf("Shadow Word: Pain rank %d has no Dot template on the default target", rank)
 		}
-		if got, want := dot.BonusCoefficient, 0.2; got != want {
-			t.Errorf("Shadow Word: Pain rank %d BonusCoefficient = %v, want %v (client's flat sp_coefficient)", rank, got, want)
+		// A rank learned below level 20 keeps only part of it.
+		if got, want := dot.BonusCoefficient, 0.2*core.LevelPenalty(spell.RequiredLevel); math.Abs(got-want) > 1e-9 {
+			t.Errorf("Shadow Word: Pain rank %d BonusCoefficient = %v, want %v (client's flat sp_coefficient, level-penalised)", rank, got, want)
 		}
 	}
 }

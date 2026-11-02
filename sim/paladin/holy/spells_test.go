@@ -4,6 +4,7 @@ import (
 	"math"
 	"testing"
 
+	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/spellconst"
 	"github.com/wowsims/classic/sim/core/stats"
 )
@@ -56,7 +57,10 @@ func assertHealNumbers(t *testing.T, f fight, castID, healID int32) spellTotals 
 	if !ok {
 		t.Fatalf("spell %d has no effect 0", healID)
 	}
-	want := (low+high)/2 + heal.Effects[0].ResolvedSPCoefficient*healingPower
+	// A rank learned below level 20 keeps only part of its coefficient
+	// (core.LevelPenalty); the cast's level is the rank's.
+	coefficient := heal.Effects[0].ResolvedSPCoefficient * core.LevelPenalty(clientSpell(t, castID).SpellLevel)
+	want := (low+high)/2 + coefficient*healingPower
 
 	totals := totalsOf(f.run(t, numericRuns), healID)
 	if totals.landed() == 0 {
@@ -64,7 +68,7 @@ func assertHealNumbers(t *testing.T, f fight, castID, healID int32) spellTotals 
 	}
 	if got := totals.normalHeal(); !within(got, want, averageTolerance) {
 		t.Errorf("spell %d at level %d: normal heal averages %.1f, want %.1f (roll %.1f-%.1f + %.3f x %.0f)",
-			healID, level, got, want, low, high, heal.Effects[0].ResolvedSPCoefficient, healingPower)
+			healID, level, got, want, low, high, coefficient, healingPower)
 	}
 	if totals.crits > 0 {
 		if got := totals.critHeal(); !within(got, want*spellCritMultiplier, critTolerance) {
