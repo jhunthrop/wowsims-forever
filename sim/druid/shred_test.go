@@ -16,8 +16,17 @@ func TestShredRankAtLevel(t *testing.T) {
 	if got := core.HighestRankAtLevel(shredLearnLevels, 38); got != 3 {
 		t.Errorf("rank at 38 = %d, want 3", got)
 	}
-	// Below the first rank's learn level, nothing is learned yet.
-	if got := core.HighestRankAtLevel(shredLearnLevels, 21); got != 0 {
-		t.Errorf("rank at 21 = %d, want 0", got)
+}
+
+// TestShredRankOneIsLearnedAtTwenty: client 1.60.1.70707 has Shred rank 1
+// (5221) at level 20 (SpellLevels 98857 BaseLevel 20, SkillLineAbility on
+// Feral Combat), Wowhead Forever 5221 "Requires level 20", and Blizzard's
+// 15 October beta notes: "Rank 1 Shred is learned at level 20 instead of 22."
+func TestShredRankOneIsLearnedAtTwenty(t *testing.T) {
+	if got := core.HighestRankAtLevel(shredLearnLevels, 20); got != 1 {
+		t.Errorf("rank at 20 = %d, want 1", got)
+	}
+	if got := core.HighestRankAtLevel(shredLearnLevels, 19); got != 0 {
+		t.Errorf("rank at 19 = %d, want 0", got)
 	}
 }

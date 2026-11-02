@@ -6,10 +6,11 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// shredLearnLevels are Shred's five rank learn levels; source: 1.60.1.70009
-// client spell data ("Shred", ranks 1-5; the level-20 rank-0 id is an
-// internal copy, not a player rank).
-var shredLearnLevels = []int{22, 30, 38, 46, 54}
+// shredLearnLevels are Shred's five rank learn levels: client 1.60.1.70707
+// SpellLevels and SkillLineAbility (rank 1, 5221, at 20; Era's 22 until
+// Blizzard's 15 October beta change, "Rank 1 Shred is learned at level 20
+// instead of 22").
+var shredLearnLevels = []int{20, 30, 38, 46, 54}
 
 // shredSpellID is Shred's rank -> spell id, index 0 unused.
 var shredSpellID = [6]int32{0, 5221, 6800, 8992, 9829, 9830}
