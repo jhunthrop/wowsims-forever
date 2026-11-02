@@ -32,6 +32,7 @@ func (priest *Priest) RegisterHealingSpells() {
 	priest.registerPrayerOfMending()
 	priest.registerLightwell()
 	priest.registerInnerFire()
+	priest.registerRacialHeals()
 }
 
 // registerHealRanks registers every rank of table the priest's level has

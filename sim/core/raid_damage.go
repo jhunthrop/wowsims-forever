@@ -156,6 +156,13 @@ func dealRaidDamage(sim *Simulation, unit *Unit, amount, spread float64, isTank 
 	}
 }
 
+// DealRaidDamage is one unspread hit of the damage model on unit, as a
+// pulse lands it: through its absorbs, then to its health and the
+// listeners.
+func DealRaidDamage(sim *Simulation, unit *Unit, amount float64) {
+	dealRaidDamage(sim, unit, amount, 0, false)
+}
+
 func (raid *Raid) notifyRaidDamage(sim *Simulation, unit *Unit, damage float64, isTank bool) {
 	for _, listener := range raid.raidDamageListeners {
 		listener(sim, unit, damage, isTank)

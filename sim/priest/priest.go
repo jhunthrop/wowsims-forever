@@ -170,6 +170,14 @@ type Priest struct {
 	VampiricEmbraceAuras core.AuraArray
 	WeakenedSouls        core.AuraArray
 
+	// The racial heals (racials.go): the human's Divine Grace and the
+	// gnome's Contingency Plan, its ward, shield and heal over time.
+	DivineGrace       *core.Spell
+	ContingencyPlan   *core.Spell
+	ContingencyShield *core.Spell
+	ContingencyHot    *core.Spell
+	ContingencyWards  core.AuraArray
+
 	// lastHealSpellCode is the spell code of the last heal this priest
 	// cast, which Litany of Light compares the next heal against.
 	lastHealSpellCode int32
