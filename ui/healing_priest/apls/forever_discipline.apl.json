@@ -1327,8 +1327,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2054,
-            "rank": 1
+            "spellId": 2053,
+            "rank": 3
           },
           "target": {
             "type": "Player",
@@ -1386,8 +1386,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2054,
-            "rank": 1
+            "spellId": 2053,
+            "rank": 3
           },
           "target": {
             "type": "Player",
@@ -1445,8 +1445,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2054,
-            "rank": 1
+            "spellId": 2053,
+            "rank": 3
           },
           "target": {
             "type": "Player",
@@ -1504,8 +1504,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2054,
-            "rank": 1
+            "spellId": 2053,
+            "rank": 3
           },
           "target": {
             "type": "Player",
@@ -1596,8 +1596,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2054,
-            "rank": 1
+            "spellId": 2053,
+            "rank": 3
           },
           "target": {
             "type": "Player",
@@ -1628,8 +1628,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2054,
-            "rank": 1
+            "spellId": 2053,
+            "rank": 3
           },
           "target": {
             "type": "Player",
@@ -1660,8 +1660,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2054,
-            "rank": 1
+            "spellId": 2053,
+            "rank": 3
           },
           "target": {
             "type": "Player",
@@ -1692,8 +1692,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2054,
-            "rank": 1
+            "spellId": 2053,
+            "rank": 3
           },
           "target": {
             "type": "Player",
