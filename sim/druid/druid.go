@@ -102,10 +102,10 @@ const (
 	// Genesis's "periodic damage".
 	DruidSpellMaskPeriodicDamage = DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm | DruidSpellMaskRake | DruidSpellMaskRip | DruidSpellMaskPounce
 
-	// Every Nature spell Nature's Swiftness can make instant: the one
-	// damage spell and the three cast-time heals the school has (Wild
-	// Growth's 3 s cast is client 1.60.1.70707's hotfix, wild_growth.go).
-	DruidSpellMaskNatureCasts = DruidSpellMaskWrath | DruidSpellMaskHealingTouch | DruidSpellMaskRegrowth | DruidSpellMaskWildGrowth
+	// Every spell this package registers that Nature's Swiftness can make
+	// instant: the client's mask (17116, SpellEffect 695239) names Wrath,
+	// Healing Touch and Regrowth, and not Wild Growth (mask_1 0x4000000).
+	DruidSpellMaskNatureCasts = DruidSpellMaskWrath | DruidSpellMaskHealingTouch | DruidSpellMaskRegrowth
 
 	// Every Cat Form melee special this package registers, for
 	// Predatory Instincts' "melee abilities".
