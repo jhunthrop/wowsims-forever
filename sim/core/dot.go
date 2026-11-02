@@ -1,6 +1,7 @@
 package core
 
 import (
+	"fmt"
 	"strconv"
 	"time"
 )
@@ -411,6 +412,7 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 	caster := dot.Spell.Unit
 	if config.IsAOE || config.SelfOnly {
 		dot.Aura = caster.GetOrRegisterAura(auraConfig)
+		caster.claimDotAura(dot.Aura, spell)
 		spell.aoeDot = newDot(dot)
 	} else {
 		auraConfig.Label += "-" + strconv.Itoa(int(caster.UnitIndex))
@@ -420,6 +422,7 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 		for _, target := range caster.Env.AllUnits {
 			if isHot != caster.IsOpponent(target) {
 				dot.Aura = target.GetOrRegisterAura(auraConfig)
+				target.claimDotAura(dot.Aura, spell)
 				spell.dots[target.UnitIndex] = newDot(dot)
 			}
 		}
@@ -472,4 +475,18 @@ func dotCritMultiplier(dotMult, spellMult float64) float64 {
 		return spellMult
 	}
 	return dotMult
+}
+
+// claimDotAura records that spell's dot wraps aura on unit, and refuses a
+// second spell: every dot appends its own gain and expire handlers to the
+// aura it wraps, so two spells sharing one aura would tick both dots
+// whenever either is applied. Give each spell (each rank) its own label.
+func (unit *Unit) claimDotAura(aura *Aura, spell *Spell) {
+	if unit.dotAuraSpells == nil {
+		unit.dotAuraSpells = make(map[*Aura]*Spell)
+	}
+	if owner, ok := unit.dotAuraSpells[aura]; ok && owner != spell {
+		panic(fmt.Sprintf("Dot aura %s on %s already belongs to %s; %s needs its own label", aura.Label, unit.Label, owner.ActionID, spell.ActionID))
+	}
+	unit.dotAuraSpells[aura] = spell
 }

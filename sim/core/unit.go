@@ -32,6 +32,10 @@ type DynamicDamageTakenModifier func(sim *Simulation, spell *Spell, result *Spel
 type Unit struct {
 	Type UnitType
 
+	// dotAuraSpells is the spell whose dot wraps each dot aura on this
+	// unit (claimDotAura).
+	dotAuraSpells map[*Aura]*Spell
+
 	// Index of this unit with its group.
 	//  For Players, this is the 0-indexed raid index (0-24).
 	//  For Enemies, this is its enemy index.
