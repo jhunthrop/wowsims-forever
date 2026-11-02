@@ -62,18 +62,11 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 		attackSpeed = 2.5
 	}
 
-	baseMinDamage = 18.17 * attackSpeed
-	baseMaxDamage = 27.66 * attackSpeed
+	levelScale := hunterPetDamageLevelScale(hunter.Level)
+	baseMinDamage = 18.17 * attackSpeed * levelScale
+	baseMaxDamage = 27.66 * attackSpeed * levelScale
 
-	hunterPetBaseStats = stats.Stats{
-		stats.Strength:  136,
-		stats.Agility:   100,
-		stats.Stamina:   274,
-		stats.Intellect: 50,
-		stats.Spirit:    80,
-
-		stats.AttackPower: -20,
-	}
+	hunterPetBaseStats = hunterPetBaseStatsAtLevel(hunter.Level)
 
 	hp := &HunterPet{
 		Pet:         core.NewPet(petConfig.Name, &hunter.Character, hunterPetBaseStats, hunter.makeStatInheritance(), true, false),
@@ -482,4 +475,40 @@ var PetConfigs = map[proto.Hunter_Options_PetType]PetConfig{
 		Armor:  1.05,
 		Damage: 1.00,
 	},
+}
+
+// hunterPetLevel60Stamina is the engine's level-60 pet Stamina. Era's
+// pet_levelstats carries 256; the engine's level-60 sheet (wowsims) is
+// kept, and lower levels scale it by the table's Stamina curve.
+const hunterPetLevel60Stamina = 274.0
+
+// hunterPetBaseStatsAtLevel is a pet's base sheet at the hunter's level (a
+// hunter's pet is its own level): Era's pet_levelstats (hunterPetLevelStats),
+// with Stamina on the engine's level-60 value, and the -20 attack power the
+// pet's Strength x 2 is offset by.
+func hunterPetBaseStatsAtLevel(level int32) stats.Stats {
+	row := hunterPetLevelStats[hunterPetStatsIndex(level)]
+	top := hunterPetLevelStats[len(hunterPetLevelStats)-1]
+	return stats.Stats{
+		stats.Strength:  row[0],
+		stats.Agility:   row[1],
+		stats.Stamina:   hunterPetLevel60Stamina * row[2] / top[2],
+		stats.Intellect: row[3],
+		stats.Spirit:    row[4],
+
+		stats.AttackPower: -20,
+	}
+}
+
+// hunterPetStatsIndex is level's row in hunterPetLevelStats, clamped to 1..60.
+func hunterPetStatsIndex(level int32) int {
+	return int(min(max(level, 1), int32(len(hunterPetLevelStats)))) - 1
+}
+
+// hunterPetDamageLevelScale scales the level-60 weapon roll to the pet's
+// level: Era's cores make a hunter pet's weapon damage proportional to its
+// level (vmangos Pet::InitStatsForLevel: petlevel x 1.2075 to 1.5225 a 2 s
+// swing; cmangos linear in petlevel).
+func hunterPetDamageLevelScale(level int32) float64 {
+	return float64(hunterPetStatsIndex(level)+1) / float64(len(hunterPetLevelStats))
 }
