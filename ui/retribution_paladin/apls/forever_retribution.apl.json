@@ -338,7 +338,7 @@
       }
     },
     {
-      "notes": "Consecration last, while the mana left after it still pays for the seal, Judgement and Holy Strike and the pool is no more than a fifth behind the fight's pace. It is the most expensive button on the list; the pace line is mana percent at least 0.8 times the fight's remaining percent. Owner ruling 2, round 10: a flat 'mana above 65 percent' line used to stand here; it left a fifth to a half of the pool unspent at the end of every fight. With no guard at all Consecration drains the pool and the seal lapses, which costs more than it gains on the bare bands. The pace line spends the pool by the end of the fight instead.",
+      "notes": "Consecration last, while the mana left after it still pays for the seal, Judgement and Holy Strike and the pool is no more than a fifth behind the fight's pace. It is the most expensive button on the list; the pace line is mana percent at least 0.8 times the fight's remaining percent. A flat 'mana above 65 percent' line left a fifth to a half of the pool unspent at the end of every fight; with no guard at all Consecration drains the pool and the seal lapses. The pace line spends the pool by the end of the fight instead.",
       "action": {
         "castSpell": {
           "spellId": {
