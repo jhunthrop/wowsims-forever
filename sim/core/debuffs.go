@@ -48,21 +48,9 @@ func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, rai
 		MakePermanent(CurseOfShadowAura(target))
 	}
 
-	if debuffs.WintersChill && targetIdx == 0 {
-		aura := WintersChillAura(target)
-		SchedulePeriodicDebuffApplication(aura, PeriodicActionOptions{
-			Period:          time.Millisecond * 1500,
-			NumTicks:        5,
-			TickImmediately: true,
-			Priority:        ActionPriorityDOT, // High prio
-			OnAction: func(sim *Simulation) {
-				aura.Activate(sim)
-				if aura.IsActive() {
-					aura.AddStack(sim)
-				}
-			},
-		}, raid)
-	}
+	// debuffs.WintersChill gives the raid nothing: Forever's Winter's Chill
+	// (12579, aura 271) raises only the applying mage's own Cone of Cold, and
+	// a Frost mage applies its own stacks (sim/mage/talents.go).
 
 	if debuffs.GiftOfArthas {
 		MakePermanent(GiftOfArthasAura(target))

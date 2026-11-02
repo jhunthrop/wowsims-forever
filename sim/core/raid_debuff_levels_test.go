@@ -100,3 +100,15 @@ func TestCasterOnlyDebuffsGiveTheRaidNothing(t *testing.T) {
 		}
 	}
 }
+
+// Winter's Chill (12579) is aura 271 in Forever: Frost damage taken from the
+// applying mage, whose own next Cone of Cold reads and spends the stacks. The
+// raid flag put five stacks on the boss under the mage's own aura label, so a
+// Frost mage's Cone of Cold spent stacks its talent never applied (round 9).
+func TestRaidWintersChillGivesNoOneStacks(t *testing.T) {
+	target := newDebuffTarget(60)
+	applyDebuffEffects(target, 0, &proto.Debuffs{WintersChill: true}, &proto.Raid{})
+	if target.GetAura("Winter's Chill") != nil {
+		t.Error("the raid's Winter's Chill put an aura on the target")
+	}
+}
