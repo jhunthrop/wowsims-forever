@@ -81,6 +81,7 @@ func (warlock *Warlock) ApplyTalents() {
 	warlock.applyMasterSummoner()
 	warlock.applyMasterDemonologist()
 	warlock.applyDemonicSacrifice()
+	warlock.applyDemonicPact()
 	warlock.applySoulLink()
 	warlock.applyFelVitality()
 	warlock.applyDemonicEnergies()
@@ -611,6 +612,24 @@ func (warlock *Warlock) applySoulLink() {
 			warlock.ActivePet.SoulLinkAura.Activate(sim)
 		},
 	})
+}
+
+// demonicPactTalentSpellID is Demonic Pact's talent spell (talent 105890's
+// rank in the client's talent table).
+const demonicPactTalentSpellID = 425464
+
+// applyDemonicPact registers the passive as a permanent aura so a rotation
+// can read the talent (auraIsKnown): Demonology's prepull sacrifices the Imp
+// before summoning the Succubus only when Pact keeps the sacrifice. The
+// effect itself lives in applyDemonicSacrifice's summon hook.
+func (warlock *Warlock) applyDemonicPact() {
+	if !warlock.Talents.DemonicPact {
+		return
+	}
+	core.MakePermanent(warlock.RegisterAura(core.Aura{
+		Label:    "Demonic Pact",
+		ActionID: core.ActionID{SpellID: demonicPactTalentSpellID},
+	}))
 }
 
 func (warlock *Warlock) applyDemonicSacrifice() {

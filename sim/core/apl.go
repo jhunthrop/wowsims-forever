@@ -99,6 +99,12 @@ func (unit *Unit) newAPLRotation(config *proto.APLRotation) *APLRotation {
 								})
 							}
 							unit.RegisterPrepullAction(doAt, func(sim *Simulation) {
+								// A prepull action runs only when its condition holds, as a
+								// priority-list action does: a rotation can gate a prepull step
+								// on the build (a known talent aura, say).
+								if action.condition != nil && !action.condition.GetBool(sim) {
+									return
+								}
 								if hold := prepullLandingHold(sim, action); hold > 0 {
 									StartDelayedAction(sim, DelayedActionOptions{
 										DoAt:     sim.CurrentTime + hold,

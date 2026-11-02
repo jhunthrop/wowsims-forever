@@ -3,6 +3,13 @@
   "prepullActions": [
     {
       "action": {
+        "condition": {
+          "auraIsKnown": {
+            "auraId": {
+              "spellId": 425464
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 688
@@ -17,6 +24,13 @@
     },
     {
       "action": {
+        "condition": {
+          "auraIsKnown": {
+            "auraId": {
+              "spellId": 425464
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 18788
