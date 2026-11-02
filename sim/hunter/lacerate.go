@@ -48,6 +48,7 @@ func (hunter *Hunter) getLacerateConfig(rank int) core.SpellConfig {
 			return hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance
 		},
 
+		BonusCritRating:  hunter.savageStrikesCritRating(),
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		ClientBaseDamage: damage.Range(casterLevel),
