@@ -133,6 +133,33 @@
       }
     },
     {
+      "notes": "Faerie Fire in Bear Form whenever the target lacks it: free in form with a 6 second cooldown (Bear Form (Passive)), and it carries threat in Bear Form since the 15 October beta notes; it keeps the armor reduction up when no raid Faerie Fire is on the target (tag 1 is the in-form cast).",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsActive": {
+                "sourceUnit": {
+                  "type": "CurrentTarget"
+                },
+                "auraId": {
+                  "spellId": 9907,
+                  "rank": 4
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9907,
+            "rank": 4,
+            "tag": 1
+          }
+        }
+      }
+    },
+    {
       "notes": "Queue Maul on the next swing whenever 15 rage is on hand, which keeps the rest for Primal Bite and Lacerate.",
       "action": {
         "castSpell": {
