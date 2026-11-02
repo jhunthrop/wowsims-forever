@@ -98,6 +98,13 @@ func AddWeaponEffect(id int32, weaponEffect ApplyWeaponEffect) {
 			panic(fmt.Sprintf("No enchant with ID: %d", id))
 		}
 	}
+	AddClientWeaponEffect(id, weaponEffect)
+}
+
+// AddClientWeaponEffect registers a weapon effect for a Forever enchant that
+// the site's simdb carries and this fork's own database lacks (the 1.60
+// scopes), as NewClientItemEffect does for items.
+func AddClientWeaponEffect(id int32, weaponEffect ApplyWeaponEffect) {
 	if HasWeaponEffect(id) {
 		panic(fmt.Sprintf("Cannot add multiple effects for one item: %d, %#v", id, weaponEffect))
 	}
