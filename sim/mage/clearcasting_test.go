@@ -115,3 +115,20 @@ func TestMissileBarrageAddsToTheOtherCostMods(t *testing.T) {
 		t.Errorf("Arcane Missiles Cost.Multiplier after Clearcasting and Missile Barrage both ended = %d, want 100", got)
 	}
 }
+
+// Round 9 (casters lane): a charge procced by one spell's hit is spent by the
+// next damage cast even when that cast is an instant completing at the
+// proc's moment (a Fire Blast or Ice Lance right after Scorch lands). The
+// old guard skipped every cast at the moment the aura started, so that
+// instant was free and the charge paid for a second spell.
+func TestAnInstantAtTheProcsMomentSpendsClearcasting(t *testing.T) {
+	built, sim, target := newFrostMageSimWithTalents(t, core.DefaultTargetProtoLvl60, clearcastingTestFrostTalents)
+	built.ProcClearcasting(sim, topRank(t, built.Frostbolt))
+	lance := topRank(t, built.IceLance)
+	if !lance.Cast(sim, target) {
+		t.Fatal("Ice Lance did not cast")
+	}
+	if built.ClearcastingAura.IsActive() {
+		t.Error("an Ice Lance at the proc's moment did not spend Clearcasting")
+	}
+}

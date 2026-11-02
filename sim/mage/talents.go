@@ -174,6 +174,12 @@ const (
 	arcaneConcentrationProcCooldown = time.Second
 )
 
+// ProcClearcasting is Arcane Concentration's proc from spell's hit.
+func (mage *Mage) ProcClearcasting(sim *core.Simulation, spell *core.Spell) {
+	mage.clearcastingProc = core.ProcSource{Spell: spell, At: sim.CurrentTime}
+	mage.ClearcastingAura.Activate(sim)
+}
+
 func (mage *Mage) applyArcaneConcentration() {
 	if mage.Talents.ArcaneConcentration == 0 {
 		return
@@ -198,8 +204,9 @@ func (mage *Mage) applyArcaneConcentration() {
 			freeCast.Deactivate()
 		},
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			// OnCastComplete is called after OnSpellHitDealt / etc, so don't deactivate if it was just activated.
-			if aura.RemainingDuration(sim) == aura.Duration {
+			// The spell whose hit procced the charge does not spend it; any
+			// other cast does, an instant at the proc's own moment included.
+			if mage.clearcastingProc.IsFrom(sim, spell) {
 				return
 			}
 			if !spell.Matches(clearcastingMask) || spell.Cost == nil {
@@ -232,7 +239,7 @@ func (mage *Mage) applyArcaneConcentration() {
 			}
 			if sim.Proc(procChance, "Arcane Concentration") {
 				procCooldown.Use(sim)
-				mage.ClearcastingAura.Activate(sim)
+				mage.ProcClearcasting(sim, spell)
 			}
 		},
 	})

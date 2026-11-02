@@ -40,3 +40,26 @@ func TestClearcastingFreesAndIsSpentByTheNextDamageSpell(t *testing.T) {
 		t.Errorf("after the charge, Lightning Bolt costs %v, want %v", got, full)
 	}
 }
+
+// Round 9 (casters lane): Clearcasting from Lightning Bolt A must be spent by
+// the next damage cast B even when B is an instant that completes at the same
+// moment (Fire Nova, a shock). The guard that keeps A from spending its own
+// proc compared the aura's remaining time to its full duration, so an
+// instant cast at the proc's timestamp was free and left the charge for a
+// second free spell. Bare band 50 measured 6.7 free casts a fight from 4.3
+// Clearcasting procs.
+func TestAnInstantAtTheProcsMomentSpendsClearcasting(t *testing.T) {
+	sim, built := newFireNovaShaman(t, 60, elementalTalentsWith(map[int]int{elementalFocusNode: 1}))
+	aura := built.ClearcastingAura
+	bolt := built.LightningBolt[len(built.LightningBolt)-1]
+	nova := topFireNova(t, built)
+	built.ProcClearcasting(sim, bolt)
+	aura.OnCastComplete(aura, sim, bolt)
+	if !aura.IsActive() {
+		t.Fatal("the Lightning Bolt that procced Clearcasting spent it")
+	}
+	aura.OnCastComplete(aura, sim, nova)
+	if aura.IsActive() {
+		t.Error("a Fire Nova cast at the proc's moment did not spend Clearcasting")
+	}
+}
