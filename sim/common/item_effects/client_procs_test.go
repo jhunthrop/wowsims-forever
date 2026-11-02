@@ -528,3 +528,150 @@ func TestBlazingRapierBurnsForTheClientsTwentyATick(t *testing.T) {
 		t.Errorf("Blaze is %v x %d every %v, want 20 x 10 every 3s", dot.SnapshotBaseDamage, dot.NumberOfTicks, dot.TickLength)
 	}
 }
+
+// Era weapon procs whose spell ids Forever kept but retuned (70707
+// SpellEffect and SpellMisc rows; Wowhead Forever server text, read
+// 2026-11-02). Each bleed, poison or drain ticks the client's amount at the
+// client's period for the client's duration.
+func TestRetunedEraProcDotsTickTheClientsRows(t *testing.T) {
+	for _, c := range []struct {
+		name          string
+		item, spellID int32
+		tick          float64
+		ticks         int32
+		period        time.Duration
+	}{
+		// "bleed for 155 damage over 15 sec"
+		{"Bloodrazor", 809, 17504, 31, 5, 3 * time.Second},
+		// "bleed for 105 damage over 5 sec"
+		{"Eskhandar's Left Claw", 18202, 22639, 21, 5, time.Second},
+		// "13 Nature damage every 2 sec ... for 14 sec"
+		{"Hookfang Shanker", 11635, 13526, 13, 7, 2 * time.Second},
+		// "10 Nature damage every 1 sec ... for 10 sec"
+		{"Keris of Zul'Serak", 12582, 16528, 10, 10, time.Second},
+		// "21 Shadow damage every 1 sec ... Lasts for 10 sec"
+		{"Skullforge Reaver", 13361, 17484, 21, 10, time.Second},
+		// "an additional 36 damage over 6 sec"
+		{"Volcanic Hammer", 12792, 18082, 12, 3, 2 * time.Second},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			sim, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, c.item)
+			spell := character.GetSpell(core.ActionID{SpellID: c.spellID})
+			if spell == nil {
+				t.Fatalf("no proc spell %d", c.spellID)
+			}
+			target := sim.Encounter.TargetUnits[0]
+			for i := 0; i < 50 && !spell.Dot(target).IsActive(); i++ {
+				spell.Cast(sim, target)
+			}
+			dot := spell.Dot(target)
+			if !dot.IsActive() {
+				t.Fatal("the periodic effect never applied")
+			}
+			if dot.SnapshotBaseDamage != c.tick || dot.NumberOfTicks != c.ticks || dot.TickLength != c.period {
+				t.Errorf("ticks %v x %d every %v, want %v x %d every %v", dot.SnapshotBaseDamage, dot.NumberOfTicks, dot.TickLength, c.tick, c.ticks, c.period)
+			}
+		})
+	}
+}
+
+// The retuned buff procs: amount and duration.
+func TestRetunedEraProcBuffsMatchTheClient(t *testing.T) {
+	for _, c := range []struct {
+		name          string
+		item, spellID int32
+		duration      time.Duration
+		ap            float64
+	}{
+		// "Increases attack power by 84 for 10 sec."
+		{"Lord General's Sword", 11817, 15602, 10 * time.Second, 84},
+		// "Increases Attack Power by 100, and Attack Power against Undead by an additional 100 for 10 sec."
+		{"Argent Avenger", 13246, 17352, 10 * time.Second, 100},
+		// "Increases Attack Power by 102 and melee attack speed by 6% for 15 sec."
+		{"Ragehammer", 10626, 12686, 15 * time.Second, 102},
+		// "Increases your Attack Speed by 10% for 6 sec."
+		{"Eskhandar's Right Claw", 18203, 22640, 6 * time.Second, 0},
+		// "Increases your attack speed by 15% for 10 sec."
+		{"The Jackhammer", 9423, 13533, 10 * time.Second, 0},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			sim, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, c.item)
+			aura := character.GetAuraByID(core.ActionID{SpellID: c.spellID})
+			if aura == nil {
+				t.Fatalf("no aura %d", c.spellID)
+			}
+			if aura.Duration != c.duration {
+				t.Errorf("lasts %v, want %v", aura.Duration, c.duration)
+			}
+			ap := character.GetStat(stats.AttackPower)
+			aura.Activate(sim)
+			if got := character.GetStat(stats.AttackPower) - ap; math.Abs(got-c.ap) > 1e-6 {
+				t.Errorf("attack power +%v, want +%v", got, c.ap)
+			}
+		})
+	}
+}
+
+// Melee haste of the retuned attack-speed procs, read off the warrior's
+// main-hand swing speed.
+func TestRetunedEraProcHasteMatchesTheClient(t *testing.T) {
+	for _, c := range []struct {
+		name          string
+		item, spellID int32
+		haste         float64
+	}{
+		{"Ragehammer", 10626, 12686, 1.06},
+		{"Eskhandar's Right Claw", 18203, 22640, 1.10},
+		{"The Jackhammer", 9423, 13533, 1.15},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			sim, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, c.item)
+			aura := character.GetAuraByID(core.ActionID{SpellID: c.spellID})
+			before := character.PseudoStats.MeleeSpeedMultiplier
+			aura.Activate(sim)
+			if got := character.PseudoStats.MeleeSpeedMultiplier / before; math.Abs(got-c.haste) > 1e-9 {
+				t.Errorf("melee speed x%v, want x%v", got, c.haste)
+			}
+		})
+	}
+}
+
+// The Cruel Hand of Timmy: Forever's 17505 is "Steals 85 life from target
+// enemy" (Effect 9, Shadow), not Era's -15 to every attribute.
+func TestTheCruelHandOfTimmyStealsLife(t *testing.T) {
+	_, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, 13401)
+	spell := character.GetSpell(core.ActionID{SpellID: 17505})
+	if spell == nil || spell.SpellSchool != core.SpellSchoolShadow {
+		t.Fatal("no Shadow life steal 17505")
+	}
+}
+
+// Armor Shatter (Annihilator) is 165 a stack and Puncture Armor (Bashguuder,
+// Rivenspike) 100 a stack in Forever, three stacks each; Era's were 200.
+func TestArmorProcsReduceTheClientsArmor(t *testing.T) {
+	for _, c := range []struct {
+		name          string
+		item, spellID int32
+		perStack      float64
+	}{
+		{"Annihilator", 12798, 16928, 165},
+		{"Bashguuder", 13204, 17315, 100},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			sim, character := unbuffedCharacter(t, proto.Class_ClassWarrior, proto.ItemSlot_ItemSlotMainHand, c.item)
+			spell := character.GetSpell(core.ActionID{SpellID: c.spellID})
+			if spell == nil {
+				t.Fatalf("no proc spell %d", c.spellID)
+			}
+			target := sim.Encounter.TargetUnits[0]
+			target.AddStatDynamic(sim, stats.Armor, 3000)
+			armor := target.GetStat(stats.Armor)
+			for i := 0; i < 3; i++ {
+				spell.Cast(sim, target)
+			}
+			if got := armor - target.GetStat(stats.Armor); math.Abs(got-3*c.perStack) > 1e-6 {
+				t.Errorf("three stacks take %v armor, want %v", got, 3*c.perStack)
+			}
+		})
+	}
+}
