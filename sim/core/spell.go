@@ -785,15 +785,26 @@ const (
 // levelPenalty is the share of its spell power coefficient a rank the
 // player casts keeps: 1 - (20 - level) * 0.0375 when it is learned below
 // level 20, else all of it (cmangos-classic Unit::CalculateLevelPenalty and
-// vmangos SpellCaster::CalculateLevelPenalty, on direct and periodic damage
-// and healing alike). The client's coefficients carry no penalty of their
-// own. Only a spell the player casts (it has a cost or a cast) is a learned
-// rank: a proc's RequiredLevel is its client spell level (every Seal of
-// Righteousness and Seal of Fury proc is level 1), and how the penalty
-// treats a triggered spell is unsettled, so procs keep their coefficient.
-// Physical abilities take no spell power.
+// vmangos SpellCaster::CalculateLevelPenalty). The client's coefficients
+// carry no penalty of their own. Only a spell the player casts (it has a
+// cost or a cast) is a learned rank: a proc's RequiredLevel is its client
+// spell level (every Seal of Righteousness and Seal of Fury proc is level
+// 1), and how the penalty treats a triggered spell is unsettled, so procs
+// keep their coefficient. Physical abilities take no spell power.
+//
+// Heals take no penalty in Forever. The beta logs' low ranks fit only the
+// whole coefficient: two druids' Rejuvenation ranks 3 (level 16) and 5
+// (28) give one healing power under a 1.16 and a 1.20 multiplier with it,
+// and 0.77 and 0.81, below any talent's, with the penalty; a druid's
+// Healing Touch ranks 2 and 5, a shaman's Healing Wave ranks 1 and 4 and
+// two paladins' Holy Light ranks 3 to 5 fit the same way (sim-accuracy
+// round 11, healers). Damage spells keep the cores' rule: one mage's
+// Arcane Explosion ranks lean the same way, too little to move them.
 func levelPenalty(config SpellConfig) float64 {
 	if config.SpellSchool == SpellSchoolPhysical || !isCastRank(config) {
+		return 1
+	}
+	if config.ProcMask.Matches(ProcMaskSpellHealing) {
 		return 1
 	}
 	return LevelPenalty(config.RequiredLevel)

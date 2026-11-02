@@ -14,8 +14,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | HolyPaladin | 10 | Blessing of Might | 1 | 19740 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 3600000→3600000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 10 | Divine Protection | 0 | 498 | 15.00→15.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 6→6 | 6000→6000 | match |  | n/a | n/a | n/a |
-| HolyPaladin | 10 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714 x0.2875→0.205 | declared, matches |
-| HolyPaladin | 10 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 80.03-94.77→80.03-94.77 | 0.714 x0.4750→0.339 | declared, matches |
+| HolyPaladin | 10 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 10 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 80.03-94.77→80.03-94.77 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 10 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin | 10 | Judgement | 0 | 20271 | 11.52 (6% base mana)→11.52 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin | 10 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 21.85-24.15→21.85-24.15 | 0.429→0.429 | declared, matches |
@@ -39,9 +39,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 20 | Divine Protection | 0 | 5573 | 35.00→35.00 | mana→mana | 300000→300000 | 0→0 | 1500→1500 | 18→18 | 8000→8000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 20 | Exorcism | 1 | 879 | 85.00→85.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 73.73-84.27→73.73-84.27 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 20 | Flash of Light | 1 | 19750 | 35.00→35.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 42.57-49.43→42.57-49.43 | 0.429→0.429 | declared, matches |
-| HolyPaladin | 20 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714 x0.2875→0.205 | declared, matches |
-| HolyPaladin | 20 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714 x0.4750→0.339 | declared, matches |
-| HolyPaladin | 20 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714 x0.7750→0.553 | declared, matches |
+| HolyPaladin | 20 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 20 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 20 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 20 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin | 20 | Holy Strike | 2 | 678 | 9.00→9.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 12→12 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin | 20 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
@@ -80,9 +80,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 30 | Exorcism | 2 | 5614 | 135.00→135.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 135.30-153.10→135.30-153.10 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 30 | Flash of Light | 1 | 19750 | 35.00→35.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 47.19-54.81→47.19-54.81 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 30 | Flash of Light | 2 | 19939 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 66.36-76.04→66.36-76.04 | 0.429→0.429 | declared, matches |
-| HolyPaladin | 30 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714 x0.2875→0.205 | declared, matches |
-| HolyPaladin | 30 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714 x0.4750→0.339 | declared, matches |
-| HolyPaladin | 30 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714 x0.7750→0.553 | declared, matches |
+| HolyPaladin | 30 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 30 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 30 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 30 | Holy Light | 4 | 1026 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 278.35-319.65→278.35-319.65 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 30 | Holy Light | 5 | 1042 | 275.00→275.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 425.16-478.84→425.16-478.84 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 30 | Holy Strike | 1 | 679 | 5.00→5.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
@@ -140,9 +140,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 38 | Flash of Light | 1 | 19750 | 35.00→35.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 47.19-54.81→47.19-54.81 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 38 | Flash of Light | 2 | 19939 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 67.57-77.43→67.57-77.43 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 38 | Flash of Light | 3 | 19940 | 70.00→70.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 101.12-113.68→101.12-113.68 | 0.429→0.429 | declared, matches |
-| HolyPaladin | 38 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714 x0.2875→0.205 | declared, matches |
-| HolyPaladin | 38 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714 x0.4750→0.339 | declared, matches |
-| HolyPaladin | 38 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714 x0.7750→0.553 | declared, matches |
+| HolyPaladin | 38 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 38 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 38 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 38 | Holy Light | 4 | 1026 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 278.35-319.65→278.35-319.65 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 38 | Holy Light | 5 | 1042 | 275.00→275.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 439.74-495.26→439.74-495.26 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 38 | Holy Light | 6 | 3472 | 365.00→365.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 610.16-681.84→610.16-681.84 | 0.714→0.714 | declared, matches |
@@ -214,9 +214,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 40 | Flash of Light | 2 | 19939 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 67.57-77.43→67.57-77.43 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 40 | Flash of Light | 3 | 19940 | 70.00→70.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 102.63-115.37→102.63-115.37 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 40 | Hammer of the Righteous | 0 | 407632 | 59.22 (6% base mana)→59.22 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | 1.00-1.00→1.00-1.00 | 0.214 (convention)→0.000 | declared, matches |
-| HolyPaladin | 40 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714 x0.2875→0.205 | declared, matches |
-| HolyPaladin | 40 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714 x0.4750→0.339 | declared, matches |
-| HolyPaladin | 40 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714 x0.7750→0.553 | declared, matches |
+| HolyPaladin | 40 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 40 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 40 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 40 | Holy Light | 4 | 1026 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 278.35-319.65→278.35-319.65 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 40 | Holy Light | 5 | 1042 | 275.00→275.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 439.74-495.26→439.74-495.26 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 40 | Holy Light | 6 | 3472 | 365.00→365.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 617.34-689.86→617.34-689.86 | 0.714→0.714 | declared, matches |
@@ -298,9 +298,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 50 | Flash of Light | 5 | 19942 | 115.00→115.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | n/a | match |  | 210.39-235.61→210.39-235.61 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 50 | Hammer of Wrath | 1 | 24275 | 295.00→295.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 44→44 | n/a | match |  | 285.00-315.00→285.00-315.00 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 50 | Hammer of the Righteous | 0 | 407632 | 75.42 (6% base mana)→75.42 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | 1.00-1.00→1.00-1.00 | 0.214 (convention)→0.000 | declared, matches |
-| HolyPaladin | 50 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714 x0.2875→0.205 | declared, matches |
-| HolyPaladin | 50 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714 x0.4750→0.339 | declared, matches |
-| HolyPaladin | 50 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714 x0.7750→0.553 | declared, matches |
+| HolyPaladin | 50 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 50 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 50 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 50 | Holy Light | 4 | 1026 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 278.35-319.65→278.35-319.65 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 50 | Holy Light | 5 | 1042 | 275.00→275.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 439.74-495.26→439.74-495.26 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 50 | Holy Light | 6 | 3472 | 365.00→365.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 628.11-701.89→628.11-701.89 | 0.714→0.714 | declared, matches |
@@ -419,9 +419,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 60 | Hammer of Wrath | 2 | 24274 | 360.00→360.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 52→52 | n/a | match |  | 381.42-421.58→381.42-421.58 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 60 | Hammer of Wrath | 3 | 24239 | 425.00→425.00 | mana→mana | 6000→6000 | 1000→1000 | 1000→1000 | 60→60 | n/a | match |  | 473.57-522.43→473.57-522.43 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 60 | Hammer of the Righteous | 0 | 407632 | 90.72 (6% base mana)→90.72 | mana→mana | 6000→6000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | 1.00-1.00→1.00-1.00 | 0.214 (convention)→0.000 | declared, matches |
-| HolyPaladin | 60 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714 x0.2875→0.205 | declared, matches |
-| HolyPaladin | 60 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714 x0.4750→0.339 | declared, matches |
-| HolyPaladin | 60 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714 x0.7750→0.553 | declared, matches |
+| HolyPaladin | 60 | Holy Light | 1 | 635 | 35.00→35.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 1→1 | n/a | match |  | 41.90-50.50→41.90-50.50 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 60 | Holy Light | 2 | 639 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 6→6 | n/a | match |  | 81.04-95.96→81.04-95.96 | 0.714→0.714 | declared, matches |
+| HolyPaladin | 60 | Holy Light | 3 | 647 | 110.00→110.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 150.27-176.73→150.27-176.73 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 60 | Holy Light | 4 | 1026 | 190.00→190.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 278.35-319.65→278.35-319.65 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 60 | Holy Light | 5 | 1042 | 275.00→275.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 439.74-495.26→439.74-495.26 | 0.714→0.714 | declared, matches |
 | HolyPaladin | 60 | Holy Light | 6 | 3472 | 365.00→365.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 628.11-701.89→628.11-701.89 | 0.714→0.714 | declared, matches |

@@ -4,7 +4,6 @@ import (
 	"math"
 	"testing"
 
-	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/spellconst"
 	"github.com/wowsims/classic/sim/core/stats"
 )
@@ -57,9 +56,8 @@ func assertHealNumbers(t *testing.T, f fight, castID, healID int32) spellTotals 
 	if !ok {
 		t.Fatalf("spell %d has no effect 0", healID)
 	}
-	// A rank learned below level 20 keeps only part of its coefficient
-	// (core.LevelPenalty); the cast's level is the rank's.
-	coefficient := heal.Effects[0].ResolvedSPCoefficient * core.LevelPenalty(clientSpell(t, castID).SpellLevel)
+	// A heal keeps its whole coefficient at any learn level (core levelPenalty).
+	coefficient := heal.Effects[0].ResolvedSPCoefficient
 	want := (low+high)/2 + coefficient*healingPower
 
 	totals := totalsOf(f.run(t, numericRuns), healID)

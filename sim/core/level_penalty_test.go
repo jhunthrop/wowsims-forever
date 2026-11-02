@@ -6,12 +6,11 @@ import (
 	"time"
 )
 
-// A spell learned below level 20 gains less from spell power: its bonus
-// coefficient is scaled by 1 - (20 - level) * 0.0375 (cmangos-classic
-// Unit::CalculateLevelPenalty, vmangos SpellCaster::CalculateLevelPenalty,
-// applied to direct and periodic damage and healing alike). The client's
-// coefficients carry no penalty of their own: Healing Touch rank 1 (5185,
-// level 1) is 0.429, its cast time's 1.5 / 3.5.
+// A damage spell learned below level 20 gains less from spell power: its
+// bonus coefficient is scaled by 1 - (20 - level) * 0.0375 (cmangos-classic
+// Unit::CalculateLevelPenalty, vmangos SpellCaster::CalculateLevelPenalty).
+// The client's coefficients carry no penalty of their own: Healing Touch
+// rank 1 (5185, level 1) is 0.429, its cast time's 1.5 / 3.5.
 func TestSpellsLearnedBelowTwentyGainLessFromSpellPower(t *testing.T) {
 	_, caster, _ := newPeriodicCritFixture(t, 0)
 	register := func(id int32, level int, school SpellSchool) *Spell {
@@ -19,8 +18,7 @@ func TestSpellsLearnedBelowTwentyGainLessFromSpellPower(t *testing.T) {
 			ActionID:         ActionID{SpellID: id},
 			SpellSchool:      school,
 			DefenseType:      DefenseTypeMagic,
-			Flags:            SpellFlagHelpful,
-			ProcMask:         ProcMaskSpellHealing,
+			ProcMask:         ProcMaskSpellDamage,
 			RequiredLevel:    level,
 			ManaCost:         ManaCostOptions{FlatCost: 50},
 			Cast:             CastConfig{DefaultCast: Cast{GCD: GCDDefault}},
@@ -54,6 +52,47 @@ func TestSpellsLearnedBelowTwentyGainLessFromSpellPower(t *testing.T) {
 		}
 		if got, want := spell.Hot(caster).BonusCoefficient, 0.2*c.factor; math.Abs(got-want) > 1e-9 {
 			t.Errorf("level %d %v spell: periodic coefficient %.4f, want %.4f", c.level, c.school, got, want)
+		}
+	}
+}
+
+// A heal keeps its whole coefficient at any learn level. Forever's beta logs
+// (foreverlogs.gg, levels 27 to 35) fit no sub-20 penalty on heals: a
+// druid's Rejuvenation ranks 3 (level 16) and 5 (28), two druids, tick
+// 59.6 and 81.7, and 60.8 and 83.7, which is the same healing power under
+// one multiplier (1.16 and 1.20) only with the whole 0.2; with the penalty
+// the multiplier falls to 0.77 and 0.81, below any talent's. A druid's
+// Healing Touch ranks 2 and 5, a shaman's Healing Wave ranks 1 and 4 and
+// two paladins' Holy Light ranks 3 to 5 say the same (multipliers 0.50 to
+// 0.67 under the penalty).
+func TestAHealLearnedBelowTwentyKeepsItsCoefficient(t *testing.T) {
+	_, caster, _ := newPeriodicCritFixture(t, 0)
+	for _, level := range []int{1, 16} {
+		heal := caster.RegisterSpell(SpellConfig{
+			ActionID:         ActionID{SpellID: int32(100 + level)},
+			SpellSchool:      SpellSchoolNature,
+			DefenseType:      DefenseTypeMagic,
+			Flags:            SpellFlagHelpful,
+			ProcMask:         ProcMaskSpellHealing,
+			RequiredLevel:    level,
+			ManaCost:         ManaCostOptions{FlatCost: 50},
+			Cast:             CastConfig{DefaultCast: Cast{GCD: GCDDefault}},
+			DamageMultiplier: 1,
+			ThreatMultiplier: 1,
+			BonusCoefficient: 0.8,
+			Hot: DotConfig{
+				Aura:             Aura{Label: "Heal Level Test " + string(rune('A'+level))},
+				NumberOfTicks:    4,
+				TickLength:       3 * time.Second,
+				BonusCoefficient: 0.2,
+				OnTick:           func(*Simulation, *Unit, *Dot) {},
+			},
+		})
+		if heal.BonusCoefficient != 0.8 {
+			t.Errorf("a heal learned at %d: direct coefficient %.4f, want 0.8", level, heal.BonusCoefficient)
+		}
+		if got := heal.Hot(caster).BonusCoefficient; got != 0.2 {
+			t.Errorf("a heal learned at %d: periodic coefficient %.4f, want 0.2", level, got)
 		}
 	}
 }
