@@ -193,6 +193,45 @@
       }
     },
     {
+      "notes": "Wrath as the filler while the mana pool is behind the fight's pace and Innervate is cooling down. With Improved Wrath, Wrath costs half as much and casts in half the time of Starfire, so a druid that would otherwise run dry keeps casting. Below 40 there is no Innervate, so the pace alone decides.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "or": {
+                "vals": [
+                  {
+                    "cmp": {
+                      "op": "OpGt",
+                      "lhs": {
+                        "currentManaPercent": {}
+                      },
+                      "rhs": {
+                        "remainingTimePercent": {}
+                      }
+                    }
+                  },
+                  {
+                    "spellIsReady": {
+                      "spellId": {
+                        "spellId": 29166
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9912,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
       "notes": "Starfire is the rest of the rotation once Moonfire and Insect Swarm are ticking, spending the Eclipse charges Wrath banked.",
       "action": {
         "castSpell": {
