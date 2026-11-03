@@ -49,8 +49,8 @@ character_stats_results: {
 stat_weights_results: {
  key: "TestFeralTank-Phase1-StatWeights-Default"
  value: {
-  weights: 0.4822
-  weights: 0.203
+  weights: 0.48287
+  weights: 0.26699
   weights: 0
   weights: 0
   weights: 0
@@ -63,22 +63,22 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 4.1143
+  weights: 4.91234
   weights: 0
   weights: 0
-  weights: 0.19059
+  weights: 0.19086
   weights: 0
   weights: 0
-  weights: 13.20507
+  weights: 14.3312
   weights: 0
   weights: 0
   weights: 0
-  weights: 0.00899
+  weights: -0.0122
   weights: 0
-  weights: -0.09778
+  weights: -0.31855
   weights: 0
   weights: 0
-  weights: -0.19103
+  weights: 0.15446
   weights: 0
   weights: 0
   weights: 0
@@ -181,9 +181,9 @@ dps_results: {
 dps_results: {
  key: "TestFeralTank-Phase1-Average-Default"
  value: {
-  dps: 627.93842
-  tps: 1713.50203
-  dtps: 608.31278
+  dps: 633.67273
+  tps: 1729.95841
+  dtps: 694.71359
  }
 }
 dps_results: {
@@ -210,29 +210,29 @@ dps_results: {
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-NoBuffs-Tank-Consumes-LongMultiTarget"
  value: {
-  dps: 1.28498
-  tps: 18.42494
+  dps: 0.66509
+  tps: 19.77582
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-NoBuffs-Tank-Consumes-LongSingleTarget"
  value: {
-  dps: 1.28498
-  tps: 8.68744
+  dps: 0.66509
+  tps: 6.98845
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-NoBuffs-Tank-Consumes-ShortSingleTarget"
  value: {
-  dps: 6.4249
-  tps: 27.2372
+  dps: 3.32547
+  tps: 18.74226
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 728.94156
-  tps: 1983.80514
-  dtps: 534.89019
+  dps: 742.85554
+  tps: 2024.74781
+  dtps: 609.62946
  }
 }

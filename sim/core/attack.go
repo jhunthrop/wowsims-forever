@@ -103,13 +103,12 @@ func (weapon *Weapon) GetSpellSchool() SpellSchool {
 }
 
 func (weapon *Weapon) EnemyWeaponDamage(sim *Simulation, attackPower float64, damageSpread float64) float64 {
-	// Maximum damage range is 133% of minimum damage; AP contribution is % of minimum damage roll.
-	// Patchwerk follows special damage range rules.
-	// TODO: Scrape more logs to determine these values more accurately. AP defined in constants.go
-
+	// The weapon roll runs from the minimum to (1 + damageSpread) times it;
+	// attack power then scales the whole roll (EnemyAutoAttackAPCoefficient),
+	// so an attack power reduction cuts every swing by the same share.
 	rand := 1 + damageSpread*sim.RandomFloat("Enemy Weapon Damage")
 
-	return weapon.BaseDamageMin * (rand + attackPower*EnemyAutoAttackAPCoefficient)
+	return weapon.BaseDamageMin * rand * (1 + attackPower*EnemyAutoAttackAPCoefficient)
 }
 
 func (weapon *Weapon) BaseDamage(sim *Simulation) float64 {

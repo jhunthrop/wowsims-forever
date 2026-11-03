@@ -23,7 +23,7 @@ func addVaelastraszTheCorrupt(bossPrefix string) {
 			Stats: stats.Stats{
 				stats.Health:      3_331_000,
 				stats.Armor:       3731, // TODO:
-				stats.AttackPower: 805,  // TODO: Unknown attack power
+				stats.AttackPower: 268,  // a level 63 warrior-class creature (cmangos classic-db creature_template_classlevelstats; core.EnemyAutoAttackAPCoefficient)
 				// TODO: Resistances
 			}.ToFloatArray(),
 

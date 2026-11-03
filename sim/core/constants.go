@@ -36,8 +36,17 @@ const MissDodgeParryBlockCritChancePerDefense = 0.04
 
 const DefenseRatingToChanceReduction = (1.0 / DefenseRatingPerDefense) * MissDodgeParryBlockCritChancePerDefense / 100
 
-// Updated based on formulas supplied by InDebt on WoWSims Discord
-const EnemyAutoAttackAPCoefficient = 1.0 / (14.0 * 177.0)
+// EnemyAutoAttackAPCoefficient is the share of a creature's rolled weapon
+// damage each point of its attack power adds: a swing is weapon damage x
+// (1 + attack power x 0.15873%), so a level 63 boss's ~270 attack power is
+// about 30% of its swing and Demoralizing Shout takes a share of the whole
+// swing away. Classic testing ("Boss Attacks and You", Blizzard Classic
+// forums, 2020-03-03) states the coefficient; vmangos
+// Creature::UpdateDamagePhysical (weapon damage x (0.7 + 0.3 x AP / database
+// AP), level 63 warrior-class database AP 268) gives the same slope. The
+// Wrath fork's 1 / (14 x 177) of the minimum roll made 270 attack power
+// under 9% of the swing.
+const EnemyAutoAttackAPCoefficient = 1.0 / 630.0
 
 const AverageMagicPartialResistPerLevelMultiplier = 0.02
 

@@ -109,10 +109,10 @@ func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, rai
 	}
 
 	if debuffs.DemoralizingRoar != proto.TristateEffect_TristateEffectMissing {
-		MakePermanent(DemoralizingRoarAura(target, GetTristateValueInt32(debuffs.DemoralizingRoar, 0, 5)))
+		MakePermanent(DemoralizingRoarAura(target))
 	}
 	if debuffs.DemoralizingShout != proto.TristateEffect_TristateEffectMissing {
-		MakePermanent(DemoralizingShoutAura(target, 0, GetTristateValueInt32(debuffs.DemoralizingShout, 0, 5)))
+		MakePermanent(DemoralizingShoutAura(target))
 	}
 	if debuffs.HuntersMark != proto.TristateEffect_TristateEffectMissing {
 		MakePermanent(HuntersMarkAura(target, GetTristateValueInt32(debuffs.HuntersMark, 0, 5)))
@@ -760,31 +760,30 @@ func ExposeWeaknessAura(target *Unit) *Aura {
 	return aura
 }
 
-func DemoralizingRoarAura(target *Unit, points int32) *Aura {
-	baseAPReduction := 138.0
-
+// DemoralizingRoarAura is the raid's Demoralizing Roar: the rank the raid's
+// level has learned, at that level (DemoralizingRoarRaidRanks).
+func DemoralizingRoarAura(target *Unit) *Aura {
+	rank, _ := raidDebuffRank(DemoralizingRoarRaidRanks, target)
 	aura := target.GetOrRegisterAura(Aura{
-		Label:    "DemoralizingRoar-" + strconv.Itoa(int(points)),
-		ActionID: ActionID{SpellID: 9898},
+		Label:    "DemoralizingRoar",
+		ActionID: ActionID{SpellID: rank.SpellID},
 		Duration: time.Second * 30,
 	})
-	apReductionEffect(aura, math.Floor(baseAPReduction*(1+0.08*float64(points))))
+	apReductionEffect(aura, rank.At(raidDebuffLevel(target)))
 	return aura
 }
 
 const DemoralizingShoutRanks = 5
 
 var DemoralizingShoutSpellId = [DemoralizingShoutRanks + 1]int32{0, 1160, 6190, 11554, 11555, 11556}
-var DemoralizingShoutBaseAP = [DemoralizingShoutRanks + 1]float64{0, 45, 56, 76, 111, 146}
 var DemoralizingShoutLevel = [DemoralizingShoutRanks + 1]int{0, 14, 24, 34, 44, 54}
 
-func DemoralizingShoutAura(target *Unit, boomingVoicePts int32, impDemoShoutPts int32) *Aura {
-	rank := int32(5)
-	return DemoralizingShoutAuraFor(target,
-		"DemoralizingShout-"+strconv.Itoa(int(impDemoShoutPts)),
-		DemoralizingShoutSpellId[rank],
-		math.Floor(DemoralizingShoutBaseAP[rank]*(1+0.08*float64(impDemoShoutPts))),
-		time.Duration(float64(time.Second*30)*(1+0.1*float64(boomingVoicePts))))
+// DemoralizingShoutAura is the raid's Demoralizing Shout: the rank the
+// raid's level has learned, at that level (DemoralizingShoutRaidRanks).
+func DemoralizingShoutAura(target *Unit) *Aura {
+	rank, _ := raidDebuffRank(DemoralizingShoutRaidRanks, target)
+	return DemoralizingShoutAuraFor(target, "DemoralizingShout", rank.SpellID,
+		rank.At(raidDebuffLevel(target)), 45*time.Second)
 }
 
 // DemoralizingShoutAuraFor is the attack power reduction a Demoralizing

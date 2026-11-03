@@ -19,7 +19,7 @@ func addLevel60(bossPrefix string) {
 			Stats: stats.Stats{
 				stats.Health:      127_393, // TODO:
 				stats.Armor:       3731,    // TODO:
-				stats.AttackPower: 805,     // TODO:
+				stats.AttackPower: 268,     // a level 63 warrior-class creature (cmangos classic-db creature_template_classlevelstats; core.EnemyAutoAttackAPCoefficient)
 			}.ToFloatArray(),
 
 			SpellSchool:      proto.SpellSchool_SpellSchoolPhysical,

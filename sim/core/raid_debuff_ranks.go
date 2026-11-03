@@ -62,6 +62,25 @@ var (
 		{SpellID: 1311680, Level: 50, Amount: 75},
 	}
 
+	// Demoralizing Shout and Demoralizing Roar: melee attack power removed
+	// (aura 99, the sign flipped), the rank's base points plus its points
+	// per level up to its max level. Forever has no Improved Demoralizing
+	// Shout or Roar talent.
+	DemoralizingShoutRaidRanks = BuffRanks{
+		{SpellID: 1160, Level: 14, Amount: 49, PerLevel: 1.4, MaxLevel: 24},
+		{SpellID: 6190, Level: 24, Amount: 77, PerLevel: 1.4, MaxLevel: 34},
+		{SpellID: 11554, Level: 34, Amount: 98, PerLevel: 1.4, MaxLevel: 44},
+		{SpellID: 11555, Level: 44, Amount: 147, PerLevel: 1.4, MaxLevel: 54},
+		{SpellID: 11556, Level: 54, Amount: 196, PerLevel: 1.4, MaxLevel: 64},
+	}
+	DemoralizingRoarRaidRanks = BuffRanks{
+		{SpellID: 99, Level: 10, Amount: 46, PerLevel: 1.0, MaxLevel: 20},
+		{SpellID: 1735, Level: 20, Amount: 74, PerLevel: 1.4, MaxLevel: 30},
+		{SpellID: 9490, Level: 32, Amount: 95, PerLevel: 1.0, MaxLevel: 42},
+		{SpellID: 9747, Level: 42, Amount: 144, PerLevel: 1.4, MaxLevel: 52},
+		{SpellID: 9898, Level: 52, Amount: 193, PerLevel: 1.4, MaxLevel: 62},
+	}
+
 	// Hunter's Mark: ranged attack power against the target (effect 1,
 	// aura 127). Rank 4 is 14325, the rank SkillLineAbility teaches.
 	HuntersMarkRanks = BuffRanks{
