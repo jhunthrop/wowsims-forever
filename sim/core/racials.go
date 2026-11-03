@@ -189,10 +189,6 @@ const (
 	// 26 October notes ("increases Spirit by 10% (was 5%)") and the
 	// 30 October hotfix cache; the shipped 1.60.1.70707 row still reads 5.
 	humanSpiritMultiplier = 1.10
-	// commandPetDamageMultiplier is Orc's Command, re-added in Blizzard's
-	// 26 October notes ("increasing Warlock and Hunter pet damage by 5%")
-	// in place of Savage's 1% crit, which the same notes remove.
-	commandPetDamageMultiplier = 1.05
 	// windBlessedHasteMultiplier is Skyborne's Wind Blessed (1259710):
 	// 26 October notes, "Haste bonus reduced to 2% (was 3%)"; the shipped
 	// 1.60.1.70707 rows still read 3.
@@ -243,21 +239,8 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "Command", Kind: RacialPassive, Confirmed: true,
-			Note: "hunter and warlock pets deal 5% more damage (20576 ClassMask 4, 20575 ClassMask 256; 26 October notes; Savage's 1% crit is removed)",
-			Apply: func(character *Character) {
-				// The client's damage is on hunter and warlock pets only
-				// (20576 ClassMask 4, 20575 ClassMask 256); the other
-				// classes' Command is the dummy 21563, so an item guardian
-				// of an orc warrior or shaman gains nothing.
-				if character.Class != proto.Class_ClassHunter && character.Class != proto.Class_ClassWarlock {
-					return
-				}
-				// Pets are added while the class agent is built, before
-				// applyAllEffects runs the racials, so every pet is here.
-				for _, pet := range character.Pets {
-					pet.PseudoStats.DamageDealtMultiplier *= commandPetDamageMultiplier
-				}
-			},
+			Note:  "hunter and warlock pets deal 5% more damage (20576 ClassMask 4, 20575 ClassMask 256, each +5 to the pet's Tamed Pet Passive); the warlock's Imp Firebolt and Succubus Lash of Pain take 5% more on top (20575 effect 2, 1.60.1.70753)",
+			Apply: applyCommand,
 		},
 		{
 			Name: "Hardiness", Kind: RacialPassive, Confirmed: true,
@@ -438,9 +421,10 @@ var racialsByRace = map[proto.Race][]Racial{
 				// 5% Health, the usual multiplicative stat dependency
 				// every other "+X%" racial in this file uses. The 1% Hit an
 				// early demo transcription gave it is in neither the
-				// 1.60.1.70707 table nor Wowhead Forever's live text; the
-				// table's 2% critical strike bonus (aura 163), which the live
-				// text no longer shows, is open in the round 4 report.
+				// 1.60.1.70707 table nor Wowhead Forever's live text. The 2%
+				// critical strike damage of earlier builds (aura 163) is gone:
+				// 20550 is one effect, aura 133 at 5, in 70707 and 70753, and
+				// the tooltip reads "Total Health increased by 5%".
 				character.MultiplyStat(stats.Health, 1.05)
 			},
 		},
@@ -490,7 +474,7 @@ var racialsByRace = map[proto.Race][]Racial{
 	proto.Race_RaceTroll: {
 		{
 			Name: "Berserking", Kind: RacialActive, Confirmed: true,
-			Note: "client 20554: +10% spellcasting and attack speed for 10 s, 3 min cooldown, no resource cost; the engine's custom-percentage cooldowns (15 to 30) are APL compatibility tags, not client rows",
+			Note: "client 20554: +10% spellcasting and attack speed for 15 s, 3 min cooldown, no resource cost; the engine's custom-percentage cooldowns (15 to 30) are APL compatibility tags, not client rows",
 			Apply: func(character *Character) {
 				// Haste is NOT merged (research/08-stats.md 12.1 item 5),
 				// so the aura sets both melee/ranged and spell haste.
@@ -558,8 +542,9 @@ const expansiveMindEnergyCap = 100
 
 // Berserking (client 20554): effects aura 319, 140 and 65 at 10 each and a
 // 3 min cooldown, with no resource cost. The duration is 15 s: Blizzard's
-// 27 October notes ("increased to 15 seconds (was 10 seconds)") and the
-// 30 October hotfix cache, over the shipped 10 s (SpellDuration 1). A customPercentage of 0 is the client row; any other value makes a
+// 27 October notes ("increased to 15 seconds (was 10 seconds)"), and the
+// 1.60.1.70753 client ships it (SpellMisc DurationIndex 15000 ms).
+// A customPercentage of 0 is the client row; any other value makes a
 // cooldown hard-coded to that percentage, which existing APLs address by
 // tag.
 const (

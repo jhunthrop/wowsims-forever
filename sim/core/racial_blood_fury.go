@@ -10,7 +10,10 @@ import (
 // for 15 s", 2 min cooldown, and no global cooldown (SpellCooldowns
 // StartRecoveryTime 0). Its three effects are aura 166 (attack power
 // percent), 167 (ranged attack power percent) and 317 (spell power
-// percent), each with base points 10. They are percentages of the unit's
+// percent), each with base points 10. Aura 317 carries misc value 0: no
+// school mask and no damage-or-healing selector (the same client's other
+// 317 row, Totemic Wrath 77747, is a party spell power buff), so the spell
+// power effect raises healing as well as spell damage. They are percentages of the unit's
 // current totals, so the aura multiplies the stats through the dynamic stat
 // dependency system, after strength, agility and every other source have
 // been added, and the bonus follows later changes to those totals.
@@ -22,13 +25,15 @@ const (
 )
 
 // bloodFuryMultipliedStats are the stats the dependency system can multiply:
-// total attack power, ranged attack power, spell power and the spell damage
-// derived from healing power.
+// total attack power, ranged attack power, spell power, spell damage and
+// healing power. Nothing feeds spell damage from healing power (stats/deps.go),
+// so no bonus is multiplied twice.
 var bloodFuryMultipliedStats = []stats.Stat{
 	stats.AttackPower,
 	stats.RangedAttackPower,
 	stats.SpellPower,
 	stats.SpellDamage,
+	stats.HealingPower,
 }
 
 // schoolPowerStats are the per-school spell power stats. They sit outside

@@ -194,9 +194,6 @@ type Shaman struct {
 	AirTotems   []*core.Spell
 	Totems      *proto.ShamanTotems
 
-	WindfuryTotemPeriodicActions      []*core.PendingAction
-	ActiveWindfuryTotemPeriodicAction *core.PendingAction
-
 	// Shield
 	ActiveShield     *core.Spell // Tracks the Shaman's active shield spell
 	ActiveShieldAura *core.Aura

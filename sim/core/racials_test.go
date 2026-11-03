@@ -248,6 +248,83 @@ func TestOrcHasCommandAndNoSavage(t *testing.T) {
 	}
 }
 
+// Command in the 1.60.1.70753 client. The hunter's 20576 and the warlock's
+// 20575 add 5 to every effect of the "Tamed Pet Passive (DND)" aura (aura
+// 107, misc 8): 8875 on every hunter pet family, 18727 to 18730 on the
+// Voidwalker, Imp, Succubus and Felhunter, each an aura 79 (damage done,
+// all schools) at 0. An item guardian (Emerald Dragon Whelp, Core Hound)
+// has no such passive, so it gains nothing. The warlock's row also gains
+// a second effect in 70753: aura 108 (percent modifier, damage) at 5 on
+// class mask 0x3000, the Imp's Firebolt (0x1000) and the Succubus' Lash
+// of Pain (0x2000).
+func TestCommandReachesClassPetsAndTheTwoDemonBolts(t *testing.T) {
+	command := racialNamed(t, proto.Race_RaceOrc, "Command")
+	newPet := func(guardian bool) *Pet {
+		return &Pet{Character: Character{Unit: Unit{PseudoStats: stats.NewPseudoStats()}}, isGuardian: guardian}
+	}
+	for _, class := range []proto.Class{proto.Class_ClassHunter, proto.Class_ClassWarlock} {
+		pet, guardian := newPet(false), newPet(true)
+		character := &Character{Class: class, Pets: []*Pet{pet, guardian}}
+		command.Apply(character)
+		if got := pet.PseudoStats.DamageDealtMultiplier; math.Abs(got-1.05) > 1e-12 {
+			t.Errorf("a %v's pet damage multiplier is %v, want 1.05", class, got)
+		}
+		if got := guardian.PseudoStats.DamageDealtMultiplier; got != 1 {
+			t.Errorf("a %v's item guardian damage multiplier is %v, want 1 (no Tamed Pet Passive)", class, got)
+		}
+	}
+
+	demon := newPet(false)
+	demon.auraTracker = newAuraTracker()
+	warlock := &Character{Class: proto.Class_ClassWarlock, Pets: []*Pet{demon}}
+	command.Apply(warlock)
+	for _, c := range []struct {
+		name string
+		id   int32
+		want float64
+	}{
+		{"Firebolt rank 7", 11763, 1.05},
+		{"Firebolt rank 1", 3110, 1.05},
+		{"Lash of Pain rank 6", 11780, 1.05},
+		{"Torment rank 6", 11775, 1},
+		{"Shadow Bite", 24450, 1},
+	} {
+		spell := demon.RegisterSpell(SpellConfig{ActionID: ActionID{SpellID: c.id}, SpellSchool: SpellSchoolFire, ProcMask: ProcMaskSpellDamage, DamageMultiplier: 1})
+		if math.Abs(spell.DamageMultiplier-c.want) > 1e-12 {
+			t.Errorf("an orc warlock's %s damage multiplier is %v, want %v", c.name, spell.DamageMultiplier, c.want)
+		}
+	}
+
+	hunterPet := newPet(false)
+	hunterPet.auraTracker = newAuraTracker()
+	hunter := &Character{Class: proto.Class_ClassHunter, Pets: []*Pet{hunterPet}}
+	command.Apply(hunter)
+	if spell := hunterPet.RegisterSpell(SpellConfig{ActionID: ActionID{SpellID: 3110}, SpellSchool: SpellSchoolFire, ProcMask: ProcMaskSpellDamage, DamageMultiplier: 1}); spell.DamageMultiplier != 1 {
+		t.Errorf("a hunter pet's spell with Firebolt's id took %v; the 0x3000 modifier is the warlock's row only", spell.DamageMultiplier)
+	}
+}
+
+// Command's +5 and a talent's points land on the same Tamed Pet Passive, so
+// they add: Unholy Power 5 (+10) with Command is 1.15, not 1.10 x 1.05, in
+// either order.
+func TestCommandAddsToTheTalentPointsOnThePetPassive(t *testing.T) {
+	command := racialNamed(t, proto.Race_RaceOrc, "Command")
+	for _, talentFirst := range []bool{true, false} {
+		pet := &Pet{Character: Character{Unit: Unit{PseudoStats: stats.NewPseudoStats()}}}
+		character := &Character{Class: proto.Class_ClassWarlock, Pets: []*Pet{pet}}
+		if talentFirst {
+			pet.AddPassiveDamagePercent(10)
+			command.Apply(character)
+		} else {
+			command.Apply(character)
+			pet.AddPassiveDamagePercent(10)
+		}
+		if got := pet.PseudoStats.DamageDealtMultiplier; math.Abs(got-1.15) > 1e-12 {
+			t.Errorf("talent first %v: demon damage multiplier %v, want 1.15", talentFirst, got)
+		}
+	}
+}
+
 // The Human Spirit (20598): Blizzard's 26 October notes, "Human Spirit now
 // increases Spirit by 10% (was 5%)", and the 30 October hotfix cache. The
 // shipped 1.60.1.70707 row still reads 5.
@@ -443,7 +520,9 @@ func TestBerserkingIsAFlatTenPercentHaste(t *testing.T) {
 
 // Blood Fury 20572: attack power, ranged attack power and spell power each
 // +10% of the unit's current total, for 15 s, 2 min cooldown, off the global
-// cooldown (SpellCooldowns StartRecoveryTime 0, as Berserking's).
+// cooldown (SpellCooldowns StartRecoveryTime 0, as Berserking's). The spell
+// power effect is aura 317 with misc value 0: no school mask and no
+// damage-only selector, so it raises healing as well as spell damage.
 func TestBloodFuryIsTenPercentOfTotalPowers(t *testing.T) {
 	character := &Character{
 		Unit: Unit{
@@ -477,6 +556,7 @@ func TestBloodFuryIsTenPercentOfTotalPowers(t *testing.T) {
 	base[stats.AttackPower] = 1000
 	base[stats.RangedAttackPower] = 800
 	base[stats.SpellPower] = 500
+	base[stats.HealingPower] = 600
 	base[stats.Strength] = 200 // not a percentage target: must stay put
 
 	final := func() stats.Stats { return character.StatDependencyManager.SortAndApplyStatDependencies(base) }
@@ -492,6 +572,7 @@ func TestBloodFuryIsTenPercentOfTotalPowers(t *testing.T) {
 		{stats.AttackPower, 1100},
 		{stats.RangedAttackPower, 880},
 		{stats.SpellPower, 550},
+		{stats.HealingPower, 660},
 		{stats.Strength, 200},
 	} {
 		if math.Abs(got[tc.stat]-tc.want) > 1e-9 {
