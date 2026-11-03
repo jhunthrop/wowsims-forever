@@ -10,3 +10,11 @@ func TestCombustionEndsAfterThreeCriticalStrikes(t *testing.T) {
 		t.Errorf("combustionCriticalStrikes = %d, want 3", combustionCriticalStrikes)
 	}
 }
+
+// Combustion's buff 28682 stacks to 10 (SpellAuraOptions 135400,
+// CumulativeAura 10): +10% Fire crit a stack, so +100% at most.
+func TestCombustionStacksToTen(t *testing.T) {
+	if combustionMaxStacks != 10 {
+		t.Errorf("combustionMaxStacks = %d, want 10", combustionMaxStacks)
+	}
+}
