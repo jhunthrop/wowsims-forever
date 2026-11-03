@@ -32,7 +32,8 @@ func TestFireboltUsesTheClientRoll(t *testing.T) {
 // Incubus, and Felhunter pets" by 2% a rank, and the Firebolt tooltip applies
 // it, so it is a pet-wide multiplier: the Imp's Firebolt gains it, and the
 // Succubus' melee and Lash of Pain gain it once, not twice. The test warlock
-// is an orc, so Command's 5% pet damage multiplies in as well.
+// is an orc, so Command's 5% pet damage multiplies in as well, and Command's
+// 70753 spell modifier on class mask 0x3000 gives Lash of Pain its own 5%.
 func TestUnholyPowerRaisesAllDemonDamageOnce(t *testing.T) {
 	_, warlock := newPetInheritanceTestWarlock(t, proto.WarlockOptions_Imp)
 	const want = 1.10 * 1.05
@@ -44,7 +45,7 @@ func TestUnholyPowerRaisesAllDemonDamageOnce(t *testing.T) {
 	if got := warlock.Succubus.AutoAttacks.MHConfig().DamageMultiplier; got != 1 {
 		t.Errorf("Succubus melee multiplier = %.3f, want 1 (Unholy Power is pet-wide)", got)
 	}
-	if got := warlock.Succubus.primaryAbility.DamageMultiplier; got != 1 {
-		t.Errorf("Lash of Pain multiplier = %.3f, want 1 (Unholy Power is pet-wide)", got)
+	if got := warlock.Succubus.primaryAbility.DamageMultiplier; math.Abs(got-1.05) > 1e-9 {
+		t.Errorf("Lash of Pain multiplier = %.3f, want Command's 1.05 alone (Unholy Power is pet-wide)", got)
 	}
 }

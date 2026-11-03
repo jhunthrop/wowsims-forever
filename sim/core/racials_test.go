@@ -248,6 +248,62 @@ func TestOrcHasCommandAndNoSavage(t *testing.T) {
 	}
 }
 
+// Command in the 1.60.1.70753 client. The hunter's 20576 and the warlock's
+// 20575 add 5 to every effect of the "Tamed Pet Passive (DND)" aura (aura
+// 107, misc 8): 8875 on every hunter pet family, 18727 to 18730 on the
+// Voidwalker, Imp, Succubus and Felhunter, each an aura 79 (damage done,
+// all schools) at 0. An item guardian (Emerald Dragon Whelp, Core Hound)
+// has no such passive, so it gains nothing. The warlock's row also gains
+// a second effect in 70753: aura 108 (percent modifier, damage) at 5 on
+// class mask 0x3000, the Imp's Firebolt (0x1000) and the Succubus' Lash
+// of Pain (0x2000).
+func TestCommandReachesClassPetsAndTheTwoDemonBolts(t *testing.T) {
+	command := racialNamed(t, proto.Race_RaceOrc, "Command")
+	newPet := func(guardian bool) *Pet {
+		return &Pet{Character: Character{Unit: Unit{PseudoStats: stats.NewPseudoStats()}}, isGuardian: guardian}
+	}
+	for _, class := range []proto.Class{proto.Class_ClassHunter, proto.Class_ClassWarlock} {
+		pet, guardian := newPet(false), newPet(true)
+		character := &Character{Class: class, Pets: []*Pet{pet, guardian}}
+		command.Apply(character)
+		if got := pet.PseudoStats.DamageDealtMultiplier; math.Abs(got-1.05) > 1e-12 {
+			t.Errorf("a %v's pet damage multiplier is %v, want 1.05", class, got)
+		}
+		if got := guardian.PseudoStats.DamageDealtMultiplier; got != 1 {
+			t.Errorf("a %v's item guardian damage multiplier is %v, want 1 (no Tamed Pet Passive)", class, got)
+		}
+	}
+
+	demon := newPet(false)
+	demon.auraTracker = newAuraTracker()
+	warlock := &Character{Class: proto.Class_ClassWarlock, Pets: []*Pet{demon}}
+	command.Apply(warlock)
+	for _, c := range []struct {
+		name string
+		id   int32
+		want float64
+	}{
+		{"Firebolt rank 7", 11763, 1.05},
+		{"Firebolt rank 1", 3110, 1.05},
+		{"Lash of Pain rank 6", 11780, 1.05},
+		{"Torment rank 6", 11775, 1},
+		{"Shadow Bite", 24450, 1},
+	} {
+		spell := demon.RegisterSpell(SpellConfig{ActionID: ActionID{SpellID: c.id}, SpellSchool: SpellSchoolFire, ProcMask: ProcMaskSpellDamage, DamageMultiplier: 1})
+		if math.Abs(spell.DamageMultiplier-c.want) > 1e-12 {
+			t.Errorf("an orc warlock's %s damage multiplier is %v, want %v", c.name, spell.DamageMultiplier, c.want)
+		}
+	}
+
+	hunterPet := newPet(false)
+	hunterPet.auraTracker = newAuraTracker()
+	hunter := &Character{Class: proto.Class_ClassHunter, Pets: []*Pet{hunterPet}}
+	command.Apply(hunter)
+	if spell := hunterPet.RegisterSpell(SpellConfig{ActionID: ActionID{SpellID: 3110}, SpellSchool: SpellSchoolFire, ProcMask: ProcMaskSpellDamage, DamageMultiplier: 1}); spell.DamageMultiplier != 1 {
+		t.Errorf("a hunter pet's spell with Firebolt's id took %v; the 0x3000 modifier is the warlock's row only", spell.DamageMultiplier)
+	}
+}
+
 // The Human Spirit (20598): Blizzard's 26 October notes, "Human Spirit now
 // increases Spirit by 10% (was 5%)", and the 30 October hotfix cache. The
 // shipped 1.60.1.70707 row still reads 5.

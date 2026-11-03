@@ -189,10 +189,6 @@ const (
 	// 26 October notes ("increases Spirit by 10% (was 5%)") and the
 	// 30 October hotfix cache; the shipped 1.60.1.70707 row still reads 5.
 	humanSpiritMultiplier = 1.10
-	// commandPetDamageMultiplier is Orc's Command, re-added in Blizzard's
-	// 26 October notes ("increasing Warlock and Hunter pet damage by 5%")
-	// in place of Savage's 1% crit, which the same notes remove.
-	commandPetDamageMultiplier = 1.05
 	// windBlessedHasteMultiplier is Skyborne's Wind Blessed (1259710):
 	// 26 October notes, "Haste bonus reduced to 2% (was 3%)"; the shipped
 	// 1.60.1.70707 rows still read 3.
@@ -243,21 +239,8 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "Command", Kind: RacialPassive, Confirmed: true,
-			Note: "hunter and warlock pets deal 5% more damage (20576 ClassMask 4, 20575 ClassMask 256; 26 October notes; Savage's 1% crit is removed)",
-			Apply: func(character *Character) {
-				// The client's damage is on hunter and warlock pets only
-				// (20576 ClassMask 4, 20575 ClassMask 256); the other
-				// classes' Command is the dummy 21563, so an item guardian
-				// of an orc warrior or shaman gains nothing.
-				if character.Class != proto.Class_ClassHunter && character.Class != proto.Class_ClassWarlock {
-					return
-				}
-				// Pets are added while the class agent is built, before
-				// applyAllEffects runs the racials, so every pet is here.
-				for _, pet := range character.Pets {
-					pet.PseudoStats.DamageDealtMultiplier *= commandPetDamageMultiplier
-				}
-			},
+			Note:  "hunter and warlock pets deal 5% more damage (20576 ClassMask 4, 20575 ClassMask 256, each +5 to the pet's Tamed Pet Passive); the warlock's Imp Firebolt and Succubus Lash of Pain take 5% more on top (20575 effect 2, 1.60.1.70753)",
+			Apply: applyCommand,
 		},
 		{
 			Name: "Hardiness", Kind: RacialPassive, Confirmed: true,
