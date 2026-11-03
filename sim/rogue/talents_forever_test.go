@@ -20,6 +20,7 @@ import (
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/simsignals"
 	"github.com/wowsims/classic/sim/core/stats"
+	"github.com/wowsims/classic/sim/rogue"
 	dpsrogue "github.com/wowsims/classic/sim/rogue/dps_rogue"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
@@ -383,5 +384,38 @@ func TestQuietusAppliesNothingBeforeAnyExecutePhaseTransition(t *testing.T) {
 	got := withRogue.SinisterStrike.DamageMultiplierAdditive - baseRogue.SinisterStrike.DamageMultiplierAdditive
 	if got != 0 {
 		t.Errorf("Quietus rank 5's SinisterStrike.DamageMultiplierAdditive delta right after Reset = %v, want 0 (nothing is below 35%% health yet)", got)
+	}
+}
+
+// TestHackAndSlashMaceIgnoresArmorPercent checks the mace branch: "Mace:
+// Your attacks ignore 15% of your target's armor" at rank 5 (13960 effect
+// 1309137, 15). Like Serrated Blades it is a share of the target's armor
+// (PseudoStats.ArmorIgnorePercent), not flat armor penetration. The prebis
+// backstab set is reused with Ironfoe (11684, a one-hand mace) in the main
+// hand.
+func TestHackAndSlashMaceIgnoresArmorPercent(t *testing.T) {
+	build := func(talentsStr string) *rogue.Rogue {
+		player := core.WithSpec(
+			&proto.Player{
+				Class:              proto.Class_ClassRogue,
+				Race:               proto.Race_RaceHuman,
+				Equipment:          core.GetGearSet("../../ui/rogue/gear_sets", "combat_backstab_prebis").GearSet,
+				TalentsString:      talentsStr,
+				DistanceFromTarget: 5,
+			},
+			&proto.Player_Rogue{Rogue: &proto.Rogue{Options: &proto.RogueOptions{}}},
+		)
+		player.Equipment.Items[proto.ItemSlot_ItemSlotMainHand] = &proto.ItemSpec{Id: 11684}
+		raid := core.SinglePlayerRaidProto(player, &proto.PartyBuffs{}, &proto.RaidBuffs{}, &proto.Debuffs{})
+		env, _, _ := core.NewEnvironment(raid, &proto.Encounter{}, true)
+		return env.Raid.Parties[0].Players[0].(*dpsrogue.DpsRogue).GetRogue()
+	}
+	plain := build(zeroRogueTalents)
+	mace := build(talentStringWithRank(t, zeroRogueTalents, "hack_and_slash", 5))
+	if got := mace.PseudoStats.ArmorIgnorePercent - plain.PseudoStats.ArmorIgnorePercent; math.Abs(got-0.15) > 1e-9 {
+		t.Errorf("armor ignored by Hack and Slash 5 with a mace = %v of the target's armor, want 0.15", got)
+	}
+	if got := mace.GetStat(stats.ArmorPenetration) - plain.GetStat(stats.ArmorPenetration); got != 0 {
+		t.Errorf("Hack and Slash added %v flat armor penetration, want 0", got)
 	}
 }

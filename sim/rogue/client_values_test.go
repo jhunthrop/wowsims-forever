@@ -151,13 +151,17 @@ func buildRogueAgainst(t *testing.T, talentsStr string, mobType proto.MobType) *
 
 // Serrated Blades: "Causes your attacks to ignore 3%/6%/9% of your target's
 // Armor and increases the damage dealt by your Rupture ability by
-// 10%/20%/30%." The engine's integer-division term (5/3 is 1) gave one point
-// of armor penetration rating per level, about 4.3% per rank.
+// 10%/20%/30%." The client's effect is aura 280 (SpellEffect 690915, 9 at
+// rank 3): ignore a percentage of the target's armor, the same shape as the
+// warrior's Weaponmaster mace clause. It is not flat armor penetration: the
+// engine once added 9 x 13.99 "rating" (a TBC rating constant), which the
+// armor formula subtracts as 126 flat armor, more than 9% of a fully
+// debuffed raid boss and far less than 9% of an undebuffed one.
 func TestSerratedBladesIgnoresThreePercentOfArmorPerRank(t *testing.T) {
 	plain := buildRogueForTalentTest(t, zeroRogueTalents, "combat_backstab_prebis").GetRogue()
 	serrated := buildRogueForTalentTest(t, talentsWithRanks(t, map[string]int{"serrated_blades": 3}), "combat_backstab_prebis").GetRogue()
-	got := (serrated.GetStat(stats.ArmorPenetration) - plain.GetStat(stats.ArmorPenetration)) / core.ArmorPenPerPercentArmor
-	assertClose(t, "armor ignored (percent) at rank 3", got, 9)
+	assertClose(t, "armor ignored (fraction of the target's armor) at rank 3", serrated.PseudoStats.ArmorIgnorePercent-plain.PseudoStats.ArmorIgnorePercent, 0.09)
+	assertClose(t, "flat armor penetration from Serrated Blades", serrated.GetStat(stats.ArmorPenetration)-plain.GetStat(stats.ArmorPenetration), 0)
 	assertClose(t, "Rupture.DamageMultiplier", serrated.Rupture.DamageMultiplier, 1.3)
 }
 
