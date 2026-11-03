@@ -33,6 +33,10 @@ type Pet struct {
 	isGuardian     bool
 	enabledOnStart bool
 
+	// passiveDamagePercent is the summed effect points of the pet's "Tamed
+	// Pet Passive (DND)" damage aura (see AddPassiveDamagePercent).
+	passiveDamagePercent float64
+
 	// refusesPlayerBuffs keeps raid, party and individual buffs off the pet.
 	// Forever hunter pets take their stats from the hunter instead.
 	refusesPlayerBuffs bool
@@ -314,3 +318,15 @@ func (pet *Pet) AddRaidBuffs(_ *proto.RaidBuffs)   {}
 func (pet *Pet) AddPartyBuffs(_ *proto.PartyBuffs) {}
 func (pet *Pet) ApplyTalents()                     {}
 func (pet *Pet) OnGCDReady(_ *Simulation)          {}
+
+// AddPassiveDamagePercent adds points to the class pet's "Tamed Pet Passive
+// (DND)" (8875 on hunter pets, 18727-18730 on the four demons): an aura 79,
+// damage done on all schools, at 0 in the client. Talents and racials raise
+// its points with flat spell modifiers (aura 107, misc 8) - Orc Command +5,
+// Unholy Power and Unleashed Fury by rank - so their percentages add into
+// one multiplier instead of multiplying each other.
+func (pet *Pet) AddPassiveDamagePercent(percent float64) {
+	pet.PseudoStats.DamageDealtMultiplier /= 1 + pet.passiveDamagePercent/100
+	pet.passiveDamagePercent += percent
+	pet.PseudoStats.DamageDealtMultiplier *= 1 + pet.passiveDamagePercent/100
+}

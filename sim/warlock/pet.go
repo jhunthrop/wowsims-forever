@@ -116,7 +116,9 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 	// Unholy Power: "Increases all damage done by your Imp, Voidwalker,
 	// Succubus, Incubus, and Felhunter pets by 2%" a rank; the Forever
 	// Firebolt tooltip applies it too, so it is pet-wide, not melee only.
-	wp.PseudoStats.DamageDealtMultiplier *= 1 + unholyPowerDamagePerRank*float64(warlock.Talents.UnholyPower)
+	// The client's 18769 adds points to the demon's Tamed Pet Passive
+	// (aura 107, misc 8), so it adds with Orc Command's +5.
+	wp.AddPassiveDamagePercent(100 * unholyPowerDamagePerRank * float64(warlock.Talents.UnholyPower))
 
 	// Forever demons scale from the warlock (Warlock Pet Scaling 416189, the
 	// same server-computed channels as Hunter Pet Scaling 415429; see

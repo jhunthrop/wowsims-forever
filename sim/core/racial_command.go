@@ -15,14 +15,16 @@ import (
 //     Voidwalker, Imp, Succubus and Felhunter. That passive is aura 79,
 //     damage done, all schools, at 0, so the pet deals 5% more damage. An
 //     item guardian (Emerald Dragon Whelp, the Core Hound) has no such
-//     passive and gains nothing.
+//     passive and gains nothing. The +5 adds to the other points on the
+//     same passive (Unholy Power, Unleashed Fury): 1 + 0.10 + 0.05 with
+//     Unholy Power 5, not 1.10 x 1.05.
 //   - 20575's second effect, new in 70753, is aura 108 (percent modifier,
 //     damage) at 5 on warlock class mask 0x3000: the Imp's Firebolt
 //     (0x1000) and the Succubus' Lash of Pain (0x2000). The owner's spell
 //     modifiers reach its pet's spells, so those two take 5% more again.
 //   - Every other class's Command is the dummy 21563 (ClassMask 1243).
 const (
-	commandPetDamageMultiplier   = 1.05
+	commandPetPassivePercent     = 5
 	commandDemonSpellsMultiplier = 1.05
 )
 
@@ -44,7 +46,7 @@ func applyCommand(character *Character) {
 		if pet.IsGuardian() {
 			continue
 		}
-		pet.PseudoStats.DamageDealtMultiplier *= commandPetDamageMultiplier
+		pet.AddPassiveDamagePercent(commandPetPassivePercent)
 		if character.Class == proto.Class_ClassWarlock {
 			pet.OnSpellRegistered(func(spell *Spell) {
 				if slices.Contains(commandDemonSpellIDs, spell.ActionID.SpellID) {

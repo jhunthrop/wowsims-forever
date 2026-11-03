@@ -36,10 +36,11 @@ func TestFireboltUsesTheClientRoll(t *testing.T) {
 // 70753 spell modifier on class mask 0x3000 gives Lash of Pain its own 5%.
 func TestUnholyPowerRaisesAllDemonDamageOnce(t *testing.T) {
 	_, warlock := newPetInheritanceTestWarlock(t, proto.WarlockOptions_Imp)
-	const want = 1.10 * 1.05
+	// Both add points to the demon's Tamed Pet Passive: 1 + 0.10 + 0.05.
+	const want = 1.15
 	for _, pet := range []*WarlockPet{warlock.Imp, warlock.Succubus} {
 		if got := pet.PseudoStats.DamageDealtMultiplier; math.Abs(got-want) > 1e-9 {
-			t.Errorf("%s damage dealt multiplier = %.4f, want Unholy Power's 1.10 times Command's 1.05", pet.Name, got)
+			t.Errorf("%s damage dealt multiplier = %.4f, want Unholy Power's 10%% plus Command's 5%%", pet.Name, got)
 		}
 	}
 	if got := warlock.Succubus.AutoAttacks.MHConfig().DamageMultiplier; got != 1 {

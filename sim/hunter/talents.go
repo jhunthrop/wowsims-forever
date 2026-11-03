@@ -73,7 +73,9 @@ func (hunter *Hunter) ApplyTalents() {
 		// carried those until 2026-10-09. One write under the unified Crit.
 		hunter.pet.AddStat(stats.Crit, core.CritRatingPerCritChance*ferocityCritPerRank*float64(hunter.Talents.Ferocity))
 
-		hunter.pet.PseudoStats.DamageDealtMultiplier *= 1 + unleashedFuryPerRank*float64(hunter.Talents.UnleashedFury)
+		// The client's Unleashed Fury adds points to the pet's Tamed Pet
+		// Passive (aura 107 on 8875), so it adds with Orc Command's +5.
+		hunter.pet.AddPassiveDamagePercent(100 * unleashedFuryPerRank * float64(hunter.Talents.UnleashedFury))
 
 		if hunter.Talents.EnduranceTraining > 0 {
 			hunter.pet.MultiplyStat(stats.Health, 1+(0.03*float64(hunter.Talents.EnduranceTraining)))

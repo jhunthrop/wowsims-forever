@@ -304,6 +304,27 @@ func TestCommandReachesClassPetsAndTheTwoDemonBolts(t *testing.T) {
 	}
 }
 
+// Command's +5 and a talent's points land on the same Tamed Pet Passive, so
+// they add: Unholy Power 5 (+10) with Command is 1.15, not 1.10 x 1.05, in
+// either order.
+func TestCommandAddsToTheTalentPointsOnThePetPassive(t *testing.T) {
+	command := racialNamed(t, proto.Race_RaceOrc, "Command")
+	for _, talentFirst := range []bool{true, false} {
+		pet := &Pet{Character: Character{Unit: Unit{PseudoStats: stats.NewPseudoStats()}}}
+		character := &Character{Class: proto.Class_ClassWarlock, Pets: []*Pet{pet}}
+		if talentFirst {
+			pet.AddPassiveDamagePercent(10)
+			command.Apply(character)
+		} else {
+			command.Apply(character)
+			pet.AddPassiveDamagePercent(10)
+		}
+		if got := pet.PseudoStats.DamageDealtMultiplier; math.Abs(got-1.15) > 1e-12 {
+			t.Errorf("talent first %v: demon damage multiplier %v, want 1.15", talentFirst, got)
+		}
+	}
+}
+
 // The Human Spirit (20598): Blizzard's 26 October notes, "Human Spirit now
 // increases Spirit by 10% (was 5%)", and the 30 October hotfix cache. The
 // shipped 1.60.1.70707 row still reads 5.
