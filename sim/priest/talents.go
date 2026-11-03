@@ -414,10 +414,13 @@ var innerFocusCritRating = 25 * float64(core.CritRatingPerCritChance)
 // periodic - which matters now that Devouring Plague's ticks can crit.
 // Renew is a heal over time and its crit modifier (14751 effect 1,
 // SpellEffect 692357) names no Renew rank, so a Renew ticking while Inner
-// Focus is up gets none of it either.
+// Focus is up gets none of it either. Nor does Shadow Word: Death
+// (1309636, class mask word 1 bit 0x2): the crit modifier's word 1 is
+// 0x00098434, without that bit, though the cost modifier (692356) has it,
+// so a Death under Inner Focus is free and crits no more often.
 func innerFocusAddsCrit(spell *core.Spell) bool {
 	return !spell.Flags.Matches(core.SpellFlagPureDot|core.SpellFlagChanneled) &&
-		!spell.Matches(PriestSpellMaskRenew)
+		!spell.Matches(PriestSpellMaskRenew|PriestSpellMaskShadowWordDeath)
 }
 
 func (priest *Priest) registerInnerFocus() {
