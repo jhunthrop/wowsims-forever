@@ -14,11 +14,12 @@ func (rogue *Rogue) applyRiposte() {
 	var riposteReady *core.Aura
 
 	riposte := rogue.GetOrRegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: 14251},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+		ActionID:       core.ActionID{SpellID: 14251},
+		ClassSpellMask: RogueSpellMaskRiposte,
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost: 10,

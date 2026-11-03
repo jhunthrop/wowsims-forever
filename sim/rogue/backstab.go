@@ -30,13 +30,14 @@ func (rogue *Rogue) registerBackstabSpell() {
 	damageMultiplier := 1.5 * (opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])] + rogue.aggressionBonus())
 
 	rogue.Backstab = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:     SpellCode_RogueBackstab,
-		ActionID:      core.ActionID{SpellID: spellID},
-		SpellSchool:   core.SpellSchoolPhysical,
-		DefenseType:   core.DefenseTypeMelee,
-		ProcMask:      core.ProcMaskMeleeMHSpecial,
-		Flags:         rogue.builderFlags() | SpellFlagColdBlooded,
-		RequiredLevel: backstabLearnLevels[rank-1],
+		SpellCode:      SpellCode_RogueBackstab,
+		ClassSpellMask: RogueSpellMaskBackstab,
+		ActionID:       core.ActionID{SpellID: spellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          rogue.builderFlags() | SpellFlagColdBlooded,
+		RequiredLevel:  backstabLearnLevels[rank-1],
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   60,

@@ -28,13 +28,14 @@ func (rogue *Rogue) registerAmbushSpell() {
 	damageMultiplier := 2.5 * opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])]
 
 	rogue.Ambush = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:     SpellCode_RogueAmbush,
-		ActionID:      core.ActionID{SpellID: spellID},
-		SpellSchool:   core.SpellSchoolPhysical,
-		DefenseType:   core.DefenseTypeMelee,
-		ProcMask:      core.ProcMaskMeleeMHSpecial,
-		Flags:         rogue.builderFlags() | SpellFlagColdBlooded,
-		RequiredLevel: ambushLearnLevels[rank-1],
+		SpellCode:      SpellCode_RogueAmbush,
+		ClassSpellMask: RogueSpellMaskAmbush,
+		ActionID:       core.ActionID{SpellID: spellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          rogue.builderFlags() | SpellFlagColdBlooded,
+		RequiredLevel:  ambushLearnLevels[rank-1],
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   60,

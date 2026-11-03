@@ -64,14 +64,15 @@ func (rogue *Rogue) registerExposeArmorSpell() {
 	})
 
 	rogue.ExposeArmor = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:     SpellCode_RogueExposeArmor,
-		ActionID:      core.ActionID{SpellID: spellID},
-		SpellSchool:   core.SpellSchoolPhysical,
-		DefenseType:   core.DefenseTypeMelee,
-		ProcMask:      core.ProcMaskMeleeMHSpecial,
-		Flags:         rogue.finisherFlags(),
-		MetricSplits:  6,
-		RequiredLevel: exposeArmorLearnLevels[rank-1],
+		SpellCode:      SpellCode_RogueExposeArmor,
+		ClassSpellMask: RogueSpellMaskExposeArmor,
+		ActionID:       core.ActionID{SpellID: spellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          rogue.finisherFlags(),
+		MetricSplits:   6,
+		RequiredLevel:  exposeArmorLearnLevels[rank-1],
 
 		RelatedSelfBuff: exposeArmorDurationAura,
 

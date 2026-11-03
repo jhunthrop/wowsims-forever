@@ -23,13 +23,14 @@ func (rogue *Rogue) registerCheapShot() {
 	}
 
 	rogue.CheapShot = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:     SpellCode_RogueCheapShot,
-		ActionID:      core.ActionID{SpellID: cheapShotSpellID},
-		SpellSchool:   core.SpellSchoolPhysical,
-		DefenseType:   core.DefenseTypeMelee,
-		ProcMask:      core.ProcMaskMeleeMHSpecial,
-		Flags:         rogue.builderFlags(),
-		RequiredLevel: cheapShotLevel,
+		SpellCode:      SpellCode_RogueCheapShot,
+		ClassSpellMask: RogueSpellMaskCheapShot,
+		ActionID:       core.ActionID{SpellID: cheapShotSpellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          rogue.builderFlags(),
+		RequiredLevel:  cheapShotLevel,
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   cheapShotEnergyCost,

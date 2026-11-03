@@ -110,12 +110,13 @@ func (rogue *Rogue) registerMutilateSpell() {
 	})
 
 	rogue.Mutilate = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:   SpellCode_RogueMutilate,
-		ActionID:    core.ActionID{SpellID: mutilateSpellID[rank]},
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeOHSpecial,
-		Flags:       rogue.builderFlags() | SpellFlagColdBlooded,
+		SpellCode:      SpellCode_RogueMutilate,
+		ClassSpellMask: RogueSpellMaskMutilate,
+		ActionID:       core.ActionID{SpellID: mutilateSpellID[rank]},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeOHSpecial,
+		Flags:          rogue.builderFlags() | SpellFlagColdBlooded,
 
 		RequiredLevel:    mutilateLearnLevels[rank-1],
 		Rank:             rank,

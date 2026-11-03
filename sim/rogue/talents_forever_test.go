@@ -261,11 +261,19 @@ var hackAndSlashActionID = core.ActionID{SpellID: 13960}
 // already-applied field values.
 func buildRogueSimForTalentTest(t *testing.T, talentsStr string, gearSet string) (*core.Simulation, *dpsrogue.DpsRogue) {
 	t.Helper()
+	return buildRogueSimAtLevel(t, talentsStr, gearSet, 0)
+}
+
+// buildRogueSimAtLevel is buildRogueSimForTalentTest at a given character
+// level (0 is the engine's default, 60).
+func buildRogueSimAtLevel(t *testing.T, talentsStr string, gearSet string, level int32) (*core.Simulation, *dpsrogue.DpsRogue) {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
 			Class:              proto.Class_ClassRogue,
 			Race:               proto.Race_RaceHuman,
+			Level:              level,
 			Equipment:          core.GetGearSet("../../ui/rogue/gear_sets", gearSet).GearSet,
 			Buffs:              core.FullBuffs.Player,
 			TalentsString:      talentsStr,
@@ -307,6 +315,9 @@ func TestThousandCutsStacksDiscountEnergyCost(t *testing.T) {
 	if rogue.Backstab == nil {
 		t.Fatal("Backstab did not register")
 	}
+	// The fight opens with Poised's -10 on the first ability; this test
+	// is about Thousand Cuts' own discount.
+	rogue.PoisedAura.Deactivate(sim)
 	if got := rogue.Backstab.Cost.FlatModifier; got != 0 {
 		t.Fatalf("Backstab.Cost.FlatModifier = %d before any Rupture tick, want 0", got)
 	}
