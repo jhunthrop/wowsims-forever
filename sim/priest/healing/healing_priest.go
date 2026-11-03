@@ -8,8 +8,8 @@ import (
 	"github.com/wowsims/classic/sim/priest"
 )
 
-// innerFirePrepullAt is when the option's Inner Fire is cast: just before
-// the pull, as a player buffs.
+// innerFirePrepullAt is when the option's Inner Fire goes up: before the
+// pull, as a player buffs.
 const innerFirePrepullAt = -time.Second
 
 func RegisterHealingPriest() {
@@ -91,11 +91,16 @@ func (hpriest *HealingPriest) Initialize() {
 }
 
 // castInnerFireBeforeThePull buffs with the highest rank the priest knows.
+// Inner Fire lasts ten minutes and is up long before the pull, as every
+// armor is, so it takes neither a global cooldown nor a cast slot here:
+// cast at -1 s it began while the rotation's pre-pull Lightwell was still
+// casting, held that cast's completion to its own global and delayed the
+// fight's first heal.
 func (hpriest *HealingPriest) castInnerFireBeforeThePull() {
 	for rank := len(hpriest.InnerFire) - 1; rank > 0; rank-- {
 		if spell := hpriest.InnerFire[rank]; spell != nil {
 			hpriest.RegisterPrepullAction(innerFirePrepullAt, func(sim *core.Simulation) {
-				spell.Cast(sim, &hpriest.Unit)
+				spell.RelatedSelfBuff.Activate(sim)
 			})
 			return
 		}
