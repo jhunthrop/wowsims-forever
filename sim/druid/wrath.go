@@ -103,13 +103,15 @@ func (druid *Druid) newWrathSpellConfig(rank int) core.SpellConfig {
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			result := spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 
-			// NG procs when the cast finishes
-			if result.DidCrit() && druid.NaturesGraceProcAura != nil {
-				druid.NaturesGraceProcAura.Activate(sim)
-			}
-
 			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
 				spell.DealDamage(sim, result)
+				// Nature's Grace (16880) procs on the hit, so it starts when
+				// the bolt lands: foreverlogs.gg beta timelines put every
+				// Wrath crit's Nature's Grace on the damage event, after the
+				// flight (round 13 casters).
+				if result.DidCrit() && druid.NaturesGraceProcAura != nil {
+					druid.NaturesGraceProcAura.Activate(sim)
+				}
 			})
 		},
 	}
