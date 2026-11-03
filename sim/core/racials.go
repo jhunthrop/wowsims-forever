@@ -421,9 +421,10 @@ var racialsByRace = map[proto.Race][]Racial{
 				// 5% Health, the usual multiplicative stat dependency
 				// every other "+X%" racial in this file uses. The 1% Hit an
 				// early demo transcription gave it is in neither the
-				// 1.60.1.70707 table nor Wowhead Forever's live text; the
-				// table's 2% critical strike bonus (aura 163), which the live
-				// text no longer shows, is open in the round 4 report.
+				// 1.60.1.70707 table nor Wowhead Forever's live text. The 2%
+				// critical strike damage of earlier builds (aura 163) is gone:
+				// 20550 is one effect, aura 133 at 5, in 70707 and 70753, and
+				// the tooltip reads "Total Health increased by 5%".
 				character.MultiplyStat(stats.Health, 1.05)
 			},
 		},
