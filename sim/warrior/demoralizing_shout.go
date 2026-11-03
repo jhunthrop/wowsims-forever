@@ -34,6 +34,19 @@ func demoralizingShoutAttackPowerReduction(rank int, level int32) float64 {
 	return demoralizingShoutBaseAttackPower[rank] + demoralizingShoutAttackPowerPerLevel*float64(levelsAbove)
 }
 
+// demoralizingShoutBaseThreat and demoralizingShoutThreatPerLevel are each
+// rank's effect 63 (flat threat on every target hit): 11, 19, 27, 35 and 43
+// at the rank's learn level, plus 0.8 a level to its cap (SpellEffect
+// 1361983 to 1361987).
+var demoralizingShoutBaseThreat = [DemoralizingShoutRanks + 1]float64{0, 11, 19, 27, 35, 43}
+
+const demoralizingShoutThreatPerLevel = 0.8
+
+func demoralizingShoutThreat(rank int, level int32) float64 {
+	levelsAbove := max(0, min(int(level), DemoralizingShoutMaxLevel[rank])-DemoralizingShoutLevel[rank])
+	return demoralizingShoutBaseThreat[rank] + demoralizingShoutThreatPerLevel*float64(levelsAbove)
+}
+
 func (warrior *Warrior) registerDemoralizingShoutSpell() {
 	rank := max(1, rankAtLevel(core.DemoralizingShoutLevel[:], warrior.Level))
 	actionID := core.ActionID{SpellID: core.DemoralizingShoutSpellId[rank]}
@@ -67,7 +80,7 @@ func (warrior *Warrior) registerDemoralizingShoutSpell() {
 		// (Sunder Armor's is the only warrior effect 63), so the fork's
 		// vanilla-shaped 0.4 x damage-free formula stays.
 		ThreatMultiplier: 0.4,
-		FlatThreatBonus:  0.4 * 2 * float64(core.DemoralizingShoutLevel[rank]),
+		FlatThreatBonus:  demoralizingShoutThreat(rank, warrior.Level),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			for _, aoeTarget := range sim.Encounter.TargetUnits {
