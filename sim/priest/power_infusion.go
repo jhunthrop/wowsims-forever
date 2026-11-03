@@ -39,9 +39,10 @@ func (priest *Priest) RegisterPowerInfusion(target *core.Unit) {
 	})
 
 	priest.PowerInfusion = priest.RegisterSpell(core.SpellConfig{
-		ActionID:  actionID,
-		SpellCode: SpellCode_PriestPowerInfusion,
-		Flags:     SpellFlagPriest | core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
+		ActionID:       actionID,
+		SpellCode:      SpellCode_PriestPowerInfusion,
+		ClassSpellMask: PriestSpellMaskPowerInfusion,
+		Flags:          SpellFlagPriest | core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
 
 		ManaCost: core.ManaCostOptions{BaseCost: powerInfusionManaPct},
 		Cast: core.CastConfig{
