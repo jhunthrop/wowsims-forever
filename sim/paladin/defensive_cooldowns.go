@@ -24,9 +24,11 @@ const (
 	// Templar's Bulwark (node 105625, spell 1311015): "When activated, this
 	// ability grants you an absorb shield equal to 100% of your maximum
 	// health for 8 sec. Applies Forbearance for 1 min. Cannot be cast
-	// while Forbearance is active." 110 mana, no global cooldown.
+	// while Forbearance is active." 110 mana, no global cooldown. No level
+	// of its own: 1.60.1.70707 shipped SpellLevels 30, hotfix push 113139
+	// set it to 0 and 1.60.1.70753 ships 0, so the talent alone gates it.
 	templarsBulwarkActionID    = 1311015
-	templarsBulwarkLevel       = 30
+	templarsBulwarkLevel       = 0
 	templarsBulwarkManaCost    = 110
 	templarsBulwarkDuration    = 8 * time.Second
 	templarsBulwarkAbsorbShare = 1.0

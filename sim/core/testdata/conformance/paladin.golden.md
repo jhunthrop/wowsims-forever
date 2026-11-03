@@ -1526,11 +1526,13 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Swift Judgement talent) | 40 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Swift Judgement talent) | 50 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Swift Judgement talent) | 60 | Swift Judgement | 0 | 1310994 | 0.00→0.00 | mana→none | 60000→60000 | 0→0 | 0→0 | 1→1 | n/a | match |  | n/a | n/a | n/a |
-| ProtectionPaladin (Templar's Bulwark talent) | 30 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→30 | 8000→8000 | mismatch | required_level 0->30 | n/a | n/a | n/a |
-| ProtectionPaladin (Templar's Bulwark talent) | 38 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→30 | 8000→8000 | mismatch | required_level 0->30 | n/a | n/a | n/a |
-| ProtectionPaladin (Templar's Bulwark talent) | 40 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→30 | 8000→8000 | mismatch | required_level 0->30 | n/a | n/a | n/a |
-| ProtectionPaladin (Templar's Bulwark talent) | 50 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→30 | 8000→8000 | mismatch | required_level 0->30 | n/a | n/a | n/a |
-| ProtectionPaladin (Templar's Bulwark talent) | 60 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→30 | 8000→8000 | mismatch | required_level 0->30 | n/a | n/a | n/a |
+| ProtectionPaladin (Templar's Bulwark talent) | 10 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→0 | 8000→8000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Templar's Bulwark talent) | 20 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→0 | 8000→8000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Templar's Bulwark talent) | 30 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→0 | 8000→8000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Templar's Bulwark talent) | 38 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→0 | 8000→8000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Templar's Bulwark talent) | 40 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→0 | 8000→8000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Templar's Bulwark talent) | 50 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→0 | 8000→8000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Templar's Bulwark talent) | 60 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→0 | 8000→8000 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
 Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 12 of the class's 41 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
