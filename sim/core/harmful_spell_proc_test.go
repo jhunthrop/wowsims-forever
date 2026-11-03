@@ -60,3 +60,31 @@ func TestHarmfulSpellProcRollsPerMinuteAndKeepsItsRecoveryPerSpell(t *testing.T)
 		t.Errorf("1 PPM on an instant is %v a cast, want %v (the 1.5 s GCD)", got, want)
 	}
 }
+
+// A new iteration starts with no recovery held over, even when its first cast
+// lands inside the window the last iteration's proc left open: otherwise a
+// run's mean depends on how its iterations are split between sims (the
+// single-threaded sample and the wasm's shards read differently from the
+// concurrent run on the same seed, round 14 platform).
+func TestHarmfulSpellProcRecoveryEndsWithTheIteration(t *testing.T) {
+	sim, caster, target := newHarmfulProcTestUnits()
+	procs := 0
+	aura := MakeHarmfulSpellProcAura(caster, HarmfulSpellProc{
+		Name:    "Test Proc",
+		PPM:     60,
+		ICD:     10 * time.Millisecond,
+		Handler: func(*Simulation, *Unit) { procs++ },
+	})
+	bolt := &Spell{ProcMask: ProcMaskSpellDamage, CurCast: Cast{CastTime: 3 * time.Second}}
+
+	sim.CurrentTime = time.Second
+	harmfulHit(aura, sim, bolt, target)
+	aura.Deactivate(sim)
+	aura.reset(sim) // the next iteration
+	aura.Deactivate(sim)
+	sim.CurrentTime = time.Second + 5*time.Millisecond
+	harmfulHit(aura, sim, bolt, target)
+	if procs != 2 {
+		t.Errorf("a new iteration's cast %v after the last iteration's proc was held by its recovery (%d procs, want 2)", 5*time.Millisecond, procs)
+	}
+}
