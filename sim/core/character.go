@@ -255,25 +255,11 @@ func (character *Character) applyEquipment() {
 	character.AddStats(character.EquipStats())
 	character.equipStatsApplied = true
 
+	// An item's and its enchant's MeleeHaste and SpellHaste are in the
+	// equipment stats added above, which SwingSpeed, RangedSwingSpeed and
+	// CastSpeed read; they are not applied a second time to the speed
+	// multipliers.
 	for _, item := range character.Equipment {
-		if item.Stats[stats.MeleeHaste] != 0 {
-			character.PseudoStats.MeleeSpeedMultiplier *= 1 + item.Stats[stats.MeleeHaste]/100
-			character.PseudoStats.RangedSpeedMultiplier *= 1 + item.Stats[stats.MeleeHaste]/100
-		}
-
-		if item.Enchant.Stats[stats.MeleeHaste] != 0 {
-			character.PseudoStats.MeleeSpeedMultiplier *= 1 + item.Enchant.Stats[stats.MeleeHaste]/100
-			character.PseudoStats.RangedSpeedMultiplier *= 1 + item.Enchant.Stats[stats.MeleeHaste]/100
-		}
-
-		if item.Stats[stats.SpellHaste] != 0 {
-			character.PseudoStats.CastSpeedMultiplier *= 1 + item.Stats[stats.SpellHaste]/100
-		}
-
-		if item.Enchant.Stats[stats.SpellHaste] != 0 {
-			character.PseudoStats.CastSpeedMultiplier *= 1 + item.Enchant.Stats[stats.SpellHaste]/100
-		}
-
 		character.PseudoStats.BonusPhysicalDamage += item.BonusPhysicalDamage
 	}
 
