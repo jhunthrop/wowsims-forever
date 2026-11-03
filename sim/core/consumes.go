@@ -982,15 +982,18 @@ func makePotionActivation(potionType proto.Potions, character *Character, potion
 const SelfCastConsumableFlags = SpellFlagNoOnCastComplete | SpellFlagHelpful
 
 func makeHealthConsumableMCD(itemId int32, character *Character, cdTimer *Timer) MajorCooldown {
-	// Using min values for healthstones as locks generally don't spec into improved
+	// The client's heals (1.60.1.70753): the potions' EffectBasePointsF with
+	// Variance as the full width, and the healthstones' flat amounts
+	// (Healthstone 5720 600, Greater 5723 960, Major 11732 1440; server
+	// text "Instantly restores 1440 life").
 	minRoll := map[int32]float64{
 		858:   140,
 		929:   280,
 		1710:  455,
 		3928:  700,
-		5509:  500,
-		5510:  800,
-		9421:  1200,
+		5509:  600,
+		5510:  960,
+		9421:  1440,
 		13446: 1050,
 	}[itemId]
 
@@ -999,9 +1002,9 @@ func makeHealthConsumableMCD(itemId int32, character *Character, cdTimer *Timer)
 		929:   360,
 		1710:  585,
 		3928:  900,
-		5509:  500,
-		5510:  800,
-		9421:  1200,
+		5509:  600,
+		5510:  960,
+		9421:  1440,
 		13446: 1750,
 	}[itemId]
 
@@ -1041,19 +1044,26 @@ func makeHealthConsumableMCD(itemId int32, character *Character, cdTimer *Timer)
 const demonicRuneHealthCost = 800.0
 
 func makeManaConsumableMCD(itemId int32, character *Character, cdTimer *Timer) MajorCooldown {
+	// The client's energize: EffectBasePointsF with Variance as the full
+	// width (1.60.1.70753): Lesser Mana Potion 438 320 ±12.5%, Mana Potion
+	// 2023 520 ±12.5%, Greater 11903 800 ±12.5%, Superior 17530 1200 ±25%,
+	// Major 17531 1800 ±25%, Demonic Rune 16666 1200 ±25%, Minor
+	// Recombobulator 18805 128 ±25% (server text "96 to 160 Mana").
 	minRoll := map[int32]float64{
+		3385:  280.0,
 		3827:  455.0,
 		6149:  700.0,
-		4381:  150.0,
+		4381:  96.0,
 		12662: 900.0,
 		13443: 900.0,
 		13444: 1350.0,
 	}[itemId]
 
 	maxRoll := map[int32]float64{
+		3385:  360.0,
 		3827:  585.0,
 		6149:  900.0,
-		4381:  250.0,
+		4381:  160.0,
 		12662: 1500.0,
 		13443: 1500.0,
 		13444: 2250.0,
