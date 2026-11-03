@@ -13,6 +13,33 @@ import (
 // Forever's. Improved Vampiric Embrace is not in Forever's trees.
 const vampiricEmbraceHealShare = 0.20
 
+// vampiricEmbraceHealing is the health each party member gains from one
+// damage event on the embraced target: the share of the priest's own landed
+// Shadow damage, direct or periodic. Another player's damage heals nobody.
+func vampiricEmbraceHealing(owner *core.Unit, spell *core.Spell, result *core.SpellResult) float64 {
+	if spell.Unit != owner || !result.Landed() || !spell.SpellSchool.Matches(core.SpellSchoolShadow) {
+		return 0
+	}
+	return result.Damage * vampiricEmbraceHealShare
+}
+
+// vampiricEmbraceAuraConfig is the target's debuff: it heals the party off
+// both Shadow hits and Shadow ticks, as 15286's proc row (SpellAuraOptions
+// 128620, ProcTypeMask 0x800A0000: harmful magic spells and periodic damage
+// taken) states.
+func vampiricEmbraceAuraConfig(owner *core.Unit, target *core.Unit, healParty func(*core.Simulation, float64)) core.Aura {
+	onDamage := func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+		if amount := vampiricEmbraceHealing(owner, spell, result); amount > 0 {
+			healParty(sim, amount)
+		}
+	}
+	return core.Aura{
+		Label:                 "Vampiric Embrace (Health) - " + target.Label,
+		OnSpellHitTaken:       onDamage,
+		OnPeriodicDamageTaken: onDamage,
+	}
+}
+
 func (priest *Priest) registerVampiricEmbraceSpell() {
 	if !priest.Talents.VampiricEmbrace {
 		return
@@ -35,20 +62,16 @@ func (priest *Priest) registerVampiricEmbraceSpell() {
 	partyPlayers := priest.Env.Raid.GetPlayerParty(&priest.Unit).Players
 	healthMetrics := priest.NewHealthMetrics(actionID)
 
+	healParty := func(sim *core.Simulation, amount float64) {
+		for _, player := range partyPlayers {
+			player.GetCharacter().GainHealth(sim, amount, healthMetrics)
+		}
+	}
 	priest.VampiricEmbraceAuras = priest.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-		return target.GetOrRegisterAura(core.Aura{
-			ActionID: actionID,
-			Label:    "Vampiric Embrace (Health) - " + target.Label,
-			Duration: duration,
-			OnSpellHitTaken: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-				if result.Landed() && spell.SpellSchool.Matches(core.SpellSchoolShadow) {
-					healthGained := result.Damage * vampiricEmbraceHealShare
-					for _, player := range partyPlayers {
-						player.GetCharacter().GainHealth(sim, healthGained, healthMetrics)
-					}
-				}
-			},
-		})
+		config := vampiricEmbraceAuraConfig(&priest.Unit, target, healParty)
+		config.ActionID = actionID
+		config.Duration = duration
+		return target.GetOrRegisterAura(config)
 	})
 
 	priest.VampiricEmbrace = priest.RegisterSpell(core.SpellConfig{
