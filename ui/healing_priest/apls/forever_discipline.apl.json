@@ -307,8 +307,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 6075,
-            "rank": 3
+            "spellId": 139,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -324,8 +324,8 @@
                   "index": 5
                 },
                 "spellId": {
-                  "spellId": 6075,
-                  "rank": 3
+                  "spellId": 139,
+                  "rank": 1
                 }
               }
             }
