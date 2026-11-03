@@ -47,6 +47,14 @@ func (unit *Unit) SetGCDTimer(sim *Simulation, gcdReadyAt time.Duration) {
 
 	unit.GCD.Set(gcdReadyAt)
 
+	// A cast that ends on the global is completed by the global's action.
+	// When something else spends the global at that moment (a prepull
+	// action, which runs first), moving the action would carry the cast's
+	// completion along with it, so the cast gets its own.
+	if hc := &unit.Hardcast; hc.Expires != startingCDTime && hc.Expires >= sim.CurrentTime && hc.Expires < gcdReadyAt {
+		unit.newHardcastAction(sim)
+	}
+
 	if unit.gcdAction.consumed {
 		unit.gcdAction.cancelled = false
 		unit.gcdAction.NextActionAt = gcdReadyAt

@@ -95,11 +95,30 @@ func (hpriest *HealingPriest) castInnerFireBeforeThePull() {
 	for rank := len(hpriest.InnerFire) - 1; rank > 0; rank-- {
 		if spell := hpriest.InnerFire[rank]; spell != nil {
 			hpriest.RegisterPrepullAction(innerFirePrepullAt, func(sim *core.Simulation) {
-				spell.Cast(sim, &hpriest.Unit)
+				hpriest.castWhenFree(sim, spell)
 			})
 			return
 		}
 	}
+}
+
+// castWhenFree casts spell now, or, while a prepull cast is still running
+// or the global is down, as soon as both are done: a player buffs after
+// the rotation's own opener rather than skipping the buff.
+func (hpriest *HealingPriest) castWhenFree(sim *core.Simulation, spell *core.Spell) {
+	free := max(sim.CurrentTime, hpriest.GCD.ReadyAt())
+	if hpriest.IsCasting(sim) {
+		free = max(free, hpriest.Hardcast.Expires)
+	}
+	if free == sim.CurrentTime {
+		spell.Cast(sim, &hpriest.Unit)
+		return
+	}
+	core.StartDelayedAction(sim, core.DelayedActionOptions{
+		DoAt:     free,
+		Priority: core.ActionPriorityPrePull,
+		OnAction: func(sim *core.Simulation) { hpriest.castWhenFree(sim, spell) },
+	})
 }
 
 func (hpriest *HealingPriest) Reset(sim *core.Simulation) {
