@@ -63,8 +63,10 @@ func (mage *Mage) newFrostfireBoltSpellConfig(rank int) core.SpellConfig {
 		ClientBaseDamage: roll,
 		// Binary like Frostbolt: the snare rides on the same hit roll,
 		// so a resist takes the whole spell and no partial applies.
-		Flags:        SpellFlagMage | SpellFlagChillSpell | core.SpellFlagBinary | core.SpellFlagAPL,
-		MissileSpeed: 28,
+		Flags: SpellFlagMage | SpellFlagChillSpell | core.SpellFlagBinary | core.SpellFlagAPL,
+		// SpellMisc.Speed 24 on every rank (401502, 1237312, 1237313), as
+		// Fireball and Pyroblast; Frostbolt's 28 is not this spell's.
+		MissileSpeed: 24,
 
 		RequiredLevel: FrostfireBoltLevel[rank],
 		Rank:          rank,
