@@ -39,7 +39,7 @@
       }
     },
     {
-      "notes": "Keep Strength of Earth Totem down; refreshing it needs no aura or spell id to check, since totem upkeep is tracked by slot, not by buff.",
+      "notes": "Strength of Earth Totem whenever it is down: Strength is your best stat, and in Forever the totem reaches the whole raid within 30 yards.",
       "action": {
         "condition": {
           "cmp": {
@@ -65,7 +65,7 @@
       }
     },
     {
-      "notes": "Keep Grace of Air Totem down for its Agility. Windfury Weapon on the main hand takes no benefit from any Windfury Totem (16362's text: \"disables any benefit you personally receive from Windfury Totem\"), and the raid preset already carries a Windfury Totem for the group, so the shaman's own Windfury Totem gave nobody anything and Grace of Air shares its Air slot. In a group with no other shaman, Windfury Totem for the warriors and rogues is worth far more to the raid than this shaman's own damage, so put Windfury Totem down there in place of Grace of Air. Learned at 42 (rank 2 at 56); below that there is no air totem worth a global.",
+      "notes": "Grace of Air Totem whenever it is down: Agility for the whole raid in range. Windfury Weapon on your own weapon turns off any Windfury Totem's bonus for you, so your Air slot goes to Grace of Air. If no other shaman in the raid has Windfury Totem down, drop Windfury Totem for the warriors and rogues instead: it is worth far more to them than Grace of Air is to you. Learned at 42, rank 2 at 56.",
       "action": {
         "condition": {
           "cmp": {
@@ -91,7 +91,7 @@
       }
     },
     {
-      "notes": "Stormstrike on cooldown: it is the highest damage per global Enhancement has, on an 8 second cooldown.",
+      "notes": "Stormstrike on cooldown: it is your hardest hit, and it makes your next Lightning Bolt, Chain Lightning or Earth Shock on the target hit 20% harder. 8 second cooldown.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -101,7 +101,7 @@
       }
     },
     {
-      "notes": "Lightning Bolt at five Maelstrom Weapon stacks, right after Stormstrike so its +20% on the next Lightning Bolt is up: each stack takes 4% a talent rank off the bolt's cast time and mana, so 5/5 makes it instant and free. Gated on auraIsKnown so a build without the talent skips the line instead of reading a missing aura as always-ready.",
+      "notes": "Lightning Bolt at five Maelstrom Weapon stacks: it is instant and free then. Cast it right after Stormstrike when you can, so the bolt takes Stormstrike's 20%.",
       "action": {
         "condition": {
           "and": {
@@ -142,7 +142,7 @@
       }
     },
     {
-      "notes": "Keep Searing Totem down for the extra fire damage, but not with less than 20 seconds left -- no point paying for a totem that will barely tick.",
+      "notes": "Searing Totem whenever it is down, unless the fight ends within 20 seconds: a fresh totem would barely fire.",
       "action": {
         "condition": {
           "and": {
@@ -184,7 +184,38 @@
       }
     },
     {
-      "notes": "Earth Shock on the shock cooldown while mana is above 50 percent.",
+      "notes": "Fire Nova on a Clearcasting proc: it is free then, and in melee your Searing Totem stands within its 10 yards of the boss. Clearcasting comes from Elemental Focus in the raid build.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 16246
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 16246
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 408345,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Earth Shock on cooldown while you are above half mana: it takes Stormstrike's 20% when no bolt is ready. Below half mana, stop shocking so you do not run dry without raid buffs.",
       "action": {
         "castSpell": {
           "spellId": {
