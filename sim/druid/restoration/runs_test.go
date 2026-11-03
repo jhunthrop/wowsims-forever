@@ -169,14 +169,14 @@ func loadDefaultRotation(t *testing.T) *proto.APLRotation {
 }
 
 // castIDs is the rotation's healing kit: what it has to be seen casting.
-// Rejuvenation is rank 10 (9841) on the tank and rank 7 (8910) on the party
+// Rejuvenation is rank 10 (9841) on the tank and rank 1 (774) on the party
 // since site round 13 (rank 4, 2090, from round 9 left 40% of the raid
 // fight's mana unspent).
 // Wild Growth is not in it: the site's guide build does not take the
 // talent, so the shipped rotation has no Wild Growth line since client
 // 1.60.1.70707.
 var castIDs = struct{ healingTouch, regrowth, rejuvenation, partyRejuvenation, tranquility, swiftmend, innervate int32 }{
-	healingTouch: 9889, regrowth: 9858, rejuvenation: 9841, partyRejuvenation: 8910, tranquility: 9863,
+	healingTouch: 9889, regrowth: 9858, rejuvenation: 9841, partyRejuvenation: 774, tranquility: 9863,
 	swiftmend: 18562, innervate: 29166,
 }
 
