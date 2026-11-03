@@ -443,7 +443,9 @@ func TestBerserkingIsAFlatTenPercentHaste(t *testing.T) {
 
 // Blood Fury 20572: attack power, ranged attack power and spell power each
 // +10% of the unit's current total, for 15 s, 2 min cooldown, off the global
-// cooldown (SpellCooldowns StartRecoveryTime 0, as Berserking's).
+// cooldown (SpellCooldowns StartRecoveryTime 0, as Berserking's). The spell
+// power effect is aura 317 with misc value 0: no school mask and no
+// damage-only selector, so it raises healing as well as spell damage.
 func TestBloodFuryIsTenPercentOfTotalPowers(t *testing.T) {
 	character := &Character{
 		Unit: Unit{
@@ -477,6 +479,7 @@ func TestBloodFuryIsTenPercentOfTotalPowers(t *testing.T) {
 	base[stats.AttackPower] = 1000
 	base[stats.RangedAttackPower] = 800
 	base[stats.SpellPower] = 500
+	base[stats.HealingPower] = 600
 	base[stats.Strength] = 200 // not a percentage target: must stay put
 
 	final := func() stats.Stats { return character.StatDependencyManager.SortAndApplyStatDependencies(base) }
@@ -492,6 +495,7 @@ func TestBloodFuryIsTenPercentOfTotalPowers(t *testing.T) {
 		{stats.AttackPower, 1100},
 		{stats.RangedAttackPower, 880},
 		{stats.SpellPower, 550},
+		{stats.HealingPower, 660},
 		{stats.Strength, 200},
 	} {
 		if math.Abs(got[tc.stat]-tc.want) > 1e-9 {
