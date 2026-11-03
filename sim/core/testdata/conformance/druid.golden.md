@@ -590,7 +590,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | FeralBearDruid (Lacerate talent) | 60 | Lacerate | 5 | 1235827 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 58→58 | 15000→15000 | match |  | 15.00-15.00→15.00-15.00 | 0.500 (convention)→1.000 | declared, matches |
 | FeralBearDruid (Primal Bite talent) | 40 | Primal Bite | 1 | 407995 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | FeralBearDruid (Primal Bite talent) | 50 | Primal Bite | 2 | 1238069 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 50→50 | n/a | match |  | n/a | n/a | n/a |
-| FeralBearDruid (Primal Bite talent) | 60 | Primal Bite | 4 | 1238073 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | n/a | n/a | n/a |
+| FeralBearDruid (Primal Bite talent) | 60 | Primal Bite | 3 | 1238070 | 20.00→20.00 | rage→rage | 6000→6000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | n/a | n/a | n/a |
 | FeralDruid (Shifting Power talent) | 10 | Shifting Power | 0 | 1322605 | 81.95 (55% base mana)→81.95 | mana→mana | 8000→8000 | 0→0 | 1000→1000 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | FeralDruid (Shifting Power talent) | 20 | Shifting Power | 0 | 1322605 | 194.70 (55% base mana)→194.70 | mana→mana | 8000→8000 | 0→0 | 1000→1000 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | FeralDruid (Shifting Power talent) | 30 | Shifting Power | 0 | 1322605 | 337.70 (55% base mana)→337.70 | mana→mana | 8000→8000 | 0→0 | 1000→1000 | 1→1 | n/a | match |  | n/a | n/a | n/a |

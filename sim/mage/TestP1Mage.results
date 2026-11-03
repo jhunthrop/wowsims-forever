@@ -8,7 +8,7 @@ character_stats_results: {
   final_stats: 271.975
   final_stats: 348
   final_stats: 0
-  final_stats: 40
+  final_stats: 0
   final_stats: 233
   final_stats: 0
   final_stats: 0
@@ -188,8 +188,8 @@ dps_results: {
 dps_results: {
  key: "TestP1Mage-Phase1-Average-Default"
  value: {
-  dps: 856.22943
-  tps: 796.73769
+  dps: 856.22929
+  tps: 796.73756
  }
 }
 dps_results: {
@@ -216,15 +216,15 @@ dps_results: {
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-forever_frost-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
-  dps: 436.35515
-  tps: 672.75394
+  dps: 436.34539
+  tps: 672.74418
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-forever_frost-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
-  dps: 436.35515
-  tps: 410.97859
+  dps: 436.34539
+  tps: 410.96883
  }
 }
 dps_results: {
@@ -300,15 +300,15 @@ dps_results: {
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Troll-p0.bis-DPS-forever_frost-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
-  dps: 430.18318
-  tps: 667.52523
+  dps: 430.16711
+  tps: 667.50916
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Troll-p0.bis-DPS-forever_frost-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
-  dps: 430.18318
-  tps: 405.33522
+  dps: 430.16711
+  tps: 405.31915
  }
 }
 dps_results: {
