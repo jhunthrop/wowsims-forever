@@ -2,7 +2,6 @@ package shaman
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/wowsims/classic/sim/core"
 )
@@ -10,14 +9,18 @@ import (
 const WindfuryTotemRanks = 3
 
 var WindfuryTotemSpellId = [WindfuryTotemRanks + 1]int32{0, 8512, 10613, 10614}
-var WindfuryBuffAuraId = [WindfuryTotemRanks + 1]int32{0, 8514, 10607, 10611}
-var WindfuryTotemBonusDamage = [WindfuryTotemRanks + 1]float64{0, 122, 229, 315}
+
+// WindfuryTotemAuraId is the totem's own aura on the party, per rank: an
+// area aura (SpellEffect effect 65, aura 42, the 20% proc of 8516, 10608
+// or 10610) with no duration in the 1.60.1.70753 client. It holds only
+// while the totem stands; vanilla's 10-second weapon enchant (8514, 10607,
+// 10611) is not in the client.
+var WindfuryTotemAuraId = [WindfuryTotemRanks + 1]int32{0, 8515, 10609, 10612}
 var WindfuryTotemManaCost = [WindfuryTotemRanks + 1]float64{0, 115, 175, 250}
 var WindfuryTotemLevel = [WindfuryTotemRanks + 1]int{0, 32, 42, 52}
 
 func (shaman *Shaman) registerWindfuryTotemSpell() {
 	shaman.WindfuryTotem = make([]*core.Spell, WindfuryTotemRanks+1)
-	shaman.WindfuryTotemPeriodicActions = make([]*core.PendingAction, WindfuryTotemRanks+1)
 
 	for rank := 1; rank <= WindfuryTotemRanks; rank++ {
 		config := shaman.newWindfuryTotemSpellConfig(rank)
@@ -36,32 +39,18 @@ func (shaman *Shaman) registerWindfuryTotemSpell() {
 func (shaman *Shaman) newWindfuryTotemSpellConfig(rank int) core.SpellConfig {
 	spellId := WindfuryTotemSpellId[rank]
 	// TODO: The sim won't respect the value of a totem dropped via the APL. It uses hard-coded values from buffs.go
-	// bonusDamage := WindfuryTotemBonusDamage[rank]
 	manaCost := WindfuryTotemManaCost[rank]
 	level := WindfuryTotemLevel[rank]
 
-	// Create a trackable aura for totem weaving
+	// A trackable aura for the standing totem: it is up exactly as long as
+	// the totem is.
 	buffAura := shaman.RegisterAura(core.Aura{
-		ActionID: core.ActionID{SpellID: WindfuryBuffAuraId[rank]},
+		ActionID: core.ActionID{SpellID: WindfuryTotemAuraId[rank]},
 		Label:    fmt.Sprintf("Windfury (Rank %d)", rank),
-		Duration: time.Second * 10,
+		Duration: core.NeverExpires,
 	})
 
-	lifetimeConfig := newTotemLifetimeConfig("Windfury Totem", rank)
-	lifetimeConfig.OnGain = func(_ *core.Aura, sim *core.Simulation) {
-		shaman.ActiveWindfuryTotemPeriodicAction = core.StartPeriodicAction(sim, core.PeriodicActionOptions{
-			Period:          time.Second * 5, // Totem refreshes every 5 seconds
-			TickImmediately: true,
-			OnAction: func(_ *core.Simulation) {
-				buffAura.Activate(sim)
-			},
-		})
-	}
-	lifetimeConfig.OnExpire = func(_ *core.Aura, sim *core.Simulation) {
-		shaman.ActiveWindfuryTotemPeriodicAction.Cancel(sim)
-		shaman.ActiveWindfuryTotemPeriodicAction = nil
-	}
-	lifetime := shaman.RegisterAura(lifetimeConfig)
+	lifetime := shaman.registerBuffTotemLifetime("Windfury Totem", rank, buffAura)
 
 	spell := shaman.newTotemSpellConfig(manaCost, spellId)
 	spell.RequiredLevel = level
