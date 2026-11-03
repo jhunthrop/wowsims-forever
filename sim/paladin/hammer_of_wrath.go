@@ -51,6 +51,9 @@ func (paladin *Paladin) registerHammerOfWrath() {
 			ProcMask:    core.ProcMaskRangedSpecial, // TODO to be tested
 			Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
 			CastType:    proto.CastType_CastTypeRanged,
+			// SpellMisc Speed 35 on every rank: the hammer is thrown, and its
+			// damage lands after the flight.
+			MissileSpeed: 35,
 
 			Rank:           i + 1,
 			RequiredLevel:  int(rank.level),
@@ -79,7 +82,10 @@ func (paladin *Paladin) registerHammerOfWrath() {
 			},
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeRangedHitAndCrit)
+				result := spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeRangedHitAndCrit)
+				spell.WaitTravelTime(sim, func(sim *core.Simulation) {
+					spell.DealDamage(sim, result)
+				})
 			},
 		})
 	}
