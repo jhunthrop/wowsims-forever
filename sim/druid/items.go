@@ -16,6 +16,7 @@ const (
 	TalonsOfWrath       = 249441
 	IdolOfTheDream      = 220606
 	HowlingIdol         = 272427
+	IdolOfSwiftness     = 279250
 )
 
 // Talons of Wrath: client spell 1248996 "Improved Wrath" procs at its
@@ -28,15 +29,16 @@ const (
 )
 
 // relicClassMasks says which engine spells each client spell family is, for
-// the idols in relic_mods_auto_gen.go (SpellClassOptions masks of Rip 9896
-// and Shifting Power 1322605). An idol whose family is missing here (Swiftmend,
-// Enrage, Healing Touch) cannot be registered, and core.NewEquipModItemEffect
+// the idols in relic_mods_auto_gen.go (SpellClassOptions masks of Rip 9896,
+// Shifting Power 1322605 and Swiftmend 18562). An idol whose family is missing
+// here (Enrage, Healing Touch) cannot be registered, and core.NewEquipModItemEffect
 // refuses it. Swarming Idol (272430) is deliberately absent: its text names
 // Insect Swarm but its client mask is Rip's, so it is left unmodelled until
 // the client settles which spell it reaches.
 var relicClassMasks = core.ClassMaskTable{
 	{Client: core.ClientClassMask{0, 0, 1 << 21}, Engine: DruidSpellMaskRip},
 	{Client: core.ClientClassMask{0, 1 << 31}, Engine: DruidSpellMaskShiftingPower},
+	{Client: core.ClientClassMask{0, 1 << 1}, Engine: DruidSpellMaskSwiftmend},
 }
 
 func init() {
@@ -71,6 +73,10 @@ func init() {
 	// Client spell 1291059. Equip: Reduces the cooldown of your Shifting Power
 	// ability by 1 sec.
 	core.NewEquipModItemEffect(HowlingIdol, relicEquipMods[HowlingIdol], relicClassMasks)
+
+	// Client spell 1306488. Equip: Reduces the cooldown of your Swiftmend
+	// spell by 3 sec. An Enchanting relic, like the shaman's Totem of Urgency.
+	core.NewEquipModItemEffect(IdolOfSwiftness, relicEquipMods[IdolOfSwiftness], relicClassMasks)
 
 	// Client spell 1248996. Equip: Causes Wrath to have a 50% chance to
 	// restore 35 Mana.

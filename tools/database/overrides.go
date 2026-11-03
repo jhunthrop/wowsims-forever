@@ -151,6 +151,7 @@ var ItemOverrides = []*proto.UIItem{
 	foreverRelic(272435, "Libram of Law", "inv_misc_book_04", proto.RangedWeaponType_RangedWeaponTypeLibram, 65, proto.ItemQuality_ItemQualityRare),
 	foreverRelic(279248, "Libram of Infusion", "inv_misc_book_13", proto.RangedWeaponType_RangedWeaponTypeLibram, 65, proto.ItemQuality_ItemQualityEpic),
 	foreverRelic(279249, "Totem of Urgency", "inv_ability_totemicshaman_surgingtotem", proto.RangedWeaponType_RangedWeaponTypeTotem, 65, proto.ItemQuality_ItemQualityEpic),
+	foreverRelic(279250, "Idol of Swiftness", "ability_druid_nourish", proto.RangedWeaponType_RangedWeaponTypeIdol, 65, proto.ItemQuality_ItemQualityEpic),
 
 	// Forever's Tier 1 mage set, Manaflare Regalia (client ItemSet 2098;
 	// data/builds/1.60.1.70009/items/mage.json). No Wowhead or Wago page
