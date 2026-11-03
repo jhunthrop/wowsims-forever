@@ -9,6 +9,12 @@ import (
 
 const ShadowBoltRanks = 10
 
+// boltMissileSpeed is SpellMisc.Speed, in yards a second, for every Shadow
+// Bolt rank (686 to 25307) and every Incinerate rank (412758, 1293812,
+// 1293813) in client 1.60.1.70753: from 30 yards the bolt lands 1.5 s after
+// its cast.
+const boltMissileSpeed = 20
+
 // ShadowBoltDamage is spellconst/warlock.json's own roll for ids 686
 // through 25307 (rank 10 rolls 253.3-282.7 at level 60: a centre of 268 at
 // level 60 growing 1.8 a level, 0.1067 wide), where the classic tooltip roll
@@ -48,6 +54,7 @@ func (warlock *Warlock) getShadowBoltBaseConfig(rank int) core.SpellConfig {
 		Flags:            core.SpellFlagAPL | core.SpellFlagResetAttackSwing | WarlockFlagDestruction,
 		RequiredLevel:    level,
 		Rank:             rank,
+		MissileSpeed:     boltMissileSpeed,
 		ClientBaseDamage: damage.Range(casterLevel),
 
 		ManaCost: core.ManaCostOptions{

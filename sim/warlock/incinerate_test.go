@@ -69,6 +69,13 @@ func TestIncinerateLevel60HasMaxRankAndDealsDamage(t *testing.T) {
 	target := sim.Encounter.TargetUnits[0]
 
 	maxRank.ApplyEffects(sim, target, maxRank)
+	// The bolt lands after its travel time (spell.WaitTravelTime), so step
+	// the sim until that pending action fires.
+	for i := 0; i < 200 && maxRank.SpellMetrics[target.UnitIndex].TotalDamage == 0; i++ {
+		if done := sim.Step(); done {
+			break
+		}
+	}
 
 	metrics := maxRank.SpellMetrics[target.UnitIndex]
 	if metrics.Hits+metrics.Crits == 0 {

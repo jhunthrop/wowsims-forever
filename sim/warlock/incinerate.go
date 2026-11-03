@@ -58,6 +58,7 @@ func (warlock *Warlock) getIncinerateBaseConfig(rank int) core.SpellConfig {
 		Flags:            core.SpellFlagAPL | core.SpellFlagResetAttackSwing | WarlockFlagDestruction,
 		RequiredLevel:    level,
 		Rank:             rank,
+		MissileSpeed:     boltMissileSpeed,
 		ClientBaseDamage: damage.Range(casterLevel),
 
 		ManaCost: core.ManaCostOptions{
@@ -83,7 +84,9 @@ func (warlock *Warlock) getIncinerateBaseConfig(rank int) core.SpellConfig {
 			result := spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
 			spell.DamageMultiplier = oldMultiplier
 
-			spell.DealDamage(sim, result)
+			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
+				spell.DealDamage(sim, result)
+			})
 		},
 	}
 }
