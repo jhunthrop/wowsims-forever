@@ -5,13 +5,14 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2687
+            "spellId": 11578,
+            "rank": 3
           }
         }
       },
       "doAtValue": {
         "const": {
-          "val": "-2.5s"
+          "val": "-2s"
         }
       }
     },
@@ -39,21 +40,6 @@
       "doAtValue": {
         "const": {
           "val": "-1.5s"
-        }
-      }
-    },
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 11578,
-            "rank": 3
-          }
-        }
-      },
-      "doAtValue": {
-        "const": {
-          "val": "-0.5s"
         }
       }
     }
