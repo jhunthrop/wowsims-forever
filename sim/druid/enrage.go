@@ -13,20 +13,33 @@ import (
 // 2 rage) for 10 seconds, so a cast pays 30 rage; the bear also "loses" base
 // armor for the duration, in a dummy effect with no amount.
 //
-// unconfirmed: the armor penalty. Era's 27% of base armor is used, since the
-// client's dummy effect states none. The instant 10 rage and the 2 a second
+// The armor penalty is the client's text: "reduces base armor by 27% in
+// Bear Form and 16% in Dire Bear Form" (Spell 5229 Description_lang,
+// 1.60.1.70753). The dummy effect states no amount; cmangos-classic casts
+// 25503 (aura 101, base armor percent) at -27, or -16 in Dire Bear Form
+// (SpellEffects.cpp, case 5229). The instant 10 rage and the 2 a second
 // are the client's amounts read as tenths of a point, the unit rage costs
 // use.
 const (
-	enrageSpellID            = 5229
-	enrageDuration           = 10 * time.Second
-	enrageCooldown           = time.Minute
-	enrageLearnLevel         = 12
-	enrageInstantRage        = 10.0
-	enrageRagePerTick        = 2.0
-	enrageTickPeriod         = time.Second
-	enrageBaseArmorReduction = 0.27
+	enrageSpellID                = 5229
+	enrageDuration               = 10 * time.Second
+	enrageCooldown               = time.Minute
+	enrageLearnLevel             = 12
+	enrageInstantRage            = 10.0
+	enrageRagePerTick            = 2.0
+	enrageTickPeriod             = time.Second
+	enrageBearArmorReduction     = 0.27
+	enrageDireBearArmorReduction = 0.16
 )
+
+// enrageBaseArmorReductionAt is the share of base armor Enrage takes at the
+// level: Bear Form's 27% until Dire Bear Form replaces it at 40, then 16%.
+func enrageBaseArmorReductionAt(level int32) float64 {
+	if tier, learned := bearFormTierAt(level); learned && tier.FormSpellID == bearFormTiers[1].FormSpellID {
+		return enrageDireBearArmorReduction
+	}
+	return enrageBearArmorReduction
+}
 
 func (druid *Druid) registerEnrageSpell() {
 	if int(druid.Level) < enrageLearnLevel {
@@ -34,7 +47,7 @@ func (druid *Druid) registerEnrageSpell() {
 	}
 	actionID := core.ActionID{SpellID: enrageSpellID}
 	rageMetrics := druid.NewRageMetrics(actionID)
-	armorMultiplier := 1 - enrageBaseArmorReduction
+	armorMultiplier := 1 - enrageBaseArmorReductionAt(druid.Level)
 
 	druid.EnrageAura = druid.RegisterAura(core.Aura{
 		Label:    "Enrage Aura",
