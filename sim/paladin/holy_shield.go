@@ -34,6 +34,11 @@ var HolyShieldValues = []struct {
 	{level: 30, spellID: 20925, procID: 20955, manaCost: 100, damage: 75},
 	{level: 40, spellID: 20927, procID: 20956, manaCost: 150, damage: 110},
 	{level: 50, spellID: 20928, procID: 20957, manaCost: 195, damage: 153},
+	// Client 1.60.1.70753 adds rank 4 (1239570): level 60, 240 mana, 221
+	// Holy damage a block on its aura (spellconst/paladin.json). The client
+	// states no damage spell of its own, so 27179, an id the Forever client
+	// does not carry, names the engine's proc.
+	{level: 60, spellID: 1239570, procID: 27179, manaCost: 240, damage: 221},
 }
 
 const (
