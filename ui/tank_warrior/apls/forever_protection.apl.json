@@ -183,7 +183,7 @@
       }
     },
     {
-      "notes": "Keep it on the boss: the 20% attack speed slow is your biggest cut to damage taken after Shield Block. Refresh it in its last 3 seconds.",
+      "notes": "Keep it on the boss: its attack speed slow is your biggest cut to damage taken after Shield Block. Refresh it in its last 3 seconds.",
       "action": {
         "condition": {
           "or": {
@@ -236,7 +236,60 @@
       }
     },
     {
-      "notes": "Whenever it drops. At 60 a raid warrior's shout usually covers you.",
+      "notes": "Keep it on the boss: 204 attack power off it at 60 takes about a fifth of its melee damage away. Refresh it in its last 3 seconds.",
+      "action": {
+        "condition": {
+          "or": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "auraIsActive": {
+                      "auraId": {
+                        "spellId": 11556,
+                        "rank": 5
+                      },
+                      "sourceUnit": {
+                        "type": "CurrentTarget"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "auraRemainingTime": {
+                      "sourceUnit": {
+                        "type": "CurrentTarget"
+                      },
+                      "auraId": {
+                        "spellId": 11556,
+                        "rank": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3s"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11556,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Whenever it drops. Below 60 no raid warrior shouts for you; at 60 a raid warrior's shout is the same aura, so this line idles.",
       "action": {
         "condition": {
           "not": {
