@@ -145,7 +145,33 @@
       }
     },
     {
-      "notes": "Multi-Shot on cooldown. It shares one 6 second cooldown with Aimed Shot, and the instant shot wins that cooldown every time: Aimed Shot's 2 second cast holds your auto shot, Multi-Shot never does.",
+      "notes": "Aimed Shot when the shared cooldown comes up and your next auto shot is more than 1.2 seconds away, so the cast starts right after a shot leaves. Since the 3 November hotfix it hits about twice as hard as before and beats Multi-Shot on that cooldown whenever the cast fits; with an auto shot about to fire, take Multi-Shot instead and keep the auto rolling.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "autoTimeToNext": {
+                "autoType": "Ranged"
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "1.2s"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20904,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Multi-Shot on the shared cooldown when Aimed Shot's cast would hold an auto shot. It is instant, so it never delays your next shot.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -156,7 +182,60 @@
       }
     },
     {
-      "notes": "Arcane Shot to fill a gap when Multi-Shot is more than a global away and you are above 25% mana. It is instant and never holds an auto shot, but it costs the most mana for its damage, so it is the shot you drop first when the mana runs low. Serpent Sting is not worth the global in this build: the shots do more with that mana.",
+      "notes": "Serpent Sting when it has under 1.5 seconds left and the shared cooldown is not about to come back. Refreshing any earlier throws away a tick. It is the best damage for its mana you have between the big shots, so keep it rolling for the whole fight.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "dotRemainingTime": {
+                      "spellId": {
+                        "spellId": 13555,
+                        "rank": 8
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "1.5s"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "spellTimeToReady": {
+                      "spellId": {
+                        "spellId": 2643,
+                        "rank": 0
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.5"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 13555,
+            "rank": 8
+          }
+        }
+      }
+    },
+    {
+      "notes": "Arcane Shot to fill a gap when the shared cooldown is more than a global away and you are above 25% mana. It is instant and never holds an auto shot, but it costs the most mana for its damage, so it is the shot you drop first when the mana runs low.",
       "action": {
         "condition": {
           "and": {

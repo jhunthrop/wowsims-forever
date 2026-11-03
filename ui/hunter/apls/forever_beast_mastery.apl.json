@@ -155,7 +155,33 @@
       }
     },
     {
-      "notes": "Multi-Shot on cooldown. It shares one 6 second cooldown with Aimed Shot, and the instant shot wins that cooldown every time: Aimed Shot's 2 second cast holds your auto shot, Multi-Shot never does.",
+      "notes": "Aimed Shot when the shared cooldown comes up and your next auto shot is more than 1.2 seconds away, so the cast starts right after a shot leaves. Since the 3 November hotfix it hits about twice as hard as before and beats Multi-Shot on that cooldown whenever the cast fits; with an auto shot about to fire, take Multi-Shot instead and keep the auto rolling.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "autoTimeToNext": {
+                "autoType": "Ranged"
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "1.2s"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20904,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Multi-Shot on the shared cooldown when Aimed Shot's cast would hold an auto shot. It is instant, so it never delays your next shot.",
       "action": {
         "castSpell": {
           "spellId": {
