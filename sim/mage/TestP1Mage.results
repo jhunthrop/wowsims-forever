@@ -52,18 +52,18 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 0.19508
+  weights: 0.21955
   weights: 0
-  weights: 0.74726
-  weights: 0.05743
+  weights: 0.75395
+  weights: 0.05774
   weights: 0
-  weights: 0.68983
-  weights: 0
-  weights: 0
+  weights: 0.69621
   weights: 0
   weights: 0
-  weights: 10.41505
-  weights: 5.35101
+  weights: 0
+  weights: 0
+  weights: 10.82839
+  weights: 5.36511
   weights: 0
   weights: 0
   weights: 0
@@ -97,141 +97,141 @@ stat_weights_results: {
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-ArcanistRegalia"
  value: {
-  dps: 822.86731
-  tps: 668.29455
+  dps: 831.7072
+  tps: 675.32555
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-Champion'sArcanum"
  value: {
-  dps: 831.52094
-  tps: 773.85852
+  dps: 837.10672
+  tps: 779.1995
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-Champion'sRegalia"
  value: {
-  dps: 774.13392
-  tps: 721.57876
+  dps: 783.9156
+  tps: 730.72128
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-EnigmaVestments"
  value: {
-  dps: 911.12807
-  tps: 846.09281
+  dps: 918.17509
+  tps: 852.5436
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-FieldMarshal'sRegalia"
  value: {
-  dps: 879.07175
-  tps: 817.16032
+  dps: 881.78911
+  tps: 819.60159
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-FrostfireRegalia"
  value: {
-  dps: 1012.68133
-  tps: 815.39909
+  dps: 1021.74579
+  tps: 823.67258
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-Illusionist'sAttire"
  value: {
-  dps: 812.07931
-  tps: 756.00938
+  dps: 823.225
+  tps: 766.45496
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-IronweaveBattlesuit"
  value: {
-  dps: 671.94285
-  tps: 629.23005
+  dps: 678.90393
+  tps: 635.88929
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-LieutenantCommander'sRegalia"
  value: {
-  dps: 774.13392
-  tps: 721.57876
+  dps: 783.9156
+  tps: 730.72128
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-ManaflareRegalia"
  value: {
-  dps: 691.44201
-  tps: 646.02189
+  dps: 697.95208
+  tps: 652.04983
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-NetherwindRegalia"
  value: {
-  dps: 877.66243
-  tps: 783.53671
+  dps: 885.52558
+  tps: 790.43627
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-Sorcerer'sRegalia"
  value: {
-  dps: 796.20299
-  tps: 741.56787
+  dps: 805.64188
+  tps: 750.37295
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-AllItems-Warlord'sRegalia"
  value: {
-  dps: 879.07175
-  tps: 817.16032
+  dps: 881.78911
+  tps: 819.60159
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Average-Default"
  value: {
-  dps: 840.8813
-  tps: 781.96499
+  dps: 847.15187
+  tps: 787.94181
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-forever_frost-FullBuffs-P1-Consumes-LongMultiTarget"
  value: {
-  dps: 783.89852
-  tps: 1065.06904
+  dps: 790.61559
+  tps: 1074.39379
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-forever_frost-FullBuffs-P1-Consumes-LongSingleTarget"
  value: {
-  dps: 783.89852
-  tps: 729.49607
+  dps: 790.61559
+  tps: 735.7469
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-forever_frost-FullBuffs-P1-Consumes-ShortSingleTarget"
  value: {
-  dps: 790.39692
-  tps: 732.60569
+  dps: 815.4938
+  tps: 757.09909
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-forever_frost-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
-  dps: 423.94862
-  tps: 659.41205
+  dps: 430.22307
+  tps: 665.06683
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-forever_frost-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
-  dps: 423.94862
-  tps: 399.53801
+  dps: 430.22307
+  tps: 405.23007
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-forever_frost-NoBuffs-P1-Consumes-ShortSingleTarget"
  value: {
-  dps: 550.95701
-  tps: 522.25135
+  dps: 568.379
+  tps: 538.97208
  }
 }
 dps_results: {
@@ -279,43 +279,43 @@ dps_results: {
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Troll-p0.bis-DPS-forever_frost-FullBuffs-P1-Consumes-LongMultiTarget"
  value: {
-  dps: 784.31931
-  tps: 1071.7412
+  dps: 791.22988
+  tps: 1082.00251
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Troll-p0.bis-DPS-forever_frost-FullBuffs-P1-Consumes-LongSingleTarget"
  value: {
-  dps: 784.31931
-  tps: 730.17691
+  dps: 791.22988
+  tps: 736.60853
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Troll-p0.bis-DPS-forever_frost-FullBuffs-P1-Consumes-ShortSingleTarget"
  value: {
-  dps: 794.05664
-  tps: 736.17623
+  dps: 817.32491
+  tps: 758.68269
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Troll-p0.bis-DPS-forever_frost-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
-  dps: 421.61071
-  tps: 657.28151
+  dps: 423.54611
+  tps: 661.90858
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Troll-p0.bis-DPS-forever_frost-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
-  dps: 421.61071
-  tps: 397.44176
+  dps: 423.54611
+  tps: 399.36986
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Troll-p0.bis-DPS-forever_frost-NoBuffs-P1-Consumes-ShortSingleTarget"
  value: {
-  dps: 554.17778
-  tps: 525.2839
+  dps: 569.94642
+  tps: 540.4032
  }
 }
 dps_results: {
@@ -363,7 +363,7 @@ dps_results: {
 dps_results: {
  key: "TestP1Mage-Phase1-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 845.82454
-  tps: 786.92748
+  dps: 854.83549
+  tps: 795.02596
  }
 }

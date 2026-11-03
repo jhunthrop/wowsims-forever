@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Evocation when mana is nearly gone and at least 30 seconds of the fight are left: it is every mage's mana cooldown from level 20 (an 8 second channel at +1500% mana regeneration, 8 minute cooldown), so a mage that runs dry casts it instead of wanding. With less of the fight left, the channel costs more casting than the mana it returns can be spent on.",
+      "notes": "Evocation when you are nearly dry and more than 30 seconds of the fight remain. It is an 8 second channel at +1500% mana regeneration on an 8 minute cooldown, so it comes once a boss: spend your gem, a Major Mana Potion and a Demonic Rune first. Inside the last 30 seconds the mana comes back too late to spend, so keep casting.",
       "action": {
         "condition": {
           "and": {
@@ -49,7 +49,7 @@
       }
     },
     {
-      "notes": "Keep Ice Barrier up: the talent adds 15% Frost damage for a minute after a cast and another 5% while the shield holds (client 1.60.1.70707). It goes up before the pull and again when the shield's minute runs out. The condition names the shield with its rank, so while levelling it is rewritten to the same lower rank the cast uses. Nothing hits the simulated mage, so the shield never breaks and its extra 5% holds all minute; in a fight where it breaks, only the 15% stays.",
+      "notes": "Ice Barrier whenever the shield is down. The talent adds 15% Frost damage for a minute after the cast and another 5% while the shield holds, so it is your biggest damage buff. It has a 30 second cooldown: put it up before the pull and recast it the moment it breaks or runs out.",
       "action": {
         "condition": {
           "not": {
@@ -72,7 +72,7 @@
       }
     },
     {
-      "notes": "Ice Lance on a Fingers of Frost charge: the charge makes the target count as Frozen, so Ice Lance deals four times its damage and Shatter's crit bonus applies. Only fires with the Fingers of Frost talent; without it the buff never appears, the line asks whether the aura exists first, and the line stays idle.",
+      "notes": "Ice Lance while Fingers of Frost is up and its 8 second cooldown is ready. The charge makes the boss count as frozen, so Ice Lance hits for four times its damage with Shatter's 50% crit. Fingers of Frost gives two charges and Ice Lance spends one, so your next Frostbolt gets the other.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -103,7 +103,7 @@
       }
     },
     {
-      "notes": "Arcane Missiles on a Missile Barrage proc, raid build only (needs the talent). The proc makes it free, halves its channel and fires the missiles every half second. Frostbolt procs it 20% of the time with Missile Barrage 2/2. Guarded by auraIsKnown so a build without the talent never reads the line as live.",
+      "notes": "Arcane Missiles the moment Missile Barrage lights up. The proc makes it free, halves the channel and fires a missile every half second; Frostbolt procs it 20% of the time with Missile Barrage 2/2.",
       "action": {
         "condition": {
           "and": {
@@ -134,7 +134,7 @@
       }
     },
     {
-      "notes": "Cone of Cold within 10 yards on five Winter's Chill stacks, which every rank reaches. Every rank stacks Winter's Chill to 5 (the rank sets the chance a cast applies one); Frostbolt and empowered Ice Lance build the stacks, and Cone of Cold spends them for 100% more damage and 35% more of your spell damage (20% a stack since client 1.60.1.70707). You need to stand within 10 yards of the target. The line asks whether the target can carry Winter's Chill before it counts stacks: without the talent the aura does not exist, a condition on a missing aura is dropped, and the line would cast Cone of Cold on cooldown. Above 50% mana only: below that the mana is worth more as Frostbolts. At the raid band 20% to 60% gates all measured at least as well as no gate; 50% is the lowest that keeps the bare ladder character's level-40 rung from spending its pool on Cone of Cold. A raid frost mage stands at range, where the cone cannot reach the boss, so the engine refuses the cast beyond 10 yards (12 with Arctic Reach) and the tier list, which stands every caster at 30 yards, never fires this line. It fires for a character set to stand within reach, such as on a boss with no cleave or tail.",
+      "notes": "Cone of Cold on 5 Winter's Chill stacks above half mana, from within 10 yards. Frostbolt and Fingers of Frost Ice Lances build the stacks, and Cone of Cold spends 5 of them for double damage and 35% more of your spell damage. The cone reaches 10 yards, 12 with Arctic Reach, so it only comes up on a boss that lets you stand that close; from 30 yards, skip it.",
       "action": {
         "condition": {
           "and": {
@@ -194,7 +194,7 @@
       }
     },
     {
-      "notes": "Frostbolt is the filler between Fingers of Frost charges.",
+      "notes": "Frostbolt is the filler, and every cast can roll Fingers of Frost or Missile Barrage. Never stop casting to wait for a proc.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -205,7 +205,7 @@
       }
     },
     {
-      "notes": "Shoot only when nothing else can be cast, which in practice means out of mana: a wand shot cannot start during the global cooldown and holds you for the wand's full speed, so it never fits between spells.",
+      "notes": "Shoot only when you are out of mana and waiting on a gem, a rune or Evocation. A wand shot holds you for the wand's full speed, so never weave it between spells.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -227,7 +227,22 @@
       },
       "doAtValue": {
         "const": {
-          "val": "-1.5s"
+          "val": "-4s"
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10181,
+            "rank": 10
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-2.5s"
         }
       }
     }
