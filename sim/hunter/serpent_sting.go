@@ -12,7 +12,6 @@ func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 	spellId := [10]int32{0, 1978, 13549, 13550, 13551, 13552, 13553, 13554, 13555, 25295}[rank]
 	damage := SerpentStingDamage[rank]
 	casterLevel := int(hunter.Level)
-	spellCoeff := [10]float64{0, .4, .625, .925, 1, 1, 1, 1, 1, 1}[rank] / 5
 	manaCost := [10]float64{0, 15, 30, 50, 80, 115, 150, 190, 230, 250}[rank]
 	level := [10]int{0, 4, 10, 18, 26, 34, 42, 50, 58, 60}[rank]
 
@@ -53,9 +52,11 @@ func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 				Label: "SerpentSting" + hunter.Label + strconv.Itoa(rank),
 				Tag:   "SerpentSting",
 			},
-			NumberOfTicks:    5,
-			TickLength:       time.Second * 3,
-			BonusCoefficient: spellCoeff,
+			NumberOfTicks: 5,
+			TickLength:    time.Second * 3,
+			// EffectBonusCoefficient 0 on every trained rank (1978, 13549-13555,
+			// 25295); only the Season of Discovery reissues 425728-425737 scale.
+			BonusCoefficient: 0,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, damage.Roll(sim, casterLevel), isRollover)
