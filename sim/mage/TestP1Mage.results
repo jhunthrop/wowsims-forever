@@ -216,15 +216,15 @@ dps_results: {
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-forever_frost-NoBuffs-P1-Consumes-LongMultiTarget"
  value: {
-  dps: 435.13036
-  tps: 671.64694
+  dps: 436.35515
+  tps: 672.75394
  }
 }
 dps_results: {
  key: "TestP1Mage-Phase1-Settings-Gnome-p0.bis-DPS-forever_frost-NoBuffs-P1-Consumes-LongSingleTarget"
  value: {
-  dps: 435.13036
-  tps: 409.87885
+  dps: 436.35515
+  tps: 410.97859
  }
 }
 dps_results: {
