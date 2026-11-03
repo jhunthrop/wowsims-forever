@@ -11,9 +11,9 @@ import (
 
 // Evocation (12051) is an 8 s channel at +1500% spirit regen. Regen ticks
 // every 2 s, and a pull's regen timer has no fixed phase against the
-// mage's casts, so an 8 s channel always spans four ticks. The engine's
-// ticks sit on a 2 s grid from the pull, and its casts on the global's
-// 0.5 s grid, so a channel often starts exactly on a tick. The tick at the
+// mage's casts, so an 8 s channel always spans four ticks. The engine
+// draws the regen grid's phase per iteration (core initManaTickAction), so
+// a start exactly on a tick is now rare, but this test forces one. The tick at the
 // start belongs to the time before the channel; the tick at the end must
 // still see the channel's regen, or that Evocation gets three ticks.
 func TestEvocationThatStartsOnARegenTickGetsFourTicks(t *testing.T) {
@@ -53,6 +53,9 @@ func TestEvocationThatStartsOnARegenTickGetsFourTicks(t *testing.T) {
 		Priority: core.ActionPriorityGCD,
 		OnAction: func(sim *core.Simulation) {
 			mage.SpendMana(sim, mage.CurrentMana(), mage.NewManaMetrics(core.ActionID{OtherID: proto.OtherAction_OtherActionNone}))
+			// The idle rotation's wait can hold the global past an
+			// off-grid tick; the test owns this moment.
+			mage.GCD.Reset()
 			if !mage.Evocation.Cast(sim, nil) {
 				t.Fatal("Evocation did not cast")
 			}
