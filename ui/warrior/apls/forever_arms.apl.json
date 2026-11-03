@@ -12,7 +12,7 @@
       },
       "doAtValue": {
         "const": {
-          "val": "-2s"
+          "val": "0s"
         }
       }
     },
@@ -39,7 +39,7 @@
       },
       "doAtValue": {
         "const": {
-          "val": "-1.5s"
+          "val": "0s"
         }
       }
     }
