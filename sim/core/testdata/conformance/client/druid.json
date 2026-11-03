@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70707",
+  "build": "1.60.1.70753",
   "class_slug": "druid",
   "family": 7,
   "spells": {
@@ -30790,7 +30790,7 @@
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
-          "variance": 0.71428573131561,
+          "variance": 0.71428573132,
           "points_per_level": 0.0
         },
         {
@@ -30887,6 +30887,42 @@
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1328827": {
+      "name": "Poised",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": -1,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 1,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 107,
+          "amount": -10,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 14,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
