@@ -157,8 +157,8 @@ type Paladin struct {
 	// Active abilities and shared cooldowns that are externally manipulated.
 	exorcism       []*core.Spell
 	judgement      *core.Spell
-	holyShieldAura [3]*core.Aura
-	holyShieldProc [3]*core.Spell
+	holyShieldAura [HolyShieldRanks]*core.Aura
+	holyShieldProc [HolyShieldRanks]*core.Spell
 	redoubtAura    *core.Aura
 	holyWrath      []*core.Spell
 
