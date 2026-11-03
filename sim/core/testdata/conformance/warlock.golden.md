@@ -12,78 +12,78 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| DSRuinWarlock | 10 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| DSRuinWarlock | 10 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| DSRuinWarlock | 10 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
-| DSRuinWarlock | 10 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| DSRuinWarlock | 10 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.200 x0.6250→0.125 | declared, matches |
+| DSRuinWarlock | 10 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| DSRuinWarlock | 10 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| DSRuinWarlock | 10 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
+| DSRuinWarlock | 10 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| DSRuinWarlock | 10 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | DSRuinWarlock | 10 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 10 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| DSRuinWarlock | 10 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.41-26.99→21.41-26.99 | 0.629 x0.4750→0.299 | declared, matches |
+| DSRuinWarlock | 10 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| DSRuinWarlock | 10 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.41-26.99→21.41-26.99 | 0.629 x0.4750→0.2988 | declared, matches |
 | DSRuinWarlock | 10 | Summon Felhunter | 0 | 691 | 198.00 (100% base mana)→198.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 10 | Summon Imp | 0 | 688 | 158.40 (80% base mana)→158.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 10 | Summon Succubus | 0 | 712 | 198.00 (100% base mana)→198.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 10 | Summon Voidwalker | 0 | 697 | 198.00 (100% base mana)→198.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 20 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| DSRuinWarlock | 20 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.123 | declared, matches |
-| DSRuinWarlock | 20 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| DSRuinWarlock | 20 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.155 | declared, matches |
+| DSRuinWarlock | 20 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| DSRuinWarlock | 20 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.1230 | declared, matches |
+| DSRuinWarlock | 20 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| DSRuinWarlock | 20 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.1550 | declared, matches |
 | DSRuinWarlock | 20 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 20 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 20 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
-| DSRuinWarlock | 20 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| DSRuinWarlock | 20 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.125 | declared, matches |
+| DSRuinWarlock | 20 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
+| DSRuinWarlock | 20 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| DSRuinWarlock | 20 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | DSRuinWarlock | 20 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  | 32.00-32.00→32.00-32.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 20 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 20 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 20 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 20 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 21.65-26.75→21.65-26.75 | 0.429 x0.9250→0.397 | declared, matches |
-| DSRuinWarlock | 20 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| DSRuinWarlock | 20 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.299 | declared, matches |
-| DSRuinWarlock | 20 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.560 | declared, matches |
+| DSRuinWarlock | 20 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 21.65-26.75→21.65-26.75 | 0.429 x0.9250→0.3968 | declared, matches |
+| DSRuinWarlock | 20 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| DSRuinWarlock | 20 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.2988 | declared, matches |
+| DSRuinWarlock | 20 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.5600 | declared, matches |
 | DSRuinWarlock | 20 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 54.22-61.78→54.22-61.78 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 20 | Summon Felhunter | 0 | 691 | 383.00 (100% base mana)→383.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 20 | Summon Imp | 0 | 688 | 306.40 (80% base mana)→306.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 20 | Summon Succubus | 0 | 712 | 383.00 (100% base mana)→383.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 20 | Summon Voidwalker | 0 | 697 | 383.00 (100% base mana)→383.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 30 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| DSRuinWarlock | 30 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.123 | declared, matches |
+| DSRuinWarlock | 30 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| DSRuinWarlock | 30 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.1230 | declared, matches |
 | DSRuinWarlock | 30 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
-| DSRuinWarlock | 30 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| DSRuinWarlock | 30 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.155 | declared, matches |
+| DSRuinWarlock | 30 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| DSRuinWarlock | 30 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.1550 | declared, matches |
 | DSRuinWarlock | 30 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 30 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 30 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
+| DSRuinWarlock | 30 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
 | DSRuinWarlock | 30 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  | 34.00-34.00→34.00-34.00 | 0.100→0.100 | declared, matches |
-| DSRuinWarlock | 30 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| DSRuinWarlock | 30 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.125 | declared, matches |
+| DSRuinWarlock | 30 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| DSRuinWarlock | 30 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | DSRuinWarlock | 30 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  | 38.00-38.00→38.00-38.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 30 | Immolate | 4 | 2941 | 155.00→155.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 15000→15000 | match |  | 56.00-56.00→56.00-56.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 30 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Life Tap | 3 | 1456 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 30 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.397 | declared, matches |
+| DSRuinWarlock | 30 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.3968 | declared, matches |
 | DSRuinWarlock | 30 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 32.50-39.10→32.50-39.10 | 0.429→0.429 | declared, matches |
-| DSRuinWarlock | 30 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| DSRuinWarlock | 30 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.299 | declared, matches |
-| DSRuinWarlock | 30 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.560 | declared, matches |
+| DSRuinWarlock | 30 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| DSRuinWarlock | 30 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.2988 | declared, matches |
+| DSRuinWarlock | 30 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.5600 | declared, matches |
 | DSRuinWarlock | 30 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 57.96-66.04→57.96-66.04 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 30 | Shadow Bolt | 5 | 1106 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 75.11-85.69→75.11-85.69 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 30 | Summon Felhunter | 0 | 691 | 638.00 (100% base mana)→638.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Summon Imp | 0 | 688 | 510.40 (80% base mana)→510.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Summon Succubus | 0 | 712 | 638.00 (100% base mana)→638.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 30 | Summon Voidwalker | 0 | 697 | 638.00 (100% base mana)→638.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 38 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| DSRuinWarlock | 38 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.123 | declared, matches |
+| DSRuinWarlock | 38 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| DSRuinWarlock | 38 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.1230 | declared, matches |
 | DSRuinWarlock | 38 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 38 | Bane of Agony | 4 | 11711 | 130.00→130.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 24000→24000 | match |  | 21.00-21.00→21.00-21.00 | 0.133→0.133 | declared, matches |
-| DSRuinWarlock | 38 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| DSRuinWarlock | 38 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.155 | declared, matches |
+| DSRuinWarlock | 38 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| DSRuinWarlock | 38 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.1550 | declared, matches |
 | DSRuinWarlock | 38 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 38 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 38 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -92,11 +92,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 38 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 38 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 38 | Drain Life | 4 | 7651 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 5000→5000 | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 38 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
+| DSRuinWarlock | 38 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
 | DSRuinWarlock | 38 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  | 34.00-34.00→34.00-34.00 | 0.100→0.100 | declared, matches |
 | DSRuinWarlock | 38 | Drain Soul | 3 | 8289 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  | 54.00-54.00→54.00-54.00 | 0.100→0.100 | declared, matches |
-| DSRuinWarlock | 38 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| DSRuinWarlock | 38 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.125 | declared, matches |
+| DSRuinWarlock | 38 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| DSRuinWarlock | 38 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | DSRuinWarlock | 38 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  | 38.00-38.00→38.00-38.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 38 | Immolate | 4 | 2941 | 155.00→155.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 15000→15000 | match |  | 63.50-63.50→63.50-63.50 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 38 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
@@ -105,12 +105,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 38 | Life Tap | 4 | 11687 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 38 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 38 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 38 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.397 | declared, matches |
+| DSRuinWarlock | 38 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.3968 | declared, matches |
 | DSRuinWarlock | 38 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 33.77-40.63→33.77-40.63 | 0.429→0.429 | declared, matches |
 | DSRuinWarlock | 38 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 42.73-51.67→42.73-51.67 | 0.429→0.429 | declared, matches |
-| DSRuinWarlock | 38 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| DSRuinWarlock | 38 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.299 | declared, matches |
-| DSRuinWarlock | 38 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.560 | declared, matches |
+| DSRuinWarlock | 38 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| DSRuinWarlock | 38 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.2988 | declared, matches |
+| DSRuinWarlock | 38 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.5600 | declared, matches |
 | DSRuinWarlock | 38 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 57.96-66.04→57.96-66.04 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 38 | Shadow Bolt | 5 | 1106 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 78.47-89.53→78.47-89.53 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 38 | Shadow Bolt | 6 | 7641 | 210.00→210.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 36→36 | n/a | match |  | 97.21-109.59→97.21-109.59 | 0.857→0.857 | declared, matches |
@@ -118,12 +118,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 38 | Summon Imp | 0 | 688 | 692.80 (80% base mana)→692.80 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 38 | Summon Succubus | 0 | 712 | 866.00 (100% base mana)→866.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 38 | Summon Voidwalker | 0 | 697 | 866.00 (100% base mana)→866.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 40 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| DSRuinWarlock | 40 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.123 | declared, matches |
+| DSRuinWarlock | 40 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| DSRuinWarlock | 40 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.1230 | declared, matches |
 | DSRuinWarlock | 40 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 40 | Bane of Agony | 4 | 11711 | 130.00→130.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 24000→24000 | match |  | 21.00-21.00→21.00-21.00 | 0.133→0.133 | declared, matches |
-| DSRuinWarlock | 40 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| DSRuinWarlock | 40 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.155 | declared, matches |
+| DSRuinWarlock | 40 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| DSRuinWarlock | 40 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.1550 | declared, matches |
 | DSRuinWarlock | 40 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 40 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 40 | Curse of Recklessness | 2 | 7658 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 120000→-1 | unmodeled-duration | duration_ms: the engine aura on the target is the same object core.FullBuffs.Debuffs already made permanent with core.MakePermanent, so its registered duration cannot be read here (the spell's own constructor sets the client's duration) | n/a | n/a | n/a |
@@ -134,11 +134,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 40 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 40 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 40 | Drain Life | 4 | 7651 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 5000→5000 | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 40 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
+| DSRuinWarlock | 40 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
 | DSRuinWarlock | 40 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  | 34.00-34.00→34.00-34.00 | 0.100→0.100 | declared, matches |
 | DSRuinWarlock | 40 | Drain Soul | 3 | 8289 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  | 54.00-54.00→54.00-54.00 | 0.100→0.100 | declared, matches |
-| DSRuinWarlock | 40 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| DSRuinWarlock | 40 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.125 | declared, matches |
+| DSRuinWarlock | 40 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| DSRuinWarlock | 40 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | DSRuinWarlock | 40 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  | 38.00-38.00→38.00-38.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 40 | Immolate | 4 | 2941 | 155.00→155.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 15000→15000 | match |  | 63.50-63.50→63.50-63.50 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 40 | Immolate | 5 | 11665 | 220.00→220.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 40→40 | 15000→15000 | match |  | 72.00-72.00→72.00-72.00 | 0.200→0.200 | declared, matches |
@@ -148,12 +148,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 40 | Life Tap | 4 | 11687 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 40 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 40 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 40 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.397 | declared, matches |
+| DSRuinWarlock | 40 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.3968 | declared, matches |
 | DSRuinWarlock | 40 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 33.77-40.63→33.77-40.63 | 0.429→0.429 | declared, matches |
 | DSRuinWarlock | 40 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 44.18-53.42→44.18-53.42 | 0.429→0.429 | declared, matches |
-| DSRuinWarlock | 40 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| DSRuinWarlock | 40 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.299 | declared, matches |
-| DSRuinWarlock | 40 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.560 | declared, matches |
+| DSRuinWarlock | 40 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| DSRuinWarlock | 40 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.2988 | declared, matches |
+| DSRuinWarlock | 40 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.5600 | declared, matches |
 | DSRuinWarlock | 40 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 57.96-66.04→57.96-66.04 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 40 | Shadow Bolt | 5 | 1106 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 78.47-89.53→78.47-89.53 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 40 | Shadow Bolt | 6 | 7641 | 210.00→210.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 36→36 | n/a | match |  | 99.46-112.14→99.46-112.14 | 0.857→0.857 | declared, matches |
@@ -161,13 +161,13 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 40 | Summon Imp | 0 | 688 | 738.40 (80% base mana)→738.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 40 | Summon Succubus | 0 | 712 | 923.00 (100% base mana)→923.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 40 | Summon Voidwalker | 0 | 697 | 923.00 (100% base mana)→923.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 50 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| DSRuinWarlock | 50 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.123 | declared, matches |
+| DSRuinWarlock | 50 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| DSRuinWarlock | 50 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.1230 | declared, matches |
 | DSRuinWarlock | 50 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 50 | Bane of Agony | 4 | 11711 | 130.00→130.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 24000→24000 | match |  | 21.00-21.00→21.00-21.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 50 | Bane of Agony | 5 | 11712 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 24000→24000 | match |  | 33.00-33.00→33.00-33.00 | 0.133→0.133 | declared, matches |
-| DSRuinWarlock | 50 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| DSRuinWarlock | 50 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.155 | declared, matches |
+| DSRuinWarlock | 50 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| DSRuinWarlock | 50 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.1550 | declared, matches |
 | DSRuinWarlock | 50 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 50 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 50 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  | 40.00-40.00→40.00-40.00 | 0.200→0.200 | declared, matches |
@@ -183,11 +183,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 50 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 50 | Drain Life | 4 | 7651 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 50 | Drain Life | 5 | 11699 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 5000→5000 | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 50 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
+| DSRuinWarlock | 50 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
 | DSRuinWarlock | 50 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  | 34.00-34.00→34.00-34.00 | 0.100→0.100 | declared, matches |
 | DSRuinWarlock | 50 | Drain Soul | 3 | 8289 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  | 54.00-54.00→54.00-54.00 | 0.100→0.100 | declared, matches |
-| DSRuinWarlock | 50 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| DSRuinWarlock | 50 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.125 | declared, matches |
+| DSRuinWarlock | 50 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| DSRuinWarlock | 50 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | DSRuinWarlock | 50 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  | 38.00-38.00→38.00-38.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 50 | Immolate | 4 | 2941 | 155.00→155.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 15000→15000 | match |  | 63.50-63.50→63.50-63.50 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 50 | Immolate | 5 | 11665 | 220.00→220.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 40→40 | 15000→15000 | match |  | 80.00-80.00→80.00-80.00 | 0.200→0.200 | declared, matches |
@@ -200,14 +200,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 50 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 50 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 50 | Rain of Fire | 3 | 11677 | 885.00→885.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 8000→8000 | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 50 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.397 | declared, matches |
+| DSRuinWarlock | 50 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.3968 | declared, matches |
 | DSRuinWarlock | 50 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 33.77-40.63→33.77-40.63 | 0.429→0.429 | declared, matches |
 | DSRuinWarlock | 50 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 44.18-53.42→44.18-53.42 | 0.429→0.429 | declared, matches |
 | DSRuinWarlock | 50 | Searing Pain | 4 | 17921 | 118.00→118.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 42→42 | n/a | match |  | 61.36-73.44→61.36-73.44 | 0.429→0.429 | declared, matches |
 | DSRuinWarlock | 50 | Searing Pain | 5 | 17922 | 141.00→141.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | n/a | match |  | 77.63-92.37→77.63-92.37 | 0.429→0.429 | declared, matches |
-| DSRuinWarlock | 50 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| DSRuinWarlock | 50 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.299 | declared, matches |
-| DSRuinWarlock | 50 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.560 | declared, matches |
+| DSRuinWarlock | 50 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| DSRuinWarlock | 50 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.2988 | declared, matches |
+| DSRuinWarlock | 50 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.5600 | declared, matches |
 | DSRuinWarlock | 50 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 57.96-66.04→57.96-66.04 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 50 | Shadow Bolt | 5 | 1106 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 78.47-89.53→78.47-89.53 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 50 | Shadow Bolt | 6 | 7641 | 210.00→210.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 36→36 | n/a | match |  | 100.59-113.41→100.59-113.41 | 0.857→0.857 | declared, matches |
@@ -217,15 +217,15 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 50 | Summon Imp | 0 | 688 | 930.40 (80% base mana)→930.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 50 | Summon Succubus | 0 | 712 | 1163.00 (100% base mana)→1163.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 50 | Summon Voidwalker | 0 | 697 | 1163.00 (100% base mana)→1163.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 60 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| DSRuinWarlock | 60 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.123 | declared, matches |
+| DSRuinWarlock | 60 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| DSRuinWarlock | 60 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.1230 | declared, matches |
 | DSRuinWarlock | 60 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 60 | Bane of Agony | 4 | 11711 | 130.00→130.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 24000→24000 | match |  | 21.00-21.00→21.00-21.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 60 | Bane of Agony | 5 | 11712 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 24000→24000 | match |  | 33.00-33.00→33.00-33.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 60 | Bane of Agony | 6 | 11713 | 215.00→215.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 24000→24000 | match |  | 46.00-46.00→46.00-46.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 60 | Bane of Doom | 0 | 603 | 300.00→300.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 60→60 | 60000→60000 | match |  | 1742.00-1742.00→1742.00-1742.00 | 4.000→4.000 | declared, matches |
-| DSRuinWarlock | 60 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| DSRuinWarlock | 60 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.155 | declared, matches |
+| DSRuinWarlock | 60 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| DSRuinWarlock | 60 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.1550 | declared, matches |
 | DSRuinWarlock | 60 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  | 40.00-40.00→40.00-40.00 | 0.200→0.200 | declared, matches |
@@ -244,12 +244,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 60 | Drain Life | 4 | 7651 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Drain Life | 5 | 11699 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 5000→5000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Drain Life | 6 | 11700 | 300.00→300.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 5000→5000 | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 60 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
+| DSRuinWarlock | 60 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
 | DSRuinWarlock | 60 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  | 34.00-34.00→34.00-34.00 | 0.100→0.100 | declared, matches |
 | DSRuinWarlock | 60 | Drain Soul | 3 | 8289 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  | 54.00-54.00→54.00-54.00 | 0.100→0.100 | declared, matches |
 | DSRuinWarlock | 60 | Drain Soul | 4 | 11675 | 290.00→290.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 15000→15000 | match |  | 84.00-84.00→84.00-84.00 | 0.100→0.100 | declared, matches |
-| DSRuinWarlock | 60 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| DSRuinWarlock | 60 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.125 | declared, matches |
+| DSRuinWarlock | 60 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| DSRuinWarlock | 60 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | DSRuinWarlock | 60 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  | 38.00-38.00→38.00-38.00 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Immolate | 4 | 2941 | 155.00→155.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 15000→15000 | match |  | 63.50-63.50→63.50-63.50 | 0.200→0.200 | declared, matches |
 | DSRuinWarlock | 60 | Immolate | 5 | 11665 | 220.00→220.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 40→40 | 15000→15000 | match |  | 80.00-80.00→80.00-80.00 | 0.200→0.200 | declared, matches |
@@ -265,15 +265,15 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 60 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Rain of Fire | 3 | 11677 | 885.00→885.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 8000→8000 | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Rain of Fire | 4 | 11678 | 1185.00→1185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 8000→8000 | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 60 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.397 | declared, matches |
+| DSRuinWarlock | 60 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.3968 | declared, matches |
 | DSRuinWarlock | 60 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 33.77-40.63→33.77-40.63 | 0.429→0.429 | declared, matches |
 | DSRuinWarlock | 60 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 44.18-53.42→44.18-53.42 | 0.429→0.429 | declared, matches |
 | DSRuinWarlock | 60 | Searing Pain | 4 | 17921 | 118.00→118.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 42→42 | n/a | match |  | 61.36-73.44→61.36-73.44 | 0.429→0.429 | declared, matches |
 | DSRuinWarlock | 60 | Searing Pain | 5 | 17922 | 141.00→141.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | n/a | match |  | 83.11-98.89→83.11-98.89 | 0.429→0.429 | declared, matches |
 | DSRuinWarlock | 60 | Searing Pain | 6 | 17923 | 168.00→168.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 58→58 | n/a | match |  | 106.96-125.84→106.96-125.84 | 0.429→0.429 | declared, matches |
-| DSRuinWarlock | 60 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| DSRuinWarlock | 60 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.299 | declared, matches |
-| DSRuinWarlock | 60 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.560 | declared, matches |
+| DSRuinWarlock | 60 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| DSRuinWarlock | 60 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.2988 | declared, matches |
+| DSRuinWarlock | 60 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.5600 | declared, matches |
 | DSRuinWarlock | 60 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 57.96-66.04→57.96-66.04 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 60 | Shadow Bolt | 5 | 1106 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 78.47-89.53→78.47-89.53 | 0.857→0.857 | declared, matches |
 | DSRuinWarlock | 60 | Shadow Bolt | 6 | 7641 | 210.00→210.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 36→36 | n/a | match |  | 100.59-113.41→100.59-113.41 | 0.857→0.857 | declared, matches |
@@ -286,78 +286,78 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 60 | Summon Imp | 0 | 688 | 1098.40 (80% base mana)→1098.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Summon Succubus | 0 | 712 | 1373.00 (100% base mana)→1373.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 60 | Summon Voidwalker | 0 | 697 | 1373.00 (100% base mana)→1373.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 10 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| SMRuinWarlock | 10 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| SMRuinWarlock | 10 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
-| SMRuinWarlock | 10 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| SMRuinWarlock | 10 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.200 x0.6250→0.125 | declared, matches |
+| SMRuinWarlock | 10 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| SMRuinWarlock | 10 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| SMRuinWarlock | 10 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
+| SMRuinWarlock | 10 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| SMRuinWarlock | 10 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | SMRuinWarlock | 10 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 10 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| SMRuinWarlock | 10 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.41-26.99→21.41-26.99 | 0.629 x0.4750→0.299 | declared, matches |
+| SMRuinWarlock | 10 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| SMRuinWarlock | 10 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.41-26.99→21.41-26.99 | 0.629 x0.4750→0.2988 | declared, matches |
 | SMRuinWarlock | 10 | Summon Felhunter | 0 | 691 | 198.00 (100% base mana)→198.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 10 | Summon Imp | 0 | 688 | 158.40 (80% base mana)→158.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 10 | Summon Succubus | 0 | 712 | 198.00 (100% base mana)→198.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 10 | Summon Voidwalker | 0 | 697 | 198.00 (100% base mana)→198.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 20 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| SMRuinWarlock | 20 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.123 | declared, matches |
-| SMRuinWarlock | 20 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| SMRuinWarlock | 20 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.155 | declared, matches |
+| SMRuinWarlock | 20 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| SMRuinWarlock | 20 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.1230 | declared, matches |
+| SMRuinWarlock | 20 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| SMRuinWarlock | 20 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.1550 | declared, matches |
 | SMRuinWarlock | 20 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 20 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 20 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
-| SMRuinWarlock | 20 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| SMRuinWarlock | 20 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.125 | declared, matches |
+| SMRuinWarlock | 20 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
+| SMRuinWarlock | 20 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| SMRuinWarlock | 20 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | SMRuinWarlock | 20 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  | 32.00-32.00→32.00-32.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 20 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 20 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 20 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 20 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 21.65-26.75→21.65-26.75 | 0.429 x0.9250→0.397 | declared, matches |
-| SMRuinWarlock | 20 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| SMRuinWarlock | 20 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.299 | declared, matches |
-| SMRuinWarlock | 20 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.560 | declared, matches |
+| SMRuinWarlock | 20 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 21.65-26.75→21.65-26.75 | 0.429 x0.9250→0.3968 | declared, matches |
+| SMRuinWarlock | 20 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| SMRuinWarlock | 20 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.2988 | declared, matches |
+| SMRuinWarlock | 20 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.5600 | declared, matches |
 | SMRuinWarlock | 20 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 54.22-61.78→54.22-61.78 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 20 | Summon Felhunter | 0 | 691 | 383.00 (100% base mana)→383.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 20 | Summon Imp | 0 | 688 | 306.40 (80% base mana)→306.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 20 | Summon Succubus | 0 | 712 | 383.00 (100% base mana)→383.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 20 | Summon Voidwalker | 0 | 697 | 383.00 (100% base mana)→383.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 30 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| SMRuinWarlock | 30 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.123 | declared, matches |
+| SMRuinWarlock | 30 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| SMRuinWarlock | 30 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.1230 | declared, matches |
 | SMRuinWarlock | 30 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
-| SMRuinWarlock | 30 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| SMRuinWarlock | 30 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.155 | declared, matches |
+| SMRuinWarlock | 30 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| SMRuinWarlock | 30 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.1550 | declared, matches |
 | SMRuinWarlock | 30 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 30 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Curse of the Elements | 2 | 1311676 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 300000→300000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Drain Life | 1 | 689 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 30 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
+| SMRuinWarlock | 30 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
 | SMRuinWarlock | 30 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  | 34.00-34.00→34.00-34.00 | 0.100→0.100 | declared, matches |
-| SMRuinWarlock | 30 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| SMRuinWarlock | 30 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.125 | declared, matches |
+| SMRuinWarlock | 30 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| SMRuinWarlock | 30 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | SMRuinWarlock | 30 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  | 38.00-38.00→38.00-38.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 30 | Immolate | 4 | 2941 | 155.00→155.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 15000→15000 | match |  | 56.00-56.00→56.00-56.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 30 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Life Tap | 2 | 1455 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 16→16 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Life Tap | 3 | 1456 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 26→26 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 30 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.397 | declared, matches |
+| SMRuinWarlock | 30 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.3968 | declared, matches |
 | SMRuinWarlock | 30 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 32.50-39.10→32.50-39.10 | 0.429→0.429 | declared, matches |
-| SMRuinWarlock | 30 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| SMRuinWarlock | 30 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.299 | declared, matches |
-| SMRuinWarlock | 30 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.560 | declared, matches |
+| SMRuinWarlock | 30 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| SMRuinWarlock | 30 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.2988 | declared, matches |
+| SMRuinWarlock | 30 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.5600 | declared, matches |
 | SMRuinWarlock | 30 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 57.96-66.04→57.96-66.04 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 30 | Shadow Bolt | 5 | 1106 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 75.11-85.69→75.11-85.69 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 30 | Summon Felhunter | 0 | 691 | 638.00 (100% base mana)→638.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Summon Imp | 0 | 688 | 510.40 (80% base mana)→510.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Summon Succubus | 0 | 712 | 638.00 (100% base mana)→638.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 30 | Summon Voidwalker | 0 | 697 | 638.00 (100% base mana)→638.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 38 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| SMRuinWarlock | 38 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.123 | declared, matches |
+| SMRuinWarlock | 38 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| SMRuinWarlock | 38 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.1230 | declared, matches |
 | SMRuinWarlock | 38 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 38 | Bane of Agony | 4 | 11711 | 130.00→130.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 24000→24000 | match |  | 21.00-21.00→21.00-21.00 | 0.133→0.133 | declared, matches |
-| SMRuinWarlock | 38 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| SMRuinWarlock | 38 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.155 | declared, matches |
+| SMRuinWarlock | 38 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| SMRuinWarlock | 38 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.1550 | declared, matches |
 | SMRuinWarlock | 38 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 38 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 38 | Curse of the Elements | 1 | 440892 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -366,11 +366,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 38 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 38 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 38 | Drain Life | 4 | 7651 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 5000→5000 | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 38 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
+| SMRuinWarlock | 38 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
 | SMRuinWarlock | 38 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  | 34.00-34.00→34.00-34.00 | 0.100→0.100 | declared, matches |
 | SMRuinWarlock | 38 | Drain Soul | 3 | 8289 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  | 54.00-54.00→54.00-54.00 | 0.100→0.100 | declared, matches |
-| SMRuinWarlock | 38 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| SMRuinWarlock | 38 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.125 | declared, matches |
+| SMRuinWarlock | 38 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| SMRuinWarlock | 38 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | SMRuinWarlock | 38 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  | 38.00-38.00→38.00-38.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 38 | Immolate | 4 | 2941 | 155.00→155.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 15000→15000 | match |  | 63.50-63.50→63.50-63.50 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 38 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
@@ -379,12 +379,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 38 | Life Tap | 4 | 11687 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 38 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 38 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 38 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.397 | declared, matches |
+| SMRuinWarlock | 38 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.3968 | declared, matches |
 | SMRuinWarlock | 38 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 33.77-40.63→33.77-40.63 | 0.429→0.429 | declared, matches |
 | SMRuinWarlock | 38 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 42.73-51.67→42.73-51.67 | 0.429→0.429 | declared, matches |
-| SMRuinWarlock | 38 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| SMRuinWarlock | 38 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.299 | declared, matches |
-| SMRuinWarlock | 38 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.560 | declared, matches |
+| SMRuinWarlock | 38 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| SMRuinWarlock | 38 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.2988 | declared, matches |
+| SMRuinWarlock | 38 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.5600 | declared, matches |
 | SMRuinWarlock | 38 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 57.96-66.04→57.96-66.04 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 38 | Shadow Bolt | 5 | 1106 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 78.47-89.53→78.47-89.53 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 38 | Shadow Bolt | 6 | 7641 | 210.00→210.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 36→36 | n/a | match |  | 97.21-109.59→97.21-109.59 | 0.857→0.857 | declared, matches |
@@ -392,12 +392,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 38 | Summon Imp | 0 | 688 | 692.80 (80% base mana)→692.80 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 38 | Summon Succubus | 0 | 712 | 866.00 (100% base mana)→866.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 38 | Summon Voidwalker | 0 | 697 | 866.00 (100% base mana)→866.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 40 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| SMRuinWarlock | 40 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.123 | declared, matches |
+| SMRuinWarlock | 40 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| SMRuinWarlock | 40 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.1230 | declared, matches |
 | SMRuinWarlock | 40 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 40 | Bane of Agony | 4 | 11711 | 130.00→130.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 24000→24000 | match |  | 21.00-21.00→21.00-21.00 | 0.133→0.133 | declared, matches |
-| SMRuinWarlock | 40 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| SMRuinWarlock | 40 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.155 | declared, matches |
+| SMRuinWarlock | 40 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| SMRuinWarlock | 40 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.1550 | declared, matches |
 | SMRuinWarlock | 40 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 40 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 40 | Curse of Recklessness | 2 | 7658 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 120000→-1 | unmodeled-duration | duration_ms: the engine aura on the target is the same object core.FullBuffs.Debuffs already made permanent with core.MakePermanent, so its registered duration cannot be read here (the spell's own constructor sets the client's duration) | n/a | n/a | n/a |
@@ -408,11 +408,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 40 | Drain Life | 2 | 699 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 22→22 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 40 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 40 | Drain Life | 4 | 7651 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 5000→5000 | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 40 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
+| SMRuinWarlock | 40 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
 | SMRuinWarlock | 40 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  | 34.00-34.00→34.00-34.00 | 0.100→0.100 | declared, matches |
 | SMRuinWarlock | 40 | Drain Soul | 3 | 8289 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  | 54.00-54.00→54.00-54.00 | 0.100→0.100 | declared, matches |
-| SMRuinWarlock | 40 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| SMRuinWarlock | 40 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.125 | declared, matches |
+| SMRuinWarlock | 40 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| SMRuinWarlock | 40 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | SMRuinWarlock | 40 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  | 38.00-38.00→38.00-38.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 40 | Immolate | 4 | 2941 | 155.00→155.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 15000→15000 | match |  | 63.50-63.50→63.50-63.50 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 40 | Immolate | 5 | 11665 | 220.00→220.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 40→40 | 15000→15000 | match |  | 72.00-72.00→72.00-72.00 | 0.200→0.200 | declared, matches |
@@ -422,12 +422,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 40 | Life Tap | 4 | 11687 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 40 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 40 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 40 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.397 | declared, matches |
+| SMRuinWarlock | 40 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.3968 | declared, matches |
 | SMRuinWarlock | 40 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 33.77-40.63→33.77-40.63 | 0.429→0.429 | declared, matches |
 | SMRuinWarlock | 40 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 44.18-53.42→44.18-53.42 | 0.429→0.429 | declared, matches |
-| SMRuinWarlock | 40 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| SMRuinWarlock | 40 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.299 | declared, matches |
-| SMRuinWarlock | 40 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.560 | declared, matches |
+| SMRuinWarlock | 40 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| SMRuinWarlock | 40 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.2988 | declared, matches |
+| SMRuinWarlock | 40 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.5600 | declared, matches |
 | SMRuinWarlock | 40 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 57.96-66.04→57.96-66.04 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 40 | Shadow Bolt | 5 | 1106 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 78.47-89.53→78.47-89.53 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 40 | Shadow Bolt | 6 | 7641 | 210.00→210.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 36→36 | n/a | match |  | 99.46-112.14→99.46-112.14 | 0.857→0.857 | declared, matches |
@@ -435,13 +435,13 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 40 | Summon Imp | 0 | 688 | 738.40 (80% base mana)→738.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 40 | Summon Succubus | 0 | 712 | 923.00 (100% base mana)→923.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 40 | Summon Voidwalker | 0 | 697 | 923.00 (100% base mana)→923.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 50 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| SMRuinWarlock | 50 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.123 | declared, matches |
+| SMRuinWarlock | 50 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| SMRuinWarlock | 50 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.1230 | declared, matches |
 | SMRuinWarlock | 50 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 50 | Bane of Agony | 4 | 11711 | 130.00→130.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 24000→24000 | match |  | 21.00-21.00→21.00-21.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 50 | Bane of Agony | 5 | 11712 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 24000→24000 | match |  | 33.00-33.00→33.00-33.00 | 0.133→0.133 | declared, matches |
-| SMRuinWarlock | 50 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| SMRuinWarlock | 50 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.155 | declared, matches |
+| SMRuinWarlock | 50 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| SMRuinWarlock | 50 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.1550 | declared, matches |
 | SMRuinWarlock | 50 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 50 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 50 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  | 40.00-40.00→40.00-40.00 | 0.200→0.200 | declared, matches |
@@ -457,11 +457,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 50 | Drain Life | 3 | 709 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 50 | Drain Life | 4 | 7651 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 50 | Drain Life | 5 | 11699 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 5000→5000 | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 50 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
+| SMRuinWarlock | 50 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
 | SMRuinWarlock | 50 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  | 34.00-34.00→34.00-34.00 | 0.100→0.100 | declared, matches |
 | SMRuinWarlock | 50 | Drain Soul | 3 | 8289 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  | 54.00-54.00→54.00-54.00 | 0.100→0.100 | declared, matches |
-| SMRuinWarlock | 50 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| SMRuinWarlock | 50 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.125 | declared, matches |
+| SMRuinWarlock | 50 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| SMRuinWarlock | 50 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | SMRuinWarlock | 50 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  | 38.00-38.00→38.00-38.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 50 | Immolate | 4 | 2941 | 155.00→155.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 15000→15000 | match |  | 63.50-63.50→63.50-63.50 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 50 | Immolate | 5 | 11665 | 220.00→220.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 40→40 | 15000→15000 | match |  | 80.00-80.00→80.00-80.00 | 0.200→0.200 | declared, matches |
@@ -474,14 +474,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 50 | Rain of Fire | 1 | 5740 | 295.00→295.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 50 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 50 | Rain of Fire | 3 | 11677 | 885.00→885.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 8000→8000 | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 50 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.397 | declared, matches |
+| SMRuinWarlock | 50 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.3968 | declared, matches |
 | SMRuinWarlock | 50 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 33.77-40.63→33.77-40.63 | 0.429→0.429 | declared, matches |
 | SMRuinWarlock | 50 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 44.18-53.42→44.18-53.42 | 0.429→0.429 | declared, matches |
 | SMRuinWarlock | 50 | Searing Pain | 4 | 17921 | 118.00→118.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 42→42 | n/a | match |  | 61.36-73.44→61.36-73.44 | 0.429→0.429 | declared, matches |
 | SMRuinWarlock | 50 | Searing Pain | 5 | 17922 | 141.00→141.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | n/a | match |  | 77.63-92.37→77.63-92.37 | 0.429→0.429 | declared, matches |
-| SMRuinWarlock | 50 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| SMRuinWarlock | 50 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.299 | declared, matches |
-| SMRuinWarlock | 50 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.560 | declared, matches |
+| SMRuinWarlock | 50 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| SMRuinWarlock | 50 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.2988 | declared, matches |
+| SMRuinWarlock | 50 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.5600 | declared, matches |
 | SMRuinWarlock | 50 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 57.96-66.04→57.96-66.04 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 50 | Shadow Bolt | 5 | 1106 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 78.47-89.53→78.47-89.53 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 50 | Shadow Bolt | 6 | 7641 | 210.00→210.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 36→36 | n/a | match |  | 100.59-113.41→100.59-113.41 | 0.857→0.857 | declared, matches |
@@ -491,15 +491,15 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 50 | Summon Imp | 0 | 688 | 930.40 (80% base mana)→930.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 50 | Summon Succubus | 0 | 712 | 1163.00 (100% base mana)→1163.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 50 | Summon Voidwalker | 0 | 697 | 1163.00 (100% base mana)→1163.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 60 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.073 | declared, matches |
-| SMRuinWarlock | 60 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.123 | declared, matches |
+| SMRuinWarlock | 60 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133 x0.5500→0.0732 | declared, matches |
+| SMRuinWarlock | 60 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133 x0.9250→0.1230 | declared, matches |
 | SMRuinWarlock | 60 | Bane of Agony | 3 | 6217 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | 14.00-14.00→14.00-14.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 60 | Bane of Agony | 4 | 11711 | 130.00→130.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 24000→24000 | match |  | 21.00-21.00→21.00-21.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 60 | Bane of Agony | 5 | 11712 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | 24000→24000 | match |  | 33.00-33.00→33.00-33.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 60 | Bane of Agony | 6 | 11713 | 215.00→215.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 24000→24000 | match |  | 46.00-46.00→46.00-46.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 60 | Bane of Doom | 0 | 603 | 300.00→300.00 | mana→mana | 60000→60000 | 0→0 | 1500→1500 | 60→60 | 60000→60000 | match |  | 1742.00-1742.00→1742.00-1742.00 | 4.000→4.000 | declared, matches |
-| SMRuinWarlock | 60 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.080 | declared, matches |
-| SMRuinWarlock | 60 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.155 | declared, matches |
+| SMRuinWarlock | 60 | Corruption | 1 | 172 | 35.00→35.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | 12000→12000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.4000→0.0800 | declared, matches |
+| SMRuinWarlock | 60 | Corruption | 2 | 6222 | 55.00→55.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 14→14 | 15000→15000 | match |  | 13.00-13.00→13.00-13.00 | 0.200 x0.7750→0.1550 | declared, matches |
 | SMRuinWarlock | 60 | Corruption | 3 | 6223 | 100.00→100.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 24→24 | 18000→18000 | match |  | 22.00-22.00→22.00-22.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Corruption | 4 | 7648 | 160.00→160.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 34→34 | 18000→18000 | match |  | 28.00-28.00→28.00-28.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Corruption | 5 | 11671 | 225.00→225.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 44→44 | 18000→18000 | match |  | 40.00-40.00→40.00-40.00 | 0.200→0.200 | declared, matches |
@@ -518,12 +518,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 60 | Drain Life | 4 | 7651 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Drain Life | 5 | 11699 | 240.00→240.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 5000→5000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Drain Life | 6 | 11700 | 300.00→300.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 5000→5000 | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 60 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.062 | declared, matches |
+| SMRuinWarlock | 60 | Drain Soul | 1 | 1120 | 55.00→55.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 17.00-17.00→17.00-17.00 | 0.100 x0.6250→0.0625 | declared, matches |
 | SMRuinWarlock | 60 | Drain Soul | 2 | 8288 | 125.00→125.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 24→24 | 15000→15000 | match |  | 34.00-34.00→34.00-34.00 | 0.100→0.100 | declared, matches |
 | SMRuinWarlock | 60 | Drain Soul | 3 | 8289 | 210.00→210.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  | 54.00-54.00→54.00-54.00 | 0.100→0.100 | declared, matches |
 | SMRuinWarlock | 60 | Drain Soul | 4 | 11675 | 290.00→290.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 15000→15000 | match |  | 84.00-84.00→84.00-84.00 | 0.100→0.100 | declared, matches |
-| SMRuinWarlock | 60 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.058 | declared, matches |
-| SMRuinWarlock | 60 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.125 | declared, matches |
+| SMRuinWarlock | 60 | Immolate | 1 | 348 | 25.00→25.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 1→1 | 15000→15000 | match |  | 10.80-10.80→10.80-10.80 | 0.200 x0.2875→0.0575 | declared, matches |
+| SMRuinWarlock | 60 | Immolate | 2 | 707 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 10→10 | 15000→15000 | match |  | 21.00-21.00→21.00-21.00 | 0.200 x0.6250→0.1250 | declared, matches |
 | SMRuinWarlock | 60 | Immolate | 3 | 1094 | 90.00→90.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 20→20 | 15000→15000 | match |  | 38.00-38.00→38.00-38.00 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Immolate | 4 | 2941 | 155.00→155.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 30→30 | 15000→15000 | match |  | 63.50-63.50→63.50-63.50 | 0.200→0.200 | declared, matches |
 | SMRuinWarlock | 60 | Immolate | 5 | 11665 | 220.00→220.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 40→40 | 15000→15000 | match |  | 80.00-80.00→80.00-80.00 | 0.200→0.200 | declared, matches |
@@ -539,15 +539,15 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 60 | Rain of Fire | 2 | 6219 | 605.00→605.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 8000→8000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Rain of Fire | 3 | 11677 | 885.00→885.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 46→46 | 8000→8000 | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 60 | Rain of Fire | 4 | 11678 | 1185.00→1185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 8000→8000 | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 60 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.397 | declared, matches |
+| SMRuinWarlock | 60 | Searing Pain | 1 | 5676 | 45.00→45.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 18→18 | n/a | match |  | 23.80-29.40→23.80-29.40 | 0.429 x0.9250→0.3968 | declared, matches |
 | SMRuinWarlock | 60 | Searing Pain | 2 | 17919 | 68.00→68.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 33.77-40.63→33.77-40.63 | 0.429→0.429 | declared, matches |
 | SMRuinWarlock | 60 | Searing Pain | 3 | 17920 | 91.00→91.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 44.18-53.42→44.18-53.42 | 0.429→0.429 | declared, matches |
 | SMRuinWarlock | 60 | Searing Pain | 4 | 17921 | 118.00→118.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 42→42 | n/a | match |  | 61.36-73.44→61.36-73.44 | 0.429→0.429 | declared, matches |
 | SMRuinWarlock | 60 | Searing Pain | 5 | 17922 | 141.00→141.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | n/a | match |  | 83.11-98.89→83.11-98.89 | 0.429→0.429 | declared, matches |
 | SMRuinWarlock | 60 | Searing Pain | 6 | 17923 | 168.00→168.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 58→58 | n/a | match |  | 106.96-125.84→106.96-125.84 | 0.429→0.429 | declared, matches |
-| SMRuinWarlock | 60 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.140 | declared, matches |
-| SMRuinWarlock | 60 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.299 | declared, matches |
-| SMRuinWarlock | 60 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.560 | declared, matches |
+| SMRuinWarlock | 60 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486 x0.2875→0.1397 | declared, matches |
+| SMRuinWarlock | 60 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629 x0.4750→0.2988 | declared, matches |
+| SMRuinWarlock | 60 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800 x0.7000→0.5600 | declared, matches |
 | SMRuinWarlock | 60 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 57.96-66.04→57.96-66.04 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 60 | Shadow Bolt | 5 | 1106 | 160.00→160.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 78.47-89.53→78.47-89.53 | 0.857→0.857 | declared, matches |
 | SMRuinWarlock | 60 | Shadow Bolt | 6 | 7641 | 210.00→210.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 36→36 | n/a | match |  | 100.59-113.41→100.59-113.41 | 0.857→0.857 | declared, matches |

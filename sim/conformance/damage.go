@@ -214,7 +214,11 @@ func damageCells(c DamageComparison) (rangeCell, coefficientCell, statusCell str
 	}
 	coefficientCell = fmt.Sprintf("%.3f→%.3f", c.ClientCoefficient, c.EngineCoefficient)
 	if c.LevelPenalty != 0 && c.LevelPenalty != 1 {
-		coefficientCell = fmt.Sprintf("%.3f x%.4f→%.3f", c.ClientCoefficient, c.LevelPenalty, c.EngineCoefficient)
+		// Four places for a penalised coefficient: a product such as 0.200 x 0.2875 = 0.0575
+		// sits exactly on a three-place boundary, and arm64's fused multiply-add rounds it to
+		// 0.058 where amd64 rounds it to 0.057, so a golden written on one architecture
+		// failed on the other (the fork's CI, amd64, from 40021374a to 9f42ff1b3).
+		coefficientCell = fmt.Sprintf("%.3f x%.4f→%.4f", c.ClientCoefficient, c.LevelPenalty, c.EngineCoefficient)
 	}
 	if !c.ClientCoefficientFromTable {
 		coefficientCell = fmt.Sprintf("%.3f (convention)→%.3f", c.ClientCoefficient, c.EngineCoefficient)
