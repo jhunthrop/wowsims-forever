@@ -76,9 +76,9 @@ func (warrior *Warrior) registerDemoralizingShoutSpell() {
 			IgnoreHaste: true,
 		},
 
-		// UNCONFIRMED: the client row has no threat effect for the shout
-		// (Sunder Armor's is the only warrior effect 63), so the fork's
-		// vanilla-shaped 0.4 x damage-free formula stays.
+		// The shout deals no damage, so ThreatMultiplier touches nothing;
+		// its threat is effect 63's flat amount on each target hit
+		// (demoralizingShoutThreat).
 		ThreatMultiplier: 0.4,
 		FlatThreatBonus:  demoralizingShoutThreat(rank, warrior.Level),
 
