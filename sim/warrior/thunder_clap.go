@@ -26,11 +26,9 @@ var thunderClapRankDuration = [ThunderClapRanks + 1]time.Duration{
 }
 
 const (
-	// thunderClapCooldown and thunderClapAttackSpeedSlowPercent are the
-	// learnable family's category cooldown (6000 ms) and aura 319 amount
-	// (-20).
+	// thunderClapCooldown is the learnable family's category cooldown
+	// (6000 ms); its slow is core.ThunderClapSlowPercent.
 	thunderClapCooldown               = 6 * time.Second
-	thunderClapAttackSpeedSlowPercent = 20
 	conquerorsBattlegear5pcSlowDamage = 1.5
 )
 
@@ -42,9 +40,9 @@ func (warrior *Warrior) registerThunderClapSpell() {
 	// Conqueror's Battlegear 5-piece: "Increase the Slow effect and damage
 	// of Thunder Clap by 50%".
 	has5pcConq := warrior.HasSetBonus(ItemSetConquerorsBattleGear, 5)
-	attackSpeedReduction := int32(thunderClapAttackSpeedSlowPercent)
+	attackSpeedReduction := core.ThunderClapSlowPercent
 	if has5pcConq {
-		attackSpeedReduction = int32(thunderClapAttackSpeedSlowPercent * conquerorsBattlegear5pcSlowDamage)
+		attackSpeedReduction = core.ThunderClapConquerorSlowPercent
 	}
 	// Forever lets a Defensive Stance warrior clap ("Thunder Clap works in
 	// Battle or Defensive Stance", research/06-since-announcement.md,

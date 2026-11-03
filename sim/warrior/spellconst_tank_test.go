@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/common/clientdamage/clientdamagetest"
+	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/spellconst"
 )
 
@@ -72,8 +73,8 @@ func TestThunderClapRanksAreTheLearnableFamily(t *testing.T) {
 		if got, want := time.Duration(spell.DurationMS)*time.Millisecond, thunderClapRankDuration[rank]; got != want {
 			t.Errorf("rank %d: duration %v, client %v", rank, want, got)
 		}
-		if got := findEffect(t, spell, clientEffectApplyAura, clientAuraSlowAttack).Amount; got != -thunderClapAttackSpeedSlowPercent {
-			t.Errorf("rank %d: slow %v, client %v", rank, -thunderClapAttackSpeedSlowPercent, got)
+		if got := findEffect(t, spell, clientEffectApplyAura, clientAuraSlowAttack).Amount; got != -float64(core.ThunderClapSlowPercent) {
+			t.Errorf("rank %d: slow %v, client %v", rank, -core.ThunderClapSlowPercent, got)
 		}
 		if got, want := ThunderClapManaCost[rank], spell.Cost; got != want {
 			t.Errorf("rank %d: cost %v, client %v", rank, got, want)

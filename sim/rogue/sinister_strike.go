@@ -26,13 +26,14 @@ func (rogue *Rogue) registerSinisterStrikeSpell() {
 	spellID := sinisterStrikeSpellID[rank]
 
 	rogue.SinisterStrike = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:     SpellCode_RogueSinisterStrike,
-		ActionID:      core.ActionID{SpellID: spellID},
-		SpellSchool:   core.SpellSchoolPhysical,
-		DefenseType:   core.DefenseTypeMelee,
-		ProcMask:      core.ProcMaskMeleeMHSpecial,
-		Flags:         rogue.builderFlags() | SpellFlagColdBlooded,
-		RequiredLevel: sinisterStrikeLearnLevels[rank-1],
+		SpellCode:      SpellCode_RogueSinisterStrike,
+		ClassSpellMask: RogueSpellMaskSinisterStrike,
+		ActionID:       core.ActionID{SpellID: spellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          rogue.builderFlags() | SpellFlagColdBlooded,
+		RequiredLevel:  sinisterStrikeLearnLevels[rank-1],
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   []float64{45, 42, 40}[rogue.Talents.ImprovedSinisterStrike],

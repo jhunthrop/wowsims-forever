@@ -201,6 +201,11 @@ func (aa *AutoAttacks) OHAuto() *Spell {
 	return aa.oh.spell
 }
 
+// rangedAutoMissileSpeed is Auto Shot's (75) client SpellMisc Speed, the
+// same as Shoot Bow, Shoot Gun and Shoot Crossbow (2480, 7918, 7919); only
+// Throw (2764) flies at 20, and no simmed ranged auto attack throws.
+const rangedAutoMissileSpeed = 40
+
 func (aa *AutoAttacks) RangedAuto() *Spell {
 	return aa.ranged.spell
 }
@@ -536,7 +541,7 @@ func (unit *Unit) EnableAutoAttacks(agent Agent, options AutoAttackOptions) {
 		ProcMask:     ProcMaskRangedAuto,
 		Flags:        SpellFlagMeleeMetrics,
 		CastType:     proto.CastType_CastTypeRanged,
-		MissileSpeed: 24,
+		MissileSpeed: rangedAutoMissileSpeed,
 
 		MetricSplits: 2,
 

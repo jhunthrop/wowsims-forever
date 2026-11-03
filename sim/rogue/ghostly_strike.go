@@ -26,12 +26,13 @@ func (rogue *Rogue) registerGhostlyStrikeSpell() {
 	})
 
 	rogue.GhostlyStrike = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:   SpellCode_RogueGhostlyStrike,
-		ActionID:    ghostlyStrikeAura.ActionID,
-		SpellSchool: core.SpellSchoolPhysical,
-		DefenseType: core.DefenseTypeMelee,
-		ProcMask:    core.ProcMaskMeleeMHSpecial,
-		Flags:       rogue.builderFlags(),
+		SpellCode:      SpellCode_RogueGhostlyStrike,
+		ClassSpellMask: RogueSpellMaskGhostlyStrike,
+		ActionID:       ghostlyStrikeAura.ActionID,
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          rogue.builderFlags(),
 
 		// See talents.go's Adrenaline Rush RelatedSelfBuff comment.
 		RelatedSelfBuff: ghostlyStrikeAura,

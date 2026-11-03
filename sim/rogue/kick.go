@@ -23,13 +23,14 @@ func (rogue *Rogue) registerKick() {
 	// The interrupt and the lockout it starts are not modelled: encounter
 	// targets cast nothing. The damage and the energy are the result.
 	rogue.Kick = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:     SpellCode_RogueKick,
-		ActionID:      core.ActionID{SpellID: KickSpellId[rank]},
-		SpellSchool:   core.SpellSchoolPhysical,
-		DefenseType:   core.DefenseTypeMelee,
-		ProcMask:      core.ProcMaskMeleeMHSpecial,
-		Flags:         core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
-		RequiredLevel: KickLevel[rank],
+		SpellCode:      SpellCode_RogueKick,
+		ClassSpellMask: RogueSpellMaskKick,
+		ActionID:       core.ActionID{SpellID: KickSpellId[rank]},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+		RequiredLevel:  KickLevel[rank],
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   KickManaCost[rank], // the client's cost column; the energy this spell spends

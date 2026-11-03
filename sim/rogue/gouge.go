@@ -26,13 +26,14 @@ func (rogue *Rogue) registerGouge() {
 	casterLevel := int(rogue.Level)
 
 	rogue.Gouge = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:     SpellCode_RogueGouge,
-		ActionID:      core.ActionID{SpellID: GougeSpellId[rank]},
-		SpellSchool:   core.SpellSchoolPhysical,
-		DefenseType:   core.DefenseTypeMelee,
-		ProcMask:      core.ProcMaskMeleeMHSpecial,
-		Flags:         rogue.builderFlags(),
-		RequiredLevel: GougeLevel[rank],
+		SpellCode:      SpellCode_RogueGouge,
+		ClassSpellMask: RogueSpellMaskGouge,
+		ActionID:       core.ActionID{SpellID: GougeSpellId[rank]},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          rogue.builderFlags(),
+		RequiredLevel:  GougeLevel[rank],
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   GougeManaCost[rank], // the client's cost column; the energy this spell spends

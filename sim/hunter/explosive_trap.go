@@ -55,7 +55,7 @@ func (hunter *Hunter) getExplosiveTrapConfig(rank int, timer *core.Timer) core.S
 		Flags:         core.SpellFlagAPL | SpellFlagTrap,
 		Rank:          rank,
 		RequiredLevel: level,
-		MissileSpeed:  24,
+		MissileSpeed:  trapMissileSpeed,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,

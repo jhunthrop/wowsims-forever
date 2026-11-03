@@ -11,13 +11,11 @@ import (
 // SpellEquippedItems row is item class 2 with subclass mask 32768, the
 // dagger bit (Backstab carries the same row).
 func TestMutilateNeedsDaggersInBothHands(t *testing.T) {
-	daggers := testDaggers
-	maceAndSword := &proto.EquipmentSpec{Items: []*proto.ItemSpec{{Id: 19170}, {Id: 18832}}}
 	for _, c := range []struct {
 		name string
 		gear *proto.EquipmentSpec
 		want bool
-	}{{"two daggers", daggers, true}, {"a mace and a sword", maceAndSword, false}} {
+	}{{"two daggers", testDaggers, true}, {"a mace and a sword", testMaceAndSword, false}} {
 		sim, rogue := buildRogueWithGear(t, rogueTalentStringWith(t, "mutilate"), core.FullBuffs.Raid, core.FullBuffs.Debuffs, c.gear)
 		if got := rogue.Mutilate.CanCast(sim, sim.Encounter.TargetUnits[0]); got != c.want {
 			t.Errorf("%s: Mutilate castable = %v, want %v", c.name, got, c.want)

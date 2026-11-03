@@ -22,3 +22,9 @@ func (rogue *Rogue) HemorrhageWeaponDamageForTest(sim *core.Simulation, attackPo
 func (rogue *Rogue) MutilateOHWeaponDamageForTest(sim *core.Simulation, attackPower float64) float64 {
 	return rogue.mutilateOHWeaponDamage(sim, attackPower)
 }
+
+// PoisedEngineMaskForTest exposes the engine spells Poised's client family
+// reaches.
+func PoisedEngineMaskForTest() uint64 {
+	return rogueClassMasks.Resolve(poisedFamilies)
+}

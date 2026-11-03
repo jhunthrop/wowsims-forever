@@ -44,7 +44,7 @@ func (hunter *Hunter) getSniperShotConfig(rank int) core.SpellConfig {
 		CastType:      proto.CastType_CastTypeRanged,
 		Rank:          rank,
 		RequiredLevel: SniperShotLevel[rank],
-		MissileSpeed:  24,
+		MissileSpeed:  sniperShotMissileSpeed,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: sniperShotManaCost,

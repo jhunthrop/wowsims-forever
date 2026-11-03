@@ -30,14 +30,15 @@ func (rogue *Rogue) registerRupture() {
 	spellID := ruptureSpellID[rank]
 
 	rogue.Rupture = rogue.RegisterSpell(core.SpellConfig{
-		SpellCode:     SpellCode_RogueRupture,
-		ActionID:      core.ActionID{SpellID: spellID},
-		SpellSchool:   core.SpellSchoolPhysical,
-		DefenseType:   core.DefenseTypeMelee,
-		ProcMask:      core.ProcMaskMeleeMHSpecial,
-		Flags:         rogue.finisherFlags(),
-		MetricSplits:  6,
-		RequiredLevel: ruptureLearnLevels[rank-1],
+		SpellCode:      SpellCode_RogueRupture,
+		ClassSpellMask: RogueSpellMaskRupture,
+		ActionID:       core.ActionID{SpellID: spellID},
+		SpellSchool:    core.SpellSchoolPhysical,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial,
+		Flags:          rogue.finisherFlags(),
+		MetricSplits:   6,
+		RequiredLevel:  ruptureLearnLevels[rank-1],
 
 		EnergyCost: core.EnergyCostOptions{
 			Cost:   25,

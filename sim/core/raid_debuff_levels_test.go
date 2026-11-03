@@ -125,3 +125,24 @@ func TestRaidWintersChillGivesNoOneStacks(t *testing.T) {
 		t.Error("the raid's Winter's Chill put an aura on the target")
 	}
 }
+
+// Thunder Clap's slow in Forever is the trained family's: 6343 to 11581
+// (SkillLineAbility 6073 to 6078) all carry aura 319 at -20, "increasing
+// the time between their attacks by 20%" (the 461810 reissue's -10 is not
+// trained). The raid debuff had Era's 10% (15% with the 5-piece).
+func TestThunderClapRaidDebuffSlowsTwentyPercent(t *testing.T) {
+	for _, c := range []struct {
+		effect proto.TristateEffect
+		label  string
+	}{{proto.TristateEffect_TristateEffectRegular, "ThunderClap-20"}, {proto.TristateEffect_TristateEffectImproved, "ThunderClap-30"}} {
+		target := newDebuffTarget(60)
+		applyDebuffEffects(target, 0, &proto.Debuffs{ThunderClap: c.effect}, &proto.Raid{})
+		aura := target.GetAuraByID(ActionID{SpellID: 11581})
+		if aura == nil {
+			t.Fatalf("%v: no Thunder Clap 11581 on the target", c.effect)
+		}
+		if aura.Label != c.label {
+			t.Errorf("%v: Thunder Clap debuff is %q, want %q", c.effect, aura.Label, c.label)
+		}
+	}
+}

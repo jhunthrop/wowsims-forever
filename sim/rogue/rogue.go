@@ -99,6 +99,7 @@ type Rogue struct {
 	EvasionAura        *core.Aura
 	SliceAndDiceAura   *core.Aura
 	StealthAura        *core.Aura
+	PoisedAura         *core.Aura
 	VanishAura         *core.Aura
 	VenomAura          *core.Aura
 	// CutthroatAura is nil unless the Cutthroat talent is spent; set in
@@ -159,6 +160,9 @@ func (rogue *Rogue) Initialize() {
 	rogue.registerStealthAura()
 	rogue.registerStealthSpell()
 	rogue.registerVanishSpell()
+
+	// After every Energy ability, so its cost mod reaches them all.
+	rogue.registerPoised()
 }
 
 func (rogue *Rogue) Reset(_ *core.Simulation) {

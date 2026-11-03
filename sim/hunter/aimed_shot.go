@@ -25,7 +25,7 @@ func (hunter *Hunter) getAimedShotConfig(rank int, timer *core.Timer) core.Spell
 		CastType:       proto.CastType_CastTypeRanged,
 		Rank:           rank,
 		RequiredLevel:  level,
-		MissileSpeed:   24,
+		MissileSpeed:   aimedShotMissileSpeed,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,
