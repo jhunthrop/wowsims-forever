@@ -16,6 +16,10 @@ type OnRageChange func(aura *Aura, sim *Simulation, metrics *ResourceMetrics)
 type rageBar struct {
 	unit *Unit
 
+	// maxRage is the bar's cap: MaxRage, raised by a maximum-rage percent
+	// (a Gnome warrior's Expansive Mind).
+	maxRage float64
+
 	damageDealtMultiplier float64 // Multiplier for rage generation from damage dealt
 	damageTakenMultiplier float64 // Multiplier for rage generation from damage taken
 	// offHandDamageDealtMultiplier scales rage from off-hand auto-attacks
@@ -200,9 +204,21 @@ func (unit *Unit) EnableRageBar(options RageBarOptions) {
 		damageDealtMultiplier:        options.DamageDealtMultiplier,
 		damageTakenMultiplier:        options.DamageTakenMultiplier,
 		offHandDamageDealtMultiplier: 1,
+		maxRage:                      MaxRage,
 		startingRage:                 max(0, min(options.StartingRage, MaxRage)),
 		RageRefundMetrics:            unit.NewRageMetrics(ActionID{OtherID: proto.OtherAction_OtherActionRefund}),
 	}
+}
+
+// MaxRage is the most rage the unit's bar holds.
+func (unit *Unit) MaxRage() float64 {
+	return unit.rageBar.maxRage
+}
+
+// MultiplyMaxRage scales the rage bar's cap, as the client's aura 178
+// (maximum power percent, misc 1) does.
+func (unit *Unit) MultiplyMaxRage(multiplier float64) {
+	unit.rageBar.maxRage *= multiplier
 }
 
 func (unit *Unit) HasRageBar() bool {
@@ -240,7 +256,7 @@ func (rb *rageBar) AddRage(sim *Simulation, amount float64, metrics *ResourceMet
 		panic("Trying to add negative rage!")
 	}
 
-	newRage := min(rb.currentRage+amount, MaxRage)
+	newRage := min(rb.currentRage+amount, rb.maxRage)
 	metrics.AddEvent(amount, newRage-rb.currentRage)
 
 	if sim.Log != nil {
