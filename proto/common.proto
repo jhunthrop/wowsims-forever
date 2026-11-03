@@ -488,7 +488,16 @@ enum ShadowPowerBuff {
 enum FirePowerBuff {
 	FirePowerBuffUnknown = 0;
 	ElixirOfFirepower = 1;
-	ElixirOfGreaterFirepower = 2;
+	// Forever turned item 21546 into the Elixir of Holy Power
+	// (HolyPowerBuff); no fire elixir of 40 is left, so this applies nothing.
+	ElixirOfGreaterFirepower = 2 [deprecated=true];
+}
+
+// Forever's Elixir of Holy Power: item 21546, spell 1310077, 40 Holy
+// spell damage for 30 minutes.
+enum HolyPowerBuff {
+	HolyPowerBuffUnknown = 0;
+	ElixirOfHolyPower = 1;
 }
 
 enum FrostPowerBuff {
@@ -728,7 +737,7 @@ message IndividualBuffs {
 	bool slipkiks_savvy = 14;
 }
 
-// NextIndex: 38
+// NextIndex: 39
 message Consumes {
 	Flask flask = 1;
 	Food food = 2;
@@ -766,6 +775,7 @@ message Consumes {
 	// temporary enchant on the same hand.
 	WeaponImbue main_hand_stone = 36;
 	WeaponImbue off_hand_stone = 37;
+	HolyPowerBuff holy_power_buff = 38;
 }
 
 // NextIndex: 26
