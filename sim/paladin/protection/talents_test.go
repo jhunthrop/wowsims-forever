@@ -11,12 +11,15 @@ import (
 )
 
 const (
-	spellSealOfFury       = 20423
-	spellSealOfFuryProc   = 20418
-	spellJudgement        = 20271
-	spellHolyStrike       = 10333
-	spellHammerRighteous  = 407632
-	spellHolyShield       = 20928
+	spellSealOfFury      = 20423
+	spellSealOfFuryProc  = 20418
+	spellJudgement       = 20271
+	spellHolyStrike      = 10333
+	spellHammerRighteous = 407632
+	spellHolyShield      = 20928
+	// spellHolyShieldRank4 is the level 60 rank client 1.60.1.70753 adds; the
+	// reference rotation casts it.
+	spellHolyShieldRank4  = 1239570
 	spellHolyShieldProc   = 20957
 	spellTemplarsBulwark  = 1311015
 	spellDivineProtection = 5573

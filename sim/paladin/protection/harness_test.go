@@ -154,7 +154,7 @@ func auraLines(metrics *proto.UnitMetrics) []string {
 	var lines []string
 	for _, aura := range metrics.Auras {
 		switch aura.Id.GetSpellId() {
-		case spellHolyShield, spellSealOfFury, auraRedoubt, auraSealOfFuryShield, auraIronCreed:
+		case spellHolyShield, spellHolyShieldRank4, spellSealOfFury, auraRedoubt, auraSealOfFuryShield, auraIronCreed:
 			lines = append(lines, fmt.Sprintf("  aura %-8d uptime %6.1fs procs %6.1f", aura.Id.GetSpellId(), aura.UptimeSecondsAvg, aura.ProcsAvg))
 		}
 	}

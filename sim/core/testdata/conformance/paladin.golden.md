@@ -1472,6 +1472,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 1 | 20925 | 100.00→100.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | 10000→10000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 2 | 20927 | 150.00→150.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | 10000→10000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 3 | 20928 | 195.00→195.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 50→50 | 10000→10000 | match |  | n/a | n/a | n/a |
+| ProtectionPaladin (Holy Shield talent) | 60 | Holy Shield | 4 | 1239570 | 240.00→240.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 60→60 | 10000→10000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shock talent) | 40 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shock talent) | 50 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin (Holy Shock talent) | 50 | Holy Shock | 2 | 20929 | 275.00→275.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | n/a | n/a | n/a |

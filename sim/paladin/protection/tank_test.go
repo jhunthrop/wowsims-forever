@@ -70,7 +70,7 @@ func TestRotationAblation(t *testing.T) {
 		damageRises  bool
 	}{
 		{"Seal of Fury", spellSealOfFury, true, true},
-		{"Holy Shield", spellHolyShield, true, true},
+		{"Holy Shield", spellHolyShieldRank4, true, true},
 		{"Hammer of the Righteous", spellHammerRighteous, true, false},
 		{"Holy Strike", spellHolyStrike, true, false},
 		{"Judgement", spellJudgement, true, false},

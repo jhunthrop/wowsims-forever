@@ -129,21 +129,6 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 14325,
-            "rank": 4
-          }
-        }
-      },
-      "doAtValue": {
-        "const": {
-          "val": "-12s"
-        }
-      }
-    },
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
             "spellId": 1299447,
             "rank": 4
           }
