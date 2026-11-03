@@ -2,7 +2,7 @@
 //
 // Class: hunter
 // Client build: 1.60.1.70753
-// Source: /private/tmp/claude-501/-Users-jh-code-forever/54c69daf-a689-41fc-ad89-a21df2102a2f/scratchpad/a70753/site/data/builds/1.60.1.70753/spellconst/hunter.json
+// Source: /private/tmp/claude-501/-Users-jh-code-forever/54c69daf-a689-41fc-ad89-a21df2102a2f/scratchpad/r13/hotfix/root/1.60.1.70753/spellconst/hunter.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -140,7 +140,7 @@ var AimedShotCooldownMS = [AimedShotRanks + 1]int32{6000, 6000, 6000, 6000, 6000
 var AimedShotManaCost = [AimedShotRanks + 1]float64{0, 75, 115, 160, 210, 260, 310}
 var AimedShotManaCostPct = [AimedShotRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var AimedShotSpellCoeff = [AimedShotRanks + 1]float64{0.8571, 1, 1, 1, 1, 1, 1}
-var AimedShotBaseDamage = [AimedShotRanks + 1][]float64{{1387, 1613}, {20, 20}, {34, 34}, {55, 55}, {89, 89}, {125, 125}, {600, 600}}
+var AimedShotBaseDamage = [AimedShotRanks + 1][]float64{{1387, 1613}, {40, 40}, {70, 70}, {115, 115}, {185, 185}, {260, 260}, {600, 600}}
 var AimedShotPointsPerLevel = [AimedShotRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var AimedShotMaxLevel = [AimedShotRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
 
@@ -174,7 +174,7 @@ var ArcaneShotCooldownMS = [ArcaneShotRanks + 1]int32{0, 6000, 6000, 6000, 6000,
 var ArcaneShotManaCost = [ArcaneShotRanks + 1]float64{0, 25, 35, 50, 80, 105, 135, 160, 190}
 var ArcaneShotManaCostPct = [ArcaneShotRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
 var ArcaneShotSpellCoeff = [ArcaneShotRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286}
-var ArcaneShotBaseDamage = [ArcaneShotRanks + 1][]float64{{0, 0}, {20, 20}, {26, 26}, {39, 39}, {65, 65}, {94, 94}, {134, 134}, {170, 170}, {217, 217}}
+var ArcaneShotBaseDamage = [ArcaneShotRanks + 1][]float64{{0, 0}, {25, 25}, {35, 35}, {50, 50}, {85, 85}, {120, 120}, {175, 175}, {220, 220}, {280, 280}}
 var ArcaneShotPointsPerLevel = [ArcaneShotRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
 var ArcaneShotMaxLevel = [ArcaneShotRanks + 1]int{0, 0, 0, 0, 0, 0, 0, 0, 0}
 
@@ -254,7 +254,7 @@ var AspectOfTheHawkCooldownMS = [AspectOfTheHawkRanks + 1]int32{0, 0, 0, 0, 0, 0
 var AspectOfTheHawkManaCost = [AspectOfTheHawkRanks + 1]float64{0, 20, 35, 50, 70, 90, 110, 120}
 var AspectOfTheHawkManaCostPct = [AspectOfTheHawkRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var AspectOfTheHawkSpellCoeff = [AspectOfTheHawkRanks + 1]float64{0, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286, 0.4286}
-var AspectOfTheHawkBaseDamage = [AspectOfTheHawkRanks + 1][]float64{{0, 0}, {15, 15}, {22, 22}, {30, 30}, {38, 38}, {47, 47}, {55, 55}, {120, 120}}
+var AspectOfTheHawkBaseDamage = [AspectOfTheHawkRanks + 1][]float64{{0, 0}, {20, 20}, {35, 35}, {50, 50}, {70, 70}, {90, 90}, {110, 110}, {120, 120}}
 var AspectOfTheHawkPointsPerLevel = [AspectOfTheHawkRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var AspectOfTheHawkMaxLevel = [AspectOfTheHawkRanks + 1]int{0, 0, 0, 0, 0, 0, 0, 0}
 
@@ -4470,7 +4470,7 @@ var SniperShotCooldownMS = [SniperShotRanks + 1]int32{0, 15000, 15000, 15000}
 var SniperShotManaCost = [SniperShotRanks + 1]float64{0, 365, 365, 365}
 var SniperShotManaCostPct = [SniperShotRanks + 1]float64{0, 0, 0, 0}
 var SniperShotSpellCoeff = [SniperShotRanks + 1]float64{0, 1, 1, 1}
-var SniperShotBaseDamage = [SniperShotRanks + 1][]float64{{0, 0}, {160, 160}, {225, 225}, {295, 295}}
+var SniperShotBaseDamage = [SniperShotRanks + 1][]float64{{0, 0}, {320, 320}, {450, 450}, {590, 590}}
 var SniperShotPointsPerLevel = [SniperShotRanks + 1]float64{0, 0, 0, 0}
 var SniperShotMaxLevel = [SniperShotRanks + 1]int{0, 0, 0, 0}
 
@@ -5387,7 +5387,7 @@ var TrueshotAuraCooldownMS = [TrueshotAuraRanks + 1]int32{0, 0, 0, 0, 0, 0}
 var TrueshotAuraManaCost = [TrueshotAuraRanks + 1]float64{0, 180, 245, 325, 425, 525}
 var TrueshotAuraManaCostPct = [TrueshotAuraRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var TrueshotAuraSpellCoeff = [TrueshotAuraRanks + 1]float64{0, 120, 120, 120, 120, 120}
-var TrueshotAuraBaseDamage = [TrueshotAuraRanks + 1][]float64{{0, 0}, {15, 15}, {22, 22}, {30, 30}, {40, 40}, {50, 50}}
+var TrueshotAuraBaseDamage = [TrueshotAuraRanks + 1][]float64{{0, 0}, {20, 20}, {35, 35}, {50, 50}, {75, 75}, {100, 100}}
 var TrueshotAuraPointsPerLevel = [TrueshotAuraRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var TrueshotAuraMaxLevel = [TrueshotAuraRanks + 1]int{0, 0, 0, 0, 0, 0}
 

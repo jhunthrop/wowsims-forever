@@ -126,10 +126,11 @@ func averageArcaneShotRank8Damage(t *testing.T, n int) float64 {
 // TestArcaneShotRank8DamageMatchesSpellconst guards arcane_shot.go's
 // baseDamage array against regressing back to the pre-Forever classic
 // numbers (13/21/33/59/83/115/145/183) instead of spellconst/
-// hunter.json's own flat rank-8 amount (14287: 217, at zero spell power
-// so BonusCoefficient contributes nothing here).
+// hunter.json's own flat rank-8 amount (14287: 280 since the server's
+// 70753 hotfix push, 217 before; at zero spell power so BonusCoefficient
+// contributes nothing here).
 func TestArcaneShotRank8DamageMatchesSpellconst(t *testing.T) {
-	const wantBase = 217.0
+	const wantBase = 280.0
 	const oldEngineValue = 183.0
 
 	got := averageArcaneShotRank8Damage(t, 30)
@@ -233,13 +234,14 @@ func TestAspectOfTheHawkChargesManaMatchingSpellconst(t *testing.T) {
 	}
 }
 
-// TestAspectOfTheHawkAttackPowerFollowsThe70707Ranks pins the client's
-// aura-124 base points on every rank since 1.60.1.70707: ranks 1-5 cut to
-// 15/22/30/38/47 (from 20/35/50/70/90), rank 6 (14322) 55 and rank 7
-// (25296) 120 unchanged.
-func TestAspectOfTheHawkAttackPowerFollowsThe70707Ranks(t *testing.T) {
+// TestAspectOfTheHawkAttackPowerFollowsThe70753Push pins the server's
+// aura-124 base points on every rank: 1.60.1.70707 cut ranks 1-5 to
+// 15/22/30/38/47 and rank 6 (14322) stood at 55; the 70753 hotfix push
+// (2026-11-03) raised ranks 1-6 to 20/35/50/70/90/110. Rank 7 (25296)
+// stays 120.
+func TestAspectOfTheHawkAttackPowerFollowsThe70753Push(t *testing.T) {
 	_, built, _ := newBareHunterAtLevel(t, 60)
-	want := []float64{0, 15, 22, 30, 38, 47, 55, 120}
+	want := []float64{0, 20, 35, 50, 70, 90, 110, 120}
 	for rank := 1; rank < len(want); rank++ {
 		if got := built.getMaxAspectOfTheHawkAttackPower(rank); got != want[rank] {
 			t.Errorf("Aspect of the Hawk rank %d attack power = %.0f, want %.0f", rank, got, want[rank])
@@ -247,8 +249,8 @@ func TestAspectOfTheHawkAttackPowerFollowsThe70707Ranks(t *testing.T) {
 	}
 }
 
-// TestAspectOfTheHawkCastsRank6From58: rank 6 (14322, 55) is now stronger
-// than rank 5 (14321, 47), so a hunter who has learned it casts rank 6.
+// TestAspectOfTheHawkCastsRank6From58: rank 6 (14322, 110) is stronger
+// than rank 5 (14321, 90), so a hunter who has learned it casts rank 6.
 // Through 70685 rank 5 (90) won and rank 6 was skipped.
 func TestAspectOfTheHawkCastsRank6From58(t *testing.T) {
 	for _, level := range []int32{58, 59, 60} {
@@ -299,9 +301,10 @@ func TestSerpentStingPerTickDamageMatchesSpellconst(t *testing.T) {
 		spellID int32
 		want    float64
 	}{
-		{10, 13549, 6},  // rank 2
-		{34, 13552, 34}, // rank 5
-		{60, core.TernaryInt32(core.IncludeAQ, 25295, 13555), core.TernaryFloat64(core.IncludeAQ, 111, 83)}, // rank 9 (book) or 8 (trainer)
+		// The server's 70753 hotfix push (2026-11-03) amounts.
+		{10, 13549, 7},  // rank 2
+		{34, 13552, 40}, // rank 5
+		{60, core.TernaryInt32(core.IncludeAQ, 25295, 13555), core.TernaryFloat64(core.IncludeAQ, 135, 100)}, // rank 9 (book) or 8 (trainer)
 	}
 	for _, c := range cases {
 		found := false
