@@ -75,9 +75,11 @@ func (hunter *Hunter) getVolleyConfig(rank int) core.SpellConfig {
 			Aura: core.Aura{
 				Label: auraLabel,
 			},
-			NumberOfTicks:    6,
-			TickLength:       time.Second * 1,
-			BonusCoefficient: .056,
+			NumberOfTicks: 6,
+			TickLength:    time.Second * 1,
+			// Volley's damage rows (1279715, 1279719, 1279721) carry
+			// EffectBonusCoefficient 0.
+			BonusCoefficient: 0,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, damage.Roll(sim, casterLevel), isRollover)
 			},

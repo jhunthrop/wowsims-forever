@@ -12,16 +12,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Hunter | 10 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.097 | declared, matches |
+| Hunter | 10 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.000 | declared, matches |
 | Hunter | 10 | Aspect of the Hawk | 1 | 13165 | 20.00→20.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 10 | Heart of the Lion | 0 | 409580 | 16.48 (8% base mana)→16.48 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 10 | Hunter's Mark | 1 | 1130 | 15.00→15.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 6→6 | 120000→120000 | match |  | n/a | n/a | n/a |
 | Hunter | 10 | Raptor Strike | 2 | 14260 | 25.00→25.00 | mana→mana | 6000→6000 | 0→0 | 0→0 | 8→8 | 0→-1 | client-scripted | duration_ms: client states none (0), engine keeps -1ms | n/a | n/a | n/a |
 | Hunter | 10 | Serpent Sting | 2 | 13549 | 30.00→30.00 | mana→mana | 0→0 | -1000000→0 | 1500→1500 | 10→10 | 15000→15000 | match |  | 6.00-6.00→6.00-6.00 | 1.000 (convention)→0.000 | declared, matches |
 | Hunter | 20 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
-| Hunter | 20 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.097 | declared, matches |
-| Hunter | 20 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.210 | declared, matches |
-| Hunter | 20 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.429 | declared, matches |
+| Hunter | 20 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 20 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 20 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.000 | declared, matches |
 | Hunter | 20 | Aspect of the Hawk | 2 | 14318 | 35.00→35.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 20 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
 | Hunter | 20 | Heart of the Lion | 0 | 409580 | 36.08 (8% base mana)→36.08 | mana→mana | 0→0 | 0→0 | 1500→1500 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
@@ -34,10 +34,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 20 | Wing Clip | 1 | 2974 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | 5.00-5.00→5.00-5.00 | 1.000→1.000 | declared, matches |
 | Hunter | 30 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Aimed Shot | 2 | 20900 | 115.00→115.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
-| Hunter | 30 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.097 | declared, matches |
-| Hunter | 30 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.210 | declared, matches |
-| Hunter | 30 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 30 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
+| Hunter | 30 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 30 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 30 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 30 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.000 | declared, matches |
 | Hunter | 30 | Aspect of the Beast | 1 | 13161 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Aspect of the Hawk | 3 | 14319 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 30 | Freezing Trap | 1 | 1499 | 50.00→50.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 20→20 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
@@ -55,11 +55,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 38 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Aimed Shot | 2 | 20900 | 115.00→115.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Aimed Shot | 3 | 20901 | 160.00→160.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| Hunter | 38 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.097 | declared, matches |
-| Hunter | 38 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.210 | declared, matches |
-| Hunter | 38 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 38 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 38 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.429 | declared, matches |
+| Hunter | 38 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 38 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 38 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 38 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 38 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.000 | declared, matches |
 | Hunter | 38 | Aspect of the Beast | 1 | 13161 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Aspect of the Hawk | 4 | 14320 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 38 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
@@ -79,11 +79,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 40 | Aimed Shot | 1 | 19434 | 75.00→75.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Aimed Shot | 2 | 20900 | 115.00→115.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Aimed Shot | 3 | 20901 | 160.00→160.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
-| Hunter | 40 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.097 | declared, matches |
-| Hunter | 40 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.210 | declared, matches |
-| Hunter | 40 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 40 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 40 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.429 | declared, matches |
+| Hunter | 40 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 40 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 40 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 40 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 40 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.000 | declared, matches |
 | Hunter | 40 | Aspect of the Beast | 2 | 1299445 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Aspect of the Hawk | 4 | 14320 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 40 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
@@ -106,12 +106,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 50 | Aimed Shot | 2 | 20900 | 115.00→115.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Aimed Shot | 3 | 20901 | 160.00→160.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 36→36 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Aimed Shot | 4 | 20902 | 210.00→210.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 44→44 | n/a | match |  | n/a | n/a | n/a |
-| Hunter | 50 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.097 | declared, matches |
-| Hunter | 50 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.210 | declared, matches |
-| Hunter | 50 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 50 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 50 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 50 | Arcane Shot | 6 | 14285 | 135.00→135.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 44→44 | n/a | match |  | 134.00-134.00→134.00-134.00 | 0.429 (convention)→0.429 | declared, matches |
+| Hunter | 50 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 50 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 50 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 50 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 50 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 50 | Arcane Shot | 6 | 14285 | 135.00→135.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 44→44 | n/a | match |  | 134.00-134.00→134.00-134.00 | 0.429 (convention)→0.000 | declared, matches |
 | Hunter | 50 | Aspect of the Beast | 3 | 1299446 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Aspect of the Hawk | 5 | 14321 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 48→48 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 50 | Explosive Trap | 1 | 13813 | 275.00→275.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 34→34 | 60000→20000 | mismatch | duration_ms 60000->20000 | n/a | n/a | n/a |
@@ -138,14 +138,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Hunter | 60 | Aimed Shot | 4 | 20902 | 210.00→210.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 44→44 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Aimed Shot | 5 | 20903 | 260.00→260.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 52→52 | n/a | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Aimed Shot | 6 | 20904 | 310.00→310.00 | mana→mana | 6000→6000 | 2000→2000 | 1500→1500 | 60→60 | n/a | match |  | n/a | n/a | n/a |
-| Hunter | 60 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.097 | declared, matches |
-| Hunter | 60 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.210 | declared, matches |
-| Hunter | 60 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 60 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 60 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 60 | Arcane Shot | 6 | 14285 | 135.00→135.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 44→44 | n/a | match |  | 134.00-134.00→134.00-134.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 60 | Arcane Shot | 7 | 14286 | 160.00→160.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 52→52 | n/a | match |  | 170.00-170.00→170.00-170.00 | 0.429 (convention)→0.429 | declared, matches |
-| Hunter | 60 | Arcane Shot | 8 | 14287 | 190.00→190.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 60→60 | n/a | match |  | 217.00-217.00→217.00-217.00 | 0.429 (convention)→0.429 | declared, matches |
+| Hunter | 60 | Arcane Shot | 1 | 3044 | 25.00→25.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 6→6 | n/a | match |  | 20.00-20.00→20.00-20.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 60 | Arcane Shot | 2 | 14281 | 35.00→35.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 12→12 | n/a | match |  | 26.00-26.00→26.00-26.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 60 | Arcane Shot | 3 | 14282 | 50.00→50.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 20→20 | n/a | match |  | 39.00-39.00→39.00-39.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 60 | Arcane Shot | 4 | 14283 | 80.00→80.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 28→28 | n/a | match |  | 65.00-65.00→65.00-65.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 60 | Arcane Shot | 5 | 14284 | 105.00→105.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 36→36 | n/a | match |  | 94.00-94.00→94.00-94.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 60 | Arcane Shot | 6 | 14285 | 135.00→135.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 44→44 | n/a | match |  | 134.00-134.00→134.00-134.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 60 | Arcane Shot | 7 | 14286 | 160.00→160.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 52→52 | n/a | match |  | 170.00-170.00→170.00-170.00 | 0.429 (convention)→0.000 | declared, matches |
+| Hunter | 60 | Arcane Shot | 8 | 14287 | 190.00→190.00 | mana→mana | 6000→6000 | -1000000→0 | 1500→1500 | 60→60 | n/a | match |  | 217.00-217.00→217.00-217.00 | 0.429 (convention)→0.000 | declared, matches |
 | Hunter | 60 | Aspect of the Beast | 4 | 1299447 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Aspect of the Falcon | 0 | 469145 | 120.00→120.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | -1→-1 | match |  | n/a | n/a | n/a |
 | Hunter | 60 | Aspect of the Hawk | 6 | 14322 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | -1→-1 | match |  | n/a | n/a | n/a |
