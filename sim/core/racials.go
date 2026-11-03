@@ -490,7 +490,7 @@ var racialsByRace = map[proto.Race][]Racial{
 	proto.Race_RaceTroll: {
 		{
 			Name: "Berserking", Kind: RacialActive, Confirmed: true,
-			Note: "client 20554: +10% spellcasting and attack speed for 10 s, 3 min cooldown, no resource cost; the engine's custom-percentage cooldowns (15 to 30) are APL compatibility tags, not client rows",
+			Note: "client 20554: +10% spellcasting and attack speed for 15 s, 3 min cooldown, no resource cost; the engine's custom-percentage cooldowns (15 to 30) are APL compatibility tags, not client rows",
 			Apply: func(character *Character) {
 				// Haste is NOT merged (research/08-stats.md 12.1 item 5),
 				// so the aura sets both melee/ranged and spell haste.
@@ -558,8 +558,9 @@ const expansiveMindEnergyCap = 100
 
 // Berserking (client 20554): effects aura 319, 140 and 65 at 10 each and a
 // 3 min cooldown, with no resource cost. The duration is 15 s: Blizzard's
-// 27 October notes ("increased to 15 seconds (was 10 seconds)") and the
-// 30 October hotfix cache, over the shipped 10 s (SpellDuration 1). A customPercentage of 0 is the client row; any other value makes a
+// 27 October notes ("increased to 15 seconds (was 10 seconds)"), and the
+// 1.60.1.70753 client ships it (SpellMisc DurationIndex 15000 ms).
+// A customPercentage of 0 is the client row; any other value makes a
 // cooldown hard-coded to that percentage, which existing APLs address by
 // tag.
 const (
