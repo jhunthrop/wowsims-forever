@@ -110,7 +110,7 @@ func TestSkyborneRowsDifferOnlyInTheirSecondActive(t *testing.T) {
 		}
 	}
 	if differ != 1 {
-		t.Errorf("the two Skyborne rows differ in %d racials, want exactly 1 (Read Ley Line vs Skysight): %v vs %v", differ, alNames, hoNames)
+		t.Errorf("the two Skyborne rows differ in %d racials, want exactly 1 (Read Leyline vs Skysight): %v vs %v", differ, alNames, hoNames)
 	}
 }
 
@@ -126,7 +126,7 @@ func TestTheNamedRacialsAreAllPresent(t *testing.T) {
 		proto.Race_RaceTauren:             {"War Stomp", "Cultivation", "Endurance", "Plainsrunning"},
 		proto.Race_RaceGnome:              {"Escape Artist", "Eureka!", "Expansive Mind", "Engineering Specialization"},
 		proto.Race_RaceTroll:              {"Berserking", "Rapid Regeneration", "Beast Slaying", "Regeneration"},
-		proto.Race_RaceHighOrderSkyborne:  {"Walk on Air", "Read Ley Line", "Wind Blessed", "Elemental Insight"},
+		proto.Race_RaceHighOrderSkyborne:  {"Walk on Air", "Read Leyline", "Wind Blessed", "Elemental Insight"},
 		proto.Race_RaceWindshaperSkyborne: {"Walk on Air", "Skysight", "Wind Blessed", "Elemental Insight"},
 	}
 	for race, names := range want {

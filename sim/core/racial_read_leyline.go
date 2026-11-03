@@ -2,7 +2,7 @@ package core
 
 import "time"
 
-// Read Leyline (client 1259705, "Read Ley Line" in Blizzard's notes) is the
+// Read Leyline (client 1259705; Blizzard's notes wrote "Read Ley Line") is the
 // Alliance Skyborne's second active. It casts Energized (1270842): aura 110
 // (power regeneration percent, misc 0 mana) at 50 and aura 88 (health
 // regeneration percent) at 50, for 15 s. SpellCooldowns gives a 120000 ms

@@ -26,7 +26,7 @@ import (
 // TEN RACES. Skyborne is one neutral race whose faction is chosen at
 // character creation and whose second active differs by faction, so the
 // client's race table carries it as two rows and so does this file:
-// RaceHighOrderSkyborne (Alliance, Read Ley Line) and
+// RaceHighOrderSkyborne (Alliance, Read Leyline) and
 // RaceWindshaperSkyborne (Horde, Skysight). Their other three racials are
 // identical and are written once, by skyborneShared().
 //
@@ -491,11 +491,11 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 	},
 
-	// Skyborne (Alliance): Walk on Air, Read Ley Line, Wind Blessed,
+	// Skyborne (Alliance): Walk on Air, Read Leyline, Wind Blessed,
 	// Elemental Insight.
 	proto.Race_RaceHighOrderSkyborne: append([]Racial{{
-		Name: "Read Ley Line", Kind: RacialActive, SpellID: readLeylineSpellID, Confirmed: true,
-		Note:  "client 1259705 (Read Leyline): Energized 1270842, 50% mana and health regeneration for 15 s, 2 min cooldown, on the global cooldown; APL-cast only, see racial_read_leyline.go",
+		Name: "Read Leyline", Kind: RacialActive, SpellID: readLeylineSpellID, Confirmed: true,
+		Note:  "client 1259705: Energized 1270842, 50% mana and health regeneration for 15 s, 2 min cooldown, on the global cooldown; APL-cast only, see racial_read_leyline.go",
 		Apply: applyReadLeyline,
 	}}, skyborneShared()...),
 
