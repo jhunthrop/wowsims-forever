@@ -59,7 +59,12 @@ func (shaman *Shaman) newSearingTotemSpellConfig(rank int) core.SpellConfig {
 	duration := time.Second * time.Duration(SearingTotemDuration[rank])
 	level := SearingTotemLevel[rank]
 
-	attackInterval := time.Millisecond * 2500
+	// The client's Attack is a 2.2 s cast on every rank (SpellMisc
+	// CastingTimeIndex 24); foreverlogs.gg beta timelines put a totem's
+	// landed Attacks a median 2.437 s apart (1,072 gaps, ranks 1 to 3,
+	// round 13 casters), whatever the bolt's flight, so the totem does not
+	// wait for its bolt to land.
+	attackInterval := time.Millisecond * 2437
 
 	attackSpell := shaman.RegisterSpell(core.SpellConfig{
 		SpellCode:   SpellCode_ShamanSearingTotemAttack,
@@ -104,11 +109,6 @@ func (shaman *Shaman) newSearingTotemSpellConfig(rank int) core.SpellConfig {
 			Aura: core.Aura{
 				Label: fmt.Sprintf("Searing Totem (Rank %d)", rank),
 			},
-			// These are the real tick values, but searing totem doesn't start its next
-			// cast until the previous missile hits the target. We don't have an option
-			// for target distance yet so just pretend the tick rate is lower.
-			// https://wotlk.wowhead.com/spell=25530/attack
-			//TickLength:           time.Second * 2.2,
 			NumberOfTicks: int32(duration / attackInterval),
 			TickLength:    attackInterval,
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {

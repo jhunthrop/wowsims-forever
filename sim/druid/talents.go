@@ -155,7 +155,7 @@ func (druid *Druid) applyNaturesGrace() {
 	core.MakePermanent(druid.RegisterAura(core.Aura{
 		Label: "Natures Grace",
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			// Spells with travel times have their own implementation because the proc occurs as the cast finishes
+			// Spells with travel times (Wrath) activate it in their own landing callback.
 			if spell.MissileSpeed == 0 && spell.ProcMask.Matches(core.ProcMaskSpellDamage) && result.DidCrit() {
 				druid.NaturesGraceProcAura.Activate(sim)
 			}
