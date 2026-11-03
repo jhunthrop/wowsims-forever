@@ -169,13 +169,15 @@ func loadDefaultRotation(t *testing.T) *proto.APLRotation {
 }
 
 // castIDs is the rotation's healing kit: what it has to be seen casting.
-// Rejuvenation is rank 4 (2090) since site round 9 (owner ruling 3).
+// Rejuvenation is rank 10 (9841) on the tank and rank 7 (8910) on the party
+// since site round 13 (rank 4, 2090, from round 9 left 40% of the raid
+// fight's mana unspent).
 // Wild Growth is not in it: the site's guide build does not take the
 // talent, so the shipped rotation has no Wild Growth line since client
 // 1.60.1.70707.
-var castIDs = struct{ healingTouch, regrowth, rejuvenation, tranquility, swiftmend, naturesSwiftness, innervate int32 }{
-	healingTouch: 9889, regrowth: 9858, rejuvenation: 2090, tranquility: 9863,
-	swiftmend: 18562, naturesSwiftness: 17116, innervate: 29166,
+var castIDs = struct{ healingTouch, regrowth, rejuvenation, partyRejuvenation, tranquility, swiftmend, innervate int32 }{
+	healingTouch: 9889, regrowth: 9858, rejuvenation: 9841, partyRejuvenation: 8910, tranquility: 9863,
+	swiftmend: 18562, innervate: 29166,
 }
 
 func TestDefaultRotationHealsTheTestRaid(t *testing.T) {
@@ -193,8 +195,11 @@ func TestDefaultRotationHealsTheTestRaid(t *testing.T) {
 	}
 	for name, id := range map[string]int32{
 		"Healing Touch": castIDs.healingTouch, "Regrowth": castIDs.regrowth, "Rejuvenation": castIDs.rejuvenation,
-		"Tranquility": castIDs.tranquility, "Swiftmend": castIDs.swiftmend,
-		"Nature's Swiftness": castIDs.naturesSwiftness, "Innervate": castIDs.innervate,
+		"party Rejuvenation": castIDs.partyRejuvenation,
+		"Tranquility":        castIDs.tranquility, "Swiftmend": castIDs.swiftmend, "Innervate": castIDs.innervate,
+		// Nature's Swiftness is the tank-under-35% save: with rank 10 on the
+		// tank this light test raid never gets him that low. The site's raid
+		// profile still casts it (spec-breakdown -heal, about 1.6 a fight).
 	} {
 		if summary.Casts[id] == 0 {
 			t.Errorf("the rotation never cast %s (%d)", name, id)
