@@ -120,8 +120,9 @@ func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, rai
 
 	// Atk spd reduction
 	if debuffs.ThunderClap != proto.TristateEffect_TristateEffectMissing {
-		// +5% from Warrior's Conqueror's Battlegear 5pc
-		MakePermanent(ThunderClapAura(target, 8205, GetTristateValueInt32(debuffs.ThunderClap, 10, 15)))
+		// Improved is a raid warrior with Conqueror's Battlegear 5-piece.
+		MakePermanent(ThunderClapAura(target, ThunderClapRaidSpellID,
+			GetTristateValueInt32(debuffs.ThunderClap, ThunderClapSlowPercent, ThunderClapConquerorSlowPercent)))
 	}
 	if debuffs.Thunderfury {
 		MakePermanent(ThunderfuryASAura(target))
@@ -821,6 +822,16 @@ func apReductionEffect(aura *Aura, apReduction float64) *ExclusiveEffect {
 		},
 	})
 }
+
+// Thunder Clap's slow, the trained family (6343 to 11581, SkillLineAbility
+// 6073 to 6078): aura 319 at -20 on every rank, "increasing the time
+// between their attacks by 20%"; Conqueror's Battlegear 5-piece raises it
+// by 50%. The raid debuff is a level-60 warrior's rank 6.
+const (
+	ThunderClapRaidSpellID          int32 = 11581
+	ThunderClapSlowPercent          int32 = 20
+	ThunderClapConquerorSlowPercent int32 = 30
+)
 
 func ThunderClapAura(target *Unit, spellID int32, atkSpeedReductionPercent int32) *Aura {
 	aura := target.GetOrRegisterAura(Aura{
