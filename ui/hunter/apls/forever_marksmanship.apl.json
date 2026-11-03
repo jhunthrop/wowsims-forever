@@ -36,6 +36,21 @@
       "action": {
         "castSpell": {
           "spellId": {
+            "spellId": 14325,
+            "rank": 4
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-6s"
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
             "spellId": 20904,
             "rank": 6
           }
@@ -43,7 +58,7 @@
       },
       "doAtValue": {
         "const": {
-          "val": "-3.5s"
+          "val": "-2s"
         }
       }
     }
@@ -55,7 +70,33 @@
       }
     },
     {
-      "notes": "Rapid Fire timed to land with an incoming auto shot just as Multi-Shot is about to come off cooldown, so both benefit.",
+      "notes": "Hunter's Mark whenever the target is not marked. One mark per target is enough: if another hunter's mark is already up, leave it.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsActive": {
+                "auraId": {
+                  "spellId": 14325,
+                  "rank": 4
+                },
+                "sourceUnit": {
+                  "type": "CurrentTarget"
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 14325,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
+      "notes": "Rapid Fire on the pull, as an auto shot leaves and Multi-Shot is about to come back. The haste starts on a fresh shot and the first Multi-Shot lands inside it. It is a five minute cooldown, so a boss fight gets one: put your trinkets and racial on the same press.",
       "action": {
         "condition": {
           "and": {
@@ -104,7 +145,7 @@
       }
     },
     {
-      "notes": "Multi-Shot on cooldown. It shares its 6 second cooldown with Aimed Shot, and the instant shot does more over a fight than Aimed Shot's cast, which pauses the auto shot.",
+      "notes": "Multi-Shot on cooldown. It shares one 6 second cooldown with Aimed Shot, and the instant shot wins that cooldown every time: Aimed Shot's 2 second cast holds your auto shot, Multi-Shot never does.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -115,7 +156,7 @@
       }
     },
     {
-      "notes": "Arcane Shot as the last filler, only when Multi-Shot will not be ready within a global and mana is above a 25% reserve (Multi-Shot and Serpent Sting are the shots worth saving for): it is instant, so it never clips an auto shot and can hold Multi-Shot back by at most one global, but it is the least mana-efficient shot, and a Classic-length fight runs dry without the floor.",
+      "notes": "Arcane Shot to fill a gap when Multi-Shot is more than a global away and you are above 25% mana. It is instant and never holds an auto shot, but it costs the most mana for its damage, so it is the shot you drop first when the mana runs low. Serpent Sting is not worth the global in this build: the shots do more with that mana.",
       "action": {
         "condition": {
           "and": {

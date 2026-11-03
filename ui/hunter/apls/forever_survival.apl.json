@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Raptor Strike queued on the swing timer (tag 3, the on-next-swing queue tag), with no mana gate (the condition is always true): a 20% mana gate that once protected Mongoose Bite measured as a small loss.",
+      "notes": "Raptor Strike queued on every swing it is ready. It replaces your next white hit rather than costing a global, so keep it queued and never hold it back for mana: Resourcefulness takes 60% off its cost.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -32,7 +32,7 @@
       }
     },
     {
-      "notes": "Counterattack: a bare cast that only lands while its parry-triggered proc aura is active.",
+      "notes": "Counterattack the moment it lights up after you parry. It cannot be dodged, blocked or parried, so press it before anything else that is ready.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -43,7 +43,7 @@
       }
     },
     {
-      "notes": "Mongoose Bite inside its window: the client allows it for 5 seconds after a dodge, and Expose Prey opens the same window (Defensive State, spell 5302) for 10 seconds on a melee or ranged attack against a Hunter's Mark target; the window is one charge, spent by the cast. A target that never attacks gives no dodge, so without Expose Prey the line stays idle.",
+      "notes": "Mongoose Bite the moment it lights up. A dodge opens it for 5 seconds, and Expose Prey opens it for 10 seconds off your hits on a target with your Hunter's Mark, which is how it lights up on a boss that never swings at you. One press spends the window.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -61,7 +61,7 @@
       }
     },
     {
-      "notes": "Lacerate (the trainable bleed, rank 4) whenever its own bleed is down: with Mongoose Bite waiting on its window, the free globals go to keeping the bleed ticking.",
+      "notes": "Lacerate whenever its bleed is not on the target. While Mongoose Bite waits for its window, the free globals keep the bleed rolling.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -84,7 +84,7 @@
       }
     },
     {
-      "notes": "Strider Kick as the lowest-priority filler on its own 8s cooldown.",
+      "notes": "Strider Kick on its 8 second cooldown once the bleed is rolling: a full weapon hit for a sliver of mana.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -95,7 +95,7 @@
       }
     },
     {
-      "notes": "Immolation Trap on cooldown: within 5 yards it lands as a melee-range filler, gated only by its own 30-second cooldown and mana cost.",
+      "notes": "Immolation Trap at your feet on cooldown. You stand on the boss, so it walks straight into the trap, and Clever Traps and Survivalist's Discipline make it a real damage button.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -121,10 +121,25 @@
           }
         }
       },
-      "notes": "Wing Clip on every free global, only while a Windfury Totem reaches the hunter (the gate asks whether the engine registered the totem's attack power buff, spell 10610, so a character with no totem skips the line): a cheap main-hand special that rolls the totem's extra attack and any weapon proc, which the other lines leave idle. It costs 80 mana and does 50 damage; the client states both. Without the totem it measured as a loss, mana and a global spent for 50 damage."
+      "notes": "Wing Clip on any free global under a Windfury Totem, as a cheap melee special that can proc Windfury. It is a main hand hit that also rolls your weapon procs. Without the totem it is 80 mana for 50 damage, so leave it alone."
     }
   ],
   "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 14325,
+            "rank": 4
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-12s"
+        }
+      }
+    },
     {
       "action": {
         "castSpell": {
