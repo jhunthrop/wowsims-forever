@@ -577,12 +577,10 @@ func applySpellBuffConsumes(character *Character, consumes *proto.Consumes) {
 			character.AddStats(stats.Stats{
 				stats.FirePower: 10,
 			})
-		case proto.FirePowerBuff_ElixirOfGreaterFirepower:
-			character.AddStats(stats.Stats{
-				stats.FirePower: 40,
-			})
 		}
 	}
+
+	character.AddStats(holyPowerBuffStats[consumes.HolyPowerBuff])
 
 	if consumes.ShadowPowerBuff != proto.ShadowPowerBuff_ShadowPowerBuffUnknown {
 		switch consumes.ShadowPowerBuff {
@@ -624,6 +622,12 @@ var (
 	}
 	spiritElixirStats = map[proto.SpiritElixir]stats.Stats{
 		proto.SpiritElixir_ElixirOfSages: {stats.Spirit: 25, stats.Crit: 2 * CritRatingPerCritChance},
+	}
+	// Elixir of Holy Power is item 21546 (spell 1310077, aura 13 of 40,
+	// misc 2: Holy). It was Era's Elixir of Greater Firepower, which is why
+	// FirePowerBuff's ElixirOfGreaterFirepower applies nothing.
+	holyPowerBuffStats = map[proto.HolyPowerBuff]stats.Stats{
+		proto.HolyPowerBuff_ElixirOfHolyPower: {stats.HolyPower: 40},
 	}
 )
 
