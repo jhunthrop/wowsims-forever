@@ -17,6 +17,18 @@
     },
     {
       "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsActive": {
+                "auraId": {
+                  "spellId": 11551,
+                  "rank": 6
+                }
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 11551,

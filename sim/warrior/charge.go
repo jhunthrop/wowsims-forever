@@ -32,9 +32,7 @@ const chargeCooldown = 15 * time.Second
 // learned. This sim has no movement primitive, so the gap-closer itself
 // is not modelled: the cast grants the rage and nothing else, and can only
 // be made before the fight starts, as the game allows it only out of
-// combat. Improved Charge's extra rage is not added here because
-// applyImprovedCharge already grants it once at the pull, standing in for
-// this same opening Charge.
+// combat. Improved Charge's extra rage comes with it (improvedChargeRage).
 func (warrior *Warrior) registerChargeSpell() {
 	var rank chargeRank
 	rankNumber := 0
@@ -48,6 +46,11 @@ func (warrior *Warrior) registerChargeSpell() {
 	}
 
 	rageMetrics := warrior.NewRageMetrics(core.ActionID{SpellID: rank.spellID})
+	improvedRage := warrior.improvedChargeRage()
+	var improvedMetrics *core.ResourceMetrics
+	if improvedRage > 0 {
+		improvedMetrics = warrior.NewRageMetrics(core.ActionID{SpellID: TalentSpellIDs["improved_charge"][0]})
+	}
 
 	warrior.Charge = warrior.RegisterSpell(BattleStance, core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: rank.spellID},
@@ -69,6 +72,9 @@ func (warrior *Warrior) registerChargeSpell() {
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 			warrior.AddRage(sim, rank.rage, rageMetrics)
+			if improvedRage > 0 {
+				warrior.AddRage(sim, improvedRage, improvedMetrics)
+			}
 		},
 	})
 }
