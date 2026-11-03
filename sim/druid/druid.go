@@ -198,6 +198,7 @@ type Druid struct {
 	FaerieFireFeralAuras     core.AuraArray
 	FrenziedRegenerationAura *core.Aura
 	FurorAura                *core.Aura
+	PoisedAura               *core.Aura
 
 	// What Furor reads when the druid shifts back into Cat Form: the energy it
 	// had on leaving, and when it left.
@@ -304,6 +305,7 @@ func (druid *Druid) RegisterFeralCatSpells() {
 	druid.registerShiftingPowerSpell()
 	druid.registerShredSpell()
 	druid.registerClawSpell()
+	druid.registerPoised()
 	// Cat Form is not learned until level 20 (spellconst: spell 768), so a
 	// leveling feral druid below 20 has nothing else to cast; register the same
 	// baseline caster kit RegisterBalanceSpells does. Both self-gate by

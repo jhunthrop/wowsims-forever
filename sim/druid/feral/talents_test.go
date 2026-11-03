@@ -83,15 +83,19 @@ func newFeralDruidSimWearing(t *testing.T, level int32, talents string, equipmen
 // shred.go: "Reduces the Energy cost of your Shred ability by 6/12/18."
 // (node 104945, proto field ShreddingAttacks; Feral tier 2 in the live tree).
 func TestShreddingAttacksReducesShredEnergyCost(t *testing.T) {
-	base, _, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, nil))
+	// Poised (poised_test.go) takes 10 off the fight's first ability; the
+	// base cost is read with it spent.
+	base, baseSim, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, nil))
 	if base.Shred == nil {
 		t.Fatal("level-60 Feral druid has no Shred registered")
 	}
+	base.PoisedAura.Deactivate(baseSim)
 	if got, want := base.Shred.Cost.GetCurrentCost(), 60.0; got != want {
 		t.Fatalf("untalented Shred cost = %v, want %v", got, want)
 	}
 
-	talented, _, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, map[string]int{"shredding_attacks": 3}))
+	talented, talentedSim, _ := newFeralDruidSimWithTalents(t, 60, feralTalentsString(t, map[string]int{"shredding_attacks": 3}))
+	talented.PoisedAura.Deactivate(talentedSim)
 	if got, want := talented.Shred.Cost.GetCurrentCost(), 60.0-18.0; got != want {
 		t.Errorf("3/3 Shredding Attacks Shred cost = %v, want %v", got, want)
 	}

@@ -25,6 +25,7 @@ func TestPredatoryDisciplineKeepsTheExcessEnergy(t *testing.T) {
 			cat.AddEnergy(sim, cat.MaxEnergy()-cat.CurrentEnergy(), metrics)
 			cat.AddComboPoints(sim, 5, target, cat.NewComboPointMetrics(core.ActionID{SpellID: 1}))
 			cat.ClearcastingAura.Deactivate(sim)
+			cat.PoisedAura.Deactivate(sim)
 
 			for attempt := 0; attempt < 50; attempt++ {
 				cat.FerociousBite.Cast(sim, target)
