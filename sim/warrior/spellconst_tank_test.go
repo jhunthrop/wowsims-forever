@@ -115,6 +115,29 @@ func TestDemoralizingShoutReductionMatchesClient(t *testing.T) {
 	}
 }
 
+// Demoralizing Shout's threat is the client's effect 63 (flat threat, per
+// target hit) at the rank's own level, growing 0.8 a level to the rank's cap
+// (rank 5, 11556: 43 at 54, 47.8 at 60). The engine had 0.8 x the rank's
+// learn level, the base alone.
+func TestDemoralizingShoutThreatMatchesClient(t *testing.T) {
+	client := clientWarrior(t)
+	for rank := 1; rank <= 5; rank++ {
+		id := []int32{0, 1160, 6190, 11554, 11555, 11556}[rank]
+		spell, ok := client.ByID(id)
+		if !ok {
+			t.Fatalf("Demoralizing Shout rank %d (%d) is not in the client table", rank, id)
+		}
+		effect := findEffect(t, spell, clientEffectThreat, 0)
+		for _, level := range []int32{int32(spell.SpellLevel), 60, 64, 70} {
+			capped := math.Min(float64(level), float64(spell.MaxLevel))
+			want := effect.Amount + effect.PointsPerLevel*math.Max(0, capped-float64(spell.SpellLevel))
+			if got := demoralizingShoutThreat(rank, level); math.Abs(got-want) > attackPowerAmountEpsilon {
+				t.Errorf("rank %d at level %d: threat %v, client %v", rank, level, got, want)
+			}
+		}
+	}
+}
+
 // Shield Block, Shield Wall and the talents' cooldowns read the client's
 // own rows.
 func TestShieldAbilitiesMatchClient(t *testing.T) {

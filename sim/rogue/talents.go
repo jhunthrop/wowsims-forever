@@ -97,7 +97,9 @@ func (rogue *Rogue) ApplyTalents() {
 	rogue.AddStat(stats.Parry, deflectionParryPerRank*float64(rogue.Talents.Deflection))
 	rogue.AddStat(stats.Crit, 1*float64(rogue.Talents.Malice))
 	rogue.AddStat(stats.Hit, 1*float64(rogue.Talents.Precision))
-	rogue.AddStat(stats.ArmorPenetration, serratedBladesArmorPenPctPerRank*float64(rogue.Talents.SerratedBlades)*core.ArmorPenPerPercentArmor)
+	// Serrated Blades' armor half is aura 280 (SpellEffect 690915): a share
+	// of the target's armor, not flat armor penetration.
+	rogue.PseudoStats.ArmorIgnorePercent += 0.01 * serratedBladesArmorPenPctPerRank * float64(rogue.Talents.SerratedBlades)
 	rogue.AutoAttacks.OHConfig().DamageMultiplier *= rogue.dwsMultiplier()
 
 	/*
@@ -640,7 +642,7 @@ func (rogue *Rogue) applyHackAndSlash() {
 
 	extraAttackChance := hackAndSlashExtraAttackChancePerRank * float64(rank)
 	critBonus := hackAndSlashCritPerRank * float64(rank) * core.CritRatingPerCritChance
-	armorPenRating := hackAndSlashArmorPenPctPerRank * float64(rank) * core.ArmorPenPerPercentArmor
+	armorIgnore := 0.01 * hackAndSlashArmorPenPctPerRank * float64(rank)
 	actionID := core.ActionID{SpellID: 13960}
 
 	isAxeOrSword := func(weapon *core.Item) bool {
@@ -656,11 +658,12 @@ func (rogue *Rogue) applyHackAndSlash() {
 	mh, oh := rogue.MainHand(), rogue.OffHand()
 
 	if isMace(mh) || isMace(oh) {
-		// No per-weapon armor-pen stat exists (stats.ArmorPenetration is
-		// unit-wide), so one mace in either hand grants the full bonus,
-		// the same simplification applyWeaponSpecializations' commented
-		// Mace Specialization used for weapon skill.
-		rogue.AddStat(stats.ArmorPenetration, armorPenRating)
+		// "Your attacks ignore 15% of your target's armor" at rank 5: a
+		// share of the target's armor (PseudoStats.ArmorIgnorePercent, as
+		// the warrior's Weaponmaster mace clause), not flat armor
+		// penetration. It is per attacker, so one mace in either hand
+		// grants it.
+		rogue.PseudoStats.ArmorIgnorePercent += armorIgnore
 	}
 
 	// The client row (13960) is a server dummy; its text gives the crit
