@@ -1,14 +1,30 @@
 {
   "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 5229
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1s"
+        }
+      }
+    }
+  ],
   "priorityList": [
     {
-      "notes": "Potions, trinkets and racials as they come up, as every other tank's list opens: the raid preset's Mighty Rage Potion, which Forever lets a druid drink in Bear Form without leaving it (the druid deep dive).",
+      "notes": "Potions, trinkets and racials as they come up. Mighty Rage Potion goes down in Bear Form without breaking it.",
       "action": {
         "autocastOtherCooldowns": {}
       }
     },
     {
-      "notes": "Barkskin on cooldown: 20% less physical damage for 15 s of every 60 (about 5% less damage taken measured against the tank fight).",
+      "notes": "On cooldown: 20% less damage taken for 15 seconds of every minute, and Forever lets you cast it in Bear Form.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -18,7 +34,7 @@
       }
     },
     {
-      "notes": "Frenzied Regeneration as the emergency heal: under half health with 20 rage to convert.",
+      "notes": "Under half health with 20 rage or more to turn into health.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -60,7 +76,7 @@
       }
     },
     {
-      "notes": "Primal Bite (talent) on cooldown: the biggest threat hit per rage.",
+      "notes": "On cooldown: your biggest threat hit, every 6 seconds.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -71,7 +87,7 @@
       }
     },
     {
-      "notes": "Lacerate (a Feral talent since client 1.60.1.70707) to start the bleed, to build it to five stacks, and again when under 3 s remain; the bleed is what turns on Rend and Tear, and since 70707 its hit is 10% weapon damage per stack already up, so building to five measured about 3% more threat and 2% more damage in the tank fight than refreshing at one stack.",
+      "notes": "Until it has five stacks, and again when it has under 3 seconds left. Each stack makes the next cast hit harder, and the bleed turns on Rend and Tear.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -139,7 +155,7 @@
       }
     },
     {
-      "notes": "Faerie Fire in Bear Form whenever the target lacks it: free in form with a 6 second cooldown (Bear Form (Passive)), and it carries threat in Bear Form since the 15 October beta notes; it keeps the armor reduction up when no raid Faerie Fire is on the target (tag 1 is the in-form cast).",
+      "notes": "When the target has no Faerie Fire on it. In Bear Form it is free on a 6 second cooldown and carries threat, so it is also your ranged pull.",
       "action": {
         "condition": {
           "not": {
@@ -166,7 +182,7 @@
       }
     },
     {
-      "notes": "Queue Maul on the next swing whenever 15 rage is on hand, which keeps the rest for Primal Bite and Lacerate.",
+      "notes": "Queued on your next swing whenever you have 15 rage, which leaves the rest for Primal Bite and Lacerate.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -191,7 +207,7 @@
       }
     },
     {
-      "notes": "Swipe is the rage dump above 40, a flat hit on up to three targets.",
+      "notes": "Above 40 rage, as the rage dump. It hits up to three targets, so on a pack it is your main threat.",
       "action": {
         "castSpell": {
           "spellId": {
