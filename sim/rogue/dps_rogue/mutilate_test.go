@@ -47,12 +47,10 @@ func rogueTalentStringWith(t *testing.T, fieldNames ...string) string {
 }
 
 // testMHWeapon/testOHWeapon are synthetic dual-wield weapons set directly
-// on AutoAttacks after construction, bypassing core.GetGearSet: this
-// fork's item database isn't generated in this test environment (see
-// pet_level_test.go and, for the same "No item with id" panic on
-// existing, already-committed code, mage/talents_test.go's
-// buildMageForTalentTest), so any Equipment built from real item ids
-// panics here regardless of which package touches it.
+// on AutoAttacks after construction, so a test's numbers do not move with
+// an item's stats. The weapons a test equips come from testWeaponDatabase
+// on the player (core.Character adds a player's Database to the item
+// table), so these tests need no item database build tag.
 var (
 	testMHWeapon = core.Weapon{
 		BaseDamageMin:        50,
@@ -93,8 +91,42 @@ func buildRogueWithBuffs(t *testing.T, talentsStr string, raidBuffs *proto.RaidB
 
 // testDaggers equips a dagger in each hand (Heartseeker and Scarlet
 // Kris), so Mutilate's dagger requirement holds; the synthetic weapons
-// below then replace their damage numbers.
-var testDaggers = &proto.EquipmentSpec{Items: []*proto.ItemSpec{{Id: 12783}, {Id: 5267}}}
+// above then replace their damage numbers. testMaceAndSword is the pair
+// that fails it (Ebon Hand and Brutality Blade).
+var (
+	testDaggers      = &proto.EquipmentSpec{Items: []*proto.ItemSpec{{Id: heartseekerID}, {Id: scarletKrisID}}}
+	testMaceAndSword = &proto.EquipmentSpec{Items: []*proto.ItemSpec{{Id: ebonHandID}, {Id: brutalityBladeID}}}
+)
+
+const (
+	heartseekerID    int32 = 12783
+	scarletKrisID    int32 = 5267
+	ebonHandID       int32 = 19170
+	brutalityBladeID int32 = 18832
+)
+
+// testWeaponDatabase holds the four one-handers the tests equip, with the
+// fields the slot, weapon-type and damage checks read (the engine's item
+// rows for them, assets/database/db.json).
+var testWeaponDatabase = &proto.SimDatabase{Items: []*proto.SimItem{
+	testOneHander(heartseekerID, "Heartseeker", proto.WeaponType_WeaponTypeDagger, 49, 92, 1.7),
+	testOneHander(scarletKrisID, "Scarlet Kris", proto.WeaponType_WeaponTypeDagger, 43, 81, 1.5),
+	testOneHander(ebonHandID, "Ebon Hand", proto.WeaponType_WeaponTypeMace, 90, 168, 2.5),
+	testOneHander(brutalityBladeID, "Brutality Blade", proto.WeaponType_WeaponTypeSword, 90, 168, 2.5),
+}}
+
+func testOneHander(id int32, name string, weaponType proto.WeaponType, minDamage, maxDamage, speed float64) *proto.SimItem {
+	return &proto.SimItem{
+		Id:              id,
+		Name:            name,
+		Type:            proto.ItemType_ItemTypeWeapon,
+		WeaponType:      weaponType,
+		HandType:        proto.HandType_HandTypeOneHand,
+		WeaponDamageMin: minDamage,
+		WeaponDamageMax: maxDamage,
+		WeaponSpeed:     speed,
+	}
+}
 
 // buildRogueWithGear is buildRogueWithBuffs wearing the given weapons.
 func buildRogueWithGear(t *testing.T, talentsStr string, raidBuffs *proto.RaidBuffs, debuffs *proto.Debuffs, gear *proto.EquipmentSpec) (*core.Simulation, *rogue.Rogue) {
@@ -106,6 +138,7 @@ func buildRogueWithGear(t *testing.T, talentsStr string, raidBuffs *proto.RaidBu
 			Race:          proto.Race_RaceOrc,
 			Level:         60,
 			Equipment:     gear,
+			Database:      testWeaponDatabase,
 			Buffs:         core.FullBuffs.Player,
 			TalentsString: talentsStr,
 			// A rogue's energy bar walks player.Rotation unconditionally

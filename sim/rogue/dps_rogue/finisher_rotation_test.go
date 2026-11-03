@@ -15,8 +15,10 @@ type finisherRunResult struct {
 	casts map[int32]float64
 }
 
-// runRotation runs the Combat preset gear and talents through RunRaidSim
-// with the given APL JSON for the given fight length and iteration count.
+// runRotation runs the Combat preset talents, wearing the fixture mace and
+// sword (mutilate_test.go's testWeaponDatabase, so no item database build
+// tag is needed), through RunRaidSim with the given APL JSON for the given
+// fight length and iteration count.
 func runRotation(t *testing.T, aplJSON string, durationSeconds float64, iterations int32) finisherRunResult {
 	t.Helper()
 
@@ -25,7 +27,8 @@ func runRotation(t *testing.T, aplJSON string, durationSeconds float64, iteratio
 			Class:         proto.Class_ClassRogue,
 			Race:          proto.Race_RaceHuman,
 			Level:         60,
-			Equipment:     core.GetGearSet("../../../ui/rogue/gear_sets", "combat_sinister_strike_prebis").GearSet,
+			Equipment:     testMaceAndSword,
+			Database:      testWeaponDatabase,
 			Buffs:         core.FullBuffs.Player,
 			Consumes:      Phase1Consumes.Consumes,
 			TalentsString: CombatSwordsTalents,
