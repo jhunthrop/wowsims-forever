@@ -106,6 +106,56 @@
       }
     },
     {
+      "notes": "Vampiric Embrace on the boss whenever it is down: the guide keeps it up in a raid. It costs a global every 30 seconds (its cooldown equals its duration) and heals the whole group for 20% of every Shadow spell you land, which the damage figure does not count. Skipped in the last 10 seconds, and below the level that takes the talent.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "spellIsKnown": {
+                  "spellId": {
+                    "spellId": 15286
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "auraIsActive": {
+                      "sourceUnit": {
+                        "type": "CurrentTarget"
+                      },
+                      "auraId": {
+                        "spellId": 15286
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "10"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 15286
+          }
+        }
+      }
+    },
+    {
       "notes": "Devouring Plague is kept up: its 24-second cooldown lets it be reapplied when it expires, and its ticks crit.",
       "action": {
         "condition": {

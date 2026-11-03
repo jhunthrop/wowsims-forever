@@ -678,8 +678,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2090,
-            "rank": 4
+            "spellId": 9841,
+            "rank": 10
           },
           "target": {
             "type": "Player",
@@ -694,8 +694,8 @@
                   "val": {
                     "dotIsActive": {
                       "spellId": {
-                        "spellId": 2090,
-                        "rank": 4
+                        "spellId": 9841,
+                        "rank": 10
                       },
                       "targetUnit": {
                         "type": "Player",
@@ -787,8 +787,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2090,
-            "rank": 4
+            "spellId": 774,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -821,33 +821,12 @@
                   "val": {
                     "dotIsActive": {
                       "spellId": {
-                        "spellId": 2090,
-                        "rank": 4
+                        "spellId": 774,
+                        "rank": 1
                       },
                       "targetUnit": {
                         "type": "Player",
                         "index": 0
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "math": {
-                      "op": "OpMul",
-                      "lhs": {
-                        "remainingTimePercent": {}
-                      },
-                      "rhs": {
-                        "const": {
-                          "val": "1.2"
-                        }
                       }
                     }
                   }
@@ -863,8 +842,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2090,
-            "rank": 4
+            "spellId": 774,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -897,33 +876,12 @@
                   "val": {
                     "dotIsActive": {
                       "spellId": {
-                        "spellId": 2090,
-                        "rank": 4
+                        "spellId": 774,
+                        "rank": 1
                       },
                       "targetUnit": {
                         "type": "Player",
                         "index": 1
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "math": {
-                      "op": "OpMul",
-                      "lhs": {
-                        "remainingTimePercent": {}
-                      },
-                      "rhs": {
-                        "const": {
-                          "val": "1.2"
-                        }
                       }
                     }
                   }
@@ -939,8 +897,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2090,
-            "rank": 4
+            "spellId": 774,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -973,33 +931,12 @@
                   "val": {
                     "dotIsActive": {
                       "spellId": {
-                        "spellId": 2090,
-                        "rank": 4
+                        "spellId": 774,
+                        "rank": 1
                       },
                       "targetUnit": {
                         "type": "Player",
                         "index": 2
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "math": {
-                      "op": "OpMul",
-                      "lhs": {
-                        "remainingTimePercent": {}
-                      },
-                      "rhs": {
-                        "const": {
-                          "val": "1.2"
-                        }
                       }
                     }
                   }
@@ -1014,8 +951,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2090,
-            "rank": 4
+            "spellId": 774,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -1048,33 +985,12 @@
                   "val": {
                     "dotIsActive": {
                       "spellId": {
-                        "spellId": 2090,
-                        "rank": 4
+                        "spellId": 774,
+                        "rank": 1
                       },
                       "targetUnit": {
                         "type": "Player",
                         "index": 3
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "math": {
-                      "op": "OpMul",
-                      "lhs": {
-                        "remainingTimePercent": {}
-                      },
-                      "rhs": {
-                        "const": {
-                          "val": "1.2"
-                        }
                       }
                     }
                   }
@@ -1089,8 +1005,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 2090,
-            "rank": 4
+            "spellId": 774,
+            "rank": 1
           },
           "target": {
             "type": "Player",
@@ -1123,33 +1039,12 @@
                   "val": {
                     "dotIsActive": {
                       "spellId": {
-                        "spellId": 2090,
-                        "rank": 4
+                        "spellId": 774,
+                        "rank": 1
                       },
                       "targetUnit": {
                         "type": "Player",
                         "index": 4
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "math": {
-                      "op": "OpMul",
-                      "lhs": {
-                        "remainingTimePercent": {}
-                      },
-                      "rhs": {
-                        "const": {
-                          "val": "1.2"
-                        }
                       }
                     }
                   }
