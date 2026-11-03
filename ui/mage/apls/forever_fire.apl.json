@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Evocation when mana is nearly gone and at least 30 seconds of the fight are left: it is every mage's mana cooldown from level 20 (an 8 second channel at +1500% mana regeneration, 8 minute cooldown), so a mage that runs dry casts it instead of wanding. With less of the fight left, the channel costs more casting than the mana it returns can be spent on.",
+      "notes": "Evocation when you are nearly dry and more than 30 seconds of the fight remain. It is an 8 second channel at +1500% mana regeneration on an 8 minute cooldown, so it comes once a boss: spend your gem, a Major Mana Potion and a Demonic Rune first. Inside the last 30 seconds the mana comes back too late to spend, so keep casting.",
       "action": {
         "condition": {
           "and": {
@@ -49,7 +49,7 @@
       }
     },
     {
-      "notes": "Pop Combustion once Improved Scorch's debuff is fully stacked on the current target, for a guaranteed run of Fire crits.",
+      "notes": "Combustion once the boss carries 5 Improved Scorch stacks, with your on-use trinkets and your racial. Every Fire hit then adds 10% crit until three non-periodic crits land, and each crit is an Ignite and a Heating Up stack. Give a fresh tank a few seconds of threat first.",
       "action": {
         "condition": {
           "cmp": {
@@ -79,7 +79,7 @@
       }
     },
     {
-      "notes": "Scorch to apply or refresh the five stacks of Improved Scorch's debuff before it falls off.",
+      "notes": "Scorch to build Improved Scorch to 5 stacks, or to refresh it with 1.5 seconds or less left. The debuff only boosts your own Fire damage, so every Fire mage keeps their own stacks, and a Scorch that misses adds none. Filler Scorches refresh it anyway, so this line matters after a move or a target swap.",
       "action": {
         "condition": {
           "and": {
@@ -166,7 +166,7 @@
       }
     },
     {
-      "notes": "Pyroblast only when Heating Up has stacked three times: three Fire crits cut the 6 second cast to 1.5 seconds, and the cast spends the buff. Never at the full 6 seconds or a partial discount, which measured as no gain or a loss. The aura-is-known guard keeps the line off for a build without the talent, where the stack check alone would read as always true and Pyroblast would be spammed.",
+      "notes": "Pyroblast only on 3 stacks of Heating Up, when it is a 1.5 second cast. Every Fire Blast hit and every Scorch, Fireball or Fire Blast crit adds a stack, and the cast spends them all. At 6 seconds, or on 1 or 2 stacks, it loses to Scorch.",
       "action": {
         "condition": {
           "and": {
@@ -207,7 +207,7 @@
       }
     },
     {
-      "notes": "Fire Blast on cooldown as a free extra nuke that does not compete for Scorch or Fireball casts.",
+      "notes": "Fire Blast every time it is off cooldown, since every hit is a Heating Up stack. Improved Fire Blast makes it a 6 second cooldown. It is your most expensive spell for its damage, but skipping it to save mana costs more damage than the mana buys.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -218,7 +218,7 @@
       }
     },
     {
-      "notes": "Scorch is the filler: at 150 mana for a 1.5 second cast it spends mana far more efficiently than Fireball (395 mana for 3 seconds), and a Fire mage is mana-bound well before a fight ends. Every filler Scorch also renews the Improved Scorch debuff, so the refresh line above rarely has anything to do.",
+      "notes": "Scorch is the filler, not Fireball. At 150 mana for 1.5 seconds it does far more damage per mana than Fireball's 395 for 3.4 seconds, every cast keeps your stacks rolling, and a Fire mage runs short of mana long before a boss dies.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -229,7 +229,7 @@
       }
     },
     {
-      "notes": "Fireball only before Scorch is trained (it comes at level 22), where Scorch cannot be cast and the list would otherwise have no filler.",
+      "notes": "Fireball only before you train Scorch at level 22, when it is the only filler you have.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -240,12 +240,29 @@
       }
     },
     {
-      "notes": "Shoot only when nothing else can be cast, which in practice means out of mana: a wand shot cannot start during the global cooldown and holds you for the wand's full speed, so it never fits between spells.",
+      "notes": "Shoot only when you are out of mana and waiting on a gem, a rune or Evocation. A wand shot holds you for the wand's full speed, so never weave it between spells.",
       "action": {
         "castSpell": {
           "spellId": {
             "spellId": 5019
           }
+        }
+      }
+    }
+  ],
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 18809,
+            "rank": 8
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-6s"
         }
       }
     }

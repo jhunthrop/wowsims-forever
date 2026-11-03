@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Evocation when mana is nearly gone and at least 30 seconds of the fight are left: it is every mage's mana cooldown from level 20 (an 8 second channel at +1500% mana regeneration, 8 minute cooldown), so a mage that runs dry casts it instead of wanding. With less of the fight left, the channel costs more casting than the mana it returns can be spent on.",
+      "notes": "Evocation when you are nearly dry and more than 30 seconds of the fight remain. It is an 8 second channel at +1500% mana regeneration on an 8 minute cooldown, so it comes once a boss: spend your gem, a Major Mana Potion and a Demonic Rune first. Inside the last 30 seconds the mana comes back too late to spend, so keep casting.",
       "action": {
         "condition": {
           "and": {
@@ -49,7 +49,7 @@
       }
     },
     {
-      "notes": "Arcane Power on cooldown: a flat 30 percent damage cooldown with no cast time of its own.",
+      "notes": "Arcane Power on cooldown, together with Presence of Mind, your on-use trinkets and your racial. It is 30% more damage for 15 seconds at 30% more mana a cast, off the global cooldown, so press it between casts. On a fresh pull, give the tank a Sunder or two first.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -59,7 +59,7 @@
       }
     },
     {
-      "notes": "Presence of Mind on cooldown: free (no GCD) and makes the next cast instant.",
+      "notes": "Presence of Mind on cooldown, with Arcane Power. Your next spell is instant, so spend it on a 2.5 second Frostbolt, never on an Arcane Blast that the global cooldown already caps at 1.5 seconds.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -69,7 +69,25 @@
       }
     },
     {
-      "notes": "Missile Barrage is the talent proc that empowers your next Arcane Missiles cast -- fire the empowered Missiles under it, where the Arcane guide places the payoff.",
+      "notes": "Frostbolt the moment Presence of Mind is up, so the 2.5 second cast goes out instant. Presence of Mind on a 1.5 second Arcane Blast saves nothing, since the global cooldown already holds you that long.",
+      "action": {
+        "condition": {
+          "auraIsActive": {
+            "auraId": {
+              "spellId": 12043
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10181,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
+      "notes": "Arcane Missiles the moment Missile Barrage lights up. The proc makes it free, halves the channel and fires a missile every half second. Arcane Blast procs it 40% of the time and Frostbolt 20%, so this is a big share of your damage. Rank 7 is the top trainer rank; rank 8 is a book from Ahn'Qiraj.",
       "action": {
         "condition": {
           "auraIsActive": {
@@ -87,7 +105,7 @@
       }
     },
     {
-      "notes": "Arcane Blast to 3 stacks, then on while mana is ahead of the fight and above 20%. Ahead of the fight means a larger share of the mana bar left than of the fight. Client 1.60.1.70707 cut each stack's cost increase to 100% (was 175%) and the buff lasts 18 sec, so a mana-rich mage keeps blasting at 4 stacks instead of breaking to Frostbolt; a mage behind pace stops at 3 and Frostbolts, as before. In the 70707 run: about +10% at the raid band, within about half a percent at the bare band.",
+      "notes": "Arcane Blast to 3 stacks, then a 4th while you are above 20% mana and ahead of the fight. Ahead of the fight means more of your mana bar left than of the fight: half the fight left with more than half your mana, keep blasting. Each stack adds 12% of your Intellect as spell damage and raises the next Blast's cost by 100%. The buff lasts 18 seconds from the first Blast and does not refresh. A Clearcasting proc makes even a stacked Blast free.",
       "action": {
         "condition": {
           "or": {
@@ -151,7 +169,7 @@
       }
     },
     {
-      "notes": "Frostbolt is the filler once the Blast line stops. It is a cheaper, faster cast than Arcane Missiles, the Blast stacks' spell damage still applies to it, and it has a 20% chance to proc Missile Barrage. Frostbolt fills until the 18 second Blast buff runs out, and the next Blast starts a fresh, cheap set. Before Arcane Blast is learned, Arcane Missiles spam is the whole rotation.",
+      "notes": "Frostbolt fills the rest of the 18 seconds once you stop blasting. The stacks' spell damage still applies to it, it procs Missile Barrage 20% of the time, and it costs a fraction of a stacked Blast. When the stacks fall off, the next Blast starts a cheap new set.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -162,12 +180,29 @@
       }
     },
     {
-      "notes": "Shoot only when nothing else can be cast, which in practice means out of mana: a wand shot cannot start during the global cooldown and holds you for the wand's full speed, so it never fits between spells.",
+      "notes": "Shoot only when you are out of mana and waiting on a gem, a rune or Evocation. A wand shot holds you for the wand's full speed, so never weave it between spells.",
       "action": {
         "castSpell": {
           "spellId": {
             "spellId": 5019
           }
+        }
+      }
+    }
+  ],
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10181,
+            "rank": 10
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-2.5s"
         }
       }
     }
