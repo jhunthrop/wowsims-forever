@@ -50,7 +50,7 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 		Flags:         core.SpellFlagAPL | SpellFlagTrap,
 		Rank:          rank,
 		RequiredLevel: level,
-		MissileSpeed:  24,
+		MissileSpeed:  trapMissileSpeed,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: manaCost,

@@ -52,7 +52,7 @@ func (hunter *Hunter) getSummonHawkConfig(rank int, timer *core.Timer) core.Spel
 		CastType:      proto.CastType_CastTypeRanged,
 		Rank:          rank,
 		RequiredLevel: SummonHawkLevel[rank],
-		MissileSpeed:  24,
+		MissileSpeed:  summonHawkMissileSpeed,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: SummonHawkManaCost[rank],

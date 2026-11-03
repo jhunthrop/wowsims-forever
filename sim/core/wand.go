@@ -57,8 +57,9 @@ func (character *Character) RegisterShootSpell(wandDamageMultiplier float64) *Sp
 		// for these classes and nil-deref in AttackerDamageMultiplier the first time Shoot is
 		// cast; DefenseTypeMagic/OutcomeMagicHitAndCrit already gets the "no block/parry"
 		// behavior Shoot needs regardless of which CastType bucket it reads from.
-		CastType:     proto.CastType_CastTypeMainHand,
-		MissileSpeed: 24,
+		CastType: proto.CastType_CastTypeMainHand,
+		// Shoot's (5019) client SpellMisc Speed.
+		MissileSpeed: 20,
 
 		Cast: CastConfig{
 			DefaultCast: Cast{

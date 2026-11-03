@@ -69,6 +69,10 @@ func TestRegisterShootSpellUsesTheEquippedWand(t *testing.T) {
 	if spell.Cost != nil {
 		t.Errorf("Shoot has a resource cost (%v); wands cost no mana", spell.Cost)
 	}
+	// Shoot (5019) flies at the client's SpellMisc Speed, 20 (the engine had 24).
+	if spell.MissileSpeed != 20 {
+		t.Errorf("Shoot MissileSpeed = %v, want the client's 20", spell.MissileSpeed)
+	}
 	if spell.DefaultCast.GCD != 0 {
 		t.Errorf("Shoot DefaultCast.GCD = %v, want 0 (Shoot does not trigger the global cooldown)", spell.DefaultCast.GCD)
 	}
