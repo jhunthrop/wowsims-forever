@@ -289,12 +289,12 @@ stat_weights_results: {
 stat_weights_results: {
  key: "TestEnhancement-Phase3-StatWeights-Default"
  value: {
-  weights: 0.70654
-  weights: 0.21349
+  weights: 0.68854
+  weights: 0.19873
   weights: 0
   weights: 0
   weights: 0
-  weights: 0.09556
+  weights: 0.0934
   weights: 0
   weights: 0
   weights: 0
@@ -302,11 +302,11 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 18.10798
-  weights: 4.18449
+  weights: 18.83293
+  weights: 3.6048
   weights: 0
   weights: 0
-  weights: 0.27926
+  weights: 0.27215
   weights: 0
   weights: 0
   weights: 0
@@ -337,12 +337,12 @@ stat_weights_results: {
 stat_weights_results: {
  key: "TestEnhancement-Phase5-StatWeights-Default"
  value: {
-  weights: 0.68919
-  weights: 0.18675
+  weights: 0.67261
+  weights: 0.19281
   weights: 0
   weights: 0
   weights: 0
-  weights: 0.08991
+  weights: 0.08877
   weights: 0
   weights: 0
   weights: 0
@@ -350,11 +350,11 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 19.35659
-  weights: 3.23933
+  weights: 18.63726
+  weights: 3.47341
   weights: 0
   weights: 0
-  weights: 0.27241
+  weights: 0.26585
   weights: 0
   weights: 0
   weights: 0
@@ -903,8 +903,8 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-Phase3-AllItems-Augur'sRegalia"
  value: {
-  dps: 962.33156
-  tps: 1027.25536
+  dps: 939.20139
+  tps: 1002.23319
  }
 }
 dps_results: {
@@ -924,22 +924,22 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-Phase3-AllItems-EyeoftheBeast-13968"
  value: {
-  dps: 1016.49851
-  tps: 1070.69618
+  dps: 988.76717
+  tps: 1041.58723
  }
 }
 dps_results: {
  key: "TestEnhancement-Phase3-AllItems-GiftoftheGatheringStorm"
  value: {
-  dps: 796.42415
-  tps: 887.9812
+  dps: 778.09648
+  tps: 866.88631
  }
 }
 dps_results: {
  key: "TestEnhancement-Phase3-AllItems-Stormcaller'sGarb"
  value: {
-  dps: 980.61366
-  tps: 1053.66087
+  dps: 966.89956
+  tps: 1039.85907
  }
 }
 dps_results: {
@@ -980,8 +980,8 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-Phase3-Average-Default"
  value: {
-  dps: 1055.34354
-  tps: 1114.14926
+  dps: 1032.75135
+  tps: 1090.41064
  }
 }
 dps_results: {
@@ -1155,15 +1155,15 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-Phase3-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 766.25901
-  tps: 816.67586
+  dps: 749.99177
+  tps: 798.22624
  }
 }
 dps_results: {
  key: "TestEnhancement-Phase5-AllItems-Augur'sRegalia"
  value: {
-  dps: 953.94783
-  tps: 1012.13082
+  dps: 933.44608
+  tps: 990.82451
  }
 }
 dps_results: {
@@ -1183,22 +1183,22 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-Phase5-AllItems-EyeoftheBeast-13968"
  value: {
-  dps: 1022.73744
-  tps: 1071.99118
+  dps: 1002.86787
+  tps: 1052.39424
  }
 }
 dps_results: {
  key: "TestEnhancement-Phase5-AllItems-GiftoftheGatheringStorm"
  value: {
-  dps: 787.71906
-  tps: 870.7224
+  dps: 770.25762
+  tps: 851.08925
  }
 }
 dps_results: {
  key: "TestEnhancement-Phase5-AllItems-Stormcaller'sGarb"
  value: {
-  dps: 1018.69545
-  tps: 1098.60029
+  dps: 1014.47543
+  tps: 1092.58035
  }
 }
 dps_results: {
@@ -1239,8 +1239,8 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-Phase5-Average-Default"
  value: {
-  dps: 1060.71578
-  tps: 1115.38398
+  dps: 1037.71295
+  tps: 1091.32167
  }
 }
 dps_results: {
@@ -1414,7 +1414,7 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-Phase5-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 766.10536
-  tps: 810.9687
+  dps: 740.52147
+  tps: 783.40671
  }
 }
