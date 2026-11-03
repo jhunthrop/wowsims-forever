@@ -210,7 +210,7 @@ func TestRankedAbilitiesAtLevelSixty(t *testing.T) {
 		"Maul":                  {bear.Maul, 9881},
 		"Swipe":                 {bear.SwipeBear, 9908},
 		"Lacerate":              {bear.Lacerate, 1235827},
-		"Primal Bite":           {bear.PrimalBite, 1238073},
+		"Primal Bite":           {bear.PrimalBite, 1238070},
 		"Demoralizing Roar":     {bear.DemoralizingRoar, 9898},
 		"Enrage":                {bear.Enrage, 5229},
 		"Frenzied Regeneration": {bear.FrenziedRegeneration, 22842},
@@ -259,7 +259,10 @@ func TestLacerateLiveRanks(t *testing.T) {
 }
 
 // Primal Bite's live ladder (client 1.60.1.70707 hotfix): the capstone is
-// learned at 40 with 42, then 62 at 50 and 77 at 60.
+// learned at 40 with 42, then 62 at 50 and 77 at 60. The level 60 rank a
+// druid learns is rank 3, 1238070 (SkillLineAbility 53142, superseding
+// 1238069): the same push removed rank 4's learn row (53143, push 113283,
+// status 2), and 1.60.1.70753 ships without it.
 func TestPrimalBiteLiveRanks(t *testing.T) {
 	for _, c := range []struct {
 		level int32
@@ -268,7 +271,7 @@ func TestPrimalBiteLiveRanks(t *testing.T) {
 		{39, 0},
 		{40, 407995},
 		{50, 1238069},
-		{60, 1238073},
+		{60, 1238070},
 	} {
 		bear, _, _ := newBearSim(t, c.level, map[string]int{"primal_bite": 1})
 		if c.id == 0 {

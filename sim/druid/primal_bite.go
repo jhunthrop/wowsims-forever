@@ -7,8 +7,8 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// Primal Bite (talent node 104956; spells 407995, 1238069, 1238070 and
-// 1238073): "Bite the target, dealing 100% normal damage plus 42 and
+// Primal Bite (talent node 104956; spells 407995, 1238069 and 1238070):
+// "Bite the target, dealing 100% normal damage plus 42 and
 // generating a high amount of threat." Every rank costs 20 rage (cost 200,
 // less Ferocity's 1 a rank), is on the global cooldown and has a 6 second
 // cooldown of its own. The client states a weapon-damage effect (effect
@@ -42,13 +42,15 @@ type primalBiteRank struct {
 	flat    float64
 }
 
-// primalBiteRanks is the live ladder, lowest first. Rank 3 (1238070) is
-// stated at level 60 with the same 77 as rank 4, so it is never the
-// highest rank a druid knows and is left out.
+// primalBiteRanks is the live ladder, lowest first: the ranks
+// SkillLineAbility teaches (53146, 53141 and 53142, each superseding the
+// one before). Rank 4 (1238073) states the same 77 at level 60, but the
+// 70707 push removed its learn row (53143, push 113283) and 1.60.1.70753
+// ships without it, so no druid learns it and rank 3 is the top rank.
 var primalBiteRanks = []primalBiteRank{
 	{rank: 1, spellID: 407995, level: 40, flat: 42},
 	{rank: 2, spellID: 1238069, level: 50, flat: 62},
-	{rank: 4, spellID: 1238073, level: 60, flat: 77},
+	{rank: 3, spellID: 1238070, level: 60, flat: 77},
 }
 
 // primalBiteRankAt is the highest live rank a druid of the level knows, and
