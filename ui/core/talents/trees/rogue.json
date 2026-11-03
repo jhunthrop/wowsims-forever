@@ -28,9 +28,9 @@
         "maxPoints": 3
       },
       {
-        "fieldName": "murder",
+        "fieldName": "improvedExposeArmor",
         "location": { "rowIdx": 1, "colIdx": 1 },
-        "spellIds": [14158, 14158],
+        "spellIds": [14168, 14168],
         "maxPoints": 2
       },
       {
@@ -40,22 +40,22 @@
         "maxPoints": 3
       },
       {
-        "fieldName": "relentlessStrikes",
+        "fieldName": "vigor",
         "location": { "rowIdx": 2, "colIdx": 0 },
-        "spellIds": [14179],
-        "maxPoints": 1
+        "spellIds": [14983, 14983],
+        "maxPoints": 2
       },
       {
-        "fieldName": "improvedExposeArmor",
+        "fieldName": "bloodSplatter",
         "location": { "rowIdx": 2, "colIdx": 1 },
-        "spellIds": [14168, 14168],
-        "maxPoints": 2
+        "spellIds": [1329256],
+        "maxPoints": 1
       },
       {
         "fieldName": "lethality",
         "location": { "rowIdx": 2, "colIdx": 2 },
-        "spellIds": [14128, 14128, 14128, 14128, 14128],
-        "maxPoints": 5,
+        "spellIds": [14128, 14128],
+        "maxPoints": 2,
         "prereqLocation": { "rowIdx": 0, "colIdx": 2 },
         "prereqRank": 5
       },
@@ -78,15 +78,15 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "vigor",
+        "fieldName": "relentlessStrikes",
         "location": { "rowIdx": 4, "colIdx": 0 },
-        "spellIds": [14983, 14983],
-        "maxPoints": 2
+        "spellIds": [14179, 14179, 14179, 14179, 14179],
+        "maxPoints": 5
       },
       {
-        "fieldName": "mutilate",
+        "fieldName": "venom",
         "location": { "rowIdx": 4, "colIdx": 1 },
-        "spellIds": [1310707],
+        "spellIds": [1329328],
         "maxPoints": 1
       },
       {
@@ -98,13 +98,13 @@
       {
         "fieldName": "sealFate",
         "location": { "rowIdx": 5, "colIdx": 2 },
-        "spellIds": [14186, 14186, 14186, 14186, 14186],
-        "maxPoints": 5
+        "spellIds": [14186, 14186, 14186],
+        "maxPoints": 3
       },
       {
-        "fieldName": "venom",
+        "fieldName": "mutilate",
         "location": { "rowIdx": 6, "colIdx": 1 },
-        "spellIds": [1310703],
+        "spellIds": [399956],
         "maxPoints": 1,
         "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
         "prereqRank": 1
@@ -116,13 +116,13 @@
     "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/181.jpg",
     "talents": [
       {
-        "fieldName": "improvedEviscerate",
+        "fieldName": "coupDeGrace",
         "location": { "rowIdx": 0, "colIdx": 0 },
         "spellIds": [14162, 14162, 14162],
         "maxPoints": 3
       },
       {
-        "fieldName": "improvedSinisterStrike",
+        "fieldName": "efficientStrikes",
         "location": { "rowIdx": 0, "colIdx": 1 },
         "spellIds": [13732, 13732],
         "maxPoints": 2
@@ -152,6 +152,12 @@
         "maxPoints": 3
       },
       {
+        "fieldName": "improvedSprint",
+        "location": { "rowIdx": 1, "colIdx": 3 },
+        "spellIds": [13743, 13743],
+        "maxPoints": 2
+      },
+      {
         "fieldName": "endurance",
         "location": { "rowIdx": 2, "colIdx": 0 },
         "spellIds": [13742, 13742],
@@ -166,9 +172,9 @@
         "prereqRank": 3
       },
       {
-        "fieldName": "improvedSprint",
+        "fieldName": "composure",
         "location": { "rowIdx": 2, "colIdx": 3 },
-        "spellIds": [13743, 13743],
+        "spellIds": [1329265, 1329265],
         "maxPoints": 2
       },
       {
@@ -184,12 +190,24 @@
         "maxPoints": 1
       },
       {
-        "fieldName": "dualWieldSpecialization",
+        "fieldName": "weaponExpertise",
         "location": { "rowIdx": 3, "colIdx": 2 },
-        "spellIds": [13715, 13715, 13715, 13715, 13715],
-        "maxPoints": 5,
+        "spellIds": [30919, 30919],
+        "maxPoints": 2,
         "prereqLocation": { "rowIdx": 1, "colIdx": 2 },
         "prereqRank": 3
+      },
+      {
+        "fieldName": "aggression",
+        "location": { "rowIdx": 3, "colIdx": 3 },
+        "spellIds": [18427, 18427, 18427],
+        "maxPoints": 3
+      },
+      {
+        "fieldName": "dualWieldSpecialization",
+        "location": { "rowIdx": 4, "colIdx": 0 },
+        "spellIds": [13715, 13715],
+        "maxPoints": 2
       },
       {
         "fieldName": "bladeFlurry",
@@ -204,24 +222,18 @@
         "maxPoints": 5
       },
       {
-        "fieldName": "weaponExpertise",
-        "location": { "rowIdx": 5, "colIdx": 1 },
-        "spellIds": [30919, 30919],
-        "maxPoints": 2,
-        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
-        "prereqRank": 1
-      },
-      {
-        "fieldName": "aggression",
+        "fieldName": "flashOfSteel",
         "location": { "rowIdx": 5, "colIdx": 2 },
-        "spellIds": [18427, 18427, 18427],
-        "maxPoints": 3
+        "spellIds": [1329284, 1329284, 1329284, 1329284, 1329284],
+        "maxPoints": 5
       },
       {
         "fieldName": "adrenalineRush",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [13750],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },
@@ -230,10 +242,10 @@
     "backgroundUrl": "https://wow.zamimg.com/images/wow/talents/backgrounds/classic/183.jpg",
     "talents": [
       {
-        "fieldName": "camouflage",
+        "fieldName": "setup",
         "location": { "rowIdx": 0, "colIdx": 0 },
-        "spellIds": [13975, 13975, 13975, 13975, 13975],
-        "maxPoints": 5
+        "spellIds": [13983, 13983, 13983],
+        "maxPoints": 3
       },
       {
         "fieldName": "masterOfDeception",
@@ -244,32 +256,32 @@
       {
         "fieldName": "opportunity",
         "location": { "rowIdx": 0, "colIdx": 2 },
-        "spellIds": [14057, 14057],
-        "maxPoints": 2
+        "spellIds": [14057, 14057, 14057, 14057, 14057],
+        "maxPoints": 5
       },
       {
-        "fieldName": "setup",
+        "fieldName": "dirtyDeeds",
         "location": { "rowIdx": 1, "colIdx": 0 },
-        "spellIds": [13983, 13983, 13983],
-        "maxPoints": 3
+        "spellIds": [14082, 14082],
+        "maxPoints": 2
       },
       {
-        "fieldName": "elusiveness",
+        "fieldName": "camouflage",
         "location": { "rowIdx": 1, "colIdx": 1 },
-        "spellIds": [13981, 13981],
-        "maxPoints": 2
-      },
-      {
-        "fieldName": "dirtyTricks",
-        "location": { "rowIdx": 1, "colIdx": 2 },
-        "spellIds": [1224782, 1224782],
-        "maxPoints": 2
+        "spellIds": [13975, 13975, 13975],
+        "maxPoints": 3
       },
       {
         "fieldName": "improvedAmbush",
-        "location": { "rowIdx": 1, "colIdx": 3 },
+        "location": { "rowIdx": 1, "colIdx": 2 },
         "spellIds": [14079, 14079, 14079],
         "maxPoints": 3
+      },
+      {
+        "fieldName": "dirtyTricks",
+        "location": { "rowIdx": 1, "colIdx": 3 },
+        "spellIds": [1224782, 1224782],
+        "maxPoints": 2
       },
       {
         "fieldName": "initiative",
@@ -278,39 +290,41 @@
         "maxPoints": 3
       },
       {
-        "fieldName": "ghostlyStrike",
-        "location": { "rowIdx": 2, "colIdx": 1 },
-        "spellIds": [14278],
-        "maxPoints": 1
-      },
-      {
-        "fieldName": "improvedDistract",
-        "location": { "rowIdx": 2, "colIdx": 2 },
-        "spellIds": [14084, 14084],
-        "maxPoints": 2
-      },
-      {
-        "fieldName": "heightenedSenses",
-        "location": { "rowIdx": 3, "colIdx": 0 },
-        "spellIds": [30894, 30894],
-        "maxPoints": 2
-      },
-      {
         "fieldName": "premeditation",
-        "location": { "rowIdx": 3, "colIdx": 1 },
+        "location": { "rowIdx": 2, "colIdx": 1 },
         "spellIds": [14183],
         "maxPoints": 1
       },
       {
         "fieldName": "serratedBlades",
-        "location": { "rowIdx": 3, "colIdx": 2 },
+        "location": { "rowIdx": 2, "colIdx": 2 },
         "spellIds": [14171, 14171, 14171],
         "maxPoints": 3
       },
       {
-        "fieldName": "dirtyDeeds",
+        "fieldName": "elusiveness",
+        "location": { "rowIdx": 3, "colIdx": 0 },
+        "spellIds": [13981, 13981],
+        "maxPoints": 2
+      },
+      {
+        "fieldName": "ghostlyStrike",
+        "location": { "rowIdx": 3, "colIdx": 1 },
+        "spellIds": [14278],
+        "maxPoints": 1
+      },
+      {
+        "fieldName": "quickGetaway",
+        "location": { "rowIdx": 3, "colIdx": 3 },
+        "spellIds": [1310728, 1310728],
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 1, "colIdx": 3 },
+        "prereqRank": 2
+      },
+      {
+        "fieldName": "heightenedSenses",
         "location": { "rowIdx": 4, "colIdx": 0 },
-        "spellIds": [14082, 14082],
+        "spellIds": [30894, 30894],
         "maxPoints": 2
       },
       {
@@ -324,27 +338,19 @@
         "location": { "rowIdx": 4, "colIdx": 2 },
         "spellIds": [16511],
         "maxPoints": 1,
-        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
+        "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
         "prereqRank": 3
       },
       {
-        "fieldName": "quietus",
-        "location": { "rowIdx": 5, "colIdx": 0 },
-        "spellIds": [1310728, 1310728, 1310728, 1310728, 1310728],
-        "maxPoints": 5,
-        "prereqLocation": { "rowIdx": 4, "colIdx": 0 },
-        "prereqRank": 2
-      },
-      {
-        "fieldName": "cutthroat",
+        "fieldName": "bootKnife",
         "location": { "rowIdx": 5, "colIdx": 2 },
-        "spellIds": [462708, 462708, 462708, 462708, 462708],
+        "spellIds": [1329286, 1329286, 1329286, 1329286, 1329286],
         "maxPoints": 5
       },
       {
-        "fieldName": "thousandCuts",
+        "fieldName": "deathMark",
         "location": { "rowIdx": 6, "colIdx": 1 },
-        "spellIds": [1310721],
+        "spellIds": [1316709],
         "maxPoints": 1,
         "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
         "prereqRank": 1

@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70753",
+  "build": "1.60.1.70755",
   "class_id": 3,
   "class_slug": "hunter",
   "trees": [
@@ -666,7 +666,7 @@
           "ranks": [
             {
               "spell_id": 1299346,
-              "description": "Increases the Ranged Attack Power of party or raid members within 45 yds by 15."
+              "description": "Increases the Ranged Attack Power of party or raid members within 45 yds by 20."
             }
           ],
           "spell_id": 1299346
@@ -737,15 +737,15 @@
           "ranks": [
             {
               "spell_id": 19461,
-              "description": "Increases the damage done by your Multi-Shot, Aimed Shot, and Volley abilities by 3%."
-            },
-            {
-              "spell_id": 19461,
-              "description": "Increases the damage done by your Multi-Shot, Aimed Shot, and Volley abilities by 7%."
+              "description": "Increases the damage done by your Multi-Shot, Aimed Shot, and Volley abilities by 5%."
             },
             {
               "spell_id": 19461,
               "description": "Increases the damage done by your Multi-Shot, Aimed Shot, and Volley abilities by 10%."
+            },
+            {
+              "spell_id": 19461,
+              "description": "Increases the damage done by your Multi-Shot, Aimed Shot, and Volley abilities by 15%."
             }
           ],
           "spell_id": 19461
@@ -812,7 +812,7 @@
           "ranks": [
             {
               "spell_id": 1310687,
-              "description": "A long-range shot that deals ranged damage plus 160 and increases the range of your next 3 Shots by 10 yards for 10 sec."
+              "description": "A long-range shot that deals ranged damage plus 320 and increases the range of your next 3 Shots by 10 yards for 10 sec."
             }
           ],
           "spell_id": 1310687
@@ -1230,11 +1230,7 @@
           "ranks": [
             {
               "spell_id": 19168,
-              "description": "Increases your Agility by 2%."
-            },
-            {
-              "spell_id": 19168,
-              "description": "Increases your Agility by 4%."
+              "description": "Increases your Agility by 3%."
             },
             {
               "spell_id": 19168,
@@ -1242,11 +1238,15 @@
             },
             {
               "spell_id": 19168,
-              "description": "Increases your Agility by 8%."
+              "description": "Increases your Agility by 9%."
             },
             {
               "spell_id": 19168,
-              "description": "Increases your Agility by 10%."
+              "description": "Increases your Agility by 12%."
+            },
+            {
+              "spell_id": 19168,
+              "description": "Increases your Agility by 15%."
             }
           ],
           "spell_id": 19168

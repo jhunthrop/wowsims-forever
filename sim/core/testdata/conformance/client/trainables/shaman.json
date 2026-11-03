@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70753",
+  "build": "1.60.1.70755",
   "class_slug": "shaman",
   "trainables": [
     {
@@ -186,9 +186,9 @@
       "skill_line": "Elemental Combat",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 315,
+      "cost": 495,
       "cost_type": 0,
-      "cast_time_ms": 2000,
+      "cast_time_ms": 2500,
       "cooldown_ms": 6000,
       "ranks": [
         {
@@ -357,23 +357,6 @@
       "ranks": [
         {
           "id": 16164,
-          "rank": 0,
-          "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Elemental Mastery",
-      "skill_line": "Elemental Combat",
-      "source": "talent",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 180000,
-      "ranks": [
-        {
-          "id": 16166,
           "rank": 0,
           "level": 1
         }
@@ -850,38 +833,6 @@
       ]
     },
     {
-      "name": "Lava Burst",
-      "skill_line": "Elemental Combat",
-      "source": "talent",
-      "active": true,
-      "cost": 265,
-      "cost_type": 0,
-      "cast_time_ms": 2500,
-      "cooldown_ms": 10000,
-      "ranks": [
-        {
-          "id": 408490,
-          "rank": 1,
-          "level": 30
-        },
-        {
-          "id": 1238299,
-          "rank": 2,
-          "level": 40
-        },
-        {
-          "id": 1238300,
-          "rank": 3,
-          "level": 50
-        },
-        {
-          "id": 1326047,
-          "rank": 4,
-          "level": 60
-        }
-      ]
-    },
-    {
       "name": "Lesser Healing Wave",
       "skill_line": "Restoration",
       "source": "skill_line_ability",
@@ -982,6 +933,23 @@
           "id": 15208,
           "rank": 10,
           "level": 56
+        }
+      ]
+    },
+    {
+      "name": "Lightning Mastery",
+      "skill_line": "Elemental Combat",
+      "source": "talent",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 180000,
+      "ranks": [
+        {
+          "id": 16166,
+          "rank": 0,
+          "level": 1
         }
       ]
     },
@@ -1255,10 +1223,10 @@
       "skill_line": "Restoration",
       "source": "talent",
       "active": true,
-      "cost": 385,
+      "cost": 230,
       "cost_type": 0,
       "cast_time_ms": 0,
-      "cooldown_ms": 6000,
+      "cooldown_ms": 12000,
       "ranks": [
         {
           "id": 408521,
@@ -1492,7 +1460,7 @@
       "cost": 0,
       "cost_type": 0,
       "cast_time_ms": 0,
-      "cooldown_ms": 8000,
+      "cooldown_ms": 6000,
       "ranks": [
         {
           "id": 17364,
@@ -1539,6 +1507,23 @@
       ]
     },
     {
+      "name": "Totemic Call",
+      "skill_line": "Enhancement",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 30000,
+      "ranks": [
+        {
+          "id": 437009,
+          "rank": 0,
+          "level": 22
+        }
+      ]
+    },
+    {
       "name": "Totemic Mastery",
       "skill_line": "Restoration",
       "source": "skill_line_ability",
@@ -1552,23 +1537,6 @@
           "id": 16189,
           "rank": 0,
           "level": 1
-        }
-      ]
-    },
-    {
-      "name": "Totemic Projection",
-      "skill_line": "Enhancement",
-      "source": "skill_line_ability",
-      "active": true,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 60000,
-      "ranks": [
-        {
-          "id": 437009,
-          "rank": 0,
-          "level": 22
         }
       ]
     },

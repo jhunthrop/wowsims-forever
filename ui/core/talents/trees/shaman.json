@@ -76,9 +76,9 @@
         "maxPoints": 2
       },
       {
-        "fieldName": "lavaBurst",
+        "fieldName": "callOfThunder",
         "location": { "rowIdx": 4, "colIdx": 1 },
-        "spellIds": [408490],
+        "spellIds": [16120],
         "maxPoints": 1
       },
       {
@@ -98,7 +98,7 @@
         "prereqRank": 3
       },
       {
-        "fieldName": "elementalMastery",
+        "fieldName": "lightningMastery",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [16166],
         "maxPoints": 1,
@@ -142,14 +142,8 @@
         "maxPoints": 3
       },
       {
-        "fieldName": "improvedGhostWolf",
-        "location": { "rowIdx": 1, "colIdx": 2 },
-        "spellIds": [16262, 16262],
-        "maxPoints": 2
-      },
-      {
         "fieldName": "improvedLightningShield",
-        "location": { "rowIdx": 1, "colIdx": 3 },
+        "location": { "rowIdx": 1, "colIdx": 2 },
         "spellIds": [16261, 16261, 16261],
         "maxPoints": 3
       },
@@ -190,6 +184,12 @@
         "location": { "rowIdx": 3, "colIdx": 2 },
         "spellIds": [17364],
         "maxPoints": 1
+      },
+      {
+        "fieldName": "improvedGhostWolf",
+        "location": { "rowIdx": 3, "colIdx": 3 },
+        "spellIds": [16262, 16262],
+        "maxPoints": 2
       },
       {
         "fieldName": "spiritWeapons",

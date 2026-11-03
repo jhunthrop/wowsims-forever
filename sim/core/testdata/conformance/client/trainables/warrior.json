@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70753",
+  "build": "1.60.1.70755",
   "class_slug": "warrior",
   "trainables": [
     {
@@ -1209,6 +1209,23 @@
       ]
     },
     {
+      "name": "Reckless Swings",
+      "skill_line": "Fury",
+      "source": "talent",
+      "active": true,
+      "cost": 0,
+      "cost_type": -2,
+      "cast_time_ms": 0,
+      "cooldown_ms": 15000,
+      "ranks": [
+        {
+          "id": 1329555,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
       "name": "Recklessness",
       "skill_line": "Fury",
       "source": "skill_line_ability",
@@ -1449,7 +1466,7 @@
       "cost": 150,
       "cost_type": 1,
       "cast_time_ms": 1500,
-      "cooldown_ms": 18000,
+      "cooldown_ms": 15000,
       "ranks": [
         {
           "id": 1240193,

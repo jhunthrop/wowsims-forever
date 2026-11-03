@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70753",
+  "build": "1.60.1.70755",
   "class_slug": "rogue",
   "trainables": [
     {
@@ -187,23 +187,6 @@
       ]
     },
     {
-      "name": "Coup de Grace",
-      "skill_line": "Assassination",
-      "source": "skill_line_ability",
-      "active": false,
-      "cost": 0,
-      "cost_type": 0,
-      "cast_time_ms": 0,
-      "cooldown_ms": 0,
-      "ranks": [
-        {
-          "id": 1310709,
-          "rank": 0,
-          "level": 30
-        }
-      ]
-    },
-    {
       "name": "Crippling Poison",
       "skill_line": "",
       "source": "class_spell",
@@ -312,8 +295,8 @@
     },
     {
       "name": "Death Mark",
-      "skill_line": "",
-      "source": "class_spell",
+      "skill_line": "Subtlety",
+      "source": "talent",
       "active": true,
       "cost": 25,
       "cost_type": 3,
@@ -872,23 +855,18 @@
       "cooldown_ms": 0,
       "ranks": [
         {
-          "id": 1310707,
-          "rank": 1,
-          "level": 30
-        },
-        {
           "id": 399956,
-          "rank": 2,
+          "rank": 1,
           "level": 40
         },
         {
           "id": 1241582,
-          "rank": 3,
+          "rank": 2,
           "level": 50
         },
         {
           "id": 1241584,
-          "rank": 4,
+          "rank": 3,
           "level": 60
         }
       ]
@@ -1150,6 +1128,28 @@
       ]
     },
     {
+      "name": "Shank",
+      "skill_line": "Combat",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 5,
+      "cost_type": 3,
+      "cast_time_ms": 0,
+      "cooldown_ms": 10000,
+      "ranks": [
+        {
+          "id": 1329283,
+          "rank": 0,
+          "level": 24
+        },
+        {
+          "id": 1329549,
+          "rank": 0,
+          "level": 44
+        }
+      ]
+    },
+    {
       "name": "Sinister Strike",
       "skill_line": "Combat",
       "source": "skill_line_ability",
@@ -1308,16 +1308,16 @@
       "name": "Venom",
       "skill_line": "Assassination",
       "source": "talent",
-      "active": true,
-      "cost": 25,
+      "active": false,
+      "cost": 0,
       "cost_type": 3,
       "cast_time_ms": 0,
       "cooldown_ms": 0,
       "ranks": [
         {
-          "id": 1310703,
+          "id": 1329328,
           "rank": 0,
-          "level": 40
+          "level": 30
         }
       ]
     },

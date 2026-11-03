@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70753",
+  "build": "1.60.1.70755",
   "class_id": 7,
   "class_slug": "shaman",
   "trees": [
@@ -20,23 +20,23 @@
           "ranks": [
             {
               "spell_id": 16039,
-              "description": "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 2%."
+              "description": "Reduces the mana cost of your Shock, Lightning Bolt, and Chain Lightning spells by 2%."
             },
             {
               "spell_id": 16039,
-              "description": "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 4%."
+              "description": "Reduces the mana cost of your Shock, Lightning Bolt, and Chain Lightning spells by 4%."
             },
             {
               "spell_id": 16039,
-              "description": "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 6%."
+              "description": "Reduces the mana cost of your Shock, Lightning Bolt, and Chain Lightning spells by 6%."
             },
             {
               "spell_id": 16039,
-              "description": "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 8%."
+              "description": "Reduces the mana cost of your Shock, Lightning Bolt, and Chain Lightning spells by 8%."
             },
             {
               "spell_id": 16039,
-              "description": "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 10%."
+              "description": "Reduces the mana cost of your Shock, Lightning Bolt, and Chain Lightning spells by 10%."
             }
           ],
           "spell_id": 16039
@@ -144,15 +144,15 @@
           "ranks": [
             {
               "spell_id": 16578,
-              "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by 0.17 sec."
+              "description": "Reduces the cast time of your Lightning Bolt and Chain Lightning spells by 0.17 sec."
             },
             {
               "spell_id": 16578,
-              "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by 0.33 sec."
+              "description": "Reduces the cast time of your Lightning Bolt and Chain Lightning spells by 0.33 sec."
             },
             {
               "spell_id": 16578,
-              "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by 0.50 sec."
+              "description": "Reduces the cast time of your Lightning Bolt and Chain Lightning spells by 0.50 sec."
             }
           ],
           "spell_id": 16578
@@ -169,15 +169,15 @@
           "ranks": [
             {
               "spell_id": 16038,
-              "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 5%, as well as increases the duration of your Flame Shock spell by 3 sec."
+              "description": "Increases the damage done by your Fire Totems and by your Flame Shock and Fire Nova spells by 5%, as well as increases the duration of your Flame Shock spell by 3 sec."
             },
             {
               "spell_id": 16038,
-              "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 10%, as well as increases the duration of your Flame Shock spell by 6 sec."
+              "description": "Increases the damage done by your Fire Totems and by your Flame Shock and Fire Nova spells by 10%, as well as increases the duration of your Flame Shock spell by 6 sec."
             },
             {
               "spell_id": 16038,
-              "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 15%, as well as increases the duration of your Flame Shock spell by 9 sec."
+              "description": "Increases the damage done by your Fire Totems and by your Flame Shock and Fire Nova spells by 15%, as well as increases the duration of your Flame Shock spell by 9 sec."
             }
           ],
           "spell_id": 16038
@@ -257,15 +257,15 @@
           "ranks": [
             {
               "spell_id": 29062,
-              "description": "Gives your Lightning Bolt, Chain Lightning, and Lava Burst spells a 23% chance to not lose casting time when you take damage."
+              "description": "Gives your Lightning Bolt and Chain Lightning spells a 23% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 29062,
-              "description": "Gives your Lightning Bolt, Chain Lightning, and Lava Burst spells a 47% chance to not lose casting time when you take damage."
+              "description": "Gives your Lightning Bolt and Chain Lightning spells a 47% chance to not lose casting time when you take damage."
             },
             {
               "spell_id": 29062,
-              "description": "Gives your Lightning Bolt, Chain Lightning, and Lava Burst spells a 70% chance to not lose casting time when you take damage."
+              "description": "Gives your Lightning Bolt and Chain Lightning spells a 70% chance to not lose casting time when you take damage."
             }
           ],
           "spell_id": 29062
@@ -299,19 +299,19 @@
           "ranks": [
             {
               "spell_id": 28999,
-              "description": "Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 3 yards and reduces the cooldown of Totemic Projection by 10 sec."
+              "description": "Increases the range of your Lightning Bolt, Chain Lightning, and Fire Nova spells by 3 yards."
             },
             {
               "spell_id": 28999,
-              "description": "Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 6 yards and reduces the cooldown of Totemic Projection by 20 sec."
+              "description": "Increases the range of your Lightning Bolt, Chain Lightning, and Fire Nova spells by 6 yards."
             }
           ],
           "spell_id": 28999
         },
         {
           "id": 104760,
-          "name": "Lava Burst",
-          "icon": "spell_shaman_lavaburst",
+          "name": "Call of Thunder",
+          "icon": "spell_nature_callstorm",
           "max_rank": 1,
           "tier": 4,
           "column": 1,
@@ -319,11 +319,11 @@
           "prereq_rank": null,
           "ranks": [
             {
-              "spell_id": 408490,
-              "description": "You hurl molten lava at the target, dealing 114 to 145 Fire damage. If your Flame Shock is on the target, Lava Burst deals 20% increased damage."
+              "spell_id": 16120,
+              "description": "Increases the critical strike chance of your Lightning Bolt and Chain Lightning spells by 5%."
             }
           ],
-          "spell_id": 408490
+          "spell_id": 16120
         },
         {
           "id": 104759,
@@ -337,15 +337,15 @@
           "ranks": [
             {
               "spell_id": 408438,
-              "description": "Gives your Lightning Bolt and Chain Lightning spells a 3% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat."
-            },
-            {
-              "spell_id": 408438,
-              "description": "Gives your Lightning Bolt and Chain Lightning spells a 7% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat."
-            },
-            {
-              "spell_id": 408438,
               "description": "Gives your Lightning Bolt and Chain Lightning spells a 10% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat."
+            },
+            {
+              "spell_id": 408438,
+              "description": "Gives your Lightning Bolt and Chain Lightning spells a 20% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat."
+            },
+            {
+              "spell_id": 408438,
+              "description": "Gives your Lightning Bolt and Chain Lightning spells a 30% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat."
             }
           ],
           "spell_id": 408438
@@ -385,8 +385,8 @@
         },
         {
           "id": 104758,
-          "name": "Elemental Mastery",
-          "icon": "spell_nature_wispheal",
+          "name": "Lightning Mastery",
+          "icon": "spell_nature_unrelentingstorm",
           "max_rank": 1,
           "tier": 6,
           "column": 1,
@@ -395,7 +395,7 @@
           "ranks": [
             {
               "spell_id": 16166,
-              "description": "Gain mastery over Fire and Lightning, reducing the cast time of Lightning Bolt and Lava Burst by 0.5 sec, and removing the cooldown from Chain Lightning. Lasts 15 sec."
+              "description": "Gain mastery over Lightning, reducing the cast time of your Lightning Bolt spell by 0.5 sec, and removing the cooldown from your Chain Lightning spell. Lasts 15 sec."
             }
           ],
           "spell_id": 16166
@@ -529,39 +529,18 @@
           "ranks": [
             {
               "spell_id": 415140,
-              "description": "Increases your Attack Power by an amount equal to 33% of your Intellect."
-            },
-            {
-              "spell_id": 415140,
-              "description": "Increases your Attack Power by an amount equal to 67% of your Intellect."
+              "description": "Increases your Attack Power by an amount equal to 50% of your Intellect."
             },
             {
               "spell_id": 415140,
               "description": "Increases your Attack Power by an amount equal to 100% of your Intellect."
+            },
+            {
+              "spell_id": 415140,
+              "description": "Increases your Attack Power by an amount equal to 150% of your Intellect."
             }
           ],
           "spell_id": 415140
-        },
-        {
-          "id": 104752,
-          "name": "Improved Ghost Wolf",
-          "icon": "spell_nature_spiritwolf",
-          "max_rank": 2,
-          "tier": 1,
-          "column": 2,
-          "prereq_talent_id": null,
-          "prereq_rank": null,
-          "ranks": [
-            {
-              "spell_id": 16262,
-              "description": "Reduces the cast time of your Ghost Wolf spell by 1.0 sec, and Ghost Wolf may be used indoors."
-            },
-            {
-              "spell_id": 16262,
-              "description": "Reduces the cast time of your Ghost Wolf spell by 3.0 sec, and Ghost Wolf may be used indoors."
-            }
-          ],
-          "spell_id": 16262
         },
         {
           "id": 104751,
@@ -569,7 +548,7 @@
           "icon": "spell_nature_lightningshield",
           "max_rank": 3,
           "tier": 1,
-          "column": 3,
+          "column": 2,
           "prereq_talent_id": null,
           "prereq_rank": null,
           "ranks": [
@@ -700,23 +679,23 @@
           "ranks": [
             {
               "spell_id": 16256,
-              "description": "Increases your attack speed by 5% for your next 3 swings after dealing a melee critical strike."
+              "description": "Increases your attack speed by 6% for your next 3 swings after dealing a melee critical strike."
             },
             {
               "spell_id": 16256,
-              "description": "Increases your attack speed by 10% for your next 3 swings after dealing a melee critical strike."
+              "description": "Increases your attack speed by 12% for your next 3 swings after dealing a melee critical strike."
             },
             {
               "spell_id": 16256,
-              "description": "Increases your attack speed by 15% for your next 3 swings after dealing a melee critical strike."
+              "description": "Increases your attack speed by 18% for your next 3 swings after dealing a melee critical strike."
             },
             {
               "spell_id": 16256,
-              "description": "Increases your attack speed by 20% for your next 3 swings after dealing a melee critical strike."
+              "description": "Increases your attack speed by 24% for your next 3 swings after dealing a melee critical strike."
             },
             {
               "spell_id": 16256,
-              "description": "Increases your attack speed by 25% for your next 3 swings after dealing a melee critical strike."
+              "description": "Increases your attack speed by 30% for your next 3 swings after dealing a melee critical strike."
             }
           ],
           "spell_id": 16256
@@ -733,10 +712,31 @@
           "ranks": [
             {
               "spell_id": 17364,
-              "description": "Instantly strike for normal weapon damage and increase the damage you deal to the target with your next Lightning Bolt, Chain Lightning, or Earth Shock spell by 20% for 12 sec."
+              "description": "Instantly strike for 150% weapon damage and increase the damage you deal to the target with your next Lightning Bolt, Chain Lightning, or Earth Shock spell by 20% for 12 sec."
             }
           ],
           "spell_id": 17364
+        },
+        {
+          "id": 104752,
+          "name": "Improved Ghost Wolf",
+          "icon": "spell_nature_spiritwolf",
+          "max_rank": 2,
+          "tier": 3,
+          "column": 3,
+          "prereq_talent_id": null,
+          "prereq_rank": null,
+          "ranks": [
+            {
+              "spell_id": 16262,
+              "description": "Reduces the cast time of your Ghost Wolf spell by 1.0 sec, and Ghost Wolf may be used indoors."
+            },
+            {
+              "spell_id": 16262,
+              "description": "Reduces the cast time of your Ghost Wolf spell by 3.0 sec, and Ghost Wolf may be used indoors."
+            }
+          ],
+          "spell_id": 16262
         },
         {
           "id": 104745,
@@ -1263,7 +1263,7 @@
           "ranks": [
             {
               "spell_id": 408521,
-              "description": "Heals a friendly target for 486 to 534, an additional 445 over 15 sec, and increases the effectiveness of your Chain Heal casts directly on that target by 25%."
+              "description": "Heals a friendly target for 445 over 15 sec, and increases the effectiveness of your Chain Heal casts directly on that target by 25%."
             }
           ],
           "spell_id": 408521

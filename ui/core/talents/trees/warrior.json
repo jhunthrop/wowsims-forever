@@ -30,8 +30,8 @@
       {
         "fieldName": "improvedTacticalMastery",
         "location": { "rowIdx": 1, "colIdx": 1 },
-        "spellIds": [12295, 12295, 12295, 12295, 12295],
-        "maxPoints": 5
+        "spellIds": [12295, 12295, 12295],
+        "maxPoints": 3
       },
       {
         "fieldName": "improvedOverpower",
@@ -45,7 +45,7 @@
         "spellIds": [12296],
         "maxPoints": 1,
         "prereqLocation": { "rowIdx": 1, "colIdx": 1 },
-        "prereqRank": 5
+        "prereqRank": 3
       },
       {
         "fieldName": "deepWounds",
@@ -78,8 +78,8 @@
       {
         "fieldName": "bloodthrill",
         "location": { "rowIdx": 4, "colIdx": 0 },
-        "spellIds": [1289682, 1289682, 1289682, 1289682, 1289682],
-        "maxPoints": 5
+        "spellIds": [1289682, 1289682],
+        "maxPoints": 2
       },
       {
         "fieldName": "sweepingStrikes",
@@ -162,22 +162,22 @@
         "maxPoints": 3
       },
       {
+        "fieldName": "enrage",
+        "location": { "rowIdx": 2, "colIdx": 3 },
+        "spellIds": [12317, 12317, 12317, 12317, 12317],
+        "maxPoints": 5
+      },
+      {
         "fieldName": "dualWieldSpecialization",
         "location": { "rowIdx": 3, "colIdx": 0 },
         "spellIds": [23584, 23584, 23584, 23584, 23584],
         "maxPoints": 5
       },
       {
-        "fieldName": "ragingBlows",
+        "fieldName": "recklessSwings",
         "location": { "rowIdx": 3, "colIdx": 1 },
-        "spellIds": [1310315],
+        "spellIds": [1329555],
         "maxPoints": 1
-      },
-      {
-        "fieldName": "enrage",
-        "location": { "rowIdx": 3, "colIdx": 2 },
-        "spellIds": [12317, 12317, 12317, 12317, 12317],
-        "maxPoints": 5
       },
       {
         "fieldName": "improvedExecute",
@@ -198,32 +198,38 @@
         "maxPoints": 1
       },
       {
+        "fieldName": "goreDrinker",
+        "location": { "rowIdx": 4, "colIdx": 2 },
+        "spellIds": [1323967, 1323967],
+        "maxPoints": 2,
+        "prereqLocation": { "rowIdx": 2, "colIdx": 2 },
+        "prereqRank": 3
+      },
+      {
         "fieldName": "improvedIntercept",
         "location": { "rowIdx": 4, "colIdx": 3 },
         "spellIds": [20504, 20504],
         "maxPoints": 2
       },
       {
-        "fieldName": "flurry",
-        "location": { "rowIdx": 5, "colIdx": 1 },
-        "spellIds": [12319, 12319, 12319, 12319, 12319],
-        "maxPoints": 5,
-        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
-        "prereqRank": 1
+        "fieldName": "improvedWhirlwind",
+        "location": { "rowIdx": 5, "colIdx": 0 },
+        "spellIds": [1310315, 1310315],
+        "maxPoints": 2
       },
       {
-        "fieldName": "goreDrinker",
+        "fieldName": "flurry",
         "location": { "rowIdx": 5, "colIdx": 2 },
-        "spellIds": [1323967, 1323967],
-        "maxPoints": 2,
-        "prereqLocation": { "rowIdx": 3, "colIdx": 2 },
-        "prereqRank": 5
+        "spellIds": [12319, 12319, 12319],
+        "maxPoints": 3
       },
       {
         "fieldName": "bloodthirst",
         "location": { "rowIdx": 6, "colIdx": 1 },
         "spellIds": [23881],
-        "maxPoints": 1
+        "maxPoints": 1,
+        "prereqLocation": { "rowIdx": 4, "colIdx": 1 },
+        "prereqRank": 1
       }
     ]
   },

@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70753",
+  "build": "1.60.1.70755",
   "class_id": 11,
   "class_slug": "druid",
   "trees": [
@@ -781,11 +781,7 @@
           "ranks": [
             {
               "spell_id": 1223246,
-              "description": "Increases damage done by your melee abilities on Bleeding targets by 2%."
-            },
-            {
-              "spell_id": 1223246,
-              "description": "Increases damage done by your melee abilities on Bleeding targets by 4%."
+              "description": "Increases damage done by your melee abilities on Bleeding targets by 3%."
             },
             {
               "spell_id": 1223246,
@@ -793,11 +789,15 @@
             },
             {
               "spell_id": 1223246,
-              "description": "Increases damage done by your melee abilities on Bleeding targets by 8%."
+              "description": "Increases damage done by your melee abilities on Bleeding targets by 9%."
             },
             {
               "spell_id": 1223246,
-              "description": "Increases damage done by your melee abilities on Bleeding targets by 10%."
+              "description": "Increases damage done by your melee abilities on Bleeding targets by 12%."
+            },
+            {
+              "spell_id": 1223246,
+              "description": "Increases damage done by your melee abilities on Bleeding targets by 15%."
             }
           ],
           "spell_id": 1223246
