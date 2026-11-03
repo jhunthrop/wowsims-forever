@@ -51,8 +51,17 @@ func (mage *Mage) registerEvocationCD() {
 				OnGain: func(aura *core.Aura, sim *core.Simulation) {
 					manaRegenAura.Activate(sim)
 				},
+				// The regen tick that falls on the channel's last moment
+				// still sees it: aura expiry runs before every pending
+				// action at the same time, so ending the regen here would
+				// cost an Evocation that starts on the 2 s regen grid one
+				// of its four ticks. The regen ends just after.
 				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-					manaRegenAura.Deactivate(sim)
+					core.StartDelayedAction(sim, core.DelayedActionOptions{
+						DoAt:     sim.CurrentTime,
+						Priority: core.ActionPriorityLow,
+						OnAction: manaRegenAura.Deactivate,
+					})
 				},
 			},
 			NumberOfTicks: maxTicks,
