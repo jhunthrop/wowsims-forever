@@ -49,8 +49,8 @@ character_stats_results: {
 stat_weights_results: {
  key: "TestFeralTank-Phase1-StatWeights-Default"
  value: {
-  weights: 0.48087
-  weights: 0.25306
+  weights: 0.48247
+  weights: 0.24544
   weights: 0
   weights: 0
   weights: 0
@@ -63,22 +63,22 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0
-  weights: 5.14668
+  weights: 4.72841
   weights: 0
   weights: 0
-  weights: 0.19007
+  weights: 0.1907
   weights: 0
   weights: 0
-  weights: 13.90581
+  weights: 14.13848
   weights: 0
   weights: 0
   weights: 0
-  weights: -0.0357
+  weights: 0.02498
   weights: 0
-  weights: 0.42015
+  weights: 0.01972
   weights: 0
   weights: 0
-  weights: -0.40679
+  weights: -1.62392
   weights: 0
   weights: 0
   weights: 0
@@ -97,130 +97,142 @@ stat_weights_results: {
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-CenarionRaiment"
  value: {
-  dps: 401.16875
-  tps: 1006.6398
+  dps: 393.88019
+  tps: 985.01085
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Champion'sRefuge"
  value: {
-  dps: 450.33882
-  tps: 1134.24313
+  dps: 453.00204
+  tps: 1141.81407
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Champion'sSanctuary"
  value: {
-  dps: 455.02311
-  tps: 1142.53901
+  dps: 457.14211
+  tps: 1152.27165
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-EyeoftheBeast-13968"
  value: {
-  dps: 460.1521
-  tps: 1163.34999
+  dps: 467.40795
+  tps: 1186.80816
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-FeralheartRaiment"
  value: {
-  dps: 438.762
-  tps: 1099.22204
+  dps: 440.03071
+  tps: 1104.00804
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-FieldMarshal'sSanctuary"
  value: {
-  dps: 484.08403
-  tps: 1221.5375
+  dps: 483.0001
+  tps: 1222.95706
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Haruspex'sGarb"
  value: {
-  dps: 431.9978
-  tps: 1085.3858
+  dps: 429.70733
+  tps: 1081.53182
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-LieutenantCommander'sRefuge"
  value: {
-  dps: 450.33882
-  tps: 1134.24313
+  dps: 453.00204
+  tps: 1141.81407
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-LieutenantCommander'sSanctuary"
  value: {
-  dps: 455.02311
-  tps: 1142.53901
+  dps: 457.14211
+  tps: 1152.27165
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-StormrageRaiment"
  value: {
-  dps: 399.93782
-  tps: 1004.13313
+  dps: 397.3324
+  tps: 997.61653
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-SymbolsofUnendingLife"
  value: {
-  dps: 446.30547
-  tps: 1126.18584
+  dps: 447.65904
+  tps: 1130.48166
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Warlord'sSanctuary"
  value: {
-  dps: 484.08403
-  tps: 1221.5375
+  dps: 483.0001
+  tps: 1222.95706
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Average-Default"
  value: {
-  dps: 635.10557
-  tps: 1731.88504
-  dtps: 676.23021
+  dps: 635.90025
+  tps: 1735.67505
+  dtps: 678.44546
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-FullBuffs-Tank-Consumes-LongMultiTarget"
- value: {}
+ value: {
+  dps: 3.11163
+  tps: 21.33489
+ }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-FullBuffs-Tank-Consumes-LongSingleTarget"
- value: {}
+ value: {
+  dps: 3.11163
+  tps: 9.93489
+ }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-FullBuffs-Tank-Consumes-ShortSingleTarget"
- value: {}
+ value: {
+  dps: 15.55816
+  tps: 49.67447
+ }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-NoBuffs-Tank-Consumes-LongMultiTarget"
  value: {
-  tps: 4.32
+  dps: 1.28498
+  tps: 18.42494
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-NoBuffs-Tank-Consumes-LongSingleTarget"
  value: {
-  tps: 4.32
+  dps: 1.28498
+  tps: 8.68744
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-NoBuffs-Tank-Consumes-ShortSingleTarget"
  value: {
-  tps: 5.4
+  dps: 6.4249
+  tps: 27.2372
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 745.13364
-  tps: 2028.19306
-  dtps: 607.86171
+  dps: 747.04629
+  tps: 2037.39529
+  dtps: 609.80028
  }
 }
