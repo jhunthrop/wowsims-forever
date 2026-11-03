@@ -657,7 +657,7 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 |---|---|---|---|---|---|---|---|---|---|
 | Curse of Exhaustion (18223) | 0→0 | 1 | Affliction | talent | 0 | 0 | 0 |  | utility: movement slow on the target; no sim number reads it |
 | Demon Skin (687) | 1→10 | 2 | Demonology | skill_line_ability | 120 mana | 0 | 0 | power cost | utility: leveling armor and health regeneration, replaced by Demon Armor at 20; no sim number reads either |
-| Soul Link (19028) | 1→1 | 1 | Demonology | talent | 0 | 0 | 0 |  | modeled as aura: sim/warlock/talents.go applySoulLink, the talent's 30% damage-taken share on the warlock and the pet; no rotation casts it |
+| Soul Link (19028) | 1→1 | 1 | Demonology | talent | 0 | 0 | 0 |  | modeled as aura: sim/warlock/talents.go applySoulLink, a cast (20% of base mana, a global, needs a demon out) giving the warlock and the demon 3% more damage and sending 30% of the warlock's damage taken to the demon; Demonology's opener casts it before the pull |
 | Curse of Weakness (702) | 4→52 | 6 | Affliction | skill_line_ability | 175 mana | 0 | 0 | power cost | utility: lowers the target's attack power; no sim number reads it |
 | Fear (5782) | 8→56 | 3 | Affliction | skill_line_ability | 0 | 1500 | 0 | cast time | utility: crowd control |
 | Create Healthstone (6201) | 10→58 | 5 | Demonology | skill_line_ability | 1120 mana | 3000 | 0 | power cost, cast time | utility: creates a consumable |
