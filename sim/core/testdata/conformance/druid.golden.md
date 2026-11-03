@@ -613,11 +613,11 @@ Each spell below is built with exactly one point in the single talent that grant
 | RestorationDruid (Wild Growth talent) | 60 | Wild Growth | 3 | 1238215 | 1050.00→1050.00 | mana→mana | 6000→6000 | 3000→3000 | 1500→1500 | 60→60 | 7000→7000 | match |  | 97.00-97.00→97.00-97.00 | 0.033→0.033 | declared, matches |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 18 of the class's 54 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 18 of the class's 55 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Entangling Roots (339) | 8→58 | 12 | Balance | skill_line_ability | 0 | 1500 | 0 | cast time |
+| Entangling Roots (339) | 8→58 | 6 | Balance | skill_line_ability | 125 mana | 1500 | 0 | power cost, cast time |
 | Growl (6795) | 10→10 | 1 | Feral Combat | skill_line_ability | 0 | 0 | 8000 | cooldown |
 | Nature's Grasp (16689) | 10→58 | 6 | Balance | skill_line_ability | 125 mana | 0 | 60000 | power cost, cooldown |
 | Teleport: Moonglade (18960) | 10→10 | 1 | Balance | skill_line_ability | 120 mana | 10000 | 0 | power cost, cast time |
@@ -626,7 +626,7 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Cure Poison (8946) | 14→14 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
 | Aquatic Form (1066) | 16→16 | 1 | Feral Combat | skill_line_ability | 0 | 0 | 0 |  |
 | Hibernate (2637) | 18→58 | 3 | Balance | skill_line_ability | 150 mana | 1500 | 0 | power cost, cast time |
-| Feral Charge (1238122) | 20→20 | 1 | Feral Combat | skill_line_ability | 50 rage | 0 | 15000 | power cost, cooldown |
+| Feral Charge (1238122) | 20→20 | 1 | Feral Combat | talent | 50 rage | 0 | 15000 | power cost, cooldown |
 | Rebirth (20484) | 20→60 | 5 | Restoration | skill_line_ability | 0 | 2000 | 1800000 | cast time, cooldown |
 | Soothe Animal (2908) | 22→54 | 3 | Balance | skill_line_ability | 100 mana | 1500 | 0 | power cost, cast time |
 | Remove Curse (2782) | 24→24 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
@@ -642,7 +642,7 @@ Active trainables the engine does not register as a spell because the presets as
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Mark of the Wild (1126) | 1→60 | 10 | Restoration | skill_line_ability | 445 mana | 0 | 0 | power cost |
+| Mark of the Wild (1126) | 1→60 | 7 | Restoration | skill_line_ability | 445 mana | 0 | 0 | power cost |
 | Gift of the Wild (21849) | 50→60 | 2 | Restoration | skill_line_ability | 1200 mana | 0 | 0 | power cost |
 
 ### In the client, no learn row

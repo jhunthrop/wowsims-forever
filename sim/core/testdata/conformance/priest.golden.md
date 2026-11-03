@@ -663,29 +663,30 @@ Each spell below is built with exactly one point in the single talent that grant
 | ShadowPriest (Vampiric Embrace talent) | 60 | Vampiric Embrace | 0 | 15286 | 40.00→40.00 | mana→mana | 30000→30000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 30 of the class's 54 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 31 of the class's 57 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Power Word: Fortitude (1243) | 1→60 | 8 | Discipline | skill_line_ability | 1695 mana | 0 | 0 | power cost |
+| Silence (15487) | 0→0 | 1 | Shadow | talent | 225 mana | 0 | 45000 | power cost, cooldown |
+| Power Word: Fortitude (1243) | 1→60 | 6 | Discipline | skill_line_ability | 1695 mana | 0 | 0 | power cost |
 | Fade (586) | 8→60 | 6 | Shadow Magic | skill_line_ability | 275 mana | 0 | 30000 | power cost, cooldown |
 | Confounding Flash (1277455) | 10→10 | 1 | Discipline | skill_line_ability | 0 | 500 | 120000 | cast time, cooldown; Gnome racial |
 | Desperate Prayer (13908) | 10→58 | 7 | Holy | skill_line_ability | 0 | 0 | 600000 | cooldown |
-| Hex of Weakness (9035) | 10→60 | 7 | Shadow Magic | skill_line_ability | 320 mana | 0 | 0 | power cost; Troll racial |
+| Hex of Weakness (9035) | 10→60 | 6 | Shadow Magic | skill_line_ability | 240 mana | 0 | 0 | power cost; Troll racial |
 | Resurrection (2006) | 10→58 | 5 | Holy | skill_line_ability | 0 | 10000 | 0 | cast time |
 | Starshards (10797) | 10→58 | 7 | Discipline | skill_line_ability | 350 mana | 0 | 30000 | power cost, cooldown; Night Elf racial; registered by a Night Elf priest (starshards.go), absent from the Undead and Human presets |
-| Touch of Weakness (2652) | 10→60 | 12 | Shadow Magic | skill_line_ability | 195 mana | 0 | 0 | power cost; Undead racial |
+| Touch of Weakness (2652) | 10→60 | 6 | Shadow Magic | skill_line_ability | 195 mana | 0 | 0 | power cost; Undead racial |
 | Cure Disease (528) | 14→14 | 1 | Holy | skill_line_ability | 0 | 0 | 0 |  |
-| Psychic Scream (8122) | 14→56 | 5 | Shadow Magic | skill_line_ability | 210 mana | 0 | 30000 | power cost, cooldown |
-| Dispel Magic (527) | 18→36 | 3 | Discipline | skill_line_ability | 0 | 0 | 0 |  |
+| Psychic Scream (8122) | 14→56 | 4 | Shadow Magic | skill_line_ability | 210 mana | 0 | 30000 | power cost, cooldown |
+| Dispel Magic (527) | 18→36 | 2 | Discipline | skill_line_ability | 0 | 0 | 0 |  |
 | Chastise (1277331) | 20→60 | 5 | Holy | skill_line_ability | 225 mana | 0 | 120000 | power cost, cooldown; Dwarf racial |
 | Contingency Plan (1277462) | 20→60 | 5 | Discipline | skill_line_ability | 0 | 0 | 600000 | cooldown; Gnome racial |
 | Elune's Grace (2651) | 20→20 | 1 | Discipline | skill_line_ability | 0 | 0 | 300000 | cooldown; Night Elf racial |
 | Fear Ward (6346) | 20→20 | 1 | Holy | skill_line_ability | 100 mana | 0 | 180000 | power cost, cooldown |
-| Feedback (13896) | 20→60 | 6 | Discipline | skill_line_ability | 0 | 0 | 180000 | cooldown; Human racial |
+| Feedback (13896) | 20→60 | 5 | Discipline | skill_line_ability | 230 mana | 0 | 180000 | power cost, cooldown; Human racial |
 | Mind Soothe (453) | 20→52 | 3 | Shadow Magic | skill_line_ability | 90 mana | 0 | 0 | power cost |
 | Shackle Undead (9484) | 20→60 | 3 | Discipline | skill_line_ability | 150 mana | 1500 | 0 | power cost, cast time |
-| Shadowguard (18137) | 20→60 | 12 | Shadow Magic | skill_line_ability | 0 | 0 | 0 | Troll racial |
+| Shadowguard (18137) | 20→60 | 6 | Shadow Magic | skill_line_ability | 250 mana | 0 | 0 | power cost; Troll racial |
 | Mind Vision (2096) | 22→44 | 2 | Shadow Magic | skill_line_ability | 150 mana | 0 | 0 | power cost |
 | Mana Burn (8129) | 24→56 | 5 | Discipline | skill_line_ability | 270 mana | 3000 | 0 | power cost, cast time |
 | Divine Spirit (14752) | 30→60 | 4 | Discipline | skill_line_ability | 970 mana | 0 | 0 | power cost |
@@ -693,8 +694,8 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Shadow Protection (976) | 30→56 | 3 | Shadow Magic | skill_line_ability | 650 mana | 0 | 0 | power cost |
 | Abolish Disease (552) | 32→32 | 1 | Holy | skill_line_ability | 0 | 0 | 0 |  |
 | Levitate (1706) | 34→34 | 1 | Discipline | skill_line_ability | 100 mana | 0 | 0 | power cost |
-| Power Infusion (10060) | 40→40 | 1 | Discipline | skill_line_ability | 0 | 0 | 180000 | cooldown |
-| Prayer of Fortitude (21562) | 48→60 | 3 | Discipline | skill_line_ability | 3400 mana | 0 | 0 | power cost |
+| Power Infusion (10060) | 40→40 | 1 | Discipline | talent | 0 | 0 | 180000 | cooldown |
+| Prayer of Fortitude (21562) | 48→60 | 2 | Discipline | skill_line_ability | 3400 mana | 0 | 0 | power cost |
 | Prayer of Shadow Protection (27683) | 56→56 | 1 | Shadow Magic | skill_line_ability | 1300 mana | 0 | 0 | power cost |
 | Prayer of Spirit (27681) | 60→60 | 1 | Discipline | skill_line_ability | 1940 mana | 0 | 0 | power cost |
 

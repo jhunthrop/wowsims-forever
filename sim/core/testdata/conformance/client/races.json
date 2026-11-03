@@ -37,7 +37,7 @@
         ]
       },
       {
-        "text": "Racials after Blizzard's 26 October notes: Will to Survive removes all Stuns on a 3 minute cooldown, Perception gives 20 seconds of stealth detection, Ruthless increases critical strike chance with all spells and attacks by 1%, and The Human Spirit increases Spirit by 10%.",
+        "text": "Racials in the beta client's spell data: Will to Survive removes all Stuns on a 3 minute cooldown, Perception gives 20 seconds of stealth detection on a 3 minute cooldown, Ruthless increases critical strike chance with all spells and attacks by 1%, and The Human Spirit increases Spirit by 10%.",
         "sources": [
           {
             "label": "Icy Veins, the racial rework",
@@ -57,6 +57,11 @@
           {
             "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
             "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
+          },
+          {
+            "label": "The Forever beta client's spell tables (SpellEffect, SpellMisc, SpellCooldowns) at build 1.60.1.70753, read through wago.tools",
+            "url": "https://wago.tools/db2/SpellEffect?build=1.60.1.70753",
             "kind": "datamined"
           }
         ]
@@ -101,7 +106,7 @@
         ]
       },
       {
-        "text": "Racials after Blizzard's 26 and 27 October notes: Blood Fury increases Attack Power, Ranged Attack Power and Spell Power by 10% for 15 seconds on a 2 minute cooldown, Shatter Curse removes and grants immunity to Curses and Banes and reduces magical damage taken by 15% for 8 seconds, Command increases the damage dealt by Hunter and Warlock pets by 5%, and Hardiness reduces stun duration by 20%. Savage, the 1% critical strike passive that had replaced the axe bonus, is removed.",
+        "text": "Racials in the beta client's spell data: Blood Fury increases Attack Power, Ranged Attack Power and Spell Power by 10% for 15 seconds on a 2 minute cooldown, Shatter Curse removes all Curses and Banes and reduces magical damage taken by 5% for 8 seconds on a 3 minute cooldown, Command increases the damage dealt by Hunter and Warlock pets by 5%, and Hardiness reduces stun duration by 20%. Savage, the 1% critical strike passive that had replaced the axe bonus, is removed.",
         "sources": [
           {
             "label": "Icy Veins, the racial rework",
@@ -121,6 +126,11 @@
           {
             "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
             "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
+          },
+          {
+            "label": "The Forever beta client's spell tables (SpellEffect, SpellMisc, SpellCooldowns) at build 1.60.1.70753, read through wago.tools",
+            "url": "https://wago.tools/db2/SpellEffect?build=1.60.1.70753",
             "kind": "datamined"
           }
         ]
@@ -175,7 +185,7 @@
         ]
       },
       {
-        "text": "Stoneform now reduces physical damage taken instead of raising armor; Find Treasure stacks with other tracking; Artisan's Precision increases hit chance with spells and attacks by 1%, in place of Earth Fury's critical strike bonus since Blizzard's 26 October notes; Big Game Hunter adds damage against Beasts.",
+        "text": "Racials in the beta client's spell data: Stoneform removes and grants immunity to Bleed, Poison and Disease effects and reduces physical damage taken by 10% for 8 seconds on a 3 minute cooldown, in place of the old armor bonus; Find Treasure tracks treasure; Artisan's Precision increases hit chance with spells and attacks by 1%, in place of Earth Fury's critical strike bonus since Blizzard's 26 October notes; Big Game Hunter increases damage dealt to Beasts by 5%. That Find Treasure stacks with other tracking is Blizzard's Deep Dive, not the client's rows.",
         "sources": [
           {
             "label": "Blizzard, Deep Dive panel recap",
@@ -190,6 +200,11 @@
           {
             "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
             "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
+          },
+          {
+            "label": "The Forever beta client's spell tables (SpellEffect, SpellMisc, SpellCooldowns) at build 1.60.1.70753, read through wago.tools",
+            "url": "https://wago.tools/db2/SpellEffect?build=1.60.1.70753",
             "kind": "datamined"
           }
         ]
@@ -234,7 +249,7 @@
         ]
       },
       {
-        "text": "Racials read from the BlizzCon demo: Elune's Light grants 10% critical strike chance for 15 seconds on a 3 minute cooldown, Shadowmeld stealths until you move and is usable in combat at a 2 minute cooldown, Quickness grants dodge and run speed, and Wisp Spirit grants 75% speed while dead. Icy Veins reads Quickness as 2% dodge and 2% speed; Talents Forever reads 1% dodge and 2% speed.",
+        "text": "Racials in the beta client's spell data: Elune's Light grants 10% critical strike chance for 15 seconds on a 3 minute cooldown, Shadowmeld stealths until you move on a 10 second cooldown, 2 minutes when used in combat, Quickness increases dodge chance by 1% and movement speed by 2%, and Wisp Spirit increases movement speed by 75% while dead.",
         "sources": [
           {
             "label": "Icy Veins, the racial rework",
@@ -245,6 +260,11 @@
             "label": "Talents Forever (demo transcription)",
             "url": "https://talentsforever.com/data.json",
             "kind": "community"
+          },
+          {
+            "label": "The Forever beta client's spell tables (SpellEffect, SpellMisc, SpellCooldowns) at build 1.60.1.70753, read through wago.tools",
+            "url": "https://wago.tools/db2/SpellEffect?build=1.60.1.70753",
+            "kind": "datamined"
           }
         ]
       }
@@ -298,7 +318,7 @@
         ]
       },
       {
-        "text": "Will of the Forsaken removes Charm, Fear, and Sleep but no longer grants immunity; Cannibalize restores mana as well as health; Touch of the Grave gives spells and attacks a chance to drain Health from the target, up to 5% of your maximum Health, at most once every 15 seconds.",
+        "text": "Racials in the beta client's spell data: Will of the Forsaken removes Charm, Fear and Sleep on a 2 minute cooldown but no longer grants immunity; Cannibalize restores 7% of Health and Mana every 2 seconds for 10 seconds beside a corpse, on a 2 minute cooldown; Touch of the Grave gives spells and attacks a chance to drain Health from the target, up to 5% of your maximum Health, at most once every 15 seconds.",
         "sources": [
           {
             "label": "Blizzard, Deep Dive panel recap",
@@ -313,6 +333,11 @@
           {
             "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
             "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
+          },
+          {
+            "label": "The Forever beta client's spell tables (SpellEffect, SpellMisc, SpellCooldowns) at build 1.60.1.70753, read through wago.tools",
+            "url": "https://wago.tools/db2/SpellEffect?build=1.60.1.70753",
             "kind": "datamined"
           }
         ]
@@ -357,7 +382,7 @@
         ]
       },
       {
-        "text": "Racials after Blizzard's 26 October notes: War Stomp stuns up to 5 enemies within 8 yards for 2 seconds on a 2 minute cooldown, Cultivation grows bonus herbs that need no Herbalism to gather on a 15 minute cooldown, Plainsrunning raises movement speed by 2% a stack the longer you keep moving, up to 60%, and no longer raises mounted speed, and Endurance increases Health by 5%.",
+        "text": "Racials in the beta client's spell data: War Stomp stuns up to 5 enemies within 8 yards for 2 seconds on a 90 second cooldown, Cultivation grows bonus herbs that need no Herbalism to gather on a 15 minute cooldown, Plainsrunning raises movement speed by 2% every 5 seconds spent moving, up to 60%, and no longer raises mounted speed, and Endurance increases Health by 5%.",
         "sources": [
           {
             "label": "Icy Veins, the racial rework",
@@ -377,6 +402,11 @@
           {
             "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
             "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
+          },
+          {
+            "label": "The Forever beta client's spell tables (SpellEffect, SpellMisc, SpellCooldowns) at build 1.60.1.70753, read through wago.tools",
+            "url": "https://wago.tools/db2/SpellEffect?build=1.60.1.70753",
             "kind": "datamined"
           }
         ]
@@ -421,7 +451,7 @@
         ]
       },
       {
-        "text": "Racials read from the BlizzCon demo: Escape Artist breaks and grants brief immunity to movement impairment on a 2 minute cooldown, Eureka! makes your next 3 abilities cost 50% less Mana and do 10% more on a 2 minute cooldown, Expansive Mind grants 5% Mana, Rage and Energy, and Engineering Specialization makes engineering devices more reliable. The immunity window is read as 3 seconds by one outlet and 5 by another.",
+        "text": "Racials in the beta client's spell data: Escape Artist removes movement impairing effects and grants immunity to them for 3 seconds on a 2 minute cooldown, Eureka! makes your damaging and healing abilities cost 10% less and deal 10% more for 8 seconds on a 2 minute cooldown, Expansive Mind grants 5% Mana, Rage and Energy, and Engineering Specialization makes engineering devices 20% less likely to fail or backfire. Eureka! follows the client's rows, one per class, not the BlizzCon demo.",
         "sources": [
           {
             "label": "Icy Veins, the racial rework",
@@ -432,6 +462,16 @@
             "label": "Talents Forever (demo transcription)",
             "url": "https://talentsforever.com/data.json",
             "kind": "community"
+          },
+          {
+            "label": "Wowhead, the Forever client's Eureka! tooltip (spell 1259817 and the per-class rows)",
+            "url": "https://www.wowhead.com/forever/spell=1259817/eureka",
+            "kind": "datamined"
+          },
+          {
+            "label": "The Forever beta client's spell tables (SpellEffect, SpellMisc, SpellCooldowns) at build 1.60.1.70753, read through wago.tools",
+            "url": "https://wago.tools/db2/SpellEffect?build=1.60.1.70753",
+            "kind": "datamined"
           }
         ]
       }
@@ -475,7 +515,7 @@
         ]
       },
       {
-        "text": "Racials after Blizzard's 27 October notes: Berserking increases casting and attack speed by 10% for 15 seconds on a 3 minute cooldown, Rapid Regeneration channels back 50% of maximum Health, Beast Slaying grants 5% damage against Beasts, and Regeneration keeps 10% of Health regeneration running in combat.",
+        "text": "Racials in the beta client's spell data: Berserking increases casting and attack speed by 10% for 15 seconds on a 3 minute cooldown, Rapid Regeneration channels back 50% of maximum Health over 6 seconds on a 3 minute cooldown, Beast Slaying increases damage dealt to Beasts by 5%, and Regeneration increases Health regeneration by 20% and keeps 20% of it running in combat.",
         "sources": [
           {
             "label": "Icy Veins, the racial rework",
@@ -495,6 +535,11 @@
           {
             "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
             "url": "https://wowforevertalents.com/patch-notes/",
+            "kind": "datamined"
+          },
+          {
+            "label": "The Forever beta client's spell tables (SpellEffect, SpellMisc, SpellCooldowns) at build 1.60.1.70753, read through wago.tools",
+            "url": "https://wago.tools/db2/SpellEffect?build=1.60.1.70753",
             "kind": "datamined"
           }
         ]
@@ -564,7 +609,7 @@
         ]
       },
       {
-        "text": "Racials after Blizzard's 26 October notes: Walk on Air (glide downward for 10 seconds), Read Ley Line (50% health and mana regeneration for 15 seconds), Wind Blessed (2% haste), Elemental Insight (5% damage to Elementals). Skyborne choose Horde or Alliance at creation.",
+        "text": "Racials in the beta client's spell data: Walk on Air (glide downward for 10 seconds on a 90 second cooldown), Read Leyline (50% health and mana regeneration for 15 seconds on a 2 minute cooldown), Wind Blessed (2% haste), Elemental Insight (5% damage to Elementals). Skyborne choose Horde or Alliance at creation. Read Leyline is spell 1259705, which casts Energized 1270842. The sim does not cast it on its own; a custom rotation can.",
         "sources": [
           {
             "label": "Icy Veins, racial rework",
@@ -585,6 +630,11 @@
             "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
             "url": "https://wowforevertalents.com/patch-notes/",
             "kind": "datamined"
+          },
+          {
+            "label": "The Forever beta client's spell tables (SpellEffect, SpellMisc, SpellCooldowns) at build 1.60.1.70753, read through wago.tools",
+            "url": "https://wago.tools/db2/SpellEffect?build=1.60.1.70753",
+            "kind": "datamined"
           }
         ]
       },
@@ -599,7 +649,7 @@
         ]
       },
       {
-        "text": "Each faction has its own second active: Alliance Skyborne get Read Ley Line, Horde Skyborne get Skysight, which raises movement and mounted speed by 15% for 30 seconds; at an elemental convergence it also grants Charged for 1 hour, which doubles it.",
+        "text": "Each faction has its own second active: Alliance Skyborne get Read Leyline, Horde Skyborne get Skysight, which raises movement and mounted speed by 15% for 30 seconds; at an elemental convergence it also grants Charged for 1 hour, which doubles it.",
         "sources": [
           {
             "label": "Talents Forever (demo transcription)",
@@ -683,7 +733,7 @@
         ]
       },
       {
-        "text": "Racials after Blizzard's 26 October notes: Walk on Air (glide downward for 10 seconds), Skysight (15% movement and mounted speed for 30 seconds), Wind Blessed (2% haste), Elemental Insight (5% damage to Elementals). Skyborne choose Horde or Alliance at creation.",
+        "text": "Racials in the beta client's spell data: Walk on Air (glide downward for 10 seconds on a 90 second cooldown), Skysight (15% movement and mounted speed for 30 seconds on a 2 minute cooldown), Wind Blessed (2% haste), Elemental Insight (5% damage to Elementals). Skyborne choose Horde or Alliance at creation.",
         "sources": [
           {
             "label": "Icy Veins, racial rework",
@@ -714,6 +764,11 @@
             "label": "WoW Forever Talents, the client's hotfix cache of 30 October 2026",
             "url": "https://wowforevertalents.com/patch-notes/",
             "kind": "datamined"
+          },
+          {
+            "label": "The Forever beta client's spell tables (SpellEffect, SpellMisc, SpellCooldowns) at build 1.60.1.70753, read through wago.tools",
+            "url": "https://wago.tools/db2/SpellEffect?build=1.60.1.70753",
+            "kind": "datamined"
           }
         ]
       },
@@ -728,7 +783,7 @@
         ]
       },
       {
-        "text": "Each faction has its own second active: Alliance Skyborne get Read Ley Line, Horde Skyborne get Skysight, which raises movement and mounted speed by 15% for 30 seconds; at an elemental convergence it also grants Charged for 1 hour, which doubles it.",
+        "text": "Each faction has its own second active: Alliance Skyborne get Read Leyline, Horde Skyborne get Skysight, which raises movement and mounted speed by 15% for 30 seconds; at an elemental convergence it also grants Charged for 1 hour, which doubles it.",
         "sources": [
           {
             "label": "Talents Forever (demo transcription)",

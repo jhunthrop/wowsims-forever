@@ -368,7 +368,7 @@ Each spell below is built with exactly one point in the single talent that grant
 | FuryWarrior (Sweeping Strikes talent) | 60 | Sweeping Strikes | 0 | 12292 | 30.00→30.00 | rage→rage | 30000→30000 | 0→0 | 0→0 | 30→30 | 20000→20000 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 9 of the class's 40 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 9 of the class's 41 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
@@ -379,7 +379,7 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Victory Rush (402927) | 20→20 | 1 | Arms | skill_line_ability | 0 | 0 | 30000 | cooldown |
 | Intimidating Shout (5246) | 22→22 | 1 | Fury | skill_line_ability | 250 rage | 0 | 180000 | power cost, cooldown |
 | Challenging Shout (1161) | 26→26 | 1 | Fury | skill_line_ability | 50 rage | 0 | 600000 | power cost, cooldown |
-| Concussion Blow (12809) | 30→30 | 1 | Protection | skill_line_ability | 100 rage | 0 | 45000 | power cost, cooldown |
+| Concussion Blow (12809) | 30→30 | 1 | Protection | talent | 100 rage | 0 | 45000 | power cost, cooldown |
 | Intercept (20252) | 30→52 | 3 | Fury | skill_line_ability | 100 rage | 0 | 30000 | power cost, cooldown |
 
 ### In the client, no learn row

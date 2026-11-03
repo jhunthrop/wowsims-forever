@@ -429,24 +429,24 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters | Disposition |
 |---|---|---|---|---|---|---|---|---|---|
-| Arcane Intellect (1459) | 1→56 | 6 | Arcane | skill_line_ability | 1510 mana | 0 | 0 | power cost | modeled as core buff: core.ArcaneIntellectRanks (client rank table); casting it changes no result |
+| Arcane Intellect (1459) | 1→56 | 5 | Arcane | skill_line_ability | 1510 mana | 0 | 0 | power cost | modeled as core buff: core.ArcaneIntellectRanks (client rank table); casting it changes no result |
+| Frost Armor (168) | 1→20 | 3 | Frost | skill_line_ability | 170 mana | 0 | 0 | power cost | modeled as aura: sim/mage/armors.go, ranks 168/7300/7301 by level |
 | Conjure Water (5504) | 4→60 | 8 | Arcane | skill_line_ability | 845 mana | 3000 | 0 | power cost, cast time | utility: creates a drink |
-| Ice Block (11958) | 4→4 | 1 | Frost | skill_line_ability | 15 mana | 0 | 300000 | power cost, cooldown | utility: invulnerability, no incoming damage in a sim |
+| Ice Block (11958) | 4→4 | 1 | Frost | talent | 15 mana | 0 | 300000 | power cost, cooldown | utility: invulnerability, no incoming damage in a sim |
 | Conjure Food (587) | 6→60 | 7 | Arcane | skill_line_ability | 705 mana | 3000 | 0 | power cost, cast time | utility: creates food |
 | Polymorph (28271) | 8→60 | 6 | Arcane | skill_line_ability | 150 mana | 1500 | 0 | power cost, cast time | utility: crowd control |
-| Frost Armor (7300) | 10→20 | 2 | Frost | skill_line_ability | 170 mana | 0 | 0 | power cost | modeled as aura: sim/mage/armors.go, ranks 168/7300/7301 by level |
 | Dampen Magic (604) | 12→60 | 5 | Arcane | skill_line_ability | 500 mana | 0 | 0 | power cost | utility: reduces magic damage and healing taken by the target |
 | Slow Fall (130) | 12→12 | 1 | Arcane | skill_line_ability | 40 mana | 0 | 0 | power cost | utility: movement |
 | Amplify Magic (1008) | 18→54 | 4 | Arcane | skill_line_ability | 450 mana | 0 | 0 | power cost | utility: increases magic damage and healing taken by the target |
 | Remove Lesser Curse (475) | 18→18 | 1 | Arcane | skill_line_ability | 0 | 0 | 0 |  | utility: dispel |
 | Blink (1953) | 20→20 | 1 | Arcane | skill_line_ability | 0 | 0 | 15000 | cooldown | utility: movement |
-| Fire Ward (543) | 20→60 | 10 | Fire | skill_line_ability | 320 mana | 0 | 30000 | power cost, cooldown | utility: absorbs incoming fire damage |
-| Mana Shield (1463) | 20→60 | 12 | Arcane | skill_line_ability | 140 mana | 0 | 0 | power cost | utility: absorbs incoming damage, none in a sim |
+| Fire Ward (543) | 20→60 | 5 | Fire | skill_line_ability | 320 mana | 0 | 30000 | power cost, cooldown | utility: absorbs incoming fire damage |
+| Mana Shield (1463) | 20→60 | 6 | Arcane | skill_line_ability | 140 mana | 0 | 0 | power cost | utility: absorbs incoming damage, none in a sim |
 | Teleport: Ironforge (3562) | 20→20 | 1 | Arcane | skill_line_ability | 120 mana | 10000 | 0 | power cost, cast time | utility: travel |
 | Teleport: Orgrimmar (3567) | 20→20 | 1 | Arcane | skill_line_ability | 120 mana | 10000 | 0 | power cost, cast time | utility: travel |
 | Teleport: Stormwind (3561) | 20→20 | 1 | Arcane | skill_line_ability | 120 mana | 10000 | 0 | power cost, cast time | utility: travel |
 | Teleport: Undercity (3563) | 20→20 | 1 | Arcane | skill_line_ability | 120 mana | 10000 | 0 | power cost, cast time | utility: travel |
-| Frost Ward (6143) | 22→60 | 10 | Frost | skill_line_ability | 320 mana | 0 | 30000 | power cost, cooldown | utility: absorbs incoming frost damage |
+| Frost Ward (6143) | 22→60 | 5 | Frost | skill_line_ability | 320 mana | 0 | 30000 | power cost, cooldown | utility: absorbs incoming frost damage |
 | Conjure Mana Agate (759) | 28→28 | 1 | Arcane | skill_line_ability | 530 mana | 3000 | 0 | power cost, cast time | utility: creates a mana gem; the gem itself is simmed (mana_gem.go), conjuring it is not |
 | Ice Armor (7302) | 30→60 | 4 | Frost | skill_line_ability | 500 mana | 0 | 0 | power cost | modeled as aura: sim/mage/armors.go, ranks 7302/7320/10219/10220 by level |
 | Teleport: Darnassus (3565) | 30→30 | 1 | Arcane | skill_line_ability | 120 mana | 10000 | 0 | power cost, cast time | utility: travel |

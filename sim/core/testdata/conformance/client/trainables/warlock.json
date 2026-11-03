@@ -3,6 +3,23 @@
   "class_slug": "warlock",
   "trainables": [
     {
+      "name": "Amplify Curse",
+      "skill_line": "Affliction",
+      "source": "talent",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 180000,
+      "ranks": [
+        {
+          "id": 18288,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
       "name": "Bane of Agony",
       "skill_line": "Affliction",
       "source": "skill_line_ability",
@@ -81,7 +98,7 @@
     {
       "name": "Bane of Havoc",
       "skill_line": "Destruction",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -111,16 +128,6 @@
           "level": 28
         },
         {
-          "id": 457569,
-          "rank": 1,
-          "level": 28
-        },
-        {
-          "id": 465352,
-          "rank": 2,
-          "level": 28
-        },
-        {
           "id": 18647,
           "rank": 2,
           "level": 48
@@ -130,7 +137,7 @@
     {
       "name": "Conflagrate",
       "skill_line": "Destruction",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 255,
       "cost_type": 0,
@@ -350,6 +357,23 @@
       ]
     },
     {
+      "name": "Curse of Exhaustion",
+      "skill_line": "Affliction",
+      "source": "talent",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 18223,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
       "name": "Curse of Recklessness",
       "skill_line": "Affliction",
       "source": "skill_line_ability",
@@ -552,6 +576,11 @@
       "cooldown_ms": 0,
       "ranks": [
         {
+          "id": 687,
+          "rank": 1,
+          "level": 1
+        },
+        {
           "id": 696,
           "rank": 2,
           "level": 10
@@ -753,6 +782,23 @@
       ]
     },
     {
+      "name": "Fel Domination",
+      "skill_line": "Demonology",
+      "source": "talent",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 300000,
+      "ranks": [
+        {
+          "id": 18708,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
       "name": "Haunt",
       "skill_line": "",
       "source": "class_spell",
@@ -921,11 +967,6 @@
           "level": 60
         },
         {
-          "id": 11668,
-          "rank": 7,
-          "level": 60
-        },
-        {
           "id": 25309,
           "rank": 8,
           "level": 60
@@ -935,7 +976,7 @@
     {
       "name": "Incinerate",
       "skill_line": "Destruction",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 325,
       "cost_type": 0,
@@ -1021,7 +1062,7 @@
     {
       "name": "Nightfall",
       "skill_line": "Affliction",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1057,7 +1098,7 @@
       "skill_line": "Destruction",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 850,
+      "cost": 1185,
       "cost_type": 0,
       "cast_time_ms": 0,
       "cooldown_ms": 0,
@@ -1068,22 +1109,7 @@
           "level": 20
         },
         {
-          "id": 460692,
-          "rank": 1,
-          "level": 20
-        },
-        {
-          "id": 19474,
-          "rank": 1,
-          "level": 60
-        },
-        {
           "id": 6219,
-          "rank": 2,
-          "level": 34
-        },
-        {
-          "id": 460698,
           "rank": 2,
           "level": 34
         },
@@ -1093,17 +1119,7 @@
           "level": 46
         },
         {
-          "id": 460699,
-          "rank": 3,
-          "level": 46
-        },
-        {
           "id": 11678,
-          "rank": 4,
-          "level": 58
-        },
-        {
-          "id": 460700,
           "rank": 4,
           "level": 58
         }
@@ -1213,6 +1229,11 @@
       "cooldown_ms": 0,
       "ranks": [
         {
+          "id": 686,
+          "rank": 1,
+          "level": 1
+        },
+        {
           "id": 695,
           "rank": 2,
           "level": 6
@@ -1294,7 +1315,7 @@
     {
       "name": "Shadowburn",
       "skill_line": "Destruction",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 365,
       "cost_type": 0,
@@ -1336,7 +1357,7 @@
     {
       "name": "Siphon Life",
       "skill_line": "Affliction",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 365,
       "cost_type": 0,
@@ -1384,6 +1405,23 @@
           "id": 17924,
           "rank": 2,
           "level": 56
+        }
+      ]
+    },
+    {
+      "name": "Soul Link",
+      "skill_line": "Demonology",
+      "source": "talent",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 19028,
+          "rank": 0,
+          "level": 1
         }
       ]
     },
@@ -1546,7 +1584,7 @@
     {
       "name": "Wrack",
       "skill_line": "Affliction",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 200,
       "cost_type": 0,

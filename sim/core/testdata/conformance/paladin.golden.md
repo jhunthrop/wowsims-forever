@@ -1535,20 +1535,22 @@ Each spell below is built with exactly one point in the single talent that grant
 | ProtectionPaladin (Templar's Bulwark talent) | 60 | Templar's Bulwark | 0 | 1311015 | 110.00→110.00 | mana→mana | 300000→300000 | 0→0 | 0→0 | 0→0 | 8000→8000 | match |  | n/a | n/a | n/a |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 12 of the class's 41 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 14 of the class's 45 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
+| Oath of Light (1328548) | 0→0 | 1 | Holy | talent | 0 | 0 | 0 |  |
 | Hammer of Justice (853) | 8→54 | 4 | Protection | skill_line_ability | 100 mana | 0 | 60000 | power cost, cooldown |
 | Purify (1152) | 8→8 | 1 | Holy | skill_line_ability | 0 | 0 | 0 |  |
 | Blessing of Protection (1022) | 10→38 | 3 | Protection | skill_line_ability | 0 | 0 | 300000 | cooldown |
 | Redemption (7328) | 12→60 | 5 | Holy | skill_line_ability | 0 | 10000 | 0 | cast time |
 | Blessing of Freedom (1044) | 18→18 | 1 | Protection | skill_line_ability | 0 | 0 | 20000 | cooldown |
-| Repentance (20066) | 20→20 | 1 | Retribution | skill_line_ability | 60 mana | 0 | 60000 | power cost, cooldown |
+| Repentance (20066) | 20→20 | 1 | Retribution | talent | 60 mana | 0 | 60000 | power cost, cooldown |
 | Voice of Truth (1310897) | 20→20 | 1 | Holy | skill_line_ability | 0 | 0 | 180000 | cooldown |
 | Seal of Justice (20164) | 22→22 | 1 | Protection | skill_line_ability | 0 | 0 | 0 |  |
 | Turn Undead (2878) | 24→52 | 3 | Holy | skill_line_ability | 75 mana | 1500 | 30000 | power cost, cast time, cooldown |
 | Divine Intervention (19752) | 30→30 | 1 | Protection | skill_line_ability | 0 | 0 | 3600000 | cooldown |
+| Turn Evil (1328374) | 38→52 | 3 | n/a | talent | 75 mana | 1500 | 30000 | power cost, cast time, cooldown |
 | Cleanse (4987) | 42→42 | 1 | Holy | skill_line_ability | 0 | 0 | 0 |  |
 | Blessing of Sacrifice (6940) | 46→54 | 2 | Protection | skill_line_ability | 100 mana | 0 | 0 | power cost |
 
@@ -1558,6 +1560,5 @@ Active, ranked, levelled class-family spells the client lists on no SkillLineAbi
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Turn Evil (1328374) | 38→52 | 3 | n/a | class_spell | 75 mana | 1500 | 30000 | power cost, cast time, cooldown |
 | Sacred Shield (53601) | 80→80 | 1 | n/a | class_spell | 0 | 0 | 0 |  |
 

@@ -36,11 +36,6 @@
           "id": 20777,
           "rank": 5,
           "level": 60
-        },
-        {
-          "id": 1326619,
-          "rank": 5,
-          "level": 60
         }
       ]
     },
@@ -302,27 +297,7 @@
           "level": 4
         },
         {
-          "id": 408681,
-          "rank": 1,
-          "level": 4
-        },
-        {
-          "id": 1220744,
-          "rank": 1,
-          "level": 4
-        },
-        {
           "id": 8044,
-          "rank": 2,
-          "level": 8
-        },
-        {
-          "id": 408683,
-          "rank": 2,
-          "level": 8
-        },
-        {
-          "id": 1220746,
           "rank": 2,
           "level": 8
         },
@@ -332,27 +307,7 @@
           "level": 14
         },
         {
-          "id": 408685,
-          "rank": 3,
-          "level": 14
-        },
-        {
-          "id": 1220747,
-          "rank": 3,
-          "level": 14
-        },
-        {
           "id": 8046,
-          "rank": 4,
-          "level": 24
-        },
-        {
-          "id": 408687,
-          "rank": 4,
-          "level": 24
-        },
-        {
-          "id": 1220748,
           "rank": 4,
           "level": 24
         },
@@ -362,42 +317,12 @@
           "level": 36
         },
         {
-          "id": 408688,
-          "rank": 5,
-          "level": 36
-        },
-        {
-          "id": 1220749,
-          "rank": 5,
-          "level": 36
-        },
-        {
           "id": 10413,
           "rank": 6,
           "level": 48
         },
         {
-          "id": 408689,
-          "rank": 6,
-          "level": 48
-        },
-        {
-          "id": 1220750,
-          "rank": 6,
-          "level": 48
-        },
-        {
           "id": 10414,
-          "rank": 7,
-          "level": 60
-        },
-        {
-          "id": 408690,
-          "rank": 7,
-          "level": 60
-        },
-        {
-          "id": 1220751,
           "rank": 7,
           "level": 60
         }
@@ -423,7 +348,7 @@
     {
       "name": "Elemental Focus",
       "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -440,7 +365,7 @@
     {
       "name": "Elemental Mastery",
       "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -873,6 +798,11 @@
       "cooldown_ms": 0,
       "ranks": [
         {
+          "id": 331,
+          "rank": 1,
+          "level": 1
+        },
+        {
           "id": 332,
           "rank": 2,
           "level": 6
@@ -922,7 +852,7 @@
     {
       "name": "Lava Burst",
       "skill_line": "Elemental Combat",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 265,
       "cost_type": 0,
@@ -990,11 +920,6 @@
           "id": 10468,
           "rank": 6,
           "level": 60
-        },
-        {
-          "id": 27624,
-          "rank": 6,
-          "level": 60
         }
       ]
     },
@@ -1008,6 +933,11 @@
       "cast_time_ms": 2500,
       "cooldown_ms": 0,
       "ranks": [
+        {
+          "id": 403,
+          "rank": 1,
+          "level": 1
+        },
         {
           "id": 529,
           "rank": 2,
@@ -1060,7 +990,7 @@
       "skill_line": "Enhancement",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 0,
+      "cost": 370,
       "cost_type": 0,
       "cast_time_ms": 0,
       "cooldown_ms": 0,
@@ -1071,17 +1001,7 @@
           "level": 8
         },
         {
-          "id": 26364,
-          "rank": 1,
-          "level": 8
-        },
-        {
           "id": 325,
-          "rank": 2,
-          "level": 16
-        },
-        {
-          "id": 26365,
           "rank": 2,
           "level": 16
         },
@@ -1091,17 +1011,7 @@
           "level": 24
         },
         {
-          "id": 26366,
-          "rank": 3,
-          "level": 24
-        },
-        {
           "id": 945,
-          "rank": 4,
-          "level": 32
-        },
-        {
-          "id": 26367,
           "rank": 4,
           "level": 32
         },
@@ -1111,27 +1021,12 @@
           "level": 40
         },
         {
-          "id": 26369,
-          "rank": 5,
-          "level": 40
-        },
-        {
           "id": 10431,
           "rank": 6,
           "level": 48
         },
         {
-          "id": 26370,
-          "rank": 6,
-          "level": 48
-        },
-        {
           "id": 10432,
-          "rank": 7,
-          "level": 56
-        },
-        {
-          "id": 26363,
           "rank": 7,
           "level": 56
         }
@@ -1204,7 +1099,7 @@
     {
       "name": "Mana Tide Totem",
       "skill_line": "Restoration",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 60,
       "cost_type": 0,
@@ -1263,7 +1158,7 @@
     {
       "name": "Nature's Swiftness",
       "skill_line": "Restoration",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -1313,18 +1208,13 @@
           "id": 8012,
           "rank": 2,
           "level": 32
-        },
-        {
-          "id": 27626,
-          "rank": 2,
-          "level": 32
         }
       ]
     },
     {
       "name": "Rage of the Farseer",
       "skill_line": "Enhancement",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -1363,7 +1253,7 @@
     {
       "name": "Riptide",
       "skill_line": "Restoration",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 385,
       "cost_type": 0,
@@ -1496,7 +1386,7 @@
     {
       "name": "Spirit Weapons",
       "skill_line": "Enhancement",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1597,7 +1487,7 @@
     {
       "name": "Stormstrike",
       "skill_line": "Enhancement",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -1811,11 +1701,6 @@
           "id": 10614,
           "rank": 3,
           "level": 52
-        },
-        {
-          "id": 27621,
-          "rank": 3,
-          "level": 52
         }
       ]
     },
@@ -1846,11 +1731,6 @@
         },
         {
           "id": 16362,
-          "rank": 4,
-          "level": 60
-        },
-        {
-          "id": 461636,
           "rank": 4,
           "level": 60
         }

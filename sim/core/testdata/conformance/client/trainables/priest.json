@@ -314,11 +314,6 @@
           "id": 988,
           "rank": 2,
           "level": 36
-        },
-        {
-          "id": 27609,
-          "rank": 2,
-          "level": 36
         }
       ]
     },
@@ -482,7 +477,7 @@
       "skill_line": "Discipline",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 0,
+      "cost": 230,
       "cost_type": 0,
       "cast_time_ms": 0,
       "cooldown_ms": 180000,
@@ -509,11 +504,6 @@
         },
         {
           "id": 19275,
-          "rank": 5,
-          "level": 60
-        },
-        {
-          "id": 447549,
           "rank": 5,
           "level": 60
         }
@@ -561,11 +551,6 @@
         },
         {
           "id": 10917,
-          "rank": 7,
-          "level": 56
-        },
-        {
-          "id": 27608,
           "rank": 7,
           "level": 56
         }
@@ -645,7 +630,7 @@
       "skill_line": "Shadow Magic",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 320,
+      "cost": 240,
       "cost_type": 0,
       "cast_time_ms": 0,
       "cooldown_ms": 0,
@@ -677,11 +662,6 @@
         },
         {
           "id": 19285,
-          "rank": 6,
-          "level": 60
-        },
-        {
-          "id": 25816,
           "rank": 6,
           "level": 60
         }
@@ -742,9 +722,9 @@
     {
       "name": "Holy Nova",
       "skill_line": "Holy",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
-      "cost": 0,
+      "cost": 750,
       "cost_type": 0,
       "cast_time_ms": 0,
       "cooldown_ms": 0,
@@ -755,17 +735,7 @@
           "level": 20
         },
         {
-          "id": 23455,
-          "rank": 1,
-          "level": 20
-        },
-        {
           "id": 15430,
-          "rank": 2,
-          "level": 28
-        },
-        {
-          "id": 23458,
           "rank": 2,
           "level": 28
         },
@@ -775,17 +745,7 @@
           "level": 36
         },
         {
-          "id": 23459,
-          "rank": 3,
-          "level": 36
-        },
-        {
           "id": 27799,
-          "rank": 4,
-          "level": 44
-        },
-        {
-          "id": 27803,
           "rank": 4,
           "level": 44
         },
@@ -795,17 +755,7 @@
           "level": 52
         },
         {
-          "id": 27804,
-          "rank": 5,
-          "level": 52
-        },
-        {
           "id": 27801,
-          "rank": 6,
-          "level": 60
-        },
-        {
-          "id": 27805,
           "rank": 6,
           "level": 60
         }
@@ -854,6 +804,23 @@
       ]
     },
     {
+      "name": "Inner Focus",
+      "skill_line": "Discipline",
+      "source": "talent",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 180000,
+      "ranks": [
+        {
+          "id": 14751,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
       "name": "Lesser Heal",
       "skill_line": "Holy",
       "source": "skill_line_ability",
@@ -863,6 +830,11 @@
       "cast_time_ms": 2500,
       "cooldown_ms": 0,
       "ranks": [
+        {
+          "id": 2050,
+          "rank": 1,
+          "level": 1
+        },
         {
           "id": 2052,
           "rank": 2,
@@ -1060,7 +1032,7 @@
     {
       "name": "Mind Flay",
       "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 205,
       "cost_type": 0,
@@ -1151,7 +1123,7 @@
     {
       "name": "Penance",
       "skill_line": "Discipline",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 385,
       "cost_type": 0,
@@ -1183,7 +1155,7 @@
     {
       "name": "Power Infusion",
       "skill_line": "Discipline",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -1233,17 +1205,7 @@
           "level": 48
         },
         {
-          "id": 23947,
-          "rank": 5,
-          "level": 48
-        },
-        {
           "id": 10938,
-          "rank": 6,
-          "level": 60
-        },
-        {
-          "id": 23948,
           "rank": 6,
           "level": 60
         }
@@ -1308,11 +1270,6 @@
           "id": 10901,
           "rank": 10,
           "level": 60
-        },
-        {
-          "id": 27607,
-          "rank": 10,
-          "level": 60
         }
       ]
     },
@@ -1333,11 +1290,6 @@
         },
         {
           "id": 21564,
-          "rank": 2,
-          "level": 60
-        },
-        {
-          "id": 450086,
           "rank": 2,
           "level": 60
         }
@@ -1383,7 +1335,7 @@
     {
       "name": "Prayer of Mending",
       "skill_line": "Holy",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 390,
       "cost_type": 0,
@@ -1470,11 +1422,6 @@
           "id": 10890,
           "rank": 4,
           "level": 56
-        },
-        {
-          "id": 27610,
-          "rank": 4,
-          "level": 56
         }
       ]
     },
@@ -1530,11 +1477,6 @@
         },
         {
           "id": 10929,
-          "rank": 9,
-          "level": 56
-        },
-        {
-          "id": 27606,
           "rank": 9,
           "level": 56
         },
@@ -1717,11 +1659,6 @@
           "id": 10894,
           "rank": 8,
           "level": 58
-        },
-        {
-          "id": 27605,
-          "rank": 8,
-          "level": 58
         }
       ]
     },
@@ -1743,11 +1680,28 @@
       ]
     },
     {
+      "name": "Shadowform",
+      "skill_line": "Shadow",
+      "source": "talent",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 1500,
+      "ranks": [
+        {
+          "id": 15473,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
       "name": "Shadowguard",
       "skill_line": "Shadow Magic",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 0,
+      "cost": 250,
       "cost_type": 0,
       "cast_time_ms": 0,
       "cooldown_ms": 0,
@@ -1758,17 +1712,7 @@
           "level": 20
         },
         {
-          "id": 28377,
-          "rank": 1,
-          "level": 20
-        },
-        {
           "id": 19308,
-          "rank": 2,
-          "level": 28
-        },
-        {
-          "id": 28378,
           "rank": 2,
           "level": 28
         },
@@ -1778,17 +1722,7 @@
           "level": 36
         },
         {
-          "id": 28379,
-          "rank": 3,
-          "level": 36
-        },
-        {
           "id": 19310,
-          "rank": 4,
-          "level": 44
-        },
-        {
-          "id": 28380,
           "rank": 4,
           "level": 44
         },
@@ -1798,19 +1732,26 @@
           "level": 52
         },
         {
-          "id": 28381,
-          "rank": 5,
-          "level": 52
-        },
-        {
           "id": 19312,
           "rank": 6,
           "level": 60
-        },
+        }
+      ]
+    },
+    {
+      "name": "Silence",
+      "skill_line": "Shadow",
+      "source": "talent",
+      "active": true,
+      "cost": 225,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 45000,
+      "ranks": [
         {
-          "id": 28382,
-          "rank": 6,
-          "level": 60
+          "id": 15487,
+          "rank": 0,
+          "level": 0
         }
       ]
     },
@@ -1824,6 +1765,11 @@
       "cast_time_ms": 2500,
       "cooldown_ms": 0,
       "ranks": [
+        {
+          "id": 585,
+          "rank": 1,
+          "level": 1
+        },
         {
           "id": 591,
           "rank": 2,
@@ -1924,24 +1870,9 @@
           "level": 10
         },
         {
-          "id": 2943,
-          "rank": 1,
-          "level": 10
-        },
-        {
-          "id": 19249,
-          "rank": 2,
-          "level": 20
-        },
-        {
           "id": 19261,
           "rank": 2,
           "level": 20
-        },
-        {
-          "id": 19251,
-          "rank": 3,
-          "level": 30
         },
         {
           "id": 19262,
@@ -1949,29 +1880,14 @@
           "level": 30
         },
         {
-          "id": 19252,
-          "rank": 4,
-          "level": 40
-        },
-        {
           "id": 19264,
           "rank": 4,
           "level": 40
         },
         {
-          "id": 19253,
-          "rank": 5,
-          "level": 50
-        },
-        {
           "id": 19265,
           "rank": 5,
           "level": 50
-        },
-        {
-          "id": 19254,
-          "rank": 6,
-          "level": 60
         },
         {
           "id": 19266,
@@ -1983,7 +1899,7 @@
     {
       "name": "Vampiric Embrace",
       "skill_line": "Shadow Magic",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 40,
       "cost_type": 0,

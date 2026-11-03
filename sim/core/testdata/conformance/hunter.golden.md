@@ -211,21 +211,21 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Concussive Shot (5116) | 8→8 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 12000 | cooldown |
 | Dismiss Pet (2641) | 10→10 | 1 | Beast Mastery | skill_line_ability | 0 | 5000 | 0 | cast time |
 | Revive Pet (982) | 10→10 | 1 | Beast Mastery | skill_line_ability | 0 | 10000 | 0 | cast time |
-| Tame Beast (1515) | 10→10 | 2 | Beast Mastery | skill_line_ability | 0 | 0 | 0 |  |
+| Tame Beast (1515) | 10→10 | 1 | Beast Mastery | skill_line_ability | 0 | 0 | 0 |  |
 | Distracting Shot (20736) | 12→60 | 6 | Marksmanship | skill_line_ability | 110 mana | -1000000 | 8000 | power cost, cooldown |
 | Mend Pet (136) | 12→60 | 7 | Beast Mastery | skill_line_ability | 480 mana | 0 | 0 | power cost |
 | Eagle Eye (6197) | 14→14 | 1 | Beast Mastery | skill_line_ability | 25 mana | 0 | 0 | power cost |
 | Eyes of the Beast (1002) | 14→14 | 1 | Beast Mastery | skill_line_ability | 20 mana | 2000 | 0 | power cost, cast time |
 | Scare Beast (1513) | 14→46 | 3 | Beast Mastery | skill_line_ability | 75 mana | 1500 | 30000 | power cost, cast time, cooldown |
 | Aspect of the Cheetah (5118) | 20→20 | 1 | Beast Mastery | skill_line_ability | 40 mana | 0 | 0 | power cost |
-| Deterrence (19263) | 20→20 | 1 | Survival | skill_line_ability | 0 | 0 | 300000 | cooldown |
+| Deterrence (19263) | 20→20 | 1 | Survival | talent | 0 | 0 | 300000 | cooldown |
 | Disengage (781) | 20→48 | 3 | Survival | skill_line_ability | 150 mana | 0 | 5000 | power cost, cooldown |
 | Scorpid Sting (3043) | 22→22 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 0 |  |
 | Beast Lore (1462) | 24→24 | 1 | Beast Mastery | skill_line_ability | 40 mana | 0 | 0 | power cost |
 | Frost Trap (13809) | 28→28 | 1 | Survival | skill_line_ability | 60 mana | 0 | 30000 | power cost, cooldown |
 | Feign Death (5384) | 30→30 | 1 | Survival | skill_line_ability | 80 mana | 0 | 30000 | power cost, cooldown |
-| Intimidation (19577) | 30→30 | 1 | Beast Mastery | skill_line_ability | 0 | 0 | 60000 | cooldown |
-| Scatter Shot (19503) | 30→30 | 1 | Marksmanship | skill_line_ability | 0 | -1000000 | 30000 | cooldown |
+| Intimidation (19577) | 30→30 | 1 | Beast Mastery | talent | 0 | 0 | 60000 | cooldown |
+| Scatter Shot (19503) | 30→30 | 1 | Marksmanship | talent | 0 | -1000000 | 30000 | cooldown |
 | Enchanted Flare (1221404) | 32→32 | 1 | Marksmanship | skill_line_ability | 50 mana | 0 | 30000 | power cost, cooldown |
 | Flare (1543) | 32→32 | 1 | Marksmanship | skill_line_ability | 50 mana | 0 | 15000 | power cost, cooldown |
 | Viper Sting (3034) | 36→56 | 3 | Marksmanship | skill_line_ability | 215 mana | -1000000 | 15000 | power cost, cooldown |
@@ -239,7 +239,7 @@ Active trainables the engine does not register as a spell because the presets as
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Trueshot Aura (1299346) | 25→60 | 5 | Marksmanship | skill_line_ability | 525 mana | 0 | 0 | power cost |
+| Trueshot Aura (1299346) | 25→60 | 5 | Marksmanship | talent | 525 mana | 0 | 0 | power cost |
 
 ### In the client, no learn row
 

@@ -27,7 +27,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 10 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 10 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| ElementalShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | ElementalShaman | 10 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 10 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 10 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -55,8 +55,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 20 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 20 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 20 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| ElementalShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | ElementalShaman | 20 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 20 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -96,9 +96,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | ElementalShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | ElementalShaman | 30 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 30 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -151,9 +151,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | ElementalShaman | 38 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 38 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -214,10 +214,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 40 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→45000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 40 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→43866 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | ElementalShaman | 40 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 40 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -291,11 +291,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 50 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→45000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 50 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→50000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 50 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→43866 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 50 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→48740 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | ElementalShaman | 50 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 50 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -387,12 +387,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ElementalShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→300000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 60 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→45000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 60 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→50000 | match |  | n/a | n/a | n/a |
-| ElementalShaman | 60 | Searing Totem | 6 | 10438 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 55000→55000 | match |  | n/a | n/a | n/a |
+| ElementalShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 60 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→43866 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 60 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→48740 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| ElementalShaman | 60 | Searing Totem | 6 | 10438 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 55000→53614 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | ElementalShaman | 60 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | ElementalShaman | 60 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -426,7 +426,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 10 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 10 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| EnhancementShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 10 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -454,8 +454,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 20 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 20 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 20 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| EnhancementShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 20 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -495,9 +495,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | EnhancementShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 30 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -550,9 +550,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 38 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -613,10 +613,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 40 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→45000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 40 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→43866 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 40 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -690,11 +690,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→45000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 50 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→50000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→43866 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 50 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→48740 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 50 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -786,12 +786,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | EnhancementShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→300000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→45000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→50000 | match |  | n/a | n/a | n/a |
-| EnhancementShaman | 60 | Searing Totem | 6 | 10438 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 55000→55000 | match |  | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→43866 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→48740 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| EnhancementShaman | 60 | Searing Totem | 6 | 10438 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 55000→53614 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | EnhancementShaman | 60 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -827,7 +827,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 10 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 10 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | RestorationShaman | 10 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 10 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 10 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -860,8 +860,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 20 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 20 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 20 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| RestorationShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | RestorationShaman | 20 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 20 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 20 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -908,9 +908,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | RestorationShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | RestorationShaman | 30 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 30 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -972,9 +972,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | RestorationShaman | 38 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 38 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -1046,10 +1046,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 40 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→45000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 40 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→43866 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | RestorationShaman | 40 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 40 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -1137,11 +1137,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 50 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→45000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 50 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→50000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 50 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→43866 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 50 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→48740 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | RestorationShaman | 50 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 50 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -1252,12 +1252,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→300000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 60 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→45000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 60 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→50000 | match |  | n/a | n/a | n/a |
-| RestorationShaman | 60 | Searing Totem | 6 | 10438 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 55000→55000 | match |  | n/a | n/a | n/a |
+| RestorationShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 60 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→43866 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 60 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→48740 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| RestorationShaman | 60 | Searing Totem | 6 | 10438 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 55000→53614 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | RestorationShaman | 60 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | RestorationShaman | 60 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -1291,7 +1291,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 10 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 10 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 10 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| WardenShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 10 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | WardenShaman | 10 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 10 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 10 | Tremor Totem | 0 | 8143 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 18→18 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -1319,8 +1319,8 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 20 | Magma Totem | 0 | 10579 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 36→36 | n/a | match |  | 35.00-35.00→35.00-35.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 20 | Magma Totem | 0 | 10580 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 46→46 | n/a | match |  | 52.00-52.00→52.00-52.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 20 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | n/a | match |  | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
-| WardenShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 20 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 20 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | WardenShaman | 20 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 20 | Strength of Earth Totem | 1 | 8075 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -1360,9 +1360,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 30 | Magma Totem | 0 | 10581 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 56→56 | 0→20000 | client-scripted | duration_ms: client states none (0), engine keeps 20000ms | 73.00-73.00→73.00-73.00 | 0.033→0.033 | declared, matches |
 | WardenShaman | 30 | Magma Totem | 1 | 8190 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 30 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 30 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 30 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | WardenShaman | 30 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 30 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -1415,9 +1415,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 38 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 38 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 38 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 38 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | WardenShaman | 38 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 38 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -1478,10 +1478,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 40 | Magma Totem | 2 | 10585 | 360.00→360.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 20000→20000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 40 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→45000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 40 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 40 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 40 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 40 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→43866 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | WardenShaman | 40 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 40 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -1555,11 +1555,11 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 50 | Mana Spring Totem | 1 | 5675 | 40.00→40.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 26→26 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 50 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→45000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 50 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→50000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 50 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 50 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 50 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 50 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→43866 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 50 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→48740 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | WardenShaman | 50 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 50 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -1651,12 +1651,12 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | WardenShaman | 60 | Mana Spring Totem | 2 | 10495 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 36→36 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Mana Spring Totem | 3 | 10496 | 80.00→80.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 46→46 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Mana Spring Totem | 4 | 10497 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 56→56 | 300000→300000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→30000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→35000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 60 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→45000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 60 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→50000 | match |  | n/a | n/a | n/a |
-| WardenShaman | 60 | Searing Totem | 6 | 10438 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 55000→55000 | match |  | n/a | n/a | n/a |
+| WardenShaman | 60 | Searing Totem | 1 | 3599 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 10→10 | 30000→29244 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 60 | Searing Totem | 2 | 6363 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 20→20 | 35000→34118 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 60 | Searing Totem | 3 | 6364 | 75.00→75.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 30→30 | 40000→38992 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 60 | Searing Totem | 4 | 6365 | 110.00→110.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 40→40 | 45000→43866 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 60 | Searing Totem | 5 | 10437 | 145.00→145.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 50→50 | 50000→48740 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
+| WardenShaman | 60 | Searing Totem | 6 | 10438 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 60→60 | 55000→53614 | unmodeled-duration | duration_ms: the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration | n/a | n/a | n/a |
 | WardenShaman | 60 | Stoneskin Totem | 1 | 8071 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 4→4 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Stoneskin Totem | 2 | 8154 | 60.00→60.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 14→14 | 300000→300000 | match |  | n/a | n/a | n/a |
 | WardenShaman | 60 | Stoneskin Totem | 3 | 8155 | 90.00→90.00 | mana→mana | 0→0 | 0→0 | 1000→1000 | 24→24 | 300000→300000 | match |  | n/a | n/a | n/a |
@@ -1746,13 +1746,13 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters |
 |---|---|---|---|---|---|---|---|---|
-| Elemental Mastery (16166) | 1→1 | 1 | Elemental Combat | skill_line_ability | 0 | 0 | 180000 | cooldown |
+| Elemental Mastery (16166) | 1→1 | 1 | Elemental Combat | talent | 0 | 0 | 180000 | cooldown |
 | Rockbiter Weapon (8017) | 1→54 | 7 | Enhancement | skill_line_ability | 150 mana | 0 | 0 | power cost |
 | Earthbind Totem (2484) | 6→6 | 1 | Elemental Combat | skill_line_ability | 0 | 0 | 15000 | cooldown |
 | Stoneclaw Totem (5730) | 8→58 | 6 | Elemental Combat | skill_line_ability | 140 mana | 0 | 30000 | power cost, cooldown |
 | Flametongue Weapon (8024) | 10→56 | 6 | Enhancement | skill_line_ability | 155 mana | 0 | 0 | power cost |
-| Ancestral Spirit (2008) | 12→60 | 6 | Restoration | skill_line_ability | 0 | 10000 | 0 | cast time |
-| Purge (370) | 12→32 | 3 | Elemental Combat | skill_line_ability | 0 | 0 | 0 |  |
+| Ancestral Spirit (2008) | 12→60 | 5 | Restoration | skill_line_ability | 0 | 10000 | 0 | cast time |
+| Purge (370) | 12→32 | 2 | Elemental Combat | skill_line_ability | 0 | 0 | 0 |  |
 | Cure Poison (526) | 16→16 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
 | Call of the Elements (66842) | 20→20 | 1 | Elemental Combat | skill_line_ability | 0 | 3000 | 0 | cast time |
 | Frostbrand Weapon (8033) | 20→58 | 5 | Enhancement | skill_line_ability | 160 mana | 0 | 0 | power cost |
@@ -1770,7 +1770,7 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Grounding Totem (8177) | 30→30 | 1 | Enhancement | skill_line_ability | 0 | 0 | 15000 | cooldown |
 | Nature Resistance Totem (10595) | 30→60 | 3 | Enhancement | skill_line_ability | 180 mana | 0 | 0 | power cost |
 | Reincarnation (20608) | 30→30 | 2 | Restoration | skill_line_ability | 0 | 0 | 3600000 | cooldown |
-| Windfury Weapon (8232) | 30→60 | 5 | Enhancement | skill_line_ability | 165 mana | 0 | 0 | power cost |
+| Windfury Weapon (8232) | 30→60 | 4 | Enhancement | skill_line_ability | 165 mana | 0 | 0 | power cost |
 | Sentry Totem (6495) | 34→34 | 1 | Enhancement | skill_line_ability | 65 mana | 0 | 0 | power cost |
 | Disease Cleansing Totem (8170) | 38→38 | 1 | Restoration | skill_line_ability | 0 | 0 | 0 |  |
 | Call of the Spirits (66844) | 40→40 | 1 | Elemental Combat | skill_line_ability | 0 | 3000 | 0 | cast time |

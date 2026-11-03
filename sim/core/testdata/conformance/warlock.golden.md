@@ -651,14 +651,16 @@ Each spell below is built with exactly one point in the single talent that grant
 | SMRuinWarlock (Wrack talent) | 60 | Wrack | 0 | 1316697 | 200.00→200.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 6000→6000 | match |  | 36.00-36.00→36.00-36.00 | 0.143→0.143 | declared, matches |
 ## Trainable abilities the engine does not register
 
-Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 24 of the class's 47 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
+Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod 0 and a learn level above 0 on the class skill lines, so Season of Discovery runes are excluded; active means a power cost, a cast time or a cooldown) for which no rank's spell id appears in any spec's spellbook at any level in this report, nor in a talent-gated build. 26 of the class's 51 active trainables are listed. This report only compares the spells the engine declares, so these are invisible to the tables above. Utility spells (Polymorph, Blink, teleports) are expected here; the Why column says what a rotation would care about. Cost is in the client's units (rage in tenths).
 
 | Ability | Level (first→last) | Ranks | Skill line | Source | Cost | Cast ms | Cooldown ms | Why it matters | Disposition |
 |---|---|---|---|---|---|---|---|---|---|
+| Curse of Exhaustion (18223) | 0→0 | 1 | Affliction | talent | 0 | 0 | 0 |  | utility: movement slow on the target; no sim number reads it |
+| Demon Skin (687) | 1→10 | 2 | Demonology | skill_line_ability | 120 mana | 0 | 0 | power cost | utility: leveling armor and health regeneration, replaced by Demon Armor at 20; no sim number reads either |
+| Soul Link (19028) | 1→1 | 1 | Demonology | talent | 0 | 0 | 0 |  | modeled as aura: sim/warlock/talents.go applySoulLink, the talent's 30% damage-taken share on the warlock and the pet; no rotation casts it |
 | Curse of Weakness (702) | 4→52 | 6 | Affliction | skill_line_ability | 175 mana | 0 | 0 | power cost | utility: lowers the target's attack power; no sim number reads it |
 | Fear (5782) | 8→56 | 3 | Affliction | skill_line_ability | 0 | 1500 | 0 | cast time | utility: crowd control |
 | Create Healthstone (6201) | 10→58 | 5 | Demonology | skill_line_ability | 1120 mana | 3000 | 0 | power cost, cast time | utility: creates a consumable |
-| Demon Skin (696) | 10→10 | 1 | Demonology | skill_line_ability | 120 mana | 0 | 0 | power cost | utility: leveling armor and health regeneration, replaced by Demon Armor at 20; no sim number reads either |
 | Health Funnel (755) | 12→60 | 7 | Demonology | skill_line_ability | 79 client:-2 | 0 | 0 | power cost | utility: heals the pet from the warlock's health; pet health is not simmed |
 | Unending Breath (5697) | 16→16 | 1 | Demonology | skill_line_ability | 50 mana | 0 | 0 | power cost | utility: underwater breathing |
 | Create Soulstone (693) | 18→60 | 5 | Demonology | skill_line_ability | 0 | 3000 | 0 | cast time | utility: creates a consumable |
@@ -669,7 +671,7 @@ Active trainables (pipeline.trainables: SkillLineAbility rows with AcquireMethod
 | Drain Mana (5138) | 24→54 | 4 | Affliction | skill_line_ability | 310 mana | 0 | 0 | power cost | utility: drains target mana, none matters for a boss |
 | Curse of Tongues (1714) | 26→50 | 2 | Affliction | skill_line_ability | 110 mana | 0 | 0 | power cost | utility: slows the target's casting; no sim number reads it |
 | Detect Invisibility (132) | 26→50 | 3 | Demonology | skill_line_ability | 140 mana | 0 | 0 | power cost | utility: detection |
-| Banish (710) | 28→48 | 4 | Demonology | skill_line_ability | 200 mana | 1500 | 0 | power cost, cast time | utility: crowd control |
+| Banish (710) | 28→48 | 2 | Demonology | skill_line_ability | 200 mana | 1500 | 0 | power cost, cast time | utility: crowd control |
 | Create Firestone (6366) | 28→56 | 4 | Demonology | skill_line_ability | 1100 mana | 3000 | 0 | power cost, cast time | utility: creates a weapon enchant item |
 | Hellfire (1949) | 30→54 | 3 | Destruction | skill_line_ability | 1300 mana | 0 | 0 | power cost | not registered, no preset reads it: AoE channel that also damages the caster; the single-target presets never cast it, so no preset result moves |
 | Subjugate Demon (1098) | 30→58 | 3 | Demonology | skill_line_ability | 700 mana | 3000 | 0 | power cost, cast time | utility: crowd control |

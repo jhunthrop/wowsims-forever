@@ -5,7 +5,7 @@
     {
       "name": "Accelerant",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -54,11 +54,11 @@
     {
       "name": "Arcane Blast",
       "skill_line": "Arcane",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
-      "cast_time_ms": 2500,
+      "cast_time_ms": 1500,
       "cooldown_ms": 0,
       "ranks": [
         {
@@ -75,11 +75,6 @@
           "id": 1239697,
           "rank": 3,
           "level": 40
-        },
-        {
-          "id": 42896,
-          "rank": 3,
-          "level": 76
         },
         {
           "id": 1239699,
@@ -113,7 +108,7 @@
     {
       "name": "Arcane Concentration",
       "skill_line": "Arcane",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -170,9 +165,26 @@
       ]
     },
     {
-      "name": "Arcane Geometry",
+      "name": "Arcane Focus",
       "skill_line": "Arcane",
       "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 11222,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Arcane Geometry",
+      "skill_line": "Arcane",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -189,7 +201,7 @@
     {
       "name": "Arcane Impact",
       "skill_line": "Arcane",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -224,11 +236,6 @@
           "level": 14
         },
         {
-          "id": 364161,
-          "rank": 2,
-          "level": 14
-        },
-        {
           "id": 1461,
           "rank": 3,
           "level": 28
@@ -248,7 +255,7 @@
     {
       "name": "Arcane Mind",
       "skill_line": "Arcane",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -317,7 +324,7 @@
     {
       "name": "Arcane Power",
       "skill_line": "Arcane",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -334,7 +341,7 @@
     {
       "name": "Arcane Shielding",
       "skill_line": "Arcane",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -351,7 +358,7 @@
     {
       "name": "Arcane Subtlety",
       "skill_line": "Arcane",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -368,7 +375,7 @@
     {
       "name": "Arcane Wrath",
       "skill_line": "Arcane",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 395,
       "cost_type": 0,
@@ -400,7 +407,7 @@
     {
       "name": "Blast Wave",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 545,
       "cost_type": 0,
@@ -490,18 +497,13 @@
           "id": 10187,
           "rank": 6,
           "level": 60
-        },
-        {
-          "id": 27618,
-          "rank": 6,
-          "level": 60
         }
       ]
     },
     {
       "name": "Burning Soul",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -552,7 +554,7 @@
     {
       "name": "Cold Snap",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -569,7 +571,7 @@
     {
       "name": "Combustion",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -807,7 +809,7 @@
     {
       "name": "Critical Mass",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -959,7 +961,7 @@
     {
       "name": "Fire Power",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1006,17 +1008,7 @@
           "level": 20
         },
         {
-          "id": 412214,
-          "rank": 1,
-          "level": 20
-        },
-        {
           "id": 8457,
-          "rank": 2,
-          "level": 30
-        },
-        {
-          "id": 412218,
           "rank": 2,
           "level": 30
         },
@@ -1026,27 +1018,12 @@
           "level": 40
         },
         {
-          "id": 412230,
-          "rank": 3,
-          "level": 40
-        },
-        {
           "id": 10223,
           "rank": 4,
           "level": 50
         },
         {
-          "id": 412231,
-          "rank": 4,
-          "level": 50
-        },
-        {
           "id": 10225,
-          "rank": 5,
-          "level": 60
-        },
-        {
-          "id": 412232,
           "rank": 5,
           "level": 60
         }
@@ -1062,6 +1039,11 @@
       "cast_time_ms": 3500,
       "cooldown_ms": 0,
       "ranks": [
+        {
+          "id": 133,
+          "rank": 1,
+          "level": 1
+        },
         {
           "id": 143,
           "rank": 2,
@@ -1122,7 +1104,7 @@
     {
       "name": "Flame Throwing",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1189,6 +1171,11 @@
       "cooldown_ms": 0,
       "ranks": [
         {
+          "id": 168,
+          "rank": 1,
+          "level": 1
+        },
+        {
           "id": 7300,
           "rank": 2,
           "level": 10
@@ -1230,7 +1217,7 @@
     {
       "name": "Frost Channeling",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1309,17 +1296,7 @@
           "level": 22
         },
         {
-          "id": 412202,
-          "rank": 1,
-          "level": 22
-        },
-        {
           "id": 8461,
-          "rank": 2,
-          "level": 32
-        },
-        {
-          "id": 412205,
           "rank": 2,
           "level": 32
         },
@@ -1329,27 +1306,12 @@
           "level": 42
         },
         {
-          "id": 412207,
-          "rank": 3,
-          "level": 42
-        },
-        {
           "id": 10177,
           "rank": 4,
           "level": 52
         },
         {
-          "id": 412209,
-          "rank": 4,
-          "level": 52
-        },
-        {
           "id": 28609,
-          "rank": 5,
-          "level": 60
-        },
-        {
-          "id": 412210,
           "rank": 5,
           "level": 60
         }
@@ -1358,7 +1320,7 @@
     {
       "name": "Frost Warding",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1375,7 +1337,7 @@
     {
       "name": "Frostbite",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1523,7 +1485,7 @@
     {
       "name": "Ice Barrier",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 480,
       "cost_type": 0,
@@ -1549,18 +1511,13 @@
           "id": 13033,
           "rank": 4,
           "level": 58
-        },
-        {
-          "id": 1213278,
-          "rank": 4,
-          "level": 58
         }
       ]
     },
     {
       "name": "Ice Block",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 15,
       "cost_type": 0,
@@ -1577,7 +1534,7 @@
     {
       "name": "Ice Lance",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 160,
       "cost_type": 0,
@@ -1619,7 +1576,7 @@
     {
       "name": "Ice Shards",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1636,7 +1593,7 @@
     {
       "name": "Ignite",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1653,7 +1610,7 @@
     {
       "name": "Impact",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1675,7 +1632,7 @@
     {
       "name": "Improved Blizzard",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1692,7 +1649,7 @@
     {
       "name": "Improved Channeling",
       "skill_line": "Arcane",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1709,7 +1666,7 @@
     {
       "name": "Improved Cone of Cold",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1726,7 +1683,7 @@
     {
       "name": "Improved Counterspell",
       "skill_line": "Arcane",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1743,7 +1700,7 @@
     {
       "name": "Improved Fire Blast",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1760,7 +1717,7 @@
     {
       "name": "Improved Fire Ward",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1777,7 +1734,7 @@
     {
       "name": "Improved Flamestrike",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1794,7 +1751,7 @@
     {
       "name": "Improved Frost Nova",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1811,7 +1768,7 @@
     {
       "name": "Improved Frostbolt",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1904,7 +1861,7 @@
     {
       "name": "Magic Absorption",
       "skill_line": "Arcane",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1951,17 +1908,7 @@
           "level": 20
         },
         {
-          "id": 412116,
-          "rank": 1,
-          "level": 20
-        },
-        {
           "id": 8494,
-          "rank": 2,
-          "level": 28
-        },
-        {
-          "id": 412118,
           "rank": 2,
           "level": 28
         },
@@ -1971,17 +1918,7 @@
           "level": 36
         },
         {
-          "id": 412120,
-          "rank": 3,
-          "level": 36
-        },
-        {
           "id": 10191,
-          "rank": 4,
-          "level": 44
-        },
-        {
-          "id": 412121,
           "rank": 4,
           "level": 44
         },
@@ -1991,17 +1928,7 @@
           "level": 52
         },
         {
-          "id": 412122,
-          "rank": 5,
-          "level": 52
-        },
-        {
           "id": 10193,
-          "rank": 6,
-          "level": 60
-        },
-        {
-          "id": 412123,
           "rank": 6,
           "level": 60
         }
@@ -2010,7 +1937,7 @@
     {
       "name": "Master of Elements",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -2032,7 +1959,7 @@
     {
       "name": "Permafrost",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -2041,6 +1968,23 @@
       "ranks": [
         {
           "id": 11175,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Piercing Ice",
+      "skill_line": "Frost",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 11151,
           "rank": 0,
           "level": 1
         }
@@ -2210,7 +2154,7 @@
     {
       "name": "Precision",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -2227,7 +2171,7 @@
     {
       "name": "Presence of Mind",
       "skill_line": "Arcane",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -2244,7 +2188,7 @@
     {
       "name": "Pyroblast",
       "skill_line": "Fire",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 440,
       "cost_type": 0,
@@ -2360,7 +2304,7 @@
     {
       "name": "Shatter",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -2540,7 +2484,7 @@
     {
       "name": "Winter's Chill",
       "skill_line": "Frost",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,

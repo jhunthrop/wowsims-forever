@@ -5,7 +5,7 @@
     {
       "name": "Anticipation",
       "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -246,16 +246,6 @@
           "level": 30
         },
         {
-          "id": 20116,
-          "rank": 2,
-          "level": 30
-        },
-        {
-          "id": 20922,
-          "rank": 3,
-          "level": 40
-        },
-        {
           "id": 20922,
           "rank": 3,
           "level": 40
@@ -264,16 +254,6 @@
           "id": 20923,
           "rank": 4,
           "level": 50
-        },
-        {
-          "id": 20923,
-          "rank": 4,
-          "level": 50
-        },
-        {
-          "id": 20924,
-          "rank": 5,
-          "level": 60
         },
         {
           "id": 20924,
@@ -330,6 +310,23 @@
       ]
     },
     {
+      "name": "Divine Favor",
+      "skill_line": "Holy",
+      "source": "talent",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 120000,
+      "ranks": [
+        {
+          "id": 20216,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
       "name": "Divine Intervention",
       "skill_line": "Protection",
       "source": "skill_line_ability",
@@ -357,19 +354,9 @@
       "cooldown_ms": 300000,
       "ranks": [
         {
-          "id": 458312,
-          "rank": 1,
-          "level": 1
-        },
-        {
           "id": 498,
           "rank": 1,
           "level": 6
-        },
-        {
-          "id": 458371,
-          "rank": 2,
-          "level": 1
         },
         {
           "id": 5573,
@@ -735,7 +722,7 @@
     {
       "name": "Holy Shield",
       "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 240,
       "cost_type": 0,
@@ -767,7 +754,7 @@
     {
       "name": "Holy Shock",
       "skill_line": "Holy",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 325,
       "cost_type": 0,
@@ -864,17 +851,7 @@
           "level": 50
         },
         {
-          "id": 429145,
-          "rank": 1,
-          "level": 50
-        },
-        {
           "id": 10318,
-          "rank": 2,
-          "level": 60
-        },
-        {
-          "id": 429146,
           "rank": 2,
           "level": 60
         }
@@ -927,7 +904,7 @@
     {
       "name": "Light's Vigil",
       "skill_line": "Holy",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 1340,
       "cost_type": 0,
@@ -948,6 +925,23 @@
           "id": 1311595,
           "rank": 3,
           "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Oath of Light",
+      "skill_line": "Holy",
+      "source": "talent",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 1328548,
+          "rank": 0,
+          "level": 0
         }
       ]
     },
@@ -1008,7 +1002,7 @@
     {
       "name": "Repentance",
       "skill_line": "Retribution",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 60,
       "cost_type": 0,
@@ -1096,7 +1090,7 @@
     {
       "name": "Seal of Command",
       "skill_line": "Retribution",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 210,
       "cost_type": 0,
@@ -1236,6 +1230,11 @@
       "cast_time_ms": 0,
       "cooldown_ms": 0,
       "ranks": [
+        {
+          "id": 20154,
+          "rank": 1,
+          "level": 1
+        },
         {
           "id": 21084,
           "rank": 1,
@@ -1377,7 +1376,7 @@
     {
       "name": "Swift Judgement",
       "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -1392,9 +1391,26 @@
       ]
     },
     {
+      "name": "Templar's Bulwark",
+      "skill_line": "Protection",
+      "source": "talent",
+      "active": true,
+      "cost": 110,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 300000,
+      "ranks": [
+        {
+          "id": 1311015,
+          "rank": 0,
+          "level": 0
+        }
+      ]
+    },
+    {
       "name": "Turn Evil",
       "skill_line": "",
-      "source": "class_spell",
+      "source": "talent",
       "active": true,
       "cost": 75,
       "cost_type": 0,

@@ -400,7 +400,7 @@
       "skill_line": "Balance",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 0,
+      "cost": 125,
       "cost_type": 0,
       "cast_time_ms": 1500,
       "cooldown_ms": 0,
@@ -411,17 +411,7 @@
           "level": 8
         },
         {
-          "id": 19975,
-          "rank": 1,
-          "level": 8
-        },
-        {
           "id": 1062,
-          "rank": 2,
-          "level": 18
-        },
-        {
-          "id": 19974,
           "rank": 2,
           "level": 18
         },
@@ -431,17 +421,7 @@
           "level": 28
         },
         {
-          "id": 19973,
-          "rank": 3,
-          "level": 28
-        },
-        {
           "id": 5196,
-          "rank": 4,
-          "level": 38
-        },
-        {
-          "id": 19972,
           "rank": 4,
           "level": 38
         },
@@ -451,17 +431,7 @@
           "level": 48
         },
         {
-          "id": 19971,
-          "rank": 5,
-          "level": 48
-        },
-        {
           "id": 9853,
-          "rank": 6,
-          "level": 58
-        },
-        {
-          "id": 19970,
           "rank": 6,
           "level": 58
         }
@@ -519,7 +489,7 @@
     {
       "name": "Feral Charge",
       "skill_line": "Feral Combat",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 50,
       "cost_type": 1,
@@ -641,6 +611,11 @@
       "cast_time_ms": 3500,
       "cooldown_ms": 0,
       "ranks": [
+        {
+          "id": 5185,
+          "rank": 1,
+          "level": 1
+        },
         {
           "id": 5186,
           "rank": 2,
@@ -767,7 +742,7 @@
     {
       "name": "Insect Swarm",
       "skill_line": "Balance",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 160,
       "cost_type": 0,
@@ -804,7 +779,7 @@
     {
       "name": "Lacerate",
       "skill_line": "Feral Combat",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 150,
       "cost_type": 1,
@@ -879,22 +854,7 @@
           "level": 50
         },
         {
-          "id": 364163,
-          "rank": 6,
-          "level": 50
-        },
-        {
           "id": 9885,
-          "rank": 7,
-          "level": 60
-        },
-        {
-          "id": 1291335,
-          "rank": 7,
-          "level": 60
-        },
-        {
-          "id": 1310503,
           "rank": 7,
           "level": 60
         }
@@ -1012,7 +972,7 @@
     {
       "name": "Moonkin Form",
       "skill_line": "Balance",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -1071,7 +1031,7 @@
     {
       "name": "Nature's Swiftness",
       "skill_line": "Restoration",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -1149,7 +1109,7 @@
     {
       "name": "Primal Bite",
       "skill_line": "Feral Combat",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 200,
       "cost_type": 1,
@@ -1169,11 +1129,6 @@
         {
           "id": 1238070,
           "rank": 3,
-          "level": 60
-        },
-        {
-          "id": 1238073,
-          "rank": 4,
           "level": 60
         }
       ]
@@ -1311,7 +1266,7 @@
       "skill_line": "Restoration",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 880,
+      "cost": 525,
       "cost_type": 0,
       "cast_time_ms": 2000,
       "cooldown_ms": 0,
@@ -1322,17 +1277,7 @@
           "level": 12
         },
         {
-          "id": 436937,
-          "rank": 1,
-          "level": 12
-        },
-        {
           "id": 8938,
-          "rank": 2,
-          "level": 18
-        },
-        {
-          "id": 436938,
           "rank": 2,
           "level": 18
         },
@@ -1342,17 +1287,7 @@
           "level": 24
         },
         {
-          "id": 436939,
-          "rank": 3,
-          "level": 24
-        },
-        {
           "id": 8940,
-          "rank": 4,
-          "level": 30
-        },
-        {
-          "id": 436940,
           "rank": 4,
           "level": 30
         },
@@ -1362,17 +1297,7 @@
           "level": 36
         },
         {
-          "id": 436942,
-          "rank": 5,
-          "level": 36
-        },
-        {
           "id": 9750,
-          "rank": 6,
-          "level": 42
-        },
-        {
-          "id": 436943,
           "rank": 6,
           "level": 42
         },
@@ -1382,27 +1307,12 @@
           "level": 48
         },
         {
-          "id": 436944,
-          "rank": 7,
-          "level": 48
-        },
-        {
           "id": 9857,
           "rank": 8,
           "level": 54
         },
         {
-          "id": 436945,
-          "rank": 8,
-          "level": 54
-        },
-        {
           "id": 9858,
-          "rank": 9,
-          "level": 60
-        },
-        {
-          "id": 436946,
           "rank": 9,
           "level": 60
         }
@@ -1424,17 +1334,7 @@
           "level": 4
         },
         {
-          "id": 417057,
-          "rank": 1,
-          "level": 4
-        },
-        {
           "id": 1058,
-          "rank": 2,
-          "level": 10
-        },
-        {
-          "id": 417058,
           "rank": 2,
           "level": 10
         },
@@ -1444,17 +1344,7 @@
           "level": 16
         },
         {
-          "id": 417059,
-          "rank": 3,
-          "level": 16
-        },
-        {
           "id": 2090,
-          "rank": 4,
-          "level": 22
-        },
-        {
-          "id": 417060,
           "rank": 4,
           "level": 22
         },
@@ -1464,17 +1354,7 @@
           "level": 28
         },
         {
-          "id": 417061,
-          "rank": 5,
-          "level": 28
-        },
-        {
           "id": 3627,
-          "rank": 6,
-          "level": 34
-        },
-        {
-          "id": 417062,
           "rank": 6,
           "level": 34
         },
@@ -1484,17 +1364,7 @@
           "level": 40
         },
         {
-          "id": 417063,
-          "rank": 7,
-          "level": 40
-        },
-        {
           "id": 9839,
-          "rank": 8,
-          "level": 46
-        },
-        {
-          "id": 417064,
           "rank": 8,
           "level": 46
         },
@@ -1504,27 +1374,12 @@
           "level": 52
         },
         {
-          "id": 417065,
-          "rank": 9,
-          "level": 52
-        },
-        {
           "id": 9841,
           "rank": 10,
           "level": 58
         },
         {
-          "id": 417066,
-          "rank": 10,
-          "level": 58
-        },
-        {
           "id": 25299,
-          "rank": 11,
-          "level": 60
-        },
-        {
-          "id": 417068,
           "rank": 11,
           "level": 60
         }
@@ -1623,6 +1478,23 @@
           "id": 9896,
           "rank": 6,
           "level": 60
+        }
+      ]
+    },
+    {
+      "name": "Shifting Power",
+      "skill_line": "Feral Combat",
+      "source": "talent",
+      "active": true,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 8000,
+      "ranks": [
+        {
+          "id": 1322605,
+          "rank": 0,
+          "level": 1
         }
       ]
     },
@@ -1740,7 +1612,7 @@
     {
       "name": "Swiftmend",
       "skill_line": "Restoration",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -1811,7 +1683,7 @@
     {
       "name": "Thick Hide",
       "skill_line": "Feral Combat",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1936,7 +1808,7 @@
     {
       "name": "Wild Growth",
       "skill_line": "Restoration",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 1050,
       "cost_type": 0,
@@ -1970,6 +1842,11 @@
       "cast_time_ms": 2000,
       "cooldown_ms": 0,
       "ranks": [
+        {
+          "id": 5176,
+          "rank": 1,
+          "level": 1
+        },
         {
           "id": 5177,
           "rank": 2,

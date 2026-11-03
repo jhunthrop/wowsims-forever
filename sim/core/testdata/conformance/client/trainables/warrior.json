@@ -50,6 +50,23 @@
       ]
     },
     {
+      "name": "Battle Stance",
+      "skill_line": "Arms",
+      "source": "skill_line_ability",
+      "active": true,
+      "cost": 0,
+      "cost_type": 1,
+      "cast_time_ms": 0,
+      "cooldown_ms": 1000,
+      "ranks": [
+        {
+          "id": 2457,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
       "name": "Battle Stance Passive",
       "skill_line": "Arms",
       "source": "skill_line_ability",
@@ -137,7 +154,7 @@
     {
       "name": "Bloodthirst",
       "skill_line": "Fury",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 300,
       "cost_type": 1,
@@ -169,7 +186,7 @@
     {
       "name": "Booming Voice",
       "skill_line": "Fury",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -267,7 +284,7 @@
     {
       "name": "Concussion Blow",
       "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 100,
       "cost_type": 1,
@@ -284,7 +301,7 @@
     {
       "name": "Death Wish",
       "skill_line": "Fury",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 100,
       "cost_type": 1,
@@ -301,7 +318,7 @@
     {
       "name": "Deep Wounds",
       "skill_line": "Arms",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -495,6 +512,11 @@
       "cooldown_ms": 0,
       "ranks": [
         {
+          "id": 78,
+          "rank": 1,
+          "level": 1
+        },
+        {
           "id": 284,
           "rank": 2,
           "level": 8
@@ -593,7 +615,7 @@
     {
       "name": "Improved Bloodrage",
       "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -632,7 +654,7 @@
     {
       "name": "Improved Charge",
       "skill_line": "Arms",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -641,6 +663,23 @@
       "ranks": [
         {
           "id": 12285,
+          "rank": 0,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "name": "Improved Cleave",
+      "skill_line": "Fury",
+      "source": "skill_line_ability",
+      "active": false,
+      "cost": 0,
+      "cost_type": 0,
+      "cast_time_ms": 0,
+      "cooldown_ms": 0,
+      "ranks": [
+        {
+          "id": 12329,
           "rank": 0,
           "level": 1
         }
@@ -686,7 +725,7 @@
     {
       "name": "Improved Disarm",
       "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -703,7 +742,7 @@
     {
       "name": "Improved Hamstring",
       "skill_line": "Arms",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -720,7 +759,7 @@
     {
       "name": "Improved Heroic Strike",
       "skill_line": "Arms",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -737,7 +776,7 @@
     {
       "name": "Improved Overpower",
       "skill_line": "Arms",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -786,7 +825,7 @@
     {
       "name": "Improved Rend",
       "skill_line": "Arms",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -803,7 +842,7 @@
     {
       "name": "Improved Revenge",
       "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -820,7 +859,7 @@
     {
       "name": "Improved Shield Bash",
       "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -864,7 +903,7 @@
     {
       "name": "Improved Shield Wall",
       "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -881,7 +920,7 @@
     {
       "name": "Improved Slam",
       "skill_line": "Fury",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -898,7 +937,7 @@
     {
       "name": "Improved Sunder Armor",
       "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -915,7 +954,7 @@
     {
       "name": "Improved Tactical Mastery",
       "skill_line": "Arms",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -954,7 +993,7 @@
     {
       "name": "Improved Thunder Clap",
       "skill_line": "Arms",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": false,
       "cost": 0,
       "cost_type": 0,
@@ -1015,7 +1054,7 @@
     {
       "name": "Last Stand",
       "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 0,
       "cost_type": 0,
@@ -1069,9 +1108,9 @@
     {
       "name": "Mortal Strike",
       "skill_line": "Arms",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
-      "cost": 0,
+      "cost": 300,
       "cost_type": 1,
       "cast_time_ms": 0,
       "cooldown_ms": 6000,
@@ -1093,11 +1132,6 @@
         },
         {
           "id": 21553,
-          "rank": 4,
-          "level": 60
-        },
-        {
-          "id": 27580,
           "rank": 4,
           "level": 60
         }
@@ -1138,7 +1172,7 @@
     {
       "name": "Piercing Howl",
       "skill_line": "Fury",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 100,
       "cost_type": 1,
@@ -1361,7 +1395,7 @@
     {
       "name": "Shield Slam",
       "skill_line": "Protection",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 200,
       "cost_type": 1,
@@ -1423,17 +1457,7 @@
           "level": 20
         },
         {
-          "id": 1310196,
-          "rank": 1,
-          "level": 20
-        },
-        {
           "id": 1464,
-          "rank": 2,
-          "level": 30
-        },
-        {
-          "id": 1310197,
           "rank": 2,
           "level": 30
         },
@@ -1443,27 +1467,12 @@
           "level": 38
         },
         {
-          "id": 1310198,
-          "rank": 3,
-          "level": 38
-        },
-        {
           "id": 11604,
           "rank": 4,
           "level": 46
         },
         {
-          "id": 1310199,
-          "rank": 4,
-          "level": 46
-        },
-        {
           "id": 11605,
-          "rank": 5,
-          "level": 54
-        },
-        {
-          "id": 1310200,
           "rank": 5,
           "level": 54
         }
@@ -1472,7 +1481,7 @@
     {
       "name": "Spearing Strike",
       "skill_line": "Arms",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 150,
       "cost_type": 1,
@@ -1526,7 +1535,7 @@
     {
       "name": "Sweeping Strikes",
       "skill_line": "Arms",
-      "source": "skill_line_ability",
+      "source": "talent",
       "active": true,
       "cost": 300,
       "cost_type": 1,
@@ -1582,15 +1591,10 @@
       "cost": 200,
       "cost_type": 1,
       "cast_time_ms": 0,
-      "cooldown_ms": 4000,
+      "cooldown_ms": 6000,
       "ranks": [
         {
           "id": 6343,
-          "rank": 1,
-          "level": 6
-        },
-        {
-          "id": 461830,
           "rank": 1,
           "level": 6
         },
@@ -1600,17 +1604,7 @@
           "level": 18
         },
         {
-          "id": 461829,
-          "rank": 2,
-          "level": 18
-        },
-        {
           "id": 8204,
-          "rank": 3,
-          "level": 28
-        },
-        {
-          "id": 461828,
           "rank": 3,
           "level": 28
         },
@@ -1620,27 +1614,12 @@
           "level": 38
         },
         {
-          "id": 461827,
-          "rank": 4,
-          "level": 38
-        },
-        {
           "id": 11580,
           "rank": 5,
           "level": 48
         },
         {
-          "id": 461826,
-          "rank": 5,
-          "level": 48
-        },
-        {
           "id": 11581,
-          "rank": 6,
-          "level": 58
-        },
-        {
-          "id": 461810,
           "rank": 6,
           "level": 58
         }
